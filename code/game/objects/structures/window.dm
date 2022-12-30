@@ -214,21 +214,6 @@
 		return 0
 	return 1
 
-/obj/structure/window/hitby(atom/movable/AM, datum/thrownthing/TT)
-	..()
-	visible_message(SPAN_DANGER("[src] was hit by [AM]."))
-	var/tforce = 0
-	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
-		var/mob/I = AM
-		tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	else if(isobj(AM))
-		var/obj/item/I = AM
-		tforce = I.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	if(reinf_material) tforce *= 0.25
-	playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
-	damage_health(tforce, DAMAGE_BRUTE)
-	deanchor(AM)
-
 /obj/structure/window/attack_hand(mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(MUTATION_HULK in user.mutations)

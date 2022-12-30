@@ -486,9 +486,28 @@
  * - `TT` - The thrownthing datum associated with the impact.
  */
 /atom/proc/hitby(atom/movable/AM, datum/thrownthing/TT)//already handled by throw impact
-	if(isliving(AM))
+	if(isliving(AM) && !isturf(src)) // See `/turf/hitby()` for turf handling of mob impacts
 		var/mob/living/M = AM
 		M.apply_damage(TT.speed * 5, DAMAGE_BRUTE)
+
+	if (get_max_health())
+		var/damage = 0
+		var/damage_type = DAMAGE_BRUTE
+		var/damage_flags = EMPTY_BITFIELD
+		if (isobj(AM))
+			var/obj/O = AM
+			damage = O.throwforce
+			damage_type = O.damtype
+		else if (ismob(AM))
+			var/mob/M = AM
+			damage = M.mob_size
+		damage = damage * (TT.speed / THROWFORCE_SPEED_DIVISOR)
+		if (!can_damage_health(damage, damage_type))
+			playsound(src, damage_hitsound, 50)
+			AM.visible_message(SPAN_NOTICE("\The [AM] bounces off \the [src] harmlessly."))
+			return
+		damage_health(damage, damage_type, damage_flags, skip_can_damage_check = TRUE)
+		AM.visible_message(SPAN_WARNING("\The [AM] impacts \the [src], causing damage!"))
 
 
 /**

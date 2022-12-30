@@ -48,23 +48,6 @@
 	visible_message(SPAN_NOTICE("\The [src] dissipates!"))
 	qdel(src)
 
-/obj/machinery/shield/hitby(AM as mob|obj, datum/thrownthing/TT)
-	//Let everyone know we've been hit!
-	visible_message(SPAN_NOTICE("<B>\The [src] was hit by [AM].</B>"))
-
-	//Super realistic, resource-intensive, real-time damage calculations.
-	var/tforce = 0
-
-	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
-		var/mob/I = AM
-		tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	else
-		var/obj/O = AM
-		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-
-	damage_health(tforce)
-
-	..()
 /obj/machinery/shieldgen
 	name = "Emergency shield projector"
 	desc = "Used to seal minor hull breaches."
