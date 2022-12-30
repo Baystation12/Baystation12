@@ -18,11 +18,10 @@
 		visible_message(SPAN_DANGER("\The [user] smashes \the [src] to pieces!"))
 		attack_animation(user)
 		qdel(src)
-		return 1
+		return
 	visible_message(SPAN_DANGER("\The [user] [attack_verb] \the [src]!"))
 	attack_animation(user)
 	damage_health(damage, DAMAGE_BRUTE)
-	return 1
 
 /obj/structure/proc/mob_breakout(mob/living/escapee)
 	set waitfor = FALSE

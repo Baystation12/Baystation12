@@ -239,8 +239,6 @@
 	if (ai_holder)
 		ai_holder.react_to_attack(user)
 
-	return TRUE
-
 /mob/living/proc/IgniteMob()
 	if(fire_stacks > 0 && !on_fire)
 		on_fire = 1

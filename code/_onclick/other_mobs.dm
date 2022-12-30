@@ -10,10 +10,10 @@
  * - `armorcheck` (string) - TODO: Unused. Remove.
  * - `dam_flags` (bitfield, any of `DAMAGE_FLAG_*`) - Damage flags associated with the attack.
  *
- * Returns boolean. TODO: Return value is unused. Remove.
+ * Returns boolean.
  */
 /atom/proc/attack_generic(mob/user, damage, attack_verb = "hits", wallbreaker = FALSE, damtype = DAMAGE_BRUTE, armorcheck = "melee", dam_flags = EMPTY_BITFIELD)
-	return FALSE
+	return
 
 
 /*

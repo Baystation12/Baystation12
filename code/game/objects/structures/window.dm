@@ -275,7 +275,6 @@
 		damage_health(damage, DAMAGE_BRUTE, skip_can_damage_check = TRUE)
 	else
 		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
-	return 1
 
 /obj/structure/window/do_simple_ranged_interaction(mob/user)
 	visible_message(SPAN_NOTICE("Something knocks on \the [src]."))

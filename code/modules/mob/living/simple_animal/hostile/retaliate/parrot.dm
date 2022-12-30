@@ -758,22 +758,18 @@
 	speech_buffer.Add(message)
 
 /mob/living/simple_animal/hostile/retaliate/parrot/attack_generic(mob/user, damage, attack_message)
-
-	var/success = ..()
-
 	if(client)
-		return success
+		return
 
 	if(parrot_state == PARROT_PERCH)
 		parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
 
-	if(!success)
-		return 0
+	if(!damage)
+		return
 
 	parrot_interest = user
 	parrot_state = PARROT_SWOOP | PARROT_ATTACK //Attack other animals regardless
 	icon_state = "[icon_set]_fly"
-	return success
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/can_pick_up(obj/item/I)
 	. = (Adjacent(I) && I.w_class <= parrot_isize && !I.anchored)

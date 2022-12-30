@@ -202,7 +202,6 @@
 		user.visible_message(SPAN_DANGER("[user] [attack_verb] open the [src]!"))
 	else
 		user.visible_message(SPAN_DANGER("[user] [attack_verb] at [src]!"))
-	return 1
 
 /obj/structure/inflatable/CanFluidPass(coming_from)
 	return !density
