@@ -6,7 +6,7 @@
 	dir = NORTH
 	anchored = FALSE
 	density = TRUE
-	obj_flags = OBJ_FLAG_ANCHORABLE || OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 	/// The actual beam
 	var/datum/particle_beam/beam
 	/// A list of adjacent beamotron parts.
@@ -65,8 +65,9 @@
 	var/base_icon_state = "angular"
 
 /obj/machinery/beamotron/angular/physical_attack_hand(mob/user)
-	if(user.a_intent == I_HELP)
+	if(user.a_intent == I_HELP && !anchored)
 		mirrored = !mirrored
+		visible_message(SPAN_NOTICE("\The [src] flips \the [src]."))
 		update_icon()
 	else
 		..()
