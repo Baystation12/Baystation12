@@ -260,22 +260,6 @@
 							"You hear a knocking sound.")
 	return
 
-/obj/structure/window/attack_generic(mob/user, damage, attack_verb, environment_smash)
-	if(environment_smash >= 1)
-		damage = max(damage, 10)
-
-	if(istype(user))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		user.do_attack_animation(src)
-	if(!damage)
-		return
-	if(can_damage_health(damage, DAMAGE_BRUTE))
-		visible_message(SPAN_DANGER("[user] [attack_verb] into [src]!"))
-		playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
-		damage_health(damage, DAMAGE_BRUTE, skip_can_damage_check = TRUE)
-	else
-		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
-
 /obj/structure/window/do_simple_ranged_interaction(mob/user)
 	visible_message(SPAN_NOTICE("Something knocks on \the [src]."))
 	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)

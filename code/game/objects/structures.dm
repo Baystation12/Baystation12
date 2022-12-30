@@ -13,15 +13,12 @@
 	var/footstep_type
 	var/mob_offset = 0 //used for on_structure_offset mob animation
 
-/obj/structure/attack_generic(mob/user, damage, attack_verb, wallbreaker)
-	if(wallbreaker && damage && breakable)
-		visible_message(SPAN_DANGER("\The [user] smashes \the [src] to pieces!"))
-		attack_animation(user)
-		qdel(src)
-		return
-	visible_message(SPAN_DANGER("\The [user] [attack_verb] \the [src]!"))
-	attack_animation(user)
-	damage_health(damage, DAMAGE_BRUTE)
+/obj/structure/damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)
+	if (damage && HAS_FLAGS(damage_flags, DAMAGE_FLAG_TURF_BREAKER))
+		if (breakable)
+			return kill_health()
+		damage = max(damage, 10)
+	..()
 
 /obj/structure/proc/mob_breakout(mob/living/escapee)
 	set waitfor = FALSE

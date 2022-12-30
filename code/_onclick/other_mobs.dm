@@ -13,7 +13,30 @@
  * Returns boolean.
  */
 /atom/proc/attack_generic(mob/user, damage, attack_verb = "hits", wallbreaker = FALSE, damtype = DAMAGE_BRUTE, armorcheck = "melee", dam_flags = EMPTY_BITFIELD)
-	return
+	if (damage && get_max_health())
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
+		if (!can_damage_health(damage, damtype))
+			playsound(src, damage_hitsound, 50)
+			user.visible_message(
+				SPAN_WARNING("\The [user] bonks \the [src] harmlessly!"),
+				SPAN_WARNING("You bonk \the [src] harmlessly!")
+			)
+			return
+		var/damage_flags = EMPTY_BITFIELD
+		if (wallbreaker)
+			SET_FLAGS(damage_flags, DAMAGE_FLAG_TURF_BREAKER)
+		playsound(src, damage_hitsound, 75)
+		if (damage_health(damage, damtype, damage_flags, skip_can_damage_check = TRUE))
+			user.visible_message(
+				SPAN_DANGER("\The [user] smashes through \the [src]!"),
+				SPAN_DANGER("You smash through \the [src]!")
+			)
+		else
+			user.visible_message(
+				SPAN_DANGER("\The [user] [attack_verb] \the [src]!"),
+				SPAN_DANGER("You [attack_verb] \the [src]!")
+			)
 
 
 /*
