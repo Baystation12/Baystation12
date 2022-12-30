@@ -4747,12 +4747,9 @@
 /obj/machinery/status_display{
 	pixel_x = -32
 	},
-/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
-	frequency = 1380;
-	id_tag = "Casino_escape_pod_3";
+/obj/structure/casino/pod_controller{
 	name = "Casino escape pod Three controller";
-	pixel_x = 24;
-	tag_door = "Casino escape_pod_3_hatch"
+	pixel_x = 24
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bow)
@@ -4761,12 +4758,9 @@
 /obj/machinery/status_display{
 	pixel_x = -32
 	},
-/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
-	frequency = 1380;
-	id_tag = "Casino_escape_pod_2";
+/obj/structure/casino/pod_controller{
 	name = "Casino escape pod Two controller";
-	pixel_x = 24;
-	tag_door = "Casino escape_pod_2_hatch"
+	pixel_x = 24
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bow)
@@ -4775,12 +4769,9 @@
 /obj/machinery/status_display{
 	pixel_x = -32
 	},
-/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
-	frequency = 1380;
-	id_tag = "Casino_escape_pod_1";
+/obj/structure/casino/pod_controller{
 	name = "Casino escape pod One controller";
-	pixel_x = 24;
-	tag_door = "escape_pod_17_hatch"
+	pixel_x = 24
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bow)
