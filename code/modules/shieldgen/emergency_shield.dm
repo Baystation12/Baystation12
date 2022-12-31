@@ -8,7 +8,6 @@
 	anchored = TRUE
 	unacidable = TRUE
 	health_max = 200
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
 	damage_hitsound = 'sound/effects/EMPulse.ogg'
 	var/shield_generate_power = 7500	//how much power we use when regenerating
 	var/shield_idle_power = 1500		//how much power we use when just being sustained.

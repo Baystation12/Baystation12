@@ -12,7 +12,6 @@ var/global/solar_gen_rate = 1500
 	idle_power_usage = 0
 	active_power_usage = 0
 	health_max = 10
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
 	var/id = 0
 	var/obscured = 0
 	var/sunfrac = 0

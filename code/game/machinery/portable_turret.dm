@@ -19,7 +19,6 @@
 	power_channel = EQUIP	//drains power from the EQUIPMENT channel
 
 	health_max = 80
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
 	health_min_damage = 5
 
 	var/raised = 0			//if the turret cover is "open" and the turret is raised

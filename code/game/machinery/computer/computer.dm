@@ -13,7 +13,6 @@
 	var/processing = 0
 
 	health_max = 80
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
 	damage_hitsound = 'sound/weapons/smash.ogg'
 
 	var/icon_keyboard = "generic_key"

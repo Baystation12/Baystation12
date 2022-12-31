@@ -10,7 +10,6 @@
 	idle_power_usage = 15 KILOWATTS
 	construct_state = /singleton/machine_construction/default/panel_closed
 	health_max = 1000
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
 	damage_hitsound = 'sound/machines/BSD_damaging.ogg'
 	health_min_damage = 10
 

@@ -8,7 +8,6 @@
 	active_power_usage = 1 KILOWATTS
 	construct_state = /singleton/machine_construction/default/panel_closed
 	health_max = 200
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
 	health_min_damage = 10
 	req_access = list(access_research)
 

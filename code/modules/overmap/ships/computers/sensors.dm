@@ -8,7 +8,6 @@
 	machine_name = "sensors console"
 	machine_desc = "Used to activate, monitor, and configure a spaceship's sensors. Higher range means higher temperature; dangerously high temperatures may fry the delicate equipment."
 	health_max = 100
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
 	var/obj/machinery/shipsensors/sensors
 	var/list/last_scan
 	var/print_language = LANGUAGE_HUMAN_EURO
