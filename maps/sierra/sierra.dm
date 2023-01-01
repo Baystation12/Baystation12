@@ -144,6 +144,7 @@
 	#include "../event/iccgn_ship/icgnv_hound.dm"
 	#include "../../mods/eris_announcer/_eris_announcer.dme"
 	#include "../../mods/species/resomi/_resomi.dme"
+	#include "../../mods/species/tajara/_tajara.dme"
 	#include "../../mods/sofa/_sofa.dme"
 	#include "../../mods/quantum_mechanic/_quantum_mechanic.dme"
 	#include "../../mods/machinery/atmos_ret_field/_atm_ret_field.dme"

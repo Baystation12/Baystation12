@@ -42,22 +42,22 @@
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
 	camera = /obj/machinery/camera/network/command
-	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC) //no available icons for aliens  //TODO: SIERRA PORT - SPECIES_TAJARA, SPECIES_RESOMI
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC,SPECIES_TAJARA, SPECIES_RESOMI) //no available icons for aliens  //TODO: SIERRA PORT - SPECIES_TAJARA, SPECIES_RESOMI
 
 /obj/item/clothing/suit/space/rig/command
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
-	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC) //TODO: SIERRA PORT - SPECIES_TAJARA, SPECIES_RESOMI
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC, SPECIES_TAJARA, SPECIES_RESOMI) //TODO: SIERRA PORT - SPECIES_TAJARA, SPECIES_RESOMI
 
 /obj/item/clothing/shoes/magboots/rig/command
 	icon = 'maps/torch/icons/obj/obj_feet_solgov.dmi'
 	item_icons = list(slot_shoes_str = 'maps/torch/icons/mob/onmob_feet_solgov.dmi')
-	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)  //TODO: SIERRA PORT - SPECIES_TAJARA, SPECIES_RESOMI
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC, SPECIES_TAJARA, SPECIES_RESOMI)  //TODO: SIERRA PORT - SPECIES_TAJARA, SPECIES_RESOMI
 
 /obj/item/clothing/gloves/rig/command
 	icon = 'maps/torch/icons/obj/obj_hands_solgov.dmi'
 	item_icons = list(slot_gloves_str = 'maps/torch/icons/mob/onmob_hands_solgov.dmi')
-	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)  //TODO: SIERRA PORT - SPECIES_TAJARA, SPECIES_RESOMI
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC, SPECIES_TAJARA, SPECIES_RESOMI)  //TODO: SIERRA PORT - SPECIES_TAJARA, SPECIES_RESOMI
 
 /obj/item/rig/command/equipped
 	initial_modules = list(
@@ -148,7 +148,7 @@
 	desc = "A specialized hardsuit rig control module issued to ranking medical command staff of the NanoTrasen and their peers."
 
 	sprite_sheets = list(
-		//SPECIES_RESOMI = 'packs/infinity/icons/mob/species/resomi/onmob_rig_back_resomi.dmi',
+		SPECIES_RESOMI = 'packs/infinity/icons/mob/species/resomi/onmob_rig_back_resomi.dmi',
 		//SPECIES_UNATHI = 'icons/mob/onmob/Unathi/rig_back.dmi' TODO: SIERRA PORT
 		)
 

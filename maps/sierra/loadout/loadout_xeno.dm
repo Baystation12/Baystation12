@@ -51,7 +51,7 @@
 	path = /obj/item/passport/xeno/resomi
 	sort_category = "Xenowear"
 	flags = 0
-//	whitelisted = list(SPECIES_RESOMI)
+	whitelisted = list(SPECIES_RESOMI)
 	custom_setup_proc = /obj/item/passport/proc/set_info
 	cost = 0
 
@@ -66,7 +66,7 @@
 /datum/gear/passport/tajara
 	display_name = "(Tajara) passport"
 	path = /obj/item/passport/xeno/tajara
-	//whitelisted = list(SPECIES_TAJARA)
+	whitelisted = list(SPECIES_TAJARA)
 	flags = 0
 	sort_category = "Xenowear"
 	custom_setup_proc = /obj/item/passport/proc/set_info
@@ -78,7 +78,7 @@
 	display_name = "modified gloves, dress"
 	path = /obj/item/clothing/gloves/color/white/modified
 	sort_category = "Xenowear"
-	//whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI, SPECIES_YEOSA, SPECIES_EROSAN)
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI, SPECIES_YEOSA)
 
 // Vox clothing
 

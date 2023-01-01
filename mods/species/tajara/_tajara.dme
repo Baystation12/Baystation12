@@ -1,0 +1,26 @@
+#ifndef CONTENT_PACK_TAJARA
+#define CONTENT_PACK_TAJARA
+#include "_tajara.dm"
+
+//clothing
+
+#include "clothing/accessories.dm"
+#include "datum/sprite_accessory.dm"
+
+#include "clothing/clothing.dm"
+/*
+#include "clothing/glasses.dm"
+#include "clothing/misc.dm"
+#include "clothing/suits.dm"
+#include "clothing/under.dm"
+*/
+
+//body and organs
+
+#include "datum/culture/tajara_culture.dm"
+#include "datum/species.dm"
+
+
+//language
+#include "language/language.dm"
+#endif

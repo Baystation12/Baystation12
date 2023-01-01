@@ -45,7 +45,7 @@
 	item_icons = list(slot_wear_mask_str = 'infinity/icons/mob/onmob/onmob_accessories.dmi')
 	body_parts_covered = 0
 	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
-//	species_restricted = list(SPECIES_TAJARA)
+	species_restricted = list(SPECIES_TAJARA)
 	slot_flags = SLOT_MASK | SLOT_TIE
 	var/lowered_icon_state = "tajneck"
 	var/rised_icon_state = "tajmask"

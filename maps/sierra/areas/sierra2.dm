@@ -284,20 +284,18 @@
 	name = "Second Deck - Service - Bar"
 	icon_state = "bar"
 	sound_env = SMALL_ENCLOSED
-	//req_access = list(list(access_kitchen, access_bar)) TODO: SIERRA PORT
-	req_access = list(list(access_kitchen))
+	req_access = list(list(access_kitchen, access_bar))
+
 
 /area/crew_quarters/galley
 	name = "Second Deck - Service - Galley"
 	icon_state = "kitchen"
-	//req_access = list(list(access_kitchen, access_bar)) TODO: SIERRA PORT
-	req_access = list(list(access_kitchen))
+	req_access = list(list(access_kitchen, access_bar))
 
 /area/crew_quarters/galley/backroom
 	name = "Second Deck - Service - Galley Cold Storage"
 	icon_state = "kitchen"
-	//req_access = list(list(access_kitchen, access_bar)) TODO: SIERRA PORT
-	req_access = list(list(access_kitchen))
+	req_access = list(list(access_kitchen, access_bar))
 
 /area/crew_quarters/cafe
 	name = "Second Deck - Living - Cafe"
