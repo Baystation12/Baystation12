@@ -6154,7 +6154,7 @@
 /area/maintenance/abandoned_common)
 "alV" = (
 /obj/structure/table/woodentable_reinforced/walnut,
-/obj/structure/flora/pottedplant/deskleaf{
+/obj/item/flora/pottedplantsmall/leaf{
 	pixel_x = 6
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
@@ -10976,7 +10976,7 @@
 "auw" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/table/woodentable/walnut,
-/obj/structure/flora/pottedplant/deskferntrim{
+/obj/item/flora/pottedplantsmall/fern{
 	pixel_x = 7;
 	pixel_y = 12
 	},
@@ -20788,7 +20788,7 @@
 	pixel_y = 32
 	},
 /obj/structure/table/woodentable/walnut,
-/obj/structure/flora/pottedplant/deskleaf{
+/obj/item/flora/pottedplantsmall/leaf{
 	pixel_x = -5;
 	pixel_y = 2
 	},
@@ -23521,7 +23521,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/structure/flora/pottedplant/deskleaf{
+/obj/item/flora/pottedplantsmall/leaf{
 	pixel_x = -5;
 	pixel_y = 2
 	},
@@ -36181,7 +36181,7 @@
 	pixel_x = 9;
 	pixel_y = 5
 	},
-/obj/structure/flora/pottedplant/deskleaf{
+/obj/item/flora/pottedplantsmall/leaf{
 	pixel_x = -5;
 	pixel_y = 2
 	},
@@ -39235,7 +39235,7 @@
 /area/crew_quarters/gym)
 "vKY" = (
 /obj/structure/table/woodentable_reinforced/walnut,
-/obj/structure/flora/pottedplant/deskleaf{
+/obj/item/flora/pottedplantsmall/leaf{
 	pixel_x = 6
 	},
 /turf/simulated/floor/wood/mahogany,

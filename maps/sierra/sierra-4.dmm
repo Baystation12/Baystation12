@@ -14560,7 +14560,7 @@
 /area/tdome)
 "qiE" = (
 /obj/structure/table/reinforced,
-/obj/structure/flora/pottedplant/deskleaf,
+/obj/item/flora/pottedplantsmall/leaf,
 /obj/effect/floor_decal/carpet,
 /obj/effect/floor_decal/carpet{
 	dir = 4
