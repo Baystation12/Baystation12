@@ -39,7 +39,7 @@
 	unregister_all_movement(loc, src) // unregister events before destroy to avoid expensive checking
 
 	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
-		crash_with("Was deleted before initalization")
+		crash_with("\A [src] was deleted before initalization")
 	walk(src, 0)
 	for(var/A in src)
 		qdel(A)

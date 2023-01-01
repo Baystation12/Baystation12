@@ -4,7 +4,8 @@
 	if(!(appearance_flags & Z) || !random_##Y.len){\
 		return;\
 	}\
-	var/singleton/color_generator/CG = GET_SINGLETON(pickweight(random_##Y));\
+	var/selection = pickweight(random_##Y);\
+	var/singleton/color_generator/CG = GET_SINGLETON(selection);\
 	return CG && CG.GenerateRGB();\
 }
 

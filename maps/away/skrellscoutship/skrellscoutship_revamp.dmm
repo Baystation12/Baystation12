@@ -2173,11 +2173,11 @@
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/command/armory)
 "gQ" = (
-/obj/structure/flora/pottedplant/deskferntrim,
 /obj/structure/window/reinforced{
 	dir = 8
 	},
 /obj/structure/window/reinforced,
+/obj/item/flora/pottedplantsmall/fern,
 /turf/simulated/floor/carpet/magenta,
 /area/ship/skrellscoutship/wings/starboard)
 "gS" = (

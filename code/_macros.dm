@@ -7,14 +7,6 @@
 
 #define CLAMP01(x) clamp(x, 0, 1)
 
-var/global/const/POSITIVE_INFINITY = 1#INF // win: 1.#INF, lin: inf
-var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
-//var/const/POSITIVE_NAN = -(1#INF/1#INF) // win: 1.#QNAN, lin: nan -- demonstration of creation, but not useful
-//var/const/NEGATIVE_NAN = (1#INF/1#INF) //win: -1.#IND, lin: -nan -- demonstration of creation, but not useful
-#define isfinite(N) (isnum(N) && ((N) == (N)) && ((N) != POSITIVE_INFINITY) && ((N) != NEGATIVE_INFINITY))
-
-#define isnan(N) (isnum(N) && (N) != (N))
-
 #define get_turf(A) get_step(A,0)
 
 #define get_x(A) (get_step(A, 0)?.x || 0)
@@ -154,7 +146,7 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define QDEL_LIST_ASSOC_VAL(L) if(L) { for(var/I in L) qdel(L[I]); L.Cut(); }
 
-#define QDEL_IN(item, time) addtimer(CALLBACK(GLOBAL_PROC, .proc/qdel, item), time, TIMER_STOPPABLE)
+#define QDEL_IN(item, time) addtimer(CALLBACK(item, /datum/proc/qdel_self), time, TIMER_STOPPABLE)
 
 #define DROP_NULL(x) if(x) { x.dropInto(loc); x = null; }
 

@@ -179,12 +179,12 @@
 			deltimer(destruction_timer)
 			destruction_timer = null
 	else if (!destruction_timer)
-		destruction_timer = addtimer(CALLBACK(src, /datum/.proc/qdel_self), 10 SECONDS, TIMER_STOPPABLE)
+		destruction_timer = QDEL_IN(src, 10 SECONDS)
 
 // Called when the turf we're on is deleted/changed.
 /atom/movable/openspace/mimic/proc/owning_turf_changed()
 	if (!destruction_timer)
-		destruction_timer = addtimer(CALLBACK(src, /datum/.proc/qdel_self), 10 SECONDS, TIMER_STOPPABLE)
+		destruction_timer = QDEL_IN(src, 10 SECONDS)
 
 // -- TURF PROXY --
 
