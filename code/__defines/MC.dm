@@ -186,9 +186,6 @@ if(Datum.is_processing) {\
 /// Repeat the timer until it's deleted or the parent is destroyed.
 #define TIMER_LOOP FLAG(5)
 
-///Delete the timer on parent datum Destroy() and when deltimer'd
-#define TIMER_DELETE_ME FLAG(6)
-
 /// The default timer ID.
 #define TIMER_ID_NULL -1
 
