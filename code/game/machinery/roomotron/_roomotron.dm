@@ -41,7 +41,6 @@
 	for(var/segment in connected_segments)
 		if(connected_segments[segment] == dir)
 			return segment
-			break
 		else
 			return null
 
