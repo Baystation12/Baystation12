@@ -11,9 +11,8 @@ var/global/solar_gen_rate = 1500
 	density = TRUE
 	idle_power_usage = 0
 	active_power_usage = 0
-	health_max = 10
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
 	var/id = 0
+	var/health = 10
 	var/obscured = 0
 	var/sunfrac = 0
 	var/efficiency = 1
@@ -58,12 +57,13 @@ var/global/solar_gen_rate = 1500
 		S.anchored = TRUE
 	S.forceMove(src)
 	if(S.glass_type == /obj/item/stack/material/glass/reinforced) //if the panel is in reinforced glass
-		set_max_health(health_max * 2)
+		health *= 2 								 //this need to be placed here, because panels already on the map don't have an assembly linked to
 	update_icon()
 
 
 
 /obj/machinery/power/solar/attackby(obj/item/W, mob/user)
+
 	if(isCrowbar(W))
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message(SPAN_NOTICE("[user] begins to take the glass off the solar panel."))
@@ -75,9 +75,17 @@ var/global/solar_gen_rate = 1500
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			user.visible_message(SPAN_NOTICE("[user] takes the glass off the solar panel."))
 			qdel(src)
-		return TRUE
+		return
+	else if (W)
+		src.add_fingerprint(user)
+		src.health -= W.force
+		src.healthcheck()
+	..()
 
-	. = ..()
+/obj/machinery/power/solar/proc/healthcheck()
+	if (src.health <= 0)
+		if(!MACHINE_IS_BROKEN(src))
+			set_broken(TRUE)
 
 /obj/machinery/power/solar/on_update_icon()
 	..()
@@ -123,17 +131,13 @@ var/global/solar_gen_rate = 1500
 
 /obj/machinery/power/solar/set_broken(new_state)
 	. = ..()
-	if(. && new_state && !health_dead)
-		kill_health()
-
-/obj/machinery/power/solar/on_death()
-	. = ..()
-	set_broken(TRUE)
-	new /obj/item/material/shard(src.loc)
-	new /obj/item/material/shard(src.loc)
-	var/obj/item/solar_assembly/S = locate() in src
-	S.glass_type = null
-	unset_control()
+	if(. && new_state)
+		health = 0
+		new /obj/item/material/shard(src.loc)
+		new /obj/item/material/shard(src.loc)
+		var/obj/item/solar_assembly/S = locate() in src
+		S.glass_type = null
+		unset_control()
 
 /obj/machinery/power/solar/ex_act(severity)
 	switch(severity)

@@ -8,7 +8,6 @@
 	machine_name = "sensors console"
 	machine_desc = "Used to activate, monitor, and configure a spaceship's sensors. Higher range means higher temperature; dangerously high temperatures may fry the delicate equipment."
 	health_max = 100
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
 	var/obj/machinery/shipsensors/sensors
 	var/list/last_scan
 	var/print_language = LANGUAGE_HUMAN_EURO
@@ -44,11 +43,11 @@
 	if(sensors)
 		data["on"] = sensors.use_power
 		data["range"] = sensors.range
-		data["health"] = sensors.get_current_health()
-		data["max_health"] = sensors.get_max_health()
+		data["health"] = sensors.health
+		data["max_health"] = sensors.max_health
 		data["heat"] = sensors.heat
 		data["critical_heat"] = sensors.critical_heat
-		if(sensors.health_dead)
+		if(sensors.health == 0)
 			data["status"] = "DESTROYED"
 		else if(!sensors.powered())
 			data["status"] = "NO POWER"
@@ -146,7 +145,8 @@
 	anchored = TRUE
 	density = TRUE
 	construct_state = /singleton/machine_construction/default/panel_closed
-	health_max = 200
+	var/max_health = 200
+	var/health = 200
 	var/critical_heat = 50 // sparks and takes damage when active & above this heat
 	var/heat_reduction = 1.5 // mitigates this much heat per tick
 	var/heat = 0
@@ -154,26 +154,25 @@
 	idle_power_usage = 5000
 
 /obj/machinery/shipsensors/attackby(obj/item/W, mob/user)
-	if (isWelder(W) && user.a_intent != I_HURT)
-		var/damage = get_damage_value()
-		var/obj/item/weldingtool/WT = W
-		if (!damage)
-			to_chat(user, SPAN_WARNING("\The [src] doesn't need any repairs."))
-			return TRUE
-		if (!WT.isOn())
-			to_chat(user, SPAN_WARNING("\The [W] needs to be turned on first."))
-			return TRUE
-		if (!WT.remove_fuel(0,user))
-			to_chat(user, SPAN_WARNING("You need more welding fuel to complete this task."))
-			return TRUE
-		to_chat(user, SPAN_NOTICE("You start repairing the damage to [src]."))
-		playsound(src, 'sound/items/Welder.ogg', 100, 1)
-		if(do_after(user, max(5, damage / 5), src, DO_REPAIR_CONSTRUCT) && WT?.isOn())
-			to_chat(user, SPAN_NOTICE("You finish repairing the damage to [src]."))
-			revive_health()
-		return TRUE
+	var/damage = max_health - health
+	if(damage && isWelder(W))
 
-	return ..()
+		var/obj/item/weldingtool/WT = W
+
+		if(!WT.isOn())
+			return
+
+		if(WT.remove_fuel(0,user))
+			to_chat(user, SPAN_NOTICE("You start repairing the damage to [src]."))
+			playsound(src, 'sound/items/Welder.ogg', 100, 1)
+			if(do_after(user, max(5, damage / 5), src, DO_REPAIR_CONSTRUCT) && WT && WT.isOn())
+				to_chat(user, SPAN_NOTICE("You finish repairing the damage to [src]."))
+				take_damage(-damage)
+		else
+			to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
+			return
+		return
+	..()
 
 /obj/machinery/shipsensors/proc/in_vacuum()
 	var/turf/T=get_turf(src)
@@ -194,6 +193,20 @@
 	if(panel_open)
 		overlays += "sensors_panel"
 	. = ..()
+/obj/machinery/shipsensors/examine(mob/user)
+	. = ..()
+	if(health_dead)
+		to_chat(user, "\The [src] is wrecked.")
+	else if(health < max_health * 0.25)
+		to_chat(user, SPAN_DANGER("\The [src] looks like it's about to break!"))
+	else if(health < max_health * 0.5)
+		to_chat(user, SPAN_DANGER("\The [src] looks seriously damaged!"))
+	else if(health < max_health * 0.75)
+		to_chat(user, SPAN_NOTICE("\The [src] shows signs of damage!"))
+
+/obj/machinery/shipsensors/bullet_act(obj/item/projectile/Proj)
+	take_damage(Proj.get_structure_damage())
+	..()
 
 /obj/machinery/shipsensors/proc/toggle()
 	if(!use_power && (health_dead || !in_vacuum()))
@@ -213,7 +226,7 @@
 			s.set_up(3, 1, src)
 			s.start()
 
-			damage_health(rand(10, 50), DAMAGE_BURN)
+			take_damage(rand(10,50))
 			toggle()
 		heat += idle_power_usage/15000
 
@@ -230,13 +243,14 @@
 	change_power_consumption(1500 * (range**2), POWER_USE_IDLE) //Exponential increase, also affects speed of overheating
 
 /obj/machinery/shipsensors/emp_act(severity)
-	if (use_power)
+	if(use_power)
+		take_damage(20/severity)
 		toggle()
 	..()
 
-/obj/machinery/shipsensors/on_death()
-	. = ..()
-	if (use_power)
+/obj/machinery/shipsensors/proc/take_damage(value)
+	health = min(max(health - value, 0),max_health)
+	if(use_power && health == 0)
 		toggle()
 
 /obj/machinery/shipsensors/RefreshParts()

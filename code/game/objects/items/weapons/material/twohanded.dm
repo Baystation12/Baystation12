@@ -96,7 +96,7 @@
 			qdel(A)
 		else if(istype(A,/obj/effect/vine))
 			var/obj/effect/vine/P = A
-			P.kill_health()
+			P.die_off()
 
 /obj/item/material/twohanded/fireaxe/IsHatchet()
 	return TRUE

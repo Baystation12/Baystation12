@@ -5,7 +5,57 @@
 	icon = 'icons/effects/effects.dmi'
 	anchored = TRUE
 	density = FALSE
-	health_max = 15
+	var/health = 15
+
+//similar to weeds, but only barfed out by nurses manually
+/obj/effect/spider/ex_act(severity)
+	switch(severity)
+		if(EX_ACT_DEVASTATING)
+			qdel(src)
+		if(EX_ACT_HEAVY)
+			if (prob(50))
+				qdel(src)
+		if(EX_ACT_LIGHT)
+			if (prob(5))
+				qdel(src)
+	return
+
+/obj/effect/spider/attackby(obj/item/W, mob/user)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+
+	if(W.attack_verb.len)
+		visible_message(SPAN_WARNING("\The [src] have been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]"))
+	else
+		visible_message(SPAN_WARNING("\The [src] have been attacked with \the [W][(user ? " by [user]." : ".")]"))
+
+	var/damage = W.force / 4.0
+
+	if(W.edge)
+		damage += 5
+
+	if(isWelder(W))
+		var/obj/item/weldingtool/WT = W
+
+		if(WT.remove_fuel(0, user))
+			damage = 15
+			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
+
+	health -= damage
+	healthcheck()
+
+/obj/effect/spider/bullet_act(obj/item/projectile/Proj)
+	..()
+	health -= Proj.get_structure_damage()
+	healthcheck()
+
+/obj/effect/spider/proc/healthcheck()
+	if(health <= 0)
+		qdel(src)
+
+/obj/effect/spider/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	if(exposed_temperature > 300 + T0C)
+		health -= 5
+		healthcheck()
 
 /obj/effect/spider/stickyweb
 	icon_state = "stickyweb1"
@@ -78,8 +128,7 @@
 	icon_state = "green"
 	anchored = FALSE
 	layer = BELOW_OBJ_LAYER
-	health_max = 3
-	health_resistances = DAMAGE_RESIST_BIOLOGICAL
+	health = 3
 	var/mob/living/simple_animal/hostile/giant_spider/greater_form
 	var/last_itch = 0
 	var/amount_grown = -1
@@ -141,8 +190,8 @@
 	. = ..()
 
 /obj/effect/spider/spiderling/attackby(obj/item/W, mob/user)
-	. = ..()
-	if (!health_dead)
+	..()
+	if(health > 0)
 		disturbed()
 
 /obj/effect/spider/spiderling/Crossed(mob/living/L)
@@ -163,10 +212,14 @@
 	else
 		..()
 
-/obj/effect/spider/spiderling/on_death()
-	visible_message(SPAN_CLASS("alert", "\The [src] dies!"))
+/obj/effect/spider/spiderling/proc/die()
+	visible_message(SPAN_CLASS("alert", "[src] dies!"))
 	new /obj/effect/decal/cleanable/spiderling_remains(loc)
 	qdel(src)
+
+/obj/effect/spider/spiderling/healthcheck()
+	if(health <= 0)
+		die()
 
 /obj/effect/spider/spiderling/proc/check_vent(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
 	if(QDELETED(exit_vent) || exit_vent.welded) // If it's qdeleted we probably were too, but in that case we won't be making this call due to timer cleanup.
@@ -194,7 +247,7 @@
 	if(loc)
 		var/datum/gas_mixture/environment = loc.return_air()
 		if(environment && environment.gas[GAS_METHYL_BROMIDE] > 0)
-			kill_health()
+			die()
 			return
 
 	if(travelling_in_vent)
@@ -282,7 +335,7 @@
 	name = "cocoon"
 	desc = "Something wrapped in silky spider web."
 	icon_state = "cocoon1"
-	health_max = 60
+	health = 60
 
 /obj/effect/spider/cocoon/Initialize()
 	. = ..()

@@ -3,7 +3,7 @@
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "yellow"
 	density = TRUE
-	health_max = 100
+	var/health = 100.0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_GARGANTUAN
 	construct_state = null
@@ -146,19 +146,30 @@
 		overlays += "can-o3"
 
 /obj/machinery/portable_atmospherics/canister/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if (exposed_temperature > temperature_resistance)
-		..()
+	if(exposed_temperature > temperature_resistance)
+		health -= 5
+		healthcheck()
 
-/obj/machinery/portable_atmospherics/canister/on_death()
-	var/atom/location = loc
-	location.assume_air(air_contents)
-	destroyed = TRUE
-	playsound(src, 'sound/effects/spray.ogg', 10, TRUE, -3)
-	set_density(FALSE)
-	update_icon()
-	if (holding)
-		holding.dropInto(loc)
-		holding = null
+/obj/machinery/portable_atmospherics/canister/proc/healthcheck()
+	if(destroyed)
+		return 1
+
+	if (src.health <= 10)
+		var/atom/location = src.loc
+		location.assume_air(air_contents)
+
+		src.destroyed = 1
+		playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
+		src.set_density(0)
+		update_icon()
+
+		if (src.holding)
+			src.holding.dropInto(loc)
+			src.holding = null
+
+		return 1
+	else
+		return 1
 
 /obj/machinery/portable_atmospherics/canister/Process()
 	if (destroyed)
@@ -205,7 +216,21 @@
 		return GM.return_pressure()
 	return 0
 
+/obj/machinery/portable_atmospherics/canister/bullet_act(obj/item/projectile/Proj)
+	if (!(Proj.damage_type == DAMAGE_BRUTE || Proj.damage_type == DAMAGE_BURN))
+		return
+
+	if(Proj.damage)
+		src.health -= round(Proj.damage / 2)
+		healthcheck()
+	..()
+
 /obj/machinery/portable_atmospherics/canister/attackby(obj/item/W as obj, mob/user as mob)
+	if(!isWrench(W) && !istype(W, /obj/item/tank) && !istype(W, /obj/item/device/scanner/gas) && !istype(W, /obj/item/modular_computer/pda))
+		visible_message(SPAN_WARNING("\The [user] hits \the [src] with \a [W]!"))
+		src.health -= W.force
+		healthcheck()
+
 	if(istype(user, /mob/living/silicon/robot) && istype(W, /obj/item/tank/jetpack))
 		var/datum/gas_mixture/thejetpack = W:air_contents
 		var/env_pressure = thejetpack.return_pressure()
@@ -217,9 +242,9 @@
 			var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
 			thejetpack.merge(removed)
 			to_chat(user, "You pulse-pressurize your jetpack from the tank.")
-		return TRUE
+		return
 
-	. = ..()
+	..()
 
 	SSnano.update_uis(src) // Update all NanoUIs attached to src
 

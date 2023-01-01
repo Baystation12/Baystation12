@@ -147,7 +147,8 @@
 		else
 			P = new /obj/machinery/porta_turret(T)
 
-		P.set_max_health(settings["health"])
+		P.health = settings["health"]
+		P.maxhealth = settings["health"]
 		P.auto_repair = settings["repair"]
 		P.installation = settings["weapon"]
 		P.check_weapons = settings["check_weapons"]

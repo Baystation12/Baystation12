@@ -28,9 +28,10 @@
 	var/steel_sheet_cost = 5								// Amount of steel sheets refunded when disassembling an empty frame of this computer.
 	var/light_strength = 0									// Intensity of light this computer emits. Comparable to numbers light fixtures use.
 
-	health_max = 100
-	/// Integer. Damage level at which the computer ceased to operate.
-	var/broken_damage = 50
+	// Damage of the chassis. If the chassis takes too much damage it will break apart.
+	var/damage = 0				// Current damage level
+	var/broken_damage = 50		// Damage level at which the computer ceases to operate
+	var/max_damage = 100		// Damage level at which the computer breaks apart.
 	var/list/terminals          // List of open terminal datums.
 
 	// Important hardware (must be installed for computer to work)

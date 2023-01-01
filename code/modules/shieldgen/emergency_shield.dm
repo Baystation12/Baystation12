@@ -7,19 +7,25 @@
 	opacity = 0
 	anchored = TRUE
 	unacidable = TRUE
-	health_max = 200
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
-	damage_hitsound = 'sound/effects/EMPulse.ogg'
+	var/const/max_health = 200
+	var/health = max_health //The shield can only take so much beating (prevents perma-prisons)
 	var/shield_generate_power = 7500	//how much power we use when regenerating
 	var/shield_idle_power = 1500		//how much power we use when just being sustained.
 
 /obj/machinery/shield/malfai
 	name = "emergency forcefield"
 	desc = "A weak forcefield which seems to be projected by the emergency atmosphere containment field."
-	health_max = 100 // Half health, it's not suposed to resist much.
+	health = max_health/2 // Half health, it's not suposed to resist much.
 
 /obj/machinery/shield/malfai/Process()
-	damage_health(1) // Slowly lose integrity over time
+	health -= 0.5 // Slowly lose integrity over time
+	check_failure()
+
+/obj/machinery/shield/proc/check_failure()
+	if (src.health <= 0)
+		visible_message(SPAN_NOTICE("\The [src] dissipates!"))
+		qdel(src)
+		return
 
 /obj/machinery/shield/New()
 	src.set_dir(pick(1,2,3,4))
@@ -36,17 +42,53 @@
 	if(!height || air_group) return 0
 	else return ..()
 
-/obj/machinery/shield/post_health_change(health_mod, damage_type)
-	. = ..()
-	if (health_dead)
-		return
-	if (health_mod < -1) // To prevent slow degradation proccing this constantly
-		set_opacity(TRUE)
-		addtimer(CALLBACK(src, /atom/proc/set_opacity, FALSE), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
+/obj/machinery/shield/attackby(obj/item/W as obj, mob/user as mob)
+	if(!istype(W)) return
 
-/obj/machinery/shield/on_death()
-	visible_message(SPAN_NOTICE("\The [src] dissipates!"))
-	qdel(src)
+	//Calculate damage
+	var/aforce = W.force
+	if (W.damtype == DAMAGE_BRUTE || W.damtype == DAMAGE_BURN)
+		src.health -= aforce
+
+	//Play a fitting sound
+	playsound(src.loc, 'sound/effects/EMPulse.ogg', 75, 1)
+
+	check_failure()
+	set_opacity(1)
+	spawn(20) if(!QDELETED(src)) set_opacity(0)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+
+	..()
+
+/obj/machinery/shield/bullet_act(obj/item/projectile/Proj)
+	health -= Proj.get_structure_damage()
+	..()
+	check_failure()
+	set_opacity(1)
+	spawn(20) if(!QDELETED(src)) set_opacity(0)
+
+/obj/machinery/shield/ex_act(severity)
+	switch(severity)
+		if(EX_ACT_DEVASTATING)
+			if (prob(75))
+				qdel(src)
+		if(EX_ACT_HEAVY)
+			if (prob(50))
+				qdel(src)
+		if(EX_ACT_LIGHT)
+			if (prob(25))
+				qdel(src)
+	return
+
+/obj/machinery/shield/emp_act(severity)
+	switch(severity)
+		if(EMP_ACT_HEAVY)
+			qdel(src)
+		if(EMP_ACT_LIGHT)
+			if(prob(50))
+				qdel(src)
+	..()
+
 
 /obj/machinery/shield/hitby(AM as mob|obj, datum/thrownthing/TT)
 	//Let everyone know we've been hit!
@@ -62,7 +104,16 @@
 		var/obj/O = AM
 		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 
-	damage_health(tforce)
+	src.health -= tforce
+
+	//This seemed to be the best sound for hitting a force field.
+	playsound(src.loc, 'sound/effects/EMPulse.ogg', 100, 1)
+
+	check_failure()
+
+	//The shield becomes dense to absorb the blow.. purely asthetic.
+	set_opacity(1)
+	spawn(20) if(!QDELETED(src)) set_opacity(0)
 
 	..()
 /obj/machinery/shieldgen
@@ -74,7 +125,8 @@
 	opacity = 0
 	anchored = FALSE
 	req_access = list(access_engine)
-	health_max = 100
+	var/const/max_health = 100
+	var/health = max_health
 	var/active = 0
 	var/malfunction = 0 //Malfunction causes parts of the shield to slowly dissapate
 	var/list/deployed_shields = list()
@@ -162,25 +214,42 @@
 		else
 			check_delay--
 
-/obj/machinery/shieldgen/post_health_change(health_mod, damage_type)
-	. = ..()
-	queue_icon_update()
-	if (get_current_health() <= 30)
-		malfunction = TRUE
+/obj/machinery/shieldgen/proc/checkhp()
+	if(health <= 30)
+		src.malfunction = 1
+	if(health <= 0)
+		spawn(0)
+			explosion(get_turf(src.loc), 1, EX_ACT_LIGHT, 0, 0)
+		qdel(src)
+	update_icon()
+	return
 
-/obj/machinery/shieldgen/on_death()
-	. = ..()
-	explosion(get_turf(src), 1, EX_ACT_LIGHT, 0, 0)
-	qdel(src)
+/obj/machinery/shieldgen/ex_act(severity)
+	switch(severity)
+		if(EX_ACT_DEVASTATING)
+			src.health -= 75
+			src.checkhp()
+		if(EX_ACT_HEAVY)
+			src.health -= 30
+			if (prob(15))
+				src.malfunction = 1
+			src.checkhp()
+		if(EX_ACT_LIGHT)
+			src.health -= 10
+			src.checkhp()
+	return
 
 /obj/machinery/shieldgen/emp_act(severity)
 	switch(severity)
 		if(EMP_ACT_HEAVY)
+			src.health /= 2 //cut health in half
 			malfunction = 1
 			locked = pick(0,1)
 		if(EMP_ACT_LIGHT)
 			if(prob(50))
+				src.health *= 0.3 //chop off a third of the health
 				malfunction = 1
+	checkhp()
 	..()
 
 /obj/machinery/shieldgen/interface_interact(mob/user as mob)
@@ -223,7 +292,6 @@
 		else
 			to_chat(user, SPAN_NOTICE("You open the panel and expose the wiring."))
 			is_open = 1
-		return TRUE
 
 	else if(isCoil(W) && malfunction && is_open)
 		var/obj/item/stack/cable_coil/coil = W
@@ -231,15 +299,15 @@
 		//if(do_after(user, min(60, round( ((maxhealth/health)*10)+(malfunction*10) ))) //Take longer to repair heavier damage
 		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if (coil.use(1))
-				revive_health()
+				health = max_health
 				malfunction = 0
 				to_chat(user, SPAN_NOTICE("You repair the [src]!"))
-		return TRUE
+				update_icon()
 
 	else if(istype(W, /obj/item/wrench))
 		if(locked)
 			to_chat(user, "The bolts are covered, unlocking this would retract the covers.")
-			return TRUE
+			return
 		if(anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			to_chat(user, SPAN_NOTICE("'You unsecure the [src] from the floor!"))
@@ -252,7 +320,7 @@
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			to_chat(user, SPAN_NOTICE("You secure the [src] to the floor!"))
 			anchored = TRUE
-		return TRUE
+
 
 	else if(istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer/pda))
 		if(src.allowed(user))
@@ -260,9 +328,8 @@
 			to_chat(user, "The controls are now [src.locked ? "locked." : "unlocked."]")
 		else
 			to_chat(user, SPAN_WARNING("Access denied."))
-		return TRUE
-
-	return ..()
+	else
+		..()
 
 
 /obj/machinery/shieldgen/on_update_icon()

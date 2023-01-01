@@ -42,7 +42,9 @@
 	icon_state = ""
 	pass_flags = PASS_FLAG_TABLE
 	buckle_sound = null
-	health_max = 100
+
+	var/health = 10
+	var/max_health = 100
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0
@@ -68,9 +70,10 @@
 	seed = newseed
 	if(start_matured)
 		mature_time = 0
+		health = max_health
 	..()
 
-/obj/effect/vine/Initialize(mapload, datum/seed/newseed, obj/effect/vine/newparent, start_matured = 0)
+/obj/effect/vine/Initialize()
 	. = ..()
 
 	if(!SSplants)
@@ -81,18 +84,15 @@
 	if(!seed)
 		return INITIALIZE_HINT_QDEL
 	name = seed.display_name
-	health_max = round(seed.get_trait(TRAIT_ENDURANCE)/2)
+	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
 	if(seed.get_trait(TRAIT_SPREAD) == 2)
 		mouse_opacity = 2
 		max_growth = VINE_GROWTH_STAGES
-		growth_threshold = health_max / VINE_GROWTH_STAGES
+		growth_threshold = max_health/VINE_GROWTH_STAGES
 		growth_type = seed.get_growth_type()
 	else
 		max_growth = seed.growth_stages
-		growth_threshold = max_growth && health_max / max_growth
-
-	if (!start_matured)
-		health_current = 10
+		growth_threshold = max_growth && max_health/max_growth
 
 	if(max_growth > 2 && prob(50))
 		max_growth-- //Ensure some variation in final sprite, makes the carpet of crap look less wonky.
@@ -112,7 +112,7 @@
 
 /obj/effect/vine/on_update_icon()
 	overlays.Cut()
-	var/growth = growth_threshold ? min(max_growth, round(get_current_health() / growth_threshold)) : 1
+	var/growth = growth_threshold ? min(max_growth, round(health/growth_threshold)) : 1
 	var/at_fringe = get_dist(src,parent)
 	if(spread_distance > 5)
 		if(at_fringe >= spread_distance-3)
@@ -196,19 +196,23 @@
 	if(W.edge && W.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
 		if(!is_mature())
 			to_chat(user, SPAN_WARNING("\The [src] is not mature enough to yield a sample yet."))
-			return TRUE
+			return
 		if(!seed)
 			to_chat(user, SPAN_WARNING("There is nothing to take a sample from."))
-			return TRUE
+			return
 		var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
 		if(prob(user.skill_fail_chance(SKILL_BOTANY, 90, needed_skill)))
 			to_chat(user, SPAN_WARNING("You failed to get a usable sample."))
 		else
 			seed.harvest(user,0,1)
-		damage_health(rand(15, 25), W.damtype)
-		return TRUE
-
-	return ..()
+		health -= (rand(3,5)*5)
+	else
+		..()
+		var/damage = W.force
+		if(W.edge)
+			damage *= 2
+		adjust_health(-damage)
+		playsound(get_turf(src), W.hitsound, 100, 1)
 
 /obj/effect/vine/AltClick(mob/user)
 	if(!CanPhysicallyInteract(user) || user.incapacitated())
@@ -217,13 +221,13 @@
 	if(istype(W) && W.edge && W.w_class >= ITEM_SIZE_NORMAL)
 		visible_message(SPAN_NOTICE("[user] starts chopping down \the [src]."))
 		playsound(, W.hitsound, 100, 1)
-		var/chop_time = (get_current_health() / W.force) * 0.5 SECONDS
+		var/chop_time = (health/W.force) * 0.5 SECONDS
 		if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
 			chop_time *= 0.5
 		if (do_after(user, chop_time, src, DO_PUBLIC_UNIQUE))
 			visible_message(SPAN_NOTICE("[user] chops down \the [src]."))
 			playsound(get_turf(src), W.hitsound, 100, 1)
-			kill_health()
+			die_off()
 
 //handles being overrun by vines - note that attacker_parent may be null in some cases
 /obj/effect/vine/proc/vine_overrun(datum/seed/attacker_seed, obj/effect/vine/attacker_parent)
@@ -248,20 +252,31 @@
 	aggression -= resiliance
 
 	if(aggression > 0)
-		damage_health(aggression * 5)
+		adjust_health(-aggression*5)
 
-/obj/effect/vine/on_death()
-	if(plant)
-		plant.die()
-	wake_neighbors()
-	qdel(src)
+/obj/effect/vine/ex_act(severity)
+	switch(severity)
+		if(EX_ACT_DEVASTATING)
+			die_off()
+			return
+		if(EX_ACT_HEAVY)
+			if (prob(50))
+				die_off()
+				return
+		if(EX_ACT_LIGHT)
+			if (prob(5))
+				die_off()
+				return
+		else
+	return
 
-/obj/effect/vine/post_health_change(health_mod, damage_type)
-	..()
-	queue_icon_update()
+/obj/effect/vine/proc/adjust_health(value)
+	health = clamp(health + value, 0, max_health)
+	if(health <= 0)
+		die_off()
 
 /obj/effect/vine/proc/is_mature()
-	return (get_damage_percentage() < 66 && world.time > mature_time)
+	return (health >= (max_health/3) && world.time > mature_time)
 
 /obj/effect/vine/is_burnable()
 	return seed.get_trait(TRAIT_HEAT_TOLERANCE) < 1000
