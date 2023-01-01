@@ -6,6 +6,7 @@
 	color = "#404040"
 	level = ATOM_LEVEL_OVER_TILE
 	connect_types = CONNECT_TYPE_HE
+	appearance_flags = KEEP_TOGETHER
 	var/initialize_directions_he
 	var/surface = 2	//surface area in m^2
 	var/icon_temperature = T20C //stop small changes in temperature causing an icon refresh
@@ -24,6 +25,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/Initialize()
 	. = ..()
 	color = "#404040" //we don't make use of the fancy overlay system for colours, use this to set the default.
+	add_filter("glow",1, list(type="drop_shadow", x = 0, y = 0, offset = 0, size = 4))
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/set_dir(new_dir)
 	..()
@@ -91,18 +93,24 @@
 		if(pipe_air.temperature && (icon_temperature > 500 || pipe_air.temperature > 500)) //start glowing at 500K
 			if(abs(pipe_air.temperature - icon_temperature) > 10)
 				icon_temperature = pipe_air.temperature
+				var/scale = max((icon_temperature - 500) / 1500, 0)
 
 				var/h_r = heat2color_r(icon_temperature)
 				var/h_g = heat2color_g(icon_temperature)
 				var/h_b = heat2color_b(icon_temperature)
 
 				if(icon_temperature < 2000) //scale up overlay until 2000K
-					var/scale = (icon_temperature - 500) / 1500
 					h_r = 64 + (h_r - 64)*scale
 					h_g = 64 + (h_g - 64)*scale
 					h_b = 64 + (h_b - 64)*scale
 
-				animate(src, color = rgb(h_r, h_g, h_b), time = 20, easing = SINE_EASING)
+				var/scale_color = rgb(h_r, h_g, h_b)
+
+				animate(src, color = scale_color, time = 2 SECONDS, easing = SINE_EASING)
+				animate_filter("glow", list(color = scale_color, time = 2 SECONDS, easing = LINEAR_EASING))
+				set_light(min(3, scale*2.5), min(3, scale*2.5), l_color = scale_color)
+		else
+			set_light(0)
 
 
 

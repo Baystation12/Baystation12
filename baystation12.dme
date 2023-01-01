@@ -129,6 +129,7 @@
 #include "code\_helpers\type2type.dm"
 #include "code\_helpers\unsorted.dm"
 #include "code\_helpers\vector.dm"
+#include "code\_helpers\visual_filters.dm"
 #include "code\_helpers\washing.dm"
 #include "code\_helpers\sorts\__main.dm"
 #include "code\_helpers\sorts\TimSort.dm"
