@@ -106,7 +106,6 @@
 					/obj/structure/flora/pottedplant/tall,
 					/obj/structure/flora/pottedplant/sticky,
 					/obj/structure/flora/pottedplant/smelly,
-					/obj/structure/flora/pottedplant/small,
 					/obj/structure/flora/pottedplant/aquatic,
 					/obj/structure/flora/pottedplant/shoot,
 					/obj/structure/flora/pottedplant/flower,
@@ -117,7 +116,10 @@
 					/obj/structure/flora/pottedplant/drooping,
 					/obj/structure/flora/pottedplant/tropical,
 					/obj/structure/flora/pottedplant/dead,
-					/obj/structure/flora/pottedplant/decorative)
+					/obj/structure/flora/pottedplant/decorative,
+					/obj/item/flora/pottedplantsmall,
+					/obj/item/flora/pottedplantsmall/leaf,
+					/obj/item/flora/pottedplantsmall/fern)
 	cost = 8
 	containertype = /obj/structure/closet/crate/large/hydroponics
 	containername = "potted plant crate"

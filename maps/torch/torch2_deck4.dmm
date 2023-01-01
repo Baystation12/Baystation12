@@ -12084,7 +12084,7 @@
 /area/security/hangcheck)
 "OZ" = (
 /obj/structure/table/marble,
-/obj/structure/flora/pottedplant/deskferntrim{
+/obj/item/flora/pottedplantsmall/fern{
 	pixel_y = 4
 	},
 /turf/simulated/floor/lino,
