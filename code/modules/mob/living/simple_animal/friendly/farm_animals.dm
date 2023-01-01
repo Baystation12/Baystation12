@@ -62,7 +62,7 @@
 			var/obj/effect/vine/SV = locate() in loc
 			if(prob(60))
 				src.visible_message(SPAN_NOTICE("\The [src] eats the plants."))
-				SV.die_off(1)
+				SV.kill_health(1)
 				if(locate(/obj/machinery/portable_atmospherics/hydroponics/soil/invisible) in loc)
 					var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/SP = locate() in loc
 					qdel(SP)
