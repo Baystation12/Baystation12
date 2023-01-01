@@ -2184,13 +2184,13 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/structure/flora/pottedplant/deskleaf{
-	desc = "A tiny waxy leafed plant specimen. It has 'Green's replacement' scribbled into the pot."
-	},
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/item/flora/pottedplantsmall/leaf{
+	desc = "A tiny waxy leafed plant specimen. It has 'Green's replacement' scribbled onto the pot."
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
@@ -10861,6 +10861,8 @@
 /obj/item/storage/toolbox/mechanical,
 /obj/item/device/multitool,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/device/destTagger,
+/obj/item/stack/package_wrap/twenty_five,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "Dw" = (
@@ -12235,13 +12237,12 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/item/device/destTagger,
-/obj/item/stack/package_wrap/twenty_five,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/item/flora/pottedplantsmall/fern,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "Jc" = (

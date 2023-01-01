@@ -16656,9 +16656,6 @@
 "evb" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/standard,
-/obj/structure/flora/pottedplant/small{
-	pixel_y = 10
-	},
 /obj/machinery/power/apc{
 	dir = 8;
 	name = "west bump";
@@ -16667,6 +16664,9 @@
 /obj/structure/cable/green{
 	d2 = 4;
 	icon_state = "0-4"
+	},
+/obj/item/flora/pottedplantsmall{
+	pixel_y = 10
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/foyer/storeroom)

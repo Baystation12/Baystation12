@@ -4663,7 +4663,7 @@
 /area/space)
 "kS" = (
 /obj/structure/table/woodentable/ebony,
-/obj/structure/flora/pottedplant/deskferntrim,
+/obj/item/flora/pottedplantsmall/fern,
 /turf/simulated/floor/carpet/blue2,
 /area/meatstation/dorm)
 "kT" = (

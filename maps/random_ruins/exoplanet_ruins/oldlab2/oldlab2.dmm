@@ -3114,7 +3114,7 @@
 /area/map_template/oldlab2/recandlockers)
 "rl" = (
 /obj/structure/table/steel_reinforced,
-/obj/structure/flora/pottedplant/deskleaf{
+/obj/item/flora/pottedplantsmall/leaf{
 	pixel_y = 5
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{

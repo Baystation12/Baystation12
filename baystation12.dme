@@ -929,6 +929,7 @@
 #include "code\game\objects\items\crayons.dm"
 #include "code\game\objects\items\cryobag.dm"
 #include "code\game\objects\items\documents.dm"
+#include "code\game\objects\items\flora.dm"
 #include "code\game\objects\items\glassjar.dm"
 #include "code\game\objects\items\holosign_creator.dm"
 #include "code\game\objects\items\instruments.dm"

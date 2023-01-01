@@ -6524,9 +6524,6 @@
 /area/maintenance/thirddeck/aftstarboard)
 "nI" = (
 /obj/structure/table/steel,
-/obj/structure/flora/pottedplant/small{
-	pixel_y = 13
-	},
 /obj/machinery/requests_console{
 	announcementConsole = 1;
 	department = "Security";
@@ -6538,6 +6535,9 @@
 	},
 /obj/machinery/rotating_alarm/security_alarm{
 	dir = 1
+	},
+/obj/item/flora/pottedplantsmall{
+	pixel_y = 13
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
@@ -12821,7 +12821,7 @@
 /area/maintenance/thirddeck/aftport)
 "Fn" = (
 /obj/structure/table/woodentable/walnut,
-/obj/structure/flora/pottedplant/deskleaf,
+/obj/item/flora/pottedplantsmall/leaf,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/observation)
 "Fo" = (
@@ -16999,6 +16999,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
+"QG" = (
+/obj/structure/table/woodentable/walnut,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/crew_quarters/observation)
 "QH" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 8
@@ -28406,7 +28410,7 @@ aa
 Di
 Di
 BQ
-Fn
+QG
 YB
 nw
 Xq
