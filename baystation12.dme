@@ -251,7 +251,6 @@
 #include "code\core\atom\Transform.dm"
 #include "code\core\datum\IsAbstract.dm"
 #include "code\core\image\Transform.dm"
-#include "code\core\math\math.dm"
 #include "code\core\matrix\Transform.dm"
 #include "code\datums\ai_law_sets.dm"
 #include "code\datums\ai_laws.dm"
