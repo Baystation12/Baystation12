@@ -179,6 +179,7 @@
 
 /singleton/security_level/default
 	icon = 'icons/misc/security_state.dmi'
+	var/code_adapt
 
 	var/static/datum/announcement/priority/security/security_announcement_up = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))
 	var/static/datum/announcement/priority/security/security_announcement_down = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))
@@ -199,11 +200,12 @@
 			FA.update_icon()
 	for (var/obj/machinery/rotating_alarm/security_alarm/SA in SSmachines.machinery)
 		if (SA.z in GLOB.using_map.contact_levels)
-			SA.set_alert(name, alarm_level, light_color_alarm)
+			SA.set_alert(code_adapt, alarm_level, light_color_alarm)
 	post_status("alert")
 
 /singleton/security_level/default/code_green
 	name = "code green"
+	code_adapt = "code green"
 
 	light_max_bright = 0.25
 	light_inner_range = 0.1
@@ -220,6 +222,7 @@
 
 /singleton/security_level/default/code_blue
 	name = "code blue"
+	code_adapt = "code blue"
 	alarm_level = "on"
 
 	light_max_bright = 0.5
@@ -239,6 +242,7 @@
 
 /singleton/security_level/default/code_red
 	name = "code red"
+	code_adapt = "code red"
 	alarm_level = "on"
 
 	light_max_bright = 0.5
@@ -258,6 +262,7 @@
 
 /singleton/security_level/default/code_delta
 	name = "code delta"
+	code_adapt = "code delta"
 	alarm_level = "on"
 
 	light_max_bright = 0.75

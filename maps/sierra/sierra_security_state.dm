@@ -79,6 +79,7 @@
 
 /singleton/security_level/default/sierradept/code_green
 	name = "код зелёный"
+	code_adapt = "code green"
 
 	light_max_bright = 0.25
 	light_inner_range = 0.1
@@ -102,6 +103,8 @@
 
 /singleton/security_level/default/sierradept/code_violet
 	name = "код фиолетовый"
+	code_adapt = "code violet"
+	alarm_level = "on"
 
 	light_max_bright = 0.25
 	light_inner_range = 1
@@ -133,6 +136,8 @@
 
 /singleton/security_level/default/sierradept/code_orange
 	name = "код оранжевый"
+	code_adapt = "code orange"
+	alarm_level = "on"
 
 	light_max_bright = 0.25
 	light_inner_range = 1
@@ -163,6 +168,8 @@
 
 /singleton/security_level/default/sierradept/code_blue
 	name = "код синий"
+	code_adapt = "code blue"
+	alarm_level = "on"
 
 	light_max_bright = 0.5
 	light_inner_range = 1
@@ -190,6 +197,8 @@
 
 /singleton/security_level/default/sierradept/code_red
 	name = "код красный"
+	code_adapt = "code red"
+	alarm_level = "on"
 
 	light_max_bright = 0.5
 	light_inner_range = 1
@@ -224,6 +233,8 @@
 
 /singleton/security_level/default/sierradept/code_delta
 	name = "код дельта"
+	code_adapt = "code delta"
+	alarm_level = "on"
 
 	light_max_bright = 0.7
 	light_inner_range = 1
