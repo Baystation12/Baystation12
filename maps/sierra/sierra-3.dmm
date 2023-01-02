@@ -11007,8 +11007,7 @@
 	id = "iaaright"
 	},
 /obj/item/storage/secure/safe{
-	pixel_x = 8;
-	pixel_y = 24
+	pixel_y = 28
 	},
 /obj/item/folder/envelope/blanks,
 /obj/effect/floor_decal/borderfloorblack{
@@ -15782,6 +15781,11 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/multi_tile/glass/security{
+	dir = 8;
+	name = "Brig";
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/bridge/hall/level_two)
@@ -22040,6 +22044,9 @@
 /obj/effect/floor_decal/corner/blue/bordercorner2{
 	dir = 1
 	},
+/obj/machinery/computer/modular/preset/cardslot/command{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/crew_quarters/heads/office/hop)
 "aLb" = (
@@ -23674,6 +23681,7 @@
 /turf/simulated/floor/carpet,
 /area/security/sierra/hosbed)
 "aNB" = (
+/obj/structure/table/standard,
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/hop)
 "aNC" = (
@@ -35949,6 +35957,10 @@
 	},
 /turf/simulated/floor/blackgrid,
 /area/security/nuke_storage)
+"dSy" = (
+/obj/structure/closet/walllocker/secure_closet,
+/turf/simulated/wall/prepainted,
+/area/crew_quarters/heads/office/iaa)
 "dTt" = (
 /obj/machinery/computer/air_control{
 	input_tag = "test_xenoflora_in";
@@ -59043,7 +59055,7 @@ alY
 ans
 aoN
 aql
-arz
+dSy
 atb
 aut
 avR

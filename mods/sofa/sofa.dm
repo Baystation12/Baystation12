@@ -6,7 +6,7 @@
 	icon_state = "sofa_preview"
 	base_icon = "sofa"
 	buckle_dir = FALSE
-	buckle_stance = BUCKLE_FORCE_PRONE
+	buckle_stance = BUCKLE_FORCE_STAND
 	obj_flags = OBJ_FLAG_ROTATABLE
 
 /obj/structure/bed/sofa/do_simple_ranged_interaction(var/mob/user)
