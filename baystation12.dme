@@ -812,6 +812,7 @@
 #include "code\game\machinery\pipe\pipe_datums\pipe_datum_base.dm"
 #include "code\game\machinery\pipe\pipe_datums\pipe_datums.dm"
 #include "code\game\machinery\roomotron\_roomotron.dm"
+#include "code\game\machinery\roomotron\roomotron_generator.dm"
 #include "code\game\machinery\roomotron\particle_beam\_particle_beam.dm"
 #include "code\game\machinery\roomotron\particle_beam\particle_beam_projectile.dm"
 #include "code\game\machinery\rotating_alarm\station_alerts.dm"

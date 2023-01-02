@@ -1,7 +1,7 @@
 /// A particle accelerator of sorts, for research usage. The parent type is a simple segment.
 /obj/machinery/roomotron
 	name = "bluespace roomotron segment"
-	desc = "A segment of a linear roomotron. It can recieve and deliver a beam of bluespace particles."
+	desc = "A segment of a bluespace roomotron. It can recieve and deliver a beam of bluespace particles."
 	icon = 'icons/obj/machines/roomotron.dmi'
 	dir = NORTH
 	anchored = FALSE
@@ -15,6 +15,8 @@
 	var/list/connected_segments = list()
 	/// The segment that a recieved beam will travel to.
 	var/obj/machinery/roomotron/beam_exit
+	/// The speed modifier for the particle. When traveling through the roomotron, the particles will gain this amount of speed.
+	var/speed = 1.5
 
 /obj/machinery/roomotron/Initialize(mapload)
 	. = ..()
@@ -22,11 +24,17 @@
 		anchored = TRUE
 	beam_overlay = image(icon, "[icon_state]_beam")
 
-/obj/machinery/roomotron/Process()
-	if(beam & !overlays)
+/obj/machinery/roomotron/on_update_icon()
+	. = ..()
+	if(beam && !overlays)
 		overlays += beam_overlay
-	else
+	else if (!beam && overlays)
 		overlays -= beam_overlay
+
+/obj/machinery/roomotron/Process()
+	if(beam)
+		beam.Process()
+	update_icon()
 
 /obj/machinery/roomotron/wrench_floor_bolts()
 	. = ..()
@@ -76,13 +84,6 @@
 			disconnect_segment(connected_segment)
 	beam_exit = return_beam_exit()
 
-/// Moving the beam forward.
-/obj/machinery/roomotron/proc/fire_beam()
-	if(beam_exit)
-		beam.update_position(beam_exit, src)
-	else
-		beam.exit_containment()
-
 /obj/machinery/roomotron/angular
 	name = "angular bluespace roomotron segment"
 	icon_state = "angular"
@@ -100,6 +101,7 @@
 		..()
 
 /obj/machinery/roomotron/angular/on_update_icon()
+	. = ..()
 	icon_state = "[base_icon_state][mirrored ? "_mirrored" : null]"
 
 /obj/machinery/roomotron/angular/return_valid_dirs()
@@ -112,13 +114,3 @@
 /obj/machinery/roomotron/angular/mirrored
 	icon_state = "angular_mirrored"
 	mirrored = TRUE
-
-/// Every roomotron has a source.
-/obj/machinery/roomotron/source
-	name = "bluespace roomotron source"
-	desc = "A segment of a linear roomotron. It can generate a beam of bluespace particles."
-	/// The type of beam generated.
-	var/beam_type
-
-/obj/machinery/roomotron/source/return_valid_dirs()
-	return list(dir)
