@@ -411,6 +411,8 @@
  * If you're expecting to be calling a lot of icon updates at once, use `queue_icon_update()` instead.
  */
 /atom/proc/update_icon()
+	if (QDELETED(src))
+		return
 	on_update_icon(arglist(args))
 
 /**
