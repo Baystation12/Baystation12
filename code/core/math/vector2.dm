@@ -24,10 +24,8 @@
 	return other && x == other.x && y == other.y
 
 
-/* spacemandmm 1.5.1 doesn't know this overload
 /datum/vector2/proc/operator~!(datum/vector2/other)
 	return !other || x != other.x || y != other.y
-*/
 
 
 /datum/vector2/proc/operator>=(datum/vector2/other)
@@ -65,7 +63,6 @@
 		y *= other.y
 
 
-/* spacemandmm 1.5.1 doesn't know this overload
 /datum/vector2/proc/operator/=(datum/vector2/other)
 	if (isnum(other))
 		x /= other
@@ -73,13 +70,10 @@
 	else
 		x /= other.x
 		y /= other.y
-*/
 
 
-/* spacemandmm 1.5.1 doesn't know this overload
 /datum/vector2/proc/operator:=(datum/vector2/other)
 	return new /datum/vector2 (other.x, other.y)
-*/
 
 
 /datum/vector2/proc/operator+(datum/vector2/other)
