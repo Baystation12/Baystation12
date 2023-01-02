@@ -1,4 +1,5 @@
 /turf/unsimulated
+	simulated = 0
 	name = "command"
 	initial_gas = list(GAS_OXYGEN = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
 	turf_flags = TURF_DISALLOW_BLOB
