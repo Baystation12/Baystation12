@@ -96,7 +96,10 @@
 			for(var/obj/effect/landmark/start/sloc in landmarks_list)
 				if (sloc.name == "AI")
 					loc_landmark = sloc
-		O.forceMove(loc_landmark.loc)
+		if (!loc_landmark)
+			to_chat(O, SPAN_DEBUG("We still failed to find a AI spawn location. Where you're standing is now you're new home."))
+		else
+			O.forceMove(loc_landmark.loc)
 		O.on_mob_init()
 
 	O.add_ai_verbs()
