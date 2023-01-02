@@ -54,6 +54,13 @@
 		O.implants -= src
 	. = ..()
 
+/obj/effect/spider/eggcluster/on_death()
+	if (isturf(loc))
+		var/amount_to_spawn = round(spiders_max * amount_grown / 100)
+		for (var/count = 1 to amount_to_spawn)
+			new spider_type(loc, src)
+	. = ..()
+
 /obj/effect/spider/eggcluster/Process()
 	if(prob(70))
 		amount_grown += rand(0,2)
