@@ -2,8 +2,8 @@
 	name = SPECIES_UNATHI
 	name_plural = SPECIES_UNATHI
 	icon_template = 'icons/mob/human_races/species/template_tall.dmi'
-	icobase = 'icons/mob/human_races/species/unathi/body.dmi'
-	deform = 'icons/mob/human_races/species/unathi/deformed_body.dmi'
+	icobase = 'icons/mob/human_races/species/unathi/skin.dmi'
+	deform = 'icons/mob/human_races/species/unathi/deformed.dmi'
 	husk_icon = 'icons/mob/human_races/species/unathi/husk.dmi'
 	preview_icon = 'icons/mob/human_races/species/unathi/preview.dmi'
 	bandages_icon = 'icons/mob/bandage.dmi'
