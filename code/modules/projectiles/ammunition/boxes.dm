@@ -343,8 +343,8 @@
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/iclipr
-	name = "internal rifle magazine"
-	desc = "An internal clip for rifle caliber weapons."
+	name = "en-bloc clip"
+	desc = "An en-bloc clip for the garand rifle."
 	icon_state = "iclipr"
 	caliber = CALIBER_RIFLE
 	mag_type = MAGAZINE
