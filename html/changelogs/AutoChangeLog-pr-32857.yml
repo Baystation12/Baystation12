@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - rscadd: Any machinery with wires will now have those wires randomly pulsed or
-      even damaged/cut when EMP'd.
