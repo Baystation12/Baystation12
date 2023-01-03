@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscadd: Eggclusters now release some spiderlings when they are broken. The number
+      of spiderlings released depends on how mature the egg cluster was.
