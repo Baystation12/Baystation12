@@ -16,7 +16,6 @@
 	var/damaged_reinf = FALSE
 	var/init_material = MATERIAL_GLASS
 	var/init_reinf_material = null
-	var/damage_per_fire_tick = 2 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
 	var/construction_state = 2
 	var/id
 	var/polarized = 0
@@ -577,7 +576,7 @@
 	if(reinf_material)
 		melting_point += 0.25*reinf_material.melting_point
 	if (exposed_temperature > melting_point)
-		damage_health(damage_per_fire_tick, DAMAGE_FIRE)
+		..()
 
 /obj/structure/window/basic
 	icon_state = "window"
