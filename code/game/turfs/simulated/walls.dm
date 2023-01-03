@@ -254,10 +254,11 @@
 		addtimer(CALLBACK(src, .proc/burn_adjacent, temperature), 2, TIMER_UNIQUE)
 
 /turf/simulated/wall/proc/burn_adjacent(temperature)
-	for (var/turf/simulated/wall/W in range(3,src))
-		W.burn((temperature/4))
-	for (var/obj/machinery/door/airlock/phoron/D in range(3,src))
-		D.ignite(temperature/4)
+	var/list/nearby_atoms = range(3,src)
+	for (var/turf/simulated/wall/W in nearby_atoms)
+		W.burn(temperature * 0.25)
+	for (var/obj/machinery/door/airlock/phoron/D in nearby_atoms)
+		D.ignite(temperature * 0.25)
 	kill_health()
 
 /turf/simulated/wall/get_color()
