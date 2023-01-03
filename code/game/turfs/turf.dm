@@ -317,6 +317,8 @@ var/global/const/enterloopsanity = 100
 		spawn(2)
 			step(AM, turn(intial_dir, 180))
 
+	..()
+
 /turf/proc/can_engrave()
 	return FALSE
 

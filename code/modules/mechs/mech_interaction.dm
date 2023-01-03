@@ -186,7 +186,8 @@
 		return attack_self(user)
 	else if(adj)
 		setClickCooldown(arms ? arms.action_delay : 15)
-		return A.attack_generic(src, arms.melee_damage, "attacked")
+		A.attack_generic(src, arms.melee_damage, "attacked")
+		return
 	return
 
 /mob/living/exosuit/proc/set_hardpoint(hardpoint_tag)
@@ -481,7 +482,7 @@
 	return
 
 /mob/living/exosuit/attack_generic(mob/user, damage, attack_message = "smashes into")
-	if(..())
+	if(damage)
 		playsound(loc, arms.mech_punch_sound, 40, 1)
 
 /mob/living/exosuit/proc/attack_self(mob/user)

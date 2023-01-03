@@ -106,14 +106,6 @@
 
 	..()
 
-/turf/simulated/wall/hitby(AM as mob|obj, datum/thrownthing/TT)
-	if(!ismob(AM))
-		var/obj/O = AM
-		var/tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-		playsound(src, hitsound, tforce >= 15? 60 : 25, TRUE)
-		damage_health(tforce, O.damtype)
-	..()
-
 /turf/simulated/wall/proc/clear_plants()
 	for(var/obj/effect/overlay/wallrot/WR in src)
 		qdel(WR)

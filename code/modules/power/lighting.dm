@@ -339,7 +339,6 @@
 	)
 	attack_animation(user)
 	broken()
-	return TRUE
 
 /// Set's the lights `current_mode`. `new_mode` should be one of `LIGHTMODE_*`.
 /obj/machinery/light/proc/set_mode(new_mode)

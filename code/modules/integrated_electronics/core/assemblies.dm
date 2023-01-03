@@ -531,11 +531,6 @@
 		playsound(loc, SOUNDS_BULLET_METAL, 100, 1)
 	..()
 
-/obj/item/device/electronic_assembly/attack_generic(mob/user, damage)
-	user.visible_message(SPAN_WARNING("\The [user] smashes \the [src]!"), SPAN_WARNING("You smash \the [src]!"))
-	attack_animation(user)
-	damage_health(damage)
-
 /obj/item/device/electronic_assembly/emp_act(severity)
 	for(var/I in src)
 		var/atom/movable/AM = I
