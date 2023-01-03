@@ -640,8 +640,8 @@
 	var/list/valid_things = list()
 	if(isweakref(I.data))
 		var/atom/A = I.data.resolve()
-		var/desired_type = A.type
-		if(desired_type)
+		if (A)
+			var/desired_type = A.type
 			for(var/i in nearby_things)
 				var/atom/thing = i
 				if(ismob(thing) && !isliving(thing))

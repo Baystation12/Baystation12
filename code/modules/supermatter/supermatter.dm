@@ -523,8 +523,8 @@
 		SPAN_WARNING("For a brief moment, you hear an oppressive, unnatural silence.")
 	)
 
-	user.drop_from_inventory(W)
-	Consume(W)
+	if (user.drop_from_inventory(W))
+		Consume(W)
 
 	user.apply_damage(150, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 
