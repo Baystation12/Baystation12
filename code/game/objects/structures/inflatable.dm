@@ -66,7 +66,7 @@
 	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "wall"
 	atmos_canpass = CANPASS_DENSITY
-	health_max = 10
+	health_max = 20
 	damage_hitsound = 'sound/effects/Glasshit.ogg'
 
 	var/undeploy_path = null
