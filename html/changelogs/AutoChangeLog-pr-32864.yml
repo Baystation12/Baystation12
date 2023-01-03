@@ -1,0 +1,4 @@
+author: The Spanish Inquisition
+delete-after: true
+changes:
+  - tweak: renamed 'internal rifle magazine' to 'en-bloc clip' as it SHOULD BE
