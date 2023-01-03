@@ -1,0 +1,4 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: Doubled inflatable health to account for people-throwing.
