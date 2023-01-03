@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Replicators now provide a replicator circuit board when dismantled instead
+      of an auto lathe board.
