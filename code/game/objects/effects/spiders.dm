@@ -7,6 +7,10 @@
 	density = FALSE
 	health_max = 15
 
+/obj/effect/spider/on_death()
+	visible_message(SPAN_WARNING("\The [src] breaks apart!"))
+	qdel(src)
+
 /obj/effect/spider/stickyweb
 	icon_state = "stickyweb1"
 
