@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Adjacent fires are more effective against windows and walls and can effect
+      some other atoms that would otherwise block airflow and fire. Doors are currently
+      exempt.
