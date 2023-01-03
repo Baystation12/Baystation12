@@ -121,7 +121,7 @@
 
 /obj/effect/turf_fire/Process()
 	var/turf/simulated/T = get_turf(src)
-	if(T.density)
+	if(!T || T.density)
 		qdel(src)
 		return
 	if(T.hotspot) //If we have an active hotspot, let it do the damage instead and lets not loose power
