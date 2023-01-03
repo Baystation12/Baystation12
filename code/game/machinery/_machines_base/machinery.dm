@@ -120,6 +120,13 @@
 		pulse2.set_dir(pick(GLOB.cardinal))
 
 		QDEL_IN(pulse2, 1 SECOND)
+
+		if (prob(100 / severity) && istype(wires))
+			if (prob(20))
+				wires.RandomCut()
+			else
+				wires.RandomPulse()
+
 	..()
 
 /obj/machinery/ex_act(severity)
