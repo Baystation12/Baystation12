@@ -13071,7 +13071,9 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/wallframe_spawn/reinforced/polarized/full,
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	id = "forensicswindow"
+	},
 /turf/simulated/floor/plating,
 /area/security/sierra/forensic)
 "ayg" = (
@@ -13085,7 +13087,9 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized/full,
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	id = "forensicswindow"
+	},
 /turf/simulated/floor/plating,
 /area/security/sierra/forensic)
 "ayh" = (
@@ -13113,7 +13117,9 @@
 	icon_state = "1-4"
 	},
 /obj/structure/cable/green,
-/obj/effect/wallframe_spawn/reinforced/polarized/full,
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	id = "processwindow"
+	},
 /turf/simulated/floor/plating,
 /area/security/sierra/interrogation)
 "ayj" = (
@@ -13127,7 +13133,9 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized/full,
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	id = "processwindow"
+	},
 /turf/simulated/floor/plating,
 /area/security/sierra/interrogation)
 "ayk" = (
@@ -17493,7 +17501,9 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/wallframe_spawn/reinforced/polarized/full,
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	id = "bo_windows"
+	},
 /turf/simulated/floor/plating,
 /area/security/sierra/sergeant)
 "aEw" = (
@@ -17507,7 +17517,9 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized/full,
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	id = "bo_windows"
+	},
 /turf/simulated/floor/plating,
 /area/security/sierra/sergeant)
 "aEx" = (
@@ -17521,7 +17533,9 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized/full,
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	id = "bo_windows"
+	},
 /turf/simulated/floor/plating,
 /area/security/sierra/sergeant)
 "aEy" = (
@@ -17529,7 +17543,9 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized/full,
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	id = "bo_windows"
+	},
 /turf/simulated/floor/plating,
 /area/security/sierra/sergeant)
 "aEz" = (
@@ -18804,7 +18820,9 @@
 	id_tag = "security_lockdown";
 	name = "Security Department Lockdown"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized/full,
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	id = "bo_windows"
+	},
 /turf/simulated/floor/plating,
 /area/security/sierra/sergeant)
 "aGt" = (
@@ -19607,7 +19625,9 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized/full,
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	id = "bo_windows"
+	},
 /turf/simulated/floor/plating,
 /area/security/sierra/sergeant)
 "aHH" = (
@@ -19688,7 +19708,9 @@
 	id_tag = "security_lockdown";
 	name = "Security Department Lockdown"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized/full,
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	id = "bo_windows"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/sierra/sergeant)
 "aHO" = (
@@ -20761,7 +20783,6 @@
 	},
 /obj/machinery/door/airlock/glass/security{
 	dir = 4;
-	id_tag = "detdoor";
 	name = "Warden";
 	req_access = newlist()
 	},
@@ -21885,7 +21906,9 @@
 	id_tag = "security_lockdown";
 	name = "Security Department Lockdown"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized/full,
+/obj/effect/wallframe_spawn/reinforced/polarized/full{
+	id = "bo_windows"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/sierra/sergeant)
 "aKS" = (
@@ -23916,12 +23939,6 @@
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals4{
 	dir = 6
-	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_y = 24;
-	req_access = list("ACCESS_ENGINEERING")
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/prison)
@@ -27710,6 +27727,11 @@
 	},
 /obj/effect/floor_decal/corner/green/border{
 	dir = 4
+	},
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled,
 /area/security/prison)

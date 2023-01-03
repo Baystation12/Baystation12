@@ -1387,6 +1387,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/hatch/maintenance,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/item/tape/engineering,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "ade" = (
@@ -4361,6 +4362,8 @@
 /turf/simulated/wall/prepainted,
 /area/holocontrol)
 "ait" = (
+/obj/effect/floor_decal/borderfloor,
+/obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "aiu" = (
@@ -4370,6 +4373,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "aiv" = (
@@ -5079,7 +5083,7 @@
 /area/maintenance/seconddeck/starboard)
 "ajR" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/techfloor,
+/turf/simulated/floor/plating,
 /area/maintenance/compactor)
 "ajS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -7954,6 +7958,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/item/tape/engineering,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "apd" = (
@@ -9488,7 +9493,8 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/tiled/techmaint,
+/obj/random/trash,
+/turf/simulated/floor/plating,
 /area/maintenance/compactor)
 "arV" = (
 /obj/machinery/firealarm{
@@ -17569,7 +17575,9 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled/techmaint,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
 /area/maintenance/compactor)
 "aGm" = (
 /obj/structure/cable/green{
@@ -22611,7 +22619,7 @@
 /obj/effect/floor_decal/borderfloor/corner{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/techmaint,
+/turf/simulated/floor/plating,
 /area/maintenance/compactor)
 "aQg" = (
 /obj/machinery/vending/tool/adherent{
@@ -22826,6 +22834,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "aQy" = (
@@ -32480,6 +32489,14 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/center)
+"bRn" = (
+/obj/item/paper/sticky{
+	pixel_y = -6;
+	pixel_x = 11;
+	info = "Мусорный пресс - временно не работает"
+	},
+/turf/simulated/wall/prepainted,
+/area/maintenance/compactor)
 "bRG" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8;
@@ -32873,6 +32890,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hydroponics/storage)
+"daG" = (
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/effect/decal/cleanable/dirt,
+/obj/random/trash,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/compactor)
 "dcg" = (
 /obj/machinery/light{
 	dir = 1
@@ -34502,6 +34525,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/nano)
+"iar" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/maintenance/compactor)
 "iaX" = (
 /obj/structure/window/reinforced{
 	dir = 4
@@ -35423,6 +35450,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "lmg" = (
@@ -35463,6 +35491,11 @@
 /obj/structure/table/glass,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/nano)
+"lwx" = (
+/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techmaint,
+/area/maintenance/compactor)
 "lAe" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -39042,6 +39075,12 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/sleep/bunk_big)
+"uZB" = (
+/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/effect/decal/cleanable/dirt,
+/obj/random/trash,
+/turf/simulated/floor/tiled/techmaint,
+/area/maintenance/compactor)
 "vaq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -62360,9 +62399,9 @@ aTg
 mxF
 acW
 aAn
-aNQ
+ait
 aUf
-ahv
+lwx
 ahv
 ahv
 aqP
@@ -62564,8 +62603,8 @@ acW
 aPU
 aNQ
 aUf
-ahv
-ahv
+lwx
+uZB
 ahv
 aqP
 abc
@@ -62764,9 +62803,9 @@ afq
 afl
 acW
 aPW
-aNQ
-aUf
-ahv
+ait
+iar
+lwx
 ahv
 ahv
 aqP
@@ -63369,7 +63408,7 @@ hsW
 gwl
 aGn
 aGJ
-afd
+bRn
 afd
 llZ
 aou
@@ -63777,7 +63816,7 @@ ngY
 afd
 afd
 aiu
-ajR
+daG
 aPd
 aaW
 acW
@@ -63979,7 +64018,7 @@ akT
 lcU
 afd
 aQp
-ait
+aUf
 aNQ
 aaW
 acW
