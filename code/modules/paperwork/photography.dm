@@ -200,7 +200,7 @@ var/global/photo_count = 0
 		if(A.invisibility) continue
 		var/holding = null
 		var/list/held_items = A.GetAllHeld()
-		if (held_items.len)
+		if (length(held_items))
 			holding = "They are holding [english_list(A.GetAllHeld())]"
 
 		if(!mob_detail)
