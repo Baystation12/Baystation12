@@ -224,7 +224,6 @@
 
 /datum/gear/trinket/coin
 	display_name = "coin selection"
-	description = "A selection of coins, made of different materials."
 	path = /obj/item/material/coin
 	cost = 2
 
