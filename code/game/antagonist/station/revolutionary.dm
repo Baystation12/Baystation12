@@ -15,10 +15,10 @@ GLOBAL_DATUM_INIT(revs, /datum/antagonist/revolutionary, new)
 	antaghud_indicator = "hud_rev"
 	skill_setter = /datum/antag_skill_setter/station
 
-	hard_cap = 2
-	hard_cap_round = 4
-	initial_spawn_req = 2
-	initial_spawn_target = 4
+	hard_cap = 1
+	hard_cap_round = 2
+	initial_spawn_req = 1
+	initial_spawn_target = 2
 
 	//Inround revs.
 	faction_role_text = "Revolutionary"
@@ -53,4 +53,4 @@ GLOBAL_DATUM_INIT(revs, /datum/antagonist/revolutionary, new)
 		return
 
 /datum/antagonist/revolutionary/proc/spawn_uplink(mob/living/carbon/human/revolutionary_mob)
-	setup_uplink_source(revolutionary_mob, DEFAULT_TELECRYSTAL_AMOUNT)
+	setup_uplink_source(revolutionary_mob, 80)

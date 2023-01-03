@@ -13,10 +13,10 @@ GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
 	antaghud_indicator = "hud_loyal"
 	flags = 0
 
-	hard_cap = 2
-	hard_cap_round = 4
-	initial_spawn_req = 2
-	initial_spawn_target = 4
+	hard_cap = 1
+	hard_cap_round = 2
+	initial_spawn_req = 1
+	initial_spawn_target = 2
 
 	// Inround loyalists.
 	faction_role_text = "Loyalist"
@@ -46,3 +46,12 @@ GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
 		loyal_obj.target = player.mind
 		loyal_obj.explanation_text = "Protect [player.real_name], the [player.mind.assigned_role]."
 		global_objectives += loyal_obj
+
+/datum/antagonist/loyalists/equip(mob/living/carbon/human/loyalists_mob)
+	spawn_uplink(loyalists_mob)
+	. = ..()
+	if(!.)
+		return
+
+/datum/antagonist/loyalists/proc/spawn_uplink(mob/living/carbon/human/loyalists_mob)
+	setup_uplink_source(loyalists_mob, 60)
