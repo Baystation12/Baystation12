@@ -36,10 +36,12 @@
 	var/new_health = 0
 	if(!material)
 		new_health = 10
+		damage_hitsound = initial(damage_hitsound)
 	else
 		new_health = material.integrity / 2
 		if(reinforced)
 			new_health += reinforced.integrity / 2
+		damage_hitsound = material.hitsound
 	set_max_health(new_health)
 
 /obj/structure/table/damage_health(damage, damage_type, damage_flags = EMPTY_BITFIELD, severity, skip_can_damage_check = FALSE)
