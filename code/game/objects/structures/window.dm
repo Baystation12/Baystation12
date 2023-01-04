@@ -16,7 +16,6 @@
 	var/damaged_reinf = FALSE
 	var/init_material = MATERIAL_GLASS
 	var/init_reinf_material = null
-	var/damage_per_fire_tick = 2 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
 	var/construction_state = 2
 	var/id
 	var/polarized = 0
@@ -214,21 +213,6 @@
 		return 0
 	return 1
 
-/obj/structure/window/hitby(atom/movable/AM, datum/thrownthing/TT)
-	..()
-	visible_message(SPAN_DANGER("[src] was hit by [AM]."))
-	var/tforce = 0
-	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
-		var/mob/I = AM
-		tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	else if(isobj(AM))
-		var/obj/item/I = AM
-		tforce = I.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	if(reinf_material) tforce *= 0.25
-	playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
-	damage_health(tforce, DAMAGE_BRUTE)
-	deanchor(AM)
-
 /obj/structure/window/attack_hand(mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(MUTATION_HULK in user.mutations)
@@ -259,23 +243,6 @@
 							"You knock on the [src.name].",
 							"You hear a knocking sound.")
 	return
-
-/obj/structure/window/attack_generic(mob/user, damage, attack_verb, environment_smash)
-	if(environment_smash >= 1)
-		damage = max(damage, 10)
-
-	if(istype(user))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		user.do_attack_animation(src)
-	if(!damage)
-		return
-	if(can_damage_health(damage, DAMAGE_BRUTE))
-		visible_message(SPAN_DANGER("[user] [attack_verb] into [src]!"))
-		playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
-		damage_health(damage, DAMAGE_BRUTE, skip_can_damage_check = TRUE)
-	else
-		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
-	return 1
 
 /obj/structure/window/do_simple_ranged_interaction(mob/user)
 	visible_message(SPAN_NOTICE("Something knocks on \the [src]."))
@@ -609,7 +576,7 @@
 	if(reinf_material)
 		melting_point += 0.25*reinf_material.melting_point
 	if (exposed_temperature > melting_point)
-		damage_health(damage_per_fire_tick, DAMAGE_FIRE)
+		..()
 
 /obj/structure/window/basic
 	icon_state = "window"

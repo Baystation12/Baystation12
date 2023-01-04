@@ -66,7 +66,7 @@
 	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "wall"
 	atmos_canpass = CANPASS_DENSITY
-	health_max = 10
+	health_max = 20
 	damage_hitsound = 'sound/effects/Glasshit.ogg'
 
 	var/undeploy_path = null
@@ -195,14 +195,6 @@
 	verbs -= /obj/structure/inflatable/verb/hand_deflate
 	deflate()
 	return TRUE
-
-/obj/structure/inflatable/attack_generic(mob/user, damage, attack_verb)
-	attack_animation(user)
-	if (damage_health(damage))
-		user.visible_message(SPAN_DANGER("[user] [attack_verb] open the [src]!"))
-	else
-		user.visible_message(SPAN_DANGER("[user] [attack_verb] at [src]!"))
-	return 1
 
 /obj/structure/inflatable/CanFluidPass(coming_from)
 	return !density

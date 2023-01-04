@@ -7,6 +7,10 @@
 	density = FALSE
 	health_max = 15
 
+/obj/effect/spider/on_death()
+	visible_message(SPAN_WARNING("\The [src] breaks apart!"))
+	qdel(src)
+
 /obj/effect/spider/stickyweb
 	icon_state = "stickyweb1"
 
@@ -48,6 +52,13 @@
 	if(istype(loc, /obj/item/organ/external))
 		var/obj/item/organ/external/O = loc
 		O.implants -= src
+	. = ..()
+
+/obj/effect/spider/eggcluster/on_death()
+	if (isturf(loc))
+		var/amount_to_spawn = round(spiders_max * amount_grown / 100)
+		for (var/count = 1 to amount_to_spawn)
+			new spider_type(loc, src)
 	. = ..()
 
 /obj/effect/spider/eggcluster/Process()
@@ -164,7 +175,7 @@
 		..()
 
 /obj/effect/spider/spiderling/on_death()
-	visible_message(SPAN_CLASS("alert", "\The [src] dies!"))
+	visible_message(SPAN_WARNING("\The [src] dies!"))
 	new /obj/effect/decal/cleanable/spiderling_remains(loc)
 	qdel(src)
 

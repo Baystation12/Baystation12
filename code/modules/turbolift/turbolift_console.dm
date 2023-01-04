@@ -37,7 +37,7 @@
 	return attack_hand(user)
 
 /obj/structure/lift/attack_generic(mob/user)
-	return attack_hand(user)
+	attack_hand(user)
 
 /obj/structure/lift/attack_hand(mob/user)
 	return interact(user)

@@ -28,7 +28,7 @@
 
 /obj/item/clothing/under/iccgn/pt
 	name = "physical training uniform, ICCGN"
-	desc = "A comfortable set of clingy shorts and a t-shirt sporting the insigna of the Confederation Navy."
+	desc = "A comfortable set of clingy shorts and a t-shirt sporting the insigna of the confederation navy."
 	icon_state = "under_pt"
 	item_state_slots = list(
 		slot_l_hand_str = "under_pt_held_l",
@@ -39,7 +39,7 @@
 
 /obj/item/clothing/under/iccgn/utility
 	name = "utility uniform, ICCGN"
-	desc = "A comfortable black utility jumpsuit from a Confederation Navy uniform."
+	desc = "A comfortable black utility jumpsuit from a confederation navy uniform."
 	icon_state = "under_utility"
 	item_state_slots = list(
 		slot_l_hand_str = "under_utility_held_l",
@@ -50,7 +50,7 @@
 
 /obj/item/clothing/under/iccgn/service
 	name = "service uniform, ICCGN"
-	desc = "A smart service shirt and dress pants from a Confederation Navy uniform."
+	desc = "A smart service shirt and dress pants from a confederation navy uniform."
 	icon_state = "under_service"
 	item_state_slots = list(
 		slot_l_hand_str = "under_service_held_l",
@@ -61,7 +61,7 @@
 
 /obj/item/clothing/under/iccgn/service_command
 	name = "service uniform, ICCGN"
-	desc = "A smart senior officers' shirt and dress pants from a Confederation Navy uniform."
+	desc = "A smart senior officers' shirt and dress pants from a confederation navy uniform."
 	icon_state = "under_service_command"
 	item_state_slots = list(
 		slot_l_hand_str = "under_service_command_held_l",
@@ -93,7 +93,7 @@
 
 /obj/item/clothing/suit/iccgn/utility
 	name = "utility jacket, ICCGN"
-	desc = "A rugged utility jacket from a Confederation Navy uniform."
+	desc = "A rugged utility jacket from a confederation navy uniform."
 	icon_state = "suit_utility"
 	item_state_slots = list(
 		slot_l_hand_str = "suit_utility_held_l",
@@ -107,7 +107,7 @@
 
 /obj/item/clothing/suit/iccgn/service_enlisted
 	name = "service jacket, ICCGN"
-	desc = "A slick enlisted persons' service jacket from a Confederation Navy uniform."
+	desc = "A slick enlisted persons' service jacket from a confederation navy uniform."
 	icon_state = "suit_service"
 	item_state_slots = list(
 		slot_l_hand_str = "suit_service_held_l",
@@ -122,7 +122,7 @@
 
 /obj/item/clothing/suit/iccgn/service_officer
 	name = "service jacket, ICCGN"
-	desc = "A slick officers' service jacket from a Confederation Navy uniform."
+	desc = "A slick officers' service jacket from a confederation navy uniform."
 	icon_state = "suit_service"
 	item_state_slots = list(
 		slot_l_hand_str = "suit_service_held_l",
@@ -137,7 +137,7 @@
 
 /obj/item/clothing/suit/iccgn/service_command
 	name = "service jacket, ICCGN"
-	desc = "A slick senior officers' service jacket from a Confederation Navy uniform."
+	desc = "A slick senior officers' service jacket from a confederation navy uniform."
 	icon_state = "suit_service_command"
 	item_state_slots = list(
 		slot_l_hand_str = "suit_service_held_l",
@@ -152,7 +152,7 @@
 
 /obj/item/clothing/suit/iccgn/dress_enlisted
 	name = "dress cloak, ICCGN"
-	desc = "A stylish enlisted persons' dress cloak from a Confederation Navy uniform."
+	desc = "A stylish enlisted persons' dress cloak from a confederation navy uniform."
 	icon_state = "suit_dress_enlisted"
 	item_state_slots = list(
 		slot_l_hand_str = "suit_dress_enlisted_held_l",
@@ -167,7 +167,7 @@
 
 /obj/item/clothing/suit/iccgn/dress_officer
 	name = "dress cloak, ICCGN"
-	desc = "A stylish officers' dress cloak from a Confederation Navy uniform."
+	desc = "A stylish officers' dress cloak from a confederation navy uniform."
 	icon_state = "suit_dress_officer"
 	item_state_slots = list(
 		slot_l_hand_str = "suit_dress_officer_held_l",
@@ -182,7 +182,7 @@
 
 /obj/item/clothing/suit/iccgn/dress_command
 	name = "dress cloak, ICCGN"
-	desc = "A stylish senior officers' dress cloak from a Confederation Navy uniform."
+	desc = "A stylish senior officers' dress cloak from a confederation navy uniform."
 	icon_state = "suit_dress_command"
 	item_state_slots = list(
 		slot_l_hand_str = "suit_dress_command_held_l",
@@ -210,7 +210,7 @@
 
 /obj/item/clothing/gloves/iccgn/duty
 	name = "duty gloves, ICCGN"
-	desc = "Regal black utility gloves from a Confederation Navy uniform."
+	desc = "Regal black utility gloves from a confederation navy uniform."
 	icon_state = "gloves_utility"
 	item_state_slots = list(
 		slot_l_hand_str = "gloves_utility_held_l",
@@ -234,7 +234,7 @@
 
 /obj/item/clothing/shoes/iccgn/utility
 	name = "duty boots, ICCGN"
-	desc = "Spectacularly shiny utility boots from a Confederation Navy uniform."
+	desc = "Spectacularly shiny utility boots from a confederation navy uniform."
 	icon_state = "boots_utility"
 	item_state_slots = list(
 		slot_l_hand_str = "boots_utility_held_l",
@@ -245,7 +245,7 @@
 
 /obj/item/clothing/shoes/iccgn/service
 	name = "service boots, ICCGN"
-	desc = "Extra tall service boots from a Confederation Navy uniform."
+	desc = "Extra tall service boots from a confederation navy uniform."
 	icon_state = "boots_service"
 	item_state_slots = list(
 		slot_l_hand_str = "boots_service_held_l",
@@ -269,7 +269,7 @@
 
 /obj/item/clothing/head/iccgn/beret
 	name = "uniform beret, ICCGN"
-	desc = "A slick grey beret from a Confederation Navy uniform."
+	desc = "A slick grey beret from a confederation navy uniform."
 	icon_state = "hat_beret"
 	item_state_slots = list(
 		slot_l_hand_str = "hat_beret_held_l",
@@ -280,7 +280,7 @@
 
 /obj/item/clothing/head/iccgn/service
 	name = "service cover, ICCGN"
-	desc = "A peaked service cap from a Confederation Navy uniform."
+	desc = "A peaked service cap from a confederation navy uniform."
 	icon_state = "hat_service"
 	item_state_slots = list(
 		slot_l_hand_str = "hat_service_held_l",
@@ -291,7 +291,7 @@
 
 /obj/item/clothing/head/iccgn/service_command
 	name = "service cover, ICCGN"
-	desc = "A senior officers' peaked service cap from a Confederation Navy uniform."
+	desc = "A senior officers' peaked service cap from a confederation navy uniform."
 	icon_state = "hat_service_command"
 	item_state_slots = list(
 		slot_l_hand_str = "hat_service_command_held_l",

@@ -399,8 +399,6 @@
 			SPAN_ITALIC("You start setting up \the [src]."),
 			range = 5
 		)
-		if (!do_after(user, 2 SECONDS, src, do_flags = DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
-			return
 	var/obj/structure/roller_bed/roller = new (target)
 	if (user)
 		roller.add_fingerprint(user)

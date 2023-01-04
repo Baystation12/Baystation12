@@ -186,7 +186,8 @@
 		return attack_self(user)
 	else if(adj)
 		setClickCooldown(arms ? arms.action_delay : 15)
-		return A.attack_generic(src, arms.melee_damage, "attacked")
+		A.attack_generic(src, arms.melee_damage, "attacked")
+		return
 	return
 
 /mob/living/exosuit/proc/set_hardpoint(hardpoint_tag)
@@ -251,14 +252,38 @@
 	if(!silent)
 		to_chat(user, SPAN_NOTICE("You climb into \the [src]."))
 		playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
-	user.forceMove(src)
-	LAZYDISTINCTADD(pilots, user)
-	sync_access()
-	if(user.client) user.client.screen |= hud_elements
-	LAZYDISTINCTADD(user.additional_vision_handlers, src)
-	update_pilots()
-	user.PushClickHandler(/datum/click_handler/default/mech)
+	add_pilot(user)
 	return TRUE
+
+/// Adds a mob to the pilots list and destroyed event handlers.
+/mob/living/exosuit/proc/add_pilot(mob/user)
+	if (LAZYISIN(pilots, user))
+		return
+	user.forceMove(src)
+	user.PushClickHandler(/datum/click_handler/default/mech)
+	if (user.client)
+		user.client.screen |= hud_elements
+	LAZYADD(pilots, user)
+	LAZYDISTINCTADD(user.additional_vision_handlers, src)
+	GLOB.destroyed_event.register(user, src, .proc/remove_pilot)
+	sync_access()
+	update_pilots()
+
+/// Removes a mob from the pilots list and destroyed event handlers. Called by the destroyed event.
+/mob/living/exosuit/proc/remove_pilot(mob/user)
+	if (!LAZYISIN(pilots, user))
+		return
+	user.RemoveClickHandler(/datum/click_handler/default/mech)
+	if (!QDELETED(user))
+		user.dropInto(loc)
+	if (user.client)
+		user.client.screen -= hud_elements
+		user.client.eye = user
+	LAZYREMOVE(user.additional_vision_handlers, src)
+	LAZYREMOVE(pilots, user)
+	GLOB.destroyed_event.unregister(user, src, .proc/remove_pilot)
+	sync_access()
+	update_pilots()
 
 /mob/living/exosuit/proc/sync_access()
 	access_card.access = saved_access.Copy()
@@ -282,17 +307,7 @@
 		if(!silent)
 			to_chat(user, SPAN_NOTICE("You climb out of \the [src]."))
 
-	user.RemoveClickHandler(/datum/click_handler/default/mech)
-	user.dropInto(loc)
-	LAZYREMOVE(user.additional_vision_handlers, src)
-	if(user.client)
-		user.client.screen -= hud_elements
-		user.client.eye = user
-	if(user in pilots)
-		a_intent = I_HURT
-		LAZYREMOVE(pilots, user)
-		UNSETEMPTY(pilots)
-		update_pilots()
+	remove_pilot(user)
 	return 1
 
 /mob/living/exosuit/attackby(obj/item/thing, mob/user)
@@ -467,7 +482,7 @@
 	return
 
 /mob/living/exosuit/attack_generic(mob/user, damage, attack_message = "smashes into")
-	if(..())
+	if(damage)
 		playsound(loc, arms.mech_punch_sound, 40, 1)
 
 /mob/living/exosuit/proc/attack_self(mob/user)

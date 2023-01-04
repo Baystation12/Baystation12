@@ -120,8 +120,8 @@
 	return TRUE
 
 /obj/effect/turf_fire/Process()
-	var/turf/simulated/floor/T = loc
-	if(!istype(T) || T.density) //This can happen, how I'm not sure
+	var/turf/simulated/T = get_turf(src)
+	if(!T || T.density)
 		qdel(src)
 		return
 	if(T.hotspot) //If we have an active hotspot, let it do the damage instead and lets not loose power
@@ -154,8 +154,9 @@
 	for(var/atom/movable/burning_atom as anything in T)
 		burning_atom.fire_act(exposed_temperature = effective_temperature, exposed_volume = TURF_FIRE_VOLUME)
 	if(interact_with_atmos)
-		if(prob(fire_power))
-			T.burn_tile(effective_temperature)
+		if(prob(fire_power) && istype(T, /turf/simulated/floor))
+			var/turf/simulated/floor/F = T
+			F.burn_tile(effective_temperature)
 		UpdateFireState()
 
 /obj/effect/turf_fire/Crossed(O)

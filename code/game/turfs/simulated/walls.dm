@@ -106,14 +106,6 @@
 
 	..()
 
-/turf/simulated/wall/hitby(AM as mob|obj, datum/thrownthing/TT)
-	if(!ismob(AM))
-		var/obj/O = AM
-		var/tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-		playsound(src, hitsound, tforce >= 15? 60 : 25, TRUE)
-		damage_health(tforce, O.damtype)
-	..()
-
 /turf/simulated/wall/proc/clear_plants()
 	for(var/obj/effect/overlay/wallrot/WR in src)
 		qdel(WR)
@@ -180,13 +172,11 @@
 
 /turf/simulated/wall/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)//Doesn't fucking work because walls don't interact with air
 	burn(exposed_temperature)
+	if (exposed_temperature > material.melting_point)
+		..()
 
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
-	burn(adj_temp)
-	if(adj_temp > material.melting_point)
-		damage_health(log(Frand(0.9, 1.1) * (adj_temp - material.melting_point)), DAMAGE_BURN)
-
-	return ..()
+	fire_act(adj_air, adj_temp, adj_volume)
 
 /turf/simulated/wall/proc/dismantle_wall(devastated, no_product)
 
@@ -261,13 +251,15 @@
 
 /turf/simulated/wall/proc/burn(temperature)
 	if(material.combustion_effect(src, temperature, 0.7))
-		spawn(2)
-			new /obj/structure/girder(src)
-			src.ChangeTurf(/turf/simulated/floor)
-			for(var/turf/simulated/wall/W in range(3,src))
-				W.burn((temperature/4))
-			for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
-				D.ignite(temperature/4)
+		addtimer(CALLBACK(src, .proc/burn_adjacent, temperature), 2, TIMER_UNIQUE)
+
+/turf/simulated/wall/proc/burn_adjacent(temperature)
+	var/list/nearby_atoms = range(3,src)
+	for (var/turf/simulated/wall/W in nearby_atoms)
+		W.burn(temperature * 0.25)
+	for (var/obj/machinery/door/airlock/phoron/D in nearby_atoms)
+		D.ignite(temperature * 0.25)
+	kill_health()
 
 /turf/simulated/wall/get_color()
 	return paint_color

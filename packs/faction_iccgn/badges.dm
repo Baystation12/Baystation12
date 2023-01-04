@@ -18,13 +18,13 @@
 
 /obj/item/clothing/accessory/iccgn_badge/enlisted
 	name = "pin badge, ICCGN Enlisted"
-	desc = "A shiny little pin badge denoting that the holder is Confederation Navy enlisted personnel."
+	desc = "A shiny little pin badge denoting qualification as a confederation navy enlisted person."
 	icon_state = "enlisted"
 	overlay_state = "enlisted_worn"
 
 
 /obj/item/clothing/accessory/iccgn_badge/officer
 	name = "pin badge, ICCGN Officer"
-	desc = "A shiny little pin badge denoting that the holder is a Confederation Navy officer."
+	desc = "A shiny little pin badge denoting qualification as a confederation navy officer."
 	icon_state = "officer"
 	overlay_state = "officer_worn"
