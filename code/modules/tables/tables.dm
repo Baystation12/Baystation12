@@ -37,10 +37,14 @@
 	if(!material)
 		new_health = 10
 		damage_hitsound = initial(damage_hitsound)
+		health_min_damage = 0
 	else
 		new_health = material.integrity / 2
+		health_min_damage = material.hardness
 		if(reinforced)
 			new_health += reinforced.integrity / 2
+			health_min_damage += reinforced.hardness
+		health_min_damage = round(health_min_damage / 10)
 		damage_hitsound = material.hitsound
 	set_max_health(new_health)
 
