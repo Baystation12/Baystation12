@@ -292,7 +292,6 @@
 	if (istype(human))
 		human.custom_pain(power = 20)
 	buckled_mob.apply_damage(rand(1, 3), DAMAGE_BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags = DAMAGE_FLAG_SHARP, armor_pen = 100)
-	buckled_mob = null
 	update_icon()
 
 
