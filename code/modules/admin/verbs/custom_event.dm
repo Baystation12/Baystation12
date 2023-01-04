@@ -24,7 +24,7 @@
 	to_world(SPAN_CLASS("alert", "[config.event]"))
 	to_world("<br>")
 
-	SSwebhooks.send(WEBHOOK_CUSTOM_EVENT, list("text" = config.event))
+	SSwebhooks.Send(/singleton/webhook/discord/event, config.event)
 
 // normal verb for players to view info
 /client/verb/cmd_view_custom_event()

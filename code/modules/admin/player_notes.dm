@@ -73,17 +73,3 @@
 	log_admin("[key_name(usr)] deleted one of [target]'s notes.")
 
 	del(info) // savefile, so NOT qdel
-
-/proc/show_player_info_irc(key as text)
-	var/dat = "          Info on [key]\n"
-	var/target = ckey(key)
-	var/savefile/info = new("data/player_saves/[copytext_char(target, 1, 2)]/[target]/info.sav")
-	var/list/infos
-	from_save(info, infos)
-	if(!infos)
-		dat = "No information found on the given key."
-	else
-		for(var/datum/player_info/I in infos)
-			dat += "[I.content]\nby [I.author] ([I.rank]) on [I.timestamp]\n\n"
-
-	return list2params(list(dat))

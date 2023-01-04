@@ -1,5 +1,3 @@
-#define WEBHOOK_SUBMAP_LOADED_SKRELL "webhook_submap_skrell"
-
 #include "skrellscoutship_areas.dm"
 #include "skrellscoutship_shuttles.dm"
 #include "skrellscoutship_radio.dm"
@@ -36,18 +34,6 @@
 
 /obj/effect/submap_landmark/spawnpoint/skrellscoutship/leader
 	name = "Qrri-Vuxix"
-
-/singleton/webhook/submap_loaded/skrell
-	id = WEBHOOK_SUBMAP_LOADED_SKRELL
-
-/singleton/submap_archetype/skrellscoutship
-	descriptor = "Skrellian Scout Ship"
-	map = "Xilvuxix"
-	crew_jobs = list(
-		/datum/job/submap/skrellscoutship_crew,
-		/datum/job/submap/skrellscoutship_crew/leader
-	)
-	call_webhook = WEBHOOK_SUBMAP_LOADED_SKRELL
 
 //Access + Loadout
 
@@ -209,8 +195,6 @@ var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 	cell_type = /obj/item/cell/infinite
 	req_access = list(access_skrellscoutship)
 
-#undef WEBHOOK_SUBMAP_LOADED_SKRELL
-
 //Skrell Security Belt
 /obj/item/storage/belt/holster/skrell
 	name = "skrellian holster belt"
@@ -308,3 +292,18 @@ var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 	name = "thermal induction generator"
 	desc = "Made by Krri'gli Corp using thermal induction technology, this heater is guaranteed not to set anything, or anyone, on fire."
 	set_temperature = T0C+40
+
+
+/singleton/webhook/discord/submap/skrell
+	config_key = "submap_skrell"
+	submap_name = "Skrell Scout Ship"
+
+
+/singleton/submap_archetype/skrellscoutship
+	descriptor = "Skrellian Scout Ship"
+	map = "Xilvuxix"
+	crew_jobs = list(
+		/datum/job/submap/skrellscoutship_crew,
+		/datum/job/submap/skrellscoutship_crew/leader
+	)
+	call_webhook = /singleton/webhook/discord/submap/skrell

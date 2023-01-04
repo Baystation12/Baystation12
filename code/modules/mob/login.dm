@@ -12,12 +12,14 @@
 				if(M == src)	continue
 				if( M.key && (M.key != key) )
 					var/matches
-					if( (M.lastKnownIP == client.address) )
+					if(!client.warned_about_same_ip && M.lastKnownIP == client.address)
+						client.warned_about_same_ip = TRUE
 						matches += "IP ([client.address])"
-					if( (client.connection != "web") && (M.computer_id == client.computer_id) )
-						if(matches)	matches += " and "
+					if(M.computer_id == client.computer_id)
+						if(matches)
+							matches += " and "
 						matches += "ID ([client.computer_id])"
-						is_multikeying = 1
+						is_multikeying = TRUE
 					if(matches)
 						if(M.client)
 							message_admins("[SPAN_DANGER("<B>Notice:</B>")] [SPAN_INFO("<A href='?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as <A href='?src=\ref[usr];priv_msg=\ref[M]'>[key_name_admin(M)]</A>.")]", 1)
@@ -26,7 +28,7 @@
 							message_admins("[SPAN_DANGER("<B>Notice:</B>")] [SPAN_INFO("<A href='?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as [key_name_admin(M)] (no longer logged in).")]", 1)
 							log_access("Notice: [key_name(src)] has the same [matches] as [key_name(M)] (no longer logged in).")
 		if(is_multikeying && !client.warned_about_multikeying)
-			client.warned_about_multikeying = 1
+			client.warned_about_multikeying = TRUE
 			spawn(1 SECOND)
 				to_chat(src, "<b>WARNING:</b> It would seem that you are sharing connection or computer with another player. If you haven't done so already, please contact the staff via the Adminhelp verb to resolve this situation. Failure to do so may result in administrative action. You have been warned.")
 

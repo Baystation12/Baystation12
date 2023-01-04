@@ -2,91 +2,72 @@ SUBSYSTEM_DEF(webhooks)
 	name = "Webhooks"
 	init_order = SS_INIT_EARLY
 	flags = SS_NO_FIRE
-	var/list/webhook_singletons = list()
 
+	/// If not truthy, the HTTP library was not found and webhooks are unavailable.
+	var/static/http_available
 
-/datum/controller/subsystem/webhooks/UpdateStat(time)
-	return
+	/// A cache of (path = Instance) webhook singletons.
+	var/static/list/singleton/webhook/enabled_webhooks = list()
 
 
 /datum/controller/subsystem/webhooks/Initialize(start_uptime)
-	load_webhooks()
+	LoadConfiguration()
 
 
-/datum/controller/subsystem/webhooks/proc/load_webhooks()
-
-	if(!fexists(HTTP_POST_DLL_LOCATION))
-		to_world_log("Unable to locate HTTP POST lib at [HTTP_POST_DLL_LOCATION], webhooks will not function on this run.")
+/datum/controller/subsystem/webhooks/proc/LoadConfiguration()
+	http_available = fexists(HTTP_POST_DLL_LOCATION)
+	if (!http_available)
+		log_debug({"HTTP POST library "[HTTP_POST_DLL_LOCATION]" unavailable, webhooks disabled."})
 		return
+	var/list/webhooks_config = trim(file2text("config/webhooks.json"))
+	if (!webhooks_config)
+		return
+	if (webhooks_config[1] != "{" || webhooks_config[length(webhooks_config)] != "}")
+		log_debug("Invalid JSON in webhooks.json; unable to load any webhooks.")
+		return
+	try
+		webhooks_config = json_decode(webhooks_config)
+	catch
+		log_debug("Invalid JSON in webhooks.json; unable to load any webhooks.")
+		return
+	enabled_webhooks.Cut()
+	var/list/webhooks_by_key = list()
+	var/list/webhooks_by_path = Singletons.GetSubtypeMap(/singleton/webhook)
+	for (var/path in webhooks_by_path)
+		var/singleton/webhook/webhook = webhooks_by_path[path]
+		webhooks_by_key[webhook.config_key] = webhook
+	for (var/config_key in webhooks_config)
+		var/singleton/webhook/webhook = webhooks_by_key[config_key]
+		if (!webhook)
+			log_debug({"Invalid webhook config key "[config_key]" in webhooks.json"})
+			continue
+		if (!webhook.Configure(webhooks_config[config_key]))
+			continue
+		enabled_webhooks[webhook.type] = webhook
+		webhook.available = TRUE
 
-	var/list/all_webhooks_by_id = list()
-	var/list/all_webhooks = GET_SINGLETON_SUBTYPE_MAP(/singleton/webhook)
-	for(var/wid in all_webhooks)
-		var/singleton/webhook/webhook = all_webhooks[wid]
-		if(webhook.id)
-			all_webhooks_by_id[webhook.id] = webhook
 
-	webhook_singletons.Cut()
-	var/webhook_config = file2text("config/webhooks.json") || "{}"
-	if(webhook_config)
-		for(var/webhook_data in json_decode(webhook_config))
-			var/wid = webhook_data["id"]
-			var/wurl = webhook_data["url"]
-			var/wmention = webhook_data["mentions"]
-			to_world_log("Setting up webhook [wid].")
-			if(wid && wurl && all_webhooks_by_id[wid])
-				var/singleton/webhook/webhook = all_webhooks_by_id[wid]
-				webhook.urls = islist(wurl) ? wurl : list(wurl)
-				if(wmention)
-					webhook.mentions = jointext(wmention, ", ")
-				webhook_singletons[wid] = webhook
-				to_world_log("Webhook [wid] ready.")
-			else
-				to_world_log("Failed to set up webhook [wid].")
+/datum/controller/subsystem/webhooks/proc/Send(path, list/payload)
+	if (!length(enabled_webhooks))
+		return // HTTP is not available or the webhooks config is bad.
+	if (!ispath(path, /singleton/webhook))
+		log_debug({"Invalid webhook "[path]" called."})
+		return
+	var/singleton/webhook/webhook = enabled_webhooks[path]
+	if (!webhook)
+		log_debug({"Invalid webhook "[path]" called."})
+		return
+	if (!webhook.Send(payload))
+		log_debug({"Webhook "[path]" failed to send."})
 
-/datum/controller/subsystem/webhooks/proc/send(wid, wdata)
-	var/singleton/webhook/webhook = webhook_singletons[wid]
-	if(webhook)
-		if(webhook.send(wdata))
-			to_world_log("Sent webhook [webhook.id].")
-			log_debug("Webhook sent: [webhook.id].")
-		else
-			to_world_log("Failed to send webhook [webhook.id].")
-			log_debug("Webhook failed to send: [webhook.id].")
 
 /client/proc/reload_webhooks()
 	set name = "Reload Webhooks"
 	set category = "Debug"
-
-	if(!holder)
+	if (!check_rights(R_DEBUG))
 		return
-
-	if(!SSwebhooks.initialized)
-		to_chat(usr, SPAN_WARNING("Let the webhook subsystem initialize before trying to reload it."))
+	if (!SSwebhooks.initialized)
+		to_chat(usr, SPAN_WARNING("SSwebhooks is not Initialized."))
 		return
-
-	to_world_log("[usr.key] has reloaded webhooks.")
 	log_and_message_admins("has reloaded webhooks.")
-	SSwebhooks.load_webhooks()
-
-/client/proc/ping_webhook()
-	set name = "Ping Webhook"
-	set category = "Debug"
-
-	if(!holder)
-		return
-
-	if(!length(SSwebhooks.webhook_singletons))
-		to_chat(usr, "Webhook list is empty; either webhooks are disabled, webhooks aren't configured, or the subsystem hasn't initialized.")
-		return
-
-	var/choice = input(usr, "Select a webhook to ping.", "Ping Webhook") as null|anything in SSwebhooks.webhook_singletons
-	if(choice && SSwebhooks.webhook_singletons[choice])
-		var/singleton/webhook/webhook = SSwebhooks.webhook_singletons[choice]
-		log_and_message_admins("has pinged webhook [choice].", usr)
-		to_world_log("[usr.key] has pinged webhook [choice].")
-		webhook.send()
-
-/hook/roundstart/proc/run_webhook()
-	SSwebhooks.send(WEBHOOK_ROUNDSTART, list("url" = get_world_url()))
-	return 1
+	SSwebhooks.LoadConfiguration()

@@ -843,8 +843,6 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	var/long_message = "Updated hub visibility. The server is now [config.hub_visible ? "visible" : "invisible"]."
 	if (config.hub_visible && !world.reachable)
 		message_admins("WARNING: The server will not show up on the hub because byond is detecting that a firewall is blocking incoming connections.")
-
-	send2adminirc("[key_name(src)]" + long_message)
 	log_and_message_admins(long_message)
 
 /datum/admins/proc/toggletraitorscaling()

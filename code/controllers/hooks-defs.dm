@@ -11,6 +11,12 @@
 /hook/startup
 
 /**
+ * First lobby hook.
+ * Called in ticker.dm when the server first enters the lobby runlevel.
+ */
+/hook/lobby
+
+/**
  * Roundstart hook.
  * Called in ticker.dm when a round starts.
  */
@@ -97,3 +103,15 @@
  * Parameters: var/obj/structure/closet/crate/sold, var/area/shuttle
  */
 /hook/sell_crate
+
+
+/**
+* Called when a ticket is opened, receives a message, or closes.
+* Parameters: (number, active_staff, user_ckey, staff_ckey|null, message|null)
+* number: The ticket number.
+* active_staff: The count of staff with R_MOD who are not afk.
+* user_ckey: The recipient of the ticket.
+* staff_ckey: If a message from staff, the responder's ckey.
+* message: The current message, or null if closing.
+*/
+/hook/ticket
