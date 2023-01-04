@@ -1,5 +1,4 @@
 /obj/item/material/coin
-	abstract_type = /obj/item/material/coin
 	name = "coin"
 	icon = 'icons/obj/coin.dmi'
 	icon_state = "coin1"
