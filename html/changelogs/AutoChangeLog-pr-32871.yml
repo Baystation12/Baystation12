@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Making material coins now produces coins once more.
+  - bugfix: Oxygen pumps no longer break if their linked mob is deleted.
