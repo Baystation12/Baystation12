@@ -531,7 +531,7 @@ SUBSYSTEM_DEF(jobs)
 			H.buckled = W
 			H.UpdateLyingBuckledAndVerbStatus()
 			W.set_dir(H.dir)
-			W.buckled_mob = H
+			W.buckle_mob(H)
 			W.add_fingerprint(H)
 
 	to_chat(H, FONT_LARGE("<B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B>"))

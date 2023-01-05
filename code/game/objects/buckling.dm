@@ -91,6 +91,7 @@
 	M.UpdateLyingBuckledAndVerbStatus()
 	M.update_floating()
 	buckled_mob = M
+	GLOB.destroyed_event.register(buckled_mob, src, /obj/proc/clear_buckle)
 	if (buckle_sound)
 		playsound(src, buckle_sound, 20)
 	post_buckle_mob(M)
@@ -105,7 +106,20 @@
 		buckled_mob.update_floating()
 		buckled_mob = null
 
+		GLOB.destroyed_event.unregister(., src, /obj/proc/clear_buckle)
 		post_buckle_mob(.)
+
+/**
+ * Clears any buckling references that exist between object and buckled mob, without clearing any unrelated references. Used by the destroyed event handler.
+ *
+ * Includes some redundancy to ensure all references are clear.
+ */
+/obj/proc/clear_buckle(mob/living/_buckled_mob)
+	if (buckled_mob == _buckled_mob)
+		unbuckle_mob()
+	if (_buckled_mob.buckled == src)
+		_buckled_mob.buckled = null
+	GLOB.destroyed_event.unregister(., src, /obj/proc/clear_buckle)
 
 /obj/proc/post_buckle_mob(mob/living/M)
 	if (buckle_pixel_shift)

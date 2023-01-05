@@ -137,7 +137,7 @@
 		return
 	to_chat(owner, SPAN_NOTICE(FONT_GIANT("<B>What happened...?</B>")))
 	alert(owner, "You have taken massive brain damage! This could affect speech, memory, or any other skill, but provided you've been treated, it shouldn't be permanent.", "Brain Damaged")
-	if (owner.psi)
+	if (owner?.psi)
 		owner.psi.check_latency_trigger(20, "physical trauma")
 
 /obj/item/organ/internal/brain/Process()
