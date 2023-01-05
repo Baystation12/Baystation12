@@ -125,6 +125,7 @@
 	icobase = 'icons/mob/human_races/species/monkey/farwa_body.dmi'
 	deform = 'icons/mob/human_races/species/monkey/farwa_body.dmi'
 
+	greater_form = "Tajaran"
 	flesh_color = "#afa59e"
 	base_color = "#333333"
 	tail = "farwatail"

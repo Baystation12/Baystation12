@@ -73,6 +73,9 @@
 	if(modifiers["ctrl"] && modifiers["alt"])
 		CtrlAltClickOn(A)
 		return 1
+	if(modifiers["middle"] && modifiers["alt"])
+		AltMiddleClickOn(A)
+		return 1
 	if(modifiers["middle"])
 		MiddleClickOn(A)
 		return 1
@@ -247,6 +250,9 @@
 /mob/proc/MiddleClickOn(atom/A)
 	swap_hand()
 	return
+
+/mob/proc/AltMiddleClickOn(var/atom/A)
+	pointed(A)
 
 // In case of use break glass
 /*

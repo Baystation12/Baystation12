@@ -1,3 +1,5 @@
+#define CEILING(x, y) ( -round(-(x) / (y)) * (y) )
+
 /// A random real number between low and high inclusive
 #define Frand(low, high) ( rand() * ((high) - (low)) + (low) )
 
@@ -107,6 +109,15 @@
 		sum += part * part
 	return sum
 
+// Vector algebra.
+/proc/squaredNorm(x, y)
+	return x*x + y*y
+
+/proc/norm(x, y)
+	return sqrt(squaredNorm(x, y))
+
+/proc/Ceiling(x)
+	return -round(-x)
 
 /// Returns the euclidian magnitude of a vector of either a list or variadic arguments: VecMag(list(3, 4)) = 5 , VecMag(3, 4) = 5
 /proc/VecMag(...)

@@ -17,7 +17,7 @@ var/global/floorIsLava = 0
 		if(C && C.holder && (R_INVESTIGATE & C.holder.rights))
 			to_chat(C, msg)
 /proc/msg_admin_attack(text) //Toggleable Attack Messages
-	log_attack(text)
+	log_attack()
 	var/rendered = SPAN_CLASS("log_message", "[SPAN_CLASS("prefix", "ATTACK:")] [SPAN_CLASS("message", text)]")
 	for(var/client/C as anything in GLOB.admins)
 		if(check_rights(R_INVESTIGATE, 0, C))
@@ -89,10 +89,38 @@ var/global/floorIsLava = 0
 		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A> |
 	"}
 
+	// INF START
+	body += "<br>"
+	body += "<b>Client Information:</b><br>"
+
+	body += "<br>\[<b>Client [M.client ? "On" : "Off"]line</b>\]"
+	body += "<br>\[<b>Ckey:</b> [M.client ? M.client.ckey : M.ckey]\]"
+	body += "<br>\[<b>Client Age:</b> [M.client ? "[M.client.player_age] days" : "Logged out"]\]"
+	body += "<br>\[<b>Client Gender:</b> [M.client ? M.client.gender : "Logged out"]\]"
+	body += "<br>\[<b>CID:</b> [M.client ?  M.client.computer_id : M.computer_id]\]"
+	body += "<br>\[<b>CID Related Accounts:</b> [M.client ? M.client.related_accounts_cid : "Logged out"]\]"
+	body += "<br>\[<b>IP:</b> [M.client ?  M.client.address : M.lastKnownIP]\]"
+	body += "<br>\[<b>IP Related Accounts:</b> [M.client ? M.client.related_accounts_ip : "Logged out"]\]"
+	var/full_version = "Unknown"
+	if(M.client.byond_version)
+		full_version = "[M.client.byond_version].[M.client.byond_build ? M.client.byond_build : "xxx"]"
+	body += "<br>\[<b>Byond version:</b> [full_version]\]"
+	if(M.client.discord_id)
+		if(length(M.client.discord_id) < 32)
+			body += "<br>\[<b>Discord:</b> <@[M.client.discord_id]>  <b>[M.client.discord_name]</b>\]"
+		else
+			body += "<br>\[<b>Discord: привязка не завершена!</b>\]"
+	else
+		body += "<br>\[<b>Discord: не привязан!</b>\]"
+	body += "<br><br>"
+	// INF END
+
+
 	if (!istype(M, /mob/new_player) && !istype(M, /mob/observer))
 		body += "<A HREF='?src=\ref[src];cryo=\ref[M]'>Cryo Character</A> | "
 
 	if(M.client)
+		body += "\ <A HREF='?src=\ref[src];sendbacktolobby=\ref[M]'>Send back to Lobby</A> | "
 		body += "<A HREF='?src=\ref[src];sendtoprison=\ref[M]'>Prison</A> | "
 		body += "<A HREF='?src=\ref[src];reloadsave=\ref[M]'>Reload Save</A> | "
 		body += "<A HREF='?src=\ref[src];reloadchar=\ref[M]'>Reload Character</A> | "
@@ -211,6 +239,7 @@ var/global/floorIsLava = 0
 				<A href='?src=\ref[src];simplemake=human;species=Unathi;mob=\ref[M]'>Unathi</A>
 				<A href='?src=\ref[src];simplemake=human;species=Skrell;mob=\ref[M]'>Skrell</A>
 				<A href='?src=\ref[src];simplemake=human;species=Vox;mob=\ref[M]'>Vox</A> \] | \[
+				<A href='?src=\ref[src];simplemake=human;species=Resomi;mob=\ref[M]'>Resomi</A> \] | \[
 				<A href='?src=\ref[src];simplemake=nymph;mob=\ref[M]'>Nymph</A>
 				<A href='?src=\ref[src];simplemake=human;species='Diona';mob=\ref[M]'>Diona</A> \] |
 				\[ slime: <A href='?src=\ref[src];simplemake=slime;mob=\ref[M]'>Baby</A>,

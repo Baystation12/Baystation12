@@ -48,8 +48,8 @@
 	var/obj/item/owner
 
 /obj/screen/item_action/Destroy()
-	..()
 	owner = null
+	. = ..()
 
 /obj/screen/item_action/Click()
 	if(!usr || !owner)

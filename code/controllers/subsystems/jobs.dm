@@ -146,6 +146,11 @@ SUBSYSTEM_DEF(jobs)
 	if(SSticker.mode && SSticker.mode.explosion_in_progress)
 		to_chat(joining, SPAN_WARNING("The [station_name()] is currently exploding. Joining would go poorly."))
 		return FALSE
+//[INF]
+	if(!job.is_required_roles_filled())
+		to_chat(joining, SPAN_WARNING("For joining as <b>\a [job.title]</b> there should be <b>\a [jointext(job.required_role, ", ")]</b> in crew."))
+		return FALSE
+//[/INF]
 	return TRUE
 
 /datum/controller/subsystem/jobs/proc/check_latejoin_blockers(mob/new_player/joining, datum/job/job)
@@ -198,6 +203,7 @@ SUBSYSTEM_DEF(jobs)
 			player.mind.assigned_role = rank
 			player.mind.role_alt_title = job.get_alt_title_for(player.client)
 			unassigned_roundstart -= player
+			log_game("Игрок [player.mind.key] вошел в раунд с профессией [rank] ([job.current_positions]/[position_limit])")
 			job.current_positions++
 			return 1
 	return 0
@@ -354,8 +360,9 @@ SUBSYSTEM_DEF(jobs)
 	//For ones returning to lobby
 	for(var/mob/new_player/player in unassigned_roundstart)
 		if(player.client.prefs.alternate_option == RETURN_TO_LOBBY)
-			player.ready = 0
+			player.ready = FALSE
 			player.new_player_panel()
+			player.client << output(player.ready, "lobbybrowser:setReadyStatus")
 			unassigned_roundstart -= player
 	return TRUE
 
@@ -483,9 +490,17 @@ SUBSYSTEM_DEF(jobs)
 
 	if(!joined_late || job.latejoin_at_spawnpoints)
 		var/obj/S = job.get_roundstart_spawnpoint()
-
+/*[BAY]
 		if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 			H.forceMove(S.loc)
+[/BAY]*/
+		var/turf/truf = get_turf(S)
+		if((istype(S, /obj/effect/landmark/start) && isturf(truf)) || isturf(S))
+			H.forceMove(truf)
+			var/obj/structure/bed/b = locate(/obj/structure/bed) in truf
+			if(istype(b))
+				H.Sleeping(15)
+				b.buckle_mob(H)
 		else
 			var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(H.client)
 			H.forceMove(pick(spawnpoint.turfs))

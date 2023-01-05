@@ -37,6 +37,10 @@
 		power_environ = 0
 	power_change()		// all machines set to current power level, also updates lighting icon
 
+	icon = 'icons/turf/areas.dmi'
+	icon_state = "white"
+	blend_mode = BLEND_MULTIPLY
+
 /area/Destroy()
 	..()
 	return QDEL_HINT_HARDDEL
@@ -92,15 +96,19 @@
 		if (danger_level < 1 && atmosalm >= 1)
 			//closing the doors on red and opening on green provides a bit of hysteresis that will hopefully prevent fire doors from opening and closing repeatedly due to noise
 			air_doors_open()
+			arfgs_deactivate()
 		else if (danger_level >= 2 && atmosalm < 2)
 			air_doors_close()
+			arfgs_activate()
 
 		atmosalm = danger_level
 		for (var/obj/machinery/alarm/AA in src)
 			AA.update_icon()
 
-		return 1
-	return 0
+		update_icon()
+
+		return TRUE
+	return FALSE
 
 /// Sets `air_doors_activated` and sets all firedoors in `all_doors` to the closed state. Does nothing if `air_doors_activated` is already set.
 /area/proc/air_doors_close()
@@ -203,21 +211,45 @@
 					D.open()
 	return
 
+#define DO_PARTY(COLOR) animate(color = COLOR, time = 0.5 SECONDS, easing = QUAD_EASING)
+
 /area/on_update_icon()
-	if ((fire || eject || party) && (!requires_power||power_environ))//If it doesn't require power, can still activate this proc.
-		if(fire && !eject && !party)
-			icon_state = "blue"
-		/*else if(atmosalm && !fire && !eject && !party)
-			icon_state = "bluenew"*/
-		else if(!fire && eject && !party)
-			icon_state = "red"
-		else if(party && !fire && !eject)
-			icon_state = "party"
+	if((atmosalm || fire || eject || party) && (!requires_power||power_environ) && !istype(src, /area/space))//If it doesn't require power, can still activate this proc.
+		if(fire && !atmosalm && !eject && !party) // FIRE
+			color = "#ff9292"
+			animate(src)	// stop any current animations.
+			animate(src, color = "#ffa5b2", time = 1 SECOND, loop = -1, easing = SINE_EASING)
+			animate(color = "#ff9292", time = 1 SECOND, easing = SINE_EASING)
+		else if(atmosalm && !fire && !eject && !party) // ATMOS
+			color = "#b3dfff"
+			animate(src)
+			animate(src, color = "#78dfff", time = 3 SECOND, loop = -1, easing = SINE_EASING)
+			animate(color = "#b3dfff", time = 3 SECOND, easing = SINE_EASING)
+		else if(eject && !atmosalm && !fire && !party) // EJECT
+			color = "#ff9292"
+			animate(src)
+			animate(src, color = "#bc8a81", time = 1 SECOND, loop = -1, easing = EASE_IN|CUBIC_EASING)
+			animate(color = "#ff9292", time = 0.5 SECOND, easing = EASE_OUT|CUBIC_EASING)
+		else if(party && !atmosalm && !fire && !eject) // PARTY
+			color = "#ff728e"
+			animate(src)
+			animate(src, color = "#7272ff", time = 0.5 SECONDS, loop = -1, easing = QUAD_EASING)
+			DO_PARTY("#72aaff")
+			DO_PARTY("#ffc68e")
+			DO_PARTY("#72c6ff")
+			DO_PARTY("#ff72e2")
+			DO_PARTY("#72ff8e")
+			DO_PARTY("#ffff8e")
+			DO_PARTY("#ff728e")
 		else
-			icon_state = "blue-red"
+			color = "#ffb2b2"
+			animate(src)
+			animate(src, color = "#b3dfff", time = 0.5 SECOND, loop = -1, easing = SINE_EASING)
+			animate(color = "#ffb2b2", time = 0.5 SECOND, loop = -1, easing = SINE_EASING)
 	else
-	//	new lighting behaviour with obj lights
-		icon_state = null
+		animate(src, color = "#ffffff", time = 0.5 SECONDS, easing = QUAD_EASING)	// Stop the animation.
+
+#undef DO_PARTY
 
 /// Sets the area's light switch state to on or off, in turn turning all lights in the area on or off.
 /area/proc/set_lightswitch(new_switch)
@@ -307,6 +339,25 @@
 		if(has_gravity)
 			thunk(M)
 		M.update_floating()
+
+/area/proc/throw_unbuckled_occupants(var/maxrange, var/speed, var/direction = null)
+	for(var/mob/M in src)
+		addtimer(CALLBACK(src, .proc/throw_unbuckled_occupant, M, maxrange, speed, direction), 0)
+
+/area/proc/throw_unbuckled_occupant(var/mob/M, var/maxrange, var/speed, var/direction = null)
+	if(iscarbon(M))
+		if(M.buckled)
+			to_chat(M, SPAN_WARNING("Sudden acceleration presses you into your chair!"))
+			shake_camera(M, 3, 1)
+		else
+			shake_camera(M, 10, 1)
+			M.visible_message(SPAN_WARNING("[M.name] is tossed around by the sudden acceleration!"), SPAN_WARNING("The floor lurches beneath you!"))
+			if(!direction)
+				M.throw_at_random(FALSE, maxrange, speed)
+			else
+				var/turf/T = get_ranged_target_turf(M, direction, maxrange)
+				M.throw_at(T, maxrange, speed)
+
 
 /// Causes the provided mob to 'slam' down to the floor if certain conditions are not met. Primarily used for gravity changes.
 /area/proc/thunk(mob/mob)

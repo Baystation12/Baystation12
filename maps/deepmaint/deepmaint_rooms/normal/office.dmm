@@ -53,7 +53,7 @@
 /area/map_template/deepmaint)
 "y" = (
 /obj/structure/table/woodentable_reinforced/ebony,
-/obj/structure/flora/pottedplant/deskferntrim,
+/obj/item/flora/pottedplantsmall/fern,
 /turf/simulated/floor/greengrid,
 /area/map_template/deepmaint)
 "z" = (

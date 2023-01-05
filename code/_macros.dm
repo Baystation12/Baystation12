@@ -111,7 +111,7 @@
 #define to_world_log(message)                 to_target(world.log, message)
 #define sound_to(target, sound)               to_target(target, sound)
 #define image_to(target, image)               to_target(target, image)
-#define show_browser(target, content, title)  to_target(target, browse(content, title))
+#define show_browser(target, content, title)  to_target(target, browse(parse_html(content), title))
 #define close_browser(target, title)          to_target(target, browse(null, title))
 #define send_rsc(target, content, title)      to_target(target, browse_rsc(content, title))
 #define send_link(target, url)                to_target(target, link(url))
@@ -140,6 +140,12 @@
 
 #define QDEL_NULL(x) if(x) { qdel(x) ; x = null }
 
+#define QDEL_NULL_SCREEN(item) if(client) { client.screen -= item; }; QDEL_NULL(item)
+
+#define QDEL_LIST_ASSOC(L) if(L) { for(var/I in L) { qdel(L[I]); qdel(I); } L.Cut(); }
+
+#define QDEL_LIST_ASSOC_VAL(L) if(L) { for(var/I in L) qdel(L[I]); L.Cut(); }
+
 #define QDEL_IN(item, time) addtimer(CALLBACK(item, /datum/proc/qdel_self), time, TIMER_STOPPABLE)
 
 #define DROP_NULL(x) if(x) { x.dropInto(loc); x = null; }
@@ -163,6 +169,8 @@
 #define SPAN_ITALIC(X) SPAN_CLASS("italic", "[X]")
 
 #define SPAN_BOLD(X) SPAN_CLASS("bold", "[X]")
+
+#define SPAN_BOLDANNOUNCE(X) "<span class='boldannounce'>[X]</span>"
 
 #define SPAN_NOTICE(X) SPAN_CLASS("notice", "[X]")
 
@@ -261,7 +269,19 @@
 #define FLIP_FLAGS(FIELD, MASK) ((FIELD) ^= (MASK))
 
 
+#define GLOBAL_REAL_VAR(X) var/global/##X
+
+
 #define hex2num(hex) (text2num(hex, 16) || 0)
 
 
 #define num2hex(num) num2text(num, 1, 16)
+
+
+/proc/parse_html(var/browser_content)
+	if(isfile(browser_content))
+		return browser_content
+	else if(findtext(browser_content, "<html>"))
+		return replacetext(browser_content, "<html>", "<html><meta charset='UTF-8'>")
+	else
+		return "<HTML><meta charset='UTF-8'><BODY>[browser_content]</BODY></HTML>"

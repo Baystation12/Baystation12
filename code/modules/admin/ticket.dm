@@ -8,17 +8,33 @@ var/global/list/ticket_panels = list()
 	var/list/msgs = list()
 	var/datum/client_lite/closed_by
 	var/id
+	var/sql_id
 	var/opened_time
 	var/timeout = FALSE
+	var/to_check
+	var/to_close
 
 /datum/ticket/New(datum/client_lite/owner)
 	src.owner = owner
 	tickets |= src
 	id = tickets.len
 	opened_time = world.time
-	addtimer(CALLBACK(src, .proc/timeoutcheck), 5 MINUTES, TIMER_STOPPABLE)
+	if(establish_db_connection())
+		var/sql_ckey = sanitizeSQL(owner.ckey)
+		var/DBQuery/ticket_query = dbcon.NewQuery("INSERT INTO erro_admin_tickets(ckey,round,inround_id,status,open_date) VALUES ('[sql_ckey]', '[game_id]', [src.id], 'OPEN', NOW());")
+		ticket_query.Execute()
+	to_check = addtimer(CALLBACK(src, .proc/timeoutcheck), 5 MINUTES, TIMER_STOPPABLE)
+	to_close = addtimer(CALLBACK(src, .proc/timeoutclose), 10 MINUTES, TIMER_STOPPABLE)
 
 /datum/ticket/proc/timeoutcheck()
+	if(status == TICKET_OPEN)
+		message_staff("<span class='notice'>Отреагируйте на запрос от <b>[src.owner.key_name(0)]</b>.</span>")
+		for(var/client/X in GLOB.admins)
+			if((R_ADMIN|R_MOD) & X.holder.rights)
+				if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)
+					sound_to(X, 'sound/effects/adminhelp.ogg')
+
+/datum/ticket/proc/timeoutclose()
 	if(status == TICKET_OPEN)
 		message_staff(SPAN_DANGER("[owner.key_name(0)] has not received a reply to their initial ahelp after 5 minutes!"))
 		addtimer(CALLBACK(src, .proc/timeoutchecklast), 5 MINUTES, TIMER_STOPPABLE)
@@ -37,11 +53,32 @@ var/global/list/ticket_panels = list()
 		close(assigned_admins[1])
 
 /datum/ticket/proc/close(datum/client_lite/closed_by)
+	if(timeout)
+		if(establish_db_connection())
+			var/DBQuery/ticket_timeout = dbcon.NewQuery("UPDATE erro_admin_tickets SET status = 'TIMED_OUT' WHERE round = '[game_id]' AND inround_id = '[src.id]';")
+			ticket_timeout.Execute()
+		src.status = TICKET_CLOSED
+		update_ticket_panels()
+		to_chat(client_by_ckey(src.owner.ckey), "<span class='notice'><b>Your ticket has been closed by timeout.</b></span>")
+		message_staff("<span class='notice'><b>[src.owner.key_name(0)]</b>'s ticket has been closed by timeout.</span>")
+		send2adminirc("[src.owner.key_name(0)]'s ticket has been closed by timeout.")
+		return 1
+
+	var/closed_by_not_assigned = FALSE
+	if(!closed_by)
+		closed_by_not_assigned = TRUE
+
 	if(status == TICKET_CLOSED)
 		return
 
 	if(status == TICKET_ASSIGNED && !((closed_by.ckey in assigned_admin_ckeys()) || owner.ckey == closed_by.ckey) && alert(client_by_ckey(closed_by.ckey), "You are not assigned to this ticket. Are you sure you want to close it?",  "Close ticket?" , "Yes" , "No") != "Yes")
 		return
+
+	else
+		closed_by_not_assigned = TRUE
+
+	if((closed_by.ckey in assigned_admin_ckeys()) || owner.ckey == closed_by.ckey)
+		closed_by_not_assigned = FALSE
 
 	if(timeout == FALSE)
 		var/client/real_client = client_by_ckey(closed_by.ckey)
@@ -58,7 +95,17 @@ var/global/list/ticket_panels = list()
 		message_staff(SPAN_NOTICE("<b>[src.owner.key_name(0)]</b>'s ticket has been closed by <b>[closed_by.key]</b>."))
 		send2adminirc("[src.owner.key_name(0)]'s ticket has been closed by [closed_by.key].")
 
+	if(establish_db_connection())
+		var/sql_text = "[closed_by_not_assigned ? "CLOSED" : "SOLVED"]: [closed_by.ckey]\n"
+		var/DBQuery/ticket_text = dbcon.NewQuery("UPDATE erro_admin_tickets SET text = CONCAT(text, '[sql_text]') WHERE round = '[game_id]' AND inround_id = '[src.id]';")
+		var/DBQuery/ticket_close = dbcon.NewQuery("UPDATE erro_admin_tickets SET status = '[closed_by_not_assigned ? "CLOSED" : "SOLVED"]' WHERE round = '[game_id]' AND inround_id = '[src.id]';")
+		ticket_text.Execute()
+		ticket_close.Execute()
+
 	update_ticket_panels()
+
+	deltimer(to_check)
+	deltimer(to_close)
 
 	for (var/datum/timedevent/T as anything in active_timers)
 		deltimer(T.id)
@@ -77,6 +124,16 @@ var/global/list/ticket_panels = list()
 
 	assigned_admins |= assigned_admin
 	src.status = TICKET_ASSIGNED
+
+	if(establish_db_connection())
+		var/sql_assignee
+		for(var/datum/client_lite/_admin in assigned_admins)
+			if(!sql_assignee)
+				sql_assignee += "[_admin.ckey]"
+			else
+				sql_assignee += ", [_admin.ckey]"
+		var/DBQuery/ticket_take = dbcon.NewQuery("UPDATE erro_admin_tickets SET assignee = '[sql_assignee]' WHERE round = '[game_id]' AND inround_id = '[src.id]';")
+		ticket_take.Execute()
 
 	message_staff(SPAN_NOTICE("<b>[assigned_admin.key]</b> has assigned themself to <b>[src.owner.key_name(0)]'s</b> ticket."))
 	send2adminirc("[assigned_admin.key] has assigned themself to [src.owner.key_name(0)]'s ticket.")

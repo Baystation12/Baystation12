@@ -36,11 +36,11 @@
 	#endif
 
 	// asset_cache
+	var/asset_cache_job
 	if(href_list["asset_cache_confirm_arrival"])
-//		to_chat(src, "ASSET JOB [href_list["asset_cache_confirm_arrival"]] ARRIVED.")
-		var/job = text2num(href_list["asset_cache_confirm_arrival"])
-		completed_asset_jobs += job
-		return
+		asset_cache_job = asset_cache_confirm_arrival(href_list["asset_cache_confirm_arrival"])
+		if (!asset_cache_job)
+			return
 
 	//search the href for script injection
 	if( findtext(href,"<script",1,0) )
@@ -81,6 +81,15 @@
 	if (GLOB.href_logfile)
 		to_chat(GLOB.href_logfile, "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>")
 
+	//byond bug ID:2256651
+	if (asset_cache_job && (asset_cache_job in completed_asset_jobs))
+		to_chat(src, "<span class='danger'>An error has been detected in how your client is receiving resources. Attempting to correct.... (If you keep seeing these messages you might want to close byond and reconnect)</span>")
+		src << browse("...", "window=asset_cache_browser")
+		return
+	if (href_list["asset_cache_preload_data"])
+		asset_cache_preload_data(href_list["asset_cache_preload_data"])
+		return
+
 	switch(href_list["_src_"])
 		if("holder")	hsrc = holder
 		if("usr")		hsrc = mob
@@ -97,6 +106,11 @@
 
 	if(href_list["SDQL_select"])
 		debug_variables(locate(href_list["SDQL_select"]))
+		return
+
+	//byond bug ID:2694120
+	if(href_list["reset_macros"])
+		reset_macros(skip_alert = TRUE)
 		return
 
 	..()	//redirect to hsrc.Topic()
@@ -175,8 +189,13 @@
 	prefs.last_ip = address				//these are gonna be used for banning
 	prefs.last_id = computer_id			//these are gonna be used for banning
 	apply_fps(prefs.clientfps)
+	load_player_discord(src)
 
 	. = ..()	//calls mob.Login()
+
+	connection_time = world.time
+	connection_realtime = world.realtime
+	connection_timeofday = world.timeofday
 
 	GLOB.using_map.map_info(src)
 
@@ -213,6 +232,8 @@
 
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
+	if(SSinput.initialized)
+		set_macros()
 
 	//////////////
 	//DISCONNECT//
@@ -379,12 +400,12 @@
 		'html/images/fleetlogo.png',
 		'html/images/sfplogo.png'
 		)
-	addtimer(CALLBACK(src, .proc/after_send_resources), 1 SECOND)
 
-
-/client/proc/after_send_resources()
-	var/singleton/asset_cache/asset_cache = GET_SINGLETON(/singleton/asset_cache)
-	getFilesSlow(src, asset_cache.cache, register_asset = FALSE)
+	spawn(10) // Removing this spawn causes all clients to not get verbs.
+		// Load info on what assets the client has
+		show_browser(src, 'code/modules/asset_cache/validate_assets.html', "window=asset_cache_browser")
+		// Precache the client with all other assets slowly, so as to not block other browse() calls
+		addtimer(CALLBACK(GLOBAL_PROC, /proc/getFilesSlow, src, SSassets.preload, FALSE), 5 SECONDS)
 
 
 /mob/proc/MayRespawn()
@@ -405,7 +426,7 @@
 
 /client/proc/apply_fps(client_fps)
 	if(world.byond_version >= 511 && byond_version >= 511 && client_fps >= CLIENT_MIN_FPS && client_fps <= CLIENT_MAX_FPS)
-		vars["fps"] = prefs.clientfps
+		vars["fps"] = client_fps
 
 /client/MouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
 	. = ..()
@@ -438,6 +459,11 @@
 		winset(usr, "mainwindow", "can-resize=true")
 		winset(usr, "mainwindow", "statusbar=true")
 		winset(usr, "mainwindow", "menu=menu")
+
+	fit_viewport()
+
+/client/verb/onresize()
+	set hidden = TRUE
 
 	fit_viewport()
 
@@ -486,3 +512,113 @@
 
 		pct += delta
 		winset(src, "mainwindow.mainvsplit", "splitter=[pct]")
+
+/client/Click(atom/A)
+	if(!user_acted(src))
+		return
+
+	if(holder && holder.callproc && holder.callproc.waiting_for_click)
+		if(alert("Do you want to select \the [A] as the [holder.callproc.arguments.len+1]\th argument?",, "Yes", "No") == "Yes")
+			holder.callproc.arguments += A
+
+		holder.callproc.waiting_for_click = 0
+		verbs -= /client/proc/cancel_callproc_select
+		holder.callproc.do_args()
+		return
+
+	if (prefs.hotkeys)
+		// If hotkey mode is enabled, then clicking the map will automatically
+		// unfocus the text bar. This removes the red color from the text bar
+		// so that the visual focus indicator matches reality.
+		winset(src, null, "outputwindow.input.background-color=[COLOR_INPUT_DISABLED]")
+	else
+		winset(src, null, "outputwindow.input.focus=true input.background-color=[COLOR_INPUT_ENABLED]")
+
+	return ..()
+
+/**
+ * Updates the keybinds for special keys
+ *
+ * Handles adding macros for the keys that need it
+ * And adding movement keys to the clients movement_keys list
+ * At the time of writing this, communication(OOC, Say, IC) require macros
+ * Arguments:
+ * * direct_prefs - the preference we're going to get keybinds from
+ */
+/client/proc/update_special_keybinds(datum/preferences/direct_prefs)
+	var/datum/preferences/D = prefs || direct_prefs
+	if(!D?.key_bindings)
+		return
+	movement_keys = list()
+	var/list/communication_hotkeys = list()
+	for(var/key in D.key_bindings)
+		for(var/kb_name in D.key_bindings[key])
+			switch(kb_name)
+				if("North")
+					movement_keys[key] = NORTH
+				if("East")
+					movement_keys[key] = EAST
+				if("West")
+					movement_keys[key] = WEST
+				if("South")
+					movement_keys[key] = SOUTH
+				if("Say")
+					winset(src, "default-\ref[key]", "parent=default;name=[key];command=say")
+					communication_hotkeys += key
+				if("OOC")
+					winset(src, "default-\ref[key]", "parent=default;name=[key];command=ooc")
+					communication_hotkeys += key
+				if("Me")
+					winset(src, "default-\ref[key]", "parent=default;name=[key];command=me")
+					communication_hotkeys += key
+
+	// winget() does not work for F1 and F2
+	for(var/key in communication_hotkeys)
+		if(!(key in list("F1","F2")) && !winget(src, "default-\ref[key]", "command"))
+			to_chat(src, "You probably entered the game with a different keyboard layout.\n<a href='?src=\ref[src];reset_macros=1'>Please switch to the English layout and click here to fix the communication hotkeys.</a>")
+			break
+
+/client/proc/load_player_discord(client/C)
+	establish_db_connection()
+	if(!dbcon.IsConnected())
+		return
+
+	var/sql_ckey = sql_sanitize_text(C.ckey)
+
+	var/DBQuery/query = dbcon.NewQuery("SELECT discord_id, discord_name FROM [sqlfdbkdbutil].player WHERE ckey = '[sql_ckey]'")
+	query.Execute()
+
+	if(query.NextRow())
+		discord_id = sanitize_text(query.item[1])
+		discord_name = sanitize_text(query.item[2])
+
+/client/verb/link_discord_account()
+	set name = "Привязка Discord"
+	set category = "Special Verbs"
+	set desc = "Привязать аккаунт Discord для удобного просмотра игровой статистики на нашем Discord-сервере."
+
+	if(!config.discord_url)
+		return
+
+	if(IsGuestKey(key))
+		to_chat(usr, "Гостевой аккаунт не может быть связан.")
+		return
+
+	load_player_discord(usr)
+
+	if(discord_id && length(discord_id) < 32)
+		to_chat(usr, "<span class='darkmblue'>Аккаунт Discord уже привязан! Чтобы отвязать используйте команду <span class='boldannounce'>!отвязать_аккаунт</span> в канале <b>#дом-бота<b> в Discord-сообществе!</span>")
+		return
+
+	var/token = md5("[world.time+rand(1000,1000000)]")
+	if(dbcon.IsConnected())
+		var/sql_ckey = sql_sanitize_text(ckey(key))
+		var/DBQuery/query_update_token = dbcon.NewQuery("UPDATE [sqlfdbkdbutil].player SET discord_id='[token]' WHERE ckey='[sql_ckey]'")
+
+		if(!query_update_token.Execute())
+			to_chat(usr, "<span class='warning'>Ошибка записи токена в БД! Обратитесь к администрации.</span>")
+			log_debug("link_discord_account: failed db update discord_id for ckey [ckey]")
+			return
+
+		to_chat(usr, "<span class='darkmblue'>Для завершения используйте команду <span class='boldannounce'>!привязать_аккаунт [token]</span> в канале <b>#дом-бота<b> в Discord-сообществе!</span>")
+		load_player_discord(usr)

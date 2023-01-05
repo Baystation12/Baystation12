@@ -12,7 +12,14 @@ var/global/datum/global_init/init = new
 /*
 	Pre-map initialization stuff should go here.
 */
+
 /datum/global_init/New()
 	config = new
 	callHook("global_init")
 	qdel(src) //we're done
+
+
+/datum/global_init/Destroy()
+	init = null
+	..()
+	return QDEL_HINT_HARDDEL

@@ -225,6 +225,7 @@
 	desc = "A heavy, radiation-shielded voidsuit helmet with a surprisingly comfortable interior."
 	icon_state = "rig0-engineeringalt"
 	item_state = "engalt_helm"
+	sprite_sheets = list()
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_MINOR,
@@ -239,6 +240,7 @@
 	name = "reinforced engineering voidsuit"
 	desc = "A bulky industrial voidsuit. It's a few generations old, but a reliable design and radiation shielding make up for the lack of climate control."
 	icon_state = "rig-engineeringalt"
+	sprite_sheets = list()
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_MINOR,
@@ -314,6 +316,7 @@
 	icon_state = "rig0-secalt"
 	item_state = "secalt_helm"
 	light_overlay = "helmet_light_alt"
+	sprite_sheets = list()
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_SMALL,
@@ -326,6 +329,7 @@
 	name = "riot security voidsuit"
 	icon_state = "rig-secalt"
 	desc = "A heavily armored voidsuit, designed to intimidate people who find black intimidating. Surprisingly slimming."
+	sprite_sheets = list()
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_SMALL,
@@ -346,11 +350,15 @@
 	icon_state = "rig0-atmosalt"
 	item_state = "atmosalt_helm"
 	light_overlay = "hardhat_light"
+	sprite_sheets = list()
+
 
 /obj/item/clothing/suit/space/void/atmos/alt
 	name = "heavy duty atmos voidsuit"
 	desc = "An expensive voidsuit, rated to withstand extreme heat and even minor radiation without exceeding room temperature within."
 	icon_state = "rig-atmosalt"
+	sprite_sheets = list()
+
 
 /obj/item/clothing/suit/space/void/atmos/alt/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/atmos/alt

@@ -174,6 +174,15 @@
 		fluid_update()
 	. = ..()
 
+/turf/simulated/Destroy()
+	if (zone)
+		if (can_safely_remove_from_zone())
+			c_copy_air()
+			zone.remove(src)
+		else
+			zone.rebuild()
+	. = ..()
+
 /turf/simulated/damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check = FALSE)
 	if (HAS_FLAGS(damage_flags, DAMAGE_FLAG_TURF_BREAKER))
 		damage *= 4

@@ -3,7 +3,7 @@
 		return
 
 	if(user.incapacitated()  || !user.Adjacent(src))
-		show_browser(user, null, "window=mob[src.name]")
+		close_browser(user, "window=mob[src.name]")
 		return TRUE
 
 	var/strip_delay = HUMAN_STRIP_DELAY

@@ -24,9 +24,8 @@
 
 /// Called whenever the area's power or power usage state should change.
 /area/proc/power_change()
-	for(var/obj/machinery/M in src)	// for each machine in the area
-		M.power_change()			// reverify power status (to update icons etc.)
-	if (fire || eject || party)
+	GLOB.area_power_change.raise_event(src)
+	if (atmosalm || fire || eject || party)
 		update_icon()
 
 /// Returns Integer. The total amount of power usage queued for the area from both `used_*` and `oneoff_*` for the given power channel, or all channels if `TOTAL` is passed instead.

@@ -25,7 +25,7 @@
 */
 /singleton/communication_channel/proc/communicate(datum/communicator, message)
 	if(can_communicate(arglist(args)))
-		call(log_proc)("[(flags&COMMUNICATION_LOG_CHANNEL_NAME) ? "([name]) " : ""][communicator.communication_identifier()] : [message]")
+		call(log_proc)(message, communicator)
 		return do_communicate(arglist(args))
 	return FALSE
 

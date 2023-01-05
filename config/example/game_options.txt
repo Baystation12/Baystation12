@@ -53,3 +53,6 @@ MAXIMUM_STAMINA_RECOVERY 5
 
 ## Remove the # in front of this config option to have loyalty implants spawn by default on your server.
 #USE_LOYALTY_IMPLANTS
+
+## Allow multiple input keys to be pressed for diagonal movement.
+ALLOW_DIAGONAL_MOVEMENT

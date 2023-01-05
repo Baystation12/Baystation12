@@ -138,6 +138,7 @@
 
 /obj/item/rig_module/Destroy()
 	deactivate()
+	QDEL_NULL_LIST(stat_modules)
 	. = ..()
 
 // Called when the module is installed into a suit.
@@ -324,6 +325,13 @@
 /stat_rig_module/New(obj/item/rig_module/module)
 	..()
 	src.module = module
+
+/stat_rig_module/Destroy()
+	if(module)
+		if(module.stat_modules)
+			module.stat_modules -= src
+		module = null
+	. = ..()
 
 /stat_rig_module/proc/AddHref(list/href_list)
 	return

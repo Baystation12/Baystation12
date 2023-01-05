@@ -261,7 +261,7 @@ var/global/list/channel_to_radio_key = new
 				src.custom_emote(1, "[pick(speaking.signlang_verb)].")
 
 		if (speaking.flags & SIGNLANG)
-			log_say("[name]/[key] : SIGN: [message]")
+			log_say(message + "nonverbal", src)
 			return say_signlang(message, pick(speaking.signlang_verb), speaking)
 
 	if(T)
@@ -308,10 +308,12 @@ var/global/list/channel_to_radio_key = new
 				if(O) //It's possible that it could be deleted in the meantime.
 					O.hear_talk(src, stars(message), verb, speaking)
 
+	INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, message, speaking, italics, speech_bubble_recipients)
+
 	if(whispering)
-		log_whisper("[name]/[key] : [message]")
+		log_whisper(message, src)
 	else
-		log_say("[name]/[key] : [message]")
+		log_say(message, src)
 
 	if (length(speech_bubble_recipients))
 		var/speech_intent = say_test(message)

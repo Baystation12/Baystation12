@@ -280,7 +280,10 @@
 	if(.)
 		SSnano.update_uis(src)
 
-/obj/item/device/radio/proc/autosay(message, from, channel) //BS12 EDIT
+/mob/announcer // used only for autosay
+	simulated = FALSE
+
+/obj/item/device/radio/proc/autosay(message, from, channel, zlevel) //BS12 EDIT
 	var/datum/radio_frequency/connection = null
 	if(channel && channels && channels.len > 0)
 		if (channel == "department")
@@ -291,7 +294,9 @@
 		channel = null
 	if (!istype(connection))
 		return
-	var/mob/living/silicon/ai/A = new /mob/living/silicon/ai(src, null, null, 1)
+	if(zlevel)
+		z = zlevel
+	var/mob/announcer/A = new()
 	A.fully_replace_character_name(from)
 	talk_into(A, message, channel,"states")
 	qdel(A)
@@ -386,7 +391,7 @@
 		jobname = "No id"
 
 	// --- AI ---
-	else if (isAI(M))
+	else if (isAI(M) || istype(M, /mob/announcer))
 		jobname = "AI"
 
 	// --- Cyborg ---

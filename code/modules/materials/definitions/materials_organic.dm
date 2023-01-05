@@ -49,11 +49,12 @@
 
 /material/cloth //todo
 	name = MATERIAL_CLOTH
-	display_name ="cotton"
-	use_name = "cotton"
+	display_name ="white"
+	use_name = "cloth roll"
 	icon_colour = "#ffffff"
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	door_icon_base = "wood"
+	stack_type = /obj/item/stack/material/cloth
 	ignition_point = T0C+232
 	melting_point = T0C+300
 	flags = MATERIAL_PADDING
@@ -63,61 +64,68 @@
 	hidden_from_codex = TRUE
 	construction_difficulty = MATERIAL_NORMAL_DIY
 
-/material/cloth/carpet
-	name = "carpet"
+/material/cloth/red
+	name = MATERIAL_RED_CLOTH
 	display_name = "red"
-	use_name = "red upholstery"
-	icon_colour = "#9d2300"
-	sheet_singular_name = "tile"
-	sheet_plural_name = "tiles"
+	use_name = "red cloth roll"
+	icon_colour = COLOR_NT_RED
+	stack_type = /obj/item/stack/material/cloth/red
 
 /material/cloth/yellow
-	name = "yellow"
+	name = MATERIAL_YELLOW_CLOTH
 	display_name ="yellow"
-	use_name = "yellow cloth"
-	icon_colour = "#ffbf00"
+	use_name = "yellow cloth roll"
+	icon_colour = COLOR_AMBER
+	stack_type = /obj/item/stack/material/cloth/yellow
 
 /material/cloth/teal
-	name = "teal"
+	name = MATERIAL_TEAL_CLOTH
 	display_name = "teal"
-	use_name = "teal cloth"
-	icon_colour = "#00e1ff"
+	use_name = "teal cloth roll"
+	icon_colour = COLOR_TEAL
+	stack_type = /obj/item/stack/material/cloth/teal
 
 /material/cloth/black
-	name = "black"
+	name = MATERIAL_BLACK_CLOTH
 	display_name = "black"
-	use_name = "black cloth"
+	use_name = "black cloth roll"
 	icon_colour = "#505050"
+	stack_type = /obj/item/stack/material/cloth/black
 
 /material/cloth/green
-	name = "green"
+	name = MATERIAL_GREEN_CLOTH
 	display_name = "green"
-	use_name = "green cloth"
-	icon_colour = "#b7f27d"
+	use_name = "green cloth roll"
+	icon_colour = COLOR_CIVIE_GREEN
+	stack_type = /obj/item/stack/material/cloth/green
 
-/material/cloth/puple
-	name = "purple"
+/material/cloth/purple
+	name = MATERIAL_PURPLE_CLOTH
 	display_name = "purple"
-	use_name = "purple cloth"
-	icon_colour = "#9933ff"
+	use_name = "purple cloth roll"
+	icon_colour = COLOR_VIOLET
+	stack_type = /obj/item/stack/material/cloth/purple
 
 /material/cloth/blue
-	name = "blue"
+	name = MATERIAL_BLUE_CLOTH
 	display_name = "blue"
-	use_name = "blue cloth"
-	icon_colour = "#46698c"
+	use_name = "blue cloth roll"
+	icon_colour = COLOR_COMMAND_BLUE
+	stack_type = /obj/item/stack/material/cloth/blue
 
 /material/cloth/beige
-	name = "beige"
+	name = MATERIAL_BEIGE_CLOTH
 	display_name = "beige"
-	use_name = "beige cloth"
-	icon_colour = "#ceb689"
+	use_name = "beige cloth roll"
+	icon_colour = COLOR_BEIGE
+	stack_type = /obj/item/stack/material/cloth/beige
 
 /material/cloth/lime
-	name = "lime"
+	name = MATERIAL_LIME_CLOTH
 	display_name = "lime"
-	use_name = "lime cloth"
+	use_name = "lime cloth roll"
 	icon_colour = "#62e36c"
+	stack_type = /obj/item/stack/material/cloth/lime
 
 /material/carpet
 	name = MATERIAL_CARPET
@@ -272,7 +280,7 @@
 	ignition_point = T0C+300
 	melting_point = T0C+300
 	conductive = 0
-	stack_type = /obj/item/stack/material/generic/skin
+	stack_type = /obj/item/stack/material/leather
 	hidden_from_codex = TRUE
 	construction_difficulty = MATERIAL_NORMAL_DIY
 	value = 3

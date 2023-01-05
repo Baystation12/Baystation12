@@ -123,43 +123,43 @@
 	display_name = "modified gloves, colored"
 	path = /obj/item/clothing/gloves/color/modified
 	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI, SPECIES_YEOSA)
 
 /datum/gear/gloves/latex/modified
 	display_name = "modified gloves, latex"
 	path = /obj/item/clothing/gloves/latex/modified
 	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI, SPECIES_YEOSA)
 
 /datum/gear/gloves/nitrile/modified
 	display_name = "modified gloves, nitrile"
 	path = /obj/item/clothing/gloves/latex/nitrile/modified
 	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI, SPECIES_YEOSA)
 
 /datum/gear/gloves/rainbow/modified
 	display_name = "modified gloves, rainbow"
 	path = /obj/item/clothing/gloves/rainbow/modified
 	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI, SPECIES_YEOSA)
 
 /datum/gear/gloves/evening/modified
 	display_name = "modified gloves, evening"
 	path = /obj/item/clothing/gloves/color/evening/modified
 	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI, SPECIES_YEOSA)
 
 /datum/gear/gloves/botany/modified
 	display_name = "modified gloves, botany"
 	path = /obj/item/clothing/gloves/thick/botany/modified
 	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI, SPECIES_YEOSA)
 
 /datum/gear/gloves/work/modified
 	display_name = "modified gloves, work"
 	path = /obj/item/clothing/gloves/thick/modified
 	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI, SPECIES_YEOSA)
 
 // Vox clothing
 /datum/gear/vox_mask

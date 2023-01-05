@@ -191,8 +191,8 @@ SUBSYSTEM_DEF(ticker)
 		Master.SetRunLevel(RUNLEVEL_POSTGAME)
 		end_game_state = END_GAME_READY_TO_END
 		INVOKE_ASYNC(src, .proc/declare_completion)
-		if(config.allow_map_switching && config.auto_map_vote && GLOB.all_maps.len > 1)
-			SSvote.initiate_vote(/datum/vote/map/end_game, automatic = 1)
+		//if(config.allow_map_switching && config.auto_map_vote && GLOB.all_maps.len > 1)
+		//	SSvote.initiate_vote(/datum/vote/map/end_game, automatic = 1)
 
 	else if(mode_finished && (end_game_state <= END_GAME_NOT_OVER))
 		end_game_state = END_GAME_MODE_FINISH_DONE
@@ -442,16 +442,16 @@ Helpers
 			return 1
 		else
 			if(antag.initial_spawn_req > 1)
-				to_world("Failed to find enough [antag.role_text_plural].")
+				log_and_message_admins("Failed to find enough [antag.role_text_plural].")
 
 			else
-				to_world("Failed to find a [antag.role_text].")
+				log_and_message_admins("Failed to find a [antag.role_text].")
 
 			antag_choices -= antag
 			if(length(antag_choices))
 				antag = antag_choices[1]
 				if(antag)
-					to_world("Attempting to spawn [antag.role_text_plural].")
+					log_and_message_admins("Attempting to spawn [antag.role_text_plural].")
 	return 0
 
 /datum/controller/subsystem/ticker/proc/game_finished()
@@ -565,6 +565,11 @@ Helpers
 	log_game("Antagonists at round end were...")
 	for(var/i in total_antagonists)
 		log_game("[i]s[total_antagonists[i]].")
+
+	//make big obvious note in game logs that round ended (привет с ss220)
+	log_game("///////////////////////////////////////////////////////")
+	log_game("///////////////////// ROUND ENDED /////////////////////")
+	log_game("///////////////////////////////////////////////////////")
 
 /datum/controller/subsystem/ticker/proc/start_now(mob/user)
 	if(!(GAME_STATE == RUNLEVEL_LOBBY))

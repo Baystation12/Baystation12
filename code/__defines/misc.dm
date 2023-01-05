@@ -29,6 +29,10 @@
 #define SEE_INVISIBLE_MINIMUM 5
 #define INVISIBILITY_MAXIMUM 100
 
+// The SQL version required by this version of the code
+#define DB_VERSION 8
+
+
 // Some arbitrary defines to be used by self-pruning global lists. (see master_controller)
 #define PROCESS_KILL 26 // Used to trigger removal from a processing list.
 
@@ -315,3 +319,15 @@
 #define ATOM_FLOURESCENCE_NONE 0 // Not flourescent
 #define ATOM_FLOURESCENCE_INACTIVE 1 // Flourescent but not actively lit
 #define ATOM_FLOURESCENCE_ACTVE 2 // Flourescent and actively lit. Helps prevent repeated processing on a flourescent atom by multiple UV lights
+
+//NOTE: INTENT_HOTKEY_* defines are not actual intents!
+//they are here to support hotkeys
+#define INTENT_HOTKEY_LEFT  "left"
+#define INTENT_HOTKEY_RIGHT "right"
+
+
+/proc/get_dist_bounds(var/target, var/source) // Alternative to get_dist for multi-turf objects
+	return Ceiling(bounds_dist(target, source)/world.icon_size) + 1
+
+
+#define any2bool(expression) (!(!(expression)))

@@ -118,6 +118,8 @@
 
 	var/static/list/resource_urls
 
+	var/static/minimum_byondacc_age = 0
+
 	/// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
 	var/static/antag_hud_allowed = FALSE
 
@@ -182,6 +184,8 @@
 	/// Set to 1 to prevent newly-spawned mice from understanding human speech
 	var/static/uneducated_mice = FALSE
 
+	var/static/usewhitelist_database = FALSE
+
 	var/static/usealienwhitelist = FALSE
 
 	var/static/usealienwhitelistSQL = FALSE
@@ -211,6 +215,8 @@
 	var/static/discord_url
 
 	var/static/issue_url
+
+	var/static/overflow_server_url
 
 	var/static/list/chat_markup
 
@@ -433,6 +439,13 @@
 
 	var/static/run_empty_levels = FALSE
 
+	var/static/allow_diagonal_movement = FALSE
+
+	/// Timeout (seconds) for async SQL queries
+	var/static/async_sql_query_timeout = 10 SECONDS
+
+	/// Limit of how many SQL threads can run at once
+	var/static/rust_sql_thread_limit = 50
 
 /datum/configuration/New()
 	load_config()
@@ -603,6 +616,10 @@
 				source_url = value
 			if ("issue_url")
 				issue_url = value
+			if ("overflow_server_url")
+				overflow_server_url = value
+			if("minimum_byondacc_age")
+				minimum_byondacc_age = text2num(value)
 			if ("discord_url")
 				discord_url = value
 			if ("ghosts_can_possess_animals")
@@ -681,6 +698,8 @@
 				secret_disabled = TRUE
 			if ("usealienwhitelist")
 				usealienwhitelist = TRUE
+			if("usewhitelist_database")
+				usewhitelist_database = TRUE
 			if ("usealienwhitelist_sql")
 				usealienwhitelistSQL = TRUE
 			if ("continuous_rounds")
@@ -894,6 +913,8 @@
 				maximum_stamina_recovery = value
 			if ("maximum_mushrooms")
 				maximum_mushrooms = value
+			if("allow_diagonal_movement")
+				config.allow_diagonal_movement = TRUE
 			if ("use_loyalty_implants")
 				use_loyalty_implants = TRUE
 			else
@@ -932,6 +953,14 @@
 				sqlfdbklogin = value
 			if ("feedback_password")
 				sqlfdbkpass = value
+			if("feedback_tableprefix")
+				sqlfdbktableprefix = value
+			if("db_version")
+				db_version = text2num(value)
+			if ("async_sql_query_timeout")
+				async_sql_query_timeout = text2num(value) SECONDS
+			if ("rust_sql_thread_limit")
+				rust_sql_thread_limit = text2num(value)
 			else
 				log_misc("Unknown setting in config/dbconfig.txt: '[name]'")
 

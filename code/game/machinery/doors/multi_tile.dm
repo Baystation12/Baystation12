@@ -23,6 +23,15 @@
 /obj/machinery/door/airlock/multi_tile/New()
 	..()
 	SetBounds()
+	update_filler_turfs()
+
+/obj/machinery/door/airlock/multi_tile/Initialize()
+	. = ..()
+	SetBounds()
+	update_connections()
+	update_filler_turfs()
+
+
 
 /obj/machinery/door/airlock/multi_tile/Move()
 	. = ..()
@@ -134,6 +143,8 @@
 	name = "Glass Airlock"
 	hitsound = 'sound/effects/Glasshit.ogg'
 	glass = TRUE
+	opacity = 0
+	glass = 1
 
 /obj/machinery/door/airlock/multi_tile/glass/command
 	door_color = COLOR_COMMAND_BLUE

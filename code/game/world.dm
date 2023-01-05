@@ -76,6 +76,13 @@ GLOBAL_VAR(href_logfile)
 /proc/stack_trace(msg)
 	CRASH(msg)
 
+GLOBAL_REAL_VAR(list/stack_trace_storage)
+/proc/gib_stack_trace()
+	stack_trace_storage = list()
+	stack_trace()
+	stack_trace_storage.Cut(1, min(3,stack_trace_storage.len))
+	. = stack_trace_storage
+	stack_trace_storage = null
 
 /proc/enable_debugging(mode, port)
 	CRASH("auxtools not loaded")
@@ -101,7 +108,10 @@ GLOBAL_VAR(href_logfile)
 	//logs
 	SetupLogs()
 	var/date_string = time2text(world.realtime, "YYYY/MM/DD")
-	to_file(global.diary, "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]")
+	//to_file(global.diary, "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]")
+
+	GLOB.world_game_log = "[GLOB.log_directory]/game.log"
+	start_log(GLOB.world_game_log)
 
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		config.server_name += " #[(world.port % 1000) / 100]"
@@ -525,6 +535,11 @@ var/global/failed_db_connections = 0
 var/global/failed_old_db_connections = 0
 
 /hook/startup/proc/connectDB()
+
+	// This check includes connection to DB. Works with brand new rust_g SQL.
+	SSdbcore.CheckSchemaVersion()
+
+	// TODO: Remove legacy DB interaction
 	if(!setup_database_connection())
 		to_world_log("Your server failed to establish a connection with the feedback database.")
 	else

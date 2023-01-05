@@ -8,9 +8,8 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	var/log = 0
 	var/sound
 	var/newscast = 0
-	var/channel_name = "Announcements"
 	var/announcement_type = "Announcement"
-
+/*
 /datum/announcement/priority
 	title = "Priority Announcement"
 	announcement_type = "Priority Announcement"
@@ -18,12 +17,13 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 /datum/announcement/priority/security
 	title = "Security Announcement"
 	announcement_type = "Security Announcement"
+*/
 
 /datum/announcement/New(do_log = 0, new_sound = null, do_newscast = 0)
 	sound = new_sound
 	log = do_log
 	newscast = do_newscast
-
+/*
 /datum/announcement/priority/command/New(do_log = 1, new_sound = 'sound/misc/notice2.ogg', do_newscast = 0)
 	..(do_log, new_sound, do_newscast)
 	title = "[GLOB.using_map.boss_name] Update"
@@ -81,6 +81,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	. = FONT_HUGE(SPAN_COLOR("red", message_title))
 	. += "<br>[SPAN_COLOR("red", message)]"
 
+*/
 
 /datum/announcement/proc/NewsCast(message, list/zlevels)
 	if (!message || !islist(zlevels))
@@ -116,11 +117,12 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	return "[I.registered_name]"
 
 /proc/level_seven_announcement()
-	GLOB.using_map.level_x_biohazard_announcement(7)
+	command_announcement.Announce("Confirmed outbreak of level 7 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", new_sound = 'sound/AI/outbreak7.ogg')
 
 /proc/ion_storm_announcement(list/affecting_z)
 	command_announcement.Announce("It has come to our attention that the [station_name()] passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert", zlevels = affecting_z)
 
+/*
 /proc/AnnounceArrival(mob/living/carbon/human/character, datum/job/job, join_message)
 	if(!istype(job) || !job.announced)
 		return
@@ -131,6 +133,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 		rank = character.mind.role_alt_title
 
 	AnnounceArrivalSimple(character.real_name, rank, join_message, get_announcement_frequency(job))
+*/
 
 /proc/AnnounceArrivalSimple(name, rank = "visitor", join_message = "has arrived on the [station_name()]", frequency)
 	GLOB.global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer", frequency)

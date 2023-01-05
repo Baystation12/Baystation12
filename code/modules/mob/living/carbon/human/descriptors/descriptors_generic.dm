@@ -21,7 +21,8 @@
 		"towering over you"
 		)
 	var/list/scale_effect = list(
-		SPECIES_HUMAN = list(-7, -4, 0, 4, 7)
+		SPECIES_HUMAN = list(-7, -4, 0, 4, 7),
+		SPECIES_TAJARA= list(-7, -4, 0, 4, 7)
 	)
 
 /datum/mob_descriptor/build

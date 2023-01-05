@@ -86,6 +86,7 @@
 		var/DBQuery/log_query = dbcon.NewQuery("INSERT INTO `test`.`erro_admin_log` (`id` ,`datetime` ,`adminckey` ,`adminip` ,`log` ) VALUES (NULL , NOW( ) , '[usr.ckey]', '[usr.client.address]', 'Added new admin [adm_ckey] to rank [new_rank]');")
 		log_query.Execute()
 		to_chat(usr, SPAN_NOTICE("New admin added."))
+		log_permissions("<span class='notice'>New admin added by [usr.ckey].</span>")
 	else
 		if(!isnull(admin_id) && isnum(admin_id))
 			var/DBQuery/insert_query = dbcon.NewQuery("UPDATE `erro_admin` SET rank = '[new_rank]' WHERE id = [admin_id]")
@@ -93,6 +94,7 @@
 			var/DBQuery/log_query = dbcon.NewQuery("INSERT INTO `test`.`erro_admin_log` (`id` ,`datetime` ,`adminckey` ,`adminip` ,`log` ) VALUES (NULL , NOW( ) , '[usr.ckey]', '[usr.client.address]', 'Edited the rank of [adm_ckey] to [new_rank]');")
 			log_query.Execute()
 			to_chat(usr, SPAN_NOTICE("Admin rank changed."))
+			log_permissions("<span class='notice'>Admin rank changed by [usr.ckey].</span>")
 
 /datum/admins/proc/log_admin_permission_modification(adm_ckey, new_permission)
 	if(config.admin_legacy_system)	return

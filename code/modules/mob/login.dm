@@ -5,7 +5,7 @@
 	computer_id	= client.computer_id
 	last_ckey = ckey
 	if(config.log_access)
-		log_access("Login: [key_name(src)] from [lastKnownIP ? lastKnownIP : "localhost"]-[computer_id] || BYOND v[client.byond_version]")
+		log_access_in(client)
 		var/is_multikeying = 0
 		if (config.warn_if_staff_same_ip || !check_rights(R_MOD, FALSE, client))
 			for(var/mob/M in GLOB.player_list)
@@ -21,10 +21,10 @@
 					if(matches)
 						if(M.client)
 							message_admins("[SPAN_DANGER("<B>Notice:</B>")] [SPAN_INFO("<A href='?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as <A href='?src=\ref[usr];priv_msg=\ref[M]'>[key_name_admin(M)]</A>.")]", 1)
-							log_access("Notice: [key_name(src)] has the same [matches] as [key_name(M)].")
+							log_adminwarn("Notice: [key_name(src)] has the same [matches] as [key_name(M)].")
 						else
 							message_admins("[SPAN_DANGER("<B>Notice:</B>")] [SPAN_INFO("<A href='?src=\ref[usr];priv_msg=\ref[src]'>[key_name_admin(src)]</A> has the same [matches] as [key_name_admin(M)] (no longer logged in).")]", 1)
-							log_access("Notice: [key_name(src)] has the same [matches] as [key_name(M)] (no longer logged in).")
+							log_adminwarn("Notice: [key_name(src)] has the same [matches] as [key_name(M)] (no longer logged in).")
 		if(is_multikeying && !client.warned_about_multikeying)
 			client.warned_about_multikeying = 1
 			spawn(1 SECOND)
@@ -100,12 +100,11 @@
 	reload_fullscreen() // Reload any fullscreen overlays this mob has.
 	add_click_catcher()
 	update_action_buttons()
+	update_mouse_pointer()
 
 	if(machine)
 		machine.on_user_login(src)
 
-	//set macro to normal incase it was overriden (like cyborg currently does)
-	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5")
 
 /mob/living/carbon/Login()
 	. = ..()

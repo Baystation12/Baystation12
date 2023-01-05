@@ -37,7 +37,7 @@
 /obj/machinery/computer/air_control/Destroy()
 	if(radio_controller)
 		radio_controller.remove_object(src, frequency)
-	..()
+	. = ..()
 
 /obj/machinery/computer/air_control/interface_interact(mob/user)
 	ui_interact(user)

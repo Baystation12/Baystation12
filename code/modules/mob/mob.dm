@@ -5,16 +5,18 @@
 	GLOB.player_list -= src
 	unset_machine()
 	QDEL_NULL(hud_used)
+	if(istype(ability_master))
+		QDEL_NULL(ability_master)
 	if(istype(skillset))
 		QDEL_NULL(skillset)
 	for(var/obj/item/grab/G in grabbed_by)
 		qdel(G)
 	clear_fullscreen()
+	remove_screen_obj_references()
 	if(client)
-		remove_screen_obj_references()
 		for(var/atom/movable/AM in client.screen)
 			var/obj/screen/screenobj = AM
-			if(!istype(screenobj) || !screenobj.globalscreen)
+			if(istype(screenobj) && !screenobj.globalscreen)
 				qdel(screenobj)
 		client.screen = list()
 	if(mind && mind.current == src)
@@ -24,26 +26,26 @@
 	return QDEL_HINT_HARDDEL
 
 /mob/proc/remove_screen_obj_references()
-	hands = null
-	pullin = null
-	purged = null
-	internals = null
-	oxygen = null
-	i_select = null
-	m_select = null
-	toxin = null
-	fire = null
-	bodytemp = null
-	healths = null
-	throw_icon = null
-	nutrition_icon = null
-	pressure = null
-	pain = null
-	item_use_icon = null
-	gun_move_icon = null
-	gun_setting_icon = null
-	ability_master = null
-	zone_sel = null
+	QDEL_NULL_SCREEN(hands)
+	QDEL_NULL_SCREEN(pullin)
+	QDEL_NULL_SCREEN(purged)
+	QDEL_NULL_SCREEN(internals)
+	QDEL_NULL_SCREEN(oxygen)
+	QDEL_NULL_SCREEN(i_select)
+	QDEL_NULL_SCREEN(m_select)
+	QDEL_NULL_SCREEN(toxin)
+	QDEL_NULL_SCREEN(fire)
+	QDEL_NULL_SCREEN(bodytemp)
+	QDEL_NULL_SCREEN(healths)
+	QDEL_NULL_SCREEN(throw_icon)
+	QDEL_NULL_SCREEN(nutrition_icon)
+	QDEL_NULL_SCREEN(pressure)
+	QDEL_NULL_SCREEN(pain)
+	QDEL_NULL_SCREEN(item_use_icon)
+	QDEL_NULL_SCREEN(gun_move_icon)
+	QDEL_NULL_SCREEN(gun_setting_icon)
+	QDEL_NULL_SCREEN(ability_master)
+	QDEL_NULL_SCREEN(zone_sel)
 
 /mob/Initialize()
 	. = ..()
@@ -484,7 +486,7 @@
 		if(href_list["mach_close"])
 			var/t1 = text("window=[href_list["mach_close"]]")
 			unset_machine()
-			show_browser(src, null, t1)
+			close_browser(src, t1)
 			return TOPIC_HANDLED
 		if(href_list["flavor_change"])
 			update_flavor_text(href_list["flavor_change"])
@@ -1200,3 +1202,16 @@
 	if(ear_deaf)
 		return 0
 	return 1
+
+/// Update the mouse pointer of the attached client in this mob.
+/mob/proc/update_mouse_pointer()
+	if(!client)
+		return
+
+	client.mouse_pointer_icon = initial(client.mouse_pointer_icon)
+
+	if(examine_cursor_icon && client.keys_held["Shift"])
+		client.mouse_pointer_icon = examine_cursor_icon
+
+/mob/keybind_face_direction(direction)
+	facedir(direction)

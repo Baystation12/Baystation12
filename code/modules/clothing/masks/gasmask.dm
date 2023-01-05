@@ -230,3 +230,4 @@
 	filter_water = TRUE
 	body_parts_covered = FACE
 	w_class = 2
+	sprite_sheets = list()

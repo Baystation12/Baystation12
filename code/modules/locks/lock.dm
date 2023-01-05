@@ -16,7 +16,7 @@
 
 /datum/lock/Destroy()
 	holder = null
-	..()
+	. = ..()
 
 /datum/lock/proc/unlock(key = "", mob/user)
 	if(status ^ LOCK_LOCKED)

@@ -167,7 +167,10 @@
 					bad_message = "<b>\[SPECIES RESTRICTED]</b>"
 				else if(!S.check_background(job, user.client.prefs))
 					bad_message = "<b>\[BACKGROUND RESTRICTED]</b>"
-
+//[INF]
+				else if(!job.is_required_roles_filled())
+					bad_message = "<b>\[HEAD NEEDED]</b>"
+//[/INF]
 				var/current_level = JOB_LEVEL_NEVER
 				if(pref.job_high == job.title)
 					current_level = JOB_LEVEL_HIGH

@@ -407,6 +407,7 @@
 	total_positions = 0
 
 /datum/job/proc/get_roundstart_spawnpoint()
+/*[ORIGINAL]
 	var/list/loc_list = list()
 	for(var/obj/effect/landmark/start/sloc in landmarks_list)
 		if(sloc.name != title)	continue
@@ -414,8 +415,29 @@
 		loc_list += sloc
 	if(loc_list.len)
 		return pick(loc_list)
+[/ORIGINAL]*/
+
+	var/spawnpoint_loc = get_job_spawnpoints()
+	if(spawnpoint_loc)
+		return spawnpoint_loc
+
 	else
-		return locate("start*[title]") // use old stype
+
+		var/list/L = list()
+		for(var/turf/i in GLOB.newplayer_start)
+			if(locate(/mob/living) in get_turf(i))	continue
+			L += i
+		return pick(L)
+
+/datum/job/proc/get_job_spawnpoints()
+	var/list/loc_list = list()
+	for(var/obj/effect/landmark/start/sloc in landmarks_list)
+		if(sloc.name != title)	continue
+		if(locate(/mob/living) in sloc.loc)	continue
+		loc_list += sloc
+	return length(loc_list) ? pick(loc_list) : null
+
+//orig		return locate("start*[title]") // use old stype
 
 /**
  *  Return appropriate /datum/spawnpoint for given client
@@ -444,23 +466,25 @@
 		else
 			spawnpos = spawntypes()[spawnpoint]
 
-	if(spawnpos && !spawnpos.check_job_spawning(title))
+	if(spawnpos && !spawnpos.can_spawn_here(H, src)) /*[BAY]
 		if(H)
-			to_chat(H, SPAN_WARNING("Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job ([title]). Spawning you at another spawn point instead."))
+			to_chat(H, SPAN_WARNING("Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job ([title]). Spawning you at another spawn point instead."))[/BAY]*/
 		spawnpos = null
+
 
 	if(!spawnpos)
 		// Step through all spawnpoints and pick first appropriate for job
 		for(var/spawntype in GLOB.using_map.allowed_spawns)
 			var/datum/spawnpoint/candidate = spawntypes()[spawntype]
-			if(candidate.check_job_spawning(title))
+			if(spawnpos.can_spawn_here(H, src))
 				spawnpos = candidate
 				break
 
 	if(!spawnpos)
 		// Pick at random from all the (wrong) spawnpoints, just so we have one
 		warning("Could not find an appropriate spawnpoint for job [title].")
-		spawnpos = spawntypes()[pick(GLOB.using_map.allowed_spawns)]
+		var/list/spawntyps = spawntypes()
+		spawnpos = spawntyps[pick(GLOB.using_map.allowed_spawns)]
 
 	return spawnpos
 

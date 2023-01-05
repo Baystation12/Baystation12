@@ -13,6 +13,9 @@ PORT 3306
 # Database the population, death, karma, etc. tables may be found in
 DATABASE tgstation
 
+## Database for ckey_whitelist and other custom stuff
+UTILITY_DATABASE tgstation
+
 # Username/Login used to access the database
 LOGIN mylogin
 
