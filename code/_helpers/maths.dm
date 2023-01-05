@@ -1,14 +1,3 @@
-/// Multiplier for converting degrees to radians
-#define DEG_TO_RAD 0.0174532925
-
-
-/// Multiplier for converting radians to degrees
-#define RAD_TO_DEG 57.2957795
-
-
-/// The mathematical constant pi to f32 precision
-#define PI 3.141592
-
 #define CEILING(x, y) ( -round(-(x) / (y)) * (y) )
 
 /// A random real number between low and high inclusive
