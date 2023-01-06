@@ -170,6 +170,9 @@ var/global/obfs_y = 0 //A number between -500 and 500
 		user << "<span class='warning'>You cannot fire [src] to this target.</span>"
 		return
 
+	if(busy)
+		user << "<span class='warning'>Someone else is currently using [src].</span>"
+		return
 
 	if(firing)
 		to_chat(user, "<span class='warning'>[src]'s barrel is still steaming hot. Wait a few seconds and stop firing it.</span>")
