@@ -508,6 +508,11 @@
 		toggle()
 	return TRUE
 
+/obj/machinery/door/get_material_melting_point()
+	. = ..()
+	if (heat_proof)
+		. += 4000
+
 // Public access
 
 /singleton/public_access/public_method/open_door
