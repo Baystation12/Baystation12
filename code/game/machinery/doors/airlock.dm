@@ -1280,11 +1280,15 @@ About the new airlock wires panel:
 					close_door_at = world.time + 6
 					return
 
+	var/crushed = FALSE
 	for(var/turf/turf in locs)
 		for(var/atom/movable/AM in turf)
-			if(AM.airlock_crush(door_crush_damage))
-				damage_health(door_crush_damage, DAMAGE_BRUTE)
-				use_power_oneoff(door_crush_damage * 100)		// Uses bunch extra power for crushing the target.
+			if (AM != src && AM.airlock_can_crush())
+				AM.airlock_crush(door_crush_damage)
+				crushed = TRUE
+	if (crushed)
+		damage_health(door_crush_damage, DAMAGE_BRUTE)
+		use_power_oneoff(door_crush_damage * 100)		// Uses bunch extra power for crushing the target.
 
 	use_power_oneoff(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(arePowerSystemsOn())
