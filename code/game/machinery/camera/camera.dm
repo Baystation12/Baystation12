@@ -246,6 +246,9 @@
 	spark_system.start()
 	playsound(loc, "sparks", 50, 1)
 
+/obj/machinery/camera/get_material()
+	return SSmaterials.get_material_by_name(MATERIAL_PLASTEEL)
+
 /obj/machinery/camera/can_damage_health(damage, damage_type)
 	if (invuln)
 		return FALSE

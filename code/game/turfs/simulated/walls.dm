@@ -172,8 +172,13 @@
 
 /turf/simulated/wall/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)//Doesn't fucking work because walls don't interact with air
 	burn(exposed_temperature)
-	if (exposed_temperature > material.melting_point)
-		..()
+	..()
+
+/turf/simulated/wall/get_material_melting_point()
+	var/melting_point = material.melting_point
+	if (reinf_material)
+		melting_point += reinf_material.melting_point
+	return melting_point
 
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	fire_act(adj_air, adj_temp, adj_volume)

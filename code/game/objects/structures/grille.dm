@@ -224,11 +224,6 @@
 			return 0
 	return 0
 
-/obj/structure/grille/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if (!is_broken() && exposed_temperature > material.melting_point)
-		damage_health(1, DAMAGE_BURN)
-	..()
-
 /obj/structure/grille/cult
 	name = "cult grille"
 	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it."
