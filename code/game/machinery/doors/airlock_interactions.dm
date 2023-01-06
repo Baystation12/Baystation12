@@ -39,17 +39,20 @@
 
 /atom/movable/proc/airlock_crush(crush_damage)
 	damage_health(crush_damage, DAMAGE_BRUTE)
+	return TRUE
 
 /obj/structure/window/airlock_crush(crush_damage)
 	shatter(TRUE)
+	return TRUE
 
 /obj/effect/energy_field/airlock_crush(crush_damage)
 	Stress(crush_damage)
+	return TRUE
 
 /obj/structure/closet/airlock_crush(crush_damage)
 	for(var/atom/movable/AM in src)
 		AM.airlock_crush(crush_damage)
-	..()
+	. = ..()
 
 /mob/living/airlock_crush(crush_damage)
 	. = ..()
@@ -86,10 +89,10 @@
 	return ..(round(crush_damage / CYBORG_AIRLOCKCRUSH_RESISTANCE)) //TODO implement robot melee armour and remove this.
 
 /obj/structure/disposalpipe/airlock_crush(crush_damage)
-	return
+	return FALSE
 
 /obj/machinery/atmospherics/pipe/airlock_crush(crush_damage)
-	return
+	return FALSE
 
 /obj/structure/cable/airlock_crush(crush_damage)
-	return
+	return FALSE

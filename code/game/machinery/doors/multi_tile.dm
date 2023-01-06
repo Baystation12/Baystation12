@@ -132,7 +132,7 @@
 
 /obj/machinery/door/airlock/multi_tile/glass
 	name = "Glass Airlock"
-	hitsound = 'sound/effects/Glasshit.ogg'
+	damage_hitsound = 'sound/effects/Glasshit.ogg'
 	glass = TRUE
 
 /obj/machinery/door/airlock/multi_tile/glass/command

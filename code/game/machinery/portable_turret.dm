@@ -19,7 +19,6 @@
 	power_channel = EQUIP	//drains power from the EQUIPMENT channel
 
 	health_max = 80
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
 	health_min_damage = 5
 
 	var/raised = 0			//if the turret cover is "open" and the turret is raised
@@ -403,9 +402,9 @@ var/global/list/turret_icons
 		disabled = 0
 
 /obj/machinery/porta_turret/on_death()
-	set_broken(TRUE)
 	spark_system.start()	//creates some sparks because they look cool
 	atom_flags |= ATOM_FLAG_CLIMBABLE // they're now climbable
+	..()
 
 /obj/machinery/porta_turret/Process()
 	if(inoperable())

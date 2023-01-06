@@ -12,6 +12,8 @@
 	layer = STRUCTURE_LAYER // Layer under items
 	init_flags = INIT_MACHINERY_PROCESS_SELF
 
+	health_resistances = DAMAGE_RESIST_ELECTRICAL
+
 	/// Boolean. Whether or not the machine has been emagged.
 	var/emagged = FALSE
 	/// Boolean. Whether or not the machine has been upgrade by a malfunctioning AI.
@@ -93,6 +95,16 @@
 	QDEL_NULL_LIST(component_parts) // Further handling is done via destroyed events.
 	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
 	. = ..()
+
+/obj/machinery/on_death()
+	..()
+	set_broken(TRUE, MACHINE_BROKEN_HEALTH)
+	queue_icon_update()
+
+/obj/machinery/on_revive()
+	..()
+	set_broken(FALSE, MACHINE_BROKEN_HEALTH)
+	queue_icon_update()
 
 /// Part of the machinery subsystem's process stack. Processes everything defined by `processing_flags`.
 /obj/machinery/proc/ProcessAll(wait)

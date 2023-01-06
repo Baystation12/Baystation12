@@ -143,12 +143,6 @@
 			return TRUE
 	return FALSE
 
-/obj/machinery/door/firedoor/attack_generic(mob/user, damage)
-	playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
-	if(MACHINE_IS_BROKEN(src))
-		qdel(src)
-	..()
-
 /obj/machinery/door/firedoor/attack_hand(mob/user)
 	add_fingerprint(user)
 	if(operating)

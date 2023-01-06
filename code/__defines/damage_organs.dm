@@ -15,15 +15,6 @@
 #define EFFECT_DROWSY   "drowsy"
 #define EFFECT_PAIN     "pain"
 
-// Damage flags
-#define DAMAGE_FLAG_SHARP     FLAG(0)
-#define DAMAGE_FLAG_EDGE      FLAG(1)
-#define DAMAGE_FLAG_LASER     FLAG(2)
-#define DAMAGE_FLAG_BULLET    FLAG(3)
-#define DAMAGE_FLAG_EXPLODE   FLAG(4)
-#define DAMAGE_FLAG_DISPERSED FLAG(5) // Makes apply_damage calls without specified zone distribute damage rather than randomly choose organ (for humans)
-#define DAMAGE_FLAG_BIO       FLAG(6) // Toxin damage that should be mitigated by biological (i.e. sterile) armor
-
 #define FIRE_DAMAGE_MODIFIER 0.0215 // Higher values result in more external fire damage to the skin. (default 0.0215)
 #define  AIR_DAMAGE_MODIFIER 2.025  // More means less damage from hot air scalding lungs, less = more damage. (default 2.025)
 

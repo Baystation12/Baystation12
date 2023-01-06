@@ -21,6 +21,7 @@
 
 /obj/effect/fluid/airlock_crush()
 	qdel(src)
+	return FALSE
 
 /obj/effect/fluid/Initialize()
 	. = ..()

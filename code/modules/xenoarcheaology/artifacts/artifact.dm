@@ -10,18 +10,16 @@
 	var/being_used = 0
 	waterproof = FALSE
 
-	//Stuff for damaging and breaking artifacts.
-	var/max_health = 500
-	var/health = 500
+	health_max = 500
+	health_min_damage = 5
+	damage_hitsound = 'sound/effects/Glasshit.ogg'
+
 	///TRUE if artifact can be damaged, FALSE otherwise.
 	var/can_damage = FALSE
 	///The damage type that can harm the artifact.
 	var/damage_type = DAMAGE_FLAG_SHARP
-	///Minimum force needed to cause damage. Only applicable when being melee'd.
-	var/min_force = 5
 	///Extra descriptor added to artifact analyzer results.
 	var/damage_desc = "The physical structure appears indestructable."
-	var/destroyed = FALSE
 
 /obj/machinery/artifact/New()
 	..()
@@ -143,9 +141,9 @@
 
 //Damage/Destruction procs
 
-/obj/machinery/artifact/examine(mob/user)
-	. = ..()
-
+/obj/machinery/artifact/examine_damage_state(mob/user)
+	var/health = get_current_health()
+	var/max_health = get_max_health()
 	if (health <= 0)
 		to_chat(user, SPAN_NOTICE("It is inert, dead and quiet."))
 	else if (health < (max_health * 0.25))
@@ -167,8 +165,7 @@
  */
 /obj/machinery/artifact/proc/setup_destructibility()
 	can_damage = TRUE
-	health = rand(100, 200)
-	max_health = health
+	set_max_health(rand(100, 200))
 
 	var/damage_types = list(DAMAGE_FLAG_SHARP, DAMAGE_FLAG_BULLET, DAMAGE_FLAG_EDGE, DAMAGE_FLAG_LASER)
 	for (var/datum/artifact_effect/A in list(my_effect, secondary_effect))
@@ -206,47 +203,26 @@
 		if (DAMAGE_FLAG_LASER)
 			damage_desc += "concentrated high-energy bursts."
 
-/**
- * Handles damage the artifact receives.
- * Sends a visual message when the aritfacts health value falls below certain points.
- * Once the artifact has 0 or less health:
- *   Calls the effect(s) 'destroyed_effect()' proc.
- *   Sets the artifacts icon state to its 'destroyed' state.
- * If the artifact has > 0 health, calls the effect(s) 'holder_damaged()' proc. This may or may not be removed.
- *
- * @param damage int The damage dealt.
- */
-/obj/machinery/artifact/proc/handle_damage(damage)
-	if (destroyed)
-		return
 
-	var/initialhealth = health
-	health = max(0, health - damage)
-	if (health < max_health / 4 && initialhealth >= max_health / 4)
-		visible_message("\The [src] looks like it's about to break!" )
-	else if (health < max_health / 2 && initialhealth >= max_health / 2)
-		visible_message("\The [src] looks seriously damaged!" )
-	else if (health < max_health * 3/4 && initialhealth >= max_health * 3/4)
-		visible_message("\The [src] shows signs of damage!" )
-	update_icon()
+/obj/machinery/artifact/post_health_change(health_mod, damage_type)
+	..()
+	queue_icon_update()
+	if (health_mod < 0)
+		var/initial_damage_percentage = round(((get_current_health() - health_mod) / get_max_health()) * 100)
+		var/damage_percentage = get_damage_percentage()
+		if (damage_percentage >= 75 && initial_damage_percentage < 75)
+			visible_message("\The [src] looks like it's about to break!")
+		else if (damage_percentage >= 50 && initial_damage_percentage < 50)
+			visible_message("\The [src] looks seriously damaged!" )
+		else if (damage_percentage >= 25 && initial_damage_percentage < 25)
+			visible_message("\The [src] shows signs of damage!" )
+
+		for (var/datum/artifact_effect/A in list(my_effect, secondary_effect))
+			A.holder_damaged(get_current_health(), abs(health_mod))
 
 
-
-	playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 75, TRUE)
-
-	for (var/datum/artifact_effect/A in list(my_effect, secondary_effect))
-		A.holder_damaged(health, damage)
-
-	if (!health)
-		handle_destruction()
-/**
- * Handles the 'destruction' of the artifact.
- * Icon state is updated to the corresponding 'destroyed' state.
- * Client mobs are 'flashed' for added effect.
- * Effects are deleted so they can't be triggered again.
- * 'destroyed' is set to TRUE to prevent re-triggering the destroyed event.
- */
-/obj/machinery/artifact/proc/handle_destruction()
+/obj/machinery/artifact/on_death()
+	..()
 	visible_message(SPAN_DANGER("\The [src] breaks apart and explodes in a wave of energy!"), SPAN_DANGER("You hear something break apart and feel a wave of energy hit you!"))
 	playsound(get_turf(src), 'sound/effects/Glassbr3.ogg', 75, TRUE)
 	icon_state = "ano[icon_num]2"
@@ -260,25 +236,10 @@
 	QDEL_NULL(my_effect)
 	QDEL_NULL(secondary_effect)
 
-	destroyed = TRUE
 
-/obj/machinery/artifact/attackby(obj/item/W, mob/living/user)
-	. = ..()
-
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if (W.sharp && damage_type == DAMAGE_FLAG_SHARP || W.edge && damage_type == DAMAGE_FLAG_EDGE)
-		user.do_attack_animation(src)
-
-		if (W.force < min_force)
-			visible_message(SPAN_DANGER("\The [user] hits \the [src] with \the [W], but it doesn't even scratch it!"))
-			return
-
-		handle_damage(W.force)
-	else
-		visible_message(SPAN_DANGER("\The [user] hits \the [src] with \the [W], but it bounces off!"))
-
-/obj/machinery/artifact/bullet_act(obj/item/projectile/P)
-	. = ..()
-
-	if (P.damage_flags & damage_type)
-		handle_damage(P.damage)
+/obj/machinery/artifact/can_damage_health(damage, damage_type, damage_flags)
+	if (!can_damage)
+		return FALSE
+	if (!HAS_FLAGS(damage_flags, src.damage_type))
+		return FALSE
+	return ..()
