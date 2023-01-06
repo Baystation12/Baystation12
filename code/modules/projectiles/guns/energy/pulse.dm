@@ -13,7 +13,6 @@
 	multi_aim = 1
 	burst_delay = 3
 	burst = 3
-	move_delay = 4
 	accuracy = 1
 	wielded_item_state = "gun_wielded"
 	bulk = GUN_BULK_RIFLE
@@ -30,7 +29,6 @@
 	w_class = ITEM_SIZE_LARGE
 	one_hand_penalty= 3
 	burst_delay = 2
-	move_delay = 2
 	bulk = GUN_BULK_RIFLE - 3
 	accuracy = 0
 
@@ -46,7 +44,6 @@
 	w_class = ITEM_SIZE_NORMAL
 	one_hand_penalty=1 //a bit heavy
 	burst_delay = 1
-	move_delay = 1
 	wielded_item_state = null
 	bulk = 0
 	accuracy = 0
@@ -76,7 +73,6 @@
 	desc = "The Vuu'Xqu*ix T-3, known as 'VT-3' by SolGov. Rarely seen out in the wild by anyone outside of a Skrellian SDTF."
 	cell_type = /obj/item/cell/high
 	self_recharge = 1
-	move_delay = 2
 	projectile_type=/obj/item/projectile/beam/pulse/skrell/single
 	charge_cost=120
 	one_hand_penalty = 3

@@ -120,7 +120,7 @@
 	mag_remove_sound = 'sound/weapons/guns/interaction/garand_magout.ogg'
 
 	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=6,    move_delay=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null)
+		list(mode_name="semi auto",       burst=1, fire_delay=6, one_hand_penalty=8, burst_accuracy=null, dispersion=null)
 		)
 
 /obj/item/gun/projectile/sniper/garand/on_update_icon()
@@ -152,5 +152,5 @@
 	wielded_item_state = "semistrip-wielded"
 
 	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=2,    move_delay=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null)
+		list(mode_name="semi auto",       burst=1, fire_delay=2,  one_hand_penalty=8, burst_accuracy=null, dispersion=null)
 		)

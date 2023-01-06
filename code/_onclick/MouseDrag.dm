@@ -14,18 +14,27 @@
  *
  * Returns boolean. TRUE if the mouse drag operation was intercepted, FALSE otherwise.
  */
-/atom/proc/RelayMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, mob/user)
+/atom/proc/RelayMouseDrag(atom/src_object, atom/over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
 	return FALSE
 
-/mob/proc/OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
+/mob/proc/OnMouseDrag(atom/src_object, atom/over_object, src_location, over_location, src_control, over_control, params)
 	if(istype(loc, /atom))
 		var/atom/A = loc
 		if(A.RelayMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, src))
 			return
 
-	if(over_object)
-		if(!incapacitated())
-			var/obj/item/gun/gun = get_active_hand()
-			if(istype(gun) && gun.can_autofire())
-				set_dir(get_dir(src, over_object))
-				gun.Fire(get_turf(over_object), src, params, (get_dist(over_object, src) <= 1), FALSE)
+	var/obj/item/gun/gun = get_active_hand()
+	var/list/click_params = params2list(params)
+	if(istype(over_object) && (isturf(over_object) || isturf(over_object.loc)) && !incapacitated() && istype(gun) && !click_params["shift"])
+		gun.set_autofire(over_object, src)
+
+/mob/proc/OnMouseDown(atom/object, location, control, params)
+	var/obj/item/gun/gun = get_active_hand()
+	var/list/click_params = params2list(params)
+	if(istype(object) && (isturf(object) || isturf(object.loc)) && !incapacitated() && istype(gun) && !click_params["shift"])
+		gun.set_autofire(object, src)
+
+/mob/proc/OnMouseUp(atom/object, location, control, params)
+	var/obj/item/gun/gun = get_active_hand()
+	if(istype(gun))
+		gun.clear_autofire()
