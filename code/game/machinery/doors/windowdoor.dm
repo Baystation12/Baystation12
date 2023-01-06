@@ -4,10 +4,9 @@
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "left"
 	var/base_state = "left"
-	min_force = 4
-	hitsound = 'sound/effects/Glasshit.ogg'
-	maxhealth = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
-	health = 150
+	health_min_damage = 4
+	damage_hitsound = 'sound/effects/Glasshit.ogg'
+	health_max = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
 	visible = FALSE
 	use_power = POWER_USE_OFF
 	stat_immune = MACHINE_STAT_NOSCREEN | MACHINE_STAT_NOINPUT | MACHINE_STAT_NOPOWER
@@ -148,11 +147,8 @@
 /obj/machinery/door/window/proc/close_final()
 	operating = DOOR_OPERATING_NO
 
-/obj/machinery/door/window/take_damage(damage)
-	src.health = max(0, src.health - damage)
-	if (src.health <= 0)
-		shatter()
-		return
+/obj/machinery/door/window/on_death()
+	shatter()
 
 /obj/machinery/door/window/physical_attack_hand(mob/user)
 	if(istype(user,/mob/living/carbon/human))
@@ -160,7 +156,7 @@
 		if(H.species.can_shred(H))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 			visible_message(SPAN_DANGER("[user] smashes against the [src.name]."), 1)
-			take_damage(25)
+			damage_health(25, DAMAGE_BRUTE)
 			return TRUE
 
 /obj/machinery/door/window/emag_act(remaining_charges, mob/user)
@@ -228,8 +224,8 @@
 			operating = DOOR_OPERATING_NO
 			return
 
-	if (check_force(I, user))
-		return
+	if (user.a_intent == I_HURT)
+		return ..()
 
 	src.add_fingerprint(user, 0, I)
 
@@ -255,8 +251,7 @@
 	icon_state = "leftsecure"
 	base_state = "leftsecure"
 	var/id = null
-	maxhealth = 300
-	health = 300 //Stronger doors for prison (regular window door health is 150)
+	health_max = 300
 	pry_mod = 0.65
 
 

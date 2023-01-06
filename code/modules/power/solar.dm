@@ -12,7 +12,6 @@ var/global/solar_gen_rate = 1500
 	idle_power_usage = 0
 	active_power_usage = 0
 	health_max = 10
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
 	var/id = 0
 	var/obscured = 0
 	var/sunfrac = 0
@@ -127,13 +126,12 @@ var/global/solar_gen_rate = 1500
 		kill_health()
 
 /obj/machinery/power/solar/on_death()
-	. = ..()
-	set_broken(TRUE)
 	new /obj/item/material/shard(src.loc)
 	new /obj/item/material/shard(src.loc)
 	var/obj/item/solar_assembly/S = locate() in src
 	S.glass_type = null
 	unset_control()
+	..()
 
 /obj/machinery/power/solar/ex_act(severity)
 	switch(severity)

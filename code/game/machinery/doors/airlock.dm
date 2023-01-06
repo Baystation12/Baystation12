@@ -186,7 +186,7 @@
 /obj/machinery/door/airlock/glass
 	name = "Glass Airlock"
 	icon_state = "preview_glass"
-	hitsound = 'sound/effects/Glasshit.ogg'
+	damage_hitsound = 'sound/effects/Glasshit.ogg'
 	explosion_resistance = 5
 	opacity = 0
 	glass = TRUE
@@ -730,7 +730,7 @@ About the new airlock wires panel:
 
 		if(MACHINE_IS_BROKEN(src))
 			damage_overlay = sparks_broken_file
-		else if(health < maxhealth * 3/4)
+		else if (get_damage_percentage() >= 25)
 			damage_overlay = sparks_damaged_file
 
 	if(welded)
@@ -1132,11 +1132,8 @@ About the new airlock wires panel:
 		var/obj/item/material/twohanded/fireaxe/F = C
 		if (F.wielded)
 			playsound(src, 'sound/weapons/smash.ogg', 100, 1)
-			health -= F.force_wielded * 2
-			if(health <= 0)
+			if (damage_health(F.force_wielded * 2, F.damtype))
 				user.visible_message(SPAN_DANGER("[user] smashes \the [C] into the airlock's control panel! It explodes in a shower of sparks!"), SPAN_DANGER("You smash \the [C] into the airlock's control panel! It explodes in a shower of sparks!"))
-				health = 0
-				set_broken(TRUE)
 			else
 				user.visible_message(SPAN_DANGER("[user] smashes \the [C] into the airlock's control panel!"))
 		else
@@ -1283,11 +1280,15 @@ About the new airlock wires panel:
 					close_door_at = world.time + 6
 					return
 
+	var/crushed = FALSE
 	for(var/turf/turf in locs)
 		for(var/atom/movable/AM in turf)
-			if(AM.airlock_crush(door_crush_damage))
-				take_damage(door_crush_damage)
-				use_power_oneoff(door_crush_damage * 100)		// Uses bunch extra power for crushing the target.
+			if (AM != src && AM.airlock_can_crush())
+				AM.airlock_crush(door_crush_damage)
+				crushed = TRUE
+	if (crushed)
+		damage_health(door_crush_damage, DAMAGE_BRUTE)
+		use_power_oneoff(door_crush_damage * 100)		// Uses bunch extra power for crushing the target.
 
 	use_power_oneoff(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(arePowerSystemsOn())
@@ -1421,12 +1422,11 @@ About the new airlock wires panel:
 	return
 
 // Braces can act as an extra layer of armor - they will take damage first.
-/obj/machinery/door/airlock/take_damage(amount)
-	if(brace)
-		brace.damage_health(amount)
-	else
-		..(amount)
-	update_icon()
+/obj/machinery/door/airlock/damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)
+	if (brace)
+		brace.damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)
+		return FALSE
+	return ..()
 
 /obj/machinery/door/airlock/examine(mob/user)
 	. = ..()

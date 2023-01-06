@@ -1,6 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - rscadd: Tables now use their material's hit sound when struck.
-  - rscadd: Tables now have a minimum damage value needed to damage their health,
-      derived from their material.

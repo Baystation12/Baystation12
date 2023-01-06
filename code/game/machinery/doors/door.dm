@@ -12,6 +12,10 @@
 	layer = CLOSED_DOOR_LAYER
 	interact_offline = TRUE
 
+	health_max = 300
+	health_min_damage = 10
+	damage_hitsound = 'sound/weapons/smash.ogg'
+
 	var/open_layer = OPEN_DOOR_LAYER
 	var/closed_layer = CLOSED_DOOR_LAYER
 
@@ -29,16 +33,6 @@
 	var/normalspeed = TRUE
 	/// Boolean. Whether or not the door is heat proof. Affects turf thermal conductivity for non-opaque doors. Provided for mapping use.
 	var/heat_proof = FALSE
-	/// Integer. The door's maximum health. TODO: Replace this with standardized health.
-	var/maxhealth = 300
-	/// Integer. The door's current health. TODO: Replace this with standardized health.
-	var/health
-	/// Integer. How many strong projectile hits it takes to destroy the door. Primarily used for emitters.
-	var/destroy_hits = 10
-	/// Integer. Minimum amount of force needed to damage the door with a melee weapon. TODO: Replace this with standardized health.
-	var/min_force = 10
-	/// Sound file. Sound the door makes when hit with a weapon. TODO: Replace with standardized health.
-	var/hitsound = 'sound/weapons/smash.ogg'
 	/// Float. Multiplier applied to mob AI door prying time.
 	var/pry_mod = 1.0
 	/// Instance of material stack that's been added to the door for repairs.
@@ -65,20 +59,6 @@
 
 	atmos_canpass = CANPASS_PROC
 
-/obj/machinery/door/attack_generic(mob/user, damage, attack_verb, environment_smash)
-	if(environment_smash >= 1)
-		damage = max(damage, 10)
-
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2)
-	playsound(loc, hitsound, 50, 1)
-
-	if(damage >= 10)
-		visible_message(SPAN_DANGER("\The [user] [attack_verb] into \the [src]!"))
-		take_damage(damage)
-	else
-		visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
-	attack_animation(user)
-
 /obj/machinery/door/New()
 	. = ..()
 	if(density)
@@ -103,7 +83,6 @@
 	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
 	. = ..()
 
-	health = maxhealth
 	update_connections(1)
 	update_icon()
 
@@ -192,43 +171,6 @@
 			do_animate("deny")
 	return
 
-/obj/machinery/door/bullet_act(obj/item/projectile/Proj)
-	..()
-
-	var/damage = Proj.get_structure_damage()
-
-	// Emitter Blasts - these will eventually completely destroy the door, given enough time.
-	if (damage > 90)
-		destroy_hits--
-		if (destroy_hits <= 0)
-			visible_message(SPAN_DANGER("\The [src.name] disintegrates!"))
-			switch (Proj.damage_type)
-				if (DAMAGE_BRUTE)
-					new /obj/item/stack/material/steel(src.loc, 2)
-					new /obj/item/stack/material/rods(src.loc, 3)
-				if (DAMAGE_BURN)
-					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
-			qdel(src)
-
-	if(damage)
-		//cap projectile damage so that there's still a minimum number of hits required to break the door
-		take_damage(min(damage, 100))
-
-
-
-/obj/machinery/door/hitby(AM as mob|obj, datum/thrownthing/TT)
-
-	..()
-	visible_message(SPAN_DANGER("[src.name] was hit by [AM]."))
-	var/tforce = 0
-	if(ismob(AM))
-		tforce = 3 * TT.speed
-	else
-		tforce = AM:throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	playsound(src.loc, hitsound, 100, 1)
-	take_damage(tforce)
-	return
-
 // This is legacy code that should be revisited, probably by moving the bulk of the logic into here.
 /obj/machinery/door/interface_interact(user)
 	if(CanInteract(user, DefaultTopicState()))
@@ -237,11 +179,14 @@
 /obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
 	src.add_fingerprint(user, 0, I)
 
+	if (user.a_intent == I_HURT)
+		return ..()
+
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
 		if(MACHINE_IS_BROKEN(src))
 			to_chat(user, SPAN_NOTICE("It looks like \the [src] is pretty busted. It's going to need more than just patching up now."))
 			return
-		if(health >= maxhealth)
+		if (!get_damage_value())
 			to_chat(user, SPAN_NOTICE("Nothing to fix!"))
 			return
 		if(!density)
@@ -249,7 +194,7 @@
 			return
 
 		//figure out how much metal we need
-		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT
+		var/amount_needed = get_damage_value() / DOOR_REPAIR_AMOUNT
 		amount_needed = Ceil(amount_needed)
 
 		var/obj/item/stack/stack = I
@@ -283,7 +228,7 @@
 					return //the materials in the door have been removed before welding was finished.
 
 				to_chat(user, SPAN_NOTICE("You finish repairing the damage to \the [src]."))
-				health = clamp(health + repairing.amount * DOOR_REPAIR_AMOUNT, health, maxhealth)
+				restore_health(repairing.amount * DOOR_REPAIR_AMOUNT)
 				update_icon()
 				qdel(repairing)
 				repairing = null
@@ -295,12 +240,6 @@
 		repairing.dropInto(user.loc)
 		repairing = null
 		return
-
-	if (check_force(I, user))
-		return
-
-	if (operating == DOOR_OPERATING_YES || isrobot(user))
-		return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
 
 	if(src.operating) return
 
@@ -325,49 +264,27 @@
 		set_broken(TRUE)
 		return 1
 
-/obj/machinery/door/proc/check_force(obj/item/I, mob/user)
-	if (!istype(I))
-		return FALSE
-	if (!density || user.a_intent != I_HURT)
-		return FALSE
-	if (I.damtype != DAMAGE_BRUTE && I.damtype != DAMAGE_BURN)
-		return FALSE
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.do_attack_animation(src)
-	if (I.force < min_force)
-		visible_message(SPAN_WARNING("\The [user] hits \the [src] with \an [I] to no effect."))
-	else
-		visible_message(SPAN_DANGER("\The [user] hits \the [src] with \an [I], causing damage!"))
-		playsound(src, hitsound, 100, 1)
-		take_damage(I.force)
-	return TRUE
+/obj/machinery/door/post_health_change(health_mod, damage_type)
+	. = ..()
+	queue_icon_update()
+	if (health_mod < 0 && !health_dead)
+		var/initial_damage_percentage = round(((get_current_health() - health_mod) / get_max_health()) * 100)
+		var/damage_percentage = get_damage_percentage()
+		if (damage_percentage >= 75 && initial_damage_percentage < 75)
+			visible_message("\The [src] looks like it's about to break!" )
+		else if (damage_percentage >= 50 && initial_damage_percentage < 50)
+			visible_message("\The [src] looks seriously damaged!" )
+		else if (damage_percentage >= 25 && initial_damage_percentage < 25)
+			visible_message("\The [src] shows signs of damage!" )
 
-/obj/machinery/door/proc/take_damage(damage)
-	var/initialhealth = src.health
-	src.health = max(0, src.health - damage)
-	if(src.health <= 0 && initialhealth > 0)
-		src.set_broken(TRUE)
-	else if(src.health < src.maxhealth / 4 && initialhealth >= src.maxhealth / 4)
-		visible_message("\The [src] looks like it's about to break!" )
-	else if(src.health < src.maxhealth / 2 && initialhealth >= src.maxhealth / 2)
-		visible_message("\The [src] looks seriously damaged!" )
-	else if(src.health < src.maxhealth * 3/4 && initialhealth >= src.maxhealth * 3/4)
-		visible_message("\The [src] shows signs of damage!" )
-	update_icon()
-	return
+
+/obj/machinery/door/on_revive()
+	. = ..()
+	p_open = FALSE
 
 
 /obj/machinery/door/examine(mob/user)
 	. = ..()
-	if(src.health <= 0)
-		to_chat(user, "\The [src] is broken!")
-	else if(src.health < src.maxhealth / 4)
-		to_chat(user, "\The [src] looks like it's about to break!")
-	else if(src.health < src.maxhealth / 2)
-		to_chat(user, "\The [src] looks seriously damaged!")
-	else if(src.health < src.maxhealth * 3/4)
-		to_chat(user, "\The [src] shows signs of damage!")
-
 	if (emagged && ishuman(user) && user.skill_check(SKILL_COMPUTER, SKILL_ADEPT))
 		to_chat(user, SPAN_WARNING("\The [src]'s control panel looks fried."))
 
@@ -376,25 +293,6 @@
 	. = ..()
 	if(. && new_state)
 		visible_message(SPAN_WARNING("\The [src.name] breaks!"))
-
-/obj/machinery/door/ex_act(severity)
-	switch(severity)
-		if(EX_ACT_DEVASTATING)
-			qdel(src)
-		if(EX_ACT_HEAVY)
-			if(prob(25))
-				qdel(src)
-			else
-				take_damage(100)
-			take_damage(200)
-		if(EX_ACT_LIGHT)
-			if(prob(80))
-				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-				s.set_up(2, 1, src)
-				s.start()
-			else
-				take_damage(100)
-			take_damage(100)
 
 
 /obj/machinery/door/on_update_icon()
@@ -537,7 +435,7 @@
 		deconstruct(null, TRUE)
 
 /obj/machinery/door/proc/CheckPenetration(base_chance, damage)
-	. = damage/maxhealth*180
+	. = get_damage_percentage() * 0.18
 	if(glass)
 		. *= 2
 	. = round(.)

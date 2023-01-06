@@ -8,6 +8,9 @@
 	active_power_usage = 10
 	layer = CAMERA_LAYER
 
+	health_max = 40
+	health_min_damage = 5
+
 	var/list/network = list(NETWORK_EXODUS)
 	var/c_tag = null
 	var/c_tag_order = 999
@@ -17,8 +20,6 @@
 	var/invuln = null
 	var/bugged = 0
 	var/obj/item/camera_assembly/assembly = null
-
-	var/toughness = 5 //sorta fragile
 
 	// WIRES
 	wires = /datum/wires/camera
@@ -135,27 +136,6 @@
 				START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 		..()
 
-/obj/machinery/camera/bullet_act(obj/item/projectile/P)
-	take_damage(P.get_structure_damage())
-
-/obj/machinery/camera/ex_act(severity)
-	if(src.invuln)
-		return
-
-	//camera dies if an explosion touches it!
-	if(severity <= EX_ACT_HEAVY || prob(50))
-		destroy()
-
-	..() //and give it the regular chance of being deleted outright
-
-/obj/machinery/camera/hitby(AM as mob|obj)
-	..()
-	if (istype(AM, /obj))
-		var/obj/O = AM
-		if (O.throwforce >= src.toughness)
-			visible_message(SPAN_WARNING("<B>[src] was hit by [O].</B>"))
-		take_damage(O.throwforce)
-
 /obj/machinery/camera/proc/setViewRange(num = 7)
 	src.view_range = num
 	cameranet.update_visibility(src, 0)
@@ -169,7 +149,7 @@
 		visible_message(SPAN_WARNING("\The [user] slashes at [src]!"))
 		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
 		add_hiddenprint(user)
-		destroy()
+		kill_health()
 		return TRUE
 
 /obj/machinery/camera/attackby(obj/item/W as obj, mob/living/user as mob)
@@ -223,17 +203,6 @@
 			else to_chat(O, "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U];trackname=[U.name]'>[U]</a></b> holds \a [itemname] up to one of your cameras ...")
 			show_browser(O, text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
 
-	else if (W.damtype == DAMAGE_BRUTE || W.damtype == DAMAGE_BURN) //bashing cameras
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if (W.force >= src.toughness)
-			user.do_attack_animation(src)
-			visible_message(SPAN_WARNING("<b>[src] has been [pick(W.attack_verb)] with [W] by [user]!</b>"))
-			if (istype(W, /obj/item)) //is it even possible to get into attackby() with non-items?
-				var/obj/item/I = W
-				if (I.hitsound)
-					playsound(loc, I.hitsound, 50, 1, -1)
-		take_damage(W.force)
-
 	else
 		..()
 
@@ -263,14 +232,8 @@
 		icon_state = initial(icon_state)
 		add_hiddenprint(user)
 
-/obj/machinery/camera/proc/take_damage(force, message)
-	//prob(25) gives an average of 3-4 hits
-	if (force >= toughness && (force > toughness*4 || prob(25)))
-		destroy()
-
-//Used when someone breaks a camera
-/obj/machinery/camera/proc/destroy()
-	set_broken(TRUE)
+/obj/machinery/camera/on_death()
+	. = ..()
 	wires.RandomCutAll()
 
 	triggerCameraAlarm()
@@ -282,6 +245,11 @@
 	spark_system.set_up(5, 0, loc)
 	spark_system.start()
 	playsound(loc, "sparks", 50, 1)
+
+/obj/machinery/camera/can_damage_health(damage, damage_type)
+	if (invuln)
+		return FALSE
+	. = ..()
 
 /obj/machinery/camera/proc/set_status(newstatus)
 	if (status != newstatus)
