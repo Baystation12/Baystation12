@@ -571,12 +571,10 @@
 	D.alpha = damage_alpha
 	overlays += D
 
-/obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	var/melting_point = material.melting_point
-	if(reinf_material)
-		melting_point += 0.25*reinf_material.melting_point
-	if (exposed_temperature > melting_point)
-		..()
+/obj/structure/window/get_material_melting_point()
+	. = ..()
+	if (reinf_material)
+		. += 0.25 * reinf_material.melting_point
 
 /obj/structure/window/basic
 	icon_state = "window"

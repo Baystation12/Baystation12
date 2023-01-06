@@ -1421,13 +1421,10 @@ About the new airlock wires panel:
 		src.lock()
 	return
 
-/obj/machinery/door/airlock/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	var/material/material = get_material()
-	var/melting_point = material.melting_point
+/obj/machinery/door/airlock/get_material_melting_point()
+	. = ..()
 	if (window_material)
-		melting_point = round((melting_point + window_material.melting_point) / 2)
-	if (exposed_temperature > melting_point)
-		..()
+		. = round((. + window_material.melting_point) / 2)
 
 // Braces can act as an extra layer of armor - they will take damage first.
 /obj/machinery/door/airlock/damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)

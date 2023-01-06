@@ -145,9 +145,8 @@
 	else
 		overlays += "can-o3"
 
-/obj/machinery/portable_atmospherics/canister/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if (exposed_temperature > temperature_resistance)
-		..()
+/obj/machinery/portable_atmospherics/canister/get_material_melting_point()
+	return temperature_resistance
 
 /obj/machinery/portable_atmospherics/canister/on_death()
 	var/atom/location = loc

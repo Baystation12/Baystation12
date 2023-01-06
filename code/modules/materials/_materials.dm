@@ -40,6 +40,19 @@
 	if (material)
 		return material.display_name
 
+/**
+ * Returns the material's melting point, or `T100C` if there is no material. Overrideable for special cases, such as
+ * atoms that allow material reinforcement or that by nature should have a higher or lower melting point.
+ */
+/atom/proc/get_material_melting_point()
+	return T100C
+
+/obj/get_material_melting_point()
+	. = ..()
+	var/material/material = get_material()
+	if (material)
+		. = material.melting_point
+
 // Material definition and procs follow.
 /material
 	var/name	                          // Unique name for use in indexing the list.
