@@ -282,8 +282,8 @@
 	begins_closed = FALSE
 	icon_state = "pdoor0"
 	// Дальше только ад.
-	min_force = 50
-	maxhealth = 5000
+	health_min_damage = 50
+	health_max = 5000
 
 // Как я и обещал, бронестворки можно емагать.
 /obj/machinery/door/blast/regular/lockdown/emag_act(remaining_charges)

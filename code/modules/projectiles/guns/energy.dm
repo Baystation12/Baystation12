@@ -28,7 +28,7 @@
 	var/reload_time = 5 SECONDS
 
 	var/mag_insert_sound = 'sound/weapons/guns/interaction/energy_magin.ogg'
-	var/mag_remove_sound = 'sound/weapons/guns/interaction/pistol_magout.ogg'
+	var/mag_remove_sound = 'sound/weapons/guns/interaction/energy_magout.ogg'
 
 /obj/item/gun/energy/switch_firemodes()
 	. = ..()

@@ -21,7 +21,13 @@
 		<h4>Additional</h4>
 		<div class=itemGroup>
 			<div class="item">{{:helper.link('Unbolt saferoom doors', null, {'action' : 'unbolt_doors'})}}</div>
-			<div class="item">{{:helper.link('Bolt saferoom doors', null, {'action' : 'bolt_doors'})}}</div>		
+			<div class="item">{{:helper.link('Bolt saferoom doors', null, {'action' : 'bolt_doors'})}}</div>
+			<!-- INF -->
+			<div class="item">{{:helper.link('Сменить режим освещения обьекта', null, {'action' : 'change_lights_auto'})}}</div>
+			{{if data.lockdown_support}}
+				<div class="item">{{:helper.link('Изменить режим карантина на обьекте', null, {'action' : 'change_lockdown'})}}</div>
+			{{/if}}
+			<!-- INF -->
 			{{for data.evac_options}}
 				<div class="item">
 					{{:helper.link(value.option_text, null, {'action' : 'evac', 'target' : value.option_target}, ((value.needs_syscontrol && !data.net_syscont) || (!value.silicon_allowed && data.isAI)) ? 'disabled' : null, 'redButton')}}
@@ -77,7 +83,7 @@
                 {{:helper.link(data.message_line2 ? data.message_line2 : '(none)', null, {'action' : 'setstatus', 'target' : 'line2'})}}
             </div>
         </div>
-        
+
         <div class="item">
             <div class="itemLabel">
                 <b>Alert:</b>

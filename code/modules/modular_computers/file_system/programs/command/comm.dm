@@ -100,6 +100,7 @@
 			option["silicon_allowed"] = EO.silicon_allowed
 			processed_evac_options[++processed_evac_options.len] = option
 	data["evac_options"] = processed_evac_options
+	data["lockdown_support"] = GLOB.using_map.lockdown_support //Нужно для отображения кнопки локдауна
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
@@ -257,6 +258,23 @@
 			. = TOPIC_HANDLED
 			if(is_authenticated(user) && ntn_comm)
 				post_status("toggle_alert_border")
+		// Расширить до полноценного списка индивидуальных проков карты. Как реализовано например с эвакуацией
+		if("change_lights_auto")
+			if(!ntn_cont)
+				to_chat(usr, SPAN_WARNING("Консоль выдает предупреждающий звук. Кажется неполадки с сетью..."))
+				return
+		//	GLOB.using_map.reset_lights_automatics()
+		if("change_lockdown")
+			if(!ntn_cont)
+				to_chat(usr, SPAN_WARNING("Консоль выдает предупреждающий звук. Кажется неполадки с сетью..."))
+				return
+			GLOB.using_map.lockdown()
+			if(GLOB.using_map.lockdown)
+				ntnet_global.add_log("***[program.computer.get_network_tag()] активировал карантин на обьекте.***")
+				priority_announcement.Announce("Сохраняйте спокойствие и оставайтесь на местах. Врачи, инженеры, охрана - используйте карты доступа для временного открытия створок. На обьекте введен карантин.", "Введен карантин")
+			else
+				ntnet_global.add_log("***[program.computer.get_network_tag()] деактивировал карантин на обьекте.***")
+				priority_announcement.Announce("Карантин снят, возвращайтесь к обычному режиму передвижения. Проконсультируйтесь с главами, по ситуации на судне. Обратите внимание на текущий код угрозы.", "Карантин снят")
 
 #undef STATE_DEFAULT
 #undef STATE_MESSAGELIST
