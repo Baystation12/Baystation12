@@ -1,8 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - rscadd: Standardized health and damage handling has been added to doors, airlocks,
-      wall cameras, and artifacts.
-  - tweak: Machinery damage resistances are now set to the electrical preset (Immune
-      to radiation, bio, pain, toxin, genetic, oxy, brain, and psionic damage; Takes
-      1/2 stun damage).
