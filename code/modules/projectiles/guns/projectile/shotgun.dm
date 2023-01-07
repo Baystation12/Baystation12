@@ -1,10 +1,11 @@
 /obj/item/gun/projectile/shotgun/pump
 	name = "shotgun"
-	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys or ship corridors."
+	desc = "A mass-produced shotgun by Mars Security Industries. The rugged ZX-870 'Bulldog' is durable and common throughout most frontier worlds. Useful for sweeping alleys or ship corridors."
 	icon = 'icons/obj/guns/shotguns.dmi'
 	icon_state = "shotgun"
 	item_state = "shotgun"
-	max_shells = 4
+	max_shells = 6
+	// A non-sawned off shotgun should probably have some sort of advantage to its mutilated counterpart. Behold: an extension tube!
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
@@ -125,7 +126,7 @@
 
 /obj/item/gun/projectile/shotgun/pump/sawn
 	name = "riot shotgun"
-	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys or ship corridors. This one's had it's stock cut off."
+	desc = "A mass-produced shotgun by Mars Security Industries. The rugged ZX-870 'Bulldog' is durable and common throughout most frontier worlds. This one's had it's stock cut off, shortening the magazine tube.."
 	icon = 'icons/obj/guns/shotguns.dmi'
 	icon_state = "rshotgun"
 	item_state = "rshotgun"
