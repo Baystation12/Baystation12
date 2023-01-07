@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Blast doors no longer open when clicked on.
