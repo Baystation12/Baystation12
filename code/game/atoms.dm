@@ -484,10 +484,11 @@
  * - `exposed_volume` - The volume of the air for the fire affecting the atom. Usually, this is `air.volume`.
  */
 /atom/proc/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if (get_max_health())
+	var/melting_point = get_material_melting_point()
+	if (get_max_health() && exposed_temperature > melting_point)
 		// No hitsound here to avoid noise spam.
-		// 1 point of damage for every 100 kelvin above 300 (~27 C).
-		damage_health(round(max(exposed_temperature - 300, 0) / 100), DAMAGE_FIRE)
+		// 1 point of damage for every 100 kelvin above 300 (~27 C), minimum of 1.
+		damage_health(max(round((exposed_temperature - melting_point) / 100), 1), DAMAGE_FIRE)
 
 /**
  * Handler for melting from heat or other sources. Called by terrain generation and some instances of `fire_act()` or
