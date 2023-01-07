@@ -169,8 +169,6 @@
 			to_chat(user, SPAN_WARNING("You must remain still while working on \the [src]."))
 		return
 
-	return ..()
-
 
 
 // Proc: open()
