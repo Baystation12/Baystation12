@@ -58,7 +58,8 @@
 	var/bstate = 0
 	var/plaque_contents = "Unnamed alien creature"
 
-/obj/skeleton/New()
+/obj/skeleton/Initialize()
+	. = ..()
 	src.breq = rand(6)+3
 	src.desc = "An incomplete skeleton, looks like it could use [src.breq-src.bnum] more bones."
 
@@ -103,5 +104,6 @@
 	desc = " A fossilised shred of alien plant matter."
 	animal = 0
 
-/obj/item/fossil/plant/New()
+/obj/item/fossil/plant/Initialize()
+	. = ..()
 	icon_state = "plant[rand(1,4)]"

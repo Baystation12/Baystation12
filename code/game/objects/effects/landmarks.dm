@@ -92,7 +92,7 @@
 
 //Costume spawner landmarks
 /obj/effect/landmark/costume/New() //costume spawner, selects a random subclass and disappears
-
+	SHOULD_CALL_PARENT(FALSE) // TODO: Replace this entire set of New() overrides with Initialize() and qdel hints
 	var/list/options = typesof(/obj/effect/landmark/costume)
 	var/PICK= options[rand(1,options.len)]
 	new PICK(src.loc)

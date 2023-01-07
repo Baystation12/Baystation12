@@ -122,6 +122,7 @@ var/global/list/big_deepmaint_room_templates = list()
 	name = "Deep Maint Gen"
 
 /obj/procedural/dungenerator/deepmaint/New()
+	..()
 	spawn()
 		while(1)
 			if(Master.current_runlevel)

@@ -147,6 +147,7 @@
 	var/override_depth
 
 /atom/movable/openspace/mimic/New()
+	SHOULD_CALL_PARENT(FALSE) // Probably a reason for this but I don't know it
 	atom_flags |= ATOM_FLAG_INITIALIZED
 	SSzcopy.openspace_overlays += 1
 
