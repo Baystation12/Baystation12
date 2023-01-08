@@ -35,7 +35,7 @@ var/global/list/event_last_fired = list()
 	possibleEvents[/datum/event/mob_spawning/carp] = 20 + 10 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/brand_intelligence] = 10 + 10 * active_with_role["Janitor"]
 
-	possibleEvents[/datum/event/rogue_drone] = 5 + 25 * active_with_role["Engineer"] + 25 * active_with_role["Security"]
+	possibleEvents[/datum/event/mob_spawning/rogue_drones] = 5 + 25 * active_with_role["Engineer"] + 25 * active_with_role["Security"]
 	possibleEvents[/datum/event/infestation] = 100 + 100 * active_with_role["Janitor"]
 
 	possibleEvents[/datum/event/communications_blackout] = 50 + 25 * active_with_role["AI"] + active_with_role["Scientist"] * 25
