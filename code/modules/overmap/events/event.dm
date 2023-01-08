@@ -233,7 +233,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 
 /obj/effect/overmap/event/carp
 	name = "carp shoal"
-	events = list(/datum/event/carp_migration/overmap)
+	events = list(/datum/event/mob_spawning/carp)
 	opacity = 0
 	difficulty = EVENT_LEVEL_MODERATE
 	event_icon_states = list("carp1", "carp2")
