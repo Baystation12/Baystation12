@@ -32,7 +32,7 @@
 //Telescopic baton
 /obj/item/melee/telebaton
 	name = "telescopic baton"
-	desc = "A compact yet rebalanced personal defense weapon. Can be concealed when folded."
+	desc = "A compact yet balanced personal defense weapon. Can be concealed when collapsed."
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "telebaton_0"
 	item_state = "telebaton_0"
@@ -51,7 +51,7 @@
 		"You hear an ominous click.")
 		w_class = ITEM_SIZE_NORMAL
 		force = 15//quite robust
-		attack_verb = list("smacked", "struck", "slapped")
+		attack_verb = list("cracked", "struck", "snapped", "thrashed", "whapped")
 	else
 		user.visible_message(SPAN_NOTICE("\The [user] collapses their telescopic baton."),\
 		SPAN_NOTICE("You collapse the baton."),\
