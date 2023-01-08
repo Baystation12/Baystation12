@@ -172,6 +172,9 @@
 	return ..()
 
 
+/obj/machinery/door/blast/allowed(mob/M)
+	return FALSE // Blast doors can only be opened remotely, or with a crowbar when broken/unpowered.
+
 
 // Proc: open()
 // Parameters: None

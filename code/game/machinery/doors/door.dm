@@ -171,10 +171,13 @@
 			do_animate("deny")
 	return
 
-// This is legacy code that should be revisited, probably by moving the bulk of the logic into here.
-/obj/machinery/door/interface_interact(user)
-	if(CanInteract(user, DefaultTopicState()))
-		return attackby(user = user)
+/obj/machinery/door/attack_hand(mob/user)
+	..()
+	if (allowed(user) && operable())
+		if (density)
+			open()
+		else
+			close()
 
 /obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
 	src.add_fingerprint(user, 0, I)
