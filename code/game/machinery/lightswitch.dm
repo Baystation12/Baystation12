@@ -116,7 +116,7 @@
 	// Furniture, simple_animals - doesn't care
 	if(!(ishuman(detected) || istype(detected, /mob/living/exosuit)) && force != TRUE)
 		return
-	if(!smart in list(LS_MODE_MANUAL, LS_MODE_ONLY_OFF, LS_MODE_FULL_AUTO))
+	if(!(smart in list(LS_MODE_MANUAL, LS_MODE_ONLY_OFF, LS_MODE_FULL_AUTO)))
 		smart = LS_MODE_FULL_AUTO
 	// Regular manual lightswitch
 	if(smart == LS_MODE_MANUAL)
