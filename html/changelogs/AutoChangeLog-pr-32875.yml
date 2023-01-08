@@ -1,0 +1,6 @@
+author: Taza, gy1ta23
+delete-after: true
+changes:
+  - bugfix: syringes no longer turn fish fillet into sashimi.
+  - bugfix: you can now extract carpotoxin from carp meat with syringes
+  - tweak: pike meat now has a bit more carpotoxin in it than carp meat
