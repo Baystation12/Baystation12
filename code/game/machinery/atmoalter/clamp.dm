@@ -7,18 +7,18 @@
 	icon = 'icons/atmos/clamp.dmi'
 	icon_state = "pclamp0"
 	anchored = TRUE
-	var/obj/machinery/atmospherics/pipe/simple/target = null
+	var/obj/machinery/atmospherics/pipe/target = null
 	var/open = 1
 
-	var/datum/pipe_network/network_node1
-	var/datum/pipe_network/network_node2
+	var/list/datum/pipe_network/network_nodes
 
-/obj/machinery/clamp/New(loc, obj/machinery/atmospherics/pipe/simple/to_attach = null)
+/obj/machinery/clamp/Initialize(mapload, obj/machinery/atmospherics/pipe/to_attach = null)
+
 	..()
 	if(istype(to_attach))
 		target = to_attach
 	else
-		target = locate(/obj/machinery/atmospherics/pipe/simple) in loc
+		target = locate(/obj/machinery/atmospherics/pipe) in loc
 	if(target)
 		target.clamp = src
 		update_networks()
@@ -29,14 +29,9 @@
 	if(!target)
 		return
 	else
-		var/obj/machinery/atmospherics/pipe/node1 = target.node1
-		var/obj/machinery/atmospherics/pipe/node2 = target.node2
-		if(istype(node1) && node1.parent)
-			var/datum/pipeline/P1 = node1.parent
-			network_node1 = P1.network
-		if(istype(node2) && node2.parent)
-			var/datum/pipeline/P2 = node2.parent
-			network_node2 = P2.network
+		for(var/obj/machinery/atmospherics/pipe/node in target.pipeline_expansion())
+			var/datum/pipeline/PL = node.parent
+			LAZYADD(network_nodes, PL.network)
 
 /obj/machinery/clamp/physical_attack_hand(mob/user)
 	if(!target)
@@ -49,10 +44,9 @@
 	return TRUE
 
 /obj/machinery/clamp/Destroy()
-	if(!open)
-		spawn(-1) open()
-	if (target && target.clamp == src)
-		target.clamp = null
+	if(!open && !QDELING(target))
+		open()
+	target = null
 	. = ..()
 
 /obj/machinery/clamp/proc/open()
@@ -62,20 +56,15 @@
 	target.build_network()
 
 
-	if(network_node1&&network_node2)
-		network_node1.merge(network_node2)
-		network_node2 = network_node1
-
-	if(network_node1)
-		network_node1.update = 1
-	else if(network_node2)
-		network_node2.update = 1
+	for(var/datum/pipe_network/netnode in network_nodes)
+		netnode.update = TRUE
 
 	update_networks()
 
-	open = 1
+	open = TRUE
 	icon_state = "pclamp0"
-	target.in_stasis = 0
+	target.in_stasis = FALSE
+	target.try_leak()
 	return 1
 
 /obj/machinery/clamp/proc/close()
@@ -84,56 +73,43 @@
 
 	qdel(target.parent)
 
-	if(network_node1)
-		qdel(network_node1)
-	if(network_node2)
-		qdel(network_node2)
+	for(var/datum/pipe_network/netnode in network_nodes)
+		qdel(netnode)
+	network_nodes = null
 
-	var/obj/machinery/atmospherics/pipe/node1 = null
-	var/obj/machinery/atmospherics/pipe/node2 = null
+	for(var/obj/machinery/atmospherics/pipe/node in target.pipeline_expansion())
+		node.build_network()
+		LAZYADD(network_nodes, node)
+		var/datum/pipeline/P = node.parent
+		P.build_pipeline(node)
+		qdel(P)
 
-	if(target.node1)
-		target.node1.build_network()
-		node1 = target.node1
-	if(target.node2)
-		target.node2.build_network()
-		node2 = target.node2
-	if(istype(node1) && node1.parent)
-		var/datum/pipeline/P1 = node1.parent
-		P1.build_pipeline(node1)
-		qdel(P1)
-	if(istype(node2) && node2.parent)
-		var/datum/pipeline/P2 = node2.parent
-		P2.build_pipeline(node2)
-		qdel(P2)
-//  P1.build_network()
-//  P2.build_network()
-
-
-
-
-	open = 0
+	open = FALSE
 	icon_state = "pclamp1"
-	target.in_stasis = 1
+	target.in_stasis = TRUE
+	target.try_leak()
+	return TRUE
 
-	return 1
+/obj/machinery/clamp/proc/removal(var/atom/destination)
+	var/obj/item/clamp/C = new/obj/item/clamp(destination)
+	if(ishuman(destination))
+		var/mob/living/carbon/human/H = destination
+		H.put_in_hands(C)
+	qdel(src)
 
 /obj/machinery/clamp/MouseDrop(obj/over_object as obj)
 	if(!usr)
 		return
 
 	if(open && over_object == usr && Adjacent(usr))
-		to_chat(usr, SPAN_NOTICE("You begin to remove \the [src]..."))
-		if (do_after(usr, 3 SECONDS, over_object, DO_REPAIR_CONSTRUCT))
-			to_chat(usr, SPAN_NOTICE("You have removed \the [src]."))
-			var/obj/item/clamp/C = new/obj/item/clamp(src.loc)
-			C.forceMove(usr.loc)
-			if(ishuman(usr))
-				usr.put_in_hands(C)
-			qdel(src)
+		to_chat(usr, "<span class='notice'>You begin to remove \the [src]...</span>")
+		if (do_after(usr, 30, src))
+			to_chat(usr, "<span class='notice'>You have removed \the [src].</span>")
+			removal()
 			return
 	else
-		to_chat(usr, SPAN_WARNING("You can't remove \the [src] while it's active!"))
+		to_chat(usr, "<span class='warning'>You can't remove \the [src] while it's active!</span>")
+
 
 /obj/machinery/clamp/proc/detach()
 	if (target && target.clamp == src)
@@ -152,7 +128,7 @@
 	if(!proximity)
 		return
 
-	if (istype(A, /obj/machinery/atmospherics/pipe/simple))
+	if (istype(A, /obj/machinery/atmospherics/pipe))
 		var/obj/machinery/atmospherics/pipe/simple/P = A
 		if (P.clamp)
 			to_chat(user, SPAN_WARNING("There is already \a [P.clamp] attached to \the [P]."))
