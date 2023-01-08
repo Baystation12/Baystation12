@@ -79,20 +79,6 @@ GLOBAL_LIST_INIT(carp_count,list())// a list of Z levels (string), associated wi
 	if(M.health <= 0 && prob(60))
 		M.gib()
 
-/proc/get_random_edge_turf(dir, clearance = TRANSITIONEDGE + 1, Z)
-	if(!dir)
-		return
-
-	switch(dir)
-		if(NORTH)
-			return locate(rand(clearance, world.maxx - clearance), world.maxy - clearance, Z)
-		if(SOUTH)
-			return locate(rand(clearance, world.maxx - clearance), clearance, Z)
-		if(EAST)
-			return locate(world.maxx - clearance, rand(clearance, world.maxy - clearance), Z)
-		if(WEST)
-			return locate(clearance, rand(clearance, world.maxy - clearance), Z)
-
 /datum/event/carp_migration/proc/reduce_carp_count(mob/M)
 	for(var/Z in affecting_z)
 		var/list/L = GLOB.carp_count["[Z]"]
