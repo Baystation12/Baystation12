@@ -263,7 +263,7 @@
 			if(!ntn_cont)
 				to_chat(usr, SPAN_WARNING("Консоль выдает предупреждающий звук. Кажется неполадки с сетью..."))
 				return
-		//	GLOB.using_map.reset_lights_automatics()
+			GLOB.using_map.reset_lights_automatics()
 		if("change_lockdown")
 			if(!ntn_cont)
 				to_chat(usr, SPAN_WARNING("Консоль выдает предупреждающий звук. Кажется неполадки с сетью..."))
