@@ -7,7 +7,7 @@
 	name="beam"
 	icon='icons/effects/beam.dmi'
 	icon_state= "b_beam"
-	var/tmp/atom/BeamSource
+	var/atom/BeamSource
 
 /obj/effect/overlay/beam/New()
 	..()

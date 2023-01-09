@@ -3,7 +3,7 @@ For the main html chat area
 *********************************/
 
 /// Cache of icons for the browser output
-GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
+GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 
 
 /// Should match the value set in the browser js

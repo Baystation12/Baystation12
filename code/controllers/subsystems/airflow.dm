@@ -106,11 +106,11 @@ SUBSYSTEM_DEF(airflow)
 #undef CLEAR_OBJECT
 
 
-/atom/movable/var/tmp/airflow_xo
-/atom/movable/var/tmp/airflow_yo
-/atom/movable/var/tmp/airflow_od
-/atom/movable/var/tmp/airflow_process_delay
-/atom/movable/var/tmp/airflow_skip_speedcheck
+/atom/movable/var/airflow_xo
+/atom/movable/var/airflow_yo
+/atom/movable/var/airflow_od
+/atom/movable/var/airflow_process_delay
+/atom/movable/var/airflow_skip_speedcheck
 
 
 /atom/movable/proc/prepare_airflow(strength)

@@ -93,11 +93,11 @@
 	var/keep_aim = 1 	//1 for keep shooting until aim is lowered
 						//0 for one bullet after tarrget moves and aim is lowered
 	var/multi_aim = 0 //Used to determine if you can target multiple people.
-	var/tmp/list/mob/living/aim_targets //List of who yer targeting.
-	var/tmp/mob/living/last_moved_mob //Used to fire faster at more than one person.
-	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
-	var/tmp/lock_time = -100
-	var/tmp/last_safety_check = -INFINITY
+	var/list/mob/living/aim_targets //List of who yer targeting.
+	var/mob/living/last_moved_mob //Used to fire faster at more than one person.
+	var/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
+	var/lock_time = -100
+	var/last_safety_check = -INFINITY
 	var/safety_state = 1
 	var/has_safety = TRUE
 	var/safety_icon 	   //overlay to apply to gun based on safety state, if any

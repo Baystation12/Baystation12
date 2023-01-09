@@ -26,9 +26,9 @@
 	var/autoheal_cutoff = 15   // the maximum amount of damage that this wound can have and still autoheal
 
 	// helper lists
-	var/tmp/list/embedded_objects
-	var/tmp/list/desc_list = list()
-	var/tmp/list/damage_list = list()
+	var/list/embedded_objects
+	var/list/desc_list = list()
+	var/list/damage_list = list()
 
 /datum/wound/New(damage, obj/item/organ/external/organ = null)
 

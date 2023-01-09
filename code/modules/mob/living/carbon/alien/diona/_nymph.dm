@@ -39,9 +39,9 @@
 	var/obj/item/holding_item
 	var/mob/living/carbon/alien/diona/next_nymph
 	var/mob/living/carbon/alien/diona/previous_nymph
-	var/tmp/image/flower
-	var/tmp/image/eyes
-	var/tmp/last_glow
+	var/image/flower
+	var/image/eyes
+	var/last_glow
 
 /mob/living/carbon/alien/diona/get_jump_distance()
 	return 3
