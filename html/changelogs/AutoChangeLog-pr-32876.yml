@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Uplink radios now look like shortwave radios.
