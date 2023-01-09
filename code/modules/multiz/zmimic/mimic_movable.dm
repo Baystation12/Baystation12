@@ -1,6 +1,6 @@
 /atom/movable
 	/// The mimic (if any) that's *directly* copying us.
-	var/tmp/atom/movable/openspace/mimic/bound_overlay
+	var/atom/movable/openspace/mimic/bound_overlay
 	/// If TRUE, this atom is ignored by Z-Mimic.
 	var/no_z_overlay
 

@@ -34,7 +34,7 @@
 	var/height = 0 // Determines if fluids can overflow onto next turf
 	var/footstep_type
 
-	var/tmp/changing_turf
+	var/changing_turf
 
 	/// List of 'dangerous' objs that the turf holds that can cause something bad to happen when stepped on, used for AI mobs.
 	var/list/dangerous_objects
