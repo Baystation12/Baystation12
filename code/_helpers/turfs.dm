@@ -27,6 +27,20 @@
 		available_turfs = start_turfs
 	return pick(available_turfs)
 
+/proc/get_random_edge_turf(dir, clearance = TRANSITIONEDGE + 1, Z)
+	if(!dir)
+		return
+
+	switch(dir)
+		if(NORTH)
+			return locate(rand(clearance, world.maxx - clearance), world.maxy - clearance, Z)
+		if(SOUTH)
+			return locate(rand(clearance, world.maxx - clearance), clearance, Z)
+		if(EAST)
+			return locate(world.maxx - clearance, rand(clearance, world.maxy - clearance), Z)
+		if(WEST)
+			return locate(clearance, rand(clearance, world.maxy - clearance), Z)
+
 /proc/get_random_turf_in_range(atom/origin, outer_range, inner_range)
 	origin = get_turf(origin)
 	if(!origin)
