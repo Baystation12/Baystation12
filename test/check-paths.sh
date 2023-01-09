@@ -51,6 +51,7 @@ exactly 2 "density = 0/1" 'density\s*=\s*\d' -P
 exactly 0 "emagged = 0/1" 'emagged\s*=\s*\d' -P
 exactly 0 "simulated = 0/1" 'simulated\s*=\s*\d' -P
 exactly 2 "var/ in proc arguments" '(^/[^/].+/.+?\(.*?)var/' -P
+exactly 0 "tmp/ vars" 'var.*/tmp/' -P
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 
 num=`find ./html/changelogs -not -name "*.yml" | wc -l`
