@@ -82,11 +82,3 @@ GLOBAL_DATUM_INIT(debug_real_globals, /datum/debug_real_globals, new)
 		"alien_whitelist",
 		"adminfaxes"
 	)
-
-
-/client/proc/debug_global_variables()
-	set category = "Debug"
-	set name = "View Real Globals"
-	if (!GLOB.debug_real_globals)
-		GLOB.debug_real_globals = new
-	debug_variables(GLOB.debug_real_globals)
