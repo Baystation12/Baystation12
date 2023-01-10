@@ -179,6 +179,22 @@
 		else
 			close()
 
+/obj/machinery/door/attack_generic(mob/user, damage, attack_verb, wallbreaker, damtype, armorcheck, dam_flags)
+	if (can_open(TRUE))
+		user.visible_message(
+			SPAN_WARNING("\The [user] starts forcing \the [src] open!"),
+			SPAN_NOTICE("You start forcing \the [src] open!")
+		)
+		if (!do_after(user, 10 SECONDS, src, DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) || !can_open(TRUE))
+			return
+		open(TRUE)
+		user.visible_message(
+			SPAN_WARNING("\The [user] forces \the [src] open!"),
+			SPAN_NOTICE("You force \the [src] open!")
+		)
+		return
+	..()
+
 /obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
 	src.add_fingerprint(user, 0, I)
 
