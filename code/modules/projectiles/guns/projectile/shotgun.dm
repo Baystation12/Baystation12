@@ -5,7 +5,6 @@
 	icon_state = "shotgun"
 	item_state = "shotgun"
 	max_shells = 4
-	// A non-sawned off shotgun should probably have some sort of advantage to its mutilated counterpart. But whatever.
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
@@ -237,7 +236,6 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 1)
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	one_hand_penalty = 8
-	//Why was the penalty for a double-barrel TWO? That's silly. The sawn off had even less!
 	wielded_item_state = "gun_wielded"
 
 	burst_delay = 0
