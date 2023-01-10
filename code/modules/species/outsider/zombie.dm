@@ -115,15 +115,15 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	H.stat = CONSCIOUS
 
 	if (H.wear_id)
-		qdel(H.wear_id)
+		H.drop_from_inventory(H.wear_id)
 	if (H.gloves)
-		qdel(H.gloves)
+		H.drop_from_inventory(H.gloves)
 	if (H.head)
-		qdel(H.head) //Remove helmet so headshots aren't impossible
+		H.drop_from_inventory(H.head) //Remove helmet so headshots aren't impossible
 	if (H.glasses)
-		qdel(H.glasses)
+		H.drop_from_inventory(H.glasses)
 	if (H.wear_mask)
-		qdel(H.wear_mask)
+		H.drop_from_inventory(H.wear_mask)
 	..()
 
 /datum/species/zombie/handle_environment_special(mob/living/carbon/human/H)
