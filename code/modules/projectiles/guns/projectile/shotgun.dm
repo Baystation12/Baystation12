@@ -1,10 +1,11 @@
 /obj/item/gun/projectile/shotgun/pump
 	name = "shotgun"
-	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys or ship corridors."
+	desc = "A mass-produced shotgun by Mars Security Industries. The rugged ZX-870 'Bulldog' is common throughout most frontier worlds. Useful for sweeping alleys or ship corridors."
 	icon = 'icons/obj/guns/shotguns.dmi'
 	icon_state = "shotgun"
 	item_state = "shotgun"
 	max_shells = 4
+	// A non-sawned off shotgun should probably have some sort of advantage to its mutilated counterpart. But whatever.
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
@@ -125,7 +126,7 @@
 
 /obj/item/gun/projectile/shotgun/pump/sawn
 	name = "riot shotgun"
-	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys or ship corridors. This one's had it's stock cut off."
+	desc = "A mass-produced shotgun by Mars Security Industries. The rugged ZX-870 'Bulldog' is common throughout most frontier worlds. This one has had it's stock cut off..."
 	icon = 'icons/obj/guns/shotguns.dmi'
 	icon_state = "rshotgun"
 	item_state = "rshotgun"
@@ -218,7 +219,7 @@
 
 /obj/item/gun/projectile/shotgun/doublebarrel
 	name = "double-barreled shotgun"
-	desc = "A true classic."
+	desc = "A classic double-barreled shotgun. In production for centuries, it has proliferated across human space, earning a sizable reputation for being simple and effective. Produced by Novaya Zemlya Arms."
 	icon = 'icons/obj/guns/shotguns.dmi'
 	icon_state = "dshotgun"
 	item_state = "dshotgun"
@@ -235,7 +236,8 @@
 	caliber = CALIBER_SHOTGUN
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 1)
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
-	one_hand_penalty = 2
+	one_hand_penalty = 8
+	//Why was the penalty for a double-barrel TWO? That's silly. The sawn off had even less!
 	wielded_item_state = "gun_wielded"
 
 	burst_delay = 0
@@ -279,7 +281,7 @@
 
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn
 	name = "sawn-off shotgun"
-	desc = "Omar's coming!"
+	desc = "A ubiquitous weapon, commonplace in almost every settlement and slum. It is one of many basic firearms for those who want to be able to defend themselves with as little fuss as possible. Produced by Novaya Zemlya Arms."
 	icon_state = "sawnshotgun"
 	item_state = "sawnshotgun"
 	wielded_item_state = "sawnshotgun-wielded"
