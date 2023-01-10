@@ -156,7 +156,7 @@
 	..()
 	update_icon()
 	if (health_mod < 0)
-		var/initial_damage_percentage = round(((get_current_health() - health_mod) / get_max_health()) * 100)
+		var/initial_damage_percentage = 100 - round(((get_current_health() - health_mod) / get_max_health()) * 100)
 		var/damage_percentage = get_damage_percentage()
 		if (damage_percentage >= 75 && initial_damage_percentage < 75)
 			visible_message(SPAN_DANGER("\The [src] looks like it's about to shatter!"))

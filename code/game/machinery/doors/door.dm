@@ -271,7 +271,7 @@
 	. = ..()
 	queue_icon_update()
 	if (health_mod < 0 && !health_dead)
-		var/initial_damage_percentage = round(((get_current_health() - health_mod) / get_max_health()) * 100)
+		var/initial_damage_percentage = 100 - round(((get_current_health() - health_mod) / get_max_health()) * 100)
 		var/damage_percentage = get_damage_percentage()
 		if (damage_percentage >= 75 && initial_damage_percentage < 75)
 			visible_message("\The [src] looks like it's about to break!" )
