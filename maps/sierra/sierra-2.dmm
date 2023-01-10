@@ -10572,7 +10572,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/fore)
 "atT" = (
-/obj/machinery/inertial_damper,
 /turf/simulated/floor/greengrid,
 /area/engineering/gravitaional_generator)
 "atU" = (

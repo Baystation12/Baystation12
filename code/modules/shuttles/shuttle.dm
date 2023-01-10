@@ -211,7 +211,17 @@
 				if(istype(TA, ceiling_type))
 					TA.ChangeTurf(get_base_turf_by_area(TA), 1, 1)
 		if(knockdown)
-			A.throw_unbuckled_occupants(4, 1)
+			for(var/mob/M in A)
+				spawn(0)
+					if(istype(M, /mob/living/carbon))
+						if(M.buckled)
+							to_chat(M, SPAN_WARNING("Sudden acceleration presses you into your chair!"))
+							shake_camera(M, 3, 1)
+						else
+							to_chat(M, SPAN_WARNING("The floor lurches beneath you!"))
+							shake_camera(M, 10, 1)
+							M.visible_message(SPAN_WARNING("[M.name] is tossed around by the sudden acceleration!"))
+							M.throw_at_random(FALSE, 4, 1)
 
 		for(var/obj/structure/cable/C in A)
 			powernets |= C.powernet

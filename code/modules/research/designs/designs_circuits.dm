@@ -867,10 +867,3 @@
 	req_tech = list(TECH_ENGINEERING = 1)
 	build_path = /obj/item/stock_parts/circuitboard/shipmap
 	sort_string = "SAAAT"
-
-/datum/design/circuit/inertial_damper
-	name = "ship holomap"
-	id = "shipmap"
-	req_tech = list(TECH_ENGINEERING = 2)
-	build_path = /obj/item/stock_parts/circuitboard/inertial_damper
-	sort_string = "RAAAS"

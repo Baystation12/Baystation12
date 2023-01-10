@@ -7,7 +7,6 @@
 	base = TRUE
 	color = COLOR_PURPLE
 	icon = 'icons/obj/overmap_inf.dmi'
-	needs_dampers = TRUE
 
 	initial_restricted_waypoints = list(
 		"Charon" = list("nav_hangar_calypso"),

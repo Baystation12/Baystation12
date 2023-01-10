@@ -165,14 +165,6 @@
 	containername = "disposal dispenser crate"
 	access = access_atmospherics
 
-/singleton/hierarchy/supply_pack/engineering/inertial_damper
-	name = "Equipment - inertial damper construction kit"
-	contains = list(/obj/item/stock_parts/circuitboard/inertial_damper, /obj/item/stock_parts/capacitor, /obj/item/stock_parts/micro_laser, /obj/item/stock_parts/console_screen)
-	cost = 30
-	containertype = /obj/structure/closet/crate/secure
-	containername = "inertial damper construction kit crate"
-	access = access_engine
-
 /singleton/hierarchy/supply_pack/engineering/shield_generator
 	name = "Equipment - Shield generator construction kit"
 	contains = list(/obj/item/stock_parts/circuitboard/shield_generator, /obj/item/stock_parts/capacitor, /obj/item/stock_parts/micro_laser, /obj/item/stock_parts/smes_coil, /obj/item/stock_parts/console_screen)
