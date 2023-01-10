@@ -35,7 +35,7 @@
 		else
 			user.visible_message(
 				SPAN_DANGER("\The [user] [attack_verb] \the [src]!"),
-				SPAN_DANGER("You [attack_verb] \the [src]!")
+				SPAN_DANGER("You attack \the [src]!")
 			)
 
 
