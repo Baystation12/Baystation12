@@ -37,5 +37,5 @@ jobs:
           git config --global user.email "${{ secrets.BOT_EMAIL }}"
           git config --global user.name "${{ secrets.BOT_NAME }}"
           git diff --quiet --exit-code && echo "No changes found, abort." && exit 0
-          git commit -m "Automatic changelog generation" -a
+          git commit -m "Automatic changelog generation [ci skip]" -a
           git push

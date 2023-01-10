@@ -150,7 +150,7 @@
 
 	var/dir
 
-	if(!O.may_edit_var(usr, objectvar))
+	if(O.may_not_edit_var(usr, objectvar))
 		return
 
 	if(isnull(variable))
@@ -340,7 +340,7 @@
 			to_chat(src, "A variable with this name ([param_var_name]) doesn't exist in this atom ([O])")
 			return
 
-		if(!O.may_edit_var(usr, param_var_name))
+		if(O.may_not_edit_var(usr, param_var_name))
 			return
 
 		variable = param_var_name
@@ -398,7 +398,7 @@
 		if(!variable)	return
 		var_value = O.get_variable_value(variable)
 
-		if(!O.may_edit_var(usr, variable))
+		if(O.may_not_edit_var(usr, variable))
 			return
 
 	if(!autodetect_class)

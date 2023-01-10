@@ -13,11 +13,11 @@
 	active_power_usage = 10000
 
 	var/list/reagent_buffer = list()
-	var/tmp/fluid_consumption_per_tick = 100
-	var/tmp/gas_generated_per_tick = 1
-	var/tmp/max_reagents = 100
-	var/tmp/deuterium_generation_chance = 10
-	var/tmp/deuterium_generation_amount = 1
+	var/fluid_consumption_per_tick = 100
+	var/gas_generated_per_tick = 1
+	var/max_reagents = 100
+	var/deuterium_generation_chance = 10
+	var/deuterium_generation_amount = 1
 
 /obj/machinery/portable_atmospherics/cracker/on_update_icon()
 	icon_state = (use_power == POWER_USE_ACTIVE) ? "cracker_on" : "cracker"

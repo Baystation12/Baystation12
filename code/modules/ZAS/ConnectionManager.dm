@@ -34,7 +34,7 @@ Macros:
 // macro-ized to cut down on proc calls
 #define check(c) (c && c.valid())
 
-/turf/var/tmp/connection_manager/connections
+/turf/var/connection_manager/connections
 
 /connection_manager/var/connection/N
 /connection_manager/var/connection/S

@@ -721,6 +721,7 @@
 				stat(null)
 				config.UpdateStat()
 				GLOB.UpdateStat()
+				GLOB.debug_real_globals.UpdateStat()
 				stat(null)
 				for (var/datum/controller/subsystem/subsystem as anything in Master.subsystems)
 					subsystem.UpdateStat(time)

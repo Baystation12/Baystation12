@@ -19,9 +19,9 @@ var/global/total_lighting_sources = 0
 	var/lum_b
 
 	// The lumcount values used to apply the light.
-	var/tmp/applied_lum_r
-	var/tmp/applied_lum_g
-	var/tmp/applied_lum_b
+	var/applied_lum_r
+	var/applied_lum_g
+	var/applied_lum_b
 
 	var/list/datum/lighting_corner/effect_str     // List used to store how much we're affecting corners.
 	var/list/turf/affecting_turfs
