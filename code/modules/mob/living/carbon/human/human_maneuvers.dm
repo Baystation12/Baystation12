@@ -10,6 +10,8 @@
 	// Broken limb checks
 	for (var/_limb in BP_LEGS_FEET)
 		var/obj/item/organ/external/limb = get_organ(_limb)
+		if (!limb)
+			return
 		if (limb.status & ORGAN_BROKEN)
 			. -= limb.splinted ? 0.25 : 0.5
 
