@@ -23,7 +23,7 @@
 				SPAN_WARNING("You bonk \the [src] harmlessly!")
 			)
 			return
-		var/damage_flags = EMPTY_BITFIELD
+		var/damage_flags = dam_flags
 		if (wallbreaker)
 			SET_FLAGS(damage_flags, DAMAGE_FLAG_TURF_BREAKER)
 		playsound(src, damage_hitsound, 75)
