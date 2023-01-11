@@ -254,7 +254,7 @@
 		leak_fuel(amount_per_transfer_from_this/10.0)
 
 /obj/structure/reagent_dispensers/fueltank/proc/leak_fuel(amount)
-	if (reagents.total_volume == 0)
+	if (QDELING(src) || reagents.total_volume == 0)
 		return
 
 	amount = min(amount, reagents.total_volume)
