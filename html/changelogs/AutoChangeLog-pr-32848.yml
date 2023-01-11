@@ -1,0 +1,5 @@
+author: SomeAngryMiner
+delete-after: true
+changes:
+  - rscadd: EMT, First response jackets and medical chest rigs have been resprited.
+  - rscadd: Autocompressors have been resprited as well.
