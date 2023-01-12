@@ -1,6 +1,0 @@
-author: Nerezza
-delete-after: true
-changes:
-  - bugfix: Emergency Adrenaline Autoinjectors now contain 8u of adrenaline as originally
-      intended instead of just 5u. This means it is now possible for patients to reach
-      medbay before the stabilizing effects of an adrenaline shot runs out.

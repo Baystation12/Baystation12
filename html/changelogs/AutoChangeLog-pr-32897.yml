@@ -1,6 +1,0 @@
-author: SealCure
-delete-after: true
-changes:
-  - rscadd: Adds the nymph as a pet option to loadout. Perhaps it is your best friend
-      or perhaps you just woke up with it, who knows?
-  - bugfix: Add inhand sprites to the rat.
