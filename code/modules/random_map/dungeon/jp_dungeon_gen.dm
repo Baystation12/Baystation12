@@ -997,6 +997,7 @@ unlikely that you'll need to modify this
 	minsize = minsize_n
 	required = required_n
 	maxnum = maxnum_n
+	..()
 
 /**
 This object is used to represent a 'region' in the dungeon - a set of contiguous floor turfs,
@@ -1014,7 +1015,7 @@ Make a new jp_DungeonRegion, and set its reference to its generator object
 */
 /obj/procedural/jp_DungeonRegion/New(obj/procedural/jp_DungeonGenerator/g)
 	gen = g
-
+	..()
 
 /**
 	Add a list of turfs to the region, optionally without adding the walls around
@@ -1078,6 +1079,7 @@ Make a new jp_dungeonroom, size 's', centre 'c', generator 'g'
 	size = s
 	centre = c
 	gen = g
+	..()
 
 
 /**

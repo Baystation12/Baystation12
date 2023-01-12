@@ -185,13 +185,11 @@
 	icon_state = "icecream_cone_waffle" //default for admin-spawned cones, href_list["cone"] should overwrite this all the time
 	layer = ABOVE_OBJ_LAYER
 	bitesize = 3
+	volume = 20
+	nutriment_amt = 5
 
 	var/ice_creamed = 0
 	var/cone_type
-
-/obj/item/reagent_containers/food/snacks/icecream/New()
-	create_reagents(20)
-	reagents.add_reagent(/datum/reagent/nutriment, 5)
 
 /obj/item/reagent_containers/food/snacks/icecream/proc/add_ice_cream(flavour_name)
 	name = "[flavour_name] icecream"
