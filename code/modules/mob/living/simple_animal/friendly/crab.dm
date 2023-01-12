@@ -33,7 +33,7 @@
 	ai_holder = /datum/ai_holder/simple_animal/passive/crab
 	say_list_type = /datum/say_list/crab
 
-/mob/living/simple_animal/crab/Life()
+/mob/living/simple_animal/passive/crab/Life()
 	. = ..()
 	if(!.)
 		return FALSE
@@ -47,7 +47,7 @@
 	regenerate_icons()
 
 //COFFEE! SQUEEEEEEEEE!
-/mob/living/simple_animal/crab/Coffee
+/mob/living/simple_animal/passive/crab/Coffee
 	name = "Coffee"
 	real_name = "Coffee"
 	desc = "It's Coffee, the other pet!"

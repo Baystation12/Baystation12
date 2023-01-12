@@ -2079,7 +2079,7 @@
 /turf/unsimulated/beach/sand,
 /area/beach)
 "api" = (
-/mob/living/simple_animal/crab/Coffee,
+/mob/living/simple_animal/passive/crab/Coffee,
 /turf/unsimulated/beach/sand,
 /area/beach)
 "apA" = (
@@ -10875,7 +10875,7 @@
 	},
 /area/centcom/holding)
 "bmb" = (
-/mob/living/simple_animal/crab,
+/mob/living/simple_animal/passive/crab,
 /turf/unsimulated/beach/sand{
 	icon_state = "desert1"
 	},

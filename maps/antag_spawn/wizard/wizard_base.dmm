@@ -630,7 +630,7 @@
 	},
 /area/map_template/wizard_station)
 "bG" = (
-/mob/living/simple_animal/crab{
+/mob/living/simple_animal/passive/crab{
 	name = "Experiment 68a"
 	},
 /turf/unsimulated/floor{
