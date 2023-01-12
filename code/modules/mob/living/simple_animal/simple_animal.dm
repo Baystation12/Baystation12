@@ -369,4 +369,4 @@
 	icon_state = icon_living
 	update_icon()
 	bleed_ticks = 0
-	ai_holder.handle_stance_tactical()
+	ai_holder?.handle_stance_tactical()
