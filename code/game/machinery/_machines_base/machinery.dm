@@ -300,6 +300,8 @@
 
 /// Electrocutes the mob `user` based on probability `prb`, if the machine is in a state capable of doing so. Returns `TRUE` if the user was shocked.
 /obj/machinery/proc/shock(mob/user, prb)
+	if (!user)
+		return FALSE
 	if(inoperable())
 		return FALSE
 	if(!prob(prb))
