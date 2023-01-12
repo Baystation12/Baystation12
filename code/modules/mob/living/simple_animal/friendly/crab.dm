@@ -21,14 +21,10 @@
 	density = FALSE
 
 	meat_type = /obj/item/reagent_containers/food/snacks/shellfish/crab
-	meat_amount =   3
 	skin_material = MATERIAL_SKIN_CHITIN
 	skin_amount =   10
 	bone_material = null
 	bone_amount =   0
-
-	var/obj/item/inventory_head
-	var/obj/item/inventory_mask
 
 	ai_holder = /datum/ai_holder/simple_animal/passive/crab
 	say_list_type = /datum/say_list/crab
