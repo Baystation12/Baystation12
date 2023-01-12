@@ -57,6 +57,10 @@
 	pet = /mob/living/simple_animal/passive/mouse/rat/chill
 	w_class = ITEM_SIZE_TINY
 
+/obj/item/holder/gear/nymph
+	pet = /mob/living/carbon/alien/diona
+	w_class = ITEM_SIZE_NORMAL
+
 /datum/gear/pet
 	display_name = "pet selection"
 	description = "A variety of creatures indentured for comfort and amusement."
@@ -74,4 +78,5 @@
 	options["mouse, grey"] = /obj/item/holder/gear/mouse_gray
 	options["mouse, white"] = /obj/item/holder/gear/mouse_white
 	options["rat"]	= /obj/item/holder/gear/mouse_rat
+	options["diona nymph"] = /obj/item/holder/gear/nymph
 	gear_tweaks += new /datum/gear_tweak/path (options)
