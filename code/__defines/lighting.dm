@@ -84,3 +84,6 @@
 #define AREA_LIGHTING_WARM		"warm"
 #define AREA_LIGHTING_COOL		"cool"
 #define AREA_LIGHTING_DEFAULT	"default" // For light replacers, defaults to whatever the area is set to. For areas, uses the initial lighting value from the light bulb itself.
+
+// Sierra220 Gravity Generator lightning
+#define SET_L_RPC(r, p, c) set_light(p, l_outer_range = r, l_color = c)

@@ -331,3 +331,8 @@
 
 
 #define any2bool(expression) (!(!(expression)))
+
+//Area gravity flags
+#define AREA_GRAVITY_NEVER  -1 // No gravity, never
+#define AREA_GRAVITY_NORMAL 1 // Gravity in area will act like always
+#define AREA_GRAVITY_ALWAYS 2 // No matter what, gravity always would be

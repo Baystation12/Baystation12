@@ -1,0 +1,69 @@
+<h3>Power Status</h3>
+<div class="statusDisplay">
+	<div class="item">
+		<div class="itemLabel">
+			Gravity Field:
+		</div>
+		<div class="itemContent">
+			{{if data.enabled}}
+				<span class='good'>Active</span>
+			{{else}}
+				<span class='bad'>Inactive</span>
+			{{/if}}
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemLabel">
+			Power Status:
+		</div>
+		<div class="itemContent">
+			{{if data.charging_state == 1}}
+				<span class='average'>Charging</span>
+			{{else data.charging_state == 2}}
+				<span class='average'>Discharging</span>
+			{{else}}
+				{{if data.breaker}}
+					<span class='good'>Powered</span>
+				{{else}}
+					<span class='bad'>Unpowered</span>
+				{{/if}}
+			{{/if}}
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemLabel">
+			Charge Status:
+		</div>
+
+			{{:helper.displayBar(data.charger_count, 0, 100, (data.charger_count >= 50) ? 'good' : (data.charger_count >= 25) ? 'average' : 'bad')}}
+			<div class="itemContent" style="width: 60px">
+				<b>{{:helper.round(data.charger_count*10)/10}}%</b>
+			</div>
+
+	</div>
+
+</div>
+
+
+<h3>Options</h3>
+	<div class="item">
+		<div class="itemLabel">
+			Breaker Status:
+		</div>
+			<div class="itemContent">
+				{{:helper.link('On', 'power', {'gentoggle' : 1}, data.breaker ? 'selected' : null)}} {{:helper.link('Off', 'close', {'gentoggle' : 1}, data.breaker ? null : 'selected')}}
+			</div>
+	</div>
+
+{{if data.emergency_shutoff_button}}
+	<div class="item">
+		<div class="itemLabel">
+			Emergency Shutdown:
+		</div>
+			<div class="itemContent">
+				{{:helper.link('ACTIVATE', 'power', {'eshutoff' : 1}, null, 'redButton')}}
+			</div>
+	</div>
+{{/if}}
