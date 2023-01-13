@@ -69,6 +69,7 @@
 #include "code\__defines\qdel.dm"
 #include "code\__defines\research.dm"
 #include "code\__defines\ruin_tags.dm"
+#include "code\__defines\rust_g.dm"
 #include "code\__defines\shields.dm"
 #include "code\__defines\shuttle.dm"
 #include "code\__defines\singletons.dm"
