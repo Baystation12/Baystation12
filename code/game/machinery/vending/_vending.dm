@@ -113,7 +113,7 @@
 		spawn(rand(0, 15))
 			icon_state = "[initial(icon_state)]-off"
 	if (panel_open)
-		overlays += image(icon, "[initial(icon_state)]-panel")
+		add_overlay(image(icon, "[initial(icon_state)]-panel"))
 
 
 /obj/machinery/vending/ex_act(severity)
