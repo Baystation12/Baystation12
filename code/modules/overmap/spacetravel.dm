@@ -8,10 +8,11 @@ var/global/list/cached_space = list()
 	invisibility = 101
 	known = FALSE
 
-/obj/effect/overmap/visitable/sector/temporary/New(nx, ny, nz)
+/obj/effect/overmap/visitable/sector/temporary/Initialize(mapload, nx, ny, nz)
 	map_z += nz
 	testing("Temporary sector at zlevel [nz] was created.")
 	register(nx, ny)
+	. = ..()
 
 /obj/effect/overmap/visitable/sector/temporary/Destroy()
 	unregister()

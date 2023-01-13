@@ -31,6 +31,8 @@
 	var/init_flags = EMPTY_BITFIELD
 
 /atom/New(loc, ...)
+	SHOULD_CALL_PARENT(TRUE) // Ensures atoms don't unintentionally skip initialization by not calling parent in New()
+
 	//atom creation method that preloads variables at creation
 	if(GLOB.use_preloader && (src.type == GLOB._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
 		GLOB._preloader.load(src)
@@ -52,6 +54,8 @@
 
 	if(atom_flags & ATOM_FLAG_CLIMBABLE)
 		verbs += /atom/proc/climb_on
+
+	..()
 
 /**
  * Initialization handler for atoms. It is preferred to use this over `New()`.

@@ -13,7 +13,8 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	var/next_spell_time = 0
 	var/spell/hand/hand_spell
 
-/obj/item/magic_hand/New(spell/hand/S)
+/obj/item/magic_hand/Initialize(mapload, spell/hand/S)
+	. = ..()
 	hand_spell = S
 	name = "[name] ([S.name])"
 	icon_state = S.hand_state

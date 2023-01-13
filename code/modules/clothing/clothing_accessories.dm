@@ -104,6 +104,10 @@
 		src.verbs |= /obj/item/clothing/proc/removetie_verb
 	update_accessory_slowdown()
 	update_clothing_icon()
+	GLOB.destroyed_event.register(A, src, .proc/accessory_deleted)
+
+/obj/item/clothing/proc/accessory_deleted(obj/item/clothing/accessory/A)
+	remove_accessory(null, A)
 
 /obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A)
 	if(!A || !(A in accessories))
@@ -113,6 +117,7 @@
 	accessories -= A
 	update_accessory_slowdown()
 	update_clothing_icon()
+	GLOB.destroyed_event.unregister(A, src, .proc/accessory_deleted)
 
 
 /obj/item/clothing/proc/attempt_attach_accessory(obj/item/I, mob/user)

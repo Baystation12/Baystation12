@@ -26,7 +26,8 @@ var/global/intercom_range_display_status = 0
 	icon = 'icons/480x480.dmi'
 	icon_state = "25percent"
 
-/obj/effect/debugging/camera_range/New()
+/obj/effect/debugging/camera_range/Initialize()
+	. = ..()
 	pixel_x = -224
 	pixel_y = -224
 

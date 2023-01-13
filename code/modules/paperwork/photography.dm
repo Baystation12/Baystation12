@@ -36,7 +36,8 @@ var/global/photo_count = 0
 	var/image/tiny
 	var/photo_size = 3
 
-/obj/item/photo/New()
+/obj/item/photo/Initialize()
+	. = ..()
 	id = photo_count++
 
 /obj/item/photo/attack_self(mob/user as mob)
