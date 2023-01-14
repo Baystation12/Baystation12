@@ -185,9 +185,15 @@
 		setClickCooldown(5)
 		return attack_self(user)
 	else if(adj)
-		setClickCooldown(arms ? arms.action_delay : 15)
-		A.attack_generic(src, arms.melee_damage, "attacked")
-		return
+		setClickCooldown(arms ? arms.action_delay : 7) // You've already commited to applying fist, don't turn and back out now!
+		playsound(src.loc, legs.mech_step_sound, 60, 1)
+		src.visible_message(SPAN_DANGER("\The [src] steps back, preparing for a slam!"), blind_message = SPAN_DANGER("You hear the loud hissing of hydraulics!"))
+		if (do_after(src, 1.2 SECONDS, get_turf(src), DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && user)
+			A.attack_generic(src, arms.melee_damage, "slammed against", DAMAGE_BRUTE) //"Punch" would be bad since vehicles without arms could be a thing
+			var/turf/T = get_step(get_turf(src), src.dir)
+			if(istype(T))
+				do_attack_effect(T, "smash")
+			playsound(src.loc, arms.punch_sound, 50, 1)
 	return
 
 /mob/living/exosuit/proc/set_hardpoint(hardpoint_tag)
@@ -251,7 +257,7 @@
 		return FALSE
 	if(!silent)
 		to_chat(user, SPAN_NOTICE("You climb into \the [src]."))
-		playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
+		playsound(src, 'sound/machines/airlock_heavy.ogg', 60, 1)
 	add_pilot(user)
 	return TRUE
 
@@ -483,7 +489,7 @@
 
 /mob/living/exosuit/attack_generic(mob/user, damage, attack_message = "smashes into")
 	if(damage)
-		playsound(loc, arms.mech_punch_sound, 40, 1)
+		playsound(loc, body.damage_sound, 40, 1)
 
 /mob/living/exosuit/proc/attack_self(mob/user)
 	return visible_message("\The [src] pokes itself.")
