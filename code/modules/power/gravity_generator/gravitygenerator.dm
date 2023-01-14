@@ -432,16 +432,16 @@ GLOBAL_VAR(station_gravity_generator)
 			set_light(0)
 		if(21 to 40)
 			overlay_state = "startup"
-			set_light(4, 0.2, "#6496fa")
+			set_light(0.2, l_outer_range = 4, l_color = "#6496fa")
 		if(41 to 60)
 			overlay_state = "idle"
-			set_light(6, 0.5, "#7d9bff")
+			set_light(0.5, l_outer_range = 6, l_color = "#7d9bff")
 		if(61 to 80)
 			overlay_state = "activating"
-			set_light(6, 0.8, "#7dc3ff")
+			set_light(0.8, l_outer_range = 6, l_color = "#7dc3ff")
 		if(81 to 100)
 			overlay_state = "activated"
-			set_light(8, 1, "#7de1e1")
+			set_light(1,l_outer_range = 8, l_color = "#7de1e1")
 
 	if(middle)
 		middle.overlays.Cut()
