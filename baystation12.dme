@@ -1852,6 +1852,7 @@
 #include "code\modules\events\spider_infestation.dm"
 #include "code\modules\events\spontaneous_appendicitis.dm"
 #include "code\modules\events\toilets.dm"
+#include "code\modules\events\vent_clog.dm"
 #include "code\modules\events\wallrot.dm"
 #include "code\modules\events\exo_awakening\_datums.dm"
 #include "code\modules\events\exo_awakening\exo_awaken.dm"
