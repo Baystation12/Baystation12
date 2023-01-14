@@ -80,7 +80,7 @@
 /obj/machinery/bluespacedrive/on_death()
 	playsound(loc, 'sound/machines/BSD_explosion.ogg', 100)
 	visible_message(SPAN_DANGER(FONT_LARGE("\The [src] begins emitting an ear-splitting, horrible shrill! Get back!")))
-	addtimer(CALLBACK(src, .proc/explode), 5 SECONDS)
+	addtimer(new Callback(src, .proc/explode), 5 SECONDS)
 	..()
 
 

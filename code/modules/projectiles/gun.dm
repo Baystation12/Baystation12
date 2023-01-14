@@ -199,7 +199,7 @@
 					checkperm = TRUE
 			PreFire(A, user)
 			if (checkperm)
-				addtimer(CALLBACK(user.aiming, /obj/aiming_overlay/proc/toggle_permission, TARGET_CAN_CLICK, TRUE), 1)
+				addtimer(new Callback(user.aiming, /obj/aiming_overlay/proc/toggle_permission, TARGET_CAN_CLICK, TRUE), 1)
 		else
 			if (suicide && user.zone_sel.selecting == BP_MOUTH && istype(user, /mob/living/carbon/human))
 				handle_suicide(user)

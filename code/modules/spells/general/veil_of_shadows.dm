@@ -23,7 +23,7 @@
 	if(H.add_cloaking_source(src))
 		H.visible_message(SPAN_WARNING("\The [H] shrinks from view!"))
 	GLOB.moved_event.register(H,src,.proc/check_light)
-	timer_id = addtimer(CALLBACK(src,.proc/cancel_veil),duration, TIMER_STOPPABLE)
+	timer_id = addtimer(new Callback(src,.proc/cancel_veil),duration, TIMER_STOPPABLE)
 
 /spell/veil_of_shadows/proc/cancel_veil()
 	var/mob/living/carbon/human/H = holder

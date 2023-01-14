@@ -68,7 +68,7 @@
 
 	update_use_power(POWER_USE_ACTIVE)
 	update_icon()
-	addtimer(CALLBACK(src, /obj/machinery/washing_machine/proc/wash), 20 SECONDS)
+	addtimer(new Callback(src, /obj/machinery/washing_machine/proc/wash), 20 SECONDS)
 
 /obj/machinery/washing_machine/proc/wash()
 	for(var/atom/A in (contents - component_parts))
@@ -86,7 +86,7 @@
 				C.ironed_state = WRINKLES_WRINKLY
 				if(detergent)
 					C.change_smell(SMELL_CLEAN)
-					addtimer(CALLBACK(C, /obj/item/clothing/proc/change_smell), detergent.smell_clean_time, TIMER_UNIQUE | TIMER_OVERRIDE)
+					addtimer(new Callback(C, /obj/item/clothing/proc/change_smell), detergent.smell_clean_time, TIMER_UNIQUE | TIMER_OVERRIDE)
 	QDEL_NULL(detergent)
 
 	//Tanning!

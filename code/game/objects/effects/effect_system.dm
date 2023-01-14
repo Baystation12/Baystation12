@@ -69,7 +69,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 /datum/effect/effect/system/steam_spread/start()
 	var/i = 0
 	for(i=0, i<src.number, i++)
-		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread, i), 0)
+		addtimer(new Callback(src, /datum/effect/effect/system/proc/spread, i), 0)
 
 /datum/effect/effect/system/steam_spread/spread(i)
 	set waitfor = 0
@@ -139,7 +139,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 /datum/effect/effect/system/spark_spread/start()
 	var/i = 0
 	for(i=0, i<src.number, i++)
-		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread, i), 0)
+		addtimer(new Callback(src, /datum/effect/effect/system/proc/spread, i), 0)
 
 /datum/effect/effect/system/spark_spread/spread(i)
 	set waitfor = 0
@@ -185,7 +185,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /obj/effect/effect/smoke/Initialize()
 	. = ..()
-	addtimer(CALLBACK(src, .proc/fade_out), time_to_live)
+	addtimer(new Callback(src, .proc/fade_out), time_to_live)
 
 /obj/effect/effect/smoke/Crossed(mob/living/carbon/M as mob )
 	..()
@@ -265,7 +265,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
 		M.emote("cough")
-		addtimer(CALLBACK(M, /mob/living/carbon/proc/clear_coughedtime), 2 SECONDS)
+		addtimer(new Callback(M, /mob/living/carbon/proc/clear_coughedtime), 2 SECONDS)
 
 /obj/effect/effect/smoke/bad/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -292,7 +292,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
 		M.emote("cough")
-		addtimer(CALLBACK(M, /mob/living/carbon/proc/clear_coughedtime), 2 SECONDS)
+		addtimer(new Callback(M, /mob/living/carbon/proc/clear_coughedtime), 2 SECONDS)
 /////////////////////////////////////////////
 // Mustard Gas
 /////////////////////////////////////////////
@@ -317,7 +317,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	if (R.coughedtime != 1)
 		R.coughedtime = 1
 		R.emote("gasp")
-		addtimer(CALLBACK(R, /mob/living/carbon/proc/clear_coughedtime), 2 SECONDS)
+		addtimer(new Callback(R, /mob/living/carbon/proc/clear_coughedtime), 2 SECONDS)
 	R.updatehealth()
 	return
 
@@ -347,7 +347,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	for(i=0, i<src.number, i++)
 		if(src.total_smoke > 20)
 			return
-		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread, i), 0)
+		addtimer(new Callback(src, /datum/effect/effect/system/proc/spread, i), 0)
 
 /datum/effect/effect/system/smoke_spread/spread(i)
 	if(holder)

@@ -122,7 +122,7 @@ Please wait until completion...</TT><BR>
 
 					src.overlays += "fab-active"
 					src.updateUsrDialog()
-					addtimer(CALLBACK(src, .proc/done_building), build_time)
+					addtimer(new Callback(src, .proc/done_building), build_time)
 		return
 
 	for (var/mob/M in viewers(1, src))

@@ -256,7 +256,7 @@
 
 /turf/simulated/wall/proc/burn(temperature)
 	if(material.combustion_effect(src, temperature, 0.7))
-		addtimer(CALLBACK(src, .proc/burn_adjacent, temperature), 2, TIMER_UNIQUE)
+		addtimer(new Callback(src, .proc/burn_adjacent, temperature), 2, TIMER_UNIQUE)
 
 /turf/simulated/wall/proc/burn_adjacent(temperature)
 	var/list/nearby_atoms = range(3,src)

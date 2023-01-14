@@ -207,7 +207,7 @@
 			dt = clamp(detonation_time.data, 1, 12)*10
 		else
 			dt = 15
-		addtimer(CALLBACK(attached_grenade, /obj/item/grenade.proc/activate), dt)
+		addtimer(new Callback(attached_grenade, /obj/item/grenade.proc/activate), dt)
 		var/atom/holder = loc
 		log_and_message_admins("activated a grenade assembly. Last touches: Assembly: [holder.fingerprintslast] Circuit: [fingerprintslast] Grenade: [attached_grenade.fingerprintslast]")
 

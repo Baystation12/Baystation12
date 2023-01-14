@@ -305,7 +305,7 @@
 					to_chat(usr, SPAN_NOTICE("You begin printing a custom assembly. This will take approximately [round(cloning_time/10)] seconds. You can still print \
 					off normal parts during this time."))
 					playsound(src, 'sound/items/poster_being_created.ogg', 50, TRUE)
-					addtimer(CALLBACK(src, .proc/print_program, usr), cloning_time)
+					addtimer(new Callback(src, .proc/print_program, usr), cloning_time)
 
 			if("cancel")
 				if(!cloning || !program)

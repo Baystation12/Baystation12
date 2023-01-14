@@ -47,7 +47,7 @@
 
 	. += "<br><b>Other</b>:"
 	var/set_addr_button = TBTN("set_email_addr", pref.email_addr ? pref.email_addr : "(default)", "Email Address")
-	var/list/branches = pref.for_each_selected_branch(CALLBACK(src, .proc/allow_email_branch_check))
+	var/list/branches = pref.for_each_selected_branch(new Callback(src, .proc/allow_email_branch_check))
 	for (var/name in branches)
 		set_addr_button += "  " + (branches[name] ? UI_FONT_GOOD(name) : UI_FONT_BAD(name))
 	. += set_addr_button
