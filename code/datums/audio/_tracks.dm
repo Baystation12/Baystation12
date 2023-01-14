@@ -311,3 +311,10 @@
 	author = "*Kira* Miki"
 	license = /decl/license/grandfathered
 	url = "https://ghyti.bandcamp.com/"
+
+/decl/audio/track/lackey
+	source = 'proxima/sound/music/Shadow Stalker (Oathbreakers).ogg'
+	title = "Lackey" // PRX
+	author = "Shadow Stalker"
+	license = /decl/license/grandfathered
+	url = "https://youtu.be/iUUSYt1Myd8"

@@ -10,7 +10,7 @@
 		energy = ARMOR_ENERGY_SMALL,
 		bomb = ARMOR_BOMB_RESISTANT,
 		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
+		rad = ARMOR_RAD_RESISTANT
 		)
 	online_slowdown = 0.75
 	offline_slowdown = 1

@@ -10,6 +10,11 @@
 	minimal_player_age = 0
 	supervisors = "the Executive Officer"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/chaplain
+	alt_titles = list(
+		"Celebrant",
+		"Priest",
+		"Psionic Confessor"
+	)  //PRX
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/service/chaplain/ec,
@@ -33,6 +38,11 @@
 		access_crematorium, access_solgov_crew,
 		access_radio_serv
 	)
+
+/datum/job/detective/equip(var/mob/living/carbon/human/H)
+	if(H.mind?.role_alt_title == "Psionic Confessor")
+		psi_faculties = list("[PSI_COERCION]" = PSI_RANK_OPERANT)
+	return ..()
 
 /datum/job/janitor
 	title = "Sanitation Technician"

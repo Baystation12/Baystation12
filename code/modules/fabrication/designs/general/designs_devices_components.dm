@@ -52,8 +52,7 @@
 	path = /obj/item/device/assembly/prox_sensor
 
 /datum/fabricator_recipe/device_component/cable_coil
-	path = /obj/item/stack/cable_coil/full
-
+	path = /obj/item/stack/cable_coil/single
 /datum/fabricator_recipe/device_component/electropack
 	path = /obj/item/device/radio/electropack
 	hidden = TRUE

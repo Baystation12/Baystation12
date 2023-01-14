@@ -150,6 +150,7 @@
 
 
 GLOBAL_LIST_INIT(jukebox_tracks, list(
+	/decl/audio/track/lackey,
 	/decl/audio/track/absconditus,
 	/decl/audio/track/ambispace,
 	/decl/audio/track/as_far_as_it_gets,

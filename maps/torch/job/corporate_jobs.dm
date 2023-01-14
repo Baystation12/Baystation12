@@ -50,7 +50,7 @@
 	create_record = 1
 	total_positions = 0
 	spawn_positions = 1
-	hud_icon = "hudworkplaceliaison"
+	hud_icon = "hudsynthetic"
 	allowed_branches = list(
 		/datum/mil_branch/civilian
 	)
