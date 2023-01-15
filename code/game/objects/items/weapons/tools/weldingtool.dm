@@ -159,7 +159,7 @@
 		if(M)
 			M.welding_eyecheck()//located in mob_helpers.dm
 			set_light(0.7, 2, 5, l_color = COLOR_LIGHT_CYAN)
-			addtimer(CALLBACK(src, /atom/proc/update_icon), 5)
+			addtimer(new Callback(src, /atom/proc/update_icon), 5)
 		return 1
 	else
 		if(M)

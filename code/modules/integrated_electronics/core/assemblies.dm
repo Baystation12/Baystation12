@@ -80,7 +80,7 @@
 		spark_system.start()
 	playsound(loc, 'sound/items/electronic_assembly_empty.ogg', 100, 1)
 	icon = 0
-	addtimer(CALLBACK(src, .proc/fall_apart), 5.1)
+	addtimer(new Callback(src, .proc/fall_apart), 5.1)
 
 /obj/item/device/electronic_assembly/post_health_change(health_mod, damage_type)
 	..()

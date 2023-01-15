@@ -63,7 +63,7 @@
 /datum/beam/proc/redrawing(atom/movable/mover, atom/oldloc, new_loc)
 	if(!QDELETED(origin) && !QDELETED(target) && get_dist(origin,target)<max_distance && origin.z == target.z)
 		QDEL_NULL_LIST(elements)
-		INVOKE_ASYNC(src, .proc/Draw)
+		invoke_async(src, .proc/Draw)
 	else
 		qdel(src)
 
@@ -163,5 +163,5 @@
  */
 /atom/proc/Beam(atom/BeamTarget,icon_state="b_beam",icon='icons/effects/beam.dmi',time=INFINITY,maxdistance=INFINITY,beam_type=/obj/effect/ebeam)
 	var/datum/beam/newbeam = new(src,BeamTarget,icon,icon_state,time,maxdistance,beam_type)
-	INVOKE_ASYNC(newbeam, /datum/beam/.proc/Start)
+	invoke_async(newbeam, /datum/beam/.proc/Start)
 	return newbeam

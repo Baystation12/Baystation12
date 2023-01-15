@@ -66,7 +66,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	notify_players()
 	adjust_to_planet_size()
 
-	addtimer(CALLBACK(src, /datum/event/exo_awakening/proc/start_spawning), delay_time)
+	addtimer(new Callback(src, /datum/event/exo_awakening/proc/start_spawning), delay_time)
 
 //Locates a planet with players on it (prioritizes players from the station).
 //If no suitable planets are found, the event is killed and something else is run instead.

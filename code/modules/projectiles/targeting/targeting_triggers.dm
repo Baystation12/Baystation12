@@ -23,7 +23,7 @@
 	if (!istype(G))
 		return
 	if (owner == aiming_at)
-		addtimer(CALLBACK(G, /obj/item/gun/proc/handle_suicide, owner, 2))
+		addtimer(new Callback(G, /obj/item/gun/proc/handle_suicide, owner, 2))
 		return
 	if (prob(owner.skill_fail_chance(SKILL_WEAPONS, 30, SKILL_ADEPT, 3)))
 		to_chat(owner, SPAN_WARNING("You fumble with the gun, throwing your aim off!"))

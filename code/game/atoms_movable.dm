@@ -60,7 +60,7 @@
 
 	if (A && yes)
 		A.last_bumped = world.time
-		INVOKE_ASYNC(A, /atom/proc/Bumped, src) // Avoids bad actors sleeping or unexpected side effects, as the legacy behavior was to spawn here
+		invoke_async(A, /atom/proc/Bumped, src) // Avoids bad actors sleeping or unexpected side effects, as the legacy behavior was to spawn here
 	..()
 
 /atom/movable/proc/forceMove(atom/destination)

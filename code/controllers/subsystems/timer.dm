@@ -136,7 +136,7 @@ SUBSYSTEM_DEF(timer)
 				head_offset: [head_offset], practical_offset: [practical_offset], Uptime(): [Uptime()]")
 
 		ctime_timer.spent = Uptime()
-		callBack.InvokeAsync()
+		invoke_async(callBack)
 
 		if(ctime_timer.flags & TIMER_LOOP)
 			ctime_timer.spent = 0
@@ -181,7 +181,7 @@ SUBSYSTEM_DEF(timer)
 			// Invoke callback if possible
 			if (!timer.spent)
 				timer.spent = world.time
-				callBack.InvokeAsync()
+				invoke_async(callBack)
 				last_invoke_tick = world.time
 
 			if (timer.flags & TIMER_LOOP) // Prepare looping timers to re-enter the queue
@@ -426,8 +426,8 @@ SUBSYSTEM_DEF(timer)
 	if ((timeToRun < world.time || timeToRun < timer_subsystem.head_offset) && !(flags & TIMER_CLIENT_TIME))
 		CRASH("Invalid timer state: Timer created that would require a backtrack to run (addtimer would never let this happen): [SStimer.get_timer_debug_string(src)]")
 
-	if (callBack.object != GLOBAL_PROC && !QDESTROYING(callBack.object))
-		LAZYADD(callBack.object.active_timers, src)
+	if (callBack.target != FALSE && !QDESTROYING(callBack.target))
+		LAZYADD(callBack.target.active_timers, src)
 
 	bucketJoin()
 
@@ -436,9 +436,9 @@ SUBSYSTEM_DEF(timer)
 	if (flags & TIMER_UNIQUE && hash)
 		timer_subsystem.hashes -= hash
 
-	if (callBack && callBack.object && callBack.object != GLOBAL_PROC && callBack.object.active_timers)
-		callBack.object.active_timers -= src
-		UNSETEMPTY(callBack.object.active_timers)
+	if (callBack && callBack.target && callBack.target != FALSE && callBack.target.active_timers)
+		callBack.target.active_timers -= src
+		UNSETEMPTY(callBack.target.active_timers)
 
 	callBack = null
 
@@ -510,11 +510,10 @@ SUBSYSTEM_DEF(timer)
   * If the timed event is tracking client time, it will be added to a special bucket.
   */
 /datum/timedevent/proc/bucketJoin()
-	// Generate debug-friendly name for timer
 	var/static/list/bitfield_flags = list("TIMER_UNIQUE", "TIMER_OVERRIDE", "TIMER_CLIENT_TIME", "TIMER_STOPPABLE", "TIMER_NO_HASH_WAIT", "TIMER_LOOP")
+
 	name = "Timer: [id] (\ref[src]), TTR: [timeToRun], wait:[wait] Flags: [jointext(bitfield2list(flags, bitfield_flags), ", ")], \
-		callBack: \ref[callBack], callBack.object: [callBack.object]\ref[callBack.object]([getcallingtype()]), \
-		callBack.delegate:[callBack.delegate]([callBack.arguments ? callBack.arguments.Join(", ") : ""]), source: [source]"
+		callBack: \ref[callBack], target: [callBack.identity], callable:[callBack.callable]([callBack.params ? callBack.params.Join(", ") : ""]), source: [source]"
 
 	if (bucket_joined)
 		stack_trace("Bucket already joined! [name]")
@@ -558,15 +557,6 @@ SUBSYSTEM_DEF(timer)
 	prev = null
 	bucket_list[bucket_pos] = src
 
-/**
-  * Returns a string of the type of the callback for this timer
-  */
-/datum/timedevent/proc/getcallingtype()
-	. = "ERROR"
-	if (callBack.object == GLOBAL_PROC)
-		. = "GLOBAL_PROC"
-	else
-		. = "[callBack.object.type]"
 
 /**
  * Create a new timer and insert it in the queue.
@@ -584,7 +574,7 @@ SUBSYSTEM_DEF(timer)
 	if (wait < 0)
 		stack_trace("addtimer called with a negative wait. Converting to [world.tick_lag]")
 
-	if (callback.object != GLOBAL_PROC && QDELETED(callback.object) && !QDESTROYING(callback.object))
+	if (callback.target != FALSE && QDELETED(callback.target) && !QDESTROYING(callback.target))
 		stack_trace("addtimer called with a callback assigned to a qdeleted object. In the future such timers will not \
 			be supported and may refuse to run or run with a 0 wait")
 
@@ -598,10 +588,10 @@ SUBSYSTEM_DEF(timer)
 	// Generate hash if relevant for timed events with the TIMER_UNIQUE flag
 	var/hash
 	if (flags & TIMER_UNIQUE)
-		var/list/hashlist = list(callback.object, "(\ref[callback.object])", callback.delegate, flags & TIMER_CLIENT_TIME)
+		var/list/hashlist = list(callback.target, "(\ref[callback.target])", callback.callable, flags & TIMER_CLIENT_TIME)
 		if(!(flags & TIMER_NO_HASH_WAIT))
 			hashlist += wait
-		hashlist += callback.arguments
+		hashlist += callback.params
 		hash = hashlist.Join("|||||||")
 
 		var/datum/timedevent/hash_timer = timer_subsystem.hashes[hash]

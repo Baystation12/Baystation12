@@ -437,7 +437,7 @@
 		priority = selected_jobs_assoc(priority)
 	for (var/title in priority)
 		var/datum/job/job = priority[title]
-		.[title] = callback.Invoke(job)
+		.[title] = invoke(callback, job)
 
 /datum/preferences/proc/for_each_selected_job_multi(list/callbacks, priority = JOB_PRIORITY_LIKELY)
 	. = list()
@@ -452,7 +452,7 @@
 		priority = selected_branches_assoc(priority)
 	for (var/name in priority)
 		var/datum/mil_branch/branch = priority[name]
-		.[name] = callback.Invoke(branch)
+		.[name] = invoke(callback, branch)
 
 /datum/preferences/proc/for_each_selected_branch_multi(list/callbacks, priority = JOB_PRIORITY_LIKELY)
 	. = list()
