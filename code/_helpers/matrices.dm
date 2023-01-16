@@ -90,7 +90,7 @@ var/global/list/delta_index = list(
 
 //Exxagerates or removes brightness
 /proc/color_contrast(value)
-	value = clamp(value, -100, 100)
+	value = round(clamp(value, -100, 100))
 	if(value == 0)
 		return color_identity()
 
