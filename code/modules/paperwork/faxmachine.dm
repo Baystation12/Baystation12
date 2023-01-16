@@ -95,9 +95,12 @@ GLOBAL_LIST_EMPTY(admin_departments)
 /obj/machinery/photocopier/faxmachine/get_mechanics_info()
 	. = "<p>The fax machine can be used to transmit paper faxes to other fax machines on the map, or to off-ship organizations handled by server administration. To use the fax machine, you'll need to insert both a paper and your ID card, authenticate, select a destination, the transmit the fax.</p>"
 	. += "<p>You can also fax paper bundles, including photos, using this machine.</p>"
-	. += "<p>You can check the machine's department origin tag using a multitool.</p>"
-	. += "<p>You can link a PDA to it to receive notifications of inbound faxes by clicking on it with the PDA in hand.</p>"
 	. += ..()
+
+/obj/machinery/photocopier/faxmachine/get_interactions_info()
+	. = ..()
+	.["Multitool"] += "<p>Displays the fax machine's department origin tag.</p>"
+	.["PDA"] += "<p>Links the PDA to be notified of inbound faxes, or unlinks the PDA if it's currently linked.</p>"
 
 /obj/machinery/photocopier/faxmachine/get_antag_info()
 	. = "<p>If emagged with a cryptographic sequencer, the fax machine can then have it's origin department tag changed using a multitool. This allows you to send faxes pretending to be from somewhere else on the ship, or even an off-ship origin like EXCOMM.</p>"

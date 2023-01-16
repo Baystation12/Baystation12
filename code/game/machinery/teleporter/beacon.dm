@@ -172,12 +172,13 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 /obj/machinery/tele_beacon/get_mechanics_info()
 	. = ..()
 	. += "<p>\The [src] can be targeted by teleporter control consoles to allow teleporter pads to send mobs and objects to this [src]'s location. \
-		It can only be targeted and used while \the [src] is powered and anchored (wrenched) to the floor.</p>\
-		<p>While the panel is closed:</p>\
-		<ul>\
-			<li>Use a Wrench to anchor/unanchor the beacon, allowing it to be moved. The beacon is not functional unless anchored.</li>\
-			<li>Use a Multitool to rename the beacon. The name will be displayed in teleport control consoles.</li>\
-		</ul>"
+		It can only be targeted and used while \the [src] is powered and anchored (wrenched) to the floor.</p>"
+
+
+/obj/machinery/tele_beacon/get_interactions_info()
+	. = ..()
+	.["Multitool"] += "<p>If the maintenance panel is closed, renames the beacon. The name will be displayed in teleport control consoles.</p>"
+	.["Wrench"] += "<p>If the maintenance panel is closed, anchors/unanchors the beacon, allowing it to be moved. The beacon is not functional unless anchored.</p>"
 
 
 /obj/machinery/tele_beacon/get_antag_info()

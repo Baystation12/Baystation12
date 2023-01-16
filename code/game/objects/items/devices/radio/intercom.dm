@@ -280,6 +280,15 @@
 				<li>Wrench to remove the frame from the wall</li>\
 			</ol>"
 
+/obj/item/device/radio/intercom/get_interactions_info()
+	. = ..()
+	.["Cable Coil"] += "<p>Used for construction. See construction steps.</p>"
+	.["Circuitboard"] += "<p>Used for construction. See construction steps.</p>"
+	.["Crowbar"] += "<p>Used for desconstruction. See deconstruction steps.</p>"
+	.["Screwdriver"] += "<p>Toggles the maintenance panel open and closed.</p>"
+	.["Wirecutters"] += "<p>Used for deconstruction. See deconstruction steps.</p>"
+	.["Wrench"] += "<p>Used for deconstruction. See deconstruction steps.</p>"
+
 /obj/item/device/radio/intercom/Process()
 	if (wiresexposed)
 		on = FALSE
