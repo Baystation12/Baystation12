@@ -25,7 +25,7 @@
 
 	possible_wanted_items = list(/mob/living/simple_animal/passive/corgi      = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/passive/cat         = TRADER_THIS_TYPE,
-								/mob/living/simple_animal/crab        = TRADER_THIS_TYPE,
+								/mob/living/simple_animal/passive/crab        = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/passive/lizard      = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/passive/mouse       = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/passive/mushroom    = TRADER_THIS_TYPE,
@@ -45,7 +45,7 @@
 
 	possible_trading_items = list(/mob/living/simple_animal/passive/corgi     = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/passive/cat         = TRADER_THIS_TYPE,
-								/mob/living/simple_animal/crab        = TRADER_THIS_TYPE,
+								/mob/living/simple_animal/passive/crab        = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/passive/lizard      = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/passive/mouse       = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/passive/mushroom    = TRADER_THIS_TYPE,

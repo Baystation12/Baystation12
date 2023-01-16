@@ -108,7 +108,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
  * Returns the result of `install_component()`, or `null` if the path does not exist in the list.
  */
 /obj/machinery/proc/force_init_component(path)
-	if(!uncreated_component_parts[path])
+	if(!LAZYACCESS(uncreated_component_parts, path))
 		return
 	uncreated_component_parts[path]-- //bookkeeping to make sure tally is correct.
 	if(!uncreated_component_parts[path])

@@ -32,7 +32,7 @@
 	var/power_init_complete = FALSE
 	/// List of component instances. Expected type: `/obj/item/stock_parts.`
 	var/list/component_parts
-	/// List of component paths which have delayed init. Indeces = number of components.
+	/// LAZYLIST of component paths which have delayed init. Indeces = number of components.
 	var/list/uncreated_component_parts = list(/obj/item/stock_parts/power/apc)
 	/// List of componant paths and the maximum number of that specific path that can be inserted into the machine. `null` - no max. `list(type part = number max)`.
 	var/list/maximum_component_parts = list(/obj/item/stock_parts = 10)
@@ -300,6 +300,8 @@
 
 /// Electrocutes the mob `user` based on probability `prb`, if the machine is in a state capable of doing so. Returns `TRUE` if the user was shocked.
 /obj/machinery/proc/shock(mob/user, prb)
+	if (!user)
+		return FALSE
 	if(inoperable())
 		return FALSE
 	if(!prob(prb))
