@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Canisters no longer take damage from EMPs, and are now set to be damaged
+      by physical damage sources instead of electrical.
