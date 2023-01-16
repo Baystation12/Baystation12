@@ -135,6 +135,9 @@
 /obj/machinery/door/blast/get_material()
 	return implicit_material
 
+/obj/machinery/door/blast/get_material_melting_point()
+	return 10000 // Blast doors are implicitly heavily fire resistant and are used for containing high-temperature areas like burn chambers.
+
 // Proc: attackby()
 // Parameters: 2 (C - Item this object was clicked with, user - Mob which clicked this object)
 // Description: If we are clicked with crowbar or wielded fire axe, try to manually open the door.
