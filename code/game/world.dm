@@ -93,7 +93,7 @@ GLOBAL_VAR(href_logfile)
 /world/New()
 	var/debug_server = world.GetConfig("env", "AUXTOOLS_DEBUG_DLL")
 	if (debug_server)
-		call(debug_server, "auxtools_init")()
+		call_ext(debug_server, "auxtools_init")()
 		enable_debugging()
 
 	name = "[server_name] - [GLOB.using_map.full_name]"
@@ -130,7 +130,7 @@ GLOBAL_VAR(href_logfile)
 /world/Del()
 	var/debug_server = world.GetConfig("env", "AUXTOOLS_DEBUG_DLL")
 	if (debug_server)
-		call(debug_server, "auxtools_shutdown")()
+		call_ext(debug_server, "auxtools_shutdown")()
 	callHook("shutdown")
 	return ..()
 
