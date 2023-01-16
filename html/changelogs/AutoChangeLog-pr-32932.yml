@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscadd: Codex entries for chemistry recipes now include the minimum and maximum
+      temperatures.
