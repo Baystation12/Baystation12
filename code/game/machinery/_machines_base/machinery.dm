@@ -445,6 +445,13 @@
 	if (wire_mechanics)
 		. += "<hr><h5>Wiring</h5>[wire_mechanics]"
 
+/obj/machinery/get_interactions_info()
+	. = ..()
+	var/wire_interactions = wires?.get_interactions_info()
+	if (wire_interactions)
+		for (var/key in wire_interactions)
+			.["[key]"] += "[wire_interactions[key]]"
+
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(depth)
 	..()
