@@ -102,10 +102,13 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	.["Multitool"] += "<p>Displays the fax machine's department origin tag.</p>"
 	.["PDA"] += "<p>Links the PDA to be notified of inbound faxes, or unlinks the PDA if it's currently linked.</p>"
 
-/obj/machinery/photocopier/faxmachine/get_antag_info()
-	. = "<p>If emagged with a cryptographic sequencer, the fax machine can then have it's origin department tag changed using a multitool. This allows you to send faxes pretending to be from somewhere else on the ship, or even an off-ship origin like EXCOMM.</p>"
-	. += "<p><strong>NOTE</strong>: Any new department tags created in this way that do not already exist in the list of targets cannot receive faxes, as this does not add new departments to the list of valid fax targets.</p>"
-	. += ..()
+/obj/machinery/photocopier/faxmachine/get_antag_interactions_info()
+	. = ..()
+	.["Cryptographic Sequencer"] += "<p>Emags the fax machine, allowing its origin department tag to be modified using a multitool.</p>"
+	.["Multitool"] += {"
+		<p>If emagged, allows changing the fax machine's origin department tag. This allows you to send faxes pretending to be from somewhere else on the ship, or even an off-ship origin like EXCOMM.<br />
+		<strong>NOTE</strong>: Any new department tags created in this way that do not already exist in the list of targets cannot receive faxes, as this does not add new departments to the list of valid fax targets.</p>
+	"}
 
 /obj/machinery/photocopier/faxmachine/emag_act(remaining_charges, mob/user, emag_source)
 	if (emagged)
