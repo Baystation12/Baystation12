@@ -39,6 +39,24 @@
 /atom/proc/get_mechanics_info()
 	return
 
+// Constants for use to describe special handlers in `get_interactions_info()`. These allow for consistant key names for overriding and stacking purposes.
+// Click handlers
+/atom/var/const/CODEX_INTERACTION_ALT_CLICK = "ALT+CLICK"
+/atom/var/const/CODEX_INTERACTION_ALT_SHIFT_CLICK = "ALT+SHIFT+CLICK"
+/atom/var/const/CODEX_INTERACTION_CTRL_CLICK = "CTRL+CLICK"
+/atom/var/const/CODEX_INTERACTION_CTRL_ALT_CLICK = "CTRL+ALT+CLICK"
+/atom/var/const/CODEX_INTERACTION_CTRL_ALT_SHIFT_CLICK = "CTRL+ALT+SHIFT+CLICK"
+/atom/var/const/CODEX_INTERACTION_CTRL_SHIFT_CLICK = "CTRL+SHIFT+CLICK"
+/atom/var/const/CODEX_INTERACTION_SHIFT_CLICK = "SHIFT+CLICK"
+
+// Use handlers
+/atom/var/const/CODEX_INTERACTION_USE_SELF = "Use On Self"
+/atom/var/const/CODEX_INTERACTION_HAND = "Empty Hand"
+
+// Other cases
+/atom/var/const/CODEX_INTERACTION_EMAG = "Cryptographic Sequencer (EMAG)"
+/atom/var/const/CODEX_INTERACTION_EMP = "EMP"
+
 /**
  * Handler for displaying information on tool interations in the Mechanics section of the atom's codex entry.
  *

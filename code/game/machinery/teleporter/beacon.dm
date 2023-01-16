@@ -183,7 +183,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 
 /obj/machinery/tele_beacon/get_antag_interactions_info()
 	. = ..()
-	.["EMP"] += "<p>Disables all established teleporter locks and disables the beacon for up to 30 seconds.</p>"
+	.[CODEX_INTERACTION_EMP] += "<p>Disables all established teleporter locks and disables the beacon for up to 30 seconds.</p>"
 
 
 /// Connects the beacon to a computer that's locking onto it. Returns TRUE on connection, FALSE if the connection fails.
