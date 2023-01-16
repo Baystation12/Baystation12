@@ -143,7 +143,7 @@
 				visible_message(SPAN_WARNING("Something sparks inside \the [src]'s wiring panel!"))
 				new /obj/effect/sparks(get_turf(src))
 
-	..()
+		..()
 
 /obj/machinery/ex_act(severity)
 	..()
