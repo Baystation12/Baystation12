@@ -35,9 +35,9 @@
 	new spawned_mob(get_turf(src))
 	qdel(src)
 
-/obj/item/reagent_containers/food/snacks/dehydrated_carp/get_antag_info()
+/obj/item/reagent_containers/food/snacks/dehydrated_carp/get_antag_interactions_info()
 	. = ..()
-	. += "You can add water to this plushie to hydrate it, transforming it into a living space carp after a short delay. Be careful, as the carp will be hostile to you too!"
+	.["Water"] += "<p>Hydrates the plushie, transforming it into a living space carp after a short delay. Be careful, as the carp will be hostile to you too!</p>"
 
 /obj/item/plushbomb
 	name = "kitten plush"

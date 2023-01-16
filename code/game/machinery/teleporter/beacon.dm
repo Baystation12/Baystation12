@@ -181,9 +181,9 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 	.["Wrench"] += "<p>If the maintenance panel is closed, anchors/unanchors the beacon, allowing it to be moved. The beacon is not functional unless anchored.</p>"
 
 
-/obj/machinery/tele_beacon/get_antag_info()
+/obj/machinery/tele_beacon/get_antag_interactions_info()
 	. = ..()
-	. += "<p>If EMP'd, \the [src] will lose all established teleporter locks and will be disabled for up to 30 seconds.</p>"
+	.["EMP"] += "<p>Disables all established teleporter locks and disables the beacon for up to 30 seconds.</p>"
 
 
 /// Connects the beacon to a computer that's locking onto it. Returns TRUE on connection, FALSE if the connection fails.

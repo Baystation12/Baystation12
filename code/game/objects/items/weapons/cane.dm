@@ -104,4 +104,8 @@
 
 /obj/item/gun/projectile/shotgun/cane/get_antag_info()
 	. = ..()
-	. += "<p>This cane conceals a single-shot shotgun! Ctrl-click the weapon to toggle the concealed trigger, acting in place of a safety. Inaccurate, so you'll want to be close to your victim.</p>"
+	. += "<p>This cane conceals a single-shot shotgun! Inaccurate, so you'll want to be close to your victim.</p>"
+
+/obj/item/gun/projectile/shotgun/cane/get_antag_interactions_info()
+	. = ..()
+	.["CTRL+CLICK"] = "<p>Toggles the concealed trigger, acting in place of a safety.</p>"
