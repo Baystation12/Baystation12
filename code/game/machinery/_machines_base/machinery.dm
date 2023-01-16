@@ -136,8 +136,12 @@
 		if (prob(100 / severity) && istype(wires))
 			if (prob(20))
 				wires.RandomCut()
+				visible_message(SPAN_DANGER("A shower of sparks sprays out of \the [src]'s wiring panel!"))
+				sparks(3, 0, get_turf(src))
 			else
 				wires.RandomPulse()
+				visible_message(SPAN_WARNING("Something sparks inside \the [src]'s wiring panel!"))
+				new /obj/effect/sparks(get_turf(src))
 
 	..()
 
