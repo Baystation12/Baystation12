@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Overmap shuttles now halt travel when they enter transit.
-  - bugfix: Shuttles in transit no longer trigger overmap hazards.
