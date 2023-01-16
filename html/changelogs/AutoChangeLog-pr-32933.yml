@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Advanced Energy Guns now have a working safety indicator icon.
