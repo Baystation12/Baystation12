@@ -1330,7 +1330,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		return
 
 	if(!M)
-		M = input("Select mob.", "Select mob.") as null|anything in GLOB.player_list
+		M = input("Select mob.", "Select mob.") as null|mob in GLOB.player_list
 	if(!istype(M))
 		return
 	var/datum/nano_module/skill_ui/NM = /datum/nano_module/skill_ui

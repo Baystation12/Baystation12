@@ -74,7 +74,9 @@ var/global/const/Callback = /datum/callback
 	else if (QDELETED(target))
 		return
 	else if (istype(target))
-		var/list/params = list(target.target, target.callable) + target.params
+		var/list/params = list(target.target, target.callable)
+		if (LAZYLEN(target.params))
+			params += target.params
 		if (length(args) > 1)
 			params += args.Copy(2)
 		return invoke(arglist(params))

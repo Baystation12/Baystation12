@@ -242,14 +242,12 @@
 
 
 	// Try to find all the players who can hear the message
-	for(var/i = 1; i <= GLOB.player_list.len; i++)
-		var/mob/M = GLOB.player_list[i]
-		if(M)
-			var/turf/ear = get_turf(M)
-			if(ear)
-				// Ghostship is magic: Ghosts can hear radio chatter from anywhere
-				if(speaker_coverage[ear] || (isghost(M) && M.get_preference_value(/datum/client_preference/ghost_radio) == GLOB.PREF_ALL_CHATTER))
-					. |= M		// Since we're already looping through mobs, why bother using |= ? This only slows things down.
+	for (var/mob/M in GLOB.player_list)
+		var/turf/ear = get_turf(M)
+		if(ear)
+			// Ghostship is magic: Ghosts can hear radio chatter from anywhere
+			if(speaker_coverage[ear] || (isghost(M) && M.get_preference_value(/datum/client_preference/ghost_radio) == GLOB.PREF_ALL_CHATTER))
+				. |= M		// Since we're already looping through mobs, why bother using |= ? This only slows things down.
 	return .
 
 /proc/get_mobs_and_objs_in_view_fast(turf/T, range, list/mobs, list/objs, checkghosts = null)

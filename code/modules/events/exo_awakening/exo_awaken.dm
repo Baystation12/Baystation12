@@ -76,10 +76,8 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	var/list/players = list()
 
 	for (var/area/A in exoplanet_areas)
-		var/mob/M
-		for (var/i = length(GLOB.player_list) to 1 step -1)
-			M = GLOB.player_list[i]
-			if (M && M.stat != DEAD && (get_z(M) in GetConnectedZlevels(A.z)))
+		for (var/mob/M in GLOB.player_list)
+			if (M.stat != DEAD && (get_z(M) in GetConnectedZlevels(A.z)))
 				players += M
 
 				if (get_crewmember_record(M.real_name || M.name))
