@@ -328,6 +328,8 @@
 // This function can not be undone; do not call this unless you are sure
 // Also make sure there is a valid control computer
 /obj/machinery/cryopod/proc/despawn_occupant()
+	SHOULD_NOT_SLEEP(TRUE) // Sleeping causes the double-despawn bug
+
 	if (QDELETED(occupant))
 		log_and_message_admins("A mob was deleted while in a cryopod, or the cryopod double-processed. This may cause errors!")
 		return
@@ -416,7 +418,7 @@
 	log_and_message_admins("[key_name(occupant)] ([role_alt_title]) entered cryostorage.")
 
 	if(announce_despawn)
-		announce.autosay("[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
+		invoke_async(announce, /obj/item/device/radio/proc/autosay, "[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
 
 	var/despawnmessage = replacetext(on_store_visible_message, "$occupant$", occupant.real_name)
 	visible_message(SPAN_NOTICE("\The [initial(name)] " + despawnmessage), range = 3)
