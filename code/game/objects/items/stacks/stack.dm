@@ -142,9 +142,10 @@
 			to_chat(user, SPAN_WARNING("You waste some [name] and fail to build \the [recipe.display_name()]!"))
 			return
 		var/atom/O = recipe.spawn_result(user, user.loc, produced)
-		O.add_fingerprint(user)
-
-		user.put_in_hands(O)
+		// Stack recipes will delete the created item if it merges with a stack already in hand.
+		if (!QDELETED(O))
+			O.add_fingerprint(user)
+			user.put_in_hands(O)
 
 /obj/item/stack/Topic(href, href_list)
 	..()
