@@ -121,7 +121,7 @@
 	return PROCESS_KILL // Only process if you need to.
 
 /obj/machinery/emp_act(severity)
-	if(use_power && stat == EMPTY_BITFIELD)
+	if(use_power && operable())
 		use_power_oneoff(7500/severity)
 
 		var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(loc)
