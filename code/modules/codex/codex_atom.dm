@@ -18,7 +18,13 @@
 
 	var/lore = get_lore_info()
 	var/mechanics = get_mechanics_info()
+	var/interactions = html_list_dl(get_interactions_info())
+	if (interactions)
+		mechanics += "<h4>Interactions</h4>[interactions]"
 	var/antag = get_antag_info()
+	interactions = html_list_dl(get_antag_interactions_info())
+	if (interactions)
+		antag += "<h4>Interactions</h4>[interactions]"
 	if(!lore && !mechanics && !antag)
 		return FALSE
 
@@ -34,12 +40,39 @@
 	return
 
 /**
+ * Handler for displaying information on tool interations in the Mechanics section of the atom's codex entry.
+ *
+ * Returns associative list of strings. Best practice is to append information to existing entries with `+=`, if present (This is null safe), i.e.:
+ * ```dm
+ * . = ..()
+ * .["Screwdriver"] += "<p>Toggles the maintenance panel open and closed.</p>"
+ * ```
+ */
+/atom/proc/get_interactions_info()
+	RETURN_TYPE(/list)
+	return list()
+
+/**
  * Handler for displaying information in the Antagonist section of the atom's codex entry.
  *
  * Returns string.
  */
 /atom/proc/get_antag_info()
 	return
+
+
+/**
+ * Handler for displaying information on tool interations in the Antagonist section of the atom's codex entry.
+ *
+ * Returns associative list of strings. Best practice is to append information to existing entries with `+=`, if present (This is null safe), i.e.:
+ * ```dm
+ * . = ..()
+ * .["Screwdriver"] += "<p>Toggles the maintenance panel open and closed.</p>"
+ * ```
+ */
+/atom/proc/get_antag_interactions_info()
+	RETURN_TYPE(/list)
+	return list()
 
 /**
  * Handler for displaying information in the Lore section of the atom's codex entry.
