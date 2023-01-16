@@ -1,0 +1,9 @@
+author: SomeAngryMiner, Sounds by Sindorman
+delete-after: true
+changes:
+  - tweak: Reduced mech ballistic shield damage from 1.2x to 0.2x.
+  - tweak: Buffed exosuit mechete damage cap from 25 to 35.
+  - tweak: Tripled fall damage taken by mechs from 30 to 90.
+  - rscadd: New sounds for exosuits in general.
+  - tweak: Exosuit unarmed attacks are now telegraphed, and are able to break structures.
+  - tweak: Tou can no longer block exosuit movement by standing as a human.
