@@ -66,8 +66,7 @@ GLOBAL_LIST_INIT(tray_hit_sound,list('sound/items/trayhit1.ogg', 'sound/items/tr
 	var/turf/turf_source = get_turf(source)
 
  	// Looping through the player list has the added bonus of working for mobs inside containers
-	for (var/P in GLOB.player_list)
-		var/mob/M = P
+	for (var/mob/M in GLOB.player_list)
 		if(!M || !M.client)
 			continue
 		if(get_dist(M, turf_source) <= (world.view + extrarange) * 2)
