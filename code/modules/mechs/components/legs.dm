@@ -6,7 +6,7 @@
 	var/turn_delay = 5
 	var/obj/item/robot_parts/robot_component/actuator/motivator
 	power_use = 50
-	var/max_fall_damage = 30
+	var/max_fall_damage = 90
 
 	var/mech_turn_sound = 'sound/mecha/mechmove01.ogg'
 	var/mech_step_sound = 'sound/mecha/mechstep01.ogg'
@@ -88,7 +88,7 @@
 	max_fall_damage = 0
 
 	mech_turn_sound = 'sound/mecha/mechmove02.ogg'
-	mech_step_sound = 'sound/mecha/mechstep02.ogg'
+	mech_step_sound = 'sound/mecha/mechstep01.ogg'
 
 /obj/item/mech_component/propulsion/light/handle_vehicle_fall()
 	..()
@@ -105,6 +105,7 @@
 	power_use = 25
 
 	mech_turn_sound = 'sound/mecha/mechmove03.ogg'
+	mech_step_sound = 'sound/mecha/mechstep02.ogg'
 
 /obj/item/mech_component/propulsion/tracks
 	name = "tracks"

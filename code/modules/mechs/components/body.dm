@@ -37,6 +37,7 @@
 	var/min_pilot_size = MOB_SMALL
 	var/max_pilot_size = MOB_LARGE
 	has_hardpoints = list(HARDPOINT_BACK, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
+	var/damage_sound = 'sound/effects/bang.ogg'
 	var/climb_time = 25
 
 /obj/item/mech_component/chassis/New()
@@ -240,6 +241,7 @@
 	max_damage = 50
 	power_use = 5
 	has_hardpoints = list(HARDPOINT_BACK, HARDPOINT_LEFT_SHOULDER)
+	damage_sound = 'sound/effects/glass_crack1.ogg'
 	desc = "The Veymed Odysseus series cockpits combine ultralight materials and clear aluminum laminates to provide an optimized cockpit experience."
 	climb_time = 15
 
