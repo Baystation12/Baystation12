@@ -117,6 +117,10 @@ ul {
     list-style-type: none;
 }
 
+dl dt {
+    font-weight: bold;
+}
+
 li {
     padding: 0 0 2px 0;
 }
