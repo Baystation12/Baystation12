@@ -1,0 +1,7 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Psionics now work again.
+  - bugfix: Cryopods will now longer occasionally announce a mob has been flushed
+      twice.
+  - bugfix: Custom email addresses in character setup should function again.
