@@ -16,14 +16,23 @@
 	var/smell_state = SMELL_DEFAULT
 	var/volume_multiplier = 1
 
-	// The footprints left by items covering the feet (space suits and shoes) chosen by wearer bodytype (NOT SPECIES).
-	// "Default" is used if the wearer's bodytype isn't in the list.
-	// Change species_trails to give custom footprints, move_trail doesn't need to be changed..
+	/**
+	* The footprints decal left by items covering the feet. This includes space suits, not just footwear.
+	* This is called by species_tracks() to select the correct decal by wearer body type which is not the same as their species.
+	* Calling get_bodytype() on SPECIES_YEOSA returns SPECIES_UNATHI as an example.
+	*
+	* '"Default"' - Always include this. This can be the only value in the list if every species should use the specified footprint decals.
+	* If the wearer's body type doesn't match any of the specified body types, this is the value the proc uses by default.
+	*
+	* 'SPECIES_UNATHI' - An example of a valid body type. Assign any body types a custom footprint decal and the proc will use the specified decal instead of the default.
+	* Multiple body types can have specified footprint decals in the list.
+	*/
 	var/list/species_trails = list(
 		"Default" = /obj/effect/decal/cleanable/blood/tracks/footprints,
 		SPECIES_UNATHI = /obj/effect/decal/cleanable/blood/tracks/claw
 	)
-	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // Default value set since there's no real reason for this to be null.
+	/// Use species_trails instead. This variable is now only used to store the footprint decals chosen when someone equips a clothing item.
+	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // Default value set since there's no reason for this to be null.
 
 
 /obj/item/clothing/Initialize()
@@ -110,9 +119,9 @@
 		update_vision()
 	return ..()
 
+/// This proc is called when a clothing item is equipped to determine what footprints it gives the wearer. See species_trails for details on how to set this up.
 /obj/item/clothing/proc/species_tracks(mob/user)
-	//Change the tracks decal according to species.
-	var/bodytype = "Default"
+	var/bodytype = "Default"					// Should never try to find a null bodytype.
 	var/mob/living/carbon/human/H
 	if(ishuman(user))
 		H = user
