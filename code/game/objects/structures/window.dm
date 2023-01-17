@@ -294,7 +294,10 @@
 			to_chat(user, SPAN_NOTICE("You're not sure how to dismantle \the [src] properly."))
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-			user.visible_message(SPAN_WARNING("[user] dismantles \the [src]."), SPAN_NOTICE("You dismantle \the [src]."))
+			user.visible_message(
+				SPAN_WARNING("[user] dismantles \the [src]."),
+				SPAN_NOTICE("You dismantle \the [src].")
+			)
 			dismantle()
 		return
 
@@ -343,9 +346,15 @@
 		if(!cutter.slice(user))
 			return
 		playsound(src, 'sound/items/Welder.ogg', 80, 1)
-		user.visible_message(SPAN_WARNING("[user] has started slicing \the [src] apart!"),SPAN_NOTICE("You start slicing \the [src] apart."))
+		user.visible_message(
+			SPAN_WARNING("[user] has started slicing \the [src] apart!"),
+			SPAN_NOTICE("You start slicing \the [src] apart.")
+		)
 		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-			user.visible_message(SPAN_WARNING("[user] slices \the [src] into sheets!"),SPAN_NOTICE("You slice \the [src] into sheets."))
+			user.visible_message(
+				SPAN_WARNING("[user] slices \the [src] into sheets!"),
+				SPAN_NOTICE("You slice \the [src] into sheets.")
+			)
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			dismantle()
 		return
