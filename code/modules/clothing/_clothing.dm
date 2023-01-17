@@ -17,7 +17,10 @@
 	var/volume_multiplier = 1
 
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
-
+	var/list/species_trails = list(
+		"Default" = /obj/effect/decal/cleanable/blood/tracks/footprints,
+		SPECIES_UNATHI = /obj/effect/decal/cleanable/blood/tracks/claw
+	)
 
 /obj/item/clothing/Initialize()
 	. = ..()
@@ -98,9 +101,22 @@
 	return 1
 
 /obj/item/clothing/equipped(mob/user)
+	species_tracks(user)
 	if(needs_vision_update())
 		update_vision()
 	return ..()
+
+/obj/item/clothing/proc/species_tracks(mob/user)
+	//Change the tracks decal according to species.
+	var/bodytype = "Default"
+	var/mob/living/carbon/human/H
+	if(ishuman(user))
+		H = user
+		bodytype = H.species.get_bodytype()
+	if(!species_trails[bodytype])
+		move_trail = species_trails["Default"]
+	else
+		move_trail = species_trails[bodytype]
 
 /obj/item/clothing/proc/refit_for_species(target_species)
 	if(!species_restricted)
