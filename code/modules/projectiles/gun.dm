@@ -101,8 +101,11 @@
 	var/safety_state = 1
 	var/has_safety = TRUE
 	var/safety_icon 	   //overlay to apply to gun based on safety state, if any
-	var/gun_skill = SKILL_WEAPONS	// What skill governs this gun's training. Basic training with this skill is required to see the safety icon.
-	var/safety_skill = SKILL_EXPERT // What skill level covers safely handling this gun. Anything less and accidents can occur.
+
+	/// What skill governs safe handling of this gun. Basic skill level and higher will also show the safety overlay to the player.
+	var/gun_skill = SKILL_WEAPONS
+	/// What skill level is needed in the gun's skill to completely negate the chance of an accident.
+	var/safety_skill = SKILL_EXPERT
 
 /obj/item/gun/Initialize()
 	. = ..()
