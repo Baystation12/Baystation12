@@ -66,7 +66,7 @@ GLOBAL_VAR_INIT(actual_error_file_line, new/regex("^%% (.*?),(.*?) %% "))
 			error_cooldown[erroruid] = 0
 			if(skipcount > 0)
 				to_world_log("\[[time_stamp()]] Skipped [skipcount] runtimes in [erroruid].")
-				GLOB.error_cache.log_error(E, skip_count = skipcount)
+				GLOB.error_cache.log_error(E, skip_count = skipcount, actual_file = efile, actual_line = eline)
 
 	error_last_seen[erroruid] = world.time
 	error_cooldown[erroruid] = cooldown
@@ -100,7 +100,7 @@ GLOBAL_VAR_INIT(actual_error_file_line, new/regex("^%% (.*?),(.*?) %% "))
 	if(silencing)
 		desclines += "  (This error will now be silenced for [configured_error_silence_time / 600] minutes)"
 	if(GLOB.error_cache)
-		GLOB.error_cache.log_error(E, desclines)
+		GLOB.error_cache.log_error(E, desclines, actual_file = efile, actual_line = eline)
 
 	to_world_log("\[[time_stamp()]] Runtime in [erroruid]: [E]")
 	for(var/line in desclines)
