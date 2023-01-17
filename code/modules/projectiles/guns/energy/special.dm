@@ -142,7 +142,7 @@
 
 /obj/item/gun/energy/plasmacutter
 	name = "plasma cutter"
-	desc = "A mining tool capable of expelling concentrated plasma bursts. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
+	desc = "An industrial tool that expels focused plasma bursts for deconstruction and mining."
 	charge_meter = 0
 	icon = 'icons/obj/guns/plasmacutter.dmi'
 	icon_state = "plasmacutter"
@@ -157,6 +157,10 @@
 	max_shots = 10
 	self_recharge = 1
 	var/datum/effect/effect/system/spark_spread/spark_system
+
+	// As an industrial tool the plasma cutter's safety training falls under construction.
+	gun_skill = SKILL_CONSTRUCTION
+	safety_skill = SKILL_ADEPT
 
 /obj/item/gun/energy/plasmacutter/mounted
 	name = "mounted plasma cutter"
@@ -178,7 +182,7 @@
 	if(!safety())
 		if(M)
 			M.welding_eyecheck()//Welding tool eye check
-			if(check_accidents(M, "[M] loses grip on [src] from its sudden recoil!",SKILL_CONSTRUCTION, 60, SKILL_ADEPT))
+			if(check_accidents(M, "[M] loses grip on \the [src] from its sudden recoil!",gun_skill, 60, safety_skill))
 				return 0
 		spark_system.start()
 		return 1

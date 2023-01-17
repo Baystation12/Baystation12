@@ -294,13 +294,8 @@
 			to_chat(user, SPAN_NOTICE("You're not sure how to dismantle \the [src] properly."))
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-			visible_message(SPAN_NOTICE("[user] dismantles \the [src]."))
-			var/obj/item/stack/material/S = material.place_sheet(loc, is_fulltile() ? 4 : 1)
-			if(S && reinf_material)
-				S.reinf_material = reinf_material
-				S.update_strings()
-				S.update_icon()
-			qdel(src)
+			user.visible_message(SPAN_WARNING("[user] dismantles \the [src]."), SPAN_NOTICE("You dismantle \the [src]."))
+			dismantle()
 		return
 
 	if (isCoil(W) && is_fulltile())
@@ -343,17 +338,16 @@
 			to_chat(user, SPAN_NOTICE("The new ID of \the [src] is [id]."))
 		return
 
-	if (istype(W, /obj/item/gun/energy/plasmacutter) && anchored)
+	if (istype(W, /obj/item/gun/energy/plasmacutter))
 		var/obj/item/gun/energy/plasmacutter/cutter = W
 		if(!cutter.slice(user))
 			return
 		playsound(src, 'sound/items/Welder.ogg', 80, 1)
-		visible_message(SPAN_NOTICE("[user] has started slicing through the window's frame!"))
+		user.visible_message(SPAN_WARNING("[user] has started slicing \the [src] apart!"),SPAN_NOTICE("You start slicing \the [src] apart."))
 		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-			visible_message(SPAN_WARNING("[user] has sliced through the window's frame!"))
+			user.visible_message(SPAN_WARNING("[user] slices \the [src] into sheets!"),SPAN_NOTICE("You slice \the [src] into sheets."))
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
-			construction_state = 0
-			set_anchored(0)
+			dismantle()
 		return
 
 	if (istype(W, /obj/item/stack/material))
@@ -412,6 +406,14 @@
 		return
 
 	..()
+
+/obj/structure/window/proc/dismantle()
+	var/obj/item/stack/material/S = material.place_sheet(loc, is_fulltile() ? 4 : 1)
+	if(S && reinf_material)
+		S.reinf_material = reinf_material
+		S.update_strings()
+		S.update_icon()
+	qdel(src)
 
 /obj/structure/window/grab_attack(obj/item/grab/G)
 	if (G.assailant.a_intent != I_HURT)
