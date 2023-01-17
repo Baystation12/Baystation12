@@ -16,11 +16,15 @@
 	var/smell_state = SMELL_DEFAULT
 	var/volume_multiplier = 1
 
-	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
+	// The footprints left by items covering the feet (space suits and shoes) chosen by wearer bodytype (NOT SPECIES).
+	// "Default" is used if the wearer's bodytype isn't in the list.
+	// Change species_trails to give custom footprints, move_trail doesn't need to be changed..
 	var/list/species_trails = list(
 		"Default" = /obj/effect/decal/cleanable/blood/tracks/footprints,
 		SPECIES_UNATHI = /obj/effect/decal/cleanable/blood/tracks/claw
 	)
+	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // Default value set since there's no real reason for this to be null.
+
 
 /obj/item/clothing/Initialize()
 	. = ..()
@@ -112,10 +116,10 @@
 	var/mob/living/carbon/human/H
 	if(ishuman(user))
 		H = user
-		bodytype = H.species.get_bodytype()
-	if(!species_trails[bodytype])
+		bodytype = H.species.get_bodytype()		// Gets the species bodytype, this is NOT the user's species.
+	if(!species_trails[bodytype])				// If the species bodytype isn't assigned a specific footprint, use the assigned default.
 		move_trail = species_trails["Default"]
-	else
+	else										// Otherwise use the footprint assigned to the bodytype.
 		move_trail = species_trails[bodytype]
 
 /obj/item/clothing/proc/refit_for_species(target_species)
