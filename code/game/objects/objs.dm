@@ -124,13 +124,16 @@
 		if (damtype == DAMAGE_BURN)
 			. |= DAMAGE_FLAG_LASER
 
-/obj/attackby(obj/item/O, mob/user)
-	if(obj_flags & OBJ_FLAG_ANCHORABLE)
-		if(isWrench(O))
-			wrench_floor_bolts(user)
-			update_icon()
-			return
+
+/obj/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Wrench - Toggle anchoring
+	if (HAS_FLAGS(obj_flags, OBJ_FLAG_ANCHORABLE) && isWrench(tool))
+		wrench_floor_bolts(user)
+		update_icon()
+		return TRUE
+
 	return ..()
+
 
 /obj/proc/wrench_floor_bolts(mob/user, delay=20)
 	playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
