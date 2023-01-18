@@ -134,7 +134,7 @@
 		return
 
 	if(on)
-		addtimer(CALLBACK(src, .proc/set_state, !on), 3 SECONDS)
+		addtimer(new Callback(src, .proc/set_state, !on), 3 SECONDS)
 	else
 		set_state(!on)
 	//visible_message("Выключатель тихо щелкнул и в[on?"":"ы"]ключился как только [detected.name] [on?"вошел в":"покидает"] помещение.")

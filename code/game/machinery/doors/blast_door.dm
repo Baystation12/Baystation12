@@ -295,7 +295,7 @@
 		// Если уж емагаются, то все сразу
 		for(var/obj/machinery/door/blast/regular/lockdown/door in SSmachines.machinery)
 			if(door.id_tag == id_tag && door.density && door.operable())
-				INVOKE_ASYNC(door, /obj/machinery/door/proc/do_animate, "emag")
+				invoke_async(door, /obj/machinery/door/proc/do_animate, "emag")
 
 /obj/machinery/door/blast/regular/lockdown/attackby(obj/item/C as obj, mob/user as mob)
 	. = ..(C, user)
@@ -303,16 +303,16 @@
 		if(allowed(user))
 			for(var/obj/machinery/door/blast/regular/lockdown/door in SSmachines.machinery)
 				if(door.id_tag == id_tag)
-					INVOKE_ASYNC(door, /obj/machinery/door/proc/open)
+					invoke_async(door, /obj/machinery/door/proc/open)
 		return
 
 /obj/machinery/door/blast/regular/lockdown/attack_ai()
 	for(var/obj/machinery/door/blast/regular/lockdown/door in SSmachines.machinery)
 		if(door.id_tag == id_tag)
 			if(door.density)
-				INVOKE_ASYNC(door, /obj/machinery/door/proc/open)
+				invoke_async(door, /obj/machinery/door/proc/open)
 			else
-				INVOKE_ASYNC(door, /obj/machinery/door/proc/close)
+				invoke_async(door, /obj/machinery/door/proc/close)
 
 // SUBTYPE: Shutters
 // Nicer looking, and also weaker, shutters. Found in kitchen and similar areas.
