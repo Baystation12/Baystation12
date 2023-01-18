@@ -60,7 +60,9 @@
 /**
  * Handler for displaying information on tool interations in the Mechanics section of the atom's codex entry.
  *
- * Returns associative list of strings. Best practice is to append information to existing entries with `+=`, if present (This is null safe), i.e.:
+ * Returns associative list of strings. Best practice is to  either:
+ * - Append information to existing entries with `+=`, if present (This is null safe), or
+ * - Overwrite existing entries if the specific item doesn't pass through to parent.
  * ```dm
  * . = ..()
  * .["Screwdriver"] += "<p>Toggles the maintenance panel open and closed.</p>"
@@ -80,9 +82,11 @@
 
 
 /**
- * Handler for displaying information on tool interations in the Antagonist section of the atom's codex entry.
+ * Handler for displaying information on tool interations in the Mechanics section of the atom's codex entry.
  *
- * Returns associative list of strings. Best practice is to append information to existing entries with `+=`, if present (This is null safe), i.e.:
+ * Returns associative list of strings. Best practice is to  either:
+ * - Append information to existing entries with `+=`, if present (This is null safe), or
+ * - Overwrite existing entries if the specific item doesn't pass through to parent.
  * ```dm
  * . = ..()
  * .["Screwdriver"] += "<p>Toggles the maintenance panel open and closed.</p>"
