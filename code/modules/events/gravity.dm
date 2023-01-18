@@ -6,8 +6,9 @@
 	endWhen = rand(15, 60)
 
 /datum/event/gravity/announce()
-	command_announcement.Announce("Feedback surge detected in mass-distributions systems. Artificial gravity has been disabled to avoid system overload.", "[location_name()] Gravity Subsystem", zlevels = affecting_z)
+	command_announcement.Announce("Отклонения в показателях генератора искусственной гравитации достигли неблагоприятного уровня. Техническому отделу крайне рекомендуется решить эту проблему.", "Ошибка распределения ускорения.", zlevels = affecting_z)
 
+/*[inf.exclude]
 /datum/event/gravity/start()
 	for (var/area/A in world)
 		if (A.has_gravity() && (A.z in affecting_z))
@@ -15,8 +16,12 @@
 			A.gravitychange(FALSE)
 
 /datum/event/gravity/end()
-	for (var/area/A in gravity_status)
-		if (!A.has_gravity() && (A.z in affecting_z))
-			A.gravitychange(TRUE)
-	gravity_status.Cut()
-	command_announcement.Announce("Gravity generators are again functioning within normal parameters. Sorry for any inconvenience.", "[location_name()] Gravity Subsystem", zlevels = affecting_z)
+	if(!gravity_is_on)
+		gravity_is_on = 1
+
+		for(var/area/A in world)
+			if((A.z in affecting_z) && initial(A.has_gravity))
+				A.gravitychange(gravity_is_on)
+
+		command_announcement.Announce("Генератор гравитации успешно перекалиброван и запущен. Текущая сила притяжения - 9.8.", "Гравитация Восстановлена", zlevels = affecting_z)
+[/inf.exclude]*/

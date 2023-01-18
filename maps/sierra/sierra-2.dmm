@@ -38527,6 +38527,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/gravity_generator/main/station,
 /turf/simulated/floor/greengrid,
 /area/engineering/gravitaional_generator)
 "tML" = (
