@@ -185,12 +185,12 @@
 	next_action = time + 3 SECONDS
 	active = !active
 	if (active)
-		addtimer(CALLBACK(src, /obj/item/shield/energy/proc/UpdateSoundLoop), 0.25 SECONDS)
+		addtimer(new Callback(src, /obj/item/shield/energy/proc/UpdateSoundLoop), 0.25 SECONDS)
 		playsound(src, 'sound/obj/item/shield/energy/shield-start.ogg', 40)
 		force = 10
 		w_class = ITEM_SIZE_NO_CONTAINER
 	else
-		addtimer(CALLBACK(src, /obj/item/shield/energy/proc/UpdateSoundLoop), 0.1 SECONDS)
+		addtimer(new Callback(src, /obj/item/shield/energy/proc/UpdateSoundLoop), 0.1 SECONDS)
 		playsound(src, 'sound/obj/item/shield/energy/shield-stop.ogg', 40)
 		force = initial(force)
 		w_class = initial(w_class)

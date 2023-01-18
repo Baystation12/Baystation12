@@ -31,7 +31,6 @@
 #include "code\__defines\armor.dm"
 #include "code\__defines\atmos.dm"
 #include "code\__defines\atmospherics.dm"
-#include "code\__defines\callback.dm"
 #include "code\__defines\chemistry.dm"
 #include "code\__defines\client.dm"
 #include "code\__defines\colors.dm"

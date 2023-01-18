@@ -120,10 +120,13 @@
 		if("kill") return "nucgun-kill"
 
 /obj/item/gun/energy/gun/nuclear/on_update_icon()
-	var/list/new_overlays = list()
+	overlays.Cut()
+	overlays += get_charge_overlay()
+	overlays += get_reactor_overlay()
+	overlays += get_mode_overlay()
 
-	new_overlays += get_charge_overlay()
-	new_overlays += get_reactor_overlay()
-	new_overlays += get_mode_overlay()
-
-	overlays = new_overlays
+	// Safety
+	if (ismob(loc))
+		var/mob/M = loc
+		if (M.skill_check(SKILL_WEAPONS, SKILL_BASIC))
+			overlays += image('icons/obj/guns/gui.dmi', "safety[safety()]")

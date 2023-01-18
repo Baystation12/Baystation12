@@ -85,7 +85,7 @@
 			reagents.add_reagent(reagent, hot_reagents[reagent])
 		was_heated = TRUE
 	SetName("hot " + name)
-	addtimer(CALLBACK(src, .proc/UnsetHot), 7 MINUTES)
+	addtimer(new Callback(src, .proc/UnsetHot), 7 MINUTES)
 
 
 /obj/item/reagent_containers/food/snacks/donkpocket/proc/UnsetHot()

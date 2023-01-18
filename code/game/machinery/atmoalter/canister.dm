@@ -7,6 +7,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_GARGANTUAN
 	construct_state = null
+	health_resistances = DAMAGE_RESIST_PHYSICAL
 
 	var/valve_open = 0
 	var/release_pressure = ONE_ATMOSPHERE

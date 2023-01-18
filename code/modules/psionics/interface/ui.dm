@@ -3,10 +3,10 @@
 	var/mob/living/owner
 	var/hidden = TRUE
 
-/obj/screen/psi/Initialize(mapload, mob/living/_owner)
+/obj/screen/psi/Initialize(mapload)
 	. = ..()
+	owner = loc
 	loc = null
-	owner = _owner
 	update_icon()
 
 /obj/screen/psi/Destroy()

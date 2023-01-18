@@ -51,7 +51,7 @@
 	visible_message(SPAN_NOTICE("\The [src] burrows into \the [get_turf(src)]!"))
 	set_invisibility(INVISIBILITY_OBSERVER)
 	prep_burrow(TRUE)
-	addtimer(CALLBACK(src, .proc/diggy), 5 SECONDS)
+	addtimer(new Callback(src, .proc/diggy), 5 SECONDS)
 
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/diggy()
 	var/list/turf_targets
@@ -70,12 +70,12 @@
 				continue
 			turf_targets += T
 	if(!LAZYLEN(turf_targets)) //oh no
-		addtimer(CALLBACK(src, .proc/emerge, 2 SECONDS))
+		addtimer(new Callback(src, .proc/emerge, 2 SECONDS))
 		return
 	var/turf/T = pick(turf_targets)
 	if(T && !incapacitated())
 		forceMove(T)
-	addtimer(CALLBACK(src, .proc/emerge, 2 SECONDS))
+	addtimer(new Callback(src, .proc/emerge, 2 SECONDS))
 
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/emerge()
 	var/turf/T = get_turf(src)

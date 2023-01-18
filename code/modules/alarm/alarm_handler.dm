@@ -54,7 +54,7 @@
 	if(z_level)
 		. = list()
 		for(var/z in GetConnectedZlevels(z_level))
-			. += alarms_by_z["[z]"] || list()
+			. += SANITIZE_LIST(alarms_by_z["[z]"])
 	else
 		return alarms
 
@@ -76,7 +76,7 @@
 	if ((alarm.end_time && world.time > alarm.end_time) || !alarm.sources.len)
 		alarms -= alarm
 		alarms_assoc -= alarm.origin
-		alarms_by_z["[alarm.alarm_z()]"] -= alarm
+		LAZYREMOVE(alarms_by_z["[alarm.alarm_z()]"], alarm)
 		on_alarm_change(alarm, ALARM_CLEARED)
 		return 1
 	return 0

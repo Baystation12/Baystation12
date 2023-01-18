@@ -41,6 +41,11 @@
 			else
 				production_strings += "- [jointext(reactant_values, " + ")]: [reaction.result_amount]u [lowertext(initial(result.name))]"
 
+			if (reaction.maximum_temperature < INFINITY)
+				production_strings += "- Maximum temperature: [KELVIN_TO_CELSIUS(reaction.maximum_temperature)]C ([reaction.maximum_temperature]K)"
+			if (reaction.minimum_temperature > 0)
+				production_strings += "- Minimum temperature: [KELVIN_TO_CELSIUS(reaction.minimum_temperature)]C ([reaction.minimum_temperature]K)"
+
 		if(production_strings.len)
 			if(!entry.mechanics_text)
 				entry.mechanics_text = "It can be produced as follows:<br>"

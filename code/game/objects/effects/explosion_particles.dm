@@ -56,7 +56,7 @@
 	var/datum/effect/system/expl_particles/P = new/datum/effect/system/expl_particles()
 	P.set_up(10,location)
 	P.start()
-	addtimer(CALLBACK(src, .proc/make_smoke), 5)
+	addtimer(new Callback(src, .proc/make_smoke), 5)
 
 /datum/effect/system/explosion/proc/make_smoke()
 	var/datum/effect/effect/system/smoke_spread/S = new/datum/effect/effect/system/smoke_spread()

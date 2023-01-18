@@ -229,6 +229,7 @@
 /obj/screen/exosuit/toggle/air/toggled()
 	owner.use_air = ..()
 	to_chat(usr, SPAN_NOTICE("Auxiliary atmospheric system [owner.use_air ? "enabled" : "disabled"]."))
+	playsound(src.loc, 'sound/effects/turret/open.wav', 50, 1, -6)
 
 /obj/screen/exosuit/toggle/maint
 	name = "toggle maintenance protocol"
@@ -241,6 +242,7 @@
 /obj/screen/exosuit/toggle/maint/toggled()
 	owner.maintenance_protocols = ..()
 	to_chat(usr, SPAN_NOTICE("Maintenance protocols [owner.maintenance_protocols ? "enabled" : "disabled"]."))
+	playsound(src.loc, 'sound/machines/suitstorage_lockdoor.ogg', 50, 1, -6)
 
 /obj/screen/exosuit/toggle/hardpoint
 	name = "toggle hardpoint lock"
@@ -251,6 +253,7 @@
 /obj/screen/exosuit/toggle/hardpoint/toggled()
 	owner.hardpoints_locked = ..()
 	to_chat(usr, SPAN_NOTICE("Hardpoint system access is now [owner.hardpoints_locked ? "disabled" : "enabled"]."))
+	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1, -6)
 
 /obj/screen/exosuit/toggle/hatch
 	name = "toggle hatch lock"
@@ -264,6 +267,7 @@
 		return
 	owner.hatch_locked = ..()
 	to_chat(usr, SPAN_NOTICE("The [owner.body.hatch_descriptor] is [owner.hatch_locked ? "now" : "no longer" ] locked."))
+	playsound(src.loc, 'sound/machines/suitstorage_lockdoor.ogg', 50, 1, -6)
 
 /obj/screen/exosuit/toggle/hatch_open
 	name = "open or close hatch"
@@ -280,6 +284,7 @@
 	owner.hatch_closed = ..()
 	to_chat(usr, SPAN_NOTICE("The [owner.body.hatch_descriptor] is now [owner.hatch_closed ? "closed" : "open" ]."))
 	owner.update_icon()
+	playsound(src.loc, 'sound/machines/suitstorage_cycledoor.ogg', 50, 1, -6)
 
 /obj/screen/exosuit/toggle/hatch_open/on_update_icon()
 	toggled = owner.hatch_closed
