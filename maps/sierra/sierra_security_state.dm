@@ -61,11 +61,11 @@
 	if(!lockdown)
 		for(var/obj/machinery/door/blast/regular/lockdown/door in SSmachines.machinery)
 			door.autoclose = FALSE
-			INVOKE_ASYNC(door, /obj/machinery/door/proc/open)
+			invoke_async(door, /obj/machinery/door/proc/open)
 	else
 		for(var/obj/machinery/door/blast/regular/lockdown/door in SSmachines.machinery)
 			door.autoclose = TRUE
-			INVOKE_ASYNC(door, /obj/machinery/door/blast/proc/delayed_close)
+			invoke_async(door, /obj/machinery/door/blast/proc/delayed_close)
 
 /datum/map/sierra // setting the map to use this list
 	security_state = /singleton/security_state/default/sierradept

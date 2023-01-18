@@ -61,7 +61,7 @@
 	/// Soundfile. The sound played when opening the door while unpowered.
 	var/open_sound_unpowered = 'sound/machines/airlock_open_force.ogg'
 	/// Soundfile. The sound played when the door refuses to open due to access.
-	var/open_failure_access_denied = 'sound/machines/buzz-two.ogg'
+	var/open_failure_access_denied = 'sound/machines/deniedboop.ogg'
 	/// Soundfile. The sound played when the door closes while powered.
 	var/close_sound_powered = 'sound/machines/airlock_close.ogg'
 	/// Soundfile. The sound played when the door closes while unpowered.
@@ -431,7 +431,7 @@
 /obj/machinery/door/airlock/phoron/proc/PhoronBurn(temperature)
 	for(var/turf/simulated/floor/target_tile in range(2,loc))
 		target_tile.assume_gas(GAS_PHORON, 35, 400+T0C)
-		addtimer(CALLBACK(target_tile, /turf/proc/hotspot_expose, 400), 0)
+		addtimer(new Callback(target_tile, /turf/proc/hotspot_expose, 400), 0)
 	for(var/turf/simulated/wall/W in range(3,src))
 		W.burn((temperature/4))//Added so that you can't set off a massive chain reaction with a small flame
 	for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
@@ -608,6 +608,8 @@ About the new airlock wires panel:
 // returns 1 if shocked, 0 otherwise
 // The preceding comment was borrowed from the grille's shock script
 /obj/machinery/door/airlock/shock(mob/user, prb)
+	if (!user)
+		return FALSE
 	if(!arePowerSystemsOn())
 		return 0
 	if(hasShocked)
@@ -773,9 +775,7 @@ About the new airlock wires panel:
 			set_airlock_overlays(AIRLOCK_DENY)
 			if(density && arePowerSystemsOn())
 				flick("deny", src)
-				if(secured_wires && world.time > next_clicksound)
-					next_clicksound = world.time + CLICKSOUND_INTERVAL
-					playsound(loc, open_failure_access_denied, 50, 0)
+				playsound(loc, open_failure_access_denied, 70, 0)
 			update_icon(AIRLOCK_CLOSED)
 		if("emag")
 			set_airlock_overlays(AIRLOCK_EMAG)

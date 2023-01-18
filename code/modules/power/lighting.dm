@@ -288,9 +288,6 @@
 	if(istype(lightbulb, /obj/item/light))
 		var/image/I = image(icon, src, _state)
 		I.color = get_mode_color()
-		if (on)
-			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-			I.layer = ABOVE_LIGHTING_LAYER
 		overlays += I
 
 	if(on)
@@ -673,7 +670,7 @@
 	/// Lighting `curve` value when turned on.
 	var/b_curve = 2
 	/// Lighting `colour` value when turned on.
-	var/b_colour = LIGHT_COLOUR_WARM
+	var/b_colour = LIGHT_COLOUR_HALOGEN
 
 	/**
 	 * List of lists. Alternative lighting modes the bulb supports. Entry index should be the `LIGHTMODE_*` type supported, and the value should be a list of `l_*` lighting values to be applied when the mode is enabled.
@@ -715,6 +712,7 @@
 	base_state = "ltube"
 	item_state = "c_tube"
 	matter = list(MATERIAL_GLASS = 100, MATERIAL_ALUMINIUM = 20)
+	b_colour = LIGHT_COLOUR_HALOGEN
 
 	b_outer_range = 5
 	lighting_modes = list(
@@ -907,7 +905,7 @@
 			log_and_message_admins("Rigged light explosion, last touched by [fingerprintslast]")
 			var/turf/T = get_turf(loc)
 			set_status(LIGHT_BROKEN)
-			addtimer(CALLBACK(src, .proc/explosion, T, 3, EX_ACT_LIGHT), 2)
+			addtimer(new Callback(GLOBAL_PROC, /proc/explosion, T, 3, EX_ACT_LIGHT), 0.5 SECONDS)
 		else
 			visible_message(SPAN_WARNING("\The [src] short-circuits as something burns out its filament!"))
 			set_status(LIGHT_BURNED)

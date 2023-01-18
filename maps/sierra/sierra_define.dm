@@ -6,6 +6,8 @@
 	config_path = "config/sierra_config.txt"
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 
+	welcome_sound = list('sound/AI/welcome.ogg', 'sound/AI/welcome_alt.ogg')
+
 	load_legacy_saves = TRUE
 
 	station_levels = list(1,2,3)

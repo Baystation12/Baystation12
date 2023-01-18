@@ -67,7 +67,7 @@ var/global/list/angle_step_to_dir = list(
 	return global.angle_step_to_dir[clamp(round(angle/45)+1, 1, length(global.angle_step_to_dir))]
 
 /obj/compass_holder/Destroy()
-	QDEL_NULL_LIST(compass_waypoints)
+	QDEL_NULL_ASSOC_LIST(compass_waypoints)
 	. = ..()
 
 /obj/compass_holder/proc/get_heading_strength()

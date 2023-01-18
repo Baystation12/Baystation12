@@ -51,7 +51,7 @@ Random item spawning
 /obj/random/hostile/xenobio/spawn_choices()
 	return list(/mob/living/simple_animal/slime,
 				/mob/living/simple_animal/hostile/carp,
-				/mob/living/simple_animal/crab,
+				/mob/living/simple_animal/passive/crab,
 				/mob/living/simple_animal/thinbug,
 				/mob/living/simple_animal/yithian)
 

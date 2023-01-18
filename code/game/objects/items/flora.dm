@@ -29,7 +29,7 @@
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 			to_chat (user, SPAN_NOTICE("You trim \the [src] with \the [S]. You probably should've used a pair of scissors."))
 			trimmed = TRUE
-			addtimer(CALLBACK(src, .proc/grow), 90 MINUTES, TIMER_UNIQUE|TIMER_OVERRIDE)
+			addtimer(new Callback(src, .proc/grow), 90 MINUTES, TIMER_UNIQUE|TIMER_OVERRIDE)
 			update_icon()
 
 /obj/item/flora/pottedplantsmall/fern/on_update_icon()

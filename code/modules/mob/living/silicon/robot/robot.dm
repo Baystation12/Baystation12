@@ -12,6 +12,7 @@
 	mob_swap_flags = ROBOT|MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = ~HEAVY //trundle trundle
 	skillset = /datum/skillset/silicon/robot
+	z_flags = ZMM_MANGLE_PLANES
 
 	var/lights_on = FALSE
 	var/used_power_this_tick = 0

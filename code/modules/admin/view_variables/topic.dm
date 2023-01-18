@@ -485,7 +485,7 @@
 			return
 
 		SSnano.close_uis(H)
-		H.client.sent_assets.Cut()
+		H.client.cache.Cut()
 		var/datum/asset/assets = get_asset_datum(/datum/asset/nanoui)
 		assets.send(H)
 

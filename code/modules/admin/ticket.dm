@@ -23,8 +23,8 @@ var/global/list/ticket_panels = list()
 		var/sql_ckey = sanitizeSQL(owner.ckey)
 		var/DBQuery/ticket_query = dbcon.NewQuery("INSERT INTO erro_admin_tickets(ckey,round,inround_id,status,open_date) VALUES ('[sql_ckey]', '[game_id]', [src.id], 'OPEN', NOW());")
 		ticket_query.Execute()
-	to_check = addtimer(CALLBACK(src, .proc/timeoutcheck), 5 MINUTES, TIMER_STOPPABLE)
-	to_close = addtimer(CALLBACK(src, .proc/timeoutclose), 10 MINUTES, TIMER_STOPPABLE)
+	to_check = addtimer(new Callback(src, .proc/timeoutcheck), 5 MINUTES, TIMER_STOPPABLE)
+	to_close = addtimer(new Callback(src, .proc/timeoutclose), 10 MINUTES, TIMER_STOPPABLE)
 
 /datum/ticket/proc/timeoutcheck()
 	if(status == TICKET_OPEN)
@@ -37,7 +37,7 @@ var/global/list/ticket_panels = list()
 /datum/ticket/proc/timeoutclose()
 	if(status == TICKET_OPEN)
 		message_staff(SPAN_DANGER("[owner.key_name(0)] has not received a reply to their initial ahelp after 5 minutes!"))
-		addtimer(CALLBACK(src, .proc/timeoutchecklast), 5 MINUTES, TIMER_STOPPABLE)
+		addtimer(new Callback(src, .proc/timeoutchecklast), 5 MINUTES, TIMER_STOPPABLE)
 
 
 /datum/ticket/proc/timeoutchecklast()
@@ -140,7 +140,7 @@ var/global/list/ticket_panels = list()
 	to_chat(client_by_ckey(src.owner.ckey), SPAN_NOTICE("<b>[assigned_admin.key] has added themself to your ticket and should respond shortly. Thanks for your patience!</b>"))
 
 	update_ticket_panels()
-	addtimer(CALLBACK(src, .proc/timeoutchecktaken), 30 MINUTES, TIMER_STOPPABLE)
+	addtimer(new Callback(src, .proc/timeoutchecktaken), 30 MINUTES, TIMER_STOPPABLE)
 
 	return 1
 

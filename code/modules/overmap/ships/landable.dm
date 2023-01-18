@@ -128,7 +128,7 @@
 	var/datum/shuttle/autodock/auto = given_shuttle
 	if(into == auto.landmark_transition)
 		status = SHIP_STATUS_TRANSIT
-		on_takeoff(from, into)
+		on_transit(from, into)
 		return
 	if(into == landmark)
 		status = SHIP_STATUS_OVERMAP
@@ -136,6 +136,9 @@
 		return
 	status = SHIP_STATUS_LANDED
 	on_landing(from, into)
+
+/obj/effect/overmap/visitable/ship/landable/proc/on_transit(obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
+	halt()
 
 /obj/effect/overmap/visitable/ship/landable/proc/on_landing(obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
 	var/obj/effect/overmap/visitable/target = map_sectors["[into.z]"]

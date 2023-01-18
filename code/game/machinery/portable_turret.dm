@@ -364,7 +364,7 @@ var/global/list/turret_icons
 	if (health_mod < 0)
 		if (!emagged && enabled)
 			attacked = TRUE
-			addtimer(CALLBACK(src, .proc/timer_attacked), 6 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
+			addtimer(new Callback(src, .proc/timer_attacked), 6 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 		if (prob(45))
 			spark_system.start()
 
@@ -393,7 +393,7 @@ var/global/list/turret_icons
 
 	disabled = 1
 	var/power = 4 - severity
-	addtimer(CALLBACK(src,/obj/machinery/porta_turret/proc/enable), rand(60*power,600*power))
+	addtimer(new Callback(src,/obj/machinery/porta_turret/proc/enable), rand(60*power,600*power))
 
 	..()
 

@@ -252,6 +252,7 @@
 					cycleDoors(target_state)
 					state = STATE_IDLE
 					target_state = TARGET_NONE
+					playsound(master, 'sound/machines/airlockdone.ogg', 50)
 
 
 		if(STATE_DEPRESSURIZE)
@@ -271,6 +272,7 @@
 						cycleDoors(target_state)
 						state = STATE_IDLE
 						target_state = TARGET_NONE
+						playsound(master, 'sound/machines/airlockdone.ogg', 50)
 
 
 	memory["processing"] = (state != target_state)
@@ -283,20 +285,20 @@
 	state = STATE_IDLE
 	target_state = TARGET_INOPEN
 	memory["purge"] = cycle_to_external_air
-	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
+	playsound(master, 'sound/machines/airlockin.ogg', 50)
 	shutAlarm()
 
 /datum/computer/file/embedded_program/airlock/proc/begin_dock_cycle()
 	state = STATE_IDLE
 	target_state = TARGET_INOPEN
-	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
+	playsound(master, 'sound/machines/airlockin.ogg', 50)
 	shutAlarm()
 
 /datum/computer/file/embedded_program/airlock/proc/begin_cycle_out()
 	state = STATE_IDLE
 	target_state = TARGET_OUTOPEN
 	memory["purge"] = cycle_to_external_air
-	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
+	playsound(master, 'sound/machines/airlockout.ogg', 50)
 	shutAlarm()
 
 /datum/computer/file/embedded_program/airlock/proc/close_doors()

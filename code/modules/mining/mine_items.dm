@@ -167,10 +167,12 @@
 	icon_state = "folded"
 	amount = 10
 	max_amount = 10
+	z_flags = ZMM_MANGLE_PLANES
 	icon = 'icons/obj/marking_beacon.dmi'
 
 	var/upright = 0
 	var/fringe = null
+
 
 /obj/item/stack/flag/red
 	light_color = COLOR_RED

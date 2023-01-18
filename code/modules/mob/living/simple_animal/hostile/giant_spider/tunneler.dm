@@ -60,6 +60,8 @@
 	// Telegraph to give a small window to dodge if really close.
 	do_windup_animation(A, tunnel_warning)
 	sleep(tunnel_warning) // For the telegraphing.
+	if (QDELETED(src))
+		return FALSE
 
 	// Do the dig!
 	visible_message(SPAN_DANGER("\The [src] tunnels towards \the [A]!"))

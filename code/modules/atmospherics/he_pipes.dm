@@ -103,12 +103,13 @@
 					h_r = 64 + (h_r - 64)*scale
 					h_g = 64 + (h_g - 64)*scale
 					h_b = 64 + (h_b - 64)*scale
-
 				var/scale_color = rgb(h_r, h_g, h_b)
-
-				animate(src, color = scale_color, time = 2 SECONDS, easing = SINE_EASING)
+				var/list/animate_targets = get_above_oo() + src
+				for (var/thing in animate_targets)
+					var/atom/movable/AM = thing
+					animate(AM, color = scale_color, time = 2 SECONDS, easing = SINE_EASING)
 				animate_filter("glow", list(color = scale_color, time = 2 SECONDS, easing = LINEAR_EASING))
-				set_light(min(3, scale*2.5), min(3, scale*2.5), l_color = scale_color)
+				set_light(l_max_bright = min(1, scale*1.2), l_inner_range = scale*0.9, l_outer_range = min(5, scale*2.9), l_color = scale_color)
 		else
 			set_light(0)
 
