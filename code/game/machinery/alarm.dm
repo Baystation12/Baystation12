@@ -876,6 +876,18 @@
 
 	return ..()
 
+
+/obj/machinery/alarm/get_interactions_info()
+	. = ..()
+	.["Air Alarm Electronics"] += "<p>Part of construction. Installs the electronics. <b>This consumes the item</b>.</p>"
+	.["Cable Coil"] += "<p>Part of construction. Wires the alarm.</p>"
+	.["Crowbar"] += "<p>Part of deconstruction. After removing wires, removes the circuit board.</p>"
+	.["ID Card"] += "<p>Toggles the interface lock, if the ID has access.</p>"
+	.["Screwdriver"] += "<p>Opens or closes the maintenance panel.</p>"
+	.["Wirecutters"] += "<p>Part of deconstruction. While the maintenance panel is open, removes wiring.</p>"
+	.["Wrench"] += "<p>Part of deconstruction. After removing the circuit, detaches the alarm frame from the wall.</p>"
+
+
 /obj/machinery/alarm/examine(mob/user)
 	. = ..()
 	if (buildstage < 2)
@@ -973,6 +985,23 @@ FIRE ALARM
 			overlays += image(sl.icon, sl.overlay_alarm)
 		else
 			overlays += get_cached_overlay("fire0")
+
+
+/obj/machinery/firealarm/get_interactions_info()
+	. = ..()
+	.["Cable Coil"] = "<p>Part of construction. Installs wiring. <b>Requires and uses 5 pieces of cable</b>.</p>"
+	.["Crowbar"] = "<p>Part of deconstruction. Removes the circuit.</p>"
+	.["Fire Alarm Electronics"] = "<p>Part of construction. Installs the circuit. <b>This consumes the item.</b>"
+	.["Multitool"] = "<p>While the maintenance panel is open, toggles the fire detection unit on or off.</p>"
+	.["Screwdriver"] = "<p>Toggles the maintenance panel open or closed.</p>"
+	.["Wirecutters"] = "<p>Part of deconstruction. While the maintenance panel is open, removes the wiring.</p>"
+	.["Wrench"] = "<p>Part of deconstruction. Removes the frame from the wall.</p>"
+
+
+/obj/machinery/firealarm/get_antag_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_EMP] += "<p>Has a <pre>50% / severity</pre> chance of triggering a fire alarm.</p>"
+
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(src.detecting)

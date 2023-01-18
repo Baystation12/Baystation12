@@ -71,6 +71,18 @@
 	to_chat(user, SPAN_WARNING("You can't think of a way to use \the [I] on \the [src]."))
 	return TRUE
 
+
+/obj/machinery/barrier/get_interactions_info()
+	. = ..()
+	.["ID Card"] = "<p>Toggles the locking clamps on and off, in turn, toggling the ability to move the barrier.</p>"
+	.["Welding Tool"] = "<p>Repairs damaged locking clamps, allowing barriers to be locked in place again.</p>"
+
+
+/obj/machinery/barrier/get_antag_info()
+	. = ..()
+	.[CODEX_INTERACTION_EMAG] = "<p>Disables the barrier's locking clamps, allowing it to be moved even when locked.</p>"
+
+
 /obj/machinery/barrier/emag_act(remaining_charges, mob/user, emag_source)
 	if (user)
 		var/message = emagged ? "achieving nothing new" : "fusing the locking clamps open"
