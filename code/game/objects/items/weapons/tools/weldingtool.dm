@@ -146,6 +146,31 @@
 	setWelding(!welding, usr)
 	return
 
+/**
+ * Checks if the welding tool can be used for an interaction requiring the given amount of fuel.
+ *
+ * **Parameters**:
+ * - `user` - The mob attempting the interaction. Targeted by feedback messages.
+ * - `amount` (Integer, default `1`) - The amount of fuel needed.
+ * - `silent` (Boolean, default `FALSE`) - If set, `user` is not sent feedback messages.
+ *
+ * Returns boolean.
+ */
+/obj/item/weldingtool/proc/can_use(mob/user, amount = 1, silent = FALSE)
+	SHOULD_CALL_PARENT(TRUE)
+
+	if (!isOn())
+		if (!silent)
+			to_chat(user, SPAN_WARNING("\The [src] must be turned on first."))
+		return FALSE
+
+	if (get_fuel() < amount)
+		if (!silent)
+			to_chat(user, SPAN_WARNING("\The [src] doesn't have enough fuel. You need at least [amount] unit\s."))
+		return FALSE
+
+	return TRUE
+
 //Returns the amount of fuel in the welder
 /obj/item/weldingtool/proc/get_fuel()
 	return tank ? tank.reagents.get_reagent_amount(/datum/reagent/fuel) : 0
