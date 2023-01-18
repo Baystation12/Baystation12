@@ -315,3 +315,7 @@
 #define ATOM_FLOURESCENCE_NONE 0 // Not flourescent
 #define ATOM_FLOURESCENCE_INACTIVE 1 // Flourescent but not actively lit
 #define ATOM_FLOURESCENCE_ACTVE 2 // Flourescent and actively lit. Helps prevent repeated processing on a flourescent atom by multiple UV lights
+
+
+/// Generates a string that can be used in displayed text for IDs that may be contained in another atom. Generally paired with the result of GetIdCard()
+#define GET_ID_CARD_NAME(ATOM, ID) (ID == ATOM ? "\the [ID]" : "\the [ID] in \the [ATOM]")
