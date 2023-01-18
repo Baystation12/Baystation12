@@ -23,7 +23,23 @@ var/global/bomb_set
 	var/yes_code = 0
 	var/safety = 1
 	var/obj/item/disk/nuclear/auth = null
-	var/removal_stage = 0 // 0 is no removal, 1 is covers removed, 2 is covers open, 3 is sealant open, 4 is unwrenched, 5 is removed from bolts.
+
+	var/removal_stage = REMOVAL_STAGE_NOT_STARTED
+	/// The device can't be removed. Used for subtypes.
+	var/const/REMOVAL_STAGE_NO = -1
+	/// No removal steps have been performed.
+	var/const/REMOVAL_STAGE_NOT_STARTED = 0
+	/// Anchoring bolt covers are cut
+	var/const/REMOVAL_STAGE_COVER_CUT = 1
+	/// Anchoring bolt covers are open
+	var/const/REMOVAL_STAGE_COVER_OPEN = 2
+	/// Anchoring sealant is cut
+	var/const/REMOVAL_STAGE_SEALANT_CUT = 3
+	/// Bolts are unwrenched
+	var/const/REMOVAL_STAGE_BOLTS_WRENCHED = 4
+	/// Device is removed from bolts
+	var/const/REMOVAL_STAGE_DONE = 5
+
 	var/lastentered
 	var/previous_level = ""
 	wires = /datum/wires/nuclearbomb
@@ -93,19 +109,19 @@ var/global/bomb_set
 		var/step_name
 		var/next_stage
 		switch (removal_stage)
-			if (0)
+			if (REMOVAL_STAGE_NOT_STARTED)
 				to_chat(user, SPAN_WARNING("You need to cut \the [src]'s anchoring bolt covers loose before you can pry them open."))
 				return TRUE
-			if (1)
+			if (REMOVAL_STAGE_COVER_CUT)
 				step_name = "\the [src]'s anchoring bolt covers open"
-				next_stage = 2
-			if (2, 3)
+				next_stage = REMOVAL_STAGE_COVER_OPEN
+			if (REMOVAL_STAGE_COVER_OPEN, REMOVAL_STAGE_SEALANT_CUT)
 				to_chat(user, SPAN_WARNING("You need cut open and unwrench the anchoring bolts before you can pry \the [src] off of them."))
 				return TRUE
-			if (4)
+			if (REMOVAL_STAGE_BOLTS_WRENCHED)
 				step_name = "\the [src] off of the anchoring bolts"
-				next_stage = 5
-			else
+				next_stage = REMOVAL_STAGE_DONE
+			if (REMOVAL_STAGE_DONE)
 				to_chat(user, SPAN_WARNING("\The [src] has already been pried off its anchoring bolts."))
 				return TRUE
 		user.visible_message(
@@ -124,7 +140,7 @@ var/global/bomb_set
 
 	// Welder - Removal steps 1 and 3
 	if (isWelder(tool))
-		if (removal_stage == -1)
+		if (removal_stage == REMOVAL_STAGE_NO)
 			to_chat(user, SPAN_WARNING("\The [src] can't be removed!"))
 			return TRUE
 		var/obj/item/weldingtool/welder = tool
@@ -133,15 +149,15 @@ var/global/bomb_set
 		var/step_name
 		var/next_stage
 		switch (removal_stage)
-			if (0)
+			if (REMOVAL_STAGE_NOT_STARTED)
 				step_name = "anchoring bolt covers"
-				next_stage = 1
-			if (1)
+				next_stage = REMOVAL_STAGE_COVER_CUT
+			if (REMOVAL_STAGE_COVER_CUT)
 				to_chat(user, SPAN_WARNING("You need to open \the [src]'s anchoring bolt covers first."))
 				return TRUE
-			if (2)
+			if (REMOVAL_STAGE_COVER_OPEN)
 				step_name = "anchoring system sealant"
-				next_stage = 3
+				next_stage = REMOVAL_STAGE_SEALANT_CUT
 			else
 				to_chat(user, SPAN_WARNING("\The [src] has nothing else to cut with \the [tool]."))
 				return TRUE
@@ -162,10 +178,10 @@ var/global/bomb_set
 
 	// Wrench - Removal step 4
 	if (isWrench(tool))
-		if (removal_stage < 3)
+		if (removal_stage < REMOVAL_STAGE_SEALANT_CUT)
 			to_chat(user, SPAN_WARNING("You need to open \the [src]'s anchoring bolt cover before you can access the bolts."))
 			return TRUE
-		if (removal_stage > 3)
+		if (removal_stage > REMOVAL_STAGE_SEALANT_CUT)
 			to_chat(user, SPAN_WARNING("\The [src]'s anchoring bolts have already been unwrenched."))
 			return TRUE
 		user.visible_message(
@@ -174,7 +190,7 @@ var/global/bomb_set
 		)
 		if (!do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
-		removal_stage = 4
+		removal_stage = REMOVAL_STAGE_BOLTS_WRENCHED
 		user.visible_message(
 			SPAN_NOTICE("\The [user] unwrenches \the [src]'s anchoring bolts with \a [tool]."),
 			SPAN_NOTICE("You unwrenches \the [src]'s anchoring bolts with \the [tool].")
@@ -187,7 +203,7 @@ var/global/bomb_set
 /obj/machinery/nuclearbomb/physical_attack_hand(mob/user)
 	if(!extended && deployable)
 		. = TRUE
-		if(removal_stage < 5)
+		if(removal_stage < REMOVAL_STAGE_DONE)
 			src.anchored = TRUE
 			visible_message(SPAN_WARNING("With a steely snap, bolts slide out of [src] and anchor it to the flooring!"))
 		else
@@ -329,7 +345,7 @@ var/global/bomb_set
 					secure_device()
 				update_icon()
 			if(href_list["anchor"])
-				if(removal_stage == 5)
+				if(removal_stage == REMOVAL_STAGE_DONE)
 					anchored = FALSE
 					visible_message(SPAN_WARNING("\The [src] makes a highly unpleasant crunching noise. It looks like the anchoring bolts have been cut."))
 					return 1
@@ -493,7 +509,7 @@ var/global/bomb_set
 	anchored = TRUE
 	deployable = 1
 	extended = 1
-	removal_stage = -1
+	removal_stage = REMOVAL_STAGE_NO
 
 	var/list/flash_tiles = list()
 	var/list/inserters = list()

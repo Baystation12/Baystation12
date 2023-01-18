@@ -85,7 +85,14 @@
 	var/screen = AALARM_SCREEN_MAIN
 	var/area_uid
 	var/area/alarm_area
-	var/buildstage = 2 //2 is built, 1 is building, 0 is frame.
+	var/buildstage = BUILDSTAGE_COMPLETE
+
+	/// Frame is installed. No circuit or wiring.
+	var/const/BUILDSTAGE_FRAME = 0
+	/// Frame and circuit is installed. No wiring.
+	var/const/BUILDSTAGE_CIRCUIT = 1
+	/// Frame, circuit, and wiring is installed.
+	var/const/BUILDSTAGE_COMPLETE = 2
 
 	var/target_temperature = T0C+20
 	var/regulating_temperature = 0
@@ -145,7 +152,7 @@
 		src.set_dir(dir)
 
 	if(istype(frame))
-		buildstage = 0
+		buildstage = BUILDSTAGE_FRAME
 		wiresexposed = TRUE
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
 		pixel_y = (dir & 3)? (dir ==1 ? -21 : 21) : 0
@@ -181,7 +188,7 @@
 	return ..()
 
 /obj/machinery/alarm/Process()
-	if(inoperable() || shorted || buildstage != 2)
+	if(inoperable() || shorted || buildstage != BUILDSTAGE_COMPLETE)
 		return
 
 	var/turf/simulated/location = loc
@@ -641,7 +648,7 @@
 			data["thresholds"] = thresholds
 
 /obj/machinery/alarm/CanUseTopic(mob/user, datum/topic_state/state, href_list = list())
-	if(buildstage != 2)
+	if(buildstage != BUILDSTAGE_COMPLETE)
 		return STATUS_CLOSE
 
 	if(aidisabled && isAI(user))
@@ -812,13 +819,13 @@
 /obj/machinery/alarm/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Air Alarm Electronics - Add circuit
 	if (istype(tool, /obj/item/airalarm_electronics))
-		if (buildstage != 0)
+		if (buildstage != BUILDSTAGE_FRAME)
 			to_chat(user, SPAN_WARNING("\The [src] already has a circuit installed."))
 			return TRUE
 		if (!user.unEquip(tool, src))
 			to_chat(user, SPAN_WARNING("You can't drop \the [src]."))
 			return TRUE
-		buildstage = 1
+		buildstage = BUILDSTAGE_CIRCUIT
 		update_icon()
 		user.visible_message(
 			SPAN_NOTICE("\The [user] installs \a [tool] into \the [src]."),
@@ -829,17 +836,17 @@
 
 	// Cable Coil - Add wiring
 	if (isCoil(tool))
-		if (buildstage == 2)
+		if (buildstage == BUILDSTAGE_COMPLETE)
 			to_chat(user, SPAN_WARNING("\The [src] is already wired."))
 			return TRUE
-		if (buildstage == 0)
+		if (buildstage == BUILDSTAGE_FRAME)
 			to_chat(user, SPAN_WARNING("\The [src] needs circuits before it can be wired."))
 			return TRUE
 		var/obj/item/stack/cable_coil/cable = tool
 		if (!cable.use(5))
 			to_chat(user, SPAN_WARNING("You at least 5 [cable.plural_name] of \the [cable] to wire \the [src]."))
 			return TRUE
-		buildstage = 2
+		buildstage = BUILDSTAGE_COMPLETE
 		update_icon()
 		user.visible_message(
 			SPAN_NOTICE("\The [user] wires \the [src] with \a [cable]."),
@@ -849,10 +856,10 @@
 
 	// Crowbar - Remove circuitry
 	if (isCrowbar(tool))
-		if (buildstage == 2)
+		if (buildstage == BUILDSTAGE_COMPLETE)
 			to_chat(user, SPAN_WARNING("You need to remove \the [src]'s wiring before you can remove the circuits."))
 			return TRUE
-		if (buildstage == 0)
+		if (buildstage == BUILDSTAGE_FRAME)
 			to_chat(user, SPAN_WARNING("\The [src] has no circuit to remove."))
 			return TRUE
 		playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
@@ -862,14 +869,14 @@
 		)
 		if (!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
-		if (buildstage == 2)
+		if (buildstage == BUILDSTAGE_COMPLETE)
 			to_chat(user, SPAN_WARNING("You need to remove \the [src]'s wiring before you can remove the circuits."))
 			return TRUE
-		if (buildstage == 0)
+		if (buildstage == BUILDSTAGE_FRAME)
 			to_chat(user, SPAN_WARNING("\The [src] has no circuit to remove."))
 			return TRUE
 		new /obj/item/airalarm_electronics(get_turf(src))
-		buildstage = 0
+		buildstage = BUILDSTAGE_FRAME
 		update_icon()
 		user.visible_message(
 			SPAN_NOTICE("\The [user] removes \the [src]'s circuit with \s [tool]."),
@@ -880,7 +887,7 @@
 	// ID Card - Toggle interface lock
 	var/obj/item/card/id/id = tool.GetIdCard()
 	if (istype(id))
-		if (buildstage != 2)
+		if (buildstage != BUILDSTAGE_COMPLETE)
 			to_chat(user, SPAN_WARNING("\The [src] needs to be completed before you can access the interface."))
 			return TRUE
 		var/id_name = GET_ID_CARD_NAME(tool, id)
@@ -899,7 +906,7 @@
 
 	// Screwdriver - Toggle maintenance panel
 	if (isScrewdriver(tool))
-		if (buildstage != 2)
+		if (buildstage != BUILDSTAGE_COMPLETE)
 			to_chat(user, SPAN_WARNING("\The [src] needs to be completed before you can close the maintenance panel."))
 			return TRUE
 		wiresexposed = !wiresexposed
@@ -912,13 +919,13 @@
 
 	// Wirecutters - Remove wiring
 	if (isWirecutter(tool))
-		if (buildstage != 2)
+		if (buildstage != BUILDSTAGE_COMPLETE)
 			to_chat(user, SPAN_WARNING("\The [src] has no wiring to remove."))
 			return TRUE
 		if (!wiresexposed)
 			to_chat(user, SPAN_WARNING("\The [src]'s maintenance panel must be opened before you can access the wiring."))
 			return TRUE
-		buildstage = 1
+		buildstage = BUILDSTAGE_CIRCUIT
 		update_icon()
 		new /obj/item/stack/cable_coil(get_turf(src), 5)
 		playsound(src, 'sound/items/Wirecutter.ogg', 50, 1)
@@ -930,7 +937,7 @@
 
 	// Wrench - Remove frame
 	if (isWrench(tool))
-		if (buildstage != 0)
+		if (buildstage != BUILDSTAGE_FRAME)
 			to_chat(user, SPAN_WARNING("You must remove \the [src]'s circuit before you can dismantle it."))
 			return TRUE
 		new /obj/item/frame/air_alarm(get_turf(src))
@@ -947,9 +954,9 @@
 
 /obj/machinery/alarm/examine(mob/user)
 	. = ..()
-	if (buildstage < 2)
+	if (buildstage < BUILDSTAGE_COMPLETE)
 		to_chat(user, "It is not wired.")
-	if (buildstage < 1)
+	if (buildstage < BUILDSTAGE_CIRCUIT)
 		to_chat(user, "The circuit is missing.")
 /*
 AIR ALARM CIRCUIT
@@ -982,7 +989,15 @@ FIRE ALARM
 	power_channel = ENVIRON
 	var/last_process = 0
 	var/wiresexposed = FALSE
-	var/buildstage = 2 // 2 = complete, 1 = no wires,  0 = circuit gone
+	var/buildstage = BUILDSTAGE_COMPLETE
+
+	/// Frame is installed. No circuit or wiring.
+	var/const/BUILDSTAGE_FRAME = 0
+	/// Frame and circuit is installed. No wiring.
+	var/const/BUILDSTAGE_CIRCUIT = 1
+	/// Frame, circuit, and wiring is installed.
+	var/const/BUILDSTAGE_COMPLETE = 2
+
 	var/seclevel
 	var/static/list/overlays_cache
 
@@ -1061,17 +1076,17 @@ FIRE ALARM
 /obj/machinery/firealarm/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Cable Coil - Add wiring
 	if (isCoil(tool))
-		if (buildstage == 2)
+		if (buildstage == BUILDSTAGE_COMPLETE)
 			to_chat(user, SPAN_WARNING("\The [src] is already wired."))
 			return TRUE
-		if (buildstage == 0)
+		if (buildstage == BUILDSTAGE_FRAME)
 			to_chat(user, SPAN_WARNING("\The [src] needs circuits before it can be wired."))
 			return TRUE
 		var/obj/item/stack/cable_coil/cable = tool
 		if (!cable.use(5))
 			to_chat(user, SPAN_WARNING("You at least 5 [cable.plural_name] of \the [cable] to wire \the [src]."))
 			return TRUE
-		buildstage = 2
+		buildstage = BUILDSTAGE_COMPLETE
 		update_icon()
 		user.visible_message(
 			SPAN_NOTICE("\The [user] wires \the [src] with \a [cable]."),
@@ -1081,10 +1096,10 @@ FIRE ALARM
 
 	// Crowbar - Remove circuitry
 	if (isCrowbar(tool))
-		if (buildstage == 2)
+		if (buildstage == BUILDSTAGE_COMPLETE)
 			to_chat(user, SPAN_WARNING("You need to remove \the [src]'s wiring before you can remove the circuits."))
 			return TRUE
-		if (buildstage == 0)
+		if (buildstage == BUILDSTAGE_FRAME)
 			to_chat(user, SPAN_WARNING("\The [src] has no circuit to remove."))
 			return TRUE
 		playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
@@ -1094,14 +1109,14 @@ FIRE ALARM
 		)
 		if (!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
-		if (buildstage == 2)
+		if (buildstage == BUILDSTAGE_COMPLETE)
 			to_chat(user, SPAN_WARNING("You need to remove \the [src]'s wiring before you can remove the circuits."))
 			return TRUE
-		if (buildstage == 0)
+		if (buildstage == BUILDSTAGE_FRAME)
 			to_chat(user, SPAN_WARNING("\The [src] has no circuit to remove."))
 			return TRUE
 		new /obj/item/firealarm_electronics(get_turf(src))
-		buildstage = 0
+		buildstage = BUILDSTAGE_FRAME
 		update_icon()
 		user.visible_message(
 			SPAN_NOTICE("\The [user] removes \the [src]'s circuit with \s [tool]."),
@@ -1111,13 +1126,13 @@ FIRE ALARM
 
 	// Fire Alarm Electronics - Add circuit
 	if (istype(tool, /obj/item/firealarm_electronics))
-		if (buildstage != 0)
+		if (buildstage != BUILDSTAGE_FRAME)
 			to_chat(user, SPAN_WARNING("\The [src] already has a circuit installed."))
 			return TRUE
 		if (!user.unEquip(tool, src))
 			to_chat(user, SPAN_WARNING("You can't drop \the [src]."))
 			return TRUE
-		buildstage = 1
+		buildstage = BUILDSTAGE_CIRCUIT
 		update_icon()
 		user.visible_message(
 			SPAN_NOTICE("\The [user] installs \a [tool] into \the [src]."),
@@ -1128,7 +1143,7 @@ FIRE ALARM
 
 	// Multitool - Toggle fire detector
 	if (isMultitool(tool))
-		if (buildstage != 2)
+		if (buildstage != BUILDSTAGE_COMPLETE)
 			to_chat(user, SPAN_WARNING("\The [src] needs to be completed before you can toggle the detection unit."))
 			return TRUE
 		if (!wiresexposed)
@@ -1143,7 +1158,7 @@ FIRE ALARM
 
 	// Screwdriver - Toggle maintenance panel
 	if (isScrewdriver(tool))
-		if (buildstage != 2)
+		if (buildstage != BUILDSTAGE_COMPLETE)
 			to_chat(user, SPAN_WARNING("\The [src] needs to be completed before you can close the maintenance panel."))
 			return TRUE
 		wiresexposed = !wiresexposed
@@ -1156,13 +1171,13 @@ FIRE ALARM
 
 	// Wirecutters - Remove wiring
 	if (isWirecutter(tool))
-		if (buildstage != 2)
+		if (buildstage != BUILDSTAGE_COMPLETE)
 			to_chat(user, SPAN_WARNING("\The [src] has no wiring to remove."))
 			return TRUE
 		if (!wiresexposed)
 			to_chat(user, SPAN_WARNING("\The [src]'s maintenance panel must be opened before you can access the wiring."))
 			return TRUE
-		buildstage = 1
+		buildstage = BUILDSTAGE_CIRCUIT
 		update_icon()
 		new /obj/item/stack/cable_coil(get_turf(src), 5)
 		playsound(src, 'sound/items/Wirecutter.ogg', 50, 1)
@@ -1174,7 +1189,7 @@ FIRE ALARM
 
 	// Wrench - Remove frame
 	if (isWrench(tool))
-		if (buildstage != 0)
+		if (buildstage != BUILDSTAGE_FRAME)
 			to_chat(user, SPAN_WARNING("You must remove \the [src]'s circuit before you can dismantle it."))
 			return TRUE
 		new /obj/item/frame/fire_alarm(get_turf(src))
@@ -1265,7 +1280,7 @@ FIRE ALARM
 	return
 
 /obj/machinery/firealarm/CanUseTopic(user)
-	if(buildstage != 2)
+	if(buildstage != BUILDSTAGE_COMPLETE)
 		return STATUS_CLOSE
 	return ..()
 
@@ -1318,7 +1333,7 @@ FIRE ALARM
 		src.set_dir((dir & (NORTH|SOUTH)) ? dir : GLOB.reverse_dir[dir])
 
 	if(istype(frame))
-		buildstage = 0
+		buildstage = BUILDSTAGE_FRAME
 		wiresexposed = TRUE
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
 		pixel_y = (dir & 3)? (dir ==1 ? -21 : 21) : 0
