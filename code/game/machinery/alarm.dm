@@ -877,6 +877,27 @@
 	return ..()
 
 
+/obj/machinery/alarm/get_mechanics_info()
+	. = ..()
+	. += {"
+		<h3>To Construct</h3>
+		<ol>
+			<li>Use an <b>air alarm frame</b> on a wall to place it.</li>
+			<li>Install a circuit by using an <b>air alarm electronics</b> on it.</li>
+			<li>Install wiring with 5 pieces of <b>cable coil</b>.</li>
+			<li>Close the maintenance panel with a <b>screwdriver</b>.</li>
+		</ol>
+
+		<h3>To Deconstruct</h3>
+		<ol>
+			<li>Open the maintenance panel with a <b>screwdriver</b>.</li>
+			<li>Remove the wiring with <b>wirecutters</b>.</li>
+			<li>Remove the circuit with a <b>crowbar</b>.</li>
+			<li>Remove the frame from the wall with a <b>wrench</b>.</li>
+		</ol>
+	"}
+
+
 /obj/machinery/alarm/get_interactions_info()
 	. = ..()
 	.["Air Alarm Electronics"] += "<p>Part of construction. Installs the electronics. <b>This consumes the item</b>.</p>"
@@ -985,6 +1006,27 @@ FIRE ALARM
 			overlays += image(sl.icon, sl.overlay_alarm)
 		else
 			overlays += get_cached_overlay("fire0")
+
+
+/obj/machinery/firealarm/get_mechanics_info()
+	. = ..()
+	. += {"
+		<h3>To Construct</h3>
+		<ol>
+			<li>Use a <b>fire alarm frame</b> on a wall to place it.</li>
+			<li>Install a circuit by using a <b>fire alarm electronics</b> on it.</li>
+			<li>Install wiring with 5 pieces of <b>cable coil</b>.</li>
+			<li>Close the maintenance panel with a <b>screwdriver</b>.</li>
+		</ol>
+
+		<h3>To Deconstruct</h3>
+		<ol>
+			<li>Open the maintenance panel with a <b>screwdriver</b>.</li>
+			<li>Remove the wiring with <b>wirecutters</b>.</li>
+			<li>Remove the circuit with a <b>crowbar</b>.</li>
+			<li>Remove the frame from the wall with a <b>wrench</b>.</li>
+		</ol>
+	"}
 
 
 /obj/machinery/firealarm/get_interactions_info()
