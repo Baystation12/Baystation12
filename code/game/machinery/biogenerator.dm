@@ -76,46 +76,84 @@
 		return SPAN_NOTICE("You must turn \the [src] off first.")
 	return ..()
 
-/obj/machinery/biogenerator/attackby(obj/item/O, mob/user)
-	if((. = component_attackby(O, user)))
+
+/obj/machinery/biogenerator/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Component and build state passthrough check
+	. = ..()
+	if (.)
 		return
-	if(processing)
-		to_chat(user, SPAN_NOTICE("\The [src] is currently processing."))
-	if(istype(O, /obj/item/reagent_containers/glass))
-		if(beaker)
-			to_chat(user, SPAN_NOTICE("The [src] is already loaded."))
-			return TRUE
-		else if(user.unEquip(O, src))
-			beaker = O
-			state = BG_READY
-			updateUsrDialog()
-			return TRUE
 
-	if(ingredients >= capacity)
-		to_chat(user, SPAN_NOTICE("\The [src] is already full! Activate it."))
-	else if(istype(O, /obj/item/storage/plants))
-		var/obj/item/storage/plants/P = O
-		var/hadPlants = 0
-		for(var/obj/item/reagent_containers/food/snacks/grown/G in P.contents)
-			hadPlants = 1
-			P.remove_from_storage(G, src, 1) //No UI updates until we are all done.
+	// All following interactions shouldn't occur if the machine is currently processing
+	if (processing)
+		to_chat(user, SPAN_WARNING("\The [src] is currently busy processing."))
+		return TRUE
+
+	// Beaker - Load beaker
+	if (istype(tool, /obj/item/reagent_containers/glass))
+		if (beaker)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [beaker] loaded."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		beaker = tool
+		state = BG_READY
+		updateUsrDialog()
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] inserts \a [tool] into \the [src]."),
+			SPAN_NOTICE("You inster \the [tool] into \the [src].")
+		)
+		return TRUE
+
+	// Everything else is going to be considered an ingredient
+	if (ingredients >= capacity)
+		to_chat(user, SPAN_WARNING("\The [src] is already full."))
+		return TRUE
+
+	// Botanical Satchel - Insert all plants as ingredients
+	if (istype(tool, /obj/item/storage/plants))
+		var/obj/item/storage/plants/botanical_satchel = tool
+		var/had_plants = FALSE
+		var/at_capacity = FALSE
+
+		// Retrieve all the plants from the satchel
+		for (var/obj/item/reagent_containers/food/snacks/grown/plant in botanical_satchel.contents)
+			had_plants = TRUE
+			botanical_satchel.remove_from_storage(plant, src, TRUE)
 			ingredients++
-			if(ingredients >= capacity)
-				to_chat(user, SPAN_NOTICE("You fill \the [src] to its capacity."))
+			if (ingredients >= capacity)
+				at_capacity = TRUE
 				break
-		P.finish_bulk_removal() //Now do the UI stuff once.
-		if(!hadPlants)
-			to_chat(user, SPAN_NOTICE("\The [P] has no produce inside."))
-		else if(ingredients < capacity)
-			to_chat(user, SPAN_NOTICE("You empty \the [P] into \the [src]."))
 
+		botanical_satchel.finish_bulk_removal()
+		if (!had_plants)
+			to_chat(user, SPAN_WARNING("\The [botanical_satchel] has no produce inside."))
+			return TRUE
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] dumps \a [tool]'s contents into \the [src]."),
+			SPAN_NOTICE("You dump \the [tool]'s contents into \the [src][at_capacity ? ", filling it to capacity." : "."]")
+		)
+		return TRUE
 
-	else if(!istype(O, /obj/item/reagent_containers/food/snacks/grown))
-		to_chat(user, SPAN_NOTICE("You cannot put this in \the [src]."))
-	else if(user.unEquip(O, src))
+	// Grown Food - Insert individual plant
+	if (istype(tool, /obj/item/reagent_containers/food/snacks/grown))
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
 		ingredients++
-		to_chat(user, SPAN_NOTICE("You put \the [O] in \the [src]"))
-	update_icon()
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adds \a [tool] to \the [src]."),
+			SPAN_NOTICE("You add \the [tool] to \the [src].")
+		)
+		return TRUE
+
+	// Everything else
+	to_chat(user, SPAN_WARNING("You cannot put \the [tool] into \the [src]."))
+	return TRUE
+
 
 /**
  *  Display the NanoUI window for the vending machine.

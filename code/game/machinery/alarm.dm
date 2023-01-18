@@ -808,73 +808,142 @@
 			apply_mode()
 			return TOPIC_REFRESH
 
-/obj/machinery/alarm/attackby(obj/item/W as obj, mob/user as mob)
-	switch(buildstage)
-		if(2)
-			if(isScrewdriver(W))  // Opening that Air Alarm up.
-//				to_chat(user, "You pop the Air Alarm's maintence panel open.")
-				wiresexposed = !wiresexposed
-				to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"]")
-				update_icon()
-				return
 
-			if (wiresexposed && isWirecutter(W))
-				user.visible_message(SPAN_WARNING("[user] has cut the wires inside \the [src]!"), "You have cut the wires inside \the [src].")
-				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
-				new/obj/item/stack/cable_coil(get_turf(src), 5)
-				buildstage = 1
-				update_icon()
-				return
+/obj/machinery/alarm/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Air Alarm Electronics - Add circuit
+	if (istype(tool, /obj/item/airalarm_electronics))
+		if (buildstage != 0)
+			to_chat(user, SPAN_WARNING("\The [src] already has a circuit installed."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [src]."))
+			return TRUE
+		buildstage = 1
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \the [src]."),
+			SPAN_NOTICE("You install \the [tool] into \the [src].")
+		)
+		qdel(tool)
+		return TRUE
 
-			if (istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer))// trying to unlock the interface with an ID card
-				if(inoperable())
-					to_chat(user, "It does nothing")
-					return
-				else
-					if(allowed(usr) && !wires.IsIndexCut(AALARM_WIRE_IDSCAN))
-						locked = !locked
-						to_chat(user, SPAN_NOTICE("You [ locked ? "lock" : "unlock"] the Air Alarm interface."))
-					else
-						to_chat(user, SPAN_WARNING("Access denied."))
-			return
+	// Cable Coil - Add wiring
+	if (isCoil(tool))
+		if (buildstage == 2)
+			to_chat(user, SPAN_WARNING("\The [src] is already wired."))
+			return TRUE
+		if (buildstage == 0)
+			to_chat(user, SPAN_WARNING("\The [src] needs circuits before it can be wired."))
+			return TRUE
+		var/obj/item/stack/cable_coil/cable = tool
+		if (!cable.use(5))
+			to_chat(user, SPAN_WARNING("You at least 5 [cable.plural_name] of \the [cable] to wire \the [src]."))
+			return TRUE
+		buildstage = 2
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] wires \the [src] with \a [cable]."),
+			SPAN_NOTICE("You use 5 [cable.plural_name] of \the [cable] to wire \the [src].")
+		)
+		return TRUE
 
-		if(1)
-			if(isCoil(W))
-				var/obj/item/stack/cable_coil/C = W
-				if (C.use(5))
-					to_chat(user, SPAN_NOTICE("You wire \the [src]."))
-					buildstage = 2
-					update_icon()
-					return
-				else
-					to_chat(user, SPAN_WARNING("You need 5 pieces of cable to do wire \the [src]."))
-					return
+	// Crowbar - Remove circuitry
+	if (isCrowbar(tool))
+		if (buildstage == 2)
+			to_chat(user, SPAN_WARNING("You need to remove \the [src]'s wiring before you can remove the circuits."))
+			return TRUE
+		if (buildstage == 0)
+			to_chat(user, SPAN_WARNING("\The [src] has no circuit to remove."))
+			return TRUE
+		playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts prying out \the [src]'s circuit with \a [tool]."),
+			SPAN_NOTICE("You start prying out \the [src]'s circuit with \the [tool].")
+		)
+		if (!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (buildstage == 2)
+			to_chat(user, SPAN_WARNING("You need to remove \the [src]'s wiring before you can remove the circuits."))
+			return TRUE
+		if (buildstage == 0)
+			to_chat(user, SPAN_WARNING("\The [src] has no circuit to remove."))
+			return TRUE
+		new /obj/item/airalarm_electronics(get_turf(src))
+		buildstage = 0
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \the [src]'s circuit with \s [tool]."),
+			SPAN_NOTICE("You remove \the [src]'s circuit with \the [tool].")
+		)
+		return TRUE
 
-			else if(isCrowbar(W))
-				to_chat(user, "You start prying out the circuit.")
-				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-				if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) && buildstage == 1)
-					to_chat(user, "You pry out the circuit!")
-					var/obj/item/airalarm_electronics/circuit = new /obj/item/airalarm_electronics()
-					circuit.dropInto(user.loc)
-					buildstage = 0
-					update_icon()
-				return
-		if(0)
-			if(istype(W, /obj/item/airalarm_electronics))
-				to_chat(user, "You insert the circuit!")
-				qdel(W)
-				buildstage = 1
-				update_icon()
-				return
+	// ID Card - Toggle interface lock
+	var/obj/item/card/id/id = tool.GetIdCard()
+	if (istype(id))
+		if (buildstage != 2)
+			to_chat(user, SPAN_WARNING("\The [src] needs to be completed before you can access the interface."))
+			return TRUE
+		var/id_name = GET_ID_CARD_NAME(tool, id)
+		if (inoperable() || wires.IsIndexCut(AALARM_WIRE_IDSCAN))
+			to_chat(user, SPAN_WARNING("\The [src] doesn't respond to [id_name]"))
+			return TRUE
+		if (!check_access(id))
+			to_chat(user, SPAN_WARNING("\The [src] refuses [id_name]."))
+			return TRUE
+		locked = !locked
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [locked ? "locks" : "unlocks"] \the [src]'s interfac with \a [tool]."),
+			SPAN_NOTICE("You [locked ? "lock" : "unlock"] \the [src]'s interface with [id_name].")
+		)
+		return TRUE
 
-			else if(isWrench(W))
-				to_chat(user, "You remove the fire alarm assembly from the wall!")
-				new /obj/item/frame/air_alarm(get_turf(user))
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-				qdel(src)
+	// Screwdriver - Toggle maintenance panel
+	if (isScrewdriver(tool))
+		if (buildstage != 2)
+			to_chat(user, SPAN_WARNING("\The [src] needs to be completed before you can close the maintenance panel."))
+			return TRUE
+		wiresexposed = !wiresexposed
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [wiresexposed ? "opens" : "closes"] \the [src]'s maintenance hatch with \a [tool]."),
+			SPAN_NOTICE("You [wiresexposed ? "open" : "close"] \the [src]'s maintenance hatch with \the [tool].")
+		)
+		return TRUE
+
+	// Wirecutters - Remove wiring
+	if (isWirecutter(tool))
+		if (buildstage != 2)
+			to_chat(user, SPAN_WARNING("\The [src] has no wiring to remove."))
+			return TRUE
+		if (!wiresexposed)
+			to_chat(user, SPAN_WARNING("\The [src]'s maintenance panel must be opened before you can access the wiring."))
+			return TRUE
+		buildstage = 1
+		update_icon()
+		new /obj/item/stack/cable_coil(get_turf(src), 5)
+		playsound(src, 'sound/items/Wirecutter.ogg', 50, 1)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] cuts \the [src]'s wires with \a [tool]."),
+			SPAN_NOTICE("You cut \the [src]'s wires with \the [tool].")
+		)
+		return TRUE
+
+	// Wrench - Remove frame
+	if (isWrench(tool))
+		if (buildstage != 0)
+			to_chat(user, SPAN_WARNING("You must remove \the [src]'s circuit before you can dismantle it."))
+			return TRUE
+		new /obj/item/frame/air_alarm(get_turf(src))
+		playsound(src, 'sound/items/Ratchet.ogg', 50, 1)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \the [src] from the wall with \a [tool]."),
+			SPAN_NOTICE("You remove \the [src] from the wall with \the [tool].")
+		)
+		qdel(src)
+		return TRUE
 
 	return ..()
+
 
 /obj/machinery/alarm/examine(mob/user)
 	. = ..()
@@ -988,63 +1057,150 @@ FIRE ALARM
 		alarm(rand(30/severity, 60/severity))
 	..()
 
-/obj/machinery/firealarm/attackby(obj/item/W as obj, mob/user as mob)
-	if(isScrewdriver(W) && buildstage == 2)
+
+/obj/machinery/firealarm/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Cable Coil - Add wiring
+	if (isCoil(tool))
+		if (buildstage == 2)
+			to_chat(user, SPAN_WARNING("\The [src] is already wired."))
+			return TRUE
+		if (buildstage == 0)
+			to_chat(user, SPAN_WARNING("\The [src] needs circuits before it can be wired."))
+			return TRUE
+		var/obj/item/stack/cable_coil/cable = tool
+		if (!cable.use(5))
+			to_chat(user, SPAN_WARNING("You at least 5 [cable.plural_name] of \the [cable] to wire \the [src]."))
+			return TRUE
+		buildstage = 2
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] wires \the [src] with \a [cable]."),
+			SPAN_NOTICE("You use 5 [cable.plural_name] of \the [cable] to wire \the [src].")
+		)
+		return TRUE
+
+	// Crowbar - Remove circuitry
+	if (isCrowbar(tool))
+		if (buildstage == 2)
+			to_chat(user, SPAN_WARNING("You need to remove \the [src]'s wiring before you can remove the circuits."))
+			return TRUE
+		if (buildstage == 0)
+			to_chat(user, SPAN_WARNING("\The [src] has no circuit to remove."))
+			return TRUE
+		playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts prying out \the [src]'s circuit with \a [tool]."),
+			SPAN_NOTICE("You start prying out \the [src]'s circuit with \the [tool].")
+		)
+		if (!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (buildstage == 2)
+			to_chat(user, SPAN_WARNING("You need to remove \the [src]'s wiring before you can remove the circuits."))
+			return TRUE
+		if (buildstage == 0)
+			to_chat(user, SPAN_WARNING("\The [src] has no circuit to remove."))
+			return TRUE
+		new /obj/item/firealarm_electronics(get_turf(src))
+		buildstage = 0
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \the [src]'s circuit with \s [tool]."),
+			SPAN_NOTICE("You remove \the [src]'s circuit with \the [tool].")
+		)
+		return TRUE
+
+	// Fire Alarm Electronics - Add circuit
+	if (istype(tool, /obj/item/firealarm_electronics))
+		if (buildstage != 0)
+			to_chat(user, SPAN_WARNING("\The [src] already has a circuit installed."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [src]."))
+			return TRUE
+		buildstage = 1
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \the [src]."),
+			SPAN_NOTICE("You install \the [tool] into \the [src].")
+		)
+		qdel(tool)
+		return TRUE
+
+	// Multitool - Toggle fire detector
+	if (isMultitool(tool))
+		if (buildstage != 2)
+			to_chat(user, SPAN_WARNING("\The [src] needs to be completed before you can toggle the detection unit."))
+			return TRUE
+		if (!wiresexposed)
+			to_chat(user, SPAN_WARNING("\The [src]'s maintenance panel needs to be open before you can toggle the detection unit."))
+			return TRUE
+		detecting = !detecting
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [detecting ? "enables" : "disables"] \the [src]'s detection unit with \a [tool]."),
+			SPAN_NOTICE("You [detecting ? "enable" : "disable"] \the [src]'s detection unit with \the [tool].")
+		)
+		return TRUE
+
+	// Screwdriver - Toggle maintenance panel
+	if (isScrewdriver(tool))
+		if (buildstage != 2)
+			to_chat(user, SPAN_WARNING("\The [src] needs to be completed before you can close the maintenance panel."))
+			return TRUE
 		wiresexposed = !wiresexposed
 		update_icon()
-		return
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [wiresexposed ? "opens" : "closes"] \the [src]'s maintenance hatch with \a [tool]."),
+			SPAN_NOTICE("You [wiresexposed ? "open" : "close"] \the [src]'s maintenance hatch with \the [tool].")
+		)
+		return TRUE
 
-	if(wiresexposed)
-		switch(buildstage)
-			if(2)
-				if(isMultitool(W))
-					src.detecting = !( src.detecting )
-					if (src.detecting)
-						user.visible_message(SPAN_NOTICE("\The [user] has reconnected [src]'s detecting unit!"), SPAN_NOTICE("You have reconnected [src]'s detecting unit."))
-					else
-						user.visible_message(SPAN_NOTICE("\The [user] has disconnected [src]'s detecting unit!"), SPAN_NOTICE("You have disconnected [src]'s detecting unit."))
-				else if(isWirecutter(W))
-					user.visible_message(SPAN_NOTICE("\The [user] has cut the wires inside \the [src]!"), SPAN_NOTICE("You have cut the wires inside \the [src]."))
-					new/obj/item/stack/cable_coil(get_turf(src), 5)
-					playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
-					buildstage = 1
-					update_icon()
-			if(1)
-				if(istype(W, /obj/item/stack/cable_coil))
-					var/obj/item/stack/cable_coil/C = W
-					if (C.use(5))
-						to_chat(user, SPAN_NOTICE("You wire \the [src]."))
-						buildstage = 2
-						update_icon()
-						return
-					else
-						to_chat(user, SPAN_WARNING("You need 5 pieces of cable to wire \the [src]."))
-						return
-				else if(isCrowbar(W))
-					to_chat(user, "You start prying out the circuit.")
-					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-					if (do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
-						to_chat(user, "You pry out the circuit!")
-						var/obj/item/firealarm_electronics/circuit = new /obj/item/firealarm_electronics()
-						circuit.dropInto(user.loc)
-						buildstage = 0
-						update_icon()
-			if(0)
-				if(istype(W, /obj/item/firealarm_electronics))
-					to_chat(user, "You insert the circuit!")
-					qdel(W)
-					buildstage = 1
-					update_icon()
+	// Wirecutters - Remove wiring
+	if (isWirecutter(tool))
+		if (buildstage != 2)
+			to_chat(user, SPAN_WARNING("\The [src] has no wiring to remove."))
+			return TRUE
+		if (!wiresexposed)
+			to_chat(user, SPAN_WARNING("\The [src]'s maintenance panel must be opened before you can access the wiring."))
+			return TRUE
+		buildstage = 1
+		update_icon()
+		new /obj/item/stack/cable_coil(get_turf(src), 5)
+		playsound(src, 'sound/items/Wirecutter.ogg', 50, 1)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] cuts \the [src]'s wires with \a [tool]."),
+			SPAN_NOTICE("You cut \the [src]'s wires with \the [tool].")
+		)
+		return TRUE
 
-				else if(isWrench(W))
-					to_chat(user, "You remove the fire alarm assembly from the wall!")
-					new /obj/item/frame/fire_alarm(get_turf(user))
-					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-					qdel(src)
-		return
+	// Wrench - Remove frame
+	if (isWrench(tool))
+		if (buildstage != 0)
+			to_chat(user, SPAN_WARNING("You must remove \the [src]'s circuit before you can dismantle it."))
+			return TRUE
+		new /obj/item/frame/fire_alarm(get_turf(src))
+		playsound(src, 'sound/items/Ratchet.ogg', 50, 1)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \the [src] from the wall with \a [tool]."),
+			SPAN_NOTICE("You remove \the [src] from the wall with \the [tool].")
+		)
+		qdel(src)
+		return TRUE
 
-	src.alarm()
-	return
+	return ..()
+
+
+/obj/machinery/firealarm/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Trigger the fire alarm if hit
+	if (working)
+		alarm()
+		user.visible_message(
+			SPAN_WARNING("\The [user] hits \the [src] with \a [weapon], setting off the alarm!"),
+			SPAN_WARNING("You hit \the [src] with \the [weapon], setting off the alarm!")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/machinery/firealarm/Process()//Note: this processing was mostly phased out due to other code, and only runs when needed
 	if(inoperable())

@@ -56,14 +56,15 @@
 			if (prob(25))
 				src.set_density(0)
 
-/obj/machinery/optable/attackby(obj/item/O, mob/user)
-	if (istype(O, /obj/item/grab))
-		var/obj/item/grab/G = O
-		if(iscarbon(G.affecting) && check_table(G.affecting))
-			take_victim(G.affecting,usr)
-			qdel(O)
-			return
+
+/obj/machinery/optable/use_grab(obj/item/grab/grab, list/click_params)
+	if (check_table(grab.affecting))
+		take_victim(grab.affecting, grab.assailant)
+		qdel(grab)
+		return TRUE
+
 	return ..()
+
 
 /obj/machinery/optable/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()

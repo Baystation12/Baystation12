@@ -26,28 +26,37 @@
 	user.visible_message("\The [user] [!on?"dea":"a"]ctivates \the [src].", "You switch [src] [on? "on" : "off"]")
 	return TRUE
 
-/obj/machinery/cablelayer/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/stack/cable_coil))
 
-		var/result = load_cable(O)
-		if(!result)
+/obj/machinery/cablelayer/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Cable Coil - Refill cable
+	if (isCoil(tool))
+		if (!load_cable(tool))
 			to_chat(user, SPAN_WARNING("\The [src]'s cable reel is full."))
-		else
-			to_chat(user, "You load [result] lengths of cable into [src].")
-		return
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] refills \the [src] with \a [tool]."),
+			SPAN_NOTICE("You refill \the [src] with \the [tool].")
+		)
+		return TRUE
 
-	if(isWirecutter(O))
-		if(cable && cable.amount)
-			var/m = round(input(usr,"Please specify the length of cable to cut","Cut cable",min(cable.amount,30)) as num, 1)
-			m = min(m, cable.amount)
-			m = min(m, 30)
-			if(m)
-				playsound(loc, 'sound/items/Wirecutter.ogg', 50, 1)
-				use_cable(m)
-				var/obj/item/stack/cable_coil/CC = new (get_turf(src))
-				CC.amount = m
-		else
-			to_chat(usr, SPAN_WARNING("There's no more cable on the reel."))
+	// Wirecutters - Remove cable
+	if (isWirecutter(tool))
+		if (!cable?.amount)
+			to_chat(user, SPAN_WARNING("\The [src] has no more cable on the reel."))
+			return TRUE
+		var/amount = round(input(user, "Please specify the length of cable to cut", "Cut cablt", min(cable.amount, 30)) as num|null, 1)
+		if (!amount || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (!cable?.amount)
+			to_chat(user, SPAN_WARNING("\The [src] has no more cable on the reel."))
+			return TRUE
+		playsound(src, 'sound/items/Wirecutter.ogg', 50, 1)
+		use_cable(amount)
+		new /obj/item/stack/cable_coil(get_turf(src), amount)
+		return TRUE
+
+	return ..()
+
 
 /obj/machinery/cablelayer/examine(mob/user)
 	. = ..()

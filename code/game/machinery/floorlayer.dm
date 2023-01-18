@@ -37,40 +37,72 @@
 	)
 	return TRUE
 
-/obj/machinery/floorlayer/attackby(obj/item/W as obj, mob/user as mob)
 
-	if(isWrench(W))
-		var/m = input("Choose work mode", "Mode") as null|anything in mode
-		mode[m] = !mode[m]
-		var/O = mode[m]
+/obj/machinery/floorlayer/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Crowbar - Remove tiles
+	if (isCrowbar(tool))
+		if (!length(contents))
+			to_chat(user, SPAN_WARNING("\The [src] has no tiles to remove."))
+			return TRUE
+		var/obj/item/stack/tile/choice = input("Choose tile type to remove.", "Tiles") as null|anything in contents
+		if (!choice || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (!(choice in contents))
+			to_chat(user, SPAN_WARNING("\The [src] doesn't contain that option anymore."))
+			return TRUE
+		tool.dropInto(loc)
+		if (T == choice)
+			T = null
 		user.visible_message(
-			SPAN_NOTICE("\The [user] has set \the [src] [m] mode [!O?"off":"on"]."),
-			SPAN_NOTICE("You set \the [src] [m] mode [!O?"off":"on"].")
+			SPAN_NOTICE("\The [user] removes some [choice] from \the [src] with \a [tool]."),
+			SPAN_NOTICE("You remove \the [choice] from \the [src] with \the [tool].")
 		)
-		return
+		return TRUE
 
-	if(istype(W, /obj/item/stack/tile))
-		if(!user.unEquip(W, T))
-			return
-		to_chat(user, SPAN_NOTICE("\The [W] successfully loaded."))
-		TakeTile(T)
-		return
+	// Floor Tile - Refill
+	if (istype(tool, /obj/item/stack/tile))
+		if (!user.unEquip(tool))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		TakeTile(tool)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] loads \a [tool] into \the [src]."),
+			SPAN_NOTICE("You load \the [tool] into \the [src].")
+		)
+		return TRUE
 
-	if(isCrowbar(W))
-		if(!length(contents))
-			to_chat(user, SPAN_NOTICE("\The [src] is empty."))
-		else
-			var/obj/item/stack/tile/E = input("Choose remove tile type.", "Tiles") as null|anything in contents
-			if(E)
-				to_chat(user, SPAN_NOTICE("You remove the [E] from /the [src]."))
-				E.dropInto(loc)
-				T = null
-		return
+	// Screwdriver - Choose tile type
+	if (isScrewdriver(tool))
+		if (!length(contents))
+			to_chat(user, SPAN_WARNING("\The [src] has no tiles to select."))
+			return TRUE
+		var/choice = input("Choose tile type.", "Tiles") as null|anything in contents
+		if (!choice || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (!(choice in contents))
+			to_chat(user, SPAN_WARNING("\The [src] doesn't contain that option anymore."))
+			return TRUE
+		T = choice
+		user.visible_message(
+			SPAN_NOTICE("\The [user] configures \the [src] with \a [tool]."),
+			SPAN_NOTICE("You set \the [src] to use \the [choice] with \the [tool].")
+		)
+		return TRUE
 
-	if(isScrewdriver(W))
-		T = input("Choose tile type.", "Tiles") as null|anything in contents
-		return
-	..()
+	// Wrench - Toggle mode
+	if (isWrench(tool))
+		var/choice = input("Choose work mode", "Mode") as null|anything in mode
+		if (!choice || !user.use_sanity_check(src, tool))
+			return TRUE
+		mode[choice] = !mode[choice]
+		user.visible_message(
+			SPAN_NOTICE("\The [user] configures \the [src] with \a [tool]."),
+			SPAN_NOTICE("You set \the [src]'s [choice] mode [mode[choice] ? "on" : "off"] with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/machinery/floorlayer/examine(mob/user)
 	. = ..()

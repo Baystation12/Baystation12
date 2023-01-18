@@ -433,36 +433,37 @@
 /obj/machinery/cryopod/proc/attempt_enter(mob/target, mob/user)
 	if (!user.IsAdvancedToolUser())
 		to_chat(user, SPAN_WARNING("You're too simple to understand how to do that."))
-		return
+		return FALSE
 	if (user.incapacitated() || !user.Adjacent(src))
 		to_chat(user, SPAN_WARNING("You're in no position to do that."))
-		return
+		return FALSE
 	if (!user.Adjacent(target))
 		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
-		return
+		return FALSE
 	if (user != target  && target.client)
 		var/response = alert(target, "Enter the [src]?", null, "Yes", "No")
 		if (response != "Yes")
 			to_chat(user, SPAN_WARNING("\The [target] refuses."))
-			return
+			return FALSE
 	if (user.incapacitated() || !user.Adjacent(src))
 		to_chat(user, SPAN_WARNING("You're in no position to do that."))
-		return
+		return FALSE
 	if (!user.Adjacent(target))
 		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
-		return
+		return FALSE
 	add_fingerprint(user)
 	if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-		return
+		return FALSE
 	if (QDELETED(target))
-		return
+		return FALSE
 	if (!user.Adjacent(target))
 		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
-		return
+		return FALSE
 	set_occupant(target)
 	if (user != target)
 		add_fingerprint(target)
 	log_and_message_admins("placed [target == user ? "themself" : key_name_admin(target)] into \a [src]")
+	return TRUE
 
 //Like grap-put, but for mouse-drop.
 /obj/machinery/cryopod/MouseDrop_T(mob/target, mob/user)
@@ -475,21 +476,22 @@
 	user.visible_message(SPAN_NOTICE("\The [user] begins placing \the [target] into \the [src]."), SPAN_NOTICE("You start placing \the [target] into \the [src]."))
 	attempt_enter(target, user)
 
-/obj/machinery/cryopod/attackby(obj/item/G as obj, mob/user as mob)
 
-	if(istype(G, /obj/item/grab))
-		var/obj/item/grab/grab = G
-		if(occupant)
-			to_chat(user, SPAN_NOTICE("\The [src] is in use."))
-			return
+/obj/machinery/cryopod/use_grab(obj/item/grab/grab, list/click_params)
+	if (occupant)
+		to_chat(grab.assailant, SPAN_WARNING("\The [occupant] is already inside \the [src]."))
+		return TRUE
+	if (!check_occupant_allowed(grab.affecting))
+		to_chat(grab.assailant, SPAN_WARNING("\The [src] cannot hold \the [grab.affecting]"))
+		return TRUE
+	if (!attempt_enter(grab.affecting, grab.assailant))
+		return TRUE
+	grab.assailant.visible_message(
+		SPAN_NOTICE("\The [grab.assailant] places \the [grab.affecting] into \the [src]."),
+		SPAN_NOTICE("You place \the [grab.affecting] into \the [src].")
+	)
+	return TRUE
 
-		if(!ismob(grab.affecting))
-			return
-
-		if(!check_occupant_allowed(grab.affecting))
-			return
-
-		attempt_enter(grab.affecting, user)
 
 /obj/machinery/cryopod/verb/eject()
 	set name = "Eject Pod"

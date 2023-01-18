@@ -8,46 +8,59 @@
 	anchored = TRUE
 	idle_power_usage = 4
 	active_power_usage = 30 KILOWATTS
+	obj_flags = OBJ_FLAG_ANCHORABLE
 	var/obj/item/charging = null
 	var/list/allowed_devices = list(/obj/item/gun/energy, /obj/item/gun/magnetic/railgun, /obj/item/melee/baton, /obj/item/cell, /obj/item/modular_computer, /obj/item/device/suit_sensor_jammer, /obj/item/stock_parts/computer/battery_module, /obj/item/shield_diffuser, /obj/item/clothing/mask/smokable/ecig, /obj/item/device/radio)
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
 	var/icon_state_idle = "recharger0" //also when unpowered
-	var/portable = 1
 
-/obj/machinery/recharger/attackby(obj/item/G as obj, mob/user as mob)
-	var/allowed = 0
-	for (var/allowed_type in allowed_devices)
-		if (istype(G, allowed_type)) allowed = 1
 
-	if(allowed)
-		if(charging)
-			to_chat(user, SPAN_WARNING("\A [charging] is already charging here."))
-			return
-		// Checks to make sure he's not in space doing it, and that the area got proper power.
-		if(!powered())
-			to_chat(user, SPAN_WARNING("The [name] blinks red as you try to insert the item!"))
-			return
-		if (istype(G, /obj/item/gun/energy))
-			var/obj/item/gun/energy/E = G
-			if(E.self_recharge)
-				to_chat(user, SPAN_NOTICE("You can't find a charging port on \the [E]."))
-				return
-		if(!G.get_cell())
-			to_chat(user, "This device does not have a battery installed.")
-			return
+/obj/machinery/recharger/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Chargeable items - Insert item to charge
+	var/allowed_item = FALSE
+	for (var/allowed_device as anything in allowed_devices)
+		if (istype(tool, allowed_device))
+			allowed_item = TRUE
+			break
+	if (allowed_item)
+		if (!anchored)
+			to_chat(user, SPAN_WARNING("\The [src] isn't secured."))
+			return TRUE
+		if (charging)
+			to_chat(user, SPAN_WARNING("\The [src] is already charging \a [charging]."))
+			return TRUE
+		if (!powered())
+			to_chat(user, SPAN_WARNING("\The [src] has now power."))
+			return TRUE
+		if (istype(tool, /obj/item/gun/energy))
+			var/obj/item/gun/energy/gun = tool
+			if (gun.self_recharge)
+				to_chat(user, SPAN_WARNING("\The [tool] cannot be charged with \the [src]."))
+				return TRUE
+		if (!tool.get_cell())
+			to_chat(user, SPAN_WARNING("\The [tool] doesn't have a battery to charge."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		charging = tool
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] places \a [tool] into \the [src]."),
+			SPAN_NOTICE("You place \the [tool] into \the [src].")
+		)
+		return TRUE
 
-		if(user.unEquip(G))
-			G.forceMove(src)
-			charging = G
-			update_icon()
-	else if(portable && isWrench(G))
-		if(charging)
-			to_chat(user, SPAN_WARNING("Remove [charging] first!"))
-			return
-		anchored = !anchored
-		to_chat(user, "You [anchored ? "attached" : "detached"] the recharger.")
-		playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
+	// Wrench - Additional pre-anchoring checks
+	if (isWrench(tool))
+		if (charging)
+			to_chat(user, SPAN_WARNING("\The [src] can't be unanchored while charging \the [charging]."))
+			return TRUE
+		return ..()
+
+	return ..()
+
 
 /obj/machinery/recharger/physical_attack_hand(mob/user)
 	if(charging)
@@ -112,4 +125,4 @@
 	icon_state_charged = "wrecharger2"
 	icon_state_charging = "wrecharger1"
 	icon_state_idle = "wrecharger0"
-	portable = 0
+	obj_flags = EMPTY_BITFIELD

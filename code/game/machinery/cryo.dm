@@ -197,28 +197,38 @@
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/atmospherics/unary/cryo_cell/attackby(obj/G, mob/user as mob)
-	if(component_attackby(G, user))
+
+/obj/machinery/atmospherics/unary/cryo_cell/use_grab(obj/item/grab/grab, list/click_params)
+	if (put_mob(grab.affecting))
+		grab.assailant.visible_message(
+			SPAN_NOTICE("\The [grab.assailant] places \the [grab.affecting] into \the [src]."),
+			SPAN_NOTICE("You place \the [grab.affecting] into \the [src].")
+		)
+		qdel(grab)
+	return TRUE
+
+
+/obj/machinery/atmospherics/unary/cryo_cell/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Component and construct state passthrough check
+	. = ..()
+	if (.)
+		return
+
+	// Glass Container - Load 'beaker'
+	if (istype(tool, /obj/item/reagent_containers/glass))
+		if (beaker)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [beaker] loaded."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		beaker = tool
+		user.visible_message(
+			SPAN_NOTICE("\The [user] inserts \a [tool] into \the [src]."),
+			SPAN_NOTICE("You inster \the [tool] into \the [src].")
+		)
 		return TRUE
-	if(istype(G, /obj/item/reagent_containers/glass))
-		if(beaker)
-			to_chat(user, SPAN_WARNING("A beaker is already loaded into the machine."))
-			return
-		if(!user.unEquip(G, src))
-			return // Temperature will be adjusted on Entered()
-		beaker =  G
-		user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
-	else if(istype(G, /obj/item/grab))
-		var/obj/item/grab/grab = G
-		if(!ismob(grab.affecting))
-			return
-		for(var/mob/living/carbon/slime/M in range(1,grab.affecting))
-			if(M.Victim == grab.affecting)
-				to_chat(user, "[grab.affecting.name] will not fit into the cryo because they have a slime latched onto their head.")
-				return
-		if(put_mob(grab.affecting))
-			qdel(G)
-	return
+
 
 /obj/machinery/atmospherics/unary/cryo_cell/on_update_icon()
 	overlays.Cut()

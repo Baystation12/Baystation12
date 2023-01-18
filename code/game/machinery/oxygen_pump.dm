@@ -145,29 +145,45 @@
 		return
 	return 1
 
-/obj/machinery/oxygen_pump/attackby(obj/item/W as obj, mob/user as mob)
-	if(isScrewdriver(W))
-		toggle_stat(MACHINE_STAT_MAINT)
+
+/obj/machinery/oxygen_pump/on_update_icon()
+	if (GET_FLAGS(stat, MACHINE_STAT_MAINT))
+		icon_state = icon_state_open
+	else
+		icon_state = icon_state_closed
+
+
+/obj/machinery/oxygen_pump/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Gas Tank - Install tank
+	if (istype(tool, /obj/item/tank))
+		if (!HAS_FLAGS(stat, MACHINE_STAT_MAINT))
+			to_chat(user, SPAN_WARNING("You must open \the [src]'s maintenance hatch before you can install \the [tool]."))
+			return TRUE
+		if (tank)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [tank] installed."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		tank = tool
 		user.visible_message(
-			SPAN_NOTICE("\The [user] [GET_FLAGS(stat, MACHINE_STAT_MAINT) ? "opens" : "closes"] \the [src]."),
-			SPAN_NOTICE("You [GET_FLAGS(stat, MACHINE_STAT_MAINT) ? "open" : "close"] \the [src].")
+			SPAN_NOTICE("\The [user] installs \a [tank] into \the [src]."),
+			SPAN_NOTICE("You install \the [tank] into \the [src].")
 		)
-		if(GET_FLAGS(stat, MACHINE_STAT_MAINT))
-			icon_state = icon_state_open
-		if(!stat)
-			icon_state = icon_state_closed
-		//TO-DO: Open icon
-	if(istype(W, /obj/item/tank) && (GET_FLAGS(stat, MACHINE_STAT_MAINT)))
-		if(tank)
-			to_chat(user, SPAN_WARNING("\The [src] already has a tank installed!"))
-		else
-			if(!user.unEquip(W, src))
-				return
-			tank = W
-			user.visible_message(SPAN_NOTICE("\The [user] installs \the [tank] into \the [src]."), SPAN_NOTICE("You install \the [tank] into \the [src]."))
-			src.add_fingerprint(user)
-	if(istype(W, /obj/item/tank) && !stat)
-		to_chat(user, SPAN_WARNING("Please open the maintenance hatch first."))
+		return TRUE
+
+	// Screwdriver - Toggle the maintenance panel
+	if (isScrewdriver(tool))
+		toggle_stat(MACHINE_STAT_MAINT)
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [HAS_FLAGS(stat, MACHINE_STAT_MAINT) ? "opens" : "closes"] \the [src]'s maintenance hatch with \a [tool]."),
+			SPAN_NOTICE("You [HAS_FLAGS(stat, MACHINE_STAT_MAINT) ? "open" : "close"] \the [src]'s maintenance hatch with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/machinery/oxygen_pump/examine(mob/user)
 	. = ..()

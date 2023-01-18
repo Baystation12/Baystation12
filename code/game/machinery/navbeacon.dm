@@ -37,29 +37,36 @@ var/global/list/navbeacons = list()
 	else
 		icon_state = "[state]"
 
-/obj/machinery/navbeacon/attackby(obj/item/I, mob/user)
-	var/turf/T = loc
-	if(!T.is_plating())
-		return		// prevent intraction when T-scanner revealed
 
-	if(isScrewdriver(I))
+/obj/machinery/navbeacon/use_tool(obj/item/tool, mob/user, list/click_params)
+	// ID Card - Toggle access lock
+	var/obj/item/card/id/id = tool.GetIdCard()
+	if (istype(id))
+		if (!open)
+			to_chat(user, SPAN_WARNING("\The [src]'s cover needs to be opened before you can scan an ID."))
+			return TRUE
+		var/id_name = GET_ID_CARD_NAME(tool, id)
+		if (!check_access(id))
+			to_chat(user, SPAN_WARNING("\The [src] refuses [id_name]."))
+			return TRUE
+		locked = !locked
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [locked ? "locks" : "unlocks"] \the [src]'s controls with \a [tool]."),
+			SPAN_NOTICE("You [locked ? "lock" : "unlock"] \the [src] with [id_name].")
+		)
+		return TRUE
+
+	// Screwdriver - Toggles the cover
+	if (isScrewdriver(tool))
 		open = !open
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [open ? "opens" : "closes"] \the [src]'s cover with \a [tool]."),
+			SPAN_NOTICE("You [open ? "open" : "close"] \the [src]'s cover with \the [tool].")
+		)
+		return TRUE
 
-		user.visible_message("\The [user] [open ? "opens" : "closes"] cover of \the [src].", "You [open ? "open" : "close"] cover of \the [src].")
+	return ..()
 
-		update_icon()
-
-	else if(I.GetIdCard())
-		if(open)
-			if (src.allowed(user))
-				src.locked = !src.locked
-				to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
-			else
-				to_chat(user, SPAN_WARNING("Access denied."))
-			updateDialog()
-		else
-			to_chat(user, "You must open the cover first!")
-	return
 
 /obj/machinery/navbeacon/interface_interact(mob/user)
 	interact(user)

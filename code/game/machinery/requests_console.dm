@@ -188,51 +188,58 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 		silent = !silent
 		return TOPIC_REFRESH
 
-					//err... hacking code, which has no reason for existing... but anyway... it was once supposed to unlock priority 3 messanging on that console (EXTREME priority...), but the code for that was removed.
-/obj/machinery/requests_console/attackby(obj/item/O as obj, mob/user as mob)
-	/*
-	if (istype(O, /obj/item/crowbar))
-		if(open)
-			open = 0
-			icon_state="req_comp0"
-		else
-			open = 1
-			if(hackState == 0)
-				icon_state="req_comp_open"
-			else if(hackState == 1)
-				icon_state="req_comp_rewired"
-	if (istype(O, /obj/item/screwdriver))
-		if(open)
-			if(hackState == 0)
-				hackState = 1
-				icon_state="req_comp_rewired"
-			else if(hackState == 1)
-				hackState = 0
-				icon_state="req_comp_open"
-		else
-			to_chat(user, "You can't do much with that.") */
-	if (istype(O, /obj/item/card/id))
-		if(inoperable() || GET_FLAGS(stat, MACHINE_STAT_MAINT)) return
-		if(screen == RCS_MESSAUTH)
-			var/obj/item/card/id/T = O
-			msgVerified = text(SPAN_COLOR("green", "<b>Verified by [T.registered_name] ([T.assignment])</b>"))
-			SSnano.update_uis(src)
-		if(screen == RCS_ANNOUNCE)
-			var/obj/item/card/id/ID = O
-			if (access_RC_announce in ID.GetAccess())
-				announceAuth = 1
-				announcement.announcer = ID.assignment ? "[ID.assignment] [ID.registered_name]" : ID.registered_name
+
+/obj/machinery/requests_console/use_tool(obj/item/tool, mob/user, list/click_params)
+	// ID Card - Verify message/send announcement
+	var/obj/item/card/id/id = tool.GetIdCard()
+	if (istype(id))
+		var/id_name = GET_ID_CARD_NAME(tool, id)
+		if (inoperable(MACHINE_STAT_MAINT))
+			to_chat(user, SPAN_WARNING("\The [src] does not respond to [id_name]"))
+			return TRUE
+		switch (screen)
+			if (RCS_MESSAUTH)
+				msgVerified = text(SPAN_COLOR("green", "<b>Verified by [id.get_display_name()]</b>"))
+				SSnano.update_uis(src)
+				user.visible_message(
+					SPAN_NOTICE("\The [user] scans \a [tool] over \the [src]."),
+					SPAN_NOTICE("You verify \the [src]'s pending message with [id_name].")
+				)
+				return TRUE
+			if (RCS_ANNOUNCE)
+				if (!has_access(access_RC_announce, id.GetAccess()))
+					to_chat(user, SPAN_WARNING("\The [src] refuses [id_name]."))
+					return TRUE
+				announceAuth = TRUE
+				announcement.announcer = id.get_display_name()
+				SSnano.update_uis(src)
+				user.visible_message(
+					SPAN_NOTICE("\The [user] scans \a [tool] over \the [src]."),
+					SPAN_NOTICE("You verify \the [src]'s pending announcement with [id_name].")
+				)
+				return TRUE
 			else
-				reset_message()
-				to_chat(user, SPAN_WARNING("You are not authorized to send announcements."))
+				to_chat(user, SPAN_WARNING("\The [src] is not currently accepting ID scans."))
+				return TRUE
+
+	// Stamp - Stamp message
+	if (istype(tool, /obj/item/stamp))
+		if (inoperable(MACHINE_STAT_MAINT))
+			to_chat(user, SPAN_WARNING("\The [src] does not respond to \the [tool]"))
+			return TRUE
+		if (screen == RCS_MESSAUTH)
+			msgStamped = text(SPAN_COLOR("blue", "<b>Stamped with \the [tool]</b>"))
 			SSnano.update_uis(src)
-	if (istype(O, /obj/item/stamp))
-		if(inoperable() || GET_FLAGS(stat, MACHINE_STAT_MAINT)) return
-		if(screen == RCS_MESSAUTH)
-			var/obj/item/stamp/T = O
-			msgStamped = text(SPAN_COLOR("blue", "<b>Stamped with the [T.name]</b>"))
-			SSnano.update_uis(src)
-	return
+			user.visible_message(
+				SPAN_NOTICE("\The [user] scans \a [tool] over \the [src]."),
+				SPAN_NOTICE("You stamp \the [src]'s announcement with \the [tool].")
+			)
+			return TRUE
+		to_chat(user, SPAN_WARNING("\The [src] is not currently accepting stamps."))
+		return TRUE
+
+	return ..()
+
 
 /obj/machinery/requests_console/proc/reset_message(mainmenu = 0)
 	message = ""

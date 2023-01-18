@@ -46,105 +46,143 @@ var/global/bomb_set
 			addtimer(new Callback(src, .proc/explode), 0)
 		SSnano.update_uis(src)
 
-/obj/machinery/nuclearbomb/attackby(obj/item/O as obj, mob/user as mob, params)
-	if(isScrewdriver(O))
-		add_fingerprint(user)
-		if(auth)
-			if(panel_open == 0)
-				panel_open = 1
-				overlays |= "panel_open"
-				to_chat(user, "You unscrew the control panel of [src].")
-				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
-			else
-				panel_open = 0
-				overlays -= "panel_open"
-				to_chat(user, "You screw the control panel of [src] back on.")
-				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
-		else
-			if(panel_open == 0)
-				to_chat(user, "\The [src] emits a buzzing noise, the panel staying locked in.")
-			if(panel_open == 1)
-				panel_open = 0
-				overlays -= "panel_open"
-				to_chat(user, "You screw the control panel of \the [src] back on.")
-				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
+
+/obj/machinery/nuclearbomb/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Multitool & Wirecutters - Passthrough to attack_hand for the wire panel
+	if (isMultitool(tool) || isWirecutter(tool))
+		if (panel_open && attack_hand(user))
+			return TRUE
+
+	// Nuclear Authentication Disk - Insert disk
+	if (istype(tool, /obj/item/disk/nuclear))
+		if (!extended)
+			to_chat(user, SPAN_WARNING("\The [src] needs to be anchored before you can insert \the [tool]."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		auth = tool
+		attack_hand(user)
+		return TRUE // Interaction is handled regardless of the result of attack_hand
+
+	// Screwdriver - Toggle panel
+	if (isScrewdriver(tool))
+		if (!auth && !panel_open)
 			flick("lock", src)
-		return
+			to_chat(user, SPAN_WARNING("\The [src]'s control panel cover is locked until you insert an authentication disk."))
+			return TRUE
+		panel_open = !panel_open
+		update_icon()
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [panel_open ? "opens" : "closes"] \the [src]'s control panel with \a [tool]."),
+			SPAN_NOTICE("You [panel_open ? "open" : "close"] \the [src]'s control panel with \the [tool].")
+		)
+		return TRUE
 
-	if(panel_open && isMultitool(O) || isWirecutter(O))
-		return attack_hand(user)
+	// Remaining interactions only apply if anchored
+	if (!anchored)
+		// Feedback message in case someone tries to weld it.
+		if (isWelder(tool))
+			to_chat(user, SPAN_WARNING("\The [src] isn't anchored."))
+			return TRUE
+		return ..()
 
-	if(extended)
-		if(istype(O, /obj/item/disk/nuclear))
-			if(!user.unEquip(O, src))
-				return
-			auth = O
-			add_fingerprint(user)
-			return attack_hand(user)
+	// Crowbar - Removal steps 2 and 5
+	if (isCrowbar(tool))
+		var/step_name
+		var/next_stage
+		switch (removal_stage)
+			if (0)
+				to_chat(user, SPAN_WARNING("You need to cut \the [src]'s anchoring bolt covers loose before you can pry them open."))
+				return TRUE
+			if (1)
+				step_name = "\the [src]'s anchoring bolt covers open"
+				next_stage = 2
+			if (2, 3)
+				to_chat(user, SPAN_WARNING("You need cut open and unwrench the anchoring bolts before you can pry \the [src] off of them."))
+				return TRUE
+			if (4)
+				step_name = "\the [src] off of the anchoring bolts"
+				next_stage = 5
+			else
+				to_chat(user, SPAN_WARNING("\The [src] has already been pried off its anchoring bolts."))
+				return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts prying [step_name] with \a [tool]."),
+			SPAN_NOTICE("You start prying [step_name] with \the [tool].")
+		)
+		if (!do_after(user, 1.5 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		removal_stage = next_stage
+		anchored = FALSE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] pries [step_name] with \a [tool]. It can now be moved!"),
+			SPAN_NOTICE("You pry [step_name] with \the [tool]. It can now be moved!")
+		)
+		return TRUE
 
-	if(anchored)
-		switch(removal_stage)
-			if(0)
-				if(isWelder(O))
-					var/obj/item/weldingtool/WT = O
-					if(!WT.isOn()) return
-					if(WT.get_fuel() < 5) // uses up 5 fuel.
-						to_chat(user, SPAN_WARNING("You need more fuel to complete this task."))
-						return
+	// Welder - Removal steps 1 and 3
+	if (isWelder(tool))
+		if (removal_stage == -1)
+			to_chat(user, SPAN_WARNING("\The [src] can't be removed!"))
+			return TRUE
+		var/obj/item/weldingtool/welder = tool
+		if (!welder.can_use(user, 5))
+			return TRUE
+		var/step_name
+		var/next_stage
+		switch (removal_stage)
+			if (0)
+				step_name = "anchoring bolt covers"
+				next_stage = 1
+			if (1)
+				to_chat(user, SPAN_WARNING("You need to open \the [src]'s anchoring bolt covers first."))
+				return TRUE
+			if (2)
+				step_name = "anchoring system sealant"
+				next_stage = 3
+			else
+				to_chat(user, SPAN_WARNING("\The [src] has nothing else to cut with \the [tool]."))
+				return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts cutting through \the [src]'s [step_name] with \a [tool]."),
+			SPAN_NOTICE("You start cutting through \the [src]'s [step_name] with \the [tool].")
+		)
+		if (!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (!welder.remove_fuel(5, user))
+			return TRUE
+		removal_stage = next_stage
+		user.visible_message(
+			SPAN_NOTICE("\The [user] cuts through \the [src]'s [step_name] with \a [tool]."),
+			SPAN_NOTICE("You cut through \the [src]'s [step_name] with \the [tool].")
+		)
+		return TRUE
 
-					user.visible_message("[user] starts cutting loose the anchoring bolt covers on [src].", "You start cutting loose the anchoring bolt covers with [O]...")
+	// Wrench - Removal step 4
+	if (isWrench(tool))
+		if (removal_stage < 3)
+			to_chat(user, SPAN_WARNING("You need to open \the [src]'s anchoring bolt cover before you can access the bolts."))
+			return TRUE
+		if (removal_stage > 3)
+			to_chat(user, SPAN_WARNING("\The [src]'s anchoring bolts have already been unwrenched."))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts unwrenching \the [src]'s anchoring bolts with \a [tool]."),
+			SPAN_NOTICE("You start unwrenching \the [src]'s anchoring bolts with \the [tool].")
+		)
+		if (!do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		removal_stage = 4
+		user.visible_message(
+			SPAN_NOTICE("\The [user] unwrenches \the [src]'s anchoring bolts with \a [tool]."),
+			SPAN_NOTICE("You unwrenches \the [src]'s anchoring bolts with \the [tool].")
+		)
+		return TRUE
 
-					if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !user || !WT.remove_fuel(5, user)) return
-						user.visible_message("\The [user] cuts through the bolt covers on \the [src].", "You cut through the bolt cover.")
-						removal_stage = 1
-				return
+	return ..()
 
-			if(1)
-				if(isCrowbar(O))
-					user.visible_message("[user] starts forcing open the bolt covers on [src].", "You start forcing open the anchoring bolt covers with [O]...")
-
-					if(do_after(user, 1.5 SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !user) return
-						user.visible_message("\The [user] forces open the bolt covers on \the [src].", "You force open the bolt covers.")
-						removal_stage = 2
-				return
-
-			if(2)
-				if(isWelder(O))
-					var/obj/item/weldingtool/WT = O
-					if(!WT.isOn()) return
-					if (WT.get_fuel() < 5) // uses up 5 fuel.
-						to_chat(user, SPAN_WARNING("You need more fuel to complete this task."))
-						return
-
-					user.visible_message("[user] starts cutting apart the anchoring system sealant on [src].", "You start cutting apart the anchoring system's sealant with [O]...")
-
-					if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !user || !WT.remove_fuel(5, user)) return
-						user.visible_message("\The [user] cuts apart the anchoring system sealant on \the [src].", "You cut apart the anchoring system's sealant.")
-						removal_stage = 3
-				return
-
-			if(3)
-				if(isWrench(O))
-					user.visible_message("[user] begins unwrenching the anchoring bolts on [src].", "You begin unwrenching the anchoring bolts...")
-					if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !user) return
-						user.visible_message("[user] unwrenches the anchoring bolts on [src].", "You unwrench the anchoring bolts.")
-						removal_stage = 4
-				return
-
-			if(4)
-				if(isCrowbar(O))
-					user.visible_message("[user] begins lifting [src] off of the anchors.", "You begin lifting the device off the anchors...")
-					if(do_after(user, 8 SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !user) return
-						user.visible_message("\The [user] crowbars \the [src] off of the anchors. It can now be moved.", "You jam the crowbar under the nuclear device and lift it off its anchors. You can now move it!")
-						anchored = FALSE
-						removal_stage = 5
-				return
-	..()
 
 /obj/machinery/nuclearbomb/physical_attack_hand(mob/user)
 	if(!extended && deployable)
@@ -357,6 +395,10 @@ var/global/bomb_set
 	else
 		icon_state = "idle"
 
+	overlays.Cut()
+	if (panel_open)
+		overlays += "panel_open"
+
 //====The nuclear authentication disc====
 /obj/item/disk/nuclear
 	name = "nuclear authentication disk"
@@ -451,6 +493,7 @@ var/global/bomb_set
 	anchored = TRUE
 	deployable = 1
 	extended = 1
+	removal_stage = -1
 
 	var/list/flash_tiles = list()
 	var/list/inserters = list()
@@ -472,10 +515,6 @@ var/global/bomb_set
 	update_icon()
 	for(var/obj/machinery/self_destruct/ch in get_area(src))
 		inserters += ch
-
-/obj/machinery/nuclearbomb/station/attackby(obj/item/O as obj, mob/user as mob)
-	if(isWrench(O))
-		return
 
 /obj/machinery/nuclearbomb/station/Topic(href, href_list)
 	if((. = ..()))

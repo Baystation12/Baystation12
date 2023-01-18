@@ -16,8 +16,11 @@
 		var/area/A = get_area(src)
 		location = A.name
 
-/obj/machinery/pager/attackby(obj/item/W, mob/user as mob)
-	return attack_hand(user)
+
+/obj/machinery/pager/use_tool(obj/item/tool, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE) // Passthrough to attack_hand
+	return attack_hand()
+
 
 /obj/machinery/pager/interface_interact(mob/living/user)
 	if(!CanInteract(user, GLOB.default_state))

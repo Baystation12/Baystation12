@@ -31,19 +31,25 @@
 	update_icon()
 	return TRUE
 
-/obj/machinery/portable_atmospherics/cracker/attackby(obj/item/thing, mob/user)
-	// remove deuterium as a reagent
-	if(thing.is_open_container() && thing.reagents)
-		if(!reagent_buffer[MATERIAL_DEUTERIUM] || reagent_buffer[MATERIAL_DEUTERIUM] <= 0)
-			to_chat(user, SPAN_WARNING("There is no deuterium stored in \the [src]."))
-			return
-		var/transfer_amt = min(thing.reagents.maximum_volume, reagent_buffer[MATERIAL_DEUTERIUM])
-		thing.reagents.add_reagent(MATERIAL_DEUTERIUM, transfer_amt)
-		thing.update_icon()
-		reagent_buffer[MATERIAL_DEUTERIUM] -= transfer_amt
-		user.visible_message(SPAN_NOTICE("\The [user] siphons [transfer_amt] unit\s of deuterium from \the [src] into \the [thing]."))
-		return
-	. = ..()
+
+/obj/machinery/portable_atmospherics/cracker/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Open Containers - Remove deuterium from reagent buffer
+	if (tool.is_open_container() && tool.reagents)
+		if (!reagent_buffer[MATERIAL_DEUTERIUM] || reagent_buffer[MATERIAL_DEUTERIUM] <= 0)
+			to_chat(user, SPAN_WARNING("There is no deuterium stored in \the [src] to siphon."))
+			return TRUE
+		var/transfer_amount = min(tool.reagents.maximum_volume, reagent_buffer[MATERIAL_DEUTERIUM])
+		tool.reagents.add_reagent(MATERIAL_DEUTERIUM, transfer_amount)
+		tool.update_icon()
+		reagent_buffer[MATERIAL_DEUTERIUM] -= transfer_amount
+		user.visible_message(
+			SPAN_NOTICE("\The [user] siphons some deuterium from \the [src] into \a [tool]."),
+			SPAN_NOTICE("You siphon [transfer_amount] unit\s of deuterium from \the [src] into \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/machinery/portable_atmospherics/cracker/power_change()
 	. = ..()

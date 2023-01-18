@@ -727,26 +727,46 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 			src.updateUsrDialog()
 
 
+/obj/machinery/newscaster/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE) // Self contained until it uses standardized health
 
-/obj/machinery/newscaster/attackby(obj/item/I, mob/user)
-	if (user.a_intent == I_HURT)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if (I.force < 15)
-			visible_message(SPAN_WARNING("\The [user] uselessly bops \the [src] with \an [I]."))
-		else if (MACHINE_IS_BROKEN(src))
-			visible_message(SPAN_WARNING("\The [user] further abuses the shattered [name]."))
-			playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 100, 1)
-		else if (++hitstaken < 3)
-			visible_message(SPAN_DANGER("\The [user] slams \the [src] with \an [I], cracking it!"))
-			playsound(src, 'sound/effects/Glassbr3.ogg', 100, 1)
-		else
-			visible_message(SPAN_DANGER("\The [user] smashes \the [src] with \an [I]!"))
-			playsound(src, 'sound/effects/Glasshit.ogg', 100, 1)
-			set_broken(TRUE)
-			update_icon()
+	user.do_attack_animation(src)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+
+	if (MACHINE_IS_BROKEN(src))
+		playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 100, 1)
+		user.visible_message(
+			SPAN_WARNING("\The [user] further abuses the shattered [name] with \a [weapon]."),
+			SPAN_WARNING("You further abuse the shattered [name] with \the [weapon].")
+		)
 		return TRUE
-	else
-		. = ..()
+
+	if (weapon.force < 15)
+		playsound(src, 'sound/weapons/genhit.ogg', 50, 1)
+		user.visible_message(
+			SPAN_WARNING("\The [user] uselessly bops \the [src] with \a [weapon]."),
+			SPAN_WARNING("You uselessly bop \the [src] with \the [weapon].")
+		)
+		return TRUE
+
+	if (hitstaken >= 3)
+		playsound(src, 'sound/effects/Glasshit.ogg', 100, 1)
+		set_broken(TRUE)
+		update_icon()
+		user.visible_message(
+			SPAN_WARNING("\The [user] smashes \the [src] with \a [weapon]!"),
+			SPAN_DANGER("You smash \the [src] with \the [weapon]!")
+		)
+		return TRUE
+
+	hitstaken++
+	playsound(src, 'sound/effects/Glassbr3.ogg', 100, 1)
+	user.visible_message(
+		SPAN_WARNING("\The [user] slams \the [src] with \a [weapon], cracking it!"),
+		SPAN_DANGER("You smash \the [src] with \the [weapon], cracking it!")
+	)
+	return TRUE
+
 
 /datum/news_photo
 	var/is_synth = 0

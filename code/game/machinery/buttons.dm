@@ -25,8 +25,11 @@
 	. = ..()
 	update_icon()
 
-/obj/machinery/button/attackby(obj/item/W, mob/user as mob)
+
+/obj/machinery/button/use_tool(obj/item/tool, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE) // Passes through to attack_hand
 	return attack_hand(user)
+
 
 /obj/machinery/button/interface_interact(user)
 	if(!CanInteract(user, DefaultTopicState()))

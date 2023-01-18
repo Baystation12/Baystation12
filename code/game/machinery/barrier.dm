@@ -21,55 +21,61 @@
 			message += SPAN_WARNING(" The locking clamps have other ideas.")
 		to_chat(user, message)
 
-/obj/machinery/barrier/attackby(obj/item/I, mob/user)
-	if (isid(I))
-		var/success = allowed(user)
-		var/message = " to no effect"
-		if (success)
-			if (locked)
-				message = ", unlocking it from \the [get_turf(src)]"
-			else
-				message = ", locking it onto \the [get_turf(src)]"
+
+/obj/machinery/barrier/use_tool(obj/item/tool, mob/user, list/click_params)
+	// ID Card - Toggle barrier lock and anchoring
+	var/obj/item/card/id/id = tool.GetIdCard()
+	if (istype(id))
+		var/id_name = GET_ID_CARD_NAME(tool, id)
+		if (!check_access(id) || emagged)
+			to_chat(user, SPAN_WARNING("\The [src] refuses [id_name]."))
+			return TRUE
+		locked = !locked
+		update_icon()
 		user.visible_message(
-			"\The [user] swipes \an [I] against \the [src].",
-			"You swipe \the [I] against \the [src][message].",
-			"You hear metal sliding and creaking.",
-			range = 5
+			SPAN_NOTICE("\The [user] [locked ? "locks" : "unlocks"] \the [src] with \a [tool]."),
+			SPAN_NOTICE("You [locked ? "lock" : "unlock"] \the [src] with [id_name]."),
+			SPAN_ITALIC("You hear metal sliding and creaking."),
+			5
 		)
-		if (success)
-			locked = !locked
-			anchored = emagged ? FALSE : locked
-			update_icon()
 		return TRUE
-	if (user.a_intent == I_HURT)
-		return ..()
-	if (isWelder(I))
-		var/obj/item/weldingtool/W = I
-		if (!W.welding)
-			to_chat(user, SPAN_WARNING("\The [I] isn't turned on."))
+
+	// Welding Tool - Repair emag damage
+	if (isWelder(tool))
+		if (!emagged)
+			to_chat(user, SPAN_WARNING("\The [src]'s locking clamps are not damaged."))
+			return TRUE
+		var/obj/item/weldingtool/welder = tool
+		if (!welder.can_use(user, 5))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts repairing \the [src]'s locking clamps with \a [tool]."),
+			SPAN_NOTICE("You start repairing \the [src]'s locking clamps with \the [tool].")
+		)
+		if (!do_after(user, 15 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (!emagged)
 			to_chat(user, SPAN_WARNING("\The [src]'s locking clamps are not damaged."))
 			return TRUE
+		if (!welder.remove_fuel(5, user))
+			return TRUE
+		emagged = FALSE
+		if (locked)
+			anchored = TRUE
+			visible_message(
+				SPAN_WARNING("\The [src]'s clamps engage, locking onto \the [get_turf(src)]."),
+				SPAN_ITALIC("You hear metal sliding and creaking."),
+				5
+			)
+		update_icon()
 		user.visible_message(
-			"\The [user] starts to repair \the [src]'s locking clamps with \an [I].",
-			"You start to repair \the [src]'s locking clamps with \the [I].",
-			"You hear a hissing flame."
+			SPAN_NOTICE("\The [user] repairs \the [src]'s locking clamps with \a [tool]."),
+			SPAN_NOTICE("You repair \the [src]'s locking clamps with \the [tool], using 5 units of fuel.")
 		)
-		if (do_after(user, 15 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(user, SPAN_NOTICE("There - Good as new."))
-			emagged = FALSE
-			if (locked)
-				visible_message(
-					"\The [src]'s clamps engage, locking onto \the [get_turf(src)].",
-					"You hear metal sliding and creaking.",
-					range = 5
-				)
-				anchored = TRUE
-			update_icon()
 		return TRUE
-	to_chat(user, SPAN_WARNING("You can't think of a way to use \the [I] on \the [src]."))
-	return TRUE
+
+	return ..()
+
 
 /obj/machinery/barrier/emag_act(remaining_charges, mob/user, emag_source)
 	if (user)

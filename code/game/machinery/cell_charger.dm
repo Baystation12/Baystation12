@@ -4,6 +4,7 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "ccharger0"
 	anchored = TRUE
+	obj_flags = OBJ_FLAG_ANCHORABLE
 	idle_power_usage = 5
 	active_power_usage = 60 KILOWATTS	//This is the power drawn when charging
 	power_channel = EQUIP
@@ -28,36 +29,40 @@
 		if(charging)
 			to_chat(user, "Current charge: [charging.charge]")
 
-/obj/machinery/cell_charger/attackby(obj/item/W, mob/user)
-	if(MACHINE_IS_BROKEN(src))
-		return
 
-	if(istype(W, /obj/item/cell) && anchored)
-		if(charging)
-			to_chat(user, SPAN_WARNING("There is already a cell in the charger."))
-			return
-		else
-			var/area/a = get_area(loc)
-			if(a.power_equip == 0) // There's no APC in this area, don't try to cheat power!
-				to_chat(user, SPAN_WARNING("The [name] blinks red as you try to insert the cell!"))
-				return
-			if(!user.unEquip(W, src))
-				return
-			charging = W
-			set_power()
-			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
-			user.visible_message("[user] inserts a cell into the charger.", "You insert a cell into the charger.")
-			chargelevel = -1
-		queue_icon_update()
-	else if(isWrench(W))
-		if(charging)
-			to_chat(user, SPAN_WARNING("Remove the cell first!"))
-			return
-
-		anchored = !anchored
+/obj/machinery/cell_charger/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Cell - Insert cell to be charged
+	if (istype(tool, /obj/item/cell))
+		if (MACHINE_IS_BROKEN(src))
+			to_chat(user, SPAN_WARNING("\The [src] is not working."))
+			return TRUE
+		if (!anchored)
+			to_chat(user, SPAN_WARNING("\The [src] needs to be secured before you can charge a cell in it."))
+			return TRUE
+		if (charging)
+			to_chat(user, SPAN_WARNING("\The [src] is already charging \a [charging]."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		charging = tool
 		set_power()
-		to_chat(user, "You [anchored ? "attach" : "detach"] the cell charger [anchored ? "to" : "from"] the ground")
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+		chargelevel = -1
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] inserts \a [tool] into \the [src]."),
+			SPAN_NOTICE("You insert \the [tool] into \the [src].")
+		)
+		return TRUE
+
+	// Wrench - Block unanchoring interaction if there's a cell inside
+	if (isWrench(tool) && charging)
+		to_chat(user, SPAN_WARNING("You need to remove \the [charging] from \the [src] before you can unsecure it."))
+		return TRUE
+
+	return ..()
+
 
 /obj/machinery/cell_charger/physical_attack_hand(mob/user)
 	if(charging)

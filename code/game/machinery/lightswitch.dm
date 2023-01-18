@@ -66,10 +66,19 @@
 		set_state(!on)
 		return TRUE
 
-/obj/machinery/light_switch/attackby(obj/item/tool as obj, mob/user as mob)
-	if(istype(tool, /obj/item/screwdriver))
-		new /obj/item/frame/light_switch(user.loc, 1)
+
+/obj/machinery/light_switch/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Detach from wal
+	if (isScrewdriver(tool))
+		new /obj/item/frame/light_switch(get_turf(src))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \the [src] from the wall with \a [tool]."),
+			SPAN_NOTICE("You remove \the [src] from the wall with \the [tool].")
+		)
 		qdel(src)
+		return TRUE
+
+	return ..()
 
 
 /obj/machinery/light_switch/powered()

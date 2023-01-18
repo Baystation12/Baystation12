@@ -90,15 +90,17 @@
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, mob/user)
-	if(istype(G))
-		var/mob/M = G.affecting
-		if(!user_can_move_target_inside(M, user))
-			return
-		move_target_inside(M,user)
-		qdel(G)
+
+/obj/machinery/bodyscanner/use_grab(obj/item/grab/grab, list/click_params)
+	if (!user_can_move_target_inside(grab.affecting, grab.assailant))
 		return TRUE
-	return ..()
+	move_target_inside(grab.affecting, grab.assailant)
+	grab.assailant.visible_message(
+		SPAN_NOTICE("\The [grab.assailant] places \the [grab.affecting] into \the [src]."),
+		SPAN_NOTICE("You place \the [grab.affecting] into \the [src].")
+	)
+	qdel(grab)
+	return TRUE
 
 /obj/machinery/bodyscanner/proc/user_can_move_target_inside(mob/target, mob/user)
 	if(!istype(user) || !istype(target))

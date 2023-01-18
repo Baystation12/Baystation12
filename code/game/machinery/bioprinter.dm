@@ -147,45 +147,58 @@
 	playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 	return O
 
-/obj/machinery/organ_printer/robot/attackby(obj/item/W, mob/user)
-	var/add_matter = 0
-	var/object_name = "[W]"
 
-	if(istype(W, /obj/item/stack/material) && W.get_material_name() == matter_type)
-		if((max_stored_matter-stored_matter) >= matter_amount_per_sheet)
-			var/obj/item/stack/S = W
-			var/space_left = max_stored_matter - stored_matter
-			var/sheets_to_take = min(S.amount, Floor(space_left/matter_amount_per_sheet))
-			if(sheets_to_take > 0)
-				add_matter = min(max_stored_matter - stored_matter, sheets_to_take*matter_amount_per_sheet)
-				S.use(sheets_to_take)
-		else
-			to_chat(user, SPAN_WARNING("\The [src] is too full."))
+/obj/machinery/organ_printer/robot/use_tool(obj/item/tool, mob/user, list/click_params)
+	/// Integer. Amount of storage space left for matter. Used by the various interactions that refill the printer.
+	var/space_left = max_stored_matter - stored_matter
 
-	else if(istype(W,/obj/item/organ))
-		var/obj/item/organ/O = W
-		if((O.organ_tag in products) && istype(O, products[O.organ_tag][1]))
-			if(!BP_IS_ROBOTIC(O))
-				to_chat(user, SPAN_WARNING("\The [src] only accepts robotic organs."))
-				return
-			if(max_stored_matter == stored_matter)
-				to_chat(user, SPAN_WARNING("\The [src] is too full."))
-			else
-				var/recycle_worth = Floor(products[O.organ_tag][2] * 0.5)
-				if((max_stored_matter-stored_matter) >= recycle_worth)
-					add_matter = recycle_worth
-					qdel(O)
-		else
-			to_chat(user, SPAN_WARNING("\The [src] does not know how to recycle \the [O]."))
-			return
+	// Material Stack - Add material
+	if (istype(tool, /obj/item/stack/material))
+		var/obj/item/stack/material/material_stack = tool
+		var/material_stack_name = material_stack.get_material_name()
+		if (material_stack_name != matter_type)
+			to_chat(user, SPAN_WARNING("\The [src] does not accept [material_stack_name]. It only accepts [matter_type]."))
+			return TRUE
+		if (space_left < matter_amount_per_sheet)
+			to_chat(user, SPAN_WARNING("\The [src] is too full to be refilled with \the [tool]."))
+			return TRUE
+		var/sheets_to_take = min(material_stack.amount, Floor(space_left / matter_amount_per_sheet))
+		stored_matter += sheets_to_take * matter_amount_per_sheet
+		material_stack.use(sheets_to_take)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] refills \the [src] with some [material_stack.plural_name] of [material_stack_name]."),
+			SPAN_NOTICE("You refill \the [src] with [sheets_to_take] [sheets_to_take == 1 ? material_stack.singular_name : material_stack.plural_name] of [material_stack_name].")
+		)
+		to_chat(user, SPAN_NOTICE("\The [src] now has [stored_matter] units of matter stored."))
+		return TRUE
 
-	stored_matter += add_matter
+	// Organs - Add material
+	if (istype(tool, /obj/item/organ))
+		var/obj/item/organ/organ = tool
+		if (!(organ.organ_tag in products) || !istype(organ, products[organ.organ_tag][1]))
+			to_chat(user, SPAN_WARNING("\The [src] cannot recyle \the [tool]. It can only recycle organs it can print."))
+			return TRUE
+		if (!BP_IS_ROBOTIC(organ))
+			to_chat(user, SPAN_WARNING("\The [src] cannot recyle \the [tool]. It can only recycle robotic organs."))
+			return TRUE
+		var/recycle_worth = Floor(products[organ.organ_tag][2] * 0.5)
+		if (space_left < recycle_worth)
+			to_chat(user, SPAN_WARNING("\The [src] is too full to be refilled with \the [tool]."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [src]."))
+			return TRUE
+		stored_matter += recycle_worth
+		user.visible_message(
+			SPAN_NOTICE("\The [user] recycles \a [tool] into \the [src]."),
+			SPAN_NOTICE("You recycle \the [tool] into \the [src].")
+		)
+		qdel(tool)
+		to_chat(user, SPAN_NOTICE("\The [src] now has [stored_matter] units of matter stored."))
+		return TRUE
 
-	if(add_matter)
-		to_chat(user, SPAN_INFO("\The [src] processes \the [object_name]. Levels of stored matter now: [stored_matter]"))
-		return
 	return ..()
-// END ROBOT ORGAN PRINTER
+
 
 // FLESH ORGAN PRINTER
 /obj/machinery/organ_printer/flesh
@@ -244,36 +257,57 @@
 
 	..(user, choice)
 
-/obj/machinery/organ_printer/flesh/attackby(obj/item/W, mob/user)
-	// Load with matter for printing.
-	for(var/path in amount_list)
-		if(istype(W, path))
-			if(max_stored_matter == stored_matter)
-				to_chat(user, SPAN_WARNING("\The [src] is too full."))
-				return
-			if(!user.unEquip(W))
-				return
-			var/add_matter = amount_list[path] ? amount_list[path] : 0.5*get_organ_cost(W)
-			stored_matter += min(add_matter, max_stored_matter - stored_matter)
-			to_chat(user, SPAN_INFO("\The [src] processes \the [W]. Levels of stored biomass now: [stored_matter]"))
-			qdel(W)
 
-	// DNA sample from syringe.
-	if(istype(W,/obj/item/reagent_containers/syringe))
-		var/obj/item/reagent_containers/syringe/S = W
-		var/datum/reagent/blood/injected = locate() in S.reagents.reagent_list //Grab some blood
-		if(injected && LAZYLEN(injected.data))
-			var/loaded_dna = injected.data
-			var/weakref/R = loaded_dna["donor"]
-			var/mob/living/carbon/human/H = R.resolve()
-			if(H && istype(H) && H.species && H.dna)
-				loaded_species = H.species
-				loaded_dna_datum = H.dna && H.dna.Clone()
-				products = get_possible_products()
-				to_chat(user, SPAN_INFO("You inject the blood sample into the bioprinter."))
-				return TRUE
-		to_chat(user, SPAN_NOTICE("\The [src] displays an error: no viable blood sample could be obtained from \the [W]."))
+/obj/machinery/organ_printer/flesh/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Syringe - Inject DNA sample
+	if (istype(tool, /obj/item/reagent_containers/syringe))
+		var/obj/item/reagent_containers/syringe/syringe = tool
+		var/datum/reagent/blood/injected = syringe.reagents.get_reagent(/datum/reagent/blood)
+		if (!injected)
+			to_chat(user, SPAN_WARNING("\The [tool] has no blood in it."))
+			return TRUE
+		if (!LAZYLEN(injected.data))
+			to_chat(user, SPAN_WARNING("The blood sample in \the [tool] has no DNA."))
+			return TRUE
+		var/weakref/weakref = injected.data["donor"]
+		var/mob/living/carbon/human/donor = weakref.resolve()
+		if (!istype(donor) || !donor.species || !donor.dna)
+			to_chat(user, SPAN_WARNING("The blood sample in \the [tool] is too old."))
+			return TRUE
+		loaded_species = donor.species
+		loaded_dna_datum = donor.dna.Clone()
+		products = get_possible_products()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] injects a blood sample into \the [src] with \a [tool]."),
+			SPAN_NOTICE("You inject a blood sample into \the [src] with \the [tool].")
+		)
+		return TRUE
+
+	// Everything Else - Load with matter
+	var/type_match
+	for (var/path in amount_list)
+		if (istype(tool, path))
+			type_match = path
+			break
+	if (type_match)
+		if (max_stored_matter == stored_matter)
+			to_chat(user, SPAN_WARNING("\The [src] is too full to be refilled with \the [tool]."))
+			return TRUE
+		if (!user.unEquip(tool))
+			to_chat(user, SPAN_WARNING("You can't drop \the [src]."))
+			return TRUE
+		var/add_matter = amount_list[type_match] ? amount_list[type_match] : round(0.5 * get_organ_cost(tool))
+		stored_matter = min(stored_matter + add_matter, max_stored_matter)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] refills \the [src] with \a [tool]."),
+			SPAN_NOTICE("You refill \the [src] with \the [tool].")
+		)
+		qdel(tool)
+		to_chat(user, SPAN_NOTICE("\The [src] now has [stored_matter] units of matter stored."))
+		return TRUE
+
 	return ..()
+
 
 /obj/machinery/organ_printer/flesh/proc/get_possible_products()
 	. = list()

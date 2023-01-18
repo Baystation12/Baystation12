@@ -5,7 +5,7 @@ var/global/list/doppler_arrays = list()
 	desc = "A highly precise directional sensor array which measures the release of quants from decaying tachyons. The doppler shifting of the mirror-image formed by these quants can reveal the size, location and temporal affects of energetic disturbances within a large radius ahead of the array."
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "tdoppler"
-	obj_flags = OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_ANCHORABLE
 	construct_state = /singleton/machine_construction/default/panel_closed
 	var/currentlyfacing
 	var/direct
@@ -51,14 +51,6 @@ var/global/list/doppler_arrays = list()
 	if(inoperable())
 		icon_state = "[initial(icon_state)]-off"
 
-/obj/machinery/doppler_array/attackby(obj/item/W, mob/user)
-	if(component_attackby(W, user))
-		return TRUE
-	else if(isWrench(W))
-		anchored = !anchored
-		to_chat(user, SPAN_NOTICE("You wrench the stabilising bolts [anchored ? "into place" : "loose"]."))
-		playsound(loc, 'sound/items/Ratchet.ogg', 40)
-		update_icon()
 
 /obj/machinery/doppler_array/proc/getcurrentdirection()
 	switch(direct)

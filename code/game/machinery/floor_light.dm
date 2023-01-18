@@ -12,6 +12,7 @@ var/global/list/floor_light_cache = list()
 	active_power_usage = 20
 	power_channel = LIGHT
 	matter = list(MATERIAL_STEEL = 250, MATERIAL_GLASS = 250)
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 	var/damaged
 	var/default_light_max_bright = 0.75
@@ -36,35 +37,54 @@ var/global/list/floor_light_cache = list()
 	use_power = POWER_USE_ACTIVE
 
 
-/obj/machinery/floor_light/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
-		anchored = !anchored
-		if(use_power)
-			update_use_power(POWER_USE_OFF)
-			queue_icon_update()
-		visible_message(SPAN_NOTICE("\The [user] has [anchored ? "attached" : "detached"] \the [src]."))
-	else if(isWelder(W) && (damaged || MACHINE_IS_BROKEN(src)))
-		var/obj/item/weldingtool/WT = W
-		if(!WT.remove_fuel(0, user))
-			to_chat(user, SPAN_WARNING("\The [src] must be on to complete this task."))
-			return
-		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			return
-		if(!src || !WT.isOn())
-			return
-		visible_message(SPAN_NOTICE("\The [user] has repaired \the [src]."))
+/obj/machinery/floor_light/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE) // Passthrough to attack_hand()
+	return attack_hand(user)
+
+
+/obj/machinery/floor_light/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Dismantle
+	if (isScrewdriver(tool))
+		if (use_power)
+			to_chat(user, SPAN_WARNING("\The [src] must be turned off before you can dismantle it."))
+			return TRUE
+		new /obj/item/stack/material/steel(get_turf(src), 1)
+		new /obj/item/stack/material/glass(get_turf(src), 1)
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] dismantles \the [src] with \a [tool]."),
+			SPAN_NOTICE("You dismantle \the [src] with \the [tool].")
+		)
+		qdel(src)
+		return TRUE
+
+	// Welder - Repair damage
+	if (isWelder(tool))
+		if (!damaged && !MACHINE_IS_BROKEN(src))
+			to_chat(user, SPAN_WARNING("\The [src] isn't damaged."))
+			return TRUE
+		var/obj/item/weldingtool/welder = tool
+		if (!welder.can_use(user, 5))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts repairing \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start repairing \the [src] with \the [tool].")
+		)
+		playsound(src, 'sound/items/Welder.ogg', 50, 1)
+		if (!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (!welder.remove_fuel(user, 5))
+			return TRUE
 		set_broken(FALSE)
 		damaged = null
-	else if(isWrench(W))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-		to_chat(user, SPAN_NOTICE("You dismantle the floor light."))
-		new /obj/item/stack/material/steel(src.loc, 1)
-		new /obj/item/stack/material/glass(src.loc, 1)
-		qdel(src)
-	else if(W.force && user.a_intent == "hurt")
-		attack_hand(user)
-	return
+		user.visible_message(
+			SPAN_NOTICE("\The [user] repairs \the [src] with \a [tool]."),
+			SPAN_NOTICE("You repair \the [src] with \the [tool], expending 5 units of fuel.")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/machinery/floor_light/physical_attack_hand(mob/user)
 	if(user.a_intent == I_HURT && !issmall(user))

@@ -57,7 +57,6 @@
 
 	var/datum/effect/effect/system/spark_spread/spark_system	//the spark system, used for generating... sparks?
 
-	var/wrenching = 0
 	var/last_target			//last target fired at, prevents turrets from erratically firing at all valid targets in range
 
 	req_access = list(list(access_security, access_bridge))
@@ -274,71 +273,64 @@ var/global/list/turret_icons
 			queue_icon_update()
 
 
-/obj/machinery/porta_turret/attackby(obj/item/I, mob/user)
-	if(MACHINE_IS_BROKEN(src))
-		if(isCrowbar(I))
-			//If the turret is destroyed, you can remove it with a crowbar to
-			//try and salvage its components
-			to_chat(user, SPAN_NOTICE("You begin prying the metal coverings off."))
-			if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
-				if(prob(70))
-					to_chat(user, SPAN_NOTICE("You remove the turret and salvage some components."))
-					if(installation)
-						var/obj/item/gun/energy/Gun = new installation(loc)
-						Gun.power_supply.charge = gun_charge
-						Gun.update_icon()
-					if(prob(50))
-						new /obj/item/stack/material/steel(loc, rand(1,4))
-					if(prob(50))
-						new /obj/item/device/assembly/prox_sensor(loc)
-				else
-					to_chat(user, SPAN_NOTICE("You remove the turret but did not manage to salvage anything."))
-				qdel(src) // qdel
+/obj/machinery/porta_turret/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Crowbar - Remove broken turret and salvage components
+	if (isCrowbar(tool))
+		if (!MACHINE_IS_BROKEN(src))
+			to_chat(user, SPAN_WARNING("\The [src] isn't damaged enough to pry apart."))
 			return TRUE
-
-	else if(isWrench(I))
-		if(enabled || raised)
-			to_chat(user, SPAN_WARNING("You cannot unsecure an active turret!"))
-			return TRUE
-		if(wrenching)
-			to_chat(user, SPAN_WARNING("Someone is already [anchored ? "un" : ""]securing the turret!"))
-			return TRUE
-		if(!anchored && isinspace())
-			to_chat(user, SPAN_WARNING("Cannot secure turrets in space!"))
-			return TRUE
-
 		user.visible_message(
-			SPAN_WARNING("\The [user] begins [anchored ? "un" : ""]securing the turret."),
-			SPAN_NOTICE("You begin [anchored ? "un" : ""]securing the turret.")
+			SPAN_NOTICE("\The [user] starts prying \the [src]'s metal coverings off with \a [tool]."),
+			SPAN_NOTICE("You start prying \the [src]'s metal coverings off with \the [tool].")
 		)
-
-		wrenching = 1
-		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			//This code handles moving the turret around. After all, it's a portable turret!
-			if(!anchored)
-				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
-				anchored = TRUE
-				update_icon()
-				to_chat(user, SPAN_NOTICE("You secure the exterior bolts on the turret."))
-			else if(anchored)
-				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
-				anchored = FALSE
-				to_chat(user, SPAN_NOTICE("You unsecure the exterior bolts on the turret."))
-				update_icon()
-		wrenching = 0
+		if (!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (!MACHINE_IS_BROKEN(src))
+			to_chat(user, SPAN_WARNING("\The [src] isn't damaged enough to pry apart."))
+			return TRUE
+		var/result = "but did not manage to salvage anything"
+		if (prob(70))
+			result = "and salvage some components"
+			if (installation)
+				var/obj/item/gun/energy/gun = new installation(get_turf(src))
+				gun.power_supply.charge = gun_charge
+				gun.update_icon()
+				installation = null
+			if (prob(50))
+				new /obj/item/stack/material/steel(get_turf(src), rand(1, 4))
+			if (prob(50))
+				new /obj/item/device/assembly/prox_sensor(get_turf(src))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] pries \the [src]'s metal coverings off with \a [tool]."),
+			SPAN_NOTICE("You pry \the [src]'s metal coverings off with \the [tool] [result].")
+		)
+		qdel(src)
 		return TRUE
 
-	else if(istype(I, /obj/item/card/id)||istype(I, /obj/item/modular_computer))
-		//Behavior lock/unlock mangement
-		if(allowed(user))
-			locked = !locked
-			to_chat(user, SPAN_NOTICE("Controls are now [locked ? "locked" : "unlocked"]."))
-			updateUsrDialog()
-		else
-			to_chat(user, SPAN_NOTICE("Access denied."))
+	// ID Card - Toggle control lock
+	var/obj/item/card/id/id = tool.GetIdCard()
+	if (istype(id))
+		var/id_name = GET_ID_CARD_NAME(tool, id)
+		if (!check_access(id))
+			to_chat(user, SPAN_WARNING("\The [src] refuses [id_name]."))
+			return TRUE
+		locked = !locked
+		updateUsrDialog()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [locked ? "locks" : "unlocks"] \the [src]'s controls with \a [tool]."),
+			SPAN_NOTICE("You [locked ? "lock" : "unlock"] \the [src]'s controls with [id_name].")
+		)
 		return TRUE
+
+	// Wrench - Additional checks before allowing anchored switching
+	if (isWrench(tool))
+		if (enabled || raised)
+			to_chat(user, SPAN_WARNING("\The [src] is currently active and cannot be unanchored."))
+			return TRUE
+		return ..()
 
 	return ..()
+
 
 /obj/machinery/porta_turret/emag_act(remaining_charges, mob/user)
 	if(!emagged)
