@@ -121,6 +121,12 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 
 		S.volume *= pressure_factor
 
+		if(istype(T,/turf/simulated) && istype(turf_source,/turf/simulated))
+			var/turf/simulated/sim_source = turf_source
+			var/turf/simulated/sim_destination = T
+			if(sim_destination.zone != sim_source.zone)
+				S.volume -= 30
+
 		if (S.volume <= 0)
 			return	//no volume means no sound
 
