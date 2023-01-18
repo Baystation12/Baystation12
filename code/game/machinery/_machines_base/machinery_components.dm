@@ -245,8 +245,8 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	for(var/obj/item/stock_parts/part in component_parts)
 		if(!components_are_accessible(part.type))
 			continue
-		if((. = part.attackby(I, user)))
-			return
+		if (TRY_USE_TOOL(part, I, user, null))
+			return TRUE
 	return construct_state && construct_state.attackby(I, user, src)
 
 /// Passes `attack_hand()` calls through to components within the machine, if they are accessible.
