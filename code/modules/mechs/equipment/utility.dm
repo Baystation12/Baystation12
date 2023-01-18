@@ -337,7 +337,7 @@
 
 /obj/effect/ebeam/warp
 	plane = WARP_EFFECT_PLANE
-	no_z_overlay = TRUE
+	z_flags = ZMM_IGNORE
 
 /obj/effect/effect/warp/small
 	plane = WARP_EFFECT_PLANE
@@ -346,7 +346,7 @@
 	icon_state = "singularity_s3"
 	pixel_x = -32
 	pixel_y = -32
-	no_z_overlay = TRUE
+	z_flags = ZMM_IGNORE
 
 /obj/item/mech_equipment/catapult/proc/beamdestroyed()
 	if(beam)

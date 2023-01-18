@@ -9,6 +9,7 @@
 	anchored = TRUE
 	idle_power_usage = 20
 	power_channel = LIGHT
+	z_flags = ZMM_MANGLE_PLANES
 	var/on = 0
 	var/area/connected_area = null
 	var/other_area = null

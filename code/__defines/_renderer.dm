@@ -323,4 +323,4 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 	icon_state = "singularity_s11"
 	pixel_x = -176
 	pixel_y = -176
-	no_z_overlay = TRUE
+	z_flags = 2
