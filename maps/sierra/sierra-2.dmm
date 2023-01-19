@@ -11251,6 +11251,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/plating,
 /area/engineering/hallway)
 "auN" = (
@@ -31389,6 +31390,7 @@
 /obj/effect/floor_decal/corner/blue/border{
 	dir = 8
 	},
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/fore)
 "bhx" = (
@@ -32800,6 +32802,10 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology/level1)
+"cJD" = (
+/obj/machinery/tele_beacon,
+/turf/simulated/floor/tiled/techfloor,
+/area/crew_quarters/sleep/cryo)
 "cKt" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 4
@@ -32989,6 +32995,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/gravitaional_generator)
+"dya" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/tele_beacon,
+/turf/simulated/floor/tiled/techfloor,
+/area/teleporter/seconddeck)
 "dyy" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -51918,7 +51931,7 @@ aHD
 aRB
 aBR
 aCD
-aDs
+dya
 aCA
 aRB
 aPB
@@ -57166,7 +57179,7 @@ aVI
 aYh
 cno
 aAf
-aGV
+cJD
 uVE
 aYh
 ldg

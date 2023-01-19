@@ -8448,6 +8448,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
 	},
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/ship)
 "nB" = (
@@ -15771,6 +15772,10 @@
 "zl" = (
 /turf/simulated/floor/tiled/white,
 /area/vacant/infirmary)
+"zm" = (
+/obj/machinery/tele_beacon,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/thirddeck/central_stairwell)
 "zn" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -18458,6 +18463,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/power)
 "Ed" = (
@@ -26224,6 +26230,7 @@
 /obj/effect/floor_decal/techfloor/orange/corner{
 	dir = 8
 	},
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "Rq" = (
@@ -28074,6 +28081,15 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
 /area/exploration_shuttle/power)
+"Vh" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden,
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/effect/floor_decal/techfloor,
+/obj/machinery/tele_beacon,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/hallway/primary/thirddeck/fore)
 "Vi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -28155,6 +28171,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "Vo" = (
@@ -39763,7 +39780,7 @@ LV
 Mg
 TZ
 cv
-cA
+Vh
 jX
 uA
 Ca
@@ -49463,7 +49480,7 @@ sk
 qH
 sb
 uw
-tH
+zm
 tH
 Ac
 Gu

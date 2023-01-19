@@ -21217,6 +21217,7 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/central_stairwell)
 "aJV" = (
@@ -26472,6 +26473,7 @@
 	},
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/purple/border,
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "aRy" = (
