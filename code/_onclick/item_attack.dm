@@ -63,6 +63,43 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 
 /**
+ * Verifies the target can still be interacted with after, e.g. a do_after timer or input dialog, or other proc calls that sleep.
+ *
+ * **Parameters**:
+ * - `target` - The atom that was clicked on.
+ * - `item` (Optional) - The atom being used. This will be compared against active hand.
+ * - `silent` (Booleant, default `FALSE`) - If set, `src` will not be sent feedback messages on failure.
+ *
+ * Returns boolean.
+ */
+/mob/proc/use_sanity_check(atom/target, atom/item = null, silent = FALSE)
+	SHOULD_CALL_PARENT(TRUE)
+
+	if (QDELETED(target))
+		if (!silent)
+			to_chat(src, SPAN_WARNING("The item you were interacting with no longer exists."))
+		return FALSE
+
+	if (!target.Adjacent(src))
+		if (!silent)
+			to_chat(src, SPAN_WARNING("You must remain next to \the [target] to complete that action."))
+		return FALSE
+
+	if (!isnull(item))
+		if (QDELETED(item))
+			if (!silent)
+				to_chat(src, SPAN_WARNING("The item you were using no longer exists."))
+			return FALSE
+
+		if (get_active_hand() != item)
+			if (!silent)
+				to_chat(src, SPAN_WARNING("\The [item] must remain in your active hand to complete that action."))
+			return FALSE
+
+	return TRUE
+
+
+/**
  * Interaction handler for using an item on yourself. This is called and the result checked before the other `use_*`
  * interaction procs are called, regardless of user intent.
  *
