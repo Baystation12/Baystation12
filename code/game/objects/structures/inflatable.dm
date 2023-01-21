@@ -4,6 +4,9 @@
 	icon = 'icons/obj/inflatable.dmi'
 	health_max = 10
 	var/deploy_path = null
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
+
 
 /obj/item/inflatable/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(!deploy_path)

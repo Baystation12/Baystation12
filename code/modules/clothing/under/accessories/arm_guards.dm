@@ -21,6 +21,9 @@
 	body_location = ARMS
 	flags_inv = CLOTHING_BULKY
 
+	drop_sound = 'sound/items/drop/axe.ogg'
+	pickup_sound = 'sound/items/pickup/axe.ogg'
+
 
 /obj/item/clothing/accessory/arm_guards/blue
 	desc = "A pair of blue arm pads reinforced with armor plating. Attaches to a plate carrier."

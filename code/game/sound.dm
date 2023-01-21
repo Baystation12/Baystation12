@@ -54,6 +54,10 @@ GLOBAL_LIST_INIT(button_sound,list('sound/machines/button1.ogg','sound/machines/
 GLOBAL_LIST_INIT(chop_sound,list('sound/weapons/chop1.ogg','sound/weapons/chop2.ogg','sound/weapons/chop3.ogg'))
 GLOBAL_LIST_INIT(glasscrack_sound,list('sound/effects/glass_crack1.ogg','sound/effects/glass_crack2.ogg','sound/effects/glass_crack3.ogg','sound/effects/glass_crack4.ogg'))
 GLOBAL_LIST_INIT(tray_hit_sound,list('sound/items/trayhit1.ogg', 'sound/items/trayhit2.ogg'))
+GLOBAL_LIST_INIT(sword_pickup_sound,list('sound/items/pickup/sword1.ogg','sound/items/pickup/sword2.ogg','sound/items/pickup/sword3.ogg'))
+GLOBAL_LIST_INIT(sword_drop_sound, list('sound/items/equip/sword1.ogg',	'sound/items/equip/sword2.ogg'))
+GLOBAL_LIST_INIT(generic_drop_sound, list('sound/items/drop/generic1.ogg', 'sound/items/drop/generic2.ogg'))
+GLOBAL_LIST_INIT(generic_pickup_sound, list('sound/items/pickup/generic1.ogg','sound/items/pickup/generic2.ogg','sound/items/pickup/generic3.ogg'))
 
 /proc/playsound(atom/source, soundin, vol as num, vary, extrarange as num, falloff, is_global, frequency, is_ambiance = 0)
 
@@ -196,6 +200,10 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 			if ("chop") soundin = pick(GLOB.chop_sound)
 			if ("glasscrack") soundin = pick(GLOB.glasscrack_sound)
 			if ("tray_hit") soundin = pick(GLOB.tray_hit_sound)
+			if ("drop_sword") soundin = pick(GLOB.sword_drop_sound)
+			if ("pickup_sword") soundin = pick(GLOB.sword_pickup_sound)
+			if ("generic_drop") soundin = pick(GLOB.generic_drop_sound)
+			if ("generic_pickup") soundin = pick(GLOB.generic_pickup_sound)
 	return soundin
 
 /client/verb/stop_sounds()

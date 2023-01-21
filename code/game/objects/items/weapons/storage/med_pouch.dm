@@ -15,6 +15,9 @@ Single Use Emergency Pouches
 	var/injury_type = "generic"
 	var/static/image/cross_overlay
 
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/gloves.ogg'
+
 	var/instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
 	\t2) Carefully remove all items from the pouch and discard the pouch.\n\

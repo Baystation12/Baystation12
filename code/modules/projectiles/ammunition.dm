@@ -15,6 +15,8 @@
 	var/obj/item/projectile/BB = null	//The loaded bullet - make it so that the projectiles are created only when needed?
 	var/spent_icon = "pistolcasing-spent"
 	var/fall_sounds = list('sound/weapons/guns/casingfall1.ogg','sound/weapons/guns/casingfall2.ogg','sound/weapons/guns/casingfall3.ogg')
+	drop_sound = 'sound/items/drop/ring.ogg'
+	pickup_sound = 'sound/items/pickup/ring.ogg'
 
 /obj/item/ammo_casing/Initialize()
 	if(ispath(projectile_type))

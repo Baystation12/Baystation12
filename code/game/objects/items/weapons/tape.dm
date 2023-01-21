@@ -3,6 +3,8 @@
 	desc = "A roll of sticky tape. Possibly for taping ducks... or was that ducts?"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "taperoll"
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/tape_roll/attack(mob/living/carbon/human/H, mob/user)

@@ -140,6 +140,8 @@
 	icon_state ="book"
 	throw_speed = 1
 	throw_range = 5
+	drop_sound = 'sound/items/drop/book.ogg'
+	pickup_sound = 'sound/items/pickup/book.ogg'
 	w_class = ITEM_SIZE_NORMAL		 //upped to three because books are, y'know, pretty big. (and you could hide them inside eachother recursively forever)
 	attack_verb = list("bashed", "whacked", "educated")
 	var/dat			 // Actual page content

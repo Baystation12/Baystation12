@@ -17,6 +17,9 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_BELT
 
+	drop_sound = 'sound/items/drop/gun.ogg'
+	pickup_sound = 'sound/items/pickup/gun.ogg'
+
 	// autoinjectors takes less time than a normal syringe (overriden for hypospray).
 	// This delay is only applied when injecting concious mobs, and is not applied for self-injection
 	// The 1.9 factor scales it so it takes the following number of seconds:

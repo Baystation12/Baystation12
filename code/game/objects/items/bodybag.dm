@@ -6,6 +6,10 @@
 	icon = 'icons/obj/closets/bodybag.dmi'
 	icon_state = "bodybag_folded"
 	w_class = ITEM_SIZE_SMALL
+
+	drop_sound = 'sound/items/drop/generic1.ogg'
+	pickup_sound = 'sound/items/pickup/generic2.ogg'
+
 /obj/item/bodybag/attack_self(mob/user)
 	var/obj/structure/closet/body_bag/R = new /obj/structure/closet/body_bag(user.loc)
 	R.add_fingerprint(user)

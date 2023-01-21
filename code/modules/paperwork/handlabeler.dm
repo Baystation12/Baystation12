@@ -6,6 +6,9 @@
 	item_flags = ITEM_FLAG_TRY_ATTACK
 	matter = list(MATERIAL_PLASTIC = 100)
 
+	drop_sound = 'sound/items/drop/device.ogg'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+
 	/// If set, the label text this will apply.
 	var/label
 

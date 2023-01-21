@@ -12,6 +12,8 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	volume = 30
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
 
 /obj/item/reagent_containers/pill/New()
 	..()

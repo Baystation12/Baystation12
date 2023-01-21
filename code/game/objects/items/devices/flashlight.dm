@@ -156,6 +156,8 @@
 	desc = "A pen-sized light, used by medical staff."
 	icon_state = "penlight"
 	item_state = ""
+	drop_sound = 'sound/items/drop/accessory.ogg'
+	pickup_sound = 'sound/items/pickup/accessory.ogg'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_EARS
 	w_class = ITEM_SIZE_TINY
@@ -175,6 +177,8 @@
 	hitsound = "swing_hit"
 	flashlight_max_bright = 0.5
 	flashlight_outer_range = 5
+	drop_sound = 'sound/items/drop/accessory.ogg'
+	pickup_sound = 'sound/items/pickup/accessory.ogg'
 
 /******************************Lantern*******************************/
 /obj/item/device/flashlight/lantern
@@ -224,6 +228,8 @@
 	flashlight_max_bright = 0.3
 	flashlight_inner_range = 2
 	flashlight_outer_range = 5
+	drop_sound = 'sound/items/drop/generic1.ogg'
+	pickup_sound = 'sound/items/pickup/generic2.ogg'
 
 	on = 1
 
@@ -256,6 +262,8 @@
 	var/on_damage = 7
 	var/produce_heat = 1500
 	activation_sound = 'sound/effects/flare.ogg'
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/gloves.ogg'
 	flashlight_flags = FLASHLIGHT_SINGLE_USE
 
 	flashlight_max_bright = 0.8

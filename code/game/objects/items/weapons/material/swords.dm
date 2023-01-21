@@ -17,6 +17,9 @@
 	melee_accuracy_bonus = 10
 	worth_multiplier = 30
 
+	drop_sound = "equip_sword"
+	pickup_sound = "pickup_sword"
+
 /obj/item/material/sword/replica
 	max_force = 10
 	edge = FALSE

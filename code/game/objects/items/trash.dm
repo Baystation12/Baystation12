@@ -2,6 +2,8 @@
 	icon = 'icons/obj/trash.dmi'
 	w_class = ITEM_SIZE_SMALL
 	desc = "This is rubbish."
+	drop_sound = 'sound/items/drop/wrapper.ogg'
+	pickup_sound = 'sound/items/pickup/wrapper.ogg'
 	var/age = 0
 
 
@@ -70,10 +72,16 @@
 	name = "plate"
 	icon_state = "plate"
 
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/gloves.ogg'
+
 
 /obj/item/trash/snack_bowl
 	name = "snack bowl"
 	icon_state	= "snack_bowl"
+
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/gloves.ogg'
 
 
 /obj/item/trash/pistachios
@@ -126,6 +134,9 @@
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candle4"
 
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/gloves.ogg'
+
 
 /obj/item/trash/liquidfood
 	name = "\improper \"LiquidFood\" MRE"
@@ -146,26 +157,37 @@
 	name = "empty can"
 	icon_state = "beef"
 
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
+
 
 /obj/item/trash/beans
 	name = "empty can"
 	icon_state = "beans"
 
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
 
 /obj/item/trash/tomato
 	name = "empty can"
 	icon_state = "tomato"
 
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
 
 /obj/item/trash/spinach
 	name = "empty can"
 	icon_state = "spinach"
 
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
 
 /obj/item/trash/berries
 	name = "empty can"
 	icon_state = "berries"
 
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
 
 /obj/item/trash/cakewrap
 	name = "wrapper"

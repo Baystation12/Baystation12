@@ -11,6 +11,10 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 2)
 	attack_verb = list("beaten")
+
+	drop_sound = 'sound/items/drop/metalweapon.ogg'
+	pickup_sound = 'sound/items/pickup/metalweapon.ogg'
+
 	base_parry_chance = 30
 	attack_ignore_harm_check = TRUE
 	var/stunforce = 0

@@ -4,6 +4,8 @@
 	icon = 'icons/obj/hydroponics_products.dmi'
 	icon_state = "blank"
 	randpixel = 5
+	drop_sound = 'sound/items/drop/herb.ogg'
+	pickup_sound = 'sound/items/pickup/herb.ogg'
 	desc = "Nutritious! Probably."
 	slot_flags = SLOT_HOLSTER
 
@@ -309,6 +311,8 @@
 	name = "fruit slice"
 	desc = "A slice of some tasty fruit."
 	icon = 'icons/obj/hydroponics_misc.dmi'
+	drop_sound = 'sound/items/drop/herb.ogg'
+	pickup_sound = 'sound/items/pickup/herb.ogg'
 	icon_state = ""
 
 var/global/list/fruit_icon_cache = list()

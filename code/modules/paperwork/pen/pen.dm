@@ -13,6 +13,9 @@
 	var/colour = "black"	//what colour the ink is!
 	var/color_description = "black ink"
 
+	drop_sound = 'sound/items/drop/accessory.ogg'
+	pickup_sound = 'sound/items/pickup/accessory.ogg'
+
 	var/active = TRUE
 	var/iscrayon = FALSE
 	var/isfancy = FALSE

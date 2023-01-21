@@ -103,6 +103,8 @@
 	name = "space cleaner"
 	desc = "BLAM!-brand non-foaming space cleaner!"
 	step_delay = 6
+	drop_sound = 'sound/items/drop/generic1.ogg'
+	pickup_sound = 'sound/items/pickup/generic1.ogg'
 
 /obj/item/reagent_containers/spray/cleaner/New()
 	..()
@@ -134,6 +136,8 @@
 	volume = 60
 	var/safety = 1
 	step_delay = 1
+	drop_sound = 'sound/items/drop/component.ogg'
+	pickup_sound = 'sound/items/pickup/component.ogg'
 
 /obj/item/reagent_containers/spray/pepper/New()
 	..()
@@ -163,6 +167,8 @@
 	amount_per_transfer_from_this = 1
 	possible_transfer_amounts = null
 	volume = 10
+	drop_sound = 'sound/items/drop/herb.ogg'
+	pickup_sound = 'sound/items/pickup/herb.ogg'
 
 /obj/item/reagent_containers/spray/waterflower/New()
 	..()

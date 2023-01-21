@@ -126,6 +126,8 @@
 	name = "small parcel"
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "deliverycrate3"
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 	var/obj/item/wrapped = null
 	var/sortTag = null
 	var/examtext = null
@@ -240,6 +242,9 @@
 	icon_state = "deliveryPaper"
 	w_class = ITEM_SIZE_NORMAL
 
+	drop_sound = 'sound/items/drop/wrapper.ogg'
+	pickup_sound = 'sound/items/pickup/wrapper.ogg'
+
 /obj/item/stack/package_wrap/twenty_five
 	amount = 25
 
@@ -344,6 +349,9 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	matter = list(MATERIAL_STEEL = 100, MATERIAL_GLASS = 34)
+
+	drop_sound = 'sound/items/drop/device.ogg'
+	pickup_sound = 'sound/items/pickup/device.ogg'
 
 /obj/item/device/destTagger/proc/openwindow(mob/user as mob)
 	var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"

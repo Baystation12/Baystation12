@@ -15,6 +15,8 @@
 	var/list/allowed_containers = list(/obj/item/reagent_containers/glass/beaker, /obj/item/reagent_containers/glass/bottle)
 	var/affected_area = 3
 
+	drop_sound = 'sound/items/drop/generic1.ogg'
+	pickup_sound = 'sound/items/pickup/generic2.ogg'
 
 /obj/item/grenade/chem_grenade/Initialize()
 	. = ..()

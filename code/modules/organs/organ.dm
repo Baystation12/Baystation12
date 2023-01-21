@@ -7,6 +7,9 @@ var/global/list/organ_cache = list()
 	w_class = ITEM_SIZE_TINY
 	default_action_type = /datum/action/item_action/organ
 
+	drop_sound = 'sound/items/drop/flesh.ogg'
+	pickup_sound = 'sound/items/pickup/flesh.ogg'
+
 	// Strings.
 	var/organ_tag = "organ"           // Unique identifier.
 	var/parent_organ = BP_CHEST       // Organ holding this object.

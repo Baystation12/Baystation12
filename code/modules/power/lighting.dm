@@ -686,6 +686,9 @@
 	/// List of colors to pick from on init if `random_tone` is set.
 	var/list/random_tone_options = LIGHT_STANDARD_COLORS
 
+	drop_sound = 'sound/items/drop/glass.ogg'
+	pickup_sound = 'sound/items/pickup/glass.ogg'
+
 /obj/item/light/Initialize(mapload, light_color)
 	. = ..()
 	if (light_color)

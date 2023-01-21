@@ -5,6 +5,9 @@
 	icon_state = "walkietalkie"
 	item_state = "walkietalkie"
 
+	drop_sound = 'sound/items/drop/device.ogg'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+
 	var/on = 1 // 0 for off
 	var/last_transmission
 	var/frequency = PUB_FREQ //common chat

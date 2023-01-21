@@ -50,6 +50,9 @@
 	var/const/crayonfont = "Comic Sans MS"
 	var/const/fancyfont = "Garamond"
 
+	drop_sound = 'sound/items/drop/paper.ogg'
+	pickup_sound = 'sound/items/pickup/paper.ogg'
+
 	var/scan_file_type = /datum/computer_file/data/text
 
 /obj/item/paper/New(loc, text, title, list/md = null, datum/language/L = null)

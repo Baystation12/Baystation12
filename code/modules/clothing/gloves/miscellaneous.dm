@@ -19,6 +19,8 @@
 	item_state = "lgloves"
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
+	drop_sound = 'sound/items/drop/rubber.ogg'
+	pickup_sound = 'sound/items/pickup/rubber.ogg'
 
 /obj/item/clothing/gloves/insulated/cheap                             //Cheap Chinese Crap
 	desc = "These gloves are cheap copies of the coveted gloves, no way this can end badly."
@@ -98,6 +100,8 @@
 	name = "thick leather gloves"
 	icon_state = "leather"
 	item_state = "ggloves"
+	drop_sound = 'sound/items/drop/leather.ogg'
+	pickup_sound = 'sound/items/pickup/leather.ogg'
 
 /obj/item/clothing/gloves/thick/botany/modified
 	item_flags = ITEM_FLAG_PREMODIFIED | ITEM_FLAG_WASHER_ALLOWED
@@ -111,6 +115,8 @@
 	siemens_coefficient = 1.1 //thin latex gloves, much more conductive than fabric gloves (basically a capacitor for AC)
 	permeability_coefficient = 0.01
 	germ_level = 0
+	drop_sound = 'sound/items/drop/rubber.ogg'
+	pickup_sound = 'sound/items/pickup/rubber.ogg'
 
 /obj/item/clothing/gloves/latex/modified
 	item_flags = ITEM_FLAG_PREMODIFIED | ITEM_FLAG_WASHER_ALLOWED

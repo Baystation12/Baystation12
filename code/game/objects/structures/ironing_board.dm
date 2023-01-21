@@ -267,6 +267,9 @@
 	force = 8
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 
+	drop_sound = 'sound/items/drop/weldingtool.ogg'
+	pickup_sound = 'sound/items/pickup/weldingtool.ogg'
+
 	var/iron_enabled
 
 /obj/item/ironing_iron/attack_self(mob/living/user)

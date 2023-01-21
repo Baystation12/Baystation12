@@ -239,14 +239,43 @@
 		return drop_from_inventory(r_hand, Target)
 	return unEquip(r_hand, Target)
 
+/mob/proc/get_active_grabs()
+	. = list()
+	for(var/obj/item/grab/grab in list(l_hand, r_hand))
+		. += grab
+
 /**
  * Drops the item in our active hand. TODO: rename this to drop_active_hand or something
  * Make sure you are ABSOLUTELY CERTAIN you need to drop this and ignore unequip checks (For example, grabs can be "dropped" but only willingly)
  * Else use unequip_item
  */
-/mob/proc/drop_item(atom/Target)
-	if(hand)	return drop_l_hand(Target, TRUE)
-	else		return drop_r_hand(Target, TRUE)
+
+/mob/proc/drop_item(var/atom/Target)
+	var/obj/item/item_dropped = null
+
+	if(length(get_active_grabs()))
+		for(var/obj/item/grab/grab in get_active_grabs())
+			qdel(grab)
+			. = TRUE
+		return
+
+	if (hand)
+		item_dropped = l_hand
+		. = drop_l_hand(Target)
+	else
+		item_dropped = r_hand
+		. = drop_r_hand(Target)
+
+	if (istype(item_dropped) && !QDELETED(item_dropped))
+		addtimer(new Callback(src, .proc/make_item_drop_sound, item_dropped), 1)
+
+/mob/proc/make_item_drop_sound(obj/item/I)
+    if(QDELETED(I))
+        return
+
+    if(I.drop_sound)
+        playsound(I, I.drop_sound, 25, 0)
+
 
 /*
 	Removes the object from any slots the mob might have, calling the appropriate icon update proc.

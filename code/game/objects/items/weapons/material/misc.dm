@@ -64,6 +64,9 @@
 	applies_material_colour = 0
 	hitsound = "chop"
 
+	drop_sound = 'sound/items/drop/axe.ogg'
+	pickup_sound = 'sound/items/pickup/axe.ogg'
+
 /obj/item/material/hatchet/unbreakable
 	unbreakable = TRUE
 

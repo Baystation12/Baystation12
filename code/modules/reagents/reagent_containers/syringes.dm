@@ -23,6 +23,9 @@
 	var/image/filling //holds a reference to the current filling overlay
 	var/visible_name = "a syringe"
 	var/time = 30
+	drop_sound = 'sound/items/drop/glass.ogg'
+	pickup_sound = 'sound/items/pickup/glass.ogg'
+
 
 /obj/item/reagent_containers/syringe/Initialize(mapload)
 	. = ..()

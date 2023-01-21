@@ -8,6 +8,8 @@
 	max_amount = 60
 	randpixel = 3
 	icon = 'icons/obj/materials.dmi'
+	drop_sound = 'sound/items/drop/axe.ogg'
+	pickup_sound = 'sound/items/pickup/axe.ogg'
 
 	var/default_type = MATERIAL_STEEL
 	var/material/material
@@ -165,6 +167,8 @@
 	plural_icon_state = "brick-mult"
 	max_icon_state = "brick-max"
 	default_type = MATERIAL_SANDSTONE
+	drop_sound = 'sound/items/drop/boots.ogg'
+	pickup_sound = 'sound/items/pickup/boots.ogg'
 
 /obj/item/stack/material/marble
 	name = "marble brick"
@@ -172,6 +176,8 @@
 	plural_icon_state = "brick-mult"
 	max_icon_state = "brick-max"
 	default_type = MATERIAL_MARBLE
+	drop_sound = 'sound/items/drop/boots.ogg'
+	pickup_sound = 'sound/items/pickup/boots.ogg'
 
 /obj/item/stack/material/marble/ten
 	amount = 10
@@ -185,6 +191,8 @@
 	plural_icon_state = "diamond-mult"
 	max_icon_state = "diamond-max"
 	default_type = MATERIAL_DIAMOND
+	drop_sound = 'sound/items/drop/glass.ogg'
+	pickup_sound = 'sound/items/pickup/glass.ogg'
 
 /obj/item/stack/material/diamond/ten
 	amount = 10
@@ -211,6 +219,8 @@
 	max_icon_state = "sheet-phoron-max"
 	default_type = MATERIAL_PHORON
 	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
+	drop_sound = 'sound/items/drop/glass.ogg'
+	pickup_sound = 'sound/items/pickup/glass.ogg'
 
 /obj/item/stack/material/phoron/ten
 	amount = 10
@@ -224,6 +234,9 @@
 	plural_icon_state = "sheet-plastic-mult"
 	max_icon_state = "sheet-plastic-max"
 	default_type = MATERIAL_PLASTIC
+	drop_sound = 'sound/items/drop/card.ogg'
+	pickup_sound = 'sound/items/pickup/card.ogg'
+
 
 /obj/item/stack/material/plastic/ten
 	amount = 10
@@ -390,6 +403,8 @@
 	plural_icon_state = "sheet-wood-mult"
 	max_icon_state = "sheet-wood-max"
 	default_type = MATERIAL_WOOD
+	drop_sound = 'sound/items/drop/wooden.ogg'
+	pickup_sound = 'sound/items/pickup/wooden.ogg'
 
 /obj/item/stack/material/wood/ten
 	amount = 10
@@ -467,6 +482,8 @@
 	name = "cloth"
 	icon_state = "sheet-cloth"
 	default_type = MATERIAL_CLOTH
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
 
 /obj/item/stack/material/cardboard
 	name = "cardboard"
@@ -475,6 +492,8 @@
 	max_icon_state = "sheet-card-max"
 	default_type = MATERIAL_CARDBOARD
 	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 
 /obj/item/stack/material/cardboard/ten
 	amount = 10
@@ -488,6 +507,8 @@
 	icon_state = "sheet-leather"
 	default_type = MATERIAL_LEATHER_GENERIC
 	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
+	drop_sound = 'sound/items/drop/leather.ogg'
+	pickup_sound = 'sound/items/pickup/leather.ogg'
 
 /obj/item/stack/material/glass
 	name = "glass"
@@ -495,6 +516,9 @@
 	plural_icon_state = "sheet-clear-mult"
 	max_icon_state = "sheet-clear-max"
 	default_type = MATERIAL_GLASS
+
+	drop_sound = 'sound/items/drop/glass.ogg'
+	pickup_sound = 'sound/items/pickup/glass.ogg'
 
 /obj/item/stack/material/glass/on_update_icon()
 	if(reinf_material)

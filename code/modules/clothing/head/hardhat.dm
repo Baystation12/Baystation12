@@ -22,6 +22,9 @@
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 
+	drop_sound = 'sound/items/drop/helm.ogg'
+	pickup_sound = 'sound/items/pickup/helm.ogg'
+
 /obj/item/clothing/head/hardhat/orange
 	icon_state = "hardhat0_orange"
 

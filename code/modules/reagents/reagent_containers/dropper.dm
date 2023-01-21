@@ -11,6 +11,8 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	volume = 5
+	drop_sound = 'sound/items/drop/glass.ogg'
+	pickup_sound = 'sound/items/pickup/glass.ogg'
 
 /obj/item/reagent_containers/dropper/afterattack(obj/target, mob/user, proximity)
 	if(!target.reagents || !proximity) return

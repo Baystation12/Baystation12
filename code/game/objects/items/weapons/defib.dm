@@ -8,6 +8,8 @@
 	icon = 'icons/obj/defibrillator.dmi'
 	icon_state = "defibunit"
 	item_state = "defibunit"
+	drop_sound = 'sound/items/drop/device.ogg'
+	pickup_sound = 'sound/items/pickup/device.ogg'
 	slot_flags = SLOT_BACK
 	force = 5
 	throwforce = 6

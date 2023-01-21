@@ -3,6 +3,9 @@
 	desc = "It's made of AUTHENTIC faux-leather and has a price-tag still attached. Its owner must be a real professional."
 	icon_state = "briefcase"
 	item_state = "briefcase"
+	use_sound = 'sound/items/storage/briefcase.ogg'
+	drop_sound = 'sound/items/drop/backpack.ogg'
+	pickup_sound = 'sound/items/pickup/backpack.ogg'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 8.0
 	throw_speed = 1

@@ -9,6 +9,8 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	attack_verb = list("burnt", "singed")
+	drop_sound = 'sound/items/drop/card.ogg'
+	pickup_sound = 'sound/items/pickup/card.ogg'
 	var/max_fuel = 5
 	var/random_colour = FALSE
 	var/available_colors = list(COLOR_WHITE, COLOR_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_BOTTLE_GREEN, COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_GUNMETAL, COLOR_RED, COLOR_YELLOW, COLOR_CYAN, COLOR_GREEN, COLOR_VIOLET, COLOR_NAVY_BLUE, COLOR_PINK)
@@ -136,6 +138,8 @@
 	desc = "It's a zippo-styled lighter, using a replacable flint in a fetching steel case. It makes a clicking sound that everyone loves."
 	icon_state = "zippo"
 	item_state = "zippo"
+	drop_sound = 'sound/items/drop/accessory.ogg'
+	pickup_sound = 'sound/items/pickup/accessory.ogg'
 	max_fuel = 10
 	available_colors = list(COLOR_WHITE, COLOR_WHITE, COLOR_WHITE, COLOR_DARK_GRAY, COLOR_GUNMETAL, COLOR_BRONZE, COLOR_BRASS)
 

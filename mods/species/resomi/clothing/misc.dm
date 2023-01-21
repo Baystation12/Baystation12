@@ -43,6 +43,8 @@
 	item_flags = ITEM_FLAG_SILENT
 	w_class = ITEM_SIZE_SMALL
 	species_restricted = list(SPECIES_RESOMI)
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
 
 /obj/item/clothing/shoes/footwraps/socks_resomi
 	name = "koishi"

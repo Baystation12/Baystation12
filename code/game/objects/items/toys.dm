@@ -30,6 +30,9 @@
 	throw_range = 20
 	force = 0
 
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/gloves.ogg'
+
 /*
  * Balloons
  */
@@ -39,6 +42,9 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "waterballoon-e"
 	item_state = "balloon-empty"
+
+	drop_sound = 'sound/items/drop/rubber.ogg'
+	pickup_sound = 'sound/items/pickup/rubber.ogg'
 
 /obj/item/toy/water_balloon/New()
 	create_reagents(10)
@@ -105,6 +111,9 @@
 	item_state = "syndballoon"
 	w_class = ITEM_SIZE_HUGE
 
+	drop_sound = 'sound/items/drop/rubber.ogg'
+	pickup_sound = 'sound/items/pickup/rubber.ogg'
+
 /obj/item/toy/balloon/New()
 	..()
 	desc = "Across the balloon is printed: \"[desc]\""
@@ -151,6 +160,9 @@
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5
+
+	drop_sound = 'sound/items/drop/gun.ogg'
+	pickup_sound = 'sound/items/pickup/gun.ogg'
 
 /obj/item/toy/crossbow/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/toy/ammo/crossbow))
@@ -246,6 +258,9 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
+
 /obj/effect/foam_dart_dummy
 	name = ""
 	desc = ""
@@ -267,6 +282,9 @@
 	var/active = 0.0
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "struck", "hit")
+
+	drop_sound = 'sound/items/drop/gun.ogg'
+	pickup_sound = 'sound/items/pickup/gun.ogg'
 
 /obj/item/toy/sword/attack_self(mob/user as mob)
 	src.active = !( src.active )
@@ -301,6 +319,9 @@
 	w_class = ITEM_SIZE_LARGE
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
 
+	drop_sound = 'sound/items/drop/gun.ogg'
+	pickup_sound = 'sound/items/pickup/gun.ogg'
+
 /*
  * Snap pops
  */
@@ -310,6 +331,9 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "snappop"
 	w_class = ITEM_SIZE_TINY
+
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
 
 /obj/item/toy/snappop/throw_impact(atom/hit_atom)
 	..()
@@ -347,6 +371,9 @@
 	var/cooldown = 0
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
+
+	drop_sound = 'sound/items/drop/card.ogg'
+	pickup_sound = 'sound/items/pickup/card.ogg'
 
 /obj/item/toy/bosunwhistle/attack_self(mob/user as mob)
 	if(cooldown < world.time - 35)
@@ -443,6 +470,10 @@
 	icon_state = "assistant"
 	icon = 'icons/obj/toy.dmi'
 	w_class = ITEM_SIZE_TINY
+
+	drop_sound = 'sound/items/drop/accessory.ogg'
+	pickup_sound = 'sound/items/pickup/accessory.ogg'
+
 
 /obj/item/toy/figure/cmo
 	name = "Chief Medical Officer action figure"
@@ -693,6 +724,8 @@
 	var/phrase = "I don't want to exist anymore!"
 
 
+
+
 /obj/structure/plushie/attack_hand(mob/living/user)
 	var/action_word = "action"
 	if (user.a_intent == I_HELP)
@@ -747,6 +780,9 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "nymphplushie"
 	w_class = ITEM_SIZE_SMALL
+
+	drop_sound = 'sound/items/drop/plushie.ogg'
+	pickup_sound = 'sound/items/pickup/plushie.ogg'
 
 
 /obj/item/toy/plushie/attack_self(mob/living/user)
@@ -872,6 +908,9 @@
 	item_state = "inflatable"
 	icon = 'icons/obj/clothing/obj_belt.dmi'
 	slot_flags = SLOT_BELT
+
+	drop_sound = 'sound/items/drop/rubber.ogg'
+	pickup_sound = 'sound/items/pickup/rubber.ogg'
 
 /obj/item/marshalling_wand
 	name = "marshalling wand"

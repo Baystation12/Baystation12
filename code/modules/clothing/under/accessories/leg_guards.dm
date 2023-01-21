@@ -18,6 +18,9 @@
 	body_location = LEGS
 	flags_inv = CLOTHING_BULKY
 
+	drop_sound = 'sound/items/drop/boots.ogg'
+	pickup_sound = 'sound/items/pickup/boots.ogg'
+
 
 /obj/item/clothing/accessory/leg_guards/blue
 	desc = "A pair of armored leg pads in blue. Attaches to a plate carrier."

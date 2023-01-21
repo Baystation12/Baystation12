@@ -51,6 +51,8 @@
 	name = "deck of cards"
 	desc = "A simple deck of playing cards."
 	icon_state = "deck"
+	drop_sound = 'sound/items/drop/paper.ogg'
+	pickup_sound = 'sound/items/pickup/paper.ogg'
 
 /obj/item/deck/cards/New()
 	..()
@@ -195,7 +197,8 @@
 /obj/item/pack
 	name = "card pack"
 	desc = "For those with disposible income."
-
+	drop_sound = 'sound/items/drop/paper.ogg'
+	pickup_sound = 'sound/items/pickup/paper.ogg'
 	icon_state = "card_pack"
 	icon = 'icons/obj/playing_cards.dmi'
 	w_class = ITEM_SIZE_TINY
@@ -224,6 +227,8 @@
 	desc = "Some playing cards."
 	icon = 'icons/obj/playing_cards.dmi'
 	icon_state = "empty"
+	drop_sound = 'sound/items/drop/paper.ogg'
+	pickup_sound = 'sound/items/pickup/paper.ogg'
 	w_class = ITEM_SIZE_TINY
 
 	var/concealed = 0

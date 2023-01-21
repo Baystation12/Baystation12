@@ -9,6 +9,9 @@
 	color_description = "red crayon"
 	iscrayon = TRUE
 
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/gloves.ogg'
+
 	var/shadeColour = "#220000" //RGB
 	var/uses = 30 //0 for unlimited uses
 	var/instant = 0

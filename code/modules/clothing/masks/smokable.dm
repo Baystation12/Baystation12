@@ -19,6 +19,9 @@
 	var/brand
 	var/gas_consumption = 0.04
 
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
+
 /obj/item/clothing/mask/smokable/New()
 	..()
 	atom_flags |= ATOM_FLAG_NO_REACT // so it doesn't react until you light it
@@ -381,6 +384,9 @@
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME with the power of science.</span>"
 	brand = null
 	filling = list(/datum/reagent/tobacco/fine = 5)
+
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/gloves.ogg'
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
 	name = "\improper Cohiba Robusto cigar"

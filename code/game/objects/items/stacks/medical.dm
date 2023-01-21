@@ -9,6 +9,9 @@
 	throw_speed = 4
 	throw_range = 20
 
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
+
 	var/heal_brute = 0
 	var/heal_burn = 0
 	var/animal_heal = 3
@@ -76,6 +79,8 @@
 	animal_heal = 5
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg')
 	amount = 10
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/gloves.ogg'
 
 /obj/item/stack/medical/bruise_pack/attack(mob/living/carbon/M, mob/user)
 	if(..())
@@ -134,6 +139,8 @@
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 4
 	apply_sounds = list('sound/effects/ointment.ogg')
+	drop_sound = 'sound/items/drop/herb.ogg'
+	pickup_sound = 'sound/items/pickup/herb.ogg'
 
 /obj/item/stack/medical/ointment/attack(mob/living/carbon/M, mob/user)
 	if(..())
@@ -261,6 +268,8 @@
 	max_amount = 5
 	animal_heal = 0
 	can_treat_robots = TRUE
+	drop_sound = 'sound/items/drop/hat.ogg'
+	pickup_sound = 'sound/items/pickup/hat.ogg'
 	var/list/splintable_organs = list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT)	//List of organs you can splint, natch.
 
 /obj/item/stack/medical/splint/attack(mob/living/carbon/M, mob/user)

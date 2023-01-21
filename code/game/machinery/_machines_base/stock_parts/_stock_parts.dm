@@ -9,6 +9,8 @@
 	var/rating = 1
 	var/status = 0             // Flags using PART_STAT defines.
 	var/base_type              // Type representing parent of category for replacer usage.
+	drop_sound = 'sound/items/drop/glass.ogg'
+	pickup_sound = 'sound/items/pickup/glass.ogg'
 
 /obj/item/stock_parts/attack_hand(mob/user)
 	if(istype(loc, /obj/machinery))

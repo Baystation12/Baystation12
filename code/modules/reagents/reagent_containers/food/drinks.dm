@@ -9,6 +9,8 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	amount_per_transfer_from_this = 5
 	volume = 50
+	drop_sound = 'sound/items/drop/bottle.ogg'
+	pickup_sound = 'sound/items/pickup/bottle.ogg'
 	var/filling_states   // List of percentages full that have icons
 	var/base_name = null // Name to put in front of drinks, i.e. "[base_name] of [contents]"
 	var/base_icon = null // Base icon name for fill states
@@ -140,6 +142,8 @@
 	icon_state = "milk"
 	item_state = "carton"
 	center_of_mass = "x=16;y=9"
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 
 /obj/item/reagent_containers/food/drinks/milk/Initialize()
 	. = ..()
@@ -166,6 +170,8 @@
 	icon_state = "soymilk"
 	item_state = "carton"
 	center_of_mass = "x=16;y=9"
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 
 /obj/item/reagent_containers/food/drinks/soymilk/Initialize()
 	. = ..()
@@ -178,6 +184,8 @@
 	item_state = "carton"
 	center_of_mass = "x=16;y=9"
 	volume = 30
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 
 /obj/item/reagent_containers/food/drinks/small_milk/Initialize()
 	. = ..()
@@ -190,6 +198,8 @@
 	item_state = "carton"
 	center_of_mass = "x=16;y=9"
 	volume = 30
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 
 /obj/item/reagent_containers/food/drinks/small_milk_choc/Initialize()
 	. = ..()
@@ -201,6 +211,8 @@
 	desc = "Careful, the beverage you're about to enjoy is extremely hot."
 	icon_state = "coffee"
 	center_of_mass = "x=15;y=10"
+	drop_sound = 'sound/items/drop/papercup.ogg'
+	pickup_sound = 'sound/items/pickup/papercup.ogg'
 
 /obj/item/reagent_containers/food/drinks/coffee/Initialize()
 	. = ..()
@@ -222,6 +234,8 @@
 	icon_state = "coffee"
 	item_state = "coffee"
 	center_of_mass = "x=15;y=13"
+	drop_sound = 'sound/items/drop/papercup.ogg'
+	pickup_sound = 'sound/items/pickup/papercup.ogg'
 
 /obj/item/reagent_containers/food/drinks/h_chocolate/Initialize()
 	. = ..()
@@ -233,6 +247,8 @@
 	desc = "Just add 10ml water, self heats! A taste that reminds you of your school years."
 	icon_state = "ramen"
 	center_of_mass = "x=16;y=11"
+	drop_sound = 'sound/items/drop/papercup.ogg'
+	pickup_sound = 'sound/items/pickup/papercup.ogg'
 
 /obj/item/reagent_containers/food/drinks/dry_ramen/Initialize()
 	. = ..()
@@ -246,6 +262,8 @@
 	possible_transfer_amounts = null
 	volume = 10
 	center_of_mass = "x=16;y=12"
+	drop_sound = 'sound/items/drop/papercup.ogg'
+	pickup_sound = 'sound/items/pickup/papercup.ogg'
 
 /obj/item/reagent_containers/food/drinks/sillycup/on_reagent_change()
 	if(reagents.total_volume)
@@ -326,6 +344,8 @@
 	filling_states = "100"
 	base_name = "cup"
 	base_icon = "cup"
+	drop_sound = 'sound/items/drop/papercup.ogg'
+	pickup_sound = 'sound/items/pickup/papercup.ogg'
 
 /obj/item/reagent_containers/food/drinks/tea/black
 	name = "cup of black tea"
@@ -360,6 +380,8 @@
 	filling_states = "100"
 	base_name = "cup"
 	base_icon = "cup"
+	drop_sound = 'sound/items/drop/papercup.ogg'
+	pickup_sound = 'sound/items/pickup/papercup.ogg'
 
 /obj/item/reagent_containers/food/drinks/decafcoffee/Initialize()
 	. = ..()

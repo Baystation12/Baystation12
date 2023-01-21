@@ -379,6 +379,8 @@
 	desc = "Cola. in space."
 	icon_state = "colabottle"
 	center_of_mass = "x=16;y=6"
+	drop_sound = 'sound/items/drop/shoes.ogg'
+	pickup_sound = 'sound/items/pickup/shoes.ogg'
 
 
 /obj/item/reagent_containers/food/drinks/bottle/cola/Initialize()
@@ -815,6 +817,8 @@
 	attack_verb = list("stabbed", "slashed", "attacked")
 	sharp = TRUE
 	var/icon/broken_outline = icon('icons/obj/drinks.dmi', "broken")
+	drop_sound = 'sound/items/drop/glass.ogg'
+	pickup_sound = 'sound/items/pickup/glass.ogg'
 
 
 /obj/item/broken_bottle/attack(mob/living/carbon/M, mob/living/carbon/user)

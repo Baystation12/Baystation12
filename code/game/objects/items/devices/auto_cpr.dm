@@ -3,6 +3,8 @@
 	desc = "A device that gives regular compression to the victim's ribcage, used in case of urgent heart issues."
 	icon = 'icons/obj/auto_cpr.dmi'
 	icon_state = "pumper"
+	drop_sound = 'sound/items/drop/device.ogg'
+	pickup_sound = 'sound/items/pickup/device.ogg'
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	slot_flags = SLOT_OCLOTHING

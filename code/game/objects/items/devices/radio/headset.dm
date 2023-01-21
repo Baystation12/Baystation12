@@ -19,6 +19,9 @@
 	var/ks1type = /obj/item/device/encryptionkey
 	var/ks2type = null
 
+	drop_sound = 'sound/items/drop/component.ogg'
+	pickup_sound = 'sound/items/pickup/component.ogg'
+
 /obj/item/device/radio/headset/Initialize()
 	. = ..()
 	internal_channels.Cut()

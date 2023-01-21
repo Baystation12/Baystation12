@@ -3,6 +3,8 @@
 	amount_per_transfer_from_this = 5
 	atom_flags = 0 //starts closed
 	matter = list(MATERIAL_ALUMINIUM = 30)
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
 
 //DRINKS
 
@@ -22,6 +24,8 @@
 	icon_state = "waterbottle"
 	center_of_mass = "x=15;y=8"
 	matter = list(MATERIAL_PLASTIC = 40)
+	drop_sound = 'sound/items/drop/disk.ogg'
+	pickup_sound = 'sound/items/pickup/disk.ogg'
 
 /obj/item/reagent_containers/food/drinks/cans/waterbottle/Initialize()
 	. = ..()

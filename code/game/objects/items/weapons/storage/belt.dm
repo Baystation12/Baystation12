@@ -14,6 +14,9 @@
 	var/overlay_flags
 	attack_verb = list("whipped", "lashed", "disciplined")
 
+	drop_sound = 'sound/items/drop/toolbelt.ogg'
+	pickup_sound = 'sound/items/pickup/toolbelt.ogg'
+
 /obj/item/storage/belt/verb/toggle_layer()
 	set name = "Switch Belt Layer"
 	set category = "Object"
@@ -104,6 +107,7 @@
 	desc = "A belt of durable leather, festooned with hooks, slots, and pouches."
 	icon_state = "utilitybelt"
 	item_state = "utility"
+	equip_sound = 'sound/items/equip/toolbelt.ogg'
 	overlay_flags = BELT_OVERLAY_ITEMS
 	can_hold = list(
 		///obj/item/combitool,

@@ -9,6 +9,8 @@
 	var/base_icon
 	var/open
 	var/obj/item/held
+	drop_sound = 'sound/items/drop/ring.ogg'
+	pickup_sound = 'sound/items/pickup/ring.ogg'
 
 
 /obj/item/clothing/accessory/locket/attack_self(mob/user)

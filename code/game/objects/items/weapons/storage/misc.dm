@@ -3,6 +3,8 @@
 	desc = "It's a small bag with dice inside."
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "dicebag"
+	drop_sound = 'sound/items/drop/hat.ogg'
+	pickup_sound = 'sound/items/pickup/hat.ogg'
 
 /obj/item/storage/pill_bottle/dice/New()
 	..()
@@ -56,8 +58,14 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 10
 	throwforce = 2
+
+	drop_sound = 'sound/items/drop/wrapper.ogg'
+	pickup_sound = 'sound/items/pickup/wrapper.ogg'
+	use_sound = 'sound/items/drop/paper.ogg'
+
 	slot_flags = SLOT_BELT
 	startswith = list(/obj/item/paper/cig = 10)
+
 	can_hold = list(
   /obj/item/paper/cig,
   /obj/item/clothing/mask/smokable/cigarette,
@@ -84,6 +92,9 @@
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "placeholder"
 	item_state = "cigpacket"
+	use_sound = 'sound/items/drop/paper.ogg'
+	drop_sound = 'sound/items/drop/wrapper.ogg'
+	pickup_sound = 'sound/items/pickup/wrapper.ogg'
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6

@@ -9,6 +9,8 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("warned", "cautioned", "smashed")
+	drop_sound = 'sound/items/drop/shoes.ogg'
+	pickup_sound = 'sound/items/pickup/shoes.ogg'
 
 /obj/item/caution/cone
 	desc = "This cone is trying to warn you of something!"

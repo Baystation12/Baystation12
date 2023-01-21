@@ -16,6 +16,9 @@
 	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 30)
 	origin_tech = list(TECH_ENGINEERING = 1)
 
+	drop_sound = 'sound/items/drop/weldingtool.ogg'
+	pickup_sound = 'sound/items/pickup/weldingtool.ogg'
+
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
 	var/status = 1 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
 	var/welding_resource = "welding fuel"

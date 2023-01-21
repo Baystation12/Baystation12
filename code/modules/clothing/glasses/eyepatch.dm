@@ -7,6 +7,9 @@
 	item_flags = ITEM_FLAG_WASHER_ALLOWED
 	var/flipped = FALSE // Indicates left or right eye; 0 = on the right
 
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/gloves.ogg'
+
 /obj/item/clothing/glasses/eyepatch/verb/flip_patch()
 	set name = "Flip Patch"
 	set category = "Object"

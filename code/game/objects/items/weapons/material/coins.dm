@@ -12,6 +12,9 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	item_flags = ITEM_FLAG_TRY_ATTACK
+	drop_sound = 'sound/items/drop/ring.ogg'
+	pickup_sound = 'sound/items/pickup/ring.ogg'
+
 
 	/// The smallest interval allowed between coin flips.
 	var/const/FLIP_COOLDOWN = 5 SECONDS

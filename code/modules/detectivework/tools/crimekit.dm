@@ -5,6 +5,9 @@
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "case"
 	item_state = "case"
+	use_sound = 'sound/items/storage/toolbox.ogg'
+	drop_sound = 'sound/items/drop/toolbox.ogg'
+	pickup_sound = 'sound/items/pickup/toolbox.ogg'
 	startswith = list(
 		/obj/item/storage/box/swabs,
 		/obj/item/storage/box/fingerprints,

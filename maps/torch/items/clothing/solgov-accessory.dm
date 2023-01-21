@@ -334,6 +334,8 @@ badges
 	name = "master solgov badge"
 	icon = 'maps/torch/icons/obj/obj_accessories_solgov.dmi'
 	accessory_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/onmob_accessories_solgov.dmi', slot_wear_suit_str = 'maps/torch/icons/mob/onmob_accessories_solgov.dmi')
+	drop_sound = 'sound/items/drop/ring.ogg'
+	pickup_sound = 'sound/items/pickup/ring.ogg'
 
 /obj/item/clothing/accessory/badge/solgov/security
 	name = "security forces badge"

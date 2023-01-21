@@ -13,6 +13,8 @@
 	desc = "The poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface."
 	icon_state = "rolled_poster"
 	var/poster_type
+	drop_sound = 'sound/items/drop/wrapper.ogg'
+	pickup_sound = 'sound/items/pickup/wrapper.ogg'
 
 /obj/item/contraband/poster/New(maploading, given_poster_type)
 	if(given_poster_type && !ispath(given_poster_type, /singleton/poster))

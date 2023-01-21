@@ -23,6 +23,9 @@
 	item_flags = 0
 	obj_flags = 0
 
+	drop_sound = 'sound/items/drop/axe.ogg'
+	pickup_sound = 'sound/items/pickup/axe.ogg'
+
 /*
  * Grass
  */
@@ -32,6 +35,9 @@
 	desc = "A patch of grass like they often use on golf courses."
 	icon_state = "tile_grass"
 	origin_tech = list(TECH_BIO = 1)
+
+	drop_sound = 'sound/items/drop/herb.ogg'
+	pickup_sound = 'sound/items/pickup/herb.ogg'
 
 /*
  * Wood
@@ -43,6 +49,9 @@
 	icon_state = "tile-wood"
 	color = WOOD_COLOR_GENERIC
 	matter = list(MATERIAL_WOOD = 450)
+
+	drop_sound = 'sound/items/drop/wooden.ogg'
+	pickup_sound = 'sound/items/pickup/wooden.ogg'
 
 /obj/item/stack/tile/wood/cyborg
 	name = "wood floor tile synthesizer"
@@ -227,6 +236,9 @@
 	desc = "A piece of brown carpet."
 	icon_state = "tile_carpetbrown"
 
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
+
 /obj/item/stack/tile/carpet/fifty
 	amount = 50
 
@@ -235,6 +247,9 @@
 	desc = "A piece of blue and gold carpet."
 	singular_name = "blue carpet"
 	icon_state = "tile_carpetblue"
+
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
 
 /obj/item/stack/tile/carpetblue/fifty
 	amount = 50
@@ -245,6 +260,9 @@
 	singular_name = "pale blue carpet"
 	icon_state = "tile_carpetblue2"
 
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
+
 /obj/item/stack/tile/carpetblue2/fifty
 	amount = 50
 
@@ -253,6 +271,9 @@
 	desc = "A piece of blue and green carpet."
 	singular_name = "sea blue carpet"
 	icon_state = "tile_carpetblue3"
+
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
 
 /obj/item/stack/tile/carpetblue3/fifty
 	amount = 50
@@ -263,6 +284,9 @@
 	singular_name = "magenta carpet"
 	icon_state = "tile_carpetmagenta"
 
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
+
 /obj/item/stack/tile/carpetmagenta/fifty
 	amount = 50
 
@@ -271,6 +295,9 @@
 	desc = "A piece of purple carpet."
 	singular_name = "purple carpet"
 	icon_state = "tile_carpetpurple"
+
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
 
 /obj/item/stack/tile/carpetpurple/fifty
 	amount = 50
@@ -281,6 +308,9 @@
 	singular_name = "orange carpet"
 	icon_state = "tile_carpetorange"
 
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
+
 /obj/item/stack/tile/carpetorange/fifty
 	amount = 50
 
@@ -290,6 +320,9 @@
 	singular_name = "green carpet"
 	icon_state = "tile_carpetgreen"
 
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
+
 /obj/item/stack/tile/carpetgreen/fifty
 	amount = 50
 
@@ -298,6 +331,9 @@
 	desc = "A piece of red carpet."
 	singular_name = "red carpet"
 	icon_state = "tile_carpetred"
+
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
 
 /obj/item/stack/tile/carpetred/fifty
 	amount = 50

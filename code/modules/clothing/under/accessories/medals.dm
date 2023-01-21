@@ -5,6 +5,9 @@
 	slot = ACCESSORY_SLOT_MEDAL
 	on_rolled_down = ACCESSORY_ROLLED_NONE
 
+	drop_sound = 'sound/items/drop/accessory.ogg'
+	pickup_sound = 'sound/items/pickup/accessory.ogg'
+
 
 /obj/item/clothing/accessory/medal/iron
 	name = "iron medal"

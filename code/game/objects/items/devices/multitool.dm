@@ -14,6 +14,8 @@
 	throwforce = 5.0
 	throw_range = 15
 	throw_speed = 3
+	drop_sound = 'sound/items/drop/multitool.ogg'
+	pickup_sound = 'sound/items/pickup/multitool.ogg'
 
 	matter = list(MATERIAL_PLASTIC = 50, MATERIAL_GLASS = 20, MATERIAL_STEEL = 5)
 

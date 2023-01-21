@@ -12,6 +12,9 @@
 /obj/item/storage/fancy
 	item_state = "syringe_kit" //placeholder, many of these don't have inhands
 	opened = 0 //if an item has been removed from this container
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
+	use_sound = 'sound/items/storage/box.ogg'
 	var/obj/item/key_type //path of the key item that this "fancy" container is meant to store
 
 /obj/item/storage/fancy/on_update_icon()
@@ -146,6 +149,10 @@
 	max_storage_space = 6
 	throwforce = 2
 	slot_flags = SLOT_BELT
+
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/gloves.ogg'
+	use_sound = 'sound/items/drop/paper.ogg'
 
 	key_type = /obj/item/clothing/mask/smokable/cigarette
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette = 6)
@@ -296,6 +303,10 @@
 	slot_flags = SLOT_BELT
 	storage_slots = 7
 
+	drop_sound = 'sound/items/drop/shovel.ogg'
+	pickup_sound = 'sound/items/pickup/shovel.ogg'
+	use_sound = 'sound/items/storage/briefcase.ogg'
+
 	key_type = /obj/item/clothing/mask/smokable/cigarette/cigar
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/cigar = 6)
 
@@ -322,6 +333,10 @@
 	max_w_class = ITEM_SIZE_TINY
 	storage_slots = 12
 
+	use_sound = 'sound/items/drop/glass.ogg'
+	drop_sound = 'sound/items/drop/toolbox.ogg'
+	pickup_sound = 'sound/items/pickup/toolbox.ogg'
+
 	key_type = /obj/item/reagent_containers/glass/beaker/vial
 	startswith = list(/obj/item/reagent_containers/glass/beaker/vial = 12)
 
@@ -343,6 +358,10 @@
 	max_storage_space = null
 	storage_slots = 12
 	req_access = list(access_virology)
+
+	use_sound = 'sound/items/drop/glass.ogg'
+	drop_sound = 'sound/items/drop/toolbox.ogg'
+	pickup_sound = 'sound/items/pickup/toolbox.ogg'
 
 /obj/item/storage/lockbox/vials/New()
 	..()

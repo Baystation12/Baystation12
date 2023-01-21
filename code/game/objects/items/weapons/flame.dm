@@ -50,6 +50,9 @@
 	slot_flags = SLOT_EARS
 	attack_verb = list("burnt", "singed")
 
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
+
 /obj/item/flame/match/Process()
 	if(isliving(loc))
 		var/mob/living/M = loc

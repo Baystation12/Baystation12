@@ -26,7 +26,8 @@
 	stacktype = /obj/item/stack/cable_coil
 	singular_name = "length"
 	plural_name = "lengths"
-
+	drop_sound = 'sound/items/drop/accessory.ogg'
+	pickup_sound = 'sound/items/pickup/accessory.ogg'
 
 /obj/item/stack/cable_coil/Initialize(mapload, _amount, _color)
 	. = ..()

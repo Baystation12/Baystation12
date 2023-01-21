@@ -7,6 +7,9 @@
 	use_to_pickup = 1
 	slot_flags = SLOT_BELT
 
+	drop_sound = 'sound/items/drop/backpack.ogg'
+	pickup_sound = 'sound/items/pickup/backpack.ogg'
+
 /obj/item/storage/bag/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
 	. = ..()
 	if(.) update_w_class()
@@ -50,6 +53,8 @@
 	max_w_class = ITEM_SIZE_HUGE //can fit a backpack inside a trash bag, seems right
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	can_hold = list() // any
+	drop_sound = 'sound/items/drop/wrapper.ogg'
+	pickup_sound = 'sound/items/pickup/wrapper.ogg'
 
 /obj/item/storage/bag/trash/update_w_class()
 	..()
@@ -90,6 +95,8 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BOX_STORAGE
 	can_hold = list() // any
+	drop_sound = 'sound/items/drop/wrapper.ogg'
+	pickup_sound = 'sound/items/pickup/wrapper.ogg'
 
 // -----------------------------
 //           Cash Bag

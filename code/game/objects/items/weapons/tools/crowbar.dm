@@ -18,6 +18,9 @@
 	center_of_mass = "x=16;y=20"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 
+	drop_sound = 'sound/items/drop/crowbar.ogg'
+	pickup_sound = 'sound/items/pickup/crowbar.ogg'
+
 /obj/item/crowbar/red
 	icon_state = "red_crowbar"
 	item_state = "crowbar_red"

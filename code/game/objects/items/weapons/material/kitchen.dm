@@ -15,6 +15,9 @@
 	thrown_force_multiplier = 0.25 // 5 when thrown with weight 20 (steel)
 	default_material = MATERIAL_ALUMINIUM
 
+	drop_sound = 'sound/items/drop/knife.ogg'
+	pickup_sound = 'sound/items/pickup/knife.ogg'
+
 	var/loaded      //Descriptive string for currently loaded food object.
 	var/scoop_food = 1
 
@@ -134,6 +137,9 @@
 	max_force = 15
 	force_multiplier = 0.7 // 10 when wielded with weight 15 (wood)
 	thrown_force_multiplier = 1 // as above
+
+	drop_sound = 'sound/items/drop/wooden.ogg'
+	pickup_sound = 'sound/items/pickup/wooden.ogg'
 
 /obj/item/material/kitchen/rollingpin/plastic/default_material = MATERIAL_PLASTIC
 /obj/item/material/kitchen/rollingpin/aluminium/default_material = MATERIAL_ALUMINIUM

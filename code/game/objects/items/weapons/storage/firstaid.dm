@@ -12,6 +12,9 @@
 	use_sound = 'sound/effects/storage/briefcase.ogg'
 	allow_slow_dump = TRUE
 
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
+
 
 /obj/item/storage/firstaid/empty
 	name = "empty first-aid kit"

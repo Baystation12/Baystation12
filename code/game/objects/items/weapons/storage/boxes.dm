@@ -26,6 +26,8 @@
 	item_state = "syringe_kit"
 	max_storage_space = DEFAULT_BOX_STORAGE
 	use_sound = 'sound/effects/storage/box.ogg'
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 	var/foldable = /obj/item/stack/material/cardboard	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
 	allow_slow_dump = TRUE
 
@@ -155,6 +157,9 @@
 	icon_state = "ammo"
 	desc = "A sturdy metal box with several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 	use_sound = 'sound/effects/closet_open.ogg'
+
+	drop_sound = 'sound/items/drop/ammobox.ogg'
+	pickup_sound = 'sound/items/pickup/ammobox.ogg'
 
 /obj/item/storage/box/ammo/blanks
 	name = "box of blank shells"
@@ -362,6 +367,8 @@
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "matchbox"
 	item_state = "zippo"
+	drop_sound = 'sound/items/drop/matchbox.ogg'
+	pickup_sound = 'sound/items/pickup/matchbox.ogg'
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_BELT
 	can_hold = list(/obj/item/flame/match)

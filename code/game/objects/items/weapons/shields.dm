@@ -68,6 +68,9 @@
 	var/cooldown = 0 //shield bash cooldown. based on world.time
 	var/can_block_lasers = FALSE
 
+	drop_sound = 'sound/items/drop/metalweapon.ogg'
+	pickup_sound = 'sound/items/pickup/metalweapon.ogg'
+
 /obj/item/shield/riot/handle_shield(mob/user)
 	. = ..()
 	if(.) playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
@@ -106,6 +109,9 @@
 	max_block = 50
 	can_block_lasers = TRUE
 	slowdown_general = 0.5
+
+	drop_sound = 'sound/items/drop/metalweapon.ogg'
+	pickup_sound = 'sound/items/pickup/metalweapon.ogg'
 
 /obj/item/shield/buckler
 	name = "buckler"

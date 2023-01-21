@@ -366,6 +366,9 @@ var/global/bomb_set
 	item_state = "card-id"
 	w_class = ITEM_SIZE_TINY
 
+	drop_sound = 'sound/items/drop/disk.ogg'
+	pickup_sound =  'sound/items/pickup/disk.ogg'
+
 
 /obj/item/disk/nuclear/Initialize()
 	. = ..()

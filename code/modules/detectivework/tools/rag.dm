@@ -27,6 +27,9 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = FALSE
 
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
+
 	var/on_fire = 0
 	var/burn_time = 20 //if the rag burns for too long it turns to ashes
 

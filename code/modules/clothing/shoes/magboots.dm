@@ -14,6 +14,8 @@
 	var/mob/living/carbon/human/wearer = null	//For shoe procs
 	randpixel = 0
 	var/online_slowdown = 3
+	drop_sound = 'sound/items/drop/toolbox.ogg'
+	pickup_sound = 'sound/items/pickup/toolbox.ogg'
 
 /obj/item/clothing/shoes/magboots/proc/set_slowdown()
 	slowdown_per_slot[slot_shoes] = shoes? max(0, shoes.slowdown_per_slot[slot_shoes]): 0	//So you can't put on magboots to make you walk faster.

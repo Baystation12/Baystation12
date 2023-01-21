@@ -15,6 +15,9 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	volume = 30
 	matter = list(MATERIAL_GLASS = 65)
 
+	drop_sound = 'sound/items/drop/drinkglass.ogg'
+	pickup_sound =  'sound/items/pickup/drinkglass.ogg'
+
 	var/list/extras = list() // List of extras. Two extras maximum
 
 	var/rim_pos // Position of the rim for fruit slices. list(y, x_left, x_right)

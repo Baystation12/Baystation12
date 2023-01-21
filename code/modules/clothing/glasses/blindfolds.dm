@@ -11,6 +11,8 @@
 	darkness_view = -1
 	toggleable = TRUE
 	activation_sound = null
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/gloves.ogg'
 
 /obj/item/clothing/glasses/blindfold/Initialize()
 	. = ..()

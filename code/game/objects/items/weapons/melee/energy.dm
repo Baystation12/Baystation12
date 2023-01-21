@@ -135,6 +135,8 @@
 	base_parry_chance = 50
 	active_attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
+	drop_sound = "equip_sword"
+	pickup_sound = "pickup_sword"
 	var/blade_color
 
 /obj/item/melee/energy/sword/Initialize()

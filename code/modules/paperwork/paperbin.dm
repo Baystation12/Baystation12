@@ -11,6 +11,8 @@
 	layer = BELOW_OBJ_LAYER
 	var/amount = 30					//How much paper is in the bin.
 	var/list/papers = new/list()	//List of papers put in the bin for reference.
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 
 
 /obj/item/paper_bin/MouseDrop(mob/user as mob)

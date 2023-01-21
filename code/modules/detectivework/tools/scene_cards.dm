@@ -3,6 +3,8 @@
 	desc = "A cardboard box for crime scene marker cards."
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "cards"
+	drop_sound = 'sound/items/drop/card.ogg'
+	pickup_sound = 'sound/items/pickup/card.ogg'
 	w_class = ITEM_SIZE_TINY
 	startswith = list(
 		/obj/item/csi_marker/n1 = 1,

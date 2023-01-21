@@ -21,6 +21,10 @@
 	matter = list(MATERIAL_STEEL = 5000)
 	allow_slow_dump = TRUE
 
+	use_sound = 'sound/items/storage/toolbox.ogg'
+	drop_sound = 'sound/items/drop/toolbox.ogg'
+	pickup_sound = 'sound/items/pickup/toolbox.ogg'
+
 /obj/item/storage/toolbox/emergency
 	name = "emergency toolbox"
 	startswith = list(

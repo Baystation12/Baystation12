@@ -5,6 +5,8 @@
 	randpixel = 6
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	possible_transfer_amounts = null
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
 	volume = 50 //Sets the default container amount for all food items.
 	var/filling_color = "#ffffff" //Used by sandwiches.
 	var/datum/extension/scent/scent_extension

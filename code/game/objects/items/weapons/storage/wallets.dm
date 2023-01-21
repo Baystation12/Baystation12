@@ -8,6 +8,10 @@
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = 8
 	slot_flags = SLOT_ID
+
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
+
 	can_hold = list(
 		/obj/item/spacecash,
 		/obj/item/card,

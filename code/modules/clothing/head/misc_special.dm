@@ -34,6 +34,9 @@
 	flash_protection = FLASH_PROTECTION_MAJOR
 	tint = TINT_HEAVY
 
+	drop_sound = 'sound/items/drop/helm.ogg'
+	pickup_sound = 'sound/items/pickup/helm.ogg'
+
 /obj/item/clothing/head/welding/attack_self()
 	if(!base_state)
 		base_state = icon_state

@@ -381,6 +381,9 @@
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
 
+	drop_sound = 'sound/items/drop/axe.ogg'
+	pickup_sound = 'sound/items/pickup/axe.ogg'
+
 
 /obj/item/roller_bed/attack_self(mob/living/user)
 	if (!isturf(user.loc))

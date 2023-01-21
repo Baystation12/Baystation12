@@ -269,6 +269,9 @@
 	var/path = /datum/instrument
 	var/sound_player = /datum/sound_player
 
+	drop_sound = 'sound/items/drop/generic1.ogg'
+	pickup_sound = 'sound/items/pickup/generic2.ogg'
+
 /obj/item/device/synthesized_instrument/Initialize()
 	. = ..()
 	for (var/type in typesof(path))

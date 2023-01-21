@@ -195,6 +195,8 @@
 	w_class = ITEM_SIZE_SMALL
 	can_add_hidden_item = FALSE
 	can_add_cuffs = FALSE
+	drop_sound = 'sound/items/drop/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/cloth.ogg'
 
 /obj/item/clothing/shoes/slippers/worn
 	name = "worn bunny slippers"

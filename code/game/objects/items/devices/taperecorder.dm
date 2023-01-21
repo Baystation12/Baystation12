@@ -8,6 +8,10 @@
 
 	matter = list(MATERIAL_ALUMINIUM = 60,MATERIAL_GLASS = 30)
 
+	drop_sound = 'sound/items/drop/device.ogg'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+
+
 	var/emagged = FALSE
 	var/recording = 0.0
 	var/playing = 0.0

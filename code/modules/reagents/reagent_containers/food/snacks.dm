@@ -1607,6 +1607,9 @@
 	nutriment_desc = list("tomato" = 2, "potato" = 2, "carrot" = 2, "eggplant" = 2, "mushroom" = 2)
 	nutriment_amt = 6
 	bitesize = 10
+	drop_sound = 'sound/items/drop/shovel.ogg'
+	pickup_sound = 'sound/items/pickup/shovel.ogg'
+
 /obj/item/reagent_containers/food/snacks/stew/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
@@ -2667,6 +2670,8 @@
 	var/obj/item/reagent_containers/food/snacks/sliceable/pizza/pizza // content pizza
 	var/list/boxes = list()// If the boxes are stacked, they come here
 	var/boxtag = ""
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 
 /obj/item/pizzabox/on_update_icon()
 

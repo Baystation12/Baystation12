@@ -4,6 +4,9 @@
 	icon = 'icons/obj/clothing/obj_mask.dmi'
 	body_parts_covered = 0
 
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
+
 	var/type_butt = null
 	var/chem_volume = 0
 	var/chewtime = 0

@@ -15,6 +15,8 @@
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = TRUE
+	drop_sound = 'sound/items/drop/bottle.ogg'
+	pickup_sound = 'sound/items/pickup/bottle.ogg'
 
 
 	var/list/can_be_placed_into = list(
@@ -136,6 +138,8 @@
 	item_state = "beaker"
 	center_of_mass = "x=15;y=10"
 	matter = list(MATERIAL_GLASS = 500)
+	drop_sound = 'sound/items/drop/glass_small.ogg'
+	pickup_sound = 'sound/items/pickup/glass_small.ogg'
 
 
 /obj/item/reagent_containers/glass/beaker/New()
@@ -198,6 +202,8 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "5;10;15;25;30;60;120"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	drop_sound = 'sound/items/drop/glass.ogg'
+	pickup_sound = 'sound/items/pickup/glass.ogg'
 
 /obj/item/reagent_containers/glass/beaker/bowl
 	name = "mixing bowl"
@@ -244,6 +250,9 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "5;10;15;30"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	drop_sound = 'sound/items/drop/glass_small.ogg'
+	pickup_sound = 'sound/items/pickup/glass_small.ogg'
+
 
 /obj/item/reagent_containers/glass/beaker/insulated
 	name = "insulated beaker"
@@ -289,6 +298,8 @@
 	volume = 180
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = FALSE
+	drop_sound = 'sound/items/drop/helm.ogg'
+	pickup_sound = 'sound/items/pickup/helm.ogg'
 
 /obj/item/reagent_containers/glass/bucket/wood
 	name = "bucket"
@@ -297,6 +308,8 @@
 	item_state = "wbucket"
 	matter = list(MATERIAL_WOOD = 280)
 	volume = 200
+	drop_sound = 'sound/items/drop/wooden.ogg'
+	pickup_sound = 'sound/items/pickup/wooden.ogg'
 
 /obj/item/reagent_containers/glass/bucket/attackby(obj/D, mob/user as mob)
 	if(istype(D, /obj/item/mop))

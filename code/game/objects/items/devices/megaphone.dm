@@ -7,6 +7,9 @@
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
+	drop_sound = 'sound/items/drop/device.ogg'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+
 	var/spamcheck = 0
 	var/emagged = FALSE
 	var/insults = 0

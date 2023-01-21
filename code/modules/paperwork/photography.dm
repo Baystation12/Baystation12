@@ -36,6 +36,10 @@ var/global/photo_count = 0
 	var/image/tiny
 	var/photo_size = 3
 
+	drop_sound = 'sound/items/drop/paper.ogg'
+	pickup_sound = 'sound/items/pickup/paper.ogg'
+
+
 /obj/item/photo/Initialize()
 	. = ..()
 	id = photo_count++
@@ -145,6 +149,8 @@ var/global/photo_count = 0
 	desc = "A polaroid camera."
 	icon_state = "camera"
 	item_state = "electropack"
+	drop_sound = 'sound/items/drop/device.ogg'
+	pickup_sound = 'sound/items/pickup/device.ogg'
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
@@ -155,6 +161,8 @@ var/global/photo_count = 0
 	var/icon_on = "camera"
 	var/icon_off = "camera_off"
 	var/size = 3
+
+
 /obj/item/device/camera/on_update_icon()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 	if(on)

@@ -14,6 +14,9 @@
 	center_of_mass = "x=17;y=16"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
+	drop_sound = 'sound/items/drop/wrench.ogg'
+	pickup_sound = 'sound/items/pickup/wrench.ogg'
+
 /obj/item/wrench/Initialize()
 	icon_state = "wrench[pick("","_red","_black","_green","_blue")]"
 	. = ..()

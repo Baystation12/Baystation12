@@ -13,6 +13,9 @@ GLOBAL_LIST(hazard_overlays)
 
 	var/apply_tape = FALSE
 
+	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/hat.ogg'
+
 /obj/item/taperoll/Initialize()
 	. = ..()
 	if(!GLOB.hazard_overlays)

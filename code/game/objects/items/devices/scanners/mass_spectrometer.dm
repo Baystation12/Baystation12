@@ -5,6 +5,9 @@
 	icon_state = "spectrometer"
 	item_state = "analyzer"
 
+	drop_sound = 'sound/items/drop/device.ogg'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	window_width = 550

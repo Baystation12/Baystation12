@@ -7,6 +7,8 @@
 	volume = 120
 	matter = list(MATERIAL_PLASTIC = 4000)
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
 
 	/// The set of options for the amount of reagents the bag will try to transfer per process.
 	var/static/list/allowed_transfer_amounts = list(2, 1, REM, 0)

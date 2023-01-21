@@ -17,6 +17,9 @@
 	sharp = TRUE
 	edge = TRUE
 
+	drop_sound = 'sound/items/drop/wirecutter.ogg'
+	pickup_sound = 'sound/items/pickup/wirecutter.ogg'
+
 	var/build_from_parts = TRUE
 	var/handle_icon = "cutters_handle"
 	var/hardware_icon = "cutters_hardware"

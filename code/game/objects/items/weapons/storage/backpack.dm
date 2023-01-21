@@ -24,6 +24,9 @@
 	open_sound = 'sound/effects/storage/unzip.ogg'
 	allow_slow_dump = TRUE
 
+	drop_sound = 'sound/items/drop/backpack.ogg'
+	pickup_sound = 'sound/items/pickup/backpack.ogg'
+
 	/// Can this backpack be opened while worn on the back?
 	var/worn_access = TRUE
 

@@ -15,6 +15,9 @@
 	item_state = "gift1"
 	randpixel = 10
 
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
+
 /obj/item/a_gift/New()
 	..()
 	if(w_class > 0 && w_class < ITEM_SIZE_HUGE)
@@ -148,6 +151,8 @@
 	desc = "You can use this to wrap items in."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "wrap_paper"
+	drop_sound = 'sound/items/drop/wrapper.ogg'
+	pickup_sound = 'sound/items/pickup/wrapper.ogg'
 	var/amount = 2.5*BASE_STORAGE_COST(ITEM_SIZE_HUGE)
 
 /obj/item/wrapping_paper/attackby(obj/item/W as obj, mob/user as mob)

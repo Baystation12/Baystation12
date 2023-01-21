@@ -5,6 +5,8 @@
 	permeability_coefficient = 0.05
 	item_flags = ITEM_FLAG_NOSLIP
 	species_restricted = null
+	drop_sound = 'sound/items/drop/rubber.ogg'
+	pickup_sound = 'sound/items/pickup/rubber.ogg'
 
 /obj/item/clothing/shoes/galoshes/Initialize()
 	. = ..()
@@ -17,10 +19,10 @@
 	item_state = "jackboots"
 	force = 3
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_MINOR, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.7
@@ -32,6 +34,9 @@
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+
+	drop_sound = 'sound/items/drop/boots.ogg'
+	pickup_sound = 'sound/items/pickup/boots.ogg'
 
 /obj/item/clothing/shoes/jackboots/unathi
 	name = "toe-less jackboots"
@@ -46,9 +51,9 @@
 	icon_state = "workboots"
 	item_state = "workboots"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_SMALL, 
+		melee = ARMOR_MELEE_RESISTANT,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_SMALL,
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.7
@@ -58,6 +63,8 @@
 	heat_protection = FEET
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	drop_sound = 'sound/items/drop/boots.ogg'
+	pickup_sound = 'sound/items/pickup/boots.ogg'
 
 /obj/item/clothing/shoes/workboots/toeless
 	name = "toe-less workboots"

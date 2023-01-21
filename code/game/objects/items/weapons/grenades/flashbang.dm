@@ -6,6 +6,9 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
 	var/banglet = 0
 
+	drop_sound = 'sound/items/drop/generic2.ogg'
+	pickup_sound = 'sound/items/pickup/generic3.ogg'
+
 /obj/item/grenade/flashbang/detonate(mob/living/user)
 	..()
 	var/list/victims = list()

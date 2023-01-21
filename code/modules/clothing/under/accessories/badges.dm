@@ -9,6 +9,9 @@
 	var/badge_string = "Detective"
 	var/stored_name
 
+	drop_sound = 'sound/items/drop/ring.ogg'
+	pickup_sound = 'sound/items/pickup/ring.ogg'
+
 
 /obj/item/clothing/accessory/badge/get_lore_info()
 	. = ..()
@@ -213,6 +216,9 @@
 	desc = "A leather-backed plastic badge displaying that the owner is certified press personnel."
 	icon_state = "pressbadge"
 	badge_string = "Journalist"
+
+	drop_sound = 'sound/items/drop/rubber.ogg'
+	pickup_sound = 'sound/items/pickup/rubber.ogg'
 
 
 /obj/item/clothing/accessory/badge/tags/skrell
