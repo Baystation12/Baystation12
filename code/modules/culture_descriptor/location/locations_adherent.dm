@@ -1,18 +1,21 @@
 /decl/cultural_info/location/adherent
 	name = HOME_SYSTEM_ADHERENT
-	description = "The creators of the adherents once resided on a gleaming gas giant called Canon. After the solar flare called the Scream, \
-		nothing moves in the ocean of cloud other than the artificial weapon platforms and automated defences that enforce the eternal quarantine \
-		of the dead planet. To the Vigil, Canon is a shrine to their lost gods, untouchable and revered. Adherents stationed around Canon work \
-		directly under Core Traffic Control, carrying out tasks vital to the continued functioning of the Vigil as a whole. They are likely highly \
-		loyal and very traditionalist by comparison to their peers."
-	distance = "Unknown, more than 50 light years"
-	ruling_body = "Core System Traffic Control Hub 37-Q"
+	description = "Создатели <font color=\"#57967f\">адхерантов</font> когда-то жили на сверкающем газовом гиганте под названием <font color=\"#996633\">Кэнон</font>. \
+	Однако после солнечной вспышки \"Крик\", ничто не движется в океане облаков, кроме платформ искусственного \
+	оружия и автоматических средств защиты, обеспечивающих вечный карантин мертвой планеты. Для <font color=\"#738465\">Часовых</font> Кэнон \
+	является святыней их потерянных богов, неприкасаемых и почитаемых. <font color=\"#57967f\">Адхеранты</font> дислоцированы вокруг работы \
+	Кэнона непосредственно под контролем Центральной Системы Контроля Трафика Хаб 37-Q, выполняя задачи, \
+	жизненно важные для непрерывного функционирования Зоны Ожидания в целом. Они, в большинстве своем, лояльны \
+	и придерживаются традиций по сравнению с остальными своими сородичами."
+	distance = "Неизвестно, более 50 световых лет"
+	ruling_body = "Центральная Система Контроля Трафика Хаб 37-Q"
 
 /decl/cultural_info/location/adherent/monument
 	name = HOME_SYSTEM_ADHERENT_MOURNER
-	description = "In their unending search across the stars, the Vigil has uncovered many so-called grave worlds or monument worlds - planets \
-		upon which a sentient species met an unkind end. The adherents build orbital stations over such worlds to add them to their vigil, watching \
-		over the bombed-out, desolate or virally rampant surfaces in memoriam for those who died there. Adherents stationed at the observation \
-		stations over the monument worlds tend to be more reflective and less garrulous than their peers. They have stood silent vigil over the \
-		grave of a billion souls for longer than humans have had electricity, and that colours their instinctive deference to organic intelligences \
-		somewhat."
+	description = "В своих бесконечных межзвездных поисках, <font color=\"#738465\">Часовые</font> обнаружили множество, так называемых, могильных \
+	миров (или миров-памятников) - планет, на которых разумный вид полностью вымер. Адхеранты строят орбитальные \
+	станции над такими мирами, чтобы наблюдать за разбомбленными, пустынными или покрытыми разнообразными \
+	вирусами поверхностями в память о тех, кто там умер. <font color=\"#57967f\">Адхеранты</font>, размещенные на наблюдательных станциях над \
+	мирами-памятниками, имеют тенденцию быть более рефлексивными и менее болтливыми, чем их остальные сородичи. \
+	Они стояли на своем молчаливом посту больше миллиарда лет, прежде чем люди открыли электричество, что \
+	окрашивает их инстинктивное уважение к органическому разуму в специфичном для их понимания."

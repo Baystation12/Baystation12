@@ -25,10 +25,8 @@
 
 /decl/cultural_info/faction/scg/army
 	name = FACTION_ARMY
-	description = "Корпус Морской Пехоты ЦПСС является частью Армии ЦПСС. \
-	The Marine Corps is responsible for handling any ground conflicts and many peacekeeping missions that the SCG may be engaged in. \
-	Marine Corps is much smaller than Fleet, thus less funded, but never had same low respect as Army force in general even after their failures during War of Gaia. \
-	Corps is created to serve with it's 'bigger brother' to assist in planetary missions."
+	description = "После Гайского Конфликта был создан <font color=\"#b99d71\">Корпус Морской Пехоты</font>. Он является недавно созданной структурой, предназначенной для быстрого развертования в любой точки галактики. \
+	Его оснащение и финансирование пока что не может сравнится ни с Флотом, ни с Армией, но это не мешает морпехам в их работе.  "
 
 /decl/cultural_info/faction/torchco
 	name = FACTION_CORPORATE
@@ -75,12 +73,10 @@
 
 /decl/cultural_info/faction/police
 	name = FACTION_SPACECOPS
-	description = "The Sol Federal (SFP) is a government law enforcement agency tasked with enforcing Sol Central Government law, \
-	investigating breaches of law, fugitive recovery and transport, and securing ports of entry. \
-	Some Agents embedded with other organizations (e.g. an <l>Expeditionary Corps</l> ship) and are expected to answer to their superiours from those organizations. \
-	Notable units are Organized Crime & Vice (self-explanatory), Territory Support (ports of entry and helping local law enforcement), \
-	Special Investigations (sensitive and urgent cases) and Fugitive Recovery Division (for when local authorities are unable or unwilling to arrest someone). \
-	The contractor SFP Trackers are also used find and arrest low-profile fugitives from justice."
+	description = "<font color=\"#ffcc33\">Федеральная Полиция</font>(ФП) – это правительственное правоохранительное агентство, чья задача – \
+	обеспечить соблюдение законов ЦПСС, расследовать их нарушения, ловить и доставлять преступников, поддерживать безопасность портовых пропускных пунктов.\
+	Трекеры агенства ловят малоопасных преступников за награду. Более опасными преступниками занимается Отдел Розыска Преступников. \
+	Агенты ФП также работают с некоторыми другими правительственными организациями (например, Экспедиционный Корупс) и нанимаются на суда ЭК в качестве лучших криминалистов и следователей."
 
 /decl/cultural_info/faction/remote/nanotrasen
 	name = FACTION_NANOTRASEN

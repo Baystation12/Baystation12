@@ -1,6 +1,7 @@
 /datum/job/captain
 	title = "Commanding Officer"
-	supervisors = "the Sol Central Government and the Sol Code of Uniform Justice"
+	department = "Командный"
+	supervisors = "Центральному Правительству Солнечной Системы и Военно-юридическому кодексу ЦПСС"
 	minimal_player_age = 14
 	economic_power = 16
 	minimum_character_age = list(SPECIES_HUMAN = 40)
@@ -26,7 +27,10 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/captain/get_description_blurb()
-	return "You are the Commanding Officer. You are the top dog. You are an experienced professional officer in control of an entire ship, and ultimately responsible for all that happens onboard. Your job is to make sure [GLOB.using_map.full_name] fulfils its space exploration mission. Delegate to your Executive Officer, your department heads, and your Senior Enlisted Advisor to effectively manage the ship, and listen to and trust their expertise."
+	return "Вы - Командующий офицер, или, неформально, Капитан. Вы - первый человек на борту судна. \
+	Вы опытный профессиональный офицер, контролирующий всё судно и в конечном счете несущий ответственность за все, что происходит на борту. \
+	Ваша работа - убедится, что ГЭК \"Факел\" выполняет свою миссию по исследованию космоса. \
+	Делегируете ваши полномочия Исполнительному офицеру, главам департаментов и вашему Старшему советнику по работе с личным составом для эффективного управления судном, прислушивайтесь к их опыту и доверяйте им."
 
 /datum/job/captain/post_equip_rank(var/mob/person, var/alt_title)
 	var/sound/announce_sound = (GAME_STATE <= RUNLEVEL_SETUP)? null : sound('sound/misc/boatswain.ogg', volume=20)
@@ -35,8 +39,8 @@
 
 /datum/job/hop
 	title = "Executive Officer"
-	supervisors = "the Commanding Officer"
-	department = "Command"
+	supervisors = "Командующему офицеру"
+	department = "Командный"
 	department_flag = COM
 	minimal_player_age = 14
 	economic_power = 14
@@ -82,11 +86,14 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/hop/get_description_blurb()
-	return "You are the Executive Officer. You are an experienced senior officer, second in command of the ship, and are responsible for the smooth operation of the ship under your Commanding Officer. In their absence, you are expected to take their place. Your primary duty is directly managing department heads and all those outside a department heading. You are also responsible for the contractors and passengers aboard the ship. Consider the Senior Enlisted Advisor and Bridge Officers tools at your disposal."
+	return "Вы - Исполнительный офицер. Вы опытный старший офицер и второй человек на судне после Капитана. Вы несёте ответственность за стабильную работу судна под началом Командующего офицера. \
+	В отсутствие КО, ожидается, что Вы займёте его место. \
+	Ваша основная задача - управлять главами отделов и всеми теми, кто не входит в них. \
+	Вы также ответственны за контрактников и пассажиров на борту судна. Старший советник по работе в личным составом и Мостовые офицеры являются инструментами в вашем распоряжении."
 
 /datum/job/rd
 	title = "Chief Science Officer"
-	supervisors = "the Commanding Officer"
+	supervisors = "Командующему офицеру"
 	economic_power = 12
 	minimal_player_age = 14
 	minimum_character_age = list(SPECIES_HUMAN = 35)
@@ -130,11 +137,13 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/rd/get_description_blurb()
-	return "You are the Chief Science Officer. You are responsible for the research department. You handle the science aspects of the project and liase with the corporate interests of the Expeditionary Corps Organisation. Make sure science gets done, do some yourself, and get your scientists on away missions to find things to benefit the project. Advise the CO on science matters."
+	return "Вы - Главный научный офицер. Вы ответственны за работу научно-исследовательского отдела. \
+	Вы занимаетесь научными аспектами миссии и отвечаете за корпоративные интересы Организации Экспедиционного корпуса. \
+	Убедитесь, что учёные выполняют свою работу, работайте сами и отправляйте группы на исследовательские экспедиции для нахождения артефактов, полезных для миссии. Консультируйте КО по научным вопросам."
 
 /datum/job/cmo
 	title = "Chief Medical Officer"
-	supervisors = "the Commanding Officer and the Executive Officer"
+	supervisors = "Командующему и Исполнительному офицеру"
 	economic_power = 14
 	minimal_player_age = 14
 	minimum_character_age = list(SPECIES_HUMAN = 35)
@@ -177,11 +186,13 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/cmo/get_description_blurb()
-	return "You are the Chief Medical Officer. You manage the medical department. You ensure all members of medical are skilled, tasked and handling their duties. Ensure your doctors are staffing your infirmary and your corpsman/paramedics are ready for response. Act as a second surgeon or backup pharmacist in the absence of either. You are expected to know medical very well, along with general regulations."
+	return "Вы - Главный медицинский офицер. Вы отвечаете за работу медицинского отдела. Вы гарантируете, что все работники отдела хорошо обученны, подготовленны и что они выполняют свои обязанности. \
+	Убедитесь, что ваши врачи укомплектовали ваш лазарет, а ваши санитары/парамедики готовы к реагированию. \
+	Действуйте в качестве второго хирурга или резервного химика в отсутствие того или другого. Ожидается, что Вы очень хорошо знаете медицину, а также основные регуляции."
 
 /datum/job/chief_engineer
 	title = "Chief Engineer"
-	supervisors = "the Commanding Officer and the Executive Officer"
+	supervisors = "Командующему и Исполнительному офицеру"
 	economic_power = 12
 	minimum_character_age = list(SPECIES_HUMAN = 25)
 	ideal_character_age = 40
@@ -232,11 +243,15 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/chief_engineer/get_description_blurb()
-	return "You are the Chief Engineer. You manage the Engineering Department. You are responsible for the Senior engineer, who is your right hand and (should be) an experienced, skilled engineer. Delegate to and listen to them. Manage your engineers, ensure vessel power stays on, breaches are patched and problems are fixed. Advise the CO on engineering matters. You are also responsible for the maintenance and control of any vessel synthetics. You are an experienced engineer with a wealth of theoretical knowledge. You should also know vessel regulations to a reasonable degree."
+	return "Вы - Главный инженер. Вы ответственны за работу инженерного отдела. \
+	Вы несёте ответственность за Старшего инженера, который является вашей правой рукой и (должен) быть компитентным и опытным инженером. \
+	Делегируйте задачи ему и слушайте его. Управляйте инженерами, убедитесь, что на судно поступает энергия и, что все пробоины и поломки устранены. \
+	Консультируйте КО по инженерным вопросам. Вы также ответственны за обслуживания и контроль всех синтетиков судна. \
+	Вы - опытный инженер с большим багажом теоритических знаний. Вам также следует знать регуляции судна на приемлемом уровне."
 
 /datum/job/hos
 	title = "Chief of Security"
-	supervisors = "the Commanding Officer and the Executive Officer"
+	supervisors = "Командующему и Исполнительному офицеру"
 	economic_power = 10
 	minimal_player_age = 14
 	minimum_character_age = list(SPECIES_HUMAN = 25)
@@ -281,15 +296,17 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/hos/get_description_blurb()
-	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Chief and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
+	return "Вы - Глава службы безопасности. Вы отвечаете за охрану судна, равно как и за каптенармусов, смотрителя и криминалистов. \
+	Вы поддерживаете порядок на судне, а также отвечаете за внешнюю и внутренную безопасность. Вы - закон. Вы подчиняетесь КО и ИО. \
+	От Вас ожидается знание Военно-Юридического кодекса ЦПСС, Законов ЦПСС, кодов угроз и основных регуляций на самом высоком уровне."
 
 /datum/job/representative
 	title = "SolGov Representative"
-	department = "Support"
+	department = "Поддержка командования"
 	department_flag = SPT
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Sol Central Government and the SCG Charter"
+	supervisors = "Центральному Правительству Солнечной Системы и Уставу ЦПСС"
 	selection_color = "#2f2f7f"
 	economic_power = 16
 	minimal_player_age = 0
@@ -310,15 +327,17 @@
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/representative/get_description_blurb()
-	return "You are the Sol Gov Representative. You are a civilian assigned as both a diplomatic liaison for first contact and foreign affair situations on board. You are also responsible for monitoring for any serious missteps of justice, sol law or other ethical or legal issues aboard and informing and advising the Commanding Officer of them. You are a mid-level bureaucrat. You liaise between the crew and corporate interests on board. Send faxes back to Sol on mission progress and important events."
+	return "Вы - представитель ЦПСС. Вы являетесь гражданским, назначенным как дипломатическим представителем для первого контакта, так и для решения дипломатических проблем. \
+	Вы также ответственны за наблюдение за любыми серьёзными нарушениями закона, законов ЦПСС или другими этническими или юридическими проблемами на борту; информируете и консультируете Командующего офицера этим вопросам. \
+	Вы бюрократ среднего уровня. Вы поддерживаете связь между корпоративными интересами и интересами экипажа судна. Отправляйте факсы ЦПСС о ходе продвижения миссии и важных событиях. "
 
 /datum/job/sea
 	title = "Senior Enlisted Advisor"
-	department = "Support"
+	department = "Поддержка командования"
 	department_flag = SPT
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Commanding Officer and the Executive Officer"
+	supervisors = "Командующему и Исполнительному офицеру"
 	selection_color = "#2f2f7f"
 	minimal_player_age = 14
 	economic_power = 11
@@ -364,15 +383,19 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/sea/get_description_blurb()
-	return "You are the Senior Enlisted Advisor. You are the highest enlisted person on the ship. You are directly subordinate to the CO. You advise them on enlisted concerns and provide expertise and advice to officers. You are responsible for ensuring discipline and good conduct among enlisted, as well as notifying officers of any issues and \"advising\" them on mistakes they make. You also handle various duties on behalf of the CO and XO. You are an experienced enlisted person, very likely equal only in experience to the CO and XO. You know the regulations better than anyone."
+	return "Вы - Старший советник по работе с личным составом (СЕА). Вы самый старший представитель рядового состава на судне. \
+	Вы напрямую подчиняетесь КО. Вы консультируете его по вопросам, связанными с рядовым составом, даёте оценки и советы офицерам. \
+	Вы отвечате за поддержание дисциплины и хорошего поведения среди рядовых, как и уведомляете офицеров о любых проблемах и \"консультируете\" их по ошибкам которые сделал рядовой состав. \
+	Вы также выполняете различные поручения от имени КО и ИО. \
+	Вы опытный член рядового состава и, скорее всего, равны по опыту только КО и ИО. Вы знаете регуляции лучше, чем кто-либо другой."
 
 /datum/job/bridgeofficer
 	title = "Bridge Officer"
-	department = "Support"
+	department = "Поддержка командования"
 	department_flag = SPT
 	total_positions = 3
 	spawn_positions = 3
-	supervisors = "the Commanding Officer and heads of staff"
+	supervisors = "Командующему офицеру и главам отделов"
 	selection_color = "#2f2f7f"
 	minimal_player_age = 0
 	economic_power = 8
@@ -415,4 +438,6 @@
 							 /datum/computer_file/program/deck_management)
 
 /datum/job/bridgeofficer/get_description_blurb()
-	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."
+	return "Вы - Мостовой офицер. Вы очень молодой офицер и не даёте приказов сами. Вы подчинятесь всему командованию. \
+	Вы разбераетесь с делами на мостике и отчитываетесь напрямую КО и ИО. Вы берете управление над Факелом и Аквиллой при необходимости. \
+	Следите за программами, установленных на консолях мостика, и докладывайте актуальную информацию командованию."

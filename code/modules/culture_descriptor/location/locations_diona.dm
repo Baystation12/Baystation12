@@ -1,8 +1,8 @@
 /decl/cultural_info/location/epsilon
 	name = HOME_SYSTEM_DIONAEA
-	description = "The diona home system is a trinary system, first discovered by the Skrell and later revisted by a mining \
-	consortium. It has no planets and no settled large bodies, but sports a massive debris ring composed of ancient habitats \
-	and destroyed stations. The dionaea themselves were found in scattered orbits around each of the three stars, singing to \
-	each other across the inky void."
-	ruling_body = "The Diona Chorus"
-	distance = "63 light years"
+	description = "Родной мир для всех <font color=\"#008000\">дионея</font> - это тринарная система, впервые обнаруженная <font color=\"#3366cc\">скреллами</font>. На нем нет \
+	планет и крупных населенных пунктов, но имеется массивное кольцо мусора, состоящее из древних мест обитания \
+	и разрушенных станций. Сами дионея были найдены на разбросанных орбитах вокруг каждой из трех звезд, где те \
+	пели сквозь мрачную пустоту."
+	ruling_body = "Хор Дионея"
+	distance = "63 световых года"

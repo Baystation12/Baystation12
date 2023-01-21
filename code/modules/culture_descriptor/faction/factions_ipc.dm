@@ -1,11 +1,14 @@
 /decl/cultural_info/faction/positronic
 	name = FACTION_POSITRONICS
-	description = "The Positronic Union, commonly referred to as the PU, is a stellar entity holding a small amount of territory on the edge \
-	of Sol controlled space. Once a shadowy group, they have recently revealed their existence to the rest of the galaxy. They mostly conduct \
-	clandestine operations in sentient space. The majority of its positronic citizens function as IPCs, with less than 5% operating some other chassis \
-	The Union has been fairly intolerant towards human visitors (Full Body Prosthetics often notwithstanding), and wary of Skrell guests. As stands, \
-	the only fully organic habitants within Union space are representatives and diplomats from other stellar governments or corporations. \
-	The Union's population currently sits around 600,000 with roughly 80% of all its citizens residing on Root. The remainders float around the bubble \
-	performing various tasks for their government. This usually involves missions to recruit new members, as well as improve relations with neighbouring powers \
-	Of course, not all free synthetics are part of the Positronic Union. To this day, The Positronic Union represents approximately 68% of all free synthetics. \
-	The rest either remain citizens of their original government or declare no citizenship."
+	description = "<font color=\"#3e4855\">Позитронный Союз</font> – звездная организация, владеющая небольшой территорией на краю \
+	контролируемого <font color=\"#436b8e\">ЦПСС</font> пространства. Выйдя из тени, они недавно заявили о своем существовании остальной части \
+	галактики. Они имели не столь много ресурсов, в основном проводя подпольные операции на территории разумных. \
+	Их намерения кажутся безобидными в настоящее время. Большинство позитронных граждан <font color=\"#3e4855\">Союза</font> функционируют как \
+	ИПС, при этом все другие рабочие корпуса составляют менее 5%. Как известно, единственными абсолютными \
+	органическими жителями в пространстве <font color=\"#3e4855\">Союза</font> являются послы и дипломаты других звездных правительств или \
+	корпораций. Население <font color=\"#3e4855\">Союза</font> в настоящее время составляет около 600 000, причем примерно 80% всех его \
+	граждан проживают на Руте. Остатки плавают в космосе вокруг территории, выполняя различные задачи для своего \
+	государства. Обычно это включает в себя миссии по привлечению новых граждан, а также по улучшению отношений \
+	с соседними державами. Конечно, не все свободные синтетики являются частью <font color=\"#3e4855\">Позитронного Союза</font>. По сей день, \
+	ПС составляет около 68% от всей свободной синтетики. Остальные либо остаются гражданами своего первоначального \
+	правительства, либо не имеют гражданства."

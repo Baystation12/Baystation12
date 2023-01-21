@@ -1,53 +1,66 @@
 /decl/cultural_info/faction/skrell
 	name = FACTION_SKRELL_QERRVOAL
-	description = "A famous name within the Raskinta-Katish community, the Qerr'voal is the SDTF in charge of defending the Qerr'Vallis system,\
-	a task the Qerr'Voal has carried out with distinction for 600 years. Despite the relative safety and stability of the system many young Skrell \
-	of Qerr'balak and the surrounding colonies try to enter the prestigious organisation in order to gain status and influence with their brethren."
+	description = "Кверр'воал - ззнаменитое для Раскинта-Кэтиш наименование - это Оборонительные Силы Скреллов, \
+	служащие защитой системе Кверр'валлис на протяжении 470 лет. Невзирая на спокойствие и безопасность системы \
+	сейчас, многие молодые скреллы Кверрбалака и некоторых близких колоний пытаются поступить туда на службу, \
+	чтобы доказать свою доблесть и достоинство своим собратьям."
 
 
 /decl/cultural_info/faction/skrell/qalaoa
 	name = FACTION_SKRELL_QALAOA
-	description = "Relatively recent, this particular group was funded shortly after the first contact between Skrell and humans. Patrolling \
-	several worlds at the border between the two species this SDTF has, like the colonies it protects, started to slowly adopt some human customs \
-	and views, for better and for worse. Still growing today, some expect it to become the largest SDTF along the skrell-human border within the next thirty years."
+	description = "Квала'оаэта - одна из самых юных и многочисленных Оборонительных Сил Скреллов, созданная в \
+	ответ сначала на контакт с Человечеством, а затем и на угрозу инопланетного вторжения со стороны Империи \
+	Сирисай. Патрулируя несколько миров на границе между двумя видами, эта ОСС, как и колонии, которые она \
+	защищает, начала постепенно принимать некоторые человеческие обычаи и взгляды, к лучшему или к худшему. \
+	Все еще растущая сегодня, некоторые ожидают, что она станет крупнейшей организацией ОСС на границе скреллов \
+	и людей в течение следующих тридцати лет."
 
 
 /decl/cultural_info/faction/skrell/yiitalana
 	name = FACTION_SKRELL_YIITALANA
-	description = "An SDTF from the far side of skrell territory, deep into what is, to humanity, uncharted space. Yii'talana is the SDTF for the \
-	Ri'Qora system. Heavily funded and well equipped, Yii'Talana has a number of mutual assistance and cooperation agreements with a large number of \
-	frontier colony SDTF's, or functions as an intermediary SDTF for systems where a presence has yet to be established. The Skrell of Yii'Talana \
-	are some of the more experienced on the far skrellian frontier."
+	description = "Йии'талана - ОСС из глубины территорий Скреллианский Империи, вдали от ее границ , в тех \
+	местах, которые для людей являются тёмным пятном на карте. Йии'талана базируется в системе Ри'куора, там \
+	же где и находится самая богатая колония Таламира. Прекрасно финансируемая, и хорошо экипированная - она \
+	имеет ряд и договоров об взаимопомощи с большим числом более мелких ОСС, или функционирует в качестве \
+	промежуточного ОСС в тех системах, в которых только-только начало устанавливаться скреллианское присутствие. \
+	Является самой обученной и опытной ОСС скреллов на пограничье, однако очень сильно уступает в численности ОСС \
+	Квала'оа и ОСС Кверр'воал."
 
 
 /decl/cultural_info/faction/skrell/krrigli
 	name = FACTION_SKRELL_KRRIGLI
-	description = "Krri'gli is a Skrell aerospace manufacturing and research corporation from the city-state of Tibrivuu in the Go'kal system,\
-	and one of the more well known Skrell corporations in human space as a result of its contribution to the SEV Torch Project.\
-	Krri'gli is mostly concerned with the design and construction of bluespace drives, and is one of the largest providers in the human side \
-	of Skrell space. Their participation in the Torch project is their first human venture, and has resulted in their sending science staff \
-	as a part of the Expeditionary Corps Organization to provide expertise and gather mission data firsthand."
+	description = "Krri'gli Corp - это аэрокосмическая производственная и исследовательская корпорация скреллов \
+	из города-государства Тибривуу в системе Го'Кал, а также одна из наиболее известных корпораций скреллов в \
+	человеческом пространстве в результате своего вклада в проект ГЭК \"Факел\". Krri'gli в основном занимается \
+	проектированием и конструированием блюспейс-двигателей, и является одним из крупнейших их поставщиков в \
+	человеческой части пространства скреллов. Их участие в проекте «Факел» - это их первое человеческое начинание, \
+	в результате которого они направили научных сотрудников в состав Организации Экспедиционного Корпуса для \
+	передачи опыта и непосредственного сбора данных о миссиях."
 	additional_langs = list(LANGUAGE_HUMAN_EURO)
 	economic_power = 1.5
 
 
 /decl/cultural_info/faction/skrell/qonprri
 	name = FACTION_SKRELL_QONPRRI
-	description = "Qon'prri is, officially an independent security services corporation that operates in the Harr'Kelm system, providing private \
-	security services to a variety of Skrell vessels, traders and organisations, and, more recently, human corporations. Unofficially, it is rumoured that \
-	Qonn'prri is a for-profit offshoot of Qala'oa tasked with information gathering in human space and along the frontier.So far such claims have been \
-	unfounded, and Qonn'prri is known for offering a professional, reliable and able service to Humans and Skrell alike."
+	description = "Кон'прри - независимая корпорация службы безопасности, которая работает в системе Харр'клем \
+	в западной части Скреллианской Империи. Предоставляет частные услуги безопасности различным судам, торговцам \
+	и организациям скреллов, а в последнее время - и человеческим корпорациям. Неофициально ходят слухи, что \
+	Кон'прри - это лишь часть Квала'оа, которому поручено собирать информацию в человеческом пространстве и \
+	вдоль границы. До сих пор такие заявления были необоснованными, и Кон'прри всё еще остается известен тем, \
+	что предлагает профессиональный, надежный, и обученный охранный персонал для людей и скреллов. За разумную \
+	плату, разумеется."
 	additional_langs = list(LANGUAGE_HUMAN_EURO)
 	economic_power = 1.4
 
 /decl/cultural_info/faction/skrell/otherskrellfac
 	name = FACTION_SKRELL_OTHERSKRELLFAC
-	description = "There are more factions in skrellian space than can be counted, from corporations to crime syndicates to royal courts. This faction is one of those many outliers."
+	description = "Существует бесчисленное множество фракций в скреллианском пространстве: начиная от корпораций, заканчивая криминальными синдикатами. Это фракция - одна из таких."
 	additional_langs = list(LANGUAGE_HUMAN_EURO)
 	economic_power = 1.5
 
 /decl/cultural_info/faction/skrell/othersdtf
 	name = FACTION_SKRELL_OTHERSDTF
-	description = "SDTFs control skrell space from the human frontiers to far, far beyond. There are too many Defense Task Forces to name, and this SDTF is one of them."
+	description = "ООС скреллов контролирует скреллианское пространство от человеческого фронтира до далёких-далёких земель. \
+	Существуект сильном много Оборонительных Сил Скреллов, чтобы их называть поименно, и эта ООС - одна из них."
 	additional_langs = list(LANGUAGE_HUMAN_EURO)
 	economic_power = 1.5

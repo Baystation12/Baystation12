@@ -1,10 +1,10 @@
 /datum/job/senior_engineer
 	title = "Senior Engineer"
-	department = "Engineering"
+	department = "Инженерный"
 	department_flag = ENG
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Chief Engineer"
+	supervisors = "Главному инженеру"
 	selection_color = "#5b4d20"
 	economic_power = 7
 	minimal_player_age = 3
@@ -49,13 +49,16 @@
 							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/senior_engineer/get_description_blurb()
-	return "You are the Senior Engineer. You are a veteran SNCO. You are subordinate to the Chief Engineer though you may have many years more experience than them and your subordinates are the rest of engineering. You should be an expert in practically every engineering area and familiar and possess leadership skills. Coordinate the team and ensure the smooth running of the department along with the Chief Engineer."
+	return "Вы - Старший инженер. Вы опытный Старший Унтер-офицер. Вы подчиняетесь Главному инженеру, хотя вы можете иметь больше лет опыта чем он. Вам подчиняется остальной отдел. \
+	Вы должны быть экспертом практически в каждом инженерном деле, а также быть знакомым с лидерскими качествами и владеть ими. \
+	Координируйте команду и убедитесь в правильной работе отдела вместе с Главным инженером."
 
 /datum/job/engineer
 	title = "Engineer"
+	department = "Инженерный"
 	total_positions = 6
 	spawn_positions = 6
-	supervisors = "the Chief Engineer"
+	supervisors = "Главному и Старшему инженеру"
 	economic_power = 5
 	minimal_player_age = 0
 	minimum_character_age = list(SPECIES_HUMAN = 19)
@@ -115,15 +118,17 @@
 							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/engineer/get_description_blurb()
-	return "You are an Engineer. You operate under one of many titles and may be highly specialised in a specific area of engineering. You probably have at least a general familiarity with most other areas though this is not expected. You are subordinate to the Senior Engineer and the Chief Engineer and are expected to follow them."
+	return "Вы - инженер. Вы работаете под одним из множества названий и можете быть высокоспециализированны в определённой области инженернии. \
+	Возможно, что у Вы хотя бы в общем знакомы с большинством остальных областей инженерии, хотя это не ожидается от Вас. \
+	Вы подчиняетесь Главному инженеру и Старшему инженеру, ожидается, что Вы будете следовать их приказам."
 
 /datum/job/engineer_trainee
 	title = "Engineer Trainee"
-	department = "Engineering"
+	department = "Инженерный"
 	department_flag = ENG
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Chief Engineer and Engineering Personnel"
+	supervisors = "Главному инженеру и остальному инженерному персоналу"
 	selection_color = "#5b4d20"
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 20
@@ -171,19 +176,19 @@
 							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/engineer_trainee/get_description_blurb()
-	return "You are an Engineer Trainee. You are learning how to operate the various onboard engineering systems from senior engineering staff. You are subordinate to all of the other engineers aboard."
-
+	return "Вы - Инженер-стажёр. Вы обучаетесь работе с множеством бортовых систем используя помощь старшего инженерного состава. \
+	Вы подчиняетесь всему остальному инженерному составу на борту судна."
 
 /datum/job/roboticist
 	title = "Roboticist"
-	department = "Engineering"
+	department = "Инженерный"
 	department_flag = ENG|ROB
 
 	total_positions = 2
 	spawn_positions = 2
 	minimal_player_age = 0
 	minimum_character_age = list(SPECIES_HUMAN = 22)
-	supervisors = "the Chief Engineer."
+	supervisors = "Главному и Старшему инженеру"
 	selection_color = "#5b4d20"
 	economic_power = 6
 	alt_titles = list(
@@ -230,4 +235,5 @@
 	)
 
 /datum/job/roboticist/get_description_blurb()
-	return "You are the Roboticist. You are responsible for repairing, upgrading and handling ship synthetics (like robots). You are also responsible for the production of exosuits(mechs) and bots for various departments. You answer to the Chief Engineer."
+	return "Вы - робототехник. Вы ответственны за починку, улучшение и обслуживание судовых синтетиков (к примеру, роботов). \
+	Вы также ответственны за производство экзокостюмов (мехов) и ботов для различных отделов. Вы подчиняетесь Главному Инженеру."

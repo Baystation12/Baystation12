@@ -1,8 +1,8 @@
 /decl/cultural_info/location/root
 	name = HOME_SYSTEM_ROOT
-	description = "Root, the claimed homeworld of the Positronic Union, is a verdant world slowly falling \
-	to mass mechanization. Although there are populations of positronics living directly on the surface, \
-	most operate from orbital stations. IPCs living on Root tend to be more callous than those in organic territories, \
-	with a strong drive for freedom."
-	ruling_body = "The Assembly"
-	distance = "55 light years"
+	description = "<font color=\"#54654c\">Рут</font> - самопровозглашенный родной мир <font color=\"#3e4855\">Позитронного Союза</font>, - это зеленый мир, медленно движущийся \
+	к массовой механизации. Хотя есть позитроники, живущие прямо на поверхности, большинство работают на \
+	орбитальных станциях. ИПС, живущие на <font color=\"#54654c\">Руте</font>, как правило, более \"бессердечны\", чем их \"сородичи\" на \
+	органических территориях, которые отличаются сильным стремлением к свободе."
+	ruling_body = "Ассамблея"
+	distance = "55 световых лет"

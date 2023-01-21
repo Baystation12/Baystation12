@@ -1,10 +1,10 @@
 /datum/job/qm
 	title = "Deck Chief"
-	department = "Supply"
+	department = "Снабжения"
 	department_flag = SUP
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Executive Officer"
+	supervisors = "Исполнительному офицеру"
 	economic_power = 5
 	minimal_player_age = 0
 	minimum_character_age = list(SPECIES_HUMAN = 27)
@@ -48,13 +48,17 @@
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
 
+/datum/job/qm/get_description_blurb()
+	return "Вы - Начальник палубы. Ваша задача - обеспечивать бесперебойную работу отдела снабжения и обслуживать шаттлы в ангаре. Вы подчиняетесь Исполнительному офицеру. \
+	Удостоверьтесь, что Ваш отдел укомплектован всем необходимым, персонал знает какие заказы куда доставлять и что кредитов снабжения хватит на все заказы. "
+
 /datum/job/cargo_tech
 	title = "Deck Technician"
 	department = "Supply"
 	department_flag = SUP
 	total_positions = 3
 	spawn_positions = 3
-	supervisors = "the Deck Chief and Executive Officer"
+	supervisors = "Начальнику палубы и Исполнительному офицеру"
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 24
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/tech
@@ -97,13 +101,17 @@
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
 
+/datum/job/cargo_tech/get_description_blurb()
+	return "Вы - Палубный техник. Ваша задача - доставлять заказы в пункт назначения и разгружать дрон доставки. Вы подчиняетесь Исполнительному офицеру и Начальнику палубы. \
+	Не забывайте сортировать мусор и зарабатывать кредиты снабжения для своего отдела."
+
 /datum/job/mining
 	title = "Prospector"
 	department = "Supply"
 	department_flag = SUP
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Deck Chief, the Corporate Liaison and the Executive Officer"
+	supervisors = "Начальнику палубы, корпоративному связному и Исполнительному офицеру"
 	economic_power = 7
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 25
@@ -135,3 +143,8 @@
 		access_guppy_helm, access_solgov_crew, access_eva,
 		access_radio_exp, access_radio_sup
 	)
+
+/datum/job/research_guard/get_description_blurb()
+	return "Вы - шахтёр. Ваша миссия - добывать ресурсы на астероидах и доставлять их на судно. \
+	Вы подчиняетесь Начальнику палубы и Исполнительному офицеру (в случае, если Вы контрактник, то ещё и Корпоративному связному). \
+	Не забывайте спрашивать у сотрудников отдела, какие ресурсы им нужны. "

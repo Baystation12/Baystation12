@@ -1,71 +1,81 @@
 /decl/cultural_info/location/qerrbalak
 	name = HOME_SYSTEM_QERRBALAK
-	description = "Qerr'Balak, in the Qerr'Valis system, is the ancient home of skrellkind. A large, swampy world, it consists of two continents separated by \
-		an archipelago filled ocean. The smaller continent, and original home of the Skrell civilisation, Qorr'gloa, is mostly swampland, with most cities being \
-		built on the coast. It is separated by the Qo'rria Sea from the other, larger continent, Xi'Krri'oal, which is more populous and varied, with snowy \
-		mountains in the south to temperate zones in the inner areas. Composed of hundreds of city-states, Qerr'Balak is still home to a sizable population of Skrell. \
-		While no longer the sole powerhouse of the Skrell civilisation, it is still widely respected among skrellkind as their homeworld, and for its academic and \
-		scientific prowess."
-	capital = "None"
-	ruling_body = "None"
-	distance = "67 light years"
+	description = "<font color=\"#89cff0\">Кверр'балак</font> в системе Кверр'валис является древним домом <font color=\"#3366cc\"><font color=\"#3366cc\">скреллов</font></font>. Большой, болотистый мир, он \
+	состоит из двух континентов, разделенных архипелагами в огромном океане. Меньший континент, являющийся родным \
+	домом цивилизации <font color=\"#3366cc\">Скреллов</font>, - Корр'глоа, представляет собой болото, причем большинство их городов \
+	построены на побережье. Оно отделено морем К'оррия от другого, более крупного материка, - Си'Кририоал, \
+	густонаселенного и разнообразного, со снежными горами на юге и умеренными зонами во внутренних районах. \
+	<font color=\"#89cff0\">Кверр'балак</font>, состоящий из сотен городов-государств, до сих пор является домом для значительного населения <font color=\"#3366cc\">скреллов</font>. \
+	Хотя он больше не является единственной электростанцией на планете, он все еще широко почитаем среди <font color=\"#3366cc\">скреллов</font> как \
+	их родной мир, а также за его научные достижения."
+	capital = "Отсутствует"
+	ruling_body = "Ксаку Моглар"
+	distance = "67 световых лет"
 	economic_power = 1.5
 
 /decl/cultural_info/location/talamira
 	name = HOME_SYSTEM_TALAMIRA
-	description = "Talamira, in the Ri'Qora system, is located far on the other side of Skrell space far into what is, to humans, unchartered and unexplored territory.\
-	Established some 500 years ago Talamira is considered a trade and commerce hub in its sector. This is largely a result of its central position between a large \
-	number of established frontier city-states and the rest of Skrell space, The planet itself consists of a single swamp ridden supercontinent that is mildly \
-	warmer than Qerr'Balak, with hundreds of city-states dotting the surface, most of which are heavily invested in manufacturing and logistics, benefiting from the \
-	trade of raw resources with frontier worlds. This rising star of the Skrell territories is considered an economic powerhouse, with its city states wielding influence \
-	across the frontier."
-	capital = "None"
-	ruling_body = "None"
-	distance = "300 light years"
+	description = "<font color=\"#cc9090\">Таламира</font> в системе Ри'куора расположена далеко в пространстве <font color=\"#3366cc\">скреллов</font>, в том месте, что для людей \
+	является неизученной и неизведанной территорией. Основанная около 500 лет назад, <font color=\"#cc9090\">Таламира</font> считается торговым и \
+	коммерческим центром в своем секторе. Это в значительной степени является результатом его центрального положения \
+	между большим количеством пограничных городов-государств и остальной части Скреллианской Империи. Сама планета \
+	состоит из одного суперконтинента, на котором болота несколько теплее, чем <font color=\"#89cff0\">Кверр'балак</font>, с сотнями \
+	городов-государств, усеивающих ее поверхность, большинство из которых вкладывают значительные средства в \
+	производство и логистику, извлекая выгоду из торговли сырьевыми ресурсами с пограничными мирами. <font color=\"#cc9090\">Таламира</font> \
+	считается экономическим центром, где ее города-государства обладают большим влиянием за рубежом."
+	capital = "Отсутствует"
+	ruling_body = "Короли городов-государств"
+	distance = "300 световых лет"
 	economic_power = 2.5
 
 /decl/cultural_info/location/roasora
 	name = HOME_SYSTEM_ROASORA
-	description = "Roa'Sora, in the Qrri'terr system, is a small planet consisting of a single city-state, Tri'sorr. Ro'moxi.Since its founding some 200 years prior \
-	The Skrell of Roa'Sora have been engaged in a state of constant defence against a nearby species that has made no diplomatic attempts to communicate known \
-	only as the 'Throom,' a name given because of a distinctive sound made by their vessels. The species, which appear to do little other than raid, make regular incursions.\
-	It is because of this state that Roa'Sora is heavily militarised in nature, with a heavy Raskinta influence and strong cooperation with its SDTF, Sora'terr.\
-	The primary export of the planet is rare minerals, though it possesses a strong military defence industry also. In spite of their situation the city-state regularly \
-	attempts to negotiate and open diplomatic channels with their assailants to little avail. Geographically, the planet is fairly mountainous and rocky, with a few deep lakes \
-	in mountain valleys, around which most mining stations are built."
-	capital = "None"
-	ruling_body = "None"
-	distance = "350 light years"
+	description = "<font color=\"#b99d71\">Роа'сора</font> в системе Куэрри'терр представляет собой небольшую планету, состоящую из одного \
+	города-государства под названием Три'Сорр. С момента своего основания около 200 лет назад, \
+	скреллы из <font color=\"#b99d71\">Роа'сора</font> находились в состоянии постоянной обороны от таинственных чужаков, которые не предпринимали \
+	никаких дипломатических попыток сообщить о себе. Из назвали \"Трумами\" - из-за отличительного звуков, которые те \
+	издавали. Трумы совершали постоянные набеги на колонистов-<font color=\"#3366cc\">скреллов</font>. Именно из-за такой ситуации <font color=\"#b99d71\">Роа'сора</font> сильно \
+	милитаризована, однако с их стороны все еще не прекращаются попытки установить дипломатический контакт \
+	с \"налетчиками\". Основной экспорт планеты - редкие полезные ископаемые, хотя имеется и сильно развитая военная \
+	промышленность, поскольку до сих пор переговоры с чужаками не принесли каких-либо успехов. Географически планета \
+	имеет горную и скалистую поверхность, с несколькими глубокими озерами в горных долинах, вокруг которых построено \
+	большинство шахтерских станций."
+	capital = "Отсутствует"
+	ruling_body = "Отсутствует"
+	distance = "350 световых лет"
 	economic_power = 1.2
 
 /decl/cultural_info/location/mitorqi
 	name = HOME_SYSTEM_MITORQI
-	description = "Mi'tor'qi, in the Qoa'lo system, is one of a multitude of planets along the human-skrell border. One of the newest colonies of Skrellkind, the numerous \
-	city states of Mi'tor'qi show a great deal of human influence in their society. Many of the city states have adapted their economies to focus on interstellar trade with \
-	humanity, and it is here that a number of skrellian corporations offer loan services of skilled Skrell to human organizations. Many inner-system city states use their \
-	counterparts and their corporations as an intermediary to trade with humanity while remaining obscure. Despite the planet's prosperity there is a growing conservative \
-	movement in many city-states concerned with the perceived invasive influence of humankind and its potential long-term damage."
-	capital = "None"
-	ruling_body = "None"
-	distance = "32 light years"
+	description = "<font color=\"#b88a3b\">Ми'тор'куи</font> в системе  Куа'ло является одной из множества планет вдоль границы между Человечеством и \
+	Скреллианской Империей. Будучи одной из новейших колоний, многочисленные города-государства <font color=\"#b88a3b\">Ми'тор'куи</font> \
+	демонстрируют большое влияние Людей в их обществе. Экономически сосредоточенные на межзвездной торговле с \
+	представителями Человечества, именно отсюда ряд компаний корпораций <font color=\"#3366cc\">скреллов</font> предлагают кредитные услуги \
+	квалифицированных работников человеческим организациям. Однако такое положение дел нравится далеко не всем \
+	местным. Несмотря на процветание планеты, здесь растет консервативность и ксенофобское движение во многих \
+	городах-государствах, обеспокоенных возрастающим влиянием Человечества и его потенциальным долгосрочным ущербом."
+	capital = "Отсутствует"
+	ruling_body = "Президент"
+	distance = "32 световых года"
 	economic_power = 1.9
 
 /decl/cultural_info/location/skrellspace
 	name = HOME_SYSTEM_SKRELLSPACE
-	description = "A very different style of living from a more traditional city-state based Skrell, those who live and reside in space belong to no particular city-state \
-	and instead are governed by the SDTF of the system in which they reside, with all services and installations under the control of the local Raskinta SDTF Commander \
-	rather than a Qerr-Skria. Life in these circumstances is often more regimented and disciplined, with a stronger emphasis on community and collaboration, with varying extremes \
-	depending on the status, funding and level of military engagements the SDTF is currently in."
-	capital = "None"
-	ruling_body = "Your local SDTF"
-	distance = "None"
+	description = "Совсем другой стиль жизни, отличающийся от традиционного, основанного на городе-государстве. \
+	Это те, кто живут в космосе, не принадлежат к одному конкретному городу-государству, а вместо этого служат ОСС \
+	(Оборонительным Силам Скреллов), в которой они находятся, со всей спецификой организации военного типа. Жизнь \
+	в таких обстоятельствах куда более упорядочена  и дисциплинирована, с сильным акцентом на братство и \
+	сотрудничество в целом, с различными крайностями в зависимости от статуса, финансирования и уровня военных действий."
+	capital = "Отсутствует"
+	ruling_body = "Ваша ОСС"
+	distance = "Отсутствует"
 	economic_power = 1.9
 
 /decl/cultural_info/location/otherskrell
 	name = HOME_SYSTEM_OTHERSKRELL
-	description = "Skrell control a much wider region of space than humanity, and to many their space is seen as uncountably infinite. This planet is one of the many skrellian worlds \
-	 that are less known."
-	capital = "None"
-	ruling_body = "None"
-	distance = "None"
+	description = "Скреллы контролируют гораздо более обширную область космоса, чем человечество, и многим их пространство представляется неисчислимо бесконечным. \
+	та планета - один из многих скреллианских миров, которые менее известны."
+	capital = "Отсутствует"
+	ruling_body = "Отсутствует"
+	distance = "Отсутствует"
 	economic_power = 1.5

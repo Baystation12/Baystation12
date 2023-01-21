@@ -18,7 +18,7 @@
 
 /decl/cultural_info/culture/human/martian_surfacer
 	name = CULTURE_HUMAN_MARTIAN
-	description = "Вы происходите с поверхности <font color=\"#cc6600\">Марса</font>. Вы выросли в одном из множества фермерских общин, либо в \
+	description = "Вы происходите с поверхности <font color=#cc6600>Марса</font>. Вы выросли в одном из множества фермерских общин, либо в \
 	одном из крупных городов, таких как Олимпус. Большинство жителей поверхности известны как монсийцы - самая \
 	большая этническая группа поверхности планеты. Довольно много жителей поверхности имеют достойное воспитание, \
 	и представляют средний уровень комфорта, ожидаемый в пространстве <font color=\"#436b8e\">ЦПСС</font>. Почти все жители поверхности такие \
@@ -186,7 +186,12 @@
 
 /decl/cultural_info/culture/human/gaia
 	name = CULTURE_HUMAN_GAIAN
-	description = "Gaia is the sole planet in the Galilei system, serving as the DMZ between the Sol Central Government and the Independent Colonial Confederation of Gilgamesh. It is an agricultural world, though various conflicts across the planet's surface have left it scarred. The planet is divided into Sol-Controlled Southern Gaia and Independent-Controlled Northern Gaia, with New Venice remaining a neutral zone inside the DMZ. The planet's population remain divided even 10 years after the Gaia Conflict. New Venice sits on the edge of Lake Cabot. While Gaia is divided, the current Mayor of New Venice serves as a vital mediator between both sides. The Gaian People are tired of war, and long to see their families once again. They suffered hard twenty years prior, and fear they may suffer again."
+	description = "Гайя - это одинокая планета в системе Галлелей, служащяя как демилитаризованная зона между Центральным Правительством Солнечной Системы и Независимой Колониальной Конфедерацией Гильгамеша. \
+	Это сельскохозяйственный мир, хотя череда конфликтов на поверхности планеты оставили его опустошённым.\
+	Планета разделенна на Южную Гайю и Северную Гайю, контролируемыми ЦПСС и ГКК соответственно. Новая Венеция служит нейтральной зоной внутри ДМЗ. \
+	Население планеты остаётся разделённым даже спустя 10 лет после Гайского Конфликта. Новая Венеция распологается на берегу озера Кабот. \
+	В то время как Гайя разделенна, нынешний мэр Новой Венеции служит жизненно важным посредником между обеими сторонами. Люди Гайи устали от войн и снова хотят увидеть лица своих семей. \
+	Они страдали на протяжении двадцати лет и боятся, что могут пострадать снова."
 	economic_power = 0.9
 
 /decl/cultural_info/culture/human/other

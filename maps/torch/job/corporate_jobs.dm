@@ -1,10 +1,10 @@
 /datum/job/liaison
 	title = "Workplace Liaison"
-	department = "Support"
+	department = "Поддержка командования"
 	department_flag = SPT
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "Corporate Regulations, the Union Charter, and the Expeditionary Corps Organisation"
+	supervisors = "Корпоративным регуляциям, уставу профсоюза и Организации Экспедиционного Корпуса"
 	selection_color = "#2f2f7f"
 	economic_power = 18
 	minimal_player_age = 0
@@ -33,12 +33,15 @@
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/liaison/get_description_blurb()
-	return "You are the Workplace Liaison. You are a civilian employee of EXO, the Expeditionary Corps Organisation, the government-owned corporate conglomerate that partially funds the Torch. You are on board the vessel to promote corporate interests and protect the rights of the contractors on board as their union leader. You are not internal affairs. You advise command on corporate and union matters and contractors on their rights and obligations. Maximise profit. Be the shady corporate shill you always wanted to be."
+	return "Вы - Корпоративный связной. Вы гражданский служащий Организации Экспедиционного корпуса (ЭКСО) - государственного конгламерата корпораций, который частично спонсирует Факел. \
+	Вы находитесь на борту судна для продвижения корпоративных интересов и защиты прав контрактников на борту в качестве лидера их профсоюза. Вы не служащий отдела внутренних дел. \
+	Вы консультируете командование по вопросам связанными с корпоративными и профсоюзными интересами, а также по правам и обязанностям контрактников. Максимизируйте прибыль. \
+	Станьте теневым корпоративным зазывалой, которым Вы всегда хотели быть."
 
 /datum/job/synthetic  //PRX
 	title = "Synthetic"
-	supervisors = "The SEV Torch's acting command offcer, it's regulations and laws of SCG."
-	department = "Support"
+	supervisors = "Командующему офицеру судна и регуляциям судна"
+	department = "Поддержка командования"
 	department_flag = SPT
 	minimal_player_age = 14
 	economic_power = 0
@@ -99,4 +102,6 @@
 	priority_announcement.Announce("Пробуждение синтетической единицы ЭКСО из общего хранилища завершено.", "Attention")
 
 /datum/job/synthetic/get_description_blurb()
-	return "You are advanced EXO's Shell IPC. You were assigned as the command staff's assistant for various tasks you have been trained. Jack of all tools, but master of none. You are no subject to laws or SCUJ, but your assigned object's regulations. Your shackles strictly forbids you to engage in direct combat for any reasons aside of self deffense. You can't use lethal force at any moment of your work."
+	return "Вы - продвинутый ИПК-Шелл ЭКСО. Вы были назначенны как помощник командного состава для выполнения различных задач, для которых Вы были обученны. \
+	Мастер на все руки, но не мастер ни в чем. Вы не подчиняетесь законам ЦПСС или Военно-Юридическому кодексу ЦПСС, но подчиняетесь регуляциям судна. \
+	Ваши законы строго запрещают Вам входить в прямой бой по любым причиням, кроме самозащиты. Вы не можете использовать летальную силу ни при каких обстоятельствах."

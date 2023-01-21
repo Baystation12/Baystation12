@@ -37,6 +37,7 @@
 #define HOME_SYSTEM_TAU_CETI   "Ceti Epsilon"
 #define HOME_SYSTEM_HELIOS	   "Eos"
 #define HOME_SYSTEM_TERRA 	   "Terra"
+#define HOME_SYSTEM_TERSTEN    "Tersten" //bring back Tersten //drakon
 #define HOME_SYSTEM_LORRIMAN   "Lorriman"
 #define HOME_SYSTEM_CINU       "Cinu"
 #define HOME_SYSTEM_YUKLID     "Yuklid V"
@@ -44,8 +45,6 @@
 #define HOME_SYSTEM_KINGSTON   "Kingston"
 #define HOME_SYSTEM_GAIA       "Gaia"
 #define HOME_SYSTEM_MAGNITKA   "Magnitka"
-#define HOME_SYSTEM_CASTILLA   "Nueva Castilla"
-#define HOME_SYSTEM_FOSTER	   "Foster's Planet"
 #define HOME_SYSTEM_STATELESS  "Stateless"
 #define HOME_SYSTEM_OTHER      "Other System"
 #define HOME_SYSTEM_DEEP_SPACE "Deep Space"
@@ -172,6 +171,7 @@
 
 #define HOME_SYSTEM_MOGHES          "Moghes"
 #define HOME_SYSTEM_OUERE           "Ouere"
+#define HOME_SYSTEM_UNATHI_TERSTEN  "Tersten - Unathi Clans" //bring back unathi-tersten //drakon
 #define HOME_SYSTEM_OFFWORLD        "Off-world"
 
 #define FACTION_UNATHI_HEGEMONY          "Moghes Hegemony"

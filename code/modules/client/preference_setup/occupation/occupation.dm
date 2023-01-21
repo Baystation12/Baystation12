@@ -403,14 +403,14 @@
 		send_rsc(user, job.get_job_icon(), "job[ckey(rank)].png")
 		dat += "<img src=job[ckey(rank)].png width=96 height=96 style='float:left;'>"
 		if(job.department)
-			dat += "<b>Department:</b> [job.department]."
+			dat += "<b>Департамент:</b> [job.department]."
 			if(job.head_position)
-				dat += "You are in charge of this department."
+				dat += "Вы являетесь главой департамента."
 
-		dat += "You answer to <b>[job.supervisors]</b> normally."
+		dat += "Вы подчиняетесь <b>[job.supervisors]</b>."
 
 		if(job.allowed_branches)
-			dat += "You can be of following ranks:"
+			dat += "Вы можете обладать следующими званиями:"
 			for(var/T in job.allowed_branches)
 				var/datum/mil_branch/B = GLOB.mil_branches.get_branch_by_type(T)
 				dat += "<li>[B.name]: [job.get_ranks(B.name)]"
