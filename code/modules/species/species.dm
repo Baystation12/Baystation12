@@ -279,6 +279,13 @@
 
 	/// An associative list of /singleton/trait and trait level - See individual traits for valid levels
 	var/list/traits = list()
+
+	/**
+	* Allows a species to override footprints on worn clothing. Used by get_move_trail.
+	* Uses istype() so child objects should be first in the list relative to parent objects.
+	* For universally overriding footprints on all footwear, use obj/item/clothing instead of /obj/item/clothing/shoes since suit layer clothing that covers the feet (space suits) are a thing.
+	*/
+	var/list/footwear_trail_overrides
 /*
 These are all the things that can be adjusted for equipping stuff and
 each one can be in the NORTH, SOUTH, EAST, and WEST direction. Specify
@@ -629,6 +636,10 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		return /obj/effect/decal/cleanable/blood/tracks/body
 	if(H.shoes || (H.wear_suit && (H.wear_suit.body_parts_covered & FEET)))
 		var/obj/item/clothing/shoes = (H.wear_suit && (H.wear_suit.body_parts_covered & FEET)) ? H.wear_suit : H.shoes // suits take priority over shoes
+		if(footwear_trail_overrides)
+			for (var/key in footwear_trail_overrides)
+				if (istype(shoes, key))
+					return footwear_trail_overrides[key]
 		return shoes.move_trail
 	else
 		return move_trail
