@@ -10480,11 +10480,19 @@
 /obj/machinery/button/blast_door{
 	id_tag = "disvent";
 	name = "Incinerator Vent Control";
+	pixel_x = 8;
 	pixel_y = -24
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 4
+	},
+/obj/machinery/button/blast_door{
+	desc = "A switch made to open the incinerator blast doors.";
+	id_tag = "IncineratorBlastDoors";
+	name = "Incinerator Blast Doors";
+	pixel_x = -8;
+	pixel_y = -24
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/incinerator)
@@ -10692,6 +10700,10 @@
 	id_tag = "incinerator_airlock_interior";
 	locked = 1;
 	name = "Mixing Room Interior Airlock"
+	},
+/obj/machinery/door/blast/regular{
+	id_tag = "IncineratorBlastDoors";
+	name = "Incinerator Blast Door"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/incinerator)
@@ -11137,6 +11149,10 @@
 	id_tag = "incinerator_airlock_exterior";
 	locked = 1;
 	name = "Mixing Room Exterior Airlock"
+	},
+/obj/machinery/door/blast/regular{
+	id_tag = "IncineratorBlastDoors";
+	name = "Incinerator Blast Door"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/incinerator)
