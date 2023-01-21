@@ -2,15 +2,16 @@
 	key = "burp"
 	emote_message_3p = "USER burps."
 	message_type = AUDIBLE_MESSAGE
-	var/list/emote_sound
+//	var/list/emote_sound
 
+/*
 /singleton/emote/audible/do_extra(atom/user)
 	if(emote_sound)
 		var/playable = emote_sound
 		if (islist(emote_sound))
 			playable = pick(emote_sound)
 		playsound(user.loc, playable, 50, 0)
-
+*/
 /singleton/emote/audible/deathgasp_alien
 	key = "deathgasp"
 	emote_message_3p = "USER lets out a waning guttural screech, green blood bubbling from its maw."
@@ -211,3 +212,91 @@
 	key = "squeal"
 	emote_message_3p = "USER squeals."
 	emote_sound = 'sound/voice/LizardSqueal.ogg'
+
+/singleton/emote/audible/whistle
+	key = "whistle"
+	emote_message_1p = "You whistle."
+	emote_message_3p = "USER whistles."
+
+
+
+/singleton/emote/audible/gasp
+	emote_sound = list(
+		MALE = list(
+			'packs/infinity/sound/voice/gasp_male1.ogg', 'packs/infinity/sound/voice/gasp_male2.ogg',
+			'packs/infinity/sound/voice/gasp_male3.ogg', 'packs/infinity/sound/voice/gasp_male4.ogg',
+			'packs/infinity/sound/voice/gasp_male5.ogg', 'packs/infinity/sound/voice/gasp_male6.ogg',
+			'packs/infinity/sound/voice/gasp_male7.ogg'),
+		FEMALE = list(
+			'packs/infinity/sound/voice/gasp_female1.ogg', 'packs/infinity/sound/voice/gasp_female2.ogg',
+			'packs/infinity/sound/voice/gasp_female3.ogg', 'packs/infinity/sound/voice/gasp_female4.ogg',
+			'packs/infinity/sound/voice/gasp_female5.ogg', 'packs/infinity/sound/voice/gasp_female6.ogg',
+			'packs/infinity/sound/voice/gasp_female7.ogg'))
+
+/singleton/emote/audible/whistle
+	emote_sound = 'packs/infinity/sound/voice/whistle.ogg'
+
+/singleton/emote/audible/sneeze
+	emote_sound = list(
+		MALE = list('packs/infinity/sound/voice/sneeze_male_1.ogg', 'packs/infinity/sound/voice/sneeze_male_2.ogg'),
+		FEMALE = list('packs/infinity/sound/voice/sneeze_female_1.ogg', 'packs/infinity/sound/voice/sneeze_female_2.ogg'))
+
+/singleton/emote/audible/snore
+	emote_sound = list(
+		'packs/infinity/sound/voice/snore_1.ogg', 'packs/infinity/sound/voice/snore_2.ogg',
+		'packs/infinity/sound/voice/snore_3.ogg', 'packs/infinity/sound/voice/snore_4.ogg',
+		'packs/infinity/sound/voice/snore_5.ogg', 'packs/infinity/sound/voice/snore_6.ogg',
+		'packs/infinity/sound/voice/snore_7.ogg')
+
+/singleton/emote/audible/yawn
+	emote_sound = list(
+		MALE = list('packs/infinity/sound/voice/yawn_male_1.ogg', 'packs/infinity/sound/voice/yawn_male_2.ogg'),
+		FEMALE = list('packs/infinity/sound/voice/yawn_female_1.ogg', 'packs/infinity/sound/voice/yawn_female_2.ogg',
+						'packs/infinity/sound/voice/yawn_female_3.ogg'))
+
+/singleton/emote/audible/clap
+	emote_sound = 'packs/infinity/sound/voice/clap.ogg'
+
+/singleton/emote/audible/chuckle/resomi
+	emote_sound = 'packs/infinity/sound/voice/resomicougha.ogg'
+
+/singleton/emote/audible/cough
+	emote_sound = list(
+		MALE = 'packs/infinity/sound/voice/cough_male.ogg',
+		FEMALE = 'packs/infinity/sound/voice/cough_female.ogg')
+
+/singleton/emote/audible/cough/resomi
+	emote_sound = 'packs/infinity/sound/voice/resomicoughb.ogg'
+
+/singleton/emote/audible/cry
+	emote_sound = list(
+		MALE = list('packs/infinity/sound/voice/cry_male_1.ogg', 'packs/infinity/sound/voice/cry_male_2.ogg'),
+		FEMALE = list('packs/infinity/sound/voice/cry_female_1.ogg', 'packs/infinity/sound/voice/cry_female_2.ogg',
+						'packs/infinity/sound/voice/cry_female_3.ogg'))
+
+/singleton/emote/audible/sigh
+	emote_sound = list(
+		MALE = 'packs/infinity/sound/voice/sigh_male.ogg',
+		FEMALE = 'packs/infinity/sound/voice/sigh_female.ogg')
+
+/singleton/emote/audible/laugh
+	emote_sound = list(
+		MALE = list('packs/infinity/sound/voice/laugh_male_1.ogg', 'packs/infinity/sound/voice/laugh_male_2.ogg', 'packs/infinity/sound/voice/laugh_male_3.ogg'),
+		FEMALE = list('packs/infinity/sound/voice/laugh_female_1.ogg', 'packs/infinity/sound/voice/laugh_female_2.ogg', 'packs/infinity/sound/voice/laugh_female_3.ogg'))
+
+/singleton/emote/audible/laugh/resomi
+	emote_sound = 'packs/infinity/sound/voice/resomicougha.ogg'
+
+/singleton/emote/audible/giggle
+	emote_sound = list(
+		MALE = 'packs/infinity/sound/voice/giggle_male_2.ogg',
+		FEMALE = 'packs/infinity/sound/voice/giggle_female_3.ogg')
+
+/singleton/emote/audible/scream
+	emote_sound = list(
+		MALE = list('packs/infinity/sound/voice/scream_male_1.ogg', 'packs/infinity/sound/voice/scream_male_2.ogg',
+					'packs/infinity/sound/voice/scream_male_3.ogg'),
+		FEMALE = list('packs/infinity/sound/voice/scream_female_1.ogg', 'packs/infinity/sound/voice/scream_female_2.ogg'))
+
+/singleton/emote/audible/scream/resomi
+	emote_sound = 'packs/infinity/sound/voice/resomisneeze.ogg'
