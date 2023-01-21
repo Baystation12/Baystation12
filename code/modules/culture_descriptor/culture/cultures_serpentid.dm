@@ -2,7 +2,7 @@
 /decl/cultural_info/culture/nabber
 	name = CULTURE_NABBER_CMINUS
 
-	description = "You have been trained to Xynergy Grade PLACEHOLDER."
+	description = "Вы были обучены корпорацией Xynergy до класса PLACEHOLDER."
 	language = LANGUAGE_NABBER
 	secondary_langs = list(
 		LANGUAGE_HUMAN_EURO,

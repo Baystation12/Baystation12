@@ -373,8 +373,15 @@
 				/obj/item/toy/figure/warden,
 				/obj/item/toy/figure/psychologist,
 				/obj/item/toy/figure/paramedic,
-				/obj/item/toy/figure/ert)
-
+				/obj/item/toy/figure/ert,
+				/obj/item/toy/figure/jaba,
+				/obj/item/toy/figure/dc,
+				/obj/item/toy/figure/boec,
+				/obj/item/toy/figure/xoec,
+				/obj/item/toy/figure/cmoec,
+				/obj/item/toy/figure/cwmf,
+				/obj/item/toy/figure/ceaf,
+				/obj/item/toy/desk/gas)
 
 /obj/random/plushie
 	name = "random plushie"

@@ -1,7 +1,8 @@
 /mob/living/silicon/ai //from infinity //proxima
 	var/list/announcements_variants = list(
-		"Torch Voice Announcement"	=	'sound/AI/newAI.ogg',
-		"TG Voice Announcement"		=	'proxima/sound/AI/newai.ogg'
+		"Torch Voice Announcement"	=	'sound/AI/a-newai.ogg',
+		"TG Voice Announcement"		=	'proxima/sound/AI/newai.ogg',
+		"MedBot Voice Announcement" =	'sound/AI/newAI.ogg'
 		)
 
 /mob/living/silicon/ai/on_mob_init()
@@ -14,7 +15,7 @@
 		if(list_find(announcements_variants, result))
 			var/result_sound = announcements_variants[result]
 			if(isfile(result_sound))
-				announcement.Announce("Новый ИИ загружен в ядро.", new_sound = result_sound)
+				announcement.Announce("Установлено новое соединение. Данные получены. Ядро ИИ активировано и готово выполнять установленные законы.", new_sound = result_sound)
 
 /mob/living/silicon/ai/proc/ChangeFloorColorInArea(Color, area/Area = get_area(src))
 	if(length(Color) && istype(Area))
