@@ -107,11 +107,11 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 
 	browse_to(user, html)
 
-/datum/error_viewer/error_cache/proc/log_error(exception/e, list/desclines, skip_count)
+/datum/error_viewer/error_cache/proc/log_error(exception/e, list/desclines, skip_count, actual_file, actual_line)
 	if (!istype(e))
 		return // Abnormal exception, don't even bother
 
-	var/erroruid = "[e.file],[e.line]"
+	var/erroruid = "[actual_file],[actual_line]"
 	var/datum/error_viewer/error_source/error_source = error_sources[erroruid]
 	if (!error_source)
 		error_source = new(e)
@@ -128,7 +128,7 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 	//  from the same source hasn't been shown too recently
 	if (error_source.next_message_at <= world.time)
 		var/const/viewtext = "\[view]" // Nesting these in other brackets went poorly
-		log_runtime("Runtime in <b>[e.file]</b>, line <b>[e.line]</b>: <b>[html_encode(e.name)]</b> [error_entry.make_link(viewtext)]")
+		log_runtime("Runtime in <b>[actual_file]</b>, line <b>[actual_line]</b>: <b>[html_encode(e.name)]</b> [error_entry.make_link(viewtext)]")
 		var/err_msg_delay
 		if(config)
 			err_msg_delay = config.error_msg_delay
