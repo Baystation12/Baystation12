@@ -2742,6 +2742,10 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
+/obj/item/bodybag/cryobag,
+/obj/item/bodybag/cryobag,
+/obj/item/bodybag/cryobag,
+/obj/item/bodybag/cryobag,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "afD" = (
@@ -4262,6 +4266,9 @@
 	c_tag = "Infirmary - Staging";
 	dir = 8
 	},
+/obj/machinery/sleeper{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/staging)
 "aim" = (
@@ -4735,6 +4742,7 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
+/obj/structure/roller_bed,
 /turf/simulated/floor/tiled/white,
 /area/medical/staging)
 "ajh" = (
@@ -7100,19 +7108,19 @@
 /area/maintenance/firstdeck/aftstarboard)
 "amH" = (
 /obj/structure/flora/pottedplant/flower,
-/obj/effect/floor_decal/carpet/blue2{
-	dir = 8
-	},
-/obj/effect/floor_decal/carpet/blue2{
-	dir = 1
-	},
-/obj/effect/floor_decal/carpet/blue2{
-	dir = 9
-	},
 /obj/machinery/camera/network/medbay{
 	c_tag = "Infirmary - Therapy Room"
 	},
-/turf/simulated/floor/carpet/blue2,
+/obj/effect/floor_decal/carpet/green{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet/green{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet/green{
+	dir = 9
+	},
+/turf/simulated/floor/carpet/green,
 /area/medical/mentalhealth/therapyroom)
 "amI" = (
 /obj/structure/reagent_dispensers/water_cooler{
@@ -8050,8 +8058,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/carpet/blue2,
-/turf/simulated/floor/carpet/blue2,
+/obj/effect/floor_decal/carpet/green,
+/turf/simulated/floor/carpet/green,
 /area/medical/mentalhealth/therapyroom)
 "anZ" = (
 /obj/random_multi/single_item/space_rabbit,
@@ -8936,13 +8944,13 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/effect/floor_decal/carpet/blue2{
-	dir = 4
-	},
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/floor/carpet/blue2,
+/obj/effect/floor_decal/carpet/green{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/green,
 /area/medical/mentalhealth/therapyroom)
 "apq" = (
 /obj/structure/bed/psych,
@@ -8955,10 +8963,10 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/floor_decal/carpet/blue2{
+/obj/effect/floor_decal/carpet/green{
 	dir = 1
 	},
-/turf/simulated/floor/carpet/blue2,
+/turf/simulated/floor/carpet/green,
 /area/medical/mentalhealth/therapyroom)
 "apr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -9827,15 +9835,15 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/effect/floor_decal/carpet/blue2{
+/obj/item/device/flashlight/lamp/green,
+/obj/effect/floor_decal/carpet/green,
+/obj/effect/floor_decal/carpet/green{
 	dir = 8
 	},
-/obj/effect/floor_decal/carpet/blue2,
-/obj/effect/floor_decal/carpet/blue2{
+/obj/effect/floor_decal/carpet/green{
 	dir = 10
 	},
-/obj/item/device/flashlight/lamp/green,
-/turf/simulated/floor/carpet/blue2,
+/turf/simulated/floor/carpet/green,
 /area/medical/mentalhealth/therapyroom)
 "ara" = (
 /obj/machinery/atmospherics/pipe/zpipe/down/cyan,
@@ -21217,6 +21225,7 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/central_stairwell)
 "aJV" = (
@@ -23705,6 +23714,9 @@
 /area/security/sierra/hosbed)
 "aNB" = (
 /obj/structure/table/standard,
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 4
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/hop)
 "aNC" = (
@@ -24162,17 +24174,38 @@
 "aOa" = (
 /obj/structure/table/standard,
 /obj/item/folder/blue,
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 9
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/hop)
 "aOb" = (
 /obj/structure/table/standard,
 /obj/item/reagent_containers/food/drinks/glass2/coffeecup/SCG,
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 1
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/hop)
 "aOc" = (
 /obj/structure/table/standard,
 /obj/item/stamp/hop,
 /obj/item/sticky_pad/random,
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 5
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/hop)
 "aOd" = (
@@ -25007,6 +25040,9 @@
 /obj/structure/table/standard,
 /obj/item/paper_bin,
 /obj/item/pen/multi/cmd/hop,
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 8
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/hop)
 "aPs" = (
@@ -26150,6 +26186,13 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet/blue2,
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 10
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/hop)
 "aQZ" = (
@@ -26180,6 +26223,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/effect/floor_decal/carpet/blue2,
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/hop)
 "aRa" = (
@@ -26472,6 +26516,7 @@
 	},
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/purple/border,
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "aRy" = (
@@ -29735,6 +29780,9 @@
 /area/crew_quarters/heads/office/hop/cobed)
 "aWO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 1
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/hop/cobed)
 "aWP" = (
@@ -29747,6 +29795,15 @@
 	},
 /obj/structure/table/standard,
 /obj/item/modular_computer/tablet/lease/preset/command,
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 5
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/hop/cobed)
 "aWR" = (
@@ -30273,6 +30330,13 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/hop/cobed)
 "aYe" = (
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet/blue2,
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 10
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/hop/cobed)
 "aYf" = (
@@ -30288,10 +30352,18 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
+/obj/effect/floor_decal/carpet/blue2,
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/hop/cobed)
 "aYg" = (
 /obj/machinery/light/small,
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet/blue2,
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 6
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/hop/cobed)
 "aYh" = (
@@ -31596,14 +31668,14 @@
 	pixel_x = -4;
 	pixel_y = -24
 	},
-/obj/effect/floor_decal/carpet/blue2,
-/obj/effect/floor_decal/carpet/blue2{
+/obj/effect/floor_decal/carpet/green,
+/obj/effect/floor_decal/carpet/green{
 	dir = 4
 	},
-/obj/effect/floor_decal/carpet/blue2{
+/obj/effect/floor_decal/carpet/green{
 	dir = 6
 	},
-/turf/simulated/floor/carpet/blue2,
+/turf/simulated/floor/carpet/green,
 /area/medical/mentalhealth/therapyroom)
 "bbE" = (
 /turf/simulated/floor/tiled/techfloor,
@@ -34998,13 +35070,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/carpet/blue2,
 /obj/machinery/light_switch{
 	dir = 1;
 	pixel_x = 9;
 	pixel_y = -21
 	},
-/turf/simulated/floor/carpet/blue2,
+/obj/effect/floor_decal/carpet/green,
+/turf/simulated/floor/carpet/green,
 /area/medical/mentalhealth/therapyroom)
 "bkc" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan{
@@ -35661,10 +35733,10 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/effect/floor_decal/carpet/blue2{
+/obj/effect/floor_decal/carpet/green{
 	dir = 1
 	},
-/turf/simulated/floor/carpet/blue2,
+/turf/simulated/floor/carpet/green,
 /area/medical/mentalhealth/therapyroom)
 "cyK" = (
 /obj/effect/floor_decal/techfloor,
@@ -35887,6 +35959,9 @@
 "dEW" = (
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/reagent_dispensers/water_cooler{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/hallway/infirmary)
 "dGl" = (
@@ -36164,6 +36239,7 @@
 /area/rnd/xenobiology/xenoflora)
 "eNQ" = (
 /obj/effect/floor_decal/industrial/outline/blue,
+/obj/structure/bed/chair/comfy/teal,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/infirmreception)
 "eOT" = (
@@ -37348,6 +37424,13 @@
 	dir = 1;
 	pixel_y = -23
 	},
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet/blue2,
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 6
+	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/hop)
 "ibv" = (
@@ -37870,10 +37953,13 @@
 	dir = 4;
 	pixel_x = 22
 	},
+/obj/structure/bed/sofa/r/blue{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/hallway/infirmary)
 "jJC" = (
-/turf/simulated/floor/carpet/blue2,
+/turf/simulated/floor/carpet/green,
 /area/medical/mentalhealth/therapyroom)
 "jMH" = (
 /obj/effect/floor_decal/borderfloor/corner{
@@ -37937,6 +38023,7 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/flora/pottedplant/tropical,
 /turf/simulated/floor/tiled/white/monotile,
 /area/hallway/infirmary)
 "klE" = (
@@ -37960,6 +38047,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/rnd/xenobiology/xenoflora)
+"kmz" = (
+/obj/effect/floor_decal/industrial/outline/blue,
+/obj/structure/bed/chair/comfy/teal{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/medical/infirmreception)
 "knM" = (
 /obj/machinery/flasher{
 	dir = 4;
@@ -37972,6 +38066,10 @@
 /obj/machinery/porta_turret,
 /turf/simulated/floor/bluegrid,
 /area/turret_protected/ai)
+"kqT" = (
+/obj/structure/table/reinforced,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/shuttle/escape_pod/escape_pod5/station)
 "krA" = (
 /obj/effect/floor_decal/techfloor,
 /obj/effect/floor_decal/techfloor{
@@ -39663,6 +39761,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore_stairwell)
+"oYR" = (
+/obj/machinery/computer/prisoner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/shuttle/escape_pod/escape_pod5/station)
 "paW" = (
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -39928,7 +40032,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/carpet/blue2,
+/turf/simulated/floor/carpet/green,
 /area/medical/mentalhealth/therapyroom)
 "pQb" = (
 /obj/structure/bed/chair/office/comfy/blue{
@@ -40051,13 +40155,13 @@
 /turf/simulated/floor/tiled,
 /area/crew_quarters/dungeon_master_lounge)
 "qiE" = (
-/obj/effect/floor_decal/carpet/blue2{
-	dir = 8
-	},
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/carpet/blue2,
+/obj/effect/floor_decal/carpet/green{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/green,
 /area/medical/mentalhealth/therapyroom)
 "qnG" = (
 /obj/machinery/turretid/stun{
@@ -40235,6 +40339,12 @@
 /obj/effect/floor_decal/techfloor/hole,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/tcommsat/chamber)
+"rbU" = (
+/obj/machinery/computer/modular/preset/security{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/shuttle/escape_pod/escape_pod5/station)
 "rcl" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
@@ -40415,6 +40525,18 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
+"sgr" = (
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet/blue2{
+	dir = 9
+	},
+/turf/simulated/floor/carpet/blue2,
+/area/crew_quarters/heads/office/hop/cobed)
 "sjt" = (
 /obj/machinery/computer/modular/preset/medical{
 	dir = 8
@@ -40603,20 +40725,23 @@
 	dir = 8;
 	pixel_x = 24
 	},
+/obj/structure/bed/sofa/m/blue{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/hallway/infirmary)
 "syy" = (
 /obj/structure/bed/chair/comfy/brown,
-/obj/effect/floor_decal/carpet/blue2{
-	dir = 1
-	},
-/obj/effect/floor_decal/carpet/blue2{
+/obj/effect/floor_decal/carpet/green{
 	dir = 4
 	},
-/obj/effect/floor_decal/carpet/blue2{
+/obj/effect/floor_decal/carpet/green{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet/green{
 	dir = 5
 	},
-/turf/simulated/floor/carpet/blue2,
+/turf/simulated/floor/carpet/green,
 /area/medical/mentalhealth/therapyroom)
 "sAJ" = (
 /obj/structure/cable/green{
@@ -40968,6 +41093,9 @@
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/machinery/light/spot{
 	dir = 4
+	},
+/obj/structure/bed/sofa/l/blue{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/hallway/infirmary)
@@ -51630,9 +51758,9 @@ aXL
 aXL
 bbi
 bbi
-bdz
+rbU
 beo
-bdz
+oYR
 bbi
 bbi
 bcI
@@ -51831,7 +51959,7 @@ aXN
 aXL
 aXL
 bbi
-bdz
+kqT
 bdv
 bep
 bft
@@ -56674,7 +56802,7 @@ aPt
 aGE
 aUh
 aVs
-aYe
+sgr
 aYe
 wzP
 bbs
@@ -64534,7 +64662,7 @@ aqH
 arU
 atp
 akK
-eNQ
+kmz
 eNQ
 qaE
 spL
