@@ -1297,7 +1297,7 @@
 /obj/machinery/embedded_controller/radio/simple_docking_controller{
 	dir = 4;
 	frequency = 1380;
-	id_tag = "admin_shuttle";
+	id_tag = "specops_shuttle_cent";
 	pixel_x = -25;
 	req_access = list("ACCESS_CENT_GENERAL");
 	tag_door = "specops_shuttle_cent_berth_hatch"
@@ -7878,7 +7878,7 @@
 /area/centcom/holding)
 "bxn" = (
 /obj/structure/window/reinforced{
-	dir = 1;
+	dir = 1
 	},
 /obj/structure/showcase{
 	desc = "A self-contained autopilot that controls supply drones.";

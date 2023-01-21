@@ -715,6 +715,8 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/medical)
 "bL" = (
@@ -1189,6 +1191,8 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo_l)
 "cz" = (
@@ -2026,6 +2030,8 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cockpit)
 "ee" = (
@@ -2305,6 +2311,8 @@
 /area/shuttle/petrov/gas)
 "ey" = (
 /obj/structure/disposalpipe/segment,
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/wall/r_titanium,
 /area/exploration_shuttle/cargo_l)
 "ez" = (
@@ -5772,6 +5780,11 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/thirddeck/aft)
+"jT" = (
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
+/turf/simulated/wall/r_titanium,
+/area/exploration_shuttle/cargo_r)
 "jU" = (
 /obj/structure/table/rack,
 /obj/item/storage/box/lights/mixed,
@@ -8082,6 +8095,8 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/power)
 "mX" = (
@@ -11673,6 +11688,8 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo_l)
 "sw" = (
@@ -11830,6 +11847,8 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo_r)
 "sG" = (
@@ -12308,6 +12327,8 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/airlock)
 "tv" = (
@@ -12582,6 +12603,8 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo_l)
 "tZ" = (
@@ -12607,6 +12630,8 @@
 /area/maintenance/thirddeck/aft)
 "ub" = (
 /obj/structure/sign/warning/deathsposal,
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/wall/r_titanium,
 /area/exploration_shuttle/cargo_l)
 "uc" = (
@@ -13369,6 +13394,8 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo_r)
 "vp" = (
@@ -13863,6 +13890,8 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo_l)
 "we" = (
@@ -14097,6 +14126,8 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo_r)
 "wx" = (
@@ -14984,8 +15015,6 @@
 /obj/item/storage/firstaid/toxin,
 /obj/item/storage/firstaid/trauma,
 /obj/item/defibrillator,
-/obj/item/bodybag/cryobag,
-/obj/item/bodybag/cryobag,
 /obj/item/bodybag/rescue/loaded,
 /obj/item/bodybag/rescue/loaded,
 /obj/item/roller_bed,
@@ -15107,6 +15136,8 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/airlock)
 "yk" = (
@@ -15372,6 +15403,8 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo_l)
 "yB" = (
@@ -16322,6 +16355,8 @@
 /turf/simulated/floor/tiled/white,
 /area/exploration_shuttle/medical)
 "Aj" = (
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/wall/r_titanium,
 /area/exploration_shuttle/airlock)
 "Ak" = (
@@ -16624,6 +16659,8 @@
 	dir = 8;
 	icon_state = "pipe-c"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/wall/r_titanium,
 /area/exploration_shuttle/airlock)
 "AS" = (
@@ -17503,6 +17540,7 @@
 	id_tag = "guppy_shield";
 	name = "Window Shield"
 	},
+/obj/effect/paint_stripe/yellow,
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
 "Cy" = (
@@ -18799,6 +18837,8 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/firedoor,
 /obj/structure/cable/cyan,
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/airlock)
 "EG" = (
@@ -19771,6 +19811,8 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo_r)
 "Gw" = (
@@ -19819,6 +19861,8 @@
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable/cyan,
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo_l)
 "GA" = (
@@ -20299,6 +20343,8 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo_r)
 "Hi" = (
@@ -20377,6 +20423,8 @@
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo_l)
 "Ho" = (
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/wall/r_titanium,
 /area/exploration_shuttle/seats_place)
 "Hp" = (
@@ -21446,9 +21494,6 @@
 /obj/structure/window/reinforced/polarized,
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
-"IX" = (
-/turf/simulated/wall/r_titanium,
-/area/exploration_shuttle/cockpit)
 "IY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -21935,6 +21980,8 @@
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo_l)
 "JQ" = (
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/wall/r_titanium,
 /area/exploration_shuttle/cargo_l)
 "JR" = (
@@ -22780,9 +22827,6 @@
 	icon_state = "1-2"
 	},
 /obj/effect/shuttle_landmark/sierra/hangar/guppy,
-/obj/structure/bed/chair/shuttle/blue{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/visible/universal,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -23747,6 +23791,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
+	},
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/guppy_hangar/start)
@@ -24836,6 +24883,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/effect/paint/black,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cockpit)
 "OW" = (
@@ -26084,6 +26132,15 @@
 /obj/effect/floor_decal/borderfloor/corner{
 	dir = 1
 	},
+/obj/machinery/sleeper{
+	dir = 8
+	},
+/obj/structure/closet/walllocker{
+	pixel_y = 32
+	},
+/obj/item/storage/firstaid/regular,
+/obj/item/storage/med_pouch/oxyloss,
+/obj/item/storage/med_pouch/oxyloss,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/guppy_hangar/start)
 "QY" = (
@@ -27526,6 +27583,8 @@
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable/cyan,
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo_r)
 "TI" = (
@@ -27669,6 +27728,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/security/sierra/dockcheck)
 "Ue" = (
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/wall/r_titanium,
 /area/exploration_shuttle/power)
 "Uf" = (
@@ -27758,6 +27819,9 @@
 /obj/effect/floor_decal/corner/paleblue/bordercorner2{
 	dir = 10
 	},
+/obj/structure/table/reinforced,
+/obj/item/roller_bed,
+/obj/item/roller_bed,
 /turf/simulated/floor/tiled/white,
 /area/exploration_shuttle/medical)
 "Un" = (
@@ -27912,6 +27976,11 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/fore)
+"UG" = (
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
+/turf/simulated/wall/r_titanium,
+/area/exploration_shuttle/cockpit)
 "UH" = (
 /obj/machinery/firealarm{
 	pixel_y = 24
@@ -28144,6 +28213,7 @@
 	id_tag = "guppy_shield_left";
 	name = "Window Shield"
 	},
+/obj/effect/paint_stripe/yellow,
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
 "Vm" = (
@@ -28237,6 +28307,7 @@
 	name = "Protective Shutters";
 	opacity = 0
 	},
+/obj/effect/paint/black,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cockpit)
 "Vx" = (
@@ -28501,6 +28572,12 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
+"We" = (
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
+/obj/effect/paint_stripe/blue,
+/turf/simulated/wall/r_titanium,
+/area/exploration_shuttle/airlock)
 "Wf" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -28683,6 +28760,8 @@
 /area/security/sierra/dockcheck)
 "Wv" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/airlock)
 "Ww" = (
@@ -29053,6 +29132,8 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
 "Xm" = (
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/wall/r_titanium,
 /area/exploration_shuttle/medical)
 "Xo" = (
@@ -29177,6 +29258,8 @@
 	name = "Protective Shutters";
 	opacity = 0
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/seats_place)
 "XB" = (
@@ -29252,7 +29335,7 @@
 /area/shuttle/petrov/gas)
 "XJ" = (
 /obj/machinery/light{
-	dir = 1
+	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -29274,6 +29357,11 @@
 /obj/structure/table/reinforced,
 /obj/random/blood_packs,
 /obj/random/blood_packs,
+/obj/item/bodybag/cryobag,
+/obj/item/bodybag/cryobag,
+/obj/structure/closet/walllocker{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/white,
 /area/exploration_shuttle/medical)
 "XK" = (
@@ -29414,8 +29502,12 @@
 /turf/simulated/wall/r_wall/hull,
 /area/vacant/cargo)
 "Yd" = (
-/turf/simulated/wall/r_titanium,
-/area/exploration_shuttle/cargo_r)
+/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/hangar)
 "Ye" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -29763,6 +29855,8 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/effect/paint/black,
+/obj/effect/paint_stripe/blue,
 /turf/simulated/wall/r_titanium,
 /area/exploration_shuttle/airlock)
 "YV" = (
@@ -51298,7 +51392,7 @@ FY
 VF
 Yr
 Qn
-ZP
+Yd
 Bl
 zd
 XH
@@ -51500,7 +51594,7 @@ FY
 VF
 PN
 QU
-ZP
+Yd
 Bl
 Ah
 Ot
@@ -51688,7 +51782,7 @@ JQ
 JQ
 vP
 JQ
-Aj
+We
 Iq
 JS
 IU
@@ -51702,7 +51796,7 @@ hN
 VF
 Yr
 Ra
-ZP
+Yd
 Bl
 KZ
 Wc
@@ -51890,10 +51984,10 @@ Ho
 Ep
 yV
 JU
-IX
+UG
 ed
-IX
-IX
+UG
+UG
 jx
 Ue
 Ue
@@ -52092,7 +52186,7 @@ Ho
 Hx
 GW
 HT
-IX
+UG
 Iw
 em
 Vc
@@ -52488,15 +52582,15 @@ OS
 OS
 PG
 ZD
-Yd
-Yd
-Yd
+jT
+jT
+jT
 Hh
 Ho
 Hx
 GW
 HT
-IX
+UG
 Iy
 IN
 IW
@@ -52690,7 +52784,7 @@ OS
 OS
 aq
 ZD
-Yd
+jT
 Wz
 Wz
 Wz
@@ -52698,10 +52792,10 @@ Ho
 yx
 HK
 GZ
-IX
+UG
 OV
-IX
-IX
+UG
+UG
 GE
 Ue
 Uz
@@ -52896,10 +52990,10 @@ sF
 Wz
 Wz
 WB
-Yd
-Yd
+jT
+jT
 HN
-Yd
+jT
 Xm
 IB
 WS
@@ -53303,7 +53397,7 @@ Hl
 YA
 cz
 Ku
-Yd
+jT
 XJ
 Ai
 IQ
@@ -53498,14 +53592,14 @@ OS
 OS
 as
 ZD
-Yd
+jT
 Ps
 Wz
 or
 UD
 Vo
 PA
-Yd
+jT
 Xm
 Xm
 Xm
@@ -53700,14 +53794,14 @@ Qa
 LM
 as
 ZD
-Yd
-Yd
-Yd
-Yd
+jT
+jT
+jT
+jT
 Gv
 TH
-Yd
-Yd
+jT
+jT
 US
 US
 US
