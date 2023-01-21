@@ -438,26 +438,34 @@
 	if(istype(M) && !M.in_throw_mode)
 		M.OnMouseDown(object, location, control, params)
 
+#define MAXIMAZED  (1<<0)
+#define FULLSCREEN (1<<1)
+
 /client/verb/toggle_fullscreen()
 	set name = "Toggle Fullscreen"
 	set category = "OOC"
 
-	fullscreen = !fullscreen
+	fullscreen ^= FULLSCREEN
 
-	if (fullscreen)
+	if(fullscreen & FULLSCREEN)
+		if(winget(usr, "mainwindow", "is-maximized") == "true")
+			fullscreen |= MAXIMAZED
+		else
+			fullscreen &= ~MAXIMAZED
 		winset(usr, "mainwindow", "titlebar=false")
 		winset(usr, "mainwindow", "can-resize=false")
 		winset(usr, "mainwindow", "is-maximized=false")
 		winset(usr, "mainwindow", "is-maximized=true")
-		winset(usr, "mainwindow", "statusbar=false")
 		winset(usr, "mainwindow", "menu=")
-//		winset(usr, "mainwindow.mainvsplit", "size=0x0")
 	else
-		winset(usr, "mainwindow", "is-maximized=false")
+		if(!(fullscreen & MAXIMAZED))
+			winset(usr, "mainwindow", "is-maximized=false")
 		winset(usr, "mainwindow", "titlebar=true")
 		winset(usr, "mainwindow", "can-resize=true")
-		winset(usr, "mainwindow", "statusbar=true")
 		winset(usr, "mainwindow", "menu=menu")
+
+#undef MAXIMAZED
+#undef FULLSCREEN
 
 	fit_viewport()
 
@@ -476,8 +484,20 @@
 	var/aspect_ratio = view_size[1] / view_size[2]
 
 	// Calculate desired pixel width using window size and aspect ratio
-	var/sizes = params2list(winget(src, "mainwindow.mainvsplit;mapwindow", "size"))
-	var/map_size = splittext(sizes["mapwindow.size"], "x")
+	var/list/sizes = params2list(winget(src, "mainwindow.mainvsplit;mapwindow", "size"))
+
+	// Client closed the window? Some other error? This is unexpected behaviour, let's
+	// CRASH with some info.
+	if(!sizes["mapwindow.size"])
+		CRASH("sizes does not contain mapwindow.size key. This means a winget failed to return what we wanted. --- sizes var: [sizes] --- sizes length: [length(sizes)]")
+
+	var/list/map_size = splittext(sizes["mapwindow.size"], "x")
+
+	// Looks like we expect mapwindow.size to be "ixj" where i and j are numbers.
+	// If we don't get our expected 2 outputs, let's give some useful error info.
+	if(length(map_size) != 2)
+		CRASH("map_size of incorrect length --- map_size var: [map_size] --- map_size length: [length(map_size)]")
+
 	var/height = text2num(map_size[2])
 	var/desired_width = round(height * aspect_ratio)
 	if (text2num(map_size[1]) == desired_width)
@@ -486,6 +506,9 @@
 
 	var/split_size = splittext(sizes["mainwindow.mainvsplit.size"], "x")
 	var/split_width = text2num(split_size[1])
+
+	// Avoid auto-resizing the statpanel and chat into nothing.
+	desired_width = min(desired_width, split_width - 300)
 
 	// Calculate and apply a best estimate
 	// +4 pixels are for the width of the splitter's handle
@@ -510,7 +533,7 @@
 			delta = -delta/2
 
 		pct += delta
-		winset(src, "mainwindow.mainvsplit", "splitter=[pct]")
+		winset(src, "mainwindow.split", "splitter=[pct]")
 
 /client/Click(atom/A)
 	if(!user_acted(src))
@@ -574,7 +597,7 @@
 	// winget() does not work for F1 and F2
 	for(var/key in communication_hotkeys)
 		if(!(key in list("F1","F2")) && !winget(src, "default-\ref[key]", "command"))
-			to_chat(src, "You probably entered the game with a different keyboard layout.\n<a href='?src=\ref[src];reset_macros=1'>Please switch to the English layout and click here to fix the communication hotkeys.</a>")
+			to_chat(src, "<div style='border: 2px solid red; padding: 10px 20px;'><font size=3> Вероятно Вы вошли в игру с русской раскладкой клавиатуры. \n<a href='?src=\ref[src];reset_macros=1'> Пожалуйста, переключитесь на английскую раскладку и кликните сюда, чтобы исправить хоткеи коммуникаций.</a></div></font>")
 			break
 
 /client/proc/load_player_discord(client/C)
