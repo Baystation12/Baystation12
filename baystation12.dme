@@ -146,6 +146,8 @@
 #include "code\_onclick\hud\_defines.dm"
 #include "code\_onclick\hud\ability_screen_objects.dm"
 #include "code\_onclick\hud\action.dm"
+#include "code\_onclick\hud\ai.dm"
+#include "code\_onclick\hud\ai_screen_objects.dm"
 #include "code\_onclick\hud\animal.dm"
 #include "code\_onclick\hud\fullscreen.dm"
 #include "code\_onclick\hud\global_hud.dm"

@@ -191,6 +191,10 @@
 #define AI_POWERUSAGE_NORMAL 5
 #define AI_POWERUSAGE_RECHARGING 7
 
+// AI button defines
+#define AI_BUTTON_PROC_BELONGS_TO_CALLER 1
+#define AI_BUTTON_INPUT_REQUIRES_SELECTION 2
+
 // Above values get multiplied by this when converting AI oxyloss -> watts.
 // For now, one oxyloss point equals 10kJ of energy, so normal AI uses 5 oxyloss per tick (50kW or 70kW if charging)
 #define AI_POWERUSAGE_OXYLOSS_TO_WATTS_MULTIPLIER 10000
