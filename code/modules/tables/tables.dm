@@ -91,7 +91,7 @@
 	. = ..()
 
 /obj/structure/table/attackby(obj/item/W, mob/user, click_params)
-	if(!reinforced && !carpeted && material && isWrench(W) && user.a_intent == I_HURT) //robots dont have disarm so it's harm
+	if(!reinforced && !carpeted && material && isWrench(W) && user.a_intent != I_HELP) //robots dont have disarm so it's harm
 		remove_material(W, user)
 		if(!material)
 			update_connections(1)
@@ -102,7 +102,7 @@
 			update_material()
 		return 1
 
-	if(!carpeted && !reinforced && !material && isWrench(W) && user.a_intent == I_HURT)
+	if(!carpeted && !reinforced && !material && isWrench(W) && user.a_intent != I_HELP)
 		dismantle(W, user)
 		return 1
 
