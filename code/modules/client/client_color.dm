@@ -60,7 +60,7 @@
 	if(!client)
 		return
 	client.color = null
-	if(!client_colors.len)
+	if(!length(client_colors))
 		return
 	var/list/c = list(1,0,0, 0,1,0, 0,0,1) //Star at normal
 	for(var/datum/client_color/CC in client_colors)

@@ -9,7 +9,7 @@ var/global/list/whitelist = list()
 
 /proc/load_whitelist()
 	whitelist = file2list(WHITELISTFILE)
-	if(!whitelist.len)	whitelist = null
+	if(!length(whitelist))	whitelist = null
 
 /proc/check_whitelist(mob/M /*, rank*/)
 	if(!whitelist)

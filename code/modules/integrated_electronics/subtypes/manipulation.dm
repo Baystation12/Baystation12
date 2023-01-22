@@ -326,7 +326,7 @@
 		seed_output += weakref(seeds)
 	qdel(O)
 
-	if(seed_output.len)
+	if(length(seed_output))
 		set_pin_data(IC_OUTPUT, 1, seed_output)
 		push_data()
 	activate_pin(2)
@@ -355,14 +355,14 @@
 		var/mode = get_pin_data(IC_INPUT, 2)
 		if(mode == 1)
 			if(check_target(AM))
-				if((contents.len < max_items) && AM.w_class <= assembly.w_class)
+				if((length(contents) < max_items) && AM.w_class <= assembly.w_class)
 					AM.forceMove(src)
 		if(mode == 0)
-			if(contents.len)
+			if(length(contents))
 				var/obj/item/U = contents[1]
 				U.forceMove(T)
 		if(mode == -1)
-			if(contents.len)
+			if(length(contents))
 				var/obj/item/U
 				for(U in contents)
 					U.forceMove(T)
@@ -370,18 +370,18 @@
 	activate_pin(2)
 
 /obj/item/integrated_circuit/manipulation/grabber/proc/update_outputs()
-	if(contents.len)
+	if(length(contents))
 		set_pin_data(IC_OUTPUT, 1, weakref(contents[1]))
-		set_pin_data(IC_OUTPUT, 2, weakref(contents[contents.len]))
+		set_pin_data(IC_OUTPUT, 2, weakref(contents[length(contents)]))
 	else
 		set_pin_data(IC_OUTPUT, 1, null)
 		set_pin_data(IC_OUTPUT, 2, null)
-	set_pin_data(IC_OUTPUT, 3, contents.len)
+	set_pin_data(IC_OUTPUT, 3, length(contents))
 	set_pin_data(IC_OUTPUT, 4, contents)
 	push_data()
 
 /obj/item/integrated_circuit/manipulation/grabber/attack_self(mob/user)
-	if(contents.len)
+	if(length(contents))
 		var/turf/T = get_turf(src)
 		var/obj/item/U
 		for(U in contents)

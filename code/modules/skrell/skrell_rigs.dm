@@ -302,7 +302,7 @@
 
 /obj/item/clustertool/attack_self(mob/user)
 	var/new_index = _list_find(tool_modes, tool_mode) + 1
-	if(new_index > tool_modes.len)
+	if(new_index > length(tool_modes))
 		new_index = 1
 	tool_mode = tool_modes[new_index]
 	name = "[initial(name)] ([tool_mode])"

@@ -140,7 +140,7 @@
 
 	if(src.loc == W)
 		return 0 //Means the item is already in the storage item
-	if(storage_slots != null && contents.len >= storage_slots)
+	if(storage_slots != null && length(contents) >= storage_slots)
 		if(!stop_messages)
 			to_chat(user, SPAN_NOTICE("\The [src] is full, make some space."))
 		return 0 //Storage item is full
@@ -171,7 +171,7 @@
 			stop_messages = 1
 			return 0
 
-	if(cant_hold.len && is_type_in_list(W, cant_hold))
+	if(length(cant_hold) && is_type_in_list(W, cant_hold))
 		if(!stop_messages)
 			to_chat(user, SPAN_NOTICE("\The [src] cannot hold \the [W]."))
 		return 0
@@ -362,14 +362,14 @@
 		return
 
 	if (usr.IsHolding(src) && usr.HasFreeHand())
-		if (contents.len == 0)
+		if (length(contents) == 0)
 			to_chat(usr, SPAN_WARNING("\The [src] is already empty."))
 			return
 
 		var/turf/T = get_turf(src)
 		hide_from(usr)
 		usr.visible_message(SPAN_NOTICE("\The [usr] starts dumping out the contents of \the [src]."), SPAN_NOTICE("You begin dumping out the contents of \the [src]."))
-		if (do_after(usr, max(3 SECONDS, 1 SECONDS * contents.len), src, DO_PUBLIC_UNIQUE))
+		if (do_after(usr, max(3 SECONDS, 1 SECONDS * length(contents)), src, DO_PUBLIC_UNIQUE))
 			for(var/obj/item/I in contents)
 				remove_from_storage(I, T, 1)
 			finish_bulk_removal()
@@ -448,7 +448,7 @@
 			return 1
 
 /obj/item/storage/proc/make_exact_fit()
-	storage_slots = contents.len
+	storage_slots = length(contents)
 
 	can_hold.Cut()
 	max_w_class = 0

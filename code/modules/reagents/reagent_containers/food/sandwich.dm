@@ -83,14 +83,14 @@
 
 	var/image/T = new(src.icon, "sandwich_top")
 	T.pixel_x = pick(list(-1,0,1))
-	T.pixel_y = (ingredients.len * 2)+1
+	T.pixel_y = (length(ingredients) * 2)+1
 	overlays += T
 
 	fullname = english_list(ingredient_names)
 	SetName(lowertext("[fullname] sandwich"))
 	renamed = 0 //updating removes custom name
 	if(length(name) > 80) SetName("[pick(list("absurd","colossal","enormous","ridiculous"))] sandwich")
-	w_class = Ceil(clamp((ingredients.len/2),2,4))
+	w_class = Ceil(clamp((length(ingredients)/2),2,4))
 
 /obj/item/reagent_containers/food/snacks/csandwich/Destroy()
 	QDEL_NULL_LIST(ingredients)

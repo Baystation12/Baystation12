@@ -591,7 +591,7 @@
 					)
 				var/singleton/environment_data/env_info = GET_SINGLETON(environment_type)
 				for(var/gas_id in env_info.filter_gasses)
-					scrubbers[scrubbers.len]["filters"] += list(
+					scrubbers[length(scrubbers)]["filters"] += list(
 						list(
 							"name" = gas_data.name[gas_id],
 							"id"   = gas_id,
@@ -625,17 +625,17 @@
 				thresholds[LIST_PRE_INC(thresholds)] = list("name" = gas_names[g], "settings" = list())
 				selected = TLV[g]
 				for(var/i = 1, i <= 4, i++)
-					thresholds[thresholds.len]["settings"] += list(list("env" = g, "val" = i, "selected" = selected[i]))
+					thresholds[length(thresholds)]["settings"] += list(list("env" = g, "val" = i, "selected" = selected[i]))
 
 			selected = TLV["pressure"]
 			thresholds[LIST_PRE_INC(thresholds)] = list("name" = "Pressure", "settings" = list())
 			for(var/i = 1, i <= 4, i++)
-				thresholds[thresholds.len]["settings"] += list(list("env" = "pressure", "val" = i, "selected" = selected[i]))
+				thresholds[length(thresholds)]["settings"] += list(list("env" = "pressure", "val" = i, "selected" = selected[i]))
 
 			selected = TLV["temperature"]
 			thresholds[LIST_PRE_INC(thresholds)] = list("name" = "Temperature", "settings" = list())
 			for(var/i = 1, i <= 4, i++)
-				thresholds[thresholds.len]["settings"] += list(list("env" = "temperature", "val" = i, "selected" = selected[i]))
+				thresholds[length(thresholds)]["settings"] += list(list("env" = "temperature", "val" = i, "selected" = selected[i]))
 
 
 			data["thresholds"] = thresholds

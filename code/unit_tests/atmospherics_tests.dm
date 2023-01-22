@@ -15,7 +15,7 @@
 		var/datum/gas_mixture/gas_mix = new (CELL_VOLUME, mix_data["temperature"])
 
 		var/list/initial_gas = mix_data["initial_gas"]
-		if(initial_gas.len)
+		if(length(initial_gas))
 			var/list/gas_args = list()
 			for(var/gasid in initial_gas)
 				gas_args += gasid

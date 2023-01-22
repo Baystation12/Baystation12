@@ -23,7 +23,7 @@
 		var/gasnum = rand(1,4)
 		var/i = 1
 		var/sanity = prob(99.9)
-		while (i <= gasnum && total_moles && newgases.len)
+		while (i <= gasnum && total_moles && length(newgases))
 			if (badflag && sanity)
 				for(var/g in newgases)
 					if (gas_data.flags[g] & badflag)
@@ -37,7 +37,7 @@
 				sanity = 0
 
 			var/part = total_moles * rand(3,80)/100 //allocate percentage to it
-			if (i == gasnum || !newgases.len) //if it's last gas, let it have all remaining moles
+			if (i == gasnum || !length(newgases)) //if it's last gas, let it have all remaining moles
 				part = total_moles
 			atmosphere.gas[ng] += part
 			total_moles = max(total_moles - part, 0)
@@ -48,5 +48,5 @@
 	for (var/g in atmosphere.gas)
 		if (gas_data.tile_overlay_color[g])
 			colors += gas_data.tile_overlay_color[g]
-	if (colors.len)
+	if (length(colors))
 		return MixColors(colors)

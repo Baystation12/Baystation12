@@ -496,10 +496,10 @@ var/global/list/turret_icons
 	return H.assess_perp(src, check_access, check_weapons, check_records, check_arrest)
 
 /obj/machinery/porta_turret/proc/tryToShootAt(list/mob/living/targets)
-	if(targets.len && last_target && (last_target in targets) && target(last_target))
+	if(length(targets) && last_target && (last_target in targets) && target(last_target))
 		return 1
 
-	while(targets.len > 0)
+	while(length(targets) > 0)
 		var/mob/living/M = pick(targets)
 		targets -= M
 		if(target(M))

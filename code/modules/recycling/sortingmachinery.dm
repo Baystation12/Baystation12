@@ -133,7 +133,7 @@
 	var/tag_x
 
 /obj/item/smallDelivery/proc/unwrap(mob/user)
-	if (!contents.len || !Adjacent(user))
+	if (!length(contents) || !Adjacent(user))
 		return
 
 	user.put_in_hands(wrapped)
@@ -445,7 +445,7 @@
 	if(prob(35))
 		for(var/mob/living/carbon/human/L in src)
 			var/list/obj/item/organ/external/crush = L.get_damageable_organs()
-			if(!crush.len)
+			if(!length(crush))
 				return
 
 			var/obj/item/organ/external/E = pick(crush)

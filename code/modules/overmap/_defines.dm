@@ -30,7 +30,7 @@ var/global/list/map_sectors = list()
 	if(y == 1 || y == GLOB.using_map.overmap_size)
 		numbers += list("[round(x/10)]","[round(x%10)]")
 
-	for(var/i = 1 to numbers.len)
+	for(var/i = 1 to length(numbers))
 		var/image/I = image('icons/effects/numbers.dmi',numbers[i])
 		I.pixel_x = 5*i - 2
 		I.pixel_y = world.icon_size/2 - 3

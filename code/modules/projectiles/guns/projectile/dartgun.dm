@@ -97,7 +97,7 @@
 
 /obj/item/gun/projectile/dartgun/examine(mob/user)
 	. = ..()
-	if (beakers.len)
+	if (length(beakers))
 		to_chat(user, SPAN_NOTICE("\The [src] contains:"))
 		for(var/obj/item/reagent_containers/glass/beaker/B in beakers)
 			if(B.reagents && B.reagents.reagent_list.len)
@@ -114,7 +114,7 @@
 	if(!istype(B, container_type))
 		to_chat(user, SPAN_WARNING("[B] doesn't seem to fit into [src]."))
 		return
-	if(beakers.len >= max_beakers)
+	if(length(beakers) >= max_beakers)
 		to_chat(user, SPAN_WARNING("[src] already has [max_beakers] beakers in it - another one isn't going to fit!"))
 		return
 	if(!user.unEquip(B, src))
@@ -130,8 +130,8 @@
 
 //fills the given dart with reagents
 /obj/item/gun/projectile/dartgun/proc/fill_dart(obj/item/projectile/bullet/chemdart/dart)
-	if(mixing.len)
-		var/mix_amount = dart.reagent_amount/mixing.len
+	if(length(mixing))
+		var/mix_amount = dart.reagent_amount/length(mixing)
 		for(var/obj/item/reagent_containers/glass/beaker/B in mixing)
 			B.reagents.trans_to_obj(dart, mix_amount)
 
@@ -142,10 +142,10 @@
 	user.set_machine(src)
 	var/list/dat = list("<b>[src] mixing control:</b><br><br>")
 
-	if (!beakers.len)
+	if (!length(beakers))
 		dat += "There are no beakers inserted!<br><br>"
 	else
-		for(var/i in 1 to beakers.len)
+		for(var/i in 1 to length(beakers))
 			var/obj/item/reagent_containers/glass/beaker/B = beakers[i]
 			if(!istype(B)) continue
 

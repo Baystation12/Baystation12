@@ -34,7 +34,7 @@
 	handle_stance()
 	handle_grasp()
 
-	if(!force_process && !bad_external_organs.len)
+	if(!force_process && !length(bad_external_organs))
 		return
 
 	for(var/obj/item/organ/external/E in bad_external_organs)

@@ -106,10 +106,10 @@
 		choices |= "Gunshot Residue"
 
 	var/choice
-	if(!choices.len)
+	if(!length(choices))
 		to_chat(user, SPAN_WARNING("There is no evidence on \the [A]."))
 		return
-	else if(choices.len == 1)
+	else if(length(choices) == 1)
 		choice = choices[1]
 	else
 		choice = input("What kind of evidence are you looking for?","Evidence Collection") as null|anything in choices

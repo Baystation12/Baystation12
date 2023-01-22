@@ -23,7 +23,7 @@
 
 /obj/item/gun/projectile/flare/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 2 && loaded.len)
+	if(distance <= 2 && length(loaded))
 		to_chat(user, "\A [loaded[1]] is chambered.")
 
 /obj/item/gun/projectile/flare/special_check()

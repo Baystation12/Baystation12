@@ -171,7 +171,7 @@
 		if(topic_data)
 			listed_components = TRUE
 			HTML += "<b>[circuit.displayed_name]: </b>"
-			if(topic_data.len != 1)
+			if(length(topic_data) != 1)
 				HTML += "<br>"
 			for(var/entry in topic_data)
 				var/href = topic_data[entry]
@@ -233,7 +233,7 @@
 /obj/item/device/electronic_assembly/Topic(href, href_list)
 	if(href_list["ghostscan"])
 		if((isobserver(usr) && ckeys_allowed_to_scan[usr.ckey]) || check_rights(R_ADMIN,0,usr))
-			if(assembly_components.len)
+			if(length(assembly_components))
 				var/saved = "On circuit printers with cloning enabled, you may use the code below to clone the circuit:<br><br><code>[SScircuit.save_electronic_assembly(src)]</code>"
 				show_browser(usr, saved, "window=circuit_scan;size=500x600;border=1;can_resize=1;can_close=1;can_minimize=1")
 			else

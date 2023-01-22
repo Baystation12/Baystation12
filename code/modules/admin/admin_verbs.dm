@@ -815,7 +815,7 @@ var/global/list/admin_verbs_mod = list(
 		for (var/datum/job/J in SSjobs.primary_job_datums)
 			if(!J.is_position_available())
 				jobs[J.title] = J
-		if (!jobs.len)
+		if (!length(jobs))
 			to_chat(usr, "There are no fully staffed jobs.")
 			return
 		var/job_title = input("Please select job slot to free", "Free job slot")  as null|anything in jobs

@@ -69,11 +69,11 @@
 /singleton/observ/proc/is_listening(event_source, datum/listener, proc_call)
 	// Return whether there are global listeners unless the event source is given.
 	if (!event_source)
-		return !!global_listeners.len
+		return !!length(global_listeners)
 
 	// Return whether anything is listening to a source, if no listener is given.
 	if (!listener)
-		return global_listeners.len || event_sources[event_source]
+		return length(global_listeners) || event_sources[event_source]
 
 	// Return false if nothing is associated with that source.
 	if (!event_sources[event_source])
@@ -143,7 +143,7 @@
 	if (!proc_call)
 		if(listeners.Remove(listener))
 			// Perform some cleanup and return true.
-			if (!listeners.len)
+			if (!length(listeners))
 				event_sources -= event_source
 			return TRUE
 		return FALSE
@@ -157,9 +157,9 @@
 	if(!callbacks.Remove(proc_call))
 		return FALSE
 
-	if (!callbacks.len)
+	if (!length(callbacks))
 		listeners -= listener
-	if (!listeners.len)
+	if (!length(listeners))
 		event_sources -= event_source
 	return TRUE
 
@@ -197,16 +197,16 @@
 	if(!callbacks.Remove(proc_call))
 		return FALSE
 
-	if (!callbacks.len)
+	if (!length(callbacks))
 		global_listeners -= listener
 	return TRUE
 
 /singleton/observ/proc/raise_event()
 	// Sanity
-	if (!args.len)
+	if (!length(args))
 		return FALSE
 
-	if (global_listeners.len)
+	if (length(global_listeners))
 		// Call the global listeners.
 		for (var/listener in global_listeners)
 			var/list/callbacks = global_listeners[listener]

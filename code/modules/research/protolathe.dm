@@ -29,7 +29,7 @@
 	if(inoperable())
 		update_icon()
 		return
-	if(queue.len == 0)
+	if(length(queue) == 0)
 		busy = 0
 		update_icon()
 		return

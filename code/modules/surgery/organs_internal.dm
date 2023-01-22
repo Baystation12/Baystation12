@@ -104,7 +104,7 @@
 		to_chat(user, SPAN_WARNING("You can't find any organs to separate."))
 	else
 		var/obj/item/organ/organ_to_remove = attached_organs[1]
-		if(attached_organs.len > 1)
+		if(length(attached_organs) > 1)
 			organ_to_remove = input(user, "Which organ do you want to separate?") as null|anything in attached_organs
 		if(organ_to_remove)
 			return organ_to_remove
@@ -155,7 +155,7 @@
 			to_chat(user, SPAN_WARNING("You can't find any removable organs."))
 		else
 			var/obj/item/organ/organ_to_remove = removable_organs[1]
-			if(removable_organs.len > 1)
+			if(length(removable_organs) > 1)
 				organ_to_remove = input(user, "Which organ do you want to remove?") as null|anything in removable_organs
 			if(organ_to_remove)
 				return organ_to_remove
@@ -414,10 +414,10 @@
 	for(var/obj/item/organ/internal/I in target.internal_organs)
 		if(I && !(I.status & ORGAN_CUT_AWAY) && (I.status & ORGAN_DEAD) && I.parent_organ == affected.organ_tag && !BP_IS_ROBOTIC(I))
 			dead_organs |= I
-	if(!dead_organs.len)
+	if(!length(dead_organs))
 		return FALSE
 	var/obj/item/organ/internal/organ_to_fix = dead_organs[1]
-	if(dead_organs.len > 1)
+	if(length(dead_organs) > 1)
 		organ_to_fix = input(user, "Which organ do you want to regenerate?") as null|anything in dead_organs
 	if(!organ_to_fix)
 		return FALSE

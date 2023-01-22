@@ -115,7 +115,7 @@
 /DBQuery/proc/GetRowData()
 	var/list/columns = Columns()
 	var/list/results
-	if(columns.len)
+	if(length(columns))
 		results = list()
 		for(var/C in columns)
 			results+=C
@@ -137,7 +137,7 @@
 		column = columns.Find(column)
 	if(!conversions)
 		conversions = new (column)
-	else if(conversions.len < column)
+	else if(length(conversions) < column)
 		LIST_RESIZE(conversions, column)
 	conversions[column] = conversion
 

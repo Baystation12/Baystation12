@@ -413,7 +413,7 @@ Helpers
 
 /datum/controller/subsystem/ticker/proc/attempt_late_antag_spawn(list/antag_choices)
 	var/datum/antagonist/antag = antag_choices[1]
-	while(antag_choices.len && antag)
+	while(length(antag_choices) && antag)
 		var/needs_ghost = antag.flags & (ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB)
 		if (needs_ghost)
 			looking_for_antags = 1
@@ -530,7 +530,7 @@ Helpers
 	if(dronecount)
 		to_world("<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance [dronecount>1 ? "drones" : "drone"] at the end of this round.</b>")
 
-	if(all_money_accounts.len)
+	if(length(all_money_accounts))
 		var/datum/money_account/max_profit = all_money_accounts[1]
 		var/datum/money_account/max_loss = all_money_accounts[1]
 		for(var/datum/money_account/D in all_money_accounts)

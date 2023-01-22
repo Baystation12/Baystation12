@@ -35,7 +35,7 @@
 		return
 
 	var/list/dron_turfs = get_area_turfs(location, list(/proc/not_turf_contains_dense_objects, /proc/IsTurfAtmosSafe))
-	if(!dron_turfs.len)
+	if(!length(dron_turfs))
 		log_debug("Drone infestation failed to find viable turfs in \the [location].")
 		kill(TRUE)
 		return

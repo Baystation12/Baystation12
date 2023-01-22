@@ -39,7 +39,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	return igniting
 
 /zone/proc/process_fire()
-	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, fire_tiles.len)
+	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, length(fire_tiles))
 
 	var/firelevel = burn_gas.react(src, fire_tiles, force_burn = 1, no_check = 1)
 
@@ -57,7 +57,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 				qdel(T.hotspot)
 		fire_tiles.Cut()
 
-	if(!fire_tiles.len)
+	if(!length(fire_tiles))
 		SSair.active_fire_zones.Remove(src)
 
 /turf/proc/create_fire(fl)
@@ -294,7 +294,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	if(!.)
 		return 0
 
-	if(fuel_objs && fuel_objs.len)
+	if(fuel_objs && length(fuel_objs))
 		return 1
 
 	. = 0

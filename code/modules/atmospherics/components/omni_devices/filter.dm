@@ -88,7 +88,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 /obj/machinery/atmospherics/omni/filter/error_check()
 	if(!input || !output || !gas_filters)
 		return 1
-	if(gas_filters.len < 1) //requires at least 1 filter ~otherwise why are you using a filter?
+	if(length(gas_filters) < 1) //requires at least 1 filter ~otherwise why are you using a filter?
 		return 1
 
 	return 0
@@ -178,7 +178,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 										"filter" = is_filter, \
 										"f_type" = f_type)
 
-	if(portData.len)
+	if(length(portData))
 		data["ports"] = portData
 	if(output)
 		data["set_flow_rate"] = round(set_flow_rate*10)		//because nanoui can't handle rounded decimals.

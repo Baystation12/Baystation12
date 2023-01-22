@@ -20,7 +20,7 @@
 		if(!SS.initialized)
 			bad_subsystems += SS.type
 
-	if(bad_subsystems.len)
+	if(length(bad_subsystems))
 		fail("Found improperly initialized subsystems: [english_list(bad_subsystems)]")
 	else
 		pass("All susbsystems have initialized properly")

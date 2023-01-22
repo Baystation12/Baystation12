@@ -347,7 +347,7 @@
 
 	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
 	var/i = 0
-	while(candidates.len <= 0 && i < 5)
+	while(length(candidates) <= 0 && i < 5)
 		for(var/mob/observer/ghost/G in GLOB.player_list)
 			if(((G.client.inactivity/10)/60) <= buffer + i) // the most active players are more likely to become an alien
 				if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
@@ -440,7 +440,7 @@
 	var/list/greens = list()
 	var/list/weights = list()
 
-	for (var/i = 0, ++i <= colors.len)
+	for (var/i = 0, ++i <= length(colors))
 		reds.Add(GetRedPart(colors[i]))
 		blues.Add(GetBluePart(colors[i]))
 		greens.Add(GetGreenPart(colors[i]))
@@ -519,10 +519,10 @@
 			if(WEST)
 				direction = 4
 		var/turf/simulated/T=get_turf(get_step(loc,dir))
-		var/list/rstats = new /list(stats.len)
+		var/list/rstats = new /list(length(stats))
 		if(T && istype(T) && T.zone)
 			var/datum/gas_mixture/environment = T.return_air()
-			for(var/i=1;i<=stats.len;i++)
+			for(var/i=1;i<=length(stats);i++)
 				if(stats[i] == "pressure")
 					rstats[i] = environment.return_pressure()
 				else
@@ -532,7 +532,7 @@
 		else if(istype(T, /turf))
 			// Should still work.  (/turf/return_air())
 			var/datum/gas_mixture/environment = T.return_air()
-			for(var/i=1;i<=stats.len;i++)
+			for(var/i=1;i<=length(stats);i++)
 				if(stats[i] == "pressure")
 					rstats[i] = environment.return_pressure()
 				else

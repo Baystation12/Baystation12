@@ -73,7 +73,7 @@
 /obj/item/stock_parts/computer/hard_drive/diagnostics()
 	. = ..()
 	// 999 is a byond limit that is in place. It's unlikely someone will reach that many files anyway, since you would sooner run out of space.
-	. += "NT-NFS File Table Status: [stored_files.len]/999"
+	. += "NT-NFS File Table Status: [length(stored_files)]/999"
 	. += "Storage capacity: [used_capacity]/[max_capacity]GQ"
 	. += "Read-only mode: [(read_only ? "ON" : "OFF")]"
 
@@ -215,7 +215,7 @@
 /obj/item/stock_parts/computer/hard_drive/proc/can_store_file(size = 1, replaced_size = 0)
 	// In the unlikely event someone manages to create that many files.
 	// BYOND is acting weird with numbers above 999 in loops (infinite loop prevention)
-	if(stored_files.len >= 999)
+	if(length(stored_files) >= 999)
 		return FALSE
 	if(used_capacity + size - replaced_size > max_capacity)
 		return FALSE
@@ -251,4 +251,3 @@
 /obj/item/stock_parts/computer/hard_drive/Destroy()
 	stored_files = null
 	return ..()
-

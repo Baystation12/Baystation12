@@ -117,7 +117,7 @@ var/global/list/gear_datums = list()
 	. = list()
 	var/total_cost = 0
 	var/list/gears = pref.gear_list[pref.gear_slot]
-	for(var/i = 1; i <= gears.len; i++)
+	for(var/i = 1; i <= length(gears); i++)
 		var/datum/gear/G = gear_datums[gears[i]]
 		if(G)
 			total_cost += G.cost

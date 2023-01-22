@@ -133,11 +133,11 @@
 	if (state == BG_READY)
 		data["points"] = points
 		var/list/listed_types = list()
-		for(var/c_type =1 to products.len)
+		for(var/c_type =1 to length(products))
 			type_name = products[c_type]
 			var/list/current_content = products[type_name]
 			var/list/listed_products = list()
-			for(var/c_product =1 to current_content.len)
+			for(var/c_product =1 to length(current_content))
 				path = current_content[c_product]
 				var/atom/A = path
 				name = initial(A.name)
@@ -174,7 +174,7 @@
 			if (isnull(products[type]))
 				return TOPIC_REFRESH
 			var/list/sub_products = products[type]
-			if (product_index < 1 || product_index > sub_products.len)
+			if (product_index < 1 || product_index > length(sub_products))
 				return TOPIC_REFRESH
 			create_product(type, sub_products[product_index])
 		if("return")

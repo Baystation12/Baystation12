@@ -115,7 +115,7 @@
 	if(suit_overlay_inactive)
 		suit_overlay = suit_overlay_inactive
 
-	if(charges && charges.len)
+	if(charges && length(charges))
 		var/list/processed_charges = list()
 		for(var/list/charge in charges)
 			var/datum/rig_charge/charge_dat = new

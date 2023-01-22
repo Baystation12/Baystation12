@@ -6,7 +6,7 @@
 
 	current_vote = new vote_type(src, voter)
 
-	if(!nymphs || nymphs.len < current_vote.minimum_nymphs)
+	if(!nymphs || length(nymphs) < current_vote.minimum_nymphs)
 		to_chat(voter, SPAN_WARNING("There are not enough nymphs in the gestalt for this form to be viable."))
 		QDEL_NULL(current_vote)
 		return

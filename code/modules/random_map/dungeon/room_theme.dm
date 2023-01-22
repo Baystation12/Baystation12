@@ -59,7 +59,7 @@
 		new door_type(T)
 
 /datum/room_theme/proc/get_a_room_layout()
-	if(room_layouts.len && prob(layout_chance))
+	if(length(room_layouts) && prob(layout_chance))
 		return pickweight(room_layouts)
 	return null
 

@@ -134,7 +134,7 @@ var/global/list/delta_index = list(
 /proc/multiply_matrices(list/A, list/B, m, n, p)
 	var/list/result = new (m * p)
 
-	if(A.len == m*n && B.len == n*p)
+	if(length(A) == m*n && length(B) == n*p)
 		for(var/row = 1; row <= m; row += 1) //For each row on left matrix
 			for(var/col = 1; col <= p; col += 1) //go over each column of the second matrix
 				var/sum = 0

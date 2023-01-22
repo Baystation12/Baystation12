@@ -122,7 +122,7 @@ var/global/list/default_pai_software = list()
 
 		else if(href_list["image"])
 			var/img = text2num(href_list["image"])
-			if(1 <= img && img <= pai_emotions.len)
+			if(1 <= img && img <= length(pai_emotions))
 				card.setEmotion(img)
 			return TOPIC_HANDLED
 

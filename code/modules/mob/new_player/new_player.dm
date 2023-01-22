@@ -97,7 +97,7 @@
 								if (role in mode.antag_tags)
 									readied_antag_roles += role
 
-						var/antag_role_text = "[readied_antag_roles.len ? "Readied for ([english_list(readied_antag_roles)])" : ""]"
+						var/antag_role_text = "[length(readied_antag_roles) ? "Readied for ([english_list(readied_antag_roles)])" : ""]"
 						stat("[player.key]", (player.ready && (show_ready || can_see_hidden)?("(Playing[highjob]) [(can_see_hidden && !show_ready) ? "(Hidden)" : ""] [antag_role_text]"):(null)))
 				totalPlayers++
 				if(player.ready)totalPlayersReady++

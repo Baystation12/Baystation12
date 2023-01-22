@@ -35,7 +35,7 @@
 
 	// Uninstall a robotic part.
 	if(isCrowbar(W))
-		if(!parts.len)
+		if(!length(parts))
 			to_chat(user, SPAN_WARNING("\The [src] has no parts to remove."))
 			return
 		var/removing = pick(parts)

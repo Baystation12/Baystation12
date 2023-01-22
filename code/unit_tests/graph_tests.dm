@@ -319,8 +319,8 @@
 	issues = list()
 
 /datum/graph/testing/OnSplit(list/subgraphs)
-	if(length(split_expectations) != subgraphs.len)
-		issues += "Expected number of subgrapghs is [subgraphs.len], was [length(split_expectations)]"
+	if(length(split_expectations) != length(subgraphs))
+		issues += "Expected number of subgrapghs is [length(subgraphs)], was [length(split_expectations)]"
 	else if(length(split_expectations))
 		var/list/unexpected_subgraphs = list()
 		var/list/split_expectations_copy = split_expectations.Copy()

@@ -168,7 +168,7 @@
 		. = TOPIC_REFRESH
 
 	else if (href_list["issue"])
-		if (giver && accesses.len)
+		if (giver && length(accesses))
 			var/number = pad_left(random_id("guestpass_id_number", 1, 9999), 6, "0")
 			var/entry = "\[[stationtime2text()]\] Pass #[number] issued by [giver.registered_name] ([giver.assignment]) to [giv_name]. Reason: [reason]. Granted access to following areas: "
 			var/list/access_descriptors = list()
@@ -191,5 +191,5 @@
 			. = TOPIC_REFRESH
 		else if(!giver)
 			to_chat(user, SPAN_WARNING("Cannot issue pass without issuing ID."))
-		else if(!accesses.len)
+		else if(!length(accesses))
 			to_chat(user, SPAN_WARNING("Cannot issue pass without at least one granted access permission."))

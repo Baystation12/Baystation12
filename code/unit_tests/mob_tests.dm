@@ -492,7 +492,7 @@ var/global/default_mobloc = null
 
 	var/list/valid_states = icon_states(icon_file)
 
-	if(!valid_states.len)
+	if(!length(valid_states))
 		return 1
 
 	for(var/i=1, i<=SSrobots.all_module_names.len, i++)

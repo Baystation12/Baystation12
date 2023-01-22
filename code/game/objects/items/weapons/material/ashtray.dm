@@ -13,17 +13,17 @@
 	. = ..()
 	if(material)
 		to_chat(user, "It's made of [material.display_name].")
-	if(contents.len >= max_butts)
+	if(length(contents) >= max_butts)
 		to_chat(user, "It's full.")
-	else if(contents.len)
-		to_chat(user, "It has [contents.len] cig butts in it.")
+	else if(length(contents))
+		to_chat(user, "It has [length(contents)] cig butts in it.")
 
 /obj/item/material/ashtray/on_update_icon()
 	..()
 	overlays.Cut()
-	if (contents.len == max_butts)
+	if (length(contents) == max_butts)
 		overlays |= image('icons/obj/objects.dmi',"ashtray_full")
-	else if (contents.len >= max_butts/2)
+	else if (length(contents) >= max_butts/2)
 		overlays |= image('icons/obj/objects.dmi',"ashtray_half")
 
 /obj/item/material/ashtray/attackby(obj/item/W as obj, mob/user as mob)
@@ -35,7 +35,7 @@
 		return
 
 	if (istype(W,/obj/item/trash/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/flame/match))
-		if (contents.len >= max_butts)
+		if (length(contents) >= max_butts)
 			to_chat(user, "\The [src] is full.")
 			return
 
@@ -57,7 +57,7 @@
 
 /obj/item/material/ashtray/throw_impact(atom/hit_atom)
 	if (health_max)
-		if (contents.len)
+		if (length(contents))
 			visible_message(SPAN_DANGER("\The [src] slams into [hit_atom], spilling its contents!"))
 			for (var/obj/O in contents)
 				O.dropInto(loc)

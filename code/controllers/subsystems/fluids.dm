@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(fluids)
 /datum/controller/subsystem/fluids/UpdateStat(time)
 	if (PreventUpdateStat(time))
 		return ..()
-	..("Sources: [water_sources.len] Active Fluids: [active_fluids.len]")
+	..("Sources: [length(water_sources)] Active Fluids: [length(active_fluids)]")
 
 
 /datum/controller/subsystem/fluids/fire(resumed = 0)
@@ -43,8 +43,8 @@ SUBSYSTEM_DEF(fluids)
 	var/dry_run = FALSE
 	var/flooded_a_neighbor // Not used, required by FLOOD_TURF_NEIGHBORS.
 	var/list/curr_sources = processing_sources
-	while (curr_sources.len)
-		var/turf/T = curr_sources[curr_sources.len]
+	while (length(curr_sources))
+		var/turf/T = curr_sources[length(curr_sources)]
 		LIST_DEC(curr_sources)
 
 		FLOOD_TURF_NEIGHBORS(T, dry_run)
@@ -57,7 +57,7 @@ SUBSYSTEM_DEF(fluids)
 		processing_fluids = active_fluids.Copy()
 
 	// We need to iterate through this list a few times, so we're using indexes instead of a while-truncate loop.
-	while (af_index <= processing_fluids.len)
+	while (af_index <= length(processing_fluids))
 		var/obj/effect/fluid/F = processing_fluids[af_index++]
 		if (QDELETED(F))
 			processing_fluids -= F
@@ -110,7 +110,7 @@ SUBSYSTEM_DEF(fluids)
 
 	af_index = 1
 
-	while (af_index <= processing_fluids.len)
+	while (af_index <= length(processing_fluids))
 		var/obj/effect/fluid/F = processing_fluids[af_index++]
 		if (QDELETED(F))
 			processing_fluids -= F
@@ -168,7 +168,7 @@ SUBSYSTEM_DEF(fluids)
 
 	af_index = 1
 
-	while (af_index <= processing_fluids.len)
+	while (af_index <= length(processing_fluids))
 		var/obj/effect/fluid/F = processing_fluids[af_index++]
 		if (QDELETED(F))
 			processing_fluids -= F
@@ -201,7 +201,7 @@ SUBSYSTEM_DEF(fluids)
 	if(world.time >= next_water_act)
 		next_water_act = world.time + water_act_delay
 		af_index = 1
-		while (af_index <= processing_fluids.len)
+		while (af_index <= length(processing_fluids))
 			var/obj/effect/fluid/F = processing_fluids[af_index++]
 			var/turf/T = get_turf(F)
 			if(istype(T) && !QDELETED(F))

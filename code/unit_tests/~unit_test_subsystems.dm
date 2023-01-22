@@ -33,7 +33,7 @@ SUBSYSTEM_DEF(unit_tests)
 	SSticker.master_mode = "extended"
 	for(var/test_datum_type in get_test_datums())
 		queue += new test_datum_type
-	log_unit_test("[queue.len] unit tests loaded.")
+	log_unit_test("[length(queue)] unit tests loaded.")
 
 
 /datum/controller/subsystem/unit_tests/proc/load_map_templates()
@@ -81,15 +81,15 @@ SUBSYSTEM_DEF(unit_tests)
 
 /datum/controller/subsystem/unit_tests/proc/handle_tests()
 	var/list/curr = queue
-	while (curr.len)
-		var/datum/unit_test/test = curr[curr.len]
+	while (length(curr))
+		var/datum/unit_test/test = curr[length(curr)]
 		LIST_DEC(curr)
 		if(do_unit_test(test, end_unit_tests) && test.async)
 			async_tests += test
 		total_unit_tests++
 		if (MC_TICK_CHECK)
 			return
-	if (!curr.len)
+	if (!length(curr))
 		stage++
 
 /datum/controller/subsystem/unit_tests/proc/handle_async(resumed = 0)
@@ -97,8 +97,8 @@ SUBSYSTEM_DEF(unit_tests)
 		current_async = async_tests.Copy()
 
 	var/list/async = current_async
-	while (async.len)
-		var/datum/unit_test/test = current_async[async.len]
+	while (length(async))
+		var/datum/unit_test/test = current_async[length(async)]
 		for(var/S in test.subsystems_to_await())
 			var/datum/controller/subsystem/subsystem = S
 			if(subsystem.times_fired < 1)
@@ -108,7 +108,7 @@ SUBSYSTEM_DEF(unit_tests)
 			async_tests -= test
 		if (MC_TICK_CHECK)
 			return
-	if (!async_tests.len)
+	if (!length(async_tests))
 		stage++
 
 /datum/controller/subsystem/unit_tests/fire(resumed = 0)

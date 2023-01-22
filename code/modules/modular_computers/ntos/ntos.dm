@@ -147,7 +147,7 @@
 
 	if(P in running_programs)
 		return P
-	if(running_programs.len >= get_program_capacity())
+	if(length(running_programs) >= get_program_capacity())
 		loud && show_error(user, "Kernel Error - Insufficient CPU resources available to allocate.")
 		return
 	if(!P.can_run(user, loud))

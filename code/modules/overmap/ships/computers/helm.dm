@@ -155,11 +155,11 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	if (href_list["add"])
 		var/datum/computer_file/data/waypoint/R = new()
-		var/sec_name = input("Input naviation entry name", "New navigation entry", "Sector #[known_sectors.len]") as text
+		var/sec_name = input("Input naviation entry name", "New navigation entry", "Sector #[length(known_sectors)]") as text
 		if(!CanInteract(user,state))
 			return TOPIC_NOACTION
 		if(!sec_name)
-			sec_name = "Sector #[known_sectors.len]"
+			sec_name = "Sector #[length(known_sectors)]"
 		R.fields["name"] = sec_name
 		if(sec_name in known_sectors)
 			to_chat(user, SPAN_WARNING("Sector with that name already exists, please input a different name."))

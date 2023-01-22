@@ -110,13 +110,13 @@
 /client/proc/mod_list(list/L, atom/O, original_name, objectvar)
 	if(!check_rights(R_VAREDIT))	return
 	if(!istype(L,/list)) to_chat(src, "Not a List.")
-	if(L.len > 1000)
+	if(length(L) > 1000)
 		var/confirm = alert(src, "The list you're trying to edit is very long, continuing may crash the server.", "Warning", "Continue", "Abort")
 		if(confirm != "Continue")
 			return
 
 	var/assoc = 0
-	if(L.len > 0)
+	if(length(L) > 0)
 		var/a = L[1]
 		try
 			if(!isnum(a) && L[a] != null)

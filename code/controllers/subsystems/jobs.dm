@@ -247,7 +247,7 @@ SUBSYSTEM_DEF(jobs)
 			var/datum/job/job = get_by_title(command_position)
 			if(!job)	continue
 			var/list/candidates = find_occupation_candidates(job, level)
-			if(!candidates.len)	continue
+			if(!length(candidates))	continue
 			// Build a weighted list, weight by age.
 			var/list/weightedCandidates = list()
 			for(var/mob/V in candidates)
@@ -269,7 +269,7 @@ SUBSYSTEM_DEF(jobs)
 						weightedCandidates[V] = 3 // Geezer.
 					else
 						// If there's ABSOLUTELY NOBODY ELSE
-						if(candidates.len == 1) weightedCandidates[V] = 1
+						if(length(candidates) == 1) weightedCandidates[V] = 1
 			var/mob/new_player/candidate = pickweight(weightedCandidates)
 			if(assign_role(candidate, command_position, mode = mode))
 				return 1
@@ -281,7 +281,7 @@ SUBSYSTEM_DEF(jobs)
 		var/datum/job/job = get_by_title(command_position)
 		if(!job)	continue
 		var/list/candidates = find_occupation_candidates(job, level)
-		if(!candidates.len)	continue
+		if(!length(candidates))	continue
 		var/mob/new_player/candidate = pick(candidates)
 		assign_role(candidate, command_position, mode = mode)
 
@@ -294,7 +294,7 @@ SUBSYSTEM_DEF(jobs)
 	for(var/mob/new_player/player in GLOB.player_list)
 		if(player.ready && player.mind && !player.mind.assigned_role)
 			unassigned_roundstart += player
-	if(unassigned_roundstart.len == 0)	return 0
+	if(length(unassigned_roundstart) == 0)	return 0
 	//Shuffle players and jobs
 	unassigned_roundstart = shuffle(unassigned_roundstart)
 	//People who wants to be assistants, sure, go on.

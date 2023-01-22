@@ -119,7 +119,7 @@
 			var/datum/depth_scan/D = new()
 			D.coords = "[M.x]:[M.y]:[M.z]"
 			D.time = stationtime2text()
-			D.record_index = positive_locations.len + 1
+			D.record_index = length(positive_locations) + 1
 			D.material = M.mineral ? M.mineral.ore_name : "Rock"
 
 			//find the first artifact and store it
@@ -141,7 +141,7 @@
 			var/datum/depth_scan/D = new()
 			D.coords = "[B.x]:[B.y]:[B.z]"
 			D.time = stationtime2text()
-			D.record_index = positive_locations.len + 1
+			D.record_index = length(positive_locations) + 1
 
 			//these values are arbitrary
 			D.depth = rand(150, 200)
@@ -171,7 +171,7 @@
 		dat += "Anomaly size: [current.clearance] cm<br>"
 		dat += "Dissonance spread: [current.dissonance_spread]<br>"
 		var/index = responsive_carriers.Find(current.material)
-		if(index > 0 && index <= finds_as_strings.len)
+		if(index > 0 && index <= length(finds_as_strings))
 			dat += "Anomaly material: [finds_as_strings[index]]<br>"
 		else
 			dat += "Anomaly material: Unknown<br>"
@@ -180,8 +180,8 @@
 		dat += "Select an entry from the list<br>"
 		dat += "<br><br><br><br>"
 	dat += "<hr>"
-	if(positive_locations.len)
-		for(var/index = 1 to positive_locations.len)
+	if(length(positive_locations))
+		for(var/index = 1 to length(positive_locations))
 			var/datum/depth_scan/D = positive_locations[index]
 			dat += "<A href='?src=\ref[src];select=[index]'>[D.time], coords: [D.coords]</a><br>"
 	else
@@ -198,13 +198,13 @@
 /obj/item/device/depth_scanner/OnTopic(user, href_list)
 	if(href_list["select"])
 		var/index = text2num(href_list["select"])
-		if(index && index <= positive_locations.len)
+		if(index && index <= length(positive_locations))
 			current = positive_locations[index]
 		. = TOPIC_REFRESH
 	else if(href_list["clear"])
 		var/index = text2num(href_list["clear"])
 		if(index)
-			if(index <= positive_locations.len)
+			if(index <= length(positive_locations))
 				var/datum/depth_scan/D = positive_locations[index]
 				positive_locations.Remove(D)
 				qdel(D)

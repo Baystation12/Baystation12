@@ -51,7 +51,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 		if ((freq % 2) == 0)
 			freq += 1
 
-	freq = freqlist[rand(1, freqlist.len)]
+	freq = freqlist[rand(1, length(freqlist))]
 	var/obj/item/device/uplink/T = new(R, M.mind, amount)
 	R.hidden_uplink = T
 	R.traitor_frequency = freq
@@ -121,7 +121,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	if(M.client && M.client.prefs)
 		priority_order = M.client.prefs.uplink_sources
 
-	if(!priority_order || !priority_order.len)
+	if(!priority_order || !length(priority_order))
 		priority_order = list()
 		for(var/entry in GLOB.default_uplink_source_priority)
 			priority_order += GET_SINGLETON(entry)

@@ -1,7 +1,7 @@
 #define SETUP_RANDOM_COLOR_GETTER(X, Y, Z, W)  \
 /datum/species/var/list/random_##Y = W;\
 /datum/species/proc/get_random_##X(){\
-	if(!(appearance_flags & Z) || !random_##Y.len){\
+	if(!(appearance_flags & Z) || !length(random_##Y)){\
 		return;\
 	}\
 	var/selection = pickweight(random_##Y);\

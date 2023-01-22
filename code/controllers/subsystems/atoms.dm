@@ -19,7 +19,7 @@ SUBSYSTEM_DEF(atoms)
 /datum/controller/subsystem/atoms/UpdateStat(time)
 	if (PreventUpdateStat(time))
 		return ..()
-	..("Bad Inits: [BadInitializeCalls.len]")
+	..("Bad Inits: [length(BadInitializeCalls)]")
 
 
 /datum/controller/subsystem/atoms/Shutdown()
@@ -45,10 +45,10 @@ SUBSYSTEM_DEF(atoms)
 		return
 	atom_init_stage = INITIALIZATION_INNEW_MAPLOAD
 	var/list/mapload_arg = list(TRUE)
-	var/count = created_atoms.len
+	var/count = length(created_atoms)
 	var/atom/created
 	var/list/arguments
-	for (var/i = created_atoms.len to 1 step -1)
+	for (var/i = length(created_atoms) to 1 step -1)
 		created = created_atoms[i]
 		if (!(created.atom_flags & ATOM_FLAG_INITIALIZED))
 			arguments = created_atoms[created] ? mapload_arg + created_atoms[created] : mapload_arg
@@ -63,11 +63,11 @@ SUBSYSTEM_DEF(atoms)
 				CHECK_TICK
 	report_progress("Initialized [count] atom\s")
 	atom_init_stage = INITIALIZATION_INNEW_REGULAR
-	if (!late_loaders.len)
+	if (!length(late_loaders))
 		return
 	for (var/atom/A as anything in late_loaders)
 		A.LateInitialize(arglist(late_loaders[A]))
-	report_progress("Late initialized [late_loaders.len] atom\s")
+	report_progress("Late initialized [length(late_loaders)] atom\s")
 	late_loaders.Cut()
 
 

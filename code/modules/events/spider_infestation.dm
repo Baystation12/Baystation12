@@ -27,7 +27,7 @@ var/global/sent_spiders_to_station = 0
 			if(temp_vent.network.normal_members.len > 50)
 				vents += temp_vent
 
-	while((spawncount >= 1) && vents.len)
+	while((spawncount >= 1) && length(vents))
 		var/obj/vent = pick(vents)
 		if (guaranteed_to_grow > 0)
 			new /obj/effect/spider/spiderling/growing(vent.loc)

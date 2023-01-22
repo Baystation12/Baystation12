@@ -412,7 +412,7 @@
 		if(sloc.name != title)	continue
 		if(locate(/mob/living) in sloc.loc)	continue
 		loc_list += sloc
-	if(loc_list.len)
+	if(length(loc_list))
 		return pick(loc_list)
 	else
 		return locate("start*[title]") // use old stype

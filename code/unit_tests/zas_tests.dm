@@ -94,9 +94,9 @@
 
 		GM_checked.Add(GM)
 
-	if(GM_checked.len)
+	if(length(GM_checked))
 		test_result["result"] = SUCCESS
-		test_result["msg"] = "Checked [GM_checked.len] zones"
+		test_result["msg"] = "Checked [length(GM_checked)] zones"
 	else
 		test_result["msg"] = "No zones checked."
 

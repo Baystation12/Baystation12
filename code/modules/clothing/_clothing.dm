@@ -57,7 +57,7 @@
 			bloodsies.appearance_flags |= NO_CLIENT_COLOR
 			ret.overlays	+= bloodsies
 
-	if(accessories.len)
+	if(length(accessories))
 		for(var/obj/item/clothing/accessory/A in accessories)
 			ret.overlays |= A.get_mob_overlay(user_mob, slot)
 	return ret
@@ -855,7 +855,7 @@ BLIND     // can't see anything
 			. += "_s"
 
 /obj/item/clothing/under/attack_hand(mob/user)
-	if(accessories && accessories.len)
+	if(accessories && length(accessories))
 		..()
 	if ((ishuman(usr) || issmall(usr)) && src.loc == user)
 		return

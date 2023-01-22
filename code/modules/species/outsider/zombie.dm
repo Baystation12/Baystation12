@@ -427,16 +427,16 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 				continue
 			victims += L
 
-	if (!victims.len)
+	if (!length(victims))
 		to_chat(src, SPAN_WARNING("No valid targets nearby!"))
 		return
 	if (client)
-		if (victims.len == 1) //No need to choose
+		if (length(victims) == 1) //No need to choose
 			target = victims[1]
 		else
 			target = input("Who would you like to consume?") as null | anything in victims
 	else //NPCs
-		if (victims.len > 0)
+		if (length(victims) > 0)
 			target = victims[1]
 
 	if (!target)

@@ -82,14 +82,14 @@
 /datum/shuttle/autodock/overmap/proc/try_consume_fuel() //returns 1 if successful, returns 0 if error (like insufficient fuel)
 	if(!fuel_consumption)
 		return 1 //shuttles with zero fuel consumption are magic and can always launch
-	if(!fuel_ports.len)
+	if(!length(fuel_ports))
 		return 0 //Nowhere to get fuel from
 	var/list/obj/item/tank/fuel_tanks = list()
 	for(var/obj/structure/FP in fuel_ports) //loop through fuel ports and assemble list of all fuel tanks
 		var/obj/item/tank/FT = locate() in FP
 		if(FT)
 			fuel_tanks += FT
-	if(!fuel_tanks.len)
+	if(!length(fuel_tanks))
 		return 0 //can't launch if you have no fuel TANKS in the ports
 	var/total_flammable_gas_moles = 0
 	for(var/obj/item/tank/FT in fuel_tanks)
@@ -130,13 +130,13 @@
 	if(!opened)
 		to_chat(user, "<spawn class='notice'>The door is secured tightly. You'll need a crowbar to open it.")
 		return
-	else if(contents.len > 0)
+	else if(length(contents) > 0)
 		user.put_in_hands(contents[1])
 	update_icon()
 
 /obj/structure/fuel_port/on_update_icon()
 	if(opened)
-		if(contents.len > 0)
+		if(length(contents) > 0)
 			icon_state = icon_full
 		else
 			icon_state = icon_empty
@@ -157,7 +157,7 @@
 		if(!opened)
 			to_chat(user, "<spawn class='warning'>\The [src] door is still closed!")
 			return
-		if(contents.len == 0)
+		if(length(contents) == 0)
 			user.unEquip(W, src)
 	update_icon()
 

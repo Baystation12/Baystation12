@@ -48,7 +48,7 @@
 		if(C.id == src.id)
 			targets += C
 
-	if(targets.len==0)
+	if(length(targets)==0)
 		set_broken(TRUE)
 	queue_icon_update()
 

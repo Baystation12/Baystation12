@@ -32,7 +32,7 @@
 
 /obj/machinery/chemical_dispenser/examine(mob/user)
 	. = ..()
-	to_chat(user, "It has [cartridges.len] cartridges installed, and has space for [DISPENSER_MAX_CARTRIDGES - cartridges.len] more.")
+	to_chat(user, "It has [length(cartridges)] cartridges installed, and has space for [DISPENSER_MAX_CARTRIDGES - length(cartridges)] more.")
 
 /obj/machinery/chemical_dispenser/proc/add_cartridge(obj/item/reagent_containers/chem_disp_cartridge/C, mob/user)
 	if(!istype(C))
@@ -40,7 +40,7 @@
 			to_chat(user, SPAN_WARNING("\The [C] will not fit in \the [src]!"))
 		return
 
-	if(cartridges.len >= DISPENSER_MAX_CARTRIDGES)
+	if(length(cartridges) >= DISPENSER_MAX_CARTRIDGES)
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [src] does not have any slots open for \the [C] to fit into!"))
 		return

@@ -80,7 +80,7 @@ var/global/list/map_count = list()
 	if(!map)
 		set_map_size()
 	. = ((y-1)*limit_x)+x
-	if((. < 1) || (. > map.len))
+	if((. < 1) || (. > length(map)))
 		return null
 
 /datum/random_map/proc/get_map_char(value)
@@ -199,7 +199,7 @@ var/global/list/map_count = list()
 	return
 
 /datum/random_map/proc/overlay_with(datum/random_map/target_map, tx, ty)
-	if(!map.len || !istype(target_map))
+	if(!length(map) || !istype(target_map))
 		return
 	tx-- // Update origin so that x/y index
 	ty-- // doesn't push it off-kilter by one.

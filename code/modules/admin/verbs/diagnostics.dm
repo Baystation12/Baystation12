@@ -87,7 +87,7 @@
 			if (!f)
 				output += "&nbsp;&nbsp;[filter]: ERROR<br>"
 				continue
-			output += "&nbsp;&nbsp;[filter]: [f.len]<br>"
+			output += "&nbsp;&nbsp;[filter]: [length(f)]<br>"
 			for (var/device in f)
 				if (isobj(device))
 					output += "&nbsp;&nbsp;&nbsp;&nbsp;[device] ([device:x],[device:y],[device:z] in area [get_area(device)])<br>"

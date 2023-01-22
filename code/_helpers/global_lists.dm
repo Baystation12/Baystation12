@@ -186,6 +186,6 @@ var/global/list/paramslist_cache = list()
 
 /proc/number_list_decode(number_list_data)
 	var/list/L = params2list(number_list_data)
-	for(var/i in 1 to L.len)
+	for(var/i in 1 to length(L))
 		L[i] = text2num(L[i])
 	return L

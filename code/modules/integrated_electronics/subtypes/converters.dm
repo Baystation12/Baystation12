@@ -163,7 +163,7 @@
 
 /obj/item/integrated_circuit/converter/concatenator/do_work()
 	var/result = null
-	for(var/k in 1 to inputs.len)
+	for(var/k in 1 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
 		if(!isnull(I))
 			result = result + I

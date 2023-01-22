@@ -28,7 +28,7 @@
 			return
 
 		var/list/cardaccess = W:access
-		if(!istype(cardaccess, /list) || !cardaccess.len) //no access
+		if(!istype(cardaccess, /list) || !length(cardaccess)) //no access
 			to_chat(user, "The access level of [W:registered_name]\'s card is not high enough. ")
 			return
 

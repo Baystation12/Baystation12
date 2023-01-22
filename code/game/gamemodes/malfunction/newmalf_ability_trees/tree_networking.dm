@@ -169,7 +169,7 @@
 			continue
 		remaining_apcs += A
 
-	var/duration = (remaining_apcs.len * 100)		// Calculates duration for announcing system
+	var/duration = (length(remaining_apcs) * 100)		// Calculates duration for announcing system
 	if(user.hack_can_fail)								// Two types of announcements. Short hacks trigger immediate warnings. Long hacks are more "progressive".
 		spawn(0)
 			sleep(duration/5)

@@ -21,7 +21,7 @@
 	return
 
 /datum/antagonist/proc/place_mob(mob/living/mob)
-	if(!starting_locations || !starting_locations.len)
+	if(!starting_locations || !length(starting_locations))
 		return
 	var/turf/T = pick_mobless_turf_if_exists(starting_locations)
 	mob.forceMove(T)

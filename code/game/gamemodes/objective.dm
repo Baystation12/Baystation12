@@ -26,7 +26,7 @@ var/global/list/all_objectives = list()
 	for(var/datum/mind/possible_target in SSticker.minds)
 		if(possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != DEAD))
 			possible_targets += possible_target
-	if(possible_targets.len > 0)
+	if(length(possible_targets) > 0)
 		target = pick(possible_targets)
 
 
@@ -338,9 +338,9 @@ var/global/list/all_objectives = list()
 					priority_targets += possible_target
 					continue
 
-	if(priority_targets.len > 0)
+	if(length(priority_targets) > 0)
 		target = pick(priority_targets)
-	else if(possible_targets.len > 0)
+	else if(length(possible_targets) > 0)
 		target = pick(possible_targets)
 
 	if(target && target.current)
@@ -445,11 +445,11 @@ var/global/list/all_objectives = list()
 
 /datum/objective/cult/sacrifice/find_target()
 	var/list/possible_targets = list()
-	if(!possible_targets.len)
+	if(!length(possible_targets))
 		for(var/mob/living/carbon/human/player in GLOB.player_list)
 			if(player.mind && !(player.mind in GLOB.cult.current_antagonists))
 				possible_targets += player.mind
-	if(possible_targets.len > 0)
+	if(length(possible_targets) > 0)
 		target = pick(possible_targets)
 	if(target) explanation_text = "Sacrifice [target.name], the [target.assigned_role]. You will need the sacrifice rune (Hell blood join) and three acolytes to do so."
 

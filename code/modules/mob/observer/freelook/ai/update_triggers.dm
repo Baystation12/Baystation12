@@ -12,7 +12,7 @@
 /obj/machinery/camera/Initialize()
 	. = ..()
 	var/list/open_networks = difflist(network, GLOB.restricted_camera_networks)
-	on_open_network = open_networks.len
+	on_open_network = length(open_networks)
 	if(on_open_network)
 		cameranet.add_source(src)
 
@@ -25,10 +25,10 @@
 	if(network_change)
 		var/list/open_networks = difflist(network, GLOB.restricted_camera_networks)
 		// Add or remove camera from the camera net as necessary
-		if(on_open_network && !open_networks.len)
+		if(on_open_network && !length(open_networks))
 			on_open_network = FALSE
 			cameranet.remove_source(src)
-		else if(!on_open_network && open_networks.len)
+		else if(!on_open_network && length(open_networks))
 			on_open_network = TRUE
 			cameranet.add_source(src)
 	else

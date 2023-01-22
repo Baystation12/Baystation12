@@ -317,7 +317,7 @@
 		breathtype += pick("straining","labored")
 	if(owner.shock_stage > 50)
 		breathtype += pick("shallow and rapid")
-	if(!breathtype.len)
+	if(!length(breathtype))
 		breathtype += "healthy"
 
 	. += "[english_list(breathtype)] breathing"

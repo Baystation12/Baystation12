@@ -13,7 +13,7 @@
 	cmp = compare
 
 /PriorityQueue/proc/IsEmpty()
-	return !L.len
+	return !length(L)
 
 //add an element in the list,
 //immediatly ordering it to its position using dichotomic search
@@ -22,7 +22,7 @@
 
 //removes and returns the first element in the queue
 /PriorityQueue/proc/Dequeue()
-	if(!L.len)
+	if(!length(L))
 		return 0
 	. = L[1]
 
@@ -42,20 +42,20 @@
 
 //return the element at the i_th position
 /PriorityQueue/proc/Get(i)
-	if(i > L.len || i < 1)
+	if(i > length(L) || i < 1)
 		return 0
 	return L[i]
 
 //return the length of the queue
 /PriorityQueue/proc/Length()
-	. = L.len
+	. = length(L)
 
 //replace the passed element at it's right position using the cmp proc
 /PriorityQueue/proc/ReSort(atom/A)
 	var/i = Seek(A)
 	if(i == 0)
 		return
-	while(i < L.len && call(cmp)(L[i],L[i+1]) > 0)
+	while(i < length(L) && call(cmp)(L[i],L[i+1]) > 0)
 		L.Swap(i,i+1)
 		i++
 	while(i > 1 && call(cmp)(L[i],L[i-1]) <= 0) //last inserted element being first in case of ties (optimization)

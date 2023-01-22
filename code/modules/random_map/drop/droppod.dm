@@ -25,7 +25,7 @@
 
 	if(supplied_drop)
 		drop_type = supplied_drop
-	else if(islist(supplied_drops) && supplied_drops.len)
+	else if(islist(supplied_drops) && length(supplied_drops))
 		supplied_drop_types = supplied_drops
 		drop_type = "custom"
 	if(automated)
@@ -129,8 +129,8 @@
 	// Use the supply pod if you don't want to drop mobs.
 	// Mobs will not double up; if you want multiple mobs, you
 	// will need multiple drop tiles.
-	if(islist(supplied_drop_types) && supplied_drop_types.len)
-		while(supplied_drop_types.len)
+	if(islist(supplied_drop_types) && length(supplied_drop_types))
+		while(length(supplied_drop_types))
 			drop = pick(supplied_drop_types)
 			supplied_drop_types -= drop
 			if(istype(drop))
@@ -174,7 +174,7 @@
 			if(player.mob && isghost(player.mob))
 				candidates |= player
 
-		if(!candidates.len)
+		if(!length(candidates))
 			to_chat(usr, "There are no candidates for a drop pod launch.")
 			return
 
@@ -197,7 +197,7 @@
 	if(alert("Are you SURE you wish to deploy this drop pod? It will cause a sizable explosion and gib anyone underneath it.",,"No","Yes") == "No")
 		if(spawned_mob)
 			qdel(spawned_mob)
-		if(spawned_mobs.len)
+		if(length(spawned_mobs))
 			for(var/mob/living/M in spawned_mobs)
 				spawned_mobs -= M
 				M.tag = null
@@ -214,9 +214,9 @@
 			spawned_mob.ckey = selected_player.mob.ckey
 		spawned_mobs = list(spawned_mob)
 		log_and_message_admins("dropped a pod containing \the [spawned_mob] ([spawned_mob.key]) at ([usr.x],[usr.y],[usr.z])")
-	else if(spawned_mobs.len)
+	else if(length(spawned_mobs))
 		automatic_pod = 1
-		log_and_message_admins("dropped a pod containing [spawned_mobs.len] [spawned_mobs[1]] at ([usr.x],[usr.y],[usr.z])")
+		log_and_message_admins("dropped a pod containing [length(spawned_mobs)] [spawned_mobs[1]] at ([usr.x],[usr.y],[usr.z])")
 	else
 		return
 

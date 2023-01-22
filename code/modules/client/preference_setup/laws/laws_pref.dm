@@ -3,7 +3,7 @@
 	var/is_shackled = FALSE
 
 /datum/preferences/proc/get_lawset()
-	if(!laws || !laws.len)
+	if(!laws || !length(laws))
 		return
 	var/datum/ai_laws/custom_lawset = new
 	for(var/law in laws)

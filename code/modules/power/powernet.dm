@@ -45,7 +45,7 @@
 	return draw
 
 /datum/powernet/proc/is_empty()
-	return !cables.len && !nodes.len
+	return !length(cables) && !length(nodes)
 
 //remove a cable from the current powernet
 //if the powernet is then empty, delete it
@@ -101,7 +101,7 @@
 	if(problem > 0)
 		problem = max(problem - 1, 0)
 
-	if(nodes && nodes.len) // Added to fix a bad list bug -- TLE
+	if(nodes && length(nodes)) // Added to fix a bad list bug -- TLE
 		for(var/obj/machinery/power/terminal/term in nodes)
 			if( istype( term.master_machine(), /obj/machinery/power/apc ) )
 				numapc++
@@ -120,7 +120,7 @@
 		perapc = avail/numapc + perapc_excess
 
 	// At this point, all other machines have finished using power. Anything left over may be used up to charge SMESs.
-	if(inputting.len && smes_demand)
+	if(length(inputting) && smes_demand)
 		var/smes_input_percentage = clamp((netexcess / smes_demand) * 100, 0, 100)
 		for(var/obj/machinery/power/smes/S in inputting)
 			S.input_power(smes_input_percentage)

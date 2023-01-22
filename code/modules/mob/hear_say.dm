@@ -308,7 +308,7 @@
 	if(prob(15))
 		var/list/punctuation = list(",", "!", ".", ";", "?")
 		var/list/messages = splittext(message, " ")
-		var/R = rand(1, messages.len)
+		var/R = rand(1, length(messages))
 		var/heardword = messages[R]
 		if(copytext(heardword,1, 1) in punctuation)
 			heardword = copytext(heardword,2)

@@ -304,7 +304,7 @@
 			for(var/carrier in G.find_presence)
 				if(G.find_presence[carrier])
 					var/index = responsive_carriers.Find(carrier)
-					if(index > 0 && index <= finds_as_strings.len)
+					if(index > 0 && index <= length(finds_as_strings))
 						data += "	> [100 * G.find_presence[carrier]]% [finds_as_strings[index]]<br>"
 
 			if(G.artifact_id && G.artifact_distance >= 0)

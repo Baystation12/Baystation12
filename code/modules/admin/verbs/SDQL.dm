@@ -8,8 +8,8 @@
 
 	var/list/query_list = SDQL_tokenize(query_text)
 
-	if(query_list.len < 2)
-		if(query_list.len > 0)
+	if(length(query_list) < 2)
+		if(length(query_list) > 0)
 			to_chat(usr, SPAN_WARNING("SDQL: Too few discrete tokens in query \"[query_text]\". Please check your syntax and try again."))
 		return
 
@@ -20,35 +20,35 @@
 	var/list/types = list()
 
 	var/i
-	for(i = 2; i <= query_list.len; i += 2)
+	for(i = 2; i <= length(query_list); i += 2)
 		types += query_list[i]
 
-		if(i + 1 >= query_list.len || query_list[i + 1] != ",")
+		if(i + 1 >= length(query_list) || query_list[i + 1] != ",")
 			break
 
 	i++
 
 	var/list/from = list()
 
-	if(i <= query_list.len)
+	if(i <= length(query_list))
 		if(lowertext(query_list[i]) in list("from", "in"))
-			for(i++; i <= query_list.len; i += 2)
+			for(i++; i <= length(query_list); i += 2)
 				from += query_list[i]
 
-				if(i + 1 >= query_list.len || query_list[i + 1] != ",")
+				if(i + 1 >= length(query_list) || query_list[i + 1] != ",")
 					break
 
 			i++
 
-	if(from.len < 1)
+	if(length(from) < 1)
 		from += "world"
 
 	var/list/set_vars = list()
 
 	if(lowertext(query_list[1]) == "update")
-		if(i <= query_list.len && lowertext(query_list[i]) == "set")
-			for(i++; i <= query_list.len; i++)
-				if(i + 2 <= query_list.len && query_list[i + 1] == "=")
+		if(i <= length(query_list) && lowertext(query_list[i]) == "set")
+			for(i++; i <= length(query_list); i++)
+				if(i + 2 <= length(query_list) && query_list[i + 1] == "=")
 					set_vars += query_list[i]
 					set_vars[query_list[i]] = query_list[i + 2]
 
@@ -58,16 +58,16 @@
 
 				i += 3
 
-				if(i >= query_list.len || query_list[i] != ",")
+				if(i >= length(query_list) || query_list[i] != ",")
 					break
 
-		if(set_vars.len < 1)
+		if(length(set_vars) < 1)
 			to_chat(usr, SPAN_WARNING("SDQL: Invalid or missing set in query \"[query_text]\". Please check your syntax and try again."))
 			return
 
 	var/list/where = list()
 
-	if(i <= query_list.len && lowertext(query_list[i]) == "where")
+	if(i <= length(query_list) && lowertext(query_list[i]) == "where")
 		where = query_list.Copy(i + 1)
 
 	var/list/from_objs = list()
@@ -208,7 +208,7 @@
 
 	for(var/datum/t in objs)
 		var/currently_false = 0
-		for(i = 1, i - 1 < where.len, i++)
+		for(i = 1, i - 1 < length(where), i++)
 			var/v = where[i++]
 			var/compare_op = where[i++]
 			if(!(compare_op in list("==", "=", "<>", "<", ">", "<=", ">=", "!=")))
@@ -216,7 +216,7 @@
 				return
 
 			var/j
-			for(j = i, j <= where.len, j++)
+			for(j = i, j <= length(where), j++)
 				if(lowertext(where[j]) in list("and", "or", ";"))
 					break
 
@@ -244,7 +244,7 @@
 						currently_false = !(value >= result)
 
 
-			if(j > where.len || lowertext(where[j]) == ";")
+			if(j > length(where) || lowertext(where[j]) == ";")
 				break
 			else if(lowertext(where[j]) == "or")
 				if(currently_false)
@@ -268,7 +268,7 @@
 		to_chat(usr, "From: [t]")
 	for(var/t in set_vars)
 		to_chat(usr, "Set: [t] = [set_vars[t]]")
-	if(where.len)
+	if(length(where))
 		var/where_str = ""
 		for(var/t in where)
 			where_str += "[t] "
@@ -326,10 +326,10 @@
 			show_browser(usr, text, "window=sdql_result")
 
 /proc/SDQL_evaluate(datum/object, list/equation)
-	if(equation.len == 0)
+	if(length(equation) == 0)
 		return null
 
-	else if(equation.len == 1)
+	else if(length(equation) == 1)
 		return SDQL_text2value(object, equation[1])
 
 	else if(equation[1] == "!")

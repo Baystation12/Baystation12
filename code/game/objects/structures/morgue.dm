@@ -293,7 +293,7 @@
 	if(cremating)
 		return //don't let you cremate something twice or w/e
 
-	if(contents.len <= 0)
+	if(length(contents) <= 0)
 		src.audible_message(SPAN_WARNING("You hear a hollow crackle."), 1)
 		return
 

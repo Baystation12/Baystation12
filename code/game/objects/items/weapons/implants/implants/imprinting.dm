@@ -18,7 +18,7 @@
 	It is HIGLY ILLEGAL and the seller does NOT endorse use of this device in such way.
 	Any amount of "Mind-Breaker"(TM) present in bloodstream will trigger this side-effect.<BR>"}
 	. += "<HR><B>Instructions:</B><BR>"
-	for(var/i = 1 to instructions.len)
+	for(var/i = 1 to length(instructions))
 		. += "- [instructions[i]] <A href='byond://?src=\ref[src];edit=[i]'>Edit</A> <A href='byond://?src=\ref[src];del=[i]'>Remove</A><br>"
 	. += "<A href='byond://?src=\ref[src];add=1'>Add</A>"
 

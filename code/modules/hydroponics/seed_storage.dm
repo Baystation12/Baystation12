@@ -156,7 +156,7 @@
 	user.set_machine(src)
 
 	var/dat = "<center><h1>Seed storage contents</h1></center>"
-	if (piles.len == 0)
+	if (length(piles) == 0)
 		dat += SPAN_COLOR("red", "No seeds")
 	else
 		dat += "<table style='text-align:center;border-style:solid;border-width:1px;padding:4px'><tr><td>Name</td>"

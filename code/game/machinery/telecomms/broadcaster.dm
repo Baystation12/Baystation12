@@ -145,7 +145,7 @@ var/global/message_delay = 0 // To make sure restarting the recentmessages list 
 
 	if(is_freq_listening(signal)) // detect subspace signals
 
-		if(freq_listening.len) //If we are actively listening to this frequency, go ahead and use the real signal
+		if(length(freq_listening)) //If we are actively listening to this frequency, go ahead and use the real signal
 			signal.data["done"] = 1 // mark the signal as being broadcasted
 			signal.data["compression"] = 0
 

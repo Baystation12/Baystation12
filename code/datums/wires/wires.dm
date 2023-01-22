@@ -72,7 +72,7 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 		indexes_to_pick += i
 	LIST_RESIZE(colours_to_pick, wire_count) // Downsize it to our specifications.
 
-	while(colours_to_pick.len && indexes_to_pick.len)
+	while(length(colours_to_pick) && length(indexes_to_pick))
 		// Pick and remove a colour
 		var/colour = pick_n_take(colours_to_pick)
 
@@ -294,7 +294,7 @@ var/global/const/POWER = 8
 
 
 /datum/wires/proc/RandomPulse()
-	var/index = rand(1, wires.len)
+	var/index = rand(1, length(wires))
 	PulseColour(wires[index])
 
 //
@@ -366,7 +366,7 @@ var/global/const/POWER = 8
 		return 0
 
 /datum/wires/proc/RandomCut()
-	var/r = rand(1, wires.len)
+	var/r = rand(1, length(wires))
 	CutWireColour(wires[r])
 
 /datum/wires/proc/RandomCutAll(probability = 10)

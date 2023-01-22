@@ -105,7 +105,7 @@
 	smokeFlow() //pathing check
 
 	//set the density of the cloud - for diluting reagents
-	density = max(1, targetTurfs.len / 4) //clamp the cloud density minimum to 1 so it cant multiply the reagents
+	density = max(1, length(targetTurfs) / 4) //clamp the cloud density minimum to 1 so it cant multiply the reagents
 
 	//Admin messaging
 	var/contained = carry.get_reagents()
@@ -220,7 +220,7 @@
 
 	pending += location
 
-	while(pending.len)
+	while(length(pending))
 		for(var/turf/current in pending)
 			for(var/D in GLOB.cardinal)
 				var/turf/target = get_step(current, D)

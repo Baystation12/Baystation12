@@ -29,7 +29,7 @@
 			continue
 		if(M.buckled)
 			M.buckled.unbuckle_mob()
-		if(toggle && transformed_dudes.len && stop_transformation(M))
+		if(toggle && length(transformed_dudes) && stop_transformation(M))
 			continue
 		var/new_mob = pick(possible_transformations)
 

@@ -120,7 +120,7 @@
 	. = ..()
 
 /mob/living/simple_animal/borer/proc/set_borer_name()
-	truename = "[borer_names[min(generation, borer_names.len)]] [random_id("borer[generation]", 1000, 9999)]"
+	truename = "[borer_names[min(generation, length(borer_names))]] [random_id("borer[generation]", 1000, 9999)]"
 
 /mob/living/simple_animal/borer/Life()
 

@@ -214,7 +214,7 @@
 	. = ..()
 
 /mob/living/silicon/robot/proc/set_module_sprites(list/new_sprites)
-	if(new_sprites && new_sprites.len)
+	if(new_sprites && length(new_sprites))
 		module_sprites = new_sprites.Copy()
 		//Custom_sprite check and entry
 
@@ -931,13 +931,13 @@
 
 /mob/living/silicon/robot/proc/choose_icon(triesleft, list/module_sprites)
 	set waitfor = 0
-	if(!module_sprites.len)
+	if(!length(module_sprites))
 		to_chat(src, "Something is badly wrong with the sprite selection. Harass a coder.")
 		return
 
 	icon_selected = 0
 	src.icon_selection_tries = triesleft
-	if(module_sprites.len == 1 || !client)
+	if(length(module_sprites) == 1 || !client)
 		if(!(icontype in module_sprites))
 			icontype = module_sprites[1]
 	else
@@ -945,7 +945,7 @@
 	icon_state = module_sprites[icontype]
 	update_icon()
 
-	if (module_sprites.len > 1 && triesleft >= 1 && client)
+	if (length(module_sprites) > 1 && triesleft >= 1 && client)
 		icon_selection_tries--
 		var/choice = input("Look at your icon - is this what you want?") in list("Yes","No")
 		if(choice=="No")

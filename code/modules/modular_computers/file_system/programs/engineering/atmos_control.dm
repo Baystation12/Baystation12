@@ -42,7 +42,7 @@
 
 	if(href_list["alarm"])
 		if(ui_ref)
-			var/obj/machinery/alarm/alarm = locate(href_list["alarm"]) in (monitored_alarms.len ? monitored_alarms : SSmachines.machinery)
+			var/obj/machinery/alarm/alarm = locate(href_list["alarm"]) in (length(monitored_alarms) ? monitored_alarms : SSmachines.machinery)
 			if(alarm)
 				var/datum/topic_state/TS = generate_state(alarm)
 				alarm.ui_interact(usr, master_ui = ui_ref, state = TS)
@@ -55,9 +55,9 @@
 	var/alarmsDanger[0]
 
 	// TODO: Move these to a cache, similar to cameras
-	for(var/obj/machinery/alarm/alarm in (monitored_alarms.len ? monitored_alarms : SSmachines.machinery))
+	for(var/obj/machinery/alarm/alarm in (length(monitored_alarms) ? monitored_alarms : SSmachines.machinery))
 		var/Z = get_host_z()
-		if ((!monitored_alarms.len) && (!Z || !AreConnectedZLevels(Z, alarm.z)))
+		if ((!length(monitored_alarms)) && (!Z || !AreConnectedZLevels(Z, alarm.z)))
 			continue
 		var/danger_level = max(alarm.danger_level, alarm.alarm_area.atmosalm)
 		if(danger_level == 2)

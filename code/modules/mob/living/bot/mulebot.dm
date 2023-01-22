@@ -100,7 +100,7 @@
 			if("sethome")
 				var/new_dest
 				var/list/beaconlist = GetBeaconList()
-				if(beaconlist.len)
+				if(length(beaconlist))
 					new_dest = input("Select new home tag", "Mulebot [suffix ? "([suffix])" : ""]", null) in null|beaconlist
 				else
 					alert("No destination beacons available.")
@@ -132,7 +132,7 @@
 		if("SetD")
 			var/new_dest
 			var/list/beaconlist = GetBeaconList()
-			if(beaconlist.len)
+			if(length(beaconlist))
 				new_dest = input("Select new destination tag", "Mulebot [suffix ? "([suffix])" : ""]") in null|beaconlist
 			else
 				alert("No destination beacons available.")
@@ -156,7 +156,7 @@
 	if(open)
 		icon_state = "mulebot-hatch"
 		return
-	if(target_path.len && !paused)
+	if(length(target_path) && !paused)
 		icon_state = "mulebot1"
 		return
 	icon_state = "mulebot0"
@@ -186,7 +186,7 @@
 
 /mob/living/bot/mulebot/calcTargetPath()
 	..()
-	if(!target_path.len && target != home) // I presume that target is not null
+	if(!length(target_path) && target != home) // I presume that target is not null
 		resetTarget()
 		target = home
 		targetName = "Home"

@@ -182,7 +182,7 @@ var/global/list/mining_floors = list()
 		var/newDepth = excavation_level + P.excavation_amount // Used commonly below
 		//handle any archaeological finds we might uncover
 		var/fail_message = ""
-		if(finds && finds.len)
+		if(finds && length(finds))
 			var/datum/find/F = finds[1]
 			if(newDepth > F.excavation_required) // Digging too deep can break the item. At least you won't summon a Balrog (probably)
 				fail_message = ". <b>[pick("There is a crunching noise","[W] collides with some different rock","Part of the rock face crumbles away","Something breaks under [W]")]</b>"
@@ -198,7 +198,7 @@ var/global/list/mining_floors = list()
 					artifact_debris()
 
 		if(do_after(user, P.digspeed, src,  DO_DEFAULT | DO_PUBLIC_PROGRESS))
-			if(finds && finds.len)
+			if(finds && length(finds))
 				var/datum/find/F = finds[1]
 				if(newDepth == F.excavation_required) // When the pick hits that edge just right, you extract your find perfectly, it's never confined in a rock
 					excavate_find(1, F)
@@ -231,13 +231,13 @@ var/global/list/mining_floors = list()
 			var/updateIcon = 0
 
 			//archaeo overlays
-			if(!archaeo_overlay && finds && finds.len)
+			if(!archaeo_overlay && finds && length(finds))
 				var/datum/find/F = finds[1]
 				if(F.excavation_required <= excavation_level + F.view_range)
 					archaeo_overlay = image('icons/turf/excavation_overlays.dmi',"overlay_archaeo[rand(1,3)]")
 					updateIcon = 1
 
-			else if(archaeo_overlay && (!finds || !finds.len))
+			else if(archaeo_overlay && (!finds || !length(finds)))
 				archaeo_overlay = null
 				updateIcon = 1
 

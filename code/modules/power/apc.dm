@@ -326,12 +326,12 @@
 			icon_state = "apcewires"
 
 	if(!(update_state & UPDATE_ALLGOOD))
-		if(overlays.len)
+		if(length(overlays))
 			overlays.Cut()
 			return
 
 	if(update & 2)
-		if(overlays.len)
+		if(length(overlays))
 			overlays.Cut()
 		if(!MACHINE_IS_BROKEN(src) && !GET_FLAGS(stat, MACHINE_STAT_MAINT) && update_state & UPDATE_ALLGOOD)
 			overlays += status_overlays_lock[locked+1]

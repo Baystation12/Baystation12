@@ -79,7 +79,7 @@
 
 		var/list/mutations = T.GetMutations()
 
-		if(!mutations.len)
+		if(!length(mutations))
 			. += "This slime will never mutate."
 		else
 			var/list/mutationChances = list()
@@ -87,9 +87,9 @@
 				if(i == T.colour)
 					continue
 				if(mutationChances[i])
-					mutationChances[i] += T.mutation_chance / mutations.len
+					mutationChances[i] += T.mutation_chance / length(mutations)
 				else
-					mutationChances[i] = T.mutation_chance / mutations.len
+					mutationChances[i] = T.mutation_chance / length(mutations)
 
 			var/list/mutationTexts = list("[T.colour] ([100 - T.mutation_chance]%)")
 			for(var/i in mutationChances)

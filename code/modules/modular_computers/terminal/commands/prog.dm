@@ -21,7 +21,7 @@
 	if(isnull(arguments))
 		return
 	// Program list
-	if(!arguments.len)
+	if(!length(arguments))
 		. = list()
 		. += "[name]: Listing running programs..."
 		. += "PID Status Filename"
@@ -30,7 +30,7 @@
 				. += "[P.uid] - [(P.program_state == PROGRAM_STATE_ACTIVE ? "active" : "bckgrn")] - [P.filename]"
 		. += ""
 	// Run command with flag only
-	else if(arguments.len == 1)
+	else if(length(arguments) == 1)
 		if(arguments[1] == "-k")
 			for(var/datum/computer_file/program/P in terminal.computer.running_programs)
 				terminal.computer.kill_program_remote(P, 1)
@@ -40,7 +40,7 @@
 				return "[name]: Error; could not modify autorun data."
 			return "[name]: Autorun disabled"
 	// Run command on a pid or filename
-	else if(arguments.len == 2)
+	else if(length(arguments) == 2)
 		if(arguments[1] == "-f")
 			var/datum/computer_file/program/P = get_program_by_pid(arguments[2], terminal)
 			if(!istype(P))

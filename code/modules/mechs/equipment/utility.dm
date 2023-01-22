@@ -45,7 +45,7 @@
 		else if(chosen_obj.dropInto(get_turf(src)))
 			src.visible_message(SPAN_NOTICE("\The [user] pulls \the [chosen_obj] from \the [src]."))
 
-		if(!contents.len)
+		if(!length(contents))
 			qdel_self()
 		else update_icon()
 
@@ -246,7 +246,7 @@
 				var/turf/location = get_turf(src)
 				var/list/turfs = location.AdjacentTurfsSpace()
 				if(load.density)
-					if(turfs.len > 0)
+					if(length(turfs) > 0)
 						location = pick(turfs)
 						turfs -= location
 					else

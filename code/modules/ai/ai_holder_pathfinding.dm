@@ -44,7 +44,7 @@
 	forget_path()
 	var/list/new_path = AStar(get_turf(holder.loc), target, astar_adjacent_proc, /turf/proc/Distance, min_target_dist = get_to, max_node_depth = max_distance, id = holder.IGetID(), exclude = obstacles)
 
-	if (new_path && new_path.len)
+	if (new_path && length(new_path))
 		path = new_path
 		ai_log("get_path() : Made new path.", AI_LOG_DEBUG)
 		if (path_display)
@@ -55,4 +55,4 @@
 		return 0
 
 	ai_log("get_path() : Exiting.", AI_LOG_DEBUG)
-	return path.len
+	return length(path)

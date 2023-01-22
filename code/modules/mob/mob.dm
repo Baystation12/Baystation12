@@ -260,7 +260,7 @@
 	if ((incapacitation_flags & INCAPACITATION_STUNNED) && stunned)
 		return 1
 
-	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (weakened || resting || pinned.len))
+	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (weakened || resting || length(pinned)))
 		return 1
 
 	if ((incapacitation_flags & INCAPACITATION_KNOCKOUT) && (stat || paralysis || sleeping || (status_flags & FAKEDEATH)))
@@ -904,7 +904,7 @@
 	return visible_implants
 
 /mob/proc/embedded_needs_process()
-	return (embedded.len > 0)
+	return (length(embedded) > 0)
 
 /mob/proc/remove_implant(obj/item/implant, surgical_removal = FALSE)
 	if(!LAZYLEN(get_visible_implants(0))) //Yanking out last object - removing verb.
@@ -912,7 +912,7 @@
 	for(var/obj/item/O in pinned)
 		if(O == implant)
 			pinned -= O
-		if(!pinned.len)
+		if(!length(pinned))
 			anchored = FALSE
 	implant.dropInto(loc)
 	implant.add_blood(src)
@@ -982,7 +982,7 @@
 		self = 1 // Removing object from yourself.
 
 	valid_objects = get_visible_implants(0)
-	if(!valid_objects.len)
+	if(!length(valid_objects))
 		if(self)
 			to_chat(src, "You have nothing stuck in your body that is large enough to remove.")
 		else

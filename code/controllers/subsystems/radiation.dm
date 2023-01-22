@@ -18,8 +18,8 @@ SUBSYSTEM_DEF(radiation)
 		current_res_cache = resistance_cache.Copy()
 		listeners = GLOB.alive_mobs.Copy()
 
-	while(current_sources.len)
-		var/datum/radiation_source/S = current_sources[current_sources.len]
+	while(length(current_sources))
+		var/datum/radiation_source/S = current_sources[length(current_sources)]
 		LIST_DEC(current_sources)
 
 		if(QDELETED(S))
@@ -29,8 +29,8 @@ SUBSYSTEM_DEF(radiation)
 		if (MC_TICK_CHECK)
 			return
 
-	while(current_res_cache.len)
-		var/turf/T = current_res_cache[current_res_cache.len]
+	while(length(current_res_cache))
+		var/turf/T = current_res_cache[length(current_res_cache)]
 		LIST_DEC(current_res_cache)
 
 		if(QDELETED(T))
@@ -40,11 +40,11 @@ SUBSYSTEM_DEF(radiation)
 		if (MC_TICK_CHECK)
 			return
 
-	if(!sources.len)
+	if(!length(sources))
 		listeners.Cut()
 
-	while(listeners.len)
-		var/atom/A = listeners[listeners.len]
+	while(length(listeners))
+		var/atom/A = listeners[length(listeners)]
 		LIST_DEC(listeners)
 
 		if(!QDELETED(A))
@@ -61,7 +61,7 @@ SUBSYSTEM_DEF(radiation)
 /datum/controller/subsystem/radiation/UpdateStat(time)
 	if (PreventUpdateStat(time))
 		return ..()
-	..("Sources: [sources.len] Cache: [resistance_cache.len]")
+	..("Sources: [length(sources)] Cache: [length(resistance_cache)]")
 
 
 // Ray trace from all active radiation sources to T and return the strongest effect.

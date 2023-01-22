@@ -78,7 +78,7 @@
 /obj/machinery/robotics_fabricator/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
 
-	var/datum/design/current = queue.len ? queue[1] : null
+	var/datum/design/current = length(queue) ? queue[1] : null
 	if(current)
 		data["current"] = current.name
 	data["queue"] = get_queue_names()
@@ -190,7 +190,7 @@
 	return 1
 
 /obj/machinery/robotics_fabricator/proc/update_busy()
-	if(queue.len)
+	if(length(queue))
 		if(can_build(queue[1]))
 			busy = 1
 		else
@@ -217,7 +217,7 @@
 	return 1
 
 /obj/machinery/robotics_fabricator/proc/check_build()
-	if(!queue.len)
+	if(!length(queue))
 		progress = 0
 		return
 	var/datum/design/D = queue[1]
@@ -239,7 +239,7 @@
 
 /obj/machinery/robotics_fabricator/proc/get_queue_names()
 	. = list()
-	for(var/i = 2 to queue.len)
+	for(var/i = 2 to length(queue))
 		var/datum/design/D = queue[i]
 		. += D.name
 

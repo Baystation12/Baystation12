@@ -44,7 +44,7 @@
 	return 1
 
 /datum/job/ai/is_position_available()
-	return (empty_playable_ai_cores.len != 0)
+	return (length(empty_playable_ai_cores) != 0)
 
 /datum/job/ai/handle_variant_join(mob/living/carbon/human/H, alt_title)
 	return H

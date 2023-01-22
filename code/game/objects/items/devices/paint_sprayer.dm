@@ -181,7 +181,7 @@
 	for (var/image/I in F.decals)
 		available_colors |= isnull(I.color) ? COLOR_WHITE : I.color
 	var/picked_color = available_colors[1]
-	if (available_colors.len > 1)
+	if (length(available_colors) > 1)
 		picked_color = input(user, "Which color do you wish to pick from?") as null|anything in available_colors
 		if (user.incapacitated() || !user.Adjacent(F))
 			return FALSE

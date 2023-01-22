@@ -12,7 +12,7 @@
 		if(!initial(O.max_damage))
 			failed_organ_types += O
 
-	if(failed_organ_types.len)
+	if(length(failed_organ_types))
 		fail("The following organs have incorrectly setup max damage: [english_list(failed_organ_types)]")
 	else
 		pass("All organs have a correctly setup max damage")

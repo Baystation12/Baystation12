@@ -81,7 +81,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 /obj/item/spellbook/attackby(obj/item/I as obj, mob/user as mob)
 	if(investing_time)
 		var/list/objects = spellbook.sacrifice_objects
-		if(objects && objects.len)
+		if(objects && length(objects))
 			for(var/type in objects)
 				if(istype(I,type))
 					make_sacrifice(I,user)
@@ -89,7 +89,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 		if(I.reagents)
 			var/datum/reagents/R = I.reagents
 			var/list/reagent_list = spellbook.sacrifice_reagents
-			if(reagent_list && reagent_list.len)
+			if(reagent_list && length(reagent_list))
 				for(var/id in reagent_list)
 					if(R.has_reagent(id,5))
 						make_sacrifice(I,user, id)

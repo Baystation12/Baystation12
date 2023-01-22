@@ -103,7 +103,7 @@
 		if (holder.say_list.emote_see.len)
 			comm_types += COMM_VISUAL_EMOTE
 
-		if (!comm_types.len)
+		if (!length(comm_types))
 			return // All the relevant lists are empty, so do nothing.
 
 		switch(pick(comm_types))

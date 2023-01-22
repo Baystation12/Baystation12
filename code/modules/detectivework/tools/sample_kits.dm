@@ -19,7 +19,7 @@
 		to_chat(user, "The label says: '[object]'")
 
 /obj/item/sample/print/on_update_icon()
-	if(evidence && evidence.len)
+	if(evidence && length(evidence))
 		icon_state = "fingerprint1"
 
 /obj/item/sample/print/New(newloc, atom/supplied)
@@ -78,7 +78,7 @@
 	item_state = "paper"
 
 /obj/item/sample/print/attack_self(mob/user)
-	if(evidence && evidence.len)
+	if(evidence && length(evidence))
 		return
 	if(!ishuman(user))
 		return
@@ -98,7 +98,7 @@
 	if(!ishuman(M))
 		return ..()
 
-	if(evidence && evidence.len)
+	if(evidence && length(evidence))
 		return 0
 
 	var/mob/living/carbon/human/H = M

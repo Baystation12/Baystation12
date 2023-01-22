@@ -62,7 +62,7 @@
 				bits += organ.get_visible_state()
 			for(var/obj/item/implant in implants)
 				bits += implant.name
-			if(bits.len)
+			if(length(bits))
 				wound_descriptors["[english_list(bits)] visible in the wounds"] = 1
 
 	for(var/wound in wound_descriptors)
@@ -92,7 +92,7 @@
 		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_BRUTE]'>Bleeding</span>" : "Bleeding"
 	if(status & ORGAN_BROKEN)
 		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_BROKEN]'>[capitalize(broken_description)]</span>" : capitalize(broken_description)
-	if (implants && implants.len)
+	if (implants && length(implants))
 		var/unknown_body = 0
 		for(var/I in implants)
 			var/obj/item/implant/imp = I
@@ -121,7 +121,7 @@
 		for(var/datum/wound/wound in wounds)
 			if(LAZYLEN(wound.embedded_objects))
 				stuff |= wound.embedded_objects
-		if(stuff.len)
+		if(length(stuff))
 			to_chat(user, SPAN_WARNING("There's [english_list(stuff)] sticking out of [owner]'s [name]."))
 	else
 		to_chat(user, SPAN_NOTICE("You find no visible wounds."))
@@ -136,7 +136,7 @@
 		var/singleton/diagnostic_sign/sign = symptoms[S]
 		if(sign.manifested_in(src))
 			badness += sign.get_description(user)
-	if(!badness.len)
+	if(!length(badness))
 		to_chat(user, SPAN_NOTICE("[owner]'s skin is normal."))
 	else
 		to_chat(user, SPAN_WARNING("[owner]'s skin is [english_list(badness)]."))
@@ -168,7 +168,7 @@
 		var/gutsound = I.listen()
 		if(gutsound)
 			sounds += gutsound
-	if(!sounds.len)
+	if(!length(sounds))
 		if(owner.pulse())
 			sounds += "faint pulse"
 	return sounds

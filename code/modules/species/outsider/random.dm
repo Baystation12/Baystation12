@@ -129,9 +129,9 @@
 	for(var/gas in newgases)
 		if(gas_data.flags[gas] & (XGM_GAS_OXIDIZER|XGM_GAS_FUEL))
 			newgases -= gas
-	if(newgases.len)
+	if(length(newgases))
 		poison_types = list(pick_n_take(newgases))
-	if(newgases.len)
+	if(length(newgases))
 		exhale_type = pick_n_take(newgases)
 
 /obj/structure/aliumizer

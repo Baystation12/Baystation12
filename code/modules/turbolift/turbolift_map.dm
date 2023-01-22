@@ -214,7 +214,7 @@
 			light2.set_dir(NORTH)
 
 		// Update area.
-		if(az > areas_to_use.len)
+		if(az > length(areas_to_use))
 			log_debug("Insufficient defined areas in turbolift datum, aborting.")
 			qdel(src)
 			return

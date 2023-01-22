@@ -164,7 +164,7 @@
 			F.icon_state = "flash"
 		else if(F.times_used)
 			F.times_used--
-	if(!synths || !synths.len)
+	if(!synths || !length(synths))
 		return
 	for(var/datum/matter_synth/T in synths)
 		T.add_charge(T.recharge_rate * rate)

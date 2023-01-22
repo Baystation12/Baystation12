@@ -19,7 +19,7 @@
 			// Somehow check for missing vars here without creating instances.
 			// I.e.:  for(var/handled_var in sh.handled_vars) check handled_var in handled_type.vars
 
-	if(faulty_handlers.len)
+	if(length(faulty_handlers))
 		fail("The following special VV handlers are invalid: [english_list(faulty_handlers)]")
 	else
 		pass("All special VV handlers are valid.")
@@ -38,7 +38,7 @@
 			if(!(ispath(sh1.handled_type, sh2.handled_type) || ispath(sh2.handled_type, sh1.handled_type)))
 				continue
 			var/list/intersected_vars = sh1.handled_vars & sh2.handled_vars
-			if(intersected_vars.len)
+			if(length(intersected_vars))
 				failed =  TRUE
 				log_bad("[sh1] and [sh2] have the following overlaps: [english_list(intersected_vars)]")
 

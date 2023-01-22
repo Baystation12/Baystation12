@@ -97,7 +97,7 @@
 
 // Generates the field objects. Deletes existing field, if applicable.
 /obj/machinery/power/shield_generator/proc/regenerate_field()
-	if(field_segments.len)
+	if(length(field_segments))
 		for(var/obj/effect/shield/S in field_segments)
 			qdel(S)
 
@@ -167,7 +167,7 @@
 	mitigation_physical = clamp(mitigation_physical - MITIGATION_LOSS_PASSIVE, 0, mitigation_max)
 
 	if(running == SHIELD_RUNNING)
-		upkeep_power_usage = round((field_segments.len - damaged_segments.len) * ENERGY_UPKEEP_PER_TILE * upkeep_multiplier)
+		upkeep_power_usage = round((length(field_segments) - length(damaged_segments)) * ENERGY_UPKEEP_PER_TILE * upkeep_multiplier)
 	else if(running > SHIELD_RUNNING)
 		upkeep_power_usage = round(ENERGY_UPKEEP_IDLE * idle_multiplier * (field_radius * 8) * upkeep_multiplier) // Approximates number of turfs.
 
@@ -252,8 +252,8 @@
 	data["max_energy"] = round(max_energy / 1000000, 0.1)
 	data["current_energy"] = round(current_energy / 1000000, 0.1)
 	data["percentage_energy"] = max_energy ? round(data["current_energy"] / data["max_energy"] * 100) : 0
-	data["total_segments"] = field_segments ? field_segments.len : 0
-	data["functional_segments"] = damaged_segments ? data["total_segments"] - damaged_segments.len : data["total_segments"]
+	data["total_segments"] = field_segments ? length(field_segments) : 0
+	data["functional_segments"] = damaged_segments ? data["total_segments"] - length(damaged_segments) : data["total_segments"]
 	data["field_radius"] = field_radius
 	data["target_radius"] = target_radius
 	data["input_cap_kw"] = round(input_cap / 1000)

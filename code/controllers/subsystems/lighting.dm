@@ -37,9 +37,9 @@ SUBSYSTEM_DEF(lighting)
 		return ..()
 	..({"\
 		Queues: \
-		Source [light_queue.len] \
-		Corner [corner_queue.len] \
-		Overlay [overlay_queue.len]\n\
+		Source [length(light_queue)] \
+		Corner [length(corner_queue)] \
+		Overlay [length(overlay_queue)]\n\
 		Source Updates [length(stats_lists["Source"])]\n\
 		Corner Updates [length(stats_lists["Corner"])]\n\
 		Overlay Updates [length(stats_lists["Overlay"])]\
@@ -82,15 +82,15 @@ SUBSYSTEM_DEF(lighting)
 
 				var/list/stats_list = stats_lists[stat_name]
 				stats_list.Insert(1, stat_sum)
-				if(stats_list.len > stat_updates_to_keep)
-					stats_list.Cut(stats_list.len)
+				if(length(stats_list) > stat_updates_to_keep)
+					stats_list.Cut(length(stats_list))
 
 	MC_SPLIT_TICK_INIT(3)
 	if (!no_mc_tick)
 		MC_SPLIT_TICK
 
 	// Sources.
-	while (lq_idex <= light_queue.len)
+	while (lq_idex <= length(light_queue))
 		var/datum/light_source/L = light_queue[lq_idex]
 		lq_idex += 1
 
@@ -121,7 +121,7 @@ SUBSYSTEM_DEF(lighting)
 		MC_SPLIT_TICK
 
 	// Corners.
-	while (cq_idex <= corner_queue.len)
+	while (cq_idex <= length(corner_queue))
 		var/datum/lighting_corner/C = corner_queue[cq_idex]
 		cq_idex += 1
 
@@ -144,7 +144,7 @@ SUBSYSTEM_DEF(lighting)
 		MC_SPLIT_TICK
 
 	// Objects.
-	while (oq_idex <= overlay_queue.len)
+	while (oq_idex <= length(overlay_queue))
 		var/atom/movable/lighting_overlay/O = overlay_queue[oq_idex]
 		oq_idex += 1
 

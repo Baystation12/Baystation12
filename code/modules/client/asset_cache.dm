@@ -83,9 +83,9 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 			return 0
 
 	var/list/unreceived = asset_list - (client.cache + client.sending)
-	if(!unreceived || !unreceived.len)
+	if(!unreceived || !length(unreceived))
 		return 0
-	if (unreceived.len >= ASSET_CACHE_TELL_CLIENT_AMOUNT)
+	if (length(unreceived) >= ASSET_CACHE_TELL_CLIENT_AMOUNT)
 		to_chat(client, "Sending Resources...")
 	var/singleton/asset_cache/asset_cache = GET_SINGLETON(/singleton/asset_cache)
 	for(var/asset in unreceived)

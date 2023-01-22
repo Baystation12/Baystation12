@@ -17,12 +17,12 @@ SUBSYSTEM_DEF(throwing)
 /datum/controller/subsystem/throwing/UpdateStat(time)
 	if (PreventUpdateStat(time))
 		return ..()
-	..("Queue [processing.len]")
+	..("Queue [length(processing)]")
 
 
 /datum/controller/subsystem/throwing/fire(resumed, no_mc_tick)
 	if (!resumed)
-		if (!processing.len)
+		if (!length(processing))
 			return
 		queue = processing.Copy()
 	var/cut_until = 1

@@ -15,7 +15,7 @@
 // Picks a turf without a mob from the given list of turfs, if one exists.
 // If no such turf exists, picks any random turf from the given list of turfs.
 /proc/pick_mobless_turf_if_exists(list/start_turfs)
-	if(!start_turfs.len)
+	if(!length(start_turfs))
 		return null
 
 	var/list/available_turfs = list()
@@ -23,7 +23,7 @@
 		var/mob/M = locate() in start_turf
 		if(!M)
 			available_turfs += start_turf
-	if(!available_turfs.len)
+	if(!length(available_turfs))
 		available_turfs = start_turfs
 	return pick(available_turfs)
 
@@ -52,7 +52,7 @@
 			if(T.y >= world.maxy-TRANSITIONEDGE || T.y <= TRANSITIONEDGE)	continue
 		if(!inner_range || get_dist(origin, T) >= inner_range)
 			turfs += T
-	if(turfs.len)
+	if(length(turfs))
 		return pick(turfs)
 
 /proc/screen_loc2turf(text, turf/origin)

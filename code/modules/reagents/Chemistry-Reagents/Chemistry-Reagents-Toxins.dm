@@ -1020,7 +1020,7 @@
 		var/obj/item/organ/external/E = H.get_organ(limb_tag)
 		if(E && !E.is_stump() && !BP_IS_ROBOTIC(E) && E.species.name != SPECIES_PROMETHEAN)
 			meatchunks += E
-	if(!meatchunks.len)
+	if(!length(meatchunks))
 		if(prob(10))
 			to_chat(H, SPAN_DANGER("Your flesh rapidly mutates!"))
 			H.set_species(SPECIES_PROMETHEAN)

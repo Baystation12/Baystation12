@@ -42,7 +42,7 @@ field_generator power level display
 	if(!active)
 		if(warming_up)
 			overlays += "+a[warming_up]"
-	if(fields.len)
+	if(length(fields))
 		overlays += "+on"
 	// Power level indicator
 	// Scale % power to % num_power_levels and truncate value

@@ -63,7 +63,7 @@
 /obj/machinery/icecream_vat/Initialize()
 	. = ..()
 	create_reagents(100)
-	while(product_types.len < 8)
+	while(length(product_types) < 8)
 		product_types.Add(5)
 	reagents.add_reagent(/datum/reagent/drink/milk, 5)
 	reagents.add_reagent(/datum/reagent/nutriment/flour, 5)

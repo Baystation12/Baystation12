@@ -86,14 +86,14 @@
 		T.ex_act(EX_ACT_HEAVY)
 
 	//Dig out the tasty ores.
-	if(resource_field.len)
+	if(length(resource_field))
 		var/turf/simulated/harvesting = pick(resource_field)
 
-		while(resource_field.len && !harvesting.resources)
+		while(length(resource_field) && !harvesting.resources)
 			harvesting.has_resources = 0
 			harvesting.resources = null
 			resource_field -= harvesting
-			if(resource_field.len)
+			if(length(resource_field))
 				harvesting = pick(resource_field)
 
 		if(!harvesting || !harvesting.resources)
@@ -104,15 +104,15 @@
 
 		for(var/metal in ore_types)
 
-			if(contents.len >= capacity)
+			if(length(contents) >= capacity)
 				system_error("insufficient storage space")
 				set_active(FALSE)
 				need_player_check = 1
 				update_icon()
 				return
 
-			if(contents.len + total_harvest >= capacity)
-				total_harvest = capacity - contents.len
+			if(length(contents) + total_harvest >= capacity)
+				total_harvest = capacity - length(contents)
 
 			if(total_harvest <= 0) break
 			if(harvesting.resources[metal])
@@ -186,7 +186,7 @@
 	if(need_player_check)
 		icon_state = "mining_drill_error"
 	else if(active)
-		var/status = clamp(round( (contents.len / capacity) * 4 ), 0, 3)
+		var/status = clamp(round( (length(contents) / capacity) * 4 ), 0, 3)
 		icon_state = "mining_drill_active[status]"
 	else if(supported)
 		icon_state = "mining_drill_braced"
@@ -205,13 +205,13 @@
 
 	supported = 0
 
-	if((!supports || !supports.len) && initial(anchored) == 0)
+	if((!supports || !length(supports)) && initial(anchored) == 0)
 		anchored = FALSE
 		set_active(FALSE)
 	else
 		anchored = TRUE
 
-	if(supports && supports.len >= braces_needed)
+	if(supports && length(supports) >= braces_needed)
 		supported = 1
 
 	update_icon()

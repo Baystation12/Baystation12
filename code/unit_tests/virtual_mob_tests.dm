@@ -22,7 +22,7 @@
 	var/list/missing_mobs = expected_mobs - actual_mobs
 	var/list/excessive_mobs= actual_mobs - expected_mobs
 
-	if(missing_mobs.len || excessive_mobs.len)
+	if(length(missing_mobs) || length(excessive_mobs))
 		fail("[helper_proc] did not return the expected mobs. Expected [english_list(expected_mobs)], was [english_list(actual_mobs)]")
 		log_debug(mob_one.virtual_mob.sight)
 		log_debug(mob_one.virtual_mob.see_invisible)

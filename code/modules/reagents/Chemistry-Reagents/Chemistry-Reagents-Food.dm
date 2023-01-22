@@ -12,7 +12,7 @@
 
 /datum/reagent/nutriment/mix_data(list/newdata, newamount)
 
-	if(!islist(newdata) || !newdata.len)
+	if(!islist(newdata) || !length(newdata))
 		return
 
 	//add the new taste data

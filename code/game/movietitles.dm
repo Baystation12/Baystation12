@@ -119,7 +119,7 @@ GLOBAL_LIST(end_titles)
 			continue
 		if(H.timeofdeath && H.timeofdeath < 5 MINUTES) //don't mention these losers (prespawned corpses mostly)
 			continue
-		if(!cast.len && !chunksize)
+		if(!length(cast) && !chunksize)
 			chunk += "CAST:"
 		var/job = ""
 		if(GetAssignment(H) != "Unassigned")
@@ -150,7 +150,7 @@ GLOBAL_LIST(end_titles)
 			cast += "<center>[jointext(chunk,"<br>")]</center>"
 			chunk.Cut()
 			chunksize = 0
-	if(chunk.len)
+	if(length(chunk))
 		cast += "<center>[jointext(chunk,"<br>")]</center>"
 
 	titles += cast
@@ -167,7 +167,7 @@ GLOBAL_LIST(end_titles)
 	for(var/spec in monkies)
 		var/datum/species/S = all_species[spec]
 		corpses += "[monkies[spec]] [lowertext(monkies[spec] > 1 ? S.name_plural : S.name)]"
-	if(corpses.len)
+	if(length(corpses))
 		titles += "<center>BASED ON REAL EVENTS<br>In memory of [english_list(corpses)].</center>"
 
 	var/list/staff = list("PRODUCTION STAFF:")
@@ -184,7 +184,7 @@ GLOBAL_LIST(end_titles)
 			goodboys += "[C.key]"
 
 	titles += "<center>[jointext(staff,"<br>")]</center>"
-	if(goodboys.len)
+	if(length(goodboys))
 		titles += "<center>STAFF'S GOOD BOYS:<br>[english_list(goodboys)]</center><br>"
 
 	var/disclaimer = "<br>Sponsored by [GLOB.using_map.company_name].<br>All rights reserved.<br>\

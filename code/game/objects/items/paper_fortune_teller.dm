@@ -27,7 +27,7 @@
 
 /obj/item/paper_fortune_teller/Initialize(ml, material_key)
 	var/list/fortune_options = possible_fortunes.Copy()
-	for(var/i = 1 to fortunes.len)
+	for(var/i = 1 to length(fortunes))
 		fortunes[i] = pick_n_take(fortune_options)
 	add_state_machine(src, /datum/state_machine/paper_fortune)
 	. = ..()

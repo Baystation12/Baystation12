@@ -331,8 +331,8 @@
 
 	var/list/obj/item/organ/external/to_shock = trace_shock(initial_organ, floor_organ)
 
-	if(to_shock && to_shock.len)
-		shock_damage /= to_shock.len
+	if(to_shock && length(to_shock))
+		shock_damage /= length(to_shock)
 		shock_damage = round(shock_damage, 0.1)
 	else
 		return 0
@@ -1684,7 +1684,7 @@
 				status += "is grey and necrotic"
 			if(!org.is_usable() || org.is_dislocated())
 				status += "dangling uselessly"
-			if(status.len)
+			if(length(status))
 				src.show_message("My [org.name] is [SPAN_WARNING("[english_list(status)].")]",1)
 			else
 				src.show_message("My [org.name] is [SPAN_NOTICE("OK.")]",1)

@@ -131,7 +131,7 @@
 
 	for(var/prefix_key in prefixes_by_key)
 		var/list/prefix_types = prefixes_by_key[prefix_key]
-		if(prefix_types.len > 1)
+		if(length(prefix_types) > 1)
 			for(var/prefix_type in prefix_types)
 				var/singleton/prefix/prefix_instance = GET_SINGLETON(prefix_type)
 				pref.prefix_keys_by_type[prefix_instance.type] = prefix_instance.default_key

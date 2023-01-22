@@ -428,7 +428,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/candidates = GLOB.using_map.accessible_z_levels.Copy()
 	candidates.Remove(num2text(current_z_level))
 
-	if(!candidates.len)
+	if(!length(candidates))
 		return current_z_level
 	return text2num(pickweight(candidates))
 

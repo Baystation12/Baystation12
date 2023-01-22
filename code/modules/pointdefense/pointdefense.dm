@@ -25,7 +25,7 @@
 		var/datum/local_network/lan = pointdefense.get_local_network()
 		if(lan)
 			var/list/pointdefense_controllers = lan.get_devices(/obj/machinery/pointdefense_control)
-			if(pointdefense_controllers.len > 1)
+			if(length(pointdefense_controllers) > 1)
 				lan.remove_device(src)
 
 /obj/machinery/pointdefense_control/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
@@ -90,7 +90,7 @@
 		var/datum/local_network/lan = pointdefense.get_local_network()
 		if(lan)
 			var/list/pointdefense_controllers = lan.get_devices(/obj/machinery/pointdefense_control)
-			if(pointdefense_controllers && pointdefense_controllers.len > 1)
+			if(pointdefense_controllers && length(pointdefense_controllers) > 1)
 				lan.remove_device(src)
 		return
 	else

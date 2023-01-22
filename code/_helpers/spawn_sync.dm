@@ -62,7 +62,7 @@
 
 /datum/spawn_sync/proc/start_worker()
 	//Extract the thread run proc and it's arguments from the variadic args list.
-	ASSERT(args.len > 0)
+	ASSERT(length(args) > 0)
 	var/obj = args[1]
 	var/thread_proc = args[2]
 

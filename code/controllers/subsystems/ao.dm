@@ -11,11 +11,11 @@ SUBSYSTEM_DEF(ao)
 /datum/controller/subsystem/ao/UpdateStat(time)
 	if (PreventUpdateStat(time))
 		return ..()
-	..("Queue: [queue.len]")
+	..("Queue: [length(queue)]")
 
 
 /datum/controller/subsystem/ao/fire(resume, no_mc_tick)
-	if (!queue.len)
+	if (!length(queue))
 		return
 	var/cut_until = 1
 	for (var/turf/turf as anything in queue)

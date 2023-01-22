@@ -50,7 +50,7 @@
 //Repair a certain amount of brute or burn damage to the suit.
 /obj/item/clothing/suit/space/proc/repair_breaches(damtype, amount, mob/user)
 
-	if(!can_breach || !breaches || !breaches.len)
+	if(!can_breach || !breaches || !length(breaches))
 		to_chat(user, "There are no breaches to repair on \the [src].")
 		return
 
@@ -60,7 +60,7 @@
 		if(B.damtype == damtype)
 			valid_breaches += B
 
-	if(!valid_breaches.len)
+	if(!length(valid_breaches))
 		to_chat(user, "There are no breaches to repair on \the [src].")
 		return
 
@@ -148,7 +148,7 @@
 	burn_damage = 0
 	var/all_patched = TRUE
 
-	if(!can_breach || !breaches || !breaches.len)
+	if(!can_breach || !breaches || !length(breaches))
 		SetName(initial(name))
 		return 0
 
@@ -259,7 +259,7 @@
 
 /obj/item/clothing/suit/space/examine(mob/user)
 	. = ..()
-	if(can_breach && breaches && breaches.len)
+	if(can_breach && breaches && length(breaches))
 		for(var/datum/breach/B in breaches)
 			to_chat(user, SPAN_DANGER("It has \a [B.descriptor]."))
 

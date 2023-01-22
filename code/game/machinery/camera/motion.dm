@@ -35,7 +35,7 @@
 /obj/machinery/camera/proc/lostTarget(mob/target)
 	if (target in motionTargets)
 		motionTargets -= target
-	if (motionTargets.len == 0)
+	if (length(motionTargets) == 0)
 		cancelAlarm()
 
 /obj/machinery/camera/proc/cancelAlarm()

@@ -53,7 +53,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 
 
 /datum/event_container/proc/acquire_event()
-	if(available_events.len == 0)
+	if(length(available_events) == 0)
 		return
 	var/active_with_role = number_active_with_role()
 
@@ -63,7 +63,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		if(event_weight)
 			possible_events[EM] = event_weight
 
-	if(possible_events.len == 0)
+	if(length(possible_events) == 0)
 		return null
 
 	// Select an event and remove it from the pool of available events

@@ -238,7 +238,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 /datum/reagents/proc/has_all_reagents(list/check_reagents)
 	//this only works if check_reagents has no duplicate entries... hopefully okay since it expects an associative list
-	var/missing = check_reagents.len
+	var/missing = length(check_reagents)
 	for(var/datum/reagent/current in reagent_list)
 		if(current.type in check_reagents)
 			if(current.volume >= check_reagents[current.type])

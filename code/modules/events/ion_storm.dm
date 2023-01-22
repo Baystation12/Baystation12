@@ -136,7 +136,7 @@
 			continue
 		players += player.real_name
 
-	if(players.len)
+	if(length(players))
 		return pick(players)
 	return default_if_none
 
@@ -147,8 +147,8 @@
 		if(initial(specimen.spawn_flags) & SPECIES_CAN_JOIN)
 			species += initial(specimen.name_plural)
 
-	if(species.len)
-		return pick(species.len)
+	if(length(species))
+		return pick(length(species))
 	return default_if_none
 
 /datum/event/ionstorm/proc/get_random_language(mob/living/silicon/S)
@@ -161,7 +161,7 @@
 		else if(L.flags & (HIVEMIND|NONVERBAL|SIGNLANG))
 			languages -= L
 
-	if(languages.len)
+	if(length(languages))
 		var/datum/language/L = pick(languages)
 		return L.name
 	else // Highly unlikely but it is a failsafe fallback.

@@ -125,7 +125,7 @@ var/global/list/ai_verbs_default = list(
 	while(!pickedName)
 		pickedName = pick(GLOB.ai_names)
 		for (var/mob/living/silicon/ai/A in GLOB.silicon_mobs)
-			if (A.real_name == pickedName && possibleNames.len > 1) //fixing the theoretically possible infinite loop
+			if (A.real_name == pickedName && length(possibleNames) > 1) //fixing the theoretically possible infinite loop
 				possibleNames -= pickedName
 				pickedName = null
 
@@ -249,12 +249,12 @@ var/global/list/ai_verbs_default = list(
 	for(var/line in lines)
 	// split & clean up
 		var/list/Entry = splittext(line, ":")
-		for(var/i = 1 to Entry.len)
+		for(var/i = 1 to length(Entry))
 			Entry[i] = trim(Entry[i])
 
-		if(Entry.len < 2)
+		if(length(Entry) < 2)
 			continue
-		if(Entry.len == 2) // This is to handle legacy entries
+		if(length(Entry) == 2) // This is to handle legacy entries
 			Entry[LIST_PRE_INC(Entry)] = Entry[1]
 
 		if(Entry[1] == src.ckey && Entry[2] == src.real_name)
@@ -540,7 +540,7 @@ var/global/list/ai_verbs_default = list(
 		for(var/datum/computer_file/report/crew_record/t in GLOB.all_crew_records)//Look in data core locked.
 			personnel_list["[t.get_name()]: [t.get_rank()]"] = t.photo_front//Pull names, rank, and image.
 
-		if(personnel_list.len)
+		if(length(personnel_list))
 			input = input("Select a crew member:") as null|anything in personnel_list
 			var/icon/character_icon = personnel_list[input]
 			if(character_icon)

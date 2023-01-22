@@ -155,16 +155,16 @@
 
 	var/list/allmails = current_account.all_emails()
 
-	if(allmails.len > last_message_count)
+	if(length(allmails) > last_message_count)
 		. = 2
-	else if(allmails.len > read_message_count)
+	else if(length(allmails) > read_message_count)
 		. = 1
 	else
 		. = 0
 
-	last_message_count = allmails.len
+	last_message_count = length(allmails)
 	if(messages_read)
-		read_message_count = allmails.len
+		read_message_count = length(allmails)
 
 
 /datum/nano_module/email_client/proc/log_out()
@@ -260,7 +260,7 @@
 						"uid" = message.uid
 					)))
 				data["messages"] = all_messages
-				data["messagecount"] = all_messages.len
+				data["messagecount"] = length(all_messages)
 	else
 		data["stored_login"] = stored_login
 		data["stored_password"] = stars(stored_password, 0)

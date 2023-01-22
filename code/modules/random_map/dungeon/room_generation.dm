@@ -18,7 +18,7 @@
 	return 1
 
 /datum/random_room/proc/apply_loot(xorigin = 1,yorigin = 1,zorigin = 1, type)
-	if(!item_spawns || !item_spawns.len)
+	if(!item_spawns || !length(item_spawns))
 		return 0
 	var/place = pick(item_spawns)
 	if(istype(place,/obj)) //we assume what object we get is some sort of container.

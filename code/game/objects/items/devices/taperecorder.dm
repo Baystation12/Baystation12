@@ -418,7 +418,7 @@
 /obj/item/device/tape/attack_self(mob/user)
 	if(!ruined)
 		to_chat(user, SPAN_NOTICE("You pull out all the tape!"))
-		get_loose_tape(user, storedinfo.len)
+		get_loose_tape(user, length(storedinfo))
 		ruin()
 
 
@@ -478,7 +478,7 @@
 		to_chat(user, SPAN_NOTICE("There's nothing on this tape!"))
 		return
 	var/list/output = list("<center>")
-	for(var/i=1, i < timestamp.len, i++)
+	for(var/i=1, i < length(timestamp), i++)
 		var/time = "\[[time2text(timestamp[i]*10,"mm:ss")]\]"
 		output += "[time]<br><a href='?src=\ref[src];cut_after=[i]'>-----CUT------</a><br>"
 	output += "</center>"
@@ -505,7 +505,7 @@
 /obj/item/device/tape/OnTopic(mob/user, list/href_list)
 	if(href_list["cut_after"])
 		var/index = text2num(href_list["cut_after"])
-		if(index >= timestamp.len)
+		if(index >= length(timestamp))
 			return
 
 		to_chat(user, SPAN_NOTICE("You remove part of the tape off."))

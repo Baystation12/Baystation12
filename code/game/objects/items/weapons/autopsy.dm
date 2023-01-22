@@ -126,7 +126,7 @@
 
 		n++
 
-	if(chemtraces.len)
+	if(length(chemtraces))
 		scan_data += "<b>Trace Chemicals: </b><br>"
 		for(var/chemID in chemtraces)
 			scan_data += chemID

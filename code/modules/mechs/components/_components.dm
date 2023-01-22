@@ -87,7 +87,7 @@
 	var/list/damageable_components = list()
 	for(var/obj/item/robot_parts/robot_component/RC in contents)
 		damageable_components += RC
-	if(!damageable_components.len) return
+	if(!length(damageable_components)) return
 	var/obj/item/robot_parts/robot_component/RC = pick(damageable_components)
 	if(RC.take_damage(brute, burn))
 		qdel(RC)
@@ -95,13 +95,13 @@
 
 /obj/item/mech_component/attackby(obj/item/thing, mob/user)
 	if(isScrewdriver(thing))
-		if(contents.len)
+		if(length(contents))
 			//Filter non movables
 			var/list/valid_contents = list()
 			for(var/atom/movable/A in contents)
 				if(!A.anchored)
 					valid_contents += A
-			if(!valid_contents.len)
+			if(!length(valid_contents))
 				return
 			var/obj/item/removed = pick(valid_contents)
 			if(!(removed in contents))
