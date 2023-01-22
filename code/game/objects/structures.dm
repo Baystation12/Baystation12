@@ -79,6 +79,13 @@
 	return ..()
 
 
+/obj/structure/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_GRAB_AGGRESSIVE] = "<p>On harm intent, slams the victim against \the [initial(name)], causing damage to both the victim and object.</p>"
+	if (HAS_FLAGS(initial(atom_flags), ATOM_FLAG_CLIMBABLE))
+		.[CODEX_INTERACTION_GRAB_AGGRESSIVE] += "<p>On non-harm intent, places the victim on \the [initial(name)] after a 3 second timer.</p>"
+
+
 /obj/structure/use_grab(obj/item/grab/grab, list/click_params)
 	// Harm intent - Slam face against the structure
 	if (grab.assailant == I_HURT)
