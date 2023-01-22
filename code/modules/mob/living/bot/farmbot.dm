@@ -279,3 +279,17 @@
 		return FARMBOT_NUTRIMENT
 
 	return 0
+
+
+/mob/living/bot/farmbot/get_construction_info()
+	return list(
+		"Attach a <b>Plant Scanner</b> to a <b>Water Tank</b>.",
+		"Add a <b>Bucket</b>.",
+		"Add a <b>Minihoe</b>.",
+		"Add a <b>Proximity Sensor</b> to complete the farmbot."
+	)
+
+
+/mob/living/bot/farmbot/get_antag_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_EMAG] += "<p>Enables a malfunction that causes \the [initial(name)] to attack mobs, except yourself.</p>"
