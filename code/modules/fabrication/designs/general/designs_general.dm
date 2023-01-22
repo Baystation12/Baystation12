@@ -1,6 +1,8 @@
 /datum/fabricator_recipe/bucket
 	path = /obj/item/reagent_containers/glass/bucket
 
+/datum/fabricator_recipe/mop
+	path = /obj/item/mop
 /datum/fabricator_recipe/flashlight
 	path = /obj/item/device/flashlight
 
@@ -18,6 +20,9 @@
 
 /datum/fabricator_recipe/radio_headset
 	path = /obj/item/device/radio/headset
+
+/datum/fabricator_recipe/binocular
+	path = /obj/item/device/binoculars
 
 /datum/fabricator_recipe/radio_bounced
 	path = /obj/item/device/radio/off

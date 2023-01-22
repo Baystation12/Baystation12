@@ -47,6 +47,8 @@
 	accuracy = 2
 
 /obj/item/gun/energy/get_hardpoint_maptext()
+	if (charge_cost <= 0)
+		return "INF"
 	return "[round(power_supply.charge / charge_cost)]/[max_shots]"
 
 /obj/item/gun/energy/get_hardpoint_status_value()
@@ -273,7 +275,7 @@
 			E.setClickCooldown(1.35 SECONDS)
 			E.visible_message(SPAN_DANGER("\The [E] swings \the [src] back, preparing for an attack!"), blind_message = SPAN_DANGER("You hear the loud hissing of hydraulics!"))
 			playsound(E, 'sound/mecha/mechmove03.ogg', 35, 1)
-			if (do_after(E, 1.2 SECONDS, get_turf(user), do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) && E && MC)
+			if (do_after(E, 1.2 SECONDS, get_turf(user), DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && E && MC)
 				for (var/mob/living/M in orange(1, E))
 					attack(M, E, E.zone_sel.selecting, FALSE)
 				E.spin(0.65 SECONDS, 0.125 SECONDS)
@@ -314,7 +316,7 @@
 				owner.visible_message(SPAN_WARNING("\The [owner] retracts \the [src], preparing to push with it!"), blind_message = SPAN_WARNING("You hear the whine of hydraulics and feel a rush of air!"))
 				owner.setClickCooldown(0.7 SECONDS)
 				last_push = world.time
-				if (do_after(owner, 0.5 SECONDS, get_turf(owner), do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) && owner)
+				if (do_after(owner, 0.5 SECONDS, get_turf(owner), DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && owner)
 					owner.visible_message(SPAN_WARNING("\The [owner] slams the area in front \the [src]!"), blind_message = SPAN_WARNING("You hear a loud hiss and feel a strong gust of wind!"))
 					playsound(src ,'sound/effects/bang.ogg',35,1)
 					var/list/turfs = list()
@@ -339,7 +341,7 @@
 			owner.setClickCooldown(0.8 SECONDS)
 			blocking = TRUE
 			last_max_block = world.time
-			do_after(owner, 0.75 SECONDS, get_turf(user), do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT)
+			do_after(owner, 0.75 SECONDS, get_turf(user), DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)
 			blocking = FALSE
 		else
 			to_chat(user, SPAN_WARNING("You are not ready to block again!"))
@@ -432,7 +434,7 @@
 	. = ..()
 	if (shield)
 		var/throw_damage = 0
-		if (istype(M,/obj/))
+		if (isobj(M))
 			var/obj/O = M
 			throw_damage = O.throwforce*(TT.speed/THROWFORCE_SPEED_DIVISOR)
 
@@ -544,3 +546,63 @@
 					O.drop_r_hand()
 				if(flash_time > 5)
 					O.Weaken(3)
+
+/obj/item/flamethrower/full/mech
+	max_beaker = ITEM_SIZE_NORMAL
+	range = 5
+	desc = "A Hephaestus brand 'Prometheus' flamethrower. Bigger and better."
+
+/obj/item/flamethrower/full/mech/Initialize()
+	. = ..()
+	beaker = new /obj/item/reagent_containers/chem_disp_cartridge(src)
+
+/obj/item/flamethrower/full/mech/get_hardpoint_maptext()
+	return beaker ? "[lit ? "ON" : "OFF"]-:-[beaker.reagents.total_volume]/[beaker.reagents.maximum_volume]" : "NO TANK"
+
+/obj/item/flamethrower/full/mech/get_hardpoint_status_value()
+	return beaker ? beaker.reagents.total_volume/beaker.reagents.maximum_volume : 0
+
+/obj/item/mech_equipment/mounted_system/flamethrower
+	icon_state = "mech_flamer"
+	holding_type = /obj/item/flamethrower/full/mech
+	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
+	restricted_software = list(MECH_SOFTWARE_WEAPONS)
+
+/obj/item/mech_equipment/mounted_system/flamethrower/attack_self(mob/user)
+	. = ..()
+	if(owner && holding)
+		update_icon()
+
+/obj/item/mech_equipment/mounted_system/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
+	if(!CanPhysicallyInteract(user))	return
+
+	var/obj/item/flamethrower/full/mech/FM = holding
+	if(istype(FM))
+		if(isCrowbar(W) && FM.beaker)
+			if(FM.beaker)
+				user.visible_message(SPAN_NOTICE("\The [user] pries out \the [FM.beaker] using \the [W]."))
+				FM.beaker.dropInto(get_turf(user))
+				FM.beaker = null
+			return
+
+		if (istype(W, /obj/item/reagent_containers) && W.is_open_container() && (W.w_class <= FM.max_beaker))
+			if(FM.beaker)
+				to_chat(user, SPAN_NOTICE("There is already a tank inserted!"))
+				return
+			if(user.unEquip(W, FM))
+				user.visible_message(SPAN_NOTICE("\The [user] inserts \the [W] inside \the [src]."))
+				FM.beaker = W
+			return
+	..()
+
+/obj/item/mech_equipment/mounted_system/flamethrower/on_update_icon()
+	. = ..()
+	if(owner && holding)
+		var/obj/item/flamethrower/full/mech/FM = holding
+		if(istype(FM))
+			if(FM.lit)
+				icon_state = "mech_flamer_lit"
+			else icon_state = "mech_flamer"
+
+			if(owner)
+				owner.update_icon()

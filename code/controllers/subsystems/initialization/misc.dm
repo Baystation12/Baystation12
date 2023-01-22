@@ -4,12 +4,13 @@ SUBSYSTEM_DEF(init_misc)
 	flags = SS_NO_FIRE
 
 
-/datum/controller/subsystem/init_misc/stat_entry(text, force)
-	if (!initialized)
-		return ..(text, force)
+/datum/controller/subsystem/init_misc/UpdateStat(time)
+	if (initialized)
+		return
+	..()
 
 
-/datum/controller/subsystem/init_misc/Initialize(start_timeofday)
+/datum/controller/subsystem/init_misc/Initialize(start_uptime)
 	GLOB.changelog_hash = md5('html/changelog.html')
 	if(config.generate_map)
 		GLOB.using_map.perform_map_generation()

@@ -1,4 +1,4 @@
-var/list/pai_emotions = list(
+var/global/list/pai_emotions = list(
 		"Happy" = 1,
 		"Cat" = 2,
 		"Extremely Happy" = 3,

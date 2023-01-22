@@ -1,0 +1,76 @@
+<div style="min-width: 480px">
+	<h3>{{:data.title}}</h3>
+
+	<div class="item" style="padding-top: 10px">
+
+		<div class="itemLabel">
+			Health:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.health, null, {'health' : '1'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Auto repair:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.repair, null, {'repair' : '1'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Weapon Type:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.weapon, null, {'weapon' : '1'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Check Weapons:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.check_weapons, null, {'check_weapons' : '1'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Check Access:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.check_access, null, {'check_access' : '1'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Check Synth:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.check_synth, null, {'check_synth' : '1'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Lethality:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.lethal, null, {'lethal' : '1'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Access List:
+		</div>
+		<div class="item">
+			{{:helper.link('Add Access List', null, {'add_access' : '1'}, null, null)}}
+			{{:helper.link('Remove Access List', null, {'remove_access' : '1'}, null, null)}}
+		</div>
+		<div class="block">
+			{{props data.access_list :value :index}}
+				{{:value}}
+				<br>
+			{{/for}}
+		</div>
+	</div>
+</div>

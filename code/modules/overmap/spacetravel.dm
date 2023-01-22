@@ -1,12 +1,12 @@
 //list used to cache empty zlevels to avoid needless map bloat
-var/list/cached_space = list()
+var/global/list/cached_space = list()
 
 //Space stragglers go here
 
 /obj/effect/overmap/visitable/sector/temporary
 	name = "Deep Space"
 	invisibility = 101
-	known = 0
+	known = FALSE
 
 /obj/effect/overmap/visitable/sector/temporary/New(var/nx, var/ny, var/nz)
 	map_z += nz
@@ -39,7 +39,7 @@ var/list/cached_space = list()
 			return 0
 	return 1
 
-proc/get_deepspace(x,y)
+/proc/get_deepspace(x,y)
 	var/turf/map = locate(x,y,GLOB.using_map.overmap_z)
 	var/obj/effect/overmap/visitable/sector/temporary/res
 	for(var/obj/effect/overmap/visitable/sector/temporary/O in map)
@@ -67,7 +67,7 @@ proc/get_deepspace(x,y)
 /mob/living/carbon/human/lost_in_space()
 	return isnull(client) && !last_ckey && stat == DEAD
 
-proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
+/proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	if (!T || !A)
 		return
 

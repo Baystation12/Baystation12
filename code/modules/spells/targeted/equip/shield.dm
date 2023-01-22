@@ -15,7 +15,7 @@
 	charge_type = Sp_RECHARGE
 	charge_max = 900
 	cooldown_min = 300
-	equipped_summons = list("off hand" = /obj/item/shield/)
+	equipped_summons = list("off hand" = /obj/item/shield)
 	duration = 300
 	delete_old = 0
 	var/item_color = "#6666ff"

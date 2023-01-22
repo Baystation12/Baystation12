@@ -220,7 +220,7 @@
 	if(src.timing)
 		var/disp1 = id
 		var/timeleft = timeleft()
-		var/disp2 = "[add_zero(num2text((timeleft / 60) % 60),2)]~[add_zero(num2text(timeleft % 60), 2)]"
+		var/disp2 = "[pad_left(num2text((timeleft / 60) % 60), 2, "0")]~[pad_left(num2text(timeleft % 60), 2, "0")]"
 		if(length(disp2) > CHARS_PER_LINE)
 			disp2 = "Error"
 		update_display(disp1, disp2)

@@ -5,7 +5,7 @@
   * with the same filename using save_file(). Additional useful procs for data
   * files in particular are also available.
   */
-/obj/item/stock_parts/computer/hard_drive/
+/obj/item/stock_parts/computer/hard_drive
 	name = "basic hard drive"
 	desc = "A small power efficient solid state drive, with 128GQ of storage capacity for use in basic computers where power efficiency is desired."
 	power_usage = 25

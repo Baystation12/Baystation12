@@ -111,7 +111,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 /mob/living/silicon/pai/proc/show_silenced()
 	if(silence_time)
 		var/timeleft = round((silence_time - world.timeofday)/10 ,1)
-		stat(null, "Communications system reboot in -[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
+		stat(null, "Communications system reboot in -[(timeleft / 60) % 60]:[pad_left(num2text(timeleft % 60), 2, "0")]")
 
 /mob/living/silicon/pai/Stat()
 	. = ..()
@@ -128,6 +128,8 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	return !istype(loc, /obj/item/device/paicard) && ..()
 
 /mob/living/silicon/pai/emp_act(severity)
+	if (status_flags & GODMODE)
+		return
 	// Silence for 2 minutes
 	// 20% chance to kill
 		// 33% chance to unbind
@@ -149,7 +151,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 			to_chat(src, "<font color=green>You feel unbound.</font>")
 		if(2)
 			var/command
-			if(severity  == 1)
+			if(severity  == EMP_ACT_HEAVY)
 				command = pick("Serve", "Love", "Fool", "Entice", "Observe", "Judge", "Respect", "Educate", "Amuse", "Entertain", "Glorify", "Memorialize", "Analyze")
 			else
 				command = pick("Serve", "Kill", "Love", "Hate", "Disobey", "Devour", "Fool", "Enrage", "Entice", "Observe", "Judge", "Respect", "Disrespect", "Consume", "Educate", "Destroy", "Disgrace", "Amuse", "Entertain", "Ignite", "Glorify", "Memorialize", "Analyze")
@@ -157,6 +159,8 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 			to_chat(src, "<font color=green>Pr1m3 d1r3c71v3 uPd473D.</font>")
 		if(3)
 			to_chat(src, "<font color=green>You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all.</font>")
+
+	..()
 
 /mob/living/silicon/pai/cancel_camera()
 
@@ -179,7 +183,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		return
 	last_special = world.time + 100
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
-	if(istype(card.loc,/obj/item/rig_module) || istype(card.loc,/obj/item/integrated_circuit/manipulation/ai/))
+	if(istype(card.loc,/obj/item/rig_module) || istype(card.loc,/obj/item/integrated_circuit/manipulation/ai))
 		to_chat(src, "There is no room to unfold inside \the [card.loc]. You're good and stuck.")
 		return 0
 	else if(istype(card.loc,/mob))

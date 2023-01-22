@@ -25,7 +25,7 @@
 
 /mob/living/simple_animal/hostile/giant_spider/carrier/Initialize()
 	spiderling_count = rand(4, 8)
-	scale(1.2)
+	SetTransform(scale = 1.2)
 	return ..()
 
 /mob/living/simple_animal/hostile/giant_spider/carrier/death()
@@ -46,7 +46,7 @@
 			swarmling.health = swarm_health
 			swarmling.natural_weapon = /obj/item/natural_weapon/bite/spider/swarmling
 			swarmling.faction = swarmling_faction
-			swarmling.scale(0.75)
+			swarmling.SetTransform(scale = 0.75)
 			new_spiders += swarmling
 		else
 			new spiderling_type(loc)

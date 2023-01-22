@@ -304,7 +304,7 @@
 			playsound(owner.loc,'sound/effects/scanbeep.ogg',30,0)
 			for(var/obj/item/mech_component/MC in list(owner.arms, owner.legs, owner.body, owner.head))
 				if(MC)
-					MC.return_diagnostics(usr)	
+					MC.return_diagnostics(usr)
 
 //Controls if cameras set the vision flags
 /obj/screen/exosuit/toggle/camera
@@ -361,7 +361,7 @@
 		if(modifiers["ctrl"])
 			celsius = !celsius
 			usr.show_message(SPAN_NOTICE("You switch the chassis probe display to use [celsius ? "celsius" : "kelvin"]."), VISIBLE_MESSAGE)
-			return	
+			return
 		if(owner && owner.body && owner.body.diagnostics?.is_functional() && owner.loc)
 			usr.show_message(SPAN_NOTICE("The life support panel blinks several times as it updates:"), VISIBLE_MESSAGE)
 
@@ -380,11 +380,16 @@
 	//Relative value of heat
 	if(owner && owner.body && owner.body.diagnostics?.is_functional() && gauge_needle)
 		var/value = clamp( owner.bodytemperature / (owner.material.melting_point * 1.55), 0, 1)
-		var/matrix/rot_matrix = matrix()
-		rot_matrix.Turn(Interpolate(-90, 90, value))
-		rot_matrix.Translate(0, -2)
-		animate(gauge_needle, transform = rot_matrix, 0.1, easing = SINE_EASING)
-		
+		animate(
+			gauge_needle,
+			transform = matrix().Update(
+				rotation = Interpolate(-90, 90, value),
+				offset_y = -2
+			),
+			time = 0.1,
+			easing = SINE_EASING
+		)
+
 
 #undef BAR_CAP
 #undef MECH_UI_STYLE

@@ -8,11 +8,10 @@ SUBSYSTEM_DEF(ghost_images)
 	var/queue_all = FALSE
 
 
-/datum/controller/subsystem/ghost_images/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Queue: [queue.len]"
-	..(text, force)
+/datum/controller/subsystem/ghost_images/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Queue: [queue.len]")
 
 
 /datum/controller/subsystem/ghost_images/fire(resumed = 0)

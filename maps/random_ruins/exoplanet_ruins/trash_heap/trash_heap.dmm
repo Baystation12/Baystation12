@@ -15,10 +15,6 @@
 /obj/random/junk,
 /turf/template_noop,
 /area/template_noop)
-"l" = (
-/obj/random/junk,
-/turf/template_noop,
-/area/template_noop)
 "n" = (
 /obj/random/junk,
 /obj/random/junk,
@@ -143,7 +139,7 @@ j
 j
 j
 j
-l
+j
 a
 a
 "}

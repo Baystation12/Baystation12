@@ -169,3 +169,48 @@
 	name = "Clown"
 	alive_icon = "ai-clown2"
 	alive_light = "#e50213"
+
+/datum/ai_icon/malf/alien
+	name = "Alien"
+	alive_icon = "ai-alien"
+	alive_light = "#9517bb"
+
+/datum/ai_icon/malf/syndicatmeow
+	name = "Catmeow"
+	alive_icon = "ai-syndicatmeow"
+	alive_light = "#c529ca"
+
+/datum/ai_icon/malf/fabulous
+	name = "Fabulous"
+	alive_icon = "ai-fabulous"
+	alive_light = "#d3c5c7"
+
+/datum/ai_icon/malf/bloodylove
+	name = "Bloodylove"
+	alive_icon = "ai-bloodylove"
+	alive_light = "#9b1b23"
+
+/datum/ai_icon/malf/ahasuerus
+	name = "Ahasuerus"
+	alive_icon = "ai-ahasuerus"
+	alive_light = "#d1c1c6"
+
+/datum/ai_icon/malf/godfrey
+	name = "Godfrey"
+	alive_icon = "ai-godfrey"
+	alive_light = "#c0baba"
+
+/datum/ai_icon/malf/angel
+	name = "Angel"
+	alive_icon = "ai-angel"
+	alive_light = "#f5f4f4"
+
+/datum/ai_icon/malf/fallen_angel
+	name = "Fallen Angel"
+	alive_icon = "ai-fallen-angel"
+	alive_light = "#832329"
+
+/datum/ai_icon/malf/hourglass
+	name = "Hourglass"
+	alive_icon = "ai-hourglass"
+	alive_light = "#c7bbbc"

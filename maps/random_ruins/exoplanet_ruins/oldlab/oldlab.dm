@@ -10,7 +10,7 @@
 
 	// Areas //
 
-area/map_template/oldlab
+/area/map_template/oldlab
 
 /area/map_template/oldlab/solars
 	name = "\improper Solar Array and hall"

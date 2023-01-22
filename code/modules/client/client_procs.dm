@@ -123,15 +123,17 @@
 	var/bad_version = config.minimum_byond_version && byond_version < config.minimum_byond_version
 	var/bad_build = config.minimum_byond_build && byond_build < config.minimum_byond_build
 	if (bad_build || bad_version)
-		to_chat(src, "You are attempting to connect with a out of date version of BYOND. Please update to the latest version at http://www.byond.com/ before trying again.")
-		qdel(src)
-		return
+		to_chat(src, "You are attempting to connect with a out of date version of BYOND. Please update to the latest version at http://www.byond.com/ before trying again.\
+		Your version is [byond_version].[byond_build]")
+		//qdel(src)
+		//return
 
 	if("[byond_version].[byond_build]" in config.forbidden_versions)
 		_DB_staffwarn_record(ckey, "Tried to connect with broken and possibly exploitable BYOND build.")
-		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.")
-		qdel(src)
-		return
+		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.\
+		Your version is [byond_version].[byond_build]")
+		//qdel(src)
+		//return
 
 	if(!config.guests_allowed && IsGuestKey(key))
 		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
@@ -144,6 +146,11 @@
 			log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[config.player_limit])")
 			qdel(src)
 			return
+
+	for (var/datum/ticket/T in tickets)
+		if (T.status == TICKET_OPEN && T.owner.ckey == ckey)
+			message_staff("[key_name_admin(src)] has joined the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]")
+			break
 
 	// Change the way they should download resources.
 	if(config.resource_urls && config.resource_urls.len)
@@ -219,6 +226,10 @@
 
 
 /client/Destroy()
+	for (var/datum/ticket/T in tickets)
+		if (T.status == TICKET_OPEN && T.owner.ckey == ckey)
+			message_staff("[key_name_admin(src)] has left the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]")
+			break
 	if (holder)
 		holder.owner = null
 		GLOB.admins -= src
@@ -380,17 +391,17 @@
 	getFilesSlow(src, asset_cache.cache, register_asset = FALSE)
 
 
-mob/proc/MayRespawn()
+/mob/proc/MayRespawn()
 	return 0
 
-client/proc/MayRespawn()
+/client/proc/MayRespawn()
 	if(mob)
 		return mob.MayRespawn()
 
 	// Something went wrong, client is usually kicked or transfered to a new mob at this point
 	return 0
 
-client/verb/character_setup()
+/client/verb/character_setup()
 	set name = "Character Setup"
 	set category = "OOC"
 	if(prefs)

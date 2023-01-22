@@ -5,7 +5,6 @@
 	simulated = FALSE
 	screen_loc = "CENTER:-224,CENTER:-224"
 	plane = SKYBOX_PLANE
-	blend_mode = BLEND_MULTIPLY
 
 /client
 	var/obj/skybox/skybox

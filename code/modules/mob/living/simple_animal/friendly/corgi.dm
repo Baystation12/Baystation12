@@ -6,7 +6,7 @@
 	icon_state = "corgi"
 	icon_living = "corgi"
 	icon_dead = "corgi_dead"
-	speak_emote = list("barks", "woofs")
+	speak_emote = list("лает", "гавкает", "тявкает")
 	turns_per_move = 10
 	response_help  = "pets"
 	response_disarm = "bops"

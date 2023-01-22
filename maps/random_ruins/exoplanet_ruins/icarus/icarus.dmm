@@ -102,8 +102,7 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/blue{
-	dir = 8;
-	icon_state = "corner_white"
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icarus/bridge)
@@ -142,8 +141,7 @@
 /area/map_template/icarus/bridge)
 "cd" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 1;
-	icon_state = "spline_fancy"
+	dir = 1
 	},
 /obj/item/ore/slag,
 /turf/simulated/floor/carpet/blue,
@@ -231,8 +229,7 @@
 "fq" = (
 /obj/item/stack/material/rods,
 /obj/effect/floor_decal/corner/research{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/structure/filingcabinet/chestdrawer,
 /turf/simulated/floor/tiled/white,
@@ -253,8 +250,7 @@
 /area/map_template/icarus/sec)
 "fz" = (
 /obj/effect/floor_decal/corner/research{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light_construct,
@@ -267,8 +263,7 @@
 /area/map_template/icarus/bridge)
 "fJ" = (
 /obj/effect/floor_decal/corner/research{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/bookcase/manuals/research_and_development,
@@ -520,8 +515,7 @@
 /area/map_template/icarus/sec)
 "oJ" = (
 /obj/effect/floor_decal/corner/yellow/half{
-	dir = 8;
-	icon_state = "bordercolorhalf"
+	dir = 8
 	},
 /obj/machinery/light_construct,
 /turf/simulated/floor/tiled,
@@ -569,8 +563,7 @@
 /area/map_template/icarus/armory)
 "pL" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 1;
-	icon_state = "spline_fancy"
+	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/carpet/blue,
@@ -694,8 +687,7 @@
 /area/map_template/icarus/eng)
 "sS" = (
 /obj/effect/floor_decal/corner/blue{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light_construct,
@@ -776,8 +768,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/blue{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark,
@@ -800,8 +791,7 @@
 /area/map_template/icarus/sci)
 "wT" = (
 /obj/effect/floor_decal/corner/yellow/half{
-	dir = 8;
-	icon_state = "bordercolorhalf"
+	dir = 8
 	},
 /obj/item/frame/apc,
 /turf/simulated/floor/tiled,
@@ -849,8 +839,7 @@
 "yi" = (
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/blue{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/item/folder/blue,
@@ -893,8 +882,7 @@
 /area/map_template/icarus/eng)
 "zX" = (
 /obj/structure/bed/chair/comfy/blue{
-	dir = 1;
-	icon_state = "comfychair_preview"
+	dir = 1
 	},
 /obj/item/remains/human,
 /obj/machinery/light_construct,
@@ -916,17 +904,14 @@
 	dir = 8
 	},
 /obj/structure/bed/chair/comfy/captain{
-	color = "#666666";
-	dir = 1;
-	icon_state = "capchair_preview"
+	dir = 1
 	},
 /obj/item/remains/human,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icarus/bridge)
 "AG" = (
 /obj/effect/floor_decal/corner/yellow/half{
-	dir = 8;
-	icon_state = "bordercolorhalf"
+	dir = 8
 	},
 /obj/structure/table/steel_reinforced,
 /obj/item/folder/yellow,
@@ -1004,8 +989,7 @@
 /area/map_template/icarus/eng)
 "DB" = (
 /obj/structure/bed/chair/comfy/blue{
-	dir = 1;
-	icon_state = "comfychair_preview"
+	dir = 1
 	},
 /obj/item/remains/human,
 /obj/effect/decal/cleanable/dirt,
@@ -1212,8 +1196,7 @@
 /area/map_template/icarus/driver/west)
 "Mf" = (
 /obj/effect/floor_decal/corner/research{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/machinery/papershredder,
 /turf/simulated/floor/tiled/white,
@@ -1254,8 +1237,7 @@
 /area/map_template/icarus/sci)
 "No" = (
 /obj/effect/floor_decal/corner/blue{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/item/frame/apc,
 /turf/simulated/floor/tiled/dark,
@@ -1292,8 +1274,7 @@
 /area/map_template/icarus/driver/east)
 "NU" = (
 /obj/effect/floor_decal/corner/yellow/half{
-	dir = 8;
-	icon_state = "bordercolorhalf"
+	dir = 8
 	},
 /obj/machinery/computer/modular/preset/engineering{
 	dir = 4;
@@ -1515,9 +1496,7 @@
 /area/map_template/icarus/driver/east)
 "Zh" = (
 /obj/structure/bed/chair/comfy/captain{
-	color = "#666666";
-	dir = 8;
-	icon_state = "capchair_preview"
+	dir = 8
 	},
 /turf/simulated/floor/wood/walnut,
 /area/map_template/icarus/bridge)
@@ -1533,8 +1512,7 @@
 /area/map_template/icarus/bridge)
 "ZQ" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 1;
-	icon_state = "spline_fancy"
+	dir = 1
 	},
 /obj/item/frame/air_alarm,
 /obj/effect/decal/cleanable/dirt,

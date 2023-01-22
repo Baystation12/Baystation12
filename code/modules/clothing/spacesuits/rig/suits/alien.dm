@@ -13,8 +13,8 @@
 		rad = ARMOR_RAD_MINOR
 		)
 	emp_protection = -20
-	online_slowdown = 6
-	offline_slowdown = 10
+	online_slowdown = 3
+	offline_slowdown = 4
 	offline_vision_restriction = TINT_BLIND
 
 	chest_type = /obj/item/clothing/suit/space/rig/unathi
@@ -35,6 +35,7 @@
 		bomb = ARMOR_BOMB_RESISTANT,
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL)
+	online_slowdown = 2
 
 /obj/item/clothing/head/helmet/space/rig/unathi
 	species_restricted = list(SPECIES_UNATHI)

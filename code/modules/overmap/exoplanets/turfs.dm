@@ -1,4 +1,4 @@
-/turf/unsimulated/floor/exoplanet
+/turf/simulated/floor/exoplanet
 	name = "space land"
 	icon = 'icons/turf/desert.dmi'
 	icon_state = "desert"
@@ -6,10 +6,10 @@
 	var/diggable = 1
 	var/dirt_color = "#7c5e42"
 
-/turf/unsimulated/floor/exoplanet/can_engrave()
+/turf/simulated/floor/exoplanet/can_engrave()
 	return FALSE
 
-/turf/unsimulated/floor/exoplanet/New()
+/turf/simulated/floor/exoplanet/New()
 	if(GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 		if(istype(E))
@@ -25,10 +25,10 @@
 				ChangeArea(src, E.planetary_area)
 	..()
 
-/turf/unsimulated/floor/exoplanet/attackby(obj/item/C, mob/user)
+/turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
 	if(diggable && istype(C,/obj/item/shovel))
 		visible_message("<span class='notice'>\The [user] starts digging \the [src]</span>")
-		if(do_after(user, 50))
+		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user,"<span class='notice'>You dig a deep pit.</span>")
 			new /obj/structure/pit(src)
 			diggable = 0
@@ -44,19 +44,19 @@
 	else
 		..()
 
-/turf/unsimulated/floor/exoplanet/ex_act(severity)
+/turf/simulated/floor/exoplanet/ex_act(severity)
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			ChangeTurf(get_base_turf_by_area(src))
-		if(2)
+		if(EX_ACT_HEAVY)
 			if(prob(40))
 				ChangeTurf(get_base_turf_by_area(src))
 
-/turf/unsimulated/floor/exoplanet/Initialize()
+/turf/simulated/floor/exoplanet/Initialize()
 	. = ..()
 	update_icon(1)
 
-/turf/unsimulated/floor/exoplanet/on_update_icon(var/update_neighbors)
+/turf/simulated/floor/exoplanet/on_update_icon(var/update_neighbors)
 	overlays.Cut()
 	if(LAZYLEN(decals))
 		overlays += decals
@@ -79,13 +79,13 @@
 			turf_to_check.update_icon()
 
 //WAter
-/turf/unsimulated/floor/exoplanet/water/on_update_icon()
+/turf/simulated/floor/exoplanet/water/on_update_icon()
 	return
 
-/turf/unsimulated/floor/exoplanet/water/is_flooded(lying_mob, absolute)
+/turf/simulated/floor/exoplanet/water/is_flooded(lying_mob, absolute)
 	. = absolute ? ..() : lying_mob
 
-/turf/unsimulated/floor/exoplanet/water/shallow
+/turf/simulated/floor/exoplanet/water/shallow
 	name = "shallow water"
 	icon = 'icons/misc/beach.dmi'
 	icon_state = "seashallow"
@@ -93,7 +93,7 @@
 	footstep_type = /decl/footsteps/water
 	var/reagent_type = /datum/reagent/water
 
-/turf/unsimulated/floor/exoplanet/water/shallow/attackby(obj/item/O, var/mob/living/user)
+/turf/simulated/floor/exoplanet/water/shallow/attackby(obj/item/O, var/mob/living/user)
 	var/obj/item/reagent_containers/RG = O
 	if (reagent_type && istype(RG) && RG.is_open_container() && RG.reagents)
 		RG.reagents.add_reagent(reagent_type, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
@@ -102,43 +102,43 @@
 		return ..()
 
 //Ice
-/turf/unsimulated/floor/exoplanet/ice
+/turf/simulated/floor/exoplanet/ice
 	name = "ice"
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "ice"
 
-/turf/unsimulated/floor/exoplanet/ice/on_update_icon()
+/turf/simulated/floor/exoplanet/ice/on_update_icon()
 	return
 
 //Snow
-/turf/unsimulated/floor/exoplanet/snow
+/turf/simulated/floor/exoplanet/snow
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"
 	dirt_color = "#e3e7e8"
 	footstep_type = /decl/footsteps/snow
 
-/turf/unsimulated/floor/exoplanet/snow/Initialize()
+/turf/simulated/floor/exoplanet/snow/Initialize()
 	. = ..()
 	icon_state = pick("snow[rand(1,12)]","snow0")
 
-/turf/unsimulated/floor/exoplanet/snow/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/turf/simulated/floor/exoplanet/snow/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	melt()
 
-/turf/unsimulated/floor/exoplanet/snow/melt()
+/turf/simulated/floor/exoplanet/snow/melt()
 	SetName("permafrost")
 	icon_state = "permafrost"
 	footstep_type = /decl/footsteps/asteroid
 
 //Grass
-/turf/unsimulated/floor/exoplanet/grass
+/turf/simulated/floor/exoplanet/grass
 	name = "grass"
 	icon = 'icons/turf/jungle.dmi'
 	icon_state = "greygrass"
 	color = "#799c4b"
 	footstep_type = /decl/footsteps/grass
 
-/turf/unsimulated/floor/exoplanet/grass/Initialize()
+/turf/simulated/floor/exoplanet/grass/Initialize()
 	. = ..()
 	if(GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
@@ -153,39 +153,39 @@
 	if(prob(2))
 		resources[MATERIAL_DIAMOND] = 1
 
-/turf/unsimulated/floor/exoplanet/grass/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/turf/simulated/floor/exoplanet/grass/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000)
 		melt()
 
-/turf/unsimulated/floor/exoplanet/grass/melt()
+/turf/simulated/floor/exoplanet/grass/melt()
 	SetName("scorched ground")
 	icon_state = "scorched"
 	footstep_type = /decl/footsteps/asteroid
 	color = null
 
 //Sand
-/turf/unsimulated/floor/exoplanet/desert
+/turf/simulated/floor/exoplanet/desert
 	name = "sand"
 	desc = "It's coarse and gets everywhere."
 	dirt_color = "#ae9e66"
 	footstep_type = /decl/footsteps/sand
 
-/turf/unsimulated/floor/exoplanet/desert/Initialize()
+/turf/simulated/floor/exoplanet/desert/Initialize()
 	. = ..()
 	icon_state = "desert[rand(0,5)]"
 
-/turf/unsimulated/floor/exoplanet/desert/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/turf/simulated/floor/exoplanet/desert/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if((temperature > T0C + 1700 && prob(5)) || temperature > T0C + 3000)
 		melt()
 
-/turf/unsimulated/floor/exoplanet/desert/melt()
+/turf/simulated/floor/exoplanet/desert/melt()
 	SetName("molten silica")
 	desc = "A glassed patch of sand."
 	icon_state = "sandglass"
 	diggable = 0
 
 //Concrete
-/turf/unsimulated/floor/exoplanet/concrete
+/turf/simulated/floor/exoplanet/concrete
 	name = "concrete"
 	desc = "Stone-like artificial material."
 	icon = 'icons/turf/flooring/misc.dmi'
@@ -194,7 +194,7 @@
 
 //Special world edge turf
 
-/turf/unsimulated/planet_edge
+/turf/simulated/planet_edge
 	name = "world's edge"
 	desc = "Government didn't want you to see this!"
 	density = TRUE
@@ -203,7 +203,7 @@
 	icon = null
 	icon_state = null
 
-/turf/unsimulated/planet_edge/Initialize()
+/turf/simulated/planet_edge/Initialize()
 	. = ..()
 	var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 	if(!istype(E))
@@ -230,7 +230,7 @@
 	O.name = "distant terrain"
 	O.desc = "You need to come over there to take a better look."
 
-/turf/unsimulated/planet_edge/Bumped(atom/movable/A)
+/turf/simulated/planet_edge/Bumped(atom/movable/A)
 	. = ..()
 	var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 	if(!istype(E))

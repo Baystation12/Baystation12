@@ -75,7 +75,7 @@
 				for(var/obj/machinery/atmospherics/pipe/item in result)
 					if(item.in_stasis)
 						continue
-					if(!list_find(members, item))
+					if(!members.Find(item))
 						members += item
 						possible_expansions += item
 
@@ -101,7 +101,7 @@
 
 /datum/pipeline/proc/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 
-	if(list_find(new_network.line_members, src))
+	if(new_network.line_members.Find(src))
 		return 0
 
 	new_network.line_members += src

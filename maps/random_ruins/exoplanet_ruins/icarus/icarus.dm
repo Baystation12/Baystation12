@@ -5,7 +5,7 @@
 	suffixes = list("icarus/icarus.dmm")
 	spawn_cost = 1
 	ruin_tags = RUIN_HUMAN|RUIN_WRECK
-	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
+	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED
 	apc_test_exempt_areas = list(
 		/area/map_template/icarus = NO_SCRUBBER|NO_VENT|NO_APC
 	)
@@ -83,7 +83,7 @@
 
 /obj/item/icarus_disk
 	name = "disk"
-	desc = "A dusty disk. Its label says: \"Deliver to SCG Expeditionary Corps Command!\". Its content is encrypted with quantum crypthography methods."
+	desc = "A dusty disk. Its label says: \"Deliver to SCG Expeditionary Corps Command!\". Its content is encrypted with quantum cryptography methods."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "nucleardisk"
 	item_state = "card-id"

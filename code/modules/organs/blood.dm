@@ -210,7 +210,7 @@
 	data["blood_colour"] = species.get_blood_colour(src)
 	return data
 
-proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spray_dir)
+/proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spray_dir)
 
 	var/obj/effect/decal/cleanable/blood/B
 	var/decal_type = /obj/effect/decal/cleanable/blood/splatter

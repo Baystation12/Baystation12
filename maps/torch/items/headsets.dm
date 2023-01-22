@@ -1,9 +1,15 @@
-/obj/item/device/radio/headset/torchnanotrasen
+/obj/item/device/radio/headset/science
 	name = "research headset"
 	desc = "A headset for researchers."
 	icon_state = "sci_headset"
 	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/headset_torchnt
+	ks1type = /obj/item/device/encryptionkey/science
+
+/obj/item/device/radio/headset/science/alt
+	name = "research headset"
+	desc = "A headset for researchers."
+	icon_state = "sci_headset_alt"
+	item_state = "sci_headset_alt"
 
 /obj/item/device/radio/headset/heads/torchexec
 	name = "executive headset"
@@ -164,7 +170,7 @@
 
 /obj/item/device/radio/headset/research_guard
 	name = "research guard's headset"
-	desc = "Headset of the servants to the corporate overlords."
+	desc = "A headset of the servants to the corporate overlords."
 	icon_state = "nt_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_research_guard
@@ -176,7 +182,7 @@
 
 /obj/item/device/radio/headset/expmed
 	name = "expedition medic's headset"
-	desc = "Headset for a one to bossy over medical dummies."
+	desc = "A headset for a one to bossy over medical dummies."
 	icon_state = "par_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_expedition_medic
@@ -188,7 +194,7 @@
 
 /obj/item/device/radio/headset/expeng
 	name = "expedition engineer's headset"
-	desc = "Headset for a one to bossy over engineering dummies."
+	desc = "A headset for a one to bossy over engineering dummies."
 	icon_state = "par_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_expedition_engineer
@@ -197,3 +203,21 @@
 	name = "expedition engineer's bowman headset"
 	icon_state = "par_headset_alt"
 	item_state = "headset_alt"
+
+/obj/item/device/radio/headset/headset_medsci
+	name = "medical scientific headset"
+	desc = "A headset to to tell how you lost your medical license."
+	icon_state = "par_headset"
+	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/headset_modsci
+
+/obj/item/device/radio/headset/headset_medsci/alt
+	name = "medical scientific bowman headset"
+	icon_state = "par_headset_alt"
+	item_state = "par_headset_alt"
+
+/obj/item/device/radio/headset/heads/torchexec/synth
+	name = "Synth's headset"
+	desc = "A headset issued to abroad's EXO Synth Unit."
+	icon_state = "nt_headset"
+	item_state = "headset"

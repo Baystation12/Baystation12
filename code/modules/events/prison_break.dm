@@ -19,7 +19,7 @@
 
 /datum/event/prison_break/announce()
 	if(areas && areas.len > 0)
-		command_announcement.Announce("[pick("Gr3yT1d3 virus","Malignant trojan",)] detected in [location_name()] [(eventDept == "Security")? "imprisonment":"containment"] subroutines. Secure any compromised areas immediately.", "[location_name()] Anti-Virus Alert", zlevels = affecting_z)
+		command_announcement.Announce("[pick("Gr3yT1d3 вирус","Malignant троян","Davinci вирус","Black Light вирус","Nimba вирус","Selachii троян","Bastion троян",)] обнаружен в  подпрограмме [location_name()] [(eventDept == "Security")? "imprisonment":"containment"]. Немедленно защитите все скомпрометированные области.", "[location_name()] Anti-Virus Alert", zlevels = affecting_z)
 
 
 /datum/event/prison_break/start()

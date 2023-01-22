@@ -4995,7 +4995,6 @@
 	tag_airpump = "xil_scoutship_fore_pumps";
 	tag_chamber_sensor = "xil_scoutship_fore_dock_sensor";
 	tag_exterior_door = "xil_scoutship_fore_external";
-	tag_exterior_sensor = null;
 	tag_interior_door = "xil_scoutship_fore_internal"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{

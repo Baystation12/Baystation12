@@ -266,9 +266,9 @@
 	species_branch_rank_cache_[S] = list()
 	. = species_branch_rank_cache_[S]
 
-	var/spawn_branches = mil_branches.spawn_branches(S)
+	var/spawn_branches = GLOB.mil_branches.spawn_branches(S)
 	for(var/branch_type in allowed_branches)
-		var/datum/mil_branch/branch = mil_branches.get_branch_by_type(branch_type)
+		var/datum/mil_branch/branch = GLOB.mil_branches.get_branch_by_type(branch_type)
 		if(branch.name in spawn_branches)
 			if(!allowed_ranks || !(GLOB.using_map.flags & MAP_HAS_RANK))
 				LAZYADD(., branch.name)
@@ -292,7 +292,7 @@
 	if(branch_name == "None")
 		return 0
 
-	var/datum/mil_branch/branch = mil_branches.get_branch(branch_name)
+	var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(branch_name)
 
 	if(!branch)
 		crash_with("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
@@ -317,7 +317,7 @@
 	if(branch_name == "None" || rank_name == "None")
 		return 0
 
-	var/datum/mil_rank/rank = mil_branches.get_rank(branch_name, rank_name)
+	var/datum/mil_rank/rank = GLOB.mil_branches.get_rank(branch_name, rank_name)
 
 	if(!rank)
 		crash_with("unknown rank \"[rank_name]\" in branch \"[branch_name]\" passed to is_rank_allowed()")
@@ -332,14 +332,14 @@
 /datum/job/proc/get_branches()
 	var/list/res = list()
 	for(var/T in allowed_branches)
-		var/datum/mil_branch/B = mil_branches.get_branch_by_type(T)
+		var/datum/mil_branch/B = GLOB.mil_branches.get_branch_by_type(T)
 		res += B.name
 	return english_list(res)
 
 //Same as above but ranks
 /datum/job/proc/get_ranks(branch)
 	var/list/res = list()
-	var/datum/mil_branch/B = mil_branches.get_branch(branch)
+	var/datum/mil_branch/B = GLOB.mil_branches.get_branch(branch)
 	for(var/T in allowed_ranks)
 		var/datum/mil_rank/R = T
 		if(B && !(initial(R.name) in B.ranks))
@@ -402,6 +402,9 @@
 
 /datum/job/proc/make_position_available()
 	total_positions++
+
+/datum/job/proc/make_position_unavailable()
+	total_positions = 0
 
 /datum/job/proc/get_roundstart_spawnpoint()
 	var/list/loc_list = list()

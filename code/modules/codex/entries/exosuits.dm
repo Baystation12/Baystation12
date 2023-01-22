@@ -14,3 +14,9 @@
 /datum/codex_entry/exosuit_camera
 	associated_paths = list(/obj/item/mech_equipment/camera)
 	mechanics_text = "A camera! Similar to helmet cameras it will work in connected levels regardless of network status. Use a screwdriver to change the output camera network."
+
+/datum/codex_entry/exosuit_flamethrower
+	associated_paths = list(/obj/item/mech_equipment/mounted_system/flamethrower)
+	mechanics_text = "A flamethrower. It throws flames consuming chemicals. In order to change the tanks you will need to dismount it and use a crowbar on it."
+	lore_text = "The Hephaestus Industries 'Prometheus' is a tried and tested design that has seen minimal variation since its introduction. Designed for use in light vehicles and exosuits, \
+	 it is guaranteed to live up to its namesake."

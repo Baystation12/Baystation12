@@ -87,7 +87,7 @@
 		overlays += image(icon, "tank")
 
 /obj/structure/closet/body_bag/rescue/attackby(obj/item/W, mob/user, var/click_params)
-	if(istype(W,/obj/item/tank/))
+	if(istype(W,/obj/item/tank))
 		if(airtank)
 			to_chat(user, "\The [src] already has an air tank installed.")
 			return 1

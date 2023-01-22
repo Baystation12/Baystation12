@@ -54,7 +54,7 @@
 	connect_to_network()
 
 	mode_list = list()
-	for(var/st in subtypesof(/datum/shield_mode/))
+	for(var/st in subtypesof(/datum/shield_mode))
 		var/datum/shield_mode/SM = new st()
 		mode_list.Add(SM)
 

@@ -214,37 +214,46 @@
 		t = replacetext_char(t, char, repl_chars[char])
 	return t
 
-//Adds 'u' number of zeros ahead of the text 't'
-/proc/add_zero(t, u)
-	return pad_left(t, u, "0")
 
-//Adds 'u' number of spaces ahead of the text 't'
-/proc/add_lspace(t, u)
-	return pad_left(t, u, " ")
-
-//Adds 'u' number of spaces behind the text 't'
-/proc/add_tspace(t, u)
-	return pad_right(t, u, " ")
-
-// Adds the required amount of 'character' in front of 'text' to extend the lengh to 'desired_length', if it is shorter
-// No consideration are made for a multi-character 'character' input
-/proc/pad_left(text, desired_length, character)
-	var/padding = generate_padding(length_char(text), desired_length, character)
-	return length(padding) ? "[padding][text]" : text
-
-// Adds the required amount of 'character' after 'text' to extend the lengh to 'desired_length', if it is shorter
-// No consideration are made for a multi-character 'character' input
-/proc/pad_right(text, desired_length, character)
-	var/padding = generate_padding(length_char(text), desired_length, character)
-	return length(padding) ? "[text][padding]" : text
-
-/proc/generate_padding(current_length, desired_length, character)
-	if(current_length >= desired_length)
+/// Builds a string of padding repeated until its character count meets or exceeds size
+/proc/generate_padding(size, padding)
+	var/padding_size = length_char(padding)
+	if (!padding_size)
 		return ""
-	var/characters = list()
-	for(var/i = 1 to (desired_length - current_length))
-		characters += character
-	return JOINTEXT(characters)
+	var/padding_count = Ceil(size / padding_size)
+	var/list/result = list()
+	for (var/i = padding_count to 1 step -1)
+		result += padding // pow2 strategies could be used here at the cost of complexity
+	return result.Join(null)
+
+
+/// Pads the matter of padding onto the start of text until the result length is size
+/proc/pad_left(text, size, padding)
+	var/text_length = length_char(text)
+	if (text_length >= size)
+		return text
+	if (!text_length)
+		text = ""
+	var/result = "[generate_padding(size - text_length, padding)][text]"
+	var/length_difference = length_char(result) - size
+	if (!length_difference)
+		return result
+	return copytext_char(result, length_difference + 1)
+
+
+/// Pads the matter of padding onto the start of text until the result length is size
+/proc/pad_right(text, size, padding)
+	var/text_length = length_char(text)
+	if (text_length >= size)
+		return text
+	if (!text_length)
+		text = ""
+	var/result = "[text][generate_padding(size - text_length, padding)]"
+	var/length_difference = length_char(result) - size
+	if (!length_difference)
+		return result
+	return copytext_char(result, 1, -length_difference)
+
 
 //Returns a string with reserved characters and spaces before the first letter removed
 /proc/trim_left(text)
@@ -333,7 +342,7 @@
 
 //Used in preferences' SetFlavorText and human's set_flavor verb
 //Previews a string of len or less length
-proc/TextPreview(var/string,var/len=40)
+/proc/TextPreview(var/string,var/len=40)
 	if(length(string) <= len)
 		if(!length(string))
 			return "\[...\]"
@@ -570,7 +579,7 @@ proc/TextPreview(var/string,var/len=40)
 // If char isn't part of the text the entire text is returned
 /proc/copytext_after_last(var/text, var/char)
 	var/regex/R = regex("(\[^[char]\]*)$")
-	regex_find(R, text)
+	R.Find_char(text)
 	return R.group[1]
 
 /proc/sql_sanitize_text(var/text)
@@ -599,3 +608,67 @@ proc/TextPreview(var/string,var/len=40)
 			var/regex/matcher = entry[1]
 			message = replacetext_char(message, matcher, entry[2])
 	return message
+
+
+/**
+* Connects either a list or variadic arguments with "/" and cleans up multiple joins.
+* eg:
+*   join_url("a", "b", "c") => "a/b/c"
+*   join_url(list("a", "b", "c")) => "a/b/c"
+*   join_url("https://some.tld/", "/cats", "~", "//dogs") => "https://some.tld/cats/~/dogs"
+*/
+/proc/join_url()
+	var/len = length(args)
+	if (!len)
+		return ""
+	var/list/parts
+	if (len == 1)
+		if (!islist(args[1]))
+			parts = list(args[1])
+		else
+			parts = args[1]
+	else
+		parts = args
+	var/static/regex/clean1 = regex(@"\/\/+", "g") //Squash //+ to /
+	var/static/regex/clean2 = regex(@"^([^:]+:)\/([^\/])") //Fix "blah://" if we killed it in clean1
+	parts = replacetext_char(parts.Join("/"), clean1, "/")
+	return replacetext_char(parts, clean2, "$1//$2")
+
+/// Returns direction-string, rounded to multiples of 22.5, from the first parameter to the second
+/// N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW
+/proc/get_compass_direction_string(turf/A, turf/B)
+	var/degree = Get_Angle(A, B)
+/// % appears to round down floats, hence below values all being integers
+	switch(round(degree, 22.5) % 360)
+		if(0)
+			return "North"
+		if(22)
+			return "North-Northeast"
+		if(45)
+			return "Northeast"
+		if(67)
+			return "East-Northeast"
+		if(90)
+			return "East"
+		if(112)
+			return "East-Southeast"
+		if(135)
+			return "Southeast"
+		if(157)
+			return "South-Southeast"
+		if(180)
+			return "South"
+		if(202)
+			return "South-Southwest"
+		if(225)
+			return "Southwest"
+		if(247)
+			return "West-Southwest"
+		if(270)
+			return "West"
+		if(292)
+			return "West-Northwest"
+		if(315)
+			return "Northwest"
+		if(337)
+			return "North-Northwest"

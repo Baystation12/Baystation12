@@ -6,13 +6,13 @@
 /// Duck check to see if text looks like a ckey
 /proc/valid_ckey(text)
 	var/static/regex/matcher = new (@"^[a-z0-9]{1,30}$")
-	return regex_find(matcher, text)
+	return matcher.Find_char(text)
 
 
 /// Duck check to see if text looks like a key
 /proc/valid_key(text)
 	var/static/regex/matcher = new (@"^[0-9A-Za-z][0-9A-Za-z_\. -]{2,29}$")
-	return regex_find(matcher, text)
+	return matcher.Find_char(text)
 
 
 /// Get the client associated with ckey text if it is currently connected

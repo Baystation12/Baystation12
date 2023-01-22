@@ -205,10 +205,15 @@
 		update_inv_wear_mask(0)
 	return
 
-/mob/proc/isEquipped(obj/item/I)
-	if(!I)
-		return 0
-	return get_inventory_slot(I) != 0
+
+/// Returns truthy when item is in the mobs inventory slots, or in slot if specified.
+/mob/proc/isEquipped(obj/item/item, slot)
+	if (!item)
+		return FALSE
+	if (slot)
+		return get_equipped_item(slot) == item
+	return get_inventory_slot(item) != 0
+
 
 /mob/proc/canUnEquip(obj/item/I)
 	if(!I) //If there's nothing to drop, the drop is automatically successful.

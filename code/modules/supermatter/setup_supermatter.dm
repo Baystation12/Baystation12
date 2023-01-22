@@ -36,16 +36,16 @@
 	for(var/obj/effect/engine_setup/coolant_canister/C in world)
 		switch(response)
 			if("N2")
-				C.canister_type = /obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup/
+				C.canister_type = /obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup
 				continue
 			if("CO2")
-				C.canister_type = /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup/
+				C.canister_type = /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup
 				continue
 			if("PH")
-				C.canister_type = /obj/machinery/portable_atmospherics/canister/phoron/engine_setup/
+				C.canister_type = /obj/machinery/portable_atmospherics/canister/phoron/engine_setup
 				continue
 			if("H2")
-				C.canister_type = /obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup/
+				C.canister_type = /obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup
 				continue
 
 	for(var/obj/effect/engine_setup/core/C in world)
@@ -106,7 +106,7 @@
 
 
 
-/obj/effect/engine_setup/
+/obj/effect/engine_setup
 	name = "Engine Setup Marker"
 	desc = "You shouldn't see this."
 	invisibility = 101
@@ -121,7 +121,7 @@
 
 
 // Tries to locate a pump, enables it, and sets it to MAX. Triggers warning if unable to locate a pump.
-/obj/effect/engine_setup/pump_max/
+/obj/effect/engine_setup/pump_max
 	name = "Pump Setup Marker"
 
 /obj/effect/engine_setup/pump_max/activate()
@@ -138,7 +138,7 @@
 
 
 // Spawns an empty canister on this turf, if it has a connector port. Triggers warning if unable to find a connector port
-/obj/effect/engine_setup/empty_canister/
+/obj/effect/engine_setup/empty_canister
 	name = "Empty Canister Marker"
 
 /obj/effect/engine_setup/empty_canister/activate()
@@ -155,7 +155,7 @@
 
 // Spawns a coolant canister on this turf, if it has a connector port.
 // Triggers error when unable to locate connector port or when coolant canister type is unset.
-/obj/effect/engine_setup/coolant_canister/
+/obj/effect/engine_setup/coolant_canister
 	name = "Coolant Canister Marker"
 	var/canister_type = null
 
@@ -174,7 +174,7 @@
 
 
 // Energises the supermatter. Errors when unable to locate supermatter.
-/obj/effect/engine_setup/core/
+/obj/effect/engine_setup/core
 	name = "Supermatter Core Marker"
 	var/energy_setting = 0
 
@@ -195,7 +195,7 @@
 
 
 // Tries to enable the SMES on max input/output settings. With load balancing it should be fine as long as engine outputs at least ~500kW
-/obj/effect/engine_setup/smes/
+/obj/effect/engine_setup/smes
 	name = "SMES Marker"
 
 /obj/effect/engine_setup/smes/activate()
@@ -214,7 +214,7 @@
 
 
 // Sets up filters. This assumes filters are set to filter out CO2 back to the core loop by default!
-/obj/effect/engine_setup/filter/
+/obj/effect/engine_setup/filter
 	name = "Omni Filter Marker"
 	var/coolant = null
 

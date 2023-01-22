@@ -31,6 +31,7 @@
 	var/next_offer_time					//The time a discount will next be offered
 	var/datum/uplink_item/discount_item	//The item to be discounted
 	var/discount_amount					//The amount as a percent the item will be discounted by
+	var/datum/computer_file/program/uplink/program
 
 /obj/item/device/uplink/nano_host()
 	return loc
@@ -153,6 +154,9 @@
 	else if(href_list["lock"])
 		toggle()
 		SSnano.close_user_uis(user, src, "main")
+		if (program)
+			program.authenticated = FALSE
+			program.computer.kill_program(program)
 		. = TOPIC_HANDLED
 	else if(href_list["return"])
 		nanoui_menu = round(nanoui_menu/10)

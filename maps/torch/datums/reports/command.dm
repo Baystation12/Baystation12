@@ -2,8 +2,8 @@
 	..()
 	set_access(access_heads)
 
-/datum/computer_file/report/recipient/command/request
-	form_name = "REQ-SCG"
+/datum/computer_file/report/recipient/command/report
+	form_name = "REP-SCG"
 	title = "Общая форма отчёта"
 	logo = "\[solcrest\]"
 	available_on_ntnet = 1
@@ -19,6 +19,43 @@
 	add_field(/datum/report_field/pencode_text, "Сообщение", required = 1)
 	add_field(/datum/report_field/signature, "Подпись", required = 1)
 	set_access(list(list(access_qm, access_senadv, access_cent_creed, access_representative)), list(list(access_qm, access_senadv, access_cent_creed, access_representative)), override = 0)
+
+
+/datum/computer_file/report/recipient/command/request_command
+	form_name = "REQ-SCG"
+	title = "Запрос к Командованию"
+	logo = "\[logo\]"
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/command/request_command/generate_fields()
+	..()
+	add_field(/datum/report_field/number, "Номер запроса ")
+	add_field(/datum/report_field/people/from_manifest, "Полное имя, звание и должность запросившего", required = 1)
+	add_field(/datum/report_field/pencode_text, "Содержание запроса", required = 1)
+	add_field(/datum/report_field/pencode_text, "Причина запроса", required = 1)
+	add_field(/datum/report_field/date, "Дата заполнения")
+	add_field(/datum/report_field/time, "Время заполнения")
+	add_field(/datum/report_field/text_label/instruction, "Документ является недействительным в случае отсутствия подписи или печати.")
+	add_field(/datum/report_field/signature, "Подпись", required = 1)
+	set_access(list(list(access_qm, access_senadv, access_cent_creed, access_representative)), list(list(access_qm, access_senadv, access_cent_creed, access_representative)), override = 0)
+
+
+/datum/computer_file/report/recipient/command/decree
+	form_name = "DEC-NTF"
+	title = "Указ Командования"
+	logo = "\[solcrest\]"
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/command/decree/generate_fields()
+	..()
+	add_field(/datum/report_field/number, "Номер указа")
+	add_field(/datum/report_field/people/from_manifest, "Полное имя, звание и должность распорядителя", required = 1)
+	add_field(/datum/report_field/pencode_text, "Содержание распоряжения", required = 1)
+	add_field(/datum/report_field/pencode_text, "Причина распоряжения", required = 1)
+	add_field(/datum/report_field/date, "Дата заполнения")
+	add_field(/datum/report_field/time, "Время заполнения")
+	add_field(/datum/report_field/text_label/instruction, "Документ является недействительным в случае отсутствия подписи или печати.")
+	add_field(/datum/report_field/signature, "Подпись", required = 1)
 
 /datum/computer_file/report/recipient/command/crew_transfer
 	form_name = "CTA-SGF-01"
@@ -39,7 +76,7 @@
 	add_field(/datum/report_field/pencode_text, "Причина перевода", required = 1)
 	add_field(/datum/report_field/text_label/instruction, "Документ является недействительным в случае отсутствия подписи или печати.")
 	add_field(/datum/report_field/signature, "Подпись Заявителя", required = 1)
-	xo_fields += add_field(/datum/report_field/signature, "Подпись Исполнителя(Исполнительный/Командующий офицер)", required = 1)
+	xo_fields += add_field(/datum/report_field/signature, "Подпись Исполнителя(Исполнительный/Командующий офицер)")
 	xo_fields += add_field(/datum/report_field/options/yes_no, "Одобрено")
 	for(var/datum/report_field/field in xo_fields)
 		field.set_access(access_edit = access_hop)
@@ -64,7 +101,7 @@
 	add_field(/datum/report_field/simple_text, "Срок расширения доступа")
 	add_field(/datum/report_field/text_label/instruction, "Документ является недействительным в случае отсутствия подписи или печати.")
 	add_field(/datum/report_field/signature, "Подпись Заявителя", required = 1)
-	xo_fields += add_field(/datum/report_field/signature, "Подпись Исполнителя(Исполнительный/Командующий офицер)", required = 1)
+	xo_fields += add_field(/datum/report_field/signature, "Подпись Исполнителя(Исполнительный/Командующий офицер)")
 	xo_fields += add_field(/datum/report_field/options/yes_no, "Одобрено")
 	for(var/datum/report_field/field in xo_fields)
 		field.set_access(access_edit = access_hop)

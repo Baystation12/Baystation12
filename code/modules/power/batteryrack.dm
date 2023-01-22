@@ -17,7 +17,7 @@
 	should_be_mapped = 1
 	base_type = /obj/machinery/power/smes/batteryrack
 	maximum_component_parts = list(/obj/item/stock_parts = 15)
-	
+
 	machine_name = "battery rack PSU"
 	machine_desc = "A very simple power storage solution: several power cells on a rack. About as basic as you can get."
 
@@ -56,13 +56,18 @@
 
 	overlays += "charge[charge_level]"
 
-	for(var/obj/item/cell/C in internal_cells)
-		cellcount++
-		overlays += "cell[cellcount]"
-		if(C.fully_charged())
-			overlays += "cell[cellcount]f"
-		else if(!C.charge)
-			overlays += "cell[cellcount]e"
+	if(!panel_open)
+		icon_state = "rack-closed"
+	else
+		icon_state = "rack"
+		for(var/obj/item/cell/C as anything in internal_cells)
+			if (++cellcount > max_cells)
+				break
+			overlays += "cell[cellcount]"
+			if(C.fully_charged())
+				overlays += "cell[cellcount]f"
+			else if(!C.charge)
+				overlays += "cell[cellcount]e"
 
 // Recalculate maxcharge and similar variables.
 /obj/machinery/power/smes/batteryrack/proc/update_maxcharge()

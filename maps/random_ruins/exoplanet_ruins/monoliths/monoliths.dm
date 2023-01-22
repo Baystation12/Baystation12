@@ -40,7 +40,7 @@
 		overlays += I
 		set_light(0.3, 0.1, 2, l_color = I.color)
 
-	var/turf/unsimulated/floor/exoplanet/T = get_turf(src)
+	var/turf/simulated/floor/exoplanet/T = get_turf(src)
 	if(istype(T))
 		var/image/I = overlay_image(icon, "dugin", T.dirt_color, RESET_COLOR)
 		overlays += I

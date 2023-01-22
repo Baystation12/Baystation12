@@ -45,7 +45,7 @@
 	var/list/heads_fields = list()
 	add_field(/datum/report_field/text_label/header, "ГЭК \"Факел\" - Отдел снабжения")
 	add_field(/datum/report_field/simple_text, "Наименование отдела, запрашивающего предметы или материалы", required = 1)
-	add_field(/datum/report_field/people/from_manifest, "Имя, должность и звание запрашивающего", required = 1)
+	add_field(/datum/report_field/people/from_manifest, "Полное Имя, должность и звание запрашивающего", required = 1)
 	add_field(/datum/report_field/signature, "Подпись запрашивающего", required = 1)
 	add_field(/datum/report_field/date, "Дата заполнения")
 	add_field(/datum/report_field/time, "Время заполнения")

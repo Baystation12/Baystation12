@@ -47,6 +47,7 @@
 	playsound(src, 'sound/effects/snap.ogg', 100, 1)
 	SET_FLAGS(boombox_flags, BOOMBOX_BROKEN)
 	jukebox.Stop()
+	..()
 
 
 /obj/item/boombox/examine(mob/user, distance)

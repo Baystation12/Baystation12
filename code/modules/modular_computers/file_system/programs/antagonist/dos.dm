@@ -9,7 +9,7 @@
 	requires_ntnet = TRUE
 	available_on_ntnet = FALSE
 	available_on_syndinet = TRUE
-	nanomodule_path = /datum/nano_module/program/computer_dos/
+	nanomodule_path = /datum/nano_module/program/computer_dos
 	var/obj/machinery/ntnet_relay/target = null
 	var/dos_speed = 0
 	var/error = ""

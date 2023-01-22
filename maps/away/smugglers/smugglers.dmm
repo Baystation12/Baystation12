@@ -22,8 +22,7 @@
 "ag" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1439;
-	icon_state = "door_closed";
-	locked = 0
+	icon_state = "door_closed"
 	},
 /turf/simulated/floor,
 /area/smugglers/base)
@@ -58,7 +57,6 @@
 	pixel_x = 25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 2;
 	id_tag = "asteroid_base_dock_pump"
 	},
 /obj/effect/floor_decal/industrial/warning/full,
@@ -86,7 +84,6 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1439;
 	icon_state = "door_closed";
-	locked = 0;
 	name = "Internal Airlock"
 	},
 /turf/simulated/floor,
@@ -150,8 +147,7 @@
 "ay" = (
 /obj/item/stack/cable_coil{
 	pixel_x = 5;
-	pixel_y = 5;
-	pixel_z = 0
+	pixel_y = 5
 	},
 /obj/item/stack/cable_coil,
 /obj/structure/cable{
@@ -164,7 +160,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor,
@@ -206,8 +201,7 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor,
 /area/smugglers/base)
@@ -218,21 +212,18 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor,
 /area/smugglers/base)
 "aD" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/black{
-	dir = 1;
-	icon_state = "map"
+	dir = 1
 	},
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor,
 /area/smugglers/base)
@@ -263,9 +254,7 @@
 	pixel_y = 25;
 	tag_airpump = "asteroid_base_east_pump";
 	tag_exterior_door = "asteroid_base_east_outer";
-	tag_exterior_sensor = null;
-	tag_interior_door = "asteroid_base_east_inner";
-	tag_interior_sensor = null
+	tag_interior_door = "asteroid_base_east_inner"
 	},
 /obj/machinery/access_button{
 	command = "cycle_interior";
@@ -375,8 +364,7 @@
 	d1 = 16;
 	d2 = 0;
 	dir = 4;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /obj/structure/cable{
 	d2 = 8;
@@ -708,7 +696,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -1023,9 +1010,7 @@
 /turf/simulated/floor/tiled,
 /area/smugglers/dorms)
 "cB" = (
-/obj/machinery/light/small{
-	dir = 2
-	},
+/obj/machinery/light/small,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/smugglers/dorms)

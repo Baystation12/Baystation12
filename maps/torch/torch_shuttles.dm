@@ -349,8 +349,8 @@ TORCH_ESCAPE_POD(17)
 
 /datum/shuttle/autodock/overmap/exploration_shuttle
 	name = "Charon"
-	move_time = 90
-	shuttle_area = list(/area/exploration_shuttle/cockpit, /area/exploration_shuttle/atmos, /area/exploration_shuttle/power, /area/exploration_shuttle/crew, /area/exploration_shuttle/cargo, /area/exploration_shuttle/airlock)
+	move_time = 60
+	shuttle_area = list(/area/exploration_shuttle/cockpit, /area/exploration_shuttle/atmos, /area/exploration_shuttle/power, /area/exploration_shuttle/crew, /area/exploration_shuttle/cargo, /area/exploration_shuttle/airlock, /area/exploration_shuttle/medical, /area/exploration_shuttle/fuel)
 	dock_target = "charon_shuttle"
 	current_location = "nav_hangar_charon"
 	landmark_transition = "nav_transit_charon"
@@ -393,7 +393,7 @@ TORCH_ESCAPE_POD(17)
 /datum/shuttle/autodock/overmap/guppy
 	name = "Guppy"
 	warmup_time = 5
-	move_time = 30
+	move_time = 20
 	shuttle_area = /area/guppy_hangar/start
 	dock_target ="guppy_shuttle"
 	current_location = "nav_hangar_guppy"
@@ -438,8 +438,8 @@ TORCH_ESCAPE_POD(17)
 
 /datum/shuttle/autodock/overmap/aquila
 	name = "Aquila"
-	move_time = 60
-	shuttle_area = list(/area/aquila/cockpit, /area/aquila/maintenance, /area/aquila/storage, /area/aquila/secure_storage, /area/aquila/mess, /area/aquila/passenger, /area/aquila/medical, /area/aquila/head, /area/aquila/airlock)
+	move_time = 50
+	shuttle_area = list(/area/aquila/cockpit, /area/aquila/power, /area/aquila/storage, /area/aquila/suits, /area/aquila/air, /area/aquila/crew, /area/aquila/medical, /area/aquila/airlock)
 	current_location = "nav_hangar_aquila"
 	landmark_transition = "nav_transit_aquila"
 	dock_target = "aquila_shuttle"

@@ -123,7 +123,7 @@
 		else
 			return max(0, 1 + (SKILL_DEFAULT - points) * factor)
 
-/mob/proc/do_skilled(base_delay, skill_path , atom/target = null, factor = 0.3, do_flags = DO_DEFAULT)
+/mob/proc/do_skilled(base_delay, skill_path , atom/target = null, factor = 0.3, do_flags = DO_PUBLIC_UNIQUE)
 	return do_after(src, base_delay * skill_delay_mult(skill_path, factor), target, do_flags)
 
 // A generic way of modifying success probabilities via skill values. Higher factor means skills have more effect. fail_chance is the chance at SKILL_NONE.

@@ -132,14 +132,14 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	Stop()
 	. = ..()
 
-datum/sound_token/proc/SetVolume(var/new_volume)
+/datum/sound_token/proc/SetVolume(var/new_volume)
 	new_volume = clamp(new_volume, 0, 100)
 	if(_sound.volume == new_volume)
 		return
 	_sound.volume = new_volume
 	PrivUpdateListeners()
 
-datum/sound_token/proc/Mute()
+/datum/sound_token/proc/Mute()
 	PrivUpdateStatus(status|SOUND_MUTE)
 
 /datum/sound_token/proc/Unmute()
@@ -196,7 +196,7 @@ datum/sound_token/proc/Mute()
 	status = new_status
 	PrivUpdateListeners()
 
-datum/sound_token/proc/PrivAddListener(var/atom/listener)
+/datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	if(!check_preference(listener))
 		return
 

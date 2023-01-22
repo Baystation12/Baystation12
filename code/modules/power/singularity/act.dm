@@ -13,7 +13,7 @@
 
 /mob/living/singularity_pull(S, current_size)
 	step_towards(src, S)
-	apply_damage(current_size * 3, IRRADIATE, damage_flags = DAM_DISPERSED)
+	apply_damage(current_size * 3, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 
 /mob/living/carbon/human/singularity_pull(S, current_size)
 	if(current_size >= STAGE_THREE)
@@ -29,7 +29,7 @@
 
 /obj/singularity_act()
 	if(simulated)
-		ex_act(1)
+		ex_act(EX_ACT_DEVASTATING)
 		if(src)
 			qdel(src)
 		return 2
@@ -62,21 +62,10 @@
 	return
 
 /obj/machinery/power/supermatter/shard/singularity_act()
-	src.forceMove(null)
 	qdel(src)
 	return 5000
 
 /obj/machinery/power/supermatter/singularity_act()
-	if(!src.loc)
-		return
-
-	var/prints = ""
-	if(src.fingerprintshidden)
-		prints = ", all touchers : " + src.fingerprintshidden
-
-	SetUniversalState(/datum/universal_state/supermatter_cascade)
-	log_and_message_admins("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
-	src.forceMove(null)
 	qdel(src)
 	return 50000
 

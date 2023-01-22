@@ -32,8 +32,7 @@
 #define NEARSIGHTED    FLAG(0)
 #define EPILEPSY       FLAG(1)
 #define COUGHING       FLAG(2)
-#define TOURETTES      FLAG(3)
-#define NERVOUS        FLAG(4)
+#define NERVOUS        FLAG(3)
 
 // sdisabilities
 #define BLINDED     FLAG(0)

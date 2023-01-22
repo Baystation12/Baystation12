@@ -24,12 +24,16 @@
 /datum/movement_handler/delay/New(var/host, var/delay)
 	..()
 	src.delay = max(1, delay)
+	UpdateGlideSize()
 
 /datum/movement_handler/delay/DoMove()
 	next_move = world.time + delay
 
 /datum/movement_handler/delay/MayMove()
 	return world.time >= next_move ? MOVEMENT_PROCEED : MOVEMENT_STOP
+
+/datum/movement_handler/delay/proc/UpdateGlideSize()
+	host.set_glide_size(DELAY2GLIDESIZE(delay))
 
 // Relay self
 /datum/movement_handler/move_relay_self/DoMove(var/direction, var/mover)

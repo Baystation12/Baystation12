@@ -132,7 +132,7 @@
 
 /decl/hierarchy/supply_pack/security/sniperlaser
 	name = "Weapons - Energy marksman"
-	contains = list(/obj/item/gun/energy/sniperrifle = 2)
+	contains = list(/obj/item/gun/energy/sniperrifle = 1)
 	cost = 70
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "energy marksman crate"
@@ -159,11 +159,11 @@
 
 //rubay code
 /decl/hierarchy/supply_pack/security/gren_launch
-	name = "Weapons - Grenade Launcher Ammunition"
+	name = "Weapons - Fragmentation shell"
 	contains = list(/obj/item/grenade/frag/shell = 6)
 	cost = 65
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "grenade launcher ammunition crate"
+	containername = "fragmentation shell crate"
 	access = access_emergency_armory
 	security_level = SUPPLY_SECURITY_HIGH
 //rubay code end
@@ -210,7 +210,7 @@
 					/obj/item/reagent_containers/spray/pepper,
 					/obj/item/grenade/chem_grenade/teargas,
 					/obj/item/melee/baton/loaded,
-					/obj/item/clothing/glasses/sunglasses/sechud/goggles,
+					/obj/item/clothing/glasses/hud/security/prot,
 					/obj/item/taperoll/police,
 					/obj/item/device/hailer,
 					/obj/item/clothing/accessory/storage/black_vest,
@@ -228,7 +228,7 @@
 /decl/hierarchy/supply_pack/security/cosextragear
 	name = "Gear - Chief of Security equipment"
 	contains = list(/obj/item/device/radio/headset/heads/cos,
-					/obj/item/clothing/glasses/sunglasses/sechud/goggles,
+					/obj/item/clothing/glasses/hud/security/prot,
 					/obj/item/taperoll/police,
 					/obj/item/storage/belt/holster/security,
 					/obj/item/device/hailer,

@@ -1,4 +1,4 @@
-var/list/fusion_reactions
+var/global/list/fusion_reactions
 
 /decl/fusion_reaction
 	var/p_react = "" // Primary reactant.
@@ -15,7 +15,7 @@ var/list/fusion_reactions
 /decl/fusion_reaction/proc/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 	return 0
 
-proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
+/proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	if(!fusion_reactions)
 		fusion_reactions = list()
 		for(var/rtype in typesof(/decl/fusion_reaction) - /decl/fusion_reaction)
@@ -27,9 +27,9 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 				fusion_reactions[cur_reaction.s_react] = list()
 			fusion_reactions[cur_reaction.s_react][cur_reaction.p_react] = cur_reaction
 
-	if(list_find(fusion_reactions, p_react))
+	if(fusion_reactions.Find(p_react))
 		var/list/secondary_reactions = fusion_reactions[p_react]
-		if(list_find(secondary_reactions, s_react))
+		if(secondary_reactions.Find(s_react))
 			return fusion_reactions[p_react][s_react]
 
 // Material fuels
@@ -158,10 +158,11 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 
 // High end reactions.
 /decl/fusion_reaction/boron_hydrogen
-	p_react = "boron"
+	p_react = GAS_BORON
 	s_react = GAS_HYDROGEN
 	minimum_energy_level = 15000
 	energy_consumption = 3
 	energy_production = 12
 	radiation = 3
 	instability = 2.5
+	products = list(GAS_HELIUM = 1)

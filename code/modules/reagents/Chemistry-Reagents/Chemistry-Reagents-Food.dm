@@ -279,7 +279,7 @@
 	if(!istype(T))
 		return
 
-	var/hotspot = (locate(/obj/fire) in T)
+	var/hotspot = (locate(/obj/hotspot) in T)
 	if(hotspot && !istype(T, /turf/space))
 		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
 		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
@@ -393,7 +393,7 @@
 		if(prob(5) || M.chem_doses[type] == metabolism) //dose == metabolism is a very hacky way of forcing the message the first time this procs
 			to_chat(M, discomfort_message)
 	else
-		M.apply_effect(agony_amount, PAIN, 0)
+		M.apply_effect(agony_amount, EFFECT_PAIN, 0)
 		if(prob(5))
 			M.custom_emote(2, "[pick("dry heaves!","coughs!","splutters!")]")
 			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
@@ -484,7 +484,7 @@
 	if(M.chem_doses[type] == metabolism)
 		to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 	else
-		M.apply_effect(6, PAIN, 0)
+		M.apply_effect(6, EFFECT_PAIN, 0)
 		if(prob(5))
 			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 			M.custom_emote(2, "[pick("coughs.","gags.","retches.")]")

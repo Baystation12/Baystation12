@@ -23,4 +23,4 @@
 	install_system(new /obj/item/mech_equipment/catapult(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/sleeper(src), HARDPOINT_BACK)
 	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
-
+	install_system(new /obj/item/mech_equipment/mender(src), HARDPOINT_RIGHT_HAND)

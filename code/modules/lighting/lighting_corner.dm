@@ -1,11 +1,11 @@
-/var/total_lighting_corners = 0
-/var/datum/lighting_corner/dummy/dummy_lighting_corner = new
+var/global/total_lighting_corners = 0
+var/global/datum/lighting_corner/dummy/dummy_lighting_corner = new
 // Because we can control each corner of every lighting overlay.
 // And corners get shared between multiple turfs (unless you're on the corners of the map, then 1 corner doesn't).
 // For the record: these should never ever ever be deleted, even if the turf doesn't have dynamic lighting.
 
 // This list is what the code that assigns corners listens to, the order in this list is the order in which corners are added to the /turf/corners list.
-/var/list/LIGHTING_CORNER_DIAGONAL = list(NORTHEAST, SOUTHEAST, SOUTHWEST, NORTHWEST)
+var/global/list/LIGHTING_CORNER_DIAGONAL = list(NORTHEAST, SOUTHEAST, SOUTHWEST, NORTHWEST)
 
 /datum/lighting_corner
 	var/list/turf/masters                 = list()
@@ -56,7 +56,7 @@
 			T.corners = list(null, null, null, null)
 
 		masters[T]   = diagonal
-		i            = list_find(LIGHTING_CORNER_DIAGONAL, turn(diagonal, 180))
+		i            = LIGHTING_CORNER_DIAGONAL.Find(turn(diagonal, 180))
 		T.corners[i] = src
 
 	// Now the horizontal one.
@@ -66,7 +66,7 @@
 			T.corners = list(null, null, null, null)
 
 		masters[T]   = ((T.x > x) ? EAST : WEST) | ((T.y > y) ? NORTH : SOUTH) // Get the dir based on coordinates.
-		i            = list_find(LIGHTING_CORNER_DIAGONAL, turn(masters[T], 180))
+		i            = LIGHTING_CORNER_DIAGONAL.Find(turn(masters[T], 180))
 		T.corners[i] = src
 
 	// And finally the vertical one.
@@ -76,7 +76,7 @@
 			T.corners = list(null, null, null, null)
 
 		masters[T]   = ((T.x > x) ? EAST : WEST) | ((T.y > y) ? NORTH : SOUTH) // Get the dir based on coordinates.
-		i            = list_find(LIGHTING_CORNER_DIAGONAL, turn(masters[T], 180))
+		i            = LIGHTING_CORNER_DIAGONAL.Find(turn(masters[T], 180))
 		T.corners[i] = src
 
 	update_active()

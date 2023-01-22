@@ -46,28 +46,37 @@
 /datum/build_mode/proc/Warn(message)
 	to_chat(user, "BUILD MODE - [name] - [message])")
 
-/datum/build_mode/proc/select_subpath(given_path, within_scope = /atom)
-	var/desired_path = input("Enter full or partial typepath.","Typepath","[given_path]") as text|null
-	if(!desired_path)
-		return
-
-	var/list/types = typesof(within_scope)
-	var/list/matches = list()
-
-	for(var/path in types)
-		if(findtext("[path]", desired_path))
-			matches += path
-
-	if(!matches.len)
-		alert("No results found. Sorry.")
-		return
-
-	if(matches.len==1)
-		return matches[1]
-	else
-		return (input("Select a type", "Select Type", matches[1]) as null|anything in matches)
-
 /datum/build_mode/CanUseTopic(mob/user)
 	if (check_rights(R_BUILDMODE, TRUE, user))
 		return STATUS_INTERACTIVE
 	return ..()
+
+/datum/build_mode/proc/make_rectangle(turf/A, turf/B)
+	if(!A || !B) // No coords
+		return
+	if(A.z != B.z) // Not same z-level
+		return
+
+	var/height = A.y - B.y
+	var/width = A.x - B.x
+	var/z_level = A.z
+
+	var/turf/lower_left_corner = null
+	// First, try to find the lowest part
+	var/desired_y = 0
+	desired_y = min(A.y, B.y)
+
+	//Now for the left-most part.
+	var/desired_x = 0
+	desired_x = min(A.x, B.x)
+
+	lower_left_corner = locate(desired_x, desired_y, z_level)
+
+	// Now we can begin building the actual room.  This defines the boundries for the room.
+	var/low_bound_x = lower_left_corner.x
+	var/low_bound_y = lower_left_corner.y
+
+	var/high_bound_x = lower_left_corner.x + abs(width)
+	var/high_bound_y = lower_left_corner.y + abs(height)
+
+	return list(low_bound_x, low_bound_y, high_bound_x, high_bound_y, z_level)

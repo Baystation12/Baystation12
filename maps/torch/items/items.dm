@@ -60,11 +60,19 @@ Torch specific items
 	name = "explorer backpack"
 	desc = "A rugged backpack."
 	icon_state = "exppack"
+	item_state_slots = list(
+		slot_l_hand_str = "exppack",
+		slot_r_hand_str = "exppack",
+		)
 
 /obj/item/storage/backpack/satchel/explorer
 	name = "explorer satchel"
 	desc = "A rugged satchel for field work."
 	icon_state = "satchel-exp"
+	item_state_slots = list(
+		slot_l_hand_str = "satchel-exp",
+		slot_r_hand_str = "satchel-exp",
+		)
 
 /obj/item/storage/backpack/messenger/explorer
 	name = "explorer messenger bag"

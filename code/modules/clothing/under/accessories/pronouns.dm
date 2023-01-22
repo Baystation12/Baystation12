@@ -1,16 +1,11 @@
 /obj/item/clothing/accessory/pronouns
+	abstract_type = /obj/item/clothing/accessory/pronouns
 	name = "base pronouns badge"
 	icon_state = "pronounpin"
 	item_state = "pronouns"
 	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_INSIGNIA
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
-
-
-/obj/item/clothing/accessory/pronouns/Initialize()
-	. = ..()
-	INIT_SKIP_QDELETED
-	INIT_DISALLOW_TYPE(/obj/item/clothing/accessory/pronouns)
 
 
 /obj/item/clothing/accessory/pronouns/they

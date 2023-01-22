@@ -5,8 +5,8 @@
 	school = "transmutation"
 	charge_max = 120
 	spell_flags = 0
-	invocation = "none"
-	invocation_type = SpI_NONE
+	invocation = "CONJURATION!"
+	invocation_type = SpI_SHOUT
 	range = 1
 	inner_radius = -1
 	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 3, Sp_POWER = 2)

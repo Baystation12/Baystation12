@@ -1,22 +1,20 @@
 /decl/cultural_info/location/stateless
 	name = HOME_SYSTEM_STATELESS
-	description = "Sometimes people fall through the cracks... You have nobody to speak on your behalf."
+	description = "Некторые люди возникают просто из ниоткуда...  Вам не с кем говорить от вашего имени."
 	economic_power = 0
-	ruling_body = "None"
+	ruling_body = "Отсутсвует"
 
 /decl/cultural_info/location/other
 	name = HOME_SYSTEM_OTHER
-	description = "The last time someone tried to do a comprehensive encyclopaedia of the known galaxy, their \
-	positronic processor deleted itself rather than face up to the task. You are from nowhere in particular - a \
-	backwater world, or somewhere off the starmaps."
-	distance = "Various"
-	capital = "Various"
+	description = "В последний раз кто-то пытался сделать всеобъемлющую энциклопедию известной галактики, но \
+	даже его усилий не хватило, чтобы обнаружить ваш родной мир: дикое захолустье или дальний рубеж."
+	capital = "Различается"
 	economic_power = 1
-	ruling_body = "Various"
+	ruling_body = "Различается"
 
 /decl/cultural_info/location/deep_space
 	name = HOME_SYSTEM_DEEP_SPACE
-	description = "You came from the void between the stars."
+	description = "Вы пришли из межвездной пустоты."
 	language =         null
 	secondary_langs =  null
 	additional_langs = null

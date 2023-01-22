@@ -132,3 +132,25 @@
 	var/new_falloff = variable == "light_falloff_curve" ? var_value : A.light_falloff_curve
 
 	A.set_light(new_max, new_inner, new_outer, new_falloff)
+
+/decl/vv_set_handler/health_value_handler
+	handled_type = /atom
+	handled_vars = list(
+		"health_max" = /atom/proc/set_max_health,
+		"health_current" = /atom/proc/set_health
+	)
+	predicates = list(/proc/is_num_predicate)
+
+/decl/vv_set_handler/health_dead_handler
+	handled_type = /atom
+	handled_vars = list("health_dead")
+	predicates = list(/proc/is_strict_bool_predicate)
+
+/decl/vv_set_handler/health_dead_handler/handle_set_var(atom/target, variable, var_value, client)
+	if (var_value == target.health_dead)
+		return
+	switch (var_value)
+		if (TRUE)
+			target.kill_health()
+		if (FALSE)
+			target.revive_health()

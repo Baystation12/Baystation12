@@ -62,7 +62,7 @@
 	var/list/z_levels = list()
 
 /datum/feed_network/New()
-	CreateFeedChannel("Announcements", "SS13", 1, 1, "New Announcement Available")
+	CreateFeedChannel("Announcement System Records", "EXO Announcement System", 1, 1, "Доступно новое объявление!")
 
 /datum/feed_network/proc/CreateFeedChannel(channel_name, author, locked, adminChannel = 0, announcement_message)
 	var/datum/feed_channel/newChannel = new /datum/feed_channel
@@ -73,7 +73,7 @@
 	if(announcement_message)
 		newChannel.announcement = announcement_message
 	else
-		newChannel.announcement = "Breaking news from [channel_name]!"
+		newChannel.announcement = "Последние новости из [channel_name]!"
 	network_channels += newChannel
 
 /datum/feed_network/proc/SubmitArticle(msg, author, channel_name, obj/item/photo/photo, adminMessage = 0, message_type = "")
@@ -107,13 +107,13 @@
 	for(var/datum/nano_module/program/newscast/program in news_programs)
 		program.news_alert(annoncement)
 
-var/list/datum/feed_network/news_network = list()     //The global news-network, which is coincidentally a global list.
+var/global/list/datum/feed_network/news_network = list()     //The global news-network, which is coincidentally a global list.
 
-var/list/obj/machinery/newscaster/allCasters = list() //Global list that will contain reference to all newscasters in existence.
+var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that will contain reference to all newscasters in existence.
 
 
 /obj/machinery/newscaster
-	name = "newscaster"
+	name = "Newscaster"
 	desc = "A standard newsfeed handler. All the news you absolutely have no use for, in one place!"
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "newscaster_normal"
@@ -220,7 +220,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	if(istype(user, /mob/living/carbon/human) || istype(user,/mob/living/silicon) )
 		var/mob/living/human_or_robot_user = user
 		var/dat
-		dat = text("<meta charset=\"UTF-8\"><HEAD><TITLE>Newscaster</TITLE></HEAD><H3>Newscaster Unit #[src.unit_no]</H3>")
+		dat = text("<HEAD><TITLE>Newscaster</TITLE></HEAD><H3>Newscaster Unit #[src.unit_no]</H3>")
 
 		src.scan_user(human_or_robot_user) //Newscaster scans you
 
@@ -473,7 +473,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 /obj/machinery/newscaster/Topic(href, href_list)
 	if(..())
 		return
-	if ((list_find(usr.contents, src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
+	if ((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 		if(href_list["set_channel_name"])
 			src.channel_name = sanitizeSafe(input(usr, "Provide a Feed Channel Name", "Network Channel Handler", ""), MAX_LNAME_LEN)
@@ -793,7 +793,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	var/scribble=""
 	var/scribble_page = null
 
-obj/item/newspaper/attack_self(mob/user)
+/obj/item/newspaper/attack_self(mob/user)
 	user.update_personal_goal(/datum/goal/achievement/newshound, TRUE)
 	if(ishuman(user))
 		var/mob/living/carbon/human/human_user = user
@@ -875,7 +875,7 @@ obj/item/newspaper/attack_self(mob/user)
 		to_chat(user, "The paper is full of intelligible symbols!")
 
 
-obj/item/newspaper/Topic(href, href_list)
+/obj/item/newspaper/Topic(href, href_list)
 	var/mob/living/U = usr
 	..()
 	if ((src in U.contents) || ( istype(loc, /turf) && in_range(src, U) ))
@@ -907,7 +907,7 @@ obj/item/newspaper/Topic(href, href_list)
 			src.attack_self(src.loc)
 
 
-obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/pen))
 		if(src.scribble_page == src.curr_page)
 			to_chat(user, "<FONT COLOR='blue'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</FONT>")
@@ -958,7 +958,7 @@ obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
 	var/turf/T = get_turf(src)                      //Who the fuck uses spawn(600) anyway, jesus christ
 	if(news_call)
 		for(var/mob/O in hearers(world.view-1, T))
-			O.show_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"[news_call]\"</span>",2)
+			O.show_message("<span class='newscaster'><EM>[src.name]</EM> монотонно произносит, \"[news_call]\"</span>",2)
 		src.alert = 1
 		src.update_icon()
 		spawn(300)
@@ -967,6 +967,6 @@ obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 75, 1)
 	else
 		for(var/mob/O in hearers(world.view-1, T))
-			O.show_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"Attention! Wanted issue distributed!\"</span>",2)
+			O.show_message("<span class='newscaster'><EM>[src.name]</EM> монотонно произносит, \"Внимание. Обнаружена новая публикация.\"</span>",2)
 		playsound(src.loc, 'sound/machines/warning-buzzer.ogg', 75, 1)
 	return

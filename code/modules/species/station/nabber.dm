@@ -250,7 +250,7 @@
 /obj/item/grab/nab/special/init()
 	if(!(. = ..()))
 		return
-	affecting.apply_damage(15, BRUTE, BP_CHEST, DAM_SHARP, "organic punctures")
+	affecting.apply_damage(15, DAMAGE_BRUTE, BP_CHEST, DAMAGE_FLAG_SHARP, "organic punctures")
 	affecting.visible_message("<span class='danger'>[assailant]'s spikes dig in painfully!</span>")
 	affecting.Stun(10)
 
@@ -364,7 +364,7 @@
 	if(!hidden) H.visible_message("<span class='warning'>\The [H] shifts [T.his] arms.</span>")
 	H.unEquip(H.l_hand)
 	H.unEquip(H.r_hand)
-	if(do_after(H, 30))
+	if(do_after(H, 3 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
 		arm_swap(H)
 	else
 		to_chat(H, "<span class='notice'>You stop adjusting your arms and don't switch between them.</span>")

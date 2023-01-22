@@ -6,6 +6,10 @@
 	set desc = "Begin or stop aiming."
 	set category = "IC"
 
+	if (!gun_setting_icon)
+		to_chat(src, SPAN_WARNING("Your mobtype cannot use aiming overlays. If you feel this is in error, contact a dev."))
+		return
+
 	if(isliving(src)) //Needs to be a mob verb to prevent error messages when using hotkeys
 		var/mob/living/M = src
 		if(!M.aiming)
@@ -42,4 +46,3 @@
 		aiming = null
 	aimed.Cut()
 	return ..()
-

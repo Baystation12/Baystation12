@@ -1,4 +1,4 @@
-var/list/holder_mob_icon_cache = list()
+var/global/list/holder_mob_icon_cache = list()
 
 //Helper object for picking dionaea (and other creatures) up.
 /obj/item/holder
@@ -116,6 +116,9 @@ var/list/holder_mob_icon_cache = list()
 
 /obj/item/holder/mouse
 	w_class = ITEM_SIZE_TINY
+
+/obj/item/holder/small
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/holder/borer
 	origin_tech = list(TECH_BIO = 6)

@@ -1,4 +1,4 @@
-var/list/flooring_cache = list()
+var/global/list/flooring_cache = list()
 
 /turf/simulated/floor/on_update_icon(var/update_neighbors)
 

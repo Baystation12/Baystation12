@@ -70,9 +70,9 @@
 		var/mob/living/carbon/human/user_human
 		if(ishuman(character))
 			user_human = character
-			if(job.branch && mil_branches)
-				user_human.char_branch = mil_branches.get_branch(job.branch)
-				user_human.char_rank =   mil_branches.get_rank(job.branch, job.rank)
+			if(job.branch && GLOB.mil_branches)
+				user_human.char_branch = GLOB.mil_branches.get_branch(job.branch)
+				user_human.char_rank =   GLOB.mil_branches.get_rank(job.branch, job.rank)
 
 			// We need to make sure to use the abstract instance here; it's not the same as the one we were passed.
 			character.skillset.obtain_from_client(SSjobs.get_by_path(job.type), character.client)

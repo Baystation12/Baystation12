@@ -49,8 +49,8 @@
 	l_ear = /obj/item/device/radio/headset/expmed
 
 /decl/hierarchy/outfit/job/torch/crew/exploration/expmed/army
-	name = OUTFIT_JOB_NAME("Expedition Medic - Army")
-	uniform = /obj/item/clothing/under/solgov/utility/army/medical
+	name = OUTFIT_JOB_NAME("Expedition Medic - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/exploration/expeng
@@ -62,12 +62,12 @@
 	l_ear = /obj/item/device/radio/headset/expeng
 
 /decl/hierarchy/outfit/job/torch/crew/exploration/expeng/army
-	name = OUTFIT_JOB_NAME("Expedition Engineer - Army")
-	uniform = /obj/item/clothing/under/solgov/utility/army/engineering
+	name = OUTFIT_JOB_NAME("Expedition Engineer - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/engineering
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/exploration/expmar
-	name = OUTFIT_JOB_NAME("Expedition Guard - Army")
+	name = OUTFIT_JOB_NAME("Expedition Guard - Marine")
 	uniform = /obj/item/clothing/under/solgov/utility/army/urban/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_types = list(/obj/item/card/id/torch/crew/expmar)

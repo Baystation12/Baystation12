@@ -49,7 +49,7 @@
 	if(O.force)
 		if(prob(80))
 			var/damage = O.force
-			if (O.damtype == PAIN)
+			if (O.damtype == DAMAGE_PAIN)
 				damage = 0
 			health -= damage
 			visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by \the [user].</span>")
@@ -63,6 +63,8 @@
 
 /mob/living/simple_animal/hostile/syndicate/melee/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)	return
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 	if(prob(65))
 		src.health -= Proj.damage
 	else

@@ -17,8 +17,8 @@
 	// has_eye_glow = TRUE
 
 	faction = "spiders"
-	maxHealth = 125
-	health = 125
+	maxHealth = 110
+	health = 110
 	natural_weapon = /obj/item/natural_weapon/bite/spider
 	pass_flags = PASS_FLAG_TABLE
 	poison_resist = 0.5
@@ -41,13 +41,13 @@
 	cold_damage_per_tick = 20
 	minbodytemp = 175 // So they can all survive Sif without having to be classed under /sif subtype.
 
-	speak_emote = list("chitters")
+	speak_emote = list("щёлкает жвалами", "трёт лапки о друг друга")
 
 	say_list_type = /datum/say_list/spider
 	ai_holder = /datum/ai_holder/simple_animal/melee
 
 	var/poison_type = /datum/reagent/toxin/venom	// The reagent that gets injected when it attacks.
-	var/poison_chance = 20			// Chance for injection to occur.
+	var/poison_chance = 25			// Chance for injection to occur.
 	var/poison_per_bite = 5			// Amount added per injection.
 
 	var/image/eye_layer
@@ -106,10 +106,3 @@
 	if(prob(poison_chance))
 		to_chat(L, SPAN_WARNING("You feel a tiny prick."))
 		L.reagents.add_reagent(poison_type, poison_per_bite)
-
-/// Scale the spiders icon up or down.
-/mob/living/simple_animal/hostile/giant_spider/proc/scale(factor)
-	if (factor)
-		var/matrix/M = matrix()
-		M.Scale(factor)
-		src.transform = M

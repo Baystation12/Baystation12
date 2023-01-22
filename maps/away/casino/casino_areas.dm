@@ -1,7 +1,7 @@
-area/casino
+/area/casino
 	icon = 'maps/away/casino/casino_sprites.dmi'
 
-area/casino/casino_mainfloor
+/area/casino/casino_mainfloor
 	name = "\improper Casino Hall"
 	icon_state = "main_area"
 

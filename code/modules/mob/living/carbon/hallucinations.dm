@@ -43,7 +43,7 @@
 		hall_delay *= 2
 	next_hallucination = world.time + hall_delay
 	var/list/candidates = list()
-	for(var/T in subtypesof(/datum/hallucination/))
+	for(var/T in subtypesof(/datum/hallucination))
 		var/datum/hallucination/H = new T
 		if(H.can_affect(src))
 			candidates += H

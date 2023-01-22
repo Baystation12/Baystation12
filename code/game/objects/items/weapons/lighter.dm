@@ -38,9 +38,9 @@
 	else
 		to_chat(user, "<span class='warning'>You burn yourself while lighting the lighter.</span>")
 		if (user.l_hand == src)
-			user.apply_damage(2,BURN,BP_L_HAND)
+			user.apply_damage(2, DAMAGE_BURN, BP_L_HAND)
 		else
-			user.apply_damage(2,BURN,BP_R_HAND)
+			user.apply_damage(2, DAMAGE_BURN, BP_R_HAND)
 		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light \the [src], burning their finger in the process.</span>")
 	playsound(src.loc, "light_bic", 100, 1, -4)
 

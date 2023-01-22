@@ -100,6 +100,14 @@
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_atmospherics
 
+/decl/hierarchy/supply_pack/atmospherics/canister_boron
+	name = "Gas - Boron gas canister"
+	contains = list(/obj/machinery/portable_atmospherics/canister/boron)
+	cost = 40
+	containername = "\improper Boron gas canister crate"
+	containertype = /obj/structure/closet/crate/secure/large
+	access = access_atmospherics
+
 /decl/hierarchy/supply_pack/atmospherics/fuel
 	name = "Liquid - Fuel tanks"
 	contains = list(/obj/item/tank/hydrogen = 4)

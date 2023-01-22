@@ -2,17 +2,28 @@
 	name = "anomaly suit"
 	desc = "A suit that protects against exotic alien energies and biological contamination."
 	icon_state = "bio_anom"
+	item_state_slots = list(
+		slot_l_hand_str = "bio_anom",
+		slot_r_hand_str = "bio_anom",
+	)
 
 /obj/item/clothing/head/bio_hood/anomaly
 	name = "anomaly hood"
 	desc = "A hood that protects the head and face from exotic alien energies and biological contamination."
-	icon_state = "bio_anom"
-	item_state = "bio_anom"
+	icon_state = "bio_anom_hood"
+	item_state_slots = list(
+		slot_l_hand_str = "bio_anom_hood",
+		slot_r_hand_str = "bio_anom_hood",
+	)
 
 /obj/item/clothing/suit/space/void/excavation
 	name = "excavation voidsuit"
 	desc = "A specially shielded voidsuit that insulates against some exotic alien energies, as well as the more mundane dangers of excavation."
 	icon_state = "rig-excavation"
+	item_state_slots = list(
+		slot_l_hand_str = "excavation_voidsuit",
+		slot_r_hand_str = "excavation_voidsuit",
+	)
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		energy = ARMOR_ENERGY_RESISTANT,
@@ -27,6 +38,10 @@
 	desc = "A sophisticated voidsuit helmet, capable of protecting the wearer from many exotic alien energies."
 	icon_state = "rig0-excavation"
 	item_state = "excavation-helm"
+	item_state_slots = list(
+		slot_l_hand_str = "excavation_helm",
+		slot_r_hand_str = "excavation_helm",
+	)
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		energy = ARMOR_ENERGY_RESISTANT,
@@ -34,7 +49,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
-	light_overlay = "hardhat_light"
+	light_overlay = "helmet_light_alt"
 
 /obj/item/clothing/suit/space/void/excavation/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/excavation

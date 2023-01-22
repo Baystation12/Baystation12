@@ -15,7 +15,8 @@
 		LANGUAGE_HUMAN_ARABIC = 5,
 		LANGUAGE_HUMAN_INDIAN = 5,
 		LANGUAGE_HUMAN_SELENIAN = 10,
-		LANGUAGE_SPACER = 20
+		LANGUAGE_SPACER = 20,
+		LANGUAGE_HUMAN_LORRIMAN = 5
 	)
 	syllables = list(
 		"a", "ai", "an", "ang", "ao", "ba", "bai", "ban", "bang", "bao", "bei", "ben", "beng", "bi", "bian", "biao",

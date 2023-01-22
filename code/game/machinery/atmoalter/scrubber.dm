@@ -165,7 +165,7 @@
 	machine_name = "large portable scrubber"
 	machine_desc = "A heavy-duty scrubbing machine with greatly enhanced filtration power. Typically used around areas where a gas breach could be disastrous."
 
-	var/global/gid = 1
+	var/static/gid = 1
 	var/id = 0
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/New()

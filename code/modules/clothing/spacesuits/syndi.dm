@@ -50,11 +50,13 @@
 //Black syndicate space suit
 /obj/item/clothing/head/helmet/space/syndicate/black
 	name = "black space helmet"
+	desc = "A black helmet sporting clean lines and durable plating."
 	icon_state = "syndicate-helm-black"
 	item_state = "syndicate-helm-black"
 
 /obj/item/clothing/suit/space/syndicate/black
 	name = "black space suit"
+	desc = "A black spacesuit sporting clean lines and durable plating."
 	icon_state = "syndicate-black"
 	item_state_slots = list(
 		slot_l_hand_str = "syndicate-black",

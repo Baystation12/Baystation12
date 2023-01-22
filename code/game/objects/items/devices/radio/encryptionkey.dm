@@ -1,5 +1,5 @@
 
-/obj/item/device/encryptionkey/
+/obj/item/device/encryptionkey
 	name = "standard encryption key"
 	desc = "An encryption key for a radio headset. Contains cypherkeys."
 	icon = 'icons/obj/radio.dmi'

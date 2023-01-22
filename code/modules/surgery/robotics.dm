@@ -10,7 +10,7 @@
 	can_infect = 0
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP
 
-decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+/decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	return SURGERY_SKILLS_ROBOTIC
 
 /decl/surgery_step/robotics/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -233,7 +233,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s [tool.name] slips, damaging the internal structure of [target]'s [affected.name].</span>",
 	"<span class='warning'>Your [tool.name] slips, damaging the internal structure of [target]'s [affected.name].</span>")
-	target.apply_damage(rand(5,10), BURN, affected)
+	target.apply_damage(rand(5,10), DAMAGE_BURN, affected)
 
 //////////////////////////////////////////////////////////////////
 //	robotic limb brittleness repair surgery step
@@ -270,7 +270,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user] causes some of \the [target]'s [affected.name] to crumble!</span>",
 	"<span class='warning'>You cause some of \the [target]'s [affected.name] to crumble!</span>")
-	target.apply_damage(rand(5,10), BRUTE, affected)
+	target.apply_damage(rand(5,10), DAMAGE_BRUTE, affected)
 
 //////////////////////////////////////////////////////////////////
 //	robotic limb burn damage repair surgery step
@@ -328,7 +328,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user] causes a short circuit in [target]'s [affected.name]!</span>",
 	"<span class='warning'>You cause a short circuit in [target]'s [affected.name]!</span>")
-	target.apply_damage(rand(5,10), BURN, affected)
+	target.apply_damage(rand(5,10), DAMAGE_BURN, affected)
 
 //////////////////////////////////////////////////////////////////
 //	 artificial organ repair surgery step
@@ -346,9 +346,9 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 
 /decl/surgery_step/robotics/fix_organ_robotic/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	if(target.isSynthetic())
-		return SURGERY_SKILLS_ROBOTIC 
+		return SURGERY_SKILLS_ROBOTIC
 	else
-		return SURGERY_SKILLS_ROBOTIC_ON_MEAT 
+		return SURGERY_SKILLS_ROBOTIC_ON_MEAT
 
 /decl/surgery_step/robotics/fix_organ_robotic/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
@@ -383,7 +383,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 	user.visible_message("<span class='warning'>[user]'s hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with \the [tool]!</span>")
 	target.adjustToxLoss(5)
-	affected.createwound(CUT, 5)
+	affected.createwound(INJURY_TYPE_CUT, 5)
 	for(var/internal in affected.internal_organs)
 		var/obj/item/organ/internal/I = internal
 		if(I)

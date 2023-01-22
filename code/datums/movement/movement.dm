@@ -1,8 +1,8 @@
-var/const/MOVEMENT_HANDLED = FLAG(0) // If no further movement handling should occur after this
-var/const/MOVEMENT_REMOVE  = FLAG(1)
+var/global/const/MOVEMENT_HANDLED = FLAG(0) // If no further movement handling should occur after this
+var/global/const/MOVEMENT_REMOVE  = FLAG(1)
 
-var/const/MOVEMENT_PROCEED = FLAG(2)
-var/const/MOVEMENT_STOP    = FLAG(3)
+var/global/const/MOVEMENT_PROCEED = FLAG(2)
+var/global/const/MOVEMENT_STOP    = FLAG(3)
 
 #define INIT_MOVEMENT_HANDLERS \
 if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
@@ -87,7 +87,7 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	for(var/mh in movement_handlers)
 		var/datum/movement_handler/movement_handler = mh
 		if(movement_handler.MayMove(mover, is_external) & MOVEMENT_STOP)
-			return MOVEMENT_HANDLED
+			return MOVEMENT_STOP
 
 		. = movement_handler.DoMove(direction, mover, is_external)
 		if(. & MOVEMENT_REMOVE)
@@ -130,6 +130,7 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	. = ..()
 
 /datum/movement_handler/proc/DoMove(var/direction, var/mob/mover, var/is_external)
+	set waitfor = FALSE
 	return
 
 // Asks the handlers if the mob may move, ignoring destination, if attempting a DoMove()

@@ -6,7 +6,7 @@
 		if(department_goals && current.get_preference_value(/datum/client_preference/show_department_goals) == GLOB.PREF_SHOW)
 			to_chat(current, SPAN_NOTICE(department_goals))
 		if(LAZYLEN(goals))
-			to_chat(current, SPAN_NOTICE("<br><br><b>You had the following personal goals this round:</b><br>[jointext(summarize_goals(TRUE), "<br>")]"))
+			to_chat(current, SPAN_NOTICE("<br><br><b>В этой смене вы имели следующие личные цели:</b><br>[jointext(summarize_goals(TRUE), "<br>")]"))
 
 /datum/mind/proc/summarize_goals(var/show_success = FALSE, var/allow_modification = FALSE, var/mob/caller)
 	. = list()
@@ -22,7 +22,7 @@
 		goals = null
 
 	var/list/available_goals = SSgoals.global_personal_goals ? SSgoals.global_personal_goals.Copy() : list()
-		
+
 	if(ishuman(current))
 		var/mob/living/carbon/human/H = current
 		for(var/token in H.cultural_info)
@@ -38,17 +38,17 @@
 		max_goals = job.max_goals
 		if(LAZYLEN(job.possible_goals))
 			available_goals |= job.possible_goals
-	
+
 	if(isnull(add_amount))
 		add_amount = rand(min_goals, max_goals)
-	
+
 	if (!bypass_goal_checks)
 		add_amount = min(max(0, max_goals - LAZYLEN(goals)), add_amount)
 		if(add_amount <= 0)
 			if(!is_spawning)
 				to_chat(src.current, SPAN_WARNING("Your job doesn't allow for any more distractions."))
 			return FALSE
-		
+
 		var/pref_val = current.get_preference_value(/datum/client_preference/give_personal_goals)
 		if (pref_val == GLOB.PREF_NEVER || (pref_val == GLOB.PREF_NON_ANTAG && player_is_antag(src)))
 			if(!is_spawning)

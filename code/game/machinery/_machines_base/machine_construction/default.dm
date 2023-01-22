@@ -22,6 +22,9 @@
 /decl/machine_construction/default/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
+	if (!machine.can_use_tools)
+		to_chat(user, SPAN_WARNING("\The [src] cannot be modified!"))
+		return TRUE
 	if(isScrewdriver(I))
 		TRANSFER_STATE(down_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)

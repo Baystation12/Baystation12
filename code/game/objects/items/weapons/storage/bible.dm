@@ -69,7 +69,7 @@
 		return
 	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
 		user.visible_message(SPAN_NOTICE("\The [user] places \the [src] on \the [M]'s forehead, reciting a prayer..."))
-		if(do_after(user, 5 SECONDS) && user.Adjacent(M))
+		if(do_after(user, 5 SECONDS, M, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && user.Adjacent(M))
 			user.visible_message("\The [user] finishes reciting \his prayer, removing \the [src] from \the [M]'s forehead.", "You finish reciting your prayer, removing \the [src] from \the [M]'s forehead.")
 			if(user.get_cultural_value(TAG_RELIGION) == M.get_cultural_value(TAG_RELIGION))
 				to_chat(M, SPAN_NOTICE("You feel calm and relaxed, at one with the universe."))
@@ -96,7 +96,7 @@
 		return
 	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
 		user.visible_message("\The [user] begins to read a passage from \the [src]...", "You begin to read a passage from \the [src]...")
-		if(do_after(user, 5 SECONDS))
+		if(do_after(user, 5 SECONDS, src, do_flags = DO_PUBLIC_UNIQUE))
 			user.visible_message("\The [user] reads a passage from \the [src].", "You read a passage from \the [src].")
 			for(var/mob/living/carbon/human/H in view(user))
 				if(user.get_cultural_value(TAG_RELIGION) == H.get_cultural_value(TAG_RELIGION))

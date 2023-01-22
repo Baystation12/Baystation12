@@ -2,7 +2,7 @@
 *	This repository is intended for images that are never altered after creation
 */
 
-/var/repository/images/image_repository = new()
+var/global/repository/images/image_repository = new()
 
 /repository/images
 	var/list/image_cache_for_atoms

@@ -73,7 +73,7 @@
 	if( !straight_table_check(turn(direction,90)) || !straight_table_check(turn(direction,-90)) )
 		return FALSE
 
-	if(!do_after(usr, 1 SECOND, src))
+	if(!do_after(usr, 1 SECOND, src, DO_PUBLIC_UNIQUE))
 		return FALSE
 	verbs -=/obj/structure/table/verb/do_flip
 	verbs +=/obj/structure/table/proc/do_put
@@ -94,14 +94,14 @@
 		var/obj/structure/table/T = locate() in get_step(src,D)
 		if(T && T.can_connect() && T.flipped == 0 && material && T.material && T.material.name == material.name)
 			T.flip(direction)
-	damage_health(rand(5, 10), BRUTE)
+	damage_health(rand(5, 10), DAMAGE_BRUTE)
 	update_connections(1)
 	update_icon()
 
 	return TRUE
 
 /obj/structure/table/proc/unflip()
-	if(!do_after(usr, 1 SECOND, src))
+	if(!do_after(usr, 1 SECOND, src, DO_PUBLIC_UNIQUE))
 		return FALSE
 	verbs -=/obj/structure/table/proc/do_put
 	verbs +=/obj/structure/table/verb/do_flip

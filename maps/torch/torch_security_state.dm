@@ -27,6 +27,7 @@
 /decl/security_level/default/torchdept/code_green
 	name = "Зелёный код"
 	icon = 'icons/misc/security_state.dmi'
+	alarm_level = "off"
 
 	light_max_bright = 0.25
 	light_inner_range = 0.1
@@ -47,6 +48,7 @@
 
 /decl/security_level/default/torchdept/code_violet
 	name = "Фиолетовый код"
+	alarm_level = "on"
 
 	light_max_bright = 0.5
 	light_inner_range = 1
@@ -70,6 +72,7 @@
 
 /decl/security_level/default/torchdept/code_orange
 	name = "Оранжевый код"
+	alarm_level = "on"
 
 	light_max_bright = 0.5
 	light_inner_range = 1
@@ -95,11 +98,12 @@
 /decl/security_level/default/torchdept/code_blue
 	name = "Cиний код"
 	icon = 'icons/misc/security_state.dmi'
+	alarm_level = "on"
 
 	light_max_bright = 0.5
 	light_inner_range = 1
 	light_outer_range = 2
-	light_color_alarm = COLOR_BLUE
+	light_color_alarm = COLOR_NAVY_BLUE
 	light_color_status_display = COLOR_BLUE
 	overlay_alarm = "alarm_blue"
 	overlay_status_display = "status_display_blue"
@@ -118,6 +122,7 @@
 /decl/security_level/default/torchdept/code_red
 	name = "Красный код"
 	icon = 'icons/misc/security_state.dmi'
+	alarm_level = "on"
 
 	light_max_bright = 0.75
 	light_inner_range = 1
@@ -151,6 +156,7 @@
 /decl/security_level/default/torchdept/code_delta
 	name = "код Дельта"
 	icon = 'icons/misc/security_state.dmi'
+	alarm_level = "on"
 
 	light_max_bright = 0.75
 	light_inner_range = 0.1

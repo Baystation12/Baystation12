@@ -7,7 +7,7 @@ GLOBAL_VAR_INIT(emojis, 'icons/emoji.dmi')
 	var/pos = 1
 	var/search = 0
 	var/emoji = ""
-	var/static/list/emojis = icon_states(GLOB.emojis)
+	var/list/emojis = icon_states(GLOB.emojis)
 	while(1)
 		search = findtext_char(text, ":", pos)
 		parsed += copytext_char(text, pos, search)
@@ -17,7 +17,7 @@ GLOBAL_VAR_INIT(emojis, 'icons/emoji.dmi')
 			if(search)
 				emoji = lowertext(copytext_char(text, pos+1, search))
 				if(emoji in emojis)
-					parsed += icon2html(icon(GLOB.emojis, emoji), C, realsize= TRUE, incx=-16, incy=-16)
+					parsed += icon2html(icon(GLOB.emojis, emoji), C, realsize= TRUE, incx=16, incy=16)
 					// parsed += " <img class=icon src=\ref[GLOB.emojis] iconstate='[emoji]'>"
 					pos = search + 1
 				else

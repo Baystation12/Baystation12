@@ -5,7 +5,7 @@
 	school = "transmutation"
 	charge_max = 600
 	spell_flags = 0
-	invocation = "DIRI CEL"
+	invocation = "VERBO DEI."
 	invocation_type = SpI_WHISPER
 	range = 0
 	cooldown_min = 400 //50 deciseconds reduction per rank
@@ -47,7 +47,7 @@
 			var/mob/M = G.affecting
 			charged_item = mob_charge(M)
 
-	if(istype(target, /obj/item/cell/))
+	if(istype(target, /obj/item/cell))
 		var/obj/item/cell/C = target
 		if(prob(80) && C.maxcharge)
 			C.maxcharge -= 200

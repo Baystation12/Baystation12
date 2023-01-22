@@ -17,6 +17,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
+	valid_accessory_slots = null
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 	cold_protection = HEAD
@@ -138,9 +139,9 @@
 	siemens_coefficient = 0.9
 	randpixel = 0
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
-	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,
+								ACCESSORY_SLOT_ARMBAND) // PRX@CODE
 	equip_delay = 5 SECONDS
-	equip_delay_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT
 
 
 /obj/item/clothing/suit/space/equip_delay_before(mob/user, slot, equip_flags)
@@ -163,4 +164,4 @@
 
 /obj/item/clothing/suit/space/Initialize()
 	. = ..()
-	slowdown_per_slot[slot_wear_suit] = 1
+	slowdown_per_slot[slot_wear_suit] = 0.5

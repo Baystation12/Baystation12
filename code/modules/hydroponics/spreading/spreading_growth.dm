@@ -38,8 +38,8 @@
 			continue
 
 		if(floor.density)
-			if(!isnull(seed.chems[/datum/reagent/acid/polyacid]))
-				spawn(rand(5,25)) floor.ex_act(3)
+			if(LAZYACCESS(seed.chems, /datum/reagent/acid/polyacid))
+				spawn(rand(5,25)) floor.ex_act(EX_ACT_LIGHT)
 			continue
 
 		if(!Adjacent(floor) || !floor.Enter(src))
@@ -59,7 +59,7 @@
 	adjust_health(-seed.handle_environment(T,T.return_air(),null,1))
 	if(health <= 0)
 		return
-	
+
 	//Vine fight!
 	for(var/obj/effect/vine/other in T)
 		if(other.seed != seed)
@@ -87,14 +87,14 @@
 		//Try to spread
 		if(parent && parent.possible_children && prob(spread_chance))
 			var/list/neighbors = get_neighbors()
-			if(neighbors.len)
+			if(neighbors?.len)
 				spread_to(pick(neighbors))
-			
+
 		//Try to settle down
 		if(can_spawn_plant())
 			plant = new(T,seed)
 			plant.dir = src.dir
-			plant.transform = src.transform
+			plant.SetTransform(others = transform)
 			plant.age = seed.get_trait(TRAIT_MATURATION)-1
 			plant.update_icon()
 			if(growth_type==0) //Vines do not become invisible.
@@ -133,7 +133,7 @@
 		child.update_icon()
 		// Some plants eat through plating.
 		if(islist(seed.chems) && !isnull(seed.chems[/datum/reagent/acid/polyacid]))
-			target_turf.ex_act(prob(80) ? 3 : 2)
+			target_turf.ex_act(prob(80) ? EX_ACT_LIGHT : EX_ACT_HEAVY)
 	else
 		qdel(child)
 

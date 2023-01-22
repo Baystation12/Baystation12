@@ -1,0 +1,78 @@
+{{if data.tracking == 0}}
+    {{:helper.link('Switch On', null, {'toggle_power' : 1})}}
+{{else}}
+    {{:helper.link('Switch Off', null, {'toggle_power' : 1})}}
+
+    <div class='item'>
+        <div class='itemLabel'>Current location</div>
+        <div class='itemContent'>{{:data.my_area_name}} ({{:data.curr_x}}, {{:data.curr_y}}, {{:data.curr_z}})</div>
+    </div>
+
+    <div class="statusDisplay">
+    {{if data.hide_signal == 1}}
+        Tagged as {{:data.gps_tag}}.
+    {{else}}
+        Broadcasting as {{:data.gps_tag}}.
+    {{/if}}
+    </div>
+
+    <div class='item'>
+        <div class='itemLabel'>Configuration</div>
+        <div class='itemContent'>
+            {{:helper.link('Change Tag', null, { 'tag' : 1 })}}
+            {{if data.local_mode == 1}}
+                {{:helper.link('Narrow Band', null, { 'range'  : 1 })}}
+            {{else}}
+                {{:helper.link('Broad Band', null, { 'range'  : 1 })}}
+            {{/if}}
+            {{if data.can_hide_signal == 1}}
+                {{:helper.link('Toggle Signal Visibility', null, { 'hide' : 1})}}
+            {{/if}}
+        </div>
+    </div>
+
+    {{if data.no_signals == 1}}
+        <div class='item'>
+            <div class='itemLabel'>
+                No signals detected.
+            </div>
+        </div>
+    {{else}}
+        {{for data.gps_list}}
+
+        <div class='item'>
+            <div class="itemLabel">
+                {{:value.gps_tag}} - {{:value.area_name}}
+            </div>
+
+            <div class="itemContent">
+            {{if value.is_special_gps_marker == 1}}
+                {{if value.local == 1}}
+                    {{:value.direction}} Dist: {{:value.distance}}m
+                {{else}}
+                    {{:value.z}}
+                {{/if}}
+            {{else}}
+                ({{:value.x}}, {{:value.y}})
+            {{/if}}
+            <br>
+            {{if value.local == 1}}
+                {{:value.distance}}m, {{:value.direction}}
+            {{else}}
+                Non-local signal.
+            {{/if}}
+            <br>
+            {{if value.being_tracked == 1}}
+                {{:helper.link('Stop Tracking', null, {'stop_track' :  value.gps_ref })}}
+                {{:helper.link('Color ' + value.coloured_square, null, {'track_color' : value.gps_ref })}}
+                {{:helper.link('Show/Hide Label', null, {'track_label' : value.gps_ref })}}
+            {{else}}
+                {{:helper.link('Start Tracking', null, {'start_track' : value.gps_ref })}}
+            {{/if}}
+            </div>
+        </div>
+
+        {{/for}}
+    {{/if}}
+    </div>
+{{/if}}

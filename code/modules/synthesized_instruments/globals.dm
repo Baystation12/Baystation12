@@ -216,7 +216,7 @@ Bit flags that modify the behavior of above properties
 
 /datum/musical_config/proc/environment_to_id(environment)
 	if (environment in src.all_environments)
-		return list_find(src.all_environments, environment) - 2
+		return src.all_environments.Find(environment) - 2
 	return -1
 
 

@@ -31,7 +31,7 @@
 						SPAN_NOTICE("You begin prying up \the [flooring.descriptor] with \the [C].")
 					)
 					playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
-					if (do_after(user, flooring.remove_timer, src))
+					if (do_after(user, flooring.remove_timer, src, DO_PUBLIC_UNIQUE))
 						user.visible_message(
 							SPAN_NOTICE("\The [user] pries up \the [flooring.descriptor] with \the [C]!"),
 							SPAN_NOTICE("You pry up \the [flooring.descriptor] with \the [C].")
@@ -55,7 +55,7 @@
 					SPAN_NOTICE("You begin unscrewing \the [flooring.descriptor] with \the [C].")
 				)
 				playsound(src, 'sound/items/Screwdriver.ogg', 80, 1)
-				if (do_after(user, flooring.remove_timer, src))
+				if (do_after(user, flooring.remove_timer, src, DO_PUBLIC_UNIQUE))
 					user.visible_message(
 						SPAN_NOTICE("\The [user] unscrews \the [flooring.descriptor] with \the [C]!"),
 						SPAN_NOTICE("You unscrew \the [flooring.descriptor] with \the [C].")
@@ -75,7 +75,7 @@
 					SPAN_NOTICE("You begin unwrenching \the [flooring.descriptor] with \the [C].")
 				)
 				playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
-				if (do_after(user, flooring.remove_timer, src))
+				if (do_after(user, flooring.remove_timer, src, DO_PUBLIC_UNIQUE))
 					user.visible_message(
 						SPAN_NOTICE("\The [user] unwrench \the [flooring.descriptor] with \the [C]!"),
 						SPAN_NOTICE("You unwrench \the [flooring.descriptor] with \the [C].")
@@ -118,7 +118,7 @@
 				var/decl/flooring/F = decls[flooring_type]
 				if(!F.build_type)
 					continue
-				if(ispath(S.type, F.build_type) || ispath(S.build_type, F.build_type))
+				if(S.type == F.build_type || S.build_type == F.build_type)
 					use_flooring = F
 					break
 			if(!use_flooring)
@@ -128,7 +128,7 @@
 				to_chat(user, "<span class='warning'>You require at least [use_flooring.build_cost] [S.name] to complete the [use_flooring.descriptor].</span>")
 				return
 			// Stay still and focus...
-			if(use_flooring.build_time && !do_after(user, use_flooring.build_time, src))
+			if(use_flooring.build_time && !do_after(user, use_flooring.build_time, src, DO_PUBLIC_UNIQUE))
 				return
 			if(flooring || !S || !user || !use_flooring)
 				return
@@ -144,7 +144,7 @@
 				var/turf/T = GetBelow(src)
 				if(T)
 					T.visible_message("<span class='warning'>The ceiling above looks as if it's being pried off.</span>")
-				if(do_after(user, 10 SECONDS))
+				if(do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE))
 					if(!istype(src, /turf/simulated/floor))
 						return
 					if(!broken && !burnt || !(is_plating()))
@@ -173,7 +173,7 @@
 					if(welder.remove_fuel(0, user))
 						playsound(src, 'sound/items/Welder.ogg', 80, 1)
 						visible_message("<span class='notice'>[user] has started melting the plating's reinforcements!</span>")
-						if(do_after(user, 5 SECONDS) && welder.isOn() && welder_melt())
+						if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) && welder.isOn() && welder_melt())
 							visible_message("<span class='warning'>[user] has melted the plating's reinforcements! It should be possible to pry it off.</span>")
 							playsound(src, 'sound/items/Welder.ogg', 80, 1)
 					return
@@ -183,7 +183,7 @@
 				return ..()
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			visible_message("<span class='notice'>[user] has started slicing through the plating's reinforcements!</span>")
-			if(do_after(user, 3 SECONDS) && welder_melt())
+			if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) && welder_melt())
 				visible_message("<span class='warning'>[user] has sliced through the plating's reinforcements! It should be possible to pry it off.</span>")
 				playsound(src, 'sound/items/Welder.ogg', 80, 1)
 
@@ -199,7 +199,7 @@
 
 /turf/simulated/floor/can_build_cable(var/mob/user)
 	if(!is_plating() || flooring)
-		to_chat(user, "<span class='warning'>Removing the tiling first.</span>")
+		to_chat(user, "<span class='warning'>Remove the tiling first.</span>")
 		return 0
 	if(broken || burnt)
 		to_chat(user, "<span class='warning'>This section is too damaged to support anything. Use a welder to fix the damage.</span>")

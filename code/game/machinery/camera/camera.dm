@@ -122,16 +122,18 @@
 	return internal_process()
 
 /obj/machinery/camera/emp_act(severity)
-	if(!isEmpProof() && prob(100/severity))
-		if(!affected_by_emp_until || (world.time < affected_by_emp_until))
-			affected_by_emp_until = max(affected_by_emp_until, world.time + (90 SECONDS / severity))
-		else
-			stat |= EMPED
-			set_light(0)
-			triggerCameraAlarm()
-			update_icon()
-			update_coverage()
-			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+	if (!isEmpProof())
+		if (prob(100/severity))
+			if (!affected_by_emp_until || (world.time < affected_by_emp_until))
+				affected_by_emp_until = max(affected_by_emp_until, world.time + (90 SECONDS / severity))
+			else
+				stat |= EMPED
+				set_light(0)
+				triggerCameraAlarm()
+				update_icon()
+				update_coverage()
+				START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+		..()
 
 /obj/machinery/camera/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.get_structure_damage())
@@ -141,7 +143,7 @@
 		return
 
 	//camera dies if an explosion touches it!
-	if(severity <= 2 || prob(50))
+	if(severity <= EX_ACT_HEAVY || prob(50))
 		destroy()
 
 	..() //and give it the regular chance of being deleted outright
@@ -219,7 +221,7 @@
 			else to_chat(O, "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U];trackname=[U.name]'>[U]</a></b> holds \a [itemname] up to one of your cameras ...")
 			show_browser(O, text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
 
-	else if(W.damtype == BRUTE || W.damtype == BURN) //bashing cameras
+	else if (W.damtype == DAMAGE_BRUTE || W.damtype == DAMAGE_BURN) //bashing cameras
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if (W.force >= src.toughness)
 			user.do_attack_animation(src)
@@ -383,7 +385,7 @@
 		to_chat(user, "<span class='notice'>You start to weld \the [src]..</span>")
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 		busy = 1
-		if(do_after(user, 100, src) && WT.isOn())
+		if(do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE) && WT.isOn())
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			busy = 0
 			return 1

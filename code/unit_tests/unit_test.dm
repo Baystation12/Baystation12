@@ -24,26 +24,26 @@
  *
  */
 
-var/all_unit_tests_passed = 1
-var/failed_unit_tests = 0
-var/skipped_unit_tests = 0
-var/total_unit_tests = 0
+var/global/all_unit_tests_passed = 1
+var/global/failed_unit_tests = 0
+var/global/skipped_unit_tests = 0
+var/global/total_unit_tests = 0
 
 // For console out put in Linux/Bash makes the output green or red.
 // Should probably only be used for unit tests since some special folks use winders to host servers.
 // if you want plain output, use dm.sh -DUNIT_TEST -DUNIT_TEST_PLAIN baystation12.dme
 #ifdef UNIT_TEST_PLAIN
-var/ascii_esc = ""
-var/ascii_red = ""
-var/ascii_green = ""
-var/ascii_yellow = ""
-var/ascii_reset = ""
+var/global/ascii_esc = ""
+var/global/ascii_red = ""
+var/global/ascii_green = ""
+var/global/ascii_yellow = ""
+var/global/ascii_reset = ""
 #else
-var/ascii_esc = ascii2text(27)
-var/ascii_red = "[ascii_esc]\[31m"
-var/ascii_green = "[ascii_esc]\[32m"
-var/ascii_yellow = "[ascii_esc]\[33m"
-var/ascii_reset = "[ascii_esc]\[0m"
+var/global/ascii_esc = ascii2text(27)
+var/global/ascii_red = "[ascii_esc]\[31m"
+var/global/ascii_green = "[ascii_esc]\[32m"
+var/global/ascii_yellow = "[ascii_esc]\[33m"
+var/global/ascii_reset = "[ascii_esc]\[0m"
 #endif
 
 

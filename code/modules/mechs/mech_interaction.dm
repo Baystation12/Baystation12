@@ -215,6 +215,10 @@
 /mob/living/exosuit/proc/check_enter(mob/user, silent = FALSE, check_incap = TRUE)
 	if(!user || (check_incap && user.incapacitated()))
 		return FALSE
+	if (user.buckled)
+		if (!silent)
+			to_chat(user, SPAN_WARNING("You are currently buckled to \the [user.buckled]."))
+		return FALSE
 	if(!(user.mob_size >= body.min_pilot_size && user.mob_size <= body.max_pilot_size))
 		if(!silent)
 			to_chat(user, SPAN_WARNING("You cannot pilot an exosuit of this size."))
@@ -241,7 +245,7 @@
 	to_chat(user, SPAN_NOTICE("You start climbing into \the [src]..."))
 	if(!body)
 		return FALSE
-	if(!instant && !do_after(user, body.climb_time))
+	if(!instant && !do_after(user, body.climb_time, src, DO_PUBLIC_UNIQUE))
 		return FALSE
 	if(!check_enter(user, silent, check_incap))
 		return FALSE
@@ -357,8 +361,8 @@
 					return
 
 				visible_message(SPAN_WARNING("\The [user] begins unwrenching the securing bolts holding \the [src] together."))
-				var/delay = 60 * user.skill_delay_mult(SKILL_DEVICES)
-				if(!do_after(user, delay) || !maintenance_protocols)
+				var/delay = 6 SECONDS * user.skill_delay_mult(SKILL_DEVICES)
+				if(!do_after(user, delay, src, DO_PUBLIC_UNIQUE) || !maintenance_protocols)
 					return
 				visible_message(SPAN_NOTICE("\The [user] loosens and removes the securing bolts, dismantling \the [src]."))
 				dismantle()
@@ -392,8 +396,8 @@
 				if(!body || !body.cell)
 					to_chat(user, SPAN_WARNING("There is no cell here for you to remove!"))
 					return
-				var/delay = 20 * user.skill_delay_mult(SKILL_DEVICES)
-				if(!do_after(user, delay) || !maintenance_protocols || !body || !body.cell)
+				var/delay = 2 SECONDS * user.skill_delay_mult(SKILL_DEVICES)
+				if(!do_after(user, delay, src, DO_PUBLIC_UNIQUE) || !maintenance_protocols || !body || !body.cell)
 					return
 
 				user.put_in_hands(body.cell)
@@ -412,7 +416,7 @@
 					return
 				var/delay = min(50 * user.skill_delay_mult(SKILL_DEVICES), 50 * user.skill_delay_mult(SKILL_EVA))
 				visible_message(SPAN_NOTICE("\The [user] starts forcing the \the [src]'s emergency [body.hatch_descriptor] release using \the [thing]."))
-				if(!do_after(user, delay, src, DO_DEFAULT | DO_PUBLIC_PROGRESS))
+				if(!do_after(user, delay, src, DO_PUBLIC_UNIQUE))
 					return
 				visible_message(SPAN_NOTICE("\The [user] forces \the [src]'s [body.hatch_descriptor] open using the \the [thing]."))
 				playsound(user.loc, 'sound/machines/bolts_up.ogg', 25, 1)
@@ -454,7 +458,7 @@
 		else if(!hatch_closed)
 			var/mob/pilot = pick(pilots)
 			user.visible_message(SPAN_DANGER("\The [user] is trying to pull \the [pilot] out of \the [src]!"))
-			if(do_after(user, 30) && user.Adjacent(src) && (pilot in pilots) && !hatch_closed)
+			if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) && user.Adjacent(src) && (pilot in pilots) && !hatch_closed)
 				user.visible_message(SPAN_DANGER("\The [user] drags \the [pilot] out of \the [src]!"))
 				eject(pilot, silent=1)
 		else if(hatch_closed)

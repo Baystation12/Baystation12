@@ -1,5 +1,6 @@
 /obj/machinery/computer/shuttle_control/multi
 	ui_template = "shuttle_control_console_multi.tmpl"
+	can_use_tools = FALSE
 
 /obj/machinery/computer/shuttle_control/multi/get_ui_data(var/datum/shuttle/autodock/multi/shuttle)
 	. = ..()

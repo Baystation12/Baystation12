@@ -143,7 +143,7 @@
 			return V
 	return null
 
-/obj/screen/movable/ability_master/proc/get_ability_by_instance(var/obj/instance/)
+/obj/screen/movable/ability_master/proc/get_ability_by_instance(var/obj/instance)
 	for(var/obj/screen/ability/obj_based/O in ability_objects)
 		if(O.object == instance)
 			return O

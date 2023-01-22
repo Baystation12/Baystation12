@@ -148,7 +148,7 @@
 		if(WT.remove_fuel(0,user))
 			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, max(5, damage / 5), src) && WT && WT.isOn())
+			if(do_after(user, max(5, damage / 5), src, DO_PUBLIC_UNIQUE) && WT && WT.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
 				take_damage(-damage)
 		else
@@ -221,10 +221,10 @@
 	change_power_consumption(1500 * (range**2), POWER_USE_IDLE) //Exponential increase, also affects speed of overheating
 
 /obj/machinery/shipsensors/emp_act(severity)
-	if(!use_power)
-		return
-	take_damage(20/severity)
-	toggle()
+	if(use_power)
+		take_damage(20/severity)
+		toggle()
+	..()
 
 /obj/machinery/shipsensors/proc/take_damage(value)
 	health = min(max(health - value, 0),max_health)

@@ -437,8 +437,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		moblist.Add(M)
 	for(var/mob/living/silicon/robot/M in sortmob)
 		moblist.Add(M)
-	for(var/mob/living/carbon/alien/chorus/M in sortmob)
-		moblist.Add(M)
 	for(var/mob/living/carbon/human/M in sortmob)
 		moblist.Add(M)
 	for(var/mob/living/carbon/brain/M in sortmob)
@@ -517,7 +515,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 
 //returns random gauss number
-proc/GaussRand(var/sigma)
+/proc/GaussRand(var/sigma)
 	var/x,y,rsq
 	do
 		x=2*rand()-1
@@ -527,7 +525,7 @@ proc/GaussRand(var/sigma)
 	return sigma*y*sqrt(-2*log(rsq)/rsq)
 
 //returns random gauss number, rounded to 'roundto'
-proc/GaussRandRound(var/sigma,var/roundto)
+/proc/GaussRandRound(var/sigma,var/roundto)
 	return round(GaussRand(sigma),roundto)
 
 //Will return the contents of an atom recursivly to a depth of 'searchDepth'
@@ -599,7 +597,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 //Takes: Anything that could possibly have variables and a varname to check.
 //Returns: 1 if found, 0 if not.
 /proc/hasvar(var/datum/A, var/varname)
-	return !!list_find(A.vars, lowertext(varname))
+	return A.vars.Find(varname) != 0
 
 //Takes: Area type as text string or as typepath OR an instance of the area.
 //Returns: A list of all areas of that type in the world.
@@ -654,7 +652,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		var/translation = get_turf_translation(src_origin, trg_origin, turfs_src)
 		translate_turfs(translation, null)
 
-proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
+/proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 	if(!original)
 		return null
 
@@ -679,15 +677,22 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 	var/y_pos = null
 	var/z_pos = null
 
+/**
+ * Attempts to move the contents, including turfs, of one area to another area.
+ * Positioning is based on the lower left corner of both areas.
+ * Tiles that do not fit into the new area will not be copied.
+ * Source atoms are not modified or deleted.
+ * Turfs are created using `ChangeTurf()`.
+ * `dir`, `icon`, and `icon_state` are copied. All other vars use the default value for the copied atom.
+ * Primarily used for holodecks.
+ *
+ * **Parameters**:
+ * - `A` `/area`. The area to copy src's contents to.
+ * - `platingRequired` Boolean, default `FALSE`. If set, contents will only be copied to destination tiles that are not the same type as `get_base_area_by_turf()` before calling `ChangeTurf()`.
+ *
+ * Returns List (`/atom`). A list containing all atoms that were created at the target area during the process.
+ */
 /area/proc/copy_contents_to(var/area/A , var/platingRequired = 0 )
-	//Takes: Area. Optional: If it should copy to areas that don't have plating
-	//Returns: Nothing.
-	//Notes: Attempts to move the contents of one area to another area.
-	//       Movement based on lower left corner. Tiles that do not fit
-	//		 into the new area will not be moved.
-
-	// Does *not* affect gases etc; copied turfs will be changed via ChangeTurf, and the dir, icon, and icon_state copied. All other vars will remain default.
-
 	if(!A || !src) return 0
 
 	var/list/turfs_src = get_area_turfs(src.type)
@@ -808,16 +813,16 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 
 
 
-proc/get_cardinal_dir(atom/A, atom/B)
+/proc/get_cardinal_dir(atom/A, atom/B)
 	var/dx = abs(B.x - A.x)
 	var/dy = abs(B.y - A.y)
 	return get_dir(A, B) & (rand() * (dx+dy) < dy ? 3 : 12)
 
 //chances are 1:value. anyprob(1) will always return true
-proc/anyprob(value)
+/proc/anyprob(value)
 	return (rand(1,value)==value)
 
-proc/view_or_range(distance = world.view , center = usr , type)
+/proc/view_or_range(distance = world.view , center = usr , type)
 	switch(type)
 		if("view")
 			. = view(distance,center)
@@ -825,7 +830,7 @@ proc/view_or_range(distance = world.view , center = usr , type)
 			. = range(distance,center)
 	return
 
-proc/oview_or_orange(distance = world.view , center = usr , type)
+/proc/oview_or_orange(distance = world.view , center = usr , type)
 	switch(type)
 		if("view")
 			. = oview(distance,center)
@@ -833,7 +838,7 @@ proc/oview_or_orange(distance = world.view , center = usr , type)
 			. = orange(distance,center)
 	return
 
-proc/get_mob_with_client_list()
+/proc/get_mob_with_client_list()
 	var/list/mobs = list()
 	for(var/mob/M in SSmobs.mob_list)
 		if (M.client)
@@ -867,20 +872,37 @@ proc/get_mob_with_client_list()
 	return get_turf(location)
 
 
-//Quick type checks for some tools
-var/global/list/common_tools = list(
-/obj/item/stack/cable_coil,
-/obj/item/wrench,
-/obj/item/weldingtool,
-/obj/item/screwdriver,
-/obj/item/wirecutters,
-/obj/item/device/multitool,
-/obj/item/crowbar)
+/obj/item/proc/istool()
+	return FALSE
 
-/proc/istool(O)
-	if(O && is_type_in_list(O, common_tools))
-		return 1
-	return 0
+
+/obj/item/stack/cable_coil/istool()
+	return TRUE
+
+
+/obj/item/wrench/istool()
+	return TRUE
+
+
+/obj/item/weldingtool/istool()
+	return TRUE
+
+
+/obj/item/screwdriver/istool()
+	return TRUE
+
+
+/obj/item/wirecutters/istool()
+	return TRUE
+
+
+/obj/item/device/multitool/istool()
+	return TRUE
+
+
+/obj/item/crowbar/istool()
+	return TRUE
+
 
 /proc/is_hot(obj/item/W as obj)
 	switch(W.type)
@@ -910,7 +932,7 @@ var/global/list/common_tools = list(
 		if(/obj/item/melee/energy)
 			return 3500
 		if(/obj/item/blob_tendril)
-			if(W.damtype == BURN)
+			if (W.damtype == DAMAGE_BURN)
 				return 1000
 			else
 				return 0
@@ -966,7 +988,7 @@ var/global/list/common_tools = list(
 		. = TRUE
 	if(locate(/obj/structure/table, T))
 		. = TRUE
-	if(locate(/obj/effect/rune/, T))
+	if(locate(/obj/effect/rune, T))
 		. = TRUE
 
 	if(M == user)
@@ -1003,7 +1025,7 @@ var/global/list/common_tools = list(
 /*
 Checks if that loc and dir has a item on the wall
 */
-var/list/WALLITEMS = list(
+var/global/list/WALLITEMS = list(
 	/obj/machinery/power/apc, /obj/machinery/alarm, /obj/item/device/radio/intercom,
 	/obj/structure/extinguisher_cabinet, /obj/structure/reagent_dispensers/peppertank,
 	/obj/machinery/status_display, /obj/machinery/requests_console, /obj/machinery/light_switch, /obj/structure/sign,
@@ -1103,8 +1125,6 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 /proc/crash_at(msg, file, line)
 	CRASH("%% [file],[line] %% [msg]")
 
-/proc/pass()
-	return
 
 //clicking to move pulled objects onto assignee's turf/loc
 /proc/do_pull_click(mob/user, atom/A)
@@ -1116,3 +1136,24 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		M.start_pulling(t)
 	else
 		step(user.pulling, get_dir(user.pulling.loc, A))
+
+/proc/select_subpath(given_path, within_scope = /atom)
+	var/desired_path = input("Enter full or partial typepath.","Typepath","[given_path]") as text|null
+	if(!desired_path)
+		return
+
+	var/list/types = typesof(within_scope)
+	var/list/matches = list()
+
+	for(var/path in types)
+		if(findtext("[path]", desired_path))
+			matches += path
+
+	if(!matches.len)
+		alert("No results found. Sorry.")
+		return
+
+	if(matches.len==1)
+		return matches[1]
+	else
+		return (input("Select a type", "Select Type", matches[1]) as null|anything in matches)

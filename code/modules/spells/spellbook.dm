@@ -6,7 +6,7 @@
 
 //spells/spellbooks have a variable for this but as artefacts are literal items they do not.
 //so we do this instead.
-var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
+var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 								/obj/item/gun/energy/staff/focus = 	"MF",
 								/obj/item/summoning_stone = 			"ST",
 								/obj/item/magic_rock = 				"RA",

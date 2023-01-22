@@ -14,7 +14,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/grenade/smokebomb/detonate()
+/obj/item/grenade/smokebomb/detonate(mob/living/user)
 	playsound(src.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
 	smoke = new /datum/effect/effect/system/smoke_spread/bad
 	smoke.attach(src)

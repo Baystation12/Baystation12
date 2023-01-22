@@ -14,7 +14,7 @@
 	machine_name = "seed extractor"
 	machine_desc = "Extracts a number of growable seed packets from a provided plant sample. The sample is destroyed in the process."
 
-obj/machinery/seed_extractor/attackby(var/obj/item/O, var/mob/user)
+/obj/machinery/seed_extractor/attackby(var/obj/item/O, var/mob/user)
 	if((. = component_attackby(O, user)))
 		return
 	// Fruits and vegetables.

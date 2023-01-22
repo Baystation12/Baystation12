@@ -1,7 +1,7 @@
-var/const/GHOST_IMAGE_NONE = 0
-var/const/GHOST_IMAGE_DARKNESS = 1
-var/const/GHOST_IMAGE_SIGHTLESS = 2
-var/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
+var/global/const/GHOST_IMAGE_NONE = 0
+var/global/const/GHOST_IMAGE_DARKNESS = 1
+var/global/const/GHOST_IMAGE_SIGHTLESS = 2
+var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 
 /mob/observer
 	density = FALSE
@@ -38,7 +38,7 @@ var/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 		SSghost_images.queue_global_image_update()
 	. = ..()
 
-mob/observer/check_airflow_movable()
+/mob/observer/check_airflow_movable()
 	return FALSE
 
 /mob/observer/CanPass()

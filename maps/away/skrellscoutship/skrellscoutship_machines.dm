@@ -37,10 +37,7 @@
 		field_image.alpha = 50
 		field_image.layer = SINGULARITY_LAYER
 		field_image.appearance_flags |= RESET_COLOR
-
-		var/matrix/M = matrix()
-		M.Scale(3)
-		field_image.transform = M
+		field_image.SetTransform(scale = 3)
 
 	if(on)
 		overlays |= field_image

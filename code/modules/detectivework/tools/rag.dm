@@ -10,7 +10,7 @@
 	var/transfer_blood = 0
 	var/mob/living/carbon/human/bloody_hands_mob
 
-/obj/item/clothing/shoes/
+/obj/item/clothing/shoes
 	var/track_blood = 0
 
 /obj/item/reagent_containers/glass/rag
@@ -82,15 +82,21 @@
 		return
 
 	if(reagents.total_volume)
-		var/target_text = trans_dest? "\the [trans_dest]" : "\the [user.loc]"
-		user.visible_message("<span class='danger'>\The [user] begins to wring out [src] over [target_text].</span>", "<span class='notice'>You begin to wring out [src] over [target_text].</span>")
+		var/atom/target = trans_dest ? trans_dest : user.loc
+		user.visible_message(
+			SPAN_DANGER("\The [user] begins to wring out \the [src] over \the [target]."),
+			SPAN_NOTICE("You begin to wring out \the [src] over \the [target].")
+		)
 
-		if(do_after(user, reagents.total_volume*5, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS)) //50 for a fully soaked rag
+		if (do_after(user, reagents.total_volume * 5, target, DO_PUBLIC_UNIQUE)) //50 for a fully soaked rag
 			if(trans_dest)
 				reagents.trans_to(trans_dest, reagents.total_volume)
 			else
 				reagents.splash(user.loc, reagents.total_volume)
-			user.visible_message("<span class='danger'>\The [user] wrings out [src] over [target_text].</span>", "<span class='notice'>You finish to wringing out [src].</span>")
+			user.visible_message(
+				SPAN_DANGER("\The [user] wrings out \the [src] over [target]."),
+				SPAN_NOTICE("You finish to wringing out \the [src].")
+			)
 			update_name()
 
 /obj/item/reagent_containers/glass/rag/proc/wipe_down(atom/A, mob/user)
@@ -100,7 +106,7 @@
 		user.visible_message("\The [user] starts to wipe down [A] with [src]!")
 		reagents.splash(A, 1) //get a small amount of liquid on the thing we're wiping.
 		update_name()
-		if(do_after(user,30))
+		if (do_after(user, 3 SECONDS, A, DO_PUBLIC_UNIQUE))
 			user.visible_message("\The [user] finishes wiping off the [A]!")
 			if(isturf(A))
 				var/turf/T = A
@@ -156,7 +162,7 @@
 				if (user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
 					grab_time = 3 SECONDS
 
-				if (do_after(user, grab_time, target, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+				if (do_after(user, grab_time, target, DO_PUBLIC_UNIQUE))
 					user.visible_message(
 						SPAN_DANGER("\The [user] smothers \the [target] with \the [src]!"),
 						SPAN_DANGER("You smother \the [target] with \the [src]!")
@@ -210,6 +216,7 @@
 	for (var/datum/reagent/R as anything in reagents?.reagent_list)
 		if (R.gas_flags & XGM_GAS_FUEL)
 			fuel += R.volume
+		fuel += R.accelerant_quality * R.volume
 	return (fuel >= 2 && fuel >= reagents?.total_volume * 0.8)
 
 

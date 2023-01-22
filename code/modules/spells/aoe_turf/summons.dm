@@ -16,7 +16,7 @@
 	school = "conjuration"
 	charge_max = 1200
 	spell_flags = NEEDSCLOTHES
-	invocation = "Nouk Fhumm Sacp Risska!"
+	invocation = "VENIT CREATURA A TENEBRIS!"
 	invocation_type = SpI_SHOUT
 	range = 1
 	cast_sound = 'sound/magic/summon_carp.ogg'

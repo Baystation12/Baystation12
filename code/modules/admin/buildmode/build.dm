@@ -52,6 +52,9 @@
 			return
 		else if (ispath(build_type, /turf))
 			location.ChangeTurf(build_type)
+		else if (ispath(build_type, /area))
+			to_chat(user, SPAN_WARNING("Do not use this to create or modify areas. Use the Area build mode category instead."))
+			return
 		else
 			var/atom/instance = new build_type (location)
 			instance.set_dir(host.dir)

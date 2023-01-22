@@ -249,7 +249,7 @@
 				to_chat(target, "SYSTEM LOG: User: Admin - Connection Lost. Changes Reverted.")
 				return
 			to_chat(user, "Hack succeeded. The AI is now under your exclusive control.")
-			to_chat(target, "SYSTEM LOG: System re¡3RT5§^#COMU@(#$)TED)@$")
+			to_chat(target, "SYSTEM LOG: System re'3RT5'^#COMU@(#$)TED)@$")
 			for(var/i = 0, i < 5, i++)
 				var/temptxt = pick("1101000100101001010001001001",\
 							   	   "0101000100100100000100010010",\
@@ -263,6 +263,3 @@
 			target.show_laws()
 			user.hacking = 0
 			log_ability_use(user, "hack AI", target)
-
-
-// END ABILITY VERBS

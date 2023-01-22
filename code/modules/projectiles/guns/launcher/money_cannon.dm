@@ -130,7 +130,7 @@
 		return ..()
 
 /obj/item/gun/launcher/money/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/spacecash/))
+	if(istype(W, /obj/item/spacecash))
 		var/obj/item/spacecash/bling = W
 		if(bling.worth < 1)
 			to_chat(user, "<span class='warning'>You can't seem to get the bills to slide into the receptacle.</span>")
@@ -174,7 +174,7 @@
 	var/mob/living/carbon/human/M = user
 	M.visible_message("<span class='danger'>[user] sticks [src] in their mouth, ready to pull the trigger...</span>")
 
-	if(!do_after(user, 40, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+	if(!do_after(user, 4 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
 		M.visible_message("<span class='notice'>[user] decided life was worth living.</span>")
 		return
 

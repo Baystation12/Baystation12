@@ -9,7 +9,7 @@
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
 	materials = list(MATERIAL_STEEL = 400, MATERIAL_GLASS = 100)
-	build_path = /obj/item/stock_parts/computer/hard_drive/
+	build_path = /obj/item/stock_parts/computer/hard_drive
 	sort_string = "VBAAA"
 
 /datum/design/item/modularcomponent/disk/advanced
@@ -292,7 +292,7 @@
 	..()
 	name = "CPU design ([item_name])"
 
-/datum/design/item/modularcomponent/cpu/
+/datum/design/item/modularcomponent/cpu
 	name = "computer processor unit"
 	id = "cpu_normal"
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)

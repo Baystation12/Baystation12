@@ -1,4 +1,4 @@
-var/datum/controller/transfer_controller/transfer_controller
+var/global/datum/controller/transfer_controller/transfer_controller
 
 /datum/controller/transfer_controller
 	var/timerbuffer = 0 //buffer for time check

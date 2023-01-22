@@ -51,7 +51,7 @@
 			M.GetDrilled(TRUE) //no artifacts survive this
 	for(var/mob/living/L in victims)
 		to_chat(L, SPAN_DANGER("You feel an incredible force ripping and tearing at you."))
-		L.ex_act(3) //no artif- I mean idiot/unfortunate bystanders survive this... much
+		L.ex_act(EX_ACT_LIGHT) //no artif- I mean idiot/unfortunate bystanders survive this... much
 
 /obj/structure/ship_munition/disperser_charge/explosive
 	name = "XP4-INDARRA charge"

@@ -7,11 +7,9 @@ var/global/list/additional_antag_types = list()
 	var/extended_round_description = "This roundtype should not be spawned, let alone votable. Someone contact a developer and tell them the game's broken again."
 	var/config_tag = null
 	var/votable = TRUE
-	var/probability = 0
 
 	var/required_players = 0                 // Minimum players for round to start if voted in.
 	var/required_enemies = 0                 // Minimum antagonists for round to start.
-	var/newscaster_announcements = null
 	var/end_on_antag_death = FALSE           // Round will end when all antagonists are dead.
 	var/ert_disabled = FALSE                 // ERT cannot be called.
 	var/deny_respawn = FALSE	             // Disable respawn during this round.
@@ -154,14 +152,14 @@ var/global/list/additional_antag_types = list()
 /// Run prior to a mode vote to determine if the mode should be included. Falsy if yes, otherwise a status message.
 /datum/game_mode/proc/check_votable(list/lobby_players)
 	if (lobby_players.len < required_players)
-		return "Not enough players are in the lobby. [lobby_players.len] of the required [required_players]."
+		return "[lobby_players.len]/[required_players] lobby players"
 
 
 /// Check to see if the currently selected mode can be started. Falsy if yes, otherwise a status message.
 /datum/game_mode/proc/check_startable(list/lobby_players)
 	var/list/ready_players = SSticker.ready_players(lobby_players)
 	if (ready_players.len < required_players)
-		return "Not enough players. [ready_players.len] ready of the required [required_players]."
+		return "[ready_players.len]/[required_players] ready players"
 
 	var/enemy_count = 0
 	var/list/all_antag_types = GLOB.all_antag_types_
@@ -180,11 +178,11 @@ var/global/list/additional_antag_types = list()
 				potential = antag.get_potential_candidates(src)
 			if(islist(potential))
 				if(require_all_templates && potential.len < antag.initial_spawn_req)
-					return "Not enough antagonists ([antag.role_text]), [antag.initial_spawn_req] required and [potential.len] available."
+					return "[potential.len]/[antag.initial_spawn_req] [antag.role_text] players"
 				enemy_count += potential.len
 				if(enemy_count >= required_enemies)
 					return 0
-		return "Not enough antagonists, [required_enemies] required and [enemy_count] available."
+		return "[enemy_count]/[required_enemies] total antag players"
 	else
 		return 0
 
@@ -249,38 +247,24 @@ var/global/list/additional_antag_types = list()
 		return
 
 	var/list/reasons = list(
-		"political instability",
-		"quantum fluctuations",
-		"hostile raiders",
-		"derelict station debris",
-		"REDACTED",
-		"ancient alien artillery",
-		"solar magnetic storms",
-		"sentient time-travelling killbots",
-		"gravitational anomalies",
-		"wormholes to another dimension",
-		"a telescience mishap",
-		"radiation flares",
-		"supermatter dust",
-		"leaks into a negative reality",
-		"antiparticle clouds",
-		"residual bluespace energy",
-		"suspected criminal operatives",
-		"malfunctioning von Neumann probe swarms",
-		"shadowy interlopers",
-		"a stranded Vox arkship",
-		"haywire IPC constructs",
-		"rogue Unathi exiles",
-		"artifacts of eldritch horror",
-		"a brain slug infestation",
-		"killer bugs that lay eggs in the husks of the living",
-		"a deserted transport carrying xenofauna specimens",
-		"an emissary for the gestalt requesting a security detail",
-		"radical Skrellian transevolutionaries",
-		"classified security operations",
-		"a gargantuan glowing goat"
-		)
-	command_announcement.Announce("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time, and post-evacuation recovery efforts will be substantially delayed.","Emergency Transmission")
+		"Проявление квантовой флуктуации",
+		"Ликвидация враждебных банд рейдеров",
+		"Обломки заброшенной станции",
+		"Недавно обнаруженная древняя артиллерия неизвестной расы",
+		"Солнечные магнитные бури",
+		"Множественные гравитационные аномалии",
+		"Появление червоточины в другое измерение",
+		"Гигантская вспышка радиации",
+		"Выполнение операции по ликвидации скрытых групп культа Нар-Си",
+		"Облака античастиц",
+		"Остаточная энергия подпространства",
+		"Операция по уничтожению неисправных роев зондов фон Неймана",
+		"Ликвидация застрявшего корабля неизвестного класса",
+		"Умиротворение группы унати-изгнанников",
+		"Выполнение операции по нейтрализации артефактов сверхъестественного ужаса",
+		"Осуществление специальной операции по контролю за новым видом фауны"
+		)  //PRX
+	command_announcement.Announce("[pick (reasons)] в регионе связывает все доступные местные ресурсы для решения сложившихся чрезвычайных ситуаций. Ожидайте прибытие освободившегося отряда в течение следующих [rand(6,24)] часов.","Fifth Fleet Emergency Transmission")
 
 /datum/game_mode/proc/check_finished()
 	if(evacuation_controller.round_over() || station_was_nuked)
@@ -418,7 +402,6 @@ var/global/list/additional_antag_types = list()
 				antag_templates |= antag
 
 	shuffle(antag_templates) //In the case of multiple antag types
-	newscaster_announcements = pick(newscaster_standard_feeds)
 
 // Manipulates the end-game cinematic in conjunction with GLOB.cinematic
 /datum/game_mode/proc/nuke_act(obj/screen/cinematic_screen, station_missed = 0)
@@ -448,7 +431,7 @@ var/global/list/additional_antag_types = list()
 //////////////////////////
 //Reports player logouts//
 //////////////////////////
-proc/display_roundstart_logout_report()
+/proc/display_roundstart_logout_report()
 	var/msg = "<span class='notice'><b>Roundstart logout report</b>\n\n"
 	for(var/mob/living/L in SSmobs.mob_list)
 

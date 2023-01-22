@@ -28,7 +28,7 @@
 /proc/power_restore_quick(var/announce = 1)
 
 	if(announce)
-		command_announcement.Announce("All SMESs on the [station_name()] have been recharged. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = GLOB.using_map.grid_restored_sound)
+		command_announcement.Announce("Все СМХЭ на [GLOB.using_map.station_name] были подзаряжены. Приносим извинения за причинённые неудобства.", "Power Systems Alert", new_sound = GLOB.using_map.grid_restored_sound)
 	for(var/obj/machinery/power/smes/S in SSmachines.machinery)
 		S.failure_timer = 0
 		S.charge = S.capacity

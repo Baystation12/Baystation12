@@ -4,6 +4,19 @@
 		var/decl/footsteps/FS = decls_repository.get_decl(footstep_type)
 		. = pick(FS.footstep_sounds)
 
+/turf/simulated/proc/get_footstep_sound(var/mob/caller)
+	for(var/obj/structure/S in contents)
+		if(S.footstep_type)
+			return get_footstep(S.footstep_type, caller)
+
+	if(check_fluid_depth(10) && !is_flooded(TRUE))
+		return get_footstep(/decl/footsteps/water, caller)
+
+	if(footstep_type)
+		return get_footstep(footstep_type, caller)
+
+	if(is_plating())
+		return get_footstep(/decl/footsteps/plating, caller)
 
 /turf/simulated/floor/get_footstep_sound(var/mob/caller)
 	. = ..()

@@ -5,44 +5,61 @@
 	icon_state = "delivery"
 	item_state = "flashbang"
 	origin_tech = list(TECH_MATERIAL = 3, TECH_MAGNET = 4)
-	var/banglet = 0
-	var/spawner_type = null // must be an object path
-	var/deliveryamt = 1 // amount of type to deliver
-	var/list/newvars
 
-	detonate()												// Prime now just handles the two loops that query for people in lockers and people who can see it.
+	/// The obj/mob path to be created when the grenade explodes.
+	var/spawn_type
 
-		if(spawner_type && deliveryamt)
-			// Make a quick flash
-			var/turf/T = get_turf(src)
-			playsound(T, 'sound/effects/phasein.ogg', 100, 1)
-			for(var/mob/living/carbon/human/M in viewers(T, null))
-				if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
-					M.flash_eyes()
+	/// The number of spawn_type to be created when the grenade explodes.
+	var/spawn_amount = 1
 
-			for(var/i=1, i<=deliveryamt, i++)
-				var/atom/movable/x = new spawner_type
-				if(newvars && length(newvars))
-					for(var/v in newvars)
-						x.vars[v] = newvars[v]
-				x.dropInto(loc)
-				if(prob(50))
-					for(var/j = 1, j <= rand(1, 3), j++)
-						step(x, pick(NORTH,SOUTH,EAST,WEST))
+	/// If set, the maximum distance to toss spawned atoms when the grenade explodes.
+	var/spawn_throw_range
 
-				// Spawn some hostile syndicate critters
 
-		qdel(src)
+/obj/item/grenade/spawnergrenade/detonate(mob/living/user)
+	var/turf/origin = get_turf(src)
+	if (origin)
+		playsound(origin, 'sound/effects/phasein.ogg', 100, 1)
+		for (var/mob/living/living in viewers(origin))
+			if (living.eyecheck() < FLASH_PROTECTION_MODERATE)
+				living.flash_eyes()
+		var/list/spawned = list()
+		var/atom/movable/movable
+		var/turf/target
+		for (var/i = spawn_amount to 1 step -1)
+			movable = new spawn_type (origin)
+			spawned += movable
+			if (spawn_throw_range)
+				target = CircularRandomTurfAround(origin, Frand(1, spawn_throw_range))
+				movable.throw_at(target, spawn_throw_range, 3)
+		AfterSpawn(user, spawned)
+	qdel(src)
+
+
+/obj/item/grenade/spawnergrenade/proc/AfterSpawn(mob/living/user, list/spawned)
+	return
+
+
+
+
+/obj/item/grenade/spawnergrenade/viscerator
+	name = "viscerator grenade"
+	spawn_type = /mob/living/simple_animal/hostile/viscerator
+	spawn_amount = 5
+	spawn_throw_range = 3
+
+
+/obj/item/grenade/spawnergrenade/viscerator/AfterSpawn(mob/living/user, list/spawned)
+	if (!istype(user))
 		return
+	for (var/mob/living/simple_animal/hostile/viscerator/viscerator as anything in spawned)
+		viscerator.faction = user.faction
 
-/obj/item/grenade/spawnergrenade/manhacks
-	name = "manhack delivery grenade"
-	spawner_type = /mob/living/simple_animal/hostile/viscerator
-	deliveryamt = 5
-	origin_tech = list(TECH_MATERIAL = 3, TECH_MAGNET = 4, TECH_ESOTERIC = 4)
+
+
 
 /obj/item/grenade/spawnergrenade/spesscarp
 	name = "carp delivery grenade"
-	spawner_type = /mob/living/simple_animal/hostile/carp
-	deliveryamt = 5
-	origin_tech = list(TECH_MATERIAL = 3, TECH_MAGNET = 4, TECH_ESOTERIC = 4)
+	spawn_type = /mob/living/simple_animal/hostile/carp
+	spawn_amount = 4
+	spawn_throw_range = 3

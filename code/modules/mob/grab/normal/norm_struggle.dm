@@ -54,7 +54,7 @@
 
 /datum/grab/normal/struggle/proc/resolve_struggle(var/obj/item/grab/G)
 	set waitfor = FALSE
-	if(do_after(G.assailant, upgrade_cooldown, G, do_flags = DO_DEFAULT | DO_USER_CAN_MOVE))
+	if(do_after(G.assailant, upgrade_cooldown, G, DO_DEFAULT | DO_USER_CAN_MOVE))
 		G.done_struggle = TRUE
 		G.upgrade(TRUE)
 	else

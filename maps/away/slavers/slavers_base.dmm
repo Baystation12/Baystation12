@@ -250,10 +250,7 @@
 /area/slavers_base/cells)
 "aX" = (
 /obj/structure/hygiene/shower{
-	dir = 4;
-	icon_state = "shower";
-	pixel_x = 0;
-	pixel_y = 0
+	dir = 4
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -285,8 +282,7 @@
 "bc" = (
 /obj/machinery/flasher{
 	id_tag = "permentryflash";
-	name = "Floor mounted flash";
-	pixel_x = 0
+	name = "Floor mounted flash"
 	},
 /obj/item/reagent_containers/glass/rag,
 /turf/simulated/floor/airless/ceiling,
@@ -300,8 +296,7 @@
 "be" = (
 /obj/machinery/flasher{
 	id_tag = "permentryflash";
-	name = "Floor mounted flash";
-	pixel_x = 0
+	name = "Floor mounted flash"
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -312,8 +307,7 @@
 "bg" = (
 /obj/machinery/flasher{
 	id_tag = "permentryflash";
-	name = "Floor mounted flash";
-	pixel_x = 0
+	name = "Floor mounted flash"
 	},
 /obj/random/trash,
 /turf/simulated/floor/airless/ceiling,
@@ -322,8 +316,7 @@
 /obj/structure/mattress/dirty,
 /obj/machinery/flasher{
 	id_tag = "permentryflash";
-	name = "Floor mounted flash";
-	pixel_x = 0
+	name = "Floor mounted flash"
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -452,8 +445,7 @@
 "bs" = (
 /obj/machinery/flasher{
 	id_tag = "permentryflash";
-	name = "Floor mounted flash";
-	pixel_x = 0
+	name = "Floor mounted flash"
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable/cyan{
@@ -713,8 +705,7 @@
 "bW" = (
 /obj/machinery/flasher{
 	id_tag = "permentryflash";
-	name = "Floor mounted flash";
-	pixel_x = 0
+	name = "Floor mounted flash"
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/item/ammo_casing/shotgun/beanbag{
@@ -1374,8 +1365,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -1388,14 +1378,12 @@
 "dv" = (
 /obj/machinery/flasher{
 	id_tag = "permentryflash";
-	name = "Floor mounted flash";
-	pixel_x = 0
+	name = "Floor mounted flash"
 	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
@@ -1414,7 +1402,6 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "Medical room";
-	pixel_x = 0;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/airless,
@@ -1520,8 +1507,7 @@
 /area/slavers_base/secwing)
 "dP" = (
 /obj/machinery/power/terminal{
-	dir = 1;
-	icon_state = "term"
+	dir = 1
 	},
 /obj/structure/cable/green{
 	d2 = 4;
@@ -1549,8 +1535,7 @@
 /obj/item/storage/box/ammo/stunshells,
 /obj/item/melee/baton,
 /obj/machinery/power/terminal{
-	dir = 1;
-	icon_state = "term"
+	dir = 1
 	},
 /obj/structure/cable/green{
 	d2 = 8;
@@ -1563,8 +1548,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/secwing)
@@ -1819,8 +1803,7 @@
 /area/slavers_base/powatm)
 "eI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	dir = 4;
-	icon_state = "map_universal"
+	dir = 4
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
@@ -1912,9 +1895,7 @@
 	name = "Riot control console"
 	},
 /obj/machinery/power/apc{
-	dir = 2;
 	name = "Slavers security wing";
-	operating = 1;
 	pixel_y = -24
 	},
 /obj/structure/cable,
@@ -2017,15 +1998,13 @@
 /area/slavers_base/med)
 "fh" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan{
-	dir = 8;
-	icon_state = "map"
+	dir = 8
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/hangar)
 "fi" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /obj/structure/cable{
 	d1 = 2;
@@ -2040,9 +2019,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/apc{
-	dir = 2;
 	name = "Slavers hangar";
-	operating = 1;
 	pixel_y = -24
 	},
 /turf/simulated/floor/airless/ceiling,
@@ -2292,15 +2269,13 @@
 /area/slavers_base/maint)
 "fG" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "fH" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
@@ -2426,8 +2401,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
@@ -2463,8 +2437,7 @@
 /area/slavers_base/powatm)
 "gf" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	dir = 4;
-	icon_state = "map_universal"
+	dir = 4
 	},
 /obj/effect/decal/cleanable/generic,
 /turf/simulated/floor/airless/ceiling,
@@ -2743,8 +2716,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
@@ -2761,9 +2733,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/apc{
-	dir = 2;
 	name = "Slavers Maintenance";
-	operating = 1;
 	pixel_y = -24
 	},
 /turf/simulated/floor/airless/ceiling,
@@ -3152,8 +3122,7 @@
 /area/slavers_base/demo)
 "hR" = (
 /obj/machinery/power/terminal{
-	dir = 1;
-	icon_state = "term"
+	dir = 1
 	},
 /obj/structure/cable/green{
 	d2 = 2;
@@ -3520,9 +3489,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/apc{
-	dir = 2;
 	name = "Slavers Dorms";
-	operating = 1;
 	pixel_y = -24
 	},
 /obj/structure/cable{
@@ -3536,8 +3503,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
@@ -3546,8 +3512,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/item/reagent_containers/food/condiment/small/peppermill,
 /obj/item/reagent_containers/food/condiment/small/saltshaker{
@@ -3565,8 +3530,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
@@ -3576,8 +3540,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
@@ -3588,8 +3551,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
@@ -3598,8 +3560,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -3611,8 +3572,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
@@ -3621,8 +3581,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
@@ -3659,8 +3618,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
@@ -3677,8 +3635,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/demo)
@@ -3907,8 +3864,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/dorms)
@@ -4028,10 +3984,7 @@
 /area/slavers_base/demo)
 "jX" = (
 /obj/structure/hygiene/shower{
-	dir = 4;
-	icon_state = "shower";
-	pixel_x = 0;
-	pixel_y = 0
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white/airless,
 /area/slavers_base/dorms)
@@ -4158,9 +4111,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/apc{
-	dir = 2;
 	name = "south bump";
-	operating = 1;
 	pixel_y = -24
 	},
 /turf/simulated/floor/tiled,
@@ -4169,8 +4120,7 @@
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)

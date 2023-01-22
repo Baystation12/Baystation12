@@ -5,8 +5,8 @@
 	school = "transmutation"
 	charge_max = 30 SECONDS
 	spell_flags = Z2NOCAST | NEEDSCLOTHES | INCLUDEUSER
-	invocation = "none"
-	invocation_type = SpI_NONE
+	invocation = "A Saltu in tenebris."
+	invocation_type = SpI_WHISPER
 	range = 0
 	max_targets = 1
 	level_max = list(Sp_TOTAL = 4, Sp_SPEED = 4, Sp_POWER = 3)
@@ -43,7 +43,7 @@
 			animation.set_density(FALSE)
 			animation.anchored = TRUE
 			animation.icon = 'icons/mob/mob.dmi'
-			animation.layer = FLY_LAYER 
+			animation.layer = FLY_LAYER
 			target.ExtinguishMob()
 			if(target.buckled)
 				target.buckled = null
@@ -114,7 +114,9 @@
 /obj/effect/dummy/spell_jaunt/relaymove(var/mob/user, direction)
 	if (!canmove || reappearing) return
 	var/turf/newLoc = get_step(src, direction)
-	if(!(newLoc.turf_flags & TURF_FLAG_NOJAUNT))
+	if (!newLoc)
+		to_chat(user, SPAN_WARNING("You cannot go that way."))
+	else if (!(newLoc.turf_flags & TURF_FLAG_NOJAUNT))
 		forceMove(newLoc)
 		var/turf/T = get_turf(loc)
 		if(!T.contains_dense_objects())

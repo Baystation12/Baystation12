@@ -1,37 +1,28 @@
-// Damage things. TODO: Merge these down to reduce on defines.
-// Way to waste perfectly good damage-type names (BRUTE) on this... If you were really worried about case sensitivity, you could have just used lowertext(damagetype) in the proc.
-#define BRUTE       "brute"
-#define BURN        "fire"
-#define TOX         "tox"
-#define OXY         "oxy"
-#define CLONE       "clone"
-#define PAIN        "pain"
-#define ELECTROCUTE "electrocute"
-#define PSIONIC     "psi"
+// Injury types for wounds
+#define INJURY_TYPE_CUT     "cut"
+#define INJURY_TYPE_BRUISE  "bruise"
+#define INJURY_TYPE_BURN    "burn"
+#define INJURY_TYPE_PIERCE  "pierce"
+#define INJURY_TYPE_LASER   "laser"
+#define INJURY_TYPE_SHATTER "shatter"
 
-#define CUT       "cut"
-#define BRUISE    "bruise"
-#define PIERCE    "pierce"
-#define LASER     "laser"
-#define SHATTER   "shatter"
-
-#define STUN      "stun"
-#define WEAKEN    "weaken"
-#define PARALYZE  "paralize"
-#define IRRADIATE "irradiate"
-#define SLUR      "slur"
-#define STUTTER   "stutter"
-#define EYE_BLUR  "eye_blur"
-#define DROWSY    "drowsy"
+// Effect types for mobs
+#define EFFECT_STUN     "stun"
+#define EFFECT_WEAKEN   "weaken"
+#define EFFECT_PARALYZE "paralize"
+#define EFFECT_STUTTER  "stutter"
+#define EFFECT_EYE_BLUR "eye_blur"
+#define EFFECT_DROWSY   "drowsy"
+#define EFFECT_PAIN     "pain"
 
 // Damage flags
-#define DAM_SHARP     1
-#define DAM_EDGE      2
-#define DAM_LASER     4
-#define DAM_BULLET    8
-#define DAM_EXPLODE   16
-#define DAM_DISPERSED 32 // Makes apply_damage calls without specified zone distribute damage rather than randomly choose organ (for humans)
-#define DAM_BIO       64 // Toxin damage that should be mitigated by biological (i.e. sterile) armor
+#define DAMAGE_FLAG_SHARP     FLAG(0)
+#define DAMAGE_FLAG_EDGE      FLAG(1)
+#define DAMAGE_FLAG_LASER     FLAG(2)
+#define DAMAGE_FLAG_BULLET    FLAG(3)
+#define DAMAGE_FLAG_EXPLODE   FLAG(4)
+#define DAMAGE_FLAG_DISPERSED FLAG(5) // Makes apply_damage calls without specified zone distribute damage rather than randomly choose organ (for humans)
+#define DAMAGE_FLAG_BIO       FLAG(6) // Toxin damage that should be mitigated by biological (i.e. sterile) armor
 
 #define FIRE_DAMAGE_MODIFIER 0.0215 // Higher values result in more external fire damage to the skin. (default 0.0215)
 #define  AIR_DAMAGE_MODIFIER 2.025  // More means less damage from hot air scalding lungs, less = more damage. (default 2.025)

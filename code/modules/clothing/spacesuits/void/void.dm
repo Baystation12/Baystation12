@@ -87,6 +87,7 @@ else if(##equipment_var) {\
 
 /obj/item/clothing/suit/space/void/Initialize()
 	. = ..()
+	slowdown_per_slot[slot_wear_suit] = 1
 	VOIDSUIT_INIT_EQUIPMENT(boots,  /obj/item/clothing/shoes/magboots)
 	VOIDSUIT_INIT_EQUIPMENT(helmet, /obj/item/clothing/head/helmet)
 	VOIDSUIT_INIT_EQUIPMENT(tank,   /obj/item/tank)

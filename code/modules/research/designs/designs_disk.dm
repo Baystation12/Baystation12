@@ -19,7 +19,7 @@
 	build_path = /obj/item/disk/tech_disk
 	sort_string = "AAAAB"
 
-datum/design/item/disk/flora
+/datum/design/item/disk/flora
 	name = "flora data"
 	desc = "Produce additional disks for storing flora genetic data."
 	id = "flora_disk"

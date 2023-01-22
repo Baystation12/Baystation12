@@ -1,7 +1,7 @@
 /turf/proc/ReplaceWithLattice(var/material)
-	var base_turf = get_base_turf_by_area(src);
+	var base_turf = get_base_turf_by_area(src, TRUE)
 	if(type != base_turf)
-		src.ChangeTurf(get_base_turf_by_area(src))
+		src.ChangeTurf(get_base_turf_by_area(src, TRUE))
 	if(!locate(/obj/structure/lattice) in src)
 		new /obj/structure/lattice(src, material)
 
@@ -21,14 +21,19 @@
 	if (!N)
 		return
 
+	if(isturf(N) && !N.flooded && N.flood_object)
+		QDEL_NULL(flood_object)
+
 	// This makes sure that turfs are not changed to space when one side is part of a zone
 	if(N == /turf/space)
 		var/turf/below = GetBelow(src)
 		if(istype(below) && !istype(below,/turf/space))
 			N = /turf/simulated/open
 
+	var/old_density = density
 	var/old_air = air
-	var/old_fire = fire
+	var/old_hotspot = hotspot
+	var/old_turf_fire = null
 	var/old_opacity = opacity
 	var/old_dynamic_lighting = dynamic_lighting
 	var/old_affecting_lights = affecting_lights
@@ -36,8 +41,14 @@
 	var/old_corners = corners
 	var/old_ao_neighbors = ao_neighbors
 	var/old_above = above
+	var/old_permit_ao = permit_ao
 
-//	log_debug("Replacing [src.type] with [N]")
+	if(isspaceturf(N) || isopenspace(N))
+		QDEL_NULL(turf_fire)
+	else
+		old_turf_fire = turf_fire
+
+	//log_debug("Replacing [src.type] with [N]")
 
 	changing_turf = TRUE
 
@@ -55,7 +66,7 @@
 	// Run the Destroy() chain.
 	qdel(src)
 
-	var/old_opaque_counter = opaque_counter 
+	var/old_opaque_counter = opaque_counter
 	var/turf/simulated/W = new N(src)
 
 	if (permit_ao)
@@ -68,12 +79,13 @@
 		W.air = old_air
 
 	if(ispath(N, /turf/simulated))
-		if(old_fire)
-			fire = old_fire
+		if(old_hotspot)
+			hotspot = old_hotspot
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
-	else if(old_fire)
-		qdel(old_fire)
+	else if(hotspot)
+		qdel(hotspot)
+
 
 	if(tell_universe)
 		GLOB.universe.OnTurfChange(W)
@@ -103,6 +115,20 @@
 
 	for(var/turf/T in RANGE_TURFS(src, 1))
 		T.update_icon()
+
+	if(density != old_density)
+		GLOB.density_set_event.raise_event(src, old_density, density)
+
+	if(!density)
+		turf_fire = old_turf_fire
+	else if(old_turf_fire)
+		QDEL_NULL(old_turf_fire)
+
+	if(density != old_density || permit_ao != old_permit_ao)
+		regenerate_ao()
+
+	GLOB.turf_changed_event.raise_event(src, old_density, density, old_opacity, opacity)
+	updateVisibility(src, FALSE)
 
 /turf/proc/transport_properties_from(turf/other)
 	if(!istype(other, src.type))

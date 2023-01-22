@@ -300,6 +300,9 @@ Standard helpers for users interacting with machinery parts.
 		return istype(part) // If it's not a stock part, we don't block further interactions; presumably the user meant to do something else.
 	if(isstack(part))
 		var/obj/item/stack/stack = part
+		if (!stack.can_use(number))
+			to_chat(user, SPAN_WARNING("You need at least [number] [stack.plural_name] to install into \the [src]."))
+			return FALSE
 		install_component(stack.split(number, TRUE))
 	else
 		user.unEquip(part, src)

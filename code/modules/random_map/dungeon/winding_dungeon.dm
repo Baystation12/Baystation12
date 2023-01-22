@@ -259,7 +259,7 @@
 
 			break
 
-		if(sanity < 1000) //If we haven't looped through /everything/
+		if(sanity < 1000) //If we haven't looped through everything
 			logging("Carving out stuff.")
 			var/wall_char = (isRoom ? ARTIFACT_TURF_CHAR : CORRIDOR_TURF_CHAR)
 			if(!carve_area(round(newx+xmod),round(newy+ymod),width,height,FLOOR_CHAR,wall_char)) //something went bad

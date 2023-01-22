@@ -1,4 +1,4 @@
-var/list/all_virtual_listeners = list()
+var/global/list/all_virtual_listeners = list()
 
 /mob/observer/virtual
 	icon = 'icons/mob/virtual.dmi'

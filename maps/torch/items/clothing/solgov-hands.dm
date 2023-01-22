@@ -14,13 +14,19 @@
 	name = "command duty gloves"
 	desc = "These black duty gloves are made from durable synthetic materials, and have a lovely gold accent color."
 	icon_state = "duty_gloves_cmd"
-	item_state = "duty_gloves_cmd"	
+	item_state = "duty_gloves_cmd"
 
 /obj/item/clothing/gloves/thick/duty/solgov/exp
 	name = "exploration duty gloves"
 	desc = "These black duty gloves are made from durable synthetic materials, and have a lovely purple accent color."
 	icon_state = "duty_gloves_exp"
 	item_state = "duty_gloves_exp"
+
+/obj/item/clothing/gloves/thick/duty/solgov/sci
+	name = "science duty gloves"
+	desc = "These black duty gloves are made from durable synthetic materials, and have a lovely heather accent color."
+	icon_state = "duty_gloves_sci"
+	item_state = "duty_gloves_sci"
 
 /obj/item/clothing/gloves/thick/duty/solgov/med
 	name = "medical duty gloves"

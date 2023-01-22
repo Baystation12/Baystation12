@@ -1,6 +1,5 @@
-/mob
-	var/list/default_emotes = list()
-	var/list/usable_emotes = list()
+/mob/var/list/default_emotes = list()
+/mob/var/list/usable_emotes = list()
 
 /mob/proc/update_emotes(var/skip_sort)
 	usable_emotes.Cut()
@@ -16,75 +15,73 @@
 	update_emotes()
 
 // Specific defines follow.
-/mob/living/carbon/alien
-	default_emotes = list(
-		/decl/emote/visible,
-		/decl/emote/visible/scratch,
-		/decl/emote/visible/drool,
-		/decl/emote/visible/nod,
-		/decl/emote/visible/sway,
-		/decl/emote/visible/sulk,
-		/decl/emote/visible/twitch,
-		/decl/emote/visible/dance,
-		/decl/emote/visible/roll,
-		/decl/emote/visible/shake,
-		/decl/emote/visible/jump,
-		/decl/emote/visible/shiver,
-		/decl/emote/visible/collapse,
-		/decl/emote/audible/hiss,
-		/decl/emote/audible,
-		/decl/emote/audible/deathgasp_alien,
-		/decl/emote/audible/whimper,
-		/decl/emote/audible/gasp,
-		/decl/emote/audible/scretch,
-		/decl/emote/audible/choke,
-		/decl/emote/audible/moan,
-		/decl/emote/audible/gnarl
-		)
+/mob/living/carbon/alien/default_emotes = list(
+	/decl/emote/visible,
+	/decl/emote/visible/scratch,
+	/decl/emote/visible/drool,
+	/decl/emote/visible/nod,
+	/decl/emote/visible/sway,
+	/decl/emote/visible/sulk,
+	/decl/emote/visible/twitch,
+	/decl/emote/visible/dance,
+	/decl/emote/visible/roll,
+	/decl/emote/visible/shake,
+	/decl/emote/visible/jump,
+	/decl/emote/visible/shiver,
+	/decl/emote/visible/collapse,
+	/decl/emote/audible/hiss,
+	/decl/emote/audible,
+	/decl/emote/audible/deathgasp_alien,
+	/decl/emote/audible/whimper,
+	/decl/emote/audible/gasp,
+	/decl/emote/visible/scratch,
+	/decl/emote/audible/choke,
+	/decl/emote/audible/moan,
+	/decl/emote/audible/gnarl
+)
 
-/mob/living/carbon/alien/diona
-	default_emotes = list(
-		/decl/emote/visible,
-		/decl/emote/visible/scratch,
-		/decl/emote/visible/drool,
-		/decl/emote/visible/nod,
-		/decl/emote/visible/sway,
-		/decl/emote/visible/sulk,
-		/decl/emote/visible/twitch,
-		/decl/emote/visible/dance,
-		/decl/emote/visible/roll,
-		/decl/emote/visible/shake,
-		/decl/emote/visible/jump,
-		/decl/emote/visible/shiver,
-		/decl/emote/visible/collapse,
-		/decl/emote/audible/hiss,
-		/decl/emote/audible,
-		/decl/emote/audible/scretch,
-		/decl/emote/audible/choke,
-		/decl/emote/audible/gnarl,
-		/decl/emote/audible/bug_hiss,
-		/decl/emote/audible/bug_chitter,
-		/decl/emote/audible/chirp
-		)
+/mob/living/carbon/alien/diona/default_emotes = list(
+	/decl/emote/visible,
+	/decl/emote/visible/scratch,
+	/decl/emote/visible/drool,
+	/decl/emote/visible/nod,
+	/decl/emote/visible/sway,
+	/decl/emote/visible/sulk,
+	/decl/emote/visible/twitch,
+	/decl/emote/visible/dance,
+	/decl/emote/visible/roll,
+	/decl/emote/visible/shake,
+	/decl/emote/visible/jump,
+	/decl/emote/visible/shiver,
+	/decl/emote/visible/collapse,
+	/decl/emote/audible/hiss,
+	/decl/emote/audible,
+	/decl/emote/audible/choke,
+	/decl/emote/audible/gnarl,
+	/decl/emote/audible/bug_hiss,
+	/decl/emote/audible/bug_chitter,
+	/decl/emote/audible/chirp
+)
 
 /mob/living/carbon/brain/can_emote()
 	return (istype(container, /obj/item/device/mmi) && ..())
 
-/mob/living/carbon/brain
-	default_emotes = list(
-		/decl/emote/audible/alarm,
-		/decl/emote/audible/alert,
-		/decl/emote/audible/notice,
-		/decl/emote/audible/whistle,
-		/decl/emote/audible/synth,
-		/decl/emote/audible/boop,
-		/decl/emote/visible/blink,
-		/decl/emote/visible/flash
-		)
+/mob/living/carbon/brain/default_emotes = list(
+	/decl/emote/audible/alarm,
+	/decl/emote/audible/alert,
+	/decl/emote/audible/notice,
+	/decl/emote/audible/whistle,
+	/decl/emote/audible/synth,
+	/decl/emote/audible/boop,
+	/decl/emote/visible/blink,
+	/decl/emote/visible/flash
+)
 
 /mob/living/carbon/human
 	default_emotes = list(
+		/decl/emote/visible/adjust,
 		/decl/emote/visible/blink,
+		/decl/emote/visible/scratch,
 		/decl/emote/audible/synth,
 		/decl/emote/audible/synth/ping,
 		/decl/emote/audible/synth/buzz,
@@ -166,7 +163,6 @@
 		/decl/emote/visible/squint,
 		/decl/emote/visible/tfist,
 		/decl/emote/visible/tilt,
-		/decl/emote/visible/adjust,
 //[INF],
 		/decl/emote/audible/finger_snap,
 //[/INF],

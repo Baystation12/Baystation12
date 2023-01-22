@@ -175,10 +175,8 @@
 /obj/structure/window/proc/get_repaired_per_unit()
 	return round(get_max_health() / get_glass_cost())
 
-/obj/structure/window/handle_death_change(new_death_state)
-	. = ..()
-	if (new_death_state)
-		shatter()
+/obj/structure/window/on_death()
+	shatter()
 
 /obj/structure/window/proc/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)
@@ -194,7 +192,7 @@
 	qdel(src)
 
 /obj/structure/window/ex_act(severity)
-	if (severity == 1)
+	if (severity == EX_ACT_DEVASTATING)
 		qdel(src)
 		return
 	..()
@@ -228,7 +226,7 @@
 		tforce = I.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	if(reinf_material) tforce *= 0.25
 	playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
-	damage_health(tforce, BRUTE)
+	damage_health(tforce, DAMAGE_BRUTE)
 	deanchor(AM)
 
 /obj/structure/window/attack_hand(mob/user as mob)
@@ -271,10 +269,10 @@
 		user.do_attack_animation(src)
 	if(!damage)
 		return
-	if(can_damage_health(damage, BRUTE))
+	if(can_damage_health(damage, DAMAGE_BRUTE))
 		visible_message("<span class='danger'>[user] [attack_verb] into [src]!</span>")
 		playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
-		damage_health(damage, BRUTE)
+		damage_health(damage, DAMAGE_BRUTE)
 	else
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	return 1
@@ -384,7 +382,7 @@
 			return
 		playsound(src, 'sound/items/Welder.ogg', 80, 1)
 		visible_message("<span class='notice'>[user] has started slicing through the window's frame!</span>")
-		if(do_after(user,20,src))
+		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			visible_message("<span class='warning'>[user] has sliced through the window's frame!</span>")
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			construction_state = 0
@@ -459,16 +457,16 @@
 		G.affecting.visible_message("<span class='danger'>[G.assailant] bashes [G.affecting] against \the [src]!</span>")
 		if (prob(50))
 			G.affecting.Weaken(1)
-		G.affecting.apply_damage(10, BRUTE, def_zone, used_weapon = src)
+		G.affecting.apply_damage(10, DAMAGE_BRUTE, def_zone, used_weapon = src)
 		hit(25, G.assailant, G.affecting)
 	else
 		G.affecting.visible_message("<span class='danger'>[G.assailant] crushes [G.affecting] against \the [src]!</span>")
 		G.affecting.Weaken(5)
-		G.affecting.apply_damage(20, BRUTE, def_zone, used_weapon = src)
+		G.affecting.apply_damage(20, DAMAGE_BRUTE, def_zone, used_weapon = src)
 		hit(50, G.assailant, G.affecting)
 	return TRUE
 
-/obj/structure/window/proc/hit(damage, mob/user, atom/weapon = null, damage_type = BRUTE)
+/obj/structure/window/proc/hit(damage, mob/user, atom/weapon = null, damage_type = DAMAGE_BRUTE)
 	if (can_damage_health(damage, damage_type))
 		var/weapon_text = weapon ? " with \the [weapon]" : null
 		user.visible_message(
@@ -489,7 +487,7 @@
 		)
 
 /obj/structure/window/proc/deanchor(atom/impact_origin)
-	if (is_alive() && get_damage_percentage() >= 85)
+	if (!health_dead && get_damage_percentage() >= 85)
 		set_anchored(FALSE)
 		step(src, get_dir(impact_origin, src))
 
@@ -784,7 +782,7 @@
 			to_chat(user, "<span class='notice'>There is already a window there.</span>")
 			return
 	to_chat(user, "<span class='notice'>You start placing the window.</span>")
-	if(do_after(user,20))
+	if(do_after(user, 2 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		for(var/obj/structure/window/WINDOW in loc)
 			if(WINDOW.dir == dir_to_set)//checking this for a 2nd time to check if a window was made while we were waiting.
 				to_chat(user, "<span class='notice'>There is already a window facing this way there.</span>")

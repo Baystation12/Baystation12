@@ -1,6 +1,6 @@
-var/const/NO_CLIENT_CKEY = "*no ckey*"
+var/global/const/NO_CLIENT_CKEY = "*no ckey*"
 
-var/repository/client/client_repository = new()
+var/global/repository/client/client_repository = new()
 
 /repository/client
 	var/list/clients_

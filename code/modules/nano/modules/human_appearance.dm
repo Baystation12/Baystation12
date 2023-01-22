@@ -56,14 +56,14 @@
 
 	if (href_list["skin_tone"] && (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & HAS_A_SKIN_TONE))
 		var/high = owner.species.max_skin_tone()
-		var/data = input(usr, "Skin Tone:\n1 (pale) ~ [high] (dark)", "Skin Tone", 35 - owner.s_tone) as null | num
+		var/data = input(usr, "Skin Tone:\n1 (pale) ~ [high] (dark)", "Skin Tone", 35 - owner.skin_tone) as null | num
 		if (isnull(data) || !can_still_topic(state))
 			return
 		data = 35 - max(min(round(data), high), 1)
 		return owner.change_skin_tone(data)
 
 	if (href_list["skin_color"] && (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & HAS_SKIN_COLOR))
-		var/color = rgb(owner.r_skin, owner.g_skin, owner.b_skin)
+		var/color = owner.skin_color
 		var/data = input(usr, "Skin Color:", "Skin Color", color) as null | color
 		if (isnull(data) || !can_still_topic(state))
 			return
@@ -82,7 +82,7 @@
 		return
 
 	if (href_list["hair_color"] && (flags & APPEARANCE_HEAD_COLOR))
-		var/color = rgb(owner.r_hair, owner.g_hair, owner.b_hair)
+		var/color = owner.head_hair_color
 		var/data = input(usr, "Hair Color:", "Hair Color", color) as null | color
 		if (isnull(data) || !can_still_topic(state))
 			return
@@ -101,7 +101,7 @@
 		return
 
 	if (href_list["facial_hair_color"] && (flags & APPEARANCE_FACE_COLOR))
-		var/color = rgb(owner.r_facial, owner.g_facial, owner.b_facial)
+		var/color = owner.facial_hair_color
 		var/data = input(usr, "Facial Hair Color:", "Facial Hair Color", color) as null | color
 		if (isnull(data) || !can_still_topic(state))
 			return
@@ -113,7 +113,7 @@
 		return
 
 	if (href_list["eye_color"] && (flags & APPEARANCE_EYES))
-		var/color = rgb(owner.r_eyes, owner.g_eyes, owner.b_eyes)
+		var/color = owner.eye_color
 		var/data = input(usr, "Eye Color:", "Eye Color", color) as null | color
 		if (isnull(data) || !can_still_topic(state))
 			return
@@ -170,14 +170,14 @@
 		var/list/entries = (data["hair_styles"] = list())
 		for (var/head_key in heads)
 			entries += list(list("hairstyle" = head_key))
-		data["hair_style"] = owner.h_style
+		data["hair_style"] = owner.head_hair_style
 
 	data["change_facial_hair"] = !!(flags & APPEARANCE_FACE)
 	if (data["change_facial_hair"])
 		var/list/entries = (data["facial_hair_styles"] = list())
 		for (var/face_key in faces)
 			entries += list(list("facialhairstyle" = face_key))
-		data["facial_hair_style"] = owner.f_style
+		data["facial_hair_style"] = owner.facial_hair_style
 
 	data["change_languages"] = !!(flags & APPEARANCE_LANG)
 	if (data["change_languages"])

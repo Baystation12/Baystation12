@@ -1,15 +1,15 @@
-mob/proc/flash_pain(var/target)
+/mob/proc/flash_pain(var/target)
 	if(pain)
 		animate(pain, alpha = target, time = 15, easing = ELASTIC_EASING)
 		animate(pain, alpha = 0, time = 20)
 
-mob/var/last_pain_message
-mob/var/next_pain_time = 0
+/mob/var/last_pain_message
+/mob/var/next_pain_time = 0
 
 // message is the custom message to be displayed
 // power decides how much painkillers will stop the message
 // force means it ignores anti-spam timer
-mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/item/organ/external/affecting, var/nohalloss)
+/mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/item/organ/external/affecting, var/nohalloss)
 	if(!message || stat || !can_feel_pain() || chem_effects[CE_PAINKILLER] > power)
 		return 0
 
@@ -27,23 +27,34 @@ mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/it
 	// Anti message spam checks
 	if(force || (message != last_pain_message) || (world.time >= next_pain_time))
 		last_pain_message = message
-		if(power >= 70)
-			to_chat(src, "<span class='danger'><font size=3>[message]</font></span>")
-		else if(power >= 40)
-			to_chat(src, "<span class='danger'><font size=2>[message]</font></span>")
-		else if(power >= 10)
-			to_chat(src, "<span class='danger'>[message]</span>")
-		else
-			to_chat(src, "<span class='warning'>[message]</span>")
+		custom_pain_emote(message, power)
 
-		var/force_emote = species.get_pain_emote(src, power)
-		if(force_emote && prob(power))
-			var/decl/emote/use_emote = usable_emotes[force_emote]
-			if(!(use_emote.message_type == AUDIBLE_MESSAGE && silent))
-				emote(force_emote)
 	next_pain_time = world.time + (100-power)
 
-mob/living/carbon/human/proc/handle_pain()
+
+/// Handles displaying emotes for `custom_pain()`. Separated into its own proc to account for subtype overrides.
+/mob/living/carbon/proc/custom_pain_emote(message, power)
+	if(power >= 70)
+		to_chat(src, "<span class='danger'><font size=3>[message]</font></span>")
+	else if(power >= 40)
+		to_chat(src, "<span class='danger'><font size=2>[message]</font></span>")
+	else if(power >= 10)
+		to_chat(src, "<span class='danger'>[message]</span>")
+	else
+		to_chat(src, "<span class='warning'>[message]</span>")
+
+
+// Separated out as only human subtypes define `species`
+/mob/living/carbon/human/custom_pain_emote(message, power)
+	. = ..()
+	var/force_emote = species.get_pain_emote(src, power)
+	if(force_emote && prob(power))
+		var/decl/emote/use_emote = usable_emotes[force_emote]
+		if(!(use_emote.message_type == AUDIBLE_MESSAGE && silent))
+			emote(force_emote)
+
+
+/mob/living/carbon/human/proc/handle_pain()
 	if(stat)
 		return
 	if(!can_feel_pain())

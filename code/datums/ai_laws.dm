@@ -188,13 +188,13 @@
 	laws.internal_delete_law(laws.inherent_laws, laws.state_inherent, src)
 
 /datum/ai_law/supplied/delete_law(var/datum/ai_laws/laws)
-	var/index = list_find(laws.supplied_laws, src)
+	var/index = laws.supplied_laws.Find(src)
 	if(index)
 		laws.supplied_laws[index] = ""
 		laws.state_supplied[index] = 1
 
 /datum/ai_laws/proc/internal_delete_law(var/list/datum/ai_law/laws, var/list/state, var/list/datum/ai_law/law)
-	var/index = list_find(laws, law)
+	var/index = laws.Find(law)
 	if(index)
 		laws -= law
 		for(index, index < state.len, index++)
@@ -255,7 +255,7 @@
 	return laws.get_state_internal(laws.supplied_laws, laws.state_supplied, src)
 
 /datum/ai_laws/proc/get_state_internal(var/list/datum/ai_law/laws, var/list/state, var/list/datum/ai_law/law)
-	var/index = list_find(laws, law)
+	var/index = laws.Find(law)
 	if(index)
 		return state[index]
 	return 0
@@ -282,6 +282,6 @@
 	laws.set_state_law_internal(laws.supplied_laws, laws.state_supplied, src, state)
 
 /datum/ai_laws/proc/set_state_law_internal(var/list/datum/ai_law/laws, var/list/state, var/list/datum/ai_law/law, var/do_state)
-	var/index = list_find(laws, law)
+	var/index = laws.Find(law)
 	if(index)
 		state[index] = do_state

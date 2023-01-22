@@ -186,10 +186,10 @@
 		if (destroy_hits <= 0)
 			visible_message("<span class='danger'>\The [src.name] disintegrates!</span>")
 			switch (Proj.damage_type)
-				if(BRUTE)
+				if (DAMAGE_BRUTE)
 					new /obj/item/stack/material/steel(src.loc, 2)
 					new /obj/item/stack/material/rods(src.loc, 3)
-				if(BURN)
+				if (DAMAGE_BURN)
 					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
 			qdel(src)
 
@@ -261,7 +261,7 @@
 		if(welder.remove_fuel(0,user))
 			to_chat(user, "<span class='notice'>You start to fix dents and weld \the [repairing] into place.</span>")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, 5 * repairing.amount, src) && welder && welder.isOn())
+			if(do_after(user, (0.5 * repairing.amount) SECONDS, src, DO_PUBLIC_UNIQUE) && welder && welder.isOn())
 				if (!repairing)
 					return //the materials in the door have been removed before welding was finished.
 
@@ -312,7 +312,7 @@
 		return FALSE
 	if (!density || user.a_intent != I_HURT)
 		return FALSE
-	if (I.damtype != BRUTE && I.damtype != BURN)
+	if (I.damtype != DAMAGE_BRUTE && I.damtype != DAMAGE_BURN)
 		return FALSE
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
@@ -361,15 +361,15 @@
 
 /obj/machinery/door/ex_act(severity)
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
-		if(2)
+		if(EX_ACT_HEAVY)
 			if(prob(25))
 				qdel(src)
 			else
 				take_damage(100)
 			take_damage(200)
-		if(3)
+		if(EX_ACT_LIGHT)
 			if(prob(80))
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(2, 1, src)
@@ -466,7 +466,7 @@
 	operating = 0
 
 	//I shall not add a check every x ticks if a door has closed over some fire.
-	var/obj/fire/fire = locate() in loc
+	var/obj/hotspot/fire = locate() in loc
 	if(fire)
 		qdel(fire)
 	return

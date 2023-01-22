@@ -483,7 +483,7 @@
 		var/obj/item/weldingtool/W = I
 		if(W.remove_fuel(1,user))
 			to_chat(user, "You start slicing the floorweld off the delivery chute.")
-			if(do_after(user,20, src))
+			if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				if(!src || !W.isOn()) return
 				to_chat(user, "You sliced the floorweld off the delivery chute.")

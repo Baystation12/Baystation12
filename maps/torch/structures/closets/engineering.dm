@@ -45,7 +45,6 @@
 		/obj/item/device/radio/headset/heads/ce,
 		/obj/item/device/radio/headset/heads/ce/alt,
 		/obj/item/storage/belt/utility/full,
-		/obj/item/storage/belt/general,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/multitool,
@@ -66,9 +65,7 @@
 		/obj/item/storage/box/armband/engine,
 		/obj/item/storage/box/secret_project_disks,
 		/obj/item/material/knife/folding/swiss/officer,
-		/obj/item/clothing/head/hardhat/damage_control/White,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/industrial, /obj/item/storage/backpack/satchel/eng)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/eng, /obj/item/storage/backpack/messenger/engi))
+		/obj/item/storage/backpack/dufflebag/eng
 	)
 
 /obj/structure/closet/secure_closet/engineering_torch
@@ -78,7 +75,6 @@
 
 /obj/structure/closet/secure_closet/engineering_torch/WillContain()
 	return list(
-		/obj/item/clothing/under/hazard,
 		/obj/item/clothing/accessory/storage/brown_vest,
 		/obj/item/storage/belt/utility/full,
 		/obj/item/device/radio/headset/headset_eng,
@@ -88,12 +84,9 @@
 		/obj/item/clothing/glasses/meson,
 		/obj/item/taperoll/engineering,
 		/obj/item/device/flashlight,
-		/obj/item/taperoll/atmos,
 		/obj/item/clothing/gloves/insulated,
 		/obj/item/material/knife/folding/swiss/engineer,
-		/obj/item/clothing/head/hardhat/damage_control,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/industrial, /obj/item/storage/backpack/satchel/eng)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/eng, /obj/item/storage/backpack/messenger/engi))
+		/obj/item/storage/backpack/dufflebag/eng
 	)
 
 /obj/structure/closet/secure_closet/engineering_senior
@@ -103,7 +96,6 @@
 
 /obj/structure/closet/secure_closet/engineering_senior/WillContain()
 	return list(
-		/obj/item/clothing/under/hazard,
 		/obj/item/clothing/accessory/storage/brown_vest,
 		/obj/item/device/radio/headset/headset_eng,
 		/obj/item/device/radio/headset/headset_eng/alt,
@@ -112,16 +104,13 @@
 		/obj/item/storage/belt/utility/full,
 		/obj/item/clothing/glasses/meson,
 		/obj/item/taperoll/engineering,
-		/obj/item/taperoll/atmos,
 		/obj/item/clothing/glasses/welding/superior,
 		/obj/item/device/flash,
 		/obj/item/device/flashlight,
 		/obj/item/device/megaphone,
 		/obj/item/clothing/gloves/insulated,
 		/obj/item/material/knife/folding/swiss/engineer,
-		/obj/item/clothing/head/hardhat/damage_control/Yellow,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/industrial, /obj/item/storage/backpack/satchel/eng)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/eng, /obj/item/storage/backpack/messenger/engi))
+		/obj/item/storage/backpack/dufflebag/eng
 	)
 
 /obj/structure/closet/secure_closet/atmos_torch
@@ -131,7 +120,6 @@
 
 /obj/structure/closet/secure_closet/atmos_torch/WillContain()
 	return list(
-		/obj/item/clothing/under/hazard,
 		/obj/item/storage/backpack/dufflebag/firefighter,
 		/obj/item/clothing/head/hardhat/red,
 		/obj/item/device/flashlight,

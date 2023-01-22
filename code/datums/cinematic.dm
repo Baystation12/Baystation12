@@ -16,7 +16,7 @@ GLOBAL_DATUM_INIT(cinematic, /datum/cinematic, new)
 	if(!override)
 		override = SSticker.mode
 	if(!override)
-		override = config.gamemode_cache["extended"]
+		override = SSticker.mode_cache["extended"]
 	if(!override)
 		return
 

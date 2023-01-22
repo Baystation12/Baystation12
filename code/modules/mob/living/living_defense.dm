@@ -22,6 +22,8 @@
 		. += get_extension(psi, /datum/extension/armor)
 
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 
 	//Being hit while using a deadman switch
 	var/obj/item/device/assembly/signaler/signaler = get_active_hand()
@@ -83,18 +85,20 @@
 	if (stun_amount)
 		Stun(stun_amount)
 		Weaken(stun_amount)
-		apply_effect(stun_amount, STUTTER)
-		apply_effect(stun_amount, EYE_BLUR)
+		apply_effect(stun_amount, EFFECT_STUTTER)
+		apply_effect(stun_amount, EFFECT_EYE_BLUR)
 
 	if (agony_amount)
-		apply_damage(agony_amount, PAIN, def_zone, used_weapon)
-		apply_effect(agony_amount/10, STUTTER)
-		apply_effect(agony_amount/10, EYE_BLUR)
+		apply_damage(agony_amount, DAMAGE_PAIN, def_zone, used_weapon)
+		apply_effect(agony_amount/10, EFFECT_STUTTER)
+		apply_effect(agony_amount/10, EFFECT_EYE_BLUR)
 
 /mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, def_zone = null)
 	  return FALSE //only carbon liveforms have this proc
 
 /mob/living/emp_act(severity)
+	if (status_flags & GODMODE)
+		return
 	var/list/L = get_contents()
 	for(var/obj/O in L)
 		O.emp_act(severity)
@@ -112,7 +116,7 @@
 
 	. = standard_weapon_hit_effects(I, user, effective_force, hit_zone)
 
-	if(I.damtype == BRUTE && prob(33)) // Added blood for whacking non-humans too
+	if (I.damtype == DAMAGE_BRUTE && prob(33)) // Added blood for whacking non-humans too
 		var/turf/simulated/location = get_turf(src)
 		if(istype(location)) location.add_blood_floor(src)
 
@@ -144,7 +148,7 @@
 	if (!aura_check(AURA_TYPE_THROWN, AM, TT))
 		return
 
-	if(istype(AM,/obj/))
+	if(isobj(AM))
 		var/obj/O = AM
 		var/dtype = O.damtype
 		var/throw_damage = O.throwforce*(TT.speed/THROWFORCE_SPEED_DIVISOR)
@@ -181,7 +185,7 @@
 
 			if(!O || !src) return
 
-			if(O.can_embed()) //Projectile is suitable for pinning.
+			if(O.can_embed() && !(mob_flags & MOB_FLAG_UNPINNABLE)) //Projectile is suitable for pinning.
 				//Handles embedding for non-humans and simple_animals.
 				embed(O)
 
@@ -202,7 +206,7 @@
 /mob/living/proc/turf_collision(var/turf/T, var/speed)
 	visible_message(SPAN_DANGER("[src] slams into \the [T]"))
 	playsound(T, 'sound/effects/bangtaper.ogg', 50, 1, 1)//so it plays sounds on the turf instead, makes for awesome carps to hull collision and such
-	apply_damage(speed*2, BRUTE)
+	apply_damage(speed * 2, DAMAGE_BRUTE)
 
 /mob/living/proc/near_wall(var/direction,var/distance=1)
 	var/turf/T = get_step(get_turf(src),direction)
@@ -277,6 +281,8 @@
 	location.hotspot_expose(fire_burn_temperature(), 50, 1)
 
 /mob/living/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	if (status_flags & GODMODE)
+		return
 	//once our fire_burn_temperature has reached the temperature of the fire that's giving fire_stacks, stop adding them.
 	//allow fire_stacks to go up to 4 for fires cooler than 700 K, since are being immersed in flame after all.
 	if(fire_stacks <= 4 || fire_burn_temperature() < exposed_temperature)
@@ -369,6 +375,8 @@
 		client.screen += hud_used.hide_actions_toggle
 
 /mob/living/lava_act(datum/gas_mixture/air, temperature, pressure)
+	if (status_flags & GODMODE)
+		return
 	fire_act(air, temperature)
 	FireBurn(0.4*vsc.fire_firelevel_multiplier, temperature, pressure)
 	. =  (health <= 0) ? ..() : FALSE

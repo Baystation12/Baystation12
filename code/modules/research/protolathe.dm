@@ -8,7 +8,7 @@
 	active_power_usage = 5000
 	base_type = /obj/machinery/r_n_d/protolathe
 	construct_state = /decl/machine_construction/default/panel_closed
-	
+
 	machine_name = "protolathe"
 	machine_desc = "Uses raw materials to produce prototypes. Part of an R&D network."
 
@@ -129,7 +129,7 @@
 
 	busy = 1
 	use_power_oneoff(max(1000, (SHEET_MATERIAL_AMOUNT * amount / 10)))
-	if(do_after(user, 16,src))
+	if(do_after(user, 1.6 SECONDS, src, DO_PUBLIC_UNIQUE))
 		if(stack.use(amount))
 			to_chat(user, "<span class='notice'>You add [amount] sheet\s to \the [src].</span>")
 			materials[stack.material.name] += amount * SHEET_MATERIAL_AMOUNT

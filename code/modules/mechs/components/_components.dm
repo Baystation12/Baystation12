@@ -27,6 +27,7 @@
 	take_burn_damage(rand((10 - (severity*3)),15-(severity*4)))
 	for(var/obj/item/thing in contents)
 		thing.emp_act(severity)
+	..()
 
 /obj/item/mech_component/examine(mob/user)
 	. = ..()
@@ -143,7 +144,7 @@
 			SPAN_NOTICE("You begin welding the damage on \the [src]...")
 		)
 		var/repair_value = 10 * max(user.get_skill_value(SKILL_CONSTRUCTION), user.get_skill_value(SKILL_DEVICES))
-		if(user.do_skilled(10, SKILL_DEVICES , src, 0.6, DO_PUBLIC_PROGRESS | DO_DEFAULT) && brute_damage)
+		if(user.do_skilled(1 SECOND, SKILL_DEVICES , src, 0.6) && brute_damage)
 			repair_brute_damage(repair_value)
 			to_chat(user, SPAN_NOTICE("You mend the damage to \the [src]."))
 			playsound(user.loc, 'sound/items/Welder.ogg', 25, 1)
@@ -162,7 +163,7 @@
 
 	user.visible_message("\The [user] begins replacing the wiring of \the [src]...")
 
-	if(user.do_skilled(10, SKILL_DEVICES , src, 0.6, DO_PUBLIC_PROGRESS | DO_DEFAULT) && burn_damage)
+	if(user.do_skilled(1 SECOND, SKILL_DEVICES , src, 0.6) && burn_damage)
 		if(QDELETED(CC) || QDELETED(src) || !CC.use(needed_amount))
 			return
 

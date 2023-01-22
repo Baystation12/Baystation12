@@ -51,5 +51,8 @@ lib/*.so
 *.pyc
 __pycache__
 
-# flyway config
-flyway.conf
+node_modules/
+package-lock.json
+
+# ignore local selected map
+/maps/using.dm

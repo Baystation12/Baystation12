@@ -72,7 +72,7 @@
 				src.bstate = 1
 				src.set_density(1)
 				src.SetName("alien skeleton display")
-				if(list_find(src.contents, /obj/item/fossil/skull/horned))
+				if(src.contents.Find(/obj/item/fossil/skull/horned))
 					src.desc = "A creature made of [src.contents.len-1] assorted bones and a horned skull. The plaque reads \'[plaque_contents]\'."
 				else
 					src.desc = "A creature made of [src.contents.len-1] assorted bones and a skull. The plaque reads \'[plaque_contents]\'."
@@ -84,7 +84,7 @@
 	else if(istype(W,/obj/item/pen))
 		plaque_contents = sanitize(input("What would you like to write on the plaque:","Skeleton plaque",""))
 		user.visible_message("[user] writes something on the base of [icon2html(src, viewers(get_turf(src)))] [src].","You relabel the plaque on the base of [icon2html(src, user)] [src].")
-		if(list_find(src.contents, /obj/item/fossil/skull/horned))
+		if(src.contents.Find(/obj/item/fossil/skull/horned))
 			src.desc = "A creature made of [src.contents.len-1] assorted bones and a horned skull. The plaque reads \'[plaque_contents]\'."
 		else
 			src.desc = "A creature made of [src.contents.len-1] assorted bones and a skull. The plaque reads \'[plaque_contents]\'."

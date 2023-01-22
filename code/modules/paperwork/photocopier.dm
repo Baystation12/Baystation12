@@ -130,9 +130,9 @@
 
 /obj/machinery/photocopier/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if(prob(50))
 				qdel(src)
 			else

@@ -8,6 +8,7 @@
 	desc = "Just some empty space, with an irregular sensor echo."
 	in_space = TRUE
 	known = FALSE
+	place_near_main = list(2, 4)
 	icon_state = "event"
 	hide_from_reports = TRUE
 	initial_generic_waypoints = list(
@@ -82,4 +83,3 @@
 	icon_state = "syndie-ship"
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	req_access = list(access_syndicate)
-

@@ -4,7 +4,7 @@
 	fire_sound='proxima/sound/weapons/guns/incinerate.ogg'
 	armor_penetration = 25
 	damage = 33
-	damage_type = BURN
+	damage_type = DAMAGE_BURN
 	step_delay = 0.5
 
 	muzzle_type = /obj/effect/projectile/plasma/muzzle
@@ -46,11 +46,30 @@
 /obj/effect/projectile/plasma/net/impact
 	icon_state = "impact_plasma"
 
+/obj/item/projectile/plasma/sniper
+	name = "sniper plasma bolt"
+	fire_sound='proxima/sound/weapons/guns/vaporize.ogg'
+	armor_penetration = 35
+	damage = 45
+	agony = 5
+	step_delay = 0.4
+
 /obj/item/projectile/plasma/heavy
 	name = "heavy plasma bolt"
 	fire_sound='proxima/sound/weapons/guns/vaporize.ogg'
 	armor_penetration = 50
 	damage = 60
+
+	muzzle_type = /obj/effect/projectile/plasma/heavy/muzzle
+	impact_type = /obj/effect/projectile/plasma/heavy/impact
+
+/obj/item/projectile/plasma/heavy/sniper
+	name = "heavy sniper plasma bolt"
+	fire_sound='proxima/sound/weapons/guns/vaporize.ogg'
+	armor_penetration = 75
+	agony = 15
+	damage = 90
+	step_delay = 0.4
 
 	muzzle_type = /obj/effect/projectile/plasma/heavy/muzzle
 	impact_type = /obj/effect/projectile/plasma/heavy/impact
@@ -63,6 +82,12 @@
 	eyeblur = 1
 	muzzle_type = /obj/effect/projectile/plasma/stun/muzzle
 	impact_type = /obj/effect/projectile/plasma/stun/impact
+
+/obj/item/projectile/plasma/stun/sniper
+	name = "sniper stun plasma bolt"
+	damage = 2
+	agony = 60
+	step_delay = 0.4
 
 /obj/item/projectile/plasma/stun/net
 	name = "plasma net"
@@ -78,8 +103,8 @@
 	return TRUE
 
 /obj/item/gun/energy/k342
-	name = "Plasma gun"
-	desc = "K342 - Barrakuda is the latest plasma weapon created by NanoTrasen. It can fire several types of charges: stunning, incendiary and lethal."
+	name = "plasma rifle"
+	desc = "K342 Barrakuda is the latest plasma weapon created by NanoTrasen. It can fire several types of charges: stunning, incendiary and lethal."
 	icon = 'proxima/icons/obj/guns/k342.dmi'
 	w_class = ITEM_SIZE_LARGE
 	item_icons = list(
@@ -123,6 +148,22 @@
 			overlays += image(icon, splittext(init_firemodes[sel_mode]["mode_name"], " ")[1])
 	else
 		icon_state = "[initial(item_state)]_off"
+
+/obj/item/gun/energy/k342/sniper
+	name = "plasma sniper rifle"
+	desc = "K480 Skat is the latest heavy plasma weapon created by NanoTrasen for SolGov snipers, capable to fire several types of charges: stunning, incendiary, and lethal bolts. Advanced magnetic constriction technology improves accuracy and firepower."
+	icon = 'proxima/icons/obj/guns/k480.dmi'
+	icon_state = "mantis_off"
+	item_state = "mantis"
+	w_class = ITEM_SIZE_LARGE
+	slot_flags = SLOT_BACK
+	scoped_accuracy = 6
+	scope_zoom = 1.5
+	init_firemodes = list(
+		list(mode_name="stun charge", projectile_type=/obj/item/projectile/plasma/stun/sniper, charge_cost=60, fire_delay=6, projectile_color=COLOR_YELLOW),
+		list(mode_name="plasma charge", projectile_type=/obj/item/projectile/plasma/sniper, charge_cost=60, fire_delay=6, projectile_color=COLOR_BLUE_LIGHT),
+		list(mode_name="heavy plasma charge", projectile_type=/obj/item/projectile/plasma/heavy/sniper, charge_cost=120, fire_delay=10, projectile_color=COLOR_RED)
+	)
 
 /datum/design/item/weapon/k342
 	id = "k342"

@@ -42,7 +42,7 @@
 			new_health += reinforced.integrity / 2
 	set_max_health(new_health)
 
-/obj/structure/table/damage_health(damage, damage_type, skip_death_state_change, severity)
+/obj/structure/table/damage_health(damage, damage_type, damage_flags = EMPTY_BITFIELD, severity)
 	// If the table is made of a brittle material, and is *not* reinforced with a non-brittle material, damage is multiplied by TABLE_BRITTLE_MATERIAL_MULTIPLIER
 	if (material?.is_brittle())
 		if (reinforced)
@@ -53,10 +53,9 @@
 
 	. = ..()
 
-/obj/structure/table/handle_death_change(new_death_state)
-	if (new_death_state)
-		visible_message("<span class='warning'>\The [src] breaks down!</span>")
-		break_to_parts()
+/obj/structure/table/on_death()
+	visible_message("<span class='warning'>\The [src] breaks down!</span>")
+	break_to_parts()
 
 /obj/structure/table/Initialize()
 	. = ..()
@@ -138,7 +137,7 @@
 		if(F.welding)
 			to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-			if(!do_after(user, 20, src) || !F.remove_fuel(1, user))
+			if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || !F.remove_fuel(1, user))
 				return
 			user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>",
 			                              "<span class='notice'>You repair some damage to \the [src].</span>")
@@ -243,7 +242,7 @@
 	if(manipulating) return M
 	manipulating = 1
 	to_chat(user, "<span class='notice'>You begin [verb]ing \the [src] with [M.display_name].</span>")
-	if(!do_after(user, 20, src) || !S.use(1))
+	if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || !S.use(1))
 		manipulating = 0
 		return null
 	user.visible_message("<span class='notice'>\The [user] [verb]es \the [src] with [M.display_name].</span>", "<span class='notice'>You finish [verb]ing \the [src].</span>")
@@ -262,7 +261,7 @@
 	                              "<span class='notice'>You begin removing the [type_holding] holding \the [src]'s [M.display_name] [what] in place.</span>")
 	if(sound)
 		playsound(src.loc, sound, 50, 1)
-	if(!do_after(user, 40, src))
+	if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 		manipulating = 0
 		return M
 	user.visible_message("<span class='notice'>\The [user] removes the [M.display_name] [what] from \the [src].</span>",
@@ -284,7 +283,7 @@
 	user.visible_message("<span class='notice'>\The [user] begins dismantling \the [src].</span>",
 	                              "<span class='notice'>You begin dismantling \the [src].</span>")
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	if(!do_after(user, 20, src))
+	if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 		manipulating = 0
 		return
 	user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>",

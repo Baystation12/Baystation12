@@ -125,15 +125,6 @@
 				"bio" = 100,
 				"rad" = 100
 				)
-	var/list/armor_soak = list(		// Values for getsoak() checks.
-				"melee" = 0,
-				"bullet" = 0,
-				"laser" = 0,
-				"energy" = 0,
-				"bomb" = 0,
-				"bio" = 0,
-				"rad" = 0
-				)
 
 	// Protection against heat/cold/electric/water effects.
 	// 0 is no protection, 1 is total protection. Negative numbers increase vulnerability.
@@ -187,21 +178,23 @@
 	return ..(gibbed,deathmessage,show_dead_message)
 
 /mob/living/simple_animal/ex_act(severity)
+	if (status_flags & GODMODE)
+		return
 	if(!blinded)
 		flash_eyes()
 
 	var/damage
 	switch (severity)
-		if (1)
+		if (EX_ACT_DEVASTATING)
 			damage = 500
 
-		if (2)
+		if (EX_ACT_HEAVY)
 			damage = 120
 
-		if(3)
+		if(EX_ACT_LIGHT)
 			damage = 30
 
-	apply_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
+	apply_damage(damage, DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_EXPLODE)
 
 /mob/living/simple_animal/adjustBruteLoss(damage)
 	..()
@@ -258,25 +251,35 @@
 	..()
 	switch(get_bullet_impact_effect_type(def_zone))
 		if(BULLET_IMPACT_MEAT)
-			if(P.damtype == BRUTE)
+			if (P.damtype == DAMAGE_BRUTE)
 				var/hit_dir = get_dir(P.starting, src)
 				var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
 				B.icon_state = pick("dir_splatter_1","dir_splatter_2")
 				B.basecolor = bleed_colour
-				var/scale = min(1, round(mob_size / MOB_MEDIUM, 0.1))
-				var/matrix/M = new()
-				B.transform = M.Scale(scale)
+				B.SetTransform(scale = min(1, round(mob_size / MOB_MEDIUM, 0.1)))
 				B.update_icon()
 
 /mob/living/simple_animal/handle_fire()
-	return
+	. = ..()
+
+	var/burn_temperature = fire_burn_temperature()
+	var/thermal_protection = get_heat_protection(burn_temperature)
+
+	if (thermal_protection < 1 && bodytemperature < burn_temperature)
+		bodytemperature += round(BODYTEMP_HEATING_MAX*(1-thermal_protection), 1)
+
+	burn_temperature -= maxbodytemp
+
+	if(burn_temperature < 1)
+		return
+
+	adjustBruteLoss(log(10, (burn_temperature + 10)))
 
 /mob/living/simple_animal/update_fire()
-	return
-/mob/living/simple_animal/IgniteMob()
-	return
-/mob/living/simple_animal/ExtinguishMob()
-	return
+	. = ..()
+	overlays -= image("icon"='icons/mob/OnFire.dmi', "icon_state"="Generic_mob_burning")
+	if(on_fire)
+		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Generic_mob_burning")
 
 /mob/living/simple_animal/is_burnable()
 	return heat_damage_per_tick
@@ -350,7 +353,7 @@
 /mob/living/simple_animal/proc/pry_door(var/mob/user, var/delay, var/obj/machinery/door/pesky_door)
 	visible_message(SPAN_WARNING("\The [user] begins [pry_desc] at \the [pesky_door]!"))
 	set_AI_busy(TRUE)
-	if(do_after(user, delay, pesky_door))
+	if(do_after(user, delay, pesky_door, DO_DEFAULT | DO_PUBLIC_PROGRESS))
 		pesky_door.open(1)
 		ai_holder.prying = FALSE
 		set_AI_busy(FALSE)

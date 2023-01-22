@@ -1,4 +1,4 @@
-var/repository/mob/mob_repository = new()
+var/global/repository/mob/mob_repository = new()
 
 /repository/mob
 	var/list/mobs_

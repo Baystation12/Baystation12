@@ -4,15 +4,14 @@ SUBSYSTEM_DEF(ao)
 	wait = 1
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	flags = SS_NO_INIT
-	var/static/tmp/list/queue = list()
-	var/static/tmp/list/cache = list()
+	var/static/list/queue = list()
+	var/static/list/cache = list()
 
 
-/datum/controller/subsystem/ao/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Queue: [queue.len]"
-	..(text, force)
+/datum/controller/subsystem/ao/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Queue: [queue.len]")
 
 
 /datum/controller/subsystem/ao/fire(resume, no_mc_tick)

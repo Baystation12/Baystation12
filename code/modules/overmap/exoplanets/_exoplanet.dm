@@ -4,7 +4,6 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	name = "exoplanet"
 	icon_state = "globe"
 	in_space = FALSE
-	known = TRUE
 	var/area/planetary_area
 	var/list/seeds = list()
 	var/list/fauna_types = list()		// possible types of mobs to spawn
@@ -73,7 +72,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	if (isnum(habitability_distribution))
 		habitability_class = habitability_distribution
 	else
-		habitability_class = pickweightindex(habitability_distribution)
+		habitability_class = pickweight_index(habitability_distribution)
 
 /obj/effect/overmap/visitable/sector/exoplanet/New(nloc, max_x, max_y)
 	if (!GLOB.using_map.use_overmap)
@@ -105,6 +104,8 @@ GLOBAL_VAR(planet_repopulation_disabled)
 
 	for (var/T in subtypesof(/datum/map_template/ruin/exoplanet))
 		var/datum/map_template/ruin/exoplanet/ruin = T
+		if (initial(ruin.template_flags) & TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED)
+			continue
 		if (ruin_tags_whitelist && !(ruin_tags_whitelist & initial(ruin.ruin_tags)))
 			continue
 		if (ruin_tags_blacklist & initial(ruin.ruin_tags))
@@ -154,6 +155,18 @@ GLOBAL_VAR(planet_repopulation_disabled)
 		if (!atmosphere)
 			continue
 
+		var/zone/Z
+		for (var/i = 1 to maxx)
+			var/turf/simulated/T = locate(i, 2, zlevel)
+			if (istype(T) && T.zone && T.zone.contents.len > (maxx*maxy*0.25)) //if it's a zone quarter of zlevel, good enough odds it's planetary main one
+				Z = T.zone
+				break
+		if (Z && !Z.fire_tiles.len && !atmosphere.compare(Z.air)) //let fire die out first if there is one
+			var/datum/gas_mixture/daddy = new() //make a fake 'planet' zone gas
+			daddy.copy_from(atmosphere)
+			daddy.group_multiplier = Z.air.group_multiplier
+			Z.air.equalize(daddy)
+
 	if (daycycle)
 		if (tick % round(daycycle / wait) == 0)
 			night = !night
@@ -165,7 +178,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	var/light = 0.1
 	if (!night)
 		light = lightlevel
-	for (var/turf/unsimulated/floor/exoplanet/T in block(locate(daycolumn,1,min(map_z)),locate(daycolumn,maxy,max(map_z))))
+	for (var/turf/simulated/floor/exoplanet/T in block(locate(daycolumn,1,min(map_z)),locate(daycolumn,maxy,max(map_z))))
 		T.set_light(light, 0.1, 2)
 	daycolumn++
 	if (daycolumn > maxx)
@@ -186,7 +199,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 		edges |= block(locate(1, 1, zlevel), locate(maxx, TRANSITIONEDGE, zlevel))
 		edges |= block(locate(1, maxy-TRANSITIONEDGE, zlevel),locate(maxx, maxy, zlevel))
 		for (var/turf/T in edges)
-			T.ChangeTurf(/turf/unsimulated/planet_edge)
+			T.ChangeTurf(/turf/simulated/planet_edge)
 		var/padding = TRANSITIONEDGE
 		for (var/map_type in map_generators)
 			if (ispath(map_type, /datum/random_map/noise/exoplanet))

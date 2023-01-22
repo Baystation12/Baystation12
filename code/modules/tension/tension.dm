@@ -35,7 +35,7 @@
 			potential_damage = P.agony / 2
 		else
 			potential_damage = P.damage
-			if(P.damage_type == PAIN) // Not sure if any projectiles do this, but can't be too safe. TODO: i dont think pain is a dmg type
+			if (P.damage_type == DAMAGE_PAIN) // Not sure if any projectiles do this, but can't be too safe. TODO: i dont think pain is a dmg type
 				potential_damage /= 2
 			// Rubber bullets, I guess.
 			potential_damage += P.agony / 2

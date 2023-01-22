@@ -34,7 +34,7 @@
 	var/explosion_delay_upper	= 5 SECONDS
 
 /mob/living/simple_animal/hostile/giant_spider/phorogenic/Initialize()
-	scale(1.25)
+	SetTransform(scale = 1.25)
 	return ..()
 
 /mob/living/simple_animal/hostile/giant_spider/phorogenic/death()

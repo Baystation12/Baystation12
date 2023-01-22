@@ -50,21 +50,21 @@
 		if(user.a_intent == I_HELP && target_zone == BP_HEAD)
 			head.write_on(user, src.name)
 		else if(head.has_lips)
-			if(H.lip_style)	//if they already have lipstick on
+			if(H.makeup_style)	//if they already have lipstick on
 				to_chat(user, "<span class='notice'>You need to wipe off the old lipstick first!</span>")
 				return
 			if(H == user)
 				user.visible_message("<span class='notice'>[user] does their lips with \the [src].</span>", \
 									 "<span class='notice'>You take a moment to apply \the [src]. Perfect!</span>")
-				H.lip_style = colour
+				H.makeup_style = colour
 				H.update_body()
 			else
 				user.visible_message("<span class='warning'>[user] begins to do [H]'s lips with \the [src].</span>", \
 									 "<span class='notice'>You begin to apply \the [src].</span>")
-				if(do_after(user, 4 SECONDS, H, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+				if(do_after(user, 4 SECONDS, H, DO_EQUIP))
 					user.visible_message("<span class='notice'>[user] does [H]'s lips with \the [src].</span>", \
 										 "<span class='notice'>You apply \the [src].</span>")
-					H.lip_style = colour
+					H.makeup_style = colour
 					H.update_body()
 	else if(istype(A, /obj/item/organ/external/head))
 		var/obj/item/organ/external/head/head = A
@@ -100,7 +100,7 @@
 
 /obj/item/haircomb/brush/attack_self(mob/living/carbon/human/user)
 	if(!user.incapacitated())
-		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[user.h_style]
+		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[user.head_hair_style]
 		if(hair_style.flags & VERY_SHORT)
 			user.visible_message("<span class='notice'>\The [user] just sort of runs \the [src] over their scalp.</span>")
 		else

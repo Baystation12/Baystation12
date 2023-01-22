@@ -1,4 +1,4 @@
-var/list/spells = typesof(/spell) //needed for the badmin verb for now
+var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 /spell
 	var/name = "Spell"
@@ -131,7 +131,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			after_cast(targets) //generates the sparks, smoke, target messages etc.
 		else
 			break
-	while(time != number_of_channels && do_after(user, time_between_channels, do_flags = DO_DEFAULT & ~DO_USER_CAN_TURN, incapacitation_flags = INCAPACITATION_KNOCKOUT | INCAPACITATION_FORCELYING | INCAPACITATION_STUNNED))
+	while(time != number_of_channels && do_after(user, time_between_channels, do_flags = (DO_DEFAULT | DO_USER_UNIQUE_ACT) & ~DO_USER_CAN_TURN, incapacitation_flags = INCAPACITATION_KNOCKOUT | INCAPACITATION_FORCELYING | INCAPACITATION_STUNNED))
 	after_spell(targets, user, time) //When we are done with the spell completely.
 
 
@@ -395,4 +395,4 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	if(!(spell_flags & (GHOSTCAST)))
 		incap_flags |= INCAPACITATION_KNOCKOUT
 
-	return do_after(user, delay, incapacitation_flags = incap_flags)
+	return do_after(user, delay, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = incap_flags)

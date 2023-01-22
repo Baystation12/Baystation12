@@ -211,22 +211,22 @@
 					to_chat(user, "<span class='notice'>All information has been deleted from \the [src].</span>")
 					. = 1
 			if("Branch")
-				var/new_branch = sanitize(input(user,"What branch of service would you like to put on this card?","Agent Card Branch") as null|anything in mil_branches.spawn_branches())
+				var/new_branch = sanitize(input(user,"What branch of service would you like to put on this card?","Agent Card Branch") as null|anything in GLOB.mil_branches.spawn_branches())
 				if(!isnull(new_branch) && CanUseTopic(user, state))
-					src.military_branch =  mil_branches.spawn_branches()[new_branch]
+					src.military_branch =  GLOB.mil_branches.spawn_branches()[new_branch]
 					to_chat(user, "<span class='notice'>Branch changed to '[military_branch.name]'.</span>")
 					. = 1
 			if("Rank")
-				var/new_rank = sanitize(input(user,"What rank would you like to put on this card?","Agent Card Rank") as null|anything in mil_branches.spawn_ranks(military_branch.name))
+				var/new_rank = sanitize(input(user,"What rank would you like to put on this card?","Agent Card Rank") as null|anything in GLOB.mil_branches.spawn_ranks(military_branch.name))
 				if(!isnull(new_rank) && CanUseTopic(user, state))
-					src.military_rank = mil_branches.spawn_ranks(military_branch.name)[new_rank]
+					src.military_rank = GLOB.mil_branches.spawn_ranks(military_branch.name)[new_rank]
 					to_chat(user, "<span class='notice'>Rank changed to '[military_rank.name]'.</span>")
 					. = 1
 
 	// Always update the UI, or buttons will spin indefinitely
 	SSnano.update_uis(src)
 
-/var/global/list/id_card_states
+var/global/list/id_card_states
 /proc/id_card_states()
 	if(!id_card_states)
 		id_card_states = list()

@@ -6,7 +6,7 @@
 	//Continued damage to vital organs can kill you, and robot organs don't count towards total damage so no need to cap them.
 	return (BP_IS_ROBOTIC(src) || brute_dam + burn_dam + additional_damage < max_damage * 4)
 
-obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
+/obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	take_external_damage(amount)
 
 /obj/item/organ/external/proc/take_external_damage(brute, burn, damage_flags, used_weapon = null)
@@ -16,9 +16,9 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	if((brute <= 0) && (burn <= 0))
 		return 0
 
-	var/sharp = (damage_flags & DAM_SHARP)
-	var/edge  = (damage_flags & DAM_EDGE)
-	var/laser = (damage_flags & DAM_LASER)
+	var/sharp = (damage_flags & DAMAGE_FLAG_SHARP)
+	var/edge  = (damage_flags & DAMAGE_FLAG_EDGE)
+	var/laser = (damage_flags & DAMAGE_FLAG_LASER)
 	var/blunt = !!(brute && !sharp && !edge)
 
 	// Handle some status-based damage multipliers.
@@ -73,21 +73,21 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	var/can_cut = !block_cut && !BP_IS_ROBOTIC(src) && (sharp || prob(brute))
 
 	if(brute)
-		var/to_create = BRUISE
+		var/to_create = INJURY_TYPE_BRUISE
 		if(can_cut)
-			to_create = CUT
+			to_create = INJURY_TYPE_CUT
 			//need to check sharp again here so that blunt damage that was strong enough to break skin doesn't give puncture wounds
 			if(sharp && !edge)
-				to_create = PIERCE
+				to_create = INJURY_TYPE_PIERCE
 		created_wound = createwound(to_create, brute)
 
 	if(burn)
 		if(laser)
-			createwound(LASER, burn)
+			createwound(INJURY_TYPE_LASER, burn)
 			if(prob(40))
 				owner.IgniteMob()
 		else
-			createwound(BURN, burn)
+			createwound(INJURY_TYPE_BURN, burn)
 
 	//Initial pain spike
 	add_pain(0.6*burn + 0.4*brute)
@@ -127,7 +127,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	if(!LAZYLEN(internal_organs))
 		return FALSE
 
-	var/laser = (damage_flags & DAM_LASER)
+	var/laser = (damage_flags & DAMAGE_FLAG_LASER)
 
 	var/damage_amt = brute
 	var/cur_damage = brute_dam
@@ -139,7 +139,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		return FALSE
 
 	var/organ_damage_threshold = 10
-	if(damage_flags & DAM_SHARP)
+	if(damage_flags & DAMAGE_FLAG_SHARP)
 		organ_damage_threshold *= 0.5
 	if(laser)
 		organ_damage_threshold *= 2
@@ -180,7 +180,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 			break
 
 		// heal brute damage
-		if(W.damage_type == BURN)
+		if (W.damage_type == INJURY_TYPE_BURN)
 			burn = W.heal_damage(burn)
 		else
 			brute = W.heal_damage(brute)
@@ -329,7 +329,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 		B = A.brute_mult
 	if(!BP_IS_ROBOTIC(src))
 		B *= species.get_brute_mod(owner)
-	var/blunt = !(damage_flags & DAM_EDGE|DAM_SHARP)
+	var/blunt = !(damage_flags & DAMAGE_FLAG_EDGE|DAMAGE_FLAG_SHARP)
 	if(blunt && BP_IS_BRITTLE(src))
 		B *= 1.5
 	if(BP_IS_CRYSTAL(src))

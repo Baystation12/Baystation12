@@ -18,7 +18,7 @@
 	active_power_usage = 200
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	clickvol = 30
-	
+
 	machine_name = "cryo cell"
 	machine_desc = "Uses a supercooled chemical bath to hold living beings in something close to suspended animation. Often paired with specialized medicines to rapidly heal wounds of a patient inside."
 
@@ -339,7 +339,7 @@
 		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
 		return
 	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
-	if(!do_after(user, 30, src))
+	if(!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 		return
 	put_mob(target)
 
@@ -399,4 +399,3 @@
 
 /datum/data/function/proc/display()
 	return
-

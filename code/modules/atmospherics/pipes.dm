@@ -133,7 +133,7 @@
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 
-		if (do_after(user, 40, src))
+		if (do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if (clamp)
 				to_chat(user, SPAN_WARNING("You must remove \the [clamp] first."))
 				return TRUE

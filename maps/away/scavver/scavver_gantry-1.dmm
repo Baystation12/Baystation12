@@ -275,8 +275,7 @@
 /area/scavver/gantry/down1)
 "fc" = (
 /obj/machinery/computer/ship/engines{
-	dir = 8;
-	icon_state = "computer"
+	dir = 8
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtdown/thrusters)
@@ -381,8 +380,7 @@
 /area/scavver/calypso)
 "gv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -522,8 +520,7 @@
 /obj/structure/cable{
 	d1 = 16;
 	d2 = 0;
-	icon_state = "16-0";
-	pixel_y = 0
+	icon_state = "16-0"
 	},
 /turf/simulated/floor/airless,
 /area/scavver/gantry/down1)
@@ -691,8 +688,7 @@
 "kU" = (
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /obj/machinery/power/solar,
 /obj/effect/floor_decal/solarpanel,
@@ -880,10 +876,8 @@
 /area/scavver/yachtdown)
 "oG" = (
 /obj/machinery/power/apc{
-	dir = 2;
 	locked = 0;
 	name = "south bump";
-	operating = 1;
 	pixel_y = -28;
 	req_access = list()
 	},
@@ -1036,8 +1030,7 @@
 "rb" = (
 /obj/machinery/hologram/holopad/longrange,
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
@@ -1047,8 +1040,7 @@
 /area/scavver/calypso)
 "rr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/machinery/door/airlock/external/bolted,
 /turf/simulated/floor/airless,
@@ -1169,7 +1161,7 @@
 /area/scavver/calypso)
 "tL" = (
 /obj/structure/lattice,
-/obj/item/reagent_containers/food/snacks/donkpocket/sinpocket,
+/obj/item/reagent_containers/food/snacks/donkpocket/premium,
 /turf/space,
 /area/scavver/calypso)
 "tO" = (
@@ -1694,9 +1686,7 @@
 /area/scavver/calypso)
 "Cx" = (
 /obj/machinery/meter,
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel,
 /obj/machinery/light/spot,
 /turf/simulated/floor/airless,
 /area/scavver/yachtdown/thrusters)
@@ -1914,7 +1904,6 @@
 	dir = 4;
 	locked = 0;
 	pixel_x = -25;
-	pixel_y = 0;
 	req_access = list()
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -1927,9 +1916,7 @@
 /turf/simulated/floor/tiled,
 /area/scavver/calypso)
 "Gr" = (
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
-	dir = 2
-	},
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel,
 /turf/simulated/floor/airless,
 /area/scavver/yachtdown/thrusters)
 "Gu" = (
@@ -2333,8 +2320,7 @@
 /area/scavver/yachtdown)
 "PN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/scavver/calypso)
@@ -2347,7 +2333,7 @@
 /area/scavver/yachtdown)
 "PT" = (
 /obj/structure/lattice,
-/obj/item/reagent_containers/food/snacks/donkpocket,
+/obj/random/donkpocket,
 /turf/space,
 /area/scavver/yachtdown)
 "PY" = (
@@ -2384,8 +2370,7 @@
 	id_tag = "scav_calypso_interior_door"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/scavver/calypso)
@@ -2413,8 +2398,7 @@
 /area/scavver/gantry/down1)
 "Rc" = (
 /obj/machinery/power/terminal{
-	dir = 1;
-	icon_state = "term"
+	dir = 1
 	},
 /obj/structure/cable{
 	d2 = 2;
@@ -2460,7 +2444,6 @@
 	dir = 4;
 	locked = 0;
 	pixel_x = -25;
-	pixel_y = 0;
 	req_access = list()
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
@@ -2856,8 +2839,7 @@
 	use_power = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	dir = 10;
-	icon_state = "intact"
+	dir = 10
 	},
 /turf/simulated/floor/airless,
 /area/scavver/calypso)

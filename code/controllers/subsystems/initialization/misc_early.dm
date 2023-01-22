@@ -4,6 +4,7 @@ SUBSYSTEM_DEF(init_misc_early)
 	flags = SS_NO_FIRE
 
 
-/datum/controller/subsystem/init_misc_early/stat_entry(text, force)
-	if (!initialized)
-		return ..(text, force)
+/datum/controller/subsystem/init_misc_early/UpdateStat(time)
+	if (initialized)
+		return
+	..()

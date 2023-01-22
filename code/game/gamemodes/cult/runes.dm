@@ -167,7 +167,7 @@
 		showOptions(user)
 	else if(user.loc == get_turf(src))
 		speak_incantation(user, "Sas[pick("'","`")]so c'arta forbici!")
-		if(do_after(user, 30))
+		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			user.visible_message("<span class='warning'>\The [user] disappears in a flash of red light!</span>", "<span class='warning'>You feel as your body gets dragged into the dimension of Nar-Sie!</span>", "You hear a sickening crunch.")
 			user.forceMove(src)
 			showOptions(user)
@@ -296,11 +296,9 @@
 
 	..()
 
-/obj/effect/cultwall/handle_death_change(new_death_state)
-	. = ..()
-	if (new_death_state)
-		visible_message(SPAN_WARNING("\The [src] dissipates."))
-		qdel (src)
+/obj/effect/cultwall/on_death()
+	visible_message(SPAN_WARNING("\The [src] dissipates."))
+	qdel (src)
 
 /obj/effect/rune/ajorney
 	cultname = "astral journey"
@@ -769,7 +767,7 @@
 	log_and_message_admins_many(cultists, "started summoning Nar-sie.")
 
 	var/area/A = get_area(src)
-	command_announcement.Announce("High levels of bluespace interference detected at \the [A]. Suspected wormhole forming. Investigate it immediately.")
+	command_announcement.Announce("Высокие уровни помех в подпространстве обнаружены в отсеке [A]. Подозревается образование червоточины. Немедленно расследуйте данное происшествие.")
 	while(cultists.len > 4 || the_end_comes)
 		cultists = get_cultists()
 		if(cultists.len > 8)
@@ -792,7 +790,7 @@
 	if(the_end_comes >= the_time_has_come)
 		HECOMES = new /obj/singularity/narsie/large(get_turf(src))
 	else
-		command_announcement.Announce("Bluespace anomaly has ceased.")
+		command_announcement.Announce("Проявление аномалии подпространства прекратились. Работа устройств подпространственной связи успешно восстановлена.")
 		qdel(src)
 
 /obj/effect/rune/tearreality/attack_hand(var/mob/living/user)

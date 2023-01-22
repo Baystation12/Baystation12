@@ -6,7 +6,7 @@
 	icon_living = "crab"
 	icon_dead = "crab_dead"
 	mob_size = MOB_SMALL
-	speak_emote = list("clicks")
+	speak_emote = list("щёлкает")
 	turns_per_move = 5
 	response_help = "pets"
 	response_disarm = "gently pushes aside"

@@ -78,7 +78,7 @@
 			var/obj/item/storage/S = A.loc
 			S.remove_from_storage(A)
 		c.scanned = A
-		A.forceMove(src)  //Store it inside
+		A.forceMove(c)  //Store it inside
 		safe = 2
 		desc = "It currently contains some matter."
 		update_icon()

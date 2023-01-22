@@ -53,7 +53,8 @@
 /obj/item/clothing/under/solgov/utility/army/fiber_name = "army fatigues"
 /obj/item/clothing/under/solgov/service/army/fiber_name = "army service uniform"
 /obj/item/clothing/under/solgov/mildress/army/fiber_name = "army dress uniform"
-/obj/item/clothing/suit/storage/solgov/service/army/fiber_name = "army coat"
+/obj/item/clothing/suit/storage/solgov/utility/army/fiber_name = "green army jacket"
+/obj/item/clothing/suit/storage/solgov/utility/army/navy/fiber_name = "navy army jacket"
 /obj/item/clothing/suit/dress/solgov/army/fiber_name = "army dress jacket"
 
 

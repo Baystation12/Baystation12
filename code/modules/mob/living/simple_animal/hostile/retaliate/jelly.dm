@@ -19,7 +19,7 @@
 	name = "tentacles"
 	attack_verb = list("stung","slapped")
 	force = 10
-	damtype = BURN
+	damtype = DAMAGE_BURN
 
 /mob/living/simple_animal/hostile/retaliate/jelly/Initialize()
 	. = ..()
@@ -46,9 +46,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/Initialize()
 	. = ..()
-	var/matrix/M = new
-	M.Scale(jelly_scale)
-	transform = M
+	SetTransform(scale = jelly_scale)
 	var/obj/item/W = get_natural_weapon()
 	if(W)
 		W.force *= jelly_scale

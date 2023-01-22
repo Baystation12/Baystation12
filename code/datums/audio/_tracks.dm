@@ -13,14 +13,14 @@
 	author = "Alstroemeria Records"
 	license = /decl/license/grandfathered
 
-/decl/audio/track/asfarasitgets
+/decl/audio/track/as_far_as_it_gets
 	source = 'sound/music/europa/asfarasitgets.ogg'
 	title = "As Far As It Gets" // credits music
 	author = "A Drop A Day"
-	license = /decl/license/cc_by_sa_4_0
-	url = "https://ghyti.bandcamp.com/"
+	license = /decl/license/cc_by_sa_3_0
+	url = "https://soundcloud.com/adrop_aday/32-as-far-as-it-gets"
 
-/decl/audio/track/businessend
+/decl/audio/track/business_end
 	source = 'sound/music/businessend.ogg'
 	title = "Business End"
 	author = "Cletus Got Shot"
@@ -43,7 +43,7 @@
 	license = /decl/license/grandfathered
 	url = "https://modarchive.org/index.php?request=view_by_moduleid&query=73980"
 
-/decl/audio/track/cloudsofneptune
+/decl/audio/track/clouds_of_neptune
 	source = 'sound/music/Clouds_of_Neptune.ogg'
 	title = "Clouds of Neptune" // tragic spess theme
 	author = "Dukica99"
@@ -84,8 +84,8 @@
 	source = 'sound/music/europa/80salloveragain.ogg'
 	title = "80s All Over Again" // tension for a chase with security
 	author = "A Drop A Day"
-	license = /decl/license/cc_by_sa_4_0
-	url = "https://ghyti.bandcamp.com/"
+	license = /decl/license/cc_by_sa_3_0
+	url = "https://soundcloud.com/adrop_aday/9-80s-all-over-again"
 
 /decl/audio/track/elevator
 	display = "Local Forecast"
@@ -183,7 +183,7 @@
 	license = /decl/license/cc_by_3_0
 	url = "http://freemusicarchive.org/music/Ian_Alex_Mac/Cues/Marhaba"
 
-/decl/audio/track/martiancowboy
+/decl/audio/track/martian_cowboy
 	source = 'sound/music/europa/Martian Cowboy.ogg'
 	title = "Martian Cowboy" // EC mystery OST
 	author = "Kevin MacLeod"
@@ -298,9 +298,23 @@
 	license = /decl/license/cc_by_nc_nd_4_0
 	url = "http://freemusicarchive.org/music/Ryan_Little/~/Ryan_Little_-_Wake"
 
-/decl/audio/track/wildencounters
+/decl/audio/track/wild_encounters
 	source = 'sound/music/europa/WildEncounters.ogg'
 	title = "Wild Encounters" // EC travel song
 	author = "A Drop A Day"
-	license = /decl/license/cc_by_sa_4_0
+	license = /decl/license/cc_by_sa_3_0
+	url = "https://soundcloud.com/adrop_aday/14-wild-encounters"
+
+/decl/audio/track/your_love_is_a_drug
+	source = 'sound/music/YourLoveIsADrug.ogg'
+	title = "Your Love Is a Drug" // nice bar theme
+	author = "*Kira* Miki"
+	license = /decl/license/grandfathered
 	url = "https://ghyti.bandcamp.com/"
+
+/decl/audio/track/lackey
+	source = 'proxima/sound/music/Shadow Stalker (Oathbreakers).ogg'
+	title = "Lackey" // PRX
+	author = "Shadow Stalker"
+	license = /decl/license/grandfathered
+	url = "https://youtu.be/iUUSYt1Myd8"

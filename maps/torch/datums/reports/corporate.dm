@@ -2,6 +2,23 @@
 	..()
 	set_access(list(list(access_heads, access_senadv, access_representative, access_cent_creed, access_liaison)))
 
+/datum/computer_file/report/recipient/command/request_corporate
+	form_name = "HR-NTCO-05"
+	title = "Корпоративный Запрос"
+	logo = "\[logo\]"
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/command/request_corporate/generate_fields()
+	..()
+	add_field(/datum/report_field/number, "Номер запроса ")
+	add_field(/datum/report_field/people/from_manifest, "Полное имя и должность запросившего", required = 1)
+	add_field(/datum/report_field/pencode_text, "Содержание запроса", required = 1)
+	add_field(/datum/report_field/pencode_text, "Причина запроса", required = 1)
+	add_field(/datum/report_field/date, "Дата заполнения")
+	add_field(/datum/report_field/time, "Время заполнения")
+	add_field(/datum/report_field/text_label/instruction, "Документ является недействительным в случае отсутствия подписи или печати.")
+	add_field(/datum/report_field/signature, "Подпись", required = 1)
+	set_access(access_liaison, access_liaison)
 /datum/computer_file/report/recipient/corp/incident
 	form_name = "HR-NTCO-01"
 	title = "Рапорт об инциденте на корабле"

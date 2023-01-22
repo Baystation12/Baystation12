@@ -94,12 +94,12 @@
 	var/teleport_y = 0
 	var/teleport_z = 0
 
-	Trigger(var/atom/movable/A)
-		if(teleport_x && teleport_y && teleport_z)
+/obj/effect/step_trigger/teleporter/Trigger(var/atom/movable/A)
+	if(teleport_x && teleport_y && teleport_z)
 
-			A.x = teleport_x
-			A.y = teleport_y
-			A.z = teleport_z
+		A.x = teleport_x
+		A.y = teleport_y
+		A.z = teleport_z
 
 /* Random teleporter, teleports atoms to locations ranging from teleport_x - teleport_x_offset, etc */
 

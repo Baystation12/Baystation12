@@ -104,7 +104,7 @@ Robots and antags can instruct.
 		return
 	var/decl/hierarchy/skill/skill = options[choice]
 
-	if(!do_skilled(6 SECONDS, skill.type, target))
+	if(!do_skilled(6 SECONDS, skill.type, target, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
 	if(incapacitated() || target.incapacitated())
 		to_chat(src, "<span class='notice'>[incapacitated() ? "You are in no state to teach right now!" : "\the [target] is in no state to be taught right now!"]</span>")
@@ -122,7 +122,7 @@ Robots and antags can instruct.
 	visible_message("<span class='notice'>\The [src] trained \the [target] in the basics of \the [skill.name].</span>")
 	SV.set_cooldown()
 
-/datum/skill_buff/instruct/
+/datum/skill_buff/instruct
 	limit = 3
 
 /datum/skill_buff/motivate/can_buff(mob/target)
@@ -219,7 +219,3 @@ The Appraise verb. Used on objects to estimate their value.
 		add_client_color(/datum/client_color/noir)
 	else
 		to_chat(src, "You stop looking for clues.")
-
-
-
-

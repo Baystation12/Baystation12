@@ -62,7 +62,7 @@
 /obj/item/stock_parts/scanning_module/adv
 	name = "advanced scanning module"
 	desc = "A compact, high resolution scanning module used in the construction of certain devices."
-	icon_state = "scan_module"
+	icon_state = "advanced_scan_module"
 	origin_tech = list(TECH_MAGNET = 3)
 	rating = 2
 	matter = list(MATERIAL_STEEL = 50,MATERIAL_GLASS = 20)
@@ -94,6 +94,7 @@
 /obj/item/stock_parts/capacitor/adv
 	name = "advanced capacitor"
 	desc = "An advanced capacitor used in the construction of a variety of devices."
+	icon_state = "advanced_capacitor"
 	origin_tech = list(TECH_POWER = 3)
 	rating = 2
 
@@ -102,6 +103,7 @@
 /obj/item/stock_parts/scanning_module/phasic
 	name = "phasic scanning module"
 	desc = "A compact, high resolution phasic scanning module used in the construction of certain devices."
+	icon_state = "phasic_scan_module"
 	origin_tech = list(TECH_MAGNET = 5)
 	rating = 3
 	matter = list(MATERIAL_STEEL = 50,MATERIAL_GLASS = 20)
@@ -133,6 +135,7 @@
 /obj/item/stock_parts/capacitor/super
 	name = "super capacitor"
 	desc = "A super-high capacity capacitor used in the construction of a variety of devices."
+	icon_state = "super_capacitor"
 	origin_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4)
 	rating = 3
 

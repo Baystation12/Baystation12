@@ -103,7 +103,7 @@
 	matter = list(MATERIAL_PLASTEEL = 8500)
 	max_block = 50
 	can_block_lasers = TRUE
-	slowdown_general = 1.5
+	slowdown_general = 0.5
 
 /obj/item/shield/buckler
 	name = "buckler"

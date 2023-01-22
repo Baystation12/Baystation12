@@ -176,7 +176,7 @@
 			other_feed_message_start(user, target)
 
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			if(!do_after(user, 3 SECONDS, target))
+			if(!do_after(user, 3 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				return
 
 			other_feed_message_finish(user, target)

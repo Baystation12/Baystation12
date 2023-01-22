@@ -21,7 +21,7 @@
 	species_language = LANGUAGE_ROOTLOCAL
 	only_species_language = 1
 	voice_name = "diona nymph"
-	speak_emote = list("chirrups")
+	speak_emote = list("чирикает")
 	universal_understand = FALSE
 	universal_speak = FALSE
 

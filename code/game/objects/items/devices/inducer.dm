@@ -103,12 +103,12 @@
 			SPAN_NOTICE("You start recharging \the [A] with \the [src].")
 		)
 		if (istype(A, /obj/item/gun/energy))
-			length = 30
+			length = 3 SECONDS
 			if (user.get_skill_value(SKILL_WEAPONS) <= SKILL_ADEPT)
-				length += rand(10, 30)
+				length += rand(1, 3) SECONDS
 		if (user.get_skill_value(SKILL_ELECTRICAL) < SKILL_ADEPT)
-			length += rand(40, 60)
-		if(MyC.charge > max(0, MyC.charge*failsafe) && do_after(user, length))
+			length += rand(4, 6) SECONDS
+		if(MyC.charge > max(0, MyC.charge*failsafe) && do_after(user, length, A, DO_PUBLIC_UNIQUE))
 			if(CannotUse(user))
 				return TRUE
 			if(QDELETED(C))

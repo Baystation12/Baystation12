@@ -60,6 +60,8 @@
 	return 1
 
 /mob/living/simple_animal/hostile/vagrant/bullet_act(var/obj/item/projectile/Proj)
+	if (status_flags & GODMODE)
+		return PROJECTILE_FORCE_MISS
 	var/oldhealth = health
 	. = ..()
 	if((target_mob != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at

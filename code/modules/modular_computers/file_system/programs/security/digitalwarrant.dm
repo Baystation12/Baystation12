@@ -1,5 +1,5 @@
 LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
-/datum/computer_file/data/warrant/
+/datum/computer_file/data/warrant
 	var/archived = FALSE
 
 /datum/computer_file/program/digitalwarrant
@@ -13,10 +13,10 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 	requires_ntnet = TRUE
 	available_on_ntnet = TRUE
 	required_access = access_security
-	nanomodule_path = /datum/nano_module/program/digitalwarrant/
+	nanomodule_path = /datum/nano_module/program/digitalwarrant
 	category = PROG_SEC
 
-/datum/nano_module/program/digitalwarrant/
+/datum/nano_module/program/digitalwarrant
 	name = "Warrant Assistant"
 	var/datum/computer_file/data/warrant/activewarrant
 

@@ -30,7 +30,7 @@
 /obj/item/organ/internal/stomach/vox
 	name = "gizzard"
 	color = "#0033cc"
-	var/global/list/gains_nutriment_from_inedible_reagents = list(
+	var/static/list/gains_nutriment_from_inedible_reagents = list(
 		/datum/reagent/woodpulp =      3,
 		/datum/reagent/ultraglue =     1,
 		/datum/reagent/coolant =       1,
@@ -43,7 +43,7 @@
 		/datum/reagent/surfactant =    1,
 		/datum/reagent/paint =         1
 	)
-	var/global/list/can_digest_matter = list(
+	var/static/list/can_digest_matter = list(
 		MATERIAL_WOOD =        TRUE,
 		MATERIAL_MAHOGANY =    TRUE,
 		MATERIAL_MAPLE =       TRUE,
@@ -56,7 +56,7 @@
 		MATERIAL_WASTE =       TRUE,
 		MATERIAL_ROCK_SALT =   TRUE
 	)
-	var/global/list/can_process_matter = list(
+	var/static/list/can_process_matter = list(
 		MATERIAL_STEEL =       TRUE,
 		MATERIAL_GLASS =       TRUE,
 		MATERIAL_GOLD =        TRUE,
@@ -141,7 +141,7 @@
 						mat_stack.set_amount(mat_stack.amount + taking_sheets)
 						sheets -= taking_sheets
 						updated_stacks = TRUE
-						
+
 				// Create new stacks if needed.
 				while(sheets > 0)
 					var/obj/item/stack/material/mat_stack = new M.stack_type(src)
@@ -242,9 +242,6 @@
 		if(owner.mind == backup) // Oh, it's the same mind in the backup. Someone must've spammed the 'Start Procedure' button in a panic.
 			return
 		owner.visible_message(SPAN_DANGER("\The [owner] spasms violently!"))
-		if(prob(66))
-			to_chat(owner, SPAN_DANGER("You fight off the invading tendrils of another mind, holding onto your own body!"))
-			return
 		owner.ghostize()
 	backup.active = 1
 	backup.transfer_to(owner)

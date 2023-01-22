@@ -10,6 +10,7 @@
 
 
 	stop_move = 1
+	force_stand = TRUE
 	reverse_facing = 1
 	can_absorb = 1
 	shield_assailant = 1
@@ -32,5 +33,13 @@
 
 	if(affecting.lying)
 		affecting.Weaken(4)
+
+	if(affecting.stat != CONSCIOUS)
+		force_stand = FALSE
+		shield_assailant = FALSE
+
+	else
+		force_stand = TRUE
+		shield_assailant = TRUE
 
 	affecting.adjustOxyLoss(1)

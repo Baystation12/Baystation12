@@ -7,7 +7,7 @@
 	item_state = "analyzer"
 	scan_sound = 'sound/effects/fastbeep.ogg'
 	printout_color = "#eeffe8"
-	var/global/list/valid_targets = list(
+	var/static/list/valid_targets = list(
 		/obj/item/reagent_containers/food/snacks/grown,
 		/obj/machinery/portable_atmospherics/hydroponics,
 		/obj/item/seeds

@@ -103,7 +103,7 @@
 	var/new_range = range + (rand(0,6) / severity) - (rand(0,3) / severity)
 	set_range(new_range)
 
-obj/item/device/suit_sensor_jammer/examine(mob/user, distance)
+/obj/item/device/suit_sensor_jammer/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 3)
 		var/list/message = list()
@@ -114,12 +114,12 @@ obj/item/device/suit_sensor_jammer/examine(mob/user, distance)
 			message += "is lacking a cell."
 		to_chat(user, jointext(message,.))
 
-obj/item/device/suit_sensor_jammer/CanUseTopic(user, state)
+/obj/item/device/suit_sensor_jammer/CanUseTopic(user, state)
 	if(!bcell || bcell.charge <= 0)
 		return STATUS_CLOSE
 	return ..()
 
-obj/item/device/suit_sensor_jammer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/item/device/suit_sensor_jammer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/list/methods = new
 	for(var/suit_sensor_jammer_method/ssjm in suit_sensor_jammer_methods)
 		methods[++methods.len] = list("name" = ssjm.name, "cost" = ssjm.energy_cost, "ref" = "\ref[ssjm]")
@@ -143,7 +143,7 @@ obj/item/device/suit_sensor_jammer/ui_interact(mob/user, ui_key = "main", var/da
 		ui.open()
 		ui.set_auto_update(1)
 
-obj/item/device/suit_sensor_jammer/OnTopic(var/mob/user, var/list/href_list, state)
+/obj/item/device/suit_sensor_jammer/OnTopic(var/mob/user, var/list/href_list, state)
 	if (href_list["enable_jammer"])
 		enable()
 		return TOPIC_REFRESH

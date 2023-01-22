@@ -7,7 +7,7 @@
 
 /obj/item/clothing/accessory/solgov/skillbadge/get_mob_overlay(mob/user_mob, slot)
 	var/image/I = ..()
-	if(!istype(loc,/obj/item/clothing/))
+	if(!istype(loc,/obj/item/clothing))
 		return I
 	I.icon_state = "ec_spec_badge"
 	I.color = badgecolor

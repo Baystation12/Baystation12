@@ -17,7 +17,7 @@
 	icon_state = "labcoat_cmo"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/cmoalt
-	name = "chief medical officer labcoat"
+	name = "chief medical officer's labcoat"
 	desc = "A labcoat with command blue highlights."
 	icon_state = "labcoat_cmoalt"
 
@@ -59,7 +59,7 @@
 		melee = ARMOR_MELEE_MINOR,
 		bio = ARMOR_BIO_MINOR
 		)
-	species_restricted = list(SPECIES_IPC)
+	species_restricted = list(SPECIES_IPC, SPECIES_SHELL)
 
 /obj/item/clothing/suit/storage/toggle/labcoat/foundation
 	name = "\improper Foundation labcoat"

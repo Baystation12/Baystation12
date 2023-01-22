@@ -39,20 +39,20 @@
 	if (jobban_isbanned(user, "Records"))
 		. += "[SPAN_WARNING("You are banned from using character records.")]"
 	else
-		.+= UIBUTTON("set_public_record", TextPreview(pref.public_record, 40), "Public")
-		.+= UIBUTTON("set_medical_records", TextPreview(pref.med_record, 40), "Medical")
-		.+= UIBUTTON("set_general_records", TextPreview(pref.gen_record, 40), "Employment")
-		.+= UIBUTTON("set_security_records", TextPreview(pref.sec_record, 40), "Security")
-		.+= UIBUTTON("set_memory", TextPreview(pref.memory, 40), "Memory")
+		.+= TBTN("set_public_record", TextPreview(pref.public_record, 40), "Public")
+		.+= TBTN("set_medical_records", TextPreview(pref.med_record, 40), "Medical")
+		.+= TBTN("set_general_records", TextPreview(pref.gen_record, 40), "Employment")
+		.+= TBTN("set_security_records", TextPreview(pref.sec_record, 40), "Security")
+		.+= TBTN("set_memory", TextPreview(pref.memory, 40), "Memory")
 
 	. += "<br><b>Other</b>:"
-	var/set_addr_button = UIBUTTON("set_email_addr", pref.email_addr ? pref.email_addr : "(default)", "Email Address")
+	var/set_addr_button = TBTN("set_email_addr", pref.email_addr ? pref.email_addr : "(default)", "Email Address")
 	var/list/branches = pref.for_each_selected_branch(CALLBACK(src, .proc/allow_email_branch_check))
 	for (var/name in branches)
 		set_addr_button += "  " + (branches[name] ? UI_FONT_GOOD(name) : UI_FONT_BAD(name))
 	. += set_addr_button
 
-	. += UIBUTTON("set_email_pass", pref.email_pass ? pref.email_pass : "(random)", "Email Password")
+	. += TBTN("set_email_pass", pref.email_pass ? pref.email_pass : "(random)", "Email Password")
 	. = jointext(., "<br>")
 
 /datum/category_item/player_setup_item/background/records/OnTopic(var/href,var/list/href_list, var/mob/user)

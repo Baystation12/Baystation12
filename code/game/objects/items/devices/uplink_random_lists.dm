@@ -34,7 +34,7 @@
 		return I
 	return uplink.items_assoc[/datum/uplink_item/item/stealthy_weapons/soap]
 
-var/list/uplink_random_selections_
+var/global/list/uplink_random_selections_
 /proc/get_uplink_random_selection_by_type(var/uplist_selection_type)
 	if(!uplink_random_selections_)
 		uplink_random_selections_ = init_subtypes(/datum/uplink_random_selection)
@@ -69,9 +69,9 @@ var/list/uplink_random_selections_
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/encryptionkey_binary)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/emag, 100, 50)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/clerical)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/space_suit, 50, 10)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/armor/space_suit, 50, 10) //proxima //was:/datum/uplink_item/item/tools/space_suit
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/thermal)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/heavy_armor)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/armor/heavy_armor) //proxima //was:/datum/uplink_item/item/tools/heavy_armor
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/powersink, 10, 10)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/ai_module, 25, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/polychromic_dye_bottle)
@@ -80,7 +80,7 @@ var/list/uplink_random_selections_
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/implants/imp_compress)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/implants/imp_explosive)
 
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/medical/sinpockets, reselect_propbability = 20)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/medical/combatstim, reselect_propbability = 20)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/medical/surgery, reselect_propbability = 10)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/medical/combat, reselect_propbability = 10)
 

@@ -99,6 +99,9 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/cabbageseed
 	seed_type = "cabbage"
 
+/obj/item/seeds/lettuceseed
+	seed_type = "lettuce"
+
 /obj/item/seeds/shandseed
 	seed_type = "shand"
 
@@ -266,6 +269,9 @@ var/global/list/plant_seed_sprites = list()
 
 /obj/item/seeds/puretobaccoseed
 	seed_type = "puretobacco"
+
+/obj/item/seeds/badtobaccoseed
+	seed_type = "badtobacco"
 
 /obj/item/seeds/kudzuseed
 	seed_type = "kudzu"

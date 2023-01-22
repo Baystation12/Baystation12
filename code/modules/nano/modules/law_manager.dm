@@ -8,8 +8,8 @@
 
 	var/current_view = 0
 
-	var/global/list/datum/ai_laws/admin_laws
-	var/global/list/datum/ai_laws/player_laws
+	var/static/list/datum/ai_laws/admin_laws
+	var/static/list/datum/ai_laws/player_laws
 	var/mob/living/silicon/owner = null
 
 /datum/nano_module/law_manager/New(var/mob/living/silicon/S)

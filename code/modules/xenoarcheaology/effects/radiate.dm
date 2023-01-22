@@ -10,7 +10,7 @@
 
 /datum/artifact_effect/radiate/DoEffectTouch(var/mob/living/user)
 	if(istype(user))
-		user.apply_damage(radiation_strength * 2,IRRADIATE, damage_flags = DAM_DISPERSED)
+		user.apply_damage(radiation_strength * 2, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 		user.updatehealth()
 		return 1
 

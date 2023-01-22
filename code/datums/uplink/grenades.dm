@@ -18,12 +18,12 @@
 /datum/uplink_item/item/grenades/smoke
 	name = "1x Smoke Grenade"
 	desc = "A grenade that will erupt into a vision obscuring cloud of smoke. Makes for great getaways!"
-	item_cost = 4
+	item_cost = 2
 	path = /obj/item/grenade/smokebomb
 
 /datum/uplink_item/item/grenades/smokes
 	name = "5x Smoke Grenades"
-	item_cost = 16
+	item_cost = 8
 	path = /obj/item/storage/box/smokes
 
 /datum/uplink_item/item/grenades/emp
@@ -39,34 +39,34 @@
 
 /datum/uplink_item/item/grenades/frag_high_yield
 	name = "Fragmentation Bomb"
-	item_cost = 24
+	item_cost = 20
 	antag_roles = list(MODE_MERCENARY) // yeah maybe regular traitors shouldn't be able to get these
 	path = /obj/item/grenade/frag/high_yield
 
 /datum/uplink_item/item/grenades/fragshell
 	name = "1x Fragmentation Shell"
 	desc = "Weaker than standard fragmentation grenades, these devices can be fired from a grenade launcher."
-	item_cost = 10
+	item_cost = 8
 	antag_roles = list(MODE_MERCENARY)
 	path = /obj/item/grenade/frag/shell
 
 /datum/uplink_item/item/grenades/fragshells
 	name = "5x Fragmentation Shells"
 	desc = "Weaker than standard fragmentation grenades, these devices can be fired from a grenade launcher."
-	item_cost = 40
+	item_cost = 32
 	antag_roles = list(MODE_MERCENARY)
 	path = /obj/item/storage/box/fragshells
 
 /datum/uplink_item/item/grenades/frag
 	name = "1x Fragmentation Grenade"
 	item_cost = 10
-	antag_roles = list(MODE_MERCENARY)
+	antag_costs = list(MODE_TRAITOR = 15)
 	path = /obj/item/grenade/frag
 
 /datum/uplink_item/item/grenades/frags
 	name = "5x Fragmentation Grenades"
-	item_cost = 40
-	antag_roles = list(MODE_MERCENARY)
+	item_cost = 30
+	antag_costs = list(MODE_TRAITOR = 40)
 	path = /obj/item/storage/box/frags
 
 /datum/uplink_item/item/grenades/supermatter

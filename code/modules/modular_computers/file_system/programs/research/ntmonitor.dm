@@ -10,7 +10,7 @@
 	required_access = access_network_admin
 	network_destination = "NTNet Statistics & Configuration" // This triggers logging when the program is opened and closed
 	available_on_ntnet = TRUE
-	nanomodule_path = /datum/nano_module/program/computer_ntnetmonitor/
+	nanomodule_path = /datum/nano_module/program/computer_ntnetmonitor
 	category = PROG_ADMIN
 
 /datum/nano_module/program/computer_ntnetmonitor

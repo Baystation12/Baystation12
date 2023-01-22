@@ -198,8 +198,7 @@
 		qdel(src)
 		return
 	icon = slide.img
-	transform = matrix()
-	transform *= 1 / slide.photo_size
+	SetTransform(scale = 1 / slide.photo_size)
 	pixel_x = -32 * round(slide.photo_size/2)
 	pixel_y = -32 * round(slide.photo_size/2)
 

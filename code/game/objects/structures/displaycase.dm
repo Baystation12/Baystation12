@@ -23,7 +23,7 @@
 		to_chat(user, "Inside you see [english_list(contents)].")
 
 /obj/structure/displaycase/ex_act(severity)
-	if (severity < 3)
+	if (severity < EX_ACT_LIGHT)
 		var/shuffled_contents = shuffle(contents)
 		for (var/atom/A as anything in shuffled_contents)
 			A.ex_act(severity + 1)
@@ -44,17 +44,19 @@
 				break
 	. = ..()
 
-/obj/structure/displaycase/handle_death_change(new_death_state)
-	if (new_death_state)
-		set_density(FALSE)
-		new /obj/item/material/shard(loc)
-		for(var/atom/movable/AM in src)
-			AM.dropInto(loc)
-		playsound(src, "shatter", 70, 1)
-		update_icon()
+/obj/structure/displaycase/on_death()
+	set_density(FALSE)
+	new /obj/item/material/shard(loc)
+	for(var/atom/movable/AM in src)
+		AM.dropInto(loc)
+	playsound(src, "shatter", 70, 1)
+	update_icon()
+
+/obj/structure/displaycase/on_revive()
+	update_icon()
 
 /obj/structure/displaycase/on_update_icon()
-	if(!is_alive())
+	if(health_dead)
 		icon_state = "glassboxb"
 	else
 		icon_state = "glassbox"
@@ -64,7 +66,7 @@
 
 /obj/structure/displaycase/attack_hand(mob/user as mob)
 	add_fingerprint(user)
-	if(is_alive())
+	if(!health_dead)
 		to_chat(usr, text("<span class='warning'>You kick the display case.</span>"))
 		visible_message("<span class='warning'>[usr] kicks the display case.</span>")
-		damage_health(2, BRUTE)
+		damage_health(2, DAMAGE_BRUTE)

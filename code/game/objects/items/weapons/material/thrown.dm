@@ -6,11 +6,12 @@
 	randpixel = 12
 	max_force = 10
 	force_multiplier = 0.1 // 6 with hardness 60 (steel)
-	thrown_force_multiplier = 0.75 // 15 with weight 20 (steel)
-	throw_speed = 10
+	thrown_force_multiplier = 1 // 20 with weight 20 (steel)
+	throw_speed = 8
 	throw_range = 15
 	sharp = TRUE
 	edge =  TRUE
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/material/star/New()
 	..()

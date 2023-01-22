@@ -49,7 +49,7 @@
 	name = "\improper Crashed Dropship"
 	icon_state = "A"
 
-/obj/item/paper/marooned/
+/obj/item/paper/marooned
 	name = "diary page"
 	language = LANGUAGE_HUMAN_RUSSIAN
 /obj/item/paper/marooned/note01

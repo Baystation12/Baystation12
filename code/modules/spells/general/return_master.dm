@@ -5,8 +5,8 @@
 	school = "conjuration"
 	charge_max = 600
 	spell_flags = 0
-	invocation = "none"
-	invocation_type = SpI_NONE
+	invocation = "In ordine ad reditum."
+	invocation_type = SpI_WHISPER
 	cooldown_min = 200
 
 	smoke_spread = 1

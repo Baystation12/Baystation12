@@ -460,7 +460,7 @@
 	if (isnull(budget) || budget < 0)
 		budget = 5
 
-	var/theme = input("Choose a theme:", "Theme") as anything in typesof(/datum/exoplanet_theme/) | null
+	var/theme = input("Choose a theme:", "Theme") as anything in typesof(/datum/exoplanet_theme) | null
 
 	if (!theme)
 		theme = /datum/exoplanet_theme

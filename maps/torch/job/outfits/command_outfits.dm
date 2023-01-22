@@ -53,8 +53,8 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/command/cmo/army
-	name = OUTFIT_JOB_NAME("Chief Medical Officer - Army")
-	uniform = /obj/item/clothing/under/solgov/utility/army/medical
+	name = OUTFIT_JOB_NAME("Chief Medical Officer - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer
@@ -77,8 +77,8 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/army
-	name = OUTFIT_JOB_NAME("Chief Engineer - Army")
-	uniform = /obj/item/clothing/under/solgov/utility/army/engineering
+	name = OUTFIT_JOB_NAME("Chief Engineer - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/engineering
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/command/cos
@@ -99,8 +99,8 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/command/cos/army
-	name = OUTFIT_JOB_NAME("Chief of Security - Army")
-	uniform = /obj/item/clothing/under/solgov/utility/army/security
+	name = OUTFIT_JOB_NAME("Chief of Security - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/passenger/workplace_liaison
@@ -124,6 +124,14 @@
 /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
 	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
+	shoes = /obj/item/clothing/shoes/dutyboots
+	l_ear = /obj/item/device/radio/headset/sea
+	id_types = list(/obj/item/card/id/torch/crew/sea)
+	pda_type = /obj/item/modular_computer/pda/heads
+
+/decl/hierarchy/outfit/job/torch/crew/command/sea/army
+	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 	l_ear = /obj/item/device/radio/headset/sea
 	id_types = list(/obj/item/card/id/torch/crew/sea)

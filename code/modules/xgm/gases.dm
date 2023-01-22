@@ -113,12 +113,16 @@
 /decl/xgm_gas/hydrogen/deuterium
 	id = GAS_DEUTERIUM
 	name = "Deuterium"
+	specific_heat = 80
+	molar_mass = 0.004
 	symbol_html = "D"
 	symbol = "D"
 
 /decl/xgm_gas/hydrogen/tritium
 	id = GAS_TRITIUM
 	name = "Tritium"
+	molar_mass = 0.006
+	specific_heat = 60
 	symbol_html = "T"
 	symbol = "T"
 
@@ -239,3 +243,13 @@
 	breathed_product = /datum/reagent/carbon_monoxide
 	symbol_html = "CO"
 	symbol = "CO"
+
+/decl/xgm_gas/boron
+	id = GAS_BORON
+	name = "Boron"
+	specific_heat = 11
+	molar_mass = 0.011
+	flags = XGM_GAS_FUSION_FUEL
+	breathed_product = /datum/reagent/toxin/boron
+	symbol_html = "B"
+	symbol = "B"

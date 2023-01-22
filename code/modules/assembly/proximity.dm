@@ -38,13 +38,13 @@
 	return secured
 
 
-/obj/item/device/assembly/prox_sensor/HasProximity(atom/movable/AM as mob|obj)
-	if(!istype(AM))
-		log_debug("DEBUG: HasProximity called with [AM] on [src] ([usr]).")
+/obj/item/device/assembly/prox_sensor/HasProximity(atom/movable/movable)
+	if (ismob(movable) && !isliving(movable))
 		return
-	if (istype(AM, /obj/effect/beam))	return
-	if (AM.move_speed < 12)	sense()
-	return
+	if (istype(movable, /obj/effect/beam))
+		return
+	if (movable.move_speed < 12)
+		sense()
 
 
 /obj/item/device/assembly/prox_sensor/sense()

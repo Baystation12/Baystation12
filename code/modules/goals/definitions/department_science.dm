@@ -1,7 +1,7 @@
 
 
 /datum/department/science
-	name = "Science"
+	name = "Научно-Исследовательский Отдел"
 	flag = SCI
 	goals = list(/datum/goal/department/extract_slime_cores)
 
@@ -13,10 +13,10 @@
 	..()
 
 /datum/goal/department/extract_slime_cores/update_strings()
-	description = "Extract at least [min_cores] slime core\s this shift."
+	description = "Извлеките по крайней мере [min_cores] ядер слизи в этой смене."
 
 /datum/goal/department/extract_slime_cores/get_summary_value()
-	return " ([GLOB.extracted_slime_cores_amount] core\s extracted so far)"
+	return " (Кол-во извлечённых ядер: [GLOB.extracted_slime_cores_amount])"
 
 /datum/goal/department/extract_slime_cores/check_success()
 	return (GLOB.extracted_slime_cores_amount >= min_cores)
@@ -28,5 +28,5 @@
 /datum/goal/achievement/notslimefodder
 	success = TRUE
 	failable = TRUE
-	description = "You're feeling extra careful today. Don't let a slime snack on you."
-	failure_message = "You feel sticky and miserable."
+	description = "Сегодня ты чувствуешь себя особенно осторожным. Не позволь слизи перекусить тобой."
+	failure_message = "Вы чувствуете себя липким и несчастным."

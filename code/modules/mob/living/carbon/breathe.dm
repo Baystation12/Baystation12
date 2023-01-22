@@ -38,7 +38,7 @@
 
 /mob/living/carbon/proc/get_breath_from_internal(var/volume_needed=STD_BREATH_VOLUME) //hopefully this will allow overrides to specify a different default volume without breaking any cases where volume is passed in.
 	if(internal)
-		if (!list_find(contents, internal))
+		if (!contents.Find(internal))
 			set_internals(null)
 		if (!(wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)))
 			set_internals(null)

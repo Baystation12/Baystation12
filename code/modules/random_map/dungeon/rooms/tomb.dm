@@ -1,4 +1,4 @@
-/datum/random_room/tomb/
+/datum/random_room/tomb
 	var/list/corpses = list("human" = 1)
 	var/direction = 0 //0 horizontal 1 vertical
 	var/chance_of_corpse = 30

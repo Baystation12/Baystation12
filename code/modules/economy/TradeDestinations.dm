@@ -1,6 +1,6 @@
 
-var/list/weighted_randomevent_locations = list()
-var/list/weighted_mundaneevent_locations = list()
+var/global/list/weighted_randomevent_locations = list()
+var/global/list/weighted_mundaneevent_locations = list()
 
 /datum/trade_destination
 	var/name = ""

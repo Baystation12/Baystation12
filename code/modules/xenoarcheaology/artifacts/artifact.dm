@@ -16,7 +16,7 @@
 	///TRUE if artifact can be damaged, FALSE otherwise.
 	var/can_damage = FALSE
 	///The damage type that can harm the artifact.
-	var/damage_type = DAM_SHARP
+	var/damage_type = DAMAGE_FLAG_SHARP
 	///Minimum force needed to cause damage. Only applicable when being melee'd.
 	var/min_force = 5
 	///Extra descriptor added to artifact analyzer results.
@@ -117,9 +117,9 @@
 	if(check_triggers(/datum/artifact_trigger/proc/on_explosion, severity))
 		return
 	switch(severity)
-		if(1)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
-		if(2)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 
@@ -163,13 +163,13 @@
 	health = rand(100, 200)
 	max_health = health
 
-	var/damage_types = list(DAM_SHARP, DAM_BULLET, DAM_EDGE, DAM_LASER)
+	var/damage_types = list(DAMAGE_FLAG_SHARP, DAMAGE_FLAG_BULLET, DAMAGE_FLAG_EDGE, DAMAGE_FLAG_LASER)
 	for (var/datum/artifact_effect/A in list(my_effect, secondary_effect))
 		if (istype(A.trigger, /datum/artifact_trigger/force))
-			damage_types -= list(DAM_SHARP, DAM_BULLET, DAM_EDGE)
+			damage_types -= list(DAMAGE_FLAG_SHARP, DAMAGE_FLAG_BULLET, DAMAGE_FLAG_EDGE)
 
 		if (istype(A.trigger, /datum/artifact_trigger/energy))
-			damage_types -= DAM_LASER
+			damage_types -= DAMAGE_FLAG_LASER
 
 		if (!length(damage_types)) //can't trigger effects without damaging us
 			can_damage = FALSE
@@ -190,13 +190,13 @@
 
 	damage_desc = "The physical structure is vulnerable to "
 	switch(damage_type)
-		if (DAM_SHARP)
+		if (DAMAGE_FLAG_SHARP)
 			damage_desc += "physical attack from serrated objects."
-		if (DAM_BULLET)
+		if (DAMAGE_FLAG_BULLET)
 			damage_desc += "high speed kinetic impact."
-		if (DAM_EDGE)
+		if (DAMAGE_FLAG_EDGE)
 			damage_desc += "physical strikes from edged objects."
-		if (DAM_LASER)
+		if (DAMAGE_FLAG_LASER)
 			damage_desc += "concentrated high-energy bursts."
 
 /**
@@ -259,7 +259,7 @@
 	. = ..()
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if (W.sharp && damage_type == DAM_SHARP || W.edge && damage_type == DAM_EDGE)
+	if (W.sharp && damage_type == DAMAGE_FLAG_SHARP || W.edge && damage_type == DAMAGE_FLAG_EDGE)
 		user.do_attack_animation(src)
 
 		if (W.force < min_force)

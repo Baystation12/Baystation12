@@ -6,7 +6,7 @@
 	icon_living = "drake"
 	icon_dead = "drake_dead"
 	mob_size = MOB_LARGE
-	speak_emote = list("hisses")
+	speak_emote = list("шипит")
 	response_help  = "pats"
 	response_disarm = "nudges"
 	response_harm   = "strikes"

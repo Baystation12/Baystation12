@@ -26,7 +26,7 @@
 	clogged = 0
 
 /obj/structure/hygiene/attackby(var/obj/item/thing, var/mob/user)
-	if(clogged > 0 && isPlunger(thing))
+	if(clogged > 0 && isplunger(thing))
 		user.visible_message("<span class='notice'>\The [user] strives valiantly to unclog \the [src] with \the [thing]!</span>")
 		spawn
 			playsound(loc, 'sound/effects/plunger.ogg', 75, 1)
@@ -38,7 +38,7 @@
 			playsound(loc, 'sound/effects/plunger.ogg', 75, 1)
 			sleep(5)
 			playsound(loc, 'sound/effects/plunger.ogg', 75, 1)
-		if(do_after(user, 45, src) && clogged > 0)
+		if(do_after(user, 4.5 SECONDS, src, DO_PUBLIC_UNIQUE) && clogged > 0)
 			visible_message("<span class='notice'>With a loud gurgle, \the [src] begins flowing more freely.</span>")
 			playsound(loc, pick(SSfluids.gurgles), 100, 1)
 			clogged--
@@ -136,7 +136,7 @@
 	if(isCrowbar(I))
 		to_chat(user, "<span class='notice'>You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"].</span>")
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
-		if(do_after(user, 30, src))
+		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			user.visible_message("<span class='notice'>[user] [cistern ? "replaces the lid on the cistern" : "lifts the lid off the cistern"]!</span>", "<span class='notice'>You [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]!</span>", "You hear grinding porcelain.")
 			cistern = !cistern
 			update_icon()
@@ -153,7 +153,7 @@
 			if(open && !swirlie)
 				user.visible_message("<span class='danger'>\The [user] starts jamming \the [GM]'s face into \the [src]!</span>")
 				swirlie = GM
-				if(do_after(user, 30, src))
+				if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 					user.visible_message("<span class='danger'>\The [user] gives [GM.name] a swirlie!</span>")
 					GM.adjustOxyLoss(5)
 				swirlie = null
@@ -247,7 +247,7 @@
 		var/newtemp = input(user, "What setting would you like to set the temperature valve to?", "Water Temperature Valve") in temperature_settings
 		to_chat(user,"<span class='notice'>You begin to adjust the temperature valve with \the [I].</span>")
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 50, src))
+		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 			watertemp = newtemp
 			user.visible_message("<span class='notice'>\The [user] adjusts \the [src] with \the [I].</span>", "<span class='notice'>You adjust the shower with \the [I].</span>")
 			add_fingerprint(user)
@@ -383,7 +383,7 @@
 	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
-	if(!do_after(user, 40, src))
+	if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 		busy = 0
 		return TRUE
 	busy = 0
@@ -396,7 +396,7 @@
 
 /obj/structure/hygiene/sink/attackby(obj/item/O as obj, var/mob/living/user)
 
-	if(isPlunger(O) && clogged > 0)
+	if(isplunger(O) && clogged > 0)
 		return ..()
 
 	if(busy)
@@ -443,12 +443,12 @@
 	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
-	if(!do_after(user, 40, src))
+	if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 		busy = 0
 		return TRUE
 	busy = 0
 
-	if(istype(O, /obj/item/extinguisher/)) return TRUE // We're washing, not filling.
+	if(istype(O, /obj/item/extinguisher)) return TRUE // We're washing, not filling.
 
 	O.clean_blood()
 	user.visible_message( \
@@ -487,7 +487,7 @@
 	if (clogged)
 		to_chat(user, SPAN_WARNING("\The [src] is already clogged."))
 		return
-	if (!do_after(user, 3 SECONDS, src))
+	if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 		return
 	if (clogged || QDELETED(I) || !user.unEquip(I))
 		return
@@ -550,7 +550,7 @@
 		new /obj/item/faucet (loc)
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 		user.visible_message(
-			SPAN_WARNING("\The [user] unwrenches the \the [src]."),
+			SPAN_WARNING("\The [user] unwrenches \the [src]."),
 			SPAN_WARNING("You unwrench \the [src].")
 		)
 		qdel(src)
@@ -561,11 +561,14 @@
 	. = ..()
 	open = !open
 	if(open)
-		playsound(src.loc, 'sound/effects/closet_open.ogg', 20, 1)
+		playsound(loc, 'sound/effects/closet_open.ogg', 20, 1)
 	else
-		playsound(src.loc, 'sound/effects/closet_close.ogg', 20, 1)
+		playsound(loc, 'sound/effects/closet_close.ogg', 20, 1)
 
-	user.visible_message(SPAN_NOTICE("\The [user] has [open ? "opened" : "closed"] the faucet."))
+	user.visible_message(
+		SPAN_NOTICE("\The [user] has [open ? "opened" : "closed"] \the [src]."),
+		SPAN_NOTICE("You [open ? "open" : "close"] \the [src].")
+	)
 	update_icon()
 
 /obj/structure/hygiene/faucet/on_update_icon()
@@ -588,13 +591,13 @@
 			O.dir = dir
 			playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 			user.visible_message(
-				SPAN_WARNING("\The [user] wrenches the \the [src] down."),
+				SPAN_WARNING("\The [user] wrenches \the [src] down."),
 				SPAN_WARNING("You wrench \the [src] down.")
 			)
 			qdel(src)
-			return
 		else
 			to_chat(user, SPAN_WARNING("\The [src] can only be secured to pool tiles!"))
+		return TRUE
 	return ..()
 
 /obj/structure/hygiene/faucet/proc/water_flow()

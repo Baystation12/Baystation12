@@ -1,6 +1,6 @@
-var/list/all_robolimbs = list()
-var/list/chargen_robolimbs = list()
-var/datum/robolimb/basic_robolimb
+var/global/list/all_robolimbs = list()
+var/global/list/chargen_robolimbs = list()
+var/global/datum/robolimb/basic_robolimb
 
 /proc/populate_robolimb_list()
 	basic_robolimb = new()

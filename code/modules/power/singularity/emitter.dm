@@ -138,7 +138,7 @@
 	efficiency *= 1 + (rand() - 1) * skill_modifier //subtract off between 0.8 and 0, depending on skill and luck.
 
 /obj/machinery/power/emitter/emp_act(var/severity)
-	return 1
+	return
 
 /obj/machinery/power/emitter/Process()
 	if (stat & (BROKEN))
@@ -231,7 +231,7 @@
 						SPAN_NOTICE("You start to weld \the [src] to the floor."),
 						SPAN_ITALIC("You hear welding.")
 					)
-					if (do_after(user, 20, src))
+					if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 						if (!WT.isOn())
 							return
 						state = EMITTER_WELDED
@@ -252,7 +252,7 @@
 						SPAN_NOTICE("You start to cut \the [src] free from the floor."),
 						SPAN_ITALIC("You hear welding.")
 					)
-					if (do_after(user, 20, src))
+					if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 						if (!WT.isOn())
 							return
 						state = EMITTER_WRENCHED

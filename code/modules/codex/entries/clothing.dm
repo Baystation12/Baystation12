@@ -1,7 +1,7 @@
 
 // Clothing armour values.
 /obj/item/clothing
-	var/global/list/armour_to_descriptive_term = list(
+	var/static/list/armour_to_descriptive_term = list(
 		"melee" = "blunt force",
 		"bullet" = "ballistics",
 		"laser" = "lasers",

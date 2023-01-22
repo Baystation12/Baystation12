@@ -102,3 +102,9 @@
 
 /turf/simulated/floor/is_floor()
 	return TRUE
+
+/turf/simulated/IgniteTurf(power, fire_colour)
+	if(turf_fire)
+		turf_fire.AddPower(power)
+		return
+	new /obj/effect/turf_fire(src, power, fire_colour)

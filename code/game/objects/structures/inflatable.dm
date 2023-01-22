@@ -26,7 +26,7 @@
 		SPAN_ITALIC("You can hear rushing air."),
 		range = 5
 	)
-	if (!do_after(user, 1 SECOND))
+	if (!do_after(user, 1 SECOND, target, DO_PUBLIC_PROGRESS))
 		return
 	obstruction = T.get_obstruction()
 	if (obstruction)
@@ -128,11 +128,11 @@
 
 /obj/structure/inflatable/bullet_act(obj/item/projectile/Proj)
 	. = ..()
-	if (!is_alive())
+	if (health_dead)
 		return PROJECTILE_CONTINUE
 
 /obj/structure/inflatable/ex_act(severity)
-	if (severity == 1)
+	if (severity == EX_ACT_DEVASTATING)
 		qdel(src)
 		return
 	..()
@@ -161,10 +161,8 @@
 
 	..()
 
-/obj/structure/inflatable/handle_death_change(new_death_state)
-	. = ..()
-	if (new_death_state)
-		deflate(TRUE)
+/obj/structure/inflatable/on_death()
+	deflate(TRUE)
 
 /obj/structure/inflatable/CtrlClick()
 	return hand_deflate()
@@ -310,9 +308,9 @@
 	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "folded_wall_torn"
 
-	attack_self(mob/user)
-		to_chat(user, "<span class='notice'>The inflatable wall is too torn to be inflated!</span>")
-		add_fingerprint(user)
+/obj/item/inflatable/torn/attack_self(mob/user)
+	to_chat(user, "<span class='notice'>The inflatable wall is too torn to be inflated!</span>")
+	add_fingerprint(user)
 
 /obj/item/inflatable/door/torn
 	name = "torn inflatable door"
@@ -320,15 +318,15 @@
 	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "folded_door_torn"
 
-	attack_self(mob/user)
-		to_chat(user, "<span class='notice'>The inflatable door is too torn to be inflated!</span>")
-		add_fingerprint(user)
+/obj/item/inflatable/door/torn/attack_self(mob/user)
+	to_chat(user, "<span class='notice'>The inflatable door is too torn to be inflated!</span>")
+	add_fingerprint(user)
 
 /obj/item/storage/briefcase/inflatable
 	name = "inflatable barrier box"
 	desc = "Contains inflatable walls and doors."
 	icon_state = "inf_box"
-	item_state = "syringe_kit"
+	item_state = "painted_secure"
 	w_class = ITEM_SIZE_LARGE
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 	can_hold = list(/obj/item/inflatable)

@@ -10,7 +10,7 @@
 	var/armor_range_mult = 2
 	// [under_armor_mult] multiplies how strongly damage that is <= armor value is blocked.
 	//  E.g. setting it to 0 will flat out block all damage below armor
-	var/under_armor_mult = 0.7
+	var/under_armor_mult = 1
 	// [over_armor_mult] multiplies how strongly damage that is > armor value is blocked.
 	//  E.g. setting it to more than 1 will make mitigation drop off faster, effectively reducing the range of damage mitigation
 	var/over_armor_mult = 1
@@ -33,10 +33,10 @@
 	// Blocking values that mean the damage was under armor, so all dangerous flags are removed (edge/sharp)
 	var/armor_border_blocking = 1 - (under_armor_mult * 1/armor_range_mult)
 	if(blocked >= armor_border_blocking)
-		if(damage_flags & DAM_LASER)
+		if(damage_flags & DAMAGE_FLAG_LASER)
 			damage *= FLUIDLOSS_CONC_BURN/FLUIDLOSS_WIDE_BURN
-		damage_flags &= ~(DAM_SHARP | DAM_EDGE | DAM_LASER)
-	if(damage_type == IRRADIATE)
+		damage_flags &= ~(DAMAGE_FLAG_SHARP | DAMAGE_FLAG_EDGE | DAMAGE_FLAG_LASER)
+	if (damage_type == DAMAGE_RADIATION)
 		damage = max(0, damage - 100 * blocked)
 		silent = TRUE
 	damage *= 1 - blocked
@@ -75,27 +75,27 @@
 /proc/get_armor_key(damage_type, damage_flags)
 	var/key
 	switch(damage_type)
-		if(BRUTE)
-			if(damage_flags & DAM_BULLET)
+		if (DAMAGE_BRUTE)
+			if(damage_flags & DAMAGE_FLAG_BULLET)
 				key = "bullet"
-			else if(damage_flags & DAM_EXPLODE)
+			else if(damage_flags & DAMAGE_FLAG_EXPLODE)
 				key = "bomb"
 			else
 				key = "melee"
-		if(BURN)
-			if(damage_flags & DAM_LASER)
+		if (DAMAGE_BURN)
+			if(damage_flags & DAMAGE_FLAG_LASER)
 				key = "laser"
-			else if(damage_flags & DAM_EXPLODE)
+			else if(damage_flags & DAMAGE_FLAG_EXPLODE)
 				key = "bomb"
 			else
 				key = "energy"
-		if(TOX)
-			if(damage_flags & DAM_BIO)
+		if (DAMAGE_TOXIN)
+			if(damage_flags & DAMAGE_FLAG_BIO)
 				key = "bio" // Otherwise just not blocked by default.
-		if(IRRADIATE)
+		if (DAMAGE_RADIATION)
 			key = "rad"
-		if(PSIONIC)
-			key = PSIONIC
+		if (DAMAGE_PSIONIC)
+			key = DAMAGE_PSIONIC
 	return key
 
 /datum/extension/armor/toggle

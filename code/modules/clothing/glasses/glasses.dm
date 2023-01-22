@@ -92,6 +92,7 @@
 						M.disabilities &= ~NEARSIGHTED
 			if(toggleable)
 				deactivate(M, FALSE)
+	..()
 
 /obj/item/clothing/glasses/attack_self(mob/user)
 	if(toggleable && !user.incapacitated())

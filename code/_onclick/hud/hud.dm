@@ -62,7 +62,7 @@
 		var/stamina = mymob.get_stamina()
 		if(stamina < 100)
 			stamina_bar.invisibility = 0
-			stamina_bar.icon_state = "prog_bar_[Floor(stamina/5)*5]"
+			stamina_bar.icon_state = "priv_prog_bar_[Floor(stamina/5)*5]"
 
 /datum/hud/proc/hidden_inventory_update()
 	if(!mymob) return

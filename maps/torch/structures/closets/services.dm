@@ -41,8 +41,7 @@
 		/obj/item/wirecutters/clippers,
 		/obj/item/reagent_containers/spray/plantbgone,
 		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/apron, /obj/item/clothing/suit/apron/overalls)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/hydroponics, /obj/item/storage/backpack/satchel/hyd)),
-		new /datum/atom_creator/simple(/obj/item/storage/backpack/messenger/hyd, 50)
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/hydroponics, /obj/item/storage/backpack/satchel/hyd))
 	)
 
 /obj/structure/closet/jcloset_torch

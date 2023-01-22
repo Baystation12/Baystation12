@@ -19,8 +19,8 @@
 	cell = /obj/item/cell/hyper
 	capacitor = /obj/item/stock_parts/capacitor/adv
 	gun_unreliable = 0
-	var/slowdown_held = 3
-	var/slowdown_worn = 2
+	var/slowdown_held = 2
+	var/slowdown_worn = 1
 
 /obj/item/gun/magnetic/railgun/Initialize()
 	slowdown_per_slot[slot_l_hand] =  slowdown_held
@@ -113,9 +113,6 @@
 	capacitor = /obj/item/stock_parts/capacitor/super
 
 	fire_delay =  8
-	slowdown_held = 4
-
-	slowdown_worn = 3
 
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_NO_CONTAINER
@@ -173,7 +170,6 @@
 	one_hand_penalty = 3
 	fire_delay = 10
 	slowdown_held = 1
-	slowdown_worn = 1
 	removable_components = FALSE
 	cell = /obj/item/cell/hyper
 	capacitor = /obj/item/stock_parts/capacitor/adv

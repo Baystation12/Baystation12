@@ -44,8 +44,7 @@
 		/obj/item/storage/belt/general,
 		/obj/item/stamp/cargo,
 		/obj/item/stamp/denied,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack = 75, /obj/item/storage/backpack/satchel/grey = 25)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/messenger = 75, /obj/item/storage/backpack/dufflebag = 25))
+		/obj/item/storage/backpack/dufflebag
 	)
 
 /obj/structure/closet/secure_closet/deckofficer
@@ -70,14 +69,14 @@
 		/obj/item/device/flash,
 		//proxima code start,
 		/obj/item/device/remote_device/quartermaster,
+		/obj/item/storage/box/encryptionkey/supply,
 		//proxima code end,
 		/obj/item/device/megaphone,
 		/obj/item/device/holowarrant,
 		/obj/item/clothing/suit/armor/pcarrier/light/sol,
 		/obj/item/device/binoculars,
 		/obj/item/storage/belt/general,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack = 75, /obj/item/storage/backpack/satchel/grey = 25)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/messenger = 75, /obj/item/storage/backpack/dufflebag = 25))
+		/obj/item/storage/backpack/dufflebag
 	)
 
 /obj/structure/closet/secure_closet/prospector
@@ -104,6 +103,5 @@
 		/obj/item/device/radio,
 		/obj/item/clothing/glasses/material,
 		/obj/item/clothing/glasses/meson,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/industrial, /obj/item/storage/backpack/satchel/eng, /obj/item/storage/backpack/messenger/engi)),
 		/obj/item/storage/backpack/dufflebag/eng
 	)

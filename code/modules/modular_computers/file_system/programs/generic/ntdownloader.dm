@@ -11,7 +11,7 @@
 	requires_ntnet = TRUE
 	requires_ntnet_feature = NTNET_SOFTWAREDOWNLOAD
 	available_on_ntnet = FALSE
-	nanomodule_path = /datum/nano_module/program/computer_ntnetdownload/
+	nanomodule_path = /datum/nano_module/program/computer_ntnetdownload
 	ui_header = "downloader_finished.gif"
 	var/datum/computer_file/program/downloaded_file = null
 	var/hacked_download = FALSE
@@ -115,7 +115,7 @@
 	if(href_list["PRG_downloadfile"])
 		if(!downloaded_file)
 			begin_file_download(href_list["PRG_downloadfile"], usr.get_skill_value(SKILL_COMPUTER))
-		else if(check_file_download(href_list["PRG_downloadfile"]) && !list_find(downloads_queue, href_list["PRG_downloadfile"]) && downloaded_file.filename != href_list["PRG_downloadfile"])
+		else if(check_file_download(href_list["PRG_downloadfile"]) && !downloads_queue.Find(href_list["PRG_downloadfile"]) && downloaded_file.filename != href_list["PRG_downloadfile"])
 			downloads_queue[href_list["PRG_downloadfile"]] = usr.get_skill_value(SKILL_COMPUTER)
 		return TOPIC_HANDLED
 	if(href_list["PRG_removequeued"])

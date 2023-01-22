@@ -3,7 +3,7 @@
 
 /obj/item/material/withstand_psi_stress(var/stress, var/atom/source)
 	. = ..(stress, source)
-	if(is_alive() && . > 0 && disrupts_psionics())
+	if(!health_dead && . > 0 && disrupts_psionics())
 		damage_health(.)
 		. = max(0, -(get_current_health()))
 

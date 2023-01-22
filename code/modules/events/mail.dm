@@ -42,7 +42,7 @@
 		kill(TRUE)
 
 /datum/event/mail/announce()
-	command_announcement.Announce("A batch of mail addressed to the crew of \the [location_name()] has arrived at the sorting office and will arrive on the next available supply shuttle.", pick("Major Bill's Shipping", "Flefingbridge Transport", "SolX Freight", "QuiCo. Mailing Services"), zlevels = affecting_z)
+	command_announcement.Announce("Партия почты, адресованная экипажу [location_name()], прибыла в сортировочный пункт и прибудет на следующем доступном транспортном шаттле.", pick("Major Bill's Shipping", "Flefingbridge Transport", "SolX Freight", "QuiCo. Mailing Services"), zlevels = affecting_z)
 
 /datum/event/mail/tick()
 	var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle

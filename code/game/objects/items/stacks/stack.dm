@@ -134,7 +134,7 @@
 
 	if (recipe.time)
 		to_chat(user, "<span class='notice'>Building [recipe.display_name()] ...</span>")
-		if (!user.do_skilled(recipe.time, SKILL_CONSTRUCTION))
+		if (!user.do_skilled(recipe.time, SKILL_CONSTRUCTION, src))
 			return
 
 	if (use(required))

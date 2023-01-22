@@ -2,8 +2,8 @@
 /decl/emote/exertion/biological
 	key = "esweat"
 	emote_range = 4
-	emote_message_1p = "You are sweating heavily."
-	emote_message_3p = "USER is sweating heavily."
+	emote_message_1p = "Вы сильно потеете."
+	emote_message_3p = "USER сильно потеет."
 
 /decl/emote/exertion/biological/check_user(mob/living/user)
 	if(istype(user) && !user.isSynthetic())
@@ -27,8 +27,8 @@
 	key = "ewhine"
 	emote_range = 3
 	message_type = AUDIBLE_MESSAGE
-	emote_message_1p = "You overstress your actuators."
-	emote_message_3p = "USER's actuators whine with strain."
+	emote_message_1p = "Вы перегрузили свои приводы."
+	emote_message_3p = "USER's приводы становятся белыми от напряжения."
 
 /decl/emote/exertion/synthetic/check_user(mob/living/user)
 	if(istype(user) && user.isSynthetic())
@@ -37,5 +37,5 @@
 
 /decl/emote/exertion/synthetic/creak
 	key = "ecreak"
-	emote_message_1p = "Your chassis stress indicators spike."
+	emote_message_1p = "Показатели нагрузки на шасси резко возрастают."
 	emote_message_3p = "USER's joints creak with stress."

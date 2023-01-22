@@ -1,5 +1,4 @@
-/mob/living/carbon/human
-	hud_type = /datum/hud/human
+/mob/living/carbon/human/hud_type = /datum/hud/human
 
 /datum/hud/human/FinalizeInstantiation(var/ui_style='icons/mob/screen1_White.dmi', var/ui_color = "#ffffff", var/ui_alpha = 255)
 	var/mob/living/carbon/human/target = mymob
@@ -289,6 +288,11 @@
 		target.film_grain.mouse_opacity = 0
 		if(GLOB.film_grain_stat)
 			hud_elements |= target.film_grain
+
+		target.parkour = new /obj/screen/parkour(null)
+		target.parkour.screen_loc = ui_parkour
+		target.parkour.passthrought = image(target.parkour.icon, "passthrought")
+		hud_elements |= target.parkour
 
 	mymob.client.screen = list()
 

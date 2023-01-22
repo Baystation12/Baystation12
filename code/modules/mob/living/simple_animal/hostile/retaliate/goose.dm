@@ -5,7 +5,7 @@
 	icon_state = "goose"
 	icon_living = "goose"
 	icon_dead = "goose_dead"
-	speak_emote = list("honks")
+	speak_emote = list("гудит")
 	response_help =  "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "strikes"
@@ -44,7 +44,7 @@
 	gender = PLURAL
 	attack_verb = list("smacked around")
 	force = 0
-	damtype = BRUTE
+	damtype = DAMAGE_BRUTE
 	canremove = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/goose/on_update_icon()

@@ -31,7 +31,7 @@
 	name = "shadow tendril"
 	attack_verb = list("gripped")
 	hitsound = 'sound/hallucinations/growl1.ogg'
-	damtype = BURN
+	damtype = DAMAGE_BURN
 	force = 15
 
 /mob/living/simple_animal/hostile/faithless/Allow_Spacemove(var/check_drift = 0)

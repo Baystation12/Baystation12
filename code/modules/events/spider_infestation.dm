@@ -1,4 +1,4 @@
-/var/global/sent_spiders_to_station = 0
+var/global/sent_spiders_to_station = 0
 
 /datum/event/spider_infestation
 	announceWhen	= 90
@@ -7,13 +7,15 @@
 
 
 /datum/event/spider_infestation/setup()
+	var/list/active_with_role = number_active_with_role()
 	announceWhen = rand(announceWhen, announceWhen + 60)
 	if (severity <= EVENT_LEVEL_MODERATE)
 		spawncount = 3 * severity
 	else
 		spawncount = 5 * severity
-	guaranteed_to_grow = round(rand(spawncount / 3, spawncount / 2))
-	sent_spiders_to_station = 0
+	spawncount = min(spawncount, round(active_with_role["Any"] / 2))
+	guaranteed_to_grow = max(round(rand(spawncount / 3, spawncount / 2)), severity <= EVENT_LEVEL_MODERATE ? 3 : 5)
+	sent_spiders_to_station = TRUE
 
 /datum/event/spider_infestation/announce()
 	GLOB.using_map.unidentified_lifesigns_announcement()

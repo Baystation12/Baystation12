@@ -29,7 +29,12 @@ SUBSYSTEM_DEF(goals)
 	if(!length(pending_goals))
 		flags |= SS_NO_FIRE
 
-/datum/controller/subsystem/goals/Initialize()
+
+/datum/controller/subsystem/goals/UpdateStat(time)
+	return
+
+
+/datum/controller/subsystem/goals/Initialize(start_uptime)
 	var/list/all_depts = subtypesof(/datum/department)
 	//See if map is very particular about what depts it has
 	if(LAZYLEN(GLOB.using_map.departments))
@@ -53,9 +58,9 @@ SUBSYSTEM_DEF(goals)
 	. = list()
 	for(var/thing in departments)
 		var/datum/department/dept = departments[thing]
-		. += "<b>[dept.name] had the following shift goals:</b>"
+		. += "<b>[dept.name] имел следующие цели смены:</b>"
 		. += dept.summarize_goals(show_success = TRUE)
 	if(LAZYLEN(.))
 		. = "<br>[jointext(., "<br>")]"
 	else
-		. = "<br><b>There were no departmental goals this round.</b>"
+		. = "<br><b>В этом раунде не было никаких ведомственных целей.</b>"

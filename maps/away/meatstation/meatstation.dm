@@ -4,7 +4,7 @@
 	name = "Unpowered Research Station"
 	desc = "An unpowered research station. A large quantity of nearby debris blocks more detail."
 	icon_state = "object"
-	known = 0
+	known = FALSE
 	initial_generic_waypoints = list(
 		"nav_meatstation_1",
 		"nav_meatstation_2",
@@ -182,7 +182,7 @@
 	tracer_type = /obj/effect/projectile/meatstation/tracer
 	impact_type = /obj/effect/projectile/meatstation/impact
 
-/obj/effect/projectile/meatstation/
+/obj/effect/projectile/meatstation
 	light_color = COLOR_RED_LIGHT
 	icon = 'maps/away/meatstation/meatstation_sprites.dmi'
 
@@ -254,7 +254,7 @@
 	name = "apology letter"
 	info = "Dear Chief Daniels,<br><br>I'm sorry I'm a brilliant scientist. I'm sorry I spent months of my life perfecting the genes of a highly volatile xenoflora sample. I'm sorry your idiot dockhand thought that xenoflora sample was a plum tree. I'm sorry that idiot dockhand decided to pick some fruit from the xenoflora sample. I'm sorry that Mr. Idiot Dockhand decided to consume said fruit while standing in the cargo airlock. I'm sorry you whined and cried about how it was all my fault. I'm sorry I'm now required to hand write you an apology letter. I'm sorry you've been avoiding me these past few days. Most of all, I'm sorry I haven't been able to share my thoughts with you on this matter in person, one on one.<br><br>Regards,<br><br>You know who I am, you little shit.<br><br><br>P.S.<br>I know you'll be at Robertson's demonstration tomorrow. Maybe we can have a little chat afterwards."
 
-obj/item/paper/meatstation/weapon_note//and this one's here to give players some mechanical knowledge about the gun unique to this away site
+/obj/item/paper/meatstation/weapon_note//and this one's here to give players some mechanical knowledge about the gun unique to this away site
 	name = "note"
 	info = "Okay, admittedly going with the LP76's wouldn't be all sunshine and rainbows, but it's still the right call. Yeah sure, maybe they've got a slower fire rate. And yes, you could argue that technically, since they were originally designed to be a non-lethal alternative, they might not pack the punch of today's weapons. But we're getting a hell of a deal here! If we go with the LP76's, we'll actually be able to afford enough of them to arm the entire security team, and then some! And just because they're non-lethal weapons doesn't mean they're not effective. They hurt like hell, and those stun beams are intense enough to burn flesh!<br>Look, let's be real here: the security team is pretty much just pirate deterrent. If some pirates do decide to raid us, once they see we're shooting back they'll go running back to whatever 'roid base they call home. I guarantee we won't need anything beefier than the LP76. Trust me."
 

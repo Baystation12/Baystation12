@@ -15,6 +15,8 @@
 /datum/uplink_category/ammunition
 	name = "Ammunition"
 
+/datum/uplink_category/armor
+	name = "Armor and Hardsuits"
 /datum/uplink_category/grenades
 	name = "Grenades"
 

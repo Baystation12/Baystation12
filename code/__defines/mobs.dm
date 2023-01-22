@@ -307,6 +307,8 @@
 #define BP_GROIN  "groin"
 #define BP_ALL_LIMBS list(BP_CHEST, BP_GROIN, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
 #define BP_BY_DEPTH list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_CHEST)
+#define BP_LEGS_FEET list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
+#define BP_ARMS_HANDS list(BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND)
 
 // Prosthetic helpers.
 #define BP_IS_ROBOTIC(org)  ((org) && ((org).status & ORGAN_ROBOTIC))
@@ -375,11 +377,12 @@
 #define SPECIES_MULE        "Mule"
 #define SPECIES_MONKEY      "Monkey"
 #define SPECIES_NABBER         "giant armoured serpentid"
+#define SPECIES_FBP				"Full Body Prosthesis" //just for xeno-panel //proxima
 
 #define UNRESTRICTED_SPECIES list(SPECIES_HUMAN, SPECIES_DIONA, SPECIES_IPC, SPECIES_UNATHI, SPECIES_YEOSA, SPECIES_SKRELL, SPECIES_TRITONIAN, SPECIES_SPACER, SPECIES_VATGROWN, SPECIES_GRAVWORLDER, SPECIES_MULE, SPECIES_SHELL)
 #define RESTRICTED_SPECIES   list(SPECIES_VOX, SPECIES_ALIEN, SPECIES_GOLEM)
 #define HUMAN_SPECIES        list(SPECIES_HUMAN, SPECIES_VATGROWN, SPECIES_SPACER, SPECIES_GRAVWORLDER, SPECIES_MULE)
-#define SOUNDED_SPECIES list(SPECIES_HUMAN, SPECIES_VATGROWN, SPECIES_SPACER, SPECIES_TRITONIAN, SPECIES_GRAVWORLDER, SPECIES_MULE, SPECIES_UNATHI, SPECIES_YEOSA, SPECIES_SKRELL)
+#define SOUNDED_SPECIES list(SPECIES_HUMAN, SPECIES_VATGROWN, SPECIES_SPACER, SPECIES_TRITONIAN, SPECIES_GRAVWORLDER, SPECIES_MULE, SPECIES_UNATHI, SPECIES_YEOSA, SPECIES_SKRELL, SPECIES_SHELL)
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
@@ -406,8 +409,8 @@
 #define MOB_INPUT_MESSAGE "message"
 #define MOB_INPUT_NUM "num"
 
-#define MOB_CLIMB_TIME_SMALL 30
-#define MOB_CLIMB_TIME_MEDIUM 50
+#define MOB_CLIMB_TIME_SMALL (3 SECONDS)
+#define MOB_CLIMB_TIME_MEDIUM (5 SECONDS)
 
 #define MOB_FACTION_NEUTRAL "neutral"
 
@@ -418,6 +421,8 @@
 
 /// This mob is allergic to holiness
 #define MOB_FLAG_HOLY_BAD FLAG(0)
+/// This mob cannot be pinned to walls by sharp objects
+#define MOB_FLAG_UNPINNABLE FLAG(1)
 
 // More refined version of SA_* ""intelligence"" seperators.
 // Now includes bitflags, so to target two classes you just do 'MOB_CLASS_ANIMAL|MOB_CLASS_HUMANOID'
@@ -463,11 +468,18 @@
 #define DO_PUBLIC_PROGRESS   FLAG(9)
 #define DO_MOVE_CHECKS_TURFS FLAG(10)
 #define DO_FAIL_FEEDBACK     FLAG(11)
+#define DO_BAR_OVER_USER     FLAG(12) // Forces the progress bar to appear over the user instead of the target
 
 #define DO_BOTH_CAN_MOVE     (DO_USER_CAN_MOVE | DO_TARGET_CAN_MOVE)
 #define DO_BOTH_CAN_TURN     (DO_USER_CAN_TURN | DO_TARGET_CAN_TURN)
 #define DO_BOTH_UNIQUE_ACT   (DO_USER_UNIQUE_ACT | DO_TARGET_UNIQUE_ACT)
 #define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN | DO_FAIL_FEEDBACK)
+
+// Preset do_After flags
+#define DO_PUBLIC_UNIQUE     (DO_DEFAULT | DO_PUBLIC_PROGRESS | DO_BOTH_UNIQUE_ACT) // Common flags for actions that should be public and unique
+#define DO_SURGERY           (DO_DEFAULT | DO_PUBLIC_PROGRESS) // Flags for surgery steps. No unique checks to allow multi-surgery steps.
+#define DO_MEDICAL           (DO_DEFAULT | DO_PUBLIC_PROGRESS) // Flags for medical steps. No unique checks to allow multi-bandaging steps.
+#define DO_EQUIP             (DO_DEFAULT | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) // Flags for equipping/unequipping mobs. Set to allow a mob to be targeted by multiple sources, but for a source to only be able to perform one action at a time.
 
 #define DO_MISSING_USER      (-1)
 #define DO_MISSING_TARGET    (-2)

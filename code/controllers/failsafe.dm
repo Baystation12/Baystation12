@@ -4,7 +4,7 @@
   * Pretty much pokes the MC to make sure it's still alive.
  **/
 
-GLOBAL_REAL(Failsafe, /datum/controller/failsafe)
+var/global/datum/controller/failsafe/Failsafe
 
 /datum/controller/failsafe // This thing pretty much just keeps poking the master controller
 	name = "Failsafe"
@@ -92,9 +92,7 @@ GLOBAL_REAL(Failsafe, /datum/controller/failsafe)
 			defcon = 5
 			sleep(initial(processing_interval))
 
-/datum/controller/failsafe/stat_entry(force)
-	if (!stat_line)
-		stat_line = new (null, src)
-	IF_UPDATE_STAT
-		stat_line.name = "Danger: [5 - defcon]/5  Interval:  [processing_interval]  Iteration: [master_iteration]"
-	stat(name, stat_line)
+/datum/controller/failsafe/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Danger: [5 - defcon]/5  Interval:  [processing_interval]  Iteration: [master_iteration]")

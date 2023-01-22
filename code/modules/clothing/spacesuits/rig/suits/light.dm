@@ -4,7 +4,6 @@
 	desc = "A lighter, less armoured rig suit."
 	icon_state = "ninja_rig"
 	suit_type = "light suit"
-	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/handcuffs,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/cell)
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_PISTOL,
@@ -14,9 +13,9 @@
 		)
 	siemens_coefficient = 0.4
 	emp_protection = 10
-	online_slowdown = 0
+	online_slowdown = 0.5
+	offline_slowdown = 1
 	item_flags = ITEM_FLAG_THICKMATERIAL
-	offline_slowdown = TINT_NONE
 	offline_vision_restriction = TINT_NONE
 	max_pressure_protection = LIGHT_RIG_MAX_PRESSURE
 	min_pressure_protection = 0
@@ -29,19 +28,19 @@
 /obj/item/clothing/suit/space/rig/light
 	name = "suit"
 	breach_threshold = 18 //comparable to voidsuits
-	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC, SPECIES_SHELL)
 
 /obj/item/clothing/gloves/rig/light
 	name = "gloves"
-	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC, SPECIES_SHELL)
 
 /obj/item/clothing/shoes/magboots/rig/light
 	name = "shoes"
-	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC, SPECIES_SHELL)
 
 /obj/item/clothing/head/helmet/space/rig/light
 	name = "hood"
-	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC, SPECIES_SHELL)
 
 /obj/item/rig/light/hacker
 	name = "cybersuit control module"
@@ -159,11 +158,11 @@
 /obj/item/clothing/gloves/rig/light/ninja
 	name = "insulated gloves"
 	siemens_coefficient = 0
-	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC, SPECIES_SHELL)
 
 /obj/item/clothing/suit/space/rig/light/ninja
 	breach_threshold = 38 //comparable to regular hardsuits
-	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC, SPECIES_SHELL)
 
 /obj/item/rig/light/stealth
 	name = "stealth suit control module"

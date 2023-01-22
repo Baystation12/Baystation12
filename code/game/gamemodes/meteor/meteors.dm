@@ -1,10 +1,10 @@
 //Meteor groups, used for various random events and the Meteor gamemode.
 
 // Dust, used by space dust event and during earliest stages of meteor mode.
-/var/list/meteors_dust = list(/obj/effect/meteor/dust)
+var/global/list/meteors_dust = list(/obj/effect/meteor/dust)
 
 // Standard meteors, used during early stages of the meteor gamemode.
-/var/list/meteors_normal = list(\
+var/global/list/meteors_normal = list(\
 		/obj/effect/meteor/medium=8,\
 		/obj/effect/meteor/dust=3,\
 		/obj/effect/meteor/irradiated=3,\
@@ -15,7 +15,7 @@
 		)
 
 // Threatening meteors, used during the meteor gamemode.
-/var/list/meteors_threatening = list(\
+var/global/list/meteors_threatening = list(\
 		/obj/effect/meteor/big=10,\
 		/obj/effect/meteor/medium=5,\
 		/obj/effect/meteor/golden=3,\
@@ -26,7 +26,7 @@
 		)
 
 // Catastrophic meteors, pretty dangerous without shields and used during the meteor gamemode.
-/var/list/meteors_catastrophic = list(\
+var/global/list/meteors_catastrophic = list(\
 		/obj/effect/meteor/big=75,\
 		/obj/effect/meteor/flaming=10,\
 		/obj/effect/meteor/irradiated=10,\
@@ -38,7 +38,7 @@
 		)
 
 // Armageddon meteors, very dangerous, and currently used only during the meteor gamemode.
-/var/list/meteors_armageddon = list(\
+var/global/list/meteors_armageddon = list(\
 		/obj/effect/meteor/big=25,\
 		/obj/effect/meteor/flaming=10,\
 		/obj/effect/meteor/irradiated=10,\
@@ -50,7 +50,7 @@
 		)
 
 // Cataclysm meteor selection. Very very dangerous and effective even against shields. Used in late game meteor gamemode only.
-/var/list/meteors_cataclysm = list(\
+var/global/list/meteors_cataclysm = list(\
 		/obj/effect/meteor/big=40,\
 		/obj/effect/meteor/emp=20,\
 		/obj/effect/meteor/tunguska=20,\
@@ -132,7 +132,7 @@
 	density = TRUE
 	anchored = TRUE
 	var/hits = 4
-	var/hitpwr = 2 //Level of ex_act to be called on hit.
+	var/hitpwr = EX_ACT_HEAVY //Level of ex_act to be called on hit.
 	var/dest
 	pass_flags = PASS_FLAG_TABLE
 	var/heavy = 0
@@ -169,9 +169,9 @@
 	GLOB.meteor_list -= src
 	return ..()
 
-/obj/effect/meteor/New()
-	..()
-	if(!ismissile)
+/obj/effect/meteor/Initialize()
+	. = ..()
+	if (!ismissile)
 		SpinAnimation()
 
 /obj/effect/meteor/Bump(atom/A)
@@ -191,7 +191,7 @@
 
 	//then, ram the turf if it still exists
 	if(T && !T.CanPass(src, src.loc, 0.5, 0))
-		T.ex_act(hitpwr)
+		T.ex_act(hitpwr, TRUE)
 
 //process getting 'hit' by colliding with a dense object
 //or randomly when ramming turfs
@@ -236,7 +236,7 @@
 	icon_state = "dust"
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	hits = 1
-	hitpwr = 3
+	hitpwr = EX_ACT_LIGHT
 	dropamt = 1
 	meteordrop = /obj/item/ore/glass
 
@@ -247,7 +247,7 @@
 
 /obj/effect/meteor/medium/meteor_effect()
 	..()
-	explosion(src.loc, 0, 1, 2, 3, 0)
+	explosion(src.loc, 0, 1, 2, 3, 0, turf_breaker = TRUE)
 
 //Large-sized
 /obj/effect/meteor/big
@@ -259,7 +259,7 @@
 
 /obj/effect/meteor/big/meteor_effect()
 	..()
-	explosion(src.loc, 1, 2, 3, 4, 0)
+	explosion(src.loc, 1, 2, 3, 4, 0, turf_breaker = TRUE)
 
 //Flaming meteor
 /obj/effect/meteor/flaming
@@ -271,7 +271,7 @@
 
 /obj/effect/meteor/flaming/meteor_effect()
 	..()
-	explosion(src.loc, 1, 2, 3, 4, 0, 0, 5)
+	explosion(src.loc, 1, 2, 3, 4, 0, 0, 5, TRUE)
 
 //Radiation meteor
 /obj/effect/meteor/irradiated
@@ -282,7 +282,7 @@
 
 /obj/effect/meteor/irradiated/meteor_effect()
 	..()
-	explosion(src.loc, 0, 0, 4, 3, 0)
+	explosion(src.loc, 0, 0, 4, 3, 0, turf_breaker = TRUE)
 	new /obj/effect/decal/cleanable/greenglow(get_turf(src))
 	SSradiation.radiate(src, 50)
 
@@ -320,13 +320,13 @@
 	icon_state = "flaming"
 	desc = "Your life briefly passes before your eyes the moment you lay them on this monstrosity."
 	hits = 10
-	hitpwr = 1
+	hitpwr = EX_ACT_DEVASTATING
 	heavy = 1
 	meteordrop = /obj/item/ore/diamond	// Probably means why it penetrates the hull so easily before exploding.
 
 /obj/effect/meteor/tunguska/meteor_effect()
 	..()
-	explosion(src.loc, 3, 6, 9, 20, 0)
+	explosion(src.loc, 3, 6, 9, 20, 0, turf_breaker = TRUE)
 
 // This is the final solution against shields - a single impact can bring down most shield generators.
 /obj/effect/meteor/supermatter
@@ -337,7 +337,7 @@
 
 /obj/effect/meteor/supermatter/meteor_effect()
 	..()
-	explosion(src.loc, 1, 2, 3, 4, 0)
+	explosion(src.loc, 1, 2, 3, 4, 0, turf_breaker = TRUE)
 	for(var/obj/machinery/power/apc/A in range(rand(12, 20), src))
 		A.energy_fail(round(10 * rand(8, 12)))
 

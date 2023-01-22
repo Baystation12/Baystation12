@@ -123,7 +123,7 @@
 		if(card_slot.insert_id(I, user))
 			update_verbs()
 		return
-		
+
 	if(istype(W, /obj/item/pen) && stores_pen)
 		if(istype(stored_pen))
 			to_chat(user, "<span class='notice'>There is already a pen in [src].</span>")
@@ -176,7 +176,7 @@
 			return
 
 		to_chat(user, "You begin repairing damage to \the [src]...")
-		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10))
+		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10, src, DO_PUBLIC_UNIQUE))
 			damage = 0
 			to_chat(user, "You repair \the [src].")
 		return

@@ -65,7 +65,7 @@
 	..()
 
 	mob_limit = health * 2
-	transform *= size_multiplier
+	SetTransform(scale = size_multiplier)
 	addtimer(CALLBACK(src, .proc/spawn_monster), rand(30, 60) SECONDS)
 	GLOB.sound_player.PlayLoopingSound(src, "\ref[src]", 'sound/effects/Heart Beat.ogg', 70, 6)
 

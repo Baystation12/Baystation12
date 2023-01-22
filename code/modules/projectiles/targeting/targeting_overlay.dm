@@ -93,7 +93,7 @@
 	owner = null
 	return ..()
 
-obj/aiming_overlay/proc/update_aiming_deferred()
+/obj/aiming_overlay/proc/update_aiming_deferred()
 	set waitfor = 0
 	sleep(0)
 	update_aiming()

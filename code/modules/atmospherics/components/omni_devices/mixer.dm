@@ -60,7 +60,7 @@
 		if(P.update)
 			if(output == P)
 				output = null
-			if(list_find(inputs, P))
+			if(inputs.Find(P))
 				inputs -= P
 
 			switch(P.mode)

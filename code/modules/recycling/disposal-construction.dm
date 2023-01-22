@@ -151,7 +151,7 @@
 			if(W.remove_fuel(0,user))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				to_chat(user, "Welding \the [src] in place.")
-				if(do_after(user, 20, src))
+				if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 					if(!src || !W.isOn()) return
 					to_chat(user, "\The [src] has been welded in place!")
 					build(CP)

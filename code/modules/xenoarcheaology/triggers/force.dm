@@ -5,7 +5,7 @@
 	. = ..()
 	if(istype(O, /obj/item/projectile))
 		var/obj/item/projectile/P = O
-		return (P.damage_type == BRUTE)
+		return (P.damage_type == DAMAGE_BRUTE)
 	else if(istype(O, /obj/item))
 		var/obj/item/I = O
 		return I.force >= 10

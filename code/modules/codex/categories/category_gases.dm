@@ -1,4 +1,4 @@
-/datum/codex_category/gases/
+/datum/codex_category/gases
 	name = "Gases"
 	desc = "Notable gases."
 

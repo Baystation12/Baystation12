@@ -21,7 +21,7 @@
 	if(!opened && isScrewdriver(W))
 		to_chat(user, SPAN_NOTICE("You begin screwing [src]'s lid [locked ? "open" : "shut"]."))
 		playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
-		if(do_after(user, screwdriver_time_needed, src))
+		if(do_after(user, screwdriver_time_needed, src, DO_PUBLIC_UNIQUE))
 			locked = !locked
 			to_chat(user, SPAN_NOTICE("You [locked ? "screw down" : "unscrew"] [src]'s lid."))
 	else

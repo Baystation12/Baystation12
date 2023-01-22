@@ -111,7 +111,7 @@
 		energy = ARMOR_ENERGY_MINOR
 		)
 
-/obj/item/clothing/suit/storage/det_trench/ft/
+/obj/item/clothing/suit/storage/det_trench/ft
 	desc = "A rugged canvas trenchcoat, designed and created by TX Fabrication Corp. This one wouldn't block much of anything."
 	armor = null
 

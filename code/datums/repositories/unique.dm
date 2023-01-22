@@ -1,4 +1,4 @@
-var/repository/unique/uniqueness_repository = new()
+var/global/repository/unique/uniqueness_repository = new()
 
 /repository/unique
 	var/list/generators

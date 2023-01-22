@@ -17,10 +17,10 @@
 #define RCS_MESSAUTH 7	// Authentication before sending
 #define RCS_ANNOUNCE 8	// Send announcement
 
-var/req_console_assistance = list()
-var/req_console_supplies = list()
-var/req_console_information = list()
-var/list/obj/machinery/requests_console/allConsoles = list()
+var/global/req_console_assistance = list()
+var/global/req_console_supplies = list()
+var/global/req_console_information = list()
+var/global/list/obj/machinery/requests_console/allConsoles = list()
 
 /obj/machinery/requests_console
 	name = "Requests Console"

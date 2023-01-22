@@ -31,7 +31,7 @@
 /datum/uplink_item/item/ammo/speedloader
 	name = "Standard Speedloader"
 	desc = "A speedloader for standard revolvers. Contains 6 rounds."
-	item_cost = 8
+	item_cost = 6
 	path = /obj/item/ammo_magazine/speedloader
 
 /datum/uplink_item/item/ammo/rifle
@@ -69,8 +69,9 @@
 /datum/uplink_item/item/ammo/flechette_shells
 	name = "Ammobox of Flechette Shells"
 	desc = "An ammobox with 2 sets of shell holders. Contains 8 extra accurate flechette shells."
-	item_cost = 8
+	item_cost = 12
 	path = /obj/item/storage/box/ammo/flechetteshells
+	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/ammo/shotgun_slugs
 	name = "Ammobox of Shotgun Slugs"

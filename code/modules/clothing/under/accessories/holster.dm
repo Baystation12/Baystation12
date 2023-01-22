@@ -12,7 +12,6 @@
 
 /obj/item/clothing/accessory/storage/holster/Initialize()
 	. = ..()
-	INIT_SKIP_QDELETED
 	container.virtual = TRUE
 	set_extension(src, /datum/extension/holster, container, sound_in, sound_out, can_holster)
 

@@ -13,7 +13,7 @@
 	access = list(access_rd, access_bridge, access_tox, access_morgue,
 			            access_tox_storage, access_teleporter, access_sec_doors, access_heads,
 			            access_research, access_robotics, access_xenobiology, access_ai_upload, access_tech_storage,
-			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_network, access_network_admin)
+			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_network, access_network_admin, access_research_storage)
 	minimal_player_age = 14
 	ideal_character_age = 50
 	outfit_type = /decl/hierarchy/outfit/job/science/rd
@@ -28,7 +28,7 @@
 	supervisors = "the Chief Science Officer"
 	selection_color = "#633d63"
 	economic_power = 7
-	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch, access_network)
+	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch, access_network, access_research_storage)
 	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher")
 	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/science/scientist
@@ -43,7 +43,7 @@
 	supervisors = "the Chief Science Officer"
 	selection_color = "#633d63"
 	economic_power = 7
-	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_hydroponics)
+	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_hydroponics, access_research_storage)
 	alt_titles = list("Xenobotanist")
 	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/science/xenobiologist

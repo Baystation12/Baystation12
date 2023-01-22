@@ -1,0 +1,36 @@
+<!--
+Title: Cyborg Hypospray
+Used In File(s): \code\modules\reagents\reagent_containers\borghypo.dm
+-->
+<div class="item">
+	<div class="itemLabelWide">
+		Internal synthesizer:
+	</div>
+	<div class="itemContentWide">
+		{{for data.synthReagents}}
+			{{:helper.link(value, 'circle-arrow-n', {'selected': value}, (data.selected == value) ? 'selected' : null, 'link fixedLeft')}}
+		{{empty}}
+			<span class="bad">Not available</span>
+		{{/for}}
+	</div>
+</div>
+
+<table style="text-align: center;">
+	<tr>
+		{{for data.bottles}}
+			<td><img src="{{:value.icon}}"></td>
+		{{/for}}
+	</tr>
+	<tr>
+		{{for data.bottles}}
+			<td>
+				{{:helper.link(value.name, null, {'selected': value.id}, (data.selected == value.id ? 'selected' : (value.total_volume ? null : 'disabled')))}}
+			</td>
+		{{/for}}
+	</tr>
+	<tr>
+		{{for data.bottles}}
+			<td>({{:value.total_volume}} / {{:value.maximum_volume}})</td>
+		{{/for}}
+	</tr>
+</table>

@@ -27,14 +27,14 @@
 		playsound(loc, "sparks", 50, 1)
 		return
 	if (isScrewdriver(W))
-		if (do_after(user, 20, src))
+		if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			open = ! open
 			user.show_message(text("<span class='notice'>You [] the service panel.</span>", (src.open ? "open" : "close")))
 		return
 	if (isMultitool(W) && (open == 1)&& (!l_hacking))
 		user.show_message("<span class='notice'>Now attempting to reset internal memory, please hold.</span>", 1)
 		l_hacking = 1
-		if (do_after(usr, 100, src))
+		if (do_after(usr, 10 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if (prob(40))
 				l_setshort = 1
 				l_set = 0
@@ -139,6 +139,13 @@
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	use_sound = 'sound/effects/storage/briefcase.ogg'
 
+/obj/item/storage/secure/briefcase/resguard
+	name = "EXO weapon briefcase"
+	desc = "A large briefcase with a digital locking system."
+	startswith = list(
+		/obj/item/gun/projectile/pistol/military = 1,
+		/obj/item/ammo_magazine/pistol/double/rubber = 5
+	)
 
 /obj/item/storage/secure/briefcase/attack_hand(mob/user)
 	if ((loc == user) && (locked == 1))

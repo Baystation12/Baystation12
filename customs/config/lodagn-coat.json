@@ -1,0 +1,6 @@
+{
+	"ckey": "Lodagn",
+	"character_name": "Qixzao Volxuqm",
+	"item_path": "/obj/item/clothing/suit/armor/hos/lodagn",
+    "req_access": ["ACCESS_SECURITY"]
+}

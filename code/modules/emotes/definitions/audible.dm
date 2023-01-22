@@ -1,20 +1,16 @@
 /decl/emote/audible
 	key = "burp"
-	emote_message_3p = "USER burps."
+	emote_message_3p = "USER отрыгается."
 	message_type = AUDIBLE_MESSAGE
 
 /decl/emote/audible/deathgasp_alien
 	key = "deathgasp"
-	emote_message_3p = "USER lets out a waning guttural screech, green blood bubbling from its maw."
+	emote_message_3p = "USER издает слабеющий гортанный визг, зеленая кровь пузырится из его пасти."
 
 /decl/emote/audible/gasp
 	key ="gasp"
 	emote_message_3p = "USER задыхается!"
 	conscious = 0
-
-/decl/emote/audible/scretch
-	key ="scretch"
-	emote_message_3p = "USER чешется."
 
 /decl/emote/audible/choke
 	key ="choke"
@@ -23,7 +19,7 @@
 
 /decl/emote/audible/gnarl
 	key ="gnarl"
-	emote_message_3p = "USER gnarls and shows its teeth.."
+	emote_message_3p = "USER скалится и показывает свои зубы."
 
 /decl/emote/audible/chirp
 	key ="chirp"
@@ -32,23 +28,23 @@
 
 /decl/emote/audible/multichirp
 	key ="mchirp"
-	emote_message_3p = "USER chirps a chorus of notes!"
+	emote_message_3p = "USER щебечет хор нот!"
 	emote_sound = 'sound/misc/multichirp.ogg'
 
 /decl/emote/audible/alarm
 	key = "alarm"
-	emote_message_1p = "You sound an alarm."
-	emote_message_3p = "USER sounds an alarm."
+	emote_message_1p = "You подал сигнал тревоги."
+	emote_message_3p = "USER подаёт сигнал тревоги."
 
 /decl/emote/audible/alert
 	key = "alert"
-	emote_message_1p = "You let out a distressed noise."
-	emote_message_3p = "USER lets out a distressed noise."
+	emote_message_1p = "You издаёте огорченный звук."
+	emote_message_3p = "USER издал огорченный звук."
 
 /decl/emote/audible/notice
 	key = "notice"
-	emote_message_1p = "You play a loud tone."
-	emote_message_3p = "USER plays a loud tone."
+	emote_message_1p = "You включаете громкий сигнал."
+	emote_message_3p = "USER проигрывает громкий сигнал."
 
 /decl/emote/audible/whistle
 	key = "whistle"
@@ -144,10 +140,10 @@
 
 /decl/emote/audible/slap
 	key = "slap"
-	emote_message_1p_target = "You slap TARGET across the face!"
-	emote_message_1p = "You slap yourself across the face!"
-	emote_message_3p_target = "USER slaps TARGET across the face!"
-	emote_message_3p = "USER slaps USER_SELF across the face!"
+	emote_message_1p_target = "Ты бьёшь TARGET по лицу!"
+	emote_message_1p = "Ты бьёшь себя по лицу!"
+	emote_message_3p_target = "USER бьёт TARGET по лицу!"
+	emote_message_3p = "USER бьёт USER_SELF по лицу!"
 	emote_sound = 'sound/effects/snap.ogg'
 	check_restraints = TRUE
 	check_range = 1
@@ -170,12 +166,12 @@
 
 /decl/emote/audible/vox_shriek
 	key ="shriek"
-	emote_message_3p = "USER SHRIEKS!"
+	emote_message_3p = "USER ВИЗЖИТ!"
 	emote_sound = 'sound/voice/shriek1.ogg'
 
 /decl/emote/audible/roar
 	key = "roar"
-	emote_message_3p = "USER roars!"
+	emote_message_3p = "USER рычит!"
 
 /decl/emote/audible/bellow
 	key = "bellow"
@@ -183,16 +179,16 @@
 
 /decl/emote/audible/howl
 	key = "howl"
-	emote_message_3p = "USER howls!"
+	emote_message_3p = "USER воет!"
 
 /decl/emote/audible/wheeze
 	key = "wheeze"
-	emote_message_3p = "USER wheezes."
+	emote_message_3p = "USER хрипит."
 
 /decl/emote/audible/hiss
 	key ="hiss_"
-	emote_message_3p_target = "USER hisses softly at TARGET."
-	emote_message_3p = "USER hisses softly."
+	emote_message_3p_target = "USER тихо шипит на TARGET."
+	emote_message_3p = "USER тихо шипит."
 
 /decl/emote/audible/lizard_bellow
 	key = "bellow"
@@ -202,7 +198,7 @@
 
 /decl/emote/audible/lizard_squeal
 	key = "squeal"
-	emote_message_3p = "USER squeals."
+	emote_message_3p = "USER пищит."
 	emote_sound = 'sound/voice/LizardSqueal.ogg'
 
 /decl/emote/audible/gasp
@@ -218,7 +214,7 @@
 			'sound/voice/emotes/gasp_female5.ogg', 'sound/voice/emotes/gasp_female6.ogg',
 			'sound/voice/emotes/gasp_female7.ogg'))
 	sounded_species = list(SPECIES_HUMAN, SPECIES_VATGROWN, SPECIES_SPACER, SPECIES_TRITONIAN, SPECIES_GRAVWORLDER,
-	SPECIES_MULE,
+	SPECIES_MULE, SPECIES_SHELL,
 	SPECIES_UNATHI, SPECIES_YEOSA, SPECIES_VOX, SPECIES_SKRELL)
 
 /decl/emote/audible/whistle
@@ -241,7 +237,7 @@
 		'sound/voice/emotes/snore_5.ogg', 'sound/voice/emotes/snore_6.ogg',
 		'sound/voice/emotes/snore_7.ogg')
 	sounded_species = list(SPECIES_HUMAN, SPECIES_VATGROWN, SPECIES_SPACER, SPECIES_TRITONIAN, SPECIES_GRAVWORLDER,
-	SPECIES_MULE,
+	SPECIES_MULE, SPECIES_SHELL,
 	SPECIES_UNATHI, SPECIES_YEOSA, SPECIES_VOX, SPECIES_SKRELL)
 
 /decl/emote/audible/yawn
@@ -259,7 +255,7 @@
 		MALE = 'sound/voice/emotes/cough_male.ogg',
 		FEMALE = 'sound/voice/emotes/cough_female.ogg')
 	sounded_species = list(SPECIES_HUMAN, SPECIES_VATGROWN, SPECIES_SPACER, SPECIES_TRITONIAN, SPECIES_GRAVWORLDER,
-	SPECIES_MULE,
+	SPECIES_MULE, SPECIES_SHELL,
 	SPECIES_UNATHI, SPECIES_YEOSA, SPECIES_VOX, SPECIES_SKRELL)
 
 /decl/emote/audible/cry
@@ -274,7 +270,7 @@
 		MALE = 'sound/voice/emotes/sigh_male.ogg',
 		FEMALE = 'sound/voice/emotes/sigh_female.ogg')
 	sounded_species = list(SPECIES_HUMAN, SPECIES_VATGROWN, SPECIES_SPACER, SPECIES_TRITONIAN, SPECIES_GRAVWORLDER,
-	SPECIES_MULE,
+	SPECIES_MULE, SPECIES_SHELL,
 	SPECIES_UNATHI, SPECIES_YEOSA, SPECIES_VOX, SPECIES_SKRELL)
 
 /decl/emote/audible/laugh

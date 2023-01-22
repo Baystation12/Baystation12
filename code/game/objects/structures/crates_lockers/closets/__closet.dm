@@ -19,6 +19,7 @@
 	var/storage_types = CLOSET_STORAGE_ALL
 	var/setup = CLOSET_CAN_BE_WELDED
 	var/closet_appearance = /decl/closet_appearance
+	material = MATERIAL_STEEL
 
 	// TODO: Turn these into flags. Skipped it for now because it requires updating 100+ locations...
 	var/broken = FALSE
@@ -37,6 +38,8 @@
 			icon = app.icon
 			color = null
 			queue_icon_update()
+
+	material = SSmaterials.get_material_by_name(material)
 
 	return INITIALIZE_HINT_LATELOAD
 
@@ -220,7 +223,7 @@
 
 /obj/structure/closet/ex_act(severity)
 	// Damage everything inside the closet.
-	if (severity < 3)
+	if (severity < EX_ACT_LIGHT)
 		for (var/atom/A as anything in src)
 			A.ex_act(severity + 1)
 	..()
@@ -318,7 +321,7 @@
 	attack_hand(user)
 
 /obj/structure/closet/proc/slice_into_parts(obj/W, mob/user)
-	new /obj/item/stack/material/steel(src.loc, 2)
+	material.place_sheet(src.loc, 2)
 	user.visible_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [W].</span>", \
 						 "<span class='notice'>You have cut \the [src] apart with \the [W].</span>", \
 						 "You hear welding.")
@@ -335,7 +338,7 @@
 		return
 	if(user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis)
 		return
-	if((!( istype(O, /atom/movable) ) || O.anchored || !Adjacent(user) || !Adjacent(O) || !user.Adjacent(O) || list_find(user.contents, src)))
+	if((!( istype(O, /atom/movable) ) || O.anchored || !Adjacent(user) || !Adjacent(O) || !user.Adjacent(O) || user.contents.Find(src)))
 		return
 	if(!isturf(user.loc)) // are you in a container/closet/pod/etc?
 		return
@@ -398,10 +401,9 @@
 				icon_state = "closed_unlocked[welded ? "_welded" : ""]"
 			overlays.Cut()
 
-/obj/structure/closet/handle_death_change(new_death_state)
-	if (new_death_state)
-		dump_contents()
-		qdel(src)
+/obj/structure/closet/on_death()
+	dump_contents()
+	qdel(src)
 
 /obj/structure/closet/proc/req_breakout()
 	if(opened)
@@ -427,7 +429,7 @@
 
 	breakout = 1 //can't think of a better way to do this right now.
 	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
-		if(!do_after(escapee, 50, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED)) //5 seconds
+		if(!do_after(escapee, 5 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED)) //5 seconds
 			breakout = 0
 			return FALSE
 		//Perform the same set of checks as above for weld and lock status to determine if there is even still a point in 'resisting'...

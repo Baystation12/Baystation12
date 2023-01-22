@@ -1,6 +1,6 @@
 //this file left in for legacy support
-var/eventchance = 10 // Percent chance per 5 minutes.
-var/hadevent    = 0
+var/global/eventchance = 10 // Percent chance per 5 minutes.
+var/global/hadevent    = 0
 
 /proc/appendicitis()
 	for(var/mob/living/carbon/human/H in shuffle(GLOB.living_mob_list_))
@@ -28,9 +28,9 @@ var/hadevent    = 0
 		if(isNotStationLevel(T.z))
 			continue
 		if(istype(H,/mob/living/carbon/human))
-			H.apply_damage((rand(15,75)),IRRADIATE, damage_flags = DAM_DISPERSED)
+			H.apply_damage((rand(15,75)), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 			if (prob(5))
-				H.apply_damage((rand(90,150)),IRRADIATE, damage_flags = DAM_DISPERSED)
+				H.apply_damage((rand(90,150)), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 			if (prob(25))
 				if (prob(75))
 					randmutb(H)
@@ -51,7 +51,7 @@ var/hadevent    = 0
 
 /proc/lightsout(isEvent = 0, lightsoutAmount = 1,lightsoutRange = 25) //leave lightsoutAmount as 0 to break ALL lights
 	if(isEvent)
-		command_announcement.Announce("An Electrical storm has been detected in your area, please repair potential electronic overloads.","Electrical Storm Alert")
+		command_announcement.Announce("Была обнаружена электрическая буря в зоне нахождения [GLOB.using_map.station_name]. Пожалуйста, устраните возможные электронные перегрузки.","Electrical Storm Alert")
 
 	if(lightsoutAmount)
 		var/list/epicentreList = list()

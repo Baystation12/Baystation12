@@ -613,10 +613,10 @@
 		return
 
 /obj/item/device/radio/emp_act(severity)
-	broadcasting = 0
-	listening = 0
+	broadcasting = prob(50)
+	listening = prob(50)
 	for (var/ch_name in channels)
-		channels[ch_name] = 0
+		channels[ch_name] = prob(50)
 	if(cell)
 		cell.emp_act(severity)
 	..()
@@ -698,7 +698,7 @@
 		else
 			to_chat(user, "This radio doesn't have any encryption keys!")
 
-	if(istype(W, /obj/item/device/encryptionkey/))
+	if(istype(W, /obj/item/device/encryptionkey))
 		if(keyslot)
 			to_chat(user, "The radio can't hold another key!")
 			return

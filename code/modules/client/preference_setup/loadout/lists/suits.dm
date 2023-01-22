@@ -143,6 +143,7 @@
 /datum/gear/suit/medcoat
 	display_name = "medical suit selection"
 	path = /obj/item/clothing/suit
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/suit/medcoat/New()
 	..()

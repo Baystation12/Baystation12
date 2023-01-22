@@ -20,7 +20,6 @@
 
 /obj/item/clothing/Initialize()
 	. = ..()
-	INIT_SKIP_QDELETED
 	var/list/init_accessories = accessories
 	accessories = list()
 	for (var/path in init_accessories)
@@ -456,7 +455,7 @@ BLIND     // can't see anything
 	if(!Adjacent(user))
 		return 0
 	var/success
-	if(is_drone(user))
+	if(isdrone(user))
 		var/mob/living/silicon/robot/drone/D = user
 		if(D.hat)
 			success = 2
@@ -628,13 +627,15 @@ BLIND     // can't see anything
 	remove_cuffs(user)
 	..()
 
-/obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
-	if (istype(I, /obj/item/handcuffs))
-		add_cuffs(I, user)
-		return
+
+/obj/item/clothing/shoes/attackby(obj/item/item, mob/living/user)
+	if (istype(item, /obj/item/handcuffs))
+		add_cuffs(item, user)
+	else if (istype(item, /obj/item/clothing/shoes/magboots))
+		user.equip_to_slot_if_possible(item, slot_shoes)
 	else
-		add_hidden(I, user)
-		return
+		add_hidden(item, user)
+
 
 /obj/item/clothing/shoes/proc/add_cuffs(var/obj/item/handcuffs/cuffs, var/mob/user)
 	if (!can_add_cuffs)
@@ -643,12 +644,12 @@ BLIND     // can't see anything
 	if (attached_cuffs)
 		to_chat(user, SPAN_WARNING("\The [src] already has [attached_cuffs] attached."))
 		return
-	if (do_after(user, 5 SECONDS))
+	if (do_after(user, 5 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if(!user.unEquip(cuffs, src))
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] attaches \the [cuffs] to \the [src]."), range = 2)
 		verbs |= /obj/item/clothing/shoes/proc/remove_cuffs
-		slowdown_per_slot[slot_shoes] += cuffs.elastic ? 10 : 15
+		slowdown_per_slot[slot_shoes] += cuffs.elastic ? 5 : 10
 		attached_cuffs = cuffs
 
 /obj/item/clothing/shoes/proc/remove_cuffs(var/mob/user)
@@ -664,13 +665,13 @@ BLIND     // can't see anything
 		return
 	if (user.incapacitated())
 		return
-	if (do_after(user, 5 SECONDS))
+	if (do_after(user, 5 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if (!user.put_in_hands(attached_cuffs))
 			to_chat(usr, SPAN_WARNING("You need an empty, unbroken hand to remove the [attached_cuffs] from the [src]."))
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] removes \the [attached_cuffs] from \the [src]."), range = 2)
 		attached_cuffs.add_fingerprint(user)
-		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 10 : 15
+		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 5 : 10
 		verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
 		attached_cuffs = null
 
@@ -687,7 +688,7 @@ BLIND     // can't see anything
 	if (I.w_class > hidden_item_max_w_class)
 		to_chat(user, SPAN_WARNING("\The [I] is too large to fit in the [src]."))
 		return
-	if (do_after(user, 1 SECONDS))
+	if (do_after(user, 1 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if(!user.unEquip(I, src))
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] shoves \the [I] into \the [src]."), range = 1)
@@ -709,7 +710,7 @@ BLIND     // can't see anything
 		return FALSE
 	if (loc != user)
 		return FALSE
-	if (do_after(user, 2 SECONDS))
+	if (do_after(user, 2 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if (!user.put_in_hands(hidden_item))
 			to_chat(usr, SPAN_WARNING("You need an empty, unbroken hand to pull the [hidden_item] from the [src]."))
 			return TRUE
@@ -723,7 +724,7 @@ BLIND     // can't see anything
 	if (running && attached_cuffs?.damage_health(1))
 		visible_message(SPAN_WARNING("\The [attached_cuffs] attached to \the [src] snap and fall away!"), range = 1)
 		verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
-		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 10 : 15
+		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 5 : 10
 		QDEL_NULL(attached_cuffs)
 	return
 
@@ -987,12 +988,10 @@ BLIND     // can't see anything
 	..()
 	var/new_mode
 	switch(severity)
-		if(1)
+		if (EMP_ACT_HEAVY)
 			new_mode = pick(75;SUIT_SENSOR_OFF, 15;SUIT_SENSOR_BINARY, 10;SUIT_SENSOR_VITAL)
-		if(2)
+		if (EMP_ACT_LIGHT)
 			new_mode = pick(50;SUIT_SENSOR_OFF, 25;SUIT_SENSOR_BINARY, 20;SUIT_SENSOR_VITAL, 5;SUIT_SENSOR_TRACKING)
-		else
-			new_mode = pick(25;SUIT_SENSOR_OFF, 35;SUIT_SENSOR_BINARY, 30;SUIT_SENSOR_VITAL, 10;SUIT_SENSOR_TRACKING)
 
 	sensor_mode = new_mode
 

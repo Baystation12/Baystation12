@@ -90,16 +90,16 @@
 		if(blood_overlay)
 			overlays += blood_overlay
 
-/obj/item/material/knife/folding/swiss/iscrowbar()
+/obj/item/material/knife/folding/swiss/IsCrowbar()
 	return active_tool == SWISSKNF_CROWBAR && can_use_tools
 
-/obj/item/material/knife/folding/swiss/isscrewdriver()
+/obj/item/material/knife/folding/swiss/IsScrewdriver()
 	return (active_tool == SWISSKNF_CLIFTER || active_tool == SWISSKNF_COPENER) && can_use_tools
 
-/obj/item/material/knife/folding/swiss/iswirecutter()
+/obj/item/material/knife/folding/swiss/IsWirecutter()
 	return active_tool == SWISSKNF_WCUTTER && can_use_tools
 
-/obj/item/material/knife/folding/swiss/ishatchet()
+/obj/item/material/knife/folding/swiss/IsHatchet()
 	return active_tool == SWISSKNF_WBLADE
 
 /obj/item/material/knife/folding/swiss/resolve_attackby(obj/target, mob/user)

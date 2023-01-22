@@ -38,7 +38,7 @@
 	if(istype(I, /obj/item/device/measuring_tape))
 		var/obj/item/device/measuring_tape/P = I
 		user.visible_message("<span class='notice'>\The [user] extends \the [P] towards \the [src].</span>", "<span class='notice'>You extend \the [P] towards \the [src].</span>")
-		if(do_after(user, 15))
+		if(do_after(user, 1.5 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [src.excavation_level]cm.</span>")
 		return
 
@@ -51,7 +51,7 @@
 
 		to_chat(user, "<span class='warning'>You start [P.drill_verb] [src].</span>")
 
-		if(!do_after(user, P.digspeed))
+		if(!do_after(user, P.digspeed, src, DO_PUBLIC_UNIQUE))
 			return
 
 		to_chat(user, "<span class='notice'>You finish [P.drill_verb] [src].</span>")

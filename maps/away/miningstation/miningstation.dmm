@@ -140,7 +140,6 @@
 /area/miningstation/hangar)
 "ay" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio2_alarm";
 	dir = 4;
 	pixel_x = -24
 	},
@@ -3378,7 +3377,6 @@
 "hY" = (
 /obj/structure/table/steel,
 /obj/machinery/alarm{
-	alarm_id = "xenobio2_alarm";
 	dir = 4;
 	pixel_x = -24
 	},
@@ -4354,7 +4352,6 @@
 /area/miningstation/chief)
 "kd" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio2_alarm";
 	dir = 4;
 	pixel_x = -24
 	},
@@ -4690,7 +4687,6 @@
 /area/miningstation/dorms3)
 "la" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio2_alarm";
 	dir = 4;
 	pixel_x = -24
 	},
@@ -5754,7 +5750,6 @@
 /area/miningstation/kitchen)
 "nv" = (
 /obj/machinery/alarm{
-	alarm_id = "xenobio2_alarm";
 	dir = 4;
 	pixel_x = -24
 	},

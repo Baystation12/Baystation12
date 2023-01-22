@@ -133,7 +133,7 @@
 
 /datum/gear/uniform/shorts/custom
 	display_name = "athletic shorts, colour select"
-	path = /obj/item/clothing/under/shorts/
+	path = /obj/item/clothing/under/shorts
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/turtleneck
@@ -149,7 +149,8 @@
 /datum/gear/uniform/corporate
 	display_name = "corporate uniform selection"
 	path = /obj/item/clothing/under
-
+	allowed_branches = list(/datum/mil_branch/civilian)
+	
 /datum/gear/uniform/corporate/New()
 	..()
 	var/corps = list()

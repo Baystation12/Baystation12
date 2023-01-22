@@ -11,14 +11,14 @@ The "dust" will damage the hull of the station causin minor hull breaches.
 	var/last_wave
 
 /datum/event/dust/announce()
-	command_announcement.Announce("The [location_name()] is now passing through a belt of space dust.", "[location_name()] Sensor Array", zlevels = affecting_z)
+	command_announcement.Announce("[location_name()] вошёл в пояс космической пыли.", "[station_name()] Sensor Array", zlevels = affecting_z)
 
 /datum/event/dust/tick()
 	if(world.time > last_wave + min_delay && prob(10))
 		dust_swarm(severity, affecting_z)
 
 /datum/event/dust/end()
-	command_announcement.Announce("The [location_name()] has now passed through the belt of space dust.", "[location_name()] Sensor Array", zlevels = affecting_z)
+	command_announcement.Announce("[location_name()] покинул пояс космической пыли.", "[station_name()] Sensor Array", zlevels = affecting_z)
 
 /proc/dust_swarm(var/strength = EVENT_LEVEL_MUNDANE, var/list/zlevels)
 	var/numbers = rand(strength * 10, strength * 15)

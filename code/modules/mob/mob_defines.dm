@@ -3,7 +3,7 @@
 	plane = DEFAULT_PLANE
 	layer = MOB_LAYER
 
-	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
+	appearance_flags = PIXEL_SCALE | LONG_GLIDE
 	animate_movement = 2
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 
@@ -99,9 +99,13 @@
 	var/list/pinned = list()            // List of things pinning this creature to walls (see living_defense.dm)
 	var/list/embedded = list()          // Embedded items, since simple mobs don't have organs.
 	var/list/languages = list()         // For speaking/listening.
+
+	/// The path of the accent this mob speaks with, if any.
+	var/decl/accent/accent
+
 	var/species_language = null			// For species who want reset to use a specified default.
 	var/only_species_language  = 0		// For species who can only speak their default and no other languages. Does not effect understanding.
-	var/list/speak_emote = list("says") // Verbs used when speaking. Defaults to 'say' if speak_emote is null.
+	var/list/speak_emote = list("говорит") // Verbs used when speaking. Defaults to 'say' if speak_emote is null.
 	var/emote_type = 1		// Define emote default type, 1 for seen emotes, 2 for heard emotes
 	var/facing_dir = null   // Used for the ancient art of moonwalking.
 

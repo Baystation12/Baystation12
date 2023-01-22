@@ -200,5 +200,6 @@
 	return null
 
 
+/// Returns instance of `/obj/machinery/apc` or `null`. The area's APC, if defined and present.
 /area/proc/get_apc()
 	return apc

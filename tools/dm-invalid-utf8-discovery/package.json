@@ -1,0 +1,11 @@
+{
+    "name": "dm-invalid-utf8-discovery",
+    "version": "0.1.0",
+    "type":"module",
+    "dependencies": {
+      "utf-8-validate": "5.0.9"
+    },
+    "contributors": [
+        "spookerton <spkrtn@pm.me> (https://github.com/spookerton)"
+    ]
+}

@@ -1,56 +1,94 @@
-#define isWrench(A)      (A && A.iswrench())
-#define isWelder(A)      (A && A.iswelder())
-#define isCoil(A)        (A && A.iscoil())
-#define isWirecutter(A)  (A && A.iswirecutter())
-#define isScrewdriver(A) (A && A.isscrewdriver())
-#define isMultitool(A)   (A && A.ismultitool())
-#define isCrowbar(A)     (A && A.iscrowbar())
-#define isHatchet(A)     (A && A.ishatchet())
-
-/atom/proc/iswrench()
+/// True when this atom can be used as a wrench.
+/atom/proc/IsWrench()
 	return FALSE
 
-/atom/proc/iswelder()
+/// Defines the base wrench as useable as a wrench.
+/obj/item/wrench/IsWrench()
+	return TRUE
+
+/// True when A exists and can be used as a wrench.
+#define isWrench(A) (A?.IsWrench())
+
+
+/// True when this atom can be used as a Welder.
+/atom/proc/IsWelder()
 	return FALSE
 
-/atom/proc/iscoil()
+/// Defines the base welder as useable as a welder.
+/obj/item/weldingtool/IsWelder()
+	return TRUE
+
+/// True when A exists and can be used as a welder.
+#define isWelder(A) (A?.IsWelder())
+
+
+/// True when this atom can be used as a cable coil.
+/atom/proc/IsCoil()
 	return FALSE
 
-/atom/proc/iswirecutter()
+/// Defines the base coil as useable as a cable coil.
+/obj/item/stack/cable_coil/IsCoil()
+	return TRUE
+
+/// True when A exists and can be used as a cable coil.
+#define isCoil(A) (A?.IsCoil())
+
+
+/// True when this atom can be used as a wirecutter.
+/atom/proc/IsWirecutter()
 	return FALSE
 
-/atom/proc/isscrewdriver()
+/// Defines the base wirecutter as useable as a wirecutter.
+/obj/item/wirecutters/IsWirecutter()
+	return TRUE
+
+/// True when A exists and can be used as a wirecutter.
+#define isWirecutter(A) (A?.IsWirecutter())
+
+
+/// True when this atom can be used as a screwdriver.
+/atom/proc/IsScrewdriver()
 	return FALSE
 
-/atom/proc/ismultitool()
+/// Defines the base screwdriver as useable as a screwdriver.
+/obj/item/screwdriver/IsScrewdriver()
+	return TRUE
+
+/// True when A exists and can be used as a screwdriver.
+#define isScrewdriver(A) (A?.IsScrewdriver())
+
+
+/// True when this atom can be used as a multitool.
+/atom/proc/IsMultitool()
 	return FALSE
 
-/atom/proc/iscrowbar()
+/// Defines the base multitool as useable as a multitool.
+/obj/item/device/multitool/IsMultitool()
+	return TRUE
+
+/// True when A exists and can be used as a multitool.
+#define isMultitool(A) (A?.IsMultitool())
+
+
+/// True when this atom can be used as a crowbar.
+/atom/proc/IsCrowbar()
 	return FALSE
 
-/atom/proc/ishatchet()
+/// Defines the base crowbar as useable as a crowbar.
+/obj/item/crowbar/IsCrowbar()
+	return TRUE
+
+/// True when A exists and can be used as a crowbar.
+#define isCrowbar(A) (A?.IsCrowbar())
+
+
+/// True when this atom can be used as a hatchet.
+/atom/proc/IsHatchet()
 	return FALSE
 
-/obj/item/wrench/iswrench()
+/// Defines the base hatchet as useable as a hatchet.
+/obj/item/material/hatchet/IsHatchet()
 	return TRUE
 
-/obj/item/weldingtool/iswelder()
-	return TRUE
-
-/obj/item/stack/cable_coil/iscoil()
-	return TRUE
-
-/obj/item/wirecutters/iswirecutter()
-	return TRUE
-
-/obj/item/screwdriver/isscrewdriver()
-	return TRUE
-
-/obj/item/device/multitool/ismultitool()
-	return TRUE
-
-/obj/item/crowbar/iscrowbar()
-	return TRUE
-
-/obj/item/material/hatchet/ishatchet()
-	return TRUE
+/// True when A exists and can be used as a hatchet.
+#define isHatchet(A) (A?.IsHatchet())

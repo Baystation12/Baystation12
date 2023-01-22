@@ -13,6 +13,8 @@
 		explosion_resistance = material.explosion_resistance
 	if(reinf_material && reinf_material.explosion_resistance > explosion_resistance)
 		explosion_resistance = reinf_material.explosion_resistance
+	// Base material `explosion_resistance` is `5`, so a value of `5 `should result in a wall resist value of `1`.
+	set_damage_resistance(DAMAGE_EXPLODE, explosion_resistance ? 5 / explosion_resistance : 1)
 
 	if(reinf_material)
 		SetName("reinforced [material.display_name] [material.wall_name]")

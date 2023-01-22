@@ -16,7 +16,7 @@
 	strength = STR_HIGH
 
 	min_age = 1
-	max_age = 90
+	max_age = 60
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
@@ -52,7 +52,8 @@
 
 	available_cultural_info = list(
 		TAG_CULTURE = list(
-			CULTURE_POSITRONICS
+			CULTURE_POSITRONICS,
+			CULTURE_POSITRONICS_SCG
 		),
 		TAG_HOMEWORLD = list(
 			HOME_SYSTEM_ROOT,
@@ -72,7 +73,11 @@
 			FACTION_NANOTRASEN,
 			FACTION_FREETRADE,
 			FACTION_XYNERGY,
+			FACTION_FLEET,
+			FACTION_ARMY,
+			FACTION_SPACECOPS,
 			FACTION_EXPEDITIONARY,
+			FACTION_INDIE_CONFED,
 			FACTION_OTHER
 		)
 	)

@@ -22,8 +22,8 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/service/janitor/army
-	name = OUTFIT_JOB_NAME("Sanitation Technician - Army")
-	uniform = /obj/item/clothing/under/solgov/utility/army/service
+	name = OUTFIT_JOB_NAME("Sanitation Technician - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/service
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/service/cook
@@ -46,8 +46,8 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/service/cook/army
-	name = OUTFIT_JOB_NAME("Cook - Army")
-	uniform = /obj/item/clothing/under/solgov/utility/army/service
+	name = OUTFIT_JOB_NAME("Cook - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/service
 	shoes = /obj/item/clothing/shoes/dutyboots
 /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	name = OUTFIT_JOB_NAME("Crewman")
@@ -80,6 +80,6 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/service/chaplain/army
-	name = OUTFIT_JOB_NAME("Chaplain - Army")
-	uniform = /obj/item/clothing/under/solgov/utility/army/service
+	name = OUTFIT_JOB_NAME("Chaplain - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/service
 	shoes = /obj/item/clothing/shoes/dutyboots

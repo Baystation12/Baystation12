@@ -16,5 +16,5 @@
 		return
 	user.visible_message(
 		SPAN_ITALIC("\The [user] places \the [src] against \the [target]'s [organ.name]."),
-		SPAN_NOTICE("You place \the [src] against \the [target]'s [organ.name]. You head [english_list(organ.listen())].")
+		SPAN_NOTICE("You place \the [src] against \the [target]'s [organ.name]. You hear [english_list(organ.listen())].")
 	)

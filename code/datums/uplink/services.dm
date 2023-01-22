@@ -7,7 +7,7 @@
 /datum/uplink_item/item/services/fake_ion_storm
 	name = "Ion Storm Announcement"
 	desc = "A single-use device, that when activated, fakes an announcement, so people think all their electronic readings are wrong."
-	item_cost = 8
+	item_cost = 10
 	path = /obj/item/device/uplink_service/fake_ion_storm
 
 /datum/uplink_item/item/services/suit_sensor_garble
@@ -108,9 +108,9 @@
 		if(AWAITING_ACTIVATION)
 			icon_state = initial(icon_state)
 		if(CURRENTLY_ACTIVE)
-			icon_state = "flash_on"
+			icon_state = "sflash_on"
 		if(HAS_BEEN_ACTIVATED)
-			icon_state = "flash_burnt"
+			icon_state = "sflash_burnt"
 
 /obj/item/device/uplink_service/proc/enable(var/mob/user = usr)
 	return TRUE
@@ -232,7 +232,7 @@
 	if (public_announce)
 		command_announcement.Announce(message, title, GLOB.using_map.command_report_sound, msg_sanitized = TRUE, zlevels = z_levels)
 	else
-		minor_announcement.Announce("New [GLOB.using_map.company_name] Update available at all communication consoles.", zlevels = z_levels)
+		minor_announcement.Announce("Новое объявление от [GLOB.using_map.company_name_ru] доступно на всех консолях связи.", zlevels = z_levels)
 	. = ..()
 
 

@@ -66,6 +66,7 @@
 		/obj/item/reagent_containers/glass,
 		/obj/item/reagent_containers/pill,
 		/obj/item/reagent_containers/ivbag,
+		/obj/item/reagent_containers/chem_disp_cartridge,
 		/obj/item/stack/material/phoron,
 		/obj/item/storage/pill_bottle,
 		)
@@ -90,6 +91,7 @@
 		/obj/item/reagent_containers/glass,
 		/obj/item/reagent_containers/food/snacks/monkeycube,
 		/obj/item/stock_parts/computer,
+		/obj/item/storage/part_replacer,
 		/obj/item/device/transfer_valve,
 		/obj/item/device/assembly/signaler,
 		/obj/item/device/assembly/timer,
@@ -97,6 +99,7 @@
 		/obj/item/device/assembly/infra,
 		/obj/item/tank
 		)
+
 
 /obj/item/gripper/cultivator
 	name = "cultivator gripper"
@@ -130,6 +133,19 @@
 		/obj/item/robot_parts,
 		/obj/item/reagent_containers/ivbag
 	)
+
+/obj/item/gripper/auto_cpr // Special gripper that looks like an auto-compressor, for that item only
+	name = "auto-compressor unit"
+	desc = "A manipulator unit for carrying and operating an auto-compressor, a device that gives regular compression to the victim's ribcage, used in case of urgent heart issues."
+	icon = 'icons/obj/auto_cpr.dmi'
+	icon_state = "pumper"
+	can_hold = list(/obj/item/auto_cpr)
+
+/obj/item/gripper/ivbag // Used to handle IV bags. Deliberately more limited than the organ gripper so the Emergency Response module can't do surgery.
+	name = "\improper IV bag gripper"
+	icon_state = "gripper"
+	desc = "A simple grasping tool for holding and manipulating IV bags."
+	can_hold = list(/obj/item/reagent_containers/ivbag)
 
 /obj/item/gripper/forensics// Used to handle forensics equipment.
 	name = "forensics gripper"
@@ -204,6 +220,13 @@
 	if(wrapped) //Already have an item.
 		//Temporary put wrapped into user so target's attackby() checks pass.
 		wrapped.forceMove(user)
+
+		if (istype(target, /obj/structure/table))
+			var/obj/structure/table/table = target
+			wrapped.dropInto(get_turf(target))
+			table.auto_align(wrapped, params)
+			wrapped = null
+			return
 
 		//The force of the wrapped obj gets set to zero during the attack() and afterattack().
 		var/force_holder = wrapped.force
@@ -333,7 +356,7 @@
 
 			to_chat(D, "<span class='danger'>You begin decompiling [M].</span>")
 
-			if(!do_after(D,50,M))
+			if(!do_after(D, 5 SECONDS, M, DO_PUBLIC_UNIQUE))
 				return
 
 			if(!M || !D) return

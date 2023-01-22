@@ -59,7 +59,7 @@
 	if((. = ..()))
 		return
 	if(config.vote_no_dead_crew_transfer)
-		return !isliving(user) || ismouse(user) || is_drone(user) || user.stat == DEAD
+		return !isliving(user) || ismouse(user) || isdrone(user) || user.stat == DEAD
 
 /datum/vote/transfer/check_toggle()
 	return config.allow_vote_restart ? "Allowed" : "Disallowed"

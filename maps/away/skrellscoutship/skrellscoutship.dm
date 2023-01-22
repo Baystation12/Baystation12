@@ -22,7 +22,7 @@
 /obj/effect/overmap/visitable/sector/skrellscoutspace
 	name = "Empty Sector"
 	desc = "Slight traces of a cloaking device are present. Unable to determine exact location."
-	in_space = 1
+	in_space = TRUE
 	icon_state = "event"
 	hide_from_reports = TRUE
 
@@ -51,7 +51,7 @@
 
 //Access + Loadout
 
-/var/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
+var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 
 /datum/access/skrellscoutship
 	id = access_skrellscoutship
@@ -227,7 +227,7 @@
 		/obj/item/clothing/glasses,
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_magazine,
-		/obj/item/reagent_containers/food/snacks/donut/,
+		/obj/item/reagent_containers/food/snacks/donut,
 		/obj/item/melee/baton,
 		/obj/item/melee/telebaton,
 		/obj/item/flame/lighter,

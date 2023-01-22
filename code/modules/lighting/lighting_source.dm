@@ -1,4 +1,4 @@
-/var/total_lighting_sources = 0
+var/global/total_lighting_sources = 0
 // This is where the fun begins.
 // These are the main datums that emit light.
 
@@ -269,7 +269,7 @@
 	effect_str.Cut()
 
 /datum/light_source/proc/recalc_corner(var/datum/lighting_corner/C)
-	if(list_find(effect_str, C)) // Already have one.
+	if(effect_str.Find(C)) // Already have one.
 		REMOVE_CORNER(C)
 
 	APPLY_CORNER(C)

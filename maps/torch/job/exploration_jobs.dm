@@ -1,10 +1,10 @@
 /datum/job/pathfinder
 	title = "Pathfinder"
-	department = "Exploration"
+	department = "Экспедиционный"
 	department_flag = EXP
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Chief Science Officer"
+	supervisors = "Главному научному офицеру"
 	selection_color = "#68099e"
 	minimal_player_age = 1
 	economic_power = 10
@@ -33,7 +33,7 @@
 		access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_expedition_shuttle_helm,
 		access_guppy, access_hangar, access_petrov, access_petrov_helm, access_petrov_analysis, access_petrov_phoron,
 		access_petrov_toxins, access_petrov_chemistry, access_petrov_maint, access_tox, access_tox_storage, access_research,
-		access_xenobiology, access_xenoarch, access_torch_fax, access_radio_comm, access_radio_exp, access_radio_sci,
+		access_xenobiology, access_xenoarch, access_torch_fax, access_radio_comm, access_radio_exp, access_radio_sci, access_research_storage,
 		access_exploration_guard //Proxima EC rework addition
 	)
 
@@ -41,12 +41,15 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/pathfinder/get_description_blurb()
-	return "You are the Pathfinder. Your duty is to organize and lead the expeditions to away sites, carrying out the EC's Primary Mission. You command Explorers and Marines. Watch that your men and women don't spend all shuttle's energy on recharging their cells. You make sure that expedition has the supplies and personnel it needs. You can pilot Charon if nobody else provides a pilot. Once on the away mission, your duty is to ensure that anything of scientific interest is brought back to the ship and passed to the relevant research lab."
+	return "Вы - Первопроходец. Ваша обязанность - организовывать и вести экспедиции в удалённые места, выполняя Главную Миссию ЭК. \
+	Вы командуете Исследователями и Морпехами. Присматривайте за тем, чтобы Ваши мужщины и женщины не потратили всю энергию шаттла на зарядку батарей. \
+	Убедитесь, что экспедиция имеет припасы и необходимый персонал. Вы можете пилотировать Харон, в случае, если никто другой не может. \
+	Как только Вы попали на исследовательскую миссию, Ваш долг - гарантировать, что любой предмет, представляющий научный интерес, будет принесёт обратно на судна и транспортирован к нужной научной лаборатории."
 
 /datum/job/nt_pilot
 	title = "Shuttle Pilot"
-	supervisors = "the Pathfinder"
-	department = "Exploration"
+	supervisors = "Командующему и Исполнительному Офицеру, и Первопроходцу"
+	department = "Экспедиционный"
 	department_flag = EXP
 	total_positions = 1
 	spawn_positions = 1
@@ -62,7 +65,9 @@
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/exploration/pilot/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot,
+		/datum/mil_rank/civ/second = /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot,
+		/datum/mil_rank/civ/first = /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot,
+		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/ec/e7,
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/fleet/e7
@@ -81,13 +86,17 @@
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
 
+/datum/job/nt_pilot/get_description_blurb()
+	return "Вы - пилот экспедиции. Ваша задача - обслуживать Харон и управлять им. Вы подчиняетесь Первопроходцу. Удостоверьтесь, что Харон имеет топливо в баках, а также энергию для полёта. \
+	Не забывайте приглядывать за остальной командой."
+
 /datum/job/explorer
 	title = "Explorer"
-	department = "Exploration"
+	department = "Экспедиционный"
 	department_flag = EXP
-	total_positions = 5
-	spawn_positions = 5
-	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
+	total_positions = 3
+	spawn_positions = 3
+	supervisors = "Командующему и Исполнительному Офицеру, и Первопроходцу"
 	selection_color = "#68099e"
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 20
@@ -117,17 +126,19 @@
 	software_on_spawn = list(/datum/computer_file/program/deck_management)
 
 /datum/job/explorer/get_description_blurb()
-	return "You are an Explorer. Your duty is to go on expeditions to away sites. The Pathfinder is your team leader. You are to look for anything of economic or scientific interest to the SCG - mineral deposits, alien flora/fauna, artifacts. You will also likely encounter hazardous environments, aggressive wildlife or malfunctioning defense systems, so tread carefully."
+	return "Вы - Исследователь. Ваша задача - участвовать в экспедициях в удалённые места. Первопроходец - лидер Вашей команды. \
+	Вы должны искать все, что представляет экономический или научный интерес для ЦПСС - месторождения полезных ископаемых, инопланетную флору/фауну, артефакты. \
+	Вы также, вероятно, столкнетесь с опасной средой, агрессивной дикой природой или неисправными системами защиты, поэтому действуйте осторожно."
 
 /datum/job/expmed
 	title = "Exploration Medic"
-	department = "Exploration"
+	department = "Экспедиционный"
 	department_flag = EXP
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
+	supervisors = "Командующему и Исполнительному Офицеру, и Первопроходцу"
 	selection_color = "#68099e"
-	minimum_character_age = list(SPECIES_HUMAN = 19)
+	minimum_character_age = list(SPECIES_HUMAN = 20)
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/expmed
 	allowed_branches = list(
@@ -139,7 +150,7 @@
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/army/e3,
-		/datum/mil_rank/army/e4,
+		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5
 	)
 	min_skill = list(   SKILL_EVA = SKILL_BASIC,
@@ -164,17 +175,18 @@
 							/datum/computer_file/program/deck_management)
 
 /datum/job/expmed/get_description_blurb()
-	return "You are an Exploration Medic. Your duty is to go on expeditions to away sites. The Pathfinder is your team leader. You are to keep your team members alive. Keep a note that you are not a doctor, don't try to preform surgeries on your shuttle as you're not qualified for that."
+	return "Вы - Исследователь-медик. Ваша задача - участвовать в экспедициях в удалённые места. Первопроходец - лидер Вашей команды. \
+	Ваша цель - лечение и спасение остальных участников экспедиции. Учтите, что вы не профессиональный хирург, поэтому не пытайтесь проводить операции на шаттле, у Вас нет квалификации для этого."
 
 /datum/job/expeng
 	title = "Exploration Engineer"
-	department = "Exploration"
+	department = "Экспедиционный"
 	department_flag = EXP
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
+	supervisors = "Командующему и Исполнительному Офицеру, и Первопроходцу"
 	selection_color = "#68099e"
-	minimum_character_age = list(SPECIES_HUMAN = 19)
+	minimum_character_age = list(SPECIES_HUMAN = 20)
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/expeng
 	allowed_branches = list(
@@ -186,7 +198,7 @@
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/army/e3,
-		/datum/mil_rank/army/e4,
+		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5
 	)
 	min_skill = list(   SKILL_EVA = SKILL_BASIC,
@@ -210,15 +222,16 @@
 	software_on_spawn = list(/datum/computer_file/program/deck_management)
 
 /datum/job/expeng/get_description_blurb()
-	return "You are an Exploration Engineer. Your duty is to go on expeditions to away sites. The Pathfinder is your team leader. You are to keep shuttle operational and make holes wherever your boss says."
+	return "Вы - Исследователь-инженер. Ваша задача - участвовать в экспедициях в удалённые места. Первопроходец - лидер Вашей команды. \
+	Ваша цель - поддерживать шаттл в рабочем состоянии и проделывать проходы везде, где скажет ваш босс."
 
 /datum/job/expmar
 	title = "Expedition Marine Guard"
-	department = "Exploration"
+	department = "Экспедиционный"
 	department_flag = EXP
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
+	supervisors = "Командующему и Исполнительному Офицеру, и Первопроходцу"
 	selection_color = "#68099e"
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 21
@@ -253,4 +266,5 @@
 	software_on_spawn = list(/datum/computer_file/program/deck_management)
 
 /datum/job/expmar/get_description_blurb()
-	return "You are an Exploration Guard. Your duty is to go on expeditions to away sites and keep members of the team safe. The Pathfinder is your team leader. Listen him and obey at all costs. Try not to recharge all your cells on a trip."
+	return "Вы - охранник экспедиции. Ваша задача - участвовать в экспедициях в удалённые места и обеспечивать безопасность экспедиции. Первопроходец - лидер Вашей команды. \
+	Слушайте его и повинуйтесь любой ценой. Постарайтесь не растратить весь запас батарей."

@@ -35,13 +35,6 @@
 /obj/item/implant/tracking/islegal()
 	return TRUE
 
-/obj/item/implant/tracking/emp_act(severity)
-	var/power = 4 - severity
-	if(prob(power * 15))
-		meltdown()
-	else if(prob(power * 40))
-		disable(rand(power*500,power*5000))//adds in extra time because this is the only other way to sabotage it
-
 /obj/item/implantcase/tracking
 	name = "glass case - 'tracking'"
 	imp = /obj/item/implant/tracking

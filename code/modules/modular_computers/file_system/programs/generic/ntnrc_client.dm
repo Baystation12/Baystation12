@@ -11,7 +11,7 @@
 	network_destination = "NTNRC server"
 	ui_header = "ntnrc_idle.gif"
 	available_on_ntnet = TRUE
-	nanomodule_path = /datum/nano_module/program/computer_chatclient/
+	nanomodule_path = /datum/nano_module/program/computer_chatclient
 	/// Used to generate the toolbar icon
 	var/last_message = null
 	var/username

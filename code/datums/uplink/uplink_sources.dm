@@ -31,6 +31,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 		return SETUP_FAILED	//Not enough space or other issues.
 	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [P.name]. Simply enter the code \"[pda_pass]\" in TaxQuickly program to unlock its hidden features.</span>")
 	M.StoreMemory("<B>Uplink passcode:</B> [pda_pass] ([P.name]).", /decl/memory_options/system)
+	T.program = program
 
 /decl/uplink_source/radio
 	name = "Radio"

@@ -8,8 +8,8 @@
 	var/datum/wound/created_wound = apply_damage(effective_force, I.damtype, hit_zone, damage_flags, used_weapon=I, armor_pen=I.armor_penetration)
 
 	//Melee weapon embedded object code.
-	if(istype(created_wound) && I && I.can_embed() && I.damtype == BRUTE && !I.anchored && !is_robot_module(I))
-		var/weapon_sharp = (damage_flags & DAM_SHARP)
+	if (istype(created_wound) && I && I.can_embed() && I.damtype == DAMAGE_BRUTE && !I.anchored && !is_robot_module(I))
+		var/weapon_sharp = (damage_flags & DAMAGE_FLAG_SHARP)
 		var/damage = effective_force //just the effective damage used for sorting out embedding, no further damage is applied here
 		damage *= 1 - get_blocked_ratio(hit_zone, I.damtype, I.damage_flags(), I.armor_penetration, I.force)
 

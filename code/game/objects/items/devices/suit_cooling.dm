@@ -4,7 +4,7 @@
 	w_class = ITEM_SIZE_LARGE
 	icon = 'icons/obj/suitcooler.dmi'
 	icon_state = "suitcooler0"
-	item_state = "coolingpack"			// beautiful codersprites until someone makes a prettier one.
+	item_state = "coolingpack"
 	slot_flags = SLOT_BACK
 
 	//copied from tank.dm
@@ -117,6 +117,7 @@
 		else
 			cover_open = 1
 			to_chat(user, "You unscrew the panel.")
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 		update_icon()
 		return
 

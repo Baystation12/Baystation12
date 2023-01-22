@@ -44,12 +44,6 @@
 	var/obj/effect/fluid/F = return_fluid()
 	return (istype(F) ? F.fluid_amount : 0 )
 
-/turf/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
-	. = ..()
-	var/turf/T = .
-	if(isturf(T) && !T.flooded && T.flood_object)
-		QDEL_NULL(flood_object)
-
 /turf/proc/show_bubbles()
 	set waitfor = 0
 

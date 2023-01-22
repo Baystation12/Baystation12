@@ -1,9 +1,9 @@
 /decl/cultural_info/culture/unathi
 	name = CULTURE_UNATHI_DIAMOND_PEAKS
-	description = "Haughty and warlike, unathi from the Diamond peaks are wary of the outsiders, especially offworlders. \
-	Hierarchy and tradition are the core values of their clans. From their mountainous strongholds they exercise power \
-	over their lowland vassals, protecting them and Moghes in the name of the Grand Strategem - even though the clear \
-	division between feudal masters and their subject clans has been gradually wearing away."
+	description = "Надменные и воинственные, <font color=#54654c>унати</font> с Алмазных Пиков настороженно относятся к чужакам, а особенно к инопланетянам. \
+	Иерархия и традиции являются основными ценностями их кланов. Из своих горных твердынь они осуществляют власть \
+	над своими вассалами в низинах, защищая их и Могес во имя Великой Стратегии - даже несмотря на то, что четкое \
+	разделение между феодальными хозяевами и их подчиненными кланами постепенно стирается."
 	economic_power = 0.8
 	language = LANGUAGE_UNATHI_SINTA
 	secondary_langs = list(
@@ -15,9 +15,10 @@
 
 /decl/cultural_info/culture/unathi_polar
 	name = CULTURE_UNATHI_POLAR
-	description = "These unathi hail from the dense jungles of Moghes' poles. Generally, they're the most welcoming of outsiders and the most \
-	common to find off-world. Most of these unathi are followers of the Precursors or the Fruitful Lights, with technology and progress being \
-	an important concept in the polar city-states."
+	description = "Эти <font color=#54654c>Унати</font> родом из густых джунглей полюсов Могеса. Как правило, они самые дружелюбные к \
+	посторонним и наиболее часто встречающиеся вне родной планеты. Большинство из этих <font color=#54654c>Унати</font> являются последователями \
+	Предтеч или Плодотворных Огней, а технология и прогресс являются важной концепцией в их полярных \
+	городах-государствах."
 	language = LANGUAGE_UNATHI_SINTA
 	secondary_langs = list(
 		LANGUAGE_UNATHI_YEOSA,
@@ -28,10 +29,10 @@
 
 /decl/cultural_info/culture/unathi_desert
 	name = CULTURE_UNATHI_DESERT
-	description = "These are the survivalists of the unathi. They hunker down in long-forgotten bunkers of the precursors and survive on \
-	whatever creatures that still live in the deserts. They're incredibly self-sufficient despite their living conditions. They have a heavy focus on \
-	the Precursors and the Grand Stratagem in their clan faiths, and are often considered the most spiritual."
-	language = LANGUAGE_UNATHI_SINTA
+	description = "Это <font color=#54654c>унати-выживальщики</font>. Они охотятся в давно забытых бункерах Предтеч и перемещаются на любых \
+	существах, которые все еще обитают в пустынях. Они невероятно самодостаточны, несмотря на свои скудные \
+	жилищные условия. Их клановые верования сосредоточены на Предтечах и идеях Великой Стратегии и часто эти \
+	унати считаются самыми духовными."
 	secondary_langs = list(
 		LANGUAGE_UNATHI_YEOSA,
 		LANGUAGE_SIGN,
@@ -41,8 +42,8 @@
 
 /decl/cultural_info/culture/unathi_savannah
 	name = CULTURE_UNATHI_SAVANNAH
-	description = "These unathi belong to the numerous rural and nomadic clans spread across the great plains of either hemisphere of Moghes. \
-	Excellent farmers, riders and herdsmen, most savannah unathi follow the Hand of the Vines."
+	description = "Эти <font color=#54654c>унати</font> - кочевые кланы, путешествующие по Великим Равнинам Могеса или даже звездам нашей \
+	вселенной, надеясь, смогут превратить Могес в новый рай. Большинство <font color=#54654c>унати</font> Саванн исповедуют Руку Лозы."
 	language = LANGUAGE_UNATHI_SINTA
 	secondary_langs = list(
 		LANGUAGE_UNATHI_YEOSA,
@@ -53,9 +54,8 @@
 
 /decl/cultural_info/culture/unathi_salt_swamp
 	name = CULTURE_UNATHI_SALT_SWAMP
-	description = "Combining assorted elements of various cultures with an adventurous spirit and resolve, salt swamp unathi are noted for their friendliness and openness to outsiders, \
-	along with their knack for rituals that often get mistaken as \"parties\" by humans. The Fruitful Lights and Hand of the Vines both have numerous \
-	followers with these unathi."
+	description = "Сочетая в себе различные элементы различных культур с духом авантюризма и решимостью, <font color=#54654c>унати</font> Соленых Болот известны своим дружелюбием и открытостью для посторонних, \
+	также умением проводить ритуалы, часто принимаемые за \"вечеринки\" людьми. Среди этих <font color=#54654c>унати</font> преобладают последователи Плодотворных Огней и Руки Лозы."
 	language = LANGUAGE_UNATHI_SINTA
 	secondary_langs = list(
 		LANGUAGE_UNATHI_YEOSA,
@@ -66,10 +66,10 @@
 
 /decl/cultural_info/culture/unathi_space
 	name = CULTURE_UNATHI_SPACE
-	description = "With increased trade with humanity and Sol, unathi clans have gradually reached towards the stars. Space-faring clans owe \
-	much of their origins to the nomadic savannah clans, though it still varies greatly. Many of them still retain their traditions from their \
-	original homes. Now considering themselves as pioneers, they are varied in their ways. Many function as merchants and trade haulers, offering services \
-	to the Moghes Hegemony and Sol businesses alike."
+	description = "С увеличением объёма торговли с человечеством и <font color=#436b8e>ЦПСС</font> кланы <font color=#54654c>унати</font> постепенно достигли звезд. Космические кланы во \
+	многом обязаны своим происхождением кочевым кланам саванн, хотя они все еще сильно различаются. Многие из них до сих пор сохраняют свои традиции из своих \
+	родных мест. Теперь, считая себя первопроходцами, они разнообразны в своих способах существования. Многие из них работают торговцами и перевозчиками, предоставляя свои услуги как \
+	Гегемонии Могеса, так и предприятиям <font color=#436b8e>ЦПСС</font>."
 	secondary_langs = list(
 		LANGUAGE_UNATHI_SINTA,
 		LANGUAGE_UNATHI_YEOSA,
@@ -81,15 +81,15 @@
 
 /decl/cultural_info/culture/unathi_yeosa
 	name = CULTURE_UNATHI_YEOSA_LITTORAL
-	description = "On Moghes, the boundaries between regions, cultures, and even races are rarely set in stone the yeosa realm is by no means an exception. \
-	Spread wide along the coast of the World Sea, islander communities coexist (and sometimes cooperate) with their sinta brethren. This is especially \
-	true not only for those living in the deltas and estuaries of the Salt Swamps the birthplace of yeosa'unathi race but also for those settling in proximity \
-	of major ports belonging to the Diamond Peaks (Gazalor) and other ethnic groups. Those coastal yeosa are generally known to the outsiders as yeosa littoral, or simply littorals - a name rarely used by the islanders themselves. \
-	While the name implies that yeosa in question are lagoon-bound, this may often not be the case; ties with the land-dwellers, or lack thereof, have \
-	also been used as a criterion, although less so in recent years. What is true, however, is that the littoral clans have adopted some sinta ways of life \
-	through their constant mingling with the outsiders, integrating not only some elements of continental cults and festivities, but also the newer political ideas, such as \
-	clan leagues, city-states, and the Krukzuz. Technology works the same way - just as the well-preserved units of precursor crafts found their way to \
-	the poles and the peaks, off-world and polar-produced flechette pistols and wetsuits became more commonplace in littoral areas as well."
+	description = "На Могесе границы между регионами, культурами и даже расами редко достоверно разграничивается - <font color=#ec8b2f>царство Йоза</font> ни в коем случае не является исключением. \
+	Широко раскинувшиеся вдоль побережья Мирового моря сообщества островитян сосуществуют (а иногда и сотрудничают) со своими <font color=#c0c0c0>собратьями-синта</font>. Это особенно верно \
+	для тех, кто живет в дельтах и устьях рек Соляных болот - родины расы <font color=#ec8b2f>Йоза</font> - но также и для тех, кто поселяется в \
+	непосредственной близости от крупных портов, принадлежащих Алмазным Пикам и другим этническим группам.Эти прибрежные йоза, как правило, известны посторонним как Йоза с берегов, или просто Береговые - название редко используется самими островитянами. \
+	Хотя название подразумевает, что <font color=#ec8b2f>йоза</font>, о которых идет речь, привязаны к берегу, это часто может быть не так; связи с сухопутными жителями или их отсутствие \
+	также использовались в качестве критерия, хотя и в меньшей степени в последние годы. Правда, однако, заключается в том, что в прибрежные кланы некоторые сферы жизни <font color=#c0c0c0>синта</font> \
+	посредством их постоянного смешения с посторонними - некоторые элементы Континентальной культуры и празднеств, но и новые политические идеи,такие как \
+	клановые Лиги, городов-государств и Крукзузов. Технологии распространены так же - точно так же, как хорошо сохранившиеся единицы приборов Предтеч нашли свой путь \
+	к Полюсам и Алмазным Пикам, пистолеты-пулеметы и гидрокостюмы, произведенные за пределами мира или на Полюсах, стали более распространенными в прибрежных районах."
 	economic_power = 0.8
 	language = LANGUAGE_UNATHI_YEOSA
 	secondary_langs = list(
@@ -101,11 +101,12 @@
 
 /decl/cultural_info/culture/unathi_yeosa_abyss
 	name = CULTURE_UNATHI_YEOSA_ABYSS
-	description = "While the majority of yeosa gravitate toward the coastal areas, some have dwelled deeper into the ocean, following the migration \
-	of sea animals, seeking shelter, or driven by the spirit of adventure. Those who have settled in the volcanic islands and archipelagos of deep sea became \
-	known as the Abyssals - an ethnic group connected to yeosa proper, yet very different from any race found on land. To their few guests, the Abyssals may appear uncannily secretive, if not strange. Abyssal yeosa keep track of time intently, only travelling through the \
-	waters during certain hours, and sunbathing during others. They follow Aga-Eakhe to the letter, and tend to believe in many a superstition, performing \
-	augury and seeking signs before every major enterprise."
+	description = "В то время как большинство <font color=#ec8b2f>йоза</font> тяготеют к прибрежным районам, некоторые поселились глубже в океане, следуя за миграцией \
+	морских животных, ища убежища или движимые духом приключений. Те, кто поселился на вулканических островах и архипелагах глубокого моря, стали \
+	известны как <font color=#6a97b0>Глубинные</font> - этническая группа, связанная с собственно <font color=#ec8b2f>йоза</font>, но очень отличающаяся от любой расы, обитающей на суше. Своим немногочисленным гостям <font color=#6a97b0>Глубинные</font> могут показаться сверхъестественно скрытными, если не странными. \
+	<font color=#6a97b0>Глубинные</font> внимательно следят за временем, путешествуя по \
+	воде только в одни определённые часы и отдыхают на солнце в другие. Они следуют Ага-Эхе до последней буквы и склонны верить во многие суеверия, выполняя \
+	предсказания и ища знамения перед каждым крупным предприятием."
 	language = LANGUAGE_UNATHI_YEOSA
 	secondary_langs = list(
 		LANGUAGE_UNATHI_SINTA,

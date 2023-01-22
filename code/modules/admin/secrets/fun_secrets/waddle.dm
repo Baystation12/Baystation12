@@ -14,5 +14,9 @@
 	if(!istype(L) || L.incapacitated() || L.lying)
 		return
 	animate(L, pixel_z = 4, time = 0)
-	animate(pixel_z = 0, transform = turn(matrix(), pick(-12, 0, 12)), time=2)
+	animate(
+		pixel_z = 0,
+		transform = matrix().Update(rotation = pick(-12, 0, 12)),
+		time = 2
+	)
 	animate(pixel_z = 0, transform = matrix(), time = 0)

@@ -1,12 +1,17 @@
 // Areas.dm
 
-
-
-// ===
 /area
-	var/global/global_uid = 0
+	/// Integer. Global counter for `uid` values assigned to areas. Increments by one for each new area.
+	var/static/global_uid = 0
+
+	/// Integer. The area's unique ID number. set to the value of `global_uid` + 1 when the area is created.
 	var/uid
+
+	/// Bitflag (Any of `AREA_FLAG_*`). See `code\__defines\misc.dm`.
 	var/area_flags
+
+	/// A lazy list of vent pumps currently in the area
+	var/list/obj/machinery/atmospherics/unary/vent_pump/vent_pumps
 
 /area/New()
 	icon_state = ""
@@ -56,18 +61,22 @@
 	for(var/obj/machinery/M in T)
 		M.area_changed(old_area, A) // They usually get moved events, but this is the one way an area can change without triggering one.
 
-/area/proc/get_contents()
-	return contents
-
+/// Returns list (`/obj/machinery/camera`). A list of all cameras in the area.
 /area/proc/get_cameras()
 	var/list/cameras = list()
 	for (var/obj/machinery/camera/C in src)
 		cameras += C
 	return cameras
 
-/area/proc/is_shuttle_locked()
-	return 0
-
+/**
+ * Defines the area's atmosphere alert level.
+ *
+ * **Parameters**:
+ * - `danger_level` Integer. The new alert danger level to set.
+ * - `alarm_source` Atom. The source that's triggering the alert change.
+ *
+ * Returns boolean. `TRUE` if the atmosphere alarm level was changed, `FALSE` otherwise.
+ */
 /area/proc/atmosalert(danger_level, var/alarm_source)
 	if (danger_level == 0)
 		GLOB.atmosphere_alarm.clearAlarm(src, alarm_source)
@@ -93,6 +102,7 @@
 		return 1
 	return 0
 
+/// Sets `air_doors_activated` and sets all firedoors in `all_doors` to the closed state. Does nothing if `air_doors_activated` is already set.
 /area/proc/air_doors_close()
 	if(!air_doors_activated)
 		air_doors_activated = 1
@@ -106,6 +116,7 @@
 					spawn(0)
 						E.close()
 
+/// Clears `air_doors_activated` and sets all firedoors in `all_doors` to the open state. Does nothing if `air_doors_activated` is already cleared.
 /area/proc/air_doors_open()
 	if(air_doors_activated)
 		air_doors_activated = 0
@@ -122,6 +133,7 @@
 							E.open()
 
 
+/// Sets a fire alarm in the area, if one is not already active.
 /area/proc/fire_alert()
 	if(!fire)
 		fire = 1	//used for firedoor checks
@@ -137,6 +149,7 @@
 					spawn()
 						D.close()
 
+/// Clears an active fire alarm from the area.
 /area/proc/fire_reset()
 	if (fire)
 		fire = 0	//used for firedoor checks
@@ -153,18 +166,21 @@
 					spawn(0)
 					D.open()
 
+/// Sets an active evacuation alarm in the area, if one is not already active.
 /area/proc/readyalert()
 	if(!eject)
 		eject = 1
 		update_icon()
 	return
 
+/// Clears an active evacuation alarm from the area.
 /area/proc/readyreset()
 	if(eject)
 		eject = 0
 		update_icon()
 	return
 
+/// Sets a party alarm in the area, if one is not already active.
 /area/proc/partyalert()
 	if (!( party ))
 		party = 1
@@ -172,6 +188,7 @@
 		mouse_opacity = 0
 	return
 
+/// Clears an active party alarm from the area.
 /area/proc/partyreset()
 	if (party)
 		party = 0
@@ -202,6 +219,7 @@
 	//	new lighting behaviour with obj lights
 		icon_state = null
 
+/// Sets the area's light switch state to on or off, in turn turning all lights in the area on or off.
 /area/proc/set_lightswitch(var/new_switch)
 	if(lightswitch != new_switch)
 		lightswitch = new_switch
@@ -210,12 +228,11 @@
 		update_icon()
 		power_change()
 
+/// Calls `set_emergency_lighting(enable)` on all `/obj/machinery/light` in src.
 /area/proc/set_emergency_lighting(var/enable)
 	for(var/obj/machinery/light/M in src)
 		M.set_emergency_lighting(enable)
 
-
-var/list/mob/living/forced_ambiance_list = new
 
 /area/Entered(A)
 	..()
@@ -236,37 +253,53 @@ var/list/mob/living/forced_ambiance_list = new
 	play_ambience(L)
 	L.lastarea = newarea
 
-/area/proc/play_ambience(var/mob/living/L)
-	// Ambience goes down here -- make sure to list each area seperately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
-	if(!(L && L.client && L.get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES))	return
 
-	var/turf/T = get_turf(L)
-	var/hum = 0
-	if(L.get_sound_volume_multiplier() >= 0.2 && !always_unpowered && power_environ)
-		for(var/obj/machinery/atmospherics/unary/vent_pump/vent in src)
-			if(vent.can_pump())
-				hum = 1
+/// Handles playing ambient sounds to a given mob, including ship hum.
+/area/proc/play_ambience(mob/living/living)
+	if (!living?.client)
+		return
+	if (living.get_preference_value(/datum/client_preference/play_ambiance) != GLOB.PREF_YES)
+		return
+	var/turf/turf = get_turf(living)
+	if (!turf)
+		return
+
+	var/vent_ambience
+	if (!always_unpowered && power_environ && length(vent_pumps) && living.get_sound_volume_multiplier() > 0.2)
+		for (var/obj/machinery/atmospherics/unary/vent_pump/vent as anything in vent_pumps)
+			if (vent.can_pump())
+				vent_ambience = TRUE
 				break
-	if(hum)
-		if(!L.client.ambience_playing)
-			L.client.ambience_playing = 1
-			L.playsound_local(T,sound('sound/ambience/shipambience.ogg', repeat = 1, wait = 0, volume = 20, channel = GLOB.ambience_sound_channel))
+	var/client/client = living.client
+	if (vent_ambience)
+		if (!client.playing_vent_ambience)
+			var/sound = sound('sound/ambience/shipambience.ogg', repeat = TRUE, wait = 0, volume = 10, channel = GLOB.ambience_channel_vents)
+			living.playsound_local(turf, sound)
+			client.playing_vent_ambience = TRUE
 	else
-		if(L.client.ambience_playing)
-			L.client.ambience_playing = 0
-			sound_to(L, sound(null, channel = GLOB.ambience_sound_channel))
+		sound_to(living, sound(null, channel = GLOB.ambience_channel_vents))
+		client.playing_vent_ambience = FALSE
 
-	if(L.lastarea != src)
-		if(LAZYLEN(forced_ambience))
-			forced_ambiance_list |= L
-			L.playsound_local(T,sound(pick(forced_ambience), repeat = 1, wait = 0, volume = 25, channel = GLOB.lobby_sound_channel))
-		else	//stop any old area's forced ambience, and try to play our non-forced ones
-			sound_to(L, sound(null, channel = GLOB.lobby_sound_channel))
-			forced_ambiance_list -= L
-	if(ambience.len && prob(5) && (world.time >= L.client.played + 3 MINUTES))
-		L.playsound_local(T, sound(pick(ambience), repeat = 0, wait = 0, volume = 15, channel = GLOB.lobby_sound_channel))
-		L.client.played = world.time
+	if (living.lastarea != src)
+		if (forced_ambience)
+			var/sound = sound(pick(forced_ambience), repeat = TRUE, wait = 0, volume = 25, channel = GLOB.ambience_channel_forced)
+			living.playsound_local(turf, sound)
+		else
+			sound_to(living, sound(null, channel = GLOB.ambience_channel_forced))
 
+	var/time = world.time
+	if (ambience && time > client.next_ambience_time)
+		var/sound = sound(pick(ambience), repeat = FALSE, wait = 0, volume = 15, channel = GLOB.ambience_channel_common)
+		living.playsound_local(turf, sound)
+		client.next_ambience_time = time + rand(3, 5) MINUTES
+
+
+/**
+ * Sets the area's `has_gravity` state.
+ *
+ * **Parameters**:
+ * - `gravitystate` Boolean, default `FALSE`. The new state to set `has_gravity` to.
+ */
 /area/proc/gravitychange(var/gravitystate = 0)
 	has_gravity = gravitystate
 
@@ -275,6 +308,7 @@ var/list/mob/living/forced_ambiance_list = new
 			thunk(M)
 		M.update_floating()
 
+/// Causes the provided mob to 'slam' down to the floor if certain conditions are not met. Primarily used for gravity changes.
 /area/proc/thunk(mob/mob)
 	if(istype(get_turf(mob), /turf/space)) // Can't fall onto nothing.
 		return
@@ -282,7 +316,7 @@ var/list/mob/living/forced_ambiance_list = new
 	if(mob.Check_Shoegrip())
 		return
 
-	if(istype(mob,/mob/living/carbon/human/))
+	if(istype(mob,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = mob
 		if(!H.buckled && prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_PROF)))
 			if(!MOVING_DELIBERATELY(H))
@@ -293,6 +327,7 @@ var/list/mob/living/forced_ambiance_list = new
 				H.AdjustWeakened(3)
 			to_chat(mob, "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>")
 
+/// Trigger for the prison break event. Causes lighting to overload and dooes to open. Has no effect if the area lacks an APC or the APC is turned off.
 /area/proc/prison_break()
 	var/obj/machinery/power/apc/theAPC = get_apc()
 	if(theAPC && theAPC.operating)
@@ -303,6 +338,7 @@ var/list/mob/living/forced_ambiance_list = new
 		for(var/obj/machinery/door/window/temp_windoor in src)
 			temp_windoor.open()
 
+/// Returns boolean. Whether or not the area is considered to have gravity.
 /area/proc/has_gravity()
 	return has_gravity
 
@@ -317,6 +353,7 @@ var/list/mob/living/forced_ambiance_list = new
 		return 1
 	return 0
 
+/// Returns List (axis => Integer). The width and height, in tiles, of the area, indexed by axis. Axis is `"x"` or `"y"`.
 /area/proc/get_dimensions()
 	var/list/res = list("x"=1,"y"=1)
 	var/list/min = list("x"=world.maxx,"y"=world.maxy)
@@ -329,9 +366,11 @@ var/list/mob/living/forced_ambiance_list = new
 	res["y"] = res["y"] - min["y"] + 1
 	return res
 
+/// Returns boolean. Whether or not there are any turfs (`/turf`) in src.
 /area/proc/has_turfs()
 	return !!(locate(/turf) in src)
 
+/// Returns boolean. Whether or not the area can be modified by player actions.
 /area/proc/can_modify_area()
 	if (src && src.area_flags & AREA_FLAG_NO_MODIFY)
 		return FALSE

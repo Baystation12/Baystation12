@@ -40,17 +40,17 @@ SUBSYSTEM_DEF(machines)
 	priority = SS_PRIORITY_MACHINERY
 	flags = SS_KEEP_TIMING
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
-	var/static/tmp/current_step = SSMACHINES_PIPENETS
-	var/static/tmp/cost_pipenets = 0
-	var/static/tmp/cost_machinery = 0
-	var/static/tmp/cost_powernets = 0
-	var/static/tmp/cost_power_objects = 0
-	var/static/tmp/list/pipenets = list()
-	var/static/tmp/list/machinery = list()
-	var/static/tmp/list/powernets = list()
-	var/static/tmp/list/power_objects = list()
-	var/static/tmp/list/processing = list()
-	var/static/tmp/list/queue = list()
+	var/static/current_step = SSMACHINES_PIPENETS
+	var/static/cost_pipenets = 0
+	var/static/cost_machinery = 0
+	var/static/cost_powernets = 0
+	var/static/cost_power_objects = 0
+	var/static/list/pipenets = list()
+	var/static/list/machinery = list()
+	var/static/list/powernets = list()
+	var/static/list/power_objects = list()
+	var/static/list/processing = list()
+	var/static/list/queue = list()
 
 
 /datum/controller/subsystem/machines/Recover()
@@ -58,42 +58,42 @@ SUBSYSTEM_DEF(machines)
 	queue.Cut()
 
 
-/datum/controller/subsystem/machines/Initialize()
+/datum/controller/subsystem/machines/Initialize(start_uptime)
 	makepowernets()
 	setup_atmos_machinery(machinery)
-	fire()
+	fire(FALSE, TRUE)
 
 
 /datum/controller/subsystem/machines/fire(resumed, no_mc_tick)
 	var/timer
 	if (!resumed || current_step == SSMACHINES_PIPENETS)
-		timer = TICK_USAGE_REAL
+		timer = world.tick_usage
 		process_pipenets(resumed, no_mc_tick)
-		cost_pipenets = MC_AVERAGE(cost_pipenets, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
+		cost_pipenets = MC_AVERAGE(cost_pipenets, (world.tick_usage - timer) * world.tick_lag)
 		if (state != SS_RUNNING)
 			return
 		current_step = SSMACHINES_MACHINERY
 		resumed = FALSE
 	if (current_step == SSMACHINES_MACHINERY)
-		timer = TICK_USAGE_REAL
+		timer = world.tick_usage
 		process_machinery(resumed, no_mc_tick)
-		cost_machinery = MC_AVERAGE(cost_machinery, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
+		cost_machinery = MC_AVERAGE(cost_machinery, (world.tick_usage - timer) * world.tick_lag)
 		if(state != SS_RUNNING)
 			return
 		current_step = SSMACHINES_POWERNETS
 		resumed = FALSE
 	if (current_step == SSMACHINES_POWERNETS)
-		timer = TICK_USAGE_REAL
+		timer = world.tick_usage
 		process_powernets(resumed, no_mc_tick)
-		cost_powernets = MC_AVERAGE(cost_powernets, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
+		cost_powernets = MC_AVERAGE(cost_powernets, (world.tick_usage - timer) * world.tick_lag)
 		if(state != SS_RUNNING)
 			return
 		current_step = SSMACHINES_POWER_OBJECTS
 		resumed = FALSE
 	if (current_step == SSMACHINES_POWER_OBJECTS)
-		timer = TICK_USAGE_REAL
+		timer = world.tick_usage
 		process_power_objects(resumed, no_mc_tick)
-		cost_power_objects = MC_AVERAGE(cost_power_objects, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
+		cost_power_objects = MC_AVERAGE(cost_power_objects, (world.tick_usage - timer) * world.tick_lag)
 		if (state != SS_RUNNING)
 			return
 		current_step = SSMACHINES_PIPENETS
@@ -104,7 +104,8 @@ SUBSYSTEM_DEF(machines)
 	for(var/datum/powernet/powernet as anything in powernets)
 		qdel(powernet)
 	powernets.Cut()
-	setup_powernets_for_cables(cable_list)
+	setup_powernets_for_cables(GLOB.cable_list)
+
 
 
 /datum/controller/subsystem/machines/proc/setup_powernets_for_cables(list/cables)
@@ -131,23 +132,22 @@ SUBSYSTEM_DEF(machines)
 		CHECK_TICK
 
 
-/datum/controller/subsystem/machines/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = {"[text]\n\
-			Queues: \
-			Pipes [pipenets.len] \
-			Machines [processing.len] \
-			Networks [powernets.len] \
-			Objects [power_objects.len]\n\
-			Costs: \
-			Pipes [Round(cost_pipenets)] \
-			Machines [Round(cost_machinery)] \
-			Networks [Round(cost_powernets)] \
-			Objects [Round(cost_power_objects)]\n\
-			Overall [Roundm(cost ? processing.len / cost : 0, 0.1)]
-		"}
-	..(text, force)
+/datum/controller/subsystem/machines/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..({"\
+		Queues: \
+		Pipes [pipenets.len] \
+		Machines [processing.len] \
+		Networks [powernets.len] \
+		Objects [power_objects.len]\n\
+		Costs: \
+		Pipes [Round(cost_pipenets)] \
+		Machines [Round(cost_machinery)] \
+		Networks [Round(cost_powernets)] \
+		Objects [Round(cost_power_objects)]\n\
+		Overall [Roundm(cost ? processing.len / cost : 0, 0.1)]
+	"})
 
 
 /datum/controller/subsystem/machines/proc/process_pipenets(resumed, no_mc_tick)

@@ -10,7 +10,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "meat grinder"
 	machine_desc = "Messily turns animals - living or dead - into edible meat. Installed safety mechanisms prevent use on humans."
 
@@ -67,12 +67,12 @@
 	return 1
 
 /obj/machinery/gibber/components_are_accessible(path)
-	return !operating && ..()	
+	return !operating && ..()
 
 /obj/machinery/gibber/cannot_transition_to(state_path, mob/user)
 	if(operating)
 		return SPAN_NOTICE("You must wait for \the [src] to finish operating first!")
-	return ..()	
+	return ..()
 
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
 	if(!operating)
@@ -82,8 +82,8 @@
 		if(!G.force_danger())
 			to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
 			return
-		qdel(G)
 		move_into_gibber(user,G.affecting)
+		qdel(G)
 	else if(istype(W, /obj/item/organ))
 		if(!user.unEquip(W))
 			return
@@ -122,7 +122,7 @@
 
 	user.visible_message("<span class='danger'>\The [user] starts to put \the [victim] into \the [src]!</span>")
 	src.add_fingerprint(user)
-	if(do_after(user, 30, src) && victim.Adjacent(src) && user.Adjacent(src) && victim.Adjacent(user) && !occupant)
+	if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) && victim.Adjacent(src) && user.Adjacent(src) && victim.Adjacent(user) && !occupant)
 		user.visible_message("<span class='danger'>\The [user] stuffs \the [victim] into \the [src]!</span>")
 		if(victim.client)
 			victim.client.perspective = EYE_PERSPECTIVE
@@ -218,5 +218,5 @@
 			qdel(thing)
 			continue
 		thing.dropInto(loc) // Attempts to drop it onto the turf for throwing.
-		thing.throw_at(get_edge_target_turf(src,gib_throw_dir),rand(0,3),emagged ? 100 : 50) // Being pelted with bits of meat and bone would hurt.
+		thing.throw_at(get_edge_target_turf(src,gib_throw_dir),rand(0,3),emagged ? 30 : 15) // Being pelted with bits of meat and bone would hurt.
 	update_icon()

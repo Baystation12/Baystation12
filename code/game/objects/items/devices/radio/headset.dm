@@ -351,7 +351,7 @@
 		else
 			to_chat(user, "This headset doesn't have any encryption keys!  How useless...")
 
-	if(istype(W, /obj/item/device/encryptionkey/))
+	if(istype(W, /obj/item/device/encryptionkey))
 		if(encryption_keys.len >= max_keys)
 			to_chat(user, "The headset can't hold another key!")
 			return

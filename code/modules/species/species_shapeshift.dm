@@ -1,7 +1,7 @@
 // This is something of an intermediary species used for species that
 // need to emulate the appearance of another race. Currently it is only
 // used for slimes but it may be useful for changelings later.
-var/list/wrapped_species_by_ref = list()
+var/global/list/wrapped_species_by_ref = list()
 
 /datum/species/shapeshifter
 
@@ -73,12 +73,8 @@ var/list/wrapped_species_by_ref = list()
 
 /datum/species/shapeshifter/handle_post_spawn(var/mob/living/carbon/human/H)
 	if(monochromatic)
-		H.r_hair =   H.r_skin
-		H.g_hair =   H.g_skin
-		H.b_hair =   H.b_skin
-		H.r_facial = H.r_skin
-		H.g_facial = H.g_skin
-		H.b_facial = H.b_skin
+		H.head_hair_color = H.skin_color
+		H.facial_hair_color = H.head_hair_color
 	..()
 
 /datum/species/shapeshifter/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
@@ -160,19 +156,11 @@ var/list/wrapped_species_by_ref = list()
 	shapeshifter_set_colour(new_skin)
 
 /mob/living/carbon/human/proc/shapeshifter_set_colour(var/new_skin)
-
-	r_skin =   hex2num(copytext_char(new_skin, 2, 4))
-	g_skin =   hex2num(copytext_char(new_skin, 4, 6))
-	b_skin =   hex2num(copytext_char(new_skin, 6, 8))
-
+	skin_color = new_skin
 	var/datum/species/shapeshifter/S = species
 	if(S.monochromatic)
-		r_hair =   r_skin
-		g_hair =   g_skin
-		b_hair =   b_skin
-		r_facial = r_skin
-		g_facial = g_skin
-		b_facial = b_skin
+		head_hair_color = skin_color
+		facial_hair_color = head_hair_color
 
 	for(var/obj/item/organ/external/E in organs)
 		E.sync_colour_to_human(src)

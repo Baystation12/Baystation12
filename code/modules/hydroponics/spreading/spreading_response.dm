@@ -57,7 +57,7 @@
 			SPAN_NOTICE("You attempt to get free from [src].")
 		)
 
-		if(do_after(user, breakouttime, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
+		if (do_after(user, breakouttime, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS, INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
 			if(unbuckle_mob())
 				user.visible_message(
 					"\The [user] manages to escape [src]!",
@@ -91,7 +91,7 @@
 				SPAN_WARNING("Tendrils lash to drag you but \the [src] can't pull you across the ground!")
 			)
 			return
-	
+
 	victim.visible_message(
 		SPAN_DANGER("Tendrils lash out from \the [src] and drag \the [victim] in!"),
 		SPAN_DANGER("Tendrils lash out from \the [src] and drag you in!"))

@@ -161,6 +161,10 @@
 			user.unEquip(W, src)
 	update_icon()
 
+/obj/structure/fuel_port/attack_robot(mob/user)
+	if (Adjacent(user))
+		attack_hand(user)
+
 // Walls hide stuff inside them, but we want to be visible.
 /obj/structure/fuel_port/hide()
 	return

@@ -19,7 +19,7 @@
 
 /obj/structure/diona_gestalt/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	. = ..()
-	if(P && (P.damage_type == BRUTE || P.damage_type == BURN))
+	if (P && (P.damage_type == DAMAGE_BRUTE || P.damage_type == DAMAGE_BURN))
 		shed_atom(forcefully = TRUE)
 
 /obj/structure/diona_gestalt/ex_act()

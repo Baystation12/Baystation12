@@ -1,16 +1,44 @@
-<!-- 
-Do not forget to add a changelog when you have made admin/player facing changes that can alter gameplay.
-Examples which require a changelog entry include:
-* Adding/removing objects that players may interact with, or the way they function.
-* Adding/removing/altering admin tools.
-* Changing the map.
+<!--
+**Это перевод оригинального темплейта с Baystation12/Baystation12**
+Не забудьте добавить ченджлог, если вы сделали изменения, касающиеся админов/игроков, и которые могут повлиять на геймплей.
 
-Examples were changelog entries are optional/not typically required:
-* Cosmetic changes such as descriptions, sound effects, etc.
-* Optimizations and other changes to underlying systems which do not affect gameplay.
-* Minor bug fixes.
+Примеры, когда необходимо добавить ченджлог:
+* Добавление/удаление объектов с которыми игроки могут взаимодействовать, или их поведение.
+* Добавление/удаление/изменение админских инструментов/кнопок.
+* Изменения карты.
 
-You'll find a README and example file in .\html\changelogs\ for further instructions.
+Примеры, когда записи в ченджлоге необязательны/не требуются:
+* Косметические изменения, такие как описания, звуки и т.д.
+* Оптимизация и другие подобные изменения базовых систем, не влияющие на геймплей.
+* Небольшие багфиксы.
 
-You can also find a template for adding your changelog directly to the PR description here: https://github.com/Baystation12/Baystation12/wiki/Automatic-changelog-generation
+Вы можете найти README файл с подробными объяснениями в ./html/changelogs.
+А ещё можно добавить свой ченджлог прямо в ПР. Инфа тут: https://github.com/Proxima-Project/Proxi-Bay12/wiki/Automatic-changelog-generation
+-->
+### Описание изменений
+
+<!--
+Здесь вы пишите, какой прекрасный йогурт вы сделали.
+-->
+### Почему и что этот ПР улучшит
+
+<!--
+Здесь вы пишите, почему ваш йогурт лучше чем тот, что был.
+-->
+### Авторство
+
+<!--
+Здесь вы пишите, если этот йогурт был украден у сырков.
+-->
+### Чейнджлог
+
+<!--
+Здесь вы пишите, если о новом йогурте должны узнать игроки. Пример смотрите в шапке
+-->
+#### Требуемые изменения на википедии проекта
+
+<!--
+Здесь требуется описание всех изменений, что могут, потенциально, затрагивать лор или геймплейную составляющую игры, ввиду чего требуется обновление википедии.
+Если вы не уверены в том, требуются ли они и какие именно - обратитесь к Директору Редакторума в нашем Дискорд сервере (https://discord.gg/F7GgD86Pvf)
+Вот наша основная вики: https://wiki.proxima.fun/wiki/Заглавная_страница
 -->

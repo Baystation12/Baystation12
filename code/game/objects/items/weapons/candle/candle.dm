@@ -44,7 +44,7 @@
 
 /obj/item/flame/candle/resolve_attackby(var/atom/A, mob/user)
 	. = ..()
-	if(istype(A, /obj/item/flame/candle/) && is_hot(src))
+	if(istype(A, /obj/item/flame/candle) && is_hot(src))
 		var/obj/item/flame/candle/other_candle = A
 		other_candle.light()
 

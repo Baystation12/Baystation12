@@ -1,5 +1,5 @@
 //admin verb groups - They can overlap if you so wish. Only one of each verb will exist in the verbs list regardless
-var/list/admin_verbs_default = list(
+var/global/list/admin_verbs_default = list(
 	/datum/admins/proc/show_player_panel, //shows an interface for individual players, with various links (links require additional flags), right-click player panel,
 	/client/proc/player_panel,
 	/client/proc/secrets,
@@ -8,12 +8,11 @@ var/list/admin_verbs_default = list(
 	/client/proc/hide_most_verbs,		//hides all our hideable adminverbs,
 	/client/proc/debug_variables,		//allows us to -see- the variables of any instance in the game. +VAREDIT needed to modify,
 	/client/proc/watched_variables,
-	/client/proc/debug_global_variables,//as above but for global variables,
 //	/client/proc/check_antagonists,		//shows all antags,
 	/client/proc/cmd_check_new_players
 //	/client/proc/deadchat				//toggles deadchat on/off,
 	)
-var/list/admin_verbs_admin = list(
+var/global/list/admin_verbs_admin = list(
 	/client/proc/invisimin,				//allows our mob to go invisible/visible,
 //	/datum/admins/proc/show_traitor_panel,	//interface which shows a mob's mind, -Removed due to rare practical use. Moved to debug verbs ~Errorage,
 	/datum/admins/proc/show_game_mode,  //Configuration window for the current game mode.,
@@ -68,7 +67,9 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 	/client/proc/free_slot_submap,
-	/client/proc/free_slot_crew,			//frees slot for chosen job,
+	/client/proc/close_slot_submap,
+	/client/proc/free_slot_crew,
+	/client/proc/close_slot_crew,			//frees slot for chosen job,
 	/client/proc/cmd_admin_change_custom_event,
 	/client/proc/cmd_admin_rejuvenate,
 	/client/proc/toggleghostwriters,
@@ -99,17 +100,17 @@ var/list/admin_verbs_admin = list(
 	/datum/admins/proc/setroundlength,
 	/datum/admins/proc/toggleroundendvote
 )
-var/list/admin_verbs_ban = list(
+var/global/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
 	/client/proc/jobbans
 	)
-var/list/admin_verbs_sounds = list(
+var/global/list/admin_verbs_sounds = list(
 	/client/proc/play_local_sound,
 	/client/proc/play_sound,
 	/client/proc/play_server_sound
 	)
 
-var/list/admin_verbs_fun = list(
+var/global/list/admin_verbs_fun = list(
 	/client/proc/object_talk,
 	/datum/admins/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
@@ -124,10 +125,12 @@ var/list/admin_verbs_fun = list(
 	/datum/admins/proc/call_drop_pod,
 	/client/proc/create_dungeon,
 	/datum/admins/proc/ai_hologram_set,
-	/client/proc/toggle_film_grain
+	/client/proc/toggle_film_grain,
+	/client/proc/cmd_admin_simulate_distant_explosion,
+	/datum/admins/proc/ai_hologram_set
 	)
 
-var/list/admin_verbs_spawn = list(
+var/global/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_fruit,
 	/datum/admins/proc/spawn_fluid_verb,
 	/datum/admins/proc/spawn_custom_item,
@@ -138,7 +141,7 @@ var/list/admin_verbs_spawn = list(
 	/client/proc/spawn_chemdisp_cartridge,
 	/datum/admins/proc/mass_debug_closet_icons
 	)
-var/list/admin_verbs_server = list(
+var/global/list/admin_verbs_server = list(
 	/datum/admins/proc/capture_map_part,
 	/datum/admins/proc/startnow,
 	/datum/admins/proc/restart,
@@ -155,7 +158,7 @@ var/list/admin_verbs_server = list(
 	/client/proc/toggle_random_events,
 	/client/proc/nanomapgen_DumpImage
 	)
-var/list/admin_verbs_debug = list(
+var/global/list/admin_verbs_debug = list(
 	/datum/admins/proc/jump_to_fluid_source,
 	/datum/admins/proc/jump_to_fluid_active,
 	/client/proc/cmd_admin_list_open_jobs,
@@ -163,6 +166,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/cmd_debug_make_powernets,
 	/client/proc/debug_controller,
 	/client/proc/debug_antagonist_template,
+	/client/proc/debug_global_variables,
 	/client/proc/cmd_debug_mob_lists,
 	/client/proc/cmd_admin_delete,
 	/client/proc/cmd_debug_del_all,
@@ -202,24 +206,24 @@ var/list/admin_verbs_debug = list(
 	/client/proc/spawn_exoplanet
 	)
 
-var/list/admin_verbs_paranoid_debug = list(
+var/global/list/admin_verbs_paranoid_debug = list(
 	/client/proc/callproc,
 	/client/proc/callproc_target,
 	/client/proc/debug_controller
 	)
 
-var/list/admin_verbs_possess = list(
+var/global/list/admin_verbs_possess = list(
 	/proc/possess,
 	/proc/release
 	)
-var/list/admin_verbs_permissions = list(
+var/global/list/admin_verbs_permissions = list(
 	/client/proc/edit_admin_permissions
 	)
-var/list/admin_verbs_rejuv = list(
+var/global/list/admin_verbs_rejuv = list(
 	)
 
 //verbs which can be hidden - needs work
-var/list/admin_verbs_hideable = list(
+var/global/list/admin_verbs_hideable = list(
 	/client/proc/deadmin_self,
 //	/client/proc/deadchat,
 	/datum/admins/proc/show_traitor_panel,
@@ -251,6 +255,7 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/cmd_admin_add_random_ai_law,
 	/client/proc/cmd_admin_create_centcom_report,
 	/client/proc/toggle_random_events,
+	/client/proc/cmd_admin_simulate_distant_explosion,
 	/client/proc/cmd_admin_add_random_ai_law,
 	/datum/admins/proc/startnow,
 	/datum/admins/proc/restart,
@@ -279,12 +284,11 @@ var/list/admin_verbs_hideable = list(
 	/proc/release,
 	/client/proc/cmd_admin_notarget
 	)
-var/list/admin_verbs_mod = list(
+var/global/list/admin_verbs_mod = list(
 	/client/proc/cmd_admin_pm_context,	// right-click adminPM interface,
 	/client/proc/cmd_admin_pm_panel,	// admin-pm list,
 	/client/proc/debug_variables,		// allows us to -see- the variables of any instance in the game.,
 	/client/proc/watched_variables,
-	/client/proc/debug_global_variables,// as above but for global variables,
 	/datum/admins/proc/PlayerNotes,
 	/client/proc/admin_ghost,			// allows us to ghost/reenter body at will,
 	/client/proc/cmd_mod_say,
@@ -295,11 +299,25 @@ var/list/admin_verbs_mod = list(
 	/client/proc/check_antagonists,
 	/client/proc/cmd_admin_narrate,
 	/client/proc/cmd_admin_direct_narrate,
+	/client/proc/cmd_admin_visible_narrate,
+	/client/proc/cmd_admin_audible_narrate,
+	/client/proc/cmd_admin_local_narrate,	//sends text to all players with no padding,
 	/client/proc/aooc,
 	/datum/admins/proc/sendFax,
 	/client/proc/check_fax_history,
 	/datum/admins/proc/paralyze_mob // right-click paralyze ,
 )
+
+//[INF]
+var/list/admin_verbs_xeno = list(
+//	/client/proc/cmd_admin_pm_context,
+//	/client/proc/cmd_admin_pm_panel,
+//	/client/proc/admin_ghost,
+//	/datum/admins/proc/show_player_info,
+	/datum/admins/proc/PlayerNotes,
+	/datum/admins/proc/xeno_whitelist_panel
+)
+//[/INF]
 
 /client/proc/add_admin_verbs()
 	if(holder)
@@ -320,6 +338,7 @@ var/list/admin_verbs_mod = list(
 		if(holder.rights & R_SOUNDS)		verbs += admin_verbs_sounds
 		if(holder.rights & R_SPAWN)			verbs += admin_verbs_spawn
 		if(holder.rights & R_MOD)			verbs += admin_verbs_mod
+		if(holder.rights & R_XENO)			verbs += admin_verbs_xeno		//INF
 
 /client/proc/remove_admin_verbs()
 	verbs.Remove(
@@ -378,6 +397,7 @@ var/list/admin_verbs_mod = list(
 	if(!holder)	return
 	if(isghost(mob))
 		var/mob/observer/ghost/ghost = mob
+		sound_to(usr, sound(null))
 		ghost.reenter_corpse()
 
 	else if(istype(mob,/mob/new_player))
@@ -386,6 +406,8 @@ var/list/admin_verbs_mod = list(
 		//ghostize
 		var/mob/body = mob
 		var/mob/observer/ghost/ghost = body.ghostize(1)
+		sound_to(usr, sound(null))
+
 		if (!ghost)
 			to_chat(src, FONT_COLORED("red", "You are already admin-ghosted."))
 			return
@@ -720,44 +742,36 @@ var/list/admin_verbs_mod = list(
 			return
 	var/new_facial = input("Please select facial hair color.", "Character Generation") as color
 	if(new_facial)
-		M.r_facial = hex2num(copytext_char(new_facial, 2, 4))
-		M.g_facial = hex2num(copytext_char(new_facial, 4, 6))
-		M.b_facial = hex2num(copytext_char(new_facial, 6, 8))
+		M.facial_hair_color = new_facial
 
 	var/new_hair = input("Please select hair color.", "Character Generation") as color
-	if(new_facial)
-		M.r_hair = hex2num(copytext_char(new_hair, 2, 4))
-		M.g_hair = hex2num(copytext_char(new_hair, 4, 6))
-		M.b_hair = hex2num(copytext_char(new_hair, 6, 8))
+	if(new_hair)
+		M.head_hair_color = new_hair
 
 	var/new_eyes = input("Please select eye color.", "Character Generation") as color
 	if(new_eyes)
-		M.r_eyes = hex2num(copytext_char(new_eyes, 2, 4))
-		M.g_eyes = hex2num(copytext_char(new_eyes, 4, 6))
-		M.b_eyes = hex2num(copytext_char(new_eyes, 6, 8))
+		M.eye_color = new_eyes
 		M.update_eyes()
 
 	var/new_skin = input("Please select body color. This is for Unathi, and Skrell only!", "Character Generation") as color
 	if(new_skin)
-		M.r_skin = hex2num(copytext_char(new_skin, 2, 4))
-		M.g_skin = hex2num(copytext_char(new_skin, 4, 6))
-		M.b_skin = hex2num(copytext_char(new_skin, 6, 8))
+		M.skin_color = new_skin
 
 	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation")  as text
 
 	if (new_tone)
-		M.s_tone = max(min(round(text2num(new_tone)), 220), 1)
-		M.s_tone =  -M.s_tone + 35
+		M.skin_tone = max(min(round(text2num(new_tone)), 220), 1)
+		M.skin_tone =  -M.skin_tone + 35
 
 	// hair
 	var/new_hstyle = input(usr, "Select a hair style", "Grooming")  as null|anything in GLOB.hair_styles_list
 	if(new_hstyle)
-		M.h_style = new_hstyle
+		M.head_hair_style = new_hstyle
 
 	// facial hair
 	var/new_fstyle = input(usr, "Select a facial hair style", "Grooming")  as null|anything in GLOB.facial_hair_styles_list
 	if(new_fstyle)
-		M.f_style = new_fstyle
+		M.facial_hair_style = new_fstyle
 
 	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female", "Neuter")
 	if (new_gender)
@@ -803,6 +817,26 @@ var/list/admin_verbs_mod = list(
 			job.make_position_available()
 			message_admins("An offsite job slot for [job_name] has been opened by [key_name_admin(usr)]")
 
+/client/proc/close_slot_submap()
+	set name = "Close Job Slot (Submap)"
+	set category = "Admin"
+	if(!holder) return
+
+	var/list/jobs = list()
+	for(var/thing in SSmapping.submaps)
+		var/datum/submap/submap = thing
+		for(var/otherthing in submap.jobs)
+			var/datum/job/submap/job = submap.jobs[otherthing]
+			if(job.is_position_available())
+				jobs["[job.title] - [submap.name]"] = job
+
+	var/job_name = input("Please select job slot to close", "Close job slot")  as null|anything in jobs
+	if(job_name)
+		var/datum/job/submap/job = jobs[job_name]
+		if(istype(job) && job.is_position_available())
+			job.make_position_unavailable()
+			log_and_message_admins("has closed an offsite job slot for [job_name]")
+
 /client/proc/free_slot_crew()
 	set name = "Free Job Slot (Crew)"
 	set category = "Admin"
@@ -819,6 +853,21 @@ var/list/admin_verbs_mod = list(
 		if(job && !job.is_position_available())
 			job.make_position_available()
 			message_admins("A job slot for [job_title] has been opened by [key_name_admin(usr)]")
+			return
+
+/client/proc/close_slot_crew()
+	set name = "Close Job Slot (Crew)"
+	set category = "Admin"
+	if(holder)
+		var/list/jobs = list()
+		for (var/datum/job/J in SSjobs.primary_job_datums)
+			if(J.is_position_available())
+				jobs[J.title] = J
+		var/job_title = input("Please select job slot to close", "Close job slot")  as null|anything in jobs
+		var/datum/job/job = jobs[job_title]
+		if(job && job.is_position_available())
+			job.make_position_unavailable()
+			log_and_message_admins("has closed a job slot for [job_title]")
 			return
 
 /client/proc/toggleghostwriters()

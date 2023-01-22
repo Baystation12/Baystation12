@@ -4,17 +4,17 @@
 
 //This is the output of the stringpercent(print) proc, and means about 80% of
 //the print must be there for it to be complete.  (Prints are 32 digits)
-var/const/FINGERPRINT_COMPLETE = 6
-proc/is_complete_print(var/print)
+var/global/const/FINGERPRINT_COMPLETE = 6
+/proc/is_complete_print(var/print)
 	return stringpercent(print) <= FINGERPRINT_COMPLETE
 
-atom/var/list/fingerprintshidden
-atom/var/fingerprintslast
+/atom/var/list/fingerprintshidden
+/atom/var/fingerprintslast
 
-atom/var/list/suit_fibers
-atom/var/list/fingerprints
-atom/var/list/gunshot_residue
-obj/item/var/list/trace_DNA
+/atom/var/list/suit_fibers
+/atom/var/list/fingerprints
+/atom/var/list/gunshot_residue
+/obj/item/var/list/trace_DNA
 
 /atom/proc/add_hiddenprint(mob/M)
 	if(!M || !M.key)
@@ -131,7 +131,7 @@ obj/item/var/list/trace_DNA
 		var/obj/item/I = A
 		LAZYDISTINCTADD(I.trace_DNA, trace_DNA)
 
-atom/proc/add_fibers(mob/living/carbon/human/M)
+/atom/proc/add_fibers(mob/living/carbon/human/M)
 	if(!istype(M))
 		return
 	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))

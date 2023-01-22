@@ -672,6 +672,10 @@
 	name = "Shoulder Bob"
 	icon_state = "hair_bob_shoulder"
 
+/datum/sprite_accessory/hair/bobshoulder2
+	name = "Shoulder Bob 2"
+	icon_state = "hair_bob_shoulder2"
+
 /datum/sprite_accessory/hair/bobcurl2
 	name = "Bobcurl 2"
 	icon_state = "hair_bobcurl2"
@@ -683,6 +687,10 @@
 /datum/sprite_accessory/hair/shortbun
 	name = "Short Bun"
 	icon_state = "hair_bun_short"
+
+/datum/sprite_accessory/hair/bigbun
+	name = "Big Bun"
+	icon_state = "hair_bunbig"
 
 /datum/sprite_accessory/hair/emofringe
 	name = "Emo Fringe"
@@ -757,6 +765,26 @@
 /datum/sprite_accessory/hair/ponytail7
 	name = "Ponytail 7"
 	icon_state = "hair_ponytail7"
+	flags = HAIR_TIEABLE
+
+/datum/sprite_accessory/hair/ponytailtied
+	name = "Ponytail Tied"
+	icon_state = "hair_ponytail_tied"
+	flags = HAIR_TIEABLE
+
+/datum/sprite_accessory/hair/ponytaildinky1
+	name = "Ponytail Dinky"
+	icon_state = "hair_ponytail_dinky1"
+	flags = HAIR_TIEABLE
+
+/datum/sprite_accessory/hair/ponytaildinky2
+	name = "Ponytail Dinky 2"
+	icon_state = "hair_ponytail_dinky2"
+	flags = HAIR_TIEABLE
+
+/datum/sprite_accessory/hair/ponytaildinky3
+	name = "Ponytail Dinky 3"
+	icon_state = "hair_ponytail_dinky3"
 	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/tressshoulder

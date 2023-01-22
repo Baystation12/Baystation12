@@ -31,25 +31,27 @@
 
 // MOB HELPERS
 // ===========
-/mob/living/carbon/human/var/list/datum/medical_effect/side_effects = list()
 /mob/proc/add_side_effect(name, strength = 0)
+	return
+
+
+/mob/living/carbon/human/var/list/datum/medical_effect/side_effects = list()
+
 /mob/living/carbon/human/add_side_effect(name, strength = 0)
-	for(var/datum/medical_effect/M in src.side_effects)
+	for(var/datum/medical_effect/M in side_effects)
 		if(M.name == name)
 			M.strength = max(M.strength, 10)
 			M.start = life_tick
 			return
-
-
-	var/T = side_effects[name]
+	var/T = GLOB.side_effects[name]
 	if (!T)
 		return
-
 	var/datum/medical_effect/M = new T
 	if(M.name == name)
 		M.strength = strength
 		M.start = life_tick
-		side_effects += M
+		GLOB.side_effects += M
+
 
 /mob/living/carbon/human/proc/handle_medical_side_effects()
 	//Going to handle those things only every few ticks.
@@ -63,20 +65,21 @@
 			src.add_side_effect(M.name)
 
 	// One full cycle(in terms of strength) every 10 minutes
-	for (var/datum/medical_effect/M in side_effects)
+	for (var/datum/medical_effect/M in GLOB.side_effects)
 		if (!M) continue
 		var/strength_percent = sin((life_tick - M.start) / 2)
 
 		// Only do anything if the effect is currently strong enough
 		if(strength_percent >= 0.4)
 			if (M.cure(src) || M.strength > 50)
-				side_effects -= M
+				GLOB.side_effects -= M
 				M = null
 			else
 				if(life_tick % 45 == 0)
 					M.on_life(src, strength_percent*M.strength)
 				// Effect slowly growing stronger
 				M.strength+=0.08
+
 
 // HEADACHE
 // ========

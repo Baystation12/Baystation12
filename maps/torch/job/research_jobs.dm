@@ -1,11 +1,10 @@
 /datum/job/senior_scientist
 	title = "Senior Researcher"
-	department = "Science"
+	department = "Научный"
 	department_flag = SCI
-
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Chief Science Officer"
+	supervisors = "Главному научному офицеру"
 	selection_color = "#633d63"
 	economic_power = 12
 	minimal_player_age = 3
@@ -43,11 +42,17 @@
 	skill_points = 20
 	possible_goals = list(/datum/goal/achievement/notslimefodder)
 
+/datum/job/senior_scientist/get_description_blurb()
+	return "Вы - Старший научный сотрудник. Ваша задача - обеспечивать учёных работой и заниматся исследованием различных областей науки. \
+	Вы подчиняетесь Главному научному офицеру и являетесь вторым человеком на судне по вопросам науки после него. \
+	Будьте правой рукой ГНО, делайте бомбы и открывайте порталы в другие измерения. Сила науки находится в ваших руках."
+
 /datum/job/scientist
 	title = "Scientist"
+	department = "Научный"
 	total_positions = 6
 	spawn_positions = 6
-	supervisors = "the Chief Science Officer"
+	supervisors = "Главному научному офицеру и старшему научному сотруднику"
 	economic_power = 10
 	minimum_character_age = list(SPECIES_HUMAN = 25)
 	ideal_character_age = 45
@@ -76,7 +81,8 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/passenger/research/scientist,
+		/datum/mil_rank/civ/second = /decl/hierarchy/outfit/job/torch/passenger/research/scientist,
+		/datum/mil_rank/civ/first = /decl/hierarchy/outfit/job/torch/passenger/research/scientist,
 		/datum/mil_rank/sol/scientist = /decl/hierarchy/outfit/job/torch/passenger/research/scientist/solgov
 	)
 
@@ -85,14 +91,19 @@
 		access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
 		access_xenoarch, access_nanotrasen, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar,
 		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_control, access_torch_fax,
-		access_petrov_maint, access_radio_sci, access_radio_exp
+		access_petrov_maint, access_radio_sci, access_radio_exp, access_research_storage
 	)
 	skill_points = 20
 	possible_goals = list(/datum/goal/achievement/notslimefodder)
 
+/datum/job/scientist/get_description_blurb()
+	return "Вы - Научный сотрудник. Ваша задача - проводить анализ различных вещей и проверять свои гипотизы на практике. \
+	Вы подчиняетесь Главному научному офицеру и старшему научному сотруднику. \
+	Продвиньте науку вперёд, а также постарайтесь не взорвать отдел."
+
 /datum/job/scientist_assistant
 	title = "Research Assistant"
-	department = "Science"
+	department = "Научный"
 	department_flag = SCI
 	total_positions = 4
 	spawn_positions = 4
@@ -117,7 +128,7 @@
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5,
-		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/passenger/research/assist,
+		/datum/mil_rank/civ/three = /decl/hierarchy/outfit/job/torch/passenger/research/assist,
 		/datum/mil_rank/sol/scientist = /decl/hierarchy/outfit/job/torch/passenger/research/assist/solgov
 	)
 	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
@@ -129,13 +140,17 @@
 		access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
 		access_xenoarch, access_nanotrasen, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar,
 		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_control,
-		access_radio_sci, access_radio_exp
+		access_radio_sci, access_radio_exp, access_research_storage
 	)
 	possible_goals = list(/datum/goal/achievement/notslimefodder)
 
+/datum/job/scientist_assistant/get_description_blurb()
+	return "Вы - Научный сотрудник. Вы учитесь основам науки благодаря помощи своих опытных коллег. \
+	Вы подчиняетесь Главному научному офицеру и остальному научному персоналу."
+
 /datum/job/research_guard
 	title = "Research Guard"
-	department = "Science"
+	department = "Научный"
 	department_flag = SCI
 	total_positions = 1
 	spawn_positions = 1
@@ -151,7 +166,9 @@
 	)
 
 	allowed_ranks = list(
-		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/three,
+		/datum/mil_rank/civ/second,
+		/datum/mil_rank/civ/first,
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5
 	)
@@ -174,4 +191,6 @@
 	software_on_spawn = list(/datum/computer_file/program/camera_monitor)
 
 /datum/job/research_guard/get_description_blurb()
-	return "You are a security guard from the Organization of the Expeditionary Corps, which must protect the scientific department and its employees from various threats. Eat donuts, call scientists \"eggheads\"."
+	return "Вы - охранник научного отдела. Вы являетесь работником Организации Экспедиционного Корпуса. \
+	Обеспечивайте безопасность сотрудников и оборудования научного отдела. Не ешьте слишком много пончиков. \
+	Стоит отметить, что Вы отвечаете за охрану только научного отдела и не должны патрулировать остальное судно. Помогать службе безопасности Факела следует только в крайних случаях."

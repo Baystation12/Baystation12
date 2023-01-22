@@ -790,7 +790,7 @@
 	taste_description = "fine tobacco"
 	value = 5
 	scent = "fine tobacco smoke"
-	scent_descriptor = SCENT_DESC_FRAGRANCE
+	scent_descriptor = SCENT_DESC_PLUME
 
 /datum/reagent/tobacco/bad
 	name = "Terrible Tobacco"
@@ -798,7 +798,7 @@
 	value = 0
 	scent = "acrid tobacco smoke"
 	scent_intensity = /decl/scent_intensity/strong
-	scent_descriptor = SCENT_DESC_ODOR
+	scent_descriptor = SCENT_DESC_HAZE
 
 /datum/reagent/tobacco/liquid
 	name = "Nicotine Solution"
@@ -1021,3 +1021,25 @@
 	..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.immunity -= 0.5 //inverse effects when abused
+
+/datum/reagent/coagulant
+	name = "Coagulant"
+	description = "An experimental coagulant capable of staunching both internal and external bleeding."
+	taste_description = "iron"
+	reagent_state = LIQUID
+	color = "#bf0000"
+	metabolism = REM * 0.05
+	scannable = TRUE
+
+/datum/reagent/coagulant/affect_blood(mob/living/carbon/M, alien, removed)
+	if(alien == IS_DIONA)
+		return
+	if(ishuman(M))
+		for(var/obj/item/organ/external/E in M.organs)
+			if(E.status & ORGAN_ARTERY_CUT && prob(10))
+				E.status &= ~ORGAN_ARTERY_CUT
+			for(var/datum/wound/W in E.wounds)
+				if(W.bleeding() && prob(20))
+					W.bleed_timer = 0
+					W.clamped = TRUE
+					E.status &= ~ORGAN_BLEEDING

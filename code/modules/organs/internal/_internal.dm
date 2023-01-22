@@ -123,7 +123,7 @@
 	min_broken_damage = Floor(0.75 * max_damage)
 	min_bruised_damage = Floor(0.25 * max_damage)
 
-obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
+/obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 	take_internal_damage(amount, silent)
 
 /obj/item/organ/internal/proc/take_internal_damage(amount, var/silent=0)
@@ -182,19 +182,18 @@ obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 /obj/item/organ/internal/proc/get_scarring_level()
 	. = (initial(max_damage) - max_damage)/initial(max_damage)
 
-/obj/item/organ/internal/get_scan_results()
+/obj/item/organ/internal/get_scan_results(tag = FALSE)
 	. = ..()
 	var/scar_level = get_scarring_level()
 	if(scar_level > 0.01)
-		. += "[get_wound_severity(get_scarring_level())] scarring"
+		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_SCARRING]'>[get_wound_severity(get_scarring_level())] scarring</span>" : "[get_wound_severity(get_scarring_level())] scarring"
 
 /obj/item/organ/internal/emp_act(severity)
 	if(!BP_IS_ROBOTIC(src))
 		return
 	switch (severity)
-		if (1)
+		if (EMP_ACT_HEAVY)
 			take_internal_damage(16)
-		if (2)
+		if (EMP_ACT_LIGHT)
 			take_internal_damage(9)
-		if (3)
-			take_internal_damage(6.5)
+	..()

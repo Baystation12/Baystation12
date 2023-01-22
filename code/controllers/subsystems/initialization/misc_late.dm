@@ -4,12 +4,13 @@ SUBSYSTEM_DEF(init_misc_late)
 	flags = SS_NO_FIRE
 
 
-/datum/controller/subsystem/init_misc_late/stat_entry(text, force)
-	if (!initialized)
-		return ..(text, force)
+/datum/controller/subsystem/init_misc_late/UpdateStat(time)
+	if (initialized)
+		return
+	..()
 
 
-/datum/controller/subsystem/init_misc_late/Initialize(start_timeofday)
+/datum/controller/subsystem/init_misc_late/Initialize(start_uptime)
 	GLOB.using_map.build_away_sites()
 	GLOB.using_map.build_exoplanets()
 	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)

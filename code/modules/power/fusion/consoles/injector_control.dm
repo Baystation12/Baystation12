@@ -11,12 +11,25 @@
 	if(href_list["global_toggle"])
 		if(!lan || !fuel_injectors)
 			return TOPIC_NOACTION
-			
+
 		for(var/obj/machinery/fusion_fuel_injector/F in fuel_injectors)
 			if(F.injecting)
 				F.StopInjecting()
 			else
 				F.BeginInjecting()
+		return TOPIC_REFRESH
+
+	if(href_list["global_rate"])
+		if(!lan || !fuel_injectors)
+			return TOPIC_NOACTION
+		var/new_injection_rate = input("Enter a new injection rate between 1 and 100. This will affect all injectors!", "Modifying injection rate") as null|num
+		var/new_injection_clamped = clamp(new_injection_rate, 1, 100) / 100
+		if(!new_injection_rate)
+			return TOPIC_NOACTION
+		if(!CanInteract(user,state))
+			return TOPIC_NOACTION
+		for(var/obj/machinery/fusion_fuel_injector/F as anything in fuel_injectors)
+			F.injection_rate = new_injection_clamped
 		return TOPIC_REFRESH
 
 	if(href_list["toggle_injecting"] || href_list["injection_rate"])
@@ -31,13 +44,14 @@
 				I.BeginInjecting()
 
 		if(href_list["injection_rate"])
-			var/new_injection_rate = input("Enter a new injection rate between 0 and 100", "Modifying injection rate", I.injection_rate) as num
+			var/new_injection_rate = input("Enter a new injection rate between 1 and 100.", "Modifying injection rate", I.injection_rate) as null|num
 			if(!istype(I))
 				return TOPIC_NOACTION
 			if(!new_injection_rate)
-				to_chat(user, SPAN_WARNING("That's not a valid injection rate."))
 				return TOPIC_NOACTION
-			I.injection_rate = clamp(new_injection_rate, 0, 100) / 100
+			if(!CanInteract(user,state))
+				return TOPIC_NOACTION
+			I.injection_rate = clamp(new_injection_rate, 1, 100) / 100
 		return TOPIC_REFRESH
 
 /obj/machinery/computer/fusion/fuel_control/build_ui_data()

@@ -4,12 +4,14 @@
 	departments = COM
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/command,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/cmd)
 
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/command
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/command
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
@@ -52,12 +54,15 @@
 	departments = ENG
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/engineering
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/engineering,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/renew/engineering,
+						 /obj/item/clothing/head/beret/solgov/expedition/engineering,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/eng)
 
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/engineering
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/engineering
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/engineering
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/engineering
@@ -81,14 +86,17 @@
 	min_rank = 11
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/engineering
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/engineering,
+						 /obj/item/clothing/head/beret/solgov/expedition/command,
 						 /obj/item/clothing/head/beret/solgov/expedition/engineering,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/eng)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/engineering/command
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/engineering
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/engineering
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/engineering
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command/engineering
@@ -105,11 +113,14 @@
 	departments = SEC
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/security
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/security,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/renew/security,
+						 /obj/item/clothing/head/beret/solgov/expedition/security,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/gloves/thick/duty/solgov/sec)
 
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/security
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/security
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/security
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/security
@@ -132,14 +143,17 @@
 	min_rank = 11
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/security
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/security,
+						 /obj/item/clothing/head/beret/solgov/expedition/command,
 						 /obj/item/clothing/head/beret/solgov/expedition/security,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/sec)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/security/command
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/security
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/security
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/security
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command/security
@@ -156,11 +170,14 @@
 	departments = MED
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/medical
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/medical,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/renew/medical,
+						 /obj/item/clothing/head/beret/solgov/expedition/medical,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/gloves/thick/duty/solgov/med)
 
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/medical
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/medical
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/medical
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/medical
@@ -183,14 +200,17 @@
 	min_rank = 11
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/medical,
+						 /obj/item/clothing/head/beret/solgov/expedition/command,
 						 /obj/item/clothing/head/beret/solgov/expedition/medical,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/med)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/medical/command
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/medical
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/medical
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/medical
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command/medical
@@ -206,12 +226,15 @@
 	name = "EC supply"
 	departments = SUP
 
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/supply,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/renew/supply,
+						 /obj/item/clothing/head/beret/solgov/expedition/supply,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/gloves/thick/duty/solgov/sup)
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/supply
 
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/supply
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/supply
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/supply
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/supply
@@ -234,14 +257,17 @@
 	min_rank = 11
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/supply
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/supply,
+						 /obj/item/clothing/head/beret/solgov/expedition/command,
 						 /obj/item/clothing/head/beret/solgov/expedition/supply,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/sup)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/service/command
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/supply
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/supply
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/service
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command/supply
@@ -253,12 +279,15 @@
 	name = "EC service"
 	departments = SRV
 
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/service,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/renew/service,
+						 /obj/item/clothing/head/beret/solgov/expedition/service,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/gloves/thick/duty/solgov/svc)
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/service
 
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/service
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/service
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/service
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/service
@@ -281,14 +310,17 @@
 	min_rank = 11
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/service
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/service,
+						 /obj/item/clothing/head/beret/solgov/expedition/command,
 						 /obj/item/clothing/head/beret/solgov/expedition/service,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/svc)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/service/command
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/service
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/service
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/service
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command/service
@@ -300,12 +332,15 @@
 	name = "EC exploration"
 	departments = EXP
 
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/exploration,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/renew/exploration,
+						 /obj/item/clothing/head/beret/solgov/expedition/exploration,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/gloves/thick/duty/solgov/exp)
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/exploration
 
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/exploration
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/exploration
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/exploration
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/exploration
@@ -328,14 +363,17 @@
 	min_rank = 11
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/exploration
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/exploration,
+						 /obj/item/clothing/head/beret/solgov/expedition/command,
 						 /obj/item/clothing/head/beret/solgov/expedition/exploration,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/exp)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/exploration/command
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/exploration
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/exploration
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/exploration
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command/exploration
@@ -347,13 +385,16 @@
 	name = "EC command support"
 	departments = SPT
 
-	utility_under= /obj/item/clothing/under/solgov/utility/expeditionary/command
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/command
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/renew/command,
+						 /obj/item/clothing/head/beret/solgov/expedition/command,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
 						 /obj/item/clothing/gloves/thick/duty/solgov/cmd)
 
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/command
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/command
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command
@@ -375,8 +416,11 @@
 	name = "EC command support CO"
 	min_rank = 11
 
-	utility_under= /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
+	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/command)
 
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/command
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/command
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
@@ -390,10 +434,14 @@
 	departments = SCI
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/research
-	utility_extra = list(/obj/item/clothing/head/ushanka/solgov,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/renew/research,
+						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
-						 /obj/item/clothing/suit/storage/toggle/labcoat/science/ec)
+						 /obj/item/clothing/suit/storage/toggle/labcoat/science/ec,
+						 /obj/item/clothing/gloves/thick/duty/solgov/sci)
 
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/research
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt/research
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/research
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/research
@@ -416,12 +464,16 @@
 	min_rank = 11
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/research
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/expeditionary/officer/renew/research,
+						 /obj/item/clothing/head/beret/solgov/expedition/command,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
-						 /obj/item/clothing/suit/storage/toggle/labcoat/science/ec)
+						 /obj/item/clothing/suit/storage/toggle/labcoat/science/ec,
+						 /obj/item/clothing/gloves/thick/duty/solgov/sci)
 
-	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/research/command
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary/command/research
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/command/skirt/research
+	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/research
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/command
 
 	dress_under = /obj/item/clothing/under/solgov/dress/expeditionary/command/research
@@ -437,4 +489,5 @@
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/suit/storage/toggle/labcoat/science/ec,
-						 /obj/item/clothing/suit/storage/toggle/labcoat/rd/ec)
+						 /obj/item/clothing/suit/storage/toggle/labcoat/rd/ec,
+						 /obj/item/clothing/gloves/thick/duty/solgov/sci)

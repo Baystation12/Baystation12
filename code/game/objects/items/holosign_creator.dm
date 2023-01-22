@@ -39,7 +39,7 @@
 					playsound(src.loc, 'sound/machines/click.ogg', 20, 1)
 					if(creation_time)
 						holocreator_busy = TRUE
-						if(!do_after(user, creation_time, target))
+						if(!do_after(user, creation_time, target, DO_BOTH_UNIQUE_ACT))
 							holocreator_busy = FALSE
 							return
 						holocreator_busy = FALSE

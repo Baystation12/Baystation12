@@ -19,7 +19,7 @@
 /datum/uplink_item/item/stealth_items/tactical_sneaky_armor
 	name = "Concealable Tactical Armor"
 	desc = "An armor vest that can be worn under a jacket. About as tough as a medium plate."
-	item_cost = 25
+	item_cost = 22
 	path = /obj/item/clothing/accessory/armor_plate/sneaky/tactical
 
 /datum/uplink_item/item/stealth_items/balaclava
@@ -36,20 +36,20 @@
 /datum/uplink_item/item/stealth_items/spy
 	name = "Bug Kit"
 	desc = "For when you want to conduct voyeurism from afar. Comes with 6 bugs to plant, and a monitoring device to pair them with."
-	item_cost = 8
+	item_cost = 6
 	path = /obj/item/storage/box/syndie_kit/spy
 
 /datum/uplink_item/item/stealth_items/id
 	name = "Agent ID card"
 	desc = "A unique ID card that is completely configurable. Scan another ID card with it to clone its access capabilities."
-	item_cost = 12
+	item_cost = 10
 	path = /obj/item/card/id/syndicate
 
 /datum/uplink_item/item/stealth_items/chameleon_kit
 	name = "Chameleon Kit"
 	desc = "Comes with a full set of appearance changing clothing you need to impersonate most people.  \
 	Accessories, backpack, and gun included!"
-	item_cost = 20
+	item_cost = 16
 	path = /obj/item/storage/backpack/chameleon/sydie_kit
 
 /datum/uplink_item/item/stealth_items/voice
@@ -62,7 +62,7 @@
 /datum/uplink_item/item/stealth_items/chameleon_projector
 	name = "Chameleon Projector"
 	desc = "Use this to scan a small, portable object in order to disguise yourself as said object."
-	item_cost = 32
+	item_cost = 30
 	path = /obj/item/device/chameleon
 
 /datum/uplink_item/item/stealth_items/sneakies
@@ -76,5 +76,5 @@
 	name = "Smuggler's Satchel"
 	desc = "This satchel is thin enough to be hidden in the gap between plating and tiling, \
 	great for stashing your stolen goods. Comes with a crowbar and a floor tile."
-	item_cost = 20
+	item_cost = 18
 	path = /obj/item/storage/backpack/satchel/flat

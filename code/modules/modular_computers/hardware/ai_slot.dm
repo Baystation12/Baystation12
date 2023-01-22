@@ -30,7 +30,7 @@
 			return
 		do_insert_ai(user, W)
 		return TRUE
-	if(isScrewdriver(W))
+	if(isScrewdriver(W) && stored_card)
 		to_chat(user, "You manually remove \the [stored_card] from \the [src].")
 		do_eject_ai(user)
 		return TRUE

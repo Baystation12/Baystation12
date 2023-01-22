@@ -10,6 +10,11 @@
 /obj/attack_hand(mob/living/user)
 	. = ..()
 	if(can_buckle && buckled_mob)
+		if (buckled_mob != user)
+			if (user.a_intent != I_HELP && !do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
+				return
+			if (!buckled_mob || !Adjacent(user))
+				return
 		user_unbuckle_mob(user)
 
 /obj/attack_robot(mob/user)
@@ -17,10 +22,15 @@
 	if (can_buckle && buckled_mob)
 		user_unbuckle_mob(user)
 
-/obj/MouseDrop_T(mob/living/M, mob/living/user)
+/obj/MouseDrop_T(mob/living/target, mob/living/user)
 	. = ..()
-	if(can_buckle && istype(M))
-		user_buckle_mob(M, user)
+	if (can_buckle && istype(target))
+		if (target != user)
+			if (user.a_intent != I_HELP && !do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
+				return
+			if (!Adjacent(target) || !Adjacent(user))
+				return
+		user_buckle_mob(target, user)
 
 /obj/Destroy()
 	unbuckle_mob()

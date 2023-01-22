@@ -48,8 +48,7 @@
 		/obj/item/clothing/suit/storage/toggle/suit/black,
 		/obj/item/clothing/glasses/sunglasses/big,
 		/obj/item/storage/belt/general,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel)),
-		new /datum/atom_creator/simple(/obj/item/storage/backpack/messenger, 50),
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel, /obj/item/storage/backpack/messenger)),
 		/obj/item/device/radio/headset/heads/torchntcommand,
 		/obj/item/device/radio/headset/heads/torchntcommand/alt
 	)
@@ -73,8 +72,7 @@
 		/obj/item/clothing/suit/storage/toggle/suit/black,
 		/obj/item/clothing/glasses/sunglasses/big,
 		/obj/item/storage/belt/general,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel)),
-		new /datum/atom_creator/simple(/obj/item/storage/backpack/messenger, 50)
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel, /obj/item/storage/backpack/messenger)),
 	)
 
 //equipment closets that everyone on the crew or in research can access, for storing things securely

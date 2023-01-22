@@ -1,11 +1,11 @@
-/mob/living/simple_animal/hostile/meat/
+/mob/living/simple_animal/hostile/meat
 	name = "horror"
 	desc = "A monstrously huge wall of flesh, it looks like you took who knows how many humans and put them together..."
 	icon = 'icons/mob/simple_animal/nightmaremonsters.dmi'
 	icon_state = "horror"
 	icon_living = "horror"
 	icon_dead = "horror_dead"
-	speak_emote = list("twitches.")
+	speak_emote = list("дёргается")
 	turns_per_move = 5
 	see_in_dark = 10
 	response_help  = "pets"
@@ -49,7 +49,7 @@
 	icon_state = "abomination"
 	icon_living = "abomination"
 	icon_dead = "abomination_dead"
-	speak_emote = list("twitches.")
+	speak_emote = list("дёргается")
 	turns_per_move = 5
 	see_in_dark = 10
 	response_help  = "pets"
@@ -83,7 +83,7 @@
 	icon_state = "horror"
 	icon_living = "horror"
 	icon_dead = "horror_dead"
-	speak_emote = list("twitches.")
+	speak_emote = list("дёргается")
 	turns_per_move = 5
 	see_in_dark = 10
 	response_help  = "pets"
@@ -116,7 +116,7 @@
 	icon_state = "horror_alt"
 	icon_living = "horror_alt"
 	icon_dead = "horror_alt_dead"
-	speak_emote = list("twitches.")
+	speak_emote = list("дёргается")
 	turns_per_move = 5
 	see_in_dark = 10
 	response_help  = "pets"
@@ -152,7 +152,7 @@
 	icon_state = "horror_security"
 	icon_living = "horror_security"
 	icon_dead = "horror_security_dead"
-	speak_emote = list("twitches.")
+	speak_emote = list("дёргается")
 	turns_per_move = 5
 	see_in_dark = 10
 	response_help  = "pets"
@@ -186,7 +186,7 @@
 	icon_state = "horror_miner"
 	icon_living = "horror_miner"
 	icon_dead = "horror_miner_dead"
-	speak_emote = list("twitches.")
+	speak_emote = list("дёргается")
 	turns_per_move = 5
 	see_in_dark = 10
 	response_help  = "pets"
@@ -220,7 +220,7 @@
 	icon_state = "lesser_ling"
 	icon_living = "lesser_ling"
 	icon_dead = ""
-	speak_emote = list("twitches.")
+	speak_emote = list("дёргается")
 	turns_per_move = 5
 	see_in_dark = 10
 	response_help  = "pets"

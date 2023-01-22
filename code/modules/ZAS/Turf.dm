@@ -49,7 +49,7 @@
 #define GET_ZONE_NEIGHBOURS(T, ret) \
 	ret = 0; \
 	if (T.zone) { \
-		for (var/_gzn_dir in gzn_check) { \
+		for (var/_gzn_dir in GLOB.gzn_check) { \
 			var/turf/simulated/other = get_step(T, _gzn_dir); \
 			if (istype(other) && other.zone == T.zone) { \
 				var/block; \
@@ -74,7 +74,7 @@
 	var/check_dirs
 	GET_ZONE_NEIGHBOURS(src, check_dirs)
 	. = check_dirs
-	for(var/dir in csrfz_check)
+	for(var/dir in GLOB.csrfz_check)
 		//for each pair of "adjacent" cardinals (e.g. NORTH and WEST, but not NORTH and SOUTH)
 		if((dir & check_dirs) == dir)
 			//check that they are connected by the corner turf

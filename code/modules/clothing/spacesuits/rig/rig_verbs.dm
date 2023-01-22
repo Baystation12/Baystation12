@@ -55,18 +55,6 @@
 
 	toggle_piece("helmet",wearer)
 
-/obj/item/rig/proc/toggle_chest()
-
-	set name = "Toggle Chestpiece"
-	set desc = "Deploys or retracts your chestpiece."
-	set category = "Hardsuit"
-	set src = usr.contents
-
-	if(!check_suit_access(usr))
-		return
-
-	toggle_piece("chest",wearer)
-
 /obj/item/rig/proc/toggle_gauntlets()
 
 	set name = "Toggle Gauntlets"

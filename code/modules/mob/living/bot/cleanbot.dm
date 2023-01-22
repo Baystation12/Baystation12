@@ -68,8 +68,8 @@
 	busy = 1
 	visible_message("\The [src] begins to clean up \the [D]")
 	update_icons()
-	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
-	if(do_after(src, cleantime, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+	var/cleantime = (istype(D, /obj/effect/decal/cleanable/dirt) ? 1 : 5) SECONDS
+	if(do_after(src, cleantime, D, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		if(istype(loc, /turf/simulated))
 			var/turf/simulated/f = loc
 			f.dirt = 0

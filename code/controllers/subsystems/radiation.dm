@@ -8,9 +8,9 @@ SUBSYSTEM_DEF(radiation)
 	var/list/sources_assoc = list()		// Sources indexed by turf for de-duplication.
 	var/list/resistance_cache = list()	// Cache of turf's radiation resistance.
 
-	var/tmp/list/current_sources   = list()
-	var/tmp/list/current_res_cache = list()
-	var/tmp/list/listeners         = list()
+	var/list/current_sources   = list()
+	var/list/current_res_cache = list()
+	var/list/listeners         = list()
 
 /datum/controller/subsystem/radiation/fire(resumed = FALSE)
 	if (!resumed)
@@ -57,11 +57,12 @@ SUBSYSTEM_DEF(radiation)
 		if (MC_TICK_CHECK)
 			return
 
-/datum/controller/subsystem/radiation/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Sources: [sources.len] Cache: [resistance_cache.len]"
-	..(text, force)
+
+/datum/controller/subsystem/radiation/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Sources: [sources.len] Cache: [resistance_cache.len]")
+
 
 // Ray trace from all active radiation sources to T and return the strongest effect.
 /datum/controller/subsystem/radiation/proc/get_rads_at_turf(var/turf/T)

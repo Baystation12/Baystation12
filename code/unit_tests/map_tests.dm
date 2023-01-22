@@ -258,10 +258,10 @@
 
 //=======================================================================================
 
-datum/unit_test/correct_allowed_spawn_test
+/datum/unit_test/correct_allowed_spawn_test
 	name = "MAP: All allowed_spawns entries should have spawnpoints on map."
 
-datum/unit_test/correct_allowed_spawn_test/start_test()
+/datum/unit_test/correct_allowed_spawn_test/start_test()
 	var/failed = FALSE
 
 	for(var/spawn_name in GLOB.using_map.allowed_spawns)
@@ -288,10 +288,10 @@ datum/unit_test/correct_allowed_spawn_test/start_test()
 
 //=======================================================================================
 
-datum/unit_test/map_check
+/datum/unit_test/map_check
 	name = "MAP: Map Check"
 
-datum/unit_test/map_check/start_test()
+/datum/unit_test/map_check/start_test()
 	if(world.maxx < 1 || world.maxy < 1 || world.maxz < 1)
 		fail("Unexpected map size. Was a map properly included?")
 	else
@@ -299,10 +299,10 @@ datum/unit_test/map_check/start_test()
 	return 1
 //=======================================================================================
 
-datum/unit_test/ladder_check
+/datum/unit_test/ladder_check
 	name = "MAP: Ladder Check"
 
-datum/unit_test/ladder_check/start_test()
+/datum/unit_test/ladder_check/start_test()
 	var/succeeded = TRUE
 	for(var/obj/structure/ladder/L)
 		if(L.allowed_directions & UP)

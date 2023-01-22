@@ -6,7 +6,7 @@
 	health = 50
 	maxHealth = 50
 	natural_weapon = /obj/item/natural_weapon/drone_slicer
-	speak_emote = list("blares","buzzes","beeps")
+	speak_emote = list("вопит","жужжит","пиликает")
 	faction = "silicon"
 	min_gas = null
 	max_gas = null

@@ -1,17 +1,17 @@
-var/const/NETWORK_AQUILA      = "Aquila"
-var/const/NETWORK_BRIDGE      = "Bridge"
-var/const/NETWORK_CHARON     = "Charon"
-var/const/NETWORK_EXPEDITION  = "Expedition"
-var/const/NETWORK_FIRST_DECK  = "First Deck"
-var/const/NETWORK_FOURTH_DECK = "Fourth Deck"
-var/const/NETWORK_POD         = "General Utility Pod"
-var/const/NETWORK_SECOND_DECK = "Second Deck"
-var/const/NETWORK_SUPPLY      = "Supply"
-var/const/NETWORK_HANGAR      = "Hangar"
-var/const/NETWORK_EXPLO       = "Exploration"
-var/const/NETWORK_THIRD_DECK  = "Third Deck"
-var/const/NETWORK_FIFTH_DECK  = "Fifth Deck"
-var/const/NETWORK_PETROV  = "Petrov"
+var/global/const/NETWORK_AQUILA      = "Aquila"
+var/global/const/NETWORK_BRIDGE      = "Bridge"
+var/global/const/NETWORK_CHARON     = "Charon"
+var/global/const/NETWORK_EXPEDITION  = "Expedition"
+var/global/const/NETWORK_FIRST_DECK  = "First Deck"
+var/global/const/NETWORK_FOURTH_DECK = "Fourth Deck"
+var/global/const/NETWORK_POD         = "General Utility Pod"
+var/global/const/NETWORK_SECOND_DECK = "Second Deck"
+var/global/const/NETWORK_SUPPLY      = "Supply"
+var/global/const/NETWORK_HANGAR      = "Hangar"
+var/global/const/NETWORK_EXPLO       = "Exploration"
+var/global/const/NETWORK_THIRD_DECK  = "Third Deck"
+var/global/const/NETWORK_FIFTH_DECK  = "Fifth Deck"
+var/global/const/NETWORK_PETROV  = "Petrov"
 
 /datum/map/torch/get_network_access(var/network)
 	switch(network)
@@ -184,9 +184,9 @@ var/const/NETWORK_PETROV  = "Petrov"
 	_output_on = TRUE
 	_fully_charged = TRUE
 
-var/const/NETWORK_COMMAND = "Command"
-var/const/NETWORK_ENGINE  = "Engine"
-var/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
+var/global/const/NETWORK_COMMAND = "Command"
+var/global/const/NETWORK_ENGINE  = "Engine"
+var/global/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
 
 /datum/map/proc/get_shared_network_access(var/network)
 	switch(network)

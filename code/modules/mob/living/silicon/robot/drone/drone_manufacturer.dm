@@ -20,6 +20,8 @@
 	var/produce_drones = 1
 	var/time_last_drone = 500
 	var/drone_type = /mob/living/silicon/robot/drone
+	/// Boolean. Whether or not spawned drones should be locked to the machinery's z-level.
+	var/z_locked = TRUE
 
 	icon = 'icons/obj/machines/drone_fab.dmi'
 	icon_state = "drone_fab_idle"
@@ -77,7 +79,7 @@
 	drone_progress = 0
 	time_last_drone = world.time
 
-	var/mob/living/silicon/robot/drone/new_drone = new drone_type(get_turf(src))
+	var/mob/living/silicon/robot/drone/new_drone = new drone_type(get_turf(src), z_locked)
 	if(player)
 		announce_ghost_joinleave(player, 0, "They have taken control over a maintenance drone.")
 		if(player.mob && player.mob.mind) player.mob.mind.reset()

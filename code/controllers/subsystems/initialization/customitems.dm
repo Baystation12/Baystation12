@@ -7,7 +7,12 @@ SUBSYSTEM_DEF(customitems)
 	var/list/item_states = list()
 	var/list/mob_states =  list()
 
-/datum/controller/subsystem/customitems/Initialize()
+
+/datum/controller/subsystem/customitems/UpdateStat(time)
+	return
+
+
+/datum/controller/subsystem/customitems/Initialize(start_uptime)
 
 	item_states = icon_states(CUSTOM_ITEM_OBJ)
 	mob_states =  icon_states(CUSTOM_ITEM_MOB)
@@ -42,7 +47,7 @@ SUBSYSTEM_DEF(customitems)
 					crash_with("Exception loading custom item [checkfile]: [e] on [e.file]:[e.line]")
 
 	report_progress("Loaded [item_count] custom item\s from [dir_count] director[dir_count == 1 ? "y" : "ies"].")
-	. = ..()
+
 
 // Places the item on the target mob.
 /datum/controller/subsystem/customitems/proc/place_custom_item(mob/living/carbon/human/M, var/datum/custom_item/citem)

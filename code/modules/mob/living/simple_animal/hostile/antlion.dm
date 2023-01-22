@@ -6,7 +6,7 @@
 	icon_living = "antlion"
 	icon_dead = "antlion_dead"
 	mob_size = MOB_MEDIUM
-	speak_emote = list("clicks")
+	speak_emote = list("щёлкает")
 	response_harm   = "strikes"
 	faction = "antlions"
 	bleed_colour = COLOR_SKY_BLUE
@@ -129,9 +129,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/mega/Initialize()
 	. = ..()
-	var/matrix/M = new
-	M.Scale(1.5)
-	transform = M
+	SetTransform(scale = 1.5)
 	update_icon()
 
 /datum/say_list/antlion

@@ -11,7 +11,7 @@
 		STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/grenade/supermatter/detonate()
+/obj/item/grenade/supermatter/detonate(mob/living/user)
 	..()
 	START_PROCESSING(SSobj, src)
 	implode_at = world.time + 10 SECONDS

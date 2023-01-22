@@ -67,10 +67,9 @@
 	effect = "Subject becomes confused."
 	duration = 30 SECONDS
 
-	start(mob/living/carbon/human/H)
-		H.visible_message("<B>\The [H]</B> drools.")
+/datum/genetics/side_effect/confuse/start(mob/living/carbon/human/H)
+	H.visible_message("<B>\The [H]</B> drools.")
 
-	finish(mob/living/carbon/human/H)
-		if(!H.reagents.has_reagent(/datum/reagent/dylovene))
-			H.confused += 100
-
+/datum/genetics/side_effect/confuse/finish(mob/living/carbon/human/H)
+	if(!H.reagents.has_reagent(/datum/reagent/dylovene))
+		H.confused += 100

@@ -11,7 +11,7 @@
 	var/sharp = FALSE		// whether this object cuts
 	var/edge = FALSE		// whether this object is more likely to dismember
 	var/in_use = 0 // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
-	var/damtype = "brute"
+	var/damtype = DAMAGE_BRUTE
 	var/armor_penetration = 0
 	var/anchor_fall = FALSE
 	var/holographic = 0 //if the obj is a holographic object spawned by the holodeck
@@ -137,11 +137,11 @@
 /obj/proc/damage_flags()
 	. = 0
 	if(has_edge(src))
-		. |= DAM_EDGE
+		. |= DAMAGE_FLAG_EDGE
 	if(is_sharp(src))
-		. |= DAM_SHARP
-		if(damtype == BURN)
-			. |= DAM_LASER
+		. |= DAMAGE_FLAG_SHARP
+		if (damtype == DAMAGE_BURN)
+			. |= DAMAGE_FLAG_LASER
 
 /obj/attackby(obj/item/O, mob/user)
 	if(obj_flags & OBJ_FLAG_ANCHORABLE)
@@ -157,7 +157,7 @@
 		user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
 	else
 		user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
-	if(do_after(user, delay, src))
+	if(do_after(user, delay, src, DO_PUBLIC_UNIQUE))
 		if(!src) return
 		to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 		anchored = !anchored

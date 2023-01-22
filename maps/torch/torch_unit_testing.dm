@@ -1,12 +1,8 @@
-/datum/unit_test/station_wires_shall_be_connected
-	exceptions = list(list(80, 107, 1, WEST))
-
 /datum/map/torch
 	// Unit test exemptions
 	apc_test_exempt_areas = list(
 		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/exoplanet = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/aquila/maintenance = NO_SCRUBBER|NO_VENT,
 		/area/engineering/atmos/storage = NO_SCRUBBER|NO_VENT,
 		/area/engineering/auxpower = NO_SCRUBBER|NO_VENT,
 		/area/engineering/engine_smes = NO_SCRUBBER|NO_VENT,
@@ -49,6 +45,8 @@
 		/area/supply = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/thruster = NO_SCRUBBER,
 		/area/turbolift = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/turret_protected/ai = NO_SCRUBBER|NO_VENT,
+		/area/turret_protected/ai_outer_chamber = NO_SCRUBBER|NO_VENT,
 		/area/vacant/bar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/vacant = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/vacant/brig = NO_SCRUBBER|NO_VENT,
@@ -85,14 +83,18 @@
 		/area/template_noop
 	)
 
+/datum/unit_test/zas_area_test/ai_chamber
+	name = "ZAS: AI Chamber"
+	area_path = /area/turret_protected/ai
+
 /datum/unit_test/zas_area_test/cargo_bay
 	name = "ZAS: Cargo Bay"
 	area_path = /area/quartermaster/storage
 
-datum/unit_test/zas_area_test/supply_centcomm
+/datum/unit_test/zas_area_test/supply_centcomm
 	name = "ZAS: Supply Shuttle (CentComm)"
 	area_path = /area/supply/dock
 
-datum/unit_test/zas_area_test/xenobio
+/datum/unit_test/zas_area_test/xenobio
 	name = "ZAS: Xenobiology"
 	area_path = /area/rnd/xenobiology

@@ -41,10 +41,6 @@
 		)
 	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/rcd,/obj/item/rpd)
 
-/obj/item/clothing/suit/space/void/engineering/Initialize()
-	. = ..()
-	slowdown_per_slot[slot_wear_suit] = 1
-
 /obj/item/clothing/suit/space/void/engineering/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering
 	boots = /obj/item/clothing/shoes/magboots
@@ -254,7 +250,7 @@
 
 /obj/item/clothing/suit/space/void/engineering/alt/Initialize()
 	. = ..()
-	slowdown_per_slot[slot_wear_suit] = 2
+	slowdown_per_slot[slot_wear_suit] = 1.25
 
 /obj/item/clothing/suit/space/void/engineering/alt/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering/alt
@@ -305,7 +301,7 @@
 
 /obj/item/clothing/suit/space/void/medical/alt/Initialize()
 	. = ..()
-	slowdown_per_slot[slot_wear_suit] = 0
+	slowdown_per_slot[slot_wear_suit] = 0.5
 
 /obj/item/clothing/suit/space/void/medical/alt/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt
@@ -452,6 +448,10 @@
 /obj/item/clothing/suit/space/void/pilot/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/pilot
 	boots = /obj/item/clothing/shoes/magboots
+
+/obj/item/clothing/suit/space/void/pilot/Initialize()
+	. = ..()
+	slowdown_per_slot[slot_wear_suit] = 0.75
 
 //Retro
 /obj/item/clothing/suit/space/void/retro

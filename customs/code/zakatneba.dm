@@ -1,7 +1,7 @@
 /obj/item/gun/projectile/revolver/zakatneba
 	name = "Revolver 'Saitako'"
 	desc = "This is a very reliable revolver, custom made for a specific person. The caliber of the gun is .38 Special, be careful when interacting with it. It was made by a private manufacturer - Saitako. You may notice the Yangui characters on the grip."
-	icon = 'proxima/icons/obj/guns/ballistic.dmi'
+	icon = 'customs/icons/obj/custom_items_obj.dmi'
 	icon_state = "mateba"
 	handle_casings = CYCLE_CASINGS
 	caliber = CALIBER_PISTOL_SMALL

@@ -2,7 +2,7 @@
 /decl/cultural_info/culture/nabber
 	name = CULTURE_NABBER_CMINUS
 
-	description = "You have been trained to Xynergy Grade PLACEHOLDER."
+	description = "Вы были обучены корпорацией Xynergy до класса PLACEHOLDER."
 	language = LANGUAGE_NABBER
 	secondary_langs = list(
 		LANGUAGE_HUMAN_EURO,
@@ -28,7 +28,8 @@
 		LAZYADD(job_titles, initial(job.title))
 	if(!LAZYLEN(job_titles))
 		LAZYADD(job_titles, "none")
-	description = "You have been trained by Xynergy to [name]. This makes you suitable for the following roles: [english_list(job_titles)]."
+	description = "Вы были обучены корпорацией Xynergy до класса [name]. Это позволяет вам работать на следующих \
+	должностях: [english_list(job_titles)]."
 
 	// Set up our qualifications.
 	LAZYADD(qualifications, "<b>[name]</b>")

@@ -1,6 +1,6 @@
 
 //This is a list of words which are ignored by the parser when comparing message contents for names. MUST BE IN LOWER CASE!
-var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","alien","as")
+var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","alien","as")
 
 /proc/generate_ahelp_key_words(var/mob/mob, var/msg)
 	var/list/surnames = list()

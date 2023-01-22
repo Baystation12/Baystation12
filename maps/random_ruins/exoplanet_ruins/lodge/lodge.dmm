@@ -61,16 +61,14 @@
 /obj/item/material/knife/table,
 /obj/item/material/knife/table,
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 1;
-	icon_state = "spline_fancy"
+	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/template_noop)
 "m" = (
 /obj/structure/closet/crate/freezer,
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 1;
-	icon_state = "spline_fancy"
+	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/template_noop)
@@ -89,8 +87,7 @@
 /area/template_noop)
 "p" = (
 /obj/structure/bed/chair/wood{
-	dir = 8;
-	icon_state = "wooden_chair_preview"
+	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood/corner,
 /turf/simulated/floor/wood,
@@ -104,8 +101,7 @@
 /area/template_noop)
 "r" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 1;
-	icon_state = "spline_fancy"
+	dir = 1
 	},
 /turf/simulated/floor/wood,
 /area/template_noop)
@@ -171,8 +167,7 @@
 /area/template_noop)
 "D" = (
 /obj/structure/bed/chair/wood{
-	dir = 8;
-	icon_state = "wooden_chair_preview"
+	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4

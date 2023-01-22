@@ -32,6 +32,11 @@
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/engineering
 	shoes = /obj/item/clothing/shoes/dutyboots
 
+/decl/hierarchy/outfit/job/torch/crew/engineering/engineer/army
+	name = OUTFIT_JOB_NAME("Engineer - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/engineering
+	shoes = /obj/item/clothing/shoes/dutyboots
+
 /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
 	name = OUTFIT_JOB_NAME("Engineering Assistant")
 	uniform = /obj/item/clothing/under/rank/engineer
@@ -58,4 +63,11 @@
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/engineering
 	id_types = list(/obj/item/card/id/torch/contractor/engineering/roboticist)
 	shoes = /obj/item/clothing/shoes/dutyboots
+	pda_type = /obj/item/modular_computer/pda/roboticist
+
+/decl/hierarchy/outfit/job/torch/crew/engineering/roboticistarmy
+	name = OUTFIT_JOB_NAME("Roboticist - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/engineering
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_types = list(/obj/item/card/id/torch/contractor/engineering/roboticist)
 	pda_type = /obj/item/modular_computer/pda/roboticist

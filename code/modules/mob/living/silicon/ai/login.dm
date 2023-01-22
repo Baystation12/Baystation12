@@ -1,7 +1,6 @@
-/mob/living/silicon/ai/Login()	//ThisIsDumb(TM) TODO: tidy this up ¬_¬ ~Carn
+/mob/living/silicon/ai/Login()
 	..()
-	if(stat != DEAD)
-		for(var/obj/machinery/ai_status_display/O in SSmachines.machinery) //change status
+	if (stat != DEAD)
+		for (var/obj/machinery/ai_status_display/O in SSmachines.machinery)
 			O.mode = 1
 			O.emotion = "Neutral"
-

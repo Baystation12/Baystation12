@@ -64,8 +64,6 @@
 		bomb = ARMOR_BOMB_PADDED
 	)
 	siemens_coefficient = 0.5
-	slowdown = 1
-	accessory_flags = EMPTY_BITFIELD
 
 
 /obj/item/clothing/accessory/leg_guards/ballistic
@@ -80,8 +78,6 @@
 		bomb = ARMOR_BOMB_PADDED
 	)
 	siemens_coefficient = 0.7
-	slowdown = 1
-	accessory_flags = EMPTY_BITFIELD
 
 
 /obj/item/clothing/accessory/leg_guards/ablative
@@ -96,5 +92,3 @@
 		bomb = ARMOR_BOMB_PADDED
 	)
 	siemens_coefficient = 0
-	slowdown = 1
-	accessory_flags = EMPTY_BITFIELD

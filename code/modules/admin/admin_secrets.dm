@@ -1,4 +1,4 @@
-var/datum/admin_secrets/admin_secrets = new()
+var/global/datum/admin_secrets/admin_secrets = new()
 
 /datum/admin_secrets
 	var/list/datum/admin_secret_category/categories

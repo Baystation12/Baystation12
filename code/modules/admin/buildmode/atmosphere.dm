@@ -89,6 +89,7 @@
 		if (!simmed)
 			for (var/turf/unsimulated/T in atmospheres)
 				T.temperature = temp
+				update_unsimmed_connections(T)
 			return
 
 		if (!isnull(temp))
@@ -109,6 +110,8 @@
 
 				for (var/gas in T.initial_gas)
 					T.initial_gas[gas] = new_moles
+
+				update_unsimmed_connections(T)
 			return
 
 		if (!isnull(moles))
@@ -126,6 +129,7 @@
 		if (!simmed)
 			for (var/turf/unsimulated/T in atmospheres)
 				T.initial_gas[gas_id] = moles
+				update_unsimmed_connections(T)
 			return
 
 		if (!isnull(moles))
@@ -147,6 +151,7 @@
 			if (!simmed)
 				for (var/turf/unsimulated/T in atmospheres)
 					T.initial_gas[gas] = moles
+					update_unsimmed_connections(T)
 				return
 
 			if (moles)
@@ -164,6 +169,7 @@
 			if (!simmed)
 				for (var/turf/unsimulated/T in atmospheres)
 					T.initial_gas[gas] = 0
+					update_unsimmed_connections(T)
 				return
 
 			for (var/turf/T in atmospheres)
@@ -186,6 +192,7 @@
 			for (var/turf/unsimulated/T in atmospheres)
 				T.initial_gas = gasses
 				T.temperature = temperature
+				update_unsimmed_connections(T)
 			return
 
 		if (length(gasses))
@@ -201,7 +208,6 @@
 					G.adjust_gas_temp(new_gas, gasses[new_gas], temperature)
 
 		. = TOPIC_HANDLED
-
 
 	if (mode == MODE_AREA && env_area.planetary_surface)
 		//exoplanets will slowly reset their atmosphere to default if we don't update it
@@ -236,3 +242,32 @@
 			return TRUE
 
 	return FALSE
+
+/datum/build_mode/atmosphere/proc/update_unsimmed_connections(turf/unsimulated/T)
+	if (T.connections)
+		var/connection_manager/manager = T.connections
+
+		if (manager.N)
+			set_zone_update(manager.N)
+
+		if (manager.S)
+			set_zone_update(manager.S)
+
+		if (manager.E)
+			set_zone_update(manager.E)
+
+		if (manager.W)
+			set_zone_update(manager.W)
+
+		if (manager.U)
+			set_zone_update(manager.U)
+
+		if (manager.D)
+			set_zone_update(manager.D)
+
+		manager.update_all()
+
+
+/datum/build_mode/atmosphere/proc/set_zone_update(connection/C)
+	C.zoneA = null
+	C.zoneB = null

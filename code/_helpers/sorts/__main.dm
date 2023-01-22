@@ -9,7 +9,7 @@
 #define MIN_GALLOP 7
 
 	//This is a global instance to allow much of this code to be reused. The interfaces are kept separately
-var/datum/sortInstance/sortInstance = new()
+var/global/datum/sortInstance/sortInstance = new()
 /datum/sortInstance
 	//The array being sorted.
 	var/list/L

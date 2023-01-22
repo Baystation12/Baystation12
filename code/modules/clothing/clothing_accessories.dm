@@ -60,14 +60,13 @@
 	if (usr.incapacitated())
 		return
 
-	if (!usr.unEquip(src))
-		return
-
 	switch(over_object.name)
 		if("r_hand")
-			usr.put_in_r_hand(src)
+			if (usr.unEquip(src))
+				usr.put_in_r_hand(src)
 		if("l_hand")
-			usr.put_in_l_hand(src)
+			if (usr.unEquip(src))
+				usr.put_in_l_hand(src)
 	src.add_fingerprint(usr)
 
 /obj/item/clothing/examine(mob/user)

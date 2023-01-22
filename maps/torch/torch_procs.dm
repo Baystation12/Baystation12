@@ -15,20 +15,45 @@
 					V.unlock()
 
 /datum/map/make_maint_all_access(var/radstorm = 0)
-	maint_all_access = 1
+	maint_all_access = TRUE
 	if(radstorm)
-		priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks, and saferooms have been unbolted.", "Attention!")
+		priority_announcement.Announce("Требование о доступе для технических тунелей было отозвано на всех технических шлюзах. Шлюзы бункеров безопасности были разблокированы.", "Attention!")
 		GLOB.using_map.unbolt_saferooms()
 	else
-		priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks.", "Attention!")
+		priority_announcement.Announce("Требование о доступе для технических тунелей было отозвано на всех технических шлюзах.", "Attention!")
 
 /datum/map/revoke_maint_all_access(var/radstorm = 0)
-	maint_all_access = 0
+	maint_all_access = FALSE
 	if(radstorm)
-		priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks, and saferooms have been bolted.", "Attention!")
+		priority_announcement.Announce("Требование о доступе для технических тунелей было поднято на всех технических шлюзах. Шлюзы бункеров безопасности были зыкрыты болтами.", "Attention!")
 		GLOB.using_map.bolt_saferooms()
 	else
-		priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks.", "Attention!")
+		priority_announcement.Announce("Требование о доступе для технических тунелей было поднято на всех технических шлюзах.", "Attention!")
+
+/datum/map/proc/request_synth()
+	var/datum/job/synthetic/synth = SSjobs.get_by_path(/datum/job/synthetic)
+	var/success
+	if(synth.total_positions == 0)
+		priority_announcement.Announce("Идентифицирован запрос командующего состава на пробуждение синтетической единицы ЭКСО из общего хранилища.", "Attention!")
+		synth.total_positions = 1
+		success = 1
+		return success
+	else
+		return
+
+/client/proc/awake_synth()
+	set category = "Admin"
+	set name = "Awake Synth"
+
+	var/datum/job/synthetic/synth = SSjobs.get_by_path(/datum/job/synthetic)
+	var/success
+	if(synth.total_positions == 0)
+		priority_announcement.Announce("Получен сигнал от неизвестного источника с командой на пробуждение экспериментальной синтетической единицей ЭКСО из общего хранилища.", "Attention!")
+		synth.total_positions = 1
+		success = 1
+		return success
+	else
+		return
 
 /datum/map/torch/roundend_player_status()
 	for(var/mob/Player in GLOB.player_list)

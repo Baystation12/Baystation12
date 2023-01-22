@@ -36,7 +36,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, tearing skin on [target]'s face with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, tearing skin on [target]'s face with \the [tool]!</span>")
-	affected.take_external_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+	affected.take_external_damage(10, 0, (DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	Plastic Surgery
@@ -86,7 +86,7 @@
 		SPAN_WARNING("\The [user]'s hand slips, tearing skin on \the [target]'s face with \the [tool]!"),
 		SPAN_WARNING("Your hand slips, tearing skin on \the [target]'s face with \the [tool]!")
 	)
-	affected.take_external_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+	affected.take_external_damage(10, 0, (DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE), used_weapon = tool)
 
 /decl/surgery_step/plastic_surgery/reform_face
 	name = "Reform Face"
@@ -140,6 +140,6 @@
 		SPAN_WARNING("Your hand slips, tearing skin on \the [target]'s face with \the [tool]!")
 	)
 	var/obj/item/organ/external/head/h = target.get_organ(target_zone)
-	affected.take_external_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
+	affected.take_external_damage(10, 0, (DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE), used_weapon = tool)
 	if(h)
 		h.status &= ~ORGAN_DISFIGURED

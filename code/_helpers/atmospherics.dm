@@ -12,5 +12,4 @@
 	return 1
 
 /proc/print_atmos_analysis(user, var/list/result)
-	for(var/line in result)
-		to_chat(user, "<span class='notice'>[line]</span>")
+	to_chat(user, SPAN_NOTICE("[result]"))

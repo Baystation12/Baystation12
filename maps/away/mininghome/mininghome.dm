@@ -2,7 +2,6 @@
 	name = "Asteroid Mining Station"
 	desc = "A small mining station. No active lifesigns found on the station. Sensors indicate an abundance of valuable ore."
 	icon_state = "object"
-	known = 1
 	initial_generic_waypoints = list(
 		"nav_mininghome_1",
 		"nav_mininghome_2",

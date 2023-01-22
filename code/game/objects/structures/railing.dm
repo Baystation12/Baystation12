@@ -14,14 +14,13 @@
 
 	var/broken =    FALSE
 	var/neighbor_status = 0
+	/// Color code. If set, the railing will be painted this color on init. Primarily used for mapping variants.
+	var/init_color
 
 /obj/structure/railing/mapped
-	color = COLOR_GUNMETAL
+	material = MATERIAL_ALUMINIUM
 	anchored = TRUE
-
-/obj/structure/railing/mapped/Initialize()
-	. = ..()
-	color = COLOR_GUNMETAL // They're not painted!
+	init_color = COLOR_GUNMETAL
 
 /obj/structure/railing/mapped/no_density
 	density = FALSE
@@ -30,19 +29,19 @@
 	. = ..()
 	update_icon()
 
-/obj/structure/railing/New(var/newloc, var/material_key = DEFAULT_FURNITURE_MATERIAL)
-	material = material_key // Converted to datum in initialize().
-	..(newloc)
-
 /obj/structure/railing/Process()
 	if(!material || !material.radioactivity)
 		return
 	for(var/mob/living/L in range(1,src))
-		L.apply_damage(round(material.radioactivity/20),IRRADIATE, damage_flags = DAM_DISPERSED)
+		L.apply_damage(round(material.radioactivity/20), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 
-/obj/structure/railing/Initialize()
+/obj/structure/railing/Initialize(mapload, material_key)
 	. = ..()
 
+	if (material_key)
+		material = material_key
+	if (!material)
+		material = DEFAULT_FURNITURE_MATERIAL
 	if(!isnull(material) && !istype(material))
 		material = SSmaterials.get_material_by_name(material)
 	if(!istype(material))
@@ -59,6 +58,10 @@
 		obj_flags |= OBJ_FLAG_CONDUCTIBLE
 	else
 		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
+
+	if (init_color)
+		set_color(init_color)
+
 	update_icon(FALSE)
 
 /obj/structure/railing/Destroy()
@@ -77,12 +80,11 @@
 		return !density
 	return TRUE
 
-/obj/structure/railing/handle_death_change(new_death_state)
-	if (new_death_state)
-		visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
-		playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
-		material.place_shard(get_turf(usr))
-		qdel(src)
+/obj/structure/railing/on_death()
+	visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
+	playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
+	material.place_shard(get_turf(usr))
+	qdel(src)
 
 /obj/structure/railing/proc/NeighborsCheck(var/UpdateNeighbors = 1)
 	neighbor_status = 0
@@ -90,6 +92,8 @@
 	var/Lturn = turn(src.dir, 90)
 
 	for(var/obj/structure/railing/R in src.loc)
+		if (QDELETED(R))
+			continue
 		if ((R.dir == Lturn) && R.anchored)
 			neighbor_status |= 32
 			if (UpdateNeighbors)
@@ -99,21 +103,29 @@
 			if (UpdateNeighbors)
 				R.update_icon(0)
 	for (var/obj/structure/railing/R in get_step(src, Lturn))
+		if (QDELETED(R))
+			continue
 		if ((R.dir == src.dir) && R.anchored)
 			neighbor_status |= 16
 			if (UpdateNeighbors)
 				R.update_icon(0)
 	for (var/obj/structure/railing/R in get_step(src, Rturn))
+		if (QDELETED(R))
+			continue
 		if ((R.dir == src.dir) && R.anchored)
 			neighbor_status |= 1
 			if (UpdateNeighbors)
 				R.update_icon(0)
 	for (var/obj/structure/railing/R in get_step(src, (Lturn + src.dir)))
+		if (QDELETED(R))
+			continue
 		if ((R.dir == Rturn) && R.anchored)
 			neighbor_status |= 64
 			if (UpdateNeighbors)
 				R.update_icon(0)
 	for (var/obj/structure/railing/R in get_step(src, (Rturn + src.dir)))
+		if (QDELETED(R))
+			continue
 		if ((R.dir == Lturn) && R.anchored)
 			neighbor_status |= 4
 			if (UpdateNeighbors)
@@ -203,10 +215,10 @@
 				if(user.a_intent == I_HURT)
 					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
 					playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
-					var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
+					var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, DAMAGE_BRUTE, damage = 8)
 					if (prob(30 * (1 - blocked)))
 						G.affecting.Weaken(5)
-					G.affecting.apply_damage(8, BRUTE, BP_HEAD)
+					G.affecting.apply_damage(8, DAMAGE_BRUTE, BP_HEAD)
 				else
 					if (get_turf(G.affecting) == get_turf(src))
 						G.affecting.forceMove(get_step(src, src.dir))
@@ -222,7 +234,7 @@
 	if(isWrench(W))
 		if(!anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			if(do_after(user, 20, src))
+			if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				if(anchored)
 					return
 				user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
@@ -248,7 +260,7 @@
 				to_chat(user, "<span class='warning'>\The [src] does not need repairs.</span>")
 				return
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-			if(do_after(user, 20, src))
+			if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 				if(!health_damaged())
 					return
 				user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
@@ -262,7 +274,7 @@
 			return
 		user.visible_message(anchored ? "<span class='notice'>\The [user] begins unscrew \the [src].</span>" : "<span class='notice'>\The [user] begins fasten \the [src].</span>" )
 		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-		if(do_after(user, 10, src) && density)
+		if(do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) && density)
 			to_chat(user, (anchored ? "<span class='notice'>You have unfastened \the [src] from the floor.</span>" : "<span class='notice'>You have fastened \the [src] to the floor.</span>"))
 			anchored = !anchored
 			update_icon()

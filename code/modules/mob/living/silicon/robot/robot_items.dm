@@ -91,7 +91,7 @@
 		I.forceMove(src)
 		loaded_item = I
 		for(var/mob/M in viewers())
-			M.show_message(text("<span class='notice'>[user] adds the [I] to the [src].</span>"), 1)
+			M.show_message(text(SPAN_NOTICE("[user] adds the [I] to the [src].")), 1)
 		desc = initial(desc) + "<br>It is holding \the [loaded_item]."
 		flick("portable_analyzer_load", src)
 		icon_state = "portable_analyzer_full"
@@ -271,7 +271,7 @@
 	deploy_paper(get_turf(src))
 
 /obj/item/form_printer/proc/deploy_paper(var/turf/T)
-	T.visible_message("<span class='notice'>\The [src.loc] dispenses a sheet of crisp white paper.</span>")
+	T.visible_message(SPAN_NOTICE("\The [src.loc] dispenses a sheet of crisp white paper."))
 	new /obj/item/paper(T)
 
 
@@ -303,6 +303,7 @@
 	desc = "Hand-held device which allows rapid deployment and removal of inflatables."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "inf_deployer"
+	item_state = "RPED"
 	w_class = ITEM_SIZE_LARGE
 
 	var/stored_walls = 5
@@ -337,7 +338,7 @@
 		return
 
 	if (istype(target, /obj/structure/inflatable))
-		if (!do_after(user, 0.5 SECONDS, target))
+		if (!do_after(user, 0.5 SECONDS, target, DO_PUBLIC_UNIQUE))
 			return
 		playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
 		var/obj/item/inflatable/I
@@ -391,7 +392,7 @@
 		if (obstruction)
 			to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
 			return
-		if (!do_after(user, 0.5 SECONDS))
+		if (!do_after(user, 0.5 SECONDS, T, DO_PUBLIC_UNIQUE))
 			return
 		obstruction = T.get_obstruction()
 		if (obstruction)
@@ -422,6 +423,8 @@
 	var/object_type                    //The types of object the rack holds (subtypes are allowed).
 	var/interact_type                  //Things of this type will trigger attack_hand when attacked by this.
 	var/capacity = 1                   //How many objects can be held.
+	/// Whether to attack_self on objects as they're deployed
+	var/attack_self_on_deploy = TRUE
 	var/list/obj/item/held = list()    //What is being held.
 
 /obj/item/robot_rack/examine(mob/user)
@@ -435,28 +438,39 @@
 
 /obj/item/robot_rack/attack_self(mob/user)
 	if(!length(held))
-		to_chat(user, "<span class='notice'>The rack is empty.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is empty."))
 		return
 	var/obj/item/R = held[length(held)]
 	R.dropInto(loc)
 	held -= R
-	R.attack_self(user) // deploy it
-	to_chat(user, "<span class='notice'>You deploy [R].</span>")
+	if (attack_self_on_deploy)
+		R.attack_self(user) // deploy it
+	to_chat(user, SPAN_NOTICE("You deploy \a [R]."))
 	R.add_fingerprint(user)
 
 /obj/item/robot_rack/resolve_attackby(obj/O, mob/user, click_params)
 	if(istype(O, object_type))
 		if(length(held) < capacity)
-			to_chat(user, "<span class='notice'>You collect [O].</span>")
+			to_chat(user, SPAN_NOTICE("You collect \the [O]."))
 			O.forceMove(src)
 			held += O
 			return
-		to_chat(user, "<span class='notice'>\The [src] is full and can't store any more items.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is full and can't store any more items."))
 		return
 	if(istype(O, interact_type))
 		O.attack_hand(user)
 		return
 	. = ..()
+
+/obj/item/robot_rack/verb/empty_rack()
+	set name = "Empty Rack"
+	set desc = "Empty all items from the rack."
+	set category = "Silicon Commands"
+	if(!length(held))
+		to_chat(usr, SPAN_WARNING("\The [src] is empty."))
+		return
+	while(length(held))
+		attack_self(usr)
 
 /obj/item/bioreactor
 	name = "bioreactor"

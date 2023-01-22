@@ -27,7 +27,7 @@
 		to_chat(user, SPAN_NOTICE("There's no animals inside \the [src]"))
 		return
 	user.visible_message("[user] begins undoing the locks and latches on \the [src].")
-	if(do_after(user, 20, src))
+	if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 		user.visible_message("[user] releases \the [contained] from \the [src]!")
 		release()
 
@@ -73,7 +73,7 @@
 
 		usr.visible_message("[usr] begins stuffing \the [src] into \the [over_object].", "You begin stuffing \the [src] into \the [over_object].")
 		Bumped(usr)
-		if(do_after(usr, 20, over_object))
+		if(do_after(usr, 2 SECONDS, over_object, DO_PUBLIC_UNIQUE))
 			usr.visible_message("[usr] has stuffed \the [src] into \the [over_object].", "You have stuffed \the [src] into \the [over_object].")
 			over_object.contain(src)
 	else

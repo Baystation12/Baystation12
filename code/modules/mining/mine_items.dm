@@ -58,6 +58,7 @@
 	name = "sledgehammer"
 	desc = "A mining hammer made of reinforced metal. You feel like smashing your boss in the face with this."
 	icon = 'icons/obj/weapons/melee_physical.dmi'
+	icon_state = "sledgehammer"
 
 /obj/item/pickaxe/drill
 	name = "advanced mining drill" // Can dig sand as well!
@@ -218,7 +219,7 @@
 	if(use(1)) // Don't skip use() checks even if you only need one! Stacks with the amount of 0 are possible, e.g. on synthetics!
 		var/obj/item/stack/flag/newflag = new src.type(T, 1)
 		newflag.set_up()
-		if(istype(T, /turf/simulated/floor/asteroid) || istype(T, /turf/unsimulated/floor/exoplanet))
+		if(istype(T, /turf/simulated/floor/asteroid) || istype(T, /turf/simulated/floor/exoplanet))
 			user.visible_message("\The [user] plants \the [newflag.singular_name] firmly in the ground.")
 		else
 			user.visible_message("\The [user] attaches \the [newflag.singular_name] firmly to the ground.")
@@ -239,7 +240,7 @@
 		addon.layer = ABOVE_LIGHTING_LAYER
 		addon.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		overlays += addon
-		set_light(0.5, 0.5, 3) 
+		set_light(0.5, 0.5, 3)
 	else
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)

@@ -1,4 +1,4 @@
-var/obj/screen/robot_inventory
+var/global/obj/screen/robot_inventory
 
 /mob/living/silicon/robot
 	hud_type = /datum/hud/robot

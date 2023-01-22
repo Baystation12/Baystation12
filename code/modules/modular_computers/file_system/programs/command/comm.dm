@@ -11,7 +11,6 @@
 	program_menu_icon = "flag"
 	nanomodule_path = /datum/nano_module/program/comm
 	extended_desc = "Used to command and control. Can relay long-range communications. This program can not be run on tablet computers."
-	required_access = access_bridge
 	requires_ntnet = TRUE
 	size = 12
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
@@ -36,6 +35,7 @@
 	var/datum/announcement/priority/crew_announcement = new
 	var/current_viewing_message_id = 0
 	var/current_viewing_message = null
+	var/admin_access = list(access_bridge)
 
 /datum/nano_module/program/comm/New()
 	..()
@@ -44,6 +44,7 @@
 /datum/nano_module/program/comm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 
 	var/list/data = host.initial_data()
+	var/authenticated = check_access(user, admin_access)
 
 	if(program && program.computer)
 		data["net_comms"] = program.computer.get_ntnet_capability(NTNET_COMMUNICATION)
@@ -63,8 +64,8 @@
 	data["message_line2"] = msg_line2
 	data["state"] = current_status
 	data["isAI"] = issilicon(usr)
-	data["authenticated"] = is_autenthicated(user)
 	data["boss_short"] = GLOB.using_map.boss_short
+	data["authenticated"] = authenticated
 
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 	data["current_security_level_ref"] = any2ref(security_state.current_security_level)
@@ -107,7 +108,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/program/comm/proc/is_autenthicated(var/mob/user)
+/datum/nano_module/program/comm/proc/is_authenticated(authenticated, var/mob/user)
 	if(program)
 		return program.can_run(user)
 	return TRUE
@@ -131,7 +132,7 @@
 			current_status = text2num(href_list["target"])
 		if("announce")
 			. = TOPIC_HANDLED
-			if(is_autenthicated(user) && !issilicon(usr) && ntn_comm)
+			if(is_authenticated(user) && !issilicon(usr) && ntn_comm)
 				if(user)
 					var/obj/item/card/id/id_card = user.GetIdCard()
 					crew_announcement.announcer = GetNameAndAssignmentFromId(id_card)
@@ -152,7 +153,7 @@
 			. = TOPIC_HANDLED
 			if(href_list["target"] == "emagged")
 				if(program)
-					if(is_autenthicated(user) && program.computer.emagged() && !issilicon(usr) && ntn_comm)
+					if(is_authenticated(user) && program.computer.emagged() && !issilicon(usr) && ntn_comm)
 						if(centcomm_message_cooldown)
 							to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
 							SSnano.update_uis(src)
@@ -167,7 +168,7 @@
 						spawn(300)//30 second cooldown
 							centcomm_message_cooldown = 0
 			else if(href_list["target"] == "regular")
-				if(is_autenthicated(user) && !issilicon(usr) && ntn_comm)
+				if(is_authenticated(user) && !issilicon(usr) && ntn_comm)
 					if(centcomm_message_cooldown)
 						to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
 						SSnano.update_uis(src)
@@ -186,7 +187,7 @@
 						centcomm_message_cooldown = 0
 		if("evac")
 			. = TOPIC_HANDLED
-			if(is_autenthicated(user))
+			if(is_authenticated(user))
 				var/datum/evacuation_option/selected_evac_option = evacuation_controller.evacuation_options[href_list["target"]]
 				if (isnull(selected_evac_option) || !istype(selected_evac_option))
 					return
@@ -200,7 +201,7 @@
 					ntnet_global.add_log("***[program.computer.get_network_tag()] [selected_evac_option.option_desc]***")
 		if("setstatus")
 			. = TOPIC_HANDLED
-			if(is_autenthicated(user) && ntn_cont)
+			if(is_authenticated(user) && ntn_cont)
 				switch(href_list["target"])
 					if("line1")
 						var/linput = reject_bad_text(sanitize(input("Line 1", "Enter Message Text", msg_line1) as text|null, 40), 40)
@@ -218,7 +219,7 @@
 						post_status(href_list["target"])
 		if("setalert")
 			. = TOPIC_HANDLED
-			if(is_autenthicated(user) && !issilicon(usr) && ntn_cont && ntn_comm)
+			if(is_authenticated(user) && !issilicon(usr) && ntn_cont && ntn_comm)
 				var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 				var/decl/security_level/target_level = locate(href_list["target"]) in security_state.comm_console_security_levels
 				if(target_level && security_state.can_switch_to(target_level))
@@ -231,7 +232,7 @@
 			current_status = STATE_DEFAULT
 		if("viewmessage")
 			. = TOPIC_HANDLED
-			if(is_autenthicated(user) && ntn_comm)
+			if(is_authenticated(user) && ntn_comm)
 				current_viewing_message_id = text2num(href_list["target"])
 				for(var/list/m in l.messages)
 					if(m["id"] == current_viewing_message_id)
@@ -239,14 +240,22 @@
 				current_status = STATE_VIEWMESSAGE
 		if("delmessage")
 			. = TOPIC_HANDLED
-			if(is_autenthicated(user) && ntn_comm && l != global_message_listener)
+			if(is_authenticated(user) && ntn_comm && l != global_message_listener)
 				l.Remove(current_viewing_message)
 			current_status = STATE_MESSAGELIST
 		if("printmessage")
 			. = TOPIC_HANDLED
-			if(is_autenthicated(user) && ntn_comm)
+			if(is_authenticated(user) && ntn_comm)
 				if(!program.computer.print_paper(current_viewing_message["contents"],current_viewing_message["title"]))
 					to_chat(usr, "<span class='notice'>Hardware Error: Printer was unable to print the selected file.</span>")
+		if("request_synth")
+			var/confirm = alert("Вы уверены, что хотите сделать запрос на пробуждение Эксперементального Синтетика ЭКСО?", name, "Нет", "Да")
+			if(confirm == "Да")
+				to_chat(usr, "<span class='notice'>Консоль пиликает, посылая сигнал в систему криогенного хранения.</span>")
+				if(GLOB.using_map.request_synth())
+					to_chat(usr, "<span class='notice'>Консоль пиликает, подтверждая сигнал от системы криогенного хранения.</span>")
+				else
+					to_chat(usr, "<span class='notice'>Консоль мигает красным, отклоняя ваш запрос в систему криогенного хранения. Синтетик ЭКСО уже производит процедуру пробуждения.</span>")
 		if("unbolt_doors")
 			GLOB.using_map.unbolt_saferooms()
 			to_chat(usr, "<span class='notice'>The console beeps, confirming the signal was sent to have the saferooms unbolted.</span>")
@@ -255,7 +264,7 @@
 			to_chat(usr, "<span class='notice'>The console beeps, confirming the signal was sent to have the saferooms bolted.</span>")
 		if("toggle_alert_border")
 			. = TOPIC_HANDLED
-			if(is_autenthicated(user) && ntn_comm)
+			if(is_authenticated(user) && ntn_comm)
 				post_status("toggle_alert_border")
 
 #undef STATE_DEFAULT
@@ -267,9 +276,9 @@
 /*
 General message handling stuff
 */
-var/list/comm_message_listeners = list() //We first have to initialize list then we can use it.
-var/datum/comm_message_listener/global_message_listener = new //May be used by admins
-var/last_message_id = 0
+var/global/list/comm_message_listeners = list() //We first have to initialize list then we can use it.
+var/global/datum/comm_message_listener/global_message_listener = new //May be used by admins
+var/global/last_message_id = 0
 
 /proc/get_comm_message_id()
 	last_message_id = last_message_id + 1

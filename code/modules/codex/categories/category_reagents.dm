@@ -1,4 +1,4 @@
-/datum/codex_category/reagents/
+/datum/codex_category/reagents
 	name = "Reagents"
 	desc = "Chemicals and reagents, both natural and artificial."
 

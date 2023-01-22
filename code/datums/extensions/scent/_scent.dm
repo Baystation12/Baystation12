@@ -1,6 +1,8 @@
 #define SCENT_DESC_ODOR        "odour"
 #define SCENT_DESC_SMELL       "smell"
 #define SCENT_DESC_FRAGRANCE   "fragrance"
+#define SCENT_DESC_HAZE        "haze"
+#define SCENT_DESC_PLUME       "plume"
 
 /*****
 Scent intensity
@@ -46,6 +48,17 @@ Scent intensity
 	else
 		to_chat(user, SPAN_WARNING("Your sensors pick up an intense concentration of [scent]."))
 
+/decl/scent_intensity/overpowering
+	cooldown = 1 MINUTES
+	intensity = 4
+
+/decl/scent_intensity/overpowering/PrintMessage(mob/living/carbon/human/user, var/descriptor, scent)
+	if(!can_smell(user))
+		return
+	if(!user.isSynthetic())
+		to_chat(user, SPAN_WARNING("The overwhelming [descriptor] of [scent] assaults your senses. You stifle a gag."))
+	else
+		to_chat(user, SPAN_WARNING("ALERT! Your sensors pick up an overwhelming concentration of [scent]."))
 /*****
  Scent extensions
  Usage:

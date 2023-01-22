@@ -1,4 +1,4 @@
-client/script = {"<style>
+/client/script = {"<style>
 body					{font-family: Verdana, sans-serif;}
 
 h1, h2, h3, h4, h5, h6	{color: #0000ff;font-family: Georgia, Verdana, sans-serif;}
@@ -42,7 +42,7 @@ em						{font-style: normal;font-weight: bold;}
 .deadsay				{color: #530fad;}
 .radio					{color: #408010;}
 .deptradio				{color: #ff00ff;}	/* when all other department colors fail */
-.newscaster				{color: #750000;}
+.newscaster				{color: #870e0e;}
 
 /* Radio Channels */
 .comradio				{color: #204090;}
@@ -122,7 +122,8 @@ h1.alert, h2.alert		{color: #000080;}
 .russian				{color: #9c250b;}
 .arabic					{color: #128b11;}
 .spacer					{color: #9c660b;}
-.selenian       {color: #22228b;}
+.selenian               {color: #22228b;}
+.lirris                  {color: #00BFFF;}
 
 .interface				{color: #330033;}
 

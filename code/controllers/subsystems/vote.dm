@@ -15,13 +15,13 @@ SUBSYSTEM_DEF(vote)
 	var/list/voting = list()     //Clients recieving UI updates.
 	var/list/vote_prototypes     //To run checks on whether they are available.
 
-/datum/controller/subsystem/vote/Initialize()
+/datum/controller/subsystem/vote/Initialize(start_uptime)
 	vote_prototypes = list()
 	for(var/vote_type in subtypesof(/datum/vote))
 		var/datum/vote/fake_vote = vote_type
 		if(initial(fake_vote.manual_allowed))
 			vote_prototypes[vote_type] = new vote_type
-	return ..()
+
 
 /datum/controller/subsystem/vote/fire(resumed = 0)
 	if(!active_vote)
@@ -45,11 +45,10 @@ SUBSYSTEM_DEF(vote)
 			for(var/client/C in voting)
 				show_panel(C.mob)
 
-/datum/controller/subsystem/vote/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Vote: [active_vote ? "[active_vote.name], [active_vote.time_remaining]" : "None"]"
-	..(text, force)
+/datum/controller/subsystem/vote/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Vote: [active_vote ? "[active_vote.name], [active_vote.time_remaining]" : "None"]")
 
 /datum/controller/subsystem/vote/Recover()
 	last_started_time = SSvote.last_started_time

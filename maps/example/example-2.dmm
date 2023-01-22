@@ -2,8 +2,7 @@
 "ad" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/body_scanconsole{
-	dir = 4;
-	icon_state = "body_scannerconsole"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -24,8 +23,7 @@
 /area/medical/surgery)
 "gk" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled/white,
@@ -53,8 +51,7 @@
 "hO" = (
 /obj/structure/cable{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 0
+	icon_state = "0-2"
 	},
 /obj/machinery/power/apc{
 	dir = 8;
@@ -118,8 +115,7 @@
 "mQ" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/hygiene/sink{
-	dir = 4;
-	icon_state = "sink"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -132,16 +128,14 @@
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "nu" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 4;
-	icon_state = "intact"
+	dir = 4
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled/white,
@@ -153,8 +147,7 @@
 /area/medical/surgery)
 "oy" = (
 /obj/machinery/atmospherics/portables_connector{
-	dir = 8;
-	icon_state = "map_connector"
+	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/empty,
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -228,8 +221,7 @@
 /area/medical/surgery)
 "xA" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 6;
-	icon_state = "intact"
+	dir = 6
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled/white,
@@ -247,8 +239,7 @@
 "CE" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -303,8 +294,7 @@
 "LV" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/sleeper{
-	dir = 8;
-	icon_state = "sleeper_0"
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -321,8 +311,7 @@
 /area/medical/surgery)
 "NP" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1;
-	icon_state = "map_scrubber_on"
+	dir = 1
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled/white,
@@ -340,8 +329,7 @@
 /area/medical/surgery)
 "QN" = (
 /obj/machinery/atmospherics/portables_connector{
-	dir = 8;
-	icon_state = "map_connector"
+	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/effect/floor_decal/corner/blue/diagonal,
@@ -412,8 +400,7 @@
 "Tm" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/bodyscanner{
-	dir = 4;
-	icon_state = "body_scanner_0"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -456,8 +443,7 @@
 "Yt" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)

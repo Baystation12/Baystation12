@@ -12,8 +12,8 @@
 	var/amount_per_transfer_from_this = 10
 	var/possible_transfer_amounts = "10;25;50;100;500"
 
-	attackby(obj/item/W as obj, mob/user as mob)
-		return
+/obj/structure/reagent_dispensers/attackby(obj/item/W as obj, mob/user as mob)
+	return
 
 /obj/structure/reagent_dispensers/New()
 	create_reagents(initial_capacity)
@@ -55,15 +55,15 @@
 
 /obj/structure/reagent_dispensers/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
 			return
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				new /obj/effect/effect/water(src.loc)
 				qdel(src)
 				return
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			if (prob(5))
 				new /obj/effect/effect/water(src.loc)
 				qdel(src)
@@ -174,7 +174,7 @@
 /obj/structure/reagent_dispensers/fueltank/attack_hand()
 	if (rig)
 		usr.visible_message("<span class='notice'>\The [usr] begins to detach \the [rig] from \the [src].</span>", "<span class='notice'>You begin to detach \the [rig] from \the [src].</span>")
-		if(do_after(usr, 20, src))
+		if(do_after(usr, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			usr.visible_message("<span class='notice'>\The [usr] detaches \the [rig] from \the [src].</span>", "<span class='notice'>You detach [rig] from \the [src]</span>")
 			rig.dropInto(usr.loc)
 			rig = null
@@ -194,7 +194,7 @@
 			to_chat(user, "<span class='warning'>There is another device already in the way.</span>")
 			return ..()
 		user.visible_message("\The [user] begins rigging \the [W] to \the [src].", "You begin rigging \the [W] to \the [src]")
-		if(do_after(user, 20, src))
+		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if(!user.unEquip(W, src))
 				return
 			user.visible_message("<span class='notice'>\The [user] rigs \the [W] to \the [src].</span>", "<span class='notice'>You rig \the [W] to \the [src].</span>")
@@ -214,7 +214,7 @@
 			return
 
 		user.visible_message("<span class='warning'>\The [user] draws closer to the fuel tank with \the [W].</span>", "<span class='warning'>You draw closer to the fuel tank with \the [W].</span>")
-		if(do_after(user, 50, src))
+		if(do_after(user, 5 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT)) // No public progress - Leave the people that might try to rush it guessing
 			log_and_message_admins("triggered a fuel tank explosion with \the [W].")
 			user.visible_message("<span class='danger'>\The [user] puts \the [W] to \the [src]!</span>", "<span class='danger'>You put \the [W] to \the [src] and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.</span>")
 			src.explode()
@@ -309,7 +309,7 @@
 		else
 			user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
 
-		if(do_after(user, 20, src))
+		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 			anchored = !anchored

@@ -144,7 +144,7 @@
 	if(isCrowbar(C) || (istype(C, /obj/item/material/twohanded/fireaxe) && C:wielded == 1))
 		if(((stat & NOPOWER) || (stat & BROKEN)) && !( operating ))
 			to_chat(user, "<span class='notice'>You begin prying at \the [src]...</span>")
-			if(do_after(user, 2 SECONDS, src))
+			if(do_after(user, 2 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				force_toggle()
 		else
 			to_chat(user, "<span class='notice'>[src]'s motors resist your effort.</span>")
@@ -159,7 +159,7 @@
 			to_chat(user, "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>")
 			return
 		to_chat(user, "<span class='notice'>You begin repairing \the [src]...</span>")
-		if(do_after(user, 5 SECONDS, src))
+		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if(P.use(amt))
 				to_chat(user, "<span class='notice'>You have repaired \the [src].</span>")
 				repair()

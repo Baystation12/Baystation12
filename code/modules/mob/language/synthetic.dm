@@ -9,6 +9,7 @@
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"
 	var/drone_only
+	accent = /decl/accent/none
 
 /datum/language/binary/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
@@ -84,4 +85,3 @@
 	if(prob(70))
 		return "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
 	return pick(GLOB.ai_names)
-

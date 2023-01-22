@@ -90,7 +90,7 @@
 		return 1
 	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	if(do_after(user, 40, src))
+	if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
@@ -218,7 +218,7 @@
 			P.network = new_network
 			break
 
-	if(list_find(new_network.normal_members, src))
+	if(new_network.normal_members.Find(src))
 		return 0
 
 	new_network.normal_members += src

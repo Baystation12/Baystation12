@@ -29,7 +29,7 @@
 	if (A)
 		if(ismob(A))
 			toxmob(A)
-		if((istype(A,/obj/machinery/the_singularitygen))||(istype(A,/obj/singularity/)))
+		if((istype(A,/obj/machinery/the_singularitygen))||(istype(A,/obj/singularity)))
 			A:energy += energy
 		else if(istype(A,/obj/machinery/power/fusion_core))
 			var/obj/machinery/power/fusion_core/collided_core = A
@@ -61,7 +61,7 @@
 	if (!active)
 		return
 	var/radiation = (energy*2)
-	M.apply_damage((radiation*3),IRRADIATE, damage_flags = DAM_DISPERSED)
+	M.apply_damage((radiation*3), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 	M.updatehealth()
 
 /obj/effect/accelerated_particle/proc/move(var/lag)

@@ -1,7 +1,8 @@
 /decl/cultural_info/culture/diona
 	name = CULTURE_DIONA
-	description = "To exist as a diona gestalt is to be a throng of tiny sparks forming a pyre, singing out into \
-	the dark, endlessly curious and seeking new knowledge to return to the chorus that spawned 'you'."
+	description = "Существовать гештальтом <font color=#008000>Дионея</font> - значит быть облаком крошечных искорок, формирующих костёр и \
+	поющих в темноту, бесконечно любопытных и вечно в поиске новых знаний, лишь чтобы вернуться в хор, \
+	породивший \"тебя\"."
 	language = LANGUAGE_ROOTLOCAL
 	additional_langs = list(LANGUAGE_ROOTGLOBAL)
 	secondary_langs = list(

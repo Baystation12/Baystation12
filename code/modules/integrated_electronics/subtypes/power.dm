@@ -1,4 +1,4 @@
-/obj/item/integrated_circuit/power/
+/obj/item/integrated_circuit/power
 	category_text = "Power - Active"
 
 /obj/item/integrated_circuit/power/transmitter

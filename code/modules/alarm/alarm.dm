@@ -109,7 +109,7 @@
 /atom/proc/get_alarm_z()
 	return get_z(src)
 
-area/get_alarm_z()
+/area/get_alarm_z()
 	return contents.len ? get_z(contents[1]) : 0
 
 /atom/proc/get_alarm_area()

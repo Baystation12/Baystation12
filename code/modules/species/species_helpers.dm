@@ -1,4 +1,4 @@
-var/list/stored_shock_by_ref = list()
+var/global/list/stored_shock_by_ref = list()
 
 /mob/living/proc/apply_stored_shock_to(var/mob/living/target)
 	if(stored_shock_by_ref["\ref[src]"])

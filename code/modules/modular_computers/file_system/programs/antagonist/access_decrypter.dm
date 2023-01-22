@@ -9,7 +9,7 @@
 	requires_ntnet = TRUE
 	available_on_ntnet = FALSE
 	available_on_syndinet = TRUE
-	nanomodule_path = /datum/nano_module/program/access_decrypter/
+	nanomodule_path = /datum/nano_module/program/access_decrypter
 	var/message = ""
 	var/running = FALSE
 	var/progress = 0

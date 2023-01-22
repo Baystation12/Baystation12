@@ -17,7 +17,6 @@
 
 /obj/item/clothing/accessory/toggleable/hawaii/random/Initialize()
 	. = ..()
-	INIT_SKIP_QDELETED
 	if (prob(50))
 		icon_state = "hawaii2"
 		icon_closed = "hawaii2"

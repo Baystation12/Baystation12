@@ -1,6 +1,6 @@
 var/global/file_uid = 0
 
-/datum/computer_file/
+/datum/computer_file
 	/// Placeholder. Whitespace and most special characters are not allowed.
 	var/filename = "NewFile"
 	/// File full names are [filename].[filetype] so like NewFile.XXX in this case

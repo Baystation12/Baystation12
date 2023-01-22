@@ -1,0 +1,14 @@
+version: "1"
+rules:                      # Array of rules
+  - base: dev            # Required. Target branch
+    upstream: Baystation12:dev    # Required. Must be in the same fork network.
+    mergeMethod: none  # Optional, one of [none, merge, squash, rebase, hardreset], Default: none.
+    mergeUnstable: false    # Optional, merge pull request even when the mergeable_state is not clean. Default: false
+    assignees:              # Optional
+      - Evie7056
+    reviewers:              # Optional
+      - Evie7056
+    conflictReviewers:      # Optional, on merge conflict assign a reviewer
+      - Evie7056
+label: "Военные преступления против кодинга"  # Optional
+conflictLabel: "Мерж конфликт"     # Optional, on merge conflict assign a custom label, Default: merge-conflict

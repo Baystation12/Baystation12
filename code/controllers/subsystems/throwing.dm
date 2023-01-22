@@ -12,11 +12,10 @@ SUBSYSTEM_DEF(throwing)
 	var/list/processing = list()
 
 
-/datum/controller/subsystem/throwing/stat_entry(text, force)
-	IF_UPDATE_STAT
-		force = TRUE
-		text = "[text] | Queue [processing.len]"
-	..(text, force)
+/datum/controller/subsystem/throwing/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Queue [processing.len]")
 
 
 /datum/controller/subsystem/throwing/fire(resumed = 0)

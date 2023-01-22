@@ -10,7 +10,7 @@
 /datum/category_group/underwear
 	var/sort_order		// Lower sort order is applied as icons first
 
-datum/category_group/underwear/dd_SortValue()
+/datum/category_group/underwear/dd_SortValue()
 	return sort_order
 
 /datum/category_group/underwear/top

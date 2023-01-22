@@ -1,4 +1,4 @@
-/var/decl/overmap_event_handler/overmap_event_handler = new()
+var/global/decl/overmap_event_handler/overmap_event_handler = new()
 
 /decl/overmap_event_handler
 	var/list/hazard_by_turf

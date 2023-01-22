@@ -87,7 +87,7 @@
 			
 // Remove candidate from choice_list and any votes for it from vote_list, transfering first choices to second
 /datum/vote/proc/remove_candidate(list/choice_list, list/vote_list, candidate)
-	var/candidate_index = list_find(choices, candidate) // use choices instead of choice_list because we need the original indexing
+	var/candidate_index = choices.Find(candidate) // use choices instead of choice_list because we need the original indexing
 	choice_list -= candidate
 	for(var/ckey in vote_list)
 		if(length(votes[ckey]) && vote_list[ckey][1] == candidate_index && length(vote_list[ckey]) > 1)
@@ -196,7 +196,7 @@
 		. += "<td style='text-align: center;'>"
 		if(voted_for)
 			var/list/vote = votes[user.ckey]
-			. += "[list_find(vote, i)]"
+			. += "[vote.Find(i)]"
 		. += "</td>"
 
 		if (additional_text[choice])

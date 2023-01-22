@@ -18,6 +18,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	/// The mob currently operating the helm - The last one to click one of the movement buttons and be on the overmap screen. Set to `null` for autopilot or when the mob isn't in range.
 	var/mob/current_operator
 
+
 /obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
 	get_known_sectors()
@@ -242,6 +243,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 /obj/machinery/computer/ship/helm/unlook(mob/user)
 	. = ..()
 	if (current_operator == user)
+		if (user.client)
+			user.client.pixel_x = 0
+			user.client.pixel_y = 0
 		set_operator(null)
 
 
@@ -297,6 +301,26 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			SPAN_WARNING("\The [new_operator] takes \the [src]'s controls from \the [old_operator]."),
 			SPAN_DANGER("\The [new_operator] takes \the [src]'s controls from you!")
 		)
+
+
+/obj/machinery/computer/ship/helm/emag_act(remaining_charges, mob/user, emag_source)
+	if (user)
+		var/user_message = "You swipe \the [emag_source] against \the [src],"
+		if (emagged)
+			user_message = SPAN_WARNING("[user_message] achieving nothing new.")
+		else
+			user_message = SPAN_NOTICE("[user_message] frying the access locks.")
+		user.visible_message(
+			SPAN_ITALIC("\The [user] swipes \an [emag_source] against \the [src]."),
+			user_message,
+			range = 5
+		)
+	if (emagged)
+		return
+	emagged = TRUE
+	if (req_access)
+		req_access.Cut()
+	return 1
 
 
 /obj/machinery/computer/ship/navigation

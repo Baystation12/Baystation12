@@ -84,14 +84,6 @@
 /datum/dna/gene/disability/clumsy/New()
 	block=GLOB.CLUMSYBLOCK
 
-/datum/dna/gene/disability/tourettes
-	name="Tourettes"
-	activation_message="You twitch."
-	disability=TOURETTES
-
-/datum/dna/gene/disability/tourettes/New()
-	block=GLOB.TWITCHBLOCK
-
 /datum/dna/gene/disability/nervousness
 	name="Nervousness"
 	activation_message="You feel nervous."

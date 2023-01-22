@@ -1,6 +1,6 @@
 #define SOLAR_MAX_DIST 40
 
-var/solar_gen_rate = 1500
+var/global/solar_gen_rate = 1500
 
 /obj/machinery/power/solar
 	name = "solar panel"
@@ -67,7 +67,7 @@ var/solar_gen_rate = 1500
 	if(isCrowbar(W))
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message("<span class='notice'>[user] begins to take the glass off the solar panel.</span>")
-		if(do_after(user, 50,src))
+		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 			var/obj/item/solar_assembly/S = locate() in src
 			if(S)
 				S.dropInto(loc)
@@ -141,13 +141,13 @@ var/solar_gen_rate = 1500
 
 /obj/machinery/power/solar/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			if(prob(15))
 				new /obj/item/material/shard( src.loc )
 			qdel(src)
 			return
 
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(25))
 				new /obj/item/material/shard( src.loc )
 				qdel(src)
@@ -156,7 +156,7 @@ var/solar_gen_rate = 1500
 			if (prob(50))
 				set_broken(TRUE)
 
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			if (prob(25))
 				set_broken(TRUE)
 	return

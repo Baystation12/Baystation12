@@ -6,7 +6,7 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
 	var/banglet = 0
 
-/obj/item/grenade/flashbang/detonate()
+/obj/item/grenade/flashbang/detonate(mob/living/user)
 	..()
 	var/list/victims = list()
 	var/list/objs = list()
@@ -79,9 +79,6 @@
 		if (M.ear_damage >= 5)
 			to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
 
-/obj/item/grenade/flashbang/Destroy()
-	walk(src, 0) // Because we might have called walk_away, we must stop the walk loop or BYOND keeps an internal reference to us forever.
-	return ..()
 
 /obj/item/grenade/flashbang/instant/Initialize()
 	. = ..()
@@ -96,7 +93,7 @@
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "clusterbang"
 
-/obj/item/grenade/flashbang/clusterbang/detonate()
+/obj/item/grenade/flashbang/clusterbang/detonate(mob/living/user)
 	var/numspawned = rand(4,8)
 	var/again = 0
 	for(var/more = numspawned,more > 0,more--)
@@ -105,14 +102,12 @@
 			numspawned --
 
 	for(,numspawned > 0, numspawned--)
-		spawn(0)
-			new /obj/item/grenade/flashbang/cluster(src.loc)//Launches flashbangs
-			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
+		new /obj/item/grenade/flashbang/cluster(src.loc)//Launches flashbangs
+		playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 
 	for(,again > 0, again--)
-		spawn(0)
-			new /obj/item/grenade/flashbang/clusterbang/segment(src.loc)//Creates a 'segment' that launches a few more flashbangs
-			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
+		new /obj/item/grenade/flashbang/clusterbang/segment(src.loc)//Creates a 'segment' that launches a few more flashbangs
+		playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 	qdel(src)
 	return
 
@@ -134,28 +129,26 @@
 		detonate()
 	..()
 
-/obj/item/grenade/flashbang/clusterbang/segment/detonate()
+/obj/item/grenade/flashbang/clusterbang/segment/detonate(mob/living/user)
 	var/numspawned = rand(4,8)
 	for(var/more = numspawned,more > 0,more--)
 		if(prob(35))
 			numspawned --
 
 	for(,numspawned > 0, numspawned--)
-		spawn(0)
-			new /obj/item/grenade/flashbang/cluster(src.loc)
-			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
+		new /obj/item/grenade/flashbang/cluster(src.loc)
+		playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 	qdel(src)
 	return
 
 /obj/item/grenade/flashbang/cluster/New()//Same concept as the segments, so that all of the parts don't become reliant on the clusterbang
-	spawn(0)
-		icon_state = "flashbang_active"
-		active = 1
-		banglet = 1
-		var/stepdist = rand(1,3)
-		var/temploc = src.loc
-		walk_away(src,temploc,stepdist)
-		var/dettime = rand(15,60)
-		spawn(dettime)
+	icon_state = "flashbang_active"
+	active = 1
+	banglet = 1
+	var/stepdist = rand(1,3)
+	var/temploc = src.loc
+	walk_away(src,temploc,stepdist)
+	var/dettime = rand(15,60)
+	spawn(dettime)
 		detonate()
 	..()

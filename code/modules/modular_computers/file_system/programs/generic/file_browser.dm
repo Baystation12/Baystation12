@@ -9,7 +9,7 @@
 	requires_ntnet = FALSE
 	available_on_ntnet = FALSE
 	undeletable = TRUE
-	nanomodule_path = /datum/nano_module/program/computer_filemanager/
+	nanomodule_path = /datum/nano_module/program/computer_filemanager
 	var/open_file
 	var/error
 	usage_flags = PROGRAM_ALL

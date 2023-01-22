@@ -217,8 +217,7 @@
 /area/map_template/oldpod)
 "aW" = (
 /obj/machinery/power/terminal{
-	dir = 1;
-	icon_state = "term"
+	dir = 1
 	},
 /obj/structure/cable/cyan{
 	d2 = 2;
@@ -456,8 +455,7 @@
 	dir = 1
 	},
 /obj/structure/closet/hydrant{
-	pixel_x = 24;
-	pixel_y = 0
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldpod)
@@ -515,8 +513,7 @@
 /area/map_template/oldpod)
 "Yb" = (
 /obj/structure/shuttle/engine/heater{
-	dir = 1;
-	icon_state = "heater"
+	dir = 1
 	},
 /obj/structure/window/reinforced,
 /turf/simulated/floor/plating,

@@ -8,7 +8,7 @@
 
 /obj/item/clothing/shoes/galoshes/Initialize()
 	. = ..()
-	slowdown_per_slot[slot_shoes] = 1
+	slowdown_per_slot[slot_shoes] = 0.5
 
 /obj/item/clothing/shoes/jackboots
 	name = "jackboots"

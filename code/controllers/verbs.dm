@@ -40,6 +40,6 @@
 		if("Alt Appearance Manager")
 			debug_variables(appearance_manager)
 		if("Military Branches")
-			debug_variables(mil_branches)
+			debug_variables(GLOB.mil_branches)
 	message_admins("Admin [key_name_admin(usr)] is debugging the [controller] controller.")
 	return

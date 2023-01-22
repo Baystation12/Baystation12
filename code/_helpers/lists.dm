@@ -39,7 +39,7 @@
 	return instances
 
 //Removes any null entries from the list
-proc/listclearnulls(list/list)
+/proc/listclearnulls(list/list)
 	if(istype(list))
 		while(null in list)
 			list -= null
@@ -141,23 +141,23 @@ Checks if a list has the same entries and values as an element of big.
 		return L[len]
 	return null
 
-/* pickweightindex
+/* pickweight_index
 	given an indexed list of (index = weight, index + 1 = weight, ...), returns a random index biased by weights. Higher weight = more chance
 	if the argument is not an indexed list of weights, returns pick(list)
 	if the argument is empty or not a list, returns null
 */
-/proc/pickweightindex(list/L)
+/proc/pickweight_index(list/L)
 	var/len = length(L)
 	if (len && islist(L))
-		for(var/index = 1, index <= len, index++)
+		for(var/index = 1 to len)
 			if (isnull(L[index]))
 				return pick(L)
 			break
 		var/sum = 0
-		for(var/index = 1, index <= len, index++)
+		for(var/index = 1 to len)
 			sum += L[index]
 		sum *= rand()
-		for(var/index = 1, index <= len, index++)
+		for(var/index = 1 to len)
 			sum -= L[index]
 			if (sum <= 0)
 				return index
@@ -488,7 +488,7 @@ Checks if a list has the same entries and values as an element of big.
 		else
 			min = mid+1
 
-proc/dd_sortedtextlist(list/incoming, case_sensitive = 0)
+/proc/dd_sortedtextlist(list/incoming, case_sensitive = 0)
 	// Returns a new list with the text values sorted.
 	// Use binary search to order by sortValue.
 	// This works by going to the half-point of the list, seeing if the node in question is higher or lower cost,
@@ -547,7 +547,7 @@ proc/dd_sortedtextlist(list/incoming, case_sensitive = 0)
 	return sorted_text
 
 
-proc/dd_sortedTextList(list/incoming)
+/proc/dd_sortedTextList(list/incoming)
 	var/case_sensitive = 1
 	return dd_sortedtextlist(incoming, case_sensitive)
 

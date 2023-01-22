@@ -17,7 +17,7 @@
 
 	power_rating = 7500 //7500 W ~ 10 HP
 	power_losses = 150
-	
+
 	machine_name = "portable pump"
 	machine_desc = "Used to equalize the pressure of the atmosphere in a surrounding area with its own contents, or to draw in air from the area around it. Runs on a battery backup; can be connected to atmospherics networks."
 
@@ -55,7 +55,7 @@
 	if(prob(100/severity))
 		direction_out = !direction_out
 
-	target_pressure = rand(0,1300)
+	target_pressure = rand(0, 10 * ONE_ATMOSPHERE)
 	update_icon()
 
 	..(severity)

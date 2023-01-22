@@ -78,8 +78,8 @@
 		Paralyse(3)
 		src.sleeping--
 
-	if(src.resting)
-		Weaken(5)
+	if (resting) // Just in case. This breaks things so never allow robots to rest.
+		resting = FALSE
 
 	if(health < config.health_threshold_dead && src.stat != 2) //die only once
 		death()
@@ -317,5 +317,7 @@
 		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
 
 /mob/living/silicon/robot/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	if (status_flags & GODMODE)
+		return
 	if(!on_fire) //Silicons don't gain stacks from hotspots, but hotspots can ignite them
 		IgniteMob()

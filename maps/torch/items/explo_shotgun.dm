@@ -34,7 +34,7 @@
 
 /obj/item/gun/projectile/shotgun/pump/exploration/free_fire()
 	var/my_z = get_z(src)
-	if(!list_find(GLOB.using_map.station_levels, my_z))
+	if(!GLOB.using_map.station_levels.Find(my_z))
 		return TRUE
 	return ..()
 
@@ -47,7 +47,7 @@
 		bulk = bulk + 4
 		update_icon()
 		return 1
-	if(reinforced && I.iswirecutter())
+	if(reinforced && isWirecutter(I))
 		to_chat(user, SPAN_WARNING("You remove \the [reinforced] that was reinforcing \the [src]."))
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 25, 1)
 		reinforced.dropInto(loc)
@@ -155,7 +155,7 @@
 
 //proxima code start
 /obj/item/gun/energy/k342/explo
-	desc = "K342 - Kasatka is the latest plasma weapon created by NanoTrasen. It can fire several types of charges: stunning, lethal and net-mode. This one designed specialy for expeditionary team"
+	desc = "K342E Kasatka is the latest plasma weapon created by NanoTrasen. This modification has been designed for Sol Central Government Expeditionary Corps and can fire several types of charges: stunning, lethal and net-mode."
 	icon_state = "kasatka_off"
 	item_state = "kasatka"
 	req_access = list(list("ACCESS_TORCH_EXPLORER"))

@@ -3,8 +3,8 @@
 GLOBAL_DATUM_INIT(using_map, /datum/map, new using_map_DATUM)
 GLOBAL_LIST_EMPTY(all_maps)
 
-var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
-var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
+var/global/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
+var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /hook/startup/proc/initialise_map_list()
 	for(var/type in subtypesof(/datum/map))
@@ -54,11 +54,14 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/station_name  = "BAD Station"
 	var/station_short = "Baddy"
+	var/station_ru = "Плохая Станция" //PRX
 	var/dock_name     = "THE PirateBay"
 	var/boss_name     = "Captain Roger"
+	var/boss_name_ru  = "Капитан Роджер" //PRX
 	var/boss_short    = "Cap'"
 	var/company_name  = "BadMan"
 	var/company_short = "BM"
+	var/company_name_ru = "Плохой Мужик" //PRX
 	var/system_name = "Uncharted System"
 
 	var/list/map_admin_faxes = list()
@@ -132,8 +135,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			HOME_SYSTEM_TAU_CETI,
 			HOME_SYSTEM_HELIOS,
 			HOME_SYSTEM_TERRA,
+			HOME_SYSTEM_TERSTEN, //bring back Tersten //drakon
 			HOME_SYSTEM_LORRIMAN,
-			HOME_SYSTEM_CINU,
+			HOME_SYSTEM_CINU ,
 			HOME_SYSTEM_YUKLID,
 			HOME_SYSTEM_LORDANIA,
 			HOME_SYSTEM_KINGSTON,
@@ -171,6 +175,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			CULTURE_HUMAN_SPACER,
 			CULTURE_HUMAN_SPAFRO,
 			CULTURE_HUMAN_CONFED,
+			CULTURE_HUMAN_GAIAN,
 			CULTURE_HUMAN_OTHER,
 			CULTURE_OTHER
 		),
@@ -218,6 +223,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	// List of events specific to a map
 	var/list/map_event_container = list()
 
+	var/maint_all_access = FALSE
+
 /datum/map/New()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
@@ -259,11 +266,13 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		if ("away_site_budget") away_site_budget = text2num_or_default(value, away_site_budget)
 		if ("station_name") station_name = value
 		if ("station_short") station_short = value
+		if ("station_ru") station_ru = value
 		if ("dock_name") dock_name = value
 		if ("boss_name") boss_name = value
 		if ("boss_short") boss_short = value
 		if ("company_name") company_name = value
 		if ("company_short") company_short = value
+		if ("company_name_ru") company_name_ru = value
 		if ("shuttle_docked_message") shuttle_docked_message = value
 		if ("shuttle_leaving_dock") shuttle_leaving_dock = value
 		if ("shuttle_called_message") shuttle_called_message = value
@@ -433,7 +442,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		empty_levels = list(world.maxz)
 	return pick(empty_levels)
 
-
 /datum/map/proc/setup_economy()
 	for (var/datum/feed_network/N in news_network)
 		N.CreateFeedChannel("Nyx Daily", "SolGov Minister of Information", 1, 1)
@@ -473,11 +481,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	return // overriden by torch
 
 /datum/map/proc/make_maint_all_access(var/radstorm = 0) // parameter used by torch
-	maint_all_access = 1
+	maint_all_access = TRUE
 	priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks.", "Attention!")
 
 /datum/map/proc/revoke_maint_all_access(var/radstorm = 0) // parameter used by torch
-	maint_all_access = 0
+	maint_all_access = FALSE
 	priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks.", "Attention!")
 
 // Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't

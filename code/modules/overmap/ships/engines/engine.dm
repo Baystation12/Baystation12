@@ -1,6 +1,6 @@
 //Engine component object
 
-var/list/ship_engines = list()
+var/global/list/ship_engines = list()
 /datum/ship_engine
 	var/name = "ship engine"
 	var/obj/machinery/holder	//actual engine object

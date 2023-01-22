@@ -69,3 +69,7 @@
 	display_name = "foam clogs"
 	path = /obj/item/clothing/shoes/foamclog
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/shoes/flipflobster
+	display_name = "flip flobsters"
+	path = /obj/item/clothing/shoes/flipflobster

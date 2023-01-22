@@ -86,7 +86,7 @@
 			update_access()
 			if(check_access(C))
 				to_chat(user, "You swipe \the [C] through \the [src].")
-				if(do_after(user, 10, airlock))
+				if(do_after(user, 1 SECOND, airlock, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					to_chat(user, "\The [src] clicks a few times and detaches itself from \the [airlock]!")
 					unlock_brace(usr)
 			else
@@ -98,7 +98,7 @@
 			return
 		var/obj/item/crowbar/brace_jack/C = W
 		to_chat(user, "You begin forcibly removing \the [src] with \the [C].")
-		if(do_after(user, rand(150,300), airlock))
+		if(do_after(user, rand(15, 30) SECONDS, airlock, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			to_chat(user, "You finish removing \the [src].")
 			unlock_brace(user)
 		return

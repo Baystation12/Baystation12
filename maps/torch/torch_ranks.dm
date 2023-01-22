@@ -65,7 +65,8 @@
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5,
 				/datum/mil_rank/ec/e7,
-				/datum/mil_rank/ec/o1
+				/datum/mil_rank/ec/o1,
+				/datum/mil_rank/ec/o3
 			),
 			/datum/mil_branch/fleet = list(
 				/datum/mil_rank/fleet/e1,
@@ -75,18 +76,22 @@
 				/datum/mil_rank/fleet/e5,
 				/datum/mil_rank/fleet/e6,
 				/datum/mil_rank/fleet/e7,
-				/datum/mil_rank/fleet/o1
+				/datum/mil_rank/fleet/o1,
+				/datum/mil_rank/fleet/o2,
+				/datum/mil_rank/fleet/o3
 			),
 			/datum/mil_branch/army = list(
 				/datum/mil_rank/army/e1,
 				/datum/mil_rank/army/e2,
 				/datum/mil_rank/army/e3,
-				/datum/mil_rank/army/e4,
+				///datum/mil_rank/army/e4,
 				/datum/mil_rank/army/e4_alt,
 				/datum/mil_rank/army/e5,
 				/datum/mil_rank/army/e6,
 				/datum/mil_rank/army/e7,
-				/datum/mil_rank/army/o1
+				/datum/mil_rank/army/o1,
+				/datum/mil_rank/army/o2,
+				/datum/mil_rank/army/o3
 			)
 		),
 		/datum/species/machine/shell = list(
@@ -94,7 +99,8 @@
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5,
 				/datum/mil_rank/ec/e7,
-				/datum/mil_rank/ec/o1
+				/datum/mil_rank/ec/o1,
+				/datum/mil_rank/ec/o3
 			),
 			/datum/mil_branch/fleet = list(
 				/datum/mil_rank/fleet/e1,
@@ -104,18 +110,22 @@
 				/datum/mil_rank/fleet/e5,
 				/datum/mil_rank/fleet/e6,
 				/datum/mil_rank/fleet/e7,
-				/datum/mil_rank/fleet/o1
+				/datum/mil_rank/fleet/o1,
+				/datum/mil_rank/fleet/o2,
+				/datum/mil_rank/fleet/o3
 			),
 			/datum/mil_branch/army = list(
 				/datum/mil_rank/army/e1,
 				/datum/mil_rank/army/e2,
 				/datum/mil_rank/army/e3,
-				/datum/mil_rank/army/e4,
+				///datum/mil_rank/army/e4,
 				/datum/mil_rank/army/e4_alt,
 				/datum/mil_rank/army/e5,
 				/datum/mil_rank/army/e6,
 				/datum/mil_rank/army/e7,
-				/datum/mil_rank/army/o1
+				/datum/mil_rank/army/o1,
+				/datum/mil_rank/army/o2,
+				/datum/mil_rank/army/o3
 			)
 		),
 		/datum/species/skrell = list(
@@ -236,24 +246,26 @@
 						SKILL_EVA     = SKILL_BASIC)
 
 /datum/mil_branch/army
-	name = "Army"
-	name_short = "SCGA"
-	email_domain = "army.mil"
+	name = "Marine Corps"
+	name_short = "SCGM"
+	email_domain = "torch.marine.mil"
 
 	rank_types = list(
 		/datum/mil_rank/army/e1,
 		/datum/mil_rank/army/e2,
 		/datum/mil_rank/army/e3,
-		/datum/mil_rank/army/e4,
+		///datum/mil_rank/army/e4,
 		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5,
 		/datum/mil_rank/army/e6,
 		/datum/mil_rank/army/e7,
+		/datum/mil_rank/army/e7_meme,
 		/datum/mil_rank/army/e8,
 		/datum/mil_rank/army/e8_alt,
 		/datum/mil_rank/army/e9,
 		/datum/mil_rank/army/e9_alt1,
 		/datum/mil_rank/army/e9_alt2,
+		/datum/mil_rank/army/e9_meme,
 		/datum/mil_rank/army/o1,
 		/datum/mil_rank/army/o2,
 		/datum/mil_rank/army/o3,
@@ -271,7 +283,7 @@
 		/datum/mil_rank/army/e1,
 		/datum/mil_rank/army/e2,
 		/datum/mil_rank/army/e3,
-		/datum/mil_rank/army/e4,
+		///datum/mil_rank/army/e4,
 		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5,
 		/datum/mil_rank/army/e6,
@@ -295,20 +307,25 @@
 
 /datum/mil_branch/civilian
 	name = "Civilian"
-	name_short = "Civ"
 	email_domain = "freemail.net"
 	allow_custom_email = TRUE
 
 	rank_types = list(
 		/datum/mil_rank/civ/civ,
-		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/civ/synthetic
+		/datum/mil_rank/civ/first,
+		/datum/mil_rank/civ/second,
+		/datum/mil_rank/civ/three,
+		/datum/mil_rank/civ/synthetic,
+		/datum/mil_rank/civ/exo_synth
 	)
 
 	spawn_rank_types = list(
 		/datum/mil_rank/civ/civ,
-		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/civ/synthetic
+		/datum/mil_rank/civ/first,
+		/datum/mil_rank/civ/second,
+		/datum/mil_rank/civ/three,
+		/datum/mil_rank/civ/synthetic,
+		/datum/mil_rank/civ/exo_synth
 	)
 
 /datum/mil_branch/solgov
@@ -318,15 +335,27 @@
 
 	rank_types = list(
 		/datum/mil_rank/sol/gov,
+		/datum/mil_rank/sol/junior_agent,
+		/datum/mil_rank/sol/duty_agent,
 		/datum/mil_rank/sol/agent,
+		/datum/mil_rank/sol/senior_agent,
+		/datum/mil_rank/sol/inspector_agent,
 		/datum/mil_rank/sol/curator_agent,
+		/datum/mil_rank/sol/deputy_agent,
+		/datum/mil_rank/sol/director_agent,
 		/datum/mil_rank/sol/scientist
 	)
 
 	spawn_rank_types = list(
 		/datum/mil_rank/sol/gov,
+		/datum/mil_rank/sol/junior_agent,
+		/datum/mil_rank/sol/duty_agent,
 		/datum/mil_rank/sol/agent,
+		/datum/mil_rank/sol/senior_agent,
+		/datum/mil_rank/sol/inspector_agent,
 		/datum/mil_rank/sol/curator_agent,
+		/datum/mil_rank/sol/deputy_agent,
+		/datum/mil_rank/sol/director_agent,
 		/datum/mil_rank/sol/scientist
 	)
 
@@ -556,28 +585,22 @@
  *  ====
  */
 /datum/mil_rank/army/e1
-	name = "Private Recruit"
-	name_short = "PVTR"
+	name = "Private"
+	name_short = "PVT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted)
 	sort_order = 1
 
 /datum/mil_rank/army/e2
-	name = "Private"
-	name_short = "PVT"
+	name = "Private First Class"
+	name_short = "PFC"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e2)
 	sort_order = 2
 
 /datum/mil_rank/army/e3
-	name = "Private First Class"
-	name_short = "PFC"
+	name = "Lance Corporal"
+	name_short = "LCPL"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e3)
 	sort_order = 3
-
-/datum/mil_rank/army/e4
-	name = "Specialist"
-	name_short = "SPC"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e4)
-	sort_order = 4
 
 /datum/mil_rank/army/e4_alt
 	name = "Corporal"
@@ -593,43 +616,55 @@
 
 /datum/mil_rank/army/e6
 	name = "Staff Sergeant"
-	name_short = "SSG"
+	name_short = "SSGT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e6)
 	sort_order = 6
 
 /datum/mil_rank/army/e7
-	name = "Sergeant First Class"
-	name_short = "SFC"
+	name = "Gunnery Sergeant"
+	name_short = "GYSGT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e7)
+	sort_order = 7
+
+/datum/mil_rank/army/e7_meme
+	name = "Gaming Sergeant"
+	name_short = "GmSGT"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e7_meme)
 	sort_order = 7
 
 /datum/mil_rank/army/e8
 	name = "Master Sergeant"
-	name_short = "MSG"
+	name_short = "MSGT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e8)
 	sort_order = 8
 
 /datum/mil_rank/army/e8_alt
 	name = "First Sergeant"
-	name_short = "1SG"
+	name_short = "1SGT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e8_alt)
 	sort_order = 8
 
 /datum/mil_rank/army/e9
 	name = "Sergeant Major"
-	name_short = "SGM"
+	name_short = "SGTMaj"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e9)
 	sort_order = 9
 
 /datum/mil_rank/army/e9_alt1
-	name = "Command Sergeant Major"
-	name_short = "CSM"
+	name = "Master Gunnery Sergeant"
+	name_short = "MGySGT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e9_alt1)
 	sort_order = 9
 
+/datum/mil_rank/army/e9_meme
+	name = "Master Gaming Sergeant"
+	name_short = "MGmSGT"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e9_meme)
+	sort_order = 9
+
 /datum/mil_rank/army/e9_alt2
-	name = "Sergeant Major of the Army"
-	name_short = "SMA"
+	name = "Sergeant Major of the Corps"
+	name_short = "SgtMajMarCor"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e9_alt2)
 	sort_order = 9
 
@@ -646,8 +681,8 @@
 	sort_order = 12
 
 /datum/mil_rank/army/o3
-	name = "Army Captain"
-	name_short = "ACPT"
+	name = "Marine Captain"
+	name_short = "MCPT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/officer/o3)
 	sort_order = 13
 
@@ -671,13 +706,13 @@
 
 /datum/mil_rank/army/o7
 	name = "Brigadier General"
-	name_short = "BG"
+	name_short = "BGen"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag)
 	sort_order = 17
 
 /datum/mil_rank/army/o8
 	name = "Major General"
-	name_short = "MG"
+	name_short = "MajGen"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag/o8)
 	sort_order = 18
 
@@ -694,8 +729,8 @@
 	sort_order = 20
 
 /datum/mil_rank/army/o10_alt
-	name = "General of the Army"
-	name_short = "GA"
+	name = "General of the Marine Corps"
+	name_short = "GenMarCor"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag/o10_alt)
 	sort_order = 20
 
@@ -706,12 +741,36 @@
 
 /datum/mil_rank/civ/civ
 	name = "Civilian"
-
-/datum/mil_rank/civ/contractor
-	name = "Contractor"
+	name_short = "Civ"
 
 /datum/mil_rank/civ/synthetic
 	name = "Synthetic"
+	name_short = "Synth"
+
+/datum/mil_rank/civ/exo_synth
+	name = "EXO Synthetic"
+	name_short = "Synth"
+	accessory = list(/obj/item/clothing/accessory/badge/solgov/synthetic)\
+
+/*
+ *  Contractors-PRX
+ *  =========
+ */
+
+/datum/mil_rank/civ/three
+	name = "Corporative Contractor Class 3"
+	name_short = "CCC3"
+	accessory = list(/obj/item/clothing/accessory/badge/solgov/tags/three)
+
+/datum/mil_rank/civ/second
+	name = "Corporative Contractor Class 2"
+	name_short = "CCC2"
+	accessory = list(/obj/item/clothing/accessory/badge/solgov/tags/second)
+
+/datum/mil_rank/civ/first
+	name = "Corporative Contractor Class 1"
+	name_short = "CCC1"
+	accessory = list(/obj/item/clothing/accessory/badge/solgov/tags/first)
 
 /*
  *  SolGov Employees
@@ -723,15 +782,45 @@
 	name_short = "SGR"
 	accessory = list(/obj/item/clothing/accessory/badge/solgov/representative)
 
+/datum/mil_rank/sol/junior_agent  //Proxima
+	name = "SFP Junior Agent"
+	name_short = "JAGT"
+	accessory = list(/obj/item/clothing/accessory/badge/junior_agent)
+
+/datum/mil_rank/sol/duty_agent //Proxima
+	name = "SFP Duty Agent"
+	name_short = "DAGT"
+	accessory = list(/obj/item/clothing/accessory/badge/deputy_agent)
+
 /datum/mil_rank/sol/agent
 	name = "SFP Agent"
 	name_short = "AGT"
 	accessory = list(/obj/item/clothing/accessory/badge/agent)
 
-/datum/mil_rank/sol/curator_agent
-	name = "SFP Supervisory Agent"
+/datum/mil_rank/sol/senior_agent //Proxima
+	name = "SFP Senior Agent"
 	name_short = "SAGT"
+	accessory = list(/obj/item/clothing/accessory/badge/senior_agent)
+
+/datum/mil_rank/sol/inspector_agent //Proxima
+	name = "SFP Agent Inspector"
+	name_short = "AGTI"
+	accessory = list(/obj/item/clothing/accessory/badge/inspector_agent)
+
+/datum/mil_rank/sol/curator_agent //Proxima
+	name = "SFP Supervisory Agent"
+	name_short = "SUPAGT"
 	accessory = list(/obj/item/clothing/accessory/badge/curator_agent)
+
+/datum/mil_rank/sol/deputy_agent //Proxima
+	name = "SFP Deputy Director"
+	name_short = "DDIR"
+	accessory = list(/obj/item/clothing/accessory/badge/deputy_agent)
+
+/datum/mil_rank/sol/director_agent //Proxima
+	name = "SFP Director"
+	name_short = "DIR"
+	accessory = list(/obj/item/clothing/accessory/badge/director_agent)
 
 /datum/mil_rank/sol/scientist
 	name = "Government Scientist"

@@ -1,4 +1,4 @@
-/datum/codex_category/species/
+/datum/codex_category/species
 	name = "Species"
 	desc = "Sapient species encountered in known space."
 

@@ -47,8 +47,8 @@
 /datum/game_mode/meteor/post_setup()
 	..()
 	alert_title = "Automated Beacon AB-[rand(10, 99)]"
-	alert_text = "This is an automatic warning. Your facility: [GLOB.using_map.full_name] is on a collision course with a nearby asteroid belt. Estimated time until impact is: [meteor_grace_period / 1200] MINUTES. Please perform necessary actions to secure your ship or station from the threat. Have a nice day."
-	start_text = "This is an automatic warning. Your facility: [GLOB.using_map.full_name] has entered an asteroid belt. Estimated time until you leave the belt is: [rand(20,30)] HOURS and [rand(1, 59)] MINUTES. For your safety, please consider changing course or using protective equipment. Have a nice day."
+	alert_text = "Это автоматическое предупреждение. Ваш объект: [GLOB.using_map.full_name] находится на курсе столкновения с близлежащим поясом астероидов. Расчетное время до столкновения составляет: [meteor_grace_period / 1200] МИНУТ. Пожалуйста, выполните необходимые действия, чтобы обезопасить свой объект от угрозы. Хорошего дня."
+	start_text = "Это автоматическое предупреждение. Ваш объект: [GLOB.using_map.full_name] вошел в пояс астероидов. Расчетное время до того, как вы помните пояс, составляет:  [rand(20,30)]  ЧАСОВ и [rand(1, 59)] МИНУТ. В целях вашей безопасности, пожалуйста, подумайте о смене курса или использовании защитных средств. Хорошего дня."
 	next_wave = round_duration_in_ticks + meteor_grace_period
 
 /datum/game_mode/meteor/proc/on_meteor_warn()

@@ -27,7 +27,11 @@
 			"fuel_span" = fuel_span
 		)
 
-/obj/machinery/computer/shuttle_control/explore/handle_topic_href(var/datum/shuttle/autodock/overmap/shuttle, var/list/href_list)	
+/obj/machinery/computer/shuttle_control/explore/handle_topic_href(var/datum/shuttle/autodock/overmap/shuttle, var/list/href_list)
+	if (!shuttle)
+		crash_with("Shuttle controller tried to handle topic with no shuttle provided.")
+		to_chat(usr, SPAN_DEBUG("Shuttle controller tried to handle topic with no shuttle provided. This is a bug and should be reported immediately, something's probably horribly broken."))
+		return TOPIC_HANDLED
 	if(ismob(usr))
 		var/mob/user = usr
 		shuttle.operator_skill = user.get_skill_value(SKILL_PILOT)

@@ -22,9 +22,3 @@ GLOBAL_DATUM_INIT(density_set_event, /decl/observ/density_set, new)
 	UNLINT(. = ..())
 	if(density != old_density)
 		GLOB.density_set_event.raise_event(src, old_density, density)
-
-/turf/ChangeTurf()
-	var/old_density = opacity
-	UNLINT(. = ..())
-	if(density != old_density)
-		GLOB.density_set_event.raise_event(src, old_density, density)

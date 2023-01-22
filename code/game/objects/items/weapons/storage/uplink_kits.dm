@@ -36,6 +36,16 @@
 		/obj/item/reagent_containers/hypospray/autoinjector/mindbreaker
 		)
 
+/obj/item/storage/box/syndie_kit/shuriken
+	startswith = list(
+		/obj/item/material/star/ninja,
+		/obj/item/material/star/ninja,
+		/obj/item/material/star/ninja,
+		/obj/item/material/star/ninja,
+		/obj/item/material/star/ninja,
+		/obj/item/material/star/ninja,
+	)
+
 // Space suit uplink kit
 /obj/item/storage/backpack/satchel/syndie_kit/space
 	//name = "\improper EVA gear pack"

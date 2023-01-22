@@ -6,7 +6,7 @@
 	item_state = "claymore"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_LARGE
-	force_multiplier = 0.5 // 30 when wielded with hardnes 60 (steel)
+	force_multiplier = 0.5 // 30 when wielded with hardness 60 (steel)
 	armor_penetration = 10
 	thrown_force_multiplier = 0.5 // 10 when thrown with weight 20 (steel)
 	sharp = TRUE
@@ -24,6 +24,16 @@
 	force_multiplier = 0.2
 	thrown_force_multiplier = 0.2
 	worth_multiplier = 15
+
+/obj/item/material/sword/makeshift
+	desc = "A large, unwieldy blade haphazardly tied together with rod and wire. The weapon of the modern caveman."
+	icon_state = "makeshift_sword"
+	force_multiplier = 0.5
+	attack_cooldown = 30 // slow.
+	thrown_force_multiplier = 0.2
+	base_parry_chance = 25
+	worth_multiplier = 5
+	slot_flags = SLOT_BELT | SLOT_BACK
 
 /obj/item/material/sword/katana
 	name = "katana"

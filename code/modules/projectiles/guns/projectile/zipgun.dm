@@ -11,7 +11,7 @@
 	has_safety = FALSE
 	w_class = ITEM_SIZE_NORMAL
 
-	var/global/list/ammo_types = list(
+	var/static/list/ammo_types = list(
 		/obj/item/ammo_casing/pistol,
 		/obj/item/ammo_casing/shotgun,
 		/obj/item/ammo_casing/shotgun,
@@ -36,3 +36,10 @@
 
 /obj/item/gun/projectile/pirate/unloaded
 	starts_loaded = FALSE
+
+/obj/item/gun/projectile/pirate/on_update_icon()
+	..()
+	if(length(loaded))
+		icon_state = initial(icon_state)
+	else
+		icon_state = "[initial(icon_state)]-empty"

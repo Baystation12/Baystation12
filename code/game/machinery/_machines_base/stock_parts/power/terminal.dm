@@ -26,7 +26,7 @@
 			machine.update_power_channel(cached_channel)
 			machine.power_change()
 		return
-	
+
 
 
 	var/surplus = terminal.surplus()
@@ -40,7 +40,7 @@
 		terminal.draw_power(usage)
 		if(surplus >= usage)
 			return // had enough power and good to go.
-		else 
+		else
 			// Try and use other (local) sources of power to make up for the deficit.
 			var/deficit = machine.use_power_oneoff(usage - surplus)
 			if(deficit > 0)
@@ -137,7 +137,7 @@
 		user.visible_message("<span class='warning'>\The [user] adds cables to the \the [machine].</span>", \
 							"You start adding cables to \the [machine] frame...")
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		if(do_after(user, 20, machine))
+		if(do_after(user, 2 SECONDS, machine, DO_PUBLIC_UNIQUE))
 			if(C.can_use(10) && !terminal && (machine == loc) && machine.components_are_accessible(type) && !blocking_terminal_at_loc(machine, T, user))
 				var/obj/structure/cable/N = T.get_cable_node()
 				if (prob(50) && electrocute_mob(user, N, N))
@@ -163,7 +163,7 @@
 		user.visible_message("<span class='warning'>\The [user] dismantles the power terminal from \the [machine].</span>", \
 							"You begin to cut the cables...")
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		if(do_after(user, 50, machine))
+		if(do_after(user, 5 SECONDS, machine, DO_PUBLIC_UNIQUE))
 			if(terminal && (machine == loc) && machine.components_are_accessible(type))
 				if (prob(50) && electrocute_mob(user, terminal.powernet, terminal))
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread

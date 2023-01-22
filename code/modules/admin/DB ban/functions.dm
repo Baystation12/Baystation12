@@ -1,4 +1,4 @@
-datum/admins/proc/DB_staffwarn_record(var/ckey, var/reason)
+/datum/admins/proc/DB_staffwarn_record(var/ckey, var/reason)
 	if(!check_rights((R_ADMIN|R_MOD), 0)) return
 	if(!istext(reason)) return
 	_DB_staffwarn_record(ckey, reason)
@@ -26,7 +26,7 @@ datum/admins/proc/DB_staffwarn_record(var/ckey, var/reason)
 	query.Execute()
 	to_chat(usr,"<span class='notice'>StaffWarn saved to DB</span>")
 
-datum/admins/proc/DB_staffwarn_remove(var/ckey)
+/datum/admins/proc/DB_staffwarn_remove(var/ckey)
 	if(!check_rights((R_ADMIN|R_MOD), 0)) return
 	var/dbckey = sql_sanitize_text(ckey)
 
@@ -43,7 +43,7 @@ datum/admins/proc/DB_staffwarn_remove(var/ckey)
 	to_chat(usr,"<span class='notice'>StaffWarn removed from DB</span>")
 	return 1
 
-datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = -1, var/reason, var/job = "", var/rounds = 0, var/banckey = null, var/banip = null, var/bancid = null)
+/datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = -1, var/reason, var/job = "", var/rounds = 0, var/banckey = null, var/banip = null, var/bancid = null)
 	if(!src || !src.owner)
 		return
 	_DB_ban_record(src.owner.ckey, src.owner.computer_id, src.owner.address, bantype, banned_mob, duration, reason, job, rounds, banckey, banip, bancid)
@@ -110,7 +110,7 @@ datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = 
 			who += ", [C]"
 
 	var/adminwho
-	for(var/client/C in GLOB.admins)
+	for(var/client/C as anything in GLOB.admins)
 		if(!adminwho)
 			adminwho = "[C]"
 		else
@@ -126,11 +126,12 @@ datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = 
 		to_chat(usr, "<span class='notice'>Ban saved to database.</span>")
 		setter = key_name_admin(usr)
 	message_admins("[setter] has added a [bantype_str] for [ckey] [(job)?"([job])":""] [(duration > 0)?"([minutes_to_readable(duration)])":""] with the reason: \"[reason]\" to the ban database.",1)
+	callHook("banned", list(bantype, key_name(usr, null, 0), ckey, (job)?"([job])":"", (duration > 0)?"([minutes_to_readable(duration)])":"", reason))	// PRX\BOS send to discord via TGS
 	return 1
 
 
 
-datum/admins/proc/DB_ban_unban(var/ckey, var/bantype, var/job = "")
+/datum/admins/proc/DB_ban_unban(var/ckey, var/bantype, var/job = "")
 
 	if(!check_rights(R_BAN))	return
 
@@ -194,7 +195,7 @@ datum/admins/proc/DB_ban_unban(var/ckey, var/bantype, var/job = "")
 
 	DB_ban_unban_by_id(ban_id)
 
-datum/admins/proc/DB_ban_edit(var/banid = null, var/param = null)
+/datum/admins/proc/DB_ban_edit(var/banid = null, var/param = null)
 
 	if(!check_rights(R_BAN))	return
 
@@ -254,7 +255,7 @@ datum/admins/proc/DB_ban_edit(var/banid = null, var/param = null)
 			to_chat(usr, "Cancelled")
 			return
 
-datum/admins/proc/DB_ban_unban_by_id(var/id)
+/datum/admins/proc/DB_ban_unban_by_id(var/id)
 
 	if(!check_rights(R_BAN))	return
 
@@ -290,6 +291,8 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 
 	var/sql_update = "UPDATE erro_ban SET unbanned = 1, unbanned_datetime = Now(), unbanned_ckey = '[unban_ckey]', unbanned_computerid = '[unban_computerid]', unbanned_ip = '[unban_ip]' WHERE id = [id]"
 	message_admins("[key_name_admin(usr)] has lifted [pckey]'s ban.",1)
+
+	callHook("unbanned", list(unban_ckey, pckey))	// PRX/BOS hook
 
 	var/DBQuery/query_update = dbcon.NewQuery(sql_update)
 	query_update.Execute()

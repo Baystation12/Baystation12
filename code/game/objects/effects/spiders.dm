@@ -10,12 +10,12 @@
 //similar to weeds, but only barfed out by nurses manually
 /obj/effect/spider/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			qdel(src)
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			if (prob(5))
 				qdel(src)
 	return
@@ -187,7 +187,6 @@
 	if(dormant)
 		GLOB.moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
 	STOP_PROCESSING(SSobj, src)
-	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	. = ..()
 
 /obj/effect/spider/spiderling/attackby(var/obj/item/W, var/mob/user)
@@ -311,10 +310,10 @@
 			forceMove(O.owner ? O.owner.loc : O.loc)
 			src.visible_message("<span class='warning'>\A [src] emerges from inside [O.owner ? "[O.owner]'s [O.name]" : "\the [O]"]!</span>")
 			if(O.owner)
-				O.owner.apply_damage(5, BRUTE, O.organ_tag)
-				O.owner.apply_damage(3, TOX, O.organ_tag)
+				O.owner.apply_damage(5, DAMAGE_BRUTE, O.organ_tag)
+				O.owner.apply_damage(3, DAMAGE_TOXIN, O.organ_tag)
 		else if(prob(1))
-			O.owner.apply_damage(1, TOX, O.organ_tag)
+			O.owner.apply_damage(1, DAMAGE_TOXIN, O.organ_tag)
 			if(world.time > last_itch + 30 SECONDS)
 				last_itch = world.time
 				to_chat(O.owner, "<span class='notice'>Your [O.name] itches...</span>")

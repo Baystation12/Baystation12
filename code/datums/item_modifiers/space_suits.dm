@@ -67,7 +67,7 @@
 		/obj/item/clothing/head/helmet/space = list(
 			SETUP_NAME = "excavation voidsuit helmet",
 			SETUP_ICON_STATE = "rig0-excavation",
-			SETUP_ITEM_STATE = "excavation_helm"
+			SETUP_ITEM_STATE = "excavation-helm"
 		),
 		/obj/item/clothing/suit/space/void = list(
 			SETUP_NAME = "excavation voidsuit",

@@ -3,7 +3,7 @@
 // Examples
 /*
 	-- Will call the proc for all computers in the world, thats dir is 2.
-	CALL ex_act(1) ON /obj/machinery/computer IN world WHERE dir == 2
+	CALL ex_act(EX_ACT_DEVASTATING) ON /obj/machinery/computer IN world WHERE dir == 2
 	-- Will open a window with a list of all the closets in the world, with a link to VV them.
 	SELECT /obj/structure/closet/secure_closet/security/cargo IN world WHERE icon_off == "secoff"
 	-- Will change all the tube lights to green, and flicker them. The semicolon is important to separate the consecutive querys, but is not required for standard one-query use.
@@ -139,7 +139,7 @@
 										temp.SDQL_update(v, SDQL_expression(d, set_list[sets]))
 										break
 
-									if(list_find(temp.vars, v) && (istype(temp.vars[v], /datum) || istype(temp.vars[v], /client)))
+									if(temp.vars.Find(v) && (istype(temp.vars[v], /datum) || istype(temp.vars[v], /client)))
 										temp = temp.vars[v]
 
 									else
@@ -381,7 +381,8 @@
 	var/long = start < expression.len
 
 	if (object == world && (!long || expression[start + 1] == ".") && !(expression[start] in exclude))
-		v = readglobal(expression[start])
+		var/name = expression[start]
+		v = global.vars[name]
 
 	else if (expression [start] == "{" && long)
 		if (lowertext(copytext_char(expression[start + 1], 1, 3)) != "0x")

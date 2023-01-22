@@ -111,7 +111,7 @@
 	if(state & WASHER_STATE_CLOSED)
 		to_chat(usr, SPAN_WARNING("\The [src] is closed."))
 		return
-	if(!do_after(usr, 2 SECONDS, src))
+	if(!do_after(usr, 2 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
 	if(!(state & WASHER_STATE_CLOSED))
 		usr.dropInto(loc)

@@ -531,7 +531,7 @@
 	user.drop_from_inventory(W)
 	Consume(W)
 
-	user.apply_damage(150, IRRADIATE, damage_flags = DAM_DISPERSED)
+	user.apply_damage(150, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 
 
 /obj/machinery/power/supermatter/Bumped(atom/AM as mob|obj)
@@ -584,11 +584,11 @@
 /obj/machinery/power/supermatter/ex_act(var/severity)
 	..()
 	switch(severity)
-		if(1.0)
+		if(EX_ACT_DEVASTATING)
 			power *= 4
-		if(2.0)
+		if(EX_ACT_HEAVY)
 			power *= 3
-		if(3.0)
+		if(EX_ACT_LIGHT)
 			power *= 2
 	log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power].")
 
@@ -677,89 +677,6 @@
 
 
 //Warning lights
-/obj/effect/spinning_light
-	var/spin_rate = 1 SECOND
-	var/_size = 48
-	var/_factor = 0.5
-	var/_density = 4
-	var/_offset = 30
-	plane = EFFECTS_ABOVE_LIGHTING_PLANE
-	layer = EYE_GLOW_LAYER
-	mouse_opacity = 0
-
-/obj/effect/spinning_light/Initialize()
-	. = ..()
-	filters = filter(type="rays", size = _size, color = COLOR_ORANGE, factor = _factor, density = _density, flags = FILTER_OVERLAY, offset = _offset)
-
-	alpha = 200
-
-	//Rays start rotated which made synchronizing the scaling a bit difficult, so let's move it 45 degrees
-	var matrix/m = new
-	var/matrix/test = new
-	test.Turn(-45)
-	var/matrix/squished = new
-	squished.Scale(1, 0.5)
-	animate(src, transform = (test * m.Turn(90)), spin_rate / 4, loop = -1,)
-	animate(transform =      test * m.Turn(90), spin_rate / 4, loop = -1, )
-	animate(transform =      (test * m.Turn(90)), spin_rate / 4, loop = -1, )
-	animate(transform =      test * matrix(),   spin_rate / 4, loop = -1, )
-
-/obj/machinery/rotating_alarm
-	name = "Industrial alarm"
-	desc = "An industrial rotating alarm light."
-	icon = 'icons/obj/supermatter.dmi'
-	icon_state = "alarm"
-	idle_power_usage = 0
-	active_power_usage = 0
-
-	var/on = FALSE
-	var/construct_type = /obj/machinery/light_construct
-
-	var/static/obj/effect/spinning_light/spin_effect = null
-
-	var/alarm_light_color = COLOR_ORANGE
-	/// This is an angle to rotate the colour of alarm and its light. Default is orange, so, a 45 degree angle clockwise will make it green
-	var/angle = 0
-
-/obj/machinery/rotating_alarm/Initialize()
-	. = ..()
-
-	if(!spin_effect)
-		spin_effect = new(null)
-
-	//Setup colour
-	var/list/color_matrix = color_rotation(angle)
-
-	color = color_matrix
-
-	var/HSV = RGBtoHSV(alarm_light_color)
-	var/RGB = HSVtoRGB(RotateHue(HSV, angle))
-
-	alarm_light_color = RGB
-
-	set_dir(dir) //Set dir again so offsets update correctly
-
-/obj/machinery/rotating_alarm/set_dir(ndir) //Due to effect, offsets cannot be part of sprite, so need to set it for each dir
-	. = ..()
-	if(dir == NORTH)
-		pixel_y = -13
-	if(dir == SOUTH)
-		pixel_y = 28
-	if(dir == WEST)
-		pixel_x = 20
-	if(dir == EAST)
-		pixel_x = -20
-
-/obj/machinery/rotating_alarm/proc/set_on()
-	vis_contents += spin_effect
-	set_light(1, 0.5, 2, 0.3, alarm_light_color)
-	on = TRUE
-
-/obj/machinery/rotating_alarm/proc/set_off()
-	vis_contents -= spin_effect
-	set_light(0)
-	on = FALSE
-
 /obj/machinery/rotating_alarm/supermatter
 	name = "Supermatter alarm"
 	desc = "An industrial rotating alarm light. This one is used to monitor supermatter engines."

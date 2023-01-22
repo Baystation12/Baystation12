@@ -49,7 +49,7 @@
 	fore_dir = NORTH
 	burn_delay = 2 SECONDS
 	hide_from_reports = TRUE
-	known = 0
+	known = FALSE
 	initial_generic_waypoints = list(
 		"nav_gantry_one",
 		"nav_gantry_two",

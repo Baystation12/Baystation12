@@ -55,7 +55,7 @@
 
 /datum/computer_file/report/recipient/shuttle/damage/New()
 	..()
-	set_access(null, access_cargo, override = 0)
+	set_access(null, list(access_cargo, access_pilot), override = 0)
 
 /datum/computer_file/report/recipient/shuttle/damage/generate_fields()
 	..()
@@ -71,7 +71,7 @@
 
 /datum/computer_file/report/recipient/shuttle/fuel/New()
 	..()
-	set_access(null, access_cargo, override = 0)
+	set_access(null, list(access_cargo, access_pilot), override = 0)
 
 /datum/computer_file/report/recipient/shuttle/fuel/generate_fields()
 	..()
@@ -86,7 +86,7 @@
 
 /datum/computer_file/report/recipient/shuttle/atmos/New()
 	..()
-	set_access(null, access_cargo, override = 0)
+	set_access(null, list(access_cargo, access_pilot), override = 0)
 
 /datum/computer_file/report/recipient/shuttle/atmos/generate_fields()
 	..()
@@ -101,7 +101,7 @@
 
 /datum/computer_file/report/recipient/shuttle/gear/New()
 	..()
-	set_access(null, access_cargo, override = 0)
+	set_access(null, list(access_cargo, access_pilot), override = 0)
 
 /datum/computer_file/report/recipient/shuttle/gear/generate_fields()
 	..()

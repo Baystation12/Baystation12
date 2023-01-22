@@ -59,7 +59,7 @@ GLOBAL_VAR(spawntypes)
 
 /datum/spawnpoint/cryo
 	display_name = "Cryogenic Storage"
-	msg = "has completed cryogenic revival"
+	msg = "завершено криогенное пробуждения"
 	disallow_job = list("Robot")
 
 /datum/spawnpoint/cryo/New()
@@ -68,7 +68,7 @@ GLOBAL_VAR(spawntypes)
 
 /datum/spawnpoint/cyborg
 	display_name = "Cyborg Storage"
-	msg = "has been activated from storage"
+	msg = "был активирован из хранилища"
 	restrict_job = list("Robot")
 
 /datum/spawnpoint/cyborg/New()

@@ -1,4 +1,4 @@
-/var/total_lighting_overlays = 0
+var/global/total_lighting_overlays = 0
 /atom/movable/lighting_overlay
 	name = ""
 	mouse_opacity = 0
@@ -11,7 +11,6 @@
 	color = LIGHTING_BASE_MATRIX
 	icon_state = "light1"
 	blend_mode = BLEND_OVERLAY
-	vis_flags = VIS_HIDE
 
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS
 

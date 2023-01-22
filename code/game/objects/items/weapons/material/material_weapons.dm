@@ -17,6 +17,7 @@
 	var/furniture_icon  //icon states for non-material colorable overlay, i.e. handles
 
 	var/max_force = 40	 //any damage above this is added to armor penetration value
+	var/max_pen = 100 //any penetration above this value is ignored
 	var/force_multiplier = 0.5	// multiplier to material's generic damage value for this specific type of weapon
 	var/thrown_force_multiplier = 0.5
 
@@ -57,6 +58,7 @@
 	if(new_force > max_force)
 		armor_penetration = initial(armor_penetration) + new_force - max_force
 	armor_penetration += 2*max(0, material.brute_armor - 2)
+	armor_penetration = min(max_pen, armor_penetration)
 
 	throwforce = round(material.get_blunt_damage()*thrown_force_multiplier)
 	attack_cooldown = material.get_attack_cooldown() + attack_cooldown_modifier
@@ -97,7 +99,7 @@
 
 /obj/item/material/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
-	if(material.is_brittle() || target.get_blocked_ratio(hit_zone, BRUTE, damage_flags(), armor_penetration, force) * 100 >= material.hardness/5)
+	if(material.is_brittle() || target.get_blocked_ratio(hit_zone, DAMAGE_BRUTE, damage_flags(), armor_penetration, force) * 100 >= material.hardness/5)
 		check_shatter()
 
 /obj/item/material/on_parry(damage_source)
@@ -111,10 +113,8 @@
 		else
 			damage_health(1)
 
-/obj/item/material/handle_death_change(new_death_state)
-	. = ..()
-	if (new_death_state)
-		shatter()
+/obj/item/material/on_death()
+	shatter()
 
 /obj/item/material/proc/shatter()
 	var/turf/T = get_turf(src)

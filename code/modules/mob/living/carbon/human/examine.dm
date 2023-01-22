@@ -193,10 +193,15 @@
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)
 		msg += "<span class='notice'>[T.He] [T.has] \"[H.forehead_graffiti]\" written on [T.his] [H.name] in [H.graffiti_style]!</span>\n"
 
-	if(became_younger)
-		msg += "[T.He] looks a lot younger than you remember.\n"
-	if(became_older)
-		msg += "[T.He] looks a lot older than you remember.\n"
+	if (changed_age)
+		var/scale = abs(changed_age) / age
+		if (scale > 0.5)
+			scale = "a lot "
+		else if (scale > 0.25)
+			scale = ""
+		else
+			scale = "a little "
+		msg += "[T.He] looks [scale][changed_age > 0 ? "older" : "younger"] than you remember.\n"
 
 	for (var/obj/aura/web/W in auras)
 		msg += SPAN_WARNING("[T.He] is covered in webs!\n")
@@ -257,9 +262,9 @@
 				shown_objects += embedlist
 				var/parsedembed[0]
 				for(var/obj/embedded in embedlist)
-					if(!parsedembed.len || (!list_find(parsedembed, embedded.name) && !list_find(parsedembed, "multiple [embedded.name]")))
+					if(!parsedembed.len || (!parsedembed.Find(embedded.name) && !parsedembed.Find("multiple [embedded.name]")))
 						parsedembed.Add(embedded.name)
-					else if(!list_find(parsedembed, "multiple [embedded.name]"))
+					else if(!parsedembed.Find("multiple [embedded.name]"))
 						parsedembed.Remove(embedded.name)
 						parsedembed.Add("multiple "+embedded.name)
 				wound_flavor_text["[E.name]"] += "The [wound.desc] on [T.his] [E.name] has \a [english_list(parsedembed, and_text = " and \a ", comma_text = ", \a ")] sticking out of it!<br>"

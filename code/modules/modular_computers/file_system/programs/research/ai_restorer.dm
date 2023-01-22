@@ -10,7 +10,7 @@
 	required_access = access_bridge
 	requires_access_to_run = FALSE
 	available_on_ntnet = TRUE
-	nanomodule_path = /datum/nano_module/program/computer_aidiag/
+	nanomodule_path = /datum/nano_module/program/computer_aidiag
 	var/restoring = 0
 
 /datum/computer_file/program/aidiag/proc/get_ai()

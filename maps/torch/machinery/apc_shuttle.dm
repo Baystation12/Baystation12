@@ -18,3 +18,6 @@
 
 /obj/machinery/power/apc/hyper/shuttle/aquila
 	req_access = list(list(access_engine_equip, access_aquila_helm))
+
+/obj/machinery/power/apc/hyper/shuttle/charon
+	req_access = list(list(access_engine_equip, access_expedition_shuttle_helm))

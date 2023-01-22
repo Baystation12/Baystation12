@@ -24,7 +24,7 @@
 			"<span class='notice'>You carefully begin to free \the [buckled_mob] from \the [src].</span>",
 			"<span class='notice'>You hear metal creaking.</span>"
 			)
-		if(do_after(user, 60, src))
+		if(do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE))
 			user.visible_message("<span class='notice'>\The [buckled_mob] has been freed from \the [src] by \the [user].</span>")
 			unbuckle_mob()
 			anchored = FALSE
@@ -38,7 +38,7 @@
 			"You hear the slow creaking of a spring."
 			)
 
-		if (do_after(user, 60, src) && user.unEquip(src))
+		if (do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE) && user.unEquip(src))
 			user.visible_message(
 				"<span class='danger'>\The [user] has deployed \the [src].</span>",
 				"<span class='danger'>You have deployed \the [src]!</span>",
@@ -58,7 +58,7 @@
 			"<span class='notice'>You begin disarming \the [src]!</span>",
 			"You hear a latch click followed by the slow creaking of a spring."
 			)
-		if(do_after(user, 60, src))
+		if(do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE))
 			user.visible_message(
 				"<span class='danger'>[user] has disarmed \the [src].</span>",
 				"<span class='notice'>You have disarmed \the [src]!</span>"
@@ -77,7 +77,7 @@
 	else
 		target_zone = pick(BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG)
 
-	if(!L.apply_damage(30, BRUTE, target_zone, used_weapon=src))
+	if(!L.apply_damage(30, DAMAGE_BRUTE, target_zone, used_weapon=src))
 		return 0
 
 	//trap the victim in place

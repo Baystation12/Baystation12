@@ -13,60 +13,65 @@ medals
 	icon = 'maps/torch/icons/obj/obj_accessories_solgov.dmi'
 	accessory_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/onmob_accessories_solgov.dmi', slot_wear_suit_str = 'maps/torch/icons/mob/onmob_accessories_solgov.dmi')
 
-/obj/item/clothing/accessory/medal/solgov/iron/star
-	name = "iron star medal"
-	desc = "An iron star awarded to members of the SCG for meritorious achievement or service in a combat zone."
-	icon_state = "iron_star"
+//medals ranked from least to greatest
 
-/obj/item/clothing/accessory/medal/solgov/iron/sol
-	name = "\improper Sol expeditionary medal"
-	desc = "An iron medal awarded to members of the SCG for service outside of the borders of the Sol Central Government."
-	icon_state = "iron_sol"
+//Universal medals
+/obj/item/clothing/accessory/medal/solgov/medical
+	name = "\improper Combat Medical Award"
+	desc = "An electrum heart medal with a Staff of Hermes and sanguine cross, awarded by the SCG to individuals who have served as medical personnel in an active combat zone."
+	icon_state = "medal_medical"
 
-/obj/item/clothing/accessory/medal/solgov/bronze/heart
-	name = "bronze heart medal"
-	desc = "A bronze heart awarded to members of the SCG for injury or death in the line of duty."
-	icon_state = "bronze_heart"
+//Military medals
+/obj/item/clothing/accessory/medal/solgov/mil/bronze_heart
+	name = "\improper Bronze Heart medal"
+	desc = "A bronze heart awarded by the SCG for members of the SCG Defense Forces who suffer injury or death in a combat zone."
+	icon_state = "medal_bronze_heart"
 
-/obj/item/clothing/accessory/medal/solgov/bronze/sol
-	name = "\improper Sol defensive operations medal"
-	desc = "A bronze medal awarded for members of the SCG for service defending the border regions."
-	icon_state = "bronze_sol"
+/obj/item/clothing/accessory/medal/solgov/mil/home_guard
+	name = "\improper Home Guard medal"
+	desc = "A bronze medal awarded by the SCG for members of the SCG Defense Forces who have helped defend the border regions of Sol."
+	icon_state = "medal_home_guard"
 
-/obj/item/clothing/accessory/medal/solgov/silver/sword
-	name = "combat action medal"
-	desc = "A silver medal awarded to members of the SCG for honorable service while under enemy fire."
-	icon_state = "silver_sword"
+/obj/item/clothing/accessory/medal/solgov/mil/iron_star
+	name = "\improper Iron Star medal"
+	desc = "An iron star awarded by the SCG to members of the SCG Defense Forces who have performed acts of 'meritorious achievements or service.'"
+	icon_state = "medal_iron_star"
 
-/obj/item/clothing/accessory/medal/solgov/silver/sol
-	name = "\improper Sol valor medal"
-	desc = "A silver medal awarded for members of the SCG for acts of exceptional valor."
-	icon_state = "silver_sol"
+/obj/item/clothing/accessory/medal/solgov/mil/armed_forces
+	name = "\improper Armed Forces Medal"
+	desc = "A brass medal awarded by the SCG for members of the SCG Defense Forces who have performed distinguishing acts outside of direct combat with an enemy."
+	icon_state = "medal_armed_forces"
 
-/obj/item/clothing/accessory/medal/solgov/gold/star
-	name = "gold star medal"
-	desc = "A gold star awarded to members of the SCG for acts of heroism in a combat zone."
-	icon_state = "gold_star"
+/obj/item/clothing/accessory/medal/solgov/mil/silver_sword
+	name = "\improper Silver Sword medal"
+	desc = "A silver medal awarded by the SCG for members of the SCG Defense Forces who have demonstrated exceptional valor in combat."
+	icon_state = "medal_silver_sword"
 
-/obj/item/clothing/accessory/medal/solgov/gold/sun
-	name = "solar service medal"
-	desc = "A gold medal awarded to members of the SCG by the Secretary General for significant contributions to the Sol Central Government."
-	icon_state = "gold_sun"
+/obj/item/clothing/accessory/medal/solgov/mil/service_cross
+	name = "\improper Superior Service Cross"
+	desc = "A copper cross awarded by the SCG for members of the SCG Defense Forces who have performed acts of incredible valor against an enemy of Sol."
+	icon_state = "medal_service_cross"
 
-/obj/item/clothing/accessory/medal/solgov/gold/crest
-	name = "solar honor medal"
-	desc = "A gold medal awarded to members of the Defense Forces by the Secretary General for personal acts of valor and heroism above and beyond the call of duty."
-	icon_state = "gold_crest"
+/obj/item/clothing/accessory/medal/solgov/mil/medal_of_honor
+	name = "\improper Medal of Honor"
+	desc = "An ornate golden medal awarded and conferred by the SCG Secretary-General to members of the SCG Defense Forces who have committed acts of 'conspicuous gallantry beyond the call of duty.'"
+	icon_state = "medal_of_honor"
 
-/obj/item/clothing/accessory/medal/solgov/gold/sol
-	name = "\improper Sol sapientarian medal"
-	desc = "A gold medal awarded for members of the SCG for significant contributions to sapient rights."
-	icon_state = "gold_sol"
+//Civilian medals
+/obj/item/clothing/accessory/medal/solgov/civ/expeditionary
+	name = "\improper Expeditionary Medal"
+	desc = "An iron medal awarded by the SCG for individuals who have participated in missions outside the borders of the Sol Central Government."
+	icon_state = "medal_expeditionary"
 
-/obj/item/clothing/accessory/medal/solgov/heart
-	name = "medical medal"
-	desc = "A white heart emblazoned with a red cross awarded to members of the SCG for service as a medical professional in a combat zone."
-	icon_state = "white_heart"
+/obj/item/clothing/accessory/medal/solgov/civ/sapientarian
+	name = "\improper Sapientarian Peace Award"
+	desc = "A copper medal awarded by the SCG for individuals who have contributed substantially to sapient rights or fostered greater brotherhood between sapient species. It is embossed with a date, text, and an image of famous Expeditionary Corps sapientarian, Samuel Carr."
+	icon_state = "medal_sapientarian"
+
+/obj/item/clothing/accessory/medal/solgov/civ/service
+	name = "\improper Distinguished Service Medal"
+	desc = "A golden sun medal awarded by the SCG to nonmilitary individuals who have made exceptional contributions to the Sol Central Government."
+	icon_state = "medal_service"
 
 /obj/item/clothing/accessory/solgov
 	var/check_codex_val = FACTION_FLEET
@@ -74,6 +79,9 @@ medals
 /obj/item/clothing/accessory/solgov/get_codex_value()
 	return check_codex_val || ..()
 
+/*****
+patches
+*****/
 /obj/item/clothing/accessory/solgov/torch_patch
 	name = "\improper Torch mission patch"
 	desc = "A fire resistant shoulder patch, worn by the personnel involved in the Torch Project."
@@ -84,9 +92,6 @@ medals
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_accessories_sol_unathi.dmi'
 		)
 
-/*****
-patches
-*****/
 /obj/item/clothing/accessory/solgov/ec_patch
 	name = "\improper Observatory patch"
 	desc = "A laminated shoulder patch, carrying the symbol of the Sol Central Government Expeditionary Corpss Observatory, or SCGEO for short, the eyes and ears of the Expeditionary Corps' missions."
@@ -170,25 +175,98 @@ ribbons
 	accessory_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/onmob_accessories_solgov.dmi', slot_wear_suit_str = 'maps/torch/icons/mob/onmob_accessories_solgov.dmi')
 	w_class = ITEM_SIZE_TINY
 
+//General ribbons/decorations
 /obj/item/clothing/accessory/ribbon/solgov/marksman
 	name = "marksmanship ribbon"
-	desc = "A military decoration awarded to members of the SCG for good marksmanship scores in training. Common in the days of energy weapons."
+	desc = "A military ribbon awarded to members of the SCG Defense Forces for good marksmanship scores in training. Common in the days of energy weapons."
 	icon_state = "ribbon_marksman"
 
 /obj/item/clothing/accessory/ribbon/solgov/peace
 	name = "peacekeeping ribbon"
-	desc = "A military decoration awarded to members of the SCG for service during a peacekeeping operation."
+	desc = "A military ribbon awarded to members of the SCG Defense Forces for service during a peacekeeping operation."
 	icon_state = "ribbon_peace"
 
 /obj/item/clothing/accessory/ribbon/solgov/frontier
 	name = "frontier ribbon"
-	desc = "A military decoration awarded to members of the SCG for service along the frontier."
+	desc = "A military ribbon awarded to members of the SCG Defense Forces for service along the frontier."
 	icon_state = "ribbon_frontier"
 
 /obj/item/clothing/accessory/ribbon/solgov/instructor
 	name = "instructor ribbon"
-	desc = "A military decoration awarded to members of the SCG for service as an instructor."
+	desc = "A military ribbon awarded to members of the SCG Defense Forces for service as an instructor or professional development agent."
 	icon_state = "ribbon_instructor"
+
+/obj/item/clothing/accessory/ribbon/solgov/combat
+	name = "combat action ribbon"
+	desc = "A military ribbon awarded to members of the SCG Defense Forces for serving in active combat. Colloquially known as 'blood gold.'"
+	icon_state = "ribbon_combat"
+
+/obj/item/clothing/accessory/ribbon/solgov/gaiaconflict
+	name = "\improper Gaia Conflict ribbon"
+	desc = "A military ribbon awarded to members of the SCG Defense Forces for serving in the Gaia Conflict."
+	icon_state = "ribbon_gaiaconflict"
+
+/obj/item/clothing/accessory/ribbon/solgov/distinguished_unit
+	name = "distinguished unit ribbon"
+	desc = "A military ribbon awarded to members of the SCG Defense Forces for service as part of a unit that has performed a distinguishing act of valor."
+	icon_state = "ribbon_distinguished_unit"
+
+//Medal ribbons
+/obj/item/clothing/accessory/ribbon/solgov/medal/bronze_heart
+	name = "\improper Bronze Heart ribbon"
+	desc = "A military ribbon awarded by the SCG alongside the Bronze Heart. To be worn when it is impossible or undesirable to wear the Bronze Heart."
+	icon_state = "ribbon_medal_bronze_heart"
+
+/obj/item/clothing/accessory/ribbon/solgov/medal/home_guard
+	name = "\improper Home Guard ribbon"
+	desc = "A military ribbon awarded by the SCG alongside the Home Guard medal. To be worn when it is impossible or undesirable to wear the Home Guard medal."
+	icon_state = "ribbon_medal_home_guard"
+
+/obj/item/clothing/accessory/ribbon/solgov/medal/iron_star
+	name = "\improper Iron Star ribbon"
+	desc = "A military ribbon awarded by the SCG alongside the Iron Star medal. To be worn when it is impossible or undesirable to wear the Iron Star."
+	icon_state = "ribbon_medal_iron_star"
+
+/obj/item/clothing/accessory/ribbon/solgov/medal/armed_forces
+	name = "\improper Armed Forces ribbon"
+	desc = "A military ribbon awarded by the SCG alongside the Armed Forces Medal. To be worn when it is impossible or undesirable to wear the Armed Forces Medal."
+	icon_state = "ribbon_medal_armed_forces"
+
+/obj/item/clothing/accessory/ribbon/solgov/medal/silver_sword
+	name = "\improper Silver Sword ribbon"
+	desc = "A military ribbon awarded by the SCG alongside the Silver Sword medal. To be worn when it is impossible or undesirable to wear the Silver Sword."
+	icon_state = "ribbon_medal_silver_sword"
+
+/obj/item/clothing/accessory/ribbon/solgov/medal/service_cross
+	name = "\improper Superior Service ribbon"
+	desc = "A military ribbon awarded by the SCG alongside the Superior Service Cross. To be worn when it is impossible or undesirable to wear the Service Cross."
+	icon_state = "ribbon_medal_service_cross"
+
+/obj/item/clothing/accessory/ribbon/solgov/medal/medal_of_honor
+	name = "\improper Medal of Honor ribbon"
+	desc = "A military ribbon awarded by the SCG alongside the Medal of Honor. To be worn when it is impossible or undesirable to wear the Medal of Honor."
+	icon_state = "ribbon_medal_of_honor"
+
+/obj/item/clothing/accessory/ribbon/solgov/medal/expeditionary_medal
+	name = "\improper Expeditionary Ribbon"
+	desc = "A military ribbon awarded by the SCG alongside the Expeditionary Medal. To be worn when it is impossible or undesirable to wear the Expeditionary Medal."
+	icon_state = "ribbon_medal_expeditionary"
+
+/obj/item/clothing/accessory/ribbon/solgov/medal/sapientarian
+	name = "\improper Sapientarian ribbon"
+	desc = "A military ribbon awarded by the SCG alongside the Sapientarian Peace Award. To be worn when it is impossible or undesirable to wear the Sapientarian Award."
+	icon_state = "ribbon_medal_sapientarian"
+
+/obj/item/clothing/accessory/ribbon/solgov/medal/service
+	name = "\improper Distinguished Service ribbon"
+	desc = "A military ribbon awarded by the SCG alongside the Distinguished Service Medal. To be worn when it is impossible or undesirable to wear the Distinguished Service Medal."
+	icon_state = "ribbon_medal_service"
+
+/obj/item/clothing/accessory/ribbon/solgov/medal/medical
+	name = "\improper Combat Medical ribbon"
+	desc = "A military ribbon awarded by the SCG alongside the Combat Medical Award. To be worn when it is impossible or undesirable to wear the Combat Medical Award."
+	icon_state = "ribbon_medal_medical"
+
 
 /*************
 specialty pins
@@ -271,6 +349,7 @@ badges
 	var/owner_name
 	var/owner_branch
 
+
 /obj/item/clothing/accessory/badge/solgov/tags/proc/loadout_setup(mob/M)
 	set_name(M.real_name)
 	set_desc(M)
@@ -302,6 +381,42 @@ badges
 	var/decl/cultural_info/culture = H.get_cultural_value(TAG_RELIGION)
 	var/religion = culture ? culture.name : "Unset"
 	desc = "[initial(desc)]\nName: [H.real_name] ([H.get_species()])\nReligion: [religion]\nBlood type: [H.b_type]"
+
+/obj/item/clothing/accessory/badge/solgov/synthetic
+	name = "\improper synthetic's badge"
+	desc = "A red leather-backed gold badge with silver 'SYNTH' letters written on it, displaying advanced EXO Corporative Shell IPC."
+	icon = 'maps/torch/icons/obj/obj_accessories_solgov.dmi'
+	icon_state = "solbadge"
+	badge_string = "EXO Corporative"
+	slot_flags = SLOT_BELT | SLOT_TIE | ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
+	slot = ACCESSORY_SLOT_RANK
+
+/obj/item/clothing/accessory/badge/solgov/tags/first
+	name = "contractor first class badge"
+	desc = "Plastic badge with gold inscription 'FIRST CLASS'. Owned by a corporate contractor. Shows the level of a top specialist."
+	icon = 'maps/torch/icons/obj/obj_accessories_solgov.dmi'
+	icon_state = "cont_c1"
+	badge_string = "Qualification System"
+	slot_flags = SLOT_BELT | SLOT_TIE | ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
+	slot = ACCESSORY_SLOT_RANK
+
+/obj/item/clothing/accessory/badge/solgov/tags/second
+	name = "contractor second class badge"
+	desc = "Plastic badge with gold inscription 'SECOND CLASS'. Owned by a corporate contractor. Shows the level of an average specialist."
+	icon = 'maps/torch/icons/obj/obj_accessories_solgov.dmi'
+	icon_state = "cont_c2"
+	badge_string = "Qualification System"
+	slot_flags = SLOT_BELT | SLOT_TIE | ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
+	slot = ACCESSORY_SLOT_RANK
+
+/obj/item/clothing/accessory/badge/solgov/tags/three
+	name = "contractor three class badge"
+	desc = "Plastic badge with gold inscription 'THREE CLASS'. Owned by a corporate contractor. Shows the level of a low specialist."
+	icon = 'maps/torch/icons/obj/obj_accessories_solgov.dmi'
+	icon_state = "cont_c3"
+	badge_string = "Qualification System"
+	slot_flags = SLOT_BELT | SLOT_TIE | ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
+	slot = ACCESSORY_SLOT_RANK
 
 /obj/item/clothing/accessory/badge/solgov/representative
 	name = "representative's badge"
@@ -341,6 +456,11 @@ armbands
 	name = "box of spare security armbands"
 	desc = "A box full of security armbands. For use in emergencies when provisional security personnel are needed."
 	startswith = list(/obj/item/clothing/accessory/armband/solgov/ma = 5)
+
+/obj/item/storage/box/armband/red_sec
+	name = "box of spare red security armbands"
+	desc = "A box full of red security armbands. For use in emergencies when provisional security peronnel are needed."
+	startswith = list(/obj/item/clothing/accessory/armband = 5)
 //proxima code end
 
 /*****************
@@ -409,6 +529,10 @@ department tags
 
 /obj/item/clothing/accessory/solgov/department/command/service
 	icon_state = "dept_exped_service"
+
+/obj/item/clothing/accessory/solgov/department/command/jumper
+	icon_state = "dept_exped_jumper"
+	color = "#d6bb64"
 
 /obj/item/clothing/accessory/solgov/department/command/fleet
 	icon_state = "dept_fleet"
@@ -614,8 +738,8 @@ ranks - fleet
 ************/
 /obj/item/clothing/accessory/solgov/rank/fleet
 	name = "naval ranks"
-	desc = "Insignia denoting naval rank of some kind. These appear blank."
-	icon_state = "fleetrank_e1"
+	desc = "Insignia denoting naval rank of some kind."
+	icon_state = "e1_patch"
 	overlay_state = "fleetrank_enlisted"
 	on_rolled = list("down" = "none")
 
@@ -626,98 +750,100 @@ ranks - fleet
 /obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e2
 	name = "ranks (E-2 crewman apprentice)"
 	desc = "Insignia denoting the rank of Crewman Apprentice."
-	icon_state = "fleetrank_e2"
+	icon_state = "e2_patch"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e3
 	name = "ranks (E-3 crewman)"
 	desc = "Insignia denoting the rank of Crewman."
-	icon_state = "fleetrank_e3"
+	icon_state = "e3_patch"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e4
 	name = "ranks (E-4 petty officer third class)"
 	desc = "Insignia denoting the rank of Petty Officer Third Class."
-	icon_state = "fleetrank_e4"
+	icon_state = "e4_patch"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e5
 	name = "ranks (E-5 petty officer second class)"
 	desc = "Insignia denoting the rank of Petty Officer Second Class."
-	icon_state = "fleetrank_e5"
+	icon_state = "e5_patch"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e6
 	name = "ranks (E-6 petty officer first class)"
 	desc = "Insignia denoting the rank of Petty Officer First Class."
-	icon_state = "fleetrank_e6"
+	icon_state = "e6_patch"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e7
 	name = "ranks (E-7 chief petty officer)"
 	desc = "Insignia denoting the rank of Chief Petty Officer."
-	icon_state = "fleetrank_e7"
+	icon_state = "e7_patch"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e8
 	name = "ranks (E-8 senior chief petty officer)"
 	desc = "Insignia denoting the rank of Senior Chief Petty Officer."
-	icon_state = "fleetrank_e8"
+	icon_state = "e8_patch"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e9
 	name = "ranks (E-9 master chief petty officer)"
 	desc = "Insignia denoting the rank of Master Chief Petty Officer."
-	icon_state = "fleetrank_e9"
+	icon_state = "e9_patch"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e9_alt1
 	name = "ranks (E-9 command master chief petty officer)"
 	desc = "Insignia denoting the rank of Command Master Chief Petty Officer."
-	icon_state = "fleetrank_e9"
+	icon_state = "e9_patch"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e9_alt2
 	name = "ranks (E-9 fleet master chief petty officer)"
 	desc = "Insignia denoting the rank of Fleet Master Chief Petty Officer."
-	icon_state = "fleetrank_e9"
+	icon_state = "e9_patch"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e9_alt3
 	name = "ranks (E-9 force master chief petty officer)"
 	desc = "Insignia denoting the rank of Force Master Chief Petty Officer."
-	icon_state = "fleetrank_e9"
+	icon_state = "e9_patch"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e9_alt4
 	name = "ranks (E-9 master chief petty officer of the Fleet)"
 	desc = "Insignia denoting the rank of Master Chief Petty Officer of the Fleet."
-	icon_state = "fleetrank_e9"
+	icon_state = "e9_patch"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/officer
 	name = "ranks (O-1 ensign)"
-	desc = "Insignia denoting the rank of Ensign."
+	desc = "Shoulderboards denoting the rank of Ensign."
 	icon_state = "fleetrank_o1"
 	overlay_state = "fleetrank_officer"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/officer/wo1_monkey
 	name = "makeshift ranks (WO-1 warrant officer 1)"
-	desc = "Insignia denoting the mythical rank of Warrant Officer. Too bad it's obviously fake."
+	desc = "Shoulderboards denoting the mythical rank of Warrant Officer. Too bad it's obviously fake."
 	icon_state = "fleetrank_monkey"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/officer/o2
 	name = "ranks (O-2 sub-lieutenant)"
-	desc = "Insignia denoting the rank of Sub-lieutenant."
+	desc = "Shoulderboards denoting the rank of Sub-lieutenant."
 	icon_state = "fleetrank_o2"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/officer/o3
 	name = "ranks (O-3 lieutenant)"
-	desc = "Insignia denoting the rank of Lieutenant."
+	desc = "Shoulderboards denoting the rank of Lieutenant."
 	icon_state = "fleetrank_o3"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/officer/o4
 	name = "ranks (O-4 lieutenant commander)"
-	desc = "Insignia denoting the rank of Lieutenant Commander."
+	desc = "Shoulderboards denoting the rank of Lieutenant Commander."
 	icon_state = "fleetrank_o4"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/officer/o5
 	name = "ranks (O-5 commander)"
-	desc = "Insignia denoting the rank of Commander."
+	desc = "Shoulderboards denoting the rank of Commander. "
 	icon_state = "fleetrank_o5"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/officer/o6
 	name = "ranks (O-6 captain)"
-	desc = "Insignia denoting the rank of Captain."
+	desc = "Shoulderboards denoting the rank of Captain."
 	icon_state = "fleetrank_o6"
+
+//flags are placeholdered and use o7 boards sprite, wip -xero
 
 /obj/item/clothing/accessory/solgov/rank/fleet/flag
 	name = "ranks (O-7 commodore)"
@@ -728,22 +854,125 @@ ranks - fleet
 /obj/item/clothing/accessory/solgov/rank/fleet/flag/o8
 	name = "ranks (O-8 rear admiral)"
 	desc = "Insignia denoting the rank of Rear Admiral."
-	icon_state = "fleetrank_o8"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/flag/o9
 	name = "ranks (O-9 vice admiral)"
 	desc = "Insignia denoting the rank of Vice Admiral."
-	icon_state = "fleetrank_o9"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/flag/o10
 	name = "ranks (O-10 admiral)"
 	desc = "Insignia denoting the rank of Admiral."
-	icon_state = "fleetrank_o10"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/flag/o10_alt
 	name = "ranks (O-10 fleet admiral)"
 	desc = "Insignia denoting the rank of Fleet Admiral."
-	icon_state = "fleetrank_o10"
+
+// usual and fancy ones are swapped for now
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy
+	name = "navy ranks"
+	desc = "A blank navy-blue patch. Perhaps a template for something."
+	icon_state = "e1_patch"
+	overlay_state = "fleetrank_enlisted"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/enlisted
+	name = "patch (E-1 crewman recruit)"
+	desc = "A blank patch denoting the rank of Crewman Recruit."
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/enlisted/e2
+	name = "device (E-2 crewman apprentice)"
+	desc = "Collar pin denoting the rank of Crewman Apprentice."
+	icon_state = "e2_device"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/enlisted/e3
+	name = "device (E-3 crewman apprentice)"
+	desc = "Collar pin denoting the rank of Crewman."
+	icon_state = "e3_device"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/enlisted/e4
+	name = "device (E-4 petty officer third class)"
+	desc = "Collar pin denoting the rank of Petty Officer Third Class."
+	icon_state = "e4_device"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/enlisted/e5
+	name = "device (E-5 petty officer second class)"
+	desc = "Collar pin denoting the rank of Petty Officer Second Class."
+	icon_state = "e5_device"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/enlisted/e6
+	name = "device (E-6 petty officer first class)"
+	desc = "Collar pin denoting the rank of Petty Officer First Class."
+	icon_state = "e6_device"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/enlisted/e7
+	name = "device (E-7 chief petty officer)"
+	desc = "Collar pin denoting the rank of Chief Petty Officer."
+	icon_state = "e7_device"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/enlisted/e8
+	name = "device (E-8 senior chief petty officer)"
+	desc = "Collar pin denoting the rank of Senior Chief Petty Officer."
+	icon_state = "e8_device"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/enlisted/e9
+	name = "device (E-9 master chief petty officer)"
+	desc = "Collar pin denoting the rank of Master Chief Petty Officer."
+	icon_state = "e9_device"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/enlisted/e9_alt1
+	name = "device (E-9 command master chief petty officer)"
+	desc = "Collar pin denoting the rank of Command Master Chief Petty Officer."
+	icon_state = "e9_device"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/enlisted/e9_alt2
+	name = "device (E-9 fleet master chief petty officer)"
+	desc = "Collar pin denoting the rank of Fleet Master Chief Petty Officer."
+	icon_state = "e9_device"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/enlisted/e9_alt3
+	name = "device (E-9 force master chief petty officer)"
+	desc = "Collar pin denoting the rank of Force Master Chief Petty Officer."
+	icon_state = "e9_device"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/enlisted/e9_alt4
+	name = "device (E-9 master chief petty officer of the fleet)"
+	desc = "Collar pin denoting the rank of Master Chief Petty Officer of the Fleet."
+	icon_state = "e9_device"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/officer
+	name = "device (O-1 ensign)"
+	desc = "Collar pin denoting the rank of Ensign or the equivalent."
+	icon_state = "o1_device"
+	overlay_state = "device_gold"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/officer/o2
+	name = "device (O-2 sub-lieutenant)"
+	desc = "Collar pin denoting the rank of Sub-Lieutenant."
+	icon_state = "o2_device"
+	overlay_state = "device_silver"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/officer/o3
+	name = "device (O-3 lieutenant)"
+	desc = "Collar pin denoting the rank of Lieutenant."
+	icon_state = "o3_device"
+	overlay_state = "device_silver"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/officer/o4
+	name = "device (O-4 lieutenant commander)"
+	desc = "Collar pin denoting the rank of Lieutenant Commander."
+	icon_state = "o4_device"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/officer/o5
+	name = "device (O-5 commander)"
+	desc = "Collar pin denoting the rank of Commander."
+	icon_state = "o5_device"
+	overlay_state = "device_silver"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/fancy/officer/o6
+	name = "device (O-6 captain)"
+	desc = "Collar pin denoting the rank of Captain."
+	icon_state = "o6_device"
+	overlay_state = "device_silver"
 
 /**************
 ranks - marines
@@ -755,17 +984,17 @@ ranks - marines
 	on_rolled = list("down" = "none")
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted
-	name = "ranks (E-1 private recruit)"
-	desc = "Insignia denoting the rank of Private Recruit."
+	name = "ranks (E-1 private)"
+	desc = "Insignia denoting the rank of Private."
 	icon_state = "armyrank_enlisted"
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e2
-	name = "ranks (E-2 private)"
-	desc = "Insignia denoting the rank of Private."
+	name = "ranks (E-2 private first class)"
+	desc = "Insignia denoting the rank of Private First Class."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e3
-	name = "ranks (E-3 private first class)"
-	desc = "Insignia denoting the rank of Private First Class."
+	name = "ranks (E-3 lance corporal)"
+	desc = "Insignia denoting the rank of Lance Corporal."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e4
 	name = "ranks (E-4 specialist)"
@@ -773,7 +1002,7 @@ ranks - marines
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e4_alt
 	name = "ranks (E-4 corporal)"
-	desc = "Insignia denoting the rank of Сorporal."
+	desc = "Insignia denoting the rank of Corporal."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e5
 	name = "ranks (E-5 sergeant)"
@@ -784,8 +1013,12 @@ ranks - marines
 	desc = "Insignia denoting the rank of Staff Sergeant."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e7
-	name = "ranks (E-7 sergeant first class)"
-	desc = "Insignia denoting the rank of Sergeant First Class."
+	name = "ranks (E-7 gunnery sergeant)"
+	desc = "Insignia denoting the rank of Gunnery Sergeant."
+
+/obj/item/clothing/accessory/solgov/rank/army/enlisted/e7_meme
+	name = "ranks (E-7 gaming sergeant)"
+	desc = "Insignia denoting 'honorable' rank of the Gaming Sergeant."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e8
 	name = "ranks (E-8 master sergeant)"
@@ -800,55 +1033,69 @@ ranks - marines
 	desc = "Insignia denoting the rank of Sergeant Major."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e9_alt1
-	name = "ranks (E-9 command sergeant major)"
-	desc = "Insignia denoting the rank of Command Sergeant Major."
+	name = "ranks (E-9 master gunnery sergeant)"
+	desc = "Insignia denoting the rank of Master Gunnery Sergeant."
+
+/obj/item/clothing/accessory/solgov/rank/army/enlisted/e9_meme
+	name = "ranks (E-9 master gaming sergeant)"
+	desc = "Insignia denoting the most 'honorable' rank of the Master 'Gaming' Sergeant."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e9_alt2
-	name = "ranks (E-9 sergeant major of the Army)"
-	desc = "Insignia denoting the rank of Sergeant Major of the Army."
+	name = "ranks (E-9 sergeant major of the corps)"
+	desc = "Insignia denoting the rank of Sergeant Major of the Corps."
 
 /obj/item/clothing/accessory/solgov/rank/army/officer
 	name = "ranks (O-1 second lieutenant)"
-	desc = "Insignia denoting the rank of Second Lieutenant."
-	icon_state = "armyrank_officer"
+	desc = "Collar pin denoting the rank of Second Lieutenant."
+	icon_state = "o1_device"
+	overlay_state = "device_gold"
 
 /obj/item/clothing/accessory/solgov/rank/army/officer/o2
 	name = "ranks (O-2 first lieutenant)"
-	desc = "Insignia denoting the rank of First Lieutenant."
+	desc = "Collar pin denoting the rank of First Lieutenant."
+	icon_state = "o2_device"
+	overlay_state = "device_silver"
 
 /obj/item/clothing/accessory/solgov/rank/army/officer/o3
-	name = "ranks (O-3 army captain)"
-	desc = "Insignia denoting the rank of Army Captain."
+	name = "ranks (O-3 marine captain)"
+	desc = "Collar pin denoting the rank of Marine Captain."
+	icon_state = "o3_device"
+	overlay_state = "device_silver"
 
 /obj/item/clothing/accessory/solgov/rank/army/officer/o4
 	name = "ranks (O-4 major)"
-	desc = "Insignia denoting the rank of Major."
+	desc = "Collar pin denoting the rank of Major."
+	icon_state = "o4_device"
 
 /obj/item/clothing/accessory/solgov/rank/army/officer/o5
 	name = "ranks (O-5 lieutenant colonel)"
-	desc = "Insignia denoting the rank of Lieutenant Colonel."
+	desc = "Collar pin denoting the rank of Lieutenant Colonel."
+	icon_state = "o5_device"
+	overlay_state = "device_silver"
 
 /obj/item/clothing/accessory/solgov/rank/army/officer/o6
 	name = "ranks (O-6 colonel)"
-	desc = "Insignia denoting the rank of Colonel."
+	desc = "Collar pin denoting the rank of Colonel."
+	icon_state = "o6_device"
+	overlay_state = "device_silver"
 
 /obj/item/clothing/accessory/solgov/rank/army/flag
 	name = "ranks (O-7 brigadier general)"
-	desc = "Insignia denoting the rank of Brigadier General."
+	desc = "Collar pin denoting the rank of Brigadier General."
 	icon_state = "armyrank_command"
 
 /obj/item/clothing/accessory/solgov/rank/army/flag/o8
 	name = "ranks (O-8 major general)"
-	desc = "Insignia denoting the rank of Major General."
+	desc = "Collar pin denoting the rank of Major General."
 
 /obj/item/clothing/accessory/solgov/rank/army/flag/o9
 	name = "ranks (O-9 lieutenant general)"
-	desc = "Insignia denoting the rank of Lieutenant general."
+	desc = "Collar pin denoting the rank of Lieutenant general."
 
 /obj/item/clothing/accessory/solgov/rank/army/flag/o10
 	name = "ranks (O-10 general)"
-	desc = "Insignia denoting the rank of General."
+	desc = "Collar pin denoting the rank of General."
 
 /obj/item/clothing/accessory/solgov/rank/army/flag/o10_alt
-	name = "ranks (O-10 general of the army)"
-	desc = "Insignia denoting the rank of General of the Army."
+	name = "ranks (O-10 general of the corps)"
+	desc = "Collar pin denoting the rank of General of the Corps."

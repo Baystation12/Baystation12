@@ -8,7 +8,10 @@
 	var/isCrayon = 0
 	var/origin = null
 	var/mob/sender = null
-	var/obj/machinery/photocopier/faxmachine/destination
+	/// List (`/obj/machinery/photocopier/faxmachine`). List of fax machines matching the paper's target department.
+	var/list/destinations = list()
+	/// String. The paper's target department.
+	var/department = null
 
 	var/header = null
 	var/headerOn = TRUE
@@ -73,7 +76,7 @@
 	generateFooter()
 	updateDisplay()
 
-obj/item/paper/admin/proc/updateDisplay()
+/obj/item/paper/admin/proc/updateDisplay()
 	show_browser(usr, "<html><head><meta charset='utf-8'/><title>[name]</title></head><body>[headerOn ? header : ""][info_links][stamps][footerOn ? footer : ""][interactions]</body></html>", "window=[name];can_close=0")
 
 
@@ -124,7 +127,7 @@ obj/item/paper/admin/proc/updateDisplay()
 					info += footer
 				updateinfolinks()
 				close_browser(usr, "window=[name]")
-				admindatum.faxCallback(src, destination)
+				admindatum.faxCallback(src)
 		return
 
 	if(href_list["penmode"])

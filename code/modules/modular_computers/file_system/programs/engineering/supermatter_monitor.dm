@@ -5,7 +5,7 @@
 /datum/computer_file/program/supermatter_monitor
 	filename = "supmon"
 	filedesc = "Supermatter Monitoring"
-	nanomodule_path = /datum/nano_module/supermatter_monitor/
+	nanomodule_path = /datum/nano_module/supermatter_monitor
 	program_icon_state = "smmon_0"
 	program_key_state = "tech_key"
 	program_menu_icon = "notice"
@@ -49,7 +49,7 @@
 	var/valid_z_levels = GetConnectedZlevels(get_host_z())
 	for(var/obj/machinery/power/supermatter/S in SSmachines.machinery)
 		// Delaminating, not within coverage, not on a tile.
-		if(S.grav_pulling || S.exploded || !(S.z in valid_z_levels) || !istype(S.loc, /turf/))
+		if(S.grav_pulling || S.exploded || !(S.z in valid_z_levels) || !isturf(S.loc))
 			continue
 		supermatters.Add(S)
 

@@ -10,7 +10,7 @@
 	path = /obj/item/ammo_casing/shotgun/blank
 
 /datum/fabricator_recipe/arms_ammo/flaregun
-	name = "flare gun"
+	name = "flare launcher"
 	path = /obj/item/gun/projectile/flare
 
 /datum/fabricator_recipe/arms_ammo/hidden
@@ -99,10 +99,6 @@
 /datum/fabricator_recipe/arms_ammo/hidden/shotgun_pellet
 	name = "ammunition (shell, shotgun)"
 	path = /obj/item/ammo_casing/shotgun/pellet
-
-/datum/fabricator_recipe/arms_ammo/hidden/shotgun_flechette
-	name = "ammunition (flechette, shotgun)"
-	path = /obj/item/ammo_casing/shotgun/flechette
 
 /datum/fabricator_recipe/arms_ammo/hidden/tacknife
 	path = /obj/item/material/knife/combat

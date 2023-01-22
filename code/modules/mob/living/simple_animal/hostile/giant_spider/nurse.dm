@@ -85,7 +85,7 @@
 	// Get our AI to stay still.
 	set_AI_busy(TRUE)
 
-	if(!do_after(src, 5 SECONDS, AM))
+	if(!do_after(src, 5 SECONDS, AM, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		set_AI_busy(FALSE)
 		return FALSE
 
@@ -132,7 +132,7 @@
 	// Get our AI to stay still.
 	set_AI_busy(TRUE)
 
-	if(!do_after(src, 5 SECONDS, T))
+	if(!do_after(src, 5 SECONDS, T, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		set_AI_busy(FALSE)
 		return FALSE
 
@@ -162,7 +162,7 @@
 	// Stop players from spamming eggs.
 	laying_eggs = TRUE
 
-	if(!do_after(src, 5 SECONDS, T))
+	if(!do_after(src, 5 SECONDS, T, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		set_AI_busy(FALSE)
 		return FALSE
 

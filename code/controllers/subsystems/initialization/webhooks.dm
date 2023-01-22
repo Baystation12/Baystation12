@@ -4,9 +4,14 @@ SUBSYSTEM_DEF(webhooks)
 	flags = SS_NO_FIRE
 	var/list/webhook_decls = list()
 
-/datum/controller/subsystem/webhooks/Initialize()
+
+/datum/controller/subsystem/webhooks/UpdateStat(time)
+	return
+
+
+/datum/controller/subsystem/webhooks/Initialize(start_uptime)
 	load_webhooks()
-	. = ..()
+
 
 /datum/controller/subsystem/webhooks/proc/load_webhooks()
 

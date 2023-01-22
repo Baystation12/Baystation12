@@ -5,22 +5,24 @@
 
 # byond version
 # Extracted from the Dockerfile. Change by editing Dockerfile's FROM command.
-LIST=($(sed -n 's/.*byond:\([0-9]\+\)\.\([0-9]\+\).*/\1 \2/p' Dockerfile))
-export BYOND_MAJOR=${LIST[0]}
-export BYOND_MINOR=${LIST[1]}
-unset LIST
+export BYOND_MAJOR=514
+export BYOND_MINOR=1557
 
 #rust_g git tag
-export RUST_G_VERSION=0.4.3
+export RUST_G_VERSION=1.2.0
 
-#bsql git tag
-export BSQL_VERSION=v1.4.0.0
+#bsql git tag (Not sure that needed ~Laxesh)
+#export BSQL_VERSION=v1.4.0.0 Not Used
 
-#node version
-export NODE_VERSION=12
+#node version (Not sure that needed ~Laxesh)
+#export NODE_VERSION=14
+#export NODE_VERSION_PRECISE=14.16.1
 
-# PHP version
-export PHP_VERSION=5.6
+# PHP version (Not sure that needed ~Laxesh)
+#export PHP_VERSION=5.6
 
 # SpacemanDMM git tag
 export SPACEMAN_DMM_VERSION=suite-1.4
+
+# Python version for mapmerge and other tools
+#export PYTHON_VERSION=3.7.9

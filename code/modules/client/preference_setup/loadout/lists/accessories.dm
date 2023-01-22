@@ -37,6 +37,24 @@
 	ties["striped tie"] = /obj/item/clothing/accessory/long
 	gear_tweaks += new/datum/gear_tweak/path(ties)
 
+//proxima code start
+/datum/gear/accessory/ec_sweater
+	display_name = "expeditionary fleece jacket"
+	path = /obj/item/clothing/accessory/ec_sweater
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+
+/datum/gear/accessory/ec_sweater/officer
+	display_name = "expeditionary officer's fleece jacket"
+	path = /obj/item/clothing/accessory/ec_sweater/officer
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer)
+
+/datum/gear/accessory/ec_sweater/fleet
+	display_name = "fleet sweater"
+	path = /obj/item/clothing/accessory/ec_sweater/fleet
+	allowed_branches = list(/datum/mil_branch/fleet)
+
+//proxima code end
 
 /datum/gear/accessory/locket
 	display_name = "locket"
@@ -65,6 +83,8 @@
 	description = "A medal or ribbon awarded to corporate personnel for significant accomplishments."
 	path = /obj/item/clothing/accessory/medal
 	cost = 8
+	flags = GEAR_HAS_NO_CUSTOMIZATION
+
 
 
 /datum/gear/accessory/ntaward/New()
@@ -79,33 +99,51 @@
 /datum/gear/accessory/armband_security
 	display_name = "security armband"
 	path = /obj/item/clothing/accessory/armband
+	flags = GEAR_HAS_NO_CUSTOMIZATION
+
 
 
 /datum/gear/accessory/armband_cargo
 	display_name = "cargo armband"
 	path = /obj/item/clothing/accessory/armband/cargo
+	flags = GEAR_HAS_NO_CUSTOMIZATION
+
 
 
 /datum/gear/accessory/armband_medical
 	display_name = "medical armband"
 	path = /obj/item/clothing/accessory/armband/med
+	flags = GEAR_HAS_NO_CUSTOMIZATION
+
 
 
 /datum/gear/accessory/armband_emt
 	display_name = "EMT armband"
 	path = /obj/item/clothing/accessory/armband/medgreen
-	allowed_roles = list(/datum/job/doctor)
+	allowed_roles = list(
+		/datum/job/doctor
+	)
+	flags = GEAR_HAS_NO_CUSTOMIZATION
+
 
 
 /datum/gear/accessory/armband_engineering
 	display_name = "engineering armband"
 	path = /obj/item/clothing/accessory/armband/engine
+	flags = GEAR_HAS_NO_CUSTOMIZATION
+
 
 
 /datum/gear/accessory/armband_hydro
 	display_name = "hydroponics armband"
 	path = /obj/item/clothing/accessory/armband/hydro
-	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/assistant)
+	allowed_roles = list(
+		/datum/job/rd,
+		/datum/job/scientist,
+		/datum/job/assistant
+	)
+	flags = GEAR_HAS_NO_CUSTOMIZATION
+
 
 
 /datum/gear/accessory/armband_nt
@@ -116,12 +154,16 @@
 /datum/gear/accessory/ftu_pin
 	display_name = "Free Trade Union pin"
 	path = /obj/item/clothing/accessory/ftu_pin
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/accessory/chaplain
 	display_name = "chaplain insignia"
 	path = /obj/item/clothing/accessory/chaplain
-	allowed_roles = list(/datum/job/chaplain)
+	allowed_roles = list(
+		/datum/job/chaplain
+	)
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/accessory/chaplain/New()

@@ -50,7 +50,7 @@
 
 /obj/item/clothing/suit/bio_suit/Initialize()
 	. = ..()
-	slowdown_per_slot[slot_wear_suit] = 1
+	slowdown_per_slot[slot_wear_suit] = 0.75
 
 //Standard biosuit, orange stripe
 /obj/item/clothing/head/bio_hood/general

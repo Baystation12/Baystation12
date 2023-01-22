@@ -7,11 +7,17 @@ Left Click        - Set Turf Area
 Left Click + Ctrl - Copy Turf Area
 Middle Click      - Copy Turf Area
 Right Click       - List/Create Area
+
+Create an area in a rectangle defined by two points:
+Shift + Left Click - Select point A
+Shift + Right Click - Select point B
 ************************************\
 "}
 
 	var/area/selected_area
 	var/color_pool/colors
+	var/turf/coordinate_A
+	var/turf/coordinate_B
 
 /datum/build_mode/areas/Destroy()
 	UnselectArea()
@@ -38,7 +44,7 @@ Right Click       - List/Create Area
 	M.color = colors.get(T.loc)
 
 /datum/build_mode/areas/OnClick(var/atom/A, var/list/parameters)
-	if (parameters["right"])
+	if (parameters["right"] && !parameters["shift"])
 		Configurate()
 		return
 	var/turf/T = get_turf(A)
@@ -49,6 +55,25 @@ Right Click       - List/Create Area
 		selected_area = R
 		to_chat(user, "Picked area [selected_area.name]")
 	else if (selected_area)
+
+		if (parameters["left"] && parameters["shift"])
+			coordinate_A = get_turf(A)
+			to_chat(user, SPAN_NOTICE("Defined [coordinate_A] ([coordinate_A.type]) as point A."))
+
+		if (parameters["right"] && parameters["shift"])
+			coordinate_B = get_turf(A)
+			to_chat(user, SPAN_NOTICE("Defined [coordinate_B] ([coordinate_B.type]) as point B."))
+
+		if (coordinate_A && coordinate_B)
+			to_chat(user, SPAN_NOTICE("Area coordinates set. Defining area."))
+			Log("Created an area with name [selected_area] from [log_info_line(coordinate_A)] to [log_info_line(coordinate_B)]")
+			var/list/coords = make_rectangle(coordinate_A, coordinate_B)
+			make_area(coords[1], coords[2], coords[3], coords[4], coords[5], selected_area)
+			coordinate_A = null
+			coordinate_B = null
+
+
+
 		ChangeArea(T, selected_area)
 		to_chat(user, "Set area of turf [T.name] to [selected_area.name]")
 	else
@@ -97,3 +122,9 @@ Right Click       - List/Create Area
 	if(!has_turf)
 		qdel(selected_area)
 	selected_area = null
+
+/datum/build_mode/areas/proc/make_area(low_bound_x, low_bound_y, high_bound_x, high_bound_y, z_level)
+	for(var/i = low_bound_x, i <= high_bound_x, i++)
+		for(var/j = low_bound_y, j <= high_bound_y, j++)
+			var/turf/T = locate(i, j, z_level)
+			ChangeArea(T, selected_area)
