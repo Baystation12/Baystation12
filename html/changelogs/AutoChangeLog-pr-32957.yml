@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Food and other items that use the attack proc that was documented as being
+      for ATTACKING instead of interactions are now fixed. I should stop assuming
+      people actually follow what the comments say for these things.
