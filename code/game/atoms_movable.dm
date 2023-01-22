@@ -197,6 +197,23 @@
 	master = null
 	. = ..()
 
+/atom/movable/overlay/use_grab(obj/item/grab/grab, list/click_params)
+	if (master)
+		return master.use_grab(grab, click_params)
+	return FALSE
+
+/atom/movable/overlay/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+	if (master)
+		return master.use_weapon(weapon, user, click_params)
+	return FALSE
+
+/atom/movable/overlay/use_tool(obj/item/tool, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+	if (master)
+		return master.use_tool(tool, user, click_params)
+	return FALSE
+
 /atom/movable/overlay/attackby(obj/item/I, mob/user)
 	if (master)
 		return master.attackby(I, user)
