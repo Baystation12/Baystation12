@@ -1,9 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Grilles on wires will now shock users that hit them.
-  - bugfix: Inflatables will no longer take damage from melee weapons that can't puncture
-      or with a weak damage value.
-  - bugfix: Table deconstruction steps can now be performed on disarm or grab intent.
-      Harm intent will still attack the table, and help intent will still place items
-      on the table.
