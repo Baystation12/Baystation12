@@ -172,7 +172,7 @@
 			var/list/parsed_tree
 			parsed_tree = parser.parse()
 			if(parsed_tree.len > 0)
-				querys.len = querys_pos
+				LIST_RESIZE(querys, querys_pos)
 				querys[querys_pos] = parsed_tree
 				querys_pos++
 			else //There was an error so don't run anything, and tell the user which query has errored.

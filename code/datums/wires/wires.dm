@@ -70,7 +70,7 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 	//Generate our indexes
 	for(var/i = 1; i < MAX_FLAG && i < SHIFTL(1, wire_count); i += i)
 		indexes_to_pick += i
-	colours_to_pick.len = wire_count // Downsize it to our specifications.
+	LIST_RESIZE(colours_to_pick, wire_count) // Downsize it to our specifications.
 
 	while(colours_to_pick.len && indexes_to_pick.len)
 		// Pick and remove a colour

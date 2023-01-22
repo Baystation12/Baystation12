@@ -10,7 +10,7 @@ var/global/list/z_levels = list()// Each bit re... haha just kidding this is a l
 		height = _height
 	for(var/i = (loc.z - height + 1) to (loc.z-1))
 		if (z_levels.len <i)
-			z_levels.len = i
+			LIST_RESIZE(z_levels, i)
 		z_levels[i] = TRUE
 
 /obj/effect/landmark/map_data/Initialize()

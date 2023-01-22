@@ -52,13 +52,13 @@
 				my_mob.client.screen -= O
 //			O.handle_icon_updates = 0
 		showing = 0
-		overlays.len = 0
+		overlays.Cut()
 		overlays.Add(closed_state)
 	else if(forced_state != 1) // We're opening it, show the icons.
 		open_ability_master()
 		update_abilities(1)
 		showing = 1
-		overlays.len = 0
+		overlays.Cut()
 		overlays.Add(open_state)
 	update_icon()
 

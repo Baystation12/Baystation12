@@ -224,7 +224,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 					continue
 				absorbDNA(dna_data)
 				changeling.absorbedcount++
-			T.mind.changeling.absorbed_dna.len = 1
+			T.mind.changeling.absorbed_dna.Cut(2)
 
 		if(T.mind.changeling.purchasedpowers)
 			for(var/datum/power/changeling/Tp in T.mind.changeling.purchasedpowers)

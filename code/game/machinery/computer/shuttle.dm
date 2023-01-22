@@ -62,7 +62,7 @@
 
 			if("Abort")
 				to_world(SPAN_NOTICE("<b>All authorizations to shortening time for shuttle launch have been revoked!</b>"))
-				src.authorized.len = 0
+				src.authorized.Cut()
 				src.authorized = list(  )
 
 	else if (istype(W, /obj/item/card/emag) && !emagged)

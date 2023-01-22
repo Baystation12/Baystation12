@@ -132,8 +132,7 @@ var/global/list/delta_index = list(
 //Given 2 matrices mxn and nxp (row major) it multiplies their members and return an mxp matrix
 //Do make sure your lists actually have this many elements
 /proc/multiply_matrices(list/A, list/B, m, n, p)
-	var/list/result = list()
-	result.len = m * p
+	var/list/result = new (m * p)
 
 	if(A.len == m*n && B.len == n*p)
 		for(var/row = 1; row <= m; row += 1) //For each row on left matrix

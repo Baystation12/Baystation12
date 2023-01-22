@@ -179,4 +179,4 @@ var/global/list/ventcrawl_machinery = list(
 			client.images -= current_image
 		client.eye = src
 
-	pipes_shown.len = 0
+	pipes_shown.Cut()

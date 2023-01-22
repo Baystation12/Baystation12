@@ -155,10 +155,10 @@
 		return
 	if(!lit || operating)	return
 
-	var/length = LAZYLEN(turflist)
-	if(length < 1)
+	var/size = length(turflist)
+	if (!size)
 		return
-	turflist.len = min(length, range)
+	LIST_RESIZE(turflist, min(size, range))
 
 	var/power = 0
 	var/datum/reagents/beaker_reagents = beaker.reagents
