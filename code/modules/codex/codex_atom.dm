@@ -53,6 +53,11 @@
 /atom/var/const/CODEX_INTERACTION_USE_SELF = "Use On Self"
 /atom/var/const/CODEX_INTERACTION_HAND = "Empty Hand"
 
+// Common Tools/Items
+/atom/var/const/CODEX_INTERACTION_ID_CARD = "ID Card (And Scannable ID Holders)"
+/atom/var/const/CODEX_INTERACTION_SCREWDRIVER = "Screwdriver"
+/atom/var/const/CODEX_INTERACTION_WELDER = "Welding Tool"
+
 // Grabs
 /atom/var/const/CODEX_INTERACTION_GRAB = "Grabbed Mob"
 /atom/var/const/CODEX_INTERACTION_GRAB_PASSIVE = "Grabbed Mob (Passive - Yellow)"
