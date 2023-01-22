@@ -12,6 +12,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	size = 2
 	var/icon/photo_front = null
 	var/icon/photo_side = null
+	var/static/icon/mugshot = icon('icons/obj/mugshot.dmi', "background")
 	//More variables below.
 
 /datum/computer_file/report/crew_record/New()
@@ -25,7 +26,9 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 /datum/computer_file/report/crew_record/proc/load_from_mob(mob/living/carbon/human/H)
 	if(istype(H))
 		photo_front = getFlatIcon(H, SOUTH, always_use_defdir = 1)
+		photo_front.Blend(mugshot,ICON_UNDERLAY,1,1)
 		photo_side = getFlatIcon(H, WEST, always_use_defdir = 1)
+		photo_side.Blend(mugshot,ICON_UNDERLAY,1,1)
 	else
 		var/mob/living/carbon/human/dummy = new()
 		photo_front = getFlatIcon(dummy, SOUTH, always_use_defdir = 1)
