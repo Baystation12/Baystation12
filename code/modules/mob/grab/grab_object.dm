@@ -79,13 +79,13 @@
 /obj/item/grab/resolve_attackby(atom/A, mob/user, click_params)
 	if (QDELETED(src) || !assailant)
 		return TRUE
-	assailant.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(!A.grab_attack(src))
-		return ..()
-	action_used()
-	if (current_grab.downgrade_on_action)
-		downgrade()
-	return TRUE
+	if (A.use_grab(src, user, click_params))
+		assailant.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		action_used()
+		if (current_grab.downgrade_on_action)
+			downgrade()
+		return TRUE
+	return ..()
 
 /obj/item/grab/dropped()
 	..()

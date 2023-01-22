@@ -52,8 +52,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return TRUE
 	if (A == user)
 		. = user.use_user(src, click_params)
-	if (!. && istype(src, /obj/item/grab))
-		. = A.use_grab(src, click_params)
 	if (!. && user.a_intent == I_HURT)
 		. = A.use_weapon(src, user, click_params)
 	if (!.)
