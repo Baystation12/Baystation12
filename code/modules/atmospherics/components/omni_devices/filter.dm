@@ -172,7 +172,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 			if(ATM_GAS_MIN to ATM_GAS_MAX)
 				f_type = mode_send_switch(P.mode)
 
-		portData[++portData.len] = list("dir" = dir_name(P.dir, capitalize = 1), \
+		portData[LIST_PRE_INC(portData)] = list("dir" = dir_name(P.dir, capitalize = 1), \
 										"input" = input, \
 										"output" = output, \
 										"filter" = is_filter, \

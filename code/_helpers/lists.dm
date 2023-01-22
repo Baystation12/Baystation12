@@ -247,7 +247,7 @@ Checks if a list has the same entries and values as an element of big.
 	var/last_index = length(list)
 	if (last_index)
 		. = list[last_index]
-		--list.len
+		LIST_DEC(list)
 
 
 //Returns the next element in parameter list after first appearance of parameter element. If it is the last element of the list or not present in list, returns first element.

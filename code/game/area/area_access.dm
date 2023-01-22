@@ -49,4 +49,4 @@
 /proc/add_access_requirement(list/req_access, requirement)
 	var/minimal = get_minimal_requirement(req_access, requirement)
 	if(minimal)
-		req_access[++req_access.len] = minimal
+		req_access[LIST_PRE_INC(req_access)] = minimal

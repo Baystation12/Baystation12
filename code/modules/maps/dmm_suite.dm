@@ -347,14 +347,14 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 				fields = readlist(full_def, ";")
 				if(fields.len)
 					if(!trim(fields[fields.len]))
-						--fields.len
+						LIST_DEC(fields)
 					for(var/I in fields)
 						var/value = fields[I]
 						if(istext(value))
 							fields[I] = apply_text_macros(value)
 
 			//then fill the members_attributes list with the corresponding variables
-			members_attributes.len++
+			LIST_INC(members_attributes)
 			members_attributes[index++] = fields
 
 			CHECK_TICK
@@ -541,7 +541,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 		if(!length(trim_left))
 			if(position == 0)
 				break // That terminal commas are ignored is real dm behavior.
-			to_return.len++
+			LIST_INC(to_return)
 			continue
 
 		var/left = readlistitem(trim_left)

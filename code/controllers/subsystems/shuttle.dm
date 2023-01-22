@@ -39,7 +39,7 @@ SUBSYSTEM_DEF(shuttle)
 
 	while (working_shuttles.len)
 		var/datum/shuttle/shuttle = working_shuttles[working_shuttles.len]
-		working_shuttles.len--
+		LIST_DEC(working_shuttles)
 		if(shuttle.process_state && (shuttle.Process(wait, times_fired, src) == PROCESS_KILL))
 			process_shuttles -= shuttle
 

@@ -167,7 +167,7 @@
 			flashdata["status"] = 0
 		else
 			flashdata["status"] = 1
-		flashes[++flashes.len] = flashdata
+		flashes[LIST_PRE_INC(flashes)] = flashdata
 
 	data["flashes"] = flashes
 

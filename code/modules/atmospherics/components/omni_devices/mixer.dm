@@ -164,7 +164,7 @@
 			if(ATM_OUTPUT)
 				output = 1
 
-		portData[++portData.len] = list("dir" = dir_name(P.dir, capitalize = 1), \
+		portData[LIST_PRE_INC(portData)] = list("dir" = dir_name(P.dir, capitalize = 1), \
 										"concentration" = P.concentration, \
 										"input" = input, \
 										"output" = output, \

@@ -59,7 +59,7 @@ var/global/datum/repository/crew/crew_repository = new()
 
 				var/list/crewmemberData = list("sensor_type"=C.sensor_mode, "stat"=H.stat, "area"="", "x"=-1, "y"=-1, "z"=-1, "ref"="\ref[H]")
 				if(!(run_queues(H, C, pos, crewmemberData) & MOD_SUIT_SENSORS_REJECTED))
-					crewmembers[++crewmembers.len] = crewmemberData
+					crewmembers[LIST_PRE_INC(crewmembers)] = crewmemberData
 					if (crewmemberData["alert"])
 						cache_data_alert[num2text(z_level)] = TRUE
 

@@ -63,7 +63,7 @@
 	return 0
 
 /datum/unit_test/observation/proc/receive_move(atom/movable/am, old_loc, new_loc)
-	received_moves[++received_moves.len] =  list(am, old_loc, new_loc)
+	received_moves[LIST_PRE_INC(received_moves)] =  list(am, old_loc, new_loc)
 
 /datum/unit_test/observation/proc/dump_received_moves()
 	for(var/entry in received_moves)

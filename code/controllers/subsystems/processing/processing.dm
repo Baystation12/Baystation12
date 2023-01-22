@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(processing)
 
 	while(current_run.len)
 		var/datum/thing = current_run[current_run.len]
-		current_run.len--
+		LIST_DEC(current_run)
 		if(QDELETED(thing) || (call(thing, process_proc)(wait, times_fired, src) == PROCESS_KILL))
 			if(thing)
 				thing.is_processing = null

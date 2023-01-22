@@ -83,7 +83,7 @@ SUBSYSTEM_DEF(unit_tests)
 	var/list/curr = queue
 	while (curr.len)
 		var/datum/unit_test/test = curr[curr.len]
-		curr.len--
+		LIST_DEC(curr)
 		if(do_unit_test(test, end_unit_tests) && test.async)
 			async_tests += test
 		total_unit_tests++
@@ -103,7 +103,7 @@ SUBSYSTEM_DEF(unit_tests)
 			var/datum/controller/subsystem/subsystem = S
 			if(subsystem.times_fired < 1)
 				return
-		async.len--
+		LIST_DEC(async)
 		if(check_unit_test(test, end_unit_tests))
 			async_tests -= test
 		if (MC_TICK_CHECK)

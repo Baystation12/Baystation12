@@ -57,7 +57,7 @@ SUBSYSTEM_DEF(event)
 
 	while (processing_events.len)
 		var/datum/event/E = processing_events[processing_events.len]
-		processing_events.len--
+		LIST_DEC(processing_events)
 
 		E.process()
 

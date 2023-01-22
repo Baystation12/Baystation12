@@ -125,7 +125,7 @@
 	var beakerD[0]
 	if(container && container.reagents && container.reagents.reagent_list.len)
 		for(var/datum/reagent/R in container.reagents.reagent_list)
-			beakerD[++beakerD.len] = list("name" = R.name, "volume" = R.volume)
+			beakerD[LIST_PRE_INC(beakerD)] = list("name" = R.name, "volume" = R.volume)
 	data["beakerContents"] = beakerD
 
 	if(container)
@@ -138,7 +138,7 @@
 	var chemicals[0]
 	for(var/label in cartridges)
 		var/obj/item/reagent_containers/chem_disp_cartridge/C = cartridges[label]
-		chemicals[++chemicals.len] = list("label" = label, "amount" = C.reagents.total_volume)
+		chemicals[LIST_PRE_INC(chemicals)] = list("label" = label, "amount" = C.reagents.total_volume)
 	data["chemicals"] = chemicals
 
 	// update the ui if it exists, returns null if no ui is passed/found

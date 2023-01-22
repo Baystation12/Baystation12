@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(circuit_components)
 	while(length(queued_components))
 		var/list/entry = queued_components[queued_components.len]
 		position = queued_components.len
-		queued_components.len--
+		LIST_DEC(queued_components)
 		if(!length(entry))
 			if(MC_TICK_CHECK)
 				break

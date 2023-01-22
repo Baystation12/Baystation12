@@ -67,7 +67,7 @@
 /obj/item/gun/launcher/grenade/proc/unload(mob/user)
 	if(grenades.len)
 		var/obj/item/grenade/G = grenades[grenades.len]
-		grenades.len--
+		LIST_DEC(grenades)
 		user.put_in_hands(G)
 		user.visible_message("\The [user] removes \a [G] from [src].", SPAN_NOTICE("You remove \a [G] from \the [src]."))
 	else

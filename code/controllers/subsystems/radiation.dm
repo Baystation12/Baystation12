@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(radiation)
 
 	while(current_sources.len)
 		var/datum/radiation_source/S = current_sources[current_sources.len]
-		current_sources.len--
+		LIST_DEC(current_sources)
 
 		if(QDELETED(S))
 			sources -= S
@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(radiation)
 
 	while(current_res_cache.len)
 		var/turf/T = current_res_cache[current_res_cache.len]
-		current_res_cache.len--
+		LIST_DEC(current_res_cache)
 
 		if(QDELETED(T))
 			resistance_cache -= T
@@ -45,7 +45,7 @@ SUBSYSTEM_DEF(radiation)
 
 	while(listeners.len)
 		var/atom/A = listeners[listeners.len]
-		listeners.len--
+		LIST_DEC(listeners)
 
 		if(!QDELETED(A))
 			var/atom/location = A.loc

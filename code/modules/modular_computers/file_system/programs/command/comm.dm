@@ -78,7 +78,7 @@
 		var/list/security_setup = list()
 		security_setup["title"] = security_level.name
 		security_setup["ref"] = any2ref(security_level)
-		security_levels[++security_levels.len] = security_setup
+		security_levels[LIST_PRE_INC(security_levels)] = security_setup
 	data["security_levels"] = security_levels
 
 	var/datum/comm_message_listener/l = obtain_message_listener()
@@ -98,7 +98,7 @@
 			option["option_target"] = EO.option_target
 			option["needs_syscontrol"] = EO.needs_syscontrol
 			option["silicon_allowed"] = EO.silicon_allowed
-			processed_evac_options[++processed_evac_options.len] = option
+			processed_evac_options[LIST_PRE_INC(processed_evac_options)] = option
 	data["evac_options"] = processed_evac_options
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -293,7 +293,7 @@ var/global/last_message_id = 0
 	comm_message_listeners.Add(src)
 
 /datum/comm_message_listener/proc/Add(list/message)
-	messages[++messages.len] = message
+	messages[LIST_PRE_INC(messages)] = message
 
 /datum/comm_message_listener/proc/Remove(list/message)
 	messages -= list(message)

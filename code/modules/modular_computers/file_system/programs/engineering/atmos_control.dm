@@ -61,11 +61,11 @@
 			continue
 		var/danger_level = max(alarm.danger_level, alarm.alarm_area.atmosalm)
 		if(danger_level == 2)
-			alarmsAlert[++alarmsAlert.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)
+			alarmsAlert[LIST_PRE_INC(alarmsAlert)] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)
 		else if(danger_level == 1)
-			alarmsDanger[++alarmsDanger.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)
+			alarmsDanger[LIST_PRE_INC(alarmsDanger)] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)
 		else
-			alarms[++alarms.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)
+			alarms[LIST_PRE_INC(alarms)] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)
 
 	data["alarms"] = sortByKey(alarms, "name")
 	data["alarmsAlert"] = sortByKey(alarmsAlert, "name")

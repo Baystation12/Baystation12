@@ -156,7 +156,7 @@
 	if (istype(A, /turf/simulated/floor))
 		var/turf/simulated/floor/F = A
 		if (F.decals && F.decals.len > 0)
-			F.decals.len--
+			LIST_DEC(F.decals)
 			F.update_icon()
 			. = TRUE
 	else if (istype(A, /obj/machinery/door/airlock))

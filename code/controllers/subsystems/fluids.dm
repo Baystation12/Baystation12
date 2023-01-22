@@ -45,7 +45,7 @@ SUBSYSTEM_DEF(fluids)
 	var/list/curr_sources = processing_sources
 	while (curr_sources.len)
 		var/turf/T = curr_sources[curr_sources.len]
-		curr_sources.len--
+		LIST_DEC(curr_sources)
 
 		FLOOD_TURF_NEIGHBORS(T, dry_run)
 

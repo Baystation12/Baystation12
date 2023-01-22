@@ -99,7 +99,7 @@ SUBSYSTEM_DEF(air)
 
 	while (zones.len)
 		var/zone/zone = zones[zones.len]
-		zones.len--
+		LIST_DEC(zones)
 
 		zone.c_invalidate()
 
@@ -166,7 +166,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 
 	while (curr_tiles.len)
 		var/turf/T = curr_tiles[curr_tiles.len]
-		curr_tiles.len--
+		LIST_DEC(curr_tiles)
 
 		if (!T)
 			if (no_mc_tick)
@@ -202,7 +202,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 
 	while (curr_defer.len)
 		var/turf/T = curr_defer[curr_defer.len]
-		curr_defer.len--
+		LIST_DEC(curr_defer)
 
 		T.update_air_properties()
 		T.post_update_air_properties()
@@ -219,7 +219,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 
 	while (curr_edges.len)
 		var/connection_edge/edge = curr_edges[curr_edges.len]
-		curr_edges.len--
+		LIST_DEC(curr_edges)
 
 		if (!edge)
 			if (no_mc_tick)
@@ -237,7 +237,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 
 	while (curr_fire.len)
 		var/zone/Z = curr_fire[curr_fire.len]
-		curr_fire.len--
+		LIST_DEC(curr_fire)
 
 		Z.process_fire()
 
@@ -248,7 +248,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 
 	while (curr_hotspot.len)
 		var/obj/hotspot/F = curr_hotspot[curr_hotspot.len]
-		curr_hotspot.len--
+		LIST_DEC(curr_hotspot)
 
 		F.Process()
 
@@ -259,7 +259,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 
 	while (curr_zones.len)
 		var/zone/Z = curr_zones[curr_zones.len]
-		curr_zones.len--
+		LIST_DEC(curr_zones)
 
 		Z.tick()
 		Z.needs_update = FALSE

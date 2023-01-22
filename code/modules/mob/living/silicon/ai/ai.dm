@@ -255,7 +255,7 @@ var/global/list/ai_verbs_default = list(
 		if(Entry.len < 2)
 			continue
 		if(Entry.len == 2) // This is to handle legacy entries
-			Entry[++Entry.len] = Entry[1]
+			Entry[LIST_PRE_INC(Entry)] = Entry[1]
 
 		if(Entry[1] == src.ckey && Entry[2] == src.real_name)
 			var/alive_icon_state = "[Entry[3]]-ai"

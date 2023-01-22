@@ -267,3 +267,15 @@
 
 
 #define num2hex(num) num2text(num, 1, 16)
+
+/// Increase the size of L by 1 at the end. Is the old last entry index.
+#define LIST_INC(L) (L.len++)
+
+/// Increase the size of L by 1 at the end. Is the new last entry index.
+#define LIST_PRE_INC(L) (++L.len)
+
+/// Decrease the size of L by 1 from the end. Is the old last entry index.
+#define LIST_DEC(L) (L.len--)
+
+/// Decrease the size of L by 1 from the end. Is the new last entry index.
+#define LIST_PRE_DEC(L) (--L.len)

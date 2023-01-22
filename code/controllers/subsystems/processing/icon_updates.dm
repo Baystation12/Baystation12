@@ -21,7 +21,7 @@ PROCESSING_SUBSYSTEM_DEF(icon_update)
 	while (curr.len)
 		var/atom/A = curr[curr.len]
 		var/list/argv = curr[A]
-		curr.len--
+		LIST_DEC(curr)
 
 		if (islist(argv))
 			A.update_icon(arglist(argv))

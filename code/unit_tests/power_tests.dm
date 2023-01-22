@@ -29,7 +29,7 @@
 		var/list/searched = list()
 		while(to_search.len)
 			var/obj/structure/cable/next = to_search[to_search.len]
-			to_search.len--
+			LIST_DEC(to_search)
 			searched += next
 			for(var/obj/structure/cable/other in get_connected_neighbours(next))
 				if(other in searched)
