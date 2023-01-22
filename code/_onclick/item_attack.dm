@@ -119,7 +119,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /atom/proc/use_weapon(obj/item/weapon, mob/user, list/click_params = list())
 	SHOULD_CALL_PARENT(TRUE)
 	// Standardized damage
-	if (user.a_intent == I_HURT && weapon.force > 0 && get_max_health() && !HAS_FLAGS(weapon.item_flags, ITEM_FLAG_NO_BLUDGEON))
+	if (weapon.force > 0 && get_max_health() && !HAS_FLAGS(weapon.item_flags, ITEM_FLAG_NO_BLUDGEON))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		var/damage_flags = weapon.damage_flags()
