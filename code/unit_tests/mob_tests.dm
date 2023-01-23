@@ -495,7 +495,7 @@ var/global/default_mobloc = null
 	if(!length(valid_states))
 		return 1
 
-	for(var/i=1, i<=length(SSrobots.all_module_names), i++)
+	for(var/i = 1 to length(SSrobots.all_module_names))
 		var/modname = lowertext(SSrobots.all_module_names[i])
 		var/bad_msg = "[ascii_red]--------------- [modname]"
 		if(!(modname in valid_states))

@@ -173,7 +173,8 @@
 	c.offset_y = copy.offset_y
 	var/list/temp_overlays = copy.overlays       //Iterates through stamps
 	var/image/img                                //and puts a matching
-	for (var/j = 1, j <= min(length(temp_overlays), length(copy.ico)), j++) //gray overlay onto the copy
+
+	for (var/j = 1 to min(length(temp_overlays), length(copy.ico))) //gray overlay onto the copy
 		if (findtext(copy.ico[j], "cap") || findtext(copy.ico[j], "cent"))
 			img = image('icons/obj/bureaucracy.dmi', "paper_stamp-circle")
 		else if (findtext(copy.ico[j], "deny"))

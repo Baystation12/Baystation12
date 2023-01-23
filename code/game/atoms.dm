@@ -609,7 +609,7 @@
 	var/cur_x = null
 	var/cur_y = null
 	var/list/y_arr = null
-	for(cur_x=1,cur_x<=length(GLOB.global_map),cur_x++)
+	for(cur_x = 1 to length(GLOB.global_map))
 		y_arr = GLOB.global_map[cur_x]
 		cur_y = y_arr.Find(src.z)
 		if(cur_y)
