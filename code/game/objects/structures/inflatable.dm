@@ -3,6 +3,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	icon = 'icons/obj/inflatable.dmi'
 	health_max = 10
+	health_min_damage = 10
 	var/deploy_path = null
 	drop_sound = 'sound/items/drop/cloth.ogg'
 	pickup_sound = 'sound/items/pickup/cloth.ogg'
@@ -144,13 +145,17 @@
 	add_fingerprint(user)
 	return
 
+
+/obj/structure/inflatable/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Check if the weapon can puncture. TODO: Pass this through to `can_damage_health()`.
+	if (!weapon.can_puncture())
+		return FALSE
+
+	return ..()
+
+
 /obj/structure/inflatable/attackby(obj/item/W, mob/user)
 	if(!istype(W) || istype(W, /obj/item/inflatable_dispenser)) return
-
-	if (user.a_intent == I_HURT)
-		if (W.can_puncture() || W.force > 10)
-			..()
-		return
 
 	if(istype(W, /obj/item/tape_roll) && get_damage_value() >= 3)
 		if(taped)
