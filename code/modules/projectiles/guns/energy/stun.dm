@@ -8,8 +8,8 @@
 	projectile_type = /obj/item/projectile/beam/stun
 	combustion = 0
 	battery_changable = TRUE
-	battery_chamber_size = 2
-	battery_type = /obj/item/cell/guncell/small
+	battery_chamber_size = BATTERY_PISTOL
+	battery_type = /obj/item/cell/guncell/pistol/small
 
 	init_firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
@@ -31,7 +31,7 @@
 	projectile_type = /obj/item/projectile/beam/stun/heavy
 	wielded_item_state = "tasercarbine-wielded"
 	battery_changable = TRUE
-	battery_chamber_size = 2
+	battery_chamber_size = BATTERY_RIFLE
 	battery_type = /obj/item/cell/guncell/medium
 
 	init_firemodes = list(
@@ -62,8 +62,8 @@
 	max_shots = 6
 	combustion = 0
 	battery_changable = TRUE
-	battery_type = /obj/item/cell/guncell/verysmall
-	battery_chamber_size = 1
+	battery_type = /obj/item/cell/guncell/pistol/verysmall
+	battery_chamber_size = BATTERY_PISTOL
 
 /obj/item/gun/energy/stunrevolver/rifle
 	name = "stun rifle"
@@ -73,6 +73,7 @@
 	item_state = "stunrifle"
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
+	charge_cost = 20
 	one_hand_penalty = 6
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
 	force = 10
@@ -82,7 +83,7 @@
 	wielded_item_state = "stunrifle-wielded"
 	battery_changable = TRUE
 	battery_type = /obj/item/cell/guncell/small
-	battery_chamber_size = 2
+	battery_chamber_size = BATTERY_RIFLE
 
 /obj/item/gun/energy/crossbow
 	name = "mini energy-crossbow"
@@ -132,7 +133,7 @@
 	projectile_type = /obj/item/projectile/energy/plasmastun
 	combustion = 0
 	battery_changable = TRUE
-	battery_chamber_size = 4
+	battery_chamber_size = BATTERY_RIFLE
 	battery_type = /obj/item/cell/guncell/medium
 
 /obj/item/gun/energy/confuseray

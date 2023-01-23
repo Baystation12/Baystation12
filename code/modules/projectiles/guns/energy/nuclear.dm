@@ -4,7 +4,7 @@
 	icon = 'icons/obj/guns/energy_gun.dmi'
 	icon_state = "energystun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
-	max_shots = 10
+	max_shots = 40
 	fire_delay = 10 // To balance for the fact that it is a pistol and can be used one-handed without penalty
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
@@ -44,6 +44,7 @@
 	icon = 'icons/obj/guns/small_egun.dmi'
 	battery_changable = TRUE
 	icon_state = "smallgunstun"
+	charge_cost = 60
 	max_shots = 6
 	w_class = ITEM_SIZE_SMALL
 	force = 2 //it's the size of a car key, what did you expect?

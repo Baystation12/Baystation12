@@ -7,8 +7,9 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
 	force = 10
+	charge_cost = 20
 	battery_changable = TRUE
-	battery_chamber_size = 4
+	battery_chamber_size = BATTERY_RIFLE
 	battery_type = /obj/item/cell/guncell/medium
 	one_hand_penalty = 2
 	bulk = GUN_BULK_RIFLE
@@ -93,12 +94,12 @@
 	one_hand_penalty = 6 //large and heavy
 	w_class = ITEM_SIZE_HUGE
 	projectile_type = /obj/item/projectile/beam/heavylaser
-	charge_cost = 40
+	charge_cost = 60
 	max_shots = 6
 	accuracy = 2
 	fire_delay = 20
 	battery_changable = TRUE
-	battery_chamber_size = 5
+	battery_chamber_size = BATTERY_RIFLE
 	battery_type = /obj/item/cell/guncell/large
 	wielded_item_state = "gun_wielded"
 
@@ -123,9 +124,9 @@
 	one_hand_penalty = 2
 	w_class = ITEM_SIZE_LARGE
 	battery_changable = TRUE
-	battery_chamber_size = 5 //Bigger than regular carbine by being hi-tech
+	battery_chamber_size = BATTERY_RIFLE
 	battery_type = /obj/item/cell/guncell/medium
-	charge_cost = 15
+	charge_cost = 40
 	max_shots = 10
 	wielded_item_state = "gun_wielded"
 	combustion = 0
@@ -139,9 +140,10 @@
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ESOTERIC = 2)
 	projectile_type = /obj/item/projectile/beam/xray
 	one_hand_penalty = 1
+	charge_cost = 60
 	battery_changable = TRUE
-	battery_chamber_size = 3 //Bigger than regular smartgun by being hi-tech
-	battery_type = /obj/item/cell/guncell/small
+	battery_chamber_size = BATTERY_PISTOL
+	battery_type = /obj/item/cell/guncell/pistol/small
 	w_class = ITEM_SIZE_NORMAL
 	fire_delay = 10
 
@@ -155,9 +157,9 @@
 	projectile_type = /obj/item/projectile/beam/sniper
 	one_hand_penalty = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	slot_flags = SLOT_BACK
-	charge_cost = 40
+	charge_cost = 60
 	battery_changable = TRUE
-	battery_chamber_size = 5
+	battery_chamber_size = BATTERY_RIFLE
 	battery_type = /obj/item/cell/guncell/medium
 	fire_delay = 35
 	force = 10
@@ -181,6 +183,7 @@
 	desc = "Standard issue weapon of the Imperial Guard."
 	origin_tech = list(TECH_COMBAT = 1, TECH_MAGNET = 2)
 	self_recharge = 1
+	battery_changable = FALSE
 	matter = list(MATERIAL_STEEL = 2000)
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest

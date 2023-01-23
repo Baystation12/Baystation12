@@ -121,6 +121,8 @@
 	req_access = list(list(access_brig, access_bridge))
 	authorized_modes = list(ALWAYS_AUTHORIZED)
 	screen_shake = 0
+	battery_chamber_size = BATTERY_RIFLE
+	battery_type = /obj/item/cell/guncell/medium
 	recoil_buildup = 0
 	init_firemodes = list(
 		list(mode_name="stun charge", projectile_type=/obj/item/projectile/plasma/stun, charge_cost=20, fire_delay=4, projectile_color=COLOR_YELLOW),

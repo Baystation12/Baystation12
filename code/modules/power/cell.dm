@@ -10,6 +10,7 @@
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
+	var/self_recharge = FALSE
 	w_class = ITEM_SIZE_NORMAL
 	var/charge			                // Current charge
 	var/maxcharge = 1000 // Capacity in Wh
@@ -236,4 +237,5 @@
 	icon = 'icons/mob/simple_animal/slimes.dmi' //'icons/obj/harvest.dmi'
 	icon_state = "yellow slime extract" //"potato_battery"
 	maxcharge = 200
+	self_recharge = TRUE
 	matter = null
