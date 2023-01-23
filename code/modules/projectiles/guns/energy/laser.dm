@@ -156,7 +156,6 @@
 	one_hand_penalty = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	slot_flags = SLOT_BACK
 	charge_cost = 40
-	max_shots = 4
 	battery_changable = TRUE
 	battery_chamber_size = 5
 	battery_type = /obj/item/cell/guncell/medium
