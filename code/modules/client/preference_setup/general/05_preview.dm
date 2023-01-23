@@ -43,7 +43,7 @@
 			var/datum/gear/G = gear_datums[thing]
 			if(G)
 				var/permitted = 0
-				if(G.allowed_roles && G.allowed_roles.len)
+				if(G.allowed_roles && length(G.allowed_roles))
 					if(previewJob)
 						for(var/job_type in G.allowed_roles)
 							if(previewJob.type == job_type)

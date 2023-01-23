@@ -171,8 +171,8 @@ a creative player the means to solve many problems.  Circuits are held inside an
 					if(io)
 						words += "<b><a href='?src=\ref[src];act=wire;pin=\ref[io]'>[io.display_pin_type()] [io.name]</a> \
 						<a href='?src=\ref[src];act=data;pin=\ref[io]'>[io.display_data(io.data)]</a></b><br>"
-						if(io.linked.len)
-							for(var/k in 1 to io.linked.len)
+						if(length(io.linked))
+							for(var/k in 1 to length(io.linked))
 								var/datum/integrated_io/linked = io.linked[k]
 								words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[linked]</a> \
 								@ <a href='?src=\ref[linked.holder]'>[linked.holder.displayed_name]</a><br>"
@@ -190,8 +190,8 @@ a creative player the means to solve many problems.  Circuits are held inside an
 					if(io)
 						words += "<b><a href='?src=\ref[src];act=wire;pin=\ref[io]'>[io.display_pin_type()] [io.name]</a> \
 						<a href='?src=\ref[src];act=data;pin=\ref[io]'>[io.display_data(io.data)]</a></b><br>"
-						if(io.linked.len)
-							for(var/k in 1 to io.linked.len)
+						if(length(io.linked))
+							for(var/k in 1 to length(io.linked))
 								var/datum/integrated_io/linked = io.linked[k]
 								words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[linked]</a> \
 								@ <a href='?src=\ref[linked.holder]'>[linked.holder.displayed_name]</a><br>"
@@ -207,8 +207,8 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 		words += "<b><a href='?src=\ref[src];act=wire;pin=\ref[io]'>[SPAN_COLOR("#ff0000", io)]</a> "
 		words += "<a href='?src=\ref[src];act=data;pin=\ref[io]'>[SPAN_COLOR("#ff0000", io.data ? "\<PULSE OUT\>" : "\<PULSE IN\>")]</a></b><br>"
-		if(io.linked.len)
-			for(var/k in 1 to io.linked.len)
+		if(length(io.linked))
+			for(var/k in 1 to length(io.linked))
 				var/datum/integrated_io/linked = io.linked[k]
 				words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[SPAN_COLOR("#ff0000", linked)]</a> \
 				@ <a href='?src=\ref[linked.holder]'>[SPAN_COLOR("#ff0000", linked.holder.displayed_name)]</a><br>"

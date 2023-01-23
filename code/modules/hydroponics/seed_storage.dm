@@ -276,7 +276,7 @@
 				if (O)
 					--N.amount
 					N.seeds -= O
-					if (N.amount <= 0 || N.seeds.len <= 0)
+					if (N.amount <= 0 || length(N.seeds) <= 0)
 						piles -= N
 						qdel(N)
 					flick("[initial(icon_state)]-vend", src)

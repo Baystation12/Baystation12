@@ -124,7 +124,7 @@
 /obj/item/airlock_electronics/proc/set_access(obj/object)
 	if(!object.req_access)
 		object.check_access()
-	if(object.req_access.len)
+	if(length(object.req_access))
 		conf_access = list()
 		for(var/entry in object.req_access)
 			conf_access |= entry // This flattens the list, turning everything into AND

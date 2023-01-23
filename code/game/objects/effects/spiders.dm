@@ -214,7 +214,7 @@
 			entry_vent = null
 	else if(entry_vent)
 		if(get_dist(src, entry_vent) <= 1)
-			if(entry_vent.network && entry_vent.network.normal_members.len)
+			if(entry_vent.network && length(entry_vent.network.normal_members))
 				var/list/vents = list()
 				for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in entry_vent.network.normal_members)
 					vents.Add(temp_vent)

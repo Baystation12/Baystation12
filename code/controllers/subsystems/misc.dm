@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(misc)
 	if (PreventUpdateStat(time))
 		return ..()
 	..({"\
-		TR: [GLOB.traders.len],[Roundm(cost_traders, 0.1)] \
+		TR: [length(GLOB.traders)],[Roundm(cost_traders, 0.1)] \
 		SO: [Roundm(GLOB.sun_angle, 0.1)],[Roundm(GLOB.sun_rate, 0.1)],[Roundm(cost_solars, 0.1)]
 	"})
 

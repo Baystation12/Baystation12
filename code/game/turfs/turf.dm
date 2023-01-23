@@ -310,7 +310,7 @@ var/global/const/enterloopsanity = 100
 		if(isliving(AM))
 			var/mob/living/M = AM
 			M.turf_collision(src, TT.speed)
-			if(M.pinned.len)
+			if(length(M.pinned))
 				return
 
 		var/intial_dir = TT.init_dir

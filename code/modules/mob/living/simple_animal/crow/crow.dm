@@ -125,7 +125,7 @@
 	. = ..()
 	if(Adjacent(src))
 		if(messenger_bag)
-			if(messenger_bag.contents.len)
+			if(length(messenger_bag.contents))
 				to_chat(user, "It's wearing a little messenger bag with a Corvid Couriers logo on it. There's something stuffed inside.")
 			else
 				to_chat(user, "It's wearing a little messenger bag with a Corvid Couriers logo on it. It seems to be empty.")

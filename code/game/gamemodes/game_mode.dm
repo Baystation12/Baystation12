@@ -308,7 +308,7 @@ var/global/list/additional_antag_types = list()
 		sleep(2)
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
-		if(!antag.current_antagonists.len || (antag in antag_templates))
+		if(!length(antag.current_antagonists) || (antag in antag_templates))
 			continue
 		sleep(2)
 		antag.print_player_summary()
@@ -497,7 +497,7 @@ var/global/list/additional_antag_types = list()
 
 	if(!player || !player.current) return
 
-	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
+	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !length(player.objectives))
 		return
 
 	var/obj_count = 1

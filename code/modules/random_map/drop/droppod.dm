@@ -108,7 +108,7 @@
 /datum/random_map/droppod/get_additional_spawns(value, turf/T, spawn_dir)
 
 	// Splatter anything under us that survived the explosion.
-	if(value != SD_EMPTY_TILE && T.contents.len)
+	if(value != SD_EMPTY_TILE && length(T.contents))
 		for(var/atom/movable/AM in T)
 			if(AM.simulated && !isobserver(AM))
 				qdel(AM)

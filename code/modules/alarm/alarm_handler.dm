@@ -73,7 +73,7 @@
 	return !!length(minor_alarms(z_level))
 
 /datum/alarm_handler/proc/check_alarm_cleared(datum/alarm/alarm)
-	if ((alarm.end_time && world.time > alarm.end_time) || !alarm.sources.len)
+	if ((alarm.end_time && world.time > alarm.end_time) || !length(alarm.sources))
 		alarms -= alarm
 		alarms_assoc -= alarm.origin
 		LAZYREMOVE(alarms_by_z["[alarm.alarm_z()]"], alarm)

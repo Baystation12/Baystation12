@@ -74,13 +74,13 @@
 		O += "Flags Type Size Name"
 		// It's thematically appropriate for the command to bypass the abstraction
 		// of NTOS and access the hardware directly instead.
-		if(!D.stored_files.len)
+		if(!length(D.stored_files))
 			O += "No files found on device."
 		else
 			var/i = 0
 			for(var/datum/computer_file/F in D.stored_files)
 				if(length(O) >= max_lines) // There's a line limit in the terminal, so if we approach it, break off and just list number of files on the drives.
-					O += ".. [(D.stored_files.len - i)] additional files."
+					O += ".. [(length(D.stored_files) - i)] additional files."
 					break
 				var/flags = "+[(F.hidden ? "h" : "")][(F.read_only ? "r" : "rw")]"
 				O += "[flags] [F.filetype] [F.size]GQ [F.filename]"

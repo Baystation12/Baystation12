@@ -4,7 +4,7 @@
 /datum/unit_test/areas_shall_be_coherent/start_test()
 	var/incoherent_areas = 0
 	for(var/area/A)
-		if(!A.contents.len)
+		if(!length(A.contents))
 			continue
 		if(A.type in GLOB.using_map.area_coherency_test_exempt_areas)
 			continue
@@ -62,7 +62,7 @@
 /datum/unit_test/areas_shall_be_pure/start_test()
 	var/impure_areas = 0
 	for(var/area/A)
-		if(!A.contents.len)
+		if(!length(A.contents))
 			continue
 		if(A.type in GLOB.using_map.area_purity_test_exempt_areas)
 			continue

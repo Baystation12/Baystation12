@@ -116,7 +116,7 @@ var/global/nttransfer_uid = 0
 	else if (PRG.provided_file)
 		data["uploading"] = TRUE
 		data["upload_uid"] = PRG.unique_token
-		data["upload_clients"] = PRG.connected_clients.len
+		data["upload_clients"] = length(PRG.connected_clients)
 		data["upload_haspassword"] = PRG.server_password ? TRUE : FALSE
 		data["upload_filename"] = "[PRG.provided_file.filename].[PRG.provided_file.filetype]"
 	else if (PRG.upload_menu)

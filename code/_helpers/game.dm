@@ -547,7 +547,7 @@
 	return seconds * 10
 
 /proc/round_is_spooky(spookiness_threshold = config.cult_ghostwriter_req_cultists)
-	return (GLOB.cult.current_antagonists.len > spookiness_threshold)
+	return (length(GLOB.cult.current_antagonists) > spookiness_threshold)
 
 /proc/getviewsize(view)
 	var/viewX

@@ -333,7 +333,7 @@
 				pass |= istype(A, type)
 			if(!pass)
 				continue
-		if(A.contents.len)
+		if(length(A.contents))
 			found += A.search_contents_for(path,filter_path)
 	return found
 
@@ -609,7 +609,7 @@
 	var/cur_x = null
 	var/cur_y = null
 	var/list/y_arr = null
-	for(cur_x=1,cur_x<=GLOB.global_map.len,cur_x++)
+	for(cur_x=1,cur_x<=length(GLOB.global_map),cur_x++)
 		y_arr = GLOB.global_map[cur_x]
 		cur_y = y_arr.Find(src.z)
 		if(cur_y)
@@ -672,14 +672,14 @@
 
 	for(var/o in objs)
 		var/obj/O = o
-		if (exclude_objs?.len && (O in exclude_objs))
+		if (length(exclude_objs) && (O in exclude_objs))
 			exclude_objs -= O
 			continue
 		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 
 	for(var/m in mobs)
 		var/mob/M = m
-		if (exclude_mobs?.len && (M in exclude_mobs))
+		if (length(exclude_mobs) && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
 		if(M.see_invisible >= invisibility)
@@ -709,14 +709,14 @@
 
 	for(var/m in mobs)
 		var/mob/M = m
-		if (exclude_mobs?.len && (M in exclude_mobs))
+		if (length(exclude_mobs) && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
 		M.show_message(message,2,deaf_message,1)
 
 	for(var/o in objs)
 		var/obj/O = o
-		if (exclude_objs?.len && (O in exclude_objs))
+		if (length(exclude_objs) && (O in exclude_objs))
 			exclude_objs -= O
 			continue
 		O.show_message(message,2,deaf_message,1)

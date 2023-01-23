@@ -87,7 +87,7 @@ var/global/list/gear_datums = list()
 	pref.gear_slot = sanitize_integer(pref.gear_slot, 1, config.loadout_slots, initial(pref.gear_slot))
 	if(!islist(pref.gear_list)) pref.gear_list = list()
 
-	if(pref.gear_list.len < config.loadout_slots)
+	if(length(pref.gear_list) < config.loadout_slots)
 		LIST_RESIZE(pref.gear_list, config.loadout_slots)
 
 	for(var/index = 1 to config.loadout_slots)

@@ -626,7 +626,7 @@
 
 	for(var/obj/procedural/jp_dungeonroom/r in rooms)
 		if(!r.doesMultiborder())
-			if(r.border.len == 0)
+			if(length(r.border) == 0)
 				continue
 			var/obj/procedural/jp_DungeonRegion/reg = new /obj/procedural/jp_DungeonRegion(src)
 			reg.addTurfs(r.getTurfs(), 1)

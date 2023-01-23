@@ -51,7 +51,7 @@
 				. = 0
 			else
 				return -1
-	if ((reagents?(length(reagents)):(0)) < avail_reagents.reagent_list.len)
+	if ((reagents?(length(reagents)):(0)) < length(avail_reagents.reagent_list))
 		return 0
 	return .
 
@@ -141,7 +141,7 @@
 		var/highest_count = 0
 		. = possible_recipes[1]
 		for (var/datum/recipe/recipe in possible_recipes)
-			var/count = ((recipe.items)?(recipe.items.len):0) + ((recipe.reagents)?(recipe.reagents.len):0) + ((recipe.fruit)?(recipe.fruit.len):0)
+			var/count = ((recipe.items)?(length(recipe.items)):0) + ((recipe.reagents)?(length(recipe.reagents)):0) + ((recipe.fruit)?(length(recipe.fruit)):0)
 			if (count >= highest_count)
 				highest_count = count
 				. = recipe

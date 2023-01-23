@@ -81,7 +81,7 @@
 			I.reagents.trans_to(container, I.reagents.total_volume, skill_multiplier)
 			I.reagents.clear_reagents()
 		var/material/M = I.get_material()
-		if (M?.chem_products?.len)
+		if (length(M?.chem_products))
 			if (isstack(I))
 				var/sheet_volume = 0
 				for (var/chem in M.chem_products)
@@ -105,7 +105,7 @@
 	if (I.reagents?.total_volume)
 		return TRUE
 	var/material/M = I.get_material()
-	if (M?.chem_products?.len)
+	if (length(M?.chem_products))
 		return TRUE
 	return FALSE
 
@@ -134,7 +134,7 @@
 
 	else if (is_type_in_list(I, storage_types))
 		var/obj/item/storage/S = I
-		if (!S.contents.len)
+		if (!length(S.contents))
 			to_chat(user, SPAN_WARNING("\The [S] is empty."))
 		else if (length(items) >= max_items)
 			to_chat(user, SPAN_WARNING("\The item hopper on \the [src] is full."))

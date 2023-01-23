@@ -104,7 +104,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 		dat = "<center><h3>[spellbook.title]</h3><i>[spellbook.title_desc]</i><br>You have [uses] spell slot[uses > 1 ? "s" : ""] left.</center><br>"
 		dat += "<center>[SPAN_COLOR("#ff33cc", "Requires Wizard Garb")]<br>[SPAN_COLOR("#ff6600", "Selectable Target")]<br>[SPAN_COLOR("#33cc33", "Spell Charge Type: Recharge, Sacrifice, Charges")]</center><br>"
 		dat += "<center><b>To use a contract, first bind it to your soul, then give it to someone to sign. This will bind their soul to you.</b></center><br>"
-		for(var/i in 1 to spellbook.spells.len)
+		for(var/i in 1 to length(spellbook.spells))
 			var/name = "" //name of target
 			var/desc = "" //description of target
 			var/info = "" //additional information

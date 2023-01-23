@@ -203,7 +203,7 @@ Bit flags that modify the behavior of above properties
 
 
 /datum/musical_config/proc/n2t(key) // Used instead of num2text for faster access in sample_map
-	if (!src.n2t_int.len)
+	if (!length(src.n2t_int))
 		for (var/i=1, i<=127, i++)
 			src.n2t_int += num2text(i)
 

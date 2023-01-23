@@ -78,7 +78,7 @@
 /obj/proc/buckle_mob(mob/living/M)
 	if(buckled_mob) //unless buckled_mob becomes a list this can cause problems
 		return 0
-	if(!istype(M) || (M.loc != loc) || !M.can_be_buckled || M.buckled || M.pinned.len || (buckle_require_restraints && !M.restrained()))
+	if(!istype(M) || (M.loc != loc) || !M.can_be_buckled || M.buckled || length(M.pinned) || (buckle_require_restraints && !M.restrained()))
 		return 0
 	if(ismob(src))
 		var/mob/living/carbon/C = src //Don't wanna forget the xenos.
@@ -141,7 +141,7 @@
 		return 0
 	if(M == buckled_mob)
 		return 0
-	if (M.grabbed_by.len)
+	if (length(M.grabbed_by))
 		to_chat(user, SPAN_WARNING("\The [M] is being grabbed and cannot be buckled."))
 		return FALSE
 	if (!M.can_be_buckled)

@@ -97,7 +97,7 @@
 		if(EA.battery)
 			to_chat(user, SPAN_WARNING("Remove [EA]'s power cell first!"))
 			return
-		if(EA.assembly_components.len)
+		if(length(EA.assembly_components))
 			if(recycling)
 				return
 			if(!EA.opened)
@@ -115,7 +115,7 @@
 			recycling = TRUE
 			for(var/V in EA.assembly_components)
 				recycle(V, null, EA)
-			to_chat(user, SPAN_NOTICE("You recycle all the components[EA.assembly_components.len ? " you could " : " "]from [EA]!"))
+			to_chat(user, SPAN_NOTICE("You recycle all the components[length(EA.assembly_components) ? " you could " : " "]from [EA]!"))
 			playsound(src, 'sound/items/electronic_assembly_empty.ogg', 50, TRUE)
 			recycling = FALSE
 			return TRUE

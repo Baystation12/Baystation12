@@ -8,7 +8,7 @@
 
 /datum/instrument/proc/create_full_sample_deviation_map()
 	// Obtain samples
-	if (!src.samples.len)
+	if (!length(src.samples))
 		CRASH("No samples were defined in [src.type]")
 
 	var/list/delta_1 = list()

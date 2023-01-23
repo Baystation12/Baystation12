@@ -58,9 +58,9 @@ SUBSYSTEM_DEF(jobs)
 				archetype_job_datums |= job
 
 	// Init skills.
-	if(!GLOB.skills.len)
+	if(!length(GLOB.skills))
 		GET_SINGLETON(/singleton/hierarchy/skill)
-	if(!GLOB.skills.len)
+	if(!length(GLOB.skills))
 		log_error(SPAN_WARNING("Error setting up job skill requirements, no skill datums found!"))
 
 	// Update title and path tracking, submap list, etc.
@@ -94,7 +94,7 @@ SUBSYSTEM_DEF(jobs)
 			for(var/alt_title in job.alt_titles)
 				titles_to_datums[alt_title] = job
 			if(job.department_flag)
-				for (var/I in 1 to GLOB.bitflags.len)
+				for (var/I in 1 to length(GLOB.bitflags))
 					if(job.department_flag & GLOB.bitflags[I])
 						LAZYDISTINCTADD(positions_by_department["[GLOB.bitflags[I]]"], job.title)
 						if (length(job.alt_titles))

@@ -19,7 +19,7 @@
 	if(!ntnet_global || !terminal.computer.get_ntnet_status())
 		return network_error()
 	if(!length(arguments))
-		if (ntnet_global.banned_nids.len)
+		if (length(ntnet_global.banned_nids))
 			return list("[name]: The following network ids are banned:", jointext(ntnet_global.banned_nids, ", "))
 		else
 			return "[name]: There are no banned network ids."

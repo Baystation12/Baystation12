@@ -38,7 +38,7 @@
 
 	else if(href_list["add_language"])
 
-		if(pref.alternate_languages.len >= MAX_LANGUAGES)
+		if(length(pref.alternate_languages) >= MAX_LANGUAGES)
 			alert(user, "You have already selected the maximum number of languages!")
 			return
 
@@ -100,18 +100,18 @@
 			pref.alternate_languages.Insert(1, lang)
 
 	pref.alternate_languages = uniquelist(pref.alternate_languages)
-	if(pref.alternate_languages.len > MAX_LANGUAGES)
+	if(length(pref.alternate_languages) > MAX_LANGUAGES)
 		pref.alternate_languages.Cut(MAX_LANGUAGES + 1)
 
 /datum/category_item/player_setup_item/background/languages/proc/get_language_text()
 	sanitize_alt_languages()
 	if(LAZYLEN(pref.alternate_languages))
-		for(var/i = 1 to pref.alternate_languages.len)
+		for(var/i = 1 to length(pref.alternate_languages))
 			var/lang = pref.alternate_languages[i]
 			if(free_languages[lang])
 				LAZYADD(., "- [lang] (required).<br>")
 			else
 				LAZYADD(., "- [lang] <a href='?src=\ref[src];remove_language=[i]'>Remove.</a> <span style='color:#ff0000;font-style:italic;'>[all_languages[lang].warning]</span><br>")
-	if(pref.alternate_languages.len < MAX_LANGUAGES)
-		var/remaining_langs = MAX_LANGUAGES - pref.alternate_languages.len
+	if(length(pref.alternate_languages) < MAX_LANGUAGES)
+		var/remaining_langs = MAX_LANGUAGES - length(pref.alternate_languages)
 		LAZYADD(., "- <a href='?src=\ref[src];add_language=1'>add</a> ([remaining_langs] remaining)<br>")

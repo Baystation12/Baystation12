@@ -108,7 +108,7 @@
 				digested *= 0.75
 				if(food.matter[mat] <= 0)
 					food.matter -= mat
-				if(!food.matter.len)
+				if(!length(food.matter))
 					qdel(food)
 
 				// Process it.

@@ -71,7 +71,7 @@
 	var/list/invalid_traits = list()
 	for(var/trait in GET_SINGLETON_SUBTYPE_LIST(/singleton/trait))
 		var/singleton/trait/T = trait
-		if(!length(T.levels) || (T.levels.len > 1 && (TRAIT_LEVEL_EXISTS in T.levels)))
+		if(!length(T.levels) || (length(T.levels) > 1 && (TRAIT_LEVEL_EXISTS in T.levels)))
 			invalid_traits += T.type
 
 	if(length(invalid_traits))

@@ -350,7 +350,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/mob/living/silicon/ai/selected
 	var/list/active = active_ais(z)
 	for(var/mob/living/silicon/ai/A in active)
-		if(!selected || (selected.connected_robots.len > A.connected_robots.len))
+		if(!selected || (length(selected.connected_robots) > length(A.connected_robots)))
 			selected = A
 
 	return selected
@@ -541,7 +541,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	for(var/atom/part in contents)
 		toReturn += part
-		if(part.contents.len && searchDepth)
+		if(length(part.contents) && searchDepth)
 			toReturn += part.GetAllContents(searchDepth - 1)
 
 	return toReturn

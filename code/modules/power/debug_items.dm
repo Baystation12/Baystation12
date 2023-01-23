@@ -19,8 +19,8 @@
 	to_chat(user, "Available power: [num2text(powernet.avail, 20)] W")
 	to_chat(user, "Load: [num2text(powernet.viewload, 20)] W")
 	to_chat(user, "Has alert: [powernet.problem ? "YES" : "NO"]")
-	to_chat(user, "Cables: [powernet.cables.len]")
-	to_chat(user, "Nodes: [powernet.nodes.len]")
+	to_chat(user, "Cables: [length(powernet.cables)]")
+	to_chat(user, "Nodes: [length(powernet.nodes)]")
 
 
 // An infinite power generator. Adds energy to connected cable.

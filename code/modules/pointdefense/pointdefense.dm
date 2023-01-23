@@ -195,7 +195,7 @@
 	if(engaging || ((world.time - last_shot) < charge_cooldown))
 		return
 
-	if(GLOB.meteor_list.len == 0)
+	if(length(GLOB.meteor_list) == 0)
 		return
 	var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 	var/datum/local_network/lan = pointdefense.get_local_network()

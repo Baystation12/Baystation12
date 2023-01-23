@@ -339,7 +339,7 @@
 		occupant.drop_from_inventory(W)
 		W.forceMove(src)
 
-		if(W.contents.len) //Make sure we catch anything not handled by qdel() on the items.
+		if(length(W.contents)) //Make sure we catch anything not handled by qdel() on the items.
 			for(var/obj/item/O in W.contents)
 				if(istype(O,/obj/item/storage/internal)) //Stop eating pockets, you fuck!
 					continue

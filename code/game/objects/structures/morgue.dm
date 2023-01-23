@@ -30,7 +30,7 @@
 	if (src.connected)
 		src.icon_state = "morgue0"
 	else
-		if (src.contents.len)
+		if (length(src.contents))
 			src.icon_state = "morgue2"
 		else
 			src.icon_state = "morgue1"
@@ -200,7 +200,7 @@
 		icon_state = "crema_active"
 	else if (src.connected)
 		src.icon_state = "crema0"
-	else if (src.contents.len)
+	else if (length(src.contents))
 		src.icon_state = "crema2"
 	else
 		src.icon_state = "crema1"

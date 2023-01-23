@@ -861,7 +861,7 @@
 
 /obj/item/device/radio/announcer/Initialize()
 	. = ..()
-	forceMove(locate(1,1,GLOB.using_map.contact_levels.len ? GLOB.using_map.contact_levels[1] : 1))
+	forceMove(locate(1,1,length(GLOB.using_map.contact_levels) ? GLOB.using_map.contact_levels[1] : 1))
 
 /obj/item/device/radio/announcer/subspace
 	subspace_transmission = 1

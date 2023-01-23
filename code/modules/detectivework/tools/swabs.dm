@@ -119,7 +119,7 @@
 
 	var/sample_type
 	if(choice == "Blood")
-		if(!A.blood_DNA || !A.blood_DNA.len)
+		if(!A.blood_DNA || !length(A.blood_DNA))
 			to_chat(user, SPAN_WARNING("There is no blood on \the [A]."))
 			return
 		dna = A.blood_DNA.Copy()

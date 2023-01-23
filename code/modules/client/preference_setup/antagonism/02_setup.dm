@@ -47,7 +47,7 @@
 		. +="[US.name] <a href='?src=\ref[src];move_source_up=\ref[US]'>Move Up</a> <a href='?src=\ref[src];move_source_down=\ref[US]'>Move Down</a> <a href='?src=\ref[src];remove_source=\ref[US]'>Remove</a><br>"
 		if(US.desc)
 			. += "[FONT_SMALL(US.desc)]<br>"
-	if(!pref.uplink_sources.len)
+	if(!length(pref.uplink_sources))
 		. += SPAN_WARNING("You will not receive an uplink unless you add an uplink source!")
 	. +="<br>"
 	. +="Exploitable information:<br>"
@@ -83,7 +83,7 @@
 		if(!US)
 			return TOPIC_NOACTION
 		var/index = pref.uplink_sources.Find(US)
-		if(index >= pref.uplink_sources.len)
+		if(index >= length(pref.uplink_sources))
 			return TOPIC_NOACTION
 		pref.uplink_sources.Swap(index, index + 1)
 		return TOPIC_REFRESH

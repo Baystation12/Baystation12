@@ -114,7 +114,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		to_chat(src, SPAN_WARNING("We are incapacitated."))
 		return
 
-	if(changeling.absorbed_dna.len < required_dna)
+	if(length(changeling.absorbed_dna) < required_dna)
 		to_chat(src, SPAN_WARNING("We require at least [required_dna] samples of compatible DNA."))
 		return
 

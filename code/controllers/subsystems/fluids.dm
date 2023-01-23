@@ -82,7 +82,7 @@ SUBSYSTEM_DEF(fluids)
 						if(!other)
 							other = new /obj/effect/fluid(T)
 						F.equalizing_fluids += other
-						downward_fluid_overlay_position = F.equalizing_fluids.len
+						downward_fluid_overlay_position = length(F.equalizing_fluids)
 			UPDATE_FLUID_BLOCKED_DIRS(F.start_loc)
 			for(var/spread_dir in GLOB.cardinal)
 				if(F.start_loc.fluid_blocked_dirs & spread_dir)
@@ -116,7 +116,7 @@ SUBSYSTEM_DEF(fluids)
 			processing_fluids -= F
 		else
 			// Equalize across our neighbors. Hardcoded here for performance reasons.
-			if(!F.loc || F.loc != F.start_loc || !F.equalizing_fluids || !F.equalizing_fluids.len || F.fluid_amount <= FLUID_EVAPORATION_POINT)
+			if(!F.loc || F.loc != F.start_loc || !F.equalizing_fluids || !length(F.equalizing_fluids) || F.fluid_amount <= FLUID_EVAPORATION_POINT)
 				continue
 
 			F.equalize_avg_depth = 0
@@ -124,7 +124,7 @@ SUBSYSTEM_DEF(fluids)
 			F.flow_amount = 0
 
 			// Flow downward first, since gravity. TODO: add check for gravity.
-			if(F.equalizing_fluids.len >= downward_fluid_overlay_position)
+			if(length(F.equalizing_fluids) >= downward_fluid_overlay_position)
 				var/obj/effect/fluid/downward_fluid = F.equalizing_fluids[downward_fluid_overlay_position]
 				if(downward_fluid.z == F.z-1) // It's below us.
 					F.equalizing_fluids -= downward_fluid
@@ -151,9 +151,9 @@ SUBSYSTEM_DEF(fluids)
 
 			F.set_dir(setting_dir)
 
-			if(islist(F.equalizing_fluids) && F.equalizing_fluids.len > 1)
-				F.equalize_avg_depth = Floor(F.equalize_avg_depth/F.equalizing_fluids.len)
-				F.equalize_avg_temp = Floor(F.equalize_avg_temp/F.equalizing_fluids.len)
+			if(islist(F.equalizing_fluids) && length(F.equalizing_fluids) > 1)
+				F.equalize_avg_depth = Floor(F.equalize_avg_depth/length(F.equalizing_fluids))
+				F.equalize_avg_temp = Floor(F.equalize_avg_temp/length(F.equalizing_fluids))
 				for(var/thing in F.equalizing_fluids)
 					var/obj/effect/fluid/other = thing
 					if(!QDELETED(other))

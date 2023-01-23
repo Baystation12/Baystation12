@@ -97,7 +97,7 @@
 
 /obj/item/reagent_containers/food/drinks/on_update_icon()
 	overlays.Cut()
-	if(reagents.reagent_list.len > 0)
+	if(length(reagents.reagent_list) > 0)
 		if(base_name)
 			var/datum/reagent/R = reagents.get_master_reagent()
 			SetName("[base_name] of [R.glass_name ? R.glass_name : "something"]")

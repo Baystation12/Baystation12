@@ -155,7 +155,7 @@
 		return FALSE
 	if (istype(A, /turf/simulated/floor))
 		var/turf/simulated/floor/F = A
-		if (F.decals && F.decals.len > 0)
+		if (F.decals && length(F.decals) > 0)
 			LIST_DEC(F.decals)
 			F.update_icon()
 			. = TRUE
@@ -175,7 +175,7 @@
 	return .
 
 /obj/item/device/paint_sprayer/proc/pick_color_from_floor(turf/simulated/floor/F, mob/user)
-	if (!F.decals || !F.decals.len)
+	if (!F.decals || !length(F.decals))
 		return FALSE
 	var/list/available_colors = list()
 	for (var/image/I in F.decals)
@@ -210,7 +210,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] flashes an error light. You might need to reconfigure it."))
 		return FALSE
 
-	if((F.decals && F.decals.len > 5) && !ispath(painting_decal, /obj/effect/floor_decal/reset))
+	if((F.decals && length(F.decals) > 5) && !ispath(painting_decal, /obj/effect/floor_decal/reset))
 		to_chat(user, SPAN_WARNING("\The [F] has been painted too much; you need to clear it off."))
 		return FALSE
 

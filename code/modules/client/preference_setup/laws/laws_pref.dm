@@ -52,10 +52,10 @@
 
 			. += "<b>Your Current Laws:</b><br>"
 
-			if(!pref.laws.len)
+			if(!length(pref.laws))
 				. += "<b>You currently have no laws.</b><br>"
 			else
-				for(var/i in 1 to pref.laws.len)
+				for(var/i in 1 to length(pref.laws))
 					. += "[i]) [pref.laws[i]]<br>"
 
 			. += "Law sets: <a href='?src=\ref[src];lawsets=1'>Load Set</a><br>"

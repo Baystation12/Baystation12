@@ -111,13 +111,13 @@
 	if(ntnet_global)
 		ntnet_global.relays.Add(src)
 		NTNet = ntnet_global
-		ntnet_global.add_log("New Quantum Relay ([uid]) activated. Current amount of linked relays: [NTNet.relays.len]")
+		ntnet_global.add_log("New Quantum Relay ([uid]) activated. Current amount of linked relays: [length(NTNet.relays)]")
 	..()
 
 /obj/machinery/ntnet_relay/Destroy()
 	if(ntnet_global)
 		ntnet_global.relays.Remove(src)
-		ntnet_global.add_log("Quantum Relay ([uid]) connection severed. Current amount of linked relays: [NTNet.relays.len]")
+		ntnet_global.add_log("Quantum Relay ([uid]) connection severed. Current amount of linked relays: [length(NTNet.relays)]")
 		NTNet = null
 	for(var/datum/computer_file/program/ntnet_dos/D in dos_sources)
 		D.target = null

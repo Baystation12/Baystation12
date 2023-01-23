@@ -24,7 +24,7 @@ var/global/sent_spiders_to_station = 0
 	var/list/vents = list()
 	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in world)
 		if(!temp_vent.welded && temp_vent.network && (temp_vent.loc.z in affecting_z))
-			if(temp_vent.network.normal_members.len > 50)
+			if(length(temp_vent.network.normal_members) > 50)
 				vents += temp_vent
 
 	while((spawncount >= 1) && length(vents))

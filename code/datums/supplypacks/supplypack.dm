@@ -28,7 +28,7 @@
 	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 	switch(security_level)
 		if(SUPPLY_SECURITY_ELEVATED)
-			if(security_state.all_security_levels.len > 1)
+			if(length(security_state.all_security_levels) > 1)
 				security_level = security_state.all_security_levels[2]
 			else
 				security_level = security_state.high_security_level

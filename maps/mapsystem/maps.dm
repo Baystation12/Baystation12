@@ -445,8 +445,8 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	for(var/loc_type in typesof(/datum/trade_destination) - /datum/trade_destination)
 		var/datum/trade_destination/D = new loc_type
-		weighted_randomevent_locations[D] = D.viable_random_events.len
-		weighted_mundaneevent_locations[D] = D.viable_mundane_events.len
+		weighted_randomevent_locations[D] = length(D.viable_random_events)
+		weighted_mundaneevent_locations[D] = length(D.viable_mundane_events)
 
 	if(!station_account)
 		station_account = create_account("[station_name()] Primary Account", "[station_name()]", starting_money, ACCOUNT_TYPE_DEPARTMENT)

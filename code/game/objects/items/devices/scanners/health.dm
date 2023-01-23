@@ -279,7 +279,7 @@
 			print_reagent_default_message = FALSE
 			. += SPAN_CLASS("scan_warning", "Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.")
 
-	if(H.chem_doses.len)
+	if(length(H.chem_doses))
 		var/list/chemtraces = list()
 		for(var/T in H.chem_doses)
 			var/datum/reagent/R = T

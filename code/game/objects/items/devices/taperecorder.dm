@@ -281,7 +281,7 @@
 	for(var/i=1 , i < mytape?.max_capacity , i++)
 		if(!mytape || !playing)
 			break
-		if(mytape.storedinfo.len < i)
+		if(length(mytape.storedinfo) < i)
 			break
 
 		var/turf/T = get_turf(src)
@@ -290,7 +290,7 @@
 			playedmessage = copytext(playedmessage,2)
 		T.audible_message(SPAN_COLOR("maroon", "<B>Tape Recorder</B>: [playedmessage]"))
 
-		if(mytape.storedinfo.len < i+1)
+		if(length(mytape.storedinfo) < i+1)
 			playsleepseconds = 1
 			sleep(10)
 			T = get_turf(src)
@@ -352,7 +352,7 @@
 	to_chat(usr, SPAN_NOTICE("Transcript printed."))
 	var/obj/item/paper/P = new /obj/item/paper(get_turf(src))
 	var/t1 = "<B>Transcript:</B><BR><BR>"
-	for(var/i=1,mytape.storedinfo.len >= i,i++)
+	for(var/i=1,length(mytape.storedinfo) >= i,i++)
 		var/printedmessage = mytape.storedinfo[i]
 		if (findtextEx(printedmessage,"*",1,2)) //replace action sounds
 			printedmessage = "\[[time2text(mytape.timestamp[i]*10,"mm:ss")]\] (Unrecognized sound)"

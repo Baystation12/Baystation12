@@ -35,17 +35,17 @@
 			log_bad("[bad_msg] is not supposed to have an APC.")
 			area_good = 0
 
-		if(!A.air_scrub_names.len && !(exemptions & GLOB.using_map.NO_SCRUBBER))
+		if(!length(A.air_scrub_names) && !(exemptions & GLOB.using_map.NO_SCRUBBER))
 			log_bad("[bad_msg] lacks an air scrubber.")
 			area_good = 0
-		else if(A.air_scrub_names.len && (exemptions & GLOB.using_map.NO_SCRUBBER))
+		else if(length(A.air_scrub_names) && (exemptions & GLOB.using_map.NO_SCRUBBER))
 			log_bad("[bad_msg] is not supposed to have an air scrubber.")
 			area_good = 0
 
-		if(!A.air_vent_names.len && !(exemptions & GLOB.using_map.NO_VENT))
+		if(!length(A.air_vent_names) && !(exemptions & GLOB.using_map.NO_VENT))
 			log_bad("[bad_msg] lacks an air vent.[ascii_reset]")
 			area_good = 0
-		else if(A.air_vent_names.len && (exemptions & GLOB.using_map.NO_VENT))
+		else if(length(A.air_vent_names) && (exemptions & GLOB.using_map.NO_VENT))
 			log_bad("[bad_msg] is not supposed to have an air vent.")
 			area_good = 0
 
@@ -61,7 +61,7 @@
 
 /datum/unit_test/apc_area_test/proc/get_exemptions(area)
 	// We assume deeper types come last
-	for(var/i = GLOB.using_map.apc_test_exempt_areas.len; i>0; i--)
+	for(var/i = length(GLOB.using_map.apc_test_exempt_areas); i>0; i--)
 		var/exempt_type = GLOB.using_map.apc_test_exempt_areas[i]
 		if(istype(area, exempt_type))
 			return GLOB.using_map.apc_test_exempt_areas[exempt_type]
@@ -269,7 +269,7 @@
 		if(!spawnpoint)
 			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] is null!")
 			failed = TRUE
-		else if(!spawnpoint.turfs.len)
+		else if(!length(spawnpoint.turfs))
 			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] has no associated spawn turfs.")
 			failed = TRUE
 

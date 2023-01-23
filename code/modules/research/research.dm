@@ -66,7 +66,7 @@ research holder datum.
 //Checks to see if design has all the required pre-reqs.
 //Input: datum/design; Output: 0/1 (false/true)
 /datum/research/proc/DesignHasReqs(datum/design/D)
-	if(D.req_tech.len == 0)
+	if(length(D.req_tech) == 0)
 		return 1
 
 	var/list/k_tech = list()

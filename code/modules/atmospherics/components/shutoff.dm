@@ -59,9 +59,9 @@
 
 	var/new_shutoff_state = 0
 	if (close_on_leaks)
-		if (!network_node1 || network_node1.leaks.len)
+		if (!network_node1 || length(network_node1.leaks))
 			new_shutoff_state |= NODE1_CLOSED
-		if (!network_node2 || network_node2.leaks.len)
+		if (!network_node2 || length(network_node2.leaks))
 			new_shutoff_state |= NODE2_CLOSED
 
 	if (shutoff_state == new_shutoff_state)

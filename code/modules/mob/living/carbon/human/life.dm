@@ -481,7 +481,7 @@
 		if(C)
 			if(C.max_heat_protection_temperature && C.max_heat_protection_temperature >= temperature)
 				. |= C.heat_protection
-			if(C.accessories.len)
+			if(length(C.accessories))
 				for(var/obj/item/clothing/accessory/A in C.accessories)
 					if(A.max_heat_protection_temperature && A.max_heat_protection_temperature >= temperature)
 						. |= A.heat_protection
@@ -494,7 +494,7 @@
 		if(C)
 			if(C.min_cold_protection_temperature && C.min_cold_protection_temperature <= temperature)
 				. |= C.cold_protection
-			if(C.accessories.len)
+			if(length(C.accessories))
 				for(var/obj/item/clothing/accessory/A in C.accessories)
 					if(A.min_cold_protection_temperature && A.min_cold_protection_temperature <= temperature)
 						. |= A.cold_protection

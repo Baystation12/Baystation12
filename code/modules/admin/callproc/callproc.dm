@@ -210,7 +210,7 @@
 	if(!user_acted(src))
 		return
 	if(holder && holder.callproc && holder.callproc.waiting_for_click)
-		if(alert("Do you want to select \the [A] as the [holder.callproc.arguments.len+1]\th argument?",, "Yes", "No") == "Yes")
+		if(alert("Do you want to select \the [A] as the [length(holder.callproc.arguments)+1]\th argument?",, "Yes", "No") == "Yes")
 			holder.callproc.arguments += A
 
 		holder.callproc.waiting_for_click = 0

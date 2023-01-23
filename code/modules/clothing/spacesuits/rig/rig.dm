@@ -584,7 +584,7 @@
 			"damage" =            module.damage
 			)
 
-		if(module.charges && module.charges.len)
+		if(module.charges && length(module.charges))
 
 			module_data["charges"] = list()
 			module_data["chargetype"] = module.charge_selected

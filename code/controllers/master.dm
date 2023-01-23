@@ -268,7 +268,7 @@ var/global/datum/controller/master/Master = new
 
 		var/ss_runlevels = SS.runlevels
 		var/added_to_any = FALSE
-		for(var/I in 1 to GLOB.bitflags.len)
+		for(var/I in 1 to length(GLOB.bitflags))
 			if(ss_runlevels & GLOB.bitflags[I])
 				while(length(runlevel_sorted_subsystems) < I)
 					runlevel_sorted_subsystems += list(list())

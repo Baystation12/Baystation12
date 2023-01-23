@@ -182,7 +182,7 @@
 		ability_master.ability_objects -= src
 		if(ability_master.my_mob && ability_master.my_mob.client)
 			ability_master.my_mob.client.screen -= src
-	if(ability_master && !ability_master.ability_objects.len)
+	if(ability_master && !length(ability_master.ability_objects))
 		ability_master.update_icon()
 //		qdel(ability_master)
 	ability_master = null
@@ -219,7 +219,7 @@
 		return // Bad input.
 	if(!mob.ability_master)
 		return // No abilities.
-	if(slot > mob.ability_master.ability_objects.len || slot <= 0)
+	if(slot > length(mob.ability_master.ability_objects) || slot <= 0)
 		return // Out of bounds.
 	var/obj/screen/ability/A = mob.ability_master.ability_objects[slot]
 	A.activate()

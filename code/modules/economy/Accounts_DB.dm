@@ -176,7 +176,7 @@
 						<u>Holder:</u> [detailed_account_view.owner_name]<br>
 						<u>Balance:</u> [GLOB.using_map.local_currency_name_short][detailed_account_view.money]<br>
 						<u>Status:</u> [detailed_account_view.suspended ? "Suspended" : "Active"]<br>
-						<u>Transactions:</u> ([detailed_account_view.transaction_log.len])<br>
+						<u>Transactions:</u> ([length(detailed_account_view.transaction_log)])<br>
 						<table>
 							<thead>
 								<tr>

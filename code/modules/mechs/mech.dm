@@ -183,7 +183,7 @@
 	if(LAZYLEN(pilots) && (!hatch_closed || body.pilot_coverage < 100 || body.transparent_cabin))
 		to_chat(user, "It is being piloted by [english_list(pilots, nothing_text = "nobody")].")
 	if(body && LAZYLEN(body.pilot_positions))
-		to_chat(user, "It can seat [body.pilot_positions.len] pilot\s total.")
+		to_chat(user, "It can seat [length(body.pilot_positions)] pilot\s total.")
 	if(length(hardpoints))
 		to_chat(user, "It has the following hardpoints:")
 		for(var/hardpoint in hardpoints)

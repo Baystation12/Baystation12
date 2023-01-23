@@ -38,7 +38,7 @@
 		if(istype(O,/obj/item/reagent_containers/food/snacks/slice/bread))
 			sandwich_limit += 4
 
-	if(src.contents.len > sandwich_limit)
+	if(length(src.contents) > sandwich_limit)
 		to_chat(user, SPAN_WARNING("If you put anything else on \the [src] it's going to collapse."))
 		return
 	else if(istype(W,/obj/item/material/shard))

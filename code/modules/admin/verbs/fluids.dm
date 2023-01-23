@@ -19,7 +19,7 @@
 	if(!check_rights(R_SPAWN)) return
 	var/mob/user = usr
 	if(istype(user) && user.client)
-		if(SSfluids.water_sources.len)
+		if(length(SSfluids.water_sources))
 			user.forceMove(get_turf(pick(SSfluids.water_sources)))
 		else
 			to_chat(usr, "No active fluid sources.")
@@ -33,7 +33,7 @@
 	if(!check_rights(R_SPAWN)) return
 	var/mob/user = usr
 	if(istype(user) && user.client)
-		if(SSfluids.active_fluids.len)
+		if(length(SSfluids.active_fluids))
 			user.forceMove(get_turf(pick(SSfluids.active_fluids)))
 		else
 			to_chat(usr, "No active fluids.")

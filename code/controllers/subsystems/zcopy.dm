@@ -407,7 +407,7 @@ SUBSYSTEM_DEF(zcopy)
 	for (var/atom/movable/openspace/O in T)
 		found_oo += O
 
-	if (T.shadower.overlays.len)
+	if (length(T.shadower.overlays))
 		for (var/overlay in T.shadower.overlays)
 			var/atom/movable/openspace/debug/D = new
 			D.appearance = overlay

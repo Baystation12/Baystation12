@@ -100,7 +100,7 @@
 
 /obj/machinery/uniform_vendor/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/clothingbag))
-		if(W.contents.len)
+		if(length(W.contents))
 			to_chat(user, SPAN_NOTICE("You must empty \the [W] before you can put it in \the [src]."))
 			return
 		to_chat(user, SPAN_NOTICE("You put \the [W] into \the [src]'s recycling slot."))

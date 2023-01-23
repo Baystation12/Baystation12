@@ -52,7 +52,7 @@
 		if(installed_gun.charge_cost)
 			power_draw_per_use = installed_gun.charge_cost
 		set_pin_data(IC_OUTPUT, 1, weakref(installed_gun))
-		if(installed_gun.firemodes.len)
+		if(length(installed_gun.firemodes))
 			var/datum/firemode/fm = installed_gun.firemodes[installed_gun.sel_mode]
 			set_pin_data(IC_OUTPUT, 2, fm.name)
 		push_data()

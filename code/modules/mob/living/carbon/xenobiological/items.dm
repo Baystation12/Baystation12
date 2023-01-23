@@ -309,7 +309,7 @@
 
 	var/obj/item/implant/translator/natural/I = new()
 	I.implant_in_mob(G, BP_HEAD)
-	if (user.languages.len)
+	if (length(user.languages))
 		var/datum/language/lang = user.languages[1]
 		G.add_language(lang.name)
 		G.set_default_language(lang)

@@ -68,7 +68,7 @@
 				GLOB.xeno_artifact_turfs -= T
 
 		for(var/turf/simulated/mineral/T as anything in GLOB.xeno_digsite_turfs)
-			if(T.density && T.finds && T.finds.len)
+			if(T.density && T.finds && length(T.finds))
 				if(T.z == cur_turf.z)
 					var/cur_dist = get_dist(cur_turf, T) * 2
 					if(nearestSimpleTargetDist < 0 || cur_dist < nearestSimpleTargetDist)
@@ -113,7 +113,7 @@
 
 	if(istype(A, /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = A
-		if((M.finds && M.finds.len) || M.artifact_find)
+		if((M.finds && length(M.finds)) || M.artifact_find)
 
 			//create a new scanlog entry
 			var/datum/depth_scan/D = new()
@@ -123,7 +123,7 @@
 			D.material = M.mineral ? M.mineral.ore_name : "Rock"
 
 			//find the first artifact and store it
-			if(M.finds.len)
+			if(length(M.finds))
 				var/datum/find/F = M.finds[1]
 				D.depth = "[F.excavation_required - F.clearance_range] - [F.excavation_required]"
 				D.clearance = F.clearance_range

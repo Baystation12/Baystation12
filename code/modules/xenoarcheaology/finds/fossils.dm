@@ -74,9 +74,9 @@
 				src.set_density(1)
 				src.SetName("alien skeleton display")
 				if(src.contents.Find(/obj/item/fossil/skull/horned))
-					src.desc = "A creature made of [src.contents.len-1] assorted bones and a horned skull. The plaque reads \'[plaque_contents]\'."
+					src.desc = "A creature made of [length(src.contents)-1] assorted bones and a horned skull. The plaque reads \'[plaque_contents]\'."
 				else
-					src.desc = "A creature made of [src.contents.len-1] assorted bones and a skull. The plaque reads \'[plaque_contents]\'."
+					src.desc = "A creature made of [length(src.contents)-1] assorted bones and a skull. The plaque reads \'[plaque_contents]\'."
 			else
 				src.desc = "Incomplete skeleton, looks like it could use [src.breq-src.bnum] more bones."
 				to_chat(user, "Looks like it could use [src.breq-src.bnum] more bones.")
@@ -86,9 +86,9 @@
 		plaque_contents = sanitize(input("What would you like to write on the plaque:","Skeleton plaque",""))
 		user.visible_message("[user] writes something on the base of [icon2html(src, viewers(get_turf(src)))] [src].","You relabel the plaque on the base of [icon2html(src, user)] [src].")
 		if(src.contents.Find(/obj/item/fossil/skull/horned))
-			src.desc = "A creature made of [src.contents.len-1] assorted bones and a horned skull. The plaque reads \'[plaque_contents]\'."
+			src.desc = "A creature made of [length(src.contents)-1] assorted bones and a horned skull. The plaque reads \'[plaque_contents]\'."
 		else
-			src.desc = "A creature made of [src.contents.len-1] assorted bones and a skull. The plaque reads \'[plaque_contents]\'."
+			src.desc = "A creature made of [length(src.contents)-1] assorted bones and a skull. The plaque reads \'[plaque_contents]\'."
 	else
 		..()
 

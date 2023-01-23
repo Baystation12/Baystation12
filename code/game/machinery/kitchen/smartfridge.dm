@@ -293,7 +293,7 @@
 
 		if(plants_loaded)
 			user.visible_message(SPAN_NOTICE("\The [user] loads \the [src] with the contents of \the [P]."), SPAN_NOTICE("You load \the [src] with the contents of \the [P]."))
-			if(P.contents.len > 0)
+			if(length(P.contents) > 0)
 				to_chat(user, SPAN_NOTICE("Some items were refused."))
 
 	else if ((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(O))

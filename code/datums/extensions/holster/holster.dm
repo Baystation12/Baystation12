@@ -33,7 +33,7 @@
 /datum/extension/holster/proc/holster(obj/item/I, mob/living/user)
 	if(!storage)
 		return 1
-	if(!holstered && storage.storage_slots != null && storage.contents.len >= storage.storage_slots - 1)
+	if(!holstered && storage.storage_slots != null && length(storage.contents) >= storage.storage_slots - 1)
 		if(!can_holster(I))
 			to_chat(user, SPAN_NOTICE("\The [I] won't fit in \the [atom_holder]'s holster!."))
 			return 1

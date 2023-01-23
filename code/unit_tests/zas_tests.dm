@@ -121,7 +121,7 @@
 	if(!SSshuttle)
 		fail("Shuttle Controller not setup at time of test.")
 		return 1
-	if(!SSshuttle.shuttles.len)
+	if(!length(SSshuttle.shuttles))
 		skip("No shuttles have been setup for this map.")
 		return 1
 

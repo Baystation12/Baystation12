@@ -222,7 +222,7 @@ var/global/list/turret_icons
 
 /obj/machinery/porta_turret/proc/HasController()
 	var/area/A = get_area(src)
-	return A && A.turret_controls.len > 0
+	return A && length(A.turret_controls) > 0
 
 /obj/machinery/porta_turret/CanUseTopic(mob/user)
 	if(HasController())

@@ -15,8 +15,8 @@
 
 	var/datum/antagonist/vox/vox = antag_templates[1]
 	vox.build_candidate_list(src)
-	log_debug("Attempting to start Raiding Party gamemode with [vox.candidates.len] whitelisted candidates")
-	if (vox.candidates.len >= required_enemies)
+	log_debug("Attempting to start Raiding Party gamemode with [length(vox.candidates)] whitelisted candidates")
+	if (length(vox.candidates) >= required_enemies)
 		vox.get_starting_locations()
 		vox.attempt_spawn()
 		antag_templates = list(vox)
@@ -29,7 +29,7 @@
 	if (length(ready_players) < required_players)
 		return "Not enough players. [length(ready_players)] ready of the required [required_players]."
 	var/list/all_antag_types = GLOB.all_antag_types_
-	if(antag_tags?.len)
+	if(length(antag_tags))
 		var/datum/antagonist/vox/antag_vox = all_antag_types[antag_tags[1]]
 		var/list/enemies_vox = antag_vox.pending_antagonists
 		if((length(enemies_vox) >= required_enemies))

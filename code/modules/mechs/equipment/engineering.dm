@@ -78,7 +78,7 @@
 
 /obj/effect/mech_shield/Destroy()
 	if(shields)
-		if(shields.segments.len)
+		if(length(shields.segments))
 			shields.segments -= src
 		shields = null
 	atmos_canpass = CANPASS_ALWAYS

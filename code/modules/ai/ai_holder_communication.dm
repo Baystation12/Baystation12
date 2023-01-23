@@ -96,11 +96,11 @@
 		if (!holder.say_list)
 			return
 
-		if (holder.say_list.speak.len)
+		if (length(holder.say_list.speak))
 			comm_types += COMM_SAY
-		if (holder.say_list.emote_hear.len)
+		if (length(holder.say_list.emote_hear))
 			comm_types += COMM_AUDIBLE_EMOTE
-		if (holder.say_list.emote_see.len)
+		if (length(holder.say_list.emote_see))
 			comm_types += COMM_VISUAL_EMOTE
 
 		if (!length(comm_types))

@@ -123,7 +123,7 @@
 	data["isBeakerLoaded"] = container ? 1 : 0
 	data["glass"] = accept_drinking
 	var beakerD[0]
-	if(container && container.reagents && container.reagents.reagent_list.len)
+	if(container && container.reagents && length(container.reagents.reagent_list))
 		for(var/datum/reagent/R in container.reagents.reagent_list)
 			beakerD[LIST_PRE_INC(beakerD)] = list("name" = R.name, "volume" = R.volume)
 	data["beakerContents"] = beakerD

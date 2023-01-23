@@ -89,7 +89,7 @@
 		var/list/T = list()
 		for(var/A in all_robolimbs)
 			var/datum/robolimb/R = all_robolimbs[A]
-			if(R.unavailable_at_fab || R.applies_to_part.len)
+			if(R.unavailable_at_fab || length(R.applies_to_part))
 				continue
 			T += list(list("id" = A, "company" = R.company))
 		data["manufacturers"] = T
@@ -232,7 +232,7 @@
 		var/obj/new_item = D.Fabricate(loc, src)
 		visible_message("\The [src] pings, indicating that \the [D] is complete.", "You hear a ping.")
 		if(mat_efficiency != 1)
-			if(new_item.matter && new_item.matter.len > 0)
+			if(new_item.matter && length(new_item.matter) > 0)
 				for(var/i in new_item.matter)
 					new_item.matter[i] = new_item.matter[i] * mat_efficiency
 	remove_from_queue(1)
@@ -245,7 +245,7 @@
 
 /obj/machinery/robotics_fabricator/proc/get_build_options()
 	. = list()
-	for(var/i = 1 to files.known_designs.len)
+	for(var/i = 1 to length(files.known_designs))
 		var/datum/design/D = files.known_designs[i]
 		if(!D.build_path || !(D.build_type & MECHFAB))
 			continue

@@ -116,7 +116,7 @@
 	if (info)
 		to_chat(user, SPAN_WARNING("\The [src] already has writing on it and cannot have its language changed."))
 		return
-	if (!admin_force && !user.languages.len)
+	if (!admin_force && !length(user.languages))
 		to_chat(user, SPAN_WARNING("You don't know any languages to choose from."))
 		return
 
@@ -540,7 +540,7 @@
 		if(!can_bundle())
 			return
 		var/obj/item/paper_bundle/attacking_bundle = P
-		attacking_bundle.insert_sheet_at(user, (attacking_bundle.pages.len)+1, src)
+		attacking_bundle.insert_sheet_at(user, (length(attacking_bundle.pages))+1, src)
 		attacking_bundle.update_icon()
 
 	add_fingerprint(user)

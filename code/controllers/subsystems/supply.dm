@@ -73,7 +73,7 @@ SUBSYSTEM_DEF(supply)
 	if(istype(A,/obj/machinery/tele_beacon))
 		return 1
 
-	for(var/i=1, i<=A.contents.len, i++)
+	for(var/i=1, i<=length(A.contents), i++)
 		var/atom/B = A.contents[i]
 		if(.(B))
 			return 1
@@ -96,7 +96,7 @@ SUBSYSTEM_DEF(supply)
 					var/atom/A = atom
 					if(find_slip && istype(A,/obj/item/paper/manifest))
 						var/obj/item/paper/manifest/slip = A
-						if(!slip.is_copy && slip.stamped && slip.stamped.len) //Any stamp works.
+						if(!slip.is_copy && slip.stamped && length(slip.stamped)) //Any stamp works.
 							add_points_from_source(points_per_slip, "manifest")
 							find_slip = 0
 						continue

@@ -72,7 +72,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 		if(!O.origin_tech)
 			to_chat(user, SPAN_NOTICE("This doesn't seem to have a tech origin."))
 			return
-		if(O.origin_tech.len == 0 || O.holographic)
+		if(length(O.origin_tech) == 0 || O.holographic)
 			to_chat(user, SPAN_NOTICE("You cannot deconstruct this item."))
 			return
 		if(!user.unEquip(O, src))

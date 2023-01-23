@@ -180,7 +180,7 @@ SUBSYSTEM_DEF(ticker)
 		for (var/mob/new_player/player in GLOB.player_list)
 			player.new_player_panel()
 
-	if(!GLOB.admins.len)
+	if(!length(GLOB.admins))
 		send2adminirc("Round has started with no admins online.")
 
 /datum/controller/subsystem/ticker/proc/playing_tick()
@@ -191,7 +191,7 @@ SUBSYSTEM_DEF(ticker)
 		Master.SetRunLevel(RUNLEVEL_POSTGAME)
 		end_game_state = END_GAME_READY_TO_END
 		invoke_async(src, .proc/declare_completion)
-		if(config.allow_map_switching && config.auto_map_vote && GLOB.all_maps.len > 1)
+		if(config.allow_map_switching && config.auto_map_vote && length(GLOB.all_maps) > 1)
 			SSvote.initiate_vote(/datum/vote/map/end_game, automatic = 1)
 
 	else if(mode_finished && (end_game_state <= END_GAME_NOT_OVER))
@@ -505,7 +505,7 @@ Helpers
 		to_world("<b>[aiPlayer.name][show_ai_key ? " (played by [aiPlayer.key])" : ""]'s laws at the [aiPlayer.stat == 2 ? "time of their deactivation" : "end of round"] were:</b>")
 		aiPlayer.show_laws(1)
 
-		if (aiPlayer.connected_robots.len)
+		if (length(aiPlayer.connected_robots))
 			var/minions = "<b>[aiPlayer.name]'s loyal minions were:</b>"
 			for(var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
 				var/show_robot_key = robo.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW

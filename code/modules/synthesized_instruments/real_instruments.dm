@@ -65,7 +65,7 @@
 						src.player.song.tempo = src.player.song.sanitize_tempo(5)
 				else
 					src.player.song.tempo = src.player.song.sanitize_tempo(5) // default 120 BPM
-				if(src.player.song.lines.len > maximum_lines)
+				if(length(src.player.song.lines) > maximum_lines)
 					to_chat(usr,"Too many lines!")
 					src.player.song.lines.Cut(maximum_lines+1)
 				var/linenum = 1
@@ -180,13 +180,13 @@
 			"soft_coeff" = src.player.song.soft_coeff
 		),
 		"show" = list(
-			"playback" = src.player.song.lines.len > 0,
+			"playback" = length(src.player.song.lines) > 0,
 			"custom_env_options" = GLOB.musical_config.is_custom_env(src.player.virtual_environment_selected),
 			"env_settings" = GLOB.musical_config.env_settings_available
 		),
 		"status" = list(
 			"channels" = src.player.song.available_channels,
-			"events" = src.player.event_manager.events.len,
+			"events" = length(src.player.event_manager.events),
 			"max_channels" = GLOB.musical_config.channels_per_instrument,
 			"max_events" = GLOB.musical_config.max_events,
 		)

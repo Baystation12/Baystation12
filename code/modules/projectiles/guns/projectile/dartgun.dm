@@ -81,12 +81,12 @@
 		icon_state = "dartgun-empty"
 		return 1
 
-	if(!ammo_magazine.stored_ammo || ammo_magazine.stored_ammo.len)
+	if(!ammo_magazine.stored_ammo || length(ammo_magazine.stored_ammo))
 		icon_state = "dartgun-0"
-	else if(ammo_magazine.stored_ammo.len > 5)
+	else if(length(ammo_magazine.stored_ammo) > 5)
 		icon_state = "dartgun-5"
 	else
-		icon_state = "dartgun-[ammo_magazine.stored_ammo.len]"
+		icon_state = "dartgun-[length(ammo_magazine.stored_ammo)]"
 	return 1
 
 /obj/item/gun/projectile/dartgun/consume_next_projectile()
@@ -100,7 +100,7 @@
 	if (length(beakers))
 		to_chat(user, SPAN_NOTICE("\The [src] contains:"))
 		for(var/obj/item/reagent_containers/glass/beaker/B in beakers)
-			if(B.reagents && B.reagents.reagent_list.len)
+			if(B.reagents && length(B.reagents.reagent_list))
 				for(var/datum/reagent/R in B.reagents.reagent_list)
 					to_chat(user, SPAN_NOTICE("[R.volume] units of [R.name]"))
 
@@ -150,7 +150,7 @@
 			if(!istype(B)) continue
 
 			dat += "Beaker [i] contains: "
-			if(B.reagents && B.reagents.reagent_list.len)
+			if(B.reagents && length(B.reagents.reagent_list))
 				for(var/datum/reagent/R in B.reagents.reagent_list)
 					dat += "<br>    [R.volume] units of [R.name], "
 				if(B in mixing)
@@ -162,8 +162,8 @@
 			dat += " \[<A href='?src=\ref[src];eject=[i]'>Eject</A>\]<br>"
 
 	if(ammo_magazine)
-		if(ammo_magazine.stored_ammo && ammo_magazine.stored_ammo.len)
-			dat += "The dart cartridge has [ammo_magazine.stored_ammo.len] shots remaining."
+		if(ammo_magazine.stored_ammo && length(ammo_magazine.stored_ammo))
+			dat += "The dart cartridge has [length(ammo_magazine.stored_ammo)] shots remaining."
 		else
 			dat += SPAN_COLOR("red", "The dart cartridge is empty!")
 		dat += " \[<A href='?src=\ref[src];eject_cart=1'>Eject</A>\]<br>"

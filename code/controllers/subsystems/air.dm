@@ -300,7 +300,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 	ASSERT(!B.invalid)
 	ASSERT(A != B)
 	#endif
-	if(A.contents.len < B.contents.len)
+	if(length(A.contents) < length(B.contents))
 		A.c_merge(B)
 		mark_zone_update(B)
 	else
@@ -324,7 +324,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 	var/space = !istype(B)
 
 	if(!space)
-		if(min(A.zone.contents.len, B.zone.contents.len) < ZONE_MIN_SIZE || (direct && (equivalent_pressure(A.zone,B.zone) || times_fired == 0)))
+		if(min(length(A.zone.contents), length(B.zone.contents)) < ZONE_MIN_SIZE || (direct && (equivalent_pressure(A.zone,B.zone) || times_fired == 0)))
 			merge(A.zone,B.zone)
 			return
 

@@ -22,7 +22,7 @@
 
 /obj/machinery/fusion_fuel_compressor/proc/do_fuel_compression(obj/item/thing, mob/user)
 	if(istype(thing) && thing.reagents && thing.reagents.total_volume && thing.is_open_container())
-		if(thing.reagents.reagent_list.len > 1)
+		if(length(thing.reagents.reagent_list) > 1)
 			to_chat(user, SPAN_WARNING("The contents of \the [thing] are impure and cannot be used as fuel."))
 			return 1
 		if(thing.reagents.total_volume < 100)

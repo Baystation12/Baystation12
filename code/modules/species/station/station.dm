@@ -386,7 +386,7 @@
 
 #define DIONA_LIMB_DEATH_COUNT 9
 /datum/species/diona/handle_death_check(mob/living/carbon/human/H)
-	var/lost_limb_count = length(has_limbs) - H.organs.len
+	var/lost_limb_count = length(has_limbs) - length(H.organs)
 	if(lost_limb_count >= DIONA_LIMB_DEATH_COUNT)
 		return TRUE
 	for(var/thing in H.bad_external_organs)

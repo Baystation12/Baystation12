@@ -87,7 +87,7 @@
 		//Try to spread
 		if(parent && parent.possible_children && prob(spread_chance))
 			var/list/neighbors = get_neighbors()
-			if(neighbors?.len)
+			if(length(neighbors))
 				spread_to(pick(neighbors))
 
 		//Try to settle down

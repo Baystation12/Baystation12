@@ -189,7 +189,7 @@
 
 	data["downloadable_programs"] = all_entries
 
-	if(prog.downloads_queue.len > 0)
+	if(length(prog.downloads_queue) > 0)
 		var/list/queue = list() // Nanoui can't iterate through assotiative lists, so we have to do this
 		for(var/item in prog.downloads_queue)
 			queue += item

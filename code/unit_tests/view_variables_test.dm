@@ -11,7 +11,7 @@
 		if(!islist(sh.handled_vars))
 			log_bad("[sh] does not have a handled variables list. Expected a list, was [log_info_line(sh.handled_vars)]")
 			faulty_handlers |= sh
-		else if(!sh.handled_vars.len)
+		else if(!length(sh.handled_vars))
 			log_bad("[sh] as an empty handled variables list.")
 			faulty_handlers |= sh
 		else

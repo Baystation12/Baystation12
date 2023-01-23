@@ -196,11 +196,11 @@ var/global/list/ai_verbs_default = list(
 	to_chat(src, "For department channels, use the following say commands:")
 
 	var/radio_text = ""
-	for(var/i = 1 to silicon_radio.channels.len)
+	for(var/i = 1 to length(silicon_radio.channels))
 		var/channel = silicon_radio.channels[i]
 		var/key = get_radio_key_from_channel(channel)
 		radio_text += "[key] - [channel]"
-		if(i != silicon_radio.channels.len)
+		if(i != length(silicon_radio.channels))
 			radio_text += ", "
 
 	to_chat(src, radio_text)

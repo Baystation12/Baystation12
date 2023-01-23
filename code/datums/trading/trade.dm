@@ -162,7 +162,7 @@
 	return make_response(TRADER_TRADE_COMPLETE, "Thank you for your patronage!", -value, TRUE)
 
 /datum/trader/proc/offer_items_for_bulk(quantity, list/offers, num, turf/location, skill = SKILL_MAX)
-	if(!offers?.len)
+	if(!length(offers))
 		return make_response(TRADER_NOT_ENOUGH, "That's not enough.", 0, FALSE)
 	num = clamp(num, 1, length(trading_items))
 	var/offer_worth = 0
@@ -173,7 +173,7 @@
 			is_wanted = 2
 		if((trade_flags & TRADER_WANTED_ALL) && is_type_in_list(offer, possible_wanted_items))
 			is_wanted = 1
-		if(blacklisted_trade_items?.len && is_type_in_list(offer ,blacklisted_trade_items))
+		if(length(blacklisted_trade_items) && is_type_in_list(offer ,blacklisted_trade_items))
 			return make_response(TRADER_NO_BLACKLISTED, "I refuse to take one of those items.", 0, FALSE)
 
 		if(istype(offer, /obj/item/spacecash))

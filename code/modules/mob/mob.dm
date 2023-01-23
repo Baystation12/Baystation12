@@ -93,14 +93,14 @@
 
 	for(var/o in objs)
 		var/obj/O = o
-		if (exclude_objs?.len && (O in exclude_objs))
+		if (length(exclude_objs) && (O in exclude_objs))
 			exclude_objs -= O
 			continue
 		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 
 	for(var/m in mobs)
 		var/mob/M = m
-		if (exclude_mobs?.len && (M in exclude_mobs))
+		if (length(exclude_mobs) && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
 
@@ -140,7 +140,7 @@
 
 	for(var/m in mobs)
 		var/mob/M = m
-		if (exclude_mobs?.len && (M in exclude_mobs))
+		if (length(exclude_mobs) && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
 		var/mob_message = message
@@ -159,7 +159,7 @@
 
 	for(var/o in objs)
 		var/obj/O = o
-		if (exclude_objs?.len && (O in exclude_objs))
+		if (length(exclude_objs) && (O in exclude_objs))
 			exclude_objs -= O
 			continue
 		O.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
@@ -702,7 +702,7 @@
 	if(client.holder)
 		if(statpanel("MC"))
 			stat("CPU:","[world.cpu]")
-			stat("Instances:","[world.contents.len]")
+			stat("Instances:","[length(world.contents)]")
 			stat(null)
 			var/time = Uptime()
 			if(Master)

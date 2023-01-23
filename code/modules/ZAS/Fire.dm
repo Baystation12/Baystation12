@@ -136,7 +136,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 				if(!enemy_tile.zone || enemy_tile.hotspot)
 					continue
 
-				//if(!enemy_tile.zone.fire_tiles.len) TODO - optimize
+				//if(!length(enemy_tile.zone.fire_tiles)) TODO - optimize
 				var/datum/gas_mixture/acs = enemy_tile.return_air()
 				if(!acs || !acs.check_combustability())
 					continue
@@ -254,7 +254,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 		//if the reaction is progressing too slow then it isn't self-sustaining anymore and burns out
 		if(zone) //be less restrictive with canister and tank reactions
-			if((!gas_fuel || used_fuel <= FIRE_GAS_MIN_BURNRATE*zone.contents.len))
+			if((!gas_fuel || used_fuel <= FIRE_GAS_MIN_BURNRATE*length(zone.contents)))
 				return 0
 
 

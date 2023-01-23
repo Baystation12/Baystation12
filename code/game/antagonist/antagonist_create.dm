@@ -64,7 +64,7 @@
 		to_chat(player.current, SPAN_CLASS("antagdesc", "[get_leader_welcome_text(player.current)]"))
 	else
 		to_chat(player.current, SPAN_CLASS("antagdesc", "[get_welcome_text(player.current)]"))
-	if (config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
+	if (config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !length(player.objectives))
 		to_chat(player.current, get_antag_text(player.current))
 
 	src.show_objectives_at_creation(player)

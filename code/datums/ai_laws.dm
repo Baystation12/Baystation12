@@ -157,7 +157,7 @@
 	if(length(supplied_laws) >= number && supplied_laws[number])
 		delete_law(supplied_laws[number])
 
-	while (src.supplied_laws.len < number)
+	while (length(src.supplied_laws) < number)
 		src.supplied_laws += ""
 		if(length(state_supplied) < length(supplied_laws))
 			state_supplied += 1

@@ -119,7 +119,7 @@ var/global/list/ventcrawl_machinery = list(
 				break
 
 	if(vent_found)
-		if(vent_found.network && (vent_found.network.normal_members.len || vent_found.network.line_members.len))
+		if(vent_found.network && (length(vent_found.network.normal_members) || length(vent_found.network.line_members)))
 
 			to_chat(src, "You begin climbing into the ventilation system...")
 			if(vent_found.air_contents && !issilicon(src))

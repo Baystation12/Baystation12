@@ -260,7 +260,7 @@
 		var/list/mix_sources = list()
 		for(var/gasid in ALL_GASIDS)
 			var/datum/gas_mixture/mix_source = after_gas_mixes["sink"]
-			mix_sources[mix_source] = 1.0/gas_data.gases.len //doesn't work as a macro for some reason
+			mix_sources[mix_source] = 1.0/length(gas_data.gases) //doesn't work as a macro for some reason
 
 		mix_gas(null, mix_sources, after_gas_mixes["sink"], null, INFINITY)
 

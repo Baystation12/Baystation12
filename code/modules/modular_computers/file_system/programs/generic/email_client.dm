@@ -234,10 +234,10 @@
 				data["cur_attachment_filename"] = "[current_message.attachment.filename].[current_message.attachment.filetype]"
 				data["cur_attachment_size"] = current_message.attachment.size
 		else
-			data["label_inbox"] = "Inbox ([current_account.inbox.len])"
-			data["label_outbox"] = "Sent ([current_account.outbox.len])"
-			data["label_spam"] = "Spam ([current_account.spam.len])"
-			data["label_deleted"] = "Deleted ([current_account.deleted.len])"
+			data["label_inbox"] = "Inbox ([length(current_account.inbox)])"
+			data["label_outbox"] = "Sent ([length(current_account.outbox)])"
+			data["label_spam"] = "Spam ([length(current_account.spam)])"
+			data["label_deleted"] = "Deleted ([length(current_account.deleted)])"
 			var/list/message_source
 			if(folder == "Inbox")
 				message_source = current_account.inbox

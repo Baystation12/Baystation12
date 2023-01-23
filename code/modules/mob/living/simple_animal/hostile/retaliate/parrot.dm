@@ -317,7 +317,7 @@
 	   Every once in a while, the parrot picks one of the lines from the buffer and replaces an element of the 'speech' list.
 	   Then it clears the buffer to make sure they don't magically remember something from hours ago. */
 	if(length(speech_buffer) && prob(10))
-		if(say_list.speak.len)
+		if(length(say_list.speak))
 			say_list.speak.Remove(pick(say_list.speak))
 
 		say_list.speak.Add(pick(speech_buffer))
@@ -343,7 +343,7 @@
 			parrot_sleep_dur = parrot_sleep_max
 
 			//Cycle through message modes for the headset
-			if(say_list.speak.len)
+			if(length(say_list.speak))
 				var/list/newspeak = list()
 
 				if(length(available_channels) && src.ears)

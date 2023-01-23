@@ -77,7 +77,7 @@
 	finalize_synths(R)
 
 	R.set_module_sprites(sprites)
-	R.choose_icon(R.module_sprites.len + 1, R.module_sprites)
+	R.choose_icon(length(R.module_sprites) + 1, R.module_sprites)
 
 /obj/item/robot_module/proc/build_equipment()
 	var/list/created_equipment = list()
