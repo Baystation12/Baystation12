@@ -10,7 +10,9 @@
 //Human misc
 #define LANGUAGE_GUTTER         "Gutter"
 #define LANGUAGE_SPACER         "Spacer"
-#define LANGUAGE_HUMAN_LORRIMAN "Lirris"
+#define LANGUAGE_HUMAN_LORRIMAN "Lirris" //PRX
+#define LANGUAGE_HUMAN_AVALON		"Alain" //PRX
+#define LANGUAGE_HUMAN_MIRANIAN		"Miranian" //PRX
 
 //Alien
 #define LANGUAGE_EAL               "Encoded Audio Language"

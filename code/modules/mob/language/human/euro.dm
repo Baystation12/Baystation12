@@ -23,7 +23,9 @@
 		LANGUAGE_HUMAN_RUSSIAN = 5,
 		LANGUAGE_HUMAN_SELENIAN = 85,
 		LANGUAGE_SPACER = 20,
-		LANGUAGE_HUMAN_LORRIMAN = 90
+		LANGUAGE_HUMAN_LORRIMAN = 90,
+		LANGUAGE_HUMAN_AVALON = 35, //PRX
+		LANGUAGE_HUMAN_MIRANIAN = 30 //PRX
 	)
 	syllables = list(
 		"al", "an", "ar", "as", "at", "ea", "ed", "en", "er", "es", "ha", "he", "hi", "in", "is", "it",

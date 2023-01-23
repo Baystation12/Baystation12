@@ -15,7 +15,9 @@
 		LANGUAGE_HUMAN_EURO = 30,
 		LANGUAGE_HUMAN_SELENIAN = 15,
 		LANGUAGE_SPACER = 20,
-		LANGUAGE_HUMAN_LORRIMAN = 10
+		LANGUAGE_HUMAN_LORRIMAN = 10, //PRX
+		LANGUAGE_HUMAN_AVALON = 25, //PRX
+		LANGUAGE_HUMAN_MIRANIAN = 15 //PRX
 	)
 	syllables = list(
 		"ad", "al", "an", "ar", "as", "ci", "co", "de", "do", "el", "en", "er", "es",

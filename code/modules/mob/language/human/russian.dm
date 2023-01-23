@@ -8,7 +8,9 @@
 		LANGUAGE_HUMAN_EURO = 5,
 		LANGUAGE_HUMAN_SELENIAN = 10,
 		LANGUAGE_SPACER = 20,
-		LANGUAGE_HUMAN_LORRIMAN = 5
+		LANGUAGE_HUMAN_LORRIMAN = 5,
+		LANGUAGE_HUMAN_AVALON = 5, //PRX
+		LANGUAGE_HUMAN_MIRANIAN = 5 //PRX
 	)
 	syllables = list(
 		"rus", "zem", "ave", "groz", "ski", "ska", "ven", "konst", "pol", "lin", "svy",
