@@ -106,12 +106,13 @@
 			overdose(M)
 
 	//determine the metabolism rate
-	var/removed = min(metabolism, volume)
+	var/removed = metabolism
 	if(ingest_met && (location == CHEM_INGEST))
 		removed = ingest_met
 	if(touch_met && (location == CHEM_TOUCH))
 		removed = touch_met
 	removed = M.get_adjusted_metabolism(removed)
+	removed = min(removed, volume)
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
 	var/effective = removed
