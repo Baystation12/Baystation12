@@ -106,7 +106,7 @@
 			overdose(M)
 
 	//determine the metabolism rate
-	var/removed = metabolism
+	var/removed = min(metabolism, volume)
 	if(ingest_met && (location == CHEM_INGEST))
 		removed = ingest_met
 	if(touch_met && (location == CHEM_TOUCH))
