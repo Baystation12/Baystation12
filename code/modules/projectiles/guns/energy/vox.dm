@@ -29,6 +29,7 @@
 	projectile_type = /obj/item/projectile/beam/stun/darkmatter
 	one_hand_penalty = 2 //a little bulky
 	self_recharge = 0
+	battery_changable = TRUE
 	battery_chamber_size = BATTERY_VOX
 	battery_type = /obj/item/cell/guncell/vox/overcharged
 	init_firemodes = list(
@@ -53,6 +54,7 @@
 	w_class = ITEM_SIZE_LARGE
 	one_hand_penalty = 1
 	self_recharge = 0
+	battery_changable = TRUE
 	battery_chamber_size = BATTERY_VOX
 	battery_type = /obj/item/cell/guncell/vox/overcharged
 	recharge_time = 10

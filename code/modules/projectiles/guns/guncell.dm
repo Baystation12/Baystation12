@@ -83,7 +83,7 @@
 	desc = "A very special battery for a very comlex ascent weaponary. This one is stabilized."
 	charge = 400 // base 20 shots
 	maxcharge = 400
-	self_recharge = TRUE
+	autorecharging = TRUE
 	battery_chamber_size = BATTERY_ALIEN
 	icon_state = "a_0"
 
@@ -105,7 +105,7 @@
 	charge = 400 // base 20 shots
 	maxcharge = 400
 	battery_chamber_size = BATTERY_VOX
-	self_recharge = TRUE
+	autorecharging = TRUE
 	icon_state = "v_0"
 
 /obj/item/cell/guncell/vox/overcharged
@@ -465,26 +465,25 @@
 
 /obj/item/cell/Initialize()
 	. = ..()
-	if(self_recharge)
+	if(autorecharging)
 		START_PROCESSING(SSobj, src)
 	update_icon()
 
 /obj/item/cell/Destroy()
-	if(self_recharge)
+	if(autorecharging)
 		STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/item/cell/Process()
-	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the cyborg
-		var/charge_tick
-		var/recharge_time = 20
-		charge_tick++
-		if(charge_tick < recharge_time) return 0
-		charge_tick = 0
+	charge_tick--
+	if(charge_tick > 0) return 0
+	charge_tick = recharge_time
+	give(maxcharge * autorecharge_rate)
 
-		if(charge >= maxcharge)
-			return 0 // check if we actually need to recharge
+	// If installed in a gun, update gun icon to reflect new charge level.
+	if(istype(loc, /obj/item/gun/energy))
+		var/obj/item/gun/energy/I = loc
+		I.update_icon()
 
-		charge+=10 //... to recharge the shot
 		update_icon()
 	return 1
