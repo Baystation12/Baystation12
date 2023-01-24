@@ -35,7 +35,7 @@
 	update_icon()
 
 /obj/item/gun/energy/attackby(obj/item/W, mob/living/user)
-	if(istype(W, battery_type))
+	if(istype(W, /obj/item/cell/guncell/))
 		var/obj/item/cell/guncell/B = W
 		if((B.battery_chamber_size != src.battery_chamber_size) )
 			to_chat(usr, SPAN_WARNING("This battery don't fit for this weapon!"))
