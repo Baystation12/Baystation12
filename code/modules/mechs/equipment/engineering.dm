@@ -78,7 +78,7 @@
 
 /obj/effect/mech_shield/Destroy()
 	if(shields)
-		if(shields.segments.len)
+		if(length(shields.segments))
 			shields.segments -= src
 		shields = null
 	atmos_canpass = CANPASS_ALWAYS
@@ -137,7 +137,7 @@
 				segments += MS
 				GLOB.moved_event.register(MS, src, .proc/on_moved)
 
-		passive_power_use = 0.8 KILOWATTS * segments.len
+		passive_power_use = 0.8 KILOWATTS * length(segments)
 
 		update_icon()
 		owner.update_icon()
@@ -152,7 +152,7 @@
 	for(var/obj/effect/mech_shield/MS in segments)
 		if(istype(MS))
 			GLOB.moved_event.unregister(MS, src, .proc/on_moved)
-	if(segments.len)
+	if(length(segments))
 		owner.visible_message(SPAN_WARNING("The energy shields in front of \the [owner] disappear!"))
 	QDEL_NULL_LIST(segments)
 	passive_power_use = 0

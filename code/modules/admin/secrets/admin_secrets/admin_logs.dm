@@ -8,6 +8,6 @@
 	var/dat = "<B>Admin Log<HR></B>"
 	for(var/l in GLOB.admin_log)
 		dat += "<li>[l]</li>"
-	if(!GLOB.admin_log.len)
+	if(!length(GLOB.admin_log))
 		dat += "No-one has done anything this round!"
 	show_browser(user, dat, "window=admin_log")

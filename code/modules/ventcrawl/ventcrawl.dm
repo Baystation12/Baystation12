@@ -84,10 +84,10 @@ var/global/list/ventcrawl_machinery = list(
 	for(var/obj/machinery/atmospherics/unary/U in range(1))
 		if(is_type_in_list(U,ventcrawl_machinery) && Adjacent(U) && U.can_crawl_through())
 			pipes |= U
-	if(!pipes || !pipes.len)
+	if(!pipes || !length(pipes))
 		to_chat(src, "There are no pipes that you can ventcrawl into within range!")
 		return
-	if(pipes.len == 1)
+	if(length(pipes) == 1)
 		pipe = pipes[1]
 	else
 		pipe = input("Crawl Through Vent", "Pick a pipe") as null|anything in pipes
@@ -119,7 +119,7 @@ var/global/list/ventcrawl_machinery = list(
 				break
 
 	if(vent_found)
-		if(vent_found.network && (vent_found.network.normal_members.len || vent_found.network.line_members.len))
+		if(vent_found.network && (length(vent_found.network.normal_members) || length(vent_found.network.line_members)))
 
 			to_chat(src, "You begin climbing into the ventilation system...")
 			if(vent_found.air_contents && !issilicon(src))
@@ -179,4 +179,4 @@ var/global/list/ventcrawl_machinery = list(
 			client.images -= current_image
 		client.eye = src
 
-	pipes_shown.len = 0
+	pipes_shown.Cut()

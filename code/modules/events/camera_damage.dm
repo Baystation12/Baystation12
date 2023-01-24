@@ -23,7 +23,7 @@
 					cam.wires.CutWireIndex(CAMERA_WIRE_ALARM)
 
 /datum/event/camera_damage/proc/acquire_random_camera(remaining_attempts = 5)
-	if(!cameranet.cameras.len)
+	if(!length(cameranet.cameras))
 		return
 	if(!remaining_attempts)
 		return

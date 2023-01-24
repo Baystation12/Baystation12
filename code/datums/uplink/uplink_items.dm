@@ -124,7 +124,7 @@ var/global/datum/uplink/uplink = new()
 
 	if(istype(I, /list))
 		var/list/L = I
-		if(L.len) I = L[1]
+		if(length(L)) I = L[1]
 
 	if(istype(I) && ishuman(user))
 		var/mob/living/carbon/human/A = user

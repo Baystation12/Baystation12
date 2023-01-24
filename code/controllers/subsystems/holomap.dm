@@ -27,11 +27,11 @@ SUBSYSTEM_DEF(minimap)
 	flags = SS_NO_FIRE
 	init_order = SS_INIT_HOLOMAP
 
-	var/list/datum/holomapdata/holomaps = list()
-	var/list/station_holomaps = list()
+	var/static/list/datum/holomapdata/holomaps
+	var/static/list/station_holomaps = list()
 
 /datum/controller/subsystem/minimap/Initialize(start_uptime)
-	holomaps.len = world.maxz
+	holomaps = new (world.maxz)
 	for (var/z = 1 to world.maxz)
 		generateHolomap(z)
 

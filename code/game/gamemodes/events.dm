@@ -61,12 +61,12 @@ var/global/hadevent    = 0
 			for(var/obj/effect/landmark/newEpicentre in landmarks_list)
 				if(newEpicentre.name == "lightsout" && !(newEpicentre in epicentreList))
 					possibleEpicentres += newEpicentre
-			if(possibleEpicentres.len)
+			if(length(possibleEpicentres))
 				epicentreList += pick(possibleEpicentres)
 			else
 				break
 
-		if(!epicentreList.len)
+		if(!length(epicentreList))
 			return
 
 		for(var/obj/effect/landmark/epicentre in epicentreList)
@@ -108,7 +108,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 			var/list/pos_crew = list()
 			for(var/mob/living/carbon/human/pos in GLOB.player_list)
 				pos_crew += pos.real_name
-			if(pos_crew.len)
+			if(length(pos_crew))
 				crew = pick(pos_crew)
 			else
 				crew = "Any Human"

@@ -16,7 +16,7 @@
 		if(!T.name || !istext(T.name)) // Empty strings are valid texts
 			invalid_traits += T.type
 
-	if(invalid_traits.len)
+	if(length(invalid_traits))
 		fail("Following trait types have invalid names: " + english_list(invalid_traits))
 	else
 		pass("All traits have valid names")
@@ -38,7 +38,7 @@
 			if (!(trait_type in incompatible_trait.incompatible_traits))
 				invalid_traits += trait_type
 
-	if (invalid_traits.len)
+	if (length(invalid_traits))
 		fail("Following trait types have invalid incompability setups: " + english_list(invalid_traits))
 	else
 		pass("All traits have valid incompatibility setups")
@@ -71,10 +71,10 @@
 	var/list/invalid_traits = list()
 	for(var/trait in GET_SINGLETON_SUBTYPE_LIST(/singleton/trait))
 		var/singleton/trait/T = trait
-		if(!length(T.levels) || (T.levels.len > 1 && (TRAIT_LEVEL_EXISTS in T.levels)))
+		if(!length(T.levels) || (length(T.levels) > 1 && (TRAIT_LEVEL_EXISTS in T.levels)))
 			invalid_traits += T.type
 
-	if(invalid_traits.len)
+	if(length(invalid_traits))
 		fail("Following trait types have invalid ranges: " + english_list(invalid_traits))
 	else
 		pass("All traits have valid ranges")
@@ -96,7 +96,7 @@
 				invalid_species += S.type
 				break
 
-	if(invalid_species.len)
+	if(length(invalid_species))
 		fail("Following species have invalid ranges: " + english_list(invalid_species))
 	else
 		pass("All species have valid trait levels")
@@ -119,7 +119,7 @@
 					invalid_species.Add(S.type)
 					break
 
-	if (invalid_species.len)
+	if (length(invalid_species))
 		fail("Following species have invalid trait compatibilities: " + english_list(invalid_species))
 	else
 		pass("All species have valid trait compatibilities")

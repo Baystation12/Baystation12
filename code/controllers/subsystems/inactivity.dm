@@ -19,7 +19,7 @@ SUBSYSTEM_DEF(inactivity)
 
 /datum/controller/subsystem/inactivity/fire(resumed, no_mc_tick)
 	if (!resumed)
-		if (!GLOB.clients.len)
+		if (!length(GLOB.clients))
 			return
 		queue = GLOB.clients.Copy()
 	var/kick_time = config.kick_inactive MINUTES

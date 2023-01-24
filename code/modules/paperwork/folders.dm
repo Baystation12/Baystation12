@@ -29,7 +29,7 @@
 
 /obj/item/folder/on_update_icon()
 	overlays.Cut()
-	if(contents.len)
+	if(length(contents))
 		overlays += "folder_paper"
 	return
 
@@ -119,7 +119,7 @@
 	if(sealed)
 		icon_state = "envelope_sealed"
 	else
-		icon_state = "envelope[contents.len > 0]"
+		icon_state = "envelope[length(contents) > 0]"
 
 /obj/item/folder/envelope/examine(mob/user)
 	. = ..()

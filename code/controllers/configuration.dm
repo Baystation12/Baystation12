@@ -774,7 +774,7 @@
 				starlight = value >= 0 ? value : 0
 			if ("ert_species")
 				ert_species = splittext(value, ";")
-				if (!ert_species.len)
+				if (!length(ert_species))
 					ert_species += SPECIES_HUMAN
 			if ("law_zero")
 				law_zero = value

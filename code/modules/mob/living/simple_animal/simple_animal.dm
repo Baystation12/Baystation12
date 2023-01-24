@@ -216,7 +216,7 @@
 
 /mob/living/simple_animal/say(message)
 	var/verb = "says"
-	if(speak_emote.len)
+	if(length(speak_emote))
 		verb = pick(speak_emote)
 
 	message = sanitize(message)

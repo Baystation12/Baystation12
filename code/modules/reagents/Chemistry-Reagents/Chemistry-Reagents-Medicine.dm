@@ -475,7 +475,7 @@
 	value = 3.6
 
 /datum/reagent/ryetalyn/affect_blood(mob/living/carbon/M, removed)
-	var/needs_update = M.mutations.len > 0
+	var/needs_update = length(M.mutations) > 0
 
 	M.disabilities = 0
 	M.sdisabilities = 0

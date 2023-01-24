@@ -50,7 +50,7 @@ var/global/list/holder_mob_icon_cache = list()
 		for(var/mob/M in contents)
 			unregister_all_movement(last_holder, M)
 
-	if(istype(loc,/turf) || !(contents.len))
+	if(istype(loc,/turf) || !(length(contents)))
 		for(var/mob/M in contents)
 			var/atom/movable/mob_container = M
 			mob_container.dropInto(loc)
@@ -142,7 +142,7 @@ var/global/list/holder_mob_icon_cache = list()
 /mob/living/var/holder_type
 
 /mob/living/proc/get_scooped(mob/living/carbon/human/grabber, self_grab)
-	if(!holder_type || buckled || pinned.len)
+	if(!holder_type || buckled || length(pinned))
 		return
 
 	if(self_grab)

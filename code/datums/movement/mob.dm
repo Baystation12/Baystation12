@@ -224,7 +224,7 @@
 
 /mob/living/ProcessGrabs()
 	//if we are being grabbed
-	if(grabbed_by.len)
+	if(length(grabbed_by))
 		resist() //shortcut for resisting grabs
 
 /mob/proc/ProcessGrabs()
@@ -301,7 +301,7 @@
 			return
 		var/list/L = mob.ret_grab()
 		if(istype(L, /list))
-			if(L.len == 2)
+			if(length(L) == 2)
 				L -= mob
 				var/mob/M = L[1]
 				if(M)

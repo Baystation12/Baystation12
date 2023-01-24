@@ -91,7 +91,7 @@
 /obj/item/gun/projectile/automatic/merc_smg/on_update_icon()
 	..()
 	if(ammo_magazine)
-		icon_state = "c20r-[round(ammo_magazine.stored_ammo.len,4)]"
+		icon_state = "c20r-[round(length(ammo_magazine.stored_ammo),4)]"
 	else
 		icon_state = "c20r"
 
@@ -162,7 +162,7 @@
 /obj/item/gun/projectile/automatic/sec_smg/on_update_icon()
 	..()
 	if(ammo_magazine)
-		overlays += image(icon, "mag-[round(ammo_magazine.stored_ammo.len,5)]")
+		overlays += image(icon, "mag-[round(length(ammo_magazine.stored_ammo),5)]")
 	if(ammo_magazine && LAZYLEN(ammo_magazine.stored_ammo))
 		overlays += image(icon, "ammo-ok")
 	else
@@ -230,7 +230,7 @@
 /obj/item/gun/projectile/automatic/bullpup_rifle/on_update_icon()
 	..()
 	if(ammo_magazine)
-		if(ammo_magazine.stored_ammo.len)
+		if(length(ammo_magazine.stored_ammo))
 			icon_state = "carbine-loaded"
 		else
 			icon_state = "carbine-empty"
@@ -326,7 +326,7 @@
 /obj/item/gun/projectile/automatic/l6_saw/on_update_icon()
 	..()
 	if(istype(ammo_magazine, /obj/item/ammo_magazine/box))
-		icon_state = "l6[cover_open ? "open" : "closed"][round(ammo_magazine.stored_ammo.len, 10)]"
+		icon_state = "l6[cover_open ? "open" : "closed"][round(length(ammo_magazine.stored_ammo), 10)]"
 		item_state = "l6[cover_open ? "open" : "closed"]"
 	else if(ammo_magazine)
 		icon_state = "l6[cover_open ? "open" : "closed"]mag"

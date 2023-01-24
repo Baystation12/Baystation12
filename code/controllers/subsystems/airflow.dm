@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(airflow)
 /datum/controller/subsystem/airflow/fire(resumed, no_mc_tick)
 	if (!resumed)
 		queue = movables.Copy()
-		if (!queue.len)
+		if (!length(queue))
 			return
 	var/cut_until = 1
 	for (var/atom/movable/target as anything in queue)

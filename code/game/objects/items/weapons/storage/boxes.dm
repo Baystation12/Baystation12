@@ -53,7 +53,7 @@
 	if(..()) return
 
 	//try to fold it.
-	if ( contents.len )
+	if ( length(contents) )
 		return
 
 	if ( !ispath(src.foldable) )

@@ -310,7 +310,7 @@
 	if(mind)
 		if(mind.assigned_job)
 			mind.assigned_job.clear_slot()
-		if(mind.objectives.len)
+		if(length(mind.objectives))
 			qdel(mind.objectives)
 			mind.special_role = null
 		clear_antag_roles(mind)

@@ -163,7 +163,7 @@
 			switch(remove_from)
 				if("ears")
 					if(ears)
-						if(available_channels.len)
+						if(length(available_channels))
 							src.say("[pick(available_channels)] BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
 						else
 							src.say("BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
@@ -316,8 +316,8 @@
 	   Phrases that the parrot hears in mob/living/say() get added to speach_buffer.
 	   Every once in a while, the parrot picks one of the lines from the buffer and replaces an element of the 'speech' list.
 	   Then it clears the buffer to make sure they don't magically remember something from hours ago. */
-	if(speech_buffer.len && prob(10))
-		if(say_list.speak.len)
+	if(length(speech_buffer) && prob(10))
+		if(length(say_list.speak))
 			say_list.speak.Remove(pick(say_list.speak))
 
 		say_list.speak.Add(pick(speech_buffer))
@@ -343,10 +343,10 @@
 			parrot_sleep_dur = parrot_sleep_max
 
 			//Cycle through message modes for the headset
-			if(say_list.speak.len)
+			if(length(say_list.speak))
 				var/list/newspeak = list()
 
-				if(available_channels.len && src.ears)
+				if(length(available_channels) && src.ears)
 					for(var/possible_phrase in say_list.speak)
 
 						//50/50 chance to not use the radio at all
@@ -711,7 +711,7 @@
 		return
 
 	var/verb = "says"
-	if(speak_emote.len)
+	if(length(speak_emote))
 		verb = pick(speak_emote)
 
 
@@ -747,7 +747,7 @@
 
 
 /mob/living/simple_animal/hostile/retaliate/parrot/hear_radio(message, verb="says", datum/language/language=null, part_a, part_b, part_c, mob/speaker = null, hard_to_hear = 0)
-	if(prob(50) && available_channels.len)
+	if(prob(50) && length(available_channels))
 		parrot_hear("[pick(available_channels)] [message]")
 	..()
 

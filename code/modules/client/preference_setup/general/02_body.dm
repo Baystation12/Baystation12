@@ -339,7 +339,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/hair_index = valid_hairstyles.Find(pref.head_hair_style)
 
 		if (href_list["inc"])
-			if (hair_index < valid_hairstyles.len && valid_hairstyles[hair_index + 1])
+			if (hair_index < length(valid_hairstyles) && valid_hairstyles[hair_index + 1])
 				new_h_style = valid_hairstyles[hair_index + 1]
 		else if (href_list["dec"])
 			if (hair_index > 1 && valid_hairstyles[hair_index - 1])
@@ -399,7 +399,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/hair_index = valid_facialhairstyles.Find(pref.facial_hair_style)
 
 		if (href_list["inc"])
-			if (hair_index < valid_facialhairstyles.len && valid_facialhairstyles[hair_index + 1])
+			if (hair_index < length(valid_facialhairstyles) && valid_facialhairstyles[hair_index + 1])
 				new_f_style = valid_facialhairstyles[hair_index + 1]
 		else if (href_list["dec"])
 			if (hair_index > 1 && valid_facialhairstyles[hair_index - 1])
@@ -536,14 +536,14 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					var/datum/robolimb/M = chargen_robolimbs[company]
 					if(tmp_species in M.species_cannot_use)
 						continue
-					if(M.restricted_to.len && !(tmp_species in M.restricted_to))
+					if(length(M.restricted_to) && !(tmp_species in M.restricted_to))
 						continue
-					if(M.applies_to_part.len && !(limb in M.applies_to_part))
+					if(length(M.applies_to_part) && !(limb in M.applies_to_part))
 						continue
 					if(M.allowed_bodytypes && !(tmp_species in M.allowed_bodytypes))
 						continue
 					usable_manufacturers[company] = M
-				if(!usable_manufacturers.len)
+				if(!length(usable_manufacturers))
 					return
 				var/choice = input(user, "Which manufacturer do you wish to use for this limb?") as null|anything in usable_manufacturers
 				if(!choice)
@@ -630,7 +630,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/datum/species/mob_species = all_species[pref.species]
 	var/list/valid_hairstyles = mob_species.get_hair_styles()
 
-	if(valid_hairstyles.len)
+	if(length(valid_hairstyles))
 		pref.head_hair_style = pick(valid_hairstyles)
 	else
 		//this shouldn't happen
@@ -640,7 +640,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/datum/species/mob_species = all_species[pref.species]
 	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(pref.gender)
 
-	if(valid_facialhairstyles.len)
+	if(length(valid_facialhairstyles))
 		pref.facial_hair_style = pick(valid_facialhairstyles)
 	else
 		//this shouldn't happen

@@ -20,7 +20,7 @@
 
 /proc/any_predicate_true(list/input, list/predicates)
 	PREPARE_INPUT
-	if(!predicates.len)
+	if(!length(predicates))
 		return TRUE
 
 	for(var/predicate in predicates)

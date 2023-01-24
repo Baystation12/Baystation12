@@ -32,8 +32,8 @@
 	SPAN_NOTICE("You hear something metallic spin and click."))
 	playsound(src.loc, 'sound/weapons/revolver_spin.ogg', 100, 1)
 	loaded = shuffle(loaded)
-	if(rand(1,max_shells) > loaded.len)
-		chamber_offset = rand(0,max_shells - loaded.len)
+	if(rand(1,max_shells) > length(loaded))
+		chamber_offset = rand(0,max_shells - length(loaded))
 
 /obj/item/gun/projectile/revolver/consume_next_projectile()
 	if(chamber_offset)

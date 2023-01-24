@@ -47,7 +47,7 @@
 		var/datum/hallucination/H = new T
 		if(H.can_affect(src))
 			candidates += H
-	if(candidates.len)
+	if(length(candidates))
 		var/datum/hallucination/H = pick(candidates)
 		H.holder = src
 		H.activate()
@@ -152,7 +152,7 @@
 			var/firstname = copytext(holder.real_name, 1, findtext(holder.real_name, " "))
 			if(lastname) names += lastname
 			if(firstname) names += firstname
-			if(!names.len)
+			if(!length(names))
 				names += holder.real_name
 			var/add = prob(20) ? ", [pick(names)]" : ""
 			var/list/phrases = list("[prob(50) ? "Hey, " : ""][pick(names)]!","[prob(50) ? "Hey, " : ""][pick(names)]?","Get out[add]!","Go away[add].","What are you doing[add]?","Where's your ID[add]?")
@@ -203,7 +203,7 @@
 	var/list/possible_points = list()
 	for(var/turf/simulated/floor/F in view(holder, world.view+1))
 		possible_points += F
-	if(possible_points.len)
+	if(length(possible_points))
 		for(var/i = 1 to number)
 			var/image/thing = generate_mirage()
 			things += thing

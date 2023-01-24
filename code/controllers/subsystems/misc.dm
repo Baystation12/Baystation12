@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(misc)
 	if (PreventUpdateStat(time))
 		return ..()
 	..({"\
-		TR: [GLOB.traders.len],[Roundm(cost_traders, 0.1)] \
+		TR: [length(GLOB.traders)],[Roundm(cost_traders, 0.1)] \
 		SO: [Roundm(GLOB.sun_angle, 0.1)],[Roundm(GLOB.sun_rate, 0.1)],[Roundm(cost_solars, 0.1)]
 	"})
 
@@ -68,7 +68,7 @@ GLOBAL_LIST_INIT(trader_uniques, subtypesof(/datum/trader/ship/unique))
 /datum/controller/subsystem/misc/proc/UpdateTraders(resumed, no_mc_tick, generate_stations = 0)
 	if (!resumed)
 		queue = GLOB.trader_types.Copy()
-	var/count = queue.len
+	var/count = length(queue)
 	var/max = GLOB.trader_max
 	var/trader_type
 	var/datum/trader/trader
@@ -135,7 +135,7 @@ GLOBAL_LIST_EMPTY(solar_controllers)
 		GLOB.sun_angle = angle
 		queue = GLOB.solar_controllers.Copy()
 	var/obj/machinery/power/solar_control/controller
-	for (var/i = queue.len to 1 step -1)
+	for (var/i = length(queue) to 1 step -1)
 		controller = queue[i]
 		if (QDELETED(controller) || !controller.powernet)
 			GLOB.solar_controllers -= controller

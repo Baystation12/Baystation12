@@ -10,7 +10,7 @@ var/global/list/small_deepmaint_room_templates = list()
 var/global/list/big_deepmaint_room_templates = list()
 
 /proc/populateDeepMaintMapLists()
-	if(big_deepmaint_room_templates.len || small_deepmaint_room_templates.len)
+	if(length(big_deepmaint_room_templates) || length(small_deepmaint_room_templates))
 		return
 	for(var/item in subtypesof(/datum/map_template/deepmaint_template/room))
 		var/datum/map_template/deepmaint_template/temp = item
@@ -38,7 +38,7 @@ var/global/list/big_deepmaint_room_templates = list()
 
 
 /proc/check_deepmaint_list()
-	return (free_deepmaint_ladders.len)
+	return (length(free_deepmaint_ladders))
 
 /obj/procedural/jp_DungeonGenerator/deepmaint
 	name = "Deep Maintenance Procedural Generator"
@@ -52,7 +52,7 @@ var/global/list/big_deepmaint_room_templates = list()
 	var/direction = get_dir(t1, t2)
 	var/list/walls = list()
 	for(var/turf/A in getAdjacent(t1))
-		var/length = line.len
+		var/length = length(line)
 		var/turf/T = A
 		walls += T
 		while(length > 0)
@@ -60,7 +60,7 @@ var/global/list/big_deepmaint_room_templates = list()
 			T = get_step(T, direction)
 			if (T.is_wall())
 				walls += T
-				if(walls.len == line.len)
+				if(length(walls) == length(line))
 					return walls
 			else
 				walls = list()
@@ -77,7 +77,7 @@ var/global/list/big_deepmaint_room_templates = list()
 	var/list/obj/procedural/jp_dungeonroom/done_rooms = list()
 	while(ladders_to_place > 0)
 		if(numRooms > 1)
-			if(done_rooms.len == out_rooms.len)
+			if(length(done_rooms) == length(out_rooms))
 				testing("Deepmaint generator went through all rooms, but couldn't place all ladders! Ladders left - [ladders_to_place]")
 				break
 		var/obj/procedural/jp_dungeonroom/picked_room = pick(out_rooms)
@@ -104,7 +104,7 @@ var/global/list/big_deepmaint_room_templates = list()
 					viable_turfs[F] = T //We put this floor and its wall into the possible turfs list
 					break
 
-		if(viable_turfs.len == 0)
+		if(length(viable_turfs) == 0)
 			done_rooms += picked_room
 			continue
 

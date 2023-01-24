@@ -83,7 +83,7 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 	for(var/p in current_antagonists)
 		var/datum/mind/player = p
 		var/text = "<b>[player.name]'s spells were:</b>"
-		if(!player.learned_spells || !player.learned_spells.len)
+		if(!player.learned_spells || !length(player.learned_spells))
 			text += "<br>None!"
 		else
 			for(var/s in player.learned_spells)

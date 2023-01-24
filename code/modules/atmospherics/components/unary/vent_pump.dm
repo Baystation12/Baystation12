@@ -244,7 +244,7 @@
 	if(controlled)
 		var/area/A = get_area(src)
 		if(A && !A.air_vent_names[id_tag])
-			var/new_name = "[A.name] Vent Pump #[A.air_vent_names.len+1]"
+			var/new_name = "[A.name] Vent Pump #[length(A.air_vent_names)+1]"
 			A.air_vent_names[id_tag] = new_name
 			SetName(new_name)
 	. = ..()

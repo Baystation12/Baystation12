@@ -202,7 +202,7 @@
 	return 0
 
 /mob/living/bot/proc/handleAI()
-	if(ignore_list.len)
+	if(length(ignore_list))
 		for(var/atom/A in ignore_list)
 			if(!A || !A.loc || prob(1))
 				ignore_list -= A
@@ -222,7 +222,7 @@
 		resetTarget()
 		lookForTargets()
 		if(will_patrol && !pulledby && !target)
-			if(patrol_path && patrol_path.len)
+			if(patrol_path && length(patrol_path))
 				for(var/i = 1 to patrol_speed)
 					sleep(20 / (patrol_speed + 1))
 					handlePatrol()
@@ -246,7 +246,7 @@
 	if(!target || !target.loc)
 		return
 	if(get_dist(src, target) > min_target_dist)
-		if(!target_path.len || get_turf(target) != target_path[target_path.len])
+		if(!length(target_path) || get_turf(target) != target_path[length(target_path)])
 			calcTargetPath()
 		if(makeStep(target_path))
 			frustration = 0
@@ -320,7 +320,7 @@
 	return
 
 /mob/living/bot/proc/makeStep(list/path)
-	if(!path.len)
+	if(!length(path))
 		return 0
 	var/turf/T = path[1]
 	if(get_turf(src) == T)

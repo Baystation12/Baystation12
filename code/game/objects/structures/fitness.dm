@@ -74,14 +74,14 @@
 					else
 						message = "; this does not look safe"
 				else
-					message = fail_message[min(1 + round(weight - skill), fail_message.len)]
+					message = fail_message[min(1 + round(weight - skill), length(fail_message))]
 				user.visible_message(SPAN_NOTICE("\The [user] fails to lift the weights[message]."), SPAN_NOTICE("You fail to lift the weights[message]."))
 			else
 				if(!synth)
 					var/adj_weight = weight * 5
 					user.adjust_nutrition(-(adj_weight * DEFAULT_HUNGER_FACTOR))
 					user.adjust_hydration(-(adj_weight * DEFAULT_THIRST_FACTOR))
-				message = success_message[min(1 + round(skill - weight), fail_message.len)]
+				message = success_message[min(1 + round(skill - weight), length(fail_message))]
 				user.visible_message(SPAN_NOTICE("\The [user] lift\s the weights [message]."), SPAN_NOTICE("You lift the weights [message]."))
 				user.update_personal_goal(/datum/goal/weights, 1)
 		being_used = FALSE

@@ -14,7 +14,7 @@ var/global/repository/uplink_purchases/uplink_purchase_repository = new()
 	upe.add_entry(item, cost)
 
 /repository/uplink_purchases/proc/print_entries()
-	if(purchases_by_mind.len)
+	if(length(purchases_by_mind))
 		to_world("<b>The following went shopping:</b>")
 
 	var/list/pur_log = list()

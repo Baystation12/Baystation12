@@ -41,7 +41,7 @@
 
 	update_network_gases()
 
-	if((normal_members.len>0)||(line_members.len>0))
+	if((length(normal_members)>0)||(length(line_members)>0))
 		START_PROCESSING_PIPENET(src)
 		return 1
 	qdel(src)

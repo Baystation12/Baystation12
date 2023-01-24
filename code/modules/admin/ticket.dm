@@ -17,7 +17,7 @@ var/global/list/ticket_panels = list()
 /datum/ticket/New(datum/client_lite/owner)
 	src.owner = owner
 	tickets |= src
-	id = tickets.len
+	id = length(tickets)
 	opened_time = world.time
 	if(establish_db_connection())
 		var/sql_ckey = sanitizeSQL(owner.ckey)
@@ -197,7 +197,7 @@ var/global/list/ticket_panels = list()
 	var/list/dat = list()
 
 	var/list/ticket_dat = list()
-	for(var/id = tickets.len, id >= 1, id--)
+	for(var/id = length(tickets), id >= 1, id--)
 		var/datum/ticket/ticket = tickets[id]
 		if(C.holder || ticket.owner.ckey == C.ckey)
 			var/client/owner_client = client_by_ckey(ticket.owner.ckey)
@@ -237,7 +237,7 @@ var/global/list/ticket_panels = list()
 				ticket_dat += "</i>"
 			ticket_dat += "</li>"
 
-	if(ticket_dat.len)
+	if(length(ticket_dat))
 		dat += "<br /><div style='width:50%;float:left;'><p><b>Available tickets:</b></p><ul>[jointext(ticket_dat, null)]</ul></div>"
 
 		if(open_ticket)
@@ -248,7 +248,7 @@ var/global/list/ticket_panels = list()
 				var/msg_to = msg.msg_to ? msg.msg_to : "Adminhelp"
 				msg_dat += "<li>\[[msg.time_stamp]\] [msg.msg_from] -> [msg_to]: [C.holder ? generate_ahelp_key_words(C.mob, msg.msg) : msg.msg]</li>"
 
-			if(msg_dat.len)
+			if(length(msg_dat))
 				dat += "<ul>[jointext(msg_dat, null)]</ul></div>"
 			else
 				dat += "<p>No messages to display.</p></div>"

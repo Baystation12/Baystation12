@@ -96,7 +96,7 @@
 			if(1)//1 and 2 can only be selected once each to prevent more than two specific names/places/etc.
 				switch(rand(1,2))//Mainly to add more options later.
 					if(1)
-						if(names.len&&prob(70))
+						if(length(names)&&prob(70))
 							code_phrase += pick(names)
 						else
 							code_phrase += pick(pick(GLOB.first_names_male,GLOB.first_names_female))

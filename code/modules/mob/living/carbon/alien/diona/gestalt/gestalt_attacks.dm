@@ -24,7 +24,7 @@
 
 /obj/structure/diona_gestalt/ex_act()
 	var/shed_count = rand(1,3)
-	while(shed_count && nymphs && nymphs.len)
+	while(shed_count && nymphs && length(nymphs))
 		shed_count--
 		shed_atom(forcefully = TRUE)
 

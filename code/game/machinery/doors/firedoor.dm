@@ -102,7 +102,7 @@
 	if(pdiff >= FIREDOOR_MAX_PRESSURE_DIFF)
 		to_chat(user, SPAN_WARNING("WARNING: Current pressure differential is [pdiff] kPa! Opening door may result in injury!"))
 	to_chat(user, "<b>Sensor readings:</b>")
-	for(var/index = 1; index <= tile_info.len; index++)
+	for(var/index = 1; index <= length(tile_info); index++)
 		var/o = "&nbsp;&nbsp;"
 		switch(index)
 			if(1)
@@ -123,10 +123,10 @@
 		o += "<span style='color:blue'>[pressure]kPa</span>"
 		o += "</li>"
 		to_chat(user, o)
-	if(islist(users_to_open) && users_to_open.len)
+	if(islist(users_to_open) && length(users_to_open))
 		var/users_to_open_string = users_to_open[1]
-		if(users_to_open.len >= 2)
-			for(var/i = 2 to users_to_open.len)
+		if(length(users_to_open) >= 2)
+			for(var/i = 2 to length(users_to_open))
 				users_to_open_string += ", [users_to_open[i]]"
 		to_chat(user, "These people have opened \the [src] during an alert: [users_to_open_string].")
 
@@ -510,7 +510,7 @@
 		if(dir_alerts)
 			for(var/d=1; d<=4; d++)
 				var/cdir = GLOB.cardinal[d]
-				for(var/i=1; i<=ALERT_STATES.len; i++)
+				for(var/i=1; i<=length(ALERT_STATES); i++)
 					if(dir_alerts[d] & SHIFTL(1, (i - 1)))
 						overlays += new/icon(icon, "alert_[ALERT_STATES[i]]", dir = cdir)
 						do_set_light = TRUE

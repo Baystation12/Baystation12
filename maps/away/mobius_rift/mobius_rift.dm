@@ -67,11 +67,11 @@
 	var/list/west_jumps = shuffle(rooms)
 
 	var/list/routes = list("SOUTH" = south_jumps, "NORTH" = north_jumps, "WEST" = west_jumps, "EAST" = east_jumps)//North exit is linked to south exit of another room etc.
-	for (var/ch_iter = 1 to rooms.len)//get destinations in SNWE order
+	for (var/ch_iter = 1 to length(rooms))//get destinations in SNWE order
 		var/list/destinations = list()//4 exit portals for linking
 		var/chamber_tag = rooms[ch_iter]
 		var/obj/effect/mobius_rift/chamber/chamber = rooms[chamber_tag]
-		for (var/dir_iter =1 to routes.len)
+		for (var/dir_iter =1 to length(routes))
 			var/list/route = routes[routes[dir_iter]]
 			var/ch_pos = route.Find(chamber_tag) + 1
 			if (ch_pos > (grid_number * grid_number))//if that's the last one
@@ -81,7 +81,7 @@
 			destinations.Add(P)
 		chamber.set_portals(destinations)
 	//cleaning up
-	for (var/ch_iter = 1 to rooms.len)
+	for (var/ch_iter = 1 to length(rooms))
 		qdel(rooms[rooms[ch_iter]])
 	return INITIALIZE_HINT_QDEL
 
@@ -105,7 +105,7 @@
 	portals["WEST"] = W
 
 /obj/effect/mobius_rift/chamber/proc/set_portals(list/destinations)
-	for (var/iter = 1 to portals.len)
+	for (var/iter = 1 to length(portals))
 		var/obj/effect/step_trigger/mobius_rift/seamless_portal/P = portals[portals[iter]]
 		P.set_destination(destinations[iter])
 

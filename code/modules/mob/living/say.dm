@@ -240,7 +240,7 @@ var/global/list/channel_to_radio_key = new
 		message_range = 1
 
 	//speaking into radios
-	if(used_radios.len)
+	if(length(used_radios))
 		italics = 1
 		message_range = 1
 		if(speaking)

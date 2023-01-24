@@ -51,9 +51,9 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 				arrestwarrants.Add(list(warrant))
 			else
 				searchwarrants.Add(list(warrant))
-		data["arrestwarrants"] = arrestwarrants.len ? arrestwarrants : null
-		data["searchwarrants"] = searchwarrants.len ? searchwarrants : null
-		data["archivedwarrants"] = archivedwarrants.len? archivedwarrants :null
+		data["arrestwarrants"] = length(arrestwarrants) ? arrestwarrants : null
+		data["searchwarrants"] = length(searchwarrants) ? searchwarrants : null
+		data["archivedwarrants"] = length(archivedwarrants)? archivedwarrants :null
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

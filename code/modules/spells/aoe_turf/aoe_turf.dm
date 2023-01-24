@@ -19,7 +19,7 @@ Aoe turf spells have two useful flags: IGNOREDENSE and IGNORESPACE. These are ex
 				continue
 			targets += target
 
-	if(!targets.len) //doesn't waste the spell
+	if(!length(targets)) //doesn't waste the spell
 		return
 
 	return targets

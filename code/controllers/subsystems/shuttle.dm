@@ -37,9 +37,9 @@ SUBSYSTEM_DEF(shuttle)
 	if (!resumed)
 		working_shuttles = process_shuttles.Copy()
 
-	while (working_shuttles.len)
-		var/datum/shuttle/shuttle = working_shuttles[working_shuttles.len]
-		working_shuttles.len--
+	while (length(working_shuttles))
+		var/datum/shuttle/shuttle = working_shuttles[length(working_shuttles)]
+		LIST_DEC(working_shuttles)
 		if(shuttle.process_state && (shuttle.Process(wait, times_fired, src) == PROCESS_KILL))
 			process_shuttles -= shuttle
 
@@ -158,4 +158,4 @@ SUBSYSTEM_DEF(shuttle)
 /datum/controller/subsystem/shuttle/UpdateStat(time)
 	if (PreventUpdateStat(time))
 		return ..()
-	..("Shuttles [shuttles.len] Ships [ships.len] Landmarks [registered_shuttle_landmarks.len] Halted [overmap_halted ? "Y" : "N"]")
+	..("Shuttles [length(shuttles)] Ships [length(ships)] Landmarks [length(registered_shuttle_landmarks)] Halted [overmap_halted ? "Y" : "N"]")

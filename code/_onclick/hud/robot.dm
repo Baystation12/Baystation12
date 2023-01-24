@@ -185,7 +185,7 @@ var/global/obj/screen/robot_inventory
 		if(!R.robot_modules_background)
 			return
 
-		var/display_rows = -round(-(R.module.equipment.len) / 8)
+		var/display_rows = -round(-(length(R.module.equipment)) / 8)
 		R.robot_modules_background.screen_loc = "CENTER-4:16,SOUTH+1:7 to CENTER+3:16,SOUTH+[display_rows]:7"
 		R.client.screen += R.robot_modules_background
 

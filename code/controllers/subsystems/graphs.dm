@@ -19,7 +19,7 @@ SUBSYSTEM_DEF(graphs)
 /datum/controller/subsystem/graphs/UpdateStat(time)
 	if (PreventUpdateStat(time))
 		return ..()
-	..("Queue: [queue.len]")
+	..("Queue: [length(queue)]")
 
 
 /datum/controller/subsystem/graphs/proc/Queue(datum/graph/graph)
@@ -28,7 +28,7 @@ SUBSYSTEM_DEF(graphs)
 
 /datum/controller/subsystem/graphs/fire(resumed, no_mc_tick)
 	if (!resumed)
-		if (!pending_graphs.len)
+		if (!length(pending_graphs))
 			return
 		queue = pending_graphs.Copy()
 	var/cut_until = 1

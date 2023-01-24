@@ -106,7 +106,7 @@
 		reset_scrubbing()
 	var/area/A = get_area(src)
 	if(A && !A.air_scrub_names[id_tag])
-		var/new_name = "[A.name] Vent Scrubber #[A.air_scrub_names.len+1]"
+		var/new_name = "[A.name] Vent Scrubber #[length(A.air_scrub_names)+1]"
 		A.air_scrub_names[id_tag] = new_name
 		SetName(new_name)
 	. = ..()

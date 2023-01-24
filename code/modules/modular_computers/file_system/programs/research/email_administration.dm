@@ -54,7 +54,7 @@
 				"uid" = message.uid
 			)))
 		data["messages"] = all_messages
-		data["messagecount"] = all_messages.len
+		data["messagecount"] = length(all_messages)
 	else
 		var/list/all_accounts = list()
 		for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
@@ -65,7 +65,7 @@
 				"uid" = account.uid
 			)))
 		data["accounts"] = all_accounts
-		data["accountcount"] = all_accounts.len
+		data["accountcount"] = length(all_accounts)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

@@ -49,7 +49,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 /datum/event/exo_awakening/proc/count_mobs()
 	var/total_mobs
-	total_mobs = GLOB.exo_event_mob_count.len
+	total_mobs = length(GLOB.exo_event_mob_count)
 
 	if (total_mobs >= target_mob_count || SSmobs.ticks >= 10 || !living_observers_present(affecting_z))
 		stop_spawning = TRUE

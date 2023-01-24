@@ -15,8 +15,8 @@
 
 	var/datum/antagonist/vox/vox = antag_templates[1]
 	vox.build_candidate_list(src)
-	log_debug("Attempting to start Raiding Party gamemode with [vox.candidates.len] whitelisted candidates")
-	if (vox.candidates.len >= required_enemies)
+	log_debug("Attempting to start Raiding Party gamemode with [length(vox.candidates)] whitelisted candidates")
+	if (length(vox.candidates) >= required_enemies)
 		vox.get_starting_locations()
 		vox.attempt_spawn()
 		antag_templates = list(vox)
@@ -26,18 +26,18 @@
 
 /datum/game_mode/pirates/check_startable(list/lobby_players)
 	var/list/ready_players = SSticker.ready_players(lobby_players)
-	if (ready_players.len < required_players)
-		return "Not enough players. [ready_players.len] ready of the required [required_players]."
+	if (length(ready_players) < required_players)
+		return "Not enough players. [length(ready_players)] ready of the required [required_players]."
 	var/list/all_antag_types = GLOB.all_antag_types_
-	if(antag_tags?.len)
+	if(length(antag_tags))
 		var/datum/antagonist/vox/antag_vox = all_antag_types[antag_tags[1]]
 		var/list/enemies_vox = antag_vox.pending_antagonists
-		if((enemies_vox.len >= required_enemies))
+		if((length(enemies_vox) >= required_enemies))
 			return FALSE
 		var/datum/antagonist/antag_raiders = all_antag_types[antag_tags[2]]
 		var/list/enemies_raiders = antag_raiders.pending_antagonists
-		if(enemies_raiders.len >= required_enemies)
+		if(length(enemies_raiders) >= required_enemies)
 			return FALSE
-		return "Not enough antagonists, [required_enemies] required and [max(enemies_vox.len, enemies_raiders.len)] available."
+		return "Not enough antagonists, [required_enemies] required and [max(length(enemies_vox), length(enemies_raiders))] available."
 	else
 		return FALSE

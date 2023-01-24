@@ -56,11 +56,11 @@
 
 	pref.alternate_option	= sanitize_integer(pref.alternate_option, 0, 2, initial(pref.alternate_option))
 	pref.job_high	        = sanitize(pref.job_high, null)
-	if(pref.job_medium && pref.job_medium.len)
-		for(var/i in 1 to pref.job_medium.len)
+	if(pref.job_medium && length(pref.job_medium))
+		for(var/i in 1 to length(pref.job_medium))
 			pref.job_medium[i]  = sanitize(pref.job_medium[i])
-	if(pref.job_low && pref.job_low.len)
-		for(var/i in 1 to pref.job_low.len)
+	if(pref.job_low && length(pref.job_low))
+		for(var/i in 1 to length(pref.job_low))
 			pref.job_low[i]  = sanitize(pref.job_low[i])
 	if(!pref.player_alt_titles) pref.player_alt_titles = new()
 

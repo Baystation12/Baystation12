@@ -185,7 +185,7 @@
 
 	START_PROCESSING(SSobj, src)
 
-	if(initial_modules && initial_modules.len)
+	if(initial_modules && length(initial_modules))
 		for(var/path in initial_modules)
 			var/obj/item/rig_module/module = new path(src)
 			if (!module.can_install(src))
@@ -584,7 +584,7 @@
 			"damage" =            module.damage
 			)
 
-		if(module.charges && module.charges.len)
+		if(module.charges && length(module.charges))
 
 			module_data["charges"] = list()
 			module_data["chargetype"] = module.charge_selected
@@ -596,7 +596,7 @@
 		module_list += list(module_data)
 		i++
 
-	if(module_list.len)
+	if(length(module_list))
 		data["modules"] = module_list
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -686,7 +686,7 @@
 
 		var/module_index = text2num(href_list["interact_module"])
 
-		if(module_index > 0 && module_index <= installed_modules.len)
+		if(module_index > 0 && module_index <= length(installed_modules))
 			var/obj/item/rig_module/module = installed_modules[module_index]
 			switch(href_list["module_mode"])
 				if("activate")
@@ -886,7 +886,7 @@
 
 /obj/item/rig/proc/take_hit(damage, source, is_emp=0)
 
-	if(!installed_modules.len)
+	if(!length(installed_modules))
 		return
 
 	var/chance
@@ -898,7 +898,7 @@
 	else
 		//Want this to be roughly independant of the number of modules, meaning that X emp hits will disable Y% of the suit's modules on average.
 		//that way people designing hardsuits don't have to worry (as much) about how adding that extra module will affect emp resiliance by 'soaking' hits for other modules
-		chance = 2*max(0, damage - emp_protection)*min(installed_modules.len/15, 1)
+		chance = 2*max(0, damage - emp_protection)*min(length(installed_modules)/15, 1)
 
 	if(!prob(chance))
 		return
@@ -914,9 +914,9 @@
 				damaged_modules |= module
 
 	var/obj/item/rig_module/dam_module = null
-	if(damaged_modules.len)
+	if(length(damaged_modules))
 		dam_module = pick(damaged_modules)
-	else if(valid_modules.len)
+	else if(length(valid_modules))
 		dam_module = pick(valid_modules)
 
 	if(!dam_module) return

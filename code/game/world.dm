@@ -15,7 +15,7 @@ GLOBAL_VAR(href_logfile)
 	game_id = ""
 
 	var/list/c = list("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
-	var/l = c.len
+	var/l = length(c)
 
 	var/t = world.timeofday
 	for(var/_ = 1 to 4)
@@ -203,13 +203,13 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 					continue	//so stealthmins aren't revealed by the hub
 				admins[C.key] = C.holder.rank
 			if(legacy)
-				s["player[players.len]"] = C.key
+				s["player[length(players)]"] = C.key
 			players += C.key
 			if(istype(C.mob, /mob/living))
 				active++
 
-		s["players"] = players.len
-		s["admins"] = admins.len
+		s["players"] = length(players)
+		s["admins"] = length(admins)
 		if(!legacy)
 			s["playerlist"] = list2params(players)
 			s["adminlist"] = list2params(admins)
@@ -223,7 +223,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		// We rebuild the list in the format external tools expect
 		for(var/dept in nano_crew_manifest)
 			var/list/dept_list = nano_crew_manifest[dept]
-			if(dept_list.len > 0)
+			if(length(dept_list) > 0)
 				positions[dept] = list()
 				for(var/list/person in dept_list)
 					positions[dept][person["name"]] = person["rank"]
@@ -299,9 +299,9 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 
 		var/list/match = text_find_mobs(input["laws"], /mob/living/silicon)
 
-		if(!match.len)
+		if(!length(match))
 			return "No matches"
-		else if(match.len == 1)
+		else if(length(match) == 1)
 			var/mob/living/silicon/S = match[1]
 			var/info = list()
 			info["name"] = S.name
@@ -346,9 +346,9 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 
 		var/list/match = text_find_mobs(input["info"])
 
-		if(!match.len)
+		if(!length(match))
 			return "No matches"
-		else if(match.len == 1)
+		else if(length(match) == 1)
 			var/mob/M = match[1]
 			var/info = list()
 			info["key"] = M.key
@@ -496,7 +496,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		return
 
 	var/list/Lines = file2list("data/mode.txt")
-	if(Lines.len)
+	if(length(Lines))
 		if(Lines[1])
 			SSticker.master_mode = Lines[1]
 			log_misc("Saved mode is '[SSticker.master_mode]'")

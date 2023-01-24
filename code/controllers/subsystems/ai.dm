@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(ai)
 	if (PreventUpdateStat(time))
 		return ..()
 	..({"\
-		Active AI: [ai_holders.len] \
+		Active AI: [length(ai_holders)] \
 		Run Empty Levels: [config.run_empty_levels ? "Y" : "N"]\
 	"})
 
@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(ai)
 /datum/controller/subsystem/ai/fire(resume, no_mc_tick)
 	if (!resume)
 		queue = ai_holders.Copy()
-		if (!queue.len)
+		if (!length(queue))
 			return
 	var/cut_until = 1
 	for (var/datum/ai_holder/ai as anything in queue)

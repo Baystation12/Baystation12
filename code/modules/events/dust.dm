@@ -45,7 +45,7 @@ The "dust" will damage the hull of the station causin minor hull breaches.
 	var/list/starters = getcircle(startloc, 3)
 	starters += startloc
 
-	var/rocks_per_tile = round(numbers/starters.len)
+	var/rocks_per_tile = round(numbers/length(starters))
 	for(var/turf/T in starters)
 		for(var/i = 1 to rocks_per_tile)
 			var/obj/item/projectile/bullet/rock/R = new(T)

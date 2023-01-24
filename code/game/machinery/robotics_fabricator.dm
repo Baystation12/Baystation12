@@ -78,7 +78,7 @@
 /obj/machinery/robotics_fabricator/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
 
-	var/datum/design/current = queue.len ? queue[1] : null
+	var/datum/design/current = length(queue) ? queue[1] : null
 	if(current)
 		data["current"] = current.name
 	data["queue"] = get_queue_names()
@@ -89,7 +89,7 @@
 		var/list/T = list()
 		for(var/A in all_robolimbs)
 			var/datum/robolimb/R = all_robolimbs[A]
-			if(R.unavailable_at_fab || R.applies_to_part.len)
+			if(R.unavailable_at_fab || length(R.applies_to_part))
 				continue
 			T += list(list("id" = A, "company" = R.company))
 		data["manufacturers"] = T
@@ -190,7 +190,7 @@
 	return 1
 
 /obj/machinery/robotics_fabricator/proc/update_busy()
-	if(queue.len)
+	if(length(queue))
 		if(can_build(queue[1]))
 			busy = 1
 		else
@@ -217,7 +217,7 @@
 	return 1
 
 /obj/machinery/robotics_fabricator/proc/check_build()
-	if(!queue.len)
+	if(!length(queue))
 		progress = 0
 		return
 	var/datum/design/D = queue[1]
@@ -232,20 +232,20 @@
 		var/obj/new_item = D.Fabricate(loc, src)
 		visible_message("\The [src] pings, indicating that \the [D] is complete.", "You hear a ping.")
 		if(mat_efficiency != 1)
-			if(new_item.matter && new_item.matter.len > 0)
+			if(new_item.matter && length(new_item.matter) > 0)
 				for(var/i in new_item.matter)
 					new_item.matter[i] = new_item.matter[i] * mat_efficiency
 	remove_from_queue(1)
 
 /obj/machinery/robotics_fabricator/proc/get_queue_names()
 	. = list()
-	for(var/i = 2 to queue.len)
+	for(var/i = 2 to length(queue))
 		var/datum/design/D = queue[i]
 		. += D.name
 
 /obj/machinery/robotics_fabricator/proc/get_build_options()
 	. = list()
-	for(var/i = 1 to files.known_designs.len)
+	for(var/i = 1 to length(files.known_designs))
 		var/datum/design/D = files.known_designs[i]
 		if(!D.build_path || !(D.build_type & MECHFAB))
 			continue

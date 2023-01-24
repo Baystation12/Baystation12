@@ -7,7 +7,7 @@
 		return
 
 	var/active_groups = SSair.active_zones
-	var/inactive_groups = SSair.zones.len - active_groups
+	var/inactive_groups = length(SSair.zones) - active_groups
 
 	var/hotspots = 0
 	for(var/obj/hotspot/hotspot in world)
@@ -26,7 +26,7 @@
 	var/output = {"<B>AIR SYSTEMS REPORT</B><HR>
 <B>General Processing Data</B><BR>
 	Cycle: [SSair.times_fired]<br>
-	Groups: [SSair.zones.len]<BR>
+	Groups: [length(SSair.zones)]<BR>
 ---- <I>Active:</I> [active_groups]<BR>
 ---- <I>Inactive:</I> [inactive_groups]<BR><br>
 ---- <I>Active on station:</i> [active_on_main_station]<br>
@@ -36,7 +36,7 @@
 	Hotspot Processing: [hotspots]<BR>
 <br>
 <B>Geometry Processing Data</B><BR>
-	Tile Update: [SSair.tiles_to_update.len]<BR>
+	Tile Update: [length(SSair.tiles_to_update)]<BR>
 "}
 
 	show_browser(usr, output,"window=airreport")
@@ -87,7 +87,7 @@
 			if (!f)
 				output += "&nbsp;&nbsp;[filter]: ERROR<br>"
 				continue
-			output += "&nbsp;&nbsp;[filter]: [f.len]<br>"
+			output += "&nbsp;&nbsp;[filter]: [length(f)]<br>"
 			for (var/device in f)
 				if (isobj(device))
 					output += "&nbsp;&nbsp;&nbsp;&nbsp;[device] ([device:x],[device:y],[device:z] in area [get_area(device)])<br>"

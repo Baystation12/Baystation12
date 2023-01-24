@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(mobs)
 	if (PreventUpdateStat(time))
 		return ..()
 	..({"\
-		Mobs: [mob_list.len] \
+		Mobs: [length(mob_list)] \
 		Run Empty Levels: [config.run_empty_levels ? "Y" : "N"]\
 	"})
 

@@ -30,7 +30,7 @@
 /obj/structure/diona_gestalt/on_update_icon()
 	overlays = list(eyes_overlay)
 	if (length(nymphs))
-		SetTransform(scale = clamp(nymphs.len * 0.1, 1, 2))
+		SetTransform(scale = clamp(length(nymphs) * 0.1, 1, 2))
 	else
 		ClearTransform()
 
@@ -46,4 +46,4 @@
 
 /obj/structure/diona_gestalt/examine(mob/user)
 	. = ..()
-	if(nymphs) to_chat(user, "It seems to be composed of at least [nymphs.len] nymph\s.")
+	if(nymphs) to_chat(user, "It seems to be composed of at least [length(nymphs)] nymph\s.")

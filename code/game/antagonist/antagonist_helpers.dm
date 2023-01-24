@@ -39,7 +39,7 @@
 	return 1
 
 /datum/antagonist/proc/get_antag_count()
-	return current_antagonists ? current_antagonists.len : 0
+	return current_antagonists ? length(current_antagonists) : 0
 
 /datum/antagonist/proc/get_active_antag_count()
 	var/active_antags = 0

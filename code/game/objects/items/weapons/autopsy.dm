@@ -34,7 +34,7 @@
 	return W
 
 /obj/item/autopsy_scanner/proc/add_data(obj/item/organ/external/O)
-	if(!O.autopsy_data.len) return
+	if(!length(O.autopsy_data)) return
 
 	for(var/V in O.autopsy_data)
 		var/datum/autopsy_data/W = O.autopsy_data[V]
@@ -110,7 +110,7 @@
 			if(30 to 1000)
 				damage_desc = SPAN_COLOR("red", "severe")
 
-		if(!total_score) total_score = D.organs_scanned.len
+		if(!total_score) total_score = length(D.organs_scanned)
 
 		scan_data += "<b>Weapon #[n]</b><br>"
 		if(damaging_weapon)
@@ -126,7 +126,7 @@
 
 		n++
 
-	if(chemtraces.len)
+	if(length(chemtraces))
 		scan_data += "<b>Trace Chemicals: </b><br>"
 		for(var/chemID in chemtraces)
 			scan_data += chemID

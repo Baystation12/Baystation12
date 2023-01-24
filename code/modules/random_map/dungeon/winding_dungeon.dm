@@ -73,10 +73,10 @@
 /datum/random_map/winding_dungeon/proc/get_appropriate_list(list/common, list/uncommon, list/rare, x, y)
 	var/distance = sqrt((x - round(first_room_x+first_room_width/2)) ** 2 + (y - round(first_room_y+first_room_height/2)) ** 2)
 	if(prob(distance))
-		if(prob(distance/100) && rare && rare.len)
+		if(prob(distance/100) && rare && length(rare))
 			logging("Returning rare list.")
 			return rare
-		else if(uncommon && uncommon.len)
+		else if(uncommon && length(uncommon))
 			logging("Returning uncommon list.")
 			return uncommon
 	logging("Returning common list.")
@@ -84,7 +84,7 @@
 
 
 /datum/random_map/winding_dungeon/apply_to_map()
-	logging("You have [rooms.len] # of rooms")
+	logging("You have [length(rooms)] # of rooms")
 	for(var/datum/room/R in rooms)
 		if(!priority_process)
 			sleep(-1)
@@ -93,13 +93,13 @@
 	var/num_of_loot = round(limit_x * limit_y * loot_multiplier)
 	logging("Attempting to add [num_of_loot] # of loot")
 	var/sanity = 0
-	if((loot_common && loot_common.len) || (loot_uncommon && loot_uncommon.len) || (loot_rare && loot_rare.len)) //no monsters no problem
-		while(rooms.len && num_of_loot > 0)
+	if((loot_common && length(loot_common)) || (loot_uncommon && length(loot_uncommon)) || (loot_rare && length(loot_rare))) //no monsters no problem
+		while(length(rooms) && num_of_loot > 0)
 			if(!priority_process)
 				sleep(-1)
 			var/datum/room/R = pick(rooms)
 			var/list/loot_list = get_appropriate_list(loot_common, loot_uncommon, loot_rare, round(R.x+R.width/2), round(R.y+R.height/2))
-			if(!loot_list || !loot_list.len || R.add_loot(origin_x,origin_y,origin_z,pickweight(loot_list)))
+			if(!loot_list || !length(loot_list) || R.add_loot(origin_x,origin_y,origin_z,pickweight(loot_list)))
 				num_of_loot--
 				sanity -= 10 //we hahve success so more tries
 				continue
@@ -112,7 +112,7 @@
 		rooms -= R
 		qdel(R)
 
-	if((!monsters_common || !monsters_common.len) && (!monsters_uncommon || !monsters_uncommon.len) && (!monsters_rare || !monsters_rare.len)) //no monsters no problem
+	if((!monsters_common || !length(monsters_common)) && (!monsters_uncommon || !length(monsters_uncommon)) && (!monsters_rare || !length(monsters_rare))) //no monsters no problem
 		logging("No monster lists detected. Not spawning monsters.")
 		return
 
@@ -122,14 +122,14 @@
 	while(num_of_monsters > 0)
 		if(!priority_process)
 			sleep(-1)
-		if(!monster_available || !monster_available.len)
+		if(!monster_available || !length(monster_available))
 			logging("There are no available turfs left.")
 			num_of_monsters = 0
 			continue
 		var/turf/T = pick(monster_available)
 		monster_available -= T
 		var/list/monster_list = get_appropriate_list(monsters_common, monsters_uncommon, monsters_rare, T.x, T.y)
-		if(monster_list && monster_list.len)
+		if(monster_list && length(monster_list))
 			var/type = pickweight(monster_list)
 			logging("Generating a monster of type [type] at position ([T.x],[T.y],[origin_z])")
 			var/mob/M = new type(T)
@@ -190,12 +190,12 @@
 		var/height = 1 //height of room.
 		var/isRoom = 1 //whether we are a room or not
 		for(var/testing = 0, testing < 1000, testing++)
-			if(open_positions.len)
+			if(length(open_positions))
 				var/list/coords = splittext(pick(open_positions), ":") //pop a coord from the list.
 				newx = text2num(coords[1])
 				newy = text2num(coords[2])
 				open_positions -= "[newx]:[newy]"
-				logging("Picked coords ([newx],[newy]) from open_positions. Removing it. (length: [open_positions.len])")
+				logging("Picked coords ([newx],[newy]) from open_positions. Removing it. (length: [length(open_positions)])")
 			else
 				newx = rand(1,limit_x)
 				newy = rand(1,limit_y)
@@ -300,7 +300,7 @@
 						map[get_map_cell(xtemp,ytemp)] = wall_char
 						if(!("[xtemp]:[ytemp]" in open_positions))
 							open_positions += "[xtemp]:[ytemp]"
-							logging("Adding \"[xtemp]:[ytemp]\" to open_positions (length: [open_positions.len])")
+							logging("Adding \"[xtemp]:[ytemp]\" to open_positions (length: [length(open_positions)])")
 					else
 						map[get_map_cell(xtemp,ytemp)] = char
 	return 1

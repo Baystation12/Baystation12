@@ -22,7 +22,7 @@
 /datum/vote/gamemode/setup_vote(mob/creator, automatic)
 	..()
 	var/list/lobby_players = SSticker.lobby_players()
-	log_debug("MODE VOTE: Lobby Players: [lobby_players.len]")
+	log_debug("MODE VOTE: Lobby Players: [length(lobby_players)]")
 	var/list/skipped = list()
 	for (var/tag in SSticker.votable_modes)
 		var/datum/game_mode/mode = SSticker.mode_cache[tag]

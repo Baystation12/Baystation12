@@ -92,10 +92,10 @@
 	if (islist(values[1]))
 		values = values[1]
 	var/sum = 0
-	if (values.len)
+	if (length(values))
 		for (var/value in values)
 			sum += value
-		sum /= values.len
+		sum /= length(values)
 	return sum
 
 

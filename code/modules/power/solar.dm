@@ -392,7 +392,7 @@ var/global/solar_gen_rate = 1500
 	t += "<B>[SPAN_CLASS("highlight", "Connected devices:")]</B><div class='statusDisplay'>"
 
 	t += "<A href='?src=\ref[src];search_connected=1'>Search for devices</A><BR>"
-	t += "Solar panels : [connected_panels.len] connected<BR>"
+	t += "Solar panels : [length(connected_panels)] connected<BR>"
 	t += "Solar tracker : [connected_tracker ? SPAN_GOOD("Found") : SPAN_BAD("Not found")]</div><BR>"
 
 	t += "<A href='?src=\ref[src];close=1'>Close</A>"

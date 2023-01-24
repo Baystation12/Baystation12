@@ -101,7 +101,7 @@
 		return
 	if(download_completion >= downloaded_file.size)
 		complete_file_download()
-		if(downloads_queue.len > 0)
+		if(length(downloads_queue) > 0)
 			begin_file_download(downloads_queue[1], downloads_queue[downloads_queue[1]])
 			downloads_queue.Remove(downloads_queue[1])
 
@@ -170,7 +170,7 @@
 				"size" = P.size,
 				"icon" = P.program_menu_icon
 			)))
-		if(category_list.len)
+		if(length(category_list))
 			all_entries.Add(list(list("category"=category, "programs"=category_list)))
 
 	data["hackedavailable"] = FALSE
@@ -189,7 +189,7 @@
 
 	data["downloadable_programs"] = all_entries
 
-	if(prog.downloads_queue.len > 0)
+	if(length(prog.downloads_queue) > 0)
 		var/list/queue = list() // Nanoui can't iterate through assotiative lists, so we have to do this
 		for(var/item in prog.downloads_queue)
 			queue += item

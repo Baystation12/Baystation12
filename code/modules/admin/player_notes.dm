@@ -63,7 +63,7 @@
 	var/savefile/info = new("data/player_saves/[copytext_char(target, 1, 2)]/[target]/info.sav")
 	var/list/infos
 	from_save(info, infos)
-	if(!infos || infos.len < index) return
+	if(!infos || length(infos) < index) return
 
 	var/datum/player_info/item = infos[index]
 	infos.Remove(item)

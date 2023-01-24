@@ -65,9 +65,9 @@
 			if(stored_paper >= max_paper) //check if the printer is full yet
 				to_chat(user, "The printer has been filled to full capacity.")
 				break
-		if(B.pages.len == 0) //if all its papers have been put into the printer, delete bundle
+		if(length(B.pages) == 0) //if all its papers have been put into the printer, delete bundle
 			qdel(W)
-		else if(B.pages.len == 1) //if only one item left, extract item and delete the one-item bundle
+		else if(length(B.pages) == 1) //if only one item left, extract item and delete the one-item bundle
 			user.drop_from_inventory(B)
 			user.put_in_hands(B[1])
 			qdel(B)

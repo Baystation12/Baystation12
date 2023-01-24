@@ -389,7 +389,7 @@
 
 
 /datum/station_holomap/proc/set_level(level)
-	if(level > z_levels.len)
+	if(level > length(z_levels))
 		return
 
 	displayed_level = level
@@ -416,7 +416,7 @@
 	if(displayed_level > 1)
 		station_map.vis_contents += lbuttons[1]
 
-	if(displayed_level < z_levels.len)
+	if(displayed_level < length(z_levels))
 		station_map.vis_contents += lbuttons[2]
 
 /datum/station_holomap/proc/legend_select(obj/screen/legend/L)

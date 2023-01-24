@@ -100,7 +100,7 @@
 		var/ch_dat[0]
 		ch_dat["name"] = ch_name
 		ch_dat["listening"] = !!(ch_stat & user.silicon_radio.FREQ_LISTENING)
-		channels[++channels.len] = ch_dat
+		channels[LIST_PRE_INC(channels)] = ch_dat
 	data["channels"] = channels
 	ui = SSnano.try_update_ui(user, user, id, ui, data, force_open)
 	if (!ui)
@@ -241,7 +241,7 @@
 			var/gas[0]
 			gas["name"] = gas_data.name[g]
 			gas["percent"] = round((env.gas[g] / t_moles) * 100)
-			gases[++gases.len] = gas
+			gases[LIST_PRE_INC(gases)] = gas
 		data["gas"] = gases
 	ui = SSnano.try_update_ui(user, user, id, ui, data, force_open)
 	if (!ui)

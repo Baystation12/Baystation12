@@ -47,7 +47,7 @@
 	return def_zone //Careful with effects, mechs shouldn't be stunned
 
 /mob/living/exosuit/hitby(atom/movable/AM, datum/thrownthing/TT)
-	if (!hatch_closed && (LAZYLEN(pilots) < body.pilot_positions.len))
+	if (!hatch_closed && (LAZYLEN(pilots) < length(body.pilot_positions)))
 		var/mob/living/M = AM
 		if (istype(M))
 			var/chance = 50 //Throwing someone at an empty exosuit MAY put them in the seat

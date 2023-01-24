@@ -23,7 +23,7 @@
 	playsound(loc, 'sound/effects/bonerattle.ogg', 40)
 
 /obj/structure/skele_stand/attack_hand(mob/user)
-	if(swag.len)
+	if(length(swag))
 		var/obj/item/clothing/C = input("What piece of clothing do you want to remove?", "Skeleton undressing") as null|anything in list_values(swag)
 		if(C)
 			swag -= get_key_by_value(swag, C)
@@ -38,7 +38,7 @@
 
 /obj/structure/skele_stand/examine(mob/user)
 	. = ..()
-	if(swag.len)
+	if(length(swag))
 		var/list/swagnames = list()
 		for(var/slot in swag)
 			var/obj/item/clothing/C = swag[slot]

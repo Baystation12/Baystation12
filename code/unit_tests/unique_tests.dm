@@ -178,7 +178,7 @@
 	var/issues = 0
 	for(var/key in entries)
 		var/list/values = entries[key]
-		if(values.len > 1)
+		if(length(values) > 1)
 			var/singleton/noi_feedback/noif = GET_SINGLETON(feedback)
 			noif.print(src, type, key, values)
 			issues++

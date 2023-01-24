@@ -23,7 +23,7 @@
 
 /datum/event/mob_spawning/setup()
 	..()
-	remaining_to_spawn = total_to_spawn_per_z * affecting_z.len
+	remaining_to_spawn = total_to_spawn_per_z * length(affecting_z)
 	log_debug("Event '[event_meta.name]' will spawn [remaining_to_spawn] mob\s.")
 
 

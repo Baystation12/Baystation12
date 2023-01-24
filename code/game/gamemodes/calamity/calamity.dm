@@ -14,7 +14,7 @@
 	var/list/antag_candidates = all_random_antag_types()
 
 	var/grab_antags = round(num_players()/ANTAG_TYPE_RATIO)+1
-	while(antag_candidates.len && antag_tags.len < grab_antags)
+	while(length(antag_candidates) && length(antag_tags) < grab_antags)
 		var/antag_id = pick(antag_candidates)
 		antag_candidates -= antag_id
 		antag_tags |= antag_id

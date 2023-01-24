@@ -1,4 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - bugfix: Tiny reagent volumes no longer process their full metabolism amount.

@@ -98,7 +98,7 @@
 
 /obj/item/device/core_sampler/attackby(obj/item/I, mob/living/user)
 	if(istype(I, /obj/item/evidencebag))
-		if(I.contents.len)
+		if(length(I.contents))
 			to_chat(user, SPAN_WARNING("\The [I] is full."))
 			return
 		if(num_stored_bags < 10)

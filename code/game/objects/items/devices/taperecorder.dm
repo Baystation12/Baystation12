@@ -285,7 +285,7 @@
 	for(var/i=1 , i < mytape?.max_capacity , i++)
 		if(!mytape || !playing)
 			break
-		if(mytape.storedinfo.len < i)
+		if(length(mytape.storedinfo) < i)
 			break
 
 		var/turf/T = get_turf(src)
@@ -294,7 +294,7 @@
 			playedmessage = copytext(playedmessage,2)
 		T.audible_message(SPAN_COLOR("maroon", "<B>Tape Recorder</B>: [playedmessage]"))
 
-		if(mytape.storedinfo.len < i+1)
+		if(length(mytape.storedinfo) < i+1)
 			playsleepseconds = 1
 			sleep(10)
 			T = get_turf(src)
@@ -356,7 +356,7 @@
 	to_chat(usr, SPAN_NOTICE("Transcript printed."))
 	var/obj/item/paper/P = new /obj/item/paper(get_turf(src))
 	var/t1 = "<B>Transcript:</B><BR><BR>"
-	for(var/i=1,mytape.storedinfo.len >= i,i++)
+	for(var/i=1,length(mytape.storedinfo) >= i,i++)
 		var/printedmessage = mytape.storedinfo[i]
 		if (findtextEx(printedmessage,"*",1,2)) //replace action sounds
 			printedmessage = "\[[time2text(mytape.timestamp[i]*10,"mm:ss")]\] (Unrecognized sound)"
@@ -422,7 +422,7 @@
 /obj/item/device/tape/attack_self(mob/user)
 	if(!ruined)
 		to_chat(user, SPAN_NOTICE("You pull out all the tape!"))
-		get_loose_tape(user, storedinfo.len)
+		get_loose_tape(user, length(storedinfo))
 		ruin()
 
 
@@ -482,7 +482,7 @@
 		to_chat(user, SPAN_NOTICE("There's nothing on this tape!"))
 		return
 	var/list/output = list("<center>")
-	for(var/i=1, i < timestamp.len, i++)
+	for(var/i=1, i < length(timestamp), i++)
 		var/time = "\[[time2text(timestamp[i]*10,"mm:ss")]\]"
 		output += "[time]<br><a href='?src=\ref[src];cut_after=[i]'>-----CUT------</a><br>"
 	output += "</center>"
@@ -509,7 +509,7 @@
 /obj/item/device/tape/OnTopic(mob/user, list/href_list)
 	if(href_list["cut_after"])
 		var/index = text2num(href_list["cut_after"])
-		if(index >= timestamp.len)
+		if(index >= length(timestamp))
 			return
 
 		to_chat(user, SPAN_NOTICE("You remove part of the tape off."))

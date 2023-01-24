@@ -33,7 +33,7 @@
 	..(newloc, new /mob/living/exosuit/premade/powerloader(newloc), FALSE)
 
 /obj/structure/mech_wreckage/attack_hand(mob/user)
-	if(contents.len)
+	if(length(contents))
 		var/obj/item/thing = pick(contents)
 		if(istype(thing))
 			thing.forceMove(get_turf(user))

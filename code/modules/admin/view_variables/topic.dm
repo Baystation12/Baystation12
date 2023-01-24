@@ -81,9 +81,9 @@
 		if(D && watched_variables[D])
 			watched_variables[D] -= href_list["varnameunwatch"]
 			var/list/datums_watched_vars = watched_variables[D]
-			if(!datums_watched_vars.len)
+			if(!length(datums_watched_vars))
 				watched_variables -= D
-		if(!watched_variables.len && watched_variables_window.is_processing)
+		if(!length(watched_variables) && watched_variables_window.is_processing)
 			STOP_PROCESSING(SSprocessing, watched_variables_window)
 
 	else if(href_list["mob_player_panel"])
@@ -365,7 +365,7 @@
 			to_chat(usr, "This can only be done to instances of type /mob")
 			return
 
-		if(!H.languages.len)
+		if(!length(H.languages))
 			to_chat(usr, "This mob knows no languages.")
 			return
 

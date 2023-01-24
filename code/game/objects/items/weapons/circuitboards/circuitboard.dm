@@ -42,13 +42,13 @@
 			if (buildtype_select)
 				to_chat(user, SPAN_NOTICE("This board can be used for multiple machines. Use a multitool to determine what type of machine that will be created."))
 	if (user.skill_check(SKILL_CONSTRUCTION, SKILL_ADEPT) || isobserver(user))
-		if (req_components.len)
+		if (length(req_components))
 			to_chat(user, SPAN_NOTICE("It requires the following parts to function:"))
 			for (var/V in req_components)
 				var/obj/item/I = V
 				to_chat(user, SPAN_NOTICE("&nbsp;&nbsp;[req_components[V]] [initial(I.name)]"))
-		if (additional_spawn_components.len)
-			to_chat(user, SPAN_NOTICE("It[req_components.len ? " also" : ""] requires the following parts to actually be usable:"))
+		if (length(additional_spawn_components))
+			to_chat(user, SPAN_NOTICE("It[length(req_components) ? " also" : ""] requires the following parts to actually be usable:"))
 			for (var/V in additional_spawn_components)
 				var/obj/item/I = V
 				to_chat(user, SPAN_NOTICE("&nbsp;&nbsp;[additional_spawn_components[V]] [initial(I.name)]"))

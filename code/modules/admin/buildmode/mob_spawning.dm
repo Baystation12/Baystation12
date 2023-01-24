@@ -109,7 +109,7 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 			if (findtext("[M]", type))
 				matches += M
 
-		if (matches.len)
+		if (length(matches))
 			var/mob/living/simple_animal/chosen
 			chosen = input("Choose a mob", "Mob") as null | anything in matches
 
@@ -262,7 +262,7 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 			to_chat(user, "Spawner from area [current_area] copied.")
 
 		else if (pa["right"])
-			if (copied_spawner.len == 0)
+			if (length(copied_spawner) == 0)
 				to_chat(user, SPAN_WARNING("No spawner copied, cannot paste settings!"))
 				return
 

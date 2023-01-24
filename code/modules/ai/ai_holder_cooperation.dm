@@ -17,7 +17,7 @@
 
 
 /datum/ai_holder/Destroy()
-	if (faction_friends.len) //This list is shared amongst the faction
+	if (length(faction_friends)) //This list is shared amongst the faction
 		faction_friends -= src
 	return ..()
 
@@ -25,7 +25,7 @@
 *  Call on initialization or if something weird happened like the mob switched factions.
 */
 /datum/ai_holder/proc/build_faction_friends()
-	if (faction_friends.len) // Already have a list.
+	if (length(faction_friends)) // Already have a list.
 		// Assume we're moving to a new faction.
 		faction_friends -= src   // Get us out of the current list shared by everyone else.
 		faction_friends = list() // Then make our list empty and unshared in case we become a loner.

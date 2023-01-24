@@ -13,7 +13,7 @@ SUBSYSTEM_DEF(circuit_components)
 /datum/controller/subsystem/circuit_components/UpdateStat(time)
 	if (PreventUpdateStat(time))
 		return ..()
-	..("Component Queue: [queued_components.len]")
+	..("Component Queue: [length(queued_components)]")
 
 
 /datum/controller/subsystem/circuit_components/fire(resumed = FALSE)
@@ -23,9 +23,9 @@ SUBSYSTEM_DEF(circuit_components)
 
 	var/list/queued_components = src.queued_components
 	while(length(queued_components))
-		var/list/entry = queued_components[queued_components.len]
-		position = queued_components.len
-		queued_components.len--
+		var/list/entry = queued_components[length(queued_components)]
+		position = length(queued_components)
+		LIST_DEC(queued_components)
 		if(!length(entry))
 			if(MC_TICK_CHECK)
 				break

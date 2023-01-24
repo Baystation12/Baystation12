@@ -126,9 +126,9 @@
 	data["spk_cut"] = (wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL))
 
 	var/list/chanlist = list_channels(user)
-	if(islist(chanlist) && chanlist.len)
+	if(islist(chanlist) && length(chanlist))
 		data["chan_list"] = chanlist
-		data["chan_list_len"] = chanlist.len
+		data["chan_list_len"] = length(chanlist)
 
 	if(syndie)
 		data["useSyndMode"] = 1
@@ -288,7 +288,7 @@
 
 /obj/item/device/radio/proc/autosay(message, from, channel, zlevel) //BS12 EDIT
 	var/datum/radio_frequency/connection = null
-	if(channel && channels && channels.len > 0)
+	if(channel && channels && length(channels) > 0)
 		if (channel == "department")
 			channel = channels[1]
 		connection = secure_radio_connections[channel]
@@ -311,7 +311,7 @@
 		return radio_connection
 
 	// Otherwise, if a channel is specified, look for it.
-	if(channels && channels.len > 0)
+	if(channels && length(channels) > 0)
 		if (message_mode == "department") // Department radio shortcut
 			message_mode = channels[1]
 
@@ -793,9 +793,9 @@
 	data["rawfreq"] = num2text(frequency)
 
 	var/list/chanlist = list_channels(user)
-	if(islist(chanlist) && chanlist.len)
+	if(islist(chanlist) && length(chanlist))
 		data["chan_list"] = chanlist
-		data["chan_list_len"] = chanlist.len
+		data["chan_list_len"] = length(chanlist)
 
 	if(syndie)
 		data["useSyndMode"] = 1
@@ -869,7 +869,7 @@
 
 /obj/item/device/radio/announcer/Initialize()
 	. = ..()
-	forceMove(locate(1,1,GLOB.using_map.contact_levels.len ? GLOB.using_map.contact_levels[1] : 1))
+	forceMove(locate(1,1,length(GLOB.using_map.contact_levels) ? GLOB.using_map.contact_levels[1] : 1))
 
 /obj/item/device/radio/announcer/subspace
 	subspace_transmission = 1

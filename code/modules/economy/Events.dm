@@ -9,7 +9,7 @@
 
 /datum/event/economic_event/start()
 	affected_dest = pickweight(weighted_randomevent_locations)
-	if(affected_dest.viable_random_events.len)
+	if(length(affected_dest.viable_random_events))
 		endWhen = rand(60,300)
 		event_type = pick(affected_dest.viable_random_events)
 

@@ -47,7 +47,7 @@
 		return
 	var/static/list/chance_table = list(95, 95, 90, 85, 75, 60, 40, 15)
 	var/idx = max(distance + 1, 1)
-	if (idx > chance_table.len)
+	if (idx > length(chance_table))
 		return
 	return prob(chance_table[idx])
 

@@ -56,10 +56,10 @@
 			log_debug(append_admin_tools("A fill_reagents list was created as a non-list. Seed: [seed] ([seed.type]). Reagent: [rid] = [seed.chems[rid]].", location = get_turf(src)))
 			reagent_data = list(reagent_data)
 
-		if(reagent_data && reagent_data.len)
+		if(reagent_data && length(reagent_data))
 			var/rtotal = reagent_data[1]
 			var/list/data = list()
-			if(reagent_data.len > 1 && potency > 0)
+			if(length(reagent_data) > 1 && potency > 0)
 				rtotal += round(potency/reagent_data[2])
 			if(rid == /datum/reagent/nutriment)
 				data[seed.seed_name] = max(1,rtotal)
@@ -121,7 +121,7 @@
 		var/descriptor_num = rand(2,4)
 		var/descriptor_count = descriptor_num
 		desc = "A"
-		while(descriptors.len && descriptor_num > 0)
+		while(length(descriptors) && descriptor_num > 0)
 			var/chosen = pick(descriptors)
 			descriptors -= chosen
 			desc += "[(descriptor_count>1 && descriptor_count!=descriptor_num) ? "," : "" ] [chosen]"

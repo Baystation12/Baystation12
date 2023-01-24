@@ -88,4 +88,4 @@
 
 
 /datum/musical_event_manager/proc/is_overloaded()
-	return src.events.len > GLOB.musical_config.max_events
+	return length(src.events) > GLOB.musical_config.max_events

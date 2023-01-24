@@ -35,25 +35,25 @@
 			log_bad("[bad_msg] is not supposed to have an APC.")
 			area_good = 0
 
-		if(!A.air_scrub_names.len && !(exemptions & GLOB.using_map.NO_SCRUBBER))
+		if(!length(A.air_scrub_names) && !(exemptions & GLOB.using_map.NO_SCRUBBER))
 			log_bad("[bad_msg] lacks an air scrubber.")
 			area_good = 0
-		else if(A.air_scrub_names.len && (exemptions & GLOB.using_map.NO_SCRUBBER))
+		else if(length(A.air_scrub_names) && (exemptions & GLOB.using_map.NO_SCRUBBER))
 			log_bad("[bad_msg] is not supposed to have an air scrubber.")
 			area_good = 0
 
-		if(!A.air_vent_names.len && !(exemptions & GLOB.using_map.NO_VENT))
+		if(!length(A.air_vent_names) && !(exemptions & GLOB.using_map.NO_VENT))
 			log_bad("[bad_msg] lacks an air vent.[ascii_reset]")
 			area_good = 0
-		else if(A.air_vent_names.len && (exemptions & GLOB.using_map.NO_VENT))
+		else if(length(A.air_vent_names) && (exemptions & GLOB.using_map.NO_VENT))
 			log_bad("[bad_msg] is not supposed to have an air vent.")
 			area_good = 0
 
 		if(!area_good)
 			bad_areas.Add(A)
 
-	if(bad_areas.len)
-		fail("\[[bad_areas.len]/[area_test_count]\]Some areas did not have the expected APC/vent/scrubber setup.")
+	if(length(bad_areas))
+		fail("\[[length(bad_areas)]/[area_test_count]\]Some areas did not have the expected APC/vent/scrubber setup.")
 	else
 		pass("All \[[area_test_count]\] areas contained APCs, air scrubbers, and air vents.")
 
@@ -61,7 +61,7 @@
 
 /datum/unit_test/apc_area_test/proc/get_exemptions(area)
 	// We assume deeper types come last
-	for(var/i = GLOB.using_map.apc_test_exempt_areas.len; i>0; i--)
+	for(var/i = length(GLOB.using_map.apc_test_exempt_areas); i>0; i--)
 		var/exempt_type = GLOB.using_map.apc_test_exempt_areas[i]
 		if(istype(area, exempt_type))
 			return GLOB.using_map.apc_test_exempt_areas[exempt_type]
@@ -156,8 +156,8 @@
 			bad_cables |= C
 			log_bad("[log_info_line(C)] has an non-existing icon state.")
 
-	if(bad_cables.len)
-		fail("Found [bad_cables.len] cable\s with an unexpected icon state.")
+	if(length(bad_cables))
+		fail("Found [length(bad_cables)] cable\s with an unexpected icon state.")
 	else
 		pass("All wires had their expected icon state.")
 
@@ -203,10 +203,10 @@
 			var/list/no_longer_contained_atoms = contents_pre_open - C.contents
 			var/list/previously_not_contained_atoms = C.contents - contents_pre_open
 
-			if(no_longer_contained_atoms.len)
+			if(length(no_longer_contained_atoms))
 				bad_tests++
 				log_bad("[log_info_line(C)] no longer contains the following atoms: [log_info_line(no_longer_contained_atoms)]")
-			if(previously_not_contained_atoms.len)
+			if(length(previously_not_contained_atoms))
 				log_debug("[log_info_line(C)] now contains the following atoms: [log_info_line(previously_not_contained_atoms)]")
 
 	if(bad_tests)
@@ -269,7 +269,7 @@
 		if(!spawnpoint)
 			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] is null!")
 			failed = TRUE
-		else if(!spawnpoint.turfs.len)
+		else if(!length(spawnpoint.turfs))
 			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] has no associated spawn turfs.")
 			failed = TRUE
 
@@ -481,8 +481,8 @@
 				log_bad("Following disposal pipe does not connect correctly: [log_info_line(D)]")
 				faulty_pipes += D
 
-	if(faulty_pipes.len)
-		fail("[faulty_pipes.len] disposal segment\s did not connect with other disposal pipes.")
+	if(length(faulty_pipes))
+		fail("[length(faulty_pipes)] disposal segment\s did not connect with other disposal pipes.")
 	else
 		pass("All disposal segments connect with other disposal pipes.")
 
@@ -620,7 +620,7 @@
 
 	if(failures)
 		fail("Found [failures] cable\s without connections.")
-	else if(exceptions.len)
+	else if(length(exceptions))
 		for(var/entry in exceptions)
 			log_bad("[log_info_line(entry)] - [english_list(exceptions[entry])] ")
 		fail("Unnecessary exceptions need to be cleaned up.")
@@ -650,7 +650,7 @@
 		var/list/exception = exceptions[source_turf]
 		if(exception && (dir in exception))
 			exception -= dir
-			if(!exception.len)
+			if(!length(exception))
 				exceptions -= source_turf
 			continue
 
@@ -748,7 +748,7 @@
 	if(failed)
 		fail("A package has been delivered to an incorrect location.")
 		return
-	if(!packages_awaiting_delivery.len)
+	if(!length(packages_awaiting_delivery))
 		pass("All packages delivered.")
 		return
 	return 0
@@ -807,7 +807,7 @@
 				else if(is_invalid(req))
 					obj_access_pairs += list(list(O, req))
 
-	if(obj_access_pairs.len)
+	if(length(obj_access_pairs))
 		for(var/entry in obj_access_pairs)
 			log_bad("[log_info_line(entry[1])] has an invalid value ([entry[2]]) in req_access.")
 		fail("Mapped objs with req_access must be set up to use existing access strings.")

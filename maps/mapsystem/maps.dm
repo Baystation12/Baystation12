@@ -428,7 +428,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/candidates = GLOB.using_map.accessible_z_levels.Copy()
 	candidates.Remove(num2text(current_z_level))
 
-	if(!candidates.len)
+	if(!length(candidates))
 		return current_z_level
 	return text2num(pickweight(candidates))
 
@@ -445,8 +445,8 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	for(var/loc_type in typesof(/datum/trade_destination) - /datum/trade_destination)
 		var/datum/trade_destination/D = new loc_type
-		weighted_randomevent_locations[D] = D.viable_random_events.len
-		weighted_mundaneevent_locations[D] = D.viable_mundane_events.len
+		weighted_randomevent_locations[D] = length(D.viable_random_events)
+		weighted_mundaneevent_locations[D] = length(D.viable_mundane_events)
 
 	if(!station_account)
 		station_account = create_account("[station_name()] Primary Account", "[station_name()]", starting_money, ACCOUNT_TYPE_DEPARTMENT)

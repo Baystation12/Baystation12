@@ -245,7 +245,7 @@
 		open_turfs |= origin_turf
 
 		// Flood fill to get affected turfs.
-		while(open_turfs.len)
+		while(length(open_turfs))
 			var/turf/T = pick(open_turfs)
 			open_turfs -= T
 			closed_turfs |= T
@@ -299,7 +299,7 @@
 
 	var/health_change = 0
 	// Handle gas consumption.
-	if(consume_gasses && consume_gasses.len)
+	if(consume_gasses && length(consume_gasses))
 		var/missing_gas = 0
 		for(var/gas in consume_gasses)
 			if(environment && environment.gas && environment.gas[gas] && \
@@ -321,9 +321,9 @@
 		health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
 
 	// Handle gas production.
-	if(exude_gasses && exude_gasses.len && !check_only)
+	if(exude_gasses && length(exude_gasses) && !check_only)
 		for(var/gas in exude_gasses)
-			environment.adjust_gas(gas, max(1,round((exude_gasses[gas]*(get_trait(TRAIT_POTENCY)/5))/exude_gasses.len)))
+			environment.adjust_gas(gas, max(1,round((exude_gasses[gas]*(get_trait(TRAIT_POTENCY)/5))/length(exude_gasses))))
 
 	//Handle temperature change.
 	if(get_trait(TRAIT_ALTER_TEMP) != 0 && !check_only)
@@ -558,7 +558,7 @@
 
 //Returns a key corresponding to an entry in the global seed list.
 /datum/seed/proc/get_mutant_variant()
-	if(!mutants || !mutants.len || get_trait(TRAIT_IMMUTABLE) > 0) return 0
+	if(!mutants || !length(mutants) || get_trait(TRAIT_IMMUTABLE) > 0) return 0
 	return pick(mutants)
 
 //Mutates the plant overall (randomly).
@@ -653,7 +653,7 @@
 					chems[rid] = gene_chem.Copy()
 					continue
 
-				for(var/i=1;i<=gene_chem.len;i++)
+				for(var/i=1;i<=length(gene_chem);i++)
 
 					if(isnull(gene_chem[i])) gene_chem[i] = 0
 
@@ -741,7 +741,7 @@
 		if(istype(user)) to_chat(user, "You [harvest_sample ? "take a sample" : "harvest"] from the [display_name].")
 		//This may be a new line. Update the global if it is.
 		if(name == "new line" || !(name in SSplants.seeds))
-			uid = SSplants.seeds.len + 1
+			uid = length(SSplants.seeds) + 1
 			name = "[uid]"
 			SSplants.seeds[name] = src
 

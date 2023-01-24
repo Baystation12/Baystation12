@@ -77,8 +77,8 @@
 	if (METABOLIC_INERTNESS(M) > TRAIT_LEVEL_MINOR)
 		return
 	var/datum/reagents/ingested = M.get_ingested_reagents()
-	if (ingested && ingested.reagent_list.len > 1) // Need to have at least 2 reagents - cabon and something to remove
-		var/effect = 1 / (ingested.reagent_list.len - 1)
+	if (ingested && length(ingested.reagent_list) > 1) // Need to have at least 2 reagents - cabon and something to remove
+		var/effect = 1 / (length(ingested.reagent_list) - 1)
 		for(var/datum/reagent/R in ingested.reagent_list)
 			if(R == src)
 				continue

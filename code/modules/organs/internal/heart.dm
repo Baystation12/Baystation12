@@ -172,7 +172,7 @@
 		if(CE_STABLE in owner.chem_effects) // inaprovaline
 			blood_max *= 0.8
 
-		if(world.time >= next_blood_squirt && istype(owner.loc, /turf) && do_spray.len)
+		if(world.time >= next_blood_squirt && istype(owner.loc, /turf) && length(do_spray))
 			var/spray_organ = pick(do_spray)
 			owner.visible_message(
 				SPAN_DANGER("Blood sprays out from \the [owner]'s [spray_organ]!"),

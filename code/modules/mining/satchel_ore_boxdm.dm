@@ -46,7 +46,7 @@
 
 	add_fingerprint(user)
 
-	if(!contents.len)
+	if(!length(contents))
 		to_chat(user, "It is empty.")
 		return
 
@@ -78,7 +78,7 @@
 
 	add_fingerprint(usr)
 
-	if(contents.len < 1)
+	if(length(contents) < 1)
 		to_chat(usr, SPAN_WARNING("The ore box is empty"))
 		return
 

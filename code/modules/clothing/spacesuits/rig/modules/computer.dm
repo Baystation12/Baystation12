@@ -281,7 +281,7 @@
 			var/obj/machinery/r_n_d/server/input_machine = input_device
 			incoming_files = input_machine.files
 
-		if(!incoming_files || !incoming_files.known_tech || !incoming_files.known_tech.len)
+		if(!incoming_files || !incoming_files.known_tech || !length(incoming_files.known_tech))
 			to_chat(user, SPAN_WARNING("Memory failure. There is nothing accessible stored on this terminal."))
 		else
 			// Maybe consider a way to drop all your data into a target repo in the future.

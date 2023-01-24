@@ -91,7 +91,7 @@
 		SetName(initial(name))
 		desc = initial(desc)
 		center_of_mass = initial(center_of_mass)
-		if(reagents.reagent_list.len > 0)
+		if(length(reagents.reagent_list) > 0)
 			icon_state = "mixedcondiments"
 		else
 			icon_state = "emptycondiment"

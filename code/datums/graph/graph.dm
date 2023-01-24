@@ -118,9 +118,9 @@
 
 /datum/graph/proc/ProcessPendingConnections()
 	while(LAZYLEN(pending_connections))
-		var/datum/node/N = pending_connections[pending_connections.len]
+		var/datum/node/N = pending_connections[length(pending_connections)]
 		var/list/new_neighbours = pending_connections[N]
-		pending_connections.len--
+		LIST_DEC(pending_connections)
 
 		if(N.graph != src)
 			Merge(N.graph)
@@ -156,17 +156,17 @@
 	var/list/subgraphs = list()
 	var/list/all_nodes = nodes.Copy()
 	while(length(all_nodes))
-		var/root_node = all_nodes[all_nodes.len]
-		all_nodes.len--
+		var/root_node = all_nodes[length(all_nodes)]
+		LIST_DEC(all_nodes)
 		var/checked_nodes = list()
 		var/list/nodes_to_traverse = list(root_node)
 		while(length(nodes_to_traverse))
-			var/node_to_check = nodes_to_traverse[nodes_to_traverse.len]
-			nodes_to_traverse.len--
+			var/node_to_check = nodes_to_traverse[length(nodes_to_traverse)]
+			LIST_DEC(nodes_to_traverse)
 			checked_nodes += node_to_check
 			nodes_to_traverse |= ((edges[node_to_check] || list()) - checked_nodes)
 		all_nodes -= checked_nodes
-		subgraphs[++subgraphs.len] = checked_nodes
+		subgraphs[LIST_PRE_INC(subgraphs)] = checked_nodes
 
 	if(length(subgraphs) == 1)
 		return

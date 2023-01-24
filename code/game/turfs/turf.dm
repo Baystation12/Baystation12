@@ -300,7 +300,7 @@ var/global/const/enterloopsanity = 100
 	return
 
 /turf/proc/remove_decals()
-	if(decals && decals.len)
+	if(decals && length(decals))
 		decals.Cut()
 		decals = null
 
@@ -310,7 +310,7 @@ var/global/const/enterloopsanity = 100
 		if(isliving(AM))
 			var/mob/living/M = AM
 			M.turf_collision(src, TT.speed)
-			if(M.pinned.len)
+			if(length(M.pinned))
 				return
 
 		var/intial_dir = TT.init_dir
@@ -373,7 +373,7 @@ var/global/const/enterloopsanity = 100
 /turf/proc/get_obstruction()
 	if (density)
 		LAZYADD(., src)
-	if (contents.len > 100 || contents.len <= !!lighting_overlay)
+	if (length(contents) > 100 || length(contents) <= !!lighting_overlay)
 		return    // fuck it, too/not-enough much shit here
 	for (var/thing in src)
 		var/atom/movable/AM = thing

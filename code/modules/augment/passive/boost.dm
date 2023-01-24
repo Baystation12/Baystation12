@@ -27,7 +27,7 @@
 
 
 /obj/item/organ/internal/augment/boost/onInstall()
-	if (buffs.len)
+	if (length(buffs))
 		var/datum/skill_buff/augment/A
 		A = owner.buff_skill(buffs, 0, buffpath)
 		if (A && istype(A))

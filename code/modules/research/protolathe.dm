@@ -29,7 +29,7 @@
 	if(inoperable())
 		update_icon()
 		return
-	if(queue.len == 0)
+	if(length(queue) == 0)
 		busy = 0
 		update_icon()
 		return
@@ -168,6 +168,6 @@
 	if(D.build_path)
 		var/obj/new_item = D.Fabricate(loc, src)
 		if(mat_efficiency != 1) // No matter out of nowhere
-			if(new_item.matter && new_item.matter.len > 0)
+			if(new_item.matter && length(new_item.matter) > 0)
 				for(var/i in new_item.matter)
 					new_item.matter[i] = new_item.matter[i] * mat_efficiency

@@ -409,7 +409,7 @@
 	last_reactants = 0
 
 	//cant have any reactions if there aren't any reactants present
-	if(react_pool.len)
+	if(length(react_pool))
 		//determine a random amount to actually react this cycle, and remove it from the standard pool
 		//this is a hack, and quite nonrealistic :(
 		for(var/reactant in react_pool)
@@ -421,7 +421,7 @@
 		//loop through all the reacting reagents, picking out random reactions for them
 		var/list/produced_reactants = new/list
 		var/list/p_react_pool = react_pool.Copy()
-		while(p_react_pool.len)
+		while(length(p_react_pool))
 			//pick one of the unprocessed reacting reagents randomly
 			var/cur_p_react = pick(p_react_pool)
 			p_react_pool.Remove(cur_p_react)
@@ -450,7 +450,7 @@
 			sortTim(possible_reactions, /proc/cmp_fusion_reaction_des)
 
 			//split up the reacting atoms between the possible reactions
-			while(possible_reactions.len)
+			while(length(possible_reactions))
 				var/singleton/fusion_reaction/cur_reaction = possible_reactions[1]
 				possible_reactions.Remove(cur_reaction)
 

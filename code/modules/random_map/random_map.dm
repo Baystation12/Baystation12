@@ -80,7 +80,7 @@ var/global/list/map_count = list()
 	if(!map)
 		set_map_size()
 	. = ((y-1)*limit_x)+x
-	if((. < 1) || (. > map.len))
+	if((. < 1) || (. > length(map)))
 		return null
 
 /datum/random_map/proc/get_map_char(value)
@@ -117,8 +117,7 @@ var/global/list/map_count = list()
 	to_chat(user, "[dat]+------+</code>")
 
 /datum/random_map/proc/set_map_size()
-	map = list()
-	map.len = limit_x * limit_y
+	map = new (limit_x * limit_y)
 
 /datum/random_map/proc/seed_map()
 	for(var/x = 1, x <= limit_x, x++)
@@ -200,7 +199,7 @@ var/global/list/map_count = list()
 	return
 
 /datum/random_map/proc/overlay_with(datum/random_map/target_map, tx, ty)
-	if(!map.len || !istype(target_map))
+	if(!length(map) || !istype(target_map))
 		return
 	tx-- // Update origin so that x/y index
 	ty-- // doesn't push it off-kilter by one.

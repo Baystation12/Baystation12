@@ -12,7 +12,7 @@
 
 	var/obj/item/implant/translator/natural/I = new()
 	I.implant_in_mob(H, BP_HEAD)
-	if (master.languages.len)
+	if (length(master.languages))
 		var/datum/language/lang = master.languages[1]
 		H.add_language(lang.name)
 		H.set_default_language(lang)
@@ -262,7 +262,7 @@
 	if(prob(20))
 		var/list/base_areas = maintlocs //Have to do it this way as its a macro
 		var/list/pareas = base_areas.Copy()
-		while(pareas.len)
+		while(length(pareas))
 			var/a = pick(pareas)
 			var/area/picked_area = pareas[a]
 			pareas -= a
@@ -271,7 +271,7 @@
 				var/turf/T = t
 				if(T.density)
 					turfs -= T
-			if(turfs.len)
+			if(length(turfs))
 				src.visible_message(SPAN_NOTICE("\The [src] vanishes!"))
 				src.forceMove(pick(turfs))
 	show_browser(user, null, "window=summoning")

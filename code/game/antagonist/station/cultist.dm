@@ -130,7 +130,7 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 		if((old_rating < i) && (max_cult_rating >= i))
 			to_update += i
 
-	if(to_update.len)
+	if(length(to_update))
 		update_cult_magic(to_update)
 
 /datum/antagonist/cultist/proc/update_cult_magic(list/to_update)

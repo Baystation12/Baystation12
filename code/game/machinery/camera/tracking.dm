@@ -15,7 +15,7 @@
 	var/list/T = list()
 	for (var/obj/machinery/camera/C in cameranet.cameras)
 		var/list/tempnetwork = C.network&src.network
-		if (tempnetwork.len)
+		if (length(tempnetwork))
 			T[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
 
 	track = new()
@@ -48,7 +48,7 @@
 		to_chat(src, SPAN_WARNING("Must supply a location name"))
 		return
 
-	if(stored_locations.len >= max_locations)
+	if(length(stored_locations) >= max_locations)
 		to_chat(src, SPAN_WARNING("Cannot store additional locations. Remove one first"))
 		return
 
@@ -195,7 +195,7 @@
 	var/obj/machinery/camera/a
 	var/obj/machinery/camera/b
 
-	for (var/i = L.len, i > 0, i--)
+	for (var/i = length(L), i > 0, i--)
 		for (var/j = 1 to i - 1)
 			a = L[j]
 			b = L[j + 1]

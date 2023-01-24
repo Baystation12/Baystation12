@@ -144,7 +144,7 @@
 		return
 
 	if(config.player_limit != 0)
-		if((GLOB.clients.len >= config.player_limit) && !(ckey in admin_datums))
+		if((length(GLOB.clients) >= config.player_limit) && !(ckey in admin_datums))
 			alert(src,"This server is currently full and not accepting new connections.","Server Full","OK")
 			log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[config.player_limit])")
 			qdel(src)
@@ -156,7 +156,7 @@
 			break
 
 	// Change the way they should download resources.
-	if(config.resource_urls && config.resource_urls.len)
+	if(config.resource_urls && length(config.resource_urls))
 		src.preload_rsc = pick(config.resource_urls)
 	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
 

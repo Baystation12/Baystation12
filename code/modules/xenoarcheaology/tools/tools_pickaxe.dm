@@ -197,10 +197,10 @@
 	for(var/obj/item/pickaxe/xeno/P in src)
 		picksToSort += P
 		P.loc = null
-	while(picksToSort.len)
+	while(length(picksToSort))
 		var/min = 200 // No pick is bigger than 200
 		var/selected = 0
-		for(var/i = 1 to picksToSort.len)
+		for(var/i = 1 to length(picksToSort))
 			var/obj/item/pickaxe/xeno/current = picksToSort[i]
 			if(current.excavation_amount <= min)
 				selected = i

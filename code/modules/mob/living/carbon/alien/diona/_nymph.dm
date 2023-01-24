@@ -118,7 +118,7 @@
 			available_nymphs += nymph
 
 	// Make sure there's a home for the player
-	if(!available_nymphs.len)
+	if(!length(available_nymphs))
 		available_nymphs += new /mob/living/carbon/alien/diona/sterile(donor.loc)
 
 	// Link availalbe nymphs together
@@ -131,7 +131,7 @@
 			nymph.set_previous_nymph(last_nymph)
 			last_nymph.set_next_nymph(nymph)
 		last_nymph = nymph
-	if(available_nymphs.len > 1)
+	if(length(available_nymphs) > 1)
 		first_nymph.set_previous_nymph(last_nymph)
 		last_nymph.set_next_nymph(first_nymph)
 

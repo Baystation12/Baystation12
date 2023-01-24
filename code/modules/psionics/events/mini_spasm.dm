@@ -38,7 +38,7 @@
 		for(var/disability in disabilities)
 			if(victim.disabilities & disability)
 				disabilities -= disability
-		if(disabilities.len)
+		if(length(disabilities))
 			victim.disabilities |= pick(disabilities)
 
 	if(victim.psi)

@@ -102,8 +102,8 @@ SUBSYSTEM_DEF(zcopy)
 	..({"\
 		Mx: [json_encode(zlev_maximums)]\n\
 		Queues: \
-		Turfs [queued_turfs.len - (qt_idex - 1)] \
-		Overlays [queued_overlays.len - (qo_idex - 1)]\n\
+		Turfs [length(queued_turfs) - (qt_idex - 1)] \
+		Overlays [length(queued_overlays) - (qo_idex - 1)]\n\
 		Open Turfs: \
 		Turfs [openspace_turfs] \
 		Overlays [openspace_overlays]\n\
@@ -170,7 +170,7 @@ SUBSYSTEM_DEF(zcopy)
 	var/list/curr_turfs = queued_turfs
 	var/list/curr_ov = queued_overlays
 
-	while (qt_idex <= curr_turfs.len)
+	while (qt_idex <= length(curr_turfs))
 		var/turf/T = curr_turfs[qt_idex]
 		curr_turfs[qt_idex] = null
 		qt_idex += 1
@@ -370,7 +370,7 @@ SUBSYSTEM_DEF(zcopy)
 	if (!no_mc_tick)
 		MC_SPLIT_TICK
 
-	while (qo_idex <= curr_ov.len)
+	while (qo_idex <= length(curr_ov))
 		var/atom/movable/openspace/mimic/OO = curr_ov[qo_idex]
 		curr_ov[qo_idex] = null
 		qo_idex += 1
@@ -598,7 +598,7 @@ SUBSYSTEM_DEF(zcopy)
 	for (var/atom/movable/openspace/O in T)
 		found_oo += O
 
-	if (T.shadower.overlays.len)
+	if (length(T.shadower.overlays))
 		for (var/overlay in T.shadower.overlays)
 			var/atom/movable/openspace/debug/D = new
 			D.appearance = overlay

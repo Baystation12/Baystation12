@@ -122,7 +122,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 		//Set up gases for living things
 		if (!length(breathgas))
 			var/list/goodgases = gas_data.gases.Copy()
-			var/gasnum = min(rand(1,3), goodgases.len)
+			var/gasnum = min(rand(1,3), length(goodgases))
 			for (var/i = 1 to gasnum)
 				var/gas = pick(goodgases)
 				breathgas[gas] = round(0.4*goodgases[gas], 0.1)
@@ -144,7 +144,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 
 //attempt at more consistent history generation for xenoarch finds.
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_engravings()
-	if (!actors.len)
+	if (!length(actors))
 		actors += pick("alien humanoid","an amorphic blob","a short, hairy being","a rodent-like creature","a robot","a primate","a reptilian alien","an unidentifiable object","a statue","a starship","unusual devices","a structure")
 		actors += pick("alien humanoids","amorphic blobs","short, hairy beings","rodent-like creatures","robots","primates","reptilian aliens")
 
@@ -157,7 +157,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	return engravings
 
 /obj/effect/overmap/visitable/sector/exoplanet/Process(wait, tick)
-	if (animals.len < 0.5*max_animal_count && !repopulating)
+	if (length(animals) < 0.5*max_animal_count && !repopulating)
 		repopulating = TRUE
 		max_animal_count = round(max_animal_count * 0.5)
 
@@ -171,10 +171,10 @@ GLOBAL_VAR(planet_repopulation_disabled)
 		var/zone/Z
 		for (var/i = 1 to maxx)
 			var/turf/simulated/T = locate(i, 2, zlevel)
-			if (istype(T) && T.zone && T.zone.contents.len > (maxx*maxy*0.25)) //if it's a zone quarter of zlevel, good enough odds it's planetary main one
+			if (istype(T) && T.zone && length(T.zone.contents) > (maxx*maxy*0.25)) //if it's a zone quarter of zlevel, good enough odds it's planetary main one
 				Z = T.zone
 				break
-		if (Z && !Z.fire_tiles.len && !atmosphere.compare(Z.air)) //let fire die out first if there is one
+		if (Z && !length(Z.fire_tiles) && !atmosphere.compare(Z.air)) //let fire die out first if there is one
 			var/datum/gas_mixture/daddy = new() //make a fake 'planet' zone gas
 			daddy.copy_from(atmosphere)
 			daddy.group_multiplier = Z.air.group_multiplier
@@ -255,7 +255,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	var/new_type = landmark_type
 	while(num)
 		attempts--
-		var/turf/T = locate(rand(TRANSITIONEDGE + LANDING_ZONE_RADIUS, maxx - TRANSITIONEDGE - LANDING_ZONE_RADIUS), rand(TRANSITIONEDGE + LANDING_ZONE_RADIUS, maxy - TRANSITIONEDGE - LANDING_ZONE_RADIUS),map_z[map_z.len])
+		var/turf/T = locate(rand(TRANSITIONEDGE + LANDING_ZONE_RADIUS, maxx - TRANSITIONEDGE - LANDING_ZONE_RADIUS), rand(TRANSITIONEDGE + LANDING_ZONE_RADIUS, maxy - TRANSITIONEDGE - LANDING_ZONE_RADIUS),map_z[length(map_z)])
 		if (!T || (T in places) || T.density) // Don't allow two landmarks on one turf, and don't use a dense turf.
 			continue
 		if (attempts >= 0) // While we have the patience, try to find better spawn points. If out of patience, put them down wherever, so long as there are no repeats.
@@ -294,10 +294,10 @@ GLOBAL_VAR(planet_repopulation_disabled)
 			extra_data += "Atmosphere present"
 		extra_data += "<br>"
 
-	if (seeds.len && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
+	if (length(seeds) && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
 		extra_data += "Xenoflora detected"
 
-	if (animals.len && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
+	if (length(animals) && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
 		extra_data += "Life traces detected"
 
 	if (LAZYLEN(spawned_features) && user.skill_check(SKILL_SCIENCE, SKILL_ADEPT))

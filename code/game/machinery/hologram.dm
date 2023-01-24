@@ -183,7 +183,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 
 /obj/machinery/hologram/holopad/proc/addrecentcall(id)
 	recent_calls += id
-	if (recent_calls.len > 5)
+	if (length(recent_calls) > 5)
 		recent_calls -= recent_calls[1]
 
 /obj/machinery/hologram/holopad/check_eye(mob/user)
@@ -335,7 +335,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	if(caller_id)
 		qdel(masters[caller_id])//Get rid of user's hologram
 		masters -= caller_id //Discard the caller from the list of those who use holopad
-	if (!masters.len)//If no users left
+	if (!length(masters))//If no users left
 		set_light(0)			//pad lighting (hologram lighting will be handled automatically since its owner was deleted)
 		icon_state = "[base_icon]0"
 		if(sourcepad)

@@ -14,7 +14,7 @@ SUBSYSTEM_DEF(chemistry)
 /datum/controller/subsystem/chemistry/UpdateStat(time)
 	if (PreventUpdateStat(time))
 		return ..()
-	..("Reaction Queue: [active_reagents.len]")
+	..("Reaction Queue: [length(active_reagents)]")
 
 
 /datum/controller/subsystem/chemistry/Initialize(start_uptime)
@@ -39,7 +39,7 @@ SUBSYSTEM_DEF(chemistry)
 /datum/controller/subsystem/chemistry/fire(resumed, no_mc_tick)
 	if (!resumed)
 		queue = active_reagents.Copy()
-		if (!queue.len)
+		if (!length(queue))
 			return
 	var/cut_until = 1
 	for (var/datum/reagents/reagents as anything in queue)

@@ -127,7 +127,7 @@
 		return
 
 	if(malfunction)
-		if(deployed_shields.len && prob(5))
+		if(length(deployed_shields) && prob(5))
 			qdel(pick(deployed_shields))
 	else
 		if (check_delay <= 0)

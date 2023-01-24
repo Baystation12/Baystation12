@@ -387,7 +387,7 @@ var/global/bomb_set
 /obj/item/disk/nuclear/Destroy()
 	GLOB.moved_event.unregister(src, src, /obj/item/disk/nuclear/proc/check_z_level)
 	nuke_disks -= src
-	if(!nuke_disks.len)
+	if(!length(nuke_disks))
 		var/turf/T = pick_area_turf(/area/maintenance, list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))
 		if(T)
 			var/obj/D = new /obj/item/disk/nuclear(T)

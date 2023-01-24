@@ -38,7 +38,7 @@
 	for(var/obj/machinery/power/shield_generator/G in SSmachines.machinery)
 		if((G.z in affecting_z) && G.running && G.check_flag(MODEFLAG_EM))
 			shields += G
-	if(shields.len)
+	if(length(shields))
 		var/obj/machinery/power/shield_generator/shield_gen = pick(shields)
 		//Minor breaches aren't enough to let through frying amounts of power
 		if(shield_gen.take_damage(30 * severity, SHIELD_DAMTYPE_EM) <= SHIELD_BREACHED_MINOR)

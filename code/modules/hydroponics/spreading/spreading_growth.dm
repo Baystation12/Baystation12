@@ -75,7 +75,7 @@
 		//Find a victim
 		if(!buckled_mob)
 			var/list/mob/living/targets = targets_in_range()
-			if(targets && targets.len && prob(round(seed.get_trait(TRAIT_POTENCY)/4)))
+			if(targets && length(targets) && prob(round(seed.get_trait(TRAIT_POTENCY)/4)))
 				entangle(pick(targets))
 
 		//Handle the victim
@@ -87,7 +87,7 @@
 		//Try to spread
 		if(parent && parent.possible_children && prob(spread_chance))
 			var/list/neighbors = get_neighbors()
-			if(neighbors?.len)
+			if(length(neighbors))
 				spread_to(pick(neighbors))
 
 		//Try to settle down
@@ -153,7 +153,7 @@
 		for(var/mob/living/M in check_turf.contents)
 			if(prob(5) || !M.skill_check(SKILL_BOTANY, SKILL_PROF))
 				targets |= M
-	if(targets.len)
+	if(length(targets))
 		return targets
 
 #undef NEIGHBOR_REFRESH_TIME

@@ -33,7 +33,7 @@
 	return message
 
 /datum/language/proc/get_random_name(gender, name_count=2, syllable_count=4, syllable_divisor=2)
-	if(!syllables || !syllables.len)
+	if(!syllables || !length(syllables))
 		if(gender==FEMALE)
 			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
 		else
@@ -86,7 +86,7 @@
 	. = trim(.)
 
 /datum/language/proc/scramble_word(input)
-	if(!syllables || !syllables.len)
+	if(!syllables || !length(syllables))
 		return stars(input)
 
 	// If the input is cached already, move it to the end of the cache and return it
@@ -115,8 +115,8 @@
 
 	// Add it to cache, cutting old entries if the list is too long
 	scramble_cache[input] = scrambled_text
-	if(scramble_cache.len > SCRAMBLE_CACHE_LEN)
-		scramble_cache.Cut(1, scramble_cache.len-SCRAMBLE_CACHE_LEN-1)
+	if(length(scramble_cache) > SCRAMBLE_CACHE_LEN)
+		scramble_cache.Cut(1, length(scramble_cache)-SCRAMBLE_CACHE_LEN-1)
 
 	return scrambled_text
 

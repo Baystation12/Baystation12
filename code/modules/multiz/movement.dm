@@ -274,7 +274,7 @@
 			var/obj/item/organ/external/E = get_organ(tag)
 			if(E && !E.is_stump() && !E.dislocated && !BP_IS_ROBOTIC(E))
 				victims += E
-		if(victims.len)
+		if(length(victims))
 			var/obj/item/organ/external/victim = pick(victims)
 			victim.dislocate()
 			to_chat(src, SPAN_WARNING("You feel a sickening pop as your [victim.joint] is wrenched out of the socket."))

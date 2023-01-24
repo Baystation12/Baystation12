@@ -21,14 +21,14 @@ SUBSYSTEM_DEF(alarm)
 /datum/controller/subsystem/alarm/UpdateStat(time)
 	if (PreventUpdateStat(time))
 		return ..()
-	..("Alarms: [active_alarms.len]")
+	..("Alarms: [length(active_alarms)]")
 
 
 /datum/controller/subsystem/alarm/fire(resumed, no_mc_tick)
 	if (!resumed)
 		active_alarms.Cut()
 		queue = alarm_handlers.Copy()
-		if (!queue.len)
+		if (!length(queue))
 			return
 	var/cut_until = 1
 	for (var/datum/alarm_handler/alarm_handler as anything in queue)

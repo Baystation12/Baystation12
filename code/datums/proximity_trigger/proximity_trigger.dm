@@ -64,7 +64,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	. = ..()
 
 /datum/proximity_trigger/proc/is_active()
-	return turfs_in_range.len
+	return length(turfs_in_range)
 
 /datum/proximity_trigger/proc/set_range(new_range)
 	if(range_ == new_range)

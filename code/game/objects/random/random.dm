@@ -1156,7 +1156,7 @@ var/global/list/multi_point_spawns
 /obj/random_multi/Destroy()
 	var/list/spawnpoints = multi_point_spawns[id]
 	spawnpoints -= src
-	if(!spawnpoints.len)
+	if(!length(spawnpoints))
 		multi_point_spawns -= id
 	. = ..()
 

@@ -10,10 +10,10 @@
 			for(var/turf/simulated/floor/T in turfs)
 				pick_turfs += T
 
-		if(pick_turfs.len)
+		if(length(pick_turfs))
 			//All ready. Announce that bad juju is afoot.
 			GLOB.using_map.space_time_anomaly_detected_annoncement()
-			var/number_of_selections = (pick_turfs.len / 15) + 1	//+1 to avoid division by zero!
+			var/number_of_selections = (length(pick_turfs) / 15) + 1	//+1 to avoid division by zero!
 			var/sleep_duration = round(event_duration / number_of_selections)
 			var/end_time = world.time + event_duration	//the time by which the event should have ended
 
@@ -26,12 +26,12 @@
 				//we've run into overtime. End the event
 				if (end_time < world.time)
 					return
-				if (!pick_turfs.len)
+				if (!length(pick_turfs))
 					return
 
 				//loop it round
 				i += increment
-				i %= pick_turfs.len
+				i %= length(pick_turfs)
 				i++
 
 				//get our enter and exit locations
