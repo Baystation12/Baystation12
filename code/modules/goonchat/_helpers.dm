@@ -28,7 +28,7 @@ GLOBAL_DATUM_INIT(is_http_protocol, /regex, regex("^https?://"))
 		targets = list(target)
 	else
 		targets = target
-		if (!targets.len)
+		if (!length(targets))
 			return
 	if (!isicon(I))
 		if (isfile(thing)) //special snowflake

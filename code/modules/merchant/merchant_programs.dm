@@ -23,7 +23,7 @@
 /datum/computer_file/program/merchant/proc/get_merchant(index)
 	if (!index)
 		return
-	var/count = GLOB.trader_types.len
+	var/count = length(GLOB.trader_types)
 	if (!count)
 		return
 	var/trader_type = GLOB.trader_types[clamp(index, 1, count)]
@@ -51,8 +51,8 @@
 		data["hailed"]     = hailed
 		if(show_trade)
 			var/list/trades = list()
-			if(T.trading_items.len)
-				for(var/i in 1 to T.trading_items.len)
+			if(length(T.trading_items))
+				for(var/i in 1 to length(T.trading_items))
 					trades += T.print_trading_items(i)
 			data["trades"] = trades
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -182,7 +182,7 @@
 		. = TOPIC_HANDLED
 		current_merchant = 0
 	if(href_list["PRG_merchant_list"])
-		if (!GLOB.trader_types.len)
+		if (!length(GLOB.trader_types))
 			. = TOPIC_NOACTION
 			temp = "Cannot find any traders within broadcasting range."
 		else
@@ -204,7 +204,7 @@
 				scrolled = 1
 			if("left")
 				scrolled = -1
-		var/new_merchant  = clamp(current_merchant + scrolled, 1, GLOB.trader_types.len)
+		var/new_merchant  = clamp(current_merchant + scrolled, 1, length(GLOB.trader_types))
 		if(new_merchant != current_merchant)
 			hailed_merchant = FALSE
 			last_comms = null

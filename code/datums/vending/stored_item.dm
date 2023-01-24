@@ -46,7 +46,7 @@
 
 	var/atom/movable/product
 	if(LAZYLEN(instances))
-		product = instances[instances.len]	// Remove the last added product
+		product = instances[length(instances)]	// Remove the last added product
 		LAZYREMOVE(instances, product)
 	else
 		product = new item_path(storing_object)

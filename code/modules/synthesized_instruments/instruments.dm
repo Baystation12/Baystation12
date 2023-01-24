@@ -8,14 +8,14 @@
 
 /datum/instrument/proc/create_full_sample_deviation_map()
 	// Obtain samples
-	if (!src.samples.len)
+	if (!length(src.samples))
 		CRASH("No samples were defined in [src.type]")
 
 	var/list/delta_1 = list()
 	for (var/key in samples)	delta_1 += text2num(key)
 	sortTim(delta_1, associative=0)
 
-	for (var/indx1=1 to delta_1.len-1)
+	for (var/indx1=1 to length(delta_1)-1)
 		var/from_key = delta_1[indx1]
 		var/to_key   = delta_1[indx1+1]
 		var/sample1  = src.samples[GLOB.musical_config.n2t(from_key)]
@@ -26,7 +26,7 @@
 
 	// Fill in 0 -- first key and last key -- 127
 	var/first_key = delta_1[1]
-	var/last_key  = delta_1[delta_1.len]
+	var/last_key  = delta_1[length(delta_1)]
 	var/first_sample = src.samples[GLOB.musical_config.n2t(first_key)]
 	var/last_sample = src.samples[GLOB.musical_config.n2t(last_key)]
 	for (var/key=0 to first_key-1) src.sample_map[GLOB.musical_config.n2t(key)] = new /datum/sample_pair(first_sample, key-first_key)

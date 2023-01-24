@@ -260,7 +260,7 @@
 				shown_objects += embedlist
 				var/parsedembed[0]
 				for(var/obj/embedded in embedlist)
-					if(!parsedembed.len || (!parsedembed.Find(embedded.name) && !parsedembed.Find("multiple [embedded.name]")))
+					if(!length(parsedembed) || (!parsedembed.Find(embedded.name) && !parsedembed.Find("multiple [embedded.name]")))
 						parsedembed.Add(embedded.name)
 					else if(!parsedembed.Find("multiple [embedded.name]"))
 						parsedembed.Remove(embedded.name)

@@ -69,8 +69,8 @@
 /obj/item/device/multitool/hacktool/proc/sanity_check()
 	if(max_known_targets < 1) max_known_targets = 1
 	// Cut away the oldest items if the capacity has been reached
-	if(known_targets.len > max_known_targets)
-		for(var/i = (max_known_targets + 1) to known_targets.len)
+	if(length(known_targets) > max_known_targets)
+		for(var/i = (max_known_targets + 1) to length(known_targets))
 			var/atom/A = known_targets[i]
 			GLOB.destroyed_event.unregister(A, src)
 		known_targets.Cut(max_known_targets + 1)

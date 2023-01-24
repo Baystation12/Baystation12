@@ -40,7 +40,7 @@
 	return ..()
 
 /obj/screen/movable/ability_master/Click()
-	if(!ability_objects.len) // If we're empty for some reason.
+	if(!length(ability_objects)) // If we're empty for some reason.
 		return
 
 	toggle_open()
@@ -52,13 +52,13 @@
 				my_mob.client.screen -= O
 //			O.handle_icon_updates = 0
 		showing = 0
-		overlays.len = 0
+		overlays.Cut()
 		overlays.Add(closed_state)
 	else if(forced_state != 1) // We're opening it, show the icons.
 		open_ability_master()
 		update_abilities(1)
 		showing = 1
-		overlays.len = 0
+		overlays.Cut()
 		overlays.Add(open_state)
 	update_icon()
 
@@ -75,7 +75,7 @@
 	var/y_position = decode_screen_Y(screen_loc_Y[1], my_mob)
 	var/y_pix = screen_loc_Y[2]
 
-	for(var/i = 1; i <= ability_objects.len; i++)
+	for(var/i = 1; i <= length(ability_objects); i++)
 		var/obj/screen/ability/A = ability_objects[i]
 		var/xpos = x_position + (x_position < 8 ? 1 : -1)*(i%7)
 		var/ypos = y_position + (y_position < 8 ? round(i/7) : -round(i/7))
@@ -96,7 +96,7 @@
 		i++
 
 /obj/screen/movable/ability_master/on_update_icon()
-	if(ability_objects.len)
+	if(length(ability_objects))
 		set_invisibility(0)
 	else
 		set_invisibility(101)
@@ -121,7 +121,7 @@
 	qdel(ability)
 
 
-	if(ability_objects.len)
+	if(length(ability_objects))
 		toggle_open(showing + 1)
 	update_icon()
 //	else
@@ -182,7 +182,7 @@
 		ability_master.ability_objects -= src
 		if(ability_master.my_mob && ability_master.my_mob.client)
 			ability_master.my_mob.client.screen -= src
-	if(ability_master && !ability_master.ability_objects.len)
+	if(ability_master && !length(ability_master.ability_objects))
 		ability_master.update_icon()
 //		qdel(ability_master)
 	ability_master = null
@@ -219,7 +219,7 @@
 		return // Bad input.
 	if(!mob.ability_master)
 		return // No abilities.
-	if(slot > mob.ability_master.ability_objects.len || slot <= 0)
+	if(slot > length(mob.ability_master.ability_objects) || slot <= 0)
 		return // Out of bounds.
 	var/obj/screen/ability/A = mob.ability_master.ability_objects[slot]
 	A.activate()

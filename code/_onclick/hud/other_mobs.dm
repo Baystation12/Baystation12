@@ -47,7 +47,7 @@
 
 		mymob.zone_sel = new /obj/screen/zone_sel()
 		mymob.zone_sel.icon = 'icons/mob/screen1_construct.dmi'
-		mymob.zone_sel.overlays.len = 0
+		mymob.zone_sel.overlays.Cut()
 		mymob.zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]")
 
 		mymob.purged = new /obj/screen()

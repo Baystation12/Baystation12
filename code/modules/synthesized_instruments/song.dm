@@ -118,7 +118,7 @@
 	return
 
 /datum/synthesized_song/proc/play_lines(mob/user, list/allowed_suff, list/note_off_delta, list/lines)
-	if (!lines.len)
+	if (!length(lines))
 		STOP_PLAY_LINES
 	var/list/cur_accidentals = list("n", "n", "n", "n", "n", "n", "n")
 	var/list/cur_octaves = list(3, 3, 3, 3, 3, 3, 3)
@@ -133,8 +133,8 @@
 		for (var/notes in splittext(lowertext(line), ","))
 			var/list/components = splittext(notes, "/")
 			var/duration = sanitize_tempo(src.tempo)
-			if (components.len)
-				var/delta = components.len==2 && text2num(components[2]) ? text2num(components[2]) : 1
+			if (length(components))
+				var/delta = length(components)==2 && text2num(components[2]) ? text2num(components[2]) : 1
 				var/note_str = splittext(components[1], "-")
 
 				duration = sanitize_tempo(src.tempo / delta)

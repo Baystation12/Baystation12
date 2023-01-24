@@ -69,7 +69,7 @@
 		recipe_list = srl.recipes
 	var/t1 = list()
 	t1 += "<HTML><HEAD><title>Constructions from [src]</title></HEAD><body><TT>Amount Left: [src.get_amount()]<br>"
-	for(var/i=1;i<=recipe_list.len,i++)
+	for(var/i=1;i<=length(recipe_list),i++)
 		var/E = recipe_list[i]
 		if (isnull(E))
 			continue
@@ -195,7 +195,7 @@
 	else
 		if(get_amount() < used)
 			return 0
-		for(var/i = 1 to charge_costs.len)
+		for(var/i = 1 to length(charge_costs))
 			var/datum/matter_synth/S = synths[i]
 			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
 		return 1
@@ -208,7 +208,7 @@
 			amount += extra
 			update_icon()
 		return 1
-	else if(!synths || synths.len < uses_charge)
+	else if(!synths || length(synths) < uses_charge)
 		return 0
 	else
 		for(var/i = 1 to uses_charge)
@@ -265,12 +265,12 @@
 
 /obj/item/stack/proc/get_amount()
 	if(uses_charge)
-		if(!synths || synths.len < uses_charge)
+		if(!synths || length(synths) < uses_charge)
 			return 0
 		var/datum/matter_synth/S = synths[1]
 		. = round(S.get_charge() / charge_costs[1])
-		if(charge_costs.len > 1)
-			for(var/i = 2 to charge_costs.len)
+		if(length(charge_costs) > 1)
+			for(var/i = 2 to length(charge_costs))
 				S = synths[i]
 				. = min(., round(S.get_charge() / charge_costs[i]))
 		return
@@ -278,7 +278,7 @@
 
 /obj/item/stack/proc/get_max_amount()
 	if(uses_charge)
-		if(!synths || synths.len < uses_charge)
+		if(!synths || length(synths) < uses_charge)
 			return 0
 		var/datum/matter_synth/S = synths[1]
 		. = round(S.max_energy / charge_costs[1])

@@ -103,7 +103,7 @@
 	connectedscrubbers.Cut()
 	for (var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in orange(range, src))
 		connectedscrubbers += scrubber
-	if (!connectedscrubbers.len)
+	if (!length(connectedscrubbers))
 		status = "ERROR: No scrubber found!"
 	updateUsrDialog()
 
@@ -133,6 +133,6 @@
 		return
 	for (var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in A)
 		connectedscrubbers += scrubber
-	if (!connectedscrubbers.len)
+	if (!length(connectedscrubbers))
 		status = "ERROR: No scrubber found!"
 	updateUsrDialog()

@@ -232,7 +232,7 @@
 					P.color = reagents.get_color()
 				reagents.trans_to_obj(P,amount_per_pill)
 				if(loaded_pill_bottle)
-					if(loaded_pill_bottle.contents.len < loaded_pill_bottle.max_storage_space)
+					if(length(loaded_pill_bottle.contents) < loaded_pill_bottle.max_storage_space)
 						P.forceMove(loaded_pill_bottle)
 
 		else if (href_list["createbottle"])
@@ -302,7 +302,7 @@
 
 	if (loaded_pill_bottle)
 		data["loadedPillBottle"] = loaded_pill_bottle
-		data["pillBottleBlurb"] = "Eject Pill Bottle \[[loaded_pill_bottle.contents.len]/[loaded_pill_bottle.max_storage_space]\]"
+		data["pillBottleBlurb"] = "Eject Pill Bottle \[[length(loaded_pill_bottle.contents)]/[loaded_pill_bottle.max_storage_space]\]"
 
 	data["isSloppy"] = sloppy
 	data["isTransferringToBeaker"] = to_beaker

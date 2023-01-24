@@ -158,7 +158,7 @@
 			to_chat(user, "This component is too large for \the [src].")
 	if(isWrench(W))
 		var/list/components = get_all_components()
-		if(components.len)
+		if(length(components))
 			to_chat(user, "Remove all components from \the [src] before disassembling it.")
 			return
 		new /obj/item/stack/material/steel( get_turf(src.loc), steel_sheet_cost )
@@ -184,7 +184,7 @@
 
 	if(isScrewdriver(W))
 		var/list/all_components = get_all_components()
-		if(!all_components.len)
+		if(!length(all_components))
 			to_chat(user, "This device doesn't have any components installed.")
 			return
 		var/list/component_names = list()

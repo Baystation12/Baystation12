@@ -62,7 +62,7 @@ var/global/can_call_ert
 		if(jobban_isbanned(usr, MODE_ERT) || jobban_isbanned(usr, "Security Officer"))
 			to_chat(usr, SPAN_DANGER("You are jobbanned from the emergency reponse team!"))
 			return
-		if(GLOB.ert.current_antagonists.len >= GLOB.ert.hard_cap)
+		if(length(GLOB.ert.current_antagonists) >= GLOB.ert.hard_cap)
 			to_chat(usr, "The emergency response team is already full!")
 			return
 		GLOB.ert.create_default(usr)

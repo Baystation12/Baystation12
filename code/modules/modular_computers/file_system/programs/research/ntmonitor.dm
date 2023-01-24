@@ -29,7 +29,7 @@
 	data["terminal"] = !!program
 
 	data["ntnetstatus"] = ntnet_global.check_function()
-	data["ntnetrelays"] = ntnet_global.relays.len
+	data["ntnetrelays"] = length(ntnet_global.relays)
 	data["idsstatus"] = ntnet_global.intrusion_detection_enabled
 	data["idsalarm"] = ntnet_global.intrusion_detection_alarm
 

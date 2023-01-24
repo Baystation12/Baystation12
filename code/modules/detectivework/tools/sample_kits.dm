@@ -19,7 +19,7 @@
 		to_chat(user, "The label says: '[object]'")
 
 /obj/item/sample/print/on_update_icon()
-	if(evidence && evidence.len)
+	if(evidence && length(evidence))
 		icon_state = "fingerprint1"
 
 /obj/item/sample/print/New(newloc, atom/supplied)
@@ -27,12 +27,12 @@
 	update_icon()
 
 /obj/item/sample/proc/copy_evidence(atom/supplied)
-	if(supplied.suit_fibers && supplied.suit_fibers.len)
+	if(supplied.suit_fibers && length(supplied.suit_fibers))
 		evidence = supplied.suit_fibers.Copy()
 		supplied.suit_fibers.Cut()
 
 /obj/item/sample/proc/merge_evidence(obj/item/sample/supplied, mob/user)
-	if(!supplied.evidence || !supplied.evidence.len)
+	if(!supplied.evidence || !length(supplied.evidence))
 		return 0
 	evidence |= supplied.evidence
 	SetName("[initial(name)] (combined)")
@@ -41,7 +41,7 @@
 	return 1
 
 /obj/item/sample/print/merge_evidence(obj/item/sample/supplied, mob/user)
-	if(!supplied.evidence || !supplied.evidence.len)
+	if(!supplied.evidence || !length(supplied.evidence))
 		return 0
 	for(var/print in supplied.evidence)
 		if(evidence[print])
@@ -78,7 +78,7 @@
 	item_state = "paper"
 
 /obj/item/sample/print/attack_self(mob/user)
-	if(evidence && evidence.len)
+	if(evidence && length(evidence))
 		return
 	if(!ishuman(user))
 		return
@@ -98,7 +98,7 @@
 	if(!ishuman(M))
 		return ..()
 
-	if(evidence && evidence.len)
+	if(evidence && length(evidence))
 		return 0
 
 	var/mob/living/carbon/human/H = M
@@ -133,7 +133,7 @@
 	return 0
 
 /obj/item/sample/print/copy_evidence(atom/supplied)
-	if(supplied.fingerprints && supplied.fingerprints.len)
+	if(supplied.fingerprints && length(supplied.fingerprints))
 		for(var/print in supplied.fingerprints)
 			evidence[print] = supplied.fingerprints[print]
 		supplied.fingerprints.Cut()
@@ -150,11 +150,11 @@
 	var/evidence_path = /obj/item/sample/fibers
 
 /obj/item/forensics/sample_kit/proc/can_take_sample(mob/user, atom/supplied)
-	return (supplied.suit_fibers && supplied.suit_fibers.len)
+	return (supplied.suit_fibers && length(supplied.suit_fibers))
 
 /obj/item/forensics/sample_kit/proc/take_sample(mob/user, atom/supplied)
 	var/obj/item/sample/S = new evidence_path(get_turf(user), supplied)
-	to_chat(user, SPAN_NOTICE("You transfer [S.evidence.len] [S.evidence.len > 1 ? "[evidence_type]s" : "[evidence_type]"] to \the [S]."))
+	to_chat(user, SPAN_NOTICE("You transfer [length(S.evidence)] [length(S.evidence) > 1 ? "[evidence_type]s" : "[evidence_type]"] to \the [S]."))
 
 /obj/item/forensics/sample_kit/resolve_attackby(atom/A, mob/user, click_params)
 	if (user.a_intent != I_HELP) // Prevents putting sample kits in bags, on racks/tables, etc when trying to take samples
@@ -184,4 +184,4 @@
 	evidence_path = /obj/item/sample/print
 
 /obj/item/forensics/sample_kit/powder/can_take_sample(mob/user, atom/supplied)
-	return (supplied.fingerprints && supplied.fingerprints.len)
+	return (supplied.fingerprints && length(supplied.fingerprints))

@@ -1,10 +1,10 @@
 /datum/antagonist/proc/print_player_summary()
 
-	if(!current_antagonists.len)
+	if(!length(current_antagonists))
 		return 0
 
 	var/text = list()
-	text += "<br><br>[FONT_NORMAL("<b>The [current_antagonists.len == 1 ? "[role_text] was" : "[role_text_plural] were"]:</b>")]"
+	text += "<br><br>[FONT_NORMAL("<b>The [length(current_antagonists) == 1 ? "[role_text] was" : "[role_text_plural] were"]:</b>")]"
 	for(var/datum/mind/P in current_antagonists)
 		text += print_player(P)
 		text += get_special_objective_text(P)
@@ -12,13 +12,13 @@
 		if(ambition)
 			text += "<br>Their goals for today were..."
 			text += "<br>[SPAN_NOTICE("[ambition.summarize()]")]"
-		if(!global_objectives.len && P.objectives && P.objectives.len)
+		if(!length(global_objectives) && P.objectives && length(P.objectives))
 			var/num = 1
 			for(var/datum/objective/O in P.objectives)
 				text += print_objective(O, num)
 				num++
 
-	if(global_objectives && global_objectives.len)
+	if(global_objectives && length(global_objectives))
 		text += "<BR>[FONT_NORMAL("Their objectives were:")]"
 		var/num = 1
 		for(var/datum/objective/O in global_objectives)

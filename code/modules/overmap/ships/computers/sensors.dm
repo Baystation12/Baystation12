@@ -65,7 +65,7 @@
 			if(bearing < 0)
 				bearing += 360
 			contacts.Add(list(list("name"=O.name, "color"= O.get_color(), "ref"="\ref[O]", "bearing"=bearing)))
-		if(contacts.len)
+		if(length(contacts))
 			data["contacts"] = contacts
 		data["last_scan"] = last_scan
 	else

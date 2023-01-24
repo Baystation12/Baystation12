@@ -51,13 +51,13 @@
 				. = 0
 			else
 				return -1
-	if ((reagents?(reagents.len):(0)) < avail_reagents.reagent_list.len)
+	if (length(reagents) < length(avail_reagents.reagent_list))
 		return 0
 	return .
 
 /datum/recipe/proc/check_fruit(obj/container)
 	. = 1
-	if(fruit && fruit.len)
+	if(fruit && length(fruit))
 		var/list/checklist = list()
 		 // You should trust Copy().
 		checklist = fruit.Copy()
@@ -76,14 +76,14 @@
 
 /datum/recipe/proc/check_items(obj/container as obj)
 	. = 1
-	if (items && items.len)
+	if (items && length(items))
 		var/list/checklist = list()
 		checklist = items.Copy() // You should really trust Copy
 		for(var/obj/O in container.InsertedContents())
 			if(istype(O,/obj/item/reagent_containers/food/snacks/grown))
 				continue // Fruit is handled in check_fruit().
 			var/found = 0
-			for(var/i = 1; i < checklist.len+1; i++)
+			for(var/i = 1 to length(checklist) + 1)
 				var/item_type = checklist[i]
 				if (istype(O,item_type))
 					checklist.Cut(i, i+1)
@@ -91,7 +91,7 @@
 					break
 			if (!found)
 				. = 0
-		if (checklist.len)
+		if (length(checklist))
 			. = -1
 	return .
 
@@ -133,15 +133,15 @@
 		if((recipe.check_reagents(obj.reagents) < target) || (recipe.check_items(obj) < target) || (recipe.check_fruit(obj) < target))
 			continue
 		possible_recipes |= recipe
-	if (possible_recipes.len==0)
+	if (length(possible_recipes)==0)
 		return null
-	else if (possible_recipes.len==1)
+	else if (length(possible_recipes)==1)
 		return possible_recipes[1]
 	else //okay, let's select the most complicated recipe
 		var/highest_count = 0
 		. = possible_recipes[1]
 		for (var/datum/recipe/recipe in possible_recipes)
-			var/count = ((recipe.items)?(recipe.items.len):0) + ((recipe.reagents)?(recipe.reagents.len):0) + ((recipe.fruit)?(recipe.fruit.len):0)
+			var/count = length(recipe.items) + length(recipe.reagents) + length(recipe.fruit)
 			if (count >= highest_count)
 				highest_count = count
 				. = recipe

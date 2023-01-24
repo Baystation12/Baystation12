@@ -183,7 +183,7 @@
 				loot |= wound.embedded_objects
 			find_prob += 50
 
-	if (loot.len)
+	if (length(loot))
 
 		var/obj/item/obj = pick(loot)
 

@@ -38,9 +38,9 @@ GLOBAL_LIST_INIT(local_networks, new)
 		return TRUE
 
 	entities -= device
-	if(entities.len <= 0)
+	if(length(entities) <= 0)
 		network_entities -= device.type
-	if(network_entities.len <= 0)
+	if(length(network_entities) <= 0)
 		qdel(src)
 	return isnull(entities[device])
 

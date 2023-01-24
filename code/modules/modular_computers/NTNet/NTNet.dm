@@ -66,10 +66,10 @@ var/global/datum/ntnet/ntnet_global = new()
 	log_text += log_string
 	logs.Add(log_text)
 
-	if(logs.len > setting_maxlogcount)
+	if(length(logs) > setting_maxlogcount)
 		// We have too many logs, remove the oldest entries until we get into the limit
 		for(var/L in logs)
-			if(logs.len > setting_maxlogcount)
+			if(length(logs) > setting_maxlogcount)
 				logs.Remove(L)
 			else
 				break
@@ -91,7 +91,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	registered_nids -= "[NID]"
 
 /datum/ntnet/proc/check_banned(NID)
-	if(!relays || !relays.len)
+	if(!relays || !length(relays))
 		return FALSE
 
 	for(var/obj/machinery/ntnet_relay/R in relays)
@@ -102,7 +102,7 @@ var/global/datum/ntnet/ntnet_global = new()
 
 /// Checks whether NTNet operates.
 /datum/ntnet/proc/check_function()
-	if(!relays || !relays.len) // No relays found. NTNet is down for wireless devices
+	if(!relays || !length(relays)) // No relays found. NTNet is down for wireless devices
 		return FALSE
 
 	var/operating = FALSE

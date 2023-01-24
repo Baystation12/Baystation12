@@ -171,7 +171,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 	if(!usr || !usr.mind || !usr.mind.changeling)	return
 	src = usr.mind.changeling
 
-	if(!powerinstances.len)
+	if(!length(powerinstances))
 		for(var/P in powers)
 			powerinstances += new P()
 

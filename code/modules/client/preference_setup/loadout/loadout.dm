@@ -87,8 +87,8 @@ var/global/list/gear_datums = list()
 	pref.gear_slot = sanitize_integer(pref.gear_slot, 1, config.loadout_slots, initial(pref.gear_slot))
 	if(!islist(pref.gear_list)) pref.gear_list = list()
 
-	if(pref.gear_list.len < config.loadout_slots)
-		pref.gear_list.len = config.loadout_slots
+	if(length(pref.gear_list) < config.loadout_slots)
+		LIST_RESIZE(pref.gear_list, config.loadout_slots)
 
 	for(var/index = 1 to config.loadout_slots)
 		var/list/gears = pref.gear_list[index]
@@ -117,7 +117,7 @@ var/global/list/gear_datums = list()
 	. = list()
 	var/total_cost = 0
 	var/list/gears = pref.gear_list[pref.gear_slot]
-	for(var/i = 1; i <= gears.len; i++)
+	for(var/i = 1; i <= length(gears); i++)
 		var/datum/gear/G = gear_datums[gears[i]]
 		if(G)
 			total_cost += G.cost

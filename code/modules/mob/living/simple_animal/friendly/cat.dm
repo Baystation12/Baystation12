@@ -68,7 +68,7 @@
 			for(var/obj/O in T.contents)
 				if(!O.invisibility && O.name)
 					visible += O
-			if(visible.len)
+			if(length(visible))
 				var/atom/A = pick(visible)
 				visible_emote("suddenly stops and stares at something unseen[istype(A) ? " near [A]":""].")
 

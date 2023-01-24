@@ -854,7 +854,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];menu=3.1'>Protolathe Menu</A><HR>"
 			dat += "Queue<BR><HR>"
-			if(!linked_lathe.queue.len)
+			if(!length(linked_lathe.queue))
 				dat += "Empty"
 			else
 				var/tmp = 1
@@ -963,7 +963,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];menu=4.1'>Circuit Imprinter Menu</A><HR>"
 			dat += "Queue<BR><HR>"
-			if(linked_imprinter.queue.len == 0)
+			if(length(linked_imprinter.queue) == 0)
 				dat += "Empty"
 			else
 				var/tmp = 1

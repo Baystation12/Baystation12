@@ -33,7 +33,7 @@
 		for(var/datum/gear_tweak/path/p in G.gear_tweaks)
 			path_tweaks += p
 
-		if(path_tweaks.len)
+		if(length(path_tweaks))
 			for(var/datum/gear_tweak/path/p in path_tweaks)
 				for(var/path_name in p.valid_paths)
 					var/path_type = p.valid_paths[path_name]

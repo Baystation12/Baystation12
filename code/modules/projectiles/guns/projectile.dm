@@ -63,12 +63,12 @@
 	if(is_jammed)
 		return null
 	//get the next casing
-	if(loaded.len)
+	if(length(loaded))
 		chambered = loaded[1] //load next casing.
 		if(handle_casings != HOLD_CASINGS)
 			loaded -= chambered
-	else if(ammo_magazine && ammo_magazine.stored_ammo.len)
-		chambered = ammo_magazine.stored_ammo[ammo_magazine.stored_ammo.len]
+	else if(ammo_magazine && length(ammo_magazine.stored_ammo))
+		chambered = ammo_magazine.stored_ammo[length(ammo_magazine.stored_ammo)]
 		if(handle_casings != HOLD_CASINGS)
 			ammo_magazine.stored_ammo -= chambered
 
@@ -177,12 +177,12 @@
 				user.visible_message("[user] inserts [AM] into [src].", SPAN_NOTICE("You insert [AM] into [src]."))
 				playsound(loc, mag_insert_sound, 50, 1)
 			if(SPEEDLOADER)
-				if(loaded.len >= max_shells)
+				if(length(loaded) >= max_shells)
 					to_chat(user, SPAN_WARNING("[src] is full!"))
 					return
 				var/count = 0
 				for(var/obj/item/ammo_casing/C in AM.stored_ammo)
-					if(loaded.len >= max_shells)
+					if(length(loaded) >= max_shells)
 						break
 					if(C.caliber == caliber)
 						C.forceMove(src)
@@ -198,7 +198,7 @@
 		var/obj/item/ammo_casing/C = A
 		if(!(load_method & SINGLE_CASING) || caliber != C.caliber)
 			return //incompatible
-		if(loaded.len >= max_shells)
+		if(length(loaded) >= max_shells)
 			to_chat(user, SPAN_WARNING("[src] is full."))
 			return
 		if(!user.unEquip(C, src))
@@ -228,7 +228,7 @@
 		playsound(loc, mag_remove_sound, 50, 1)
 		ammo_magazine.update_icon()
 		ammo_magazine = null
-	else if(loaded.len)
+	else if(length(loaded))
 		//presumably, if it can be speed-loaded, it can be speed-unloaded.
 		if(allow_dump && (load_method & SPEEDLOADER))
 			var/count = 0
@@ -243,8 +243,8 @@
 			if(count)
 				user.visible_message("[user] unloads [src].", SPAN_NOTICE("You unload [count] round\s from [src]."))
 		else if(load_method & SINGLE_CASING)
-			var/obj/item/ammo_casing/C = loaded[loaded.len]
-			loaded.len--
+			var/obj/item/ammo_casing/C = loaded[length(loaded)]
+			LIST_DEC(loaded)
 			user.put_in_hands(C)
 			user.visible_message("[user] removes \a [C] from [src].", SPAN_NOTICE("You remove \a [C] from [src]."))
 	else
@@ -256,7 +256,7 @@
 		return ..()
 
 /obj/item/gun/projectile/attack_self(mob/user as mob)
-	if(firemodes.len > 1)
+	if(length(firemodes) > 1)
 		..()
 	else
 		unload_ammo(user)
@@ -269,7 +269,7 @@
 
 /obj/item/gun/projectile/afterattack(atom/A, mob/living/user)
 	..()
-	if(auto_eject && ammo_magazine && ammo_magazine.stored_ammo && !ammo_magazine.stored_ammo.len)
+	if(auto_eject && ammo_magazine && ammo_magazine.stored_ammo && !length(ammo_magazine.stored_ammo))
 		ammo_magazine.dropInto(user.loc)
 		user.visible_message(
 			"[ammo_magazine] falls out and clatters on the floor!",
@@ -293,9 +293,9 @@
 /obj/item/gun/projectile/proc/getAmmo()
 	var/bullets = 0
 	if(loaded)
-		bullets += loaded.len
+		bullets += length(loaded)
 	if(ammo_magazine && ammo_magazine.stored_ammo)
-		bullets += ammo_magazine.stored_ammo.len
+		bullets += length(ammo_magazine.stored_ammo)
 	if(chambered)
 		bullets += 1
 	return bullets

@@ -41,7 +41,7 @@
 			if(place_door)
 				possible_doors |= target_map.get_map_cell(tx+x,ty+y)
 
-	if(possible_doors.len)
+	if(length(possible_doors))
 		// Place at least one door.
 		var/placing_door = pick(possible_doors)
 		possible_doors -= placing_door

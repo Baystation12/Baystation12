@@ -21,13 +21,13 @@
 	if(_mechanics_text)     mechanics_text =     _mechanics_text
 	if(_antag_text)         antag_text =         _antag_text
 
-	if(associated_paths && associated_paths.len)
+	if(associated_paths && length(associated_paths))
 		for(var/tpath in associated_paths)
 			var/atom/thing = tpath
 			LAZYADD(associated_strings, sanitize(lowertext(initial(thing.name))))
 	if(display_name)
 		LAZYADD(associated_strings, display_name)
-	else if(associated_strings && associated_strings.len)
+	else if(associated_strings && length(associated_strings))
 		display_name = associated_strings[1]
 	..()
 

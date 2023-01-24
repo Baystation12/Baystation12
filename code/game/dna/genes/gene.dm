@@ -110,12 +110,12 @@
 
 /datum/dna/gene/basic/activate(mob/M)
 	M.mutations.Add(mutation)
-	if(activation_messages.len)
+	if(length(activation_messages))
 		var/msg = pick(activation_messages)
 		to_chat(M, SPAN_NOTICE("[msg]"))
 
 /datum/dna/gene/basic/deactivate(mob/M)
 	M.mutations.Remove(mutation)
-	if(deactivation_messages.len)
+	if(length(deactivation_messages))
 		var/msg = pick(deactivation_messages)
 		to_chat(M, SPAN_WARNING("[msg]"))

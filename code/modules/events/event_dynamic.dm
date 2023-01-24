@@ -27,9 +27,9 @@ var/global/list/event_last_fired = list()
 	possibleEvents[/datum/event/trivial_news] = 400
 	possibleEvents[/datum/event/mundane_news] = 300
 
-	possibleEvents[/datum/event/money_lotto] = max(min(5, GLOB.player_list.len), 50)
+	possibleEvents[/datum/event/money_lotto] = max(min(5, length(GLOB.player_list)), 50)
 	if(account_hack_attempted)
-		possibleEvents[/datum/event/money_hacker] = max(min(25, GLOB.player_list.len) * 4, 200)
+		possibleEvents[/datum/event/money_hacker] = max(min(25, length(GLOB.player_list)) * 4, 200)
 
 
 	possibleEvents[/datum/event/mob_spawning/carp] = 20 + 10 * active_with_role["Engineer"]

@@ -95,7 +95,7 @@
 			to_chat(user, SPAN_DANGER("The suit cycler is locked."))
 			return
 
-		if(contents.len > 0)
+		if(length(contents) > 0)
 			to_chat(user, SPAN_DANGER("There is no room inside the cycler for [G.affecting.name]."))
 			return
 

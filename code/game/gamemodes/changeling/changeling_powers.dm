@@ -23,7 +23,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 /datum/changeling/New()
 	..()
-	if(possible_changeling_IDs.len)
+	if(length(possible_changeling_IDs))
 		changelingID = pick(possible_changeling_IDs)
 		possible_changeling_IDs -= changelingID
 		changelingID = "[changelingID]"
@@ -65,7 +65,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	var/lesser_form = !ishuman(src)
 
-	if(!powerinstances.len)
+	if(!length(powerinstances))
 		for(var/P in powers)
 			powerinstances += new P()
 
@@ -114,7 +114,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		to_chat(src, SPAN_WARNING("We are incapacitated."))
 		return
 
-	if(changeling.absorbed_dna.len < required_dna)
+	if(length(changeling.absorbed_dna) < required_dna)
 		to_chat(src, SPAN_WARNING("We require at least [required_dna] samples of compatible DNA."))
 		return
 
@@ -224,7 +224,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 					continue
 				absorbDNA(dna_data)
 				changeling.absorbedcount++
-			T.mind.changeling.absorbed_dna.len = 1
+			T.mind.changeling.absorbed_dna.Cut(2)
 
 		if(T.mind.changeling.purchasedpowers)
 			for(var/datum/power/changeling/Tp in T.mind.changeling.purchasedpowers)
@@ -582,7 +582,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 		if(valid)
 			names += DNA.name
 
-	if(names.len <= 0)
+	if(length(names) <= 0)
 		to_chat(src, SPAN_NOTICE("The airwaves already have all of our DNA."))
 		return
 
@@ -617,7 +617,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 		if(!(changeling.GetDNA(DNA.name)))
 			names[DNA.name] = DNA
 
-	if(names.len <= 0)
+	if(length(names) <= 0)
 		to_chat(src, SPAN_NOTICE("There's no new DNA to absorb from the air."))
 		return
 

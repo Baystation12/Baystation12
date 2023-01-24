@@ -184,18 +184,18 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 			var/list/gridLines = splittext(dmmRegex.group[6], "\n")
 
 			var/leadingBlanks = 0
-			while(leadingBlanks < gridLines.len && gridLines[++leadingBlanks] == "")
+			while(leadingBlanks < length(gridLines) && gridLines[++leadingBlanks] == "")
 			if(leadingBlanks > 1)
 				gridLines.Cut(1, leadingBlanks) // Remove all leading blank lines.
 
-			if(!gridLines.len) // Skip it if only blank lines exist.
+			if(!length(gridLines)) // Skip it if only blank lines exist.
 				continue
 
-			if(gridLines.len && gridLines[gridLines.len] == "")
-				gridLines.Cut(gridLines.len) // Remove only one blank line at the end.
+			if(length(gridLines) && gridLines[length(gridLines)] == "")
+				gridLines.Cut(length(gridLines)) // Remove only one blank line at the end.
 
 			bounds[MAP_MINY] = min(bounds[MAP_MINY], clamp(ycrd, y_lower, y_upper))
-			ycrd += gridLines.len - 1 // Start at the top and work down
+			ycrd += length(gridLines) - 1 // Start at the top and work down
 
 			if(!cropMap && ycrd > world.maxy)
 				if(!measureOnly)
@@ -345,16 +345,16 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 			if(variables_start)//if there's any variable
 				full_def = copytext(full_def,variables_start+1,length(full_def))//removing the last '}'
 				fields = readlist(full_def, ";")
-				if(fields.len)
-					if(!trim(fields[fields.len]))
-						--fields.len
+				if(length(fields))
+					if(!trim(fields[length(fields)]))
+						LIST_DEC(fields)
 					for(var/I in fields)
 						var/value = fields[I]
 						if(istext(value))
 							fields[I] = apply_text_macros(value)
 
 			//then fill the members_attributes list with the corresponding variables
-			members_attributes.len++
+			LIST_INC(members_attributes)
 			members_attributes[index++] = fields
 
 			CHECK_TICK
@@ -369,7 +369,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 		// 5. and the members are world.turf and world.area
 		// Basically, if we find an entry like this: "XXX" = (/turf/default, /area/default)
 		// We can skip calling this proc every time we see XXX
-		if(no_changeturf && !space_key && members.len == 2 && members_attributes.len == 2 && length(members_attributes[1]) == 0 && length(members_attributes[2]) == 0 && (world.area in members) && (world.turf in members))
+		if(no_changeturf && !space_key && length(members) == 2 && length(members_attributes) == 2 && length(members_attributes[1]) == 0 && length(members_attributes[2]) == 0 && (world.area in members) && (world.turf in members))
 			space_key = model_key
 			return
 
@@ -386,7 +386,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 	var/atoms_to_delete = list()
 
 	//first instance the /area and remove it from the members list
-	index = members.len
+	index = length(members)
 	if(members[index] != /area/template_noop)
 		is_not_noop = TRUE
 		var/list/attr = members_attributes[index]
@@ -424,7 +424,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 	if(T)
 		//if others /turf are presents, simulates the underlays piling effect
 		index = first_turf_index + 1
-		while(index <= members.len - 1) // Last item is an /area
+		while(index <= length(members) - 1) // Last item is an /area
 			var/underlay = T.appearance
 			T = instance_atom(members[index],members_attributes[index],crds,no_changeturf)//instance new turf
 			T.underlays += underlay
@@ -541,7 +541,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 		if(!length(trim_left))
 			if(position == 0)
 				break // That terminal commas are ignored is real dm behavior.
-			to_return.len++
+			LIST_INC(to_return)
 			continue
 
 		var/left = readlistitem(trim_left)

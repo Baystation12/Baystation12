@@ -9,6 +9,6 @@
 		var/datum/antagonist/antag = GLOB.all_antag_types_[antag_type]
 		if(antag.flags & ANTAG_RANDSPAWN)
 			valid_types |= antag
-	if(valid_types.len)
+	if(length(valid_types))
 		var/datum/antagonist/antag = pick(valid_types)
 		antag.attempt_random_spawn()

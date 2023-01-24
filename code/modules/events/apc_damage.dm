@@ -26,7 +26,7 @@
 		if(newEpicentre.name == "lightsout")
 			possibleEpicentres += newEpicentre
 
-	if(!possibleEpicentres.len)
+	if(!length(possibleEpicentres))
 		return
 
 	var/epicentre = pick(possibleEpicentres)
@@ -39,7 +39,7 @@
 				apcs += apc
 				apcs += apc
 
-	if(!apcs.len)
+	if(!length(apcs))
 		return
 
 	return pick(apcs)

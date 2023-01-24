@@ -55,9 +55,9 @@ SUBSYSTEM_DEF(event)
 		processing_events = active_events.Copy()
 		pos = EVENT_LEVEL_MUNDANE
 
-	while (processing_events.len)
-		var/datum/event/E = processing_events[processing_events.len]
-		processing_events.len--
+	while (length(processing_events))
+		var/datum/event/E = processing_events[length(processing_events)]
+		LIST_DEC(processing_events)
 
 		E.process()
 
@@ -75,7 +75,7 @@ SUBSYSTEM_DEF(event)
 /datum/controller/subsystem/event/UpdateStat(time)
 	if (PreventUpdateStat(time))
 		return ..()
-	..("Active Events: [active_events.len]")
+	..("Active Events: [length(active_events)]")
 
 
 //Actual event handling

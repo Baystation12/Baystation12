@@ -79,7 +79,7 @@
 	else if(href_list["item"])
 		if(!allow_items) return
 
-		if(frozen_items.len == 0)
+		if(length(frozen_items) == 0)
 			to_chat(user, SPAN_NOTICE("There is nothing to recover from storage."))
 			return TOPIC_HANDLED
 
@@ -100,7 +100,7 @@
 	else if(href_list["allitems"])
 		if(!allow_items) return TOPIC_HANDLED
 
-		if(frozen_items.len == 0)
+		if(length(frozen_items) == 0)
 			to_chat(user, SPAN_NOTICE("There is nothing to recover from storage."))
 			return TOPIC_HANDLED
 
@@ -229,7 +229,7 @@
 				possible_locations |= text2num(level)
 
 	var/newz = GLOB.using_map.get_empty_zlevel()
-	if(possible_locations.len && prob(10))
+	if(length(possible_locations) && prob(10))
 		newz = pick(possible_locations)
 	var/turf/nloc = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),newz)
 	if(!istype(nloc, /turf/space))
@@ -339,7 +339,7 @@
 		occupant.drop_from_inventory(W)
 		W.forceMove(src)
 
-		if(W.contents.len) //Make sure we catch anything not handled by qdel() on the items.
+		if(length(W.contents)) //Make sure we catch anything not handled by qdel() on the items.
 			for(var/obj/item/O in W.contents)
 				if(istype(O,/obj/item/storage/internal)) //Stop eating pockets, you fuck!
 					continue

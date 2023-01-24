@@ -33,7 +33,7 @@
 				var/obj/item/stock_parts/computer/network_card/remote_nc = rt.computer.get_component(PART_NETWORK)
 				if(origin_nc && remote_nc)
 					remote_connections += "[origin_nc.get_network_tag()] -> [remote_nc.get_network_tag_direct()]"
-			if(remote_connections.len)
+			if(length(remote_connections))
 				. += ""
 				. += "Active ssh sessions:"
 				. += remote_connections

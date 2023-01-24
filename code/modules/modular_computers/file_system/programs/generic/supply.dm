@@ -22,9 +22,9 @@
 	if(istype(SNM))
 		SNM.emagged = computer.emagged()
 		if(SNM.notifications_enabled)
-			if(SSsupply.requestlist.len)
+			if(length(SSsupply.requestlist))
 				ui_header = "supply_new_order.gif"
-			else if(SSsupply.shoppinglist.len)
+			else if(length(SSsupply.shoppinglist))
 				ui_header = "supply_awaiting_delivery.gif"
 			else
 				ui_header = "supply_idle.gif"
@@ -56,8 +56,8 @@
 
 	data["is_admin"] = is_admin
 	if(is_admin)
-		data["shopping_cart_length"] = SSsupply.shoppinglist.len
-		data["request_length"] = SSsupply.requestlist.len
+		data["shopping_cart_length"] = length(SSsupply.shoppinglist)
+		data["request_length"] = length(SSsupply.requestlist)
 	data["screen"] = screen
 	data["credits"] = "[SSsupply.points]"
 	data["currency"] = GLOB.using_map.supply_currency_name
@@ -330,7 +330,7 @@
 			"amount" = amount
 		)))
 
-	if(sp.contains.len == 0) // Handles the case where sp.contains is empty, e.g. for livecargo
+	if(length(sp.contains) == 0) // Handles the case where sp.contains is empty, e.g. for livecargo
 		contents_of_order.Add(list(list(
 			"name" = sp.containername,
 			"amount" = 1

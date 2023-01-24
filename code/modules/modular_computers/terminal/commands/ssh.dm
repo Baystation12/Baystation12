@@ -19,7 +19,7 @@
 	if(istype(terminal, /datum/terminal/remote))
 		return "[name]: Error; [name] is not supported on remote terminals."
 	var/list/arguments = get_arguments(text)
-	if(isnull(arguments) || arguments.len != 1)
+	if(isnull(arguments) || length(arguments) != 1)
 		return syntax_error()
 	if(!terminal.computer.get_ntnet_status())
 		return network_error()

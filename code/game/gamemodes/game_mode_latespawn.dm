@@ -39,12 +39,12 @@
 			message_admins("[uppertext(name)]: [A.id] selected for spawn attempt.")
 			usable_templates |= A
 
-	if(!usable_templates.len)
+	if(!length(usable_templates))
 		message_admins("[uppertext(name)]: Failed to find configured mode spawn templates, please re-enable auto-antagonists after one is added.")
 		round_autoantag = 0
 		return
 
-	while(usable_templates.len)
+	while(length(usable_templates))
 		var/datum/antagonist/spawn_antag = pick(usable_templates)
 		usable_templates -= spawn_antag
 

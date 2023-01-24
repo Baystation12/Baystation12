@@ -143,7 +143,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 				if(T.x>world.maxx || T.x<1)	continue//Don't want them to teleport off the map.
 				if(T.y>world.maxy || T.y<1)	continue
 				destination_list += T
-			if(destination_list.len)
+			if(length(destination_list))
 				destination = pick(destination_list)
 			else	return
 
@@ -330,7 +330,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		var/name = "[A.real_name] ([A.modtype] [A.braintype])"
 		borgs[name] = A
 
-	if (borgs.len)
+	if (length(borgs))
 		select = input("Unshackled borg signals detected:", "Borg selection", null, null) as null|anything in borgs
 		return borgs[select]
 
@@ -350,14 +350,14 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/mob/living/silicon/ai/selected
 	var/list/active = active_ais(z)
 	for(var/mob/living/silicon/ai/A in active)
-		if(!selected || (selected.connected_robots.len > A.connected_robots.len))
+		if(!selected || (length(selected.connected_robots) > length(A.connected_robots)))
 			selected = A
 
 	return selected
 
 /proc/select_active_ai(mob/user, z)
 	var/list/ais = active_ais(z)
-	if(ais.len)
+	if(length(ais))
 		if(user?.client)
 			. = input(user,"AI signals detected:", "AI selection") in ais
 		else
@@ -541,7 +541,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	for(var/atom/part in contents)
 		toReturn += part
-		if(part.contents.len && searchDepth)
+		if(length(part.contents) && searchDepth)
 			toReturn += part.GetAllContents(searchDepth - 1)
 
 	return toReturn
@@ -648,7 +648,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	var/list/turfs_src = get_area_turfs("\ref[src]")
 
-	if(!turfs_src.len) return
+	if(!length(turfs_src)) return
 
 	//figure out a suitable origin - this assumes the shuttle areas are the exact same size and shape
 	//might be worth doing this with a shuttle core object instead of areas, in the future
@@ -1117,11 +1117,11 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		if(findtext("[path]", desired_path))
 			matches += path
 
-	if(!matches.len)
+	if(!length(matches))
 		alert("No results found. Sorry.")
 		return
 
-	if(matches.len==1)
+	if(length(matches)==1)
 		return matches[1]
 	else
 		return (input("Select a type", "Select Type", matches[1]) as null|anything in matches)

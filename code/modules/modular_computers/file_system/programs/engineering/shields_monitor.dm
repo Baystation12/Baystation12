@@ -51,8 +51,8 @@
 			data["percentage_energy"] = round(data["current_energy"] / data["max_energy"] * 100)
 		else
 			data["percentage_energy"] = "ERR"
-		data["total_segments"] = active.field_segments ? active.field_segments.len : 0
-		data["functional_segments"] = active.damaged_segments ? data["total_segments"] - active.damaged_segments.len : data["total_segments"]
+		data["total_segments"] = active.field_segments ? length(active.field_segments) : 0
+		data["functional_segments"] = active.damaged_segments ? data["total_segments"] - length(active.damaged_segments) : data["total_segments"]
 		data["field_radius"] = active.field_radius
 		data["input_cap_kw"] = round(active.input_cap / 1000)
 		data["upkeep_power_usage"] = round(active.upkeep_power_usage / 1000, 0.1)

@@ -21,7 +21,7 @@
 /obj/item/integrated_circuit/memory/examine(mob/user)
 	. = ..()
 	var/i
-	for(i = 1, i <= outputs.len, i++)
+	for(i = 1, i <= length(outputs), i++)
 		var/datum/integrated_io/O = outputs[i]
 		var/data = "nothing"
 		if(isweakref(O.data))
@@ -33,7 +33,7 @@
 		to_chat(user, "\The [src] has [data] saved to address [i].")
 
 /obj/item/integrated_circuit/memory/do_work()
-	for(var/i = 1 to inputs.len)
+	for(var/i = 1 to length(inputs))
 		var/datum/integrated_io/I = inputs[i]
 		var/datum/integrated_io/O = outputs[i]
 		O.data = I.data
@@ -86,7 +86,7 @@
 	O.push_data()
 
 /obj/item/integrated_circuit/memory/constant/emp_act()
-	for(var/i in 1 to activators.len)
+	for(var/i in 1 to length(activators))
 		var/datum/integrated_io/activate/A = activators[i]
 		A.scramble()
 	..()

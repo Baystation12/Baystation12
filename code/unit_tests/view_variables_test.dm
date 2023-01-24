@@ -11,7 +11,7 @@
 		if(!islist(sh.handled_vars))
 			log_bad("[sh] does not have a handled variables list. Expected a list, was [log_info_line(sh.handled_vars)]")
 			faulty_handlers |= sh
-		else if(!sh.handled_vars.len)
+		else if(!length(sh.handled_vars))
 			log_bad("[sh] as an empty handled variables list.")
 			faulty_handlers |= sh
 		else
@@ -19,7 +19,7 @@
 			// Somehow check for missing vars here without creating instances.
 			// I.e.:  for(var/handled_var in sh.handled_vars) check handled_var in handled_type.vars
 
-	if(faulty_handlers.len)
+	if(length(faulty_handlers))
 		fail("The following special VV handlers are invalid: [english_list(faulty_handlers)]")
 	else
 		pass("All special VV handlers are valid.")
@@ -38,7 +38,7 @@
 			if(!(ispath(sh1.handled_type, sh2.handled_type) || ispath(sh2.handled_type, sh1.handled_type)))
 				continue
 			var/list/intersected_vars = sh1.handled_vars & sh2.handled_vars
-			if(intersected_vars.len)
+			if(length(intersected_vars))
 				failed =  TRUE
 				log_bad("[sh1] and [sh2] have the following overlaps: [english_list(intersected_vars)]")
 

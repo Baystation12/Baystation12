@@ -151,7 +151,7 @@
 #define ARGS_DEBUG log_debug("[__FILE__] - [__LINE__]") ; for(var/arg in args) { log_debug("\t[log_info_line(arg)]") }
 
 // Insert an object A into a sorted list using cmp_proc (/code/_helpers/cmp.dm) for comparison.
-#define ADD_SORTED(list, A, cmp_proc) if(!list.len) {list.Add(A)} else {list.Insert(FindElementIndex(A, list, cmp_proc), A)}
+#define ADD_SORTED(list, A, cmp_proc) if(!length(list)) {list.Add(A)} else {list.Insert(FindElementIndex(A, list, cmp_proc), A)}
 
 // Spawns multiple objects of the same type
 #define cast_new(type, num, args...) if((num) == 1) { new type(args) } else { for(var/i=0;i<(num),i++) { new type(args) } }
@@ -267,3 +267,18 @@
 
 
 #define num2hex(num) num2text(num, 1, 16)
+
+/// Increase the size of L by 1 at the end. Is the old last entry index.
+#define LIST_INC(L) ((L).len++)
+
+/// Increase the size of L by 1 at the end. Is the new last entry index.
+#define LIST_PRE_INC(L) (++(L).len)
+
+/// Decrease the size of L by 1 from the end. Is the old last entry index.
+#define LIST_DEC(L) ((L).len--)
+
+/// Decrease the size of L by 1 from the end. Is the new last entry index.
+#define LIST_PRE_DEC(L) (--(L).len)
+
+/// Explicitly set the length of L to NEWLEN, adding nulls or dropping entries. Is the same value as NEWLEN.
+#define LIST_RESIZE(L, NEWLEN) ((L).len = (NEWLEN))

@@ -262,17 +262,11 @@
 /obj/machinery/power/apc/on_update_icon()
 	if (!status_overlays)
 		status_overlays = 1
-		status_overlays_lock = new
-		status_overlays_charging = new
-		status_overlays_equipment = new
-		status_overlays_lighting = new
-		status_overlays_environ = new
-
-		status_overlays_lock.len = 2
-		status_overlays_charging.len = 3
-		status_overlays_equipment.len = 5
-		status_overlays_lighting.len = 5
-		status_overlays_environ.len = 5
+		status_overlays_lock = new (2)
+		status_overlays_charging = new (3)
+		status_overlays_equipment = new (5)
+		status_overlays_lighting = new (5)
+		status_overlays_environ = new (5)
 
 		status_overlays_lock[1] = image(icon, "apcox-0")    // 0=blue 1=red
 		status_overlays_lock[2] = image(icon, "apcox-1")
@@ -332,12 +326,12 @@
 			icon_state = "apcewires"
 
 	if(!(update_state & UPDATE_ALLGOOD))
-		if(overlays.len)
+		if(length(overlays))
 			overlays.Cut()
 			return
 
 	if(update & 2)
-		if(overlays.len)
+		if(length(overlays))
 			overlays.Cut()
 		if(!MACHINE_IS_BROKEN(src) && !GET_FLAGS(stat, MACHINE_STAT_MAINT) && update_state & UPDATE_ALLGOOD)
 			overlays += status_overlays_lock[locked+1]

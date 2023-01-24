@@ -108,7 +108,7 @@
 
 	var/categories[0]
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		categories[++categories.len] = list("category" = AH.category, "alarms" = list())
+		categories[LIST_PRE_INC(categories)] = list("category" = AH.category, "alarms" = list())
 		for(var/datum/alarm/A in AH.major_alarms(get_host_z()))
 
 			var/cameras[0]
@@ -116,17 +116,17 @@
 
 			if(isAI(user))
 				for(var/obj/machinery/camera/C in A.cameras())
-					cameras[++cameras.len] = C.nano_structure()
+					cameras[LIST_PRE_INC(cameras)] = C.nano_structure()
 			for(var/datum/alarm_source/AS in A.sources)
 				if(!AS.source)
-					lost_sources[++lost_sources.len] = AS.source_name
+					lost_sources[LIST_PRE_INC(lost_sources)] = AS.source_name
 
-			categories[categories.len]["alarms"] += list(list(
+			categories[length(categories)]["alarms"] += list(list(
 					"name" = sanitize(A.alarm_name()),
 					"origin_lost" = A.origin == null,
-					"has_cameras" = cameras.len,
+					"has_cameras" = length(cameras),
 					"cameras" = cameras,
-					"lost_sources" = lost_sources.len ? sanitize(english_list(lost_sources, nothing_text = "", and_text = ", ")) : ""))
+					"lost_sources" = length(lost_sources) ? sanitize(english_list(lost_sources, nothing_text = "", and_text = ", ")) : ""))
 	data["categories"] = categories
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)

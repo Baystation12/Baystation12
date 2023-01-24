@@ -54,7 +54,7 @@ SUBSYSTEM_DEF(timer)
 
 
 /datum/controller/subsystem/timer/PreInit()
-	bucket_list.len = BUCKET_LEN
+	LIST_RESIZE(bucket_list, BUCKET_LEN)
 	head_offset = world.time
 	bucket_resolution = world.tick_lag
 
@@ -259,8 +259,8 @@ SUBSYSTEM_DEF(timer)
 		while(bucket_node && bucket_node != bucket_head)
 
 	// Empty the list by zeroing and re-assigning the length
-	bucket_list.len = 0
-	bucket_list.len = BUCKET_LEN
+	bucket_list.Cut()
+	LIST_RESIZE(bucket_list, BUCKET_LEN)
 
 	// Reset values for the subsystem to their initial values
 	practical_offset = 1

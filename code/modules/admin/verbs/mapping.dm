@@ -282,10 +282,10 @@ var/global/list/debug_verbs = list (
 					atom_list += A
 	/*
 	var/atom/temp_atom
-	for(var/i = 0; i <= (atom_list.len/10); i++)
+	for(var/i = 0; i <= (length(atom_list)/10); i++)
 		var/line = ""
 		for(var/j = 1; j <= 10; j++)
-			if(i*10+j <= atom_list.len)
+			if(i*10+j <= length(atom_list))
 				temp_atom = atom_list[i*10+j]
 				line += " no.[i+10+j]@\[[temp_atom.x], [temp_atom.y], [temp_atom.z]\]; "
 		log_debug(line) */
@@ -308,10 +308,10 @@ var/global/list/debug_verbs = list (
 			count++
 	/*
 	var/atom/temp_atom
-	for(var/i = 0; i <= (atom_list.len/10); i++)
+	for(var/i = 0; i <= (length(atom_list)/10); i++)
 		var/line = ""
 		for(var/j = 1; j <= 10; j++)
-			if(i*10+j <= atom_list.len)
+			if(i*10+j <= length(atom_list))
 				temp_atom = atom_list[i*10+j]
 				line += " no.[i+10+j]@\[[temp_atom.x], [temp_atom.y], [temp_atom.z]\]; "
 		log_debug(line) */

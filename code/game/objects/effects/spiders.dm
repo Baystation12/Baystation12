@@ -214,11 +214,11 @@
 			entry_vent = null
 	else if(entry_vent)
 		if(get_dist(src, entry_vent) <= 1)
-			if(entry_vent.network && entry_vent.network.normal_members.len)
+			if(entry_vent.network && length(entry_vent.network.normal_members))
 				var/list/vents = list()
 				for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in entry_vent.network.normal_members)
 					vents.Add(temp_vent)
-				if(!vents.len)
+				if(!length(vents))
 					entry_vent = null
 					return
 				var/obj/machinery/atmospherics/unary/vent_pump/exit_vent = pick(vents)
@@ -235,7 +235,7 @@
 	if(isturf(loc))
 		if(prob(25))
 			var/list/nearby = trange(5, src) - loc
-			if(nearby.len)
+			if(length(nearby))
 				var/target_atom = pick(nearby)
 				walk_to(src, target_atom, 5)
 				if(prob(10))

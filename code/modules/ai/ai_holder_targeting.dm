@@ -56,7 +56,7 @@
 		targets = target_filter_distance(targets)
 	else
 		targets = target_filter_closest(targets)
-	if (!targets.len) // We found nothing.
+	if (!length(targets)) // We found nothing.
 		return
 
 	var/chosen_target

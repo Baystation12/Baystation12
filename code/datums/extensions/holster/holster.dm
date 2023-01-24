@@ -33,7 +33,7 @@
 /datum/extension/holster/proc/holster(obj/item/I, mob/living/user)
 	if(!storage)
 		return 1
-	if(!holstered && storage.storage_slots != null && storage.contents.len >= storage.storage_slots - 1)
+	if(!holstered && storage.storage_slots != null && length(storage.contents) >= storage.storage_slots - 1)
 		if(!can_holster(I))
 			to_chat(user, SPAN_NOTICE("\The [I] won't fit in \the [atom_holder]'s holster!."))
 			return 1
@@ -153,9 +153,9 @@
 
 	for(var/accessory_name in holster_accessories_by_name)
 		var/list/holster_accessories = holster_accessories_by_name[accessory_name]
-		if(holster_accessories.len == 1)
+		if(length(holster_accessories) == 1)
 			.[accessory_name] = get_extension(holster_accessories[1], /datum/extension/holster)
 		else
-			for(var/i = 1 to holster_accessories.len)
+			for(var/i = 1 to length(holster_accessories))
 				var/holster_name = "[accessory_name] [i]"
 				.[holster_name] = get_extension(holster_accessories[i], /datum/extension/holster)

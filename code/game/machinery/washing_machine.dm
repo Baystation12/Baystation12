@@ -159,7 +159,7 @@
 		return
 
 	else
-		if (contents.len < 5)
+		if (length(contents) < 5)
 			if (!(state & WASHER_STATE_CLOSED))
 				if (!user.unEquip(W, src))
 					return

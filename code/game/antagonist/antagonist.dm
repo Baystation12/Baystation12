@@ -177,12 +177,12 @@
 		return 0
 
 	build_candidate_list(SSticker.mode, flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
-	if(!candidates.len)
+	if(!length(candidates))
 		message_admins("Could not auto-spawn a [role_text], no candidates found.")
 		return 0
 
 	attempt_spawn(1) //auto-spawn antags one at a time
-	if(!pending_antagonists.len)
+	if(!length(pending_antagonists))
 		message_admins("Could not auto-spawn a [role_text], none of the available candidates could be selected.")
 		return 0
 
@@ -205,11 +205,11 @@
 		spawn_target = initial_spawn_target
 
 	// Update our boundaries.
-	if(!candidates.len)
+	if(!length(candidates))
 		return 0
 
 	//Grab candidates randomly until we have enough.
-	while(candidates.len && pending_antagonists.len < spawn_target)
+	while(length(candidates) && length(pending_antagonists) < spawn_target)
 		var/datum/mind/player = pick(candidates)
 		candidates -= player
 		draft_antagonist(player)

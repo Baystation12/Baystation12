@@ -31,7 +31,7 @@ var/global/list/image/fluidtrack_cache=list()
 
 /obj/effect/decal/cleanable/blood/tracks/reveal_blood()
 	if(!fluorescent)
-		if(stack && stack.len)
+		if(stack && length(stack))
 			for(var/datum/fluidtrack/track in stack)
 				track.basecolor = COLOR_LUMINOL
 		..()

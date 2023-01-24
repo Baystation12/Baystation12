@@ -221,7 +221,7 @@
  * Returns boolean - Whether or not the mob was able to perform the interaction.
  */
 /mob/proc/RangedAttack(atom/A, params)
-	if(!mutations.len)
+	if(!length(mutations))
 		return FALSE
 
 	if((MUTATION_LASER in mutations) && a_intent == I_HURT)

@@ -142,7 +142,7 @@
 		if(C.caliber != caliber)
 			to_chat(user, SPAN_WARNING("[C] does not fit into [src]."))
 			return
-		if(stored_ammo.len >= max_ammo)
+		if(length(stored_ammo) >= max_ammo)
 			to_chat(user, SPAN_WARNING("[src] is full!"))
 			return
 		if(!user.unEquip(C, src))
@@ -152,7 +152,7 @@
 	else ..()
 
 /obj/item/ammo_magazine/attack_self(mob/user)
-	if(!stored_ammo.len)
+	if(!length(stored_ammo))
 		to_chat(user, SPAN_NOTICE("[src] is already empty!"))
 		return
 	to_chat(user, SPAN_NOTICE("You empty [src]."))
@@ -165,10 +165,10 @@
 
 /obj/item/ammo_magazine/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)
-		if(!stored_ammo.len)
+		if(!length(stored_ammo))
 			to_chat(user, SPAN_NOTICE("[src] is already empty!"))
 		else
-			var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]
+			var/obj/item/ammo_casing/C = stored_ammo[length(stored_ammo)]
 			stored_ammo-=C
 			user.put_in_hands(C)
 			user.visible_message("\The [user] removes \a [C] from [src].", SPAN_NOTICE("You remove \a [C] from [src]."))
@@ -179,18 +179,18 @@
 
 /obj/item/ammo_magazine/on_update_icon()
 	if(multiple_sprites)
-		//find the lowest key greater than or equal to stored_ammo.len
+		//find the lowest key greater than or equal to length(stored_ammo)
 		var/new_state = null
-		for(var/idx in 1 to icon_keys.len)
+		for(var/idx in 1 to length(icon_keys))
 			var/ammo_count = icon_keys[idx]
-			if (ammo_count >= stored_ammo.len)
+			if (ammo_count >= length(stored_ammo))
 				new_state = ammo_states[idx]
 				break
 		icon_state = (new_state)? new_state : initial(icon_state)
 
 /obj/item/ammo_magazine/examine(mob/user)
 	. = ..()
-	to_chat(user, "There [(stored_ammo.len == 1)? "is" : "are"] [stored_ammo.len] round\s left!")
+	to_chat(user, "There [(length(stored_ammo) == 1)? "is" : "are"] [length(stored_ammo)] round\s left!")
 
 //magazine icon state caching
 var/global/list/magazine_icondata_keys = list()

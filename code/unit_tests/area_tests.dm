@@ -4,7 +4,7 @@
 /datum/unit_test/areas_shall_be_coherent/start_test()
 	var/incoherent_areas = 0
 	for(var/area/A)
-		if(!A.contents.len)
+		if(!length(A.contents))
 			continue
 		if(A.type in GLOB.using_map.area_coherency_test_exempt_areas)
 			continue
@@ -20,11 +20,11 @@
 			var/turf/T = area_turfs[1]
 			sub_area_turfs += T
 			area_turfs -= get_turfs_fill(T)
-		while(area_turfs.len)
+		while(length(area_turfs))
 
-		if(sub_area_turfs.len != expected_number_of_sub_areas)
+		if(length(sub_area_turfs) != expected_number_of_sub_areas)
 			incoherent_areas++
-			log_bad("[log_info_line(A)] is incoherent. Expected [expected_number_of_sub_areas] subarea\s, fill gave [sub_area_turfs.len]. Origin turfs:")
+			log_bad("[log_info_line(A)] is incoherent. Expected [expected_number_of_sub_areas] subarea\s, fill gave [length(sub_area_turfs)]. Origin turfs:")
 			for(var/T in sub_area_turfs)
 				log_bad(log_info_line(T))
 
@@ -62,7 +62,7 @@
 /datum/unit_test/areas_shall_be_pure/start_test()
 	var/impure_areas = 0
 	for(var/area/A)
-		if(!A.contents.len)
+		if(!length(A.contents))
 			continue
 		if(A.type in GLOB.using_map.area_purity_test_exempt_areas)
 			continue

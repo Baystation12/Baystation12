@@ -49,7 +49,7 @@
 	if(distance > 2)
 		return
 
-	if(reagents && reagents.reagent_list.len)
+	if(reagents && length(reagents.reagent_list))
 		to_chat(user, SPAN_NOTICE("It contains [reagents.total_volume] units of liquid."))
 	else
 		to_chat(user, SPAN_NOTICE("It is empty."))
@@ -94,7 +94,7 @@
 		return
 
 	if (prob(80))
-		if (reagents.reagent_list.len > 0)
+		if (length(reagents.reagent_list) > 0)
 			visible_message(
 				SPAN_DANGER("\The [src] shatters from the impact and spills all its contents!"),
 				SPAN_DANGER("You hear the sound of glass shattering!")
@@ -109,7 +109,7 @@
 		new /obj/item/material/shard(src.loc)
 		qdel(src)
 	else
-		if (reagents.reagent_list.len > 0)
+		if (length(reagents.reagent_list) > 0)
 			visible_message(
 				SPAN_DANGER("\The [src] bounces and spills all its contents!"),
 				SPAN_WARNING("You hear the sound of glass hitting something.")

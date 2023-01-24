@@ -419,7 +419,7 @@
 */
 /obj/procedural/jp_DungeonGenerator/proc/removeAllowedRoom(r)
 	allowedRooms["[r]"] = null
-	if(!allowedRooms || !allowedRooms.len) allowedRooms = null
+	if(!allowedRooms || !length(allowedRooms)) allowedRooms = null
 
 /**
 	Returns the list of allowed jp_dungeonrooms. This may be null, if the list is empty
@@ -500,7 +500,7 @@
 
 /obj/procedural/jp_DungeonGenerator/proc/getNeighboringRegions(list/R)
 	var/list/regs = list()
-	if(R.len == 1)
+	if(length(R) == 1)
 		regs += R[1]
 		regs += R[1]
 		return regs
@@ -604,7 +604,7 @@
 
 		nextloc = locate(rand(minx, maxx), rand(miny, maxy), z)
 
-		if(!required.len) nextentry = allowedRooms[pick(allowedRooms)]
+		if(!length(required)) nextentry = allowedRooms[pick(allowedRooms)]
 		else
 			nextentry = required[1]
 			if(nextentry.count>=nextentry.required)
@@ -626,7 +626,7 @@
 
 	for(var/obj/procedural/jp_dungeonroom/r in rooms)
 		if(!r.doesMultiborder())
-			if(r.border.len == 0)
+			if(length(r.border) == 0)
 				continue
 			var/obj/procedural/jp_DungeonRegion/reg = new /obj/procedural/jp_DungeonRegion(src)
 			reg.addTurfs(r.getTurfs(), 1)
@@ -654,9 +654,9 @@
 	numits = 0
 	paths = numExtraPaths
 
-	while(regions.len>1 || paths>0)
+	while(length(regions)>1 || paths>0)
 		if(numits>maximumIterations)
-			if(regions.len>1) out_error = ERROR_MAX_ITERATIONS_CONNECTIVITY
+			if(length(regions)>1) out_error = ERROR_MAX_ITERATIONS_CONNECTIVITY
 			else out_error = ERROR_MAX_ITERATIONS_EXTRAPATHS
 			break
 		numits++
@@ -665,21 +665,21 @@
 		region2 = neighbors[2]
 
 		if(region1==region2)
-			if(regions.len>1)
+			if(length(regions)>1)
 				continue
 
 		var/list/regBord = region1.getBorder()
-		if(!regBord.len)
+		if(!length(regBord))
 			regions -= region1
 			continue
 
 		var/list/turf/path = getPath(region1, region2, regions)
 
-		if(!path || !path.len) continue
+		if(!path || !length(path)) continue
 
 		numits = 0
 
-		if(region1==region2) if(regions.len<=1) paths--
+		if(region1==region2) if(length(regions)<=1) paths--
 
 		for(var/turf/t in path)
 			path-=t
@@ -706,7 +706,7 @@
 	out_time = (world.timeofday-timer)
 	out_rooms = rooms
 	out_region = region1
-	out_numRooms = out_rooms.len
+	out_numRooms = length(out_rooms)
 	rand_seed(tempseed)
 
 
@@ -737,8 +737,8 @@
 	var/list/walls = list()
 	var/list/next = list(t)
 
-	while(next.len>=1)
-		var/turf/nt = next[next.len]
+	while(length(next)>=1)
+		var/turf/nt = next[length(next)]
 
 		next-=nt
 		examined+=nt
@@ -869,7 +869,7 @@
 		previous["\ref[t]"] = start
 		cost["\ref[t]"]=1
 
-	if(!next.len) return list() //We've somehow found a route that can not be continued.
+	if(!length(next)) return list() //We've somehow found a route that can not be continued.
 	var/check_tick_in = 3
 	while(1)
 		check_tick_in = check_tick_in - 1
@@ -925,7 +925,7 @@
 	return ret
 
 /obj/procedural/jp_DungeonGenerator/proc/check_params()
-	if(!islist(allowedRooms) || allowedRooms.len<=0)
+	if(!islist(allowedRooms) || length(allowedRooms)<=0)
 		out_error = ERROR_NO_ROOMS
 		return 0
 
@@ -933,7 +933,7 @@
 		out_error = ERROR_BAD_AREA
 		return 0
 
-	if(!walltype || (islist(walltype) && walltype.len<=0))
+	if(!walltype || (islist(walltype) && length(walltype)<=0))
 		out_error = ERROR_NO_WALLTYPE
 		return 0
 
@@ -1286,7 +1286,7 @@ the arms of the plus sign - there are only four.
 	return TRUE
 
 /obj/procedural/jp_dungeonroom/preexist/square/submap/finalise()
-	if(border.len < 1)
+	if(length(border) < 1)
 		testing("ROOM [my_map.name] HAS NO BORDERS! at [centre.x], [centre.y]!")
 	if(my_map)
 		my_map.load(centre, centered = TRUE)

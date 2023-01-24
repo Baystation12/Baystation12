@@ -51,8 +51,8 @@
 	update_icon()
 
 /obj/item/gun/launcher/pneumatic/proc/unload_hopper(mob/user)
-	if(item_storage.contents.len > 0)
-		var/obj/item/removing = item_storage.contents[item_storage.contents.len]
+	if(length(item_storage.contents) > 0)
+		var/obj/item/removing = item_storage.contents[length(item_storage.contents)]
 		item_storage.remove_from_storage(removing, src.loc)
 		user.put_in_hands(removing)
 		to_chat(user, "You remove [removing] from the hopper.")
@@ -77,7 +77,7 @@
 	eject_tank(user)
 
 /obj/item/gun/launcher/pneumatic/consume_next_projectile(mob/user=null)
-	if(!item_storage.contents.len)
+	if(!length(item_storage.contents))
 		return null
 	if (!tank)
 		to_chat(user, "There is no gas tank in [src]!")

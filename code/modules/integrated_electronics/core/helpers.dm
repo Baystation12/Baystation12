@@ -3,7 +3,7 @@
 		return
 	var/list/io_list_copy = io_list.Copy()
 	io_list.Cut()
-	for(var/i in 1 to io_list_copy.len)
+	for(var/i in 1 to length(io_list_copy))
 		var/io_entry = io_list_copy[i]
 		var/default_data = null
 		var/io_type_override = null
@@ -47,15 +47,15 @@
 /obj/item/integrated_circuit/proc/get_pin_ref(pin_type, pin_number)
 	switch(pin_type)
 		if(IC_INPUT)
-			if(!inputs || pin_number > inputs.len)
+			if(!inputs || pin_number > length(inputs))
 				return
 			return inputs[pin_number]
 		if(IC_OUTPUT)
-			if(!outputs || pin_number > outputs.len)
+			if(!outputs || pin_number > length(outputs))
 				return
 			return outputs[pin_number]
 		if(IC_ACTIVATOR)
-			if(!activators || pin_number > activators.len)
+			if(!activators || pin_number > length(activators))
 				return
 			return activators[pin_number]
 	return
@@ -106,7 +106,7 @@
 	if(!components)
 		components = assembly_components
 
-	if(component_number > components.len)
+	if(component_number > length(components))
 		return
 
 	var/obj/item/integrated_circuit/component = components[component_number]
@@ -119,7 +119,7 @@
 	if(!components)
 		components = assembly_components
 
-	if(!islist(parameters) || parameters.len != 3)
+	if(!islist(parameters) || length(parameters) != 3)
 		return
 
 	// Those are supposed to be list indexes, check them for sanity

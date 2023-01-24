@@ -32,7 +32,7 @@
 
 /obj/machinery/chemical_dispenser/examine(mob/user)
 	. = ..()
-	to_chat(user, "It has [cartridges.len] cartridges installed, and has space for [DISPENSER_MAX_CARTRIDGES - cartridges.len] more.")
+	to_chat(user, "It has [length(cartridges)] cartridges installed, and has space for [DISPENSER_MAX_CARTRIDGES - length(cartridges)] more.")
 
 /obj/machinery/chemical_dispenser/proc/add_cartridge(obj/item/reagent_containers/chem_disp_cartridge/C, mob/user)
 	if(!istype(C))
@@ -40,7 +40,7 @@
 			to_chat(user, SPAN_WARNING("\The [C] will not fit in \the [src]!"))
 		return
 
-	if(cartridges.len >= DISPENSER_MAX_CARTRIDGES)
+	if(length(cartridges) >= DISPENSER_MAX_CARTRIDGES)
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [src] does not have any slots open for \the [C] to fit into!"))
 		return
@@ -123,9 +123,9 @@
 	data["isBeakerLoaded"] = container ? 1 : 0
 	data["glass"] = accept_drinking
 	var beakerD[0]
-	if(container && container.reagents && container.reagents.reagent_list.len)
+	if(container && container.reagents && length(container.reagents.reagent_list))
 		for(var/datum/reagent/R in container.reagents.reagent_list)
-			beakerD[++beakerD.len] = list("name" = R.name, "volume" = R.volume)
+			beakerD[LIST_PRE_INC(beakerD)] = list("name" = R.name, "volume" = R.volume)
 	data["beakerContents"] = beakerD
 
 	if(container)
@@ -138,7 +138,7 @@
 	var chemicals[0]
 	for(var/label in cartridges)
 		var/obj/item/reagent_containers/chem_disp_cartridge/C = cartridges[label]
-		chemicals[++chemicals.len] = list("label" = label, "amount" = C.reagents.total_volume)
+		chemicals[LIST_PRE_INC(chemicals)] = list("label" = label, "amount" = C.reagents.total_volume)
 	data["chemicals"] = chemicals
 
 	// update the ui if it exists, returns null if no ui is passed/found

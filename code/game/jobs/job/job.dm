@@ -75,7 +75,7 @@
 		H.add_language(required_language)
 		H.set_default_language(all_languages[required_language])
 
-	if (!H.languages.len)
+	if (!length(H.languages))
 		H.add_language(LANGUAGE_SPACER)
 		H.set_default_language(all_languages[LANGUAGE_SPACER])
 
@@ -146,7 +146,7 @@
 		remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
 		remembered_info += "<b>Your account funds are:</b> [GLOB.using_map.local_currency_name_short][M.money]<br>"
 
-		if(M.transaction_log.len)
+		if(length(M.transaction_log))
 			var/datum/transaction/T = M.transaction_log[1]
 			remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.get_source_name()]<br>"
 		H.StoreMemory(remembered_info, /singleton/memory_options/system)
@@ -180,7 +180,7 @@
 
 /datum/job/proc/apply_fingerprints_to_item(mob/living/carbon/human/holder, obj/item/item)
 	item.add_fingerprint(holder,1)
-	if(item.contents.len)
+	if(length(item.contents))
 		for(var/obj/item/sub_item in item.contents)
 			apply_fingerprints_to_item(holder, sub_item)
 
@@ -412,7 +412,7 @@
 		if(sloc.name != title)	continue
 		if(locate(/mob/living) in sloc.loc)	continue
 		loc_list += sloc
-	if(loc_list.len)
+	if(length(loc_list))
 		return pick(loc_list)
 	else
 		return locate("start*[title]") // use old stype

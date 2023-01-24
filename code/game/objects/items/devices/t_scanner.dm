@@ -118,8 +118,8 @@
 
 	// Add it to cache, cutting old entries if the list is too long
 	overlay_cache[scanned] = .
-	if(overlay_cache.len > OVERLAY_CACHE_LEN)
-		overlay_cache.Cut(1, overlay_cache.len-OVERLAY_CACHE_LEN-1)
+	if(length(overlay_cache) > OVERLAY_CACHE_LEN)
+		overlay_cache.Cut(1, length(overlay_cache)-OVERLAY_CACHE_LEN-1)
 
 /obj/item/device/t_scanner/proc/get_scanned_objects(scan_dist)
 	. = list()

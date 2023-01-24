@@ -38,10 +38,10 @@
 			for(var/mob/living/L in B.contents)
 				scan_content.Add(L)
 
-			if (scan_content.len == 1)
+			if (length(scan_content) == 1)
 				for(var/mob/living/carbon/human/L in scan_content)
 					scan_subject = L
-			else if (scan_content.len > 1)
+			else if (length(scan_content) > 1)
 				to_chat(user, SPAN_WARNING("\The [scanner] picks up multiple readings inside \the [target], too close together to scan properly."))
 				return
 			else
@@ -229,7 +229,7 @@
 		. += "[b]Specific limb damage:[endb]"
 
 		var/list/damaged = H.get_damaged_organs(1,1)
-		if(damaged.len)
+		if(length(damaged))
 			for(var/obj/item/organ/external/org in damaged)
 				var/limb_result = "[capitalize(org.name)][BP_IS_ROBOTIC(org) ? " (Cybernetic)" : ""]:"
 				if(org.brute_dam > 0)
@@ -257,7 +257,7 @@
 				reagentdata[R.type] = SPAN_CLASS("scan_notice", "[round(H.reagents.get_reagent_amount(R.type), 1)]u [R.name]")
 			else
 				unknown++
-		if(reagentdata.len)
+		if(length(reagentdata))
 			print_reagent_default_message = FALSE
 			. += SPAN_CLASS("scan_notice", "Beneficial reagents detected in subject's blood:")
 			for(var/d in reagentdata)
@@ -279,13 +279,13 @@
 			print_reagent_default_message = FALSE
 			. += SPAN_CLASS("scan_warning", "Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.")
 
-	if(H.chem_doses.len)
+	if(length(H.chem_doses))
 		var/list/chemtraces = list()
 		for(var/T in H.chem_doses)
 			var/datum/reagent/R = T
 			if(initial(R.scannable))
 				chemtraces += "[initial(R.name)] ([H.chem_doses[T]])"
-		if(chemtraces.len)
+		if(length(chemtraces))
 			. += SPAN_CLASS("scan_notice", "Metabolism products of [english_list(chemtraces)] found in subject's system.")
 
 	if(print_reagent_default_message)

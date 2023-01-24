@@ -79,11 +79,11 @@
 				"amount" = T.amount, \
 				"source_terminal" = T.get_source_name())))
 
-		if (trx.len > 0)
+		if (length(trx) > 0)
 			data["transactions"] = trx
 
 	var/list/accounts[0]
-	for(var/i=1, i<=all_money_accounts.len, i++)
+	for(var/i=1, i<=length(all_money_accounts), i++)
 		var/datum/money_account/D = all_money_accounts[i]
 		accounts.Add(list(list(\
 			"account_number"=D.account_number,\
@@ -91,7 +91,7 @@
 			"suspended"=D.suspended ? "SUSPENDED" : "",\
 			"account_index"=i)))
 
-	if (accounts.len > 0)
+	if (length(accounts) > 0)
 		data["accounts"] = accounts
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -152,7 +152,7 @@
 
 			if("view_account_detail")
 				var/index = text2num(href_list["account_index"])
-				if(index && index <= all_money_accounts.len)
+				if(index && index <= length(all_money_accounts))
 					detailed_account_view = all_money_accounts[index]
 
 			if("view_accounts_list")
@@ -176,7 +176,7 @@
 						<u>Holder:</u> [detailed_account_view.owner_name]<br>
 						<u>Balance:</u> [GLOB.using_map.local_currency_name_short][detailed_account_view.money]<br>
 						<u>Status:</u> [detailed_account_view.suspended ? "Suspended" : "Active"]<br>
-						<u>Transactions:</u> ([detailed_account_view.transaction_log.len])<br>
+						<u>Transactions:</u> ([length(detailed_account_view.transaction_log)])<br>
 						<table>
 							<thead>
 								<tr>
@@ -223,7 +223,7 @@
 							<tbody>
 					"}
 
-					for(var/i=1, i<=all_money_accounts.len, i++)
+					for(var/i=1, i<=length(all_money_accounts), i++)
 						var/datum/money_account/D = all_money_accounts[i]
 						text += {"
 								<tr>

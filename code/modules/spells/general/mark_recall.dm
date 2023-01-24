@@ -25,7 +25,7 @@
 		return list(mark)
 
 /spell/mark_recall/cast(list/targets,mob/user)
-	if(!targets.len)
+	if(!length(targets))
 		return 0
 	var/target = targets[1]
 	if(istext(target))

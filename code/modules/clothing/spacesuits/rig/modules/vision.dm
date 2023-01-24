@@ -168,9 +168,9 @@
 		to_chat(holder.wearer, SPAN_INFO("You activate your visual sensors."))
 		return 1
 
-	if(vision_modes.len > 1)
+	if(length(vision_modes) > 1)
 		vision_index++
-		if(vision_index > vision_modes.len)
+		if(vision_index > length(vision_modes))
 			vision_index = 1
 		vision = vision_modes[vision_index]
 

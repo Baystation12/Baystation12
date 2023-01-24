@@ -88,9 +88,9 @@ GLOBAL_LIST(xeno_digsite_turfs)
 				continue
 			queue += T
 		var/site_turf_count = rand(4, 12)
-		if (site_turf_count < queue.len)
-			for (var/i = queue.len - site_turf_count to 1 step -1)
-				var/selected = rand(1, queue.len)
+		if (site_turf_count < length(queue))
+			for (var/i = length(queue) - site_turf_count to 1 step -1)
+				var/selected = rand(1, length(queue))
 				queue.Cut(selected, selected + 1)
 		var/site_type = get_random_digsite_type()
 		for (var/turf/simulated/mineral/T as anything in queue)
@@ -119,7 +119,7 @@ GLOBAL_LIST(xeno_digsite_turfs)
 	GLOB.xeno_digsite_turfs = site_turfs
 	GLOB.xeno_artifact_turfs = list()
 	for (var/i = rand(6, 12) to 1 step -1)
-		var/len = artifact_turfs.len
+		var/len = length(artifact_turfs)
 		if (len < 1)
 			break
 		var/selected = rand(1, len)

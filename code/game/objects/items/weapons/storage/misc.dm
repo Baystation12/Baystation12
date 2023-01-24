@@ -176,7 +176,7 @@
 
 /obj/item/storage/medical_lolli_jar/on_update_icon()
 	. = ..()
-	if(contents.len)
+	if(length(contents))
 		icon_state = "lollijar"
 	else
 		icon_state = "lollijar_empty"

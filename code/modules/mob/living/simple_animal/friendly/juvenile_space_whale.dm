@@ -54,7 +54,7 @@
 			parent.ai_holder.attackers += enemies
 		if(health < (maxHealth - 5))
 			walk_to(src, parent, 1, 1 SECONDS)
-			if(parent.stance == STANCE_IDLE && ai_holder.attackers.len)
+			if(parent.stance == STANCE_IDLE && length(ai_holder.attackers))
 				parent.ai_holder.react_to_attack(pick(ai_holder.attackers))
 		else if(get_dist(src.loc, parent.loc) > 5)
 			walk_to(src, parent, 4, 3 SECONDS)

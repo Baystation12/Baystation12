@@ -14,7 +14,7 @@
 
 	for(var/i in 1 to codelen)
 		code += pick(digits)
-		digits -= code[code.len]
+		digits -= code[length(code)]
 
 	generate_loot()
 
@@ -186,7 +186,7 @@
 				to_chat(user, SPAN_WARNING("* Anti-Tamper system will activate on the next failed access attempt."))
 			else
 				to_chat(user, SPAN_NOTICE("* Anti-Tamper system will activate after [src.attempts] failed access attempts."))
-			if(lastattempt.len)
+			if(length(lastattempt))
 				var/bulls = 0
 				var/cows = 0
 

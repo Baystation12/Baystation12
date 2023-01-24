@@ -197,9 +197,9 @@
 	if(issmall(src.occupant))
 		slab_nutrition *= 0.5
 
-	slab_nutrition /= gib_products.len
+	slab_nutrition /= length(gib_products)
 
-	var/drop_products = Floor(gib_products.len * 0.35)
+	var/drop_products = Floor(length(gib_products) * 0.35)
 	for(var/atom/movable/thing in gib_products)
 		if(drop_products)
 			drop_products--

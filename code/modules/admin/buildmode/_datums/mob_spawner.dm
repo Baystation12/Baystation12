@@ -32,7 +32,7 @@
 	return contents
 
 /datum/mob_spawner/proc/paste(list/contents)
-	if(contents.len == 0)
+	if(length(contents) == 0)
 		return
 
 	var/list/mob_list = contents["mobs"]
@@ -55,7 +55,7 @@
 	if (interval == 0 && spawn_count >= 0)
 		interval = 10
 
-	if (mobs.len > 0 && next_spawn_time < world.time)
+	if (length(mobs) > 0 && next_spawn_time < world.time)
 		var/turf/T
 		var/mob/living/simple_animal/M
 		for (var/i = 1; i <= 10; i++)
@@ -87,7 +87,7 @@
 			M.minbodytemp = 0
 			M.maxbodytemp = 5000
 
-		if (messages.len > 0)
+		if (length(messages) > 0)
 			if (message_class != "none")
 				M.visible_message(SPAN_CLASS("[message_class]", "[pick(messages)]"))
 			else

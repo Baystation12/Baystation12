@@ -33,7 +33,7 @@
 		return
 
 	to_chat(user, SPAN_NOTICE("It contains:"))
-	if(reagents && reagents.reagent_list.len)
+	if(reagents && length(reagents.reagent_list))
 		for(var/datum/reagent/R in reagents.reagent_list)
 			to_chat(user, SPAN_NOTICE("[R.volume] units of [R.name]"))
 	else

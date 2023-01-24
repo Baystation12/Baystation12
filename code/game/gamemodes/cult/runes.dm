@@ -414,7 +414,7 @@
 	if(victim)
 		to_chat(user, SPAN_WARNING("You are already sarcificing \the [victim] on this rune."))
 		return
-	if(cultists.len < 3)
+	if(length(cultists) < 3)
 		to_chat(user, SPAN_WARNING("You need three cultists around this rune to make it work."))
 		return fizzle(user)
 	var/turf/T = get_turf(src)
@@ -430,16 +430,16 @@
 
 	while(victim && victim.loc == T && victim.stat != DEAD)
 		var/list/mob/living/casters = get_cultists()
-		if(casters.len < 3)
+		if(length(casters) < 3)
 			break
 		//T.turf_animation('icons/effects/effects.dmi', "rune_sac")
 		victim.fire_stacks = max(2, victim.fire_stacks)
 		victim.IgniteMob()
-		victim.take_organ_damage(2 + casters.len, 2 + casters.len) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
+		victim.take_organ_damage(2 + length(casters), 2 + length(casters)) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
 		if(ishuman(victim))
 			var/mob/living/carbon/human/H = victim
 			if(H.is_asystole())
-				H.adjustBrainLoss(2 + casters.len)
+				H.adjustBrainLoss(2 + length(casters))
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
 		GLOB.cult.add_cultiness(CULTINESS_PER_SACRIFICE)
@@ -555,9 +555,9 @@
 	for(var/obj/item/organ/I in user.internal_organs)
 		if(I.damage)
 			damaged += I
-	if(damaged.len)
+	if(length(damaged))
 		statuses += "you feel pain inside for a moment that passes quickly"
-		while(charges && damaged.len)
+		while(charges && length(damaged))
 			var/obj/item/organ/fix = pick(damaged)
 			fix.damage = max(0, fix.damage - min(charges, 1))
 			charges = max(charges - 1, 0)
@@ -604,7 +604,7 @@
 
 /obj/effect/rune/massdefile/cast(mob/living/user)
 	var/list/mob/living/cultists = get_cultists()
-	if(cultists.len < 3)
+	if(length(cultists) < 3)
 		to_chat(user, SPAN_WARNING("You need three cultists around this rune to make it work."))
 		return fizzle(user)
 	else
@@ -720,7 +720,7 @@
 
 /obj/effect/rune/blood_boil/cast(mob/living/user)
 	var/list/mob/living/cultists = get_cultists()
-	if(cultists.len < 3)
+	if(length(cultists) < 3)
 		return fizzle()
 
 	for(var/mob/living/M in cultists)
@@ -728,7 +728,7 @@
 
 	var/list/mob/living/previous = list()
 	var/list/mob/living/current = list()
-	while(cultists.len >= 3)
+	while(length(cultists) >= 3)
 		cultists = get_cultists()
 		for(var/mob/living/carbon/M in viewers(src))
 			if(iscultist(M))
@@ -763,7 +763,7 @@
 		to_chat(user, SPAN_OCCULT("You are already summoning! Be patient!"))
 		return
 	var/list/mob/living/cultists = get_cultists()
-	if(cultists.len < 5)
+	if(length(cultists) < 5)
 		return fizzle()
 	for(var/mob/living/M in cultists)
 		M.say("Tok-lyr rqa'nap g[pick("'","`")]lt-ulotf!")
@@ -772,11 +772,11 @@
 
 	var/area/A = get_area(src)
 	command_announcement.Announce("High levels of bluespace interference detected at \the [A]. Suspected wormhole forming. Investigate it immediately.")
-	while(cultists.len > 4 || the_end_comes)
+	while(length(cultists) > 4 || the_end_comes)
 		cultists = get_cultists()
-		if(cultists.len > 8)
+		if(length(cultists) > 8)
 			++the_end_comes
-		if(cultists.len > 4)
+		if(length(cultists) > 4)
 			++the_end_comes
 		else
 			--the_end_comes

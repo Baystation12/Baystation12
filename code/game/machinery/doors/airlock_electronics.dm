@@ -46,10 +46,10 @@
 			access["name"] = get_access_desc(j)
 			access["id"] = j
 			access["req"] = (j in src.conf_access)
-			accesses[++accesses.len] = access
+			accesses[LIST_PRE_INC(accesses)] = access
 		region["name"] = get_region_accesses_name(i)
 		region["accesses"] = accesses
-		regions[++regions.len] = region
+		regions[LIST_PRE_INC(regions)] = region
 	data["regions"] = regions
 	data["oneAccess"] = one_access
 	data["locked"] = locked
@@ -124,7 +124,7 @@
 /obj/item/airlock_electronics/proc/set_access(obj/object)
 	if(!object.req_access)
 		object.check_access()
-	if(object.req_access.len)
+	if(length(object.req_access))
 		conf_access = list()
 		for(var/entry in object.req_access)
 			conf_access |= entry // This flattens the list, turning everything into AND

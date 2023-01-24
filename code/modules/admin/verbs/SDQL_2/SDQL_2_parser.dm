@@ -67,7 +67,7 @@
 /datum/SDQL_parser/proc/parse_error(error_message)
 	error = 1
 	to_chat(usr, SPAN_WARNING("SQDL2 Parsing Error: [error_message]"))
-	return query.len + 1
+	return length(query) + 1
 
 /datum/SDQL_parser/proc/parse()
 	tree = list()
@@ -79,14 +79,14 @@
 		return tree
 
 /datum/SDQL_parser/proc/token(i)
-	if(i <= query.len)
+	if(i <= length(query))
 		return query[i]
 
 	else
 		return null
 
 /datum/SDQL_parser/proc/tokens(i, num)
-	if(i + num <= query.len)
+	if(i + num <= length(query))
 		return query.Copy(i, i + num)
 
 	else
@@ -265,7 +265,7 @@
 	var/list/bool = list()
 	i = expression(i, bool)
 
-	node[++node.len] = bool
+	node[LIST_PRE_INC(node)] = bool
 
 	if(tokenl(i) in boolean_operators)
 		i = bool_operator(i, node)
@@ -296,7 +296,7 @@
 //variable:	<variable name> | <variable name> '.' variable | '[' <hex number> ']' | '[' <hex number> ']' '.' variable
 /datum/SDQL_parser/proc/variable(i, list/node)
 	var/list/L = list(token(i))
-	node[++node.len] = L
+	node[LIST_PRE_INC(node)] = L
 
 	if(token(i) == "{")
 		L += token(i + 1)
@@ -313,7 +313,7 @@
 		var/list/arguments = list()
 		i = call_function(i, null, arguments)
 		L += ":"
-		L[++L.len] = arguments
+		L[LIST_PRE_INC(L)] = arguments
 
 	else if (token(i + 1) == "\[")
 		var/list/expression = list()
@@ -322,7 +322,7 @@
 			parse_error("Missing ] at the end of list access.")
 
 		L += "\["
-		L[++L.len] = expression
+		L[LIST_PRE_INC(L)] = expression
 		i++
 
 	else
@@ -400,12 +400,12 @@
 					parse_error("Found ',' or ':' without expression in an array.")
 					return i + 1
 
-				expression_list[++expression_list.len] = temp_expression_list
+				expression_list[LIST_PRE_INC(expression_list)] = temp_expression_list
 				temp_expression_list = null
 				if (tok == ":")
 					temp_expression_list = list()
 					i = expression(i + 1, temp_expression_list)
-					expression_list[expression_list[expression_list.len]] = temp_expression_list
+					expression_list[expression_list[length(expression_list)]] = temp_expression_list
 					temp_expression_list = null
 					tok = token(i)
 					if (tok != ",")
@@ -425,9 +425,9 @@
 		while(token(i) && token(i) != "]")
 
 		if (temp_expression_list)
-			expression_list[++expression_list.len] = temp_expression_list
+			expression_list[LIST_PRE_INC(expression_list)] = temp_expression_list
 
-	node[++node.len] = expression_list
+	node[LIST_PRE_INC(node)] = expression_list
 
 	return i + 1
 
@@ -447,13 +447,13 @@
 			do
 				i = expression(i + 1, temp_expression_list)
 				if(token(i) == ",")
-					arguments[++arguments.len] = temp_expression_list
+					arguments[LIST_PRE_INC(arguments)] = temp_expression_list
 					temp_expression_list = list()
 					continue
 
 			while(token(i) && token(i) != ")")
 
-			arguments[++arguments.len] = temp_expression_list // The code this is copy pasted from won't be executed when it's the last param, this fixes that.
+			arguments[LIST_PRE_INC(arguments)] = temp_expression_list // The code this is copy pasted from won't be executed when it's the last param, this fixes that.
 		else
 			i++
 	else
@@ -486,7 +486,7 @@
 		else
 			i++
 
-		node[++node.len] = expr
+		node[LIST_PRE_INC(node)] = expr
 
 	else
 		i = value(i, node)
@@ -501,7 +501,7 @@
 		var/list/rhs = list()
 		i = expression(i, rhs)
 
-		node[++node.len] = rhs
+		node[LIST_PRE_INC(node)] = rhs
 
 
 	return i
@@ -530,12 +530,12 @@
 			else
 				i++
 
-			unary_exp[++unary_exp.len] = expr
+			unary_exp[LIST_PRE_INC(unary_exp)] = expr
 
 		else
 			i = value(i, unary_exp)
 
-		node[++node.len] = unary_exp
+		node[LIST_PRE_INC(node)] = unary_exp
 
 
 	else

@@ -95,5 +95,5 @@
 
 /obj/structure/sign/memorial/examine(mob/user, distance)
 	. = ..()
-	if (distance <= 2 && fallen.len)
+	if (distance <= 2 && length(fallen))
 		to_chat(user, "<b>The fallen:</b> [jointext(fallen, "<br>")]")

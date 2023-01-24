@@ -178,7 +178,7 @@
 		P.finish_bulk_removal()
 
 		if (objects_loaded)
-			if (!P.contents.len)
+			if (!length(P.contents))
 				user.visible_message(SPAN_NOTICE("\The [user] empties \the [P] into \the [src]."),
 				SPAN_NOTICE("You empty \the [P] into \the [src]."))
 			else
@@ -251,7 +251,7 @@
 		dat += "<TT><b><i>This microwave is covered in muck. You'll need to wipe it down or clean it out before you can use it again.</i></b></TT>"
 	else
 		playsound(loc, 'sound/machines/pda_click.ogg', 50, 1)
-		if (!LAZYLEN(ingredients) && !reagents.reagent_list.len)
+		if (!LAZYLEN(ingredients) && !length(reagents.reagent_list))
 			dat += "<B>The microwave is empty.</B>"
 		else
 			dat += "<b>Ingredients:</b><br>"

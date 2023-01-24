@@ -134,7 +134,7 @@
 
 	if(href_list["set_active"])
 		var/index = text2num(href_list["set_active"])
-		if(index < 1 || index > contents.len)
+		if(index < 1 || index > length(contents))
 			return TOPIC_HANDLED
 		set_slide(contents[index])
 		. = TOPIC_REFRESH

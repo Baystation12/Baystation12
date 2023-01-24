@@ -25,7 +25,7 @@
 			user.visible_message("\The [src] visibly rejects \the [user], erasing their signature from the line.")
 			return
 		user.visible_message("\The [src] disappears with a flash of light.")
-		if(contract_spells.len && istype(contract_master,/mob/living)) //if it aint text its probably a mob or another user
+		if(length(contract_spells) && istype(contract_master,/mob/living)) //if it aint text its probably a mob or another user
 			var/mob/living/M = contract_master
 			for(var/spell_type in contract_spells)
 				M.add_spell(new spell_type(user), "const_spell_ready")

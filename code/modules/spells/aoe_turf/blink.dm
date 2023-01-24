@@ -16,7 +16,7 @@
 	cast_sound = 'sound/magic/blink.ogg'
 
 /spell/aoe_turf/blink/cast(list/targets, mob/user)
-	if(!targets.len)
+	if(!length(targets))
 		return
 
 	var/turf/T = pick(targets)

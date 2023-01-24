@@ -27,11 +27,11 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 /spell/aoe_turf/conjure/cast(list/targets, mob/user)
 
 	for(var/i=1,i <= summon_amt,i++)
-		if(!targets.len)
+		if(!length(targets))
 			break
 		var/summoned_object_type
 		if(summon_exclusive)
-			if(!summon_type.len)
+			if(!length(summon_type))
 				break
 			summoned_object_type = summon_type[1]
 			summon_type -= summoned_object_type

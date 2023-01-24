@@ -74,8 +74,8 @@ length to avoid portals or something i guess?? Not that they're counted right no
 		closed.Add(current.position)
 		if(current.position == end || call(current.position, dist)(end) <= min_target_dist)
 			path = new /list(current.nodes_traversed + 1)
-			path[path.len] = current.position
-			var/index = path.len - 1
+			path[length(path)] = current.position
+			var/index = length(path) - 1
 			while(current.previous_node)
 				current = current.previous_node
 				path[index--] = current.position

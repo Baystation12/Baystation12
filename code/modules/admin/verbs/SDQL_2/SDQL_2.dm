@@ -40,12 +40,12 @@
 
 	var/list/query_list = SDQL2_tokenize(query_text)
 
-	if(!query_list || query_list.len < 1)
+	if(!query_list || length(query_list) < 1)
 		return
 
 	var/list/querys = SDQL_parse(query_list)
 
-	if(!querys || querys.len < 1)
+	if(!querys || length(querys) < 1)
 		return
 
 	try
@@ -132,7 +132,7 @@
 								var/datum/temp = d
 								var/i = 0
 								for(var/v in sets)
-									if(++i == sets.len)
+									if(++i == length(sets))
 										if(istype(temp, /turf) && (v == "x" || v == "y" || v == "z"))
 											break
 
@@ -147,7 +147,7 @@
 
 							CHECK_TICK
 
-			to_chat(usr, SPAN_NOTICE("Query executed on [objs.len] object\s."))
+			to_chat(usr, SPAN_NOTICE("Query executed on [length(objs)] object\s."))
 	catch(var/exception/e)
 		to_chat(usr, SPAN_DANGER("An exception has occured during the execution of your query and your query has been aborted."))
 		to_chat(usr, "exception name: [e.name]")
@@ -164,15 +164,15 @@
 	for(var/val in query_list)
 		if(val == ";")
 			do_parse = 1
-		else if(pos >= query_list.len)
+		else if(pos >= length(query_list))
 			query_tree += val
 			do_parse = 1
 		if(do_parse)
 			parser.query = query_tree
 			var/list/parsed_tree
 			parsed_tree = parser.parse()
-			if(parsed_tree.len > 0)
-				querys.len = querys_pos
+			if(length(parsed_tree) > 0)
+				LIST_RESIZE(querys, querys_pos)
 				querys[querys_pos] = parsed_tree
 				querys_pos++
 			else //There was an error so don't run anything, and tell the user which query has errored.
@@ -267,7 +267,7 @@
 	var/result = 0
 	var/val
 
-	for(var/i = start, i <= expression.len, i++)
+	for(var/i = start, i <= length(expression), i++)
 		var/op = ""
 
 		if(i > start)
@@ -322,7 +322,7 @@
 	var/i = start
 	var/val = null
 
-	if(i > expression.len)
+	if(i > length(expression))
 		return list("val" = null, "i" = i)
 
 	if(istype(expression[i], /list))
@@ -371,14 +371,14 @@
 
 	else
 		val = SDQL_var(object, expression, i, object)
-		i = expression.len
+		i = length(expression)
 
 	return list("val" = val, "i" = i)
 
 /proc/SDQL_var(datum/object, list/expression, start = 1, source)
 	var/v
 	var/static/list/exclude = list("usr", "src", "marked", "global")
-	var/long = start < expression.len
+	var/long = start < length(expression)
 
 	if (object == world && (!long || expression[start + 1] == ".") && !(expression[start] in exclude))
 		var/name = expression[start]
@@ -429,7 +429,7 @@
 		else if (expression[start + 1] == "\[" && islist(v))
 			var/list/L = v
 			var/index = SDQL_expression(source, expression[start + 2])
-			if (isnum(index) && (!IsInteger(index) || L.len < index))
+			if (isnum(index) && (!IsInteger(index) || length(L) < index))
 				to_chat(usr, SPAN_DANGER("Invalid list index: [index]"))
 				return null
 
@@ -443,7 +443,7 @@
 
 	var/list/new_args = list()
 	for(var/arg in arguments)
-		new_args[++new_args.len] = SDQL_expression(source, arg)
+		new_args[LIST_PRE_INC(new_args)] = SDQL_expression(source, arg)
 
 	if (object == world) // Global proc.
 		procname = "/proc/[procname]"

@@ -19,16 +19,16 @@
 	var/obj/item/stock_parts/computer/network_card/network_card = terminal.computer.get_component(PART_NETWORK)
 	if(!network_card || !network_card.check_functionality())
 		return "[name]: Could not find valid network interface."
-	if(!arguments.len)
+	if(!length(arguments))
 		if(!network_card.proxy_id)
 			return "[name]: This device is not using a proxy."
 		return "[name]: This device is set to connect via proxy with NID '[network_card.proxy_id]'."
-	else if(arguments.len == 1 && arguments[1] == "-s")
+	else if(length(arguments) == 1 && arguments[1] == "-s")
 		if(!network_card.proxy_id)
 			return "[name]: Error; this device is not using a proxy."
 		network_card.proxy_id = null
 		return "[name]: Device proxy cleared."
-	else if(arguments.len == 2 && arguments[1] == "-s")
+	else if(length(arguments) == 2 && arguments[1] == "-s")
 		var/nid = text2num(arguments[2])
 		if(!nid)
 			return "[name]: Error; invalid NID."

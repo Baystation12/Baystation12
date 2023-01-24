@@ -44,8 +44,8 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 			pai.chassis = pai.icon_state = GLOB.possible_chassis[candidate.chassis]
 			var/list/sayverbs = GLOB.possible_say_verbs[candidate.say_verb]
 			pai.speak_statement = sayverbs[1]
-			pai.speak_exclamation = sayverbs[(sayverbs.len>1 ? 2 : sayverbs.len)]
-			pai.speak_query = sayverbs[(sayverbs.len>2 ? 3 : sayverbs.len)]
+			pai.speak_exclamation = sayverbs[(length(sayverbs)>1 ? 2 : length(sayverbs))]
+			pai.speak_query = sayverbs[(length(sayverbs)>2 ? 3 : length(sayverbs))]
 
 			card.setPersonality(pai)
 			card.looking_for_personality = 0

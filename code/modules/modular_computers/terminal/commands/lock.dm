@@ -22,7 +22,7 @@
 		return "[name]: Error; hard drive not found."
 	. = syntax_error()
 	var/obj/item/stock_parts/computer/hard_drive/D
-	if(!arguments.len)
+	if(!length(arguments))
 		. = list()
 		. += "[name]: Listing storage device status..."
 		for(var/did in drives)
@@ -32,7 +32,7 @@
 			. += ""
 			. += "** Device mounted on device id [did]: **"
 			. += D.diagnostics()
-	else if(arguments.len == 1)
+	else if(length(arguments) == 1)
 		if(length(arguments[1]) != 1)
 			return
 		D = drives[arguments[1]]

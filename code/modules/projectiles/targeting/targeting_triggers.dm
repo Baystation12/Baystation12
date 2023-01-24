@@ -3,7 +3,7 @@
 	return
 
 /mob/living/trigger_aiming(trigger_type)
-	if(!aimed.len)
+	if(!length(aimed))
 		return
 	for(var/obj/aiming_overlay/AO in aimed)
 		if(AO.aiming_at == src)

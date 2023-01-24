@@ -104,7 +104,7 @@
 
 /obj/item/gun/Initialize()
 	. = ..()
-	for(var/i in 1 to firemodes.len)
+	for(var/i in 1 to length(firemodes))
 		firemodes[i] = new /datum/firemode(src, firemodes[i])
 
 	if(isnull(scoped_accuracy))
@@ -381,8 +381,8 @@
 	if(!istype(P))
 		return //default behaviour only applies to true projectiles
 
-	var/acc_mod = burst_accuracy[min(burst, burst_accuracy.len)]
-	var/disp_mod = dispersion[min(burst, dispersion.len)]
+	var/acc_mod = burst_accuracy[min(burst, length(burst_accuracy))]
+	var/disp_mod = dispersion[min(burst, length(dispersion))]
 	var/stood_still = last_handled
 	//Not keeping gun active will throw off aim (for non-Masters)
 	if(user.skill_check(SKILL_WEAPONS, SKILL_PROF))
@@ -552,7 +552,7 @@
 /obj/item/gun/examine(mob/user)
 	. = ..()
 	if(user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
-		if(firemodes.len > 1)
+		if(length(firemodes) > 1)
 			var/datum/firemode/current_mode = firemodes[sel_mode]
 			to_chat(user, "The fire selector is set to [current_mode.name].")
 	if(has_safety)
@@ -575,10 +575,10 @@
 	return new_mode
 
 /obj/item/gun/proc/get_next_firemode()
-	if(firemodes.len <= 1)
+	if(length(firemodes) <= 1)
 		return null
 	. = sel_mode + 1
-	if(. > firemodes.len)
+	if(. > length(firemodes))
 		. = 1
 
 /obj/item/gun/attack_self(mob/user)
@@ -627,7 +627,7 @@
 	var/list/turfs = list()
 	for(var/turf/T in view())
 		turfs += T
-	if(turfs.len)
+	if(length(turfs))
 		var/turf/shoot_to = pick(turfs)
 		target.visible_message(SPAN_DANGER("\The [src] goes off during the struggle!"))
 		afterattack(shoot_to,target)

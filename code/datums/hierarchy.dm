@@ -14,7 +14,7 @@
 	return ..()
 
 /singleton/hierarchy/proc/is_category()
-	return hierarchy_type == type || children.len
+	return hierarchy_type == type || length(children)
 
 /singleton/hierarchy/proc/is_hidden_category()
 	return hierarchy_type == type

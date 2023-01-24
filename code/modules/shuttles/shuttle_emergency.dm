@@ -108,7 +108,7 @@
 	var/list/authorized = list()
 
 /obj/machinery/computer/shuttle_control/emergency/proc/has_authorization()
-	return (authorized.len >= req_authorizations || emagged)
+	return (length(authorized) >= req_authorizations || emagged)
 
 /obj/machinery/computer/shuttle_control/emergency/proc/reset_authorization()
 	//no need to reset emagged status. If they really want to go back to the station they can.
@@ -118,7 +118,7 @@
 /obj/machinery/computer/shuttle_control/emergency/proc/read_authorization(obj/item/ident)
 	if (!ident || !istype(ident))
 		return 0
-	if (authorized.len >= req_authorizations)
+	if (length(authorized) >= req_authorizations)
 		return 0 //don't need any more
 
 	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
@@ -152,11 +152,11 @@
 
 	src.visible_message("\The [src] beeps as it scans [ident].")
 	authorized[dna_hash] = auth_name
-	if (req_authorizations - authorized.len)
-		to_world(SPAN_NOTICE("<b>Alert: [req_authorizations - authorized.len] authorization\s needed to override the shuttle autopilot.</b>"))
+	if (req_authorizations - length(authorized))
+		to_world(SPAN_NOTICE("<b>Alert: [req_authorizations - length(authorized)] authorization\s needed to override the shuttle autopilot.</b>"))
 
 	if(usr)
-		log_and_message_admins("has inserted [ID] into the shuttle control computer - [req_authorizations - authorized.len] authorisation\s needed")
+		log_and_message_admins("has inserted [ID] into the shuttle control computer - [req_authorizations - length(authorized)] authorisation\s needed")
 
 	return 1
 

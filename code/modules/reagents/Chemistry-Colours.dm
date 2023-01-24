@@ -1,7 +1,7 @@
 /datum/reagents/proc/get_color()
-	if(!reagent_list || !reagent_list.len)
+	if(!reagent_list || !length(reagent_list))
 		return "#ffffffff"
-	if(reagent_list.len == 1) // It's pretty common and saves a lot of work
+	if(length(reagent_list) == 1) // It's pretty common and saves a lot of work
 		var/datum/reagent/R = reagent_list[1]
 		return R.color + num2hex(R.alpha)
 

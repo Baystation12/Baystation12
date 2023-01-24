@@ -486,7 +486,7 @@
 	)
 
 /obj/item/bioreactor/attack_self(mob/user)
-	if(contents.len >= 1)
+	if(length(contents) >= 1)
 		var/obj/item/removing = contents[1]
 		user.put_in_hands(removing)
 		to_chat(user, SPAN_NOTICE("You remove \the [removing] from \the [src]."))
@@ -504,7 +504,7 @@
 		to_chat(user, SPAN_WARNING("\The [target] cannot be used as fuel by \the [src]."))
 		return
 
-	if(contents.len >= max_fuel_items)
+	if(length(contents) >= max_fuel_items)
 		to_chat(user, SPAN_WARNING("\The [src] can fit no more fuel inside."))
 		return
 	target.forceMove(src)
@@ -520,7 +520,7 @@
 
 /obj/item/bioreactor/Process()
 	var/mob/living/silicon/robot/R = loc
-	if(!istype(R) || !R.cell || R.cell.fully_charged() || !contents.len)
+	if(!istype(R) || !R.cell || R.cell.fully_charged() || !length(contents))
 		return
 
 	var/generating_power

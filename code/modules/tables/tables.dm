@@ -473,7 +473,7 @@
 
 	var/list/ret = list(NORTHWEST, SOUTHEAST, NORTHEAST, SOUTHWEST)
 
-	for(var/i = 1 to ret.len)
+	for(var/i = 1 to length(ret))
 		var/dir = ret[i]
 		. = CORNER_NONE
 		if(dir in dirs)

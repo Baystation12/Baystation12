@@ -19,14 +19,14 @@
 
 /spell/aoe_turf/charge/proc/depth_cast(list/targets)
 	for(var/atom/A in targets)
-		if(A.contents.len)
+		if(length(A.contents))
 			depth_cast(A.contents)
 		cast_charge(A)
 
 /spell/aoe_turf/charge/proc/mob_charge(mob/living/M)
 	if(!M.mind)
 		return
-	if(M.mind.learned_spells.len != 0)
+	if(length(M.mind.learned_spells) != 0)
 		for(var/spell/S in M.mind.learned_spells)
 			if(!istype(S, /spell/aoe_turf/charge))
 				S.charge_counter = S.charge_max

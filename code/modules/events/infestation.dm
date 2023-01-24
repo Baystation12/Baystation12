@@ -55,7 +55,7 @@
 		for(var/i = 1 to severity)
 			num += rand(2,max_number)
 		log_and_message_admins("Vermin infestation spawned ([vermstring] x[num]) in \the [location]", location = pick_area_turf(location))
-		while(vermin_turfs.len && num > 0)
+		while(length(vermin_turfs) && num > 0)
 			var/turf/simulated/floor/T = pick(vermin_turfs)
 			vermin_turfs.Remove(T)
 			num--
@@ -76,7 +76,7 @@
 		return
 
 	var/list/vermin_turfs = get_area_turfs(location, list(/proc/not_turf_contains_dense_objects, /proc/IsTurfAtmosSafe))
-	if(!vermin_turfs.len)
+	if(!length(vermin_turfs))
 		log_debug("Vermin infestation failed to find viable turfs in \the [location].")
 		return
 	return vermin_turfs

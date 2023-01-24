@@ -9,7 +9,7 @@
 	var/genesource = "unknown"
 
 /obj/item/disk/botany/attack_self(mob/user as mob)
-	if(genes.len)
+	if(length(genes))
 		var/choice = alert(user, "Are you sure you want to wipe the disk?", "Xenobotany Data", "No", "Yes")
 		if(src && user && genes && choice && choice == "Yes" && user.Adjacent(get_turf(src)))
 			to_chat(user, "You wipe the disk data.")
@@ -95,7 +95,7 @@
 		else
 			var/obj/item/disk/botany/B = W
 
-			if(B.genes && B.genes.len)
+			if(B.genes && length(B.genes))
 				if(!disk_needs_genes)
 					to_chat(user, "That disk already has gene data loaded.")
 					return
@@ -168,7 +168,7 @@
 		seed.dropInto(loc)
 
 		if(seed.seed.name == "new line" || isnull(SSplants.seeds[seed.seed.name]))
-			seed.seed.uid = SSplants.seeds.len + 1
+			seed.seed.uid = length(SSplants.seeds) + 1
 			seed.seed.name = "[seed.seed.uid]"
 			SSplants.seeds[seed.seed.name] = seed.seed
 
@@ -269,7 +269,7 @@
 	else
 		data["degradation"] = 0
 
-	if(loaded_disk && loaded_disk.genes.len)
+	if(loaded_disk && length(loaded_disk.genes))
 		data["disk"] = 1
 		data["sourceName"] = loaded_disk.genesource
 		data["locus"] = ""

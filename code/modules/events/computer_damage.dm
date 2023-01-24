@@ -11,7 +11,7 @@
 	for(var/obj/machinery/computer/modular/C in SSmachines.machinery)
 		if((C.z in affecting_z) && C.use_power == POWER_USE_ACTIVE && C.get_component_of_type(/obj/item/stock_parts/computer/hard_drive))
 			victims += C
-	while(number_of_victims && victims.len)
+	while(number_of_victims && length(victims))
 		number_of_victims--
 		var/obj/machinery/computer/modular/victim = pick_n_take(victims)
 		if(prob(50))

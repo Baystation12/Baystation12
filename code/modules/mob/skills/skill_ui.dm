@@ -199,8 +199,8 @@ The generic antag version.
 		return
 	deselect(skill_type)
 	LAZYINITLIST(currently_selected)
-	if(currently_selected.len < level)
-		currently_selected.len = level
+	if(length(currently_selected) < level)
+		LIST_RESIZE(currently_selected, level)
 	var/selection = currently_selected[level]
 	LAZYADD(selection, skill_type)
 	currently_selected[level] = selection

@@ -89,7 +89,7 @@
 	else
 		src.SetName("pile of [worth] [GLOB.using_map.local_currency_name]")
 
-	if(overlays.len <= 2)
+	if(length(overlays) <= 2)
 		w_class = ITEM_SIZE_TINY
 	else
 		w_class = ITEM_SIZE_SMALL

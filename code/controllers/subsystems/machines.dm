@@ -136,16 +136,16 @@ SUBSYSTEM_DEF(machines)
 		return ..()
 	..({"\
 		Queues: \
-		Pipes [pipenets.len] \
-		Machines [processing.len] \
-		Networks [powernets.len] \
-		Objects [power_objects.len]\n\
+		Pipes [length(pipenets)] \
+		Machines [length(processing)] \
+		Networks [length(powernets)] \
+		Objects [length(power_objects)]\n\
 		Costs: \
 		Pipes [Round(cost_pipenets)] \
 		Machines [Round(cost_machinery)] \
 		Networks [Round(cost_powernets)] \
 		Objects [Round(cost_power_objects)]\n\
-		Overall [Roundm(cost ? processing.len / cost : 0, 0.1)]
+		Overall [Roundm(cost ? length(processing) / cost : 0, 0.1)]
 	"})
 
 
@@ -153,7 +153,7 @@ SUBSYSTEM_DEF(machines)
 	if (!resumed)
 		queue = pipenets.Copy()
 	var/datum/pipe_network/network
-	for (var/i = queue.len to 1 step -1)
+	for (var/i = length(queue) to 1 step -1)
 		network = queue[i]
 		if (QDELETED(network))
 			if (network)
@@ -172,7 +172,7 @@ SUBSYSTEM_DEF(machines)
 	if (!resumed)
 		queue = processing.Copy()
 	var/obj/machinery/machine
-	for (var/i = queue.len to 1 step -1)
+	for (var/i = length(queue) to 1 step -1)
 		machine = queue[i]
 		if (QDELETED(machine))
 			if (machine)
@@ -192,7 +192,7 @@ SUBSYSTEM_DEF(machines)
 	if (!resumed)
 		queue = powernets.Copy()
 	var/datum/powernet/network
-	for (var/i = queue.len to 1 step -1)
+	for (var/i = length(queue) to 1 step -1)
 		network = queue[i]
 		if (QDELETED(network))
 			if (network)
@@ -211,7 +211,7 @@ SUBSYSTEM_DEF(machines)
 	if (!resumed)
 		queue = power_objects.Copy()
 	var/obj/item/item
-	for (var/i = queue.len to 1 step -1)
+	for (var/i = length(queue) to 1 step -1)
 		item = queue[i]
 		if (QDELETED(item))
 			if (item)

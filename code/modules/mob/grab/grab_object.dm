@@ -158,7 +158,7 @@
 	if(assailant.get_active_hand())
 		to_chat(assailant, SPAN_NOTICE("You can't grab someone if your hand is full."))
 		return 0
-	if(assailant.grabbed_by.len)
+	if(length(assailant.grabbed_by))
 		to_chat(assailant, SPAN_NOTICE("You can't grab someone if you're being grabbed."))
 		return 0
 	var/obj/item/organ/organ = get_targeted_organ()

@@ -184,8 +184,8 @@
 /obj/item/blueprints/proc/detect_room(turf/first)
 	var/list/turf/found = new
 	var/list/turf/pending = list(first)
-	while(pending.len)
-		if (found.len+pending.len > 300)
+	while(length(pending))
+		if (length(found)+length(pending) > 300)
 			return ROOM_ERR_TOOLARGE
 		var/turf/T = pending[1] //why byond havent list::pop()?
 		pending -= T

@@ -115,7 +115,7 @@
 /DBQuery/proc/GetRowData()
 	var/list/columns = Columns()
 	var/list/results
-	if(columns.len)
+	if(length(columns))
 		results = list()
 		for(var/C in columns)
 			results+=C
@@ -124,7 +124,7 @@
 	return results
 
 /DBQuery/proc/Close()
-	item.len = 0
+	item.Cut()
 	columns = null
 	conversions = null
 	return _dm_db_close(_db_query)
@@ -133,9 +133,12 @@
 	return db_connection.Quote(str)
 
 /DBQuery/proc/SetConversion(column,conversion)
-	if(istext(column)) column = columns.Find(column)
-	if(!conversions) conversions = new/list(column)
-	else if(conversions.len < column) conversions.len = column
+	if(istext(column))
+		column = columns.Find(column)
+	if(!conversions)
+		conversions = new (column)
+	else if(length(conversions) < column)
+		LIST_RESIZE(conversions, column)
 	conversions[column] = conversion
 
 
