@@ -474,7 +474,7 @@
 
 	last_safety_check = world.time
 	admin_attacker_log(M, "is trying to commit suicide with \a [src]")
-	user.visible_message(M, SPAN_WARNING("\The [M] pulls the trigger."))
+	user.visible_message(SPAN_WARNING("\The [M] pulls the trigger."))
 	to_chat(M, SPAN_NOTICE("You feel \the [src] go off..."))
 
 	var/obj/item/organ/brain = M.internal_organs_by_name[BP_BRAIN] || M.internal_organs_by_name[BP_POSIBRAIN]
