@@ -5,6 +5,7 @@
 	icon_state = "energystun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	max_shots = 40
+	charge_cost = 25
 	fire_delay = 10 // To balance for the fact that it is a pistol and can be used one-handed without penalty
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)

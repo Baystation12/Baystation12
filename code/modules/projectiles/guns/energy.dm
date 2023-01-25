@@ -9,7 +9,7 @@
 	accuracy_power = 6
 
 	var/obj/item/cell/guncell/power_supply //What type of power cell this uses
-	var/charge_cost = 40 //How much energy is needed to fire.
+	var/charge_cost = 25 //How much energy is needed to fire.
 	var/max_shots = 10 //Determines the capacity of the weapon's power cell. Specifying a cell_type overrides this value.
 	var/cell_type = null
 	var/projectile_type = /obj/item/projectile/beam/practice

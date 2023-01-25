@@ -94,7 +94,7 @@
 	one_hand_penalty = 6 //large and heavy
 	w_class = ITEM_SIZE_HUGE
 	projectile_type = /obj/item/projectile/beam/heavylaser
-	charge_cost = 60
+	charge_cost = 40
 	max_shots = 6
 	accuracy = 2
 	fire_delay = 20
@@ -126,7 +126,7 @@
 	battery_changable = TRUE
 	battery_chamber_size = BATTERY_RIFLE
 	battery_type = /obj/item/cell/guncell/medium
-	charge_cost = 40
+	charge_cost = 25
 	max_shots = 10
 	wielded_item_state = "gun_wielded"
 	combustion = 0
@@ -140,7 +140,7 @@
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ESOTERIC = 2)
 	projectile_type = /obj/item/projectile/beam/xray
 	one_hand_penalty = 1
-	charge_cost = 60
+	charge_cost = 25
 	battery_changable = TRUE
 	battery_chamber_size = BATTERY_PISTOL
 	battery_type = /obj/item/cell/guncell/pistol/small
@@ -157,7 +157,7 @@
 	projectile_type = /obj/item/projectile/beam/sniper
 	one_hand_penalty = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	slot_flags = SLOT_BACK
-	charge_cost = 60
+	charge_cost = 40
 	battery_changable = TRUE
 	battery_chamber_size = BATTERY_RIFLE
 	battery_type = /obj/item/cell/guncell/medium

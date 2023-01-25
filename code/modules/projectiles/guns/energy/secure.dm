@@ -6,6 +6,7 @@
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns_secure.dmi',
 		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
 		)
+	charge_cost = 30
 	battery_changable = TRUE
 	battery_type = /obj/item/cell/guncell/pistol/verysmall
 	battery_chamber_size = BATTERY_PISTOL

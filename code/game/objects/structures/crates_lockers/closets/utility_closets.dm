@@ -181,7 +181,7 @@
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
 
-/obj/structure/closet/gun/WillContain()
+/obj/structure/closet/guncell/WillContain()
 	return list(
 			/obj/item/cell/guncell/medium = 3,
 			/obj/item/cell/guncell/small = 3
@@ -189,7 +189,7 @@
 
 /obj/structure/closet/guncell/pistol
 
-/obj/structure/closet/gun/pistol/WillContain()
+/obj/structure/closet/guncell/pistol/WillContain()
 	return list(
 			/obj/item/cell/guncell/pistol/medium = 2,
 			/obj/item/cell/guncell/pistol/small = 4

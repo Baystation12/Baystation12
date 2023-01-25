@@ -56,10 +56,10 @@
 	..()
 	if(emp_vulnerable==TRUE)
 		discharging=TRUE
-		update_icon()
 		to_chat(loc, "<span class='warning'>\The [src] is overloaded! It's going to explode!.</span>")
 		playsound(loc, arm_sound, 75, 0, -3)
 		addtimer(CALLBACK(src, .proc/detonate, user), 30) // 3 senconds
+	update_icon()
 
 /obj/item/cell/guncell/overcharged
 	name = "hypercharged battery"

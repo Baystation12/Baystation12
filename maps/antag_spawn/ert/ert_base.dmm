@@ -1822,9 +1822,11 @@
 "lx" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/red,
-/obj/item/gun/projectile/automatic/drag,
-/obj/item/ammo_magazine/mil_rifle,
-/obj/item/ammo_magazine/mil_rifle,
+/obj/item/gun/energy/k342/prereg,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "monotiledark"
@@ -2316,6 +2318,17 @@
 	icon_state = "freezerfloor"
 	},
 /area/map_template/rescue_base/base)
+"rz" = (
+/obj/structure/table/rack,
+/obj/item/cell/guncell/pistol/overcharged/huge,
+/obj/item/cell/guncell/pistol/overcharged/huge,
+/obj/item/cell/guncell/pistol/overcharged/huge,
+/obj/item/cell/guncell/pistol/overcharged/huge,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
 "rA" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5
@@ -2438,15 +2451,7 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
-"tu" = (
-/obj/structure/table/standard,
-/obj/item/paper,
-/obj/item/pen,
-/turf/unsimulated/floor{
-	icon_state = "dark"
-	},
-/area/map_template/rescue_base/base)
-"tD" = (
+"tk" = (
 /obj/structure/table/rack,
 /obj/item/cell/guncell/large,
 /obj/item/cell/guncell/large,
@@ -2456,6 +2461,14 @@
 /obj/item/cell/guncell/large,
 /obj/item/cell/guncell/large,
 /obj/item/cell/guncell/large,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"tu" = (
+/obj/structure/table/standard,
+/obj/item/paper,
+/obj/item/pen,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -2542,8 +2555,6 @@
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/red,
 /obj/item/gun/energy/sniperrifle,
-/obj/item/cell/guncell/large,
-/obj/item/cell/guncell/large,
 /obj/item/cell/guncell/large,
 /obj/item/cell/guncell/large,
 /obj/item/cell/guncell/large,
@@ -2690,17 +2701,6 @@
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
-	},
-/area/map_template/rescue_base/base)
-"wk" = (
-/obj/structure/table/rack,
-/obj/item/cell/guncell/pistol/overcharged/huge,
-/obj/item/cell/guncell/pistol/overcharged/huge,
-/obj/item/cell/guncell/pistol/overcharged/huge,
-/obj/item/cell/guncell/pistol/overcharged/huge,
-/turf/unsimulated/floor{
-	icon = 'icons/turf/flooring/tiles.dmi';
-	icon_state = "dark"
 	},
 /area/map_template/rescue_base/base)
 "wq" = (
@@ -3080,6 +3080,20 @@
 /obj/structure/closet/secure_closet/freezer/meat,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"AG" = (
+/obj/structure/table/rack,
+/obj/item/cell/guncell/pistol/large,
+/obj/item/cell/guncell/pistol/large,
+/obj/item/cell/guncell/pistol/large,
+/obj/item/cell/guncell/pistol/large,
+/obj/item/cell/guncell/pistol/large,
+/obj/item/cell/guncell/pistol/large,
+/obj/item/cell/guncell/pistol/large,
+/obj/item/cell/guncell/pistol/large,
+/turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/rescue_base/base)
@@ -3916,8 +3930,6 @@
 /obj/item/cell/guncell/large,
 /obj/item/cell/guncell/large,
 /obj/item/cell/guncell/large,
-/obj/item/cell/guncell/large,
-/obj/item/cell/guncell/large,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "monotiledark"
@@ -4471,18 +4483,6 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/rescue_base/start)
-"Pq" = (
-/obj/structure/table/rack,
-/obj/item/cell/guncell/overcharged/huge,
-/obj/item/cell/guncell/overcharged/huge,
-/obj/item/cell/guncell/overcharged/huge,
-/obj/item/cell/guncell/overcharged/huge,
-/obj/item/cell/guncell/overcharged/huge,
-/turf/unsimulated/floor{
-	icon = 'icons/turf/flooring/tiles.dmi';
-	icon_state = "dark"
-	},
-/area/map_template/rescue_base/base)
 "Pw" = (
 /obj/machinery/computer/teleporter{
 	dir = 8
@@ -5007,6 +5007,18 @@
 "VV" = (
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
+"Wc" = (
+/obj/structure/table/rack,
+/obj/item/cell/guncell/overcharged/huge,
+/obj/item/cell/guncell/overcharged/huge,
+/obj/item/cell/guncell/overcharged/huge,
+/obj/item/cell/guncell/overcharged/huge,
+/obj/item/cell/guncell/overcharged/huge,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
 "We" = (
 /obj/structure/handrail{
 	dir = 4
@@ -5347,20 +5359,6 @@
 /obj/structure/table/rack,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
-	icon_state = "dark"
-	},
-/area/map_template/rescue_base/base)
-"ZU" = (
-/obj/structure/table/rack,
-/obj/item/cell/guncell/pistol/large,
-/obj/item/cell/guncell/pistol/large,
-/obj/item/cell/guncell/pistol/large,
-/obj/item/cell/guncell/pistol/large,
-/obj/item/cell/guncell/pistol/large,
-/obj/item/cell/guncell/pistol/large,
-/obj/item/cell/guncell/pistol/large,
-/obj/item/cell/guncell/pistol/large,
-/turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/rescue_base/base)
@@ -7634,8 +7632,8 @@ dj
 ad
 ad
 ad
-wk
-Pq
+rz
+Wc
 en
 en
 en
@@ -8546,8 +8544,8 @@ eq
 cU
 iO
 ar
-tD
-ZU
+tk
+AG
 ar
 cW
 dk
