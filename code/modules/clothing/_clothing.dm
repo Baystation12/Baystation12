@@ -27,6 +27,15 @@
 		attach_accessory(null, new path (src))
 
 
+/obj/item/clothing/Destroy()
+	for (var/obj/item/clothing/accessory/A as anything in accessories)
+		remove_accessory(null, A)
+		qdel(A)
+	accessories.Cut()
+	accessories = null
+	. = ..()
+
+
 // Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
 	return

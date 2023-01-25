@@ -2096,25 +2096,27 @@
 				log_and_message_admins("has forced [last_ckey]/([M]) to ghost and deactivate.")
 				return
 
-			var/obj/machinery/cryopod/C
-			if (isrobot(M))
-				for (var/obj/machinery/cryopod/robot/CP in SSmachines.machinery)
-					if (CP.occupant || !(CP.z in GLOB.using_map.station_levels))
-						continue
-					C = CP
-			else
-				for (var/obj/machinery/cryopod/CP in SSmachines.machinery)
-					if (CP.occupant || !(CP.z in GLOB.using_map.station_levels))
-						continue
-					C = CP
+			if (!istype(M.loc, /obj/machinery/cryopod))
+				var/obj/machinery/cryopod/C
+				if (isrobot(M))
+					for (var/obj/machinery/cryopod/robot/CP in SSmachines.machinery)
+						if (CP.occupant || !(CP.z in GLOB.using_map.station_levels))
+							continue
+						C = CP
+				else
+					for (var/obj/machinery/cryopod/CP in SSmachines.machinery)
+						if (CP.occupant || !(CP.z in GLOB.using_map.station_levels))
+							continue
+						C = CP
 
-			if (!C || C.occupant)
-				to_chat(usr, SPAN_WARNING("Could not find an empty cryopod!"))
-				return
+				if (!C || C.occupant)
+					to_chat(usr, SPAN_WARNING("Could not find an empty cryopod!"))
+					return
+
+				C.set_occupant(M)
 
 			log_and_message_admins("has put [last_ckey]/([M]) into a cryopod and ghosted them.")
 
-			C.set_occupant(M)
 			var/ghost = M.ghostize(FALSE)
 			if (ghost)
 				show_player_panel(M)
