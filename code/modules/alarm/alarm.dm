@@ -114,8 +114,7 @@
  * Returns integer.
  */
 
-/area/get_alarm_z()
-	return length(contents) ? get_z(contents[1]) : 0
+
 
 /**
  * Retrieves the atom's area for alarms.
