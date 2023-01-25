@@ -9,8 +9,8 @@
 	projectile_type = /obj/item/projectile/beam/pulse/heavy
 	max_shots = 36
 	battery_changable = TRUE
-	battery_chamber_size = 5
-	battery_type = /obj/item/cell/guncell/megalarge
+	battery_chamber_size = BATTERY_RIFLE
+	battery_type = /obj/item/cell/guncell/large
 	w_class = ITEM_SIZE_HUGE
 	one_hand_penalty= 6
 	multi_aim = 1
@@ -32,7 +32,8 @@
 	max_shots = 24
 	battery_changable = TRUE
 	battery_chamber_size = 5
-	battery_type = /obj/item/cell/guncell/megalarge
+	battery_chamber_size = BATTERY_RIFLE
+	battery_type = /obj/item/cell/guncell/large
 	w_class = ITEM_SIZE_LARGE
 	one_hand_penalty= 3
 	burst_delay = 2
@@ -50,8 +51,8 @@
 	projectile_type = /obj/item/projectile/beam/pulse
 	max_shots = 21
 	battery_changable = TRUE
-	battery_chamber_size = 4
-	battery_type = /obj/item/cell/guncell/large
+	battery_chamber_size = BATTERY_PISTOL
+	battery_type = /obj/item/cell/guncell/pistol/large
 	w_class = ITEM_SIZE_NORMAL
 	one_hand_penalty=1 //a bit heavy
 	burst_delay = 1

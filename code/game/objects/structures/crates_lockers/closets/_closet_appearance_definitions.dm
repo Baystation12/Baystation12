@@ -696,6 +696,13 @@
 		"glass" = COLOR_WHITE
 	)
 
+/decl/closet_appearance/wall/gun
+	color = COLOR_BLACK
+	extra_decals = list(
+		"stripes" = COLOR_NT_RED,
+		"glass" = COLOR_WHITE
+	)
+
 // Carts
 /decl/closet_appearance/cart
 	color = COLOR_GRAY20

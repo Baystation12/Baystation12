@@ -104,13 +104,15 @@
 	return list(
 			/obj/item/clothing/accessory/storage/holster/thigh = 2,
 			/obj/item/gun/energy/gun/secure = 3,
+			/obj/item/cell/guncell/pistol/large = 3
 	)
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/small
 	name = "personal sidearm cabinet"
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/small/WillContain()
-	return list(/obj/item/gun/energy/gun/small/secure = 4)
+	return list(/obj/item/gun/energy/gun/small/secure = 4,
+				/obj/item/cell/guncell/pistol/large = 4)
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/combined
 	name = "combined sidearm cabinet"
@@ -120,6 +122,7 @@
 		/obj/item/storage/belt/holster/general = 3,
 		/obj/item/gun/energy/gun/secure = 3,
 		/obj/item/gun/energy/gun/small/secure = 1,
+		/obj/item/cell/guncell/pistol/large = 4
 	)
 
 /obj/structure/closet/secure_closet/guncabinet/PPE

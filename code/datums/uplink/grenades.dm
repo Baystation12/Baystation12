@@ -69,6 +69,12 @@
 	antag_costs = list(MODE_TRAITOR = 40)
 	path = /obj/item/storage/box/frags
 
+/datum/uplink_item/item/ammo/guncell/hypercharged/box
+	name = "6x Hypercharged Guncells"
+	desc = "A box containing 6x large hypercharged for both energy pistols and rifles. The way of jihad never ends."
+	item_cost = 20
+	path = /obj/item/storage/box/hypercharged_guncells
+
 /datum/uplink_item/item/grenades/supermatter
 	name = "1x Supermatter Grenade"
 	desc = "This grenade contains a small supermatter shard which will delaminate upon activation and pull in nearby objects, irradiate lifeforms, and eventually explode."

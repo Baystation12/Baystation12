@@ -134,3 +134,36 @@
 	desc = "A stripper clip used to load bolt action rifles. Contains just 5 rounds."
 	item_cost = 2
 	path = /obj/item/ammo_magazine/speedloader/clip
+
+/datum/uplink_item/item/ammo/guncell
+	name = "Medium Rifle Guncell"
+	desc = "A guncell used with energy based weaponry that uses rifle cells. This one is rated 300Wh."
+	item_cost = 2
+	path = /obj/item/cell/guncell/medium
+
+/datum/uplink_item/item/ammo/guncell/pistol
+	name = "Medium Pistol Guncell"
+	desc = "A guncell used with energy based weaponry that uses pistol cells. This one is rated 300Wh."
+	path = /obj/item/cell/guncell/pistol/medium
+
+/datum/uplink_item/item/ammo/guncell/large
+	name = "Large Rifle Guncell"
+	desc = "A guncell used with energy based weaponry that uses rifle cells. This one is rated 400Wh. Slightly larger than normal one and won't explode in your hands."
+	item_cost = 3
+	path = /obj/item/cell/guncell/large
+
+/datum/uplink_item/item/ammo/guncell/large/pistol
+	name = "Large Pistol Guncell"
+	desc = "A guncell used with energy based weaponry that uses pistol cells. This one is rated 400Wh. Slightly larger than normal one and won't explode in your hands."
+	path = /obj/item/cell/guncell/pistol/large
+
+/datum/uplink_item/item/ammo/guncell/hypercharged
+	name = "Hypercharged Rifle Huge Guncell"
+	desc = "A guncell used with energy based weaponry that uses rifle cells. This one is rated whopping 800wh AND can be used as ghetto hand grenade. When you hate someone so much you wouldn't even care if it can rip off your own arms."
+	item_cost = 8
+	path = /obj/item/cell/guncell/overcharged/huge
+
+/datum/uplink_item/item/ammo/guncell/hypercharged/pistol
+	name = "Hypercharged Pistol Huge Guncell"
+	desc = "A guncell used with energy based weaponry that uses pistol cells. This one is rated whopping 800wh AND can be used as ghetto hand grenade. When you hate someone so much you wouldn't even care if it can rip off your own arms."
+	path = /obj/item/cell/guncell/pistol/overcharged/huge

@@ -5686,6 +5686,7 @@
 "alV" = (
 /obj/structure/closet/secure_closet/forensics,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/item/cell/guncell/pistol/small,
 /turf/simulated/floor/tiled/monotile,
 /area/security/detectives_office)
 "alW" = (
@@ -8817,6 +8818,8 @@
 /obj/effect/floor_decal/corner/red/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/security_torch,
+/obj/item/cell/guncell/pistol/small,
+/obj/item/cell/guncell/pistol/small,
 /turf/simulated/floor/tiled/monotile,
 /area/security/locker)
 "aCv" = (
@@ -11405,6 +11408,11 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/gun/energy/gun/secure,
+/obj/item/gun/energy/gun/secure,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "aOF" = (
@@ -11433,6 +11441,9 @@
 /obj/item/storage/box/trackimp{
 	pixel_x = 8;
 	pixel_y = 11
+	},
+/obj/machinery/light{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
@@ -14609,6 +14620,7 @@
 "bCX" = (
 /obj/structure/table/steel,
 /obj/item/storage/box/cdeathalarm_kit,
+/obj/item/melee/telebaton,
 /obj/item/melee/telebaton,
 /obj/item/melee/telebaton,
 /obj/item/melee/telebaton,
@@ -18387,6 +18399,9 @@
 /obj/item/gun/energy/stunrevolver/rifle,
 /obj/item/gun/energy/taser/carbine,
 /obj/item/gun/energy/taser/carbine,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "hub" = (
@@ -18664,6 +18679,7 @@
 /obj/item/gun/energy/laser/secure,
 /obj/item/gun/energy/laser/secure,
 /obj/item/gun/energy/laser/secure,
+/obj/item/gun/energy/laser/secure,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "hGb" = (
@@ -18732,11 +18748,19 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/development)
 "hLf" = (
-/obj/machinery/light{
-	dir = 1
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/structure/table/rack,
+/obj/item/clothing/shoes/dutyboots,
+/obj/item/clothing/accessory/armband/bluegold,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/suit/armor/pcarrier/medium/sol,
+/obj/item/clothing/head/helmet,
+/obj/machinery/recharger/wallcharger{
+	pixel_y = 24
 	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/security/armoury)
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/armoury/tactical)
 "hLD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -19621,6 +19645,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
+"iXP" = (
+/obj/structure/closet/guncell{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/security/armoury)
 "iZb" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8;
@@ -21118,12 +21148,18 @@
 /area/maintenance/substation/firstdeck)
 "kSs" = (
 /obj/structure/table/rack,
-/obj/item/gun/energy/gun/secure,
-/obj/item/gun/energy/gun/secure,
 /obj/structure/window/reinforced{
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/cell/guncell/pistol/medium,
+/obj/item/cell/guncell/pistol/medium,
+/obj/item/cell/guncell/pistol/medium,
+/obj/item/cell/guncell/pistol/medium,
+/obj/item/cell/guncell/pistol/medium,
+/obj/item/cell/guncell/pistol/medium,
+/obj/item/cell/guncell/pistol/medium,
+/obj/item/cell/guncell/pistol/medium,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "kTb" = (
@@ -22157,18 +22193,6 @@
 "mpy" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/firstdeck/aftstarboard)
-"mrr" = (
-/obj/effect/floor_decal/techfloor{
-	dir = 4
-	},
-/obj/effect/floor_decal/techfloor{
-	dir = 8
-	},
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/command/armoury/tactical)
 "mrW" = (
 /obj/structure/closet/secure_closet/medical_torchsenior,
 /obj/effect/floor_decal/corner/paleblue/mono,
@@ -23699,6 +23723,8 @@
 	pixel_x = 22;
 	pixel_y = -10
 	},
+/obj/item/cell/guncell/pistol/small,
+/obj/item/cell/guncell/pistol/small,
 /turf/simulated/floor/tiled/monotile,
 /area/security/locker)
 "omb" = (
@@ -25766,6 +25792,9 @@
 /obj/item/shield/riot/metal,
 /obj/item/shield/riot/metal,
 /obj/item/shield/riot/metal,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "qLb" = (
@@ -25877,6 +25906,7 @@
 	dir = 8
 	},
 /obj/structure/closet/secure_closet/forensics,
+/obj/item/cell/guncell/pistol/small,
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
 "qSD" = (
@@ -26578,12 +26608,15 @@
 /area/thruster/d1starboard)
 "rEK" = (
 /obj/structure/table/rack,
-/obj/item/gun/energy/ionrifle,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
+/obj/item/cell/guncell/medium,
+/obj/item/cell/guncell/medium,
+/obj/item/cell/guncell/medium,
+/obj/item/cell/guncell/medium,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "rFb" = (
@@ -27604,6 +27637,18 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/fore)
+"sET" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/structure/closet/guncell/pistol{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/armoury/tactical)
 "sFb" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -28698,6 +28743,12 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/medical/washroom)
+"uex" = (
+/obj/structure/closet/guncell/pistol{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/security/armoury)
 "ugg" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -28747,6 +28798,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
+/obj/item/gun/energy/ionrifle,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "umI" = (
@@ -29145,21 +29197,6 @@
 /obj/machinery/light,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury)
-"veT" = (
-/obj/effect/floor_decal/techfloor{
-	dir = 4
-	},
-/obj/effect/floor_decal/techfloor{
-	dir = 8
-	},
-/obj/machinery/recharger/wallcharger{
-	pixel_y = 24
-	},
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/command/armoury/tactical)
 "vfK" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/machinery/door/firedoor,
@@ -29185,6 +29222,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
+/obj/item/gun/energy/gun/secure,
 /obj/item/gun/energy/gun/secure,
 /obj/item/gun/energy/gun/secure,
 /obj/item/gun/energy/gun/secure,
@@ -29765,6 +29803,18 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury/access)
+"wSf" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/structure/closet/guncell{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/armoury/tactical)
 "wUg" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 1
@@ -38085,7 +38135,7 @@ cZi
 aLv
 iLA
 sHN
-hLf
+uex
 aPu
 aPu
 aPu
@@ -38893,7 +38943,7 @@ enM
 aLy
 aMC
 sHN
-hLf
+iXP
 aPu
 aPu
 aPu
@@ -58061,7 +58111,7 @@ acd
 acd
 dVw
 dVw
-veT
+wSf
 svH
 svH
 swz
@@ -58263,7 +58313,7 @@ acd
 acd
 dVw
 dVw
-aEG
+hLf
 aEG
 aEG
 dJv
@@ -58667,7 +58717,7 @@ acd
 acd
 dVw
 dVw
-aEG
+hLf
 aEG
 aEG
 jQY
@@ -58869,7 +58919,7 @@ acd
 acd
 dVw
 dVw
-mrr
+sET
 svH
 svH
 nWP
