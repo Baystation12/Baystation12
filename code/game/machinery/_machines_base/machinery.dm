@@ -121,7 +121,7 @@
 	return PROCESS_KILL // Only process if you need to.
 
 /obj/machinery/emp_act(severity)
-	if(use_power && stat == EMPTY_BITFIELD)
+	if(use_power && operable())
 		use_power_oneoff(7500/severity)
 
 		var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(loc)
@@ -136,10 +136,14 @@
 		if (prob(100 / severity) && istype(wires))
 			if (prob(20))
 				wires.RandomCut()
+				visible_message(SPAN_DANGER("A shower of sparks sprays out of \the [src]'s wiring panel!"))
+				sparks(3, 0, get_turf(src))
 			else
 				wires.RandomPulse()
+				visible_message(SPAN_WARNING("Something sparks inside \the [src]'s wiring panel!"))
+				new /obj/effect/sparks(get_turf(src))
 
-	..()
+		..()
 
 /obj/machinery/ex_act(severity)
 	..()
