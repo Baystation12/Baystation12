@@ -16,11 +16,12 @@
 
 /obj/item/cell/guncell
 	w_class = ITEM_SIZE_SMALL
-	name = "Small battery"
+	name = "small battery"
 	icon = 'proxima/icons/obj/guns/guncells.dmi'
 	var/battery_chamber_size = BATTERY_RIFLE
 	var/overcharged = FALSE		 	//will allow cell to be used as hand grenade
 	var/discharging = FALSE			//To see if it's going to boom
+	var/universal = FALSE 			//Ignores gun cell size socket
 	var/emp_vulnerable = FALSE
 	var/arm_sound = 'sound/weapons/armbomb.ogg'
 
@@ -61,16 +62,16 @@
 		addtimer(CALLBACK(src, .proc/detonate, user), 30) // 3 senconds
 
 /obj/item/cell/guncell/overcharged
-	name = "Hypercharged battery"
+	name = "hypercharged battery"
 	overcharged = TRUE
 	emp_vulnerable = TRUE
 
 /obj/item/cell/guncell/pistol
-	name = "Pistol battery"
+	name = "pistol battery"
 	battery_chamber_size = BATTERY_PISTOL
 
 /obj/item/cell/guncell/pistol/overcharged
-	name = "Hypercharged pistol battery"
+	name = "hypercharged pistol battery"
 	overcharged = TRUE
 	emp_vulnerable = TRUE
 
@@ -79,7 +80,7 @@
 ================================================= */
 
 /obj/item/cell/guncell/ascent
-	name = "Ascent power core"
+	name = "ascent power core"
 	desc = "A very special battery for a very comlex ascent weaponary. This one is stabilized."
 	charge = 400 // base 20 shots
 	maxcharge = 400
@@ -88,7 +89,7 @@
 	icon_state = "a_0"
 
 /obj/item/cell/guncell/ascent/overcharged
-	name = "Hypercharged ascent power core"
+	name = "hypercharged ascent power core"
 	desc = "A very special battery for a very comlex ascent weaponary. This one can be rapidly discharged for a violent explosion. Not EMP proof."
 	charge = 800 // base 40 shots
 	maxcharge = 800
@@ -100,7 +101,7 @@
 ================================================= */
 
 /obj/item/cell/guncell/vox
-	name = "Vox power core"
+	name = "vox power core"
 	desc = "A very special battery for a very comlex vox weaponary. This one is stabilized."
 	charge = 400 // base 20 shots
 	maxcharge = 400
@@ -109,7 +110,7 @@
 	icon_state = "v_0"
 
 /obj/item/cell/guncell/vox/overcharged
-	name = "Hypercharged vox power core"
+	name = "hypercharged vox power core"
 	desc = "A very special battery for a very comlex vox weaponary. This one can be rapidly discharged for a violent explosion. Not EMP proof."
 	charge = 600 // base 30 shots
 	maxcharge = 600
@@ -117,39 +118,51 @@
 	emp_vulnerable = TRUE
 
 /* =================================================
+			Experimental Infinity Power Core
+================================================= */
+/obj/item/cell/guncell/powercore
+	name = "experimental power core"
+	desc = "Magnificent and wonderful near infinite power source that can be inserted in any type of weaponry. Will self-recharge itself over time but sadly isn't EMP proof."
+	charge = 800
+	universal = TRUE
+	autorecharging = TRUE
+	emp_vulnerable = TRUE
+	icon_state = "bs_0"
+
+/* =================================================
 				Rifle  battaries
 ================================================= */
 
 /obj/item/cell/guncell/verysmall
-	name = "Very-Small weapon battery"
+	name = "very-small weapon battery"
 	desc = "A small battery for energy guns."
 	charge = 100 // base 5 shots
 	maxcharge = 100
 	icon_state = "b_0"
 
 /obj/item/cell/guncell/small
-	name = "Small weapon battery"
+	name = "small weapon battery"
 	desc = "A small battery for energy guns."
 	charge = 200 // base 10 shots
 	maxcharge = 200
 	icon_state = "b_1"
 
 /obj/item/cell/guncell/medium
-	name = "Medium weapon battery"
+	name = "medium weapon battery"
 	desc = "A medium battery for energy guns."
 	charge = 300 // base 15 shots
 	maxcharge = 300
 	icon_state = "b_2"
 
 /obj/item/cell/guncell/large
-	name = "Large weapon battery"
+	name = "large weapon battery"
 	desc = "A large battery for energy gun."
 	charge = 400 // base 20 shots
 	maxcharge = 400
 	icon_state = "b_3"
 
 /obj/item/cell/guncell/megalarge
-	name = "Very-Large weapon battery"
+	name = "very-large weapon battery"
 	desc = "A very large battery for energy guns. Do not expose to EMP."
 	charge = 500 // base 25 shots
 	maxcharge = 500
@@ -157,7 +170,7 @@
 	emp_vulnerable = TRUE
 
 /obj/item/cell/guncell/huge
-	name = "Huge weapon battery"
+	name = "huge weapon battery"
 	desc = "A very large battery for energy guns. Do not expose to EMP."
 	charge = 600 // base 25 shots
 	maxcharge = 600
@@ -169,28 +182,28 @@
 ================================================= */
 
 /obj/item/cell/guncell/overcharged/verysmall
-	name = "Hypercharged Very-Small weapon battery"
+	name = "hypercharged very-small weapon battery"
 	desc = "A small battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
 	charge = 200 // base 10 shots
 	maxcharge = 200
 	icon_state = "b_0"
 
 /obj/item/cell/guncell/overcharged/small
-	name = "Hypercharged Small weapon battery"
+	name = "hypercharged small weapon battery"
 	desc = "A small battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
 	charge = 300 // base 15 shots
 	maxcharge = 300
 	icon_state = "b_1"
 
 /obj/item/cell/guncell/overcharged/medium
-	name = "Hypercharged Medium weapon battery"
+	name = "hypercharged medium weapon battery"
 	desc = "A medium battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
 	charge = 400 // base 20 shots
 	maxcharge = 400
 	icon_state = "b_2"
 
 /obj/item/cell/guncell/overcharged/large
-	name = "Hypercharged Large weapon battery"
+	name = "hypercharged large weapon battery"
 	desc = "A large battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
 	charge = 500 // base 25 shots
 	maxcharge = 500
@@ -198,7 +211,7 @@
 	emp_vulnerable = TRUE
 
 /obj/item/cell/guncell/overcharged/megalarge
-	name = "Hypercharged Very-Large weapon battery"
+	name = "hypercharged very-large weapon battery"
 	desc = "A very large battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
 	charge = 700 // base 35 shots
 	maxcharge = 700
@@ -206,7 +219,7 @@
 	emp_vulnerable = TRUE
 
 /obj/item/cell/guncell/overcharged/huge
-	name = "Hypercharged Huge weapon battery"
+	name = "hypercharged huge weapon battery"
 	desc = "A huge battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
 	charge = 800 // base 40 shots
 	maxcharge = 800
@@ -218,35 +231,35 @@
 ================================================= */
 
 /obj/item/cell/guncell/pistol/verysmall
-	name = "Very-Small pistol weapon battery"
+	name = "very-small pistol weapon battery"
 	desc = "A small battery for energy guns."
 	charge = 100 // base 5 shots
 	maxcharge = 100
 	icon_state = "p_0"
 
 /obj/item/cell/guncell/pistol/small
-	name = "Small pistol weapon battery"
+	name = "small pistol weapon battery"
 	desc = "A small battery for energy guns."
 	charge = 200 // base 10 shots
 	maxcharge = 200
 	icon_state = "p_1"
 
 /obj/item/cell/guncell/pistol/medium
-	name = "Medium pistol weapon battery"
+	name = "medium pistol weapon battery"
 	desc = "A medium battery for energy guns."
 	charge = 300 // base 15 shots
 	maxcharge = 300
 	icon_state = "p_2"
 
 /obj/item/cell/guncell/pistol/large
-	name = "Large pistol weapon battery"
+	name = "large pistol weapon battery"
 	desc = "A large battery for energy guns."
 	charge = 400 // base 20 shots
 	maxcharge = 400
 	icon_state = "p_3"
 
 /obj/item/cell/guncell/pistol/megalarge
-	name = "Very-Large pistol weapon battery"
+	name = "very-large pistol weapon battery"
 	desc = "A very large battery for energy guns. Do not expose to EMP"
 	charge = 500 // base 25 shots
 	maxcharge = 500
@@ -254,7 +267,7 @@
 	emp_vulnerable = TRUE
 
 /obj/item/cell/guncell/pistol/huge
-	name = "Huge pistol weapon battery"
+	name = "huge pistol weapon battery"
 	desc = "A huge battery for energy guns. Do not expose to EMP."
 	charge = 600 // base 30 shots
 	maxcharge = 600
@@ -266,28 +279,28 @@
 ================================================= */
 
 /obj/item/cell/guncell/pistol/overcharged/verysmall
-	name = "Hypercharged Very-Small weapon battery"
+	name = "hypercharged very-small weapon battery"
 	desc = "A small battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
 	charge = 200 // base 10 shots
 	maxcharge = 200
 	icon_state = "p_0"
 
 /obj/item/cell/guncell/pistol/overcharged/small
-	name = "Hypercharged Small weapon battery"
+	name = "hypercharged small weapon battery"
 	desc = "A small battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
 	charge = 300 // base 15 shots
 	maxcharge = 300
 	icon_state = "p_1"
 
 /obj/item/cell/guncell/pistol/overcharged/medium
-	name = "Hypercharged Medium weapon battery"
+	name = "hypercharged medium weapon battery"
 	desc = "A medium battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
 	charge = 400 // base 20 shots
 	maxcharge = 400
 	icon_state = "p_2"
 
 /obj/item/cell/guncell/pistol/overcharged/large
-	name = "Hypercharged Large weapon battery"
+	name = "hypercharged large weapon battery"
 	desc = "A large battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
 	charge = 500 // base 25 shots
 	maxcharge = 500
@@ -295,7 +308,7 @@
 	emp_vulnerable = TRUE
 
 /obj/item/cell/guncell/pistol/overcharged/megalarge
-	name = "Hypercharged Very-Large weapon battery"
+	name = "hypercharged very-large weapon battery"
 	desc = "A very large battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP"
 	charge = 700 // base 35 shots
 	maxcharge = 700
@@ -303,7 +316,7 @@
 	emp_vulnerable = TRUE
 
 /obj/item/cell/guncell/pistol/overcharged/huge
-	name = "Hypercharged Huge weapon battery"
+	name = "hypercharged huge weapon battery"
 	desc = "A huge battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP"
 	charge = 800 // base 40 shots
 	maxcharge = 800
@@ -454,6 +467,25 @@
 			new_overlay_state = "vo_35+"
 		if(0.05 to 34)
 			new_overlay_state = "vo_0+"
+	if(discharging==TRUE)
+		new_overlay_state = "overloaded_a"
+
+	if(new_overlay_state != overlay_state)
+		overlay_state = new_overlay_state
+		overlays.Cut()
+		if(overlay_state)
+			overlays += image(icon, overlay_state)
+
+/obj/item/cell/guncell/powercore/on_update_icon()
+
+	var/new_overlay_state = null
+	switch(percent())
+		if(70 to 100)
+			new_overlay_state = "a_70+"
+		if(35 to 69)
+			new_overlay_state = "a_35+"
+		if(0.05 to 34)
+			new_overlay_state = "a_0+"
 	if(discharging==TRUE)
 		new_overlay_state = "overloaded_a"
 
