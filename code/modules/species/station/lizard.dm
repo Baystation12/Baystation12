@@ -159,6 +159,10 @@
 		/singleton/trait/malus/sugar = TRAIT_LEVEL_MAJOR
 	)
 
+	footwear_trail_overrides = list(
+		/obj/item/clothing = /obj/effect/decal/cleanable/blood/tracks/claw // Needs to apply to both shoes and space suits.
+	)
+
 /datum/species/unathi/equip_survival_gear(mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
