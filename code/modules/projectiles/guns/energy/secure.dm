@@ -6,6 +6,11 @@
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns_secure.dmi',
 		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
 		)
+	charge_cost = 30
+	battery_changable = TRUE
+	battery_type = /obj/item/cell/guncell/pistol/verysmall
+	battery_chamber_size = BATTERY_PISTOL
+	max_shots = 5
 	req_access = list(list(access_brig, access_bridge))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
@@ -19,6 +24,9 @@
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns_secure.dmi',
 		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
 		)
+	battery_changable = TRUE
+	battery_type = /obj/item/cell/guncell/pistol/small
+	battery_chamber_size = BATTERY_PISTOL
 	item_state = null
 	req_access = list(list(access_brig, access_bridge))
 
@@ -31,6 +39,10 @@
 		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
 		)
 	item_state = null	//so the human update icon uses the icon_state instead.
+	max_shots = 10
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_PISTOL
+	power_supply = /obj/item/cell/guncell/pistol/small
 	req_access = list(list(access_brig, access_bridge))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
@@ -55,6 +67,9 @@
 		)
 	req_access = list(list(access_brig, access_heads))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_PISTOL
+	battery_type = /obj/item/cell/guncell/pistol/small
 
 /obj/item/gun/energy/gun/secure/mounted
 	name = "robot energy gun"

@@ -13,6 +13,9 @@
 	charge_cost = 60
 	max_shots = 5
 	fire_delay = 60
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_RIFLE
+	battery_type = /obj/item/cell/guncell/medium
 	projectile_type = /obj/item/projectile/ion
 	wielded_item_state = "ionrifle-wielded"
 	combustion = 0
@@ -28,7 +31,11 @@
 	force = 5
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	one_hand_penalty = 0
-	charge_cost = 40
+	charge_cost = 80
+	battery_changable = TRUE
+	battery_chamber_size = 2
+	battery_chamber_size = BATTERY_PISTOL
+	battery_type = /obj/item/cell/guncell/pistol/medium
 	max_shots = 3
 	projectile_type = /obj/item/projectile/ion/small
 
@@ -40,6 +47,9 @@
 	item_state = "decloner"
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_POWER = 3)
 	max_shots = 10
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_PISTOL
+	battery_type = /obj/item/cell/guncell/pistol/small
 	projectile_type = /obj/item/projectile/energy/declone
 	combustion = 0
 
@@ -128,6 +138,9 @@
 	desc = "A custom-built weapon of some kind."
 	icon = 'icons/obj/guns/xray.dmi'
 	icon_state = "xray"
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_PISTOL
+	battery_type = /obj/item/cell/guncell/pistol/small
 	origin_tech = list(TECH_COMBAT = 5, TECH_MAGNET = 4)
 	projectile_type = /obj/item/projectile/beam/mindflayer
 
@@ -136,6 +149,9 @@
 	desc = "A specialized firearm designed to fire lethal bolts of phoron."
 	icon = 'icons/obj/guns/toxgun.dmi'
 	icon_state = "toxgun"
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_PISTOL
+	battery_type = /obj/item/cell/guncell/pistol/small
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 5, TECH_PHORON = 4)
 	projectile_type = /obj/item/projectile/energy/phoron
@@ -191,6 +207,8 @@
 	icon = 'icons/obj/guns/incendiary_laser.dmi'
 	icon_state = "incen"
 	item_state = "incen"
+	battery_chamber_size = BATTERY_PISTOL
+	battery_type = /obj/item/cell/guncell/pistol/medium
 	origin_tech = list(TECH_COMBAT = 7, TECH_MAGNET = 4, TECH_ESOTERIC = 4)
 	matter = list(MATERIAL_ALUMINIUM = 1000, MATERIAL_PLASTIC = 500, MATERIAL_DIAMOND = 500)
 	projectile_type = /obj/item/projectile/beam/incendiary_laser

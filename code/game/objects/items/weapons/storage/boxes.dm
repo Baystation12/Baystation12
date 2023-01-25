@@ -244,6 +244,13 @@
 	icon_state = "radbox"
 	startswith = list(/obj/item/grenade/supermatter = 5)
 
+/obj/item/storage/box/hypercharged_guncells
+	name = "box of hypercharged cells"
+	desc = "A box containing 6 higly unstable hypercharged guncells. Both ammunition and a improvised grenade."
+	icon_state = "flashbang"
+	startswith = list(	/obj/item/cell/guncell/overcharged/large = 3,
+						/obj/item/cell/guncell/pistol/overcharged/large = 3)
+
 /obj/item/storage/box/trackimp
 	name = "boxed tracking implant kit"
 	desc = "Box full of scum-bag tracking utensils."

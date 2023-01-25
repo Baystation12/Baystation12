@@ -1,60 +1,3 @@
-/obj/item/cell/guncell
-	w_class = ITEM_SIZE_SMALL
-	name = "Small battery"
-	icon = 'proxima/icons/obj/guns/guncells.dmi'
-
-/obj/item/cell/guncell/on_update_icon()
-
-	var/new_overlay_state = null
-	switch(percent())
-		if(70 to 100)
-			new_overlay_state = "b_70+"
-		if(35 to 69)
-			new_overlay_state = "b_35+"
-		if(0.05 to 34)
-			new_overlay_state = "b_0+"
-
-	if(new_overlay_state != overlay_state)
-		overlay_state = new_overlay_state
-		overlays.Cut()
-		if(overlay_state)
-			overlays += image(icon, overlay_state)
-
-/obj/item/cell/guncell/small
-	name = "Small weapon battery"
-	desc = "A small battery for energy guns. Rated for 200Wh."
-	charge = 200 // base 10 shots
-	maxcharge = 200
-	icon_state = "b_1"
-
-/obj/item/cell/guncell/medium
-	name = "Medium weapon battery"
-	desc = "A medium battery for energy guns. Rated for 300Wh."
-	charge = 300 // base 15 shots
-	maxcharge = 300
-	icon_state = "b_2"
-
-/obj/item/cell/guncell/large
-	name = "Large weapon battery"
-	desc = "A large battery for energy guns. Rated for 400Wh."
-	charge = 400 // base 20 shots
-	maxcharge = 400
-	icon_state = "b_3"
-
-/obj/item/cell/guncell/megalarge
-	name = "Very-Large weapon battery"
-	desc = "A very large battery for energy guns. Rated for 500Wh."
-	charge = 500 // base 25 shots
-	maxcharge = 500
-	icon_state = "b_4"
-
-/obj/item/cell/guncell/huge
-	name = "Huge weapon battery"
-	desc = "A huge battery for energy guns. Rated for 600Wh."
-	charge = 600 // base 30 shots
-	maxcharge = 600
-	icon_state = "b_5"
-
 /obj/item/gun/energy
 	name = "energy gun"
 	desc = "A basic energy-based gun."
@@ -66,13 +9,14 @@
 	accuracy_power = 6
 
 	var/obj/item/cell/guncell/power_supply //What type of power cell this uses
-	var/charge_cost = 20 //How much energy is needed to fire.
+	var/charge_cost = 25 //How much energy is needed to fire.
 	var/max_shots = 10 //Determines the capacity of the weapon's power cell. Specifying a cell_type overrides this value.
 	var/cell_type = null
 	var/projectile_type = /obj/item/projectile/beam/practice
 	var/modifystate
+	var/battery_chamber_size = BATTERY_PISTOL
 	var/battery_changable = FALSE
-	var/battery_type = /obj/item/cell/guncell
+	var/battery_type = /obj/item/cell/guncell/pistol/small
 	var/charge_meter = 1	//if set, the icon state will be chosen based on the current charge
 
 	//self-recharging
@@ -91,7 +35,11 @@
 	update_icon()
 
 /obj/item/gun/energy/attackby(obj/item/W, mob/living/user)
-	if(istype(W, battery_type))
+	if(istype(W, /obj/item/cell/guncell/))
+		var/obj/item/cell/guncell/B = W
+		if((B.battery_chamber_size != src.battery_chamber_size) && (B.universal == FALSE))
+			to_chat(usr, SPAN_WARNING("This battery don't fit for this weapon!"))
+			return
 		if(power_supply)
 			to_chat(usr, SPAN_WARNING("[src] is already loaded."))
 			return
@@ -115,7 +63,7 @@
 	if(cell_type)
 		power_supply = new cell_type(src)
 	else
-		power_supply = new /obj/item/cell/guncell/medium(src)
+		power_supply = new battery_type(src)
 	if(self_recharge)
 		START_PROCESSING(SSobj, src)
 	update_icon()

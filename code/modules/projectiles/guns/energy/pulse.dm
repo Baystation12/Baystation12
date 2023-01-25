@@ -8,6 +8,10 @@
 	force = 12
 	projectile_type = /obj/item/projectile/beam/pulse/heavy
 	max_shots = 36
+	charge_cost = 10
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_RIFLE
+	battery_type = /obj/item/cell/guncell/large
 	w_class = ITEM_SIZE_HUGE
 	one_hand_penalty= 6
 	multi_aim = 1
@@ -27,6 +31,11 @@
 	force = 8
 	projectile_type = /obj/item/projectile/beam/pulse/mid
 	max_shots = 24
+	charge_cost = 14
+	battery_changable = TRUE
+	battery_chamber_size = 5
+	battery_chamber_size = BATTERY_RIFLE
+	battery_type = /obj/item/cell/guncell/large
 	w_class = ITEM_SIZE_LARGE
 	one_hand_penalty= 3
 	burst_delay = 2
@@ -43,6 +52,10 @@
 	force = 6
 	projectile_type = /obj/item/projectile/beam/pulse
 	max_shots = 21
+	charge_cost = 18
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_PISTOL
+	battery_type = /obj/item/cell/guncell/pistol/large
 	w_class = ITEM_SIZE_NORMAL
 	one_hand_penalty=1 //a bit heavy
 	burst_delay = 1
@@ -59,10 +72,10 @@
 /obj/item/gun/energy/pulse_rifle/destroyer
 	name = "pulse destroyer"
 	desc = "A heavy-duty, pulse-based energy weapon. Because of its complexity and cost, it is rarely seen in use except by specialists."
-	cell_type = /obj/item/cell/super
+	battery_type = /obj/item/cell/guncell/large
 	fire_delay = 25
 	projectile_type=/obj/item/projectile/beam/pulse/destroy
-	charge_cost= 40
+	charge_cost= 16
 
 /obj/item/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
 	to_chat(user, "<span class='warning'>[src.name] has three settings, and they are all DESTROY.</span>")

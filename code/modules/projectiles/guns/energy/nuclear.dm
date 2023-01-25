@@ -4,9 +4,9 @@
 	icon = 'icons/obj/guns/energy_gun.dmi'
 	icon_state = "energystun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
-	max_shots = 10
+	max_shots = 40
+	charge_cost = 25
 	fire_delay = 10 // To balance for the fact that it is a pistol and can be used one-handed without penalty
-
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	modifystate = "energystun"
@@ -43,11 +43,16 @@
 	name = "small energy gun"
 	desc = "A smaller model of the versatile LAEP90 Perun, the LAEP90-C packs considerable utility in a smaller package. Best used in situations where full-sized sidearms are inappropriate."
 	icon = 'icons/obj/guns/small_egun.dmi'
+	battery_changable = TRUE
 	icon_state = "smallgunstun"
+	charge_cost = 60
 	max_shots = 6
 	w_class = ITEM_SIZE_SMALL
 	force = 2 //it's the size of a car key, what did you expect?
 	modifystate = "smallgunstun"
+	battery_changable = TRUE
+	power_supply = /obj/item/cell/guncell/verysmall
+	battery_chamber_size = 1
 
 	init_firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="smallgunstun"),

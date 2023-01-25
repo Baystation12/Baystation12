@@ -7,6 +7,10 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
 	force = 10
+	charge_cost = 20
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_RIFLE
+	battery_type = /obj/item/cell/guncell/medium
 	one_hand_penalty = 2
 	bulk = GUN_BULK_RIFLE
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
@@ -26,6 +30,9 @@
 	icon_state = "laserp"
 	projectile_type = /obj/item/projectile/beam/practice
 	charge_cost = 10 //How much energy is needed to fire.
+	battery_changable = TRUE
+	battery_chamber_size = 4
+	battery_type = /obj/item/cell/guncell/verysmall
 
 /obj/item/gun/energy/laser/practice/proc/hacked()
 	return projectile_type != /obj/item/projectile/beam/practice
@@ -59,6 +66,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
 	fire_delay = 15 //old technology, and a pistol
+	battery_changable = FALSE //No recharge, cuz a shitty laser
 
 /obj/item/gun/energy/captain
 	name = "antique laser gun"
@@ -90,6 +98,9 @@
 	max_shots = 6
 	accuracy = 2
 	fire_delay = 20
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_RIFLE
+	battery_type = /obj/item/cell/guncell/large
 	wielded_item_state = "gun_wielded"
 
 /obj/item/gun/energy/lasercannon/mounted
@@ -112,7 +123,10 @@
 	projectile_type = /obj/item/projectile/beam/xray/midlaser
 	one_hand_penalty = 2
 	w_class = ITEM_SIZE_LARGE
-	charge_cost = 15
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_RIFLE
+	battery_type = /obj/item/cell/guncell/medium
+	charge_cost = 25
 	max_shots = 10
 	wielded_item_state = "gun_wielded"
 	combustion = 0
@@ -126,6 +140,10 @@
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ESOTERIC = 2)
 	projectile_type = /obj/item/projectile/beam/xray
 	one_hand_penalty = 1
+	charge_cost = 25
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_PISTOL
+	battery_type = /obj/item/cell/guncell/pistol/small
 	w_class = ITEM_SIZE_NORMAL
 	fire_delay = 10
 
@@ -140,7 +158,9 @@
 	one_hand_penalty = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	slot_flags = SLOT_BACK
 	charge_cost = 40
-	max_shots = 8
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_RIFLE
+	battery_type = /obj/item/cell/guncell/medium
 	fire_delay = 35
 	force = 10
 	w_class = ITEM_SIZE_HUGE
@@ -163,6 +183,7 @@
 	desc = "Standard issue weapon of the Imperial Guard."
 	origin_tech = list(TECH_COMBAT = 1, TECH_MAGNET = 2)
 	self_recharge = 1
+	battery_changable = FALSE
 	matter = list(MATERIAL_STEEL = 2000)
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest

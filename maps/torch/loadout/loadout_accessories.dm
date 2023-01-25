@@ -66,7 +66,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(solribbons)
 
 /datum/gear/accessory/tags
-	display_name = "dog tags"
+	display_name = "SCG dog tags"
 	path = /obj/item/clothing/accessory/badge/solgov/tags
 	custom_setup_proc = /obj/item/clothing/accessory/badge/solgov/tags/proc/loadout_setup
 

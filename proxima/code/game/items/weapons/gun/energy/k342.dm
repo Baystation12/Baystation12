@@ -121,6 +121,8 @@
 	req_access = list(list(access_brig, access_bridge))
 	authorized_modes = list(ALWAYS_AUTHORIZED)
 	screen_shake = 0
+	battery_chamber_size = BATTERY_RIFLE
+	battery_type = /obj/item/cell/guncell/medium
 	recoil_buildup = 0
 	init_firemodes = list(
 		list(mode_name="stun charge", projectile_type=/obj/item/projectile/plasma/stun, charge_cost=20, fire_delay=4, projectile_color=COLOR_YELLOW),
@@ -172,12 +174,32 @@
 	build_path = /obj/item/gun/energy/k342
 	sort_string = "TAEAA"
 
+/datum/design/item/weapon/k342/sniper
+	id = "k342_sniper"
+	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 7)
+	materials = list(MATERIAL_SILVER = 7000, MATERIAL_GLASS = 4000, MATERIAL_STEEL = 20000, MATERIAL_URANIUM = 4000, MATERIAL_DIAMOND = 1000)
+	build_path = /obj/item/gun/energy/k342/sniper
+	sort_string = "TAEAB"
+
 /datum/design/item/weapon/ammunition/smallgunbattery
 	id = "smallgun_battery"
 	desc = "A small battery for energy guns. Rated for 200Wh"
 	materials = list(MATERIAL_STEEL = 1000, MATERIAL_GLASS = 1500)
 	req_tech = list(TECH_POWER = 2, TECH_MATERIAL = 2, TECH_COMBAT = 1)
 	build_path = /obj/item/cell/guncell/small
+
+/datum/design/item/weapon/ammunition/smallgunbattery/hypercharged
+	id = "smallgun_battery_hypercharged"
+	req_tech = list(TECH_POWER = 2, TECH_MATERIAL = 2, TECH_COMBAT = 7)
+	build_path = /obj/item/cell/guncell/overcharged/small
+
+/datum/design/item/weapon/ammunition/smallgunbattery/pistol
+	id = "smallgun_battery_pistol"
+	build_path = /obj/item/cell/guncell/pistol/small
+
+/datum/design/item/weapon/ammunition/smallgunbattery/pistol/hypercharged
+	id = "smallgun_battery_pistol_hypercharged"
+	build_path = /obj/item/cell/guncell/pistol/overcharged/small
 
 /datum/design/item/weapon/ammunition/mediumgunbattery
 	id = "mediumgun_battery"
@@ -186,12 +208,40 @@
 	req_tech = list(TECH_POWER = 3, TECH_MATERIAL = 2, TECH_COMBAT = 2)
 	build_path = /obj/item/cell/guncell/medium
 
+/datum/design/item/weapon/ammunition/mediumgunbattery/pistol
+	id = "mediumgun_battery_pistol"
+	build_path = /obj/item/cell/guncell/pistol/medium
+
+/datum/design/item/weapon/ammunition/mediumgunbattery/pistol/hypercharged
+	id = "mediumgun_battery_pistol_hypercharged"
+	req_tech = list(TECH_POWER = 3, TECH_MATERIAL = 2, TECH_COMBAT = 7)
+	build_path = /obj/item/cell/guncell/pistol/overcharged/medium
+
+/datum/design/item/weapon/ammunition/mediumgunbattery/hypercharged
+	id = "mediumgun_battery_hypercharged"
+	req_tech = list(TECH_POWER = 3, TECH_MATERIAL = 2, TECH_COMBAT = 7)
+	build_path = /obj/item/cell/guncell/overcharged/medium
+
 /datum/design/item/weapon/ammunition/largegunbattery
 	id = "largegun_battery"
 	desc = "A large battery for energy guns. Rated for 400Wh"
 	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 4000, MATERIAL_SILVER = 1500)
 	req_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4, TECH_COMBAT = 3)
 	build_path = /obj/item/cell/guncell/large
+
+/datum/design/item/weapon/ammunition/largegunbattery/pistol
+	id = "largegun_battery_pistol"
+	build_path = /obj/item/cell/guncell/pistol/large
+
+/datum/design/item/weapon/ammunition/largegunbattery/pistol/hypercharged
+	id = "largegun_battery_pistol_hypercharged"
+	req_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4, TECH_COMBAT = 7)
+	build_path = /obj/item/cell/guncell/pistol/overcharged/large
+
+/datum/design/item/weapon/ammunition/largegunbattery/hypercharged
+	id = "largegun_battery_hypercharged"
+	req_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4, TECH_COMBAT = 7)
+	build_path = /obj/item/cell/guncell/overcharged/large
 
 /datum/design/item/weapon/ammunition/megalargegunbattery
 	id = "megalarge_battery"
@@ -200,9 +250,44 @@
 	req_tech = list(TECH_POWER = 5, TECH_MATERIAL = 5, TECH_COMBAT = 4)
 	build_path = /obj/item/cell/guncell/megalarge
 
+/datum/design/item/weapon/ammunition/megalargegunbattery/pistol
+	id = "megalarge_battery_pistol"
+	build_path = /obj/item/cell/guncell/pistol/megalarge
+
+/datum/design/item/weapon/ammunition/megalargegunbattery/pistol/hypercharged
+	id = "megalarge_battery_pistol_hypercharged"
+	req_tech = list(TECH_POWER = 5, TECH_MATERIAL = 5, TECH_COMBAT = 7)
+	build_path = /obj/item/cell/guncell/pistol/overcharged/megalarge
+
+/datum/design/item/weapon/ammunition/megalargegunbattery/hypercharged
+	id = "megalarge_battery_hypercharged"
+	req_tech = list(TECH_POWER = 5, TECH_MATERIAL = 5, TECH_COMBAT = 7)
+	build_path = /obj/item/cell/guncell/overcharged/megalarge
+
 /datum/design/item/weapon/ammunition/hugebattery
 	id = "huge_battery"
 	desc = "A huge battery for energy guns. Rated for 600Wh"
 	materials = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 15000, MATERIAL_SILVER = 3000 , MATERIAL_URANIUM = 2500, MATERIAL_GOLD = 2500)
 	req_tech = list(TECH_POWER = 6, TECH_MATERIAL = 6, TECH_COMBAT = 5)
 	build_path = /obj/item/cell/guncell/huge
+
+/datum/design/item/weapon/ammunition/hugebattery/pistol
+	id = "huge_battery_pistol"
+	build_path = /obj/item/cell/guncell/pistol/huge
+
+/datum/design/item/weapon/ammunition/hugebattery/pistol/hypercharged
+	id = "huge_battery_pistol_hypercharged"
+	req_tech = list(TECH_POWER = 6, TECH_MATERIAL = 6, TECH_COMBAT = 7)
+	build_path = /obj/item/cell/guncell/pistol/overcharged/huge
+
+/datum/design/item/weapon/ammunition/hugebattery/hypercharged
+	id = "huge_battery_hypercharged"
+	req_tech = list(TECH_POWER = 6, TECH_MATERIAL = 6, TECH_COMBAT = 7)
+	build_path = /obj/item/cell/guncell/overcharged/huge
+
+/datum/design/item/weapon/ammunition/powercore
+	id = "battery_powercore"
+	desc = "universal battery for energy guns with self recharge function."
+	materials = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 15000, MATERIAL_SILVER = 3000 , MATERIAL_URANIUM = 4000, MATERIAL_GOLD = 2000, MATERIAL_DIAMOND = 500)
+	req_tech = list(TECH_POWER = 7, TECH_MATERIAL = 6, TECH_COMBAT = 5)
+	build_path = /obj/item/cell/guncell/powercore

@@ -1578,7 +1578,6 @@
 /area/map_template/rescue_base/base)
 "iS" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/storage/box/sinpockets,
 /obj/structure/closet/secure_closet/freezer/kitchen,
 /obj/item/reagent_containers/food/condiment/enzyme,
 /turf/unsimulated/floor{
@@ -1745,6 +1744,7 @@
 /obj/item/clothing/suit/armor/pcarrier/medium/command,
 /obj/item/clothing/head/helmet/solgov/command,
 /obj/item/gun/energy/gun,
+/obj/item/cell/guncell/pistol/large,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -1821,9 +1821,12 @@
 /area/map_template/rescue_base/start)
 "lx" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/automatic/bullpup_rifle,
-/obj/item/gun/projectile/automatic/bullpup_rifle,
 /obj/effect/floor_decal/industrial/outline/red,
+/obj/item/gun/energy/k342/prereg,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "monotiledark"
@@ -2315,6 +2318,17 @@
 	icon_state = "freezerfloor"
 	},
 /area/map_template/rescue_base/base)
+"rz" = (
+/obj/structure/table/rack,
+/obj/item/cell/guncell/pistol/overcharged/huge,
+/obj/item/cell/guncell/pistol/overcharged/huge,
+/obj/item/cell/guncell/pistol/overcharged/huge,
+/obj/item/cell/guncell/pistol/overcharged/huge,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
 "rA" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5
@@ -2418,10 +2432,6 @@
 "ta" = (
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/storage/box/donkpockets{
-	pixel_x = 3;
-	pixel_y = 3
-	},
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "dark"
@@ -2441,6 +2451,20 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
+"tk" = (
+/obj/structure/table/rack,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
 "tu" = (
 /obj/structure/table/standard,
 /obj/item/paper,
@@ -2529,13 +2553,12 @@
 /area/map_template/rescue_base/base)
 "uL" = (
 /obj/structure/table/rack,
-/obj/item/rig/ert/assetprotection,
-/obj/item/rig/ert/assetprotection,
-/obj/item/rig/ert/assetprotection,
-/obj/item/rig/ert/assetprotection,
-/obj/item/rig/ert/assetprotection,
-/obj/item/rig/ert/assetprotection,
 /obj/effect/floor_decal/industrial/outline/red,
+/obj/item/gun/energy/sniperrifle,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "monotiledark"
@@ -2667,13 +2690,14 @@
 /area/map_template/rescue_base/base)
 "wj" = (
 /obj/structure/table/rack,
-/obj/item/rig/ert/medical,
 /obj/structure/window/reinforced/crescent{
 	dir = 1
 	},
 /obj/structure/window/reinforced/crescent{
 	dir = 8
 	},
+/obj/item/rig/ert/fleet,
+/obj/item/clothing/accessory/armband/medblue,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -2761,6 +2785,7 @@
 /obj/item/ammo_magazine/box/machinegun,
 /obj/item/ammo_magazine/box/machinegun,
 /obj/effect/floor_decal/industrial/outline/red,
+/obj/item/gun/projectile/automatic/l6_saw,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "monotiledark"
@@ -2772,8 +2797,6 @@
 	pixel_y = -22
 	},
 /obj/structure/table/rack,
-/obj/item/tank/emergency/oxygen/double,
-/obj/item/tank/emergency/oxygen/double,
 /obj/effect/floor_decal/corner/black/border,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/rescue_base/start)
@@ -2922,10 +2945,11 @@
 /area/map_template/rescue_base/start)
 "yQ" = (
 /obj/structure/table/rack,
-/obj/item/rig/ert/medical,
 /obj/structure/window/reinforced/crescent{
 	dir = 1
 	},
+/obj/item/rig/ert/fleet,
+/obj/item/clothing/accessory/armband/medblue,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -3018,10 +3042,11 @@
 "Ar" = (
 /obj/structure/window/reinforced/crescent,
 /obj/structure/table/rack,
-/obj/item/rig/ert/engineer,
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},
+/obj/item/rig/ert/fleet,
+/obj/item/clothing/accessory/armband/engine,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -3055,6 +3080,20 @@
 /obj/structure/closet/secure_closet/freezer/meat,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"AG" = (
+/obj/structure/table/rack,
+/obj/item/cell/guncell/pistol/large,
+/obj/item/cell/guncell/pistol/large,
+/obj/item/cell/guncell/pistol/large,
+/obj/item/cell/guncell/pistol/large,
+/obj/item/cell/guncell/pistol/large,
+/obj/item/cell/guncell/pistol/large,
+/obj/item/cell/guncell/pistol/large,
+/obj/item/cell/guncell/pistol/large,
+/turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/rescue_base/base)
@@ -3501,10 +3540,11 @@
 /area/map_template/rescue_base/start)
 "EU" = (
 /obj/structure/table/rack,
-/obj/item/rig/ert/security,
 /obj/structure/window/reinforced/crescent{
 	dir = 1
 	},
+/obj/item/rig/ert/fleet,
+/obj/item/clothing/accessory/armband,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -3884,8 +3924,12 @@
 /area/map_template/rescue_base/start)
 "Jk" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/automatic/l6_saw,
 /obj/effect/floor_decal/industrial/outline/red,
+/obj/item/gun/energy/k342/sniper,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
+/obj/item/cell/guncell/large,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "monotiledark"
@@ -4015,10 +4059,11 @@
 "KL" = (
 /obj/structure/window/reinforced/crescent,
 /obj/structure/table/rack,
-/obj/item/rig/ert,
 /obj/structure/window/reinforced/crescent{
 	dir = 8
 	},
+/obj/item/rig/ert/fleet,
+/obj/item/clothing/accessory/armband/bluegold,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -4118,8 +4163,6 @@
 /area/map_template/rescue_base/start)
 "Lz" = (
 /obj/structure/closet,
-/obj/item/storage/box/sinpockets,
-/obj/item/storage/box/sinpockets,
 /obj/effect/floor_decal/corner/lightgrey/border{
 	dir = 10
 	},
@@ -4314,7 +4357,8 @@
 "Nx" = (
 /obj/structure/window/reinforced/crescent,
 /obj/structure/table/rack,
-/obj/item/rig/ert/engineer,
+/obj/item/rig/ert/fleet,
+/obj/item/clothing/accessory/armband/engine,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -4500,13 +4544,14 @@
 /area/map_template/rescue_base/base)
 "QP" = (
 /obj/structure/table/rack,
-/obj/item/rig/ert/security,
 /obj/structure/window/reinforced/crescent{
 	dir = 1
 	},
 /obj/structure/window/reinforced/crescent{
 	dir = 4
 	},
+/obj/item/rig/ert/fleet,
+/obj/item/clothing/accessory/armband,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -4943,6 +4988,8 @@
 /obj/item/ammo_magazine/mil_rifle,
 /obj/item/ammo_magazine/mil_rifle,
 /obj/effect/floor_decal/industrial/outline/red,
+/obj/item/gun/projectile/automatic/bullpup_rifle,
+/obj/item/gun/projectile/automatic/bullpup_rifle,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "monotiledark"
@@ -4960,6 +5007,18 @@
 "VV" = (
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
+"Wc" = (
+/obj/structure/table/rack,
+/obj/item/cell/guncell/overcharged/huge,
+/obj/item/cell/guncell/overcharged/huge,
+/obj/item/cell/guncell/overcharged/huge,
+/obj/item/cell/guncell/overcharged/huge,
+/obj/item/cell/guncell/overcharged/huge,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
 "We" = (
 /obj/structure/handrail{
 	dir = 4
@@ -7573,8 +7632,8 @@ dj
 ad
 ad
 ad
-en
-en
+rz
+Wc
 en
 en
 en
@@ -8485,8 +8544,8 @@ eq
 cU
 iO
 ar
-ar
-ar
+tk
+AG
 ar
 cW
 dk

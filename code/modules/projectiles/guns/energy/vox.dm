@@ -28,7 +28,10 @@
 	w_class = ITEM_SIZE_LARGE
 	projectile_type = /obj/item/projectile/beam/stun/darkmatter
 	one_hand_penalty = 2 //a little bulky
-	self_recharge = 1
+	self_recharge = 0
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_VOX
+	battery_type = /obj/item/cell/guncell/vox/overcharged
 	init_firemodes = list(
 		list(mode_name="stunning", burst=1, fire_delay=null, move_delay=null, projectile_type=/obj/item/projectile/beam/stun/darkmatter, charge_cost = 50),
 		list(mode_name="focused", burst=1, fire_delay=null, move_delay=null, projectile_type=/obj/item/projectile/beam/darkmatter, charge_cost = 75),
@@ -50,7 +53,10 @@
 	item_state = "noise"
 	w_class = ITEM_SIZE_LARGE
 	one_hand_penalty = 1
-	self_recharge = 1
+	self_recharge = 0
+	battery_changable = TRUE
+	battery_chamber_size = BATTERY_VOX
+	battery_type = /obj/item/cell/guncell/vox/overcharged
 	recharge_time = 10
 	fire_delay = 15
 	projectile_type=/obj/item/projectile/energy/plasmastun/sonic/weak

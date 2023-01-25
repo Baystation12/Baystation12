@@ -10,6 +10,11 @@
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
+	var/autorecharging = FALSE //For nucclear cells
+	var/autorecharge_rate = 0.03
+	var/recharge_time = 4 //How often nuclear cells will recharge
+	var/charge_tick = 0
+	var/charge_delay = 10
 	w_class = ITEM_SIZE_NORMAL
 	var/charge			                // Current charge
 	var/maxcharge = 1000 // Capacity in Wh
@@ -236,4 +241,5 @@
 	icon = 'icons/mob/simple_animal/slimes.dmi' //'icons/obj/harvest.dmi'
 	icon_state = "yellow slime extract" //"potato_battery"
 	maxcharge = 200
+	autorecharging = TRUE
 	matter = null
