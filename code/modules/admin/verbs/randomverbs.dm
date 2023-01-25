@@ -222,7 +222,7 @@
 	var/size
 
 	var/result = cmd_admin_narrate_helper(src, style, size)
-	if (!result)
+	if (!result || !M)
 		return
 
 	to_chat(M, result[1])
