@@ -218,6 +218,8 @@
 	return (world.time >= last_upgrade + current_grab.upgrade_cooldown)
 
 /obj/item/grab/proc/leave_forensic_traces()
+	if (!affecting)
+		return
 	var/obj/item/clothing/C = affecting.get_covering_equipped_item_by_zone(target_zone)
 	if(istype(C))
 		C.leave_evidence(assailant)
