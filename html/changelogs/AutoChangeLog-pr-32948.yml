@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Psionic shielding HUD icon now displays and can be toggled once more.
