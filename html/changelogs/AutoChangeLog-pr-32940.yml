@@ -1,8 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Progress bars now appear when creating items from stacks of materials.
-  - bugfix: Stacks with an amount of 0 will no longer appear when crafting stacks
-      from materials when you already have a stack in your other hand or you spam-click.
-  - bugfix: Force-cryoing mobs that are already in cryopods no longer forcemoves them
-      into another cryopod and breaks the original pod.
