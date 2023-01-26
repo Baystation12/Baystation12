@@ -3,17 +3,6 @@
 #define BATTERY_VOX 3
 #define BATTERY_ALIEN 4
 
-/*
-/obj/item/projectile/plasma/shrapnel
-	range_step = 2 //controls damage falloff with distance. projectiles lose a "pellet" each time they travel this distance. Can be a non-integer.
-	base_spread = 0 //causes it to be treated as a shrapnel explosion instead of cone
-	spread_step = 40
-	fire_sound = null
-	no_attack_log = TRUE
-	muzzle_type = null
-	embed = FALSE
-	*/
-
 /obj/item/cell/guncell
 	w_class = ITEM_SIZE_SMALL
 	name = "small battery"
@@ -23,6 +12,7 @@
 	var/discharging = FALSE			//To see if it's going to boom
 	var/universal = FALSE 			//Ignores gun cell size socket
 	var/emp_vulnerable = FALSE
+	var/overlay = "b"
 	var/arm_sound = 'sound/weapons/armbomb.ogg'
 
 	//var/list/fragment_types = list(/obj/item/projectile/plasma/shrapnel = 1)
@@ -65,15 +55,18 @@
 	name = "hypercharged battery"
 	overcharged = TRUE
 	emp_vulnerable = TRUE
+	overlay = "bo"
 
 /obj/item/cell/guncell/pistol
 	name = "pistol battery"
 	battery_chamber_size = BATTERY_PISTOL
+	overlay = "p"
 
 /obj/item/cell/guncell/pistol/overcharged
 	name = "hypercharged pistol battery"
 	overcharged = TRUE
 	emp_vulnerable = TRUE
+	overlay = "po"
 
 /* =================================================
 				Ascent  battaries
@@ -87,6 +80,7 @@
 	autorecharging = TRUE
 	battery_chamber_size = BATTERY_ALIEN
 	icon_state = "a_0"
+	overlay = "a"
 
 /obj/item/cell/guncell/ascent/overcharged
 	name = "hypercharged ascent power core"
@@ -95,6 +89,7 @@
 	maxcharge = 800
 	overcharged = TRUE
 	emp_vulnerable = TRUE
+	overlay = "ao"
 
 /* =================================================
 				Vox  battaries
@@ -108,6 +103,7 @@
 	battery_chamber_size = BATTERY_VOX
 	autorecharging = TRUE
 	icon_state = "v_0"
+	overlay = "v"
 
 /obj/item/cell/guncell/vox/overcharged
 	name = "hypercharged vox power core"
@@ -116,6 +112,7 @@
 	maxcharge = 600
 	overcharged = TRUE
 	emp_vulnerable = TRUE
+	overlay = "vo"
 
 /* =================================================
 			Experimental Infinity Power Core
@@ -128,6 +125,7 @@
 	autorecharging = TRUE
 	emp_vulnerable = TRUE
 	icon_state = "bs_0"
+	overlay = "a"
 
 /* =================================================
 				Rifle  battaries
@@ -323,199 +321,28 @@
 	icon_state = "p_5"
 	emp_vulnerable = TRUE
 
-//pasta time
 /obj/item/cell/guncell/on_update_icon()
-
 	var/new_overlay_state = null
 	switch(percent())
 		if(70 to 100)
-			new_overlay_state = "b_70+"
+			new_overlay_state = "[overlay]_70+"
 		if(35 to 69)
-			new_overlay_state = "b_35+"
+			new_overlay_state = "[overlay]_35+"
 		if(0.05 to 34)
-			new_overlay_state = "b_0+"
+			new_overlay_state = "[overlay]_0+"
+		else
+			new_overlay_state = ""
 	if(discharging==TRUE)
-		new_overlay_state = "overloaded_b"
+		switch(overlay)
+			if("b" || "bo")
+				new_overlay_state = "overloaded_b"
+			if("p" || "po")
+				new_overlay_state = "overloaded_p"
+			if("a" || "ao" || "v" || "vo")
+				new_overlay_state = "overloaded_a"
 
 	if(new_overlay_state != overlay_state)
 		overlay_state = new_overlay_state
 		overlays.Cut()
 		if(overlay_state)
 			overlays += image(icon, overlay_state)
-
-/obj/item/cell/guncell/overcharged/on_update_icon()
-
-	var/new_overlay_state = null
-	switch(percent())
-		if(70 to 100)
-			new_overlay_state = "bo_70+"
-		if(35 to 69)
-			new_overlay_state = "bo_35+"
-		if(0.05 to 34)
-			new_overlay_state = "bo_0+"
-	if(discharging==TRUE)
-		new_overlay_state = "overloaded_b"
-
-	if(new_overlay_state != overlay_state)
-		overlay_state = new_overlay_state
-		overlays.Cut()
-		if(overlay_state)
-			overlays += image(icon, overlay_state)
-
-/obj/item/cell/guncell/pistol/on_update_icon()
-
-	var/new_overlay_state = null
-	switch(percent())
-		if(70 to 100)
-			new_overlay_state = "p_70+"
-		if(35 to 69)
-			new_overlay_state = "p_35+"
-		if(0.05 to 34)
-			new_overlay_state = "p_0+"
-	if(discharging==TRUE)
-		new_overlay_state = "overloaded_p"
-
-	if(new_overlay_state != overlay_state)
-		overlay_state = new_overlay_state
-		overlays.Cut()
-		if(overlay_state)
-			overlays += image(icon, overlay_state)
-
-/obj/item/cell/guncell/pistol/overcharged/on_update_icon()
-
-	var/new_overlay_state = null
-	switch(percent())
-		if(70 to 100)
-			new_overlay_state = "po_70+"
-		if(35 to 69)
-			new_overlay_state = "po_35+"
-		if(0.05 to 34)
-			new_overlay_state = "po_0+"
-	if(discharging==TRUE)
-		new_overlay_state = "overloaded_p"
-
-	if(new_overlay_state != overlay_state)
-		overlay_state = new_overlay_state
-		overlays.Cut()
-		if(overlay_state)
-			overlays += image(icon, overlay_state)
-
-/obj/item/cell/guncell/ascent/on_update_icon()
-
-	var/new_overlay_state = null
-	switch(percent())
-		if(70 to 100)
-			new_overlay_state = "a_70+"
-		if(35 to 69)
-			new_overlay_state = "a_35+"
-		if(0.05 to 34)
-			new_overlay_state = "a_0+"
-	if(discharging==TRUE)
-		new_overlay_state = "overloaded_a"
-
-	if(new_overlay_state != overlay_state)
-		overlay_state = new_overlay_state
-		overlays.Cut()
-		if(overlay_state)
-			overlays += image(icon, overlay_state)
-
-/obj/item/cell/guncell/ascent/overcharged/on_update_icon()
-
-	var/new_overlay_state = null
-	switch(percent())
-		if(70 to 100)
-			new_overlay_state = "ao_70+"
-		if(35 to 69)
-			new_overlay_state = "ao_35+"
-		if(0.05 to 34)
-			new_overlay_state = "ao_0+"
-	if(discharging==TRUE)
-		new_overlay_state = "overloaded_a"
-
-	if(new_overlay_state != overlay_state)
-		overlay_state = new_overlay_state
-		overlays.Cut()
-		if(overlay_state)
-			overlays += image(icon, overlay_state)
-
-/obj/item/cell/guncell/vox/on_update_icon()
-
-	var/new_overlay_state = null
-	switch(percent())
-		if(70 to 100)
-			new_overlay_state = "v_70+"
-		if(35 to 69)
-			new_overlay_state = "v_35+"
-		if(0.05 to 34)
-			new_overlay_state = "v_0+"
-	if(discharging==TRUE)
-		new_overlay_state = "overloaded_a"
-
-	if(new_overlay_state != overlay_state)
-		overlay_state = new_overlay_state
-		overlays.Cut()
-		if(overlay_state)
-			overlays += image(icon, overlay_state)
-
-/obj/item/cell/guncell/vox/overcharged/on_update_icon()
-
-	var/new_overlay_state = null
-	switch(percent())
-		if(70 to 100)
-			new_overlay_state = "vo_70+"
-		if(35 to 69)
-			new_overlay_state = "vo_35+"
-		if(0.05 to 34)
-			new_overlay_state = "vo_0+"
-	if(discharging==TRUE)
-		new_overlay_state = "overloaded_a"
-
-	if(new_overlay_state != overlay_state)
-		overlay_state = new_overlay_state
-		overlays.Cut()
-		if(overlay_state)
-			overlays += image(icon, overlay_state)
-
-/obj/item/cell/guncell/powercore/on_update_icon()
-
-	var/new_overlay_state = null
-	switch(percent())
-		if(70 to 100)
-			new_overlay_state = "a_70+"
-		if(35 to 69)
-			new_overlay_state = "a_35+"
-		if(0.05 to 34)
-			new_overlay_state = "a_0+"
-	if(discharging==TRUE)
-		new_overlay_state = "overloaded_a"
-
-	if(new_overlay_state != overlay_state)
-		overlay_state = new_overlay_state
-		overlays.Cut()
-		if(overlay_state)
-			overlays += image(icon, overlay_state)
-
-/obj/item/cell/Initialize()
-	. = ..()
-	if(autorecharging)
-		START_PROCESSING(SSobj, src)
-	update_icon()
-
-/obj/item/cell/Destroy()
-	if(autorecharging)
-		STOP_PROCESSING(SSobj, src)
-	return ..()
-
-/obj/item/cell/Process()
-	charge_tick--
-	if(charge_tick > 0) return 0
-	charge_tick = recharge_time
-	give(maxcharge * autorecharge_rate)
-
-	// If installed in a gun, update gun icon to reflect new charge level.
-	if(istype(loc, /obj/item/gun/energy))
-		var/obj/item/gun/energy/I = loc
-		I.update_icon()
-
-		update_icon()
-	return 1
