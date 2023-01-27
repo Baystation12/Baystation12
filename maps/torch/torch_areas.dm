@@ -973,8 +973,11 @@
 	icon_state = "toilet"
 	sound_env = SMALL_ENCLOSED
 
-/area/crew_quarters/head/aux
+/area/crew_quarters/head/deck1
 	name = "\improper First Deck Head"
+
+/area/crew_quarters/head/deck4
+	name = "\improper Fourth Deck Head"
 
 /area/crew_quarters/head/sauna
 	name = "\improper Sauna"
@@ -1015,6 +1018,24 @@
 	icon_state = "crew_quarters"
 	req_access = list(access_commissary)
 
+/area/crew_quarters/diplomatic_office
+	name = "\improper Diplomatic Meeting Room"
+	icon_state = "crew_quarters"
+	lighting_tone = AREA_LIGHTING_COOL
+
+/area/crew_quarters/chief_steward
+	name = "\improper Chief Steward's Office"
+	icon_state = "kitchen"
+	req_access = list(access_chief_steward)
+	sound_env = SMALL_ENCLOSED
+	lighting_tone = AREA_LIGHTING_WARM
+
+/area/crew_quarters/service_break_room
+	name = "\improper Service Break Room"
+	icon_state = "fitness"
+	sound_env = SMALL_ENCLOSED
+	lighting_tone = AREA_LIGHTING_WARM
+
 /area/crew_quarters/lounge
 	name = "\improper Lounge"
 	icon_state = "crew_quarters"
@@ -1050,14 +1071,6 @@
 /area/holocontrol
 	name = "\improper Holodeck Control"
 	icon_state = "Holodeck"
-
-/area/hydroponics/storage
-	name = "\improper Hydroponics Storage"
-
-// Tcomms
-/area/tcommsat/storage
-	name = "\improper Telecoms Storage"
-	icon_state = "tcomsatstore"
 
 // Borg Upload
 
