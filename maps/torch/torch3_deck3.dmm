@@ -1898,7 +1898,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/smes/buildable/preset/torch/substation{
-	RCon_tag = "Substation - Third Deck"
+	RCon_tag = "Substation - 3rd Deck"
 	},
 /obj/item/device/radio/intercom{
 	pixel_y = 23
