@@ -97,6 +97,9 @@
 #define Sp_CHARGES	"charges"
 #define Sp_HOLDVAR	"holdervar"
 
+//changeling cost
+#define CHANGELING_STASIS_COST 20
+
 //Voting-related
 #define VOTE_PROCESS_ABORT    1
 #define VOTE_PROCESS_COMPLETE 2
@@ -105,3 +108,14 @@
 #define VOTE_STATUS_PREVOTE   1
 #define VOTE_STATUS_ACTIVE    2
 #define VOTE_STATUS_COMPLETE  3
+
+/*
+Changeling Defines
+*/
+#define CHANGELING_POWER_INHERENT "Inherent"
+#define CHANGELING_POWER_ARMOR "Armor"
+#define CHANGELING_POWER_STINGS "Stings"
+#define CHANGELING_POWER_SHRIEKS "Shrieks"
+#define CHANGELING_POWER_HEALTH "Health"
+#define CHANGELING_POWER_ENHANCEMENTS "Enhancements"
+#define CHANGELING_POWER_WEAPONS "Weapons"

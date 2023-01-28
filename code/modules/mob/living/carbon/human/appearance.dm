@@ -23,11 +23,15 @@
 /mob/living/carbon/human/proc/change_gender(gender)
 	if(src.gender == gender)
 		return
-
 	src.gender = gender
+
 	reset_hair()
+	force_update_limbs()
 	update_body()
 	update_dna()
+	src.sync_organ_dna()
+	if(src.gender == MALE)
+		src.UpdateAppearance()
 	return 1
 
 /mob/living/carbon/human/proc/randomize_gender()

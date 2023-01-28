@@ -158,7 +158,9 @@
 		H.update_eyes()
 
 		H.skin_tone   = 35 - dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) // Value can be negative.
-
+		//Necessary for mirror to set plural properly
+		if(H.gender == PLURAL)
+			H.gender = PLURAL
 		if(H.gender != NEUTER)
 			if (dna.GetUIState(DNA_UI_GENDER))
 				H.gender = FEMALE
