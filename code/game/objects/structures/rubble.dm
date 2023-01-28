@@ -8,6 +8,7 @@
 	density = TRUE
 	anchored = TRUE
 	health_max = 40
+	z_flags = ZMM_IGNORE
 
 	var/list/loot = list(/obj/item/cell,/obj/item/stack/material/iron,/obj/item/stack/material/rods)
 	var/lootleft = 1

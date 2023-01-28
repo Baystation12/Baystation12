@@ -128,7 +128,7 @@
 		input = message
 
 	if(input)
-		message = format_emote(message, src)
+		message = format_emote(src, message)
 	else
 		return
 	message = process_chat_markup(message)
