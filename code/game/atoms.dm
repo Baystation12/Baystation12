@@ -29,6 +29,8 @@
 	var/climb_speed_mult = 1
 	/// Bitflag (Any of `INIT_*`). Flags for special/additional handling of the `Initialize()` chain. See `code\__defines\misc.dm`.
 	var/init_flags = EMPTY_BITFIELD
+	///Our local copy of filter data so we can add/remove it
+	var/list/filter_data
 
 /atom/New(loc, ...)
 	SHOULD_CALL_PARENT(TRUE) // Ensures atoms don't unintentionally skip initialization by not calling parent in New()

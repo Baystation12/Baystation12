@@ -1,4 +1,5 @@
 GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768))
+#define NONE 0
 
 #define CLOSET_HAS_LOCK         FLAG(0)
 #define CLOSET_CAN_BE_WELDED    FLAG(1)
@@ -8,6 +9,11 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define CLOSET_STORAGE_MOBS          FLAG(2)
 #define CLOSET_STORAGE_STRUCTURES    FLAG(3)
 #define CLOSET_STORAGE_ALL           (CLOSET_STORAGE_MISC | CLOSET_STORAGE_ITEMS | CLOSET_STORAGE_MOBS | CLOSET_STORAGE_STRUCTURES)
+
+// datum_flags
+#define DF_VAR_EDITED			(1<<0)
+#define DF_ISPROCESSING			(1<<1)
+#define DF_USE_TAG				(1<<2)
 
 // Flags bitmasks.
 

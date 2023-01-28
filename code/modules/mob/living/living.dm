@@ -911,3 +911,8 @@ default behaviour is:
 /mob/living/proc/jump_layer_shift_end()
 	jumping = FALSE
 	reset_layer()
+
+// Adds overlays for specific modifiers.
+// You'll have to add your own implementation for non-humans currently, just override this proc.
+/mob/living/proc/update_modifier_visuals()
+	return

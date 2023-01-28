@@ -113,6 +113,18 @@ If you have any questions/constructive-comments/bugs-to-report/or have a massivl
 Please contact me on #coderbus IRC. ~Carn x
 */
 
+//Add an entry to overlays, assuming it exists
+/mob/living/carbon/human/proc/apply_layer(cache_index)
+	if((. = overlays_standing[cache_index]))
+		overlays.Add(.)
+
+//Remove an entry from overlays, and from the list
+/mob/living/carbon/human/proc/remove_layer(cache_index)
+	var/I = overlays_standing[cache_index]
+	if(I)
+		overlays.Cut(I)
+		overlays_standing[cache_index] = null
+
 //Human Overlays Indexes/////////
 #define HO_MUTATIONS_LAYER  1
 #define HO_SKIN_LAYER       2
@@ -139,8 +151,9 @@ Please contact me on #coderbus IRC. ~Carn x
 #define HO_HANDCUFF_LAYER   23
 #define HO_L_HAND_LAYER     24
 #define HO_R_HAND_LAYER     25
-#define HO_FIRE_LAYER       26 //If you're on fire
-#define TOTAL_LAYERS        26
+#define HO_EFFECTS_LAYER    26 //Effects drawn by modifiers
+#define HO_FIRE_LAYER       27 //If you're on fire
+#define TOTAL_LAYERS        27
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -842,6 +855,24 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)
 		queue_icon_update()
 
+/mob/living/carbon/human/update_modifier_visuals(var/update_icons=1)
+	if(QDESTROYING(src))
+		return
+
+	remove_layer(HO_EFFECTS_LAYER)
+
+	if(!LAZYLEN(modifiers))
+		return //No modifiers, no effects.
+
+	var/image/effects = new()
+	for(var/datum/modifier/M in modifiers)
+		if(M.mob_overlay_state)
+			var/image/I = image(icon = 'icons/mob/modifier_effects.dmi', icon_state = M.mob_overlay_state)
+			effects.overlays.Add(I)
+
+	overlays_standing[HO_EFFECTS_LAYER] = effects
+
+	apply_layer(HO_EFFECTS_LAYER)
 
 /mob/living/carbon/human/update_fire(update_icons=1)
 	overlays_standing[HO_FIRE_LAYER] = null

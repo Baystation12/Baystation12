@@ -39,6 +39,9 @@
 			)
 
 
+/atom/proc/receive_damage(var/damage)
+	return 0
+
 /*
 	Humans:
 	Adds an exception for gloves, to allow special glove types like the ninja ones.

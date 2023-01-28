@@ -18,7 +18,7 @@ GLOBAL_DATUM_INIT(see_in_dark_set_event, /singleton/observ/see_in_dark_set, new)
 * See In Dark Set Handling *
 ***************************/
 
-/mob/proc/set_see_in_dark(new_see_in_dark)
+/mob/proc/set_see_in_dark(new_see_in_dark, seedarkness)
 	var/old_see_in_dark = sight
 	if(old_see_in_dark != new_see_in_dark)
 		see_in_dark  = new_see_in_dark
