@@ -8,10 +8,11 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 	set category = "Debug"
 	set name = "View Variables"
 
-	if(!check_rights(0))
+	if(!istype(D, /datum))
+		to_chat(usr, SPAN_WARNING("Not a viewable datum."))
 		return
 
-	if(!D)
+	if(!check_rights())
 		return
 
 	var/static/cookieoffset = rand(1, 9999) //to force cookies to reset after the round.
