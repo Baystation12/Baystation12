@@ -1,8 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: EMPs will no longer pulse wiring in broken machinery.
-  - rscadd: Machinery whos wiring is affected by EMPs will now spark and display a
-      visible message indicating something in the wiring panel is damaged.
-  - tweak: Standardized EMP damage now only effects machinery that is turned on and
-      functional.

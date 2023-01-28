@@ -106,6 +106,10 @@ var/global/list/holder_mob_icon_cache = list()
 	overlays |= M.overlays
 	var/mob/living/carbon/human/H = loc
 	last_holder = H
+	if (M.pulledby)
+		if (M.pulledby.pulling == src)
+			M.pulledby.pulling = null
+		M.pulledby = null
 	register_all_movement(H, M)
 
 	update_held_icon()

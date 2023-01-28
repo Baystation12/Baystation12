@@ -179,10 +179,14 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * Returns boolean to indicate whether the attack call was handled or not.
  */
 /atom/proc/attackby(obj/item/W, mob/user, click_params)
+	return FALSE
+
+
+/mob/living/attackby(obj/item/W, mob/user, click_params)
 	// Legacy mob attack code is handled by the weapon
 	if (W.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone()))
 		return TRUE
-	return FALSE
+	return ..()
 
 
 /**

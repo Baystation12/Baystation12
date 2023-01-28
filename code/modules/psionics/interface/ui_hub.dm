@@ -12,8 +12,8 @@
 	. = ..()
 	on_cooldown = image(icon, "cooldown")
 	components = list(
-		new /obj/screen/psi/armour(loc),
-		new /obj/screen/psi/toggle_psi_menu(loc, src)
+		new /obj/screen/psi/armour(owner),
+		new /obj/screen/psi/toggle_psi_menu(owner, src)
 	)
 	START_PROCESSING(SSprocessing, src)
 

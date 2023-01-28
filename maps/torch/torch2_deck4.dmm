@@ -5625,7 +5625,7 @@
 /area/maintenance/substation/fourthdeck)
 "ts" = (
 /obj/machinery/power/smes/buildable/preset/torch/substation{
-	RCon_tag = "Substation - Fourth Deck"
+	RCon_tag = "Substation - 4th Deck"
 	},
 /obj/structure/cable/green,
 /obj/structure/cable/green{
