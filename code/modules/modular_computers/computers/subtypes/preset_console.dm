@@ -49,7 +49,6 @@
 		/datum/computer_file/program/records,
 		/datum/computer_file/program/wordprocessor
 	)
-	autorun_program = /datum/computer_file/program/suit_sensors
 
 /obj/machinery/computer/modular/preset/aislot/research
 	default_software = list(
@@ -95,6 +94,22 @@
 		/datum/computer_file/program/forceauthorization
 	)
 
+/obj/machinery/computer/modular/preset/cardslot/command_eng
+	default_software = list(
+		/datum/computer_file/program/comm,
+		/datum/computer_file/program/camera_monitor,
+		/datum/computer_file/program/email_client,
+		/datum/computer_file/program/records,
+		/datum/computer_file/program/docking,
+		/datum/computer_file/program/wordprocessor,
+		/datum/computer_file/program/power_monitor,
+		/datum/computer_file/program/supermatter_monitor,
+		/datum/computer_file/program/alarm_monitor,
+		/datum/computer_file/program/atmos_control,
+		/datum/computer_file/program/rcon_console,
+		/datum/computer_file/program/shields_monitor
+	)
+
 /obj/machinery/computer/modular/preset/security
 	default_software = list(
 		/datum/computer_file/program/digitalwarrant,
@@ -116,10 +131,12 @@
 /obj/machinery/computer/modular/preset/dock
 	default_software = list(
 		/datum/computer_file/program/reports,
+		/datum/computer_file/program/camera_monitor,
 		/datum/computer_file/program/records,
 		/datum/computer_file/program/email_client,
 		/datum/computer_file/program/supply,
-		/datum/computer_file/program/docking
+		/datum/computer_file/program/docking,
+		/datum/computer_file/program/deck_management
 	)
 
 /obj/machinery/computer/modular/preset/supply_public
