@@ -1,4 +1,0 @@
-author: SingingSpock
-delete-after: true
-changes:
-  - tweak: Deck substations use actual numbers, causing them to show up in order
