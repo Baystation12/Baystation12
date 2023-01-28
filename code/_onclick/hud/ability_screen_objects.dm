@@ -257,9 +257,9 @@
 
 //Changeling Abilities
 /obj/screen/ability/verb_based/changeling
-	icon_state = "ling_spell_base"
-	background_base_state = "ling"
-
+	icon_state = "const_spell_base"
+	background_base_state = "const"
+//use this to force add powers
 /obj/screen/movable/ability_master/proc/add_ling_ability(object_given, verb_given, name_given, ability_icon_given, arguments)
 	if(!object_given)
 		message_admins("ERROR: add_ling_ability() was not given an object in its arguments.")

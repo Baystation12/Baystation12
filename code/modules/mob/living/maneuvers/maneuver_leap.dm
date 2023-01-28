@@ -81,3 +81,19 @@
 		animate(pixel_z = user.default_pixel_z, time = 3, easing = SINE_EASING | EASE_OUT)
 		user.throw_at(get_turf(target), strength, 1, user, FALSE, new Callback(src, /singleton/maneuver/leap/proc/end_leap, user, target))
 		addtimer(new Callback(user, /mob/living/proc/jump_layer_shift_end), 4.5)
+
+/singleton/maneuver/leap/changeling
+	name = "vigorous leap"
+	stamina_cost = 20
+	reflexive_modifier = 0.5
+	cooldown = 5 SECONDS
+	delay = 0 SECONDS
+
+/singleton/maneuver/leap/changeling/end_leap(mob/living/user, atom/target)
+	. = ..()
+	if(ishuman(user) && !user.lying && ismob(target) && user.Adjacent(target))
+		if(istype(user.get_active_hand(),/obj/item/melee/changeling))
+			target.use_weapon(user.get_active_hand(),user)
+		if(istype(user.get_inactive_hand(), /obj/item/melee/changeling))
+			user.swap_hand()
+			target.use_weapon(user.get_active_hand(),user)

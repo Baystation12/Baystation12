@@ -29,7 +29,7 @@
 	var/breathing = 0
 	var/last_successful_breath
 	var/breath_fail_ratio // How badly they failed a breath. Higher is worse.
-
+	var/mnoBreath = 100
 /obj/item/organ/internal/lungs/proc/can_drown()
 	return (is_broken() || !has_gills)
 
@@ -80,7 +80,7 @@
 		if(prob(5))
 			owner.emote("cough")		//respitory tract infection
 
-	if(is_bruised() && !owner.is_asystole())
+	if(is_bruised() && !owner.is_asystole() && !(mnoBreath in owner.mutations))
 		if(prob(2))
 			if(active_breathing)
 				owner.visible_message(

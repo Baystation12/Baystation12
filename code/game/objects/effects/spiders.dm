@@ -294,7 +294,13 @@
 	icon_state = "greenshatter"
 	anchored = TRUE
 	layer = BLOOD_LAYER
-
+/obj/decal/cleanable/ling_vomit
+	name = "green goop"
+	desc = "Green squishy mess."
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "greenshatter"
+	anchored = TRUE
+	layer = BLOOD_LAYER
 /obj/spider/cocoon
 	name = "cocoon"
 	desc = "Something wrapped in silky spider web."

@@ -164,7 +164,11 @@
 		return 0
 	if(!user.IsAdvancedToolUser())
 		return 0
-
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(istype(H.wear_suit,/obj/item/clothing/suit/space/changeling/armored) && !istype(src,/obj/item/gun/projectile/changeling))
+			to_chat(user,SPAN_WARNING("This form is too bulky to make use of the trigger guard!"))
+			return FALSE
 	var/mob/living/M = user
 	if(!safety() && world.time > last_safety_check + 5 MINUTES && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		if(prob(30))
