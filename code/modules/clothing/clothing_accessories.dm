@@ -50,7 +50,10 @@
 	return ..()
 
 /obj/item/clothing/MouseDrop(obj/over_object)
-	if (!over_object || !(ishuman(usr) || issmall(usr)))
+	if(!(ishuman(usr) || issmall(usr)))
+		return
+
+	if(!over_object || over_object == src)
 		return
 
 	//makes sure that the clothing is equipped so that we can't drag it into our hand from miles away.

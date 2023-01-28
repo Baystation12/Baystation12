@@ -38,8 +38,11 @@
 	QDEL_NULL(storage_ui)
 	. = ..()
 
-/obj/item/storage/MouseDrop(obj/over_object as obj)
+/obj/item/storage/MouseDrop(obj/over_object)
 	if(!canremove)
+		return
+
+	if(!over_object || over_object == src)
 		return
 
 	if ((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated())

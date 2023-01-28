@@ -75,9 +75,7 @@
 	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
 		return 1
 	if(master)
-		var/obj/item/I = usr.get_active_hand()
-		if(I)
-			usr.ClickOn(master)
+		usr.ClickOn(master)
 	return 1
 
 /obj/screen/zone_sel

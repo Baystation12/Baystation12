@@ -8,6 +8,7 @@
 	var/obj/screen/storage/stored_start
 	var/obj/screen/storage/stored_continue
 	var/obj/screen/storage/stored_end
+	var/list/obj/screen/storage/containers
 	var/obj/screen/close/closer
 
 /datum/storage_ui/default/New(storage)
@@ -40,13 +41,21 @@
 
 	stored_start = new /obj //we just need these to hold the icon
 	stored_start.icon_state = "stored_start"
-	stored_start.layer = HUD_BASE_LAYER
+	stored_start.mouse_opacity = 1
+	stored_start.plane = FLOAT_PLANE
+	stored_start.layer = HUD_CLICKABLE_LAYER
 	stored_continue = new /obj
 	stored_continue.icon_state = "stored_continue"
-	stored_continue.layer = HUD_BASE_LAYER
+	stored_continue.mouse_opacity = 1
+	stored_continue.plane = FLOAT_PLANE
+	stored_continue.layer = HUD_CLICKABLE_LAYER
 	stored_end = new /obj
 	stored_end.icon_state = "stored_end"
-	stored_end.layer = HUD_BASE_LAYER
+	stored_end.mouse_opacity = 1
+	stored_end.plane = FLOAT_PLANE
+	stored_end.layer = HUD_CLICKABLE_LAYER
+
+	containers = list()
 
 	closer = new /obj/screen/close(  )
 	closer.master = storage
@@ -62,6 +71,7 @@
 	QDEL_NULL(stored_start)
 	QDEL_NULL(stored_continue)
 	QDEL_NULL(stored_end)
+	QDEL_NULL_LIST(containers)
 	QDEL_NULL(closer)
 	. = ..()
 
@@ -103,8 +113,11 @@
 	user.client.screen -= storage_start
 	user.client.screen -= storage_continue
 	user.client.screen -= storage_end
+	user.client.screen -= containers
 	user.client.screen -= closer
+
 	user.client.screen -= storage.contents
+	user.client.screen += containers
 	user.client.screen += closer
 	user.client.screen += storage.contents
 	if(storage.storage_slots)
@@ -124,6 +137,7 @@
 	user.client.screen -= storage_start
 	user.client.screen -= storage_continue
 	user.client.screen -= storage_end
+	user.client.screen -= containers
 	user.client.screen -= closer
 	user.client.screen -= storage.contents
 	if(user.s_active == storage)
@@ -132,6 +146,14 @@
 //Creates the storage UI
 /datum/storage_ui/default/prepare_ui()
 	//if storage slots is null then use the storage space UI, otherwise use the slots UI
+	for(var/mob/user in is_seeing)
+		if(user)
+			user.client.screen -= containers
+	for(var/container in containers)
+		if(container)
+			qdel(container)
+	containers.Cut()
+
 	if(storage.storage_slots == null)
 		space_orient_objs()
 	else
@@ -183,6 +205,15 @@
 	boxes.screen_loc = "4:16,2:16 to [4+cols]:16,[2+rows]:16"
 
 	for(var/obj/O in storage.contents)
+		var/obj/screen/storage/box = new()
+		box.SetName(O.name)
+		box.master = O
+		box.icon_state = "block"
+		box.screen_loc = "[cx]:16,[cy]:16"
+		box.layer = HUD_CLICKABLE_LAYER
+
+		containers += box
+
 		O.screen_loc = "[cx]:16,[cy]:16"
 		O.maptext = ""
 		O.hud_layerise()
@@ -199,8 +230,6 @@
 	var/storage_cap_width = 2 //length of sprite for start and end of the box representing total storage space
 	var/stored_cap_width = 4 //length of sprite for start and end of the box representing the stored item
 	var/storage_width = min( round( 224 * storage.max_storage_space/baseline_max_storage_space ,1) ,284) //length of sprite for the box representing total storage space
-
-	storage_start.overlays.Cut()
 
 	storage_continue.SetTransform(scale_x = (storage_width - storage_cap_width * 2 + 3) / 32)
 
@@ -220,9 +249,20 @@
 			offset_x = startpoint + stored_cap_width + (endpoint - startpoint - stored_cap_width * 2) / 2 - 16,
 			scale_x = (endpoint - startpoint - stored_cap_width * 2) / 32
 		)
-		storage_start.overlays += stored_start
-		storage_start.overlays += stored_continue
-		storage_start.overlays += stored_end
+
+		var/obj/screen/storage/container = new()
+		container.screen_loc = "4:16,2:16"
+		container.icon_state = "blank"
+		container.layer = HUD_CLICKABLE_LAYER
+
+		container.overlays += stored_start
+		container.overlays += stored_continue
+		container.overlays += stored_end
+
+		container.SetName(O.name)
+		container.master = O
+
+		containers += container
 
 		O.screen_loc = "4:[round((startpoint+endpoint)/2)+2],2:16"
 		O.maptext = ""

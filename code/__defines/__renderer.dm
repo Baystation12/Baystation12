@@ -157,7 +157,8 @@
 
 #define HUD_PLANE                    6
 	#define UNDER_HUD_LAYER              0
-	#define HUD_BASE_LAYER               2
+	#define HUD_BASE_LAYER               1
+	#define HUD_CLICKABLE_LAYER          2
 	#define HUD_ITEM_LAYER               3
 	#define HUD_ABOVE_ITEM_LAYER         4
 
