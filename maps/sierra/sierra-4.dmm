@@ -10890,16 +10890,6 @@
 	icon_state = "white"
 	},
 /area/centcom/holding)
-"ipk" = (
-/obj/structure/bed/chair/shuttle/blue{
-	dir = 8
-	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/shuttle/transport1/centcom)
 "iuE" = (
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 9
@@ -12452,9 +12442,13 @@
 	},
 /area/tdome/testing)
 "lvg" = (
-/obj/structure/table/reinforced,
-/obj/machinery/recharger,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/recharger/wallcharger{
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled,
 /area/shuttle/transport1/centcom)
 "lvr" = (
@@ -13710,14 +13704,12 @@
 /area/centcom)
 "oFG" = (
 /obj/structure/bed/chair/shuttle/blue{
-	dir = 4
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/light{
-	dir = 8
-	},
-/obj/machinery/light{
-	dir = 8
+/obj/machinery/vending/wallmed1{
+	dir = 8;
+	pixel_x = 23
 	},
 /turf/simulated/floor/tiled,
 /area/shuttle/transport1/centcom)
@@ -17106,12 +17098,12 @@
 	},
 /area/centcom/specops)
 "vlh" = (
-/obj/structure/table/reinforced,
-/obj/machinery/recharger,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/vending/wallmed1{
-	dir = 8;
-	pixel_x = 23
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/recharger/wallcharger{
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
 /area/shuttle/transport1/centcom)
@@ -39665,15 +39657,15 @@ iac
 aag
 cgR
 sgM
-sgM
-wHG
-sgM
-wHG
 wHG
 sgM
 wHG
 sgM
 sgM
+aab
+aab
+aab
+aab
 aab
 aab
 qep
@@ -39869,14 +39861,14 @@ sHf
 sgM
 lvg
 iFF
-oFG
-iFF
-iFF
-iFF
 iFF
 xWN
 sgM
 sgM
+aab
+aab
+aab
+aab
 aab
 qep
 rjQ
@@ -40069,16 +40061,16 @@ tEz
 pgX
 fBR
 kQb
-kQb
 urj
-viY
-viY
-viY
 viY
 hEt
 oTp
 mXE
 wHG
+aab
+aab
+aab
+aab
 aab
 qep
 rjQ
@@ -40272,15 +40264,15 @@ kjR
 sHf
 sgM
 vlh
-ucL
-ipk
-ucL
-ucL
-ucL
+oFG
 ucL
 dJT
 sgM
 sgM
+aab
+aab
+aab
+aab
 aab
 qep
 rjQ
@@ -40473,15 +40465,15 @@ bIe
 aag
 rcI
 sgM
-sgM
-wHG
-sgM
-wHG
 wHG
 sgM
 wHG
 sgM
 sgM
+aab
+aab
+aab
+aab
 aab
 aab
 qep
