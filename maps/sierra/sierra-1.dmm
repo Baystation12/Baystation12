@@ -26756,9 +26756,6 @@
 "SF" = (
 /obj/structure/table/standard,
 /obj/machinery/light/small,
-/obj/item/music_tape/custom{
-	randpixel = 0
-	},
 /obj/item/paper/travelvisa{
 	desc = "A flimsy piece of laminated cardboard issued by the Sol Central Government. It's look's damaged"
 	},
