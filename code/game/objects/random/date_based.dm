@@ -118,4 +118,4 @@
 	if(date_check.IsValid())
 		return spawn_item()
 	else
-		return new /obj/structure/fountain/mundane(loc) //spawns fountain instead of tree
+		return new /obj/structure/fountain(loc)
