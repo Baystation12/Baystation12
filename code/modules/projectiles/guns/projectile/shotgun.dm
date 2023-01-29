@@ -68,7 +68,7 @@
 		recentpump = world.time
 
 /obj/item/gun/projectile/shotgun/pump/proc/pump(mob/M as mob)
-	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
+	playsound(M, "shotgun_pump", 60, 1)
 
 	if(chambered)//We have a shell in the chamber
 		chambered.dropInto(loc)//Eject casing
@@ -181,7 +181,7 @@
 		recentpumpr = world.time
 
 /obj/item/gun/projectile/shotgun/pump/sawn/proc/pumpr(mob/living/user)
-	playsound(user, 'sound/weapons/shotgunpump.ogg', 60, 1)
+	playsound(user, "shotgun_pump", 60, 1)
 
 	if(chambered)//We have a shell in the chamber
 		chambered.dropInto(loc)//Eject casing

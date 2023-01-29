@@ -27,7 +27,7 @@
 	var/allowed_magazines		//magazine types that may be loaded. Can be a list or single path
 	var/auto_eject = 0			//if the magazine should automatically eject itself when empty.
 	var/auto_eject_sound = null
-	var/mag_insert_sound = 'sound/weapons/guns/interaction/pistol_magin.ogg'
+	var/mag_insert_sound = "metal_slide_reload"
 	var/mag_remove_sound = 'sound/weapons/guns/interaction/pistol_magout.ogg'
 	var/can_special_reload = TRUE //Whether or not we can tactical/speed reload
 
@@ -191,6 +191,9 @@
 						count++
 				if(count)
 					user.visible_message("[user] reloads [src].", SPAN_NOTICE("You load [count] round\s into [src]."))
+					if(istype(src, /obj/item/gun/projectile/revolver))
+						playsound(src.loc, "revolver_reload", 50, 1)
+
 					playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 		AM.update_icon()
 	else if(istype(A, /obj/item/ammo_casing))

@@ -50,7 +50,7 @@
 	screen_shake = 2
 	magazine_type = /obj/item/ammo_magazine/magnum
 	allowed_magazines = /obj/item/ammo_magazine/magnum
-	mag_insert_sound = 'sound/weapons/guns/interaction/hpistol_magin.ogg'
+	mag_insert_sound = "metal_slide_reload"
 	mag_remove_sound = 'sound/weapons/guns/interaction/hpistol_magout.ogg'
 	accuracy = 2
 	one_hand_penalty = 2

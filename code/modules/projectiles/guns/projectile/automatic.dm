@@ -15,7 +15,7 @@
 	allowed_magazines = /obj/item/ammo_magazine/proto_smg
 	multi_aim = 1
 	burst_delay = 2
-	mag_insert_sound = 'sound/weapons/guns/interaction/smg_magin.ogg'
+	mag_insert_sound = "polymer_slide_reload"
 	mag_remove_sound = 'sound/weapons/guns/interaction/smg_magout.ogg'
 
 	//machine pistol, easier to one-hand with
@@ -72,6 +72,7 @@
 	caliber = CALIBER_PISTOL
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ESOTERIC = 8)
 	slot_flags = SLOT_BELT|SLOT_BACK
+	mag_insert_sound = "rifle_slide_reload"
 	magazine_type = /obj/item/ammo_magazine/smg
 	allowed_magazines = /obj/item/ammo_magazine/smg
 	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
@@ -114,7 +115,8 @@
 	accuracy = 2
 	bulk = GUN_BULK_RIFLE + 1
 	wielded_item_state = "arifle-wielded"
-	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
+	empty_sound = "out_of_ammo_rifle"
+	mag_insert_sound = "rifle_slide_reload"
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
 
 	//Assault rifle, burst fire degrades quicker than SMG, worse one-handing penalty, slightly increased move delay
@@ -191,7 +193,7 @@
 	bulk = GUN_BULK_RIFLE
 	burst_delay = 4
 	wielded_item_state = "z8carbine-wielded"
-	mag_insert_sound = 'sound/weapons/guns/interaction/batrifle_magin.ogg'
+	mag_insert_sound = "rifle_slide_reload"
 	mag_remove_sound = 'sound/weapons/guns/interaction/batrifle_magout.ogg'
 	firemodes = list(
 		list(mode_name="semi auto",       burst=1,    fire_delay=null, use_launcher=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null),
@@ -284,7 +286,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/box/machinegun, /obj/item/ammo_magazine/rifle)
 	one_hand_penalty = 10
 	wielded_item_state = "gun_wielded"
-	mag_insert_sound = 'sound/weapons/guns/interaction/lmg_magin.ogg'
+	mag_insert_sound = "heavy_machine_gun_reload"
 	mag_remove_sound = 'sound/weapons/guns/interaction/lmg_magout.ogg'
 	can_special_reload = FALSE
 
@@ -366,7 +368,7 @@
 	accuracy = 1
 	bulk = GUN_BULK_RIFLE + 1
 	wielded_item_state = "battlerifle-wielded"
-	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
+	mag_insert_sound = "rifle_slide_reload"
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
 
 	//Battle Rifle is only accurate in semi-automatic fire.
