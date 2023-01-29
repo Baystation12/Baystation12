@@ -18,6 +18,9 @@
 
 	var/lore = get_lore_info()
 	var/mechanics = get_mechanics_info()
+	var/construction = html_list(get_construction_info(), TRUE)
+	if (construction)
+		mechanics += "<h4>Construction Steps</h4>[construction]"
 	var/interactions = html_list_dl(get_interactions_info())
 	if (interactions)
 		mechanics += "<h4>Interactions</h4>[interactions]"
@@ -38,6 +41,18 @@
  */
 /atom/proc/get_mechanics_info()
 	return
+
+
+/**
+ * Handler for displaying construction steps in the Mechanics section of the atom's codex entry. Separated to allow
+ * overriding without duplication of parent steps, or removal of parent mechanics information.
+ *
+ * Returns list of strings.
+ */
+/atom/proc/get_construction_info()
+	RETURN_TYPE(/list)
+	return list()
+
 
 // Constants for use to describe special handlers in `get_interactions_info()`. These allow for consistant key names for overriding and stacking purposes.
 // Click handlers
