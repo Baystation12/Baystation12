@@ -1,6 +1,6 @@
 /client/proc/mod_list_add_ass()
 	var/class = "text"
-	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","color","list","edit referenced object","restore to default")
+	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","color","list","view variables","restore to default")
 	if(src.holder)
 		var/datum/marked_datum = holder.marked_datum()
 		if(marked_datum)
@@ -53,7 +53,7 @@
 /client/proc/mod_list_add(list/L, atom/O, original_name, objectvar)
 
 	var/class = "text"
-	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","color","edit referenced object","restore to default")
+	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","color","view variables","restore to default")
 	if(src.holder)
 		var/datum/marked_datum = holder.marked_datum()
 		if(marked_datum)
@@ -214,7 +214,7 @@
 		if(dir)
 			to_chat(usr, "If a direction, direction is: [dir]")
 	var/class = "text"
-	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","view variables","restore to default")
 
 	if(src.holder)
 		var/datum/marked_datum = holder.marked_datum()
@@ -250,8 +250,9 @@
 			else
 				L[L.Find(variable)] = new_var
 
-		if("edit referenced object")
-			modify_variables(variable)
+		if("view variables")
+			debug_variables(variable)
+			return
 
 		if("DELETE FROM LIST")
 			to_world_log("### ListVarEdit by [src]: [O.type] [objectvar]: REMOVED=[html_encode("[variable]")]")
@@ -464,7 +465,7 @@
 					dir = null
 			if(dir)
 				to_chat(usr, "If a direction, direction is: [dir]")
-		var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","json","color","edit referenced object","restore to default")
+		var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","json","color","view variables","restore to default")
 		if(src.holder)
 			var/datum/marked_datum = holder.marked_datum()
 			if(marked_datum)
@@ -494,8 +495,9 @@
 		if("restore to default")
 			var_value = O.get_initial_variable_value(variable)
 
-		if("edit referenced object")
-			return .(O.get_variable_value(variable))
+		if("view variables")
+			debug_variables(O)
+			return
 
 		if("text")
 			var/var_new = input("Enter new text:","Text",O.get_variable_value(variable)) as null|text

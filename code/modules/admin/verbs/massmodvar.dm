@@ -115,7 +115,7 @@
 			to_chat(usr, "If a direction, direction is: [dir]")
 
 	var/class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-		"num","type","icon","file","edit referenced object","restore to default")
+		"num","type","icon","file","view variables","restore to default")
 
 	if(!class)
 		return
@@ -163,8 +163,9 @@
 						if (A.type == O.type)
 							A.vars[variable] = O.vars[variable]
 
-		if("edit referenced object")
-			return .(O.vars[variable])
+		if("view variables")
+			debug_variables(O)
+			return
 
 		if("text")
 			var/new_value = input("Enter new text:","Text",O.vars[variable]) as text|null//todo: sanitize ???
