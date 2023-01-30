@@ -27,9 +27,7 @@
  */
 /atom/proc/get_current_health()
 	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
-		return
-	return health_current
+	return min(health_current, get_max_health())
 
 /**
  * Retrieves the atom's maximum health.
