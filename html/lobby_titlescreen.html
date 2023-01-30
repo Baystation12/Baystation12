@@ -268,25 +268,14 @@
 
     var backEl = document.getElementById("back");
     var containerEl = document.getElementById("container");
-
     var bottomMenuEl = document.getElementById("bottom-menu");
 
     var readyBtn = document.getElementById("ready");
-    var joinBtn = document.getElementById("join");
-    var setupBtn = document.getElementById("setup");
-    var manifestBtn = document.getElementById("manifest");
-    var observeBtn = document.getElementById("observe");
-
-
-    var floatingMenuEl = document.getElementById("floating-menu");
-
-    var changelogBtn = document.getElementById("changelog");
-    var discordBtn = document.getElementById("discord");
-    var githubBtn = document.getElementById("github");
-    var wikiBtn = document.getElementById("wiki");
-
-
     var readyIcon = document.getElementById("ready-icon");
+
+    var joinBtn = document.getElementById("join");
+
+    var manifestBtn = document.getElementById("manifest");
 
 
     var opts = {
@@ -313,7 +302,7 @@
     }
 
     function setReadyStatus(ready) {
-      if (Boolean(Number(ready))) {
+      if (Number(ready)) {
         readyIcon.classList.add("fa-check");
         readyIcon.classList.remove("fa-times");
 
@@ -323,44 +312,66 @@
       }
     }
 
+    var RUNLEVEL_INIT  = 0;
     var RUNLEVEL_LOBBY = 1;
     var RUNLEVEL_SETUP = 2;
-    var RUNLEVEL_GAME = 3;
+    var RUNLEVEL_GAME  = 3;
+
+    function clamp(v, min, max) { return Math.max(Math.min(v, max), min); }
+    function hide(el) { el.style.display = "none"; }
+    function show(el) { el.style.display = ""; }
+    function setBottomMenuDisabled(isDisabled) {
+      if (isDisabled)
+        for (var i = 0; i < bottomMenuEl.children.length; i++)
+          bottomMenuEl.children[i].classList.add("disabled");
+
+      else
+        for (var i = 0; i < bottomMenuEl.children.length; i++)
+          bottomMenuEl.children[i].classList.remove("disabled");
+    }
 
     function setStatus(message) {
       var contents = message.split("-");
-      var state = Number(contents[0]);
+      var state = clamp(Number(contents[0]), RUNLEVEL_INIT, RUNLEVEL_GAME);
       var ready = contents[1];
 
       setReadyStatus(ready);
 
-      if (state < RUNLEVEL_LOBBY) {
-        initEl.style.display = "";
-        bottomMenuEl.style.display = "none";
-      } else {
-        initEl.style.display = "none";
-        bottomMenuEl.style.display = "";
-      }
+      switch (state) {
+        case RUNLEVEL_INIT:
+          show(initEl); hide(bottomMenuEl)
+          break;
 
-      // Disabling or enabling ALL buttons
-      if (state == RUNLEVEL_SETUP) {
-        for (var i = 0; i < bottomMenuEl.children.length; i++) {
-          bottomMenuEl.children[i].classList.add("disabled");
-        }
-      } else {
-        for (var i = 0; i < bottomMenuEl.children.length; i++) {
-          bottomMenuEl.children[i].classList.remove("disabled");
-        }
-      }
+        case RUNLEVEL_LOBBY:
+          show(bottomMenuEl);
+          hide(initEl);
 
-      if (state == RUNLEVEL_LOBBY) {
-        joinBtn.style.display = "none";
-        readyBtn.style.display = "";
-        manifestBtn.classList.add("disabled");
-      } else if (state >= RUNLEVEL_SETUP) {
-        joinBtn.style.display = "";
-        readyBtn.style.display = "none";
-        // We don't need to remove "disabled", because previous code block does it
+          show(readyBtn);
+          hide(joinBtn);
+
+          setBottomMenuDisabled(false);
+          manifestBtn.classList.add("disabled");
+          break;
+
+        case RUNLEVEL_SETUP:
+          show(bottomMenuEl);
+          hide(initEl);
+
+          show(readyBtn);
+          hide(joinBtn);
+
+          setBottomMenuDisabled(true);
+          break;
+
+        case RUNLEVEL_GAME:
+          show(bottomMenuEl);
+          hide(initEl);
+
+          show(joinBtn);
+          hide(readyBtn);
+
+          setBottomMenuDisabled(false);
+          break;
       }
     }
 
