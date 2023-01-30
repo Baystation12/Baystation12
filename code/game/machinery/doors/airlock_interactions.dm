@@ -41,7 +41,7 @@
  * Whether or not the atom can be crushed and damaged by a closing airlock.
  */
 /atom/movable/proc/airlock_can_crush()
-	if (health_max)
+	if (get_max_health())
 		return TRUE
 	return FALSE
 

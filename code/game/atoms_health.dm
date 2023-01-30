@@ -61,7 +61,7 @@
  */
 /atom/proc/can_restore_health(damage, damage_type = null)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
+	if (!get_max_health())
 		return FALSE
 	if (!damage)
 		return FALSE
@@ -75,7 +75,7 @@
  */
 /atom/proc/can_damage_health(damage, damage_type = null, damage_flags = EMPTY_BITFIELD)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
+	if (!get_max_health())
 		return FALSE
 	if (health_dead)
 		return FALSE
@@ -98,7 +98,7 @@
  */
 /atom/proc/mod_health(health_mod, damage_type, skip_death_state_change = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
+	if (!get_max_health())
 		return FALSE
 	health_mod = round(health_mod)
 	var/death_state = health_dead
@@ -122,7 +122,7 @@
  */
 /atom/proc/set_health(new_health, skip_death_state_change = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
-	var/health_mod = new_health - health_current
+	var/health_mod = new_health - get_current_health()
 	return mod_health(health_mod, skip_death_state_change = skip_death_state_change)
 
 /**
@@ -172,7 +172,7 @@
  */
 /atom/proc/revive_health()
 	SHOULD_CALL_PARENT(TRUE)
-	return set_health(health_max)
+	return set_health(get_max_health())
 
 /// Proc called when the atom transitions from alive to dead.
 /atom/proc/on_death()
@@ -190,9 +190,9 @@
 	SHOULD_CALL_PARENT(TRUE)
 	health_max = round(new_max_health)
 	if (set_current_health)
-		set_health(health_max)
+		set_health(get_max_health())
 	else
-		set_health(min(health_current, health_max))
+		set_health(min(get_current_health(), get_max_health()))
 
 /**
  * Sets the atom's resistance/weakness to the given damage type.
