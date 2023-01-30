@@ -92,8 +92,16 @@
 /obj/screen/fullscreen/blackout
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "black"
-	screen_loc = "WEST,SOUTH to EAST,NORTH"
+	screen_loc = ui_entire_screen
 	layer = BLIND_LAYER
+
+/obj/screen/fullscreen/blackout/above_hud
+	icon = 'icons/mob/screen1.dmi'
+	icon_state = "black"
+	screen_loc = ui_entire_screen
+
+	plane = ABOVE_HUD_PLANE
+	layer = HUD_ABOVE_ITEM_LAYER
 
 /obj/screen/fullscreen/impaired
 	icon_state = "impairedoverlay"
@@ -101,13 +109,13 @@
 
 /obj/screen/fullscreen/blurry
 	icon = 'icons/mob/screen1.dmi'
-	screen_loc = "WEST,SOUTH to EAST,NORTH"
+	screen_loc = ui_entire_screen
 	icon_state = "blurry"
 	alpha = 100
 
 /obj/screen/fullscreen/flash
 	icon = 'icons/mob/screen1.dmi'
-	screen_loc = "WEST,SOUTH to EAST,NORTH"
+	screen_loc = ui_entire_screen
 	icon_state = "flash"
 
 /obj/screen/fullscreen/flash/noise
@@ -115,7 +123,7 @@
 
 /obj/screen/fullscreen/high
 	icon = 'icons/mob/screen1.dmi'
-	screen_loc = "WEST,SOUTH to EAST,NORTH"
+	screen_loc = ui_entire_screen
 	icon_state = "druggy"
 
 /obj/screen/fullscreen/noise

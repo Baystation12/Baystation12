@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="v4shim.css">
+  <link rel="stylesheet" type="text/css" href="font-awesome.css">
+	<style>
+    @font-face {
+      font-family: "Jost";
+      font-weight: normal;
+      src: url("Jost-Regular.ttf");
+    }
+    @font-face {
+      font-family: "Jost";
+      font-weight: bold;
+      src: url("Jost-Bold.ttf");
+    }
+    body, html {
+      margin: 0;
+      overflow: hidden;
+      text-align: center;
+      background-color: black;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    * { box-sizing: border-box; }
+    a { color: inherit; text-decoration: none; }
+    img { border-style: none; }
+
+    #back {
+      position: absolute;
+      width: auto;
+      height: 100vmin;
+      min-width: 100vmin;
+      min-height: 100vmin;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+    #container {
+      position: absolute;
+      box-sizing: border-box;
+      width: auto;
+      min-width: 100vmin;
+      min-height: 100vmin;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
+    #init {
+      position: absolute;
+      width: auto;
+      min-width: 100vmin;
+      text-align: left;
+      left: 2.6vmin;
+      bottom: 2.6vmin;
+
+      font-family: "Jost";
+      font-weight: normal;
+      font-size: 2vmin;
+      line-height: 2vmin;
+      letter-spacing: 1px;
+
+      color: #7BA6A8;
+    }
+
+    #loading-text {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 2.6vmin;
+    }
+
+    #loading-circle {
+      height: 2.4vmin;
+      width: 2.4vmin;
+      border-radius: 50%;
+      border: 0.5vmin solid transparent;
+      border-top-color: #61cad0;
+
+      animation: circle 1s infinite linear;
+    }
+
+    #game-loading {
+      font-weight: bold;
+      font-size: 2.4vmin;
+      line-height: 2.4vmin;
+      margin-left: 2vmin;
+
+      color: #61cad0;
+
+      animation: waving-bg 5s infinite;
+      text-shadow: 0 0 12px rgba(255, 255, 255, .2);
+    }
+
+    @keyframes waving-bg {
+      0% { text-shadow: 0 0 12px rgba(255, 255, 255, .2); }
+      50% { text-shadow: 0 0 12px rgba(255, 255, 255, .7); }
+      100% { text-shadow: 0 0 12px rgba(255, 255, 255, .2); }
+    }
+
+    @keyframes circle {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #floating-menu {
+      position: absolute;
+      width: auto;
+      min-width: 50vmin;
+      min-height: 50vmin;
+
+      top: 0;
+      right: 0;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-end;
+      padding: 2vmin;
+    }
+    .floating-menu__item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      margin-bottom: 1vmin;
+      padding: 1vmin;
+      color: #7BA6A8;
+      background-color: rgba(0, 0, 0, .6);
+      box-shadow: 3px 3px 16px rgba(0, 0, 0, .3);
+
+      text-align: center;
+      font-family: "Jost";
+      font-weight: normal;
+      font-size: 1.67vmin;
+      line-height: 1.67vmin;
+      letter-spacing: 1px;
+
+      border: 1px solid #7BA6A8;
+      transition: .1s color, .1s border-color;
+    }
+
+    .floating-menu__item i {
+      height: 2.54vmin;
+      width: 2.54vmin;
+      font-size: 2.22vmin;
+      line-height: 2.54vmin;
+    }
+
+    .floating-menu__item span { margin-left: 1vmin; }
+
+    #bottom-menu {
+      position: absolute;
+      width: auto;
+      height: 8vmin;
+      min-height: 8vmin;
+      min-width: 100vmin;
+      left: 0;
+      bottom: 4vmin;
+      text-align: center;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      flex-direction: row;
+    }
+    .bottom-menu__item {
+      height: 8vmin;
+      width: 8vmin;
+      margin: 0 2.11vmin;
+      padding-top: 1.27vmin;
+      color: #7BA6A8;
+      background-color: rgba(0, 0, 0, .6);
+      box-shadow: 3px 3px 16px rgba(0, 0, 0, .3);
+
+      text-align: center;
+      font-family: "Jost";
+      font-weight: normal;
+      font-size: 1.48vmin;
+      line-height: 1.48vmin;
+      letter-spacing: 1px;
+
+      border: 1px solid #7BA6A8;
+      transition: .1s color, .1s border-color;
+    }
+    .bottom-menu__item.disabled {
+      background-color: rgba(0, 0, 0);
+      box-shadow: 3px 3px 16px rgba(0, 0, 0, .5);
+      opacity: .6;
+      pointer-events: none;
+    }
+    .bottom-menu__item--horizontal {
+      width: auto;
+      font-size: 2.22vmin;
+      line-height: 2.22vmin;
+      padding: 2.33vmin;
+      padding-right: 3.38vmin;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+    .bottom-menu__item span {
+      display: block;
+      margin-top: 0.5vmin;
+    }
+    .bottom-menu__item--horizontal span {
+      margin: 0;
+      margin-left: 2.11vmin;
+      display: inline-block;
+    }
+
+    .bottom-menu__item i {
+      height: 3.38vmin;
+      width: 3.38vmin;
+      font-size: 2.7vmin;
+      line-height: 3.38vmin;
+    }
+
+    .bottom-menu__item:hover, .floating-menu__item:hover {
+      color: white;
+      border-color: white;
+    }
+
+    .submsg {
+      margin-bottom: 0.6vmin;
+    }
+  </style>
+</head>
+<body>
+	<img id="back" src='titlescreen.gif' />
+  <div id="container">
+    <div id="init" style="display: none;">
+      <div id="init-text">
+      </div>
+      <div id="loading-text">
+        <div id="loading-circle"></div>
+        <div id="game-loading">Loading...</div>
+      </div>
+    </div>
+    <div id="floating-menu">
+      <a class="floating-menu__item" href='?src=[player-ref];lobby_changelog=1' id="changelog"><i class="far fa-list-alt"></i><span>Changelog</span></a>
+      <a class="floating-menu__item" href='?src=[player-ref];lobby_discord=1' id="discord"><i class="fab fa-discord"></i><span>Discord</span></a>
+      <a class="floating-menu__item" href='?src=[player-ref];lobby_github=1' id="github"><i class="fa fa-github"></i><span>GitHub</span></a>
+      <a class="floating-menu__item" href='?src=[player-ref];lobby_wiki=1' id="wiki"><i class="fas fa-book"></i><span>Wiki</span></a>
+    </div>
+    <div id="bottom-menu" style="display: none;">
+        <a class="bottom-menu__item bottom-menu__item--horizontal" href='?src=[player-ref];lobby_ready=1' id="ready"><i id="ready-icon" class="fas fa-check"></i><span>Ready</span></a>
+		    <a class="bottom-menu__item bottom-menu__item--horizontal" href='?src=[player-ref];lobby_join=1' id="join"><i class="fas fa-play"></i><span>Join</span></a>
+				<a class="bottom-menu__item" href='?src=[player-ref];lobby_setup=1' id="setup"><i class="fas fa-user"></i><span>Setup</span></a>
+		    <a class="bottom-menu__item" href='?src=[player-ref];lobby_crew=1' id="manifest"><i class="fas fa-users"></i><span>Manifest</span></a>
+      	<a class="bottom-menu__item" href='?src=[player-ref];lobby_observe=1' id="observe"><i class="fas fa-ghost"></i><span>Observe</span></a>
+    </div>
+  </div>
+  <script type="text/javascript">
+
+    var initEl = document.getElementById("init");
+    var initTextEl = document.getElementById("init-text");
+
+    var backEl = document.getElementById("back");
+    var containerEl = document.getElementById("container");
+
+    var bottomMenuEl = document.getElementById("bottom-menu");
+
+    var readyBtn = document.getElementById("ready");
+    var joinBtn = document.getElementById("join");
+    var setupBtn = document.getElementById("setup");
+    var manifestBtn = document.getElementById("manifest");
+    var observeBtn = document.getElementById("observe");
+
+
+    var floatingMenuEl = document.getElementById("floating-menu");
+
+    var changelogBtn = document.getElementById("changelog");
+    var discordBtn = document.getElementById("discord");
+    var githubBtn = document.getElementById("github");
+    var wikiBtn = document.getElementById("wiki");
+
+
+    var readyIcon = document.getElementById("ready-icon");
+
+
+    var opts = {
+      maxInits: 13,
+      fullOpacityInits: 3
+    };
+
+    function byondDecode(message) {
+      // Basically we url_encode twice server side so we can manually read the encoded version and actually do UTF-8.
+      // The replace for + is because FOR SOME REASON, BYOND replaces spaces with a + instead of %20, and a plus with %2b.
+      // Marvelous.
+      message = message.replace(/\+/g, "%20");
+      try {
+        // This is a workaround for the above not always working when BYOND's shitty url encoding breaks. (byond bug id:2399401)
+        if (decodeURIComponent) {
+          message = decodeURIComponent(message);
+        } else {
+          throw new Error("Easiest way to trigger the fallback")
+        }
+      } catch (err) {
+        message = unescape(message);
+      }
+      return message;
+    }
+
+    function setReadyStatus(ready) {
+      if (Boolean(Number(ready))) {
+        readyIcon.classList.add("fa-check");
+        readyIcon.classList.remove("fa-times");
+
+      } else {
+        readyIcon.classList.remove("fa-check");
+        readyIcon.classList.add("fa-times");
+      }
+    }
+
+    var RUNLEVEL_LOBBY = 1;
+    var RUNLEVEL_SETUP = 2;
+    var RUNLEVEL_GAME = 3;
+
+    function setStatus(message) {
+      var contents = message.split("-");
+      var state = Number(contents[0]);
+      var ready = contents[1];
+
+      setReadyStatus(ready);
+
+      if (state < RUNLEVEL_LOBBY) {
+        initEl.style.display = "";
+        bottomMenuEl.style.display = "none";
+      } else {
+        initEl.style.display = "none";
+        bottomMenuEl.style.display = "";
+      }
+
+      // Disabling or enabling ALL buttons
+      if (state == RUNLEVEL_SETUP) {
+        for (var i = 0; i < bottomMenuEl.children.length; i++) {
+          bottomMenuEl.children[i].classList.add("disabled");
+        }
+      } else {
+        for (var i = 0; i < bottomMenuEl.children.length; i++) {
+          bottomMenuEl.children[i].classList.remove("disabled");
+        }
+      }
+
+      if (state == RUNLEVEL_LOBBY) {
+        joinBtn.style.display = "none";
+        readyBtn.style.display = "";
+        manifestBtn.classList.add("disabled");
+      } else if (state >= RUNLEVEL_SETUP) {
+        joinBtn.style.display = "";
+        readyBtn.style.display = "none";
+        // We don't need to remove "disabled", because previous code block does it
+      }
+    }
+
+    var inits = [];
+    function subsystemMessage(message) {
+      if (typeof message === 'undefined') {
+        return;
+      }
+      var submsg = document.createElement('div');
+      submsg.className = 'submsg';
+      submsg.innerText = byondDecode(message).trim();
+
+      inits.push(submsg);
+      initTextEl.appendChild(submsg);
+
+      if (inits.length > opts.maxInits) { initTextEl.removeChild(inits.shift()); }
+
+      var initBuffer = opts.maxInits - opts.fullOpacityInits;
+      for (var i = 0; i < inits.length; i++) {
+        var index = opts.maxInits - inits.length  + i;
+        inits[i].style.opacity = Math.min(index/initBuffer, 1);
+      }
+    }
+
+    function updateImage() { backEl.src = "titlescreen.gif?" + Math.random(); }
+
+    function fadeTitlescreen() {
+      containerEl.style.pointerEvents = "none";
+      // 1/0.04 = 25 iterations
+      // 25*50ms = 1250ms = 1.25s
+      var opacity = 1;
+      var interval = setInterval(function () {
+        opacity -= 0.04;
+        if (opacity < 0) {
+          opacity = 0;
+          clearInterval(interval);
+        }
+        backEl.style.opacity = opacity;
+        containerEl.style.opacity = opacity;
+      }, 50)
+    }
+
+    setReadyStatus(0);
+    window.location = "?src=[player-ref]&lobby_init=1";
+  </script>
+</body>
+</html>

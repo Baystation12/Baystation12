@@ -177,9 +177,6 @@ SUBSYSTEM_DEF(ticker)
 		mode.post_setup() // Drafts antags who don't override jobs.
 		to_world(SPAN_INFO("<B>Enjoy the game!</B>"))
 
-		for (var/mob/new_player/player in GLOB.player_list)
-			player.new_player_panel()
-
 	if(!length(GLOB.admins))
 		send2adminirc("Round has started with no admins online.")
 
@@ -361,14 +358,25 @@ Helpers
 /datum/controller/subsystem/ticker/proc/create_characters()
 	for(var/mob/new_player/player in GLOB.player_list)
 		if(player && player.ready && player.mind)
+
 			if(player.mind.assigned_role=="AI")
 				player.close_spawn_windows()
 				player.AIize()
-			else if(!player.mind.assigned_role)
 				continue
-			else
-				if(player.create_character())
-					qdel(player)
+
+			if(!player.mind.assigned_role)
+				continue
+
+			player.spawning = 1
+			GLOB.using_map.fade_titlescreen(player.client)
+			sleep(20)
+
+			var/mob/living/carbon/human/new_char = player.create_character()
+			if(new_char)
+				qdel(player)
+				if(new_char.client)
+					new_char.overlay_fullscreen("init_blackout", /obj/screen/fullscreen/blackout/above_hud)
+					new_char.clear_fullscreen("init_blackout", 30)
 
 /datum/controller/subsystem/ticker/proc/lobby_players(list/players)
 	if (!players)
