@@ -1133,6 +1133,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 		while(null in owner.internal_organs)
 			owner.internal_organs -= null
 
+	CLEAR_FLAGS(status, ORGAN_ARTERY_CUT)
+
 	return 1
 
 /obj/item/organ/external/proc/get_damage()	//returns total damage
