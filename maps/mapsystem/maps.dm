@@ -540,6 +540,9 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/proc/set_titlescreen_ready(client/C, var/ready=FALSE)
 	send_output(C, ready, "lobbybrowser:setReadyStatus")
 
+/datum/map/proc/fade_titlescreen(client/C)
+	send_output(C, null, "lobbybrowser:fadeTitlescreen")
+
 /datum/map/proc/update_titlescreens()
 	for(var/mob/new_player/player in GLOB.player_list)
 		update_titlescreen(player.client)

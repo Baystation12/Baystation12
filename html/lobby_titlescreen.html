@@ -40,7 +40,7 @@
       transform: translate(-50%, -50%);
       z-index: 0;
     }
-    .container {
+    #container {
       position: absolute;
       box-sizing: border-box;
       width: auto;
@@ -238,8 +238,7 @@
 </head>
 <body>
 	<img id="back" src='titlescreen.gif' />
-  <div id="leftop"></div>
-  <div class="container">
+  <div id="container">
     <div id="init" style="display: none;">
       <div id="init-text">
       </div>
@@ -268,7 +267,7 @@
     var initTextEl = document.getElementById("init-text");
 
     var backEl = document.getElementById("back");
-
+    var containerEl = document.getElementById("container");
 
     var bottomMenuEl = document.getElementById("bottom-menu");
 
@@ -387,6 +386,22 @@
     }
 
     function updateImage() { backEl.src = "titlescreen.gif?" + Math.random(); }
+
+    function fadeTitlescreen() {
+      containerEl.style.pointerEvents = "none";
+      // 1/0.04 = 25 iterations
+      // 25*50ms = 1250ms = 1.25s
+      var opacity = 1;
+      var interval = setInterval(function () {
+        opacity -= 0.04;
+        if (opacity < 0) {
+          opacity = 0;
+          clearInterval(interval);
+        }
+        backEl.style.opacity = opacity;
+        containerEl.style.opacity = opacity;
+      }, 50)
+    }
 
     setReadyStatus(0);
     window.location = "?src=[player-ref]&lobby_init=1";

@@ -162,6 +162,7 @@
 	#define HUD_ITEM_LAYER               3
 	#define HUD_ABOVE_ITEM_LAYER         4
 
+#define ABOVE_HUD_PLANE                7
 
 //-------------------- Rendering ---------------------
 

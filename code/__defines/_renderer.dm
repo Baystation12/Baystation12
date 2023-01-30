@@ -216,6 +216,12 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 	group = RENDER_GROUP_SCREEN
 	plane = HUD_PLANE
 
+/// Draws everything above user interface elements.
+/atom/movable/renderer/above_interface
+	name = "Above Interface"
+	group = RENDER_GROUP_SCREEN
+	plane = ABOVE_HUD_PLANE
+
 
 /* *
 * Group renderers

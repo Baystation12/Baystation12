@@ -204,6 +204,8 @@
 	if(!config.enter_allowed)
 		to_chat(usr, SPAN_NOTICE("There is an administrative lock on entering the game!"))
 		return 0
+	if(spawning)
+		return 0
 
 	if(!job || !job.is_available(client))
 		alert("[job.title] is not available. Please try another.")
@@ -227,12 +229,19 @@
 
 	SSjobs.assign_role(src, job.title, 1)
 
+	spawning = 1
+	GLOB.using_map.fade_titlescreen(client)
+	sleep(20)
+
 	var/mob/living/character = create_character(spawn_turf)	//creates the human and transfers vars and mind
 	if(!character)
 		return 0
 
 	character = SSjobs.equip_rank(character, job.title, 1)					//equips the human
 	SScustomitems.equip_custom_items(character)
+
+	character.overlay_fullscreen("init_blackout", /obj/screen/fullscreen/blackout/above_hud)
+	character.clear_fullscreen("init_blackout", 30)
 
 	// AIs don't need a spawnpoint, they must spawn at an empty core
 	if(character.mind.assigned_role == "AI")
