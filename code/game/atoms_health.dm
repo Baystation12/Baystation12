@@ -65,7 +65,7 @@
 		return FALSE
 	if (!damage)
 		return FALSE
-	if (get_current_health() == get_max_health())
+	if (!health_damaged())
 		return FALSE
 	return TRUE
 
@@ -81,7 +81,7 @@
 		return FALSE
 	if (!damage || damage < health_min_damage)
 		return FALSE
-	if (get_damage_resistance(damage_type) == 0)
+	if (is_damage_immune(damage_type))
 		return FALSE
 	return TRUE
 
@@ -253,7 +253,7 @@
 
 /mob/examine_damage_state(mob/user)
 	if (health_dead)
-		to_chat(user, SPAN_DANGER("They look severely hurt and is not moving or responding to anything around them."))
+		to_chat(user, SPAN_DANGER("They look severely hurt and are not moving or responding to anything around them."))
 		return
 
 	var/damage_percentage = get_damage_percentage()
