@@ -331,7 +331,11 @@
 
 // This proc is used so that we can return out of the revive process while ensuring that busy and update_icon() are handled
 /obj/item/shockpaddles/proc/do_revive(mob/living/carbon/human/H, mob/living/user)
-	if(H.ssd_check())
+	var/mob/observer/ghost/ghost = H.get_ghost()
+	if(ghost)
+		ghost.notify_revive("Someone is trying to resuscitate you. Re-enter your body if you want to be revived!", 'sound/machines/defib_charge.ogg', source = src)
+
+	if(ghost == null)
 		to_chat(find_dead_player(H.ckey, 1), SPAN_NOTICE("Someone is attempting to resuscitate you. Re-enter your body if you want to be revived!"))
 
 	//beginning to place the paddles on patient's chest to allow some time for people to move away to stop the process
