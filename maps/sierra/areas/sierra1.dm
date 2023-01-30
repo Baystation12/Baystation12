@@ -1,6 +1,7 @@
 /area/hallway/primary/thirddeck/fore
 	name = "Third Deck - Hallway - Fore"
 	icon_state = "hallF"
+	req_access = list(access_external_airlocks)
 
 /area/hallway/primary/thirddeck/center
 	name = "Third Deck - Hallway - Central"
@@ -46,9 +47,8 @@
 	icon_state = "disposal"
 	req_access = list(list(access_cargo, access_engine, access_el))
 
-/area/crew_quarters/commissary
-	name = "Third Deck - Commissary"
-	req_access = list(access_commissary)
+/area/crew_quarters/visitors
+	name = "Third Deck - Visitors"
 
 /* COMMAND AREAS
  * =============

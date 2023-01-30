@@ -20,7 +20,7 @@
 
 	access = list(		access_maint_tunnels, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
 						access_cargo_bot, access_qm, access_mailsorting, access_expedition_shuttle, access_guppy, access_hangar,
-						access_mining, access_mining_office, access_mining_station, access_commissary)
+						access_mining, access_mining_office, access_mining_station, access_commissary, access_external_airlocks)
 
 
 
