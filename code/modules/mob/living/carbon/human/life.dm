@@ -47,7 +47,7 @@
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 
-	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
+	clear_alert("temp") //Reset this here, because both breathe() and handle_environment() have a chance to set it.
 
 	//TODO: separate this out
 	// update the current life tick, can be used to e.g. only do something every 4 ticks
@@ -384,26 +384,28 @@
 	// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 	if(bodytemperature >= getSpeciesOrSynthTemp(HEAT_LEVEL_1))
 		//Body temperature is too hot.
-		fire_alert = max(fire_alert, 1)
+		throw_alert("temp", /obj/screen/alert/hot, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 		var/burn_dam = 0
 		if(bodytemperature < getSpeciesOrSynthTemp(HEAT_LEVEL_2))
 			burn_dam = HEAT_DAMAGE_LEVEL_1
+			throw_alert("temp", /obj/screen/alert/hot, 2)
 		else if(bodytemperature < getSpeciesOrSynthTemp(HEAT_LEVEL_3))
 			burn_dam = HEAT_DAMAGE_LEVEL_2
 		else
 			burn_dam = HEAT_DAMAGE_LEVEL_3
 		take_overall_damage(burn=burn_dam, used_weapon = "High Body Temperature")
-		fire_alert = max(fire_alert, 2)
+		throw_alert("temp", /obj/screen/alert/hot, 3)
 
 	else if(bodytemperature <= getSpeciesOrSynthTemp(COLD_LEVEL_1))
-		fire_alert = max(fire_alert, 1)
+		throw_alert("temp", /obj/screen/alert/cold, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 
 		var/burn_dam = 0
 
 		if(bodytemperature > getSpeciesOrSynthTemp(COLD_LEVEL_2))
 			burn_dam = COLD_DAMAGE_LEVEL_1
+			throw_alert("temp", /obj/screen/alert/cold, 2)
 		else if(bodytemperature > getSpeciesOrSynthTemp(COLD_LEVEL_3))
 			burn_dam = COLD_DAMAGE_LEVEL_2
 		else
@@ -411,7 +413,10 @@
 		SetStasis(getCryogenicFactor(bodytemperature), STASIS_COLD)
 		if(!chem_effects[CE_CRYO])
 			take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
-			fire_alert = max(fire_alert, 1)
+			throw_alert("temp", /obj/screen/alert/cold, 3)
+
+	else
+		clear_alert("temp")
 
 	// Account for massive pressure differences.  Done by Polymorph
 	// Made it possible to actually have something that can protect against high pressure... Done by Errorage. Polymorph now has an axe sticking from his head for his previous hardcoded nonsense!
@@ -773,13 +778,24 @@
 
 				healths.overlays += health_images
 
-		if(nutrition_icon)
-			switch(nutrition)
-				if(450 to INFINITY)				nutrition_icon.icon_state = "nutrition0"
-				if(350 to 450)					nutrition_icon.icon_state = "nutrition1"
-				if(250 to 350)					nutrition_icon.icon_state = "nutrition2"
-				if(150 to 250)					nutrition_icon.icon_state = "nutrition3"
-				else							nutrition_icon.icon_state = "nutrition4"
+		var/fat_alert = /obj/screen/alert/fat
+		var/hungry_alert = /obj/screen/alert/hungry
+		var/starving_alert = /obj/screen/alert/starving
+		var/well_fed = /obj/screen/alert/well_fed
+
+
+
+		switch(nutrition)
+			if(395 to INFINITY)
+				throw_alert("nutrition", fat_alert)
+			if(385 to 395)
+				throw_alert("nutrition", well_fed)
+			if(250 to 385)
+				clear_alert("nutrition")
+			if(150 to 250)
+				throw_alert("nutrition", hungry_alert)
+			else
+				throw_alert("nutrition", starving_alert)
 
 		if(hydration_icon)
 			switch(hydration)

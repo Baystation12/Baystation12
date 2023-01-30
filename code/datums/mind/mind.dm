@@ -71,6 +71,29 @@
 	SSticker.minds -= src
 	. = ..()
 
+
+/datum/mind/proc/get_ghost(even_if_they_cant_reenter)
+	for(var/mob/observer/ghost/G in GLOB.player_list)
+		if(G.mind == src)
+			if(G.can_reenter_corpse || even_if_they_cant_reenter)
+				return G
+			break
+
+/datum/mind/proc/grab_ghost(force)
+	var/mob/observer/ghost/G = get_ghost(even_if_they_cant_reenter = force)
+	. = G
+	if(G)
+		G.reenter_corpse()
+
+/mob/proc/get_ghost(even_if_they_cant_reenter = 0)
+	if(mind)
+		return mind.get_ghost(even_if_they_cant_reenter)
+
+/mob/proc/grab_ghost(force)
+	if(mind)
+		return mind.grab_ghost(force = force)
+
+
 /datum/mind/proc/transfer_to(mob/living/new_character)
 	if(!istype(new_character))
 		to_world_log("## DEBUG: transfer_to(): Some idiot has tried to transfer_to() a non mob/living mob. Please inform Carn.")

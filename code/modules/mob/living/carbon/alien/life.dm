@@ -112,6 +112,7 @@
 			set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
 			set_fullscreen(eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
 			set_fullscreen(druggy, "high", /obj/screen/fullscreen/high)
+
 		if(machine)
 			if(machine.check_eye(src) < 0)
 				reset_view(null)
@@ -128,11 +129,11 @@
 
 	if(environment.temperature > (T0C+66))
 		adjustFireLoss((environment.temperature - (T0C+66))/5) // Might be too high, check in testing.
-		if (fire) fire.icon_state = "fire2"
+		throw_alert("alien_fire", /obj/screen/alert/alien_fire)
 		if(prob(20))
 			to_chat(src, SPAN_DANGER("You feel a searing heat!"))
 	else
-		if (fire) fire.icon_state = "fire0"
+		clear_alert("alien_fire")
 
 /mob/living/carbon/alien/handle_fire()
 	if(..())

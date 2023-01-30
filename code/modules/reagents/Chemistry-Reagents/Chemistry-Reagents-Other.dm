@@ -441,17 +441,17 @@
 		warning_message = pick("extremely dizzy","short of breath","faint","confused")
 		warning_prob = 15
 		M.adjustOxyLoss(10,20)
-		M.co2_alert = 1
+		M.throw_alert("oxy", /obj/screen/alert/not_enough_co2)
 	else if(dosage >= 1.5)
 		warning_message = pick("dizzy","short of breath","faint","momentarily confused")
-		M.co2_alert = 1
+		M.throw_alert("oxy", /obj/screen/alert/not_enough_co2)
 		M.adjustOxyLoss(3,5)
 	else if(dosage >= 0.25)
 		warning_message = pick("a little dizzy","short of breath")
 		warning_prob = 10
-		M.co2_alert = 0
+		M.clear_alert("oxy")
 	else
-		M.co2_alert = 0
+		M.clear_alert("oxy")
 	if(warning_message && prob(warning_prob))
 		to_chat(M, SPAN_WARNING("You feel [warning_message]."))
 
