@@ -6,7 +6,6 @@
 	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
 	var/totalPlayers = 0		 //Player counts for the Lobby tab
 	var/totalPlayersReady = 0
-	var/datum/browser/panel
 	var/show_invalid_jobs = 0
 	universal_speak = TRUE
 
@@ -24,51 +23,6 @@
 /mob/new_player/New()
 	..()
 	verbs += /mob/proc/toggle_antag_pool
-
-
-/mob/new_player/proc/new_player_panel(force)
-
-	var/datum/asset/assets = get_asset_datum(/datum/asset/simple/lobby) //Sending pictures to the client
-	assets.send(src)
-
-	if (!force && !SScharacter_setup.initialized)
-		return
-	var/list/output = list()
-	output += "<div align='center'>"
-	if (config.wiki_url || config.rules_url || config.lore_url)
-		var/player_age = client?.player_age
-		if (isnum(player_age) && player_age < 7)
-			output += "<b>Welcome! Please check out these links:</b><br>"
-		if (config.wiki_url)
-			output += "<a href='byond://?src=\ref[src];show_wiki=1'>Wiki</a>"
-		if (config.rules_url)
-			output += "<a href='byond://?src=\ref[src];show_rules=1'>Rules</a>"
-		if (config.lore_url)
-			output += "<a href='byond://?src=\ref[src];show_lore=1'>Lore</a>"
-	output += "<hr>"
-	output += "<a href='byond://?src=\ref[src];lobby_setup=1'>Setup Character</A> "
-
-	if(GAME_STATE > RUNLEVEL_LOBBY)
-		output += "<a href='byond://?src=\ref[src];lobby_crew=1'>View the Crew Manifest</A> "
-
-	output += "<a href='byond://?src=\ref[src];lobby_observe=1'>Observe</A> "
-
-	output += "<hr>Current character: <a href='byond://?src=\ref[client.prefs];load=1'><b>[client.prefs.real_name]</b></a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
-	if(GAME_STATE <= RUNLEVEL_LOBBY)
-		if(ready)
-			output += "<a class='linkOn' href='byond://?src=\ref[src];lobby_ready=1'>Un-Ready</a>"
-		else
-			output += "<a href='byond://?src=\ref[src];lobby_ready=1'>Ready Up</a>"
-	else
-		output += "<a href='byond://?src=\ref[src];lobby_join=1'>Join Game!</A>"
-
-	output += "</div>"
-
-	panel = new(src, "Welcome","Welcome to [GLOB.using_map.full_name]", 560, 280, src)
-	panel.set_window_options("can_close=0")
-	panel.set_content(JOINTEXT(output))
-//	panel.open() // Пока что просто не открываем, надо будет удалить
-
 
 /mob/new_player/Stat()
 	. = ..()
@@ -114,15 +68,23 @@
 	if(usr != src || !client)
 		return TOPIC_NOACTION
 
-	if(href_list["lobby_changelog"])
-		client.changes()
-		return
-
 	if(href_list["lobby_setup"])
 		client.prefs.open_setup_window(src)
 		return 1
 
-	if (href_list["show_wiki"])
+	if(href_list["lobby_init"])
+		GLOB.using_map.update_titlescreen(client)
+		return 1
+	if(href_list["lobby_changelog"])
+		client.changes()
+		return 1
+	if (href_list["lobby_github"])
+		client.link_url(config.source_url, "Source", TRUE)
+		return 1
+	if (href_list["lobby_discord"])
+		client.link_url(config.discord_url, "Discord", TRUE)
+		return 1
+	if (href_list["lobby_wiki"] || href_list["show_wiki"])
 		client.link_url(config.wiki_url, "Wiki", TRUE)
 		return 1
 	if (href_list["show_rules"])
@@ -136,7 +98,7 @@
 
 		if(GAME_STATE <= RUNLEVEL_LOBBY)
 			ready = !ready
-			client << output(ready, "lobbybrowser:setReadyStatus")
+			GLOB.using_map.set_titlescreen_ready(client, ready)
 
 		if(config.minimum_byondacc_age && client.player_age <= config.minimum_byondacc_age)
 			if(!client.discord_id || (client.discord_id && length(client.discord_id) == 32))
@@ -144,10 +106,6 @@
 				to_chat(usr, "<span class='danger'>Вам необходимо привязать дискорд-профиль к аккаунту!</span>")
 				to_chat(usr, "<span class='warning'>Нажмите 'Привязка Discord' во вкладке 'Special Verbs' для получения инструкций.</span>")
 				return FALSE
-
-	if (href_list["refresh"])
-		panel.close()
-		new_player_panel()
 
 	if(href_list["lobby_observe"])
 		if(config.minimum_byondacc_age && client.player_age <= config.minimum_byondacc_age)
@@ -235,9 +193,6 @@
 	if(!ready && href_list["preference"])
 		if(client)
 			client.prefs.process_link(src, href_list)
-
-	else if(!href_list["lobby_join"])
-		new_player_panel()
 
 /mob/new_player/proc/AttemptLateSpawn(datum/job/job, spawning_at)
 
@@ -468,7 +423,6 @@
 
 /mob/new_player/proc/close_spawn_windows()
 	close_browser(src, "window=latechoices") //closes late choices window
-	panel.close()
 
 /mob/new_player/proc/check_species_allowed(datum/species/S, show_alert=1)
 	if(!S.is_available_for_join() && !has_admin_rights())
@@ -528,5 +482,5 @@
 
 
 /hook/roundstart/proc/update_lobby_browsers()
-	GLOB.using_map.refresh_lobby_browsers()
+	GLOB.using_map.update_titlescreens()
 	return TRUE

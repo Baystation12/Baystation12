@@ -361,8 +361,7 @@ SUBSYSTEM_DEF(jobs)
 	for(var/mob/new_player/player in unassigned_roundstart)
 		if(player.client.prefs.alternate_option == RETURN_TO_LOBBY)
 			player.ready = FALSE
-			player.new_player_panel()
-			player.client << output(player.ready, "lobbybrowser:setReadyStatus")
+			GLOB.using_map.set_titlescreen_ready(player.client, player.ready)
 			unassigned_roundstart -= player
 	return TRUE
 

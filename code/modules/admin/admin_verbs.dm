@@ -919,10 +919,10 @@ var/global/list/admin_verbs_mod = list(
 			if(!file)
 				return
 
-			GLOB.using_map.update_titlescreen(file)
+			GLOB.using_map.set_titlescreen_image(file)
 
 		if("Reset to default")
-			GLOB.using_map.update_titlescreen()
+			GLOB.using_map.set_titlescreen_image()
 
 		if("Cancel")
 			return

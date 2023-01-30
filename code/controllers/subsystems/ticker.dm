@@ -177,9 +177,6 @@ SUBSYSTEM_DEF(ticker)
 		mode.post_setup() // Drafts antags who don't override jobs.
 		to_world(SPAN_INFO("<B>Enjoy the game!</B>"))
 
-		for (var/mob/new_player/player in GLOB.player_list)
-			player.new_player_panel()
-
 	if(!length(GLOB.admins))
 		send2adminirc("Round has started with no admins online.")
 

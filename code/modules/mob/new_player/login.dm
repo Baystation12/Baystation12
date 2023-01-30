@@ -22,8 +22,6 @@
 	if (!GLOB.player_list.Find(src))
 		ADD_SORTED(GLOB.player_list, src, /proc/cmp_mob_key)
 
-	new_player_panel()
-
 	if(!SScharacter_setup.initialized)
 		SScharacter_setup.newplayers_requiring_init += src
 	else

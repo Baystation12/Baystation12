@@ -223,6 +223,8 @@ var/global/datum/controller/master/Master = new
 	if(current_runlevel < 1)
 		CRASH("Attempted to set invalid runlevel: [new_runlevel]")
 
+	GLOB.using_map.update_titlescreens()
+
 // Starts the mc, and sticks around to restart it if the loop ever ends.
 /datum/controller/master/proc/StartProcessing(delay)
 	set waitfor = 0
