@@ -39,34 +39,26 @@
 /**
  * Whether or not the atom's health is damaged.
  */
-/atom/proc/health_damaged(use_raw_values)
+/atom/proc/health_damaged()
 	if (!health_max)
 		return
-	if (use_raw_values)
-		return health_current < health_max
 	return get_current_health() < get_max_health()
 
 /**
  * Retrieves the atom's current damage, or `null` if not using health.
- * If `use_raw_values` is `TRUE`, uses the raw var values instead of the `get_*` proc results.
  */
-/atom/proc/get_damage_value(use_raw_values)
+/atom/proc/get_damage_value()
 	if (!health_max)
 		return
-	if (use_raw_values)
-		return health_max - health_current
-	else
-		return get_max_health() - get_current_health()
+	return get_max_health() - get_current_health()
 
 /**
  * Retrieves the atom's current damage as a percentage where `100%` is `100`.
- * If `use_raw_values` is `TRUE`, uses the raw var values instead of the `get_*` proc results.
  */
-/atom/proc/get_damage_percentage(use_raw_values)
+/atom/proc/get_damage_percentage()
 	if (!health_max)
 		return
-	var/max_health = use_raw_values ? health_max : get_max_health()
-	return Percent(get_damage_value(use_raw_values), max_health, 0)
+	return Percent(get_damage_value(), get_max_health(), 0)
 
 /**
  * Checks if the atom's health can be restored.
