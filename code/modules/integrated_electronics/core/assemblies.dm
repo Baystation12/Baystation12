@@ -89,7 +89,7 @@
 			visible_message(SPAN_WARNING("\The [src] sputters and sparks!"))
 			spark_system.start()
 		opened = TRUE
-		on_update_icon()
+		queue_icon_update()
 
 /obj/item/device/electronic_assembly/proc/check_interactivity(mob/user)
 	return (!user.incapacitated() && CanUseTopic(user))

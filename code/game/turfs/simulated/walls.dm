@@ -165,7 +165,7 @@
 
 /turf/simulated/wall/post_health_change(damage, prior_health, damage_type)
 	..()
-	update_icon()
+	queue_icon_update()
 
 /turf/simulated/wall/on_death()
 	dismantle_wall(TRUE)

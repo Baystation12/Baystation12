@@ -71,10 +71,10 @@
 	var/damage_percentage = get_damage_percentage()
 	if (damage_percentage >= 50 && !(state & STATE_UNSTABLE))
 		state |= STATE_UNSTABLE
-		update_icon()
+		queue_icon_update()
 	else if (damage_percentage < 50 && (state & STATE_UNSTABLE))
 		state &= ~STATE_UNSTABLE
-		update_icon()
+		queue_icon_update()
 
 
 /obj/machinery/bluespacedrive/on_death()

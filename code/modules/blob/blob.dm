@@ -78,7 +78,8 @@
 	qdel(src)
 
 /obj/effect/blob/post_health_change(health_mod, prior_health, damage_type)
-	update_icon()
+	..()
+	queue_icon_update()
 
 /obj/effect/blob/proc/regen()
 	restore_health(regen_rate)

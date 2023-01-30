@@ -154,7 +154,7 @@
 
 /obj/structure/window/post_health_change(health_mod, prior_health, damage_type)
 	..()
-	update_icon()
+	queue_icon_update()
 	if (health_mod < 0)
 		var/initial_damage_percentage = round((prior_health / get_max_health()) * 100)
 		var/damage_percentage = get_damage_percentage()
