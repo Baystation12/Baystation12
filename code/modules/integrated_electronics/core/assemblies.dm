@@ -82,7 +82,7 @@
 	icon = 0
 	addtimer(new Callback(src, .proc/fall_apart), 5.1)
 
-/obj/item/device/electronic_assembly/post_health_change(health_mod, damage_type)
+/obj/item/device/electronic_assembly/post_health_change(health_mod, prior_health, damage_type)
 	..()
 	if (get_damage_percentage() >= 75)
 		if(battery && battery.charge > 0)

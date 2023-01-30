@@ -101,9 +101,10 @@
 	if (!get_max_health())
 		return FALSE
 	health_mod = round(health_mod)
+	var/prior_health = get_current_health()
 	var/death_state = health_dead
 	health_current = round(clamp(health_current + health_mod, 0, get_max_health()))
-	post_health_change(health_mod, damage_type)
+	post_health_change(health_mod, prior_health, damage_type)
 	var/new_death_state = health_current > 0 ? FALSE : TRUE
 	if (death_state == new_death_state)
 		return FALSE
@@ -157,7 +158,7 @@
 /**
  * Proc called after any health changes made by the system
  */
-/atom/proc/post_health_change(health_mod, damage_type = null)
+/atom/proc/post_health_change(health_mod, prior_health, damage_type = null)
 	return
 
 /**

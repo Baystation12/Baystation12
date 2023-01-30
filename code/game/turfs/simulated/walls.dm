@@ -163,7 +163,7 @@
 	if (locate(/obj/effect/overlay/wallrot) in src)
 		. = round(. / 10)
 
-/turf/simulated/wall/post_health_change(damage, damage_type)
+/turf/simulated/wall/post_health_change(damage, prior_health, damage_type)
 	..()
 	update_icon()
 

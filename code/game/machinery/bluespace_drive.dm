@@ -66,7 +66,7 @@
 		playsound(loc, damage_hitsound, 80)
 
 
-/obj/machinery/bluespacedrive/post_health_change(health_mod, damage_type)
+/obj/machinery/bluespacedrive/post_health_change(health_mod, prior_health, damage_type)
 	. = ..()
 	var/damage_percentage = get_damage_percentage()
 	if (damage_percentage >= 50 && !(state & STATE_UNSTABLE))
