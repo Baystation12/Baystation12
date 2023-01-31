@@ -13,7 +13,7 @@
 
 /obj/item/robot_module/medical/build_equipment()
 	. = ..()
-	equipment += new /obj/item/robot_rack/roller(src, 1)
+	equipment += new /obj/item/robot_rack/roller_bed(src, 1)
 
 /obj/item/robot_module/medical/surgeon
 	name = "surgeon robot module"

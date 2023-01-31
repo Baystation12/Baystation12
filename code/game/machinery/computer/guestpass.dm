@@ -168,7 +168,7 @@
 		. = TOPIC_REFRESH
 
 	else if (href_list["issue"])
-		if (giver && accesses.len)
+		if (giver && length(accesses))
 			var/number = pad_left(random_id("guestpass_id_number", 1, 9999), 6, "0")
 			var/entry = "\[[stationtime2text()]\] Pass #[number] issued by [giver.registered_name] ([giver.assignment]) to [giv_name]. Reason: [reason]. Granted access to following areas: "
 			var/list/access_descriptors = list()
@@ -186,10 +186,10 @@
 			pass.reason = reason
 			pass.SetName("guest pass #[number]")
 			pass.assignment = "Guest"
-			addtimer(CALLBACK(pass, /obj/item/card/id/guest/proc/expire), duration MINUTES, TIMER_UNIQUE)
+			addtimer(new Callback(pass, /obj/item/card/id/guest/proc/expire), duration MINUTES, TIMER_UNIQUE)
 			playsound(src.loc, 'sound/machines/ping.ogg', 25, 0)
 			. = TOPIC_REFRESH
 		else if(!giver)
 			to_chat(user, SPAN_WARNING("Cannot issue pass without issuing ID."))
-		else if(!accesses.len)
+		else if(!length(accesses))
 			to_chat(user, SPAN_WARNING("Cannot issue pass without at least one granted access permission."))

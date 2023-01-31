@@ -669,3 +669,11 @@
 			return "Northwest"
 		if(337)
 			return "North-Northwest"
+
+
+/// Check if thing is an SUID. If other is supplied, check if other matches thing.
+/proc/is_suid(thing, other)
+	var/static/regex/suid_check = regex(@"^~[0-9a-zA-Z]{15}$")
+	if (other && other != thing)
+		return FALSE
+	return findtext(thing, suid_check)

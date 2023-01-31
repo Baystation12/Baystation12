@@ -93,14 +93,14 @@
 
 	for(var/o in objs)
 		var/obj/O = o
-		if (exclude_objs?.len && (O in exclude_objs))
+		if (length(exclude_objs) && (O in exclude_objs))
 			exclude_objs -= O
 			continue
 		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 
 	for(var/m in mobs)
 		var/mob/M = m
-		if (exclude_mobs?.len && (M in exclude_mobs))
+		if (length(exclude_mobs) && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
 
@@ -140,7 +140,7 @@
 
 	for(var/m in mobs)
 		var/mob/M = m
-		if (exclude_mobs?.len && (M in exclude_mobs))
+		if (length(exclude_mobs) && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
 		var/mob_message = message
@@ -159,7 +159,7 @@
 
 	for(var/o in objs)
 		var/obj/O = o
-		if (exclude_objs?.len && (O in exclude_objs))
+		if (length(exclude_objs) && (O in exclude_objs))
 			exclude_objs -= O
 			continue
 		O.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
@@ -260,7 +260,7 @@
 	if ((incapacitation_flags & INCAPACITATION_STUNNED) && stunned)
 		return 1
 
-	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (weakened || resting || pinned.len))
+	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (weakened || resting || length(pinned)))
 		return 1
 
 	if ((incapacitation_flags & INCAPACITATION_KNOCKOUT) && (stat || paralysis || sleeping || (status_flags & FAKEDEATH)))
@@ -702,7 +702,7 @@
 	if(client.holder)
 		if(statpanel("MC"))
 			stat("CPU:","[world.cpu]")
-			stat("Instances:","[world.contents.len]")
+			stat("Instances:","[length(world.contents)]")
 			stat(null)
 			var/time = Uptime()
 			if(Master)
@@ -719,6 +719,7 @@
 				stat(null)
 				config.UpdateStat()
 				GLOB.UpdateStat()
+				GLOB.debug_real_globals.UpdateStat()
 				stat(null)
 				for (var/datum/controller/subsystem/subsystem as anything in Master.subsystems)
 					subsystem.UpdateStat(time)
@@ -754,10 +755,10 @@
 	else if(buckled)
 		anchored = TRUE
 		if(istype(buckled))
-			if(buckled.buckle_lying == -1)
+			if (isnull(buckled.buckle_stance))
 				lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 			else
-				lying = buckled.buckle_lying
+				lying = buckled.buckle_stance
 			if(buckled.buckle_movable)
 				anchored = FALSE
 	else
@@ -903,7 +904,7 @@
 	return visible_implants
 
 /mob/proc/embedded_needs_process()
-	return (embedded.len > 0)
+	return (length(embedded) > 0)
 
 /mob/proc/remove_implant(obj/item/implant, surgical_removal = FALSE)
 	if(!LAZYLEN(get_visible_implants(0))) //Yanking out last object - removing verb.
@@ -911,7 +912,7 @@
 	for(var/obj/item/O in pinned)
 		if(O == implant)
 			pinned -= O
-		if(!pinned.len)
+		if(!length(pinned))
 			anchored = FALSE
 	implant.dropInto(loc)
 	implant.add_blood(src)
@@ -981,7 +982,7 @@
 		self = 1 // Removing object from yourself.
 
 	valid_objects = get_visible_implants(0)
-	if(!valid_objects.len)
+	if(!length(valid_objects))
 		if(self)
 			to_chat(src, "You have nothing stuck in your body that is large enough to remove.")
 		else

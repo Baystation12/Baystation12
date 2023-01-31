@@ -34,7 +34,7 @@
 		source.extensions[extension_base_type] = .
 	else
 		var/list/extension_data = list(extension_type, source)
-		if(args.len > 2)
+		if(length(args) > 2)
 			extension_data += args.Copy(3)
 		source.extensions[extension_base_type] = extension_data
 

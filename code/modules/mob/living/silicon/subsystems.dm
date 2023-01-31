@@ -72,7 +72,7 @@
 	. = ..()
 	if(!.)
 		return
-	if(!silicon_subsystems.len)
+	if(!length(silicon_subsystems))
 		return
 	if(!statpanel("Subsystems"))
 		return

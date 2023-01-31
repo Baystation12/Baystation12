@@ -192,7 +192,7 @@
 			discovery += "scanners"
 		if (augment_flags & AUGMENT_INSPECTABLE)
 			discovery += "manual inspection"
-		if (discovery.len)
+		if (length(discovery))
 			message += " It can be discovered by [english_list(discovery)]."
 		else
 			message += " It is undetectable."

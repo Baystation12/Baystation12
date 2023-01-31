@@ -15,7 +15,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	candidate_turfs = where(candidate_turfs, /proc/can_not_locate, /obj/effect/overmap/visitable)
 
 	for(var/i = 1 to number_of_events)
-		if(!candidate_turfs.len)
+		if(!length(candidate_turfs))
 			break
 		var/overmap_event_type = pick(subtypesof(/datum/overmap_event))
 		var/datum/overmap_event/datum_spawn = new overmap_event_type
@@ -30,7 +30,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 		qdel(datum_spawn)//idk help how do I do this better?
 
 /singleton/overmap_event_handler/proc/acquire_event_turfs(number_of_turfs, distance_from_origin, list/candidate_turfs, continuous = TRUE)
-	number_of_turfs = min(number_of_turfs, candidate_turfs.len)
+	number_of_turfs = min(number_of_turfs, length(candidate_turfs))
 	candidate_turfs = candidate_turfs.Copy() // Not this proc's responsibility to adjust the given lists
 
 	var/origin_turf = pick(candidate_turfs)
@@ -38,7 +38,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	var/list/selection_turfs = list(origin_turf)
 	candidate_turfs -= origin_turf
 
-	while(selection_turfs.len && selected_turfs.len < number_of_turfs)
+	while(length(selection_turfs) && length(selected_turfs) < number_of_turfs)
 		var/selection_turf = pick(selection_turfs)
 		var/random_neighbour = get_random_neighbour(selection_turf, candidate_turfs, continuous, distance_from_origin)
 
@@ -122,7 +122,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 			continue
 		active_hazards += E
 
-	if(!active_hazards.len)
+	if(!length(active_hazards))
 		hazard_by_turf -= T
 		GLOB.entered_event.unregister(T, src, /singleton/overmap_event_handler/proc/on_turf_entered)
 		GLOB.exited_event.unregister(T, src, /singleton/overmap_event_handler/proc/on_turf_exited)
@@ -233,7 +233,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 
 /obj/effect/overmap/event/carp
 	name = "carp shoal"
-	events = list(/datum/event/carp_migration/overmap)
+	events = list(/datum/event/mob_spawning/carp)
 	opacity = 0
 	difficulty = EVENT_LEVEL_MODERATE
 	event_icon_states = list("carp1", "carp2")

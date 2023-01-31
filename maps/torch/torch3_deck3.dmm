@@ -333,7 +333,7 @@
 /turf/simulated/wall/prepainted,
 /area/storage/tools)
 "bh" = (
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
@@ -1898,7 +1898,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/smes/buildable/preset/torch/substation{
-	RCon_tag = "Substation - Third Deck"
+	RCon_tag = "Substation - 3rd Deck"
 	},
 /obj/item/device/radio/intercom{
 	pixel_y = 23
@@ -4146,10 +4146,6 @@
 	dir = 8;
 	icon_state = "pipe-c"
 	},
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 24
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
@@ -4160,6 +4156,9 @@
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
+	},
+/obj/machinery/light/spot{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
@@ -5659,7 +5658,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos/aux)
 "ls" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
 "lt" = (
@@ -6524,9 +6523,6 @@
 /area/maintenance/thirddeck/aftstarboard)
 "nI" = (
 /obj/structure/table/steel,
-/obj/structure/flora/pottedplant/small{
-	pixel_y = 13
-	},
 /obj/machinery/requests_console{
 	announcementConsole = 1;
 	department = "Security";
@@ -6538,6 +6534,9 @@
 	},
 /obj/machinery/rotating_alarm/security_alarm{
 	dir = 1
+	},
+/obj/item/flora/pottedplantsmall{
+	pixel_y = 13
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
@@ -12821,7 +12820,7 @@
 /area/maintenance/thirddeck/aftport)
 "Fn" = (
 /obj/structure/table/woodentable/walnut,
-/obj/structure/flora/pottedplant/deskleaf,
+/obj/item/flora/pottedplantsmall/leaf,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/observation)
 "Fo" = (
@@ -16999,6 +16998,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
+"QG" = (
+/obj/structure/table/woodentable/walnut,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/crew_quarters/observation)
 "QH" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 8
@@ -18051,6 +18054,10 @@
 	dir = 4
 	},
 /obj/machinery/cooker/cereal,
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "TX" = (
@@ -28406,7 +28413,7 @@ aa
 Di
 Di
 BQ
-Fn
+QG
 YB
 nw
 Xq

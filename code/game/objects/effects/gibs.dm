@@ -28,7 +28,7 @@
 
 
 /obj/effect/gibspawner/proc/Gib(atom/location)
-	if (gibtypes.len != gibamounts.len || gibamounts.len != gibdirections.len)
+	if (length(gibtypes) != length(gibamounts) || length(gibamounts) != length(gibdirections))
 		log_error("Gib list length mismatch!")
 		return
 	if (sparks)
@@ -38,7 +38,7 @@
 	var/spread = isturf(location)
 	var/humanGibs = istype(src, /obj/effect/gibspawner/human)
 	var/obj/effect/decal/cleanable/blood/gibs/gib
-	for (var/i = gibtypes.len to 1 step -1)
+	for (var/i = length(gibtypes) to 1 step -1)
 		if (!gibamounts[i])
 			continue
 		for (var/j = gibamounts[i] to 1 step -1)
@@ -57,6 +57,6 @@
 			if (!spread)
 				continue
 			var/list/directions = gibdirections[i]
-			if (directions.len)
-				addtimer(CALLBACK(gib, /obj/effect/decal/cleanable/blood/gibs/proc/streak, directions), 0)
+			if (length(directions))
+				addtimer(new Callback(gib, /obj/effect/decal/cleanable/blood/gibs/proc/streak, directions), 0)
 	qdel(src)

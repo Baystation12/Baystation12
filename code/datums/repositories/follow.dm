@@ -67,10 +67,10 @@ var/global/repository/follow/follow_repository = new()
 
 	for(var/followed_name in followed_by_name)
 		var/list/followed_things = followed_by_name[followed_name]
-		if(followed_things.len == 1)
+		if(length(followed_things) == 1)
 			ADD_SORTED(L, followed_things[1], /proc/cmp_follow_holder)
 		else
-			for(var/i = 1 to followed_things.len)
+			for(var/i = 1 to length(followed_things))
 				var/datum/follow_holder/followed_thing = followed_things[i]
 				followed_thing.instance = i
 				followed_thing.get_name(TRUE)

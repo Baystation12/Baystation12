@@ -171,7 +171,7 @@
 
 	var/channels[0]
 	for (var/ch_name in owner.law_channels())
-		channels[++channels.len] = list("channel" = ch_name)
+		channels[LIST_PRE_INC(channels)] = list("channel" = ch_name)
 	data["channel"] = owner.lawchannel
 	data["channels"] = channels
 	data["law_sets"] = package_multiple_laws(data["isAdmin"] ? admin_laws : player_laws)
@@ -186,9 +186,9 @@
 /datum/nano_module/law_manager/proc/package_laws(list/data, field, list/datum/ai_law/laws)
 	var/packaged_laws[0]
 	for(var/datum/ai_law/AL in laws)
-		packaged_laws[++packaged_laws.len] = list("law" = AL.law, "index" = AL.get_index(), "state" = owner.laws.get_state_law(AL), "ref" = "\ref[AL]")
+		packaged_laws[LIST_PRE_INC(packaged_laws)] = list("law" = AL.law, "index" = AL.get_index(), "state" = owner.laws.get_state_law(AL), "ref" = "\ref[AL]")
 	data[field] = packaged_laws
-	data["has_[field]"] = packaged_laws.len
+	data["has_[field]"] = length(packaged_laws)
 
 /datum/nano_module/law_manager/proc/package_multiple_laws(list/datum/ai_laws/laws)
 	var/law_sets[0]
@@ -198,7 +198,7 @@
 		package_laws(packaged_laws, "ion_laws", ALs.ion_laws)
 		package_laws(packaged_laws, "inherent_laws", ALs.inherent_laws)
 		package_laws(packaged_laws, "supplied_laws", ALs.supplied_laws)
-		law_sets[++law_sets.len] = list("name" = ALs.name, "header" = ALs.law_header, "ref" = "\ref[ALs]","laws" = packaged_laws)
+		law_sets[LIST_PRE_INC(law_sets)] = list("name" = ALs.name, "header" = ALs.law_header, "ref" = "\ref[ALs]","laws" = packaged_laws)
 
 	return law_sets
 

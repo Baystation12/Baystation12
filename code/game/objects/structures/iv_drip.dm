@@ -1,217 +1,335 @@
-/obj/structure/iv_drip
+/obj/structure/iv_stand
 	name = "\improper IV drip"
 	icon = 'icons/obj/iv_drip.dmi'
 	icon_state = "unhooked"
 	anchored = FALSE
 	density = FALSE
-	var/mob/living/carbon/human/attached
-	var/mode = 1 // 1 is injecting, 0 is taking blood.
-	var/obj/item/reagent_containers/beaker
-	var/list/transfer_amounts = list(REM, 1, 2)
-	var/transfer_amount = 1
 
-/obj/structure/iv_drip/verb/set_amount_per_transfer_from_this()
-	set name = "Set IV transfer amount"
-	set category = "Object"
-	set src in range(1)
-	if(!CanPhysicallyInteract(usr))
-		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
-		return
-	var/N = input("Amount per transfer from this:","[src]") as null|anything in transfer_amounts
-	if(!CanPhysicallyInteract(usr)) // because input takes time and the situation can change
-		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
-		return
-	if(N)
-		transfer_amount = N
+	/// The IV stand is configured to remove reagents from the attached mob.
+	var/const/MODE_EXTRACT = 0
 
-/obj/structure/iv_drip/on_update_icon()
-	if(attached)
-		icon_state = "hooked"
-	else
+	/// The IV stand is configured to add reagents to the attached mob.
+	var/const/MODE_INJECT = 1
+
+	/// One of the IV stand's MODE_* constants.
+	var/drip_mode = MODE_INJECT
+
+	/// The mob currently attached to this IV stand, if any.
+	var/mob/living/carbon/human/patient
+
+	/// The IV bag currently attached to this IV stand, if any.
+	var/obj/item/reagent_containers/ivbag/iv_bag
+
+	/// The color of the last reagent mix placed on the IV stand.
+	var/last_reagent_color = "#ffffff"
+
+
+/obj/structure/iv_stand/Destroy()
+	patient = null
+	QDEL_NULL(iv_bag)
+	return ..()
+
+
+/obj/structure/iv_stand/Initialize()
+	. = ..()
+	update_icon()
+
+
+/obj/structure/iv_stand/on_update_icon()
+	if (!patient)
 		icon_state = "unhooked"
-
+	else
+		icon_state = "hooked"
 	overlays.Cut()
-
-	if(beaker)
-		var/datum/reagents/reagents = beaker.reagents
-		var/percent = round((reagents.total_volume / beaker.volume) * 100)
-		if(reagents.total_volume)
-			var/image/filling = image('icons/obj/iv_drip.dmi', src, "reagent")
-
-			switch(percent)
-				if(0 to 9)		filling.icon_state = "reagent0"
-				if(10 to 24) 	filling.icon_state = "reagent10"
-				if(25 to 49)	filling.icon_state = "reagent25"
-				if(50 to 74)	filling.icon_state = "reagent50"
-				if(75 to 79)	filling.icon_state = "reagent75"
-				if(80 to 90)	filling.icon_state = "reagent80"
-				if(91 to INFINITY)	filling.icon_state = "reagent100"
-			filling.icon += reagents.get_color()
-			overlays += filling
-
-		if(attached)
-			var/image/light = image('icons/obj/iv_drip.dmi', "light_full")
-			if(percent < 15)
-				light.icon_state = "light_low"
-			else if(percent < 60)
-				light.icon_state = "light_mid"
-			overlays += light
-
-/obj/structure/iv_drip/MouseDrop(over_object, src_location, over_location)
-	if(!CanMouseDrop(over_object))
+	if (!iv_bag)
 		return
-	if(attached)
-		drip_detach(usr)
-	else if(ishuman(over_object))
-		hook_up(over_object, usr)
+	var/image/reagents_overlay = image(icon, icon_state = "reagent0")
+	reagents_overlay.color = last_reagent_color
+	var/image/light_overlay = image(icon, icon_state = "light_low")
+	light_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	light_overlay.layer = ABOVE_LIGHTING_LAYER
+	switch (Percent(iv_bag.reagents.total_volume, iv_bag.volume, 0))
+		if (-INFINITY to 9)
+			reagents_overlay.icon_state = "reagent0"
+			light_overlay.icon_state = "light_low"
+		if (10 to 24)
+			reagents_overlay.icon_state = "reagent10"
+			light_overlay.icon_state = "light_low"
+		if (25 to 49)
+			reagents_overlay.icon_state = "reagent25"
+			light_overlay.icon_state = "light_mid"
+		if (50 to 74)
+			reagents_overlay.icon_state = "reagent50"
+			light_overlay.icon_state = "light_mid"
+		if (75 to 79)
+			reagents_overlay.icon_state = "reagent75"
+			light_overlay.icon_state = "light_full"
+		if (80 to 90)
+			reagents_overlay.icon_state = "reagent80"
+			light_overlay.icon_state = "light_full"
+		if (91 to INFINITY)
+			reagents_overlay.icon_state = "reagent100"
+			light_overlay.icon_state = "light_full"
+	overlays += reagents_overlay
+	overlays += light_overlay
 
-/obj/structure/iv_drip/attackby(obj/item/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/reagent_containers/ivbag))
-		if(!isnull(src.beaker))
-			to_chat(user, "There is already a reagent container loaded!")
-			return
-		if(!user.unEquip(W, src))
-			return
-		beaker = W
-		to_chat(user, "You attach \the [W] to \the [src].")
-		queue_icon_update()
+
+/obj/structure/iv_stand/MouseDrop(atom/over_atom, source_loc, over_loc)
+	if (!usr)
+		return
+	if (!over_atom)
+		return
+	if (!Adjacent(usr) || !over_atom.Adjacent(usr))
+		return
+	if (isliving(over_atom))
+		MouseDrop_T(over_atom, usr)
 	else
+		over_atom.MouseDrop_T(src, usr)
+
+
+/obj/structure/iv_stand/MouseDrop_T(atom/dropped, mob/living/user)
+	if (src == dropped && user.canClick())
+		user.ClickOn(src)
+		return
+	if (!CheckDexterity(user))
+		to_chat(user, SPAN_WARNING("You're not dextrous enough to do that."))
+		return
+	if (user.incapacitated())
+		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		return
+	if (patient == dropped)
+		RemoveDrip(user)
+	else if (ishuman(dropped))
+		AttachDrip(dropped, user)
+
+
+/obj/structure/iv_stand/attackby(obj/item/item, mob/living/user)
+	if (!istype(item, /obj/item/reagent_containers/ivbag))
 		return ..()
-
-/obj/structure/iv_drip/Destroy()
-	STOP_PROCESSING(SSobj,src)
-	attached = null
-	qdel(beaker)
-	beaker = null
-	. = ..()
-
-/obj/structure/iv_drip/Process()
-	if(attached)
-		if(!Adjacent(attached))
-			rip_out()
-			return PROCESS_KILL
-	else
-		return PROCESS_KILL
-
-	if(!beaker)
-		return
-
-	//SSObj fires twice as fast as SSMobs, so gotta slow down to not OD our victims.
-	if(SSobj.times_fired % 2)
-		return
-
-	if(mode) // Give blood
-		if(beaker.volume > 0)
-			beaker.reagents.trans_to_mob(attached, transfer_amount, CHEM_BLOOD)
-			queue_icon_update()
-	else // Take blood
-		var/amount = beaker.reagents.maximum_volume - beaker.reagents.total_volume
-		amount = min(amount, 4)
-
-		if(amount == 0) // If the beaker is full, ping
-			if(prob(5)) visible_message("\The [src] pings.")
-			return
-
-		if(!attached.should_have_organ(BP_HEART))
-			return
-
-		// If the human is losing too much blood, beep.
-		if(attached.get_blood_volume() < BLOOD_VOLUME_SAFE * 1.05)
-			visible_message("\The [src] beeps loudly.")
-
-		if(attached.take_blood(beaker,amount))
-			queue_icon_update()
-
-/obj/structure/iv_drip/attack_hand(mob/user as mob)
-	if(attached)
-		drip_detach(user)
-	else if(beaker)
-		beaker.dropInto(loc)
-		beaker = null
-		queue_icon_update()
-	else
-		return ..()
-
-/obj/structure/iv_drip/attack_robot(mob/user)
-	if(Adjacent(user))
-		attack_hand(user)
-
-/obj/structure/iv_drip/verb/drip_detach_verb()
-	set category = "Object"
-	set name = "Detach IV Drip"
-	set src in range(1)
-
-	drip_detach(usr)
-
-/obj/structure/iv_drip/proc/drip_detach(mob/user)
-	if (!attached)
-		to_chat(user, SPAN_WARNING("\The [src] is not attached to anything."))
-		return
-
-	if (!CanPhysicallyInteractWith(user, src))
-		to_chat(user, SPAN_WARNING("You're in no condition to do that!"))
-		return
-
-	if (!user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
-		rip_out()
-	else
-		user.visible_message(
-			SPAN_WARNING("\The [user] detaches \the [attached] from \the [src]."),
-			SPAN_NOTICE("You detach \the [attached] from \the [src]."),
-		)
-		attached = null
-
-	queue_icon_update()
-	STOP_PROCESSING(SSobj, src)
-
-/obj/structure/iv_drip/verb/toggle_mode()
-	set category = "Object"
-	set name = "Toggle IV Mode"
-	set src in view(1)
-	if(!CanPhysicallyInteract(usr))
-		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
-		return
-	mode = !mode
-	to_chat(usr, "The IV drip is now [mode ? "injecting" : "taking blood"].")
-
-/obj/structure/iv_drip/examine(mob/user, distance)
-	. = ..()
-
-	if (distance >= 2)
-		return
-
-	to_chat(user, "The IV drip is [mode ? "injecting" : "taking blood"].")
-	to_chat(user, "It is set to transfer [transfer_amount]u of chemicals per cycle.")
-
-	if(beaker)
-		if(beaker.reagents && beaker.reagents.total_volume)
-			to_chat(usr, SPAN_NOTICE("Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid."))
-		else
-			to_chat(usr, SPAN_NOTICE("Attached is an empty [beaker]."))
-	else
-		to_chat(usr, SPAN_NOTICE("No chemicals are attached."))
-
-	to_chat(usr, SPAN_NOTICE("[attached ? attached : "No one"] is hooked up to it."))
-
-/obj/structure/iv_drip/proc/rip_out()
-	visible_message("The needle is ripped out of [src.attached], doesn't that hurt?")
-	attached.apply_damage(1, DAMAGE_BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags=DAMAGE_FLAG_SHARP)
-	attached = null
-
-/obj/structure/iv_drip/proc/hook_up(mob/living/carbon/human/target, mob/user)
-	if(do_IV_hookup(target, user, src))
-		attached = target
-		START_PROCESSING(SSobj,src)
-
-/proc/do_IV_hookup(mob/living/carbon/human/target, mob/user, obj/IV)
-	to_chat(user, SPAN_NOTICE("You start to hook up \the [target] to \the [IV]."))
-	if(!user.do_skilled(2 SECONDS, SKILL_MEDICAL, target))
-		return FALSE
-
-	if(prob(user.skill_fail_chance(SKILL_MEDICAL, 80, SKILL_BASIC)))
-		user.visible_message("\The [user] fails to find the vein while trying to hook \the [target] up to \the [IV], stabbing them instead!")
-		target.apply_damage(2, DAMAGE_BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags=DAMAGE_FLAG_SHARP)
-		return FALSE
-
-	user.visible_message("\The [user] hooks \the [target] up to \the [IV].")
+	if (!isnull(iv_bag))
+		to_chat(user, SPAN_WARNING("\The [src] already has \a [iv_bag] attached."))
+		return TRUE
+	if (!user.unEquip(item, src))
+		return TRUE
+	user.visible_message(
+		SPAN_ITALIC("\The [user] attaches \a [item] to \a [src]."),
+		SPAN_ITALIC("You attach \the [item] to \the [src]."),
+		range = 5
+	)
+	iv_bag = item
+	last_reagent_color = iv_bag.reagents.get_color()
+	update_icon()
 	return TRUE
+
+
+/obj/structure/iv_stand/Process()
+	if (!patient)
+		return PROCESS_KILL
+	if (!Adjacent(patient))
+		RipDrip()
+		return PROCESS_KILL
+	if (!iv_bag)
+		return
+	if (SSobj.times_fired & 1)
+		return
+	if (!iv_bag.transfer_amount)
+		return
+	if (drip_mode == MODE_INJECT)
+		if (!iv_bag.reagents.total_volume)
+			if (prob(15))
+				playsound(src, 'sound/effects/3beep.ogg', 50, TRUE)
+				audible_message(
+					SPAN_NOTICE("\The [src] pings."),
+					hearing_distance = 5
+				)
+			return
+		iv_bag.reagents.trans_to_mob(patient, iv_bag.transfer_amount, CHEM_BLOOD)
+		update_icon()
+		return
+	if (drip_mode == MODE_EXTRACT)
+		var/difference = clamp(iv_bag.volume - iv_bag.reagents.total_volume, 0, iv_bag.transfer_amount)
+		if (!difference)
+			if (prob(15))
+				playsound(src, 'sound/effects/3beep.ogg', 50, TRUE)
+				audible_message(
+					SPAN_NOTICE("\The [src] pings."),
+					hearing_distance = 5
+				)
+			return
+		if (!patient.should_have_organ(BP_HEART))
+			return
+		if (patient.get_blood_volume() < BLOOD_VOLUME_SAFE)
+			if (prob(30))
+				playsound(src, 'sound/effects/3beep.ogg', 50, TRUE)
+				audible_message(
+					SPAN_NOTICE("\The [src] pings."),
+					hearing_distance = 5
+				)
+		if (patient.take_blood(iv_bag, difference))
+			update_icon()
+		return
+
+
+/obj/structure/iv_stand/attack_hand(mob/living/user)
+	if (iv_bag)
+		iv_bag.dropInto(loc)
+		iv_bag = null
+		update_icon()
+		return
+	if (patient)
+		RemoveDrip(user)
+		return
+	return ..()
+
+
+/obj/structure/iv_stand/attack_robot(mob/living/silicon/user)
+	if (!Adjacent(user))
+		return
+	attack_hand(user)
+
+
+/obj/structure/iv_stand/examine(mob/user, distance)
+	. = ..()
+	if (distance >= 2 && !isghost(user))
+		return
+	if (patient)
+		to_chat(user, "\The [patient] is hooked up to it.")
+	if (!iv_bag)
+		to_chat(user, "It has no IV bag attached.")
+		return
+	var/volume = Floor(iv_bag.reagents.total_volume)
+	if (!volume)
+		to_chat(user, "It has an empty [iv_bag] attached.")
+		return
+	to_chat(user, "It has \a [iv_bag] attached with [volume] units of liquid inside.")
+	to_chat(user, {"\
+		It is set to [drip_mode == MODE_INJECT ? "inject" : drip_mode == MODE_EXTRACT ? "extract" : ""] \
+		[iv_bag.transfer_amount]u of fluid per cycle.\
+	"})
+
+
+/obj/structure/iv_stand/CheckDexterity(mob/living/user)
+	return ishuman(user) || isrobot(user)
+
+
+/obj/structure/iv_stand/proc/AttachDrip(mob/living/carbon/human/target, mob/living/user)
+	if (patient)
+		to_chat(user, SPAN_WARNING("\The [patient] is already hooked up to \the [src]."))
+		return
+	user.visible_message(
+		SPAN_ITALIC("\The [user] starts to hook up \the [target] to \the [src]."),
+		SPAN_ITALIC("You start to hook up \the [target] to \the [src]."),
+		range = 5
+	)
+	if (!user.do_skilled(3 SECONDS, SKILL_MEDICAL, target))
+		return
+	if (prob(user.skill_fail_chance(SKILL_MEDICAL, 67, SKILL_BASIC)))
+		user.visible_message(
+			SPAN_DANGER("\The [user] fishes for a vein on \the [target] and fails, stabbing them instead!"),
+			SPAN_DANGER("You fish inexpertly for a vein on \the [target] and stab them instead!"),
+			range = 5
+		)
+		target.apply_damage(rand(2, 6), DAMAGE_BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags = DAMAGE_FLAG_SHARP, armor_pen = 100)
+		return
+	START_PROCESSING(SSobj, src)
+	user.visible_message(
+		SPAN_ITALIC("\The [user] successfully inserts \a [src]'s cannula into \the [target]."),
+		SPAN_NOTICE("You successfully insert \the [src]'s cannula into \the [target]."),
+		range = 1
+	)
+	patient = target
+	update_icon()
+
+
+/obj/structure/iv_stand/proc/RemoveDrip(mob/living/user)
+	if (!patient)
+		return
+	user.visible_message(
+		SPAN_ITALIC("\The [user] starts unhooking \the [patient] from \a [src]."),
+		SPAN_ITALIC("You start extracting \the [src]'s cannula from \the [patient]."),
+		range = 5
+	)
+	if (!user.do_skilled(1.5 SECONDS, SKILL_MEDICAL, patient))
+		return
+	if (!user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
+		RipDrip(user)
+		return
+	STOP_PROCESSING(SSobj, src)
+	user.visible_message(
+		SPAN_WARNING("\The [user] extracts \the [src]'s cannula from \the [patient]."),
+		SPAN_NOTICE("You successfully unhook \the [patient] from \the [src]."),
+		range = 1
+	)
+	patient = null
+	update_icon()
+
+
+/obj/structure/iv_stand/proc/RipDrip(mob/living/user)
+	if (!patient)
+		return
+	STOP_PROCESSING(SSobj, src)
+	patient.visible_message(
+		SPAN_WARNING("\The cannula from \a [src] is ripped out of \the [patient][user ? " by \the [user]" : ""]!"),
+		SPAN_DANGER("\The cannula from \the [src] is ripped out of you[user ? " by \the [user]": ""]!"),
+		range = 5
+	)
+	patient.custom_pain(power = 20)
+	patient.apply_damage(rand(1, 3), DAMAGE_BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags = DAMAGE_FLAG_SHARP, armor_pen = 100)
+	patient = null
+	update_icon()
+
+
+/obj/structure/iv_stand/verb/TransferAmountVerb()
+	set name = "Set IV Bag Rate"
+	set category = "Object"
+	set src in range(1)
+	var/mob/living/user = usr
+	if (!istype(user))
+		return
+	if (!Adjacent(user) || user.incapacitated())
+		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		return
+	if (!iv_bag)
+		to_chat(user, SPAN_WARNING("\The [src] does not have an attached IV bag."))
+		return
+	iv_bag.UpdateTransferAmount(user, src)
+
+
+/obj/structure/iv_stand/verb/RemoveDripVerb()
+	set category = "Object"
+	set name = "Detach Stand IV Drip"
+	set src in range(1)
+	var/mob/living/user = usr
+	if (!istype(user))
+		return
+	if (!patient)
+		to_chat(user, SPAN_WARNING("\The [src] is not hooked up to anyone."))
+		return
+	if (!Adjacent(user) || user.incapacitated())
+		to_chat(user, SPAN_WARNING("You're in no condition do that."))
+	RemoveDrip(user)
+
+
+/obj/structure/iv_stand/verb/ToggleModeVerb()
+	set category = "Object"
+	set name = "Toggle Stand IV Mode"
+	set src in view(1)
+	var/mob/living/user = usr
+	if (!istype(user))
+		return
+	if (!Adjacent(user) || user.incapacitated())
+		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		return
+	var/action_word
+	switch (drip_mode)
+		if (MODE_EXTRACT)
+			action_word = "inject"
+			drip_mode = MODE_INJECT
+		else
+			action_word = "extract"
+			drip_mode = MODE_EXTRACT
+	user.visible_message(
+		SPAN_ITALIC("\The [user] adjusts \a [src] to [action_word] fluids."),
+		SPAN_ITALIC("You adjust \the [src] to [action_word] fluids."),
+		range = 3
+	)

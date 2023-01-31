@@ -13,8 +13,8 @@
 	max_damage = 45
 	var/eye_icon = 'icons/mob/human_races/species/default_eyes.dmi'
 	var/apply_eye_colour = TRUE
-	var/tmp/last_cached_eye_colour
-	var/tmp/last_eye_cache_key
+	var/last_cached_eye_colour
+	var/last_eye_cache_key
 	var/flash_mod
 	var/darksight_range
 	var/darksight_tint

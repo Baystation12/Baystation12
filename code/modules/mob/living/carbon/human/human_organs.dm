@@ -34,7 +34,7 @@
 	handle_stance()
 	handle_grasp()
 
-	if(!force_process && !bad_external_organs.len)
+	if(!force_process && !length(bad_external_organs))
 		return
 
 	for(var/obj/item/organ/external/E in bad_external_organs)
@@ -48,7 +48,7 @@
 
 			if (!lying && !buckled && world.time - l_move_time < 15)
 			//Moving around with fractured ribs won't do you any good
-				if (prob(10) && !stat && can_feel_pain() && chem_effects[CE_PAINKILLER] < 50 && E.is_broken() && E.internal_organs.len)
+				if (prob(10) && !stat && can_feel_pain() && chem_effects[CE_PAINKILLER] < 50 && E.is_broken() && length(E.internal_organs))
 					custom_pain("Pain jolts through your broken [E.encased ? E.encased : E.name], staggering you!", 50, affecting = E)
 					unequip_item(loc)
 					Stun(2)
@@ -229,7 +229,7 @@
 
 	else
 		var/grasp_name = affected.name
-		if((affected.body_part in list(ARM_LEFT, ARM_RIGHT)) && affected.children.len)
+		if((affected.body_part in list(ARM_LEFT, ARM_RIGHT)) && length(affected.children))
 			var/obj/item/organ/external/hand = pick(affected.children)
 			grasp_name = hand.name
 

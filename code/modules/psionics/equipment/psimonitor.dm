@@ -49,7 +49,7 @@
 
 		else  if(href_list["remove_violation"])
 			var/remove_ind = text2num(href_list["remove_violation"])
-			if(remove_ind > 0 && remove_ind <= psi_violations.len)
+			if(remove_ind > 0 && remove_ind <= length(psi_violations))
 				psi_violations.Cut(remove_ind, remove_ind++)
 				. = 1
 
@@ -95,8 +95,8 @@
 
 	if(show_violations)
 		dat += "<h2>Psionic Control Violations <a href='?src=\ref[src];show_violations=0'>-</a></h2><hr><center><table>"
-		if(psi_violations.len)
-			for(var/i =  1 to psi_violations.len)
+		if(length(psi_violations))
+			for(var/i =  1 to length(psi_violations))
 				var/entry = psi_violations[i]
 				dat += "<tr><td><br>[entry]</td><td>[authorized ? "<a href='?src=\ref[src];remove_violation=[i]'>Remove</a>" : ""]</td></tr>"
 		else

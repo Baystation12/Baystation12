@@ -96,14 +96,14 @@
 		if (!holder.say_list)
 			return
 
-		if (holder.say_list.speak.len)
+		if (length(holder.say_list.speak))
 			comm_types += COMM_SAY
-		if (holder.say_list.emote_hear.len)
+		if (length(holder.say_list.emote_hear))
 			comm_types += COMM_AUDIBLE_EMOTE
-		if (holder.say_list.emote_see.len)
+		if (length(holder.say_list.emote_see))
 			comm_types += COMM_VISUAL_EMOTE
 
-		if (!comm_types.len)
+		if (!length(comm_types))
 			return // All the relevant lists are empty, so do nothing.
 
 		switch(pick(comm_types))
@@ -125,7 +125,7 @@
 
 // This is to make responses feel a bit more natural and not instant.
 /datum/ai_holder/proc/delayed_say(message, mob/speak_to)
-	addtimer(CALLBACK(src, .proc/do_delayed_say, message, speak_to), rand(1 SECOND, 2 SECONDS))
+	addtimer(new Callback(src, .proc/do_delayed_say, message, speak_to), rand(1 SECOND, 2 SECONDS))
 
 /datum/ai_holder/proc/do_delayed_say(message, mob/speak_to)
 	if (!src || !holder || !can_act())  // We might've died/got deleted/etc in the meantime.

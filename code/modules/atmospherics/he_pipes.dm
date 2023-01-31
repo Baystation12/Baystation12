@@ -18,8 +18,8 @@
 	fatigue_pressure = 300*ONE_ATMOSPHERE
 	alert_pressure = 360*ONE_ATMOSPHERE
 
-	can_buckle = 1
-	buckle_lying = 1
+	can_buckle = TRUE
+	buckle_stance = BUCKLE_FORCE_PRONE
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/Initialize()
 	. = ..()

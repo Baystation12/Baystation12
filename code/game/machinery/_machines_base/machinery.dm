@@ -12,6 +12,8 @@
 	layer = STRUCTURE_LAYER // Layer under items
 	init_flags = INIT_MACHINERY_PROCESS_SELF
 
+	health_resistances = DAMAGE_RESIST_ELECTRICAL
+
 	/// Boolean. Whether or not the machine has been emagged.
 	var/emagged = FALSE
 	/// Boolean. Whether or not the machine has been upgrade by a malfunctioning AI.
@@ -30,7 +32,7 @@
 	var/power_init_complete = FALSE
 	/// List of component instances. Expected type: `/obj/item/stock_parts.`
 	var/list/component_parts
-	/// List of component paths which have delayed init. Indeces = number of components.
+	/// LAZYLIST of component paths which have delayed init. Indeces = number of components.
 	var/list/uncreated_component_parts = list(/obj/item/stock_parts/power/apc)
 	/// List of componant paths and the maximum number of that specific path that can be inserted into the machine. `null` - no max. `list(type part = number max)`.
 	var/list/maximum_component_parts = list(/obj/item/stock_parts = 10)
@@ -94,6 +96,16 @@
 	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
 	. = ..()
 
+/obj/machinery/on_death()
+	..()
+	set_broken(TRUE, MACHINE_BROKEN_HEALTH)
+	queue_icon_update()
+
+/obj/machinery/on_revive()
+	..()
+	set_broken(FALSE, MACHINE_BROKEN_HEALTH)
+	queue_icon_update()
+
 /// Part of the machinery subsystem's process stack. Processes everything defined by `processing_flags`.
 /obj/machinery/proc/ProcessAll(wait)
 	if(processing_flags & MACHINERY_PROCESS_COMPONENTS)
@@ -109,7 +121,7 @@
 	return PROCESS_KILL // Only process if you need to.
 
 /obj/machinery/emp_act(severity)
-	if(use_power && stat == EMPTY_BITFIELD)
+	if(use_power && operable())
 		use_power_oneoff(7500/severity)
 
 		var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(loc)
@@ -119,10 +131,24 @@
 		pulse2.anchored = TRUE
 		pulse2.set_dir(pick(GLOB.cardinal))
 
-		addtimer(CALLBACK(GLOBAL_PROC, /proc/qdel, pulse2), 1 SECOND)
-	..()
+		QDEL_IN(pulse2, 1 SECOND)
+
+		if (prob(100 / severity) && istype(wires))
+			if (prob(20))
+				wires.RandomCut()
+				visible_message(SPAN_DANGER("A shower of sparks sprays out of \the [src]'s wiring panel!"))
+				sparks(3, 0, get_turf(src))
+			else
+				wires.RandomPulse()
+				visible_message(SPAN_WARNING("Something sparks inside \the [src]'s wiring panel!"))
+				new /obj/effect/sparks(get_turf(src))
+
+		..()
 
 /obj/machinery/ex_act(severity)
+	..()
+	if (health_max)
+		return
 	switch(severity)
 		if(EX_ACT_DEVASTATING)
 			qdel(src)
@@ -278,6 +304,8 @@
 
 /// Electrocutes the mob `user` based on probability `prb`, if the machine is in a state capable of doing so. Returns `TRUE` if the user was shocked.
 /obj/machinery/proc/shock(mob/user, prb)
+	if (!user)
+		return FALSE
 	if(inoperable())
 		return FALSE
 	if(!prob(prb))
@@ -422,6 +450,13 @@
 	var/wire_mechanics = wires?.get_mechanics_info()
 	if (wire_mechanics)
 		. += "<hr><h5>Wiring</h5>[wire_mechanics]"
+
+/obj/machinery/get_interactions_info()
+	. = ..()
+	var/wire_interactions = wires?.get_interactions_info()
+	if (wire_interactions)
+		for (var/key in wire_interactions)
+			.["[key]"] += "[wire_interactions[key]]"
 
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(depth)

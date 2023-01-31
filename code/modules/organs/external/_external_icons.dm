@@ -7,7 +7,7 @@ var/global/list/limb_icon_cache = list()
 	overlays.Cut()
 	 // This is a kludge, only one icon has more than one generation of children though.
 	for(var/obj/item/organ/external/organ in contents)
-		if(organ.children && organ.children.len)
+		if(organ.children && length(organ.children))
 			for(var/obj/item/organ/external/child in organ.children)
 				overlays += child.mob_icon
 		overlays += organ.mob_icon
@@ -53,7 +53,7 @@ var/global/list/limb_icon_cache = list()
 	update_icon(1)
 	if(owner)
 		SetName("[owner.real_name]'s head")
-		addtimer(CALLBACK(owner, /mob/living/carbon/human/proc/update_hair), 1, TIMER_UNIQUE)
+		addtimer(new Callback(owner, /mob/living/carbon/human/proc/update_hair), 1, TIMER_UNIQUE)
 	..()
 
 	var/list/sorted = list()
@@ -119,7 +119,7 @@ var/global/list/limb_icon_cache = list()
 		overlays |= entry[2]
 		mob_icon.Blend(entry[2], entry[3]["layer_blend"])
 
-	if(body_hair && islist(h_col) && h_col.len >= 3)
+	if(body_hair && islist(h_col) && length(h_col) >= 3)
 		var/cache_key = "[body_hair]-[icon_name]-[h_col[1]][h_col[2]][h_col[3]]"
 		if(!limb_icon_cache[cache_key])
 			var/icon/I = icon(species.get_icobase(owner), "[icon_name]_[body_hair]")
@@ -172,7 +172,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 		dam_state = min_dam_state
 	// Apply colour and return product.
 	var/list/hud_colours = !BP_IS_ROBOTIC(src) ? flesh_hud_colours : robot_hud_colours
-	hud_damage_image.color = hud_colours[max(1,min(Ceil(dam_state*hud_colours.len),hud_colours.len))]
+	hud_damage_image.color = hud_colours[max(1,min(Ceil(dam_state*length(hud_colours)),length(hud_colours)))]
 	return hud_damage_image
 
 /obj/item/organ/external/proc/apply_colouration(icon/applying)
@@ -197,7 +197,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 			applying.Blend(rgb(-skin_tone,  -skin_tone,  -skin_tone), ICON_SUBTRACT)
 		icon_cache_key += "_tone_[skin_tone]"
 	if(species.appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_COLOR)
-		if(s_col && s_col.len >= 3)
+		if(s_col && length(s_col) >= 3)
 			applying.Blend(rgb(s_col[1], s_col[2], s_col[3]), s_col_blend)
 			icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]_[s_col_blend]"
 

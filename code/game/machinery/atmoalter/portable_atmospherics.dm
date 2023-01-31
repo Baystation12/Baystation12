@@ -158,7 +158,7 @@
 	return panel_open
 
 /obj/machinery/portable_atmospherics/proc/log_open()
-	if(air_contents.gas.len == 0)
+	if(length(air_contents.gas) == 0)
 		return
 
 	var/gases = ""

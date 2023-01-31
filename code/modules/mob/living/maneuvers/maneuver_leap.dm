@@ -15,8 +15,8 @@
 		user.jump_layer_shift()
 		animate(user, pixel_z = 16, time = 3, easing = SINE_EASING | EASE_IN)
 		animate(pixel_z = user.default_pixel_z, time = 3, easing = SINE_EASING | EASE_OUT)
-		user.throw_at(get_turf(target), strength, 1, user, FALSE, CALLBACK(src, /singleton/maneuver/leap/proc/end_leap, user, target, old_pass_flags))
-		addtimer(CALLBACK(user, /mob/living/proc/jump_layer_shift_end), 4.5)
+		user.throw_at(get_turf(target), strength, 1, user, FALSE, new Callback(src, /singleton/maneuver/leap/proc/end_leap, user, target, old_pass_flags))
+		addtimer(new Callback(user, /mob/living/proc/jump_layer_shift_end), 4.5)
 
 /singleton/maneuver/leap/proc/end_leap(mob/living/user, atom/target, pass_flag)
 	user.pass_flags = pass_flag

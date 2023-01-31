@@ -56,7 +56,7 @@
 /turf/simulated/floor/away/blueriver/alienfloor,
 /area/bluespaceriver/underground)
 "n" = (
-/obj/item/roller,
+/obj/item/roller_bed,
 /turf/simulated/floor/asteroid,
 /area/bluespaceriver/underground)
 "o" = (

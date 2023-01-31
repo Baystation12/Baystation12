@@ -152,7 +152,7 @@
 	if(!istype(C))
 		return 0
 
-	if(internal_cells.len >= max_cells)
+	if(length(internal_cells) >= max_cells)
 		return 0
 	if(user && !user.unEquip(C))
 		return 0
@@ -206,7 +206,7 @@
 	data["equalise"] = equalise
 	data["blink_tick"] = ui_tick
 	data["cells_max"] = max_cells
-	data["cells_cur"] = internal_cells.len
+	data["cells_cur"] = length(internal_cells)
 	var/list/cells = list()
 	var/cell_index = 1
 	for(var/obj/item/cell/C in internal_cells)

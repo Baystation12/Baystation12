@@ -121,7 +121,7 @@
 		return ..()
 
 /obj/item/mech_component/control_module/proc/install_software(obj/item/circuitboard/exosystem/software, mob/user)
-	if(installed_software.len >= max_installed_software)
+	if(length(installed_software) >= max_installed_software)
 		if(user)
 			to_chat(user, SPAN_WARNING("\The [src] can only hold [max_installed_software] software modules."))
 		return

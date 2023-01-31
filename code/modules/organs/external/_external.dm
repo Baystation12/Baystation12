@@ -45,7 +45,7 @@
 	// Wound and structural data.
 	var/wound_update_accuracy = 1      // how often wounds should be updated, a higher number means less often
 	var/list/wounds                    // wound datum list.
-	var/number_wounds = 0              // number of wounds, which is NOT wounds.len!
+	var/number_wounds = 0              // number of wounds, which is NOT length(wounds)!
 	var/obj/item/organ/external/parent // Master-limb.
 	var/list/children                  // Sub-limbs.
 	var/list/internal_organs = list()  // Internal organs of this body part
@@ -182,7 +182,7 @@
 	..()
 
 /obj/item/organ/external/attack_self(mob/user)
-	if((owner && loc == owner) || !contents.len)
+	if((owner && loc == owner) || !length(contents))
 		return ..()
 	var/list/removable_objects = list()
 	for(var/obj/item/organ/external/E in (contents + src))
@@ -192,7 +192,7 @@
 			if(istype(I,/obj/item/organ))
 				continue
 			removable_objects |= I
-	if(removable_objects.len)
+	if(length(removable_objects))
 		var/obj/item/I = pick(removable_objects)
 		I.forceMove(get_turf(user)) //just in case something was embedded that is not an item
 		if(istype(I))
@@ -235,7 +235,7 @@
 		if(2)
 			if(W.sharp || istype(W,/obj/item/hemostat) || isWirecutter(W))
 				var/list/organs = get_contents_recursive()
-				if(organs.len)
+				if(length(organs))
 					var/obj/item/removing = pick(organs)
 					var/obj/item/organ/external/current_child = removing.loc
 
@@ -502,7 +502,7 @@ This function completely restores a damaged organ to perfect condition.
 				if (W.can_worsen(type, damage))
 					compatible_wounds += W
 
-			if(compatible_wounds.len)
+			if(length(compatible_wounds))
 				var/datum/wound/W = pick(compatible_wounds)
 				W.open_wound(damage)
 				if(prob(25))
@@ -651,7 +651,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			for (var/obj/item/organ/I in internal_organs)
 				if (I.germ_level < germ_level)
 					candidate_organs |= I
-			if (candidate_organs.len)
+			if (length(candidate_organs))
 				target_organ = pick(candidate_organs)
 
 		if (target_organ)
@@ -1096,7 +1096,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		var/datum/robolimb/R = all_robolimbs[company]
 		if(!istype(R) || (species && (species.name in R.species_cannot_use)) || \
 		 (species && !(species.get_bodytype(owner) in R.allowed_bodytypes)) || \
-		 (R.applies_to_part.len && !(organ_tag in R.applies_to_part)))
+		 (length(R.applies_to_part) && !(organ_tag in R.applies_to_part)))
 			R = basic_robolimb
 		else
 			model = company
@@ -1132,6 +1132,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 		while(null in owner.internal_organs)
 			owner.internal_organs -= null
+
+	CLEAR_FLAGS(status, ORGAN_ARTERY_CUT)
 
 	return 1
 
@@ -1341,7 +1343,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		return
 	if(brute_dam + force < min_broken_damage/5)	//no papercuts moving bones
 		return
-	if(internal_organs.len && prob(brute_dam + force))
+	if(length(internal_organs) && prob(brute_dam + force))
 		owner.custom_pain("A piece of bone in your [encased ? encased : name] moves painfully!", 50, affecting = src)
 		var/obj/item/organ/internal/I = pick(internal_organs)
 		if (I)

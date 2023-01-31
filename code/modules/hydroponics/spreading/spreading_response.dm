@@ -17,7 +17,10 @@
 	manual_unbuckle(user)
 
 /obj/effect/vine/attack_generic(mob/user)
-	manual_unbuckle(user)
+	if (buckled_mob == user)
+		manual_unbuckle(user)
+		return
+	..()
 
 /obj/effect/vine/Crossed(atom/movable/O)
 	if(isliving(O))

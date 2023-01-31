@@ -35,6 +35,9 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /**
  * Called when the item is in the active hand and another atom is clicked. This is generally called by `ClickOn()`.
  *
+ * This passes down to `attack()`, `use_user()`, `use_grab()`, `use_weapon()`, `use_tool()`, and `attackby()`, in that order, depending on item
+ * flags and user's intent.
+ *
  * **Parameters**:
  * - `A` - The atom that was clicked.
  * - `user` - The mob using the item.
@@ -47,10 +50,125 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		add_fingerprint(user)
 	if ((item_flags & ITEM_FLAG_TRY_ATTACK) && attack(A, user))
 		return TRUE
-	return A.attackby(src, user, click_params)
+	if (A == user)
+		. = user.use_user(src, click_params)
+	if (!. && istype(src, /obj/item/grab))
+		. = A.use_grab(src, click_params)
+	if (!. && user.a_intent == I_HURT)
+		. = A.use_weapon(src, user, click_params)
+	if (!.)
+		. = A.use_tool(src, user, click_params)
+	if (!.)
+		return A.attackby(src, user, click_params)
 
 
 /**
+ * Interaction handler for using an item on yourself. This is called and the result checked before the other `use_*`
+ * interaction procs are called, regardless of user intent.
+ *
+ * **Parameters**:
+ * - `tool` - The item being used by the mob.
+ * - `click_params` - List of click parameters.
+ *
+ * Returns boolean to indicate whether the attack call was handled or not. If `FALSE`, the next `use_*` proc in the
+ * resolve chain will be called.
+ */
+/mob/proc/use_user(obj/item/tool, list/click_params = list())
+	SHOULD_CALL_PARENT(TRUE)
+	return FALSE
+
+
+/mob/living/carbon/human/use_user(obj/item/tool, list/click_params)
+	// Devouring
+	if (zone_sel.selecting == BP_MOUTH && can_devour(tool, silent = TRUE))
+		var/obj/item/blocked = check_mouth_coverage()
+		if (blocked)
+			to_chat(src, SPAN_WARNING("\The [blocked] is in the way!"))
+			return TRUE
+		if (devour(tool))
+			return TRUE
+
+	return ..()
+
+
+/**
+ * Interaction handler for being clicked on with a grab. This is called regardless of user intent.
+ *
+ * **Parameters**:
+ * - `grab` - The grab item being used.
+ * - `click_params` - List of click parameters.
+ *
+ * Returns boolean to indicate whether the attack call was handled or not. If `FALSE`, the next `use_*` proc in the
+ * resolve chain will be called.
+ */
+/atom/proc/use_grab(obj/item/grab/grab, list/click_params)
+	return FALSE
+
+
+/**
+ * Interaction handler for using an item on this atom with harm intent. Generally, this is for attacking the atom.
+ *
+ * **Parameters**:
+ * - `weapon` - The item being used on this atom.
+ * - `user` - The mob interacting with this atom.
+ * - `click_params` - List of click parameters.
+ *
+ * Returns boolean to indicate whether the attack call was handled or not. If `FALSE`, the next `use_*` proc in the
+ * resolve chain will be called.
+ */
+/atom/proc/use_weapon(obj/item/weapon, mob/user, list/click_params = list())
+	SHOULD_CALL_PARENT(TRUE)
+	// Standardized damage
+	if (weapon.force > 0 && get_max_health() && !HAS_FLAGS(weapon.item_flags, ITEM_FLAG_NO_BLUDGEON))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
+		var/damage_flags = weapon.damage_flags()
+		if (!can_damage_health(weapon.force, weapon.damtype, damage_flags))
+			playsound(src, damage_hitsound, 50)
+			user.visible_message(
+				SPAN_WARNING("\The [user] hits \the [src] with \a [weapon], but it bounces off!"),
+				SPAN_WARNING("You hit \the [src] with \the [weapon], but it bounces off!")
+			)
+			return TRUE
+		playsound(src, damage_hitsound, 75)
+		user.visible_message(
+			SPAN_DANGER("\The [user] hits \the [src] with \a [weapon]!"),
+			SPAN_DANGER("You hit \the [src] with \the [weapon]!")
+		)
+		damage_health(weapon.force, weapon.damtype, damage_flags, skip_can_damage_check = TRUE)
+		return TRUE
+
+	return FALSE
+
+
+/**
+ * Interaction handler for using an item on this atom with a non-harm intent, or if `use_weapon()` did not resolve an
+ * action. Generally, this is for any standard interactions with items.
+ *
+ * **Parameters**:
+ * - `tool` - The item being used on this atom.
+ * - `user` - The mob interacting with this atom.
+ * - `click_params` - List of click parameters.
+ *
+ * Returns boolean to indicate whether the attack call was handled or not. If `FALSE`, the next `use_*` proc in the
+ * resolve chain will be called.
+ */
+/atom/proc/use_tool(obj/item/tool, mob/user, list/click_params = list())
+	SHOULD_CALL_PARENT(TRUE)
+	return FALSE
+
+
+/mob/living/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Surgery is handled by the tool
+	if (can_operate(src, user) && tool.do_surgery(src, user))
+		return TRUE
+
+	return ..()
+
+
+/**
+ * DEPRECATED - USE THE `use_*()` PROCS INSTEAD.
+ *
  * Called when this atom is clicked on while another item is in the active hand. This is generally called by this item's `resolve_attackby()` proc.
  *
  * **Parameters**:
@@ -64,22 +182,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	return FALSE
 
 
-/mob/living/attackby(obj/item/I, mob/user)
-	if(!ismob(user))
-		return 0
-	if(can_operate(src,user) && I.do_surgery(src,user)) //Surgery
-		return 1
-	return I.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
-
-
-/mob/living/carbon/human/attackby(obj/item/I, mob/user)
-	if(user == src && zone_sel.selecting == BP_MOUTH && can_devour(I, silent = TRUE))
-		var/obj/item/blocked = src.check_mouth_coverage()
-		if(blocked)
-			to_chat(user, SPAN_WARNING("\The [blocked] is in the way!"))
-			return TRUE
-		if(devour(I))
-			return TRUE
+/mob/living/attackby(obj/item/W, mob/user, click_params)
+	// Legacy mob attack code is handled by the weapon
+	if (W.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone()))
+		return TRUE
 	return ..()
 
 

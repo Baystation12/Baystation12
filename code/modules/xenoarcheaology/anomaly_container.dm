@@ -8,7 +8,6 @@
 	active_power_usage = 1 KILOWATTS
 	construct_state = /singleton/machine_construction/default/panel_closed
 	health_max = 200
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
 	health_min_damage = 10
 	req_access = list(access_research)
 
@@ -135,16 +134,15 @@
 		over_object.contain(src)
 	return
 /obj/machinery/anomaly_container/on_death()
-	. = ..()
 	visible_message(SPAN_DANGER("\The [src]'s glass cracks and shatters, exploding in a shower of shards!"))
 	for(var/i = 1 to rand(2,4))
 		new /obj/item/material/shard(get_turf(src), MATERIAL_PHORON_GLASS)
 	playsound(loc, 'sound/effects/Glassbr1.ogg', 60)
-	update_icon()
 	if(!contained)
 		return
 	contained.my_effect.ToggleActivate(1)
 	broken = TRUE
+	..()
 
 /obj/machinery/anomaly_container/emp_act(severity)
 	if(health_dead)

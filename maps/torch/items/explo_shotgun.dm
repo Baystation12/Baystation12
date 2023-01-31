@@ -17,9 +17,9 @@
 	. += "<br>This gun will be allowed to fire freely once off-ship, otherwise needs to be authorized by XO. \
 	<br>While you can load this gun with lethal ammo, there's a considerable risk of explosion when fired."
 
-/obj/item/gun/projectile/shotgun/pump/exploration/get_antag_info()
+/obj/item/gun/projectile/shotgun/pump/exploration/get_antag_interactions_info()
 	. = ..()
-	. += "<br>You can reinforce the barrel with a simple pipe, lowering chance of explosion to 1 in 10.<br>"
+	.["Pipe"] += "<p>Reinforces the barrel, lowering the chance of explosion to 1 in 10.</p>"
 
 /obj/item/gun/projectile/shotgun/pump/exploration/on_update_icon()
 	..()

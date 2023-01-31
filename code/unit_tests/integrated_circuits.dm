@@ -29,7 +29,7 @@
 		var/result = SScircuit.validate_electronic_assembly(initial(prefab.data))
 		if(istext(result)) //Returned some error
 			failed_prefabs += "[prefab_type]: [result]"
-	if(failed_prefabs.len)
+	if(length(failed_prefabs))
 		fail("The following integrated prefab types are invalid: [english_list(failed_prefabs)]")
 	else
 		pass("All integrated circuit prefabs are within complexity and size limits.")
@@ -55,7 +55,7 @@
 			log_bad("[prefab_type] caused an exception: [e] on [e.file]:[e.line]")
 			failed_prefabs |= prefab_type
 
-	if(failed_prefabs.len)
+	if(length(failed_prefabs))
 		fail("The following integrated prefab types failed to create their assemblies: [english_list(failed_prefabs)]")
 	else
 		pass("All integrated circuit prefabs are within complexity and size limits.")
@@ -76,20 +76,20 @@
 	var/obj/item/integrated_circuit/ic = new circuit_type()
 	var/failed = FALSE
 
-	if(all_inputs.len != all_expected_outputs.len)
+	if(length(all_inputs) != length(all_expected_outputs))
 		fail("Given inputs do not match the expected outputs length.")
 		return 1
 
-	for(var/test_index = 1 to all_inputs.len)
+	for(var/test_index = 1 to length(all_inputs))
 		var/list/inputs = all_inputs[test_index]
 		var/list/expected_outputs = all_expected_outputs[test_index]
 
-		for(var/input_pin_index = 1 to inputs.len)
+		for(var/input_pin_index = 1 to length(inputs))
 			ic.set_pin_data(IC_INPUT, input_pin_index, inputs[input_pin_index])
 
 		ic.do_work(activation_pin)
 
-		for(var/output_index = 1 to expected_outputs.len)
+		for(var/output_index = 1 to length(expected_outputs))
 			var/actual_output = ic.get_pin_data(IC_OUTPUT, output_index)
 			var/expected_output = expected_outputs[output_index]
 			if(expected_output == IC_TEST_ANY_OUTPUT)

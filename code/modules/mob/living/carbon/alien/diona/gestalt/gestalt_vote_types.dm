@@ -10,7 +10,7 @@
 /datum/gestalt_vote/New(obj/structure/diona_gestalt/_owner, mob/_caller)
 	owner = _owner
 	caller =_caller
-	addtimer(CALLBACK(src, .proc/timed_out), vote_time)
+	addtimer(new Callback(src, .proc/timed_out), vote_time)
 
 /datum/gestalt_vote/proc/timed_out()
 	if(owner && !passed)
@@ -30,9 +30,9 @@
 				if(chirp.client)
 					target_value++
 			target_value = Ceil(target_value/2)
-			passed = (voted.len >= target_value)
+			passed = (length(voted) >= target_value)
 			for(var/thing in owner.nymphs)
-				to_chat(thing, SPAN_NOTICE("\The [voter] voted yes to <i>[descriptor]</i> ([voted.len]/[target_value])."))
+				to_chat(thing, SPAN_NOTICE("\The [voter] voted yes to <i>[descriptor]</i> ([length(voted)]/[target_value])."))
 				if(passed)
 					to_chat(thing, SPAN_NOTICE("<b>Motion passed!</b>"))
 			if(passed) succeeded()

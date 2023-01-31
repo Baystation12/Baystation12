@@ -115,7 +115,7 @@
 	if(suit_overlay_inactive)
 		suit_overlay = suit_overlay_inactive
 
-	if(charges && charges.len)
+	if(charges && length(charges))
 		var/list/processed_charges = list()
 		for(var/list/charge in charges)
 			var/datum/rig_charge/charge_dat = new
@@ -299,7 +299,7 @@
 		SetupStat(R)
 
 /mob/proc/SetupStat(obj/item/rig/R)
-	if(R && !R.canremove && R.installed_modules.len && statpanel("Hardsuit Modules"))
+	if(R && !R.canremove && length(R.installed_modules) && statpanel("Hardsuit Modules"))
 		var/cell_status = R.cell ? "[R.cell.charge]/[R.cell.maxcharge]" : "ERROR"
 		stat("Suit Charge:", cell_status)
 		var/air_tank
@@ -396,12 +396,12 @@
 	if(!charge_index)
 		charge_index = 0
 	else
-		charge_index = charge_index == module.charges.len ? 1 : charge_index+1
+		charge_index = charge_index == length(module.charges) ? 1 : charge_index+1
 
 	href_list["charge_type"] = module.charges[charge_index]
 
 /stat_rig_module/charge/CanUse()
-	if(module.charges && module.charges.len)
+	if(module.charges && length(module.charges))
 		var/datum/rig_charge/charge = module.charges[module.charge_selected]
 		name = "[charge.display_name] ([charge.charges]C) - Change"
 		return 1

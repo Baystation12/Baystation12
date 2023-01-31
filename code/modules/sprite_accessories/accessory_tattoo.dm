@@ -16,7 +16,6 @@
 
 /datum/sprite_accessory/marking/tattoo/chest
 	disallows = list(/datum/sprite_accessory/marking/tattoo/chest)
-
 	body_parts = list(BP_CHEST)
 
 
@@ -36,17 +35,14 @@
 	body_parts = list(BP_R_ARM)
 
 
-
 /datum/sprite_accessory/marking/tattoo/hand_left
 	disallows = list(/datum/sprite_accessory/marking/tattoo/hand_left)
 	body_parts = list(BP_L_HAND)
 
 
-
 /datum/sprite_accessory/marking/tattoo/hand_right
 	disallows = list(/datum/sprite_accessory/marking/tattoo/hand_right)
 	body_parts = list(BP_R_HAND)
-
 
 
 /datum/sprite_accessory/marking/tattoo/leg_left
@@ -64,11 +60,9 @@
 	body_parts = list(BP_L_FOOT)
 
 
-
 /datum/sprite_accessory/marking/tattoo/foot_right
 	disallows = list(/datum/sprite_accessory/marking/tattoo/foot_right)
 	body_parts = list(BP_R_FOOT)
-
 
 
 /datum/sprite_accessory/marking/tattoo/chest/hive
@@ -76,11 +70,9 @@
 	icon_state = "hive-chest"
 
 
-
 /datum/sprite_accessory/marking/tattoo/chest/nightling
 	name = "Tattoo (Nightling, Back)"
 	icon_state = "nightling-chest"
-
 
 
 /datum/sprite_accessory/marking/tattoo/arm_left/campbell
@@ -88,11 +80,9 @@
 	icon_state = "campbell-arm-left"
 
 
-
 /datum/sprite_accessory/marking/tattoo/arm_right/campbell
 	name = "Tattoo (Campbell, Right Arm)"
 	icon_state = "campbell-arm-right"
-
 
 
 /* The icon for this needs work.

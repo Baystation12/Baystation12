@@ -1,7 +1,7 @@
 /obj/machinery/door/unpowered
-	autoclose = 0
 	var/locked = 0
 	autoset_access = FALSE
+	health_resistances = DAMAGE_RESIST_PHYSICAL
 
 /obj/machinery/door/unpowered/Bumped(atom/AM)
 	if(src.locked)

@@ -14,7 +14,7 @@
 			info = err.info
 		)
 
-		errors[++errors.len] = list2params(data)
+		errors[LIST_PRE_INC(errors)] = list2params(data)
 
 	runtimes2irc(list2params(errors), revdata.revision)
 

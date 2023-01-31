@@ -5,57 +5,11 @@
 	icon = 'icons/effects/effects.dmi'
 	anchored = TRUE
 	density = FALSE
-	var/health = 15
+	health_max = 15
 
-//similar to weeds, but only barfed out by nurses manually
-/obj/effect/spider/ex_act(severity)
-	switch(severity)
-		if(EX_ACT_DEVASTATING)
-			qdel(src)
-		if(EX_ACT_HEAVY)
-			if (prob(50))
-				qdel(src)
-		if(EX_ACT_LIGHT)
-			if (prob(5))
-				qdel(src)
-	return
-
-/obj/effect/spider/attackby(obj/item/W, mob/user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-
-	if(W.attack_verb.len)
-		visible_message(SPAN_WARNING("\The [src] have been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]"))
-	else
-		visible_message(SPAN_WARNING("\The [src] have been attacked with \the [W][(user ? " by [user]." : ".")]"))
-
-	var/damage = W.force / 4.0
-
-	if(W.edge)
-		damage += 5
-
-	if(isWelder(W))
-		var/obj/item/weldingtool/WT = W
-
-		if(WT.remove_fuel(0, user))
-			damage = 15
-			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
-
-	health -= damage
-	healthcheck()
-
-/obj/effect/spider/bullet_act(obj/item/projectile/Proj)
-	..()
-	health -= Proj.get_structure_damage()
-	healthcheck()
-
-/obj/effect/spider/proc/healthcheck()
-	if(health <= 0)
-		qdel(src)
-
-/obj/effect/spider/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > 300 + T0C)
-		health -= 5
-		healthcheck()
+/obj/effect/spider/on_death()
+	visible_message(SPAN_WARNING("\The [src] breaks apart!"))
+	qdel(src)
 
 /obj/effect/spider/stickyweb
 	icon_state = "stickyweb1"
@@ -100,6 +54,13 @@
 		O.implants -= src
 	. = ..()
 
+/obj/effect/spider/eggcluster/on_death()
+	if (isturf(loc))
+		var/amount_to_spawn = round(spiders_max * amount_grown / 100)
+		for (var/count = 1 to amount_to_spawn)
+			new spider_type(loc, src)
+	. = ..()
+
 /obj/effect/spider/eggcluster/Process()
 	if(prob(70))
 		amount_grown += rand(0,2)
@@ -128,7 +89,8 @@
 	icon_state = "green"
 	anchored = FALSE
 	layer = BELOW_OBJ_LAYER
-	health = 3
+	health_max = 3
+	health_resistances = DAMAGE_RESIST_BIOLOGICAL
 	var/mob/living/simple_animal/hostile/giant_spider/greater_form
 	var/last_itch = 0
 	var/amount_grown = -1
@@ -190,8 +152,8 @@
 	. = ..()
 
 /obj/effect/spider/spiderling/attackby(obj/item/W, mob/user)
-	..()
-	if(health > 0)
+	. = ..()
+	if (!health_dead)
 		disturbed()
 
 /obj/effect/spider/spiderling/Crossed(mob/living/L)
@@ -212,14 +174,10 @@
 	else
 		..()
 
-/obj/effect/spider/spiderling/proc/die()
-	visible_message(SPAN_CLASS("alert", "[src] dies!"))
+/obj/effect/spider/spiderling/on_death()
+	visible_message(SPAN_WARNING("\The [src] dies!"))
 	new /obj/effect/decal/cleanable/spiderling_remains(loc)
 	qdel(src)
-
-/obj/effect/spider/spiderling/healthcheck()
-	if(health <= 0)
-		die()
 
 /obj/effect/spider/spiderling/proc/check_vent(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
 	if(QDELETED(exit_vent) || exit_vent.welded) // If it's qdeleted we probably were too, but in that case we won't be making this call due to timer cleanup.
@@ -233,7 +191,7 @@
 	if(prob(50))
 		audible_message(SPAN_NOTICE("You hear something squeezing through the ventilation ducts."))
 	forceMove(exit_vent)
-	addtimer(CALLBACK(src, .proc/end_vent_moving, exit_vent), travel_time)
+	addtimer(new Callback(src, .proc/end_vent_moving, exit_vent), travel_time)
 
 /obj/effect/spider/spiderling/proc/end_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
 	if(check_vent(exit_vent))
@@ -247,7 +205,7 @@
 	if(loc)
 		var/datum/gas_mixture/environment = loc.return_air()
 		if(environment && environment.gas[GAS_METHYL_BROMIDE] > 0)
-			die()
+			kill_health()
 			return
 
 	if(travelling_in_vent)
@@ -256,18 +214,18 @@
 			entry_vent = null
 	else if(entry_vent)
 		if(get_dist(src, entry_vent) <= 1)
-			if(entry_vent.network && entry_vent.network.normal_members.len)
+			if(entry_vent.network && length(entry_vent.network.normal_members))
 				var/list/vents = list()
 				for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in entry_vent.network.normal_members)
 					vents.Add(temp_vent)
-				if(!vents.len)
+				if(!length(vents))
 					entry_vent = null
 					return
 				var/obj/machinery/atmospherics/unary/vent_pump/exit_vent = pick(vents)
 
 				forceMove(entry_vent)
 				var/travel_time = round(get_dist(loc, exit_vent.loc) / 2)
-				addtimer(CALLBACK(src, .proc/start_vent_moving, exit_vent, travel_time), travel_time + rand(20,60))
+				addtimer(new Callback(src, .proc/start_vent_moving, exit_vent, travel_time), travel_time + rand(20,60))
 				travelling_in_vent = TRUE
 				return
 			else
@@ -277,7 +235,7 @@
 	if(isturf(loc))
 		if(prob(25))
 			var/list/nearby = trange(5, src) - loc
-			if(nearby.len)
+			if(length(nearby))
 				var/target_atom = pick(nearby)
 				walk_to(src, target_atom, 5)
 				if(prob(10))
@@ -335,7 +293,7 @@
 	name = "cocoon"
 	desc = "Something wrapped in silky spider web."
 	icon_state = "cocoon1"
-	health = 60
+	health_max = 60
 
 /obj/effect/spider/cocoon/Initialize()
 	. = ..()

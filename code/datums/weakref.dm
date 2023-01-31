@@ -1,5 +1,5 @@
 /datum
-	var/tmp/weakref/weakref
+	var/weakref/weakref
 
 //obtain a weak reference to a datum
 /proc/weakref(datum/D)
@@ -17,8 +17,8 @@
 	var/ref
 
 	// Handy info for debugging
-	var/tmp/ref_name
-	var/tmp/ref_type
+	var/ref_name
+	var/ref_type
 
 /weakref/New(datum/D)
 	ref = "\ref[D]"

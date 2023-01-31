@@ -128,5 +128,5 @@
 	path = /obj/item/ammo_magazine/speedloader/hpclip
 
 /datum/fabricator_recipe/arms_ammo/hidden/rifleinternalclip
-	name = "ammunition (rifle internal clip)"
+	name = "ammunition (en-bloc clip)"
 	path = /obj/item/ammo_magazine/iclipr

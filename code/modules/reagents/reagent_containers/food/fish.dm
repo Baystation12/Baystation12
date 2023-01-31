@@ -19,7 +19,7 @@
 
 
 /obj/item/reagent_containers/food/snacks/fish/attackby(obj/item/item, mob/living/user)
-	if (!item.sharp)
+	if (istype(item, /obj/item/reagent_containers/syringe) || !item.sharp)
 		return ..()
 	var/turf/turf = get_turf(src)
 	if (turf != loc || !(locate(/obj/structure/table) in turf))
@@ -70,7 +70,7 @@
 
 /obj/item/reagent_containers/food/snacks/fish/space_pike/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/toxin/carpotoxin, 6)
+	reagents.add_reagent(/datum/reagent/toxin/carpotoxin, 11)
 
 
 /obj/item/reagent_containers/food/snacks/fish/space_shark

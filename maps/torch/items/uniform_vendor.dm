@@ -100,7 +100,7 @@
 
 /obj/machinery/uniform_vendor/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/clothingbag))
-		if(W.contents.len)
+		if(length(W.contents))
 			to_chat(user, SPAN_NOTICE("You must empty \the [W] before you can put it in \the [src]."))
 			return
 		to_chat(user, SPAN_NOTICE("You put \the [W] into \the [src]'s recycling slot."))
@@ -202,13 +202,13 @@
 	if(!issued_items[user_id()])
 		issued_items[user_id()] = list()
 	var/list/checkedout = issued_items[user_id()]
-	if(selected_outfit.len > 1)
+	if(length(selected_outfit) > 1)
 		var/obj/item/clothingbag/bag = new /obj/item/clothingbag
 		for(var/item in selected_outfit)
 			new item(bag)
 			checkedout += item
 		bag.dropInto(loc)
-	else if (selected_outfit.len)
+	else if (length(selected_outfit))
 		var/obj/item/clothing/C = selected_outfit[1]
 		new C(get_turf(src))
 		checkedout += C
@@ -221,6 +221,6 @@
 
 /obj/machinery/uniform_vendor/proc/can_issue(gear)
 	var/list/issued = issued_items[user_id()]
-	if(!issued || !issued.len)
+	if(!issued || !length(issued))
 		return TRUE
 	return !(gear in issued)

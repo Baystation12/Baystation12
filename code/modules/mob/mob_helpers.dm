@@ -28,7 +28,7 @@
 		for(var/obj/item/organ/external/E in organs)
 			if(BP_IS_ROBOTIC(E))
 				robolimb_count++
-		full_prosthetic = (robolimb_count == organs.len)
+		full_prosthetic = (robolimb_count == length(organs))
 		update_emotes()
 	return full_prosthetic
 
@@ -496,7 +496,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 
 	if(auth_weapons && !access_obj.allowed(src))
 		var/list/weapons = GetAllHeld(/obj/item/melee)
-		threatcount += 4 * weapons.len
+		threatcount += 4 * length(weapons)
 
 		if(istype(belt, /obj/item/gun) || istype(belt, /obj/item/melee))
 			threatcount += 2
@@ -624,7 +624,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	var/success = 0
 	var/turf/end
 	var/candidates = L.Copy()
-	while(L.len)
+	while(length(L))
 		attempt = pick(L)
 		success = Move(attempt)
 		if(!success)

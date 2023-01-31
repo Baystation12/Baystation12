@@ -21,7 +21,7 @@
 
 /obj/item/gun/launcher/foam/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/foam_dart))
-		if(darts.len < max_darts)
+		if(length(darts) < max_darts)
 			if(!user.unEquip(I, src))
 				return
 			darts += I
@@ -30,14 +30,14 @@
 			to_chat(user, SPAN_WARNING("\The [src] can hold no more darts."))
 
 /obj/item/gun/launcher/foam/consume_next_projectile()
-	if(darts.len)
+	if(length(darts))
 		var/obj/item/I = darts[1]
 		darts -= I
 		return I
 	return null
 
 /obj/item/gun/launcher/foam/CtrlAltClick(mob/user)
-	if(darts.len && src.loc == user)
+	if(length(darts) && src.loc == user)
 		to_chat(user, "You empty \the [src].")
 		for(var/obj/item/foam_dart/D in darts)
 			darts -= D
@@ -90,7 +90,7 @@
 /obj/item/foam_dart/Initialize()
 	mix_up()
 	. = ..()
-	
+
 /obj/item/foam_dart/proc/mix_up()
 	pixel_x = rand(-randpixel, randpixel)
 	pixel_y = rand(-randpixel, randpixel)

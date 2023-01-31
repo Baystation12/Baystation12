@@ -7,7 +7,7 @@
 
 /datum/map/setup_map()
 	..()
-	if(!post_round_safe_areas.len)
+	if(!length(post_round_safe_areas))
 		for(var/area/A)
 			if(isspace(A))
 				continue

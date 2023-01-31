@@ -137,7 +137,7 @@
 		if(watching_mob.client)
 			animate(holomap_datum.station_map, alpha = 0, time = 5, easing = LINEAR_EASING)
 			var/mob/M = watching_mob
-			addtimer(CALLBACK(src, .proc/clear_image, M, holomap_datum.station_map), 5, TIMER_CLIENT_TIME)//we give it time to fade out
+			addtimer(new Callback(src, .proc/clear_image, M, holomap_datum.station_map), 5, TIMER_CLIENT_TIME)//we give it time to fade out
 		GLOB.moved_event.unregister(watching_mob, src)
 		GLOB.destroyed_event.unregister(watching_mob, src)
 	watching_mob = null
@@ -389,7 +389,7 @@
 
 
 /datum/station_holomap/proc/set_level(level)
-	if(level > z_levels.len)
+	if(level > length(z_levels))
 		return
 
 	displayed_level = level
@@ -416,7 +416,7 @@
 	if(displayed_level > 1)
 		station_map.vis_contents += lbuttons[1]
 
-	if(displayed_level < z_levels.len)
+	if(displayed_level < length(z_levels))
 		station_map.vis_contents += lbuttons[2]
 
 /datum/station_holomap/proc/legend_select(obj/screen/legend/L)

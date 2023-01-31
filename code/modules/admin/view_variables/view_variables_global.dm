@@ -1,47 +1,56 @@
-GLOBAL_DATUM(debug_real_globals, /debug_real_globals)
+GLOBAL_DATUM_INIT(debug_real_globals, /datum/debug_real_globals, new)
 
 
-/debug_real_globals/get_variables()
-	var/static/list/cache
-	if (!cache)
-		cache = list()
-		var/list/hidden = VV_hidden()
-		if (!hidden)
-			return list()
-		for (var/name in global.vars)
-			if (name in hidden)
-				continue
-			cache |= name
-		cache = sortList(cache)
-	if (!usr || !check_rights(R_ADMIN|R_DEBUG, FALSE))
-		var/static/list/locked
-		if (!locked)
-			locked = VV_locked()
-		return (cache - locked)
-	return cache.Copy()
+/datum/debug_real_globals
+	var/static/atom/movable/clickable_stat/__stat_line
+	var/static/list/global_names
 
 
-/debug_real_globals/make_view_variables_variable_entry(name, value)
+/datum/debug_real_globals/New()
+	global_names = list()
+	var/list/hidden = VV_hidden()
+	for (var/name in global.vars)
+		if (name in hidden)
+			continue
+		ADD_SORTED(global_names, name, /proc/cmp_text_asc)
+
+
+/datum/debug_real_globals/proc/UpdateStat()
+	if (!__stat_line)
+		__stat_line = new (null, src)
+		__stat_line.name = "Edit"
+	stat("Real Globals", __stat_line)
+
+
+/datum/debug_real_globals/get_variables()
+	return global_names.Copy()
+
+
+/datum/debug_real_globals/make_view_variables_variable_entry(name, value)
 	return {"(<a href="?_src_=vars;datumedit=\ref[src];varnameedit=[name]">E</a>) "}
 
 
-/debug_real_globals/set_variable_value(name, value)
-	global.vars[name] = value
+/datum/debug_real_globals/set_variable_value(name, value)
+	if (name in global_names)
+		global.vars[name] = value
 
 
-/debug_real_globals/get_variable_value(name)
-	return global.vars[name]
+/datum/debug_real_globals/get_variable_value(name)
+	if (name in global_names)
+		return global.vars[name]
 
 
-/debug_real_globals/get_view_variables_options()
+/datum/debug_real_globals/get_view_variables_options()
 	return ""
 
 
-/debug_real_globals/VV_locked()
-	return vars
+/datum/debug_real_globals/may_not_edit_var(user, name, silent)
+	. = ..(user, name, TRUE)
+	if (. == 2 && (name in global_names))
+		return FALSE
 
 
-/debug_real_globals/VV_hidden()
+/datum/debug_real_globals/VV_hidden()
 	return list(
 		"sqladdress",
 		"sqldb",
@@ -73,11 +82,3 @@ GLOBAL_DATUM(debug_real_globals, /debug_real_globals)
 		"alien_whitelist",
 		"adminfaxes"
 	)
-
-
-/client/proc/debug_global_variables()
-	set category = "Debug"
-	set name = "View Real Globals"
-	if (!GLOB.debug_real_globals)
-		GLOB.debug_real_globals = new
-	debug_variables(GLOB.debug_real_globals)

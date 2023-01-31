@@ -1,10 +1,11 @@
 #define SETUP_RANDOM_COLOR_GETTER(X, Y, Z, W)  \
 /datum/species/var/list/random_##Y = W;\
 /datum/species/proc/get_random_##X(){\
-	if(!(appearance_flags & Z) || !random_##Y.len){\
+	if(!(appearance_flags & Z) || !length(random_##Y)){\
 		return;\
 	}\
-	var/singleton/color_generator/CG = GET_SINGLETON(pickweight(random_##Y));\
+	var/selection = pickweight(random_##Y);\
+	var/singleton/color_generator/CG = GET_SINGLETON(selection);\
 	return CG && CG.GenerateRGB();\
 }
 

@@ -257,7 +257,7 @@ var/global/list/narsie_list = list()
 				if (101 == AM2.invisibility)
 					continue
 
-				addtimer(CALLBACK(AM2, /atom/proc/singularity_pull, src, current_size), 0)
+				addtimer(new Callback(AM2, /atom/proc/singularity_pull, src, current_size), 0)
 
 		if (dist <= consume_range && !istype(A, get_base_turf_by_area(A)))
 			var/turf/T2 = A
@@ -276,7 +276,7 @@ var/global/list/narsie_list = list()
 		if(get_z(cult_nh_mind.current) != z)
 			continue
 		cultists += cult_nh_mind.current
-	if(cultists.len)
+	if(length(cultists))
 		acquire(pick(cultists))
 		return
 		//If there was living cultists, it picks one to follow.
@@ -289,7 +289,7 @@ var/global/list/narsie_list = list()
 		if(pos.z != src.z)
 			continue
 		cultists += food
-	if(cultists.len)
+	if(length(cultists))
 		acquire(pick(cultists))
 		return
 		//no living cultists, pick a living human instead.
@@ -300,7 +300,7 @@ var/global/list/narsie_list = list()
 		if(pos.z != src.z)
 			continue
 		cultists += ghost
-	if(cultists.len)
+	if(length(cultists))
 		acquire(pick(cultists))
 		return
 		//no living humans, follow a ghost instead.

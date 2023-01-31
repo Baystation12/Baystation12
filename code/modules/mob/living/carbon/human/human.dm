@@ -183,7 +183,7 @@
 		dat += "<BR><B>[slot_ref["name"]]:</b> <a href='?src=\ref[src];item=[slot_ref["slot"]]'>[istype(thing_in_slot) ? thing_in_slot : "nothing"]</a>"
 		if(istype(thing_in_slot, /obj/item/clothing))
 			var/obj/item/clothing/C = thing_in_slot
-			if(C.accessories.len)
+			if(length(C.accessories))
 				dat += "<BR><A href='?src=\ref[src];item=tie;holder=\ref[C]'>Remove accessory</A>"
 	dat += "<BR><HR>"
 
@@ -331,8 +331,8 @@
 
 	var/list/obj/item/organ/external/to_shock = trace_shock(initial_organ, floor_organ)
 
-	if(to_shock && to_shock.len)
-		shock_damage /= to_shock.len
+	if(to_shock && length(to_shock))
+		shock_damage /= length(to_shock)
 		shock_damage = round(shock_damage, 0.1)
 	else
 		return 0
@@ -678,7 +678,7 @@
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
 	var/nothing_to_puke = FALSE
 	if(should_have_organ(BP_STOMACH))
-		if(!istype(stomach) || (stomach.ingested.total_volume <= 5 && stomach.contents.len == 0))
+		if(!istype(stomach) || (stomach.ingested.total_volume <= 5 && length(stomach.contents) == 0))
 			nothing_to_puke = TRUE
 	else if(!(locate(/mob) in contents))
 		nothing_to_puke = TRUE
@@ -1006,7 +1006,7 @@
 					jostle_internal_object(organ, O)
 
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
-	if(stomach && stomach.contents.len)
+	if(stomach && length(stomach.contents))
 		for(var/obj/item/O in stomach.contents)
 			if((O.edge || O.sharp) && prob(5))
 				var/obj/item/organ/external/parent = get_organ(stomach.parent_organ)
@@ -1684,7 +1684,7 @@
 				status += "is grey and necrotic"
 			if(!org.is_usable() || org.is_dislocated())
 				status += "dangling uselessly"
-			if(status.len)
+			if(length(status))
 				src.show_message("My [org.name] is [SPAN_WARNING("[english_list(status)].")]",1)
 			else
 				src.show_message("My [org.name] is [SPAN_NOTICE("OK.")]",1)

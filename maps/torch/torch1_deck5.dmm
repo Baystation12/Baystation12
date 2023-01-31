@@ -7129,7 +7129,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition)
 "pM" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/structure/hygiene/sink/kitchen{
 	pixel_x = 32
 	},
@@ -7797,7 +7797,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/power/smes/buildable/preset/torch/substation{
-	RCon_tag = "Substation - Fifth Deck"
+	RCon_tag = "Substation - 5th Deck"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/substation/fifthdeck)

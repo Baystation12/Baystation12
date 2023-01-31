@@ -14,14 +14,14 @@ var/global/list/ticket_panels = list()
 /datum/ticket/New(datum/client_lite/owner)
 	src.owner = owner
 	tickets |= src
-	id = tickets.len
+	id = length(tickets)
 	opened_time = world.time
-	addtimer(CALLBACK(src, .proc/timeoutcheck), 5 MINUTES, TIMER_STOPPABLE)
+	addtimer(new Callback(src, .proc/timeoutcheck), 5 MINUTES, TIMER_STOPPABLE)
 
 /datum/ticket/proc/timeoutcheck()
 	if(status == TICKET_OPEN)
 		message_staff(SPAN_DANGER("[owner.key_name(0)] has not received a reply to their initial ahelp after 5 minutes!"))
-		addtimer(CALLBACK(src, .proc/timeoutchecklast), 5 MINUTES, TIMER_STOPPABLE)
+		addtimer(new Callback(src, .proc/timeoutchecklast), 5 MINUTES, TIMER_STOPPABLE)
 
 
 /datum/ticket/proc/timeoutchecklast()
@@ -83,7 +83,7 @@ var/global/list/ticket_panels = list()
 	to_chat(client_by_ckey(src.owner.ckey), SPAN_NOTICE("<b>[assigned_admin.key] has added themself to your ticket and should respond shortly. Thanks for your patience!</b>"))
 
 	update_ticket_panels()
-	addtimer(CALLBACK(src, .proc/timeoutchecktaken), 30 MINUTES, TIMER_STOPPABLE)
+	addtimer(new Callback(src, .proc/timeoutchecktaken), 30 MINUTES, TIMER_STOPPABLE)
 
 	return 1
 
@@ -140,7 +140,7 @@ var/global/list/ticket_panels = list()
 	var/list/dat = list()
 
 	var/list/ticket_dat = list()
-	for(var/id = tickets.len, id >= 1, id--)
+	for(var/id = length(tickets), id >= 1, id--)
 		var/datum/ticket/ticket = tickets[id]
 		if(C.holder || ticket.owner.ckey == C.ckey)
 			var/client/owner_client = client_by_ckey(ticket.owner.ckey)
@@ -180,7 +180,7 @@ var/global/list/ticket_panels = list()
 				ticket_dat += "</i>"
 			ticket_dat += "</li>"
 
-	if(ticket_dat.len)
+	if(length(ticket_dat))
 		dat += "<br /><div style='width:50%;float:left;'><p><b>Available tickets:</b></p><ul>[jointext(ticket_dat, null)]</ul></div>"
 
 		if(open_ticket)
@@ -191,7 +191,7 @@ var/global/list/ticket_panels = list()
 				var/msg_to = msg.msg_to ? msg.msg_to : "Adminhelp"
 				msg_dat += "<li>\[[msg.time_stamp]\] [msg.msg_from] -> [msg_to]: [C.holder ? generate_ahelp_key_words(C.mob, msg.msg) : msg.msg]</li>"
 
-			if(msg_dat.len)
+			if(length(msg_dat))
 				dat += "<ul>[jointext(msg_dat, null)]</ul></div>"
 			else
 				dat += "<p>No messages to display.</p></div>"

@@ -2423,7 +2423,7 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/fore)
 "fy" = (
-/obj/item/roller,
+/obj/item/roller_bed,
 /obj/item/auto_cpr,
 /obj/structure/hygiene/sink/kitchen{
 	pixel_x = -32

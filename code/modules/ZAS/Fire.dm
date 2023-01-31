@@ -39,7 +39,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	return igniting
 
 /zone/proc/process_fire()
-	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, fire_tiles.len)
+	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, length(fire_tiles))
 
 	var/firelevel = burn_gas.react(src, fire_tiles, force_burn = 1, no_check = 1)
 
@@ -57,7 +57,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 				qdel(T.hotspot)
 		fire_tiles.Cut()
 
-	if(!fire_tiles.len)
+	if(!length(fire_tiles))
 		SSair.active_fire_zones.Remove(src)
 
 /turf/proc/create_fire(fl)
@@ -136,7 +136,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 				if(!enemy_tile.zone || enemy_tile.hotspot)
 					continue
 
-				//if(!enemy_tile.zone.fire_tiles.len) TODO - optimize
+				//if(!length(enemy_tile.zone.fire_tiles)) TODO - optimize
 				var/datum/gas_mixture/acs = enemy_tile.return_air()
 				if(!acs || !acs.check_combustability())
 					continue
@@ -254,7 +254,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 		//if the reaction is progressing too slow then it isn't self-sustaining anymore and burns out
 		if(zone) //be less restrictive with canister and tank reactions
-			if((!gas_fuel || used_fuel <= FIRE_GAS_MIN_BURNRATE*zone.contents.len))
+			if((!gas_fuel || used_fuel <= FIRE_GAS_MIN_BURNRATE*length(zone.contents)))
 				return 0
 
 
@@ -294,7 +294,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	if(!.)
 		return 0
 
-	if(fuel_objs && fuel_objs.len)
+	if(fuel_objs && length(fuel_objs))
 		return 1
 
 	. = 0

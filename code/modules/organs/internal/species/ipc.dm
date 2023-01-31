@@ -98,7 +98,7 @@
 	if (!protected)
 		var/datum/ghosttrap/T = get_ghost_trap("positronic brain")
 		T.request_player(brainmob, "Someone is requesting a personality for a positronic brain.", 60 SECONDS)
-	searching = addtimer(CALLBACK(src, .proc/cancel_search), 60 SECONDS, TIMER_UNIQUE | TIMER_STOPPABLE)
+	searching = addtimer(new Callback(src, .proc/cancel_search), 60 SECONDS, TIMER_UNIQUE | TIMER_STOPPABLE)
 	icon_state = "posibrain-searching"
 
 /obj/item/organ/internal/posibrain/proc/cancel_search()
@@ -310,7 +310,8 @@
 	if (self && self.mind)
 		self.visible_message("\The [self] unceremoniously falls lifeless.")
 		var/mob/observer/ghost/G = self.ghostize(FALSE)
-		G.timeofdeath = world.time
+		if (G) // In case of aghosts or keyless mobs
+			G.timeofdeath = world.time
 
 /*
 	This is for law stuff directly. This is how a human mob will be able to communicate with the posi_brainmob in the

@@ -2184,13 +2184,13 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/structure/flora/pottedplant/deskleaf{
-	desc = "A tiny waxy leafed plant specimen. It has 'Green's replacement' scribbled into the pot."
-	},
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/item/flora/pottedplantsmall/leaf{
+	desc = "A tiny waxy leafed plant specimen. It has 'Green's replacement' scribbled onto the pot."
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
@@ -10313,7 +10313,7 @@
 /obj/item/clothing/gloves/latex,
 /obj/item/tank/anesthetic,
 /obj/item/clothing/mask/breath/medical,
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/random/medical,
 /obj/random/medical,
 /obj/random/firstaid,
@@ -10508,13 +10508,11 @@
 	name = "blood storage";
 	pixel_y = -32
 	},
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
 /turf/simulated/floor/tiled/white/monotile,
 /area/aquila/medical)
 "Cd" = (
@@ -10863,6 +10861,8 @@
 /obj/item/storage/toolbox/mechanical,
 /obj/item/device/multitool,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/device/destTagger,
+/obj/item/stack/package_wrap/twenty_five,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "Dw" = (
@@ -12152,9 +12152,6 @@
 	start_pressure = 450
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/rotating_alarm/security_alarm{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/bridge)
 "IG" = (
@@ -12240,13 +12237,12 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/item/device/destTagger,
-/obj/item/stack/package_wrap/twenty_five,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/item/flora/pottedplantsmall/fern,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "Jc" = (
@@ -14584,6 +14580,9 @@
 	},
 /obj/effect/floor_decal/techfloor{
 	dir = 8
+	},
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/bridge)

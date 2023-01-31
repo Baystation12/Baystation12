@@ -52,7 +52,7 @@
 
 	spawn(5)
 		if(brainmob && brainmob.client)
-			brainmob.client.screen.len = null //clear the hud
+			LAZYCLEARLIST(brainmob.client.screen)
 
 /obj/item/organ/internal/brain/set_max_damage(ndamage)
 	..()
@@ -137,7 +137,7 @@
 		return
 	to_chat(owner, SPAN_NOTICE(FONT_GIANT("<B>What happened...?</B>")))
 	alert(owner, "You have taken massive brain damage! This could affect speech, memory, or any other skill, but provided you've been treated, it shouldn't be permanent.", "Brain Damaged")
-	if (owner.psi)
+	if (owner?.psi)
 		owner.psi.check_latency_trigger(20, "physical trauma")
 
 /obj/item/organ/internal/brain/Process()
@@ -214,7 +214,7 @@
 			owner.Paralyse(damage_secondary)
 			owner.Weaken(round(damageTaken, 1))
 			if (prob(30))
-				addtimer(CALLBACK(src, .proc/brain_damage_callback, damage), rand(6, 20) SECONDS, TIMER_UNIQUE)
+				addtimer(new Callback(src, .proc/brain_damage_callback, damage), rand(6, 20) SECONDS, TIMER_UNIQUE)
 
 /obj/item/organ/internal/brain/proc/brain_damage_callback(damage) //Confuse them as a somewhat uncommon aftershock. Side note: Only here so a spawn isn't used. Also, for the sake of a unique timer.
 	if (!owner || owner.stat == DEAD || (status & ORGAN_DEAD))

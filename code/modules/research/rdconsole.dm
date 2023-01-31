@@ -482,7 +482,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	if (!quick_deconstruct)
 		screen = 0.1
 	flick("d_analyzer_process", linked_destroy)
-	addtimer(CALLBACK(src, .proc/finish_deconstruct, W), 24)
+	addtimer(new Callback(src, .proc/finish_deconstruct, W), 24)
 
 /obj/machinery/computer/rdconsole/proc/finish_deconstruct(weakref/W)
 	CHECK_DESTROY
@@ -854,7 +854,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];menu=3.1'>Protolathe Menu</A><HR>"
 			dat += "Queue<BR><HR>"
-			if(!linked_lathe.queue.len)
+			if(!length(linked_lathe.queue))
 				dat += "Empty"
 			else
 				var/tmp = 1
@@ -963,7 +963,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];menu=4.1'>Circuit Imprinter Menu</A><HR>"
 			dat += "Queue<BR><HR>"
-			if(linked_imprinter.queue.len == 0)
+			if(length(linked_imprinter.queue) == 0)
 				dat += "Empty"
 			else
 				var/tmp = 1

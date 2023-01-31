@@ -32,4 +32,4 @@ var/global/repository/cameras/camera_repository = new()
 				ADD_SORTED(networks, network, /proc/cmp_text_asc)
 				networks[network] = list()
 			var/list/netlist = networks[network]
-			netlist[++netlist.len] = cam
+			netlist[LIST_PRE_INC(netlist)] = cam

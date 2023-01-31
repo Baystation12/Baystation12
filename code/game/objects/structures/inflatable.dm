@@ -3,6 +3,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	icon = 'icons/obj/inflatable.dmi'
 	health_max = 10
+	health_min_damage = 10
 	var/deploy_path = null
 
 /obj/item/inflatable/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
@@ -66,7 +67,7 @@
 	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "wall"
 	atmos_canpass = CANPASS_DENSITY
-	health_max = 10
+	health_max = 20
 	damage_hitsound = 'sound/effects/Glasshit.ogg'
 
 	var/undeploy_path = null
@@ -141,13 +142,17 @@
 	add_fingerprint(user)
 	return
 
+
+/obj/structure/inflatable/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Check if the weapon can puncture. TODO: Pass this through to `can_damage_health()`.
+	if (!weapon.can_puncture())
+		return FALSE
+
+	return ..()
+
+
 /obj/structure/inflatable/attackby(obj/item/W, mob/user)
 	if(!istype(W) || istype(W, /obj/item/inflatable_dispenser)) return
-
-	if (user.a_intent == I_HURT)
-		if (W.can_puncture() || W.force > 10)
-			..()
-		return
 
 	if(istype(W, /obj/item/tape_roll) && get_damage_value() >= 3)
 		if(taped)
@@ -195,14 +200,6 @@
 	verbs -= /obj/structure/inflatable/verb/hand_deflate
 	deflate()
 	return TRUE
-
-/obj/structure/inflatable/attack_generic(mob/user, damage, attack_verb)
-	attack_animation(user)
-	if (damage_health(damage))
-		user.visible_message(SPAN_DANGER("[user] [attack_verb] open the [src]!"))
-	else
-		user.visible_message(SPAN_DANGER("[user] [attack_verb] at [src]!"))
-	return 1
 
 /obj/structure/inflatable/CanFluidPass(coming_from)
 	return !density

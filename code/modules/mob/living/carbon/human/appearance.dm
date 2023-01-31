@@ -67,13 +67,13 @@
 	var/list/valid_hairstyles = generate_valid_hairstyles()
 	var/list/valid_facial_hairstyles = generate_valid_facial_hairstyles()
 
-	if(valid_hairstyles.len)
+	if(length(valid_hairstyles))
 		head_hair_style = pick(valid_hairstyles)
 	else
 		//this shouldn't happen
 		head_hair_style = "Bald"
 
-	if(valid_facial_hairstyles.len)
+	if(length(valid_facial_hairstyles))
 		facial_hair_style = pick(valid_facial_hairstyles)
 	else
 		//this shouldn't happen
@@ -159,9 +159,9 @@
 				continue
 			if(!is_alien_whitelisted(src, current_species))
 				continue
-		if(whitelist.len && !(current_species_name in whitelist))
+		if(length(whitelist) && !(current_species_name in whitelist))
 			continue
-		if(blacklist.len && (current_species_name in blacklist))
+		if(length(blacklist) && (current_species_name in blacklist))
 			continue
 
 		valid_species += current_species_name

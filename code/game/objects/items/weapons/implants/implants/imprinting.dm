@@ -18,7 +18,7 @@
 	It is HIGLY ILLEGAL and the seller does NOT endorse use of this device in such way.
 	Any amount of "Mind-Breaker"(TM) present in bloodstream will trigger this side-effect.<BR>"}
 	. += "<HR><B>Instructions:</B><BR>"
-	for(var/i = 1 to instructions.len)
+	for(var/i = 1 to length(instructions))
 		. += "- [instructions[i]] <A href='byond://?src=\ref[src];edit=[i]'>Edit</A> <A href='byond://?src=\ref[src];del=[i]'>Remove</A><br>"
 	. += "<A href='byond://?src=\ref[src];add=1'>Add</A>"
 
@@ -51,7 +51,7 @@
 		M.StoreMemory(msg, /singleton/memory_options/system)
 	if(brainwashing)
 		log_and_message_admins("was implanted with a brainwashing implant holding following laws: [jointext(instructions, ";")].", M)
-	addtimer(CALLBACK(src,.proc/activate),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
+	addtimer(new Callback(src,.proc/activate),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
 	return TRUE
 
 /obj/item/implant/imprinting/proc/get_instructions()
@@ -83,7 +83,7 @@
 	else
 		instruction = SPAN_NOTICE("You remember suddenly: \"[instruction]\"")
 	to_chat(imp_in, instruction)
-	addtimer(CALLBACK(src,.proc/activate),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
+	addtimer(new Callback(src,.proc/activate),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
 
 /obj/item/implant/imprinting/removed()
 	if(brainwashing && !malfunction)

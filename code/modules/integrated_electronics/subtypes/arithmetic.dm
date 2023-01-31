@@ -29,7 +29,7 @@
 
 /obj/item/integrated_circuit/arithmetic/addition/do_work()
 	var/result = 0
-	for(var/k in 1 to inputs.len)
+	for(var/k in 1 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
 		if(isnum(I))
 			result += I
@@ -55,7 +55,7 @@
 		return
 	var/result = A.data
 
-	for(var/k in 2 to inputs.len)
+	for(var/k in 2 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
 		if(isnum(I))
 			result -= I
@@ -81,7 +81,7 @@
 	if(!isnum(A.data))
 		return
 	var/result = A.data
-	for(var/k in 2 to inputs.len)
+	for(var/k in 2 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
 		if(isnum(I))
 			result *= I
@@ -108,7 +108,7 @@
 	var/result = A.data
 
 
-	for(var/k in 2 to inputs.len)
+	for(var/k in 2 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
 		if(isnum(I) && (I != 0))
 			result /= I
@@ -198,7 +198,7 @@
 
 /obj/item/integrated_circuit/arithmetic/absolute/do_work()
 	var/result = 0
-	for(var/k in 1 to inputs.len)
+	for(var/k in 1 to length(inputs))
 		var/datum/integrated_io/I = inputs[k]
 		I.pull_data()
 		if(isnum(I.data))
@@ -220,7 +220,7 @@
 /obj/item/integrated_circuit/arithmetic/average/do_work()
 	var/result = 0
 	var/inputs_used = 0
-	for(var/k in 2 to inputs.len)
+	for(var/k in 2 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
 		if(isnum(I))
 			inputs_used++
@@ -322,7 +322,7 @@
 
 /obj/item/integrated_circuit/arithmetic/max/do_work()
 	var/result
-	for(var/k in 1 to inputs.len)
+	for(var/k in 1 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
 		if(!isnum(I))
 			continue

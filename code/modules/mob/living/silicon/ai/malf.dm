@@ -124,7 +124,7 @@
 /mob/living/silicon/ai/show_malf_ai()
 	if(src.is_malf())
 		if(src.hacked_apcs)
-			stat("Hacked APCs", "[src.hacked_apcs.len]")
+			stat("Hacked APCs", "[length(src.hacked_apcs)]")
 		stat("System Status", "[src.hacking ? "Busy" : "Stand-By"]")
 		if(src.research)
 			stat("Available CPU", "[src.research.stored_cpu] TFlops")

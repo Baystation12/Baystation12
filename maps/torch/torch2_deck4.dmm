@@ -3804,8 +3804,8 @@
 /area/maintenance/fourthdeck/foreport)
 "mM" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/ironingiron,
-/obj/item/ironingiron,
+/obj/item/ironing_iron,
+/obj/item/ironing_iron,
 /obj/item/storage/box/detergent,
 /obj/item/storage/box/detergent,
 /obj/structure/table/rack,
@@ -4093,7 +4093,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "nT" = (
-/obj/structure/bed/roller/ironingboard,
+/obj/random/ironing_board_structure,
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/item/device/radio/intercom{
 	dir = 4;
@@ -4353,7 +4353,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/turbolift/cargo_lift)
 "pf" = (
-/obj/structure/bed/roller/ironingboard,
+/obj/random/ironing_board_structure,
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/alarm{
 	dir = 4;
@@ -5625,7 +5625,7 @@
 /area/maintenance/substation/fourthdeck)
 "ts" = (
 /obj/machinery/power/smes/buildable/preset/torch/substation{
-	RCon_tag = "Substation - Fourth Deck"
+	RCon_tag = "Substation - 4th Deck"
 	},
 /obj/structure/cable/green,
 /obj/structure/cable/green{
@@ -12084,7 +12084,7 @@
 /area/security/hangcheck)
 "OZ" = (
 /obj/structure/table/marble,
-/obj/structure/flora/pottedplant/deskferntrim{
+/obj/item/flora/pottedplantsmall/fern{
 	pixel_y = 4
 	},
 /turf/simulated/floor/lino,

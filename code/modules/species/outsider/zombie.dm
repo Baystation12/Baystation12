@@ -174,7 +174,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		H.resist()
 		return
 
-	addtimer(CALLBACK(src, .proc/handle_action, H), rand(10, 20))
+	addtimer(new Callback(src, .proc/handle_action, H), rand(10, 20))
 
 /datum/species/zombie/proc/handle_action(mob/living/carbon/human/H)
 	var/dist = 128
@@ -356,7 +356,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	new /obj/effect/decal/cleanable/vomit(T)
 	playsound(T, 'sound/effects/splat.ogg', 20, 1)
 
-	addtimer(CALLBACK(src, .proc/transform_zombie), 20)
+	addtimer(new Callback(src, .proc/transform_zombie), 20)
 
 /mob/living/carbon/human/proc/transform_zombie()
 	make_jittery(300)
@@ -427,16 +427,16 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 				continue
 			victims += L
 
-	if (!victims.len)
+	if (!length(victims))
 		to_chat(src, SPAN_WARNING("No valid targets nearby!"))
 		return
 	if (client)
-		if (victims.len == 1) //No need to choose
+		if (length(victims) == 1) //No need to choose
 			target = victims[1]
 		else
 			target = input("Who would you like to consume?") as null | anything in victims
 	else //NPCs
-		if (victims.len > 0)
+		if (length(victims) > 0)
 			target = victims[1]
 
 	if (!target)

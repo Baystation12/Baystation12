@@ -65,13 +65,13 @@
 	if(base.leaking)
 		leaks |= base
 
-	while(possible_expansions.len>0)
+	while(length(possible_expansions)>0)
 		for(var/obj/machinery/atmospherics/pipe/borderline in possible_expansions)
 
 			var/list/result = borderline.pipeline_expansion()
-			var/edge_check = result.len
+			var/edge_check = length(result)
 
-			if(result.len>0)
+			if(length(result)>0)
 				for(var/obj/machinery/atmospherics/pipe/item in result)
 					if(item.in_stasis)
 						continue

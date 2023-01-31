@@ -64,7 +64,7 @@ GLOBAL_LIST_INIT(csrfz_check, list(
 	else if (A.blocks_air & ZONE_BLOCKED || B.blocks_air & ZONE_BLOCKED) { \
 		ret = (A.z == B.z) ? ZONE_BLOCKED : AIR_BLOCKED; \
 	} \
-	else if (A.contents.len) { \
+	else if (length(A.contents)) { \
 		ret = 0;\
 		for (var/thing in A) { \
 			var/atom/movable/AM = thing; \
@@ -112,7 +112,7 @@ GLOBAL_LIST_INIT(gzn_check, list(
 	else if (A.blocks_air & ZONE_BLOCKED || B.blocks_air & ZONE_BLOCKED) { \
 		ret = ZONE_BLOCKED; \
 	} \
-	else if (A.contents.len) { \
+	else if (length(A.contents)) { \
 		ret = 0;\
 		for (var/thing in A) { \
 			var/atom/movable/AM = thing; \

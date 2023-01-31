@@ -19,7 +19,7 @@
 	if(length(inputs))
 		var/list/saved_inputs = list()
 
-		for(var/index in 1 to inputs.len)
+		for(var/index in 1 to length(inputs))
 			var/datum/integrated_io/input = inputs[index]
 
 			// Don't waste space saving the default values
@@ -34,7 +34,7 @@
 			if(islist(input.data) || isnum(input.data) || istext(input.data) || isnull(input.data))
 				saved_inputs.Add(list(input_value))
 
-		if(saved_inputs.len)
+		if(length(saved_inputs))
 			component_params["inputs"] = saved_inputs
 
 	var/special = save_special()
@@ -66,7 +66,7 @@
 			return "Input values list out of bounds at [init_name]."
 
 		for(var/list/input in loaded_inputs)
-			if(input.len != 3)
+			if(length(input) != 3)
 				return "Malformed input data at [init_name]."
 
 			var/input_id = input[1]
@@ -217,7 +217,7 @@
 				saved_wires.Add(text_params + "=" + text_params2)
 				wires.Add(list(list(params, params2)))
 
-	if(wires.len)
+	if(length(wires))
 		blocks["wires"] = wires
 
 	return json_encode(blocks)
@@ -320,7 +320,7 @@
 		for(var/w in blocks["wires"])
 			var/list/wire = w
 
-			if(!islist(wire) || wire.len != 2)
+			if(!islist(wire) || length(wire) != 2)
 				return "Invalid wire data."
 
 			var/datum/integrated_io/IO = assembly.get_pin_ref_list(wire[1], assembly_components)
@@ -365,4 +365,3 @@
 	assembly.forceMove(loc)
 	assembly.post_load()
 	return assembly
-

@@ -11,8 +11,8 @@
 /datum/nano_module/usage_info/ui_interact(mob/user, ui_key = "usage_info", datum/nanoui/ui = null, force_open = 0)
 	var/static/list/data = list()
 	data.Cut()
-	data["channels_left"] = GLOB.sound_channels.available_channels.stack.len
-	data["events_active"] = src.player.event_manager.events.len
+	data["channels_left"] = length(GLOB.sound_channels.available_channels.stack)
+	data["events_active"] = length(src.player.event_manager.events)
 	data["max_channels"] = GLOB.sound_channels.channel_ceiling
 	data["max_events"] = GLOB.musical_config.max_events
 

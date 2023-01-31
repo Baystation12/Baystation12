@@ -155,15 +155,15 @@
 		return
 	if(!lit || operating)	return
 
-	var/length = LAZYLEN(turflist)
-	if(length < 1)
+	var/size = length(turflist)
+	if (!size)
 		return
-	turflist.len = min(length, range)
+	LIST_RESIZE(turflist, min(size, range))
 
 	var/power = 0
 	var/datum/reagents/beaker_reagents = beaker.reagents
 	var/datum/reagents/my_fraction = new(beaker_reagents.maximum_volume, src)
-	beaker_reagents.trans_to_holder(my_fraction, FLAMETHROWER_RELEASE_AMOUNT * turflist.len, safety = TRUE)
+	beaker_reagents.trans_to_holder(my_fraction, FLAMETHROWER_RELEASE_AMOUNT * length(turflist), safety = TRUE)
 	var/fire_colour = null
 	var/highest_amount = 0
 	for(var/datum/reagent/R in beaker_reagents.reagent_list)
@@ -190,7 +190,7 @@
 		previousturf = T
 
 		//Consume part of our fuel to create a fire spot
-		T.IgniteTurf(power / turflist.len, fire_colour)
+		T.IgniteTurf(power / length(turflist), fire_colour)
 		T.hotspot_expose((power*3) + 380,500)
 		my_fraction.remove_any(FLAMETHROWER_RELEASE_AMOUNT)
 		sleep(1)

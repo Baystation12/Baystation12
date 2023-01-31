@@ -125,7 +125,7 @@ var/global/list/ai_verbs_default = list(
 	while(!pickedName)
 		pickedName = pick(GLOB.ai_names)
 		for (var/mob/living/silicon/ai/A in GLOB.silicon_mobs)
-			if (A.real_name == pickedName && possibleNames.len > 1) //fixing the theoretically possible infinite loop
+			if (A.real_name == pickedName && length(possibleNames) > 1) //fixing the theoretically possible infinite loop
 				possibleNames -= pickedName
 				pickedName = null
 
@@ -196,11 +196,11 @@ var/global/list/ai_verbs_default = list(
 	to_chat(src, "For department channels, use the following say commands:")
 
 	var/radio_text = ""
-	for(var/i = 1 to silicon_radio.channels.len)
+	for(var/i = 1 to length(silicon_radio.channels))
 		var/channel = silicon_radio.channels[i]
 		var/key = get_radio_key_from_channel(channel)
 		radio_text += "[key] - [channel]"
-		if(i != silicon_radio.channels.len)
+		if(i != length(silicon_radio.channels))
 			radio_text += ", "
 
 	to_chat(src, radio_text)
@@ -249,13 +249,13 @@ var/global/list/ai_verbs_default = list(
 	for(var/line in lines)
 	// split & clean up
 		var/list/Entry = splittext(line, ":")
-		for(var/i = 1 to Entry.len)
+		for(var/i = 1 to length(Entry))
 			Entry[i] = trim(Entry[i])
 
-		if(Entry.len < 2)
+		if(length(Entry) < 2)
 			continue
-		if(Entry.len == 2) // This is to handle legacy entries
-			Entry[++Entry.len] = Entry[1]
+		if(length(Entry) == 2) // This is to handle legacy entries
+			Entry[LIST_PRE_INC(Entry)] = Entry[1]
 
 		if(Entry[1] == src.ckey && Entry[2] == src.real_name)
 			var/alive_icon_state = "[Entry[3]]-ai"
@@ -540,7 +540,7 @@ var/global/list/ai_verbs_default = list(
 		for(var/datum/computer_file/report/crew_record/t in GLOB.all_crew_records)//Look in data core locked.
 			personnel_list["[t.get_name()]: [t.get_rank()]"] = t.photo_front//Pull names, rank, and image.
 
-		if(personnel_list.len)
+		if(length(personnel_list))
 			input = input("Select a crew member:") as null|anything in personnel_list
 			var/icon/character_icon = personnel_list[input]
 			if(character_icon)
@@ -704,7 +704,7 @@ var/global/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/on_update_icon()
 	if(!selected_sprite || !(selected_sprite in available_icons()))
-		selected_sprite = GET_SINGLETON(default_ai_icon)
+		selected_sprite = new default_ai_icon()
 
 	icon = selected_sprite.icon
 	if(stat == DEAD)

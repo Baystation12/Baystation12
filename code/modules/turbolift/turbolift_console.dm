@@ -37,7 +37,7 @@
 	return attack_hand(user)
 
 /obj/structure/lift/attack_generic(mob/user)
-	return attack_hand(user)
+	attack_hand(user)
 
 /obj/structure/lift/attack_hand(mob/user)
 	return interact(user)
@@ -111,7 +111,7 @@
 	//the floors list stores levels in order of increasing Z
 	//therefore, to display upper levels at the top of the menu and
 	//lower levels at the bottom, we need to go through the list in reverse
-	for(var/i in lift.floors.len to 1 step -1)
+	for(var/i in length(lift.floors) to 1 step -1)
 		var/datum/turbolift_floor/floor = lift.floors[i]
 		var/label = floor.label? floor.label : "Level #[i]"
 		dat += "[SPAN_COLOR((floor in lift.queued_floors) ? COLOR_YELLOW : COLOR_WHITE, "<a href='?src=\ref[src];move_to_floor=["\ref[floor]"]'>[label]</a>: [floor.name]")]<br>"

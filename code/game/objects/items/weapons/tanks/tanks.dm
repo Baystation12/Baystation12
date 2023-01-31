@@ -591,6 +591,10 @@ var/global/list/tank_gauge_cache = list()
 	var/obj/item/device/assembly_holder/assembly = null
 
 /obj/item/device/tankassemblyproxy/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
+	if (!tank || !assembly)
+		log_debug(append_admin_tools("A tank assembly received a signal but lacks a valid assembly holder.", usr, get_turf(src)))
+		to_chat(usr, SPAN_DEBUG("A tank assembly associated with you attempted to ignite but failed because it lacks a valid assembly holder. Please ahelp this bug to be investigated in-round."))
+		return
 	tank.ignite()	//boom (or not boom if you made shijwtty mix)
 
 /obj/item/tank/proc/assemble_bomb(W,user)	//Bomb assembly proc. This turns assembly+tank into a bomb

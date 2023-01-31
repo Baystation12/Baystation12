@@ -38,7 +38,7 @@
 /mob/living/simple_animal/hostile/giant_spider/phorogenic/death()
 	visible_message(SPAN_DANGER("\The [src]'s body begins to rupture!"))
 	var/delay = rand(explosion_delay_lower, explosion_delay_upper)
-	addtimer(CALLBACK(src, .proc/flash, delay), 0)
+	addtimer(new Callback(src, .proc/flash, delay), 0)
 
 	return ..()
 

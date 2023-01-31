@@ -43,7 +43,7 @@ var/global/list/flooring_cache = list()
 
 		has_smooth = ~(has_border & (NORTH | SOUTH | EAST | WEST))
 
-		if(flooring.can_paint && decals && decals.len)
+		if(flooring.can_paint && decals && length(decals))
 			overlays |= decals
 
 		//We can only have inner corners if we're smoothed with something
@@ -71,7 +71,7 @@ var/global/list/flooring_cache = list()
 				icon_state = flooring.icon_base+"0"
 		*/
 
-	if(decals && decals.len)
+	if(decals && length(decals))
 		for(var/image/I in decals)
 			if(I.layer != DECAL_PLATING_LAYER)
 				continue

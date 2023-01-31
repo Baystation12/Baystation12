@@ -94,7 +94,7 @@
 
 	var/list/L = find_apcs()
 	var/total_apc_load = 0
-	if(L.len <= 0) 	// No APCs found.
+	if(length(L) <= 0) 	// No APCs found.
 		out = "<b>No APCs located in connected powernet!</b>"
 	else			// APCs found. Create very ugly (but working!) HTML table.
 
@@ -144,7 +144,7 @@
 	var/list/L = find_apcs()
 	var/total_apc_load = 0
 	var/list/APC_data = list()
-	if(L.len > 0)
+	if(length(L) > 0)
 		// These lists are used as replacement for number based APC settings
 		var/list/S = list("M-OFF", "DC-OFF","A-OFF","M-ON", "A-ON")
 		var/list/chg = list("N","C","F")

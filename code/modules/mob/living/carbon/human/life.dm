@@ -287,7 +287,7 @@
 			adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 			immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
 			updatehealth()
-			if(!isSynthetic() && organs.len)
+			if(!isSynthetic() && length(organs))
 				var/obj/item/organ/external/O = pick(organs)
 				if(istype(O)) O.add_autopsy_data("Radiation Poisoning", damage)
 
@@ -481,7 +481,7 @@
 		if(C)
 			if(C.max_heat_protection_temperature && C.max_heat_protection_temperature >= temperature)
 				. |= C.heat_protection
-			if(C.accessories.len)
+			if(length(C.accessories))
 				for(var/obj/item/clothing/accessory/A in C.accessories)
 					if(A.max_heat_protection_temperature && A.max_heat_protection_temperature >= temperature)
 						. |= A.heat_protection
@@ -494,7 +494,7 @@
 		if(C)
 			if(C.min_cold_protection_temperature && C.min_cold_protection_temperature <= temperature)
 				. |= C.cold_protection
-			if(C.accessories.len)
+			if(length(C.accessories))
 				for(var/obj/item/clothing/accessory/A in C.accessories)
 					if(A.min_cold_protection_temperature && A.min_cold_protection_temperature <= temperature)
 						. |= A.cold_protection
@@ -615,7 +615,7 @@
 			adjustHalLoss(-3)
 			if(sleeping)
 				if (!dream_timer && client)
-					dream_timer = addtimer(CALLBACK(src, .proc/dream), 10 SECONDS, TIMER_STOPPABLE)
+					dream_timer = addtimer(new Callback(src, .proc/dream), 10 SECONDS, TIMER_STOPPABLE)
 				if (mind || ai_holder)
 					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
 					if (client || ai_holder || sleeping > 3)

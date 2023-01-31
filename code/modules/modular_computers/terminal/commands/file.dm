@@ -24,12 +24,12 @@
 		return "[name]: Error; hard drive not found."
 	. = syntax_error()
 	// File list
-	if(!arguments.len)
+	if(!length(arguments))
 		. = list()
 		. += "[name]: Listing data storage content..."
 		. += output_file_list(drives, terminal.history_max_length - 5)
 	// Run command with one filename
-	else if(arguments.len == 2)
+	else if(length(arguments) == 2)
 		var/list/source = get_file_location(drives, arguments[2])
 		if(!source)
 			return "[name]: Error; unable to resolve filename."
@@ -47,7 +47,7 @@
 				return "[name]: Error; could not delete file '[source["name"]]'."
 			return "[name]: File deleted."
 	// Run command with two filenames
-	else if(arguments.len == 3)
+	else if(length(arguments) == 3)
 		var/list/source = get_file_location(drives, arguments[2])
 		if(!source)
 			return "[name]: Error; unable to resolve filename."
@@ -74,13 +74,13 @@
 		O += "Flags Type Size Name"
 		// It's thematically appropriate for the command to bypass the abstraction
 		// of NTOS and access the hardware directly instead.
-		if(!D.stored_files.len)
+		if(!length(D.stored_files))
 			O += "No files found on device."
 		else
 			var/i = 0
 			for(var/datum/computer_file/F in D.stored_files)
-				if(O.len >= max_lines) // There's a line limit in the terminal, so if we approach it, break off and just list number of files on the drives.
-					O += ".. [(D.stored_files.len - i)] additional files."
+				if(length(O) >= max_lines) // There's a line limit in the terminal, so if we approach it, break off and just list number of files on the drives.
+					O += ".. [(length(D.stored_files) - i)] additional files."
 					break
 				var/flags = "+[(F.hidden ? "h" : "")][(F.read_only ? "r" : "rw")]"
 				O += "[flags] [F.filetype] [F.size]GQ [F.filename]"
@@ -89,14 +89,14 @@
 
 /datum/terminal_command/file/proc/get_file_location(list/drives, text)
 	var/list/pieces = splittext(text, ":")
-	if(!pieces.len)
+	if(!length(pieces))
 		return
 	var/obj/item/stock_parts/computer/hard_drive/D
 	var/name
-	if(pieces.len == 1)
+	if(length(pieces) == 1)
 		D = drives["C"]
 		name = pieces[1]
-	else if(pieces.len == 2)
+	else if(length(pieces) == 2)
 		D = drives[pieces[1]]
 		name = pieces[2]
 	else

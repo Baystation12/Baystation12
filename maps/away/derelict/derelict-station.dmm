@@ -2214,7 +2214,7 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hp" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /turf/simulated/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hq" = (
@@ -2259,7 +2259,7 @@
 "hz" = (
 /obj/item/reagent_containers/ivbag,
 /obj/item/reagent_containers/ivbag,
-/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
 /obj/structure/closet/medical_wall{
 	name = "Blood Closet"
 	},
@@ -2343,8 +2343,8 @@
 /turf/space,
 /area/constructionsite/hallway/aft)
 "hR" = (
-/obj/item/roller,
-/obj/item/roller,
+/obj/item/roller_bed,
+/obj/item/roller_bed,
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "hS" = (
@@ -2378,7 +2378,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "hZ" = (
-/obj/item/roller,
+/obj/item/roller_bed,
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "ia" = (
@@ -2406,7 +2406,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/atmospherics)
 "if" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "ig" = (
@@ -2483,7 +2483,7 @@
 /area/constructionsite/hallway/aft)
 "iw" = (
 /obj/structure/lattice,
-/obj/item/roller,
+/obj/item/roller_bed,
 /turf/space,
 /area/constructionsite/medical)
 "ix" = (

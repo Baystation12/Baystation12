@@ -106,7 +106,7 @@
 
 		if (!simmed)
 			for (var/turf/unsimulated/T in atmospheres)
-				var/new_moles = T.initial_gas.len / moles
+				var/new_moles = length(T.initial_gas) / moles
 
 				for (var/gas in T.initial_gas)
 					T.initial_gas[gas] = new_moles

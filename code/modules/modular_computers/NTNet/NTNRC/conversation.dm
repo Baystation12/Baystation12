@@ -27,9 +27,9 @@ var/global/ntnrc_uid = 0
 	trim_message_list()
 
 /datum/ntnet_conversation/proc/trim_message_list()
-	if(messages.len <= 50)
+	if(length(messages) <= 50)
 		return
-	messages.Cut(1, (messages.len-49))
+	messages.Cut(1, (length(messages)-49))
 
 /datum/ntnet_conversation/proc/add_client(datum/computer_file/program/chatclient/C)
 	if(!istype(C))
@@ -49,7 +49,7 @@ var/global/ntnrc_uid = 0
 	// Channel operator left, pick new operator
 	if(C == operator)
 		operator = null
-		if(clients.len)
+		if(length(clients))
 			var/datum/computer_file/program/chatclient/newop = pick(clients)
 			changeop(newop)
 

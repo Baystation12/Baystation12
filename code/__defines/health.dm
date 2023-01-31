@@ -76,3 +76,12 @@
 #define DAMAGE_FLAG_SKIP_DEATH_STATE_CHANGE FLAG(0)
 /// The damage source should deal extra damage to turfs - Walls, floors,
 #define DAMAGE_FLAG_TURF_BREAKER            FLAG(1)
+#define DAMAGE_FLAG_SHARP                   FLAG(2)
+#define DAMAGE_FLAG_EDGE                    FLAG(3)
+#define DAMAGE_FLAG_LASER                   FLAG(4)
+#define DAMAGE_FLAG_BULLET                  FLAG(5)
+#define DAMAGE_FLAG_EXPLODE                 FLAG(6)
+/// Makes apply_damage calls without specified zone distribute damage rather than randomly choose organ (for humans)
+#define DAMAGE_FLAG_DISPERSED               FLAG(7)
+/// Toxin damage that should be mitigated by biological (i.e. sterile) armor
+#define DAMAGE_FLAG_BIO                     FLAG(8)

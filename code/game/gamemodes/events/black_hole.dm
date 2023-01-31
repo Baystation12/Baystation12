@@ -8,7 +8,8 @@
 	density = FALSE
 	anchored = TRUE
 
-/obj/effect/bhole/New()
+/obj/effect/bhole/Initialize()
+	. = ..()
 	spawn(4)
 		controller()
 

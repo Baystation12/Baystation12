@@ -431,7 +431,7 @@
 
 	color = new_color
 
-	if (damage >= emergency_point && !filters.len)
+	if (damage >= emergency_point && !length(filters))
 		filters = filter(type="rays", size = 64, color = "#ffd04f", factor = 0.6, density = 12)
 		animate(filters[1], time = 10 SECONDS, offset = 10, loop=-1)
 		animate(time = 10 SECONDS, offset = 0, loop=-1)
@@ -523,8 +523,8 @@
 		SPAN_WARNING("For a brief moment, you hear an oppressive, unnatural silence.")
 	)
 
-	user.drop_from_inventory(W)
-	Consume(W)
+	if (user.drop_from_inventory(W))
+		Consume(W)
 
 	user.apply_damage(150, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 

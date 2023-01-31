@@ -72,7 +72,7 @@
 	grinding = TRUE
 	update_icon()
 
-	addtimer(CALLBACK(src, .proc/reset_machine, user), grind_time)
+	addtimer(new Callback(src, .proc/reset_machine, user), grind_time)
 	var/skill_multiplier = CLAMP01(0.5 + (user.get_skill_value(skill) - 1) * 0.167)
 	for (var/obj/item/I in items)
 		if (container.reagents.total_volume >= container.reagents.maximum_volume)
@@ -81,7 +81,7 @@
 			I.reagents.trans_to(container, I.reagents.total_volume, skill_multiplier)
 			I.reagents.clear_reagents()
 		var/material/M = I.get_material()
-		if (M?.chem_products?.len)
+		if (length(M?.chem_products))
 			if (isstack(I))
 				var/sheet_volume = 0
 				for (var/chem in M.chem_products)
@@ -105,7 +105,7 @@
 	if (I.reagents?.total_volume)
 		return TRUE
 	var/material/M = I.get_material()
-	if (M?.chem_products?.len)
+	if (length(M?.chem_products))
 		return TRUE
 	return FALSE
 
@@ -134,9 +134,9 @@
 
 	else if (is_type_in_list(I, storage_types))
 		var/obj/item/storage/S = I
-		if (!S.contents.len)
+		if (!length(S.contents))
 			to_chat(user, SPAN_WARNING("\The [S] is empty."))
-		else if (items.len >= max_items)
+		else if (length(items) >= max_items)
 			to_chat(user, SPAN_WARNING("\The item hopper on \the [src] is full."))
 		else
 			var/list/removed = list()
@@ -148,11 +148,11 @@
 				S.remove_from_storage(G, src, 1)
 				removed += G
 				items += G
-				if (items.len >= max_items)
+				if (length(items) >= max_items)
 					break
-			if (removed.len)
+			if (length(removed))
 				S.finish_bulk_removal()
-				var/full = items.len >= max_items
+				var/full = length(items) >= max_items
 				user.visible_message(
 					"\The [user] empties things from \the [S] into \the [src].",
 					"You empty [english_list(removed)] from \the [S] into \the [src][full ? ", filling it to capacity" : ""]."
@@ -164,7 +164,7 @@
 	else if (I.w_class > max_item_size)
 		to_chat(user, SPAN_WARNING("\The [I] is too large for \the [src]."))
 
-	else if (items.len >= max_items)
+	else if (length(items) >= max_items)
 		to_chat(user, SPAN_WARNING("\The [src] is full."))
 
 	else if (is_type_in_list(I, banned_items) || !grindable(I))
@@ -191,7 +191,7 @@
 		window += "Working, please wait..."
 	else
 		window += "<b>Processing Hopper</b>"
-		if (!items.len)
+		if (!length(items))
 			window += " (empty)"
 		else
 			window += "<br><a href='?src=\ref[src];action=grind'>(grind)</a> <a href='?src=\ref[src];action=eject'>(eject)</a><br>"

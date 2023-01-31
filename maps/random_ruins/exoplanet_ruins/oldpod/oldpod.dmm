@@ -18,7 +18,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/bed,
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/item/bedsheet/medical,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)

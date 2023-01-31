@@ -193,7 +193,7 @@
 	. += additional_header
 	. += "</tr>"
 
-	for(var/i = 1, i <= choices.len, i++)
+	for(var/i = 1, i <= length(choices), i++)
 		var/choice = choices[i]
 		var/voted_for = votes[user.ckey] && (i in votes[user.ckey])
 

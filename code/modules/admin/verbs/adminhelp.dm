@@ -18,7 +18,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 			var/list/L = splittext(string, " ")
 			var/surname_found = 0
 			//surnames
-			for(var/i=L.len, i>=1, i--)
+			for(var/i=length(L), i>=1, i--)
 				var/word = ckey(L[i])
 				if(word)
 					surnames[word] = M
@@ -127,7 +127,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 			to_chat(X, msg)
 	//show it to the person adminhelping too
 	to_chat(src, SPAN_CLASS("staff_pm", "PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]"))
-	var/admin_number_present = GLOB.admins.len - admin_number_afk
+	var/admin_number_present = length(GLOB.admins) - admin_number_afk
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
 	if(admin_number_present <= 0)
 		adminmsg2adminirc(src, null, "[html_decode(original_msg)] - !![admin_number_afk ? "All admins AFK ([admin_number_afk])" : "No admins online"]!!")

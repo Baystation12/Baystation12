@@ -70,7 +70,7 @@
 
 /obj/item/reagent_containers/powder/proc/get_appearance()
 	/// Color based on dominant reagent.
-	if (reagents.reagent_list.len > 0)
+	if (length(reagents.reagent_list) > 0)
 		color = reagents.get_color()
 
 // Proc to shove them up your nose

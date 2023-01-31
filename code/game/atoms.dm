@@ -31,6 +31,8 @@
 	var/init_flags = EMPTY_BITFIELD
 
 /atom/New(loc, ...)
+	SHOULD_CALL_PARENT(TRUE) // Ensures atoms don't unintentionally skip initialization by not calling parent in New()
+
 	//atom creation method that preloads variables at creation
 	if(GLOB.use_preloader && (src.type == GLOB._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
 		GLOB._preloader.load(src)
@@ -52,6 +54,8 @@
 
 	if(atom_flags & ATOM_FLAG_CLIMBABLE)
 		verbs += /atom/proc/climb_on
+
+	..()
 
 /**
  * Initialization handler for atoms. It is preferred to use this over `New()`.
@@ -244,7 +248,10 @@
  * - `severity` Integer. The strength of the EMP, ranging from 1 to 3. NOTE: Lower numbers are stronger.
  */
 /atom/proc/emp_act(severity)
-	return
+	if (get_max_health())
+		// No hitsound here - Doesn't make sense for EMPs.
+		// Generalized - 75-125 damage at max, 38-63 at medium, 25-42 at minimum severities.
+		damage_health(rand(75, 125) / severity, DAMAGE_EMP, severity = severity)
 
 
 /**
@@ -278,6 +285,14 @@
 /atom/proc/bullet_act(obj/item/projectile/P, def_zone)
 	P.on_hit(src, 0, def_zone)
 	. = 0
+	if (get_max_health())
+		var/damage = P.damage
+		if (istype(src, /obj/structure) || istype(src, /turf/simulated/wall) || istype(src, /obj/machinery)) // TODO Better conditions for non-structures that want to use structure damage
+			damage = P.get_structure_damage()
+		if (!can_damage_health(damage, P.damage_type, P.damage_flags))
+			return
+		playsound(src, damage_hitsound, 75)
+		damage_health(damage, P.damage_type, P.damage_flags, skip_can_damage_check = TRUE)
 
 /**
  * Determines whether or not the atom is in the contents of the container or an instance of container if provided as a
@@ -318,7 +333,7 @@
 				pass |= istype(A, type)
 			if(!pass)
 				continue
-		if(A.contents.len)
+		if(length(A.contents))
 			found += A.search_contents_for(path,filter_path)
 	return found
 
@@ -411,6 +426,8 @@
  * If you're expecting to be calling a lot of icon updates at once, use `queue_icon_update()` instead.
  */
 /atom/proc/update_icon()
+	if (QDELETED(src))
+		return
 	on_update_icon(arglist(args))
 
 /**
@@ -429,8 +446,21 @@
  * - `severity` Integer (One of `EX_ACT_*`) - The strength of the explosion affecting the atom. NOTE: Lower numbers are
  * stronger.
  */
-/atom/proc/ex_act(severity)
-	return
+/atom/proc/ex_act(severity, turf_breaker)
+	if (get_max_health())
+		// No hitsound here to avoid noise spam.
+		// Damage is based on severity and maximum health, with DEVASTATING being guaranteed death without any resistances.
+		var/damage_flags = turf_breaker ? DAMAGE_FLAG_TURF_BREAKER : EMPTY_BITFIELD
+		var/damage = 0
+		switch (severity)
+			if (EX_ACT_DEVASTATING)
+				damage = round(health_max * (rand(100, 200) / 100)) // So that even atoms resistant to explosions may still be heavily damaged at this severity. Effective range of 100% to 200%.
+			if (EX_ACT_HEAVY)
+				damage = round(health_max * (rand(50, 100) / 100)) // Effective range of 50% to 100%.
+			if (EX_ACT_LIGHT)
+				damage = round(health_max * (rand(10, 50) / 100)) // Effective range of 10% to 50%.
+		if (damage)
+			damage_health(damage, DAMAGE_EXPLODE, damage_flags, severity)
 
 
 /**
@@ -458,7 +488,11 @@
  * - `exposed_volume` - The volume of the air for the fire affecting the atom. Usually, this is `air.volume`.
  */
 /atom/proc/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	return
+	var/melting_point = get_material_melting_point()
+	if (get_max_health() && exposed_temperature > melting_point)
+		// No hitsound here to avoid noise spam.
+		// 1 point of damage for every 100 kelvin above 300 (~27 C), minimum of 1.
+		damage_health(max(round((exposed_temperature - melting_point) / 100), 1), DAMAGE_FIRE)
 
 /**
  * Handler for melting from heat or other sources. Called by terrain generation and some instances of `fire_act()` or
@@ -472,7 +506,13 @@
  *
  * Returns boolean. Whether or not the atom was destroyed.
  */
-/atom/proc/lava_act()
+/atom/proc/lava_act(datum/gas_mixture/air, temperature, pressure)
+	if (is_damage_immune(DAMAGE_FIRE))
+		return FALSE
+	if (get_max_health())
+		fire_act(air, temperature)
+		if (!health_dead)
+			return FALSE
 	visible_message(SPAN_DANGER("\The [src] sizzles and melts away, consumed by the lava!"))
 	playsound(src, 'sound/effects/flare.ogg', 100, 3)
 	qdel(src)
@@ -486,9 +526,28 @@
  * - `TT` - The thrownthing datum associated with the impact.
  */
 /atom/proc/hitby(atom/movable/AM, datum/thrownthing/TT)//already handled by throw impact
-	if(isliving(AM))
+	if(isliving(AM) && !isturf(src)) // See `/turf/hitby()` for turf handling of mob impacts
 		var/mob/living/M = AM
 		M.apply_damage(TT.speed * 5, DAMAGE_BRUTE)
+
+	if (get_max_health())
+		var/damage = 0
+		var/damage_type = DAMAGE_BRUTE
+		var/damage_flags = EMPTY_BITFIELD
+		if (isobj(AM))
+			var/obj/O = AM
+			damage = O.throwforce
+			damage_type = O.damtype
+		else if (ismob(AM))
+			var/mob/M = AM
+			damage = M.mob_size
+		damage = damage * (TT.speed / THROWFORCE_SPEED_DIVISOR)
+		if (!can_damage_health(damage, damage_type))
+			playsound(src, damage_hitsound, 50)
+			AM.visible_message(SPAN_NOTICE("\The [AM] bounces off \the [src] harmlessly."))
+			return
+		damage_health(damage, damage_type, damage_flags, skip_can_damage_check = TRUE)
+		AM.visible_message(SPAN_WARNING("\The [AM] impacts \the [src], causing damage!"))
 
 
 /**
@@ -550,7 +609,7 @@
 	var/cur_x = null
 	var/cur_y = null
 	var/list/y_arr = null
-	for(cur_x=1,cur_x<=GLOB.global_map.len,cur_x++)
+	for(cur_x = 1 to length(GLOB.global_map))
 		y_arr = GLOB.global_map[cur_x]
 		cur_y = y_arr.Find(src.z)
 		if(cur_y)
@@ -613,14 +672,14 @@
 
 	for(var/o in objs)
 		var/obj/O = o
-		if (exclude_objs?.len && (O in exclude_objs))
+		if (length(exclude_objs) && (O in exclude_objs))
 			exclude_objs -= O
 			continue
 		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 
 	for(var/m in mobs)
 		var/mob/M = m
-		if (exclude_mobs?.len && (M in exclude_mobs))
+		if (length(exclude_mobs) && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
 		if(M.see_invisible >= invisibility)
@@ -650,14 +709,14 @@
 
 	for(var/m in mobs)
 		var/mob/M = m
-		if (exclude_mobs?.len && (M in exclude_mobs))
+		if (length(exclude_mobs) && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
 		M.show_message(message,2,deaf_message,1)
 
 	for(var/o in objs)
 		var/obj/O = o
-		if (exclude_objs?.len && (O in exclude_objs))
+		if (length(exclude_objs) && (O in exclude_objs))
 			exclude_objs -= O
 			continue
 		O.show_message(message,2,deaf_message,1)
@@ -879,7 +938,7 @@
 
 			var/obj/item/organ/external/affecting
 			var/list/limbs = BP_ALL_LIMBS //sanity check, can otherwise be shortened to affecting = pick(BP_ALL_LIMBS)
-			if(limbs.len)
+			if(length(limbs))
 				affecting = H.get_organ(pick(limbs))
 
 			if(affecting)

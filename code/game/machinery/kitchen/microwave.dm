@@ -129,7 +129,7 @@
 
 	else if(is_type_in_list(O, GLOB.microwave_accepts_items))
 
-		if (LAZYLEN(ingredients) >= GLOB.microwave_maximum_item_storage)
+		if (length(ingredients) >= GLOB.microwave_maximum_item_storage)
 			to_chat(user, SPAN_WARNING("This [src] is full of ingredients - you can't fit any more."))
 
 		else if(istype(O, /obj/item/stack)) // This is bad, but I can't think of how to change it
@@ -165,7 +165,7 @@
 		return
 
 	else if(istype(O, /obj/item/storage))
-		if (LAZYLEN(ingredients) >= GLOB.microwave_maximum_item_storage)
+		if (length(ingredients) >= GLOB.microwave_maximum_item_storage)
 			to_chat(user, SPAN_WARNING("[src] is completely full!"))
 			return
 
@@ -178,7 +178,7 @@
 		P.finish_bulk_removal()
 
 		if (objects_loaded)
-			if (!P.contents.len)
+			if (!length(P.contents))
 				user.visible_message(SPAN_NOTICE("\The [user] empties \the [P] into \the [src]."),
 				SPAN_NOTICE("You empty \the [P] into \the [src]."))
 			else
@@ -237,9 +237,6 @@
 *   Microwave Menu
 ********************/
 
-/obj/machinery/microwave/InsertedContents()
-	return ingredients
-
 /obj/machinery/microwave/interact(mob/user as mob) // The microwave Menu
 	user.set_machine(src)
 	var/dat = list()
@@ -251,14 +248,14 @@
 		dat += "<TT><b><i>This microwave is covered in muck. You'll need to wipe it down or clean it out before you can use it again.</i></b></TT>"
 	else
 		playsound(loc, 'sound/machines/pda_click.ogg', 50, 1)
-		if (!LAZYLEN(ingredients) && !reagents.reagent_list.len)
+		if (!length(ingredients) && !length(reagents.reagent_list))
 			dat += "<B>The microwave is empty.</B>"
 		else
 			dat += "<b>Ingredients:</b><br>"
 			var/list/items_counts = new
 			var/list/items_measures = new
 			var/list/items_measures_p = new
-			for (var/obj/O in InsertedContents())
+			for (var/obj/O in ingredients)
 				var/display_name = O.name
 				if (istype(O,/obj/item/reagent_containers/food/snacks/egg))
 					items_measures[display_name] = "egg"
@@ -311,14 +308,27 @@
 	if(inoperable())
 		return
 	start()
-	if (reagents.total_volume == 0 && !LAZYLEN(ingredients)) //dry run
+	if (!reagents.total_volume && !length(ingredients)) //dry run
 		if (!wzhzhzh(10))
 			abort()
 			return
 		stop()
 		return
 
-	var/datum/recipe/recipe = select_recipe(GLOB.microwave_recipes, src)
+	var/current_weight = length(reagents.reagent_list) + length(ingredients)
+	var/datum/microwave_recipe/recipe
+	for (var/datum/microwave_recipe/candidate as anything in GLOB.microwave_recipes)
+		if (current_weight != candidate.weight)
+			continue
+		if (!candidate.CheckReagents(src))
+			continue
+		if (!candidate.CheckProduce(src))
+			continue
+		if (!candidate.CheckItems(src))
+			continue
+		recipe = candidate
+		break
+
 	var/obj/cooked
 	if (!recipe)
 		dirtiness += 1
@@ -358,7 +368,7 @@
 			cooked = fail()
 			cooked.dropInto(loc)
 			return
-		cooked = recipe.make_food(src)
+		cooked = recipe.CreateResult(src)
 		LAZYCLEARLIST(ingredients)
 		stop()
 		if(cooked)
@@ -399,7 +409,7 @@
 
 /obj/machinery/microwave/proc/dispose()
 	var/disposed = FALSE
-	if (LAZYLEN(ingredients))
+	if (length(ingredients))
 		for (var/obj/O in ingredients)
 			O.dropInto(loc)
 		LAZYCLEARLIST(ingredients)
@@ -452,7 +462,7 @@
 
 	// Kill + delete mobs in mob holders
 	for (var/obj/item/holder/H in ingredients)
-		for (var/mob/living/M in H.contents)
+		for (var/mob/living/M in H)
 			M.death()
 			qdel(M)
 

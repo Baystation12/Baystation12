@@ -97,7 +97,7 @@
 
 /obj/item/gun/projectile/sniper/garand
 	name = "garand rifle"
-	desc = "The rugged garand is a old semi-automatic weapon popular on the frontier worlds."
+	desc = "The rugged garand is a old semi-automatic weapon popular on the frontier worlds. PING!"
 	icon = 'icons/obj/guns/garand.dmi'
 	icon_state = "garand"
 	item_state = null
@@ -113,7 +113,7 @@
 	auto_eject_sound = 'sound/weapons/guns/interaction/garand_magout.ogg'
 	one_hand_penalty = 9
 	accuracy_power = 5
-	accuracy = 1
+	accuracy = 2
 	bulk = GUN_BULK_RIFLE + 1
 	wielded_item_state = "garand-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'

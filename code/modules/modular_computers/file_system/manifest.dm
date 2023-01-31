@@ -84,7 +84,7 @@
 
 	for(var/list/department in dept_data)
 		var/list/names = department["names"]
-		if(names.len > 0)
+		if(length(names) > 0)
 			dat += "<tr><th colspan=3>[department["header"]]</th></tr>"
 			for(var/name in names)
 				dat += "<tr class='candystripe'><td>[mil_ranks[name]][name]</td><td>[names[name]]</td><td>[isactive[name]]</td></tr>"

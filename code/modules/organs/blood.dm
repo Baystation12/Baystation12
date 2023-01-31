@@ -228,7 +228,7 @@
 	for(var/obj/effect/decal/cleanable/blood/drip/drop in T)
 		drips |= drop.drips
 		qdel(drop)
-	if(!large && drips.len < 3)
+	if(!large && length(drips) < 3)
 		decal_type = /obj/effect/decal/cleanable/blood/drip
 
 	// Find a blood decal or create a new one.
@@ -240,7 +240,7 @@
 		B = new decal_type(T)
 
 	var/obj/effect/decal/cleanable/blood/drip/drop = B
-	if(istype(drop) && drips && drips.len && !large)
+	if(istype(drop) && drips && length(drips) && !large)
 		drop.overlays |= drips
 		drop.drips |= drips
 

@@ -30,7 +30,7 @@ GLOBAL_LIST_EMPTY(skills)
 /singleton/hierarchy/skill/Initialize()
 	. = ..()
 	if(is_hidden_category())
-		if(!GLOB.skills.len)
+		if(!length(GLOB.skills))
 			for(var/singleton/hierarchy/skill/C in children)
 				GLOB.skills += C.get_descendents()
 		else

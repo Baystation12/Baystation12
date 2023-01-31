@@ -98,7 +98,7 @@
 
 		M.Weaken(10)
 
-	if(master && wires & 1)
+	if(master && listening)
 		master.receive_signal()
 	return
 

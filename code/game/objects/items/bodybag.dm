@@ -84,7 +84,7 @@
 		to_chat(user, SPAN_NOTICE("You must close \the [name] before it can be folded."))
 		return FALSE
 
-	if(contents.len)
+	if(length(contents))
 		to_chat(user, SPAN_NOTICE("You can't fold \the [name] while it has something inside it."))
 		return FALSE
 

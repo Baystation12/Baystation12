@@ -53,7 +53,7 @@
 		/obj/item/gun,
 		/obj/item/storage/firstaid,
 		/obj/item/reagent_containers/hypospray,
-		/obj/item/roller,
+		/obj/item/roller_bed,
 		/obj/item/device/suit_cooling_unit
 	)
 
@@ -138,7 +138,7 @@
 		/obj/item/gun,
 		/obj/item/storage/firstaid,
 		/obj/item/reagent_containers/hypospray,
-		/obj/item/roller,
+		/obj/item/roller_bed,
 		/obj/item/device/suit_cooling_unit
 	)
 

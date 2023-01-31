@@ -26,9 +26,9 @@
 	var/autoheal_cutoff = 15   // the maximum amount of damage that this wound can have and still autoheal
 
 	// helper lists
-	var/tmp/list/embedded_objects
-	var/tmp/list/desc_list = list()
-	var/tmp/list/damage_list = list()
+	var/list/embedded_objects
+	var/list/desc_list = list()
+	var/list/damage_list = list()
 
 /datum/wound/New(damage, obj/item/organ/external/organ = null)
 
@@ -59,7 +59,7 @@
 
 // returns 1 if there's a next stage, 0 otherwise
 /datum/wound/proc/init_stage(initial_damage)
-	current_stage = stages.len
+	current_stage = length(stages)
 
 	while(src.current_stage > 1 && src.damage_list[current_stage-1] <= initial_damage / src.amount)
 		src.current_stage--
@@ -158,7 +158,7 @@
 	amount -= healed_damage
 	src.damage -= healed_damage
 
-	while(src.wound_damage() < damage_list[current_stage] && current_stage < src.desc_list.len)
+	while(src.wound_damage() < damage_list[current_stage] && current_stage < length(src.desc_list))
 		current_stage++
 	desc = desc_list[current_stage]
 	src.min_damage = damage_list[current_stage]

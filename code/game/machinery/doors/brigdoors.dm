@@ -48,7 +48,7 @@
 		if(C.id == src.id)
 			targets += C
 
-	if(targets.len==0)
+	if(length(targets)==0)
 		set_broken(TRUE)
 	queue_icon_update()
 
@@ -167,7 +167,7 @@
 			flashdata["status"] = 0
 		else
 			flashdata["status"] = 1
-		flashes[++flashes.len] = flashdata
+		flashes[LIST_PRE_INC(flashes)] = flashdata
 
 	data["flashes"] = flashes
 

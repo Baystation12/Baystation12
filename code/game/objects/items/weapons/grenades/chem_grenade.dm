@@ -30,12 +30,12 @@
 			det_time = null
 			stage=0
 			icon_state = initial(icon_state)
-		else if(beakers.len)
+		else if(length(beakers))
 			for(var/obj/B in beakers)
 				if(istype(B))
 					beakers -= B
 					user.put_in_hands(B)
-		SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")
+		SetName("unsecured grenade with [length(beakers)] containers[detonator?" and detonator":""]")
 	if(stage > 1 && !active && clown_check(user))
 		to_chat(user, SPAN_WARNING("You prime \the [name]!"))
 		log_and_message_admins("has primed \a [src].")
@@ -69,12 +69,12 @@
 			var/obj/item/device/assembly/timer/T = detonator.a_right
 			det_time = 10*T.time
 		icon_state = initial(icon_state) +"_ass"
-		SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")
+		SetName("unsecured grenade with [length(beakers)] containers[detonator?" and detonator":""]")
 		stage = 1
 	else if(isScrewdriver(W) && path != 2)
 		if(stage == 1)
 			path = 1
-			if(beakers.len)
+			if(length(beakers))
 				to_chat(user, SPAN_NOTICE("You lock the assembly."))
 				SetName("grenade")
 			else
@@ -92,13 +92,13 @@
 			else
 				to_chat(user, SPAN_NOTICE("You unlock the assembly."))
 				playsound(loc, 'sound/items/Screwdriver.ogg', 25, -3)
-				SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")
+				SetName("unsecured grenade with [length(beakers)] containers[detonator?" and detonator":""]")
 				icon_state = initial(icon_state) + (detonator?"_ass":"")
 				stage = 1
 				active = 0
 	else if(is_type_in_list(W, allowed_containers) && (!stage || stage==1) && path != 2)
 		path = 1
-		if(beakers.len == 2)
+		if(length(beakers) == 2)
 			to_chat(user, SPAN_WARNING("The grenade can not hold more containers."))
 			return
 		else
@@ -108,7 +108,7 @@
 				to_chat(user, SPAN_NOTICE("You add \the [W] to the assembly."))
 				beakers += W
 				stage = 1
-				SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")
+				SetName("unsecured grenade with [length(beakers)] containers[detonator?" and detonator":""]")
 			else
 				to_chat(user, SPAN_WARNING("\The [W] is empty."))
 

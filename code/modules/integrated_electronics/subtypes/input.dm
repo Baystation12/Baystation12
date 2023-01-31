@@ -295,7 +295,7 @@
 	var/obj/machinery/portable_atmospherics/hydroponics/H = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/portable_atmospherics/hydroponics)
 	if(!istype(H)) //Invalid input
 		return
-	for(var/i=1, i<=outputs.len, i++)
+	for(var/i=1, i<=length(outputs), i++)
 		set_pin_data(IC_OUTPUT, i, null)
 	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
 		if(H.seed)
@@ -338,7 +338,7 @@
 	var/obj/machinery/portable_atmospherics/hydroponics/H = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/portable_atmospherics/hydroponics)
 	if(!istype(H)) //Invalid input
 		return
-	for(var/i=1, i<=outputs.len, i++)
+	for(var/i=1, i<=length(outputs), i++)
 		set_pin_data(IC_OUTPUT, i, null)
 	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
 		if(H.seed)
@@ -476,7 +476,7 @@
 		var/list/St = new()
 		for(var/obj/effect/decal/cleanable/crayon/I in scanned_turf)
 			St.Add(I.icon_state)
-		if(St.len)
+		if(length(St))
 			set_pin_data(IC_OUTPUT, 2, jointext(St, ",", 1, 0))
 		push_data()
 		activate_pin(2)
@@ -539,7 +539,7 @@
 		if(thing.type != desired_type)
 			continue
 		valid_things.Add(thing)
-	if(valid_things.len)
+	if(length(valid_things))
 		O.data = weakref(pick(valid_things))
 		activate_pin(2)
 	else
@@ -598,7 +598,7 @@
 						if(ismob(thing) && !isliving(thing))
 							continue
 						valid_things.Add(weakref(thing))
-		if(valid_things.len)
+		if(length(valid_things))
 			O.data = valid_things
 			O.push_data()
 			activate_pin(2)
@@ -640,8 +640,8 @@
 	var/list/valid_things = list()
 	if(isweakref(I.data))
 		var/atom/A = I.data.resolve()
-		var/desired_type = A.type
-		if(desired_type)
+		if (A)
+			var/desired_type = A.type
 			for(var/i in nearby_things)
 				var/atom/thing = i
 				if(ismob(thing) && !isliving(thing))
@@ -656,7 +656,7 @@
 				continue
 			if(findtext(addtext(thing.name," ",thing.desc), DT, 1, 0) )
 				valid_things.Add(thing)
-	if(valid_things.len)
+	if(length(valid_things))
 		O.data = weakref(pick(valid_things))
 		O.push_data()
 		activate_pin(2)
@@ -1109,7 +1109,7 @@
 		return
 	var/turf/T = get_turf(src)
 	if(O in view(T)) // This is a camera. It can't examine thngs,that it can't see.
-		for(var/I in 1 to mtypes.len)
+		for(var/I in 1 to length(mtypes))
 			var/amount = O.matter[mtypes[I]]
 			if(amount)
 				set_pin_data(IC_OUTPUT, I, amount)

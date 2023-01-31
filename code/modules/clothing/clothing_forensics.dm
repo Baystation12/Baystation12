@@ -16,7 +16,7 @@
 	for (var/obj/item/clothing/accessory/A as anything in accessories)
 		if ((A.clothing_flags & CLOTHING_HAS_FIBERS) && prob(50))
 			others += A.get_fibers()
-	return "material from \a [fiber_name || name][others.len ? " and [english_list(others)]" : ""]"
+	return "material from \a [fiber_name || name][length(others) ? " and [english_list(others)]" : ""]"
 
 
 /obj/item/clothing/gloves/get_fibers()

@@ -54,8 +54,8 @@
 				for(var/datum/robot_component/org in damaged)
 					var/message = "\t [capitalize(org.name)]: "
 					message += (org.installed == -1) ? SPAN_COLOR("red", "<b>DESTROYED</b> ") : ""
-					message += (org.electronics_damage > 0) ? SPAN_COLOR("#ffa500", org.electronics_damage) : 0
-					message += (org.brute_damage > 0) ? SPAN_COLOR("red", org.brute_damage) : 0
+					message += (org.electronics_damage > 0) ? SPAN_COLOR("#ffa500", org.electronics_damage) : "0"
+					message += (org.brute_damage > 0) ? SPAN_COLOR("red", org.brute_damage) : "0"
 					message += org.toggled ? "Toggled ON" : SPAN_COLOR("red", "Toggled OFF")
 					message += org.powered ? "Power ON" : SPAN_COLOR("red", "Power OFF")
 					user.show_message(SPAN_NOTICE(message), VISIBLE_MESSAGE)

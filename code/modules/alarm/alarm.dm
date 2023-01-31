@@ -117,7 +117,7 @@
 	return get_z(src)
 
 /area/get_alarm_z()
-	return contents.len ? get_z(contents[1]) : 0
+	return length(contents) ? get_z(contents[1]) : 0
 
 /**
  * Retrieves the atom's area for alarms.

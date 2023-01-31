@@ -13,7 +13,7 @@
 	if(!drop_type) drop_type = pick(supply_drop_random_loot_types())
 
 	if(drop_type == "custom")
-		if(supplied_drop_types.len)
+		if(length(supplied_drop_types))
 			var/obj/structure/largecrate/C = locate() in T
 			for(var/drop_type in supplied_drop_types)
 				var/atom/movable/A = new drop_type(T)

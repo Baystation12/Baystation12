@@ -36,7 +36,8 @@ var/global/photo_count = 0
 	var/image/tiny
 	var/photo_size = 3
 
-/obj/item/photo/New()
+/obj/item/photo/Initialize()
+	. = ..()
 	id = photo_count++
 
 /obj/item/photo/attack_self(mob/user as mob)
@@ -200,7 +201,7 @@ var/global/photo_count = 0
 		if(A.invisibility) continue
 		var/holding = null
 		var/list/held_items = A.GetAllHeld()
-		if (held_items.len)
+		if (length(held_items))
 			holding = "They are holding [english_list(A.GetAllHeld())]"
 
 		if(!mob_detail)

@@ -79,7 +79,7 @@
 	else if(href_list["item"])
 		if(!allow_items) return
 
-		if(frozen_items.len == 0)
+		if(length(frozen_items) == 0)
 			to_chat(user, SPAN_NOTICE("There is nothing to recover from storage."))
 			return TOPIC_HANDLED
 
@@ -100,7 +100,7 @@
 	else if(href_list["allitems"])
 		if(!allow_items) return TOPIC_HANDLED
 
-		if(frozen_items.len == 0)
+		if(length(frozen_items) == 0)
 			to_chat(user, SPAN_NOTICE("There is nothing to recover from storage."))
 			return TOPIC_HANDLED
 
@@ -275,6 +275,8 @@
 // This function can not be undone; do not call this unless you are sure
 // Also make sure there is a valid control computer
 /obj/machinery/cryopod/proc/despawn_occupant()
+	SHOULD_NOT_SLEEP(TRUE) // Sleeping causes the double-despawn bug
+
 	if (QDELETED(occupant))
 		log_and_message_admins("A mob was deleted while in a cryopod, or the cryopod double-processed. This may cause errors!")
 		return
@@ -284,7 +286,7 @@
 		occupant.drop_from_inventory(W)
 		W.forceMove(src)
 
-		if(W.contents.len) //Make sure we catch anything not handled by qdel() on the items.
+		if(length(W.contents)) //Make sure we catch anything not handled by qdel() on the items.
 			for(var/obj/item/O in W.contents)
 				if(istype(O,/obj/item/storage/internal)) //Stop eating pockets, you fuck!
 					continue
@@ -363,7 +365,7 @@
 	log_and_message_admins("[key_name(occupant)] ([role_alt_title]) entered cryostorage.")
 
 	if(announce_despawn)
-		announce.autosay("[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
+		invoke_async(announce, /obj/item/device/radio/proc/autosay, "[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
 
 	var/despawnmessage = replacetext(on_store_visible_message, "$occupant$", occupant.real_name)
 	visible_message(SPAN_NOTICE("\The [initial(name)] " + despawnmessage), range = 3)

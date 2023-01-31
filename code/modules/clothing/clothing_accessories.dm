@@ -9,7 +9,7 @@
 			to_chat(user, SPAN_WARNING("\The [A] can't attach to \the [src]."))
 		return FALSE
 
-	if (accessories.len && restricted_accessory_slots && (A.slot in restricted_accessory_slots))
+	if (length(accessories) && restricted_accessory_slots && (A.slot in restricted_accessory_slots))
 		for (var/obj/item/clothing/accessory/AC in accessories)
 			if (AC.slot == A.slot)
 				if (user)
@@ -43,7 +43,7 @@
 
 /obj/item/clothing/attack_hand(mob/user)
 	//only forward to the attached accessory if the clothing is equipped (not in a storage)
-	if(accessories.len && src.loc == user)
+	if(length(accessories) && src.loc == user)
 		for(var/obj/item/clothing/accessory/A in accessories)
 			A.attack_hand(user)
 		return
@@ -104,6 +104,10 @@
 		src.verbs |= /obj/item/clothing/proc/removetie_verb
 	update_accessory_slowdown()
 	update_clothing_icon()
+	GLOB.destroyed_event.register(A, src, .proc/accessory_deleted)
+
+/obj/item/clothing/proc/accessory_deleted(obj/item/clothing/accessory/A)
+	remove_accessory(null, A)
 
 /obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A)
 	if(!A || !(A in accessories))
@@ -113,6 +117,7 @@
 	accessories -= A
 	update_accessory_slowdown()
 	update_clothing_icon()
+	GLOB.destroyed_event.unregister(A, src, .proc/accessory_deleted)
 
 
 /obj/item/clothing/proc/attempt_attach_accessory(obj/item/I, mob/user)
@@ -165,23 +170,23 @@
 	set src in usr
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
-	if(!accessories.len) return
+	if(!length(accessories)) return
 	var/obj/item/clothing/accessory/A
 	var/list/removables = list()
 	for(var/obj/item/clothing/accessory/ass in accessories)
 		if (ass.accessory_flags & ACCESSORY_REMOVABLE)
 			removables |= ass
-	if(accessories.len > 1)
+	if(length(accessories) > 1)
 		A = input("Select an accessory to remove from [src]") as null|anything in removables
 	else
 		A = accessories[1]
 	src.remove_accessory(usr,A)
 	removables -= A
-	if(!removables.len)
+	if(!length(removables))
 		src.verbs -= /obj/item/clothing/proc/removetie_verb
 
 /obj/item/clothing/emp_act(severity)
-	if(accessories.len)
+	if(length(accessories))
 		for(var/obj/item/clothing/accessory/A in accessories)
 			A.emp_act(severity)
 	..()

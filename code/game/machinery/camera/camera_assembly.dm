@@ -86,7 +86,7 @@
 					return
 
 				var/list/tempnetwork = splittext(input, ",")
-				if(tempnetwork.len < 1)
+				if(length(tempnetwork) < 1)
 					to_chat(usr, "No network found please hang up and try your call again.")
 					return
 
@@ -131,7 +131,7 @@
 		return
 
 	// Taking out upgrades
-	else if(isCrowbar(W) && upgrades.len)
+	else if(isCrowbar(W) && length(upgrades))
 		var/obj/U = locate(/obj) in upgrades
 		if(U)
 			to_chat(user, "You unattach an upgrade from the assembly.")

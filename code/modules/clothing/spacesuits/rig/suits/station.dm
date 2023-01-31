@@ -356,7 +356,7 @@
 		/obj/item/storage/firstaid,
 		/obj/item/device/scanner/health,
 		/obj/item/stack/medical,
-		/obj/item/roller,
+		/obj/item/roller_bed,
 		/obj/item/auto_cpr,
 		/obj/item/inflatable_dispenser
 	)

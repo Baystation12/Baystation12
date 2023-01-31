@@ -33,7 +33,7 @@
 		/mob/living/simple_animal/passive/cow,
 		/mob/living/simple_animal/hostile/retaliate/parrot,
 		/mob/living/simple_animal/slime,
-		/mob/living/simple_animal/crab,
+		/mob/living/simple_animal/passive/crab,
 		/mob/living/simple_animal/passive/mouse,
 		/mob/living/simple_animal/hostile/retaliate/goat,
 		/mob/living/simple_animal/hostile/retaliate/goose)

@@ -79,8 +79,8 @@
 		overlays += I
 
 /obj/item/ammo_magazine/shotholder/attack_hand(mob/user)
-	if((user.a_intent == I_HURT) && (stored_ammo.len))
-		var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]
+	if((user.a_intent == I_HURT) && (length(stored_ammo)))
+		var/obj/item/ammo_casing/C = stored_ammo[length(stored_ammo)]
 		stored_ammo-=C
 		user.put_in_hands(C)
 		user.visible_message("\The [user] removes \a [C] from [src].", SPAN_NOTICE("You remove \a [C] from [src]."))
@@ -343,8 +343,8 @@
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/iclipr
-	name = "internal rifle magazine"
-	desc = "An internal clip for rifle caliber weapons."
+	name = "en-bloc clip"
+	desc = "An en-bloc clip for the garand rifle."
 	icon_state = "iclipr"
 	caliber = CALIBER_RIFLE
 	mag_type = MAGAZINE

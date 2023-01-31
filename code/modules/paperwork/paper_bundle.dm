@@ -30,7 +30,7 @@
 			return
 	// adding sheets
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
-		insert_sheet_at(user, pages.len+1, W)
+		insert_sheet_at(user, length(pages)+1, W)
 
 	// burning
 	else if(istype(W, /obj/item/flame))
@@ -112,7 +112,7 @@
 		dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove [(istype(W, /obj/item/paper)) ? "paper" : "photo"]</A></DIV>"
 		dat+= "<DIV STYLE='float:left; text-align:right; width:33.33333%'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV><BR><HR>"
 	// last
-	else if(page == pages.len)
+	else if(page == length(pages))
 		dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
 		dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove [(istype(W, /obj/item/paper)) ? "paper" : "photo"]</A></DIV>"
 		dat+= "<DIV STYLE='float;left; text-align:right; with:33.33333%'><A href='?src=\ref[src];next_page=1'>Back</A></DIV><BR><HR>"
@@ -148,7 +148,7 @@
 		if(href_list["next_page"])
 			if(in_hand && (istype(in_hand, /obj/item/paper) || istype(in_hand, /obj/item/photo)))
 				insert_sheet_at(usr, page+1, in_hand)
-			else if(page != pages.len)
+			else if(page != length(pages))
 				page++
 				playsound(src.loc, "pageturn", 50, 1)
 		if(href_list["prev_page"])
@@ -164,7 +164,7 @@
 
 			to_chat(usr, SPAN_NOTICE("You remove the [W.name] from the bundle."))
 
-			if(pages.len <= 1)
+			if(length(pages) <= 1)
 				var/obj/item/paper/P = src[1]
 				usr.drop_from_inventory(src)
 				usr.put_in_hands(P)
@@ -172,8 +172,8 @@
 
 				return
 
-			if(page > pages.len)
-				page = pages.len
+			if(page > length(pages))
+				page = length(pages)
 
 			update_icon()
 

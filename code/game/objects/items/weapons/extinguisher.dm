@@ -143,9 +143,9 @@
 		var/direction = get_dir(src,target)
 
 		if(user.buckled && isobj(user.buckled))
-			addtimer(CALLBACK(src, .proc/propel_object, user.buckled, user, turn(direction,180)), 0)
+			addtimer(new Callback(src, .proc/propel_object, user.buckled, user, turn(direction,180)), 0)
 
-		addtimer(CALLBACK(src, .proc/do_spray, target), 0)
+		addtimer(new Callback(src, .proc/do_spray, target), 0)
 
 		if((istype(usr.loc, /turf/space)) || (usr.lastarea.has_gravity == 0))
 			user.inertia_dir = get_dir(target, user)

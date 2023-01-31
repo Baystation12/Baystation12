@@ -21,7 +21,7 @@
 		return
 	if(!imp_in)
 		return
-	if (languages.len == max_languages)
+	if (length(languages) == max_languages)
 		return
 	if(!languages[speaking.name])
 		languages[speaking.name] = 1

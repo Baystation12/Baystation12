@@ -126,7 +126,7 @@
 
 /obj/item/organ/internal/mmi_holder/Process()
 	..()
-	if(owner.is_asystole())
+	if(owner?.is_asystole())
 		take_internal_damage(0.5)
 
 /obj/item/organ/internal/mmi_holder/handle_regeneration() // MMI will regenerate from small amounts of damage, e.g. damage that might occur when swapping a power cell

@@ -52,7 +52,7 @@
 		do_simple_ranged_interaction()
 
 /proc/get_atom_closest_to_atom(atom/a, list/possibilities)
-	if(!possibilities || !possibilities.len)
+	if(!possibilities || !length(possibilities))
 		return null
 	var/closest_distance = get_dist(a, possibilities[1])
 	. = possibilities[1]

@@ -158,7 +158,7 @@
 			to_chat(user, "This component is too large for \the [src].")
 	if(isWrench(W))
 		var/list/components = get_all_components()
-		if(components.len)
+		if(length(components))
 			to_chat(user, "Remove all components from \the [src] before disassembling it.")
 			return
 		new /obj/item/stack/material/steel( get_turf(src.loc), steel_sheet_cost )
@@ -171,19 +171,20 @@
 			to_chat(user, "\The [W] is off.")
 			return
 
-		if(!damage)
+		if(!get_damage_value())
 			to_chat(user, "\The [src] does not require repairs.")
 			return
 
 		to_chat(user, "You begin repairing damage to \the [src]...")
-		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10, src, DO_REPAIR_CONSTRUCT))
-			damage = 0
+		var/damage = get_damage_value()
+		if(WT.remove_fuel(round(damage / 75)) && do_after(user, damage / 10, src, DO_REPAIR_CONSTRUCT))
+			revive_health()
 			to_chat(user, "You repair \the [src].")
 		return
 
 	if(isScrewdriver(W))
 		var/list/all_components = get_all_components()
-		if(!all_components.len)
+		if(!length(all_components))
 			to_chat(user, "This device doesn't have any components installed.")
 			return
 		var/list/component_names = list()

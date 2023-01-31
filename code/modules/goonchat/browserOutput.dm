@@ -3,7 +3,7 @@ For the main html chat area
 *********************************/
 
 /// Cache of icons for the browser output
-GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
+GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 
 
 /// Should match the value set in the browser js
@@ -139,7 +139,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 
 /datum/chatOutput/proc/syncRegex()
 	var/list/regexes = list()
-	if (regexes.len)
+	if (length(regexes))
 		ehjax_send(data = list("syncRegex" = regexes))
 
 
@@ -173,24 +173,24 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 		return
 	if(cookie != "none")
 		var/list/connData = json_decode(cookie)
-		if (connData && islist(connData) && connData.len > 0 && connData["connData"])
+		if (connData && islist(connData) && length(connData) > 0 && connData["connData"])
 			connectionHistory = connData["connData"]
 			var/list/found = new()
-			if(connectionHistory.len > MAX_COOKIE_LENGTH)
+			if(length(connectionHistory) > MAX_COOKIE_LENGTH)
 				message_admins("[key_name(src.owner)] was kicked for an invalid ban cookie)")
 				qdel(owner)
 				return
-			for(var/i in connectionHistory.len to 1 step -1)
+			for(var/i in length(connectionHistory) to 1 step -1)
 				if(QDELETED(owner))
 					return
 				var/list/row = src.connectionHistory[i]
-				if (!row || row.len < 3 || (!row["ckey"] || !row["compid"] || !row["ip"]))
+				if (!row || length(row) < 3 || (!row["ckey"] || !row["compid"] || !row["ip"]))
 					return
 				if (world.IsBanned(row["ckey"], row["ip"], row["compid"]))
 					found = row
 					break
 				CHECK_TICK
-			if (found.len > 0)
+			if (length(found) > 0)
 				var/msg = "[key_name(src.owner)] has a cookie from a banned account! (Matched: [found["ckey"]], [found["ip"]], [found["compid"]])"
 				message_admins(msg)
 				log_admin(msg)

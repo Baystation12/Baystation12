@@ -83,7 +83,7 @@ default behaviour is:
 			var/mob/living/tmob = AM
 
 			for(var/mob/living/M in range(tmob, 1))
-				if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/grab, tmob.grabbed_by.len)) )
+				if(length(tmob.pinned) ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/grab, length(tmob.grabbed_by))) )
 					if ( !(world.time % 5) )
 						to_chat(src, SPAN_WARNING("[tmob] is restrained, you cannot push past"))
 					now_pushing = 0
@@ -567,7 +567,7 @@ default behaviour is:
 		step(pulling, get_dir(pulling.loc, old_loc))
 	else
 		var/mob/living/M = pulling
-		if(M.grabbed_by.len)
+		if(length(M.grabbed_by))
 			var/obj/item/grab/G = pick(M.grabbed_by)
 			if (G.current_grab.shield_assailant)
 				visible_message(SPAN_WARNING("\The [G.assailant] stops \the [src] from pulling \the [G.affecting] from their grip!"), SPAN_WARNING("\The [G.assailant] is holding \the [G.affecting] too tight for you to pull them away!"))
@@ -576,7 +576,7 @@ default behaviour is:
 				if(istype(G))
 					M.visible_message(SPAN_WARNING("[G.affecting] has been pulled from [G.assailant]'s grip by [src]!"), SPAN_WARNING("[G.affecting] has been pulled from your grip by [src]!"))
 					qdel(G)
-		if (!M.grabbed_by.len)
+		if (!length(M.grabbed_by))
 			M.handle_pull_damage(src)
 
 			var/atom/movable/t = M.pulling

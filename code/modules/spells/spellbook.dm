@@ -81,7 +81,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 /obj/item/spellbook/attackby(obj/item/I as obj, mob/user as mob)
 	if(investing_time)
 		var/list/objects = spellbook.sacrifice_objects
-		if(objects && objects.len)
+		if(objects && length(objects))
 			for(var/type in objects)
 				if(istype(I,type))
 					make_sacrifice(I,user)
@@ -89,7 +89,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 		if(I.reagents)
 			var/datum/reagents/R = I.reagents
 			var/list/reagent_list = spellbook.sacrifice_reagents
-			if(reagent_list && reagent_list.len)
+			if(reagent_list && length(reagent_list))
 				for(var/id in reagent_list)
 					if(R.has_reagent(id,5))
 						make_sacrifice(I,user, id)
@@ -104,7 +104,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 		dat = "<center><h3>[spellbook.title]</h3><i>[spellbook.title_desc]</i><br>You have [uses] spell slot[uses > 1 ? "s" : ""] left.</center><br>"
 		dat += "<center>[SPAN_COLOR("#ff33cc", "Requires Wizard Garb")]<br>[SPAN_COLOR("#ff6600", "Selectable Target")]<br>[SPAN_COLOR("#33cc33", "Spell Charge Type: Recharge, Sacrifice, Charges")]</center><br>"
 		dat += "<center><b>To use a contract, first bind it to your soul, then give it to someone to sign. This will bind their soul to you.</b></center><br>"
-		for(var/i in 1 to spellbook.spells.len)
+		for(var/i in 1 to length(spellbook.spells))
 			var/name = "" //name of target
 			var/desc = "" //description of target
 			var/info = "" //additional information

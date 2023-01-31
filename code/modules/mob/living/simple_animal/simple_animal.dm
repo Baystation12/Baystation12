@@ -216,7 +216,7 @@
 
 /mob/living/simple_animal/say(message)
 	var/verb = "says"
-	if(speak_emote.len)
+	if(length(speak_emote))
 		verb = pick(speak_emote)
 
 	message = sanitize(message)
@@ -369,4 +369,4 @@
 	icon_state = icon_living
 	update_icon()
 	bleed_ticks = 0
-	ai_holder.handle_stance_tactical()
+	ai_holder?.handle_stance_tactical()

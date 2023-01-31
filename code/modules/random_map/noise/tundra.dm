@@ -46,7 +46,7 @@
 	switch(val)
 		if(2)
 			if(prob(5))
-				new /mob/living/simple_animal/crab(T)
+				new /mob/living/simple_animal/passive/crab(T)
 		if(6)
 			if(prob(60))
 				var/grass_path = pick(typesof(/obj/structure/flora/grass)-/obj/structure/flora/grass)

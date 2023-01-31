@@ -27,7 +27,7 @@
 		return
 
 	var/key_name = initial(key_type.name)
-	if(!contents.len)
+	if(!length(contents))
 		to_chat(user, "There are no [key_name]s left in the box.")
 	else
 		var/key_count = count_by_type(contents, key_type)
@@ -159,14 +159,14 @@
 	// Don't try to transfer reagents to lighters
 	if(istype(W, /obj/item/clothing/mask/smokable/cigarette))
 		var/obj/item/clothing/mask/smokable/cigarette/C = W
-		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
+		reagents.trans_to_obj(C, (reagents.total_volume/length(contents)))
 	..()
 
 /obj/item/storage/fancy/cigarettes/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M, /mob))
 		return
 
-	if(M == user && user.zone_sel.selecting == BP_MOUTH && contents.len > 0 && !user.wear_mask)
+	if(M == user && user.zone_sel.selecting == BP_MOUTH && length(contents) > 0 && !user.wear_mask)
 		// Find ourselves a cig. Note that we could be full of lighters.
 		var/obj/item/clothing/mask/smokable/cigarette/cig = null
 		for(var/obj/item/clothing/mask/smokable/cigarette/C in contents)
@@ -187,7 +187,7 @@
 		remove_from_storage(cig, null)
 		user.equip_to_slot(cig, slot_wear_mask)
 
-		reagents.maximum_volume = 5 * contents.len
+		reagents.maximum_volume = 5 * length(contents)
 		to_chat(user, SPAN_NOTICE("You take a cigarette out of the pack."))
 		update_icon()
 	else
@@ -307,7 +307,7 @@
 /obj/item/storage/fancy/cigar/remove_from_storage(obj/item/W as obj, atom/new_location)
 	var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
 	if(!istype(C)) return
-	reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
+	reagents.trans_to_obj(C, (reagents.total_volume/length(contents)))
 	..()
 
 /*

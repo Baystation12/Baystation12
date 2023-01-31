@@ -144,8 +144,12 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		if(!device || !(get_z(device) in GLOB.using_map.station_levels))
 			continue
 
-		var/datum/job/J = SSjobs.get_by_title(H.get_authentification_rank())
-		if(!J)
+		var/rank = H.get_authentification_rank()
+		var/datum/job/J = SSjobs.get_by_title(rank)
+		if (!J)
+			continue
+		if(!istype(J))
+			log_debug(append_admin_tools("MESSAGE SERVER: Mob has an invalid job, skipping. Mob: '[H]'. Rank: '[rank]'. Job: '[J]'."))
 			continue
 
 		if(J.department_flag & department)

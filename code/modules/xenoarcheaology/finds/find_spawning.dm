@@ -44,11 +44,11 @@
 			descriptors.Add("is encircled with bands of [pick("quadrinium","cordite","ferritic-alloy","plasteel","duranium")]")
 		if(prob(30))
 			descriptors.Add("menaces with spikes of [pick("solid phoron","uranium","white pearl","black steel")]")
-		if(descriptors.len > 0)
+		if(length(descriptors) > 0)
 			decorations = "It "
-			for(var/index=1, index <= descriptors.len, index++)
+			for(var/index=1, index <= length(descriptors), index++)
 				if(index > 1)
-					if(index == descriptors.len)
+					if(index == length(descriptors))
 						decorations += " and "
 					else
 						decorations += ", "

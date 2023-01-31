@@ -139,7 +139,7 @@
 			if(istype(speaker,/mob/living/simple_animal))
 				var/mob/living/M = speaker
 				var/datum/say_list/S = M.say_list
-				if(S && S.speak && S.speak.len)
+				if(S && S.speak && length(S.speak))
 					message = pick(S.speak)
 				else
 					return
@@ -308,7 +308,7 @@
 	if(prob(15))
 		var/list/punctuation = list(",", "!", ".", ";", "?")
 		var/list/messages = splittext(message, " ")
-		var/R = rand(1, messages.len)
+		var/R = rand(1, length(messages))
 		var/heardword = messages[R]
 		if(copytext(heardword,1, 1) in punctuation)
 			heardword = copytext(heardword,2)

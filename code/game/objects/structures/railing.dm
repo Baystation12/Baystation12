@@ -192,37 +192,46 @@
 		return 0
 	return 1
 
+
+/obj/structure/railing/use_grab(obj/item/grab/grab, list/click_params)
+	var/obj/occupied = turf_is_crowded()
+	if (occupied)
+		to_chat(grab.assailant, SPAN_WARNING("There's \a [occupied] blocking \the [src]."))
+		return TRUE
+
+	if (!grab.force_danger())
+		var/action = grab.assailant.a_intent == I_HURT ? "slam them against" : "throw them over"
+		to_chat(grab.assailant, SPAN_WARNING("You need a better grip on \the [grab.affecting] to [action] \the [src]."))
+		return TRUE
+
+	// Harm intent - Face slamming
+	if (grab.assailant.a_intent == I_HURT)
+		var/blocked = grab.affecting.get_blocked_ratio(BP_HEAD, DAMAGE_BRUTE, damage = 8)
+		if (prob(30 * (1 - blocked)))
+			grab.affecting.Weaken(5)
+		grab.affecting.apply_damage(8, DAMAGE_BRUTE, BP_HEAD)
+		playsound(src, 'sound/effects/grillehit.ogg', 50, 1)
+		grab.assailant.visible_message(
+			SPAN_WARNING("\The [grab.assailant] slams \the [grab.affecting]'s face against \the [src]!"),
+			SPAN_DANGER("You slam \the [grab.affecting]'s face against \the [src]!")
+		)
+		return TRUE
+
+	if (get_turf(grab.affecting) == get_turf(src))
+		grab.affecting.forceMove(get_step(src, dir))
+	else
+		grab.affecting.dropInto(loc)
+	grab.affecting.Weaken(5)
+	grab.assailant.visible_message(
+		SPAN_WARNING("\The [grab.assailant] throws \the [grab.affecting] over \the [src]."),
+		SPAN_WARNING("You throw \the [grab.affecting] over \the [src]."),
+	)
+	return TRUE
+
+
 /obj/structure/railing/attackby(obj/item/W, mob/user)
 	if (user.a_intent == I_HURT)
 		..()
-		return
-
-	// Handle harm intent grabbing/tabling.
-	if(istype(W, /obj/item/grab) && get_dist(src,user)<2)
-		var/obj/item/grab/G = W
-		if(istype(G.affecting, /mob/living/carbon/human))
-			var/obj/occupied = turf_is_crowded()
-			if(occupied)
-				to_chat(user, SPAN_DANGER("There's \a [occupied] in the way."))
-				return
-
-			if(G.force_danger())
-				if(user.a_intent == I_HURT)
-					visible_message(SPAN_DANGER("[G.assailant] slams [G.affecting]'s face against \the [src]!"))
-					playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
-					var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, DAMAGE_BRUTE, damage = 8)
-					if (prob(30 * (1 - blocked)))
-						G.affecting.Weaken(5)
-					G.affecting.apply_damage(8, DAMAGE_BRUTE, BP_HEAD)
-				else
-					if (get_turf(G.affecting) == get_turf(src))
-						G.affecting.forceMove(get_step(src, src.dir))
-					else
-						G.affecting.dropInto(loc)
-					G.affecting.Weaken(5)
-					visible_message(SPAN_DANGER("[G.assailant] throws \the [G.affecting] over \the [src]."))
-			else
-				to_chat(user, SPAN_DANGER("You need a better grip to do that!"))
 		return
 
 	// Dismantle
@@ -292,7 +301,7 @@
 			kill_health() // Fatboy
 
 		user.jump_layer_shift()
-		addtimer(CALLBACK(user, /mob/living/proc/jump_layer_shift_end), 2)
+		addtimer(new Callback(user, /mob/living/proc/jump_layer_shift_end), 2)
 
 /obj/structure/railing/slam_into(mob/living/L)
 	var/turf/target_turf = get_turf(src)

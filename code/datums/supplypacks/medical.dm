@@ -87,19 +87,25 @@
 
 /singleton/hierarchy/supply_pack/medical/humanblood
 	name = "Refills - Human O- Blood"
-	contains = list(/obj/item/reagent_containers/ivbag/blood/OMinus = 4)
+	contains = list(
+		/obj/item/storage/box/freezer/blood/human = 1
+	)
 	cost = 15
 	containername = "human O- blood crate"
 
 /singleton/hierarchy/supply_pack/medical/skrellblood
 	name = "Refills - Skrell O- Blood"
-	contains = list(/obj/item/reagent_containers/ivbag/blood/OMinus/skrell = 4)
+	contains = list(
+		/obj/item/storage/box/freezer/blood/skrell = 1
+	)
 	cost = 20
 	containername = "skrell blood crate"
 
 /singleton/hierarchy/supply_pack/medical/unathiblood
 	name = "Refills - Unathi O- Blood"
-	contains = list(/obj/item/reagent_containers/ivbag/blood/OMinus/unathi = 4)
+	contains = list(
+		/obj/item/storage/box/freezer/blood/unathi = 1
+	)
 	cost = 20
 	containername = "unathi blood crate"
 
@@ -111,7 +117,7 @@
 
 /singleton/hierarchy/supply_pack/medical/stretcher
 	name = "Equipment - Roller bed crate"
-	contains = list(/obj/item/roller = 3)
+	contains = list(/obj/item/roller_bed = 3)
 	cost = 10
 	containername = "\improper Roller bed crate"
 

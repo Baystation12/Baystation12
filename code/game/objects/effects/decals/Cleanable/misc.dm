@@ -21,7 +21,7 @@
 
 /obj/effect/decal/cleanable/greenglow/Initialize()
 	. = ..()
-	addtimer(CALLBACK(src, /datum/proc/qdel_self), 2 MINUTES)
+	QDEL_IN(src, 2 MINUTES)
 
 /obj/effect/decal/cleanable/dirt
 	name = "dirt"

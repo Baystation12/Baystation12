@@ -22,7 +22,7 @@
 	..()
 
 	var/list/viables = list(
-	/obj/item/roller,
+	/obj/item/roller_bed,
 	/obj/structure/closet/crate,
 	/obj/structure/closet/acloset,
 	/mob/living/simple_animal/hostile/mimic,
@@ -81,7 +81,7 @@
 		[pick("front","side","top","bottom","rear","inside")].")
 
 /obj/machinery/replicator/Process()
-	if(spawning_types.len && is_powered())
+	if(length(spawning_types) && is_powered())
 		spawn_progress_time += world.time - last_process_time
 		if(spawn_progress_time > max_spawn_time)
 			src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src] pings!"))
@@ -102,7 +102,7 @@
 			spawn_progress_time = 0
 			max_spawn_time = rand(30,100)
 
-			if(!spawning_types.len || !stored_materials.len)
+			if(!length(spawning_types) || !length(stored_materials))
 				update_use_power(POWER_USE_IDLE)
 				icon_state = "borgcharger0(old)"
 
@@ -118,7 +118,7 @@
 /obj/machinery/replicator/interact(mob/user)
 	var/dat = "The control panel displays an incomprehensible selection of controls, many with unusual markings or text around them.<br>"
 	dat += "<br>"
-	for(var/index=1, index<=construction.len, index++)
+	for(var/index=1, index<=length(construction), index++)
 		dat += "<A href='?src=\ref[src];activate=[index]'>\[[construction[index]]\]</a><br>"
 
 	show_browser(user, dat, "window=alien_replicator")
@@ -132,9 +132,9 @@
 /obj/machinery/replicator/OnTopic(user, href_list)
 	if(href_list["activate"])
 		var/index = text2num(href_list["activate"])
-		if(index > 0 && index <= construction.len)
-			if(stored_materials.len > spawning_types.len)
-				if(spawning_types.len)
+		if(index > 0 && index <= length(construction))
+			if(length(stored_materials) > length(spawning_types))
+				if(length(spawning_types))
 					src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] a [pick("light","dial","display","meter","pad")] on [src]'s front [pick("blinks","flashes")] [pick("red","yellow","blue","orange","purple","green","white")]."))
 				else
 					src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src]'s front compartment slides shut."))

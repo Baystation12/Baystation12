@@ -205,7 +205,7 @@
 
 /obj/item/reagent_containers/hypospray/autoinjector/examine(mob/user)
 	. = ..(user)
-	if(reagents && reagents.reagent_list.len)
+	if(reagents && length(reagents.reagent_list))
 		to_chat(user, SPAN_NOTICE("It is currently loaded."))
 	else
 		to_chat(user, SPAN_NOTICE("It is spent."))

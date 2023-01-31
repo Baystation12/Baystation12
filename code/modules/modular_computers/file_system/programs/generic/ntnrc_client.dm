@@ -166,13 +166,13 @@
 		ui_header = "ntnrc_idle.gif"
 		if(channel)
 			// Remember the last message. If there is no message in the channel remember null.
-			last_message = channel.messages.len ? channel.messages[channel.messages.len - 1] : null
+			last_message = length(channel.messages) ? channel.messages[length(channel.messages) - 1] : null
 		else
 			last_message = null
 		return
 
-	if(channel && channel.messages && channel.messages.len)
-		ui_header = last_message == channel.messages[channel.messages.len - 1] ? "ntnrc_idle.gif" : "ntnrc_new.gif"
+	if(channel && channel.messages && length(channel.messages))
+		ui_header = last_message == channel.messages[length(channel.messages) - 1] ? "ntnrc_idle.gif" : "ntnrc_new.gif"
 	else
 		ui_header = "ntnrc_idle.gif"
 

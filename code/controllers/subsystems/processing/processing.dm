@@ -17,7 +17,7 @@ SUBSYSTEM_DEF(processing)
 /datum/controller/subsystem/processing/UpdateStat(time)
 	if (PreventUpdateStat(time))
 		return ..()
-	..("Queue [processing.len]")
+	..("Queue [length(processing)]")
 
 
 /datum/controller/subsystem/processing/fire(resumed = 0)
@@ -28,9 +28,9 @@ SUBSYSTEM_DEF(processing)
 	var/wait = src.wait
 	var/times_fired = src.times_fired
 
-	while(current_run.len)
-		var/datum/thing = current_run[current_run.len]
-		current_run.len--
+	while(length(current_run))
+		var/datum/thing = current_run[length(current_run)]
+		LIST_DEC(current_run)
 		if(QDELETED(thing) || (call(thing, process_proc)(wait, times_fired, src) == PROCESS_KILL))
 			if(thing)
 				thing.is_processing = null

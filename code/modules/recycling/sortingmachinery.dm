@@ -133,7 +133,7 @@
 	var/tag_x
 
 /obj/item/smallDelivery/proc/unwrap(mob/user)
-	if (!contents.len || !Adjacent(user))
+	if (!length(contents) || !Adjacent(user))
 		return
 
 	user.put_in_hands(wrapped)
@@ -349,7 +349,7 @@
 	var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"
 
 	dat += "<table style='width:100%; padding:4px;'><tr>"
-	for(var/i = 1, i <= GLOB.tagger_locations.len, i++)
+	for(var/i = 1 to length(GLOB.tagger_locations))
 		dat += "<td><a href='?src=\ref[src];nextTag=[GLOB.tagger_locations[i]]'>[GLOB.tagger_locations[i]]</a></td>"
 
 		if (i%4==0)
@@ -445,7 +445,7 @@
 	if(prob(35))
 		for(var/mob/living/carbon/human/L in src)
 			var/list/obj/item/organ/external/crush = L.get_damageable_organs()
-			if(!crush.len)
+			if(!length(crush))
 				return
 
 			var/obj/item/organ/external/E = pick(crush)

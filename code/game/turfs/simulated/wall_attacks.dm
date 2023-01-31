@@ -143,10 +143,12 @@
 
 	if(reinf_material)
 		if(damage >= max(material.hardness,reinf_material.hardness))
-			return success_smash(user)
+			success_smash(user)
+			return
 	else if(wallbreaker == 2 || damage >= material.hardness)
-		return success_smash(user)
-	return fail_smash(user)
+		success_smash(user)
+		return
+	fail_smash(user)
 
 /turf/simulated/wall/attackby(obj/item/W, mob/user)
 

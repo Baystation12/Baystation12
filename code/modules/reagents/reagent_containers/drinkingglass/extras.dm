@@ -1,5 +1,5 @@
 /obj/item/reagent_containers/food/drinks/glass2/attackby(obj/item/I as obj, mob/user as mob)
-	if(extras.len >= 2) return ..() // max 2 extras, one on each side of the drink
+	if(length(extras) >= 2) return ..() // max 2 extras, one on each side of the drink
 
 	if(istype(I, /obj/item/glass_extra))
 		var/obj/item/glass_extra/GE = I
@@ -30,7 +30,7 @@
 	if(src != user.get_inactive_hand())
 		return ..()
 
-	if(!extras.len)
+	if(!length(extras))
 		to_chat(user, SPAN_WARNING("There's nothing on the glass to remove!"))
 		return
 

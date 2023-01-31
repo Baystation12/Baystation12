@@ -25,7 +25,7 @@
 		var/datum/local_network/lan = pointdefense.get_local_network()
 		if(lan)
 			var/list/pointdefense_controllers = lan.get_devices(/obj/machinery/pointdefense_control)
-			if(pointdefense_controllers.len > 1)
+			if(length(pointdefense_controllers) > 1)
 				lan.remove_device(src)
 
 /obj/machinery/pointdefense_control/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
@@ -90,7 +90,7 @@
 		var/datum/local_network/lan = pointdefense.get_local_network()
 		if(lan)
 			var/list/pointdefense_controllers = lan.get_devices(/obj/machinery/pointdefense_control)
-			if(pointdefense_controllers && pointdefense_controllers.len > 1)
+			if(pointdefense_controllers && length(pointdefense_controllers) > 1)
 				lan.remove_device(src)
 		return
 	else
@@ -147,7 +147,7 @@
 	if(!istype(M))
 		return
 	engaging = TRUE
-	addtimer(CALLBACK(src, .proc/finish_shot, target), rotation_speed)
+	addtimer(new Callback(src, .proc/finish_shot, target), rotation_speed)
 	var/Angle = round(Get_Angle(src, M))
 	animate(
 		src,
@@ -195,7 +195,7 @@
 	if(engaging || ((world.time - last_shot) < charge_cooldown))
 		return
 
-	if(GLOB.meteor_list.len == 0)
+	if(length(GLOB.meteor_list) == 0)
 		return
 	var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 	var/datum/local_network/lan = pointdefense.get_local_network()

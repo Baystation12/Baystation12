@@ -61,12 +61,12 @@
 					traits += "contaminates clothing with toxic residue"
 				if(gas_data.flags[mix] & XGM_GAS_FUSION_FUEL)
 					traits += "can be used to fuel fusion reaction"
-				if (traits.len)
+				if (length(traits))
 					text_details += "<li>This gas [english_list(traits)]</li>"
 				text_details += "</ul></dd>"
 			text_details += "</dl>"
 
-		if (summary_gasses.len)
+		if (length(summary_gasses))
 			text_summary += "<li>Composition: [english_list(summary_gasses)]</li>"
 		text_summary += "</ul>"
 		. += "[text_summary][text_details]"

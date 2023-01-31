@@ -81,3 +81,6 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 		inertia_dir = 0
 		throwing = null
 		to_chat(src, SPAN_NOTICE("You cannot move further in this direction."))
+
+/mob/observer/can_be_floored()
+	return FALSE

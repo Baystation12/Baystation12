@@ -31,19 +31,19 @@
 		icon_state = "uv_off"
 
 /obj/item/device/uv_light/proc/clear_last_scan()
-	if(scanned.len)
+	if(length(scanned))
 		for(var/atom/O in scanned)
 			O.set_invisibility(scanned[O])
 			if(O.fluorescent == ATOM_FLOURESCENCE_ACTVE)
 				O.fluorescent = ATOM_FLOURESCENCE_INACTIVE
 		scanned.Cut()
-	if(stored_alpha.len)
+	if(length(stored_alpha))
 		for(var/atom/O in stored_alpha)
 			O.alpha = stored_alpha[O]
 			if(O.fluorescent == ATOM_FLOURESCENCE_ACTVE)
 				O.fluorescent = ATOM_FLOURESCENCE_INACTIVE
 		stored_alpha.Cut()
-	if(reset_objects.len)
+	if(length(reset_objects))
 		for(var/obj/item/I in reset_objects)
 			I.overlays -= I.blood_overlay
 			if(I.fluorescent == ATOM_FLOURESCENCE_ACTVE)

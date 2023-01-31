@@ -51,7 +51,7 @@
 			unselect_io(selected_io)
 
 		if(UNWIRE)
-			if(!io.linked.len)
+			if(!length(io.linked))
 				to_chat(user, SPAN_WARNING("There is nothing connected to \the [io] data channel."))
 				return
 			select_io(io)

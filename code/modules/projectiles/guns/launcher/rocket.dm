@@ -21,21 +21,21 @@
 /obj/item/gun/launcher/rocket/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 2)
-		to_chat(user, SPAN_NOTICE("[rockets.len] / [max_rockets] rockets."))
+		to_chat(user, SPAN_NOTICE("[length(rockets)] / [max_rockets] rockets."))
 
 /obj/item/gun/launcher/rocket/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/ammo_casing/rocket))
-		if(rockets.len < max_rockets)
+		if(length(rockets) < max_rockets)
 			if(!user.unEquip(I, src))
 				return
 			rockets += I
 			to_chat(user, SPAN_NOTICE("You put the rocket in [src]."))
-			to_chat(user, SPAN_NOTICE("[rockets.len] / [max_rockets] rockets."))
+			to_chat(user, SPAN_NOTICE("[length(rockets)] / [max_rockets] rockets."))
 		else
 			to_chat(usr, SPAN_WARNING("\The [src] cannot hold more rockets."))
 
 /obj/item/gun/launcher/rocket/consume_next_projectile()
-	if(rockets.len)
+	if(length(rockets))
 		var/obj/item/ammo_casing/rocket/I = rockets[1]
 		var/obj/item/missile/M = new (src)
 		M.primed = 1

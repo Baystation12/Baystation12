@@ -126,7 +126,7 @@
 	if(updating)
 		return
 
-	if(seenby.len)
+	if(length(seenby))
 		updating = TRUE
 		spawn(UPDATE_BUFFER) // Batch large changes, such as many doors opening or closing at once
 			if(updating)     // Check if we're still updating, a forced update may have occured.

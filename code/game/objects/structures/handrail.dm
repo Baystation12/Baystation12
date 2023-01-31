@@ -5,9 +5,4 @@
 	desc = "A safety railing with buckles to secure yourself to when floor isn't stable enough."
 	density = FALSE
 	anchored = TRUE
-	can_buckle = 1
-
-/obj/structure/handrail/buckle_mob(mob/living/M)
-	. = ..()
-	if(.)
-		playsound(src, 'sound/effects/buckle.ogg', 20)
+	can_buckle = TRUE

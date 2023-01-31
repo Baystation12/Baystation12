@@ -4,15 +4,18 @@
 /area/template_noop)
 "b" = (
 /obj/item/trash/cigbutt/jerichos,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "c" = (
 /obj/random/junk,
 /obj/random/junk,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "j" = (
 /obj/random/junk,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "n" = (
@@ -20,6 +23,7 @@
 /obj/random/junk,
 /obj/random/junk,
 /obj/random/junk,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "o" = (
@@ -29,11 +33,13 @@
 /obj/random/junk,
 /obj/random/junk,
 /obj/random/junk,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "u" = (
 /obj/random/tech_supply,
 /obj/random/junk,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "x" = (
@@ -43,26 +49,35 @@
 /obj/random/junk,
 /obj/random/junk,
 /obj/random/junk,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "y" = (
 /obj/random/shoes,
 /obj/random/junk,
 /obj/random/mre,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "A" = (
 /obj/random/gloves,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"B" = (
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "D" = (
 /obj/random/junk,
 /obj/random/hat,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "E" = (
 /obj/random/tool,
 /obj/random/junk,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "G" = (
@@ -71,26 +86,31 @@
 /obj/random/junk,
 /obj/random/junk,
 /obj/random/junk,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "H" = (
 /obj/structure/closet/crate/trashcart,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "J" = (
 /obj/item/trash/cigbutt/jerichos,
 /obj/item/trash/cigbutt/jerichos,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "Q" = (
 /obj/random/junk,
 /obj/random/junk,
 /obj/random/junk,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "S" = (
 /obj/random/smokes,
 /obj/random/junk,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "U" = (
@@ -99,11 +119,13 @@
 /obj/random/junk,
 /obj/random/junk,
 /obj/random/medical/lite,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "X" = (
 /obj/random/junk,
 /obj/random/mre,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 
@@ -114,18 +136,18 @@ a
 a
 a
 j
-a
-a
+B
+B
 a
 a
 "}
 (2,1,1) = {"
 j
-a
+B
 j
 a
 a
-a
+B
 j
 A
 j
@@ -140,7 +162,7 @@ j
 j
 j
 j
-a
+B
 a
 "}
 (4,1,1) = {"
@@ -152,12 +174,12 @@ n
 x
 n
 X
-a
+B
 j
 "}
 (5,1,1) = {"
 a
-a
+B
 j
 Q
 o
@@ -169,7 +191,7 @@ a
 "}
 (6,1,1) = {"
 a
-a
+B
 j
 Q
 n
@@ -181,7 +203,7 @@ a
 "}
 (7,1,1) = {"
 a
-a
+B
 j
 c
 n
@@ -189,36 +211,36 @@ c
 Q
 S
 j
-a
+B
 "}
 (8,1,1) = {"
-a
-a
+B
+B
 y
 j
 a
 c
 j
 j
-a
+B
 b
 "}
 (9,1,1) = {"
+B
 a
 a
-a
-a
+B
 j
-a
+B
 E
-a
+B
 b
 J
 "}
 (10,1,1) = {"
 j
 a
-a
+B
 j
 a
 a

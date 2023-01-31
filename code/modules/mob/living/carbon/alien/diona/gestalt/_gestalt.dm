@@ -12,8 +12,8 @@
 	var/list/nymphs                  = list()
 	var/list/valid_things_to_roll_up = list(/mob/living/carbon/alien/diona = TRUE, /mob/living/carbon/alien/diona/sterile = TRUE)
 	var/list/democracy_bucket        = list("Change to a humanoid form." = /datum/gestalt_vote/form_change_humanoid)
-	var/tmp/image/eyes_overlay
-	var/tmp/datum/gestalt_vote/current_vote
+	var/image/eyes_overlay
+	var/datum/gestalt_vote/current_vote
 
 /obj/structure/diona_gestalt/mob_breakout(mob/living/escapee)
 	. = ..()
@@ -30,7 +30,7 @@
 /obj/structure/diona_gestalt/on_update_icon()
 	overlays = list(eyes_overlay)
 	if (length(nymphs))
-		SetTransform(scale = clamp(nymphs.len * 0.1, 1, 2))
+		SetTransform(scale = clamp(length(nymphs) * 0.1, 1, 2))
 	else
 		ClearTransform()
 
@@ -46,4 +46,4 @@
 
 /obj/structure/diona_gestalt/examine(mob/user)
 	. = ..()
-	if(nymphs) to_chat(user, "It seems to be composed of at least [nymphs.len] nymph\s.")
+	if(nymphs) to_chat(user, "It seems to be composed of at least [length(nymphs)] nymph\s.")

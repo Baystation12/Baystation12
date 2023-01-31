@@ -32,7 +32,7 @@
 
 	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways,
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
-	block_air_zones = 0
+	block_air_zones = FALSE
 
 	var/begins_closed = TRUE
 	var/material/implicit_material
@@ -97,7 +97,7 @@
 // Parameters: None
 // Description: Opens the door. No checks are done inside this proc.
 /obj/machinery/door/blast/proc/force_open()
-	operating = 1
+	operating = DOOR_OPERATING_YES
 	playsound(src.loc, open_sound, 100, 1)
 	flick(icon_state_opening, src)
 	set_density(0)
@@ -106,13 +106,13 @@
 	set_opacity(0)
 	sleep(15)
 	layer = open_layer
-	operating = 0
+	operating = DOOR_OPERATING_NO
 
 // Proc: force_close()
 // Parameters: None
 // Description: Closes the door. No checks are done inside this proc.
 /obj/machinery/door/blast/proc/force_close()
-	operating = 1
+	operating = DOOR_OPERATING_YES
 	playsound(src.loc, close_sound, 100, 1)
 	layer = closed_layer
 	flick(icon_state_closing, src)
@@ -121,7 +121,7 @@
 	update_icon()
 	set_opacity(1)
 	sleep(15)
-	operating = 0
+	operating = DOOR_OPERATING_NO
 
 // Proc: force_toggle()
 // Parameters: None
@@ -134,6 +134,9 @@
 
 /obj/machinery/door/blast/get_material()
 	return implicit_material
+
+/obj/machinery/door/blast/get_material_melting_point()
+	return 10000 // Blast doors are implicitly heavily fire resistant and are used for containing high-temperature areas like burn chambers.
 
 // Proc: attackby()
 // Parameters: 2 (C - Item this object was clicked with, user - Mob which clicked this object)
@@ -150,7 +153,7 @@
 			to_chat(user, SPAN_NOTICE("[src]'s motors resist your effort."))
 		return
 	if(istype(C, /obj/item/stack/material) && C.get_material_name() == MATERIAL_PLASTEEL)
-		var/amt = Ceil((maxhealth - health)/150)
+		var/amt = Ceil(get_damage_value() / 150)
 		if(!amt)
 			to_chat(user, SPAN_NOTICE("\The [src] is already fully functional."))
 			return
@@ -162,13 +165,18 @@
 		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			if(P.use(amt))
 				to_chat(user, SPAN_NOTICE("You have repaired \the [src]."))
-				repair()
+				revive_health()
 			else
 				to_chat(user, SPAN_WARNING("You don't have enough sheets to repair this! You need at least [amt] sheets."))
 		else
 			to_chat(user, SPAN_WARNING("You must remain still while working on \the [src]."))
-	check_force(C, user)
+		return
 
+	return ..()
+
+
+/obj/machinery/door/blast/allowed(mob/M)
+	return FALSE // Blast doors can only be opened remotely, or with a crowbar when broken/unpowered.
 
 
 // Proc: open()
@@ -195,14 +203,6 @@
 	if (operating || (MACHINE_IS_BROKEN(src) || !is_powered()))
 		return
 	force_toggle()
-
-// Proc: repair()
-// Parameters: None
-// Description: Fully repairs the blast door.
-/obj/machinery/door/blast/proc/repair()
-	health = maxhealth
-	set_broken(FALSE)
-	queue_icon_update()
 
 /obj/machinery/door/blast/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group) return 1
@@ -262,9 +262,9 @@
 	icon_state_open_broken = "blast_open_broken"
 	icon_state_closed_broken = "blast_closed_broken"
 
-	min_force = 30
-	maxhealth = 1000
-	block_air_zones = 1
+	health_min_damage = 30
+	health_max = 1000
+	block_air_zones = TRUE
 
 /obj/machinery/door/blast/regular/escape_pod
 	name = "Escape Pod release Door"
@@ -294,15 +294,10 @@
 
 	open_sound = 'sound/machines/shutters_open.ogg'
 	close_sound = 'sound/machines/shutters_close.ogg'
-	min_force = 15
-	maxhealth = 500
+	health_min_damage = 15
+	health_max = 500
 	explosion_resistance = 10
 	pry_mod = 0.55
 
 /obj/machinery/door/blast/shutters/open
 	begins_closed = FALSE
-
-/obj/machinery/door/blast/shutters/attack_generic(mob/user, damage)
-	if(MACHINE_IS_BROKEN(src))
-		qdel(src)
-	..()

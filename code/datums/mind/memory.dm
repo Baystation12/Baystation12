@@ -58,7 +58,7 @@
 			last_owner_name = owner_name
 		output += "[M.memory] <a href='?src=\ref[src];remove_memory=\ref[M]'>\[Remove\]</a>"
 
-	if(objectives.len > 0)
+	if(length(objectives) > 0)
 		output += "<HR><B>Objectives:</B>"
 
 		var/obj_count = 1

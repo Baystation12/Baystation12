@@ -11,28 +11,22 @@
 	)
 	machine_name = "replicator"
 	machine_desc = "A voice-operated machine that dispenses bland food from raw nutriment."
-
-/obj/machinery/fabricator/replicator/replicator/Initialize()
-	. = ..()
-	if (prob(1))
-		machine_desc = "\
-		<i>\"Fish!\" \
-		<br>\"Today's fish is trout a la creme. Enjoy your meal.\"</i>"
+	base_type = /obj/machinery/fabricator/replicator
 
 /obj/machinery/fabricator/replicator/hear_talk(mob/M, text, verb, datum/language/speaking)
 	if(speaking && !speaking.machine_understands)
 		return ..()
 	var/true_text = lowertext(html_decode(text))
 	if(findtext(true_text, "status"))
-		addtimer(CALLBACK(src, /obj/machinery/fabricator/replicator/proc/state_status), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
+		addtimer(new Callback(src, /obj/machinery/fabricator/replicator/proc/state_status), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 	else if(findtext(true_text, "menu"))
-		addtimer(CALLBACK(src, /obj/machinery/fabricator/replicator/proc/state_menu), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
+		addtimer(new Callback(src, /obj/machinery/fabricator/replicator/proc/state_menu), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 	else
 		for(var/datum/fabricator_recipe/recipe in SSfabrication.get_recipes(fabricator_class))
 			if(recipe.hidden && !(fab_status_flags & FAB_HACKED))
 				continue
 			if(findtext(true_text, lowertext(recipe.name)))
-				addtimer(CALLBACK(src, /obj/machinery/fabricator/proc/try_queue_build, recipe, 1), 2 SECONDS)
+				addtimer(new Callback(src, /obj/machinery/fabricator/proc/try_queue_build, recipe, 1), 2 SECONDS)
 				break
 	..()
 

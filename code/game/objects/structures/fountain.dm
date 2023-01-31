@@ -1,22 +1,28 @@
-//the fountain of youth/unyouth
-
 /obj/structure/fountain
-	name = "strange fountain"
-	desc = "The water from the spout is still as if frozen in time, yet the water in the base ripples perpetually."
+	name = "fountain"
+	desc = "A beautifully constructed fountain."
 	icon = 'icons/obj/fountain.dmi'
-	icon_state = "fountain"
+	icon_state = "fountain_g"
 	density = TRUE
 	anchored = TRUE
 	unacidable = TRUE
 	pixel_x = -16
+
+
+/obj/structure/fountain/strange
+	name = "strange fountain"
+	desc = "The water from the spout is still as if frozen in time, yet the water in the base ripples perpetually."
+	icon_state = "fountain"
 	var/used = FALSE
 
-/obj/structure/fountain/Initialize()
+
+/obj/structure/fountain/strange/Initialize()
 	. = ..()
 	light_color = get_random_colour(lower = 190)
 	set_light(0.6, 3, 5, 2, light_color)
 
-/obj/structure/fountain/attack_hand(mob/living/user as mob)
+
+/obj/structure/fountain/strange/attack_hand(mob/living/user)
 	if(user.incapacitated())
 		return
 	if(!CanPhysicallyInteract(user))
@@ -27,14 +33,14 @@
 	if(!ishuman(user) || user.isSynthetic())
 		to_chat(user, "Try as you might to touch the fountain, some force prevents you from doing so.")
 		return
-
 	if(alert("As you reach out to touch the fountain, a feeling of doubt overcomes you. Steel yourself and proceed?",,"Yes", "No") == "Yes")
 		visible_message("\The [user] touches \the [src].")
 		time_dilation(user)
 	else
 		visible_message("\The [user] retracts their hand suddenly.")
 
-/obj/structure/fountain/proc/time_dilation(mob/living/carbon/human/user as mob)
+
+/obj/structure/fountain/strange/proc/time_dilation(mob/living/carbon/human/user)
 	for(var/mob/living/L in oviewers(7, src))
 		L.flash_eyes(3)
 		L.eye_blurry += 9
@@ -49,12 +55,3 @@
 		user.changed_age = rand(15, 17) - user.age
 	used = TRUE
 	desc = "The water flows beautifully from the spout, but the water in the pool does not ripple."
-
-/obj/structure/fountain/mundane
-	name = "fountain"
-	desc = "A beautifully constructed fountain."
-	icon_state = "fountain_g"
-	used = TRUE
-
-/obj/structure/fountain/mundane/attack_hand()
-	return

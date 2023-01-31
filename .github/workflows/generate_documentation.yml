@@ -13,16 +13,33 @@ env:
   SPACEMAN_DMM_VERSION: suite-1.7.2
 
 jobs:
+  PreFlight:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+      - name: paths-filter
+        uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50
+        id: filter
+        with:
+          filters: .github/workflow-config/preflight-filters.yml
+    outputs:
+      dm: ${{ steps.filter.outputs.dm }}
   generate_documentation:
     permissions:
       contents: write # required to push the doc commit
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ubuntu-latest
-    concurrency: gen-docs
+    needs: PreFlight
+    if: |
+      (needs.PreFlight.outputs.dm == 'true') &&
+      !contains(github.event.head_commit.message, '[ci skip]')
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
     steps:
-      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
       - name: Setup Cache
-        uses: actions/cache@9b0c1fce7a93df8e3bb8926b0d6e9d89e92f20a7
+        uses: actions/cache@627f0f41f6904a5b1efbaed9f96d9eb58e92e920
         with:
           path: $HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION
           key: ${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}
@@ -31,12 +48,11 @@ jobs:
       - name: Generate documentation
         run: |
           ~/dmdoc
-          touch dmdoc/.nojekyll
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages-dmdoc
-          single-commit: true
+          branch: gh-pages
           folder: dmdoc
+          target-folder: docs/dmdoc
           clean: true

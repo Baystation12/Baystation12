@@ -62,7 +62,7 @@
 			brute /= 2
 			burn /= 2
 
-	if(status & ORGAN_BROKEN && brute)
+	if (owner && (status & ORGAN_BROKEN) && brute)
 		jostle_bone(brute)
 		if(can_feel_pain() && prob(40))
 			owner.emote("scream")	//getting hit on broken hand hurts
@@ -84,7 +84,7 @@
 	if(burn)
 		if(laser)
 			createwound(INJURY_TYPE_LASER, burn)
-			if(prob(40))
+			if(owner && prob(40))
 				owner.IgniteMob()
 		else
 			createwound(INJURY_TYPE_BURN, burn)
@@ -100,22 +100,23 @@
 				W.disinfected = 0
 				W.salved = 0
 				disturbed += W.damage
-		if(disturbed)
+		if(owner && disturbed)
 			to_chat(owner,SPAN_WARNING("Ow! Your burns were disturbed."))
 			add_pain(0.5*disturbed)
 
 	//If there are still hurties to dispense
-	if (spillover)
+	if (owner && spillover)
 		owner.shock_stage += spillover * config.organ_damage_spillover_multiplier
 
 	// sync the organ's damage with its wounds
 	update_damages()
-	owner.updatehealth()
-	if(status & ORGAN_BLEEDING)
-		owner.update_bandages()
+	if (owner)
+		owner.updatehealth()
+		if(status & ORGAN_BLEEDING)
+			owner.update_bandages()
 
-	if(owner && update_damstate())
-		owner.UpdateDamageIcon()
+		if(update_damstate())
+			owner.UpdateDamageIcon()
 
 	if(created_wound && isobj(used_weapon))
 		var/obj/O = used_weapon

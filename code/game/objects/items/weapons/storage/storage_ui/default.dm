@@ -169,7 +169,7 @@
 
 //This proc determins the size of the inventory to be displayed. Please touch it only if you know what you're doing.
 /datum/storage_ui/default/proc/slot_orient_objs()
-	var/adjusted_contents = storage.contents.len
+	var/adjusted_contents = length(storage.contents)
 	var/row_num = 0
 	var/col_count = min(7,storage.storage_slots) -1
 	if (adjusted_contents > 7)
@@ -233,7 +233,7 @@
 // Sets up numbered display to show the stack size of each stored mineral
 // NOTE: numbered display is turned off currently because it's broken
 /datum/storage_ui/default/sheetsnatcher/prepare_ui(mob/user)
-	var/adjusted_contents = storage.contents.len
+	var/adjusted_contents = length(storage.contents)
 
 	var/row_num = 0
 	var/col_count = min(7,storage.storage_slots) -1

@@ -9,8 +9,8 @@ var/global/list/z_levels = list()// Each bit re... haha just kidding this is a l
 	if(_height)
 		height = _height
 	for(var/i = (loc.z - height + 1) to (loc.z-1))
-		if (z_levels.len <i)
-			z_levels.len = i
+		if (length(z_levels) <i)
+			LIST_RESIZE(z_levels, i)
 		z_levels[i] = TRUE
 
 /obj/effect/landmark/map_data/Initialize()
@@ -18,12 +18,12 @@ var/global/list/z_levels = list()// Each bit re... haha just kidding this is a l
 	return INITIALIZE_HINT_QDEL
 
 /proc/HasAbove(z)
-	if(z >= world.maxz || z < 1 || z > z_levels.len)
+	if(z >= world.maxz || z < 1 || z > length(z_levels))
 		return 0
 	return z_levels[z]
 
 /proc/HasBelow(z)
-	if(z > world.maxz || z < 2 || (z-1) > z_levels.len)
+	if(z > world.maxz || z < 2 || (z-1) > length(z_levels))
 		return 0
 	return z_levels[z-1]
 

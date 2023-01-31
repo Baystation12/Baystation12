@@ -151,17 +151,28 @@
 
 	damage_health(damage, Proj.damage_type)
 
-/obj/structure/grille/attackby(obj/item/W as obj, mob/user as mob)
-	if (user.a_intent == I_HURT)
-		if (!(W.obj_flags & OBJ_FLAG_CONDUCTIBLE) || !shock(user, 70))
-			..()
-		return
 
+/obj/structure/grille/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Check shock
+	if (HAS_FLAGS(weapon.obj_flags, OBJ_FLAG_CONDUCTIBLE) && shock(user, 70))
+		return TRUE
+
+	return ..()
+
+
+/obj/structure/grille/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWirecutter(W))
 		if(!shock(user, 100))
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			new /obj/item/stack/material/rods(get_turf(src), is_broken() ? 1 : 2, material.name)
-			qdel(src)
+			dismantle()
+		return
+
+	if(istype(W, /obj/item/gun/energy/plasmacutter)) // Plasma cutter shouldn't need to touch the grille to cut it, so no shock check.
+		var/obj/item/gun/energy/plasmacutter/cutter = W
+		if(!cutter.slice(user))
+			return
+		playsound(loc, 'sound/items/Welder.ogg', 80, 1)
+		dismantle()
 		return
 
 	if((isScrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
@@ -185,6 +196,10 @@
 
 	if (!(W.obj_flags & OBJ_FLAG_CONDUCTIBLE) || !shock(user, 70))
 		..()
+
+/obj/structure/grille/proc/dismantle()
+	new /obj/item/stack/material/rods(get_turf(src), is_broken() ? 1 : 2, material.name)
+	qdel(src)
 
 /obj/structure/grille/on_death(new_death_state)
 	visible_message(SPAN_WARNING("\The [src] falls to pieces!"))
@@ -223,11 +238,6 @@
 		else
 			return 0
 	return 0
-
-/obj/structure/grille/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if (!is_broken() && exposed_temperature > material.melting_point)
-		damage_health(1, DAMAGE_BURN)
-	..()
 
 /obj/structure/grille/cult
 	name = "cult grille"

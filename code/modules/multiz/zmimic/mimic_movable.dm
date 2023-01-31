@@ -1,6 +1,6 @@
 /atom/movable
 	/// The mimic (if any) that's *directly* copying us.
-	var/tmp/atom/movable/openspace/mimic/bound_overlay
+	var/atom/movable/openspace/mimic/bound_overlay
 	/// If TRUE, this atom is ignored by Z-Mimic.
 	var/no_z_overlay
 
@@ -147,6 +147,7 @@
 	var/override_depth
 
 /atom/movable/openspace/mimic/New()
+	SHOULD_CALL_PARENT(FALSE) // Probably a reason for this but I don't know it
 	atom_flags |= ATOM_FLAG_INITIALIZED
 	SSzcopy.openspace_overlays += 1
 
@@ -179,12 +180,12 @@
 			deltimer(destruction_timer)
 			destruction_timer = null
 	else if (!destruction_timer)
-		destruction_timer = addtimer(CALLBACK(src, /datum/.proc/qdel_self), 10 SECONDS, TIMER_STOPPABLE)
+		destruction_timer = QDEL_IN(src, 10 SECONDS)
 
 // Called when the turf we're on is deleted/changed.
 /atom/movable/openspace/mimic/proc/owning_turf_changed()
 	if (!destruction_timer)
-		destruction_timer = addtimer(CALLBACK(src, /datum/.proc/qdel_self), 10 SECONDS, TIMER_STOPPABLE)
+		destruction_timer = QDEL_IN(src, 10 SECONDS)
 
 // -- TURF PROXY --
 

@@ -52,7 +52,7 @@ SUBSYSTEM_DEF(plants)
 /datum/controller/subsystem/plants/fire(resumed, no_mc_tick)
 	if (!resumed)
 		queue = active_plants.Copy()
-		if (!queue.len)
+		if (!length(queue))
 			return
 		run_plant_counter = 0
 	var/cut_until = 1
@@ -125,7 +125,7 @@ SUBSYSTEM_DEF(plants)
 /datum/controller/subsystem/plants/proc/create_random_seed(station_environment)
 	var/datum/seed/seed = new
 	seed.randomize()
-	seed.uid = seeds.len + 1
+	seed.uid = length(seeds) + 1
 	seed.name = "[seed.uid]"
 	seeds[seed.name] = seed
 

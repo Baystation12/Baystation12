@@ -51,13 +51,13 @@
 	var/list/valid_paths
 
 /datum/gear_tweak/path/New(list/valid_paths)
-	if(!valid_paths.len)
+	if(!length(valid_paths))
 		CRASH("No type paths given")
 	var/list/duplicate_keys = duplicates(valid_paths)
-	if(duplicate_keys.len)
+	if(length(duplicate_keys))
 		CRASH("Duplicate names found: [english_list(duplicate_keys)]")
 	var/list/duplicate_values = duplicates(list_values(valid_paths))
-	if(duplicate_values.len)
+	if(length(duplicate_values))
 		CRASH("Duplicate types found: [english_list(duplicate_values)]")
 	// valid_paths, but with names sanitized to remove \improper
 	var/list/valid_paths_san = list()
@@ -119,14 +119,14 @@
 
 /datum/gear_tweak/contents/get_default()
 	. = list()
-	for(var/i = 1 to valid_contents.len)
+	for(var/i = 1 to length(valid_contents))
 		. += "Random"
 
 /datum/gear_tweak/contents/get_metadata(user, list/metadata, title)
 	. = list()
-	for(var/i = metadata.len to (valid_contents.len - 1))
+	for(var/i = length(metadata) to (length(valid_contents) - 1))
 		metadata += "Random"
-	for(var/i = 1 to valid_contents.len)
+	for(var/i = 1 to length(valid_contents))
 		var/entry = input(user, "Choose an entry.", CHARACTER_PREFERENCE_INPUT_TITLE, metadata[i]) as null|anything in (valid_contents[i] + list("Random", "None"))
 		if(entry)
 			. += entry
@@ -136,7 +136,7 @@
 /datum/gear_tweak/contents/tweak_item(owner, obj/item/I, list/metadata)
 	if(length(metadata) != length(valid_contents))
 		return
-	for(var/i = 1 to valid_contents.len)
+	for(var/i = 1 to length(valid_contents))
 		var/path
 		var/list/contents = valid_contents[i]
 		if(metadata[i] == "Random")
@@ -268,7 +268,7 @@ Custom Description
 /datum/gear_tweak/tablet/get_contents(list/metadata)
 	var/list/names = list()
 	var/obj/O = null
-	if (metadata.len != 7)
+	if (length(metadata) != 7)
 		return
 	O = ValidProcessors[metadata[1]]
 	if(O)

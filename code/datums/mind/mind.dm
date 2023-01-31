@@ -89,7 +89,7 @@
 	current = new_character		//link ourself to our new body
 	new_character.mind = src	//and link our new body to ourself
 
-	if(learned_spells && learned_spells.len)
+	if(learned_spells && length(learned_spells))
 		restore_spells(new_character)
 
 	if(changeling)
@@ -115,7 +115,7 @@
 	out += "</table><hr>"
 	out += "<b>Objectives</b></br>"
 
-	if(objectives && objectives.len)
+	if(objectives && length(objectives))
 		var/num = 1
 		for(var/datum/objective/O in objectives)
 			out += "<b>Objective #[num]:</b> [O.explanation_text] "

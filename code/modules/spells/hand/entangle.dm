@@ -35,7 +35,7 @@
 /spell/hand/charges/entangle/cast_hand(mob/M,mob/user)
 	var/turf/T = get_turf(M)
 	var/obj/effect/vine/single/P = new(T,seed, start_matured =1)
-	P.can_buckle = 1
+	P.can_buckle = TRUE
 
 	P.buckle_mob(M)
 	M.set_dir(pick(GLOB.cardinal))

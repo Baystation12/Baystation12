@@ -21,18 +21,18 @@
 /singleton/security_state/New()
 	// Setup the severe security level
 	if(!(severe_security_level in all_security_levels))
-		severe_security_level = all_security_levels[all_security_levels.len]
+		severe_security_level = all_security_levels[length(all_security_levels)]
 	severe_security_level = GET_SINGLETON(severe_security_level)
 
 	// Setup the high security level
 	if(!(high_security_level in all_security_levels))
-		high_security_level = all_security_levels[all_security_levels.len - 1]
+		high_security_level = all_security_levels[length(all_security_levels) - 1]
 	high_security_level = GET_SINGLETON(high_security_level)
 
 	// Setup the highest standard security level
 	if(highest_standard_security_level || isnull(highest_standard_security_level))
 		if(!(highest_standard_security_level in all_security_levels))
-			highest_standard_security_level = all_security_levels[all_security_levels.len - 1]
+			highest_standard_security_level = all_security_levels[length(all_security_levels) - 1]
 		highest_standard_security_level = GET_SINGLETON(highest_standard_security_level)
 	else
 		highest_standard_security_level = null

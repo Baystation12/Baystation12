@@ -90,7 +90,7 @@
 	log_and_message_admins("has activated the service '[service_label]'", user)
 
 	if(service_duration)
-		addtimer(CALLBACK(src,/obj/item/device/uplink_service/proc/deactivate), service_duration)
+		addtimer(new Callback(src,/obj/item/device/uplink_service/proc/deactivate), service_duration)
 	else
 		deactivate()
 
@@ -288,7 +288,7 @@
 
 	var/datum/computer_file/report/crew_record/random_record
 	var/obj/item/card/id/I = user.GetIdCard()
-	if(GLOB.all_crew_records.len)
+	if(length(GLOB.all_crew_records))
 		random_record = pick(GLOB.all_crew_records)
 	var/datum/computer_file/report/crew_record/new_record = CreateModularRecord(user)
 	if(I)

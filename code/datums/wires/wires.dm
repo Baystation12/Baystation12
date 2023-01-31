@@ -57,15 +57,22 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 /datum/wires/proc/get_mechanics_info()
 	return
 
+/datum/wires/proc/get_interactions_info()
+	RETURN_TYPE(/list)
+	. = list()
+	.["Multitool"] = "<p>While the wire panel is accessible, allows pulsing wires by clicking the Pulse button in the panel UI.</p>"
+	.["Signaller"] = "<p>While the wire panel is accessible, can be attached to a wire by clicking the Attach Signaller button in the panel UI. An attached signaller will pulse the wire whenever it receives a signal.</p>"
+	.["Wirecutters"] = "<p>While the wire panel is accessible, allows cutting and mending wires by clicking the Cut and Mend buttons in the panel UI.</p>"
+
 /datum/wires/proc/GenerateWires()
 	var/list/colours_to_pick = wireColours.Copy() // Get a copy, not a reference.
 	var/list/indexes_to_pick = list()
 	//Generate our indexes
 	for(var/i = 1; i < MAX_FLAG && i < SHIFTL(1, wire_count); i += i)
 		indexes_to_pick += i
-	colours_to_pick.len = wire_count // Downsize it to our specifications.
+	LIST_RESIZE(colours_to_pick, wire_count) // Downsize it to our specifications.
 
-	while(colours_to_pick.len && indexes_to_pick.len)
+	while(length(colours_to_pick) && length(indexes_to_pick))
 		// Pick and remove a colour
 		var/colour = pick_n_take(colours_to_pick)
 
@@ -287,7 +294,7 @@ var/global/const/POWER = 8
 
 
 /datum/wires/proc/RandomPulse()
-	var/index = rand(1, wires.len)
+	var/index = rand(1, length(wires))
 	PulseColour(wires[index])
 
 //
@@ -359,7 +366,7 @@ var/global/const/POWER = 8
 		return 0
 
 /datum/wires/proc/RandomCut()
-	var/r = rand(1, wires.len)
+	var/r = rand(1, length(wires))
 	CutWireColour(wires[r])
 
 /datum/wires/proc/RandomCutAll(probability = 10)

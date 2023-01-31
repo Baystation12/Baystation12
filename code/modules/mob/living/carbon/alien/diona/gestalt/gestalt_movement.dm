@@ -47,17 +47,17 @@
 		return rolling_up.mob_size <= get_max_mob_rollup_size()
 
 /obj/structure/diona_gestalt/proc/get_max_item_rollup_size()
-	if(nymphs.len > 9)
+	if(length(nymphs) > 9)
 		return ITEM_SIZE_GARGANTUAN
-	if(nymphs.len > 6)
+	if(length(nymphs) > 6)
 		return ITEM_SIZE_HUGE
-	if(nymphs.len > 4)
+	if(length(nymphs) > 4)
 		return ITEM_SIZE_LARGE
-	if(nymphs.len > 2)
+	if(length(nymphs) > 2)
 		return ITEM_SIZE_NORMAL
 	return ITEM_SIZE_SMALL
 
 /obj/structure/diona_gestalt/proc/get_max_mob_rollup_size()
-	if(nymphs.len >= 20)
+	if(length(nymphs) >= 20)
 		return MOB_MEDIUM
 	return MOB_SMALL

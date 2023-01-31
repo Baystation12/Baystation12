@@ -126,7 +126,7 @@
 
 		else if(task == "rank")
 			var/new_rank
-			if(admin_ranks.len)
+			if(length(admin_ranks))
 				new_rank = input("Please select a rank", "New rank", null, null) as null|anything in (admin_ranks|"*New Rank*")
 			else
 				new_rank = input("Please select a rank", "New rank", null, null) as null|anything in list("Game Master","Game Admin", "Trial Admin", "Admin Observer","*New Rank*")
@@ -144,7 +144,7 @@
 						to_chat(usr, SPAN_COLOR("red", "Error: Topic 'editrights': Invalid rank"))
 						return
 					if(config.admin_legacy_system)
-						if(admin_ranks.len)
+						if(length(admin_ranks))
 							if(new_rank in admin_ranks)
 								rights = admin_ranks[new_rank]		//we typed a rank which already exists, use its rights
 							else
@@ -241,8 +241,8 @@
 			if("runtime")			M.change_mob_type( /mob/living/simple_animal/passive/cat/fluff/Runtime , null, null, delmob )
 			if("corgi")				M.change_mob_type( /mob/living/simple_animal/passive/corgi , null, null, delmob )
 			if("ian")				M.change_mob_type( /mob/living/simple_animal/passive/corgi/Ian , null, null, delmob )
-			if("crab")				M.change_mob_type( /mob/living/simple_animal/crab , null, null, delmob )
-			if("coffee")			M.change_mob_type( /mob/living/simple_animal/crab/Coffee , null, null, delmob )
+			if("crab")				M.change_mob_type( /mob/living/simple_animal/passive/crab , null, null, delmob )
+			if("coffee")			M.change_mob_type( /mob/living/simple_animal/passive/crab/Coffee , null, null, delmob )
 			if("parrot")			M.change_mob_type( /mob/living/simple_animal/hostile/retaliate/parrot , null, null, delmob )
 			if("polyparrot")		M.change_mob_type( /mob/living/simple_animal/hostile/retaliate/parrot/Poly , null, null, delmob )
 			if("constructarmoured")	M.change_mob_type( /mob/living/simple_animal/construct/armoured , null, null, delmob )
@@ -739,7 +739,7 @@
 				notbannedlist += job
 
 		//Banning comes first
-		if(notbannedlist.len) //at least 1 unbanned job exists in job_list so we have stuff to ban.
+		if(length(notbannedlist)) //at least 1 unbanned job exists in job_list so we have stuff to ban.
 			switch(alert("Temporary Ban?",,"Yes","No", "Cancel"))
 				if("Yes")
 					if(!check_rights(R_BAN, 0))
@@ -1546,7 +1546,7 @@
 			var/data = ""
 			var/obj/item/paper_bundle/B = fax
 
-			for (var/page = 1, page <= B.pages.len, page++)
+			for (var/page = 1 to length(B.pages))
 				var/obj/pageobj = B.pages[page]
 				data += "<A href='?src=\ref[src];AdminFaxViewPage=[page];paper_bundle=\ref[B]'>Page [page] - [pageobj.name]</A><BR>"
 
@@ -1696,9 +1696,9 @@
 
 		var/list/offset = splittext(href_list["offset"],",")
 		var/number = dd_range(1, 100, text2num(href_list["object_count"]))
-		var/X = offset.len > 0 ? text2num(offset[1]) : 0
-		var/Y = offset.len > 1 ? text2num(offset[2]) : 0
-		var/Z = offset.len > 2 ? text2num(offset[3]) : 0
+		var/X = length(offset) > 0 ? text2num(offset[1]) : 0
+		var/Y = length(offset) > 1 ? text2num(offset[2]) : 0
+		var/Z = length(offset) > 2 ? text2num(offset[3]) : 0
 		var/tmp_dir = href_list["object_dir"]
 		var/obj_dir = tmp_dir ? text2num(tmp_dir) : 2
 		if(!obj_dir || !(obj_dir in list(1,2,4,8,5,6,9,10)))
@@ -2096,25 +2096,27 @@
 				log_and_message_admins("has forced [last_ckey]/([M]) to ghost and deactivate.")
 				return
 
-			var/obj/machinery/cryopod/C
-			if (isrobot(M))
-				for (var/obj/machinery/cryopod/robot/CP in SSmachines.machinery)
-					if (CP.occupant || !(CP.z in GLOB.using_map.station_levels))
-						continue
-					C = CP
-			else
-				for (var/obj/machinery/cryopod/CP in SSmachines.machinery)
-					if (CP.occupant || !(CP.z in GLOB.using_map.station_levels))
-						continue
-					C = CP
+			if (!istype(M.loc, /obj/machinery/cryopod))
+				var/obj/machinery/cryopod/C
+				if (isrobot(M))
+					for (var/obj/machinery/cryopod/robot/CP in SSmachines.machinery)
+						if (CP.occupant || !(CP.z in GLOB.using_map.station_levels))
+							continue
+						C = CP
+				else
+					for (var/obj/machinery/cryopod/CP in SSmachines.machinery)
+						if (CP.occupant || !(CP.z in GLOB.using_map.station_levels))
+							continue
+						C = CP
 
-			if (!C || C.occupant)
-				to_chat(usr, SPAN_WARNING("Could not find an empty cryopod!"))
-				return
+				if (!C || C.occupant)
+					to_chat(usr, SPAN_WARNING("Could not find an empty cryopod!"))
+					return
+
+				C.set_occupant(M)
 
 			log_and_message_admins("has put [last_ckey]/([M]) into a cryopod and ghosted them.")
 
-			C.set_occupant(M)
 			var/ghost = M.ghostize(FALSE)
 			if (ghost)
 				show_player_panel(M)

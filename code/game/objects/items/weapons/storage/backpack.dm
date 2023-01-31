@@ -260,7 +260,7 @@
 
 /obj/item/storage/backpack/dufflebag/syndie/med/full
 	startswith = list(
-		/obj/item/roller,
+		/obj/item/roller_bed,
 		/obj/item/storage/box/syringes,
 		/obj/item/clothing/gloves/latex/nitrile,
 		/obj/item/clothing/glasses/hud/health,

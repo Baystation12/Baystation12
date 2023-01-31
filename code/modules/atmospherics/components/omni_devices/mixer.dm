@@ -71,10 +71,10 @@
 
 	if(!mapper_set())
 		for(var/datum/omni_port/P in inputs)
-			P.concentration = 1 / max(1, inputs.len)
+			P.concentration = 1 / max(1, length(inputs))
 
 	if(output)
-		output.air.volume = ATMOS_DEFAULT_VOLUME_MIXER * 0.75 * inputs.len
+		output.air.volume = ATMOS_DEFAULT_VOLUME_MIXER * 0.75 * length(inputs)
 		output.concentration = 1
 
 	rebuild_mixing_inputs()
@@ -85,7 +85,7 @@
 /obj/machinery/atmospherics/omni/mixer/error_check()
 	if(!output || !inputs)
 		return 1
-	if(inputs.len < 2) //requires at least 2 inputs ~otherwise why are you using a mixer?
+	if(length(inputs) < 2) //requires at least 2 inputs ~otherwise why are you using a mixer?
 		return 1
 
 	//concentration must add to 1
@@ -164,13 +164,13 @@
 			if(ATM_OUTPUT)
 				output = 1
 
-		portData[++portData.len] = list("dir" = dir_name(P.dir, capitalize = 1), \
+		portData[LIST_PRE_INC(portData)] = list("dir" = dir_name(P.dir, capitalize = 1), \
 										"concentration" = P.concentration, \
 										"input" = input, \
 										"output" = output, \
 										"con_lock" = P.con_lock)
 
-	if(portData.len)
+	if(length(portData))
 		data["ports"] = portData
 	if(output)
 		data["set_flow_rate"] = round(set_flow_rate*10)		//because nanoui can't handle rounded decimals.
@@ -232,7 +232,7 @@
 				if(ATM_NONE)
 					if(P.mode == ATM_OUTPUT)
 						return
-					if(P.mode == ATM_INPUT && inputs.len > 2)
+					if(P.mode == ATM_INPUT && length(inputs) > 2)
 						P.mode = mode
 		else if(P.mode == ATM_OUTPUT && mode == ATM_OUTPUT)
 			P.mode = ATM_INPUT

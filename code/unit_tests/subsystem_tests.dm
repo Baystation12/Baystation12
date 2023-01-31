@@ -2,7 +2,7 @@
 	name = "SUBSYSTEM - ATOMS: Shall have no bad init calls"
 
 /datum/unit_test/subsystem_atom_shall_have_no_bad_init_calls/start_test()
-	if(SSatoms.BadInitializeCalls.len)
+	if(length(SSatoms.BadInitializeCalls))
 		log_bad(jointext(SSatoms.InitLog(), null))
 		fail("[SSatoms] had bad initialization calls.")
 	else
@@ -20,7 +20,7 @@
 		if(!SS.initialized)
 			bad_subsystems += SS.type
 
-	if(bad_subsystems.len)
+	if(length(bad_subsystems))
 		fail("Found improperly initialized subsystems: [english_list(bad_subsystems)]")
 	else
 		pass("All susbsystems have initialized properly")

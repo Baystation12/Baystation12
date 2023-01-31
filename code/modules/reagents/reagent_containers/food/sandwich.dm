@@ -38,7 +38,7 @@
 		if(istype(O,/obj/item/reagent_containers/food/snacks/slice/bread))
 			sandwich_limit += 4
 
-	if(src.contents.len > sandwich_limit)
+	if(length(src.contents) > sandwich_limit)
 		to_chat(user, SPAN_WARNING("If you put anything else on \the [src] it's going to collapse."))
 		return
 	else if(istype(W,/obj/item/material/shard))
@@ -83,14 +83,14 @@
 
 	var/image/T = new(src.icon, "sandwich_top")
 	T.pixel_x = pick(list(-1,0,1))
-	T.pixel_y = (ingredients.len * 2)+1
+	T.pixel_y = (length(ingredients) * 2)+1
 	overlays += T
 
 	fullname = english_list(ingredient_names)
 	SetName(lowertext("[fullname] sandwich"))
 	renamed = 0 //updating removes custom name
 	if(length(name) > 80) SetName("[pick(list("absurd","colossal","enormous","ridiculous"))] sandwich")
-	w_class = Ceil(clamp((ingredients.len/2),2,4))
+	w_class = Ceil(clamp((length(ingredients)/2),2,4))
 
 /obj/item/reagent_containers/food/snacks/csandwich/Destroy()
 	QDEL_NULL_LIST(ingredients)

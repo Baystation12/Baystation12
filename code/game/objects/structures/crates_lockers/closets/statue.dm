@@ -84,10 +84,6 @@
 	for (var/mob/M in src)
 		shatter(M)
 
-/obj/structure/closet/statue/attack_generic(mob/user, damage, attacktext, environment_smash)
-	if(damage && environment_smash)
-		kill_health()
-
 /obj/structure/closet/statue/MouseDrop_T()
 	return
 

@@ -73,7 +73,7 @@ SUBSYSTEM_DEF(supply)
 	if(istype(A,/obj/machinery/tele_beacon))
 		return 1
 
-	for(var/i=1, i<=A.contents.len, i++)
+	for(var/i=1, i<=length(A.contents), i++)
 		var/atom/B = A.contents[i]
 		if(.(B))
 			return 1
@@ -96,7 +96,7 @@ SUBSYSTEM_DEF(supply)
 					var/atom/A = atom
 					if(find_slip && istype(A,/obj/item/paper/manifest))
 						var/obj/item/paper/manifest/slip = A
-						if(!slip.is_copy && slip.stamped && slip.stamped.len) //Any stamp works.
+						if(!slip.is_copy && slip.stamped && length(slip.stamped)) //Any stamp works.
 							add_points_from_source(points_per_slip, "manifest")
 							find_slip = 0
 						continue
@@ -117,7 +117,7 @@ SUBSYSTEM_DEF(supply)
 
 			qdel(AM)
 
-	if(material_count.len)
+	if(length(material_count))
 		for(var/material_type in material_count)
 			add_points_from_source(material_count[material_type], material_type)
 
@@ -141,13 +141,13 @@ SUBSYSTEM_DEF(supply)
 
 //Buyin
 /datum/controller/subsystem/supply/proc/buy()
-	if(!shoppinglist.len)
+	if(!length(shoppinglist))
 		return
 
 	var/list/clear_turfs = get_clear_turfs()
 
 	for(var/S in shoppinglist)
-		if(!clear_turfs.len)
+		if(!length(clear_turfs))
 			break
 		var/turf/pickedloc = pick_n_take(clear_turfs)
 		shoppinglist -= S
@@ -166,7 +166,7 @@ SUBSYSTEM_DEF(supply)
 			info +="<h3>[GLOB.using_map.boss_name] Shipping Manifest</h3><hr><br>"
 			info +="Order #[SO.ordernum]<br>"
 			info +="Destination: [GLOB.using_map.station_name]<br>"
-			info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
+			info +="[length(shoppinglist)] PACKAGES IN THIS SHIPMENT<br>"
 			info +="CONTENTS:<br><ul>"
 
 			slip = new /obj/item/paper/manifest(A, JOINTEXT(info))
@@ -189,7 +189,7 @@ SUBSYSTEM_DEF(supply)
 // Adds any given item to the supply shuttle
 /datum/controller/subsystem/supply/proc/addAtom(atom/movable/A)
 	var/list/clear_turfs = get_clear_turfs()
-	if(!clear_turfs.len)
+	if(!length(clear_turfs))
 		return FALSE
 
 	var/turf/pickedloc = pick(clear_turfs)

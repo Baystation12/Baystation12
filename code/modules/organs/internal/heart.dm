@@ -7,7 +7,7 @@
 	var/pulse = PULSE_NORM
 	var/heartbeat = 0
 	var/beat_sound = 'sound/effects/singlebeat.ogg'
-	var/tmp/next_blood_squirt = 0
+	var/next_blood_squirt = 0
 	damage_reduction = 0.7
 	relative_size = 5
 	max_damage = 45
@@ -172,7 +172,7 @@
 		if(CE_STABLE in owner.chem_effects) // inaprovaline
 			blood_max *= 0.8
 
-		if(world.time >= next_blood_squirt && istype(owner.loc, /turf) && do_spray.len)
+		if(world.time >= next_blood_squirt && istype(owner.loc, /turf) && length(do_spray))
 			var/spray_organ = pick(do_spray)
 			owner.visible_message(
 				SPAN_DANGER("Blood sprays out from \the [owner]'s [spray_organ]!"),

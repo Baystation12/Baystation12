@@ -26,7 +26,8 @@ var/global/intercom_range_display_status = 0
 	icon = 'icons/480x480.dmi'
 	icon_state = "25percent"
 
-/obj/effect/debugging/camera_range/New()
+/obj/effect/debugging/camera_range/Initialize()
+	. = ..()
 	pixel_x = -224
 	pixel_y = -224
 
@@ -281,10 +282,10 @@ var/global/list/debug_verbs = list (
 					atom_list += A
 	/*
 	var/atom/temp_atom
-	for(var/i = 0; i <= (atom_list.len/10); i++)
+	for(var/i = 0; i <= (length(atom_list)/10); i++)
 		var/line = ""
 		for(var/j = 1; j <= 10; j++)
-			if(i*10+j <= atom_list.len)
+			if(i*10+j <= length(atom_list))
 				temp_atom = atom_list[i*10+j]
 				line += " no.[i+10+j]@\[[temp_atom.x], [temp_atom.y], [temp_atom.z]\]; "
 		log_debug(line) */
@@ -307,10 +308,10 @@ var/global/list/debug_verbs = list (
 			count++
 	/*
 	var/atom/temp_atom
-	for(var/i = 0; i <= (atom_list.len/10); i++)
+	for(var/i = 0; i <= (length(atom_list)/10); i++)
 		var/line = ""
 		for(var/j = 1; j <= 10; j++)
-			if(i*10+j <= atom_list.len)
+			if(i*10+j <= length(atom_list))
 				temp_atom = atom_list[i*10+j]
 				line += " no.[i+10+j]@\[[temp_atom.x], [temp_atom.y], [temp_atom.z]\]; "
 		log_debug(line) */

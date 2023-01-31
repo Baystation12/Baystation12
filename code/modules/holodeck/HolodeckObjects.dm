@@ -89,7 +89,8 @@
 	name = "reinforced holofloor"
 	icon_state = "reinforced"
 
-/turf/simulated/floor/holofloor/space/New()
+/turf/simulated/floor/holofloor/space/Initialize()
+	. = ..()
 	icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
 
 /turf/simulated/floor/holofloor/beach
@@ -183,11 +184,11 @@
 
 /obj/machinery/door/window/holowindoor/attackby(obj/item/I as obj, mob/user as mob)
 
-	if (src.operating == 1)
+	if (operating == DOOR_OPERATING_YES)
 		return
 
-	if (check_force(I, user))
-		return
+	if (user.a_intent == I_HURT)
+		return ..()
 
 	src.add_fingerprint(user)
 	if (!src.requiresID())
@@ -255,7 +256,8 @@
 /obj/item/holo/esword/get_parry_chance(mob/user)
 	return active ? ..() : 0
 
-/obj/item/holo/esword/New()
+/obj/item/holo/esword/Initialize()
+	. = ..()
 	item_color = pick("red","blue","green","purple")
 
 /obj/item/holo/esword/attack_self(mob/living/user as mob)

@@ -77,7 +77,7 @@
 	finalize_synths(R)
 
 	R.set_module_sprites(sprites)
-	R.choose_icon(R.module_sprites.len + 1, R.module_sprites)
+	R.choose_icon(length(R.module_sprites) + 1, R.module_sprites)
 
 /obj/item/robot_module/proc/build_equipment()
 	var/list/created_equipment = list()
@@ -164,7 +164,7 @@
 			F.icon_state = "flash"
 		else if(F.times_used)
 			F.times_used--
-	if(!synths || !synths.len)
+	if(!synths || !length(synths))
 		return
 	for(var/datum/matter_synth/T in synths)
 		T.add_charge(T.recharge_rate * rate)

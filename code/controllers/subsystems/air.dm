@@ -97,9 +97,9 @@ SUBSYSTEM_DEF(air)
 		while (state != SS_IDLE)
 			stoplag()
 
-	while (zones.len)
-		var/zone/zone = zones[zones.len]
-		zones.len--
+	while (length(zones))
+		var/zone/zone = zones[length(zones)]
+		LIST_DEC(zones)
 
 		zone.c_invalidate()
 
@@ -122,11 +122,11 @@ SUBSYSTEM_DEF(air)
 	if (PreventUpdateStat(time))
 		return ..()
 	..({"\
-		TtU: [tiles_to_update.len] \
-		ZtU: [zones_to_update.len] \
-		AFZ: [active_fire_zones.len] \
-		AH: [active_hotspots.len] \
-		AE: [active_edges.len]\
+		TtU: [length(tiles_to_update)] \
+		ZtU: [length(zones_to_update)] \
+		AFZ: [length(active_fire_zones)] \
+		AH: [length(active_hotspots)] \
+		AE: [length(active_edges)]\
 	"})
 
 
@@ -138,9 +138,9 @@ SUBSYSTEM_DEF(air)
 		S.update_air_properties()
 		CHECK_TICK
 	report_progress({"Total Simulated Turfs: [simulated_turf_count]
-Total Zones: [zones.len]
-Total Edges: [edges.len]
-Total Active Edges: [active_edges.len ? SPAN_DANGER("[active_edges.len]") : "None"]
+Total Zones: [length(zones)]
+Total Edges: [length(edges)]
+Total Active Edges: [length(active_edges) ? SPAN_DANGER("[length(active_edges)]") : "None"]
 Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_count]
 Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 "})
@@ -164,9 +164,9 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 	var/list/curr_hotspot = processing_hotspots
 	var/list/curr_zones = zones_to_update
 
-	while (curr_tiles.len)
-		var/turf/T = curr_tiles[curr_tiles.len]
-		curr_tiles.len--
+	while (length(curr_tiles))
+		var/turf/T = curr_tiles[length(curr_tiles)]
+		LIST_DEC(curr_tiles)
 
 		if (!T)
 			if (no_mc_tick)
@@ -200,9 +200,9 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 		else if (MC_TICK_CHECK)
 			return
 
-	while (curr_defer.len)
-		var/turf/T = curr_defer[curr_defer.len]
-		curr_defer.len--
+	while (length(curr_defer))
+		var/turf/T = curr_defer[length(curr_defer)]
+		LIST_DEC(curr_defer)
 
 		T.update_air_properties()
 		T.post_update_air_properties()
@@ -217,9 +217,9 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 		else if (MC_TICK_CHECK)
 			return
 
-	while (curr_edges.len)
-		var/connection_edge/edge = curr_edges[curr_edges.len]
-		curr_edges.len--
+	while (length(curr_edges))
+		var/connection_edge/edge = curr_edges[length(curr_edges)]
+		LIST_DEC(curr_edges)
 
 		if (!edge)
 			if (no_mc_tick)
@@ -235,9 +235,9 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 		else if (MC_TICK_CHECK)
 			return
 
-	while (curr_fire.len)
-		var/zone/Z = curr_fire[curr_fire.len]
-		curr_fire.len--
+	while (length(curr_fire))
+		var/zone/Z = curr_fire[length(curr_fire)]
+		LIST_DEC(curr_fire)
 
 		Z.process_fire()
 
@@ -246,9 +246,9 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 		else if (MC_TICK_CHECK)
 			return
 
-	while (curr_hotspot.len)
-		var/obj/hotspot/F = curr_hotspot[curr_hotspot.len]
-		curr_hotspot.len--
+	while (length(curr_hotspot))
+		var/obj/hotspot/F = curr_hotspot[length(curr_hotspot)]
+		LIST_DEC(curr_hotspot)
 
 		F.Process()
 
@@ -257,9 +257,9 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 		else if (MC_TICK_CHECK)
 			return
 
-	while (curr_zones.len)
-		var/zone/Z = curr_zones[curr_zones.len]
-		curr_zones.len--
+	while (length(curr_zones))
+		var/zone/Z = curr_zones[length(curr_zones)]
+		LIST_DEC(curr_zones)
 
 		Z.tick()
 		Z.needs_update = FALSE
@@ -300,7 +300,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 	ASSERT(!B.invalid)
 	ASSERT(A != B)
 	#endif
-	if(A.contents.len < B.contents.len)
+	if(length(A.contents) < length(B.contents))
 		A.c_merge(B)
 		mark_zone_update(B)
 	else
@@ -324,7 +324,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 	var/space = !istype(B)
 
 	if(!space)
-		if(min(A.zone.contents.len, B.zone.contents.len) < ZONE_MIN_SIZE || (direct && (equivalent_pressure(A.zone,B.zone) || times_fired == 0)))
+		if(min(length(A.zone.contents), length(B.zone.contents)) < ZONE_MIN_SIZE || (direct && (equivalent_pressure(A.zone,B.zone) || times_fired == 0)))
 			merge(A.zone,B.zone)
 			return
 

@@ -83,11 +83,11 @@
 	ai_log("walk_path() : Entered.", AI_LOG_TRACE)
 
 	if (use_astar)
-		if (!path.len) // If we're missing a path, make a new one.
+		if (!length(path)) // If we're missing a path, make a new one.
 			ai_log("walk_path() : No path. Attempting to calculate path.", AI_LOG_DEBUG)
 			calculate_path(A, get_to)
 
-		if (!path.len) // If we still don't have one, then the target's probably somewhere inaccessible to us. Get as close as we can.
+		if (!length(path)) // If we still don't have one, then the target's probably somewhere inaccessible to us. Get as close as we can.
 			ai_log("walk_path() : Failed to obtain path to target. Using get_step_to() instead.", AI_LOG_INFO)
 			if (holder.IMove(get_step_to(holder, A)) == MOVEMENT_FAILED)
 				ai_log("walk_path() : Failed to move, attempting breakthrough.", AI_LOG_INFO)
@@ -118,7 +118,7 @@
 ///Take one step along a path
 /datum/ai_holder/proc/move_once()
 	ai_log("move_once() : Entered.", AI_LOG_TRACE)
-	if (!path.len)
+	if (!length(path))
 		return
 
 	if (path_display)
@@ -145,7 +145,7 @@
 	if (isturf(holder.loc) && can_act())
 		wander_delay--
 		if (wander_delay <= 0)
-			if (!wander_when_pulled && (holder.pulledby || holder.grabbed_by.len))
+			if (!wander_when_pulled && (holder.pulledby || length(holder.grabbed_by)))
 				ai_log("handle_wander_movement() : Being pulled and cannot wander. Exiting.", AI_LOG_DEBUG)
 				return
 

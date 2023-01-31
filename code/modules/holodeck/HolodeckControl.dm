@@ -59,7 +59,7 @@
 		onclose(user, "computer")
 		return
 
-	if(!supported_programs.len)
+	if(!length(supported_programs))
 		dat += SPAN_DANGER("Warning: No supported holo-programs loaded.<br>")
 		show_browser(user, dat, "window=computer;size=400x500")
 		onclose(user, "computer")
@@ -196,7 +196,7 @@
 	if(!..())
 		return
 	if(active)
-		use_power_oneoff(item_power_usage * (holographic_objs.len + holographic_mobs.len))
+		use_power_oneoff(item_power_usage * (length(holographic_objs) + length(holographic_mobs)))
 
 		if(!checkInteg(linkedholodeck))
 			damaged = 1

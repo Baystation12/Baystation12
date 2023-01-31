@@ -49,7 +49,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 /datum/event/exo_awakening/proc/count_mobs()
 	var/total_mobs
-	total_mobs = GLOB.exo_event_mob_count.len
+	total_mobs = length(GLOB.exo_event_mob_count)
 
 	if (total_mobs >= target_mob_count || SSmobs.ticks >= 10 || !living_observers_present(affecting_z))
 		stop_spawning = TRUE
@@ -66,7 +66,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	notify_players()
 	adjust_to_planet_size()
 
-	addtimer(CALLBACK(src, /datum/event/exo_awakening/proc/start_spawning), delay_time)
+	addtimer(new Callback(src, /datum/event/exo_awakening/proc/start_spawning), delay_time)
 
 //Locates a planet with players on it (prioritizes players from the station).
 //If no suitable planets are found, the event is killed and something else is run instead.
@@ -76,10 +76,8 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	var/list/players = list()
 
 	for (var/area/A in exoplanet_areas)
-		var/mob/M
-		for (var/i = length(GLOB.player_list) to 1 step -1)
-			M = GLOB.player_list[i]
-			if (M && M.stat != DEAD && (get_z(M) in GetConnectedZlevels(A.z)))
+		for (var/mob/M in GLOB.player_list)
+			if (M.stat != DEAD && (get_z(M) in GetConnectedZlevels(A.z)))
 				players += M
 
 				if (get_crewmember_record(M.real_name || M.name))

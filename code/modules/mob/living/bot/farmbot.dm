@@ -136,7 +136,7 @@
 
 /mob/living/bot/farmbot/stepToTarget() // Same reason
 	var/turf/T = get_turf(target)
-	if(!target_path.len || !T.Adjacent(target_path[target_path.len]))
+	if(!length(target_path) || !T?.Adjacent(target_path[length(target_path)]))
 		calcTargetPath()
 	makeStep(target_path)
 	return

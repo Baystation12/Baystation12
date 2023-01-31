@@ -177,13 +177,13 @@
 			E.set_dna(E.dna)
 
 		//Hair
-		var/hair = dna.GetUIValueRange(DNA_UI_HAIR_STYLE,GLOB.hair_styles_list.len)
-		if((0 < hair) && (hair <= GLOB.hair_styles_list.len))
+		var/hair = dna.GetUIValueRange(DNA_UI_HAIR_STYLE,length(GLOB.hair_styles_list))
+		if((0 < hair) && (hair <= length(GLOB.hair_styles_list)))
 			H.head_hair_style = GLOB.hair_styles_list[hair]
 
 		//Facial Hair
-		var/beard = dna.GetUIValueRange(DNA_UI_BEARD_STYLE,GLOB.facial_hair_styles_list.len)
-		if((0 < beard) && (beard <= GLOB.facial_hair_styles_list.len))
+		var/beard = dna.GetUIValueRange(DNA_UI_BEARD_STYLE,length(GLOB.facial_hair_styles_list))
+		if((0 < beard) && (beard <= length(GLOB.facial_hair_styles_list)))
 			H.facial_hair_style = GLOB.facial_hair_styles_list[beard]
 
 		H.force_update_limbs()

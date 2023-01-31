@@ -49,7 +49,7 @@
 			var/datum/language/L = all_languages[name_language]
 			if(L)
 				name = L.get_random_name(pick(MALE,FEMALE))
-	if(possible_origins && possible_origins.len)
+	if(possible_origins && length(possible_origins))
 		origin = pick(possible_origins)
 
 	//Generate the
@@ -84,22 +84,22 @@
 	return 1
 
 /datum/trader/proc/remove_from_pool(list/pool, chance_per_item)
-	if(pool && prob(chance_per_item * pool.len))
-		var/i = rand(1,pool.len)
+	if(pool && prob(chance_per_item * length(pool)))
+		var/i = rand(1,length(pool))
 		pool[pool[i]] = null
 		pool -= pool[i]
 
 /datum/trader/proc/add_to_pool(list/pool, list/possible, base_chance = 100, force = 0)
 	var/divisor = 1
-	if(pool && pool.len)
-		divisor = pool.len
+	if(pool && length(pool))
+		divisor = length(pool)
 	if(force || prob(base_chance/divisor))
 		var/new_item = get_possible_item(possible)
 		if(new_item)
 			pool |= new_item
 
 /datum/trader/proc/get_possible_item(list/trading_pool)
-	if(!trading_pool || !trading_pool.len)
+	if(!trading_pool || !length(trading_pool))
 		return
 	var/picked = pick(trading_pool)
 	var/atom/A = picked
@@ -118,7 +118,7 @@
 	. = replacetext(.,"CURRENCY", GLOB.using_map.local_currency_name)
 
 /datum/trader/proc/print_trading_items(num)
-	num = clamp(num,1,trading_items.len)
+	num = clamp(num,1,length(trading_items))
 	if(trading_items[num])
 		var/atom/movable/M = trading_items[num]
 		return "<b>[initial(M.name)]</b>"
@@ -162,9 +162,9 @@
 	return make_response(TRADER_TRADE_COMPLETE, "Thank you for your patronage!", -value, TRUE)
 
 /datum/trader/proc/offer_items_for_bulk(quantity, list/offers, num, turf/location, skill = SKILL_MAX)
-	if(!offers?.len)
+	if(!length(offers))
 		return make_response(TRADER_NOT_ENOUGH, "That's not enough.", 0, FALSE)
-	num = clamp(num, 1, trading_items.len)
+	num = clamp(num, 1, length(trading_items))
 	var/offer_worth = 0
 	for(var/item in offers)
 		var/atom/movable/offer = item
@@ -173,7 +173,7 @@
 			is_wanted = 2
 		if((trade_flags & TRADER_WANTED_ALL) && is_type_in_list(offer, possible_wanted_items))
 			is_wanted = 1
-		if(blacklisted_trade_items?.len && is_type_in_list(offer ,blacklisted_trade_items))
+		if(length(blacklisted_trade_items) && is_type_in_list(offer ,blacklisted_trade_items))
 			return make_response(TRADER_NO_BLACKLISTED, "I refuse to take one of those items.", 0, FALSE)
 
 		if(istype(offer, /obj/item/spacecash))
@@ -241,7 +241,7 @@
 			to_chat(offer, replacetext(text, "ORIGIN", origin))
 		qdel(offer)
 
-	num = clamp(num, 1, trading_items.len)
+	num = clamp(num, 1, length(trading_items))
 	var/type = trading_items[num]
 
 	var/list/M = list()
@@ -254,7 +254,7 @@
 	return M
 
 /datum/trader/proc/how_much_do_you_want(num, skill = SKILL_MAX)
-	num = clamp(num, 1, trading_items.len)
+	num = clamp(num, 1, length(trading_items))
 	var/atom/movable/M = trading_items[num]
 	var/datum/trade_response/tr = make_response(TRADER_HOW_MUCH, "Hmm.... how about VALUE CURRENCY?", 0, FALSE)
 	tr.text = replacetext(replacetext(tr.text, "ITEM", initial(M.name)), "VALUE", get_item_value(num, skill))
@@ -275,7 +275,7 @@
 /datum/trader/proc/sell_items(list/offers, skill = SKILL_MAX)
 	if(!(trade_flags & TRADER_GOODS))
 		return make_response(TRADER_GOODS, "I'm not buying.", 0, FALSE)
-	if(!offers || !offers.len)
+	if(!offers || !length(offers))
 		return make_response(TRADER_NOT_ENOUGH, "I'm not buying that.", 0, FALSE)
 
 	var/wanted

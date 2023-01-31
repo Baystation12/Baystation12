@@ -1773,7 +1773,12 @@
 "dQ" = (
 /obj/structure/closet/crate/freezer,
 /obj/item/reagent_containers/ivbag/nanoblood,
-/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/surgery)
 "dR" = (
@@ -1880,7 +1885,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony/medbay)
 "eb" = (
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /obj/machinery/alarm{
 	locked = 0;
 	pixel_y = 20
@@ -4519,8 +4524,8 @@
 /area/map_template/colony/jail)
 "iy" = (
 /obj/effect/floor_decal/borderfloorwhite,
-/obj/structure/bed/roller/ironingboard,
-/obj/item/ironingiron,
+/obj/random/ironing_board_structure,
+/obj/item/ironing_iron,
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony/bathroom)
 "iz" = (

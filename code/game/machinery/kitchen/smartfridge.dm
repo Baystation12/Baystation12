@@ -152,20 +152,20 @@
 	..()
 	if(inoperable())
 		return
-	if(contents.len)
+	if(length(contents))
 		dry()
 		update_icon()
 
 /obj/machinery/smartfridge/drying_rack/on_update_icon()
 	overlays.Cut()
 	if(inoperable())
-		if(contents.len)
+		if(length(contents))
 			icon_state = "drying_rack-plant-off"
 		else
 			icon_state = "drying_rack-off"
 	else
 		icon_state = "drying_rack"
-	if(contents.len)
+	if(length(contents))
 		icon_state = "drying_rack-plant"
 		if(operable())
 			icon_state = "drying_rack-close"
@@ -235,7 +235,7 @@
 		is_off = "-off"
 
 	// Fridge contents
-	switch(contents.len)
+	switch(length(contents))
 		if(0)
 			I = image(icon, "empty[is_off]")
 		if(1 to 2)
@@ -293,7 +293,7 @@
 
 		if(plants_loaded)
 			user.visible_message(SPAN_NOTICE("\The [user] loads \the [src] with the contents of \the [P]."), SPAN_NOTICE("You load \the [src] with the contents of \the [P]."))
-			if(P.contents.len > 0)
+			if(length(P.contents) > 0)
 				to_chat(user, SPAN_NOTICE("Some items were refused."))
 
 	else if ((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(O))
@@ -351,7 +351,7 @@
 		if(count > 0)
 			items.Add(list(list("display_name" = html_encode(capitalize(I.item_name)), "vend" = i, "quantity" = count)))
 
-	if(items.len > 0)
+	if(length(items) > 0)
 		data["contents"] = items
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)

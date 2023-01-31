@@ -1495,16 +1495,16 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "eh" = (
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /obj/effect/landmark/corpse/lar_maria/test_subject,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "ei" = (
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_ward)
 "ej" = (
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	level = 2
 	},
@@ -1940,7 +1940,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "fo" = (
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},

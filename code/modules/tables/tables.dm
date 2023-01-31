@@ -36,10 +36,16 @@
 	var/new_health = 0
 	if(!material)
 		new_health = 10
+		damage_hitsound = initial(damage_hitsound)
+		health_min_damage = 0
 	else
 		new_health = material.integrity / 2
+		health_min_damage = material.hardness
 		if(reinforced)
 			new_health += reinforced.integrity / 2
+			health_min_damage += reinforced.hardness
+		health_min_damage = round(health_min_damage / 10)
+		damage_hitsound = material.hitsound
 	set_max_health(new_health)
 
 /obj/structure/table/damage_health(damage, damage_type, damage_flags = EMPTY_BITFIELD, severity, skip_can_damage_check = FALSE)
@@ -85,7 +91,7 @@
 	. = ..()
 
 /obj/structure/table/attackby(obj/item/W, mob/user, click_params)
-	if(!reinforced && !carpeted && material && isWrench(W) && user.a_intent == I_HURT) //robots dont have disarm so it's harm
+	if(!reinforced && !carpeted && material && isWrench(W) && user.a_intent != I_HELP) //robots dont have disarm so it's harm
 		remove_material(W, user)
 		if(!material)
 			update_connections(1)
@@ -96,7 +102,7 @@
 			update_material()
 		return 1
 
-	if(!carpeted && !reinforced && !material && isWrench(W) && user.a_intent == I_HURT)
+	if(!carpeted && !reinforced && !material && isWrench(W) && user.a_intent != I_HELP)
 		dismantle(W, user)
 		return 1
 
@@ -467,7 +473,7 @@
 
 	var/list/ret = list(NORTHWEST, SOUTHEAST, NORTHEAST, SOUTHWEST)
 
-	for(var/i = 1 to ret.len)
+	for(var/i = 1 to length(ret))
 		var/dir = ret[i]
 		. = CORNER_NONE
 		if(dir in dirs)

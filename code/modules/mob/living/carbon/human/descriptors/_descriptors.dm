@@ -9,6 +9,8 @@
 		if(user == src)
 			for(var/entry in descriptors)
 				var/datum/mob_descriptor/descriptor = species.descriptors[entry]
+				if (!descriptor)
+					continue
 				LAZYADD(., "[descriptor.get_first_person_message_start()] [descriptor.get_standalone_value_descriptor(descriptors[entry])].")
 		else
 			for(var/entry in descriptors)

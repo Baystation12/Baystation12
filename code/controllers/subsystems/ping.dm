@@ -9,7 +9,7 @@ SUBSYSTEM_DEF(ping)
 
 /datum/controller/subsystem/ping/fire(resumed, no_mc_tick)
 	if (!resumed)
-		if (!chats.len)
+		if (!length(chats))
 			return
 		queue = chats.Copy()
 	var/cut_until = 1

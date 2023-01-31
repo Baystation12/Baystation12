@@ -15,7 +15,7 @@
 	var/list/T = list()
 	for (var/obj/machinery/camera/C in cameranet.cameras)
 		var/list/tempnetwork = C.network&src.network
-		if (tempnetwork.len)
+		if (length(tempnetwork))
 			T[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
 
 	track = new()
@@ -48,7 +48,7 @@
 		to_chat(src, SPAN_WARNING("Must supply a location name"))
 		return
 
-	if(stored_locations.len >= max_locations)
+	if(length(stored_locations) >= max_locations)
 		to_chat(src, SPAN_WARNING("Cannot store additional locations. Remove one first"))
 		return
 
@@ -159,7 +159,7 @@
 	cameraFollow = target
 	to_chat(src, SPAN_NOTICE("Tracking target ..."))
 	cameraFollow.tracking_initiated()
-	addtimer(CALLBACK(src, .proc/ai_actual_track_action), 0, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
+	addtimer(new Callback(src, .proc/ai_actual_track_action), 0, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
 
 
 /mob/living/silicon/ai/proc/ai_actual_track_action()
@@ -168,14 +168,14 @@
 	var/status = cameraFollow.tracking_status()
 	if (status == TRACKING_NO_COVERAGE)
 		to_chat(src, SPAN_WARNING("Target is not near any active cameras."))
-		addtimer(CALLBACK(src, .proc/ai_actual_track_action), 10 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
+		addtimer(new Callback(src, .proc/ai_actual_track_action), 10 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
 		return
 	else if (status == TRACKING_TERMINATE)
 		ai_cancel_tracking(TRUE)
 		return
 	if (eyeobj)
 		eyeobj.setLoc(get_turf(cameraFollow), FALSE)
-		addtimer(CALLBACK(src, .proc/ai_actual_track_action), 1 SECOND, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
+		addtimer(new Callback(src, .proc/ai_actual_track_action), 1 SECOND, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
 		return
 	view_core()
 
@@ -195,7 +195,7 @@
 	var/obj/machinery/camera/a
 	var/obj/machinery/camera/b
 
-	for (var/i = L.len, i > 0, i--)
+	for (var/i = length(L), i > 0, i--)
 		for (var/j = 1 to i - 1)
 			a = L[j]
 			b = L[j + 1]

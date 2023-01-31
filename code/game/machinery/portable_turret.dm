@@ -18,10 +18,11 @@
 	active_power_usage = 300	//when active, this turret takes up constant 300 Equipment power
 	power_channel = EQUIP	//drains power from the EQUIPMENT channel
 
+	health_max = 80
+	health_min_damage = 5
+
 	var/raised = 0			//if the turret cover is "open" and the turret is raised
 	var/raising= 0			//if the turret is currently opening or closing its cover
-	var/health = 80			//the turret's health
-	var/maxhealth = 80		//turrets maximal health.
 	var/auto_repair = 0		//if 1 the turret slowly repairs itself.
 	var/locked = 1			//if the turret's behaviour control access is locked
 	var/controllock = 0		//if the turret responds to control panels
@@ -82,7 +83,7 @@
 	ailock = 0
 	malf_upgraded = 1
 	to_chat(user, "\The [src] has been upgraded. It's damage and rate of fire has been increased. Auto-regeneration system has been enabled. Power usage has increased.")
-	maxhealth = round(initial(maxhealth) * 1.5)
+	set_max_health(round(initial(health_max) * 1.5), FALSE)
 	shot_delay = round(initial(shot_delay) / 2)
 	auto_repair = 1
 	change_power_consumption(round(initial(active_power_usage) * 5), POWER_USE_ACTIVE)
@@ -204,12 +205,12 @@ var/global/list/turret_icons
 
 	if(data["access"])
 		var/settings[0]
-		settings[++settings.len] = list("category" = "Neutralize All Non-Synthetics", "setting" = "check_synth", "value" = check_synth)
-		settings[++settings.len] = list("category" = "Check Weapon Authorization", "setting" = "check_weapons", "value" = check_weapons)
-		settings[++settings.len] = list("category" = "Check Security Records", "setting" = "check_records", "value" = check_records)
-		settings[++settings.len] = list("category" = "Check Arrest Status", "setting" = "check_arrest", "value" = check_arrest)
-		settings[++settings.len] = list("category" = "Check Access Authorization", "setting" = "check_access", "value" = check_access)
-		settings[++settings.len] = list("category" = "Check misc. Lifeforms", "setting" = "check_anomalies", "value" = check_anomalies)
+		settings[LIST_PRE_INC(settings)] = list("category" = "Neutralize All Non-Synthetics", "setting" = "check_synth", "value" = check_synth)
+		settings[LIST_PRE_INC(settings)] = list("category" = "Check Weapon Authorization", "setting" = "check_weapons", "value" = check_weapons)
+		settings[LIST_PRE_INC(settings)] = list("category" = "Check Security Records", "setting" = "check_records", "value" = check_records)
+		settings[LIST_PRE_INC(settings)] = list("category" = "Check Arrest Status", "setting" = "check_arrest", "value" = check_arrest)
+		settings[LIST_PRE_INC(settings)] = list("category" = "Check Access Authorization", "setting" = "check_access", "value" = check_access)
+		settings[LIST_PRE_INC(settings)] = list("category" = "Check misc. Lifeforms", "setting" = "check_anomalies", "value" = check_anomalies)
 		data["settings"] = settings
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -221,7 +222,7 @@ var/global/list/turret_icons
 
 /obj/machinery/porta_turret/proc/HasController()
 	var/area/A = get_area(src)
-	return A && A.turret_controls.len > 0
+	return A && length(A.turret_controls) > 0
 
 /obj/machinery/porta_turret/CanUseTopic(mob/user)
 	if(HasController())
@@ -293,17 +294,18 @@ var/global/list/turret_icons
 				else
 					to_chat(user, SPAN_NOTICE("You remove the turret but did not manage to salvage anything."))
 				qdel(src) // qdel
+			return TRUE
 
 	else if(isWrench(I))
 		if(enabled || raised)
 			to_chat(user, SPAN_WARNING("You cannot unsecure an active turret!"))
-			return
+			return TRUE
 		if(wrenching)
 			to_chat(user, SPAN_WARNING("Someone is already [anchored ? "un" : ""]securing the turret!"))
-			return
+			return TRUE
 		if(!anchored && isinspace())
 			to_chat(user, SPAN_WARNING("Cannot secure turrets in space!"))
-			return
+			return TRUE
 
 		user.visible_message(
 			SPAN_WARNING("\The [user] begins [anchored ? "un" : ""]securing the turret."),
@@ -324,6 +326,7 @@ var/global/list/turret_icons
 				to_chat(user, SPAN_NOTICE("You unsecure the exterior bolts on the turret."))
 				update_icon()
 		wrenching = 0
+		return TRUE
 
 	else if(istype(I, /obj/item/card/id)||istype(I, /obj/item/modular_computer))
 		//Behavior lock/unlock mangement
@@ -333,18 +336,9 @@ var/global/list/turret_icons
 			updateUsrDialog()
 		else
 			to_chat(user, SPAN_NOTICE("Access denied."))
+		return TRUE
 
-	else
-		//if the turret was attacked with the intention of harming it:
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		take_damage(I.force * 0.5)
-		if(I.force * 0.5 > 1) //if the force of impact dealt at least 1 damage, the turret gets pissed off
-			if(!attacked && !emagged)
-				attacked = 1
-				spawn()
-					sleep(60)
-					attacked = 0
-		..()
+	return ..()
 
 /obj/machinery/porta_turret/emag_act(remaining_charges, mob/user)
 	if(!emagged)
@@ -360,17 +354,22 @@ var/global/list/turret_icons
 		enabled = 1 //turns it back on. The cover popUp() popDown() are automatically called in process(), no need to define it here
 		return 1
 
-/obj/machinery/porta_turret/proc/take_damage(force)
-	if(!raised && !raising)
-		force = force / 8
-		if(force < 5)
-			return
+/obj/machinery/porta_turret/damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)
+	if (!raised && !raising)
+		damage = damage / 8
+	. = ..()
 
-	health -= force
-	if (force > 5 && prob(45))
-		spark_system.start()
-	if(health <= 0)
-		die()	//the death process :(
+/obj/machinery/porta_turret/post_health_change(health_mod, damage_type)
+	. = ..()
+	if (health_mod < 0)
+		if (!emagged && enabled)
+			attacked = TRUE
+			addtimer(new Callback(src, .proc/timer_attacked), 6 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
+		if (prob(45))
+			spark_system.start()
+
+/obj/machinery/porta_turret/proc/timer_attacked()
+	attacked = FALSE
 
 /obj/machinery/porta_turret/bullet_act(obj/item/projectile/Proj)
 	var/damage = Proj.get_structure_damage()
@@ -378,16 +377,7 @@ var/global/list/turret_icons
 	if(!damage)
 		return
 
-	if(enabled)
-		if(!attacked && !emagged)
-			attacked = 1
-			spawn()
-				sleep(60)
-				attacked = 0
-
-	..()
-
-	take_damage(damage)
+	. = ..()
 
 /obj/machinery/porta_turret/emp_act(severity)
 	if(enabled)
@@ -403,7 +393,7 @@ var/global/list/turret_icons
 
 	disabled = 1
 	var/power = 4 - severity
-	addtimer(CALLBACK(src,/obj/machinery/porta_turret/proc/enable), rand(60*power,600*power))
+	addtimer(new Callback(src,/obj/machinery/porta_turret/proc/enable), rand(60*power,600*power))
 
 	..()
 
@@ -411,23 +401,10 @@ var/global/list/turret_icons
 	if(disabled)
 		disabled = 0
 
-/obj/machinery/porta_turret/ex_act(severity)
-	switch (severity)
-		if (EX_ACT_DEVASTATING)
-			qdel(src)
-		if (EX_ACT_HEAVY)
-			if (prob(25))
-				qdel(src)
-			else
-				take_damage(initial(health) * 8) //should instakill most turrets
-		if (EX_ACT_LIGHT)
-			take_damage(initial(health) * 8 / 3)
-
-/obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
-	health = 0
-	set_broken(TRUE)
+/obj/machinery/porta_turret/on_death()
 	spark_system.start()	//creates some sparks because they look cool
 	atom_flags |= ATOM_FLAG_CLIMBABLE // they're now climbable
+	..()
 
 /obj/machinery/porta_turret/Process()
 	if(inoperable())
@@ -450,9 +427,9 @@ var/global/list/turret_icons
 		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
 			popDown() // no valid targets, close the cover
 
-	if(auto_repair && (health < maxhealth))
+	if(auto_repair && health_damaged())
 		use_power_oneoff(20000)
-		health = min(health+1, maxhealth) // 1HP for 20kJ
+		restore_health(1)
 
 /obj/machinery/porta_turret/proc/assess_and_assign(mob/living/L, list/targets, list/secondarytargets)
 	switch(assess_living(L))
@@ -519,10 +496,10 @@ var/global/list/turret_icons
 	return H.assess_perp(src, check_access, check_weapons, check_records, check_arrest)
 
 /obj/machinery/porta_turret/proc/tryToShootAt(list/mob/living/targets)
-	if(targets.len && last_target && (last_target in targets) && target(last_target))
+	if(length(targets) && last_target && (last_target in targets) && target(last_target))
 		return 1
 
-	while(targets.len > 0)
+	while(length(targets) > 0)
 		var/mob/living/M = pick(targets)
 		targets -= M
 		if(target(M))

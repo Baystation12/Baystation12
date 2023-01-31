@@ -2,13 +2,13 @@
 /turf/var/dynamic_lighting = TRUE
 /turf/luminosity           = 1
 
-/turf/var/tmp/lighting_corners_initialised = FALSE
+/turf/var/lighting_corners_initialised = FALSE
 
 /// List of light sources affecting this turf.
-/turf/var/tmp/list/datum/light_source/affecting_lights
+/turf/var/list/datum/light_source/affecting_lights
 /// Our lighting overlay.
-/turf/var/tmp/atom/movable/lighting_overlay/lighting_overlay
-/turf/var/tmp/list/datum/lighting_corner/corners
+/turf/var/atom/movable/lighting_overlay/lighting_overlay
+/turf/var/list/datum/lighting_corner/corners
 /turf/var/opaque_counter
 
 /turf/set_opacity(new_opacity)

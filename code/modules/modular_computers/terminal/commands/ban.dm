@@ -18,12 +18,12 @@
 		return syntax_error()
 	if(!ntnet_global || !terminal.computer.get_ntnet_status())
 		return network_error()
-	if(!arguments.len)
-		if (ntnet_global.banned_nids.len)
+	if(!length(arguments))
+		if (length(ntnet_global.banned_nids))
 			return list("[name]: The following network ids are banned:", jointext(ntnet_global.banned_nids, ", "))
 		else
 			return "[name]: There are no banned network ids."
-	else if(arguments.len == 2)
+	else if(length(arguments) == 2)
 		if(!has_access(list(access_network_admin), user.GetAccess()))
 			return "[name]: ACCESS DENIED"
 		var/nid = text2num(arguments[2])

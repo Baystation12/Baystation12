@@ -30,7 +30,7 @@
 
 /obj/item/deck/tarot/attack_self(mob/user as mob)
 	var/list/newcards = list()
-	while(cards.len)
+	while(length(cards))
 		var/datum/playingcard/P = pick(cards)
 		P.name = replacetext(P.name," reversed","")
 		if(prob(50))

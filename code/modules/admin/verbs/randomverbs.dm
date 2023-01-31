@@ -222,7 +222,7 @@
 	var/size
 
 	var/result = cmd_admin_narrate_helper(src, style, size)
-	if (!result)
+	if (!result || !M)
 		return
 
 	to_chat(M, result[1])
@@ -912,7 +912,7 @@ Ccomp's first proc.
 			mode = 1
 	var/affected = 0
 	var/floored = 0
-	for (mob as anything in GLOB.player_list)
+	for (mob in GLOB.player_list)
 		var/living = isliving(mob)
 		if (!living && !isobserver(mob))
 			continue

@@ -98,7 +98,7 @@
 
 	if(duration)
 		set_stat(MACHINE_STAT_EMPED, TRUE)
-		addtimer(CALLBACK(src, .proc/resolve_emp_timer), duration)
+		addtimer(new Callback(src, .proc/resolve_emp_timer), duration)
 
 /obj/machinery/power/port_gen/proc/resolve_emp_timer()
 	set_stat(MACHINE_STAT_EMPED, FALSE)

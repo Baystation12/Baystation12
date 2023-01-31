@@ -23,13 +23,13 @@
 
 /obj/item/gun/projectile/flare/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 2 && loaded.len)
+	if(distance <= 2 && length(loaded))
 		to_chat(user, "\A [loaded[1]] is chambered.")
 
 /obj/item/gun/projectile/flare/special_check()
 	if(length(loaded))
 		var/obj/item/ammo_casing/casing = loaded[1]
-		if(istype(casing) && !istype(casing, /obj/item/ammo_casing/shotgun/flash))
+		if(istype(casing) && istype(casing.BB) && !istype(casing, /obj/item/ammo_casing/shotgun/flash))
 			var/damage = casing.BB.get_structure_damage()
 			if(istype(casing.BB, /obj/item/projectile/bullet/pellet))
 				var/obj/item/projectile/bullet/pellet/PP = casing.BB

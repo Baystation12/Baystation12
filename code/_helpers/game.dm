@@ -242,14 +242,12 @@
 
 
 	// Try to find all the players who can hear the message
-	for(var/i = 1; i <= GLOB.player_list.len; i++)
-		var/mob/M = GLOB.player_list[i]
-		if(M)
-			var/turf/ear = get_turf(M)
-			if(ear)
-				// Ghostship is magic: Ghosts can hear radio chatter from anywhere
-				if(speaker_coverage[ear] || (isghost(M) && M.get_preference_value(/datum/client_preference/ghost_radio) == GLOB.PREF_ALL_CHATTER))
-					. |= M		// Since we're already looping through mobs, why bother using |= ? This only slows things down.
+	for (var/mob/M in GLOB.player_list)
+		var/turf/ear = get_turf(M)
+		if(ear)
+			// Ghostship is magic: Ghosts can hear radio chatter from anywhere
+			if(speaker_coverage[ear] || (isghost(M) && M.get_preference_value(/datum/client_preference/ghost_radio) == GLOB.PREF_ALL_CHATTER))
+				. |= M		// Since we're already looping through mobs, why bother using |= ? This only slows things down.
 	return .
 
 /proc/get_mobs_and_objs_in_view_fast(turf/T, range, list/mobs, list/objs, checkghosts = null)
@@ -349,7 +347,7 @@
 
 	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
 	var/i = 0
-	while(candidates.len <= 0 && i < 5)
+	while(length(candidates) <= 0 && i < 5)
 		for(var/mob/observer/ghost/G in GLOB.player_list)
 			if(((G.client.inactivity/10)/60) <= buffer + i) // the most active players are more likely to become an alien
 				if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
@@ -442,7 +440,7 @@
 	var/list/greens = list()
 	var/list/weights = list()
 
-	for (var/i = 0, ++i <= colors.len)
+	for (var/i = 0, ++i <= length(colors))
 		reds.Add(GetRedPart(colors[i]))
 		blues.Add(GetBluePart(colors[i]))
 		greens.Add(GetGreenPart(colors[i]))
@@ -521,10 +519,10 @@
 			if(WEST)
 				direction = 4
 		var/turf/simulated/T=get_turf(get_step(loc,dir))
-		var/list/rstats = new /list(stats.len)
+		var/list/rstats = new /list(length(stats))
 		if(T && istype(T) && T.zone)
 			var/datum/gas_mixture/environment = T.return_air()
-			for(var/i=1;i<=stats.len;i++)
+			for(var/i=1;i<=length(stats);i++)
 				if(stats[i] == "pressure")
 					rstats[i] = environment.return_pressure()
 				else
@@ -534,7 +532,7 @@
 		else if(istype(T, /turf))
 			// Should still work.  (/turf/return_air())
 			var/datum/gas_mixture/environment = T.return_air()
-			for(var/i=1;i<=stats.len;i++)
+			for(var/i=1;i<=length(stats);i++)
 				if(stats[i] == "pressure")
 					rstats[i] = environment.return_pressure()
 				else
@@ -549,7 +547,7 @@
 	return seconds * 10
 
 /proc/round_is_spooky(spookiness_threshold = config.cult_ghostwriter_req_cultists)
-	return (GLOB.cult.current_antagonists.len > spookiness_threshold)
+	return (length(GLOB.cult.current_antagonists) > spookiness_threshold)
 
 /proc/getviewsize(view)
 	var/viewX

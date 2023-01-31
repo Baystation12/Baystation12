@@ -303,7 +303,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 		return 0
 	if(!islist(targets))
 		targets = list(targets)
-	else if(!targets.len)
+	else if(!length(targets))
 		return 0
 
 	var/list/valid_targets = view_or_range(range, holder, selection_type)

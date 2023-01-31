@@ -31,7 +31,7 @@
 	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
 
 	var/obj/item/grenade/next
-	if(grenades.len)
+	if(length(grenades))
 		next = grenades[1] //get this first, so that the chambered grenade can still be removed if the grenades list is empty
 	if(chambered)
 		grenades += chambered //rotate the revolving magazine
@@ -47,7 +47,7 @@
 /obj/item/gun/launcher/grenade/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 2)
-		var/grenade_count = grenades.len + (chambered? 1 : 0)
+		var/grenade_count = length(grenades) + (chambered? 1 : 0)
 		to_chat(user, "Has [grenade_count] grenade\s remaining.")
 		if(chambered)
 			to_chat(user, "\A [chambered] is chambered.")
@@ -56,7 +56,7 @@
 	if(!can_load_grenade_type(G, user))
 		return
 
-	if(grenades.len >= max_grenades)
+	if(length(grenades) >= max_grenades)
 		to_chat(user, SPAN_WARNING("\The [src] is full."))
 		return
 	if(!user.unEquip(G, src))
@@ -65,9 +65,9 @@
 	user.visible_message("\The [user] inserts \a [G] into \the [src].", SPAN_NOTICE("You insert \a [G] into \the [src]."))
 
 /obj/item/gun/launcher/grenade/proc/unload(mob/user)
-	if(grenades.len)
-		var/obj/item/grenade/G = grenades[grenades.len]
-		grenades.len--
+	if(length(grenades))
+		var/obj/item/grenade/G = grenades[length(grenades)]
+		LIST_DEC(grenades)
 		user.put_in_hands(G)
 		user.visible_message("\The [user] removes \a [G] from [src].", SPAN_NOTICE("You remove \a [G] from \the [src]."))
 	else

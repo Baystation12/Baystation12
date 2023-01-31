@@ -22,7 +22,7 @@
 	// Create the origin cell to start us off.
 	openlist += new /datum/maze_cell(start_x,start_y)
 
-	while(openlist.len)
+	while(length(openlist))
 		// Grab a maze point to use and remove it from the open list.
 		var/datum/maze_cell/next = pick(openlist)
 		openlist -= next

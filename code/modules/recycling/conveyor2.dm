@@ -83,8 +83,8 @@
 		if(!AM.anchored && AM.simulated)
 			affecting += AM
 			items_moved++
-	if(affecting.len)
-		addtimer(CALLBACK(src, .proc/post_process, affecting), 1) // slight delay to prevent infinite propagation due to map order
+	if(length(affecting))
+		addtimer(new Callback(src, .proc/post_process, affecting), 1) // slight delay to prevent infinite propagation due to map order
 
 /obj/machinery/conveyor/proc/post_process(list/affecting)
 	for(var/A in affecting)

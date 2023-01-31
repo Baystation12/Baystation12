@@ -2,8 +2,8 @@
 	name = SPECIES_UNATHI
 	name_plural = SPECIES_UNATHI
 	icon_template = 'icons/mob/human_races/species/template_tall.dmi'
-	icobase = 'icons/mob/human_races/species/unathi/body.dmi'
-	deform = 'icons/mob/human_races/species/unathi/deformed_body.dmi'
+	icobase = 'icons/mob/human_races/species/unathi/skin.dmi'
+	deform = 'icons/mob/human_races/species/unathi/deformed.dmi'
 	husk_icon = 'icons/mob/human_races/species/unathi/husk.dmi'
 	preview_icon = 'icons/mob/human_races/species/unathi/preview.dmi'
 	bandages_icon = 'icons/mob/bandage.dmi'
@@ -157,6 +157,10 @@
 		/singleton/trait/boon/filtered_blood = TRAIT_LEVEL_EXISTS,
 		/singleton/trait/boon/cast_iron_stomach = TRAIT_LEVEL_EXISTS,
 		/singleton/trait/malus/sugar = TRAIT_LEVEL_MAJOR
+	)
+
+	footwear_trail_overrides = list(
+		/obj/item/clothing = /obj/effect/decal/cleanable/blood/tracks/claw // Needs to apply to both shoes and space suits.
 	)
 
 /datum/species/unathi/equip_survival_gear(mob/living/carbon/human/H)

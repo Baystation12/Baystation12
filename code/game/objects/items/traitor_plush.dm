@@ -28,16 +28,16 @@
 /obj/item/reagent_containers/food/snacks/dehydrated_carp/on_reagent_change()
 	if (reagents.has_reagent(/datum/reagent/water))
 		visible_message(SPAN_WARNING("\The [src] begins to shake as the liquid touches it."))
-		addtimer(CALLBACK(src, .proc/expand), 5 SECONDS)
+		addtimer(new Callback(src, .proc/expand), 5 SECONDS)
 
 /obj/item/reagent_containers/food/snacks/dehydrated_carp/proc/expand()
 	visible_message(SPAN_WARNING("\The [src] rapidly expands into a living space carp!"))
 	new spawned_mob(get_turf(src))
 	qdel(src)
 
-/obj/item/reagent_containers/food/snacks/dehydrated_carp/get_antag_info()
+/obj/item/reagent_containers/food/snacks/dehydrated_carp/get_antag_interactions_info()
 	. = ..()
-	. += "You can add water to this plushie to hydrate it, transforming it into a living space carp after a short delay. Be careful, as the carp will be hostile to you too!"
+	.["Water"] += "<p>Hydrates the plushie, transforming it into a living space carp after a short delay. Be careful, as the carp will be hostile to you too!</p>"
 
 /obj/item/plushbomb
 	name = "kitten plush"
@@ -73,7 +73,7 @@
 	if (!phrase)
 		return
 	if (findtext(sanitize_phrase(msg), phrase))
-		addtimer(CALLBACK(src, .proc/activate), 5 SECONDS)
+		addtimer(new Callback(src, .proc/activate), 5 SECONDS)
 		audible_message(SPAN_DANGER("\The [src] begins to beep ominously, letting out a loud '[last_words]'!"))
 		playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 

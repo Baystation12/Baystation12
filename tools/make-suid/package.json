@@ -1,0 +1,9 @@
+{
+  "name": "make-suid",
+  "description": "Creates ~ prefixed 62^15 space unique IDs on demand.",
+  "version": "1.0.0",
+  "type":"module",
+  "contributors": [
+      "spookerton <spkrtn@pm.me> (https://github.com/spookerton)"
+  ]
+}

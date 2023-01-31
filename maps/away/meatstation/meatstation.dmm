@@ -2958,7 +2958,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/meatstation/storage)
 "gH" = (
-/obj/item/ironingiron,
+/obj/item/ironing_iron,
 /obj/structure/table/glass,
 /obj/item/reagent_containers/pill/detergent,
 /obj/item/storage/box/detergent,
@@ -3155,7 +3155,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 4
 	},
@@ -3429,7 +3429,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 4
 	},
@@ -3514,7 +3514,7 @@
 /area/meatstation/hydroponics)
 "hW" = (
 /obj/structure/window/basic,
-/obj/structure/bed/roller/ironingboard,
+/obj/random/ironing_board_structure,
 /obj/effect/floor_decal/corner/b_green/border{
 	dir = 8
 	},
@@ -4663,7 +4663,7 @@
 /area/space)
 "kS" = (
 /obj/structure/table/woodentable/ebony,
-/obj/structure/flora/pottedplant/deskferntrim,
+/obj/item/flora/pottedplantsmall/fern,
 /turf/simulated/floor/carpet/blue2,
 /area/meatstation/dorm)
 "kT" = (
@@ -8250,7 +8250,7 @@
 /turf/simulated/floor/tiled,
 /area/meatstation/centerhallway)
 "uc" = (
-/obj/structure/bed/roller,
+/obj/structure/roller_bed,
 /obj/effect/floor_decal/corner/black/border{
 	dir = 1
 	},
@@ -10521,7 +10521,7 @@
 /area/meatstation/lab)
 "zH" = (
 /obj/structure/window/basic,
-/obj/structure/bed/roller/ironingboard,
+/obj/random/ironing_board_structure,
 /obj/random/maintenance/clean,
 /obj/item/cell/high,
 /turf/simulated/floor/tiled/dark/monotile,

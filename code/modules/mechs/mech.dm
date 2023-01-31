@@ -12,6 +12,7 @@
 	status_flags = PASSEMOTES
 	a_intent =     I_HURT
 	mob_size =     MOB_LARGE
+	mob_push_flags = ALLMOBS
 	mob_flags = MOB_FLAG_UNPINNABLE
 
 	meat_type = null
@@ -142,13 +143,8 @@
 
 	selected_system = null
 
-	for(var/thing in pilots)
-		var/mob/pilot = thing
-		if(pilot && pilot.client)
-			pilot.client.screen -= hud_elements
-			pilot.client.images -= hud_elements
-		pilot.forceMove(get_turf(src))
-	pilots = null
+	for (var/mob/pilot as anything in pilots)
+		remove_pilot(pilot)
 
 	hud_health = null
 	hud_open = null
@@ -156,13 +152,12 @@
 	hud_power_control = null
 	hud_camera = null
 
-	for(var/thing in hud_elements)
-		qdel(thing)
-	hud_elements.Cut()
+	QDEL_NULL_LIST(hud_elements)
 
-	for(var/hardpoint in hardpoints)
+	for (var/hardpoint in hardpoints)
 		qdel(hardpoints[hardpoint])
 	hardpoints.Cut()
+	hardpoints = null
 
 	QDEL_NULL(access_card)
 	QDEL_NULL(arms)
@@ -176,6 +171,7 @@
 		H.holding = null
 		qdel(H)
 	hardpoint_hud_elements.Cut()
+	hardpoint_hud_elements = null
 
 	. = ..()
 
@@ -187,8 +183,8 @@
 	if(LAZYLEN(pilots) && (!hatch_closed || body.pilot_coverage < 100 || body.transparent_cabin))
 		to_chat(user, "It is being piloted by [english_list(pilots, nothing_text = "nobody")].")
 	if(body && LAZYLEN(body.pilot_positions))
-		to_chat(user, "It can seat [body.pilot_positions.len] pilot\s total.")
-	if(hardpoints.len)
+		to_chat(user, "It can seat [length(body.pilot_positions)] pilot\s total.")
+	if(length(hardpoints))
 		to_chat(user, "It has the following hardpoints:")
 		for(var/hardpoint in hardpoints)
 			var/obj/item/I = hardpoints[hardpoint]

@@ -155,8 +155,8 @@
 		return FALSE
 	if (istype(A, /turf/simulated/floor))
 		var/turf/simulated/floor/F = A
-		if (F.decals && F.decals.len > 0)
-			F.decals.len--
+		if (F.decals && length(F.decals) > 0)
+			LIST_DEC(F.decals)
 			F.update_icon()
 			. = TRUE
 	else if (istype(A, /obj/machinery/door/airlock))
@@ -175,13 +175,13 @@
 	return .
 
 /obj/item/device/paint_sprayer/proc/pick_color_from_floor(turf/simulated/floor/F, mob/user)
-	if (!F.decals || !F.decals.len)
+	if (!F.decals || !length(F.decals))
 		return FALSE
 	var/list/available_colors = list()
 	for (var/image/I in F.decals)
 		available_colors |= isnull(I.color) ? COLOR_WHITE : I.color
 	var/picked_color = available_colors[1]
-	if (available_colors.len > 1)
+	if (length(available_colors) > 1)
 		picked_color = input(user, "Which color do you wish to pick from?") as null|anything in available_colors
 		if (user.incapacitated() || !user.Adjacent(F))
 			return FALSE
@@ -210,7 +210,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] flashes an error light. You might need to reconfigure it."))
 		return FALSE
 
-	if((F.decals && F.decals.len > 5) && !ispath(painting_decal, /obj/effect/floor_decal/reset))
+	if((F.decals && length(F.decals) > 5) && !ispath(painting_decal, /obj/effect/floor_decal/reset))
 		to_chat(user, SPAN_WARNING("\The [F] has been painted too much; you need to clear it off."))
 		return FALSE
 
@@ -274,11 +274,11 @@
 /obj/item/device/paint_sprayer/proc/select_airlock_region(obj/machinery/door/airlock/D, mob/user, input_text)
 	var/choice
 	var/list/choices = list()
-	if (D.paintable & AIRLOCK_PAINTABLE)
+	if (D.paintable & AIRLOCK_PAINTABLE_MAIN)
 		choices |= AIRLOCK_REGION_PAINT
-	if (D.paintable & AIRLOCK_STRIPABLE)
+	if (D.paintable & AIRLOCK_PAINTABLE_STRIPE)
 		choices |= AIRLOCK_REGION_STRIPE
-	if (D.paintable & AIRLOCK_WINDOW_PAINTABLE)
+	if (D.paintable & AIRLOCK_PAINTABLE_WINDOW)
 		choices |= AIRLOCK_REGION_WINDOW
 	choice = input(user, input_text) as null|anything in sortList(choices)
 	if (user.incapacitated() || !D || !user.Adjacent(D))

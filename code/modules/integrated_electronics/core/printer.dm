@@ -97,7 +97,7 @@
 		if(EA.battery)
 			to_chat(user, SPAN_WARNING("Remove [EA]'s power cell first!"))
 			return
-		if(EA.assembly_components.len)
+		if(length(EA.assembly_components))
 			if(recycling)
 				return
 			if(!EA.opened)
@@ -115,7 +115,7 @@
 			recycling = TRUE
 			for(var/V in EA.assembly_components)
 				recycle(V, null, EA)
-			to_chat(user, SPAN_NOTICE("You recycle all the components[EA.assembly_components.len ? " you could " : " "]from [EA]!"))
+			to_chat(user, SPAN_NOTICE("You recycle all the components[length(EA.assembly_components) ? " you could " : " "]from [EA]!"))
 			playsound(src, 'sound/items/electronic_assembly_empty.ogg', 50, TRUE)
 			recycling = FALSE
 			return TRUE
@@ -305,7 +305,7 @@
 					to_chat(usr, SPAN_NOTICE("You begin printing a custom assembly. This will take approximately [round(cloning_time/10)] seconds. You can still print \
 					off normal parts during this time."))
 					playsound(src, 'sound/items/poster_being_created.ogg', 50, TRUE)
-					addtimer(CALLBACK(src, .proc/print_program, usr), cloning_time)
+					addtimer(new Callback(src, .proc/print_program, usr), cloning_time)
 
 			if("cancel")
 				if(!cloning || !program)

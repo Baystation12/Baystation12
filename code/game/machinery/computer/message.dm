@@ -68,7 +68,7 @@
 /obj/machinery/computer/message_monitor/Initialize()
 	//Is the server isn't linked to a server, and there's a server available, default it to the first one in the list.
 	if(!linkedServer)
-		if(message_servers && message_servers.len > 0)
+		if(message_servers && length(message_servers) > 0)
 			linkedServer = message_servers[1]
 	return ..()
 
@@ -229,10 +229,10 @@
 		if(auth) linkedServer.active = !linkedServer.active
 	//Find a server
 	if (href_list["find"])
-		if(message_servers && message_servers.len > 1)
+		if(message_servers && length(message_servers) > 1)
 			src.linkedServer = input(usr,"Please select a server.", "Select a server.", null) as null|anything in message_servers
 			message = SPAN_CLASS("alert", "NOTICE: Server selected.")
-		else if(message_servers && message_servers.len > 0)
+		else if(message_servers && length(message_servers) > 0)
 			linkedServer = message_servers[1]
 			message =  SPAN_NOTICE("NOTICE: Only Single Server Detected - Server selected.")
 		else

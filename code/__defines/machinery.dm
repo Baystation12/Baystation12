@@ -30,6 +30,7 @@
 
 #define MACHINE_BROKEN_GENERIC  FLAG(0)  // Standard legacy brokenness, used on a case-by-case basis
 #define MACHINE_BROKEN_NO_PARTS FLAG(1)  // Missing required parts
+#define MACHINE_BROKEN_HEALTH   FLAG(2)  // Standardized health state is dead
 
 #define MACHINE_IS_BROKEN(MACHINE) (!!MACHINE.reason_broken)
 

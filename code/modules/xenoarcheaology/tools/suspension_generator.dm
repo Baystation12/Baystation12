@@ -30,7 +30,7 @@
 			use_power_oneoff(active_power_usage * victims)
 
 		for(var/obj/item/I in T)
-			if(!suspension_field.contents.len)
+			if(!length(suspension_field.contents))
 				suspension_field.icon_state = "energynet"
 				suspension_field.overlays += "shield2"
 			I.forceMove(suspension_field)

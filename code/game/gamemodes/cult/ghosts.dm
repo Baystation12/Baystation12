@@ -71,7 +71,7 @@
 			if(B.amount > 0)
 				choices += B
 
-		if(!choices.len)
+		if(!length(choices))
 			to_chat(src, SPAN_WARNING("There is no blood to use nearby."))
 			return
 
@@ -147,7 +147,7 @@
 		if(I.w_class <= 2)
 			choices += I
 
-	if(!choices.len)
+	if(!length(choices))
 		to_chat(src, SPAN_WARNING("There are no suitable items nearby."))
 		return
 

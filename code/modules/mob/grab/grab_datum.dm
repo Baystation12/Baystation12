@@ -302,7 +302,7 @@
 		to_chat(G.affecting, SPAN_WARNING("You try to break free but feel that unless something changes, you'll never escape!"))
 		return
 
-	var/break_chance = break_chance_table[clamp(break_strength, 1, break_chance_table.len)]
+	var/break_chance = break_chance_table[clamp(break_strength, 1, length(break_chance_table))]
 	if(prob(break_chance))
 		if(can_downgrade_on_resist && !prob((break_chance+100)/2))
 			affecting.visible_message(SPAN_WARNING("[affecting] has loosened [assailant]'s grip!"))

@@ -433,7 +433,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	if(!T1) return
 
 	var/list/powerlist = power_list(T1,src,0,0) //find the other cables that ended in the centre of the turf, with or without a powernet
-	if(powerlist.len>0)
+	if(length(powerlist)>0)
 		var/datum/powernet/PN = new()
 		propagate_network(powerlist[1],PN) //propagates the new powernet beginning at the source cable
 
@@ -452,7 +452,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	P_list += power_list(loc, src, d1, 0, cable_only = 1)//... and on turf
 
 
-	if(P_list.len == 0)//if nothing in both list, then the cable was a lone cable, just delete it and its powernet
+	if(length(P_list) == 0)//if nothing in both list, then the cable was a lone cable, just delete it and its powernet
 		powernet.remove_cable(src)
 
 		for(var/obj/machinery/power/P in T1)//check if it was powering a machine

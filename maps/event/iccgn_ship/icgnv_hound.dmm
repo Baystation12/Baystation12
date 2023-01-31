@@ -1169,7 +1169,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/borderfloorblack/corner,
-/obj/structure/iv_drip,
+/obj/structure/iv_stand,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
 "XY" = (

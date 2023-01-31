@@ -11,7 +11,7 @@
 /obj/item/gun/projectile/pistol/on_update_icon()
 	..()
 	if(empty_icon)
-		if(ammo_magazine && ammo_magazine.stored_ammo.len)
+		if(ammo_magazine && length(ammo_magazine.stored_ammo))
 			icon_state = initial(icon_state)
 		else
 			icon_state = "[initial(icon_state)]-e"
@@ -39,7 +39,7 @@
 
 /obj/item/gun/projectile/pistol/magnum_pistol
 	name = "magnum pistol"
-	desc = "The HelTek Magnus, a robust Terran handgun that uses high-caliber ammo."
+	desc = "The HelTek Magnus, a robust handgun that uses high-caliber ammo. Issued to Confederation Pioneers for holster sized defence."
 	icon = 'icons/obj/guns/magnum_pistol.dmi'
 	icon_state = "magnum"
 	item_state = "magnum"
@@ -59,7 +59,7 @@
 
 /obj/item/gun/projectile/pistol/throwback
 	name = "pistol"
-	desc = "A product of one of thousands of illegal workshops from around the galaxy. Often replicas of ancient Earth handguns, these guns are usually found in hands of frontier colonists and pirates."
+	desc = "A product of one of thousands of illegal workshops from around the galaxy. This one appears to be a clone of a 20th century design."
 	icon = 'icons/obj/guns/pistol_throwback.dmi'
 	icon_state = "pistol1"
 	magazine_type = /obj/item/ammo_magazine/pistol/throwback
@@ -77,7 +77,7 @@
 
 /obj/item/gun/projectile/pistol/throwback/on_update_icon()
 	..()
-	if(ammo_magazine && ammo_magazine.stored_ammo.len)
+	if(ammo_magazine && length(ammo_magazine.stored_ammo))
 		icon_state = base_icon
 	else
 		icon_state = "[base_icon]-e"
@@ -158,7 +158,7 @@
 		icon_state = "pistol-silencer"
 	else
 		icon_state = "pistol"
-	if(!(ammo_magazine && ammo_magazine.stored_ammo.len))
+	if(!(ammo_magazine && length(ammo_magazine.stored_ammo)))
 		icon_state = "[icon_state]-e"
 
 /obj/item/silencer
@@ -190,7 +190,7 @@
 			burst=1,
 			fire_delay=5,
 			move_delay=null,
-			one_hand_penalty=5,
+			one_hand_penalty=3,
 			burst_accuracy=null,
 			dispersion=null
 			),

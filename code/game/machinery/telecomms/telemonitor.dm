@@ -36,7 +36,7 @@
 		if(0)
 			dat += "<br>[temp]<br><br>"
 			dat += "<br>Current Network: <a href='?src=\ref[src];network=1'>[network]</a><br>"
-			if(machinelist.len)
+			if(length(machinelist))
 				dat += "<br>Detected Network Entities:<ul>"
 				for(var/obj/machinery/telecomms/T in machinelist)
 					dat += "<li><a href='?src=\ref[src];viewmachine=[T.id]'>\ref[T] [T.name]</a> ([T.id])</li>"
@@ -92,7 +92,7 @@
 				screen = 0
 
 			if("probe")
-				if(machinelist.len > 0)
+				if(length(machinelist) > 0)
 					temp = SPAN_COLOR("#d70b00", "- FAILED: CANNOT PROBE WHEN BUFFER FULL -")
 
 				else
@@ -100,10 +100,10 @@
 						if(T.network == network)
 							machinelist.Add(T)
 
-					if(!machinelist.len)
+					if(!length(machinelist))
 						temp = SPAN_COLOR("#d70b00", "- FAILED: UNABLE TO LOCATE NETWORK ENTITIES IN \[[network]\] -")
 					else
-						temp = SPAN_COLOR("#336699", "- [machinelist.len] ENTITIES LOCATED & BUFFERED -")
+						temp = SPAN_COLOR("#336699", "- [length(machinelist)] ENTITIES LOCATED & BUFFERED -")
 
 					screen = 0
 
