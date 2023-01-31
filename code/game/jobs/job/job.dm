@@ -363,25 +363,25 @@
 /datum/job/proc/get_unavailable_reasons(client/caller)
 	var/list/reasons = list()
 	if(jobban_isbanned(caller, title))
-		reasons["You are jobbanned."] = TRUE
+		reasons["У Вас имеются джоббаны."] = TRUE
 	if(is_semi_antagonist && jobban_isbanned(caller, MODE_MISC_AGITATOR))
-		reasons["You are semi-antagonist banned."] = TRUE
+		reasons["У Вас джоббан на роль полу-антагониста."] = TRUE
 	if(!player_old_enough(caller))
-		reasons["Your player age is too low."] = TRUE
+		reasons["С Вашего первого входа на сервер прошло мало времени."] = TRUE
 	if(!is_position_available())
-		reasons["There are no positions left."] = TRUE
+		reasons["Не осталось доступных ролей."] = TRUE
 	if(!isnull(allowed_branches) && (!caller.prefs.branches[title] || !is_branch_allowed(caller.prefs.branches[title])))
-		reasons["Your branch of service does not allow it."] = TRUE
+		reasons["Ваша служебная ветка имеет ограничения."] = TRUE
 	else if(!isnull(allowed_ranks) && (!caller.prefs.ranks[title] || !is_rank_allowed(caller.prefs.branches[title], caller.prefs.ranks[title])))
-		reasons["Your rank choice does not allow it."] = TRUE
+		reasons["Ваш служебный ранг имеет ограничения."] = TRUE
 	if (!is_species_whitelist_allowed(caller))
-		reasons["You do not have the required [use_species_whitelist] species whitelist."] = TRUE
+		reasons["Вас нет в вайлисте расы [use_species_whitelist]."] = TRUE
 	var/datum/species/S = all_species[caller.prefs.species]
 	if(S)
 		if(!is_species_allowed(S))
-			reasons["Your species choice does not allow it."] = TRUE
+			reasons["Ваша раса имеет ограничения."] = TRUE
 		if(!S.check_background(src, caller.prefs))
-			reasons["Your background choices do not allow it."] = TRUE
+			reasons["Предыстория персонажа имеет ограничения."] = TRUE
 	if(LAZYLEN(reasons))
 		. = reasons
 
