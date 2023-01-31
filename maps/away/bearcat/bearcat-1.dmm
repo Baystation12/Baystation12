@@ -129,6 +129,9 @@
 	dir = 4
 	},
 /obj/machinery/door/window/southright,
+/obj/machinery/mass_driver{
+	dir = 1
+	},
 /turf/simulated/floor/airless,
 /area/ship/scrap/escape_port)
 "at" = (
@@ -192,6 +195,9 @@
 	dir = 4
 	},
 /obj/machinery/door/window/southright,
+/obj/machinery/mass_driver{
+	dir = 1
+	},
 /turf/simulated/floor/airless,
 /area/ship/scrap/escape_star)
 "ay" = (
@@ -2687,6 +2693,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/escape_port)
+"uU" = (
+/obj/machinery/door/blast/regular,
+/turf/simulated/floor/airless,
+/area/ship/scrap/escape_port)
 "va" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -2789,10 +2799,36 @@
 "Ul" = (
 /turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/storage)
+"Uy" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/door/window/southright,
+/obj/machinery/mass_driver{
+	dir = 1
+	},
+/obj/machinery/lifepod,
+/turf/simulated/floor/airless,
+/area/ship/scrap/escape_port)
 "UZ" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/gambling)
+"WM" = (
+/obj/machinery/door/blast/regular,
+/turf/simulated/floor/airless,
+/area/ship/scrap/escape_star)
+"YR" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/door/window/southright,
+/obj/machinery/mass_driver{
+	dir = 1
+	},
+/obj/machinery/lifepod,
+/turf/simulated/floor/airless,
+/area/ship/scrap/escape_star)
 
 (1,1,1) = {"
 aa
@@ -8954,8 +8990,8 @@ aa
 aa
 aa
 kH
-ai
-ar
+uU
+Uy
 aA
 aL
 aW
@@ -10906,8 +10942,8 @@ aa
 aa
 aa
 kH
-ap
-ax
+WM
+YR
 aJ
 aU
 bh
