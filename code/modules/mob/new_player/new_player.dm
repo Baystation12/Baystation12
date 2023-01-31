@@ -219,6 +219,10 @@
 	if(href_list["lobby_crew"])
 		ViewManifest()
 
+	if (href_list["invalid_jobs"])
+		show_invalid_jobs = !show_invalid_jobs
+		LateChoices()
+
 	if(href_list["SelectedJob"])
 		var/datum/job/job = SSjobs.get_by_title(href_list["SelectedJob"])
 
@@ -328,70 +332,156 @@
 	var/name = client.prefs.real_name
 
 	var/list/header = list("<html><body><center>")
-	header += "<b>Welcome, [name].<br></b>"
-	header += "Round Duration: [roundduration2text()]<br>"
+	header += "<b>Добро пожаловать, [name].<br></b>"
+	header += "Длительность раунда: [roundduration2text()]<br>"
 
 	if(evacuation_controller.has_evacuated())
-		header += "[SPAN_COLOR("red", "<b>\The [station_name()] has been evacuated.</b>")]<br>"
+		header += "[SPAN_COLOR("red", "<b>[station_name()] была эвакуирована.</b>")]<br>"
 	else if(evacuation_controller.is_evacuating())
 		if(evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
-			header += "[SPAN_COLOR("red", "\The [station_name()] is currently undergoing evacuation procedures.")]<br>"
+			header += "[SPAN_COLOR("red", "[station_name()] в текущий момент эвакуируется.")]<br>"
 		else                                           // Crew transfer initiated
-			header += "[SPAN_COLOR("red", "\The [station_name()] is currently undergoing crew transfer procedures.")]<br>"
+			header += "[SPAN_COLOR("red", "[station_name()] перемещается в следующий сектор.")]<br>"
 
 	var/list/dat = list()
-	dat += "Choose from the following open/valid positions:<br>"
-	dat += "<a href='byond://?src=\ref[src];invalid_jobs=1'>[show_invalid_jobs ? "Hide":"Show"] unavailable jobs.</a><br>"
+	dat += "Выберите одну из доступных ролей:<br>"
+	dat += "<a href='byond://?src=\ref[src];invalid_jobs=1'>[show_invalid_jobs ? "Скрыть":"Показать"] недоступные профессии</a><br>"
 	dat += "<table>"
-	dat += "<tr><td colspan = 3><b>[GLOB.using_map.station_name]:</b></td></tr>"
+	dat += "<tr><td align = 'center' colspan = 3><b>[GLOB.using_map.station_name]:</b></td></tr>"
+
+	var/list/categorizedJobs = list(
+		"Командование" =         list(jobs = list(), dep = COM, color = "#aac1ee"),
+		"Младшее командование" = list(jobs = list(), dep = SPT, color = "#aac1ee"),
+		"Инженерия" =     list(jobs = list(), dep = ENG, color = "#ffd699"),
+		"Служба безопасности" =        list(jobs = list(), dep = SEC, color = "#ff9999"),
+		"Разное" =   list(jobs = list(), dep = CIV, color = "#ffffff", colBreak = 1),
+		"Синтетики" =       list(jobs = list(), dep = MSC, color = "#ccffcc"),
+		"Сервис" =         list(jobs = list(), dep = SRV, color = "#cccccc"),
+		"Медицина" =         list(jobs = list(), dep = MED, color = "#99ffe6"),
+		"Наука" =         list(jobs = list(), dep = SCI, color = "#e6b3e6", colBreak = 1),
+		"Карго" =          list(jobs = list(), dep = SUP, color = "#ead4ae"),
+		"Экспедиция" =      list(jobs = list(), dep = EXP, color = "#ffd699"),
+		"ОШИБКА" =           list(jobs = list(), color = "#ffffff", colBreak = 1)
+	)
 
 	// TORCH JOBS
 	var/list/job_summaries
 	var/list/hidden_reasons = list()
+	var/catcheck
 	for(var/datum/job/job in SSjobs.primary_job_datums)
 		var/summary = job.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[job.title]", show_invalid_jobs)
+		if(job.department_flag)
+			catcheck |= job.department_flag
 		if(summary && summary != "")
-			LAZYADD(job_summaries, summary)
+			for(var/category in categorizedJobs)
+				var/list/jobs = list()
+
+				if(job.department_flag & categorizedJobs[category]["dep"])
+					LAZYADD(jobs, job)
+
+				if(category == "ОШИБКА")
+					if(!job.department_flag)
+						LAZYADD(jobs, job)
+						continue
+
+					var/check = FALSE
+					for(var/categ in categorizedJobs)
+						if(job in categorizedJobs[categ]["jobs"])
+							check = TRUE
+							continue
+					if(!check)
+						LAZYADD(jobs, job)
+
+				if(length(jobs))
+					categorizedJobs[category]["jobs"] += jobs
 		else
 			for(var/raisin in job.get_unavailable_reasons(client))
 				hidden_reasons[raisin] = TRUE
 
-	if(LAZYLEN(job_summaries))
-		dat += job_summaries
-	else
-		dat += "<tr><td>No available positions.</td></tr>"
+	dat += "<tr><td valign='top'>"
+	for(var/jobcat in categorizedJobs)
+
+		if(categorizedJobs[jobcat]["colBreak"])
+			dat += "</td><td valign='top'>"
+
+		if((length(categorizedJobs[jobcat]["jobs"]) < 1) && (jobcat == "ERROR"))
+			continue
+
+		var/flag = categorizedJobs[jobcat]["dep"]
+		if(!flag)
+			log_admin("[jobcat] НЕТ ФЛАГА КАТЕГОРИИ.")
+			message_staff("[jobcat] НЕТ ФЛАГА КАТЕГОРИИ.")
+			continue
+		else if(!(catcheck & flag))
+			continue
+
+		var/color = categorizedJobs[jobcat]["color"]
+		dat += "<fieldset style='width: 250px; border: 2px solid [color]; display: inline'>"
+		dat += "<legend align='center' style='color: [color]'>[jobcat]</legend>"
+		dat += "<table align = 'center'>"
+		if(length(categorizedJobs[jobcat]["jobs"]) < 1)
+			dat += "<tr><td></td><td align = 'center'><i>Нет доступных ролей.</i><br></td></tr>"
+			dat += "</table>"
+			dat += "</fieldset><br>"
+			continue
+		for(var/datum/job/prof in categorizedJobs[jobcat]["jobs"])
+			if(jobcat == "Командование")
+				if(istype(prof, /datum/job/captain))
+					dat += prof.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[prof.title]", show_invalid_jobs, TRUE)
+				else
+					dat += prof.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[prof.title]", show_invalid_jobs)
+			else if(prof.department_flag & COM)
+				dat += prof.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[prof.title]", show_invalid_jobs, TRUE)
+			else
+				dat += prof.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[prof.title]", show_invalid_jobs)
+		dat += "</table>"
+		dat += "</fieldset><br>"
+	dat += "</td></tr></table>"
 	// END TORCH JOBS
 
 	// SUBMAP JOBS
-	for(var/thing in SSmapping.submaps)
-		var/datum/submap/submap = thing
-		if(submap && submap.available())
-			dat += "<tr><td colspan = 3><b>[submap.name] ([submap.archetype.descriptor]):</b></td></tr>"
-			job_summaries = list()
-			for(var/otherthing in submap.jobs)
-				var/datum/job/job = submap.jobs[otherthing]
-				var/summary = job.get_join_link(client, "byond://?src=\ref[submap];joining=\ref[src];join_as=[otherthing]", show_invalid_jobs)
-				if(summary && summary != "")
-					LAZYADD(job_summaries, summary)
-				else
-					for(var/raisin in job.get_unavailable_reasons(client))
-						hidden_reasons[raisin] = TRUE
+	if(SSmapping.submaps)
+		dat += "<table><tr><td>"
+		for(var/thing in SSmapping.submaps)
+			var/datum/submap/submap = thing
+			if(submap && submap.available())
+				var/color = "ffffff"
+				dat += "<fieldset style='border: 2px solid [color]; display: inline'>"
+				dat += "<legend align='center' style='color: [color]'><b>[submap.name] ([submap.archetype.descriptor])</b></legend>"
+				dat += "<table align = 'center'>"
+				job_summaries = list()
+				for(var/otherthing in submap.jobs)
+					var/datum/job/job = submap.jobs[otherthing]
+					var/summary = job.get_join_link(client, "byond://?src=\ref[submap];joining=\ref[src];join_as=[otherthing]", show_invalid_jobs)
+					if(summary && summary != "")
+						LAZYADD(job_summaries, summary)
+					else
+						for(var/raisin in job.get_unavailable_reasons(client))
+							hidden_reasons[raisin] = TRUE
 
-			if(LAZYLEN(job_summaries))
-				dat += job_summaries
-			else
-				dat += "No available positions."
+				if(LAZYLEN(job_summaries))
+					dat += job_summaries
+					dat += "</table>"
+					dat += "</fieldset><br>"
+				else
+					dat += "<tr><td></td><td align = 'center'><i>Нет доступных ролей.</i></td></tr>"
+					dat += "</table>"
+					dat += "</fieldset><br>"
+		dat += "</td></tr></table>"
 	// END SUBMAP JOBS
 
-	dat += "</table></center>"
+	dat += "</body></html>"
 	if(LAZYLEN(hidden_reasons))
-		var/list/additional_dat = list("<br><b>Some roles have been hidden from this list for the following reasons:</b><br>")
+		var/list/additional_dat = list("<br><b>Некоторые роли были убраны из этого списка по следующим причинам:</b><br>")
 		for(var/raisin in hidden_reasons)
 			additional_dat += "[raisin]<br>"
 		additional_dat += "<br>"
 		dat = additional_dat + dat
 	dat = header + dat
-	show_browser(src, jointext(dat, null), "window=latechoices;size=450x640;can_close=1")
+	var/datum/browser/popup = new(src, "latechoices", "Choose Profession", 900, 900)
+	popup.add_stylesheet("playeroptions", 'html/browser/playeroptions.css')
+	popup.set_content(jointext(dat, null))
+	popup.open(0) // 0 is passed to open so that it doesn't use the onclose() proc
 
 /mob/new_player/proc/create_character(turf/spawn_turf)
 	spawning = 1
