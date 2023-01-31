@@ -2,10 +2,11 @@ body
 {
 	padding: 0;
 	margin: 0;
-	background-color: #272727;
+	background-color: #222222;
 	font-size: 12px;
 	color: #ffffff;
 	line-height: 170%;
+	font-family: Verdana, Geneva, sans-serif;
 }
 
 hr
@@ -17,19 +18,31 @@ hr
 a, a:link, a:visited, a:active, .linkOn, .linkOff, input
 {
 	color: #ffffff;
-	text-decoration: none;
 	background: #40628a;
-	border: 1px solid #161616;
+  transition: color 50ms, background-color 50ms;
+
+  /* padding: 0 0.5em;
+  margin-right: 2px; */
+	border-radius: 0.16em;
 	padding: 1px 4px 1px 4px;
 	margin: 0 1px 0 1px;
-	cursor:default;
-	white-space:nowrap;
+
+	line-height: 1.667em;
+	text-decoration: none;
+
+	cursor: pointer;
+	white-space: nowrap;
+	user-select: none;
+  -ms-user-select: none;
+
+  transition: color 50ms, background-color 50ms;
 }
 
 a:hover
 {
-	color: #40628a;
-	background: #ffffff;
+	color: #ffffff;
+	background: #527aa8;
+	transition: color 0ms, background-color 0ms;
 }
 
 a.white, a.white:link, a.white:visited, a.white:active
@@ -37,8 +50,6 @@ a.white, a.white:link, a.white:visited, a.white:active
 	color: #40628a;
 	text-decoration: none;
 	background: #ffffff;
-	border: 1px solid #161616;
-	padding: 1px 4px 1px 4px;
 	margin: 0 2px 0 0;
 	cursor:default;
 }
@@ -139,7 +150,7 @@ h4
 	clear: both;
 	padding: 6px 8px 6px 8px;
 	border-bottom: 2px solid #161616;
-	background: #383838;
+	background: #333333;
 	color: #98B0C3;
 	font-size: 16px;
 }
@@ -174,7 +185,6 @@ h4
 {
 	clear: both;
 	padding: 8px;
-	font-family: Verdana, Geneva, sans-serif;
 }
 
 .good
