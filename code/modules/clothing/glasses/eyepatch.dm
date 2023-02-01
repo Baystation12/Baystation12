@@ -60,6 +60,7 @@
 		eye.layer = ABOVE_LIGHTING_LAYER
 		eye.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		res.overlays += eye
+		user_mob.z_flags |= ZMM_MANGLE_PLANES
 	return res
 
 /obj/item/clothing/glasses/eyepatch/hud/security

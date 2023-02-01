@@ -279,6 +279,7 @@
 	overlays += eye_glow
 	set_light(-2, 0.1, 1.5, l_color = "#ffffff")
 
+	z_flags |= ZMM_MANGLE_PLANES
 ////////////////HUD//////////////////////
 
 /mob/living/simple_animal/construct/Life()

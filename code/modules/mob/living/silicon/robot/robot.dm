@@ -716,6 +716,7 @@
 				eye_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 				eye_overlay.layer = EYE_GLOW_LAYER
 				eye_overlays[eye_icon_state] = eye_overlay
+				z_flags |= ZMM_MANGLE_PLANES
 			overlays += eye_overlay
 
 	if(opened)
