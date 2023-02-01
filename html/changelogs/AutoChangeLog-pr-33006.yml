@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Borgs can now deconstruct tables on help intent.
