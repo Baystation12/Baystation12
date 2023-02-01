@@ -1,8 +1,36 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 1
+	},
+/obj/structure/voxuplink,
+/turf/simulated/floor/plating/vox,
+/area/map_template/vox_raider)
+"ab" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/map_template/vox_raider)
 "ac" = (
 /obj/effect/paint/vox,
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating/vox,
+/area/map_template/vox_raider)
+"ad" = (
+/obj/structure/table/rack,
+/obj/machinery/light/vox{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/b_green/mono,
+/obj/item/material/hatchet/machete/steel,
+/obj/item/material/hatchet/machete/steel,
+/obj/item/material/hatchet/machete/steel,
+/obj/item/material/knife/combat,
+/obj/item/material/knife/combat,
+/obj/item/material/knife/combat,
+/obj/item/material/sword/makeshift,
+/turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "ae" = (
 /obj/effect/paint/vox,
@@ -14,6 +42,29 @@
 /obj/item/tank/nitrogen,
 /obj/item/tank/nitrogen,
 /obj/item/tank/nitrogen,
+/turf/simulated/floor/tiled/dark/monotile/vox,
+/area/map_template/vox_raider)
+"ag" = (
+/obj/structure/table/rack,
+/obj/effect/floor_decal/corner/b_green/mono,
+/obj/item/gun/projectile/heavysniper/boltaction,
+/obj/item/gun/projectile/pistol/broomstick,
+/obj/item/gun/projectile/pistol/throwback,
+/turf/simulated/floor/tiled/dark/monotile/vox,
+/area/map_template/vox_raider)
+"ah" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/under/vox/vox_casual,
+/obj/item/clothing/suit/armor/vox_scrap,
+/turf/simulated/floor/tiled/dark/monotile/vox,
+/area/map_template/vox_raider)
+"ai" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/under/vox/vox_casual,
+/obj/machinery/light/vox,
+/obj/item/clothing/suit/armor/vox_scrap,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "aj" = (
@@ -37,6 +88,46 @@
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
+/area/map_template/vox_raider)
+"am" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/under/vox/vox_casual,
+/obj/effect/decal/cleanable/filth,
+/obj/item/clothing/suit/armor/vox_scrap,
+/turf/simulated/floor/tiled/dark/monotile/vox,
+/area/map_template/vox_raider)
+"an" = (
+/obj/structure/table/rack,
+/obj/effect/floor_decal/corner/b_green/mono,
+/obj/item/material/harpoon,
+/obj/item/material/harpoon,
+/turf/simulated/floor/tiled/dark/monotile/vox,
+/area/map_template/vox_raider)
+"ao" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/under/vox/vox_casual,
+/obj/item/clothing/suit/armor/makeshift,
+/turf/simulated/floor/tiled/dark/monotile/vox,
+/area/map_template/vox_raider)
+"ap" = (
+/obj/structure/closet/crate{
+	dir = 1;
+	name = "reserve equipment crate"
+	},
+/obj/item/device/multitool,
+/obj/item/device/multitool,
+/obj/item/device/multitool,
+/obj/item/device/multitool,
+/obj/item/stack/material/rods/fifty,
+/obj/item/device/spaceflare,
+/obj/item/device/spaceflare,
+/obj/item/storage/backpack/weldpack,
+/obj/item/storage/backpack/weldpack,
+/obj/item/storage/backpack/dufflebag,
+/obj/item/storage/backpack/dufflebag,
+/turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "at" = (
 /obj/structure/table/standard,
@@ -120,18 +211,6 @@
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
-/area/map_template/vox_raider)
-"bv" = (
-/obj/structure/table/rack,
-/obj/item/gun/energy/darkmatter,
-/obj/effect/floor_decal/corner/b_green/mono,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"bw" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden{
-	dir = 1
-	},
-/turf/simulated/floor/plating/vox,
 /area/map_template/vox_raider)
 "bP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -236,15 +315,6 @@
 "dr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/meter,
-/turf/simulated/floor/plating/vox,
-/area/map_template/vox_raider)
-"dv" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden{
-	dir = 4
-	},
-/obj/effect/landmark{
-	name = "Vox-Spawn"
-	},
 /turf/simulated/floor/plating/vox,
 /area/map_template/vox_raider)
 "dH" = (
@@ -358,15 +428,6 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"eX" = (
-/obj/structure/table/rack,
-/obj/item/gun/energy/sonic,
-/obj/machinery/light/vox{
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/b_green/mono,
-/turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "ff" = (
 /obj/machinery/computer/ship/helm{
@@ -499,12 +560,6 @@
 	},
 /obj/effect/floor_decal/corner/b_green/full,
 /turf/simulated/floor/tiled/dark/vox,
-/area/map_template/vox_raider)
-"tU" = (
-/obj/structure/table/rack,
-/obj/effect/floor_decal/corner/b_green/mono,
-/obj/item/gun/launcher/alien/slugsling,
-/turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "tW" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -690,22 +745,6 @@
 /obj/machinery/portable_atmospherics/canister/nitrogen,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
-"Dn" = (
-/obj/structure/closet/crate{
-	dir = 1;
-	name = "reserve equipment crate"
-	},
-/obj/item/device/multitool,
-/obj/item/device/multitool,
-/obj/item/device/multitool,
-/obj/item/device/multitool,
-/obj/item/stack/material/rods/fifty,
-/obj/item/device/spaceflare,
-/obj/item/device/spaceflare,
-/obj/item/storage/backpack/weldpack,
-/obj/item/storage/backpack/weldpack,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
 "DR" = (
 /obj/machinery/recharge_station,
 /turf/simulated/floor/tiled/dark/monotile/vox,
@@ -796,32 +835,6 @@
 	frequency = 1331;
 	id_tag = "vox_raider_inner"
 	},
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"MZ" = (
-/obj/structure/table/rack,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/under/vox/vox_casual,
-/obj/machinery/light/vox,
-/obj/item/clothing/suit/space/vox/raider,
-/obj/item/clothing/head/helmet/space/vox/raider,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"Ns" = (
-/obj/structure/table/rack,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/under/vox/vox_casual,
-/obj/item/clothing/suit/space/vox/raider,
-/obj/item/clothing/head/helmet/space/vox/raider,
-/turf/simulated/floor/tiled/dark/monotile/vox,
-/area/map_template/vox_raider)
-"Nt" = (
-/obj/structure/table/rack,
-/obj/item/clothing/mask/gas/swat/vox,
-/obj/item/clothing/under/vox/vox_casual,
-/obj/effect/decal/cleanable/filth,
-/obj/item/clothing/suit/space/vox/raider,
-/obj/item/clothing/head/helmet/space/vox/raider,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "NI" = (
@@ -1415,8 +1428,8 @@ ax
 ax
 ax
 ae
-bw
-dv
+aa
+ab
 ek
 ae
 ae
@@ -1449,7 +1462,7 @@ Ry
 eQ
 qj
 dq
-Ns
+ao
 ae
 ae
 rM
@@ -1477,7 +1490,7 @@ eW
 sE
 BI
 IF
-Ns
+ao
 ae
 On
 ax
@@ -1500,11 +1513,11 @@ ae
 dZ
 dZ
 ae
-eX
+ad
 KQ
 Dm
 tN
-MZ
+ai
 ae
 ax
 ax
@@ -1527,11 +1540,11 @@ ax
 ax
 ax
 ae
-bv
+ag
 RP
 af
 tW
-Ns
+ah
 ae
 ax
 ax
@@ -1554,11 +1567,11 @@ ax
 ax
 ax
 ae
-tU
+an
 eE
-Dn
+ap
 zx
-Nt
+am
 ae
 ax
 ax

@@ -3,7 +3,7 @@
 	augment_slots = AUGMENT_CHEST
 	icon_state = "muscule"
 	desc = "Each activation of this augment provides a strong painkilling effect for around thirty seconds, but will be followed by a powerful comedown. Excessive short-term use may cause brain damage."
-	augment_flags = AUGMENT_BIOLOGICAL
+	augment_flags = AUGMENT_BIOLOGICAL | AUGMENT_SCANNABLE
 	origin_tech = list(TECH_DATA = 4, TECH_BIO = 4)
 	var/ticks_remaining = 0
 
@@ -43,3 +43,6 @@
 			owner.stamina = 0
 			if(MOVING_QUICKLY(owner))
 				owner.set_moving_slowly()
+
+/obj/item/organ/internal/augment/active/nerve_dampeners/hidden
+	augment_flags = AUGMENT_BIOLOGICAL
