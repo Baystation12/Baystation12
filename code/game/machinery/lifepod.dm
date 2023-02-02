@@ -387,10 +387,11 @@
 	landed = TRUE
 
 /obj/machinery/lifepod/touch_map_edge()
+	if(!isspaceturf(loc) || landed == TRUE)
+		return ..()
+
 	var/newZ
 
-	if(!isspaceturf(loc))
-		return ..()
 	if(emagLoop)
 		newZ = z
 	if(emagEscape || landingAttempts >= 4)
@@ -401,10 +402,11 @@
 	if(possibleSites) //If there are locations, pick one.
 		var/obj/effect/overmap/visitable/targetSite = pick(possibleSites)
 		newZ = pick(targetSite.map_z) //Fetch actual Z-level
-		microphone("[newZ]")
 		var/cycles = 0
 
-		for(var/testCoord = pick(-1(world.maxx-TRANSITIONEDGE), TRANSITIONEDGE), !checkCoord(testCoord, newZ), testCoord++)
+		microphone("[newZ]")
+
+		for(var/testCoord = pick(-1*(world.maxx-TRANSITIONEDGE), TRANSITIONEDGE); checkCoord(testCoord, newZ); testCoord++)
 			cycles++
 			if(cycles > 100)
 				break
@@ -433,14 +435,15 @@
 
 	if(istype(checkTurf, /turf/simulated/floor) || istype(checkTurf, /turf/simulated/wall))
 		landingTurf = checkTurf
-		return TRUE
-	else
 		return FALSE
+	else
+		return TRUE
 
+/// Fetches visitable overmap objects from a radius of 2 turfs from the mothership.
 /obj/machinery/lifepod/proc/generatePossibleSites()
 	var/list/siteList = list()
 	if(mothership) //I hope this would be used only in overmap-compatible maps, because outside of that there will be limited viablity.
-		for(var/obj/effect/overmap/visitable/nearPlace in range(mothership, 5))
+		for(var/obj/effect/overmap/visitable/nearPlace in range(mothership, 2))
 			if(nearPlace == mothership)
 				continue
 			else if(nearPlace.in_space || istype(nearPlace, /obj/effect/overmap/visitable/sector/exoplanet))
@@ -452,7 +455,8 @@
 	else
 		return null
 
-/obj/machinery/lifepod/verb/ejectSupplies() //Spawn your supplies!
+/// Spawns some supplies.
+/obj/machinery/lifepod/verb/ejectSupplies()
 	set name = "Eject emergency supplies"
 	set category = "Lifepod"
 	set src in oview(1)
