@@ -448,7 +448,7 @@
 				continue
 			else if(nearPlace.in_space || istype(nearPlace, /obj/effect/overmap/visitable/sector/exoplanet))
 				siteList += nearPlace
-				microphone("[siteList.len] sites")
+				microphone("[length(siteList)] sites")
 
 	if(LAZYLEN(siteList))
 		return siteList
