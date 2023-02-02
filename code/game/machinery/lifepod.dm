@@ -1,18 +1,3 @@
-/// This is used for end-round summaries and pseudo-greentext (escaped versus died).
-/proc/escapedViaPod(mob/testCase)
-	var/obj/machinery/lifepod/pod
-
-	if(istype(testCase.loc, /obj/machinery/lifepod))
-		pod = testCase.loc
-
-		if(pod.landed == TRUE) //Is the lifepod still onboard or did it fail to launch?
-			return FALSE //You did not escape because the pod did not launch.
-		else
-			return TRUE //You did escape because the pod is in space or landed somewhere.
-
-	else
-		return FALSE //You did not escape... because you're not in a pod.
-
 /// A lifepod that can be used in lieu of shuttle-based escape pods.
 /obj/machinery/lifepod
 	name = "\improper NT-31B lifepod"
@@ -30,10 +15,8 @@
 	var/const/LIFEPOD_CLOSED = 0
 	/// The lifepod is open.
 	var/const/LIFEPOD_OPEN = 1
-	/// The lifepod is locked by the passenger.
-	var/const/LIFEPOD_LOCKED = 2
-	/// The lifepod was forced open while locked or damaged too much. It is not usable in this state.
-	var/const/LIFEPOD_BROKEN = 3
+	/// The lifepod was broken. It is not usable in this state.
+	var/const/LIFEPOD_BROKEN = 2
 	/// The status of the lifepod in terms of the above constants.
 	var/hatch = LIFEPOD_CLOSED
 	/// The thing occupying the lifepod.
@@ -68,12 +51,6 @@
 	var/datum/gas_mixture/airSupply
 	/// The last time they recieved a warning about low air pressure.
 	var/lastAirWarningTime
-	/// Whether or not it was emagged with the option of exploding upon launch.
-	var/emagBombRig = FALSE
-	/// Whether or not it was emagged with the option of going to an escape-z upon launch.
-	var/emagEscape = FALSE
-	/// Whether or not it was emagged with the option of going back to its original Z before launch.
-	var/emagLoop = FALSE
 	/// Funny noises it makes while moving.
 	var/list/move_sounds = list(
 		'sound/effects/metalscrape1.ogg',
@@ -114,7 +91,7 @@
 			if(storedThing && user.Adjacent(src)) //You'd also need to be close to see it.
 				to_chat(user, SPAN_NOTICE("\The [storedThing] is inside the passenger compartment."))
 
-		if(LIFEPOD_CLOSED, LIFEPOD_LOCKED)
+		if(LIFEPOD_CLOSED)
 			if(storedThing && user.Adjacent(src)) //You'd ALSO need to be close to see it.
 				to_chat(user, SPAN_WARNING("Something is inside the passenger compartment."))
 
@@ -129,7 +106,7 @@
 		processOccupant()
 
 /obj/machinery/lifepod/return_air()
-	if(airSupply && (hatch == LIFEPOD_CLOSED || LIFEPOD_LOCKED))
+	if(airSupply && hatch == LIFEPOD_CLOSED)
 		return airSupply //Return
 	else
 		return loc.return_air()
@@ -148,13 +125,8 @@
 		attemptExit()
 		return
 	switch(user.a_intent)
-
 		if(I_DISARM)
 			switch(hatch)
-				if(LIFEPOD_LOCKED) //The hatch is locked from the inside.
-					to_chat(user, SPAN_WARNING("\The [src]'s hatch is locked and cannot be opened."))
-					return
-
 				if(LIFEPOD_CLOSED) //Opening the hatch.
 					if(user.IsAdvancedToolUser())
 						user.visible_message(
@@ -277,10 +249,6 @@
 		voluntary = TRUE
 
 	switch(hatch)
-		if(LIFEPOD_LOCKED) //The hatch is locked from the inside.
-			to_chat(user, SPAN_WARNING("\The [src]'s hatch is locked and cannot be opened."))
-			return
-
 		if(LIFEPOD_BROKEN) //Broken hatches are unusuable.
 			to_chat(user, SPAN_WARNING("\The [src]'s hatch is broken, rendering it useless."))
 			return
@@ -327,20 +295,10 @@
 
 /// Called whenever someone tries to leave it.
 /obj/machinery/lifepod/proc/attemptExit(mob/user)
-	var/voluntary = FALSE
 	if(!user) //Assume people take themselves out of the lifepod if not told otherwise.
 		user = storedThing
-	if(storedThing == user)
-		voluntary = TRUE
 
 	switch(hatch)
-		if(LIFEPOD_LOCKED) //Fail if locked.
-			storedThing.visible_message(
-				SPAN_WARNING("[voluntary ? "Something pushes the bolted hatch from the inside" : "\The [user] pulls on the bolted hatch"] of \the [src] to no avail."),
-				SPAN_WARNING("You can't open the hatch of \the [src]. Try unlocking or breaking it.")
-			)
-			return
-
 		if(LIFEPOD_CLOSED) //Open if closed.
 			storedThing.visible_message(
 				SPAN_NOTICE("\The [user] opens the hatch of \the [src]."),
@@ -373,71 +331,37 @@
 
 /// This sends them to a place where they cannot return to the regular map.
 /obj/machinery/lifepod/proc/escape()
-	if(emagEscape) //Teleport them to antag heaven beach area
-		var/obj/effect/landmark/escapePlace = pick(endgame_safespawns)
-		forceMove(escapePlace.loc)
-		//Since they are stuck in the beach, supposedly, tell them they can ghost.
-		anchored = TRUE
-		to_chat(storedThing, FONT_LARGE(SPAN_COLOR("red", "With the addition of programmed bias to the lifepod's particle sails from your hacking, you have escaped to your intended destination. You may ghost and be counted as escaped.")))
-	else //Teleport them to space-escape area.
-		forceMove(locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),  pick(GLOB.using_map.escape_levels)))
-		//Since they are stuck in baby jail, tell them that they can ghost.
-		anchored = TRUE
-		to_chat(storedThing, FONT_LARGE(SPAN_NOTICE("Your lifepod has navigated itself to the designated rescue sector. You may ghost and be counted as escaped.")))
+	forceMove(locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),  pick(GLOB.using_map.escape_levels)))
+	to_chat(storedThing, FONT_LARGE(SPAN_NOTICE("Your lifepod has navigated itself to the designated rescue sector. You may ghost and be counted as escaped.")))
 	landed = TRUE
 
 /obj/machinery/lifepod/touch_map_edge()
 	if(!isspaceturf(loc) || landed == TRUE)
 		return ..()
 
-	var/newZ
-
-	if(emagLoop)
-		newZ = z
-	if(emagEscape || landingAttempts >= 4)
+	if(landingAttempts >= 4 || mothership)
 		escape()
 
+	var/newZ
 	var/list/possibleSites = generatePossibleSites()
 
 	if(possibleSites) //If there are locations, pick one.
 		var/obj/effect/overmap/visitable/targetSite = pick(possibleSites)
 		newZ = pick(targetSite.map_z) //Fetch actual Z-level
-		var/cycles = 0
 
-		microphone("[newZ]")
-
-		for(var/testCoord = pick(-1*(world.maxx-TRANSITIONEDGE), TRANSITIONEDGE); checkCoord(testCoord, newZ); testCoord++)
-			cycles++
-			if(cycles > 100)
-				break
-
-		if(landingTurf)
-			microphone("[landingTurf]")
-			anchored = TRUE
-
-			if(istype(landingTurf, /turf/simulated/wall))
-				new /obj/effect/landmark/clear(landingTurf) //Dismantle wall if available.
-
+		if(findLandingTurf(newZ))
+			new /obj/effect/landmark/clear(landingTurf) //Dismantle wall if available.
 			new /obj/effect/landmark/scorcher(landingTurf)
 			explosion(landingTurf, 6)
 			forceMove(landingTurf) //Just get them there.
 			playsound(loc,'sound/effects/meteorimpact.ogg', 100)
+
 			landed = TRUE
+			anchored = TRUE
 		else
 			..()
 	else
 		..()
-
-/// Checks coordinates along the value y = x, because it is easier to find something in the center that way.
-/obj/machinery/lifepod/proc/checkCoord(testCoord, newZ)
-	microphone("[testCoord]")
-	var/checkTurf = locate(abs(testCoord), abs(testCoord), newZ)
-
-	if(istype(checkTurf, /turf/simulated/floor) || istype(checkTurf, /turf/simulated/wall))
-		landingTurf = checkTurf
-		return FALSE
-	else
-		return TRUE
 
 /// Fetches visitable overmap objects from a radius of 2 turfs from the mothership.
 /obj/machinery/lifepod/proc/generatePossibleSites()
@@ -454,6 +378,31 @@
 		return siteList
 	else
 		return null
+
+/// When provided with a Z-level, the proc will search for a simulated turf to land on along the value y = x.
+/obj/machinery/lifepod/proc/findLandingTurf(newZ)
+	var/checkSquare = pick(-1*(world.maxx-TRANSITIONEDGE), TRANSITIONEDGE)
+
+	for(var/cycles = 0; cycles < 100; cycles++)
+		if(checkSquare(checkSquare))
+			break
+		else
+			continue
+
+	if(landingTurf)
+		return TRUE
+	else
+		return FALSE
+
+/// Checks square (x, x) coordinates to see if they are simulated turf.
+/obj/machinery/lifepod/proc/checkSquare(testSquare, newZ)
+	var/checkTurf = locate(abs(testSquare), abs(testSquare), newZ)
+
+	if(istype(checkTurf, /turf/simulated))
+		landingTurf = checkTurf
+		return FALSE
+	else
+		return TRUE
 
 /// Spawns some supplies.
 /obj/machinery/lifepod/verb/ejectSupplies()
@@ -474,20 +423,3 @@
 		suppliesEjected = TRUE
 	else
 		to_chat(usr, SPAN_WARNING("\The [src]'s ejection cord does nothing.")) //Don't actually tell them it's empty until they pull it.
-
-/obj/machinery/lifepod/verb/lockHatch()
-	set name = "Toggle lock"
-	set category = "Lifepod"
-	set src in range(0)
-
-	switch(hatch)
-		if(LIFEPOD_LOCKED)
-			hatch = LIFEPOD_CLOSED
-			to_chat(storedThing, SPAN_NOTICE("You unlock \the [src]."))
-			playsound(loc,'sound/machines/BoltsDown.ogg', 50) //Using old door noises for nostalgia points.
-		if(LIFEPOD_CLOSED)
-			hatch = LIFEPOD_LOCKED
-			to_chat(storedThing, SPAN_NOTICE("You lock \the [src]."))
-			playsound(loc,'sound/machines/BoltsUp.ogg', 50) //Using old door noises for nostalgia points.
-
-	update_icon()
