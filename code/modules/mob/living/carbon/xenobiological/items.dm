@@ -257,8 +257,8 @@
 		to_chat(user, SPAN_WARNING("\The [M] is already alive!"))
 		return FALSE
 	user.visible_message(
-		visible_message(user, SPAN_NOTICE("The [user] feeds \a [src] to \the [M]. Life floods back into it!")),
-		to_chat(user, SPAN_NOTICE("You feed \the [src] to \the [M]. Life floods back into it!"))
+		SPAN_NOTICE("The [user] feeds \a [src] to \the [M]. Life floods back into it!"),
+		SPAN_NOTICE("You feed \the [src] to \the [M]. Life floods back into it!")
 		)
 	M.revive()
 	qdel(src)

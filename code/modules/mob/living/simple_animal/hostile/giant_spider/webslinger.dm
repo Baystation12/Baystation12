@@ -82,7 +82,7 @@
 		C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
 
 
-		user.visible_message(user,
+		user.visible_message(
 			SPAN_WARNING("\The [user] is cocooned by all the webbing!"),
 			SPAN_WARNING("You are cocooned by all the webbing!"),
 			)

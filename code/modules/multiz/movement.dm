@@ -87,13 +87,14 @@
 	if(species && species.can_overcome_gravity(src))
 		return 1
 	else
-		var/turf/T = loc
-		if(((T.height + T.get_fluid_depth()) >= FLUID_DEEP) || T.get_fluid_depth() >= FLUID_MAX_DEPTH)
-			return can_float()
+		if (isturf(loc))
+			var/turf/T = loc
+			if(((T.height + T.get_fluid_depth()) >= FLUID_DEEP) || T.get_fluid_depth() >= FLUID_MAX_DEPTH)
+				return can_float()
 
-		for(var/atom/a in src.loc)
-			if(a.atom_flags & ATOM_FLAG_CLIMBABLE)
-				return 1
+			for(var/atom/a in src.loc)
+				if(a.atom_flags & ATOM_FLAG_CLIMBABLE)
+					return 1
 
 		//Last check, list of items that could plausibly be used to climb but aren't climbable themselves
 		var/list/objects_to_stand_on = list(
