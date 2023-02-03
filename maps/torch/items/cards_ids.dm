@@ -114,6 +114,10 @@
 	job_access_type = DEFAULT_JOB_TYPE
 	detail_color = COLOR_CIVIE_GREEN
 
+/obj/item/card/id/torch/crew/service/chief_steward
+	job_access_type = /datum/job/chief_steward
+	extra_details = list("onegoldstripe")
+
 /obj/item/card/id/torch/crew/service/janitor
 	job_access_type = /datum/job/janitor
 
