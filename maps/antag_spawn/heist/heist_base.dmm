@@ -624,7 +624,6 @@
 /obj/item/clothing/head/helmet/space/vox/carapace,
 /obj/item/clothing/shoes/magboots/vox,
 /obj/item/clothing/gloves/vox,
-/obj/item/gun/launcher/alien/spikethrower,
 /obj/item/clothing/under/vox/vox_casual,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
@@ -636,8 +635,8 @@
 /obj/item/clothing/head/helmet/space/vox/carapace,
 /obj/item/clothing/shoes/magboots/vox,
 /obj/item/clothing/gloves/vox,
-/obj/item/gun/launcher/alien/spikethrower,
 /obj/item/clothing/under/vox/vox_robes,
+/obj/item/gun/energy/darkmatter,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -825,6 +824,7 @@
 /obj/item/clothing/gloves/vox,
 /obj/item/clothing/under/vox/vox_robes,
 /obj/item/gun/projectile/dartgun/vox/raider,
+/obj/item/gun/energy/sonic,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -900,7 +900,7 @@
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo/random=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -1931,6 +1931,18 @@
 	},
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
+"VK" = (
+/obj/structure/table/rack,
+/obj/item/clothing/suit/space/vox/carapace,
+/obj/item/clothing/head/helmet/space/vox/carapace,
+/obj/item/clothing/shoes/magboots/vox,
+/obj/item/clothing/gloves/vox,
+/obj/item/clothing/under/vox/vox_casual,
+/obj/item/gun/launcher/alien/slugsling,
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/map_template/syndicate_mothership/raider_base)
 
 (1,1,1) = {"
 aa
@@ -2823,7 +2835,7 @@ ab
 ab
 aR
 aq
-bA
+VK
 bU
 bX
 aq
