@@ -485,11 +485,11 @@ SUBSYSTEM_DEF(zcopy)
 			if ((fixed_appearance = .(appearance:overlays[i], depth + 1)))
 				mutated = TRUE
 				if (!fixed_overlays)
-					fixed_overlays = new(appearance:overlays.len)
+					fixed_overlays = new( length(appearance:overlays))
 				fixed_overlays[i] = fixed_appearance
 
 		if (mutated)
-			for (var/i in 1 to fixed_overlays.len)
+			for (var/i in 1 to length(fixed_overlays))
 				if (fixed_overlays[i] == null)
 					fixed_overlays[i] = appearance:overlays[i]
 
@@ -502,11 +502,11 @@ SUBSYSTEM_DEF(zcopy)
 			if ((fixed_appearance = .(appearance:underlays[i], depth + 1)))
 				mutated = TRUE
 				if (!fixed_underlays)
-					fixed_underlays = new(appearance:underlays.len)
+					fixed_underlays = new( length(appearance:underlays))
 				fixed_underlays[i] = fixed_appearance
 
 		if (mutated)
-			for (var/i in 1 to fixed_overlays.len)
+			for (var/i in 1 to  length(fixed_overlays))
 				if (fixed_underlays[i] == null)
 					fixed_underlays[i] = appearance:underlays[i]
 
