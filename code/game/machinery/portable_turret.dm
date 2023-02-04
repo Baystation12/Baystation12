@@ -359,7 +359,7 @@ var/global/list/turret_icons
 		damage = damage / 8
 	. = ..()
 
-/obj/machinery/porta_turret/post_health_change(health_mod, damage_type)
+/obj/machinery/porta_turret/post_health_change(health_mod, prior_health, damage_type)
 	. = ..()
 	if (health_mod < 0)
 		if (!emagged && enabled)

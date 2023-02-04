@@ -77,8 +77,9 @@
 	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 	qdel(src)
 
-/obj/effect/blob/post_health_change(health_mod, damage_type)
-	update_icon()
+/obj/effect/blob/post_health_change(health_mod, prior_health, damage_type)
+	..()
+	queue_icon_update()
 
 /obj/effect/blob/proc/regen()
 	restore_health(regen_rate)

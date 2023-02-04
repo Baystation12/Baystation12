@@ -56,7 +56,7 @@
 	..()
 
 /obj/item/material/ashtray/throw_impact(atom/hit_atom)
-	if (health_max)
+	if (get_max_health())
 		if (length(contents))
 			visible_message(SPAN_DANGER("\The [src] slams into [hit_atom], spilling its contents!"))
 			for (var/obj/O in contents)

@@ -118,7 +118,7 @@
 			to_chat(user, SPAN_NOTICE("You dislodged the girder!"))
 			icon_state = "displaced"
 			anchored = FALSE
-			health_max = 50
+			set_max_health(50)
 			cover = 25
 		return
 
@@ -195,7 +195,7 @@
 
 /obj/structure/girder/proc/reinforce_girder()
 	cover = 75
-	health_max = 500
+	set_max_health(500)
 	state = 2
 	icon_state = "reinforced"
 	reinforcing = 0

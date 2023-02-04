@@ -204,11 +204,11 @@
 			damage_desc += "concentrated high-energy bursts."
 
 
-/obj/machinery/artifact/post_health_change(health_mod, damage_type)
+/obj/machinery/artifact/post_health_change(health_mod, prior_health, damage_type)
 	..()
 	queue_icon_update()
 	if (health_mod < 0)
-		var/initial_damage_percentage = round(((get_current_health() - health_mod) / get_max_health()) * 100)
+		var/initial_damage_percentage = round((prior_health / get_max_health()) * 100)
 		var/damage_percentage = get_damage_percentage()
 		if (damage_percentage >= 75 && initial_damage_percentage < 75)
 			visible_message("\The [src] looks like it's about to break!")
