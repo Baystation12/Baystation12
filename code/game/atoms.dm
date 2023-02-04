@@ -760,17 +760,6 @@
 		object_shaken()
 
 /**
- * Called when the atom is clicked on with an active grab.
- *
- * **Parameters**:
- * - `G` - The grab the atom was clicked on with.
- *
- * Returns boolean. Whether or not the interaction was handled. If `TRUE`, skips `attackby()` and `afterattack()` calls.
- */
-/atom/proc/grab_attack(obj/item/grab/G)
-	return FALSE
-
-/**
  * Verb to allow climbing onto an object. Passes directly to `/atom/proc/do_climb(usr)`.
  */
 /atom/proc/climb_on()

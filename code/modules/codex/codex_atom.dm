@@ -53,6 +53,12 @@
 /atom/var/const/CODEX_INTERACTION_USE_SELF = "Use On Self"
 /atom/var/const/CODEX_INTERACTION_HAND = "Empty Hand"
 
+// Grabs
+/atom/var/const/CODEX_INTERACTION_GRAB = "Grabbed Mob"
+/atom/var/const/CODEX_INTERACTION_GRAB_PASSIVE = "Grabbed Mob (Passive - Yellow)"
+/atom/var/const/CODEX_INTERACTION_GRAB_AGGRESSIVE = "Grabbed Mob (Aggressive - Blue)"
+/atom/var/const/CODEX_INTERACTION_GRAB_NECK = "Grabbed Mob (Neck - Red)"
+
 // Other cases
 /atom/var/const/CODEX_INTERACTION_EMAG = "Cryptographic Sequencer (EMAG)"
 /atom/var/const/CODEX_INTERACTION_EMP = "EMP"
