@@ -14321,9 +14321,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/meeting_room)
 "So" = (
-/obj/machinery/atmospherics/unary/tank/air{
-	dir = 6
-	},
+/obj/machinery/atmospherics/unary/tank/air,
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/plating,
 /area/aquila/air)
