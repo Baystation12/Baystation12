@@ -1,6 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - rscadd: For structures that allow it, the codex will now inform you that you can
-      use grabs to place mobs onto things, i.e. tables. Codex will also inform you
-      of an attack interaction with mobs against structures.
