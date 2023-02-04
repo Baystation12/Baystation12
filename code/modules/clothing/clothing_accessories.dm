@@ -102,6 +102,7 @@
 	A.on_attached(src, user)
 	if (A.accessory_flags & ACCESSORY_REMOVABLE)
 		src.verbs |= /obj/item/clothing/proc/removetie_verb
+		src.verbs |= /obj/item/clothing/proc/remove_all_accessories
 	update_accessory_slowdown()
 	update_clothing_icon()
 	GLOB.destroyed_event.register(A, src, .proc/accessory_deleted)
@@ -184,6 +185,24 @@
 	removables -= A
 	if(!length(removables))
 		src.verbs -= /obj/item/clothing/proc/removetie_verb
+		src.verbs -= /obj/item/clothing/proc/remove_all_accessories
+
+/obj/item/clothing/proc/remove_all_accessories()
+	set name = "Remove All Accessories"
+	set category = "Object"
+	set src in usr
+	if(!istype(usr, /mob/living)) return
+	if(usr.stat) return
+	if(!length(accessories)) return
+
+	var/choice = alert("Are you sure you want to remove all accessories from \the [src]?", "Confirmation", "Yes", "No")
+	if(choice == "Yes")
+		for(var/obj/item/clothing/accessory/ac in accessories)
+			if (ac.accessory_flags & ACCESSORY_REMOVABLE)
+				src.remove_accessory(usr,ac)
+
+		src.verbs -= /obj/item/clothing/proc/removetie_verb
+		src.verbs -= /obj/item/clothing/proc/remove_all_accessories
 
 /obj/item/clothing/emp_act(severity)
 	if(length(accessories))
