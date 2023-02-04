@@ -40,6 +40,12 @@
 	item_cost = 40
 	path = /obj/item/device/uplink_service/jamming
 
+/datum/uplink_item/item/services/fake_cryo_announcement
+	name = "Fake Cryostorage Announcement"
+	desc = "A single-use device, that when activated, creates a fake cryogenic storage announcement and removes your name from the manifest. Perfect for the sneaky traitor!"
+	item_cost = 24
+	path = /obj/item/device/uplink_service/fake_cryo_announcement
+
 /***************
 * Service Item *
 ***************/
@@ -328,3 +334,28 @@
 	. = ..()
 
 #undef COPY_VALUE
+
+/*********************************
+	* Fake Cryo Announcement *
+*********************************/
+/obj/item/device/uplink_service/fake_cryo_announcement
+	service_label = "Cryogenic Storage Announcement"
+	var/obj/item/device/radio/headset/announcer
+
+/obj/item/device/uplink_service/fake_cryo_announcement/New()
+	announcer = new /obj/item/device/radio/headset(src)
+	..()
+
+/obj/item/device/uplink_service/fake_cryo_announcement/enable(mob/user = usr)
+
+	//Delete the user off the manifest/records
+	var/sanitized_name = user.real_name
+	sanitized_name = sanitize(sanitized_name)
+	var/datum/computer_file/report/crew_record/R = get_crewmember_record(sanitized_name)
+	if (R)
+		qdel(R)
+
+	//Make the announcement
+	var/role_alt_title = user.mind ? user.mind.role_alt_title : "Unknown"
+	invoke_async(announcer, /obj/item/device/radio/proc/autosay, "[user.real_name], [role_alt_title], has entered long-term storage.", "Cryogenic Oversight")
+	. = ..()
