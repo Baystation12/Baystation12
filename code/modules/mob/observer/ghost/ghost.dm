@@ -574,7 +574,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	log_and_message_admins("has respawned.", M)
 
 
-/mob/observer/ghost/proc/notify_revive(message, sound, atom/source)
+/mob/observer/ghost/proc/notify_revive(message, sound, atom/source, mob/user)
 	if((last_revive_notification + 2 MINUTES) > world.time)
 		return
 	last_revive_notification = world.time
@@ -582,7 +582,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(message)
 		to_chat(src, "<span class='alert'><font size=4>[message]</font></span>")
 		if(source)
-			throw_alert("\ref[source]_notify_revive", /obj/screen/alert/notify_cloning, new_master = source)
+			user.throw_alert("\ref[source]_notify_revive", /obj/screen/alert/notify_cloning, new_master = source)
 
 	to_chat(src, "<span class='alert'><a href=?src=\ref[src];reenter=1>(Click to re-enter)</a></span>")
 	if(sound)

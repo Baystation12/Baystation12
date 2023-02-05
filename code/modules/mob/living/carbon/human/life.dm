@@ -364,7 +364,7 @@
 		var/loc_temp = environment.temperature
 
 		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < species.heat_level_1 && bodytemperature > species.cold_level_1 && species.body_temperature)
-			pressure_alert = 0
+			clear_alert("pressure")
 			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
 		//Body temperature adjusts depending on surrounding atmosphere based on your thermal protection (convection)
@@ -425,13 +425,13 @@
 	if(adjusted_pressure >= species.hazard_high_pressure)
 		var/pressure_damage = min( ( (adjusted_pressure / species.hazard_high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE)
 		take_overall_damage(brute=pressure_damage, used_weapon = "High Pressure")
-		pressure_alert = 2
+		throw_alert("pressure", /obj/screen/alert/highpressure, 2)
 	else if(adjusted_pressure >= species.warning_high_pressure)
-		pressure_alert = 1
+		throw_alert("pressure", /obj/screen/alert/highpressure, 1)
 	else if(adjusted_pressure >= species.warning_low_pressure)
-		pressure_alert = 0
+		clear_alert("pressure")
 	else if(adjusted_pressure >= species.hazard_low_pressure)
-		pressure_alert = -1
+		throw_alert("pressure", /obj/screen/alert/lowpressure, 1)
 	else
 		var/list/obj/item/organ/external/parts = get_damageable_organs()
 		for(var/obj/item/organ/external/O in parts)
@@ -441,7 +441,7 @@
 				O.take_external_damage(brute = LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
 		if(getOxyLoss() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
 			adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
-		pressure_alert = -2
+		throw_alert("pressure", /obj/screen/alert/lowpressure, 2)
 
 	return
 
@@ -788,22 +788,32 @@
 		switch(nutrition)
 			if(395 to INFINITY)
 				throw_alert("nutrition", fat_alert)
-			if(385 to 395)
+			if(390 to 395)
 				throw_alert("nutrition", well_fed)
-			if(250 to 385)
+			if(250 to 390)
 				clear_alert("nutrition")
 			if(150 to 250)
 				throw_alert("nutrition", hungry_alert)
 			else
 				throw_alert("nutrition", starving_alert)
 
-		if(hydration_icon)
-			switch(hydration)
-				if(450 to INFINITY)				hydration_icon.icon_state = "hydration0"
-				if(350 to 450)					hydration_icon.icon_state = "hydration1"
-				if(250 to 350)					hydration_icon.icon_state = "hydration2"
-				if(150 to 250)					hydration_icon.icon_state = "hydration3"
-				else							hydration_icon.icon_state = "hydration4"
+		var/over_hydrated = /obj/screen/alert/hydration/full
+		var/hydrated = /obj/screen/alert/hydration/well
+		var/parched = /obj/screen/alert/hydration/low
+		var/hydration_alert = /obj/screen/alert/hydration/very_low
+
+		switch(hydration)
+			if(395 to INFINITY)
+				throw_alert("hydration", over_hydrated)
+			if(390 to 395)
+				throw_alert("hydration", hydrated)
+			if(250 to 390)
+				clear_alert("hydration")
+			if(150 to 250)
+				throw_alert("hydration", parched)
+			else
+				throw_alert("hydration", hydration_alert)
+
 
 		if(cells && isSynthetic())
 			var/obj/item/organ/internal/cell/C = internal_organs_by_name[BP_CELL]

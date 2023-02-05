@@ -83,14 +83,14 @@
 	var/severity = 0
 	var/alerttooltipstyle = ""
 
-/*
+
 /obj/screen/alert/MouseEntered(location,control,params)
 	openToolTip(usr, src, params, title = name, content = desc, theme = alerttooltipstyle)
 
 
 /obj/screen/alert/MouseExited()
 	closeToolTip(usr)
-*/
+
 
 //Gas alerts
 /obj/screen/alert/not_enough_oxy
@@ -156,14 +156,14 @@ The box in your backpack has an oxygen tank and gas mask in it."
 	//HUMANS//
 
 /obj/screen/alert/fat
-	name = "Fat"
-	desc = "You ate too much food, lardass. Run around the station and lose some weight."
+	name = "Full stomach"
+	desc = "You ate too much food, lardass. Run around the ship and lose some weight."
 	icon_state = "fat"
 
 /obj/screen/alert/well_fed
 	name = "Well fed"
 	desc = "You are full and cheerful. A warm feeling spreads over your body"
-	icon_state = "well_fed"
+	icon_state = "full"
 
 /obj/screen/alert/hungry
 	name = "Hungry"
@@ -174,6 +174,27 @@ The box in your backpack has an oxygen tank and gas mask in it."
 	name = "Starving"
 	desc = "You're severely malnourished. The hunger pains make moving around a chore."
 	icon_state = "starving"
+
+
+/obj/screen/alert/hydration/full
+	name = "Over hydrated"
+	desc = "You drank too much water and now you want to go to the toilet."
+	icon_state = "hydration_f"
+
+/obj/screen/alert/hydration/well
+	name = "Hydrated"
+	desc = "A little thirsty, but you don't notice it "
+	icon_state = "hydration_full"
+
+/obj/screen/alert/hydration/low
+	name = "Parched"
+	desc = "Need some water, it would be good right about now."
+	icon_state = "hydration_few"
+
+/obj/screen/alert/hydration/very_low
+	name = "Dying of thirst"
+	desc = "You're desperate for water."
+	icon_state = "hydration_null"
 
 	//VAMPIRE//
 
@@ -388,6 +409,7 @@ so as to remain in compliance with the most up-to-date laws."
 /obj/screen/alert/restrained/buckled
 	name = "Buckled"
 	desc = "You've been buckled to something. Click the alert to unbuckle unless you're handcuffed."
+	icon_state = "buckled"
 
 /obj/screen/alert/restrained/handcuffed
 	name = "Handcuffed"
@@ -405,14 +427,15 @@ so as to remain in compliance with the most up-to-date laws."
 
 // Re-render all alerts - also called in /datum/hud/show_hud() because it's needed there
 /datum/hud/proc/reorganize_alerts()
-	var/list/alerts = mymob?.alerts
-	var/icon_pref
+	var/list/alerts = mymob.alerts
 	if(!alerts)
+		return FALSE
 
+	var/icon_pref
 	if(!hud_shown)
 		for(var/i = 1, i <= alerts.len, i++)
 			mymob.client.screen -= alerts[alerts[i]]
-		return 1
+		return TRUE
 	for(var/i = 1, i <= alerts.len, i++)
 		var/obj/screen/alert/alert = alerts[alerts[i]]
 		if(alert.icon_state == "template")
@@ -434,7 +457,7 @@ so as to remain in compliance with the most up-to-date laws."
 				. = ""
 		alert.screen_loc = .
 		mymob?.client?.screen |= alert
-	return 1
+	return TRUE
 
 /mob
 	var/list/alerts = list() // contains /obj/screen/alert only // On /mob so clientless mobs will throw alerts properly
