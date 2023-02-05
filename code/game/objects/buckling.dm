@@ -28,6 +28,25 @@
 	return ..()
 
 
+/obj/get_mechanics_info()
+	. = ..()
+	if (initial(can_buckle))
+		. += {"
+			<h3>Buckling</h3>
+			<p>Mobs can be buckled to this object.</p>
+			<p>Generally, you can buckle mobs to the object by CLICK+DRAGGING the mob onto the object. You can buckle yourself or another mob if you are both adjacent. Only one mob can be buckled to a given object at a time.</p>
+			<p>Mobs can be unbuckled by clicking on the object with an empty hand. The mob can also unbuckle themselves by using the resist verb.</p>
+			<p>Buckled mobs are anchored to the object until unbuckled. If the mob is handcuffed, they cannot unbuckle themselves without undergoing a timer.</p>
+		"}
+
+
+/obj/get_interactions_info()
+	. = ..()
+	if (initial(can_buckle))
+		.[CODEX_INTERACTION_HAND] += "<p>Unbuckles any buckled mobs, including yourself.</p>"
+		.["Click+Drag (Mob)"] += "<p>Attempts to buckle the mob to the object. Both you and the dragged mob must be adjacent. You can also buckle yourself this way.</p>"
+
+
 /obj/attack_hand(mob/living/user)
 	. = ..()
 	if (buckled_mob)

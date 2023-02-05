@@ -83,45 +83,61 @@
 
 	update_icon()
 
-/obj/item/gun/projectile/shotgun/pump/attackby(obj/item/item, mob/living/user)
-	if (type != /obj/item/gun/projectile/shotgun/pump)
-		return ..() // ugly hack for now, /pump needs abstracting
-	. = TRUE
-	var/outcome // if null, ..() - otherwise, true on success
-	if (istype(item, /obj/item/melee/energy))
-		var/obj/item/melee/energy/energy = item
-		outcome = !!energy.active
-		if (outcome)
-			playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE)
-	else if (istype(item, /obj/item/gun/energy/plasmacutter))
-		var/obj/item/gun/energy/plasmacutter/plasmacutter = item
-		if (!plasmacutter.safety_state)
-			playsound(src, 'sound/weapons/plasma_cutter.ogg', 50, TRUE)
-		outcome = plasmacutter.slice(user)
-	else if (istype(item, /obj/item/circular_saw))
-		user.visible_message(
-			SPAN_ITALIC("\The [user] begins to saw the stock off \a [src]."),
-			SPAN_ITALIC("You begin to saw the stock off \the [src].")
-		)
+
+/obj/item/gun/projectile/shotgun/pump/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Circular Saw - Remove stock
+	if (istype(tool, /obj/item/circular_saw))
+		if (!remove_stock(tool, user))
+			return TRUE
 		playsound(src, 'sound/weapons/circsawhit.ogg', 50, TRUE)
-		var/initial_loc = loc
-		outcome = do_after(user, 5 SECONDS, item, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER)
-		if (initial_loc != loc)
-			to_chat(user, SPAN_WARNING("\The [src] must stay still."))
-			outcome = FALSE
-	if (isnull(outcome))
-		return ..()
-	if (!outcome)
-		return
-	if (!user.unEquip(src))
-		return
+		return TRUE
+
+	// Energy Weapon - Remove stock
+	if (istype(tool, /obj/item/melee/energy))
+		var/obj/item/melee/energy/energy_weapon = tool
+		if (!energy_weapon.active)
+			to_chat(user, SPAN_WARNING("\The [tool] needs to be turned on before you can cut \the [src]'s stock."))
+			return TRUE
+		if (!remove_stock(tool, user))
+			return TRUE
+		playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE)
+		return TRUE
+
+	// Plasma Cutter - Remove stock
+	if (istype(tool, /obj/item/gun/energy/plasmacutter))
+		var/obj/item/gun/energy/plasmacutter/plasmacutter = tool
+		if (!plasmacutter.slice(user))
+			return TRUE
+		if (!remove_stock(tool, user))
+			return TRUE
+		playsound(src, 'sound/weapons/plasma_cutter.ogg', 50, TRUE)
+		return TRUE
+
+	return ..()
+
+
+/obj/item/gun/projectile/shotgun/pump/proc/remove_stock(obj/item/tool, mob/user)
+	// Ugly hack. /pump needs abstracting
+	if (type != /obj/item/gun/projectile/shotgun/pump)
+		to_chat(user, SPAN_WARNING("\The [src]'s stock cannot be removed."))
+		return FALSE
 	user.visible_message(
-		SPAN_ITALIC("\The [user] slices the stock off \a [src] with \a [item]."),
-		SPAN_ITALIC("You slice the stock off \the [src] with \the [item].")
+		SPAN_NOTICE("\The [user] begins to cut \the [src]'s stock with \a [tool]."),
+		SPAN_NOTICE("You begin to cut \the [src]'s stock with \a [tool].")
 	)
-	var/obj/item/gun/projectile/shotgun/pump/sawn/sawn = new (user.loc)
-	transfer_fingerprints_to(sawn)
+	var/do_flags = loc == user ? DO_BAR_OVER_USER : EMPTY_BITFIELD
+	if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE | do_flags) || !user.use_sanity_check(src, tool, SANITY_CHECK_TARGET_UNEQUIP))
+		return FALSE
+	user.unEquip(src)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] slices \the [src]'s stock off with \a [tool]."),
+		SPAN_NOTICE("You slice \the [src]'s stock off with \a [tool].")
+	)
+	var/obj/item/gun/projectile/shotgun/pump/sawn/new_gun = new (get_turf(src))
+	transfer_fingerprints_to(new_gun)
 	qdel(src)
+	return TRUE
+
 
 /obj/item/gun/projectile/shotgun/pump/sawn
 	name = "riot shotgun"
@@ -255,27 +271,69 @@
 /obj/item/gun/projectile/shotgun/doublebarrel/unload_ammo(user, allow_dump)
 	..(user, allow_dump=1)
 
-//this is largely hacky and bad :(	-Pete
-/obj/item/gun/projectile/shotgun/doublebarrel/attackby(obj/item/A as obj, mob/user as mob)
-	if(w_class > 3 && (istype(A, /obj/item/circular_saw) || istype(A, /obj/item/melee/energy) || istype(A, /obj/item/gun/energy/plasmacutter)))
-		if(istype(A, /obj/item/gun/energy/plasmacutter))
-			var/obj/item/gun/energy/plasmacutter/cutter = A
-			if(!cutter.slice(user))
-				return ..()
-		to_chat(user, SPAN_NOTICE("You begin to shorten the barrel of \the [src]."))
-		if(length(loaded))
-			for(var/i in 1 to max_shells)
-				Fire(user, user)	//will this work? //it will. we call it twice, for twice the FUN
-			user.visible_message(SPAN_DANGER("The shotgun goes off!"), SPAN_DANGER("The shotgun goes off in your face!"))
-			return
-		if(do_after(user, 3 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))	//SHIT IS STEALTHY EYYYYY
-			user.unEquip(src)
-			var/obj/item/gun/projectile/shotgun/doublebarrel/sawn/empty/buddy = new(loc)
-			transfer_fingerprints_to(buddy)
-			qdel(src)
-			to_chat(user, SPAN_WARNING("You shorten the barrel of \the [src]!"))
-	else
-		..()
+
+/obj/item/gun/projectile/shotgun/doublebarrel/get_interactions_info()
+	. = ..()
+	.["Circular Saw"] = "<p>Saws off the barrel.</p>"
+	.["Energy Weapon"] = "<p>Saws off the barrel. The weapon must be turned on.</p>"
+	.["Plasma Cutter"] = "<p>Saws off the barrel.</p>"
+
+
+/obj/item/gun/projectile/shotgun/doublebarrel/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Circular Saw - Shorten barrel
+	if (istype(tool, /obj/item/circular_saw))
+		shorten_barrel(tool, user)
+		return TRUE
+
+	// Energy Weapon - Shorten barrel
+	if (istype(tool, /obj/item/melee/energy))
+		var/obj/item/melee/energy/energy_weapon = tool
+		if (!energy_weapon.active)
+			to_chat(user, SPAN_WARNING("\The [tool] needs to be turned on before it can cut \the [src]'s barrel."))
+			return TRUE
+		shorten_barrel(tool, user)
+		return TRUE
+
+	// Plasma Cutter - Shorten barrel
+	if (istype(tool, /obj/item/gun/energy/plasmacutter))
+		var/obj/item/gun/energy/plasmacutter/plasmacutter = tool
+		if (!plasmacutter.slice(user))
+			return TRUE
+		shorten_barrel(tool, user)
+		return TRUE
+
+	return ..()
+
+
+/obj/item/gun/projectile/shotgun/doublebarrel/proc/shorten_barrel(obj/item/tool, mob/user)
+	if (w_class <= 3)
+		to_chat(user, SPAN_WARNING("\The [src]'s barrel is too short to cut off."))
+		return
+	user.visible_message(
+		SPAN_NOTICE("\The [user] begins to cut off \the [src]'s barrel with \a [tool]."),
+		SPAN_NOTICE("You begin to cut off \the [src]'s barrel with \the [tool].")
+	)
+	if (length(loaded))
+		for (var/i in 1 to max_shells)
+			Fire(user, user)
+		user.visible_message(
+			SPAN_WARNING("\The [src] goes off in \the [user]'s face!"),
+			SPAN_DANGER("\The [src] goes off in your face!")
+		)
+		return
+	var/do_flags = loc == user ? DO_BAR_OVER_USER : EMPTY_BITFIELD
+	if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE | do_flags) || !user.use_sanity_check(src, tool, SANITY_CHECK_TARGET_UNEQUIP))
+		return
+	user.unEquip(src)
+	var/obj/item/gun/projectile/shotgun/doublebarrel/sawn/empty/new_gun = new(loc)
+	transfer_fingerprints_to(new_gun)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] shortens \the [src]'s barrel with \a [tool]."),
+		SPAN_NOTICE("You shorten \the [src]'s barrel with \a [tool].")
+	)
+	qdel(src)
+	return
+
 
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn
 	name = "sawn-off shotgun"

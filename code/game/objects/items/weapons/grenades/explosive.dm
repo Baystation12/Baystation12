@@ -131,21 +131,35 @@
 	det_time = rand(5,100) // Fuse is randomized.
 	. = ..()
 
-/obj/item/grenade/frag/makeshift/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W)) //overrides the act to screwdrive a grenade to set its fuse.
-		to_chat(user, SPAN_WARNING("You can't adjust the timer on \the [src]!"))
+
+/obj/item/grenade/frag/makeshift/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_ANY_ITEM] += "<p>Attempts to add the item as a source of shrapnel. Only certain types of items can be used in this way.</p>"
+	. -= CODEX_INTERACTION_SCREWDRIVER
+
+
+/obj/item/grenade/frag/makeshift/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Block parent interaction
+	if (isScrewdriver(tool))
+		to_chat(user, SPAN_WARNING("You can't adjust the timer on \the [src]."))
 		return TRUE
-	if (is_type_in_list(W, possible_reinforcements))
-		if(shrapnel_reinforced<10) //you can only add 10 items inside the can
-			user.visible_message(
-				SPAN_WARNING("\The [user] pries \the [src] open and drops \a [W] inside."),
-				SPAN_DANGER("You open \the [src], carefully adding \a [W] before sealing the lid again."),
-				SPAN_WARNING("You hear a metallic crack, followed by clinking.")
-			)
-			num_fragments += rand(3,7) // add 3 to 7 pellets. If you're /REALLY/ lucky, you'll end up with something similar to a standard grenade
-			shrapnel_reinforced += 1
-			qdel(W)
-		else
-			to_chat(user, SPAN_WARNING("You can't add any more items to \the [src]!"))
+
+	// Reinforcements - Add reinforcements
+	if (is_type_in_list(tool, possible_reinforcements))
+		if (shrapnel_reinforced >= 10)
+			to_chat(user, SPAN_WARNING("You can't add any more items to \the [src]."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		num_fragments += rand(3, 7)
+		shrapnel_reinforced += 1
+		user.visible_message(
+			SPAN_NOTICE("\The [user] pries \the [src] open and drops \a [tool] inside."),
+			SPAN_NOTICE("You open \the [src], carefully adding \a [tool] before sealing the lid again."),
+			SPAN_ITALIC("You hear a metallic crack, followed by clinking.")
+		)
+		qdel(tool)
 		return TRUE
+
 	return ..()

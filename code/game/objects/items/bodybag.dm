@@ -30,30 +30,62 @@
 	density = FALSE
 	storage_capacity = (MOB_MEDIUM * 2) - 1
 	var/contains_body = 0
-	var/has_label = FALSE
+	/// The body bag's current label
+	var/label = null
 
-/obj/structure/closet/body_bag/attackby(obj/item/W, mob/user as mob)
-	if (istype(W, /obj/item/pen))
-		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
-		if (user.get_active_hand() != W)
-			return
-		if (!in_range(src, user) && src.loc != user)
-			return
-		t = sanitizeSafe(t, MAX_NAME_LEN)
-		if (t)
-			src.SetName("body bag - ")
-			src.name += t
-			has_label = TRUE
-		else
-			src.SetName("body bag")
-		src.update_icon()
+
+/obj/structure/closet/body_bag/get_interactions_info()
+	. = ..()
+	.["Pen"] = "<p>Relabels \the [initial(name)].</p>"
+	.[CODEX_INTERACTION_WIRECUTTERS] = "<p>Removes the label, if present.</p>"
+
+
+/obj/structure/closet/body_bag/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Pen - Relabel bag
+	if (istype(tool, /obj/item/pen))
+		var/input = input(user, "What would you like \the [src]'s label to be?", "[name] Label", label) as null|text
+		input = sanitizeSafe(input, MAX_DESC_LEN)
+		if (!input || input == label)
+			return TRUE
+		set_label(input)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] relabels \the [initial(name)]."),
+			SPAN_NOTICE("You relabel \the [initial(name)] to '[label].'")
+		)
+		return TRUE
+
+	// Wirecutters - Remove label
+	if (isWirecutter(tool))
+		if (!label)
+			to_chat(user, SPAN_WARNING("\The [src] has no label to remove."))
+		clear_label()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \the [src]'s label with \a [tool]."),
+			SPAN_NOTICE("You remove \the [src]'s label with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
+
+/// Sets the body bag's label. Updates name and icon.
+/obj/structure/closet/body_bag/proc/set_label(new_label)
+	if (!new_label)
+		clear_label()
 		return
-	else if(isWirecutter(W))
-		src.SetName("body bag")
-		has_label = FALSE
-		to_chat(user, "You cut the tag off \the [src].")
-		src.update_icon()
+	label = new_label
+	SetName("[initial(name)] - [label]")
+	update_icon()
+
+
+/// Removes the body bag's label. Updates name and icon.
+/obj/structure/closet/body_bag/proc/clear_label()
+	if (!label)
 		return
+	label = null
+	SetName(initial(name))
+	update_icon()
+
 
 /obj/structure/closet/body_bag/on_update_icon()
 	if(opened)
@@ -62,7 +94,7 @@
 		icon_state = "closed_unlocked"
 
 	src.overlays.Cut()
-	if(has_label)
+	if(label)
 		src.overlays += image(src.icon, "bodybag_label")
 
 /obj/structure/closet/body_bag/store_mobs(stored_units)

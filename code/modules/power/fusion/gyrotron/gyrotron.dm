@@ -53,11 +53,20 @@
 	else
 		icon_state = "emitter-off"
 
-/obj/machinery/power/emitter/gyrotron/attackby(obj/item/W, mob/user)
-	if(isMultitool(W))
+
+/obj/machinery/power/emitter/gyrotron/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_MULTITOOL] = "<p>Allows setting a new ident tag on the machine.</p>"
+
+
+/obj/machinery/power/emitter/gyrotron/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Multitool - Assign new ident tag
+	if (isMultitool(tool))
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.get_new_tag(user)
-		return
+		return TRUE
+
 	return ..()
+
 
 #undef GYRO_POWER

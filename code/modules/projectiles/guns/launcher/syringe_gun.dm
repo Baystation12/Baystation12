@@ -118,18 +118,30 @@
 	else
 		..()
 
-/obj/item/gun/launcher/syringe/attackby(obj/item/A as obj, mob/user as mob)
-	if(istype(A, /obj/item/syringe_cartridge))
-		var/obj/item/syringe_cartridge/C = A
-		if(length(darts) >= max_darts)
-			to_chat(user, SPAN_WARNING("[src] is full!"))
-			return
-		if(!user.unEquip(C, src))
-			return
-		darts += C //add to the end
-		user.visible_message("[user] inserts \a [C] into [src].", SPAN_NOTICE("You insert \a [C] into [src]."))
-	else
-		..()
+
+/obj/item/gun/launcher/syringe/get_interactions_info()
+	. = ..()
+	.["Syringe Gun Cartridge"] = "<p>Inserts the dart into the gun. The gun can hold up to [initial(max_darts)] cartridge\s at once.</p>"
+
+
+/obj/item/gun/launcher/syringe/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Syringe Gun Cartridge - Insert dart
+	if (istype(tool, /obj/item/syringe_cartridge))
+		if (length(darts) >= max_darts)
+			to_chat(user, SPAN_WARNING("\The [src] is full of darts."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		darts += tool
+		user.visible_message(
+			SPAN_NOTICE("\The [user] inserts \a [tool] into \the [src]."),
+			SPAN_NOTICE("You insert \the [tool] into \the [src].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/launcher/syringe/rapid
 	name = "syringe gun revolver"

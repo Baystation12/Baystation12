@@ -115,29 +115,43 @@
 		return
 	return ..()
 
-/obj/item/reagent_containers/hypospray/vial/attackby(obj/item/W, mob/user)
-	var/usermessage = ""
-	if(istype(W, /obj/item/reagent_containers/glass/beaker/vial))
-		if(!do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) || !(W in user))
-			return 0
-		if(!user.unEquip(W, src))
-			return
-		if(loaded_vial)
+
+/obj/item/reagent_containers/hypospray/vial/get_interactions_info()
+	. = ..()
+	.["Vial"] = "<p>Loads the vial into the hypospray. Only one vial can be loaded at a time. Hot-swaps out the old vial if one is already present.</p>"
+
+
+/obj/item/reagent_containers/hypospray/vial/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Vial - Insert vial
+	if (istype(tool, /obj/item/reagent_containers/glass/beaker/vial))
+		if (!do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool, SANITY_CHECK_TOOL_UNEQUIP))
+			return TRUE
+		user.unEquip(tool, src)
+		if (loaded_vial)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] swaps the vials in \the [src]."),
+				SPAN_NOTICE("You swap \the [loaded_vial] out of \the [src] for \the [tool]."),
+				range = 2
+			)
 			remove_vial(user, "swap")
-			usermessage = "You load \the [W] into \the [src] as you remove the old one."
 		else
-			usermessage = "You load \the [W] into \the [src]."
-		if(W.is_open_container())
-			W.atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
-			W.update_icon()
-		loaded_vial = W
+			user.visible_message(
+				SPAN_NOTICE("\The [user] loads a vial into \the [src]."),
+				SPAN_NOTICE("You load \the [loaded_vial] into \the [src]."),
+				range = 2
+			)
+		if (tool.is_open_container())
+			CLEAR_FLAGS(tool.atom_flags, ATOM_FLAG_OPEN_CONTAINER)
+			tool.update_icon()
+		loaded_vial = tool
 		reagents.maximum_volume = loaded_vial.reagents.maximum_volume
 		loaded_vial.reagents.trans_to_holder(reagents,volume)
-		user.visible_message(SPAN_NOTICE("[user] has loaded [W] into \the [src]."),SPAN_NOTICE("[usermessage]"))
 		update_icon()
-		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
-		return
-	..()
+		playsound(src, 'sound/weapons/empty.ogg', 50, TRUE)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/reagent_containers/hypospray/vial/afterattack(obj/target, mob/user, proximity) // hyposprays can be dumped into, why not out? uses standard_pour_into helper checks.
 	if(!proximity)

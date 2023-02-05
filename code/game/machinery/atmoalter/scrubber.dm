@@ -190,20 +190,27 @@
 	else
 		icon_state = "scrubber:0"
 
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(obj/item/I as obj, mob/user as mob)
-	if(isWrench(I))
-		if(use_power == POWER_USE_ACTIVE)
-			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
-			return
 
-		anchored = !anchored
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("You [anchored ? "wrench" : "unwrench"] \the [src]."))
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/can_wrench_bolts(obj/item/tool, mob/user, silent)
+	. = ..()
+	if (!.)
+		return
 
-		return
-	//doesn't hold tanks
-	if(istype(I, /obj/item/tank))
-		return
+	if (use_power == POWER_USE_ACTIVE)
+		if (!silent)
+			to_chat(user, SPAN_WARNING("\The [src] must be turned off before you can wrench it."))
+		return FALSE
+
+
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/get_interactions_info()
+	. = ..()
+	. -= "Tank"
+
+
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Tank - Block interaction
+	if (istype(tool, /obj/item/tank))
+		return FALSE
 
 	return ..()
 
@@ -213,10 +220,3 @@
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 	machine_name = "large stationary portable scrubber"
 	machine_desc = "This is simply a large portable scrubber that can't be moved once it's bolted into place, and is otherwise identical."
-
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(obj/item/I as obj, mob/user as mob)
-	if(isWrench(I))
-		to_chat(user, SPAN_WARNING("The bolts are too tight for you to unscrew!"))
-		return
-
-	return ..()

@@ -65,29 +65,60 @@
 	if(cell)
 		cell.emp_act(severity)
 
-/obj/item/organ/internal/cell/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
-		if(open)
-			open = 0
-			to_chat(user, SPAN_NOTICE("You screw the battery panel in place."))
-		else
-			open = 1
-			to_chat(user, SPAN_NOTICE("You unscrew the battery panel."))
 
-	if(isCrowbar(W))
-		if(open)
-			if(cell)
-				user.put_in_hands(cell)
-				to_chat(user, SPAN_NOTICE("You remove \the [cell] from \the [src]."))
-				cell = null
+/obj/item/organ/internal/cell/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_CROWBAR] = "<p>Removes the power cell, if present. The battery panel must be open.</p>"
+	.["Power Cell"] = "<p>Inserts the power cell. The battery panel must be open. Only one power cell can be installed at a time.</p>"
+	.[CODEX_INTERACTION_SCREWDRIVER] = "<p>Toggles the battery panel open and closed.</p>"
 
-	if (istype(W, /obj/item/cell))
-		if(open)
-			if(cell)
-				to_chat(user, SPAN_WARNING("There is a power cell already installed."))
-			else if(user.unEquip(W, src))
-				cell = W
-				to_chat(user, SPAN_NOTICE("You insert \the [cell]."))
+
+/obj/item/organ/internal/cell/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Crowbar - Remove power cell
+	if (isCrowbar(tool))
+		if (!open)
+			to_chat(user, SPAN_WARNING("\The [src]'s battery panel needs to be opened before you can extract the power cell."))
+			return TRUE
+		if (!cell)
+			to_chat(user, SPAN_WARNING("\The [src] has no power cell to remove."))
+			return TRUE
+		user.put_in_hands(cell)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \a [cell] from \the [src] with \a [tool]."),
+			SPAN_NOTICE("You remove \the [cell] from \the [src] with \the [tool].")
+		)
+		cell = null
+		return TRUE
+
+	// Power Cell - Install power cell
+	if (istype(tool, /obj/item/cell))
+		if (!open)
+			to_chat(user, SPAN_WARNING("\The [src]'s battery panel needs to be opened before you can install \the [tool]."))
+			return TRUE
+		if (cell)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [cell] installed."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		cell = tool
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \the [src]."),
+			SPAN_NOTICE("You install \the [tool] into \the [src].")
+		)
+		return TRUE
+
+	// Screwdriver - Toggle the battery panel
+	if (isScrewdriver(tool))
+		open = !open
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [open ? "opens" : "closes"] \the [src]'s battery panel with \a [tool]."),
+			SPAN_NOTICE("You [open ? "open" : "close"] \the [src]'s battery panel with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/organ/internal/cell/replaced()
 	..()

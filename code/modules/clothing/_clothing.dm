@@ -282,6 +282,8 @@ BLIND     // can't see anything
 	var/clipped = 0
 	var/obj/item/clothing/ring/ring = null		//Covered ring
 	var/mob/living/carbon/human/wearer = null	//Used for covered rings when dropping
+	/// Boolean. Whether or not the gloves can be clipped with tools.
+	var/can_be_clipped = TRUE
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	item_flags = ITEM_FLAG_WASHER_ALLOWED
@@ -320,6 +322,9 @@ BLIND     // can't see anything
 
 /obj/item/clothing/gloves/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/wirecutters) || istype(W, /obj/item/scalpel))
+		if (!can_be_clipped)
+			to_chat(user, SPAN_WARNING("\The [src] cannot be cut."))
+			return TRUE
 		if (clipped)
 			to_chat(user, SPAN_NOTICE("\The [src] have already been modified!"))
 			update_icon()

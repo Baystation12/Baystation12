@@ -41,6 +41,7 @@
 	if(!can_load(S, user))
 		return
 	if(user && !user.unEquip(S, src))
+		to_chat(user, SPAN_WARNING("You can't drop \the [S]."))
 		return
 	finish_loading(S, user)
 
@@ -52,11 +53,20 @@
 	else
 		to_chat(user, SPAN_WARNING("\The [src] is empty."))
 
-/obj/item/gun/launcher/net/attackby(obj/item/I, mob/user)
-	if((istype(I, /obj/item/net_shell)))
-		load(I, user)
-	else
-		..()
+
+/obj/item/gun/launcher/net/get_interactions_info()
+	. = ..()
+	.["Net Gun Shell"] = "<p>Loads the shell into the launcher. Only one shell can be loaded at a time.</p>"
+
+
+/obj/item/gun/launcher/net/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Net Gun Shell - Load ammo
+	if (istype(tool, /obj/item/net_shell))
+		load(tool, user)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/launcher/net/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)

@@ -14,8 +14,10 @@
 /obj/item/device/mmi/digital/proc/PickName()
 	return
 
-/obj/item/device/mmi/digital/attackby()
-	return
+
+/obj/item/device/mmi/digital/can_use_item(obj/item/tool, mob/user, click_params)
+	return FALSE
+
 
 /obj/item/device/mmi/digital/attack_self()
 	return

@@ -72,19 +72,6 @@
 	..()
 	return
 
-/obj/item/storage/backpack/holding/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/storage/backpack/holding) || istype(W, /obj/item/storage/bag/trash/bluespace))
-		to_chat(user, SPAN_WARNING("The Bluespace interfaces of the two devices conflict and malfunction."))
-		qdel(W)
-		return 1
-	return ..()
-
-	//Please don't clutter the parent storage item with stupid hacks.
-/obj/item/storage/backpack/holding/can_be_inserted(obj/item/W as obj, stop_messages = 0)
-	if(istype(W, /obj/item/storage/backpack/holding))
-		return 1
-	return ..()
-
 /obj/item/storage/backpack/santabag
 	name = "\improper Santa's gift bag"
 	desc = "Space Santa uses this to deliver toys to all the nice children in space for Christmas! Wow, it's pretty big!"
@@ -466,13 +453,6 @@
 	set_invisibility(i ? 101 : 0)
 	anchored = i ? TRUE : FALSE
 	alpha = i ? 128 : initial(alpha)
-
-/obj/item/storage/backpack/satchel/flat/attackby(obj/item/W, mob/user)
-	var/turf/T = get_turf(src)
-	if(hides_under_flooring() && isturf(T) && !T.is_plating())
-		to_chat(user, SPAN_WARNING("You must remove the plating first."))
-		return 1
-	return ..()
 
 //ERT backpacks.
 /obj/item/storage/backpack/ert

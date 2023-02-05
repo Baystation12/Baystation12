@@ -38,9 +38,28 @@
 		..(over_object)
 
 
-/obj/item/clothing/accessory/storage/attackby(obj/item/I, mob/user)
+/obj/item/clothing/accessory/storage/use_grab(obj/item/grab/grab, list/click_params)
 	if (container)
-		return container.attackby(I, user)
+		return container.use_grab(grab, click_params)
+	return ..()
+
+
+/obj/item/clothing/accessory/storage/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	if (container)
+		return container.use_weapon(weapon, user, click_params)
+	return ..()
+
+
+/obj/item/clothing/accessory/storage/use_tool(obj/item/tool, mob/user, list/click_params)
+	if (container)
+		return container.use_tool(tool, user, click_params)
+	return ..()
+
+
+/obj/item/clothing/accessory/storage/attackby(obj/item/I, mob/user, click_params)
+	if (container)
+		return container.attackby(I, user, click_params)
+	return ..()
 
 
 /obj/item/clothing/accessory/storage/emp_act(severity)

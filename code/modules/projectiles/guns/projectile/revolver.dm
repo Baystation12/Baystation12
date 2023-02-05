@@ -76,12 +76,34 @@
 	caliber = CALIBER_CAPS
 	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 1)
 	ammo_type = /obj/item/ammo_casing/cap
+	/// Boolean. If set, the toy markings have been cut off.
+	var/markings_cut = FALSE
 
-/obj/item/gun/projectile/revolver/capgun/attackby(obj/item/wirecutters/W, mob/user)
-	if(!istype(W) || icon_state == "revolver")
-		return ..()
-	to_chat(user, SPAN_NOTICE("You snip off the toy markings off the [src]."))
-	name = "revolver"
-	icon_state = "revolver"
-	desc += " Someone snipped off the barrel's toy mark. How dastardly, this could get someone shot."
-	return 1
+
+/obj/item/gun/projectile/revolver/capgun/on_update_icon()
+	icon_state = markings_cut ? "revolver" : "revolver-toy"
+
+
+/obj/item/gun/projectile/revolver/capgun/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_WIRECUTTERS] = "<p>Cuts off the toy markings, making it look like a real revolver.</p>"
+
+
+/obj/item/gun/projectile/revolver/capgun/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Wirecutters - Cut off toy markings
+	if (isWirecutter(tool))
+		if (markings_cut)
+			to_chat(user, SPAN_WARNING("\The [src]'s tip has already been cut off."))
+			return TRUE
+		markings_cut = TRUE
+		SetName("revolver")
+		desc += " Someone snipped off the barrel's toy mark. How dastardly, this could get someone shot."
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] snips off \the [src]'s toy markings with \a [tool]."),
+			SPAN_NOTICE("You snip off \the [src]'s toy markings with \a [tool]."),
+			range = 3
+		)
+		return TRUE
+
+	return ..()

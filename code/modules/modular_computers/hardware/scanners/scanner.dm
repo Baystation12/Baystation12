@@ -54,28 +54,50 @@
 
 /obj/item/stock_parts/computer/scanner/proc/do_on_afterattack(mob/user, atom/target, proximity)
 
-/obj/item/stock_parts/computer/scanner/attackby(obj/W, mob/living/user)
-	do_on_attackby(user, W)
-	// Nanopaste. Repair all damage if present for a single unit.
-	var/obj/item/stack/S = W
-	if (istype(S, /obj/item/stack/nanopaste))
+
+/obj/item/stock_parts/computer/scanner/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_CABLE] = "<p>Repairs the component. 1 length of coil repairs 10 points of damage.</p>"
+	.["Nanopaste"] = "<p>Fully repairs the component. This costs 1 unit of nanopaste.</p>"
+
+
+/obj/item/stock_parts/computer/scanner/use_tool(obj/item/tool, mob/user, list/click_params)
+	do_on_attackby(user, tool)
+
+	// Cable Coil - Repair some damage
+	if (isCoil(tool))
 		if (!health_damaged())
-			to_chat(user, "\The [src] doesn't seem to require repairs.")
+			to_chat(user, SPAN_WARNING("\The [src] doesn't require repairs."))
 			return TRUE
-		if (S.use(1))
-			to_chat(user, "You apply a bit of \the [W] to \the [src]. It immediately repairs all damage.")
-			revive_health()
+		var/obj/item/stack/cable_coil/cable = tool
+		if (!cable.use(1))
+			to_chat(user, SPAN_WARNING("There isn't enough of \the [tool] left to repair \the [src]."))
+			return TRUE
+		restore_health(10)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] repairs some of \the [src]'s damage with some [cable.plural_name] of [cable.name]."),
+			SPAN_NOTICE("You repair some of \the [src]'s damage with some [cable.plural_name] of [cable.name].")
+		)
 		return TRUE
-	// Cable coil. Works as repair method, but will probably require multiple applications and more cable.
-	if (isCoil(S))
+
+	// Nanopaste - Repair all damage
+	if (istype(tool, /obj/item/stack/nanopaste))
 		if (!health_damaged())
-			to_chat(user, "\The [src] doesn't seem to require repairs.")
+			to_chat(user, SPAN_WARNING("\The [src] doesn't require repairs."))
 			return TRUE
-		if (S.use(1))
-			to_chat(user, "You patch up \the [src] with a bit of \the [W].")
-			restore_health(10)
+		var/obj/item/stack/nanopaste/nanopaste = tool
+		if (!nanopaste.use(1))
+			to_chat(user, SPAN_WARNING("There isn't enough of \the [tool] left to repair \the [src]."))
+			return TRUE
+		revive_health()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] fully repairs \the [src] with some [nanopaste.plural_name]."),
+			SPAN_NOTICE("You fully repair \the [src] with some [nanopaste.plural_name].")
+		)
 		return TRUE
+
 	return ..()
+
 
 /obj/item/stock_parts/computer/scanner/proc/do_on_attackby(mob/user, atom/target)
 

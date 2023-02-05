@@ -148,32 +148,64 @@
 		M.update_inv_r_hand(1)
 
 
-/obj/item/clothing/mask/smokable/ecig/attackby(obj/item/I, mob/user as mob)
-	if(istype(I, /obj/item/reagent_containers/ecig_cartridge))
-		if (ec_cartridge)//can't add second one
-			to_chat(user, "[SPAN_NOTICE("A cartridge has already been installed.")] ")
-		else if(user.unEquip(I, src))//fits in new one
-			ec_cartridge = I
-			update_icon()
-			to_chat(user, "[SPAN_NOTICE("You insert \the [I] into \the [src].")] ")
+/obj/item/clothing/mask/smokable/ecig/get_interactions_info()
+	. = ..()
+	.["Flavor Cartridge"] = "<p>Installs a flavor cartridge. Only one flavor cartridge can be installed at a time.</p>"
+	.["Device Cell"] = "<p>Installs the cell as a battery. Only one battery can be installed at a time.</p>"
+	.[CODEX_INTERACTION_SCREWDRIVER] = "<p>Removes the battery, if present.</p>"
 
-	if(istype(I, /obj/item/screwdriver))
-		if(cigcell) //if contains powercell
-			cigcell.update_icon()
-			cigcell.dropInto(loc)
-			cigcell = null
-			to_chat(user, SPAN_NOTICE("You remove \the [cigcell] from \the [src]."))
-		else //does not contains cell
-			to_chat(user, SPAN_NOTICE("There's no battery in \the [src]."))
 
-	if(istype(I, /obj/item/cell/device))
-		if(!cigcell && user.unEquip(I))
-			I.forceMove(src)
-			cigcell = I
-			to_chat(user, SPAN_NOTICE("You install \the [cigcell] into \the [src]."))
-			update_icon()
-		else
-			to_chat(user, SPAN_NOTICE("\The [src] already has a battery installed."))
+/obj/item/clothing/mask/smokable/ecig/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Flavor Cartridge - Insert cartridge
+	if (istype(tool, /obj/item/reagent_containers/ecig_cartridge))
+		if (ec_cartridge)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [ec_cartridge] installed."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		ec_cartridge = tool
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] inserts \a [tool] into \the [src]."),
+			SPAN_NOTICE("You insert \the [tool] into \the [src]."),
+			range = 2
+		)
+		return TRUE
+
+	// Device Cell - Install battery
+	if (istype(tool, /obj/item/cell/device))
+		if (cigcell)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [cigcell] installed."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		cigcell = tool
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \the [src]."),
+			SPAN_NOTICE("You install \the [tool] into \the [src]."),
+			range = 2
+		)
+		return TRUE
+
+	// Screwdriver - Remove battery
+	if (isScrewdriver(tool))
+		if (!cigcell)
+			to_chat(user, SPAN_WARNING("\The [src] has no battery to remove."))
+			return TRUE
+		cigcell.update_icon()
+		cigcell.dropInto(loc)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \a [cigcell] from \the [src] with \a [tool]."),
+			SPAN_NOTICE("You remove \the [cigcell] from \the [src] with \the [tool]."),
+			range = 2
+		)
+		cigcell = null
+		return TRUE
+
+	return ..()
 
 
 /obj/item/clothing/mask/smokable/ecig/attack_self(mob/user as mob)

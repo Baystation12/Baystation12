@@ -86,22 +86,46 @@
 	if(airtank)
 		overlays += image(icon, "tank")
 
-/obj/structure/closet/body_bag/rescue/attackby(obj/item/W, mob/user, click_params)
-	if(istype(W,/obj/item/tank))
-		if(airtank)
-			to_chat(user, "\The [src] already has an air tank installed.")
-			return 1
-		else if(user.unEquip(W, src))
-			set_tank(W)
-			to_chat(user, "You install \the [W] in \the [src].")
-			return 1
-	else if(airtank && isScrewdriver(W))
-		to_chat(user, "You remove \the [airtank] from \the [src].")
+
+/obj/structure/closet/body_bag/rescue/get_interactions_info()
+	. = ..()
+	.["Air Tank"] = "<p>Attaches the air tank to be used as an air supply for anyone in the bag. There can only be one air tank attached at a time.</p>"
+	.[CODEX_INTERACTION_SCREWDRIVER] = "<p>Detaches the air tank, if one is present.</p>"
+
+
+/obj/structure/closet/body_bag/rescue/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Air tank - Installs the tank
+	if (istype(tool, /obj/item/tank))
+		if (airtank)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [airtank] installed."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		set_tank(tool)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \the [src]."),
+			SPAN_NOTICE("You install \the [tool] into \the [src].")
+		)
+		update_icon()
+		return TRUE
+
+	// Screwdriver - Remove airtank
+	if (isScrewdriver(tool))
+		if (!airtank)
+			to_chat(user, SPAN_WARNING("\The [src] has no air tank to remove."))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] detaches \the [src]'s [airtank.name] with \a [tool]."),
+			SPAN_NOTICE("You detach \the [src]'s [airtank.name] with \the [tool].")
+		)
 		airtank.dropInto(loc)
 		airtank = null
 		update_icon()
-	else
-		..()
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/closet/body_bag/rescue/fold(user)
 	var/obj/item/tank/my_tank = airtank

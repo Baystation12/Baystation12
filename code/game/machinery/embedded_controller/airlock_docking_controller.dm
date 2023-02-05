@@ -11,17 +11,30 @@
 		var/datum/computer/file/embedded_program/docking/airlock/docking_program = program
 		docking_program.display_name = display_name
 
-/obj/machinery/embedded_controller/radio/airlock/docking_port/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/device/multitool)) //give them part of code, would take few tries to get full
+
+/obj/machinery/embedded_controller/radio/airlock/docking_port/get_antag_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_MULTITOOL] = "<p>Provides the docking codes needed to dock at this airlock. It may take multiple attempts to determine a full code.</p>"
+
+
+/obj/machinery/embedded_controller/radio/airlock/docking_port/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Multitool - Give part of the docking code
+	if (isMultitool(tool))
 		var/datum/computer/file/embedded_program/docking/airlock/docking_program = program
 		var/code = docking_program.docking_codes
-		if(!code)
+		if (!code)
 			code = "N/A"
 		else
 			code = stars(code)
-		to_chat(user,"[W]'s screen displays '[code]'")
-	else
-		..()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] scans \a [tool] over \the [src]."),
+			SPAN_NOTICE("You scan \the [tool] over \the [src]. The screen displays '[code].'"),
+			range = 2
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/machinery/embedded_controller/radio/airlock/docking_port/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = GLOB.default_state)
 	var/data[0]

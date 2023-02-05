@@ -70,14 +70,38 @@
 	return B
 
 
-/obj/item/reagent_containers/food/drinks/bottle/attackby(obj/item/W, mob/user)
-	if (!rag && istype(W, /obj/item/reagent_containers/glass/rag))
-		insert_rag(W, user)
-		return
-	if (rag && W.IsFlameSource())
-		rag.attackby(W, user)
-		return
-	..()
+/obj/item/reagent_containers/food/drinks/bottle/get_interactions_info()
+	. = ..()
+	.["Rag"] = "<p>Inserts a rag into the bottle. Only one rag can be in the bottle at a time.</p>"
+	.[CODEX_INTERACTION_FLAME_SOURCE] = "<p>If a rag is attached, attempts to ignite the rag. This can be done on help or harm intent.</p>"
+
+
+/obj/item/reagent_containers/food/drinks/bottle/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Rag - Insert rag
+	if (istype(tool, /obj/item/reagent_containers/glass/rag))
+		if (rag)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [rag] inserted."))
+			return TRUE
+		insert_rag(tool, user)
+		return TRUE
+
+	// Flame Source - Ignite rag
+	if (tool.IsFlameSource())
+		if (!rag)
+			return ..()
+		return rag.use_tool(tool, user, click_params)
+
+	return ..()
+
+
+/obj/item/reagent_containers/food/drinks/bottle/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Flame Source - Ignite rag
+	if (weapon.IsFlameSource())
+		if (!rag)
+			return ..()
+		return rag.use_weapon(weapon, user, click_params)
+
+	return ..()
 
 
 /obj/item/reagent_containers/food/drinks/bottle/attack_self(mob/user)

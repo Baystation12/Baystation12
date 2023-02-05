@@ -17,49 +17,69 @@
 
 	. = ..()
 
-/obj/item/storage/backpack/weldpack/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWelder(W))
-		var/obj/item/weldingtool/T = W
-		if (!T.tank)
-			to_chat(user, SPAN_WARNING("\The [T] has no tank attached!"))
-			return
-		if (!T.tank.can_refuel)
-			to_chat(user, SPAN_WARNING("\The [T]'s [T.tank.name] does not have a refuelling port."))
-			return
-		if (T.welding)
-			if (user.a_intent == I_HURT)
-				user.visible_message(
-					SPAN_DANGER("\The [user] holds \a [T] up to \a [src], causing an explosion!"),
-					SPAN_DANGER("You hold \the [T] up to \the [src], causing an explosion!")
-				)
-				log_and_message_admins("triggered a fueltank explosion.", user)
-				explosion(get_turf(src), 4, EX_ACT_HEAVY)
-				if (!QDELETED(src))
-					qdel(src)
-				return
-			else
-				to_chat(user, SPAN_WARNING("You need to turn \the [T] off before you can refuel it. Or use harm intent if you're suicidal."))
-				return
-		if (!reagents.trans_to_obj(T.tank, T.tank.max_fuel))
-			to_chat(user, SPAN_WARNING("\The [T]'s [T.tank.name] is already full."))
-			return
-		to_chat(user, SPAN_NOTICE("You refill \the [T] with \the [src]."))
-		playsound(src, 'sound/effects/refill.ogg', 50, 1, -6)
-		return
 
-	else if(istype(W, /obj/item/welder_tank))
-		var/obj/item/welder_tank/tank = W
+/obj/item/storage/backpack/weldpack/get_interactions_info()
+	. = ..()
+	.["Welding Fuel Tank"] = "<p>Refills the fuel tank.</p>"
+	.[CODEX_INTERACTION_WELDER] = {"
+		<p>Refills the welder's fuel tank. The welder must have a tank inserted and must be turned off.</p>
+		<p>On harm intent, if the welder is turned on, causes the welding pack to explode.</p>
+	"}
+
+
+/obj/item/storage/backpack/weldpack/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Welding Tool - Detonate weldpack
+	if (isWelder(weapon))
+		var/obj/item/weldingtool/welder = weapon
+		if (!welder.welding)
+			to_chat(user, SPAN_WARNING("\The [weapon] must be turned on to ignite \the [src]. Or use harm intent if you want to refuel it."))
+			return TRUE
+		welder.burn_fuel(1)
+		user.visible_message(
+			SPAN_DANGER("\The [user] holds \a [weapon] up to \the [src], causing an explosion!"),
+			SPAN_DANGER("You hold \the [weapon] up to \the [src], causing an explosion!")
+		)
+		log_and_message_admins("triggered a fueltank explosion.", user)
+		explosion(get_turf(src), 4, EX_ACT_HEAVY)
+		if (!QDELETED(src))
+			qdel(src)
+		return TRUE
+
+	return ..()
+
+
+/obj/item/storage/backpack/weldpack/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Welding Tank - Refill tank
+	if (istype(tool, /obj/item/welder_tank))
+		var/obj/item/welder_tank/tank = tool
+		var/tool_name = isWelder(tank.loc) ? "[tank.loc.name]'s [name]" : name
 		if (!tank.can_refuel)
-			to_chat(user, SPAN_WARNING("\The [tank] does not have a refuelling port."))
-			return
-		if (!reagents.trans_to_obj(tank, tank.max_fuel))
-			to_chat(user, SPAN_WARNING("\The [tank] is already full."))
-			return
-		to_chat(user, SPAN_NOTICE("You refuel \the [tank] with \the [src]."))
-		playsound(loc, 'sound/effects/refill.ogg', 50, 1, -6)
-		return
+			to_chat(user, SPAN_WARNING("\The [tool_name] does not have a refuelling port."))
+			return TRUE
+		if (!reagents.trans_to_obj(tool, tank.max_fuel))
+			to_chat(user, SPAN_WARNING("\The [tool_name] is already full."))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] refuels \a [tool_name] with \the [src]."),
+			SPAN_NOTICE("You refuel \the [tool_name] with \the [src]."),
+			range = 2
+		)
+		playsound(src, 'sound/effects/refill.ogg', 50, TRUE, -6)
+		return TRUE
 
-	..()
+	// Welding Tool - Refill tank (Proxies to welding tank)
+	if (isWelder(tool))
+		var/obj/item/weldingtool/welder = tool
+		if (!welder.tank)
+			to_chat(user, SPAN_WARNING("\The [tool] has no tank attached to refill."))
+			return TRUE
+		if (welder.welding)
+			to_chat(user, SPAN_WARNING("You need to turn \the [tool] off before you can refuel it. Or use harm intent if you're suicidal."))
+			return TRUE
+		return use_tool(welder.tank, user, click_params)
+
+	return ..()
+
 
 /obj/item/storage/backpack/weldpack/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) // this replaces and improves the get_dist(src,O) <= 1 checks used previously

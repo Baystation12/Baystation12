@@ -132,16 +132,38 @@
 	desc = "[initial(desc)] [design.desc]"
 	icon_state = design.icon_state
 
-/obj/structure/sign/poster/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWirecutter(W))
-		playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-		if(ruined)
-			to_chat(user, SPAN_NOTICE("You remove the remnants of the poster."))
+
+/obj/structure/sign/poster/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_HAND] = "<p>Rips the poster from the wall, leaving behind tattered remains.</p>"
+	. -= CODEX_INTERACTION_SCREWDRIVER
+	.[CODEX_INTERACTION_WIRECUTTERS] = "<p>Cleanly removes the poster from the wall.</p>"
+
+
+/obj/structure/sign/poster/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Block removal
+	if (isScrewdriver(tool))
+		to_chat(user, SPAN_WARNING("\The [src] can't be removed with \the [tool]. Use wirecutters instead."))
+		return TRUE
+
+	// Wirecutter - Remove the poster
+	if (isWirecutter(tool))
+		playsound(src, 'sound/items/Wirecutter.ogg', 50, TRUE)
+		if (ruined)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] removes the remnants of \the [src] from the wall with \a [tool]."),
+				SPAN_NOTICE("You remove the remnants of \the [src] from the wall with \the [tool].")
+			)
 			qdel(src)
 		else
-			to_chat(user, SPAN_NOTICE("You carefully remove the poster from the wall."))
+			user.visible_message(
+				SPAN_NOTICE("\The [user] removes \the [src] from the wall with \a [tool]."),
+				SPAN_NOTICE("You remove \the [src] from the wall with \the [tool].")
+			)
 			roll_and_drop(user.loc)
-		return
+		return TRUE
+
+	return ..()
 
 
 /obj/structure/sign/poster/attack_hand(mob/user as mob)
@@ -163,7 +185,8 @@
 		add_fingerprint(user)
 
 /obj/structure/sign/poster/proc/roll_and_drop(turf/newloc)
-	new/obj/item/contraband/poster(newloc, poster_type)
+	var/obj/item/contraband/poster/poster = new (newloc, poster_type)
+	transfer_fingerprints_to(poster)
 	qdel(src)
 
 /singleton/poster

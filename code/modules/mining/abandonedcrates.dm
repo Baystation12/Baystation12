@@ -178,25 +178,49 @@
 		if(guesschar != code[i])
 			. = 0
 
-/obj/structure/closet/crate/secure/loot/attackby(obj/item/W as obj, mob/user as mob)
-	if(locked)
-		if (istype(W, /obj/item/device/multitool)) // Greetings Urist McProfessor, how about a nice game of cows and bulls?
-			to_chat(user, SPAN_NOTICE("DECA-CODE LOCK ANALYSIS:"))
-			if (attempts == 1)
-				to_chat(user, SPAN_WARNING("* Anti-Tamper system will activate on the next failed access attempt."))
-			else
-				to_chat(user, SPAN_NOTICE("* Anti-Tamper system will activate after [src.attempts] failed access attempts."))
-			if(length(lastattempt))
-				var/bulls = 0
-				var/cows = 0
 
-				var/list/code_contents = code.Copy()
-				for(var/i in 1 to codelen)
-					if(lastattempt[i] == code[i])
-						++bulls
-					else if(lastattempt[i] in code_contents)
-						++cows
-					code_contents -= lastattempt[i]
-				to_chat(user, SPAN_NOTICE("Last code attempt had [bulls] correct digits at correct positions and [cows] correct digits at incorrect positions."))
-			return
-	..()
+/obj/structure/closet/crate/secure/loot/get_mechanics_info()
+	. = ..()
+	. += "<h3>Loot Crate</h3><p>This is a randomly generated loot box with a lock. You can attempt to unlock it with a code, then use a multitool to check how many digits in your attempt were correct.</p>"
+
+
+/obj/structure/closet/crate/secure/loot/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_MULTITOOL] = "<p>Scans the lock, giving information on how many more attempts to unlock it you have, and how many digits were correct in the last unlock attempt.</p>"
+
+
+/obj/structure/closet/crate/secure/loot/get_antag_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_EMAG] = "<p>Unlocks the crate.</p>"
+
+
+/obj/structure/closet/crate/secure/loot/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Multitool - Attempt to unlock
+	if (isMultitool(tool))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] scans \a [tool] over \the [src]."),
+			SPAN_NOTICE("You scan \the [tool] over \the [src], checking the lock and anti-tamper status."),
+			range = 3
+		)
+		to_chat(user, SPAN_NOTICE("DECA-CODE LOCK ANALYSIS:"))
+		if (attempts == 1)
+			to_chat(user, SPAN_WARNING("* Anti-Tamper system will activate on the next failed access attempt."))
+		else
+			to_chat(user, SPAN_NOTICE("* Anti-Tamper system will activate after [attempts] more failed access attempt\s."))
+		if (!length(lastattempt))
+			to_chat(user, SPAN_WARNING("\The [src] does not have a previous access attempt logged."))
+			return TRUE
+
+		var/bulls = 0
+		var/cows = 0
+		var/list/code_contents = code.Copy()
+		for (var/count = 1 to codelen)
+			if (lastattempt[count] == code[count])
+				bulls++
+			else if (lastattempt[count] in code_contents)
+				cows++
+			code_contents -= lastattempt[count]
+		to_chat(user, SPAN_NOTICE("Last code attempt had [bulls] correct digit\s at the correct positions, and [cows] correct digit\s at incorrect positions."))
+		return TRUE
+
+	return ..()

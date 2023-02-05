@@ -34,30 +34,38 @@
 	QDEL_NULL(installed_gun)
 	return ..()
 
-/obj/item/integrated_circuit/manipulation/weapon_firing/attackby(obj/O, mob/user)
-	if(istype(O, /obj/item/gun/energy))
-		var/obj/item/gun/energy/gun = O
-		if(installed_gun)
-			to_chat(user, SPAN_WARNING("There's already a weapon installed."))
-			return
-		if(!user.unEquip(gun,src))
-			return
-		installed_gun = gun
-		to_chat(user, SPAN_NOTICE("You slide \the [gun] into the firing mechanism."))
-		playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
-		if(installed_gun.fire_delay)
-			cooldown_per_use = installed_gun.fire_delay * 10
-		if(cooldown_per_use < 30)
-			cooldown_per_use = 30 //If there's no defined fire delay let's put some
-		if(installed_gun.charge_cost)
-			power_draw_per_use = installed_gun.charge_cost
+
+/obj/item/integrated_circuit/manipulation/weapon_firing/get_interactions_info()
+	. = ..()
+	.["Energy Gun"] = "<p>Installs the gun. Only one gun can be installed at a time.</p>"
+
+
+/obj/item/integrated_circuit/manipulation/weapon_firing/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Energy Gun - Attach gun
+	if (istype(tool, /obj/item/gun/energy))
+		if (installed_gun)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [installed_gun] installed."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		installed_gun = tool
+		playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \the [src]."),
+			SPAN_NOTICE("You install \the [tool] into \the [src].")
+		)
+		cooldown_per_use = max(installed_gun.fire_delay * 10, 30)
+		power_draw_per_use = installed_gun.charge_cost
 		set_pin_data(IC_OUTPUT, 1, weakref(installed_gun))
-		if(length(installed_gun.firemodes))
-			var/datum/firemode/fm = installed_gun.firemodes[installed_gun.sel_mode]
-			set_pin_data(IC_OUTPUT, 2, fm.name)
+		if (length(installed_gun.firemodes))
+			var/datum/firemode/firemode = installed_gun.firemodes[installed_gun.sel_mode]
+			set_pin_data(IC_OUTPUT, 2, firemode.name)
 		push_data()
-	else
-		..()
+		return TRUE
+
+	return ..()
+
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/attack_self(mob/user)
 	if(installed_gun)
@@ -180,16 +188,30 @@
 	detach_grenade()
 	return ..()
 
-/obj/item/integrated_circuit/manipulation/grenade/attackby(obj/item/grenade/G, mob/user)
-	if(istype(G))
-		if(attached_grenade)
-			to_chat(user, SPAN_WARNING("There is already a grenade attached!"))
-		else if(user.unEquip(G,src))
-			user.visible_message(SPAN_WARNING("\The [user] attaches \a [G] to \the [src]!"), SPAN_NOTICE("You attach \the [G] to \the [src]."))
-			attach_grenade(G)
-			G.forceMove(src)
-	else
-		return ..()
+
+/obj/item/integrated_circuit/manipulation/grenade/get_interactions_info()
+	. = ..()
+	.["Grenade"] = "<p>Attaches the grenade to the circuit. Only one grenade can be attached.</p>"
+
+
+/obj/item/integrated_circuit/manipulation/grenade/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Grenade - Attache grenade
+	if (istype(tool, /obj/item/grenade))
+		if (attached_grenade)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [attached_grenade] attached."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		attach_grenade(tool)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] attaches \a [tool] to \the [src]."),
+			SPAN_NOTICE("You attach \the [tool] to \the [src].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/integrated_circuit/manipulation/grenade/attack_self(mob/user)
 	if(attached_grenade)
@@ -645,10 +667,21 @@
 	controlling = null
 
 
-/obj/item/integrated_circuit/manipulation/ai/attackby(obj/item/I, mob/user)
-	if(is_type_in_list(I, list(/obj/item/aicard, /obj/item/device/paicard, /obj/item/device/mmi)))
-		load_ai(user, I)
-	else return ..()
+/obj/item/integrated_circuit/manipulation/ai/get_interactions_info()
+	. = ..()
+	.["inteliCard"] = "<p>Loads the card's AI.</p>"
+	.["Personal AI Device"] = "<p>Loads the card's AI.</p>"
+	.["Man-Machine Interface"] = "<p>Loads the card's AI.</p>"
+
+
+/obj/item/integrated_circuit/manipulation/ai/use_tool(obj/item/tool, mob/user, list/click_params)
+	// inteliCard, pAI, MMI - Load AI
+	if (is_type_in_list(tool, list(/obj/item/aicard, /obj/item/device/paicard, /obj/item/device/mmi)))
+		load_ai(user, tool)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/integrated_circuit/manipulation/ai/attack_self(user)
 	unload_ai()

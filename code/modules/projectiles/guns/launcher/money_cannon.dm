@@ -129,30 +129,35 @@
 	else
 		return ..()
 
-/obj/item/gun/launcher/money/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/spacecash))
-		var/obj/item/spacecash/bling = W
-		if(bling.worth < 1)
-			to_chat(user, SPAN_WARNING("You can't seem to get the bills to slide into the receptacle."))
-			return
-		if(receptacle_value >= max_capacity)
-			to_chat(user, SPAN_WARNING("There's no space in the receptacle for [bling]."))
-			return
-		else if (receptacle_value && receptacle_value + bling.worth > max_capacity) //If we have enough money to fill it to capacity
-			bling.worth -= max_capacity - receptacle_value
-			receptacle_value = max_capacity
-			to_chat(user, SPAN_NOTICE("You load [src] to capacity with [bling]."))
-			if(!bling.worth)
-				qdel(bling)
-			else
-				bling.update_icon()
-			return
-		receptacle_value += bling.worth
-		to_chat(user, SPAN_NOTICE("You slide [bling.worth] [GLOB.using_map.local_currency_name_singular] into [src]'s receptacle."))
-		qdel(bling)
 
-	else
-		to_chat(user, SPAN_WARNING("That's not going to fit in there."))
+/obj/item/gun/launcher/money/get_interactions_info()
+	. = ..()
+	.["Thalers"] = "<p>Loads the money into the launcher as ammo. The launcher can hold up to [initial(max_capacity)] thaler\s.</p>"
+
+
+/obj/item/gun/launcher/money/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Thalers - Load ammo
+	if (istype(tool, /obj/item/spacecash))
+		var/obj/item/spacecash/thalers = tool
+		if (receptacle_value >= max_capacity)
+			to_chat(user, SPAN_WARNING("\The [src] can't hold anymore money."))
+			return TRUE
+		if (!user.canUnEquip(tool))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		var/transfer_amount = min(max_capacity - receptacle_value, thalers.worth)
+		thalers.worth -= transfer_amount
+		if (thalers.worth <= 0)
+			qdel(thalers)
+		receptacle_value += transfer_amount
+		user.visible_message(
+			SPAN_NOTICE("\The [user] loads [thalers.name] into \the [src]."),
+			SPAN_NOTICE("You load [thalers.name] into \the [src].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/launcher/money/examine(mob/user)
 	. = ..(user)

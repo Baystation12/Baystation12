@@ -23,16 +23,30 @@
 	if(distance <= 2)
 		to_chat(user, SPAN_NOTICE("[length(rockets)] / [max_rockets] rockets."))
 
-/obj/item/gun/launcher/rocket/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/ammo_casing/rocket))
-		if(length(rockets) < max_rockets)
-			if(!user.unEquip(I, src))
-				return
-			rockets += I
-			to_chat(user, SPAN_NOTICE("You put the rocket in [src]."))
-			to_chat(user, SPAN_NOTICE("[length(rockets)] / [max_rockets] rockets."))
-		else
-			to_chat(usr, SPAN_WARNING("\The [src] cannot hold more rockets."))
+
+/obj/item/gun/launcher/rocket/get_interactions_info()
+	. = ..()
+	.["Rocket Shell"] = "<p>Loads the rocket into the launcher. The launcher can hold up to [initial(max_rockets)] rocket\s at a time.</p>"
+
+
+/obj/item/gun/launcher/rocket/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Rocket Shell - Add ammo
+	if (istype(tool, /obj/item/ammo_casing/rocket))
+		if (length(rockets) >= max_rockets)
+			to_chat(user, SPAN_WARNING("\The [src] cannot hold more rockets."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		rockets += tool
+		user.visible_message(
+			SPAN_NOTICE("\The [user] inserts \a [tool] into \the [src]."),
+			SPAN_NOTICE("You insert \a [tool] into \the [src].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/launcher/rocket/consume_next_projectile()
 	if(length(rockets))

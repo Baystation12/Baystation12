@@ -45,19 +45,57 @@
 	else
 		remove_contents(user)
 
-/obj/item/reagent_containers/glass/rag/attackby(obj/item/W, mob/user)
-	if (!on_fire && W.IsFlameSource())
-		ignite()
-		if(on_fire)
-			user.visible_message(
-				SPAN_WARNING("\The [user] lights \the [src] with \the [W]!"),
-				SPAN_DANGER("You light \the [src]!")
-			)
-		else
-			to_chat(user, SPAN_WARNING("You manage to singe \the [src], but it won't burn on its own.")) // Give a hint about needing fuel
 
+/obj/item/reagent_containers/glass/rag/get_interactions_info()
 	. = ..()
-	update_name()
+	.[CODEX_INTERACTION_FLAME_SOURCE] = "<p>Ignites the bottle's rag, if the bottle has a flammable liquid in it. This can be done on help or harm intent.</p>"
+
+
+/obj/item/reagent_containers/glass/rag/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Flame Source - Light rag
+	if (weapon.IsFlameSource())
+		if (on_fire)
+			to_chat(user, SPAN_WARNING("\The [src] is already on fire."))
+			return TRUE
+		ignite()
+		if (!on_fire)
+			user.visible_message(
+				SPAN_WARNING("\The [user] attempts to light \the [src] with \a [weapon], but it doesn't catch."),
+				SPAN_WARNING("You attempt to light \the [src] with \the [weapon], but it needs fuel to burn.")
+			)
+			return TRUE
+		update_name()
+		user.visible_message(
+			SPAN_WARNING("\The [user] lights \the [src] with \a [weapon]!"),
+			SPAN_DANGER("You light light \the [src] with \the [weapon]!")
+		)
+		return TRUE
+
+	return ..()
+
+
+/obj/item/reagent_containers/glass/rag/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Flame Source - Light rag
+	if (tool.IsFlameSource())
+		if (on_fire)
+			to_chat(user, SPAN_WARNING("\The [src] is already on fire."))
+			return TRUE
+		ignite()
+		if (!on_fire)
+			user.visible_message(
+				SPAN_WARNING("\The [user] attempts to light \the [src] with \a [tool], but it doesn't catch."),
+				SPAN_WARNING("You attempt to light \the [src] with \the [tool], but it needs fuel to burn.")
+			)
+			return TRUE
+		update_name()
+		user.visible_message(
+			SPAN_WARNING("\The [user] lights \the [src] with \a [tool]!"),
+			SPAN_DANGER("You light light \the [src] with \the [tool]!")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/reagent_containers/glass/rag/proc/update_name()
 	if(on_fire)

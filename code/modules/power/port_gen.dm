@@ -118,6 +118,8 @@
 	machine_name = "\improper PACMAN-type generator"
 	machine_desc = "A portable generator often used for backup power or running small spacecraft. Runs on solid phoron sheets; rated for 80 kW max safe output."
 
+	obj_flags = OBJ_FLAG_ANCHORABLE
+
 	var/sheet_name = "Phoron Sheets"
 	var/sheet_path = /obj/item/stack/material/phoron
 
@@ -290,29 +292,45 @@
 		return SPAN_WARNING("You cannot do this while \the [src] is running!")
 	return ..()
 
-/obj/machinery/power/port_gen/pacman/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O, sheet_path))
-		var/obj/item/stack/addstack = O
-		var/amount = min((max_sheets - sheets), addstack.amount)
-		if(amount < 1)
-			to_chat(user, SPAN_NOTICE("The [src.name] is full!"))
-			return
-		to_chat(user, SPAN_NOTICE("You add [amount] sheet\s to the [src.name]."))
-		sheets += amount
-		addstack.use(amount)
-		updateUsrDialog()
-		return
-	if(isWrench(O) && !active)
-		if(!anchored)
-			connect_to_network()
-			to_chat(user, SPAN_NOTICE("You secure the generator to the floor."))
-		else
-			disconnect_from_network()
-			to_chat(user, SPAN_NOTICE("You unsecure the generator from the floor."))
 
-		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		anchored = !anchored
-	return component_attackby(O, user)
+/obj/machinery/power/port_gen/pacman/can_wrench_bolts(obj/item/tool, mob/user, silent)
+	. = ..()
+	if (!.)
+		return
+
+	if (active)
+		if (!silent)
+			to_chat(user, SPAN_WARNING("\The [src] must be turned off first."))
+		return FALSE
+
+
+/obj/machinery/power/port_gen/pacman/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_MATERIAL_STACK] = "<p>Adds fuel to the generator. Only certain types of material can be used. The generator can hold up to [max_sheets] sheet\s of material.</p>"
+
+
+/obj/machinery/power/port_gen/pacman/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Material Stack - Add material
+	if (istype(tool, sheet_path))
+		if (sheets >= max_sheets)
+			to_chat(user, SPAN_WARNING("\The [src] is full."))
+			return TRUE
+		if (!user.canUnEquip(tool))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		var/obj/item/stack/material/stack = tool
+		var/transfer_amount = min(max_sheets - sheets, stack.amount)
+		sheets += transfer_amount
+		stack.use(transfer_amount)
+		updateUsrDialog()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adds some [stack.material.use_name] [stack.plural_name] to \the [src]."),
+			SPAN_NOTICE("You add [transfer_amount] [stack.material.use_name] [transfer_amount == 1 ? stack.singular_name : stack.plural_name] to \the [src].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/machinery/power/port_gen/pacman/dismantle()
 	while (sheets > 0)
@@ -505,18 +523,32 @@
 	if(power_output > max_safe_output)
 		icon_state = "potatodanger"
 
-/obj/machinery/power/port_gen/pacman/super/potato/attackby(obj/item/O, mob/user)
-	if(istype(O, /obj/item/reagent_containers))
-		var/obj/item/reagent_containers/R = O
-		if(R.standard_pour_into(src,user))
-			if(reagents.has_reagent("vodka"))
-				audible_message(SPAN_NOTICE("[src] blips happily"))
-				playsound(get_turf(src),'sound/machines/synth_yes.ogg', 50, 0)
-			else
-				audible_message(SPAN_WARNING("[src] blips in disappointment"))
-				playsound(get_turf(src), 'sound/machines/synth_no.ogg', 50, 0)
-		return
-	..()
+
+/obj/machinery/power/port_gen/pacman/super/potato/get_interactions_info()
+	. = ..()
+	.["Vodka"] = "<p>Makes the machine happy.</p>"
+
+
+/obj/machinery/power/port_gen/pacman/super/potato/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Reagent Container - Add fuel
+	if (istype(tool, /obj/item/reagent_containers))
+		var/obj/item/reagent_containers/container = tool
+		if (!container.standard_pour_into(src, user))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] pours \a [tool] into \the [src]."),
+			exclude_mobs = user
+		)
+		if (reagents.has_reagent("vodka"))
+			audible_message(SPAN_NOTICE("\The [src] blips happily."))
+			playsound(get_turf(src),'sound/machines/synth_yes.ogg', 50)
+		else
+			audible_message(SPAN_WARNING("\The [src] blips in disappointment."))
+			playsound(get_turf(src), 'sound/machines/synth_no.ogg', 50)
+		return TRUE
+
+	return ..()
+
 
 /obj/machinery/power/port_gen/pacman/super/potato/reactor
 	name = "nuclear reactor"

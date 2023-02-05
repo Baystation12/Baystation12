@@ -203,6 +203,12 @@
 
 	return ..(user, distance, "", desc_comp)
 
+
+/obj/item/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_HAND] += "<p>Attempts to pick up the item into your active hand.</p>"
+
+
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
 	if (anchored)

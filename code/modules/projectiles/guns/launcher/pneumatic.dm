@@ -65,13 +65,37 @@
 	else
 		return ..()
 
-/obj/item/gun/launcher/pneumatic/attackby(obj/item/W as obj, mob/user as mob)
-	if(!tank && istype(W,/obj/item/tank) && user.unEquip(W, src))
-		tank = W
-		user.visible_message("[user] jams [W] into [src]'s valve and twists it closed.","You jam [W] into [src]'s valve and twist it closed.")
+
+/obj/item/gun/launcher/pneumatic/get_interactions_info()
+	. = ..()
+	.["Tank"] = "<p>Loads the tank into the cannon's valve.</p>"
+	.[CODEX_INTERACTION_ANY_ITEM] = "<p>Loads the item into the cannon's barrel to be fired as a projectile.</p>"
+
+
+/obj/item/gun/launcher/pneumatic/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Tank - Inserts tank
+	if (istype(tool, /obj/item/tank))
+		if (tank)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [tank] installed."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		tank = tool
 		update_icon()
-	else if(istype(W) && item_storage.can_be_inserted(W, user))
-		item_storage.handle_item_insertion(W)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] jams \a [tool] into \the [src]'s valve and twists it closed."),
+			SPAN_NOTICE("You jam \a [tool] into \the [src]'s valve and twists it closed.")
+		)
+		return TRUE
+
+	// All Others - Attempt to load item as a projectile
+	if (item_storage.can_be_inserted(tool, user))
+		item_storage.handle_item_insertion(tool)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/launcher/pneumatic/attack_self(mob/user as mob)
 	eject_tank(user)

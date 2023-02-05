@@ -129,19 +129,34 @@
 	return 1
 
 
-/obj/item/clothing/accessory/badge/holo/attackby(obj/item/O, mob/user)
-	if (istype(O, /obj/item/card/id) || istype(O, /obj/item/modular_computer))
-		var/obj/item/card/id/id_card = O.GetIdCard()
-		if (!id_card)
-			return
-		if ((badge_access in id_card.access) || emagged)
-			to_chat(user, "You imprint your ID details onto the badge.")
-			set_name(id_card.registered_name)
-			set_desc(user)
-		else
-			to_chat(user, "[src] rejects your ID, and flashes 'Insufficient access!'")
-		return
-	..()
+/obj/item/clothing/accessory/badge/holo/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_ID_CARD] = "<p>Imprints the ID card's details onto the badge. Requires access to the badge.</p>"
+
+
+/obj/item/clothing/accessory/badge/holo/get_antag_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_EMAG] += "<p>Removes the badge's access restriction, allowing you to scan any ID's details onto it.</p>"
+
+
+/obj/item/clothing/accessory/badge/holo/use_tool(obj/item/tool, mob/user, list/click_params)
+	// ID Card - Imprint ID on the badge
+	var/obj/item/card/id/id_card = tool.GetIdCard()
+	if (istype(id_card))
+		var/id_name = GET_ID_NAME(id_card, tool)
+		if (!emagged && !check_access(id_card))
+			to_chat(user, SPAN_WARNING("\The [src] rejects [id_name]."))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] scans \a [tool] over \the [initial(name)]."),
+			SPAN_NOTICE("You imprint your details from [id_name] onto \the [initial(name)]."),
+			range = 2
+		)
+		set_name(id_card.registered_name)
+		set_desc(user)
+		return TRUE
+
+	return ..()
 
 
 /obj/item/storage/box/holobadge

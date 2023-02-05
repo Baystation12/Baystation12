@@ -136,55 +136,103 @@
 		return
 
 
-/obj/item/gun/launcher/crossbow/attackby(obj/item/W, mob/user)
+/obj/item/gun/launcher/crossbow/get_interactions_info()
+	. = ..()
+	.["Bolt"] = "<p>Loads the bolt into the crossbow. The crossbow can only have 1 bolt loaded at a time.</p>"
+	.["Power Cell"] = "<p>Attaches the cell to the crossbow. The crossbow can only have 1 cell attached at a time. Attaching a cell causes the crossbow to superheat bolts made from rods when loaded.</p>"
+	.["Rapid Construction Device"] = "<p>Converts the crossbow into a Rapid Crossbow Device. This consumes the RCD.</p>"
+	.["Rods"] = "<p>Loads a rod into the crossbow, creating a makeshift bolt. If a cell is loaded, the rod will become superheated. This costs 1 rod. The crossbow can only have 1 bolt loaded at a time.</p>"
+	.[CODEX_INTERACTION_SCREWDRIVER] = "<p>Removes the power cell, if present.</p>"
 
-	if(istype(W, /obj/item/rcd))
-		var/obj/item/rcd/rcd = W
-		if(rcd.crafting && user.unEquip(rcd) && user.unEquip(src))
-			new /obj/item/gun/launcher/crossbow/rapidcrossbowdevice(get_turf(src))
-			qdel(rcd)
-			qdel_self()
-		else
-			to_chat(user, SPAN_WARNING("\The [rcd] is not prepared for installation in \the [src]."))
-		return
 
-	if(!bolt)
-		if (istype(W,/obj/item/arrow) && user.unEquip(W, src))
-			bolt = W
-			user.visible_message("[user] slides [bolt] into [src].","You slide [bolt] into [src].")
-			update_icon()
-			return
-		else if(istype(W,/obj/item/stack/material/rods))
-			var/obj/item/stack/material/rods/R = W
-			if (R.use(1))
-				bolt = new /obj/item/arrow/rod(src)
-				bolt.fingerprintslast = src.fingerprintslast
-				update_icon()
-				user.visible_message("[user] jams [bolt] into [src].","You jam [bolt] into [src].")
-				superheat_rod(user)
-			return
+/obj/item/gun/launcher/crossbow/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Bolt - Load ammo
+	if (istype(tool, /obj/item/arrow))
+		if (bolt)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [bolt] loaded."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		bolt = tool
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] loads \a [bolt] into \the [src]."),
+			SPAN_NOTICE("You load \the [bolt] into \the [src].")
+		)
+		return TRUE
 
-	if(istype(W, /obj/item/cell))
-		if(!cell)
-			if(!user.unEquip(W, src))
-				return
-			cell = W
-			to_chat(user, SPAN_NOTICE("You jam [cell] into [src] and wire it to the firing coil."))
-			superheat_rod(user)
-		else
-			to_chat(user, SPAN_NOTICE("[src] already has a cell installed."))
+	// Power Cell - Insert power cell
+	if (istype(tool, /obj/item/cell))
+		if (cell)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [cell] installed."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		cell = tool
+		user.visible_message(
+			SPAN_NOTICE("\The [user] attaches \a [cell] to \the [src] and wires it to the firing coil."),
+			SPAN_NOTICE("You attach \the [cell] to \the [src] and wires it to the firing coil.")
+		)
+		superheat_rod(user)
+		return TRUE
 
-	else if(isScrewdriver(W))
-		if(cell)
-			var/obj/item/C = cell
-			C.dropInto(user.loc)
-			to_chat(user, SPAN_NOTICE("You jimmy [cell] out of [src] with [W]."))
-			cell = null
-		else
-			to_chat(user, SPAN_NOTICE("[src] doesn't have a cell installed."))
+	// Rapid Construction Device - Build rapid crossbow device
+	if (istype(tool, /obj/item/rcd))
+		var/obj/item/rcd/rcd = tool
+		if (!rcd.crafting)
+			to_chat(user, SPAN_WARNING("\The [rcd] isn't prepared for installation in \the [src]."))
+			return TRUE
+		if (!user.canUnEquip(tool))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		if (!user.canUnEquip(src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [src]."))
+			return TRUE
+		var/obj/item/gun/launcher/crossbow/rapidcrossbowdevice/crossbow = new(get_turf(src))
+		qdel(rcd)
+		qdel_self()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] combines \the [tool] with \the [src] to create \a [crossbow]."),
+			SPAN_NOTICE("You combine \the [tool] with \the [src] to create \a [crossbow].")
+		)
+		return TRUE
 
-	else
-		..()
+	// Rods - Load ammo
+	if (istype(tool, /obj/item/stack/material/rods))
+		if (bolt)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [bolt] loaded."))
+			return TRUE
+		var/obj/item/stack/material/rods/rods = tool
+		if (!rods.use(1))
+			to_chat(user, SPAN_DEBUG("Something broke and \the [rods] couldn't use 1 unit. This is a bug."))
+			return TRUE
+		bolt = new /obj/item/arrow/rod(src)
+		bolt.add_fingerprint(user)
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] loads \a [rods.singular_name] into \the [src]."),
+			SPAN_NOTICE("You load \a [rods.singular_name] into \the [src].")
+		)
+		superheat_rod(user)
+		return TRUE
+
+	// Screwdriver - Remove power cell
+	if (isScrewdriver(tool))
+		if (!cell)
+			to_chat(user, SPAN_WARNING("\The [src] doesn't have a cell to remove."))
+			return TRUE
+		cell.dropInto(loc)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \the [cell] from \the [src] with \a [tool]."),
+			SPAN_NOTICE("You remove \the [cell] from \the [src] with \the [tool].")
+		)
+		cell = null
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/launcher/crossbow/proc/superheat_rod(mob/user)
 	if(!user || !cell || !bolt) return
@@ -244,29 +292,51 @@
 		generate_bolt(user)
 		draw(user)
 
-/obj/item/gun/launcher/crossbow/rapidcrossbowdevice/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/rcd_ammo))
-		var/obj/item/rcd_ammo/cartridge = W
-		if(stored_matter >= max_stored_matter)
-			to_chat(user, SPAN_NOTICE("The RCD is at maximum capacity."))
-			return
-		var/matter_exchange = min(cartridge.remaining,max_stored_matter - stored_matter)
+
+/obj/item/gun/launcher/crossbow/rapidcrossbowdevice/get_interactions_info()
+	. = ..()
+	.["Compressed Matter Cartridge"] = "<p>Transfers matter from the cartridge to the crossbow.</p>"
+	.["Flashforged Bolt"] = "<p>Reclaims the bolt's matter, consuming the bolt in the process. Each bolt provides 10 units of matter.</p>"
+
+
+/obj/item/gun/launcher/crossbow/rapidcrossbowdevice/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Compressed Matter Cartridge - Add matter
+	if (istype(tool, /obj/item/rcd_ammo))
+		if (stored_matter >= max_stored_matter)
+			to_chat(user, SPAN_WARNING("\The [src] is already had maximum capacity."))
+			return TRUE
+		var/obj/item/rcd_ammo/cartridge = tool
+		var/matter_exchange = min(cartridge.remaining, max_stored_matter - stored_matter)
 		stored_matter += matter_exchange
 		cartridge.use_matter(matter_exchange)
-		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("The RCD now holds [stored_matter]/[max_stored_matter] matter-units."))
+		playsound(src, 'sound/machines/click.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] reloads \the [src] with \a [tool]."),
+			SPAN_NOTICE("You reload \the [src] with \a [tool]. It now has [stored_matter]/[max_stored_matter] matter-units.")
+		)
 		update_icon()
+		return TRUE
 
-	if(istype(W, /obj/item/arrow/rapidcrossbowdevice))
-		var/obj/item/arrow/rapidcrossbowdevice/A = W
-		if((stored_matter + 10) > max_stored_matter)
-			to_chat(user, SPAN_NOTICE("Unable to reclaim flashforged bolt. The RCD can't hold that many additional matter-units."))
-			return
+	// Flashforged Bolt - Add matter
+	if (istype(tool, /obj/item/arrow/rapidcrossbowdevice))
+		if ((stored_matter + 10) > max_stored_matter)
+			to_chat(user, SPAN_WARNING("\The [src] cannot reclaim \the [tool]. There is not enough remaining matter capacity for 10 more units."))
+			return TRUE
+		if (!user.unEquip(tool))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
 		stored_matter += 10
-		qdel(A)
-		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("Flashforged bolt reclaimed. The RCD now holds [stored_matter]/[max_stored_matter] matter-units."))
+		qdel(tool)
+		playsound(src, 'sound/machines/click.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] loads \a [tool] into \the [src]'s matter storage unit."),
+			SPAN_NOTICE("You reclaim \the [tool]'s matter with \the [src]. It now has [stored_matter]/[max_stored_matter] matter-units.")
+		)
 		update_icon()
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/launcher/crossbow/rapidcrossbowdevice/on_update_icon()
 	overlays.Cut()

@@ -8,8 +8,10 @@
 	cell = null
 	fuel_cost_multiplier = 1
 
-/obj/item/weldingtool/electric/crystal/attackby(obj/item/W, mob/user)
-	return
+
+/obj/item/weldingtool/electric/crystal/can_use_item(obj/item/tool, mob/user, click_params)
+	return FALSE
+
 
 /obj/item/weldingtool/electric/crystal/on_update_icon()
 	icon_state = welding ? "crystal_welder_on" : "crystal_welder"

@@ -38,25 +38,52 @@
 		return TRUE
 	return ..()
 
-/obj/item/gun/projectile/shotgun/pump/exploration/attackby(obj/item/I, mob/user)
-	if(!reinforced && istype(I, /obj/item/pipe) && user.unEquip(I, src))
-		reinforced = I
-		to_chat(user, SPAN_WARNING("You reinforce \the [src] with \the [reinforced]."))
-		playsound(src, 'sound/effects/tape.ogg',25)
-		explosion_chance = 10
-		bulk = bulk + 4
+
+/obj/item/gun/projectile/shotgun/pump/exploration/get_interactions_info()
+	. = ..()
+	.["Pipe"] = "<p>Reinforces the gun with the pipe. Only one pipe can be attached at a time.</p>"
+	.[CODEX_INTERACTION_WIRECUTTERS] = "<p>Removes the gun's reinforcement pipe, if present.</p>"
+
+
+/obj/item/gun/projectile/shotgun/pump/exploration/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Pipe - Reinforces the weapon
+	if (istype(tool, /obj/item/pipe))
+		if (reinforced)
+			to_chat(user, SPAN_WARNING("\The [src] has already been reinforced with \a [reinforced]."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		reinforced = tool
+		explosion_chance -= 40
+		bulk += 4
 		update_icon()
-		return 1
-	if(reinforced && isWirecutter(I))
-		to_chat(user, SPAN_WARNING("You remove \the [reinforced] that was reinforcing \the [src]."))
-		playsound(src.loc, 'sound/items/Wirecutter.ogg', 25, 1)
+		playsound(src, 'sound/effects/tape.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] reinforces \the [src] with \a [tool]."),
+			SPAN_NOTICE("You reinforce \the [src] with \the [tool].")
+		)
+		return TRUE
+
+	// Wirecutters - Remove reinforcements
+	if (isWirecutter(tool))
+		if (!reinforced)
+			to_chat(user, SPAN_WARNING("\The [src] has no reinforcements to remove."))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \a [reinforced] reinforcement from \the [src] with \a [tool]."),
+			SPAN_NOTICE("You remove \the [reinforced] reinforcement from \the [src] with \the [tool].")
+		)
 		reinforced.dropInto(loc)
 		reinforced = null
 		explosion_chance = initial(explosion_chance)
 		bulk = initial(bulk)
 		update_icon()
-		return 1
+		playsound(src, 'sound/items/Wirecutter.ogg', 50, TRUE)
+		return TRUE
+
 	return ..()
+
 
 /obj/item/gun/projectile/shotgun/pump/exploration/special_check()
 	if(chambered && chambered.BB && prob(explosion_chance))

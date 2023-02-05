@@ -30,17 +30,30 @@
 		icon_state = "[base_icon]"
 
 
-/obj/item/clothing/accessory/locket/attackby(obj/item/I, mob/user)
-	if (!open)
-		to_chat(user, "You have to open it first.")
-		return
-	if (istype(I, /obj/item/paper) || istype(I, /obj/item/photo))
+/obj/item/clothing/accessory/locket/get_interactions_info()
+	. = ..()
+	.["Paper"] = "<p>Inserts the paper into the locket. The locket must be open. There can only be one item inserted at a time.</p>"
+	.["Photo"] = "<p>Inserts the photo into the locket. The locket must be open. There can only be one item inserted at a time.</p>"
+
+
+/obj/item/clothing/accessory/locket/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Paper, Photo - Add to locket
+	if (is_type_in_list(tool, list(/obj/item/paper, /obj/item/photo)))
+		if (!open)
+			to_chat(user, SPAN_WARNING("\The [src] needs to be open before you can insert \the [tool]."))
+			return TRUE
 		if (held)
-			to_chat(usr, "\The [src] already has something inside it.")
-		else
-			if (!user.unEquip(I, src))
-				return
-			to_chat(usr, "You slip [I] into [src].")
-			held = I
-		return
-	..()
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [held] inside it."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		held = tool
+		user.visible_message(
+			SPAN_NOTICE("\The [user] slips \a [tool] into \the [src]."),
+			SPAN_NOTICE("You slip \a [tool] into \the [src]."),
+			range = 1
+		)
+		return TRUE
+
+	return ..()

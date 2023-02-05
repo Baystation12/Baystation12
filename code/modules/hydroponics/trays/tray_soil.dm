@@ -8,11 +8,19 @@
 	mechanical = 0
 	tray_light = 0
 
-/obj/machinery/portable_atmospherics/hydroponics/soil/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O,/obj/item/tank))
-		return
-	else
-		..()
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/get_interactions_info()
+	. = ..()
+	. -= "Tank"
+
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Tank - Block parent interaction
+	if (istype(tool, /obj/item/tank))
+		return FALSE
+
+	return ..()
+
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/New()
 	..()

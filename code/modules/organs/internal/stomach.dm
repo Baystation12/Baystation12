@@ -86,37 +86,44 @@
 		owner.empty_stomach()
 		refresh_action_button()
 
-/obj/item/organ/internal/stomach/attackby(obj/item/item, mob/living/user)
-	if (!is_sharp(item))
-		return ..()
-	. = TRUE
-	user.visible_message(
-		SPAN_ITALIC("\The [user] begins cutting into \a [src] with \a [item]."),
-		SPAN_ITALIC("You start to cut open \the [src] with \the [item]."),
-		range = 5
-	)
-	take_internal_damage(5)
-	if (!user.do_skilled(5 SECONDS, SKILL_ANATOMY, src) || QDELETED(src))
-		return
-	if (!Adjacent(user) || user.incapacitated())
-		return
-	var/removed_message
-	var/length = length(contents)
-	switch (length)
-		if (0)
-			removed_message = "There's nothing inside."
-		if (1)
-			removed_message = "Something falls out."
-		else
-			removed_message = "Several things fall out."
-	user.visible_message(
-		SPAN_ITALIC("\The [user] finishes cutting \a [src] open. [removed_message]"),
-		SPAN_ITALIC("You finish cutting \the [src] open. [removed_message]"),
-		range = 2
-	)
-	take_internal_damage(5)
-	for (var/atom/movable/movable as anything in contents)
-		movable.dropInto(loc)
+
+/obj/item/organ/internal/stomach/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_SHARP] = "<p>Cuts open the stomach and removes any contents. This includes a timed check based on the anatomy skill. This damages the organ.</p>"
+
+
+/obj/item/organ/internal/stomach/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Sharp objects - Cut open
+	if (is_sharp(tool))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts cutting into \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start cutting into \the [src] with \the [tool]."),
+			range = 5
+		)
+		take_internal_damage(5)
+		if (!user.do_skilled(5 SECONDS, SKILL_ANATOMY, src) || !user.use_sanity_check(src, tool))
+			return TRUE
+		var/removed_message
+		var/length = length(contents)
+		switch (length)
+			if (0)
+				removed_message = "There's nothing inside."
+			if (1)
+				removed_message = "Something falls out."
+			else
+				removed_message = "Several things fall out."
+		user.visible_message(
+			SPAN_ITALIC("\The [user] finishes cutting \the [src] open with \a [tool]. [removed_message]"),
+			SPAN_ITALIC("You finish cutting \the [src] open with \the [tool]. [removed_message]"),
+			range = 2
+		)
+		take_internal_damage(5)
+		for (var/atom/movable/movable as anything in contents)
+			movable.dropInto(loc)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/organ/internal/stomach/return_air()
 	return null

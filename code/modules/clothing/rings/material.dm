@@ -4,6 +4,8 @@
 	icon = 'icons/obj/clothing/obj_hands_ring.dmi'
 	icon_state = "material"
 	var/material/material
+	/// String. Inscription engraved on the ring, if present.
+	var/inscription
 
 /obj/item/clothing/ring/material/New(newloc, new_material)
 	..(newloc)
@@ -17,16 +19,38 @@
 	desc = "A ring made from [material.display_name]."
 	color = material.icon_colour
 
-/obj/item/clothing/ring/material/attackby(obj/item/S, mob/user)
-	if(S.sharp)
-		var/inscription = sanitize(input("Enter an inscription to engrave.", "Inscription") as null|text)
 
-		if(!user.stat && !user.incapacitated() && user.Adjacent(src) && S.loc == user)
-			if(!inscription)
-				return
-			desc = "A ring made from [material.display_name]."
-			to_chat(user, SPAN_WARNING("You carve \"[inscription]\" into \the [src]."))
-			desc += "<br>Written on \the [src] is the inscription \"[inscription]\""
+/obj/item/clothing/ring/material/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_SHARP] = "<p>Engraves a message on the ring, if one is not already present.</p>"
+
+
+/obj/item/clothing/ring/material/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Sharp Object - Engrave ring
+	if (is_sharp(tool))
+		if (inscription)
+			to_chat(user, SPAN_WARNING("\The [src] is already engraved."))
+			return TRUE
+		var/input = sanitize(input(user, "Enter an inscription to engrave", name) as null|text)
+		if (!input || !user.use_sanity_check(src, tool))
+			return TRUE
+		inscription = input
+		user.visible_message(
+			SPAN_NOTICE("\The [user] engraves a message on \the [src] with \a [tool]."),
+			SPAN_NOTICE("You engrave the following inscription on \the [src] with \the [tool]:<br/>'[inscription]'"),
+			range = 2
+		)
+		return TRUE
+
+	return ..()
+
+
+/obj/item/clothing/ring/material/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	if (distance > 1)
+		return
+	to_chat(user, SPAN_INFO("Written on \the [src] is the inscription \"[inscription]\""))
+
 
 /obj/item/clothing/ring/material/OnTopic(mob/user, list/href_list)
 	if(href_list["examine"])

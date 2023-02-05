@@ -60,37 +60,66 @@
 
 /obj/skeleton/Initialize()
 	. = ..()
-	src.breq = rand(6)+3
-	src.desc = "An incomplete skeleton, looks like it could use [src.breq-src.bnum] more bones."
+	breq = rand(6) + 3
+	desc = "An incomplete skeleton."
 
-/obj/skeleton/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/fossil/bone))
-		if(!bstate && user.unEquip(W, src))
-			bnum++
-			if(bnum==breq)
-				usr = user
-				icon_state = "skel"
-				src.bstate = 1
-				src.set_density(1)
-				src.SetName("alien skeleton display")
-				if(src.contents.Find(/obj/item/fossil/skull/horned))
-					src.desc = "A creature made of [length(src.contents)-1] assorted bones and a horned skull. The plaque reads \'[plaque_contents]\'."
-				else
-					src.desc = "A creature made of [length(src.contents)-1] assorted bones and a skull. The plaque reads \'[plaque_contents]\'."
-			else
-				src.desc = "Incomplete skeleton, looks like it could use [src.breq-src.bnum] more bones."
-				to_chat(user, "Looks like it could use [src.breq-src.bnum] more bones.")
-		else
-			..()
-	else if(istype(W,/obj/item/pen))
-		plaque_contents = sanitize(input("What would you like to write on the plaque:","Skeleton plaque",""))
-		user.visible_message("[user] writes something on the base of [icon2html(src, viewers(get_turf(src)))] [src].","You relabel the plaque on the base of [icon2html(src, user)] [src].")
-		if(src.contents.Find(/obj/item/fossil/skull/horned))
-			src.desc = "A creature made of [length(src.contents)-1] assorted bones and a horned skull. The plaque reads \'[plaque_contents]\'."
-		else
-			src.desc = "A creature made of [length(src.contents)-1] assorted bones and a skull. The plaque reads \'[plaque_contents]\'."
+
+/obj/skeleton/examine(mob/user)
+	. = ..()
+
+	if (bnum < breq)
+		to_chat(user, SPAN_WARNING("Looks like it could use [breq - bnum] more bone\s."))
 	else
-		..()
+		var/skull_type = contents.Find(/obj/item/fossil/skull/horned) ? "horned skull" : "skull"
+		to_chat(user, SPAN_NOTICE("It is composed of [bnum] assorted bone\s and \a [skull_type]."))
+
+	if (plaque_contents)
+		to_chat(user, SPAN_NOTICE("The plaque reads: '[plaque_contents].'"))
+
+
+/obj/skeleton/get_interactions_info()
+	. = ..()
+	.["Fossilized Bone"] = "<p>Adds the bone to \the [initial(name)], if it isn't yet complete.</p>"
+	.["Pen"] = "<p>Changes the text on \the [initial(name)]'s plaque.</p>"
+
+
+/obj/skeleton/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Fossilized Bone - Add bone to skeleton
+	if (istype(tool, /obj/item/fossil/bone))
+		if (bstate)
+			to_chat(user, SPAN_WARNING("\The [src] does not need anymore bones."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		bnum++
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adds \a [tool] to \the [src]."),
+			SPAN_NOTICE("You add \the [tool] to \the [src].")
+		)
+		if (bnum >= breq)
+			icon_state = "skel"
+			bstate = TRUE
+			set_density(TRUE)
+			SetName("alien skeleton display")
+			desc = "A complete skeleton"
+		return TRUE
+
+	// Pen - Change plaque label
+	if (istype(tool, /obj/item/pen))
+		var/input = input(user, "What would you like to write on the plaque?", "[src]'s Plaque", plaque_contents) as text|null
+		input = sanitize(input)
+		if (isnull(input) || !user.use_sanity_check(src, tool))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] writes something on \the [src]'s plaque."),
+			SPAN_NOTICE("You relabel \the [src]'s plaque to '[input].'")
+		)
+		plaque_contents = input
+		return TRUE
+
+	return ..()
+
 
 //shells and plants do not make skeletons
 /obj/item/fossil/shell

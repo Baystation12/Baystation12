@@ -212,8 +212,10 @@
 		add_fingerprint(user)
 	return 0
 
-/obj/item/melee/baton/robot/attackby(obj/item/W, mob/user)
-	return
+
+/obj/item/melee/baton/robot/can_use_item(obj/item/tool, mob/user, click_params)
+	return FALSE
+
 
 /obj/item/melee/baton/robot/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	update_cell(isrobot(user) ? user : null) // update the status before we apply the effects

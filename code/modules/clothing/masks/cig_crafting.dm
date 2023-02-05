@@ -56,37 +56,66 @@
 /obj/item/reagent_containers/food/snacks/grown/dried_tobacco/fine
 	plantname = "finetobacco"
 
-/obj/item/clothing/mask/smokable/cigarette/rolled/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/paper/cig/filter))
-		if(filter)
-			to_chat(user, SPAN_WARNING("[src] already has a filter!"))
-			return
-		if(lit)
-			to_chat(user, SPAN_WARNING("[src] is lit already!"))
-			return
-		if(user.unEquip(I))
-			to_chat(user, SPAN_NOTICE("You stick [I] into \the [src]"))
-			filter = 1
-			SetName("filtered [name]")
-			brand = "[brand] with a filter"
-			update_icon()
-			qdel(I)
-			return
-	..()
 
-/obj/item/reagent_containers/food/snacks/grown/attackby(obj/item/I, mob/user)
-	if(is_type_in_list(I, list(/obj/item/paper/cig, /obj/item/paper, /obj/item/teleportation_scroll)))
-		if(!dry)
-			to_chat(user, SPAN_WARNING("You need to dry [src] first!"))
-			return
-		if(user.unEquip(I))
-			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(get_turf(src))
-			R.chem_volume = reagents.total_volume
-			R.brand = "[src] handrolled in \the [I]."
-			reagents.trans_to_holder(R.reagents, R.chem_volume)
-			to_chat(user, SPAN_NOTICE("You roll \the [src] into \the [I]"))
-			user.put_in_active_hand(R)
-			qdel(I)
-			qdel(src)
-			return
-	..()
+/obj/item/clothing/mask/smokable/cigarette/rolled/get_interactions_info()
+	. = ..()
+	.["Cigarette Filter"] = "<p>Adds a filter to the cigarette. The cigarette cannot be lit, and only one filter can be installed per cigarette.</p>"
+
+
+/obj/item/clothing/mask/smokable/cigarette/rolled/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Cigarette Filter - Add filter
+	if (istype(tool, /obj/item/paper/cig/filter))
+		if (filter)
+			to_chat(user, SPAN_WARNING("\The [src] already has a filter."))
+			return TRUE
+		if (lit)
+			to_chat(user, SPAN_WARNING("\The [src] is already lit. You cannot install a filter now."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		filter = TRUE
+		SetName("filtered [name]")
+		brand = "[brand] with a filter"
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adds \a [tool] to \the [src]."),
+			SPAN_NOTICE("You add \the [tool] to \the [src].")
+		)
+		qdel(tool)
+		return TRUE
+
+	return ..()
+
+
+/obj/item/reagent_containers/food/snacks/grown/get_interactions_info()
+	. = ..()
+	.["Paper"] = "<p>If the plant is dried, rolls it up into a cigarette using the paper. This consumes both the paper and plant.</p>"
+
+
+/obj/item/reagent_containers/food/snacks/grown/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Paper - Roll dried plant into a cigarette
+	if (istype(tool, /obj/item/paper))
+		if (!dry)
+			to_chat(user, SPAN_WARNING("\The [src] needs to be dried before you can wrap it into a cigarette with \the [tool]."))
+			return TRUE
+		if (!user.unEquip(tool))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		if (loc == user && !user.unEquip(src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [src]."))
+			return TRUE
+		var/obj/item/clothing/mask/smokable/cigarette/rolled/rolled_cig = new(get_turf(src))
+		rolled_cig.chem_volume = reagents.total_volume
+		rolled_cig.brand = "\The [src] handrolled in \the [tool]."
+		reagents.trans_to_holder(rolled_cig.reagents, rolled_cig.chem_volume)
+		qdel(tool)
+		qdel(src)
+		user.put_in_active_hand(rolled_cig)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] rolls \the [src] into \a [tool], making \a [rolled_cig]."),
+			SPAN_NOTICE("You roll \the [src] into \the [tool], making \a [rolled_cig].")
+		)
+		return TRUE
+
+	return ..()

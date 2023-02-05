@@ -166,9 +166,26 @@
 		emagged = TRUE
 		return 1
 
-/obj/machinery/computer/shuttle_control/emergency/attackby(obj/item/W as obj, mob/user as mob)
-	read_authorization(W)
-	..()
+
+/obj/machinery/computer/shuttle_control/emergency/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_ID_CARD] = "<p>Scans the ID. Scan at least [initial(req_authorizations)] authorized ID\s to override the shuttle autopilot and allow manual control.</p>"
+
+
+/obj/machinery/computer/shuttle_control/emergency/use_tool(obj/item/tool, mob/user, list/click_params)
+	// ID Card - Authorize
+	var/obj/item/card/id/id_card = tool.GetIdCard()
+	if (istype(id_card))
+		var/id_name = GET_ID_NAME(id_card, tool)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] scans \a [tool] over \the [src]."),
+			SPAN_NOTICE("You scan [id_name] over \the [src].")
+		)
+		read_authorization(id_card)
+		return TRUE
+
+	return ..()
+
 
 /obj/machinery/computer/shuttle_control/emergency/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]

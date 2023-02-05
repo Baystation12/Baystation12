@@ -192,21 +192,45 @@
 		to_chat(user, "\A [mybag] is hanging on the [callme].")
 
 
-/obj/structure/bed/chair/janicart/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/mop))
-		if(reagents.total_volume > 1)
-			reagents.trans_to_obj(I, 2)
-			to_chat(user, SPAN_NOTICE("You wet [I] in the [callme]."))
-			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
-		else
-			to_chat(user, SPAN_NOTICE("This [callme] is out of water!"))
-	else if(istype(I, /obj/item/key))
-		to_chat(user, "Hold [I] in one of your hands while you drive this [callme].")
-	else if(istype(I, /obj/item/storage/bag/trash))
-		if(!user.unEquip(I, src))
-			return
-		to_chat(user, SPAN_NOTICE("You hook the trashbag onto the [callme]."))
-		mybag = I
+/obj/structure/bed/chair/janicart/get_interactions_info()
+	. = ..()
+	.["Key"] = "<p>Have the key in your hands while on the cart to drive it.</p>"
+	.["Mop"] = "<p>Wets the mop with the cart's water, if it has any.</p>"
+	.["Trash Bag"] = "<p>Attaches the trash bag to the cart. There can only be one trash bag attached at a time.</p>"
+
+
+/obj/structure/bed/chair/janicart/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Key - Instructional message
+	if (istype(tool, /obj/item/key))
+		to_chat(user, SPAN_NOTICE("Hold \the [tool] in your hands while you drive \the [callme]."))
+		return TRUE
+
+	// Mop - Wet mop with water
+	if (istype(tool, /obj/item/mop))
+		if (reagents.total_volume <= 1)
+			to_chat(user, SPAN_WARNING("\The [callme] is out of water."))
+			return TRUE
+		reagents.trans_to_obj(tool, 2)
+		playsound(src, 'sound/effects/slosh.ogg', 25, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] wets \a [tool] in \the [callme]."),
+			SPAN_NOTICE("You wet \the [tool] in \the [callme].")
+		)
+		return TRUE
+
+	// Trash Bag - Attach to cart
+	if (istype(tool, /obj/item/storage/bag/trash))
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		mybag = tool
+		user.visible_message(
+			SPAN_NOTICE("\The [user] hooks \a [tool] onto \the [callme]."),
+			SPAN_NOTICE("You hook \the [tool] onto \the [callme].")
+		)
+		return TRUE
+
+	return ..()
 
 
 /obj/structure/bed/chair/janicart/attack_hand(mob/user)

@@ -474,10 +474,24 @@
 	..()
 	icon_state = "puddle"
 
-/obj/structure/hygiene/sink/puddle/attackby(obj/item/O as obj, mob/user)
-	icon_state = "puddle-splash"
-	..()
-	icon_state = "puddle"
+
+/obj/structure/hygiene/sink/puddle/use_grab(obj/item/grab/grab, list/click_params)
+	. = ..()
+	if (.)
+		flick("puddle-splash", src)
+
+
+/obj/structure/hygiene/sink/puddle/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	. = ..()
+	if (.)
+		flick("puddle-splash", src)
+
+
+/obj/structure/hygiene/sink/puddle/use_tool(obj/item/tool, mob/user, list/click_params)
+	. = ..()
+	if (.)
+		flick("puddle-splash", src)
+
 
 //toilet paper interaction for clogging toilets and other facilities
 

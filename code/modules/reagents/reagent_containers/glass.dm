@@ -298,17 +298,28 @@
 	matter = list(MATERIAL_WOOD = 280)
 	volume = 200
 
-/obj/item/reagent_containers/glass/bucket/attackby(obj/D, mob/user as mob)
-	if(istype(D, /obj/item/mop))
-		if(reagents.total_volume < 1)
-			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
-		else
-			reagents.trans_to_obj(D, 5)
-			to_chat(user, SPAN_NOTICE("You wet \the [D] in \the [src]."))
-			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
-		return
-	else
-		return ..()
+
+/obj/item/reagent_containers/glass/bucket/get_interactions_info()
+	. = ..()
+	.["Mop"] = "<p>Wets the mop in the bucket, transferring any reagents from the bucket to the mop.</p>"
+
+
+/obj/item/reagent_containers/glass/bucket/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Mop - Wet mop
+	if (istype(tool, /obj/item/mop))
+		if (reagents.total_volume < 1)
+			to_chat(user, SPAN_WARNING("\The [src] is empty."))
+			return TRUE
+		reagents.trans_to_obj(tool, 5)
+		playsound(loc, 'sound/effects/slosh.ogg', 25, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] wets \a [tool] in \the [src]."),
+			SPAN_NOTICE("You wet \the [tool] in \the [src].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/reagent_containers/glass/bucket/on_update_icon()
 	overlays.Cut()

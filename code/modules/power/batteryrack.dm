@@ -153,8 +153,10 @@
 		return 0
 
 	if(length(internal_cells) >= max_cells)
+		to_chat(user, SPAN_WARNING("\The [src] is can't hold any more cells."))
 		return 0
 	if(user && !user.unEquip(C))
+		to_chat(user, SPAN_WARNING("You can't drop \the [C]."))
 		return 0
 	internal_cells.Add(C)
 	C.forceMove(src)
@@ -237,14 +239,27 @@
 		internal_cells -= C
 	return ..()
 
-/obj/machinery/power/smes/batteryrack/attackby(obj/item/W as obj, mob/user as mob)
-	if(..())
+
+/obj/machinery/power/smes/batteryrack/get_interactions_info()
+	. = ..()
+	.["Power Cell"] += "<p>Adds the power cell to the battery rack.</p>"
+
+
+/obj/machinery/power/smes/batteryrack/use_tool(obj/item/tool, mob/user, list/click_params)
+	. = ..()
+	if (.)
+		return
+
+	// Power Cell - Install cell
+	if (istype(tool, /obj/item/cell))
+		if (!insert_cell(tool, user))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] inserts \a [tool] into \the [src]."),
+			SPAN_NOTICE("You insert \the [tool] into \the [src].")
+		)
 		return TRUE
-	if(istype(W, /obj/item/cell)) // ID Card, try to insert it.
-		if(insert_cell(W, user))
-			to_chat(user, "You insert \the [W] into \the [src].")
-		else
-			to_chat(user, "\The [src] has no empty slot for \the [W]")
+
 
 /obj/machinery/power/smes/batteryrack/interface_interact(mob/user)
 	ui_interact(user)

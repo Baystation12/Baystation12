@@ -204,11 +204,20 @@
 	. = ..()
 	launcher = new(src)
 
-/obj/item/gun/projectile/automatic/bullpup_rifle/attackby(obj/item/I, mob/user)
-	if((istype(I, /obj/item/grenade)))
-		launcher.load(I, user)
-	else
-		..()
+
+/obj/item/gun/projectile/automatic/bullpup_rifle/get_interactions_info()
+	. = ..()
+	.["Grenade"] = "<p>Loads the grenade into the rifle's launcher. Only one grenade can be loaded at a time, and only certain types of grenades can be loaded.</p>"
+
+
+/obj/item/gun/projectile/automatic/bullpup_rifle/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Grenade - Load into launcher
+	if (istype(tool, /obj/item/grenade))
+		launcher.load(tool, user)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/projectile/automatic/bullpup_rifle/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src && use_launcher)

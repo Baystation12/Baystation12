@@ -15,22 +15,41 @@
 		rotate(user)
 	return TRUE
 
-/obj/structure/bed/chair/attackby(obj/item/W as obj, mob/user as mob)
-	..()
-	if(!padding_material && istype(W, /obj/item/assembly/shock_kit))
-		var/obj/item/assembly/shock_kit/SK = W
-		if(!SK.status)
-			to_chat(user, SPAN_NOTICE("\The [SK] is not ready to be attached!"))
-			return
-		if(!user.unEquip(SK))
-			return
-		var/obj/structure/bed/chair/e_chair/E = new (src.loc, material.name)
-		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		E.set_dir(dir)
-		E.part = SK
-		SK.forceMove(E)
-		SK.master = E
+
+/obj/structure/bed/chair/get_interactions_info()
+	. = ..()
+	.["Electrohelmet Assembly"] = "<p>Turns \the [initial(name)] into an electric chair. The chair can not have any padding.</p>"
+
+
+/obj/structure/bed/chair/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Electrohelmet Assembly - Create electric chair
+	if (istype(tool, /obj/item/assembly/shock_kit))
+		if (padding_material)
+			to_chat(user, SPAN_WARNING("You can't attach \the [tool] to \the [src] while it's padded."))
+			return TRUE
+		var/obj/item/assembly/shock_kit/shock_kit = tool
+		if (!shock_kit.status)
+			to_chat(user, SPAN_WARNING("\The [tool] is not ready to be attached."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		var/obj/structure/bed/chair/e_chair/e_chair = new(loc, material.name)
+		playsound(src, 'sound/items/Deconstruct.ogg', 50, TRUE)
+		e_chair.set_dir(dir)
+		e_chair.part = tool
+		tool.forceMove(e_chair)
+		shock_kit.master = e_chair
+		transfer_fingerprints_to(e_chair)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] attaches \a [tool] to \the [src], turning it into \a [e_chair]."),
+			SPAN_NOTICE("You \the [tool] to \the [src], turning it into \a [e_chair].")
+		)
 		qdel(src)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/bed/chair/post_buckle_mob()
 	update_icon()
@@ -337,10 +356,20 @@
 	var/chair_material = MATERIAL_WOOD
 	buckle_movable = FALSE
 
-/obj/structure/bed/chair/wood/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack) || istype(W, /obj/item/wirecutters))
-		return
-	..()
+
+/obj/structure/bed/chair/wood/get_interactions_info()
+	. = ..()
+	. -= CODEX_INTERACTION_MATERIAL_STACK
+	. -= CODEX_INTERACTION_WIRECUTTERS
+
+
+/obj/structure/bed/chair/wood/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Stacks, wirecutters - Block chair interactions
+	if (isstack(tool) || isWirecutter(tool))
+		return FALSE
+
+	return ..()
+
 
 /obj/structure/bed/chair/wood/New(newloc)
 	..(newloc, chair_material)

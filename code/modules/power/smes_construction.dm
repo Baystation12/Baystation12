@@ -330,23 +330,35 @@
 			return
 	..()
 
-// Proc: attackby()
-// Parameters: 2 (W - object that was used on this machine, user - person which used the object)
-// Description: Handles tool interaction. Allows deconstruction/upgrading/fixing.
-/obj/machinery/power/smes/buildable/attackby(obj/item/W as obj, mob/user as mob)
+
+/obj/machinery/power/smes/buildable/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_MULTITOOL] += "<p>Allows changing the SMES unit's RCON tag. If set to 'NO_TAG', this disables RCON connectivity.</p>"
+
+
+/obj/machinery/power/smes/buildable/use_tool(obj/item/tool, mob/user, list/click_params)
 	// No more disassembling of overloaded SMESs. You broke it, now enjoy the consequences.
 	if (failing)
 		to_chat(user, SPAN_WARNING("\The [src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea."))
+		return TRUE
+
+	// Check parent interactions before proceeding
+	. = ..()
+	if (.)
 		return
 
-	if (!..())
+	// Multitool - Change RCON tag
+	if (isMultitool(tool))
+		var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", name, RCon_tag) as null|text
+		if (!newtag || newtag == RCon_tag || !user.use_sanity_check(src, tool))
+			return TRUE
+		RCon_tag = newtag
+		user.visible_message(
+			SPAN_NOTICE("\The [user] reconfigures \the [src] with \a [tool]."),
+			SPAN_NOTICE("You set \the [src]'s RCON tag to '[RCon_tag]' with \the [tool].")
+		)
+		return TRUE
 
-		// Multitool - change RCON tag
-		if(isMultitool(W))
-			var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", "SMES RCON system") as text
-			if(newtag)
-				RCon_tag = newtag
-				to_chat(user, SPAN_NOTICE("You changed the RCON tag to: [newtag]"))
 
 // Proc: toggle_input()
 // Parameters: None

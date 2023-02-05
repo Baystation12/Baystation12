@@ -367,16 +367,36 @@
 	can_hold = list(/obj/item/flame/match)
 	startswith = list(/obj/item/flame/match = 10)
 
-/obj/item/storage/box/matches/attackby(obj/item/flame/match/W as obj, mob/user as mob)
-	if(istype(W) && !W.lit && !W.burnt)
-		W.lit = 1
-		W.damtype = INJURY_TYPE_BURN
-		W.icon_state = "match_lit"
-		START_PROCESSING(SSobj, W)
-		playsound(src.loc, 'sound/items/match.ogg', 60, 1, -4)
-		user.visible_message(SPAN_NOTICE("[user] strikes the match on the matchbox."))
-	W.update_icon()
-	return
+
+/obj/item/storage/box/matches/get_interactions_info()
+	. = ..()
+	.["Match"] = "<p>Lights the match.</p>"
+
+
+/obj/item/storage/box/matches/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Match - Strike match and light it
+	if (istype(tool, /obj/item/flame/match))
+		var/obj/item/flame/match/match = tool
+		if (match.lit)
+			to_chat(user, SPAN_WARNING("\The [tool] is already lit."))
+			return TRUE
+		if (match.burnt)
+			to_chat(user, SPAN_WARNING("\The [tool] is burned up."))
+			return TRUE
+		match.lit = TRUE
+		match.damtype = INJURY_TYPE_BURN
+		match.icon_state = "match_lit"
+		START_PROCESSING(SSobj, tool)
+		playsound(loc, 'sound/items/match.ogg', 50, TRUE, -4)
+		match.update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] strikes \a [tool] on \the [src], lighting it."),
+			SPAN_NOTICE("You strike \the [tool] on \the [src], lighting it.")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/storage/box/autoinjectors
 	name = "box of injectors"

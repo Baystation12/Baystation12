@@ -64,12 +64,20 @@
 	. = ..()
 	set_extension(src, /datum/extension/holster, src, sound_in, sound_out, can_holster)
 
-/obj/item/storage/belt/holster/attackby(obj/item/W as obj, mob/user as mob)
-	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
-	if(H.holster(W, user))
-		return
-	else
-		. = ..(W, user)
+
+/obj/item/storage/belt/holster/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_ANY_ITEM] = "<p>Attempts to holster the item.</p>"
+
+
+/obj/item/storage/belt/holster/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Attempt to holster the tool.
+	var/datum/extension/holster/holster = get_extension(src, /datum/extension/holster)
+	if (holster.holster(tool, user))
+		return TRUE
+
+	return ..()
+
 
 /obj/item/storage/belt/holster/attack_hand(mob/user as mob)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)

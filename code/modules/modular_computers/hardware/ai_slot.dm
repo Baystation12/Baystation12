@@ -19,21 +19,45 @@
 		power_usage = power_usage_occupied
 	..()
 
-/obj/item/stock_parts/computer/ai_slot/attackby(obj/item/W, mob/user)
-	if(..())
+
+/obj/item/stock_parts/computer/ai_slot/get_interactions_info()
+	. = ..()
+	.["inteliCard"] += "<p>Inserts the intelicard. Only one card can be inserted at a time.</p>"
+	.[CODEX_INTERACTION_SCREWDRIVER] += "<p>Removes the intelicard, if present.</p>"
+
+
+/obj/item/stock_parts/computer/ai_slot/use_tool(obj/item/tool, mob/user, list/click_params)
+	. = ..()
+	if (.)
+		return
+
+	// inteliCard - Insert card
+	if (istype(tool, /obj/item/aicard))
+		if (stored_card)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [stored_card] inserted."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		do_insert_ai(user, tool)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] inserts \a [tool] into \the [src]."),
+			SPAN_NOTICE("You insert \the [tool] into \the [src].")
+		)
 		return TRUE
-	if(istype(W, /obj/item/aicard))
-		if(stored_card)
-			to_chat(user, "\The [src] is already occupied.")
-			return
-		if(!user.unEquip(W, src))
-			return
-		do_insert_ai(user, W)
-		return TRUE
-	if(isScrewdriver(W) && stored_card)
-		to_chat(user, "You manually remove \the [stored_card] from \the [src].")
+
+	// Screwdriver - Remove intelicard
+	if (isScrewdriver(tool))
+		if (!stored_card)
+			to_chat(user, SPAN_WARNING("\The [src] doesn't have an intelicard to remove."))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] ejects \a [stored_card] from \the [src] with \a [tool]."),
+			SPAN_NOTICE("You eject \the [stored_card] from \the [src] with \the [tool].")
+		)
 		do_eject_ai(user)
 		return TRUE
+
 
 /obj/item/stock_parts/computer/ai_slot/Destroy()
 	if(stored_card)

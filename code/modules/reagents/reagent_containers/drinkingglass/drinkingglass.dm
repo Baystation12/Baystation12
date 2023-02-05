@@ -212,19 +212,47 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		return TRUE
 	splashtarget(target, user)
 
-/obj/item/reagent_containers/food/drinks/glass2/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/material/kitchen/utensil/spoon))
-		if(user.a_intent == I_HURT)
-			user.visible_message(SPAN_WARNING("[user] bashes \the [src] with a spoon, shattering it to pieces! What a rube."))
-			playsound(src, "shatter", 30, 1)
-			if(reagents)
-				user.visible_message(SPAN_NOTICE("The contents of \the [src] splash all over [user]!"))
-				reagents.splash(user, reagents.total_volume)
-			qdel(src)
-			return
-		user.visible_message(SPAN_NOTICE("[user] gently strikes \the [src] with a spoon, calling the room to attention."))
-		playsound(src, "sound/items/wineglass.ogg", 65, 1)
-	else return ..()
+
+/obj/item/reagent_containers/food/drinks/glass2/get_interactions_info()
+	. = ..()
+	.["Spoon"] = {"
+		<p>Gently taps the glass and makes a sound.</p>
+		<p>On harm intent, breaks the glass.</p>
+	"}
+
+
+/obj/item/reagent_containers/food/drinks/glass2/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Spoon - Tap on the glass
+	if (istype(tool, /obj/item/material/kitchen/utensil/spoon))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] gently strikes \the [src] with \a [tool], calling the room to attention."),
+			SPAN_NOTICE("You gently strike \the [src] with \a [tool], calling the room to attention.")
+		)
+		playsound(src, "sound/items/wineglass.ogg", 65, TRUE)
+		return TRUE
+
+	return ..()
+
+
+/obj/item/reagent_containers/food/drinks/glass2/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Spoon - Shatter the glass
+	if (istype(weapon, /obj/item/material/kitchen/utensil/spoon))
+		user.visible_message(
+			SPAN_WARNING("\The [user] bashes \the [src] with \a [weapon], shattering it to pieces! What a rube."),
+			SPAN_WARNING("You bash \the [src] with \a [weapon], shattering it to pieces! What a rube.")
+		)
+		playsound(src, "shatter", 50, TRUE)
+		if(reagents)
+			user.visible_message(
+				SPAN_WARNING("The contents of \the [src] splash all over \the [user]!"),
+				SPAN_DANGER("The contents of \the [src] splash all over you!")
+			)
+			reagents.splash(user, reagents.total_volume)
+		qdel(src)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/reagent_containers/food/drinks/glass2/ProcessAtomTemperature()
 	var/old_temp = temperature

@@ -76,11 +76,20 @@
 /obj/item/gun/launcher/grenade/attack_self(mob/user)
 	pump(user)
 
-/obj/item/gun/launcher/grenade/attackby(obj/item/I, mob/user)
-	if((istype(I, /obj/item/grenade)))
-		load(I, user)
-	else
-		..()
+
+/obj/item/gun/launcher/grenade/get_interactions_info()
+	. = ..()
+	.["Grenade"] = "<p>Loads the grenade into the launcher. The launcher can hold up to [initial(max_grenades)] grenade\s. Only certain grenade types can be loaded.</p>"
+
+
+/obj/item/gun/launcher/grenade/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Grenade - Load ammo
+	if (istype(tool, /obj/item/grenade))
+		load(tool, user)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/launcher/grenade/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)
@@ -142,12 +151,16 @@
 		return
 
 	if(chambered)
-		to_chat(user, SPAN_WARNING("\The [src] is already loaded."))
+		to_chat(user, SPAN_WARNING("\The [src] is already loaded with \a [chambered]."))
 		return
 	if(!user.unEquip(G, src))
+		to_chat(user, SPAN_WARNING("You can't drop \the [G]."))
 		return
 	chambered = G
-	user.visible_message("\The [user] load \a [G] into \the [src].", SPAN_NOTICE("You load \a [G] into \the [src]."))
+	user.visible_message(
+		SPAN_NOTICE("\The [user] loads \a [G] into \the [src]."),
+		SPAN_NOTICE("You load \the [G] into \the [src].")
+	)
 
 /obj/item/gun/launcher/grenade/underslung/unload(mob/user)
 	if(chambered)

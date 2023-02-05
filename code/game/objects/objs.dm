@@ -124,25 +124,63 @@
 		if (damtype == DAMAGE_BURN)
 			. |= DAMAGE_FLAG_LASER
 
-/obj/attackby(obj/item/O, mob/user)
-	if(obj_flags & OBJ_FLAG_ANCHORABLE)
-		if(isWrench(O))
-			wrench_floor_bolts(user)
-			update_icon()
-			return
+
+/obj/get_interactions_info()
+	. = ..()
+	if (HAS_FLAGS(initial(obj_flags), OBJ_FLAG_ANCHORABLE))
+		.[CODEX_INTERACTION_WRENCH] = "<p>Anchors and unanchors the object after a short timer. When unanchored, the object can be moved.</p>"
+
+
+
+/obj/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Wrench - Toggle anchored
+	if (isWrench(tool) && can_wrench_bolts(tool, user))
+		wrench_floor_bolts(tool, user)
+		return TRUE
+
 	return ..()
 
-/obj/proc/wrench_floor_bolts(mob/user, delay=20)
-	playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
-	if(anchored)
-		user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
-	else
-		user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
-	if(do_after(user, delay, src, DO_REPAIR_CONSTRUCT))
-		if(!src) return
-		to_chat(user, SPAN_NOTICE("You [anchored? "un" : ""]secured \the [src]!"))
-		anchored = !anchored
-	return 1
+
+/**
+ * Checks if the object can have its bolts toggled by a wrench. By default, this only checks `obj_flags` for `OBJ_FLAG_ANCHORABLE`.
+ *
+ * **Parameters**:
+ * - `tool` - The tool used to wrench the object.
+ * - `user` - The mob attempting the wrenching.
+ * - `silent` (Boolean, default `FALSE`) - If set, does not send feedback messages to `user`.
+ *
+ * Returns boolean.
+ */
+/obj/proc/can_wrench_bolts(obj/item/tool, mob/user, silent = FALSE)
+	if (!HAS_FLAGS(obj_flags, OBJ_FLAG_ANCHORABLE))
+		return FALSE
+	return TRUE
+
+
+/**
+ * Handles toggling the anchored state using a wrench. Performs no pre-checks.
+ *
+ * **Parameters**:
+ * - `tool` - The item used to perform the wrenching.
+ * - `user` - The mob performing the wrenching.
+ * - `delay` (Integer. Default `2 SECONDS`) - Time used for the do_after call.
+ */
+/obj/proc/wrench_floor_bolts(obj/item/tool, mob/user, delay = 2 SECONDS)
+	playsound(loc, 'sound/items/Ratchet.ogg', 50, TRUE)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] starts [anchored ? "unsecuring" : "securing"] \the [src] [anchored ? "from" : "to"] the floor with \a [tool]."),
+		SPAN_NOTICE("You start [anchored ? "unsecuring" : "securing"] \the [src] [anchored ? "from" : "to"] the floor with \the [tool].")
+	)
+	if (!do_after(user, delay, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+		return
+	playsound(loc, 'sound/items/Ratchet.ogg', 50, TRUE)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] [anchored ? "unsecures" : "secures"] \the [src] [anchored ? "from" : "to"] the floor with \a [tool]."),
+		SPAN_NOTICE("You [anchored ? "unsecure" : "secure"] \the [src] [anchored ? "from" : "to"] the floor with \the [tool].")
+	)
+	anchored = !anchored
+	update_icon()
+
 
 /obj/attack_hand(mob/living/user)
 	if(Adjacent(user))

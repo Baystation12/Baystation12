@@ -40,27 +40,34 @@
 	throwforce = round(0.25*material.get_edge_damage())
 	force = round(0.5*material.get_blunt_damage())
 
-/obj/item/stack/material/rods/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWelder(W))
-		var/obj/item/weldingtool/WT = W
 
-		if(!can_use(2))
-			to_chat(user, SPAN_WARNING("You need at least two rods to do this."))
-			return
+/obj/item/stack/material/rods/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_WELDER] = "<p>Shapes the rods back into sheets. Requires 2 rods and 5 units of fuel.</p>"
 
-		if(WT.remove_fuel(0,user))
-			var/obj/item/stack/material/steel/new_item = new(usr.loc)
-			new_item.add_to_stacks(usr)
-			for (var/mob/M in viewers(src))
-				M.show_message(SPAN_NOTICE("[src] is shaped into metal by [user.name] with the weldingtool."), 3, SPAN_NOTICE("You hear welding."), 2)
-			var/obj/item/stack/material/rods/R = src
-			src = null
-			var/replace = (user.get_inactive_hand()==R)
-			R.use(2)
-			if (!R && replace)
-				user.put_in_hands(new_item)
-		return
-	..()
+
+/obj/item/stack/material/rods/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Welding Tool - Form into sheets
+	if (isWelder(tool))
+		if (!can_use(2))
+			to_chat(user, SPAN_WARNING("You need at least two [plural_name] to reshape them into sheets."))
+			return TRUE
+		var/obj/item/weldingtool/welder = tool
+		if (!welder.can_use(5, user, "to reshape \the [src] into sheets."))
+			return TRUE
+		use(2)
+		welder.remove_fuel(5, user)
+		var/obj/item/stack/material/new_stack = new(get_turf(src), 1, get_material_name())
+		new_stack.add_to_stacks(user)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] shapes some of \the [src] into sheets with \a [tool]."),
+			SPAN_NOTICE("You shape some of \the [src] into sheets with \the [tool]."),
+			SPAN_ITALIC("You hear welding.")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/stack/material/rods/attack_self(mob/user as mob)
 	src.add_fingerprint(user)

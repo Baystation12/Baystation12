@@ -41,37 +41,60 @@
 		return FALSE
 	return TRUE
 
-/obj/item/stock_parts/computer/nano_printer/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/paper))
-		if(stored_paper >= max_paper)
-			to_chat(user, "You try to add \the [W] into \the [src], but its paper bin is full.")
-			return
 
-		to_chat(user, "You insert \the [W] into [src].")
-		qdel(W)
+/obj/item/stock_parts/computer/nano_printer/get_interactions_info()
+	. = ..()
+	.["Paper"] = "<p>Adds the paper to the printer's stored papers. This deletes anything that was written on the paper. The printer can hold up to [initial(max_paper)] sheet\s of paper.</p>"
+	.["Paper Bundle"] = "<p>Adds papers from the bundle to the printer's stored papers.</p>"
+
+
+/obj/item/stock_parts/computer/nano_printer/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Paper - Load paper
+	if (istype(tool, /obj/item/paper))
+		if (stored_paper >= max_paper)
+			to_chat(user, SPAN_WARNING("\The [src]'s paper bin is full."))
+			return TRUE
+		if (!user.unEquip(tool))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
 		stored_paper++
-	else if(istype(W, /obj/item/paper_bundle))
-		var/obj/item/paper_bundle/B = W
-		var/num_of_pages_added = 0
-		if(stored_paper >= max_paper)
-			to_chat(user, "You try to add \the [W] into \the [src], but its paper bin is full.")
-			return
-		for(var/obj/item/bundleitem in B) //loop through items in bundle
-			if(istype(bundleitem, /obj/item/paper)) //if item is paper (and not photo), add into the bin
-				B.pages.Remove(bundleitem)
-				qdel(bundleitem)
-				num_of_pages_added++
-				stored_paper++
-			if(stored_paper >= max_paper) //check if the printer is full yet
-				to_chat(user, "The printer has been filled to full capacity.")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] loads \a [tool] into \the [src]."),
+			SPAN_NOTICE("You load \the [tool] into \the [src].")
+		)
+		qdel(tool)
+		return TRUE
+
+	// Paper Bundle - Load paper
+	if (istype(tool, /obj/item/paper_bundle))
+		if (stored_paper >= max_paper)
+			to_chat(user, SPAN_WARNING("\The [src]'s paper bin is full."))
+			return TRUE
+		if (!user.unEquip(tool))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		var/obj/item/paper_bundle/bundle = tool
+		var/pages_added = 0
+		for (var/obj/item/paper/paper in bundle)
+			bundle.pages -= paper
+			qdel(paper)
+			pages_added++
+			stored_paper++
+			if (stored_paper >= max_paper)
 				break
-		if(length(B.pages) == 0) //if all its papers have been put into the printer, delete bundle
-			qdel(W)
-		else if(length(B.pages) == 1) //if only one item left, extract item and delete the one-item bundle
-			user.drop_from_inventory(B)
-			user.put_in_hands(B[1])
-			qdel(B)
-		else //if at least two items remain, just update the bundle icon
-			B.update_icon()
-		to_chat(user, "You add [num_of_pages_added] papers from \the [W] into \the [src].")
-	return
+		if (length(bundle.pages) == 0)
+			qdel(bundle)
+		else if (length(bundle.pages) == 1)
+			user.drop_from_inventory(bundle)
+			user.put_in_hands(bundle[1])
+			bundle.pages.Cut()
+			qdel(bundle)
+		else
+			bundle.update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adds some sheets of paper from \the [tool] to \the [src]."),
+			SPAN_NOTICE("You add [pages_added] sheet\s of paper from \the [tool] to \the [src].")
+		)
+		return TRUE
+
+	return ..()

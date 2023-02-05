@@ -77,45 +77,95 @@
 				qdel(src)
 				return
 
-/obj/structure/bed/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		dismantle()
-		qdel(src)
-	else if(istype(W,/obj/item/stack))
-		if(padding_material)
-			to_chat(user, "\The [src] is already padded.")
-			return
-		var/obj/item/stack/C = W
-		if(C.get_amount() < 1) // How??
-			qdel(C)
-			return
-		var/padding_type //This is awful but it needs to be like this until tiles are given a material var.
-		if(istype(W,/obj/item/stack/tile/carpet))
-			padding_type = MATERIAL_CARPET
-		else if(istype(W,/obj/item/stack/material))
-			var/obj/item/stack/material/M = W
-			if(M.material && (M.material.flags & MATERIAL_PADDING))
-				padding_type = "[M.material.name]"
-		if(!padding_type)
-			to_chat(user, "You cannot pad \the [src] with that.")
-			return
-		C.use(1)
-		if(!istype(src.loc, /turf))
-			src.forceMove(get_turf(src))
-		to_chat(user, "You add padding to \the [src].")
-		add_padding(padding_type)
-		return
 
-	else if(isWirecutter(W))
-		if(!padding_material)
-			to_chat(user, "\The [src] has no padding to remove.")
-			return
-		to_chat(user, "You remove the padding from \the [src].")
-		playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
+/obj/structure/bed/get_interactions_info()
+	. = ..()
+	.["Carpet"] = "<p>Pads \the [initial(name)] with carpet.</p>"
+	.[CODEX_INTERACTION_GRAB] = "<p>Attempts to buckle the victim to \the [initial(name)]. If successful, this drops the grab.</p>"
+	.[CODEX_INTERACTION_MATERIAL_STACK] = "<p>If the material can be used to pad furniture, pads \the [initial(name)] with the material.</p>"
+	.[CODEX_INTERACTION_WIRECUTTERS] = "<p>Removes any padding.</p>"
+	.[CODEX_INTERACTION_WRENCH] = "<p>Dismantles \the [initial(name)].</p>"
+
+
+/obj/structure/bed/use_grab(obj/item/grab/grab, list/click_params)
+	if (!can_buckle(grab.affecting, grab.assailant))
+		return TRUE
+	grab.assailant.visible_message(
+		SPAN_WARNING("\The [grab.assailant] starts buckling \the [grab.affecting] to \the [src]."),
+		SPAN_DANGER("You start buckling \the [grab.affecting] to \the [src]."),
+		exclude_mobs = list(grab.affecting)
+	)
+	to_chat(grab.affecting, SPAN_DANGER("\The [grab.assailant] starts buckling you to \the [src]."))
+	if (!do_after(grab.assailant, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || !grab.assailant.use_sanity_check(src, grab))
+		return TRUE
+	if (!can_buckle(grab.affecting, grab.assailant) || !user_buckle_mob(grab.affecting, grab.assailant))
+		return TRUE
+	qdel(src)
+	return TRUE
+
+
+/obj/structure/bed/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Carpet Stack - Add padding
+	if (istype(tool, /obj/item/stack/tile/carpet))
+		if (padding_material)
+			to_chat(user, SPAN_WARNING("\The [src] is already padded with [padding_material.use_name]."))
+			return TRUE
+		var/obj/item/stack/tile/carpet/carpet = tool
+		carpet.use(1)
+		add_padding(MATERIAL_CARPET)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] pads \the [src] with some [carpet.plural_name]."),
+			SPAN_NOTICE("You pad \the [src] with some [carpet.plural_name].")
+		)
+		return TRUE
+
+	// Material Stack - Add padding
+	if (istype(tool, /obj/item/stack/material))
+		if (padding_material)
+			to_chat(user, SPAN_WARNING("\The [src] is already padded with [padding_material.use_name]."))
+			return TRUE
+		var/obj/item/stack/material/stack_material = tool
+		if (!HAS_FLAGS(stack_material.material.flags, MATERIAL_PADDING))
+			to_chat(user, SPAN_WARNING("\The [tool] cannot be used to pad \the [src]."))
+			return TRUE
+		var/obj/item/stack/material/stack = tool
+		stack.use(1)
+		add_padding(stack_material.material.name)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] pads \the [src] with some [stack.plural_name]."),
+			SPAN_NOTICE("You pad \the [src] with some [stack.plural_name].")
+		)
+		return TRUE
+
+	// Wirecutters - Remove padding
+	if (isWirecutter(tool))
+		if (!padding_material)
+			to_chat(user, SPAN_WARNING("\The [src] has no padding to remove."))
+			return TRUE
+		playsound(src, 'sound/items/Wirecutter.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \the [src]'s [padding_material.use_name] padding with \a [tool]."),
+			SPAN_NOTICE("You remove \the [src]'s [padding_material.use_name] padding with \the [tool].")
+		)
 		remove_padding()
+		return TRUE
 
-	else if(istype(W, /obj/item/grab))
+	// Wrench - Dismantle
+	if (isWrench(tool))
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		dismantle()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] dismantles \the [src] with \a [tool]."),
+			SPAN_NOTICE("You dismantle \the [src] with \the [tool].")
+		)
+		qdel(src)
+		return TRUE
+
+	return ..()
+
+
+/obj/structure/bed/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/grab))
 		var/obj/item/grab/G = W
 		var/mob/living/affecting = G.affecting
 		user.visible_message(SPAN_NOTICE("[user] attempts to buckle [affecting] into \the [src]!"))

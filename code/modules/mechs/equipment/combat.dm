@@ -574,27 +574,55 @@
 	if(owner && holding)
 		update_icon()
 
-/obj/item/mech_equipment/mounted_system/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
-	if(!CanPhysicallyInteract(user))	return
 
-	var/obj/item/flamethrower/full/mech/FM = holding
-	if(istype(FM))
-		if(isCrowbar(W) && FM.beaker)
-			if(FM.beaker)
-				user.visible_message(SPAN_NOTICE("\The [user] pries out \the [FM.beaker] using \the [W]."))
-				FM.beaker.dropInto(get_turf(user))
-				FM.beaker = null
-			return
+/obj/item/mech_equipment/mounted_system/flamethrower/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_CROWBAR] += "<p>Removes the flamethrower's beaker, if present.</p>"
+	.["Reagent Container"] += "<p>Installs the container into the flamethrower. The flamethrower only accepts open containers of certain sizes.</p>"
 
-		if (istype(W, /obj/item/reagent_containers) && W.is_open_container() && (W.w_class <= FM.max_beaker))
-			if(FM.beaker)
-				to_chat(user, SPAN_NOTICE("There is already a tank inserted!"))
-				return
-			if(user.unEquip(W, FM))
-				user.visible_message(SPAN_NOTICE("\The [user] inserts \the [W] inside \the [src]."))
-				FM.beaker = W
-			return
-	..()
+
+/obj/item/mech_equipment/mounted_system/flamethrower/use_tool(obj/item/tool, mob/user, list/click_params)
+	var/obj/item/flamethrower/full/mech/flamethrower = holding
+	if (!istype(flamethrower))
+		return ..()
+	var/target_name = "[name]'s [flamethrower.name]"
+
+	// Crowbar - Remove beaker
+	if (isCrowbar(tool))
+		if (!flamethrower.beaker)
+			to_chat(user, SPAN_WARNING("\The [target_name] doesn't have a beaker to remove."))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \a [flamethrower.beaker] from \the [target_name] with \a [tool]."),
+			SPAN_NOTICE("You remove \the [flamethrower.beaker] from \the [target_name] with \the [tool].")
+		)
+		flamethrower.beaker.dropInto(get_turf(src))
+		flamethrower.beaker = null
+		return TRUE
+
+	// Reagent Containers - Insert beaker
+	if (istype(tool, /obj/item/reagent_containers))
+		if (flamethrower.beaker)
+			to_chat(user, SPAN_WARNING("\The [target_name] already has \a [flamethrower.beaker] installed."))
+			return TRUE
+		if (tool.w_class > flamethrower.max_beaker)
+			to_chat(user, SPAN_WARNING("\The [tool] is too large for \the [target_name]'s beaker slot."))
+			return TRUE
+		if (!tool.is_open_container())
+			to_chat(user, SPAN_WARNING("\The [tool] needs to be open before it can be installed into \the [target_name]'s beaker slot."))
+			return TRUE
+		if (!user.unEquip(tool, flamethrower))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \the [target_name]."),
+			SPAN_NOTICE("You install \the [tool] into \the [target_name].")
+		)
+		flamethrower.beaker = tool
+		return TRUE
+
+	return ..()
+
 
 /obj/item/mech_equipment/mounted_system/flamethrower/on_update_icon()
 	. = ..()

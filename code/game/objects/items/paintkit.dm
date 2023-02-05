@@ -39,9 +39,17 @@
 		new_light_overlay = citem.additional_data["light_overlay"]
 	new_mob_icon_file = CUSTOM_ITEM_MOB
 
-/obj/item/clothing/head/helmet/space/void/attackby(obj/item/O, mob/user)
-	if(istype(O,/obj/item/device/kit/suit))
-		var/obj/item/device/kit/suit/kit = O
+
+/obj/item/clothing/head/helmet/space/void/get_interactions_info()
+	. = ..()
+	.["Voidsuit Modification Kit"] = "<p>Applies the kit's icon and name to the helmet. This also update's the helmet's restricted species to the user's species. This costs 1 use of the kit.</p>"
+
+
+/obj/item/clothing/head/helmet/space/void/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Paint Kit - Apply paint
+	if (istype(tool, /obj/item/device/kit/suit))
+		var/obj/item/device/kit/suit/kit = tool
+		var/old_name = name
 		SetName("[kit.new_name] suit helmet")
 		desc = kit.new_desc
 		icon_state = "[kit.new_icon]_helmet"
@@ -52,17 +60,29 @@
 			icon_override = kit.new_mob_icon_file
 		if(kit.new_light_overlay)
 			light_overlay = kit.new_light_overlay
-		to_chat(user, "You set about modifying the helmet into [src].")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] modifies \the [old_name] into \a [src] with \a [tool]."),
+			SPAN_NOTICE("You modify \the [old_name] into \a [src] with \the [tool].")
+		)
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
 			species_restricted = list(H.species.get_bodytype(H))
-		kit.use(1,user)
-		return 1
+		kit.use(1, user)
+		return TRUE
+
 	return ..()
 
-/obj/item/clothing/suit/space/void/attackby(obj/item/O, mob/user)
-	if(istype(O,/obj/item/device/kit/suit))
-		var/obj/item/device/kit/suit/kit = O
+
+/obj/item/clothing/suit/space/void/get_interactions_info()
+	. = ..()
+	.["Voidsuit Modification Kit"] = "<p>Applies the kit's icon and name to the suit. This also update's the suit's restricted species to the user's species. This costs 1 use of the kit.</p>"
+
+
+/obj/item/clothing/suit/space/void/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Paint Kit - Apply paint
+	if (istype(tool, /obj/item/device/kit/suit))
+		var/obj/item/device/kit/suit/kit = tool
+		var/old_name = name
 		SetName("[kit.new_name] voidsuit")
 		desc = kit.new_desc
 		icon_state = "[kit.new_icon]_suit"
@@ -71,13 +91,18 @@
 			icon = kit.new_icon_file
 		if(kit.new_mob_icon_file)
 			icon_override = kit.new_mob_icon_file
-		to_chat(user, "You set about modifying the suit into [src].")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] modifies \the [old_name] into \a [src] with \a [tool]."),
+			SPAN_NOTICE("You modify \the [old_name] into \a [src] with \the [tool].")
+		)
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
 			species_restricted = list(H.species.get_bodytype(H))
-		kit.use(1,user)
-		return 1
+		kit.use(1, user)
+		return TRUE
+
 	return ..()
+
 
 // Mechs are handled in their attackby (mech_interaction.dm).
 /obj/item/device/kit/paint

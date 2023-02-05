@@ -101,11 +101,20 @@
 		loc.verbs |= /obj/item/stock_parts/computer/card_slot/proc/verb_eject_id
 	return TRUE
 
-/obj/item/stock_parts/computer/card_slot/attackby(obj/item/card/id/I, mob/living/user)
-	if(!istype(I))
-		return ..()
-	insert_id(I, user)
-	return TRUE
+
+/obj/item/stock_parts/computer/card_slot/get_interactions_info()
+	. = ..()
+	.["ID Card"] = "<p>Inserts the ID into the card slot.</p>"
+
+
+/obj/item/stock_parts/computer/card_slot/use_tool(obj/item/tool, mob/user, list/click_params)
+	// ID Card - Insert ID
+	if (istype(tool, /obj/item/card/id))
+		insert_id(tool, user)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/stock_parts/computer/card_slot/broadcaster // read only
 	name = "RFID card broadcaster"

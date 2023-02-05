@@ -20,10 +20,21 @@
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
 
-/obj/structure/bed/chair/wheelchair/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W) || istype(W,/obj/item/stack) || isWirecutter(W))
-		return
-	..()
+
+/obj/structure/bed/chair/wheelchair/get_interactions_info()
+	. = ..()
+	. -= CODEX_INTERACTION_MATERIAL_STACK
+	. -= CODEX_INTERACTION_WRENCH
+	. -= CODEX_INTERACTION_WIRECUTTERS
+
+
+/obj/structure/bed/chair/wheelchair/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Wrench, Stack, Wirecutters - Block normal chair interactions
+	if (isWrench(tool) || isstack(tool) || isWirecutter(tool))
+		return FALSE
+
+	return ..()
+
 
 /obj/structure/bed/chair/wheelchair/relaymove(mob/user, direction)
 	// Redundant check?

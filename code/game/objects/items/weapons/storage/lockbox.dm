@@ -112,6 +112,8 @@
 		overlays += image(icon, src, "ledb")
 	return
 
-/obj/item/storage/lockbox/vials/attackby(obj/item/item, mob/living/user)
-	. = ..()
-	update_icon()
+
+/obj/item/storage/lockbox/vials/post_use_item(obj/item/tool, mob/user, interaction_handled, click_params)
+	..()
+	if (interaction_handled)
+		update_icon()

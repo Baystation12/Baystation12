@@ -20,16 +20,30 @@
 		else
 	return
 
-/obj/structure/sign/attackby(obj/item/tool as obj, mob/user as mob)	//deconstruction
-	if(isScrewdriver(tool) && !istype(src, /obj/structure/sign/double))
-		to_chat(user, "You unfasten the sign with your [tool.name].")
-		var/obj/item/sign/S = new(src.loc)
-		S.SetName(name)
-		S.desc = desc
-		S.icon_state = icon_state
-		S.sign_state = icon_state
+
+/obj/structure/sign/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_SCREWDRIVER] = "<p>Removes \the [initial(name)] from the wall.</p>"
+
+
+/obj/structure/sign/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Remove sign from wall
+	if (isScrewdriver(tool))
+		var/obj/item/sign/sign = new (loc)
+		sign.SetName(name)
+		sign.desc = desc
+		sign.icon_state = icon_state
+		sign.sign_state = icon_state
+		transfer_fingerprints_to(sign)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \the [src] from the wall with \a [tool]."),
+			SPAN_NOTICE("You remove \the [src] from the wall with \the [tool].")
+		)
 		qdel(src)
-	else ..()
+		return TRUE
+
+	return ..()
+
 
 /obj/item/sign
 	name = "sign"

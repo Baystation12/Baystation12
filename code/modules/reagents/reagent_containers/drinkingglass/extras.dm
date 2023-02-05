@@ -1,30 +1,46 @@
-/obj/item/reagent_containers/food/drinks/glass2/attackby(obj/item/I as obj, mob/user as mob)
-	if(length(extras) >= 2) return ..() // max 2 extras, one on each side of the drink
+/obj/item/reagent_containers/food/drinks/glass2/get_interactions_info()
+	. = ..()
+	.["Fruit Slice"] = "<p>Adds the fruit slice to the glass's rim.</p>"
+	.["Glass Additions"] = "<p>Adds the additional item to the glass. The glass can only have up to 2 items added.</p>"
 
-	if(istype(I, /obj/item/glass_extra))
-		var/obj/item/glass_extra/GE = I
-		if(can_add_extra(GE))
-			extras += GE
-			if(!user.unEquip(GE, src))
-				return
-			to_chat(user, SPAN_NOTICE("You add \the [GE] to \the [src]."))
-			update_icon()
-		else
-			to_chat(user, SPAN_WARNING("There's no space to put \the [GE] on \the [src]!"))
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/fruit_slice))
-		if(!rim_pos)
-			to_chat(user, SPAN_WARNING("There's no space to put \the [I] on \the [src]!"))
-			return
-		var/obj/item/reagent_containers/food/snacks/fruit_slice/FS = I
-		extras += FS
-		if(!user.unEquip(FS, src))
-			return
-		FS.pixel_x = 0 // Reset its pixel offsets so the icons work!
-		FS.pixel_y = 0
-		to_chat(user, SPAN_NOTICE("You add \the [FS] to \the [src]."))
+
+/obj/item/reagent_containers/food/drinks/glass2/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Fruit Slice - Add to glass rim
+	if (istype(tool, /obj/item/reagent_containers/food/snacks/fruit_slice))
+		if (!rim_pos)
+			to_chat(user, SPAN_WARNING("\The [src] can't have fruit slices added to it."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		extras += tool
+		tool.pixel_x = 0
+		tool.pixel_y = 0
 		update_icon()
-	else
-		return ..()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] places \a [tool] on \the [src]'s rim."),
+			SPAN_NOTICE("You place \the [tool] on \the [src]'s rim.")
+		)
+		return TRUE
+
+	// Glass Addition - Adds extras to the glass
+	if (istype(tool, /obj/item/glass_extra))
+		if (!can_add_extra(tool))
+			to_chat(user, SPAN_WARNING("There's no space to put \the [tool] on \the [src]."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
+		extras += tool
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adds \a [tool] to \the [src]."),
+			SPAN_NOTICE("You add \a [tool] to \the [src].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/reagent_containers/food/drinks/glass2/attack_hand(mob/user as mob)
 	if(src != user.get_inactive_hand())
@@ -53,6 +69,12 @@
 	var/glass_desc
 	w_class = ITEM_SIZE_TINY
 	icon = 'icons/obj/drink_glasses/extras.dmi'
+
+
+/obj/item/glass_extra/get_mechanics_info()
+	. = ..()
+	. += "<p>It can be added to certain drinks glasses as a glass addition.</p>"
+
 
 /obj/item/glass_extra/stick
 	name = "stick"

@@ -12,15 +12,32 @@
 	overlays += image('icons/obj/objects.dmi', src, "echair_over", MOB_LAYER + 1, dir)
 	return
 
-/obj/structure/bed/chair/e_chair/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W))
-		var/obj/structure/bed/chair/C = new /obj/structure/bed/chair(loc)
-		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-		C.set_dir(dir)
+
+/obj/structure/bed/chair/e_chair/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_WRENCH] = "<p>Removes the electrical parts, turning \the [initial(name)] back into a normal chair.</p>"
+
+
+/obj/structure/bed/chair/e_chair/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Wrench - Remove electric parts
+	if (isWrench(tool))
+		var/obj/structure/bed/chair/chair = new (loc)
+		chair.set_dir(dir)
+		transfer_fingerprints_to(chair)
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] detaches \the [part] from \the [chair] with \a [tool]."),
+			SPAN_NOTICE("You detach \the [part] from \the [chair] with \the [tool].")
+		)
 		part.dropInto(loc)
 		part.master = null
+		part.add_fingerprint(user, tool = tool)
 		part = null
 		qdel(src)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/bed/chair/e_chair/verb/toggle()
 	set name = "Toggle Electric Chair"

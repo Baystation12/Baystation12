@@ -155,19 +155,21 @@
 /obj/structure/window/reinforced/holowindow/Destroy()
 	..()
 
-/obj/structure/window/reinforced/holowindow/attackby(obj/item/W as obj, mob/user as mob)
 
-	if(!istype(W) || W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
+/obj/structure/window/reinforced/holowindow/get_interactions_info()
+	. = ..()
+	. -= CODEX_INTERACTION_CROWBAR
+	. -= CODEX_INTERACTION_SCREWDRIVER
+	. -= CODEX_INTERACTION_WRENCH
 
-	if(isScrewdriver(W) || isCrowbar(W) || isWrench(W))
-		to_chat(user, (SPAN_NOTICE("It's a holowindow, you can't dismantle it!")))
-	else
-		if (W.damtype == DAMAGE_BRUTE || W.damtype == DAMAGE_BURN)
-			hit(W.force, user, W)
-		else
-			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
-		..()
-	return
+
+/obj/structure/window/reinforced/holowindow/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver, Crowbar, Wrench - Block window interactions
+	if (isScrewdriver(tool) || isCrowbar(tool) || isWrench(tool))
+		return FALSE
+
+	return ..()
+
 
 /obj/structure/window/reinforced/holowindow/shatter(display_message = 1)
 	playsound(src, "shatter", 70, 1)
@@ -215,10 +217,19 @@
 /obj/structure/bed/chair/holochair/Destroy()
 	..()
 
-/obj/structure/bed/chair/holochair/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/wrench))
-		to_chat(user, (SPAN_NOTICE("It's a holochair, you can't dismantle it!")))
-	return
+
+/obj/structure/bed/chair/holochair/get_interactions_info()
+	. = ..()
+	. -= CODEX_INTERACTION_WRENCH
+
+
+/obj/structure/bed/chair/holochair/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Wrench - Block chair interactions
+	if (isWrench(tool))
+		return FALSE
+
+	return ..()
+
 
 /obj/item/holo
 	damtype = DAMAGE_PAIN

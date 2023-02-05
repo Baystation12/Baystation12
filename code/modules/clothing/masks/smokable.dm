@@ -10,12 +10,6 @@
 	var/type_butt = null
 	var/chem_volume = 0
 	var/smoketime = 0
-	var/genericmes = "<span class='notice'>USER lights their NAME with the FLAME.</span>"
-	var/matchmes = "USER lights NAME with FLAME"
-	var/lightermes = "USER lights NAME with FLAME"
-	var/zippomes = "USER lights NAME with FLAME"
-	var/weldermes = "USER lights NAME with FLAME"
-	var/ignitermes = "USER lights NAME with FLAME"
 	var/brand
 	var/gas_consumption = 0.04
 
@@ -130,26 +124,20 @@
 	set_light(0)
 	update_icon()
 
-/obj/item/clothing/mask/smokable/attackby(obj/item/W, mob/user)
-	..()
-	if (isFlameOrHeatSource(W))
-		var/text = matchmes
-		if(istype(W, /obj/item/flame/match))
-			text = matchmes
-		else if(istype(W, /obj/item/flame/lighter/zippo))
-			text = zippomes
-		else if(istype(W, /obj/item/flame/lighter))
-			text = lightermes
-		else if(isWelder(W))
-			text = weldermes
-		else if(istype(W, /obj/item/device/assembly/igniter))
-			text = ignitermes
-		else
-			text = genericmes
-		text = replacetext(text, "USER", "[user]")
-		text = replacetext(text, "NAME", "[name]")
-		text = replacetext(text, "FLAME", "[W.name]")
-		light(text)
+
+/obj/item/clothing/mask/smokable/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_FLAME_OR_HEAT_SOURCE] = "<p>Lights \the [initial(name)].</p>"
+
+
+/obj/item/clothing/mask/smokable/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Flame/Heat Source - Light smokable
+	if (isFlameOrHeatSource(tool))
+		light(SPAN_NOTICE("\The [user] lights \the [src] with \a [tool]."))
+		return TRUE
+
+	return ..()
+
 
 /obj/item/clothing/mask/smokable/attack(mob/living/M, mob/living/user, def_zone)
 	if(istype(M) && M.on_fire)
@@ -176,11 +164,6 @@
 	type_butt = /obj/item/trash/cigbutt
 	chem_volume = 5
 	smoketime = 300
-	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
-	lightermes = "<span class='notice'>USER manages to light their NAME with FLAME.</span>"
-	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
-	weldermes = "<span class='notice'>USER casually lights the NAME with FLAME.</span>"
-	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME.</span>"
 	brand = "\improper Trans-Stellar Duty-free"
 	var/list/filling = list(/datum/reagent/tobacco = 1)
 
@@ -312,15 +295,23 @@
 	icon_state = "woodbutt"
 	matter = list(MATERIAL_WOOD = 1)
 
-/obj/item/clothing/mask/smokable/cigarette/attackby(obj/item/W, mob/user)
-	..()
 
-	if(istype(W, /obj/item/melee/energy/sword))
-		var/obj/item/melee/energy/sword/S = W
-		if(S.active)
-			light(SPAN_WARNING("[user] swings their [W], barely missing their nose. They light their [name] in the process."))
+/obj/item/clothing/mask/smokable/cigarette/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_FLAME_SOURCE] = "<p>Lights the [initial(name)].</p>"
 
-	return
+
+/obj/item/clothing/mask/smokable/cigarette/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Flame Source - Light cigarette
+	if (tool.IsFlameSource())
+		light(SPAN_NOTICE("\The [user] lights \the [src] with \a [tool]."))
+		user.update_inv_wear_mask(0)
+		user.update_inv_l_hand(0)
+		user.update_inv_r_hand(1)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/clothing/mask/smokable/cigarette/attack(mob/living/carbon/human/H, mob/user, def_zone)
 	if(lit && H == user && istype(H))
@@ -382,11 +373,6 @@
 	item_state = "cigaroff"
 	smoketime = 1500
 	chem_volume = 15
-	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
-	lightermes = "<span class='notice'>USER manages to offend their NAME by lighting it with FLAME.</span>"
-	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
-	weldermes = "<span class='notice'>USER insults NAME by lighting it with FLAME.</span>"
-	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME with the power of science.</span>"
 	brand = null
 	filling = list(/datum/reagent/tobacco/fine = 5)
 
@@ -426,12 +412,6 @@
 	desc = "A manky old cigar butt."
 	icon_state = "cigarbutt"
 
-/obj/item/clothing/mask/smokable/cigarette/cigar/attackby(obj/item/W, mob/user)
-	..()
-
-	user.update_inv_wear_mask(0)
-	user.update_inv_l_hand(0)
-	user.update_inv_r_hand(1)
 
 //Bizarre
 /obj/item/clothing/mask/smokable/cigarette/rolled/sausage
@@ -464,11 +444,6 @@
 	icon_on = "pipeon"  //Note - these are in masks.dmi
 	smoketime = 0
 	chem_volume = 50
-	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
-	lightermes = "<span class='notice'>USER manages to light their NAME with FLAME.</span>"
-	zippomes = "<span class='rose'>With much care, USER lights their NAME with their FLAME.</span>"
-	weldermes = "<span class='notice'>USER recklessly lights NAME with FLAME.</span>"
-	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME with the power of science.</span>"
 
 /obj/item/clothing/mask/smokable/pipe/New()
 	..()
@@ -517,42 +492,37 @@
 		reagents.clear_reagents()
 		SetName("empty [initial(name)]")
 
-/obj/item/clothing/mask/smokable/pipe/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/melee/energy/sword))
-		return
 
-	..()
+/obj/item/clothing/mask/smokable/pipe/get_interactions_info()
+	. = ..()
+	.["Fruit"] = "<p>If dried, packs the fruit and its reagents into the pipe for smoking.</p>"
 
-	if (istype(W, /obj/item/reagent_containers/food/snacks))
-		var/obj/item/reagent_containers/food/snacks/grown/G = W
-		if (!G.dry)
-			to_chat(user, SPAN_NOTICE("[G] must be dried before you stuff it into [src]."))
-			return
+
+/obj/item/clothing/mask/smokable/pipe/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Fruit - Insert dried plants for smoking
+	if (istype(tool, /obj/item/reagent_containers/food/snacks/grown))
+		var/obj/item/reagent_containers/food/snacks/grown/fruit = tool
+		if (!fruit.dry)
+			to_chat(user, SPAN_WARNING("\The [tool] must be dried before you can stuff it into \the [src]."))
+			return TRUE
 		if (smoketime)
-			to_chat(user, SPAN_NOTICE("[src] is already packed."))
-			return
+			to_chat(user, SPAN_WARNING("\The [src] is already packed."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [tool]."))
+			return TRUE
 		smoketime = 1000
-		if(G.reagents)
-			G.reagents.trans_to_obj(src, G.reagents.total_volume)
-		SetName("[G.name]-packed [initial(name)]")
-		qdel(G)
+		if (fruit.reagents)
+			fruit.reagents.trans_to_obj(src, fruit.reagents.total_volume)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] packs \the [initial(name)] with some [fruit]."),
+			SPAN_NOTICE("You pack \the [initial(name)] with some [fruit].")
+		)
+		SetName("[fruit.name]-packed [initial(name)]")
+		qdel(fruit)
+		return TRUE
 
-	else if(istype(W, /obj/item/flame/lighter))
-		var/obj/item/flame/lighter/L = W
-		if(L.lit)
-			light(SPAN_NOTICE("[user] manages to light their [name] with [W]."))
-
-	else if(istype(W, /obj/item/flame/match))
-		var/obj/item/flame/match/M = W
-		if(M.lit)
-			light(SPAN_NOTICE("[user] lights their [name] with their [W]."))
-
-	else if(istype(W, /obj/item/device/assembly/igniter))
-		light(SPAN_NOTICE("[user] fiddles with [W], and manages to light their [name] with the power of science."))
-
-	user.update_inv_wear_mask(0)
-	user.update_inv_l_hand(0)
-	user.update_inv_r_hand(1)
+	return ..()
 
 
 /obj/item/clothing/mask/smokable/pipe/IsFlameSource()

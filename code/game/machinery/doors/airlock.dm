@@ -267,16 +267,35 @@
 	frequency =  1380
 	locked = 1
 
-/obj/machinery/door/airlock/external/escapepod/attackby(obj/item/C, mob/user)
-	if(p_open && !arePowerSystemsOn())
-		if(isWrench(C))
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			user.visible_message(SPAN_WARNING("[user.name] starts frantically pumping the bolt override mechanism!"), SPAN_WARNING("You start frantically pumping the bolt override mechanism!"))
-			if(do_after(user, 16 SECONDS, src, DO_REPAIR_CONSTRUCT))
-				visible_message("\The [src] bolts [locked ? "disengage" : "engage"]!")
-				locked = !locked
-				return
-	..()
+
+/obj/machinery/door/airlock/external/escapepod/get_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_WRENCH] = "<p>While the panel is open, toggles the pod's bolts after a timer.</p>"
+
+
+/obj/machinery/door/airlock/external/escapepod/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Wrench - Toggle lock
+	if (isWrench(tool))
+		if (!p_open)
+			to_chat(user, SPAN_WARNING("\The [src]'s panel must be open to toggle the bolt override."))
+			return TRUE
+		if (!arePowerSystemsOn())
+			to_chat(user, SPAN_WARNING("\The [src] must be powered to toggle the bolt override."))
+			return TRUE
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_WARNING("\The [user] starts frantically pumping \the [src]'s bolt override mechanism with \a [tool]!"),
+			SPAN_WARNING("You start frantically pumping \the [src]'s bolt override mechanism with \the [tool]!")
+		)
+		if (!do_after(user, 16 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+			return TRUE
+		visible_message(SPAN_WARNING("\The [src]'s bolts [locked ? "disengage" : "engage"]!"))
+		locked = !locked
+		update_icon()
+		return TRUE
+
+	return ..()
+
 
 /obj/machinery/door/airlock/external/bolted
 	locked = 1
