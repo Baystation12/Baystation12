@@ -93,22 +93,46 @@
 	else
 		icon_state = "medibot[on]"
 
-/mob/living/bot/medbot/attackby(obj/item/O, mob/user)
-	if(istype(O, /obj/item/reagent_containers/glass))
-		if(locked)
-			to_chat(user, SPAN_NOTICE("You cannot insert a beaker because the panel is locked."))
-			return
-		if(!isnull(reagent_glass))
-			to_chat(user, SPAN_NOTICE("There is already a beaker loaded."))
-			return
 
-		if(!user.unEquip(O, src))
-			return
-		reagent_glass = O
-		to_chat(user, SPAN_NOTICE("You insert [O]."))
-		return
-	else
-		..()
+/mob/living/bot/medbot/get_construction_info()
+	return list(
+		"Add a robotic <b>Left Arm</b> or <b>Right Arm</b> to a <b>First-Aid Kit</b>.",
+		"Add a <b>Health Analyzer</b>.",
+		"Add a <b>Proximity Sensor</b> to complete the medbot."
+	)
+
+
+/mob/living/bot/medbot/get_interactions_info()
+	. = ..()
+	.["Beaker"] = "<p>Installs the beaker into \the [initial(name)]. If installed, it will use the contents of the beaker for injections instead of tricordrazine. Only one beaker can be installed at a time. The access panel must be unlocked.</p>"
+
+
+/mob/living/bot/medbot/get_antag_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_EMAG] += "<p>Causes \the [initial(name)] to synthesize and inject toxins instead of tricordrazine. It will also try to inject any mob in sight except the one who emagged it, regardless of injury state.</p>"
+
+
+/mob/living/bot/medbot/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Beaker - Inserts a beaker
+	if (istype(tool, /obj/item/reagent_containers/glass))
+		if (locked)
+			to_chat(user, SPAN_WARNING("\The [src]'s access panel must be open before you can insert a beaker."))
+			return TRUE
+		if (reagent_glass)
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [reagent_glass] installed."))
+			return TRUE
+		if (!user.unEquip(tool, src))
+			to_chat(user, SPAN_WARNING("You can't drop \the [src]."))
+			return TRUE
+		reagent_glass = tool
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \the [src]."),
+			SPAN_NOTICE("You install \the [tool] into \the [src].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /mob/living/bot/medbot/GetInteractTitle()
 	. = "<head><title>Medibot v1.0 controls</title></head>"
