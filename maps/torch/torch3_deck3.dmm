@@ -207,13 +207,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/vacant/brig)
-"aM" = (
-/obj/structure/flora/ausbushes/ppflowers,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 1
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "aN" = (
 /turf/simulated/wall/prepainted,
 /area/janitor/storage)
@@ -994,12 +987,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/center)
-"cx" = (
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 10
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "cz" = (
 /obj/machinery/photocopier,
 /obj/effect/floor_decal/corner/green{
@@ -5570,12 +5557,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
-"mr" = (
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 9
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "mv" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -5652,33 +5633,12 @@
 	},
 /turf/simulated/floor/wood,
 /area/crew_quarters/gym)
-"mJ" = (
-/obj/structure/flora/ausbushes/grassybush,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 9
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "mK" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/aftstarboard)
 "mL" = (
 /obj/structure/flora/ausbushes/ppflowers,
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
-"mM" = (
-/obj/structure/flora/ausbushes/lavendergrass,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 1
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
-"mN" = (
-/obj/structure/flora/ausbushes/brflowers,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 1
-	},
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
 "mO" = (
@@ -5690,9 +5650,6 @@
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 26
-	},
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 5
 	},
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
@@ -5747,12 +5704,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
 "mX" = (
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 5
-	},
-/obj/effect/floor_decal/spline/fancy/wood/corner{
-	dir = 8
-	},
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
 "mY" = (
@@ -6015,9 +5966,6 @@
 "nL" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 4
-	},
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
 "nO" = (
@@ -6159,12 +6107,6 @@
 /obj/random/trash,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
-"nX" = (
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 8
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "nY" = (
 /obj/structure/table/gamblingtable,
 /obj/random/coin,
@@ -6445,9 +6387,6 @@
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/light/spot{
-	dir = 4
-	},
-/obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
 /turf/simulated/floor/grass,
@@ -6918,9 +6857,6 @@
 "pD" = (
 /obj/structure/flora/ausbushes/pointybush,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 6
-	},
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
 "pE" = (
@@ -7118,15 +7054,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
-"qk" = (
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 8
-	},
-/obj/effect/floor_decal/spline/fancy/wood/corner{
-	dir = 1
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "ql" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /obj/machinery/meter,
@@ -7337,7 +7264,6 @@
 /area/hallway/primary/thirddeck/center)
 "qT" = (
 /obj/structure/flora/ausbushes/lavendergrass,
-/obj/effect/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
 "qU" = (
@@ -7636,13 +7562,6 @@
 /obj/item/reagent_containers/glass/bucket,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/starboard)
-"rJ" = (
-/obj/structure/flora/ausbushes/ywflowers,
-/obj/effect/floor_decal/spline/fancy/wood/corner{
-	dir = 8
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "rK" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -8849,9 +8768,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 5
-	},
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
 "ux" = (
@@ -8938,13 +8854,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/fore)
-"uJ" = (
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 9
-	},
-/obj/effect/floor_decal/spline/fancy/wood/corner,
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "uK" = (
 /obj/machinery/status_display,
 /turf/simulated/wall/prepainted,
@@ -9231,9 +9140,6 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 4
-	},
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
 "vF" = (
@@ -9267,9 +9173,6 @@
 /area/hallway/primary/thirddeck/center)
 "vJ" = (
 /obj/structure/flora/ausbushes/ywflowers,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 8
-	},
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
 "vM" = (
@@ -9727,11 +9630,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/security/habcheck)
-"xd" = (
-/obj/structure/flora/ausbushes/ppflowers,
-/obj/effect/floor_decal/spline/fancy/wood,
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "xf" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -10553,13 +10451,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
-"zm" = (
-/obj/structure/flora/ausbushes/brflowers,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 4
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "zn" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
@@ -10779,11 +10670,6 @@
 /obj/effect/floor_decal/techfloor/corner,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/storage/tools)
-"Ab" = (
-/obj/structure/flora/ausbushes/ppflowers,
-/obj/effect/floor_decal/spline/fancy/wood/corner,
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "Ac" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /turf/simulated/wall/ocp_wall,
@@ -11445,12 +11331,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
-"Ce" = (
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 1
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "Cf" = (
 /obj/structure/table/rack,
 /obj/random/tech_supply,
@@ -12044,12 +11924,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/chapel/memorial)
-"DB" = (
-/obj/effect/floor_decal/spline/fancy/wood/cee{
-	dir = 4
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "DD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -12619,13 +12493,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
-"EM" = (
-/obj/structure/flora/ausbushes/ywflowers,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 1
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "EN" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
@@ -12853,13 +12720,6 @@
 "Fs" = (
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/gym)
-"Ft" = (
-/obj/structure/flora/ausbushes/ppflowers,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 8
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "Fv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	dir = 9
@@ -12966,13 +12826,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/disperser)
-"FF" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 1
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "FG" = (
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
@@ -13031,9 +12884,6 @@
 /area/maintenance/thirddeck/aftport)
 "FQ" = (
 /obj/structure/flora/ausbushes/grassybush,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 10
-	},
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
 "FR" = (
@@ -13928,7 +13778,6 @@
 /area/hallway/primary/thirddeck/aft)
 "Il" = (
 /obj/structure/flora/ausbushes/brflowers,
-/obj/effect/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
 "Im" = (
@@ -14797,12 +14646,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
-"JZ" = (
-/obj/effect/floor_decal/spline/fancy/wood/cee{
-	dir = 8
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "Kb" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /obj/structure/cable/green{
@@ -16913,13 +16756,6 @@
 "Pv" = (
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/fore)
-"Pw" = (
-/obj/structure/flora/ausbushes/brflowers,
-/obj/effect/floor_decal/spline/fancy/wood/corner{
-	dir = 8
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "Px" = (
 /obj/structure/catwalk,
 /obj/structure/cable/green{
@@ -17251,12 +17087,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/fore)
-"Qt" = (
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 4
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "Qu" = (
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
@@ -17708,13 +17538,6 @@
 /obj/structure/sign/warning/hot_exhaust,
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d3starboard)
-"RJ" = (
-/obj/structure/flora/ausbushes/brflowers,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 10
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "RM" = (
 /obj/machinery/atmospherics/valve/digital{
 	dir = 4;
@@ -18477,16 +18300,6 @@
 	},
 /turf/simulated/floor/lino,
 /area/crew_quarters/office)
-"TM" = (
-/obj/structure/flora/ausbushes/ppflowers,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 4
-	},
-/obj/effect/floor_decal/spline/fancy/wood/corner{
-	dir = 4
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "TN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -19539,13 +19352,6 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
-"Wt" = (
-/obj/structure/flora/ausbushes/ppflowers,
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 10
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "Wu" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -20262,9 +20068,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 4
-	},
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
 "Yn" = (
@@ -20300,12 +20103,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
-"Yr" = (
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 6
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "Ys" = (
 /obj/structure/disposalpipe/segment{
 	dir = 2;
@@ -20883,11 +20680,6 @@
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/reinforced/airless,
 /area/thruster/d3starboard)
-"ZU" = (
-/obj/structure/flora/ausbushes/ywflowers,
-/obj/effect/floor_decal/spline/fancy/wood/corner,
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "ZV" = (
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
@@ -20908,18 +20700,6 @@
 	},
 /turf/simulated/floor/wood/maple,
 /area/chapel/main)
-"ZX" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 6
-	},
-/turf/simulated/floor/grass,
-/area/crew_quarters/observation)
 "ZY" = (
 /turf/simulated/wall/r_wall/hull,
 /area/crew_quarters/service_break_room)
@@ -29303,17 +29083,17 @@ aa
 aa
 Di
 lV
-mr
+mX
 vJ
-Ft
+mL
 FQ
 fJ
 Th
 fJ
-mJ
-nX
-nX
-RJ
+FQ
+mX
+mX
+Il
 np
 Di
 aa
@@ -29505,17 +29285,17 @@ qg
 qg
 vt
 UM
-aM
+mL
 nJ
 nJ
-Pw
-cx
+Il
+mX
 Th
-uJ
-TM
-Qt
-zm
-Yr
+mX
+mL
+mX
+Il
+mX
 IX
 vt
 fb
@@ -29707,13 +29487,13 @@ qg
 qg
 yH
 lW
-mM
+qT
 ZZ
 nJ
-ZU
-Yr
+vJ
+mX
 Th
-DB
+mX
 rN
 vy
 rN
@@ -29909,7 +29689,7 @@ PG
 Yi
 yH
 lX
-mN
+Il
 nJ
 nJ
 Il
@@ -30111,10 +29891,10 @@ VU
 Pz
 yH
 lY
-EM
+vJ
 mL
 mO
-xd
+mL
 fJ
 Uh
 fJ
@@ -30313,7 +30093,7 @@ Af
 wb
 yH
 lZ
-FF
+mO
 nJ
 nJ
 qT
@@ -30515,13 +30295,13 @@ mV
 NL
 yH
 ma
-Ce
+mX
 ZZ
 nJ
-rJ
-cx
+vJ
+mX
 Th
-JZ
+mX
 rN
 rN
 rN
@@ -30717,17 +30497,17 @@ Yu
 sN
 yH
 ma
-mN
+Il
 nJ
 nJ
-Ab
-Yr
+mL
+mX
 Th
 mX
-qk
+mX
 vJ
-nX
-Wt
+mX
+mL
 Zn
 GV
 cz
@@ -30929,7 +30709,7 @@ tj
 uv
 vD
 Ym
-ZX
+Ym
 zB
 LG
 JN
