@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscadd: Added some codex information for bots, including interactions and construction
+      steps.
