@@ -69,19 +69,31 @@
 /atom/var/const/CODEX_INTERACTION_HAND = "Empty Hand"
 
 // Common Tools/Items
-/atom/var/const/CODEX_INTERACTION_ID_CARD = "ID Card (And Scannable ID Holders)"
+/atom/var/const/CODEX_INTERACTION_CABLE = "Cable Coil"
+/atom/var/const/CODEX_INTERACTION_CROWBAR = "Crowbar/Prybar"
+/atom/var/const/CODEX_INTERACTION_ID_CARD = "ID Card (And Scannable ID Holders (PDA, Wallet, etc.))"
+/atom/var/const/CODEX_INTERACTION_MULTITOOL = "Multitool"
 /atom/var/const/CODEX_INTERACTION_SCREWDRIVER = "Screwdriver"
 /atom/var/const/CODEX_INTERACTION_WELDER = "Welding Tool"
+/atom/var/const/CODEX_INTERACTION_WRENCH = "Wrench"
+/atom/var/const/CODEX_INTERACTION_WIRECUTTERS = "Wirecutters"
 
 // Grabs
-/atom/var/const/CODEX_INTERACTION_GRAB = "Grabbed Mob"
+/atom/var/const/CODEX_INTERACTION_GRAB = "Grabbed Mob (Any Not Already Listed)"
 /atom/var/const/CODEX_INTERACTION_GRAB_PASSIVE = "Grabbed Mob (Passive - Yellow)"
 /atom/var/const/CODEX_INTERACTION_GRAB_AGGRESSIVE = "Grabbed Mob (Aggressive - Blue)"
 /atom/var/const/CODEX_INTERACTION_GRAB_NECK = "Grabbed Mob (Neck - Red)"
 
 // Other cases
+/atom/var/const/CODEX_INTERACTION_ANY_ITEM = "Any Item Not Already Listed"
 /atom/var/const/CODEX_INTERACTION_EMAG = "Cryptographic Sequencer (EMAG)"
 /atom/var/const/CODEX_INTERACTION_EMP = "EMP"
+/atom/var/const/CODEX_INTERACTION_FLAME_SOURCE = "Open Flames"
+/atom/var/const/CODEX_INTERACTION_HEAT_SOURCE = "Heat Sources"
+/atom/var/const/CODEX_INTERACTION_FLAME_OR_HEAT_SOURCE = "Open Flames or Heat Sources"
+/atom/var/const/CODEX_INTERACTION_MATERIAL_STACK = "Material Stack (Any Not Already Listed)"
+/atom/var/const/CODEX_INTERACTION_SHARP = "Sharp Objects"
+/atom/var/const/CODEX_INTERACTION_STORAGE = "Storage Items (Bags, Boxes, etc)"
 
 /**
  * Handler for displaying information on tool interations in the Mechanics section of the atom's codex entry.
