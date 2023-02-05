@@ -319,3 +319,12 @@
 
 // Helper macro for generating stringified name text for IDs located inside objects, i.e. PDAs or wallets. Used for feedback and interaction messages.
 #define GET_ID_NAME(ID, HOLDER) (ID == HOLDER ? "\the [ID]" : "\the [ID] in \the [HOLDER]")
+
+
+// Flags for `use_sanity_check()`
+/// Do not display user feedback messages.
+#define SANITY_CHECK_SILENT FLAG(0)
+/// Verify the tool can be unequipped from user.
+#define SANITY_CHECK_TOOL_UNEQUIP FLAG(1)
+/// Verify the target can be unequipped from user. Includes `target.loc == src` check to allow items the user isn't holding.
+#define SANITY_CHECK_TARGET_UNEQUIP FLAG(2)
