@@ -1,6 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - bugfix: Microwave recipes that want more than one of the same produce item work
-      again.
-  - bugfix: Donk pockets microwave again.
