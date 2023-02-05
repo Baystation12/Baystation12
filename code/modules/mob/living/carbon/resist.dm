@@ -112,7 +112,7 @@
 		handcuffed = null
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
-		update_inv_handcuffed()
+		update_handcuffed()
 
 /mob/living/carbon/human/can_break_cuffs()
 	. = ..() || species.can_shred(src,1)

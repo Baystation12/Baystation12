@@ -157,6 +157,10 @@
 	var/ui_color = mymob.client.prefs.UI_style_color
 	var/ui_alpha = mymob.client.prefs.UI_style_alpha
 
+	persistant_inventory_update()
+	mymob.reload_fullscreen() // Reload any fullscreen overlays this mob has.
+	mymob.update_action_buttons()
+	reorganize_alerts()
 
 	FinalizeInstantiation(ui_style, ui_color, ui_alpha)
 
@@ -261,6 +265,7 @@
 	hud_used.hidden_inventory_update()
 	hud_used.persistant_inventory_update()
 	update_action_buttons()
+	hud_used.reorganize_alerts()
 
 /mob/proc/add_click_catcher()
 	client.screen |= GLOB.click_catchers

@@ -29,7 +29,7 @@
 			var/obj/item/handcuffs/wizard/cuffs = new()
 			cuffs.forceMove(H)
 			H.handcuffed = cuffs
-			H.update_inv_handcuffed()
+			H.update_handcuffed()
 			H.visible_message("Beams of light form around \the [H]'s hands!")
 		apply_spell_damage(M)
 

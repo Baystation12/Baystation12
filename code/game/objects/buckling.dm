@@ -95,7 +95,8 @@
 	if (buckle_sound)
 		playsound(src, buckle_sound, 20)
 	post_buckle_mob(M)
-	return 1
+	M.throw_alert("buckled", /obj/screen/alert/restrained/buckled)
+	return TRUE
 
 /obj/proc/unbuckle_mob()
 	if(buckled_mob && buckled_mob.buckled == src)
@@ -104,6 +105,7 @@
 		buckled_mob.anchored = initial(buckled_mob.anchored)
 		buckled_mob.UpdateLyingBuckledAndVerbStatus()
 		buckled_mob.update_floating()
+		buckled_mob.clear_alert("buckled")
 		buckled_mob = null
 
 		GLOB.destroyed_event.unregister(., src, /obj/proc/clear_buckle)

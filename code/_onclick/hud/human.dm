@@ -194,27 +194,12 @@
 		mymob.oxygen.screen_loc = ui_temp
 		hud_elements |= mymob.oxygen
 
-		mymob.toxin = new /obj/screen/toxins()
-		mymob.toxin.icon = 'icons/mob/status_indicators.dmi'
-		mymob.toxin.icon_state = "tox0"
-		mymob.toxin.SetName("toxin")
-		mymob.toxin.screen_loc = ui_temp
-		hud_elements |= mymob.toxin
-
 		mymob.fire = new /obj/screen()
 		mymob.fire.icon = ui_style
 		mymob.fire.icon_state = "fire0"
 		mymob.fire.SetName("fire")
 		mymob.fire.screen_loc = ui_fire
 		hud_elements |= mymob.fire
-
-	if(hud_data.has_pressure)
-		mymob.pressure = new /obj/screen/pressure()
-		mymob.pressure.icon = 'icons/mob/status_indicators.dmi'
-		mymob.pressure.icon_state = "pressure0"
-		mymob.pressure.SetName("pressure")
-		mymob.pressure.screen_loc = ui_temp
-		hud_elements |= mymob.pressure
 
 	if(hud_data.has_bodytemp)
 		mymob.bodytemp = new /obj/screen/bodytemp()
@@ -231,22 +216,6 @@
 		target.cells.SetName("cell")
 		target.cells.screen_loc = ui_nutrition
 		hud_elements |= target.cells
-
-	else if(hud_data.has_nutrition)
-		mymob.nutrition_icon = new /obj/screen/food()
-		mymob.nutrition_icon.icon = 'icons/mob/status_hunger.dmi'
-		mymob.nutrition_icon.pixel_w = 8
-		mymob.nutrition_icon.icon_state = "nutrition1"
-		mymob.nutrition_icon.SetName("nutrition")
-		mymob.nutrition_icon.screen_loc = ui_nutrition_small
-		hud_elements |= mymob.nutrition_icon
-
-		mymob.hydration_icon = new /obj/screen/drink()
-		mymob.hydration_icon.icon = 'icons/mob/status_hunger.dmi'
-		mymob.hydration_icon.icon_state = "hydration1"
-		mymob.hydration_icon.SetName("hydration")
-		mymob.hydration_icon.screen_loc = ui_nutrition_small
-		hud_elements |= mymob.hydration_icon
 
 	mymob.pain = new /obj/screen/fullscreen/pain( null )
 	hud_elements |= mymob.pain

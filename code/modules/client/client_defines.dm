@@ -15,6 +15,9 @@
 	var/datum/preferences/prefs = null
 	var/adminobs		= null
 
+	///datum that controls the displaying and hiding of tooltips
+	var/datum/tooltip/tooltips
+
 	var/adminhelped = 0
 
 	var/staffwarn = null

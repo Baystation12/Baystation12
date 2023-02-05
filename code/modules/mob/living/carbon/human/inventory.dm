@@ -203,7 +203,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		handcuffed = null
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
-		update_inv_handcuffed()
+		update_handcuffed()
 	else if (W == r_hand)
 		r_hand = null
 		if(l_hand)
@@ -253,7 +253,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			drop_r_hand()
 			drop_l_hand()
 			stop_pulling()
-			update_inv_handcuffed(redraw_mob)
+			update_handcuffed(redraw_mob)
 		if(slot_l_hand)
 			src.l_hand = W
 			W.equipped(src, slot)
@@ -441,3 +441,15 @@ This saves us from having to call add_fingerprint() any time something is put in
 	var/obj/item/organ/external/O = get_organ(zone)
 	if(O)
 		return get_covering_equipped_item(O.body_part)
+
+
+/mob/living/carbon/proc/update_handcuffed()
+	if(handcuffed)
+		drop_l_hand()
+		drop_r_hand()
+		stop_pulling()
+		throw_alert("handcuffed", /obj/screen/alert/restrained/handcuffed, new_master = handcuffed)
+	else
+		clear_alert("handcuffed")
+	update_action_buttons() //some of our action buttons might be unusable when we're handcuffed.
+	update_inv_handcuffed()

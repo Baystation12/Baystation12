@@ -178,7 +178,7 @@
 	var/inhaled_gas_used = inhaling / 4
 	breath.adjust_gas(breath_type, -inhaled_gas_used, update = 0) //update afterwards
 
-	owner.phoron_alert = 0 // Reset our toxins alert for now.
+	owner.clear_alert("tox_in_air") // Reset our toxins alert for now.
 	if(!failed_inhale) // Enough gas to tell we're being poisoned via chemical burns or whatever.
 		var/poison_total = 0
 		if(poison_types)
@@ -186,7 +186,7 @@
 				if(poison_types[gname])
 					poison_total += breath.gas[gname]
 		if(((poison_total/breath.total_moles)*breath_pressure) > safe_toxins_max)
-			owner.phoron_alert = 1
+			owner.throw_alert("tox_in_air", /obj/screen/alert/tox_in_air)
 
 	// Pass reagents from the gas into our body.
 	// Presumably if you breathe it you have a specialized metabolism for it, so we drop/ignore breath_type. Also avoids
@@ -259,7 +259,7 @@
 				owner.apply_damage(damage, DAMAGE_BURN, BP_HEAD, used_weapon = "Excessive Cold")
 			else
 				src.damage += damage
-			owner.fire_alert = 1
+			owner.throw_alert("temp", /obj/screen/alert/cold, 3)
 		else if(breath.temperature >= species.heat_level_1)
 			if(prob(20))
 				to_chat(owner, SPAN_DANGER("You feel your face burning and a searing heat in your lungs!"))
@@ -276,7 +276,7 @@
 				owner.apply_damage(damage, DAMAGE_BURN, BP_HEAD, used_weapon = "Excessive Heat")
 			else
 				src.damage += damage
-			owner.fire_alert = 2
+			owner.throw_alert("temp", /obj/screen/alert/hot, 3)
 
 		//breathing in hot/cold air also heats/cools you a bit
 		var/temp_adj = breath.temperature - owner.bodytemperature

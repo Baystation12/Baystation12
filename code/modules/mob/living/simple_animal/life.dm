@@ -71,13 +71,13 @@
 
 	//Atmos effect
 	if(bodytemperature < minbodytemp)
-		fire_alert = 2
+		throw_alert("temp", /obj/screen/alert/cold, 3)
 		adjustBruteLoss(cold_damage_per_tick)
 	else if(bodytemperature > maxbodytemp)
-		fire_alert = 1
+		throw_alert("temp", /obj/screen/alert/hot, 3)
 		adjustBruteLoss(heat_damage_per_tick)
 	else
-		fire_alert = 0
+		clear_alert("temp")
 
 	if(!atmos_suitable)
 		adjustBruteLoss(unsuitable_atmos_damage)

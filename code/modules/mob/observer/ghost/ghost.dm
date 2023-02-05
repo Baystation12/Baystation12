@@ -31,6 +31,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 	var/obj/item/device/multitool/ghost_multitool
 	var/list/hud_images // A list of hud images
+	var/last_revive_notification = null // world.time of last notification, used to avoid spamming players from defibs or cloners.
 
 /mob/observer/ghost/New(mob/body)
 	see_in_dark = 100
@@ -97,6 +98,11 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 				if(istype(target))
 					start_following(target)
 			return TOPIC_HANDLED
+
+	if(href_list["reenter"])
+		reenter_corpse()
+		return
+
 	return ..()
 
 /*
@@ -566,3 +572,18 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		M.respawned_time = world.time
 	M.key = key
 	log_and_message_admins("has respawned.", M)
+
+
+/mob/observer/ghost/proc/notify_revive(message, sound, atom/source)
+	if((last_revive_notification + 2 MINUTES) > world.time)
+		return
+	last_revive_notification = world.time
+
+	if(message)
+		to_chat(src, "<span class='alert'><font size=4>[message]</font></span>")
+		if(source)
+			throw_alert("\ref[source]_notify_revive", /obj/screen/alert/notify_cloning, new_master = source)
+
+	to_chat(src, "<span class='alert'><a href=?src=\ref[src];reenter=1>(Click to re-enter)</a></span>")
+	if(sound)
+		SEND_SOUND(src, sound(sound))
