@@ -428,15 +428,19 @@ so as to remain in compliance with the most up-to-date laws."
 // Re-render all alerts - also called in /datum/hud/show_hud() because it's needed there
 /datum/hud/proc/reorganize_alerts()
 	var/list/alerts = mymob.alerts
-	if(!alerts)
+	if(!mymob.client)
+		return FALSE
+
+	if(!length(alerts))
 		return FALSE
 
 	var/icon_pref
 	if(!hud_shown)
-		for(var/i = 1, i <= alerts.len, i++)
+		for(var/i in 1 to length(alerts))
 			mymob.client.screen -= alerts[alerts[i]]
 		return TRUE
-	for(var/i = 1, i <= alerts.len, i++)
+
+	for(var/i in 1 to length(alerts))
 		var/obj/screen/alert/alert = alerts[alerts[i]]
 		if(alert.icon_state == "template")
 			if(!icon_pref)
@@ -456,14 +460,14 @@ so as to remain in compliance with the most up-to-date laws."
 			else
 				. = ""
 		alert.screen_loc = .
-		mymob?.client?.screen |= alert
+		mymob.client?.screen |= alert
 	return TRUE
 
 /mob
 	var/list/alerts = list() // contains /obj/screen/alert only // On /mob so clientless mobs will throw alerts properly
 
 /obj/screen/alert/Click(location, control, params)
-	if(!usr || !usr.client)
+	if(!usr?.client)
 		return
 	var/paramslist = params2list(params)
 	if(paramslist["shift"]) // screen objects don't do the normal Click() stuff so we'll cheat
