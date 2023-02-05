@@ -346,7 +346,7 @@
 /turf/simulated/floor/exoplanet/water/shallow,
 /area/mine/unexplored)
 "SY" = (
-/obj/structure/fountain,
+/obj/structure/fountain/strange,
 /mob/living/simple_animal/hostile/retaliate/parrot/space,
 /turf/simulated/floor/airless/stone,
 /area/mine/explored)

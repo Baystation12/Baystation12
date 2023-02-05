@@ -153,21 +153,34 @@
 /obj/item/weldingtool/proc/get_fuel()
 	return tank ? tank.reagents.get_reagent_amount(/datum/reagent/fuel) : 0
 
+
+/**
+ * Checks if the tool can be used for the given amount of fuel without actually using it.
+ *
+ * Returns boolean.
+ */
+/obj/item/weldingtool/proc/can_use(amount = 1, mob/user = null, interaction_message = "to complete this task.", silent = FALSE)
+	if (!isOn())
+		if (!silent && user)
+			to_chat(user, SPAN_WARNING("\The [src] must be turned on [interaction_message]"))
+		return FALSE
+	if (get_fuel() < amount)
+		if (!silent && user)
+			to_chat(user, SPAN_WARNING("You need at least [amount] unit\s of [welding_resource] [interaction_message]"))
+		return FALSE
+	return TRUE
+
+
 //Removes fuel from the welding tool. If a mob is passed, it will perform an eyecheck on the mob. This should probably be renamed to use()
 /obj/item/weldingtool/proc/remove_fuel(amount = 1, mob/M = null)
-	if(!welding)
+	if(!can_use(amount, M))
 		return 0
-	if(get_fuel() >= amount)
-		burn_fuel(amount)
-		if(M)
-			M.welding_eyecheck()//located in mob_helpers.dm
-			set_light(0.7, 2, 5, l_color = COLOR_LIGHT_CYAN)
-			addtimer(new Callback(src, /atom/proc/update_icon), 5)
-		return 1
-	else
-		if(M)
-			to_chat(M, SPAN_NOTICE("You need more [welding_resource] to complete this task."))
-		return 0
+	burn_fuel(amount)
+	if(M)
+		M.welding_eyecheck()//located in mob_helpers.dm
+		set_light(0.7, 2, 5, l_color = COLOR_LIGHT_CYAN)
+		addtimer(new Callback(src, /atom/proc/update_icon), 5)
+	return 1
 
 /obj/item/weldingtool/proc/burn_fuel(amount)
 	if(!tank)

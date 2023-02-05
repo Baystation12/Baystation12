@@ -69,7 +69,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "aak" = (
 /obj/machinery/light/spot{
 	dir = 1
@@ -280,7 +280,7 @@
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "aaM" = (
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/atmospherics/portables_connector{
@@ -731,7 +731,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "abA" = (
 /obj/effect/floor_decal/corner/beige{
 	dir = 5
@@ -920,7 +920,7 @@
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "abS" = (
 /obj/machinery/light/small,
 /obj/structure/cable/green{
@@ -933,7 +933,7 @@
 	level = 2
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "abT" = (
 /obj/effect/floor_decal/corner/beige{
 	dir = 10
@@ -1643,7 +1643,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "adl" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
@@ -1686,7 +1686,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "adp" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
@@ -1696,7 +1696,7 @@
 	pixel_x = 32
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "adq" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
@@ -2153,7 +2153,7 @@
 	},
 /obj/item/soap,
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "aef" = (
 /obj/structure/table/rack,
 /obj/random/maintenance/solgov,
@@ -5538,14 +5538,14 @@
 	pixel_y = 2
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "ala" = (
 /obj/machinery/light/small{
 	dir = 4;
 	icon_state = "bulb1"
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "alh" = (
 /obj/structure/cable{
 	d1 = 32;
@@ -5768,7 +5768,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "amn" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
@@ -8357,7 +8357,7 @@
 /area/hallway/primary/firstdeck/fore)
 "aAm" = (
 /turf/simulated/wall/prepainted,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "aAr" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/sleep/cryo/aux)
@@ -16544,6 +16544,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/item/stack/material/phoron/ten,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "emb" = (
@@ -20743,7 +20744,7 @@
 	},
 /obj/item/taperoll/bog,
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "kss" = (
 /obj/machinery/power/apc{
 	dir = 1;
@@ -21540,11 +21541,11 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "ltt" = (
 /obj/machinery/door/unpowered/simple/plastic/open,
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "lvb" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -24010,7 +24011,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "oHP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -26139,7 +26140,7 @@
 /area/security/bo)
 "riD" = (
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "riX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -27918,7 +27919,7 @@
 "sYU" = (
 /obj/structure/curtain/open/shower,
 /turf/simulated/floor/tiled/freezer,
-/area/crew_quarters/head/aux)
+/area/crew_quarters/head/deck1)
 "sZb" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
 	dir = 1

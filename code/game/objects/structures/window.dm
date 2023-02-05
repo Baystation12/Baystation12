@@ -152,11 +152,11 @@
 /obj/structure/window/CanFluidPass(coming_from)
 	return (!is_fulltile() && coming_from != dir)
 
-/obj/structure/window/post_health_change(health_mod, damage_type)
+/obj/structure/window/post_health_change(health_mod, prior_health, damage_type)
 	..()
-	update_icon()
+	queue_icon_update()
 	if (health_mod < 0)
-		var/initial_damage_percentage = round(((get_current_health() - health_mod) / get_max_health()) * 100)
+		var/initial_damage_percentage = round((prior_health / get_max_health()) * 100)
 		var/damage_percentage = get_damage_percentage()
 		if (damage_percentage >= 75 && initial_damage_percentage < 75)
 			visible_message(SPAN_DANGER("\The [src] looks like it's about to shatter!"))
@@ -416,6 +416,7 @@
 
 	..()
 
+
 /obj/structure/window/proc/dismantle()
 	var/obj/item/stack/material/S = material.place_sheet(loc, is_fulltile() ? 4 : 1)
 	if(S && reinf_material)
@@ -424,25 +425,33 @@
 		S.update_icon()
 	qdel(src)
 
-/obj/structure/window/grab_attack(obj/item/grab/G)
-	if (G.assailant.a_intent != I_HURT)
-		return TRUE
-	if (!G.force_danger())
-		to_chat(G.assailant, SPAN_DANGER("You need a better grip to do that!"))
-		return TRUE
-	var/def_zone = ran_zone(BP_HEAD, 20)
-	if(G.damage_stage() < 2)
-		G.affecting.visible_message(SPAN_DANGER("[G.assailant] bashes [G.affecting] against \the [src]!"))
-		if (prob(50))
-			G.affecting.Weaken(1)
-		G.affecting.apply_damage(10, DAMAGE_BRUTE, def_zone, used_weapon = src)
-		hit(25, G.assailant, G.affecting)
-	else
-		G.affecting.visible_message(SPAN_DANGER("[G.assailant] crushes [G.affecting] against \the [src]!"))
-		G.affecting.Weaken(5)
-		G.affecting.apply_damage(20, DAMAGE_BRUTE, def_zone, used_weapon = src)
-		hit(50, G.assailant, G.affecting)
-	return TRUE
+/obj/structure/window/use_grab(obj/item/grab/grab, list/click_params)
+	// Harm intent - Bash against the window
+	if (grab.assailant.a_intent == I_HURT)
+		if (!grab.force_danger())
+			to_chat(grab.assailant, SPAN_WARNING("You need a better grip to smash \the [grab.affecting] against \the [src]."))
+			return TRUE
+		var/def_zone = ran_zone(BP_HEAD, 20)
+		if (grab.damage_stage() < 2)
+			grab.assailant.visible_message(
+				SPAN_DANGER("\The [grab.assailant] bashes \the [grab.affecting] against \the [src]!"),
+				SPAN_DANGER("You bash \the [grab.affecting] against \the [src]!")
+			)
+			if (prob(50))
+				grab.affecting.Weaken(1)
+			grab.affecting.apply_damage(10, DAMAGE_BRUTE, def_zone, used_weapon = src)
+			hit(25, grab.assailant, grab.affecting)
+		else
+			grab.assailant.visible_message(
+				SPAN_DANGER("\The [grab.assailant] crushes \the [grab.affecting] against \the [src]!"),
+				SPAN_DANGER("You crush \the [grab.affecting] against \the [src]!")
+			)
+			grab.affecting.Weaken(5)
+			grab.affecting.apply_damage(20, DAMAGE_BRUTE, def_zone, used_weapon = src)
+			hit(50, grab.assailant, grab.affecting)
+
+	return ..()
+
 
 /obj/structure/window/proc/hit(damage, mob/user, atom/weapon = null, damage_type = DAMAGE_BRUTE)
 	if (can_damage_health(damage, damage_type))

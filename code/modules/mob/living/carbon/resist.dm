@@ -66,17 +66,16 @@
 			return
 		if(!handcuffed || buckled)
 			return
-	if (handcuffed.health_max) // Improvised cuffs can break because their health is > 0
-		if (handcuffed.damage_health(handcuffed.get_max_health() / 2))
-			visible_message(
-				SPAN_DANGER("\The [src] manages to remove \the [handcuffed], breaking them!"),
-				SPAN_NOTICE("You successfully remove \the [handcuffed], breaking them!"), range = 2
-				)
-			QDEL_NULL(handcuffed)
-			if(buckled && buckled.buckle_require_restraints)
-				buckled.unbuckle_mob()
-			update_inv_handcuffed()
-			return
+	if (handcuffed.damage_health(handcuffed.get_max_health() / 2))
+		visible_message(
+			SPAN_DANGER("\The [src] manages to remove \the [handcuffed], breaking them!"),
+			SPAN_NOTICE("You successfully remove \the [handcuffed], breaking them!"), range = 2
+			)
+		QDEL_NULL(handcuffed)
+		if(buckled && buckled.buckle_require_restraints)
+			buckled.unbuckle_mob()
+		update_inv_handcuffed()
+		return
 	visible_message(
 		SPAN_WARNING("\The [src] manages to remove \the [handcuffed]!"),
 		SPAN_NOTICE("You successfully remove \the [handcuffed]!"), range = 2

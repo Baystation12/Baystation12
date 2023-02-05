@@ -20,6 +20,22 @@
 	var/shot_delay = 4
 	var/last_shot = 0
 
+
+/mob/living/bot/secbot/ed209/get_construction_info()
+	return list(
+		"Use <b>5 Sheets of Steel</b> on a <b>Standard Robot Frame</b> that has no other parts installed.",
+		"Add a robotic <b>Left Leg</b> and a robotic <b>Right Leg</b>.",
+		"Add an <b>Armor Plate</b>.",
+		"Use a <b>Welding Tool</b> to secure the armor plating.",
+		"Add a <b>Helmet</b>.",
+		"Add a <b>Proximity Sensor</b>.",
+		"Add <b>1 Length of Cable Coil</b>.",
+		"Add an <b>Electrolaser</b>.",
+		"Use a <b>Screwdriver</b> to secure the taser in place.",
+		"Add a <p>Power Cell</p> to complete the ED-209."
+	)
+
+
 /mob/living/bot/secbot/ed209/update_icons()
 	icon_state = "ed2090"
 

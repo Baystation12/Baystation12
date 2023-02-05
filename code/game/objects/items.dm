@@ -164,7 +164,7 @@
 
 /obj/item/ex_act(severity)
 	..()
-	if (health_max)
+	if (get_max_health())
 		return
 	switch(severity)
 		if(EX_ACT_DEVASTATING)

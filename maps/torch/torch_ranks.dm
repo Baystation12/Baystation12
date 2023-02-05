@@ -24,7 +24,8 @@
 		/datum/mil_branch/solgov,
 		/datum/mil_branch/alien,
 		/datum/mil_branch/skrell_fleet,
-		/datum/mil_branch/iccgn
+		/datum/mil_branch/iccgn,
+		/datum/mil_branch/army
 	)
 
 	species_to_branch_blacklist = list(

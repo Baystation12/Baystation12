@@ -35,7 +35,7 @@
 	if(!height || air_group) return 0
 	else return ..()
 
-/obj/machinery/shield/post_health_change(health_mod, damage_type)
+/obj/machinery/shield/post_health_change(health_mod, prior_health, damage_type)
 	. = ..()
 	if (health_dead)
 		return
@@ -144,7 +144,7 @@
 		else
 			check_delay--
 
-/obj/machinery/shieldgen/post_health_change(health_mod, damage_type)
+/obj/machinery/shieldgen/post_health_change(health_mod, prior_health, damage_type)
 	. = ..()
 	queue_icon_update()
 	if (get_current_health() <= 30)

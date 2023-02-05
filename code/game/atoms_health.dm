@@ -27,9 +27,7 @@
  */
 /atom/proc/get_current_health()
 	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
-		return
-	return health_current
+	return min(health_current, get_max_health())
 
 /**
  * Retrieves the atom's maximum health.
@@ -41,65 +39,49 @@
 /**
  * Whether or not the atom's health is damaged.
  */
-/atom/proc/health_damaged(use_raw_values)
-	if (!health_max)
-		return
-	if (use_raw_values)
-		return health_current < health_max
+/atom/proc/health_damaged()
 	return get_current_health() < get_max_health()
 
 /**
  * Retrieves the atom's current damage, or `null` if not using health.
- * If `use_raw_values` is `TRUE`, uses the raw var values instead of the `get_*` proc results.
  */
-/atom/proc/get_damage_value(use_raw_values)
-	if (!health_max)
-		return
-	if (use_raw_values)
-		return health_max - health_current
-	else
-		return get_max_health() - get_current_health()
+/atom/proc/get_damage_value()
+	return get_max_health() - get_current_health()
 
 /**
  * Retrieves the atom's current damage as a percentage where `100%` is `100`.
- * If `use_raw_values` is `TRUE`, uses the raw var values instead of the `get_*` proc results.
  */
-/atom/proc/get_damage_percentage(use_raw_values)
-	if (!health_max)
-		return
-	var/max_health = use_raw_values ? health_max : get_max_health()
-	return Percent(get_damage_value(use_raw_values), max_health, 0)
+/atom/proc/get_damage_percentage()
+	return Percent(get_damage_value(), get_max_health(), 0)
 
 /**
  * Checks if the atom's health can be restored.
  * Should be called before `restore_health()` in most cases.
- * Returns `null` if health is not in use.
  * NOTE: Does not include a check for death state by default, to allow repairing/healing atoms back to life.
  */
 /atom/proc/can_restore_health(damage, damage_type = null)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
-		return
+	if (!get_max_health())
+		return FALSE
 	if (!damage)
 		return FALSE
-	if (get_current_health() == get_max_health())
+	if (!health_damaged())
 		return FALSE
 	return TRUE
 
 /**
  * Checks if the atom's health can be damaged.
  * Should be called before `damage_health()` in most cases.
- * Returns `null` if health is not in use.
  */
 /atom/proc/can_damage_health(damage, damage_type = null, damage_flags = EMPTY_BITFIELD)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
-		return
+	if (!get_max_health())
+		return FALSE
 	if (health_dead)
 		return FALSE
 	if (!damage || damage < health_min_damage)
 		return FALSE
-	if (get_damage_resistance(damage_type) == 0)
+	if (is_damage_immune(damage_type))
 		return FALSE
 	return TRUE
 
@@ -112,16 +94,17 @@
  * Health modification for the health system. Applies `health_mod` directly to `simple_health` via addition and calls `handle_death_change` as needed.
  * Has no pre-modification checks, you should be using `damage_health()` or `restore_health()` instead of this.
  * `skip_death_state_change` will skip calling `handle_death_change()` when applicable. Used for when the originally calling proc needs handle it in a unique way.
- * Returns `TRUE` if the death state changes, `null` if the atom is not using health, `FALSE` otherwise.
+ * Returns `TRUE` if the death state changes, `FALSE` otherwise.
  */
 /atom/proc/mod_health(health_mod, damage_type, skip_death_state_change = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
-		return
+	if (!get_max_health())
+		return FALSE
 	health_mod = round(health_mod)
+	var/prior_health = get_current_health()
 	var/death_state = health_dead
 	health_current = round(clamp(health_current + health_mod, 0, get_max_health()))
-	post_health_change(health_mod, damage_type)
+	post_health_change(health_mod, prior_health, damage_type)
 	var/new_death_state = health_current > 0 ? FALSE : TRUE
 	if (death_state == new_death_state)
 		return FALSE
@@ -140,9 +123,7 @@
  */
 /atom/proc/set_health(new_health, skip_death_state_change = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
-		return
-	var/health_mod = new_health - health_current
+	var/health_mod = new_health - get_current_health()
 	return mod_health(health_mod, skip_death_state_change = skip_death_state_change)
 
 /**
@@ -150,8 +131,6 @@
  */
 /atom/proc/restore_health(damage, damage_type = null, skip_death_state_change = FALSE, skip_can_restore_check = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
-		return
 	if (!skip_can_restore_check && !can_restore_health(damage, damage_type))
 		return FALSE
 	return mod_health(damage, damage_type, skip_death_state_change)
@@ -166,8 +145,6 @@
  */
 /atom/proc/damage_health(damage, damage_type, damage_flags = EMPTY_BITFIELD, severity, skip_can_damage_check = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
-		return
 	if (!skip_can_damage_check && !can_damage_health(damage, damage_type, damage_flags))
 		return FALSE
 
@@ -181,7 +158,7 @@
 /**
  * Proc called after any health changes made by the system
  */
-/atom/proc/post_health_change(health_mod, damage_type = null)
+/atom/proc/post_health_change(health_mod, prior_health, damage_type = null)
 	return
 
 /**
@@ -196,7 +173,7 @@
  */
 /atom/proc/revive_health()
 	SHOULD_CALL_PARENT(TRUE)
-	return set_health(health_max)
+	return set_health(get_max_health())
 
 /// Proc called when the atom transitions from alive to dead.
 /atom/proc/on_death()
@@ -214,9 +191,9 @@
 	SHOULD_CALL_PARENT(TRUE)
 	health_max = round(new_max_health)
 	if (set_current_health)
-		set_health(health_max)
+		set_health(get_max_health())
 	else
-		set_health(min(health_current, health_max))
+		set_health(min(get_current_health(), get_max_health()))
 
 /**
  * Sets the atom's resistance/weakness to the given damage type.
@@ -277,7 +254,7 @@
 
 /mob/examine_damage_state(mob/user)
 	if (health_dead)
-		to_chat(user, SPAN_DANGER("They look severely hurt and is not moving or responding to anything around them."))
+		to_chat(user, SPAN_DANGER("They look severely hurt and are not moving or responding to anything around them."))
 		return
 
 	var/damage_percentage = get_damage_percentage()

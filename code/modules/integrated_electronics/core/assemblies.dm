@@ -82,14 +82,14 @@
 	icon = 0
 	addtimer(new Callback(src, .proc/fall_apart), 5.1)
 
-/obj/item/device/electronic_assembly/post_health_change(health_mod, damage_type)
+/obj/item/device/electronic_assembly/post_health_change(health_mod, prior_health, damage_type)
 	..()
 	if (get_damage_percentage() >= 75)
 		if(battery && battery.charge > 0)
 			visible_message(SPAN_WARNING("\The [src] sputters and sparks!"))
 			spark_system.start()
 		opened = TRUE
-		on_update_icon()
+		queue_icon_update()
 
 /obj/item/device/electronic_assembly/proc/check_interactivity(mob/user)
 	return (!user.incapacitated() && CanUseTopic(user))

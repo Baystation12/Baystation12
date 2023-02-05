@@ -34,7 +34,7 @@
 #define SUPPLY_ROLES list(/datum/job/qm, /datum/job/cargo_tech)
 
 //For members of the service department
-#define SERVICE_ROLES list(/datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/chaplain)
+#define SERVICE_ROLES list(/datum/job/chief_steward, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/chaplain)
 
 //For members of the exploration department
 #define EXPLORATION_ROLES list(/datum/job/pathfinder, /datum/job/nt_pilot, /datum/job/explorer)

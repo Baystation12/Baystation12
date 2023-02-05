@@ -88,7 +88,7 @@
 /obj/item/stock_parts/computer/proc/set_damage_failure()
 	if (get_damage_value() >= damage_failure)
 		return
-	set_health(health_max - damage_failure)
+	set_health(get_max_health() - damage_failure)
 
 
 /**
@@ -104,7 +104,7 @@
 /obj/item/stock_parts/computer/proc/set_damage_malfunction()
 	if (get_damage_value() >= damage_malfunction)
 		return
-	set_health(health_max - damage_malfunction)
+	set_health(get_max_health() - damage_malfunction)
 
 
 /**

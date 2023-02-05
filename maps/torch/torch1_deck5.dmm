@@ -7065,13 +7065,6 @@
 	dir = 8;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftstarboard)
-"pH" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4;
-	icon_state = "warning"
-	},
 /obj/structure/cable{
 	d1 = 16;
 	d2 = 0;
@@ -7080,6 +7073,18 @@
 /obj/structure/cable{
 	d2 = 4;
 	icon_state = "0-4"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/fifthdeck/aftstarboard)
+"pH" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)

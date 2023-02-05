@@ -143,6 +143,19 @@
 		screwloose = 1
 		return 1
 
+
+/mob/living/bot/cleanbot/get_construction_info()
+	return list(
+		"Attach a <b>Proximity Sensor</b> to a <b>Bucket</b>.",
+		"Add a <b>Robot Arm</b> to complete the cleanbot."
+	)
+
+
+/mob/living/bot/cleanbot/get_antag_interactions_info()
+	. = ..()
+	.[CODEX_INTERACTION_EMAG] += "<p>Turns on malfunctions that causes \the [initial(name)] to spew out gibs and water.</p>"
+
+
 /mob/living/bot/cleanbot/proc/get_targets()
 	target_types = list()
 

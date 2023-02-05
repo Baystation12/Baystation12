@@ -28,6 +28,11 @@
 	icon_state = "qm_cypherkey"
 	channels = list("Supply" = 1, "Command" = 1, "Exploration" = 1, "Hailing" = 1)
 
+/obj/item/device/encryptionkey/headset_chief_steward
+	name = "chief steward's encryption key"
+	icon_state = "srv_cypherkey"
+	channels = list("Service" = 1, "Command" = 1, "Hailing" = 1)
+
 /obj/item/device/encryptionkey/bridgeofficer
 	name = "bridge officer's encryption key"
 	icon_state = "com_cypherkey"

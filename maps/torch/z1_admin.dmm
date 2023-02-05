@@ -11378,7 +11378,7 @@
 /turf/simulated/floor/plating,
 /area/supply/dock)
 "joZ" = (
-/obj/structure/fountain/mundane{
+/obj/structure/fountain{
 	alpha = 204;
 	pixel_x = 0
 	},

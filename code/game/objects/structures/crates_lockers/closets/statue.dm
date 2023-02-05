@@ -40,7 +40,7 @@
 			icon_state = "corgi"
 			desc = "If it takes forever, I will wait for you..."
 
-	if(health_max == 0) //meaning if the statue didn't find a valid target
+	if(!get_max_health()) //meaning if the statue didn't find a valid target
 		qdel(src)
 		return
 

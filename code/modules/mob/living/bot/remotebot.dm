@@ -41,14 +41,36 @@
 	s.start()
 	qdel(src)
 
-/mob/living/bot/remotebot/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/device/bot_controller) && !controller)
-		user.visible_message("\The [user] waves \the [I] over \the [src].")
-		to_chat(user, SPAN_NOTICE("You link \the [src] to \the [I]."))
-		var/obj/item/device/bot_controller/B = I
-		B.bot = src
-		controller = B
+
+/mob/living/bot/remotebot/get_interactions_info()
+	. = ..()
+	.["Remote Control"] = "<p>Syncs the remote control to the bot, allowing it to be controlled. Only one remote control can be synced to a given bot.</p>"
+
+
+/mob/living/bot/remotebot/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Remove Control - Link controller to bot
+	if (istype(tool, /obj/item/device/bot_controller))
+		if (controller)
+			to_chat(user, SPAN_WARNING("\The [src] is already connected to a remote control."))
+			return TRUE
+		var/obj/item/device/bot_controller/bot_controller = tool
+		bot_controller.bot = src
+		controller = bot_controller
+		GLOB.destroyed_event.register(bot_controller, src, .proc/controller_deleted)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] syncs \a [tool] to \the [src]."),
+			SPAN_NOTICE("You sync \the [tool] to \the [src].")
+		)
+		return TRUE
+
 	return ..()
+
+
+/mob/living/bot/remotebot/proc/controller_deleted(obj/item/device/bot_controller/bot_controller)
+	if (controller == bot_controller)
+		controller = null
+	GLOB.destroyed_event.unregister(bot_controller, src, .proc/controller_deleted)
+
 
 /mob/living/bot/remotebot/update_icons()
 	icon_state = "fetchbot[on]"
@@ -152,7 +174,7 @@
 
 /obj/item/device/bot_controller/Destroy()
 	if(bot)
-		bot.controller = null
+		bot.controller_deleted(src)
 		bot = null
 	return ..()
 

@@ -256,7 +256,7 @@
 	wake_neighbors()
 	qdel(src)
 
-/obj/effect/vine/post_health_change(health_mod, damage_type)
+/obj/effect/vine/post_health_change(health_mod, prior_health, damage_type)
 	..()
 	queue_icon_update()
 

@@ -2,6 +2,19 @@
 	l_ear = /obj/item/device/radio/headset/headset_service
 	hierarchy_type = /singleton/hierarchy/outfit/job/torch/crew/service
 
+/singleton/hierarchy/outfit/job/torch/crew/service/chief_steward
+	name = OUTFIT_JOB_NAME("Chief Steward")
+	l_ear = /obj/item/device/radio/headset/headset_chief_steward
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/service
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_types = list(/obj/item/card/id/torch/crew/service/chief_steward)
+	pda_type = /obj/item/modular_computer/pda/heads
+
+/singleton/hierarchy/outfit/job/torch/crew/service/chief_steward/fleet
+	name = OUTFIT_JOB_NAME("Chief Steward - Fleet")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/service
+	shoes = /obj/item/clothing/shoes/dutyboots
+
 /singleton/hierarchy/outfit/job/torch/crew/service/janitor
 	name = OUTFIT_JOB_NAME("Sanitation Technician - Torch")
 	uniform = /obj/item/clothing/under/rank/janitor
