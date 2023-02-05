@@ -48,6 +48,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /obj/item/proc/resolve_attackby(atom/A, mob/user, click_params)
 	if(!(item_flags & ITEM_FLAG_NO_PRINT))
 		add_fingerprint(user)
+	if (A.atom_flags & ATOM_FLAG_NO_TOOLS)
+		return FALSE
 	if ((item_flags & ITEM_FLAG_TRY_ATTACK) && attack(A, user))
 		return TRUE
 	if (A == user)
