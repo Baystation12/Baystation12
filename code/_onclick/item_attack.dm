@@ -61,6 +61,43 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 
 /**
+ * Validates the mob can perform general interactions. Primarily intended for use after inputs, sleeps, timers, etc to ensure the action can still be completed.
+ *
+ * **Parameters**:
+ * - `target` - The atom being interacted with.
+ * - `tool` - The item being used to interact. Optional. Defaults to `FALSE` to differentiate between a nulled reference and an empty parameter.
+ * - `flags` - Bitflags of additional settings. See `code\__defines\misc.dm`.
+ *
+ * Returns boolean.
+ */
+/mob/proc/use_sanity_check(atom/target, obj/item/tool = FALSE, flags = EMPTY_BITFIELD)
+	if (QDELETED(src))
+		return FALSE
+	var/silent = HAS_FLAGS(flags, SANITY_CHECK_SILENT)
+	if (QDELETED(target))
+		if (!silent)
+			to_chat(src, SPAN_WARNING("[target ? "\The [target]" : "The object you were interacting with"] no longer exists."))
+		return FALSE
+	if (tool != FALSE && QDELETED(tool))
+		if (!silent)
+			to_chat(src, SPAN_WARNING("[tool ? "\The [tool]" : "The item you were using"] no longer exists."))
+		return FALSE
+	if (!Adjacent(target))
+		if (!silent)
+			to_chat(src, SPAN_WARNING("You must remain next to \the [target]."))
+		return FALSE
+	if (HAS_FLAGS(flags, SANITY_CHECK_TOOL_UNEQUIP) && !canUnEquip(tool))
+		if (!silent)
+			to_chat(src, SPAN_WARNING("You can't drop \the [tool]."))
+		return FALSE
+	if (target.loc == src && HAS_FLAGS(flags, SANITY_CHECK_TARGET_UNEQUIP) && !canUnEquip(target))
+		if (!silent)
+			to_chat(src, SPAN_WARNING("You can't drop \the [target]."))
+		return FALSE
+	return TRUE
+
+
+/**
  * Interaction handler for using an item on yourself. This is called and the result checked before the other `use_*`
  * interaction procs are called, regardless of user intent.
  *
