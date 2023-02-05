@@ -14,6 +14,9 @@
 	/// A map? of ("fruit tag" = amount).
 	var/list/required_produce
 
+	/// The sum of required_produce entries. Generated.
+	var/produce_amount
+
 	/// The sum length of each required_* for sorting. Generated. Must be > 0.
 	var/weight
 
@@ -61,20 +64,19 @@
 
 
 /datum/microwave_recipe/proc/CheckProduce(obj/machinery/microwave/microwave)
-	var/required_count = length(required_produce)
-	if (!required_count)
+	if (!produce_amount)
 		return TRUE
-	if (required_count > length(microwave.ingredients))
+	if (produce_amount > length(microwave.ingredients))
 		return FALSE
-	var/list/counts = required_produce.Copy()
+	var/list/remaining_produce = required_produce.Copy()
 	for (var/obj/item/reagent_containers/food/snacks/grown/grown in microwave.ingredients)
 		var/tag = grown.seed?.kitchen_tag
-		if (isnull(counts[tag]))
+		if (!tag)
 			return FALSE
-		if (--counts[tag] < 0)
+		if (--remaining_produce[tag] < 0)
 			return FALSE
-	for (var/tag in counts)
-		if (counts[tag])
+	for (var/tag in remaining_produce)
+		if (remaining_produce[tag])
 			return FALSE
 	return TRUE
 

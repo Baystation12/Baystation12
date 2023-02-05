@@ -32,8 +32,11 @@ GLOBAL_LIST_EMPTY(microwave_accepts_items)
 	)
 	for (var/datum/microwave_recipe/recipe as anything in subtypesof(/datum/microwave_recipe))
 		recipe = new recipe
-		var/ingredients_length = length(recipe.required_items) + length(recipe.required_produce)
-		recipe.weight = ingredients_length + length(recipe.required_reagents)
+		recipe.produce_amount = 0
+		for (var/tag in recipe.required_produce)
+			recipe.produce_amount += recipe.required_produce[tag]
+		var/objects_amount = recipe.produce_amount + length(recipe.required_items)
+		recipe.weight = objects_amount + length(recipe.required_reagents)
 		if (!recipe.result_path || !recipe.weight)
 			log_error("Recipe [recipe.type] has invalid results or requirements.")
 			continue
@@ -42,7 +45,7 @@ GLOBAL_LIST_EMPTY(microwave_accepts_items)
 			reagents[type] = TRUE
 		for (var/type in recipe.required_items)
 			items[type] = TRUE
-		GLOB.microwave_maximum_item_storage = max(GLOB.microwave_maximum_item_storage, ingredients_length)
+		GLOB.microwave_maximum_item_storage = max(GLOB.microwave_maximum_item_storage, objects_amount)
 	for (var/type in reagents)
 		GLOB.microwave_accepts_reagents += type
 	for (var/type in items)
