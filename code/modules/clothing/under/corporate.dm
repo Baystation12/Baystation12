@@ -195,3 +195,12 @@
 	icon_state = "suit_zeng"
 	worn_state = "suit_zeng"
 	accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket/zeng, /obj/item/clothing/accessory/corptie/zeng)
+
+//Bishop
+/obj/item/clothing/under/rank/roboticist/bishop
+	name = "\improper Bishop robotics jumpsuit"
+	desc = "A jumpsuit themed to match the prosthetics provided by Bishop Cybernetics."
+	icon_state = "jump_bish"
+	worn_state = "jump_bish"
+	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
+	gender_icons = 1
