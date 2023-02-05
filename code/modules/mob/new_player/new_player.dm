@@ -479,7 +479,6 @@
 		dat = additional_dat + dat
 	dat = header + dat
 	var/datum/browser/popup = new(src, "latechoices", "Choose Profession", 900, 900)
-	popup.add_stylesheet("playeroptions", 'html/browser/playeroptions.css')
 	popup.set_content(jointext(dat, null))
 	popup.open(0) // 0 is passed to open so that it doesn't use the onclose() proc
 
