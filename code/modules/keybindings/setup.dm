@@ -49,9 +49,9 @@
 /client/proc/reset_macros(skip_alert = FALSE)
 	var/ans
 	if(!skip_alert)
-		ans = alert(src, "Change your keyboard language to ENG and press Ok", "Reset macros")
+		ans = alert(src, "Change your keyboard language to ENG", "Reset macros")
 
-	if(skip_alert || ans == "Ok")
+	if(skip_alert || ans)
 		set_macros()
 		to_chat(src, SPAN_NOTICE("Keybindings were fixed.")) // not yet but set_macros works fast enough
 
