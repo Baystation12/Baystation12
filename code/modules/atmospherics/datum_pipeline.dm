@@ -46,8 +46,6 @@
 		member.air_temporary.multiply(member.volume / air.volume)
 
 /datum/pipeline/proc/build_pipeline(obj/machinery/atmospherics/pipe/base)
-	air = new
-
 	var/list/possible_expansions = list(base)
 	members = list(base)
 	edges = list()

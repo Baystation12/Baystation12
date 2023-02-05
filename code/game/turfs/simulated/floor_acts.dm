@@ -92,7 +92,7 @@
 	// Blocking - Hit the first one then stop.
 	if (length(blocking_atoms))
 		var/atom/A = blocking_atoms[1]
-		A.fire_act(adj_turf, adj_air, adj_temp, adj_volume)
+		A.fire_act(adj_air, adj_temp, adj_volume)
 		return
 
 	// Non-blocking - Hit everything
