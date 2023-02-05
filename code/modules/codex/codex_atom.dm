@@ -21,6 +21,9 @@
 	var/construction = html_list(get_construction_info(), TRUE)
 	if (construction)
 		mechanics += "<h4>Construction Steps</h4>[construction]"
+	var/deconstruction = html_list(get_deconstruction_info(), TRUE)
+	if (deconstruction)
+		mechanics += "<h4>Deconstruction Steps</h4>[deconstruction]"
 	var/interactions = html_list_dl(get_interactions_info())
 	if (interactions)
 		mechanics += "<h4>Interactions</h4>[interactions]"
@@ -50,6 +53,17 @@
  * Returns list of strings.
  */
 /atom/proc/get_construction_info()
+	RETURN_TYPE(/list)
+	return list()
+
+
+/**
+ * Handler for displaying deconstruction steps in the Mechanics section of the atom's codex entry. Separated to allow
+ * overriding without duplication of parent steps, or removal of parent mechanics information.
+ *
+ * Returns list of strings.
+ */
+/atom/proc/get_deconstruction_info()
 	RETURN_TYPE(/list)
 	return list()
 
