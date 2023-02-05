@@ -332,7 +332,7 @@
 /// This sends them to a place where they cannot return to the regular map.
 /obj/machinery/lifepod/proc/escape()
 	forceMove(locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),  pick(GLOB.using_map.escape_levels)))
-	to_chat(storedThing, FONT_LARGE(SPAN_NOTICE("Your lifepod has navigated itself to the designated rescue sector. You may ghost and be counted as escaped.")))
+	to_chat(storedThing, FONT_LARGE(SPAN_NOTICE("Your lifepod has navigated itself to the designated rescue sector. You may ghost safely.")))
 	landed = TRUE
 
 /obj/machinery/lifepod/touch_map_edge()
@@ -343,13 +343,15 @@
 		escape()
 
 	var/newZ
-	var/list/possibleSites = generatePossibleSites()
+	var/list/possibleSites = list()
+	possibleSites = generatePossibleSites()
 
-	if(possibleSites) //If there are locations, pick one.
+	if(length(possibleSites)) //If there are locations, pick one.
 		var/obj/effect/overmap/visitable/targetSite = pick(possibleSites)
 		newZ = pick(targetSite.map_z) //Fetch actual Z-level
 
 		if(findLandingTurf(newZ))
+			microphone("Preparing to land")
 			new /obj/effect/landmark/clear(landingTurf) //Dismantle wall if available.
 			new /obj/effect/landmark/scorcher(landingTurf)
 			explosion(landingTurf, 6)
@@ -384,12 +386,15 @@
 	var/checkSquare = pick(-1*(world.maxx-TRANSITIONEDGE), TRANSITIONEDGE)
 
 	for(var/cycles = 0; cycles < 100; cycles++)
+		microphone("[cycles] cycle\s")
+		checkSquare++
 		if(checkSquare(checkSquare))
 			break
 		else
 			continue
 
 	if(landingTurf)
+		microphone("[landingTurf] is landingTurf")
 		return TRUE
 	else
 		return FALSE
@@ -400,9 +405,9 @@
 
 	if(istype(checkTurf, /turf/simulated))
 		landingTurf = checkTurf
-		return FALSE
-	else
 		return TRUE
+	else
+		return FALSE
 
 /// Spawns some supplies.
 /obj/machinery/lifepod/verb/ejectSupplies()
