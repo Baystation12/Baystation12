@@ -211,7 +211,7 @@
 	result_path = /obj/item/reagent_containers/food/snacks/donkpocket
 
 
-/datum/microwave_recipe/hot_donkpocket/warm/CreateResult(obj/machinery/microwave/microwave)
+/datum/microwave_recipe/hot_donkpocket/CreateResult(obj/machinery/microwave/microwave)
 	var/obj/item/reagent_containers/food/snacks/donkpocket/donk = locate() in microwave
 	donk?.SetHot()
 	return donk
