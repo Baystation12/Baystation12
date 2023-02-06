@@ -1,0 +1,13 @@
+author: SingingSpock
+delete-after: true
+changes:
+  - tweak: Docking modular computers now have the deck management and camera monitoring
+      programs
+  - tweak: Medical modular consoles no longer autorun suit sensor monitoring (the
+      telescreens still do)
+  - tweak: The CE now has their own modular computer preset, like the CoS, with command
+      and engineering programs
+  - maptweak: The Charon, Pilot's Office, and Exploration prep rooms now all have
+      docking modular computers rather than civilian or medical
+  - maptweak: The bridge's modular console presets were changed a bit to fit the seat
+      theming better
