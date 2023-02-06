@@ -12906,20 +12906,6 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/heads/office/cmo)
-"axT" = (
-/obj/structure/table/woodentable/walnut,
-/obj/random/mre,
-/obj/effect/floor_decal/borderfloor{
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/lime/border{
-	dir = 1
-	},
-/obj/machinery/light/spot{
-	dir = 1
-	},
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "axU" = (
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/dungeon_master_lounge)
@@ -13583,14 +13569,18 @@
 /turf/simulated/floor/tiled/dark,
 /area/medical/mentalhealth)
 "azi" = (
-/obj/random/vendor,
 /obj/effect/floor_decal/borderfloor{
-	dir = 9
+	dir = 1
 	},
 /obj/effect/floor_decal/corner/lime/border{
-	dir = 9
+	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/obj/structure/bed/chair/comfy/beige{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/dungeon_master_lounge)
 "azj" = (
@@ -14330,15 +14320,6 @@
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals4{
 	dir = 6
-	},
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
-"aAv" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/dungeon_master_lounge)
@@ -15687,12 +15668,6 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/monotile,
-/area/crew_quarters/dungeon_master_lounge)
-"aCh" = (
-/obj/structure/bed/chair/comfy/beige{
-	dir = 1
-	},
-/turf/simulated/floor/tiled,
 /area/crew_quarters/dungeon_master_lounge)
 "aCk" = (
 /obj/machinery/door/blast/regular{
@@ -18240,23 +18215,25 @@
 /obj/effect/floor_decal/corner/purple/bordercorner,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
-"aFH" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "aFJ" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/effect/floor_decal/borderfloor{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/lime/border{
+	dir = 4
+	},
+/obj/structure/bed/chair/comfy/beige{
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/dungeon_master_lounge)
@@ -18288,12 +18265,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/firstdeck/aftport)
-"aFM" = (
-/obj/structure/bed/chair/comfy/beige{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "aFO" = (
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/purple/border,
@@ -19355,17 +19326,6 @@
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals4{
 	dir = 6
-	},
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
-"aHm" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/dungeon_master_lounge)
@@ -27793,11 +27753,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
-"aSQ" = (
-/obj/effect/floor_decal/borderfloor/corner,
-/obj/effect/floor_decal/corner/lime/bordercorner,
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "aSS" = (
 /obj/machinery/bluespacerelay,
 /turf/simulated/floor/bluegrid,
@@ -35097,20 +35052,6 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space)
-"bkg" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
-/obj/machinery/door/firedoor,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/door/blast/regular/open{
-	id_tag = "observation_shielding";
-	name = "Observation Shield"
-	},
-/turf/simulated/floor/plating,
-/area/crew_quarters/dungeon_master_lounge)
 "bki" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
@@ -35293,21 +35234,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hall/level_two)
-"bkM" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
-/obj/machinery/door/firedoor,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/door/blast/regular/open{
-	dir = 4;
-	id_tag = "observation_shielding";
-	name = "Observation Shield"
-	},
-/turf/simulated/floor/plating,
-/area/crew_quarters/dungeon_master_lounge)
 "bkX" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -35680,19 +35606,17 @@
 /turf/simulated/floor/wood/walnut,
 /area/bridge/adjutants)
 "cqL" = (
-/obj/structure/bed/chair/comfy/beige{
-	dir = 4
-	},
-/obj/effect/landmark/start,
-/obj/machinery/newscaster{
-	pixel_y = 32
-	},
 /obj/effect/floor_decal/borderfloor{
-	dir = 1
+	dir = 5
 	},
 /obj/effect/floor_decal/corner/lime/border{
-	dir = 1
+	dir = 5
 	},
+/obj/machinery/camera/network/first_deck{
+	c_tag = "First Deck Hallway - Observation Bubble"
+	},
+/obj/structure/table/woodentable/walnut,
+/obj/random/mre,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/dungeon_master_lounge)
 "crN" = (
@@ -37118,21 +37042,6 @@
 /obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/security/range)
-"hnV" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/table/woodentable/walnut,
-/obj/effect/floor_decal/borderfloor{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/lime/border{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "hqn" = (
 /obj/machinery/atmospherics/omni/filter{
 	tag_south = 2;
@@ -37313,22 +37222,6 @@
 /obj/machinery/status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/infirmary)
-"hSE" = (
-/obj/structure/bed/chair/comfy/beige{
-	dir = 8
-	},
-/obj/effect/floor_decal/borderfloor{
-	dir = 6
-	},
-/obj/effect/floor_decal/corner/lime/border{
-	dir = 6
-	},
-/obj/machinery/alarm{
-	dir = 1;
-	pixel_y = -20
-	},
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "hUl" = (
 /turf/simulated/wall/prepainted,
 /area/medical/mentalhealth/therapyroom)
@@ -37784,35 +37677,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
-"iXl" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
-/obj/machinery/door/firedoor,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/door/blast/regular/open{
-	id_tag = "observation_shielding";
-	name = "Observations Shield"
-	},
-/turf/simulated/floor/plating,
-/area/crew_quarters/dungeon_master_lounge)
-"jca" = (
-/obj/structure/bed/chair/comfy/beige{
-	dir = 8
-	},
-/obj/effect/floor_decal/borderfloor{
-	dir = 5
-	},
-/obj/effect/floor_decal/corner/lime/border{
-	dir = 5
-	},
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck Hallway - Observation Bubble"
-	},
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "jft" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -37881,16 +37745,16 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/security/sierra/hallway/aft)
 "jsp" = (
-/obj/random/vendor{
-	dir = 1
+/obj/effect/floor_decal/borderfloor,
+/obj/effect/floor_decal/corner/lime/border,
+/obj/machinery/light/spot,
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -24
 	},
-/obj/effect/floor_decal/borderfloor{
-	dir = 10
+/obj/structure/bed/chair/comfy/beige{
+	dir = 4
 	},
-/obj/effect/floor_decal/corner/lime/border{
-	dir = 10
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/dungeon_master_lounge)
 "jvi" = (
@@ -37961,15 +37825,6 @@
 "jJC" = (
 /turf/simulated/floor/carpet/green,
 /area/medical/mentalhealth/therapyroom)
-"jMH" = (
-/obj/effect/floor_decal/borderfloor/corner{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/green/bordercorner{
-	dir = 8
-	},
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "jRz" = (
 /obj/machinery/firealarm{
 	dir = 8;
@@ -38224,6 +38079,13 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/floor_decal/borderfloor{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/lime/border{
+	dir = 4
+	},
+/obj/structure/bed/chair/comfy/beige,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/dungeon_master_lounge)
 "kGE" = (
@@ -38430,17 +38292,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
-"lnn" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/bed/chair/comfy/beige{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "loZ" = (
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/purple/border,
@@ -38791,16 +38642,18 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/security/sierra/armory)
 "mew" = (
-/obj/structure/bed/chair/comfy/beige{
-	dir = 4
+/obj/effect/floor_decal/borderfloor{
+	dir = 6
+	},
+/obj/effect/floor_decal/corner/lime/border{
+	dir = 6
 	},
 /obj/machinery/power/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
 /obj/structure/cable/green,
-/obj/effect/floor_decal/borderfloor,
-/obj/effect/floor_decal/corner/lime/border,
+/obj/structure/table/woodentable/walnut,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/dungeon_master_lounge)
 "mex" = (
@@ -38820,36 +38673,24 @@
 "mgp" = (
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore_stairwell)
-"miF" = (
-/obj/effect/floor_decal/borderfloor/corner{
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/lime/bordercorner{
-	dir = 1
-	},
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "mrL" = (
 /obj/structure/sign/warning/hot_exhaust,
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d1port)
 "msU" = (
 /obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/cable/green{
 	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
+	d2 = 2;
+	icon_state = "1-2"
 	},
-/obj/structure/table/woodentable/walnut,
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/lime/border{
 	dir = 4
+	},
+/obj/structure/bed/chair/comfy/beige{
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/dungeon_master_lounge)
@@ -38868,14 +38709,6 @@
 /obj/structure/table/reinforced,
 /turf/simulated/floor/tiled/white/monotile,
 /area/hallway/infirmary)
-"mvJ" = (
-/obj/structure/table/woodentable/walnut,
-/obj/item/reagent_containers/food/drinks/glass2/coffeecup,
-/obj/effect/floor_decal/borderfloor,
-/obj/effect/floor_decal/corner/lime/border,
-/obj/machinery/light/spot,
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "mAz" = (
 /obj/machinery/light{
 	dir = 4
@@ -40769,23 +40602,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
-"sKO" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/bed/chair/comfy/beige{
-	dir = 1
-	},
-/obj/effect/floor_decal/borderfloor{
-	dir = 6
-	},
-/obj/effect/floor_decal/corner/lime/border{
-	dir = 6
-	},
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "sMZ" = (
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/techfloor,
@@ -41259,10 +41075,6 @@
 /obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/tiled/steel_grid,
 /area/security/range)
-"ulk" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "uoW" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/medical/surgery/second)
@@ -41316,10 +41128,6 @@
 /obj/effect/wallframe_spawn/reinforced/polarized/full,
 /turf/simulated/floor/plating,
 /area/medical/office)
-"uCE" = (
-/obj/structure/bed/chair/comfy/beige,
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "uHA" = (
 /obj/structure/cable/green{
 	d1 = 2;
@@ -41732,30 +41540,6 @@
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/security/sierra/evidence)
-"vSs" = (
-/obj/effect/floor_decal/borderfloor/corner{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/lime/bordercorner{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
-"vWB" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/bed/chair/comfy/beige,
-/obj/effect/floor_decal/borderfloor{
-	dir = 5
-	},
-/obj/effect/floor_decal/corner/lime/border{
-	dir = 5
-	},
-/turf/simulated/floor/tiled,
-/area/crew_quarters/dungeon_master_lounge)
 "vYl" = (
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/purple/border,
@@ -69513,11 +69297,11 @@ dbS
 azh
 arA
 azi
-miF
-ulk
-aFH
-aHm
-jMH
+rab
+qhT
+aCg
+aDV
+rab
 jsp
 arA
 sWW
@@ -69715,9 +69499,9 @@ aFD
 nOq
 arA
 cqL
-rab
-rab
-aAv
+msU
+kGA
+biB
 aFJ
 kGA
 mew
@@ -69916,13 +69700,13 @@ akH
 akH
 akH
 arA
-axT
-aCh
-qhT
-aCg
-aDV
-uCE
-mvJ
+bjr
+bjr
+bjr
+bjr
+bjr
+bjr
+bjr
 arA
 aLW
 aLW
@@ -70118,13 +69902,13 @@ akH
 akH
 akH
 arA
-jca
-vSs
-aFM
-aFM
-lnn
-aSQ
-hSE
+aam
+aam
+aam
+aam
+aam
+aam
+aam
 arA
 aLW
 aLW
@@ -70319,15 +70103,15 @@ aam
 aam
 bgp
 bjl
-iXl
-bkM
-vWB
-hnV
-biB
-msU
-sKO
-bkM
-bkg
+bjl
+bjl
+bjl
+bjl
+bjl
+bjl
+bjl
+bjl
+bjl
 bjl
 bjQ
 bjl
@@ -70522,13 +70306,13 @@ aam
 bgq
 aam
 aam
-bjr
-bjr
-bjr
-bjr
-bjr
-bjr
-bjr
+aam
+aam
+aam
+aam
+aam
+aam
+aam
 aam
 aam
 bgq

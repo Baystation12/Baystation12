@@ -8328,6 +8328,15 @@
 	pixel_y = 4;
 	req_access = list("ACCESS_ENGINE_EQUIP")
 	},
+/obj/machinery/button/blast_door{
+	desc = "WARNING! Opening blast doors while reactor is operating, may cause meltdown.";
+	id_tag = "SupermatterDoor";
+	name = "Supermatter Access Blast Doors";
+	pixel_y = -8;
+	req_access = list("ACCESS_ENGINEERING");
+	pixel_x = -32;
+	dir = 4
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engine_monitoring)
 "apF" = (
@@ -12116,6 +12125,11 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "SupermatterDoor";
+	name = "Supermatter Access Blast Door"
+	},
 /turf/simulated/floor/reinforced,
 /area/engineering/engine_room)
 "awC" = (
@@ -14130,13 +14144,6 @@
 "azM" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/button/blast_door{
-	desc = "A remote control-switch for the engine control room blast doors.";
-	id_tag = "EngineBlast";
-	name = "Engine Monitoring Room Blast Doors";
-	pixel_y = -3;
-	req_access = list("ACCESS_ENGINEERING")
-	},
-/obj/machinery/button/blast_door{
 	desc = "A remote control-switch for the engine charging port.";
 	id_tag = "SupermatterPort";
 	name = "Reactor Blast Doors";
@@ -14155,6 +14162,13 @@
 	name = "Emitter Control";
 	pixel_x = 6;
 	pixel_y = 7
+	},
+/obj/machinery/button/blast_door{
+	desc = "A remote control-switch for the engine control room blast doors.";
+	id_tag = "EngineBlast";
+	name = "Engine Monitoring Room Blast Doors";
+	pixel_y = -3;
+	req_access = list("ACCESS_ENGINEERING")
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engine_monitoring)
@@ -27057,6 +27071,11 @@
 	req_access = newlist()
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "SupermatterDoor";
+	name = "Supermatter Access Blast Door"
+	},
 /turf/simulated/floor/reinforced,
 /area/engineering/engine_room)
 "aYO" = (
