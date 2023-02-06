@@ -31,8 +31,6 @@
 	skin_material = null
 	skin_amount =   0
 
-	z_flags = ZMM_MANGLE_PLANES
-
 	var/nullblock = 0
 	var/list/construct_spells = list()
 
