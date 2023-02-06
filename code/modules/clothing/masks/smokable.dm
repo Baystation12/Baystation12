@@ -19,6 +19,8 @@
 	var/brand
 	var/gas_consumption = 0.04
 
+	z_flags = ZMM_MANGLE_PLANES
+
 	drop_sound = 'sound/items/drop/food.ogg'
 	pickup_sound = 'sound/items/pickup/food.ogg'
 
