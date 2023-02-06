@@ -1,0 +1,11 @@
+author: 10sc
+delete-after: true
+changes:
+  - maptweak: Remapped the contents of the Galley.
+  - maptweak: Remapped the Galley's Cold Storage There are now plastic curtains over
+      the meat hook and gibber.
+  - maptweak: Superficially remapped the Chief Steward's Office. It now has a secure
+      safe!
+  - maptweak: Replaced an ATM from the Mess Hall with a status display. Added another
+      light to the Mess Hall.
+  - maptweak: Shifted the disposal chute in the Service Break Room.
