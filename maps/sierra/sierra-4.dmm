@@ -7752,10 +7752,6 @@
 /turf/simulated/floor/holofloor/beach/water,
 /area/holodeck/source_temple)
 "blE" = (
-/obj/structure/fountain/mundane{
-	alpha = 204;
-	pixel_x = 0
-	},
 /turf/simulated/floor/holofloor/beach/water,
 /area/holodeck/source_temple)
 "blK" = (

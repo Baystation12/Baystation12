@@ -9328,7 +9328,7 @@
 /area/hallway/primary/thirddeck/central_stairwell)
 "pc" = (
 /obj/structure/flora/ausbushes/genericbush,
-/obj/structure/fountain/mundane{
+/obj/structure/fountain{
 	pixel_x = 0
 	},
 /turf/simulated/floor/grass,
