@@ -1108,8 +1108,9 @@
 /area/guppy_hangar/start)
 "cl" = (
 /obj/machinery/light,
-/obj/machinery/computer/modular/preset/medical{
-	dir = 8
+/obj/machinery/computer/modular/preset/dock{
+	dir = 8;
+	icon_state = "console"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/crew)
@@ -2657,11 +2658,11 @@
 /obj/effect/floor_decal/corner/mauve/half{
 	dir = 4
 	},
-/obj/machinery/computer/modular/preset/civilian{
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/computer/modular/preset/dock{
 	dir = 8;
 	icon_state = "console"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "fX" = (
@@ -5010,10 +5011,10 @@
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/storage)
 "lt" = (
-/obj/machinery/computer/modular/preset/civilian,
 /obj/machinery/computer/guestpass{
 	pixel_y = 32
 	},
+/obj/machinery/computer/modular/preset/dock,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/pilot)
 "lu" = (
