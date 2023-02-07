@@ -960,7 +960,7 @@
 /obj/machinery/door/airlock/command{
 	autoset_access = 0;
 	name = "Officer's Mess";
-	req_access = newlist()
+	req_access = list("ACCESS_OFFICER","ACCESS_TORCH_CREW")
 	},
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4

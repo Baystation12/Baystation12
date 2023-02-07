@@ -129,6 +129,12 @@ var/global/const/access_chief_steward = "ACCESS_TORCH_CHIEF_STEWARD"
 	desc = "Chief Steward"
 	region = ACCESS_REGION_COMMAND
 
+var/global/const/access_officer = "ACCESS_OFFICER"
+/datum/access/officer
+	id = access_officer
+	desc = "Officer"
+	region = ACCESS_REGION_COMMAND
+
 /datum/access/psychiatrist
 	desc = "Mental Health"
 

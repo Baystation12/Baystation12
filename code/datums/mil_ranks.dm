@@ -103,8 +103,9 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 	var/list/spawn_ranks_            // Ranks which the player can choose for spawning, not including species restrictions
 	var/list/spawn_ranks_by_species_ // Ranks which the player can choose for spawning, with species restrictions. Populated on a needed basis
 
-	var/list/rank_types       // list of paths used to init the ranks list
-	var/list/spawn_rank_types // list of paths used to init the spawn_ranks list. Subset of rank_types
+	var/list/rank_types       	// list of paths used to init the ranks list
+	var/list/spawn_rank_types 	// list of paths used to init the spawn_ranks list. Subset of rank_types
+	var/list/officer_rank_types	// list of paths belonging to commissioned officers
 
 	var/assistant_job = DEFAULT_JOB_TYPE
 
@@ -129,6 +130,7 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 
 		if(rank_path in spawn_rank_types)
 			spawn_ranks_[rank.name] = rank
+
 
 /datum/mil_branch/proc/spawn_ranks(datum/species/S)
 	if(!S)

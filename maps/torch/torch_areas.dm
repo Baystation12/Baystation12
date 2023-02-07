@@ -624,6 +624,7 @@
 	icon_state = "bar"
 	sound_env = MEDIUM_SOFTFLOOR
 	lighting_tone = AREA_LIGHTING_WARM
+	req_access = list(list(access_kitchen, access_officer), access_solgov_crew)
 
 /area/command/pathfinder
 	name = "\improper Pathfinder's Office"

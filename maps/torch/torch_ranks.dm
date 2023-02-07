@@ -134,6 +134,13 @@
 		/datum/mil_rank/ec/o6
 	)
 
+	officer_rank_types = list(
+		/datum/mil_rank/ec/o1,
+		/datum/mil_rank/ec/o3,
+		/datum/mil_rank/ec/o5,
+		/datum/mil_rank/ec/o6
+	)
+
 	assistant_job = /datum/job/crew
 
 	min_skill = list(	SKILL_HAULING = SKILL_BASIC,
@@ -189,6 +196,22 @@
 		/datum/mil_rank/fleet/o5
 	)
 
+	officer_rank_types = list(
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/fleet/o3,
+		/datum/mil_rank/fleet/o4,
+		/datum/mil_rank/fleet/o5,
+		/datum/mil_rank/fleet/o6,
+		/datum/mil_rank/fleet/o7,
+		/datum/mil_rank/fleet/o8,
+		/datum/mil_rank/fleet/o9,
+		/datum/mil_rank/fleet/o10,
+		/datum/mil_rank/fleet/o10_alt
+	)
+
+
+
 	assistant_job = /datum/job/crew
 	min_skill = list(	SKILL_HAULING = SKILL_BASIC,
 						SKILL_WEAPONS = SKILL_BASIC,
@@ -212,6 +235,20 @@
 		/datum/mil_rank/army/e9,
 		/datum/mil_rank/army/e9_alt1,
 		/datum/mil_rank/army/e9_alt2,
+		/datum/mil_rank/army/o1,
+		/datum/mil_rank/army/o2,
+		/datum/mil_rank/army/o3,
+		/datum/mil_rank/army/o4,
+		/datum/mil_rank/army/o5,
+		/datum/mil_rank/army/o6,
+		/datum/mil_rank/army/o7,
+		/datum/mil_rank/army/o8,
+		/datum/mil_rank/army/o9,
+		/datum/mil_rank/army/o10,
+		/datum/mil_rank/army/o10_alt
+	)
+
+	officer_rank_types = list(
 		/datum/mil_rank/army/o1,
 		/datum/mil_rank/army/o2,
 		/datum/mil_rank/army/o3,

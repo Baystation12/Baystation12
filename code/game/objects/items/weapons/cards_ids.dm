@@ -319,6 +319,8 @@ var/global/const/NO_EMAG_ACT = -50
 		id_card.military_branch = char_branch
 	if(GLOB.using_map.flags & MAP_HAS_RANK)
 		id_card.military_rank = char_rank
+	if(is_type_in_list(char_rank, char_branch.officer_rank_types))
+		id_card.access.Add("ACCESS_OFFICER")
 
 /obj/item/card/id/proc/dat()
 	var/list/dat = list("<table><tr><td>")

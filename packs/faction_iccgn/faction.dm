@@ -53,6 +53,19 @@
 		/datum/mil_rank/iccgn/of9_alt
 	)
 
+	officer_rank_types = list(
+		/datum/mil_rank/iccgn/of1,
+		/datum/mil_rank/iccgn/of2,
+		/datum/mil_rank/iccgn/of3,
+		/datum/mil_rank/iccgn/of4,
+		/datum/mil_rank/iccgn/of5,
+		/datum/mil_rank/iccgn/of6,
+		/datum/mil_rank/iccgn/of7,
+		/datum/mil_rank/iccgn/of8,
+		/datum/mil_rank/iccgn/of9,
+		/datum/mil_rank/iccgn/of9_alt
+	)
+
 
 /datum/mil_branch/iccgn/New()
 	rank_types = subtypesof(/datum/mil_rank/iccgn)
