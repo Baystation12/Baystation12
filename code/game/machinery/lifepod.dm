@@ -23,8 +23,6 @@
 	var/atom/movable/storedThing
 	/// The time the above thing entered the lifepod.
 	var/timeEntered
-	/// The last time it was irradiated. Usually, they are irradiated every 10 minutes.
-	var/timeRadiated
 	/// The maximum size mob that can fit into the lifepod.
 	var/maxSize = MOB_MEDIUM
 	/// Supplies that can be spawned one time with a verb.
@@ -203,11 +201,6 @@
 
 		if(stasisPower)
 			passenger.SetStasis(stasisPower)
-
-		if(world.time - timeRadiated >= 10 MINUTES)
-			passenger.apply_radiation(1)
-			microphone("Minor generator-sourced radiation emission detected.", LIFEPOD_SPEECH_WARNING)
-			timeRadiated = world.time //Reset time.
 
 	if(airSupply && airSupply.return_pressure() < ONE_ATMOSPHERE * 0.8 && (world.time - lastAirWarningTime) >= 1 MINUTE) //Scream at them that they have low air.
 		microphone("LOW AIR LEVELS DETECTED!", LIFEPOD_SPEECH_WARNING)
