@@ -368,7 +368,7 @@
 		if(categorizedJobs[jobcat]["colBreak"])
 			dat += "</td><td valign='top'>"
 
-		if((length(categorizedJobs[jobcat]["jobs"]) < 1) && (jobcat == "ERROR"))
+		if((length(categorizedJobs[jobcat]["jobs"]) < 1) && (jobcat == "ОШИБКА"))
 			continue
 
 		var/flag = categorizedJobs[jobcat]["dep"]
