@@ -42,16 +42,12 @@
 	return "Капитан ответственен за ИКН Сьерра и всё, что на нем находится.\
 	Его обязанность заключается в том, чтобы убедиться, что ИКН Сьерра выполняет свою миссию и вернется обратно в порт СолПрава в целостности и сохранности.\
 	От капитана ожидают проявления эффективных управленческих навыков, чтобы обеспечить бесперебойную работу всех отделов. Он является высшим авторитетом на Сьерре и имеет доступ к любому отсеку на борту, а также возможность выносить приказы практически без ограничений."
-/*
+
 /datum/job/hop
 	title = "Head of Personnel"
 	supervisors = "Капитану"
 	department = "Командный"
 	department_flag = COM|SRV
-	head_position = 1
-	total_positions = 1
-	spawn_positions = 1
-	req_admin_notify = 1
 	minimal_player_age = 21
 	economic_power = 12
 	ideal_character_age = 45
@@ -100,24 +96,24 @@
 		/datum/computer_file/program/reports
 	)
 
-//	need_exp_to_play = 5   TODO: SIERRA PORT
-//	exp_track_branch = COM TODO: SIERRA PORT
 
-/datum/job/hop/get_description_blurb()
-	return "В роли Главы Персонала, или ГП, как Вас иногда будут звать, Вы обязаны отвечать за то, чтобы все отделы были укомплектованы персоналом и работали ради прибыли своей корпорации.\
-	Вам доверена возможность менять должность и уровни доступа каждого члена экипажа на борту через программу модификации ID-карт, что еще могут делать только капитан и ИИ.\
-	Вы также отвечаете за управление отделами снабжения и обслуживания, а также за управление любым персоналом без активного главы. Помните: корпорация рассчитывает на вас!"
-*/
+
+
+
 
 /datum/job/hop
-	title = "Executive Officer"
-	supervisors = "the Commanding Officer"
-	department = "Command"
+	title = "Head of Personnel"
+	supervisors = "Капитану"
+	department = "Командный"
 	department_flag = COM
 	minimal_player_age = 14
 	economic_power = 14
 	minimum_character_age = list(SPECIES_HUMAN = 35)
 	ideal_character_age = 45
+	head_position = 1
+	total_positions = 1
+	spawn_positions = 1
+	req_admin_notify = 1
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/command/hop
 	allowed_branches = list(
 		/datum/mil_branch/employee
@@ -132,6 +128,9 @@
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
 	skill_points = 30
+
+//	need_exp_to_play = 5   TODO: SIERRA PORT
+//	exp_track_branch = COM TODO: SIERRA PORT
 
 	access = list(
 		access_seceva, access_guard, access_security, access_brig, access_armory,
@@ -157,7 +156,10 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/hop/get_description_blurb()
-	return "You are the Executive Officer. You are an experienced senior officer, second in command of the ship, and are responsible for the smooth operation of the ship under your Commanding Officer. In their absence, you are expected to take their place. Your primary duty is directly managing department heads and all those outside a department heading. You are also responsible for the contractors and passengers aboard the ship. Consider the Senior Enlisted Advisor and Bridge Officers tools at your disposal."
+	return "В роли Главы Персонала, или ГП, как Вас иногда будут звать, Вы обязаны отвечать за то, чтобы все отделы были укомплектованы персоналом и работали ради прибыли своей корпорации.\
+	Вам доверена возможность менять должность и уровни доступа каждого члена экипажа на борту через программу модификации ID-карт, что еще могут делать только капитан и ИИ.\
+	Вы также отвечаете за управление отделами снабжения и обслуживания, а также за управление любым персоналом без активного главы. Помните: корпорация рассчитывает на вас!"
+
 
 
 /datum/job/rd

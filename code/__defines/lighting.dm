@@ -6,7 +6,7 @@
 #define END_FOR_DVIEW GLOB.dview_mob.loc = null
 
 #define LIGHTING_ICON 'icons/effects/lighting_overlay.dmi' // icon used for lighting shading effects
-#define LIGHTING_ICON_STATE_DARK "dark" // Change between "soft_dark" and "dark" to swap soft darkvision
+#define LIGHTING_ICON_STATE_DARK "soft_dark" // Change between "soft_dark" and "dark" to swap soft darkvision
 
 #define LIGHTING_ROUND_VALUE (1 / 64) // Value used to round lumcounts, values smaller than 1/69 don't matter (if they do, thanks sinking points), greater values will make lighting less precise, but in turn increase performance, VERY SLIGHTLY.
 
@@ -54,7 +54,7 @@
 #define LIGHT_BURNED	3 // The light bulb is burned out.
 
 // Lighting color presets
-#define LIGHT_COLOUR_WHITE	"#fefefe" // Clinical white light bulbs
+#define LIGHT_COLOUR_WHITE	"#c0c0ca" // Clinical white light bulbs
 #define LIGHT_COLOUR_WARM	"#fffee0" // Warm yellowish light bulbs
 #define LIGHT_COLOUR_COOL	"#e0fefe" // Cool bluish light bulbs
 #define LIGHT_COLOUR_E_RED	"#da0205" // Emergency red lighting
