@@ -39,7 +39,7 @@
 	seed.do_sting(victim,src,pick(BP_R_FOOT,BP_L_FOOT,BP_R_LEG,BP_L_LEG))
 
 /obj/effect/vine/proc/manual_unbuckle(mob/user)
-	if(!buckled_mob)
+	if (!can_unbuckle(user))
 		return
 	if(buckled_mob != user)
 		to_chat(user, SPAN_NOTICE("You try to free \the [buckled_mob] from \the [src]."))
@@ -60,7 +60,7 @@
 			SPAN_NOTICE("You attempt to get free from [src].")
 		)
 
-		if (do_after(user, breakouttime, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS, INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
+		if (do_after(user, breakouttime, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS, INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED) && can_unbuckle(user))
 			if(unbuckle_mob())
 				user.visible_message(
 					"\The [user] manages to escape [src]!",
@@ -99,7 +99,9 @@
 		SPAN_DANGER("Tendrils lash out from \the [src] and drag \the [victim] in!"),
 		SPAN_DANGER("Tendrils lash out from \the [src] and drag you in!"))
 	victim.forceMove(loc)
-	if(buckle_mob(victim))
+	if (victim.buckled)
+		victim.buckled.unbuckle_mob()
+	if (can_buckle(victim) && buckle_mob(victim))
 		victim.set_dir(pick(GLOB.cardinal))
 		to_chat(victim, SPAN_DANGER("The tendrils [pick("wind", "tangle", "tighten", "coil", "knot", "snag", "twist", "constrict", "squeeze", "clench", "tense")] around you!"))
 

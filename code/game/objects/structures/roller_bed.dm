@@ -112,22 +112,7 @@
 		update_icon()
 		return
 	if (istype(item, /obj/item/grab))
-		if (buckled_mob)
-			to_chat(user, SPAN_WARNING("\The [buckled_mob] is already on \the [src]."))
-			return
 		var/obj/item/grab/grab = item
-		user.visible_message(
-			SPAN_ITALIC("\The [user] starts buckling \the [grab.affecting] to \a [src]."),
-			SPAN_ITALIC("You start buckling \the [grab.affecting] to \the [src]."),
-			range = 5
-		)
-		if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
-			return
-		if (QDELETED(grab))
-			return
-		if (buckled_mob)
-			to_chat(user, SPAN_WARNING("\The [buckled_mob] is already on \the [src]."))
-			return
 		if (!AttemptBuckle(grab.affecting, user))
 			return
 		qdel(grab)
@@ -199,12 +184,6 @@
 /obj/structure/roller_bed/MouseDrop_T(atom/dropped, mob/living/user)
 	if (src == dropped && user.canClick())
 		user.ClickOn(src)
-		return
-	if (!CheckDexterity(user))
-		to_chat(user, SPAN_WARNING("You're not dextrous enough to do that."))
-		return
-	if (user.incapacitated())
-		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
 		return
 	if (!buckled_mob)
 		if (isliving(dropped))
