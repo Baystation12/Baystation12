@@ -30,12 +30,14 @@
 
 /obj/attack_hand(mob/living/user)
 	. = ..()
-	AttemptUnbuckle(user)
+	if (buckled_mob)
+		AttemptUnbuckle(user)
 
 
 /obj/attack_robot(mob/living/silicon/robot/user)
 	. = ..()
-	AttemptUnbuckle(user)
+	if (buckled_mob)
+		AttemptUnbuckle(user)
 
 
 /obj/MouseDrop_T(atom/dropped, mob/living/user)

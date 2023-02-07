@@ -78,7 +78,9 @@
 	appearance = T.appearance
 
 /obj/effect/quicksand/user_unbuckle_mob(mob/user)
-	if(buckled_mob && !user.stat && !user.restrained())
+	if (!can_unbuckle(user))
+		return
+	if (!user.stat && !user.restrained())
 		if(busy)
 			to_chat(user, SPAN_NOTICE("\The [buckled_mob] is already getting out, be patient."))
 			return
@@ -97,7 +99,7 @@
 				SPAN_NOTICE("You hear water sloshing.")
 				)
 		busy = TRUE
-		if(do_after(user, delay, src, DO_PUBLIC_UNIQUE))
+		if(do_after(user, delay, src, DO_PUBLIC_UNIQUE) && can_unbuckle(user))
 			busy = FALSE
 			if(user == buckled_mob)
 				if(prob(80))
@@ -147,7 +149,7 @@
 /obj/effect/quicksand/Crossed(atom/movable/AM)
 	if(isliving(AM))
 		var/mob/living/L = AM
-		if(L.throwing || L.can_overcome_gravity())
+		if(L.throwing || L.can_overcome_gravity() || !can_buckle(L))
 			return
 		buckle_mob(L)
 		if(!exposed)
