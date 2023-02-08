@@ -109,7 +109,7 @@
 		if(give_poster_type)
 			poster_type = give_poster_type
 		else
-			poster_type = pick(subtypesof(/singleton/poster) - typesof(/singleton/poster/torch))
+			poster_type = pick(subtypesof(/singleton/poster) - typesof(/singleton/poster/torch) - typesof(/singleton/poster/nowallspawn))
 	if(torch_poster)
 		poster_type = pick(subtypesof(/singleton/poster/torch))
 	set_poster(poster_type)
