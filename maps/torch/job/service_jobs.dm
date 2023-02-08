@@ -36,7 +36,8 @@
 		access_janitor,
 		access_commissary,
 		access_hydroponics,
-		access_kitchen
+		access_kitchen,
+		access_o_mess
 	)
 
 /datum/job/chaplain
@@ -139,7 +140,8 @@
 		access_hydroponics,
 		access_kitchen,
 		access_radio_serv,
-		access_solgov_crew
+		access_solgov_crew,
+		access_o_mess
 	)
 
 

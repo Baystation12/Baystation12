@@ -181,6 +181,17 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 	var/list/accessory		//type of accesory that will be equipped by job code with this rank
 	var/sort_order = 0 // A numerical equivalent of the rank used to indicate its order when compared to other datums: eg e-1 = 1, o-1 = 11
 
-//Returns short designation (yes shorter than name_short), like E1, O3 etc.
+/// Returns short designation (yes shorter than name_short), like E1, O3 etc.
 /datum/mil_rank/proc/grade()
 	return sort_order
+
+/// Returns category of rank, like commissioned versus enlisted.
+/datum/mil_rank/proc/rank_category()
+	return null
+
+/// Categories of ranks
+/singleton/rank_category
+	var/name = "Unknown"
+
+	/// Accesses granted based on being in this category of ranks.
+	var/add_accesses = list()
