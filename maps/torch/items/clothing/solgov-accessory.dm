@@ -136,7 +136,7 @@ patches
 
 /obj/item/clothing/accessory/solgov/fleet_patch/fifth
 	name = "\improper Fifth Fleet patch"
-	desc = "A tactical shoulder patch carrying insignia of Fifth Fleet, the Quick Reaction Force, recently formed and outfited with last tech."
+	desc = "A tactical shoulder patch carrying insignia of Fifth Fleet, the Quick Reaction Force, recently formed and outfited with the latest tech."
 	icon_state = "fleetpatch5"
 
 /*****
