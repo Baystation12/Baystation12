@@ -1,0 +1,5 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Fixes minor typo in Fifth Fleet patch desc. and another in character choosing
+      residency.
