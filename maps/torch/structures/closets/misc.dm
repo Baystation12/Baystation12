@@ -54,7 +54,7 @@
 	)
 
 /obj/structure/closet/secure_closet/representative
-	name = "\improper Sol Central Government representative's locker"
+	name = "\improper Naval Judge Advocate's locker"
 	req_access = list(access_representative)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/sol/rep
 
@@ -66,13 +66,20 @@
 		/obj/item/folder,
 		/obj/item/device/tape/random = 3,
 		/obj/item/storage/secure/briefcase,
-		/obj/item/device/radio/headset/headset_com,
+		/obj/item/device/holowarrant,
+		/obj/item/material/knife/folding/swiss/officer,
+		/obj/item/device/radio/headset/jua,
+		/obj/item/device/radio/headset/jua/alt,
+		/obj/item/device/megaphone,
+		/obj/item/melee/telebaton,
+		/obj/item/device/flash,
+		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/shoes/laceup,
 		/obj/item/clothing/under/rank/internalaffairs/plain/solgov,
 		/obj/item/clothing/suit/storage/toggle/suit/black,
 		/obj/item/clothing/glasses/sunglasses/big,
 		/obj/item/storage/belt/general,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel, /obj/item/storage/backpack/messenger)),
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/command, /obj/item/storage/backpack/satchel/com, /obj/item/storage/backpack/messenger/com)),
 	)
 
 //equipment closets that everyone on the crew or in research can access, for storing things securely

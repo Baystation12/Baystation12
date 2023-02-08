@@ -1422,7 +1422,6 @@
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "agS" = (
-/obj/structure/holostool,
 /obj/effect/floor_decal/carpet{
 	dir = 8
 	},
@@ -1432,17 +1431,21 @@
 /obj/effect/floor_decal/carpet{
 	dir = 9
 	},
+/obj/structure/bed/chair/holochair{
+	dir = 1
+	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "agT" = (
-/obj/structure/holostool,
 /obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/obj/structure/bed/chair/holochair{
 	dir = 1
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "agU" = (
-/obj/structure/holostool,
 /obj/effect/floor_decal/carpet{
 	dir = 4
 	},
@@ -1451,6 +1454,9 @@
 	},
 /obj/effect/floor_decal/carpet{
 	dir = 5
+	},
+/obj/structure/bed/chair/holochair{
+	dir = 1
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
@@ -1578,20 +1584,26 @@
 	},
 /area/centcom/evac)
 "aht" = (
-/obj/structure/holostool,
 /obj/effect/floor_decal/carpet{
 	dir = 8
+	},
+/obj/structure/bed/chair/holochair{
+	dir = 1
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "ahu" = (
-/obj/structure/holostool,
+/obj/structure/bed/chair/holochair{
+	dir = 1
+	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "ahv" = (
-/obj/structure/holostool,
 /obj/effect/floor_decal/carpet{
 	dir = 4
+	},
+/obj/structure/bed/chair/holochair{
+	dir = 1
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
@@ -1762,9 +1774,11 @@
 /turf/simulated/floor/holofloor/snow,
 /area/holodeck/source_snowfield)
 "aiu" = (
-/obj/structure/holostool,
 /obj/effect/floor_decal/carpet{
 	dir = 4
+	},
+/obj/structure/bed/chair/holochair{
+	dir = 1
 	},
 /turf/simulated/floor/holofloor/carpet{
 	dir = 8
@@ -1826,7 +1840,6 @@
 	},
 /area/centcom/evac)
 "aiK" = (
-/obj/structure/holostool,
 /obj/effect/floor_decal/carpet{
 	dir = 8
 	},
@@ -1834,21 +1847,28 @@
 /obj/effect/floor_decal/carpet{
 	dir = 10
 	},
+/obj/structure/bed/chair/holochair{
+	dir = 1
+	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "aiL" = (
-/obj/structure/holostool,
 /obj/effect/floor_decal/carpet,
+/obj/structure/bed/chair/holochair{
+	dir = 1
+	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "aiM" = (
-/obj/structure/holostool,
 /obj/effect/floor_decal/carpet,
 /obj/effect/floor_decal/carpet{
 	dir = 4
 	},
 /obj/effect/floor_decal/carpet{
 	dir = 6
+	},
+/obj/structure/bed/chair/holochair{
+	dir = 1
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)

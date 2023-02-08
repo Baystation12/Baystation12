@@ -6,24 +6,6 @@
 	..()
 	BACKPACK_OVERRIDE_ENGINEERING
 
-/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer
-	name = OUTFIT_JOB_NAME("Deck Chief")
-	l_ear = /obj/item/device/radio/headset/headset_deckofficer
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/supply
-	shoes = /obj/item/clothing/shoes/dutyboots
-	id_types = list(/obj/item/card/id/torch/crew/supply/deckofficer)
-	pda_type = /obj/item/modular_computer/pda/cargo
-
-/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet
-	name = OUTFIT_JOB_NAME("Deck Chief - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/supply
-	shoes = /obj/item/clothing/shoes/dutyboots
-
-/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/army
-	name = OUTFIT_JOB_NAME("Deck Chief - Marine")
-	uniform = /obj/item/clothing/under/solgov/utility/army/urban/supply
-	shoes = /obj/item/clothing/shoes/dutyboots
-
 /decl/hierarchy/outfit/job/torch/crew/supply/tech
 	name = OUTFIT_JOB_NAME("Deck Technician")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/supply

@@ -2,6 +2,7 @@
 	title = "Chaplain"
 	department = "Обслуживания"
 	department_flag = SRV
+	selection_color = "#964B00"
 	total_positions = 1
 	spawn_positions = 1
 	minimum_character_age = list(SPECIES_HUMAN = 24)
@@ -58,6 +59,7 @@
 	supervisors = "Исполнительному офицеру"
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 20
+	selection_color = "#964B00"
 	alt_titles = list(
 		"Janitor")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/janitor
@@ -98,6 +100,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	minimum_character_age = list(SPECIES_HUMAN = 18)
+	selection_color = "#964B00"
 	supervisors = "Исполнительному офицеру"
 	alt_titles = list(
 		"Bartender",

@@ -94,10 +94,9 @@
 	job_access_type = /datum/job/roboticist
 
 
-/obj/item/card/id/torch/crew/supply/deckofficer
+/obj/item/card/id/torch/silver/deckofficer
 	job_access_type = /datum/job/qm
 	detail_color = COLOR_BROWN
-	extra_details = list("onegoldstripe")
 
 /obj/item/card/id/torch/crew/supply
 	job_access_type = /datum/job/cargo_tech
@@ -124,10 +123,11 @@
 	job_access_type = DEFAULT_JOB_TYPE
 	detail_color = COLOR_CIVIE_GREEN
 
-
+/*
 /obj/item/card/id/torch/crew/representative
 	job_access_type = /datum/job/representative
 	detail_color = COLOR_COMMAND_BLUE
+	*/
 
 /obj/item/card/id/torch/crew/sea
 	job_access_type = /datum/job/sea
@@ -136,6 +136,10 @@
 
 /obj/item/card/id/torch/crew/bridgeofficer
 	job_access_type = /datum/job/bridgeofficer
+	detail_color = COLOR_COMMAND_BLUE
+
+/obj/item/card/id/torch/crew/jua
+	job_access_type = /datum/job/jua
 	detail_color = COLOR_COMMAND_BLUE
 
 /obj/item/card/id/torch/crew/pathfinder

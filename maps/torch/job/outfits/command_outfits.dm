@@ -103,6 +103,24 @@
 	uniform = /obj/item/clothing/under/solgov/utility/army/urban/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
+/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer
+	name = OUTFIT_JOB_NAME("Supply Corps Officer")
+	l_ear = /obj/item/device/radio/headset/headset_deckofficer
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/supply
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_types = list(/obj/item/card/id/torch/silver/deckofficer)
+	pda_type = /obj/item/modular_computer/pda/cargo
+
+/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet
+	name = OUTFIT_JOB_NAME("Supply Corps Officer - Fleet")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/supply
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/army
+	name = OUTFIT_JOB_NAME("Supply Corps Officer - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/army/urban/supply
+	shoes = /obj/item/clothing/shoes/dutyboots
+
 /decl/hierarchy/outfit/job/torch/passenger/workplace_liaison
 	name = OUTFIT_JOB_NAME("Workplace Liaison")
 	l_ear = /obj/item/device/radio/headset/heads/torchntcommand
@@ -112,6 +130,7 @@
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 	backpack_contents = list(/obj/item/clothing/accessory/badge/nanotrasen = 1)
 
+/*
 /decl/hierarchy/outfit/job/torch/crew/representative
 	name = OUTFIT_JOB_NAME("SolGov Representative")
 	l_ear = /obj/item/device/radio/headset/headset_com
@@ -120,6 +139,7 @@
 	shoes = /obj/item/clothing/shoes/laceup
 	id_types = list(/obj/item/card/id/torch/crew/representative)
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
+*/
 
 /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
 	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Fleet")
@@ -147,5 +167,23 @@
 
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
 	name = OUTFIT_JOB_NAME("Bridge Officer - Fleet")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/command/jua
+	name = OUTFIT_JOB_NAME("Judge Advocate")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_types = list(/obj/item/card/id/torch/crew/jua)
+	pda_type = /obj/item/modular_computer/pda/heads
+	l_ear = /obj/item/device/radio/headset/jua
+
+/decl/hierarchy/outfit/job/torch/crew/command/jua/fleet
+	name = OUTFIT_JOB_NAME("Judge Advocate - Fleet")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/command/jua/army
+	name = OUTFIT_JOB_NAME("Judge Advocate - Marine")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots

@@ -9,13 +9,13 @@
 		/datum/species/human/mule = list(/datum/job/ai, /datum/job/cyborg, /datum/job/merchant)
 	)
 
-#define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/representative, /datum/job/sea, /datum/job/pathfinder, /datum/job/rd
+#define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/qm, /datum/job/jua, /datum/job/sea, /datum/job/pathfinder, /datum/job/rd
 	species_to_job_blacklist = list(
 		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/research_guard, /datum/job/warden, /datum/job/synthetic), //Other jobs unavailable via branch restrictions,
 		/datum/species/unathi/yeosa = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/research_guard, /datum/job/warden, /datum/job/synthetic),
 		/datum/species/skrell  = list(HUMAN_ONLY_JOBS, /datum/job/synthetic),
-		/datum/species/machine = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/psychiatrist, /datum/job/synthetic),
-		/datum/species/machine/shell   = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/psychiatrist, /datum/job/officer, /datum/job/warden),
+		/datum/species/machine = list(/datum/job/liaison, /datum/job/psychiatrist, /datum/job/synthetic),
+		/datum/species/machine/shell   = list(/datum/job/liaison, /datum/job/psychiatrist, /datum/job/officer, /datum/job/warden),
 		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/research_guard, /datum/job/officer, /datum/job/liaison, /datum/job/warden, /datum/job/doctor, /datum/job/medical_trainee, /datum/job/synthetic),	//Other jobs unavailable via branch restrictions,
 		/datum/species/human/gravworlder = list(/datum/job/synthetic),
 		/datum/species/human/spacer = list(/datum/job/synthetic),
@@ -26,16 +26,16 @@
 	)
 #undef HUMAN_ONLY_JOBS
 
-	allowed_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos,
-						/datum/job/liaison, /datum/job/representative, /datum/job/sea, /datum/job/synthetic,
+	allowed_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/qm,
+						/datum/job/liaison, /datum/job/jua, /datum/job/sea, /datum/job/synthetic,
 						/datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/nt_pilot, /datum/job/explorer,
 						/datum/job/expeng, /datum/job/expmed, /datum/job/expmar,
 						/datum/job/senior_engineer, /datum/job/roboticist, /datum/job/engineer,  /datum/job/engineer_trainee,
 						/datum/job/officer, /datum/job/warden, /datum/job/detective,
 						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/junior_doctor, /datum/job/chemist, /datum/job/medical_trainee,
-						/datum/job/psychiatrist, /datum/job/chaplain,
-						/datum/job/qm, /datum/job/cargo_tech, /datum/job/mining,
-						/datum/job/janitor, /datum/job/chef,
+						/datum/job/psychiatrist,
+						/datum/job/cargo_tech, /datum/job/mining,
+						/datum/job/janitor, /datum/job/chef, /datum/job/chaplain,
 						/datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/research_guard,
 						/datum/job/ai, /datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,

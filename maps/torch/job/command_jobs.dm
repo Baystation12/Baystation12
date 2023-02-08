@@ -300,36 +300,102 @@
 	Вы поддерживаете порядок на судне, а также отвечаете за внешнюю и внутренную безопасность. Вы - закон. Вы подчиняетесь КО и ИО. \
 	От Вас ожидается знание Военно-Юридического кодекса ЦПСС, Законов ЦПСС, кодов угроз и основных регуляций на самом высоком уровне."
 
-/datum/job/representative
-	title = "SolGov Representative"
+/datum/job/qm
+	title = "Supply Corps Officer"
+	selection_color = "#964B00"
+	total_positions = 1
+	spawn_positions = 1
+	head_position = 1
+	req_admin_notify = 1
+	department_flag = SUP|COM
+	supervisors = "Командующему и Исполнительному офицеру"
+	economic_power = 12
+	minimal_player_age = 0
+	minimum_character_age = list(SPECIES_HUMAN = 22)
+	ideal_character_age = 30
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet,
+		/datum/mil_branch/army = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/army
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/ec/o3,
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/fleet/o3,
+		/datum/mil_rank/army/o2,
+		/datum/mil_rank/army/o3
+	)
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
+	                    SKILL_FINANCE     = SKILL_BASIC,
+	                    SKILL_HAULING     = SKILL_BASIC,
+	                    SKILL_EVA         = SKILL_BASIC,
+	                    SKILL_PILOT       = SKILL_BASIC,
+						SKILL_MECH        =	SKILL_BASIC)
+
+	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
+	skill_points = 18
+
+	access = list(
+		access_maint_tunnels, access_bridge, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
+		access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar,
+		access_mining, access_mining_office, access_mining_station, access_commissary, access_teleporter, access_eva, access_torch_fax,
+		access_radio_sup, access_radio_exp, access_radio_comm, access_keycard_auth, access_heads, access_aquila, access_RC_announce
+	)
+
+	software_on_spawn = list(/datum/computer_file/program/supply,
+							 /datum/computer_file/program/deck_management,
+							 /datum/computer_file/program/reports)
+
+/datum/job/qm/get_description_blurb()
+	return "Вы - Офицер снабжения. Вы отвечаете за работу отделов снабжения и поставок. \
+	С одной стороны, вы следите за правильным оформлением бланков заказов и за тем, чтобы карготехник \
+	своевременно принимал и отправлял заказы, шахтёры копали руду, а челноки находились в готовом к вылету состоянию. \
+	С другой стороны, вы отвечаете за целостность и учет всех складов на борту ГЭК 'Факел' и за тем, чем и как питаются, \
+	что пьют борту. Другими словми, офицер снабжения является главным по тому, что прибывает на склад судна извне и \
+	куда это вдальнейшем перераспределяется внутри судна. Также он отвечает за чистоту палуб."
+
+/datum/job/jua
+	title = "Judge Advocate"
 	department = "Поддержка командования"
 	department_flag = SPT
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "Центральному Правительству Солнечной Системы и Уставу ЦПСС"
+	supervisors = "Исполнительному и Командующему Офицеру судна и ВЮКПСС"
 	selection_color = "#2f2f7f"
-	economic_power = 16
+	economic_power = 10
 	minimal_player_age = 0
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/representative
-	allowed_branches = list(/datum/mil_branch/solgov)
-	allowed_ranks = list(/datum/mil_rank/sol/gov)
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/jua
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/jua/fleet,
+		/datum/mil_branch/army = /decl/hierarchy/outfit/job/torch/crew/command/jua/army
+		)
+	allowed_ranks = list(
+		/datum/mil_rank/ec/o3,
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/fleet/o3,
+		/datum/mil_rank/army/o2,
+		/datum/mil_rank/army/o3,
+		)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_EXPERT,
 	                    SKILL_FINANCE     = SKILL_BASIC)
-	skill_points = 20
-	minimum_character_age = list(SPECIES_HUMAN = 27)
+	skill_points = 23
+	minimum_character_age = list(SPECIES_HUMAN = 22)
 
 	access = list(
-		access_representative, access_security, access_medical,
-		access_bridge, access_cargo, access_solgov_crew,
-		access_hangar, access_torch_fax, access_radio_comm
+		access_representative, access_security, access_external_airlocks, access_emergency_storage,
+		access_bridge, access_solgov_crew, access_maint_tunnels, access_aquila, access_guppy_helm, access_expedition_shuttle, access_hangar,
+		access_torch_fax, access_RC_announce, access_radio_comm, access_radio_sec
 	)
 
+	alt_titles = list("Military Lawyer")
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/representative/get_description_blurb()
-	return "Вы - представитель ЦПСС. Вы являетесь гражданским, назначенным как дипломатическим представителем для первого контакта, так и для решения дипломатических проблем. \
-	Вы также ответственны за наблюдение за любыми серьёзными нарушениями закона, законов ЦПСС или другими этническими или юридическими проблемами на борту; информируете и консультируете Командующего офицера этим вопросам. \
-	Вы бюрократ среднего уровня. Вы поддерживаете связь между корпоративными интересами и интересами экипажа судна. Отправляйте факсы ЦПСС о ходе продвижения миссии и важных событиях. "
+	return "Вы - Военный Прокурор. Консультруйте экипаж по вопросам закона. \
+	Рассматривайте апелляции гражданских и военнослужащих. \
+	Проводите суды. Отчитывайтесь о своих результатах Командующему офицеру"
 
 /datum/job/sea
 	title = "Senior Enlisted Advisor"

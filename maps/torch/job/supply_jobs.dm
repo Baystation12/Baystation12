@@ -1,60 +1,7 @@
-/datum/job/qm
-	title = "Deck Chief"
-	department = "Снабжения"
-	department_flag = SUP
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "Исполнительному офицеру"
-	economic_power = 5
-	minimal_player_age = 0
-	minimum_character_age = list(SPECIES_HUMAN = 27)
-	ideal_character_age = 35
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer
-	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet,
-		/datum/mil_branch/army = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/army
-	)
-	allowed_ranks = list(
-		/datum/mil_rank/fleet/e6,
-		/datum/mil_rank/ec/e7,
-		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/fleet/e7,
-		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/army/e6,
-		/datum/mil_rank/army/e7,
-		/datum/mil_rank/army/e8,
-		/datum/mil_rank/army/o1,
-	)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
-	                    SKILL_FINANCE     = SKILL_BASIC,
-	                    SKILL_HAULING     = SKILL_BASIC,
-	                    SKILL_EVA         = SKILL_BASIC,
-	                    SKILL_PILOT       = SKILL_BASIC,
-						SKILL_MECH        =	SKILL_BASIC)
-
-	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
-	skill_points = 18
-
-	access = list(
-		access_maint_tunnels, access_bridge, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
-		access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar,
-		access_mining, access_mining_office, access_mining_station, access_commissary, access_teleporter, access_eva, access_torch_fax,
-		access_radio_sup, access_radio_exp, access_radio_comm
-	)
-
-	software_on_spawn = list(/datum/computer_file/program/supply,
-							 /datum/computer_file/program/deck_management,
-							 /datum/computer_file/program/reports)
-
-/datum/job/qm/get_description_blurb()
-	return "Вы - Начальник палубы. Ваша задача - обеспечивать бесперебойную работу отдела снабжения и обслуживать шаттлы в ангаре. Вы подчиняетесь Исполнительному офицеру. \
-	Удостоверьтесь, что Ваш отдел укомплектован всем необходимым, персонал знает какие заказы куда доставлять и что кредитов снабжения хватит на все заказы. "
-
 /datum/job/cargo_tech
 	title = "Deck Technician"
 	department = "Supply"
+	selection_color = "#964B00"
 	department_flag = SUP
 	total_positions = 3
 	spawn_positions = 3
@@ -108,6 +55,7 @@
 /datum/job/mining
 	title = "Prospector"
 	department = "Supply"
+	selection_color = "#964B00"
 	department_flag = SUP
 	total_positions = 2
 	spawn_positions = 2

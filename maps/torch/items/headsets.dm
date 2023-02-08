@@ -114,6 +114,18 @@
 	item_state = "com_headset_alt"
 	max_keys = 4
 
+/obj/item/device/radio/headset/jua
+	name = "judge advocate's headset"
+	desc = "A headset with access to the command and security channels."
+	icon_state = "com_headset"
+	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/jua
+
+/obj/item/device/radio/headset/jua/alt
+	name = "judge advocate's bowman headset"
+	icon_state = "com_headset_alt"
+	item_state = "com_headset_alt"
+
 /obj/item/device/radio/headset/exploration
 	name = "exploration headset"
 	desc = "A headset with access to the exploration channel. It has an inbuilt subspace antenna for better reception."
