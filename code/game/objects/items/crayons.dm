@@ -46,11 +46,6 @@
 	color_description = "purple crayon"
 	crayon_reagent = /datum/reagent/crayon_dust/purple
 
-/obj/item/pen/crayon/random/Initialize()
-	..()
-	var/crayon_type = pick(subtypesof(/obj/item/pen/crayon) - /obj/item/pen/crayon/random)
-	new crayon_type(loc)
-	return INITIALIZE_HINT_QDEL
 
 /obj/item/pen/crayon/mime
 	icon_state = "crayonmime"
@@ -127,3 +122,14 @@
 				qdel(src)
 	else
 		..()
+
+
+/obj/random/crayon
+	name = "Random Crayon"
+	desc = "This is a random crayon."
+	icon = 'icons/obj/crayons.dmi'
+	icon_state = "crayonrainbow"
+
+
+/obj/random/crayon/spawn_choices()
+	return subtypesof(/obj/item/pen/crayon)

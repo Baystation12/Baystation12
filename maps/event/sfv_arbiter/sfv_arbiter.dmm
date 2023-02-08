@@ -2539,7 +2539,7 @@
 /obj/item/flame/lighter/zippo/gunmetal{
 	pixel_x = 5
 	},
-/obj/item/storage/fancy/cigarettes,
+/obj/item/storage/fancy/smokable/transstellar,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "Zj" = (

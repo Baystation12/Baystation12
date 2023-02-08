@@ -208,12 +208,12 @@
 
 /datum/gear/cigscase
 	display_name = "fancy cigarette case"
-	path = /obj/item/storage/fancy/cigarettes/case
+	path = /obj/item/storage/fancy/smokable/case
 	cost = 2
 
 /datum/gear/cigars
 	display_name = "fancy cigar case"
-	path = /obj/item/storage/fancy/cigar
+	path = /obj/item/storage/fancy/smokable/cigar
 	cost = 2
 
 /datum/gear/cigar

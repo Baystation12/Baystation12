@@ -95,7 +95,7 @@
 	desc = "This robe commands authority."
 	icon_state = "judge"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	allowed = list(/obj/item/storage/fancy/cigarettes,/obj/item/spacecash)
+	allowed = list(/obj/item/storage/fancy/smokable,/obj/item/spacecash)
 	flags_inv = HIDEJUMPSUIT
 
 

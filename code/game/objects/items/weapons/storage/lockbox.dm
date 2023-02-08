@@ -82,3 +82,36 @@
 	startswith = list(
 		/obj/item/grenade/flashbang/clusterbang = 1
 	)
+
+
+/obj/item/storage/lockbox/vials
+	name = "secure vial storage box"
+	desc = "A locked box for keeping things away from children."
+	icon = 'icons/obj/vialbox.dmi'
+	icon_state = "vialbox0"
+	item_state = "syringe_kit"
+	w_class = ITEM_SIZE_NORMAL
+	max_w_class = ITEM_SIZE_TINY
+	max_storage_space = null
+	storage_slots = 12
+	req_access = list(access_virology)
+
+/obj/item/storage/lockbox/vials/New()
+	..()
+	update_icon()
+
+/obj/item/storage/lockbox/vials/on_update_icon()
+	var/total_contents = count_by_type(contents, /obj/item/reagent_containers/glass/beaker/vial)
+	src.icon_state = "vialbox[Floor(total_contents/2)]"
+	src.overlays.Cut()
+	if (!broken)
+		overlays += image(icon, src, "led[locked]")
+		if(locked)
+			overlays += image(icon, src, "cover")
+	else
+		overlays += image(icon, src, "ledb")
+	return
+
+/obj/item/storage/lockbox/vials/attackby(obj/item/item, mob/living/user)
+	. = ..()
+	update_icon()
