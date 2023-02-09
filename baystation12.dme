@@ -929,6 +929,8 @@
 #include "code\game\objects\effects\decals\Cleanable\robots.dm"
 #include "code\game\objects\effects\decals\Cleanable\tracks.dm"
 #include "code\game\objects\effects\decals\posters\bs12.dm"
+#include "code\game\objects\effects\decals\posters\nyc.dm"
+#include "code\game\objects\effects\decals\posters\other.dm"
 #include "code\game\objects\effects\fire\fire.dm"
 #include "code\game\objects\effects\particles\particles.dm"
 #include "code\game\objects\effects\spawners\bombspawner.dm"
