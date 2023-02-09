@@ -296,22 +296,6 @@
 	if (!turf)
 		return
 
-	var/vent_ambience
-	if (!always_unpowered && power_environ && length(vent_pumps) && living.get_sound_volume_multiplier() > 0.2)
-		for (var/obj/machinery/atmospherics/unary/vent_pump/vent as anything in vent_pumps)
-			if (vent.can_pump())
-				vent_ambience = TRUE
-				break
-	var/client/client = living.client
-	if (vent_ambience)
-		if (!client.playing_vent_ambience)
-			var/sound = sound('sound/ambience/shipambience.ogg', repeat = TRUE, wait = 0, volume = 10, channel = GLOB.ambience_channel_vents)
-			living.playsound_local(turf, sound)
-			client.playing_vent_ambience = TRUE
-	else
-		sound_to(living, sound(null, channel = GLOB.ambience_channel_vents))
-		client.playing_vent_ambience = FALSE
-
 	if (living.lastarea != src)
 		if (length(forced_ambience))
 			var/sound = sound(pick(forced_ambience), repeat = TRUE, wait = 0, volume = 25, channel = GLOB.ambience_channel_forced)
@@ -320,6 +304,7 @@
 			sound_to(living, sound(null, channel = GLOB.ambience_channel_forced))
 
 	var/time = world.time
+	var/client/client = living.client
 	if (length(ambience) && time > client.next_ambience_time)
 		var/sound = sound(pick(ambience), repeat = FALSE, wait = 0, volume = 15, channel = GLOB.ambience_channel_common)
 		living.playsound_local(turf, sound)

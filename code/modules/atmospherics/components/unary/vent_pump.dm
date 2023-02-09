@@ -37,7 +37,10 @@
 	var/internal_pressure_bound_default = INTERNAL_PRESSURE_BOUND
 	var/pressure_checks_default = PRESSURE_CHECKS
 
+
 	var/welded = 0 // Added for aliens -- TLE
+	var/sound_id
+	var/datum/sound_token/sound_token
 
 	var/controlled = TRUE  //if we should register with an air alarm on spawn
 	build_icon_state = "uvent"
@@ -102,8 +105,10 @@
 		LAZYADD(area.vent_pumps, src)
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	icon = null
+	update_sound()
 
 /obj/machinery/atmospherics/unary/vent_pump/Destroy()
+	QDEL_NULL(sound_token)
 	var/area/area = get_area(src)
 	if(area)
 		area.air_vent_info -= id_tag
@@ -120,6 +125,18 @@
 	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
+/obj/machinery/atmospherics/unary/vent_pump/power_change()
+	. = ..()
+	if(.)
+		update_sound()
+
+/obj/machinery/atmospherics/unary/vent_pump/proc/update_sound()
+	if(!sound_id)
+		sound_id = "[sequential_id("vent_z[z]")]"
+	if(can_pump())
+		sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/ambience/vent_hum.ogg', 8, range = 7, falloff = 4)
+	else
+		QDEL_NULL(sound_token)
 
 /obj/machinery/atmospherics/unary/vent_pump/on_update_icon(safety = 0)
 	if(!check_icon_cache())
