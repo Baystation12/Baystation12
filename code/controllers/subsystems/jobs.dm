@@ -498,7 +498,6 @@ SUBSYSTEM_DEF(jobs)
 			H.forceMove(truf)
 			var/obj/structure/bed/b = locate(/obj/structure/bed) in truf
 			if(istype(b))
-				H.Sleeping(15)
 				b.buckle_mob(H)
 		else
 			var/datum/spawnpoint/spawnpoint = job.get_spawnpoint(H.client)
