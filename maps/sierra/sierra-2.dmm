@@ -31952,6 +31952,9 @@
 /obj/effect/floor_decal/corner/blue/border{
 	dir = 4
 	},
+/obj/machinery/computer/modular/preset/cardslot/command{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hall/level_one)
 "bjK" = (
