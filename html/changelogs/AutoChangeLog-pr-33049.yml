@@ -1,6 +1,0 @@
-author: SomeAngryMiner
-delete-after: true
-changes:
-  - rscadd: Borers can now inyect Inaprovaline, Dylovene, Dermaline and Peridaxon.
-  - rscadd: Borer ability buttons have been fixed and are placed in the top left corner
-      of the screen.
