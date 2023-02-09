@@ -1841,6 +1841,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
+/obj/structure/bed/chair/comfy/yellow{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/ce)
 "adW" = (
@@ -3711,6 +3714,9 @@
 "ahh" = (
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/yellow/border,
+/obj/machinery/computer/modular/preset/cardslot/command_eng{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/ce)
 "ahj" = (
@@ -6191,6 +6197,9 @@
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals6{
 	dir = 8
+	},
+/obj/structure/bed/chair/padded/yellow{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engineering_monitoring)
