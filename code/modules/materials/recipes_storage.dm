@@ -14,7 +14,7 @@
 
 /datum/stack_recipe/box/egg
 	title = "egg box"
-	result_type = /obj/item/storage/fancy/egg_box/empty
+	result_type = /obj/item/storage/fancy/egg_box
 
 /datum/stack_recipe/box/light_tubes
 	title = "light tubes box"

@@ -2226,7 +2226,7 @@
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "atp" = (
-/obj/item/storage/fancy/cigarettes,
+/obj/item/storage/fancy/smokable/transstellar,
 /obj/structure/table/reinforced,
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
@@ -3262,7 +3262,7 @@
 "awN" = (
 /obj/structure/table/rack,
 /obj/item/storage/secure/briefcase,
-/obj/item/storage/fancy/cigarettes,
+/obj/item/storage/fancy/smokable/transstellar,
 /obj/item/flame/lighter/zippo/random,
 /obj/item/storage/belt/utility,
 /obj/item/storage/backpack/satchel,
@@ -5873,7 +5873,7 @@
 	dir = 5
 	},
 /obj/item/flame/lighter/zippo/random,
-/obj/item/storage/fancy/cigarettes,
+/obj/item/storage/fancy/smokable/transstellar,
 /obj/item/material/ashtray/bronze{
 	pixel_x = -1;
 	pixel_y = 1
@@ -5891,7 +5891,7 @@
 	dir = 5
 	},
 /obj/item/flame/lighter/zippo/random,
-/obj/item/storage/fancy/cigarettes,
+/obj/item/storage/fancy/smokable/transstellar,
 /obj/item/material/ashtray/bronze{
 	pixel_x = -1;
 	pixel_y = 1
@@ -6939,7 +6939,7 @@
 /obj/item/reagent_containers/food/drinks/bottle/small/beer,
 /obj/item/reagent_containers/food/drinks/bottle/small/beer,
 /obj/item/flame/lighter/zippo/random,
-/obj/item/storage/fancy/cigarettes,
+/obj/item/storage/fancy/smokable/transstellar,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -7939,7 +7939,7 @@
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/smokable/transstellar = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /turf/unsimulated/floor{
 	icon_state = "plating";
@@ -8390,7 +8390,7 @@
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/smokable/transstellar = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /obj/structure/window/reinforced{
 	dir = 1

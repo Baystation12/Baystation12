@@ -6664,7 +6664,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/meatstation/cargo)
 "qA" = (
-/obj/item/storage/fancy/egg_box,
+/obj/item/storage/fancy/egg_box/full,
 /turf/space,
 /area/space)
 "qB" = (

@@ -2890,7 +2890,7 @@
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
 /obj/item/reagent_containers/food/condiment/flour,
-/obj/item/storage/fancy/egg_box,
+/obj/item/storage/fancy/egg_box/full,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "ie" = (

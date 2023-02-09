@@ -4401,7 +4401,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief)
 "km" = (
-/obj/item/storage/fancy/cigar{
+/obj/item/storage/fancy/smokable/cigar{
 	pixel_x = 31;
 	pixel_y = 7
 	},
