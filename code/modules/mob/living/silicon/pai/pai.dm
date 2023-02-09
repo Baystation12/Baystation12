@@ -294,7 +294,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	if(.)
 		var/obj/item/holder/H = .
 		if(istype(H))
-			H.icon_state = "pai-[icon_state]"
+			H.item_state = "pai-[icon_state]"
 			grabber.update_inv_l_hand()
 			grabber.update_inv_r_hand()
 
