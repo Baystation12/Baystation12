@@ -3,8 +3,12 @@
 
 /datum/keybinding/client/communication/say
 	hotkey_keys = list("F3", "T")
-	name = "Say"
+	name = "IC Say"
 	full_name = "IC Say"
+
+/datum/keybinding/client/communication/me/down(client/user)
+	user.mob.say_wrapper()
+	return TRUE
 
 /datum/keybinding/client/communication/ooc
 	hotkey_keys = list("F2", "O")
@@ -22,7 +26,7 @@
 
 /datum/keybinding/client/communication/me
 	hotkey_keys = list("F4", "M")
-	name = "Me"
+	name = "IC Me"
 	full_name = "Custom Emote (/Me)"
 
 /datum/keybinding/client/communication/me/down(client/user)
