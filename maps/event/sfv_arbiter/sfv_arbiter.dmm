@@ -605,7 +605,7 @@
 "sS" = (
 /obj/machinery/airlock_sensor{
 	frequency = 1380;
-	id_tag = s;
+	id_tag = "sfv_arbiter_shuttle_exterior_sensor";
 	pixel_y = 24
 	},
 /turf/template_noop,
