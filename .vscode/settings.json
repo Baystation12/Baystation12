@@ -31,7 +31,7 @@
   },
 
   "workbench.editorAssociations": {
-    "*.dmi": "imagePreview.previewEditor"
+    "*.dmi": "dmiEditor.dmiEditor"
   },
 
   "debug.onTaskErrors": "abort",
