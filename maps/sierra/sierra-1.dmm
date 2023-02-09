@@ -1374,7 +1374,8 @@
 	id_tag = "escape_pod_1";
 	name = "escape pod one controller";
 	pixel_x = 20;
-	tag_door = "escape_pod_1_hatch"
+	tag_door = "escape_pod_1_hatch";
+	frequency = 1380
 	},
 /obj/effect/floor_decal/borderfloor/corner2{
 	dir = 5
@@ -3735,7 +3736,8 @@
 	id_tag = "escape_pod_2";
 	name = "escape pod two controller";
 	pixel_x = -20;
-	tag_door = "escape_pod_2_hatch"
+	tag_door = "escape_pod_2_hatch";
+	frequency = 1380
 	},
 /obj/effect/floor_decal/borderfloor/corner2{
 	dir = 10
@@ -6432,7 +6434,8 @@
 	name = "escape pod one berth controller";
 	pixel_x = -20;
 	pixel_y = 32;
-	tag_door = "escape_pod_1_berth_hatch"
+	tag_door = "escape_pod_1_berth_hatch";
+	frequency = 1380
 	},
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 8
@@ -10497,7 +10500,8 @@
 	name = "escape pod two berth controller";
 	pixel_x = 20;
 	pixel_y = -32;
-	tag_door = "escape_pod_2_berth_hatch"
+	tag_door = "escape_pod_2_berth_hatch";
+	frequency = 1380
 	},
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 4
@@ -19201,7 +19205,8 @@
 	name = "escape pod three berth controller";
 	pixel_x = -20;
 	pixel_y = 32;
-	tag_door = "escape_pod_3_berth_hatch"
+	tag_door = "escape_pod_3_berth_hatch";
+	frequency = 1380
 	},
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 8
@@ -19436,7 +19441,8 @@
 	name = "escape pod four berth controller";
 	pixel_x = 20;
 	pixel_y = -32;
-	tag_door = "escape_pod_4_berth_hatch"
+	tag_door = "escape_pod_4_berth_hatch";
+	frequency = 1380
 	},
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 4
@@ -20448,7 +20454,8 @@
 	id_tag = "escape_pod_3";
 	name = "escape pod three controller";
 	pixel_x = 20;
-	tag_door = "escape_pod_3_hatch"
+	tag_door = "escape_pod_3_hatch";
+	frequency = 1380
 	},
 /obj/effect/floor_decal/borderfloor/corner2{
 	dir = 6
@@ -21051,7 +21058,8 @@
 	id_tag = "escape_pod_4";
 	name = "escape pod four controller";
 	pixel_x = -20;
-	tag_door = "escape_pod_4_hatch"
+	tag_door = "escape_pod_4_hatch";
+	frequency = 1380
 	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 8
