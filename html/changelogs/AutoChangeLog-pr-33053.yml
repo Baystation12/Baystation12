@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: The SFV Arbiter's airlock now properly detects and reads the external
+      air sensor.
