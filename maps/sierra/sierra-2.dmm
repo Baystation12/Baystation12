@@ -1387,7 +1387,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/hatch/maintenance,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/item/tape/engineering,
+/obj/item/taperoll/engineering/applied,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "ade" = (
@@ -7967,7 +7967,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/item/tape/engineering,
+/obj/item/taperoll/engineering/applied,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "apd" = (
@@ -17193,6 +17193,7 @@
 	id_tag = "crusher";
 	name = "Compactor Zone"
 	},
+/obj/item/taperoll/engineering/applied,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "aFx" = (
