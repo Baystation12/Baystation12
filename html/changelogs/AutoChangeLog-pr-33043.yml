@@ -1,0 +1,5 @@
+author: Hubblenaut
+delete-after: true
+changes:
+  - bugfix: pAIs are no longer invisible in inventory.
+  - bugfix: Fixed the on-mob-sprites for the pAI drone chassis in particular.
