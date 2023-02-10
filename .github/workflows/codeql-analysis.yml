@@ -16,14 +16,14 @@ permissions:
 
 on:
   pull_request:
-    branches: [ "dev" ]
+    branches: [ "dev", "dev220" ]
     paths: [ "tools/**", "nano/**" ]
   schedule:
     - cron: '45 15 * * 4'
 
 jobs:
   analyze:
-    name: Analyze
+    name: Анализ
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -38,11 +38,11 @@ jobs:
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     steps:
-    - name: Checkout repository
+    - name: Checkout
       uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
 
     # Initializes the CodeQL tools for scanning.
-    - name: Initialize CodeQL
+    - name: Инициализация CodeQL
       uses: github/codeql-action/init@v2
       with:
         config-file: ./.github/workflow-config/codeql.yml
@@ -57,7 +57,7 @@ jobs:
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
-    - name: Autobuild
+    - name: Автобилд
       uses: github/codeql-action/autobuild@v2
 
     # ℹ️ Command-line programs to run using the OS shell.
@@ -70,5 +70,5 @@ jobs:
     #   echo "Run, Build Application using script"
     #   ./location_of_script_within_repo/buildscript.sh
 
-    - name: Perform CodeQL Analysis
+    - name: Выполнение CodeQL анализа
       uses: github/codeql-action/analyze@v2

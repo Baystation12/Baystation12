@@ -1,4 +1,4 @@
-name: Compile changelogs
+name: "Чейнджлог: YML -> HTML"
 
 permissions:
   contents: read
@@ -13,29 +13,29 @@ jobs:
     permissions:
       contents: write # required to push the updated changelog commit
     runs-on: ubuntu-latest
-    if: github.repository == 'Baystation12/Baystation12' # to prevent this running on forks
+    if: github.repository == 'SierraBay/SierraBay12' # to prevent this running on forks
     steps:
       - name: Checkout
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
         with:
           fetch-depth: 0 # Otherwise, we will fail to push refs
-          ref: dev
+          ref: dev220
           token: ${{ secrets.BOT_TOKEN }}
-      - name: Python setup
+      - name: Установка Python
         uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435
         with:
           python-version: '3.x'
-      - name: Install depends
+      - name: Установка зависимостей
         run: |
           python -m pip install --upgrade pip
           pip install pyyaml bs4
-      - name: Compile CL
+      - name: Компиляция чейнджлогов
         run: |
-          python tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs
-      - name: Commit And Push
+          python tools/changelog/sierra_genchangelog.py html/changelog.html html/changelogs
+      - name: Commit и Push
         run: |
           git config --global user.email "${{ secrets.BOT_EMAIL }}"
           git config --global user.name "${{ secrets.BOT_NAME }}"
           git diff --quiet --exit-code && echo "No changes found, abort." && exit 0
-          git commit -m "Automatic changelog generation [ci skip]" -a
+          git commit -m "Автоматическая компиляция чейнджлогов [ci skip]" -a
           git push

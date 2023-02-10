@@ -5,9 +5,9 @@ permissions:
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "dev", "dev220" ]
   pull_request:
-    branches: [ "dev" ]
+    branches: [ "dev", "dev220" ]
 env:
   BYOND_MAJOR: "514"
   BYOND_MINOR: "1589"

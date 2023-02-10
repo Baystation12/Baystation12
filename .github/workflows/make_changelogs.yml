@@ -1,4 +1,4 @@
-name: Make changelogs
+name: "Чейнджлог: PR -> YML"
 
 permissions:
   contents: read
@@ -6,28 +6,28 @@ permissions:
 on:
   push:
     branches:
-    - dev
+    - dev220
 
 jobs:
   MakeCL:
     permissions:
       contents: write # required to push the changelog chunk yml commit
     runs-on: ubuntu-latest
-    if: github.repository == 'Baystation12/Baystation12' # to prevent this running on forks
+    if: github.repository == 'SierraBay/SierraBay12' # to prevent this running on forks
     steps:
       - name: Checkout
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
         with:
           fetch-depth: 25
-      - name: Python setup
+      - name: Установка Python
         uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435
         with:
           python-version: '3.x'
-      - name: Install depends
+      - name: Установка зависимостей
         run: |
           python -m pip install --upgrade pip
           pip install ruamel.yaml PyGithub
-      - name: Make CL
+      - name: Создание чейнджлога
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           GIT_EMAIL: "${{ secrets.BOT_EMAIL }}"
