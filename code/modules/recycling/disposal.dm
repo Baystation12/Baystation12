@@ -32,6 +32,12 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	atom_flags = ATOM_FLAG_CLIMBABLE
 	var/turn = DISPOSAL_FLIP_NONE
 	throwpass = TRUE
+	var/landchance = 75 // Chance to hit with thrown object
+
+/obj/machinery/disposal/small
+	icon = 'icons/obj/pipes/disposal_small.dmi'
+	density = FALSE
+	landchance = 20
 
 // create a new disposal
 // find the attached trunk (if present) and init gas resvr.
@@ -351,7 +357,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 	// flush handle
 	if(flush)
-		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-handle")
+		overlays += image(icon, "dispover-handle")
 
 	// only handle is shown if no power
 	if(!is_powered() || mode == -1)
@@ -359,13 +365,13 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 	// 	check for items/vomit in disposal - occupied light
 	if(length(contents) > LAZYLEN(component_parts) || reagents.total_volume)
-		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-full")
+		overlays += image(icon, "dispover-full")
 
 	// charging and ready light
 	if(mode == 1)
-		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-charge")
+		overlays += image(icon, "dispover-charge")
 	else if(mode == 2)
-		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-ready")
+		overlays += image(icon, "dispover-ready")
 
 // timed process
 // charge the gas reservoir and perform flush if ready
@@ -484,7 +490,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		var/obj/item/I = mover
 		if(istype(I, /obj/item/projectile))
 			return
-		if(prob(75))
+		if(prob(landchance))
 			I.forceMove(src)
 			visible_message("\The [I] lands in \the [src].")
 		else

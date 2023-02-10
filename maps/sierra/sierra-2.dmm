@@ -1387,7 +1387,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/hatch/maintenance,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/item/tape/engineering,
+/obj/item/taperoll/engineering/applied,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "ade" = (
@@ -1840,6 +1840,9 @@
 "adU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
+	},
+/obj/structure/bed/chair/comfy/yellow{
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/ce)
@@ -3711,6 +3714,9 @@
 "ahh" = (
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/yellow/border,
+/obj/machinery/computer/modular/preset/cardslot/command_eng{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/ce)
 "ahj" = (
@@ -5316,7 +5322,7 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
-/obj/machinery/disposal,
+/obj/machinery/disposal/small,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "aku" = (
@@ -5382,7 +5388,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/structure/bed/sofa/r/blue{
+/obj/structure/bed/chair/comfy/beige{
 	dir = 4
 	},
 /turf/simulated/floor/wood/ebony,
@@ -6191,6 +6197,9 @@
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals6{
 	dir = 8
+	},
+/obj/structure/bed/chair/padded/yellow{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engineering_monitoring)
@@ -7813,6 +7822,10 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
+/obj/machinery/disposal/small{
+	dir = 1;
+	pixel_y = 23
+	},
 /turf/simulated/floor/lino,
 /area/bridge/meeting_room)
 "aoT" = (
@@ -7958,7 +7971,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/item/tape/engineering,
+/obj/item/taperoll/engineering/applied,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "apd" = (
@@ -9518,6 +9531,9 @@
 /obj/effect/floor_decal/borderfloor{
 	dir = 6
 	},
+/obj/item/rolled_towel/fitness,
+/obj/item/rolled_towel/fitness,
+/obj/item/rolled_towel/fitness,
 /obj/item/wrench,
 /obj/item/stack/medical/bruise_pack,
 /turf/simulated/floor/tiled,
@@ -16904,6 +16920,9 @@
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 1
 	},
+/obj/machinery/disposal/small{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/bridge/hall/level_one)
 "aER" = (
@@ -17184,6 +17203,7 @@
 	id_tag = "crusher";
 	name = "Compactor Zone"
 	},
+/obj/item/taperoll/engineering/applied,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "aFx" = (
@@ -18417,7 +18437,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood,
-/obj/machinery/disposal,
+/obj/machinery/disposal/small,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/cafe)
 "aHV" = (
@@ -25525,6 +25545,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
+/obj/structure/bed/chair/pew/down,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/sauna)
 "aVB" = (
@@ -26814,6 +26835,9 @@
 	icon_state = "0-4"
 	},
 /obj/structure/table/standard,
+/obj/item/rolled_towel/pink_stripped,
+/obj/item/rolled_towel/blue_stripped,
+/obj/item/rolled_towel,
 /obj/random/soap,
 /obj/random/soap,
 /turf/simulated/floor/tiled/freezer,
@@ -26880,6 +26904,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
+/obj/structure/bed/chair/pew/up,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/sauna)
 "aYt" = (
@@ -31943,6 +31968,9 @@
 /obj/effect/floor_decal/corner/blue/border{
 	dir = 4
 	},
+/obj/machinery/computer/modular/preset/cardslot/command{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hall/level_one)
 "bjK" = (
@@ -32958,7 +32986,7 @@
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 10
 	},
-/obj/structure/bed/sofa/l/blue{
+/obj/structure/bed/chair/comfy/beige{
 	dir = 4
 	},
 /turf/simulated/floor/wood/ebony,
@@ -33091,6 +33119,9 @@
 	},
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 4
+	},
+/obj/structure/bed/sofa/m/beige{
+	dir = 8
 	},
 /turf/simulated/floor/wood/ebony,
 /area/crew_quarters/cafe)
@@ -34436,7 +34467,9 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 2
 	},
-/obj/machinery/disposal,
+/obj/machinery/disposal/small{
+	dir = 4
+	},
 /turf/simulated/floor/wood/ebony,
 /area/crew_quarters/bar)
 "hSe" = (
@@ -34574,7 +34607,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/structure/bed/sofa/l/blue{
+/obj/structure/bed/sofa/m/beige{
 	dir = 8
 	},
 /turf/simulated/floor/wood/ebony,
@@ -35363,6 +35396,7 @@
 /area/bridge/lobby)
 "kRQ" = (
 /obj/effect/landmark/start,
+/obj/structure/towel/fitness,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/gym)
 "kUU" = (
@@ -38672,6 +38706,10 @@
 /obj/machinery/floodlight,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
+"ugI" = (
+/obj/structure/towel/fitness,
+/turf/simulated/floor/tiled,
+/area/crew_quarters/gym)
 "ujh" = (
 /turf/simulated/wall/prepainted,
 /area/janitor)
@@ -39284,6 +39322,9 @@
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 5
 	},
+/obj/structure/bed/sofa/l/beige{
+	dir = 8
+	},
 /turf/simulated/floor/wood/ebony,
 /area/crew_quarters/cafe)
 "vER" = (
@@ -39678,7 +39719,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/bed/sofa/r/blue{
+/obj/structure/bed/sofa/r/beige{
 	dir = 8
 	},
 /turf/simulated/floor/wood/ebony,
@@ -60619,11 +60660,11 @@ bbR
 bbR
 bbR
 akN
-akN
+ugI
 awl
 kRQ
 amV
-akN
+ugI
 nqe
 apg
 alg

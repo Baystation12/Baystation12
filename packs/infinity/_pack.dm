@@ -8,8 +8,13 @@
 #include "clothing\suits\suits.dm"
 #include "clothing\shoes\shoes.dm"
 
-//Music player
-#include "music_player\_music_player.dm"
-#include "music_player\_music_tape.dm"
-#include "music_player\subtypes_player.dm"
-#include "music_player\subtypes_tape.dm"
+// Items
+#include "items\music_player\_music_player.dm"
+#include "items\music_player\_music_tape.dm"
+#include "items\music_player\subtypes_player.dm"
+#include "items\music_player\subtypes_tape.dm"
+
+#include "items\towels.dm"
+
+// Structures
+#include "structures\chairs.dm"
