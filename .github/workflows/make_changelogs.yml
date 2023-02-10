@@ -32,4 +32,4 @@ jobs:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           GIT_EMAIL: "${{ secrets.BOT_EMAIL }}"
           GIT_NAME: "${{ secrets.BOT_NAME }}"
-        run: python tools/changelog/generate_cl.py
+        run: python tools/changelog/sierra_generate_cl.py
