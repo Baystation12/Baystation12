@@ -154,7 +154,7 @@ var/global/const/access_pilot = "ACCESS_TORCH_PILOT" //95
 	desc = "Executive Officer"
 
 /datum/access/qm
-	desc = "Deck Chief"
+	desc = "Supply Corps Officer"
 
 var/global/const/access_torch_fax = "ACCESS_TORCH_FAX"
 /datum/access/torch_fax

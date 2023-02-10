@@ -77,14 +77,14 @@
 	item_state = "com_headset_alt"
 
 /obj/item/device/radio/headset/headset_deckofficer
-	name = "deck chief's radio headset"
+	name = "supply corps officer's radio headset"
 	desc = "The headset of the chief box pusher."
 	icon_state = "cargo_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_deckofficer
 
 /obj/item/device/radio/headset/headset_deckofficer/alt
-	name = "deck chief's bowman headset"
+	name = "supply corps officer's bowman headset"
 	item_state = "cargo_headset_alt"
 	icon_state = "cargo_headset_alt"
 	max_keys = 3
@@ -151,10 +151,10 @@
 	item_state = "exp_headset_alt"
 
 /obj/item/device/radio/headset/headset_cargo
-	desc = "A headset used by the Deck Chief and his slaves."
+	desc = "A headset used by the Supply corps officer and his slaves."
 
 /obj/item/device/radio/headset/headset_cargo/alt
-	desc = "A bowman headset used by the Deck Chief and his slaves."
+	desc = "A bowman headset used by the Supply corps officer and his slaves."
 
 /obj/item/device/radio/headset/headset_corpsman
 	name = "medical headset"

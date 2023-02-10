@@ -46,8 +46,6 @@
 		/obj/item/taperoll/police,
 		//rubay code,
 		/obj/item/storage/firstaid/individual/military,
-		/obj/item/cell/guncell/medium,
-		/obj/item/cell/guncell/medium,
 		//rubay code end,
 		/obj/item/device/hailer,
 		/obj/item/clothing/accessory/storage/black_vest,
@@ -57,7 +55,7 @@
 		/obj/item/storage/belt/security,
 		/obj/item/material/knife/folding/swiss/sec,
 		/obj/item/storage/backpack/dufflebag/sec,
-		/obj/item/gun/energy/gun/small/secure
+		new /datum/atom_creator/weighted(list(/obj/item/gun/energy/gun/small/secure, /obj/item/gun/energy/gun/small/secure, /obj/item/gun/energy/k342/pistol)),
 	)
 
 

@@ -1,8 +1,3 @@
-#define BATTERY_PISTOL 1
-#define BATTERY_RIFLE 2
-#define BATTERY_VOX 3
-#define BATTERY_ALIEN 4
-
 /obj/item/cell/guncell
 	w_class = ITEM_SIZE_SMALL
 	name = "small battery"
@@ -79,6 +74,7 @@
 	maxcharge = 400
 	autorecharging = TRUE
 	battery_chamber_size = BATTERY_ALIEN
+	origin_tech = list(TECH_COMBAT=7, TECH_MATERIAL=5, TECH_POWER=8) //loot only
 	icon_state = "a_0"
 	overlay = "a"
 
@@ -102,6 +98,7 @@
 	maxcharge = 400
 	battery_chamber_size = BATTERY_VOX
 	autorecharging = TRUE
+	origin_tech = list(TECH_COMBAT=7, TECH_MATERIAL=5, TECH_POWER=8) //loot only
 	icon_state = "v_0"
 	overlay = "v"
 
@@ -124,6 +121,7 @@
 	universal = TRUE
 	autorecharging = TRUE
 	emp_vulnerable = TRUE
+	origin_tech = list(TECH_COMBAT=7, TECH_MATERIAL=5, TECH_POWER=8)
 	icon_state = "bs_0"
 	overlay = "a"
 
@@ -134,6 +132,7 @@
 /obj/item/cell/guncell/verysmall
 	name = "very-small weapon battery"
 	desc = "A small battery for energy guns."
+	origin_tech = list(TECH_POWER = 1, TECH_MATERIAL = 1, TECH_COMBAT = 1)
 	charge = 100 // base 5 shots
 	maxcharge = 100
 	icon_state = "b_0"
@@ -141,6 +140,7 @@
 /obj/item/cell/guncell/small
 	name = "small weapon battery"
 	desc = "A small battery for energy guns."
+	origin_tech = list(TECH_POWER = 2, TECH_MATERIAL = 2, TECH_COMBAT = 2)
 	charge = 200 // base 10 shots
 	maxcharge = 200
 	icon_state = "b_1"
@@ -148,6 +148,7 @@
 /obj/item/cell/guncell/medium
 	name = "medium weapon battery"
 	desc = "A medium battery for energy guns."
+	origin_tech = list(TECH_POWER = 3, TECH_MATERIAL = 3, TECH_COMBAT = 3)
 	charge = 300 // base 15 shots
 	maxcharge = 300
 	icon_state = "b_2"
@@ -155,6 +156,7 @@
 /obj/item/cell/guncell/large
 	name = "large weapon battery"
 	desc = "A large battery for energy gun."
+	origin_tech = list(TECH_POWER = 4, TECH_MATERIAL = 4, TECH_COMBAT = 4)
 	charge = 400 // base 20 shots
 	maxcharge = 400
 	icon_state = "b_3"
@@ -162,6 +164,7 @@
 /obj/item/cell/guncell/megalarge
 	name = "very-large weapon battery"
 	desc = "A very large battery for energy guns. Do not expose to EMP."
+	origin_tech = list(TECH_POWER = 5, TECH_MATERIAL = 5, TECH_COMBAT = 5)
 	charge = 500 // base 25 shots
 	maxcharge = 500
 	icon_state = "b_4"
@@ -170,6 +173,7 @@
 /obj/item/cell/guncell/huge
 	name = "huge weapon battery"
 	desc = "A very large battery for energy guns. Do not expose to EMP."
+	origin_tech = list(TECH_POWER = 6, TECH_MATERIAL = 6, TECH_COMBAT = 6)
 	charge = 600 // base 25 shots
 	maxcharge = 600
 	icon_state = "b_5"
@@ -182,6 +186,7 @@
 /obj/item/cell/guncell/overcharged/verysmall
 	name = "hypercharged very-small weapon battery"
 	desc = "A small battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
+	origin_tech = list(TECH_POWER = 1, TECH_MATERIAL = 1, TECH_COMBAT = 2)
 	charge = 200 // base 10 shots
 	maxcharge = 200
 	icon_state = "b_0"
@@ -189,6 +194,7 @@
 /obj/item/cell/guncell/overcharged/small
 	name = "hypercharged small weapon battery"
 	desc = "A small battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
+	origin_tech = list(TECH_POWER = 2, TECH_MATERIAL = 2, TECH_COMBAT = 3)
 	charge = 300 // base 15 shots
 	maxcharge = 300
 	icon_state = "b_1"
@@ -196,6 +202,7 @@
 /obj/item/cell/guncell/overcharged/medium
 	name = "hypercharged medium weapon battery"
 	desc = "A medium battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
+	origin_tech = list(TECH_POWER = 3, TECH_MATERIAL = 3, TECH_COMBAT = 4)
 	charge = 400 // base 20 shots
 	maxcharge = 400
 	icon_state = "b_2"
@@ -203,6 +210,7 @@
 /obj/item/cell/guncell/overcharged/large
 	name = "hypercharged large weapon battery"
 	desc = "A large battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
+	origin_tech = list(TECH_POWER = 4, TECH_MATERIAL = 4, TECH_COMBAT = 5)
 	charge = 500 // base 25 shots
 	maxcharge = 500
 	icon_state = "b_3"
@@ -211,6 +219,7 @@
 /obj/item/cell/guncell/overcharged/megalarge
 	name = "hypercharged very-large weapon battery"
 	desc = "A very large battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
+	origin_tech = list(TECH_POWER = 5, TECH_MATERIAL = 5, TECH_COMBAT = 6)
 	charge = 700 // base 35 shots
 	maxcharge = 700
 	icon_state = "b_4"
@@ -219,6 +228,7 @@
 /obj/item/cell/guncell/overcharged/huge
 	name = "hypercharged huge weapon battery"
 	desc = "A huge battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
+	origin_tech = list(TECH_POWER = 6, TECH_MATERIAL = 6, TECH_COMBAT = 7)
 	charge = 800 // base 40 shots
 	maxcharge = 800
 	icon_state = "b_5"
@@ -231,6 +241,7 @@
 /obj/item/cell/guncell/pistol/verysmall
 	name = "very-small pistol weapon battery"
 	desc = "A small battery for energy guns."
+	origin_tech = list(TECH_POWER = 1, TECH_MATERIAL = 1, TECH_COMBAT = 1)
 	charge = 100 // base 5 shots
 	maxcharge = 100
 	icon_state = "p_0"
@@ -238,6 +249,7 @@
 /obj/item/cell/guncell/pistol/small
 	name = "small pistol weapon battery"
 	desc = "A small battery for energy guns."
+	origin_tech = list(TECH_POWER = 2, TECH_MATERIAL = 2, TECH_COMBAT = 2)
 	charge = 200 // base 10 shots
 	maxcharge = 200
 	icon_state = "p_1"
@@ -245,6 +257,7 @@
 /obj/item/cell/guncell/pistol/medium
 	name = "medium pistol weapon battery"
 	desc = "A medium battery for energy guns."
+	origin_tech = list(TECH_POWER = 3, TECH_MATERIAL = 3, TECH_COMBAT = 3)
 	charge = 300 // base 15 shots
 	maxcharge = 300
 	icon_state = "p_2"
@@ -252,6 +265,7 @@
 /obj/item/cell/guncell/pistol/large
 	name = "large pistol weapon battery"
 	desc = "A large battery for energy guns."
+	origin_tech = list(TECH_POWER = 4, TECH_MATERIAL = 4, TECH_COMBAT = 4)
 	charge = 400 // base 20 shots
 	maxcharge = 400
 	icon_state = "p_3"
@@ -259,6 +273,7 @@
 /obj/item/cell/guncell/pistol/megalarge
 	name = "very-large pistol weapon battery"
 	desc = "A very large battery for energy guns. Do not expose to EMP"
+	origin_tech = list(TECH_POWER = 5, TECH_MATERIAL = 5, TECH_COMBAT = 5)
 	charge = 500 // base 25 shots
 	maxcharge = 500
 	icon_state = "p_4"
@@ -267,6 +282,7 @@
 /obj/item/cell/guncell/pistol/huge
 	name = "huge pistol weapon battery"
 	desc = "A huge battery for energy guns. Do not expose to EMP."
+	origin_tech = list(TECH_POWER = 6, TECH_MATERIAL = 6, TECH_COMBAT = 6)
 	charge = 600 // base 30 shots
 	maxcharge = 600
 	icon_state = "p_5"
@@ -279,6 +295,7 @@
 /obj/item/cell/guncell/pistol/overcharged/verysmall
 	name = "hypercharged very-small weapon battery"
 	desc = "A small battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
+	origin_tech = list(TECH_POWER = 1, TECH_MATERIAL = 1, TECH_COMBAT = 2)
 	charge = 200 // base 10 shots
 	maxcharge = 200
 	icon_state = "p_0"
@@ -286,6 +303,7 @@
 /obj/item/cell/guncell/pistol/overcharged/small
 	name = "hypercharged small weapon battery"
 	desc = "A small battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
+	origin_tech = list(TECH_POWER = 2, TECH_MATERIAL = 2, TECH_COMBAT = 3)
 	charge = 300 // base 15 shots
 	maxcharge = 300
 	icon_state = "p_1"
@@ -293,6 +311,7 @@
 /obj/item/cell/guncell/pistol/overcharged/medium
 	name = "hypercharged medium weapon battery"
 	desc = "A medium battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
+	origin_tech = list(TECH_POWER = 3, TECH_MATERIAL = 3, TECH_COMBAT = 4)
 	charge = 400 // base 20 shots
 	maxcharge = 400
 	icon_state = "p_2"
@@ -300,6 +319,7 @@
 /obj/item/cell/guncell/pistol/overcharged/large
 	name = "hypercharged large weapon battery"
 	desc = "A large battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP."
+	origin_tech = list(TECH_POWER = 4, TECH_MATERIAL = 4, TECH_COMBAT = 5)
 	charge = 500 // base 25 shots
 	maxcharge = 500
 	icon_state = "p_3"
@@ -308,6 +328,7 @@
 /obj/item/cell/guncell/pistol/overcharged/megalarge
 	name = "hypercharged very-large weapon battery"
 	desc = "A very large battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP"
+	origin_tech = list(TECH_POWER = 5, TECH_MATERIAL = 5, TECH_COMBAT = 6)
 	charge = 700 // base 35 shots
 	maxcharge = 700
 	icon_state = "p_4"
@@ -316,6 +337,7 @@
 /obj/item/cell/guncell/pistol/overcharged/huge
 	name = "hypercharged huge weapon battery"
 	desc = "A huge battery for energy guns. This one can be rapidly discharged for a violent explosion. Do not expose to EMP"
+	origin_tech = list(TECH_POWER = 6, TECH_MATERIAL = 6, TECH_COMBAT = 7)
 	charge = 800 // base 40 shots
 	maxcharge = 800
 	icon_state = "p_5"

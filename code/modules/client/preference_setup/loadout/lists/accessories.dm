@@ -47,7 +47,7 @@
 	display_name = "expeditionary officer's fleece jacket"
 	path = /obj/item/clothing/accessory/ec_sweater/officer
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
-	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer)
+	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/qm, /datum/job/pathfinder)
 
 /datum/gear/accessory/ec_sweater/fleet
 	display_name = "fleet sweater"

@@ -1,3 +1,8 @@
+#define BATTERY_PISTOL 1
+#define BATTERY_RIFLE 2
+#define BATTERY_VOX 3
+#define BATTERY_ALIEN 4
+
 /obj/item/gun/energy
 	name = "energy gun"
 	desc = "A basic energy-based gun."
