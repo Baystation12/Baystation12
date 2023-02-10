@@ -12,6 +12,7 @@
 	var/floor_type = /turf/simulated/floor/tiled/dark
 	var/door_type =  /obj/machinery/door/airlock/lift
 	var/firedoor_type = /obj/machinery/door/firedoor
+	var/light_type =    /obj/machinery/light
 
 	var/list/areas_to_use = list()
 
@@ -201,18 +202,6 @@
 		panel_ext.set_dir(udir)
 		cfloor.ext_panel = panel_ext
 
-		// Place lights
-		var/turf/placing1 = locate(light_x1, light_y1, cz)
-		var/turf/placing2 = locate(light_x2, light_y2, cz)
-		var/obj/machinery/light/light1 = new(placing1, light)
-		var/obj/machinery/light/light2 = new(placing2, light)
-		if(udir == NORTH || udir == SOUTH)
-			light1.set_dir(WEST)
-			light2.set_dir(EAST)
-		else
-			light1.set_dir(SOUTH)
-			light2.set_dir(NORTH)
-
 		// Update area.
 		if(az > length(areas_to_use))
 			log_debug("Insufficient defined areas in turbolift datum, aborting.")
@@ -225,6 +214,19 @@
 	lift.control_panel_interior = new(T, lift)
 	lift.control_panel_interior.set_dir(udir)
 	lift.current_floor = lift.floors[1]
+
+	// Place interior lights
+	if(light_type)
+		var/turf/placing1 = locate(light_x1, light_y1, uz)
+		var/turf/placing2 = locate(light_x2, light_y2, uz)
+		var/obj/machinery/light/light1 = new light_type(placing1, light)
+		var/obj/machinery/light/light2 = new light_type(placing2, light)
+		if(udir == NORTH || udir == SOUTH)
+			light1.set_dir(WEST)
+			light2.set_dir(EAST)
+		else
+			light1.set_dir(SOUTH)
+			light2.set_dir(NORTH)
 
 	lift.open_doors()
 
