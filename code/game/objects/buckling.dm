@@ -176,7 +176,7 @@
  * Returns boolean. Whether or not the buckling was successful.
  */
 /obj/proc/AttemptBuckle(mob/living/target, mob/living/user, silent = FALSE)
-	if (target == user || user.a_intent == I_HELP)
+	if (target == user || target.a_intent == I_HELP)
 		return user_buckle_mob(target, user, silent)
 	if (!can_buckle(target, user, silent))
 		return FALSE
@@ -197,7 +197,7 @@
  * Returns boolean. Whether or not the buckling was successful.
  */
 /obj/proc/AttemptUnbuckle(mob/living/user, silent = FALSE)
-	if (buckled_mob == user || user.a_intent == I_HELP)
+	if (buckled_mob && (buckled_mob == user || buckled_mob.a_intent == I_HELP))
 		return user_unbuckle_mob(user, silent)
 	if (!can_unbuckle(user, silent))
 		return FALSE
