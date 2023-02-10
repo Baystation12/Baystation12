@@ -139,7 +139,9 @@ var/global/list/map_count = list()
 	if(check_map_sanity())
 		cleanup()
 		if(auto_apply)
+			Master.StartLoadingMap()
 			apply_to_map()
+			Master.StopLoadingMap()
 		return 1
 	return 0
 
