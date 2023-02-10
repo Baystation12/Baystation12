@@ -5388,7 +5388,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/structure/bed/sofa/r/blue{
+/obj/structure/bed/chair/comfy/beige{
 	dir = 4
 	},
 /turf/simulated/floor/wood/ebony,
@@ -32971,7 +32971,7 @@
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 10
 	},
-/obj/structure/bed/sofa/l/blue{
+/obj/structure/bed/chair/comfy/beige{
 	dir = 4
 	},
 /turf/simulated/floor/wood/ebony,
@@ -33104,6 +33104,9 @@
 	},
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 4
+	},
+/obj/structure/bed/sofa/m/beige{
+	dir = 8
 	},
 /turf/simulated/floor/wood/ebony,
 /area/crew_quarters/cafe)
@@ -34587,7 +34590,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/structure/bed/sofa/l/blue{
+/obj/structure/bed/sofa/m/beige{
 	dir = 8
 	},
 /turf/simulated/floor/wood/ebony,
@@ -39297,6 +39300,9 @@
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 5
 	},
+/obj/structure/bed/sofa/l/beige{
+	dir = 8
+	},
 /turf/simulated/floor/wood/ebony,
 /area/crew_quarters/cafe)
 "vER" = (
@@ -39691,7 +39697,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/bed/sofa/r/blue{
+/obj/structure/bed/sofa/r/beige{
 	dir = 8
 	},
 /turf/simulated/floor/wood/ebony,
