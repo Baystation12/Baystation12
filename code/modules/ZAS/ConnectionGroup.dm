@@ -96,28 +96,31 @@ Class Procs:
 
 /connection_edge/proc/flow(list/movable, differential, repelled)
 	for(var/i = 1; i <= length(movable); i++)
-		var/atom/movable/M = movable[i]
+		var/atom/movable/AM = movable[i]
 
 		//If they're already being tossed, don't do it again.
-		if(M.last_airflow > world.time - vsc.airflow_delay) continue
-		if(M.airflow_speed) continue
+		if(AM.last_airflow > world.time - vsc.airflow_delay) continue
+		if(AM.airflow_speed) continue
 
 		//Check for knocking people over
-		if(ismob(M) && differential > vsc.airflow_stun_pressure)
-			if(M:status_flags & GODMODE) continue
-			M:airflow_stun()
+		if(ismob(AM) && differential > vsc.airflow_stun_pressure)
+			var/mob/M = AM
+			invoke_async(M, /mob/proc/playsound_local, null, 'sound/effects/airflow.ogg', 100, FALSE)
+			if(M.status_flags & GODMODE)
+				continue
+			M.airflow_stun()
 
-		if(M.check_airflow_movable(differential))
+		if(AM.check_airflow_movable(differential))
 			//Check for things that are in range of the midpoint turfs.
 			var/list/close_turfs = list()
 			for(var/turf/U in connecting_turfs)
-				if(get_dist(M,U) < world.view) close_turfs += U
+				if(get_dist(AM,U) < world.view) close_turfs += U
 			if(!length(close_turfs)) continue
 
-			M.airflow_dest = pick(close_turfs) //Pick a random midpoint to fly towards.
+			AM.airflow_dest = pick(close_turfs) //Pick a random midpoint to fly towards.
 
-			if(repelled) spawn if(M) M.RepelAirflowDest(differential/5)
-			else spawn if(M) M.GotoAirflowDest(differential/10)
+			if(repelled) spawn if(AM) AM.RepelAirflowDest(differential/5)
+			else spawn if(AM) AM.GotoAirflowDest(differential/10)
 
 
 
