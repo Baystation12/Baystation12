@@ -6,7 +6,7 @@
 	name = "IC Say"
 	full_name = "IC Say"
 
-/datum/keybinding/client/communication/me/down(client/user)
+/datum/keybinding/client/communication/say/down(client/user)
 	user.mob.say_wrapper()
 	return TRUE
 
