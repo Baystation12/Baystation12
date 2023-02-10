@@ -2190,7 +2190,8 @@
 	id_tag = "escape_pod_7";
 	name = "escape pod seven controller";
 	pixel_x = -20;
-	tag_door = "escape_pod_7_hatch"
+	tag_door = "escape_pod_7_hatch";
+	frequency = 1380
 	},
 /obj/structure/bed/chair/shuttle{
 	dir = 1
@@ -2207,7 +2208,8 @@
 	id_tag = "escape_pod_8";
 	name = "escape pod eight controller";
 	pixel_x = -20;
-	tag_door = "escape_pod_8_hatch"
+	tag_door = "escape_pod_8_hatch";
+	frequency = 1380
 	},
 /obj/structure/bed/chair/shuttle{
 	dir = 1
@@ -2224,7 +2226,8 @@
 	id_tag = "escape_pod_9";
 	name = "escape pod nine controller";
 	pixel_x = -20;
-	tag_door = "escape_pod_9_hatch"
+	tag_door = "escape_pod_9_hatch";
+	frequency = 1380
 	},
 /obj/structure/bed/chair/shuttle{
 	dir = 1
@@ -3835,7 +3838,8 @@
 	name = "escape pod seven berth controller";
 	pixel_x = -32;
 	pixel_y = 21;
-	tag_door = "escape_pod_7_berth_hatch"
+	tag_door = "escape_pod_7_berth_hatch";
+	frequency = 1380
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
@@ -3894,7 +3898,8 @@
 	name = "escape pod eight berth controller";
 	pixel_x = -32;
 	pixel_y = 21;
-	tag_door = "escape_pod_8_berth_hatch"
+	tag_door = "escape_pod_8_berth_hatch";
+	frequency = 1380
 	},
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -3933,7 +3938,8 @@
 	name = "escape pod nine berth controller";
 	pixel_x = -32;
 	pixel_y = 21;
-	tag_door = "escape_pod_9_berth_hatch"
+	tag_door = "escape_pod_9_berth_hatch";
+	frequency = 1380
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
@@ -30601,7 +30607,8 @@
 	id_tag = "escape_pod_5_berth";
 	name = "escape pod five berth controller";
 	pixel_x = -20;
-	tag_door = "escape_pod_5_berth_hatch"
+	tag_door = "escape_pod_5_berth_hatch";
+	frequency = 1380
 	},
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/borderfloor/corner{
@@ -32477,7 +32484,8 @@
 	pixel_x = -32;
 	pixel_y = 21;
 	req_access = list("ACCESS_SECURITY");
-	tag_door = "escape_pod_5_hatch"
+	tag_door = "escape_pod_5_hatch";
+	frequency = 1380
 	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 9
