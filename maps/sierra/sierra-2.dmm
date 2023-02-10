@@ -9531,6 +9531,9 @@
 /obj/effect/floor_decal/borderfloor{
 	dir = 6
 	},
+/obj/item/rolled_towel/fitness,
+/obj/item/rolled_towel/fitness,
+/obj/item/rolled_towel/fitness,
 /obj/item/wrench,
 /obj/item/stack/medical/bruise_pack,
 /turf/simulated/floor/tiled,
@@ -26832,6 +26835,9 @@
 	icon_state = "0-4"
 	},
 /obj/structure/table/standard,
+/obj/item/rolled_towel/pink_stripped,
+/obj/item/rolled_towel/blue_stripped,
+/obj/item/rolled_towel,
 /obj/random/soap,
 /obj/random/soap,
 /turf/simulated/floor/tiled/freezer,
@@ -35390,6 +35396,7 @@
 /area/bridge/lobby)
 "kRQ" = (
 /obj/effect/landmark/start,
+/obj/structure/towel/fitness,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/gym)
 "kUU" = (
@@ -38699,6 +38706,10 @@
 /obj/machinery/floodlight,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
+"ugI" = (
+/obj/structure/towel/fitness,
+/turf/simulated/floor/tiled,
+/area/crew_quarters/gym)
 "ujh" = (
 /turf/simulated/wall/prepainted,
 /area/janitor)
@@ -60649,11 +60660,11 @@ bbR
 bbR
 bbR
 akN
-akN
+ugI
 awl
 kRQ
 amV
-akN
+ugI
 nqe
 apg
 alg

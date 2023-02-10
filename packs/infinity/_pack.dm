@@ -14,5 +14,7 @@
 #include "music_player\subtypes_player.dm"
 #include "music_player\subtypes_tape.dm"
 
+#include "items\towels.dm"
+
 // Structures
 #include "structures\chairs.dm"
