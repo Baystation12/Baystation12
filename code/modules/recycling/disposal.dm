@@ -32,6 +32,12 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	atom_flags = ATOM_FLAG_CLIMBABLE
 	var/turn = DISPOSAL_FLIP_NONE
 	throwpass = TRUE
+	var/landchance = 75 // Chance to hit with thrown object
+
+/obj/machinery/disposal/small
+	icon = 'icons/obj/pipes/disposal_small.dmi'
+	density = FALSE
+	landchance = 20
 
 // create a new disposal
 // find the attached trunk (if present) and init gas resvr.
@@ -484,7 +490,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		var/obj/item/I = mover
 		if(istype(I, /obj/item/projectile))
 			return
-		if(prob(75))
+		if(prob(landchance))
 			I.forceMove(src)
 			visible_message("\The [I] lands in \the [src].")
 		else
