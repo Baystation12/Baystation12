@@ -13,3 +13,6 @@
 #include "music_player\_music_tape.dm"
 #include "music_player\subtypes_player.dm"
 #include "music_player\subtypes_tape.dm"
+
+// Structures
+#include "structures\chairs.dm"

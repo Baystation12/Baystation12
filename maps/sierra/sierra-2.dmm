@@ -25542,6 +25542,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
+/obj/structure/bed/chair/pew/down,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/sauna)
 "aVB" = (
@@ -26897,6 +26898,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
+/obj/structure/bed/chair/pew/up,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/sauna)
 "aYt" = (
