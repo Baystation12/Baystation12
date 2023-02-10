@@ -75,6 +75,9 @@ PROCESSING_SUBSYSTEM_DEF(nano)
   */
 /datum/controller/subsystem/processing/nano/proc/close_uis(src_object)
 	. = 0
+	if (!length(open_uis))
+		return
+
 	var/src_object_key = "\ref[src_object]"
 	if (!open_uis[src_object_key])
 		return
