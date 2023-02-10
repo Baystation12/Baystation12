@@ -100,6 +100,10 @@
 		amount = round(clamp(amount, 0, src.worth))
 		if (amount==0) return 0
 
+		if(!locate(src) in view(1, usr)) //BoS. Add this to fox money dupes
+			to_chat(usr, SPAN_WARNING("You must hold money in hands to divide them!"))
+			return 0
+
 		src.worth -= amount
 		src.update_icon()
 		if (amount in list(1000,500,200,100,50,20,1))

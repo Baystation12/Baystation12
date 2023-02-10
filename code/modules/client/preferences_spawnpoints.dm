@@ -59,7 +59,7 @@ GLOBAL_VAR(spawntypes)
 
 /datum/spawnpoint/cryo
 	display_name = "Cryogenic Storage"
-	msg = "завершено криогенное пробуждения"
+	msg = "завершено криогенное пробуждение"
 	disallow_job = list("Robot")
 
 /datum/spawnpoint/cryo/New()

@@ -38,6 +38,7 @@
 	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC, SPECIES_SHELL) //no available icons for aliens
 
 /obj/item/clothing/suit/space/rig/command
+	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit, /obj/item/gun/energy,/obj/item/device/radio,/obj/item/reagent_containers/spray/pepper,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/handcuffs,/obj/item/gun/magnetic)
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC, SPECIES_SHELL)
@@ -358,7 +359,8 @@
 		/obj/item/rig_module/device/flash,
 		/obj/item/rig_module/device/anomaly_scanner,
 		/obj/item/rig_module/grenade_launcher/light,
-		/obj/item/rig_module/cooling_unit
+		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/chem_dispenser/lite
 	)
 
 /obj/item/rig/hazard/research_guard

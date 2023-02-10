@@ -697,7 +697,7 @@
 	)
 
 /decl/closet_appearance/wall/gun
-	color = COLOR_BLACK
+	color = COLOR_GRAY20
 	extra_decals = list(
 		"stripes" = COLOR_NT_RED
 	)
