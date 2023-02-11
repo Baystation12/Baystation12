@@ -12890,6 +12890,10 @@
 	pixel_x = 32
 	},
 /obj/item/modular_computer/tablet/lease/preset/command,
+/obj/machinery/computer/modular/preset/cardslot/command_sec{
+	dir = 8;
+	icon_state = "console"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "Mq" = (
