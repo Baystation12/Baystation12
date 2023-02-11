@@ -94,12 +94,11 @@
 	turf_flags = TURF_DISALLOW_BLOB
 	var/list/victims
 
+	ambient_light = COLOR_ORANGE
+	ambient_light_multiplier = 1
+
 /turf/simulated/floor/exoplanet/lava/on_update_icon()
 	return
-
-/turf/simulated/floor/exoplanet/lava/Initialize()
-	. = ..()
-	set_light(0.95, 0.5, 2, l_color = COLOR_ORANGE)
 
 /turf/simulated/floor/exoplanet/lava/Destroy()
 	STOP_PROCESSING(SSobj, src)

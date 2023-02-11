@@ -274,9 +274,8 @@
 
 
 	var/on = 0
-	var/l_max_bright = 0.9
-	var/l_inner_range = 1
-	var/l_outer_range = 6
+	var/l_power = 0.9
+	var/l_range = 6
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 
 /obj/item/mech_equipment/light/installed(mob/living/exosuit/_owner)
@@ -304,7 +303,7 @@
 /obj/item/mech_equipment/light/on_update_icon()
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
-		set_light(l_max_bright, l_inner_range, l_outer_range)
+		set_light(l_range, l_power, angle = LIGHT_WIDE)
 	else
 		icon_state = "[initial(icon_state)]"
 		set_light(0, 0)
@@ -793,7 +792,7 @@
 	. = ..()
 	if (active)
 		icon_state = "mech_jet_on"
-		set_light(1, 1, 1, l_color = COLOR_LIGHT_CYAN)
+		set_light(1, 1, l_color = COLOR_LIGHT_CYAN)
 	else
 		icon_state = "mech_jet_off"
 		set_light(0)

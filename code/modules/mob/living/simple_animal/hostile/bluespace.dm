@@ -16,8 +16,8 @@
 	say_list = /datum/say_list/bluespace
 	natural_weapon = /obj/item/natural_weapon/bluespace
 	light_color = "#4da6ff"
-	light_outer_range = 2
-	light_max_bright = 1
+	light_range = 2
+	light_power = 1
 	bleed_colour = "#0000ff"
 
 /mob/living/simple_animal/hostile/bluespace/Process_Spacemove()

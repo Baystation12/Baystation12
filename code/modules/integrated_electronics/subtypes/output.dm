@@ -83,7 +83,7 @@
 /obj/item/integrated_circuit/output/light/proc/update_lighting()
 	if(light_toggled)
 		if(assembly)
-			assembly.set_light(light_brightness, 1, 4, 2, light_rgb)
+			assembly.set_light(4, light_brightness, light_rgb)
 	else
 		if(assembly)
 			assembly.set_light(0)

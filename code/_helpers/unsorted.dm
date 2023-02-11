@@ -1062,7 +1062,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 /atom/proc/get_light_and_color(atom/origin)
 	if(origin)
 		color = origin.color
-		set_light(origin.light_max_bright, origin.light_inner_range, origin.light_outer_range, origin.light_falloff_curve)
+		set_light(origin.light_range, origin.light_power)
 
 
 // call to generate a stack trace and print to runtime logs

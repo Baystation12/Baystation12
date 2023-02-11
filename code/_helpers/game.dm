@@ -262,7 +262,8 @@
 
 /proc/get_mobs_and_objs_in_view_fast(turf/T, range, list/mobs, list/objs, checkghosts = null)
 
-	var/list/hear = dview(range,T,INVISIBILITY_MAXIMUM)
+	var/list/hear = list()
+	DVIEW(hear, range, T, INVISIBILITY_MAXIMUM)
 	var/list/hearturfs = list()
 
 	for(var/atom/movable/AM in hear)

@@ -56,10 +56,16 @@
 /turf/space/proc/update_starlight()
 	if(!config.starlight)
 		return
-	if(locate(/turf/simulated) in orange(src,1)) //Let's make sure not to break everything if people use a crazy setting.
-		set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.background_color)
-	else
-		set_light(0)
+
+	for (var/turf/T in RANGE_TURFS(src, 1))
+		if (!isloc(T.loc) || !TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+			continue
+
+		set_ambient_light(SSskybox.background_color, 0.5)
+		return
+
+	if(TURF_IS_AMBIENT_LIT_UNSAFE(src))
+		clear_ambient_light()
 
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)
 

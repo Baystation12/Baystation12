@@ -261,7 +261,7 @@
 	anchored = TRUE
 	density = TRUE
 	unacidable = TRUE
-	light_outer_range = 3
+	light_range = 3
 	var/needs_power = 0
 	var/active = 1
 	var/delay = 5

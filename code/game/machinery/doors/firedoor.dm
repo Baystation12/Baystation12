@@ -521,7 +521,7 @@
 		weld_overlay = welded_file
 
 	if(do_set_light)
-		set_light(0.25, 0.1, 1, 2, COLOR_SUN)
+		set_light(2, 0.25, COLOR_SUN)
 
 	AddOverlays(panel_overlay)
 	AddOverlays(weld_overlay)

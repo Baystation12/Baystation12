@@ -44,7 +44,7 @@
 	name = "glowing goo"
 	desc = "Jeez. I hope that's not for lunch."
 	gender = PLURAL
-	light_outer_range = 1
+	light_range = 1
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "greenglow"
 	persistent = TRUE

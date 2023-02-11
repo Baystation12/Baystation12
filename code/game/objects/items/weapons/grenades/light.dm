@@ -12,5 +12,5 @@
 
 	playsound(src, 'sound/effects/snap.ogg', 80, 1)
 	audible_message(SPAN_WARNING("\The [src] detonates with a sharp crack!"))
-	set_light(1, 1, 12, 2, light_colour)
+	set_light(12, 1, light_colour)
 	QDEL_IN(src, lifetime)

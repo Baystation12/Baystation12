@@ -38,7 +38,7 @@
 		I.layer = ABOVE_LIGHTING_LAYER
 		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		AddOverlays(I)
-		set_light(0.3, 0.1, 2, l_color = I.color)
+		set_light(2, 0.3, l_color = I.color)
 
 	var/turf/simulated/floor/exoplanet/T = get_turf(src)
 	if(istype(T))

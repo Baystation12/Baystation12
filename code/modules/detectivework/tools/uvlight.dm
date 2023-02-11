@@ -21,7 +21,7 @@
 /obj/item/device/uv_light/attack_self(mob/user)
 	on = !on
 	if(on)
-		set_light(0.5, 0.1, range, 2, "#007fff")
+		set_light(range, 0.5, "#007fff")
 		START_PROCESSING(SSobj, src)
 		icon_state = "uv_on"
 	else

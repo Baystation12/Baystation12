@@ -217,8 +217,13 @@
 			updateVisibility(src)
 
 		// lighting
-		if (light_sources)	// Yes, I know you can for-null safely, but this is slightly faster. Hell knows why.
-			for (var/datum/light_source/L in light_sources)
+		if (light_source_solo)
+			light_source_solo.source_atom.update_light()
+		else if (light_source_multi)
+			var/datum/light_source/L
+			var/thing
+			for (thing in light_source_multi)
+				L = thing
 				L.source_atom.update_light()
 
 /atom/movable/Move(...)
@@ -233,8 +238,13 @@
 			updateVisibility(src)
 
 		// lighting
-		if (light_sources)	// Yes, I know you can for-null safely, this is slightly faster. Hell knows why.
-			for (var/datum/light_source/L in light_sources)
+		if (light_source_solo)
+			light_source_solo.source_atom.update_light()
+		else if (light_source_multi)
+			var/datum/light_source/L
+			var/thing
+			for (thing in light_source_multi)
+				L = thing
 				L.source_atom.update_light()
 
 //called when src is thrown into hit_atom

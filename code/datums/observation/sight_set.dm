@@ -18,8 +18,15 @@ GLOBAL_DATUM_INIT(sight_set_event, /singleton/observ/sight_set, new)
 * Sight Set Handling *
 *********************/
 
+/mob
+	var/see_black = FALSE
+
 /mob/proc/set_sight(new_sight)
 	var/old_sight = sight
+	if(see_black)
+		new_sight |= SEE_BLACKNESS // Avoids pixel bleed from atoms overlapping completely dark turfs, but conflicts with other flags.
+	else
+		new_sight &= ~SEE_BLACKNESS
 	if(old_sight != new_sight)
 		sight = new_sight
 		GLOB.sight_set_event.raise_event(src, old_sight, new_sight)

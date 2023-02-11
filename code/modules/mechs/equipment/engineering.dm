@@ -73,7 +73,7 @@
 
 /obj/effect/mech_shield/Initialize()
 	. = ..()
-	set_light(0.8, 0.1, 1, 2, COLOR_SABER_BLUE)
+	set_light(1, 0.8, COLOR_SABER_BLUE)
 	update_nearby_tiles(need_rebuild=1)
 
 /obj/effect/mech_shield/Destroy()

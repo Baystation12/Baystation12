@@ -1,0 +1,53 @@
+SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient lights of away sites and such places
+	name = "Ambient Lighting"
+	wait = 1
+	priority = SS_PRIORITY_LIGHTING
+	init_order = SS_INIT_LIGHTING
+	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
+
+	var/list/queued = list()
+
+// /datum/controller/subsystem/ambient_lighting/stat_entry()
+// 	return ..() + " Queue:[length(queued)]"
+
+/datum/controller/subsystem/ambient_lighting/Initialize(start_timeofday)
+	fire(FALSE, TRUE)
+	return ..()
+
+/datum/controller/subsystem/ambient_lighting/fire(resumed = FALSE, no_mc_tick = FALSE)
+	var/list/curr = queued
+	var/starlight_enabled = config.starlight
+
+	var/needs_ambience
+	while (curr.len)
+		var/turf/target = curr[curr.len]
+		curr.len -= 1
+
+		var/area/AO = target.loc
+		if(AO && (AO.area_flags & AREA_FLAG_EXTERNAL))
+			needs_ambience = TURF_IS_DYNAMICALLY_LIT_UNSAFE(target)
+			if (!needs_ambience)
+				for (var/turf/T in RANGE_TURFS(target, 1))
+					if(TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
+						needs_ambience = TRUE
+						break
+
+			if (needs_ambience)
+				var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[target.z]"]
+				if (istype(E))
+					if (E.sun_brightness_modifier)
+						E.update_sun() //Citadel seems to update entire planet ?
+				else if (starlight_enabled) //Assume we can light up exterior maybe?
+					target.set_ambient_light(SSskybox.background_color, 1)
+		else if (TURF_IS_AMBIENT_LIT_UNSAFE(target))
+			var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[target.z]"]
+			if (istype(E))
+				if (E.sun_brightness_modifier)
+					target.replace_ambient_light(E.sun_apparent_color, null, E.sun_apparent_brightness, null)
+			else if (starlight_enabled)
+				target.replace_ambient_light(COLOR_WHITE, null, 1, null)
+
+		if (no_mc_tick)
+			CHECK_TICK
+		else if (MC_TICK_CHECK)
+			return

@@ -31,7 +31,7 @@
 	icon_state = "supermatter"
 	density = TRUE
 	anchored = FALSE
-	light_outer_range = 4
+	light_range = 4
 
 	layer = ABOVE_HUMAN_LAYER
 
@@ -275,8 +275,8 @@
 
 //Changes color and luminosity of the light to these values if they were not already set
 /obj/machinery/power/supermatter/proc/shift_light(lum, clr)
-	if(lum != light_outer_range || clr != light_color)
-		set_light(1, 0.1, lum, l_color = clr)
+	if(lum != light_range || clr != light_color)
+		set_light(lum, 1, l_color = clr)
 
 /obj/machinery/power/supermatter/proc/get_integrity()
 	var/integrity = damage / explosion_point

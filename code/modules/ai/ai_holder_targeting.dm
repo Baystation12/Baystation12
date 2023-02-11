@@ -26,7 +26,7 @@
 /// Step 1, find out what we can see.
 /datum/ai_holder/proc/list_targets()
 	. = ohearers(vision_range, holder)
-	. -= GLOB.dview_mob // Not the dview mob!
+	. -= global.dview_mob // Not the dview mob!
 
 	var/static/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /mob/living/exosuit, /obj/effect/blob))
 

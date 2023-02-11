@@ -23,7 +23,7 @@
 	var/custom_sprite = FALSE
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = FALSE
-	var/integrated_light_max_bright = 0.75
+	var/integrated_light_power = 0.75
 	var/datum/wires/robot/wires
 	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
 	var/dismantle_type = /obj/item/robot_parts/robot_suit
@@ -408,9 +408,9 @@
 /mob/living/silicon/robot/proc/update_robot_light()
 	if(lights_on)
 		if(intenselight)
-			set_light(1, 2, 6)
+			set_light(6, 1)
 		else
-			set_light(0.75, 1, 4)
+			set_light(4, 0.75)
 	else
 		set_light(0)
 

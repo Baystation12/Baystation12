@@ -29,9 +29,8 @@
 	icon = 'icons/misc/security_state.dmi'
 	alarm_level = "off"
 
-	light_max_bright = 0.25
-	light_inner_range = 0.1
-	light_outer_range = 1
+	light_range = 2
+	light_power = 1
 	light_color_alarm = COLOR_GREEN
 	light_color_status_display = COLOR_GREEN
 
@@ -49,9 +48,8 @@
 	name = "code violet"
 	alarm_level = "on"
 
-	light_max_bright = 0.5
-	light_inner_range = 1
-	light_outer_range = 2
+	light_range = 2
+	light_power = 1
 	light_color_alarm = COLOR_VIOLET
 	light_color_status_display = COLOR_VIOLET
 
@@ -68,9 +66,8 @@
 	name = "code orange"
 	alarm_level = "on"
 
-	light_max_bright = 0.5
-	light_inner_range = 1
-	light_outer_range = 2
+	light_range = 2
+	light_power = 1
 	light_color_alarm = COLOR_ORANGE
 	light_color_status_display = COLOR_ORANGE
 	overlay_alarm = "alarm_orange"
@@ -88,9 +85,8 @@
 	icon = 'icons/misc/security_state.dmi'
 	alarm_level = "on"
 
-	light_max_bright = 0.5
-	light_inner_range = 1
-	light_outer_range = 2
+	light_range = 2
+	light_power = 1
 	light_color_alarm = COLOR_BLUE
 	light_color_status_display = COLOR_BLUE
 	overlay_alarm = "alarm_blue"
@@ -107,9 +103,8 @@
 	icon = 'icons/misc/security_state.dmi'
 	alarm_level = "on"
 
-	light_max_bright = 0.75
-	light_inner_range = 1
-	light_outer_range = 3
+	light_range = 4
+	light_power = 2
 	light_color_alarm = COLOR_RED
 	light_color_status_display = COLOR_RED
 	overlay_alarm = "alarm_red"
@@ -135,9 +130,8 @@
 	icon = 'icons/misc/security_state.dmi'
 	alarm_level = "on"
 
-	light_max_bright = 0.75
-	light_inner_range = 0.1
-	light_outer_range = 3
+	light_range = 4
+	light_power = 2
 	light_color_alarm = COLOR_RED
 	light_color_status_display = COLOR_NAVY_BLUE
 

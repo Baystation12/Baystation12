@@ -52,7 +52,16 @@
 	else
 		luminosity = 1
 
-	RecalculateOpacity()
+	recalc_atom_opacity()
+
+	if (light_power && light_range)
+		update_light()
+
+	if (!mapload)
+		SSambient_lighting.queued += src
+
+	if (opacity)
+		has_opaque_atom = TRUE
 
 	if (mapload && permit_ao)
 		queue_ao()

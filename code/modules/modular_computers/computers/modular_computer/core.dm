@@ -86,7 +86,7 @@
 		AddOverlays(os.get_keyboard_overlay())
 
 	if(enabled)
-		set_light(0.2, 0.1, light_strength)
+		set_light(light_strength, 0.2)
 	else
 		set_light(0)
 

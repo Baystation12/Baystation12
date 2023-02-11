@@ -32,7 +32,7 @@ var/global/list/narsie_list = list()
 	// Pixel stuff centers Narsie.
 	pixel_x = -236
 	pixel_y = -256
-	light_outer_range = 1
+	light_range = 1
 	light_color = "#3e0000"
 
 	current_size = 6
@@ -154,7 +154,7 @@ var/global/list/narsie_list = list()
 	T.icon_state = "cult-narsie"
 	T.set_opacity(0)
 	T.set_density(0)
-	set_light(1)
+	set_light(1, 1)
 
 /obj/singularity/narsie/large/consume(atom/A) //Has its own consume proc because it doesn't need energy and I don't want BoHs to explode it. --NEO
 //NEW BEHAVIOUR

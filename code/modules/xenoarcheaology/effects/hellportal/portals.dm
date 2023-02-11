@@ -1,7 +1,7 @@
 /obj/effect/gateway/artifact
 	name = "reality tear"
 	desc = "A piercing pain strikes your mind as you peer into the tear, witnessing horrors and suffering beyond comprehension."
-	light_outer_range=5
+	light_range=5
 	light_color="#ff0000"
 	spawnable = list(
 		/mob/living/simple_animal/hostile/meat/abomination = 5,
@@ -45,7 +45,7 @@
 /obj/effect/gateway/artifact/big
 	name = "interdimensional gateway"
 	desc = "A huge hole in reality with a strange, pulsing heartbeat. Faint, agonized screams can be heard from inside it..."
-	light_outer_range = 10
+	light_range = 10
 	///Ticks down every so often until portal vanishes.
 	var/health = 15
 	///How many mobs we've spawned.

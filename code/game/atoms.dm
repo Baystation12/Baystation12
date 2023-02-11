@@ -83,14 +83,14 @@
 		log_debug("Abstract atom [type] created!")
 		return INITIALIZE_HINT_QDEL
 
-	if(light_max_bright && light_outer_range)
+	if(light_power && light_range)
 		update_light()
 
 	if(opacity)
 		updateVisibility(src)
 		var/turf/T = loc
 		if(istype(T))
-			T.RecalculateOpacity()
+			T.recalc_atom_opacity()
 
 	if (health_max)
 		health_current = health_max
@@ -114,6 +114,7 @@
 
 /atom/Destroy()
 	QDEL_NULL(reagents)
+	QDEL_NULL(light)
 	. = ..()
 
 /**

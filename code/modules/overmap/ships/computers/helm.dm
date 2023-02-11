@@ -391,4 +391,4 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 		set_light(0)
 	else
 		icon_state = "tele_nav"
-		set_light(light_max_bright_on, light_inner_range_on, light_outer_range_on, 2, light_color)
+		set_light(light_range_on, light_power_on, light_color)
