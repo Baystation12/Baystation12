@@ -18,6 +18,10 @@
 	body_location = LEGS
 	flags_inv = CLOTHING_BULKY
 
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_modular_armor_unathi.dmi'
+		)
+
 
 /obj/item/clothing/accessory/leg_guards/blue
 	desc = "A pair of armored leg pads in blue. Attaches to a plate carrier."

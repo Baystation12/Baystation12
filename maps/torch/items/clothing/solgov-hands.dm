@@ -3,6 +3,9 @@
 	desc = "You should never see this."
 	item_icons = list(slot_gloves_str = 'maps/torch/icons/mob/onmob_hands_solgov.dmi')
 	icon = 'maps/torch/icons/obj/obj_hands_solgov.dmi'
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_hands_solgov_unathi.dmi'
+	)
 
 /obj/item/clothing/gloves/thick/duty/solgov/eng
 	name = "engineering duty gloves"

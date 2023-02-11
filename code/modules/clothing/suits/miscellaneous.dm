@@ -144,7 +144,7 @@
 	desc = "A suit made long ago by the ancient empire KFC."
 	icon_state = "chickensuit"
 	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS|FEET
-	flags_inv = HIDESHOES|HIDEJUMPSUIT
+	flags_inv = HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	siemens_coefficient = 2.0
 
 
@@ -153,7 +153,7 @@
 	desc = "A suit that looks like a primate."
 	icon_state = "monkeysuit"
 	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS|FEET|HANDS
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	siemens_coefficient = 2.0
 
 
@@ -275,7 +275,7 @@
 	icon_state = "xenos"
 	item_flags = null
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	siemens_coefficient = 2.0
 //swimsuit
 /obj/item/clothing/under/swimsuit
@@ -496,6 +496,7 @@
 	name = "human suit"
 	desc = "A Human suit made out of rubber."
 	icon_state = "mansuit"
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 
 /obj/item/clothing/suit/rubber/cat
 	name = "cat suit"
