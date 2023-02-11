@@ -13,7 +13,7 @@
 	"hal","ket","jurl","mah","tul","cresh","azu","ragh","mro","mra","mrro","mrra")
 	shorthand = "TJ"
 
-/datum/language/tajaran/get_random_name(var/gender)
+/datum/language/tajaran/get_random_name(gender)
 
 	var/new_name = ..(gender,1)
 	if(prob(50))

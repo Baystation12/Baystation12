@@ -24,7 +24,7 @@
 		/obj/item/storage/firstaid/combat =1)
 	flags = OUTFIT_HAS_BACKPACK
 
-/singleton/hierarchy/outfit/scg/troops/post_equip(var/mob/living/carbon/human/H)
+/singleton/hierarchy/outfit/scg/troops/post_equip(mob/living/carbon/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.w_uniform
 	if(uniform)
@@ -40,7 +40,7 @@
 	name = "Inf - SCG Marine Standart"
 	id_pda_assignment = "Marine Trooper"
 
-/singleton/hierarchy/outfit/scg/troops/standart/post_equip(var/mob/living/carbon/human/H)
+/singleton/hierarchy/outfit/scg/troops/standart/post_equip(mob/living/carbon/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.w_uniform
 	if(uniform)
@@ -66,7 +66,7 @@
 	..()
 	BACKPACK_OVERRIDE_ENGINEERING
 
-/singleton/hierarchy/outfit/scg/troops/engineer/post_equip(var/mob/living/carbon/human/H)
+/singleton/hierarchy/outfit/scg/troops/engineer/post_equip(mob/living/carbon/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.w_uniform
 	if(uniform)
@@ -94,7 +94,7 @@
 	..()
 	BACKPACK_OVERRIDE_MEDICAL
 
-/singleton/hierarchy/outfit/scg/troops/medic/post_equip(var/mob/living/carbon/human/H)
+/singleton/hierarchy/outfit/scg/troops/medic/post_equip(mob/living/carbon/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.w_uniform
 	if(uniform)
@@ -117,7 +117,7 @@
 	..()
 	BACKPACK_OVERRIDE_SECURITY
 
-/singleton/hierarchy/outfit/scg/troops/sergeant/post_equip(var/mob/living/carbon/human/H)
+/singleton/hierarchy/outfit/scg/troops/sergeant/post_equip(mob/living/carbon/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.w_uniform
 	if(uniform)

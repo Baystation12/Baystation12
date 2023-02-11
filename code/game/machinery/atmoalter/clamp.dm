@@ -90,7 +90,7 @@
 	target.try_leak()
 	return TRUE
 
-/obj/machinery/clamp/proc/removal(var/atom/destination)
+/obj/machinery/clamp/proc/removal(atom/destination)
 	var/obj/item/clamp/C = new/obj/item/clamp(destination)
 	if(ishuman(destination))
 		var/mob/living/carbon/human/H = destination

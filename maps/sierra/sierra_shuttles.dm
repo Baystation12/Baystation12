@@ -61,7 +61,7 @@ SIERRA_ESCAPE_POD(9)
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/sierra
 	warmup_time = 7
 
-/datum/shuttle/autodock/ferry/petrov/New(_name, var/obj/effect/shuttle_landmark/initial_location)
+/datum/shuttle/autodock/ferry/petrov/New(_name, obj/effect/shuttle_landmark/initial_location)
 	shuttle_area = subtypesof(/area/shuttle/petrov)
 	..()
 

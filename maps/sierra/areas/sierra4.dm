@@ -23,16 +23,17 @@
 	name = "Creed's Office"
 	req_access = list(access_cent_creed)
 
-/area/centcom/ferry
-	name = "Centcom Transport Shuttle"
-
 /area/centcom/living
 	name = "Centcom Living Quarters"
 	req_access = list(access_cent_living)
 
+/*
+/area/centcom/ferry
+	name = "Centcom Transport Shuttle"
+
 /area/centcom/test
 	name = "Centcom Testing Facility"
-/*
+
 /area/centcom/evac
 	name = "Centcom Emergency Shuttle"
 

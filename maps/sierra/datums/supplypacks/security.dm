@@ -103,15 +103,6 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Practice laser carbine crate"
 
-/singleton/hierarchy/supply_pack/security/armory/barriers
-	name = "Portable Barriers (4)"
-	contains = list(/obj/machinery/barrier = 4)
-	cost = 30
-	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "\improper portable barriers crate"
-	access = access_heads
-	security_level = SUPPLY_SECURITY_ELEVATED
-
 /*
  * OVERRIDES
  * =========

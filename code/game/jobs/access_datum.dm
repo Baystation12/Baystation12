@@ -445,7 +445,7 @@ var/global/const/access_cent_captain = "ACCESS_CENT_CAPTAIN" //109
 	desc = "Code Gold"
 	access_type = ACCESS_TYPE_CENTCOM
 
-/var/const/access_bar = "ACCESS_BAR" //110 INF
+var/global/const/access_bar = "ACCESS_BAR" //110 INF
 /datum/access/bar
 	id = access_bar
 	desc = "Bar"

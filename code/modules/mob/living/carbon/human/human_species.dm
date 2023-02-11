@@ -25,11 +25,11 @@
 	head_hair_style = "Skrell Male Tentacles"
 	..(new_loc, SPECIES_SKRELL)
 
-/mob/living/carbon/human/resomi/New(var/new_loc)
+/mob/living/carbon/human/resomi/New(new_loc)
 	head_hair_style = "Resomi Plumage"
 	..(new_loc, SPECIES_RESOMI)
 
-/mob/living/carbon/human/tajaran/New(var/new_loc)
+/mob/living/carbon/human/tajaran/New(new_loc)
 	head_hair_style = "Tajaran Ears"
 	..(new_loc, SPECIES_TAJARA)
 

@@ -543,7 +543,7 @@
 		return
 
 	if(holder && holder.callproc && holder.callproc.waiting_for_click)
-		if(alert("Do you want to select \the [A] as the [holder.callproc.arguments.len+1]\th argument?",, "Yes", "No") == "Yes")
+		if(alert("Do you want to select \the [A] as the [length(holder.callproc.arguments)+1]\th argument?",, "Yes", "No") == "Yes")
 			holder.callproc.arguments += A
 
 		holder.callproc.waiting_for_click = 0
@@ -632,7 +632,7 @@
 	load_player_discord(usr)
 
 	if(discord_id && length(discord_id) < 32)
-		to_chat(usr, "<span class='darkmblue'>Аккаунт Discord уже привязан! Чтобы отвязать используйте команду <span class='boldannounce'>!отвязать_аккаунт</span> в канале <b>#дом-бота<b> в Discord-сообществе!</span>")
+		to_chat(usr, "<span class='darkmblue'>Аккаунт Discord уже привязан! Чтобы отвязать используйте команду <span class='boldannounce'>!отвязать_аккаунт</span> в канале <b>#дом-бота</b> в Discord-сообществе!</span>")
 		return
 
 	var/token = md5("[world.time+rand(1000,1000000)]")
@@ -645,5 +645,5 @@
 			log_debug("link_discord_account: failed db update discord_id for ckey [ckey]")
 			return
 
-		to_chat(usr, "<span class='darkmblue'>Для завершения используйте команду <span class='boldannounce'>!привязать_аккаунт [token]</span> в канале <b>#дом-бота<b> в Discord-сообществе!</span>")
+		to_chat(usr, "<span class='darkmblue'>Для завершения используйте команду <span class='boldannounce'>!привязать_аккаунт [token]</span> в канале <b>#дом-бота</b> в Discord-сообществе!</span>")
 		load_player_discord(usr)

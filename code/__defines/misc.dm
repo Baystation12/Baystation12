@@ -334,7 +334,7 @@
 #define INTENT_HOTKEY_RIGHT "right"
 
 
-/proc/get_dist_bounds(var/target, var/source) // Alternative to get_dist for multi-turf objects
+/proc/get_dist_bounds(target, source) // Alternative to get_dist for multi-turf objects
 	return Ceiling(bounds_dist(target, source)/world.icon_size) + 1
 
 

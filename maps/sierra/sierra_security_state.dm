@@ -21,12 +21,12 @@
 	var/lockdown = FALSE
 	var/lockdown_support = FALSE
 
-/datum/map/proc/area_lockdown(var/a)
+/datum/map/proc/area_lockdown(a)
 	var/area/area = get_area_name(a)
 	for(var/obj/machinery/door/airlock/airlock in area)
 		airlock.command("secure_close")
 
-/datum/map/proc/area_unlock(var/a)
+/datum/map/proc/area_unlock(a)
 	var/area/area = get_area_name(a)
 	for(var/obj/machinery/door/airlock/airlock in area)
 		airlock.command("unlock")
@@ -51,7 +51,7 @@
 		for(var/area in high_secure_areas)
 			area_unlock(area)
 
-/datum/map/proc/lockdown(var/force)
+/datum/map/proc/lockdown(force)
 	lockdown = !lockdown
 	if(force && force == "close")
 		lockdown = TRUE

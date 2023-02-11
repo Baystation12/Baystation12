@@ -7752,8 +7752,9 @@
 /turf/simulated/floor/holofloor/beach/water,
 /area/holodeck/source_temple)
 "blE" = (
-/turf/simulated/floor/holofloor/beach/water,
-/area/holodeck/source_temple)
+/obj/effect/floor_decal/industrial/hatch,
+/turf/unsimulated/floor/reinforced,
+/area/thruster/d1port)
 "blK" = (
 /obj/effect/floor_decal/stoneborder/corner{
 	dir = 8
@@ -9715,6 +9716,10 @@
 	icon_state = "steel"
 	},
 /area/centcom)
+"fRb" = (
+/obj/effect/paint/hull,
+/turf/simulated/wall/r_titanium,
+/area/thruster/d1port)
 "fRh" = (
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 6
@@ -9912,6 +9917,10 @@
 	icon_state = "dark"
 	},
 /area/tdome/testing)
+"gqF" = (
+/obj/effect/decal/cleanable/filth,
+/turf/unsimulated/floor/techfloor,
+/area/thruster/d1port)
 "gsX" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/unsimulated/floor/techfloor,
@@ -10257,6 +10266,9 @@
 	icon_state = "white"
 	},
 /area/centcom/holding)
+"gWq" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/thruster/d1port)
 "gYv" = (
 /obj/effect/floor_decal/borderfloor,
 /obj/structure/bed/chair/office/comfy/blue{
@@ -10333,6 +10345,21 @@
 	icon_state = "white"
 	},
 /area/centcom/holding)
+"hid" = (
+/obj/effect/floor_decal/borderfloorblack{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/red/border{
+	dir = 8
+	},
+/obj/effect/floor_decal/borderfloorblack/corner2{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/red/bordercorner2{
+	dir = 8
+	},
+/turf/unsimulated/floor/techfloor,
+/area/thruster/d1port)
 "hjD" = (
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -12686,7 +12713,10 @@
 /obj/machinery/door/airlock/centcom{
 	dir = 8
 	},
-/turf/space,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "steel"
+	},
 /area/centcom/living)
 "mhW" = (
 /obj/effect/floor_decal/borderfloor{
@@ -16446,6 +16476,9 @@
 	name = "carpet"
 	},
 /area/centcom/living)
+"tNR" = (
+/turf/unsimulated/floor/reinforced,
+/area/thruster/d1port)
 "tRb" = (
 /obj/effect/floor_decal/techfloor/corner{
 	dir = 8
@@ -32134,7 +32167,7 @@ ahO
 akH
 ath
 alZ
-auo
+blE
 aRV
 aRV
 anY
@@ -33344,7 +33377,7 @@ aas
 aoc
 apu
 asY
-aas
+fRb
 aas
 aRV
 aRV
@@ -33949,7 +33982,7 @@ aan
 aas
 aas
 aas
-aas
+fRb
 aas
 aan
 aus
@@ -34150,7 +34183,7 @@ aRV
 aRV
 aRV
 aRV
-aRV
+tNR
 aRV
 aRV
 aRV
@@ -34352,7 +34385,7 @@ aag
 aag
 akE
 akE
-aag
+gWq
 aag
 aag
 aag
@@ -34554,7 +34587,7 @@ ame
 aiu
 ane
 ane
-aoP
+hid
 ame
 ame
 ame
@@ -34620,7 +34653,7 @@ wwa
 sFC
 sFC
 sFC
-gUN
+sFC
 aab
 aab
 aab
@@ -34755,7 +34788,7 @@ lZK
 ane
 ane
 ane
-lZK
+gqF
 ane
 ane
 ane
@@ -34822,7 +34855,7 @@ emF
 ape
 ape
 ape
-gUN
+sFC
 aab
 aab
 aab
@@ -35024,7 +35057,7 @@ nlw
 vyh
 vtM
 ape
-gUN
+sFC
 aab
 aab
 aab
@@ -35226,7 +35259,7 @@ lbU
 fjZ
 geB
 ape
-gUN
+sFC
 aab
 aab
 aab
@@ -35428,7 +35461,7 @@ ayS
 wlC
 xOo
 ape
-gUN
+sFC
 aab
 aab
 aab
@@ -37950,7 +37983,7 @@ aWd
 bly
 blC
 blC
-blE
+blC
 blC
 blC
 blL
@@ -42073,7 +42106,7 @@ uuU
 ape
 sFC
 aab
-gUN
+upn
 qep
 ksZ
 oRm
@@ -42089,7 +42122,7 @@ tsZ
 oRm
 ksZ
 qep
-gUN
+upn
 aab
 aab
 aab
@@ -42275,7 +42308,7 @@ xJd
 ape
 sFC
 aab
-gUN
+upn
 qep
 foz
 oRm
@@ -42291,7 +42324,7 @@ oRm
 gwF
 foz
 qep
-gUN
+upn
 aab
 aab
 aab
@@ -42477,7 +42510,7 @@ sFC
 sFC
 sFC
 aab
-gUN
+upn
 qep
 obA
 qGc
@@ -42493,7 +42526,7 @@ jeB
 jeB
 uSd
 qep
-gUN
+upn
 aab
 aab
 aab
@@ -42679,7 +42712,7 @@ aab
 aab
 aab
 aab
-gUN
+upn
 sVJ
 uMJ
 jeB
@@ -42695,7 +42728,7 @@ tkq
 jeB
 uMJ
 aag
-gUN
+upn
 aab
 aab
 aab
@@ -42877,11 +42910,11 @@ wOC
 jaZ
 ffG
 sgo
-gUN
+sgo
 aab
 aab
 aab
-gUN
+upn
 aag
 aag
 qep
@@ -42897,7 +42930,7 @@ qep
 qep
 aag
 aag
-gUN
+upn
 aab
 aab
 aab
@@ -43079,27 +43112,27 @@ ayQ
 wMZ
 aRS
 aRS
-gUN
+sgo
 aab
 aab
 aab
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
+upn
+upn
+upn
+upn
+upn
+upn
+upn
+upn
+upn
+upn
+upn
+upn
+upn
+upn
+upn
+upn
+upn
 aab
 aab
 aab
@@ -43281,7 +43314,7 @@ opB
 opB
 opB
 aRS
-gUN
+sgo
 aab
 aab
 aab
@@ -43483,7 +43516,7 @@ cAX
 egT
 opB
 aRS
-gUN
+sgo
 aab
 aab
 aab
@@ -43685,7 +43718,7 @@ tNM
 xuz
 opB
 aRS
-gUN
+sgo
 aab
 aab
 aab
@@ -43887,7 +43920,7 @@ tNM
 xuz
 opB
 aRS
-gUN
+sgo
 aab
 aab
 aab
@@ -44089,7 +44122,7 @@ tNM
 tNM
 tNM
 sFh
-gUN
+sgo
 aab
 aab
 aab
@@ -44291,7 +44324,7 @@ tNM
 tNM
 aHY
 sFh
-gUN
+sgo
 aab
 aab
 aab
@@ -44493,7 +44526,7 @@ tNM
 tNM
 tNM
 sFh
-gUN
+sgo
 aab
 aab
 aab
@@ -44695,7 +44728,7 @@ tNM
 xuz
 opB
 aRS
-gUN
+sgo
 aab
 aab
 aab
@@ -44897,7 +44930,7 @@ tNM
 xuz
 opB
 aRS
-gUN
+sgo
 aab
 aab
 aab
@@ -45099,7 +45132,7 @@ tNM
 ngr
 opB
 aRS
-gUN
+sgo
 aab
 aab
 aab
@@ -45301,7 +45334,7 @@ tNM
 opB
 opB
 aRS
-gUN
+sgo
 aab
 aab
 aab
@@ -45503,7 +45536,7 @@ sFh
 aRS
 aRS
 aRS
-gUN
+sgo
 aab
 aab
 aab
@@ -45694,18 +45727,18 @@ aab
 aab
 aab
 aab
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
-gUN
+sgo
+sgo
+sgo
+sgo
+sgo
+sgo
+sgo
+sgo
+sgo
+sgo
+sgo
+sgo
 aab
 aab
 aab

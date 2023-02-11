@@ -295,7 +295,7 @@
 #define LIST_RESIZE(L, NEWLEN) ((L).len = (NEWLEN))
 
 
-/proc/parse_html(var/browser_content)
+/proc/parse_html(browser_content)
 	if(isfile(browser_content))
 		return browser_content
 	else if(findtext(browser_content, "<html>"))

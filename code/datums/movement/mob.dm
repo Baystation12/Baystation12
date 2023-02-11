@@ -141,12 +141,12 @@
 		return MOVEMENT_PROCEED
 	return ((mover && mover != mob) ||  world.time >= next_move) ? MOVEMENT_PROCEED : MOVEMENT_STOP
 
-/datum/movement_handler/mob/delay/proc/SetDelay(var/new_delay)
+/datum/movement_handler/mob/delay/proc/SetDelay(new_delay)
 	delay = new_delay
 	next_move = max(next_move, world.time + delay)
 	UpdateGlideSize()
 
-/datum/movement_handler/mob/delay/proc/AddDelay(var/add_delay)
+/datum/movement_handler/mob/delay/proc/AddDelay(add_delay)
 	delay += add_delay
 	next_move += max(0, add_delay)
 	UpdateGlideSize()

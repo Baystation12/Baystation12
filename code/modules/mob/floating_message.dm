@@ -1,5 +1,5 @@
 // Thanks to Burger from Burgerstation for the foundation for this
-var/list/floating_chat_colors = list()
+var/global/list/floating_chat_colors = list()
 
 /// How long the chat message's spawn-in animation will occur for
 #define CHAT_MESSAGE_SPAWN_TIME 0.2 SECONDS

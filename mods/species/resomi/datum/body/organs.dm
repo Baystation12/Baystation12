@@ -107,7 +107,7 @@
 		to_chat(src, "<span class='notice'>You need to stand still while you listen.</span>")
 
 
-/mob/living/carbon/human/proc/clear_sonar_effect(var/client/C, var/image/I)
+/mob/living/carbon/human/proc/clear_sonar_effect(client/C, image/I)
 	if(C && I)
 		C.images -= I
 	qdel(I)

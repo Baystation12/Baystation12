@@ -40,7 +40,7 @@
 	icon_state = "collar_pisilv"
 	renameable = TRUE
 
-/obj/item/clothing/accessory/necklace/collar/attackby(var/obj/item/S, var/mob/user)
+/obj/item/clothing/accessory/necklace/collar/attackby(obj/item/S, mob/user)
 	if(renameable && S.sharp)
 		var/inscription = sanitize(input("Enter an inscription to engrave.", "Inscription") as null|text)
 

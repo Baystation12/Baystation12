@@ -119,11 +119,11 @@
 	return key
 
 
-/singleton/emote/do_emote(var/atom/user, var/extra_params)
+/singleton/emote/do_emote(atom/user, xtra_params)
 	..()
 	if(emote_sound) do_sound(user)
 
-/singleton/emote/proc/do_sound(var/atom/user)
+/singleton/emote/proc/do_sound(atom/user)
 	var/mob/living/carbon/human/H = user
 	if(H.stat) return // No dead or unconcious people screaming pls.
 

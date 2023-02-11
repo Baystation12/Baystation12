@@ -17,7 +17,7 @@
 	var/list/credits_topics          //! A list of strings that are used by the end of round credits roll.
 	var/list/credits_nouns           //! A list of strings that are used by the end of round credits roll.
 
-/singleton/modpack/proc/get_player_panel_options(var/mob/M)
+/singleton/modpack/proc/get_player_panel_options(mob/M)
 	return
 
 /singleton/modpack/proc/pre_initialize()

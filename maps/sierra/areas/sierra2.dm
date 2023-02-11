@@ -75,10 +75,12 @@
 	name = "Second Deck - Laundry Room"
 	icon_state = "Sleep"
 
+/*
 /area/maintenance/abandoned_compartment
 	name = "Second Deck - Abandoned - Bar"
 	turf_initializer = /singleton/turf_initializer/maintenance/heavy
 	icon_state = "cafeteria"
+*/
 
 /area/maintenance/abandoned_hydroponics
 	name = "Second Deck - Abandoned - Hydroponics"
@@ -305,11 +307,12 @@
 	name = "Second Deck - Living - Sauna"
 	icon_state = "sauna"
 	sound_env = SMALL_ENCLOSED
-
+/*
 /area/grove/theta // /area/ai_abadoned
 	name = "Second Deck - Grove - Theta"
 	icon_state = "garden"
 	sound_env = LARGE_SOFTFLOOR
+*/
 
 /area/crew_quarters/head
 	name = "Second Deck - Living - Restroom"

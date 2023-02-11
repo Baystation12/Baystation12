@@ -295,7 +295,7 @@
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.real_name
 
-	var/list/header = list("<html><body><center>")
+	var/list/header = list("<html><center><body></center>")
 	header += "<b>Добро пожаловать, [name].<br></b>"
 	header += "Длительность раунда: [roundduration2text()]<br>"
 

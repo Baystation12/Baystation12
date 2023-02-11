@@ -9,7 +9,7 @@
 	buckle_stance = BUCKLE_FORCE_STAND
 	obj_flags = OBJ_FLAG_ROTATABLE
 
-/obj/structure/bed/sofa/do_simple_ranged_interaction(var/mob/user)
+/obj/structure/bed/sofa/do_simple_ranged_interaction(mob/user)
 	if(!buckled_mob && user)
 		rotate(user)
 	return TRUE

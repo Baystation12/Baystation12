@@ -15,6 +15,7 @@
 
 /datum/gear/uniform/corpsi
 	display_name = "contractor uniform selection"
+	path = /obj/item/clothing/under/solgov/utility
 	allowed_branches = list(/datum/mil_branch/contractor)
 
 /datum/gear/uniform/si_guard

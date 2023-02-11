@@ -17,17 +17,17 @@ var/global/command_name
 	var/channel_name = "Station Announcements"
 
 
-/datum/announcement/priority/security/New(var/do_log = 1, var/new_sound = 'sound/misc/notice2.ogg', var/do_newscast = 0)
+/datum/announcement/priority/security/New(do_log = 1, new_sound = 'sound/misc/notice2.ogg',do_newscast = 0)
 	..(do_log, new_sound, do_newscast)
 	title = "Security Announcement"
 	announcement_type = "Security Announcement"
 
-/datum/announcement/priority/command/New(var/do_log = 1, var/new_sound = 'sound/misc/notice2.ogg', var/do_newscast = 0)
+/datum/announcement/priority/command/New(do_log = 1, new_sound = 'sound/misc/notice2.ogg', do_newscast = 0)
 	..(do_log, new_sound, do_newscast)
 	title = "[command_name()] Update"
 	announcement_type = "[command_name()] Update"
 
-/datum/announcement/proc/Announce(var/message as text, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/zlevels = GLOB.using_map.contact_levels, var/radio_mode = GLOB.using_map.use_radio_announcement)
+/datum/announcement/proc/Announce(message as text, new_title = "", new_sound = null, do_newscast = newscast, msg_sanitized = 0, zlevels = GLOB.using_map.contact_levels, radio_mode = GLOB.using_map.use_radio_announcement)
 	if(!message)
 		return
 	var/message_title = new_title ? new_title : title
@@ -106,13 +106,13 @@ var/global/command_name
 	GLOB.global_announcer.autosay("<font size=3><span class='alert'>[message_title]:</span> [message]</font>", announcer ? announcer : ANNOUNSER_NAME)
 
 /datum/announcement/priority/command/Message(message as text, message_title as text)
-	GLOB.global_announcer.autosay("<font size=3><span class='warning'>[command_name()] [message_title]:</span> [message]</font>", ANNOUNSER_NAME)
+	GLOB.global_announcer.autosay(SPAN_SIZE(3,"<span class='warning'>[command_name()] [message_title]:</span> [message]"), ANNOUNSER_NAME)
 
 /datum/announcement/priority/security/Message(message as text, message_title as text)
-	GLOB.global_announcer.autosay("<font size=3><font color='red'>[message_title]:</span> [message]</font>", ANNOUNSER_NAME)
+	GLOB.global_announcer.autosay(SPAN_SIZE(3,"<font color='red'> <span>[message_title]:</span> [message]</font>"), ANNOUNSER_NAME)
 
 
-/proc/AnnounceArrival(var/mob/living/carbon/human/character, var/datum/job/job, var/join_message)
+/proc/AnnounceArrival(mob/living/carbon/human/character, datum/job/job, join_message)
 	if(!istype(job) || !job.announced)
 		return
 	if (GAME_STATE != RUNLEVEL_GAME)

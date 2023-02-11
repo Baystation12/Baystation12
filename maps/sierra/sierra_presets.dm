@@ -1,20 +1,20 @@
-var/const/NETWORK_CALYPSO     = "Charon"
-var/const/NETWORK_EXPEDITION  = "Expedition"
-var/const/NETWORK_POD         = "General Utility Pod"
-var/const/NETWORK_FIRST_DECK  = "First Deck"
-var/const/NETWORK_SECOND_DECK = "Second Deck"
-var/const/NETWORK_THIRD_DECK  = "Third Deck"
-var/const/NETWORK_SUPPLY      = "Supply"
-var/const/NETWORK_HANGAR      = "Hangar"
-var/const/NETWORK_PETROV      = "Petrov"
+var/global/const/NETWORK_CALYPSO     = "Charon"
+var/global/const/NETWORK_EXPEDITION  = "Expedition"
+var/global/const/NETWORK_POD         = "General Utility Pod"
+var/global/const/NETWORK_FIRST_DECK  = "First Deck"
+var/global/const/NETWORK_SECOND_DECK = "Second Deck"
+var/global/const/NETWORK_THIRD_DECK  = "Third Deck"
+var/global/const/NETWORK_SUPPLY      = "Supply"
+var/global/const/NETWORK_HANGAR      = "Hangar"
+var/global/const/NETWORK_PETROV      = "Petrov"
 
 //Overrides
-var/const/NETWORK_COMMAND = "Command"
-var/const/NETWORK_ENGINE  = "Engine"
-var/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
+var/global/const/NETWORK_COMMAND = "Command"
+var/global/const/NETWORK_ENGINE  = "Engine"
+var/global/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
 
 
-/datum/map/sierra/get_network_access(var/network)
+/datum/map/sierra/get_network_access(network)
 	switch(network)
 		if(NETWORK_CALYPSO)
 			return access_expedition_shuttle
@@ -109,7 +109,7 @@ var/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
 /obj/machinery/camera/all/command
 	network = list(NETWORK_COMMAND)
 
-/datum/map/proc/get_shared_network_access(var/network)
+/datum/map/proc/get_shared_network_access(network)
 	switch(network)
 		if(NETWORK_COMMAND)
 			return access_heads

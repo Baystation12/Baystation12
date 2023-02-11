@@ -3,7 +3,7 @@
 // will get logs that are one big line if the system is Linux and they are using notepad.  This solves it by adding CR to every line ending
 // in the logs.  ascii character 13 = CR
 
-/var/global/log_end = world.system_type == UNIX ? ascii2text(13) : ""
+var/global/log_end = world.system_type == UNIX ? ascii2text(13) : ""
 GLOBAL_PROTECT(log_end)
 GLOBAL_VAR_INIT(log_end, (ascii2text(13))) // CRLF for all logs
 
@@ -120,7 +120,7 @@ GLOBAL_VAR_INIT(log_end, (ascii2text(13))) // CRLF for all logs
 	if (config.log_emote)
 		rustg_log_write(GLOB.world_game_log, "EMOTE: [speaker.simple_info_line()]: [html_decode(text)][GLOB.log_end]")
 
-/proc/log_attack(var/mob/attacker, var/mob/defender, message)
+/proc/log_attack(mob/attacker, mob/defender, message)
 	if (config.log_attack)
 		rustg_log_write(GLOB.world_game_log, "ATTACK: [attacker.simple_info_line()] against [defender.simple_info_line()]: [message][GLOB.log_end]") //Seperate attack logs? Why?
 
@@ -151,7 +151,7 @@ GLOBAL_VAR_INIT(log_end, (ascii2text(13))) // CRLF for all logs
 /proc/log_qdel(text)
 	to_file(GLOB.world_qdel_log, "\[[time_stamp()]]QDEL: [text]")
 
-/proc/log_world(var/text)
+/proc/log_world(text)
 	to_world_log(text)
 	if (config && config.log_world_output)
 		rustg_log_write(GLOB.world_game_log, "WORLD: [html_decode(text)][GLOB.log_end]")

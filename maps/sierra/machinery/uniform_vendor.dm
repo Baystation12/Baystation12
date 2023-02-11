@@ -58,7 +58,7 @@
 	popup.set_content(dat)
 	popup.open()
 
-/obj/machinery/uniform_vendor/OnTopic(var/mob/user, href_list)
+/obj/machinery/uniform_vendor/OnTopic(mob/user, href_list)
 	if(href_list["ID"])
 		if(ID)
 			if(!issilicon(user))
@@ -98,9 +98,9 @@
 	if(.)
 		attack_hand(user)
 
-/obj/machinery/uniform_vendor/attackby(var/obj/item/W, var/mob/user)
+/obj/machinery/uniform_vendor/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/clothingbag))
-		if(W.contents.len)
+		if(length(W.contents))
 			to_chat(user, "<span class='notice'>You must empty \the [W] before you can put it in \the [src].</span>")
 			return
 		to_chat(user, "<span class='notice'>You put \the [W] into \the [src]'s recycling slot.</span>")
@@ -121,7 +121,7 @@
 	The one exception to the above is the command department, due to the fact that you have to be an officer to
 	be in command, and there are no variants as a result. Also no special CO uniform :(
 */
-/obj/machinery/uniform_vendor/proc/find_uniforms(var/datum/mil_rank/user_rank, var/datum/mil_branch/user_branch, var/department) //returns 1 if found branch and thus has a base uniform, 2, branch and department, 0 if failed.
+/obj/machinery/uniform_vendor/proc/find_uniforms(datum/mil_rank/user_rank, datum/mil_branch/user_branch, department) //returns 1 if found branch and thus has a base uniform, 2, branch and department, 0 if failed.
 	var/singleton/hierarchy/mil_uniform/user_outfit = GET_SINGLETON(/singleton/hierarchy/mil_uniform)
 	var/mil_uniforms = user_outfit
 	for(var/singleton/hierarchy/mil_uniform/child in user_outfit.children)
@@ -159,7 +159,7 @@
 
 	return populate_uniforms(user_outfit) //Generate uniform lists.
 
-/obj/machinery/uniform_vendor/proc/populate_uniforms(var/singleton/hierarchy/mil_uniform/user_outfit)
+/obj/machinery/uniform_vendor/proc/populate_uniforms(singleton/hierarchy/mil_uniform/user_outfit)
 	var/list/res = list()
 
 	res["Uniform Heads"] = user_outfit.dress_hat
@@ -169,18 +169,18 @@
 
 	return res
 
-/obj/machinery/uniform_vendor/proc/spawn_uniform(var/list/selected_outfit)
+/obj/machinery/uniform_vendor/proc/spawn_uniform(list/selected_outfit)
 	listclearnulls(selected_outfit)
 	if(!issued_items[user_id()])
 		issued_items[user_id()] = list()
 	var/list/checkedout = issued_items[user_id()]
-	if(selected_outfit.len > 1)
+	if(length(selected_outfit) > 1)
 		var/obj/item/clothingbag/bag = new /obj/item/clothingbag
 		for(var/item in selected_outfit)
 			new item(bag)
 			checkedout += item
 		bag.dropInto(loc)
-	else if (selected_outfit.len)
+	else if (length(selected_outfit))
 		var/obj/item/clothing/C = selected_outfit[1]
 		new C(get_turf(src))
 		checkedout += C
@@ -191,8 +191,8 @@
 	else
 		return "[ID.registered_name], [ID.military_rank], [ID.military_branch]"
 
-/obj/machinery/uniform_vendor/proc/can_issue(var/gear)
+/obj/machinery/uniform_vendor/proc/can_issue(gear)
 	var/list/issued = issued_items[user_id()]
-	if(!issued || !issued.len)
+	if(!issued || !length(issued))
 		return TRUE
 	return !(gear in issued)

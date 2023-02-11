@@ -14,7 +14,7 @@
  *
  * Returns boolean. TRUE if the mouse drag operation was intercepted, FALSE otherwise.
  */
-/atom/proc/RelayMouseDrag(atom/src_object, atom/over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
+/atom/proc/RelayMouseDrag(atom/src_object, atom/over_object, src_location, over_location, src_control, over_control, params, mob/user)
 	return FALSE
 
 /mob/proc/OnMouseDrag(atom/src_object, atom/over_object, src_location, over_location, src_control, over_control, params)

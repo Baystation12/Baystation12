@@ -138,7 +138,7 @@
 	. = ..()
 	LAZYSET(sprite_sheets, SPECIES_RESOMI, 'packs/infinity/icons/mob/species/resomi/onmob_ears_resomi.dmi')
 
-/obj/item/clothing/mask/plunger/equipped(var/M, var/slot)
+/obj/item/clothing/mask/plunger/equipped(M, slot)
 	..()
 	sprite_sheets[SPECIES_RESOMI] = (slot == slot_head ? 'packs/infinity/icons/mob/species/resomi/onmob_head_resomi.dmi' : 'packs/infinity/icons/mob/species/resomi/onmob_mask_resomi.dmi')
 
@@ -158,6 +158,6 @@
 	. = ..()
 	LAZYSET(sprite_sheets, SPECIES_RESOMI, 'packs/infinity/icons/mob/species/resomi/onmob_back_resomi.dmi')
 
-/obj/item/towel/equipped(var/M, var/slot)
+/obj/item/towel/equipped(M, slot)
 	..()
 	sprite_sheets = list(SPECIES_RESOMI = (slot == slot_head ? 'packs/infinity/icons/mob/species/resomi/onmob_head_resomi.dmi' : 'packs/infinity/icons/mob/species/resomi/onmob_suit_resomi.dmi'))

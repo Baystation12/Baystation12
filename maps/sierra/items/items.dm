@@ -63,7 +63,7 @@ Unique items
 	name = "stationary boombox"
 	anchored = TRUE
 
-/obj/item/device/boombox/anchored/attack_hand(var/mob/user)
+/obj/item/device/boombox/anchored/attack_hand(mob/user)
 	interact(user)
 
 /obj/item/tape/research
@@ -257,7 +257,7 @@ Passports
 	. = ..()
 	create_access()
 
-/obj/item/device/remote_device/proc/create_access(var/obj/item/card/id/user_id)
+/obj/item/device/remote_device/proc/create_access(obj/item/card/id/user_id)
 	QDEL_NULL(ID)
 	ID = new /obj/item/card/id
 	ID.access = list()

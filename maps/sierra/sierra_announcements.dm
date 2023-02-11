@@ -37,7 +37,7 @@
 	use_job_frequency_announcement = FALSE
 	use_radio_announcement = TRUE
 
-/datum/map/sierra/level_x_biohazard_announcement(var/bio_level)
+/datum/map/sierra/level_x_biohazard_announcement(bio_level)
 	if(!isnum(bio_level))
 		CRASH("Expected a number, was: [log_info_line(bio_level)]")
 	if(bio_level < 1 || bio_level > 9)

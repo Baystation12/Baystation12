@@ -134,7 +134,7 @@
 	autofiring_by = null
 	. = ..()
 
-/obj/item/gun/proc/set_autofire(var/atom/fire_at, var/mob/fire_by)
+/obj/item/gun/proc/set_autofire(atom/fire_at, mob/fire_by)
 	. = TRUE
 	if(!istype(fire_at) || !istype(fire_by))
 		. = FALSE
@@ -275,7 +275,7 @@
 	update_icon()
 	return ..()
 
-/obj/item/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0, set_click_cooldown=TRUE, var/list/params = list())
+/obj/item/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0, set_click_cooldown=TRUE, list/params = list())
 	if(!user || !target)
 		return
 	if(target.z != user.z)

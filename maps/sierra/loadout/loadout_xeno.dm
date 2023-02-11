@@ -79,17 +79,3 @@
 	path = /obj/item/clothing/gloves/color/white/modified
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI, SPECIES_YEOSA)
-
-// Vox clothing
-
-/datum/gear/mask/gas/vox
-	allowed_roles = list(  /*/datum/job/stowaway*/)
-
-/datum/gear/gloves/vox
-	allowed_roles = list(  /*/datum/job/stowaway*/)
-
-/datum/gear/uniform/vox_cloth
-	allowed_roles = list(  /*/datum/job/stowaway*/)
-
-/datum/gear/uniform/vox_robe
-	allowed_roles = list(  /*/datum/job/stowaway*/)

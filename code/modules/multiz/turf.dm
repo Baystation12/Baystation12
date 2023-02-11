@@ -127,11 +127,11 @@
 			return 0
 	return 1
 
-/turf/exterior/open/Entered(var/atom/movable/mover, var/atom/oldloc)
+/turf/exterior/open/Entered(atom/movable/mover, atom/oldloc)
 	..()
 	mover.fall(oldloc)
 
-/turf/exterior/open/hitby(var/atom/movable/AM)
+/turf/exterior/open/hitby(atom/movable/AM)
 	..()
 	if(!QDELETED(AM))
 		AM.fall()

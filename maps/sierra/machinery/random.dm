@@ -6,7 +6,7 @@ Random item spawning
 	name = "random solgov equipment"
 	desc = "This is a random piece of solgov equipment or clothing."
 	icon = 'icons/obj/clothing/obj_head.dmi'
-	icon_state = "m_helmet"
+	icon_state = "swatglass"
 
 /obj/random/solgov/spawn_choices()
 	return list(/obj/item/clothing/head/solgov/utility/fleet = 4,

@@ -13,21 +13,21 @@
 
 #define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hos, /datum/job/hop, /datum/job/chief_engineer, /datum/job/rd, /datum/job/cmo, /datum/job/iaa, /datum/job/psychiatrist
 	species_to_job_blacklist = list(
-		/datum/species/unathi  		 = list(HUMAN_ONLY_JOBS/*, /datum/job/adjutant, /datum/job/senior_doctor, /datum/job/senior_scientist*/),
-		/datum/species/unathi/yeosa  = list(HUMAN_ONLY_JOBS/*, /datum/job/adjutant, /datum/job/senior_doctor, /datum/job/senior_scientist*/),
-		/datum/species/skrell  		 = list(/datum/job/captain, /datum/job/hos, /datum/job/hop, /*/datum/job/chief_engineer, /datum/job/rd, *//datum/job/cmo, /datum/job/iaa, /datum/job/psychiatrist),
-		/datum/species/machine 		 = list(/datum/job/captain, /datum/job/hos, /datum/job/security_assistant, /datum/job/psychiatrist),
-		/datum/species/diona   		 = list(HUMAN_ONLY_JOBS, /datum/job/exploration_leader, /datum/job/explorer_pilot,\
+		/datum/species/unathi		 = list(HUMAN_ONLY_JOBS/*, /datum/job/adjutant, /datum/job/senior_doctor, /datum/job/senior_scientist*/),
+		/datum/species/unathi/yeosa	= list(HUMAN_ONLY_JOBS/*, /datum/job/adjutant, /datum/job/senior_doctor, /datum/job/senior_scientist*/),
+		/datum/species/skrell		 = list(/datum/job/captain, /datum/job/hos, /datum/job/hop, /*/datum/job/chief_engineer, /datum/job/rd, *//datum/job/cmo, /datum/job/iaa, /datum/job/psychiatrist),
+		/datum/species/machine		 = list(/datum/job/captain, /datum/job/hos, /datum/job/security_assistant, /datum/job/psychiatrist),
+		/datum/species/diona		 = list(HUMAN_ONLY_JOBS, /datum/job/exploration_leader, /datum/job/explorer_pilot,\
 									/datum/job/officer, /datum/job/warden, /datum/job/detective,\
 									/datum/job/qm,\
 									/datum/job/senior_engineer, /datum/job/senior_doctor,\
 									/*/datum/job/stowaway,*/ /datum/job/senior_scientist, /datum/job/security_assistant),
+		/datum/species/resomi		= list(HUMAN_ONLY_JOBS,	/datum/job/officer,	/datum/job/exploration_leader,\
+									/datum/job/warden,	/datum/job/chief_engineer,	/datum/job/rd,	/datum/job/iaa,	/datum/job/security_assistant)
 		/* /datum/species/human/booster= list(HUMAN_ONLY_JOBS,\
 									/datum/job/adjutant, /datum/job/exploration_leader, /datum/job/senior_engineer,\
 									/datum/job/warden, /datum/job/detective, /datum/job/officer,
 									/datum/job/qm, /datum/job/senior_scientist) */
-		/datum/species/resomi  		 = list(HUMAN_ONLY_JOBS, /datum/job/officer, /datum/job/exploration_leader,\
-									/datum/job/warden, /datum/job/chief_engineer, /datum/job/rd, /datum/job/iaa, /datum/job/security_assistant),
 	)
 #undef HUMAN_ONLY_JOBS
 

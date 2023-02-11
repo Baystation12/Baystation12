@@ -1,5 +1,6 @@
 
 /datum/gear/utility/modular_scanner/medical
+	display_name = "Medical PDA"
 	allowed_roles = STERILE_ROLES
 
 /datum/gear/utility/pda
@@ -29,7 +30,7 @@
 	pdas["black (mercs)"]           = /obj/item/modular_computer/pda/syndicate
 	gear_tweaks += new/datum/gear_tweak/path(pdas)
 
-/datum/gear/utility/pda/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
+/datum/gear/utility/pda/spawn_on_mob(mob/living/carbon/human/H, metadata)
 	var/obj/item/modular_computer/pda/item = spawn_item(H, H, metadata)
 	var/obj/item/card/id = H.GetIdCard()
 	if(id)
@@ -75,7 +76,7 @@
 	wcomp["short (black)"]           = /obj/item/modular_computer/pda/wrist/lila/black
 	gear_tweaks += new/datum/gear_tweak/path(wcomp)
 
-/datum/gear/utility/wrist_computer/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
+/datum/gear/utility/wrist_computer/spawn_on_mob(mob/living/carbon/human/H, metadata)
 	var/obj/item/modular_computer/pda/wrist/item = spawn_item(H, H, metadata)
 	var/obj/item/card/id = H.GetIdCard()
 	if(id)

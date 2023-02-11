@@ -8077,11 +8077,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/bridge/adjutants)
 "aob" = (
@@ -8437,10 +8432,6 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/structure/cable{
-	d1 = 32;
-	icon_state = "32-1"
-	},
 /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers{
 	dir = 8
 	},
@@ -8481,11 +8472,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/computer/cryopod/robot{
 	pixel_y = 30
-	},
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24
 	},
 /turf/simulated/floor/plating,
 /area/turret_protected/ai_cyborg_station)
@@ -9491,6 +9477,11 @@
 /obj/structure/cable/green{
 	d2 = 8;
 	icon_state = "0-8"
+	},
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
 	},
 /turf/simulated/floor/plating,
 /area/turret_protected/ai_cyborg_station)
@@ -18227,11 +18218,6 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
 	},
@@ -26561,7 +26547,7 @@
 	req_access = list("ACCESS_RESEARCH")
 	},
 /obj/machinery/camera/network/research{
-	c_tag = "Research - Lockers";
+	c_tag = "First Deck - RND - Research Lab";
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -34575,7 +34561,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d1port)
 "bhK" = (
@@ -34887,11 +34872,6 @@
 "biB" = (
 /obj/structure/table/woodentable/walnut,
 /obj/item/material/ashtray/glass,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
 	},
@@ -37433,7 +37413,7 @@
 	use_power = 1
 	},
 /turf/simulated/floor/airless,
-/area/thruster/d1starboard)
+/area/thruster/d1port)
 "ijg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -38477,6 +38457,11 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "lFn" = (
@@ -38686,11 +38671,6 @@
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d1port)
 "msU" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
 	},
@@ -38782,6 +38762,16 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/morgue)
+"mLB" = (
+/obj/effect/floor_decal/borderfloor{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/lime/border{
+	dir = 4
+	},
+/obj/structure/bed/chair/comfy/beige,
+/turf/simulated/floor/tiled,
+/area/crew_quarters/dungeon_master_lounge)
 "mLH" = (
 /obj/structure/closet/secure_closet/personal/patient,
 /obj/effect/floor_decal/borderfloorwhite{
@@ -69508,7 +69498,7 @@ nOq
 arA
 cqL
 msU
-kGA
+mLB
 biB
 aFJ
 kGA

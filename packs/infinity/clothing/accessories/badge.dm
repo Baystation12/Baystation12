@@ -30,7 +30,7 @@
 			badge_string = faction.name
 		to_chat(user, "<span class='notice'>[src]'s faction now is '[badge_string]'.</span>")
 
-/obj/item/clothing/accessory/badge/dog_tags/set_desc(var/mob/living/carbon/human/H)
+/obj/item/clothing/accessory/badge/dog_tags/set_desc(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
 	var/singleton/cultural_info/culture = H.get_cultural_value(TAG_RELIGION)

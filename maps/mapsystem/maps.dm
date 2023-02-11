@@ -537,7 +537,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	show_browser(C, current_lobby_screen, "file=titlescreen.gif;display=0")
 	send_output(C, null, "lobbybrowser:updateImage")
 
-/datum/map/proc/set_titlescreen_ready(client/C, var/ready=FALSE)
+/datum/map/proc/set_titlescreen_ready(client/C, ready=FALSE)
 	send_output(C, ready, "lobbybrowser:setReadyStatus")
 
 /datum/map/proc/fade_titlescreen(client/C)
@@ -552,7 +552,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/mob/new_player/player = C.mob
 	send_output(C, "[state]-[player.ready]", "lobbybrowser:setStatus")
 
-/proc/to_titlescreen(var/msg)
+/proc/to_titlescreen(msg)
 	var/message = url_encode(url_encode(msg))
 	for(var/mob/new_player/player in GLOB.player_list)
 		send_output(player.client, message, "lobbybrowser:subsystemMessage")

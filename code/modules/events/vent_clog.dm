@@ -33,9 +33,9 @@
 		if(!temp_vent)
 			continue
 		if(isStationLevel(temp_vent.z))
-			if(temp_vent.network && temp_vent.network.normal_members.len > 20)
+			if(temp_vent.network && length(temp_vent.network.normal_members) > 20)
 				vents += temp_vent
-	if(!vents.len)
+	if(!length(vents))
 		return kill()
 
 /datum/event/vent_clog/tick()

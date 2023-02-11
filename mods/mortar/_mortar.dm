@@ -26,7 +26,6 @@ var/global/obfs_y = 0 //A number between -500 and 500
 
 /singleton/modpack/mortar
 	name = "Mortar's"
-	author = "@Констебель Глист#2586"
 
 
 /obj/structure/mortar
@@ -34,8 +33,6 @@ var/global/obfs_y = 0 //A number between -500 and 500
 	desc = "Mortar"
 	icon = 'mortar.dmi'
 	icon_state = "mortar_m402"
-	anchored = 1
-	density = 1
 	var/xinput
 	var/yinput
 	var/xdial
@@ -50,6 +47,11 @@ var/global/obfs_y = 0 //A number between -500 and 500
 	var/max_shells = 1
 	var/list/shells = new/list
 
+
+/obj/structure/mortar/New()
+	. = ..()
+	anchored = TRUE
+	density = TRUE
 
 
 /obj/structure/mortar/attack_hand(mob/user)
@@ -106,29 +108,29 @@ var/global/obfs_y = 0 //A number between -500 and 500
 	if (choice == "Dial")
 		var/temp_dial_x = input("Set longitude adjustement from -10 to 10.") as num
 		if(temp_dial_x + xinput > world.maxx || temp_dial_x + xinput < 0)
-			user << "<span class='warning'>You cannot dial to this coordinate, it is outside of the area of operations.</span>"
+			to_chat(user, "<span class='warning'>You cannot dial to this coordinate, it is outside of the area of operations.</span>")
 			return
 
 		if(temp_dial_x < -10 || temp_dial_x > 10)
-			user << "<span class='warning'>You cannot dial to this coordinate, it is too far away. You need to set [src] up instead.</span>"
+			to_chat(user, "<span class='warning'>You cannot dial to this coordinate, it is too far away. You need to set [src] up instead.</span>")
 			return
 
 		var/temp_dial_y = input("Set latitude adjustement from -10 to 10.") as num
 		if(temp_dial_y + yinput > world.maxy || temp_dial_y + yinput < 0)
-			user << "<span class='warning'>You cannot dial to this coordinate, it is outside of the area of operations.</span>"
+			to_chat(user, "<span class='warning'>You cannot dial to this coordinate, it is outside of the area of operations.</span>")
 			return
 
 		var/turf/T = locate(xinput + temp_dial_x, yinput + temp_dial_y, z)
 		if(get_dist(loc, T) < 10)
-			user << "<span class='warning'>You cannot dial to this coordinate, it is too close to your mortar.</span>"
+			to_chat(user, "<span class='warning'>You cannot dial to this coordinate, it is too close to your mortar.</span>")
 			return
 
 		if(temp_dial_y < -10 || temp_dial_y > 10)
-			user << "<span class='warning'>You cannot dial to this coordinate, it is too far away. You need to set [src] up instead.</span>"
+			to_chat(user, "<span class='warning'>You cannot dial to this coordinate, it is too far away. You need to set [src] up instead.</span>")
 			return
 
 		if(busy)
-			user << "<span class='warning'>Someone else is currently using this mortar.</span>"
+			to_chat(user, "<span class='warning'>Someone else is currently using this mortar.</span>")
 			return
 		user.visible_message("<span class='notice'>[user] starts dialing [src]'s firing angle and distance.</span>",
 		"<span class='notice'>You start dialing [src]'s firing angle and distance to match the new coordinates.</span>")
@@ -145,26 +147,7 @@ var/global/obfs_y = 0 //A number between -500 and 500
 
 
 
-/obj/structure/mortar/attackby(var/obj/item/O as obj, mob/user as mob)
-/*
-	if(busy)
-		user << "<span class='warning'>Someone else is currently using [src].</span>"
-		return
-
-	if(z != 1)
-		user << "<span class='warning'>You cannot fire [src] here.</span>"
-		return
-
-	if(xinput == 0 && yinput == 0) //Mortar wasn't set
-		user << "<span class='warning'>[src] needs to be aimed first.</span>"
-		return
-
-	var/turf/T = locate(xinput + xdial + xoffset, yinput + ydial + yoffset, z)
-	if(!isturf(T))
-		user << "<span class='warning'>You cannot fire [src] to this target.</span>"
-		return
-*/
-
+/obj/structure/mortar/attackby(obj/item/O, mob/user)
 	var/turf/T = locate(xinput + xdial + xoffset, yinput + ydial + yoffset, z)
 	if(!isturf(T))
 		user << "<span class='warning'>You cannot fire [src] to this target.</span>"
@@ -223,12 +206,12 @@ var/global/obfs_y = 0 //A number between -500 and 500
 	w_class = 5
 
 /obj/item/mortar_kit/attack_self(mob/user)
-	user.visible_message("<span class='notice'>[user] starts deploying [src].",
-	"<span class='notice'>You start deploying [src].")
+	user.visible_message("<span class='notice'>[user] starts deploying [src].</span>",
+	"<span class='notice'>You start deploying [src].</span>")
 	playsound(loc, 'sound/items/Deconstruct.ogg', 25, 1)
 	if(do_after(user, 40, src))
-		user.visible_message("<span class='notice'>[user] deploys [src].",
-		"<span class='notice'>You deploy [src].")
+		user.visible_message("<span class='notice'>[user] deploys [src].</span>",
+		"<span class='notice'>You deploy [src].</span>")
 		playsound(loc, 'sound/items/Deconstruct.ogg', 25, 1)
 		var/obj/structure/mortar/M = new /obj/structure/mortar(get_turf(user))
 		M.dir = user.dir
@@ -251,7 +234,7 @@ var/global/obfs_y = 0 //A number between -500 and 500
 	var/spread_range = 7 //leave as is, for some reason setting this higher makes the spread pattern have gaps close to the epicenter
 	var/explosion_size = 4
 
-/obj/item/mortar_shell/proc/detonate(var/turf/T)
+/obj/item/mortar_shell/proc/detonate(turf/T)
 
 	forceMove(T)
 
@@ -263,7 +246,7 @@ var/global/obfs_y = 0 //A number between -500 and 500
 	spread_range = 0
 	explosion_size = 8
 
-/obj/item/mortar_shell/he/detonate(var/turf/T)
+/obj/item/mortar_shell/he/detonate(turf/T)
 	explosion(T, explosion_size, EX_ACT_HEAVY)
 
 /obj/item/mortar_shell/frag
@@ -282,7 +265,7 @@ var/global/obfs_y = 0 //A number between -500 and 500
 	armor_penetration = 10
 
 
-/obj/item/mortar_shell/frag/detonate(var/turf/T)
+/obj/item/mortar_shell/frag/detonate(turf/T)
 
 	explosion(T, explosion_size, EX_ACT_LIGHT)
 	src.fragmentate(T, num_fragments, spread_range, fragment_types)

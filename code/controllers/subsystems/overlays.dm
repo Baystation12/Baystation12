@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(overlays)
 	var/list/overlay_icon_cache = list()
 
 /datum/controller/subsystem/overlays/UpdateStat(text)
-	..("Ov:[processing.len - (idex - 1)]")
+	..("Ov:[length(processing) - (idex - 1)]")
 
 /datum/controller/subsystem/overlays/Initialize()
 	Flush()
@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(overlays)
 
 /datum/controller/subsystem/overlays/fire(resumed = FALSE, mc_check = TRUE)
 	var/list/processing = src.processing
-	while(idex <= processing.len)
+	while(idex <= length(processing))
 		var/atom/thing = processing[idex++]
 
 		if(!QDELETED(thing) && thing.overlay_queued)	// Don't double-process if something already forced a compile.
@@ -42,8 +42,8 @@ SUBSYSTEM_DEF(overlays)
 		idex = 1
 
 /datum/controller/subsystem/overlays/proc/Flush()
-	if(processing.len)
-		log_ss("overlays", "Flushing [processing.len] overlays.")
+	if(length(processing))
+		log_ss("overlays", "Flushing [length(processing)] overlays.")
 		fire(mc_check = FALSE)
 
 /atom/proc/compile_overlays()
@@ -157,7 +157,7 @@ SUBSYSTEM_DEF(overlays)
 
 	overlays_list = build_appearance_list(overlays_list)
 
-	if (!overlays_list || (islist(overlays_list) && !overlays_list.len))
+	if (!overlays_list || (islist(overlays_list) && !length(overlays_list)))
 		// No point trying to compile if we don't have any overlays.
 		return
 

@@ -43,7 +43,7 @@ SUBSYSTEM_DEF(modpacks)
 	if(!mob || !SSmodpacks.initialized)
 		return
 
-	if(SSmodpacks.loaded_modpacks.len)
+	if(length(SSmodpacks.loaded_modpacks))
 		. = "<hr><br><center><b><font size = 3>Modpacks List</font></b></center><br><hr><br>"
 		for(var/modpack in SSmodpacks.loaded_modpacks)
 			var/singleton/modpack/M = SSmodpacks.loaded_modpacks[modpack]

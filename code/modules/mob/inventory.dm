@@ -250,7 +250,7 @@
  * Else use unequip_item
  */
 
-/mob/proc/drop_item(var/atom/Target)
+/mob/proc/drop_item(atom/Target)
 	var/obj/item/item_dropped = null
 
 	if(length(get_active_grabs()))
@@ -270,11 +270,11 @@
 		addtimer(new Callback(src, .proc/make_item_drop_sound, item_dropped), 1)
 
 /mob/proc/make_item_drop_sound(obj/item/I)
-    if(QDELETED(I))
-        return
+	if(QDELETED(I))
+		return
 
-    if(I.drop_sound)
-        playsound(I, I.drop_sound, 25, 0)
+	if(I.drop_sound)
+		playsound(I, I.drop_sound, 25, 0)
 
 
 /*

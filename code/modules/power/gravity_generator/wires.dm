@@ -3,10 +3,10 @@
 	holder_type = /obj/machinery/gravity_generator/main
 	wire_count = 4
 
-var/const/GRAVITY_GENERATOR_WIRE_BREAKER = 1
-var/const/GRAVITY_GENERATOR_WIRE_EMERGENCY_BUTTON = 2
-var/const/GRAVITY_GENERATOR_WIRE_POWER = 4
-var/const/GRAVITY_GENERATOR_WIRE_ANNOUNCER = 8
+var/global/const/GRAVITY_GENERATOR_WIRE_BREAKER = 1
+var/global/const/GRAVITY_GENERATOR_WIRE_EMERGENCY_BUTTON = 2
+var/global/const/GRAVITY_GENERATOR_WIRE_POWER = 4
+var/global/const/GRAVITY_GENERATOR_WIRE_ANNOUNCER = 8
 
 /datum/wires/gravity_generator/CanUse(mob/living/L)
 	var/obj/machinery/gravity_generator/main/GG = holder

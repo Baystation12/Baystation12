@@ -13,7 +13,6 @@
 		/area/turret_protected/ai_cyborg_station = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/thirddeck/aft = 0,
 		/area/maintenance/waterstore = 0,
-		/area/maintenance/abandoned_compartment = NO_APC,
 		/area/maintenance/abandoned_hydroponics = 0,
 		/area/maintenance/firstdeck/aftport = 0,
 		/area/maintenance/abandoned_common = 0,
@@ -37,6 +36,7 @@
 		/area/vacant/infirmary = NO_SCRUBBER|NO_VENT,
 		/area/vacant/monitoring = NO_SCRUBBER|NO_VENT,
 		/area/rnd/xenobiology/atmos  = NO_SCRUBBER|NO_VENT,
+		/area/shield/seconddeck = NO_SCRUBBER|NO_VENT,
 	)
 
 	area_coherency_test_exempt_areas = list(

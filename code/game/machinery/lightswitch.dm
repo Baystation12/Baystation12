@@ -110,7 +110,7 @@
 			if(L.smart != smart)
 				L.smart = smart
 
-/obj/machinery/light_switch/proc/motion_detect(var/force=FALSE, var/atom/movable/detected)
+/obj/machinery/light_switch/proc/motion_detect(force=FALSE, atom/movable/detected)
 	// Events writes into force - areas... But who cares
 
 	// Furniture, simple_animals - doesn't care

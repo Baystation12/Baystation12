@@ -9,7 +9,7 @@ var/global/all_ui_styles = list(
 	"minimalist"   = 'icons/mob/screen/minimalist.dmi'
 	)
 
-var/all_tooltip_styles = list(
+var/global/all_tooltip_styles = list(
 	"Midnight", //Default for everyone is the first one,
 	"Plasmafire",
 	"Retro",
