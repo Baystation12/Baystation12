@@ -12,7 +12,6 @@
 	var/hidden
 	var/hidden_from_codex
 	var/list/qualifications
-	var/list/allowed_accents
 
 /decl/cultural_info/New()
 

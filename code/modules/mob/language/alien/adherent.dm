@@ -14,4 +14,3 @@
 	)
 	shorthand = "VP"
 	space_chance = 0
-	accent = /decl/accent/adherent

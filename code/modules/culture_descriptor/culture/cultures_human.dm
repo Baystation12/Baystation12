@@ -26,11 +26,6 @@
 	группам или слишком гордятся своим происхождением в целом, как в случае с гидеонцами, доходя до того, \
 	что постоянно про нее упоминают."
 	economic_power = 1
-	allowed_accents = list(
-		/decl/accent/sol_core,
-		/decl/accent/mars_surface,
-		/decl/accent/mars_tunnel
-	)
 
 /decl/cultural_info/culture/human/martian_tunneller
 	name = CULTURE_HUMAN_MARSTUN
