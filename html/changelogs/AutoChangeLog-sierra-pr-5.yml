@@ -1,0 +1,5 @@
+author: ''
+delete-after: true
+changes:
+  - experiment: Всё связанное с таярами теперь находится в одной папке.
+  - bugfix: Исправлены проблемы с ригом СЕ.
