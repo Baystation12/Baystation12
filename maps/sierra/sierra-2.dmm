@@ -5461,11 +5461,6 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_y = 24
-	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -5754,6 +5749,10 @@
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/shield/seconddeck)
@@ -6697,7 +6696,7 @@
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled,
-/area/hallway/primary/seconddeck/center)
+/area/crew_quarters/gym)
 "amS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -12915,10 +12914,6 @@
 /obj/item/paper/sierra,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/camera/network/second_deck{
-	c_tag = "Second Deck - Hallway - Central";
-	dir = 4
-	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/cafe)
 "axY" = (
@@ -26580,7 +26575,8 @@
 /obj/item/rig/eva/equipped,
 /obj/machinery/door/window/brigdoor/southleft{
 	dir = 4;
-	req_access = list("ACCESS_SENENG")
+	req_access = list("ACCESS_SENENG");
+	autoset_access = 0
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engine_eva)
@@ -35014,13 +35010,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/space)
-"jxJ" = (
-/obj/machinery/camera/network/second_deck{
-	c_tag = "Second Deck - Hallway - Central";
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/crew_quarters/gym)
 "jyL" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/seconddeck/xenobio)
@@ -36471,13 +36460,6 @@
 /obj/effect/floor_decal/spline/fancy/black/corner,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/nano)
-"otK" = (
-/obj/machinery/camera/network/second_deck{
-	c_tag = "Second Deck - Hallway - Central";
-	dir = 4
-	},
-/turf/simulated/wall/prepainted,
-/area/crew_quarters/gym)
 "owg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -60291,7 +60273,7 @@ aAP
 aAP
 aAP
 aAP
-otK
+aAP
 aAP
 aAP
 avj
@@ -60695,7 +60677,7 @@ avj
 bbR
 bbR
 bbR
-jxJ
+akN
 ugI
 awl
 kRQ

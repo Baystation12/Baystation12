@@ -47,20 +47,20 @@
 	conductive = 0
 	value = 0
 
-/material/cloth //todo
+
+/material/cloth
 	name = MATERIAL_CLOTH
 	display_name ="white"
 	use_name = "cloth roll"
 	icon_colour = "#ffffff"
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	door_icon_base = "wood"
-	stack_type = /obj/item/stack/material/cloth
 	ignition_point = T0C+232
 	melting_point = T0C+300
 	flags = MATERIAL_PADDING
 	brute_armor = 1
 	conductive = 0
-	stack_type = null
+	stack_type = /obj/item/stack/material/cloth
 	hidden_from_codex = TRUE
 	construction_difficulty = MATERIAL_NORMAL_DIY
 

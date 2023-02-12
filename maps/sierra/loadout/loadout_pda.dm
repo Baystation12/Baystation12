@@ -1,8 +1,4 @@
 
-/datum/gear/utility/modular_scanner/medical
-	display_name = "Medical PDA"
-	allowed_roles = STERILE_ROLES
-
 /datum/gear/utility/pda
 	display_name = "PDA selection"
 	path = /obj/item/modular_computer/pda

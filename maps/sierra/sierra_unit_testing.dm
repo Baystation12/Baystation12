@@ -16,7 +16,6 @@
 		/area/maintenance/abandoned_hydroponics = 0,
 		/area/maintenance/firstdeck/aftport = 0,
 		/area/maintenance/abandoned_common = 0,
-		/area/shield = NO_SCRUBBER|NO_VENT,
 		/area/shuttle = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/shuttle/petrov = 0,
 		/area/solar = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -36,7 +35,11 @@
 		/area/vacant/infirmary = NO_SCRUBBER|NO_VENT,
 		/area/vacant/monitoring = NO_SCRUBBER|NO_VENT,
 		/area/rnd/xenobiology/atmos  = NO_SCRUBBER|NO_VENT,
-		/area/shield/seconddeck = NO_SCRUBBER|NO_VENT,
+		/area/rnd/xenobiology/cell_1 = NO_APC,
+		/area/rnd/xenobiology/cell_2 = NO_APC,
+		/area/rnd/xenobiology/cell_3 = NO_APC,
+		/area/rnd/xenobiology/cell_4 = NO_APC,
+		/area/hydroponics/storage = NO_SCRUBBER|NO_VENT
 	)
 
 	area_coherency_test_exempt_areas = list(
@@ -51,6 +54,7 @@
 		/area/shuttle/escape,
 		/area/security/prison,
 		/area/syndicate_elite_squad,
+		/area/shuttle/syndicate_elite,
 		/area/shuttle/syndicate_elite/station,
 		/area/shuttle/syndicate_elite/mothership,
 		/area/shuttle/escape/centcom,

@@ -277,6 +277,23 @@
 	path = /obj/item/clothing/under/resomi/work_white
 	flags = GEAR_HAS_TYPE_SELECTION
 
+/datum/gear/uniform/resomi/white/New()
+	return
+/datum/gear/uniform/resomi/dress/New()
+	return
+/datum/gear/uniform/resomi/utility/New()
+	return
+/datum/gear/uniform/resomi/sport/New()
+	return
+/datum/gear/uniform/resomi/med/New()
+	return
+/datum/gear/uniform/resomi/science/New()
+	return
+/datum/gear/uniform/resomi/dark_worksmock/New()
+	return
+/datum/gear/uniform/resomi/light_worksmock/New()
+	return
+
 /datum/gear/eyes/resomi
 	display_name = "(Resomi) sun lenses"
 	path = /obj/item/clothing/glasses/sunglasses/lenses
@@ -348,7 +365,7 @@
 	whitelisted = list(SPECIES_RESOMI)
 	flags = GEAR_HAS_SUBTYPE_SELECTION
 
-/datum/gear/suit/hooded/resomicloak
+/datum/gear/suit/resomicloak
 	display_name = "(Resomi) Hooded Cloak"
 	sort_category = "Xenowear"
 	path = /obj/item/clothing/suit/storage/hooded/resomi

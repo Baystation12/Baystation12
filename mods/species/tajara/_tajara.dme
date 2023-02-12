@@ -1,5 +1,5 @@
-#ifndef CONTENT_PACK_TAJARA
-#define CONTENT_PACK_TAJARA
+#ifndef MODPACK_TAJARA
+#define MODPACK_TAJARA
 #include "_tajara.dm"
 
 //clothing

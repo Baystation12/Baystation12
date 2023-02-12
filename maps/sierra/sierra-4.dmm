@@ -3104,7 +3104,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "aum" = (
 /obj/effect/floor_decal/corner/paleblue/bordercorner2{
 	dir = 9
@@ -3156,7 +3156,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "auu" = (
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 1
@@ -3169,7 +3169,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "auv" = (
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 1
@@ -3182,7 +3182,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "aux" = (
 /obj/machinery/door/airlock/centcom{
 	dir = 8;
@@ -3314,7 +3314,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "auO" = (
 /obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
 	id = "cc_surgery_operative"
@@ -5701,7 +5701,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "aUp" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/stamp/boss,
@@ -7631,7 +7631,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "bjQ" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/structure/flora/ausbushes/ywflowers,
@@ -7751,10 +7751,6 @@
 "blC" = (
 /turf/simulated/floor/holofloor/beach/water,
 /area/holodeck/source_temple)
-"blE" = (
-/obj/effect/floor_decal/industrial/hatch,
-/turf/unsimulated/floor/reinforced,
-/area/thruster/d1port)
 "blK" = (
 /obj/effect/floor_decal/stoneborder/corner{
 	dir = 8
@@ -7820,7 +7816,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "btu" = (
 /obj/effect/floor_decal/corner/black/diagonal{
 	dir = 8
@@ -7872,7 +7868,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "bxn" = (
 /obj/structure/window/reinforced{
 	dir = 1
@@ -7929,7 +7925,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "bEo" = (
 /obj/structure/table/reinforced,
 /obj/item/paper_bin,
@@ -7969,7 +7965,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "bJa" = (
 /obj/structure/disposalpipe/segment,
 /turf/unsimulated/floor/techfloor{
@@ -8139,9 +8135,6 @@
 	icon = 'icons/turf/flooring/grass.dmi'
 	},
 /area/centcom)
-"ctq" = (
-/turf/simulated/wall/prepainted,
-/area/centcom/holding)
 "ctI" = (
 /obj/machinery/smartfridge{
 	opacity = 1
@@ -8326,7 +8319,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "cSw" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
@@ -8380,7 +8373,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "cUW" = (
 /obj/machinery/chem_master,
 /obj/effect/floor_decal/corner/beige{
@@ -8447,7 +8440,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "cYt" = (
 /obj/effect/floor_decal/borderfloorblack,
 /turf/unsimulated/floor{
@@ -8480,7 +8473,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "dcm" = (
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 4
@@ -8580,7 +8573,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "dqW" = (
 /obj/structure/closet/secure_closet/freezer/meat,
 /obj/effect/floor_decal/corner/paleblue/diagonal,
@@ -8635,7 +8628,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "dxf" = (
 /obj/structure/disposalpipe/junction,
 /turf/unsimulated/floor{
@@ -8705,7 +8698,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "dHt" = (
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 8
@@ -8799,7 +8792,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "dSc" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
@@ -8897,7 +8890,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "eaU" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 1
@@ -8982,7 +8975,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "ein" = (
 /obj/structure/bed/chair/comfy/blue{
 	dir = 8
@@ -9005,7 +8998,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "ekl" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 8
@@ -9137,7 +9130,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "ewi" = (
 /obj/structure/disposalpipe/segment,
 /turf/unsimulated/floor{
@@ -9164,7 +9157,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "ezA" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/disposalpipe/segment{
@@ -9234,7 +9227,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "eCv" = (
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 1
@@ -9302,7 +9295,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "eLp" = (
 /obj/effect/floor_decal/techfloor/corner{
 	dir = 1
@@ -9477,7 +9470,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "fjZ" = (
 /obj/structure/railing/mapped{
 	dir = 8
@@ -9573,7 +9566,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "fzy" = (
 /obj/structure/table/rack/dark,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -9680,7 +9673,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "fIV" = (
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/machinery/robotics_fabricator,
@@ -9716,10 +9709,6 @@
 	icon_state = "steel"
 	},
 /area/centcom)
-"fRb" = (
-/obj/effect/paint/hull,
-/turf/simulated/wall/r_titanium,
-/area/thruster/d1port)
 "fRh" = (
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 6
@@ -9887,7 +9876,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "gpQ" = (
 /obj/effect/forcefield{
 	desc = "You can't get in. Heh.";
@@ -9917,10 +9906,6 @@
 	icon_state = "dark"
 	},
 /area/tdome/testing)
-"gqF" = (
-/obj/effect/decal/cleanable/filth,
-/turf/unsimulated/floor/techfloor,
-/area/thruster/d1port)
 "gsX" = (
 /obj/effect/decal/cleanable/blood/oil,
 /turf/unsimulated/floor/techfloor,
@@ -10001,7 +9986,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "gzh" = (
 /obj/machinery/telecomms/server/presets/centcomm,
 /obj/effect/floor_decal/borderfloorblack{
@@ -10265,10 +10250,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
-"gWq" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/thruster/d1port)
+/area/centcom/living)
 "gYv" = (
 /obj/effect/floor_decal/borderfloor,
 /obj/structure/bed/chair/office/comfy/blue{
@@ -10344,22 +10326,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
-"hid" = (
-/obj/effect/floor_decal/borderfloorblack{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/red/border{
-	dir = 8
-	},
-/obj/effect/floor_decal/borderfloorblack/corner2{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/red/bordercorner2{
-	dir = 8
-	},
-/turf/unsimulated/floor/techfloor,
-/area/thruster/d1port)
+/area/centcom/living)
 "hjD" = (
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -10369,7 +10336,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "hlg" = (
 /obj/effect/floor_decal/borderfloorblack,
 /obj/effect/floor_decal/corner/purple/border,
@@ -10694,7 +10661,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "hTO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
@@ -10703,7 +10670,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "hUs" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 1
@@ -10742,7 +10709,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "hVs" = (
 /obj/machinery/door/blast/shutters{
 	dir = 4;
@@ -10912,7 +10879,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "iuE" = (
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 9
@@ -10924,7 +10891,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "iwf" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 8
@@ -11233,7 +11200,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "jjy" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
@@ -11339,7 +11306,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "jwc" = (
 /obj/effect/floor_decal/techfloor/corner{
 	dir = 4
@@ -11376,7 +11343,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "jzh" = (
 /turf/unsimulated/beach/sand{
 	dir = 9;
@@ -11516,7 +11483,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "jIz" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/effect/floor_decal/borderfloorblack{
@@ -11672,7 +11639,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "jWV" = (
 /obj/structure/table/rack/dark,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -11789,7 +11756,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "ksZ" = (
 /obj/structure/bed/chair/wood/wings/walnut{
 	dir = 8
@@ -11932,7 +11899,7 @@
 	icon = 'icons/turf/flooring/wood.dmi';
 	color = "#78523b"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "kIZ" = (
 /obj/structure/table/woodentable_reinforced/walnut,
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -12014,7 +11981,7 @@
 	icon = 'icons/turf/flooring/wood.dmi';
 	color = "#78523b"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "kMa" = (
 /obj/structure/closet/crate/trashcart,
 /obj/effect/floor_decal/techfloor{
@@ -12061,7 +12028,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "kMF" = (
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/purple/border,
@@ -12089,7 +12056,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "kOJ" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/floor_decal/borderfloorblack{
@@ -12163,7 +12130,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "kTF" = (
 /obj/machinery/door/airlock/multi_tile{
 	dir = 8
@@ -12247,7 +12214,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "lbM" = (
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 1
@@ -12398,10 +12365,6 @@
 	icon_state = "dark"
 	},
 /area/centcom)
-"loe" = (
-/obj/machinery/status_display,
-/turf/simulated/wall/prepainted,
-/area/centcom/holding)
 "lol" = (
 /obj/structure/flora/pottedplant/largebush,
 /obj/effect/floor_decal/borderfloor{
@@ -12562,7 +12525,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "lIe" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
@@ -12582,7 +12545,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "lJU" = (
 /obj/machinery/light{
 	dir = 4
@@ -12595,7 +12558,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "lKh" = (
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 8
@@ -12708,7 +12671,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "mfE" = (
 /obj/machinery/door/airlock/centcom{
 	dir = 8
@@ -12822,7 +12785,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "mIS" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/decal/cleanable/filth,
@@ -12853,7 +12816,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "mLk" = (
 /obj/structure/flora/pottedplant/largebush,
 /obj/effect/floor_decal/corner/black/mono,
@@ -12946,7 +12909,7 @@
 	icon = 'icons/turf/flooring/wood.dmi';
 	color = "#78523b"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "mRa" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 9
@@ -13008,7 +12971,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "mYi" = (
 /turf/unsimulated/beach/sand{
 	icon_state = "seashallow"
@@ -13191,7 +13154,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "nuY" = (
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 8
@@ -13202,14 +13165,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor/techfloor,
 /area/centcom/specops)
-"nvv" = (
-/obj/effect/decal/cleanable/filth,
-/turf/unsimulated/floor{
-	icon_state = "wood";
-	icon = 'icons/turf/flooring/wood.dmi';
-	color = "#78523b"
-	},
-/area/centcom/holding)
 "nwD" = (
 /obj/effect/floor_decal/spline/fancy/wood,
 /obj/structure/table/woodentable_reinforced/walnut,
@@ -13247,7 +13202,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "nxB" = (
 /obj/machinery/body_scanconsole,
 /turf/unsimulated/floor{
@@ -13476,7 +13431,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "obh" = (
 /obj/machinery/door/airlock/centcom{
 	dir = 8;
@@ -13490,7 +13445,7 @@
 	dir = 2;
 	icon_state = "freezerfloor"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "obA" = (
 /obj/structure/table/woodentable_reinforced/walnut,
 /turf/simulated/floor/holofloor/space,
@@ -13670,7 +13625,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "oAv" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/modular_computer/laptop/preset/custom_loadout/advanced{
@@ -13698,7 +13653,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "oDb" = (
 /obj/structure/table/rack,
 /obj/item/stack/material/titanium/fifty,
@@ -13940,7 +13895,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "monotile_light"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "pdt" = (
 /obj/structure/flora/ausbushes/fernybush,
 /obj/structure/railing/mapped{
@@ -14266,7 +14221,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "pKX" = (
 /obj/effect/floor_decal/carpet{
 	dir = 4
@@ -14358,7 +14313,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "pUP" = (
 /obj/effect/floor_decal/techfloor,
 /obj/structure/disposalpipe/segment{
@@ -14381,7 +14336,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "pVG" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
@@ -14410,7 +14365,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "pWe" = (
 /obj/effect/forcefield{
 	desc = "You can't get in. Heh.";
@@ -14546,7 +14501,7 @@
 	id = "cc_surgery"
 	},
 /turf/unsimulated/floor/plating,
-/area/centcom/holding)
+/area/centcom/living)
 "qhG" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/structure/disposalpipe/segment{
@@ -14710,7 +14665,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "qvb" = (
 /obj/structure/table/rack/dark,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -14806,7 +14761,7 @@
 	icon = 'icons/turf/flooring/wood.dmi';
 	color = "#78523b"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "qEl" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/unsimulated/floor/grass{
@@ -14924,7 +14879,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "qOW" = (
 /obj/effect/floor_decal/borderfloorblack,
 /obj/machinery/computer/prisoner{
@@ -15134,7 +15089,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "rlP" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 4
@@ -15190,7 +15145,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "rsz" = (
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 1
@@ -15546,7 +15501,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "sgo" = (
 /obj/effect/forcefield{
 	desc = "You can't get in. Heh.";
@@ -15796,7 +15751,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "sHC" = (
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/paleblue/border,
@@ -15807,7 +15762,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "sIT" = (
 /obj/effect/decal/cleanable/filth,
 /obj/structure/janitorialcart,
@@ -15866,7 +15821,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "sKx" = (
 /obj/effect/floor_decal/spline/fancy/wood,
 /obj/structure/disposaloutlet{
@@ -15934,7 +15889,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "sSC" = (
 /obj/effect/floor_decal/corner/black/diagonal{
 	dir = 8
@@ -16134,7 +16089,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "tlJ" = (
 /obj/machinery/door/airlock/centcom{
 	dir = 8;
@@ -16229,7 +16184,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "tsm" = (
 /obj/effect/floor_decal/borderfloorblack/corner{
 	dir = 1
@@ -16424,7 +16379,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "tMt" = (
 /obj/structure/bed/chair/office/comfy/blue,
 /obj/machinery/button/blast_door{
@@ -16476,9 +16431,6 @@
 	name = "carpet"
 	},
 /area/centcom/living)
-"tNR" = (
-/turf/unsimulated/floor/reinforced,
-/area/thruster/d1port)
 "tRb" = (
 /obj/effect/floor_decal/techfloor/corner{
 	dir = 8
@@ -16574,7 +16526,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "tVv" = (
 /obj/structure/disposalpipe/segment,
 /turf/simulated/wall/r_wall/prepainted,
@@ -16714,7 +16666,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "monotile_light"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "ukT" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/effect/floor_decal/corner/red/diagonal,
@@ -16769,7 +16721,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "unM" = (
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 8
@@ -16855,7 +16807,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "uxw" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
@@ -16890,7 +16842,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "uBf" = (
 /turf/unsimulated/floor/techfloor{
 	icon_state = "dark";
@@ -16903,7 +16855,7 @@
 	dir = 1
 	},
 /turf/unsimulated/floor/plating,
-/area/centcom/holding)
+/area/centcom/living)
 "uCh" = (
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 10
@@ -16996,7 +16948,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "uMj" = (
 /obj/item/inflatable_duck{
 	name = "NovA gosling"
@@ -17097,7 +17049,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "vga" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Bridge";
@@ -17250,7 +17202,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "vBh" = (
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 1
@@ -17265,7 +17217,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "vBi" = (
 /obj/machinery/door/airlock/centcom{
 	dir = 8;
@@ -17278,7 +17230,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "steel"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "vCi" = (
 /obj/structure/bed/chair/comfy/blue,
 /turf/unsimulated/floor/techfloor,
@@ -17345,7 +17297,7 @@
 	icon = 'icons/turf/flooring/wood.dmi';
 	color = "#78523b"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "vEG" = (
 /obj/random/trash,
 /obj/effect/floor_decal/techfloor{
@@ -17376,7 +17328,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "vHr" = (
 /obj/machinery/door/airlock/civilian{
 	dir = 8
@@ -17428,7 +17380,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "vNh" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/effect/floor_decal/borderfloorblack{
@@ -17448,7 +17400,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "vWA" = (
 /obj/effect/floor_decal/beach,
 /turf/unsimulated/floor{
@@ -17558,7 +17510,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "wlC" = (
 /obj/structure/railing/mapped,
 /turf/unsimulated/floor/techfloor,
@@ -17701,7 +17653,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "wDZ" = (
 /obj/effect/floor_decal/carpet{
 	dir = 4
@@ -17806,7 +17758,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "wMc" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -18220,7 +18172,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "monotile_light"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "xRY" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
@@ -18379,7 +18331,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
 	},
-/area/centcom/holding)
+/area/centcom/living)
 "yiF" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 8
@@ -32167,7 +32119,7 @@ ahO
 akH
 ath
 alZ
-blE
+auo
 aRV
 aRV
 anY
@@ -33377,7 +33329,7 @@ aas
 aoc
 apu
 asY
-fRb
+aas
 aas
 aRV
 aRV
@@ -33982,7 +33934,7 @@ aan
 aas
 aas
 aas
-fRb
+aas
 aas
 aan
 aus
@@ -34183,7 +34135,7 @@ aRV
 aRV
 aRV
 aRV
-tNR
+aRV
 aRV
 aRV
 aRV
@@ -34385,7 +34337,7 @@ aag
 aag
 akE
 akE
-gWq
+aag
 aag
 aag
 aag
@@ -34587,7 +34539,7 @@ ame
 aiu
 ane
 ane
-hid
+aoP
 ame
 ame
 ame
@@ -34788,7 +34740,7 @@ lZK
 ane
 ane
 ane
-gqF
+lZK
 ane
 ane
 ane
@@ -38052,18 +38004,18 @@ qep
 aag
 rjQ
 iac
-ctq
-ctq
-ctq
-ctq
-ctq
+rME
+rME
+rME
+rME
+rME
 vBi
-ctq
-ctq
+rME
+rME
 gWe
 jWR
-ctq
-ctq
+rME
+rME
 njl
 anm
 oii
@@ -38254,18 +38206,18 @@ aab
 aag
 rjQ
 iac
-ctq
+rME
 iuE
 dQD
 brG
 kMz
 aTK
 pUK
-ctq
+rME
 qEa
 kIF
 kLU
-ctq
+rME
 krq
 dcm
 dcm
@@ -38456,18 +38408,18 @@ aab
 qep
 rjQ
 bIe
-ctq
+rME
 sHq
 lGT
 auJ
 dal
 obe
 sbI
-ctq
+rME
 mQR
-nvv
+hxb
 vEj
-ctq
+rME
 aag
 aag
 aag
@@ -38658,18 +38610,18 @@ aab
 qep
 rjQ
 iac
-ctq
+rME
 eKE
 uyE
 tKI
 dal
 fHU
 sbI
-ctq
-ctq
+rME
+rME
 wlw
-ctq
-ctq
+rME
+rME
 aVP
 sZC
 fTc
@@ -38860,7 +38812,7 @@ aab
 aag
 rjQ
 iac
-ctq
+rME
 uLC
 hTO
 dal
@@ -38871,7 +38823,7 @@ jjl
 wDD
 dal
 oCf
-ctq
+rME
 rjQ
 tEz
 tEz
@@ -39062,7 +39014,7 @@ aab
 aag
 rjQ
 iac
-ctq
+rME
 trO
 ozr
 dal
@@ -39073,7 +39025,7 @@ fzm
 fzm
 hjD
 vOS
-ctq
+rME
 rjQ
 tEz
 rWJ
@@ -39264,18 +39216,18 @@ aab
 qep
 nOX
 iac
-ctq
-xJd
+rME
+ffG
 uCf
 obh
-xJd
-ape
+ffG
+aRS
 aul
 dal
 dal
 obe
 eCn
-ctq
+rME
 rjQ
 tEz
 iac
@@ -39466,18 +39418,18 @@ aab
 qep
 rjQ
 iac
-ctq
+rME
 aut
 rly
 dal
 gxc
-xJd
+ffG
 bEj
 dal
 ezf
 obe
 rru
-ctq
+rME
 rjQ
 fOj
 iac
@@ -39668,7 +39620,7 @@ aag
 aag
 jhH
 bIe
-ctq
+rME
 auu
 eaO
 dal
@@ -39679,7 +39631,7 @@ eaO
 dal
 obe
 rru
-ctq
+rME
 rjQ
 tEz
 iac
@@ -39870,18 +39822,18 @@ fTc
 fTc
 iSd
 iac
-ctq
+rME
 auv
 yia
 dal
 vBf
-xJd
+ffG
 kSb
 dal
 eaO
 obe
 rru
-ctq
+rME
 rjQ
 tEz
 iac
@@ -40072,18 +40024,18 @@ fOj
 nyY
 nyY
 rUd
-ctq
+rME
 ksY
 sSt
 pKT
 laU
-xJd
+ffG
 qOB
 sKn
 vci
 obe
 mFT
-ctq
+rME
 vKh
 fOj
 tEz
@@ -40274,18 +40226,18 @@ mfE
 rME
 rME
 rME
-ctq
-ctq
-ctq
-ctq
+rME
+rME
+rME
+rME
 bwJ
-ctq
-ctq
-ctq
+rME
+rME
+rME
 jyA
 obe
 vLf
-ctq
+rME
 rjQ
 tEz
 iac
@@ -40478,7 +40430,7 @@ rME
 jFD
 tat
 qtE
-ctq
+rME
 jFO
 pVH
 wLj
@@ -40487,7 +40439,7 @@ qhA
 vBh
 obe
 cUs
-ctq
+rME
 rjQ
 tEz
 bIe
@@ -40680,7 +40632,7 @@ cIH
 jeR
 wUH
 nwD
-ctq
+rME
 dFG
 ukl
 xRi
@@ -40689,7 +40641,7 @@ qhA
 hVo
 obe
 gnM
-ctq
+rME
 rjQ
 tEz
 iac
@@ -40882,7 +40834,7 @@ vbx
 eWc
 aCH
 cvz
-ctq
+rME
 eua
 pde
 xRi
@@ -40891,7 +40843,7 @@ pVh
 dal
 obe
 gnM
-ctq
+rME
 nOX
 tEz
 iac
@@ -41084,16 +41036,16 @@ rME
 rME
 rME
 rME
-ctq
+rME
 bjN
 lII
 lJU
 mKH
-loe
+vbx
 nxb
 obe
 tVp
-ctq
+rME
 rjQ
 tEz
 fRi
@@ -41286,16 +41238,16 @@ rME
 oeL
 gAe
 kAO
-ctq
-ctq
+rME
+rME
 cXK
-ctq
-ctq
-ctq
-ctq
+rME
+rME
+rME
+rME
 mYg
-ctq
-ctq
+rME
+rME
 rjQ
 tEz
 fOj
@@ -41488,7 +41440,7 @@ cIH
 lVi
 esG
 szb
-ctq
+rME
 iuE
 dQD
 dQD
@@ -41497,7 +41449,7 @@ dQD
 kMz
 mcM
 cRC
-ctq
+rME
 buu
 nyY
 nyY
@@ -41690,7 +41642,7 @@ rME
 oKs
 bOP
 egW
-ctq
+rME
 dvt
 dal
 dal
@@ -41699,7 +41651,7 @@ dal
 dal
 dal
 sHC
-ape
+aRS
 aag
 aag
 aag
@@ -41892,7 +41844,7 @@ rME
 rME
 rME
 rME
-ctq
+rME
 tkE
 umC
 dal
@@ -41901,7 +41853,7 @@ dal
 umC
 dal
 bIw
-ape
+aRS
 upn
 upn
 upn
@@ -42094,7 +42046,7 @@ wug
 fXa
 rMF
 ydQ
-ctq
+rME
 kNx
 ehz
 qtG
@@ -42103,8 +42055,8 @@ qtG
 ehz
 qtG
 uuU
-ape
-sFC
+aRS
+sgo
 aab
 upn
 qep
@@ -42296,17 +42248,17 @@ atv
 tnR
 tnR
 nUd
-ctq
-ctq
-ctq
-ctq
-ctq
-ctq
-ape
-xJd
-xJd
-ape
-sFC
+rME
+rME
+rME
+rME
+rME
+rME
+aRS
+ffG
+ffG
+aRS
+sgo
 aab
 upn
 qep
@@ -42505,10 +42457,10 @@ nYO
 rPc
 dsr
 aRS
-sFC
-sFC
-sFC
-sFC
+sgo
+sgo
+sgo
+sgo
 aab
 upn
 qep

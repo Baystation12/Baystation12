@@ -3321,11 +3321,13 @@
 #include "code\unit_tests\~helpers.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
+#include "maps\_map_include.dm"
 #include "maps\_maps.dm"
 #include "maps\deepmaint\deepmaint.dm"
 #include "maps\deepmaint\deepmaint_rooms\template.dm"
 #include "maps\deepmaint\deepmaint_rooms\core\_core_rooms.dm"
 #include "maps\deepmaint\deepmaint_rooms\normal\_normal_rooms.dm"
 #include "mods\_modpack.dm"
+#include "mods\eris_announcer\_eris_announcer.dme"
 #include "~code\global_init.dm"
 // END_INCLUDE

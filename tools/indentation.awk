@@ -16,12 +16,17 @@
 		}
 	}
 
-	if ($0 ~ /,[\t ]*\\?\r?$/ || # comma at EOL
-	    $0 ~ /list[\t ]*\([\t ]*\\?\r?$/ || # start of a list()
-	    $0 ~ /pick[\t ]*\([\t ]*\\?\r?$/ ) { # start of a pick()
-		comma = 1
-	} else {
-		comma = 0
+	# Current line's first non-whitespace character is NOT a hashtag,
+	# followed by something that is not another hashtag
+	# (#ifdef inside of list() won't fail test now)
+	if ( $0 !~ /^[\t ]+#[^#]/ ) {
+		if ($0 ~ /,[\t ]*\\?\r?$/ || # comma at EOL
+				$0 ~ /list[\t ]*\([\t ]*\\?\r?$/ || # start of a list()
+				$0 ~ /pick[\t ]*\([\t ]*\\?\r?$/ ) { # start of a pick()
+			comma = 1
+		} else {
+			comma = 0
+		}
 	}
 }
 

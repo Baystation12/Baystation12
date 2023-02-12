@@ -81,9 +81,6 @@
 	display_name = "military jacket"
 	path = /obj/item/clothing/suit/storage/tgbomber/militaryjacket
 
-/datum/gear/suit/sec_jacket
-	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer,     )
-
 /datum/gear/suit/snakeskin
 	display_name = "snakeskin coat"
 	path = /obj/item/clothing/suit/snakeskin

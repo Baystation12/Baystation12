@@ -15,4 +15,3 @@
 #include "..\torch\structures\signs.dm"
 //	INF(Torch required)
 #include "../../packs/faction_iccgn/_pack.dm"
-#include "../../packs/infinity/_pack.dm"

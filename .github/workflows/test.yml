@@ -15,7 +15,7 @@ env:
 
 jobs:
   PreFlight:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: checkout
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
@@ -27,7 +27,7 @@ jobs:
     outputs:
       dm: ${{ steps.filter.outputs.dm }}
   DreamChecker:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: PreFlight
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
@@ -53,7 +53,7 @@ jobs:
       #     chmod +x send.sh
       #     ./send.sh failure $WEBHOOK_URL
   Code:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs:
     - PreFlight
     - DreamChecker
@@ -83,7 +83,7 @@ jobs:
       #     chmod +x send.sh
       #     ./send.sh failure $WEBHOOK_URL
   ExampleMap:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs:
     - PreFlight
     - DreamChecker
@@ -95,6 +95,14 @@ jobs:
         with:
           path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
+      - name: Download rust_g
+        run: scripts/download_rust_g.sh
+      - name: Install rust_g deps
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt update || true
+          sudo apt install libssl1.1:i386
+          ldd librust_g.so
       - name: Run Tests
         env:
           TEST: MAP
@@ -111,8 +119,8 @@ jobs:
       #     wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
       #     chmod +x send.sh
       #     ./send.sh failure $WEBHOOK_URL
-  TorchMap:
-    runs-on: ubuntu-latest
+  SierraMap:
+    runs-on: ubuntu-20.04
     needs:
     - PreFlight
     - DreamChecker
@@ -124,10 +132,18 @@ jobs:
         with:
           path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
+      - name: Download rust_g
+        run: scripts/download_rust_g.sh
+      - name: Install rust_g deps
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt update || true
+          sudo apt install libssl1.1:i386
+          ldd librust_g.so
       - name: Run Tests
         env:
           TEST: MAP
-          MAP_PATH: torch
+          MAP_PATH: sierra
         run: test/run-test.sh
       # - name: Run Failure Webhook
       #   env:
@@ -141,7 +157,7 @@ jobs:
       #     chmod +x send.sh
       #     ./send.sh failure $WEBHOOK_URL
   AwaySites:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs:
     - PreFlight
     - DreamChecker
@@ -153,6 +169,14 @@ jobs:
         with:
           path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
+      - name: Download rust_g
+        run: scripts/download_rust_g.sh
+      - name: Install rust_g deps
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt update || true
+          sudo apt install libssl1.1:i386
+          ldd librust_g.so
       - name: Run Tests
         env:
           TEST: MAP

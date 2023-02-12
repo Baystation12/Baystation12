@@ -485,6 +485,112 @@
 	drop_sound = 'sound/items/drop/cloth.ogg'
 	pickup_sound = 'sound/items/pickup/cloth.ogg'
 
+/obj/item/stack/material/cloth/ten
+	amount = 10
+
+/obj/item/stack/material/cloth/fifty
+	amount = 50
+
+/obj/item/stack/material/cloth/red
+	name = "red cloth"
+	icon_state = "sheet-cloth"
+	default_type = MATERIAL_RED_CLOTH
+
+/obj/item/stack/material/cloth/red/ten
+	amount = 10
+
+/obj/item/stack/material/cloth/red/fifty
+	amount = 50
+
+/obj/item/stack/material/cloth/yellow
+	name = "yellow cloth"
+	icon_state = "sheet-cloth"
+	default_type = MATERIAL_YELLOW_CLOTH
+
+/obj/item/stack/material/cloth/yellow/ten
+	amount = 10
+
+/obj/item/stack/material/cloth/yellow/fifty
+	amount = 50
+
+/obj/item/stack/material/cloth/teal
+	name = "teal cloth"
+	icon_state = "sheet-cloth"
+	default_type = MATERIAL_TEAL_CLOTH
+
+/obj/item/stack/material/cloth/teal/ten
+	amount = 10
+
+/obj/item/stack/material/cloth/teal/fifty
+	amount = 50
+
+/obj/item/stack/material/cloth/black
+	name = "black cloth"
+	icon_state = "sheet-cloth"
+	default_type = MATERIAL_BLACK_CLOTH
+
+/obj/item/stack/material/cloth/black/ten
+	amount = 10
+
+/obj/item/stack/material/cloth/black/fifty
+	amount = 50
+
+/obj/item/stack/material/cloth/green
+	name = "green cloth"
+	icon_state = "sheet-cloth"
+	default_type = MATERIAL_GREEN_CLOTH
+
+/obj/item/stack/material/cloth/green/ten
+	amount = 10
+
+/obj/item/stack/material/cloth/green/fifty
+	amount = 50
+
+/obj/item/stack/material/cloth/purple
+	name = "purple cloth"
+	icon_state = "sheet-cloth"
+	default_type = MATERIAL_PURPLE_CLOTH
+
+/obj/item/stack/material/cloth/purple/ten
+	amount = 10
+
+/obj/item/stack/material/cloth/purple/fifty
+	amount = 50
+
+/obj/item/stack/material/cloth/blue
+	name = "blue cloth"
+	icon_state = "sheet-cloth"
+	default_type = MATERIAL_BLUE_CLOTH
+
+/obj/item/stack/material/cloth/blue/ten
+	amount = 10
+
+/obj/item/stack/material/cloth/blue/fifty
+	amount = 50
+
+/obj/item/stack/material/cloth/beige
+	name = "beige cloth"
+	icon_state = "sheet-cloth"
+	default_type = MATERIAL_BEIGE_CLOTH
+
+/obj/item/stack/material/cloth/beige/ten
+	amount = 10
+
+/obj/item/stack/material/cloth/beige/fifty
+	amount = 50
+
+/obj/item/stack/material/cloth/lime
+	name = "lime cloth"
+	icon_state = "sheet-cloth"
+	default_type = MATERIAL_LIME_CLOTH
+
+/obj/item/stack/material/cloth/lime/ten
+	amount = 10
+
+/obj/item/stack/material/cloth/lime/fifty
+	amount = 50
+
+
 /obj/item/stack/material/cardboard
 	name = "cardboard"
 	icon_state = "sheet-card"

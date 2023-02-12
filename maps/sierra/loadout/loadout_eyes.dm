@@ -1,6 +1,3 @@
-/datum/gear/eyes/sciencegoggles
-	allowed_roles = STERILE_ROLES
-
 /datum/gear/eyes/security
 	allowed_roles = SECURITY_ROLES
 

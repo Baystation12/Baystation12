@@ -55,11 +55,11 @@
 
 /datum/gear/shoes/geta
 	display_name = "geta shoes selection"
-	path = /obj/item/clothing/shoes/red_geta
+	path = /obj/item/clothing/shoes/geta
 
 /datum/gear/shoes/geta/New()
 	..()
 	var/get = list()
-	get["red geta"] = /obj/item/clothing/shoes/red_geta
-	get["black geta"] = /obj/item/clothing/shoes/black_geta
+	get["red geta"] = /obj/item/clothing/shoes/geta
+	get["black geta"] = /obj/item/clothing/shoes/geta/black
 	gear_tweaks += new/datum/gear_tweak/path(get)

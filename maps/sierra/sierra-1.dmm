@@ -4084,7 +4084,9 @@
 	pixel_x = 32;
 	pixel_y = 32
 	},
-/obj/machinery/camera/network/third_deck,
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Third Deck - Central Stairwell Third"
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "hp" = (
@@ -10911,7 +10913,7 @@
 	dir = 8
 	},
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck - Hallway - Fore";
+	c_tag = "Third Deck - Hallway - Fore Side";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -17708,7 +17710,7 @@
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/blue/border,
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck - Hallway - Fore";
+	c_tag = "Third Deck - Hallway - Fore Central";
 	dir = 1
 	},
 /obj/item/device/radio/intercom{

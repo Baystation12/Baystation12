@@ -200,7 +200,9 @@
 	max_w_class = ITEM_SIZE_SMALL //Don't worry, see can_hold[]
 	max_storage_space = 5
 	can_hold = list(
+		#ifdef CONTENT_PACK_INFINITY
 		/obj/item/music_tape,
+		#endif
 		/obj/item/device/flashlight/pen,
 		/obj/item/device/tape,
 		/obj/item/material/coin,
@@ -213,6 +215,8 @@
 		/obj/item/screwdriver
 	)
 	startswith = list(
+		#ifdef CONTENT_PACK_INFINITY
 		/obj/item/music_tape/custom = 2,
+		#endif
 		/obj/item/screwdriver = 1
 	)

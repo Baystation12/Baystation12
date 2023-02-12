@@ -102,6 +102,13 @@
 	build_path = /obj/item/stock_parts/circuitboard/roboprinter
 	sort_string = "FAGAK"
 
+/datum/design/circuit/bioprinter
+	name = "synthetic organ fabricator"
+	id = "bioprinter"
+	req_tech = list(TECH_BIO = 6, TECH_DATA = 3)
+	build_path = /obj/item/stock_parts/circuitboard/bioprinter
+	sort_string = "FAGAL"
+
 /datum/design/circuit/teleconsole
 	name = "teleporter control console"
 	id = "teleconsole"
@@ -321,44 +328,50 @@
 	id = "air_management"
 	build_path = /obj/item/stock_parts/circuitboard/air_management
 	sort_string = "JAAAB"
+/datum/design/circuit/area_atmos
+	name = "area air control console"
+	id = "area_atmos"
+	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
+	build_path = /obj/item/stock_parts/circuitboard/area_atmos
+	sort_string = "JAAAC"
 
 /datum/design/circuit/rcon_console
 	name = "RCON remote control console"
 	id = "rcon_console"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_POWER = 5)
 	build_path = /obj/item/stock_parts/circuitboard/rcon_console
-	sort_string = "JAAAC"
+	sort_string = "JAAAD"
 
 /datum/design/circuit/dronecontrol
 	name = "drone control console"
 	id = "dronecontrol"
 	req_tech = list(TECH_DATA = 4)
 	build_path = /obj/item/stock_parts/circuitboard/drone_control
-	sort_string = "JAAAD"
+	sort_string = "JAAAE"
 
 /datum/design/circuit/powermonitor
 	name = "power monitoring console"
 	id = "powermonitor"
 	build_path = /obj/item/stock_parts/circuitboard/powermonitor
-	sort_string = "JAAAE"
+	sort_string = "JAAAF"
 
 /datum/design/circuit/solarcontrol
 	name = "solar control console"
 	id = "solarcontrol"
 	build_path = /obj/item/stock_parts/circuitboard/solar_control
-	sort_string = "JAAAF"
+	sort_string = "JAAAG"
 
 /datum/design/circuit/supermatter_control
 	name = "core monitoring console"
 	id = "supermatter_control"
 	build_path = /obj/item/stock_parts/circuitboard/air_management/supermatter_core
-	sort_string = "JAAAG"
+	sort_string = "JAAAH"
 
 /datum/design/circuit/injector
 	name = "injector control console"
 	id = "injector"
 	build_path = /obj/item/stock_parts/circuitboard/air_management/injector_control
-	sort_string = "JAAAH"
+	sort_string = "JAAAI"
 
 /datum/design/circuit/pacman
 	name = "PACMAN-type generator"
@@ -810,26 +823,32 @@
 	build_path = /obj/item/stock_parts/circuitboard/engine/ion
 	sort_string = "XAAAB"
 
+/datum/design/circuit/sublimator
+	name = "reagent sublimator system"
+	id = "sublimator"
+	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 1)
+	build_path = /obj/item/stock_parts/circuitboard/sublimator
+	sort_string = "XAAAC"
 /datum/design/circuit/sublimator/sauna
 	name = "sauna heater system"
 	id = "sauna"
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 1)
 	build_path = /obj/item/stock_parts/circuitboard/sublimator/sauna
-	sort_string = "XAAAC"
+	sort_string = "XAAAD"
 
 /datum/design/circuit/vitals
 	name = "vitals monitor"
 	id = "vitals"
 	req_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 1)
 	build_path = /obj/item/stock_parts/circuitboard/vitals_monitor
-	sort_string = "XAAAD"
+	sort_string = "XAAAE"
 
 /datum/design/circuit/sublimator/modular_computer
 	name = "general-purpose computer"
 	id = "pc_motherboard"
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	build_path = /obj/item/stock_parts/circuitboard/modular_computer
-	sort_string = "XAAAD"
+	sort_string = "XAAAF"
 
 /datum/design/circuit/tele_beacon
 	name = "teleporter beacon"
@@ -838,28 +857,28 @@
 		TECH_BLUESPACE = 1
 	)
 	build_path = /obj/item/stock_parts/circuitboard/tele_beacon
-	sort_string = "XAAAF"
+	sort_string = "XAAAG"
 
 /datum/design/circuit/bluespacedrive
 	name = "Naophoros-pattern bluespace puncturer"
 	id = "bluespacedrive"
 	req_tech = list(TECH_BLUESPACE = 12, TECH_POWER = 12, TECH_ENGINEERING = 12) // You are not supposed to get this
 	build_path = /obj/item/stock_parts/circuitboard/bluespacedrive
-	sort_string = "XAAAG"
+	sort_string = "XAAAH"
 
 /datum/design/circuit/shipsensors
 	name = "Broad-band sensor suite"
 	id = "shipsensors"
 	req_tech = list(TECH_BLUESPACE = 2, TECH_POWER = 4, TECH_ENGINEERING = 4, TECH_DATA = 4)
 	build_path = /obj/item/stock_parts/circuitboard/shipsensors
-	sort_string = "XAAAH"
+	sort_string = "XAAAI"
 
 /datum/design/circuit/radio_beacon
 	name = "Transmission beacon"
 	id = "radio_beacon"
 	req_tech = list(TECH_BLUESPACE = 2, TECH_POWER = 4, TECH_ENGINEERING = 4, TECH_DATA = 4)
 	build_path = /obj/item/stock_parts/circuitboard/radio_beacon
-	sort_string = "XAAAI"
+	sort_string = "XAAAJ"
 
 /datum/design/circuit/shipmap
 	name = "ship holomap"

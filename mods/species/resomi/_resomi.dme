@@ -1,5 +1,5 @@
-#ifndef CONTENT_PACK_RESOMI
-#define CONTENT_PACK_RESOMI
+#ifndef MODPACK_RESOMI
+#define MODPACK_RESOMI
 #include "_resomi.dm"
 
 //clothing

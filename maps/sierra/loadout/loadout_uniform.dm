@@ -11,8 +11,6 @@
 /datum/gear/uniform/hazard
 	allowed_roles = TECHNICAL_ROLES
 
-/datum/gear/uniform/pmc/allowed_branches = list(/datum/mil_branch/contractor)
-
 /datum/gear/uniform/corpsi
 	display_name = "contractor uniform selection"
 	path = /obj/item/clothing/under/solgov/utility

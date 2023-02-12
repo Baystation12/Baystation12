@@ -151,7 +151,7 @@
 	cost = 0
 	//price = 25  // I don't want to see clown parade ~ SidVeld
 
-/datum/gear/head/kittyears/donate
+/datum/gear/head/kittyears
 	display_name = "kitty ears"
 	path = /obj/item/clothing/head/kitty/fake
 	sort_category = "Earwear"

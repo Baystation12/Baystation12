@@ -28,6 +28,7 @@
 		/area/maintenance,
 		/area/medical,
 		/area/overmap,
+		/area/engineering,
 		/area/rnd,
 		/area/rnd/xenobiology,
 		/area/rnd/xenobiology/xenoflora,

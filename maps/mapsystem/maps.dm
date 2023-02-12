@@ -223,6 +223,12 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/maint_all_access = FALSE
 
+	// Security state
+	var/list/high_secure_areas
+	var/list/secure_areas
+	var/lockdown = FALSE
+	var/lockdown_support = FALSE
+
 	var/base_lobby_html
 
 /datum/map/New()
@@ -478,6 +484,15 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/unbolt_saferooms()
 	return // overriden by torch
+
+/datum/map/proc/lockdown(force)
+	lockdown = !lockdown
+	if(force && force == "close")
+		lockdown = TRUE
+	else if(force && force == "open")
+		lockdown = FALSE
+
+	return lockdown
 
 /datum/map/proc/make_maint_all_access(radstorm = 0) // parameter used by torch
 	maint_all_access = TRUE

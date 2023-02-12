@@ -19,12 +19,14 @@
 	suffixes = list("smugglers/smugglers.dmm")
 	spawn_cost = 1
 	generate_mining_by_z = 1
-	area_usage_test_exempted_root_areas = list(/area/smugglers)
 	apc_test_exempt_areas = list(
 		/area/smugglers/base = NO_SCRUBBER,
 		/area/smugglers/dorms = NO_SCRUBBER|NO_VENT,
 		/area/smugglers/office = NO_SCRUBBER|NO_VENT
 	)
+	area_usage_test_exempted_root_areas = list(/area/smugglers, /area/mine, /area/outpost)
+	area_usage_test_exempted_areas = list(/area/djstation)
+	area_coherency_test_exempt_areas =  list(/area/mine/explored, /area/mine/unexplored)
 
 /obj/effect/shuttle_landmark/nav_asteroid_base/nav1
 	name = "Abandoned Asteroid Base Navpoint #1"

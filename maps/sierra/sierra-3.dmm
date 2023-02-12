@@ -8430,11 +8430,11 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "aoK" = (
-/obj/structure/catwalk,
 /obj/structure/ladder,
 /obj/structure/cable{
 	d2 = 8;
-	icon_state = "0-8"
+	icon_state = "32-8";
+	d1 = 32
 	},
 /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers{
 	dir = 8
@@ -41133,7 +41133,7 @@
 /area/medical/surgery/second)
 "upT" = (
 /obj/structure/closet/crate/secure/loot,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/reinforced,
 /area/maintenance/firstdeck/aftport)
 "uuc" = (
 /obj/structure/cable/green{

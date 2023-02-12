@@ -32,25 +32,8 @@
 	allowed_roles = NANOTRASEN_ROLES
 	allowed_branches = list(/datum/mil_branch/employee)
 
-/datum/gear/accessory/ntaward_sci
-	allowed_roles = RESEARCH_ROLES
-	allowed_branches = list(/datum/mil_branch/employee)
-	allowed_skills = list(SKILL_SCIENCE = SKILL_EXPERT)
-
-/datum/gear/accessory/penlight
-	display_name = "penlight"
-	path = /obj/item/device/flashlight/pen
-	allowed_roles = STERILE_ROLES
-
 /datum/gear/accessory/stethoscope
 	allowed_roles = STERILE_ROLES
-
-/datum/gear/head/kittyears
-	allowed_roles = RESTRICTED_ROLES
-
-/datum/gear/accessory/ftupin
-	allowed_roles = list(/datum/job/assistant)
-	allowed_branches = list(/datum/mil_branch/civilian)
 
 /datum/gear/passport/scg
 	display_name = "passports selection - SCG"

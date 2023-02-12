@@ -71,16 +71,16 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	all_unit_tests_passed = 0
 	failed_unit_tests++
 	reported = 1
-	log_unit_test("[ascii_red]!!! FAILURE !!! \[[name]\]: [message][ascii_reset]")
+	log_unit_test("[ascii_red]!!! FAILURE !!![ascii_reset] \[[name]\]: [message]")
 
 /datum/unit_test/proc/pass(message)
 	reported = 1
-	log_unit_test("[ascii_green]*** SUCCESS *** \[[name]\]: [message][ascii_reset]")
+	log_unit_test("[ascii_green]*** SUCCESS ***[ascii_reset] \[[name]\]: [message]")
 
 /datum/unit_test/proc/skip(message)
 	skipped_unit_tests++
 	reported = 1
-	log_unit_test("[ascii_yellow]--- SKIPPED --- \[[name]\]: [message][ascii_reset]")
+	log_unit_test("[ascii_yellow]--- SKIPPED ---[ascii_reset] \[[name]\]: [message]")
 
 /datum/unit_test/proc/start_test()
 	fail("No test proc - [type]")

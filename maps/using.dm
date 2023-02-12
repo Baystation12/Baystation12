@@ -2,4 +2,4 @@
 
 //#include "example\map.dm"
 //#include "torch\map.dm"
-#include "sierra\sierra.dm"
+#include "sierra\map.dm"

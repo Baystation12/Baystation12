@@ -96,10 +96,14 @@
 		if (danger_level < 1 && atmosalm >= 1)
 			//closing the doors on red and opening on green provides a bit of hysteresis that will hopefully prevent fire doors from opening and closing repeatedly due to noise
 			air_doors_open()
-			arfgs_deactivate()
+			#ifdef MODPACK_ATM_RET_FIELD
+				arfgs_deactivate()
+			#endif
 		else if (danger_level >= 2 && atmosalm < 2)
 			air_doors_close()
-			arfgs_activate()
+			#ifdef MODPACK_ATM_RET_FIELD
+				arfgs_activate()
+			#endif
 
 		atmosalm = danger_level
 		for (var/obj/machinery/alarm/AA in src)
