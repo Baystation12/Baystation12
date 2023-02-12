@@ -40,11 +40,9 @@
 	name = "insect protein"
 	desc = "A small mass of cooked extruded bug stuff."
 	icon = 'icons/obj/food_bugmeat.dmi'
-	icon_state = "cutlet"
 	filling_color = "#858040"
 	slice_path = /obj/item/reagent_containers/food/snacks/bacon/bugmeat
 	slices_num = 2
-	bitesize = 2
 	center_of_mass = "x=16;y=16"
 	nutriment_desc = list("rubbery meat" = 10)
 
@@ -64,14 +62,12 @@
 	name = "sliced insect protein"
 	desc = "A small mass of cooked extruded bug stuff, lovingly cut thin."
 	icon = 'icons/obj/food_bugmeat.dmi'
-	icon_state = "bacon"
 	filling_color = "#858040"
-	bitesize = 2
 	center_of_mass = "x=16;y=16"
 	nutriment_desc = list("rubbery meat" = 10)
 
 
-/datum/microwave_recipe/bugmeat_cutlet
+/datum/microwave_recipe/cutlet/bugmeat
 	required_items = list(
 		/obj/item/reagent_containers/food/snacks/rawcutlet/bugmeat
 	)

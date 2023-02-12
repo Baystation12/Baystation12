@@ -1371,16 +1371,32 @@
 	)
 	result_path = /obj/item/reagent_containers/food/snacks/meatball
 
-
-/datum/microwave_recipe/cutlet
+/datum/microwave_recipe/cutlet/meat
 	required_items = list(
-		/obj/item/reagent_containers/food/snacks/rawcutlet
+		/obj/item/reagent_containers/food/snacks/rawcutlet/meat
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/cutlet/meat
+
+
+/datum/microwave_recipe/cutlet ///this is fucking stupid but it works
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/rawcutlet,
+		/obj/item/projectile
 	)
 	result_path = /obj/item/reagent_containers/food/snacks/cutlet
 
-/datum/microwave_recipe/bacon
+
+/datum/microwave_recipe/bacon/meat
 	required_items = list(
-		/obj/item/reagent_containers/food/snacks/rawbacon
+		/obj/item/reagent_containers/food/snacks/rawbacon/meat
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/bacon/meat
+
+
+/datum/microwave_recipe/bacon ///see cutlet note
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/rawbacon,
+		/obj/item/projectile
 	)
 	result_path = /obj/item/reagent_containers/food/snacks/bacon
 

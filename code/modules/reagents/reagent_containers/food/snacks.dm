@@ -1043,7 +1043,7 @@
 	desc = "A piece of unseasoned cooked meat."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "steak"
-	slice_path = /obj/item/reagent_containers/food/snacks/cutlet
+	slice_path = /obj/item/reagent_containers/food/snacks/cutlet/meat
 	slices_num = 3
 	filling_color = "#7a3d11"
 	center_of_mass = "x=16;y=13"
@@ -3039,8 +3039,9 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
 
 /obj/item/reagent_containers/food/snacks/rawcutlet
-	name = "raw cutlet"
-	desc = "A thin piece of raw meat."
+	abstract_type = /obj/item/reagent_containers/food/snacks/rawcutlet
+	name = "parent raw cutlet"
+	desc = "You probably shouldn't be seeing this."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawcutlet"
 	filling_color = "#fb8258"
@@ -3049,42 +3050,62 @@
 	bitesize = 1
 	center_of_mass = "x=17;y=20"
 
-/obj/item/reagent_containers/food/snacks/rawcutlet/Initialize()
+/obj/item/reagent_containers/food/snacks/rawcutlet/meat
+	name = "raw cutlet"
+	desc = "A thin piece of raw meat."
+	slice_path = /obj/item/reagent_containers/food/snacks/rawbacon/meat
+
+/obj/item/reagent_containers/food/snacks/rawcutlet/meat/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 1)
 
 /obj/item/reagent_containers/food/snacks/cutlet
-	name = "cutlet"
-	desc = "A tasty meat slice."
+	abstract_type = /obj/item/reagent_containers/food/snacks/cutlet
+	name = "parent cutlet"
+	desc = "You probably shouldn't be seeing this."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "cutlet"
 	filling_color = "#d75608"
 	bitesize = 2
 	center_of_mass = "x=17;y=20"
 
-/obj/item/reagent_containers/food/snacks/cutlet/Initialize()
+/obj/item/reagent_containers/food/snacks/cutlet/meat
+	name = "cutlet"
+	desc = "A tasty meat slice."
+
+/obj/item/reagent_containers/food/snacks/cutlet/meat/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
 
 /obj/item/reagent_containers/food/snacks/rawbacon
-	name = "raw bacon"
-	desc = "A raw, fatty strip of meat."
+	abstract_type = /obj/item/reagent_containers/food/snacks/rawbacon
+	name = "master raw bacon"
+	desc = "You probably shouldn't be seeing this."
 	icon_state = "rawbacon"
 	filling_color = "#ffa7a3"
 	bitesize = 1
 	center_of_mass = "x=16;y=15"
+
+/obj/item/reagent_containers/food/snacks/rawbacon/meat
+	name = "raw bacon"
+	desc = "A raw, fatty strip of meat."
 
 /obj/item/reagent_containers/food/snacks/rawbacon/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 1)
 
 /obj/item/reagent_containers/food/snacks/bacon
-	name = "bacon"
-	desc = "A delicious, crispy strip of meat."
+	abstract_type = /obj/item/reagent_containers/food/snacks/bacon
+	name = "master bacon"
+	desc = "You probably shouldn't be seeing this."
 	icon_state = "bacon"
 	filling_color = "#cb5d27"
 	bitesize = 2
 	center_of_mass = "x=16;y=15"
+
+/obj/item/reagent_containers/food/snacks/bacon/meat
+	name = "bacon"
+	desc = "A delicious, crispy strip of meat."
 
 /obj/item/reagent_containers/food/snacks/bacon/Initialize()
 	.=..()
