@@ -32,7 +32,7 @@
 			/obj/item/reagent_containers/food/drinks/small_milk = 30,
 			/obj/item/reagent_containers/food/drinks/milk = 50,
 			/obj/item/reagent_containers/food/snacks/meat/syntiflesh = 50,
-			/obj/item/storage/fancy/egg_box = 300),
+			/obj/item/storage/fancy/egg_box/full = 300),
 		"Nutrients" = list(
 			/obj/item/reagent_containers/glass/bottle/eznutrient = 60,
 			/obj/item/reagent_containers/glass/bottle/left4zed = 120,

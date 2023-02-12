@@ -175,7 +175,7 @@
 		/obj/item/reagent_containers/pill,
 		/obj/item/reagent_containers/syringe,
 		/obj/item/flame/lighter/zippo,
-		/obj/item/storage/fancy/cigarettes,
+		/obj/item/storage/fancy/smokable,
 		/obj/item/storage/pill_bottle,
 		/obj/item/stack/medical,
 		/obj/item/device/flashlight/pen,

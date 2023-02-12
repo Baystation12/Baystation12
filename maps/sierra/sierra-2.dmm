@@ -18650,7 +18650,7 @@
 	},
 /obj/structure/table/woodentable/walnut,
 /obj/item/flame/lighter/zippo,
-/obj/item/storage/fancy/cigar,
+/obj/item/storage/fancy/smokable/cigar,
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/captain)

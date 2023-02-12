@@ -26026,7 +26026,7 @@
 /area/maintenance/thirddeck/aft)
 "Ro" = (
 /obj/structure/closet/emcloset,
-/obj/item/pen/crayon/random,
+/obj/random/crayon,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aft)
 "Rp" = (

@@ -103,7 +103,7 @@
 	return list(
 		/obj/item/reagent_containers/food/drinks/milk = 2,
 		/obj/item/reagent_containers/food/drinks/soymilk = 2,
-		/obj/item/storage/fancy/egg_box = 1
+		/obj/item/storage/fancy/egg_box/full = 1
 	)
 
 

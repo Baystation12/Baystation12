@@ -21,6 +21,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	QDEL_NULL_LIST(reagent_list)
 	my_atom = null
 
+
 /* Internal procs */
 /datum/reagents/proc/get_free_space() // Returns free space.
 	return maximum_volume - total_volume
@@ -489,6 +490,25 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		if (R.should_admin_log)
 			return TRUE
 	return FALSE
+
+
+/datum/reagents/proc/Resize(new_volume = maximum_volume)
+	maximum_volume = max(1, new_volume)
+	var/over_volume = total_volume - maximum_volume
+	if (over_volume <= 0)
+		return
+	over_volume /= length(reagent_list)
+	total_volume = 0
+	var/list/removed = list()
+	for (var/datum/reagent/reagent as anything in reagent_list)
+		reagent.volume -= over_volume
+		if (reagent.volume >= MINIMUM_CHEMICAL_VOLUME)
+			total_volume += reagent.volume
+		else
+			removed += reagent
+	reagent_list -= removed
+	QDEL_NULL_LIST(removed)
+
 
 /**
  * Creates a reagent holder for the atom. This shouldn't be used if a reagents holder already exists, but it will

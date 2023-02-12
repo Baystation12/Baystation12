@@ -6,7 +6,7 @@
 	contains = list(/obj/item/reagent_containers/food/condiment/flour = 6,
 					/obj/item/reagent_containers/food/drinks/milk = 4,
 					/obj/item/reagent_containers/food/drinks/soymilk = 2,
-					/obj/item/storage/fancy/egg_box = 2,
+					/obj/item/storage/fancy/egg_box/full = 2,
 					/obj/item/reagent_containers/food/snacks/tofu = 4,
 					/obj/item/reagent_containers/food/snacks/meat = 4,
 					/obj/item/reagent_containers/food/condiment/enzyme = 1,
@@ -73,7 +73,7 @@
 
 /singleton/hierarchy/supply_pack/galley/eggs
 	name = "Perishables - Eggs"
-	contains = list(/obj/item/storage/fancy/egg_box = 2)
+	contains = list(/obj/item/storage/fancy/egg_box/full = 2)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "egg crate"
 	cost = 15
@@ -137,7 +137,7 @@
 			/obj/item/reagent_containers/food/drinks/bottle/patron,
 			/obj/item/reagent_containers/food/drinks/bottle/goldschlager,
 			/obj/item/reagent_containers/food/drinks/bottle/specialwhiskey,
-			/obj/item/storage/fancy/cigarettes/dromedaryco,
+			/obj/item/storage/fancy/smokable/dromedaryco,
 			/obj/item/lipstick/random,
 			/obj/item/reagent_containers/food/drinks/bottle/small/ale = 2,
 			/obj/item/reagent_containers/food/drinks/bottle/small/beer = 4,

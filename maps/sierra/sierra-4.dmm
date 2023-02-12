@@ -5133,7 +5133,7 @@
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
+	products = list(/obj/item/storage/fancy/smokable/transstellar=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/unsimulated/floor/plating,
 /area/acting/backstage)

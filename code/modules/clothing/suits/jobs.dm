@@ -100,7 +100,7 @@
 		/obj/item/ammo_casing,
 		/obj/item/melee/baton,
 		/obj/item/handcuffs,
-		/obj/item/storage/fancy/cigarettes,
+		/obj/item/storage/fancy/smokable,
 		/obj/item/flame/lighter,
 		/obj/item/device/taperecorder
 	)

@@ -21987,7 +21987,7 @@
 "mgb" = (
 /obj/structure/table/steel,
 /obj/item/material/ashtray/bronze,
-/obj/item/storage/fancy/cigarettes/professionals,
+/obj/item/storage/fancy/smokable/professionals,
 /turf/simulated/floor/tiled,
 /area/security/detectives_office)
 "mhb" = (

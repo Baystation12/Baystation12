@@ -264,6 +264,7 @@
 
 /obj/item/clothing/mask/smokable/cigarette/killthroat
 	brand = "\improper Acme Co. cigarette"
+	filling = list(/datum/reagent/tobacco = 1, /datum/reagent/fuel = 0.5)
 
 /obj/item/clothing/mask/smokable/cigarette/dromedaryco
 	brand = "\improper Dromedary Co. cigarette"

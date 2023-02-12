@@ -97,7 +97,7 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/reagent_containers/food/condiment/flour,
 		/obj/item/reagent_containers/food/drinks/milk,
 		/obj/item/reagent_containers/food/drinks/milk,
-		/obj/item/storage/fancy/egg_box,
+		/obj/item/storage/fancy/egg_box/full,
 		/obj/item/reagent_containers/food/snacks/tofu,
 		/obj/item/reagent_containers/food/snacks/tofu,
 		/obj/item/reagent_containers/food/snacks/meat,
