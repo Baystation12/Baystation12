@@ -50,7 +50,7 @@ if not pr_list.totalCount:
 
 pr = pr_list[0]
 
-pr_body = pr.body
+pr_body = pr.body or ""
 pr_number = pr.number
 pr_author = pr.user.login
 
