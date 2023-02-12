@@ -1,16 +1,37 @@
-<!-- 
-Do not forget to add a changelog when you have made admin/player facing changes that can alter gameplay.
-Examples which require a changelog entry include:
-* Adding/removing objects that players may interact with, or the way they function.
-* Adding/removing/altering admin tools.
-* Changing the map.
+<!-- Здесь должно быть описание PR -->
+Я сделяль™
 
-Examples were changelog entries are optional/not typically required:
-* Cosmetic changes such as descriptions, sound effects, etc.
-* Optimizations and other changes to underlying systems which do not affect gameplay.
-* Minor bug fixes.
+<!-- А здесь ченджлог -->
+:cl:
 
-You'll find a README and example file in .\html\changelogs\ for further instructions.
+/:cl:
+<!--
+  Теги ченджлога для быстрого копипаста:
+  - bugfix: Пофиксил баг
+  - wip: Добавил что-то, что ещё в процессе
+  - tweak: Подправил что-то
+  - soundadd: Добавил новый звук
+  - sounddel: Удалил старый звук
+  - rscadd: Добавил что-то новое
+  - rscdel: Удалил что-то старое
+  - imageadd: Добавил новые иконки и картинки
+  - imagedel: Удалил старые иконки и картинки
+  - maptweak: Отредактировал карту
+  - spellcheck: Исправил опечатку
+  - experiment: Добавил что-то экспериментальное
+  - balance: Заребалансил что-то
+  - admin: Сделал что-то с админскими тулзами
 
-You can also find a template for adding your changelog directly to the PR description here: https://github.com/Baystation12/Baystation12/wiki/Automatic-changelog-generation
+  В ченджлог обязательно стоит внести:
+  - Добавление/удаление предметов, изменение их логики, поведения
+  - Добавление/удаление админских кнопок, интерфейсов и прочего
+  - Изменения карты
+
+  Необязательно в ченджлог вносить:
+  - Косметические изменения (поменял описание предмету, заменил звук и т.п.)
+  - Оптимизации и изменения систем, который геймплей не захватывают
+  - Минорные багфиксы
+
+  Если ченджлог не нужен (например для мержа с оффами),
+  то не забудь удалить теги :cl: и /:cl:
 -->
