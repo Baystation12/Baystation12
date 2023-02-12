@@ -724,6 +724,9 @@
 	for(var/obj/structure/window/W in range(src,range))
 		if(W.polarized && (W.id == src.id || !W.id))
 			W.toggle()
+	for(var/obj/machinery/door/window/W in range(src,range))
+		if(W.polarized && (W.id == src.id || !W.id))
+			W.toggle_tint()
 	..()
 
 /obj/machinery/button/windowtint/power_change()

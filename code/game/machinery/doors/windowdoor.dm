@@ -16,10 +16,27 @@
 	var/obj/item/airlock_electronics/electronics = null
 	explosion_resistance = 5
 	pry_mod = 0.5
+	var/id // Tint id
+	var/tinted = FALSE
+	var/polarized = FALSE
 
 /obj/machinery/door/window/New()
 	..()
 	update_nearby_tiles()
+
+/obj/machinery/door/window/proc/toggle_tint()
+	if(!polarized)
+		return
+	if(tinted)
+		animate(src, color=COLOR_WHITE, time=5)
+		if(opacity)
+			set_opacity(FALSE)
+		tinted = FALSE
+	else
+		animate(src, color=GLASS_COLOR_TINTED, time=5)
+		if(!opacity && density)
+			set_opacity(TRUE)
+		tinted = TRUE
 
 /obj/machinery/door/window/Initialize(mapload, obj/structure/windoor_assembly/assembly)
 	if(assembly)
@@ -117,6 +134,8 @@
 	icon_state = "[src.base_state]open";
 	flick("[src.base_state]opening", src)
 	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
+	if(opacity && tinted)
+		set_opacity(FALSE)
 	addtimer(new Callback(src, .proc/open_final), 1 SECOND, TIMER_UNIQUE | TIMER_OVERRIDE)
 
 	return 1
@@ -140,6 +159,8 @@
 	update_icon()
 	explosion_resistance = initial(explosion_resistance)
 	update_nearby_tiles()
+	if(opacity && tinted)
+		set_opacity(TRUE)
 
 	addtimer(new Callback(src, .proc/close_final), 1 SECOND, TIMER_UNIQUE | TIMER_OVERRIDE)
 	return TRUE
@@ -189,6 +210,43 @@
 	//If it's in the process of opening/closing, ignore the click
 	if (operating == DOOR_OPERATING_YES)
 		return
+
+	if(isCoil(I))
+		if (polarized)
+			to_chat(user, SPAN_WARNING("\The [src] is already polarized."))
+			return
+		var/obj/item/stack/cable_coil/C = I
+		if (C.use(1))
+			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
+			polarized = TRUE
+			to_chat(user, SPAN_NOTICE("You wire and polarize \the [src]."))
+			return
+	else if(isMultitool(I))
+		if (!polarized)
+			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
+			return
+		if (anchored)
+			playsound(loc, 'sound/effects/pop.ogg', 75, 1)
+			to_chat(user, SPAN_NOTICE("You toggle \the [src]'s tinting."))
+			toggle_tint()
+		else
+			var/response = input(user, "New Window ID:", name, id) as null | text
+			if (isnull(response) || user.incapacitated() || !user.Adjacent(src) || user.get_active_hand() != I)
+				return
+			id = sanitizeSafe(response, MAX_NAME_LEN)
+			to_chat(user, SPAN_NOTICE("The new ID of \the [src] is [id]."))
+		return
+	else if (isWirecutter(I))
+		if (!polarized)
+			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
+			return
+		new /obj/item/stack/cable_coil(get_turf(user), 1)
+		if (tinted)
+			toggle_tint()
+		polarized = FALSE
+		id = null
+		playsound(loc, 'sound/items/Wirecutter.ogg', 75, 1)
+		to_chat(user, SPAN_NOTICE("You cut the wiring and remove the polarization from \the [src]."))
 
 	//Emags and ninja swords? You may pass.
 	if (istype(I, /obj/item/melee/energy/blade))
@@ -250,7 +308,6 @@
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "leftsecure"
 	base_state = "leftsecure"
-	var/id = null
 	health_max = 300
 	pry_mod = 0.65
 
