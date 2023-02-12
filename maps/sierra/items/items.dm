@@ -216,12 +216,6 @@ Passports
 	icon_state = "passport"
 	desc = "A passport for Xenos."
 
-/obj/item/passport/xeno/tajara
-	name = "\improper Tajaran passport"
-	icon = 'packs/infinity/icons/obj/passports.dmi'
-	icon_state = "passport_taj"
-	desc = "A passport that apparently belongs to the Tajara."
-
 /obj/item/passport/xeno/resomi
 	name = "\improper Resomi registration document"
 	icon_state = "passport"

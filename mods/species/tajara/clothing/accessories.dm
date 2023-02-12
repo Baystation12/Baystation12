@@ -3,16 +3,16 @@
 	desc = "An classic Ahdominian made veil that allows the user to see while obscuring their eyes."
 	icon_state = "tajblind"
 	item_state = "tajblind"
-	item_icons = list(slot_glasses_str = 'packs/infinity/icons/mob/onmob/onmob_eyes.dmi')
-	icon = 'packs/infinity/icons/obj/clothing/obj_eyes.dmi'
+	item_icons = list(slot_glasses_str = 'mods/species/tajara/icons/onmob_eyes.dmi')
+	icon = 'mods/species/tajara/icons/obj_eyes.dmi'
 	prescription = 5
 	body_parts_covered = EYES
 
 /obj/item/clothing/glasses/hud/health/tajblind
 	name = "lightweight veil"
 	desc = "An classic Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an installed medical HUD."
-	item_icons = list(slot_glasses_str = 'packs/infinity/icons/mob/onmob/onmob_eyes.dmi')
-	icon = 'packs/infinity/icons/obj/clothing/obj_eyes.dmi'
+	item_icons = list(slot_glasses_str = 'mods/species/tajara/icons/onmob_eyes.dmi')
+	icon = 'mods/species/tajara/icons/obj_eyes.dmi'
 	icon_state = "tajblind_med"
 	item_state = "tajblind_med"
 	off_state = "tajblind_med"
@@ -21,8 +21,8 @@
 /obj/item/clothing/glasses/hud/science/tajblind
 	name = "science veil"
 	desc = "An classic Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an in-built science HUD."
-	item_icons = list(slot_glasses_str = 'packs/infinity/icons/mob/onmob/onmob_eyes.dmi')
-	icon = 'packs/infinity/icons/obj/clothing/obj_eyes.dmi'
+	item_icons = list(slot_glasses_str = 'mods/species/tajara/icons/onmob_eyes.dmi')
+	icon = 'mods/species/tajara/icons/obj_eyes.dmi'
 	icon_state = "tajblind_sci"
 	item_state = "tajblind_sci"
 	prescription = 5
@@ -31,8 +31,8 @@
 /obj/item/clothing/glasses/sunglasses/sechud/tajblind
 	name = "sleek veil"
 	desc = "An classic Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an in-built security HUD."
-	item_icons = list(slot_glasses_str = 'packs/infinity/icons/mob/onmob/onmob_eyes.dmi')
-	icon = 'packs/infinity/icons/obj/clothing/obj_eyes.dmi'
+	item_icons = list(slot_glasses_str = 'mods/species/tajara/icons/onmob_eyes.dmi')
+	icon = 'mods/species/tajara/icons/obj_eyes.dmi'
 	icon_state = "tajblind_sec"
 	item_state = "tajblind_sec"
 	prescription = 5
@@ -41,8 +41,8 @@
 /obj/item/clothing/glasses/meson/prescription/tajblind
 	name = "industrial veil"
 	desc = "An classic Ahdominian made veil that allows the user to see while obscuring their eyes. This one has installed mesons."
-	item_icons = list(slot_glasses_str = 'packs/infinity/icons/mob/onmob/onmob_eyes.dmi')
-	icon = 'packs/infinity/icons/obj/clothing/obj_eyes.dmi'
+	item_icons = list(slot_glasses_str = 'mods/species/tajara/icons/onmob_eyes.dmi')
+	icon = 'mods/species/tajara/icons/obj_eyes.dmi'
 	icon_state = "tajblind_meson"
 	item_state = "tajblind_meson"
 	off_state = "tajblind_meson"
@@ -51,8 +51,8 @@
 /obj/item/clothing/glasses/hud/health/tajvisor
 	name = "lightweight visor"
 	desc = "A modern Ahdominian made visor that allows the user to see while obscuring their eyes. This one has an installed medical HUD."
-	item_icons = list(slot_glasses_str = 'packs/infinity/icons/mob/onmob/onmob_eyes.dmi')
-	icon = 'packs/infinity/icons/obj/clothing/obj_eyes.dmi'
+	item_icons = list(slot_glasses_str = 'mods/species/tajara/icons/onmob_eyes.dmi')
+	icon = 'mods/species/tajara/icons/obj_eyes.dmi'
 	icon_state = "tajvisor_med"
 	item_state = "tajvisor_med"
 	off_state = "tajvisor_med"
@@ -61,8 +61,8 @@
 /obj/item/clothing/glasses/hud/science/tajvisor
 	name = "lightweight visor"
 	desc = "A modern Ahdominian made visor that allows the user to see while obscuring their eyes. This one has an installed science HUD."
-	item_icons = list(slot_glasses_str = 'packs/infinity/icons/mob/onmob/onmob_eyes.dmi')
-	icon = 'packs/infinity/icons/obj/clothing/obj_eyes.dmi'
+	item_icons = list(slot_glasses_str = 'mods/species/tajara/icons/onmob_eyes.dmi')
+	icon = 'mods/species/tajara/icons/obj_eyes.dmi'
 	icon_state = "tajvisor_sci"
 	item_state = "tajvisor_sci"
 	off_state = "tajvisor_sci"
@@ -71,8 +71,8 @@
 /obj/item/clothing/glasses/sunglasses/sechud/tajvisor
 	name = "sleek visor"
 	desc = "A modern Ahdominian made visor that allows the user to see while obscuring their eyes. This one has an in-built security HUD."
-	item_icons = list(slot_glasses_str = 'packs/infinity/icons/mob/onmob/onmob_eyes.dmi')
-	icon = 'packs/infinity/icons/obj/clothing/obj_eyes.dmi'
+	item_icons = list(slot_glasses_str = 'mods/species/tajara/icons/onmob_eyes.dmi')
+	icon = 'mods/species/tajara/icons/obj_eyes.dmi'
 	icon_state = "tajvisor_sec"
 	item_state = "tajvisor_sec"
 	prescription = 5
@@ -81,8 +81,8 @@
 /obj/item/clothing/glasses/meson/prescription/tajvisor
 	name = "industrial visor"
 	desc = "A modern Ahdominian made visor that allows the user to see while obscuring their eyes. This one has installed mesons."
-	item_icons = list(slot_glasses_str = 'packs/infinity/icons/mob/onmob/onmob_eyes.dmi')
-	icon = 'packs/infinity/icons/obj/clothing/obj_eyes.dmi'
+	item_icons = list(slot_glasses_str = 'mods/species/tajara/icons/onmob_eyes.dmi')
+	icon = 'mods/species/tajara/icons/obj_eyes.dmi'
 	icon_state = "tajvisor_mes"
 	item_state = "tajvisor_mes"
 	off_state = "tajvisor_mes"
@@ -91,8 +91,8 @@
 /obj/item/clothing/glasses/meson/prescription/tajvisor/hybrid
 	name = "engineering visor"
 	desc = "A modern Ahdominian made visor that allows the user to see while obscuring their eyes. This one has installed as the mesons, and the add-on shielding module."
-	item_icons = list(slot_glasses_str = 'packs/infinity/icons/mob/onmob/onmob_eyes.dmi')
-	icon = 'packs/infinity/icons/obj/clothing/obj_eyes.dmi'
+	item_icons = list(slot_glasses_str = 'mods/species/tajara/icons/onmob_eyes.dmi')
+	icon = 'mods/species/tajara/icons/obj_eyes.dmi'
 	icon_state = "tajvisor_mes"
 	item_state = "tajvisor_mes"
 	off_state = "tajvisor_mes"
@@ -130,8 +130,8 @@
 /obj/item/clothing/glasses/tajvisor
 	name = "tajaran master visor object, not used"
 	desc = "An Ahdominian made eyeguard."
-	item_icons = list(slot_glasses_str = 'packs/infinity/icons/mob/onmob/onmob_eyes.dmi')
-	icon = 'packs/infinity/icons/obj/clothing/obj_eyes.dmi'
+	item_icons = list(slot_glasses_str = 'mods/species/tajara/icons/onmob_eyes.dmi')
+	icon = 'mods/species/tajara/icons/obj_eyes.dmi'
 	body_parts_covered = EYES
 
 /obj/item/clothing/glasses/tajvisor/a
@@ -185,6 +185,12 @@
 	custom_setup_proc = /obj/item/passport/proc/set_info
 	cost = 0
 
+/obj/item/passport/xeno/tajara
+	name = "\improper Tajaran passport"
+	icon = 'packs/infinity/icons/obj/passports.dmi'
+	icon_state = "passport_taj"
+	desc = "A passport that apparently belongs to the Tajara."
+
 // Pre-modified gloves
 
 /datum/gear/gloves/dress/modified
@@ -215,10 +221,10 @@
 /obj/item/clothing/accessory/scarf/tajaran
 	name = "tua-tari scarf"
 	desc = "A light and soft scarf, very long and wide. You also may rise it to hide your person..."
-	icon = 'packs/infinity/icons/obj/clothing/obj_accessories.dmi'
+	icon = 'mods/species/tajara/icons/obj_accessories.dmi'
 	icon_state = "tajneck"
-	accessory_icons = list(slot_w_uniform_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi', slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi')
-	item_icons = list(slot_wear_mask_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi')
+	accessory_icons = list(slot_w_uniform_str = 'mods/species/tajara/icons/onmob_accessories.dmi', slot_wear_suit_str = 'mods/species/tajara/icons/onmob_accessories.dmi')
+	item_icons = list(slot_wear_mask_str = 'mods/species/tajara/icons/onmob_accessories.dmi')
 	body_parts_covered = 0
 	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
 	slot_flags = SLOT_MASK | SLOT_TIE
@@ -239,9 +245,50 @@
 	name = "talisman"
 	desc = "A simple metal amulet with runes, according to the primitive beliefs of Tajara, able to protect them from evil spirits."
 	icon_state = "taj_amulet"
-	icon = 'packs/infinity/icons/obj/clothing/obj_accessories.dmi'
+	icon = 'mods/species/tajara/icons/obj_accessories.dmi'
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_MASK | SLOT_TIE
+
+/* todo
+Сделать, чтобы блокировало мелкое воздействие - чтение мыслей, слабое лечение. Сейчас оно высасывае псионику \
+со своего тайла - можно контрить псиоников, удерживая.
+/obj/item/clothing/accessory/amulet/disrupts_psionics()
+	visible_message("<span class='rose'>The [src] protect his owner but explodes.</span>")
+	playsound(src.loc, 'sound/effects/glass_step.ogg', 100, 1, -4)
+	QDEL_IN(src, 0)
+	return src
+*/
+
+/obj/item/clothing/accessory/amulet/medium
+	name = "amulet"
+	desc = "An expensive-looking amulet, interspersed with unknown crystals and runes, according to the primitive beliefs of Tajara, able to protect them from evil spirits."
+	icon_state = "taj_amulet_2"
+
+/* todo
+/obj/item/clothing/accessory/amulet/medium/disrupts_psionics()
+	if(prob(20))
+		visible_message("<span class='rose'>The [src] protect his owner but explodes.</span>")
+		playsound(src.loc, 'sound/effects/glass_step.ogg', 100, 1, -4)
+		QDEL_IN(src, 0)
+	return src
+*/
+
+/obj/item/clothing/accessory/amulet/strong
+	name = "averter"
+	desc = "Amulet of Tajara, created from the primordial stone according to their belief, able to protect according to their primitive religion from evil spirits and their servants. The runes on the amulet are etched with acid."
+	icon_state = "taj_amulet_3"
+
+/* todo
+/obj/item/clothing/accessory/amulet/strong/disrupts_psionics()
+	visible_message("<span class='rose'>The [src] radiated faint waves of heat and light, protecting the wearer from psionic influence...</span>")
+	if(prob(0.01))
+		visible_message("<span class='rose'>The [src] protect his owner but explodes.</span>")
+		playsound(src.loc, 'sound/effects/glass_step.ogg', 100, 1, -4)
+		QDEL_IN(src, 0)
+	return src
+*/
+
+
 
 /* todo
 Сделать, чтобы блокировало мелкое воздействие - чтение мыслей, слабое лечение. Сейчас оно высасывае псионику \
@@ -284,7 +331,7 @@
 	item_state = "taj_overcoat"
 	icon = 'mods/species/tajara/icons/suit.dmi'
 	item_icons = list(slot_wear_suit_str = 'mods/species/tajara/icons/onmob_suit.dmi')
-	//species_restricted = list(SPECIES_TAJARA)
+	species_restricted = list(SPECIES_TAJARA)
 
 /datum/gear/uniform/tajara/taj_new_fatigues
 	display_name = "(Tajara) CCA fatigues"

@@ -68,6 +68,8 @@
 	. = ..()
 	LAZYSET(sprite_sheets, SPECIES_RESOMI, 'packs/infinity/icons/mob/species/resomi/onmob_rig_back_resomi.dmi')
 
+
+/*
 /obj/item/clothing/head/helmet/space/rig/Initialize()
 	. = ..()
 	LAZYADD(species_restricted, list(SPECIES_RESOMI))
@@ -83,7 +85,7 @@
 /obj/item/clothing/suit/space/rig/Initialize()
 	. = ..()
 	LAZYADD(species_restricted, list(SPECIES_RESOMI))
-
+*/
 
 
 /obj/item/storage/belt/Initialize()
