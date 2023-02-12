@@ -3490,15 +3490,16 @@
 /turf/simulated/open,
 /area/maintenance/thirddeck/port)
 "hK" = (
-/obj/structure/railing/mapped{
-	dir = 4;
-	icon_state = "railing0-1"
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
-/obj/structure/railing/mapped{
-	dir = 1;
-	icon_state = "railing0-1"
-	},
-/turf/simulated/open,
+/obj/effect/catwalk_plated,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/fore)
 "hL" = (
 /turf/simulated/wall/walnut,
@@ -6180,6 +6181,7 @@
 /area/hydroponics)
 "oa" = (
 /obj/structure/stairs/west,
+/obj/structure/railing/mapped,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "ob" = (
@@ -6192,9 +6194,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/fore)
 "oc" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/green/half{
 	dir = 4
 	},
@@ -6202,10 +6201,10 @@
 	dir = 8;
 	icon_state = "warningcorner"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/fore)
 "od" = (
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
 	d1 = 1;
@@ -6213,6 +6212,9 @@
 	icon_state = "1-2"
 	},
 /obj/effect/catwalk_plated,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/fore)
 "oe" = (
@@ -6473,19 +6475,10 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/recreation)
 "oT" = (
-/obj/structure/railing/mapped{
-	dir = 1;
-	icon_state = "railing0-1"
-	},
-/obj/machinery/rotating_alarm/security_alarm{
-	dir = 4
-	},
-/turf/simulated/open,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "oU" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/green/half{
 	dir = 4
 	},
@@ -6493,12 +6486,10 @@
 	dir = 8;
 	icon_state = "warning"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/fore)
 "oV" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/green{
 	d1 = 1;
@@ -6506,6 +6497,9 @@
 	icon_state = "1-2"
 	},
 /obj/effect/catwalk_plated,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/fore)
 "oW" = (
@@ -6519,6 +6513,9 @@
 	},
 /obj/effect/floor_decal/corner/green{
 	dir = 6
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
@@ -6946,6 +6943,13 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "pO" = (
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 1
+	},
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
 /turf/simulated/open,
 /area/hallway/primary/thirddeck/fore)
 "pP" = (
@@ -7950,6 +7954,10 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/center)
+"sq" = (
+/obj/structure/railing/mapped,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/thirddeck/fore)
 "su" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
@@ -15637,6 +15645,13 @@
 /obj/structure/reagent_dispensers/watertank,
 /turf/simulated/floor/tiled/techfloor,
 /area/hallway/primary/thirddeck/fore)
+"Me" = (
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/open,
+/area/hallway/primary/thirddeck/fore)
 "Mf" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -16131,6 +16146,7 @@
 /obj/effect/floor_decal/corner/green{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "NF" = (
@@ -33921,9 +33937,9 @@ dx
 dx
 mi
 MD
-VU
-hK
-pO
+sq
+oT
+Me
 SE
 sc
 tp
@@ -34328,7 +34344,7 @@ PV
 od
 oV
 mZ
-mZ
+hK
 sf
 MB
 uI

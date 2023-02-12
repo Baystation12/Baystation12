@@ -6320,7 +6320,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "aql" = (
-/obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/item/device/radio/intercom{
 	pixel_y = 23
 	},
@@ -6525,7 +6524,6 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
 "arx" = (
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
 	},
@@ -6539,6 +6537,9 @@
 	icon_state = "4-8"
 	},
 /obj/effect/catwalk_plated,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
 "ary" = (
@@ -6689,6 +6690,7 @@
 /obj/effect/floor_decal/corner/blue/half{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/fore)
 "asE" = (
@@ -6889,6 +6891,9 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "atG" = (
@@ -7088,6 +7093,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/fore)
 "auH" = (
@@ -7106,6 +7112,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "auI" = (
@@ -7130,6 +7137,7 @@
 /obj/effect/floor_decal/corner/paleblue/half{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/fore)
 "auJ" = (
@@ -7354,6 +7362,9 @@
 	dir = 1;
 	pixel_y = -32
 	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "avU" = (
@@ -7561,6 +7572,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "axa" = (
@@ -18696,6 +18708,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "hOb" = (
@@ -19250,10 +19263,12 @@
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d1port)
 "iCj" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /obj/effect/catwalk_plated,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
 "iDb" = (
@@ -20003,6 +20018,7 @@
 /obj/effect/floor_decal/corner/paleblue/half{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/fore)
 "jyb" = (
@@ -28836,6 +28852,13 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/equipstorage)
+"uzZ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/disposalpipe/segment,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/monotile,
+/area/hallway/primary/firstdeck/fore)
 "uBg" = (
 /obj/structure/sign/double/solgovflag/left{
 	pixel_y = 32
@@ -43972,7 +43995,7 @@ aCF
 bMb
 aql
 arx
-sEm
+uzZ
 iCj
 auJ
 avW
