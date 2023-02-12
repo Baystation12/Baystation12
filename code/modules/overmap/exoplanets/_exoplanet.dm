@@ -15,11 +15,25 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	var/list/breathgas = list()	//list of gases animals/plants require to survive
 	var/badgas					//id of gas that is toxic to life here
 
-	var/lightlevel = 0 //This default makes turfs not generate light. Adjust to have exoplanents be lit.
-	var/night = TRUE
+
+	//DAY/NIGHT CYCLE
 	var/daycycle //How often do we change day and night
-	var/daycolumn = 0 //Which column's light needs to be updated next?
-	var/daycycle_column_delay = 10 SECONDS
+	//var/current_time // Holds the current time for sun positioning.  Note that we assume day and night is the same length because simplicity.
+	var/sun_process_interval = 5 MINUTES //How often we update planetary sunlight -> This has a performance impact, though consider lengthening days if you increase this else you may skip over phases
+	var/sun_last_process = null // world.time
+
+	/// 0 means midnight, 1 means noon.
+	var/sun_position = 0
+	/// This a multiplier used to apply to the brightness of ambient lighting.  0.3 means 30% of the brightness of the sun.
+	var/sun_brightness_modifier = 0.5
+
+	/// The color currently applied to the sun.
+	var/sun_apparent_color
+	var/sun_apparent_brightness
+	var/sun_updating = FALSE //Once a color/brightness value has been set, we must finish setting turfs before changing values again
+	var/sun_next_color
+	var/sun_next_brightness
+	var/sun_needs_update = FALSE //TODO test initialize
 
 	var/maxx
 	var/maxy
@@ -181,22 +195,124 @@ GLOBAL_VAR(planet_repopulation_disabled)
 			daddy.group_multiplier = Z.air.group_multiplier
 			Z.air.equalize(daddy)
 
-	if (daycycle)
-		if (tick % round(daycycle / wait) == 0)
-			night = !night
-			daycolumn = 1
-		if (daycolumn && tick % round(daycycle_column_delay / wait) == 0)
-			update_daynight()
+	if((sun_last_process <= world.time - sun_process_interval) || )
+		update_sun()
+	if(sun_needs_update)
+		update_sunlight()
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/update_daynight()
-	var/light = 0.1
-	if (!night)
-		light = lightlevel
-	for (var/turf/simulated/floor/exoplanet/T in block(locate(daycolumn,1,min(map_z)),locate(daycolumn,maxy,max(map_z))))
-		T.set_light(light, 0.1, 2)
-	daycolumn++
-	if (daycolumn > maxx)
-		daycolumn = 0
+/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_daycycle()
+	daycycle = rand(20 MINUTES, 40 MINUTES)
+
+	update_sun()
+
+
+// This changes the position of the sun on the planet.
+/obj/effect/overmap/visitable/sector/exoplanet/proc/update_sun()
+	if(sun_last_process == world.time) //For now, calling it several times in same frame is not valid. Add a parameter to ignore this if weather is added
+		return
+	sun_last_process = world.time
+
+	var/time_of_day = (world.time % daycycle) / daycycle //0 to 1 range.
+
+	var/distance_from_noon = abs(time_of_day - 0.5)
+	sun_position = distance_from_noon / 0.5
+	sun_position = abs(sun_position - 1)
+
+	var/low_brightness = null
+	var/high_brightness = null
+
+	var/low_color = null
+	var/high_color = null
+	var/min = 0
+	var/max = 0
+
+	//Now, each planet type may want to do its own thing for light, if so move most of this code into its own function and override it.
+	switch(sun_position)
+		if(0 to 0.40) // Night
+			low_brightness = 0.01
+			low_color = "#000066"
+
+			high_brightness = 0.2
+			high_color = "#66004D"
+			min = 0
+			max = 0.4
+
+		if(0.40 to 0.50) // Twilight
+			low_brightness = 0.2
+			low_color = "#66004D"
+
+			high_brightness = 0.5
+			high_color = "#CC3300"
+			min = 0.40
+			max = 0.50
+
+		if(0.50 to 0.70) // Sunrise/set
+			low_brightness = 0.5
+			low_color = "#CC3300"
+
+			high_brightness = 0.8
+			high_color = "#FF9933"
+			min = 0.50
+			max = 0.70
+
+		if(0.70 to 1.00) // Noon
+			low_brightness = 0.8
+			low_color = "#DDDDDD"
+
+			high_brightness = 1.0
+			high_color = "#FFFFFF"
+			min = 0.70
+			max = 1.0
+
+	//var/interpolate_weight = (abs(min - sun_position)) * 4 Cit interpolation, not sure
+	var/interpolate_weight = (sun_position - min) / (max - min)
+
+	var/new_brightness = (Interpolate(low_brightness, high_brightness, interpolate_weight) ) * sun_brightness_modifier
+
+	//We do a gradient instead of linear interpolation because linear interpolations of colours are unintuitive
+	var/new_color = gradient(low_color, high_color, space = COLORSPACE_HSV, index=interpolate_weight)
+
+	finish_updating_sun(new_brightness, new_color)
+
+/obj/effect/overmap/visitable/sector/exoplanet/proc/finish_updating_sun(new_brightness, new_color)
+	set waitfor = FALSE
+	ASSERT(args.len < 3)
+	// Delta updates: changing the sun while it's still updating will permanently corrupt ambient lights (short of resetting them globally)
+	while(sun_updating)
+		stoplag()
+
+	sun_updating = TRUE //Block any further changes
+
+	sun_next_brightness = new_brightness
+	sun_next_color = new_color
+
+	sun_needs_update = TRUE
+
+
+/obj/effect/overmap/visitable/sector/exoplanet/proc/update_sunlight()
+	sun_needs_update = FALSE
+	if (sun_next_brightness == sun_apparent_brightness && sun_next_color == sun_apparent_color)
+		sun_updating = FALSE
+		log_debug("update_sunlight(): apparent == next, not bothering")
+		return
+
+	//Replace implies we already set colour before. Else we're going to run into an assert
+	var/replace = (sun_apparent_color != null) && (sun_apparent_brightness != null)
+
+	var/list/surface = block(locate(1, 1, min(map_z)),locate(maxx,maxy, max(map_z)))
+	for (var/turf/simulated/floor/T in surface)
+		if(istype(T))
+			if(T.is_outside()) //Probably more accurate to base it on z stack
+				if(replace)
+					T.replace_ambient_light(sun_apparent_color, sun_next_color, sun_apparent_brightness, sun_next_brightness)
+				else
+					T.add_ambient_light(sun_next_color, sun_next_brightness)
+
+			CHECK_TICK
+
+	sun_apparent_color = sun_next_color
+	sun_apparent_brightness = sun_next_brightness
+	sun_updating = FALSE
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_map()
 	var/list/grasscolors = plant_colors.Copy()
@@ -230,14 +346,6 @@ GLOBAL_VAR(planet_repopulation_disabled)
 
 	for (var/mob/living/simple_animal/A in animals)
 		adapt_animal(A)
-
-/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_daycycle()
-	if (lightlevel)
-		night = FALSE //we start with a day if we have light.
-
-		//When you set daycycle ensure that the minimum is larger than [maxx * daycycle_column_delay].
-		//Otherwise the right side of the exoplanet can get stuck in a forever day.
-		daycycle = rand(10 MINUTES, 40 MINUTES)
 
 /obj/effect/landmark/exoplanet_spawn/Initialize()
 	..()

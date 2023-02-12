@@ -1114,6 +1114,40 @@
 			to_chat(src, SPAN_NOTICE("You look up."))
 			reset_view(z_eye)
 			return
+
+		var/turf/T= get_turf(src)
+
+		if(T.is_outside())// They're outside and hopefully on a planet.
+			var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[T.z]"]
+			if (!istype(E))
+				to_chat(usr, SPAN_NOTICE("You see... things, it's hard to put into words what you're seeing specifically."))
+				return
+
+			//Weather hook here when it is a thing
+
+			// Sun-related output.
+			//Calculate time of day
+			var/time_of_day = E.sun_last_process % E.daycycle
+			var/afternoon = time_of_day > (E.daycycle / 2)
+			var/star_name = GLOB.using_map.system_name
+
+			var/sun_message = null
+			switch(E.sun_position)
+				if(0 to 0.4) // Night
+					sun_message = "It is night time, [star_name] is not visible."
+				if(0.4 to 0.5) // Twilight
+					sun_message = "The sky is in twilight, however [star_name] is not visible."
+				if(0.5 to 0.7) // Sunrise/set.
+					sun_message = "[star_name] is slowly [!afternoon ? "rising from" : "setting on"] the horizon."
+				if(0.7 to 0.9) // Morning/evening
+					sun_message = "[star_name]'s position implies it is currently [!afternoon ? "early" : "late"] in the day."
+				if(0.9 to 1.0) // Noon
+					sun_message = "It's high noon. [star_name] hangs directly above you."
+
+			to_chat(usr, SPAN_NOTICE(sun_message))
+			return
+
+
 		to_chat(src, SPAN_NOTICE("You can see \the [above ? above : "ceiling"]."))
 	else
 		to_chat(src, SPAN_NOTICE("You can't look up right now."))

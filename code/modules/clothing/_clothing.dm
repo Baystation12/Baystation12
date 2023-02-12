@@ -456,7 +456,7 @@ BLIND     // can't see anything
 
 /obj/item/clothing/head/proc/update_flashlight(mob/user = null)
 	if(on && !light_applied)
-		set_light(brightness_on, 1, 3)
+		set_light(3, brightness_on, angle = LIGHT_WIDE)
 		light_applied = 1
 	else if(!on && light_applied)
 		set_light(0)

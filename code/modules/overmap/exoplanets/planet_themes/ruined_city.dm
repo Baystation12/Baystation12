@@ -23,9 +23,6 @@
 		new /datum/random_map/city(null,1,1,zlevel,E.maxx,E.maxy,0,1,1, E.planetary_area)
 
 	if (prob(50))
-		E.lightlevel = rand(5,10)/10	//deserts are usually :lit:
-
-	if (prob(50))
 		var/datum/exoplanet_theme/robotic_guardians/T = new /datum/exoplanet_theme/robotic_guardians
 		E.themes += T
 		E.possible_themes -= /datum/exoplanet_theme/robotic_guardians
