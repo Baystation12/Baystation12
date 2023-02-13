@@ -64,7 +64,7 @@ except AttributeError:
 
 
 if cl.group(2) is not None:
-    write_cl['author'] = cl.group(2).lstrip()
+    write_cl['author'] = cl.group(2).strip() or pr_author
 else:
     write_cl['author'] = pr_author
 
