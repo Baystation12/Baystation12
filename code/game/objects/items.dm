@@ -368,12 +368,12 @@ note this isn't called during the initial dressing of a player
 		user.stop_pulling()
 	if((slot_flags & slot))
 		if(equip_sound)
-			playsound(src, equip_sound, 50)
+			playsound(src, equip_sound, 25)
 		else if(drop_sound)
-			playsound(src, drop_sound, 50)
+			playsound(src, drop_sound, 25)
 	else if(slot == slot_l_hand || slot == slot_r_hand)
 		if(pickup_sound)
-			playsound(src, pickup_sound, 50)
+			playsound(src, pickup_sound, 25)
 	var/mob/M = loc
 	if(!istype(M))
 		return

@@ -105,6 +105,10 @@
 	if(machine)
 		machine.on_user_login(src)
 
+	if (SScharacter_setup.initialized && SSchat.initialized && !isnull(client.chatOutput))
+		if(client.get_preference_value(/datum/client_preference/goonchat) == GLOB.PREF_YES)
+			client.chatOutput.start()
+
 
 /mob/living/carbon/Login()
 	. = ..()

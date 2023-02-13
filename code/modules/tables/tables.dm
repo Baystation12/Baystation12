@@ -186,6 +186,8 @@
 
 	// Placing stuff on tables
 	if(user.unEquip(W, src.loc))
+		if (W.drop_sound)
+			playsound(W.loc, W.drop_sound, 25)
 		auto_align(W, click_params)
 		return 1
 
