@@ -1,7 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - bugfix: Починил юнит-тесты
-  - bugfix: Починил карты для юнит-тестов
-  - bugfix: Починил код для юнит-тестов
-  - bugfix: Починил спрайты для юнит-тестов
