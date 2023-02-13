@@ -21,8 +21,6 @@ a, a:link, a:visited, a:active, .linkOn, .linkOff, input
 	background: #40628a;
   transition: color 50ms, background-color 50ms;
 
-  /* padding: 0 0.5em;
-  margin-right: 2px; */
 	border-radius: 0.16em;
 	padding: 1px 4px 1px 4px;
 	margin: 0 1px 0 1px;
@@ -34,6 +32,8 @@ a, a:link, a:visited, a:active, .linkOn, .linkOff, input
 	white-space: nowrap;
 	user-select: none;
   -ms-user-select: none;
+
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
 
   transition: color 50ms, background-color 50ms;
 }

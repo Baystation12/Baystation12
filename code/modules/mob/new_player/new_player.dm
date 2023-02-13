@@ -295,7 +295,7 @@
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.real_name
 
-	var/list/header = list("<html><center><body></center>")
+	var/list/header = list("<html><body><center>")
 	header += "<b>Добро пожаловать, [name].<br></b>"
 	header += "Длительность раунда: [roundduration2text()]<br>"
 
@@ -434,7 +434,7 @@
 		dat += "</td></tr></table>"
 	// END SUBMAP JOBS
 
-	dat += "</body></html>"
+	dat += "</center></body></html>"
 	if(LAZYLEN(hidden_reasons))
 		var/list/additional_dat = list("<br><b>Некоторые роли были убраны из этого списка по следующим причинам:</b><br>")
 		for(var/raisin in hidden_reasons)

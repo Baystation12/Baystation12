@@ -276,6 +276,26 @@ var/global/list/asset_datums = list()
 		"Jost-Regular.ttf" = 'html/browser/Jost-Regular.ttf',
 	)
 
+/datum/asset/simple/changelog
+	assets = list(
+		"admin.png" = 'html/changelog-static/admin.png',
+		"balance.png" = 'html/changelog-static/balance.png',
+		"bugfix.png" = 'html/changelog-static/bugfix.png',
+		"experiment.png" = 'html/changelog-static/experiment.png',
+		"imageadd.png" = 'html/changelog-static/imageadd.png',
+		"imagedel.png" = 'html/changelog-static/imagedel.png',
+		"maptweak.png" = 'html/changelog-static/maptweak.png',
+		"rscadd.png" = 'html/changelog-static/rscadd.png',
+		"rscdel.png" = 'html/changelog-static/rscdel.png',
+		"wip.png" = 'html/changelog-static/wip.png',
+		"soundadd.png" = 'html/changelog-static/soundadd.png',
+		"sounddel.png" = 'html/changelog-static/sounddel.png',
+		"spellcheck.png" = 'html/changelog-static/spellcheck.png',
+		"tweak.png" = 'html/changelog-static/tweak.png',
+		"changelog.css" = 'html/changelog.css',
+		"changelog.html" = 'html/changelog.html'
+	)
+
 /*
 	Asset cache
 */
