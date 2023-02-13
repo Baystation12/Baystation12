@@ -1,9 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - admin: Сделал Game Panel более удобной
-  - tweak: Заредизайнил Ченджлог
-  - rscadd: Создал пак sierra-tweaks
-  - rscadd: Добавил в пак sierra-tweaks новый вёрб - Credits
-  - bugfix: Починил центрирование лейтджоин меню
-  - tweak: Добавил тень кнопкам common.css для повышения их видимости в Occupations
