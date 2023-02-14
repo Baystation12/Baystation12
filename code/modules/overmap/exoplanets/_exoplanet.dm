@@ -33,7 +33,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	var/sun_updating = FALSE //Once a color/brightness value has been set, we must finish setting turfs before changing values again
 	var/sun_next_color
 	var/sun_next_brightness
-	var/sun_needs_update = FALSE //TODO test initialize
+	var/sun_needs_update = FALSE
 
 	var/maxx
 	var/maxy
@@ -195,7 +195,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 			daddy.group_multiplier = Z.air.group_multiplier
 			Z.air.equalize(daddy)
 
-	if((sun_last_process <= world.time - sun_process_interval) || )
+	if(sun_last_process <= world.time - sun_process_interval)
 		update_sun()
 	if(sun_needs_update)
 		update_sunlight()
@@ -215,7 +215,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	var/time_of_day = (world.time % daycycle) / daycycle //0 to 1 range.
 
 	var/distance_from_noon = abs(time_of_day - 0.5)
-	sun_position = distance_from_noon / 0.5
+	sun_position = distance_from_noon / 0.5 // -1 to 1 range
 	sun_position = abs(sun_position - 1)
 
 	var/low_brightness = null
@@ -270,7 +270,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	var/new_brightness = (Interpolate(low_brightness, high_brightness, interpolate_weight) ) * sun_brightness_modifier
 
 	//We do a gradient instead of linear interpolation because linear interpolations of colours are unintuitive
-	var/new_color = gradient(low_color, high_color, space = COLORSPACE_HSV, index=interpolate_weight)
+	var/new_color = UNLINT(gradient(low_color, high_color, space = COLORSPACE_HSV, index=interpolate_weight))
 
 	finish_updating_sun(new_brightness, new_color)
 

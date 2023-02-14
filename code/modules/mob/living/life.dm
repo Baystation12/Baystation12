@@ -193,6 +193,7 @@
 		reset_view(null)
 
 /mob/living/proc/update_sight()
+	handle_darksight() //Use last frame data as carbons do things out of order
 	set_sight(0)
 	set_see_in_dark(0)
 	if(stat == DEAD || eyeobj)
@@ -226,3 +227,39 @@
 
 /mob/living/proc/handle_hud_icons_health()
 	return
+
+//Adaptative darksight
+//Ideally this would run instantly as mob updates are a bit too slow for this (noticeable when moving fast), but set_see_in_dark is called several times so it's not a good place to put item_states
+/mob/living/proc/handle_darksight()
+	if(!darksight)
+		return
+
+	//For testing purposes
+	var/darksightedness = min(see_in_dark/world.view,1.0)	//A ratio of how good your darksight is, from 'nada' to 'really darn good'
+	var/current = darksight.alpha/255						//Our current adjustedness
+	var/newScale = min(see_in_dark * (world.icon_size/DARKSIGHT_GRADIENT_SIZE), 1)*0.9 //Scale the darksight gradient
+
+	var/brightness = 0.0 //We'll assume it's superdark if we can't find something else.
+
+
+	//Currently we're going to assume that only thing that matter is your turf
+	//This is not necessarily correct.
+	//We may want to blind people inside exosuits and such. At some point we could try moving lumcount to atom, default to turf and then we can make those override
+
+	var/turf/my_turf = get_turf(src)
+	if(isturf(my_turf))
+		brightness = my_turf.get_lumcount()
+
+	brightness = min(brightness * 2, 1) //Why double it? We want darksight to only kick in when dark so this increases apparent brightness
+
+	var/darkness = 1-brightness					//Silly, I know, but 'alpha' and 'darkness' go the same direction on a number line
+	var/adjust_to = min(darkness,darksightedness)//Capped by how darksighted they are
+	var/distance = abs(current-adjust_to)		//Used for how long to animate for
+	var/negative = current > adjust_to          //Unfortunately due to a visual issue this must be instant if we go down 1 level of darksight
+
+	if(distance < 0.01) return					//We're already all set
+
+	if(negative)
+		distance = 0 //Make it instant
+
+	animate(darksight, alpha = (adjust_to*255), transform = matrix().Update(scale_x = newScale, scale_y = newScale), time = (distance*10 SECONDS))

@@ -1,27 +1,21 @@
 /obj/darksight
 	plane = LIGHTING_PLANE
-	screen_loc = "8,8"
 
-	icon = LIGHTING_ICON
-	icon_state = LIGHTING_TRANSPARENT_ICON_STATE
+	icon = 'icons/mob/darksight.dmi'
 
-	color = DARKTINT_NONE
+	screen_loc = "CENTER-7,CENTER-7"
 
-	blend_mode = BLEND_OVERLAY
-	var/stop_sync = FALSE
-	alpha = 1
+	blend_mode = BLEND_ADD
 
 /obj/darksight/Initialize()
 	. = ..()
-	SetTransform(scale = world.view * 2.2)
+	SetTransform((world.icon_size/DARKSIGHT_GRADIENT_SIZE) * 0.9)
 
 /obj/darksight/proc/sync(new_colour)
-	if(stop_sync)
-		return
 	color = new_colour
 
 /mob
-	var/obj/darksight/darksight
+	var/obj/darksight/darksight = null
 
 
 /mob/proc/change_light_colour(new_colour)

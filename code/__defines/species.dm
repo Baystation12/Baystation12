@@ -42,7 +42,7 @@
 #define SKIN_THREAT FLAG(0)
 
 
-// Darkvision Levels. Inverted - white is darkest, black is full vision
-#define DARKTINT_NONE      "#000000"
-#define DARKTINT_MODERATE  "#1a1a1a"
-#define DARKTINT_GOOD      "#292929"
+// Darkvision Levels. White is brightest, darker tints affect vision negatively
+#define DARKTINT_GOOD     "#ffffff"
+#define DARKTINT_MODERATE "#f9f9f5"
+#define DARKTINT_NONE     "#ebebe6"
