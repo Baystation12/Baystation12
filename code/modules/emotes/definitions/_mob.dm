@@ -160,6 +160,7 @@
 		/decl/emote/visible/pocket,
 		/decl/emote/visible/rsalute,
 		/decl/emote/visible/rshoulder,
+		/decl/emote/visible/attention,
 		/decl/emote/visible/squint,
 		/decl/emote/visible/tfist,
 		/decl/emote/visible/tilt,

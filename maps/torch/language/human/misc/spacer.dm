@@ -1,2 +1,2 @@
 /datum/language/spacer
-	warning = "Automatically given if spawning with no languages, except on the Torch."
+	warning = "Автоматически присваивается при появлении без языков, за исключением ГЭК \"Факел\"!"

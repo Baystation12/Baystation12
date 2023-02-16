@@ -1,9 +1,9 @@
 /datum/language/mantid
 	name = LANGUAGE_MANTID_VOCAL
 	desc = "A curt, sharp language developed by the insectoid Ascent for use over comms."
-	speech_verb = "clicks"
-	ask_verb = "chirps"
-	exclaim_verb = "rasps"
+	speech_verb = "щёлкает"
+	ask_verb = "щебечет"
+	exclaim_verb = "скрежещет"
 	colour = "alien"
 	syllables = list("-","=","+","_","|","/")
 	space_chance = 0

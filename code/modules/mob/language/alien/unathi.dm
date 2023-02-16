@@ -1,9 +1,9 @@
 /datum/language/unathi
 	name = LANGUAGE_UNATHI_SINTA
 	desc = "The common language of Moghes, composed of sibilant hisses and rattles. Spoken natively by Unathi."
-	speech_verb = "hisses"
-	ask_verb = "hisses"
-	exclaim_verb = "roars"
+	speech_verb = "шипит"
+	ask_verb = "свистит"
+	exclaim_verb = "рычит"
 	colour = "soghun"
 	key = "o"
 	flags = WHITELISTED
@@ -26,9 +26,9 @@
 /datum/language/yeosa
 	name = LANGUAGE_UNATHI_YEOSA
 	desc = "A language of Moghes consisting of a combination of spoken word and gesticulation. While it is uncommonly spoken in the drier regions, it enjoys popular usage as the official tongue of the Yeosa clans."
-	speech_verb = "hisses"
-	ask_verb = "rattles"
-	exclaim_verb = "barks"
+	speech_verb = "шипит"
+	ask_verb = "трещит"
+	exclaim_verb = "лает"
 	colour = "yeosa"
 	key = "h"
 	flags = WHITELISTED

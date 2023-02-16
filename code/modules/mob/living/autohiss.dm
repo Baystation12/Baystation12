@@ -16,10 +16,10 @@
 
 /datum/species/unathi
 	autohiss_basic_map = list(
-			"s" = list("ss", "sss", "ssss")
+			"с" = list("с-с", "с-с-с", "с-с-с-с")
 		)
 	autohiss_extra_map = list(
-			"x" = list("ks", "kss", "ksss")
+			"х" = list("х-с", "х-с-с", "х-с-с-с")
 		)
 	autohiss_exempt = list(
 					LANGUAGE_UNATHI_SINTA,

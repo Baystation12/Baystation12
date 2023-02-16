@@ -27,3 +27,18 @@
 	Несмотря на это, ИПС всё ещё считаются разумными существами и имеют право на выкуп себя и своего тела, \
 	но при этом лишаются права работать на позициях в государственных организациях, если не имеют специальных сдерживающих \"Оков\" \
 	с установленными в них одобренных властью <font color=#436b8e>ЦПСС</font> сводов законов."
+	language = LANGUAGE_EAL
+	secondary_langs = list(
+		LANGUAGE_HUMAN_EURO,
+		LANGUAGE_HUMAN_CHINESE,
+		LANGUAGE_HUMAN_ARABIC,
+		LANGUAGE_HUMAN_LORRIMAN,
+		LANGUAGE_HUMAN_INDIAN,
+		LANGUAGE_HUMAN_IBERIAN,
+		LANGUAGE_HUMAN_RUSSIAN,
+		LANGUAGE_SPACER,
+		LANGUAGE_SIGN
+	)
+
+/decl/cultural_info/culture/ipc_scg/sanitize_name(var/new_name)
+	return sanitizeName(new_name, allow_numbers = 1)

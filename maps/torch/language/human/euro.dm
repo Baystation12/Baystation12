@@ -1,2 +1,2 @@
 /datum/language/human/euro
-	warning = "Automatically given if spawning on the Torch."
+	warning = "Автоматически присваивается при появлении на ГЭК \"Факел\"!"

@@ -2,9 +2,9 @@
 	name = LANGUAGE_ROBOT_GLOBAL
 	desc = "Most human facilities support free-use communications protocols and routing hubs for synthetic use."
 	colour = "say_quote"
-	speech_verb = "states"
-	ask_verb = "queries"
-	exclaim_verb = "declares"
+	speech_verb = "заявляет"
+	ask_verb = "запрашивает"
+	exclaim_verb = "объявляет"
 	key = "b"
 	flags = RESTRICTED | HIVEMIND
 	shorthand = "N/A"

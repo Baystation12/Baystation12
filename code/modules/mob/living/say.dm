@@ -241,6 +241,7 @@ var/global/list/channel_to_radio_key = new
 	message = handle_autohiss(message, speaking)
 	message = format_say_message(message)
 	message = process_chat_markup(message)
+	message = say_emphasis(message)
 
 	if(speaking && !speaking.can_be_spoken_properly_by(src))
 		message = speaking.muddle(message)

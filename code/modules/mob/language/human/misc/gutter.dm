@@ -1,7 +1,7 @@
 /datum/language/gutter
 	name = LANGUAGE_GUTTER
 	desc = "This crude pidgin tongue developed on Pluto during its busier days. It is common among the lower classes of Pluto. It is a common language among Plutonians. It is considered a crude language by many that are 'upper class'."
-	speech_verb = "growls"
+	speech_verb = "базарит"
 	colour = "rough"
 	key = "t"
 	space_chance = 70

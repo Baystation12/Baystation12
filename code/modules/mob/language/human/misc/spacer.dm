@@ -1,7 +1,7 @@
 /datum/language/spacer
 	name = LANGUAGE_SPACER
 	desc = "A rough, informal language used infrequently by humans as a last resort when attempts to establish dialogue in more proper languages fail and no autotranslators are available."
-	warning = "Automatically given if spawning with no languages."
+	warning = "Автоматически присваивается при появлении без языков!"
 	key = "j"
 	shorthand = "Spc"
 	partial_understanding = list(

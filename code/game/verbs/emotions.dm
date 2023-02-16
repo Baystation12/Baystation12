@@ -230,6 +230,11 @@
 	set category = "Emote"
 	emote("rsalute")
 
+/mob/living/verb/attention()
+	set name = "Встать смирно"
+	set category = "Emote"
+	emote("attention")
+
 /mob/living/verb/eyebrow()
 	set name = "Приподнять бровь"
 	set category = "Emote"

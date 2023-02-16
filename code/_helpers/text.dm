@@ -441,6 +441,7 @@
 	t = replacetext_char(t, "\[armylogo\]", "<img src = armylogo.png>")
 	t = replacetext_char(t, "\[sfplogo\]", "<img src = sfplogo.png>")
 	t = replacetext_char(t, "\[torchlogo\]", "<img src = torchlogo.png>")
+	t = replacetext_char(t, "\[fondlogo\]", "<img src = fondlogo.png>")
 	t = replacetext_char(t, "\[editorbr\]", "")
 	return t
 

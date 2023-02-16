@@ -143,6 +143,7 @@
 		visible_message(message, checkghosts = check_ghosts)
 	else
 		audible_message(message, checkghosts = check_ghosts)
+	message = say_emphasis(message)
 
 // Specific mob type exceptions below.
 /mob/living/silicon/ai/emote(var/act, var/type, var/message)

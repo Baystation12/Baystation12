@@ -11,8 +11,8 @@
 
 #define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/qm, /datum/job/jua, /datum/job/sea, /datum/job/pathfinder, /datum/job/rd
 	species_to_job_blacklist = list(
-		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/research_guard, /datum/job/warden, /datum/job/synthetic), //Other jobs unavailable via branch restrictions,
-		/datum/species/unathi/yeosa = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/research_guard, /datum/job/warden, /datum/job/synthetic),
+		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/warden, /datum/job/synthetic), //Other jobs unavailable via branch restrictions,
+		/datum/species/unathi/yeosa = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/warden, /datum/job/synthetic),
 		/datum/species/skrell  = list(HUMAN_ONLY_JOBS, /datum/job/synthetic),
 		/datum/species/machine = list(/datum/job/liaison, /datum/job/psychiatrist, /datum/job/synthetic),
 		/datum/species/machine/shell   = list(/datum/job/liaison, /datum/job/psychiatrist, /datum/job/officer, /datum/job/warden),

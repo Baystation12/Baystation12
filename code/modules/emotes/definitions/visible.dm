@@ -223,8 +223,8 @@
 /decl/emote/visible/handshake
 	key = "handshake"
 	check_restraints = TRUE
-	emote_message_3p_target = "USER shakes hands with TARGET."
-	emote_message_3p = "USER shakes hands with USER_SELF."
+	emote_message_3p_target = "USER пожимает руку с TARGET."
+	emote_message_3p = "USER пожимает руку с USER_SELF."
 	check_range = 1
 
 /decl/emote/visible/handshake/get_emote_message_3p(var/atom/user, var/atom/target, var/extra_params)
@@ -318,6 +318,11 @@
 	key = "rsalute"
 	check_restraints = TRUE
 	emote_message_3p = "USER отвечает на воинское приветствие."
+
+/decl/emote/visible/attention
+	key = "attention"
+	check_restraints = TRUE
+	emote_message_3p = "USER встал по стойке смирно."
 
 /decl/emote/visible/rshoulder
 	key = "rshoulder"

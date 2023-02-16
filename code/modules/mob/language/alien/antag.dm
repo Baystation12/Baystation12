@@ -1,7 +1,7 @@
 /datum/language/ling
 	name = LANGUAGE_CHANGELING_GLOBAL
 	desc = "Although they are normally wary and suspicious of each other, changelings can commune over a distance."
-	speech_verb = "says"
+	speech_verb = "гласят"
 	colour = "changeling"
 	key = "g"
 	flags = RESTRICTED | HIVEMIND
@@ -49,9 +49,9 @@
 /datum/language/vox
 	name = LANGUAGE_VOX
 	desc = "The common tongue of the various Vox ships making up the Shoal. It sounds like chaotic shrieking to everyone else."
-	speech_verb = "shrieks"
-	ask_verb = "creels"
-	exclaim_verb = "SHRIEKS"
+	speech_verb = "визжит"
+	ask_verb = "вопит"
+	exclaim_verb = "ВИЗЖИТ"
 	colour = "vox"
 	key = "x"
 	flags = WHITELISTED
