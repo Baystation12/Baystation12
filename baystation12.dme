@@ -3337,5 +3337,6 @@
 #include "maps\deepmaint\deepmaint_rooms\normal\_normal_rooms.dm"
 #include "mods\_modpack.dm"
 #include "mods\eris_announcer\_eris_announcer.dme"
+#include "mods\leroy_beasts_pack\_leroy_beasts.dme"
 #include "~code\global_init.dm"
 // END_INCLUDE

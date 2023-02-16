@@ -1,11 +1,20 @@
 /mob/living/simple_animal/hostile/bear
 	name = "space bear"
 	desc = "A product of Space Russia?"
-	icon_state = "bear"
+	icon = 'mods/leroy_beasts_pack/leroy_beasts_32x64.dmi'
+	icon_state = "brown_bear"
+	icon_living = "brown_bear"
+	icon_dead = "brown_bear_dead"
+	icon_gib = "bear_gib"
+	default_pixel_x = -16
+	pixel_x = -16
+
+// Overriding old bear icon with new from modpack. /singleton/modpack/leroy_beasts
+/*	icon_state = "bear"
 	icon_living = "bear"
 	icon_dead = "bear_dead"
 	icon_gib = "bear_gib"
-
+*/
 	faction = "russian"
 
 	maxHealth = 60
