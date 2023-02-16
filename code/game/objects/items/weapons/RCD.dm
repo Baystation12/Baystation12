@@ -228,7 +228,7 @@
 	var/result = get_work_result(target)
 	if(ispath(result,/turf))
 		var/turf/T = target
-		T.ChangeTurf(result)
+		T.ChangeTurf(result, keep_air = TRUE)
 	else if(result)
 		new result(target)
 	else
