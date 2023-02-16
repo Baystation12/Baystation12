@@ -1,0 +1,5 @@
+author: LordNest
+delete-after: true
+changes:
+  - imageadd: Добавил спрайты от Лероя и заменил медведю спрайт
+  - rscadd: Добавил зверьё от Лероя
