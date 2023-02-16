@@ -270,7 +270,7 @@
 /singleton/hierarchy/rcd_mode/floor_and_walls/base_turf
 	cost = 1
 	delay = 2 SECONDS
-	work_type = /turf/simulated/floor/airless
+	work_type = /turf/simulated/floor/plating
 
 /singleton/hierarchy/rcd_mode/floor_and_walls/base_turf/can_handle_work(rcd, turf/target)
 	var/area/A = get_area(target)
