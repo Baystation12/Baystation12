@@ -1,0 +1,10 @@
+author: rootoo807
+delete-after: true
+changes:
+  - rscadd: Adds 8 new seafood recipes.
+  - bugfix: Sushi sprites show up correctly for all fish.
+  - bugfix: Sashimi doesn't disappear in cookers.
+  - tweak: Sushi and sashimi now use fish color. Shellfish (and shrimp tempura) can
+      be made into sushi.
+  - rscdel: Sashimi can no longer be stacked.
+  - tweak: Cooking/cutting bacon no longer summons additional protein into existence.
