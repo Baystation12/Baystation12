@@ -1387,7 +1387,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/hatch/maintenance,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/item/taperoll/engineering/applied,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "ade" = (
@@ -3812,6 +3811,7 @@
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 1
 	},
+/obj/machinery/scrap/stacking_machine,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/compactor)
 "ahu" = (
@@ -33841,6 +33841,17 @@
 	},
 /turf/simulated/floor/wood/ebony,
 /area/crew_quarters/bar)
+"fKu" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/machinery/conveyor{
+	dir = 4;
+	id = "compactor"
+	},
+/obj/machinery/recycler,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/maintenance/compactor)
 "fKy" = (
 /obj/effect/wallframe_spawn/reinforced/no_grille,
 /obj/machinery/door/firedoor,
@@ -34611,6 +34622,7 @@
 /area/bridge/nano)
 "iar" = (
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/crusher_base,
 /turf/simulated/floor/plating,
 /area/maintenance/compactor)
 "iaX" = (
@@ -35524,6 +35536,9 @@
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/item/modular_computer/telescreen/preset/trashcompactor{
+	pixel_y = 28
+	},
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "lmg" = (
@@ -35834,6 +35849,19 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/center)
+"mkO" = (
+/obj/effect/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/machinery/conveyor{
+	dir = 4;
+	id = "compactor"
+	},
+/obj/machinery/pile_ripper{
+	active_power_usage = 300
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/maintenance/compactor)
 "mlC" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 10
@@ -38084,6 +38112,10 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/bridge/nano)
+"sDO" = (
+/obj/machinery/crusher_base,
+/turf/simulated/floor/plating,
+/area/maintenance/compactor)
 "sDZ" = (
 /obj/effect/floor_decal/corner/lime/bordercorner{
 	dir = 4
@@ -62491,7 +62523,7 @@ mxF
 acW
 aAn
 ait
-aUf
+sDO
 lwx
 ahv
 ahv
@@ -62693,7 +62725,7 @@ wTP
 acW
 aPU
 aNQ
-aUf
+sDO
 lwx
 uZB
 ahv
@@ -63707,7 +63739,7 @@ arT
 aQx
 aAo
 aEH
-aaW
+mkO
 acW
 aaY
 abk
@@ -63909,7 +63941,7 @@ afd
 aiu
 daG
 aPd
-aaW
+fKu
 acW
 afz
 aqf
