@@ -85,6 +85,7 @@
 	filling_color = "#f6db93"
 	bitesize = 4
 	center_of_mass = "x=16;y=16"
+	sushi_overlay = "fish"
 
 
 /obj/item/reagent_containers/food/snacks/shellfish/clam
@@ -131,6 +132,7 @@
 	desc = "A tasty shrimp, ready to use. Eat too much and you'll get sick."
 	icon_state = "shrimp_meat"
 	filling_color = "#ffdfc5"
+	sushi_overlay = "shrimp"
 
 
 /obj/item/reagent_containers/food/snacks/shellfish/shrimp/Initialize()
@@ -144,6 +146,7 @@
 	icon_state = "crab_meat"
 	filling_color = "#e8d9c8"
 	bitesize = 3
+	sushi_overlay = "crab"
 
 
 /obj/item/reagent_containers/food/snacks/shellfish/crab/Initialize()
