@@ -1,0 +1,7 @@
+author: Mucker
+delete-after: true
+changes:
+  - bugfix: Fixed plating placed by the RCD not keeping the original atmosphere of
+      the tile.
+  - tweak: Changed the RCD floor type from 'airless plating' to just 'plating' to
+      avoid confusion.
