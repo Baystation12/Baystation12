@@ -182,12 +182,3 @@
 /obj/effect/landmark/corpse/syndicate/commando
 	name = "Syndicate Commando"
 	corpse_outfits = list(/singleton/hierarchy/outfit/mercenary/syndicate/commando)
-
-/obj/effect/landmark/corpse/fleet
-	name = "Fleet Armsman"
-	corpse_outfits = list(/singleton/hierarchy/outfit/job/torch/ert)
-	spawn_flags = CORPSE_SPAWNER_NO_RANDOMIZATION
-
-/obj/effect/landmark/corpse/fleet/leader
-	name = "Fleet Team Leader"
-	corpse_outfits = list(/singleton/hierarchy/outfit/job/torch/ert/leader)

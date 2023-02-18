@@ -71,6 +71,7 @@
 	#include "items/memos.dm"
 
 	#include "spawners.dm"
+	#include "outfits/roguefleet.dm"
 
 	#include "items/clothing/ec_skillbadges.dm"
 	#include "items/clothing/solgov-accessory.dm"
