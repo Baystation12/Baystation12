@@ -721,6 +721,7 @@
 /obj/effect/floor_decal/corner/beige/border{
 	dir = 1
 	},
+/obj/machinery/vending/generic,
 /turf/simulated/floor/tiled,
 /area/storage/primary)
 "bK" = (
@@ -847,7 +848,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/glass/civilian{
 	autoset_access = 0;
-	name = "Commissary Counter";
+	name = "Recreation Area";
 	req_access = newlist()
 	},
 /obj/structure/disposalpipe/segment,
@@ -2820,6 +2821,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/structure/reagent_dispensers/water_cooler{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/visitors)
 "fq" = (
@@ -3797,6 +3801,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
+"gP" = (
+/obj/machinery/vending/weeb{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/crew_quarters/visitors)
 "gQ" = (
 /obj/effect/wallframe_spawn/reinforced/no_grille,
 /obj/machinery/door/firedoor,
@@ -5027,6 +5037,9 @@
 /obj/effect/floor_decal/corner/lime/border{
 	dir = 4
 	},
+/obj/machinery/light{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/visitors)
 "iS" = (
@@ -5974,7 +5987,7 @@
 /area/quartermaster/expedition)
 "kl" = (
 /obj/machinery/vending/cigarette{
-	dir = 1
+	dir = 4
 	},
 /obj/effect/floor_decal/corner/lime/bordercorner2,
 /obj/effect/floor_decal/borderfloor,
@@ -6008,7 +6021,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/glass/civilian{
 	autoset_access = 0;
-	name = "Comissary"
+	name = "Recreation Area"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -14469,12 +14482,12 @@
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
 "xz" = (
-/obj/machinery/vending/weeb{
-	dir = 1
+/obj/machinery/door/airlock/glass/civilian{
+	autoset_access = 0;
+	name = "Recreation Area"
 	},
-/obj/effect/floor_decal/borderfloor,
-/obj/effect/floor_decal/corner/lime/border,
-/turf/simulated/floor/tiled,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/visitors)
 "xA" = (
 /obj/machinery/airlock_sensor{
@@ -21509,6 +21522,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
 	},
+/obj/machinery/radio_beacon,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/power)
 "Jo" = (
@@ -27859,17 +27873,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/auxillary/port)
 "UJ" = (
-/obj/effect/floor_decal/borderfloor{
-	dir = 1
-	},
-/obj/structure/reagent_dispensers/water_cooler,
-/obj/effect/floor_decal/corner/lime/border{
-	dir = 1
-	},
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/floor/tiled,
+/obj/effect/wallframe_spawn/no_grille,
+/turf/simulated/floor/plating,
 /area/crew_quarters/visitors)
 "UK" = (
 /obj/structure/cable/green{
@@ -41762,7 +41767,7 @@ gD
 iR
 ih
 hI
-hI
+gP
 kl
 dW
 ho
@@ -41963,9 +41968,9 @@ cJ
 dW
 dW
 UJ
-hI
-hI
 xz
+UJ
+UJ
 dW
 rH
 mI

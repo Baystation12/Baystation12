@@ -11,4 +11,5 @@
 // BEGIN_INCLUDE
 #include "_sofa.dm"
 #include "sofa.dm"
+#include "roundedchair.dm"
 // END_INCLUDE

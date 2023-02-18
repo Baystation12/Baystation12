@@ -12867,7 +12867,7 @@
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 4
 	},
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/chair/rounded/blue{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -16220,7 +16220,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/chair/rounded/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -20223,6 +20223,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/bed/chair/rounded/beige{
+	dir = 1
+	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
 "aLv" = (
@@ -20437,6 +20440,9 @@
 /obj/structure/extinguisher_cabinet{
 	dir = 4;
 	pixel_x = -24
+	},
+/obj/structure/bed/chair/rounded/beige{
+	dir = 4
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
@@ -29137,7 +29143,7 @@
 /obj/effect/landmark/start{
 	name = "Captain"
 	},
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/chair/rounded/blue{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
@@ -30850,7 +30856,7 @@
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 4
 	},
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/chair/rounded/blue{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -30875,7 +30881,7 @@
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 8
 	},
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/chair/rounded/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -32984,7 +32990,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/gravitaional_generator)
 "dxO" = (
-/obj/structure/bed/chair/armchair/lime{
+/obj/structure/bed/chair/rounded/blue{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -34553,7 +34559,7 @@
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 1
 	},
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/chair/rounded/blue{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
@@ -34911,7 +34917,7 @@
 /area/shield/seconddeck)
 "jne" = (
 /obj/effect/landmark/start,
-/obj/structure/bed/chair/armchair/lime{
+/obj/structure/bed/chair/rounded/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -35377,6 +35383,16 @@
 /obj/structure/towel/fitness,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/gym)
+"kRV" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/bed/chair/rounded/beige,
+/turf/simulated/floor/carpet,
+/area/crew_quarters/lounge)
 "kUU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow,
 /turf/simulated/wall/r_wall/prepainted,
@@ -36425,7 +36441,7 @@
 /turf/simulated/floor/beach/sand,
 /area/crew_quarters/cafe)
 "ooJ" = (
-/obj/structure/bed/chair/comfy/blue,
+/obj/structure/bed/chair/rounded/blue,
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/captain/office_anteroom)
 "otd" = (
@@ -38088,6 +38104,9 @@
 /area/crew_quarters/lounge_big)
 "sEX" = (
 /obj/effect/landmark/start,
+/obj/structure/bed/chair/rounded/beige{
+	dir = 1
+	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
 "sFP" = (
@@ -38402,7 +38421,7 @@
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/sleep/bunk_big/room_two)
 "tsO" = (
-/obj/structure/bed/chair/armchair/lime{
+/obj/structure/bed/chair/rounded/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -39178,6 +39197,12 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/game_room)
+"vom" = (
+/obj/structure/bed/chair/rounded/beige{
+	dir = 1
+	},
+/turf/simulated/floor/carpet,
+/area/crew_quarters/lounge)
 "voG" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/janitor)
@@ -39243,6 +39268,12 @@
 	},
 /turf/simulated/floor/greengrid,
 /area/engineering/gravitaional_generator)
+"vym" = (
+/obj/structure/bed/chair/rounded/beige{
+	dir = 8
+	},
+/turf/simulated/floor/carpet,
+/area/crew_quarters/lounge)
 "vyn" = (
 /obj/machinery/status_display,
 /turf/simulated/wall/prepainted,
@@ -40106,7 +40137,7 @@
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 8
 	},
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/chair/rounded/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -57205,7 +57236,7 @@ aRx
 aGY
 aGY
 aXq
-aME
+kRV
 aZU
 sEX
 aKz
@@ -57409,7 +57440,7 @@ aXs
 aXs
 aME
 aZi
-aRp
+vom
 aKz
 aaK
 aam
@@ -57610,7 +57641,7 @@ aGY
 aJu
 aXT
 aYR
-aRp
+vym
 aRp
 aKz
 aaK
