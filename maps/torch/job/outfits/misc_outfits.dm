@@ -30,14 +30,24 @@
 /singleton/hierarchy/outfit/job/torch/ert
 	name = OUTFIT_JOB_NAME("ERT - Torch")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat
-	head = /obj/item/clothing/head/beret/solgov/fleet
+	suit = /obj/item/clothing/suit/armor/pcarrier/light/sol
+	head = /obj/item/clothing/head/helmet
 	gloves = /obj/item/clothing/gloves/thick
 	id_types = list(/obj/item/card/id/centcom/ERT)
 	pda_type = /obj/item/modular_computer/pda/ert
 	l_ear = /obj/item/device/radio/headset/ert
 	shoes = /obj/item/clothing/shoes/dutyboots
+	mask = /obj/item/clothing/mask/gas/half
 
 /singleton/hierarchy/outfit/job/torch/ert/leader
 	name = OUTFIT_JOB_NAME("ERT Leader - Torch")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/command
-	head = /obj/item/clothing/head/beret/solgov/fleet/command
+	suit = /obj/item/clothing/suit/armor/pcarrier/medium/sol
+	head = /obj/item/clothing/head/helmet/ballistic
+	mask = /obj/item/clothing/mask/gas/half
+
+/singleton/hierarchy/outfit/job/torch/ert/suit
+	name = OUTFIT_JOB_NAME("ERT Heavy - Torch")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/command
+	mask = /obj/item/clothing/mask/gas/half
+	back = /obj/item/rig/ert

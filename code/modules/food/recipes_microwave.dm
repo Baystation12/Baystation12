@@ -1619,3 +1619,102 @@
 		/obj/item/reagent_containers/food/snacks/slice/bread
 	)
 	result_path = /obj/item/reagent_containers/food/snacks/stuffed_clam
+
+
+/datum/microwave_recipe/steamed_mussels
+	required_reagents = list(
+		/datum/reagent/ethanol/wine/premium = 10,
+		/datum/reagent/sodiumchloride = 1,
+		/datum/reagent/blackpepper = 1
+	)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/shellfish/mussel,
+		/obj/item/reagent_containers/food/snacks/shellfish/mussel,
+		/obj/item/reagent_containers/food/snacks/shellfish/mussel
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/steamed_mussels
+
+
+/datum/microwave_recipe/oysters_rockefeller
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/shellfish/oyster,
+		/obj/item/reagent_containers/food/snacks/shellfish/oyster,
+		/obj/item/reagent_containers/food/snacks/bacon,
+		/obj/item/reagent_containers/food/snacks/slice/bread
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/oysters_rockefeller
+
+
+/datum/microwave_recipe/crab_cakes
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/shellfish/crab,
+		/obj/item/reagent_containers/food/snacks/slice/bread,
+		/obj/item/reagent_containers/food/snacks/egg
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/crab_cakes
+
+
+/datum/microwave_recipe/crab_rangoon
+	required_reagents = list(
+		/datum/reagent/drink/milk/cream = 5
+	)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/doughslice,
+		/obj/item/reagent_containers/food/snacks/shellfish/crab,
+		/obj/item/reagent_containers/food/snacks/cheesewedge,
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/crab_rangoon
+
+
+/datum/microwave_recipe/crab_dinner
+	required_reagents = list(
+		/datum/reagent/water = 10
+	)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/shellfish/crab,
+		/obj/item/reagent_containers/food/snacks/shellfish/crab,
+		/obj/item/reagent_containers/food/snacks/shellfish/crab,
+		/obj/item/reagent_containers/food/snacks/fruit_slice
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/crab_dinner
+
+
+/datum/microwave_recipe/shrimp_cocktail
+	required_reagents = list(
+		/datum/reagent/nutriment/ketchup = 5
+	)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/shellfish/shrimp,
+		/obj/item/reagent_containers/food/snacks/shellfish/shrimp,
+		/obj/item/reagent_containers/food/snacks/shellfish/shrimp,
+		/obj/item/reagent_containers/food/drinks/glass2/cocktail
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/shrimp_cocktail
+
+
+/datum/microwave_recipe/shrimp_tempura
+	required_reagents = list(
+		/datum/reagent/nutriment/batter = 5
+	)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/shellfish/shrimp
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/shrimp_tempura
+
+
+/datum/microwave_recipe/seafood_paella
+	required_reagents = list(
+		/datum/reagent/ethanol/wine/premium = 5
+	)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/shellfish/shrimp,
+		/obj/item/reagent_containers/food/snacks/shellfish/shrimp,
+		/obj/item/reagent_containers/food/snacks/shellfish/mussel,
+		/obj/item/reagent_containers/food/snacks/shellfish/mussel,
+		/obj/item/reagent_containers/food/snacks/boiledrice
+	)
+	required_produce = list(
+		"tomato" = 1
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/seafood_paella
+
