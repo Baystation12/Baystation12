@@ -1,0 +1,15 @@
+# Determines if we search the title (optional). Defaults to true.
+matchTitle: false
+
+# Determines if we search the body (optional). Defaults to true.
+matchBody: true
+
+# Determines if label matching is case sensitive (optional). Defaults to true.
+caseSensitive: true
+
+# Explicit keyword mappings to labels. Form of match:label. Required.
+labelMappings:
+    "[NEEDTEST]": Task: Needs Testing
+    "[REVIEW]": Task: Requires review
+    "[DISCUSSION]": Task: Requires Discussion
+    "[STALE]": Task: Requires Discussion
