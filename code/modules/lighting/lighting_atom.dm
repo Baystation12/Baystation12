@@ -10,9 +10,9 @@
 	var/light_offset_x
 	var/light_offset_y
 
-	var/tmp/datum/light_source/light // Our light source. Don't fuck with this directly unless you have a good reason!
-	var/tmp/list/light_source_multi       // Any light sources that are "inside" of us, for example, if src here was a mob that's carrying a flashlight, that flashlight's light source would be part of this list.
-	var/tmp/datum/light_source/light_source_solo    // Same as above - this is a shortcut to avoid allocating the above list if we can
+	var/datum/light_source/light // Our light source. Don't fuck with this directly unless you have a good reason!
+	var/list/light_source_multi       // Any light sources that are "inside" of us, for example, if src here was a mob that's carrying a flashlight, that flashlight's light source would be part of this list.
+	var/datum/light_source/light_source_solo    // Same as above - this is a shortcut to avoid allocating the above list if we can
 
 // Nonsensical value for l_color default, so we can detect if it gets set to null.
 #define NONSENSICAL_VALUE -99999
@@ -73,7 +73,7 @@
 
 // Should always be used to change the opacity of an atom.
 // It notifies (potentially) affected light sources so they can update (if needed).
-/atom/set_opacity(var/new_opacity)
+/atom/set_opacity(new_opacity)
 	. = ..()
 	if (!.)
 		return

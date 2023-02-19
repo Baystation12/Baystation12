@@ -4,19 +4,19 @@
 	var/ambient_light_multiplier = 0.3	// The power of the above is multiplied by this. Setting too high may drown out normal lights on the same turf.
 	luminosity           = 1
 
-	var/tmp/lighting_corners_initialised = FALSE
+	var/lighting_corners_initialised = FALSE
 
-	var/tmp/list/datum/light_source/affecting_lights       // List of light sources affecting this turf.
-	var/tmp/atom/movable/lighting_overlay/lighting_overlay // Our lighting overlay.
-	var/tmp/list/datum/lighting_corner/corners
+	var/list/datum/light_source/affecting_lights       // List of light sources affecting this turf.
+	var/atom/movable/lighting_overlay/lighting_overlay // Our lighting overlay.
+	var/list/datum/lighting_corner/corners
 
-	var/tmp/ambient_has_indirect = FALSE // If this is TRUE, an above turf's ambient light is affecting this turf.
+	var/ambient_has_indirect = FALSE // If this is TRUE, an above turf's ambient light is affecting this turf.
 
 	// Record-keeping, do not touch -- that means you, admins.
-	var/tmp/ambient_active = FALSE	//! Do we have non-zero ambient light? Use [TURF_IS_AMBIENT_LIT] instead of reading this directly.
-	var/tmp/ambient_light_old_r = 0
-	var/tmp/ambient_light_old_g = 0
-	var/tmp/ambient_light_old_b = 0
+	var/ambient_active = FALSE	//! Do we have non-zero ambient light? Use [TURF_IS_AMBIENT_LIT] instead of reading this directly.
+	var/ambient_light_old_r = 0
+	var/ambient_light_old_g = 0
+	var/ambient_light_old_b = 0
 
 /turf/proc/set_ambient_light(color, multiplier)
 	if (color == ambient_light && multiplier == ambient_light_multiplier)
@@ -90,10 +90,7 @@
 	ambient_light_old_b += lb
 
 	if (!corners || !lighting_corners_initialised)
-		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
-			generate_missing_corners()
-		else
-			return
+		generate_missing_corners()
 
 	// This list can contain nulls on things like space turfs -- they only have their neighbors' corners.
 	for (var/datum/lighting_corner/C in corners)

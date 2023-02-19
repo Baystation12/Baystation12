@@ -37,14 +37,14 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
 					if (E.sun_brightness_modifier)
 						E.update_sun() //Citadel seems to update entire planet ?
 				else if (starlight_enabled) //Assume we can light up exterior maybe?
-					target.set_ambient_light(SSskybox.background_color, 1)
+					target.set_ambient_light(SSskybox.background_color, 0.5)
 		else if (TURF_IS_AMBIENT_LIT_UNSAFE(target))
 			var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[target.z]"]
 			if (istype(E))
 				if (E.sun_brightness_modifier && ((E.sun_apparent_color != null) && (E.sun_apparent_brightness != null)))
 					target.replace_ambient_light(E.sun_apparent_color, null, E.sun_apparent_brightness, null)
 			else if (starlight_enabled)
-				target.replace_ambient_light(SSskybox.background_color, null, 1, null)
+				target.replace_ambient_light(SSskybox.background_color, null, 0.5, null)
 
 		if (no_mc_tick)
 			CHECK_TICK

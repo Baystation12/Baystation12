@@ -238,6 +238,16 @@
 	on = powered()
 	update_icon(FALSE)
 
+	switch (dir)
+		if(NORTH)
+			light_offset_y = WORLD_ICON_SIZE * 0.5
+		if(SOUTH)
+			light_offset_y = WORLD_ICON_SIZE * -0.5
+		if(EAST)
+			light_offset_x = WORLD_ICON_SIZE * 0.5
+		if(WEST)
+			light_offset_x = WORLD_ICON_SIZE * -0.5
+
 /// Fetches the light's color based on area flags. Used for Init and for smartly installing new bulbs during runtime (See light replacers).
 /obj/machinery/light/proc/get_color_from_area()
 	var/light_color = null

@@ -276,7 +276,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/finish_updating_sun(new_brightness, new_color)
 	set waitfor = FALSE
-	ASSERT(args.len < 3)
+	ASSERT(length(args) < 3)
 	// Delta updates: changing the sun while it's still updating will permanently corrupt ambient lights (short of resetting them globally)
 	while(sun_updating)
 		stoplag()
@@ -302,7 +302,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	var/list/surface = block(locate(1, 1, min(map_z)),locate(maxx,maxy, max(map_z)))
 	for (var/turf/simulated/floor/T in surface)
 		if(istype(T))
-			if(T.is_outside()) //Probably more accurate to base it on z stack
+			if(T.is_outside() && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T)) //Probably more accurate to base it on z stack
 				if(replace)
 					T.replace_ambient_light(sun_apparent_color, sun_next_color, sun_apparent_brightness, sun_next_brightness)
 				else

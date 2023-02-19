@@ -18,21 +18,21 @@
 	var/lum_b
 
 	// The lumcount values used to apply the light.
-	var/tmp/applied_lum_r
-	var/tmp/applied_lum_g
-	var/tmp/applied_lum_b
+	var/applied_lum_r
+	var/applied_lum_g
+	var/applied_lum_b
 
 	// Variables used to keep track of the atom's angle.
-	var/tmp/limit_a_x       // The first test point's X coord for the cone.
-	var/tmp/limit_a_y       // The first test point's Y coord for the cone.
-	var/tmp/limit_b_x       // The second test point's X coord for the cone.
-	var/tmp/limit_b_y       // The second test point's Y coord for the cone.
-	var/tmp/cached_origin_x // The last known X coord of the origin.
-	var/tmp/cached_origin_y // The last known Y coord of the origin.
-	var/tmp/old_direction   // The last known direction of the origin.
-	var/tmp/test_x_offset   // How much the X coord should be offset due to direction.
-	var/tmp/test_y_offset   // How much the Y coord should be offset due to direction.
-	var/tmp/facing_opaque = FALSE
+	var/limit_a_x       // The first test point's X coord for the cone.
+	var/limit_a_y       // The first test point's Y coord for the cone.
+	var/limit_b_x       // The second test point's X coord for the cone.
+	var/limit_b_y       // The second test point's Y coord for the cone.
+	var/cached_origin_x // The last known X coord of the origin.
+	var/cached_origin_y // The last known Y coord of the origin.
+	var/old_direction   // The last known direction of the origin.
+	var/test_x_offset   // How much the X coord should be offset due to direction.
+	var/test_y_offset   // How much the Y coord should be offset due to direction.
+	var/facing_opaque = FALSE
 
 	var/list/datum/lighting_corner/effect_str     // List used to store how much we're affecting corners.
 	var/list/turf/affecting_turfs

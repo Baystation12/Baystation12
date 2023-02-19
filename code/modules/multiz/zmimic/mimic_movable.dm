@@ -114,6 +114,11 @@
 		c_list[CL_MATRIX_AG] *= SHADOWER_DARKENING_FACTOR
 		c_list[CL_MATRIX_AB] *= SHADOWER_DARKENING_FACTOR
 		color = c_list
+
+		//Hackfix until I look into planes a bit more, we copy the plane of turf
+		var/turf/myturf = loc
+		if (istype(myturf))
+			plane = myturf.plane
 	else
 		// Not a color matrix, so we can just use the color var ourselves.
 		color = SHADOWER_DARKENING_COLOR

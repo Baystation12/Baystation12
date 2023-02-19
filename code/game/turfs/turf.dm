@@ -57,7 +57,7 @@
 	if (light_power && light_range)
 		update_light()
 
-	if (!mapload)
+	if (!mapload || (!istype(src, /turf/space) && is_outside())) //Is outside is a hack until better ambient groups are a thing. Currently some parts of ship will not obtain starlight correctly
 		SSambient_lighting.queued += src
 
 	if (opacity)
