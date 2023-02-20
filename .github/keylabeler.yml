@@ -9,7 +9,7 @@ caseSensitive: true
 
 # Explicit keyword mappings to labels. Form of match:label. Required.
 labelMappings:
-    "[NEEDTEST]": Task: Needs Testing
-    "[REVIEW]": Task: Requires review
-    "[DISCUSSION]": Task: Requires Discussion
+    "[NEEDTEST]": Task - Needs Testing
+    "[REVIEW]": Task - Requires review
+    "[DISCUSSION]": Task - Requires Discussion
     "[STALE]": stale
