@@ -1,3 +1,16 @@
+/obj/effect/landmark/corpse/fleet
+	name = "Fleet Armsman"
+	corpse_outfits = list(/singleton/hierarchy/outfit/job/torch/ert/hostile)
+	spawn_flags = CORPSE_SPAWNER_NO_RANDOMIZATION
+
+/obj/effect/landmark/corpse/fleet/leader
+	name = "Fleet Team Leader"
+	corpse_outfits = list(/singleton/hierarchy/outfit/job/torch/ert/hostile/leader)
+
+/obj/effect/landmark/corpse/fleet/space
+	name = "Fleet Assault Armsman"
+	corpse_outfits = list(/singleton/hierarchy/outfit/job/torch/ert/hostile/suit)
+
 /mob/living/simple_animal/hostile/fleet
 	name = "\improper Fleet Armsman"
 	desc = "An armsman wearing Fleet garbs. They have a Fleet patch on their uniform, and pride on their shoulders."
@@ -37,12 +50,11 @@
 	..(gibbed, deathmessage, show_dead_message)
 	if(corpse)
 		new corpse (loc)
-		qdel(src)
 	if(weapon1)
 		new weapon1 (loc)
 	if(weapon2)
 		new weapon2 (loc)
-	update_icon()
+	qdel(src)
 	return
 
 ///////////////Pistol////////////////
@@ -114,6 +126,7 @@
 	icon_state = "fleetassault"
 	icon_living = "fleetassault"
 	icon_dead = "fleetassault_dead"
+	corpse = /obj/effect/landmark/corpse/fleet/space
 	ranged = TRUE
 	natural_armor = list(
 		melee = ARMOR_MELEE_KNIVES,
