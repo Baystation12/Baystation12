@@ -1,4 +1,4 @@
-Repo:
+':open_file_folder: Репозиторий':
 - .github/**/*
 - .vscode/**/*
 - docs/**/*
@@ -12,16 +12,16 @@ Repo:
 - README.md
 - SpacemanDMM.toml
 
-Map:
+':world_map: Карты':
 - '**/*.dmm'
 
-Sprites:
+':mountain: Спрайты':
 - '**/*.dmi'
 
-Sound:
+':sound: Звуки':
 - '**/*.ogg'
 - '**/*.wav'
 - '**/*.mp3'
 
-Config Update:
+':page_facing_up: Конфиги':
 - config/example/**/*
