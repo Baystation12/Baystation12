@@ -23,9 +23,11 @@ var/global/list/ghost_traps
 	var/object = "default ghost trap"
 	var/minutes_since_death = 0     // If non-zero the ghost must have been dead for this many minutes to be allowed to spawn
 	var/list/ban_checks = list()
+	var/pref_check = ""
 	var/ghost_trap_message = "They are no longer a ghost."
 	var/ghost_trap_role = "default ghost trap"
 	var/can_set_own_name = TRUE
+	var/list_as_special_role = FALSE	// If true, this entry will be listed as a special role in the character setup
 
 	var/list/request_timeouts
 	var/datum/species/species_whitelist // If defined, this is the species whitelist required to join
@@ -37,16 +39,6 @@ var/global/list/ghost_traps
 // Check for bans, proper atom types, etc.
 /datum/ghosttrap/proc/assess_candidate(mob/observer/ghost/candidate, mob/target, feedback = TRUE)
 	if(!candidate.MayRespawn(feedback, minutes_since_death))
-		return FALSE
-
-	if(request_timeouts[target] && world.time > request_timeouts[target])
-		if (feedback)
-			to_chat(candidate, "This occupation request is no longer valid.")
-		return FALSE
-
-	if(target.key)
-		if (feedback)
-			to_chat(candidate, "The target is already occupied.")
 		return FALSE
 
 	if(islist(ban_checks))
@@ -81,6 +73,8 @@ var/global/list/ghost_traps
 
 	for(var/mob/observer/ghost/O in GLOB.player_list)
 		if(!assess_candidate(O, target, FALSE))
+			return
+		if(pref_check && !O.client.wishes_to_be_role(pref_check))
 			continue
 		if(O.client)
 			to_chat(O, SPAN_BOLD(FONT_LARGE("[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])")))
@@ -101,12 +95,14 @@ var/global/list/ghost_traps
 			return
 		if(candidate != usr)
 			return
-		if(!assess_candidate(candidate, target))
+		if(request_timeouts[target] && world.time > request_timeouts[target])
+			to_chat(candidate, "This occupation request is no longer valid.")
 			return
-		// Modal yes/no alert to guard misclicks
-		if(alert("Would you like to occupy \a [object]?", "Occupy", "Yes", "No") != "Yes")
+		if(target.key)
+			to_chat(candidate, "The target is already occupied.")
 			return
-		transfer_personality(candidate,target)
+		if(assess_candidate(candidate, target))
+			transfer_personality(candidate,target)
 		return TRUE
 
 // Shunts the ckey/mind into the target mob.
@@ -141,8 +137,10 @@ var/global/list/ghost_traps
 /datum/ghosttrap/positronic
 	object = "positronic brain"
 	ban_checks = list("AI","Robot")
+	pref_check = BE_SYNTH
 	ghost_trap_message = "They are occupying a positronic brain now."
 	ghost_trap_role = "Positronic Brain"
+	list_as_special_role = TRUE
 
 /datum/ghosttrap/positronic/welcome_candidate(mob/target)
 	to_chat(target, SPAN_BOLD("You are a positronic brain, activated on [station_name()]."))
@@ -170,8 +168,10 @@ var/global/list/ghost_traps
 /datum/ghosttrap/plant
 	object = "living plant"
 	ban_checks = list("Dionaea")
+	pref_check = BE_PLANT
 	ghost_trap_message = "They are occupying a living plant now."
 	ghost_trap_role = "Plant"
+	list_as_special_role = TRUE
 	species_whitelist = /datum/species/diona
 
 /datum/ghosttrap/plant/welcome_candidate(mob/target)
@@ -186,9 +186,11 @@ var/global/list/ghost_traps
 /datum/ghosttrap/borer
 	object = "cortical borer"
 	ban_checks = list(MODE_BORER)
+	pref_check = MODE_BORER
 	ghost_trap_message = "They are occupying a borer now."
 	ghost_trap_role = "Cortical Borer"
 	can_set_own_name = FALSE
+	list_as_special_role = FALSE
 
 /datum/ghosttrap/borer/welcome_candidate(mob/target)
 	to_chat(target, "[SPAN_NOTICE("You are a cortical borer!")] You are a brain slug that worms its way \
@@ -200,9 +202,11 @@ var/global/list/ghost_traps
 *********************/
 /datum/ghosttrap/drone
 	object = "maintenance drone"
+	pref_check = BE_PAI
 	ghost_trap_message = "They are occupying a maintenance drone now."
 	ghost_trap_role = "Maintenance Drone"
 	can_set_own_name = FALSE
+	list_as_special_role = FALSE
 
 /datum/ghosttrap/drone/New()
 	minutes_since_death = DRONE_SPAWN_DELAY
@@ -223,33 +227,39 @@ var/global/list/ghost_traps
 **************/
 /datum/ghosttrap/pai
 	object = "pAI"
+	pref_check = BE_PAI
 	ghost_trap_message = "They are occupying a pAI now."
 	ghost_trap_role = "pAI"
+	list_as_special_role = TRUE
 
 /datum/ghosttrap/pai/assess_candidate(mob/observer/ghost/candidate, mob/target)
-	return FALSE
+	return 0
 
 /datum/ghosttrap/pai/transfer_personality(mob/candidate, mob/living/silicon/robot/drone/drone)
-	return FALSE
+	return 0
 
 /******************
 * Wizard Familiar *
 ******************/
 /datum/ghosttrap/familiar
 	object = "wizard familiar"
+	pref_check = MODE_WIZARD
 	ghost_trap_message = "They are occupying a familiar now."
 	ghost_trap_role = "Wizard Familiar"
 	ban_checks = list(MODE_WIZARD)
+	list_as_special_role = TRUE
 
 /datum/ghosttrap/familiar/welcome_candidate(mob/target)
-	return FALSE
+	return 0
 
 /datum/ghosttrap/cult
 	object = "cultist"
 	ban_checks = list("cultist")
+	pref_check = MODE_CULTIST
 	can_set_own_name = FALSE
 	ghost_trap_message = "They are occupying a cultist's body now."
 	ghost_trap_role = "Cultist"
+	list_as_special_role = TRUE
 
 /datum/ghosttrap/cult/welcome_candidate(mob/target)
 	var/obj/item/device/soulstone/S = target.loc
@@ -268,3 +278,4 @@ var/global/list/ghost_traps
 	object = "soul stone"
 	ghost_trap_message = "They are occupying a soul stone now."
 	ghost_trap_role = "Shade"
+	list_as_special_role = TRUE
