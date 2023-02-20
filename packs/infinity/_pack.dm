@@ -19,6 +19,10 @@
 
 #include "items\towels.dm"
 
+// Machines
+#include "machinery\machines.dm"
+#include "machinery\suit_storage.dm"
+
 // Structures
 #include "structures\table_presets.dm"
 #include "structures\chairs.dm"
