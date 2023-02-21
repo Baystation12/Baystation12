@@ -69,7 +69,7 @@
 		if(M.stat != DEAD)
 			GLOB.death_event.register(M,src,/obj/item/material/twohanded/fireaxe/cult/proc/gain_power)
 			targeted = M
-			addtimer(CALLBACK(src, .proc/UnregisterMe, M), 3 SECONDS)
+			addtimer(new Callback(src, .proc/UnregisterMe, M), 3 SECONDS)
 		if (targeted && M != targeted)
 			UnregisterMe(targeted)
 
