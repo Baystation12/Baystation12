@@ -1,0 +1,5 @@
+author: 10sc
+delete-after: true
+changes:
+  - maptweak: The galley is now only accessible by commissioned officers, Stewards,
+      and Chief Stewards.
