@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - tweak: Thermic spiders will now do significant burn damage against mechs when
-      they would normally inject poison.
