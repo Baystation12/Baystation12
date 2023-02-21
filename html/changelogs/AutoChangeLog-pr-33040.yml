@@ -1,0 +1,9 @@
+author: 10sc
+delete-after: true
+changes:
+  - maptweak: Swapped one of the microwaves with the deep fryer in the Galley. Also
+      adjusted the sink's and light switch's pixel offsets.
+  - maptweak: Put the Torch-defined chef's closet back in the Galley's Cold Storage.
+      Also put a basic border window backing to the fridges to prevent them from moving.
+  - maptweak: Put the Mess Hall jukebox on a table to prevent it from clipping with
+      the status display.
