@@ -22,6 +22,7 @@ GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 	initial_spawn_target = 3
 	antaghud_indicator = "hudcultist"
 	skill_setter = /datum/antag_skill_setter/station
+	faction = "cult"
 
 /datum/antagonist/godcultist/add_antagonist_mind(datum/mind/player, ignore_role, nonstandard_role_type, nonstandard_role_msg, mob/living/deity/specific_god)
 	if(!..())
