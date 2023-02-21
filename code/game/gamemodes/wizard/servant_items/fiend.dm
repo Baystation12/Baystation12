@@ -3,13 +3,12 @@
 	desc = "A dark hood with blood-red trim. Something about the fabric blocks more light than it should."
 	icon_state = "fiendhood"
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_MINOR,
 		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL, 
+		energy = ARMOR_ENERGY_SMALL,
 		rad = ARMOR_RAD_SHIELDED
 	)
-	species_restricted = list(SPECIES_HUMAN)
 	flags_inv = HIDEEARS | BLOCKHAIR
 
 /obj/item/clothing/suit/fiendcowl
@@ -18,10 +17,10 @@
 	icon_state = "fiendcowl"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_PISTOL,
 		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_RESISTANT, 
+		energy = ARMOR_ENERGY_RESISTANT,
 		rad = ARMOR_RAD_SHIELDED
 	)
 
@@ -29,7 +28,6 @@
 	name = "black suit"
 	desc = "A snappy black suit with red trim. The undershirt's stained with something, though..."
 	icon_state = "fiendsuit"
-	species_restricted = list(SPECIES_HUMAN)
 
 /obj/item/clothing/shoes/dress/devilshoes
 	name = "dress shoes"

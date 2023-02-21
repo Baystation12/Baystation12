@@ -21,6 +21,10 @@
 	body_location = ARMS
 	flags_inv = CLOTHING_BULKY
 
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_modular_armor_unathi.dmi'
+		)
+
 
 /obj/item/clothing/accessory/arm_guards/blue
 	desc = "A pair of blue arm pads reinforced with armor plating. Attaches to a plate carrier."

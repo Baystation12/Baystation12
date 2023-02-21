@@ -12,7 +12,7 @@
 	brightness_on = 0.5
 	sprite_sheets = list(
 		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_head_skrell.dmi',
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_helmet_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi',
 		)
 	species_restricted = null
 

@@ -2,6 +2,9 @@
 	name = "master solgov jacket"
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi'
+	)
 
 //Service
 
@@ -40,10 +43,6 @@
 	name = "expeditionary jacket"
 	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps."
 	icon_state = "ecservice_crew"
-
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi'
-	)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
 	icon_state = "ecservice_officer"
@@ -219,9 +218,6 @@
 	desc = "A silver and black dress peacoat belonging to the SCG Expeditionary Corps. Fashionable, for the 25th century at least."
 	icon_state = "ecdress_xpl"
 	item_state = "ecdress_xpl"
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi'
-		)
 
 /obj/item/clothing/suit/storage/solgov/dress/expedition/senior
 	name = "expeditionary senior's dress coat"
@@ -507,7 +503,7 @@
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi',
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_spacesuits_solgov_unathi.dmi',
 		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/onmob_suit_solgov_skrell.dmi',
 		)
 	sprite_sheets_obj = list(
@@ -523,7 +519,7 @@
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi',
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_spacesuits_solgov_unathi.dmi',
 		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/onmob_suit_solgov_skrell.dmi',
 		)
 	sprite_sheets_obj = list(
@@ -539,7 +535,7 @@
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi',
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_spacesuits_solgov_unathi.dmi',
 		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/onmob_suit_solgov_skrell.dmi',
 		)
 	sprite_sheets_obj = list(
@@ -555,7 +551,7 @@
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi',
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_spacesuits_solgov_unathi.dmi',
 		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/onmob_suit_solgov_skrell.dmi',
 		)
 	sprite_sheets_obj = list(
@@ -575,7 +571,7 @@
 	icon_state = "rig_command"
 	item_state = "rig_command"
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi',
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_spacesuits_solgov_unathi.dmi',
 		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/onmob_suit_solgov_skrell.dmi',
 		)
 	sprite_sheets_obj = list(
@@ -600,7 +596,7 @@
 	icon_state = "rig_explorer"
 	item_state = "rig_explorer"
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi',
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_spacesuits_solgov_unathi.dmi',
 		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/onmob_suit_solgov_skrell.dmi',
 		)
 	sprite_sheets_obj = list(

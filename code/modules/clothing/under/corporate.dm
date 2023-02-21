@@ -14,7 +14,7 @@
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	gender_icons = 1
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_corporate_unathi.dmi',
 		)
 
 /obj/item/clothing/under/rank/scientist
@@ -30,7 +30,7 @@
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	gender_icons = 1
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_corporate_unathi.dmi',
 		)
 	accessories = list(/obj/item/clothing/accessory/tunic)
 
@@ -54,7 +54,7 @@
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	gender_icons = 1
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_corporate_unathi.dmi',
 		)
 
 /obj/item/clothing/under/rank/ntpilot
@@ -66,7 +66,7 @@
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	gender_icons = 1
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_corporate_unathi.dmi',
 		)
 
 /obj/item/clothing/under/suit_jacket/corp
@@ -79,7 +79,7 @@
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	gender_icons = 1
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_corporate_unathi.dmi',
 		)
 
 //NanoTrasen
@@ -116,7 +116,7 @@
 	worn_state = "pilot_nt"
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_corporate_unathi.dmi',
 		)
 
 /obj/item/clothing/under/suit_jacket/corp/nanotrasen
@@ -159,7 +159,7 @@
 	worn_state = "pilot_heph"
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_corporate_unathi.dmi',
 		)
 
 /obj/item/clothing/under/suit_jacket/corp/heph
@@ -203,4 +203,7 @@
 	icon_state = "jump_bish"
 	worn_state = "jump_bish"
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_corporate_unathi.dmi',
+		)
 	gender_icons = 1

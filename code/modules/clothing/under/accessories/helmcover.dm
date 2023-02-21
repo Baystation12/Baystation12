@@ -11,6 +11,10 @@
 	slot = ACCESSORY_SLOT_HELM_C
 	body_location = HEAD
 
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_modular_armor_unathi.dmi'
+		)
+
 
 /obj/item/clothing/accessory/helmet_cover/blue
 	name = "blue helmet cover"
