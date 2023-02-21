@@ -1,0 +1,5 @@
+author: rootoo807
+delete-after: true
+changes:
+  - imageadd: Adds icon states for Unathi for clothing items that were missing them,
+      updates icons for Unathi clothes that were using old sprites.
