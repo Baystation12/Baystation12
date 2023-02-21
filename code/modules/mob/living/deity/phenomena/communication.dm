@@ -39,7 +39,7 @@
 				M.client.images += arrow
 				GLOB.logged_out_event.register(M, src, /datum/phenomena/point/proc/remove_image)
 				if(M.client)
-					addtimer(CALLBACK(src, .proc/remove_image, M), 2 SECONDS)
+					addtimer(new Callback(src, .proc/remove_image, M), 2 SECONDS)
 
 
 /datum/phenomena/point/proc/remove_image(mob/living/L)

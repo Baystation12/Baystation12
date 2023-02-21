@@ -63,7 +63,7 @@
 		var/obj/effect/rift/R = new(get_turf(L))
 		L.visible_message(SPAN_DANGER("\The [L] is quickly sucked into \a [R]!"))
 		L.forceMove(R)
-		addtimer(CALLBACK(src, .proc/qdel, R), 30 SECONDS)
+		addtimer(new Callback(src, .proc/qdel, R), 30 SECONDS)
 
 /obj/effect/rift
 	name = "rift"

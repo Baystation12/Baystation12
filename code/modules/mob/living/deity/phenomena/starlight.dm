@@ -139,7 +139,7 @@
 	to_chat(L, SPAN_OCCULT("[whisper_from ? "The [whisper_from] speaks to you" : "You hear a whisper say"] \"[message]\""))
 	linked.eyeobj.visualnet.add_source(L)
 	GLOB.destroyed_event.register(L, src, .proc/deactivate_look)
-	addtimer(CALLBACK(src, .proc/deactivate_look, L), 30 SECONDS)
+	addtimer(new Callback(src, .proc/deactivate_look, L), 30 SECONDS)
 
 /datum/phenomena/flickering_whisper/proc/deactivate_look(var/mob/viewer)
 	if(!linked.is_follower(viewer)) //Don't remove if they are follower
@@ -198,7 +198,7 @@
 	new /obj/aura/starborn(L)
 	L.status_flags |= GODMODE
 	GLOB.destroyed_event.register(L,src,.proc/fail_ritual)
-	addtimer(CALLBACK(src, .proc/succeed_ritual, L), 600 SECONDS) //6 minutes
+	addtimer(new Callback(src, .proc/succeed_ritual, L), 600 SECONDS) //6 minutes
 	for(var/mob/living/player in GLOB.player_list)
 		sound_to(player, 'sound/effects/cascade.ogg')
 		if(player.mind && istype(player.mind.assigned_job, /datum/job/chaplain))

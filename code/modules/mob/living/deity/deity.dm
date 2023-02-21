@@ -97,7 +97,7 @@
 /mob/living/deity/proc/set_form(type)
 	form = new type(src)
 	to_chat(src, SPAN_NOTICE("You undergo a transformation into your new form!"))
-	addtimer(CALLBACK(src, .proc/GodName), 1 SECONDS)
+	addtimer(new Callback(src, .proc/GodName), 1 SECONDS)
 	verbs -= /mob/living/deity/verb/choose_form
 	show_browser(src, null, "window=godform")
 	for(var/m in minions)
