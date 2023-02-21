@@ -21,7 +21,7 @@
 		g = GLOB.godcult.get_deity(H.mind)
 	return list(new /obj/structure/deity/gateway(T,g))
 
-/spell/open_gateway/cast(var/list/targets, var/mob/holder, var/channel_count)
+/spell/open_gateway/cast(list/targets, mob/holder, channel_count)
 	if(prob((channel_count / 5) * 100))
 		to_chat(holder, "<span class='danger'>If you hold the portal open for much longer you'll be ripped apart!</span>")
 	if(channel_count == 6)
@@ -29,5 +29,5 @@
 		holder.dust()
 
 
-/spell/open_gateway/after_spell(var/list/targets)
+/spell/open_gateway/after_spell(list/targets)
 	QDEL_NULL_LIST(targets)

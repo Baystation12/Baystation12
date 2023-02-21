@@ -33,20 +33,20 @@
 	else
 		return
 
-/spell/construction/cast_check(var/skipcharge, var/mob/user, var/list/targets)
+/spell/construction/cast_check(skipcharge, mob/user, list/targets)
 	if(!..())
-		return 0
+		return FALSE
 	var/turf/T = get_turf(user)
 	if(skipcharge && !valid_deity_structure_spot(targets[CONSTRUCT_SPELL_TYPE], T, connected_god, user))
-		return 0
+		return FALSE
 	else
 		for(var/obj/O in T)
 			if(O.density)
 				to_chat(user, "<span class='warning'>Something here is blocking your construction!</span>")
-				return 0
-	return 1
+				return FALSE
+	return TRUE
 
-/spell/construction/cast(var/target, mob/user)
+/spell/construction/cast(target, mob/user)
 	charge_max = target[CONSTRUCT_SPELL_COST]
 	target = target[CONSTRUCT_SPELL_TYPE]
 	var/turf/T = get_turf(user)
@@ -60,8 +60,8 @@
 			continue
 
 		if (thing.density)
-			return 0
-	return 1
+			return FALSE
+	return TRUE
 
 #undef CONSTRUCT_SPELL_COST
 #undef CONSTRUCT_SPELL_TYPE
