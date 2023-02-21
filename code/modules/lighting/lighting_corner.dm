@@ -276,7 +276,7 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 		if (!T.corners || !T.corners[Ti])
 			T.generate_missing_corners()
 
-		ASSERT(T.corners?.len)
+		ASSERT(length(T.corners))
 
 		below = T.corners[Ti]
 		below.above_ambient_r += delta_r

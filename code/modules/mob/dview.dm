@@ -16,7 +16,7 @@ var/global/mob/dview/dview_mob = new
 	if (!force)
 		return QDEL_HINT_LETMELIVE
 
-	to_world_log("Dview was force-qdeleted, this should never happen!")
+	crash_with("Forced deletion of dview mob, this should not happen! : [log_info_line(src)]")
 
 	dview_mob = new
 	return QDEL_HINT_QUEUE

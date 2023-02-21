@@ -48,7 +48,7 @@
 
 // These macros are for dealing with the multi/solo split.
 #define ADD_SOURCE(TARGET) if (!TARGET.light_source_multi && !TARGET.light_source_solo) { TARGET.light_source_solo = src; } else if (TARGET.light_source_solo) { TARGET.light_source_multi = list(TARGET.light_source_solo, src); TARGET.light_source_solo = null; } else { TARGET.light_source_multi += src }
-#define REMOVE_SOURCE(TARGET) if (TARGET.light_source_solo == src) { TARGET.light_source_solo = null } else if (TARGET.light_source_multi) { TARGET.light_source_multi -= src; if (TARGET.light_source_multi.len == 1) { TARGET.light_source_solo = TARGET.light_source_multi[1]; TARGET.light_source_multi = null; } }
+#define REMOVE_SOURCE(TARGET) if (TARGET.light_source_solo == src) { TARGET.light_source_solo = null } else if (TARGET.light_source_multi) { TARGET.light_source_multi -= src; if (length(TARGET.light_source_multi) == 1) { TARGET.light_source_solo = TARGET.light_source_multi[1]; TARGET.light_source_multi = null; } }
 
 /datum/light_source/New(atom/owner, atom/top)
 	SSlighting.total_lighting_sources += 1
@@ -137,7 +137,7 @@
 /datum/light_source/proc/parse_light_color()
 	if (light_color)
 		var/list/parts = rgb2num(light_color)
-		ASSERT(parts.len == 3)
+		ASSERT(length(parts) == 3)
 		lum_r = parts[1] / 255
 		lum_g = parts[2] / 255
 		lum_b = parts[3] / 255

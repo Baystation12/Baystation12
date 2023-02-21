@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(lighting)
 		"IUR: [total_ss_updates ? round(total_instant_updates/(total_instant_updates+total_ss_updates)*100, 0.1) : "NaN"]%\n",
 #endif
 		"\tT:{L:[total_lighting_sources] C:[total_lighting_corners] O:[total_lighting_overlays] A:[total_ambient_turfs]}\n",
-		"\tP:{L:[light_queue.len - (lq_idex - 1)]|C:[corner_queue.len - (cq_idex - 1)]|O:[overlay_queue.len - (oq_idex - 1)]}\n",
+		"\tP:{L:[length(light_queue) - (lq_idex - 1)]|C:[length(corner_queue) - (cq_idex - 1)]|O:[length(overlay_queue) - (oq_idex - 1)]}\n",
 		"\tL:{L:[processed_lights]|C:[processed_corners]|O:[processed_overlays]}\n"
 	)
 	..(out.Join())
@@ -110,7 +110,7 @@ SUBSYSTEM_DEF(lighting)
 	var/list/curr_corners = corner_queue
 	var/list/curr_overlays = overlay_queue
 
-	while (lq_idex <= curr_lights.len)
+	while (lq_idex <= length(curr_lights))
 		var/datum/light_source/L = curr_lights[lq_idex++]
 
 		if (L.needs_update != LIGHTING_NO_UPDATE)
@@ -133,7 +133,7 @@ SUBSYSTEM_DEF(lighting)
 	if (!no_mc_tick)
 		MC_SPLIT_TICK
 
-	while (cq_idex <= curr_corners.len)
+	while (cq_idex <= length(curr_corners))
 		var/datum/lighting_corner/C = curr_corners[cq_idex++]
 
 		if (C.needs_update)
@@ -155,7 +155,7 @@ SUBSYSTEM_DEF(lighting)
 	if (!no_mc_tick)
 		MC_SPLIT_TICK
 
-	while (oq_idex <= curr_overlays.len)
+	while (oq_idex <= length(curr_overlays))
 		var/atom/movable/lighting_overlay/O = curr_overlays[oq_idex++]
 
 		if (!QDELETED(O) && O.needs_update)

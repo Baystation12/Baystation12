@@ -7,8 +7,8 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
 
 	var/list/queued = list()
 
-// /datum/controller/subsystem/ambient_lighting/stat_entry()
-// 	return ..() + " Queue:[length(queued)]"
+/datum/controller/subsystem/ambient_lighting/UpdateStat(time)
+	return ..() + " Queue:[length(queued)]"
 
 /datum/controller/subsystem/ambient_lighting/Initialize(start_timeofday)
 	fire(FALSE, TRUE)
@@ -19,9 +19,9 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
 	var/starlight_enabled = config.starlight
 
 	var/needs_ambience
-	while (curr.len)
-		var/turf/target = curr[curr.len]
-		curr.len -= 1
+	while (length(curr))
+		var/turf/target = curr[length(curr)]
+		LIST_DEC(curr)
 
 		if(target && target.is_outside())
 			needs_ambience = TURF_IS_DYNAMICALLY_LIT_UNSAFE(target)

@@ -233,34 +233,34 @@ GLOBAL_VAR(planet_repopulation_disabled)
 			low_color = "#000066"
 
 			high_brightness = 0.2
-			high_color = "#66004D"
+			high_color = "#66004d"
 			min = 0
 			max = 0.4
 
 		if(0.40 to 0.50) // Twilight
 			low_brightness = 0.2
-			low_color = "#66004D"
+			low_color = "#66004d"
 
 			high_brightness = 0.5
-			high_color = "#CC3300"
+			high_color = "#cc3300"
 			min = 0.40
 			max = 0.50
 
 		if(0.50 to 0.70) // Sunrise/set
 			low_brightness = 0.5
-			low_color = "#CC3300"
+			low_color = "#cc3300"
 
 			high_brightness = 0.8
-			high_color = "#FF9933"
+			high_color = "#ff9933"
 			min = 0.50
 			max = 0.70
 
 		if(0.70 to 1.00) // Noon
 			low_brightness = 0.8
-			low_color = "#DDDDDD"
+			low_color = "#dddddd"
 
 			high_brightness = 1.0
-			high_color = "#FFFFFF"
+			high_color = "#ffffff"
 			min = 0.70
 			max = 1.0
 
