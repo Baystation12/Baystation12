@@ -384,9 +384,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	machine_desc = "A compact, slimmed-down version of the navigation console."
 
 /obj/machinery/computer/ship/navigation/telescreen/on_update_icon()
-	if(reason_broken & MACHINE_BROKEN_NO_PARTS || !is_powered() || MACHINE_IS_BROKEN(src))
+	if(inoperable())
 		icon_state = "tele_off"
-		set_light(0)
 	else
 		icon_state = "tele_nav"
-		set_light(light_max_bright_on, light_inner_range_on, light_outer_range_on, 2, light_color)

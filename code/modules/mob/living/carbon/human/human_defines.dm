@@ -3,6 +3,8 @@
 	mob_push_flags = ~HEAVY
 	mob_swap_flags = ~HEAVY
 
+	blocks_emissive = EMISSIVE_BLOCK_UNIQUE
+
 	/// The style of head hair applied to this mob
 	var/head_hair_style = "Bald"
 

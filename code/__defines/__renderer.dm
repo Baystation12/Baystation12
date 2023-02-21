@@ -164,6 +164,10 @@
 
 #define ABOVE_HUD_PLANE                7
 
+/// This plane masks out lighting to create an "emissive" effect, ie for glowing lights in otherwise dark areas.
+#define EMISSIVE_PLANE 8
+#define EMISSIVE_RENDER_TARGET "*EMISSIVE_PLANE"
+
 //-------------------- Rendering ---------------------
 
 /// Semantics - The final compositor or a filter effect renderer

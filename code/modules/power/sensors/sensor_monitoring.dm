@@ -8,7 +8,7 @@
 	desc = "Computer designed to remotely monitor power levels."
 	icon = 'icons/obj/computer.dmi'
 	icon_keyboard = "power_key"
-	icon_screen = "power"
+	icon_screen = "power_screen"
 	light_color = "#ffcc33"
 	machine_name = "power monitoring console"
 	machine_desc = "Allows for a detailed and thorough readout of the area's power generation and consumption, listed by area."
@@ -27,19 +27,6 @@
 	if(alert != alerting)
 		alerting = !alerting
 		update_icon()
-
-// Updates icon of this computer according to current status.
-/obj/machinery/computer/power_monitor/on_update_icon()
-	if(MACHINE_IS_BROKEN(src))
-		icon_state = "powerb"
-		return
-	if(!is_powered())
-		icon_state = "power0"
-		return
-	if(alerting)
-		icon_state = "power_alert"
-		return
-	icon_state = "power"
 
 // On creation automatically connects to active sensors. This is delayed to ensure sensors already exist.
 /obj/machinery/computer/power_monitor/New()
