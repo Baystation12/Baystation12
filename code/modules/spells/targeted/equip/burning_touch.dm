@@ -63,4 +63,5 @@
 
 /obj/item/flame/hands/dropped()
 	..()
+	user.visible_message(SPAN_WARNING("\The [user] clenches their first and whispers a prayer, the fire in their hand fizzling out in a puff of smoke!"))
 	qdel(src)
