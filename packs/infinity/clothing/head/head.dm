@@ -49,7 +49,7 @@
 	body_parts_covered = HEAD
 
 	sprite_sheets = list(
-		SPECIES_RESOMI = 'packs/infinity/icons/mob/species/resomi/onmob_head_resomi.dmi',
+		SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/onmob_head_resomi.dmi',
 		//SPECIES_UNATHI = 'icons/mob/onmob/Unathi/head_infinity.dmi', TODO: SIERRA PORT
 		)
 

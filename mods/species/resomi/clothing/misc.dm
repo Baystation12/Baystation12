@@ -187,42 +187,42 @@
 	name = "small expeditionary pt smock"
 	desc = "It looks fitted to nonhuman proportions."
 	icon = 'packs/infinity/icons/obj/clothing/species/resomi/obj_under_resomi.dmi'
-	item_icons = list('packs/infinity/icons/mob/species/resomi/onmob_under_resomi.dmi')
+	item_icons = list('mods/species/resomi/icons/clothing/onmob_under_resomi.dmi')
 	icon_state = "resomi_expeditionpt"
 	worn_state = "resomi_expeditionpt"
 	species_restricted = list(SPECIES_RESOMI)
-	sprite_sheets = list(SPECIES_RESOMI = 'packs/infinity/icons/mob/species/resomi/onmob_under_resomi.dmi')
+	sprite_sheets = list(SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/onmob_under_resomi.dmi')
 
 /obj/item/clothing/under/solgov/utility/expeditionary/resomi
 	name = "small expeditionary uniform"
 	desc = "It looks fitted to nonhuman proportions."
 	icon = 'packs/infinity/icons/obj/clothing/species/resomi/obj_under_resomi.dmi'
-	item_icons = list('packs/infinity/icons/mob/species/resomi/onmob_under_resomi.dmi')
+	item_icons = list('mods/species/resomi/icons/clothing/onmob_under_resomi.dmi')
 	icon_state = "resomi_blackutility"
 	worn_state = "resomi_blackutility"
 	species_restricted = list(SPECIES_RESOMI)
-	sprite_sheets = list(SPECIES_RESOMI = 'packs/infinity/icons/mob/species/resomi/onmob_under_resomi.dmi')
+	sprite_sheets = list(SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/onmob_under_resomi.dmi')
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/resomi
 	name = "small expeditionary officer's uniform"
 	desc = "It looks fitted to nonhuman proportions."
 	icon = 'packs/infinity/icons/obj/clothing/species/resomi/obj_under_resomi.dmi'
-	item_icons = list('packs/infinity/icons/mob/species/resomi/onmob_under_resomi.dmi')
+	item_icons = list('mods/species/resomi/icons/clothing/onmob_under_resomi.dmi')
 	icon_state = "resomi_blackutility_com"
 	worn_state = "resomi_blackutility_com"
 	species_restricted = list(SPECIES_RESOMI)
-	sprite_sheets = list(SPECIES_RESOMI = 'packs/infinity/icons/mob/species/resomi/onmob_under_resomi.dmi')
+	sprite_sheets = list(SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/onmob_under_resomi.dmi')
 	accessories = list(/obj/item/clothing/accessory/solgov/department/command)
 
 /obj/item/clothing/under/solgov/mildress/expeditionary/resomi
 	name = "small expeditionary dress uniform"
 	desc = "It looks fitted to nonhuman proportions."
 	icon = 'packs/infinity/icons/obj/clothing/species/resomi/obj_under_resomi.dmi'
-	item_icons = list('packs/infinity/icons/mob/species/resomi/onmob_under_resomi.dmi')
+	item_icons = list('mods/species/resomi/icons/clothing/onmob_under_resomi.dmi')
 	icon_state = "resomi_greydress"
 	worn_state = "resomi_greydress"
 	species_restricted = list(SPECIES_RESOMI)
-	sprite_sheets = list(SPECIES_RESOMI = 'packs/infinity/icons/mob/species/resomi/onmob_under_resomi.dmi')
+	sprite_sheets = list(SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/onmob_under_resomi.dmi')
 
 
 /datum/gear/uniform/resomi

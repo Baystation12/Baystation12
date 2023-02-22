@@ -582,7 +582,7 @@
 /obj/item/clothing/suit/storage/hooded/polychromic/New()
 	..()
 	sprite_sheets = list(
-		SPECIES_RESOMI = 'packs/infinity/icons/mob/species/resomi/onmob_suit_resomi.dmi'
+		SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/onmob_suit_resomi.dmi'
 	)
 	if(pockets)
 		qdel(pockets)
@@ -628,7 +628,7 @@
 /obj/item/clothing/head/winterhood/polychromic_hood/New()
 	..()
 	sprite_sheets = list(
-		SPECIES_RESOMI = 'packs/infinity/icons/mob/species/resomi/onmob_head_resomi.dmi'
+		SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/onmob_head_resomi.dmi'
 	)
 
 //Hooded Resomi cloaks
@@ -648,7 +648,7 @@
 /obj/item/clothing/suit/storage/hooded/resomi/New()
 	..()
 	sprite_sheets = list(
-		SPECIES_RESOMI = 'packs/infinity/icons/mob/species/resomi/onmob_suit_resomi.dmi'
+		SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/onmob_suit_resomi.dmi'
 	)
 	if(pockets)
 		qdel(pockets)
@@ -666,12 +666,12 @@
 	flags_inv = BLOCKHAIR | HIDEEARS
 	body_parts_covered = HEAD
 	species_restricted = list(SPECIES_RESOMI)
-	sprite_sheets = list(SPECIES_RESOMI = 'packs/infinity/icons/mob/species/resomi/onmob_head_resomi.dmi')
+	sprite_sheets = list(SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/onmob_head_resomi.dmi')
 
 /obj/item/clothing/head/resomi/resomi_hood/New()
 	..()
 	sprite_sheets = list(
-		SPECIES_RESOMI = 'packs/infinity/icons/mob/species/resomi/onmob_head_resomi.dmi'
+		SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/onmob_head_resomi.dmi'
 	)
 
 

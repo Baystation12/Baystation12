@@ -9,7 +9,7 @@ var/global/list/holder_mob_icon_cache = list()
 
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
-		SPECIES_RESOMI = 'packs/infinity/icons/mob/species/resomi/onmob_head_resomi.dmi'
+		SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/onmob_head_resomi.dmi'
 		)
 
 	origin_tech = null
