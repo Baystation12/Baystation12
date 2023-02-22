@@ -25,7 +25,7 @@
 	if(user.get_active_hand())
 		to_chat(user, SPAN_WARNING("You need an empty hand to cast this spell."))
 		return FALSE
-	current_hand = new(src)
+	current_hand = new(null, src)
 	if(!user.put_in_active_hand(current_hand))
 		QDEL_NULL(current_hand)
 		return FALSE
