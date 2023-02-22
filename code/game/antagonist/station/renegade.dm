@@ -5,12 +5,13 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 	role_text_plural = "Renegades"
 	blacklisted_jobs = list(/datum/job/ai, /datum/job/submap)
 	restricted_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/chief_engineer, /datum/job/rd, /datum/job/cmo)
-	welcome_text = "Something's going to go wrong today, you can just feel it. You're paranoid, you've got a gun, and you're going to survive."
+	welcome_text = "Something's going to go wrong today, you can just feel it. You're paranoid, you've got a gun, and you're going to make it everyone's problem."
 	antag_text = {"\
 	<p>You are a <b>minor</b> antagonist! Make sure <b>you</b> survive the round at any cost.</p> \
-	<p>Betray friends, make deals with enemies, and keep your gun handy. \
-	You aren't here to go looking for trouble - but if <i>it</i> finds <i>you</i>, kill it.</p> \
-	<p>Remember that the rules still apply to antagonists - Chat with staff before taking extreme actions.</p>
+	<p>Pick fights, betray friends, make deals with enemies, and keep your gun handy. Use it. \
+	You may cause trouble if it benefits you - Be a true <i>chaotic neutral</i>. Become the <b>trouble</b>, within reasonable measures.\
+	<p>Remember that the rules still apply to antagonists - Chat with staff before taking extreme actions.</p> \
+	<p>Keep in mind not to shut down antagonist play! You may <b>facilitate it</b>, proactively.
 	"}
 
 	id = MODE_RENEGADE
@@ -19,7 +20,7 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 	hard_cap_round = 5
 
 	initial_spawn_req = 1
-	initial_spawn_target = 3
+	initial_spawn_target = 2
 	antaghud_indicator = "hud_renegade"
 	skill_setter = /datum/antag_skill_setter/station
 
