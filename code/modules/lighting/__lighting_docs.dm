@@ -1,5 +1,5 @@
 /*
-	-- Aurora directional lighting system, based off of /vg/lights. --
+	-- O7 lighting system --
 
 	Documentation is present in most of the code files.
 		lighting_atom.dm -> procs/vars for tracking/managing lights attached to objects.

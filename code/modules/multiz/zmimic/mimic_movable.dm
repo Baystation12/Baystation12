@@ -121,7 +121,7 @@
 			plane = myturf.plane
 	else
 		// Not a color matrix, so we can just use the color var ourselves.
-		color = SHADOWER_DARKENING_COLOR
+		color = (icon_state == LIGHTING_DARKNESS_ICON_STATE) ? COLOR_WHITE : SHADOWER_DARKENING_COLOR
 
 	var/turf/parent = loc
 	ASSERT(isturf(parent))

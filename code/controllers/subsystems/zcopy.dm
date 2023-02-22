@@ -1,5 +1,6 @@
 #define SHADOWER_DARKENING_FACTOR 0.8	// The multiplication factor for openturf shadower darkness. Lighting will be multiplied by this.
-#define SHADOWER_DARKENING_COLOR "#adadad"	// The above, but as an RGB string for lighting-less turfs.
+#define SHADOWER_DARKENING_COLOR "#00000033"	// The above, but as an RGB string for lighting-less turfs.
+//Bay can't do multiplicative lighting for zmimic currently so we change alpha, this does mean full lit turfs need a different colour. TODO: Take another look at zmimic render setup
 
 SUBSYSTEM_DEF(zcopy)
 	name = "Z-Copy"

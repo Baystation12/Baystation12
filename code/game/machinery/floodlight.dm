@@ -17,8 +17,8 @@
 	machine_desc = "A portable, battery-powered LED flood lamp used to illuminate large areas."
 
 	//better laser, increased brightness & power consumption
-	var/l_power = 0.8 //brightness of light when on, can be negative
-	var/l_range = 6 //outer range of light when on, can be negative
+	var/l_power = 2.5 //brightness of light when on, can be negative
+	var/l_range = 7 //outer range of light when on, can be negative
 
 /obj/machinery/floodlight/on_update_icon()
 	icon_state = "flood[panel_open ? "o" : ""][panel_open && get_cell() ? "b" : ""]0[use_power == POWER_USE_ACTIVE]"

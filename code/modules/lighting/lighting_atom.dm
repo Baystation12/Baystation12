@@ -86,6 +86,9 @@
 	if (new_opacity == TRUE)
 		T.has_opaque_atom = TRUE
 		T.reconsider_lights()
+	#ifdef AO_USE_LIGHTING_OPACITY
+		T.regenerate_ao()
+	#endif
 	else
 		var/old_has_opaque_atom = T.has_opaque_atom
 		T.recalc_atom_opacity()

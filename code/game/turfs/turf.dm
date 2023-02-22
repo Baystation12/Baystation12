@@ -52,8 +52,6 @@
 	else
 		luminosity = 1
 
-	recalc_atom_opacity()
-
 	if (light_power && light_range)
 		update_light()
 

@@ -120,5 +120,6 @@
 /mob/observer/ghost/Login()
 	. = ..()
 	if(darksight)
-		darksight.alpha = 255
-		darksight.SetTransform(10) //Max darksight
+		darksight.icon_state = "ghost"
+		darksight.alpha = 127
+		darksight.SetTransform(2) //Max darksight

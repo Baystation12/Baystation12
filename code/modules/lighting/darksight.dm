@@ -6,7 +6,7 @@
 	screen_loc = "CENTER-7,CENTER-7"
 
 	blend_mode = BLEND_ADD
-
+	invisibility = INVISIBILITY_LIGHTING
 	alpha = 0 //By default make it transparent so mobs that don't update it also don't get it
 
 /obj/darksight/Initialize()

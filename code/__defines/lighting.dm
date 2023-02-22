@@ -15,6 +15,9 @@
 // If defined, instant updates will be used whenever server load permits. Otherwise queued updates are always used.
 #define USE_INTELLIGENT_LIGHTING_UPDATES
 
+/// Maximum light_range before forced to always queue instead of using sync updates. Setting this too high will cause server stutter with moving large lights.
+#define LIGHTING_MAXIMUM_INSTANT_RANGE 8
+
 // mostly identical to below, but doesn't make sure T is valid first. Should only be used by lighting code.
 #define TURF_IS_DYNAMICALLY_LIT_UNSAFE(T) ((T:dynamic_lighting && T:loc:dynamic_lighting))
 #define TURF_IS_DYNAMICALLY_LIT(T) (isturf(T) && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))

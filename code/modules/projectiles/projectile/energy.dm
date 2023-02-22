@@ -40,7 +40,7 @@
 	sparks.start()
 
 	new /obj/effect/decal/cleanable/ash(src.loc) //always use src.loc so that ash doesn't end up inside windows
-	new /obj/effect/effect/smoke/illumination(T, 5, 4, 1, light_colour)
+	new /obj/effect/effect/smoke/illumination(T, 5, 4, 2, light_colour)
 
 //blinds people like the flash round, but in a larger area and can also be used for temporary illumination
 /obj/item/projectile/energy/flash/flare

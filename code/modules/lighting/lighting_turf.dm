@@ -184,7 +184,7 @@
 	lum_g = CLAMP01(lum_g / 4) * 255
 	lum_b = CLAMP01(lum_b / 4) * 255
 
-	return "#[num2hex(lum_r)][num2hex(lum_g)][num2hex(lum_g)]"
+	return "#[num2hex(lum_r)][num2hex(lum_g)][num2hex(lum_b)]"
 
 #define SCALE(targ,min,max) (targ - min) / (max - min)
 

@@ -237,7 +237,8 @@
 	//For testing purposes
 	var/darksightedness = min(see_in_dark/world.view,1.0)	//A ratio of how good your darksight is, from 'nada' to 'really darn good'
 	var/current = darksight.alpha/255						//Our current adjustedness
-	var/newScale = min(see_in_dark * (world.icon_size/DARKSIGHT_GRADIENT_SIZE), 1)*0.9 //Scale the darksight gradient
+	var/adjusted_diameter = (0.5 + (see_in_dark - 1)) * 2
+	var/newScale = min((adjusted_diameter) * (world.icon_size/DARKSIGHT_GRADIENT_SIZE), 1)*0.9 //Scale the darksight gradient
 
 	var/brightness = 0.0 //We'll assume it's superdark if we can't find something else.
 
@@ -250,16 +251,17 @@
 	if(isturf(my_turf))
 		brightness = my_turf.get_lumcount()
 
-	brightness = min(brightness * 2, 1) //Why double it? We want darksight to only kick in when dark so this increases apparent brightness
+	brightness = min((brightness + brightness*brightness), 1) //Increase apparent brightness so it's not that obvious. TODO: Make this a curve
 
 	var/darkness = 1-brightness					//Silly, I know, but 'alpha' and 'darkness' go the same direction on a number line
+	newScale *= darkness                        // you see further in the dark, in fully lit areas you don't get a bonus
 	var/adjust_to = min(darkness,darksightedness)//Capped by how darksighted they are
 	var/distance = abs(current-adjust_to)		//Used for how long to animate for
 	var/negative = current > adjust_to          //Unfortunately due to a visual issue this must be instant if we go down 1 level of darksight
 
-	if(distance < 0.01) return					//We're already all set
+	if((distance < 0.001) && (abs(darksight.transform.a - newScale) < 0.01)) return	 //We're already all set
 
 	if(negative)
 		distance = 0 //Make it instant
 
-	animate(darksight, alpha = (adjust_to*255), transform = matrix().Update(scale_x = newScale, scale_y = newScale), time = (distance*10 SECONDS))
+	animate(darksight, alpha = (adjust_to*255), transform = matrix().Update(scale_x = newScale, scale_y = newScale), time = (distance*10 SECONDS), flags = ANIMATION_LINEAR_TRANSFORM)
