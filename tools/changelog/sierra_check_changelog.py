@@ -36,7 +36,7 @@ pr = pr_list[0]
 pr_body = pr.body or ""
 pr_number = pr.number
 pr_author = pr.user.login
-pr_labels = pr.get_labels()
+pr_labels = pr.labels
 
 CL_INVALID = ":scroll: CL невалиден"
 CL_VALID = ":scroll: CL валиден"
@@ -47,6 +47,7 @@ has_valid_label = False
 has_invalid_label = False
 cl_needed = True
 for label in pr_labels:
+    print("Found label: ", label.name)
     if label.name == CL_NOT_NEEDED:
         print("No CL needed!")
         cl_needed = False

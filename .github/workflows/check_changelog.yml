@@ -27,7 +27,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install ruamel.yaml PyGithub
-      - name: Создание чейнджлога
+      - name: Проверка чейнджлога
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: python tools/changelog/sierra_check_changelog.py
