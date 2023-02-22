@@ -309,6 +309,10 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 		return 0
 
 	var/list/valid_targets = view_or_range(range, holder, selection_type)
+
+	if (spell_flags & INCLUDEUSER)
+		valid_targets += holder
+
 	for(var/target in targets)
 		if(!(target in valid_targets))
 			return 0
