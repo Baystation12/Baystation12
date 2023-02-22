@@ -334,8 +334,7 @@
 
 /obj/item/ammo_magazine/mil_rifle/light
 	icon_state = "bullpup_light"
-	caliber = CALIBER_RIFLE
-	ammo_type = /obj/item/ammo_casing/rifle
+	ammo_type = /obj/item/ammo_casing/rifle/military/light
 	max_ammo = 20
 
 /obj/item/ammo_magazine/mil_rifle/light/empty
@@ -343,7 +342,7 @@
 
 /obj/item/ammo_magazine/mil_rifle/light/practice
 	labels = list("practice")
-	ammo_type = /obj/item/ammo_casing/rifle/practice
+	ammo_type = /obj/item/ammo_casing/rifle/military/practice
 
 /obj/item/ammo_magazine/caps
 	name = "speed loader"

@@ -164,6 +164,10 @@
 	icon_state = "rifle_mil"
 	spent_icon = "rifle_mil-spent"
 
+/obj/item/ammo_casing/rifle/military/light
+	desc = "A low-power military rifle bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle
+
 /obj/item/ammo_casing/rifle/military/practice
 	desc = "A military rifle practice bullet casing."
 	projectile_type = /obj/item/projectile/bullet/rifle/military/practice
