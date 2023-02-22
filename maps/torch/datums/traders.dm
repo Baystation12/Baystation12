@@ -12,7 +12,7 @@
 		/obj/item/gun/projectile/shotgun/pump = TRADER_SUBTYPES_ONLY,
 		/obj/item/ammo_magazine = TRADER_SUBTYPES_ONLY,
 		/obj/item/ammo_magazine/pistol/empty = TRADER_BLACKLIST,
-		/obj/item/ammo_magazine/mil_rifle/empty = TRADER_BLACKLIST,
+		/obj/item/ammo_magazine/mil_rifle/heavy/empty = TRADER_BLACKLIST,
 		/obj/item/ammo_magazine/gyrojet/empty = TRADER_BLACKLIST,
 		/obj/item/ammo_magazine/pistol/small/empty = TRADER_BLACKLIST,
 		/obj/item/ammo_magazine/pistol/empty = TRADER_BLACKLIST,

@@ -178,8 +178,8 @@
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 3)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/mil_rifle
-	allowed_magazines = list(/obj/item/ammo_magazine/mil_rifle, /obj/item/ammo_magazine/mil_rifle/light) //Interchangable but poor performance
+	magazine_type = /obj/item/ammo_magazine/mil_rifle/heavy
+	allowed_magazines = /obj/item/ammo_magazine/mil_rifle //Interchangable but poor performance
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 	accuracy = 2
@@ -352,7 +352,7 @@
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 1, TECH_ESOTERIC = 5)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/mil_rifle
+	magazine_type = /obj/item/ammo_magazine/mil_rifle/heavy
 	allowed_magazines = /obj/item/ammo_magazine/mil_rifle
 	one_hand_penalty = 10
 	accuracy_power = 9

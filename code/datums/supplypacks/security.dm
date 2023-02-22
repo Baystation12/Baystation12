@@ -225,7 +225,7 @@
 
 /singleton/hierarchy/supply_pack/security/bullpupammo
 	name = "Ammunition - heavy bullpup rifle"
-	contains = list(/obj/item/ammo_magazine/mil_rifle = 4)
+	contains = list(/obj/item/ammo_magazine/mil_rifle/heavy = 4)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "heavy bullpup rifle ammunition crate"
@@ -234,7 +234,7 @@
 
 /singleton/hierarchy/supply_pack/security/bullpupammopractice
 	name = "Ammunition - heavy bullpup rifle practice"
-	contains = list(/obj/item/ammo_magazine/mil_rifle/practice = 8)
+	contains = list(/obj/item/ammo_magazine/mil_rifle/heavy/practice = 8)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "heavy bullpup practice ammunition crate"
