@@ -37,10 +37,10 @@
 	burn_timer = world.time + 5 SECONDS
 	burn_power++
 	force += 2
-	if(!istype(src.loc, /mob/living/carbon/human))
+	if(!istype(loc, /mob/living/carbon/human))
 		qdel(src)
 		return
-	var/mob/living/carbon/human/user = src.loc
+	var/mob/living/carbon/human/user = loc
 	var/obj/item/organ/external/hand
 	if(src == user.l_hand)
 		hand = user.get_organ(BP_L_HAND)
@@ -63,5 +63,6 @@
 
 /obj/item/flame/hands/dropped()
 	..()
+	var/mob/living/carbon/human/user = loc
 	user.visible_message(SPAN_WARNING("\The [user] clenches their first and whispers a prayer, the fire in their hand fizzling out in a puff of smoke!"))
 	qdel(src)
