@@ -85,7 +85,7 @@
 
 
 /obj/item/melee/energy/IsHeatSource()
-	return 3500
+	return active ? 3500 : 0
 
 
 /*
