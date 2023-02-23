@@ -21,6 +21,7 @@
 
 // Machines
 #include "machinery\machines.dm"
+#include "machinery\lighting.dm"
 #include "machinery\suit_storage.dm"
 
 // Structures

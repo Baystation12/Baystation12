@@ -6,13 +6,14 @@ Expected envrionmental variables:
 -----------------------------------
 GITHUB_REPOSITORY: Github action variable representing the active repo (Action provided)
 BOT_TOKEN: A repository account token, this will allow the action to push the changes (Action provided)
-GITHUB_SHA: The SHA associated with the commit that triggered the action (Action provided)
+GITHUB_EVENT_PATH: path to JSON file containing the event info (Action provided)
 """
 import os
 import re
 from pathlib import Path
 from ruamel import yaml
 from github import Github
+import json
 
 CL_BODY = re.compile(r"(:cl:|🆑)(.+)?\r\n((.|\n|\r)+?)\r\n\/(:cl:|🆑)", re.MULTILINE)
 CL_SPLIT = re.compile(r"(^\w+):\s+(\w.+)", re.MULTILINE)
@@ -20,28 +21,22 @@ CL_SPLIT = re.compile(r"(^\w+):\s+(\w.+)", re.MULTILINE)
 # Blessed is the GoOnStAtIoN birb ZeWaKa for thinking of this first
 repo = os.getenv("GITHUB_REPOSITORY")
 token = os.getenv("BOT_TOKEN")
-sha = os.getenv("GITHUB_SHA")
+event_path = os.getenv("GITHUB_EVENT_PATH")
+
+with open(event_path, 'r') as f:
+    event_data = json.load(f)
 
 git = Github(token)
 repo = git.get_repo(repo)
-commit = repo.get_commit(sha)
-pr_list = commit.get_pulls()
-
-if not pr_list.totalCount:
-    print("Direct commit detected")
-    exit(0)
-
-pr = pr_list[0]
+pr = repo.get_pull(event_data['number'])
 
 pr_body = pr.body or ""
-pr_number = pr.number
 pr_author = pr.user.login
 pr_labels = pr.labels
 
 CL_INVALID = ":scroll: CL невалиден"
 CL_VALID = ":scroll: CL валиден"
 CL_NOT_NEEDED = ":scroll: CL не требуется"
-
 
 has_valid_label = False
 has_invalid_label = False
