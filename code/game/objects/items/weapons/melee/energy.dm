@@ -83,6 +83,11 @@
 		return ITEM_SIZE_NO_CONTAINER
 	return ..()
 
+
+/obj/item/melee/energy/IsHeatSource()
+	return 3500
+
+
 /*
  * Energy Axe
  */

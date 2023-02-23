@@ -132,7 +132,7 @@
 
 /obj/item/clothing/mask/smokable/attackby(obj/item/W, mob/user)
 	..()
-	if (W.IsFlameSource() || is_hot(W))
+	if (W.IsFlameSource() || W.IsHeatSource())
 		var/text = matchmes
 		if(istype(W, /obj/item/flame/match))
 			text = matchmes

@@ -1216,9 +1216,9 @@ About the new airlock wires panel:
 	qdel(src)
 
 	return da
-/obj/machinery/door/airlock/phoron/attackby(C as obj, mob/user as mob)
+/obj/machinery/door/airlock/phoron/attackby(atom/C, mob/user)
 	if(C)
-		ignite(is_hot(C))
+		ignite(C.IsHeatSource())
 	..()
 
 /obj/machinery/door/airlock/set_broken(new_state)

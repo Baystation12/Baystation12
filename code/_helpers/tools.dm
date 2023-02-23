@@ -100,3 +100,11 @@
 
 /// True when A exists and can be used as a flame source.
 #define isFlameSource(A) (A?.IsFlameSource())
+
+
+/// Returns an integer value of temperature when this atom can be used as a heat source. This is for hot objects.
+/atom/proc/IsHeatSource()
+	return 0
+
+/// 0 if A does not exist, or the heat value of A
+#define isHeatSource(A) (A ? A.IsHeatSource() : 0)

@@ -413,6 +413,11 @@ regen() will cover update_icon() for this proc
 			new /obj/effect/decal/cleanable/ash(src.loc)
 			qdel(src)
 
+
+/obj/item/blob_tendril/IsHeatSource()
+	return damtype == DAMAGE_BURN ? 1000 : 0
+
+
 /obj/item/blob_tendril/core
 	name = "asteroclast nucleus sample"
 	desc = "A sample taken from an asteroclast's nucleus. It pulses with energy."
