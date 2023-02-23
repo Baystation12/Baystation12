@@ -108,3 +108,7 @@
 
 /// 0 if A does not exist, or the heat value of A
 #define isHeatSource(A) (A ? A.IsHeatSource() : 0)
+
+
+/// True when A exists and is either a flame or heat source
+#define isFlameOrHeatSource(A) (A && (A.IsFlameSource() || !!A.IsHeatSource()))
