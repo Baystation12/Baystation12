@@ -106,6 +106,10 @@
 		location.hotspot_expose(700, 5)
 
 
+/obj/item/flame/lighter/IsHeatSource()
+	return lit ? 1500 : 0
+
+
 /obj/item/flame/lighter/red
 	color = COLOR_RED
 	name = "red lighter"

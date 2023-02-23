@@ -171,8 +171,9 @@
 
 	if(W)
 		radiate()
-		if(is_hot(W))
-			burn(is_hot(W))
+		var/heat_value = W.IsHeatSource()
+		if (heat_value)
+			burn(heat_value)
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		if(isWelder(W))
