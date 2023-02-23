@@ -35,3 +35,7 @@
 	activate()
 	add_fingerprint(user)
 	return
+
+
+/obj/item/device/assembly/igniter/IsFlameSource()
+	return TRUE
