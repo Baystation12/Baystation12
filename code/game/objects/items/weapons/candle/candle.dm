@@ -39,7 +39,7 @@
 
 /obj/item/flame/candle/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if(isflamesource(W) || is_hot(W))
+	if (W.IsFlameSource() || is_hot(W))
 		light(user)
 
 /obj/item/flame/candle/resolve_attackby(atom/A, mob/user)

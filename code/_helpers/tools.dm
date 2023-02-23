@@ -92,3 +92,11 @@
 
 /// True when A exists and can be used as a hatchet.
 #define isHatchet(A) (A?.IsHatchet())
+
+
+/// True when this atom can be used as a flame source. This is for open flames.
+/atom/proc/IsFlameSource()
+	return FALSE
+
+/// True when A exists and can be used as a flame source.
+#define isFlameSource(A) (A?.IsFlameSource())

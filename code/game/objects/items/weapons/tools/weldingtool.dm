@@ -296,6 +296,11 @@
 	else
 		return ..()
 
+
+/obj/item/weldingtool/IsFlameSource()
+	return isOn()
+
+
 /obj/item/weldingtool/mini
 	tank = /obj/item/welder_tank/mini
 

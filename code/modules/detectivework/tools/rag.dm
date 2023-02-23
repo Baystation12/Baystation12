@@ -46,7 +46,7 @@
 		remove_contents(user)
 
 /obj/item/reagent_containers/glass/rag/attackby(obj/item/W, mob/user)
-	if(!on_fire && isflamesource(W))
+	if (!on_fire && W.IsFlameSource())
 		ignite()
 		if(on_fire)
 			user.visible_message(
