@@ -65,3 +65,14 @@
 	var/mob/living/carbon/human/H = user.mob
 	H.give()
 	return TRUE
+
+/datum/keybinding/human/stop_pulling
+	hotkey_keys = list("C", "Delete")
+	name = "stop_pulling"
+	full_name = "Stop Pulling"
+	description = "Let go of the object and stop pulling"
+
+/datum/keybinding/human/stop_pulling/down(client/user)
+	var/mob/living/carbon/human/H = user.mob
+	H.stop_pulling()
+	return TRUE
