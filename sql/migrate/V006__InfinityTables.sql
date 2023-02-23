@@ -23,8 +23,7 @@ CREATE TABLE IF NOT EXISTS `erro_messages` (
 -- Table structure for table `online_score`
 --
 
-DROP TABLE IF EXISTS `online_score`;
-CREATE TABLE `online_score` (
+CREATE TABLE IF NOT EXISTS `online_score` (
   `ckey` varchar(32),
   `year` int(11) DEFAULT 0,
   `month` int(11) DEFAULT 0,
@@ -37,8 +36,7 @@ CREATE TABLE `online_score` (
 -- Table structure for table `erro_admin_tickets`
 --
 
-DROP TABLE IF EXISTS `erro_admin_tickets`;
-CREATE TABLE `erro_admin_tickets` (
+CREATE TABLE IF NOT EXISTS `erro_admin_tickets` (
   `id` int(11) AUTO_INCREMENT,
   `assignee` text DEFAULT NULL,
   `ckey` varchar(32) NOT NULL,
@@ -53,7 +51,6 @@ CREATE TABLE `erro_admin_tickets` (
 --
 -- Table structure for table `erro_connection_log`
 --
-DROP TABLE IF EXISTS `erro_connection_log`;
 CREATE TABLE IF NOT EXISTS `erro_connection_log`
 (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -69,7 +66,6 @@ CREATE TABLE IF NOT EXISTS `erro_connection_log`
 --
 -- Table structure for table `ckey_whitelist`
 --
-DROP TABLE IF EXISTS `ckey_whitelist`;
 CREATE TABLE IF NOT EXISTS `ckey_whitelist`
 (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,

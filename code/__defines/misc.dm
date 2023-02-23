@@ -30,7 +30,7 @@
 #define INVISIBILITY_MAXIMUM 100
 
 // The SQL version required by this version of the code
-#define DB_VERSION 8
+#define DB_VERSION 9
 
 
 // Some arbitrary defines to be used by self-pruning global lists. (see master_controller)

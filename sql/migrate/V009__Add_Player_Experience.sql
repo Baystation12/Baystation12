@@ -12,5 +12,5 @@ CREATE TABLE IF NOT EXISTS `erro_playtime_history` (
   `date` DATE NOT NULL,
   `time_living` INT(32) NOT NULL DEFAULT '0',
   `time_ghost` INT(32) NOT NULL DEFAULT '0',
-  CONSTRAINT PK_Playtime_History PRIMARY KEY (ckey, date)
+  CONSTRAINT PRIMARY KEY (ckey, date)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
