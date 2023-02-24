@@ -10,7 +10,6 @@
 /obj/effect/overmap/visitable/sector/sfv_arbiter_space
 	name = "Sensor Anomaly"
 	desc = "Sensors readings are confused and inaccurate on this grid sector."
-	in_space = TRUE
 	icon_state = "event"
 	hide_from_reports = TRUE
 

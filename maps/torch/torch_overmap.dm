@@ -4,7 +4,7 @@
 	fore_dir = WEST
 	vessel_mass = 100000
 	burn_delay = 2 SECONDS
-	base = TRUE
+	sector_flags = OVERMAP_SECTOR_KNOWN|OVERMAP_SECTOR_IN_SPACE|OVERMAP_SECTOR_BASE
 
 	initial_restricted_waypoints = list(
 		"Charon" = list("nav_hangar_charon"), 	//can't have random shuttles popping inside the ship
