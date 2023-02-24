@@ -1,5 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - tweak: Добавил кнопку try again в легаси чат, видимую в случае если гунчат не
-      загрузился
