@@ -46,14 +46,13 @@
 
 /obj/item/gun/magnetic/railgun/use_ammo()
 	var/obj/item/rcd_ammo/ammo = loaded
-	ammo.remaining--
-	if(ammo.remaining <= 0)
+	ammo.use_matter(1)
+	if(QDELETED(ammo))
 		spawn(3)
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 		out_of_ammo()
 
 /obj/item/gun/magnetic/railgun/proc/out_of_ammo()
-	qdel(loaded)
 	loaded = null
 	visible_message(SPAN_WARNING("\The [src] beeps and ejects its empty cartridge."))
 

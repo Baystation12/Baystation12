@@ -252,10 +252,7 @@
 			return
 		var/matter_exchange = min(cartridge.remaining,max_stored_matter - stored_matter)
 		stored_matter += matter_exchange
-		cartridge.remaining -= matter_exchange
-		if(cartridge.remaining <= 0)
-			qdel(W)
-		cartridge.matter = list(MATERIAL_STEEL = 500 * cartridge.remaining,MATERIAL_GLASS = 250 * cartridge.remaining)
+		cartridge.use_matter(matter_exchange)
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("The RCD now holds [stored_matter]/[max_stored_matter] matter-units."))
 		update_icon()

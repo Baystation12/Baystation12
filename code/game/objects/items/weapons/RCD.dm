@@ -71,10 +71,7 @@
 			return
 		var/matter_exchange = min(cartridge.remaining,max_stored_matter - stored_matter)
 		stored_matter += matter_exchange
-		cartridge.remaining -= matter_exchange
-		if(cartridge.remaining <= 0)
-			qdel(W)
-		cartridge.matter = list(MATERIAL_STEEL = 500 * cartridge.remaining,MATERIAL_GLASS = 250 * cartridge.remaining)
+		cartridge.use_matter(matter_exchange)
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("The RCD now holds [stored_matter]/[max_stored_matter] matter-units."))
 		update_icon()
@@ -134,19 +131,45 @@
 	item_state = "rcdammo"
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 2)
-	matter = list(MATERIAL_STEEL = 15000,MATERIAL_GLASS = 7500)
 	var/remaining = 30
+
+
+/obj/item/rcd_ammo/Initialize()
+	. = ..()
+	update_matter()
+
 
 /obj/item/rcd_ammo/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
 		to_chat(user, SPAN_NOTICE("It has [remaining] unit\s of matter left."))
 
+
+/obj/item/rcd_ammo/proc/update_matter()
+	matter = list(
+		MATERIAL_STEEL = 500 * remaining,
+		MATERIAL_GLASS = 250 * remaining
+	)
+
+
+/obj/item/rcd_ammo/proc/can_use_matter(amount, mob/user)
+	if (amount > remaining)
+		to_chat(user, SPAN_WARNING("\The [src] doesn't have enough matter. You need at least [amount]."))
+		return FALSE
+	return TRUE
+
+
+/obj/item/rcd_ammo/proc/use_matter(amount)
+	remaining -= amount
+	if (remaining <= 0)
+		qdel(src)
+		return
+	update_matter()
+
 /obj/item/rcd_ammo/large
 	name = "high-capacity matter cartridge"
 	desc = "Do not ingest."
 	icon_state = "rcdlarge"
-	matter = list(MATERIAL_STEEL = 45000,MATERIAL_GLASS = 22500)
 	remaining = 120
 	origin_tech = list(TECH_MATERIAL = 4)
 
