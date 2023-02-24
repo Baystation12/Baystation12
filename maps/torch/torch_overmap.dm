@@ -4,7 +4,12 @@
 	fore_dir = WEST
 	vessel_mass = 100000
 	burn_delay = 2 SECONDS
-	base = TRUE
+	sector_flags = OVERMAP_SECTOR_KNOWN|OVERMAP_SECTOR_IN_SPACE|OVERMAP_SECTOR_BASE
+	known_ships = list(
+		/obj/effect/overmap/visitable/ship/landable/exploration_shuttle,
+		/obj/effect/overmap/visitable/ship/landable/aquila,
+		/obj/effect/overmap/visitable/ship/landable/guppy
+	)
 
 	initial_restricted_waypoints = list(
 		"Charon" = list("nav_hangar_charon"), 	//can't have random shuttles popping inside the ship
@@ -86,6 +91,11 @@
 	fore_dir = NORTH
 	skill_needed = SKILL_BASIC
 	vessel_size = SHIP_SIZE_SMALL
+	known_ships = list(
+		/obj/effect/overmap/visitable/ship/torch,
+		/obj/effect/overmap/visitable/ship/landable/aquila,
+		/obj/effect/overmap/visitable/ship/landable/guppy
+	)
 
 /obj/effect/overmap/visitable/ship/landable/aquila
 	name = "Aquila"
@@ -96,6 +106,11 @@
 	burn_delay = 0.5 SECONDS //spammable, but expensive
 	fore_dir = NORTH
 	vessel_size = SHIP_SIZE_SMALL
+	known_ships = list(
+		/obj/effect/overmap/visitable/ship/torch,
+		/obj/effect/overmap/visitable/ship/landable/exploration_shuttle,
+		/obj/effect/overmap/visitable/ship/landable/guppy
+	)
 
 /obj/effect/overmap/visitable/ship/landable/guppy
 	name = "Guppy"
@@ -107,6 +122,11 @@
 	fore_dir = SOUTH
 	skill_needed = SKILL_BASIC
 	vessel_size = SHIP_SIZE_TINY
+	known_ships = list(
+		/obj/effect/overmap/visitable/ship/torch,
+		/obj/effect/overmap/visitable/ship/landable/exploration_shuttle,
+		/obj/effect/overmap/visitable/ship/landable/aquila
+	)
 
 /obj/machinery/computer/shuttle_control/explore/aquila
 	name = "aquila control console"

@@ -1,3 +1,4 @@
+GLOBAL_LIST_EMPTY(known_overmap_sectors)
 //===================================================================================
 //Overmap object representing zlevel(s)
 //===================================================================================
@@ -17,8 +18,7 @@
 	var/start_x			//Coordinates for self placing
 	var/start_y			//will use random values if unset
 
-	var/base = 0		//starting sector, counts as station_levels
-	var/in_space = TRUE	//can be accessed via lucky EVA
+	var/sector_flags = OVERMAP_SECTOR_IN_SPACE
 
 	var/hide_from_reports = FALSE
 
@@ -34,6 +34,14 @@
 
 	find_z_levels()     // This populates map_z and assigns z levels to the ship.
 	register_z_levels() // This makes external calls to update global z level information.
+
+	if(HAS_FLAGS(sector_flags, OVERMAP_SECTOR_KNOWN))
+		LAZYADD(GLOB.known_overmap_sectors, src)
+		layer = ABOVE_LIGHTING_LAYER
+		plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		for(var/obj/machinery/computer/ship/helm/H as anything in GLOB.overmap_helm_computers)
+			H.add_known_sector(src)
+
 
 	if(!GLOB.using_map.overmap_z)
 		build_overmap()
@@ -63,6 +71,11 @@
 	LAZYADD(SSshuttle.sectors_to_initialize, src) //Queued for further init. Will populate the waypoint lists; waypoints not spawned yet will be added in as they spawn.
 	SSshuttle.clear_init_queue()
 
+
+/obj/effect/overmap/visitable/Destroy()
+	LAZYREMOVE(GLOB.known_overmap_sectors, src)
+	. = ..()
+
 //This is called later in the init order by SSshuttle to populate sector objects. Importantly for subtypes, shuttles will be created by then.
 /obj/effect/overmap/visitable/proc/populate_sector_objects()
 
@@ -77,9 +90,9 @@
 		map_sectors["[zlevel]"] = src
 
 	GLOB.using_map.player_levels |= map_z
-	if(!in_space)
+	if(!HAS_FLAGS(sector_flags, OVERMAP_SECTOR_IN_SPACE))
 		GLOB.using_map.sealed_levels |= map_z
-	if(base)
+	if(HAS_FLAGS(sector_flags, OVERMAP_SECTOR_BASE))
 		GLOB.using_map.station_levels |= map_z
 		GLOB.using_map.contact_levels |= map_z
 		GLOB.using_map.map_levels |= map_z
@@ -121,14 +134,15 @@
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
 	icon_state = "sector"
+	requires_contact = TRUE
 	anchored = TRUE
 
 
 /obj/effect/overmap/visitable/sector/Initialize()
 	. = ..()
-
-	if(known)
-		update_known_connections(TRUE)
+	if(HAS_FLAGS(sector_flags, OVERMAP_SECTOR_KNOWN))
+		for(var/obj/machinery/computer/ship/helm/H as anything in GLOB.overmap_helm_computers)
+			update_known_connections(TRUE)
 
 
 /obj/effect/overmap/visitable/sector/update_known_connections(notify = FALSE)

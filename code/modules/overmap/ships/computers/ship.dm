@@ -66,21 +66,31 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 		user.reset_view(linked)
 	if(user.client)
 		user.client.view = world.view + extra_view
+	if(linked)
+		for(var/obj/machinery/computer/ship/sensors/sensor in linked.consoles)
+			sensor.reveal_contacts(user)
 	GLOB.moved_event.register(user, src, /obj/machinery/computer/ship/proc/unlook)
 	if (!isghost(user))
 		GLOB.stat_set_event.register(user, src, /obj/machinery/computer/ship/proc/unlook)
 	LAZYDISTINCTADD(viewers, weakref(user))
+	if(linked)
+		LAZYDISTINCTADD(linked.navigation_viewers, weakref(user))
 
 /obj/machinery/computer/ship/proc/unlook(mob/user)
 	user.reset_view(null, FALSE)
 	if(user.client)
 		user.client.view = world.view
+	if(linked)
+		for(var/obj/machinery/computer/ship/sensors/sensor in linked.consoles)
+			sensor.hide_contacts(user)
 	GLOB.moved_event.unregister(user, src, /obj/machinery/computer/ship/proc/unlook)
 	GLOB.stat_set_event.unregister(user, src, /obj/machinery/computer/ship/proc/unlook)
 	LAZYREMOVE(viewers, weakref(user))
+	if(linked)
+		LAZYREMOVE(linked.navigation_viewers, weakref(user))
 
 /obj/machinery/computer/ship/proc/viewing_overmap(mob/user)
-	return (weakref(user) in viewers)
+	return (weakref(user) in viewers) || (linked && (weakref(user) in linked.navigation_viewers))
 
 /obj/machinery/computer/ship/CouldNotUseTopic(mob/user)
 	. = ..()
@@ -98,8 +108,12 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	else
 		return 0
 
+/obj/machinery/computer/ship/Destroy()
+	linked.consoles -= src
+	. = ..()
+
 /obj/machinery/computer/ship/sensors/Destroy()
-	sensors = null
+	sensor_ref = null
 	if(LAZYLEN(viewers))
 		for(var/weakref/W in viewers)
 			var/M = W.resolve()
