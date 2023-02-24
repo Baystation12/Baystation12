@@ -1409,7 +1409,7 @@
 /area/map_template/sfv_arbiter)
 "Lr" = (
 /obj/effect/paint/red,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+/obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
 	},
 /turf/simulated/wall/r_titanium,
@@ -1698,7 +1698,7 @@
 /area/map_template/sfv_arbiter)
 "Oo" = (
 /obj/effect/paint/red,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
 /turf/simulated/wall/r_titanium,
@@ -1791,7 +1791,7 @@
 /area/map_template/sfv_arbiter)
 "Qh" = (
 /obj/effect/paint/red,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+/obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 10
 	},
 /turf/simulated/wall/r_titanium,
