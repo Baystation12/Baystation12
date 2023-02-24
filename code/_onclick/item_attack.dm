@@ -46,10 +46,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * Returns boolean to indicate whether the attack call was handled or not.
  */
 /obj/item/proc/resolve_attackby(atom/A, mob/user, click_params)
+	if (!A.can_use_item(src, user, click_params))
+		return FALSE
 	if(!(item_flags & ITEM_FLAG_NO_PRINT))
 		add_fingerprint(user)
-	if (A.atom_flags & ATOM_FLAG_NO_TOOLS)
-		return FALSE
 	if ((item_flags & ITEM_FLAG_TRY_ATTACK) && attack(A, user))
 		return TRUE
 	if (A == user)
@@ -60,6 +60,30 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		. = A.use_tool(src, user, click_params)
 	if (!.)
 		return A.attackby(src, user, click_params)
+
+
+/**
+ * Whether or not an item interaction is possible. Checked before any use calls.
+ */
+/atom/proc/can_use_item(obj/item/tool, mob/user, click_params)
+	// No Tools flag check
+	if (HAS_FLAGS(atom_flags, ATOM_FLAG_NO_TOOLS))
+		to_chat(user, SPAN_WARNING("\The [src] can't be interacted with."))
+		return FALSE
+
+	return TRUE
+
+
+/obj/can_use_item(obj/item/tool, mob/user, click_params)
+	. = ..()
+	if (!.)
+		return
+
+	// Block interacting with things under platings - In case of t-ray shennanigans or layering glitches
+	var/turf/T = get_turf(src)
+	if (hides_under_flooring() && !T.is_plating())
+		to_chat(user, SPAN_WARNING("You must remove the plating before you can interact with \the [src]."))
+		return FALSE
 
 
 /**
