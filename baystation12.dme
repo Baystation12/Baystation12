@@ -208,6 +208,7 @@
 #include "code\controllers\subsystems\misc.dm"
 #include "code\controllers\subsystems\misc_slow.dm"
 #include "code\controllers\subsystems\mobs.dm"
+#include "code\controllers\subsystems\overlays.dm"
 #include "code\controllers\subsystems\ping.dm"
 #include "code\controllers\subsystems\plants.dm"
 #include "code\controllers\subsystems\presence.dm"
