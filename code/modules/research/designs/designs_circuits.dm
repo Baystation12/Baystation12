@@ -212,6 +212,14 @@
 	build_path = /obj/item/stock_parts/circuitboard/protolathe
 	sort_string = "HABAB"
 
+
+/datum/design/circuit/protolathe
+	name = "exosuit fabricator"
+	id = "mechfab"
+	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 6)
+	build_path = /obj/item/stock_parts/circuitboard/mechfab
+	sort_string = "HABAL"
+
 /datum/design/circuit/circuit_imprinter
 	name = "circuit imprinter"
 	id = "circuit_imprinter"

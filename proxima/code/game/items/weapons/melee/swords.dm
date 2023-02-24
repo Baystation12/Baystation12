@@ -30,7 +30,7 @@
 		slot_r_hand_str = "cursed_katana",
 		slot_l_hand_str = "cursed_katana"
 		)
-	active_force = 40
+	active_force = 45
 	active_throwforce = 15
 	force = 5
 	throwforce = 2

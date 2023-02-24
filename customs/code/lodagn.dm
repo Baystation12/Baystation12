@@ -1,4 +1,4 @@
-/obj/item/clothing/suit/armor/hos/lodagn
+/obj/item/clothing/suit/armor/hos/jensen/lodagn
 	name = "armored coat"
 	desc = "A greatcoat enhanced with a kevlar alloy for some protection and style. You can see traces of dried slime in the area of the sleeves and collar, as well as a patch on the inside of the collar, which reads M.-Q."
 	armor = list(

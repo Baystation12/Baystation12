@@ -682,14 +682,7 @@
 	materials = list(MATERIAL_STEEL = 3000)
 	id = "augment_circuitry"
 
-//BigRigs
-/datum/design/item/mechfab/rig/zero
-	category = "Hardsuits"
-	name = "Null suit control module"
-	build_path = /obj/item/rig/zero
-	materials = list(MATERIAL_STEEL = 30000, MATERIAL_GLASS = 5000, MATERIAL_SILVER = 1000)
-	id = "null _suit"
-	time = 120
+//Rig modules
 
 /datum/design/item/mechfab/rig/meson
 	category = "Hardsuits"
@@ -735,6 +728,42 @@
 	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 5)
 	id = "rig_healthscanner"
 	sort_string = "WCBAA"
+
+/datum/design/item/mechfab/rig/defib
+	category = "Hardsuits"
+	name = "Medical Defib"
+	build_path = /obj/item/rig_module/device/defib
+	materials = list(MATERIAL_PLASTIC = 1000, MATERIAL_STEEL = 700, MATERIAL_GLASS = 500)
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 4, TECH_ENGINEERING = 5)
+	id = "rig_defib"
+	sort_string = "WCBAB"
+
+/datum/design/item/mechfab/rig/dispenser
+	category = "Hardsuits"
+	name = "Medical Chemical Dispenser"
+	build_path = /obj/item/rig_module/chem_dispenser
+	materials = list(MATERIAL_PLASTIC = 1000, MATERIAL_STEEL = 700, MATERIAL_GLASS = 500)
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 4, TECH_ENGINEERING = 5)
+	id = "rig_chemdispenser"
+	sort_string = "WCBAC"
+
+/datum/design/item/mechfab/rig/comdispenser
+	category = "Hardsuits"
+	name = "Medical Combat Chemical Dispenser"
+	build_path = /obj/item/rig_module/chem_dispenser/combat
+	materials = list(MATERIAL_PLASTIC = 1000, MATERIAL_STEEL = 700, MATERIAL_GLASS = 500)
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 4, TECH_ENGINEERING = 5, TECH_COMBAT = 3)
+	id = "rig_chemdispensercombat"
+	sort_string = "WCBAD"
+
+/datum/design/item/mechfab/rig/injector
+	category = "Hardsuits"
+	name = "Medical Chemical Injector"
+	build_path = /obj/item/rig_module/chem_dispenser/injector
+	materials = list(MATERIAL_PLASTIC = 1000, MATERIAL_STEEL = 700, MATERIAL_GLASS = 500)
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 4, TECH_ENGINEERING = 5)
+	id = "rig_cheminjector"
+	sort_string = "WCBAC"
 
 /datum/design/item/mechfab/rig/drill
 	category = "Hardsuits"
@@ -831,7 +860,7 @@
 	name = "Electrolaser"
 	build_path = /obj/item/rig_module/mounted/taser
 	materials = list(MATERIAL_STEEL = 4000, MATERIAL_PLASTIC = 2500, MATERIAL_GLASS = 2000, MATERIAL_GOLD = 1000)
-	req_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
+	req_tech = list(TECH_POWER = 5, TECH_COMBAT = 4, TECH_ENGINEERING = 6)
 	id = "rig_taser"
 	sort_string = "WCKAA"
 
@@ -840,9 +869,18 @@
 	name = "Energy Gun"
 	build_path = /obj/item/rig_module/mounted/egun
 	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 3000, MATERIAL_PLASTIC = 2500, MATERIAL_GOLD = 2000, MATERIAL_SILVER = 1000)
-	req_tech = list(TECH_POWER = 6, TECH_COMBAT = 6, TECH_ENGINEERING = 6)
+	req_tech = list(TECH_POWER = 6, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
 	id = "rig_egun"
 	sort_string = "WCKAB"
+
+/datum/design/item/mechfab/rig/egun
+	category = "Hardsuits"
+	name = "Energy Laser Cannon"
+	build_path = /obj/item/rig_module/mounted/lcannon
+	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 3000, MATERIAL_PLASTIC = 2500, MATERIAL_GOLD = 2000, MATERIAL_SILVER = 1000, MATERIAL_URANIUM = 1000)
+	req_tech = list(TECH_POWER = 6, TECH_COMBAT = 6, TECH_ENGINEERING = 6)
+	id = "rig_lcannon"
+	sort_string = "WCKAC"
 /datum/design/item/mechfab/rig/enet
 	category = "Hardsuits"
 	name = "Energy Net"
@@ -850,7 +888,7 @@
 	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 3000, MATERIAL_DIAMOND = 2000, MATERIAL_PLASTIC = 2000)
 	req_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 5, TECH_ESOTERIC = 4, TECH_ENGINEERING = 6)
 	id = "rig_enet"
-	sort_string = "WCKAC"
+	sort_string = "WCKAD"
 
 /datum/design/item/mechfab/rig/stealth
 	category = "Hardsuits"
@@ -869,3 +907,48 @@
 	req_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 2, TECH_ENGINEERING = 5)
 	id = "rig_cooler"
 	sort_string = "WCLAB"
+
+/datum/design/item/mechfab/rig/grenade
+	category = "Hardsuits"
+	name = "Grenade launcher"
+	build_path = /obj/item/rig_module/grenade_launcher
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 3500, MATERIAL_PLASTIC = 2000)
+	req_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 2, TECH_COMBAT = 5)
+	id = "rig_glaucher"
+	sort_string = "WCLAC"
+
+/datum/design/item/mechfab/rig/grenade_cleaning
+	category = "Hardsuits"
+	name = "Cleaning Grenade launcher"
+	build_path = /obj/item/rig_module/grenade_launcher/cleaner
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 3500, MATERIAL_PLASTIC = 2000)
+	req_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 2)
+	id = "rig_claucher"
+	sort_string = "WCLAC"
+
+/datum/design/item/mechfab/rig/grenade_smoke
+	category = "Hardsuits"
+	name = "Smoke Grenade launcher"
+	build_path = /obj/item/rig_module/grenade_launcher/smoke
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 3500, MATERIAL_PLASTIC = 2000)
+	req_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 2, TECH_COMBAT = 2)
+	id = "rig_slaucher"
+	sort_string = "WCLAD"
+
+/datum/design/item/mechfab/rig/grenade_foam
+	category = "Hardsuits"
+	name = "Metal Foam Grenade launcher"
+	build_path = /obj/item/rig_module/grenade_launcher/mfoam
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 3500, MATERIAL_PLASTIC = 2000)
+	req_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 2, TECH_ENGINEERING = 3)
+	id = "rig_mlaucher"
+	sort_string = "WCLAE"
+
+/datum/design/item/mechfab/rig/grenade_light
+	category = "Hardsuits"
+	name = "Illuminating Grenade launcher"
+	build_path = /obj/item/rig_module/grenade_launcher/light
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 3500, MATERIAL_PLASTIC = 2000)
+	req_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 2)
+	id = "rig_llaucher"
+	sort_string = "WCLAG"

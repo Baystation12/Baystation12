@@ -72,7 +72,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	var/imprinter_search = ""
 	var/quick_deconstruct = FALSE
 
-	req_access = list(access_research)	//Data and setting manipulation requires scientist access.
+	req_access = list(list(access_robotics, access_research))	//Data and setting manipulation requires scientist access.
 
 /obj/machinery/computer/rdconsole/proc/CallMaterialName(var/ID)
 	var/return_name = ID

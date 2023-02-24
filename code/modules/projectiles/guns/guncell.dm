@@ -121,7 +121,7 @@
 	universal = TRUE
 	autorecharging = TRUE
 	emp_vulnerable = TRUE
-	origin_tech = list(TECH_COMBAT=7, TECH_MATERIAL=5, TECH_POWER=8)
+	origin_tech = list(TECH_COMBAT=8, TECH_MATERIAL=5, TECH_POWER=8)
 	icon_state = "bs_0"
 	overlay = "a"
 

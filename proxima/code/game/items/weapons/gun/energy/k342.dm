@@ -194,7 +194,7 @@
 		slot_r_hand_str = 'proxima/icons/mob/onmob/items/righthand-guns.dmi',
 		slot_back_str = null
 		)
-	slot_flags = SLOT_BACK|SLOT_BELT
+	slot_flags = SLOT_BACK|SLOT_BELT|SLOT_HOLSTER
 	icon_state = "koi_off"
 	item_state = "koi"
 	origin_tech = list(TECH_COMBAT=3, TECH_MATERIAL=3, TECH_POWER=5)
@@ -368,5 +368,5 @@
 	id = "battery_powercore"
 	desc = "universal battery for energy guns with self recharge function."
 	materials = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 15000, MATERIAL_SILVER = 3000 , MATERIAL_URANIUM = 4000, MATERIAL_GOLD = 2000, MATERIAL_DIAMOND = 500)
-	req_tech = list(TECH_POWER = 7, TECH_MATERIAL = 6, TECH_COMBAT = 5)
+	req_tech = list(TECH_POWER = 8, TECH_MATERIAL = 6, TECH_COMBAT = 5)
 	build_path = /obj/item/cell/guncell/powercore

@@ -702,6 +702,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_RESISTANT
 		)
+	camera = /obj/machinery/camera/network/exploration
 	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/device/scanner/health,/obj/item/device/gps,/obj/item/pinpointer/radio,/obj/item/material/hatchet/machete,/obj/item/shovel)
 
 
@@ -731,6 +732,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_RESISTANT
 		)
+	camera = /obj/machinery/camera/network/exploration
 	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/device/scanner/health,/obj/item/device/gps,/obj/item/pinpointer/radio,/obj/item/material/hatchet/machete,/obj/item/shovel)
 
 /obj/item/clothing/suit/space/void/security/alt/expo
@@ -740,3 +742,4 @@
 /obj/item/clothing/head/helmet/space/void/security/alt/expo
 	name = "marine voidsuit helmet"
 	desc = "A light, radiation resistant voidsuit commonly used among SCG uniformed services. This one has an SCG Army seal on its chest plate."
+	camera = /obj/machinery/camera/network/exploration

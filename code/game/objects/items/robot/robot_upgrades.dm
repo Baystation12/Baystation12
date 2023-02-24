@@ -51,6 +51,7 @@
 	name = "\improper Madhouse Productions Official Party Module"
 	desc = "A weird-looking chip with third-party additions crudely soldered in. It feels cheap and chintzy in the hand. Inscribed into the cheap-feeling circuit is the logo of Madhouse Productions, a group that arranges parties and entertainment venues."
 	new_module = "Party"
+	origin_tech = list(TECH_ESOTERIC = 1)
 
 /obj/item/borg/upgrade/uncertified/combat
 	name = "ancient module"
