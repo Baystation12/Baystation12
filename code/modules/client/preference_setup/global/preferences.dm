@@ -289,6 +289,12 @@ var/global/list/_client_preferences_by_type
 			winset(C, "output", "is-visible=true;is-disabled=false")
 			winset(C, "browseroutput", "is-visible=false")
 
+/datum/client_preference/notify_ghost_trap
+	description = "Notify when ghost-trap roles are available."
+	key = "GHOST_TRAP"
+	options = list(GLOB.PREF_YES, GLOB.PREF_NO)
+	default_value = GLOB.PREF_YES
+
 /********************
 * General Staff Preferences *
 ********************/
