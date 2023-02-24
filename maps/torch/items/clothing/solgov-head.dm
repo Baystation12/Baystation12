@@ -405,13 +405,14 @@
 /obj/item/clothing/head/helmet/solgov/pilot
 	name = "pilot's helmet"
 	desc = "A pilot's helmet for operating the cockpit in style. For when you want to protect your noggin AND look stylish."
-	icon_state = "pilotfleet"
+	icon_state = "pilotgov"
 	accessories = null
 
 /obj/item/clothing/head/helmet/solgov/pilot/fleet
 	name = "fleet pilot's helmet"
 	desc = "A pilot's helmet for operating the cockpit in style. This one is worn by members of the SCG Fleet."
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
+	icon_state = "pilotfleet"
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
 	accessories = null
 
