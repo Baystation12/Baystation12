@@ -30,6 +30,19 @@
 	/// Bitflag (Any of `INIT_*`). Flags for special/additional handling of the `Initialize()` chain. See `code\__defines\misc.dm`.
 	var/init_flags = EMPTY_BITFIELD
 
+	/// This atom's cache of non-protected overlays, used for normal icon additions. Do not manipulate directly- See SSicon_composition.
+	var/list/atom_overlay_cache
+
+	/// This atom's cache of overlays that can only be removed explicitly, like C4. Do not manipulate directly- See SSicon_composition.
+	var/list/atom_protected_overlay_cache
+
+	/// This atom's cache of non-protected overlays for basic icon composition. Do not manipulate directly- See SSicon_composition.
+	var/list/atom_underlay_cache
+
+	/// This atom's cache of underlays that can only be removed explicitly. Do not manipulate directly- See SSicon_composition.
+	var/list/atom_protected_underlay_cache
+
+
 /atom/New(loc, ...)
 	SHOULD_CALL_PARENT(TRUE) // Ensures atoms don't unintentionally skip initialization by not calling parent in New()
 

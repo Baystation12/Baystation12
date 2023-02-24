@@ -230,7 +230,7 @@
 	update_icon()
 
 /obj/item/stack/flag/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(upright)
 		pixel_x = 0
 		pixel_y = 0

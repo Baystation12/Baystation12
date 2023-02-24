@@ -40,7 +40,7 @@
 		icon_state = "unhooked"
 	else
 		icon_state = "hooked"
-	overlays.Cut()
+	ClearOverlays()
 	if (!iv_bag)
 		return
 	var/image/reagents_overlay = image(icon, icon_state = "reagent0")

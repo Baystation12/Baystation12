@@ -34,7 +34,7 @@
 	. = ..()
 
 /obj/machinery/gibber/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (dirty)
 		src.overlays += image('icons/obj/kitchen.dmi', "grbloody")
 	if(inoperable())

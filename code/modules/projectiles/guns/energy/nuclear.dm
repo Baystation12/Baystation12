@@ -120,7 +120,7 @@
 		if("kill") return "nucgun-kill"
 
 /obj/item/gun/energy/gun/nuclear/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	overlays += get_charge_overlay()
 	overlays += get_reactor_overlay()
 	overlays += get_mode_overlay()

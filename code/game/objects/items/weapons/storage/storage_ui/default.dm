@@ -200,7 +200,7 @@
 	var/stored_cap_width = 4 //length of sprite for start and end of the box representing the stored item
 	var/storage_width = min( round( 224 * storage.max_storage_space/baseline_max_storage_space ,1) ,284) //length of sprite for the box representing total storage space
 
-	storage_start.overlays.Cut()
+	storage_start.ClearOverlays()
 
 	storage_continue.SetTransform(scale_x = (storage_width - storage_cap_width * 2 + 3) / 32)
 

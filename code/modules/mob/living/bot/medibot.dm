@@ -85,7 +85,7 @@
 	update_icons()
 
 /mob/living/bot/medbot/update_icons()
-	overlays.Cut()
+	ClearOverlays()
 	if(skin)
 		overlays += image('icons/mob/bot/medibot_skins.dmi', "medskin_[skin]")
 	if(busy)

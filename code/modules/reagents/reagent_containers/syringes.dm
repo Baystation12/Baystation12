@@ -78,13 +78,11 @@
 	handleTarget(target, user)
 
 /obj/item/reagent_containers/syringe/on_update_icon()
-	overlays.Cut()
-	underlays.Cut()
-
+	ClearOverlays()
+	ClearUnderlays()
 	if(mode == SYRINGE_BROKEN)
 		icon_state = "broken"
 		return
-
 	var/rounded_vol = clamp(round((reagents.total_volume / volume * 15),5), 5, 15)
 	if (reagents.total_volume == 0)
 		rounded_vol = 0
@@ -95,17 +93,14 @@
 				injoverlay = "draw"
 			if (SYRINGE_INJECT)
 				injoverlay = "inject"
-		overlays += injoverlay
+		AddOverlays(injoverlay)
 	icon_state = "[initial(icon_state)][rounded_vol]"
 	item_state = "syringe_[rounded_vol]"
-
 	if(reagents.total_volume)
 		filling = image('icons/obj/reagentfillings.dmi', src, "syringe10")
-
 		filling.icon_state = "syringe[rounded_vol]"
-
 		filling.color = reagents.get_color()
-		underlays += filling
+		AddUnderlays(filling)
 
 /obj/item/reagent_containers/syringe/proc/handleTarget(atom/target, mob/user)
 	switch(mode)

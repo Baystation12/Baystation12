@@ -127,7 +127,7 @@
 	if (!node)
 		return
 
-	overlays.Cut()
+	ClearOverlays()
 
 	var/vent_icon = "vent"
 
@@ -149,7 +149,7 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/update_underlays()
 	if(..())
-		underlays.Cut()
+		ClearUnderlays()
 		var/turf/T = get_turf(src)
 		if(!istype(T))
 			return

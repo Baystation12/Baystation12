@@ -162,7 +162,7 @@ var/global/list/turret_icons
 		turret_icons = list()
 		turret_icons["open"] = image(icon, "openTurretCover")
 
-	underlays.Cut()
+	ClearUnderlays()
 	underlays += turret_icons["open"]
 
 	if(MACHINE_IS_BROKEN(src))

@@ -111,7 +111,7 @@
 	return ..()
 
 /obj/effect/vine/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	var/growth = growth_threshold ? min(max_growth, round(get_current_health() / growth_threshold)) : 1
 	var/at_fringe = get_dist(src,parent)
 	if(spread_distance > 5)

@@ -99,7 +99,7 @@
 		update_current_build(wait)
 
 /obj/machinery/fabricator/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(!is_powered())
 		icon_state = "[base_icon_state]_d"
 	else if(currently_building)

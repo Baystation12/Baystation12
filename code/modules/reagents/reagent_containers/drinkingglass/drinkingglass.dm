@@ -145,8 +145,8 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	return I
 
 /obj/item/reagent_containers/food/drinks/glass2/on_update_icon()
-	underlays.Cut()
-	overlays.Cut()
+	ClearUnderlays()
+	ClearOverlays()
 
 	if (length(reagents?.reagent_list))
 		var/datum/reagent/R = reagents.get_master_reagent()
@@ -172,17 +172,15 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 				under_liquid |= image(icon, src, "[base_icon]_[S]")
 			else if("[base_icon][amnt]_[S]" in icon_states(icon))
 				over_liquid |= image(icon, src, "[base_icon][amnt]_[S]")
-
-		underlays += under_liquid
+		AddUnderlays(under_liquid)
 
 		var/image/filling = get_filling_overlay(amnt, R.glass_icon)
 		filling.color = reagents.get_color()
 		if(filling_overlayed)
-			overlays += filling
+			AddOverlays(filling)
 		else
-			underlays += filling
-
-		overlays += over_liquid
+			AddUnderlays(filling)
+		AddOverlays(over_liquid)
 
 	else
 		SetName(custom_name || initial(name))
@@ -194,7 +192,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 			var/obj/item/glass_extra/GE = item
 			var/image/I = image(icon, src, "[base_icon]_[GE.glass_addition][side]")
 			I.color = GE.color
-			underlays += I
+			AddUnderlays(I)
 		else if(rim_pos && istype(item, /obj/item/reagent_containers/food/snacks/fruit_slice))
 			var/obj/FS = item
 			var/image/I = image(FS)
@@ -203,7 +201,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 			var/fsy = rim_pos_data["y"] - 20
 			var/fsx = rim_pos_data[side == "left" ? "x_left" : "x_right"] - 16
 			I.SetTransform(scale = 0.5, offset_x = fsx, offset_y = fsy)
-			underlays += I
+			AddUnderlays(I)
 		else continue
 		side = "right"
 

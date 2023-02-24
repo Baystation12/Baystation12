@@ -81,7 +81,7 @@
 	. = ..()
 
 /obj/item/device/paint_sprayer/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	overlays += overlay_image(icon, "paint_sprayer_color", paint_color)
 	update_held_icon()
 

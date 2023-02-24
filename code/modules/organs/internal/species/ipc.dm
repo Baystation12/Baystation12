@@ -209,7 +209,7 @@
 	else
 		icon_state = "posibrain"
 
-	overlays.Cut()
+	ClearOverlays()
 	if(shackle)
 		overlays |= image('icons/obj/assemblies.dmi', "posibrain-shackles")
 

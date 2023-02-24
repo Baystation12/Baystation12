@@ -183,7 +183,7 @@
 	return 1
 
 /obj/machinery/shipsensors/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(use_power)
 		icon_state = "sensors"
 	if(health_dead)

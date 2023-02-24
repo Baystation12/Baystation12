@@ -82,7 +82,7 @@
 
 /obj/structure/closet/body_bag/rescue/on_update_icon()
 	..()
-	overlays.Cut()
+	ClearOverlays()
 	if(airtank)
 		overlays += image(icon, "tank")
 

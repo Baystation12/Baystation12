@@ -155,7 +155,7 @@ Please contact me on #coderbus IRC. ~Carn x
 /mob/living/carbon/human/update_icons()
 	lying_prev = lying	//so we don't update overlays for lying/standing unless our stance changes again
 	update_hud()		//TODO: remove the need for this
-	overlays.Cut()
+	ClearOverlays()
 
 	var/list/overlays_to_apply = list()
 
@@ -510,13 +510,11 @@ var/global/list/damage_icon_parts = list()
 		if(gene.is_active(src))
 			var/underlay=gene.OnDrawUnderlays(src,g,fat)
 			if(underlay)
-				standing.underlays += underlay
+				standing.AddUnderlays(underlay)
 				add_image = 1
-	for(var/mut in mutations)
-		switch(mut)
-			if(MUTATION_LASER)
-				standing.overlays	+= "lasereyes_s"
-				add_image = 1
+	if (MUTATION_LASER in mutations)
+		standing.AddOverlays("lasereyes_s")
+		add_image = 1
 	if(add_image)
 		overlays_standing[HO_MUTATIONS_LAYER]	= standing
 	else

@@ -84,7 +84,7 @@ var/global/list/angle_step_to_dir = list(
 		. = 0
 
 /obj/compass_holder/on_update_icon()
-	overlays = (compass_static_labels | compass_waypoint_markers)
+	SetOverlays(compass_static_labels | compass_waypoint_markers)
 
 /obj/compass_holder/proc/clear_waypoint(id)
 	LAZYREMOVE(compass_waypoints, id)

@@ -272,7 +272,7 @@
 		update_icon()
 
 /obj/item/gun/launcher/crossbow/rapidcrossbowdevice/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 
 	if(bolt)
 		overlays += "rxb-bolt"

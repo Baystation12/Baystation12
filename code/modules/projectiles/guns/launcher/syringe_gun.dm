@@ -13,10 +13,12 @@
 	var/obj/item/reagent_containers/syringe/syringe
 
 /obj/item/syringe_cartridge/on_update_icon()
-	underlays.Cut()
+	ClearUnderlays()
 	if(syringe)
-		underlays += image(syringe.icon, src, syringe.icon_state)
-		underlays += syringe.filling
+		AddUnderlays(list(
+			image(syringe.icon, src, syringe.icon_state),
+			syringe.filling
+		))
 
 /obj/item/syringe_cartridge/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/reagent_containers/syringe) && user.unEquip(I, src))
@@ -38,7 +40,7 @@
 /obj/item/syringe_cartridge/proc/prime()
 	//the icon state will revert back when update_icon() is called from throw_impact()
 	icon_state = icon_flight
-	underlays.Cut()
+	ClearUnderlays()
 
 /obj/item/syringe_cartridge/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	..() //handles embedding for us. Should have a decent chance if thrown fast enough

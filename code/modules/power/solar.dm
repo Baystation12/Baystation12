@@ -80,7 +80,7 @@ var/global/solar_gen_rate = 1500
 
 /obj/machinery/power/solar/on_update_icon()
 	..()
-	overlays.Cut()
+	ClearOverlays()
 	if(MACHINE_IS_BROKEN(src))
 		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = ABOVE_HUMAN_LAYER)
 	else
@@ -357,14 +357,14 @@ var/global/solar_gen_rate = 1500
 /obj/machinery/power/solar_control/on_update_icon()
 	if(MACHINE_IS_BROKEN(src))
 		icon_state = "broken"
-		overlays.Cut()
+		ClearOverlays()
 		return
 	if(!is_powered())
 		icon_state = "c_unpowered"
-		overlays.Cut()
+		ClearOverlays()
 		return
 	icon_state = "solar"
-	overlays.Cut()
+	ClearOverlays()
 	if(cdir > -1)
 		overlays += image('icons/obj/computer.dmi', "solcon-o", ABOVE_OBJ_LAYER, angle2dir(cdir))
 	return

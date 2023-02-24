@@ -37,12 +37,7 @@ var/global/list/pipe_colors = list(
 	var/list/pipe_icons[]
 	var/list/manifold_icons[]
 	var/list/device_icons[]
-	var/list/underlays[]
-	//var/list/underlays_down[]
-	//var/list/underlays_exposed[]
-	//var/list/underlays_intact[]
-	//var/list/pipe_underlays_exposed[]
-	//var/list/pipe_underlays_intact[]
+	var/list/pipe_underlays[]
 	var/list/omni_icons[]
 
 /datum/pipe_icon_manager/New()
@@ -66,17 +61,8 @@ var/global/list/pipe_colors = list(
 		if("omni")
 			return omni_icons[state]
 		if("underlay")
-			return underlays[state + dir + color]
-	//  if("underlay_intact")
-	//	return underlays_intact[state + dir + color]
-	//	if("underlay_exposed")
-	//		return underlays_exposed[state + dir + color]
-	//	if("underlay_down")
-	//		return underlays_down[state + dir + color]
-	//	if("pipe_underlay_exposed")
-	//		return pipe_underlays_exposed[state + dir + color]
-	//	if("pipe_underlay_intact")
-	//		return pipe_underlays_intact[state + dir + color]
+			return pipe_underlays[state + dir + color]
+
 
 /datum/pipe_icon_manager/proc/check_icons(device, dir, color, state)
 	if(!pipe_icons)
@@ -87,8 +73,7 @@ var/global/list/pipe_colors = list(
 		gen_device_icons()
 	if(!omni_icons)
 		gen_omni_icons()
-	//if(!underlays_intact || !underlays_down || !underlays_exposed || !pipe_underlays_exposed || !pipe_underlays_intact)
-	if(!underlays)
+	if(!pipe_underlays)
 		gen_underlay_icons()
 
 	// In case of a non-default color, generate the missing icon and add it to the cache.
@@ -102,7 +87,7 @@ var/global/list/pipe_colors = list(
 			if(!manifold_icons[color + state])
 				gen_single_manifold_icon(color, state)
 		if("underlay")
-			if(!underlays[state + "[dir]" + color])
+			if(!pipe_underlays[state + "[dir]" + color])
 				gen_single_underlay_icon(dir, color, state)
 
 /datum/pipe_icon_manager/proc/gen_pipe_icons()
@@ -202,8 +187,8 @@ var/global/list/pipe_colors = list(
 
 /datum/pipe_icon_manager/proc/gen_underlay_icons()
 
-	if(!underlays)
-		underlays = new()
+	if(!pipe_underlays)
+		pipe_underlays = new()
 
 	var/icon/pipe = new('icons/atmos/pipe_underlays.dmi')
 
@@ -215,107 +200,13 @@ var/global/list/pipe_colors = list(
 
 		for(var/D in GLOB.cardinal)
 			var/image/I = image('icons/atmos/pipe_underlays.dmi', icon_state = state, dir = D)
-			underlays[cache_name + "[D]"] = I
+			pipe_underlays[cache_name + "[D]"] = I
 			for(var/pipe_color in pipe_colors)
 				I = image('icons/atmos/pipe_underlays.dmi', icon_state = state, dir = D)
 				I.color = pipe_colors[pipe_color]
-				underlays[state + "[D]" + "[pipe_colors[pipe_color]]"] = I
+				pipe_underlays[state + "[D]" + "[pipe_colors[pipe_color]]"] = I
 
 /datum/pipe_icon_manager/proc/gen_single_underlay_icon(dir, color, state)
 	var/image/I = image('icons/atmos/pipe_underlays.dmi', icon_state = state, dir = dir)
 	I.color = color
-	underlays[state + "[dir]" + color] = I
-
-/*
-	Leaving the old icon manager code commented out for now, as we may want to rewrite the new code to cleanly
-	separate the newpipe icon caching (speshul supply and scrubber lines) from the rest of the pipe code.
-*/
-
-/*
-/datum/pipe_icon_manager/proc/gen_underlay_icons()
-	if(!underlays_intact)
-		underlays_intact = new()
-	if(!underlays_exposed)
-		underlays_exposed = new()
-	if(!underlays_down)
-		underlays_down = new()
-	if(!pipe_underlays_exposed)
-		pipe_underlays_exposed = new()
-	if(!pipe_underlays_intact)
-		pipe_underlays_intact = new()
-
-	var/icon/pipe = new('icons/atmos/pipe_underlays.dmi')
-
-	for(var/state in pipe.IconStates())
-		if(state == "")
-			continue
-
-		for(var/D in cardinal)
-			var/image/I = image('icons/atmos/pipe_underlays.dmi', icon_state = state, dir = D)
-			switch(state)
-				if("intact")
-					underlays_intact["[D]"] = I
-				if("exposed")
-					underlays_exposed["[D]"] = I
-				if("down")
-					underlays_down["[D]"] = I
-				if("pipe_exposed")
-					pipe_underlays_exposed["[D]"] = I
-				if("pipe_intact")
-					pipe_underlays_intact["[D]"] = I
-				if("intact-supply")
-					underlays_intact["[D]"] = I
-				if("exposed-supply")
-					underlays_exposed["[D]"] = I
-				if("down-supply")
-					underlays_down["[D]"] = I
-				if("pipe_exposed-supply")
-					pipe_underlays_exposed["[D]"] = I
-				if("pipe_intact-supply")
-					pipe_underlays_intact["[D]"] = I
-				if("intact-scrubbers")
-					underlays_intact["[D]"] = I
-				if("exposed-scrubbers")
-					underlays_exposed["[D]"] = I
-				if("down-scrubbers")
-					underlays_down["[D]"] = I
-				if("pipe_exposed-scrubbers")
-					pipe_underlays_exposed["[D]"] = I
-				if("pipe_intact-scrubbers")
-					pipe_underlays_intact["[D]"] = I
-			for(var/pipe_color in pipe_colors)
-				I = image('icons/atmos/pipe_underlays.dmi', icon_state = state, dir = D)
-				I.color = pipe_colors[pipe_color]
-				switch(state)
-					if("intact")
-						underlays_intact["[D]" + pipe_colors[pipe_color]] = I
-					if("exposed")
-						underlays_exposed["[D]" + pipe_colors[pipe_color]] = I
-					if("down")
-						underlays_down["[D]" + pipe_colors[pipe_color]] = I
-					if("pipe_exposed")
-						pipe_underlays_exposed["[D]" + pipe_colors[pipe_color]] = I
-					if("pipe_intact")
-						pipe_underlays_intact["[D]" + pipe_colors[pipe_color]] = I
-					if("intact-supply")
-						underlays_intact["[D]" + pipe_colors[pipe_color]] = I
-					if("exposed-supply")
-						underlays_exposed["[D]" + pipe_colors[pipe_color]] = I
-					if("down-supply")
-						underlays_down["[D]" + pipe_colors[pipe_color]] = I
-					if("pipe_exposed-supply")
-						pipe_underlays_exposed["[D]" + pipe_colors[pipe_color]] = I
-					if("pipe_intact-supply")
-						pipe_underlays_intact["[D]" + pipe_colors[pipe_color]] = I
-					if("intact-scrubbers")
-						underlays_intact["[D]" + pipe_colors[pipe_color]] = I
-					if("exposed-scrubbers")
-						underlays_exposed["[D]" + pipe_colors[pipe_color]] = I
-					if("down-scrubbers")
-						underlays_down["[D]" + pipe_colors[pipe_color]] = I
-					if("pipe_exposed-scrubbers")
-						pipe_underlays_exposed["[D]" + pipe_colors[pipe_color]] = I
-					if("pipe_intact-scrubbers")
-						pipe_underlays_intact["[D]" + pipe_colors[pipe_color]] = I
-
-*/
+	pipe_underlays[state + "[dir]" + color] = I

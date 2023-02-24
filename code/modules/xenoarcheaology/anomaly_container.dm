@@ -111,7 +111,7 @@
 		return
 	contained.dropInto(src)
 	contained = null
-	underlays.Cut()
+	ClearUnderlays()
 	update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/artifact/MouseDrop(obj/machinery/anomaly_container/over_object, mob/user)
@@ -218,7 +218,7 @@
 	return ..()
 
 /obj/machinery/anomaly_container/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(health_dead)
 		icon_state = "anomaly_container_broken"
 	if(attached_paper)

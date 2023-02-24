@@ -62,7 +62,7 @@
 	update_icon()
 
 /obj/item/evidencebag/on_update_icon()
-	underlays.Cut()
+	ClearUnderlays()
 	if(stored_item)
 		icon_state = "evidence"
 		desc = "An evidence bag containing \a [stored_item]."

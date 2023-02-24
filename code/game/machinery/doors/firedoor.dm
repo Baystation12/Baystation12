@@ -487,11 +487,8 @@
 	var/icon/lights_overlay
 	var/icon/panel_overlay
 	var/icon/weld_overlay
-
-	overlays.Cut()
-	set_light(0)
+	ClearOverlays()
 	var/do_set_light = FALSE
-
 	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
 		if(connections in list(WEST, EAST, EAST|WEST))
 			set_dir(SOUTH)
@@ -499,30 +496,33 @@
 			set_dir(EAST)
 	else
 		set_dir(SOUTH)
-
 	if(density)
 		icon_state = "closed"
 		if(hatch_open)
-			overlays = panel_overlay
+			AddOverlays(panel_overlay)
 		if(pdiff_alert)
 			lights_overlay += "palert"
 			do_set_light = TRUE
-		if(dir_alerts)
-			for(var/d=1; d<=4; d++)
-				var/cdir = GLOB.cardinal[d]
-				for(var/i=1; i<=length(ALERT_STATES); i++)
-					if(dir_alerts[d] & SHIFTL(1, (i - 1)))
-						overlays += new/icon(icon, "alert_[ALERT_STATES[i]]", dir = cdir)
-						do_set_light = TRUE
+		if (dir_alerts)
+			var/list/alert_overlays = list()
+			for (var/check_cardinal = 1 to 4)
+				var/cardinal = GLOB.cardinal[check_cardinal]
+				for (var/alert_index = 1 to length(ALERT_STATES))
+					if (dir_alerts[check_cardinal] & SHIFTL(1, (alert_index - 1)))
+						alert_overlays += icon(icon, "alert_[ALERT_STATES[alert_index]]", dir = cardinal)
+			if (length(alert_overlays))
+				AddOverlays(alert_overlays)
+				do_set_light = TRUE
 	else
 		icon_state = "open"
-
 	if(blocked)
 		weld_overlay = welded_file
-
 	if(do_set_light)
 		set_light(0.25, 0.1, 1, 2, COLOR_SUN)
-
-	overlays += panel_overlay
-	overlays += weld_overlay
-	overlays += lights_overlay
+	else
+		set_light(0)
+	AddOverlays(list(
+		panel_overlay,
+		weld_overlay,
+		lights_overlay
+	))

@@ -199,14 +199,12 @@ var/global/list/rad_collectors = list()
 		icon_state = "ca_on"
 	else
 		icon_state = "ca"
-
-	overlays.Cut()
-	underlays.Cut()
-
+	ClearOverlays()
+	ClearUnderlays()
 	if(P)
-		overlays += image(icon, "ptank")
-		underlays += image(icon, "ca_filling")
-	underlays += image(icon, "ca_inside")
+		AddOverlays(image(icon, "ptank"))
+		AddUnderlays(image(icon, "ca_filling"))
+	AddUnderlays(image(icon, "ca_inside"))
 	if(inoperable())
 		return
 	if(active)

@@ -16,7 +16,7 @@
 
 /obj/machinery/atmospherics/valve/shutoff/on_update_icon()
 	icon_state = "vclamp[icon_connect_type]"
-	overlays.Cut()
+	ClearOverlays()
 	if (!close_on_leaks)
 		overlays += image('icons/atmos/clamp.dmi', "override[icon_connect_type]")
 		return

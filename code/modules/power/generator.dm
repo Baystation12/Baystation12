@@ -62,7 +62,7 @@
 
 /obj/machinery/power/generator/on_update_icon()
 	icon_state = anchored ? "teg-assembled" : "teg-unassembled"
-	overlays.Cut()
+	ClearOverlays()
 	if (circ1)
 		circ1.temperature_overlay = null
 	if (circ2)

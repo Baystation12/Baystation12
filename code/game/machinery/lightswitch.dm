@@ -33,7 +33,7 @@
 		overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		overlay.layer = ABOVE_LIGHTING_LAYER
 
-	overlays.Cut()
+	ClearOverlays()
 	if(inoperable())
 		icon_state = "light-p"
 		set_light(0)

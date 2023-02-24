@@ -114,7 +114,7 @@
 
 		M.AddMovementHandler(/datum/movement_handler/mob/transformation)
 		M.icon = null
-		M.overlays.Cut()
+		M.ClearOverlays()
 		M.set_invisibility(101)
 
 		if(istype(M, /mob/living/silicon/robot))

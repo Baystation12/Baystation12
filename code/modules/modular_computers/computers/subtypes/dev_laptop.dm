@@ -38,7 +38,7 @@
 	if(anchored)
 		..()
 	else
-		overlays.Cut()
+		ClearOverlays()
 		icon_state = icon_state_closed
 
 /obj/item/modular_computer/laptop/preset

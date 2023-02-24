@@ -31,7 +31,7 @@
 #define SS_INIT_OPEN_SPACE       4
 #define SS_INIT_ATOMS            3
 #define SS_INIT_MACHINES         2
-#define SS_INIT_ICON_UPDATE      1
+#define SS_INIT_ICON_UPDATE       1
 #define SS_INIT_DEFAULT          0
 #define SS_INIT_AIR             -1
 #define SS_INIT_MISC_LATE       -2
@@ -42,6 +42,7 @@
 #define SS_INIT_LIGHTING        -6
 #define SS_INIT_ZCOPY           -7
 #define SS_INIT_HOLOMAP         -8
+#define SS_INIT_ICON_COMPOSITION -9
 #define SS_INIT_XENOARCH        -10
 #define SS_INIT_BAY_LEGACY      -12
 #define SS_INIT_TICKER          -20

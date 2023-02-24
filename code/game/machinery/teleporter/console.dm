@@ -28,7 +28,7 @@
 
 /obj/machinery/computer/teleporter/Initialize()
 	. = ..()
-	underlays.Cut()
+	ClearUnderlays()
 	underlays += image('icons/obj/stationobjs.dmi', icon_state = "telecomp-wires")
 	id = "[random_id(/obj/machinery/computer/teleporter, 1000, 9999)]"
 	update_refs()

@@ -522,12 +522,10 @@ SUBSYSTEM_DEF(zcopy)
 	if (plane_needs_fix)
 		MA.plane = depth == 0 ? DEFAULT_PLANE : FLOAT_PLANE
 		MA.layer = FLY_LAYER	// probably fine
-
-	if (fixed_overlays)
-		MA.overlays = fixed_overlays
-
 	if (fixed_underlays)
-		MA.underlays = fixed_underlays
+		MA.AddUnderlays(fixed_underlays)
+	if (fixed_overlays)
+		MA.AddOverlays(fixed_overlays)
 
 	fixup_cache[appearance] = MA.appearance
 

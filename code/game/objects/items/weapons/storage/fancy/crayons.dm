@@ -18,7 +18,6 @@
 
 
 /obj/item/storage/fancy/crayons/on_update_icon()
-	overlays.Cut()
-	overlays += image('icons/obj/crayons.dmi', "crayonbox")
+	SetOverlays("crayonbox")
 	for (var/obj/item/pen/crayon/crayon in contents)
-		overlays += image('icons/obj/crayons.dmi', crayon.colourName)
+		AddOverlays(crayon.colourName)

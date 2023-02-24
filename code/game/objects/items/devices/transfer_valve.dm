@@ -130,8 +130,8 @@
 			toggle = 1
 
 /obj/item/device/transfer_valve/on_update_icon()
-	overlays.Cut()
-	underlays.Cut()
+	ClearOverlays()
+	ClearUnderlays()
 
 	if(!tank_one && !tank_two && !attached_device)
 		icon_state = "valve_1"

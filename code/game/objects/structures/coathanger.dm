@@ -42,7 +42,7 @@
 		return 1
 
 /obj/structure/coatrack/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (istype(coat, /obj/item/clothing/suit/storage/toggle/labcoat))
 		overlays += image(icon, icon_state = "coat_lab")
 	if (istype(coat, /obj/item/clothing/suit/storage/toggle/labcoat/cmo))

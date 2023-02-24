@@ -128,7 +128,7 @@
 
 /obj/structure/railing/on_update_icon(update_neighbors = TRUE)
 	NeighborsCheck(update_neighbors)
-	overlays.Cut()
+	ClearOverlays()
 	if (!neighbor_status || !anchored)
 		icon_state = "railing0-[density]"
 		if (density)//walking over a railing which is above you is really weird, do not do this if density is 0

@@ -49,7 +49,7 @@
 
 
 /obj/structure/ironing_board/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (deployed)
 		if (clothing)
 			overlays += clothing.appearance

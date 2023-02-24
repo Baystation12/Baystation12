@@ -74,7 +74,7 @@
 		beeping--
 
 /obj/item/pinpointer/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(!active)
 		return
 	if(!target || !target.resolve())

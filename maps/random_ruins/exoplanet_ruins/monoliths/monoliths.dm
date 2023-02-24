@@ -30,7 +30,7 @@
 	update_icon()
 
 /obj/structure/monolith/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(active)
 		var/image/I = image(icon,"[icon_state]decor")
 		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR

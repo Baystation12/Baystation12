@@ -32,7 +32,7 @@
 
 /obj/structure/catwalk/on_update_icon()
 	update_connections()
-	overlays.Cut()
+	ClearOverlays()
 	icon_state = ""
 	var/image/I
 	if(!hatch_open)

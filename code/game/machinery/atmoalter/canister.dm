@@ -122,14 +122,14 @@
 
 /obj/machinery/portable_atmospherics/canister/on_update_icon()
 	if (destroyed)
-		overlays.Cut()
+		ClearOverlays()
 		icon_state = "[canister_color]-1"
 		return
 
 	if (icon_state != "[canister_color]")
 		icon_state = "[canister_color]"
 
-	overlays.Cut()
+	ClearOverlays()
 
 	if (holding)
 		overlays += "can-open"

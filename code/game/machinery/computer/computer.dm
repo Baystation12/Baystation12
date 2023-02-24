@@ -42,7 +42,7 @@
 	visible_message(SPAN_WARNING("\The [src] breaks!"))
 
 /obj/machinery/computer/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	icon = initial(icon)
 	icon_state = initial(icon_state)
 

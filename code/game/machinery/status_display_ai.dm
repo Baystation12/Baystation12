@@ -76,12 +76,12 @@ var/global/list/ai_status_emotions = list(
 
 /obj/machinery/ai_status_display/on_update_icon()
 	if(inoperable())
-		overlays.Cut()
+		ClearOverlays()
 		return
 
 	switch(mode)
 		if(0) //Blank
-			overlays.Cut()
+			ClearOverlays()
 		if(1) // AI emoticon
 			var/datum/ai_emotion/ai_emotion = ai_status_emotions[emotion]
 			set_picture(ai_emotion.overlay)
@@ -91,6 +91,7 @@ var/global/list/ai_status_emotions = list(
 /obj/machinery/ai_status_display/proc/set_picture(state)
 	picture_state = state
 	if(length(overlays))
-		overlays.Cut()
-	overlays += overlay_image('icons/obj/status_display.dmi', icon_state=picture_state, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+		ClearOverlays()
 	set_light(0.8, 0.1, 1, l_color = "#0093ff")
+	var/status_overlay = overlay_image('icons/obj/status_display.dmi', icon_state=picture_state, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+	AddOverlays(status_overlay)

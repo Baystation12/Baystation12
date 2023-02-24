@@ -24,7 +24,6 @@
 	update_icon()
 
 /obj/structure/rubble/on_update_icon()
-	overlays.Cut()
 	var/list/parts = list()
 	for(var/i = 1 to 7)
 		var/image/I = image(icon,"rubble[rand(1,15)]")
@@ -41,9 +40,9 @@
 		I.pixel_y = rand(-16,16)
 		I.SetTransform(rotation = rand(0,360))
 		parts += I
-	overlays = parts
 	if(lootleft)
-		overlays += image(icon,"twinkle[rand(1,3)]")
+		parts += image(icon,"twinkle[rand(1,3)]")
+	SetOverlays(parts)
 
 /obj/structure/rubble/attack_hand(mob/user)
 	if(!is_rummaging)

@@ -208,10 +208,10 @@
 
 
 /obj/item/paper_bundle/on_update_icon()
-	var/obj/item/paper/P = pages[1]
-	icon_state = P.icon_state
-	overlays = P.overlays
-	underlays.Cut()
+	var/obj/item/paper/top_paper = pages[1]
+	icon_state = top_paper.icon_state
+	CopyOverlays(top_paper, TRUE)
+	ClearUnderlays()
 	var/i = 0
 	var/photo
 	for(var/obj/O in src)
@@ -222,18 +222,17 @@
 			img.pixel_y -= min(1*i, 2)
 			pixel_x = min(0.5*i, 1)
 			pixel_y = min(  1*i, 2)
-			underlays += img
+			AddUnderlays(img)
 			i++
 		else if(istype(O, /obj/item/photo))
 			var/obj/item/photo/Ph = O
 			img = Ph.tiny
 			photo = 1
-			overlays += img
+			AddOverlays(img)
 	if(i>1)
 		desc =  "[i] papers clipped to each other."
 	else
 		desc = "A single sheet of paper."
 	if(photo)
 		desc += "\nThere is a photo attached to it."
-	overlays += image('icons/obj/bureaucracy.dmi', "clip")
-	return
+	AddOverlays("clip")

@@ -73,7 +73,7 @@
 
 
 /obj/item/storage/wallet/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (front_id)
 		var/tiny_state = "id-generic"
 		var/check_state = "id-[front_id.icon_state]"

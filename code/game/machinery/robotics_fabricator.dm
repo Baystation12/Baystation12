@@ -49,7 +49,7 @@
 	update_icon()
 
 /obj/machinery/robotics_fabricator/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
 		icon_state = "fab-o"
 	else

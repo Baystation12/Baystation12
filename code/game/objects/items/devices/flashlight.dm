@@ -346,7 +346,7 @@
 
 /obj/item/device/flashlight/flare/glowstick/on_update_icon()
 	item_state = "glowstick"
-	overlays.Cut()
+	ClearOverlays()
 	if(fuel <= 0)
 		icon_state = "glowstick-empty"
 		on = FALSE
@@ -443,7 +443,7 @@
 	flashlight_flags = FLASHLIGHT_CANNOT_BLIND
 
 /obj/item/device/flashlight/lamp/lava/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	var/image/I = image(icon = icon, icon_state = "lavalamp-[on ? "on" : "off"]")
 	I.color = light_color
 	overlays += I

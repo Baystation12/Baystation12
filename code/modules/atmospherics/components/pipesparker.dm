@@ -138,7 +138,7 @@
 
 /obj/machinery/atmospherics/pipe/cap/sparker/update_underlays()
 	if (..())
-		underlays.Cut()
+		ClearUnderlays()
 		var/turf/T = get_turf(src)
 		if (!istype(T))
 			return

@@ -1,5 +1,3 @@
-#define OVERLAY_CACHE_LEN 50
-
 /obj/item/device/t_scanner
 	name = "\improper T-ray scanner"
 	desc = "A terahertz-ray emitter and scanner, capable of penetrating conventional hull materials."
@@ -18,7 +16,8 @@
 	var/list/active_scanned = list() //assoc list of objects being scanned, mapped to their overlay
 	var/client/user_client //since making sure overlays are properly added and removed is pretty important, so we track the current user explicitly
 
-	var/static/list/overlay_cache = list() //cache recent overlays
+	var/const/MAX_SCANNER_CACHE_SIZE = 50
+	var/static/list/scanner_overlay_cache = list() //cache recent overlays
 
 /obj/item/device/t_scanner/Destroy()
 	. = ..()
@@ -85,8 +84,8 @@
 /obj/item/device/t_scanner/proc/get_overlay(atom/movable/scanned)
 	//Use a cache so we don't create a whole bunch of new images just because someone's walking back and forth in a room.
 	//Also means that images are reused if multiple people are using t-rays to look at the same objects.
-	if(scanned in overlay_cache)
-		. = overlay_cache[scanned]
+	if(scanned in scanner_overlay_cache)
+		. = scanner_overlay_cache[scanned]
 	else
 		var/image/I = image(loc = scanned, icon = scanned.icon, icon_state = scanned.icon_state)
 		I.plane = HUD_PLANE
@@ -117,9 +116,9 @@
 		. = I
 
 	// Add it to cache, cutting old entries if the list is too long
-	overlay_cache[scanned] = .
-	if(length(overlay_cache) > OVERLAY_CACHE_LEN)
-		overlay_cache.Cut(1, length(overlay_cache)-OVERLAY_CACHE_LEN-1)
+	scanner_overlay_cache[scanned] = .
+	if(length(scanner_overlay_cache) > MAX_SCANNER_CACHE_SIZE)
+		scanner_overlay_cache.Cut(1, length(scanner_overlay_cache)-MAX_SCANNER_CACHE_SIZE-1)
 
 /obj/item/device/t_scanner/proc/get_scanned_objects(scan_dist)
 	. = list()
@@ -167,5 +166,3 @@
 /obj/item/device/t_scanner/dropped(mob/user)
 	set_user_client(null)
 	..()
-
-#undef OVERLAY_CACHE_LEN

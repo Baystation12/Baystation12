@@ -20,7 +20,7 @@
 	update_icon()
 
 /obj/item/robot_parts/robot_suit/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	for(var/part in required_parts)
 		if(parts[part])
 			overlays += "[part]+o"

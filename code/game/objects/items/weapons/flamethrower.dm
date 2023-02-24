@@ -44,7 +44,7 @@
 
 
 /obj/item/flamethrower/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(igniter)
 		overlays += "+igniter[status]"
 	if(beaker)

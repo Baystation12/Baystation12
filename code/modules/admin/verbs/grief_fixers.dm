@@ -38,8 +38,8 @@
 
 	for(var/turf/simulated/T in world)
 		T.air = null
-		T.overlays.Remove(unsorted_overlays)
 		T.zone = null
+		T.CutOverlays(unsorted_overlays)
 		for(var/obj/effect/gas_overlay/effect in T.vis_contents)
 			T.vis_contents -= effect
 

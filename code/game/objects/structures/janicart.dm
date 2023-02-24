@@ -150,7 +150,7 @@
 
 
 /obj/structure/janitorialcart/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(mybag)
 		overlays += "cart_garbage"
 	if(mymop)

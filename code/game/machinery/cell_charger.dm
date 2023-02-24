@@ -15,11 +15,10 @@
 	if(charging && operable())
 		var/newlevel = 	round(charging.percent() * 4.0 / 99)
 		if(chargelevel != newlevel)
-			overlays.Cut()
-			overlays += "ccharger-o[newlevel]"
+			SetOverlays("ccharger-o[newlevel]")
 			chargelevel = newlevel
 	else
-		overlays.Cut()
+		ClearOverlays()
 
 /obj/machinery/cell_charger/examine(mob/user, distance)
 	. = ..()

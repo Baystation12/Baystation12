@@ -26,7 +26,7 @@
 		var/mob/M = src.loc
 		M.update_inv_belt()
 
-	overlays.Cut()
+	ClearOverlays()
 	if(overlay_flags & BELT_OVERLAY_ITEMS)
 		for(var/obj/item/I in contents)
 			overlays += image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]")
@@ -89,7 +89,7 @@
 		var/mob/M = src.loc
 		M.update_inv_belt()
 
-	overlays.Cut()
+	ClearOverlays()
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if(overlay_flags)
 		for(var/obj/item/I in contents)

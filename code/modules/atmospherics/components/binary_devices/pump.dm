@@ -77,7 +77,7 @@ Thus, the two variables affect pump operation are set in New():
 
 /obj/machinery/atmospherics/binary/pump/update_underlays()
 	if(..())
-		underlays.Cut()
+		ClearUnderlays()
 		var/turf/T = get_turf(src)
 		if(!istype(T))
 			return

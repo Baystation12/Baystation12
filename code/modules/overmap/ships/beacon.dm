@@ -138,7 +138,7 @@
 		deactivate()
 
 /obj/machinery/radio_beacon/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	icon_state = signal ? "active" : "inactive"
 	if(emergency_signal)
 		overlays += "distress"

@@ -125,9 +125,7 @@
 	return ..()
 
 /obj/machinery/reagent_temperature/on_update_icon()
-
 	var/list/adding_overlays
-
 	if(use_power >= POWER_USE_ACTIVE)
 		if(!on_icon)
 			on_icon = image(icon, "[icon_state]-on")
@@ -142,13 +140,11 @@
 			set_light(0)
 	else
 		set_light(0)
-
 	if(container)
 		if(!beaker_icon)
 			beaker_icon = image(icon, "[icon_state]-beaker")
 		LAZYADD(adding_overlays, beaker_icon)
-
-	overlays = adding_overlays
+	SetOverlays(adding_overlays)
 
 /obj/machinery/reagent_temperature/interact(mob/user)
 

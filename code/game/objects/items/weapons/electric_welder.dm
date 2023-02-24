@@ -77,7 +77,7 @@
 		T.hotspot_expose(700, 5)
 
 /obj/item/weldingtool/electric/on_update_icon()
-	underlays.Cut()
+	ClearUnderlays()
 	if(welding)
 		icon_state = "welder_arc1"
 		set_light(0.6, 0.5, 2.5, l_color = COLOR_LIGHT_CYAN)

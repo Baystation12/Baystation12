@@ -46,7 +46,7 @@
 
 
 /obj/machinery/tele_projector/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (computer?.active)
 		update_use_power(POWER_USE_ACTIVE)
 		var/image/I = image(icon, src, "[initial(icon_state)]_active_overlay")

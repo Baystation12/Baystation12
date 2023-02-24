@@ -126,7 +126,7 @@
 		update_optable(new_table_connection)
 
 /obj/machinery/vitals_monitor/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(!is_powered())
 		return
 	overlays += image(icon, icon_state = "screen")

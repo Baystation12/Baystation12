@@ -41,7 +41,7 @@
 
 
 /obj/machinery/bluespacedrive/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (state & STATE_BROKEN)
 		icon_state = "bsd_core_broken"
 	else

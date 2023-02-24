@@ -29,7 +29,7 @@
 		updateUsrDialog()
 
 /obj/machinery/organ_printer/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
 		overlays += "[icon_state]_panel_open"
 	if(printing)

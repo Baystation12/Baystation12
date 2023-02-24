@@ -705,7 +705,7 @@
 	return req_access
 
 /mob/living/silicon/robot/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(stat == CONSCIOUS)
 		var/eye_icon_state = "eyes-[module_sprites[icontype]]"
 		if(eye_icon_state in icon_states(icon))

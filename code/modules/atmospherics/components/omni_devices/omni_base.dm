@@ -47,20 +47,20 @@
 		if(new_port.mode > 0)
 			initialize_directions |= d
 		ports += new_port
-
 	build_icons()
 
+
 /obj/machinery/atmospherics/omni/on_update_icon()
-	if(!is_powered())
-		overlays = overlays_off
-	else if(error_check())
-		overlays = overlays_error
+	if (!is_powered())
+		SetOverlays(overlays_off)
+	else if (error_check())
+		SetOverlays(overlays_error)
+	else if (use_power)
+		SetOverlays(overlays_on)
 	else
-		overlays = use_power ? (overlays_on) : (overlays_off)
+		SetOverlays(overlays_off)
+	SetUnderlays(underlays_current)
 
-	underlays = underlays_current
-
-	return
 
 /obj/machinery/atmospherics/omni/proc/error_check()
 	return

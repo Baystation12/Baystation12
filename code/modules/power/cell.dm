@@ -50,7 +50,7 @@
 
 	if(new_overlay_state != overlay_state)
 		overlay_state = new_overlay_state
-		overlays.Cut()
+		ClearOverlays()
 		if(overlay_state)
 			overlays += image('icons/obj/power.dmi', overlay_state)
 

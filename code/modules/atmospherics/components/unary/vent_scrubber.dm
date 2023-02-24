@@ -66,7 +66,7 @@
 	if(!check_icon_cache())
 		return
 
-	overlays.Cut()
+	ClearOverlays()
 
 
 	var/turf/T = get_turf(src)
@@ -87,7 +87,7 @@
 
 /obj/machinery/atmospherics/unary/vent_scrubber/update_underlays()
 	if(..())
-		underlays.Cut()
+		ClearUnderlays()
 		var/turf/T = get_turf(src)
 		if(!istype(T))
 			return

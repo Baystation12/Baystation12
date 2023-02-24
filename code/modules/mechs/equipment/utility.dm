@@ -12,7 +12,7 @@
 
 
 /obj/structure/cargopile/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	for(var/obj/thing in contents)
 		var/image/I = new
 		I.appearance = thing.appearance

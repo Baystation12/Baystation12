@@ -332,7 +332,7 @@
 	return 0
 
 /obj/machinery/alarm/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	icon_state = "alarmp"
 	if(wiresexposed)
 		icon_state = "alarmx"
@@ -355,7 +355,8 @@
 			new_color = COLOR_SUN
 		if (2)
 			new_color = COLOR_RED_LIGHT
-	overlays  += overlay_image(icon, "alarm[icon_level]", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+	var/lit_overlay = overlay_image(icon, "alarm[icon_level]", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+	AddOverlays(lit_overlay)
 
 	pixel_x = 0
 	pixel_y = 0
@@ -933,7 +934,7 @@ FIRE ALARM
 	return overlays_cache[state]
 
 /obj/machinery/firealarm/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 
 	pixel_x = 0
 	pixel_y = 0

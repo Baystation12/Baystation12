@@ -75,7 +75,7 @@
 
 /obj/machinery/atmospherics/binary/circulator/on_update_icon()
 	icon_state = anchored ? "circ-assembled" : "circ-unassembled"
-	overlays.Cut()
+	ClearOverlays()
 	if (inoperable() || !anchored)
 		return 1
 	if (last_pressure_delta > 0 && recent_moles_transferred > 0)

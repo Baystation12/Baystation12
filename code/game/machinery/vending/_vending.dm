@@ -104,7 +104,7 @@
 
 
 /obj/machinery/vending/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (MACHINE_IS_BROKEN(src))
 		icon_state = "[initial(icon_state)]-broken"
 	else if (is_powered())

@@ -96,7 +96,7 @@
 	return 0
 
 /obj/machinery/power/smes/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(MACHINE_IS_BROKEN(src))	return
 
 	overlays += image(overlay_icon, "smes-op[outputting]")

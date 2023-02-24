@@ -193,12 +193,11 @@
 
 /mob/living/simple_animal/hostile/fleet/space/ranged/on_update_icon()
 	..()
-	if(stat != DEAD)
-		if(deactivated)
-			overlays += image(icon, "disabled")
-			return
-
-		overlays.Cut()
+	if (stat == DEAD)
+		return
+	ClearOverlays()
+	if (!deactivated)
+		AddOverlays("disabled")
 
 /mob/living/simple_animal/hostile/fleet/space/ranged/neutral
 	say_list_type = /datum/say_list/fleet/friendly
@@ -282,15 +281,14 @@
 
 /mob/living/simple_animal/hostile/fleet/space/ranged/heavy/on_update_icon()
 	..()
-	if(stat != DEAD)
-		if(deactivated)
-			overlays += image(icon, "disabled")
-			return
+	if (stat == DEAD)
+		return
+	ClearOverlays()
+	if (deactivated)
+		AddOverlays("disabled")
+	else if (attack_mode == ATTACK_MODE_LAS)
+		AddOverlays("laser")
 
-		overlays.Cut()
-		switch(attack_mode)
-			if(ATTACK_MODE_LAS)
-				overlays += image(icon, "laser")
 
 /mob/living/simple_animal/hostile/fleet/space/ranged/heavy/neutral
 	say_list_type = /datum/say_list/fleet/friendly

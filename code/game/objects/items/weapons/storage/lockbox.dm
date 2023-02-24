@@ -102,15 +102,14 @@
 
 /obj/item/storage/lockbox/vials/on_update_icon()
 	var/total_contents = count_by_type(contents, /obj/item/reagent_containers/glass/beaker/vial)
-	src.icon_state = "vialbox[Floor(total_contents/2)]"
-	src.overlays.Cut()
+	icon_state = "vialbox[Floor(total_contents/2)]"
+	ClearOverlays()
 	if (!broken)
-		overlays += image(icon, src, "led[locked]")
-		if(locked)
-			overlays += image(icon, src, "cover")
+		AddOverlays("led[locked]")
+		if (locked)
+			AddOverlays("cover")
 	else
-		overlays += image(icon, src, "ledb")
-	return
+		AddOverlays("ledb")
 
 /obj/item/storage/lockbox/vials/attackby(obj/item/item, mob/living/user)
 	. = ..()

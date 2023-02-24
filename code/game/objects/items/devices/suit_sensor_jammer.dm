@@ -64,7 +64,7 @@
 			to_chat(user, SPAN_WARNING("You're unable to insert the battery."))
 
 /obj/item/device/suit_sensor_jammer/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(bcell)
 		var/percent = bcell.percent()
 		switch(percent)

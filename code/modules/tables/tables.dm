@@ -331,7 +331,7 @@
 	if(!flipped)
 		mob_offset = initial(mob_offset)
 		icon_state = "blank"
-		overlays.Cut()
+		ClearOverlays()
 
 		var/image/I
 
@@ -362,7 +362,7 @@
 				overlays += I
 	else
 		mob_offset = 0
-		overlays.Cut()
+		ClearOverlays()
 		var/type = 0
 		var/tabledirs = 0
 		for(var/direction in list(turn(dir,90), turn(dir,-90)) )

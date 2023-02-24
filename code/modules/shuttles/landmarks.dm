@@ -223,7 +223,7 @@
 		set_light(0.7, 0.1, 7, 2, "#85d1ff")
 	else
 		icon_state = initial(icon_state)
-		overlays.Cut()
+		ClearOverlays()
 		set_light(0)
 
 

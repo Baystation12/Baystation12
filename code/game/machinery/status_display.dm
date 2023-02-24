@@ -228,7 +228,7 @@
 
 /obj/machinery/status_display/proc/remove_display()
 	if(length(overlays))
-		overlays.Cut()
+		ClearOverlays()
 	if(maptext)
 		maptext = ""
 	set_light(0)

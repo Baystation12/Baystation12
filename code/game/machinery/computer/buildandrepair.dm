@@ -8,7 +8,7 @@
 	expected_machine_type = "computer"
 
 /obj/machinery/constructable_frame/computerframe/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	switch(construct_state && construct_state.type)
 		if(/singleton/machine_construction/frame/awaiting_circuit)
 			icon_state = "wired"
