@@ -34,9 +34,8 @@
 	damage = 35
 	distance_falloff = 2
 	damage_falloff_list = list(
-		list(3, 0.90),
-		list(5, 0.80),
-		list(7, 0.60),
+		list(5, 0.87),
+		list(7, 0.67),
 	)
 
 /obj/item/projectile/beam/midlaser
@@ -44,9 +43,8 @@
 	armor_penetration = 10
 	distance_falloff = 1
 	damage_falloff_list = list(
-		list(4, 0.96),
-		list(6, 0.92),
-		list(8, 0.86),
+		list(6, 0.98),
+		list(8, 0.92),
 	)
 
 /obj/item/projectile/beam/heavylaser
