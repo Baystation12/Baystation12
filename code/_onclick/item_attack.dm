@@ -48,18 +48,64 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /obj/item/proc/resolve_attackby(atom/A, mob/user, click_params)
 	if (!A.can_use_item(src, user, click_params))
 		return FALSE
-	if(!(item_flags & ITEM_FLAG_NO_PRINT))
-		add_fingerprint(user)
+	A.pre_use_item(src, user, click_params)
+	var/use_call
 	if ((item_flags & ITEM_FLAG_TRY_ATTACK) && attack(A, user))
-		return TRUE
-	if (A == user)
+		use_call = "attack"
+		. = TRUE
+	if (!. && A == user)
+		use_call = "user"
 		. = user.use_user(src, click_params)
 	if (!. && user.a_intent == I_HURT)
+		use_call = "weapon"
 		. = A.use_weapon(src, user, click_params)
 	if (!.)
+		use_call = "tool"
 		. = A.use_tool(src, user, click_params)
 	if (!.)
-		return A.attackby(src, user, click_params)
+		use_call = "attackby"
+		. = A.attackby(src, user, click_params)
+	if (!.)
+		use_call = null
+	A.post_use_item(src, user, ., use_call, click_params)
+
+
+/**
+ * Handler for operations to occur before running the chain of use_* procs. Always called.
+ *
+ * By default, this does nothing.
+ *
+ * **Parameters**:
+ * - `tool` - The item being used.
+ * - `user` - The mob performing the interaction.
+ * - `click_params` - List of click parameters.
+ *
+ * Has no return value.
+ */
+/atom/proc/pre_use_item(obj/item/tool, mob/user, click_params)
+	return
+
+
+/**
+ * Handler for operations to occur after running the chain of use_* procs. Always called.
+ *
+ * By default, this adds fingerprints to the atom and tool.
+ *
+ * **Parameters**:
+ * - `tool` - The item being used.
+ * - `user` - The mob performing the interaction.
+ * - `interaction_handled` (boolean) - Whether or not the use call was handled.
+ * - `use_call` (string) - The use call proc that handled the interaction, or null.
+ * - `click_params` - List of click parameters.
+ *
+ * Has no return value.
+ */
+/atom/proc/post_use_item(obj/item/tool, mob/user, interaction_handled, use_call, click_params)
+	if (interaction_handled)
+		// Fingerprints
+		if (!HAS_FLAGS(tool.item_flags, ITEM_FLAG_NO_PRINT))
+			tool.add_fingerprint(user)
+			add_fingerprint(user, tool = tool)
 
 
 /**
