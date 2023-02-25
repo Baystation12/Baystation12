@@ -48,18 +48,53 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /obj/item/proc/resolve_attackby(atom/A, mob/user, click_params)
 	if (!A.can_use_item(src, user, click_params))
 		return FALSE
-	if(!(item_flags & ITEM_FLAG_NO_PRINT))
-		add_fingerprint(user)
+	A.pre_use_item(src, user, click_params)
 	if ((item_flags & ITEM_FLAG_TRY_ATTACK) && attack(A, user))
-		return TRUE
-	if (A == user)
+		. = TRUE
+	if (!. && A == user)
 		. = user.use_user(src, click_params)
 	if (!. && user.a_intent == I_HURT)
 		. = A.use_weapon(src, user, click_params)
 	if (!.)
 		. = A.use_tool(src, user, click_params)
 	if (!.)
-		return A.attackby(src, user, click_params)
+		. = A.attackby(src, user, click_params)
+	A.post_use_item(src, user, ., click_params)
+
+
+/**
+ * Handler for operations to occur before running the chain of use_* procs. Always called.
+ *
+ * By default, this does nothing.
+ *
+ * **Parameters**:
+ * - `tool` - The item being used.
+ * - `user` - The mob performing the interaction.
+ * - `click_params` - List of click parameters.
+ *
+ * Has no return value.
+ */
+/atom/proc/pre_use_item(obj/item/tool, mob/user, click_params)
+	return
+
+
+/**
+ * Handler for operations to occur after running the chain of use_* procs. Always called.
+ *
+ * By default, this adds fingerprints to the atom and tool.
+ *
+ * **Parameters**:
+ * - `tool` - The item being used.
+ * - `user` - The mob performing the interaction.
+ * - `interaction_handled` (boolean) - Whether or not the use call was handled.
+ * - `click_params` - List of click parameters.
+ *
+ * Has no return value.
+ */
+/atom/proc/post_use_item(obj/item/tool, mob/user, interaction_handled, click_params)
+	if (interaction_handled && !(tool.item_flags & ITEM_FLAG_NO_PRINT))
+		tool.add_fingerprint(user)
+		add_fingerprint(user, tool = tool)
 
 
 /**
