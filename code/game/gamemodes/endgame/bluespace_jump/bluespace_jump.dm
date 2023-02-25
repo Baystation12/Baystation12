@@ -139,6 +139,14 @@
 	dust()
 	return clone
 
+/mob/living/exosuit/blueswitch(obj/effect/bluegoast/ghost)
+	if (!length(pilots))
+		return
+	for (var/mob/pilot in pilots)
+		remove_pilot(pilot)
+		var/mob/clone = pilot.blueswitch(ghost)
+		add_pilot(clone)
+
 /mob/living/carbon/human/blueswitch(obj/effect/bluegoast/ghost)
 	var/mob/living/carbon/human/clone = new(get_turf(ghost), species.name)
 	clone.dna = dna.Clone()
