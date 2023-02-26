@@ -1,5 +1,0 @@
-author: Hubblenaut
-delete-after: true
-changes:
-  - rscadd: Introduces department colors for the manifest.
-  - tweak: The crew manifest for ghosts is now black.
