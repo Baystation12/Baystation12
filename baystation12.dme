@@ -3246,6 +3246,7 @@
 #include "proxima\code\game\gamemodes\objective.dm"
 #include "proxima\code\game\items\poraz.dm"
 #include "proxima\code\game\items\devices\remote_device.dm"
+#include "proxima\code\game\items\toys.dm"
 #include "proxima\code\game\items\weapons\gun\energy\k342.dm"
 #include "proxima\code\game\items\weapons\gun\projectiles\bosnia.dm"
 #include "proxima\code\game\items\weapons\melee\swords.dm"
