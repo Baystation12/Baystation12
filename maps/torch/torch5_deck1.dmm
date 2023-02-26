@@ -4926,7 +4926,7 @@
 	pixel_x = -21
 	},
 /obj/machinery/power/smes/buildable/preset/torch/substation{
-	RCon_tag = "Substation - First Deck"
+	RCon_tag = "Substation - 1st Deck"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/substation/firstdeck)

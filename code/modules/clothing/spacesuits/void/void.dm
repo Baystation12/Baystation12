@@ -22,7 +22,7 @@
 	//Species-specific stuff.
 	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC, SPECIES_SHELL)
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_helmet_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi',
 		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_head_skrell.dmi',
 		)
 	sprite_sheets_obj = list(
@@ -321,3 +321,26 @@ else if(##equipment_var) {\
 	if(tank && slot == slot_back)
 		ret.overlays += tank.get_mob_overlay(user_mob, slot_back_str)
 	return ret
+
+/obj/item/clothing/suit/space/void/proc/forceDropEquipment(equipment)
+	var/mob/living/carbon/human/H
+	if(helmet && equipment == helmet)
+		H = helmet.loc
+		if(istype(H))
+			if(H.head == helmet)
+				helmet.canremove = TRUE
+				helmet.dropInto(loc)
+				helmet = null
+	if(boots && equipment == boots)
+		H = boots.loc
+		if(istype(H))
+			if(H.shoes == boots)
+				boots.canremove = TRUE
+				boots.dropInto(loc)
+				boots = null
+	if(tank && equipment == tank)
+		tank.canremove = TRUE
+		tank.dropInto(loc)
+		tank = null
+	else
+		return

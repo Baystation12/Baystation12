@@ -65,7 +65,6 @@
 	floor_smooth = SMOOTH_NONE
 	wall_smooth = SMOOTH_ALL
 	space_smooth = SMOOTH_NONE
-	decal_layer = ABOVE_WIRE_LAYER
 
 /decl/flooring/dirt
 	name = "dirt"

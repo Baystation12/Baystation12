@@ -23,7 +23,7 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 /**
  *  Retrieve branch object by branch name
  */
-/datum/mil_branches/proc/get_branch(var/branch_name)
+/datum/mil_branches/proc/get_branch(branch_name)
 	if(ispath(branch_name, /datum/mil_branch))
 		var/datum/mil_branch/branch = branch_name
 		branch_name = initial(branch.name)
@@ -33,7 +33,7 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 /**
  *  Retrieve branch object by branch type
  */
-/datum/mil_branches/proc/get_branch_by_type(var/branch_type)
+/datum/mil_branches/proc/get_branch_by_type(branch_type)
 	for(var/name in branches)
 		if (istype(branches[name], branch_type))
 			return branches[name]
@@ -41,7 +41,7 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 /**
  *  Retrieve a rank object from given branch by name
  */
-/datum/mil_branches/proc/get_rank(var/branch_name, var/rank_name)
+/datum/mil_branches/proc/get_rank(branch_name, rank_name)
 	if(ispath(rank_name))
 		var/datum/mil_rank/rank = rank_name
 		rank_name = initial(rank.name)
@@ -53,7 +53,7 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 /**
  *  Return all spawn branches for the given input
  */
-/datum/mil_branches/proc/spawn_branches(var/datum/species/S)
+/datum/mil_branches/proc/spawn_branches(datum/species/S)
 	if(!S)
 		return spawn_branches_.Copy()
 	. = LAZYACCESS(spawn_branches_by_species_, S)
@@ -67,21 +67,21 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 /**
  *  Return all spawn ranks for the given input
  */
-/datum/mil_branches/proc/spawn_ranks(var/branch_name, var/datum/species/S)
+/datum/mil_branches/proc/spawn_ranks(branch_name, datum/species/S)
 	var/datum/mil_branch/branch = get_branch(branch_name)
 	return branch && branch.spawn_ranks(S)
 
 /**
  *  Return a true value if branch_name is a valid spawn branch key
  */
-/datum/mil_branches/proc/is_spawn_branch(var/branch_name, var/datum/species/S)
+/datum/mil_branches/proc/is_spawn_branch(branch_name, datum/species/S)
 	return (branch_name in spawn_branches(S))
 
 
 /**
  *  Return a true value if rank_name is a valid spawn rank in branch under branch_name
  */
-/datum/mil_branches/proc/is_spawn_rank(var/branch_name, var/rank_name, var/datum/species/S)
+/datum/mil_branches/proc/is_spawn_rank(branch_name, rank_name, datum/species/S)
 	var/datum/mil_branch/branch = get_branch(branch_name)
 	if(branch && (rank_name in branch.spawn_ranks(S)))
 		return TRUE
@@ -184,3 +184,14 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 //Returns short designation (yes shorter than name_short), like E1, O3 etc.
 /datum/mil_rank/proc/grade()
 	return sort_order
+
+/// Returns category of rank, like commissioned versus enlisted.
+/datum/mil_rank/proc/rank_category()
+	return null
+
+/// Categories of ranks
+/singleton/rank_category
+	var/name = "Unknown"
+
+	/// Accesses granted based on being in this category of ranks.
+	var/add_accesses = list()

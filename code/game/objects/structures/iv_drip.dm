@@ -1,6 +1,7 @@
 /obj/structure/iv_drip
 	name = "\improper IV drip"
 	icon = 'icons/obj/iv_drip.dmi'
+	icon_state = "unhooked"
 	anchored = FALSE
 	density = FALSE
 	var/mob/living/carbon/human/attached
@@ -27,7 +28,7 @@
 	if(attached)
 		icon_state = "hooked"
 	else
-		icon_state = ""
+		icon_state = "unhooked"
 
 	overlays.Cut()
 

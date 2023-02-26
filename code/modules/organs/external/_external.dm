@@ -1215,10 +1215,16 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	switch(body_part)
 		if(FOOT_LEFT, FOOT_RIGHT)
+			if(istype(owner.wear_suit, /obj/item/clothing/suit/space/void))
+				var/obj/item/clothing/suit/space/void/voidsuit = owner.wear_suit
+				voidsuit.forceDropEquipment(voidsuit.boots)
 			owner.drop_from_inventory(owner.shoes)
 		if(HAND_LEFT, HAND_RIGHT)
 			owner.drop_from_inventory(owner.gloves)
 		if(HEAD)
+			if(istype(owner.wear_suit, /obj/item/clothing/suit/space/void))
+				var/obj/item/clothing/suit/space/void/voidsuit = owner.wear_suit
+				voidsuit.forceDropEquipment(voidsuit.helmet)
 			owner.drop_from_inventory(owner.glasses)
 			if(istype(owner.wear_suit,/obj/item/clothing/suit/space/void))
 				var/obj/item/clothing/suit/space/void/S = owner.wear_suit

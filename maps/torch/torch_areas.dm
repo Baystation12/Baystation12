@@ -623,6 +623,7 @@
 	name = "Officer's Mess"
 	icon_state = "bar"
 	sound_env = MEDIUM_SOFTFLOOR
+	req_access = list(access_o_mess, access_solgov_crew)
 	lighting_tone = AREA_LIGHTING_WARM
 
 /area/command/pathfinder

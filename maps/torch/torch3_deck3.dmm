@@ -993,15 +993,15 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/galley)
 "ct" = (
-/obj/machinery/door/airlock/command{
-	autoset_access = 0;
-	name = "Officer's Mess";
-	req_access = newlist()
-	},
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/command{
+	autoset_access = 0;
+	name = "Officer's Mess";
+	req_access = list("ACCESS_TORCH_O_MESS", "ACCESS_TORCH_CREW")
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "cu" = (
@@ -1928,7 +1928,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/smes/buildable/preset/torch/substation{
-	RCon_tag = "Substation - Third Deck"
+	RCon_tag = "Substation - 3rd Deck"
 	},
 /obj/item/device/radio/intercom{
 	pixel_y = 23

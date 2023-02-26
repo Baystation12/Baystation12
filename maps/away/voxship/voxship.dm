@@ -159,4 +159,23 @@
 	_output_on = TRUE
 	_fully_charged = TRUE
 
+
+/decl/closet_appearance/crate/vox_uranium
+	color = COLOR_OLIVE
+	extra_decals = list(
+		"crate_radiation_left" = COLOR_YELLOW,
+		"crate_radiation_right" = COLOR_YELLOW,
+		"lid_stripes" = COLOR_VIOLET
+	)
+
+
+/obj/structure/closet/crate/vox_uranium
+	name = "fissibles crate"
+	closet_appearance = /decl/closet_appearance/crate/vox_uranium
+
+
+/obj/structure/closet/crate/uranium/WillContain()
+	return list(/obj/item/stack/material/uranium/fifty = 4)
+
+
 #undef WEBHOOK_SUBMAP_LOADED_VOX

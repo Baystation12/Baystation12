@@ -39,8 +39,7 @@
 			H.updatehealth()
 	else if(ismouse(target))
 		var/mob/living/simple_animal/passive/mouse/M = target
-		visible_message("<span class='danger'>SPLAT!</span>")
-		M.splat()
+		M.death()
 	playsound(target.loc, 'sound/effects/snap.ogg', 50, 1)
 	reset_plane_and_layer()
 	armed = 0

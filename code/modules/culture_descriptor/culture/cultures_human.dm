@@ -222,7 +222,7 @@
 		if(1) return NAME
 		if(2) return "[LTR][LTR]-[FIRST]"
 		if(3) return "[FIRST]-[NUM][NUM][NUM]"
-		if(4) return "[LTR][LTR]-[NUM][NUM][NUM]"
+		if(4) return "[NUM][NUM][NUM]-[FIRST]"
 	. = 1 // Never executed, works around http://www.byond.com/forum/?post=2072419
 	#undef LTR
 	#undef NUM

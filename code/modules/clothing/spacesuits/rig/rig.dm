@@ -127,17 +127,6 @@
 			<li>Click on the HCM with an empty hand to remove it from your back.</li>
 		</ol>
 
-		<h4>TOOL INTERACTIONS</h4>
-		<ul>
-			<li>You can toggle the HCM's access panel lock by using an ID card with the required access on it.</li>
-			<li>You can open or close the HCM's maintenance panel by using a crowbar on it. The panel can only be opened if the HCM's access panel is unlocked.</li>
-			<li>You can remove modules or the oxygen tank by using a wrench on the HCM. You can only do this if the maintenance panel is open.</li>
-			<li>You can insert modules, power cells, oxygen tanks by using them on the HCM while its maintenance panel is open.</li>
-			<li>You can repair the HCM's internals by using nanopaste on it while the maintenance panel is open.</li>
-			<li>You can open or close the HCM's wire panel by using a screwdriver on it. This operates as a standard wire control panel, interactable with a multitool, wirecutters, signallers, etc. once open.</li>
-			<li>You can repair damage to the HCM's chest piece by using a stack of the relevant material or a welder on the HCM or the chest piece while the chest piece is deployed.</li>
-		</ul>
-
 		<h4>HARDSUIT INTERFACE</h4>
 		<p>The HCM's Hardsuit Interface can be accessed by using the <code>Open Hardsuit Interface</code> option under the <code>Hardsuit</code> tab in the top right, or using the <code>open-hardsuit-interface`</code>verb in the chat bar.</p>
 		<ul>
@@ -147,6 +136,18 @@
 			<li><b>Suit Pieces</b> displays the name and status of the major components of the hardsuit, and allows you to toggle the helmet on or off.</li>
 			<li>Additional HCM modules and their controls are displayed in the HCM's interface as well.</li>
 		</ul>
+	"}
+
+/obj/item/rig/get_interactions_info()
+	. = ..()
+	.["Crowbar"] += "<p>Toggles the maintenance panel open and closed if it is unlocked.</p>"
+	.["ID Card"] += "<p>Toggle the maintenance panel's access lock with an ID that has the required access. A locked panel cannot be crowbarred open.</p>"
+	.["Nanopaste"] += "<p>While the maintenance panel is open, repairs the HCM's internal components.</p>"
+	.["Screwdriver"] += "<p>Toggles the wiring panel open and closed.</p>"
+	.["Wrench"] += "<p>While the maintenance panel is open, allows you to remove specific components from the HCM, such as oxygen tanks, power cells, or HCM modules.</p>"
+	.["Miscellaneous"] += {"
+		<p>While the maintenance panel is open, oxygen tanks, power cells, and HCM modules can be inserted.</p>
+		<p>WYou can repair damage to the chest piece by using a stack of the relevant material or a welder on the HCM or the chest piece while the chest piece is deployed.</p>
 	"}
 
 /obj/item/rig/get_cell()

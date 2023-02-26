@@ -11,6 +11,10 @@
 	slot = ACCESSORY_SLOT_ARMOR_M
 	w_class = ITEM_SIZE_TINY
 
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_modular_armor_unathi.dmi'
+		)
+
 
 /obj/item/clothing/accessory/armor_tag/nt
 	name = "\improper CORPORATE SECURITY tag"

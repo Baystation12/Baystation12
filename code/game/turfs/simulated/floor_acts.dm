@@ -40,6 +40,61 @@
 /turf/simulated/floor/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	var/dir_to = get_dir(src, adj_turf)
 
-	for(var/obj/structure/window/W in src)
-		if(W.dir == dir_to || W.is_fulltile()) //Same direction or diagonal (full tile)
-			W.fire_act(adj_air, adj_temp, adj_volume)
+	// Check for and affect things in a certain order to accomodate atoms that should cover and protect other atoms, such as fire doors
+	// First, to avoid multiple type checked loops through source, build lists of the specific types of atoms
+	var/list/fire_doors = list()
+	var/list/other_doors = list()
+	var/list/blocking_windows = list()
+
+	var/list/blocking_atoms = list() // These atoms protect everything else on the turf from the fire
+	var/list/other_atoms = list() // These atoms do not protect anything else
+
+	for (var/atom/movable/A as anything in src)
+		var/canpass
+		switch (A.atmos_canpass)
+			if (CANPASS_ALWAYS)
+				canpass = TRUE
+			if (CANPASS_DENSITY)
+				canpass = !density
+			if (CANPASS_PROC)
+				canpass = !A.c_airblock(adj_turf)
+			if (CANPASS_NEVER)
+				canpass = FALSE
+		if (canpass)
+			continue
+
+		if (istype(A, /obj/machinery/door))
+			var/obj/machinery/door/door = A
+			if (istype(door, /obj/machinery/door/blast) || istype(door, /obj/machinery/door/firedoor))
+				fire_doors += door
+			else
+				other_doors += door
+			continue
+
+		if (istype(A, /obj/structure/window))
+			var/obj/structure/window/window = A
+			if (window.dir == dir_to || window.is_fulltile()) //Same direction or diagonal (full tile)
+				blocking_windows += window
+			else
+				other_atoms += window
+			continue
+
+		other_atoms += A
+
+	// These checks prevent null entries from showing up due to merging empty lists
+	if (length(fire_doors))
+		blocking_atoms |= fire_doors
+	if (length(other_doors))
+		blocking_atoms |= other_doors
+	if (length(blocking_windows))
+		blocking_atoms |= blocking_windows
+
+	// Blocking - Hit the first one then stop.
+	if (length(blocking_atoms))
+		var/atom/A = blocking_atoms[1]
+		A.fire_act(adj_air, adj_temp, adj_volume)
+		return
+
+	// Non-blocking - Hit everything
+	for (var/atom/A as anything in other_atoms)
+		A.fire_act(adj_turf, adj_air, adj_temp, adj_volume)

@@ -19,10 +19,10 @@ var/global/list/holder_mob_icon_cache = list()
 		)
 	pixel_y = 8
 
-	var/last_holder
+	var/mob/living/last_holder
 
-/obj/item/holder/New()
-	..()
+/obj/item/holder/Initialize()
+	. = ..()
 	START_PROCESSING(SSobj, src)
 
 /obj/item/holder/proc/destroy_all()

@@ -193,7 +193,7 @@ Class Procs:
 	return PROCESS_KILL // Only process if you need to.
 
 /obj/machinery/emp_act(severity)
-	if(use_power && stat == EMPTY_BITFIELD)
+	if(use_power && operable())
 		use_power_oneoff(7500/severity)
 
 		var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(loc)
@@ -203,7 +203,17 @@ Class Procs:
 		pulse2.anchored = TRUE
 		pulse2.set_dir(pick(GLOB.cardinal))
 
-		addtimer(CALLBACK(GLOBAL_PROC, /proc/qdel, pulse2), 1 SECOND)
+		QDEL_IN(pulse2, 1 SECOND)
+
+		if (prob(100 / severity) && istype(wires))
+			if (prob(20))
+				wires.RandomCut()
+			else
+				wires.RandomPulse()
+
+	..()
+
+/obj/machinery/ex_act(severity)
 	..()
 
 /obj/machinery/ex_act(severity)
@@ -555,6 +565,13 @@ Class Procs:
 	var/wire_mechanics = wires?.get_mechanics_info()
 	if (wire_mechanics)
 		. += "<hr><h5>Wiring</h5>[wire_mechanics]"
+
+/obj/machinery/get_interactions_info()
+	. = ..()
+	var/wire_interactions = wires?.get_interactions_info()
+	if (wire_interactions)
+		for (var/key in wire_interactions)
+			.["[key]"] += "[wire_interactions[key]]"
 
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(depth)

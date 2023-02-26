@@ -9,6 +9,7 @@
 	item_state = "hypo"
 	icon_state = "hypo"
 	origin_tech = list(TECH_MATERIAL = 4, TECH_BIO = 5)
+	matter = list(MATERIAL_STEEL = 8000, MATERIAL_GLASS = 8000, MATERIAL_SILVER = 2000)
 	amount_per_transfer_from_this = 5
 	unacidable = TRUE
 	volume = 30

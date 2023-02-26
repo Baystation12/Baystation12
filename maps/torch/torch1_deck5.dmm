@@ -7796,7 +7796,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/power/smes/buildable/preset/torch/substation{
-	RCon_tag = "Substation - Fifth Deck"
+	RCon_tag = "Substation - 5th Deck"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/substation/fifthdeck)

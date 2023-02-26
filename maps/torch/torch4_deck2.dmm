@@ -3454,7 +3454,7 @@
 /area/space)
 "gF" = (
 /obj/machinery/power/smes/buildable/preset/torch/substation{
-	RCon_tag = "Substation - Second Deck"
+	RCon_tag = "Substation - 2nd Deck"
 	},
 /obj/structure/cable/green{
 	d2 = 4;

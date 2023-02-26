@@ -111,6 +111,12 @@
 	)//They don't need to protect against the environment very much.
 	siemens_coefficient = 0.5 //These guys work with electronics. DAIS's labcoats shouldn't conduct very well.
 
+
+/obj/item/clothing/suit/storage/toggle/labcoat/science/bishop
+	name = "Bishop labcoat"
+	desc = "A labcoat themed after the prosthetics provided by Bishop Cybernetics."
+	icon_state = "labcoat_bish"
+
 /obj/item/clothing/suit/storage/toggle/labcoat/rd
 	name = "research director's labcoat"
 	desc = "A full-body labcoat covered in green and black designs, denoting it as an Expeditionary Corps Organisation management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."

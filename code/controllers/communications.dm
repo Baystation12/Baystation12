@@ -109,6 +109,8 @@ var/global/const/COMM_FREQ = 1353
 var/global/const/ERT_FREQ	= 1345
 var/global/const/AI_FREQ	= 1343
 var/global/const/ENT_FREQ	= 1461 //entertainment frequency. This is not a diona exclusive frequency.
+var/global/const/ICCGN_FREQ = 1344
+var/global/const/SFV_FREQ = 1346
 
 //antagonist channels
 var/global/const/DTH_FREQ	= 1341

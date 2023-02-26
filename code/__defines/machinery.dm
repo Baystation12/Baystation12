@@ -32,6 +32,8 @@
 #define MACHINE_BROKEN_GENERIC  FLAG(0)  // Standard legacy brokenness, used on a case-by-case basis
 #define MACHINE_BROKEN_NO_PARTS FLAG(1)  // Missing required parts
 
+#define MACHINE_IS_BROKEN(MACHINE) (!!MACHINE.reason_broken)
+
 // Used by firelocks
 #define FIREDOOR_OPEN 1
 #define FIREDOOR_CLOSED 2

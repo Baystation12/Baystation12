@@ -514,3 +514,73 @@
 	H.bodytemperature -= temp_adj
 	active_power_cost = round((temp_adj/max_cooling)*charge_consumption)
 	return active_power_cost
+
+/obj/item/rig_module/kinetic_module
+	name = "gravikinetic module"
+	desc = "A point-gravity manipulator module for the hardsuit."
+	icon_state = "kinetic"
+	selectable = TRUE
+	use_power_cost = 20 KILOWATTS
+
+	interface_name = "gravikinetic module"
+	interface_desc = "A directed point-gravity manipulator module for lifting and moving things out of reach."
+	origin_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 6,  TECH_ENGINEERING = 6)
+
+	var/atom/movable/locked
+	var/datum/beam = null
+	var/max_dist = 4
+	var/obj/effect/effect/warp/small/warpeffect = null
+
+/obj/item/rig_module/kinetic_module/proc/beamdestroyed()
+	if(beam)
+		GLOB.destroyed_event.unregister(beam, src, .proc/beamdestroyed)
+		beam = null
+	if(locked)
+		if(holder.wearer)
+			to_chat(holder.wearer, SPAN_NOTICE("Lock on \the [locked] disengaged."))
+		endanimation()
+		locked = null
+	//It's possible beam self destroyed, match active
+	if(active)
+		deactivate()
+
+/obj/item/rig_module/kinetic_module/proc/endanimation()
+	if(locked)
+		animate(locked,pixel_y= initial(locked.pixel_y), time = 0)
+
+/obj/item/rig_module/kinetic_module/deactivate()
+	. = ..()
+	if(beam)
+		QDEL_NULL(beam)
+
+/obj/item/rig_module/kinetic_module/engage(atom/target, mob/living/user, inrange, params)
+	. = ..()
+	if(.)
+		if(!locked && (get_dist(holder.wearer, target) <= max_dist))
+			var/atom/movable/AM = target
+			if(!istype(AM) || AM.anchored || !AM.simulated)
+				to_chat(user, SPAN_NOTICE("Unable to lock on [target]."))
+				return
+			locked = AM
+			beam = holder.wearer.Beam(BeamTarget = target, icon_state = "r_beam", maxdistance = max_dist, beam_type = /obj/effect/ebeam/warp)
+			GLOB.destroyed_event.register(beam, src, .proc/beamdestroyed)
+
+			animate(target,pixel_y= initial(target.pixel_y) - 2,time=1 SECOND, easing = SINE_EASING, flags = ANIMATION_PARALLEL, loop = -1)
+			animate(pixel_y= initial(target.pixel_y) + 2,time=1 SECOND)
+
+			active = TRUE
+
+			to_chat(user, SPAN_NOTICE("Locked on [AM]."))
+			return
+		else if(target != locked)
+			if(locked in view(holder.wearer))
+				admin_attack_log(holder.wearer, holder.loc, "used [src] to throw their target at [target].")
+				endanimation() //End animation without waiting for delete, so throw won't be affected
+				locked.throw_at(target, 14, 1.5, holder.wearer)
+				locked = null
+				deactivate()
+
+				holder.cell.use(use_power_cost * CELLRATE)
+
+			else
+				deactivate()

@@ -29,19 +29,20 @@ var/global/list/image/splatter_cache=list()
 	var/blood_size = BLOOD_SIZE_MEDIUM // A relative size; larger-sized blood will not override smaller-sized blood, except maybe at mapload.
 
 /obj/effect/decal/cleanable/blood/reveal_blood()
-	if(!fluorescent)
-		fluorescent = 1
+	if(!fluorescent || invisibility == 100)
+		set_invisibility(0)
+		fluorescent = ATOM_FLOURESCENCE_INACTIVE
 		basecolor = COLOR_LUMINOL
 		update_icon()
 
 /obj/effect/decal/cleanable/blood/clean_blood()
-	fluorescent = 0
+	fluorescent = ATOM_FLOURESCENCE_NONE
 	if(invisibility != 100)
 		set_invisibility(100)
 		amount = 0
 		STOP_PROCESSING(SSobj, src)
 		remove_extension(src, /datum/extension/scent)
-	..(ignore=1)
+		return TRUE
 
 /obj/effect/decal/cleanable/blood/hide()
 	return
@@ -57,7 +58,7 @@ var/global/list/image/splatter_cache=list()
 	start_drying()
 
 // Returns true if overriden and needs deletion. If the argument is false, we will merge into any existing blood.
-/obj/effect/decal/cleanable/blood/proc/merge_with_blood(var/override = TRUE)
+/obj/effect/decal/cleanable/blood/proc/merge_with_blood(override = TRUE)
 	. = FALSE
 	if(blood_size == BLOOD_SIZE_NO_MERGE)
 		return
@@ -151,7 +152,7 @@ var/global/list/image/splatter_cache=list()
 			return
 		var/taken = rand(1,amount)
 		amount -= taken
-		to_chat(user, "<span class='notice'>You get some of \the [src] on your hands.</span>")
+		to_chat(user, SPAN_NOTICE("You get some of \the [src] on your hands."))
 		if (!user.blood_DNA)
 			user.blood_DNA = list()
 		user.blood_DNA |= blood_DNA.Copy()
@@ -208,7 +209,7 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/writing/examine(mob/user)
 	. = ..()
-	to_chat(user, "It reads: <font color='[basecolor]'>\"[message]\"</font>")
+	to_chat(user, "It reads: [SPAN_COLOR(basecolor, "\"[message]\"")]")
 
 /obj/effect/decal/cleanable/blood/gibs
 	name = "gibs"
@@ -254,7 +255,7 @@ var/global/list/image/splatter_cache=list()
 	random_icon_states = list("gibmid1", "gibmid2", "gibmid3")
 
 
-/obj/effect/decal/cleanable/blood/gibs/proc/streak(var/list/directions)
+/obj/effect/decal/cleanable/blood/gibs/proc/streak(list/directions)
 	var/direction = pick(directions)
 	for (var/i = 0, i < pick(1, 200; 2, 150; 3, 50; 4), i++)
 		sleep(3)

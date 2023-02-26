@@ -189,6 +189,11 @@
 * Custom Setup
 */
 /datum/gear_tweak/custom_setup
+	/*
+	* The fully qualified path of a proc on the created item.
+	* Provides the ability to carry out complex post-creation customization of a loadout object.
+	* Expects the signature /obj/item/.../proc/some_name(mob/living.../user)
+	*/
 	var/custom_setup_proc
 
 /datum/gear_tweak/custom_setup/New(custom_setup_proc)

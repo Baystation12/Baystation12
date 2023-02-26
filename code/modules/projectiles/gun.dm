@@ -114,6 +114,11 @@
 	var/has_safety = TRUE
 	var/safety_icon 	   //overlay to apply to gun based on safety state, if any
 
+	/// What skill governs safe handling of this gun. Basic skill level and higher will also show the safety overlay to the player.
+	var/gun_skill = SKILL_WEAPONS
+	/// What skill level is needed in the gun's skill to completely negate the chance of an accident.
+	var/safety_skill = SKILL_EXPERT
+
 /obj/item/gun/Initialize()
 	. = ..()
 
@@ -154,7 +159,7 @@
 			else
 				item_state_slots[slot_l_hand_str] = initial(item_state)
 				item_state_slots[slot_r_hand_str] = initial(item_state)
-		if(M.skill_check(SKILL_WEAPONS,SKILL_BASIC))
+		if(M.skill_check(gun_skill,SKILL_BASIC))
 			overlays += image('icons/obj/guns/gui.dmi',"safety[safety()]")
 	if(safety_icon)
 		overlays += image(icon,"[safety_icon][safety()]")
@@ -727,7 +732,7 @@
 /obj/item/gun/proc/can_autofire()
 	return (can_autofire && world.time >= next_fire_time)
 
-/obj/item/gun/proc/check_accidents(mob/living/user, message = "[user] fumbles with the [src] and it goes off!",skill_path = SKILL_WEAPONS, fail_chance = 20, no_more_fail = SKILL_EXPERT, factor = 2)
+/obj/item/gun/proc/check_accidents(mob/living/user, message = "[user] fumbles with \the [src] and it goes off!",skill_path = gun_skill, fail_chance = 20, no_more_fail = safety_skill, factor = 2)
 	if(istype(user))
 		if(!safety() && user.skill_fail_prob(skill_path, fail_chance, no_more_fail, factor) && special_check(user))
 			user.visible_message(SPAN_WARNING(message))

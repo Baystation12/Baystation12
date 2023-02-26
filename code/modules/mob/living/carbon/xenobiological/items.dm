@@ -16,10 +16,10 @@
 /obj/item/slime_extract/attackby(obj/item/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/slimesteroid2))
 		if(enhanced == 1)
-			to_chat(user, "<span class='warning'> This extract has already been enhanced!</span>")
+			to_chat(user, SPAN_WARNING(" This extract has already been enhanced!"))
 			return ..()
 		if(Uses == 0)
-			to_chat(user, "<span class='warning'> You can't enhance a used extract!</span>")
+			to_chat(user, SPAN_WARNING(" You can't enhance a used extract!"))
 			return ..()
 		to_chat(user, "You apply the enhancer. It now has triple the amount of uses.")
 		Uses = 3
@@ -130,20 +130,20 @@
 	name = "docility potion"
 	desc = "A potent chemical mix that will nullify a slime's powers, causing it to become docile and tame."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle19"
+	icon_state = "Pinkpotion"
 
 /obj/item/slimepotion/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
 	if(!istype(M, /mob/living/carbon/slime))//If target is not a slime.
-		to_chat(user, "<span class='warning'> The potion only works on baby slimes!</span>")
+		to_chat(user, SPAN_WARNING(" The potion only works on baby slimes!"))
 		return ..()
 	if(M.is_adult) //Can't tame adults
-		to_chat(user, "<span class='warning'> Only baby slimes can be tamed!</span>")
+		to_chat(user, SPAN_WARNING(" Only baby slimes can be tamed!"))
 		return..()
 	if(M.stat)
-		to_chat(user, "<span class='warning'> The slime is dead!</span>")
+		to_chat(user, SPAN_WARNING(" The slime is dead!"))
 		return..()
 	if(M.mind)
-		to_chat(user, "<span class='warning'> The slime resists!</span>")
+		to_chat(user, SPAN_WARNING(" The slime resists!"))
 		return ..()
 	var/mob/living/simple_animal/slime/pet = new /mob/living/simple_animal/slime(M.loc)
 	pet.icon_state = "[M.colour] baby slime"
@@ -164,17 +164,17 @@
 	name = "advanced docility potion"
 	desc = "A potent chemical mix that will nullify a slime's powers, causing it to become docile and tame. This one is meant for adult slimes."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle19"
+	icon_state = "LPinkpotion"
 
 /obj/item/slimepotion2/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
 	if(!istype(M, /mob/living/carbon/slime))
-		to_chat(user, "<span class='warning'> The potion only works on slimes!</span>")
+		to_chat(user, SPAN_WARNING(" The potion only works on slimes!"))
 		return ..()
 	if(M.stat)
-		to_chat(user, "<span class='warning'> The slime is dead!</span>")
+		to_chat(user, SPAN_WARNING(" The slime is dead!"))
 		return..()
 	if(M.mind)
-		to_chat(user, "<span class='warning'> The slime resists!</span>")
+		to_chat(user, SPAN_WARNING(" The slime resists!"))
 		return ..()
 	var/mob/living/simple_animal/adultslime/pet = new /mob/living/simple_animal/adultslime(M.loc)
 	pet.icon_state = "[M.colour] adult slime"
@@ -196,20 +196,20 @@
 	name = "slime steroid"
 	desc = "A potent chemical mix that will cause a slime to generate more extract."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle16"
+	icon_state = "Greenpotion"
 
 /obj/item/slimesteroid/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
 	if(!istype(M, /mob/living/carbon/slime))//If target is not a slime.
-		to_chat(user, "<span class='warning'> The steroid only works on baby slimes!</span>")
+		to_chat(user, SPAN_WARNING(" The steroid only works on baby slimes!"))
 		return ..()
 	if(M.is_adult) //Can't tame adults
-		to_chat(user, "<span class='warning'> Only baby slimes can use the steroid!</span>")
+		to_chat(user, SPAN_WARNING(" Only baby slimes can use the steroid!"))
 		return..()
 	if(M.stat)
-		to_chat(user, "<span class='warning'> The slime is dead!</span>")
+		to_chat(user, SPAN_WARNING(" The slime is dead!"))
 		return..()
 	if(M.cores == 3)
-		to_chat(user, "<span class='warning'> The slime already has the maximum amount of extract!</span>")
+		to_chat(user, SPAN_WARNING(" The slime already has the maximum amount of extract!"))
 		return..()
 
 	to_chat(user, "You feed the slime the steroid. It now has triple the amount of extract.")
@@ -220,16 +220,16 @@
 	name = "extract enhancer"
 	desc = "A potent chemical mix that will give a slime extract three uses."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle17"
+	icon_state = "Ceruleanpotion"
 
 /obj/item/slimesteroid2/afterattack(obj/target, mob/user , flag)
 	if(istype(target, /obj/item/slime_extract))
 		var/obj/item/slime_extract/extract = target
 		if(extract.enhanced == 1)
-			to_chat(user, "<span class='warning'> This extract has already been enhanced!</span>")
+			to_chat(user, SPAN_WARNING(" This extract has already been enhanced!"))
 			return ..()
 		if(extract.Uses == 0)
-			to_chat(user, "<span class='warning'> You can't enhance a used extract!</span>")
+			to_chat(user, SPAN_WARNING(" You can't enhance a used extract!"))
 			return ..()
 		to_chat(user, "You apply the enhancer. It now has triple the amount of uses.")
 		extract.Uses = 3
@@ -241,7 +241,7 @@
 	name= "revival potion"
 	desc= "A potent chemical mix that will revitalize a recently dead slime"
 	icon= 'icons/obj/chemical.dmi'
-	icon_state= "bottle15"
+	icon_state= "Goldpotion"
 
 /obj/item/slimepotion3/attack(mob/living/carbon/slime/M, mob/user)
 	if(!istype(M)) //If target is not a slime.

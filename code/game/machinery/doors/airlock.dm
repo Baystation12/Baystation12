@@ -162,11 +162,10 @@
 /obj/machinery/door/airlock/glass
 	name = "Glass Airlock"
 	icon_state = "preview_glass"
-	hitsound = 'sound/effects/Glasshit.ogg'
-	maxhealth = 300
+	damage_hitsound = 'sound/effects/Glasshit.ogg'
 	explosion_resistance = 5
 	opacity = 0
-	glass = 1
+	glass = TRUE
 
 /obj/machinery/door/airlock/glass/command
 	door_color = COLOR_COMMAND_BLUE
@@ -267,10 +266,9 @@
 	opacity = 0
 
 /obj/machinery/door/airlock/external/glass
-	maxhealth = 300
 	explosion_resistance = 5
 	opacity = 0
-	glass = 1
+	glass = TRUE
 
 /obj/machinery/door/airlock/external/glass/bolted
 	locked = 1
@@ -335,7 +333,7 @@
 	icon = 'icons/obj/doors/secure/door.dmi'
 	fill_file = 'icons/obj/doors/secure/fill_steel.dmi'
 	explosion_resistance = 20
-	secured_wires = 1
+	secured_wires = TRUE
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity
 	paintable = 0
 
@@ -695,31 +693,31 @@ About the new airlock wires panel:
 		switch(state)
 			if(AIRLOCK_CLOSED)
 				if(lights && locked)
-					lights_overlay = bolts_file
+					lights_overlay = overlay_image(bolts_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 					set_light(0.25, 0.1, 1, 2, COLOR_RED_LIGHT)
 
 			if(AIRLOCK_DENY)
 				if(lights)
-					lights_overlay = deny_file
+					lights_overlay = overlay_image(deny_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 					set_light(0.25, 0.1, 1, 2, COLOR_RED_LIGHT)
 
 			if(AIRLOCK_EMAG)
-				sparks_overlay = emag_file
+				sparks_overlay = overlay_image(emag_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 
 			if(AIRLOCK_CLOSING)
 				if(lights)
-					lights_overlay = lights_file
+					lights_overlay = overlay_image(lights_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 					set_light(0.25, 0.1, 1, 2, COLOR_LIME)
 
 			if(AIRLOCK_OPENING)
 				if(lights)
-					lights_overlay = lights_file
+					lights_overlay = overlay_image(lights_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 					set_light(0.25, 0.1, 1, 2, COLOR_LIME)
 
-		if(stat & BROKEN)
-			damage_overlay = sparks_broken_file
-		else if(health < maxhealth * 3/4)
-			damage_overlay = sparks_damaged_file
+		if(MACHINE_IS_BROKEN(src))
+			damage_overlay = overlay_image(sparks_broken_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+		else if (get_damage_percentage() >= 25)
+			damage_overlay = overlay_image(sparks_damaged_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 
 	if(welded)
 		weld_overlay = welded_file
@@ -1401,16 +1399,6 @@ About the new airlock wires panel:
 		electronics_type = /obj/item/airlock_electronics/secure
 	electronics = ..()
 	return electronics
-
-/obj/machinery/door/airlock/emp_act(var/severity)
-	if(prob(20/severity))
-		spawn(0)
-			open()
-	if(prob(40/severity))
-		var/duration = SecondsToTicks(30 / severity)
-		if(electrified_until > -1 && (duration + world.time) > electrified_until)
-			electrify(duration)
-	..()
 
 /obj/machinery/door/airlock/power_change() //putting this is obj/machinery/door itself makes non-airlock doors turn invisible for some reason
 	. = ..()

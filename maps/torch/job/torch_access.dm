@@ -144,6 +144,12 @@ var/global/const/access_pilot = "ACCESS_TORCH_PILOT" //95
 	desc = "Research Checkpoint"
 	region = ACCESS_REGION_RESEARCH
 
+var/global/const/access_o_mess = "ACCESS_TORCH_O_MESS"
+/datum/access/o_mess
+	id = access_o_mess
+	desc = "Officer's Mess"
+	region = ACCESS_REGION_SERVICE
+
 /datum/access/psychiatrist
 	desc = "Mental Health"
 

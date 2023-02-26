@@ -222,7 +222,6 @@
 /obj/item/device/radio/uplink/New(var/loc, var/owner, var/amount)
 	..()
 	hidden_uplink = new(src, owner, amount)
-	icon_state = "radio"
 
 /obj/item/device/radio/uplink/attack_self(mob/user as mob)
 	if(hidden_uplink)

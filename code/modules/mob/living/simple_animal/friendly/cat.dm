@@ -9,9 +9,9 @@
 	speak_emote = list("мурлычет", "мяукает")
 	turns_per_move = 5
 	see_in_dark = 6
-	response_help  = "pets"
-	response_disarm = "gently pushes aside"
-	response_harm   = "kicks"
+	response_help  = "гладит"
+	response_disarm = "аккуратно толкает в сторону"
+	response_harm   = "пинает"
 	minbodytemp = 223		//Below -50 Degrees Celsius
 	maxbodytemp = 323	//Above 50 Degrees Celsius
 	holder_type = /obj/item/holder/cat
@@ -37,8 +37,8 @@
 		if(!resting && !buckled)
 			for(var/mob/living/simple_animal/passive/mouse/M in loc)
 				if(!M.stat)
-					M.splat()
-					visible_emote(pick("bites \the [M]!","toys with \the [M].","chomps on \the [M]!"))
+					M.death()
+					visible_emote(pick("кусает [M]!","играет с [M].","откусывает [M]!"))
 					movement_target = null
 					set_AI_busy(FALSE)
 					break
@@ -47,7 +47,7 @@
 
 	for(var/mob/living/simple_animal/passive/mouse/snack in oview(src,5))
 		if(snack.stat < DEAD && prob(15))
-			audible_emote(pick("hisses and spits!","mrowls fiercely!","eyes [snack] hungrily."))
+			audible_emote(pick("шипит и плюется!","мурчит в ярости!","поглядывает на [snack] с голодом."))
 		break
 
 
@@ -70,7 +70,7 @@
 					visible += O
 			if(visible.len)
 				var/atom/A = pick(visible)
-				visible_emote("suddenly stops and stares at something unseen[istype(A) ? " near [A]":""].")
+				visible_emote("внезапно останавливается и пялится на что-то незримое [istype(A) ? " рядом с [A]":""].")
 
 /mob/living/simple_animal/passive/cat/proc/handle_movement_target()
 	//if our target is neither inside a turf or inside a human(???), stop
@@ -123,7 +123,7 @@
 			movement_target = null
 			set_AI_busy(FALSE)
 			if (prob(10))
-				say("Meow!")
+				say("Мррр!")
 
 	if (!friend || movement_target != friend)
 		..()
@@ -137,18 +137,18 @@
 	if (get_dist(src, friend) <= 1)
 		if (friend.stat >= DEAD || friend.is_asystole())
 			if (prob((friend.stat < DEAD)? 50 : 15))
-				var/verb = pick("meows", "mews", "mrowls")
-				audible_emote(pick("[verb] in distress.", "[verb] anxiously."))
+				var/verb = pick("мурчит", "кричит", "мяукает")
+				audible_emote(pick("[verb] в отчаяние.", "[verb] в тревоге."))
 		else
 			if (prob(5))
-				visible_emote(pick("nuzzles [friend].",
-								   "brushes against [friend].",
-								   "rubs against [friend].",
-								   "purrs."))
+				visible_emote(pick("обнюхивает [friend].",
+								   "трется об [friend].",
+								   "чешется об [friend].",
+								   "мурчит."))
 	else if (friend.health <= 50)
 		if (prob(10))
-			var/verb = pick("meows", "mews", "mrowls")
-			audible_emote("[verb] anxiously.")
+			var/verb = pick("мяучит", "мурчит", "мяукает")
+			audible_emote("тревожно [verb].")
 
 /mob/living/simple_animal/passive/cat/fluff/verb/become_friends()
 	set name = "Become Friends"
@@ -165,12 +165,12 @@
 
 	if(.)
 		set_dir(get_dir(src, friend))
-		visible_emote(pick("nuzzles [friend].",
-						   "brushes against [friend].",
-						   "rubs against [friend].",
-						   "purrs."))
+		visible_emote(pick("обнюхивает [friend].",
+						   "трется об [friend].",
+						   "чешется об [friend].",
+						   "мурчит."))
 	else
-		to_chat(usr, "<span class='notice'>[src] ignores you.</span>")
+		to_chat(usr, "<span class='notice'>[src] не обращает на вас никакого внимания.</span>")
 	return
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
@@ -223,6 +223,6 @@
 	speak_chance = 1
 
 /datum/say_list/cat
-	speak = list("Meow!","Esp!","Purr!","HSSSSS")
-	emote_hear = list("meows","mews")
-	emote_see = list("shakes their head", "shivers")
+	speak = list("Мьяу!","Мяу!","Мрррррх!","Шшшш...")
+	emote_hear = list("мяучит","мурчит")
+	emote_see = list("трясет головой", "трется", "вздрагивает")

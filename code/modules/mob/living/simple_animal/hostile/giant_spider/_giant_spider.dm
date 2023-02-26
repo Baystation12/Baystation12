@@ -88,6 +88,7 @@
 	I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	eye_layer = I
 	overlays += I
+	z_flags |= ZMM_MANGLE_PLANES
 
 
 /mob/living/simple_animal/hostile/giant_spider/apply_melee_effects(atom/A)

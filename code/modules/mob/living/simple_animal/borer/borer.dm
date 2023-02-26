@@ -28,7 +28,11 @@
 	var/static/list/chemical_types = list(
 		"bicaridine" = /datum/reagent/bicaridine,
 		"hyperzine" =  /datum/reagent/hyperzine,
-		"tramadol" =   /datum/reagent/tramadol
+		"tramadol" =   /datum/reagent/tramadol,
+		"dermaline" =  /datum/reagent/dermaline,
+		"peridaxon" =  /datum/reagent/peridaxon,
+		"inaprovaline" =  /datum/reagent/inaprovaline,
+		"dylovene" =  /datum/reagent/dylovene
 	)
 
 	var/generation = 1

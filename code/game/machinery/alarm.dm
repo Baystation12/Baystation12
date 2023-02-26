@@ -332,6 +332,8 @@
 	return 0
 
 /obj/machinery/alarm/on_update_icon()
+	overlays.Cut()
+	icon_state = "alarmp"
 	if(wiresexposed)
 		icon_state = "alarmx"
 		set_light(0)
@@ -348,14 +350,12 @@
 	var/new_color = null
 	switch(icon_level)
 		if (0)
-			icon_state = "alarm0"
 			new_color = COLOR_LIME
 		if (1)
-			icon_state = "alarm2" //yes, alarm2 is yellow alarm
 			new_color = COLOR_SUN
 		if (2)
-			icon_state = "alarm1"
 			new_color = COLOR_RED_LIGHT
+	overlays  += overlay_image(icon, "alarm[icon_level]", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 
 	pixel_x = 0
 	pixel_y = 0

@@ -187,9 +187,34 @@
 			found += A.search_contents_for(path,filter_path)
 	return found
 
-// A type overriding /examine() should either return the result of ..() or return TRUE if not calling ..()
-// Calls to ..() should generally not supply any arguments and instead rely on BYOND's automatic argument passing
-// There is no need to check the return value of ..(), this is only done by the calling /examinate() proc to validate the call chain
+/**
+ * Recursively searches containers for a given path, and returns the first match.
+ */
+/atom/proc/get_container(container_type)
+	var/atom/A = src
+	while (!istype(A, /area))
+		if (istype(A.loc, container_type))
+			return A.loc
+		A = A.loc
+
+/**
+ * Called when a user examines the atom. This proc and its overrides handle displaying the text that appears in chat
+ * during examines.
+ *
+ * Any overrides must either call parent, or return `TRUE`. There is no need to check the return value of `..()`, this
+ * is only used by the calling `examinate()` proc to validate the call chain.
+ *
+ * For `infix` and `suffix`, generally, these are inserted at the beginning of the examine text, as:
+ * `That's \a [name][infix]. [suffix]`.
+ *
+ * **Parameters**:
+ * - `user` - The mob performing the examine.
+ * - `distance` - The distance in tiles from `user` to `src`.
+ * - `infix` String - String that is appended immediately after the atom's name.
+ * - `suffix` String - Additional string appended after the atom's name and infix.
+ *
+ * Returns boolean.
+ */
 /atom/proc/examine(mob/user, distance, infix = "", suffix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
 	var/f_name = "\a [src][infix]."

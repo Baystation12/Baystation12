@@ -77,7 +77,7 @@
 
 	changing_turf = FALSE
 
-	remove_cleanables()
+	remove_cleanables(FALSE)
 	fluid_update()
 	REMOVE_ACTIVE_FLUID_SOURCE(src)
 
@@ -291,9 +291,9 @@ var/global/const/enterloopsanity = 100
 		to_chat(user, "<span class='warning'>\The [source] is too dry to wash that.</span>")
 	source.reagents.trans_to_turf(src, 1, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
 
-/turf/proc/remove_cleanables()
+/turf/proc/remove_cleanables(skip_blood = TRUE)
 	for(var/obj/effect/O in src)
-		if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable))
+		if(istype(O,/obj/effect/rune) || (istype(O,/obj/effect/decal/cleanable) && (!skip_blood || !istype(O, /obj/effect/decal/cleanable/blood))))
 			qdel(O)
 
 /turf/proc/update_blood_overlays()

@@ -952,3 +952,12 @@
 	req_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 2)
 	id = "rig_llaucher"
 	sort_string = "WCLAG"
+
+/datum/design/item/mechfab/rig/kinetic_module
+	category = "Hardsuits"
+	name = "Gravikinetic Module"
+	build_path = /obj/item/rig_module/kinetic_module
+	materials = list(MATERIAL_STEEL = 4000, MATERIAL_GLASS = 4500, MATERIAL_PLASTIC = 3000)
+	req_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 6,  TECH_ENGINEERING = 6)
+	id = "rig_kinetic"
+	sort_string = "WCLAH"

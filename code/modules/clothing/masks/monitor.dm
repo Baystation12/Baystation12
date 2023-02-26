@@ -13,6 +13,8 @@
 	item_state = null
 	item_flags = null
 
+	z_flags = ZMM_MANGLE_PLANES
+
 	var/monitor_state_index = "blank"
 	var/static/list/monitor_states = list(
 		"blank" =    "ipc_blank",

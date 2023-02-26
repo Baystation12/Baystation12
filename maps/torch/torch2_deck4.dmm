@@ -478,6 +478,7 @@
 /area/hallway/primary/fourthdeck/aft)
 "bK" = (
 /obj/effect/shuttle_landmark/icgnv_hound/dock,
+/obj/effect/shuttle_landmark/sfv_arbiter/dock,
 /turf/space,
 /area/space)
 "bM" = (
@@ -5674,7 +5675,7 @@
 /area/maintenance/substation/fourthdeck)
 "ts" = (
 /obj/machinery/power/smes/buildable/preset/torch/substation{
-	RCon_tag = "Substation - Fourth Deck"
+	RCon_tag = "Substation - 4th Deck"
 	},
 /obj/structure/cable/green,
 /obj/structure/cable/green{

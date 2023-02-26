@@ -91,7 +91,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	if (!renderers)
 		renderers = list()
 	for (var/atom/movable/renderer/renderer as anything in subtypesof(/atom/movable/renderer))
-		if(istype(renderer, /atom/movable/renderer/shared))
+		if(ispath(renderer, /atom/movable/renderer/shared))
 			continue
 		renderer = new renderer (null, src)
 		renderers[renderer] = renderer.plane // (renderer = plane) format for visual debugging
@@ -134,7 +134,6 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	plane = BLACKNESS_PLANE
 	appearance_flags = PLANE_MASTER | NO_CLIENT_COLOR
 	blend_mode = BLEND_MULTIPLY
-	color = list(null, null, null, "#0000", "#000f")
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 /atom/movable/renderer/space
@@ -324,4 +323,3 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 	icon_state = "singularity_s11"
 	pixel_x = -176
 	pixel_y = -176
-	no_z_overlay = TRUE

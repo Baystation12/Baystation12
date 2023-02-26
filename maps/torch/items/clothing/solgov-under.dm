@@ -3,6 +3,9 @@
 	desc = "You shouldn't be seeing this."
 	icon = 'maps/torch/icons/obj/obj_under_solgov.dmi'
 	item_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/onmob_under_solgov.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_under_solgov_unathi.dmi'
+		)
 	siemens_coefficient = 0.8
 	gender_icons = 1
 
@@ -19,9 +22,6 @@
 	desc = "A baggy shirt bearing the seal of the SCG Expeditionary Corps and some dorky looking blue shorts."
 	icon_state = "expeditionpt"
 	worn_state = "expeditionpt"
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
-		)
 
 /obj/item/clothing/under/solgov/pt/fleet
 	name = "fleet pt uniform"
@@ -44,9 +44,6 @@
 	icon_state = "blackutility"
 	item_state = "bl_suit"
 	worn_state = "blackutility"
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
-		)
 	armor = list(
 		melee = ARMOR_MELEE_MINOR,
 		energy = ARMOR_ENERGY_MINOR,
@@ -58,9 +55,6 @@
 	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has silver trim."
 	icon_state = "blackutility_crew"
 	worn_state = "blackutility_crew"
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
-		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/renew
 	name = "field expeditionary uniform"
@@ -536,9 +530,6 @@
 	desc = "The dress uniform of the SCG Expeditionary Corps in silver trim."
 	icon_state = "greydress"
 	worn_state = "greydress"
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
-		)
 
 /obj/item/clothing/under/solgov/dress/expeditionary/engineering
 

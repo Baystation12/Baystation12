@@ -12,6 +12,7 @@
 	w_class = ITEM_SIZE_TINY
 	volume = 120
 	possible_transfer_amounts = "0.2;1;2"
+	matter = list(MATERIAL_PLASTIC = 4000)
 	amount_per_transfer_from_this = REM
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
@@ -36,7 +37,6 @@
 		var/image/filling = image('icons/obj/bloodpack.dmi', "[round(percent,25)]")
 		filling.color = reagents.get_color()
 		overlays += filling
-	overlays += image('icons/obj/bloodpack.dmi', "top")
 	if(attached)
 		overlays += image('icons/obj/bloodpack.dmi', "dongle")
 

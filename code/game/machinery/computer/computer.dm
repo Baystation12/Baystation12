@@ -86,6 +86,22 @@
 	icon = initial(icon)
 	icon_state = initial(icon_state)
 
+	// Connecting multiple computers in a row
+	if(initial(icon_state) == "computer")
+		var/append_string = ""
+		var/left = turn(dir, 90)
+		var/right = turn(dir, -90)
+		var/turf/L = get_step(src, left)
+		var/turf/R = get_step(src, right)
+		var/obj/machinery/computer/LC = locate() in L
+		var/obj/machinery/computer/RC = locate() in R
+		if(LC && LC.dir == dir && initial(LC.icon_state) == "computer")
+			append_string += "_L"
+		if(RC && RC.dir == dir && initial(RC.icon_state) == "computer")
+			append_string += "_R"
+		icon_state = "computer[append_string]"
+
+
 	if(reason_broken & MACHINE_BROKEN_NO_PARTS)
 		set_light(0)
 		icon = 'icons/obj/computer.dmi'
@@ -114,7 +130,7 @@
 	overlays += get_keyboard_overlay()
 
 /obj/machinery/computer/proc/get_screen_overlay()
-	return image(icon,icon_screen, overlay_layer)
+	return overlay_image(icon,icon_screen, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 
 /obj/machinery/computer/proc/get_keyboard_overlay()
 	if(icon_keyboard)

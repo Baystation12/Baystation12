@@ -160,8 +160,15 @@
 	if(isWirecutter(W))
 		if(!shock(user, 100))
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			new /obj/item/stack/material/rods(get_turf(src), is_broken() ? 1 : 2, material.name)
-			qdel(src)
+			dismantle()
+		return
+
+	if(istype(W, /obj/item/gun/energy/plasmacutter)) // Plasma cutter shouldn't need to touch the grille to cut it, so no shock check.
+		var/obj/item/gun/energy/plasmacutter/cutter = W
+		if(!cutter.slice(user))
+			return
+		playsound(loc, 'sound/items/Welder.ogg', 80, 1)
+		dismantle()
 		return
 
 	if((isScrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
@@ -194,6 +201,10 @@
 
 	if (!(W.obj_flags & OBJ_FLAG_CONDUCTIBLE) || !shock(user, 70))
 		..()
+
+/obj/structure/grille/proc/dismantle()
+	new /obj/item/stack/material/rods(get_turf(src), is_broken() ? 1 : 2, material.name)
+	qdel(src)
 
 /obj/structure/grille/on_death(new_death_state)
 	visible_message(SPAN_WARNING("\The [src] falls to pieces!"))

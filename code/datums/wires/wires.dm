@@ -57,6 +57,13 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 /datum/wires/proc/get_mechanics_info()
 	return
 
+/datum/wires/proc/get_interactions_info()
+	RETURN_TYPE(/list)
+	. = list()
+	.["Multitool"] = "<p>While the wire panel is accessible, allows pulsing wires by clicking the Pulse button in the panel UI.</p>"
+	.["Signaller"] = "<p>While the wire panel is accessible, can be attached to a wire by clicking the Attach Signaller button in the panel UI. An attached signaller will pulse the wire whenever it receives a signal.</p>"
+	.["Wirecutters"] = "<p>While the wire panel is accessible, allows cutting and mending wires by clicking the Cut and Mend buttons in the panel UI.</p>"
+
 /datum/wires/proc/GenerateWires()
 	var/list/colours_to_pick = wireColours.Copy() // Get a copy, not a reference.
 	var/list/indexes_to_pick = list()

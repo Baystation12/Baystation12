@@ -19,6 +19,8 @@
 	var/brand
 	var/gas_consumption = 0.04
 
+	z_flags = ZMM_MANGLE_PLANES
+
 /obj/item/clothing/mask/smokable/New()
 	..()
 	atom_flags |= ATOM_FLAG_NO_REACT // so it doesn't react until you light it

@@ -17,6 +17,75 @@
 		if(2) return "[input[1]][and_text][input[2]]"
 		else  return "[jointext(input, comma_text, 1, -1)][final_comma_text][and_text][input[input.len]]"
 
+/**
+ * Converts a list to an HTML formatted list, i.e.:
+ *
+ * ```dm
+ * list(
+ *     "Value1",
+ *     "Value2"
+ * )
+ * ```
+ *
+ * Becomes:
+ *
+ * ```html
+ * <ul>
+ *     <li>Value1</li>
+ *     <li>Value2</li>
+ * </ul>
+ * ```
+ *
+ * **Parameters**:
+ * - `input` - The list to convert to an HTML formatted list. Values must be convertable to string. List keys from associative lists are not used.
+ * - `numbered_list` (Boolean, default `FALSE`) - If set, the list will use `<ol>` instead of `<ul>` tags, generating a numbered list instead of bullets.
+ *
+ * Returns string, or null if `input` is empty.
+ */
+/proc/html_list(list/input, numbered_list = FALSE)
+	if (!length(input))
+		return
+	var/html_tag = numbered_list ? "ol" : "ul"
+	. = "<[html_tag]>"
+	for (var/key in input)
+		. += "<li>[input[key]]</li>"
+	. += "</[html_tag]>"
+
+/**
+ * Converts an associative list to an HTML formatted definition list, i.e.:
+ *
+ * ```dm
+ * list(
+ *     "Key1" = "Value1",
+ *     "Key2" = "Value2"
+ * )
+ * ```
+ *
+ * Becomes:
+ *
+ * ```html
+ * <dl>
+ *     <dt>Key1</dt>
+ *     <dd>Value1</dd>
+ *     <dt>Key2</dt>
+ *     <dd>Value2</dd>
+ *     ...
+ * </dl>
+ * ```
+ *
+ * **Parameters**:
+ * - `input` - The list to convert to an HTML formatted list. Both the key and value must be convertable to string.
+ *
+ * Returns string, or null if `input` is empty.
+ */
+/proc/html_list_dl(list/input)
+	if (!length(input))
+		return
+	. = "<dl>"
+	for (var/key in input)
+		. += "<dt>[key]</dt><dd>[input[key]]</dd>"
+	. += "</dl>"
+
 //Checks for specific types in a list
 /proc/is_type_in_list(var/atom/A, var/list/L)
 	for(var/type in L)

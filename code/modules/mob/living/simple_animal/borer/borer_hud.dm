@@ -28,7 +28,7 @@
 /obj/screen/borer/toggle_host_control
 	name = "Seize Control"
 	icon_state = "seize_control"
-	screen_loc = "WEST-3,NORTH-1"
+	screen_loc = "WEST, NORTH"
 
 /obj/screen/borer/toggle_host_control/Click(location, control, params)
 	. = ..()
@@ -85,7 +85,7 @@
 /obj/screen/borer/inject_chemicals
 	name = "Inject Chemicals"
 	icon_state = "inject_chemicals"
-	screen_loc = "WEST-2,NORTH-1"
+	screen_loc = "WEST+1, NORTH"
 
 /obj/screen/borer/inject_chemicals/Click(location, control, params)
 	. = ..()
@@ -112,7 +112,7 @@
 /obj/screen/borer/leave_host
 	name = "Leave Host"
 	icon_state = "leave_host"
-	screen_loc = "WEST-1,NORTH-1"
+	screen_loc = "WEST+2, NORTH"
 
 /obj/screen/borer/leave_host/Click(location, control, params)
 	. = ..()

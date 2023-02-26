@@ -13,6 +13,7 @@
 	throwforce = 6
 	w_class = ITEM_SIZE_LARGE
 	origin_tech = list(TECH_BIO = 4, TECH_POWER = 2)
+	matter = list(MATERIAL_STEEL = 5000, MATERIAL_PLASTIC = 2000, MATERIAL_GLASS = 1500, MATERIAL_ALUMINIUM = 1000)
 	action_button_name = "Remove/Replace Paddles"
 
 	var/obj/item/shockpaddles/linked/paddles

@@ -122,7 +122,7 @@
 	name = "circular saw"
 	desc = "A small and nasty-looking hand saw used to cut through bone, or in an emergency, pizza."
 	icon = 'icons/obj/surgery.dmi'
-	icon_state = "saw3"
+	icon_state = "saw"
 	hitsound = 'sound/weapons/circsawhit.ogg'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 15.0
@@ -135,28 +135,36 @@
 	attack_verb = list("attacked", "slashed", "sawed", "cut")
 	sharp = TRUE
 	edge = TRUE
-
-//misc, formerly from code/defines/weapons.dm
+/*
+ * Bone Gel
+ */
 /obj/item/bonegel
 	name = "bone gel"
-	desc = "Sophisticated chemical gel used to mend fractures and broken bones before setting."
+	desc = "A pack of sophisticated chemical gel used to mend fractures and broken bones before setting."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bone-gel"
 	force = 0
 	w_class = ITEM_SIZE_SMALL
 	throwforce = 1.0
 
+/*
+ * Vascular Recoupler
+ */
 /obj/item/FixOVein
-	name = "FixOVein"
-	desc = "Derived from a Vey-Med design, this is a very precise surgical tool used to mend cut tendons and severed arteries."
+	name = "Vascular Recoupler"
+	desc = "Derived from a Vey-Med design, this miniature 3D printer is used to quickly synthetize and thread new organic tissue during surgical procedures."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "fixovein"
 	force = 0
 	throwforce = 1.0
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 3)
+	matter = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 2500, MATERIAL_ALUMINIUM = 1000)
 	w_class = ITEM_SIZE_SMALL
 	var/usage_amount = 10
 
+/*
+ * Bone Setter
+ */
 /obj/item/bonesetter
 	name = "bone setter"
 	desc = "A large, heavy clamp for setting dislocated or fractured bones back in place."
@@ -168,3 +176,5 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "hit", "bludgeoned")
+	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
+	matter = list(MATERIAL_STEEL = 10000,MATERIAL_GLASS = 10000)

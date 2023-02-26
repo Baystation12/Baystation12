@@ -123,14 +123,11 @@
 		/datum/mil_rank/fleet/e2,
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/army/e2,
 		/datum/mil_rank/army/e3,
-		/datum/mil_rank/army/e4_alt
-	)
-	min_skill = list(
-		SKILL_BOTANY = SKILL_BASIC,
-		SKILL_CHEMISTRY = SKILL_BASIC,
-		SKILL_COOKING = SKILL_ADEPT
+		/datum/mil_rank/army/e4_alt,
+		/datum/mil_rank/army/e5
 	)
 	min_skill = list(
 		SKILL_BOTANY = SKILL_BASIC,
@@ -142,7 +139,8 @@
 		access_hydroponics,
 		access_kitchen,
 		access_radio_serv,
-		access_solgov_crew
+		access_solgov_crew,
+		access_o_mess
 	)
 
 /datum/job/chef/get_description_blurb()

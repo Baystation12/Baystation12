@@ -200,6 +200,10 @@
 /obj/item/stack/material/uranium/ten
 	amount = 10
 
+
+/obj/item/stack/material/uranium/fifty
+	amount = 50
+
 /obj/item/stack/material/phoron
 	name = "solid phoron"
 	icon_state = "sheet-phoron"
