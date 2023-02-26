@@ -1,0 +1,4 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - tweak: Removes fall-off from sniper beam. Decreases damage to 35.
