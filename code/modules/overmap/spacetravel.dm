@@ -6,7 +6,7 @@ var/global/list/cached_space = list()
 /obj/effect/overmap/visitable/sector/temporary
 	name = "Deep Space"
 	invisibility = 101
-	known = FALSE
+	sector_flags = OVERMAP_SECTOR_IN_SPACE
 
 /obj/effect/overmap/visitable/sector/temporary/Initialize(mapload, nx, ny, nz)
 	. = ..()
@@ -106,7 +106,7 @@ var/global/list/cached_space = list()
 	var/turf/map = locate(M.x,M.y,GLOB.using_map.overmap_z)
 	var/obj/effect/overmap/visitable/TM
 	for(var/obj/effect/overmap/visitable/O in map)
-		if(O != M && O.in_space && prob(50))
+		if(O != M && (O.sector_flags & OVERMAP_SECTOR_IN_SPACE) && prob(50))
 			TM = O
 			break
 	if(!TM)

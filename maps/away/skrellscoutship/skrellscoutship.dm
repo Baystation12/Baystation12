@@ -22,7 +22,7 @@
 /obj/effect/overmap/visitable/sector/skrellscoutspace
 	name = "Empty Sector"
 	desc = "Slight traces of a cloaking device are present. Unable to determine exact location."
-	in_space = TRUE
+	sector_flags = OVERMAP_SECTOR_IN_SPACE
 	icon_state = "event"
 	hide_from_reports = TRUE
 

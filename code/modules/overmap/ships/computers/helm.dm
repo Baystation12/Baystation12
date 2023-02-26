@@ -26,7 +26,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 /obj/machinery/computer/ship/helm/proc/get_known_sectors()
 	var/area/overmap/map = locate() in world
 	for(var/obj/effect/overmap/visitable/sector/S in map)
-		if (S.known)
+		if ((S.sector_flags & OVERMAP_SECTOR_KNOWN))
 			add_known_sector(S)
 
 /obj/machinery/computer/ship/helm/proc/add_known_sector(obj/effect/overmap/visitable/sector/S, notify = FALSE)
