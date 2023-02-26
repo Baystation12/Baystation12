@@ -3062,12 +3062,12 @@
 /area/centcom/specops)
 "awl" = (
 /obj/structure/table/rack,
-/obj/item/ammo_magazine/mil_rifle,
-/obj/item/ammo_magazine/mil_rifle,
-/obj/item/ammo_magazine/mil_rifle,
-/obj/item/ammo_magazine/mil_rifle,
-/obj/item/ammo_magazine/mil_rifle,
-/obj/item/ammo_magazine/mil_rifle,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/obj/item/ammo_magazine/mil_rifle/heavy,
 /obj/item/gun/projectile/automatic/bullpup_rifle,
 /obj/item/gun/projectile/automatic/bullpup_rifle,
 /turf/unsimulated/floor{

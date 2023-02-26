@@ -44,7 +44,7 @@
 	name = "Bullpup Rifle Magazine"
 	desc = "A magazine for bullpup assault rifles. Contains 15 rounds."
 	item_cost = 8
-	path = /obj/item/ammo_magazine/mil_rifle
+	path = /obj/item/ammo_magazine/mil_rifle/heavy
 
 /datum/uplink_item/item/ammo/sniperammo
 	name = "Ammobox of Sniper Rounds"

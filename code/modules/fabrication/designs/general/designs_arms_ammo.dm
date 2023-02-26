@@ -86,7 +86,7 @@
 
 /datum/fabricator_recipe/arms_ammo/hidden/magazine_bullpupheavy
 	name = "ammunition (heavy bullpup rifle)"
-	path = /obj/item/ammo_magazine/mil_rifle
+	path = /obj/item/ammo_magazine/mil_rifle/heavy
 
 /datum/fabricator_recipe/arms_ammo/hidden/magazine_bullpuplight
 	name = "ammunition (light bullpup rifle)"

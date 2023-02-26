@@ -103,7 +103,7 @@
 		/obj/item/ammo_magazine/pistol,
 		/obj/item/ammo_magazine/speedloader,
 		/obj/item/ammo_magazine/rifle,
-		/obj/item/ammo_magazine/mil_rifle)
+		/obj/item/ammo_magazine/mil_rifle/heavy)
 
 /obj/structure/closet/crate/plastic_smug_ammo
 	name = "dirty plastic crate"
