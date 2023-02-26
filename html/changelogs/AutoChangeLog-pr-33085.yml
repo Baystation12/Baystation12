@@ -1,0 +1,10 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Z8 rifles and Z9 rifles use interchangeable magazines. They are NOT loaded
+      with the same ammo.
+  - tweak: Z9 rifles are now military caliber. The bullets do the same damage as before,
+      they're just grey and 7mmR now.
+  - tweak: Weapons that can load different magazines, like the bullpups and the L6
+      SAW, have a chance to jam when using their non-native type.
+  - tweak: Practice rifle rounds are now blue-tipped for better distinction.
