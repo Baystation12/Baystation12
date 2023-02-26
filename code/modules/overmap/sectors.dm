@@ -114,6 +114,18 @@
 /obj/effect/overmap/visitable/proc/generate_skybox()
 	return
 
+/obj/effect/overmap/visitable/MouseEntered(location, control, params)
+	openToolTip(user = usr, tip_src = src, params = params, title = name)
+	..()
+
+/obj/effect/overmap/visitable/MouseDown()
+	closeToolTip(usr) //No reason not to, really
+	..()
+
+/obj/effect/overmap/visitable/MouseExited()
+	closeToolTip(usr) //No reason not to, really
+	..()
+
 /obj/effect/overmap/visitable/sector
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
