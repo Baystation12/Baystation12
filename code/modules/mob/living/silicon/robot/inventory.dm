@@ -310,6 +310,7 @@
 		for (var/obj/item/gripper/gripper in module?.equipment)
 			if (gripper.wrapped == thing)
 				gripper.wrapped = null
+				gripper.update_icon()
 
 //Robots don't use inventory slots, so we need to override this.
 /mob/living/silicon/robot/canUnEquip(obj/item/I)

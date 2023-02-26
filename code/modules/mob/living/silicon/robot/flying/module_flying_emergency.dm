@@ -63,6 +63,7 @@
 	// and an auto-compressor
 	var/obj/item/gripper/auto_cpr/cpr_gripper = locate() in equipment
 	cpr_gripper.wrapped = new /obj/item/auto_cpr()
+	cpr_gripper.update_icon()
 
 /obj/item/robot_module/flying/emergency/finalize_synths()
 	. = ..()
