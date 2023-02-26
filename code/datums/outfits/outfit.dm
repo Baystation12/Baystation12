@@ -142,8 +142,6 @@ var/global/list/outfits_singletons_by_type_
 				qdel(equip_holster)
 	if(suit)
 		H.equip_to_slot_or_del(new suit(H),slot_wear_suit)
-	if(back)
-		H.equip_to_slot_or_del(new back(H),slot_back)
 	if(belt)
 		H.equip_to_slot_or_del(new belt(H),slot_belt)
 	if(gloves)
@@ -154,6 +152,13 @@ var/global/list/outfits_singletons_by_type_
 		H.equip_to_slot_or_del(new mask(H),slot_wear_mask)
 	if(head)
 		H.equip_to_slot_or_del(new head(H),slot_head)
+	if(back)
+		H.equip_to_slot_or_del(new back(H),slot_back)
+		var/obj/item/rig/onback = H.back
+		if(istype(onback))
+			onback.wearer = H
+			H.wearing_rig = onback
+			onback.toggle_seals(H, instant = TRUE)
 	if(l_ear)
 		var/l_ear_path = (OUTFIT_ADJUSTMENT_PLAIN_HEADSET & equip_adjustments) && ispath(l_ear, /obj/item/device/radio/headset) ? /obj/item/device/radio/headset : l_ear
 		H.equip_to_slot_or_del(new l_ear_path(H),slot_l_ear)
