@@ -122,13 +122,13 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		user.do_attack_animation(src)
 		var/damage_flags = weapon.damage_flags()
 		if (!can_damage_health(weapon.force, weapon.damtype, damage_flags))
-			playsound(src, damage_hitsound, 50)
+			playsound(src, damage_hitsound, 50, TRUE)
 			user.visible_message(
 				SPAN_WARNING("\The [user] hits \the [src] with \a [weapon], but it bounces off!"),
 				SPAN_WARNING("You hit \the [src] with \the [weapon], but it bounces off!")
 			)
 			return TRUE
-		playsound(src, damage_hitsound, 75)
+		playsound(src, damage_hitsound, 75, TRUE)
 		user.visible_message(
 			SPAN_DANGER("\The [user] hits \the [src] with \a [weapon]!"),
 			SPAN_DANGER("You hit \the [src] with \the [weapon]!")
