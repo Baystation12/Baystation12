@@ -10,15 +10,15 @@
 	desc = "A hunter's talisman, some say the old gods smile on those who wear it."
 	icon = CUSTOM_ITEM_OBJ
 	accessory_icons = list(slot_w_uniform_str = CUSTOM_ITEM_MOB, slot_wear_suit_str = CUSTOM_ITEM_MOB)
-	item_icons = list(slot_wear_mask_str = 'infinity/icons/mob/onmob/onmob_accessories.dmi')
+	item_icons = list(slot_wear_mask_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi')
 	icon_state = "talisman-4"
 
 /obj/item/clothing/accessory/scarf/inf
 	name = "red striped scarf"
 	icon = 'packs/infinity/icons/obj/clothing/obj_accessories.dmi'
 	icon_state = "stripedredscarf"
-	accessory_icons = list(slot_w_uniform_str = 'infinity/icons/mob/onmob/onmob_accessories.dmi', slot_wear_suit_str = 'infinity/icons/mob/onmob/onmob_accessories.dmi')
-	item_icons = list(slot_wear_mask_str = 'infinity/icons/mob/onmob/onmob_accessories.dmi')
+	accessory_icons = list(slot_w_uniform_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi', slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi')
+	item_icons = list(slot_wear_mask_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi')
 
 /obj/item/clothing/accessory/scarf/inf/green
 	name = "green striped scarf"

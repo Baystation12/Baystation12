@@ -5,11 +5,11 @@
 	icon_state = "colorcloak"
 
 	accessory_icons = list(
-		slot_w_uniform_str = 'infinity/icons/mob/onmob/onmob_accessories.dmi', \
-		slot_tie_str = 'infinity/icons/mob/onmob/onmob_accessories.dmi', \
-		slot_wear_suit_str = 'infinity/icons/mob/onmob/onmob_accessories.dmi')
+		slot_w_uniform_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi', \
+		slot_tie_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi', \
+		slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi')
 	item_icons = list(
-		slot_wear_suit_str = 'infinity/icons/mob/onmob/onmob_accessories.dmi')
+		slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi')
 
 	var/fire_resist = T0C+100
 	allowed = list(/obj/item/tank/oxygen_emergency)
@@ -19,7 +19,7 @@
 	siemens_coefficient = 0.9
 	w_class = ITEM_SIZE_NORMAL
 	slot = ACCESSORY_SLOT_OVER
-	high_visibility = 1
+	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 
 	species_restricted = null
 	valid_accessory_slots = null
@@ -180,7 +180,7 @@
 	name = "crimson hood"
 	desc = "A hood."
 	icon = 'packs/infinity/icons/obj/clothing/obj_head.dmi'
-	item_icons = list(slot_head_str = 'infinity/icons/mob/onmob/onmob_head.dmi')
+	item_icons = list(slot_head_str = 'packs/infinity/icons/mob/onmob/onmob_head.dmi')
 	icon_state = "crimson_cloak_hood"
 	flags_inv = BLOCKHEADHAIR
 	body_parts_covered = HEAD

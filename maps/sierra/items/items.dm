@@ -59,6 +59,18 @@ Unique items
 /obj/effect/paint/hull
 	color = "#436b8e"
 
+/obj/effect/paint/dark_gunmetal
+	color = COLOR_DARK_GUNMETAL
+
+/obj/effect/paint/nt_white
+	color = "#eeeeee"
+
+/obj/effect/paint_stripe/nt_red
+	color = "#9d2300"
+
+/obj/effect/paint_stripe/turquoise
+	color = "#03ffc6"
+
 /obj/item/device/boombox/anchored //for bar's private rooms
 	name = "stationary boombox"
 	anchored = TRUE

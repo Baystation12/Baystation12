@@ -385,3 +385,7 @@
 	desc = "This is a plush resomi. Very soft, with a pompom on the tail. The toy is made well, as if alive. Looks like she is sleeping. Shhh!"
 	icon = 'packs/infinity/icons/obj/toy.dmi'
 	icon_state = "resomiplushie"
+
+/obj/item/clothing/accessory/necklace/collar/New()
+	sprite_sheets += list(SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/misc.dmi')
+	. = ..()

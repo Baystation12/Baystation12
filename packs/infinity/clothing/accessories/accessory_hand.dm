@@ -13,7 +13,7 @@
 	name = "black watch"
 	desc = "A wristwatch. This one is silver and EMP-resistance."
 	icon = 'packs/infinity/icons/obj/clothing/obj_accessory_hand.dmi'
-	item_icons = list(slot_gloves_str = 'infinity/icons/mob/onmob/onmob_wristwatch.dmi')
+	item_icons = list(slot_gloves_str = 'packs/infinity/icons/mob/onmob/onmob_wristwatch.dmi')
 	icon_state = "watch_black"
 	item_state = "watch_black"
 	w_class = ITEM_SIZE_TINY

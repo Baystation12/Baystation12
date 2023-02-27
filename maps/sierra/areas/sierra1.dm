@@ -186,6 +186,9 @@
 	icon_state = "janitor"
 	req_access = list(access_janitor)
 
+/area/hydroponics/third_deck_storage
+	name = "Third Deck - Service - Hydroponics Storage"
+
 /* SECURITY AREAS
  *
  */

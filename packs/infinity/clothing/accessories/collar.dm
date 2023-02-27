@@ -5,15 +5,13 @@
 	icon_state = "collar_bksilv"
 
 	accessory_icons = list(
-		slot_w_uniform_str = 'infinity/icons/mob/onmob/onmob_accessories.dmi', \
-		slot_wear_suit_str = 'infinity/icons/mob/onmob/onmob_accessories.dmi')
-	item_icons = list(
-		slot_wear_mask_str = 'infinity/icons/mob/onmob/onmob_accessories.dmi')
-
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/misc.dmi',
-		SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/misc.dmi'
+		slot_w_uniform_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi',
+		slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi'
 	)
+	item_icons = list(
+		slot_wear_mask_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi'
+	)
+
 	var/renameable = FALSE
 
 /obj/item/clothing/accessory/necklace/collar/gold
@@ -97,7 +95,7 @@
 /obj/item/clothing/accessory/necklace/collar/shock/Topic(href, href_list)
 	if(usr.stat || usr.restrained())
 		return
-	if(((istype(usr, /mob/living/carbon/human) && ((!( SSticker ) || (SSticker && SSticker.mode != "monkey")) && list_find(usr.contents, src))) || (list_find(usr.contents, master) || (in_range(src, usr) && istype(loc, /turf)))))
+	if(((istype(usr, /mob/living/carbon/human) && ((!( SSticker ) || (SSticker && SSticker.mode != "monkey")) && LAZYACCESS(usr.contents, src))) || (LAZYACCESS(usr.contents, master) || (in_range(src, usr) && istype(loc, /turf)))))
 		usr.set_machine(src)
 		if(href_list["freq"])
 			var/new_frequency = sanitize_frequency(frequency + text2num(href_list["freq"]))
