@@ -118,7 +118,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	SHOULD_CALL_PARENT(TRUE)
 	// Standardized damage
 	if (weapon.force > 0 && get_max_health() && !HAS_FLAGS(weapon.item_flags, ITEM_FLAG_NO_BLUDGEON))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.setClickCooldown(user.get_attack_speed(weapon))
 		user.do_attack_animation(src)
 		var/damage_flags = weapon.damage_flags()
 		if (!can_damage_health(weapon.force, weapon.damtype, damage_flags))
