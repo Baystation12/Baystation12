@@ -1,3 +1,17 @@
+/obj/item/crush_act() // This is how we get unrefined scrap in compactor
+	playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
+	for(var/i in 1 to w_class)
+		new /obj/item/scrap_lump(loc)
+	for(var/obj/item/I in contents)
+		I.forceMove(loc)
+		I.crush_act()
+	..()
+
+/obj/item/organ/crush_act() // prevent gaining scrap from organs. Yep this is... so uncivilised
+	ex_act(1)
+	if(!QDELETED(src))
+		qdel(src)
+
 /obj/structure/scrap_cube
 	name = "compressed scrap"
 	desc = "A cube made of scrap compressed with hydraulic clamp."
