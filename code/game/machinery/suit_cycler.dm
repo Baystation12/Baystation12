@@ -279,7 +279,7 @@
 			locked = !locked
 			to_chat(usr, "You [locked ? "lock" : "unlock"] [src].")
 		else
-			to_chat(usr, FEEDBACK_ACCESS_DENIED)
+			FEEDBACK_ACCESS_DENIED(usr, src)
 
 	else if(href_list["begin_decontamination"])
 

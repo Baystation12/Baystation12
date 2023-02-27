@@ -116,13 +116,13 @@
 	// Beaker - Inserts a beaker
 	if (istype(tool, /obj/item/reagent_containers/glass))
 		if (locked)
-			to_chat(user, SPAN_WARNING("\The [src]'s access panel must be open before you can insert a beaker."))
+			USE_FEEDBACK_FAILURE("\The [src]'s access panel must be open before you can insert a beaker.")
 			return TRUE
 		if (reagent_glass)
-			to_chat(user, SPAN_WARNING("\The [src] already has \a [reagent_glass] installed."))
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [reagent_glass] installed.")
 			return TRUE
 		if (!user.unEquip(tool, src))
-			to_chat(user, SPAN_WARNING("You can't drop \the [src]."))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
 			return TRUE
 		reagent_glass = tool
 		user.visible_message(
