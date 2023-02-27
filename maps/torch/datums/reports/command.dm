@@ -68,10 +68,9 @@
 	var/list/xo_fields = list()
 	add_field(/datum/report_field/text_label/header, "ГЭК \"Факел\" - Офис Исполнительного офицера")
 	add_field(/datum/report_field/people/from_manifest, "Полное имя и звание Исполнителя(Исполнительный/Командующий офицер)", required = 1)
-	add_field(/datum/report_field/people/from_manifest, "Полное имя и звание Заявителя", required = 1)
+	add_field(/datum/report_field/people/from_manifest, "Полное имя, звание и должность Заявителя", required = 1)
 	add_field(/datum/report_field/date, "Дата заполнения")
 	add_field(/datum/report_field/time, "Время заполнения")
-	add_field(/datum/report_field/simple_text, "Текущая должность", required = 1)
 	add_field(/datum/report_field/simple_text, "Запрашиваемая должность", required = 1)
 	add_field(/datum/report_field/pencode_text, "Причина перевода", required = 1)
 	add_field(/datum/report_field/text_label/instruction, "Документ является недействительным в случае отсутствия подписи или печати.")
@@ -92,10 +91,9 @@
 	var/list/xo_fields = list()
 	add_field(/datum/report_field/text_label/header, "ГЭК \"Факел\" - Офис Исполнительного офицера")
 	add_field(/datum/report_field/people/from_manifest, "Полное имя и звание Исполнителя(Исполнительный/Командующий офицер)", required = 1)
-	add_field(/datum/report_field/people/from_manifest, "Полное имя и звание Заявителя", required = 1)
+	add_field(/datum/report_field/people/from_manifest, "Полное имя, звание и должность Заявителя", required = 1)
 	add_field(/datum/report_field/date, "Дата заполнения")
 	add_field(/datum/report_field/time, "Время заполнения")
-	add_field(/datum/report_field/simple_text, "Текущая должность", required = 1)
 	add_field(/datum/report_field/simple_text, "Запрашиваемый доступ", required = 1)
 	add_field(/datum/report_field/pencode_text, "Причина расширения доступа", required = 1)
 	add_field(/datum/report_field/simple_text, "Срок расширения доступа")
@@ -127,3 +125,20 @@
 	xo_fields += add_field(/datum/report_field/options/yes_no, "Одобрено")
 	for(var/datum/report_field/field in xo_fields)
 		field.set_access(access_edit = access_hop)
+
+/datum/computer_file/report/recipient/command/gratitude
+	form_name = "CC-SGF-11"
+	title = "Благодарность"
+	logo = "\[solcrest\]"
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/command/gratitude/generate_fields()
+	..()
+	add_field(/datum/report_field/text_label/header, "ГЭК \"Факел\" - Офис Исполнительного офицера")
+	add_field(/datum/report_field/text_label, "Благодарность")
+	add_field(/datum/report_field/pencode_text, "Текст благодарности")
+	add_field(/datum/report_field/people/from_manifest, "Полное имя, звание и должность лица, получившего благодарность", required = 1)
+	add_field(/datum/report_field/people/from_manifest, "Полное имя и звание лица, выдавшего благодарность", required = 1)
+	add_field(/datum/report_field/date, "Дата заполнения")
+	add_field(/datum/report_field/time, "Время заполнения")
+	add_field(/datum/report_field/signature, "Подпись лица, выдавшего благодарность", required = 1)
