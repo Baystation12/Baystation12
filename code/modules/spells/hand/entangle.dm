@@ -37,6 +37,10 @@
 	var/obj/effect/vine/single/P = new(T,seed, start_matured =1)
 	P.can_buckle = TRUE
 
+	if (!P.can_buckle(M))
+		P.visible_message(SPAN_WARNING("\The [P] appear from the floor, attempting to wrap around \the [M], but slip free and disappear!"))
+		qdel(src)
+		return TRUE
 	P.buckle_mob(M)
 	M.set_dir(pick(GLOB.cardinal))
 	M.visible_message(SPAN_DANGER("[P] appear from the floor, spinning around \the [M] tightly!"))
