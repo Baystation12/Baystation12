@@ -83,8 +83,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if (blocked)
 			to_chat(src, SPAN_WARNING("\The [blocked] is in the way!"))
 			return TRUE
-		if (devour(tool))
-			return TRUE
+		devour(tool)
+		return TRUE
 
 	return ..()
 
