@@ -19,6 +19,7 @@
 	slot_flags = SLOT_EARS
 	sharp = TRUE
 	unacidable = TRUE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_TOOLS
 	var/mode = SYRINGE_DRAW
 	var/image/filling //holds a reference to the current filling overlay
 	var/visible_name = "a syringe"
@@ -52,9 +53,6 @@
 /obj/item/reagent_containers/syringe/attack_hand()
 	..()
 	update_icon()
-
-/obj/item/reagent_containers/syringe/attackby(obj/item/I as obj, mob/user as mob)
-	return
 
 /obj/item/reagent_containers/syringe/afterattack(obj/target, mob/user, proximity)
 	if(!proximity)

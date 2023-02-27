@@ -1,4 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
+/obj/item/device/mmi/digital
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_TOOLS
 
 /obj/item/device/mmi/digital/New()
 	src.brainmob = new(src)
@@ -12,9 +14,6 @@
 	..()
 
 /obj/item/device/mmi/digital/proc/PickName()
-	return
-
-/obj/item/device/mmi/digital/attackby()
 	return
 
 /obj/item/device/mmi/digital/attack_self()

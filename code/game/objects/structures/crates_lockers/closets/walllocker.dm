@@ -16,15 +16,13 @@
 /obj/structure/closet/walllocker/emerglocker
 	name = "emergency locker"
 	desc = "A wall mounted locker with emergency supplies."
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_TOOLS
 	var/list/spawnitems = list(/obj/item/tank/oxygen_emergency,/obj/item/clothing/mask/breath)
 	var/amount = 2 // spawns each items X times.
 	closet_appearance = /singleton/closet_appearance/wall/emergency
 
 /obj/structure/closet/walllocker/emerglocker/toggle(mob/user as mob)
 	src.attack_hand(user)
-	return
-
-/obj/structure/closet/walllocker/emerglocker/attackby(obj/item/W as obj, mob/user as mob)
 	return
 
 /obj/structure/closet/walllocker/emerglocker/attack_hand(mob/user as mob)

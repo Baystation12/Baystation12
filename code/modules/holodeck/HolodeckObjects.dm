@@ -5,14 +5,11 @@
 
 /turf/simulated/floor/holofloor
 	thermal_conductivity = 0
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_TOOLS
 
 // the new Diona Death Prevention Feature: gives an average amount of lumination
 /turf/simulated/floor/holofloor/get_lumcount(minlum = 0, maxlum = 1)
 	return 0.8
-
-/turf/simulated/floor/holofloor/attackby(obj/item/W as obj, mob/user as mob)
-	return
-	// HOLOFLOOR DOES NOT GIVE A FUCK
 
 /turf/simulated/floor/holofloor/set_flooring()
 	return

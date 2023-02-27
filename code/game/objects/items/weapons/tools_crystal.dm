@@ -7,9 +7,7 @@
 	matter = list(MATERIAL_CRYSTAL = 1250)
 	cell = null
 	fuel_cost_multiplier = 1
-
-/obj/item/weldingtool/electric/crystal/attackby(obj/item/W, mob/user)
-	return
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_TOOLS
 
 /obj/item/weldingtool/electric/crystal/on_update_icon()
 	if(welding)
