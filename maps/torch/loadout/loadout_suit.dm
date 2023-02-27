@@ -20,7 +20,6 @@
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/suit/poncho
-	allowed_roles = CASUAL_ROLES
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/suit/security_poncho
