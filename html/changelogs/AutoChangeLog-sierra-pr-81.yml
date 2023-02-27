@@ -1,0 +1,4 @@
+author: LordNest
+delete-after: true
+changes:
+  - bugfix: Пофиксил отсутствие unrefined scrap в компакторе после удачного запуска.
