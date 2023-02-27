@@ -189,6 +189,11 @@
 	handle_click_empty(M)
 	return 0
 
+
+/obj/item/gun/energy/plasmacutter/IsHeatSource()
+	return 3800
+
+
 /obj/item/gun/energy/incendiary_laser
 	name = "dispersive blaster"
 	desc = "The A&M 'Shayatin' was the first of a class of dispersive laser weapons which, instead of firing a focused beam, scan over a target rapidly with the goal of setting it ablaze."

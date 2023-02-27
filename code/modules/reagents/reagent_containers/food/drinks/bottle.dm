@@ -74,7 +74,7 @@
 	if (!rag && istype(W, /obj/item/reagent_containers/glass/rag))
 		insert_rag(W, user)
 		return
-	if (rag && isflamesource(W))
+	if (rag && W.IsFlameSource())
 		rag.attackby(W, user)
 		return
 	..()

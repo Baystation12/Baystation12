@@ -208,7 +208,7 @@
 			test.Shift(EAST,6)
 			overlays += test
 
-	else if(isflamesource(W))
+	else if (W.IsFlameSource())
 		if(user.a_intent != I_HURT)
 			to_chat(user, SPAN_WARNING("You almost got \the [W] too close to [src]! That could have ended very badly for you."))
 			return
