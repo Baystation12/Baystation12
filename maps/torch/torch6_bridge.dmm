@@ -784,6 +784,7 @@
 /obj/structure/hygiene/toilet{
 	dir = 4
 	},
+/obj/item/storage/secure/briefcase/medals/fake,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/heads/cobed)
 "bI" = (

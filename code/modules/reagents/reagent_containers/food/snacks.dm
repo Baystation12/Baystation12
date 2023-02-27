@@ -3558,6 +3558,20 @@
 	reagents.add_reagent(/datum/reagent/sugar, 2)
 	reagents.add_reagent(/datum/reagent/nutriment/coco, 2)
 
+/obj/item/reagent_containers/food/snacks/chocolatemedal
+	name = "chocolate medal"
+	desc = "Looks like real medal. Almost."
+	icon_state = "chocolatemedal"
+	filling_color = "#7d5f46"
+	center_of_mass = "x=15;y=15"
+	nutriment_amt = 2
+	nutriment_desc = list("chocolate" = 5)
+	bitesize = 2
+/obj/item/reagent_containers/food/snacks/chocolatebar/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/sugar, 3)
+	reagents.add_reagent(/datum/reagent/nutriment/coco, 2)
+
 /obj/item/reagent_containers/food/snacks/chocolateegg
 	name = "chocolate egg"
 	desc = "Such sweet, fattening food."

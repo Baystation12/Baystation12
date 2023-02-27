@@ -236,6 +236,7 @@ var/global/list/all_objectives = list()
 		"the supply corps officer rubber stamp" = /obj/item/stamp/deckoff,
 		"the pathfinder rubber stamp" = /obj/item/stamp/path,
 		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof,
+		"the medal briefcase" = /obj/item/storage/secure/briefcase/medals,
 		"an RCD" = /obj/item/rcd
 	)
 

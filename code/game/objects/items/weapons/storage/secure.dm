@@ -147,6 +147,31 @@
 		/obj/item/ammo_magazine/pistol/double/rubber = 5
 	)
 
+//proxima code start
+/obj/item/storage/secure/briefcase/medals
+	name = "medal briefcase"
+	desc = "A large briefcase with a digital locking system."
+	startswith = list(
+		/obj/item/clothing/accessory/medal/solgov/mil/bronze_heart = 3,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/bronze_heart = 3,
+		/obj/item/clothing/accessory/medal/solgov/mil/iron_star = 2,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/iron_star = 2,
+		/obj/item/clothing/accessory/medal/solgov/civ/expeditionary = 3,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/expeditionary_medal = 3,
+		/obj/item/clothing/accessory/medal/solgov/civ/sapientarian = 1,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/sapientarian = 1,
+		/obj/item/clothing/accessory/medal/solgov/civ/service = 1,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/service = 1
+	)
+
+/obj/item/storage/secure/briefcase/medals/fake
+	name = "medal briefcase"
+	desc = "A large briefcase with a digital locking system."
+	startswith = list(
+		/obj/item/reagent_containers/food/snacks/chocolatemedal = 14
+	)
+//proxima code end
+
 /obj/item/storage/secure/briefcase/attack_hand(mob/user)
 	if ((loc == user) && (locked == 1))
 		to_chat(usr, "<span class='warning'>[src] is locked and cannot be opened!</span>")
