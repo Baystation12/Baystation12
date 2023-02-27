@@ -1,0 +1,7 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscdel: Attempting to buckle to an object that already has someone buckled to
+      it no longer unbuckles the already buckled person.
+  - rscadd: Buckling now sends various descriptive failure feedback messages to you
+      if your attempt to buckle or unbuckle someone fails.
