@@ -441,6 +441,11 @@ armour attachments
 	name = "\improper POLICE tag"
 	desc = "An armor tag with the words POLICE printed in gold lettering on it."
 
+/obj/item/clothing/accessory/armor_tag/solgov/lead
+	name = "\improper LEAD tag"
+	desc = "An armor tag denoting the leader of a fireteam."
+	icon_state = "leadtag"
+
 /obj/item/clothing/accessory/helmet_cover/blue/sol
 	name = "peacekeeper helmet cover"
 	desc = "A fabric cover for armored helmets. This one is in SCG peacekeeper colors."

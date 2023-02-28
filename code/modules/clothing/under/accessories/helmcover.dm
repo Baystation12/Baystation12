@@ -56,3 +56,8 @@
 	name = "\improper SAARE helmet cover"
 	desc = "A fabric cover for armored helmets. This one has SAARE's colors."
 	icon_state = "helmcover_saare"
+
+/obj/item/clothing/accessory/helmet_cover/lead
+	name = "\improper LEAD helmet cover"
+	desc = "A fabric cover for armored helmets. This one has gold stripes to denote a fireteam leader."
+	icon_state = "helmcover_lead"
