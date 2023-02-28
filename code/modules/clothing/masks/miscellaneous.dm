@@ -282,11 +282,18 @@
 			flags_inv = initial(flags_inv)
 			body_parts_covered = initial(body_parts_covered)
 			icon_state = initial(icon_state)
+			sprite_sheets = list(
+				SPECIES_VOX = 'icons/mob/species/vox/onmob_mask_vox.dmi',
+				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_mask_unathi.dmi'
+				)
 		if(slot_head)
 			flags_inv = 0
 			body_parts_covered = HEAD
 			icon_state = "[initial(icon_state)]_up"
-			sprite_sheets = list()
+			sprite_sheets = list(
+				SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
+				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi'
+				)
 
 	return ..()
 

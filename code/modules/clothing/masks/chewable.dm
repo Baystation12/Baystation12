@@ -21,10 +21,16 @@
 /obj/item/clothing/mask/chewable/equipped(mob/living/user, slot)
 	..()
 	if(slot == slot_wear_mask)
+		sprite_sheets = list(
+				SPECIES_VOX = 'icons/mob/species/vox/onmob_mask_vox.dmi',
+				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_mask_unathi.dmi'
+				)
 		if(user.check_has_mouth())
 			START_PROCESSING(SSobj, src)
 		else
 			to_chat(user, SPAN_NOTICE("You don't have a mouth, and can't make much use of \the [src]."))
+	else
+		sprite_sheets = list()
 
 /obj/item/clothing/mask/chewable/dropped()
 	STOP_PROCESSING(SSobj, src)

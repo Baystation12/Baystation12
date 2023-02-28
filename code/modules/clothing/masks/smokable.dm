@@ -21,6 +21,17 @@
 
 	z_flags = ZMM_MANGLE_PLANES
 
+/obj/item/clothing/mask/smokable/equipped(mob/user, slot)
+	switch(slot)
+		if(slot_wear_mask)
+			sprite_sheets = list(
+				SPECIES_VOX = 'icons/mob/species/vox/onmob_mask_vox.dmi',
+				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_mask_unathi.dmi'
+				)
+		else
+			sprite_sheets = list()
+	return ..()
+
 /obj/item/clothing/mask/smokable/New()
 	..()
 	atom_flags |= ATOM_FLAG_NO_REACT // so it doesn't react until you light it
