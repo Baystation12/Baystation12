@@ -1,6 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - tweak: Fleet mobs now leave the correct gear on their corpses and aren't all mustached.
-  - tweak: Fleet hardsuit mobs now have corpses.
-  - bugfix: Simplemobs now leave empty casings when firing guns.
