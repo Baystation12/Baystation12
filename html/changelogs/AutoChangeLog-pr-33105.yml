@@ -1,0 +1,5 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Civilian roles with access to department ponchos can now also select generic
+      ponchos.
