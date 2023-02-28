@@ -178,6 +178,8 @@
  * Returns boolean. Whether or not the buckling was successful.
  */
 /obj/proc/AttemptBuckle(mob/living/target, mob/living/user, silent = FALSE)
+	if (!istype(target))
+		return FALSE
 	if (target == user || target.a_intent == I_HELP)
 		return user_buckle_mob(target, user, silent)
 	if (!can_buckle(target, user, silent))
