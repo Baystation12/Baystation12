@@ -188,57 +188,68 @@ var/global/list/mob_hat_cache = list()
 	new_hat.forceMove(src)
 	update_icon()
 
-//Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
-/mob/living/silicon/robot/drone/attackby(obj/item/W, mob/user)
 
-	if(user.a_intent == I_HELP && istype(W, /obj/item/clothing/head))
-		if(hat)
-			to_chat(user, SPAN_WARNING("\The [src] is already wearing \the [hat]."))
-		else if(user.unEquip(W))
-			wear_hat(W)
-			user.visible_message(SPAN_NOTICE("\The [user] puts \the [W] on \the [src]."))
-		return
-	else if(istype(W, /obj/item/borg/upgrade))
-		to_chat(user, SPAN_DANGER("\The [src] is not compatible with \the [W]."))
-		return
+/mob/living/silicon/robot/drone/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Crowbar - Block interaction
+	if (isCrowbar(tool))
+		USE_FEEDBACK_FAILURE("\The [src] is hermetically sealed. You can't open the case.")
+		return TRUE
 
-	else if(isCrowbar(W) && user.a_intent != I_HURT)
-		to_chat(user, SPAN_DANGER("\The [src] is hermetically sealed. You can't open the case."))
-		return
+	// Hat - Equip hat
+	if (istype(tool, /obj/item/clothing/head))
+		if (hat)
+			USE_FEEDBACK_FAILURE("\The [src] is already wearing \a [hat].")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		wear_hat(tool)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] puts \a [tool] on \the [src]."),
+			SPAN_NOTICE("You put \the [tool] on \the [src]."),
+			exclude_mobs = list(src)
+		)
+		to_chat(src, SPAN_NOTICE("\The [user] puts \a [tool] on you."))
+		return TRUE
 
-	else if (istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
-
-		if(stat == 2)
-
-			if(!config.allow_drone_spawn || emagged || health < -35) //It's dead, Dave.
-				to_chat(user, SPAN_DANGER("The interface is fried, and a distressing burned smell wafts from the robot's interior. You're not rebooting this one."))
-				return
-
-			if(!allowed(usr))
-				to_chat(user, SPAN_DANGER("Access denied."))
-				return
-
-			user.visible_message(
-				SPAN_DANGER("\The [user] swipes \his ID card through \the [src], attempting to reboot it."),
-				SPAN_DANGER("You swipe your ID card through \the [src], attempting to reboot it.")
-			)
+	// ID Card - Reboot or shutdown the drone
+	var/obj/item/card/id/id = tool.GetIdCard()
+	if (istype(id))
+		var/id_name = GET_ID_NAME(id, tool)
+		// Reboot
+		if (stat == DEAD)
+			if (!config.allow_drone_spawn || emagged || health < -35)
+				USE_FEEDBACK_FAILURE("\The [src] interface is fried, and a distressing burned smell wafts from \his interior. You're not rebooting this one.")
+				return TRUE
+			if (!check_access(id))
+				USE_FEEDBACK_ID_CARD_DENIED(src, id_name)
+				return TRUE
 			request_player()
-			return
-
+			user.visible_message(
+				SPAN_NOTICE("\The [user] swipes \a [tool] over \the [src], attempting to reboot it."),
+				SPAN_NOTICE("You swipe [id_name] over \the [src], attempting to reboot it.")
+			)
+		// Shutdown
 		else
-			user.visible_message(SPAN_DANGER("\The [user] swipes \his ID card through \the [src], attempting to shut it down."), SPAN_DANGER("You swipe your ID card through \the [src], attempting to shut it down."))
+			user.visible_message(
+				SPAN_WARNING("\The [user] swipes \a [tool] over \the [src], attempting to shut it down."),
+				SPAN_WARNING("You swipe [id_name] over \the [src], attempting to shut it down."),
+				exclude_mobs = list(src)
+			)
+			to_chat(src, SPAN_DANGER("\The [user] swipes \a [tool] over you, attempting to shut you down!"))
+			if (emagged || !check_access(id))
+				USE_FEEDBACK_ID_CARD_DENIED(src, id_name)
+				return TRUE
+			shut_down()
+		return TRUE
 
-			if(emagged)
-				return
+	// Robot Upgrade Module - Block interaction
+	if (istype(tool, /obj/item/borg/upgrade))
+		USE_FEEDBACK_FAILURE("\The [src] is not compatible with \the [tool].")
+		return TRUE
 
-			if(allowed(usr))
-				shut_down()
-			else
-				to_chat(user, SPAN_DANGER("Access denied."))
+	return ..()
 
-		return
-
-	..()
 
 /mob/living/silicon/robot/drone/emag_act(remaining_charges, mob/user)
 	if(!client || stat == 2)

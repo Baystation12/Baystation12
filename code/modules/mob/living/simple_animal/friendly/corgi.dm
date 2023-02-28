@@ -96,18 +96,33 @@
 	name = "Corgi meat"
 	desc = "Tastes like... well you know..."
 
-/mob/living/simple_animal/passive/corgi/attackby(obj/item/O as obj, mob/user as mob)  //Marker -Agouri
-	if(istype(O, /obj/item/newspaper))
-		if(!stat)
-			for(var/mob/M in viewers(user, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message(SPAN_NOTICE("[user] baps [name] on the nose with the rolled up [O]"))
-			spawn(0)
-				for(var/i in list(1,2,4,8,4,2,1,2))
-					set_dir(i)
-					sleep(1)
-	else
-		..()
+
+/mob/living/simple_animal/passive/corgi/get_interactions_info()
+	. = ..()
+	.["Newspaper"] = "<p>On harm intent, disciplines \the [initial(name)]. Bad dog!</p>"
+
+
+/mob/living/simple_animal/passive/corgi/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Newspaper - Bap on the nose
+	if (istype(weapon, /obj/item/newspaper))
+		user.setClickCooldown(user.get_attack_speed(weapon))
+		user.do_attack_animation(src)
+		user.visible_message(
+			SPAN_WARNING("\The [user] baps \the [src] on the nose with a rolled up [weapon.name]!"),
+			SPAN_DANGER("You bap \the [src] on the nose with the rolled up [weapon.name]!"),
+			exclude_mobs = list(src)
+		)
+		if (stat)
+			return TRUE
+		to_chat(src, SPAN_DANGER("\The [user] baps you on the nose with a rolle up [weapon.name]!"))
+		spawn(0)
+			for(var/i in list(1,2,4,8,4,2,1,2))
+				set_dir(i)
+				sleep(1)
+		return TRUE
+
+	return ..()
+
 
 /mob/living/simple_animal/passive/corgi/regenerate_icons()
 	overlays = list()

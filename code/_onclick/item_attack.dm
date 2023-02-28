@@ -248,6 +248,14 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	return FALSE
 
 
+/mob/living/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Legacy mob attack code is handled by the weapon
+	if (weapon.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone()))
+		return TRUE
+
+	return ..()
+
+
 /**
  * Interaction handler for using an item on this atom with a non-harm intent, or if `use_weapon()` did not resolve an
  * action. Generally, this is for any standard interactions with items.
@@ -287,13 +295,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
  */
 /atom/proc/attackby(obj/item/W, mob/user, click_params)
 	return FALSE
-
-
-/mob/living/attackby(obj/item/W, mob/user, click_params)
-	// Legacy mob attack code is handled by the weapon
-	if (W.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone()))
-		return TRUE
-	return ..()
 
 
 /**
