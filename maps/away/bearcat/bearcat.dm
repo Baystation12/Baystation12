@@ -92,7 +92,7 @@
 	coverlocked = 0
 
 /obj/machinery/door/airlock/autoname/command
-	door_color = COLOR_COMMAND_BLUE
+	door_color = COLOR_SOL
 
 /obj/machinery/door/airlock/autoname/engineering
 	door_color = COLOR_AMBER

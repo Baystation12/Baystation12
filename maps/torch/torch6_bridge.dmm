@@ -251,13 +251,13 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/airlock/research{
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/door/airlock/exo{
 	id_tag = "liaisondoor2";
 	name = "Corporate Liaison";
 	secured_wires = 1
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/cl)
@@ -664,7 +664,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/exo{
 	id_tag = "liaisondoor3";
 	name = "Corporate Liaison";
 	secured_wires = 1
@@ -839,11 +839,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "bL" = (
-/obj/machinery/door/airlock/research{
-	id_tag = "liaisondoor";
-	name = "Corporate Liaison";
-	secured_wires = 1
-	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
@@ -852,6 +847,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/airlock/exo{
+	id_tag = "liaisondoor";
+	name = "Corporate Liaison";
+	secured_wires = 1
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/cl)
 "bM" = (
@@ -1615,11 +1615,6 @@
 /area/maintenance/bridge/forestarboard)
 "cS" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/research{
-	id_tag = "csodoor";
-	name = "Chief Science Officer";
-	secured_wires = 1
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -1632,7 +1627,13 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/tiled/white,
+/obj/machinery/door/airlock/command{
+	id_tag = "csodoor";
+	name = "Chief Science Officer";
+	secured_wires = 1;
+	stripe_color = "#a2819e"
+	},
+/turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/rd)
 "cT" = (
 /obj/structure/table/standard{
@@ -2348,16 +2349,16 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/meeting_room)
 "eq" = (
-/obj/machinery/door/airlock/sol{
-	name = "XO's Quarters";
-	secured_wires = 1
-	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/machinery/door/airlock/command{
+	name = "XO's Quarters";
+	secured_wires = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/xo)
@@ -3743,13 +3744,14 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/door/airlock/engineering{
-	id_tag = "cedoor";
-	name = "Chief Engineer";
-	secured_wires = 1
-	},
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/command{
+	id_tag = "cedoor";
+	name = "Chief Engineer";
+	secured_wires = 1;
+	stripe_color = "#ffbf00"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/ce)
 "hA" = (
@@ -3904,11 +3906,6 @@
 /area/crew_quarters/heads/office/sea)
 "hV" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/sol{
-	id_tag = "starboardbridgedoor";
-	name = "Bridge";
-	secured_wires = 1
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -3922,6 +3919,11 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/command{
+	id_tag = "starboardbridgedoor";
+	name = "Bridge";
+	secured_wires = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
@@ -5200,7 +5202,7 @@
 /area/aquila/airlock)
 "lZ" = (
 /obj/machinery/door/airlock/hatch{
-	name = "Passenger Seating"
+	name = "Life Support"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -5730,7 +5732,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/airlock/sol{
+/obj/machinery/door/airlock/command{
 	name = "Deliberation Room"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -6249,7 +6251,9 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/airlock)
 "ph" = (
-/obj/machinery/door/airlock/hatch,
+/obj/machinery/door/airlock/hatch{
+	name = "Storage"
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -6478,9 +6482,6 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/aquila/medical)
 "pY" = (
-/obj/machinery/door/airlock/hatch{
-	name = "Engineering"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -6489,6 +6490,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/hatch{
+	name = "Infirmary"
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/aquila/medical)
 "qa" = (
@@ -6627,11 +6631,6 @@
 /area/crew_quarters/heads/office/cl/backroom)
 "qo" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/security{
-	id_tag = "cosdoor";
-	name = "Chief of Security";
-	secured_wires = 1
-	},
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 4;
@@ -6645,6 +6644,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/airlock/command{
+	id_tag = "cosdoor";
+	name = "Chief of Security";
+	secured_wires = 1;
+	stripe_color = "#9d2300"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "qp" = (
@@ -6851,7 +6856,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/effect/floor_decal/corner/orange/half{
+/obj/effect/floor_decal/corner/yellow/half{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -7194,11 +7199,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
 "rK" = (
-/obj/machinery/door/airlock/sol{
-	id_tag = "captaindoor";
-	name = "Commanding Officer";
-	secured_wires = 1
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 4;
@@ -7219,6 +7219,11 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/command{
+	id_tag = "captaindoor";
+	name = "Commanding Officer";
+	secured_wires = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/co)
 "rQ" = (
@@ -7442,11 +7447,6 @@
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/sea)
 "sz" = (
-/obj/machinery/door/airlock/sol{
-	id_tag = "seaforedoor";
-	name = "Senior Enlisted Advisor";
-	secured_wires = 1
-	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
@@ -7461,6 +7461,11 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/airlock/command{
+	id_tag = "seaforedoor";
+	name = "Senior Enlisted Advisor";
+	secured_wires = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/sea)
 "sB" = (
@@ -7540,9 +7545,6 @@
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/rd)
 "sS" = (
-/obj/machinery/door/airlock/sol{
-	name = "Disciplinary Board Room"
-	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
@@ -7551,6 +7553,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/airlock/command{
+	name = "Disciplinary Board Room"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/disciplinary_board_room)
 "sT" = (
@@ -10095,9 +10100,6 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
 "Ao" = (
-/obj/structure/bed/chair/padded/green{
-	dir = 1
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -10105,6 +10107,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/bed/chair/padded/purple{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/rd)
 "Ap" = (
@@ -10207,7 +10212,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/airlock)
 "AE" = (
-/obj/structure/bed/chair/comfy/green,
+/obj/structure/bed/chair/comfy/purple,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/rd)
 "AH" = (
@@ -11518,7 +11523,7 @@
 "GX" = (
 /obj/machinery/vending/wallmed1{
 	pixel_y = 32;
-	products = list(/obj/item/stack/medical/bruise_pack=6,/obj/item/stack/medical/ointment=6,/obj/item/reagent_containers/pill/paracetamol=8,/obj/item/storage/med_pouch/trauma=4,/obj/item/storage/med_pouch/burn=2,/obj/item/storage/med_pouch/oxyloss=2,/obj/item/storage/med_pouch/toxin=2)
+	products = list(/obj/item/stack/medical/bruise_pack = 6, /obj/item/stack/medical/ointment = 6, /obj/item/reagent_containers/pill/paracetamol = 8, /obj/item/storage/med_pouch/trauma = 4, /obj/item/storage/med_pouch/burn = 2, /obj/item/storage/med_pouch/oxyloss = 2, /obj/item/storage/med_pouch/toxin = 2)
 	},
 /obj/machinery/pointdefense_control{
 	initial_id_tag = "torch_primary_pd";
@@ -11622,11 +11627,6 @@
 /turf/simulated/floor/plating,
 /area/aquila/power)
 "Ho" = (
-/obj/machinery/door/airlock/sol{
-	id_tag = "hopdoor";
-	name = "Executive Officer";
-	secured_wires = 1
-	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 2;
@@ -11646,6 +11646,11 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/airlock/command{
+	id_tag = "hopdoor";
+	name = "Executive Officer";
+	secured_wires = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/xo)
 "Hp" = (
@@ -11800,7 +11805,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/exo{
 	id_tag = "liaisondoor3";
 	name = "Corporate Liaison";
 	secured_wires = 1
@@ -11888,11 +11893,6 @@
 /area/bridge)
 "HX" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/sol{
-	id_tag = "portbridgedoor";
-	name = "Bridge";
-	secured_wires = 1
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -11903,6 +11903,11 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/command{
+	id_tag = "portbridgedoor";
+	name = "Bridge";
+	secured_wires = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
@@ -12067,10 +12072,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sea)
 "Iv" = (
-/obj/machinery/door/airlock/sol{
-	name = "CO's Quarters";
-	secured_wires = 1
-	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
@@ -12080,6 +12081,10 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/airlock/command{
+	name = "CO's Quarters";
+	secured_wires = 1
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/cobed)
 "Ix" = (
@@ -12285,7 +12290,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "Jj" = (
-/obj/structure/bed/chair/padded/green{
+/obj/structure/bed/chair/padded/purple{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -12707,7 +12712,6 @@
 /area/maintenance/bridge/foreport)
 "Lv" = (
 /obj/structure/table/glass,
-/obj/item/book/manual/nt_regs,
 /obj/item/stamp/rd,
 /obj/effect/floor_decal/corner/research{
 	dir = 5
@@ -13621,12 +13625,12 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/effect/floor_decal/corner/orange/half{
-	dir = 4
-	},
 /obj/machinery/light_switch{
 	pixel_x = 10;
 	pixel_y = 22
+	},
+/obj/effect/floor_decal/corner/yellow/half{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/power)
@@ -13788,12 +13792,12 @@
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/rd)
 "Qp" = (
-/obj/machinery/door/airlock/sol{
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/command{
 	id_tag = "captaindoorfore";
 	name = "Commanding Officer";
 	secured_wires = 1
 	},
-/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "Qv" = (
@@ -13958,7 +13962,7 @@
 /area/bridge)
 "Rb" = (
 /obj/machinery/door/airlock/hatch{
-	name = "Infirmary"
+	name = "Life Support"
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -15363,11 +15367,6 @@
 /area/maintenance/bridge/foreport)
 "Xx" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
-/obj/machinery/door/airlock/medical{
-	id_tag = "cmodoor";
-	name = "Chief Medical Officer";
-	secured_wires = 1
-	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
@@ -15379,6 +15378,12 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/machinery/door/airlock/command{
+	id_tag = "cmodoor";
+	name = "Chief Medical Officer";
+	secured_wires = 1;
+	stripe_color = "#00e1ff"
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)

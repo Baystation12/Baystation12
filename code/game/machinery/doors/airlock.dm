@@ -130,7 +130,7 @@
 //regular airlock presets
 
 /obj/machinery/door/airlock/command
-	door_color = COLOR_COMMAND_BLUE
+	door_color = COLOR_SOL
 
 /obj/machinery/door/airlock/security
 	door_color = COLOR_NT_RED
@@ -158,7 +158,7 @@
 
 /obj/machinery/door/airlock/research
 	door_color = COLOR_WHITE
-	stripe_color = COLOR_BOTTLE_GREEN
+	stripe_color = COLOR_RESEARCH
 
 /obj/machinery/door/airlock/science
 	door_color = COLOR_WHITE
@@ -166,6 +166,10 @@
 
 /obj/machinery/door/airlock/sol
 	door_color = COLOR_BLUE_GRAY
+
+/obj/machinery/door/airlock/exo
+	door_color = COLOR_WHITE
+	stripe_color = COLOR_BOTTLE_GREEN
 
 /obj/machinery/door/airlock/civilian
 	stripe_color = COLOR_CIVIE_GREEN
@@ -192,7 +196,7 @@
 	glass = TRUE
 
 /obj/machinery/door/airlock/glass/command
-	door_color = COLOR_COMMAND_BLUE
+	door_color = COLOR_SOL
 	stripe_color = COLOR_SKY_BLUE
 
 /obj/machinery/door/airlock/glass/security
@@ -230,6 +234,10 @@
 /obj/machinery/door/airlock/glass/sol
 	door_color = COLOR_BLUE_GRAY
 	stripe_color = COLOR_AMBER
+
+/obj/machinery/door/airlock/glass/exo
+	door_color = COLOR_WHITE
+	stripe_color = COLOR_BOTTLE_GREEN
 
 /obj/machinery/door/airlock/glass/freezer
 	door_color = COLOR_WHITE
@@ -397,6 +405,7 @@
 	opacity = 1
 	secured_wires = TRUE
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity //Until somebody makes better sprites.
+	paintable = EMPTY_BITFIELD
 
 /obj/machinery/door/airlock/vault/bolted
 	locked = 1

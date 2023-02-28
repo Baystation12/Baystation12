@@ -82,7 +82,7 @@
 	connections = dirs
 
 /obj/machinery/door/airlock/multi_tile/command
-	door_color = COLOR_COMMAND_BLUE
+	door_color = COLOR_SOL
 
 /obj/machinery/door/airlock/multi_tile/security
 	door_color = COLOR_NT_RED
@@ -136,7 +136,7 @@
 	glass = TRUE
 
 /obj/machinery/door/airlock/multi_tile/glass/command
-	door_color = COLOR_COMMAND_BLUE
+	door_color = COLOR_SOL
 	stripe_color = COLOR_SKY_BLUE
 
 /obj/machinery/door/airlock/multi_tile/glass/security

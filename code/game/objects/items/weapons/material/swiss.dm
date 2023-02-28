@@ -119,7 +119,7 @@
 /obj/item/material/knife/folding/swiss/officer
 	name = "officer's combi-knife"
 	desc = "A small, blue, multi-purpose folding knife. This one adds a corkscrew."
-	color = COLOR_COMMAND_BLUE
+	color = COLOR_SOL
 
 	tools = list(SWISSKNF_LBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER, SWISSKNF_CSCREW)
 

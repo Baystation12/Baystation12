@@ -67,7 +67,6 @@
 #define COLOR_PAKISTAN_GREEN   "#006600"
 #define COLOR_SOL              "#436b8e"
 #define COLOR_AMBER            "#ffbf00"
-#define COLOR_COMMAND_BLUE     "#46698c"
 #define COLOR_SKY_BLUE         "#5ca1cc"
 #define COLOR_PALE_ORANGE      "#b88a3b"
 #define COLOR_CIVIE_GREEN      "#b7f27d"

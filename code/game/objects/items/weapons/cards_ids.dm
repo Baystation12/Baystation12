@@ -474,7 +474,7 @@ var/global/const/NO_EMAG_ACT = -50
 	registered_name = "Central Command"
 	assignment = "General"
 	color = COLOR_GRAY40
-	detail_color = COLOR_COMMAND_BLUE
+	detail_color = COLOR_SOL
 	extra_details = list("goldstripe")
 
 /obj/item/card/id/centcom/New()
