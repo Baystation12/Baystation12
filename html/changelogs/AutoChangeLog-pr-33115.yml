@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Interactions that require drop+dropping an item on another item should
-      now work again, if they were broken.
-  - bugfix: Spawning in a wheelchair no longer places you in a broken half-buckled
-      state.
