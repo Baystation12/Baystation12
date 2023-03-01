@@ -391,7 +391,7 @@ var/global/floorIsLava = 0
 					<b>[comment.author || "(not recorded)"]</b>, \
 					<b>[comment.rank || "(not recorded)"]</b>, \
 					on <b>[comment.timestamp || "(not recorded)"]</b>\
-					<br>Round ID: <b>[comment.game_id || "(not recorded)"]</b>\
+					[comment.game_id ? "<br>Round ID: <b>[comment.game_id]</b>" : null]\
 				</div>\
 				[remove_button]\
 			</div>\
