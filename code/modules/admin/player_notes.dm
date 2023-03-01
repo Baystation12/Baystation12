@@ -28,6 +28,7 @@
 	var/day_loc = findtext(full_date, time2text(world.timeofday, "DD"))
 
 	var/datum/player_info/P = new
+	P.game_id = game_id
 	if (ismob(user))
 		P.author = user.key
 		P.rank = user.client.holder.rank
@@ -84,6 +85,6 @@
 		dat = "No information found on the given key."
 	else
 		for(var/datum/player_info/I in infos)
-			dat += "[I.content]\nby [I.author] ([I.rank]) on [I.timestamp]\n\n"
+			dat += "[I.content]\nby [I.author] ([I.rank]) on [I.timestamp] ([I.game_id])\n\n"
 
 	return list2params(list(dat))
