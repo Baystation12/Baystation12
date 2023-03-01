@@ -174,7 +174,7 @@
 	closet_appearance = /singleton/closet_appearance/crate/vox_uranium
 
 
-/obj/structure/closet/crate/uranium/WillContain()
+/obj/structure/closet/crate/vox_uranium/WillContain()
 	return list(/obj/item/stack/material/uranium/fifty = 4)
 
 
