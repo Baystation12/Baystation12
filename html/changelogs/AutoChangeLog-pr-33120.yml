@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Notes now include the round ID they were added on. Note this is not retroactive
-      and only applies to notes created after this change went live.
