@@ -44,9 +44,15 @@
 		SetInitialReagents(filling_options)
 
 
-/obj/item/reagent_containers/food/snacks/donkpocket/OnConsume(mob/living/consumer)
+/obj/item/reagent_containers/food/snacks/donkpocket/OnConsume(mob/living/consumer, mob/living/feeder)
 	if (can_self_heat)
-		to_chat(consumer, SPAN_ITALIC("You tear open \the [src], destroying the self-heating packaging."))
+		if (feeder)
+			feeder.visible_message(
+				SPAN_ITALIC("\The [feeder] tears open \a [src], destroying the self-heating packaging."),
+				SPAN_ITALIC("You tear open \the [src], destroying the self-heating packaging."),
+				SPAN_ITALIC("You hear plastic packaging crinkling."),
+				range = 3
+			)
 		can_self_heat = FALSE
 	..()
 
