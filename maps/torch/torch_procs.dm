@@ -41,7 +41,34 @@
 	else
 		return
 
-/client/proc/awake_synth()
+/datum/map/proc/give_aa(mob/activator, mob/confirmator)
+	if(aa_given == 1)
+		return -1
+	var/obj/item/card/id/captains_spare/card = new()
+
+	var/obj/item/card/id/act_card = activator.GetIdCard()
+	var/obj/item/card/id/con_card = confirmator.GetIdCard()
+
+	card.name = "Emergency Access ID Card"
+	card.registered_name = "[act_card.registered_name]"
+	card.assignment = "Temporary Access"
+
+	card.age = act_card.age
+	card.blood_type = act_card.blood_type
+	card.dna_hash = act_card.dna_hash
+	card.fingerprint_hash = act_card.fingerprint_hash
+	card.sex = act_card.sex
+	card.front = act_card.front
+	card.side = act_card.side
+
+	card.military_branch = act_card.military_branch
+	card.military_rank = act_card.military_rank
+
+	card.loc = activator.loc
+	priority_announcement.Announce("Подтверждена процедура выдачи экстренного доступа [con_card.registered_name] ко всем системам ГЭК Факел для [act_card.registered_name].", "Attention!")
+	aa_given = 1
+
+/client/verb/awake_synth()
 	set category = "Admin"
 	set name = "Awake Synth"
 

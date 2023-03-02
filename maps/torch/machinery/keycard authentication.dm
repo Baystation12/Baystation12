@@ -27,6 +27,7 @@
 		dat += "<A href='?src=\ref[src];triggerevent=Revoke Emergency Maintenance Access'>Revoke Emergency Maintenance Access</A><br>"
 		dat += "<A href='?src=\ref[src];triggerevent=Grant Nuclear Authorization Code'>Grant Nuclear Authorization Code</A><br>"
 		dat += "<a href='?src=\ref[src];triggerevent=Evacuate'>Initiate Evacuation Procedures</a><br>"
+		dat += "<a href='?src=\ref[src];triggerevent=Access'>Request Emergency Access</a><br>"
 	if(screen == 2)
 		dat += "Please swipe your card to authorize the following event: <b>[event]</b>"
 		dat += "<p><A href='?src=\ref[src];reset=1'>Back</A>"
@@ -73,3 +74,7 @@
 				if(EO.abandon_ship)
 					evacuation_controller.handle_evac_option(EO.option_target, usr)
 					return
+		if("Access")
+			if(GLOB.using_map.aa_given == 1)
+				to_chat(usr, "<span class='warning'>Emergency Access card was already issued!</span>")
+			GLOB.using_map.give_aa(event_triggered_by, event_confirmed_by)
