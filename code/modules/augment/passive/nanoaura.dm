@@ -57,9 +57,9 @@
 	to_chat(loc, SPAN_NOTICE("Your skin tingles as the nanites spread over your body."))
 
 
-/obj/aura/nanoaura/bullet_act(obj/item/projectile/P, def_zone)
+/obj/aura/nanoaura/aura_check_bullet(obj/item/projectile/proj, def_zone)
 	if (!active)
-		return
+		return EMPTY_BITFIELD
 	if (unit.charges > 0)
 		user.visible_message(SPAN_WARNING("The nanomachines harden as a response to physical trauma!"))
 		playsound(user, 'sound/effects/basscannon.ogg',35,1)
@@ -68,6 +68,7 @@
 			to_chat(user, SPAN_DANGER("Warning: Critical damage treshold passed. Shut down unit to avoid further damage"))
 		return AURA_FALSE | AURA_CANCEL
 	unit.catastrophic_failure()
+	return EMPTY_BITFIELD
 
 
 /obj/aura/nanoaura/Destroy()

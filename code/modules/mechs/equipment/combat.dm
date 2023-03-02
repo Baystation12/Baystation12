@@ -200,35 +200,29 @@
 	else
 		icon_state = "shield_null"
 
-/obj/aura/mechshield/bullet_act(obj/item/projectile/P, def_zone)
-	if(!active)
-		return
-	if(shields)
-		if(shields.charge)
-			P.damage = shields.stop_damage(P.damage)
-			user.visible_message(SPAN_WARNING("\The [shields.owner]'s shields flash and crackle."))
-			flick("shield_impact", src)
-			playsound(user,'sound/effects/basscannon.ogg',35,1)
-			//light up the night.
-			new /obj/effect/effect/smoke/illumination(user.loc, 5, 4, 1, "#ffffff")
-			if(P.damage <= 0)
-				return AURA_FALSE|AURA_CANCEL
-
-			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-			spark_system.set_up(5, 0, user)
-			spark_system.start()
-			playsound(loc, "sparks", 25, 1)
-
-/obj/aura/mechshield/hitby(atom/movable/M, datum/thrownthing/TT)
-	. = ..()
-	if(!active)
-		return
-	if(shields.charge && TT.speed <= 5)
-		user.visible_message(SPAN_WARNING("\The [shields.owner]'s shields flash briefly as they deflect \the [M]."))
+/obj/aura/mechshield/aura_check_bullet(obj/item/projectile/proj, def_zone)
+	if (active && shields?.charge)
+		proj.damage = shields.stop_damage(proj.damage)
+		user.visible_message(SPAN_WARNING("\The [shields.owner]'s shields flash and crackle."))
 		flick("shield_impact", src)
-		playsound(user,'sound/effects/basscannon.ogg',10,1)
+		playsound(user,'sound/effects/basscannon.ogg',35,1)
+		new /obj/effect/effect/smoke/illumination(user.loc, 5, 4, 1, "#ffffff")
+		if (proj.damage <= 0)
+			return AURA_FALSE|AURA_CANCEL
+
+		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		spark_system.set_up(5, 0, user)
+		spark_system.start()
+		playsound(loc, "sparks", 25, 1)
+	return EMPTY_BITFIELD
+
+/obj/aura/mechshield/aura_check_thrown(atom/movable/thrown_atom, datum/thrownthing/thrown_datum)
+	. = ..()
+	if (active && shields?.charge && thrown_datum.speed <= 5)
+		user.visible_message(SPAN_WARNING("\The [shields.owner]'s shields flash briefly as they deflect \the [thrown_atom]."))
+		flick("shield_impact", src)
+		playsound(user, 'sound/effects/basscannon.ogg', 10, TRUE)
 		return AURA_FALSE|AURA_CANCEL
-	//Too fast!
 
 //Melee! As a general rule I would recommend using regular objects and putting logic in them.
 /obj/item/mech_equipment/mounted_system/melee
@@ -423,34 +417,32 @@
 	shield = null
 	. = ..()
 
-/obj/aura/mech_ballistic/bullet_act(obj/item/projectile/P, def_zone)
+/obj/aura/mech_ballistic/aura_check_bullet(obj/item/projectile/proj, def_zone)
 	. = ..()
-	if (shield)
-		if (prob(shield.block_chance(P.damage, P.armor_penetration, source = P)))
-			user.visible_message(SPAN_WARNING("\The [P] is blocked by \the [user]'s [shield]."))
-			user.bullet_impact_visuals(P, def_zone, 0)
-			return AURA_FALSE|AURA_CANCEL
+	if (shield && prob(shield.block_chance(proj.damage, proj.armor_penetration, source = proj)))
+		user.visible_message(SPAN_WARNING("\The [proj] is blocked by \the [user]'s [shield]."))
+		user.bullet_impact_visuals(proj, def_zone, 0)
+		return AURA_FALSE|AURA_CANCEL
 
-/obj/aura/mech_ballistic/hitby(atom/movable/M, datum/thrownthing/TT)
+/obj/aura/mech_ballistic/aura_check_thrown(atom/movable/thrown_atom, datum/thrownthing/thrown_datum)
 	. = ..()
 	if (shield)
 		var/throw_damage = 0
-		if (isobj(M))
-			var/obj/O = M
-			throw_damage = O.throwforce*(TT.speed/THROWFORCE_SPEED_DIVISOR)
+		if (isobj(thrown_atom))
+			var/obj/object = thrown_atom
+			throw_damage = object.throwforce * (thrown_datum.speed / THROWFORCE_SPEED_DIVISOR)
 
-		if (prob(shield.block_chance(throw_damage, 0, source = M, attacker = TT.thrower)))
-			user.visible_message(SPAN_WARNING("\The [M] bounces off \the [user]'s [shield]."))
+		if (prob(shield.block_chance(throw_damage, 0, source = thrown_atom, attacker = thrown_datum.thrower)))
+			user.visible_message(SPAN_WARNING("\The [thrown_atom] bounces off \the [user]'s [shield]."))
 			playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 			return AURA_FALSE|AURA_CANCEL
 
-/obj/aura/mech_ballistic/attackby(obj/item/I, mob/user)
+/obj/aura/mech_ballistic/aura_check_weapon(obj/item/weapon, mob/attacker, click_params)
 	. = ..()
-	if (shield)
-		if (prob(shield.block_chance(I.force, I.armor_penetration, source = I, attacker = user)))
-			user.visible_message(SPAN_WARNING("\The [I] is blocked by \the [user]'s [shield]."))
-			playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
-			return AURA_FALSE|AURA_CANCEL
+	if (shield && prob(shield.block_chance(weapon.force, weapon.armor_penetration, source = weapon, attacker = user)))
+		user.visible_message(SPAN_WARNING("\The [weapon] is blocked by \the [user]'s [shield]."))
+		playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, TRUE)
+		return AURA_FALSE|AURA_CANCEL
 
 /obj/item/mech_equipment/flash
 	name = "exosuit flash"

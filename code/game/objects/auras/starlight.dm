@@ -5,16 +5,16 @@
 	color = "#33cc33"
 	layer = MOB_LAYER
 
-/obj/aura/starborn/bullet_act(obj/item/projectile/P, def_zone)
-	if (P.damage_type == DAMAGE_BURN)
-		user.visible_message(SPAN_WARNING("\The [P] seems to only make \the [user] stronger."))
-		user.adjustBruteLoss(-P.damage)
+/obj/aura/starborn/aura_check_bullet(obj/item/projectile/proj, def_zone)
+	if (proj.damage_type == DAMAGE_BURN)
+		user.visible_message(SPAN_WARNING("\The [proj] seems to only make \the [user] stronger."))
+		user.adjustBruteLoss(-proj.damage)
 		return AURA_FALSE
-	return 0
+	return EMPTY_BITFIELD
 
-/obj/aura/starborn/attackby(obj/item/I, mob/i_user)
-	if(I.damtype == DAMAGE_BURN)
-		to_chat(i_user, SPAN_WARNING("\The [I] seems to only feed into \the [user]'s flames."))
-		user.adjustBruteLoss(-I.force)
+/obj/aura/starborn/aura_check_weapon(obj/item/weapon, mob/attacker, click_params)
+	if (weapon.damtype == DAMAGE_BURN)
+		user.visible_message(SPAN_WARNING("\The [weapon] seems to only feed into \the [user]'s flames."))
+		user.adjustBruteLoss(-weapon.force)
 		return AURA_FALSE
-	return 0
+	return EMPTY_BITFIELD
