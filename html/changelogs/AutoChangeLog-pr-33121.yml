@@ -1,7 +1,0 @@
-author: rootoo807
-delete-after: true
-changes:
-  - bugfix: Voxship has uranium again.
-  - bugfix: Welding rods produces the correct material sheets. Flammable rods can't
-      be welded into sheets.
-  - bugfix: Fixes circuit printer messages and material checking.
