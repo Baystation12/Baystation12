@@ -268,6 +268,8 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 
 /proc/to_chat(target, message, handle_whitespace = TRUE, trailing_newline = TRUE)
 	set waitfor = FALSE
+	if (!target)
+		return
 	if(Master.current_runlevel == RUNLEVEL_INIT || !SSchat?.initialized)
 		to_chat_immediate(target, message, handle_whitespace, trailing_newline)
 		return
