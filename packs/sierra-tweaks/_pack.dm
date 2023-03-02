@@ -1,6 +1,9 @@
 #ifndef CONTENT_PACK_SIERRA_TWEAKS
 #define CONTENT_PACK_SIERRA_TWEAKS
 
+// Admintools
+#include "admintools\fun_secrets_lights.dm"
+
 // Client
 #include "client\spawnpoints.dm"
 #include "client\verbs.dm"
