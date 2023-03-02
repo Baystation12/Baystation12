@@ -74,10 +74,15 @@
 		qdel(src)
 	..()
 
-/obj/effect/cleanable/wizard_mark/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/nullrod) || istype(I, /obj/item/spellbook))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		src.visible_message("\The [src] fades away!")
+
+/obj/effect/cleanable/wizard_mark/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Null Rod or Spell Book - Remove mark
+	if (is_type_in_list(tool, list(/obj/item/nullrod, /obj/item/spellbook)))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] waves \a [tool] over \the [src], and it fades away."),
+			SPAN_NOTICE("You wave \the [tool] over \the [src], and it fades away.")
+		)
 		qdel(src)
-		return
-	..()
+		return TRUE
+
+	return ..()

@@ -140,11 +140,15 @@
 	exposed = 1
 	update_icon()
 
-/obj/effect/quicksand/attackby(obj/item/W, mob/user)
-	if(!exposed && W.force)
+
+/obj/effect/quicksand/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Any object - Expose the quicksand
+	if (!exposed && tool.force)
 		expose()
-	else
-		..()
+		return TRUE
+
+	return ..()
+
 
 /obj/effect/quicksand/Crossed(atom/movable/AM)
 	if(isliving(AM))

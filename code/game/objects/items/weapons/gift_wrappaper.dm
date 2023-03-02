@@ -32,22 +32,24 @@
 		return
 	to_chat(user, SPAN_WARNING("You can't move."))
 
-/obj/effect/spresent/attackby(obj/item/W as obj, mob/user as mob)
-	..()
 
-	if(!isWirecutter(W))
-		to_chat(user, SPAN_WARNING("I need wirecutters for that."))
-		return
+/obj/effect/spresent/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Wirecutters - Open the present
+	if (isWirecutter(tool))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] cuts open \the [src] with \a [tool]."),
+			SPAN_NOTICE("You cut open \the [src] with \the [tool].")
+		)
+		for (var/mob/M in src) //Should only be one but whatever.
+			M.dropInto(loc)
+			if (M.client)
+				M.client.eye = M.client.mob
+				M.client.perspective = MOB_PERSPECTIVE
+		qdel(src)
+		return TRUE
 
-	to_chat(user, SPAN_NOTICE("You cut open the present."))
+	return ..()
 
-	for(var/mob/M in src) //Should only be one but whatever.
-		M.dropInto(loc)
-		if (M.client)
-			M.client.eye = M.client.mob
-			M.client.perspective = MOB_PERSPECTIVE
-
-	qdel(src)
 
 /obj/item/a_gift/attack_self(mob/M as mob)
 	var/gift_type = pick(
