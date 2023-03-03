@@ -1,6 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Bluespace ghosts no longer duplicate mechs and should now instead replace
-      the pilots with clones.
-  - maptweak: The Aquila no longer has 2 chairs stacked on top of eachother.
