@@ -10,6 +10,24 @@
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "A soft cotton towel."
 
+/obj/item/towel/equipped(mob/user, slot)
+	switch(slot)
+		if(slot_head)
+			sprite_sheets = list(
+				SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
+				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi',
+				SPECIES_NABBER = 'icons/mob/species/nabber/onmob_head_gas.dmi'
+				)
+		if(slot_belt)
+			sprite_sheets = list()
+		if(slot_wear_suit)
+			sprite_sheets = list(
+				SPECIES_VOX = 'icons/mob/species/vox/onmob_suit_vox.dmi',
+				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi',
+				SPECIES_NABBER = 'icons/mob/species/nabber/onmob_suit_gas.dmi'
+				)
+	return ..()
+
 /obj/item/towel/attack_self(mob/living/user as mob)
 	user.visible_message(SPAN_NOTICE("[user] uses [src] to towel themselves off."))
 	playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
