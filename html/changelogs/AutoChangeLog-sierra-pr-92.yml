@@ -1,4 +1,0 @@
-author: LordNest
-delete-after: true
-changes:
-  - bugfix: Логис более не срёт рандомными движениями. Теперь и у нас.
