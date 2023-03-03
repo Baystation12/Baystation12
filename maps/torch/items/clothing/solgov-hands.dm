@@ -54,3 +54,9 @@
 	desc = "These black duty gloves are made from durable synthetic materials, and have a lovely brown accent color."
 	icon_state = "duty_gloves_sup"
 	item_state = "duty_gloves_sup"
+
+/obj/item/clothing/gloves/thick/duty/solgov/fleet
+	name = "fleet duty gloves"
+	desc = "These black duty gloves are made from durable synthetic materials. Standard issue to all ranks in the SCG Fleet."
+	icon_state = "fleet_gloves"
+	item_state = "fleet_gloves"
