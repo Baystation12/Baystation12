@@ -1,0 +1,8 @@
+author: rootoo807
+delete-after: true
+changes:
+  - bugfix: Wearable objects that can go in more than one slot (e.g. bandanas, towels,
+      cigarettes, gum/lollipops, berets, toilet paper) now render correctly for Vox
+      and Unathi.
+  - tweak: Minor sprite tweaks for Unathi bandanas + a few other hats, added some
+      icons for recently PR'd clothes.
