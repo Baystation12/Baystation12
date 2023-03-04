@@ -791,7 +791,6 @@
 /turf/simulated/floor/tiled,
 /area/hydroponics)
 "ce" = (
-/obj/item/screwdriver,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -5186,6 +5185,7 @@
 /obj/structure/table/standard,
 /obj/item/material/hatchet,
 /obj/item/material/minihoe,
+/obj/item/screwdriver,
 /turf/simulated/floor/tiled,
 /area/hydroponics)
 "lB" = (
