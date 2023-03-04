@@ -213,6 +213,8 @@ would spawn and follow the beaker, even if it is carried or thrown.
 		return 0
 	if (M.isSynthetic())
 		return 0
+	if (HAS_FLAGS(M.wear_mask?.item_flags, ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
+		return FALSE
 	if (M.internal != null)
 		if(M.wear_mask && (M.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
 			return 0
