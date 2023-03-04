@@ -9,10 +9,10 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
 	/// The set of options for the amount of reagents the bag will try to transfer per process.
-	var/static/list/allowed_transfer_amounts = list(2, 1, REM, 0)
+	var/static/list/allowed_transfer_amounts = list(2, 1, 0)
 
 	/// The configured amount of reagents the IV bag will try to transfer per process.
-	var/transfer_amount = 1
+	var/transfer_amount = 2
 
 	/// If this bag is attached to a person, that person.
 	var/mob/living/carbon/human/patient
@@ -251,9 +251,12 @@
 	UpdateTransferAmount(user, src)
 
 
+/obj/item/reagent_containers/ivbag/nanoblood
+	transfer_amount = 1
+
+
 /obj/item/reagent_containers/ivbag/nanoblood/Initialize()
 	. = ..()
-	transfer_amount = REM
 	reagents.add_reagent(/datum/reagent/nanoblood, volume)
 	AddLabel("Nanoblood")
 	UpdateItemSize()
