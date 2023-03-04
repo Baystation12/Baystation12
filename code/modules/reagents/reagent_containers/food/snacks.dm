@@ -14,6 +14,7 @@
 	var/list/eat_sound = 'sound/items/eatfood.ogg'
 	var/obj/item/trash
 	var/sushi_overlay
+	var/can_use_cooker = TRUE
 
 
 /obj/item/reagent_containers/food/snacks/Destroy()

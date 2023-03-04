@@ -36,6 +36,7 @@
 	filling_color = null
 	trash = /obj/item/serving_bowl
 	bitesize = 2
+	can_use_cooker = FALSE
 	var/list/ingredients = list()
 	var/ingredients_left = 4
 	var/fullname

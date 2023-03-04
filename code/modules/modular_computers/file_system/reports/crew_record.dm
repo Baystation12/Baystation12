@@ -164,7 +164,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 /proc/get_crewmember_record(name)
 	name = sanitize(name)
 	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
-		if(CR.get_name() == name)
+		if(sanitize(CR.get_name()) == name)
 			return CR
 	return null
 
