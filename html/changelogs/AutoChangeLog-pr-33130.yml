@@ -1,0 +1,7 @@
+author: rootoo807
+delete-after: true
+changes:
+  - bugfix: Crew with special characters in their name no longer stay in crew records
+      after cryo-ing.
+  - tweak: Serving bowls can no longer be used in cookers. Boil your potatoes before
+      serving them.
