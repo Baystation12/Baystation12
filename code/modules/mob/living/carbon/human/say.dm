@@ -33,10 +33,11 @@
 			return
 		else if(L.breath_fail_ratio > 0.7)
 			whisper_say(length(message) > 5 ? stars(message) : message, speaking)
+			return
 		else if(L.breath_fail_ratio > 0.4 && length(message) > 10)
 			whisper_say(message, speaking)
-	else
-		return ..(message, speaking = speaking, whispering = whispering)
+			return
+	return ..(message, speaking = speaking, whispering = whispering)
 
 
 /mob/living/carbon/human/proc/forcesay(list/append)
