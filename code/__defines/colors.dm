@@ -92,6 +92,7 @@
 #define CABLE_COLOR_ORANGE "#ff9900"
 #define CABLE_COLOR_CYAN "#5ca1cc"
 #define CABLE_COLOR_WHITE "#c0c0c0"
+#define CABLE_COLOR_BLACK "#333333"
 
 
 #define	PIPE_COLOR_GREY        "#808080"

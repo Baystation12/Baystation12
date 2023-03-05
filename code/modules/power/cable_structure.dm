@@ -91,6 +91,9 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/structure/cable/white
 	color = CABLE_COLOR_WHITE
 
+/obj/structure/cable/black
+	color = CABLE_COLOR_BLACK
+
 
 // Ghost examining the cable -> tells him the power
 /obj/structure/cable/attack_ghost(mob/user)
