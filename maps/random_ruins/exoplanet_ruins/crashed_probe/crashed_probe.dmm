@@ -1,0 +1,1897 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aq" = (
+/obj/effect/floor_decal/solarpanel,
+/obj/machinery/power/solar,
+/obj/structure/cable{
+	dir = 4;
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarsp)
+"ba" = (
+/obj/effect/floor_decal/solarpanel,
+/obj/machinery/power/solar,
+/obj/item/stack/material/rods,
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"bs" = (
+/obj/machinery/light/small/red{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"bB" = (
+/obj/structure/sign/ecplaque{
+	pixel_x = -32
+	},
+/obj/machinery/light/small/red{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/ecprobe/bridge)
+"co" = (
+/obj/machinery/door/airlock/glass,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/ecprobe/bridge)
+"cY" = (
+/obj/machinery/constructable_frame,
+/obj/item/stack/cable_coil,
+/obj/item/stock_parts/circuitboard/comm_monitor,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"da" = (
+/obj/structure/cable,
+/obj/effect/floor_decal/corner/blue/border,
+/obj/machinery/power/apc/derelict{
+	pixel_y = -28
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/ecprobe/bridge)
+"dF" = (
+/obj/effect/floor_decal/corner/blue/bordercorner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/ecprobe/bridge)
+"dK" = (
+/obj/machinery/light/small/red{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"ee" = (
+/obj/machinery/atmospherics/binary/pump{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/loading{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"eB" = (
+/obj/structure/cable{
+	dir = 4;
+	icon_state = "1-4"
+	},
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"gl" = (
+/obj/effect/landmark/clear,
+/obj/structure/shuttle/engine/heater{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/template_noop,
+/area/map_template/ecprobe/engineering)
+"go" = (
+/obj/structure/sign/warning/airlock{
+	pixel_y = 32
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"gs" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/effect/decal/cleanable/blood/gibs/robot{
+	pixel_x = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"gB" = (
+/obj/structure/cable{
+	dir = 4;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"hn" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/decoy{
+	icon_state = "ai-crash";
+	name = "inactive AI"
+	},
+/obj/machinery/door/window/eastright{
+	name = "Processing Core 2";
+	dir = 8
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"hQ" = (
+/obj/machinery/constructable_frame,
+/obj/item/stack/cable_coil,
+/obj/item/stock_parts/circuitboard/comm_server,
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"id" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"in" = (
+/obj/effect/landmark/clear,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"iL" = (
+/obj/machinery/light/small/red{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"jV" = (
+/obj/effect/floor_decal/solarpanel,
+/obj/machinery/power/solar,
+/obj/structure/cable{
+	dir = 4;
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	d1 = 16;
+	d2 = 0;
+	dir = 1;
+	icon_state = "0-4"
+	},
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"kM" = (
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/ecprobe/engineering)
+"ld" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/mob/living/simple_animal/hostile/hivebot/ranged_damage/strong/guard,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarsp)
+"lO" = (
+/obj/effect/floor_decal/solarpanel,
+/obj/machinery/power/solar,
+/obj/structure/cable{
+	d1 = 16;
+	d2 = 0;
+	dir = 1;
+	icon_state = "0-4"
+	},
+/obj/structure/cable{
+	dir = 4;
+	icon_state = "1-2"
+	},
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"mE" = (
+/obj/machinery/telecomms/broadcaster,
+/obj/effect/landmark/clear,
+/obj/effect/landmark/scorcher,
+/turf/simulated/floor,
+/area/map_template/ecprobe/bridge)
+"mG" = (
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/ecprobe/bridge)
+"mH" = (
+/obj/structure/cable{
+	dir = 8;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"mJ" = (
+/obj/machinery/computer/ship/engines{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/blue/border{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/ecprobe/bridge)
+"nJ" = (
+/obj/effect/landmark/clear,
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/ecprobe/engineering)
+"nP" = (
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/item/material/shard,
+/obj/structure/catwalk,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarsp)
+"oa" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 8
+	},
+/obj/effect/landmark/clear,
+/obj/effect/landmark/scorcher,
+/turf/template_noop,
+/area/map_template/ecprobe/engineering)
+"pi" = (
+/obj/structure/cable{
+	dir = 4;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/airlock/glass,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/ecprobe/bridge)
+"pv" = (
+/obj/machinery/telecomms/server,
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"pA" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarsp)
+"pX" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 8
+	},
+/obj/effect/landmark/clear,
+/obj/effect/landmark/scorcher,
+/turf/template_noop,
+/area/template_noop)
+"qz" = (
+/obj/effect/decal/cleanable/blood/gibs/robot{
+	pixel_x = 1
+	},
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/simulated/floor,
+/area/map_template/ecprobe/engineering)
+"rg" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	dir = 4;
+	icon_state = "1-4"
+	},
+/obj/effect/landmark/clear,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"rw" = (
+/obj/machinery/light/small/red{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"rE" = (
+/obj/structure/cable{
+	dir = 4;
+	icon_state = "1-2"
+	},
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/decoy{
+	icon_state = "ai-crash";
+	name = "inactive AI"
+	},
+/obj/machinery/door/window/eastright{
+	name = "Processing Core 1"
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"rW" = (
+/obj/effect/floor_decal/corner/blue/border{
+	dir = 1
+	},
+/obj/machinery/computer/dummy{
+	name = "ship intelligence control console"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/ecprobe/bridge)
+"sk" = (
+/obj/effect/landmark/clear,
+/obj/effect/landmark/scorcher,
+/turf/template_noop,
+/area/template_noop)
+"so" = (
+/obj/item/stack/material/rods,
+/obj/item/material/shard,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"sw" = (
+/obj/machinery/computer/ship/sensors{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/blue/border{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/ecprobe/bridge)
+"th" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 10
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"tm" = (
+/obj/effect/floor_decal/corner/blue/border{
+	dir = 6
+	},
+/obj/structure/table/steel_reinforced,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/ecprobe/bridge)
+"tu" = (
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"tQ" = (
+/obj/effect/floor_decal/solarpanel,
+/obj/machinery/power/solar,
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarsp)
+"uw" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"uG" = (
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide{
+	dir = 1;
+	start_pressure = 1013.25
+	},
+/obj/effect/floor_decal/industrial/outline/orange,
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"uK" = (
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"uT" = (
+/obj/effect/landmark/clear,
+/obj/structure/shuttle/engine/heater{
+	dir = 8
+	},
+/turf/template_noop,
+/area/template_noop)
+"uV" = (
+/mob/living/simple_animal/hostile/hivebot/ranged_damage/strong/guard,
+/turf/simulated/floor,
+/area/map_template/ecprobe/engineering)
+"vu" = (
+/obj/item/stack/material/rods,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"vz" = (
+/turf/template_noop,
+/area/template_noop)
+"xm" = (
+/obj/structure/window/reinforced,
+/obj/machinery/door/window{
+	dir = 8;
+	name = "Blackbox Recording Room"
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"yh" = (
+/obj/effect/landmark/clear,
+/obj/structure/sign/warning/server_room{
+	pixel_y = 32
+	},
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"zp" = (
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup{
+	start_pressure = 7498.00
+	},
+/obj/effect/floor_decal/industrial/outline/orange,
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"AH" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 9
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"CA" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/mob/living/simple_animal/hostile/hivebot/ranged_damage/strong/guard,
+/obj/effect/landmark/clear,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"DG" = (
+/obj/item/material/shard,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"DX" = (
+/obj/effect/floor_decal/corner/blue/border{
+	dir = 5
+	},
+/obj/machinery/computer/dummy{
+	name = "ship robot control console"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/ecprobe/bridge)
+"Eh" = (
+/obj/effect/landmark/clear,
+/obj/effect/landmark/scorcher,
+/obj/machinery/telecomms/receiver,
+/turf/simulated/floor,
+/area/map_template/ecprobe/bridge)
+"Ez" = (
+/obj/effect/landmark/clear,
+/obj/item/material/shard,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 8
+	},
+/turf/template_noop,
+/area/map_template/ecprobe/engineering)
+"EI" = (
+/obj/machinery/telecomms/processor,
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"EP" = (
+/mob/living/simple_animal/hostile/hivebot/ranged_damage/strong/guard,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"GB" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/structure/handrail{
+	dir = 4
+	},
+/turf/simulated/floor,
+/area/map_template/ecprobe/engineering)
+"GW" = (
+/obj/item/stack/material/rods,
+/obj/item/material/shard,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarsp)
+"Hu" = (
+/obj/machinery/computer/ship/helm{
+	req_access = list(list("ACCESS_EXPLO_HELM"));
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/blue/border{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/ecprobe/bridge)
+"Ix" = (
+/obj/structure/bed/chair/office/light{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/rogue_drone/hijacked,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/ecprobe/bridge)
+"II" = (
+/obj/effect/floor_decal/solarpanel,
+/obj/machinery/power/solar,
+/obj/structure/cable{
+	dir = 4;
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"IP" = (
+/obj/effect/floor_decal/corner/blue/bordercorner,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/ecprobe/bridge)
+"IV" = (
+/obj/machinery/telecomms/hub,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"Jt" = (
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/decoy{
+	icon_state = "ai-crash";
+	name = "inactive AI"
+	},
+/obj/machinery/door/window{
+	dir = 8;
+	name = "Processing Core 2"
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"JG" = (
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/item/stool,
+/mob/living/simple_animal/hostile/rogue_drone/hijacked,
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"JO" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarsp)
+"Ke" = (
+/obj/structure/shuttle/engine/heater{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/template_noop,
+/area/map_template/ecprobe/engineering)
+"Ko" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/engineering)
+"KB" = (
+/obj/machinery/telecomms/bus,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"KD" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/machinery/recharge_station{
+	name = "drone recharging station";
+	desc = "An outdated, bulky model of recharging stations, designed for drones but wildly inefficient by modern standards. You see loose wires and sparks coming out of it."
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"Lc" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"Ln" = (
+/obj/machinery/power/smes/buildable,
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"Lr" = (
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/ecprobe/bridge)
+"Ml" = (
+/obj/effect/landmark/clear,
+/obj/structure/sign/warning/server_room{
+	dir = 1;
+	pixel_y = -32
+	},
+/turf/template_noop,
+/area/map_template/ecprobe/solarsp)
+"Mv" = (
+/obj/structure/sign/warning/airlock{
+	dir = 1
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/ecprobe/engineering)
+"ND" = (
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/ecprobe/bridge)
+"NE" = (
+/obj/structure/cable{
+	dir = 4;
+	icon_state = "1-2"
+	},
+/mob/living/simple_animal/hostile/hivebot/ranged_damage/strong/guard,
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"NP" = (
+/obj/effect/floor_decal/solarpanel,
+/obj/machinery/power/solar,
+/obj/structure/cable{
+	d1 = 16;
+	d2 = 0;
+	dir = 1;
+	icon_state = "0-4"
+	},
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"NX" = (
+/obj/machinery/shipsensors,
+/obj/effect/landmark/clear,
+/obj/effect/landmark/scorcher,
+/turf/simulated/floor,
+/area/map_template/ecprobe/bridge)
+"Ok" = (
+/obj/effect/floor_decal/solarpanel,
+/obj/machinery/power/solar,
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"Ow" = (
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"OT" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"OX" = (
+/obj/item/stack/material/rods,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"Ps" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/mob/living/simple_animal/hostile/hivebot/ranged_damage/strong/guard,
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"PZ" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/item/disk/astrodata,
+/obj/item/paper/ecprobelog,
+/obj/machinery/computer/dummy{
+	name = "ship intelligence control console"
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"QE" = (
+/obj/machinery/computer/shuttle_control{
+	dir = 8;
+	req_access = list("ACCESS_TORCH_PETROV_HELM");
+	shuttle_tag = "Petrov"
+	},
+/obj/effect/floor_decal/corner/blue/border{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/ecprobe/bridge)
+"QF" = (
+/obj/structure/cable,
+/obj/machinery/power/apc/derelict{
+	pixel_y = -28
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"Rs" = (
+/obj/item/material/shard,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"RC" = (
+/obj/item/stock_parts/circuitboard/ntnet_relay,
+/obj/machinery/constructable_frame,
+/obj/item/stack/cable_coil,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"RP" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"Sz" = (
+/obj/structure/sign/warning/science{
+	pixel_x = -32
+	},
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/machinery/light/small/red{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/ecprobe/bridge)
+"SM" = (
+/obj/item/stack/cable_coil,
+/obj/item/stack/material/rods,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"TH" = (
+/obj/machinery/light/small/red,
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"TJ" = (
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/obj/structure/cable{
+	d1 = 16;
+	d2 = 0;
+	dir = 4;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"Uc" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/backup_server,
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"Ug" = (
+/obj/machinery/constructable_frame,
+/obj/item/stack/cable_coil,
+/obj/item/stock_parts/circuitboard/broken,
+/obj/structure/window/reinforced,
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"UJ" = (
+/obj/item/material/shard,
+/obj/item/stack/material/rods,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarss)
+"UW" = (
+/obj/structure/cable{
+	dir = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"VZ" = (
+/turf/simulated/wall/r_wall/hull,
+/area/template_noop)
+"Xj" = (
+/obj/structure/cable{
+	dir = 4;
+	icon_state = "1-2"
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/decoy{
+	icon_state = "ai-crash";
+	name = "inactive AI"
+	},
+/obj/machinery/door/window{
+	dir = 4;
+	name = "Processing Core 1"
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"Yl" = (
+/obj/effect/floor_decal/solarpanel,
+/obj/machinery/power/solar,
+/obj/structure/cable{
+	dir = 4;
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	d1 = 16;
+	d2 = 0;
+	dir = 1;
+	icon_state = "0-4"
+	},
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarsp)
+"YK" = (
+/obj/effect/floor_decal/solarpanel,
+/obj/machinery/power/solar,
+/obj/structure/cable{
+	d1 = 16;
+	d2 = 0;
+	dir = 1;
+	icon_state = "0-4"
+	},
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/map_template/ecprobe/solarsp)
+"YL" = (
+/obj/item/stock_parts/circuitboard/smes,
+/obj/item/stock_parts/smes_coil/weak,
+/obj/item/stack/cable_coil,
+/obj/machinery/constructable_frame,
+/turf/simulated/floor/reinforced,
+/area/map_template/ecprobe/engineering)
+"YU" = (
+/obj/machinery/door/airlock/external,
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/simulated/floor,
+/area/map_template/ecprobe/engineering)
+"Zp" = (
+/obj/machinery/constructable_frame,
+/obj/item/stack/cable_coil,
+/obj/item/stock_parts/circuitboard/broken,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/simulated/floor/bluegrid,
+/area/map_template/ecprobe/engineering)
+"ZC" = (
+/obj/machinery/suit_storage_unit/engineering/salvage,
+/turf/simulated/floor,
+/area/map_template/ecprobe/engineering)
+
+(1,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(2,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+RP
+RP
+pX
+RP
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(3,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+RP
+RP
+RP
+RP
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(4,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+RP
+RP
+RP
+pX
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(5,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+RP
+VZ
+in
+in
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(6,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+RP
+RP
+RP
+RP
+RP
+RP
+RP
+uT
+RP
+RP
+RP
+RP
+RP
+RP
+RP
+RP
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(7,1,1) = {"
+vz
+vz
+vz
+RP
+RP
+RP
+RP
+RP
+RP
+RP
+kM
+kM
+oa
+oa
+Ko
+Ko
+oa
+oa
+kM
+kM
+in
+RP
+RP
+RP
+RP
+RP
+RP
+vz
+vz
+vz
+"}
+(8,1,1) = {"
+vz
+vz
+vz
+RP
+RP
+RP
+RP
+RP
+RP
+RP
+kM
+kM
+Ke
+Ke
+Ez
+gl
+Ke
+Ke
+kM
+kM
+RP
+RP
+RP
+RP
+RP
+RP
+RP
+vz
+vz
+vz
+"}
+(9,1,1) = {"
+vz
+vz
+vz
+RP
+RP
+RP
+RP
+RP
+RP
+kM
+kM
+uG
+kM
+kM
+Ko
+kM
+kM
+kM
+zp
+kM
+kM
+RP
+RP
+RP
+RP
+RP
+RP
+vz
+vz
+vz
+"}
+(10,1,1) = {"
+vz
+vz
+vz
+RP
+RP
+RP
+RP
+RP
+RP
+kM
+kM
+uK
+bs
+uK
+YL
+Ln
+gs
+bs
+ee
+kM
+kM
+RP
+RP
+RP
+RP
+RP
+RP
+vz
+vz
+vz
+"}
+(11,1,1) = {"
+vz
+vz
+vz
+OX
+RP
+RP
+RP
+RP
+kM
+kM
+uK
+th
+uK
+uK
+Lc
+TJ
+gB
+uK
+AH
+uK
+kM
+kM
+RP
+RP
+RP
+RP
+RP
+vz
+vz
+vz
+"}
+(12,1,1) = {"
+vz
+vz
+vz
+Rs
+RP
+RP
+RP
+RP
+kM
+kM
+uK
+Zp
+Ug
+uK
+gB
+gB
+gB
+KD
+uV
+uK
+kM
+kM
+RP
+RP
+EP
+RP
+RP
+RP
+RP
+vz
+"}
+(13,1,1) = {"
+RP
+JO
+GW
+JO
+tQ
+tQ
+JO
+nJ
+kM
+kM
+dK
+cY
+hQ
+uK
+gB
+NE
+gB
+RC
+qz
+TH
+kM
+kM
+nJ
+OT
+Ok
+DG
+OT
+OT
+DG
+vz
+"}
+(14,1,1) = {"
+RP
+JO
+JO
+tQ
+aq
+aq
+Ml
+kM
+kM
+kM
+go
+uK
+uK
+uK
+Xj
+rE
+gB
+uK
+uK
+uK
+Mv
+kM
+kM
+yh
+II
+ba
+UJ
+OT
+OT
+vz
+"}
+(15,1,1) = {"
+so
+JO
+nP
+pA
+pA
+ld
+pA
+YU
+GB
+YU
+id
+id
+Ps
+id
+UW
+Ow
+gB
+id
+id
+id
+YU
+GB
+YU
+uw
+rg
+CA
+vu
+SM
+DG
+vz
+"}
+(16,1,1) = {"
+RP
+JO
+YK
+Yl
+Yl
+Yl
+JO
+kM
+ZC
+kM
+uK
+uK
+uK
+uK
+hn
+Jt
+NE
+id
+id
+QF
+kM
+ZC
+kM
+OT
+jV
+lO
+vu
+OT
+OT
+vz
+"}
+(17,1,1) = {"
+RP
+GW
+YK
+YK
+YK
+YK
+JO
+kM
+kM
+kM
+dK
+KB
+EI
+uK
+uK
+uK
+gB
+Uc
+xm
+TH
+kM
+kM
+kM
+OT
+NP
+NP
+OT
+UJ
+OT
+vz
+"}
+(18,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+sk
+kM
+kM
+uK
+IV
+pv
+uK
+uK
+uK
+gB
+PZ
+JG
+uK
+kM
+kM
+sk
+RP
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(19,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+sk
+kM
+kM
+uK
+uK
+uK
+uK
+uK
+uK
+gB
+uK
+uK
+uK
+kM
+kM
+sk
+RP
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(20,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+sk
+sk
+kM
+kM
+tu
+iL
+tu
+uK
+mH
+eB
+rw
+tu
+kM
+kM
+sk
+sk
+RP
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(21,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+sk
+sk
+Lr
+Lr
+Lr
+Lr
+Lr
+co
+pi
+Lr
+Lr
+Lr
+Lr
+Lr
+sk
+sk
+RP
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(22,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+RP
+sk
+sk
+Lr
+Lr
+rW
+bB
+ND
+mG
+Sz
+da
+Lr
+Lr
+sk
+sk
+RP
+RP
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(23,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+RP
+RP
+sk
+Lr
+Lr
+DX
+dF
+Ix
+Ix
+IP
+tm
+Lr
+Lr
+sk
+RP
+RP
+RP
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(24,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+RP
+RP
+sk
+sk
+Lr
+Lr
+Hu
+sw
+mJ
+QE
+Lr
+Lr
+sk
+sk
+RP
+RP
+RP
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(25,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+RP
+RP
+sk
+sk
+Lr
+Lr
+Lr
+Lr
+Lr
+Lr
+Lr
+Lr
+sk
+sk
+RP
+RP
+RP
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(26,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+sk
+sk
+NX
+Lr
+Lr
+Lr
+Lr
+mE
+Eh
+sk
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(27,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+sk
+sk
+sk
+sk
+sk
+sk
+sk
+sk
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(28,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(29,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(30,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
