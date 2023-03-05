@@ -145,7 +145,7 @@
 		buckled_mob = null
 		return FALSE
 	if (user)
-		if (user.incapacitated())
+		if (user.incapacitated(INCAPACITATION_DISABLED))
 			if (!silent)
 				to_chat(user, SPAN_WARNING("You're in no condition to unbuckle things right now."))
 			return FALSE
