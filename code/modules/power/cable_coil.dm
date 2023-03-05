@@ -1,3 +1,17 @@
+/// Associative list of colors. Default colors that a cable coil or length of cable can be. Used for multitool interactions.
+GLOBAL_LIST_INIT(cable_default_colors, list(
+	"Black"  = CABLE_COLOR_BLACK,
+	"Blue"   = CABLE_COLOR_BLUE,
+	"Cyan"   = CABLE_COLOR_CYAN,
+	"Green"  = CABLE_COLOR_GREEN,
+	"Orange" = CABLE_COLOR_ORANGE,
+	"Purple" = CABLE_COLOR_PINK,
+	"Red"    = CABLE_COLOR_RED,
+	"Yellow" = CABLE_COLOR_YELLOW,
+	"White"  = CABLE_COLOR_WHITE
+))
+
+
 /obj/item/stack/cable_coil
 
 	var/const/MAX_COIL_AMOUNT = 30
@@ -58,8 +72,7 @@
 
 
 /obj/item/stack/cable_coil/on_update_icon()
-	if (!color)
-		color = GLOB.possible_cable_colours[pick(GLOB.possible_cable_colours)]
+	color = COLOR_MAROON
 	switch (amount)
 		if (1)
 			icon_state = "coil1"
