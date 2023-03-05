@@ -2574,7 +2574,7 @@
 /area/lar_maria/sec_wing)
 "gt" = (
 /obj/structure/closet/crate/radiation,
-/obj/random/cable_coil,
+/obj/random/single/color/cable_coil,
 /obj/item/stack/material/tritium/ten,
 /obj/item/wirecutters,
 /obj/item/wrench,

@@ -303,17 +303,22 @@
 	return ..(mapload, rand(1, 2), _color)
 
 
-/obj/random/cable_coil
+/obj/random/single/color/cable_coil
 	icon = 'icons/obj/power.dmi'
 	icon_state = "coil"
+	spawn_object = /obj/item/stack/cable_coil
 
 
-/obj/random/cable_coil/spawn_choices()
-	var/options = typesof(/obj/item/stack/cable_coil)
-	options -= /obj/item/stack/cable_coil/cyborg
-	options -= /obj/item/stack/cable_coil/fabricator
-	options -= /obj/item/stack/cable_coil/single
-	return options
+/obj/random/single/color/cable_coil/color_choices()
+	return list(
+		CABLE_COLOR_YELLOW,
+		CABLE_COLOR_GREEN,
+		CABLE_COLOR_BLUE,
+		CABLE_COLOR_PINK,
+		CABLE_COLOR_ORANGE,
+		CABLE_COLOR_CYAN,
+		CABLE_COLOR_WHITE
+	)
 
 
 /obj/item/stack/cable_coil/cyborg
