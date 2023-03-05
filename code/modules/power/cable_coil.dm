@@ -19,6 +19,7 @@
 		MATERIAL_GLASS = 20,
 		MATERIAL_PLASTIC = 20
 	)
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	item_state = "coil"
@@ -314,6 +315,7 @@
 	matter = null
 	uses_charge = 1
 	charge_costs = list(1)
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
 
 
 /obj/item/stack/cable_coil/cyborg/can_merge(obj/item/stack/cable_coil/coil)
