@@ -5,6 +5,10 @@
 #include "_defines\clothing.dm"
 #include "_defines\guns.dm"
 
+// Interactions (including overriding)
+#include "interactions\glup_down.dm"
+#include "interactions\face_wash.dm"
+
 // Clothing
 #include "clothing\head\berets.dm"
 #include "clothing\head\head.dm"
