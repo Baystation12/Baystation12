@@ -8,7 +8,7 @@
 	randpixel = 2
 	amount = MAX_COIL_AMOUNT
 	max_amount = MAX_COIL_AMOUNT
-	color = COLOR_MAROON
+	color = CABLE_COLOR_RED
 	desc = "A coil of wiring, used for delicate electronics and basic power transfer."
 	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL

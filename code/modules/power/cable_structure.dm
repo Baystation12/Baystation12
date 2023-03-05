@@ -71,25 +71,25 @@ By design, d1 is the smallest direction and d2 is the highest
 	return PN.draw_power(amount)
 
 /obj/structure/cable/yellow
-	color = COLOR_AMBER
+	color = CABLE_COLOR_YELLOW
 
 /obj/structure/cable/green
-	color = COLOR_GREEN
+	color = CABLE_COLOR_GREEN
 
 /obj/structure/cable/blue
-	color = COLOR_CYAN_BLUE
+	color = CABLE_COLOR_BLUE
 
 /obj/structure/cable/pink
-	color = COLOR_PURPLE
+	color = CABLE_COLOR_PINK
 
 /obj/structure/cable/orange
-	color = COLOR_ORANGE
+	color = CABLE_COLOR_ORANGE
 
 /obj/structure/cable/cyan
-	color = COLOR_SKY_BLUE
+	color = CABLE_COLOR_CYAN
 
 /obj/structure/cable/white
-	color = COLOR_SILVER
+	color = CABLE_COLOR_WHITE
 
 
 // Ghost examining the cable -> tells him the power
