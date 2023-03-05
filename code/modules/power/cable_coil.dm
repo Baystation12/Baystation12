@@ -108,16 +108,6 @@
 	UpdateItemSize()
 
 
-/obj/item/stack/cable_coil/proc/SetCableColor(_color, mob/living/user)
-	if (!_color)
-		return
-	var/final_color = GLOB.possible_cable_colours[_color]
-	if (!final_color)
-		return
-	color = final_color
-	to_chat(user, SPAN_NOTICE("You change \the [src]'s color to [lowertext(_color)]."))
-
-
 /obj/item/stack/cable_coil/proc/can_merge(obj/item/stack/cable_coil/coil)
 	return color == coil.color
 
@@ -339,10 +329,11 @@
 /obj/item/stack/cable_coil/cyborg/verb/SetCableColorVerb()
 	set name = "Change Cable Colour"
 	set category = "Object"
-	var/response = input("Pick new colour:", "Cable Colour", null, null) as null | color
-	if (isnull(response))
+	var/response = lowertext(input(usr, "Pick new colour:", "Cable Colour", color) as null | color)
+	if (isnull(response) || color == response)
 		return
-	SetCableColor(response, usr)
+	set_color(response)
+	to_chat(usr, SPAN_NOTICE("You change \the [src]'s color to [lowertext(color)]."))
 
 
 /obj/item/stack/cable_coil/fabricator
