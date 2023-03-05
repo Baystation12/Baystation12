@@ -147,6 +147,10 @@
 	if (!istype(I, /obj/item/reagent_containers/food/snacks))
 		to_chat(user, SPAN_WARNING("Cooking \a [I] wouldn't be very tasty."))
 		return
+	var/obj/item/reagent_containers/food/snacks/F = I
+	if (!F.can_use_cooker)
+		to_chat(user, SPAN_WARNING("Cooking \a [I] wouldn't be very tasty."))
+		return
 	if (length(cooking) >= capacity)
 		to_chat(user, SPAN_WARNING("\The [src] is already full up."))
 		return
