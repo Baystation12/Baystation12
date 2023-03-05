@@ -42,11 +42,6 @@
 	associated_paths = list(/obj/item/storage/toolbox/crystal)
 	lore_text = "The most basic of Vigil units may sometimes use toolboxes like these, which are surprisingly similar in design to ones of human origin. On occasion, some units have been known to harbor a slight preference for these archaic designs over something more streamlined, for whatever reason."
 
-/datum/codex_entry/cable_painter
-	associated_paths = list(/obj/item/device/cable_painter)
-	mechanics_text = "Use this device to select a preferred cable color. Apply it to a bundle of cables on your person, or use it on installed cabling on the floor to paint it in your chosen color."
-	lore_text = "A device often used by spacefaring engineers to color-code their electrical systems. An experienced technician can identify traditional installations by color alone."
-
 /datum/codex_entry/paint_sprayer
 	associated_paths = list(/obj/item/device/paint_sprayer)
 	mechanics_text = "<p>Used to paint floors, walls, windows, pipes, mech parts and airlocks.</p>\

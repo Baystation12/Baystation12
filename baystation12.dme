@@ -949,7 +949,6 @@
 #include "code\game\objects\items\devices\auto_cpr.dm"
 #include "code\game\objects\items\devices\binoculars.dm"
 #include "code\game\objects\items\devices\boombox.dm"
-#include "code\game\objects\items\devices\cable_painter.dm"
 #include "code\game\objects\items\devices\chameleonproj.dm"
 #include "code\game\objects\items\devices\debugger.dm"
 #include "code\game\objects\items\devices\dociler.dm"
