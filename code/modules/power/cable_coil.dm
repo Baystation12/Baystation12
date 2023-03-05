@@ -303,9 +303,17 @@
 	return ..(mapload, rand(1, 2), _color)
 
 
-/obj/item/stack/cable_coil/random/Initialize(mapload, _amount)
-	var/_color = GLOB.possible_cable_colours[pick(GLOB.possible_cable_colours)]
-	return ..(mapload, _amount, _color)
+/obj/random/cable_coil
+	icon = 'icons/obj/power.dmi'
+	icon_state = "coil"
+
+
+/obj/random/cable_coil/spawn_choices()
+	var/options = typesof(/obj/item/stack/cable_coil)
+	options -= /obj/item/stack/cable_coil/cyborg
+	options -= /obj/item/stack/cable_coil/fabricator
+	options -= /obj/item/stack/cable_coil/single
+	return options
 
 
 /obj/item/stack/cable_coil/cyborg
@@ -325,7 +333,7 @@
 /obj/item/stack/cable_coil/cyborg/verb/SetCableColorVerb()
 	set name = "Change Cable Colour"
 	set category = "Object"
-	var/response = input("Pick new colour:", "Cable Colour", null, null) as null | anything in GLOB.possible_cable_colours
+	var/response = input("Pick new colour:", "Cable Colour", null, null) as null | color
 	if (isnull(response))
 		return
 	SetCableColor(response, usr)

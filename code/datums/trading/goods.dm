@@ -75,7 +75,7 @@
 								/obj/item/stock_parts/circuitboard/broken                     = TRADER_BLACKLIST,
 								/obj/item/stack/cable_coil                               = TRADER_SUBTYPES_ONLY,
 								/obj/item/stack/cable_coil/cyborg                        = TRADER_BLACKLIST,
-								/obj/item/stack/cable_coil/random                        = TRADER_BLACKLIST,
+								/obj/random/cable_coil                        = TRADER_BLACKLIST,
 								/obj/item/stack/cable_coil/cut                           = TRADER_BLACKLIST,
 								/obj/item/airalarm_electronics                    = TRADER_THIS_TYPE,
 								/obj/item/airlock_electronics                     = TRADER_ALL,

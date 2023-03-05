@@ -126,7 +126,7 @@
 				/obj/random/bomb_supply = 2,
 				/obj/item/extinguisher = 1,
 				/obj/item/clothing/gloves/insulated/cheap = 1,
-				/obj/item/stack/cable_coil/random = 2,
+				/obj/random/cable_coil = 2,
 				/obj/random/toolbox = 2,
 				/obj/item/storage/belt/utility = 2,
 				/obj/item/storage/belt/utility/atmostech = 1,
