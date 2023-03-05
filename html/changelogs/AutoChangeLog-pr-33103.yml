@@ -1,0 +1,8 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Attack click cooldown when hitting things with standardized health now
+      applies the mob's and weapon's intended cooldown timers, instead of the generic
+      default time.
+  - bugfix: Using grabs to slam someone into a window no longer slams them twice per
+      click.
