@@ -44,6 +44,34 @@
 /obj/random/single/spawn_choices()
 	return list(spawn_object)
 
+
+/obj/random/single/color
+	name = "randomly colored object"
+	desc = "This item is used to spawn a given object with a random color at round-start."
+	spawn_nothing_percentage = 0
+
+/obj/random/single/color/proc/color_choices()
+	return list(
+		COLOR_RED,
+		COLOR_BLUE,
+		COLOR_YELLOW,
+		COLOR_PURPLE,
+		COLOR_GREEN,
+		COLOR_ORANGE,
+		COLOR_BROWN,
+		COLOR_WHITE,
+		COLOR_DARK_GRAY // Black but not void
+	)
+
+/obj/random/single/color/spawn_item()
+	var/atom/A = ..()
+	if (!istype(A))
+		return A
+	A.set_color(pickweight(color_choices()))
+	return A
+
+
+
 /obj/random/tool
 	name = "random tool"
 	desc = "This is a random tool."
