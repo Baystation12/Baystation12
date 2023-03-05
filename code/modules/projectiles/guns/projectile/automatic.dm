@@ -262,6 +262,7 @@
 	icon = 'icons/obj/guns/saw.dmi'
 	icon_state = "l6closed50"
 	item_state = "l6closedmag"
+	wielded_item_state = "l6closed-wielded"
 	w_class = ITEM_SIZE_HUGE
 	bulk = 10
 	force = 10
@@ -275,7 +276,6 @@
 	magazine_type = /obj/item/ammo_magazine/box/machinegun
 	allowed_magazines = list(/obj/item/ammo_magazine/box/machinegun, /obj/item/ammo_magazine/rifle)
 	one_hand_penalty = 10
-	wielded_item_state = "gun_wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/lmg_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/lmg_magout.ogg'
 	can_special_reload = FALSE
@@ -303,16 +303,26 @@
 	cover_open = !cover_open
 	to_chat(user, SPAN_NOTICE("You [cover_open ? "open" : "close"] [src]'s cover."))
 	update_icon()
+	user.update_inv_l_hand()
+	user.update_inv_r_hand()
 
 /obj/item/gun/projectile/automatic/l6_saw/attack_self(mob/user as mob)
 	if(cover_open)
 		toggle_cover(user) //close the cover
+		update_icon()
+		user.update_inv_l_hand()
+		user.update_inv_r_hand()
+
 	else
 		return ..() //once closed, behave like normal
 
 /obj/item/gun/projectile/automatic/l6_saw/attack_hand(mob/user as mob)
 	if(!cover_open && user.get_inactive_hand() == src)
 		toggle_cover(user) //open the cover
+		update_icon()
+		user.update_inv_l_hand()
+		user.update_inv_r_hand()
+
 	else
 		return ..() //once open, behave like normal
 
@@ -321,12 +331,15 @@
 	if(istype(ammo_magazine, /obj/item/ammo_magazine/box))
 		icon_state = "l6[cover_open ? "open" : "closed"][round(length(ammo_magazine.stored_ammo), 10)]"
 		item_state = "l6[cover_open ? "open" : "closed"]"
+		wielded_item_state = "l6[cover_open ? "open" : "closed"]-wielded"
 	else if(ammo_magazine)
 		icon_state = "l6[cover_open ? "open" : "closed"]mag"
 		item_state = "l6[cover_open ? "open" : "closed"]mag"
+		wielded_item_state = "l6[cover_open ? "open" : "closed"]mag-wielded"
 	else
 		icon_state = "l6[cover_open ? "open" : "closed"]-empty"
 		item_state = "l6[cover_open ? "open" : "closed"]-empty"
+		wielded_item_state = "l6[cover_open ? "open" : "closed"]-empty-wielded"
 
 /obj/item/gun/projectile/automatic/l6_saw/load_ammo(obj/item/A, mob/user)
 	if(!cover_open)

@@ -181,9 +181,10 @@
 					if(!istype(AM, magazine_type))
 						jam_chance += 10
 					return
-				if(!user.unEquip(AM, src))
-					return
 				ammo_magazine = AM
+				if(!user.unEquip(AM, src))
+					ammo_magazine = null
+					return
 				user.visible_message("[user] inserts [AM] into [src].", SPAN_NOTICE("You insert [AM] into [src]."))
 				playsound(loc, mag_insert_sound, 50, 1)
 				if(!istype(AM, magazine_type))
