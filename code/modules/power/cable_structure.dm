@@ -255,12 +255,6 @@ By design, d1 is the smallest direction and d2 is the highest
 				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				qdel(src)
 
-/obj/structure/cable/proc/cableColor(colorC)
-	var/color_n = "#dd0000"
-	if(colorC)
-		color_n = colorC
-	color = color_n
-
 /////////////////////////////////////////////////
 // Cable laying helpers
 ////////////////////////////////////////////////

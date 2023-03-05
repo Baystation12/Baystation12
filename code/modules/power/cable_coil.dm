@@ -135,7 +135,7 @@
 	if(!isturf(target))
 		return
 	var/obj/structure/cable/cable = new (target)
-	cable.cableColor(color)
+	cable.set_color(color)
 	cable.d1 = from_dir
 	cable.d2 = to_dir
 	cable.add_fingerprint(user)
@@ -233,7 +233,7 @@
 			if ((other_cable.d1 == new_from_dir && other_cable.d2 == new_to_dir) || (other_cable.d1 == new_to_dir && other_cable.d2 == new_from_dir))
 				to_chat(user, SPAN_WARNING("There's already a cable at that position."))
 				return
-		cable.cableColor(color)
+		cable.set_color(color)
 		cable.d1 = new_from_dir
 		cable.d2 = new_to_dir
 		cable.add_fingerprint()
