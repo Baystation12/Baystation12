@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Fingerprints are now always added to held items and clicked objects if
+      there was a valid interaction, except when the tool is flagged to not leave
+      fingerprints.
