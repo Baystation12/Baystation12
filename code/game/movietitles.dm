@@ -98,8 +98,8 @@ GLOBAL_LIST(end_titles)
 	var/chunksize = 0
 	if(!GLOB.end_credits_title)
 		/* Establish a big-ass list of potential titles for the "episode". */
-		possible_titles += "THE [pick("DOWNFALL OF", "RISE OF", "TROUBLE WITH", "FINAL STAND OF", "DARK SIDE OF", "DESOLATION OF", "DESTRUCTION OF", "CRISIS OF")]\
-							 [pick("SPACEMEN", "HUMANITY", "DIGNITY", "SANITY", "THE CHIMPANZEES", "THE VENDOMAT PRICES", "GIANT ARMORED", "THE GAS JANITOR",\
+		possible_titles += "THE [pick("DOWNFALL OF ", "RISE OF ", "TROUBLE WITH ", "FINAL STAND OF ", "DARK SIDE OF ", "DESOLATION OF ", "DESTRUCTION OF ", "CRISIS OF ")]\
+							[pick("SPACEMEN", "HUMANITY", "DIGNITY", "SANITY", "THE CHIMPANZEES", "THE VENDOMAT PRICES", "GIANT ARMORED", "THE GAS JANITOR",\
 							"THE SUPERMATTER CRYSTAL", "MEDICAL", "ENGINEERING", "SECURITY", "RESEARCH", "THE SERVICE DEPARTMENT", "COMMAND", "THE EXPLORERS", "THE PATHFINDER",\
 							"[uppertext(GLOB.using_map.station_name)]")]"
 		possible_titles += "THE CREW GETS [pick("RACIST", "PICKLED", "AN INCURABLE DISEASE", "PIZZA", "A VALUABLE HISTORY LESSON", "A BREAK", "HIGH", "TO LIVE", "TO RELIVE THEIR CHILDHOOD", "EMBROILED IN CIVIL WAR", "A BAD HANGOVER", "SERIOUS ABOUT [pick("DRUG ABUSE", "CRIME", "PRODUCTIVITY", "ANCIENT AMERICAN CARTOONS", "SPACEBALL", "DECOMPRESSION PROCEDURES")]")]"
@@ -117,7 +117,7 @@ GLOBAL_LIST(end_titles)
 			continue
 		if(H.is_species(SPECIES_MONKEY) && findtext(H.real_name,"[lowertext(H.species.name)]")) //no monki
 			continue
-		if(H.timeofdeath && H.timeofdeath < 5 MINUTES) //don't mention these losers (prespawned corpses mostly)
+		if(H.last_ckey == null) //don't mention these losers (prespawned corpses mostly)
 			continue
 		if(!length(cast) && !chunksize)
 			chunk += "CAST:"
@@ -158,7 +158,7 @@ GLOBAL_LIST(end_titles)
 	var/list/corpses = list()
 	var/list/monkies = list()
 	for(var/mob/living/carbon/human/H in GLOB.dead_mobs)
-		if(H.timeofdeath < 5 MINUTES) //no prespawned corpses
+		if(H.last_ckey == null) //no prespawned corpses
 			continue
 		if(H.is_species(SPECIES_MONKEY) && findtext(H.real_name,"[lowertext(H.species.name)]"))
 			monkies[H.species.name] += 1
