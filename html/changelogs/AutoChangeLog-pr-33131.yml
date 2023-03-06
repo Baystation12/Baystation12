@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - maptweak: The screwdriver in botany now spawns on the table instead of the floor.
