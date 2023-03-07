@@ -77,7 +77,16 @@ var/global/list/holder_mob_icon_cache = list()
 	var/obj/item/I = GetIdCard()
 	return I ? I.GetAccess() : ..()
 
-/obj/item/holder/attack_self()
+/obj/item/holder/attack_self(mob/user)
+	if (!ishuman(user))
+		return
+	var/mob/living/carbon/human/H = user
+	for(var/mob/M in contents)
+		H.species.hug(H, M)
+
+/obj/item/holder/MouseDrop(atom/over_atom, atom/source_loc, atom/over_loc, source_control, over_control, list/mouse_params)
+	if(over_atom != usr)
+		return ..()
 	for(var/mob/M in contents)
 		M.show_inv(usr)
 
