@@ -1,0 +1,4 @@
+author: rootoo807
+delete-after: true
+changes:
+  - bugfix: Fixes Solgov beret rendering on Unathi.
