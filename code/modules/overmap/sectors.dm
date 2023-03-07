@@ -1,3 +1,4 @@
+GLOBAL_LIST_EMPTY(known_overmap_sectors)
 //===================================================================================
 //Overmap object representing zlevel(s)
 //===================================================================================
@@ -32,6 +33,14 @@
 	find_z_levels()     // This populates map_z and assigns z levels to the ship.
 	register_z_levels() // This makes external calls to update global z level information.
 
+	if(sector_flags & OVERMAP_SECTOR_KNOWN)
+		LAZYADD(GLOB.known_overmap_sectors, src)
+		layer = ABOVE_LIGHTING_LAYER
+		plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		for(var/obj/machinery/computer/ship/helm/H as anything in GLOB.overmap_helm_computers)
+			H.add_known_sector(src)
+
+
 	if(!GLOB.using_map.overmap_z)
 		build_overmap()
 
@@ -59,6 +68,11 @@
 
 	LAZYADD(SSshuttle.sectors_to_initialize, src) //Queued for further init. Will populate the waypoint lists; waypoints not spawned yet will be added in as they spawn.
 	SSshuttle.clear_init_queue()
+
+
+/obj/effect/overmap/visitable/Destroy()
+	LAZYREMOVE(GLOB.known_overmap_sectors, src)
+	. = ..()
 
 //This is called later in the init order by SSshuttle to populate sector objects. Importantly for subtypes, shuttles will be created by then.
 /obj/effect/overmap/visitable/proc/populate_sector_objects()
@@ -130,14 +144,15 @@
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
 	icon_state = "sector"
+	requires_contact = TRUE
 	anchored = TRUE
 
 
 /obj/effect/overmap/visitable/sector/Initialize()
 	. = ..()
-
-	if(known)
-		update_known_connections(TRUE)
+	if(sector_flags & OVERMAP_SECTOR_KNOWN)
+		for(var/obj/machinery/computer/ship/helm/H as anything in GLOB.overmap_helm_computers)
+			update_known_connections(TRUE)
 
 
 /obj/effect/overmap/visitable/sector/update_known_connections(notify = FALSE)

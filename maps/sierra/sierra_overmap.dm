@@ -5,7 +5,9 @@
 	fore_dir = WEST
 	vessel_mass = 63000
 	sector_flags = OVERMAP_SECTOR_KNOWN|OVERMAP_SECTOR_IN_SPACE|OVERMAP_SECTOR_BASE
-	color = COLOR_PURPLE
+	color = "#a97faa"
+	known_ships = list(/obj/effect/overmap/visitable/ship/landable/exploration_shuttle, /obj/effect/overmap/visitable/ship/landable/guppy)
+
 	icon = 'icons/obj/overmap_inf.dmi'
 
 	initial_restricted_waypoints = list(

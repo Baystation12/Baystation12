@@ -1,6 +1,6 @@
 
 <fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
-	<legend style="text-align:center">Controls</legend> 
+	<legend style="text-align:center">Controls</legend>
 	<div class='item'>
 		<div class="itemLabel">
 			Power
@@ -25,9 +25,18 @@
 			{{:helper.link(data.viewing ? 'Engaged' : 'Disengaged', 'shuffle', { 'viewing' : 1 }, null, data.viewing ? 'selected' : null)}}
 		</div>
 	</div>
+	<div class='item'>
+		<div class="itemLabel">
+			Contact readout
+		</div>
+		<div class="itemContent">
+			{{:helper.link(data.muted ? 'Disabled' : 'Enabled', data.muted ? 'volume-off' : 'volume-on', { 'mute' : 1 }, null, null)}}
+		</div>
+	</div>
+
 </fieldset>
 <fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
-	<legend style="text-align:center">Status</legend> 
+	<legend style="text-align:center">Status</legend>
 	<div class='item'>
 		<div class="itemLabel">
 			Status:
@@ -61,7 +70,7 @@
 	</div>
 </fieldset>
 <fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
-	<legend style="text-align:center">Contacts</legend> 
+	<legend style="text-align:center">Contacts</legend>
 {{if data.contacts}}
 	<table>
 	{{for data.contacts}}
@@ -78,7 +87,7 @@
 {{/if}}
 </fieldset>
 <fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
-	<legend style="text-align:center">Scan data</legend> 
+	<legend style="text-align:center">Scan data</legend>
 	{{if data.last_scan}}
 		<b>{{:data.last_scan.name}}</b> at {{:data.last_scan.location}}
 		{{:helper.link('Print', 'print' ,{ 'print' : 1 }, null, null)}}

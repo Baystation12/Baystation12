@@ -9,11 +9,12 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	else \
 		{speed_var = SANITIZE_SPEED((speed_var + v_diff)/(1 + speed_var*v_diff/(max_speed ** 2)))}
 // Uses Lorentzian dynamics to avoid going too fast.
-
+#define SENSOR_COEFFICENT 1000
 /obj/effect/overmap/visitable/ship
 	name = "generic ship"
 	desc = "Space faring vessel."
 	icon_state = "ship"
+	requires_contact = TRUE
 	var/moving_state = "ship_moving"
 	var/list/consoles
 
@@ -29,6 +30,11 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/burn_delay = 1 SECOND           // how often ship can do burns
 	var/fore_dir = NORTH                // what dir ship flies towards for purpose of moving stars effect procs
 
+	//List of ships known at roundstart - put types here.
+	var/base_sensor_visibility
+
+	var/list/navigation_viewers // list of weakrefs to people viewing the overmap via this ship
+
 	var/list/engines = list()
 	var/engines_state = 0 //global on/off toggle for all engines
 	var/thrust_limit = 1  //global thrust limit for all engines, 0..1
@@ -43,6 +49,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	max_speed = round(max_speed, SHIP_MOVE_RESOLUTION)
 	SSshuttle.ships += src
 	START_PROCESSING(SSobj, src)
+	base_sensor_visibility = round((vessel_mass/SENSOR_COEFFICENT),1)
 
 /obj/effect/overmap/visitable/ship/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -74,8 +81,11 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/get_scan_data(mob/user)
 	. = ..()
+	. += "<br>Mass: [vessel_mass] tons."
 	if(!is_still())
 		. += "<br>Heading: [get_heading_angle()], speed [get_speed() * 1000]"
+	if(instant_contact)
+		. += "<br>It is broadcasting a distress signal."
 
 //Projected acceleration based on information from engines
 /obj/effect/overmap/visitable/ship/proc/get_acceleration()
@@ -178,6 +188,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 		if(newloc && loc != newloc)
 			Move(newloc)
 			handle_wraparound()
+	sensor_visibility = min(round(base_sensor_visibility + get_speed_sensor_increase(), 1), 100)
 
 /obj/effect/overmap/visitable/ship/on_update_icon()
 	pixel_x = position[1] * (world.icon_size/2)
@@ -267,6 +278,9 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/proc/get_landed_info()
 	return "This ship cannot land."
+
+/obj/effect/overmap/visitable/ship/proc/get_speed_sensor_increase()
+	return min(get_speed() * 1000, 50) //Engines should never increase sensor visibility by more than 50.
 
 #undef MOVING
 #undef SANITIZE_SPEED

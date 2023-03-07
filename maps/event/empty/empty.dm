@@ -13,7 +13,7 @@
 		"nav_empty_6",
 		"nav_empty_7"
 	)
-	known = FALSE
+
 
 /datum/map_template/ruin/empty
 	name = "Empty"
