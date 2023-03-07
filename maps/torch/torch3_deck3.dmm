@@ -10484,7 +10484,9 @@
 /area/hydroponics)
 "xo" = (
 /obj/structure/table/standard,
-/obj/item/material/bell,
+/obj/machinery/photocopier/faxmachine{
+	department = "Torch - Public Fax"
+	},
 /turf/simulated/floor/lino,
 /area/crew_quarters/office)
 "xp" = (
@@ -15171,8 +15173,8 @@
 /area/maintenance/thirddeck/port)
 "JM" = (
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /obj/item/device/radio/intercom/locked/ai_private{
 	pixel_y = 22
@@ -16979,6 +16981,7 @@
 	dir = 4;
 	pixel_x = -21
 	},
+/obj/item/material/bell,
 /turf/simulated/floor/lino,
 /area/crew_quarters/office)
 "Oj" = (

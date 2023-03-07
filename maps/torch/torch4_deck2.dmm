@@ -2744,12 +2744,17 @@
 	pixel_x = 32
 	},
 /obj/structure/table/steel,
-/obj/machinery/cell_charger,
+/obj/machinery/cell_charger{
+	pixel_y = -3
+	},
 /obj/random/powercell,
 /obj/random/powercell,
 /obj/item/cell/high,
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
+	},
+/obj/machinery/recharger{
+	pixel_y = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engineering_bay)
@@ -14364,12 +14369,12 @@
 /area/maintenance/disposal)
 "JQ" = (
 /obj/structure/table/steel,
-/obj/machinery/recharger{
-	pixel_y = 0
-	},
 /obj/effect/floor_decal/corner/yellow/half{
 	dir = 1;
 	icon_state = "bordercolorhalf"
+	},
+/obj/machinery/photocopier/faxmachine{
+	department = "Torch - Engineering"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engineering_bay)

@@ -5665,7 +5665,7 @@
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
 "alZ" = (
-/obj/structure/bed/chair/wood/mahogany,
+/obj/structure/bed/chair/wood,
 /turf/simulated/floor/wood/yew,
 /area/command/conference)
 "amb" = (
@@ -14352,6 +14352,14 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "Biohazard";
+	name = "Biohazard Shutter";
+	opacity = 0
+	},
 /turf/simulated/floor/plating,
 /area/rnd/rnd_sec)
 "bqb" = (
@@ -14816,10 +14824,10 @@
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod13/station)
 "bRW" = (
-/obj/structure/bed/chair/wood/mahogany{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/bed/chair/wood{
 	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/wood/yew,
 /area/command/conference)
 "bSz" = (
@@ -15643,10 +15651,10 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/structure/bed/chair/wood/mahogany{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/bed/chair/wood{
 	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/wood/yew,
 /area/command/conference)
 "cWR" = (
@@ -16855,6 +16863,14 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "Biohazard";
+	name = "Biohazard Shutter";
+	opacity = 0
 	},
 /turf/simulated/floor/plating,
 /area/rnd/rnd_sec)
@@ -18794,6 +18810,14 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "Biohazard";
+	name = "Biohazard Shutter";
+	opacity = 0
+	},
 /turf/simulated/floor/plating,
 /area/rnd/rnd_sec)
 "hUc" = (
@@ -18950,6 +18974,13 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "Biohazard";
+	name = "Biohazard Shutter";
+	opacity = 0
+	},
 /turf/simulated/floor/plating,
 /area/rnd/rnd_sec)
 "ikZ" = (
@@ -18989,6 +19020,14 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "Biohazard";
+	name = "Biohazard Shutter";
+	opacity = 0
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/rnd/rnd_sec)
@@ -19093,7 +19132,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/bed/chair/wood/mahogany{
+/obj/structure/bed/chair/wood{
 	dir = 4
 	},
 /turf/simulated/floor/wood/yew,
@@ -19461,10 +19500,10 @@
 	c_tag = "Briefing Room";
 	dir = 8
 	},
-/obj/structure/bed/chair/wood/mahogany{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/bed/chair/wood{
 	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/wood/yew,
 /area/command/conference)
 "iPV" = (
@@ -20564,12 +20603,12 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/bed/chair/wood/mahogany{
-	dir = 4
-	},
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24
+	},
+/obj/structure/bed/chair/wood{
+	dir = 4
 	},
 /turf/simulated/floor/wood/yew,
 /area/command/conference)
@@ -20747,7 +20786,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/bed/chair/wood/mahogany{
+/obj/structure/bed/chair/wood{
 	dir = 4
 	},
 /turf/simulated/floor/wood/yew,
@@ -23305,6 +23344,13 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "Biohazard";
+	name = "Biohazard Shutter";
+	opacity = 0
+	},
 /turf/simulated/floor/plating,
 /area/rnd/rnd_sec)
 "nPT" = (
@@ -23675,6 +23721,9 @@
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/research/mono,
 /obj/random_multi/single_item/memo_research,
+/obj/machinery/photocopier/faxmachine{
+	department = "Torch - Reseacrh and Develepment"
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/office)
 "okp" = (
@@ -26327,6 +26376,13 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "Biohazard";
+	name = "Biohazard Shutter";
+	opacity = 0
+	},
 /turf/simulated/floor/plating,
 /area/rnd/rnd_sec)
 "rsV" = (
@@ -28876,7 +28932,7 @@
 /obj/structure/sign/double/solgovflag/left{
 	pixel_y = 32
 	},
-/obj/structure/bed/chair/wood/mahogany,
+/obj/structure/bed/chair/wood,
 /turf/simulated/floor/wood/yew,
 /area/command/conference)
 "uCe" = (
@@ -29205,9 +29261,7 @@
 	pixel_y = 32
 	},
 /obj/machinery/hologram/holopad,
-/obj/structure/bed/chair/wood/wings/mahogany{
-	name = "Judge"
-	},
+/obj/structure/bed/chair/wood/wings,
 /turf/simulated/floor/wood/yew,
 /area/command/conference)
 "vii" = (
@@ -30038,6 +30092,9 @@
 	},
 /obj/structure/table/glass,
 /obj/random_multi/single_item/memo_medical,
+/obj/machinery/photocopier/faxmachine{
+	department = "Torch - Medbay"
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/medpaperworkoffice)
 "xBk" = (
