@@ -1,0 +1,4 @@
+author: Hubblenaut
+delete-after: true
+changes:
+  - rscadd: Pets in your hand can now be hugged.
