@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Unbuckling while handcuffed no longer tells you success, then failure,
+      then does nothing - It now actually unbuckles you.
