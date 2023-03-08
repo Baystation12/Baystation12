@@ -12,6 +12,7 @@
 #include "gamemodes\revolutionary.dm"
 
 // Objects
+#include "objects\machines\disposal.dm"
 #include "objects\structures\wall_frame.dm"
 #include "objects\structures\wallframe_spawner.dm"
 #endif
