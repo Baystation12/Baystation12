@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: IV bags now come with a default transfer rate of 2 units (1 unit for nanoblood
+      bags).
+  - rscdel: IV bags can no longer be set to a transfer rate of 0.2 units
