@@ -189,8 +189,14 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /obj/effect/effect/smoke/Crossed(mob/living/carbon/M as mob )
 	..()
-	if(istype(M))
+	if(can_affect(M))
 		affect(M)
+
+/obj/effect/effect/smoke/Move()
+	..()
+	for(var/mob/living/carbon/M in get_turf(src))
+		if (can_affect(M))
+			affect(M)
 
 /// Fades out the smoke smoothly using it's alpha variable.
 /obj/effect/effect/smoke/proc/fade_out(frames = 16)
@@ -202,11 +208,13 @@ would spawn and follow the beaker, even if it is carried or thrown.
 		sleep(world.tick_lag)
 	qdel(src)
 
-/obj/effect/effect/smoke/proc/affect(mob/living/carbon/M)
+/obj/effect/effect/smoke/proc/can_affect(mob/living/carbon/M)
 	if (!istype(M))
 		return 0
 	if (M.isSynthetic())
 		return 0
+	if (HAS_FLAGS(M.wear_mask?.item_flags, ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
+		return FALSE
 	if (M.internal != null)
 		if(M.wear_mask && (M.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
 			return 0
@@ -216,6 +224,9 @@ would spawn and follow the beaker, even if it is carried or thrown.
 				return 0
 		return 0
 	return 1
+
+/obj/effect/effect/smoke/proc/affect(mob/living/carbon/M)
+	return
 
 /////////////////////////////////////////////
 // Illumination
@@ -253,14 +264,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 /obj/effect/effect/smoke/bad
 	time_to_live = 200
 
-/obj/effect/effect/smoke/bad/Move()
-	..()
-	for(var/mob/living/carbon/M in get_turf(src))
-		affect(M)
-
 /obj/effect/effect/smoke/bad/affect(mob/living/carbon/M)
-	if (!..())
-		return 0
 	M.adjustOxyLoss(1)
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
@@ -279,15 +283,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /obj/effect/effect/smoke/sleepy
 
-/obj/effect/effect/smoke/sleepy/Move()
-	..()
-	for(var/mob/living/carbon/M in get_turf(src))
-		affect(M)
-
 /obj/effect/effect/smoke/sleepy/affect(mob/living/carbon/M as mob )
-	if (!..())
-		return 0
-
 	M:sleeping += 1
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
@@ -302,17 +298,16 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	name = "mustard gas"
 	icon_state = "mustard"
 
-/obj/effect/effect/smoke/mustard/Move()
-	..()
-	for(var/mob/living/carbon/human/R in get_turf(src))
-		affect(R)
+/obj/effect/effect/smoke/mustard/can_affect(mob/living/carbon/M)
+	. = ..()
+	if (!.)
+		return
+	if (ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if (H.wear_suit)
+			return FALSE
 
 /obj/effect/effect/smoke/mustard/affect(mob/living/carbon/human/R)
-	if (!..())
-		return 0
-	if (R.wear_suit != null)
-		return 0
-
 	R.burn_skin(0.75)
 	if (R.coughedtime != 1)
 		R.coughedtime = 1
