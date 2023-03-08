@@ -1,4 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Computers on the admin z-level can now run all NT-Net programs.

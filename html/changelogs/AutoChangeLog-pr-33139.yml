@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: The gunbox no longer spawns guns inside your mob if your hands are full.
-  - bugfix: The gunbox no longer deletes itself if you cancel the prompt.
