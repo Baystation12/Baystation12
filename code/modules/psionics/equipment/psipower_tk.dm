@@ -34,7 +34,6 @@
 		. = attack_self(owner)
 		if(!.)
 			to_chat(owner, SPAN_WARNING("\The [_focus] is too hefty for you to get a mind-grip on."))
-		qdel(src)
 		return FALSE
 
 	focus = _focus

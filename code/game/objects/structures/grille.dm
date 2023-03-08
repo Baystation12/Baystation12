@@ -256,6 +256,9 @@
 /proc/place_grille(mob/user, loc, obj/item/stack/material/rods/ST)
 	if(ST.in_use)
 		return
+	if(locate(/obj/structure/grille) in loc)
+		USE_FEEDBACK_FAILURE("There is another grille here!")
+		return
 	if(ST.get_amount() < 2)
 		to_chat(user, SPAN_WARNING("You need at least two rods to do this."))
 		return
