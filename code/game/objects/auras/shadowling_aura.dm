@@ -14,9 +14,9 @@
 		user.mutations -= MUTATION_SPACERES
 	..()
 
-/obj/aura/shadowling_aura/bullet_act(obj/item/projectile/P)
-	if(P.damage_flags() & DAMAGE_FLAG_LASER)
-		P.damage *= 2
-	if(P.agony)
-		P.agony *= 2
-	return 0
+/obj/aura/shadowling_aura/aura_check_bullet(obj/item/projectile/proj, def_zone)
+	if (HAS_FLAGS(proj.damage_flags(), DAMAGE_FLAG_LASER))
+		proj.damage *= 2
+	if (proj.agony)
+		proj.agony *= 2
+	return EMPTY_BITFIELD
