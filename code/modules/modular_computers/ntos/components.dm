@@ -49,6 +49,10 @@
 /datum/extension/interactive/ntos/proc/get_ntnet_status()
 	if(!on) // No signal if the computer isn't on.
 		return 0
+
+	if (isAdminLevel(get_z(holder)))
+		return 3
+
 	if(isnull(ntnet_status))
 		var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 		if(network_card)
