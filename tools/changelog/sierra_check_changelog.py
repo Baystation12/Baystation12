@@ -99,4 +99,9 @@ if write_cl['changes']:
     exit(0)
 else:
     print("No CL changes detected!")
+    # add invalid, remove valid
+    if not has_invalid_label:
+        pr.add_to_labels(CL_INVALID)
+    if has_valid_label:
+        pr.remove_from_labels(CL_VALID)
     exit(1)
