@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
       - name: Setup Cache
-        uses: actions/cache@69d9d449aced6a2ede0bc19182fadc3a0a42d2b0
+        uses: actions/cache@940f3d7cf195ba83374c77632d1e2cbb2f24ae68
         with:
           path: $HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION
           key: ${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}
@@ -61,7 +61,7 @@ jobs:
     steps:
       - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
       - name: Setup Cache
-        uses: actions/cache@69d9d449aced6a2ede0bc19182fadc3a0a42d2b0
+        uses: actions/cache@940f3d7cf195ba83374c77632d1e2cbb2f24ae68
         with:
           path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
@@ -91,7 +91,7 @@ jobs:
     steps:
       - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
       - name: Setup Cache
-        uses: actions/cache@69d9d449aced6a2ede0bc19182fadc3a0a42d2b0
+        uses: actions/cache@940f3d7cf195ba83374c77632d1e2cbb2f24ae68
         with:
           path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
@@ -120,7 +120,7 @@ jobs:
     steps:
       - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
       - name: Setup Cache
-        uses: actions/cache@69d9d449aced6a2ede0bc19182fadc3a0a42d2b0
+        uses: actions/cache@940f3d7cf195ba83374c77632d1e2cbb2f24ae68
         with:
           path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
@@ -149,7 +149,7 @@ jobs:
     steps:
       - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
       - name: Setup Cache
-        uses: actions/cache@69d9d449aced6a2ede0bc19182fadc3a0a42d2b0
+        uses: actions/cache@940f3d7cf195ba83374c77632d1e2cbb2f24ae68
         with:
           path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
