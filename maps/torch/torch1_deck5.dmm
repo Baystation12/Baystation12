@@ -10473,6 +10473,10 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/eva)
+"xZ" = (
+/obj/effect/shuttle_landmark/fleet_deimos/deck5stern,
+/turf/space,
+/area/space)
 "ya" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -16522,6 +16526,7 @@
 /obj/effect/shuttle_landmark/ninja/hanger{
 	name = "5th Deck, Fore"
 	},
+/obj/effect/shuttle_landmark/fleet_deimos/deck5bow,
 /turf/space,
 /area/space)
 "Wg" = (
@@ -52939,7 +52944,7 @@ aa
 aa
 aa
 aa
-aa
+xZ
 aa
 aa
 aa

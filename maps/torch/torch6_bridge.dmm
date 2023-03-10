@@ -10960,6 +10960,10 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
+"Ej" = (
+/obj/effect/shuttle_landmark/fleet_deimos/deckbridgestern,
+/turf/space,
+/area/space)
 "El" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -15236,6 +15240,10 @@
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/xo)
+"WO" = (
+/obj/effect/shuttle_landmark/fleet_deimos/deckbridgebow,
+/turf/space,
+/area/space)
 "WW" = (
 /obj/structure/table/glass,
 /obj/effect/floor_decal/corner/blue/mono,
@@ -19225,7 +19233,7 @@ aa
 aa
 aa
 aa
-aa
+WO
 aa
 aa
 aa
@@ -47504,7 +47512,7 @@ aa
 aa
 aa
 aa
-aa
+Ej
 aa
 aa
 aa

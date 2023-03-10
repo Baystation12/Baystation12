@@ -19,7 +19,21 @@
 		"SRV Venerable Catfish" = list("nav_verne_5"), //docking location for verne shuttle
 		"Cyclopes" = list("nav_merc_dock"),
 		"ICGNV Hound" = list("nav_hound_dock"),
-		"SFV Arbiter" = list("nav_sfv_arbiter_dock")
+		"SFV Arbiter" = list("nav_sfv_arbiter_dock"),
+		"SFV Deimos"  = list(
+			"nav_fleet_deimos_deckbridgebow",
+			"nav_fleet_deimos_deckbridgestern",
+			"nav_fleet_deimos_deck1bow",
+			"nav_fleet_deimos_deck1stern",
+			"nav_fleet_deimos_deck2bow",
+			"nav_fleet_deimos_deck2stern",
+			"nav_fleet_deimos_deck3bow",
+			"nav_fleet_deimos_deck3stern",
+			"nav_fleet_deimos_deck4bow",
+			"nav_fleet_deimos_deck4stern",
+			"nav_fleet_deimos_deck5bow",
+			"nav_fleet_deimos_deck5stern"
+		)
 	)
 
 	initial_generic_waypoints = list(

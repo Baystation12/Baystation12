@@ -183,7 +183,7 @@
 	#include "../event/sfv_arbiter/sfv_arbiter.dm"
 	#include "../event/placeholders/placeholders.dm"
 	#include "../event/empty/empty.dm"
-
+	#include "../event/deimos/fleet_deimos.dm"
 
 	#define using_map_DATUM /datum/map/torch
 

@@ -2912,6 +2912,7 @@
 /obj/effect/shuttle_landmark/ninja/deck4{
 	name = "3rd Deck, Aft"
 	},
+/obj/effect/shuttle_landmark/fleet_deimos/deck3stern,
 /turf/space,
 /area/space)
 "gF" = (
@@ -20139,6 +20140,10 @@
 /obj/item/reagent_containers/glass/rag,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/bar)
+"Yy" = (
+/obj/effect/shuttle_landmark/fleet_deimos/deck3bow,
+/turf/space,
+/area/space)
 "YA" = (
 /obj/structure/lattice,
 /turf/simulated/floor/reinforced/hydrogen,
@@ -24624,7 +24629,7 @@ aa
 aa
 aa
 aa
-aa
+Yy
 aa
 aa
 aa
