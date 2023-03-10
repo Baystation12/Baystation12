@@ -14617,6 +14617,10 @@
 /obj/random/junk,
 /turf/simulated/floor/airless,
 /area/engineering/engine_room)
+"MT" = (
+/obj/effect/shuttle_landmark/fleet_deimos/deck2stern,
+/turf/space,
+/area/space)
 "MW" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -16962,6 +16966,10 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
+"Us" = (
+/obj/effect/shuttle_landmark/fleet_deimos/deck2bow,
+/turf/space,
+/area/space)
 "Uz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/industrial/warning{
@@ -22613,7 +22621,7 @@ aa
 aa
 aa
 aa
-aa
+Us
 aa
 aa
 aa
@@ -53114,7 +53122,7 @@ aa
 aa
 aa
 aa
-aa
+MT
 aa
 aa
 aa

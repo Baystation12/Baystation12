@@ -1056,6 +1056,10 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
+"dD" = (
+/obj/effect/shuttle_landmark/fleet_deimos/deck4stern,
+/turf/space,
+/area/space)
 "dH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -9785,6 +9789,10 @@
 "HS" = (
 /turf/simulated/floor/tiled/dark,
 /area/eva)
+"HT" = (
+/obj/effect/shuttle_landmark/fleet_deimos/deck4bow,
+/turf/space,
+/area/space)
 "HU" = (
 /obj/machinery/status_display{
 	pixel_x = 32
@@ -20697,7 +20705,7 @@ aa
 aa
 aa
 aa
-aa
+HT
 aa
 aa
 aa
@@ -51602,7 +51610,7 @@ aa
 aa
 aa
 aa
-aa
+dD
 aa
 aa
 aa
