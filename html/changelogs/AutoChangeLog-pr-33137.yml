@@ -1,6 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - bugfix: Random corpses like "dead test subject" will no longer appear in credits.
-  - bugfix: End titles formatted like "The BLANK of BLANK" no longer have a missing
-      space.

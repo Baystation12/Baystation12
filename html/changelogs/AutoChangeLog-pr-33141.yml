@@ -1,5 +1,0 @@
-author: rootoo807
-delete-after: true
-changes:
-  - bugfix: Beards no longer appear on the back of your head in setup preview.
-  - bugfix: Grilles can no longer be built on the same tile infinitely.
