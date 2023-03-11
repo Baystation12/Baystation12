@@ -244,7 +244,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		planet_size = list(world.maxx, world.maxy)
 	game_year = text2num(time2text(world.timeofday, "YYYY")) + DEFAULT_GAME_YEAR_OFFSET
 
-	base_lobby_html = file2text('html/lobby_titlescreen.html')
+	base_lobby_html = file2text('html/lobby/lobby_titlescreen.html')
 
 
 /datum/map/proc/get_lobby_track(banned)
@@ -299,7 +299,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/setup_map()
 	lobby_track = get_lobby_track()
-	set_titlescreen_image()
 	world.update_status()
 	setup_events()
 
@@ -526,13 +525,17 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	set waitfor = FALSE
 
 	winset(C, "lobbybrowser", "is-disabled=false;is-visible=true")
-	update_titlescreen_image(C)
 
 	if(isnewplayer(C.mob))
-		var/datum/asset/lobby_assets = get_asset_datum(/datum/asset/simple/lobby)    // Sending font to the client
+		var/datum/asset/lobby_assets = get_asset_datum(/datum/asset/simple/lobby)    // Sending fonts+png+mp4 assets to the client
 		var/datum/asset/fa_assets = get_asset_datum(/datum/asset/simple/fontawesome) // Sending font awesome to the client
 		lobby_assets.send(C)
 		fa_assets.send(C)
+
+		if (!Master.current_runlevel)
+			// Sending big video only if it's needed
+			var/datum/asset/loop = get_asset_datum(/datum/asset/simple/lobby_loop)
+			loop.send(C)
 
 		var/mob/new_player/player = C.mob
 		show_browser(C, replacetext_char(base_lobby_html, "\[player-ref]", "\ref[player]"), "window=lobbybrowser")
@@ -542,15 +545,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(C.mob) // Check if the client is still connected to something
 		// Hide title screen, allowing player to see the map
 		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")
-
-/datum/map/proc/set_titlescreen_image(new_screen)
-	current_lobby_screen = new_screen || pick(lobby_screens)
-	for(var/mob/new_player/player in GLOB.player_list)
-		update_titlescreen_image(player.client)
-
-/datum/map/proc/update_titlescreen_image(client/C)
-	show_browser(C, current_lobby_screen, "file=titlescreen.gif;display=0")
-	send_output(C, null, "lobbybrowser:updateImage")
 
 /datum/map/proc/set_titlescreen_ready(client/C, ready=FALSE)
 	send_output(C, ready, "lobbybrowser:setReadyStatus")
@@ -566,11 +560,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/state = Master.current_runlevel || 0
 	var/mob/new_player/player = C.mob
 	send_output(C, "[state]-[player.ready]", "lobbybrowser:setStatus")
-
-/proc/to_titlescreen(msg)
-	var/message = url_encode(url_encode(msg))
-	for(var/mob/new_player/player in GLOB.player_list)
-		send_output(player.client, message, "lobbybrowser:subsystemMessage")
 
 /datum/map/proc/roundend_player_status()
 	for(var/mob/Player in GLOB.player_list)

@@ -111,7 +111,6 @@ var/global/list/admin_verbs_sounds = list(
 	)
 
 var/global/list/admin_verbs_fun = list(
-	/client/proc/change_lobby_screen,
 	/client/proc/object_talk,
 	/datum/admins/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
@@ -904,27 +903,3 @@ var/global/list/admin_verbs_mod = list(
 	if(!S) return
 	T.add_spell(new S)
 	log_and_message_admins("gave [key_name(T)] the spell [S].")
-
-/client/proc/change_lobby_screen()
-	set name = "Lobby Screen: Change"
-	set category = "Fun"
-
-	if(!check_rights(R_FUN))
-		return
-
-	log_and_message_admins("is trying to change the title screen.")
-
-	switch(alert(usr, "Select option", "Lobby Screen", "Upload custom", "Reset to default", "Cancel"))
-		if("Upload custom")
-			var/file = input(usr) as icon|null
-
-			if(!file)
-				return
-
-			GLOB.using_map.set_titlescreen_image(file)
-
-		if("Reset to default")
-			GLOB.using_map.set_titlescreen_image()
-
-		if("Cancel")
-			return

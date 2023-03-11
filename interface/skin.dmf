@@ -277,119 +277,95 @@ window "rpane"
 		saved-params = "splitter"
 		right = "outputwindow"
 		is-vert = false
-	elem "linksource"
-		type = BUTTON
-		pos = 536,0
-		size = 60x15
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		background-color = none
-		saved-params = "is-checked"
-		text = "Source"
-		command = "link-source"
-	elem "linkissue"
-		type = BUTTON
-		pos = 596,0
-		size = 60x15
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		background-color = none
-		saved-params = "is-checked"
-		text = "Report Issue"
-		command = "link-issue"
 	elem "linkrules"
+		border = line
+		is-flat = true
 		type = BUTTON
-		pos = 120,0
-		size = 60x15
+		pos = 8,7
+		size = 66x18
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
+		background-color = #ffffff
 		saved-params = "is-checked"
-		text = "Rules"
+		text = "Правила"
 		command = "link-rules"
 		group = "rpanemode"
-	elem "changelog"
-		type = BUTTON
-		pos = 476,0
-		size = 60x15
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		background-color = none
-		saved-params = "is-checked"
-		text = "Changelog"
-		command = "Changelog"
-		group = "rpanemode"
-	elem "linklore"
-		type = BUTTON
-		pos = 208,0
-		size = 60x15
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		background-color = none
-		saved-params = "is-checked"
-		text = "Lore"
-		command = "link-lore"
-		group = "rpanemode"
-	elem "linkforum"
-		type = BUTTON
-		pos = 328,0
-		size = 60x15
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		background-color = none
-		saved-params = "is-checked"
-		text = "Forum"
-		command = "link-forum"
-		group = "rpanemode"
-	elem "linkdiscord"
-		type = BUTTON
-		pos = 388,0
-		size = 60x15
-		anchor1 = -1,-1
-		anchor2 = -1,-1
-		background-color = none
-		saved-params = "is-checked"
-		text = "Discord"
-		command = "link-discord"
-		group = "rpanemode"
 	elem "linkwiki"
+		border = line
+		is-flat = true
 		type = BUTTON
-		pos = 268,0
-		size = 60x15
+		pos = 73,7
+		size = 60x18
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
+		background-color = #ffffff
 		saved-params = "is-checked"
 		text = "Wiki"
 		command = "link-wiki"
 		group = "rpanemode"
-	elem "textb"
+	elem "linkdiscord"
+		border = line
+		is-flat = true
 		type = BUTTON
-		pos = 0,0
-		size = 60x15
+		pos = 132,7
+		size = 60x18
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
-		is-visible = false
+		background-color = #ffffff
 		saved-params = "is-checked"
-		text = "Text"
-		command = ".winset \"rpanewindow.left=;\""
-		is-checked = true
+		text = "Discord"
+		command = "link-discord"
 		group = "rpanemode"
-		button-type = pushbox
-	elem "infob"
+	elem "linksource"
+		border = line
+		is-flat = true
 		type = BUTTON
-		pos = 60,0
-		size = 60x15
+		pos = 211,7
+		size = 60x18
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
-		is-visible = false
+		background-color = #ffffff
 		saved-params = "is-checked"
-		text = "Info"
-		command = ".winset \"rpanewindow.left=infowindow\""
+		text = "GitHub"
+		command = "link-source"
+	elem "linkissue"
+		border = line
+		is-flat = true
+		type = BUTTON
+		pos = 270,7
+		size = 76x18
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #ffffff
+		saved-params = "is-checked"
+		text = "Багрепорт"
+		command = "link-issue"
+	elem "changelog"
+		border = line
+		is-flat = true
+		type = BUTTON
+		pos = 365,7
+		size = 74x18
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #ffffff
+		saved-params = "is-checked"
+		text = "Ченджлог"
+		command = "Changelog"
 		group = "rpanemode"
-		button-type = pushbox
+	elem "credits"
+		border = line
+		is-flat = true
+		type = BUTTON
+		pos = 438,7
+		size = 64x18
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #ffffff
+		saved-params = "is-checked"
+		text = "Авторы"
+		command = "Credits"
+		group = "rpanemode"
 
 window "infowindow"
 	elem "infowindow"

@@ -272,8 +272,17 @@ var/global/list/asset_datums = list()
 
 /datum/asset/simple/lobby
 	assets = list(
-		"Jost-Bold.ttf" = 'html/browser/Jost-Bold.ttf',
-		"Jost-Regular.ttf" = 'html/browser/Jost-Regular.ttf',
+		"courierprime-code.woff" = 'html/lobby/courierprime-code.woff',
+		"round-control.woff" = 'html/lobby/round-control.woff',
+		"light_left.png" = 'html/lobby/light_left.png',
+		"light_right.png" = 'html/lobby/light_right.png',
+		"smallbutton.png" = 'html/lobby/smallbutton.png',
+		"buttons.mp4" = 'html/lobby/buttons.mp4'
+	)
+
+/datum/asset/simple/lobby_loop
+	assets = list(
+		"loop.mp4" = 'html/lobby/loop.mp4'
 	)
 
 /datum/asset/simple/changelog

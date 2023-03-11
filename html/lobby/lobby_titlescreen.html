@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lobby</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="v4shim.css">
+  <link rel="stylesheet" type="text/css" href="font-awesome.css">
+	<style>
+    @font-face {
+      font-family: "Round Control";
+      src: url("round-control.woff");
+    }
+    @font-face {
+      font-family: "Courier Prime Code";
+      font-weight: normal;
+      src: url("courierprime-code.woff");
+    }
+    body, html {
+      margin: 0;
+      overflow: hidden;
+      text-align: center;
+      background-color: black;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    * { box-sizing: border-box; }
+    a { color: inherit; text-decoration: none; }
+    img { border-style: none; }
+
+    .video {
+      position: absolute;
+      width: auto;
+      height: 100vmin;
+      min-width: 100vmin;
+      min-height: 100vmin;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: .5s opacity ease-in-out;
+    }
+
+    .transparent {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #container {
+      position: absolute;
+      box-sizing: border-box;
+      width: auto;
+      min-width: 100vmin;
+      min-height: 100vmin;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #bottom-menu {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      width: 100vmin;
+      min-width: 100vmin;
+
+      display: -ms-flexbox;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-end;
+
+      padding-bottom: 4vmin;
+    }
+
+    /* 290px x 108px */
+    .bottom-menu__item {
+      height: 5.1428vmin; /* 61.7px */
+      width: 13.8095vmin; /* 165.7px */
+
+      margin: 0 1.5vmin;
+      color: #85bab6;
+
+      background-image: url("smallbutton.png");
+      background-position: center center;
+      background-size: 100% 100%;
+
+      font-family: "Courier Prime Code", Verdana, sans-serif;
+      font-weight: normal;
+      font-size: 1.2vmin;
+      line-height: 1.2vmin;
+      letter-spacing: 1px;
+
+      transition: .1s color;
+      position: relative;
+    }
+
+    .bottom-menu__item i,
+    .bottom-menu__item span {
+      display: -ms-flexbox;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      position: absolute;
+    }
+
+    .bottom-menu__item i {
+      top:   0.0476vmin; /* 0.5714px (1px of 1200px) */
+      right: 0.0476vmin; /* 0.5714px (1px of 1200px) */
+
+      top:   0.4762vmin; /* 5.7142px (10px of 1200px) */
+      right: 0.4285vmin; /* 5.1429px (9px of 1200px) */
+
+      height: 4.1905vmin; /* 50.2857px (88px of 1200px) */
+      width:  4.1905vmin; /* 50.2857px (88px of 1200px) */
+
+      height: 3.381vmin; /* 40.5714px (71px of 1200px) */
+      width:  3.381vmin; /* 40.5714px (71px of 1200px) */
+
+      font-size: 1.7vmin;
+      line-height: 1.7vmin;
+
+      opacity: 0.5;
+      transition: .1s opacity;
+    }
+
+    .bottom-menu__item span {
+      top: 0.4762vmin; /* 5.7142px (10px of 1200px) */
+      left: 0;
+      height: 3.7619vmin; /* 45.1428px (79px of 1200px) */
+      width: 9.5238vmin; /* 114.2857px (200px of 1200px) */
+    }
+
+    .bottom-menu__item::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      background-image: url("smallbutton.png");
+      background-position: center center;
+      background-size: 100% 100%;
+      transition: .1s opacity;
+      opacity: 0;
+    }
+
+    .center-menu__item:hover::before { opacity: 1; }
+
+    #center-menu {
+      position: absolute;
+      width: auto;
+      height: 100vmin;
+      min-height: 100vmin;
+      min-width: 100vmin;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+
+      transition: .3s opacity;
+    }
+
+    /* 590x169 */
+    .center-menu__item {
+      width: 23.5375vmin; /* 282.45px */
+      height: 6.74575vmin; /* 80.949px */
+      padding: 2.33vmin 3.38vmin;
+      color: #85bab6;
+
+      font-family: "Round Control", Verdana, sans-serif;
+      text-align: center;
+      font-weight: normal;
+      font-size: 2vmin;
+      line-height: 2vmin;
+      letter-spacing: 1px;
+
+      transition: .1s color, .1s opacity, .1s text-shadow;
+
+      display: -ms-flexbox;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      position: absolute;
+    }
+    .center-menu__item.disabled {
+      opacity: .45;
+      pointer-events: none;
+    }
+    .center-menu__item span {
+      display: -ms-flexbox;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      position: absolute;
+      top: 0;
+      width: 17.6331vmin; /* 211.5981px */
+      width: 19.4683vmin; /* 233.6196px */
+      height: 100%;
+    }
+
+    .center-menu__item--tl span, .center-menu__item--bl span { left: 0; }
+    .center-menu__item--tr span, .center-menu__item--br span { right: 0; }
+
+    /* X - same. Y - not */
+    .center-menu__item--tl {
+      left: 10.7691vmin; /* 129.23px */
+      top: 42.1133vmin;  /* 505.36px */
+    }
+
+    .center-menu__item--bl {
+      left: 10.7691vmin; /* 129.23px */
+      top: 51.4vmin;  /* 616.8px */
+    }
+
+    .center-menu__item--tr {
+      left: 65.7766vmin; /* 789.32px */
+      top: 41.8541vmin;  /* 502.25px */
+    }
+
+    .center-menu__item--br {
+      left: 65.7766vmin; /* 789.32px */
+      top: 51.1416vmin;  /* 613.7px */
+    }
+
+    .center-menu__item--tl::before, .center-menu__item--bl::before { background-image: url("light_left.png"); }
+    .center-menu__item--tr::before, .center-menu__item--br::before { background-image: url("light_right.png"); }
+
+    .center-menu__item::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      background-position: center center;
+      background-size: 100% 100%;
+      transition: .1s opacity;
+      opacity: 0;
+    }
+
+    .center-menu__item.active::before { opacity: .75; }
+
+    .center-menu__item:hover {
+      color: white;
+      text-shadow: 0px 0px 1.6666vmin rgb(255, 255, 255, .8);
+    }
+    .bottom-menu__item:hover { color: white; }
+
+    .bottom-menu__item:hover i       { opacity: 1;  }
+    .center-menu__item:hover::before { opacity: 1;  }
+    .bottom-menu__item:hover::before { opacity: .8; }
+
+    #back-buttons { z-index: 1; }
+    #back-loop    { z-index: 2; }
+    #container    { z-index: 3; }
+
+    #center-menu { z-index: 1; }
+    #bottom-menu { z-index: 2; }
+
+    .bottom-menu__item::before,
+    .center-menu__item::before {
+      z-index: 2;
+    }
+
+    .bottom-menu__item span,
+    .center-menu__item span {
+      z-index: 3;
+    }
+  </style>
+</head>
+<body>
+  <video class="video" style="display: none;" id="back-loop" src="loop.mp4" loop></video>
+  <video class="video" style="display: none;" id="back-buttons" src="buttons.mp4"></video>
+  <div id="container">
+    <div id="init" style="display: none;">
+      <div id="init-text">
+      </div>
+    </div>
+    <div id="center-menu" style="display: none;">
+        <a class="center-menu__item center-menu__item--horizontal center-menu__item--tr" href='?src=[player-ref];lobby_ready=1' id="ready"><span id="ready-text">Ready</span></a>
+		    <a class="center-menu__item center-menu__item--horizontal center-menu__item--tr" href='?src=[player-ref];lobby_join=1' id="join"><span>Join</span></a>
+				<a class="center-menu__item center-menu__item--tl" href='?src=[player-ref];lobby_setup=1' id="setup"><span>Setup</span></a>
+		    <a class="center-menu__item center-menu__item--bl" href='?src=[player-ref];lobby_crew=1' id="manifest"><span>Manifest</span></a>
+      	<a class="center-menu__item center-menu__item--br" href='?src=[player-ref];lobby_observe=1' id="observe"><span>Observe</span></a>
+    </div>
+    <div id="bottom-menu">
+      <a class="bottom-menu__item" href='?src=[player-ref];lobby_changelog=1' id="changelog"><span>Changelog</span><i class="far fa-list-alt"></i></a>
+      <a class="bottom-menu__item" href='?src=[player-ref];lobby_discord=1' id="discord"><span>Discord</span><i class="fab fa-discord"></i></a>
+      <a class="bottom-menu__item" href='?src=[player-ref];lobby_wiki=1' id="wiki"><span>Wiki</span><i class="fas fa-book"></i></a>
+    </div>
+  </div>
+  <script type="text/javascript">
+
+    var initEl = document.getElementById("init");
+    var initTextEl = document.getElementById("init-text");
+
+    var loopVideo = document.getElementById("back-loop");
+    var buttonsVideo = document.getElementById("back-buttons");
+
+    var containerEl = document.getElementById("container");
+    var centerMenuEl = document.getElementById("center-menu");
+
+    var readyBtn = document.getElementById("ready");
+    var readyText = document.getElementById("ready-text");
+
+    var joinBtn = document.getElementById("join");
+    var manifestBtn = document.getElementById("manifest");
+
+    var opts = {
+      maxInits: 13,
+      fullOpacityInits: 3
+    };
+    var currentRunlevel = null;
+
+    function setReadyStatus(ready) {
+      if (Number(ready)) {
+        readyBtn.classList.add("active");
+        readyText.innerText = "Ready";
+
+      } else {
+        readyBtn.classList.remove("active");
+        readyText.innerText = "Not ready";
+      }
+    }
+
+    var RUNLEVEL_INIT  = 0;
+    var RUNLEVEL_LOBBY = 1;
+    var RUNLEVEL_SETUP = 2;
+    var RUNLEVEL_GAME  = 3;
+
+    function clamp(v, min, max) { return Math.max(Math.min(v, max), min); }
+    function hide(el) { el.style.display = "none"; }
+    function show(el) { el.style.display = ""; }
+    function setCenterMenuDisabled(isDisabled) {
+      if (isDisabled)
+        for (var i = 0; i < centerMenuEl.children.length; i++)
+          centerMenuEl.children[i].classList.add("disabled");
+
+      else
+        for (var i = 0; i < centerMenuEl.children.length; i++)
+          centerMenuEl.children[i].classList.remove("disabled");
+    }
+
+    var VIDEO_LOOP = 1;
+    var VIDEO_BUTTONS = 2;
+    function showVideo(video_type) {
+      if (video_type == VIDEO_BUTTONS) {
+        if (loopVideo.paused && !buttonsVideo.paused)
+          return;
+        if (buttonsVideo.style.display != "none")
+          return;
+
+        show(buttonsVideo);
+        loopVideo.classList.add("transparent");
+        buttonsVideo.play();
+        setTimeout(function () {
+          loopVideo.pause();
+          hide(loopVideo);
+        }, 1000);
+      }
+
+      if (video_type == VIDEO_LOOP) {
+        if (!loopVideo.paused && buttonsVideo.paused)
+          return;
+        loopVideo.classList.remove("transparent");
+        show(loopVideo);
+        hide(buttonsVideo);
+        loopVideo.play();
+        buttonsVideo.pause();
+      }
+    }
+
+    function showButtons() {
+      if (centerMenuEl.style.display == "none")
+        centerMenuEl.classList.add("transparent");
+      show(centerMenuEl);
+      showVideo(VIDEO_BUTTONS);
+    }
+
+    function setStatus(message) {
+      var contents = message.split("-");
+      var state = clamp(Number(contents[0]), RUNLEVEL_INIT, RUNLEVEL_GAME);
+      var ready = contents[1];
+
+      setReadyStatus(ready);
+      currentRunlevel = state;
+
+      switch (state) {
+        case RUNLEVEL_INIT:
+          hide(centerMenuEl);
+          showVideo(VIDEO_LOOP);
+          break;
+
+        case RUNLEVEL_LOBBY:
+          showButtons();
+
+          show(readyBtn);
+          hide(joinBtn);
+
+          setCenterMenuDisabled(false);
+          manifestBtn.classList.add("disabled");
+          break;
+
+        case RUNLEVEL_SETUP:
+          showButtons();
+
+          show(readyBtn);
+          hide(joinBtn);
+
+          setCenterMenuDisabled(true);
+          break;
+
+        case RUNLEVEL_GAME:
+          showButtons();
+
+          show(joinBtn);
+          hide(readyBtn);
+
+          setCenterMenuDisabled(false);
+          break;
+      }
+    }
+
+    function fadeTitlescreen() {
+      containerEl.style.pointerEvents = "none";
+      // 1/0.04 = 25 iterations
+      // 25*50ms = 1250ms = 1.25s
+      var opacity = 1;
+      var fadeInterval = setInterval(function () {
+        opacity -= 0.04;
+        if (opacity < 0) {
+          opacity = 0;
+          clearInterval(fadeInterval);
+        }
+        loopVideo.style.opacity = opacity;
+        buttonsVideo.style.opacity = opacity;
+        containerEl.style.opacity = opacity;
+      }, 50)
+    }
+
+    loopVideo.onload = function () {
+      if (currentRunlevel == RUNLEVEL_INIT) { loopVideo.play(); }
+      else { loopVideo.pause(); }
+    }
+    buttonsVideo.onload = function () {
+      if (currentRunlevel > RUNLEVEL_INIT) { buttonsVideo.play(); }
+      else { buttonsVideo.pause(); }
+    }
+
+    buttonsVideo.onended = function () {
+      centerMenuEl.classList.remove("transparent");
+    }
+
+    setReadyStatus(0);
+
+    window.location = "?src=[player-ref]&lobby_init=1";
+  </script>
+</body>
+</html>

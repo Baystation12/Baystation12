@@ -174,7 +174,7 @@
 	. = (Uptime() - start_uptime) / 10
 	var/msg = "Initialized [name] subsystem within [.] second[. == 1 ? "" : "s"]!"
 	log_world(msg)
-	to_titlescreen(msg)
+	admin_notice(msg)
 	init_state = SS_INITSTATE_DONE
 	initialized = TRUE	// Legacy.
 
