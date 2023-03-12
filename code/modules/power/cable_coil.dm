@@ -121,6 +121,25 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 	UpdateItemSize()
 
 
+/obj/item/stack/cable_coil/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Multitool - Recolor cable coil
+	if (isMultitool(tool))
+		var/new_color = input(user, "Select a color to change to:", "\The [src] - Color Change", null) as null|anything in GLOB.cable_default_colors
+		if (!new_color || !user.use_sanity_check(src))
+			return TRUE
+		var/new_color_code = GLOB.cable_default_colors["[new_color]"]
+		if (get_color() == new_color_code)
+			return TRUE
+		set_color(new_color_code)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] changes \the [src]'s color with \a [tool]."),
+			SPAN_NOTICE("You set \the [src]'s color to '[new_color]' with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
+
 /obj/item/stack/cable_coil/proc/can_merge(obj/item/stack/cable_coil/coil)
 	return color == coil.color
 
