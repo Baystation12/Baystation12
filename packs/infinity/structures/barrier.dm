@@ -22,11 +22,11 @@
 /obj/structure/barrier/examine(mob/user)
 	..()
 	if(health>=200)
-		to_chat(user, "<span class='notice'>It looks undamaged.</span>")
+		to_chat(user, SPAN_NOTICE("It looks undamaged."))
 	if(health>=140 && health<200)
-		to_chat(user, "<span class='warning'>It has small dents.</span>")
+		to_chat(user, SPAN_WARNING("It has small dents."))
 	if(health>=80 && health<140)
-		to_chat(user, "<span class='warning'>It has medium dents.</span>")
+		to_chat(user, SPAN_WARNING("It has medium dents."))
 	if(health<80)
 		to_chat(user, "<span class='danger'>It will break apart soon!</span>")
 
@@ -94,42 +94,43 @@
 		take_damage(20)
 		return
 	if(deployed)
-		to_chat(user, "<span class='notice'>[src] is already deployed. You can't move it.</span>")
+		to_chat(user, SPAN_NOTICE("[src] is already deployed. You can't move it."))
 	else
 		if(do_after(user, 5, src))
 			playsound(src, 'sound/effects/extout.ogg', 100, 1)
 			density = !density
-			to_chat(user, "<span class='notice'>You're getting [density ? "up" : "down"] [src].</span>")
+			to_chat(user, SPAN_NOTICE("You're getting [density ? "up" : "down"] [src]."))
 			update_layers()
 			update_icon()
 
 /obj/structure/barrier/use_tool(obj/item/tool, mob/user, list/click_params)
-	. = ..()
+
 	if(isWelder(tool))
 		var/obj/item/weldingtool/WT = tool
 		if(health == maxhealth)
-			to_chat(user, "<span class='notice'>\The [src] is fully repaired.</span>")
+			to_chat(user, SPAN_NOTICE("\The [src] is fully repaired."))
 			return TRUE
 		if(!WT.isOn())
-			to_chat(user, "<span class='notice'>[tool] should be turned on firstly.</span>")
+			to_chat(user, SPAN_NOTICE("[tool] should be turned on firstly."))
 			return TRUE
 		if(WT.remove_fuel(0,user))
-			visible_message("<span class='warning'>[user] is repairing \the [src]...</span>")
+			visible_message(SPAN_WARNING("[user] is repairing \the [src]..."))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, max(5, health / 5), src) && WT?.isOn())
-				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
+				to_chat(user, SPAN_NOTICE("You finish repairing the damage to [src]."))
 				playsound(src, 'sound/items/Welder2.ogg', 100, 1)
 				health = maxhealth
 		else
-			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
+			to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
 		update_icon()
 		return TRUE
+
 	if(isScrewdriver(tool))
 		if(density)
 			visible_message("<span class='danger'>[user] begins to [deployed ? "un" : ""]deploy \the [src]...</span>")
 			playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
 			if(do_after(user, 30, src))
-				visible_message("<span class='notice'>[user] has [deployed ? "un" : ""]deployed \the [src].</span>")
+				visible_message(SPAN_NOTICE("[user] has [deployed ? "un" : ""]deployed \the [src]."))
 				deployed = !deployed
 				if(deployed)
 					basic_chance = 70
@@ -137,25 +138,26 @@
 					basic_chance = 50
 		update_icon()
 		return TRUE
+
 	if(isCrowbar(tool))
 		if(!deployed && !density)
 			visible_message("<span class='danger'>[user] is begins disassembling \the [src]...</span>")
 			playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 			if(do_after(user, 60, src))
 				var/obj/item/barrier/B = new /obj/item/barrier(get_turf(user))
-				visible_message("<span class='notice'>[user] dismantled \the [src].</span>")
+				visible_message(SPAN_NOTICE("[user] dismantled \the [src]."))
 				playsound(src, 'sound/items/Deconstruct.ogg', 100, 1)
 				B.health = health
 				B.add_fingerprint(user)
 				qdel(src)
 		else
-			to_chat(user, "<span class='notice'>You should unsecure \the [src] firstly. Use a screwdriver.</span>")
+			to_chat(user, SPAN_NOTICE("You should unsecure \the [src] firstly. Use a screwdriver."))
 		update_icon()
 		return TRUE
 	else
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		take_damage(tool.force)
-		return TRUE
+		return ..()
 
 /obj/structure/barrier/bullet_act(obj/item/projectile/P)
 	..()
@@ -195,7 +197,7 @@
 		chance += 10
 
 	if(prob(chance))
-		visible_message("<span class='warning'>[P] hits \the [src]!</span>")
+		visible_message(SPAN_WARNING("[P] hits \the [src]!"))
 		bullet_act(P)
 		return 0
 
@@ -237,13 +239,13 @@
 /obj/item/barrier/proc/turf_check(mob/user as mob)
 	for(var/obj/structure/barrier/D in user.loc.contents)
 		if((D.dir == user.dir))
-			to_chat(user, "<span class='warning'>There is no more space.</span>")
+			to_chat(user, SPAN_WARNING("There is no more space."))
 			return 1
 	return 0
 
 /obj/item/barrier/attack_self(mob/user as mob)
 	if(!isturf(user.loc))
-		to_chat(user, "<span class='warning'>You can't place it here.</span>")
+		to_chat(user, SPAN_WARNING("You can't place it here."))
 		return
 	if(turf_check(user))
 		return
@@ -257,20 +259,20 @@
 		qdel(src)
 
 /obj/item/barrier/use_tool(obj/item/tool, mob/user, list/click_params)
-	. = ..()
 	if(health != 200 && isWelder(tool))
 		var/obj/item/weldingtool/WT = tool
 		if(!WT.isOn())
-			to_chat(user, "<span class='notice'>The [tool] should be turned on firstly.</span>")
+			to_chat(user, SPAN_NOTICE("The [tool] should be turned on firstly."))
 			return TRUE
 		if(WT.remove_fuel(0,user))
-			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
+			to_chat(user, SPAN_NOTICE("You start repairing the damage to [src]."))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, max(5, health / 5), src) && WT?.isOn())
-				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
+				to_chat(user, SPAN_NOTICE("You finish repairing the damage to [src]."))
 				playsound(src, 'sound/items/Welder2.ogg', 100, 1)
 				health = 200
 			return TRUE
 		else
-			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
+			to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
 			return TRUE
+	return ..()

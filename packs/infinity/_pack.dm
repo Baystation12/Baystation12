@@ -2,8 +2,15 @@
 #define CONTENT_PACK_INFINITY
 
 // DEFINES
-#include "_defines\clothing.dm"
-#include "_defines\guns.dm"
+#include "__defines\clothing.dm"
+#include "__defines\guns.dm"
+
+// DATUMS
+#include "_datums\loadout\gears.dm"
+#include "_datums\reagents\experimental.dm"
+
+// HELPERS
+#include "_helpers\colors.dm"
 
 // Interactions (including overriding)
 #include "interactions\glup_down.dm"
@@ -34,22 +41,36 @@
 // Items
 #include "items\music_player\_music_player.dm"
 #include "items\music_player\_music_tape.dm"
+#include "items\music_player\music_writer.dm"
 #include "items\music_player\subtypes_player.dm"
 #include "items\music_player\subtypes_tape.dm"
 
-#include "items\projectile\ammunition\boxes.dm"
-#include "items\projectile\ammunition\bullets.dm"
-#include "items\projectile\guns\automatic.dm"
-
+#include "items\carpets.dm"
+#include "items\chairs.dm"
+#include "items\chemistry.dm"
+#include "items\grown.dm"
+#include "items\modular_computer.dm"
 #include "items\multimeter.dm"
 #include "items\powertools.dm"
 #include "items\towels.dm"
+#include "items\toys.dm"
+#include "items\wheelchair_kit.dm"
+
+// Guns
+#include "items\projectile\ammunition\boxes.dm"
+#include "items\projectile\ammunition\bullets.dm"
+
+#include "items\projectile\guns\automatic.dm"
+#include "items\projectile\guns\energy\laser_handmade.dm"
 
 // Machines
-#include "machinery\computer_presets.dm"
+#include "machinery\computer.dm"
+#include "machinery\heater.dm"
 #include "machinery\machines.dm"
+#include "machinery\rack.dm"
 #include "machinery\lighting.dm"
 #include "machinery\suit_storage.dm"
+#include "machinery\survival_pod.dm"
 
 // Mobs
 #include "mobs\simple\fox.dm"
@@ -58,6 +79,10 @@
 // Structures
 #include "structures\barrier.dm"
 #include "structures\chairs.dm"
+#include "structures\curtains.dm"
+#include "structures\holoplants.dm"
+#include "structures\l3closets.dm"
+#include "structures\ladder_mobile.dm"
 #include "structures\signs.dm"
 #include "structures\table_presets.dm"
 #endif

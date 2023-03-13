@@ -279,9 +279,6 @@
 	name = "Second Deck - Service - Hydroponics"
 	icon_state = "hydro"
 
-/area/hydroponics/storage
-	name = "Second Deck - Service - Hydroponics Storage"
-
 /area/crew_quarters/bar
 	name = "Second Deck - Service - Bar"
 	icon_state = "bar"

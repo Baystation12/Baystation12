@@ -783,6 +783,7 @@
 /turf/simulated/wall/prepainted,
 /area/maintenance/firstdeck/aftstarboard)
 "abI" = (
+/obj/item/ladder_mobile,
 /turf/simulated/floor/tiled/white,
 /area/maintenance/firstdeck/aftstarboard)
 "abJ" = (
@@ -796,6 +797,7 @@
 /turf/simulated/floor/tiled,
 /area/maintenance/firstdeck/aftstarboard)
 "abM" = (
+/obj/item/stool/padded/red,
 /turf/simulated/floor/tiled/dark,
 /area/maintenance/firstdeck/aftstarboard)
 "abN" = (
@@ -1512,7 +1514,7 @@
 /obj/machinery/camera/network/engineering{
 	c_tag = "First Deck - Starbound Necelle"
 	},
-/obj/machinery/power/apc{
+/obj/machinery/power/apc/high/critical{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
@@ -2756,10 +2758,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/item/bodybag/cryobag,
-/obj/item/bodybag/cryobag,
-/obj/item/bodybag/cryobag,
-/obj/item/bodybag/cryobag,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "afD" = (
@@ -4055,6 +4053,9 @@
 	},
 /obj/structure/closet/secure_closet/personal/patient,
 /obj/effect/floor_decal/corner/blue,
+/obj/structure/sign/poster{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "ahT" = (
@@ -4178,6 +4179,9 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/cart{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/medical/backstorage)
 "aic" = (
@@ -4285,7 +4289,7 @@
 	c_tag = "Infirmary - Staging";
 	dir = 8
 	},
-/obj/machinery/sleeper{
+/obj/machinery/sleeper/survival_pod{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -4761,7 +4765,9 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/obj/structure/roller_bed,
+/obj/machinery/sleeper/survival_pod{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/staging)
 "ajh" = (
@@ -6019,6 +6025,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/security/sierra/evidence)
 "akU" = (
@@ -6883,6 +6890,7 @@
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 8
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white,
 /area/medical/office)
 "amm" = (
@@ -8203,6 +8211,10 @@
 	pixel_x = 4;
 	pixel_y = 16
 	},
+/obj/item/storage/box/donkpocket_fruit{
+	pixel_x = -7;
+	pixel_y = 13
+	},
 /obj/item/reagent_containers/food/drinks/glass2/coffeecup/NT,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/adjutants)
@@ -8520,10 +8532,10 @@
 	},
 /obj/structure/cable/green,
 /obj/structure/disposalpipe/segment,
-/obj/machinery/power/apc{
+/obj/machinery/power/apc/high/critical{
 	dir = 4;
-	name = "east bump";
-	pixel_x = 24
+	pixel_x = 24;
+	name = "east bump"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/drone_fabrication)
@@ -8809,6 +8821,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/sleeper)
 "apc" = (
@@ -8930,6 +8943,7 @@
 /obj/effect/floor_decal/corner/beige/bordercorner2{
 	dir = 5
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white,
 /area/hallway/infirmary)
 "api" = (
@@ -9011,6 +9025,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white,
 /area/medical/staging)
 "apn" = (
@@ -9191,6 +9206,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hall/level_two)
 "apE" = (
@@ -9418,6 +9434,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/techmaint,
 /area/security/sierra/evidence)
 "apX" = (
@@ -9490,6 +9507,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/drone_fabrication)
 "aqe" = (
@@ -9837,6 +9855,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/sleeper)
 "aqJ" = (
@@ -10096,6 +10115,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/bridge/adjutants)
 "arh" = (
@@ -10276,6 +10296,7 @@
 	name = "Forensics";
 	req_access = newlist()
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/techmaint,
 /area/security/sierra/evidence)
 "arw" = (
@@ -10429,6 +10450,7 @@
 	dir = 4;
 	pixel_x = -20
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "arP" = (
@@ -10528,6 +10550,7 @@
 	dir = 1;
 	icon_state = "pipe-c"
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white,
 /area/hallway/infirmary)
 "arX" = (
@@ -11145,6 +11168,9 @@
 /obj/effect/floor_decal/corner/black/border{
 	dir = 1
 	},
+/obj/structure/closet/walllocker/secure_closet{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/iaa)
 "atc" = (
@@ -11305,6 +11331,7 @@
 	icon_state = "1-2"
 	},
 /obj/structure/disposalpipe/segment,
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/heads/office/cmo)
 "atH" = (
@@ -11938,7 +11965,7 @@
 /obj/effect/floor_decal/corner/red/border{
 	dir = 8
 	},
-/obj/item/stool/padded,
+/obj/item/stool/padded/red,
 /turf/simulated/floor/tiled/steel_grid,
 /area/security/range)
 "avn" = (
@@ -12669,6 +12696,7 @@
 /obj/effect/floor_decal/corner/red/border{
 	dir = 10
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled,
 /area/security/sierra/forensic)
 "awU" = (
@@ -13296,6 +13324,7 @@
 	name = "Suits Storage";
 	req_access = newlist()
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/monotile,
 /area/security/sierra/forensic)
 "ayi" = (
@@ -13342,6 +13371,7 @@
 	name = "Processings";
 	req_access = newlist()
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/monotile,
 /area/security/sierra/interrogation)
 "ayl" = (
@@ -13483,6 +13513,7 @@
 /obj/effect/floor_decal/corner/black/border,
 /obj/effect/floor_decal/borderfloorblack/corner2,
 /obj/effect/floor_decal/corner/black/bordercorner2,
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/iaa)
 "ayx" = (
@@ -13553,6 +13584,7 @@
 /obj/effect/floor_decal/corner/black/bordercorner2{
 	dir = 9
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/iaa)
 "ayB" = (
@@ -15872,6 +15904,9 @@
 	name = "AI Core Shield";
 	opacity = 0
 	},
+/obj/machinery/door/window/phoronreinforced{
+	dir = 8
+	},
 /turf/simulated/floor/bluegrid,
 /area/turret_protected/ai)
 "aCm" = (
@@ -17427,6 +17462,7 @@
 /obj/effect/floor_decal/corner/lime/bordercorner2{
 	dir = 8
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/dungeon_master_lounge)
 "aDX" = (
@@ -17472,6 +17508,7 @@
 /obj/effect/floor_decal/corner/lime/bordercorner2{
 	dir = 6
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "aEc" = (
@@ -19386,6 +19423,7 @@
 /obj/structure/table/wallf{
 	dir = 4
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/white,
 /area/assembly/robotics)
 "aHb" = (
@@ -19657,6 +19695,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/security/sierra/equipment)
 "aHw" = (
+/obj/item/stool/padded/red,
 /turf/simulated/floor/tiled/steel_grid,
 /area/security/sierra/equipment)
 "aHx" = (
@@ -19885,6 +19924,7 @@
 	},
 /obj/structure/wall_frame/standard,
 /obj/structure/table/wallf/steel,
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/sierra/sergeant)
 "aHO" = (
@@ -20215,6 +20255,9 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 9
 	},
+/obj/structure/sign/poster/nyc_unusual_gas{
+	pixel_x = -32
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/rnd/development)
 "aIq" = (
@@ -20377,6 +20420,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white,
 /area/rnd/entry)
 "aIz" = (
@@ -20475,9 +20519,6 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/heads/office/rd)
 "aIF" = (
-/obj/machinery/computer/modular/preset/civilian{
-	dir = 4
-	},
 /obj/structure/filingcabinet/wallcabinet{
 	pixel_y = 26
 	},
@@ -20493,6 +20534,9 @@
 /obj/effect/floor_decal/corner/purple/bordercorner2{
 	dir = 1
 	},
+/obj/machinery/computer/modular/preset/civilian/professional{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/assembly/robotics)
 "aIG" = (
@@ -20502,6 +20546,9 @@
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals4{
 	dir = 4
+	},
+/obj/structure/bed/chair/office/purple{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/assembly/robotics)
@@ -20524,6 +20571,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/vending/generic,
 /turf/simulated/floor/tiled/white,
 /area/assembly/robotics)
 "aII" = (
@@ -20582,6 +20630,7 @@
 /obj/effect/floor_decal/corner/purple/bordercorner2{
 	dir = 4
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white,
 /area/assembly/robotics)
 "aIL" = (
@@ -20964,6 +21013,7 @@
 	name = "Warden";
 	req_access = newlist()
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/sierra/sergeant)
 "aJr" = (
@@ -21127,6 +21177,7 @@
 /obj/effect/floor_decal/corner/red/bordercorner2{
 	dir = 10
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "aJy" = (
@@ -21447,6 +21498,7 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/techfloor/orange/corner,
+/obj/structure/bed/chair/office/purple,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/rnd/development)
 "aJY" = (
@@ -21570,6 +21622,7 @@
 /obj/structure/sign/warning/fall{
 	pixel_y = -32
 	},
+/obj/item/ladder_mobile,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/sleep/cryo/upper)
 "aKg" = (
@@ -21919,6 +21972,7 @@
 	stripe_color = "#ffffff"
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/heads/office/rd)
 "aKI" = (
@@ -22106,6 +22160,7 @@
 	id_tag = "security_lockdown";
 	name = "Security Department Lockdown"
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/sierra/sergeant)
 "aKS" = (
@@ -22176,6 +22231,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "aKW" = (
@@ -22194,6 +22250,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/steel_grid,
 /area/crew_quarters/heads/office/hop)
 "aKX" = (
@@ -22334,10 +22391,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/unused_office)
 "aLe" = (
-/obj/machinery/computer/modular/preset/civilian{
-	dir = 1;
-	icon_state = "console"
-	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 10
 	},
@@ -22351,6 +22404,9 @@
 /obj/structure/sign/poster{
 	pixel_x = -32;
 	poster_type = /singleton/poster/bay_43
+	},
+/obj/machinery/computer/modular/preset/civilian/professional{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/crew_quarters/unused_office)
@@ -22580,6 +22636,9 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/techfloor,
+/obj/structure/bed/chair/office/purple{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/rnd/development)
 "aLx" = (
@@ -22768,6 +22827,7 @@
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 8
 	},
+/obj/structure/bed/chair/office/purple,
 /turf/simulated/floor/tiled/white,
 /area/assembly/robotics)
 "aLK" = (
@@ -22909,6 +22969,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/bridge/hall/level_two)
 "aMd" = (
@@ -24016,6 +24077,7 @@
 	id_tag = "ge_windows";
 	req_access = newlist()
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/dark,
 /area/security/sierra/breakroom)
 "aNH" = (
@@ -24078,6 +24140,7 @@
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 1
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/dark,
 /area/security/sierra/breakroom)
 "aNL" = (
@@ -24139,6 +24202,7 @@
 	name = "Lont Term Checkpoint";
 	req_access = newlist()
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/prison)
 "aNO" = (
@@ -24942,6 +25006,7 @@
 	},
 /obj/effect/floor_decal/borderfloorblack,
 /obj/effect/floor_decal/borderfloorblack/corner2,
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark,
 /area/security/sierra/breakroom)
 "aOZ" = (
@@ -25127,6 +25192,8 @@
 	name = "Checkpoint's Desk";
 	req_access = newlist()
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
+/obj/structure/table/wallf/steel,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/prison)
 "aPj" = (
@@ -25314,6 +25381,7 @@
 /turf/simulated/wall/prepainted,
 /area/tcommsat/computer)
 "aPA" = (
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark,
 /area/tcommsat/computer)
 "aPB" = (
@@ -25417,6 +25485,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/computer/modular/preset/aislot/sysadmin{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/tcommsat/computer)
@@ -25534,6 +25605,7 @@
 /obj/structure/sign/xenoflora{
 	pixel_y = -32
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "aPR" = (
@@ -26086,6 +26158,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/bridge)
 "aQB" = (
@@ -26147,6 +26220,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 4
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/security/sierra/hosbed)
 "aQF" = (
@@ -26234,6 +26308,7 @@
 	name = "Break Room";
 	req_access = newlist()
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/dark,
 /area/security/sierra/breakroom)
 "aQL" = (
@@ -26280,6 +26355,7 @@
 	name = "Lont Term Checkpoint";
 	req_access = newlist()
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/prison)
 "aQP" = (
@@ -26350,6 +26426,8 @@
 /obj/effect/floor_decal/corner/green/border{
 	dir = 4
 	},
+/obj/item/storage/box/donkpocket_protein,
+/obj/item/storage/box/donkpocket_vegetable,
 /turf/simulated/floor/tiled,
 /area/security/prison)
 "aQW" = (
@@ -27104,6 +27182,7 @@
 	},
 /obj/effect/floor_decal/borderfloorblack,
 /obj/effect/floor_decal/corner/red/border,
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/prison)
 "aRS" = (
@@ -27318,6 +27397,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 1
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/firstdeck/foreport)
 "aSj" = (
@@ -27741,6 +27821,7 @@
 /obj/effect/floor_decal/corner/red/border{
 	dir = 1
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/prison)
 "aSD" = (
@@ -27982,10 +28063,10 @@
 /obj/effect/floor_decal/corner/green/border{
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/power/apc/high/critical{
 	dir = 4;
-	name = "east bump";
-	pixel_x = 24
+	pixel_x = 24;
+	name = "east bump"
 	},
 /turf/simulated/floor/tiled,
 /area/security/prison)
@@ -28240,6 +28321,9 @@
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 6
 	},
+/obj/machinery/computer/modular/preset/aislot/research{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "aTl" = (
@@ -28440,6 +28524,7 @@
 /obj/effect/floor_decal/corner/red/bordercorner2{
 	dir = 8
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/steel_grid,
 /area/security/brig)
 "aTJ" = (
@@ -28557,6 +28642,7 @@
 	},
 /obj/effect/floor_decal/borderfloorblack,
 /obj/effect/floor_decal/corner/red/border,
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/prison)
 "aTV" = (
@@ -28835,6 +28921,7 @@
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 6
 	},
+/obj/structure/flora/pottedplant/smallcactus,
 /turf/simulated/floor/tiled/dark,
 /area/tcommsat/computer)
 "aUy" = (
@@ -29171,6 +29258,7 @@
 /obj/effect/floor_decal/corner/green/bordercorner2{
 	dir = 9
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled,
 /area/security/prison)
 "aVp" = (
@@ -30170,6 +30258,9 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 4
 	},
+/obj/machinery/vending/parts/research{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/rnd/storage)
 "aXk" = (
@@ -30769,6 +30860,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/techfloor,
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/rnd/storage)
 "aYv" = (
@@ -31120,6 +31212,7 @@
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 4
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "aZR" = (
@@ -31841,6 +31934,7 @@
 /obj/structure/railing/mapped{
 	dir = 1
 	},
+/obj/structure/flora/pottedplant/flower,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge/upper)
 "bbB" = (
@@ -31913,6 +32007,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
+	},
+/obj/machinery/door/window/phoronreinforced{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/rnd/servers)
@@ -32536,6 +32633,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/eva)
 "bcV" = (
@@ -32964,6 +33062,7 @@
 	name = "Xenoflora Lab Maintenance";
 	req_access = newlist()
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/research)
 "bdX" = (
@@ -33380,10 +33479,16 @@
 /obj/structure/railing/mapped{
 	dir = 8
 	},
+/obj/structure/bed/chair/office/brown{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/centralport)
 "beJ" = (
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/structure/bed/chair/office/brown{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/centralport)
 "beK" = (
@@ -33976,9 +34081,9 @@
 	c_tag = "First Deck - Port Necelle";
 	dir = 1
 	},
-/obj/machinery/power/apc{
-	name = "south bump";
-	pixel_y = -24
+/obj/machinery/power/apc/high/critical{
+	pixel_y = -24;
+	name = "south bump"
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
@@ -35285,6 +35390,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 8
 	},
+/obj/machinery/door/window/phoronreinforced,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/turret_protected/ai)
 "bka" = (
@@ -35502,10 +35608,10 @@
 	c_tag = "Command - Bridge Upper Hallway Stairs";
 	dir = 4
 	},
-/obj/machinery/power/apc{
+/obj/machinery/power/apc/high/critical{
 	dir = 8;
-	name = "west bump";
-	pixel_x = -24
+	pixel_x = -24;
+	name = "west bump"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hall/level_two)
@@ -35543,6 +35649,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/machinery/door/window/phoronreinforced,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/turret_protected/ai)
 "blk" = (
@@ -36174,6 +36281,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/hallway/infirmary)
+"dqw" = (
+/obj/structure/sign/nanotrasen{
+	dir = 1
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/maintenance/firstdeck/centralstarboard)
 "dsP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -36264,7 +36377,7 @@
 "dEW" = (
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/reagent_dispensers/water_cooler{
+/obj/machinery/sleeper/survival_pod{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -36315,6 +36428,15 @@
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/infirmreception)
+"dNv" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/vending/generic{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/rnd/storage)
 "dPt" = (
 /obj/structure/bed/chair/comfy/brown,
 /turf/simulated/floor/tiled/dark,
@@ -36373,10 +36495,6 @@
 	},
 /turf/simulated/floor/blackgrid,
 /area/security/nuke_storage)
-"dSy" = (
-/obj/structure/closet/walllocker/secure_closet,
-/turf/simulated/wall/prepainted,
-/area/crew_quarters/heads/office/iaa)
 "dTt" = (
 /obj/machinery/computer/air_control{
 	input_tag = "test_xenoflora_in";
@@ -36514,6 +36632,7 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/bed/chair/office/purple,
 /turf/simulated/floor/tiled/white,
 /area/rnd/misc_lab)
 "ewn" = (
@@ -36788,6 +36907,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/security/range)
 "fwZ" = (
@@ -36955,6 +37075,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/turret_protected/ai)
 "fUC" = (
@@ -37548,7 +37669,7 @@
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge/upper)
 "hJp" = (
-/obj/item/stool/padded,
+/obj/item/stool/padded/red,
 /turf/simulated/floor/tiled,
 /area/security/range)
 "hKi" = (
@@ -38089,6 +38210,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
+"iXJ" = (
+/obj/structure/bed/chair/office/brown{
+	dir = 1
+	},
+/turf/simulated/floor/carpet,
+/area/crew_quarters/lounge/upper)
 "jft" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -38229,7 +38356,7 @@
 	dir = 4;
 	pixel_x = 22
 	},
-/obj/structure/bed/sofa/r/blue{
+/obj/structure/bed/chair/rounded/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -38289,7 +38416,9 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/flora/pottedplant/tropical,
+/obj/machinery/sleeper/survival_pod{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/hallway/infirmary)
 "klE" = (
@@ -38522,6 +38651,9 @@
 	_output_on = 1
 	},
 /obj/effect/paint_stripe/turquoise,
+/obj/machinery/door/window/phoronreinforced{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/turret_protected/ai)
 "kHM" = (
@@ -38941,6 +39073,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/turret_protected/ai)
 "lIG" = (
@@ -39026,6 +39159,9 @@
 	dir = 8
 	},
 /obj/effect/paint_stripe/turquoise,
+/obj/machinery/door/window/phoronreinforced{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/turret_protected/ai)
 "lRO" = (
@@ -39126,7 +39262,9 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/paleblue/mono,
-/obj/structure/table/reinforced,
+/obj/structure/reagent_dispensers/water_cooler{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/hallway/infirmary)
 "mvB" = (
@@ -39176,6 +39314,14 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
+"mBh" = (
+/obj/effect/paint/nt_white,
+/obj/effect/paint_stripe/nt_red,
+/obj/structure/sign/nanotrasen{
+	dir = 1
+	},
+/turf/simulated/wall/r_titanium,
+/area/shuttle/escape_pod/escape_pod5/station)
 "mCg" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -39340,6 +39486,9 @@
 	pixel_y = -20;
 	range = 11
 	},
+/obj/machinery/computer/modular/preset/cardslot/command{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
 "mXP" = (
@@ -39496,6 +39645,9 @@
 	dir = 1
 	},
 /obj/machinery/porta_turret,
+/obj/machinery/door/window/phoronreinforced{
+	dir = 4
+	},
 /turf/simulated/floor/bluegrid,
 /area/turret_protected/ai)
 "nng" = (
@@ -39708,6 +39860,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/bed/chair/office/purple{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
 "nUg" = (
@@ -39868,6 +40023,12 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
+"opm" = (
+/obj/structure/sign/nanotrasen{
+	dir = 4
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/maintenance/firstdeck/aftport)
 "osv" = (
 /obj/machinery/computer/account_database{
 	dir = 1
@@ -40044,6 +40205,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/turret_protected/ai_upload)
+"oTH" = (
+/obj/structure/bed/chair/office/purple,
+/turf/simulated/floor/tiled/white,
+/area/rnd/misc_lab)
 "oWT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -40221,6 +40386,7 @@
 	pixel_y = -6;
 	req_access = list("ACCESS_MEDICAL")
 	},
+/mob/living/simple_animal/passive/cat/fluff/Runtime,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
 "pnQ" = (
@@ -40259,6 +40425,7 @@
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 6
 	},
+/obj/structure/flora/pottedplant/thinbush,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
 "pAN" = (
@@ -40310,6 +40477,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue)
 "pHI" = (
@@ -40423,6 +40591,10 @@
 "pWA" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6
+	},
+/obj/structure/sign/nanotrasen{
+	dir = 8;
+	pixel_x = 32
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
@@ -40804,6 +40976,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/tcommsat/chamber)
+"rWa" = (
+/obj/structure/sign/nanotrasen{
+	dir = 4
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/maintenance/solar)
 "sbf" = (
 /obj/machinery/sparker{
 	id_tag = "Xenobio";
@@ -41063,7 +41241,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/obj/structure/bed/sofa/m/blue{
+/obj/structure/bed/chair/rounded/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -41122,6 +41300,13 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
+"sMT" = (
+/obj/structure/sign/nanotrasen{
+	dir = 1;
+	pixel_y = -32
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
 "sMZ" = (
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/techfloor,
@@ -41261,6 +41446,11 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
+"tqF" = (
+/obj/item/stool/padded/red,
+/obj/random/junk,
+/turf/simulated/floor/wood/walnut,
+/area/maintenance/firstdeck/aftstarboard)
 "tqS" = (
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/paleblue/border,
@@ -41444,7 +41634,7 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/obj/structure/bed/sofa/l/blue{
+/obj/structure/bed/chair/rounded/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -42091,6 +42281,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled/white,
 /area/rnd/misc_lab)
 "vZt" = (
@@ -42183,6 +42374,7 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/floor_decal/industrial/hatch/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/heads/office/hop/cobed)
 "wDR" = (
@@ -42289,6 +42481,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
+/obj/structure/holoplant,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore_stairwell)
 "wTw" = (
@@ -42345,6 +42538,12 @@
 /obj/machinery/atmospherics/pipe/manifold/visible,
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
+"xbE" = (
+/obj/structure/bed/chair/office/brown{
+	dir = 4
+	},
+/turf/simulated/floor/carpet,
+/area/crew_quarters/lounge/upper)
 "xeY" = (
 /obj/structure/catwalk,
 /obj/structure/cable/green{
@@ -42622,6 +42821,9 @@
 /obj/effect/floor_decal/techfloor,
 /obj/effect/floor_decal/techfloor{
 	dir = 1
+	},
+/obj/machinery/door/window/phoronreinforced{
+	dir = 4
 	},
 /turf/simulated/floor/bluegrid,
 /area/turret_protected/ai)
@@ -51464,7 +51666,7 @@ aaa
 adz
 aao
 aam
-aam
+sMT
 aaA
 aaA
 aaA
@@ -53922,7 +54124,7 @@ aWE
 aXS
 aYV
 aZZ
-tdN
+mBh
 bcy
 bcy
 bcy
@@ -57922,7 +58124,7 @@ aaa
 aaa
 aaa
 aaa
-aaB
+dqw
 acd
 adU
 adF
@@ -59538,7 +59740,7 @@ aaa
 aaa
 aaa
 aaa
-aaB
+dqw
 aaB
 aaB
 aaB
@@ -59553,7 +59755,7 @@ alY
 ans
 aoN
 aql
-dSy
+arz
 atb
 aut
 avR
@@ -59982,7 +60184,7 @@ aXa
 aYk
 bap
 aVd
-bav
+iXJ
 bcO
 bdL
 aYW
@@ -60346,7 +60548,7 @@ aaa
 aaa
 aaa
 aaa
-aaB
+dqw
 aaB
 aaB
 aaB
@@ -60991,7 +61193,7 @@ aVI
 aXf
 aOk
 aZp
-bav
+xbE
 bbC
 bcQ
 bav
@@ -62200,7 +62402,7 @@ aRs
 aTg
 aPN
 aVN
-aXj
+dNv
 aXj
 aYT
 aYT
@@ -64839,7 +65041,7 @@ bgy
 bgZ
 bgu
 bhF
-bgu
+rWa
 bhQ
 bhY
 bhY
@@ -65032,7 +65234,7 @@ nht
 pft
 qVT
 vaj
-bdb
+oTH
 sox
 aUK
 beU
@@ -68627,7 +68829,7 @@ aal
 aav
 aam
 aaM
-acB
+tqF
 abL
 acE
 abf
@@ -70479,7 +70681,7 @@ aLW
 aLW
 pQA
 aam
-aLW
+opm
 aLW
 aLW
 aLW

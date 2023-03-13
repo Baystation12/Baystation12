@@ -15,13 +15,34 @@
 
 	random_tone = FALSE
 
-/obj/item/light/led_neon/attackby(obj/item/I, mob/user)
+/obj/machinery/light/led
+	name = "neon tube"
+	desc = "A tape of LEDs. Not actually neon, but THIS is FUTURE."
+	light_type = /obj/item/light/led_neon/large
+	icon = 'packs/infinity/icons/obj/machinery/neon.dmi'
+	icon_state = "tube_maped"
+	layer = BELOW_DOOR_LAYER
+
+/obj/machinery/light/led/small
+	name = "small neon tube"
+	base_state = "tube_border"
+	icon_state = "tube_border_maped"
+	light_type = /obj/item/light/led_neon/small
+
+/obj/machinery/light/led/on_update_icon()
 	. = ..()
+	pixel_x = 0
+	pixel_y = 0
+
+
+/obj/item/light/led_neon/use_tool(obj/item/tool, mob/user, list/click_params)
 	if(user)
-		if(isMultitool(I))
+		if(isMultitool(tool))
 			var/c = input("You are changing diode frequency.", "Input", b_colour) as color|null
 			if(c)
 				set_color(c)
+			return TRUE
+	return ..()
 
 /obj/item/light/led_neon/large
 	base_state = "big_tape"
@@ -44,21 +65,6 @@
 			qdel(src)
 			user.put_in_any_hand_if_possible(new /obj/item/light/led_neon/large(T))
 
-/obj/machinery/light/led
-	name = "neon tube"
-	desc = "A tape of LEDs. Not actually neon, but THIS is FUTURE."
-	light_type = /obj/item/light/led_neon/large
-	icon = 'packs/infinity/icons/obj/machinery/neon.dmi'
-	icon_state = "tube_maped"
-	layer = BELOW_DOOR_LAYER
-
-/obj/machinery/light/led/small
-	name = "small neon tube"
-	base_state = "tube_border"
-	icon_state = "tube_border_maped"
-	light_type = /obj/item/light/led_neon/small
-
-/obj/machinery/light/led/on_update_icon()
-	. = ..()
-	pixel_x = 0
-	pixel_y = 0
+/obj/item/storage/box/lights/led_neon
+	name = "box of neon leds"
+	startswith = list(/obj/item/light/led_neon/small = 7)

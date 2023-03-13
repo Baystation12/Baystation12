@@ -39,7 +39,6 @@
 		/area/rnd/xenobiology/cell_2 = NO_APC,
 		/area/rnd/xenobiology/cell_3 = NO_APC,
 		/area/rnd/xenobiology/cell_4 = NO_APC,
-		/area/hydroponics/storage = NO_SCRUBBER|NO_VENT,
 		/area/hydroponics/third_deck_storage = NO_SCRUBBER|NO_VENT
 	)
 
