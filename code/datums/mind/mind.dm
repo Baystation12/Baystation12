@@ -50,6 +50,7 @@
 
 	var/faction 			//associated faction
 	var/datum/changeling/changeling		//changeling holder
+	var/last_words 			//last spoken message
 
 	var/rev_cooldown = 0
 
