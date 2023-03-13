@@ -19,6 +19,7 @@
 	add_field(/datum/report_field/text_label/instruction, "Документ является недействительным в случае отсутствия подписи или печати.")
 	add_field(/datum/report_field/signature, "Подпись", required = 1)
 	set_access(access_liaison, access_liaison)
+
 /datum/computer_file/report/recipient/corp/incident
 	form_name = "HR-NTCO-01"
 	title = "Рапорт об инциденте на корабле"

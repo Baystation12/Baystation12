@@ -38,7 +38,7 @@
 		access_security, access_brig, access_armory, access_forensics_lockers,
 		access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 		access_eva, access_sec_doors, access_solgov_crew, access_gun, access_torch_fax,
-		access_radio_sec
+		access_radio_sec, access_hangar
 	)
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
@@ -102,7 +102,8 @@
 		access_security, access_brig, access_forensics_lockers,
 		access_maint_tunnels, access_emergency_storage,
 		access_sec_doors, access_solgov_crew, access_morgue,
-		access_torch_fax, access_network, access_radio_sec
+		access_torch_fax, access_network, access_radio_sec,
+		access_hangar
 	)
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
@@ -161,13 +162,13 @@
 		access_security, access_brig, access_maint_tunnels,
 		access_external_airlocks, access_emergency_storage,
 		access_eva, access_sec_doors, access_solgov_crew,
-		access_radio_sec
+		access_radio_sec, access_hangar
 	)
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
 
-/datum/job/senior_scientist/get_description_blurb()
+/datum/job/officer/get_description_blurb()
 	return "Вы - Каптенармус. Ваша задача - поддерживать порядок на судне и защищать его от различных угроз. Вы подчиняетесь Главе службы безопасности и Смотрителю. \
 	Проводите задержания, опрашивайте свидетелей. От вас ожидается хорошее знание закона ЦПСС и основных регуляций судна."
 

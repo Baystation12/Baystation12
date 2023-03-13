@@ -107,7 +107,7 @@
 	department_flag = SCI
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Chief Science Officer and science personnel"
+	supervisors = "Главному научному офицеру и научному персоналу"
 	selection_color = "#633d63"
 	economic_power = 3
 	minimum_character_age = list(SPECIES_HUMAN = 18)
@@ -154,7 +154,7 @@
 	department_flag = SCI
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Chief Science Officer"
+	supervisors = "Главному научному офицеру"
 	selection_color = "#473d63"
 	economic_power = 5
 	minimal_player_age = 0

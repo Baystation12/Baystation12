@@ -65,6 +65,26 @@
 	for(var/datum/report_field/field in det_fields)
 		field.set_access(access_edit = access_armory)
 
+/datum/computer_file/report/recipient/sec/penalty
+	form_name = "SCG-SEC-04"
+	title = "Квитанция о взимании штрафа"
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/sec/penalty/generate_fields()
+	..()
+	add_field(/datum/report_field/text_label/header, "ГЭК \"Факел\" - Охранный Отдел")
+	add_field(/datum/report_field/text_label/instruction, "Заполняется старшим сотрудником Охранного департамента.")
+	add_field(/datum/report_field/people/from_manifest, "Полное имя, звание и должность обвиняемого", required = 1)
+	add_field(/datum/report_field/number, "Номер статьи, по которой выплачивается штраф", required = 1)
+	add_field(/datum/report_field/simple_text, "Размер штрафа", required = 1)
+	add_field(/datum/report_field/text_label, "Выплата возможна действующему старшему сотруднику отдела охраны ГЭК \"Факел\".")
+	add_field(/datum/report_field/signature, "Подпись обвиняемого", required = 1)
+	add_field(/datum/report_field/people/from_manifest, "Сотрудник, назначивший выплату штрафа", required = 1)
+	add_field(/datum/report_field/signature, "Подпись сотрудника, назначившего выплату штрафа", required = 1)
+	add_field(/datum/report_field/date, "Дата")
+	add_field(/datum/report_field/time, "Время")
+	set_access(access_edit = access_security)
+
 /datum/computer_file/report/recipient/sec/arrest
 	form_name = "SCG-SEC-03"
 	title = "Отчет о задержании"

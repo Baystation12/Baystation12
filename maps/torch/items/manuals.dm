@@ -78,16 +78,16 @@
 	..()
 	var/obj/effect/overmap/visitable/torch = map_sectors["[z]"]
 	var/memo = {"
-	<tt><center><b><font color='red'>SECRET - CODE WORDS: TORCH</font></b>
-	<h3>SOL CENTRAL GOVERNMENT EXPEDITIONARY COMMAND</h3>
+	<tt><center><b><font color='red'>СЕКРЕТНО - КОДОВОЕ СЛОВО: ФАКЕЛ</font></b>
+	<h3>ЭКСПЕДИЦИОННОЕ КОМАНДОВАНИЕ ЦЕНТРАЛЬНОГО ПРАВИТЕЛЬСТВА СОЛНЕЧНОЙ СИСТЕМЫ</h3>
 	<img src = sollogo.png>
 	</center>
-	<b>FROM:</b> ADM William Lau<br>
-	<b>TO:</b> Commanding Officer of SEV Torch<br>
-	<b>SUBJECT:</b> Standing Orders<br>
+	<b>ОТПРАВИТЕЛЬ:</b> Адмирал Уильям Лау<br>
+	<b>ПОЛУЧАТЕЛЬ:</b> Командующий офицер ГЭК "Факел"<br>
+	<b>ТЕМА:</b> Текущие приказы<br>
 	<hr>
-	Captain.<br>
-	Your orders are to visit the following star systems. Keep in mind that your supplies are limited; ration exploration time accordingly.
+	Капитан.<br>
+	Вам приказанно посетить следующие звёздные системы. Имейте в виду, что ваши запасы ограничены; распоряжайтесь своим временем с умом.
 	<li>[generate_system_name()]</li>
 	<li>[generate_system_name()]</li>
 	<li>[generate_system_name()]</li>
@@ -98,14 +98,14 @@
 	<li>[generate_system_name()]</li>
 	<li>[generate_system_name()]</li>
 	<br>
-	Priority targets are artifacts of uncontacted alien species and signal sources of unknown origin.<br>
-	None of these systems are claimed by any entity recognized by the SCG, so you have full salvage rights on any derelicts discovered.<br>
-	Investigate and mark any prospective colony worlds as per usual procedures.<br>
-	There is no SCG presence in that area. In case of distress calls, you will be the only vessel available; do not ignore them. We cannot afford any more PR backlash.<br>
-	The current docking code is: [torch.docking_codes]<br>
-	Report all findings via bluespace comm buoys during inter-system jumps.<br>
+	Приоритетными целями являются артефакты ещё невстреченых инопланетных видов и сигналы неизвестного происхождения.<br>
+	Ни на одну из этих систем не претендует какая-либо организация, признанная ЦПСС, поэтому у вас есть полные права на утилизацию любых обнаруженных объектов.<br>
+	Исследуйте и обозначайте перспективные миры для колонизации согласно стандартным процедурам.<br>
+	В этих системах не присутствуют силы ЦПСС. В случае обнаружения сигнала бедствия, Вы будете единственным доступным судном; не игнорируйте их. Мы не можем больше позволить себе чёрного пиара.<br>
+	Текущий код стыковки: [torch.docking_codes]<br>
+	Докладывайте обо всех находках при помощи блюспейс телекоммуникаций при совершенни меж-системных прыжков.<br>
 
-	<i>ADM Lau.</i></tt>
+	<i>Адмирал Лау.</i></tt>
 	<i>This paper has been stamped with the stamp of SCG Expeditionary Command.</i>
 	"}
 	new/obj/item/paper(src, memo, "Standing Orders")
@@ -121,24 +121,24 @@
 /obj/item/paper/umbra
 	name = "UMBRA Protocol"
 	info = {"
-	<tt><center><b><font color='red'>TOP SECRET - CODE WORDS: TORCH UMBRA</font></b>
-	<h3>OFFICE OF THE SECRETARY GENERAL OF SOL CENTRAL GOVERNMENT</h3>
+	<tt><center><b><font color='red'>СОВЕРШЕННО СЕКРЕТНО - КОДОВОЕ СЛОВО: ФАКЕЛ ТЕНЬ</font></b>
+	<h3>ОФИС ГЕНЕРАЛЬНОГО СЕКРЕТАРЯ ЦЕНТРАЛЬНОГО ПРАВИТЕЛЬСТВА СОЛНЕЧНОЙ СИСТЕМЫ</h3>
 	<img src = sollogo.png>
 	</center>
-	<b>FROM:</b> Johnathan Smitherson, Special Aide of the Secretary General<br>
-	<b>TO:</b> Commanding Officer of the SEV Torch<br>
-	<b>CC:</b> Special Representative aboard the SEV Torch<br>
-	<b>SUBJECT:</b> UMBRA protocol<br>
+	<b>ОТПРАВИТЕЛЬ:</b> Джонатан Смитерсон, специальный помощник Генерального секретаря<br>
+	<b>ПОЛУЧАТЕЛЬ:</b> Командующий офицер ГЭК "Факел"<br>
+	<b>ТАКЖЕ:</b> Военный прокурор на борту ГЭК "Факел"<br>
+	<b>ТЕМА:</b> Протокол ТЕНЬ<br>
 	<hr>
-	This is a small addendum to the usual operating procedures. Unlike the rest of SOP, this is not left to the Commanding Officer's discretion and is mandatory. As unconventional as this is, we felt it is essential for smooth operation of this mission.<br>
-	Procedure can be initiated only by transmission from SCG Expeditionary Command via secure channel. The sender may not introduce themselves, but you shouldn't have trouble confirming the transmission source, I believe.<br>
-	The signal to initiate the procedure are codewords 'GOOD NIGHT WORLD' used in this order as one phrase. You do not need to send acknowledgement.
-	<li>Information about this expedition's findings is to be treated as secret and vital to SCG's national security, and is protected under codeword UMBRA. Only SCG government employees and Skrell citizens aboard the SEV Torch are allowed access to this information on a need-to-know basis.</li>
-	<li>The secrecy of this information is to be applied retroactively. Any non-cleared personnel who were exposed to such information are to be secured and transferred to DIA on arrival at home port.</li>
-	<li>Any devices capable of transmitting or receiving data at interstellar range are to be confiscated from private possession.</li>
-	<li>Disregard any systems remaining in your flight plan and set course for Sol, Neptune orbit. You will be contacted upon your arrival. Do not make stops in ports on the way unless absolutely necessary.</li>
+	Это небольшое дополнение к обычным стандартным процедурам. В отличии от остальных СОП, это дополнение не находится под юрисдикцией Командующего офицера и является обязательным. Каким бы неудобным это ни было бы, мы сочли, что это необходимо для бесперебойного выполнения данной миссии.<br>
+	Процедура может быть инцированна только при помощи трансляции от Экспедиционного Командования ЦПСС через защищённый канал. Отправитель может не раскрывать свою личность, но у Вас не должно быть проблем с подверждением источника трансляции, я надеюсь.<br>
+	Сигналом к иницированию процедуры являются кодовая фраза 'СПОКОЙНОЙ НОЧИ, МИР' использованная именно в этом порядке как одна фраза. Вам не нужно отправлять подтверждение.
+	<li>Информация о находках этой экспедиции должна рассматриваться как секретная и жизненно важная для национальной безопасности ЦПСС, и защищена кодовым словом ТЕНЬ. Только государственным служащим ЦПСС и гражданам Скрелльской империи на борту ГЭК "Факел" разрешен доступ к этой информации по мере необходимости.</li>
+	<li>Данная информация должна быть засекреченна задним числом. Любой персонал, не имеющий необходимого доступа, который был ознакомлен с такой информацией, должен быть задержан и передан Оборонно Разведывательному Управлению по прибытии в порт приписки.</li>
+	<li>Любые устройства, способные передавать или принимать инфофрмацию в межзвёздном радиусе должны быть конфискованны из личного пользования.</li>
+	<li>Не обращайте внимания на все системы, оставшиеся в вашем плане полета, и возьмите курс на Солнечную Систему, орбиту Нептуна. С вами свяжутся по прибытии. Не делайте остановок в портах по пути без крайней необходимости.</li>
 	<br>
-	While drastic, I assure you this is a simple precaution, lest any issues. Just keep the option open, and carry on with your normal duties.
-	<i>Regards, John.</i></tt>
+	Хотя это и радикально, я уверяю вас, что это простая мера предосторожности, чтобы избежать каких-либо проблем. Просто оставьте этот вариант открытым и продолжайте выполнять свои обычные обязанности.
+	<i>С уважением, Джон.</i></tt>
 	<i>This paper has been stamped with the stamp of Office of the General Secretary of SCG.</i>
 	"}

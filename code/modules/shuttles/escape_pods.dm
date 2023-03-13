@@ -1,12 +1,14 @@
-var/global/list/escape_pods = list()
-var/global/list/escape_pods_by_name = list()
+var/list/escape_pods = list()
+var/list/escape_pods_by_name = list()
 
-#define ISEVAC_STARSHIP_FAST_CONTROLER istype(evacuation_controller, /datum/evacuation_controller/starship/fast)
+#define evac_chair(varName) var/obj/structure/bed/chair/shuttle/##varName	// inf
+#define ISEVAC_STARSHIP_FAST_CONTROLER istype(evacuation_controller, /datum/evacuation_controller/starship/fast)	// inf
 
 /datum/shuttle/autodock/ferry/escape_pod
 	var/datum/computer/file/embedded_program/docking/simple/escape_pod_berth/arming_controller
 	category = /datum/shuttle/autodock/ferry/escape_pod
 	move_time = 100
+	var/need_people	= 0// inf
 
 /datum/shuttle/autodock/ferry/escape_pod/New()
 	if(name in escape_pods_by_name)
@@ -31,6 +33,10 @@ var/global/list/escape_pods_by_name = list()
 		CRASH("Escape pod \"[name]\" could not find it's controller master!")
 
 	controller_master.pod = src
+// [INF]
+	evac_chair(temp)
+	for(temp in shuttle_area[1])
+		++need_people
 
 /datum/shuttle/autodock/ferry/escape_pod/force_launch(user)
 	. = ..()
@@ -59,12 +65,36 @@ var/global/list/escape_pods_by_name = list()
 				return
 		GLOB.exited_event.register(shuttle_area[1], arming_controller, /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/proc/check_unarm)
 
-/datum/shuttle/autodock/ferry/escape_pod/can_launch()
-	if(!evacuation_controller.has_evacuated())
-		return 0
-	if(isnull(evacuation_controller.evac_no_return))
-		return 0
+/datum/shuttle/autodock/ferry/escape_pod/proc/check_load()
+	var/list/counted = list()
+	var/i = 0
+	evac_chair(temp)
+	for(temp in shuttle_area[1])
+		if(temp.buckled_mob)
+			counted += temp.buckled_mob
+			if(counted.len >= need_people)
+				return TRUE
+		i++
+	if(i < need_people)	// someone broke a chair
+		for(var/mob/living/M in shuttle_area[1])
+			if(M in counted)
+				continue
+			counted += M
+			if(counted.len >= need_people)
+				return TRUE
+	return FALSE
+// [/INF]
 
+/datum/shuttle/autodock/ferry/escape_pod/can_launch()
+// [INF]
+	if(!ISEVAC_STARSHIP_FAST_CONTROLER && !evacuation_controller.has_evacuated())
+		return 0
+	if(ISEVAC_STARSHIP_FAST_CONTROLER)
+		if(isnull(evacuation_controller.evac_no_return))
+			return 0
+		if(!check_load() && (world.time < evacuation_controller.evac_no_return))
+			return 0
+// [/INF]
 	if(arming_controller && !arming_controller.armed)	//must be armed
 		return 0
 	if(location)
@@ -72,8 +102,8 @@ var/global/list/escape_pods_by_name = list()
 	return ..()
 
 /datum/shuttle/autodock/ferry/escape_pod/can_force()
-	if (arming_controller && arming_controller.master.emagged)
-		return (next_location && next_location.is_valid(src) && !current_location.cannot_depart(src) && moving_status == SHUTTLE_IDLE && !location && arming_controller && arming_controller.armed)
+	if (arming_controller && arming_controller.master.emagged)	// inf
+		return (next_location && next_location.is_valid(src) && !current_location.cannot_depart(src) && moving_status == SHUTTLE_IDLE && !location && arming_controller && arming_controller.armed)	// inf
 	if (arming_controller.eject_time && world.time < arming_controller.eject_time + 50)
 		return 0	//dont allow force launching until 5 seconds after the arming controller has reached it's countdown
 	return ..()
@@ -88,7 +118,7 @@ var/global/list/escape_pods_by_name = list()
 	program = /datum/computer/file/embedded_program/docking/simple/escape_pod
 	var/datum/shuttle/autodock/ferry/escape_pod/pod
 	var/tag_pump
-	frequency = EXTERNAL_AIR_FREQ
+	frequency = EXTERNAL_AIR_FREQ	 //INF
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -99,7 +129,7 @@ var/global/list/escape_pods_by_name = list()
 		"override_enabled" = docking_program.override_enabled,
 		"door_state" = 	docking_program.memory["door_status"]["state"],
 		"door_lock" = 	docking_program.memory["door_status"]["lock"],
-		"can_force" = pod.can_force() || pod.can_launch(),	//allow players to manually launch ahead of time if the shuttle leaves
+		"can_force" = pod.can_force() || pod.can_launch(),	// inf, was "can_force" = pod.can_force() || (evacuation_controller.has_evacuated() && pod.can_launch()),	//allow players to manually launch ahead of time if the shuttle leaves
 		"is_armed" = pod.arming_controller.armed,
 	)
 
@@ -112,22 +142,25 @@ var/global/list/escape_pods_by_name = list()
 		ui.set_auto_update(1)
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/OnTopic(user, href_list)
-	// if(href_list["manual_arm"])
-	// 	pod.arming_controller.arm()
-	// 	return TOPIC_REFRESH
+/* [BAY]	thx for broken shit
+	if(href_list["manual_arm"])
+		pod.arming_controller.arm()
+		return TOPIC_REFRESH
 
-	// if(href_list["force_launch"])
-	// 	if (pod.can_force())
-	// 		pod.force_launch(src)
-	// 	else if (evacuation_controller.has_evacuated() && pod.can_launch())	//allow players to manually launch ahead of time if the shuttle leaves
-	// 		pod.launch(src)
-	// 	return TOPIC_REFRESH
-
+	if(href_list["force_launch"])
+		if (pod.can_force())
+			pod.force_launch(src)
+		else if (evacuation_controller.has_evacuated() && pod.can_launch())	//allow players to manually launch ahead of time if the shuttle leaves
+			pod.launch(src)
+		return TOPIC_REFRESH
+[/BAY]*/
+// [INF]
 	if(href_list["command"])
 		var/command = href_list["command"]
 		if(command == "manual_arm")
 			pod.arming_controller.arm()
 			return TOPIC_REFRESH
+
 		if(command == "force_launch")
 			if (pod.can_launch())
 				pod.toggle_bds()
@@ -137,12 +170,13 @@ var/global/list/escape_pods_by_name = list()
 				GLOB.global_announcer.autosay("Несанкционированный запуск капсулы <b>[pod]</b>! Возможна разгерметизация!", "Эвакуационный Контроллер",, z)
 				pod.force_launch(src)
 			return TOPIC_REFRESH
+// [/INF]
 
 //This controller is for the escape pod berth (station side)
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth
 	name = "escape pod berth controller"
 	program = /datum/computer/file/embedded_program/docking/simple/escape_pod_berth
-	frequency = EXTERNAL_AIR_FREQ
+	frequency = EXTERNAL_AIR_FREQ	 //INF
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -167,6 +201,7 @@ var/global/list/escape_pods_by_name = list()
 		ui.open()
 		ui.set_auto_update(1)
 
+// [INF]
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/attackby(var/obj/item/T, var/mob/living/carbon/human/user)
 	if(emagged && isMultitool(T) && user.skill_check(SKILL_ELECTRICAL, SKILL_ADEPT))
 		to_chat(user, "<span class='notice'>Ты начал сбрасывать настройки [src], чтобы починить его.</span>")
@@ -191,11 +226,13 @@ var/global/list/escape_pods_by_name = list()
 					P.unarm()
 			return
 	. = ..()
+// [/INF]
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
 		to_chat(user, "<span class='notice'>You emag the [src], arming the escape pod!</span>")
 		emagged = TRUE
+		// [INF]
 		GLOB.global_announcer.autosay("<b>Несанкционированный доступ</b> к контроллеру эвакуации. Потеряно управление от <b><i>[src]</i></b>. Службе безопасности рекомендуется проследовать к этой капсуле. Местоположение капсулы: [get_area(src)]", "Автоматическая Система Безопасности", "Security", z)
 		state("Ошибка центрального контроллера!")
 		sleep(5)
@@ -208,10 +245,11 @@ var/global/list/escape_pods_by_name = list()
 		state("Отключение зажимов...")
 		sleep(20)
 		state("Примерное время подготовки: 5 минут.")
+		// [/INF]
 		if (istype(program, /datum/computer/file/embedded_program/docking/simple/escape_pod_berth))
 			var/datum/computer/file/embedded_program/docking/simple/escape_pod_berth/P = program
 			if (!P.armed)
-				addtimer(CALLBACK(P, /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/proc/arm), 5 MINUTE)
+				addtimer(CALLBACK(P, /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/proc/arm), 5 MINUTES)	// inf was P.arm()
 		return 1
 
 //A docking controller program for a simple door based docking port
@@ -220,6 +258,7 @@ var/global/list/escape_pods_by_name = list()
 	var/eject_delay = 10	//give latecomers some time to get out of the way if they don't make it onto the pod
 	var/eject_time = null
 	var/closing = 0
+
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/proc/arm()
 	if(!armed)
@@ -231,6 +270,7 @@ var/global/list/escape_pods_by_name = list()
 		armed = 0
 		close_door()
 
+// [INF]
 /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/proc/check_unarm(var/area/area, var/mob/living/user)
 	if(armed && isliving(user))
 		if(evacuation_controller.is_idle() || evacuation_controller.is_on_cooldown())
@@ -243,18 +283,19 @@ var/global/list/escape_pods_by_name = list()
 				unarm()
 	else if(!armed)
 		GLOB.exited_event.unregister(area, src, /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/proc/check_unarm)
+// [/INF]
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/receive_user_command(command)
 	if (!armed)
 		return TRUE // Eat all commands.
 	return ..(command)
-
-// /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/process()
-// 	..()
-// 	if (eject_time && world.time >= eject_time && !closing)
-// 		close_door()
-// 		closing = 1
-
+/* [BAY]
+/datum/computer/file/embedded_program/docking/simple/escape_pod_berth/process()
+	..()
+	if (eject_time && world.time >= eject_time && !closing)
+		close_door()
+		closing = 1
+[BAY] */
 /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/prepare_for_docking()
 	return
 
@@ -266,11 +307,12 @@ var/global/list/escape_pods_by_name = list()
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/prepare_for_undocking()
 	eject_time = world.time + eject_delay*10
-	..()
+	..()	// inf
 
 // The program for the escape pod controller.
 /datum/computer/file/embedded_program/docking/simple/escape_pod
 	var/tag_pump
+// [INF]
 	var/undock_begin
 
 // No answer recieved from vessel controller? Evacing in any case
@@ -281,6 +323,7 @@ var/global/list/escape_pods_by_name = list()
 	if (. && (world.time > undock_begin + 10 SECONDS))
 		finish_undocking()
 		reset()
+// [/INF]
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod/New(var/obj/machinery/embedded_controller/M)
 	..(M)
@@ -290,17 +333,18 @@ var/global/list/escape_pods_by_name = list()
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod/finish_undocking()
 	. = ..()
-	undock_begin = null
+	undock_begin = null	// inf
 	// Send a signal to the vent pumps to repressurize the pod.
 	var/datum/signal/signal = new
 	signal.data = list(
 		"tag" = tag_pump,
 		"sigtype" = "command",
-		"set_power" = 1,
-		"set_direction" = "release",
-		"status" = TRUE,
+		"set_power" = 1,	// inf, was	"power" = 1,
+		"set_direction" = "release",	// inf, was	"direction" = 1,
+		"status" = TRUE,	// inf,
 		"set_external_pressure" = ONE_ATMOSPHERE
 	)
 	post_signal(signal)
 
+#undef evac_chair
 #undef ISEVAC_STARSHIP_FAST_CONTROLER

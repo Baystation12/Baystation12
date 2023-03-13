@@ -28,26 +28,26 @@
 	else
 		to_chat(usr, "Target coordinates are incorrect.")
 
-/datum/admins/proc/capture_map_capture_next(currentz, currentx, currenty, ligths)
+/datum/admins/proc/capture_map_capture_next(currentz, currentx, currenty, ligths, user=usr)
 	if(locate(currentx, currenty, currentz))
 		var/cap = generate_image(currentx ,currenty ,currentz ,32, CAPTURE_MODE_PARTIAL, null, ligths, 1)
 		var/file_name = "map_capture_x[currentx]_y[currenty]_z[currentz]_r32.png"
-		to_chat(usr, "Saved capture in cache as [file_name].")
-		send_rsc(usr, cap, file_name)
+		to_chat(user, "Saved capture in cache as [file_name].")
+		send_rsc(user, cap, file_name)
 		currentx = currentx + 32
-		addtimer(CALLBACK(src, .proc/capture_map_capture_next, currentz, currentx, currenty, ligths), 0)
+		addtimer(CALLBACK(src, .proc/capture_map_capture_next, currentz, currentx, currenty, ligths, user), 0)
 	else
 		currenty = currenty + 32
 		currentx = 1
 		if(locate(currentx, currenty, currentz))
 			var/cap = generate_image(currentx ,currenty ,currentz ,32, CAPTURE_MODE_PARTIAL, null, ligths, 1)
 			var/file_name = "map_capture_x[currentx]_y[currenty]_z[currentz]_r32.png"
-			to_chat(usr, "Saved capture in cache as [file_name].")
-			send_rsc(usr, cap, file_name)
+			to_chat(user, "Saved capture in cache as [file_name].")
+			send_rsc(user, cap, file_name)
 			currentx = currentx + 32
-			addtimer(CALLBACK(src, .proc/capture_map_capture_next, currentz, currentx, currenty, ligths), 0)
+			addtimer(CALLBACK(src, .proc/capture_map_capture_next, currentz, currentx, currenty, ligths, user), 0)
 		else
-			to_chat(usr, "End of map, capture is done.")
+			to_chat(user, "End of map, capture is done.")
 
 /datum/admins/proc/capture_map(tz as null|num)
 	set category = "Server"
@@ -74,4 +74,4 @@
 
 	switch(alert("Are you sure? (This will cause masive lag!!!)", "Map Capture", "No", "Yes"))
 		if("Yes")
-			usr.client.holder.capture_map_capture_next(tz, 1, 1, ligths)
+			usr.client.holder.capture_map_capture_next(tz, 1, 1, ligths, usr)
