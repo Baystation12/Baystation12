@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Chopping down vines with edged weapons now works when clicking on harm
+      intent, instead of overriding alt+click.
