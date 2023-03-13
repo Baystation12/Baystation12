@@ -12,6 +12,14 @@
 	antag_costs = list(MODE_MERCENARY = 18)
 	path = /obj/item/storage/backpack/satchel/syndie_kit/armor
 
+/datum/uplink_item/item/armor/holster
+	name = "Handgun holster"
+	desc = "Simple a handgun holster."
+	item_cost = 1
+	antag_costs = list(MODE_MERCENARY = 2)
+	path = /obj/item/clothing/accessory/storage/holster
+
+
 /datum/uplink_item/item/armor/space_suit
 	name = "Voidsuit and Tactical Mask"
 	desc = "A satchel containing a non-regulation voidsuit, voidsuit helmet, tactical mask, and oxygen tank. \

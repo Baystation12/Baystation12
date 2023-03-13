@@ -60,3 +60,13 @@
 	name = "chaplain insignia (taoism)"
 	desc = "An insignia worn by chaplains. The yin yang represents Taoism."
 	icon_state = "taoinsignia"
+
+/obj/item/clothing/accessory/chaplain/orthodox
+	name = "chaplain insignia (orthodox)"
+	desc = "An insignia worn by chaplains. The cross represents Orthodoxy."
+	icon_state = "orthodoxinsignia"
+
+/obj/item/clothing/accessory/chaplain/agnostic
+	name = "chaplain insignia (agnosticism)"
+	desc = "An insignia worn by believers. The cross represents Agnosticism."
+	icon_state = "agnosticisminsignia"

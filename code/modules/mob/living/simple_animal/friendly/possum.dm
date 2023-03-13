@@ -103,7 +103,7 @@
 	. = ..()
 	addtimer(CALLBACK(src, .proc/check_keywords, message), rand(1 SECOND, 3 SECONDS))
 
-/mob/living/simple_animal/passive/opossum/poppy/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/living/simple_animal/passive/opossum/poppy/hear_say(var/message, var/verb = "говорит", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	. = ..()
 	addtimer(CALLBACK(src, .proc/check_keywords, message), rand(1 SECOND, 3 SECONDS))
 
@@ -119,6 +119,6 @@
 	speak_chance = 1
 
 /datum/say_list/opossum
-	speak = list("Hiss!","Aaa!","Aaa?")
-	emote_hear = list("hisses")
-	emote_see = list("forages for trash", "lounges")
+	speak = list("Чс-с-с-с!","Ааа!","Ааа?","Хс-с-с-с!")
+	emote_hear = list("шипит")
+	emote_see = list("ищет мусор", "бездельничает")

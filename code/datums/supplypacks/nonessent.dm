@@ -35,7 +35,7 @@
 					/obj/item/pack/spaceball,
 					/obj/item/deck/holder)
 	name = "Rec - Trading Cards"
-	cost = 20
+	cost = 18
 	containername = "trading cards crate"
 	supply_method = /decl/supply_method/randomized
 
@@ -45,7 +45,7 @@
 					/obj/item/clothing/suit/redtag = 3,
 					/obj/item/gun/energy/lasertag/blue = 3,
 					/obj/item/clothing/suit/bluetag = 3)
-	cost = 20
+	cost = 15
 	containertype = /obj/structure/closet
 	containername = "lasertag Closet"
 
@@ -55,9 +55,8 @@
 					/obj/item/device/synthesized_instrument/guitar/multi,
 					/obj/item/device/synthesized_instrument/guitar,
 					/obj/item/device/synthesized_instrument/trumpet)
-	cost = 40
+	cost = 30
 	containername = "musical instrument crate"
-
 
 /decl/hierarchy/supply_pack/nonessent/llamps
 	num_contained = 3
@@ -75,14 +74,13 @@
 	containername = "lava lamp crate"
 	supply_method = /decl/supply_method/randomized
 
-
 /decl/hierarchy/supply_pack/nonessent/wizard
 	name = "Costume - Wizard"
 	contains = list(/obj/item/staff,
 					/obj/item/clothing/suit/wizrobe/fake,
 					/obj/item/clothing/shoes/sandal,
 					/obj/item/clothing/head/wizard/fake)
-	cost = 20
+	cost = 16
 	containername = "wizard costume crate"
 
 /decl/hierarchy/supply_pack/nonessent/costume
@@ -138,10 +136,9 @@
 					/obj/item/clothing/shoes/leather,
 					/obj/item/clothing/accessory/waistcoat/black)
 	name = "Costume - Formalwear"
-	cost = 30
+	cost = 25
 	containertype = /obj/structure/closet
 	containername = "formalwear for the best occasions."
-
 
 /decl/hierarchy/supply_pack/nonessent/hats
 	num_contained = 4
@@ -166,7 +163,7 @@
 					/obj/item/clothing/head/collectable/xenom,
 					/obj/item/clothing/head/collectable/petehat)
 	name = "Costume - Collectible hats!"
-	cost = 200
+	cost = 150
 	containername = "\improper Collectable hats crate! Brought to you by Bass.inc!"
 	supply_method = /decl/supply_method/randomized
 
@@ -176,7 +173,7 @@
 					/obj/item/clothing/shoes/sandal,
 					/obj/item/clothing/head/wizard/marisa/fake,
 					/obj/item/staff/broom)
-	cost = 20
+	cost = 16
 	containername = "witch costume crate"
 	containertype = /obj/structure/closet
 
@@ -230,13 +227,13 @@
 					/obj/item/toy/desk/fan,
 					/obj/item/toy/desk/officetoy,
 					/obj/item/toy/desk/dippingbird)
-	cost = 15
+	cost = 12
 	containername = "office toys crate"
 
 /decl/hierarchy/supply_pack/nonessent/holoplants
 	name = "Deco - Holoplants"
-	contains = list(/obj/structure/holoplant = 5)
-	cost = 40
+	contains = list(/obj/structure/holoplant = 4)
+	cost = 22
 	containername = "holoplants crate"
 	containertype = /obj/structure/largecrate
 
@@ -259,7 +256,7 @@
 	num_contained = 1
 	name = "Mod - \"Firestarter\" exosuit modkit"
 	contains = list(/obj/item/device/kit/paint/flames_red)
-	cost = 50
+	cost = 30
 	containername = "heavy exosuit modkit crate"
 
 /decl/hierarchy/supply_pack/nonessent/exosuit_mod/chrome
@@ -281,7 +278,7 @@
 		/obj/item/storage/candle_box/scented = 3,
 		/obj/item/storage/candle_box/incense = 6,
 		/obj/item/flame/lighter/random)
-	cost = 15
+	cost = 12
 	containername = "aromatherapy crate"
 
 /decl/hierarchy/supply_pack/nonessent/pins
@@ -296,7 +293,7 @@
 		/obj/item/clothing/accessory/pride_pin/asexual = 2,
 		/obj/item/clothing/accessory/pride_pin/intersex = 2
 	)
-	cost = 20
+	cost = 25
 	containername = "pin crate"
 
 /decl/hierarchy/supply_pack/nonessent/pronounbadges
@@ -310,5 +307,5 @@
 		/obj/item/clothing/accessory/pronouns/heshe = 2,
 		/obj/item/clothing/accessory/pronouns/ask = 2
 	)
-	cost = 20
+	cost = 25
 	containername = "pronoun badge crate"

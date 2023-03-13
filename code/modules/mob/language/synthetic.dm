@@ -55,9 +55,9 @@
 /datum/language/binary/drone
 	name = LANGUAGE_DRONE_GLOBAL
 	desc = "A heavily encoded damage control coordination stream."
-	speech_verb = "transmits"
-	ask_verb = "transmits"
-	exclaim_verb = "transmits"
+	speech_verb = "передает"
+	ask_verb = "передает"
+	exclaim_verb = "передает"
 	colour = "say_quote"
 	key = "d"
 	flags = RESTRICTED | HIVEMIND
@@ -67,9 +67,9 @@
 /datum/language/machine
 	name = LANGUAGE_EAL
 	desc = "An efficient language of encoded tones developed by synthetics and cyborgs."
-	speech_verb = "whistles"
-	ask_verb = "chirps"
-	exclaim_verb = "whistles loudly"
+	speech_verb = "гудит"
+	ask_verb = "пищит"
+	exclaim_verb = "громко гудит"
 	colour = "changeling"
 	key = "6"
 	flags = NO_STUTTER
@@ -84,4 +84,3 @@
 	if(prob(70))
 		return "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
 	return pick(GLOB.ai_names)
-

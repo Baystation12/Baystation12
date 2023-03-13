@@ -75,7 +75,7 @@
 	var/datum/job/synthetic/synth = SSjobs.get_by_path(/datum/job/synthetic)
 	var/success
 	if(synth.total_positions == 0)
-		priority_announcement.Announce("Получен сигнал от неизвестного источника с командой на пробуждение экспериментальной синтетической единицей ЭКСО из общего хранилища.", "Attention!")
+		priority_announcement.Announce("Получен сигнал от неизвестного источника с командой на пробуждение экспериментальной синтетической единицы ЭКСО из общего хранилища.", "Attention!")
 		synth.total_positions = 1
 		success = 1
 		return success

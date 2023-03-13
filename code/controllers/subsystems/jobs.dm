@@ -537,12 +537,12 @@ SUBSYSTEM_DEF(jobs)
 	to_chat(H, "<font size = 3><B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B></font>")
 
 	if(job.supervisors)
-		to_chat(H, "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
+		to_chat(H, "<b>В качестве '[alt_title ? alt_title : rank]' вы отвечаете непосредственно перед '[job.supervisors]'. Особые обстоятельства могут изменить это.</b>")
 
-	to_chat(H, "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>")
+	to_chat(H, "<b>Чтобы говорить по радиоканалу вашего отдела, используйте ':h'. Для использования других каналов проверьте свою гарнитуру.</b>")
 
 	if(job.req_admin_notify)
-		to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
+		to_chat(H, "<b>Вы находитесь на должности, которая важна для продвижения игры. Если вам придется отключиться, пожалуйста, сообщите администраторам через 'adminhelp'.</b>")
 
 	if (H.disabilities & NEARSIGHTED) //Try to give glasses to the vision impaired
 		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(H), slot_glasses)

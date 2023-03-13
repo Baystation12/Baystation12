@@ -38,6 +38,9 @@
 	fire_delay = 7
 	ammo_indicator = TRUE
 
+/obj/item/gun/projectile/pistol/military/rnd
+	magazine_type = /obj/item/ammo_magazine/pistol/double/rubber
+
 /obj/item/gun/projectile/pistol/military/alt
 	desc = "The HelTek Optimus, best known as the standard-issue sidearm for the ICCG Navy."
 	icon = 'icons/obj/guns/military_pistol2.dmi'

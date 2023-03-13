@@ -10,7 +10,7 @@
 		return 0
 
 	if(language == all_languages[src.species_language])
-		to_chat(src, "<span class='notice'>Теперь Вы будете общаться на <b>[language]</b>, если не поставите префикс другого языка при общении.</span>")
+		to_chat(src, "<span class='notice'>Теперь Вы будете общаться на '<b>[language]</b>', если не поставите префикс другого языка при общении.</span>")
 	else if (language)
 
 		if(language && !can_speak(language))

@@ -11,7 +11,7 @@
 		var/datum/language/speaking = parse_language(message)
 		if(speaking)
 			message = copytext_char(message, max(2+length(speaking.key),3)) //inf, was message = copytext_char(message, 2+length(speaking.key))
-		var/verb = "says"
+		var/verb = "говорит"
 		var/ending = copytext_char(message, length(message) - 1)
 		if (speaking)
 			verb = speaking.get_spoken_verb(ending)

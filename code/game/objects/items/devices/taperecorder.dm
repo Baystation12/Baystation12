@@ -101,7 +101,7 @@
 	if(distance <= 1 && maintenance)
 		to_chat(user, "<span class='notice'>The wires are exposed.</span>")
 
-/obj/item/device/taperecorder/hear_talk(mob/living/M as mob, msg, var/verb="says", datum/language/speaking=null)
+/obj/item/device/taperecorder/hear_talk(mob/living/M as mob, msg, var/verb="говорит", datum/language/speaking=null)
 	if(mytape && recording)
 
 		if(speaking)

@@ -105,19 +105,19 @@
 						A.being_used = 1
 
 				if(artifact_in_use)
-					src.visible_message("<b>[name]</b> states, \"Cannot scan. Too much interference.\"")
+					src.visible_message("<b>[name]</b> утверждает, \"Cannot scan. Too much interference.\"")
 				else
 					scanned_object = O
 					scan_in_progress = 1
 					scan_completion_time = world.time + scan_duration
-					src.visible_message("<b>[name]</b> states, \"Scanning begun.\"")
+					src.visible_message("<b>[name]</b> утверждает, \"Scanning begun.\"")
 				break
 			if(!scanned_object)
-				src.visible_message("<b>[name]</b> states, \"Unable to isolate scan target.\"")
+				src.visible_message("<b>[name]</b> утверждает, \"Unable to isolate scan target.\"")
 		. = TOPIC_REFRESH
 	else if(href_list["halt_scan"])
 		scan_in_progress = 0
-		src.visible_message("<b>[name]</b> states, \"Scanning halted.\"")
+		src.visible_message("<b>[name]</b> утверждает, \"Scanning halted.\"")
 		. = TOPIC_REFRESH
 
 	else if(href_list["close"])

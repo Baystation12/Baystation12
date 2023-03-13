@@ -54,7 +54,7 @@
 /decl/hierarchy/outfit/scgec/service_command
 	name = "SCGEC - Command Service"
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer
-	suit = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
+	suit = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/solgov/service/expedition/command
 
@@ -62,7 +62,7 @@
 /decl/hierarchy/outfit/scgec/service_senior_command
 	name = "SCGEC - Senior Command Service"
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer
-	suit = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
+	suit = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/solgov/service/expedition/senior_command
 
@@ -70,7 +70,7 @@
 /decl/hierarchy/outfit/scgec/service_captain
 	name = "SCGEC - Captain Service"
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer
-	suit = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
+	suit = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/solgov/service/expedition/captain
 
@@ -78,7 +78,7 @@
 /decl/hierarchy/outfit/scgec/service_admiral
 	name = "SCGEC - Admiral Service"
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer
-	suit = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
+	suit = /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/solgov/service/expedition/captain
 

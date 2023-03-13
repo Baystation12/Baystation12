@@ -128,7 +128,7 @@ var/global/list/additional_antag_types = list()
 		usr.client.holder.show_game_mode(usr)
 
 /datum/game_mode/proc/announce() //to be called when round starts
-	to_world("<B>The current game mode is [capitalize(name)]!</B>")
+	to_world("<B>Текущий режим игры - [capitalize(name)]!</B>")
 	if(round_description) to_world("[round_description]")
 	if(round_autoantag) to_world("Antagonists will be added to the round automagically as needed.")
 	if(antag_templates && antag_templates.len)
@@ -503,10 +503,10 @@ var/global/list/additional_antag_types = list()
 		return
 
 	if(SSticker.master_mode != "secret")
-		to_chat(usr, "<b>The roundtype is [capitalize(SSticker.mode.name)]</b>")
+		to_chat(usr, "<b>Игровой режим - [capitalize(SSticker.mode.name)]</b>")
 		if(SSticker.mode.round_description)
 			to_chat(usr, "<i>[SSticker.mode.round_description]</i>")
 		if(SSticker.mode.extended_round_description)
 			to_chat(usr, "[SSticker.mode.extended_round_description]")
 	else
-		to_chat(usr, "<i>Shhhh</i>. It's a secret.")
+		to_chat(usr, "<i>Тихо</i>... Это секрет!")

@@ -45,6 +45,7 @@
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/agent
 	name = OUTFIT_JOB_NAME("Forensic Technician - SFP Agent")
 	uniform = /obj/item/clothing/under/det/grey
+	head = /obj/item/clothing/head/beret/sccfp
 	suit = /obj/item/clothing/suit/storage/toggle/agent_jacket
 	shoes = /obj/item/clothing/shoes/dress
 

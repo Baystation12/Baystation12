@@ -2,9 +2,9 @@
 	desc = "It is set to detonate in 2 seconds."
 	name = "smoke bomb"
 	icon = 'icons/obj/grenade.dmi'
-	icon_state = "flashbang"
+	icon_state = "smokebang"
 	det_time = 20
-	item_state = "flashbang"
+	item_state = "smokebang"
 	slot_flags = SLOT_BELT
 	var/datum/effect/effect/system/smoke_spread/bad/smoke
 	var/smoke_times = 4

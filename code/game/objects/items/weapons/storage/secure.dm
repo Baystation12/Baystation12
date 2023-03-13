@@ -141,9 +141,9 @@
 
 /obj/item/storage/secure/briefcase/resguard
 	name = "EXO weapon briefcase"
-	desc = "A large briefcase with a digital locking system."
+	desc = "A large briefcase from EXO with a digital locking system."
 	startswith = list(
-		/obj/item/gun/projectile/pistol/military = 1,
+		/obj/item/gun/projectile/pistol/military/rnd = 1,
 		/obj/item/ammo_magazine/pistol/double/rubber = 5
 	)
 

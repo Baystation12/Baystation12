@@ -959,4 +959,4 @@
 /obj/item/toy/eightball/afterattack(obj/O, mob/user, var/proximity)
 	. = ..()
 	if (proximity)
-		visible_message("<span class='warning'>\The [src] says, \"[pick(possible_answers) ]\" as it hits \the [O]!</span>")
+		visible_message("<span class='warning'>\The [src] говорит, \"[pick(possible_answers) ]\" as it hits \the [O]!</span>")

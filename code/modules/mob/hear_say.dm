@@ -1,4 +1,4 @@
-/mob/proc/hear_say(message, verb = "says", datum/language/language, alt_name, italics, mob/speaker, sound/speech_sound, sound_vol)
+/mob/proc/hear_say(message, verb = "говорит", datum/language/language, alt_name, italics, mob/speaker, sound/speech_sound, sound_vol)
 	if (!client)
 		return
 

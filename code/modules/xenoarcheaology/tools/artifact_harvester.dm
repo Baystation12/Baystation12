@@ -85,7 +85,7 @@
 			cur_artifact.anchored = FALSE
 			cur_artifact.being_used = 0
 			cur_artifact = null
-			src.visible_message("<b>[name]</b> states, \"Battery is full.\"")
+			src.visible_message("<b>[name]</b> утверждает, \"Battery is full.\"")
 			icon_state = "incubator"
 
 	else if(harvesting < 0)
@@ -110,16 +110,16 @@
 			harvesting = 0
 			if(inserted_battery.battery_effect && inserted_battery.battery_effect.activated)
 				inserted_battery.battery_effect.ToggleActivate()
-			src.visible_message("<b>[name]</b> states, \"Battery dump completed.\"")
+			src.visible_message("<b>[name]</b> утверждает, \"Battery dump completed.\"")
 			icon_state = "incubator"
 
 /obj/machinery/artifact_harvester/OnTopic(user, href_list)
 	if (href_list["harvest"])
 		if(!inserted_battery)
-			src.visible_message("<b>[src]</b> states, \"Cannot harvest. No battery inserted.\"")
+			src.visible_message("<b>[src]</b> утверждает, \"Cannot harvest. No battery inserted.\"")
 
 		else if(inserted_battery.stored_charge >= inserted_battery.capacity)
-			src.visible_message("<b>[src]</b> states, \"Cannot harvest. battery is full.\"")
+			src.visible_message("<b>[src]</b> утверждает, \"Cannot harvest. battery is full.\"")
 
 		else
 
@@ -132,11 +132,11 @@
 				articount++
 
 			if(articount <= 0)
-				var/message = "<b>[src]</b> states, \"Cannot harvest. No noteworthy energy signature isolated.\""
+				var/message = "<b>[src]</b> утверждает, \"Cannot harvest. No noteworthy energy signature isolated.\""
 				src.visible_message(message)
 
 			else if(analysed && analysed.being_used)
-				src.visible_message("<b>[src]</b> states, \"Cannot harvest. Source already being harvested.\"")
+				src.visible_message("<b>[src]</b> утверждает, \"Cannot harvest. Source already being harvested.\"")
 
 			else
 				if(articount > 1)
@@ -146,9 +146,9 @@
 
 					//if both effects are active, we can't harvest either
 					if(cur_artifact.my_effect && cur_artifact.my_effect.activated && cur_artifact.secondary_effect && cur_artifact.secondary_effect.activated)
-						src.visible_message("<b>[src]</b> states, \"Cannot harvest. Source is emitting conflicting energy signatures.\"")
+						src.visible_message("<b>[src]</b> утверждает, \"Cannot harvest. Source is emitting conflicting energy signatures.\"")
 					else if(!cur_artifact.my_effect.activated && !(cur_artifact.secondary_effect && cur_artifact.secondary_effect.activated))
-						src.visible_message("<b>[src]</b> states, \"Cannot harvest. No energy emitting from source.\"")
+						src.visible_message("<b>[src]</b> утверждает, \"Cannot harvest. No energy emitting from source.\"")
 
 					else
 						//see if we can clear out an old effect
@@ -176,7 +176,7 @@
 								source_effect = cur_artifact.secondary_effect
 
 							if(!source_effect)
-								src.visible_message("<b>[src]</b> states, \"Cannot harvest. Battery is charged with a different energy signature.\"")
+								src.visible_message("<b>[src]</b> утверждает, \"Cannot harvest. Battery is charged with a different energy signature.\"")
 						else
 							//we're good to charge either
 							if(cur_artifact.my_effect.activated)
@@ -194,7 +194,7 @@
 							cur_artifact.anchored = TRUE
 							cur_artifact.being_used = 1
 							icon_state = "incubator_on"
-							var/message = "<b>[src]</b> states, \"Beginning energy harvesting.\""
+							var/message = "<b>[src]</b> утверждает, \"Beginning energy harvesting.\""
 							src.visible_message(message)
 							last_process = world.time
 
@@ -220,7 +220,7 @@
 			cur_artifact.anchored = FALSE
 			cur_artifact.being_used = 0
 			cur_artifact = null
-			src.visible_message("<b>[name]</b> states, \"Energy harvesting interrupted.\"")
+			src.visible_message("<b>[name]</b> утверждает, \"Energy harvesting interrupted.\"")
 			icon_state = "incubator"
 		. = TOPIC_REFRESH
 
@@ -239,13 +239,13 @@
 					harvesting = -1
 					update_use_power(POWER_USE_ACTIVE)
 					icon_state = "incubator_on"
-					var/message = "<b>[src]</b> states, \"Warning, battery charge dump commencing.\""
+					var/message = "<b>[src]</b> утверждает, \"Warning, battery charge dump commencing.\""
 					src.visible_message(message)
 			else
-				var/message = "<b>[src]</b> states, \"Cannot dump energy. Battery is drained of charge already.\""
+				var/message = "<b>[src]</b> утверждает, \"Cannot dump energy. Battery is drained of charge already.\""
 				src.visible_message(message)
 		else
-			var/message = "<b>[src]</b> states, \"Cannot dump energy. No battery inserted.\""
+			var/message = "<b>[src]</b> утверждает, \"Cannot dump energy. No battery inserted.\""
 			src.visible_message(message)
 		. = TOPIC_REFRESH
 

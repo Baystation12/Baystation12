@@ -108,7 +108,7 @@
 					/obj/item/clothing/suit/armor/riot = 4,
 					/obj/item/storage/box/flashbangs,
 					/obj/item/storage/box/teargas)
-	cost = 65
+	cost = 55
 	containertype = /obj/structure/closet/crate/secure
 	containername = "riot gear crate"
 	access = access_armory
@@ -136,7 +136,8 @@
 	contains = list(/obj/item/device/flash = 4,
 					/obj/item/reagent_containers/spray/pepper = 4,
 					/obj/item/melee/baton/loaded = 4,
-					/obj/item/gun/energy/taser = 4)
+					/obj/item/gun/energy/taser = 4,
+					/obj/item/storage/box/handcuffs)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "security weapons crate"

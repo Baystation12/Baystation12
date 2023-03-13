@@ -111,7 +111,7 @@
 /decl/hierarchy/supply_pack/atmospherics/fuel
 	name = "Liquid - Fuel tanks"
 	contains = list(/obj/item/tank/hydrogen = 4)
-	cost = 15
+	cost = 8
 	containername = "fuel tank crate"
 
 /decl/hierarchy/supply_pack/atmospherics/phoron

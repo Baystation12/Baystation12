@@ -37,25 +37,6 @@
 	ties["striped tie"] = /obj/item/clothing/accessory/long
 	gear_tweaks += new/datum/gear_tweak/path(ties)
 
-//proxima code start
-/datum/gear/accessory/ec_sweater
-	display_name = "expeditionary fleece jacket"
-	path = /obj/item/clothing/accessory/ec_sweater
-	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
-
-/datum/gear/accessory/ec_sweater/officer
-	display_name = "expeditionary officer's fleece jacket"
-	path = /obj/item/clothing/accessory/ec_sweater/officer
-	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
-	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/qm, /datum/job/pathfinder)
-
-/datum/gear/accessory/ec_sweater/fleet
-	display_name = "fleet sweater"
-	path = /obj/item/clothing/accessory/ec_sweater/fleet
-	allowed_branches = list(/datum/mil_branch/fleet)
-
-//proxima code end
-
 /datum/gear/accessory/locket
 	display_name = "locket"
 	path = /obj/item/clothing/accessory/locket
@@ -158,18 +139,16 @@
 
 
 /datum/gear/accessory/chaplain
-	display_name = "chaplain insignia"
+	display_name = "religion insignia"
+	description = "A selection of insignia used to indicate the religion belief of the wearer."
 	path = /obj/item/clothing/accessory/chaplain
-	allowed_roles = list(
-		/datum/job/chaplain
-	)
 	flags = GEAR_HAS_NO_CUSTOMIZATION
-
 
 /datum/gear/accessory/chaplain/New()
 	..()
 	var/options = list()
 	options["Christianity"] = /obj/item/clothing/accessory/chaplain/christianity
+	options["Orthodox"] = /obj/item/clothing/accessory/chaplain/orthodox
 	options["Judaism"] = /obj/item/clothing/accessory/chaplain/judaism
 	options["Islam"] = /obj/item/clothing/accessory/chaplain/islam
 	options["Buddhism"] = /obj/item/clothing/accessory/chaplain/buddhism
@@ -178,6 +157,7 @@
 	options["Baha'i Faith"] = /obj/item/clothing/accessory/chaplain/bahaifaith
 	options["Jainism"] = /obj/item/clothing/accessory/chaplain/jainism
 	options["Taoism"] = /obj/item/clothing/accessory/chaplain/taoism
+	options["Agnosticism"] = /obj/item/clothing/accessory/chaplain/agnostic
 	gear_tweaks += new/datum/gear_tweak/path (options)
 
 

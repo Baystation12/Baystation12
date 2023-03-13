@@ -11,13 +11,13 @@ GLOBAL_LIST_INIT(possible_chassis, list(
 		))
 
 GLOBAL_LIST_INIT(possible_say_verbs, list(
-		"Robotic" = list("states","declares","queries"),
-		"Natural" = list("says","yells","asks"),
-		"Beep" = list("beeps","beeps loudly","boops"),
-		"Chirp" = list("chirps","chirrups","cheeps"),
-		"Feline" = list("purrs","yowls","meows"),
-		"Canine" = list("yaps", "barks", "woofs"),
-		"Corvid" = list("caws", "caws loudly", "whistles")
+		"Robotic" = list("констатирует","заявляет","запрашивает"),
+		"Natural" = list("говорит","выкрикивает","спрашивает"),
+		"Beep" = list("пиликает","громко пиликает","пищит"),
+		"Chirp" = list("щебечет","стрекочет","пищит"),
+		"Feline" = list("мурлычет","вопит","мяучит"),
+		"Canine" = list("тявкает", "лает", "воет"),
+		"Corvid" = list("каркает", "громко каркает", "свистит")
 		))
 
 /mob/living/silicon/pai
@@ -51,7 +51,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	var/master				// Name of the one who commands us
 	var/master_dna			// DNA string for owner verification
 							// Keeping this separate from the laws var, it should be much more difficult to modify
-	var/pai_law0 = "Serve your master."
+	var/pai_law0 = "Служи своему хозяину!"
 	var/pai_laws				// String for additional operating instructions our master might give us
 
 	var/silence_time			// Timestamp when we were silenced (normally via EMP burst), set to null after silence has faded

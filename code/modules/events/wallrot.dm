@@ -3,7 +3,7 @@
 	endWhen = announceWhen + 1
 
 /datum/event/wallrot/announce()
-	command_announcement.Announce("Вредные грибы обнаружены на [location_name()]. Внешние и внутренние конструкции могут быть заражены и подвергнуты медленному разрушению.", "[location_name()] Biologic Sensor Network", zlevels = affecting_z)
+	command_announcement.Announce("Вредоносные грибы обнаружены на [location_name()]. Внешние и внутренние конструкции могут быть заражены и подвергнуты медленному разрушению.", "[location_name()] Biologic Sensor Network", zlevels = affecting_z)
 
 /datum/event/wallrot/start()
 	spawn()

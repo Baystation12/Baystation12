@@ -6,27 +6,16 @@
 	contains = list(
 			/obj/machinery/chemical_dispenser{anchored = FALSE}
 		)
-	cost = 25
+	cost = 30
 	containertype = /obj/structure/largecrate
 	containername = "reagent dispenser crate"
 
 /decl/hierarchy/supply_pack/science/coolanttank
 	name = "Liquid - Coolant tank"
 	contains = list(/obj/structure/reagent_dispensers/coolanttank)
-	cost = 16
+	cost = 14
 	containertype = /obj/structure/largecrate
 	containername = "coolant tank crate"
-
-/decl/hierarchy/supply_pack/science/robotics
-	name = "Parts - Robotics"
-	contains = list(/obj/item/device/assembly/prox_sensor = 3,
-					/obj/item/storage/toolbox/electrical,
-					/obj/item/device/flash = 4,
-					/obj/item/cell/high = 2)
-	cost = 10
-	containertype = /obj/structure/closet/crate/secure/gear
-	containername = "robotics assembly crate"
-	access = access_robotics
 
 /decl/hierarchy/supply_pack/science/phoron
 	name = "Parts - Phoron device kit"
@@ -42,7 +31,7 @@
 /decl/hierarchy/supply_pack/science/scanner_module
 	name = "Electronics - Reagent scanner modules"
 	contains = list(/obj/item/stock_parts/computer/scanner/reagent = 4)
-	cost = 20
+	cost = 18
 	containername = "reagent scanner module crate"
 
 /decl/hierarchy/supply_pack/science/minergear
@@ -71,19 +60,19 @@
 	contains = list(/obj/item/device/flashlight/lamp/floodlamp,
 					/obj/item/device/flashlight/lamp/floodlamp/green)
 	name = "Equipment - Flood lamps"
-	cost = 20
+	cost = 18
 	containername = "flood lamp crate"
 	supply_method = /decl/supply_method/randomized
 
 /decl/hierarchy/supply_pack/science/illuminate
 	name = "Gear - Illumination grenades"
 	contains = list(/obj/item/grenade/light = 8)
-	cost = 20
+	cost = 16
 	containername = "illumination grenade crate"
 
 /decl/hierarchy/supply_pack/science/anomaly_crate
 	name = "Equipment - Anomaly Container"
-	cost = 20
+	cost = 16
 	contains = list(/obj/structure/anomaly_container)
 	containertype = /obj/structure/largecrate
 	containername = "anomaly container crate"

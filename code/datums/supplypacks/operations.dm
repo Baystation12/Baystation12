@@ -10,7 +10,7 @@
 					/obj/item/reagent_containers/food/drinks/bottle/pwine)
 
 	name = "UNLISTED - Contraband crate"
-	cost = 30
+	cost = 32
 	containername = "unlabeled crate"
 	contraband = 1
 	supply_method = /decl/supply_method/randomized
@@ -18,7 +18,7 @@
 /decl/hierarchy/supply_pack/operations/plasma_cutter
 	name = "Equipment - Plasma Cutter"
 	contains = list(/obj/item/gun/energy/plasmacutter)
-	cost = 120
+	cost = 100
 	containertype = /obj/structure/closet/crate/secure
 	containername = "plasma cutter crate"
 	access = list(list(access_mining,access_engine))
@@ -49,7 +49,7 @@
 	contains = list(/obj/item/clothing/suit/space/void/engineering/alt,
 					/obj/item/clothing/head/helmet/space/void/engineering/alt,
 					/obj/item/clothing/shoes/magboots)
-	cost = 120
+	cost = 38
 	containername = "engineering voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_engine
@@ -59,7 +59,7 @@
 	contains = list(/obj/item/clothing/suit/space/void/medical/alt,
 					/obj/item/clothing/head/helmet/space/void/medical/alt,
 					/obj/item/clothing/shoes/magboots)
-	cost = 120
+	cost = 70
 	containername = "medical voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_medical_equip
@@ -69,7 +69,7 @@
 	contains = list(/obj/item/clothing/suit/space/void/security/alt,
 					/obj/item/clothing/head/helmet/space/void/security/alt,
 					/obj/item/clothing/shoes/magboots)
-	cost = 120
+	cost = 70
 	containername = "security voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_brig
@@ -89,7 +89,7 @@
 					 /obj/structure/filingcabinet/chestdrawer{anchored = FALSE},
 					 /obj/item/paper_bin)
 	name = "Office supplies"
-	cost = 15
+	cost = 12
 	containertype = /obj/structure/closet/crate/large
 	containername = "office supplies crate"
 
@@ -97,18 +97,18 @@
 /decl/hierarchy/supply_pack/operations/armengi
 	contains = list(/obj/item/storage/box/armband/engine)
 	name = "Emergency - Engineer armband"
-	cost = 10
+	cost = 8
 	containername = "engineer armband crate"
 
 /decl/hierarchy/supply_pack/operations/armsec
 	contains = list(/obj/item/storage/box/armband/peace)
 	name = "Emergency - Peacekeeper armband"
-	cost = 10
+	cost = 8
 	containername = "peacekeeper armband crate"
 
 /decl/hierarchy/supply_pack/operations/armmed
 	contains = list(/obj/item/storage/box/armband/med)
 	name = "Emergency - Medical armband"
-	cost = 10
+	cost = 8
 	containername = "medical armband crate"
 //FIN-PRX@CODE

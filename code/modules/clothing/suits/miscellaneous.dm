@@ -540,3 +540,21 @@
 	name = "pullover sweater"
 	desc = "A sweater made of a soft material with a short zipper on the collar."
 	icon_state = "pullover"
+
+/obj/item/clothing/suit/sling
+	name = "universal sling"
+	desc = "A generic universal equipment sling for whatever you could need on your back."
+	icon_state = "universal_sling"
+	allowed = list (/obj/item/gun,
+	/obj/item/device,
+	/obj/item/material,
+	/obj/item/storage/box,
+	/obj/item/storage/firstaid,
+	/obj/item/storage/lockbox,
+	/obj/item/storage/part_replacer,
+	/obj/item/storage/secure,
+	/obj/item/storage/toolbox,
+	/obj/item/storage/briefcase,
+	/obj/item/tank,
+	/obj/item/ammo_magazine
+	)

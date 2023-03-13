@@ -492,7 +492,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	vendor_account = department_accounts["Vendor"]
 
 /datum/map/proc/map_info(var/client/victim)
-	to_chat(victim, "<h2>Current map information</h2>")
+	to_chat(victim, "<h2>Текущая информация о карте</h2>")
 	to_chat(victim, get_map_info())
 
 /datum/map/proc/get_map_info()

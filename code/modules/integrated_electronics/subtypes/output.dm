@@ -235,7 +235,7 @@
 	if(!isnull(text))
 		var/atom/movable/A = get_object()
 		var/sanitized_text = sanitize(text)
-		A.audible_message("\The [A] states, \"[sanitized_text]\"")
+		A.audible_message("\The [A] утверждает, \"[sanitized_text]\"")
 		if (assembly)
 			log_say("[assembly] \ref[assembly] : [sanitized_text]")
 		else

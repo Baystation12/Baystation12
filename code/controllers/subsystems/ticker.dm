@@ -49,8 +49,8 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/Initialize(start_uptime)
 	pregame_timeleft = config.pre_game_time SECONDS
 	build_mode_cache()
-	to_world("<span class='info'><B>Welcome to the pre-game lobby!</B></span>")
-	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
+	to_world("<span class='info'><B>Добро пожаловать в предигровое лобби!</B></span>")
+	to_world("Пожалуйста, настройте своего персонажа и выберите 'Ready'. Игра начнется в течение [round(pregame_timeleft/10)] секунд")
 
 
 /datum/controller/subsystem/ticker/fire(resumed, no_mc_tick)
@@ -134,7 +134,7 @@ SUBSYSTEM_DEF(ticker)
 			pregame_timeleft = config.vote_period + 30 SECONDS
 			gamemode_vote_results = null
 			Master.SetRunLevel(RUNLEVEL_LOBBY)
-			to_world("<b>No ready players.</b> Returning to pre-game lobby.")
+			to_world("<b>Нет готовых игроков.</b> Возвращение в предигровое лобби.")
 			return
 #endif
 
@@ -145,17 +145,17 @@ SUBSYSTEM_DEF(ticker)
 		if(CHOOSE_GAMEMODE_RETRY)
 			pregame_timeleft = 30 SECONDS
 			Master.SetRunLevel(RUNLEVEL_LOBBY)
-			to_world("<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby to try again.")
+			to_world("<B>Не удается выбрать воспроизводимый режим игры.</B> Возврат в предигровое лобби для повторения попытки.")
 			return
 		if(CHOOSE_GAMEMODE_REVOTE)
 			revotes_allowed--
 			pregame_timeleft = config.vote_period + 30 SECONDS
 			gamemode_vote_results = null
 			Master.SetRunLevel(RUNLEVEL_LOBBY)
-			to_world("<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby for a revote.")
+			to_world("<B>Не удается выбрать воспроизводимый режим игры.</B> Возврат в предигровое лобби для переголосования.")
 			return
 		if(CHOOSE_GAMEMODE_RESTART)
-			to_world("<B>Unable to choose playable game mode.</B> Restarting world.")
+			to_world("<B>Не удается выбрать воспроизводимый режим игры.</B> Перезапуск мира!")
 			world.Reboot("Failure to select gamemode. Tried [english_list(bad_modes)].")
 			return
 	// This means we succeeded in picking a game mode.
@@ -210,11 +210,11 @@ SUBSYSTEM_DEF(ticker)
 			callHook("roundend")
 			if (game_over)
 				if(!delay_end)
-					to_world("<span class='notice'><b>Rebooting due to destruction of [station_name()] in [restart_timeout/10] seconds</b></span>")
+					to_world("<span class='notice'><b>Перезагрузка из-за разрушения '[station_name()]' в течение [restart_timeout/10] секунд</b></span>")
 
 			else
 				if(!delay_end)
-					to_world("<span class='notice'><b>A new story will start in [restart_timeout/10] seconds</b></span>") //PRX
+					to_world("<span class='notice'><b>Новая история начнётся в течение [restart_timeout/10] секунд</b></span>") //PRX
 			handle_tickets()
 		if(END_GAME_ENDING)
 			restart_timeout -= (world.time - last_fire)
@@ -346,7 +346,7 @@ Helpers
 	mode = mode_datum
 	master_mode = mode_to_try
 	if(mode_to_try == "secret")
-		to_world("<B>The current game mode is Secret!</B>")
+		to_world("<B>Текущий режим игры - Secret!</B>")
 		var/list/mode_names = list()
 		for (var/mode_tag in base_runnable_modes)
 			var/datum/game_mode/M = mode_cache[mode_tag]

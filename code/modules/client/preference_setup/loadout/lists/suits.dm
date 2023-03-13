@@ -3,6 +3,29 @@
 	sort_category = "Suits and Overwear"
 	category = /datum/gear/suit
 
+//proxima code start
+/datum/gear/suit/ec_sweater
+	display_name = "expeditionary fleece jacket"
+	path = /obj/item/clothing/accessory/ec_sweater
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+
+/datum/gear/suit/ec_sweater/officer
+	display_name = "expeditionary officer's fleece jacket"
+	path = /obj/item/clothing/accessory/ec_sweater/officer
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/qm, /datum/job/pathfinder)
+
+/datum/gear/suit/ec_sweater/fleet
+	display_name = "fleet sweater"
+	path = /obj/item/clothing/accessory/ec_sweater/fleet
+	allowed_branches = list(/datum/mil_branch/fleet)
+
+/datum/gear/suit/sling
+	display_name = "universal sling"
+	path = /obj/item/clothing/suit/sling
+	cost = 2
+//proxima code end
+
 /datum/gear/suit/poncho
 	display_name = "poncho selection"
 	path = /obj/item/clothing/suit/poncho/colored
