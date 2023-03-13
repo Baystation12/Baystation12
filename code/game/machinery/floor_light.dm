@@ -38,6 +38,7 @@ var/global/list/floor_light_cache = list()
 
 /obj/machinery/floor_light/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 75, 1) // SIERRA
 		anchored = !anchored
 		if(use_power)
 			update_use_power(POWER_USE_OFF)
@@ -56,6 +57,7 @@ var/global/list/floor_light_cache = list()
 		visible_message(SPAN_NOTICE("\The [user] has repaired \the [src]."))
 		set_broken(FALSE)
 		damaged = null
+		update_brightness() // SIERRA
 	else if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		to_chat(user, SPAN_NOTICE("You dismantle the floor light."))
@@ -76,6 +78,7 @@ var/global/list/floor_light_cache = list()
 			visible_message(SPAN_DANGER("\The [user] attacks \the [src]!"))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 			if(isnull(damaged)) damaged = 0
+			update_icon() // SIERRA
 		return TRUE
 
 /obj/machinery/floor_light/interface_interact(mob/user)

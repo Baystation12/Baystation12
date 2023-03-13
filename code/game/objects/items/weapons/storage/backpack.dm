@@ -48,7 +48,7 @@
 	if (!worn_access && usr?.isEquipped(src, slot_back))
 		to_chat(usr, SPAN_WARNING("You can't insert \the [W] while \the [src] is on your back."))
 		return
-	..()
+	return ..() // SIERRA was `..()`
 
 /obj/item/storage/backpack/open(mob/user)
 	if (!worn_access && user.isEquipped(src, slot_back))

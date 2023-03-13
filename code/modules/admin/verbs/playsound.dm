@@ -30,12 +30,39 @@ var/global/list/sounds_cache = list()
 		if (choice == "Play")
 			break
 
+	// [SIERRA]
+	var/zlevel = input("Where will we play?") in list("My Z-Level", "Station", "World")
+	if(alert("Song: [S].\nVolume: [uploaded_sound.volume]%.\nZ-levels: [zlevel]", "Confirmation request" ,"Play", "Cancel") == "Cancel")
+		return
+
+	var/override = FALSE
+	if(check_rights(R_PERMISSIONS))
+		if(alert("Override client sound prefs?", "Prefs override", "NO", "Yes") == "Yes")
+			log_and_message_admins("override to play [S]")
+			override = TRUE
+	// [/SIERRA]
 
 	log_admin("[key_name(src)] played sound [S]")
 	message_admins("[key_name_admin(src)] played sound [S]", 1)
 	for(var/mob/M in GLOB.player_list)
-		if(M.get_preference_value(/datum/client_preference/play_admin_midis) == GLOB.PREF_YES)
-			sound_to(M, uploaded_sound)
+		// if(M.get_preference_value(/datum/client_preference/play_admin_midis) == GLOB.PREF_YES || override)
+		// 	sound_to(M, uploaded_sound)
+		// [SIERRA]
+		if((M.get_preference_value(/datum/client_preference/play_admin_midis) == GLOB.PREF_YES) || override)
+			switch(zlevel)
+				if ("World")
+					sound_to(M, uploaded_sound)
+
+				if ("Station")
+					if (M.z in GLOB.using_map.station_levels)
+						sound_to(M, uploaded_sound)
+
+				if ("My Z-Level")
+					var/user_z = get_z(usr)
+					if (!user_z) return to_chat(usr, SPAN_DANGER("Invalid Z-Level!"))
+					if (M.z == user_z)
+						sound_to(M, uploaded_sound)
+		// [/SIERRA]
 
 /client/proc/play_local_sound(S as sound)
 	set category = "Fun"

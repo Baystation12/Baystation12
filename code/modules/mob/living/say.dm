@@ -151,7 +151,7 @@ var/global/list/channel_to_radio_key = new
 	message = html_decode(message)
 
 	var/end_char = copytext_char(message, -1)
-	if(!(end_char in list(".", "?", "!", "-", "~", ":")))
+	if(!(end_char in list(".", "?", "!", "-", "~", ":", "\""))) // SIERRA: was if(!(end_char in list(".", "?", "!", "-", "~", ":")))
 		message += "."
 
 	return html_encode(message)

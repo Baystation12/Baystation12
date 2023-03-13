@@ -22,7 +22,26 @@ This saves us from having to call add_fingerprint() any time something is put in
 			else
 				update_inv_r_hand(0)
 		else
-			to_chat(H, SPAN_WARNING("You are unable to equip that."))
+			// to_chat(H, SPAN_WARNING("You are unable to equip that.")) // SIERRA
+			// [SIERRA]
+
+			// Try put it in their toolbelt
+			if(istype(src.belt, /obj/item/storage))
+				var/obj/item/storage/belt = src.belt
+				if(belt.can_be_inserted(I, null, 1) && belt.handle_item_insertion(I))
+					return
+
+			// Try put it in their backpack
+			if(istype(src.back, /obj/item/storage))
+				var/obj/item/storage/backpack = src.back
+				if(backpack.can_be_inserted(I, null, 1) && backpack.handle_item_insertion(I))
+					return
+
+			// Try to place it in any item that can store stuff, on the mob.
+			for(var/obj/item/storage/S in src.contents)
+				if(S.can_be_inserted(I, null, 1) && S.handle_item_insertion(I))
+					return
+			// [/SIERRA]
 
 /mob/living/carbon/human/proc/equip_in_one_of_slots(obj/item/W, list/slots, del_on_fail = 1)
 	for (var/slot in slots)
