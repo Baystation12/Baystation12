@@ -92,11 +92,12 @@
 	var/obj/item/card/id/id = tool.GetIdCard()
 	if (istype(id))
 		if (open)
+			USE_FEEDBACK_FAILURE("\The [src]'s access panel must be closed before you can lock it.")
 			to_chat(user, SPAN_WARNING("\The [src]'s access panel must be closed before you can lock it."))
 			return TRUE
 		var/id_name = GET_ID_NAME(id, tool)
 		if (!access_scanner.check_access(id))
-			to_chat(user, SPAN_WARNING("\The [src]'s access panel lock refuses [id_name]."))
+			USE_FEEDBACK_ID_CARD_DENIED(src, id_name)
 			return TRUE
 		locked = !locked
 		update_icon()
@@ -110,7 +111,7 @@
 	// Screwdriver - Toggle access panel open/closed
 	if (isScrewdriver(tool))
 		if (locked)
-			to_chat(user, SPAN_WARNING("\The [src]'s access panel must be unlocked before you can open it."))
+			USE_FEEDBACK_FAILURE("\The [src]'s access panel must be unlocked before you can open it.")
 			return TRUE
 		open = !open
 		update_icon()
@@ -124,10 +125,10 @@
 	// Welder - Repairs damage
 	if (isWelder(tool))
 		if (health >= maxHealth)
-			to_chat(user, SPAN_WARNING("\The [src] doesn't need any repairs."))
+			USE_FEEDBACK_FAILURE("\The [src] doesn't need any repairs.")
 			return TRUE
 		if (!open)
-			to_chat(user, SPAN_WARNING("\The [src]'s access panel must be open to repair it."))
+			USE_FEEDBACK_FAILURE("\The [src]'s access panel must be open to repair it.")
 			return TRUE
 		var/obj/item/weldingtool/welder = tool
 		if (!welder.can_use(5, user, "to repair \the [src]."))

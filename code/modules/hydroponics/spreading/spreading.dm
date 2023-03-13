@@ -31,9 +31,16 @@
 /obj/effect/dead_plant/attack_hand()
 	qdel(src)
 
-/obj/effect/dead_plant/attackby()
-	..()
+
+/obj/effect/dead_plant/use_tool(obj/item/weapon, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+	user.visible_message(
+		SPAN_WARNING("\The [user] hits \the [src] with \a [weapon], and it falls to pieces!"),
+		SPAN_WARNING("You hit \the [src] with \the [weapon], and it falls to pieces!")
+	)
 	qdel(src)
+	return TRUE
+
 
 /obj/effect/vine
 	name = "vine"
@@ -190,40 +197,61 @@
 	floor = 1
 	return 1
 
-/obj/effect/vine/attackby(obj/item/W, mob/user)
+
+/obj/effect/vine/pre_use_item(obj/item/tool, mob/user, click_params)
+	. = ..()
 	START_PROCESSING(SSvines, src)
 
-	if(W.edge && W.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
-		if(!is_mature())
-			to_chat(user, SPAN_WARNING("\The [src] is not mature enough to yield a sample yet."))
+
+/obj/effect/vine/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Edged Items - Chop down vine
+	if (has_edge(weapon))
+		if (weapon.w_class < ITEM_SIZE_NORMAL)
+			USE_FEEDBACK_FAILURE("\The [weapon] is too small to chop down \the [src].")
 			return TRUE
-		if(!seed)
-			to_chat(user, SPAN_WARNING("There is nothing to take a sample from."))
+		user.visible_message(
+			SPAN_WARNING("\The [user] starts chopping down \the [src] with \a [weapon]!"),
+			SPAN_WARNING("You start chopping down \the [src] with \the [weapon]!")
+		)
+		playsound(src, weapon.hitsound, 50, TRUE)
+		var/chop_time = (get_current_health() / weapon.force) * 0.5 SECONDS
+		if (user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
+			chop_time *= 0.5
+		if (!do_after(user, round(chop_time), src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, weapon))
 			return TRUE
-		var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
-		if(prob(user.skill_fail_chance(SKILL_BOTANY, 90, needed_skill)))
-			to_chat(user, SPAN_WARNING("You failed to get a usable sample."))
-		else
-			seed.harvest(user,0,1)
-		damage_health(rand(15, 25), W.damtype)
+		user.visible_message(
+			SPAN_WARNING("\The [user] chops down \the [src] with \a [weapon]!"),
+			SPAN_WARNING("You chop down \the [src] with \the [weapon]!")
+		)
+		playsound(src, weapon.hitsound, 50, TRUE)
+		kill_health()
 		return TRUE
 
 	return ..()
 
-/obj/effect/vine/AltClick(mob/user)
-	if(!CanPhysicallyInteract(user) || user.incapacitated())
-		return ..()
-	var/obj/item/W = user.get_active_hand()
-	if(istype(W) && W.edge && W.w_class >= ITEM_SIZE_NORMAL)
-		visible_message(SPAN_NOTICE("[user] starts chopping down \the [src]."))
-		playsound(, W.hitsound, 100, 1)
-		var/chop_time = (get_current_health() / W.force) * 0.5 SECONDS
-		if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
-			chop_time *= 0.5
-		if (do_after(user, chop_time, src, DO_PUBLIC_UNIQUE))
-			visible_message(SPAN_NOTICE("[user] chops down \the [src]."))
-			playsound(get_turf(src), W.hitsound, 100, 1)
-			kill_health()
+
+/obj/effect/vine/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Edged Items - Take sample
+	if (has_edge(tool))
+		if (tool.w_class < ITEM_SIZE_NORMAL)
+			USE_FEEDBACK_FAILURE("\The [tool] is too small to cut a sample from \the [src].")
+			return TRUE
+		if (!is_mature())
+			USE_FEEDBACK_FAILURE("\The [src] is not mature enough to yield a sample yet.")
+			return TRUE
+		if (!seed)
+			USE_FEEDBACK_FAILURE("There is nothing on \the [src] to take a sample from.")
+			return TRUE
+		var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
+		if (prob(user.skill_fail_chance(SKILL_BOTANY, 90, needed_skill)))
+			USE_FEEDBACK_FAILURE("You failed to get a usable sample from \the [src], and damage it in the process.")
+			damage_health(rand(15, 25), tool.damtype)
+			return TRUE
+		seed.harvest(user, 0, 1)
+		return TRUE
+
+	return ..()
+
 
 //handles being overrun by vines - note that attacker_parent may be null in some cases
 /obj/effect/vine/proc/vine_overrun(datum/seed/attacker_seed, obj/effect/vine/attacker_parent)

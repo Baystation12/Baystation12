@@ -176,26 +176,31 @@
 	damage_health(damage, Proj.damage_type)
 	return 0
 
-/obj/effect/blob/attackby(obj/item/W, mob/user)
-	if (user.a_intent == I_HURT)
-		if(isWelder(W))
-			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
-		..()
-		return
 
-	if (isWirecutter(W))
-		if(prob(user.skill_fail_chance(SKILL_SCIENCE, 90, SKILL_EXPERT)))
-			to_chat(user, SPAN_WARNING("You fail to collect a sample from \the [src]."))
-		else
-			if(!pruned)
-				to_chat(user, SPAN_NOTICE("You collect a sample from \the [src]."))
-				new product(user.loc)
-				pruned = TRUE
-			else
-				to_chat(user, SPAN_WARNING("\The [src] has already been pruned."))
-		return
+/obj/effect/blob/use_tool(obj/item/tool, mob/user, list/click_params)
+	if (isWirecutter(tool))
+		if (pruned)
+			USE_FEEDBACK_FAILURE("\The [src] has already been pruned.")
+			return TRUE
+		if (prob(user.skill_fail_chance(SKILL_SCIENCE, 90, SKILL_EXPERT)))
+			USE_FEEDBACK_FAILURE("You fail to collect a sample from \the [src].")
+			return TRUE
+		var/obj/item/sample = new product(user.loc)
+		pruned = TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] collects \a [sample] from \the [src] with \a [tool]."),
+			SPAN_NOTICE("You collect \a [sample] from \the [src] with \the [tool].")
+		)
+		return TRUE
 
-	..()
+	return ..()
+
+
+/obj/effect/blob/post_use_item(obj/item/tool, mob/user, interaction_handled, use_call, click_params)
+	. = ..()
+	if (interaction_handled && use_call == "weapon" && isWelder(tool))
+		playsound(loc, 'sound/items/Welder.ogg', 100, TRUE)
+
 
 /obj/effect/blob/core
 	name = "master nucleus"

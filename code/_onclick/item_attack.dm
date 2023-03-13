@@ -114,7 +114,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /atom/proc/can_use_item(obj/item/tool, mob/user, click_params)
 	// No Tools flag check
 	if (HAS_FLAGS(atom_flags, ATOM_FLAG_NO_TOOLS))
-		to_chat(user, SPAN_WARNING("\The [src] can't be interacted with."))
+		USE_FEEDBACK_FAILURE("\The [src] can't be interacted with.")
 		return FALSE
 
 	return TRUE
@@ -128,7 +128,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	// Block interacting with things under platings - In case of t-ray shennanigans or layering glitches
 	var/turf/T = get_turf(src)
 	if (hides_under_flooring() && !T.is_plating())
-		to_chat(user, SPAN_WARNING("You must remove the plating before you can interact with \the [src]."))
+		USE_FEEDBACK_FAILURE("You must remove the plating before you can interact with \the [src].")
 		return FALSE
 
 
@@ -148,23 +148,23 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	var/silent = HAS_FLAGS(flags, SANITY_CHECK_SILENT)
 	if (QDELETED(target))
 		if (!silent)
-			to_chat(src, SPAN_WARNING("[target ? "\The [target]" : "The object you were interacting with"] no longer exists."))
+			FEEDBACK_FAILURE(src, "[target ? "\The [target]" : "The object you were interacting with"] no longer exists.")
 		return FALSE
 	if (tool != FALSE && QDELETED(tool))
 		if (!silent)
-			to_chat(src, SPAN_WARNING("[tool ? "\The [tool]" : "The item you were using"] no longer exists."))
+			FEEDBACK_FAILURE(src, "[tool ? "\The [tool]" : "The item you were using"] no longer exists.")
 		return FALSE
 	if (!Adjacent(target))
 		if (!silent)
-			to_chat(src, SPAN_WARNING("You must remain next to \the [target]."))
+			FEEDBACK_FAILURE(src, "You must remain next to \the [target].")
 		return FALSE
 	if (HAS_FLAGS(flags, SANITY_CHECK_TOOL_UNEQUIP) && !canUnEquip(tool))
 		if (!silent)
-			to_chat(src, SPAN_WARNING("You can't drop \the [tool]."))
+			FEEDBACK_UNEQUIP_FAILURE(src, tool)
 		return FALSE
 	if (target.loc == src && HAS_FLAGS(flags, SANITY_CHECK_TARGET_UNEQUIP) && !canUnEquip(target))
 		if (!silent)
-			to_chat(src, SPAN_WARNING("You can't drop \the [target]."))
+			FEEDBACK_UNEQUIP_FAILURE(src, target)
 		return FALSE
 	return TRUE
 
@@ -190,7 +190,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (zone_sel.selecting == BP_MOUTH && can_devour(tool, silent = TRUE))
 		var/obj/item/blocked = check_mouth_coverage()
 		if (blocked)
-			to_chat(src, SPAN_WARNING("\The [blocked] is in the way!"))
+			FEEDBACK_FAILURE(src, "\The [blocked] is in the way!")
 			return TRUE
 		devour(tool)
 		return TRUE

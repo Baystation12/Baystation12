@@ -216,21 +216,29 @@
 		take_damage(proj.get_structure_damage(), SHIELD_DAMTYPE_EM)
 
 
-// Attacks with hand tools. Blocked by Hyperkinetic flag.
-/obj/effect/shield/attackby(obj/item/I as obj, mob/user as mob)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+/obj/effect/shield/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE) // Fully handled here
+	user.setClickCooldown(user.get_attack_speed(weapon))
 	user.do_attack_animation(src)
-
-	if(gen.check_flag(MODEFLAG_HYPERKINETIC))
-		user.visible_message(SPAN_DANGER("\The [user] hits \the [src] with \the [I]!"))
-		if (I.damtype == DAMAGE_BURN)
-			take_damage(I.force, SHIELD_DAMTYPE_HEAT)
-		else if (I.damtype == DAMAGE_BRUTE)
-			take_damage(I.force, SHIELD_DAMTYPE_PHYSICAL)
+	playsound(src, weapon.hitsound, 50, TRUE)
+	if (!gen.check_flag(MODEFLAG_HYPERKINETIC))
+		user.visible_message(
+			SPAN_WARNING("\The [user] tries to attack \the [src] with \a [weapon], but it passes through!"),
+			SPAN_WARNING("You try to attack \the [src] with \the [weapon], but it passes through!")
+		)
+		return TRUE
+	user.visible_message(
+		SPAN_DANGER("\The [user] hits \the [src] with \a [weapon]!"),
+		SPAN_DANGER("You hit \the [src] with \the [weapon]!")
+	)
+	switch (weapon.damtype)
+		if (DAMAGE_BURN)
+			take_damage(weapon.force, SHIELD_DAMTYPE_HEAT)
+		if (DAMAGE_BRUTE)
+			take_damage(weapon.force, SHIELD_DAMTYPE_PHYSICAL)
 		else
-			take_damage(I.force, SHIELD_DAMTYPE_EM)
-	else
-		user.visible_message(SPAN_DANGER("\The [user] tries to attack \the [src] with \the [I], but it passes through!"))
+			take_damage(weapon.force, SHIELD_DAMTYPE_EM)
+	return TRUE
 
 
 // Special treatment for meteors because they would otherwise penetrate right through the shield.

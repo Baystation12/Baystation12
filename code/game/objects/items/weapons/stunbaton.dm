@@ -193,6 +193,7 @@
 /obj/item/melee/baton/robot
 	bcell = null
 	hitcost = 20
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_TOOLS
 
 // Addition made by Techhead0, thanks for fullfilling the todo!
 /obj/item/melee/baton/robot/examine_cell(mob/user)
@@ -211,9 +212,6 @@
 		to_chat(user, SPAN_WARNING("You don't seem to be able interacting with this by yourself.."))
 		add_fingerprint(user)
 	return 0
-
-/obj/item/melee/baton/robot/attackby(obj/item/W, mob/user)
-	return
 
 /obj/item/melee/baton/robot/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	update_cell(isrobot(user) ? user : null) // update the status before we apply the effects

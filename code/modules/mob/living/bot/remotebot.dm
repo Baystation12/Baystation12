@@ -51,7 +51,7 @@
 	// Remove Control - Link controller to bot
 	if (istype(tool, /obj/item/device/bot_controller))
 		if (controller)
-			to_chat(user, SPAN_WARNING("\The [src] is already connected to a remote control."))
+			USE_FEEDBACK_FAILURE("\The [src] is already connected to a remote control.")
 			return TRUE
 		var/obj/item/device/bot_controller/bot_controller = tool
 		bot_controller.bot = src

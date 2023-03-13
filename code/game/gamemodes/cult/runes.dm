@@ -44,15 +44,31 @@
 	if(iscultist(user))
 		to_chat(user, "This is \a [cultname] rune.")
 
-/obj/effect/rune/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/book/tome) && iscultist(user))
-		user.visible_message(SPAN_NOTICE("[user] rubs \the [src] with \the [I], and \the [src] is absorbed by it."), "You retrace your steps, carefully undoing the lines of \the [src].")
+
+/obj/effect/rune/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Cultist Tome - Remove rune
+	if (istype(tool, /obj/item/book/tome))
+		if (!iscultist(user))
+			return FALSE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] rubs \the [src] with \a [tool], and \the [src] is absorbed by it."),
+			SPAN_NOTICE("You retrace your steps, carefully undoing the lines of \the [src] with \the [tool].")
+		)
 		qdel(src)
-		return
-	else if(istype(I, /obj/item/nullrod))
-		user.visible_message(SPAN_NOTICE("[user] hits \the [src] with \the [I], and it disappears, fizzling."), SPAN_NOTICE("You disrupt the vile magic with the deadening field of \the [I]."), "You hear a fizzle.")
+		return TRUE
+
+	// Null Rod - Remove rune
+	if (istype(tool, /obj/item/nullrod))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] hits \the [src] with \a [tool], and it disappears, fizzling."),
+			SPAN_NOTICE("You disrupt \the [src]'s vile magic with the deadening field of \the [tool]."),
+			SPAN_ITALIC("You hear a fizzle.")
+		)
 		qdel(src)
-		return
+		return TRUE
+
+	return ..()
+
 
 /obj/effect/rune/attack_hand(mob/living/user)
 	if(!iscultist(user))
@@ -288,13 +304,19 @@
 	else
 		to_chat(user, SPAN_NOTICE("You touch \the [src]. It feels wet and becomes harder the further you push your arm."))
 
-/obj/effect/cultwall/attackby(obj/item/I, mob/living/user)
-	if (istype(I, /obj/item/nullrod))
-		user.visible_message(SPAN_NOTICE("\The [user] touches \the [src] with \the [I], and it disappears."), SPAN_NOTICE("You disrupt the vile magic with the deadening field of \the [I]."))
-		qdel(src)
-		return
 
-	..()
+/obj/effect/cultwall/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Null rod - Remove wall
+	if (istype(tool, /obj/item/nullrod))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] touches \the [src] with \a [tool], and it disappears."),
+			SPAN_NOTICE("You disrupt \the [src]'s vile magic with the deadening field of \the [tool].")
+		)
+		qdel(src)
+		return TRUE
+
+	return ..()
+
 
 /obj/effect/cultwall/on_death()
 	visible_message(SPAN_WARNING("\The [src] dissipates."))
@@ -819,10 +841,13 @@
 		if (GLOB.universe.type == /datum/universal_state/hell)
 			SetUniversalState(/datum/universal_state)
 
-/obj/effect/rune/tearreality/attackby()
-	if(the_end_comes)
-		return
-	..()
+
+/obj/effect/rune/tearreality/can_use_item(obj/item/tool, mob/user, click_params)
+	if (the_end_comes)
+		USE_FEEDBACK_FAILURE("It's far too late to try doing anything with \the [src].")
+		return FALSE
+	return ..()
+
 
 /* Imbue runes */
 

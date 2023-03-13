@@ -196,12 +196,12 @@
 /obj/structure/railing/use_grab(obj/item/grab/grab, list/click_params)
 	var/obj/occupied = turf_is_crowded()
 	if (occupied)
-		to_chat(grab.assailant, SPAN_WARNING("There's \a [occupied] blocking \the [src]."))
+		USE_FEEDBACK_GRAB_FAILURE(SPAN_WARNING("There's \a [occupied] blocking \the [src]."))
 		return TRUE
 
 	if (!grab.force_danger())
-		var/action = grab.assailant.a_intent == I_HURT ? "slam them against" : "throw them over"
-		to_chat(grab.assailant, SPAN_WARNING("You need a better grip on \the [grab.affecting] to [action] \the [src]."))
+		var/action = grab.assailant.a_intent == I_HURT ? "to slam them against \the [src]" : "to throw them over \the [src]"
+		USE_FEEDBACK_GRAB_MUST_UPGRADE(action)
 		return TRUE
 
 	// Harm intent - Face slamming

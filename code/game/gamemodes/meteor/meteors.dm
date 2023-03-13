@@ -205,11 +205,19 @@ var/global/list/meteors_cataclysm = list(\
 /obj/effect/meteor/ex_act()
 	return
 
-/obj/effect/meteor/attackby(obj/item/W as obj, mob/user as mob, params)
-	if(istype(W, /obj/item/pickaxe))
+
+/obj/effect/meteor/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Pickaxe - Delete meteor
+	if (istype(tool, /obj/item/pickaxe))
+		user.visible_message(
+			SPAN_WARNING("\The [user] hits \the [src] with \a [tool], breaking it apart!"),
+			SPAN_WARNING("You hit \the [src] with \the [tool], breaking it apart!")
+		)
 		qdel(src)
-		return
-	..()
+		return TRUE
+
+	return ..()
+
 
 /obj/effect/meteor/proc/make_debris()
 	for(var/throws = dropamt, throws > 0, throws--)

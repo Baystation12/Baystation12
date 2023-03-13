@@ -90,7 +90,7 @@
 	// Harm intent - Slam face against the structure
 	if (grab.assailant == I_HURT)
 		if (!grab.force_danger())
-			to_chat(grab.assailant, SPAN_WARNING("You need a better grip to slam \the [grab.affecting]'s face on \the [src]."))
+			USE_FEEDBACK_GRAB_MUST_UPGRADE("to slam their face on \the [src]")
 			return TRUE
 		var/blocked = grab.affecting.get_blocked_ratio(BP_HEAD, DAMAGE_BRUTE, damage = 8)
 		if (prob(30 * (1 - blocked)))
@@ -111,17 +111,17 @@
 	// Climbable structure - Put victim on it
 	if (HAS_FLAGS(atom_flags, ATOM_FLAG_CLIMBABLE))
 		if (!grab.force_danger())
-			to_chat(grab.assailant, SPAN_WARNING("You need a better grip to put \the [grab.affecting] on \the [src]."))
+			USE_FEEDBACK_GRAB_MUST_UPGRADE("to put them on \the [src]")
 			return TRUE
 		var/obj/occupied = turf_is_crowded()
 		if (occupied)
-			to_chat(grab.assailant, SPAN_DANGER("There's \a [occupied] blocking \the [src]."))
+			USE_FEEDBACK_GRAB_FAILURE("There's \a [occupied] blocking \the [src].")
 			return TRUE
-		if (!do_after(grab.assailant, 3 SECONDS, grab.affecting, DO_PUBLIC_UNIQUE))
+		if (!do_after(grab.assailant, 3 SECONDS, grab.affecting, DO_PUBLIC_UNIQUE) || !grab.assailant.use_sanity_check(src, grab))
 			return TRUE
 		occupied = turf_is_crowded()
 		if (occupied)
-			to_chat(grab.assailant, SPAN_DANGER("There's \a [occupied] blocking \the [src]."))
+			USE_FEEDBACK_GRAB_FAILURE("There's \a [occupied] blocking \the [src].")
 			return TRUE
 		grab.affecting.forceMove(loc)
 		grab.affecting.Weaken(rand(2,5))

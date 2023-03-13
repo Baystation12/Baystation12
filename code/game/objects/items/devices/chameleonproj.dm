@@ -103,10 +103,32 @@
 	master = C
 	master.active_dummy = src
 
-/obj/effect/dummy/chameleon/attackby()
-	for(var/mob/M in src)
-		to_chat(M, SPAN_WARNING("Your chameleon-projector deactivates."))
-	master.disrupt()
+
+/obj/effect/dummy/chameleon/use_tool(obj/item/tool, mob/user, list/click_params)
+	. = ..()
+	if (.)
+		return
+
+	// Interaction always handled - `post_use_item()` handles the reveal of hidden mobs.
+	user.visible_message(
+		SPAN_NOTICE("\The [user] taps \the [src] with \a [tool]."),
+		SPAN_NOTICE("You tap \the [src] with \the [tool].")
+	)
+	return TRUE
+
+
+/obj/effect/dummy/chameleon/post_use_item(obj/item/tool, mob/user, interaction_handled, use_call, click_params)
+	. = ..()
+	if (interaction_handled)
+		var/list/revealed = list()
+		for (var/hidden as anything in src)
+			to_chat(hidden, SPAN_WARNING("Your [master] deactivates."))
+			revealed += "\the [hidden]"
+		visible_message(
+			SPAN_WARNING("\The [src] flashes and [english_list(revealed)] appear[length(revealed) == 1 ? "s" : null]!")
+		)
+		master.disrupt()
+
 
 /obj/effect/dummy/chameleon/attack_hand()
 	for(var/mob/M in src)

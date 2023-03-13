@@ -151,10 +151,12 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/effect/spider/spiderling/attackby(obj/item/W, mob/user)
+
+/obj/effect/spider/spiderling/post_use_item(obj/item/tool, mob/user, interaction_handled, use_call, click_params)
 	. = ..()
-	if (!health_dead)
+	if (interaction_handled && !health_dead)
 		disturbed()
+
 
 /obj/effect/spider/spiderling/Crossed(mob/living/L)
 	if(dormant && istype(L) && L.mob_size > MOB_TINY)
