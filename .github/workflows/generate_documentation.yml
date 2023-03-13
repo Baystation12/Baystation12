@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
       - name: Setup Cache
-        uses: actions/cache@940f3d7cf195ba83374c77632d1e2cbb2f24ae68
+        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
         with:
           path: $HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION
           key: ${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}
