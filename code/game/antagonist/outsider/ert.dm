@@ -14,7 +14,7 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 	id_type = /obj/item/card/id/centcom/ERT
 
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
-	antaghud_indicator = "hudloyalist"
+	antaghud_indicator = "hudert"
 
 	hard_cap = 5
 	hard_cap_round = 7

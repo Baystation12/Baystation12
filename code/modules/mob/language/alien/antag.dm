@@ -18,9 +18,9 @@
 /datum/language/corticalborer
 	name = LANGUAGE_BORER_GLOBAL
 	desc = "Cortical borers possess a strange link between their tiny minds."
-	speech_verb = "sings"
-	ask_verb = "sings"
-	exclaim_verb = "sings"
+	speech_verb = "распевает"
+	ask_verb = "запевает"
+	exclaim_verb = "пропевает"
 	colour = "alien"
 	key = "z"
 	flags = RESTRICTED | HIVEMIND
@@ -77,9 +77,9 @@
 /datum/language/cultcommon
 	name = LANGUAGE_CULT
 	desc = "The chants of the occult, the incomprehensible."
-	speech_verb = "intones"
-	ask_verb = "intones"
-	exclaim_verb = "chants"
+	speech_verb = "поёт"
+	ask_verb = "запевает"
+	exclaim_verb = "скандирует"
 	colour = "cult"
 	key = "f"
 	flags = RESTRICTED
@@ -99,9 +99,9 @@
 /datum/language/cult
 	name = LANGUAGE_CULT_GLOBAL
 	desc = "The initiated can share their thoughts by means defying all reason."
-	speech_verb = "intones"
-	ask_verb = "intones"
-	exclaim_verb = "chants"
+	speech_verb = "поёт"
+	ask_verb = "запевает"
+	exclaim_verb = "скандирует"
 	colour = "cult"
 	key = "y"
 	flags = RESTRICTED | HIVEMIND
@@ -111,7 +111,7 @@
 /datum/language/alium
 	name = LANGUAGE_ALIUM
 	colour = "cult"
-	speech_verb = "hisses"
+	speech_verb = "шипит"
 	key = "c"
 	flags = RESTRICTED
 	syllables = list("qy","bok","mok","yok","dy","gly","ryl","byl","dok","forbici", "tarem", "n'ath", "reth", "sh'yro", "eth", "d'raggathnor","niii",
@@ -123,7 +123,7 @@
 	has_written_form = TRUE
 
 /datum/language/alium/New()
-	speech_verb = pick("hisses","growls","whistles","blubbers","chirps","skreeches","rumbles","clicks")
+	speech_verb = pick("шипит","рычит","свистит","ропочет","щебечет","скрипит","урчит","щёлкает")
 	..()
 
 /datum/language/alium/get_random_name()

@@ -122,7 +122,7 @@
 	user.visible_message("<span class='notice'>[user] has made [access_string] on [target]'s [affected.name] with \the [tool].</span>", \
 	"<span class='notice'>You have made [access_string] on [target]'s [affected.name] with \the [tool].</span>",)
 	affected.createwound(INJURY_TYPE_CUT, affected.min_broken_damage/2, 1)
-	playsound(target.loc, 'sound/weapons/bladeslice.ogg', 15, 1)
+	playsound(target.loc, 'sound/weapons/scalpel.ogg', 15, 1)
 
 /decl/surgery_step/generic/cut_open/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -283,6 +283,7 @@
 		affected.status &= ~ORGAN_ARTERY_CUT
 	if(affected.clamped())
 		affected.remove_clamps()
+	playsound(target.loc, 'sound/items/cautery.ogg', 15, 1)
 
 /decl/surgery_step/generic/cauterize/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

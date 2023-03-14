@@ -154,7 +154,7 @@
 	GLOB.using_map.toggle_crew_sensors(3)
 
 /decl/security_level/default/torchdept/code_delta
-	name = "код Дельта"
+	name = "Код дельта"
 	icon = 'icons/misc/security_state.dmi'
 	alarm_level = "on"
 

@@ -318,3 +318,38 @@
 	icon_state="bsposter_event4"
 	name = "Scientific Cooperation"
 	desc = "This poster depicts a Sol Expeditionary Corps captain shaking hands with a Terran Pioneer Corps officer. It appears to espouse greater scientific cooperation between the two organisations."
+
+/decl/poster/proxi1 //PRX-Start
+	icon_state="proxiposter1"
+	name = "Scientific Cooperation"
+	desc = "This poster depicts a Sol Expeditionary Corps captain shaking hands with a Terran Pioneer Corps officer. It appears to espouse greater scientific cooperation between the two organisations."
+
+/decl/poster/proxi2
+	icon_state="proxiposter2"
+	name = "Scientific Cooperation"
+	desc = "This poster depicts a Sol Expeditionary Corps captain shaking hands with a Terran Pioneer Corps officer. It appears to espouse greater scientific cooperation between the two organisations."
+
+/decl/poster/proxi3
+	icon_state="proxiposter3"
+	name = "Scientific Cooperation"
+	desc = "This poster depicts a Sol Expeditionary Corps captain shaking hands with a Terran Pioneer Corps officer. It appears to espouse greater scientific cooperation between the two organisations."
+
+/decl/poster/proxi4
+	icon_state="proxiposter4"
+	name = "Scientific Cooperation"
+	desc = "This poster depicts a Sol Expeditionary Corps captain shaking hands with a Terran Pioneer Corps officer. It appears to espouse greater scientific cooperation between the two organisations."
+
+/decl/poster/proxi5
+	icon_state="proxiposter5"
+	name = "Scientific Cooperation"
+	desc = "This poster depicts a Sol Expeditionary Corps captain shaking hands with a Terran Pioneer Corps officer. It appears to espouse greater scientific cooperation between the two organisations."
+
+/decl/poster/proxi5
+	icon_state="proxiposter6"
+	name = "Scientific Cooperation"
+	desc = "This poster depicts a Sol Expeditionary Corps captain shaking hands with a Terran Pioneer Corps officer. It appears to espouse greater scientific cooperation between the two organisations."
+
+/decl/poster/proxi5 //PRX-End
+	icon_state="proxiposter7"
+	name = "Scientific Cooperation"
+	desc = "This poster depicts a Sol Expeditionary Corps captain shaking hands with a Terran Pioneer Corps officer. It appears to espouse greater scientific cooperation between the two organisations."

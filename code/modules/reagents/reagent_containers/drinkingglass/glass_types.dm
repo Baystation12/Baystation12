@@ -137,6 +137,41 @@
 	icon_state = "coffeecup_black"
 	base_name = "black cup"
 
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/blue //PRX-Start
+	name = "blue coffee mug"
+	desc = "A blue coffee mug."
+	base_icon = "coffeecup_blue"
+
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/bishop
+	name = "\improper Bishop coffee mug"
+	desc = "A black coffee mug adorned with Bishop's logo."
+	base_icon = "coffeecup_bishop"
+
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/fleet
+	name = "\improper SCG Fleet coffee cup"
+	desc = "A coffee mug imprinted with the emblem of the Solar Confederate Fleet."
+	base_icon = "coffeecup_fleet"
+
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/aether
+	name = "\improper Aether Atmospherics coffee mug"
+	desc = "A coffee mug in Aether Atmospherics colours."
+	base_icon = "coffeecup_aether"
+
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/ftu
+	name = "\improper Free Trade Union coffee mug"
+	desc = "A coffee mug with the flag of the Free Trade Union proudly displayed on it."
+	base_icon = "coffeecup_fivearrows"
+
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/wt
+	name = "\improper Ward-Takahashi coffee mug"
+	desc = "A coffee mug in a geometric Ward-Takahashi design."
+	base_icon = "coffeecup_wt"
+
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/flame //PRX-End
+	name = "flame coffee cup"
+	desc = "A coffee cup with the a flame emblazoned on it."
+	base_icon = "coffeecup_flame"
+
 /obj/item/reagent_containers/food/drinks/glass2/coffeecup/green
 	name = "green coffee cup"
 	desc = "A pale green and pink coffee cup."

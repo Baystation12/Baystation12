@@ -3233,6 +3233,7 @@
 #include "customs\code\lodagn.dm"
 #include "customs\code\mafiosy.dm"
 #include "customs\code\rassvetsolnca.dm"
+#include "customs\code\taushai.dm"
 #include "customs\code\vezha.dm"
 #include "customs\code\zakatneba.dm"
 #include "interface\interface.dm"

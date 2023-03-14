@@ -1,7 +1,7 @@
 /obj/machinery/rotating_alarm/security_alarm
 	name = "security level signal"
 	desc = "A rotating alarm light that changes color to indicate a ship-wide alert."
-	icon_state = "code green"
+	icon_state = "Зелёный код"
 	alarm_light_color = COLOR_GREEN
 
 

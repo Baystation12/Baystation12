@@ -175,7 +175,7 @@
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
-			command_announcement.Announce("Внимание, [GLOB.using_map.station_ru]. Мы обнаружили ненормальное поведение в вашей сети. Похоже, кто-то пытается взломать ваши электронные системы. Мы сообщим вам, когда у нас будет больше информации.", "EXO Network Monitoring")
+			command_announcement.Announce("Внимание, [GLOB.using_map.station_name]. Мы обнаружили ненормальное поведение в вашей сети. Похоже, кто-то пытается взломать ваши электронные системы. Мы сообщим вам, когда у нас будет больше информации.", "EXO Network Monitoring")
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
@@ -214,7 +214,7 @@
 	to_chat(user, "## PRIMARY FIREWALL BYPASSED. YOU NOW HAVE FULL SYSTEM CONTROL.")
 
 	if(user.hack_can_fail)
-		command_announcement.Announce("Наши системные администраторы только что сообщили, что мы были заблокированы от вашей управляющей сети. Тот, кто это сделал, теперь имеет полный доступ к системам [GLOB.using_map.station_ru].", "EXO Network Administration Center")
+		command_announcement.Announce("Наши системные администраторы только что сообщили, что мы были заблокированы от вашей управляющей сети. Тот, кто это сделал, теперь имеет полный доступ к системам [GLOB.using_map.station_name].", "EXO Network Administration Center")
 	user.hack_can_fail = 0
 	user.system_override = 2
 	user.verbs += new/datum/game_mode/malfunction/verb/ai_destroy_station()

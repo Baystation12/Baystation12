@@ -940,7 +940,7 @@
 
 	if(shock_stage >= 80)
 		if (prob(5))
-			custom_pain("[pick("The pain is maddening", "Please, just end this endless the pain", "You practically can't feel the body")]!", shock_stage, nohalloss = TRUE)
+			custom_pain("[pick("The pain is maddening", "Please, just end this endless pain", "You practically can't feel the body")]!", shock_stage, nohalloss = TRUE)
 			Weaken(20)
 
 	if(shock_stage >= 120)
