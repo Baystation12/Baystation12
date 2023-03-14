@@ -1,8 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - bugfix: Say-verb " окончание без точки
-  - bugfix: Звук отвёртки напольной лампы + обновление иконки
-  - bugfix: Белый спрайт напольного света
-  - tweak: Быстрый эквип в портфель, тулбелт и контейнеры
-  - admin: Выбор z-уровня Playsound
