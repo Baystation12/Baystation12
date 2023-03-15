@@ -115,7 +115,7 @@
 			M.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
 
-		if(M.knows_target(src) && !isghost(M))
+		if(!(M.knows_target(src)) && !isghost(M))
 			for(var/datum/pronouns/entry as anything in GLOB.pronouns.instances)
 				mob_message = replacetext(mob_message, initial(entry.his), "their")
 				mob_message = replacetext(mob_message, initial(entry.him), "them")
@@ -156,7 +156,7 @@
 				continue
 			mob_message = add_ghost_track(mob_message, M)
 
-		if((M.knows_target(src)) && !(isghost(M)))
+		if(!(M.knows_target(src)) && !(isghost(M)))
 			for(var/datum/pronouns/entry as anything in GLOB.pronouns.instances)
 				mob_message = replacetext(mob_message, initial(entry.his), "their")
 				mob_message = replacetext(mob_message, initial(entry.him), "them")
@@ -1233,30 +1233,36 @@
 	if(old_zflags != z_flags)
 		UPDATE_OO_IF_PRESENT
 
-/mob/verb/introduce(var/mob/M)
+/mob/verb/introduce()
 	set category = "IC"
 	set name = "Introduce Self"
 	set desc = "Introduce yourself to someone else."
 
-	if(get_dist(usr, M) > 3)
-		to_chat(usr, SPAN_WARNING("You're too far away to properly introduce yourself!"))
+	var/mob/S = src
+	var/mob/U = usr
+
+	if(get_dist(U, S) > 3)
+		to_chat(U, SPAN_WARNING("You're too far away to properly introduce yourself!"))
 		return
-	if(M.stat != CONSCIOUS)
-		to_chat(usr, SPAN_WARNING("You can't introduce yourself while they're in this state!"))
+	if((S.stat != CONSCIOUS) || !(S.mind))
+		to_chat(U, SPAN_WARNING("You can't introduce yourself while they're in this state!"))
 		return
-	if(M in usr.mind.known_mobs)
-		to_chat(usr, SPAN_WARNING("You already known [M.name]!"))
+	if((S in U.mind.known_mobs) || (U in S.mind.known_mobs))
+		to_chat(U, SPAN_WARNING("You already know [S.name]!"))
 		return
 
-	var/datum/pronouns/P = choose_from_pronouns(usr)
+	var/datum/pronouns/P = choose_from_pronouns(U)
 
-	to_chat(usr, SPAN_WARNING("You introduce yourself to [M.name]!"))
-	to_chat(M, SPAN_WARNING("[usr.name] introduces [P.self]!"))
-	usr.mind.add_known_mob(M)
-	M.mind.add_known_mob(usr)
+	to_chat(U, SPAN_WARNING("You introduce yourself to [S.name]!"))
+	to_chat(S, SPAN_WARNING("[U.name] introduces [P.self]!"))
+	U.mind.add_known_mob(S)
+	S.mind.add_known_mob(U)
 
-/mob/proc/knows_target(var/mob/M)
-	if((M in src.mind.known_mobs) || (M.faction == src.faction))
-		return TRUE
+/mob/proc/knows_target(mob/M)
+	if(mind)
+		if((M in mind.known_mobs) || (M.faction == faction) || (M.last_faction == faction) || (M.faction == last_faction))
+			return TRUE
+		else
+			return FALSE
 	else
 		return FALSE

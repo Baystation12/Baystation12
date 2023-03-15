@@ -22,6 +22,9 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 	initial_spawn_target = 7
 	show_objectives_on_creation = 0 //we are not antagonists, we do not need the antagonist shpiel/objectives
 
+	faction = "emergency"
+	no_prior_faction = TRUE
+
 	base_to_load = /datum/map_template/ruin/antag_spawn/ert
 
 	var/reason = ""

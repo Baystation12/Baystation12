@@ -13,6 +13,9 @@ GLOBAL_DATUM_INIT(commandos, /datum/antagonist/deathsquad/mercenary, new)
 	hard_cap_round = 8
 	initial_spawn_req = 4
 	initial_spawn_target = 6
+	faction = "commando"
+	no_prior_faction = TRUE
+
 
 /datum/antagonist/deathsquad/mercenary/equip(mob/living/carbon/human/player)
 

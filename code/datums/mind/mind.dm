@@ -531,7 +531,7 @@
 	rev_cooldown =    0
 	brigged_since =   -1
 
-/datum/mind/proc/add_known_mob(var/mob/M)
+/datum/mind/proc/add_known_mob(mob/M)
 	if(ismob(M))
 		known_mobs += M
 

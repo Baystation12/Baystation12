@@ -13,6 +13,7 @@ GLOBAL_DATUM_INIT(provocateurs, /datum/antagonist/provocateur, new)
 	min_player_age = 0
 
 	var/antag_text_updated
+	no_prior_faction = TRUE
 
 /datum/antagonist/provocateur/get_antag_text(mob/recipient)
 	if (!antag_text_updated)

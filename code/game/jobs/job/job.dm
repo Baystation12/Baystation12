@@ -104,6 +104,7 @@
 	if(outfit) . = outfit.equip(H, title, alt_title)
 	if(faction)
 		H.faction = faction
+		H.last_faction = faction
 
 /datum/job/proc/get_outfit(mob/living/carbon/human/H, alt_title, datum/mil_branch/branch, datum/mil_rank/grade)
 	if(alt_title && alt_titles)
