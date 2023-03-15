@@ -219,6 +219,7 @@
 	var/list/base_skin_colours
 
 	var/list/genders = list(MALE, FEMALE, PLURAL)
+	var/list/pronouns = PRONOUNS_ALL
 
 	// Bump vars
 	var/bump_flag = HUMAN	// What are we considered to be when bumped?
@@ -698,8 +699,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	target.visible_message(SPAN_DANGER("[attacker] attempted to disarm \the [target]!"))
 
 /datum/species/proc/disfigure_msg(mob/living/carbon/human/H) //Used for determining the message a disfigured face has on examine. To add a unique message, just add this onto a specific species and change the "return" message.
-	var/datum/gender/T = gender_datums[H.get_gender()]
-	return "[SPAN_DANGER("[T.His] face is horribly mangled!")]\n"
+	var/datum/pronouns/P = H.choose_from_pronouns()
+	return "[SPAN_DANGER("[P.His] face is horribly mangled!")]\n"
 
 /datum/species/proc/max_skin_tone()
 	if(appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_TONE_GRAV)

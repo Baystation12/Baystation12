@@ -1,5 +1,6 @@
 /mob/living/carbon
 	gender = MALE
+	pronouns = PRONOUNS_THEY_THEM
 	var/datum/species/species //Contains icon generation and language information, set during New().
 
 	var/life_tick = 0      // The amount of life ticks that have processed on this mob.

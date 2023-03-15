@@ -106,8 +106,8 @@
 	return "oil"
 
 /datum/species/machine/disfigure_msg(mob/living/carbon/human/H)
-	var/datum/gender/T = gender_datums[H.get_gender()]
-	return "[SPAN_DANGER("[T.His] monitor is completely busted!")]\n"
+	var/datum/pronouns/P = H.choose_from_pronouns()
+	return "[SPAN_DANGER("[P.His] monitor is completely busted!")]\n"
 
 /datum/species/machine/can_float(mob/living/carbon/human/H)
 	return FALSE

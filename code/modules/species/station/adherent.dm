@@ -14,6 +14,7 @@
 	skin_material = null
 
 	genders =                 list(PLURAL)
+	pronouns = 				  list(PRONOUNS_THEY_THEM)
 	cyborg_noun =             null
 
 	icon_template =           'icons/mob/human_races/species/adherent/template.dmi'

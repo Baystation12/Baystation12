@@ -1,6 +1,7 @@
 
 /mob
 	var/list/screens = list()
+	var/pronouns = null
 
 /mob/proc/set_fullscreen(condition, screen_name, screen_type, arg)
 	condition ? overlay_fullscreen(screen_name, screen_type, arg) : clear_fullscreen(screen_name)

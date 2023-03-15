@@ -33,6 +33,15 @@
 /mob/living/carbon/human/proc/randomize_gender()
 	change_gender(pick(species.genders))
 
+/mob/living/carbon/human/proc/change_pronouns(pronouns)
+	if(src.pronouns == pronouns)
+		return
+	src.pronouns = pronouns
+	return 1
+
+/mob/living/carbon/human/proc/randomize_pronouns()
+	change_pronouns(pick(species.pronouns))
+
 /mob/living/carbon/human/proc/change_hair(new_head_hair_style)
 	if(!new_head_hair_style)
 		return

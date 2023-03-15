@@ -4,6 +4,7 @@
 	health = 20
 	maxHealth = 20
 	universal_speak = FALSE
+	pronouns = null
 
 	mob_bump_flag = SIMPLE_ANIMAL
 	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
