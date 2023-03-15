@@ -73,7 +73,7 @@
 		if (faction_verb)
 			player.current.verbs -= faction_verb
 		if (faction && player.current.faction == faction)
-			player.current.faction = MOB_FACTION_NEUTRAL
+			player.current.faction = player.assigned_job.faction
 	if(player in current_antagonists)
 		to_chat(player.current, SPAN_DANGER(FONT_LARGE("You are no longer a [role_text]!")))
 		current_antagonists -= player

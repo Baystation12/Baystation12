@@ -51,6 +51,7 @@
 	var/mob/living/carbon/human/corpse = new (loc, new_species)
 	corpse.adjustOxyLoss(corpse.maxHealth)
 	corpse.setBrainLoss(corpse.maxHealth)
+	corpse.faction = MOB_FACTION_NEUTRAL
 	var/obj/item/organ/internal/heart/heart = corpse.internal_organs_by_name[BP_HEART]
 	if (heart)
 		heart.pulse = PULSE_NONE

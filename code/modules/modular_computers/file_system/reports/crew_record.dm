@@ -243,8 +243,8 @@ FIELD_LONG("Exploitable Information", antagRecord, access_syndicate, access_synd
 /datum/report_field/options/crew_record/sex/proc/record_pronouns()
 	. = list()
 	. |= "Unset"
-	for(var/entry in GLOB.pronouns.by_key[pronouns])
-		var/datum/pronouns/P = GLOB.pronouns.by_key[pronouns]
+	for(var/entry in GLOB.pronouns.by_key)
+		var/datum/pronouns/P = GLOB.pronouns.by_key[entry]
 		. |= P.formal_term
 
 /datum/report_field/options/crew_record/branch/proc/record_branches()
