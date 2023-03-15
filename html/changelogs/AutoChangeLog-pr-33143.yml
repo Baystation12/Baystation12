@@ -1,5 +1,0 @@
-author: rootoo807
-delete-after: true
-changes:
-  - bugfix: Cans and bottles are no longer deleted when clicked on with other items.
-  - tweak: Welding steps in crafting now use 1 welding fuel.
