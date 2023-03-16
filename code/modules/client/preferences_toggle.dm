@@ -13,7 +13,7 @@ var/global/list/client_preference_stats_
 
 	for(var/client_pref_description in client_preference_stats_)
 		var/stat_client_preference/scp = client_preference_stats_[client_pref_description]
-		if(scp.client_preference.may_set(user))
+		if(scp.client_preference.may_set(user.client))
 			scp.update_name(user)
 			.[client_pref_description] = scp
 

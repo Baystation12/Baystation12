@@ -163,7 +163,8 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 		if(wrap_index && current++ >= wrap_index)
 			wrap_index = 0
 			. += "</td><td></td><td style='width:50%'>"
-		. += "[player_setup_item.content(user)]<br>"
+		//. += "[player_setup_item.content(user)]<br>" // BAY
+		. += "[player_setup_item.content(user)]"       // SIERRA
 	. += "</td></tr></table>"
 
 /datum/category_group/player_setup_category/occupation_preferences/content(mob/user)

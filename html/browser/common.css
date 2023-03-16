@@ -9,17 +9,13 @@ body
 	font-family: Verdana, Geneva, sans-serif;
 }
 
-hr
-{
-	background-color: #40628a;
-	height: 1px;
-}
+hr { border-color: #818d9b; }
 
 a, a:link, a:visited, a:active, .linkOn, .linkOff, input
 {
 	color: #ffffff;
 	background: #40628a;
-  transition: color 50ms, background-color 50ms;
+	transition: color 50ms, background-color 50ms;
 
 	border-radius: 0.16em;
 	padding: 1px 4px 1px 4px;
@@ -31,11 +27,11 @@ a, a:link, a:visited, a:active, .linkOn, .linkOff, input
 	cursor: pointer;
 	white-space: nowrap;
 	user-select: none;
-  -ms-user-select: none;
+	-ms-user-select: none;
 
 	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
 
-  transition: color 50ms, background-color 50ms;
+	transition: color 50ms, background-color 50ms;
 }
 
 a:hover
@@ -45,19 +41,33 @@ a:hover
 	transition: color 0ms, background-color 0ms;
 }
 
-a.white, a.white:link, a.white:visited, a.white:active
+a.selected
 {
-	color: #40628a;
-	text-decoration: none;
-	background: #ffffff;
-	margin: 0 2px 0 0;
-	cursor:default;
+	box-shadow: 0 0 0 1px #aec6eb, 1px 1px 2px rgba(0, 0, 0, 0.35);
 }
 
-a.white:hover
+a.gold, a.gold:link, a.gold:visited, a.gold:active
+{
+	color: #ffa600;
+	background: #000000;
+}
+
+a.gold:hover
+{
+	color: #fdbe49;
+	background: #2c200f;
+}
+
+a.gray, a.gray:link, a.gray:visited, a.gray:active
 {
 	color: #ffffff;
-	background: #40628a;
+	background: #696969;
+}
+
+a.gray:hover
+{
+	color: #ffffff;
+	background: #818181;
 }
 
 .linkOn, a.linkOn:link, a.linkOn:visited, a.linkOn:active, a.linkOn:hover
@@ -73,6 +83,11 @@ a.white:hover
 	background: #999999;
 	border-color: #666666;
 }
+
+a.gold.selected {	box-shadow: 0 0 0 1px #ebccae, 1px 1px 2px rgba(0, 0, 0, 0.35); }
+a.gray.selected {	box-shadow: 0 0 0 1px #ebebeb, 1px 1px 2px rgba(0, 0, 0, 0.35); }
+a.linkOn.selected { box-shadow: 0 0 0 1px #aeebae, 1px 1px 2px rgba(0, 0, 0, 0.35); }
+a.linkOff.selected { box-shadow: 0 0 0 1px #ebebeb, 1px 1px 2px rgba(0, 0, 0, 0.35); }
 
 a.icon, .linkOn.icon, .linkOff.icon
 {
@@ -344,4 +359,31 @@ div.notice
 	border: 1px solid #40628a;
 	padding: 4px;
 	margin: 3px 0;
+}
+
+.bigIcon
+{
+	width: 64px;
+	height: 64px;
+}
+
+.dt_1 {
+	font-weight: bold;
+	color: rgb(83, 107, 189);
+	text-shadow: 0 0 8px rgba(83, 107, 189, .4);
+}
+.dt_2 {
+	font-weight: bold;
+	color: rgb(91, 16, 212);
+	text-shadow: 0 0 8px rgba(91, 16, 212, .4);
+}
+.dt_3 {
+	font-weight: bold;
+	color: rgb(175, 48, 207);
+	text-shadow: 0 0 8px rgba(175, 48, 207, .4);
+}
+.dt_4 {
+	font-weight: bold;
+	color: rgb(229, 25, 219);
+	text-shadow: 0 0 8px rgba(229, 25, 219, .4);
 }

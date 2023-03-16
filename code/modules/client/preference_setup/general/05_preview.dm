@@ -16,8 +16,13 @@
 
 
 /datum/preferences/proc/dress_preview_mob(mob/living/carbon/human/mannequin)
+	if(!mannequin)
+		return
+
 	var/update_icon = FALSE
 	copy_to(mannequin, TRUE)
+	mannequin.update_icon = TRUE
+
 	var/datum/job/previewJob
 	if (preview_job || preview_gear)
 		// Determine what job is marked as 'High' priority, and dress them up as such.
@@ -27,12 +32,16 @@
 			previewJob = SSjobs.get_by_title(job_high)
 	else
 		return
-	if(preview_job && previewJob)
+
+	if(!previewJob && mannequin.icon)
+		update_icon = TRUE // So we don't end up stuck with a borg/AI icon after setting their priority to non-high
+	else if(preview_job && previewJob)
 		mannequin.job = previewJob.title
 		var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(branches[previewJob.title])
 		var/datum/mil_rank/rank = GLOB.mil_branches.get_rank(branches[previewJob.title], ranks[previewJob.title])
 		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title], branch, rank)
 		update_icon = TRUE
+
 	if(!(mannequin.species.appearance_flags && mannequin.species.appearance_flags & SPECIES_APPEARANCE_HAS_UNDERWEAR))
 		if(all_underwear)
 			all_underwear.Cut()
@@ -50,8 +59,10 @@
 								permitted = 1
 				else
 					permitted = 1
+
 				if(G.whitelisted && !(mannequin.species.name in G.whitelisted))
 					permitted = 0
+
 				if(!permitted)
 					continue
 				if(G.slot && G.slot != slot_tie && !(G.slot in loadout_taken_slots) && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.display_name]))
@@ -65,8 +76,11 @@
 	var/static/icon/last_built_icon
 	if (!resize_only || !last_built_icon)
 		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)
+		if(!mannequin)
+			return
 		mannequin.delete_inventory(TRUE)
 		dress_preview_mob(mannequin)
+
 		last_built_icon = icon('icons/effects/128x48.dmi', bgstate)
 		last_built_icon.Scale(48+32, 16+32)
 		mannequin.dir = WEST
@@ -75,6 +89,7 @@
 		last_built_icon.Blend(getFlatIcon(mannequin, NORTH, always_use_defdir = TRUE), ICON_OVERLAY, 25, 17)
 		mannequin.dir = SOUTH
 		last_built_icon.Blend(getFlatIcon(mannequin, SOUTH, always_use_defdir = TRUE), ICON_OVERLAY, 49, 1)
+
 	preview_icon = new (last_built_icon)
 	var/scale = client.get_preference_value(/datum/client_preference/preview_scale)
 	switch (scale)

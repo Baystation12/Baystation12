@@ -405,3 +405,24 @@ h1.alert, h2.alert		{color: #a4bad6;}
 .ml-1 {margin-left: 1em;}
 .ml-2 {margin-left: 2em;}
 .ml-3 {margin-left: 3em;}
+
+.dt_1 {
+	font-weight: bold;
+	color: rgb(83, 107, 189);
+	text-shadow: 0 0 8px rgba(83, 107, 189, .4);
+}
+.dt_2 {
+	font-weight: bold;
+	color: rgb(91, 16, 212);
+	text-shadow: 0 0 8px rgba(91, 16, 212, .4);
+}
+.dt_3 {
+	font-weight: bold;
+	color: rgb(175, 48, 207);
+	text-shadow: 0 0 8px rgba(175, 48, 207, .4);
+}
+.dt_4 {
+	font-weight: bold;
+	color: rgb(229, 25, 219);
+	text-shadow: 0 0 8px rgba(229, 25, 219, .4);
+}

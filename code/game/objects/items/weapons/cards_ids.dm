@@ -285,8 +285,8 @@ var/global/const/NO_EMAG_ACT = -50
 		. += ", [assignment]"
 
 /obj/item/card/id/proc/set_id_photo(mob/M)
-	front = getFlatIcon(M, SOUTH, always_use_defdir = 1)
-	side = getFlatIcon(M, WEST, always_use_defdir = 1)
+	front = getFlatIcon(M, SOUTH, always_use_defdir = TRUE)
+	side = getFlatIcon(M, WEST, always_use_defdir = TRUE)
 
 /mob/proc/set_id_info(obj/item/card/id/id_card)
 	id_card.age = 0

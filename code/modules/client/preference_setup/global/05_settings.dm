@@ -53,7 +53,7 @@
 	for(var/cp in get_client_preferences())
 		var/datum/client_preference/client_pref = cp
 
-		if(!client_pref.may_set(pref_mob))
+		if(!client_pref.may_set(pref_mob.client))
 			continue
 
 		. += "<tr><td>[client_pref.description]: </td>"

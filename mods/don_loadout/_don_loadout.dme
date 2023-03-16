@@ -1,0 +1,27 @@
+#ifndef MODPACK_DON_LOADOUT
+#define MODPACK_DON_LOADOUT
+#include "_don_loadout.dm"
+
+#include "donations/donations_defines.dm"
+#include "donations/donations.dm"
+#include "donations/donator.dm"
+#include "donations/ooc_color.dm"
+
+#include "loadout/gear_tweaks.dm"
+#include "loadout/gear.dm"
+#include "loadout/helpers.dm"
+#include "loadout/loadout.dm"
+#include "loadout/preferences.dm"
+
+#include "loadout/categories/categories.dm"
+#include "loadout/categories/masks.dm"
+#include "loadout/categories/tiers.dm"
+
+#include "tweaked/global.dm"
+#include "tweaked/general/01_basic.dm"
+#include "tweaked/general/02_body.dm"
+#include "tweaked/general/03_equipment.dm"
+#include "tweaked/general/04_flavor.dm"
+#include "tweaked/general/05_preview.dm"
+
+#endif
