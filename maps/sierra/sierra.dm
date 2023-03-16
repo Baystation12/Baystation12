@@ -141,7 +141,7 @@
 	#include "../away/skrellscoutship/skrellscoutship.dm"
 	#include "../away/slavers/slavers_base.dm"
 	#include "../away/voxship/voxship.dm"
-	#include "../event/iccgn_ship/icgnv_hound.dm"
+	// #include "../event/iccgn_ship/icgnv_hound.dm" // SIERRA TODO: Пофиксить или удалить
 	#include "../../mods/species/resomi/_resomi.dme"
 	#include "../../mods/species/tajara/_tajara.dme"
 	#include "../../mods/sofa/_sofa.dme"
