@@ -15,7 +15,7 @@
 	player_cost = 4
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/vox_ship, /datum/shuttle/autodock/overmap/vox_lander)
 	area_usage_test_exempted_root_areas = list(/area/voxship)
-	spawn_weight = 0.67
+	spawn_weight = 0 // TMP: was 0.67
 
 /obj/effect/overmap/visitable/sector/vox_scav_ship
 	name = "small asteroid cluster"

@@ -17,7 +17,7 @@
 		/area/ship/skrellscoutship/externalwing/port = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/ship/skrellscoutship/externalwing/starboard = NO_SCRUBBER|NO_VENT|NO_APC
 	)
-	spawn_weight = 0.67
+	spawn_weight = 0 // TMP: was 0.67
 
 /obj/effect/overmap/visitable/sector/skrellscoutspace
 	name = "Empty Sector"

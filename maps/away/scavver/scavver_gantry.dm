@@ -27,7 +27,7 @@
 		/area/scavver/gantry/lift = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/scavver/harvestpod = NO_SCRUBBER|NO_VENT
 	)
-	spawn_weight = 0.67
+	spawn_weight = 0 // TMP: was 0.67
 
 /obj/effect/submap_landmark/joinable_submap/scavver_gantry
 	name =  "Salvage Gantry"
