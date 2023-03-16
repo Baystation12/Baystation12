@@ -202,7 +202,7 @@
 		emagged = TRUE
 		if(locked)
 			locked = 0
-			to_chat(user, SPAN_WARNING("You bypass [src]'s controls."))
+			USE_FEEDBACK_FAILURE("You bypass [src]'s controls.")
 		return 1
 
 /obj/vehicle/proc/explode()

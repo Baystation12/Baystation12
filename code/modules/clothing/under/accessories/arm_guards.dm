@@ -24,6 +24,10 @@
 	drop_sound = 'sound/items/drop/axe.ogg'
 	pickup_sound = 'sound/items/pickup/axe.ogg'
 
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_modular_armor_unathi.dmi'
+	)
+
 
 /obj/item/clothing/accessory/arm_guards/blue
 	desc = "A pair of blue arm pads reinforced with armor plating. Attaches to a plate carrier."

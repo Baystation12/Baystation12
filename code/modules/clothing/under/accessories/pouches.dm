@@ -12,6 +12,10 @@
 	slot = ACCESSORY_SLOT_ARMOR_S
 	slots = 2 STORAGE_SLOTS
 
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_modular_armor_unathi.dmi'
+		)
+
 
 /obj/item/clothing/accessory/storage/pouches/blue
 	desc = "A collection of blue pouches that can be attached to a plate carrier. Carries up to two items."

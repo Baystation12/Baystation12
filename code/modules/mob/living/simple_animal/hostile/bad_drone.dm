@@ -44,3 +44,47 @@
 
 /datum/say_list/rogue_drone
 	speak = list("Removing organic waste.","Pest control in progress.","Seize the means of maintenance!", "You have nothing to lose but your laws!")
+
+/mob/living/simple_animal/hostile/rogue_drone/hijacked
+	name = "hijacked drone"
+	desc = "A small, junky-looking robot. It looks angry. The design is similar to those utilised on SCG vessels."
+	icon_state = "hivedrone"
+	icon_dead = "hivedrone_dead"
+	faction = "hivebot"
+	speed = 6
+
+	ai_holder = /datum/ai_holder/simple_animal/rogue_drone/hijacked
+	say_list_type = /datum/say_list/hijacked_drone
+
+/*
+AI
+*/
+
+/datum/ai_holder/simple_animal/rogue_drone/hijacked
+	speak_chance = 1
+	threaten = TRUE
+	threaten_delay = 2 SECOND
+	threaten_timeout = 30 SECONDS
+
+/*
+Say List
+*/
+
+/datum/say_list/hijacked_drone
+	speak = list(
+		"Li-i-ink to ship intelligence systems lost, entering autonomous mode.",
+		"New security parameters detected, resynchronizing protocols...",
+		"Datalink corrupted, broadcasting on emergency emission channels..."
+	)
+	say_threaten = list(
+		"U-u-u-unknown biological organism located, analyzing...",
+		"S-s-scanning unidentified subject...",
+		"Possible hosssstile agent detected, obtaining classification..."
+	)
+	say_maybe_target = list("Possible threat detected. Investigating.", "Anomaly detected, commencing vis-visual sweep.", "Investigating.")
+	say_escalate = list(
+		"Enemy agent confirmed. Engaging.",
+		"Hossssstile class-classification confirmed. Pacifying.",
+		"Err-rr-ror, seucrity subroutines corrupted. Assuming target as: Hostile."
+	)
+	say_stand_down = list("Visual lost.", "Error: Target lost.", "Error: Target parameter null.")

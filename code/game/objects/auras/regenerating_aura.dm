@@ -4,10 +4,11 @@
 	var/fire_mult = 1
 	var/tox_mult = 1
 
-/obj/aura/regenerating/life_tick()
+/obj/aura/regenerating/aura_check_life()
 	user.adjustBruteLoss(-brute_mult)
 	user.adjustFireLoss(-fire_mult)
 	user.adjustToxLoss(-tox_mult)
+	return EMPTY_BITFIELD
 
 /obj/aura/regenerating/human
 	var/nutrition_damage_mult = 1 //How much nutrition it takes to heal regular damage
@@ -24,15 +25,15 @@
 /obj/aura/regenerating/human/proc/external_regeneration_effect(obj/item/organ/external/O, mob/living/carbon/human/H)
 	return
 
-/obj/aura/regenerating/human/life_tick()
+/obj/aura/regenerating/human/aura_check_life()
 	var/mob/living/carbon/human/H = user
 	if(!istype(H))
 		CRASH("Someone gave [user.type] a [src.type] aura. This is invalid.")
 	if(!innate_heal || H.InStasis() || H.stat == DEAD)
-		return 0
+		return EMPTY_BITFIELD
 	if(H.nutrition < nutrition_damage_mult)
 		low_nut_warning()
-		return 0
+		return EMPTY_BITFIELD
 
 	if(brute_mult && H.getBruteLoss())
 		H.adjustBruteLoss(-brute_mult * config.organ_regeneration_multiplier)
@@ -45,7 +46,7 @@
 		H.adjust_nutrition(-nutrition_damage_mult)
 
 	if(!can_regenerate_organs())
-		return 1
+		return AURA_CANCEL
 	if(organ_mult)
 		if(prob(10) && H.nutrition >= 150 && !H.getBruteLoss() && !H.getFireLoss())
 			var/obj/item/organ/external/head/D = H.organs_by_name["head"]
@@ -92,7 +93,7 @@
 				for(var/datum/wound/W in E.wounds)
 					if(W.wound_damage() == 0 && prob(50))
 						qdel(W)
-	return 1
+	return AURA_CANCEL
 
 /obj/aura/regenerating/human/proc/low_nut_warning(wound_type)
 	if (last_nutrition_warning + 1 MINUTE < world.time)
@@ -131,21 +132,24 @@
 	return ..()
 
 // Default return; we're just logging.
-/obj/aura/regenerating/human/unathi/attackby()
+/obj/aura/regenerating/human/unathi/aura_check_weapon(obj/item/weapon, mob/attacker, click_params)
 	toggle_blocked_until = max(world.time + 1 MINUTE, toggle_blocked_until)
+	return EMPTY_BITFIELD
 
-/obj/aura/regenerating/human/unathi/hitby()
+/obj/aura/regenerating/human/unathi/aura_check_thrown(atom/movable/thrown_atom, datum/thrownthing/thrown_datum)
 	toggle_blocked_until = max(world.time + 1 MINUTE, toggle_blocked_until)
+	return EMPTY_BITFIELD
 
-/obj/aura/regenerating/human/unathi/bullet_act()
+/obj/aura/regenerating/human/unathi/aura_check_bullet(obj/item/projectile/proj, def_zone)
 	toggle_blocked_until = max(world.time + 1 MINUTE, toggle_blocked_until)
+	return EMPTY_BITFIELD
 
-/obj/aura/regenerating/human/unathi/life_tick()
+/obj/aura/regenerating/human/unathi/aura_check_life()
 	var/mob/living/carbon/human/H = user
 	if(innate_heal && istype(H) && H.stat != DEAD && H.nutrition < 50)
 		H.apply_damage(5, DAMAGE_TOXIN)
 		H.adjust_nutrition(3)
-		return 1
+		return AURA_FALSE
 	return ..()
 
 /obj/aura/regenerating/human/unathi/can_regenerate_organs()

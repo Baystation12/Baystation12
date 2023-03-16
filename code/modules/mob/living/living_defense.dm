@@ -55,6 +55,30 @@
 /mob/living/get_bullet_impact_effect_type(def_zone)
 	return BULLET_IMPACT_MEAT
 
+/**
+ * Checks the mob for auras and interactions of the given type.
+ *
+ * Calls one of the `aura_check_*` procs for each aura in the mobs `auras` list, based on type provided.
+ * All parameters after `type` are passed on to the called proc.
+ *
+ * **Parameters**:
+ * - `type` (String - One of `AURA_TYPE_*`) - The type of check to be performed any any found auras.
+ * - Additional parameters depend on aura type:
+ *   - `AURA_TYPE_WEAPON (obj/item/weapon, mob/user, click_params)`:
+ *     - `weapon` - The item used to attack/interact with the mob.
+ *     - `attacker` - The mob performing the attack/interaction.
+ *     - `click_params` - List of click parameters.
+ *   - `AURA_TYPE_BULLET (obj/item/projectile/proj, def_zone)`:
+ *     - `proj` - Projectile impacting the mob.
+ *     - `def_zone` - Impacted body part target zone.
+ *   - `AURA_TYPE_THROWN (atom/movable/thrown_atom, datum/thrownthing/thrown_datum)`:
+ *     - `thrown_atom` - Atom impacting the mob.
+ *     - `thrown_datum` - thrownthing datum instance for the throw chain.
+ *   - `AURA_TYPE_LIFE` (No additional parameters)
+ *
+ * Returns boolean - `TRUE` if no auras were found or if no auras passed `AURA_FALSE` in their checks.
+ * Generally, a `FALSE` return value means the aura blocks further interaction.
+ */
 /mob/living/proc/aura_check(type)
 	if(!auras)
 		return TRUE
@@ -62,16 +86,16 @@
 	var/list/newargs = args - args[1]
 	for(var/a in auras)
 		var/obj/aura/aura = a
-		var/result = 0
+		var/result = EMPTY_BITFIELD
 		switch(type)
 			if(AURA_TYPE_WEAPON)
-				result = aura.attackby(arglist(newargs))
+				result = aura.aura_check_weapon(arglist(newargs))
 			if(AURA_TYPE_BULLET)
-				result = aura.bullet_act(arglist(newargs))
+				result = aura.aura_check_bullet(arglist(newargs))
 			if(AURA_TYPE_THROWN)
-				result = aura.hitby(arglist(newargs))
+				result = aura.aura_check_thrown(arglist(newargs))
 			if(AURA_TYPE_LIFE)
-				result = aura.life_tick()
+				result = aura.aura_check_life()
 		if(result & AURA_FALSE)
 			. = FALSE
 		if(result & AURA_CANCEL)

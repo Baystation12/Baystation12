@@ -46,18 +46,127 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * Returns boolean to indicate whether the attack call was handled or not.
  */
 /obj/item/proc/resolve_attackby(atom/A, mob/user, click_params)
-	if(!(item_flags & ITEM_FLAG_NO_PRINT))
-		add_fingerprint(user)
+	if (!A.can_use_item(src, user, click_params))
+		return FALSE
+	A.pre_use_item(src, user, click_params)
+	var/use_call
 	if ((item_flags & ITEM_FLAG_TRY_ATTACK) && attack(A, user))
-		return TRUE
-	if (A == user)
+		use_call = "attack"
+		. = TRUE
+	if (!. && A == user)
+		use_call = "user"
 		. = user.use_user(src, click_params)
 	if (!. && user.a_intent == I_HURT)
+		use_call = "weapon"
 		. = A.use_weapon(src, user, click_params)
 	if (!.)
+		use_call = "tool"
 		. = A.use_tool(src, user, click_params)
 	if (!.)
-		return A.attackby(src, user, click_params)
+		use_call = "attackby"
+		. = A.attackby(src, user, click_params)
+	if (!.)
+		use_call = null
+	A.post_use_item(src, user, ., use_call, click_params)
+
+
+/**
+ * Handler for operations to occur before running the chain of use_* procs. Always called.
+ *
+ * By default, this does nothing.
+ *
+ * **Parameters**:
+ * - `tool` - The item being used.
+ * - `user` - The mob performing the interaction.
+ * - `click_params` - List of click parameters.
+ *
+ * Has no return value.
+ */
+/atom/proc/pre_use_item(obj/item/tool, mob/user, click_params)
+	return
+
+
+/**
+ * Handler for operations to occur after running the chain of use_* procs. Always called.
+ *
+ * By default, this adds fingerprints to the atom and tool.
+ *
+ * **Parameters**:
+ * - `tool` - The item being used.
+ * - `user` - The mob performing the interaction.
+ * - `interaction_handled` (boolean) - Whether or not the use call was handled.
+ * - `use_call` (string) - The use call proc that handled the interaction, or null.
+ * - `click_params` - List of click parameters.
+ *
+ * Has no return value.
+ */
+/atom/proc/post_use_item(obj/item/tool, mob/user, interaction_handled, use_call, click_params)
+	if (interaction_handled)
+		// Fingerprints
+		if (!HAS_FLAGS(tool.item_flags, ITEM_FLAG_NO_PRINT))
+			tool.add_fingerprint(user)
+			add_fingerprint(user, tool = tool)
+
+
+/**
+ * Whether or not an item interaction is possible. Checked before any use calls.
+ */
+/atom/proc/can_use_item(obj/item/tool, mob/user, click_params)
+	// No Tools flag check
+	if (HAS_FLAGS(atom_flags, ATOM_FLAG_NO_TOOLS))
+		USE_FEEDBACK_FAILURE("\The [src] can't be interacted with.")
+		return FALSE
+
+	return TRUE
+
+
+/obj/can_use_item(obj/item/tool, mob/user, click_params)
+	. = ..()
+	if (!.)
+		return
+
+	// Block interacting with things under platings - In case of t-ray shennanigans or layering glitches
+	var/turf/T = get_turf(src)
+	if (hides_under_flooring() && !T.is_plating())
+		USE_FEEDBACK_FAILURE("You must remove the plating before you can interact with \the [src].")
+		return FALSE
+
+
+/**
+ * Validates the mob can perform general interactions. Primarily intended for use after inputs, sleeps, timers, etc to ensure the action can still be completed.
+ *
+ * **Parameters**:
+ * - `target` - The atom being interacted with.
+ * - `tool` - The item being used to interact. Optional. Defaults to `FALSE` to differentiate between a nulled reference and an empty parameter.
+ * - `flags` - Bitflags of additional settings. See `code\__defines\misc.dm`.
+ *
+ * Returns boolean.
+ */
+/mob/proc/use_sanity_check(atom/target, obj/item/tool = FALSE, flags = EMPTY_BITFIELD)
+	if (QDELETED(src))
+		return FALSE
+	var/silent = HAS_FLAGS(flags, SANITY_CHECK_SILENT)
+	if (QDELETED(target))
+		if (!silent)
+			FEEDBACK_FAILURE(src, "[target ? "\The [target]" : "The object you were interacting with"] no longer exists.")
+		return FALSE
+	if (tool != FALSE && QDELETED(tool))
+		if (!silent)
+			FEEDBACK_FAILURE(src, "[tool ? "\The [tool]" : "The item you were using"] no longer exists.")
+		return FALSE
+	if (!Adjacent(target))
+		if (!silent)
+			FEEDBACK_FAILURE(src, "You must remain next to \the [target].")
+		return FALSE
+	if (HAS_FLAGS(flags, SANITY_CHECK_TOOL_UNEQUIP) && !canUnEquip(tool))
+		if (!silent)
+			FEEDBACK_UNEQUIP_FAILURE(src, tool)
+		return FALSE
+	if (target.loc == src && HAS_FLAGS(flags, SANITY_CHECK_TARGET_UNEQUIP) && !canUnEquip(target))
+		if (!silent)
+			FEEDBACK_UNEQUIP_FAILURE(src, target)
+		return FALSE
+	return TRUE
 
 
 /**
@@ -81,10 +190,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (zone_sel.selecting == BP_MOUTH && can_devour(tool, silent = TRUE))
 		var/obj/item/blocked = check_mouth_coverage()
 		if (blocked)
-			to_chat(src, SPAN_WARNING("\The [blocked] is in the way!"))
+			FEEDBACK_FAILURE(src, "\The [blocked] is in the way!")
 			return TRUE
-		if (devour(tool))
-			return TRUE
+		devour(tool)
+		return TRUE
 
 	return ..()
 
@@ -118,17 +227,17 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	SHOULD_CALL_PARENT(TRUE)
 	// Standardized damage
 	if (weapon.force > 0 && get_max_health() && !HAS_FLAGS(weapon.item_flags, ITEM_FLAG_NO_BLUDGEON))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.setClickCooldown(user.get_attack_speed(weapon))
 		user.do_attack_animation(src)
 		var/damage_flags = weapon.damage_flags()
 		if (!can_damage_health(weapon.force, weapon.damtype, damage_flags))
-			playsound(src, damage_hitsound, 50)
+			playsound(src, damage_hitsound, 50, TRUE)
 			user.visible_message(
 				SPAN_WARNING("\The [user] hits \the [src] with \a [weapon], but it bounces off!"),
 				SPAN_WARNING("You hit \the [src] with \the [weapon], but it bounces off!")
 			)
 			return TRUE
-		playsound(src, damage_hitsound, 75)
+		playsound(src, damage_hitsound, 75, TRUE)
 		user.visible_message(
 			SPAN_DANGER("\The [user] hits \the [src] with \a [weapon]!"),
 			SPAN_DANGER("You hit \the [src] with \the [weapon]!")

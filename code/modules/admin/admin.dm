@@ -295,6 +295,8 @@ var/global/floorIsLava = 0
 /datum/player_info/var/rank //rank of admin who made the notes
 /datum/player_info/var/content // text content of the information
 /datum/player_info/var/timestamp // Because this is bloody annoying
+/// Round ID of the note
+/datum/player_info/var/game_id
 
 #define PLAYER_NOTES_ENTRIES_PER_PAGE 50
 /datum/admins/proc/PlayerNotes()
@@ -418,6 +420,7 @@ var/global/floorIsLava = 0
 					<b>[comment.author || "(not recorded)"]</b>, \
 					<b>[comment.rank || "(not recorded)"]</b>, \
 					on <b>[comment.timestamp || "(not recorded)"]</b>\
+					[comment.game_id ? "<br>Round ID: <b>[comment.game_id]</b>" : null]\
 				</div>\
 				[remove_button]\
 			</div>\

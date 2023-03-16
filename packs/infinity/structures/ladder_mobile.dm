@@ -87,7 +87,7 @@
 	set src in oview(1)
 
 	if(usr.incapacitated() || !usr.IsAdvancedToolUser() || !ishuman(usr))
-		to_chat(usr, SPAN_WARNING("You can't do that right now!"))
+		FEEDBACK_FAILURE(usr, "You can't do that right now!")
 		return
 
 	var/mob/living/carbon/human/H = usr
@@ -98,7 +98,7 @@
 	)
 
 	if(!do_after(H, 30, src))
-		to_chat(H, SPAN_WARNING("You are interrupted!"))
+		FEEDBACK_FAILURE(H, "You are interrupted!")
 		return
 
 	if(QDELETED(src))

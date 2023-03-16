@@ -709,31 +709,31 @@ About the new airlock wires panel:
 		switch(state)
 			if(AIRLOCK_CLOSED)
 				if(lights && locked)
-					lights_overlay = bolts_file
+					lights_overlay = overlay_image(bolts_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 					set_light(0.25, 0.1, 1, 2, COLOR_RED_LIGHT)
 
 			if(AIRLOCK_DENY)
 				if(lights)
-					lights_overlay = deny_file
+					lights_overlay = overlay_image(deny_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 					set_light(0.25, 0.1, 1, 2, COLOR_RED_LIGHT)
 
 			if(AIRLOCK_EMAG)
-				sparks_overlay = emag_file
+				sparks_overlay = overlay_image(emag_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 
 			if(AIRLOCK_CLOSING)
 				if(lights)
-					lights_overlay = lights_file
+					lights_overlay = overlay_image(lights_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 					set_light(0.25, 0.1, 1, 2, COLOR_LIME)
 
 			if(AIRLOCK_OPENING)
 				if(lights)
-					lights_overlay = lights_file
+					lights_overlay = overlay_image(lights_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 					set_light(0.25, 0.1, 1, 2, COLOR_LIME)
 
 		if(MACHINE_IS_BROKEN(src))
-			damage_overlay = sparks_broken_file
+			damage_overlay = overlay_image(sparks_broken_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 		else if (get_damage_percentage() >= 25)
-			damage_overlay = sparks_damaged_file
+			damage_overlay = overlay_image(sparks_damaged_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 
 	if(welded)
 		weld_overlay = welded_file
@@ -1214,9 +1214,9 @@ About the new airlock wires panel:
 	qdel(src)
 
 	return da
-/obj/machinery/door/airlock/phoron/attackby(C as obj, mob/user as mob)
+/obj/machinery/door/airlock/phoron/attackby(atom/C, mob/user)
 	if(C)
-		ignite(is_hot(C))
+		ignite(C.IsHeatSource())
 	..()
 
 /obj/machinery/door/airlock/set_broken(new_state)

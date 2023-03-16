@@ -21,6 +21,10 @@
 	drop_sound = 'sound/items/drop/boots.ogg'
 	pickup_sound = 'sound/items/pickup/boots.ogg'
 
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_modular_armor_unathi.dmi'
+	)
+
 
 /obj/item/clothing/accessory/leg_guards/blue
 	desc = "A pair of armored leg pads in blue. Attaches to a plate carrier."

@@ -7,7 +7,7 @@
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_under_vox.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_under_gas.dmi',
 		SPECIES_MONARCH_QUEEN = 'icons/mob/species/nabber/msq/onmob_under_msq.dmi',
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi',
 		SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/onmob_under_resomi.dmi'
 	)
 	icon_state = "greyutility"

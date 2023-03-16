@@ -8,6 +8,7 @@
 	var/mob/M = target.loc
 	if(istype(M))
 		M.drop_from_inventory(target)
+		M.put_in_hands(src)
 	target.forceMove(src)
 	current_crafting_stage = initial_stage
 	update_icon()
@@ -44,6 +45,8 @@
 		if(ismob(src.loc))
 			var/mob/M = src.loc
 			M.drop_from_inventory(src)
+			if(isitem(product))
+				M.put_in_hands(product)
 		qdel_self()
 	else
 		current_crafting_stage = next_stage

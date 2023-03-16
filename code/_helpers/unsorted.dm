@@ -871,41 +871,6 @@ GLOBAL_LIST_INIT(duplicate_object_disallowed_vars, list(
 	return TRUE
 
 
-/proc/is_hot(obj/item/W as obj)
-	switch(W.type)
-		if(/obj/item/weldingtool)
-			var/obj/item/weldingtool/WT = W
-			if(WT.isOn())
-				return 3800
-			else
-				return 0
-		if(/obj/item/flame/lighter)
-			if(W:lit)
-				return 1500
-			else
-				return 0
-		if(/obj/item/flame/match)
-			if(W:lit)
-				return 1000
-			else
-				return 0
-		if(/obj/item/clothing/mask/smokable/cigarette)
-			if(W:lit)
-				return 1000
-			else
-				return 0
-		if(/obj/item/gun/energy/plasmacutter)
-			return 3800
-		if(/obj/item/melee/energy)
-			return 3500
-		if(/obj/item/blob_tendril)
-			if (W.damtype == DAMAGE_BURN)
-				return 1000
-			else
-				return 0
-		else
-			return 0
-
 //Whether or not the given item counts as sharp in terms of dealing damage
 /proc/is_sharp(obj/O as obj)
 	if (!O) return 0

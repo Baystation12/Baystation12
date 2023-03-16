@@ -42,12 +42,12 @@
 		var/obj/item/organ/internal/augment/augment = item
 		var/obj/item/organ/external/parent = augment.get_valid_parent_organ(subject)
 		if (!parent)
-			to_chat(subject, SPAN_WARNING("Failed to find a valid organ to install \the [augment] into!"))
+			FEEDBACK_FAILURE(subject, "Failed to find a valid organ to install \the [augment] into!")
 			qdel(augment)
 			return
 		var/surgery_step = GET_SINGLETON(/singleton/surgery_step/internal/replace_organ)
 		if (augment.surgery_configure(subject, subject, parent, null, surgery_step))
-			to_chat(subject, SPAN_WARNING("Failed to set up \the [augment] for installation in your [parent.name]!"))
+			FEEDBACK_FAILURE(subject, "Failed to set up \the [augment] for installation in your [parent.name]!")
 			qdel(augment)
 			return
 		augment.forceMove(subject)
@@ -62,6 +62,6 @@
 	else if (subject.put_in_hands(item))
 		to_chat(subject, SPAN_NOTICE("Placing \the [item] in your hands!"))
 	else
-		to_chat(subject, SPAN_WARNING("Dropping \the [item] on the ground!"))
+		FEEDBACK_FAILURE(subject, "Dropping \the [item] on the ground!")
 		item.forceMove(get_turf(subject))
 		item.add_fingerprint(subject)

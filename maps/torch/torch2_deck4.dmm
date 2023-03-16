@@ -15780,6 +15780,11 @@
 	dir = 4;
 	pixel_x = 21
 	},
+/obj/structure/hygiene/sink{
+	dir = 4;
+	pixel_x = 11;
+	pixel_y = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/laundry)
 "YH" = (

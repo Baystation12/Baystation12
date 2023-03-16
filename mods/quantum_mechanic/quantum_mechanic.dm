@@ -161,7 +161,7 @@
 		return TRUE
 
 	if(!istype(user, /mob/living/carbon/human/quantum))
-		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
+		USE_FEEDBACK_FAILURE("Your hand seems to go right through \the [src]. It's like it doesn't exist.")
 		return TRUE
 
 	return ..()
@@ -179,7 +179,7 @@
 		return TRUE
 
 	if(!istype(user, /mob/living/carbon/human/quantum))
-		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
+		USE_FEEDBACK_FAILURE("Your hand seems to go right through \the [src]. It's like it doesn't exist.")
 		return TRUE
 
 	return ..()
@@ -257,7 +257,7 @@
 		return TRUE
 
 	if(!istype(user, /mob/living/carbon/human/quantum))
-		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
+		USE_FEEDBACK_FAILURE("Your hand seems to go right through \the [src]. It's like it doesn't exist.")
 		return TRUE
 
 	return ..()
@@ -274,7 +274,7 @@
 		return TRUE
 
 	if(!istype(user, /mob/living/carbon/human/quantum))
-		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
+		USE_FEEDBACK_FAILURE("Your hand seems to go right through \the [src]. It's like it doesn't exist.")
 		return TRUE
 
 	return ..()
@@ -311,7 +311,7 @@
 		return TRUE
 
 	if(!istype(user, /mob/living/carbon/human/quantum))
-		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
+		USE_FEEDBACK_FAILURE("Your hand seems to go right through \the [src]. It's like it doesn't exist.")
 		return TRUE
 
 	return ..()
@@ -327,7 +327,7 @@
 		return TRUE
 
 	if(!istype(user, /mob/living/carbon/human/quantum))
-		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
+		USE_FEEDBACK_FAILURE("Your hand seems to go right through \the [src]. It's like it doesn't exist.")
 		return TRUE
 
 	return ..()
@@ -345,7 +345,7 @@
 		return TRUE
 
 	if(!istype(user, /mob/living/carbon/human/quantum))
-		to_chat(user, SPAN_WARNING("Your hand seems to go right through \the [src]. It's like it doesn't exist."))
+		USE_FEEDBACK_FAILURE("Your hand seems to go right through \the [src]. It's like it doesn't exist.")
 		return TRUE
 
 	return ..()

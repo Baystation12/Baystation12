@@ -32,18 +32,6 @@
 	accessory_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/onmob_accessories_solgov.dmi', slot_wear_suit_str = 'maps/torch/icons/mob/onmob_accessories_solgov.dmi')
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/clothing/accessory/solgov/rank
-	name = "ranks"
-	desc = "Insignia denoting rank of some kind. These appear blank."
-	icon_state = "fleetrank"
-	on_rolled_down = ACCESSORY_ROLLED_NONE
-	slot = ACCESSORY_SLOT_RANK
-	gender = PLURAL
-	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_accessories_sol_unathi.dmi'
-		)
-
 /obj/item/clothing/accessory/solgov/rank/fleet
 	name = "naval ranks"
 	desc = "Insignia denoting naval rank of some kind. These appear blank."

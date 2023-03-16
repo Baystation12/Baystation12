@@ -237,6 +237,7 @@
 	var/storage_amount = BASE_STORAGE_COST(new_box.max_w_class)
 	new_box.max_storage_space = rand(storage_amount, storage_amount * 10)
 	new_box.icon_state = "box"
+	new_box.foldable = null
 	if(prob(30))
 		apply_image_decorations = 1
 	return new_box

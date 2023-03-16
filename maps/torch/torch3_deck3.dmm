@@ -714,13 +714,6 @@
 	department = "Torch - Chief Steward's Office"
 	},
 /obj/item/device/megaphone,
-/obj/effect/floor_decal/carpet/green{
-	dir = 4
-	},
-/obj/effect/floor_decal/carpet/green,
-/obj/effect/floor_decal/carpet/green{
-	dir = 6
-	},
 /turf/simulated/floor/carpet/green,
 /area/crew_quarters/chief_steward)
 "bY" = (
@@ -798,7 +791,6 @@
 /turf/simulated/floor/tiled,
 /area/hydroponics)
 "ce" = (
-/obj/item/screwdriver,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -957,15 +949,15 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/galley)
 "ct" = (
-/obj/machinery/door/airlock/command{
-	autoset_access = 0;
-	name = "Officer's Mess";
-	req_access = newlist()
-	},
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/command{
+	autoset_access = 0;
+	name = "Officer's Mess";
+	req_access = list("ACCESS_TORCH_O_MESS", "ACCESS_TORCH_CREW")
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "cu" = (
@@ -1444,7 +1436,7 @@
 	},
 /obj/machinery/light_switch{
 	pixel_x = 24;
-	pixel_y = 28
+	pixel_y = 26
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
@@ -1491,11 +1483,15 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/machinery/cooker/fryer,
 /obj/machinery/button/blast_door{
 	id_tag = "kitchen";
 	name = "Kitchen Shutters";
 	pixel_y = 24
+	},
+/obj/structure/table/marble,
+/obj/machinery/microwave{
+	pixel_x = -1;
+	pixel_y = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
@@ -1858,11 +1854,7 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/obj/structure/table/marble,
-/obj/machinery/microwave{
-	pixel_x = -1;
-	pixel_y = 6
-	},
+/obj/machinery/cooker/fryer,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "et" = (
@@ -2366,6 +2358,9 @@
 "fy" = (
 /obj/structure/closet/secure_closet/freezer/meat,
 /obj/item/reagent_containers/food/condiment/barbecue,
+/obj/structure/window/basic{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
 "fz" = (
@@ -3183,6 +3178,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/closet/secure_closet/freezer/meat,
 /obj/item/reagent_containers/food/condiment/enzyme,
+/obj/structure/window/basic{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
 "hn" = (
@@ -3312,8 +3310,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/jukebox{
-	pixel_y = 4
+	pixel_y = 21
 	},
+/obj/structure/table/reinforced,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "hv" = (
@@ -3953,9 +3952,6 @@
 	pixel_x = 2;
 	pixel_y = 6
 	},
-/obj/effect/floor_decal/carpet/green{
-	dir = 4
-	},
 /turf/simulated/floor/carpet/green,
 /area/crew_quarters/chief_steward)
 "iO" = (
@@ -4063,7 +4059,6 @@
 /area/crew_quarters/galley)
 "iY" = (
 /obj/machinery/disposal,
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
@@ -4073,6 +4068,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "iZ" = (
@@ -4737,9 +4733,6 @@
 /obj/structure/bed/chair/comfy/green{
 	dir = 4
 	},
-/obj/effect/floor_decal/carpet/green{
-	dir = 8
-	},
 /turf/simulated/floor/carpet/green,
 /area/crew_quarters/chief_steward)
 "kx" = (
@@ -5192,6 +5185,7 @@
 /obj/structure/table/standard,
 /obj/item/material/hatchet,
 /obj/item/material/minihoe,
+/obj/item/screwdriver,
 /turf/simulated/floor/tiled,
 /area/hydroponics)
 "lB" = (
@@ -7096,6 +7090,9 @@
 	dir = 8
 	},
 /obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/window/basic{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
 "qo" = (
@@ -8995,6 +8992,14 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/crew_quarters/commissary)
+"vb" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/carpet/green,
+/area/crew_quarters/chief_steward)
 "vc" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -10657,6 +10662,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
+"zQ" = (
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/forestarboard)
 "zR" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/ladder/updown,
@@ -11325,13 +11337,6 @@
 /obj/machinery/computer/modular/preset/civilian{
 	dir = 1;
 	icon_state = "console"
-	},
-/obj/effect/floor_decal/carpet/green{
-	dir = 8
-	},
-/obj/effect/floor_decal/carpet/green,
-/obj/effect/floor_decal/carpet/green{
-	dir = 10
 	},
 /obj/machinery/alarm{
 	dir = 1;
@@ -12509,15 +12514,6 @@
 	id_tag = "cs_door";
 	name = "Chief Steward Office Door Control";
 	pixel_y = 35
-	},
-/obj/effect/floor_decal/carpet/green{
-	dir = 1
-	},
-/obj/effect/floor_decal/carpet/green{
-	dir = 8
-	},
-/obj/effect/floor_decal/carpet/green{
-	dir = 9
 	},
 /turf/simulated/floor/carpet/green,
 /area/crew_quarters/chief_steward)
@@ -18045,22 +18041,16 @@
 /turf/simulated/floor/wood/maple,
 /area/chapel/main)
 "SX" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/carpet/green{
-	dir = 1
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/carpet/green{
-	dir = 4
-	},
-/obj/effect/floor_decal/carpet/green{
-	dir = 5
-	},
-/turf/simulated/floor/carpet/green,
-/area/crew_quarters/chief_steward)
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/forestarboard)
 "SY" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/computer/modular/preset/engineering{
@@ -18373,7 +18363,7 @@
 	},
 /obj/structure/hygiene/sink/kitchen{
 	dir = 4;
-	pixel_x = -30
+	pixel_x = -23
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
@@ -29893,7 +29883,7 @@ yu
 rN
 PH
 GV
-SX
+vb
 iN
 bT
 Kd
@@ -34515,7 +34505,7 @@ aO
 aO
 aO
 cK
-bu
+SX
 cG
 fi
 cG
@@ -34717,8 +34707,8 @@ aO
 aO
 aO
 cK
+zQ
 bu
-cG
 fj
 gp
 qh
@@ -34919,7 +34909,7 @@ aO
 aO
 aO
 cK
-bu
+cG
 dy
 dy
 dy
@@ -35121,7 +35111,7 @@ aO
 aO
 aO
 cK
-bu
+bs
 dy
 AX
 Ry

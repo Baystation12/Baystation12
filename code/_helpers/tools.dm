@@ -92,3 +92,23 @@
 
 /// True when A exists and can be used as a hatchet.
 #define isHatchet(A) (A?.IsHatchet())
+
+
+/// True when this atom can be used as a flame source. This is for open flames.
+/atom/proc/IsFlameSource()
+	return FALSE
+
+/// True when A exists and can be used as a flame source.
+#define isFlameSource(A) (A?.IsFlameSource())
+
+
+/// Returns an integer value of temperature when this atom can be used as a heat source. This is for hot objects.
+/atom/proc/IsHeatSource()
+	return 0
+
+/// 0 if A does not exist, or the heat value of A
+#define isHeatSource(A) (A ? A.IsHeatSource() : 0)
+
+
+/// True when A exists and is either a flame or heat source
+#define isFlameOrHeatSource(A) (A && (A.IsFlameSource() || !!A.IsHeatSource()))

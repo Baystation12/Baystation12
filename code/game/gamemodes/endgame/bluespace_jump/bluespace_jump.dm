@@ -119,23 +119,47 @@
 	return daddy?.examine(arglist(args))
 
 /obj/effect/bluegoast/proc/blueswitch()
-	var/mob/living/carbon/human/H
-	if(ishuman(daddy))
-		H = new(get_turf(src), daddy.species.name)
-		H.dna = daddy.dna.Clone()
-		H.sync_organ_dna()
-		H.UpdateAppearance()
-		for(var/obj/item/entry in daddy.get_equipped_items(TRUE))
-			daddy.remove_from_mob(entry) //steals instead of copies so we don't end up with duplicates
-			H.equip_to_appropriate_slot(entry)
-	else
-		H = new daddy.type(get_turf(src))
-		H.appearance = daddy.appearance
-
-	H.real_name = daddy.real_name
-	H.flavor_text = daddy.flavor_text
-	daddy.dust()
+	daddy.blueswitch(src)
 	qdel(src)
+
+
+/**
+ * Handles applying blueswitch effects to the mob and creating the clone.
+ *
+ * **Parameters**:
+ * - `ghost` - The bluespace ghost triggering the switch.
+ *
+ * Returns instance of mob. The created bluespace clone, or null if no clone was created.
+ */
+/mob/proc/blueswitch(obj/effect/bluegoast/ghost)
+	var/mob/clone = new type(get_turf(ghost))
+	clone.appearance = appearance
+	clone.real_name = real_name
+	clone.flavor_text = flavor_text
+	dust()
+	return clone
+
+/mob/living/exosuit/blueswitch(obj/effect/bluegoast/ghost)
+	if (!length(pilots))
+		return
+	for (var/mob/pilot in pilots)
+		remove_pilot(pilot)
+		var/mob/clone = pilot.blueswitch(ghost)
+		add_pilot(clone)
+
+/mob/living/carbon/human/blueswitch(obj/effect/bluegoast/ghost)
+	var/mob/living/carbon/human/clone = new(get_turf(ghost), species.name)
+	clone.dna = dna.Clone()
+	clone.sync_organ_dna()
+	clone.UpdateAppearance()
+	for (var/obj/item/entry in get_equipped_items(TRUE))
+		remove_from_mob(entry) //steals instead of copies so we don't end up with duplicates
+		clone.equip_to_appropriate_slot(entry)
+	clone.real_name = real_name
+	clone.flavor_text = flavor_text
+	dust()
+	return clone
+
 
 /obj/screen/fullscreen/bluespace_overlay
 	icon = 'icons/effects/effects.dmi'

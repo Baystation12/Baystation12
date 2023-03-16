@@ -429,7 +429,7 @@
 	// Harm intent - Bash against the window
 	if (grab.assailant.a_intent == I_HURT)
 		if (!grab.force_danger())
-			to_chat(grab.assailant, SPAN_WARNING("You need a better grip to smash \the [grab.affecting] against \the [src]."))
+			USE_FEEDBACK_GRAB_MUST_UPGRADE("to smash them against \the [src]")
 			return TRUE
 		var/def_zone = ran_zone(BP_HEAD, 20)
 		if (grab.damage_stage() < 2)
@@ -449,6 +449,7 @@
 			grab.affecting.Weaken(5)
 			grab.affecting.apply_damage(20, DAMAGE_BRUTE, def_zone, used_weapon = src)
 			hit(50, grab.assailant, grab.affecting)
+		return TRUE
 
 	return ..()
 
@@ -738,10 +739,10 @@
 	icon_state = "light[active]"
 
 //Centcomm windows
-/obj/structure/window/reinforced/crescent/attack_hand()
-	return
+/obj/structure/window/reinforced/crescent
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_NO_TOOLS
 
-/obj/structure/window/reinforced/crescent/attackby()
+/obj/structure/window/reinforced/crescent/attack_hand()
 	return
 
 /obj/structure/window/reinforced/crescent/ex_act()

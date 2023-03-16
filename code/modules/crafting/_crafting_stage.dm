@@ -26,11 +26,11 @@
 			return next_stage
 
 /singleton/crafting_stage/proc/progress_to(obj/item/thing, mob/user, obj/item/target)
-	. = is_appropriate_tool(thing) && consume(user, thing, target)
+	. = is_appropriate_tool(thing, user) && consume(user, thing, target)
 	if(.)
 		on_progress(user)
 
-/singleton/crafting_stage/proc/is_appropriate_tool(obj/item/thing)
+/singleton/crafting_stage/proc/is_appropriate_tool(obj/item/thing, mob/user = null)
 	. = istype(thing, completion_trigger_type)
 
 /singleton/crafting_stage/proc/consume(mob/user, obj/item/thing, obj/item/target)
@@ -68,12 +68,12 @@
 	var/obj/item/stack/material/M = thing
 	. = istype(M) && (!stack_material || M.material.name == stack_material) && ..()
 
-/singleton/crafting_stage/welding/consume(mob/user, obj/item/thing, obj/item/target)
-	var/obj/item/weldingtool/T = thing
-	. = istype(T) && T.remove_fuel(0, user) && T.isOn()
-
 /singleton/crafting_stage/welding
 	consume_completion_trigger = FALSE
+
+/singleton/crafting_stage/welding/is_appropriate_tool(obj/item/thing, mob/user)
+	var/obj/item/weldingtool/T = thing
+	. = istype(T) && T.remove_fuel(1, user) && T.isOn()
 
 /singleton/crafting_stage/welding/on_progress(mob/user)
 	..()
@@ -82,12 +82,12 @@
 /singleton/crafting_stage/screwdriver
 	consume_completion_trigger = FALSE
 
+/singleton/crafting_stage/screwdriver/is_appropriate_tool(obj/item/thing)
+	. = isScrewdriver(thing)
+
 /singleton/crafting_stage/screwdriver/on_progress(mob/user)
 	..()
 	playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-
-/singleton/crafting_stage/screwdriver/progress_to(obj/item/thing, mob/user)
-	. = ..() && isScrewdriver(thing)
 
 /singleton/crafting_stage/tape
 	consume_completion_trigger = FALSE

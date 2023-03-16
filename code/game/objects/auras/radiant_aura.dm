@@ -13,8 +13,8 @@
 	to_chat(user, SPAN_WARNING("Your protective aura dissipates, leaving you feeling cold and unsafe."))
 	..()
 
-/obj/aura/radiant_aura/bullet_act(obj/item/projectile/P, def_zone)
-	if(P.damage_flags() & DAMAGE_FLAG_LASER)
-		user.visible_message(SPAN_WARNING("\The [P] refracts, bending into \the [user]'s aura."))
+/obj/aura/radiant_aura/aura_check_bullet(obj/item/projectile/proj, def_zone)
+	if (HAS_FLAGS(proj.damage_flags(), DAMAGE_FLAG_LASER))
+		user.visible_message(SPAN_WARNING("\The [proj] refracts, bending into \the [user]'s aura."))
 		return AURA_FALSE
-	return 0
+	return EMPTY_BITFIELD

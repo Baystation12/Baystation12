@@ -129,7 +129,7 @@
 	if(istype(A, /obj/item/ammo_magazine))
 		. = TRUE
 		var/obj/item/ammo_magazine/AM = A
-		if(!(load_method & AM.mag_type) || caliber != AM.caliber)
+		if(!(load_method & AM.mag_type) || ((istext(caliber) && caliber != AM.caliber) && (islist(caliber) && !is_type_in_list(AM.caliber, caliber))))
 			return //incompatible
 
 		switch(AM.mag_type)
@@ -150,10 +150,14 @@
 								return
 							//Experienced gets a 1 second delay, master gets a 0.5 second delay
 							if(do_after(user, user.get_skill_value(SKILL_WEAPONS) == SKILL_PROF ? PROF_TAC_RELOAD : EXP_TAC_RELOAD, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
+								if(jam_chance && (!(ammo_magazine.type == magazine_type)))
+									jam_chance -= 20
 								ammo_magazine.update_icon()
 								user.put_in_hands(ammo_magazine)
-								user.visible_message(SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
-													 SPAN_WARNING("You tactically reload \the [src] with \the [AM]!"))
+								user.visible_message(
+									SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
+									SPAN_WARNING("You tactically reload \the [src] with \the [AM]!")
+								)
 						else //Speed reloading
 							if(!can_special_reload)
 								to_chat(user, SPAN_WARNING("You can't speed reload with this gun!"))
@@ -162,20 +166,29 @@
 								return
 							//Experienced gets a 0.5 second delay, master gets a 0.25 second delay
 							if(do_after(user, user.get_skill_value(SKILL_WEAPONS) == SKILL_PROF ? PROF_SPD_RELOAD : EXP_SPD_RELOAD, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
+								if(jam_chance && istype(ammo_magazine, magazine_type))
+									jam_chance -= 10
 								ammo_magazine.update_icon()
 								ammo_magazine.dropInto(user.loc)
-								user.visible_message(SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
-													 SPAN_WARNING("You speed reload \the [src] with \the [AM]!"))
+								user.visible_message(
+									SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
+									SPAN_WARNING("You speed reload \the [src] with \the [AM]!")
+								)
 					ammo_magazine = AM
 					playsound(loc, mag_insert_sound, 75, 1)
 					update_icon()
 					AM.update_icon()
-					return
-				if(!user.unEquip(AM, src))
+					if(!istype(AM, magazine_type))
+						jam_chance += 10
 					return
 				ammo_magazine = AM
+				if(!user.unEquip(AM, src))
+					ammo_magazine = null
+					return
 				user.visible_message("[user] inserts [AM] into [src].", SPAN_NOTICE("You insert [AM] into [src]."))
 				playsound(loc, mag_insert_sound, 50, 1)
+				if(!istype(AM, magazine_type))
+					jam_chance += 10
 			if(SPEEDLOADER)
 				if(length(loaded) >= max_shells)
 					to_chat(user, SPAN_WARNING("[src] is full!"))
@@ -226,6 +239,8 @@
 		is_jammed = 0
 		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 	if(ammo_magazine)
+		if(jam_chance && !istype(ammo_magazine, magazine_type))
+			jam_chance -= 10
 		user.put_in_hands(ammo_magazine)
 		user.visible_message("[user] removes [ammo_magazine] from [src].", SPAN_NOTICE("You remove [ammo_magazine] from [src]."))
 		playsound(loc, mag_remove_sound, 50, 1)

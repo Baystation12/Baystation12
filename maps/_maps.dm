@@ -45,4 +45,5 @@ GLOBAL_DATUM_INIT(using_map, /datum/map, new using_map_DATUM)
 #include "random_ruins\exoplanet_ruins\spider_nest\spider_nest.dm"
 #include "random_ruins\exoplanet_ruins\tar_anomaly\tar_anomaly.dm"
 #include "random_ruins\exoplanet_ruins\trash_heap\trash_heap.dm"
+// #include "random_ruins\exoplanet_ruins\crashed_probe\crashed_probe.dm" // SIERRA TODO: добавить с авейками
 #include "random_ruins\space_ruins\space_ruins.dm"

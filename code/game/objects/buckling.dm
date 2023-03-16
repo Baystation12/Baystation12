@@ -30,12 +30,14 @@
 
 /obj/attack_hand(mob/living/user)
 	. = ..()
-	AttemptUnbuckle(user)
+	if (buckled_mob)
+		AttemptUnbuckle(user)
 
 
 /obj/attack_robot(mob/living/silicon/robot/user)
 	. = ..()
-	AttemptUnbuckle(user)
+	if (buckled_mob)
+		AttemptUnbuckle(user)
 
 
 /obj/MouseDrop_T(atom/dropped, mob/living/user)
@@ -47,39 +49,178 @@
 	return FALSE
 
 
-/obj/proc/AttemptBuckle(mob/living/target, mob/living/user)
+/**
+ * Checks if a mob can be buckled to the object.
+ *
+ * **Parameters**:
+ * - `target` - Mob to be buckled.
+ * - `user` - Optional. Mob attempting to perform the buckling. Target of failure feedback messages. If not provided, checks requiring `user` are not performed.
+ * - `silent` (Boolean, default `FALSE`) - If set, does not send failure feedback messages to `user`.
+ *
+ * Returns boolean.
+ */
+/obj/proc/can_buckle(mob/living/target, mob/living/user, silent = FALSE)
 	if (!can_buckle)
-		return
+		if (!silent)
+			to_chat(user, SPAN_WARNING("\The [src] cannot have mobs buckled to it."))
+		return FALSE
 	if (!istype(target))
-		return
-	if (!Adjacent(target) || !Adjacent(user))
-		return
-	if (target == user || user.a_intent == I_HELP)
-		return user_buckle_mob(target, user)
-	if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
-		return
-	return user_buckle_mob(target, user)
+		if (!silent)
+			to_chat(user, SPAN_DEBUG("You attempted to buckle a non-mob. This shouldn't be possible and is a bug."))
+		return FALSE
+	if (!target.can_be_buckled)
+		if (!silent)
+			to_chat(user, SPAN_WARNING("\The [target] cannot be buckled."))
+		return FALSE
+	if (buckled_mob)
+		if (!silent)
+			to_chat(user, SPAN_WARNING("\The [src] already has \the [buckled_mob] buckled to it."))
+		return FALSE
+	if (target.buckled)
+		if (!silent)
+			to_chat(user, SPAN_WARNING("\The [target] is already buckled to \the [target.buckled]."))
+		return FALSE
+	if (length(target.pinned))
+		if (!silent)
+			to_chat(user, SPAN_WARNING("\The [target] is currently pinned down by [english_list(target.pinned)] and cannot be buckled."))
+		return FALSE
+	var/list/grabbed_by_mobs = list()
+	for (var/obj/item/grab/grab in target.grabbed_by)
+		if (grab.assailant != user)
+			grabbed_by_mobs += grab.assailant
+	if (length(grabbed_by_mobs))
+		if (!silent)
+			to_chat(user, SPAN_WARNING("\The [target] is being grabbed by [english_list(grabbed_by_mobs)] and can't be buckled by you."))
+		return FALSE
+	if (!Adjacent(target))
+		if (!silent)
+			to_chat(user, SPAN_WARNING("\The [target] has to be next to \the [src] to buckle them to it."))
+		return FALSE
+	if (buckle_require_restraints && !target.restrained())
+		if (!silent)
+			to_chat(user, SPAN_WARNING("\The [target] must be restrained to buckle them to \the [src]."))
+		return FALSE
+	if (user)
+		if (user.incapacitated())
+			if (!silent)
+				to_chat(user, SPAN_WARNING("You're in no condition to buckle things right now."))
+			return FALSE
+		if (!CheckDexterity(user))
+			if (!silent)
+				to_chat(user, FEEDBACK_YOU_LACK_DEXTERITY)
+			return FALSE
+		if (target != user && istype(user, /mob/living/silicon/pai))
+			if (!silent)
+				to_chat(user, SPAN_WARNING("pAIs cannot buckle other mobs."))
+			return FALSE
+		if (!Adjacent(user))
+			if (!silent)
+				to_chat(user, SPAN_WARNING("You have to be next to \the [src] to buckle mobs to it."))
+			return FALSE
+		if (!user.Adjacent(target))
+			if (!silent)
+				to_chat(user, SPAN_WARNING("You have to be next to \the [target] to buckle them."))
+			return FALSE
+	return TRUE
 
 
-/obj/proc/AttemptUnbuckle(mob/living/user)
-	if (!can_buckle)
-		return
+/**
+ * Checks if a mob can unbuckle the object.
+ *
+ * **Parameters**:
+ * - `user` - Optional. Mob attempting to perform the unbuckling. Target of failure feedback messages. If not provided, checks on `user` are not performed.
+ * - `silent` (Boolean, default `FALSE`) - If set, does not send failure feedback messages to `user`.
+ *
+ * Returns boolean.
+ */
+/obj/proc/can_unbuckle(mob/living/user, silent = FALSE)
 	if (!buckled_mob)
-		return
-	if (!Adjacent(user))
-		return
-	if (buckled_mob == user || user.a_intent == I_HELP)
-		return user_unbuckle_mob(user)
+		if (!silent)
+			to_chat(user, SPAN_WARNING("\The [src] has no mob buckled to it."))
+		return FALSE
+	if (buckled_mob.buckled != src)
+		log_debug(append_admin_tools("A buckled mob ([buckled_mob.name] ([buckled_mob.type])) is buckled to multiple objects at once. This has been auto-corrected.", buckled_mob, get_turf(src)))
+		if (!silent)
+			to_chat(user, SPAN_DEBUG("\The [buckled_mob] is buckled to \the [buckled_mob.buckled] instead of \the [src]. This is a bug and has been auto-corrected. You will need to unbuckle them from \the [buckled_mob.buckled] instead of the object you clicked on."))
+		buckled_mob = null
+		return FALSE
+	if (user)
+		if (user.incapacitated(INCAPACITATION_DISABLED))
+			if (!silent)
+				to_chat(user, SPAN_WARNING("You're in no condition to unbuckle things right now."))
+			return FALSE
+		if (user != buckled_mob)
+			if (!CheckDexterity(user))
+				if (!silent)
+					to_chat(user, FEEDBACK_YOU_LACK_DEXTERITY)
+				return FALSE
+			if (istype(user, /mob/living/silicon/pai))
+				if (!silent)
+					to_chat(user, SPAN_WARNING("pAIs cannot unbuckle other mobs."))
+				return FALSE
+			if (!Adjacent(user))
+				if (!silent)
+					to_chat(user, SPAN_WARNING("You have to be next to \the [src] to unbuckle \the [buckled_mob]."))
+				return FALSE
+	return TRUE
+
+
+/**
+ * Attempts to buckle the target to the object. Includes `can_buckle()` checks and a timer. Calls `user_buckle_mob()`.
+ *
+ * Generally, you should call this during user interactions instead of directly calling the buckle procs.
+ *
+ * **Parameters**:
+ * - `target` - Mob to be buckled.
+ * - `user` - Mob attempting to perform the buckling. Target of failure feedback messages.
+ * - `silent` (Boolean, default `FALSE`) - If set, does not display feedback messages. Passed to `can_buckle()` and `user_buckle_mob()`.
+ *
+ * Returns boolean. Whether or not the buckling was successful.
+ */
+/obj/proc/AttemptBuckle(mob/living/target, mob/living/user, silent = FALSE)
+	if (!istype(target))
+		return FALSE
+	if (target == user || target.a_intent == I_HELP)
+		return user_buckle_mob(target, user, silent)
+	if (!can_buckle(target, user, silent))
+		return FALSE
 	if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
-		return
-	return user_unbuckle_mob(user)
+		return FALSE
+	return user_buckle_mob(target, user, silent)
 
 
+/**
+ * Attempts to unbuckle the object's buckled mob. Includes `can_unbuckle()` checks and a timer. Calls `user_unbuckle_mob()`.
+ *
+ * Generally, you should call this during user interactions instead of directly calling the buckle procs.
+ *
+ * **Parameters**:
+ * - `user` - Mob attempting to perform the unbuckling. Target of failure feedback messages.
+ * - `silent` (Boolean, default `FALSE`) - If set, does not display feedback messages. Passed to `can_unbuckle()` and `user_unbuckle_mob()`.
+ *
+ * Returns boolean. Whether or not the buckling was successful.
+ */
+/obj/proc/AttemptUnbuckle(mob/living/user, silent = FALSE)
+	if (buckled_mob && (buckled_mob == user || buckled_mob.a_intent == I_HELP))
+		return user_unbuckle_mob(user, silent)
+	if (!can_unbuckle(user, silent))
+		return FALSE
+	if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
+		return FALSE
+	return user_unbuckle_mob(user, silent)
+
+
+/**
+ * Handles buckling the given mob. Assumes most conditions are met - This only checks if `loc` is the same and if the mob's `buckled` is null to avoid broken states.
+ *
+ * Returns boolen - Whether or not the mob was buckled.
+ */
 /obj/proc/buckle_mob(mob/living/M)
-	if(buckled_mob) //unless buckled_mob becomes a list this can cause problems
-		return 0
-	if(!istype(M) || (M.loc != loc) || !M.can_be_buckled || M.buckled || length(M.pinned) || (buckle_require_restraints && !M.restrained()))
-		return 0
+	if (M.buckled)
+		return FALSE
+	// Additional check not covered can_buckle(), due to attempting to buckle allowing you to move an adjacent target to the object.
+	if (M.loc != loc)
+		return  FALSE
 	if(ismob(src))
 		var/mob/living/carbon/C = src //Don't wanna forget the xenos.
 		if(M != src && C.incapacitated())
@@ -98,8 +239,19 @@
 	M.throw_alert("buckled", /obj/screen/alert/restrained/buckled)
 	return TRUE
 
+
+/**
+ * Handles unbuckling any buckled mobs. Assumes all conditions are met.
+ *
+ * Returns a reference to the previously buckled mob, or null.
+ */
 /obj/proc/unbuckle_mob()
-	if(buckled_mob && buckled_mob.buckled == src)
+	if (buckled_mob)
+		if (buckled_mob.buckled != src)
+			log_debug(append_admin_tools("A buckled mob ([buckled_mob.name] ([buckled_mob.type])) is buckled to multiple objects at once. This has been auto-corrected.", buckled_mob, get_turf(src)))
+			buckled_mob = null
+			GLOB.destroyed_event.unregister(., src, /obj/proc/clear_buckle)
+			return
 		. = buckled_mob
 		buckled_mob.buckled = null
 		buckled_mob.anchored = initial(buckled_mob.anchored)
@@ -111,6 +263,7 @@
 		GLOB.destroyed_event.unregister(., src, /obj/proc/clear_buckle)
 		post_buckle_mob(.)
 
+
 /**
  * Clears any buckling references that exist between object and buckled mob, without clearing any unrelated references. Used by the destroyed event handler.
  *
@@ -119,6 +272,7 @@
 /obj/proc/clear_buckle(mob/living/_buckled_mob)
 	if (buckled_mob == _buckled_mob)
 		unbuckle_mob()
+		buckled_mob = null // In case unbuckle failed
 	if (_buckled_mob.buckled == src)
 		_buckled_mob.buckled = null
 	GLOB.destroyed_event.unregister(., src, /obj/proc/clear_buckle)
@@ -138,20 +292,24 @@
 				pixel_z = M.default_pixel_z
 			)
 
-/obj/proc/user_buckle_mob(mob/living/M, mob/user)
-	if(!user.Adjacent(M) || istype(user, /mob/living/silicon/pai) || (M != user && user.incapacitated()))
-		return 0
-	if(M == buckled_mob)
-		return 0
-	if (length(M.grabbed_by))
-		to_chat(user, SPAN_WARNING("\The [M] is being grabbed and cannot be buckled."))
-		return FALSE
-	if (!M.can_be_buckled)
-		to_chat(user, SPAN_WARNING("\The [M] cannot be buckled."))
+
+/**
+ * Handles buckling a mob by another mob (Or the same mob). Includes `can_buckle()` checks.
+ *
+ * Generally, you should be calling `AttemptBuckle()` instead of this.
+ *
+ * **Parameters**:
+ * - `target` - Mob to be buckled.
+ * - `user` - Mob attempting to perform the buckling. Target of failure feedback messages.
+ * - `silent` (Boolean, default `FALSE`) - If set, does not display feedback messages. Passed to `can_buckle()`.
+ *
+ * Returns boolean. Whether or not the buckling was successful.
+ */
+/obj/proc/user_buckle_mob(mob/living/M, mob/user, silent = FALSE)
+	if (!can_buckle(M, user, silent))
 		return FALSE
 
 	add_fingerprint(user)
-	unbuckle_mob()
 
 	//can't buckle unless you share locs so try to move M to the obj.
 	if(M.loc != src.loc)
@@ -160,29 +318,51 @@
 	. = buckle_mob(M)
 	if(.)
 		if(M == user)
-			M.visible_message(\
-				SPAN_NOTICE("\The [M.name] buckles themselves to \the [src]."),\
-				SPAN_NOTICE("You buckle yourself to \the [src]."),\
-				SPAN_NOTICE("You hear metal clanking."))
+			user.visible_message(
+				SPAN_NOTICE("\The [user] buckles themselves to \the [src]."),
+				SPAN_NOTICE("You buckle yourself to \the [src]."),
+				SPAN_NOTICE("You hear metal clanking.")
+			)
 		else
-			M.visible_message(\
-				SPAN_DANGER("\The [M.name] is buckled to \the [src] by \the [user.name]!"),\
-				SPAN_DANGER("You are buckled to \the [src] by \the [user.name]!"),\
-				SPAN_NOTICE("You hear metal clanking."))
+			user.visible_message(
+				SPAN_WARNING("\The [user] buckles \the [M] to \the [src]."),
+				SPAN_DANGER("You buckle \the [M] to \the [src]."),
+				SPAN_NOTICE("You hear metal clanking."),
+				exclude_mobs = list(M)
+			)
+			to_chat(M, SPAN_DANGER("\The [user] buckles you to \the [src]."))
 
-/obj/proc/user_unbuckle_mob(mob/user)
+
+/**
+ * Handles unbuckling a mob by another mob (Or the same mob). Includes `can_unbuckle()` checks.
+ *
+ * Generally, you should be calling `AttemptUnbuckle()` instead of this.
+ *
+ * **Parameters**:
+ * - `user` - Mob attempting to perform the unbuckling. Target of failure feedback messages.
+ * - `silent` (Boolean, default `FALSE`) - If set, does not display feedback messages. Passed to `can_unbuckle()`.
+ *
+ * Returns instance of the unbuckled mob or null on failure.
+ */
+/obj/proc/user_unbuckle_mob(mob/user, silent = FALSE)
+	if (!can_unbuckle(user, silent))
+		return
 	var/mob/living/M = unbuckle_mob()
 	if(M)
 		if(M != user)
-			M.visible_message(\
-				SPAN_NOTICE("\The [M.name] was unbuckled by \the [user.name]!"),\
-				SPAN_NOTICE("You were unbuckled from \the [src] by \the [user.name]."),\
-				SPAN_NOTICE("You hear metal clanking."))
+			user.visible_message(
+				SPAN_WARNING("\The [user] unbuckles \the [M] from \the [src]."),
+				SPAN_DANGER("You unbuckle \the [M] from \the [src]"),
+				SPAN_NOTICE("You hear metal clanking."),
+				exclude_mobs = list(M)
+			)
+			to_chat(M, SPAN_DANGER("\The [user] unbuckles you from \the [src]."))
 		else
-			M.visible_message(\
-				SPAN_NOTICE("\The [M.name] unbuckled themselves!"),\
-				SPAN_NOTICE("You unbuckle yourself from \the [src]."),\
-				SPAN_NOTICE("You hear metal clanking."))
+			user.visible_message(\
+				SPAN_WARNING("\The [user] unbuckles themselves from \the [src]."),
+				SPAN_DANGER("You unbuckle yourself from \the [src]."),
+				SPAN_NOTICE("You hear metal clanking.")
+			)
 		add_fingerprint(user)
 	return M
 

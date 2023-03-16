@@ -14,6 +14,7 @@
 	var/list/eat_sound = 'sound/items/eatfood.ogg'
 	var/obj/item/trash
 	var/sushi_overlay
+	var/can_use_cooker = TRUE
 
 
 /obj/item/reagent_containers/food/snacks/Destroy()
@@ -28,7 +29,7 @@
 		reagents.add_reagent(/datum/reagent/nutriment, nutriment_amt, nutriment_desc)
 
 
-/obj/item/reagent_containers/food/snacks/proc/OnConsume(mob/living/consumer)
+/obj/item/reagent_containers/food/snacks/proc/OnConsume(mob/living/consumer, mob/living/feeder)
 	if (reagents && reagents.total_volume)
 		return
 	if (consumer)
@@ -37,12 +38,13 @@
 			SPAN_ITALIC("You finish eating \the [src].")
 		)
 		consumer.update_personal_goal(/datum/goal/achievement/specific_object/food, type)
-		consumer.drop_from_inventory(src, consumer.loc)
+	if (feeder)
+		feeder.drop_from_inventory(src, feeder.loc)
 	if (loc && trash)
 		if (ispath(trash))
 			trash = new trash
-		if (consumer)
-			consumer.put_in_hands(trash)
+		if (feeder)
+			feeder.put_in_hands(trash)
 		else
 			trash.dropInto(loc)
 		trash = null
@@ -117,7 +119,7 @@
 				else
 					reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 				bitecount++
-				OnConsume(M)
+				OnConsume(M, user)
 			return 1
 
 	return 0
@@ -233,7 +235,7 @@
 		if(!src && !user.client)
 			user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")
 			qdel(src)
-	OnConsume(user)
+	OnConsume(user, user)
 
 //////////////////////////////////////////////////
 ////////////////////////////////////////////Snacks
@@ -1375,7 +1377,7 @@
 	var/trash = new /obj/item/trash/cubewrapper(get_turf(user))
 	user.put_in_hands(trash)
 
-/obj/item/reagent_containers/food/snacks/monkeycube/OnConsume(mob/living/consumer)
+/obj/item/reagent_containers/food/snacks/monkeycube/OnConsume(mob/living/consumer, mob/living/feeder)
 	set waitfor = FALSE
 	if (ishuman(consumer))
 		var/mob/living/carbon/human/human = consumer

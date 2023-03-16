@@ -24,6 +24,18 @@
 	drop_sound = 'sound/items/drop/food.ogg'
 	pickup_sound = 'sound/items/pickup/food.ogg'
 
+
+/obj/item/clothing/mask/smokable/equipped(mob/user, slot)
+	switch(slot)
+		if(slot_wear_mask)
+			sprite_sheets = list(
+				SPECIES_VOX = 'icons/mob/species/vox/onmob_mask_vox.dmi',
+				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_mask_unathi.dmi'
+				)
+		else
+			sprite_sheets = list()
+	return ..()
+
 /obj/item/clothing/mask/smokable/New()
 	..()
 	atom_flags |= ATOM_FLAG_NO_REACT // so it doesn't react until you light it
@@ -135,7 +147,7 @@
 
 /obj/item/clothing/mask/smokable/attackby(obj/item/W, mob/user)
 	..()
-	if(isflamesource(W) || is_hot(W))
+	if (isFlameOrHeatSource(W))
 		var/text = matchmes
 		if(istype(W, /obj/item/flame/match))
 			text = matchmes
@@ -161,6 +173,11 @@
 		return 1
 	else
 		return ..()
+
+
+/obj/item/clothing/mask/smokable/IsFlameSource()
+	return lit
+
 
 /obj/item/clothing/mask/smokable/cigarette
 	name = "cigarette"
@@ -554,6 +571,11 @@
 	user.update_inv_wear_mask(0)
 	user.update_inv_l_hand(0)
 	user.update_inv_r_hand(1)
+
+
+/obj/item/clothing/mask/smokable/pipe/IsFlameSource()
+	return FALSE
+
 
 /obj/item/clothing/mask/smokable/pipe/cobpipe
 	name = "corn cob pipe"

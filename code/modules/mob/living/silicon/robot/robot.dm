@@ -670,6 +670,7 @@
 			return
 		else if (H.wrapped == W)
 			H.wrapped = null
+			H.update_icon()
 
 /mob/living/silicon/robot/attack_hand(mob/user)
 

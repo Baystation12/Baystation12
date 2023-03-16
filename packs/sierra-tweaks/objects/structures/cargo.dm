@@ -45,12 +45,12 @@
 		return
 
 	if(haswheels)
-		to_chat(user, SPAN_WARNING("You can't load the cart unless wheels are folded!"))
+		USE_FEEDBACK_FAILURE("You can't load the cart unless wheels are folded!")
 		return
 
 	if(do_after(user, 2 SECONDS, src, DO_DEFAULT | DO_TARGET_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		if(!load(cargo))
-			to_chat(user, SPAN_WARNING("You are unable to load [cargo] on [src]"))
+			USE_FEEDBACK_FAILURE("You are unable to load [cargo] on [src]")
 			return
 		density = TRUE
 
@@ -66,7 +66,7 @@
 		return FALSE
 
 	if(haswheels)
-		to_chat(user, SPAN_WARNING("You must fold the wheels to unload the cart!"))
+		USE_FEEDBACK_FAILURE("You must fold the wheels to unload the cart!")
 		return
 
 	if(do_after(user, 2 SECONDS, src, DO_DEFAULT | DO_TARGET_UNIQUE_ACT | DO_PUBLIC_PROGRESS))

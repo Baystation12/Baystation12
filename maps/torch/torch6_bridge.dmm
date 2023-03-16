@@ -4600,9 +4600,6 @@
 /obj/structure/bed/chair/shuttle/blue{
 	dir = 4
 	},
-/obj/structure/bed/chair/shuttle/blue{
-	dir = 4
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},

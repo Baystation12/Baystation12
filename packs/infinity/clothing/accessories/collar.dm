@@ -45,7 +45,7 @@
 		if(!user.stat && !user.incapacitated() && user.Adjacent(src) && S.loc == user)
 			if(!inscription)
 				return
-			to_chat(user, SPAN_WARNING("You carve \"[inscription]\" into \the [src]."))
+			USE_FEEDBACK_FAILURE("You carve \"[inscription]\" into \the [src].")
 			name = initial(name) + " ([inscription])"
 			desc = initial(desc) + " The tag says \"[inscription]\"."
 

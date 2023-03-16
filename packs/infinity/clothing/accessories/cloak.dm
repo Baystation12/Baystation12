@@ -154,10 +154,10 @@
 		if(ishuman(loc))
 			var/mob/living/carbon/human/H = src.loc
 			if(H.wear_suit != src)
-				to_chat(H, SPAN_WARNING("You must be wearing \the [src] to put up the hood!"))
+				FEEDBACK_FAILURE(H, "You must be wearing \the [src] to put up the hood!")
 				return
 			if(H.head)
-				to_chat(H, SPAN_WARNING("You're already wearing something on your head!"))
+				FEEDBACK_FAILURE(H, "You're already wearing something on your head!")
 				return
 			else
 				H.equip_to_slot_if_possible(hood,slot_head,0,0,1)

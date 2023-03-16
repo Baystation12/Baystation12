@@ -4,10 +4,14 @@
 
 //To do: Allow corpses to appear mangled, bloody, etc. Allow customizing the bodies appearance (they're all bald and white right now).
 
-#define CORPSE_SPAWNER_RANDOM_NAME       FLAG(0)
-#define CORPSE_SPAWNER_CUT_SURVIVAL      FLAG(1)
-#define CORPSE_SPAWNER_CUT_ID_PDA        (CORPSE_SPAWNER_RANDOM_NAME | CORPSE_SPAWNER_CUT_SURVIVAL)
-#define CORPSE_SPAWNER_PLAIN_HEADSET     FLAG(2)
+#define CORPSE_SPAWNER_RANDOM_NAME         FLAG(0)
+#define CORPSE_SPAWNER_CUT_SURVIVAL        FLAG(1)
+#define CORPSE_SPAWNER_CUT_ID_PDA          (CORPSE_SPAWNER_RANDOM_NAME | CORPSE_SPAWNER_CUT_SURVIVAL)
+#define CORPSE_SPAWNER_PLAIN_HEADSET       FLAG(2)
+#define CORPSE_SPAWNER_SKIP_POST_EQUIP     FLAG(10)
+#define CORPSE_SPAWNER_SKIP_BACKPACK       FLAG(11)
+
+#define CORPSE_SPAWNER_ALL_SKIPS           (CORPSE_SPAWNER_SKIP_POST_EQUIP|CORPSE_SPAWNER_CUT_ID_PDA|CORPSE_SPAWNER_SKIP_BACKPACK)
 
 #define CORPSE_SPAWNER_RANDOM_SKIN_TONE    FLAG(3)
 #define CORPSE_SPAWNER_RANDOM_SKIN_COLOR   FLAG(4)
@@ -17,7 +21,8 @@
 #define CORPSE_SPAWNER_RANDOM_EYE_COLOR    FLAG(8)
 #define CORPSE_SPAWNER_RANDOM_GENDER       FLAG(9)
 
-#define CORPSE_SPAWNER_NO_RANDOMIZATION ~(CORPSE_SPAWNER_RANDOM_NAME|CORPSE_SPAWNER_RANDOM_SKIN_TONE|CORPSE_SPAWNER_RANDOM_SKIN_COLOR|CORPSE_SPAWNER_RANDOM_HAIR_COLOR|CORPSE_SPAWNER_RANDOM_HAIR_STYLE|CORPSE_SPAWNER_RANDOM_FACIAL_STYLE|CORPSE_SPAWNER_RANDOM_EYE_COLOR)
+#define CORPSE_SPAWNER_RANDOM_NAMELESS    ~(CORPSE_SPAWNER_RANDOM_HAIR_STYLE|CORPSE_SPAWNER_RANDOM_FACIAL_STYLE)
+#define CORPSE_SPAWNER_NO_RANDOMIZATION   ~(CORPSE_SPAWNER_RANDOM_NAME|CORPSE_SPAWNER_RANDOM_SKIN_TONE|CORPSE_SPAWNER_RANDOM_SKIN_COLOR|CORPSE_SPAWNER_RANDOM_HAIR_COLOR|CORPSE_SPAWNER_RANDOM_HAIR_STYLE|CORPSE_SPAWNER_RANDOM_FACIAL_STYLE|CORPSE_SPAWNER_RANDOM_EYE_COLOR)
 
 
 /obj/effect/landmark/corpse
@@ -111,9 +116,12 @@
 
 /obj/effect/landmark/corpse/proc/equip_outfit(mob/living/carbon/human/M)
 	var/adjustments = 0
-	adjustments = (spawn_flags & CORPSE_SPAWNER_CUT_SURVIVAL)  ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR) : adjustments
-	adjustments = (spawn_flags & CORPSE_SPAWNER_CUT_ID_PDA)    ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_ID_PDA)        : adjustments
-	adjustments = (spawn_flags & CORPSE_SPAWNER_PLAIN_HEADSET) ? (adjustments|OUTFIT_ADJUSTMENT_PLAIN_HEADSET)      : adjustments
+	adjustments = (spawn_flags & CORPSE_SPAWNER_CUT_SURVIVAL)    ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR) : adjustments
+	adjustments = (spawn_flags & CORPSE_SPAWNER_CUT_ID_PDA)      ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_ID_PDA)        : adjustments
+	adjustments = (spawn_flags & CORPSE_SPAWNER_PLAIN_HEADSET)   ? (adjustments|OUTFIT_ADJUSTMENT_PLAIN_HEADSET)      : adjustments
+	adjustments = (spawn_flags & CORPSE_SPAWNER_SKIP_BACKPACK)   ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_BACKPACK)      : adjustments
+	adjustments = (spawn_flags & CORPSE_SPAWNER_SKIP_POST_EQUIP) ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP)    : adjustments
+	adjustments = (spawn_flags & CORPSE_SPAWNER_ALL_SKIPS) 		 ? (adjustments|OUTFIT_ADJUSTMENT_ALL_SKIPS)          : adjustments
 
 	var/singleton/hierarchy/outfit/corpse_outfit = outfit_by_type(pickweight(corpse_outfits))
 	corpse_outfit.equip(M, equip_adjustments = adjustments)

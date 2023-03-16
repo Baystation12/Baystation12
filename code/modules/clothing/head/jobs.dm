@@ -96,6 +96,18 @@
 	slot_flags = SLOT_HEAD | SLOT_BELT
 	body_parts_covered = 0
 
+/obj/item/clothing/head/beret/equipped(mob/user, slot)
+	switch(slot)
+		if(slot_belt)
+			sprite_sheets = list()
+		if(slot_head)
+			sprite_sheets = list(
+				SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
+				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi',
+				SPECIES_NABBER = 'icons/mob/species/nabber/onmob_head_gas.dmi'
+				)
+	return ..()
+
 /obj/item/clothing/head/beret/sec
 	name = "corporate security beret"
 	desc = "A beret with the security insignia emblazoned on it. For officers that are more inclined towards style than safety."
@@ -156,12 +168,12 @@
 	desc = "An armored red beret adorned with the crest of corporate asset protection. Doesn't sacrifice style or safety."
 	icon_state = "beret_red"
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH, 
-		bullet = ARMOR_BALLISTIC_RIFLE, 
+		melee = ARMOR_MELEE_VERY_HIGH,
+		bullet = ARMOR_BALLISTIC_RIFLE,
 		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_RESISTANT, 
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_RESISTANT,
 		rad = ARMOR_RAD_MINOR
 	)
 	siemens_coefficient = 0.9

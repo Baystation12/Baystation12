@@ -3,6 +3,9 @@
 	icon = 'maps/torch/icons/obj/obj_accessories_solgov.dmi'
 	accessory_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/onmob_accessories_solgov.dmi', slot_wear_suit_str = 'maps/torch/icons/mob/onmob_accessories_solgov.dmi')
 	w_class = ITEM_SIZE_TINY
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_accessories_solgov_unathi.dmi'
+		)
 
 /*****
 medals
@@ -87,9 +90,6 @@ patches
 	icon_state = "torchpatch"
 	on_rolled_down = ACCESSORY_ROLLED_NONE
 	slot = ACCESSORY_SLOT_INSIGNIA
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_accessories_sol_unathi.dmi'
-		)
 
 /obj/item/clothing/accessory/solgov/ec_patch
 	name = "\improper Observatory patch"
@@ -147,6 +147,9 @@ scarves
 	desc = "An SCG blue silk scarf, meant to be worn with Expeditionary Corps uniforms."
 	icon = 'icons/obj/clothing/obj_accessories.dmi'
 	accessory_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_accessories.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_accessories.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_accessories_unathi.dmi'
+		)
 	icon_state = "whitescarf"
 	on_rolled_down = ACCESSORY_ROLLED_NONE
 	color = "#68a0ce"
@@ -383,9 +386,6 @@ armbands
 	name = "master solgov armband"
 	icon = 'maps/torch/icons/obj/obj_accessories_solgov.dmi'
 	accessory_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/onmob_accessories_solgov.dmi', slot_wear_suit_str = 'maps/torch/icons/mob/onmob_accessories_solgov.dmi')
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_accessories_sol_unathi.dmi'
-		)
 
 /obj/item/clothing/accessory/armband/solgov/mp
 	name = "military police brassard"
@@ -443,6 +443,11 @@ armour attachments
 	name = "\improper POLICE tag"
 	desc = "An armor tag with the words POLICE printed in gold lettering on it."
 
+/obj/item/clothing/accessory/armor_tag/solgov/lead
+	name = "\improper LEAD tag"
+	desc = "An armor tag denoting the leader of a fireteam."
+	icon_state = "leadtag"
+
 /obj/item/clothing/accessory/helmet_cover/blue/sol
 	name = "peacekeeper helmet cover"
 	desc = "A fabric cover for armored helmets. This one is in SCG peacekeeper colors."
@@ -458,9 +463,6 @@ department tags
 	on_rolled_sleeves = "dept_exped_sleeves"
 	slot = ACCESSORY_SLOT_DEPT
 	accessory_flags = EMPTY_BITFIELD
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_accessories_sol_unathi.dmi'
-		)
 
 /obj/item/clothing/accessory/solgov/department/command
 	name = "command insignia"
@@ -602,9 +604,6 @@ ranks - ec
 	slot = ACCESSORY_SLOT_RANK
 	gender = PLURAL
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_accessories_sol_unathi.dmi'
-		)
 
 /obj/item/clothing/accessory/solgov/rank/ec
 	name = "explorer ranks"

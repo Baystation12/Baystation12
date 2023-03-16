@@ -23,6 +23,7 @@
 	#include "torch_submaps.dm"
 	#include "torch_turfs.dm"
 	#include "torch_unit_testing.dm"
+	#include "torch_simplemobs.dm"
 
 	#include "datums/uniforms.dm"
 	#include "datums/uniforms_expedition.dm"

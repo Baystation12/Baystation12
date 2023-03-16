@@ -17,13 +17,13 @@
 	return (user.IsAdvancedToolUser() && !issilicon(user) && !user.stat && !user.restrained())
 
 /obj/item/beartrap/user_unbuckle_mob(mob/user as mob)
-	if(buckled_mob && can_use(user))
+	if(buckled_mob && can_use(user) && can_unbuckle(user))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] begins freeing \the [buckled_mob] from \the [src]."),
 			SPAN_NOTICE("You carefully begin to free \the [buckled_mob] from \the [src]."),
 			SPAN_NOTICE("You hear metal creaking.")
 			)
-		if(do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if(do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE) && can_unbuckle(user))
 			user.visible_message(SPAN_NOTICE("\The [buckled_mob] has been freed from \the [src] by \the [user]."))
 			unbuckle_mob()
 			anchored = FALSE
@@ -80,9 +80,12 @@
 		return 0
 
 	//trap the victim in place
-	set_dir(L.dir)
-	buckle_mob(L)
-	to_chat(L, SPAN_DANGER("The steel jaws of \the [src] bite into you, trapping you in place!"))
+	if (can_buckle(L))
+		set_dir(L.dir)
+		buckle_mob(L)
+		to_chat(L, SPAN_DANGER("The steel jaws of \the [src] bite into you, trapping you in place!"))
+	else
+		to_chat(L, SPAN_DANGER("The steel jaws of \the [src] bite into you, but fail to hold you in place!"))
 	deployed = 0
 
 /obj/item/beartrap/Crossed(AM as mob|obj)

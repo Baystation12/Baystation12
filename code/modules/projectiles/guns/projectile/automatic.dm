@@ -109,8 +109,8 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/rifle
-	allowed_magazines = /obj/item/ammo_magazine/rifle
 	one_hand_penalty = 8
+	allowed_magazines = /obj/item/ammo_magazine/rifle
 	accuracy_power = 7
 	accuracy = 2
 	bulk = GUN_BULK_RIFLE + 1
@@ -172,7 +172,7 @@
 
 /obj/item/gun/projectile/automatic/bullpup_rifle
 	name = "bullpup assault rifle"
-	desc = "The Haephestus Z8 is one of the oldest weapons currently in service by the SCGDF. Despite it's age, it still remains the de-facto main rifle of the SCG Army, due to it's ease of handling, cheap production costs, reliability, and plentiful surplus stock."
+	desc = "The Hephaestus Industries Z8 is one of the oldest weapons currently in service with the SCGDF. Despite its age, it still remains the de-facto main rifle of the SCG Army, due to its ease of handling, cheap production costs, reliability, and plentiful surplus stock."
 	icon = 'icons/obj/guns/bullpup_rifle.dmi'
 	icon_state = "carbine"
 	item_state = "z8carbine"
@@ -180,11 +180,10 @@
 	force = 10
 	caliber = CALIBER_RIFLE_MILITARY
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 3)
-	ammo_type = /obj/item/ammo_casing/rifle/military
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/mil_rifle
-	allowed_magazines = /obj/item/ammo_magazine/mil_rifle
+	magazine_type = /obj/item/ammo_magazine/mil_rifle/heavy
+	allowed_magazines = /obj/item/ammo_magazine/mil_rifle //Interchangable but poor performance
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 	accuracy = 2
@@ -248,13 +247,10 @@
 
 /obj/item/gun/projectile/automatic/bullpup_rifle/light
 	name = "light bullpup assault rifle"
-	desc = "The standard-issue rifle of the SCGDF. The Z9 Pitbull is the modern answer to violence's question. It has been given a blued finish with a Sol yellow stripe on its stock for easy identification of its owner."
+	desc = "The standard-issue rifle of the SCGDF, the Z9 Pitbull is the modern answer to violence's question. It has been given a blued finish with a Sol yellow stripe on its stock for easy identification of its owner."
 	icon = 'icons/obj/guns/bullpup_rifle_light.dmi'
 	item_state = "z9carbine"
-	caliber = CALIBER_RIFLE
-	ammo_type = /obj/item/ammo_casing/rifle
-	magazine_type = /obj/item/ammo_magazine/rifle
-	allowed_magazines = /obj/item/ammo_magazine/rifle
+	magazine_type = /obj/item/ammo_magazine/mil_rifle/light
 	one_hand_penalty = 6 //Slightly lighter than the Z8. Still don't try it.
 	wielded_item_state = "z9carbine-wielded"
 	firemodes = list( //Two round bursts. More accurate than the Z8 due to less maximum dispersion. More delay between shots, however, so slower.
@@ -272,6 +268,7 @@
 	icon = 'icons/obj/guns/saw.dmi'
 	icon_state = "l6closed50"
 	item_state = "l6closedmag"
+	wielded_item_state = "l6closed-wielded"
 	w_class = ITEM_SIZE_HUGE
 	bulk = 10
 	force = 10
@@ -286,7 +283,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/box/machinegun, /obj/item/ammo_magazine/rifle)
 	one_hand_penalty = 10
 	wielded_item_state = "gun_wielded"
-	mag_insert_sound = "heavy_machine_gun_reload"
+	mag_insert_sound = 'sound/weapons/guns/interaction/lmg_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/lmg_magout.ogg'
 	can_special_reload = FALSE
 
@@ -312,16 +309,26 @@
 	cover_open = !cover_open
 	to_chat(user, SPAN_NOTICE("You [cover_open ? "open" : "close"] [src]'s cover."))
 	update_icon()
+	user.update_inv_l_hand()
+	user.update_inv_r_hand()
 
 /obj/item/gun/projectile/automatic/l6_saw/attack_self(mob/user as mob)
 	if(cover_open)
 		toggle_cover(user) //close the cover
+		update_icon()
+		user.update_inv_l_hand()
+		user.update_inv_r_hand()
+
 	else
 		return ..() //once closed, behave like normal
 
 /obj/item/gun/projectile/automatic/l6_saw/attack_hand(mob/user as mob)
 	if(!cover_open && user.get_inactive_hand() == src)
 		toggle_cover(user) //open the cover
+		update_icon()
+		user.update_inv_l_hand()
+		user.update_inv_r_hand()
+
 	else
 		return ..() //once open, behave like normal
 
@@ -330,12 +337,15 @@
 	if(istype(ammo_magazine, /obj/item/ammo_magazine/box))
 		icon_state = "l6[cover_open ? "open" : "closed"][round(length(ammo_magazine.stored_ammo), 10)]"
 		item_state = "l6[cover_open ? "open" : "closed"]"
+		wielded_item_state = "l6[cover_open ? "open" : "closed"]-wielded"
 	else if(ammo_magazine)
 		icon_state = "l6[cover_open ? "open" : "closed"]mag"
 		item_state = "l6[cover_open ? "open" : "closed"]mag"
+		wielded_item_state = "l6[cover_open ? "open" : "closed"]mag-wielded"
 	else
 		icon_state = "l6[cover_open ? "open" : "closed"]-empty"
 		item_state = "l6[cover_open ? "open" : "closed"]-empty"
+		wielded_item_state = "l6[cover_open ? "open" : "closed"]-empty-wielded"
 
 /obj/item/gun/projectile/automatic/l6_saw/load_ammo(obj/item/A, mob/user)
 	if(!cover_open)
@@ -361,7 +371,7 @@
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 1, TECH_ESOTERIC = 5)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/mil_rifle
+	magazine_type = /obj/item/ammo_magazine/mil_rifle/heavy
 	allowed_magazines = /obj/item/ammo_magazine/mil_rifle
 	one_hand_penalty = 10
 	accuracy_power = 9

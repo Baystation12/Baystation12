@@ -139,6 +139,11 @@
 	icon_state = "riflecasing"
 	spent_icon = "riflecasing-spent"
 
+/obj/item/ammo_casing/rifle/practice
+	desc = "A rifle practice bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/practice
+	icon_state = "riflecasing_p"
+
 /obj/item/ammo_casing/shell
 	name = "shell casing"
 	desc = "An antimaterial shell casing."
@@ -159,6 +164,10 @@
 	projectile_type = /obj/item/projectile/bullet/rifle/military
 	icon_state = "rifle_mil"
 	spent_icon = "rifle_mil-spent"
+
+/obj/item/ammo_casing/rifle/military/light
+	desc = "A low-power military rifle bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle
 
 /obj/item/ammo_casing/rifle/military/practice
 	desc = "A military rifle practice bullet casing."

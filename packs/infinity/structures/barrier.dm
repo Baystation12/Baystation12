@@ -24,9 +24,9 @@
 	if(health>=200)
 		to_chat(user, SPAN_NOTICE("It looks undamaged."))
 	if(health>=140 && health<200)
-		to_chat(user, SPAN_WARNING("It has small dents."))
+		USE_FEEDBACK_FAILURE("It has small dents.")
 	if(health>=80 && health<140)
-		to_chat(user, SPAN_WARNING("It has medium dents."))
+		USE_FEEDBACK_FAILURE("It has medium dents.")
 	if(health<80)
 		to_chat(user, "<span class='danger'>It will break apart soon!</span>")
 
@@ -239,13 +239,13 @@
 /obj/item/barrier/proc/turf_check(mob/user as mob)
 	for(var/obj/structure/barrier/D in user.loc.contents)
 		if((D.dir == user.dir))
-			to_chat(user, SPAN_WARNING("There is no more space."))
+			USE_FEEDBACK_FAILURE("There is no more space.")
 			return 1
 	return 0
 
 /obj/item/barrier/attack_self(mob/user as mob)
 	if(!isturf(user.loc))
-		to_chat(user, SPAN_WARNING("You can't place it here."))
+		USE_FEEDBACK_FAILURE("You can't place it here.")
 		return
 	if(turf_check(user))
 		return

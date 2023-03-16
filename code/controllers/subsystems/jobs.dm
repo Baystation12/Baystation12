@@ -541,7 +541,6 @@ SUBSYSTEM_DEF(jobs)
 		var/obj/item/organ/external/r_foot = H.get_organ(BP_R_FOOT)
 		if(!l_foot || !r_foot)
 			var/obj/structure/bed/chair/wheelchair/W = new /obj/structure/bed/chair/wheelchair(H.loc)
-			H.buckled = W
 			H.UpdateLyingBuckledAndVerbStatus()
 			W.set_dir(H.dir)
 			W.buckle_mob(H)

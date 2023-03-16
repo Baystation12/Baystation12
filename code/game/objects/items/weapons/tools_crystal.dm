@@ -7,13 +7,17 @@
 	matter = list(MATERIAL_CRYSTAL = 1250)
 	cell = null
 	fuel_cost_multiplier = 1
-
-/obj/item/weldingtool/electric/crystal/attackby(obj/item/W, mob/user)
-	return
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_TOOLS
 
 /obj/item/weldingtool/electric/crystal/on_update_icon()
-	icon_state = welding ? "crystal_welder_on" : "crystal_welder"
-	item_state = welding ? "crystal_tool_lit"  : "crystal_tool"
+	if(welding)
+		icon_state = "crystal_welder_on"
+		item_state = "crystal_tool_lit"
+		set_light(0.6, 0.5, 2.5, l_color = COLOR_LIGHT_CYAN)
+	else
+		icon_state = "crystal_welder"
+		item_state = "crystal_tool"
+		set_light(0)
 	var/mob/M = loc
 	if(istype(M))
 		M.update_inv_l_hand()

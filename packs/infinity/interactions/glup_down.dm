@@ -9,7 +9,7 @@
 	set src in view(1)
 
 	if(!istype(usr.get_active_hand(), src))
-		to_chat(usr, SPAN_WARNING("You need to hold \the [src] in hands!"))
+		FEEDBACK_FAILURE(usr, "You need to hold \the [src] in hands!")
 		return
 
 	if(is_open_container())
@@ -23,7 +23,7 @@
 					return
 				var/obj/item/blocked = H.check_mouth_coverage()
 				if(blocked)
-					to_chat(H, SPAN_WARNING("\The [blocked] is in the way!"))
+					FEEDBACK_FAILURE(H, "\The [blocked] is in the way!")
 					return
 			if(reagents.total_volume > 30) // 30 equates to 3 SECONDS.
 				usr.visible_message(SPAN_NOTICE("[usr] prepares to gulp down [src]."), SPAN_NOTICE("You prepare to gulp down [src]."))

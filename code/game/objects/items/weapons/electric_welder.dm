@@ -78,9 +78,19 @@
 
 /obj/item/weldingtool/electric/on_update_icon()
 	underlays.Cut()
-	item_state = welding ? "welder1" : "welder"
+	if(welding)
+		icon_state = "welder_arc1"
+		set_light(0.6, 0.5, 2.5, l_color = COLOR_LIGHT_CYAN)
+	else
+		icon_state = "welder_arc"
+		set_light(0)
 	if(cell)
 		underlays += image(icon = icon, icon_state = "[initial(icon_state)]_cell")
+	item_state = welding ? "welder1" : "welder"
+	var/mob/M = loc
+	if(istype(M))
+		M.update_inv_l_hand()
+		M.update_inv_r_hand()
 
 /obj/item/weldingtool/electric/proc/spend_charge(amount)
 	var/obj/item/cell/cell = get_cell()

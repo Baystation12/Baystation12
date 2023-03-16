@@ -509,6 +509,21 @@
 	slot_flags = SLOT_HEAD | SLOT_OCLOTHING
 	var/sheets = 30
 
+/obj/item/taperoll/bog/equipped(mob/user, slot)
+	switch(slot)
+		if(slot_wear_suit)
+			sprite_sheets = list(
+				SPECIES_VOX = 'icons/mob/species/vox/onmob_suit_vox.dmi',
+				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi'
+				)
+		if(slot_head)
+			sprite_sheets = list(
+				SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
+				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi'
+				)
+	return ..()
+
+
 /obj/item/tape/bog
 	name = "toilet paper"
 	desc = "A length of toilet paper. Seems like custodia is marking their territory again."

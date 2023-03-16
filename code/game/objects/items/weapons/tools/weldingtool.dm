@@ -299,6 +299,15 @@
 	else
 		return ..()
 
+
+/obj/item/weldingtool/IsFlameSource()
+	return isOn()
+
+
+/obj/item/weldingtool/IsHeatSource()
+	return isOn() ? 3800 : 0
+
+
 /obj/item/weldingtool/mini
 	tank = /obj/item/welder_tank/mini
 

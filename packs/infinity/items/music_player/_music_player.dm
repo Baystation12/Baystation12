@@ -157,7 +157,7 @@ GLOBAL_LIST_INIT(switch_small_sound, list(
 				to_chat(user, "The front panel is unscrewed.")
 
 		if(broken)
-			to_chat(user, SPAN_WARNING("It's broken."))
+			USE_FEEDBACK_FAILURE("It's broken.")
 
 /obj/item/music_player/on_update_icon()
 	overlays.Cut()
@@ -212,7 +212,7 @@ GLOBAL_LIST_INIT(switch_small_sound, list(
 			return
 
 		if(C.ruined)
-			to_chat(user, SPAN_WARNING("\The [C] is ruined, you can't use it."))
+			USE_FEEDBACK_FAILURE("\The [C] is ruined, you can't use it.")
 			return
 
 		if(!user.unEquip(C))
@@ -280,7 +280,7 @@ GLOBAL_LIST_INIT(switch_small_sound, list(
 							cell = null
 							update_icon()
 						else
-							to_chat(user, SPAN_WARNING("\The [src] doesn't have a cell installed."))
+							USE_FEEDBACK_FAILURE("\The [src] doesn't have a cell installed.")
 					if("Adjust player")
 						if(!broken)
 							AdjustFrequency(I, user)
@@ -383,7 +383,7 @@ GLOBAL_LIST_INIT(switch_small_sound, list(
 
 /obj/item/music_player/proc/MayAdjust(mob/user)
 	if(mode)
-		to_chat(user, SPAN_WARNING("You can only adjust \the [src] when it's not playing."))
+		USE_FEEDBACK_FAILURE("You can only adjust \the [src] when it's not playing.")
 		return FALSE
 	return TRUE
 

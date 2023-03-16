@@ -345,3 +345,11 @@
 #define AREA_GRAVITY_NEVER  -1 // No gravity, never
 #define AREA_GRAVITY_NORMAL 1 // Gravity in area will act like always
 #define AREA_GRAVITY_ALWAYS 2 // No matter what, gravity always would be
+
+// Flags for `use_sanity_check()`
+/// Do not display user feedback messages.
+#define SANITY_CHECK_SILENT FLAG(0)
+/// Verify the tool can be unequipped from user.
+#define SANITY_CHECK_TOOL_UNEQUIP FLAG(1)
+/// Verify the target can be unequipped from user. Includes `target.loc == src` check to allow items the user isn't holding.
+#define SANITY_CHECK_TARGET_UNEQUIP FLAG(2)

@@ -4,6 +4,9 @@
 	icon_state = "solvest"
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi'
+	)
 
 /obj/item/clothing/suit/storage/vest/solgov
 	name = "\improper Sol Central Government heavy armored vest"
@@ -11,6 +14,9 @@
 	icon_state = "solwebvest"
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi'
+	)
 
 /obj/item/clothing/suit/storage/vest/solgov/security
 	name = "master at arms heavy armored vest"

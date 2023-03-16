@@ -24,33 +24,74 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 /obj/aura/proc/removed()
 	user = null
 
-/obj/aura/proc/life_tick()
-	return 0
+/**
+ * Called during the associated mob's life checks.
+ *
+ * Called by `/mob/living/proc/aura_check()` when `type` == `AURA_TYPE_LIFE`.
+ *
+ * Returns bitfield (Any of `AURA_*`). See `code\__defines\mobs.dm`.
+ */
+/obj/aura/proc/aura_check_life()
+	return EMPTY_BITFIELD
 
-/obj/aura/attackby(obj/item/I, mob/user)
-	return 0
+/**
+ * Called when the associated mob is attacked with a weapon.
+ *
+ * Called by `/mob/living/proc/aura_check()` when `type` == `AURA_TYPE_WEAPON`.
+ *
+ * **Parameters**:
+ * - `weapon` - Item used to attack the mob.
+ * - `attacker` - The attacking mob.
+ * - `click_params` - List of click parameters.
+ *
+ * Returns bitfield (Any of `AURA_*`). See `code\__defines\mobs.dm`.
+ */
+/obj/aura/proc/aura_check_weapon(obj/item/weapon, mob/attacker, click_params)
+	return EMPTY_BITFIELD
 
-/obj/aura/bullet_act(obj/item/projectile/P, def_zone)
-	return 0
+/**
+ * Called when the associated mob is impacted by a projectile.
+ *
+ * Called by `/mob/living/proc/aura_check()` when `type` == `AURA_TYPE_BULLET`.
+ *
+ * **Parameters**:
+ * - `proj` - The impacting projectile
+ * - `def_zone` - Body part target zone that was impacted
+ *
+ * Returns bitfield (Any of `AURA_*`). See `code\__defines\mobs.dm`.
+ */
+/obj/aura/proc/aura_check_bullet(obj/item/projectile/proj, def_zone)
+	return EMPTY_BITFIELD
 
-/obj/aura/hitby()
-	return 0
+/**
+ * Called when the associated mob is hit by a thrown atom.
+ *
+ * Called by `/mob/living/proc/aura_check()` when `type` == `AURA_TYPE_THROWN`.
+ *
+ * **Parameters**:
+ * - `thrown_atom` - The atom impacting the mob.
+ * - `thrown_datum` - The thrownthing datum associated with the thrown atom.
+ *
+ * Returns bitfield (Any of `AURA_*`). See `code\__defines\mobs.dm`.
+ */
+/obj/aura/proc/aura_check_thrown(atom/movable/thrown_atom, datum/thrownthing/thrown_datum)
+	return EMPTY_BITFIELD
 
 /obj/aura/debug
-	var/returning = 0
+	var/returning = EMPTY_BITFIELD
 
-/obj/aura/debug/attackby(obj/item/I, mob/user)
-	log_debug("Attackby for \ref[src]: [I], [user]")
+/obj/aura/debug/aura_check_weapon(obj/item/weapon, mob/attacker, click_params)
+	log_debug("Aura Check Weapon for \ref[src]: [weapon], [attacker]")
 	return returning
 
-/obj/aura/debug/bullet_act(obj/item/projectile/P, def_zone)
-	log_debug("Bullet Act for \ref[src]: [P], [def_zone]")
+/obj/aura/debug/aura_check_bullet(obj/item/projectile/proj, def_zone)
+	log_debug("Aura Check Bullet for \ref[src]: [proj], [def_zone]")
 	return returning
 
-/obj/aura/debug/life_tick()
-	log_debug("Life tick")
+/obj/aura/debug/aura_check_life()
+	log_debug("Aura Check Life for \ref[src]")
 	return returning
 
-/obj/aura/debug/hitby(atom/movable/M, datum/thrownthing/TT)
-	log_debug("Hit By for \ref[src]: [M], [TT.speed]")
+/obj/aura/debug/aura_check_thrown(atom/movable/thrown_atom, datum/thrownthing/thrown_datum)
+	log_debug("Aura Check Thrown for \ref[src]: [thrown_atom], [thrown_datum.speed]")
 	return returning

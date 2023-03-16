@@ -44,7 +44,7 @@
 	siemens_coefficient = 0
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC, SPECIES_VOX)
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_hands_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_hands_unathi.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_hands_vox.dmi'
 		)
 /obj/item/clothing/head/helmet/space/rig/merc
@@ -53,14 +53,14 @@
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC, SPECIES_VOX)
 	sprite_sheets = list(
 		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_head_skrell.dmi',
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_helmet_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi'
 		)
 
 /obj/item/clothing/suit/space/rig/merc
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC, SPECIES_VOX)
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_suit_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_suit_vox.dmi'
 	)
 	allowed = list(
@@ -78,7 +78,7 @@
 /obj/item/clothing/shoes/magboots/rig/merc
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC, SPECIES_VOX)
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_feet_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_feet_unathi.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_feet_vox.dmi'
 		)
 
@@ -116,27 +116,27 @@
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC, SPECIES_VOX)
 	sprite_sheets = list(
 		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_head_skrell.dmi',
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_helmet_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi'
 		)
 
 /obj/item/clothing/suit/space/rig/merc/heavy
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC, SPECIES_VOX)
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_suit_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_suit_vox.dmi'
 		)
 
 /obj/item/clothing/shoes/magboots/rig/merc/heavy
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC, SPECIES_VOX)
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_feet_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_feet_unathi.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_feet_vox.dmi'
 		)
 
 /obj/item/clothing/gloves/rig/merc/heavy
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC, SPECIES_VOX)
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_hands_unathi.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_hands_unathi.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_hands_vox.dmi'
 		)
