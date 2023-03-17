@@ -24,8 +24,8 @@
 	icon_state = "ship"
 	moving_state = "ship_moving"
 	fore_dir = SOUTH
-	vessel_size = SHIP_SIZE_TINY
-	vessel_mass = 1
+	vessel_size = SHIP_SIZE_SMALL
+	vessel_mass = 3000
 	known = FALSE
 
 /area/map_template/fleet_deimos
