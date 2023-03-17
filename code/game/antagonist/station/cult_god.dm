@@ -48,7 +48,6 @@ GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 		count++
 		deity_count++
 
-
 /datum/antagonist/godcultist/remove_antagonist(datum/mind/player, show_message, implanted)
 	var/mob/living/deity/god = get_deity(player)
 	if(!..())
@@ -85,11 +84,13 @@ GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 /datum/antagonist/godcultist/proc/add_cultist(datum/mind/player, mob/living/deity/deity)
 	deity.add_follower(player.current)
 	player.current.add_language(LANGUAGE_CULT)
+	player.current.add_language(LANGUAGE_CULT_GLOBAL)
 	log_and_message_admins("has been converted into a cultist under [deity.name]", player.current)
 
 /datum/antagonist/godcultist/proc/remove_cultist(datum/mind/player, mob/living/deity/god)
 	god.remove_follower(player.current)
 	player.current.remove_language(LANGUAGE_CULT)
+	player.current.add_language(LANGUAGE_CULT_GLOBAL)
 
 /datum/antagonist/godcultist/proc/get_deity(datum/mind/player)
 	for(var/datum/mind/mind as anything in GLOB.deity.current_antagonists)
