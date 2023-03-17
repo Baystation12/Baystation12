@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+        uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f
       - name: paths-filter
         uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50
         id: filter
@@ -31,7 +31,7 @@ jobs:
     needs: PreFlight
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+      - uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f
       - name: Setup Cache
         uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
         with:
@@ -59,7 +59,7 @@ jobs:
     - DreamChecker
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+      - uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f
       - name: Setup Cache
         uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
         with:
@@ -89,7 +89,7 @@ jobs:
     - DreamChecker
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+      - uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f
       - name: Setup Cache
         uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
         with:
@@ -118,7 +118,7 @@ jobs:
     - DreamChecker
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+      - uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f
       - name: Setup Cache
         uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
         with:
@@ -147,7 +147,7 @@ jobs:
     - DreamChecker
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+      - uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f
       - name: Setup Cache
         uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
         with:
