@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Default throwforce value changed from 1 to 0. This fixes random harmless
+      objects causing damage to things when thrown.
