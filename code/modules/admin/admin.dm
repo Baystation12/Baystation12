@@ -1650,3 +1650,25 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 
 	SSticker.skip_requirement_checks = !SSticker.skip_requirement_checks
 	log_and_message_admins("toggled the gamemode requirement checks [SSticker.skip_requirement_checks ? "OFF" : "ON"]")
+	
+/datum/admins/proc/debug_spell_cast(spell in subtypesof(/spell))
+	set category = "Debug"
+	set desc = "Cast a spell from a mob created once this verb is used."
+	set name = "Cast Debug Spell"
+
+
+	if(!spell)
+		return
+	var/mob/living/carbon/human/H = new(usr.loc)
+	var/spell/S = new spell
+	H.add_spell(S)
+
+	var/list/targets = S.choose_targets(H)
+	if(!S.check_valid_targets(targets))
+		return
+	S.cast(targets, H, 0)
+
+
+	log_and_message_admins("gave [key_name(H)] the spell [S] and cast it.")
+
+	qdel(H)

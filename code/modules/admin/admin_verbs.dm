@@ -99,7 +99,8 @@ var/global/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_notarget,
 	/datum/admins/proc/setroundlength,
 	/datum/admins/proc/toggleroundendvote,
-	/datum/admins/proc/togglemoderequirementchecks
+	/datum/admins/proc/togglemoderequirementchecks,
+	/datum/admins/proc/debug_spell_cast
 )
 var/global/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
