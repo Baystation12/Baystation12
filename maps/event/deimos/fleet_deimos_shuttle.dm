@@ -117,7 +117,15 @@
 /area/map_template/fleet_deimos/rightthrust
 	name = "\improper SFV Deimos - Right Thruster"
 
+
+var/global/const/access_deimos = "ACCESS_DEIMOS"
+/datum/access/deimos
+	id = access_deimos
+	desc = "SFV Deimos Crew"
+	region = ACCESS_REGION_NONE
+
+
 /obj/machinery/computer/shuttle_control/explore/fleet_deimos_shuttle
 	name = "SFV Deimos Control Console"
-	req_access = list(access_bearcat)
+	req_access = list(access_deimos)
 	shuttle_tag = "SFV Deimos"

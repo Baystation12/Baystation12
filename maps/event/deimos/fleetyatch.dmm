@@ -24,6 +24,16 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/comms)
+"as" = (
+/obj/structure/handrail{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 4;
+	id_tag = "deimos_east_pump_out_internal"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/fleet_deimos/crew)
 "aw" = (
 /obj/machinery/chemical_dispenser,
 /turf/simulated/floor/tiled/white/monotile,
@@ -85,9 +95,18 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/leftengi)
+"be" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/fleet_deimos/crew)
 "bg" = (
 /obj/effect/floor_decal/corner/yellow/half{
 	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/leftengi)
@@ -140,6 +159,22 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/rightgun)
+"cY" = (
+/obj/structure/handrail{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 4;
+	id_tag = "deimos_east_pump"
+	},
+/obj/machinery/airlock_sensor{
+	id_tag = "deimos_east_chamber_sensor";
+	pixel_y = 24;
+	req_access = list("ACCESS_DEIMOS");
+	master_tag = "deimos_east"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/fleet_deimos/crew)
 "dh" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/autoname/command/bearcat,
@@ -190,10 +225,26 @@
 /obj/effect/floor_decal/corner/red/half{
 	dir = 8
 	},
-/obj/machinery/light/spot{
-	dir = 8
+/obj/machinery/airlock_sensor/airlock_interior{
+	id_tag = "deimos_west_interior_sensor";
+	req_access = list("ACCESS_DEIMOS");
+	pixel_x = -22;
+	master_tag = "deimos_west"
 	},
 /turf/simulated/floor/tiled/dark,
+/area/map_template/fleet_deimos/crew)
+"dH" = (
+/obj/effect/floor_decal/corner/red/half{
+	dir = 1
+	},
+/obj/structure/handrail{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 4;
+	id_tag = "deimos_east_pump_out_internal"
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
 "dN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -229,14 +280,21 @@
 /obj/machinery/computer/modular/preset/engineering{
 	dir = 1
 	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -26
 	},
 /turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/fleet_deimos/crew)
+"ek" = (
+/obj/structure/lattice,
+/obj/machinery/light/small/red{
+	dir = 1
+	},
+/obj/structure/sign/warning/docking_area{
+	pixel_x = -32
+	},
+/turf/space,
 /area/map_template/fleet_deimos/crew)
 "es" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -271,6 +329,9 @@
 	},
 /obj/effect/floor_decal/corner/yellow{
 	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
+	dir = 6
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/leftengi)
@@ -375,6 +436,19 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/fleet_deimos/hospital)
+"fL" = (
+/obj/structure/handrail{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	id_tag = "deimos_east_pump_out_external";
+	dir = 1
+	},
+/obj/structure/sign/icarus_solgov{
+	pixel_x = -32
+	},
+/turf/simulated/floor/plating,
+/area/map_template/fleet_deimos/crew)
 "fT" = (
 /obj/effect/floor_decal/corner/yellow/half{
 	dir = 1
@@ -417,14 +491,12 @@
 /obj/effect/floor_decal/corner/red/half{
 	dir = 1
 	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
-	},
 /obj/structure/handrail{
 	dir = 8
 	},
-/obj/machinery/light/spot{
-	dir = 4
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 8;
+	id_tag = "deimos_west_pump_out_internal"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
@@ -545,11 +617,26 @@
 /obj/item/device/radio,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/bridge)
+"hz" = (
+/obj/structure/handrail{
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	id_tag = "deimos_west_pump_out_external";
+	dir = 1
+	},
+/obj/structure/sign/icarus_solgov{
+	pixel_x = 32
+	},
+/turf/simulated/floor/plating,
+/area/map_template/fleet_deimos/crew)
 "hE" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/item/device/radio/intercom{
 	pixel_y = -26;
 	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	color = "#ff00ff"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
@@ -602,9 +689,13 @@
 /area/map_template/fleet_deimos/central)
 "hK" = (
 /obj/structure/handrail{
-	dir = 4
+	dir = 8
 	},
-/turf/space,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 8;
+	id_tag = "deimos_east_pump_out_internal"
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
 "hP" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -655,8 +746,8 @@
 /obj/effect/floor_decal/corner/red/half{
 	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 8
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/crew)
@@ -690,11 +781,12 @@
 /area/map_template/fleet_deimos/rightstorage)
 "ip" = (
 /obj/effect/floor_decal/corner/red/half,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
-	dir = 8
-	},
 /obj/structure/handrail{
 	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 8;
+	id_tag = "deimos_west_pump"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
@@ -702,15 +794,20 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/comms)
 "iN" = (
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	pixel_y = 24;
+	id_tag = "deimos_east";
+	tag_airpump = "deimos_east_pump";
+	tag_chamber_sensor = "deimos_east_chamber_sensor";
+	tag_exterior_door = "deimos_east_exterior_door";
+	tag_exterior_sensor = "deimos_east_exterior_sensor";
+	tag_interior_door = "deimos_east_interior_door";
+	tag_interior_sensor = "deimos_east_interior_sensor";
+	req_access = list("ACCESS_DEIMOS");
+	cycle_to_external_air = 1
+	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
-	},
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	cycle_to_external_air = 1;
-	frequency = 1331;
-	id_tag = "deimos_shuttle_east";
-	pixel_y = 24;
-	req_access = list("ACCESS_TORCH_CREW")
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
@@ -749,16 +846,20 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/central)
-"jR" = (
-/obj/effect/floor_decal/corner/red/half,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+"jx" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/fleet_deimos/crew)
+"jR" = (
+/obj/effect/floor_decal/corner/red/half,
 /obj/structure/handrail{
 	dir = 4
 	},
-/obj/machinery/light/spot{
-	dir = 8
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 4;
+	id_tag = "deimos_east_pump"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
@@ -772,13 +873,15 @@
 /obj/effect/floor_decal/icarus_scglogo{
 	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/shuttle_landmark/fleet_deimos/start,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/crew)
@@ -839,9 +942,10 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/central)
 "kE" = (
-/obj/effect/paint/hull,
-/obj/structure/sign/icarus_solgov,
-/turf/simulated/wall/r_titanium,
+/obj/structure/sign/warning/docking_area{
+	pixel_x = -32
+	},
+/turf/space,
 /area/map_template/fleet_deimos/crew)
 "kJ" = (
 /obj/structure/bed/chair/comfy/blue,
@@ -953,7 +1057,6 @@
 "mB" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/power/smes/batteryrack,
-/obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/power/apc/debug{
 	dir = 1
 	},
@@ -974,13 +1077,14 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/leftthrust)
 "mJ" = (
-/obj/effect/floor_decal/corner/red/half{
-	dir = 4
+/obj/structure/lattice,
+/obj/machinery/light/small/red{
+	dir = 1
 	},
-/obj/machinery/light/spot{
-	dir = 4
+/obj/structure/sign/warning/docking_area{
+	pixel_x = 32
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/space,
 /area/map_template/fleet_deimos/crew)
 "mQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -1015,11 +1119,12 @@
 /obj/effect/floor_decal/corner/red/half{
 	dir = 1
 	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
 /obj/structure/handrail{
 	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 4;
+	id_tag = "deimos_west_pump_out_internal"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
@@ -1033,7 +1138,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 10
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/crew)
@@ -1124,7 +1229,7 @@
 "po" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/door/airlock/external/bolted/cycling{
-	id_tag = "deimos_shuttle_west_outer";
+	id_tag = "deimos_west_exterior_door";
 	name = "external airlock"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -1134,6 +1239,10 @@
 	id_tag = "deimos_shutters";
 	name = "Protective Shutters";
 	opacity = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4;
+	color = "#ff00ff"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/crew)
@@ -1164,9 +1273,10 @@
 /turf/simulated/floor/plating,
 /area/map_template/fleet_deimos/central)
 "pw" = (
-/obj/effect/paint/hull,
-/obj/structure/sign/warning/docking_area,
-/turf/simulated/wall/r_titanium,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/crew)
 "py" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1226,9 +1336,6 @@
 /area/map_template/fleet_deimos/leftengi)
 "qy" = (
 /obj/effect/catwalk_plated/dark,
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 1
 	},
@@ -1244,6 +1351,9 @@
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/map_template/fleet_deimos/leftengi)
@@ -1377,6 +1487,22 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/fleet_deimos/rightstorage)
+"tN" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 1
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/fleet_deimos/leftengi)
 "tW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/firedoor,
@@ -1488,11 +1614,12 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/fleet_deimos/hospital)
 "vB" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
-	},
 /obj/structure/handrail{
 	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 8;
+	id_tag = "deimos_west_pump_out_internal"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
@@ -1573,6 +1700,12 @@
 /obj/structure/sign/bluecross_2,
 /turf/simulated/wall/r_titanium,
 /area/map_template/fleet_deimos/central)
+"wf" = (
+/obj/structure/sign/warning/docking_area{
+	pixel_x = 32
+	},
+/turf/space,
+/area/map_template/fleet_deimos/crew)
 "wl" = (
 /obj/effect/floor_decal/corner/yellow/half{
 	dir = 4
@@ -1627,7 +1760,13 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/bridge)
 "wE" = (
-/turf/simulated/floor/tiled/dark/monotile,
+/obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4;
+	color = "#ff00ff"
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
 /area/map_template/fleet_deimos/crew)
 "wJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1686,19 +1825,27 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/bridge)
 "xA" = (
-/obj/structure/lattice,
-/turf/space,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	id_tag = "deimos_west_pump_out_external"
+	},
+/obj/machinery/airlock_sensor/airlock_exterior{
+	req_access = list("ACCESS_DEIMOS");
+	id_tag = "deimos_west_exterior_sensor";
+	pixel_x = 22;
+	master_tag = "deimos_west"
+	},
+/turf/simulated/floor/plating,
 /area/map_template/fleet_deimos/crew)
 "xI" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/door/airlock/external/bolted/cycling{
 	name = "internal airlock";
-	id_tag = "deimos_shuttle_west_inner"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 8
+	id_tag = "deimos_west_interior_door"
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/crew)
 "xT" = (
@@ -1720,10 +1867,15 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/fleet_deimos/hospital)
 "yg" = (
+/obj/effect/floor_decal/corner/red/half,
 /obj/structure/handrail{
 	dir = 8
 	},
-/turf/space,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 8;
+	id_tag = "deimos_east_pump"
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
 "yi" = (
 /obj/effect/floor_decal/corner/paleblue/half{
@@ -1878,6 +2030,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/leftengi)
 "AP" = (
@@ -1901,15 +2054,20 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/rightengi)
 "AX" = (
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	cycle_to_external_air = 1;
-	frequency = 1331;
-	id_tag = "deimos_shuttle_west";
-	pixel_y = 24;
-	req_access = list("ACCESS_TORCH_CREW")
-	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
+	},
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	pixel_y = 24;
+	id_tag = "deimos_west";
+	tag_airpump = "deimos_west_pump";
+	tag_chamber_sensor = "deimos_west_chamber_sensor";
+	tag_exterior_door = "deimos_west_exterior_door";
+	tag_exterior_sensor = "deimos_west_exterior_sensor";
+	tag_interior_door = "deimos_west_interior_door";
+	tag_interior_sensor = "deimos_west_interior_sensor";
+	req_access = list("ACCESS_DEIMOS");
+	cycle_to_external_air = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
@@ -1918,6 +2076,7 @@
 	dir = 9
 	},
 /obj/effect/floor_decal/corner/yellow,
+/obj/machinery/atmospherics/unary/tank,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/leftengi)
 "Bh" = (
@@ -1948,9 +2107,16 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/bridge)
 "BI" = (
-/obj/effect/paint/hull,
-/obj/structure/sign/warning/internals_required,
-/turf/simulated/wall/r_titanium,
+/obj/effect/floor_decal/corner/red/half{
+	dir = 4
+	},
+/obj/machinery/airlock_sensor/airlock_interior{
+	id_tag = "deimos_east_interior_sensor";
+	req_access = list("ACCESS_DEIMOS");
+	pixel_x = 22;
+	master_tag = "deimos_east"
+	},
+/turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/crew)
 "BL" = (
 /obj/machinery/computer/ship/helm{
@@ -1983,6 +2149,13 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/fleet_deimos/crew)
+"BW" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4;
+	color = "#ff00ff"
+	},
+/turf/simulated/floor/plating,
 /area/map_template/fleet_deimos/crew)
 "Cb" = (
 /obj/effect/catwalk_plated/dark,
@@ -2023,6 +2196,9 @@
 "Cq" = (
 /obj/effect/floor_decal/corner/red/half{
 	dir = 8
+	},
+/obj/structure/sign/warning/airlock{
+	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/crew)
@@ -2082,7 +2258,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/portable_atmospherics/powered/pump/filled,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
+	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/leftengi)
@@ -2096,11 +2272,15 @@
 /turf/simulated/floor/plating,
 /area/map_template/fleet_deimos/leftstorage)
 "CQ" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
-	dir = 8
-	},
 /obj/structure/handrail{
 	dir = 8
+	},
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 8;
+	id_tag = "deimos_east_pump"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
@@ -2113,8 +2293,8 @@
 /obj/effect/floor_decal/corner/red/half{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 8
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/crew)
@@ -2178,7 +2358,6 @@
 	dir = 2;
 	pixel_y = 21
 	},
-/obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/crew)
 "DO" = (
@@ -2200,9 +2379,6 @@
 /area/map_template/fleet_deimos/central)
 "Ef" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
 /obj/machinery/computer/ship/navigation{
 	dir = 1
 	},
@@ -2221,13 +2397,19 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/fleet_deimos/leftengi)
+"Em" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/fleet_deimos/crew)
 "EA" = (
 /obj/effect/floor_decal/icarus_scglogo{
 	icon_state = "bottom-center";
 	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 8
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/crew)
@@ -2304,7 +2486,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/crew)
@@ -2392,10 +2574,10 @@
 /turf/space,
 /area/map_template/fleet_deimos/rightstorage)
 "Gs" = (
-/obj/effect/catwalk_plated/dark,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 8
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
+/obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/map_template/fleet_deimos/crew)
 "Gz" = (
@@ -2424,8 +2606,8 @@
 	icon_state = "top-center";
 	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 8
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/crew)
@@ -2479,11 +2661,14 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/rightengi)
 "Hr" = (
-/obj/effect/catwalk_plated/dark,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
 	},
-/turf/simulated/floor/plating,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10;
+	color = "#ff00ff"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/crew)
 "Hu" = (
 /obj/effect/floor_decal/corner/yellow/half{
@@ -2511,11 +2696,12 @@
 /turf/simulated/wall/r_titanium,
 /area/map_template/fleet_deimos/crew)
 "HN" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
 /obj/structure/handrail{
 	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 4;
+	id_tag = "deimos_west_pump_out_internal"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
@@ -2547,6 +2733,13 @@
 /obj/structure/closet/crate/solar_assembly,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/leftstorage)
+"Ib" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8;
+	color = "#ff00ff"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/fleet_deimos/crew)
 "Ic" = (
 /obj/effect/floor_decal/icarus_scglogo{
 	icon_state = "center-left";
@@ -2574,11 +2767,14 @@
 /turf/simulated/wall/r_titanium,
 /area/map_template/fleet_deimos/crew)
 "Iq" = (
-/obj/effect/catwalk_plated/dark,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 10
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6;
+	color = "#ff00ff"
 	},
-/turf/simulated/floor/plating,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/crew)
 "Iz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2697,12 +2893,15 @@
 /obj/effect/floor_decal/corner/red/half{
 	dir = 4
 	},
+/obj/structure/sign/warning/airlock{
+	pixel_x = 32
+	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/crew)
 "Kn" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/door/airlock/external/bolted/cycling{
-	id_tag = "deimos_shuttle_east_outer";
+	id_tag = "deimos_east_exterior_door";
 	name = "external airlock"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -2712,6 +2911,10 @@
 	id_tag = "deimos_shutters";
 	name = "Protective Shutters";
 	opacity = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4;
+	color = "#ff00ff"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/crew)
@@ -2750,7 +2953,9 @@
 /obj/effect/floor_decal/corner/red/half{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply{
+	color = "#ff00ff"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
 "KP" = (
@@ -2779,8 +2984,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/leftengi)
 "La" = (
-/obj/machinery/atmospherics/binary/pump{
-	dir = 8
+/obj/machinery/atmospherics/binary/pump/on{
+	dir = 8;
+	target_pressure = 80
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/leftengi)
@@ -2823,6 +3029,18 @@
 /obj/structure/ship_munition/disperser_charge/emp,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/rightstorage)
+"Lz" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	id_tag = "deimos_east_pump_out_external"
+	},
+/obj/machinery/airlock_sensor/airlock_exterior{
+	req_access = list("ACCESS_DEIMOS");
+	id_tag = "deimos_east_exterior_sensor";
+	pixel_x = -22;
+	master_tag = "deimos_east"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/fleet_deimos/crew)
 "LD" = (
 /obj/effect/floor_decal/corner/paleblue/half{
 	dir = 4
@@ -2867,9 +3085,6 @@
 /area/map_template/fleet_deimos/comms)
 "Ma" = (
 /obj/effect/catwalk_plated/dark,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 1
-	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},
@@ -2881,12 +3096,16 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/map_template/fleet_deimos/leftengi)
 "Mf" = (
 /obj/effect/floor_decal/corner/red/half,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
-	dir = 4
+	dir = 4;
+	id_tag = "deimos_west_pump"
 	},
 /obj/structure/handrail{
 	dir = 4
@@ -2898,9 +3117,12 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/door/airlock/external/bolted/cycling{
 	name = "internal airlock";
-	id_tag = "deimos_shuttle_east_inner"
+	id_tag = "deimos_east_interior_door"
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/crew)
 "Mm" = (
@@ -3014,6 +3236,9 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/crew)
 "NZ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/fleet_deimos/leftengi)
 "Oh" = (
@@ -3176,6 +3401,16 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/fleet_deimos/central)
+"Qj" = (
+/obj/structure/bed/chair/shuttle/black{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/fleet_deimos/crew)
 "Qo" = (
 /obj/effect/paint/hull,
 /turf/simulated/wall/r_titanium,
@@ -3191,9 +3426,6 @@
 /area/map_template/fleet_deimos/comms)
 "Qz" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
 /obj/machinery/power/apc/debug{
 	dir = 1
 	},
@@ -3246,14 +3478,14 @@
 /obj/machinery/power/terminal{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9
-	},
 /obj/structure/cable/cyan,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/crew)
@@ -3314,6 +3546,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/fleet_deimos/rightengi)
+"Rv" = (
+/obj/structure/bed/chair/shuttle/black,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/fleet_deimos/crew)
 "RA" = (
 /obj/effect/floor_decal/corner/yellow/half{
 	dir = 8
@@ -3621,10 +3861,12 @@
 /turf/space,
 /area/map_template/fleet_deimos/rightgun)
 "UY" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 8
+/obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
-/turf/simulated/floor/tiled/dark/monotile,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
 /area/map_template/fleet_deimos/crew)
 "Vf" = (
 /obj/machinery/recharge_station,
@@ -3695,11 +3937,12 @@
 /obj/effect/floor_decal/corner/red/half{
 	dir = 1
 	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
-	},
 /obj/structure/handrail{
 	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 8;
+	id_tag = "deimos_east_pump_out_internal"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
@@ -3718,10 +3961,14 @@
 /area/map_template/fleet_deimos/bridge)
 "WI" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
-	dir = 4
+	dir = 4;
+	id_tag = "deimos_west_pump"
 	},
 /obj/structure/handrail{
 	dir = 4
+	},
+/obj/machinery/light/spot{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/fleet_deimos/crew)
@@ -3779,7 +4026,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/fleet_deimos/crew)
@@ -3806,6 +4053,22 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/fleet_deimos/leftthrust)
+"YF" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 8;
+	id_tag = "deimos_west_pump"
+	},
+/obj/structure/handrail{
+	dir = 8
+	},
+/obj/machinery/airlock_sensor{
+	id_tag = "deimos_west_chamber_sensor";
+	pixel_y = 24;
+	req_access = list("ACCESS_DEIMOS");
+	master_tag = "deimos_west"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/fleet_deimos/crew)
 "YM" = (
 /obj/effect/catwalk_plated/dark,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -3835,10 +4098,11 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/fleet_deimos/hospital)
 "ZC" = (
-/obj/effect/paint/hull,
-/obj/structure/sign/warning/airlock,
-/turf/simulated/wall/r_titanium,
-/area/map_template/fleet_deimos/crew)
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/fleet_deimos/leftengi)
 "ZF" = (
 /obj/structure/table/reinforced,
 /obj/item/storage/firstaid/surgery,
@@ -7798,11 +8062,11 @@ Qo
 Qo
 Qo
 HG
+mJ
 xA
-xA
-Yf
-Yf
-yg
+Ib
+hz
+wf
 Yf
 wS
 wS
@@ -7901,9 +8165,9 @@ UO
 aR
 HG
 HG
-pw
+HG
 po
-kE
+HG
 HG
 HG
 VU
@@ -8206,7 +8470,7 @@ Ru
 TS
 Cy
 HG
-CQ
+YF
 ip
 UY
 gK
@@ -8309,9 +8573,9 @@ mt
 EN
 HG
 HG
-BI
+HG
 xI
-ZC
+HG
 HG
 HG
 vO
@@ -8410,7 +8674,7 @@ sK
 KE
 MY
 HG
-SA
+Rv
 dF
 ia
 Cq
@@ -8615,9 +8879,9 @@ Pu
 JS
 HG
 SA
-Ty
+jx
 Gs
-Ty
+pw
 nT
 HG
 hJ
@@ -9023,9 +9287,9 @@ wl
 kp
 HG
 SA
-Ty
+Em
 Gs
-Ty
+be
 nT
 HG
 hJ
@@ -9221,16 +9485,16 @@ dm
 dm
 IX
 CJ
-NZ
+ZC
 eP
 AK
 Bg
 HG
 SA
-Kg
+BI
 CZ
-mJ
-nT
+Kg
+Qj
 HG
 YV
 Ff
@@ -9329,9 +9593,9 @@ sP
 Ni
 HG
 HG
-ZC
+HG
 Mh
-BI
+HG
 HG
 HG
 cN
@@ -9426,15 +9690,15 @@ Cb
 qA
 qy
 Ma
-Ma
+tN
 Eh
 oy
 HG
-WI
+cY
 jR
 UY
-nc
-HN
+dH
+as
 HG
 vG
 So
@@ -9635,10 +9899,10 @@ La
 ZX
 HG
 CQ
-ip
+yg
 wE
 VS
-vB
+hK
 HG
 Dn
 es
@@ -9737,9 +10001,9 @@ gk
 Yq
 HG
 HG
-kE
+HG
 Kn
-pw
+HG
 HG
 HG
 ZW
@@ -9838,11 +10102,11 @@ IX
 IX
 IX
 HG
-xA
-xA
-Yf
-Yf
-hK
+ek
+Lz
+BW
+fL
+kE
 Yf
 wS
 wS

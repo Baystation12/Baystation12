@@ -32,13 +32,13 @@
 	name = "\improper SFV Deimos"
 	icon_state = "blue"
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-	req_access = list(access_bearcat)
+	req_access = list(access_deimos)
 
 
 //items
 
 /obj/item/card/id/deimos
-	access = list(access_bearcat)
+	access = list(access_deimos)
 
 //mobs
 
