@@ -83,7 +83,7 @@
 	var/static/datum/announcement/priority/security/security_announcement_green = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice2.ogg'))
 
 /singleton/security_level/default/sierradept/code_green/switching_down_to()
-	security_announcement_green.Announce("Все угрозы для судна и его экипажа были устранены. \
+	security_announcement_green.Announce("Угрозы для судна и его экипажа отсутствуют. \
 	Персоналу следует вернуться к выполнению рабочих обязанностей в штатном режиме.", \
 	"Внимание! Зелёный код")
 	notify_station()
@@ -171,16 +171,16 @@
 	psionic_control_level = PSI_IMPLANT_LOG
 
 /singleton/security_level/default/sierradept/code_blue/switching_up_to()
-	security_announcement_up.Announce("По новой информации на судне может присутствовать угроза для безопасности экипажа. \
+	security_announcement_up.Announce("Согласно полученной информации на судне может присутствовать угроза для безопасности экипажа. \
 	Всей охране требуется обратиться к вышестоящим сотрудникам для получения указаний; \
-	разрешено обыскивать сотрудников и отсеки, а так же держать оружие на виду.", "Внимание! Синий код")
+	разрешено обыскивать сотрудников и отсеки, а также держать оружие на виду.", "Внимание! Синий код")
 	notify_station()
 	GLOB.using_map.lock_high_secure_areas()
 
 /singleton/security_level/default/sierradept/code_blue/switching_down_to()
 	security_announcement_down.Announce("Потенциальная угроза для экипажа. \
 	Всей охране требуется обратиться к вышестоящим сотрудникам для получения указаний; \
-	разрешено обыскивать сотрудников и отсеки, а так же держать оружие на виду.", "Внимание! Код угрозы понижен до Синего")
+	разрешено обыскивать сотрудников и отсеки, а также держать оружие на виду.", "Внимание! Код угрозы понижен до Синего")
 	notify_station()
 	GLOB.using_map.unlock_secure_areas()
 
