@@ -8,6 +8,7 @@
 	health = 100
 	maxHealth = 100 //I dunno what to do with health at this point.
 	universal_understand = TRUE
+	see_invisible = SEE_INVISIBLE_CULT
 
 	meat_type = null
 	meat_amount = 0
