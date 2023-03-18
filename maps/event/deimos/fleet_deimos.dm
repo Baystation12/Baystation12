@@ -48,7 +48,7 @@
 	icon = 'maps/event/deimos/smallrobot.dmi'
 	icon_state = "deimoslaser"
 	icon_dead = "deimoslaser"
-	faction = "hivebot"
+	faction = "deimos"
 	projectiletype = /obj/item/projectile/beam/smalllaser
 	base_attack_cooldown = 10
 	projectilesound = 'sound/weapons/Laser.ogg'
@@ -81,6 +81,7 @@
 	health = 100
 
 /datum/ai_holder/simple_animal/hostile/hivebot/ranged_damage/deimos
+	pointblank = TRUE
 	speak_chance = 0
 	threaten = FALSE
 
@@ -151,9 +152,9 @@
 	name = "\improper hullbreaker monitor"
 	desc = "A Massive, heavily armored drone with anti-gravity propulsion and a particle-projector cannon mounted on its front. <span class='danger'>The exposed back-mounted reactor crackles with barely-restrained energy.</span>"
 	icon = 'maps/event/deimos/bigrobot.dmi'
-	pixel_x = 16
-	pixel_y = 16
-	faction = "hivebot"
+	pixel_x = -16
+	pixel_y = -16
+	faction = "deimos"
 	icon_state = "deimosbig"
 	icon_living = "deimosbig"
 	icon_dead = "deimosbig"
@@ -202,7 +203,6 @@
 	ranged_attack_delay = 2 SECONDS //How much time we wait before really shooting
 
 /datum/ai_holder/simple_animal/ranged/kiting/threatening/deimosheavy
-	pointblank = FALSE        // Makes it safe to get close
 	firing_lanes = TRUE        // Lets you use others as shields
 	returns_home = TRUE     // So it won't chase you forever
 	violent_breakthrough = FALSE //It won't try to break walls and such maybe? Modify as needed
