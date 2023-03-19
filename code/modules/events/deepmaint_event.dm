@@ -1,11 +1,12 @@
 /datum/event/deepmaint
 	announceWhen = 10
-	endWhen = 100
+	endWhen = 2400
 	var/list/free_deepmaint_ladders_copy
 	var/list/spawned_ladders
 
 /datum/event/deepmaint/start()
 	var/attempts = 5
+	spawned_ladders = new/list()
 	free_deepmaint_ladders_copy = free_deepmaint_ladders.Copy()
 	do
 		if (!length(free_deepmaint_ladders_copy))
@@ -23,7 +24,7 @@
 	for (var/obj/structure/ladder/L in spawned_ladders)
 		L.target_down = null
 		L.target_up = null
-		L.visible_message(SPAN_WARNING("\The [src] suddenly vanishes in front of your eyes!"))
+		L.visible_message(SPAN_WARNING("\The [src] suddenly vanishes into nothingness!"))
 		qdel(L)
 
 	command_announcement.Announce("All subspace distortions have ceased. All personnel and/or assets not present onboard should be considered lost.")
@@ -45,11 +46,15 @@
 		return FALSE
 
 	var/turf/station_turf = pick(ladder_turfs)
+
 	var/turf/deepmaint_turf = pick(free_deepmaint_ladders_copy)
 	free_deepmaint_ladders_copy -= deepmaint_turf
 	var/obj/structure/ladder/station_ladder = new (station_turf)
-	var/obj/structure/ladder/deepmaint_ladder = new (deepmaint_turf)
-	station_ladder.desc = "[station_ladder.desc] This one seems... Out of place."
+	var/turf/T = station_ladder.loc
+	T.ChangeTurf(/turf/simulated/open)
+	new/obj/structure/lattice(station_ladder.loc)
+	var/obj/structure/ladder/up/deepmaint_ladder = new (deepmaint_turf)
+	station_ladder.desc = "[station_ladder.desc] Was this always here...?"
 	station_ladder.target_down = deepmaint_ladder
 	deepmaint_ladder.target_up = station_ladder
 	spawned_ladders += station_ladder
