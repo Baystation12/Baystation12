@@ -22,6 +22,7 @@
 	icon_state = "sheet"
 	default_type = MATERIAL_STEEL
 	stacktype = /obj/item/stack/material/steel
+	build_type = /obj/item/stack/material/steel
 
 /obj/item/stack/material/cyborg/plasteel
 	icon_state = "sheet-reinf"
