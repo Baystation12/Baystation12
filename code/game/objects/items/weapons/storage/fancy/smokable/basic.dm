@@ -4,6 +4,9 @@
 	icon_state = "cigscase"
 	max_storage_space = null
 	storage_slots = 6
+	startswith = list(
+		/obj/item/clothing/mask/smokable/cigarette = 6
+	)
 
 
 /obj/item/storage/fancy/smokable/transstellar
