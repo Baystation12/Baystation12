@@ -2,32 +2,10 @@
  * Sierra Exploration
  */
 
-/singleton/closet_appearance/secure_closet/sierra/exploration
-	extra_decals = list(
-		"stripe_vertical_mid_full" = COLOR_PURPLE,
-		"exped" = COLOR_PURPLE
-	)
-
-/singleton/closet_appearance/secure_closet/sierra/exploration/pilot
-	extra_decals = list(
-		"stripe_vertical_left_full" = COLOR_PURPLE,
-		"stripe_vertical_right_full" = COLOR_PURPLE,
-		"exped" = COLOR_PURPLE
-	)
-
-/singleton/closet_appearance/secure_closet/sierra/exploration/leader
-	extra_decals = list(
-		"stripe_vertical_left_full" = COLOR_PURPLE,
-		"stripe_vertical_mid_full" = COLOR_GOLD,
-		"stripe_vertical_right_full" = COLOR_PURPLE,
-		"exped" = COLOR_GOLD
-	)
-
-
 /obj/structure/closet/secure_closet/el
 	name = "exploration leader's locker"
 	req_access = list(access_el)
-
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/exploration/leader
 
 /obj/structure/closet/secure_closet/el/WillContain()
 	return list(
@@ -60,7 +38,7 @@
 /obj/structure/closet/secure_closet/explorer
 	name = "explorer's locker"
 	req_access = list(access_explorer)
-	icon_state = "exp"
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/exploration
 
 /obj/structure/closet/secure_closet/explorer/WillContain()
 	return list(
@@ -83,7 +61,7 @@
 /obj/structure/closet/secure_closet/explorer/pilot
 	name = "expeditionary pilot's locker"
 	req_access = list(access_explorer, list(access_el, access_expedition_shuttle_helm))
-
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/exploration/pilot
 
 /obj/structure/closet/secure_closet/explorer/pilot/WillContain()
 	return list(
@@ -108,6 +86,7 @@
 /obj/structure/closet/secure_closet/explorer/medic
 	name = "field medic's locker"
 	req_access = list(access_explorer, list(access_el, access_field_med))
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/exploration/med
 
 /obj/structure/closet/secure_closet/explorer/medic/WillContain()
 	return list(
@@ -133,6 +112,7 @@
 /obj/structure/closet/secure_closet/explorer/engineer
 	name = "field engineer's locker"
 	req_access = list(access_explorer, list(access_el, access_field_eng))
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/exploration/eng
 
 /obj/structure/closet/secure_closet/explorer/engineer/WillContain()
 	return list(

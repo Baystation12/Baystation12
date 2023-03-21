@@ -1,46 +1,10 @@
 /*
  * Sierra Security
 */
-
-/singleton/closet_appearance/secure_closet/sierra/security
-	color = COLOR_GUNMETAL
-	extra_decals = list(
-		"stripe_vertical_mid_full" = COLOR_NT_RED,
-		"security" = COLOR_NT_RED
-	)
-
-/singleton/closet_appearance/secure_closet/sierra/security/forensics
-	color = COLOR_OFF_WHITE
-	extra_decals = list(
-		"stripe_vertical_mid_full" = COLOR_NT_RED,
-		"forensics" = COLOR_NT_RED
-	)
-
-/singleton/closet_appearance/secure_closet/sierra/security/warden
-	color = COLOR_WALL_GUNMETAL
-	extra_decals = list(
-		"stripe_vertical_left_full" = COLOR_NT_RED,
-		"stripe_vertical_right_full" = COLOR_NT_RED,
-		"security" = COLOR_NT_RED
-	)
-
-/singleton/closet_appearance/secure_closet/sierra/security/hos
-	color = COLOR_WALL_GUNMETAL
-	extra_decals = list(
-		"stripe_vertical_left_full" = COLOR_NT_RED,
-		"stripe_vertical_mid_full" = COLOR_GOLD,
-		"stripe_vertical_right_full" = COLOR_NT_RED,
-		"security" = COLOR_GOLD
-	)
-
-
-
-
 /obj/structure/closet/secure_closet/hos/sierra
 	name = "head of security's cabinet"
 	req_access = list(access_hos)
-	icon_state = "hos"
-
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/security/hos
 
 /obj/structure/closet/secure_closet/hos/sierra/WillContain()
 	return list(
@@ -77,7 +41,7 @@
 /obj/structure/closet/secure_closet/warden/sierra
 	name = "warden's locker"
 	req_access = list(access_warden)
-	icon_state = "warden"
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/security/warden
 
 /obj/structure/closet/secure_closet/warden/sierra/WillContain()
 	return list(
@@ -115,7 +79,7 @@
 /obj/structure/closet/secure_closet/cabinet/forensics
 	name = "forensics technician's locker"
 	req_access = list(access_forensics_lockers)
-	icon_state = "cabinet"
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/security/forensics
 
 
 /obj/structure/closet/secure_closet/cabinet/forensics/WillContain()
@@ -149,7 +113,7 @@
 /obj/structure/closet/secure_closet/security/sierra
 	name = "security guard's locker"
 	req_access = list(access_guard)
-	icon_state = "sec"
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/security
 
 /obj/structure/closet/secure_closet/security/sierra/WillContain()
 	return list(
@@ -180,7 +144,7 @@
 /obj/structure/closet/secure_closet/security/sierra/cadet
 	name = "cadet's locker"
 	req_access = list(access_security)
-	icon_state = "sec"
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/security
 
 /obj/structure/closet/secure_closet/security/sierra/cadet/WillContain()
 	return list(

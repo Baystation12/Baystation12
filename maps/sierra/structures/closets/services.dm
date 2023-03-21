@@ -6,7 +6,7 @@
 /obj/structure/closet/chefcloset_sierra
 	name = "chef's closet"
 	desc = "It's a storage unit for foodservice equipment."
-
+	closet_appearance = /singleton/closet_appearance/wardrobe/sierra/chef
 
 /obj/structure/closet/chefcloset_sierra/WillContain()
 	return list(
@@ -25,7 +25,7 @@
 /obj/structure/closet/secure_closet/hydroponics_sierra //done so that it has no access reqs
 	name = "hydroponics locker"
 	req_access = list()
-	icon_state = "hydro"
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/hydroponics
 
 /obj/structure/closet/secure_closet/hydroponics_sierra/WillContain()
 	return list(
@@ -45,7 +45,7 @@
 /obj/structure/closet/jcloset/sierra
 	name = "custodial closet"
 	desc = "It's a storage unit for janitorial equipment."
-
+	closet_appearance = /singleton/closet_appearance/wardrobe/sierra/janitor
 
 /obj/structure/closet/jcloset/sierra/WillContain()
 	return list(
@@ -76,6 +76,7 @@
 	name = "bar locker"
 	desc = "It's a storage unit for bar equipment."
 	req_access = list(access_bar)
+	closet_appearance = /singleton/closet_appearance/cabinet/secure
 	//open_sound = 'sound/machines/wooden_closet_open.ogg'
 	//close_sound = 'sound/machines/wooden_closet_close.ogg'
 

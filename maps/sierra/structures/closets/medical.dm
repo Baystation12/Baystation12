@@ -1,11 +1,13 @@
 /*
  * Sierra Medical
  */
+/obj/structure/closet/secure_closet/personal/patient
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/patients
 
 /obj/structure/closet/secure_closet/CMO_sierra
 	name = "chief medical officer's locker"
 	req_access = list(access_cmo)
-	icon_state = "cmo"
+	closet_appearance = /singleton/closet_appearance/secure_closet/cmo
 
 /obj/structure/closet/secure_closet/CMO_sierra/WillContain()
 	return list(
@@ -34,6 +36,7 @@
 /obj/structure/closet/secure_closet/medical_sierrasenior
 	name = "surgeon's locker"
 	req_access = list(access_senmed)
+	closet_appearance = /singleton/closet_appearance/secure_closet/medical/alt
 
 
 /obj/structure/closet/secure_closet/medical_sierrasenior/WillContain()
@@ -53,7 +56,7 @@
 /obj/structure/closet/secure_closet/medical_sierra
 	name = "doctor's locker"
 	req_access = list(access_medical_equip)
-	icon_state = "med"
+	closet_appearance = /singleton/closet_appearance/secure_closet/medical
 
 /obj/structure/closet/secure_closet/medical_sierra/WillContain()
 	return list(
@@ -72,7 +75,7 @@
 
 /obj/structure/closet/wardrobe/medic_sierra
 	name = "medical wardrobe"
-
+	closet_appearance = /singleton/closet_appearance/wardrobe/sierra/medical
 
 /obj/structure/closet/wardrobe/medic_sierra/WillContain()
 	return list(
@@ -87,6 +90,7 @@
 	name = "chemical closet"
 	desc = "Store dangerous chemicals in here."
 	req_access = list(access_chemistry)
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/medical/chemistry
 
 /obj/structure/closet/secure_closet/chemical_sierra/WillContain()
 	return list(

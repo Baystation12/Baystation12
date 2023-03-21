@@ -2,33 +2,6 @@
  * Sierra Supply
  */
 
-/singleton/closet_appearance/secure_closet/sierra/prospector
-	color = COLOR_WARM_YELLOW
-	decals = list(
-		"upper_side_vent",
-		"lower_side_vent"
-	)
-	extra_decals = list(
-		"stripe_vertical_mid_partial" = COLOR_BEASTY_BROWN,
-		"stripe_vertical_left_partial" = COLOR_BEASTY_BROWN,
-		"mining" = COLOR_BEASTY_BROWN
-	)
-
-/singleton/closet_appearance/secure_closet/sierra/cargo/decktech
-	extra_decals = list(
-		"stripe_vertical_left_full" = COLOR_BEASTY_BROWN,
-		"stripe_vertical_right_full" = COLOR_BEASTY_BROWN,
-		"cargo_upper" = COLOR_BEASTY_BROWN
-	)
-
-/singleton/closet_appearance/secure_closet/sierra/cargo/quartmaster
-	extra_decals = list(
-		"stripe_vertical_mid_full" = COLOR_GOLD,
-		"stripe_vertical_left_full" = COLOR_BEASTY_BROWN,
-		"stripe_vertical_right_full" = COLOR_BEASTY_BROWN,
-		"cargo_upper" = COLOR_GOLD
-	)
-
 /obj/structure/closet/secure_closet/decktech
 	name = "cargo technician's locker"
 	req_access = list(access_cargo)
@@ -55,7 +28,7 @@
 /obj/structure/closet/secure_closet/quartermaster_sierra
 	name = "quartermaster's locker"
 	req_access = list(access_qm)
-	icon_state = "qm"
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/cargo/quartmaster
 
 /obj/structure/closet/secure_closet/quartermaster_sierra/WillContain()
 	return list(
@@ -82,7 +55,7 @@
 /obj/structure/closet/secure_closet/prospector
 	name = "prospector's locker"
 	req_access = list(access_mining)
-	icon_state = "mining"
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/cargo/prospector
 
 /obj/structure/closet/secure_closet/prospector/WillContain()
 	return list(

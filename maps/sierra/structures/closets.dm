@@ -2,13 +2,6 @@
  * Sierra Excavation
  */
 
-/singleton/closet_appearance/secure_closet/sierra/excavation
-	extra_decals = list(
-		"stripe_vertical_left_full" =  COLOR_PURPLE_GRAY,
-		"stripe_vertical_right_full" = COLOR_PURPLE_GRAY,
-		"research" = COLOR_PURPLE_GRAY
-	)
-
 /obj/structure/closet/toolcloset/excavation
 	name = "excavation equipment closet"
 	desc = "It's a storage unit for excavation equipment."
