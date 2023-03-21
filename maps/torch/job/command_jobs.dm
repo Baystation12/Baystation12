@@ -310,9 +310,9 @@
 	department_flag = SUP|COM
 	supervisors = "Командующему и Исполнительному офицеру"
 	economic_power = 12
-	minimal_player_age = 0
-	minimum_character_age = list(SPECIES_HUMAN = 22)
-	ideal_character_age = 30
+	minimum_character_age = list(SPECIES_HUMAN = 24)
+	ideal_character_age = 40
+	minimal_player_age = 14
 	hud_icon = "hudsupplyofficer"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer
 	allowed_branches = list(
@@ -366,7 +366,9 @@
 	supervisors = "Исполнительному и Командующему Офицеру судна и ВЮКПСС"
 	selection_color = "#2f2f7f"
 	economic_power = 10
-	minimal_player_age = 0
+	minimum_character_age = list(SPECIES_HUMAN = 24)
+	ideal_character_age = 40
+	minimal_player_age = 14
 	hud_icon = "hudjudgeadvocate"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/jua
 	allowed_branches = list(
