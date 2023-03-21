@@ -109,6 +109,7 @@
 #define RELIGION_JAINISM       "Jainism"
 #define RELIGION_ISLAM         "Islam"
 #define RELIGION_CHRISTIANITY  "Christianity"
+#define RELIGION_EASTERN_ORTHODOXY  "Eastern Orthodoxy"
 #define RELIGION_BAHAI_FAITH   "Baha'i Faith"
 #define RELIGION_AGNOSTICISM   "Agnosticism"
 #define RELIGION_DEISM         "Deism"

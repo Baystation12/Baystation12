@@ -41,6 +41,11 @@
 	description = "Абрахамская монотеистическая религия, основанная на жизни и учении Иисуса из Назарета. Того, \
 	кто исповедует христианство, называют <font color=\"#ffbf00\">христианином</font>."
 
+/decl/cultural_info/religion/eastern_orthodoxy
+	name = RELIGION_EASTERN_ORTHODOXY
+	description = "Одно из из основных и древнейших направлений в христианстве, сложившиееся ещё в Византии. Того, \
+	кто исповедует православие, называют <font color=\"#ffa000\">православным</font>."
+
 /decl/cultural_info/religion/bahai
 	name = RELIGION_BAHAI_FAITH
 	description = "Абрахамская монотеистическая религия, которая следует учению Бахауллы и верит во всеобщий мир \
