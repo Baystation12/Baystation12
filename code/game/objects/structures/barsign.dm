@@ -51,6 +51,8 @@
 			to_chat(user, "It fills you with a snuggly wuggly sense of warmth and comfort.")
 		if("The Redshirt")
 			to_chat(user, "Mmm... Donuts...")
+		if("The Singulo")
+			to_chat(user, "You spin me right 'round, baby right 'round.")
 		else
 			to_chat(user, "It says '[icon_state]'")
 
