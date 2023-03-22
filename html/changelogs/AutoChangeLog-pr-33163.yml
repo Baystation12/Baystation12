@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Legacy non-harmful mob interactions no longer require harm intent to occur.
