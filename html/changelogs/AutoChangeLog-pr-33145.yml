@@ -1,0 +1,7 @@
+author: CrimsonShrike
+delete-after: true
+changes:
+  - rscadd: Holding a baseball bat has a chance, scaled by athletics skill, to reflect
+      thrown items back at launcher
+  - rscadd: Baseball unhandled afterattacks on small and below items will hit the
+      item and send it flying.
