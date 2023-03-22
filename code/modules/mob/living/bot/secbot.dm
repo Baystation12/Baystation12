@@ -130,10 +130,11 @@
 	.[CODEX_INTERACTION_EMAG] += "<p>Causes \the [initial(name)] to attack and arrest anyone around it, except the person who emagged it.</p>"
 
 
-/mob/living/bot/secbot/use_weapon(obj/item/weapon, mob/user, list/click_params)
-	var/previous_health = health
-	. = ..()
-	if (. && health < previous_health)
+/mob/living/bot/secbot/post_use_item(obj/item/tool, mob/user, interaction_handled, use_call, click_params)
+	..()
+
+	// React to attack
+	if (use_call == "weapon")
 		react_to_attack(user)
 
 

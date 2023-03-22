@@ -252,19 +252,20 @@
 			drop_held_item(0)
 	return
 
-//Mobs with objects
-/mob/living/simple_animal/hostile/retaliate/parrot/attackby(obj/item/O as obj, mob/user as mob)
-	..()
-	if(!stat && !client && !istype(O, /obj/item/stack/medical))
-		if(O.force)
-			if(parrot_state == PARROT_PERCH)
-				parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
 
-			parrot_interest = user
-			parrot_state = PARROT_SWOOP | PARROT_FLEE
-			icon_state = "[icon_set]_fly"
-			drop_held_item(0)
-	return
+/mob/living/simple_animal/hostile/retaliate/parrot/post_use_item(obj/item/tool, mob/user, interaction_handled, use_call, click_params)
+	..()
+
+	// React to being hit
+	if ((use_call == "weapon" || use_call == "attackby") && !stat && !client)
+		if (parrot_state == PARROT_PERCH)
+			parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
+
+		parrot_interest = user
+		parrot_state = PARROT_SWOOP | PARROT_FLEE
+		icon_state = "[icon_set]_fly"
+		drop_held_item(FALSE)
+
 
 //Bullets
 /mob/living/simple_animal/hostile/retaliate/parrot/bullet_act(obj/item/projectile/Proj)

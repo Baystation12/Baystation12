@@ -612,31 +612,30 @@ var/global/list/ai_verbs_default = list(
 		camera_light_on = world.timeofday + 1 * 20 // Update the light every 2 seconds.
 
 
-/mob/living/silicon/ai/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/aicard))
-
-		var/obj/item/aicard/card = W
+/mob/living/silicon/ai/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Intellicard - Swap AI
+	if (istype(tool, /obj/item/aicard))
+		var/obj/item/aicard/card = tool
 		card.grab_ai(src, user)
+		return TRUE
 
-	else if(isWrench(W))
-		if(anchored)
-			user.visible_message(SPAN_NOTICE("\The [user] starts to unbolt \the [src] from the plating..."))
-			if(!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-				user.visible_message(SPAN_NOTICE("\The [user] decides not to unbolt \the [src]."))
-				return
-			user.visible_message(SPAN_NOTICE("\The [user] finishes unfastening \the [src]!"))
-			anchored = FALSE
-			return
-		else
-			user.visible_message(SPAN_NOTICE("\The [user] starts to bolt \the [src] to the plating..."))
-			if(!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-				user.visible_message(SPAN_NOTICE("\The [user] decides not to bolt \the [src]."))
-				return
-			user.visible_message(SPAN_NOTICE("\The [user] finishes fastening down \the [src]!"))
-			anchored = TRUE
-			return
-	else
-		return ..()
+	// Wrench - Toggle anchored
+	if (isWrench(tool))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts [anchored ? "unbolting" : "bolting"] \the [src] from the floor with \a [tool]."),
+			SPAN_NOTICE("You start [anchored ? "unbolting" : "bolting"] \the [src] from the floor with \the [tool].")
+		)
+		if (!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		anchored = !anchored
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [anchored ? "bolts" : "unbolts"] \the [src] from the floor with \a [tool]."),
+			SPAN_NOTICE("You [anchored ? "bolts" : "unbolts"] \the [src] from the floor with \the [tool].")
+		)
+		return
+
+	return ..()
+
 
 /mob/living/silicon/ai/proc/control_integrated_radio()
 	set name = "Radio Settings"

@@ -15,16 +15,25 @@
 
 	return ..()
 
-/mob/living/carbon/alien/diona/attackby(obj/item/W, mob/user)
-	if(user.a_intent == I_HELP && istype(W, /obj/item/clothing/head))
-		if(hat)
-			to_chat(user, SPAN_WARNING("\The [src] is already wearing \the [hat]."))
-			return
-		user.unEquip(W)
-		wear_hat(W)
-		user.visible_message(SPAN_NOTICE("\The [user] puts \the [W] on \the [src]."))
-		return
+
+/mob/living/carbon/alien/diona/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Hat - Equip hat
+	if (istype(tool, /obj/item/clothing/head))
+		if (hat)
+			USE_FEEDBACK_FAILURE("\The [src] is already wearing \a [hat].")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		wear_hat(tool)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] puts \a [tool] on \the [src]."),
+			SPAN_NOTICE("You put \the [tool] on \the [src].")
+		)
+		return TRUE
+
 	return ..()
+
 
 /mob/living/carbon/alien/diona/UnarmedAttack(atom/A)
 

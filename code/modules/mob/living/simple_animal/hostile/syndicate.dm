@@ -45,20 +45,40 @@
 	weapon2 = /obj/item/shield/energy
 	status_flags = 0
 
-/mob/living/simple_animal/hostile/syndicate/melee/attackby(obj/item/O as obj, mob/user as mob)
-	if(O.force)
-		if(prob(80))
-			var/damage = O.force
-			if (O.damtype == DAMAGE_PAIN)
-				damage = 0
-			health -= damage
-			visible_message(SPAN_DANGER("\The [src] has been attacked with \the [O] by \the [user]."))
-		else
-			visible_message(SPAN_DANGER("\The [src] blocks the [O] with its shield!"))
-		//user.do_attack_animation(src)
-	else
-		to_chat(usr, SPAN_WARNING("This weapon is ineffective, it does no damage."))
-		visible_message(SPAN_WARNING("\The [user] gently taps \the [src] with \the [O]."))
+
+/mob/living/simple_animal/hostile/syndicate/melee/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	if (!weapon.force)
+		return ..()
+
+	// Shield check
+	if (!prob(80))
+		user.visible_message(
+			SPAN_WARNING("\The [user] swings \a [weapon] at \the [src], but they block it with their shield!"),
+			SPAN_WARNING("You swing \the [weapon] at \the [src], but they block it with their shield!"),
+			exclude_mobs = list(src)
+		)
+		to_chat(src, SPAN_WARNING("\The [user] swings \a [weapon] at you, but you block it with your shield!"))
+		return TRUE
+
+	// Block pain damage
+	if (weapon.damtype == DAMAGE_PAIN)
+		user.visible_message(
+			SPAN_WARNING("\The [user] swings \a [weapon] at \the [src], but it has no effect!"),
+			SPAN_WARNING("You swing \the [weapon] at \the [src], but it has no effect!"),
+			exclude_mobs = list(src)
+		)
+		to_chat(src, SPAN_WARNING("\The [user] swings \a [weapon] at you, but it has no effect!"))
+		return TRUE
+
+	// Apply damage
+	health -= weapon.force
+	user.visible_message(
+		SPAN_WARNING("\The [user] swings \a [weapon] at \the [src]!"),
+		SPAN_DANGER("You swing \the [weapon] at \the [src]!"),
+		exclude_mobs = list(src)
+	)
+	to_chat(src, SPAN_DANGER("\The [user] swings \a [weapon] at you!"))
+	return TRUE
 
 
 /mob/living/simple_animal/hostile/syndicate/melee/bullet_act(obj/item/projectile/Proj)

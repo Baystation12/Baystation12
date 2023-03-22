@@ -59,56 +59,79 @@
 
 	return
 
-/mob/living/simple_animal/attackby(obj/item/O, mob/user)
-	if(istype(O, /obj/item/stack/medical))
-		if(stat != DEAD)
-			var/obj/item/stack/medical/MED = O
-			if(!MED.animal_heal)
-				to_chat(user, SPAN_NOTICE("That [MED] won't help \the [src] at all!"))
-				return
-			if(health < maxHealth)
-				if(MED.can_use(1))
-					adjustBruteLoss(-MED.animal_heal)
-					visible_message(SPAN_NOTICE("[user] applies the [MED] on [src]."))
-					MED.use(1)
-		else
-			to_chat(user, SPAN_NOTICE("\The [src] is dead, medical items won't bring \him back to life."))
-		return
 
-	if(istype(O, /obj/item/device/flash))
-		if(stat != DEAD)
-			O.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
-			return
+/mob/living/simple_animal/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Attempt attack
+	var/result = weapon.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
+	if (result && ai_holder)
+		ai_holder.react_to_attack(user)
+		return TRUE
 
-	if(meat_type && (stat == DEAD) && meat_amount)
-		if(istype(O, /obj/item/material/knife/kitchen/cleaver))
-			var/victim_turf = get_turf(src)
-			if(!locate(/obj/structure/table, victim_turf))
-				to_chat(user, SPAN_NOTICE("You need to place \the [src] on a table to butcher it."))
-				return
-			var/time_to_butcher = (mob_size)
-			to_chat(user, SPAN_NOTICE("You begin harvesting \the [src]."))
-			if(do_after(user, time_to_butcher, src, DO_PUBLIC_UNIQUE))
-				if(prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_ADEPT)))
-					to_chat(user, SPAN_NOTICE("You botch harvesting \the [src], and ruin some of the meat in the process."))
-					subtract_meat(user)
-					return
-				else
-					harvest(user, user.get_skill_value(SKILL_COOKING))
-					return
-			else
-				to_chat(user, SPAN_NOTICE("Your hand slips with your movement, and some of the meat is ruined."))
-				subtract_meat(user)
-				return
+	return ..()
 
-	else
-		if(!O.force)
-			visible_message(SPAN_NOTICE("[user] gently taps [src] with \the [O]."))
-		else
-			O.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
 
-			if (ai_holder)
-				ai_holder.react_to_attack(user)
+/mob/living/simple_animal/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Butcher's Cleaver - Butcher dead mob
+	if (istype(tool, /obj/item/material/knife/kitchen/cleaver))
+		if (stat != DEAD)
+			USE_FEEDBACK_FAILURE("\The [src] must be dead before you can butcher \him.")
+			return TRUE
+		if (!meat_type || !meat_amount)
+			USE_FEEDBACK_FAILURE("\The [src] can't be butchered.")
+			return TRUE
+		var/turf/turf = get_turf(src)
+		if (!locate(/obj/structure/table, turf))
+			USE_FEEDBACK_FAILURE("You need to place \the [src] on a table to butcher \him.")
+			return TRUE
+		var/time_to_butcher = mob_size
+		user.visible_message(
+			SPAN_WARNING("\The [user] begins butchering \the [src]'s corpse with \a [tool]."),
+			SPAN_WARNING("You begin \the [src]'s corpse with \the [tool].")
+		)
+		if (!do_after(user, time_to_butcher, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check())
+			USE_FEEDBACK_FAILURE("Some of \the [src]'s meat is ruined.")
+			subtract_meat(user)
+			return TRUE
+		if (prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_ADEPT)))
+			subtract_meat(user)
+			user.visible_message(
+				SPAN_WARNING("\The [user] botches harvesting \the [src], and ruins some of the meat in the process."),
+				SPAN_WARNING("You botch harvesting \the [src], and ruins some of the meat in the process.")
+			)
+			return TRUE
+		harvest(user, user.get_skill_value(SKILL_COOKING))
+		user.visible_message(
+			SPAN_WARNING("\The [user] harvests some meat from \the [src] with \a [tool]."),
+			SPAN_WARNING("You harvest some meat from \the [src] with \the [tool].")
+		)
+		return TRUE
+
+	// Medical - Attempt healing
+	if (istype(tool, /obj/item/stack/medical))
+		if (stat == DEAD)
+			USE_FEEDBACK_FAILURE("\The [src] is dead, medical items won't bring \him back to life.")
+			return TRUE
+		if (health >= maxHealth)
+			USE_FEEDBACK_FAILURE("\The [src] doesn't need any healing.")
+			return TRUE
+		var/obj/item/stack/medical/medical = tool
+		if (!medical.animal_heal)
+			USE_FEEDBACK_FAILURE("\The [medical] won't help \the [src].")
+			return TRUE
+		if (!medical.use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(medical, 1, "to heal \the [src].")
+			return TRUE
+		adjustBruteLoss(-medical.animal_heal)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] applies a [medical.singular_name] from \a [medical.name] to \the [src]'s injuries."),
+			SPAN_NOTICE("You apply a [medical.singular_name] from \the [medical.name] to \the [src]'s injuries."),
+			exclude_mobs = list(src)
+		)
+		to_chat(src, SPAN_NOTICE("\The [user] applies a [medical.singular_name] from \a [medical.name] to your injuries."),)
+		return TRUE
+
+	return ..()
+
 
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, effective_force, hit_zone)
 
