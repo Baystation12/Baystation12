@@ -125,18 +125,44 @@ LINEN BINS
 		else				icon_state = "linenbin-full"
 
 
-/obj/structure/bedsheetbin/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/bedsheet))
-		if(!user.unEquip(I, src))
-			return
-		sheets.Add(I)
+/obj/structure/bedsheetbin/use_tool(obj/item/tool, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+
+	// Bed sheet - Add to bin
+	if (istype(tool, /obj/item/bedsheet))
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		sheets += tool
 		amount++
-		to_chat(user, SPAN_NOTICE("You put [I] in [src]."))
-	else if(amount && !hidden && I.w_class < ITEM_SIZE_HUGE)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
-		if(!user.unEquip(I, src))
-			return
-		hidden = I
-		to_chat(user, SPAN_NOTICE("You hide [I] among the sheets."))
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adds \a [tool] to \the [src]."),
+			SPAN_NOTICE("You add \the [tool] to \the [src].")
+		)
+		return TRUE
+
+	// Anything else - Attempt to hide
+	if (!amount)
+		USE_FEEDBACK_FAILURE("\The [src] has no bedsheets to hide \the [tool] in.")
+		return TRUE
+	if (tool.w_class >= ITEM_SIZE_HUGE)
+		USE_FEEDBACK_FAILURE("\The [tool] is too large to hide in \the [src].")
+		return TRUE
+	if (hidden)
+		USE_FEEDBACK_FAILURE("There's already something hidden in \the [src].")
+		return TRUE
+	if (!user.unEquip(tool, src))
+		FEEDBACK_UNEQUIP_FAILURE(user, tool)
+		return TRUE
+	hidden = tool
+	user.visible_message(
+		SPAN_NOTICE("\The [user] stuffs \a [tool] into \the [src]'s sheets."),
+		SPAN_NOTICE("You hide \the [tool] among \the [src]'s sheets."),
+		3
+	)
+	return TRUE
+
 
 /obj/structure/bedsheetbin/attack_hand(mob/user)
 	var/obj/item/bedsheet/B = remove_sheet()

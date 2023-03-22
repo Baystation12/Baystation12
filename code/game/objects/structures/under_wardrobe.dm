@@ -8,31 +8,36 @@
 	density = TRUE
 	var/static/list/amount_of_underwear_by_id_card
 
-/obj/structure/undies_wardrobe/attackby(obj/item/underwear/underwear, mob/user)
-	if(istype(underwear))
-		if(!user.unEquip(underwear))
-			return
-		qdel(underwear)
-		user.visible_message(SPAN_NOTICE("\The [user] inserts \their [underwear.name] into \the [src]."), SPAN_NOTICE("You insert your [underwear.name] into \the [src]."))
 
-		var/id = user.GetIdCard()
+/obj/structure/undies_wardrobe/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Underwear - Return to wardrobe
+	if (istype(tool, /obj/item/underwear))
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] inserts \a [tool] into \the [src]."),
+			SPAN_NOTICE("You insert \the [tool] into \the [src].")
+		)
+		qdel(tool)
+		var/obj/item/card/id/id = user.GetIdCard()
 		var/message
-		if(id)
+		if (id)
 			message = "ID card detected. Your underwear quota for this shift has been increased, if applicable."
 		else
 			message = "No ID card detected. Thank you for your contribution."
-
 		audible_message(message, WARDROBE_BLIND_MESSAGE(user))
 
 		var/number_of_underwear = LAZYACCESS(amount_of_underwear_by_id_card, id) - 1
-		if(number_of_underwear)
+		if (number_of_underwear)
 			LAZYSET(amount_of_underwear_by_id_card, id, number_of_underwear)
 			GLOB.destroyed_event.register(id, src, /obj/structure/undies_wardrobe/proc/remove_id_card)
 		else
 			remove_id_card(id)
+		return TRUE
 
-	else
-		..()
+	return ..()
+
 
 /obj/structure/undies_wardrobe/proc/remove_id_card(id_card)
 	LAZYREMOVE(amount_of_underwear_by_id_card, id_card)

@@ -103,23 +103,26 @@
 		AttachDrip(dropped, user)
 
 
-/obj/structure/iv_stand/attackby(obj/item/item, mob/living/user)
-	if (!istype(item, /obj/item/reagent_containers/ivbag))
-		return ..()
-	if (!isnull(iv_bag))
-		to_chat(user, SPAN_WARNING("\The [src] already has \a [iv_bag] attached."))
+/obj/structure/iv_stand/use_tool(obj/item/tool, mob/user, list/click_params)
+	// IV Bag - Attach
+	if (istype(tool, /obj/item/reagent_containers/ivbag))
+		if (iv_bag)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [iv_bag] attached.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] attaches \a [tool] to \a [src]."),
+			SPAN_NOTICE("You attach \the [tool] to \the [src]."),
+			range = 5
+		)
+		iv_bag = tool
+		last_reagent_color = iv_bag.reagents.get_color()
+		update_icon()
 		return TRUE
-	if (!user.unEquip(item, src))
-		return TRUE
-	user.visible_message(
-		SPAN_ITALIC("\The [user] attaches \a [item] to \a [src]."),
-		SPAN_ITALIC("You attach \the [item] to \the [src]."),
-		range = 5
-	)
-	iv_bag = item
-	last_reagent_color = iv_bag.reagents.get_color()
-	update_icon()
-	return TRUE
+
+	return ..()
 
 
 /obj/structure/iv_stand/Process()

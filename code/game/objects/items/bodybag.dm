@@ -30,30 +30,46 @@
 	density = FALSE
 	storage_capacity = (MOB_MEDIUM * 2) - 1
 	var/contains_body = 0
-	var/has_label = FALSE
+	/// String. The body bag's label, if set.
+	var/label = null
 
-/obj/structure/closet/body_bag/attackby(obj/item/W, mob/user as mob)
-	if (istype(W, /obj/item/pen))
-		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
-		if (user.get_active_hand() != W)
-			return
-		if (!in_range(src, user) && src.loc != user)
-			return
-		t = sanitizeSafe(t, MAX_NAME_LEN)
-		if (t)
-			src.SetName("body bag - ")
-			src.name += t
-			has_label = TRUE
-		else
-			src.SetName("body bag")
-		src.update_icon()
-		return
-	else if(isWirecutter(W))
-		src.SetName("body bag")
-		has_label = FALSE
-		to_chat(user, "You cut the tag off \the [src].")
-		src.update_icon()
-		return
+
+/obj/structure/closet/body_bag/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Pen - Set label
+	if (istype(tool, /obj/item/pen))
+		var/input = input(user, "What would you like the label to be?", name, label) as text|null
+		input = sanitizeSafe(input, MAX_NAME_LEN)
+		if (!input || input == label || !user.use_sanity_check(src, tool))
+			return TRUE
+		set_label(input)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] labels \the [src] with \a [tool]."),
+			SPAN_NOTICE("You set \the [src]'s label with \the [tool] to: [SPAN_INFO("'[label]'")]")
+		)
+		return TRUE
+
+	// Wirecutters - Remove label
+	if (isWirecutter(tool))
+		if (!label)
+			USE_FEEDBACK_FAILURE("\The [src] has no label to remove.")
+			return TRUE
+		set_label(null)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \the [src]'s label with \a [tool]."),
+			SPAN_NOTICE("You remove \the [src]'s label with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
+
+/obj/structure/closet/body_bag/proc/set_label(new_label)
+	label = new_label
+	name = initial(name)
+	if (label)
+		name += " - [label]"
+	update_icon()
+
 
 /obj/structure/closet/body_bag/on_update_icon()
 	if(opened)
@@ -62,7 +78,7 @@
 		icon_state = "closed_unlocked"
 
 	src.overlays.Cut()
-	if(has_label)
+	if(label)
 		src.overlays += image(src.icon, "bodybag_label")
 
 /obj/structure/closet/body_bag/store_mobs(stored_units)

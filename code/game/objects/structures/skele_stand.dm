@@ -46,33 +46,59 @@
 				swagnames += C.get_examine_line()
 		to_chat(user,"[gender == MALE ? "He" : "She"] is wearing [english_list(swagnames)].")
 
-/obj/structure/skele_stand/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/pen))
-		var/nuname = sanitize(input(user,"What do you want to name this skeleton as?","Skeleton Christening",name) as text|null)
-		if(nuname && CanPhysicallyInteract(user))
-			SetName(nuname)
-			return 1
-	if(istype(W,/obj/item/clothing))
+
+/obj/structure/skele_stand/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+	rattle_bones(user, weapon)
+	return TRUE
+
+
+/obj/structure/skele_stand/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Pen - Name skeleton
+	if (istype(tool, /obj/item/pen))
+		var/input = input(user, "What do you want to name this skeleton?", "[initial(name)] - Name", name) as null|text
+		input = sanitizeSafe(input, MAX_NAME_LEN)
+		if (!input || input == name || !user.use_sanity_check(src, tool))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [src] renames \the [src] to '[input]' with \a [tool]."),
+			SPAN_NOTICE("You rename \the [src] to '[input]' with \the [tool].")
+		)
+		SetName(input)
+		return TRUE
+
+	// Clothing - Add clothing
+	if (istype(tool, /obj/item/clothing))
 		var/slot
-		if(istype(W, /obj/item/clothing/under))
+		if (istype(tool, /obj/item/clothing/under))
 			slot = slot_w_uniform_str
-		else if(istype(W, /obj/item/clothing/suit))
+		else if (istype(tool, /obj/item/clothing/suit))
 			slot = slot_wear_suit_str
-		else if(istype(W, /obj/item/clothing/head))
+		else if (istype(tool, /obj/item/clothing/head))
 			slot = slot_head_str
-		else if(istype(W, /obj/item/clothing/shoes))
+		else if (istype(tool, /obj/item/clothing/shoes))
 			slot = slot_shoes_str
-		else if(istype(W, /obj/item/clothing/mask))
+		else if (istype(tool, /obj/item/clothing/mask))
 			slot = slot_wear_mask_str
-		if(slot)
-			if(swag[slot])
-				to_chat(user,SPAN_NOTICE("There is already that kind of clothing on \the [src]."))
-			else if(user.unEquip(W, src))
-				swag[slot] = W
-				update_icon()
-				return 1
-	else
-		rattle_bones(user, W)
+		if (!slot)
+			USE_FEEDBACK_FAILURE("\The [tool] can't be put on \the [src].")
+			return TRUE
+		if (swag[slot])
+			USE_FEEDBACK_FAILURE("\The [src] is already wearing \a [swag[slot]].")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		swag[slot] = tool
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] puts \a [tool] on \the [src]."),
+			SPAN_NOTICE("You put \the [tool] on \the [src].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/skele_stand/Destroy()
 	for(var/slot in swag)

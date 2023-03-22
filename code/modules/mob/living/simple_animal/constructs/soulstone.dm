@@ -134,36 +134,61 @@
 	icon_state = "construct-cult"
 	desc = "This eerie contraption looks like it would come alive if supplied with a missing ingredient."
 
-/obj/structure/constructshell/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/device/soulstone))
-		var/obj/item/device/soulstone/S = I
-		if(!S.shade.client)
-			to_chat(user, SPAN_NOTICE("\The [I] has essence, but no soul. Activate it in your hand to find a soul for it first."))
-			return
-		if(S.shade.loc != S)
-			to_chat(user, SPAN_NOTICE("Recapture the shade back into \the [I] first."))
-			return
-		var/construct = alert(user, "Please choose which type of construct you wish to create.",,"Artificer", "Wraith", "Juggernaut")
-		var/ctype
-		switch(construct)
-			if("Artificer")
-				ctype = /mob/living/simple_animal/construct/builder
-			if("Wraith")
-				ctype = /mob/living/simple_animal/construct/wraith
-			if("Juggernaut")
-				ctype = /mob/living/simple_animal/construct/armoured
-		var/mob/living/simple_animal/construct/C = new ctype(get_turf(src))
-		C.key = S.shade.key
-		//C.cancel_camera()
-		transfer_languages(user, C, RESTRICTED | HIVEMIND)
-		if (S.owner_flag == SOULSTONE_OWNER_CULT)
-			GLOB.cult.add_antagonist(C.mind)
+
+/obj/structure/constructshell/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Soul Stone - Create construct
+	if (istype(tool, /obj/item/device/soulstone))
+		var/obj/item/device/soulstone/soulstone = tool
+		if (!soulstone.shade)
+			USE_FEEDBACK_FAILURE("\The [soulstone] has no essence.")
+			return TRUE
+		if (!soulstone.shade.client)
+			USE_FEEDBACK_FAILURE("\The [soulstone] has essence, but no soul. Activate it in your hand to find a soul for it first.")
+			return TRUE
+		if (soulstone.shade.loc != soulstone)
+			USE_FEEDBACK_FAILURE("\The [soulstone]'s shade must be within the stone to use it with \the [src].")
+			return TRUE
+		if (!user.canUnEquip(tool))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		var/input = input(user, "Please choose which type of construct you wish to create.", "[src] Construct Selection") as null|anything in list("Artificer", "Juggernaut", "Wraith")
+		if (!input || !user.use_sanity_check(src, tool, SANITY_CHECK_TOOL_UNEQUIP))
+			return TRUE
+		if (!soulstone.shade)
+			USE_FEEDBACK_FAILURE("\The [soulstone] has no essence.")
+			return TRUE
+		if (!soulstone.shade.client)
+			USE_FEEDBACK_FAILURE("\The [soulstone] has essence, but no soul. Activate it in your hand to find a soul for it first.")
+			return TRUE
+		if (soulstone.shade.loc != soulstone)
+			USE_FEEDBACK_FAILURE("\The [soulstone]'s shade must be within the stone to use it with \the [src].")
+			return TRUE
+		var/construct_type
+		switch (input)
+			if ("Artificer")
+				construct_type = /mob/living/simple_animal/construct/builder
+			if ("Wraith")
+				construct_type = /mob/living/simple_animal/construct/wraith
+			if ("Juggernaut")
+				construct_type = /mob/living/simple_animal/construct/armoured
+		var/mob/living/simple_animal/construct/construct = new construct_type(loc)
+		user.visible_message(
+			SPAN_WARNING("\The [user] presses \a [tool] against \the [src]. It twists and warps into the shape of \a [initial(construct.name)]!"),
+			SPAN_WARNING("You press \the [tool] against \the [src], summoning forth a loyal [initial(construct.name)]!")
+		)
+		construct.key = soulstone.shade.key
+		transfer_languages(user, construct, RESTRICTED | HIVEMIND)
+		if (soulstone.owner_flag == SOULSTONE_OWNER_CULT)
+			GLOB.cult.add_antagonist(construct.mind)
 		else
-			// Only cult constructs get cult languages
-			C.remove_language(LANGUAGE_CULT)
-			C.remove_language(LANGUAGE_CULT_GLOBAL)
-		qdel(S)
-		qdel(src)
+			construct.remove_language(LANGUAGE_CULT)
+			construct.remove_language(LANGUAGE_CULT_GLOBAL)
+		qdel(soulstone)
+		qdel_self()
+		return TRUE
+
+	return ..()
+
 
 #undef SOULSTONE_CRACKED
 #undef SOULSTONE_EMPTY

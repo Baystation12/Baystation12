@@ -178,25 +178,35 @@
 		if(guesschar != code[i])
 			. = 0
 
-/obj/structure/closet/crate/secure/loot/attackby(obj/item/W as obj, mob/user as mob)
-	if(locked)
-		if (istype(W, /obj/item/device/multitool)) // Greetings Urist McProfessor, how about a nice game of cows and bulls?
-			to_chat(user, SPAN_NOTICE("DECA-CODE LOCK ANALYSIS:"))
-			if (attempts == 1)
-				to_chat(user, SPAN_WARNING("* Anti-Tamper system will activate on the next failed access attempt."))
-			else
-				to_chat(user, SPAN_NOTICE("* Anti-Tamper system will activate after [src.attempts] failed access attempts."))
-			if(length(lastattempt))
-				var/bulls = 0
-				var/cows = 0
 
-				var/list/code_contents = code.Copy()
-				for(var/i in 1 to codelen)
-					if(lastattempt[i] == code[i])
-						++bulls
-					else if(lastattempt[i] in code_contents)
-						++cows
-					code_contents -= lastattempt[i]
-				to_chat(user, SPAN_NOTICE("Last code attempt had [bulls] correct digits at correct positions and [cows] correct digits at incorrect positions."))
-			return
-	..()
+/obj/structure/closet/crate/secure/loot/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Multitool - Check last code attempt
+	if (isMultitool(tool))
+		if (!locked)
+			USE_FEEDBACK_FAILURE("\The [src] is not locked.")
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] scans \the [src] with \a [tool]."),
+			SPAN_NOTICE("You scan \the [src] with \the [tool].")
+		)
+		var/data = "<h2>DECA-CODE LOCK ANALYSIS:</h2>"
+		if (attempts == 1)
+			data += "<p style='color: red; font-weight: bold;'>* Anti-Tamper system will activate on the next failed access attempt.</p>"
+		else
+			data += "<p>* Anti-Tamper system will activate after <b>[src.attempts]</b> failed access attempts.</p>"
+		if(length(lastattempt))
+			var/bulls = 0
+			var/cows = 0
+
+			var/list/code_contents = code.Copy()
+			for(var/i in 1 to codelen)
+				if(lastattempt[i] == code[i])
+					++bulls
+				else if(lastattempt[i] in code_contents)
+					++cows
+				code_contents -= lastattempt[i]
+			data += "<p>Last code attempt had [bulls] correct digits at correct positions and [cows] correct digits at incorrect positions.</p>"
+		show_browser(user, data, "window=[name]")
+		return
+
+	return ..()

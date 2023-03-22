@@ -59,3 +59,11 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define TANK_FLAG_FORCED     FLAG(1)
 #define TANK_FLAG_LEAKING    FLAG(2)
 #define TANK_FLAG_WIRED      FLAG(3)
+
+// Flags for beds/chairs
+/// The bed/chair cannot be dismantled with a wrench.
+#define BED_FLAG_CANNOT_BE_DISMANTLED FLAG(1)
+/// The bed/chair cannot be padded with material.
+#define BED_FLAG_CANNOT_BE_PADDED FLAG(2)
+/// The bed/chair cannot be made into an electric chair with a shock kit. Only applies to `/obj/structure/bed/chair` subtypes.
+#define BED_FLAG_CANNOT_BE_ELECTRIFIED FLAG(3)

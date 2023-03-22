@@ -49,52 +49,61 @@
 	if(severity <= EX_ACT_HEAVY)
 		qdel(src)
 
-/obj/structure/lattice/proc/deconstruct(mob/user)
-	to_chat(user, SPAN_NOTICE("Slicing lattice joints ..."))
-	new /obj/item/stack/material/rods(loc, 1, material.name)
+/obj/structure/lattice/proc/deconstruct(mob/user, obj/item/tool)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] slices \the [src] apart with \a [tool]."),
+		SPAN_NOTICE("You \the [src] apart with \a [tool].")
+	)
+	var/obj/item/stack/material/rods/rods = new(loc, 1, material.name)
+	transfer_fingerprints_to(rods)
 	var/turf/source = get_turf(src)
 	if(locate(/obj/structure/cable, source))
 		for(var/obj/structure/cable/C in source)
 			C.visible_message(SPAN_WARNING("\The [C] snaps!"))
 			new/obj/item/stack/cable_coil(source, (C.d1 ? 2 : 1), C.color)
 			qdel(C)
-	qdel(src)
+	qdel_self()
 
-/obj/structure/lattice/attackby(obj/item/C as obj, mob/user as mob)
 
-	if (istype(C, /obj/item/stack/tile/floor))
-		var/turf/T = get_turf(src)
-		T.attackby(C, user) //BubbleWrap - hand this off to the underlying turf instead
-		return
+/obj/structure/lattice/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Floor Tile, Cable Coil - Passthrough to turf
+	if (istype(tool, /obj/item/stack/tile) || isCoil(tool))
+		return tool.resolve_attackby(get_turf(src), user, click_params)
 
-	if (isCoil(C))
-		var/turf/T = get_turf(src)
-		T.attackby(C, user) //Also handing this off to turf, the checks should confirm the lattice exists
-		return
-
-	if(isWelder(C))
-		var/obj/item/weldingtool/WT = C
-		if(WT.remove_fuel(0, user))
-			deconstruct(user)
-		return
-
-	if(istype(C, /obj/item/gun/energy/plasmacutter))
-		var/obj/item/gun/energy/plasmacutter/cutter = C
-		if(!cutter.slice(user))
-			return
+	// Plasma Cutter - Deconstruct
+	if (istype(tool, /obj/item/gun/energy/plasmacutter))
+		var/obj/item/gun/energy/plasmacutter/cutter = tool
+		if (!cutter.slice(user))
+			return TRUE
 		deconstruct(user)
-		return
+		return TRUE
 
-	if (istype(C, /obj/item/stack/material/rods))
-		var/obj/item/stack/material/rods/R = C
-		if(R.use(2))
-			src.alpha = 0
-			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			new /obj/structure/catwalk(src.loc)
-			qdel(src)
-			return
-		else
-			to_chat(user, SPAN_NOTICE("You require at least two rods to complete the catwalk."))
+	// Welder - Deconstruct
+	if (isWelder(tool))
+		var/obj/item/weldingtool/welder = tool
+		if (!welder.remove_fuel(1, user))
+			return TRUE
+		deconstruct(user)
+		return TRUE
+
+	// Rods - Create catwalk
+	if (istype(tool, /obj/item/stack/material/rods))
+		var/obj/item/stack/material/rods/rods = tool
+		if (!rods.use(2))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(rods, 2, "to create a catwalk")
+			return TRUE
+		playsound(src, 'sound/weapons/Genhit.ogg', 50, TRUE)
+		var/obj/structure/catwalk/catwalk = new(loc)
+		transfer_fingerprints_to(catwalk)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] constructs \a [catwalk] over \the [src] with \a [tool]."),
+			SPAN_NOTICE("You construct \a [catwalk] over \the [src] with \the [tool].")
+		)
+		qdel_self()
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/lattice/on_update_icon()
 	var/dir_sum = 0

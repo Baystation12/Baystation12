@@ -195,13 +195,15 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/kitchenspike/attackby(obj/item/thing, mob/user)
-	if(!thing.sharp)
-		return ..()
-	if(!occupant)
-		to_chat(user, SPAN_WARNING("There is nothing on \the [src] to butcher."))
-		return
-	if(!busy)
+
+/obj/structure/kitchenspike/use_tool(obj/item/tool, mob/user, list/click_params)
+	if (is_sharp(tool))
+		if (!occupant)
+			USE_FEEDBACK_FAILURE("\The [src] doesn't have anything to butcher.")
+			return TRUE
+		if (busy)
+			USE_FEEDBACK_FAILURE("\The [src] is currently being used by someone else.")
+			return TRUE
 		busy = TRUE
 		switch(occupant_state)
 			if(CARCASS_FRESH)
@@ -211,6 +213,10 @@
 			if(CARCASS_JOINTED)
 				do_butchery_step(user, CARCASS_EMPTY,   "butchering")
 		busy = FALSE
+		return TRUE
+
+	return ..()
+
 
 #undef CARCASS_EMPTY
 #undef CARCASS_FRESH

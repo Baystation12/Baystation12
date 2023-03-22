@@ -46,16 +46,23 @@
 			I.forceMove(src)
 	. = ..()
 
-/obj/structure/filingcabinet/attackby(obj/item/P as obj, mob/user as mob)
-	if(is_type_in_list(P, can_hold))
-		if(!user.unEquip(P, src))
+
+/obj/structure/filingcabinet/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Any item - Attempt to put in cabinet
+	if (is_type_in_list(tool, can_hold))
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(tool, user)
 			return
-		add_fingerprint(user)
-		to_chat(user, SPAN_NOTICE("You put [P] in [src]."))
-		flick("[initial(icon_state)]-open",src)
+		flick("[initial(icon_state)]-open", src)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] puts \a [tool] in \the [src]."),
+			SPAN_NOTICE("You put \the [tool] in \the [src].")
+		)
 		updateUsrDialog()
-	else
-		..()
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/filingcabinet/attack_hand(mob/user as mob)
 	if(length(contents) <= 0)

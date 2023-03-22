@@ -10,6 +10,8 @@
 	var/material/padding_material
 	var/base_icon = "bed"
 	var/material_alteration = MATERIAL_ALTERATION_ALL
+	/// Bitflags. Bed/chair specific flags.
+	var/bed_flags = EMPTY_BITFIELD
 
 
 /obj/structure/bed/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
@@ -77,53 +79,99 @@
 				qdel(src)
 				return
 
-/obj/structure/bed/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		dismantle()
-		qdel(src)
-	else if(istype(W,/obj/item/stack))
-		if(padding_material)
-			to_chat(user, "\The [src] is already padded.")
-			return
-		var/obj/item/stack/C = W
-		if(C.get_amount() < 1) // How??
-			qdel(C)
-			return
-		var/padding_type //This is awful but it needs to be like this until tiles are given a material var.
-		if(istype(W,/obj/item/stack/tile/carpet))
+
+/obj/structure/bed/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Material Stack - Add padding
+	if (isstack(tool))
+		if (HAS_FLAGS(bed_flags, BED_FLAG_CANNOT_BE_PADDED))
+			USE_FEEDBACK_FAILURE("\The [src] cannot be padded.")
+			return TRUE
+		if (padding_material)
+			USE_FEEDBACK_FAILURE("\The [src] is already padded with [padding_material.display_name].")
+			return TRUE
+		var/obj/item/stack/stack = tool
+		if (!stack.can_use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, 1, "to pad \the [src].")
+			return TRUE
+		var/padding_type
+		if (istype(tool, /obj/item/stack/tile/carpet))
 			padding_type = MATERIAL_CARPET
-		else if(istype(W,/obj/item/stack/material))
-			var/obj/item/stack/material/M = W
-			if(M.material && (M.material.flags & MATERIAL_PADDING))
-				padding_type = "[M.material.name]"
-		if(!padding_type)
-			to_chat(user, "You cannot pad \the [src] with that.")
-			return
-		C.use(1)
-		if(!istype(src.loc, /turf))
-			src.forceMove(get_turf(src))
-		to_chat(user, "You add padding to \the [src].")
+		else if (istype(tool, /obj/item/stack/material))
+			var/obj/item/stack/material/material_stack = tool
+			if (!material_stack.material || !HAS_FLAGS(material_stack.material.flags, MATERIAL_PADDING))
+				USE_FEEDBACK_FAILURE("\The [tool] can't be used to pad \the [src].")
+				return TRUE
+			padding_type = material_stack.get_material_name()
+		else
+			USE_FEEDBACK_FAILURE("\The [tool] can't be used to pad \the [src].")
+			return TRUE
+		stack.use(1)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] pads \the [src] with \a [tool]."),
+			SPAN_NOTICE("You pad \the [src] with \the [tool].")
+		)
 		add_padding(padding_type)
-		return
+		return TRUE
 
-	else if(isWirecutter(W))
-		if(!padding_material)
-			to_chat(user, "\The [src] has no padding to remove.")
-			return
-		to_chat(user, "You remove the padding from \the [src].")
-		playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
+	// Wirecutters - Remove padding
+	if (isWirecutter(tool))
+		if (!padding_material)
+			USE_FEEDBACK_FAILURE("\The [src] has no padding to remove.")
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \the [src]'s padding with \a [tool]."),
+			SPAN_NOTICE("You remove \the [src]'s padding with \the [tool].")
+		)
+		playsound(src, 'sound/items/Wirecutter.ogg', 50, TRUE)
 		remove_padding()
+		return TRUE
 
-	else if(istype(W, /obj/item/grab))
-		var/obj/item/grab/G = W
-		var/mob/living/affecting = G.affecting
-		user.visible_message(SPAN_NOTICE("[user] attempts to buckle [affecting] into \the [src]!"))
-		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-			if(user_buckle_mob(affecting, user))
-				qdel(W)
-	else
-		..()
+	// Wrench - Dismantle
+	if (isWrench(tool))
+		if (HAS_FLAGS(bed_flags, BED_FLAG_CANNOT_BE_DISMANTLED))
+			USE_FEEDBACK_FAILURE("\The [src] cannot be dismantled.")
+			return TRUE
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		dismantle()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] dismantles \the [src] with \a [tool]."),
+			SPAN_NOTICE("You dismantle \the [src] with \the [tool].")
+		)
+		qdel_self()
+		return TRUE
+
+	return ..()
+
+
+/obj/structure/bed/use_grab(obj/item/grab/grab, list/click_params)
+	// Force-buckle
+	grab.assailant.visible_message(
+		SPAN_WARNING("\The [grab.assailant] starts to buckle \the [grab.affecting] to \the [src]."),
+		SPAN_DANGER("You start to buckle \the [grab.affecting] to \the [src]!"),
+		SPAN_ITALIC("You hear the sound of struggling."),
+		exclude_mobs = list(grab.affecting)
+	)
+	grab.affecting.show_message(
+		SPAN_DANGER("\The [grab.assailant] starts to buckle you to \the [src]!"),
+		VISIBLE_MESSAGE,
+		SPAN_DANGER("You feel someone trying to force you into a bed or chair!")
+	)
+	if (!do_after(grab.assailant, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || QDELETED(grab) || !grab.assailant.use_sanity_check(src, grab.affecting))
+		return TRUE
+	grab.assailant.visible_message(
+		SPAN_WARNING("\The [grab.assailant] buckles \the [grab.affecting] to \the [src]."),
+		SPAN_DANGER("You buckle \the [grab.affecting] to \the [src]!"),
+		SPAN_ITALIC("You hear the sound of buckling."),
+		exclude_mobs = list(grab.affecting)
+	)
+	grab.affecting.show_message(
+		SPAN_DANGER("\The [grab.assailant] buckles you to \the [src]!"),
+		VISIBLE_MESSAGE,
+		SPAN_DANGER("You feel someone buckle you into a bed or chair!")
+	)
+	qdel(grab)
+	return TRUE
+
 
 /obj/structure/bed/proc/remove_padding()
 	if(padding_material)

@@ -249,80 +249,112 @@
 				break
 	. = ..()
 
-/obj/structure/closet/attackby(obj/item/W as obj, mob/user as mob)
-	if (user.a_intent == I_HURT)
-		..()
-		return
 
-	if (src.opened)
-		if(istype(W, /obj/item/grab))
-			var/obj/item/grab/G = W
-			src.MouseDrop_T(G.affecting, user)      //act like they were dragged onto the closet
-			return 0
-		if(isWelder(W))
-			var/obj/item/weldingtool/WT = W
-			if(WT.remove_fuel(0,user))
-				slice_into_parts(WT, user)
-				return
-		if(istype(W, /obj/item/gun/energy/plasmacutter))
-			var/obj/item/gun/energy/plasmacutter/cutter = W
-			if(!cutter.slice(user))
-				return
-			slice_into_parts(W, user)
-			return
-		if(istype(W, /obj/item/storage/laundry_basket) && length(W.contents))
-			var/obj/item/storage/laundry_basket/LB = W
-			var/turf/T = get_turf(src)
-			for(var/obj/item/I in LB.contents)
-				LB.remove_from_storage(I, T, 1)
-			LB.finish_bulk_removal()
-			user.visible_message(SPAN_NOTICE("[user] empties \the [LB] into \the [src]."), \
-								 SPAN_NOTICE("You empty \the [LB] into \the [src]."), \
-								 SPAN_NOTICE("You hear rustling of clothes."))
-			return
+/obj/structure/closet/use_grab(obj/item/grab/grab, list/click_params)
+	if (!opened)
+		return ..()
 
-		if(user.unEquip(W, loc))
-			W.pixel_x = 0
-			W.pixel_y = 0
-			W.pixel_z = 0
-			W.pixel_w = 0
-		return
+	MouseDrop_T(grab.affecting, grab.assailant)
+	return TRUE
 
-	if (istype(W, /obj/item/melee/energy/blade))
-		if(emag_act(INFINITY, user, "[SPAN_DANGER("The locker has been sliced open by [user] with \an [W]")]!", SPAN_DANGER("You hear metal being sliced and sparks flying.")))
-			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-			spark_system.set_up(5, 0, src.loc)
-			spark_system.start()
-			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
-			playsound(src.loc, "sparks", 50, 1)
-			open()
-		return
 
-	if (istype(W, /obj/item/stack/package_wrap))
-		return
+/obj/structure/closet/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Energy Blade - Break locker open
+	if (istype(weapon, /obj/item/melee/energy/blade))
+		if (opened)
+			return ..()
+		if (!emag_act(INFINITY, user,
+			SPAN_WARNING("\The [user] slices \the [src] open with \a [weapon]!"),
+			SPAN_DANGER("You slice \the [src] open with \the [weapon]!"),
+			SPAN_ITALIC("You hear metal being sliced and sparks flying.")
+		))
+			return TRUE
+		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		spark_system.set_up(5, loca = src)
+		spark_system.start()
+		playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE)
+		playsound(src, "sparks", 50, TRUE)
+		open()
+		return TRUE
 
-	if (isWelder(W) && (setup & CLOSET_CAN_BE_WELDED))
-		var/obj/item/weldingtool/WT = W
-		if(!WT.remove_fuel(0,user))
-			if(!WT.isOn())
-				return
-			else
-				to_chat(user, SPAN_NOTICE("You need more welding fuel to complete this task."))
-				return
-		src.welded = !src.welded
-		src.update_icon()
+	// The following interactions only apply to open closets
+	if (!opened)
+		return ..()
+
+	// Laundry Basket - Dump contents into closet
+	if (istype(weapon, /obj/item/storage/laundry_basket) && length(weapon.contents))
+		if (!opened)
+			USE_FEEDBACK_FAILURE("\The [src] needs to be open before you can dump \the [src] into it.")
+			return TRUE
+		var/obj/item/storage/laundry_basket/basket = weapon
+		for (var/obj/item/item as anything in basket.contents)
+			basket.remove_from_storage(item, loc, TRUE)
+		basket.finish_bulk_removal()
 		user.visible_message(
-			SPAN_WARNING("\The [src] has been [welded?"welded shut":"unwelded"] by \the [user]."),
-			blind_message = "You hear welding.",
-			range = 3
+			SPAN_NOTICE("\The [user] empties \a [weapon] into \the [src]."),
+			SPAN_NOTICE("You empty \the [weapon] into \the [src].")
 		)
-		return
+		return TRUE
 
-	if (setup & CLOSET_HAS_LOCK)
-		src.togglelock(user, W)
-		return
+	// Plasma Cutter - Dismantle closet
+	if (istype(weapon, /obj/item/gun/energy/plasmacutter))
+		var/obj/item/gun/energy/plasmacutter/cutter = weapon
+		if (!cutter.slice(user))
+			return TRUE
+		slice_into_parts(weapon, user)
+		return TRUE
 
-	attack_hand(user)
+	// Welding weapon - Dismantle closet
+	if (isWelder(weapon))
+		var/obj/item/weldingtool/welder = weapon
+		if (!welder.remove_fuel(1, user))
+			return TRUE
+		slice_into_parts(weapon, user)
+		return TRUE
+
+	return ..()
+
+
+/obj/structure/closet/use_tool(obj/item/tool, mob/user, list/click_params)
+	// General Action - Place item in closet, if open.
+	// The following interactions only apply to closed closets.
+	if (opened)
+		if (!user.unEquip(tool, loc))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		tool.pixel_x = 0
+		tool.pixel_y = 0
+		tool.pixel_z = 0
+		tool.pixel_w = 0
+		return TRUE
+
+	// ID - Toggle lock
+	var/obj/item/card/id/id = tool.GetIdCard()
+	if (istype(id))
+		if (!HAS_FLAGS(setup, CLOSET_HAS_LOCK))
+			USE_FEEDBACK_FAILURE("\The [src] cannot be locked.")
+			return TRUE
+		togglelock(user, id)
+		return TRUE
+
+	// Welding Tool - Weld closet shut
+	if (isWelder(tool))
+		var/obj/item/weldingtool/welder = tool
+		if (!HAS_FLAGS(setup, CLOSET_CAN_BE_WELDED))
+			USE_FEEDBACK_FAILURE("\The [src] can't be welded shut.")
+			return TRUE
+		if (!welder.can_use(1, user))
+			return TRUE
+		welded = !welded
+		update_icon()
+		user.visible_message(
+			SPAN_WARNING("\The [user] [welded ? "welds" : "unwelds"] \the [src] with \a [tool]."),
+			SPAN_WARNING("You [welded ? "weld" : "unweld"] \the [src] with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/closet/proc/slice_into_parts(obj/W, mob/user)
 	material.place_sheet(src.loc, 2)

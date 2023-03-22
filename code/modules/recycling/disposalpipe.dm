@@ -197,38 +197,29 @@
 /obj/structure/disposalpipe/on_death()
 	broken(prob(0.5))
 
-//attack by item
-//weldingtool: unfasten and convert to obj/disposalconstruct
 
-/obj/structure/disposalpipe/attackby(obj/item/I, mob/user)
-	var/turf/T = src.loc
-	if(!T.is_plating())
-		return		// prevent interaction with T-scanner revealed pipes
-	src.add_fingerprint(user, 0, I)
+/obj/structure/disposalpipe/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Welding Tool - Cut pipe
+	if (isWelder(tool))
+		var/obj/item/weldingtool/welder = tool
+		if (!welder.can_use(1, user, "to slice \the [src]."))
+			return TRUE
+		playsound(src, 'sound/items/Welder2.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts slicing \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start slicing \the [src] with \the [tool].")
+		)
+		if (!do_after(user, 3 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool) || !welder.remove_fuel(1, user))
+			return TRUE
+		welded()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] slices \the [src] with \a [tool]."),
+			SPAN_NOTICE("You slice \the [src] with \the [tool].")
+		)
+		return TRUE
 
-	if (user.a_intent == I_HURT)
-		..()
-		return
+	return ..()
 
-	if(istype(I, /obj/item/weldingtool))
-		var/obj/item/weldingtool/W = I
-		if(W.remove_fuel(0,user))
-			playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-			// check if anything changed over 2 seconds
-			var/turf/uloc = user.loc
-			var/atom/wloc = W.loc
-			to_chat(user, "Slicing the disposal pipe.")
-			sleep(30)
-			if(!W.isOn()) return
-			if(user.loc == uloc && wloc == W.loc)
-				welded()
-			else
-				to_chat(user, "You must stay still while welding the pipe.")
-		else
-			to_chat(user, "You need more welding fuel to cut the pipe.")
-		return
-
-	..()
 
 	// called when pipe is cut with welder
 /obj/structure/disposalpipe/proc/welded()
@@ -474,19 +465,26 @@
 	updatedesc()
 	update()
 
-/obj/structure/disposalpipe/tagger/attackby(obj/item/I, mob/user)
-	if(..())
-		return
 
-	if(istype(I, /obj/item/device/destTagger))
-		var/obj/item/device/destTagger/O = I
+/obj/structure/disposalpipe/tagger/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Destination Tagger - Change filter
+	if (istype(tool, /obj/item/device/destTagger))
+		var/obj/item/device/destTagger/tagger = tool
+		if (!tagger.currTag)
+			USE_FEEDBACK_FAILURE("\The [tagger] does not have a destination tag set.")
+			return TRUE
+		sort_type = tagger.currTag
+		playsound(src, 'sound/machines/twobeep.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] reconfigures \the [src] with \a [tool]."),
+			SPAN_NOTICE("You set \the [src]'s filter to '[sort_type]' with \the [tool].")
+		)
+		updatename()
+		updatedesc()
+		return TRUE
 
-		if(O.currTag)// Tag set
-			sort_tag = O.currTag
-			playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
-			to_chat(user, SPAN_NOTICE("Changed tag to '[sort_tag]'."))
-			updatename()
-			updatedesc()
+	return ..()
+
 
 /obj/structure/disposalpipe/tagger/transfer(obj/structure/disposalholder/H)
 	if(sort_tag)
@@ -549,16 +547,23 @@
 	linked = null
 	return ..()
 
-/obj/structure/disposalpipe/diversion_junction/attackby(obj/item/I, mob/user)
-	if(..())
-		return 1
 
-	if(istype(I, /obj/item/disposal_switch_construct))
-		var/obj/item/disposal_switch_construct/C = I
-		if(C.id_tag)
-			id_tag = C.id_tag
-			playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
-			user.visible_message(SPAN_NOTICE("\The [user] changes \the [src]'s tag."))
+/obj/structure/disposalpipe/diversion_junction/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Disposal Switch Assemply - Set ID tag
+	if (istype(tool, /obj/item/disposal_switch_construct))
+		var/obj/item/disposal_switch_construct/construct = tool
+		if (!construct.id_tag)
+			USE_FEEDBACK_FAILURE("\The [tool] doesn't have an ID tag set.")
+			return TRUE
+		id_tag = construct.id_tag
+		playsound(src, 'sound/machines/twobeep.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] reconfigures \the [src] with \a [tool]."),
+			SPAN_NOTICE("You set \the [src]'s ID tag to '[id_tag]' with \the [tool]..")
+		)
+		return TRUE
+
+	return ..()
 
 
 /obj/structure/disposalpipe/diversion_junction/nextdir(fromdir, sortTag)
@@ -642,19 +647,26 @@
 	updatedesc()
 	updatename()
 
-/obj/structure/disposalpipe/sortjunction/attackby(obj/item/I, mob/user)
-	if(..())
-		return
 
-	if(istype(I, /obj/item/device/destTagger))
-		var/obj/item/device/destTagger/O = I
+/obj/structure/disposalpipe/sortjunction/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Destination Tagger - Change filter
+	if (istype(tool, /obj/item/device/destTagger))
+		var/obj/item/device/destTagger/tagger = tool
+		if (!tagger.currTag)
+			USE_FEEDBACK_FAILURE("\The [tagger] does not have a destination tag set.")
+			return TRUE
+		sort_type = tagger.currTag
+		playsound(src, 'sound/machines/twobeep.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] reconfigures \the [src] with \a [tool]."),
+			SPAN_NOTICE("You set \the [src]'s filter to '[sort_type]' with \the [tool].")
+		)
+		updatename()
+		updatedesc()
+		return TRUE
 
-		if(O.currTag)// Tag set
-			sort_type = O.currTag
-			playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
-			to_chat(user, SPAN_NOTICE("Changed filter to '[sort_type]'."))
-			updatename()
-			updatedesc()
+	return ..()
+
 
 /obj/structure/disposalpipe/sortjunction/proc/divert_check(checkTag)
 	return sort_type == checkTag
@@ -755,39 +767,17 @@
 	update()
 	return
 
-	// Override attackby so we disallow trunkremoval when somethings ontop
-/obj/structure/disposalpipe/trunk/attackby(obj/item/I, mob/user)
 
-	//Disposal constructors
-	var/obj/structure/disposalconstruct/C = locate() in src.loc
-	if(C && C.anchored)
+/obj/structure/disposalpipe/trunk/can_use_item(obj/item/tool, mob/user, click_params)
+	. = ..()
+	if (!.)
 		return
 
-	var/turf/T = src.loc
-	if(!T.is_plating())
-		return		// prevent interaction with T-scanner revealed pipes
-	src.add_fingerprint(user, 0, I)
-	if(istype(I, /obj/item/weldingtool))
-		var/obj/item/weldingtool/W = I
+	var/obj/structure/disposalconstruct/construct = locate() in get_turf(src)
+	if (construct?.anchored)
+		USE_FEEDBACK_FAILURE("\The [construct] blocks access to \the [src].")
+		return FALSE
 
-		if(W.remove_fuel(0,user))
-			playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-			// check if anything changed over 2 seconds
-			var/turf/uloc = user.loc
-			var/atom/wloc = W.loc
-			to_chat(user, "Slicing the disposal pipe.")
-			sleep(30)
-			if(!W.isOn()) return
-			if(user.loc == uloc && wloc == W.loc)
-				if(linked && istype(linked,/obj/machinery/disposal))
-					var/obj/machinery/disposal/D = linked
-					D.trunk = null
-				welded()
-			else
-				to_chat(user, "You must stay still while welding the pipe.")
-		else
-			to_chat(user, "You need more welding fuel to cut the pipe.")
-			return
 
 	// would transfer to next pipe segment, but we are in a trunk
 	// if not entering from disposal bin,

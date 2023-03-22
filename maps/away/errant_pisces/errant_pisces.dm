@@ -38,24 +38,38 @@
 					continue
 				N.update_connections()
 
-/obj/structure/net/attackby(obj/item/W as obj, mob/user as mob)
-	if (user.a_intent == I_HURT && istype(W, /obj/item/material)) //sharp objects can cut thorugh
-		var/obj/item/material/SH = W
-		if (!(SH.sharp) || (SH.sharp && SH.force < 10))//is not sharp enough or at all
-			to_chat(user,SPAN_WARNING("You can't cut throught \the [src] with \the [W], it's too dull."))
-			return TRUE
-		visible_message(SPAN_WARNING("[user] starts to cut through \the [src] with \the [W]!"))
-		while (!health_dead)
-			if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-				visible_message(SPAN_WARNING("[user] stops cutting through \the [src] with \the [W]!"))
-				return TRUE
-			damage_health(20 * (1 + (SH.force-10) / 10), W.damtype, DAMAGE_FLAG_SHARP)
-		visible_message(SPAN_WARNING("[user] cuts through \the [src]!"))
-		new /obj/item/stack/net(src.loc)
-		qdel(src)
-		return TRUE
 
-	return ..()
+/obj/structure/net/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+	// Sharp Object - Cut through net
+	if (!is_sharp(weapon) || weapon.force < 10)
+		USE_FEEDBACK_FAILURE("\The [weapon] isn't sharp enough to cut \the [src].")
+		return TRUE
+	user.visible_message(
+		SPAN_NOTICE("\The [user] starts cutting through \the [src] with \a [weapon]."),
+		SPAN_NOTICE("You start cutting through \the [src] with \the [weapon].")
+	)
+	while (!health_dead)
+		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, weapon))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] makes some progress cutting through \the [src]..."),
+			SPAN_NOTICE("You make some progress cutting through \the [src]...")
+		)
+		if (damage_health(20 * (1 + (weapon.force - 10) / 10), weapon.damtype, weapon.damage_flags()))
+			user.visible_message(
+				SPAN_NOTICE("\The [user] cuts through \the [src] with \a [weapon]."),
+				SPAN_NOTICE("You cut through \the [src] with \the [weapon].")
+			)
+			break
+	return TRUE
+
+
+/obj/structure/net/on_death()
+	. = ..()
+	new /obj/item/stack/net(loc)
+	qdel_self()
+
 
 /obj/structure/net/bullet_act(obj/item/projectile/P)
 	. = PROJECTILE_CONTINUE //few cloth ribbons won't stop bullet or energy ray
