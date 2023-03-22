@@ -379,6 +379,12 @@
 	to_chat(user, desc)
 	if (get_max_health())
 		examine_damage_state(user)
+
+	if (IsFlameSource())
+		to_chat(user, SPAN_DANGER("It has an open flame."))
+	else if (distance <= 1 && IsHeatSource())
+		to_chat(user, SPAN_WARNING("It's hot to the touch."))
+
 	return TRUE
 
 /**

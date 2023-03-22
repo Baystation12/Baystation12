@@ -73,7 +73,3 @@
 	if(burnt)
 		icon_state = "match_burnt"
 		item_state = "cigoff"
-
-
-/obj/item/flame/match/IsHeatSource()
-	return lit ? 1000 : 0
