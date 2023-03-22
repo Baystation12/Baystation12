@@ -1,0 +1,5 @@
+author: rootoo807
+delete-after: true
+changes:
+  - bugfix: Engi-borgs can use steel to lay reinforced floor.
+  - bugfix: Carpet stacks (and other pre-made tile stacks) work now.
