@@ -147,6 +147,59 @@
 	melee_accuracy_bonus = -10
 	base_parry_chance = 30
 
+/obj/item/material/twohanded/baseballbat/proc/deflect(mob/user, atom/target, atom/movable/item, range, speed)
+	item.throw_at(target, range, speed, user, TRUE)
+
+/obj/item/material/twohanded/baseballbat/handle_shield(mob/user, damage, atom/damage_source, mob/attacker, def_zone, attack_text)
+	var/atom/movable/AM = damage_source
+	var/datum/thrownthing/TT = SSthrowing.processing[damage_source]
+
+	if(istype(AM) && TT && (!attacker || (attacker && get_dist(user, attacker) > 1)) && !user.incapacitated() && is_held_twohanded(user))
+
+		var/bad_arc = reverse_direction(user.dir) //arc of directions from which we cannot block
+		if(check_shield_arc(user, bad_arc, damage_source, attacker))
+			if(!prob(user.skill_fail_chance(SKILL_HAULING, 50, SKILL_EXPERT)))
+				. = TRUE
+				//You hit it!
+				playsound(src, pick('sound/items/baseball/baseball_hit_01.wav', 'sound/items/baseball/baseball_hit_02.wav'), 75, 1)
+				var/home_run = prob(25)
+				if(home_run)
+					playsound(src, 'sound/items/baseball/play_ball.wav', 75)
+					visible_message(SPAN_NOTICE("\The [user] strikes the incoming [AM] with full force! It's a home run!"))
+				else
+					visible_message(SPAN_NOTICE("\The [user] hits the incoming [AM], sending it flying back!"))
+
+				user.do_windup_animation(attacker, attack_cooldown)
+
+				addtimer(new Callback(src, .proc/deflect, user, attacker, AM, home_run ? TT.maxrange * 2 : TT.maxrange, home_run ? TT.speed * 2 : TT.speed), 0)
+
+			else
+				playsound(src, 'sound/items/baseball/swing_woosh.wav', 75, 1)
+				visible_message(SPAN_NOTICE("\The [user] tries to hit the icoming [AM] but misses!"))
+				user.do_windup_animation(attacker, attack_cooldown)
+				return FALSE //Strike!
+		else
+			return FALSE
+
+	else
+		return ..()
+
+/obj/item/material/twohanded/baseballbat/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	. = ..()
+	var/obj/O = target
+	if(istype(O))
+		if(is_held_twohanded(user) && !O.anchored && proximity_flag && isturf(O.loc) && O.w_class <= ITEM_SIZE_SMALL)
+			if(!prob(user.skill_fail_chance(SKILL_HAULING, 20, SKILL_EXPERT)))
+				var/skill = 0.25 + (user.get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)
+				var/dist = O.throw_range * skill
+				O.throw_at(get_ranged_target_turf(user, user.dir, dist), dist, O.throw_speed * skill, user, TRUE)
+				visible_message(SPAN_NOTICE("\The [user] hits \the [O], sending it flying!"))
+				playsound(src, pick('sound/items/baseball/baseball_hit_01.wav', 'sound/items/baseball/baseball_hit_02.wav'), 75, 1)
+			else
+				playsound(src, 'sound/items/baseball/swing_woosh.wav', 75, 1)
+				visible_message(SPAN_NOTICE("\The [user] tries to bat \the [O] but misses!"))
+			user.do_attack_animation(target)
+
 //Predefined materials go here.
 /obj/item/material/twohanded/baseballbat/metal/New(newloc)
 	..(newloc,MATERIAL_ALUMINIUM)
