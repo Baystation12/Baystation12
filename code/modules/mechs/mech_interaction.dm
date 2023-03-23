@@ -330,7 +330,7 @@
 		var/obj/item/mech_component/input_fix = input(user, "Which component would you like to fix?", "\The [src] - Fix Component") as null|anything in damaged_parts
 		if (!input_fix || !user.use_sanity_check(src, tool))
 			return TRUE
-		if (!input_fix.brute_damage)
+		if (!input_fix.burn_damage)
 			USE_FEEDBACK_FAILURE("\The [src]'s [input_fix.name] no longer needs repair.")
 			return TRUE
 		input_fix.repair_burn_generic(tool, user)
@@ -432,7 +432,7 @@
 		if (!maintenance_protocols)
 			USE_FEEDBACK_FAILURE("\The [src]'s maintenance protocols must be enabled to install \the [tool].")
 			return TRUE
-		if (!body?.cell)
+		if (body?.cell)
 			USE_FEEDBACK_FAILURE("\The [src] already has \a [body.cell] installed.")
 			return TRUE
 		if (!user.unEquip(tool, body))
