@@ -432,7 +432,7 @@
 		if (!maintenance_protocols)
 			USE_FEEDBACK_FAILURE("\The [src]'s maintenance protocols must be enabled to install \the [tool].")
 			return TRUE
-		if (!body?.cell)
+		if (body?.cell)
 			USE_FEEDBACK_FAILURE("\The [src] already has \a [body.cell] installed.")
 			return TRUE
 		if (!user.unEquip(tool, body))
