@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Fixes mechs being unrepairable with cable coil when components have burn
+      damage.
+  - bugfix: Fixes mechs not accepting power cells.
