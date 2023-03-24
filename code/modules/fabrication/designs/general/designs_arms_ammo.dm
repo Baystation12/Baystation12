@@ -88,9 +88,13 @@
 	name = "ammunition (rifle magazine)"
 	path = /obj/item/ammo_magazine/rifle
 
-/datum/fabricator_recipe/arms_ammo/hidden/magazine_carbine
-	name = "ammunition (military rifle)"
+/datum/fabricator_recipe/arms_ammo/hidden/magazine_bullpupheavy
+	name = "ammunition (heavy bullpup rifle)"
 	path = /obj/item/ammo_magazine/mil_rifle
+
+/datum/fabricator_recipe/arms_ammo/hidden/magazine_bullpuplight
+	name = "ammunition (light bullpup rifle)"
+	path = /obj/item/ammo_magazine/mil_rifle/light
 
 /datum/fabricator_recipe/arms_ammo/hidden/shotgun
 	name = "ammunition (slug, shotgun)"

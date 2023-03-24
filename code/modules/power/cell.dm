@@ -28,7 +28,22 @@
 		return INITIALIZE_HINT_QDEL
 	if(isnull(charge))
 		charge = maxcharge
+	if(autorecharging)
+		START_PROCESSING(SSobj, src)
 	update_icon()
+
+/obj/item/cell/Process()
+	charge_tick++
+	if(charge_tick < recharge_time) return FALSE
+	charge_tick = 0
+	give(maxcharge * autorecharge_rate)
+
+	// If installed in a gun, update gun icon to reflect new charge level.
+	if(istype(loc, /obj/item/gun/energy))
+		var/obj/item/gun/energy/I = loc
+		I.update_icon()
+
+	return TRUE
 
 /obj/item/cell/drain_power(var/drain_check, var/surge, var/power = 0)
 

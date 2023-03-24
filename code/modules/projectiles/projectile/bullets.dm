@@ -265,6 +265,9 @@
 /obj/item/projectile/bullet/pistol/practice
 	damage = 5
 
+/obj/item/projectile/bullet/rifle/practice
+	damage = 5
+
 /obj/item/projectile/bullet/rifle/military/practice
 	damage = 5
 

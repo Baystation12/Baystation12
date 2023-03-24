@@ -12245,7 +12245,7 @@
 /area/turret_protected/ai_outer_chamber)
 "GU" = (
 /obj/structure/displaycase,
-/obj/item/gun/projectile/revolver/medium/captain{
+/obj/item/gun/projectile/revolver/captain{
 	pixel_y = -3
 	},
 /obj/structure/sign/ecplaque{

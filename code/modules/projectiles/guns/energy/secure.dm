@@ -8,7 +8,7 @@
 		)
 	charge_cost = 30
 	battery_changable = TRUE
-	battery_type = /obj/item/cell/guncell/pistol/verysmall
+	battery_type = /obj/item/cell/guncell/pistol/small
 	battery_chamber_size = BATTERY_PISTOL
 	max_shots = 5
 	req_access = list(list(access_brig, access_bridge))

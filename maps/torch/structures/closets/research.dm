@@ -142,6 +142,7 @@
 		/obj/item/device/hailer,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/clothing/accessory/badge/holo/NT,
+		/obj/item/storage/firstaid/individual/military,
 		/obj/item/device/megaphone,
 		/obj/item/gun/energy/stunrevolver/secure,
 		/obj/item/clothing/shoes/jackboots,

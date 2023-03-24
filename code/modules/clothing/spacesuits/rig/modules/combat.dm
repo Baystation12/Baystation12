@@ -207,17 +207,16 @@
 	interface_name = "mounted gun"
 	interface_desc = "A shoulder-mounted cell-powered laser gun."
 
+	var/gun_type
 	var/obj/item/gun/gun
 
-/obj/item/rig_module/mounted/Initialize()
-	. = ..()
-	if(ispath(gun))
-		gun = new gun(src)
-		gun.canremove = 0
+/obj/item/rig_module/mounted/New()
+	..()
+	gun = new gun_type(src)
 
 /obj/item/rig_module/mounted/engage(atom/target)
 
-	if(!..() || !gun)
+	if(!..())
 		return 0
 
 	if(!target)
@@ -236,7 +235,7 @@
 	interface_name = "mounted laser cannon"
 	interface_desc = "A shoulder-mounted cell-powered laser cannon."
 
-	gun = /obj/item/gun/energy/lasercannon/mounted
+	gun_type = /obj/item/gun/energy/lasercannon/mounted
 
 /obj/item/rig_module/mounted/egun
 
@@ -250,7 +249,7 @@
 	interface_desc = "A shoulder-mounted suit-powered energy gun."
 	origin_tech = list(TECH_POWER = 6, TECH_COMBAT = 6, TECH_ENGINEERING = 6)
 
-	gun = /obj/item/gun/energy/gun/mounted
+	gun_type = /obj/item/gun/energy/gun/mounted
 
 /obj/item/rig_module/mounted/taser
 
@@ -265,7 +264,7 @@
 	interface_desc = "A shoulder-mounted, cell-powered electrolaser."
 	origin_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
 
-	gun = /obj/item/gun/energy/taser/mounted
+	gun_type = /obj/item/gun/energy/taser/mounted
 
 /obj/item/rig_module/mounted/plasmacutter
 
@@ -280,7 +279,7 @@
 	interface_desc = "A forearm-mounted suit-powered plasma cutter."
 	origin_tech = list(TECH_MATERIAL = 5, TECH_PHORON = 4, TECH_ENGINEERING = 7, TECH_COMBAT = 5)
 
-	gun = /obj/item/gun/energy/plasmacutter/mounted
+	gun_type = /obj/item/gun/energy/plasmacutter/mounted
 
 /obj/item/rig_module/mounted/plasmacutter/engage(atom/target)
 
@@ -317,7 +316,7 @@
 	active_power_cost = 0.5 KILOWATTS
 	passive_power_cost = 0
 
-	gun = /obj/item/gun/energy/crossbow/ninja/mounted
+	gun_type = /obj/item/gun/energy/crossbow/ninja/mounted
 
 /obj/item/rig_module/mounted/energy_blade/Process()
 

@@ -322,7 +322,7 @@
 
 /obj/item/ammo_magazine/mil_rifle
 	name = "assault rifle magazine"
-	icon_state = "bullup"
+	icon_state = "bullpup"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = CALIBER_RIFLE_MILITARY
@@ -337,6 +337,19 @@
 /obj/item/ammo_magazine/mil_rifle/practice
 	labels = list("practice")
 	ammo_type = /obj/item/ammo_casing/rifle/military/practice
+
+/obj/item/ammo_magazine/mil_rifle/light
+	icon_state = "bullpup_light"
+	caliber = CALIBER_RIFLE
+	ammo_type = /obj/item/ammo_casing/rifle
+	max_ammo = 20
+
+/obj/item/ammo_magazine/mil_rifle/light/empty
+	initial_ammo = 0
+
+/obj/item/ammo_magazine/mil_rifle/light/practice
+	labels = list("practice")
+	ammo_type = /obj/item/ammo_casing/rifle/practice
 
 /obj/item/ammo_magazine/caps
 	name = "speed loader"

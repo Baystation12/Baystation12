@@ -142,6 +142,11 @@
 	icon_state = "riflecasing"
 	spent_icon = "riflecasing-spent"
 
+/obj/item/ammo_casing/rifle/practice
+	desc = "A rifle practice bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/practice
+	icon_state = "riflecasing_p"
+
 /obj/item/ammo_casing/shell
 	name = "shell casing"
 	desc = "An antimaterial shell casing."

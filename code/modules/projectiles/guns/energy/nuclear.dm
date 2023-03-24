@@ -45,13 +45,13 @@
 	icon = 'icons/obj/guns/small_egun.dmi'
 	battery_changable = TRUE
 	icon_state = "smallgunstun"
-	charge_cost = 60
+	charge_cost = 30
 	max_shots = 6
 	w_class = ITEM_SIZE_SMALL
 	force = 2 //it's the size of a car key, what did you expect?
 	modifystate = "smallgunstun"
 	battery_changable = TRUE
-	power_supply = /obj/item/cell/guncell/verysmall
+	power_supply = /obj/item/cell/guncell/small
 	battery_chamber_size = 1
 
 	init_firemodes = list(

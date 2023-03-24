@@ -40,7 +40,7 @@
 	var/loot = "an object"
 	switch(rand(1,8))
 		if(1)
-			target = /obj/item/gun/projectile/revolver/medium/captain
+			target = /obj/item/gun/projectile/revolver/captain
 			target_amount = 1
 			loot = "a captain's revolver"
 		if(2)
