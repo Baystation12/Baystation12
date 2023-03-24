@@ -273,3 +273,5 @@ var/global/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 
 #define num2hex(num) num2text(num, 1, 16)
+
+#define SPAN_LING(X) "<span class='changeling'>[X]</span>" //PRX

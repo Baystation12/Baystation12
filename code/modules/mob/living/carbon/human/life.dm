@@ -888,10 +888,21 @@
 		to_chat(src,"<span class='notice'>You feel like you're [pick("moving","flying","floating","falling","hovering")].</span>")
 
 /mob/living/carbon/human/proc/handle_changeling()
-
+/*original
 	if(mind && mind.changeling)
 		mind.changeling.regenerate()
-
+/original*/
+//PRX
+	if(!client) return
+	if(mind?.changeling)
+		mind.changeling.regenerate()
+		if(hud_used?.changeling_chems)
+			var/datum/changeling/changeling = mind.changeling
+			hud_used.changeling_chems.invisibility = 0
+			hud_used.changeling_chems.maptext = "<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font color='#dd66dd'>[round(changeling.chem_charges)]</font></div>"
+	else
+		hud_used.changeling_chems.invisibility = INVISIBILITY_ABSTRACT
+//PRX
 
 /mob/living/carbon/human/proc/handle_shock()
 	if(status_flags & GODMODE)	return 0	//godmode

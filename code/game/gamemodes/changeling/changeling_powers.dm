@@ -192,8 +192,9 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 				to_chat(src, "<span class='notice'>We stab [T] with the proboscis.</span>")
 				src.visible_message("<span class='danger'>[src] stabs [T] with the proboscis!</span>")
 				to_chat(T, "<span class='danger'>You feel a sharp stabbing pain!</span>")
-				affecting.take_external_damage(39, 0, DAMAGE_FLAG_SHARP, "large organic needle")
-		if(!do_after(src, 15 SECONDS, T, DO_PUBLIC_UNIQUE))
+				affecting.take_external_damage(39, 0, DAMAGE_FLAG_SHARP , "large organic needle")
+
+		if(!do_after(src, 15 SECONDS, T))
 			to_chat(src, "<span class='warning'>Our absorption of [T] has been interrupted!</span>")
 			changeling.isabsorbing = 0
 			return
@@ -283,7 +284,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	else
 		src.visible_message("<span class='warning'>[src]'s body begins to twist, changing rapidly!</span>")
 
-	if(!do_after(src, changeTime, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
+	if(!do_after(src, changeTime))
 		to_chat(src, "<span class='notice'>You fail to change shape.</span>")
 		return
 	handle_changeling_transform(chosen_dna)
@@ -442,7 +443,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 			to_chat(C, "<span class='notice'><font size='5'>We are ready to rise.  Use the <b>Revive</b> verb when you are ready.</font></span>")
 			C.verbs += /mob/proc/changeling_revive
-	return 1
+			return 1
 
 /mob/proc/changeling_revive()
 	set category = "Changeling"
@@ -562,7 +563,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 // HIVE MIND UPLOAD/DOWNLOAD DNA
 
-var/global/list/datum/absorbed_dna/hivemind_bank = list()
+var/list/datum/absorbed_dna/hivemind_bank = list()
 
 /mob/proc/changeling_hiveupload()
 	set category = "Changeling"
@@ -774,7 +775,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!T)	return 0
 	to_chat(T, "<span class='danger'>You feel a small prick and your chest becomes tight.</span>")
 	T.make_jittery(400)
-	if(T.reagents)	T.reagents.add_reagent(/datum/reagent/lexorin, 10)
+	if(T.reagents)	T.reagents.add_reagent(/datum/reagent/lexorin, 40)
 	return 1
 
 /mob/proc/changeling_extract_dna_sting()

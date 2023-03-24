@@ -15,6 +15,7 @@
 	unacidable = TRUE
 	var/obj/master = null    //A reference to the object in the slot. Grabs or items, generally.
 	var/globalscreen = FALSE //Global screens are not qdeled when the holding mob is destroyed.
+	var/use_additional_colors = FALSE //PRX
 
 /obj/screen/Destroy()
 	master = null
@@ -301,6 +302,38 @@
 		if("drop")
 			if(usr.client)
 				usr.client.drop_item()
+
+//PRX
+		if("holster")
+			if(usr.stat)
+				return
+			var/mob/living/carbon/human/H = usr
+			var/obj/item/clothing/under/U = H.w_uniform
+			for(var/obj/S in U.accessories)
+				if(istype(S, /obj/item/clothing/accessory/storage/holster))
+					var/datum/extension/holster/E = get_extension(S, /datum/extension/holster)
+					if(!E.holstered)
+						if(!usr.get_active_hand())
+							to_chat(usr, "<span class='warning'>You're not holding anything to holster.</span>")
+							return
+						E.holster(usr.get_active_hand(), usr)
+						return
+					else
+						E.unholster(usr, TRUE)
+						return
+			if(istype(H.belt, /obj/item/storage/belt/holster))
+				var/obj/item/storage/belt/holster/B = H.belt
+				var/datum/extension/holster/E = get_extension(B, /datum/extension/holster)
+				if(!E.holstered)
+					if(!usr.get_active_hand())
+						to_chat(usr, "<span class='warning'>You're not holding anything to holster.</span>")
+						return
+					E.holster(usr.get_active_hand(), usr)
+					return
+				else
+					E.unholster(usr, TRUE)
+					return
+//PRX
 
 		if("module")
 			if(isrobot(usr))

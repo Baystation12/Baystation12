@@ -40,6 +40,21 @@
 /mob/proc/is_species(datum/species/S)
 	return FALSE
 
+/proc/islesserform(A) //PRX
+	if(istype(A, /mob/living/carbon/human))
+		switch(A:get_species())
+			if ("Monkey")
+				return 1
+			if ("Farwa")
+				return 1
+			if ("Neaera")
+				return 1
+			if ("Stok")
+				return 1
+			if ("V'krexi")
+				return 1
+	return 0 //PRX
+
 
 /mob/living/carbon/is_species(datum/species/S)
 	if (!S) return FALSE

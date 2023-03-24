@@ -24,7 +24,7 @@
 	var/show_intent_icons = 0
 	var/hotkey_ui_hidden = 0	//This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
 
-	var/obj/screen/lingchemdisplay
+	var/obj/screen/ling_chem/changeling_chems //PRX WAS var/obj/screen/lingchemdisplay
 	var/obj/screen/r_hand_hud_object
 	var/obj/screen/l_hand_hud_object
 	var/obj/screen/action_intent
@@ -46,7 +46,7 @@
 /datum/hud/Destroy()
 	. = ..()
 	stamina_bar = null
-	lingchemdisplay = null
+	changeling_chems = null //PRX WAS lingchemdisplay
 	r_hand_hud_object = null
 	l_hand_hud_object = null
 	action_intent = null

@@ -56,6 +56,19 @@
 		sync_organ_dna()
 	make_blood()
 
+//PRX //FROM INFINITY
+GLOBAL_LIST_EMPTY(compatable_genomes_owners)
+/mob/proc/check_compatable_genome()
+/mob/living/carbon/human/check_compatable_genome()
+	. = ..()
+	if(src in GLOB.compatable_genomes_owners)
+		. = TRUE
+/mob/living/carbon/human/proc/give_compatable_genome()
+	if(mind)
+		if(prob(mind.assigned_job ? (mind.assigned_job.good_genome_prob ? clamp(mind.assigned_job.good_genome_prob,0,100) : 30) : 30) && !(src in GLOB.compatable_genomes_owners))
+			GLOB.compatable_genomes_owners |= src
+//PRX
+
 /mob/living/carbon/human/Destroy()
 	if (dream_timer)
 		deltimer(dream_timer)

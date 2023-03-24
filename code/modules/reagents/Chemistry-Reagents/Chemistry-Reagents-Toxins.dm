@@ -265,6 +265,16 @@
 	heating_point = null
 	heating_products = null
 
+/datum/reagent/toxin/batrachotoxin //uses in changelings' deathstings //PRX
+	name = "Batrachotoxin"
+	description = "An extremly poisonous liquid. Smells strongly of bleach."
+	reagent_state = LIQUID
+	taste_description = "bleach"
+	color = "#707c13"
+	target_organ = BP_HEART
+	strength = 4
+	metabolism = REM
+
 /datum/reagent/toxin/phoron
 	name = "Phoron"
 	description = "Phoron in its liquid form."
