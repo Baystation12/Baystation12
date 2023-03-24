@@ -86,7 +86,7 @@
 	. += "<style>.Points,a.Points{background: #cc5555;}</style>"
 	. += "<style>a.Points:hover{background: #55cc55;}</style>"
 	. += "<tt><center>"
-	. += "<font size=3><b>Select and configure your occupation preferences. Unavailable occupations are crossed out.</b></font>"
+	. += "<font size=3><b>Выберите и настройте свои профессиональные предпочтения. Недоступные профессии перечёркнуты!</b></font>"
 	. += "<br>"
 
 	// Display everything.
@@ -153,20 +153,20 @@
 				var/bodytype = S.get_bodytype()
 				var/bad_message = ""
 				if(job.total_positions == 0 && job.spawn_positions == 0)
-					bad_message = "<b>\[UNAVAILABLE]</b>"
+					bad_message = "<b>\[НЕДОСТУПНО]</b>"
 				else if(jobban_isbanned(user, title))
-					bad_message = "<b>\[BANNED]</b>"
+					bad_message = "<b>\[ЗАБЛОКИРОВАНО]</b>"
 				else if (!job.is_species_whitelist_allowed(user.client))
-					bad_message = "\[WHITELIST RESTRICTED ([job.use_species_whitelist])]"
+					bad_message = "\[ТРЕБОВАНИЕ БЕЛОГО ЛИСТА ([job.use_species_whitelist])]"
 				else if(!job.player_old_enough(user.client))
 					var/available_in_days = job.available_in_days(user.client)
-					bad_message = "\[IN [(available_in_days)] DAYS]"
+					bad_message = "\[В ТЕЧЕНИЕ [(available_in_days)] ДНЕЙ]"
 				else if(LAZYACCESS(job.minimum_character_age, bodytype) && user.client && (user.client.prefs.age < job.minimum_character_age[bodytype]))
-					bad_message = "\[MIN CHAR AGE: [job.minimum_character_age[bodytype]]]"
+					bad_message = "\[МИН.ВОЗРАСТ ПЕРСОНАЖА: [job.minimum_character_age[bodytype]]]"
 				else if(!job.is_species_allowed(S))
-					bad_message = "<b>\[SPECIES RESTRICTED]</b>"
+					bad_message = "<b>\[ОГРАНИЧЕНИЕ РАСЫ]</b>"
 				else if(!S.check_background(job, user.client.prefs))
-					bad_message = "<b>\[BACKGROUND RESTRICTED]</b>"
+					bad_message = "<b>\[ОГРАНИЧЕНИЕ ПРЕДЫСТОРИИ]</b>"
 
 				var/current_level = JOB_LEVEL_NEVER
 				if(pref.job_high == job.title)
@@ -210,8 +210,8 @@
 
 				. += "<td>"
 				if(title == GLOB.using_map.default_assistant_title)//Assistant is special
-					var/yes_link = "Yes"
-					var/no_link = "No"
+					var/yes_link = "Да"
+					var/no_link = "Нет"
 					if(title in pref.job_low)
 						yes_link = "<font color='#55cc55'>[yes_link]</font>"
 						no_link = "<font color='black'>[no_link]</font>"
@@ -220,18 +220,18 @@
 						no_link = "<font color='#55cc55'>[no_link]</font>"
 					. += "<a href='?src=\ref[src];set_job=[title];set_level=[JOB_LEVEL_LOW]'>[yes_link]</a><a href='?src=\ref[src];set_job=[title];set_level=[JOB_LEVEL_NEVER]'>[no_link]</a>"
 				else if(!job.available_by_default)
-					. += "<font color = '#cccccc'>Not available at roundstart.</font>"
+					. += "<font color = '#cccccc'>Недоступно с начала смены.</font>"
 				else
 					var/level_link
 					switch(current_level)
 						if(JOB_LEVEL_LOW)
-							level_link = "<font color='#cc5555'>Low</font>"
+							level_link = "<font color='#cc5555'>Низкий</font>"
 						if(JOB_LEVEL_MEDIUM)
-							level_link = "<font color='#eecc22'>Medium</font>"
+							level_link = "<font color='#eecc22'>Средний</font>"
 						if(JOB_LEVEL_HIGH)
-							level_link = "<font color='#55cc55'>High</font>"
+							level_link = "<font color='#55cc55'>Высокий</font>"
 						else
-							level_link = "<font color=black>Never</font>"
+							level_link = "<font color=black>Никогда</font>"
 					. += "<a href='?src=\ref[src];set_job=[title];inc_level=-1'>[level_link]</a>"
 				. += "</td></tr>"
 			. += "</td></tr></table>"
@@ -239,11 +239,11 @@
 	. += "<hr/>"
 	switch(pref.alternate_option)
 		if(GET_RANDOM_JOB)
-			. += "<u><a href='?src=\ref[src];job_alternative=1'>Get random job if preferences unavailable</a></u>"
+			. += "<u><a href='?src=\ref[src];job_alternative=1'>Выбрать случайную должность, если приоритетная недоступна</a></u>"
 		if(BE_ASSISTANT)
-			. += "<u><a href='?src=\ref[src];job_alternative=1'>Be assistant if preference unavailable</a></u>"
+			. += "<u><a href='?src=\ref[src];job_alternative=1'>Быть пассажиром, если приоритетная должность недоступна</a></u>"
 		if(RETURN_TO_LOBBY)
-			. += "<u><a href='?src=\ref[src];job_alternative=1'>Return to lobby if preference unavailable</a></u>"
+			. += "<u><a href='?src=\ref[src];job_alternative=1'>Вернуться в лобби, если приоритетная должность недоступна</a></u>"
 	. += "<a href='?src=\ref[src];reset_jobs=1'>\[Reset\]</a></center>"
 	. += "<hr/>"
 	. += "</tt><br>"

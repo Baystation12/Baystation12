@@ -479,6 +479,11 @@ armour attachments
 	desc = "An emblem depicting the crest of the SCG Expeditionary Corps."
 	icon_state = "ecflag"
 
+/obj/item/clothing/accessory/armor_tag/solgov/exo
+	name = "\improper EXO crest"
+	desc = "An emblem depicting the crest of the Expeditionary Corps Organisation."
+	icon_state = "exoflag"
+
 /obj/item/clothing/accessory/armor_tag/solgov/sec
 	name = "\improper POLICE tag"
 	desc = "An armor tag with the word POLICE printed in silver lettering on it."

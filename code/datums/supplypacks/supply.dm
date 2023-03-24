@@ -39,8 +39,8 @@
 	containername = "barricade tape crate"
 
 /decl/hierarchy/supply_pack/supply/bogrolls
-	name = "Custodial - Toilet paper (12)"
-	contains = list (/obj/item/storage/box/bogrolls = 2)
+	name = "Custodial - Toilet paper"
+	contains = list (/obj/item/storage/fancy/supply_box/bumaga = 2)
 	cost = 8
 	containername = "toilet paper crate"
 
@@ -64,7 +64,7 @@
 
 /decl/hierarchy/supply_pack/supply/water
 	name = "Refills - Bottled water"
-	contains = list (/obj/item/storage/box/water = 2)
+	contains = list (/obj/item/storage/fancy/supply_box/water = 2)
 	cost = 12
 	containername = "bottled water crate"
 

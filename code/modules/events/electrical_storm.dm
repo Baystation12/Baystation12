@@ -19,9 +19,9 @@
 		if(EVENT_LEVEL_MUNDANE)
 			command_announcement.Announce("Небольшая электрическая буря была обнаружена вблизи [location_name()]. Пожалуйста, следите за возможными электрическими разрядами.", "[station_name()] Sensor Array", zlevels = affecting_z)
 		if(EVENT_LEVEL_MODERATE)
-			command_announcement.Announce("[location_name()] вот-вот пройдет через электрическую бурю. Пожалуйста, закрепите чувствительное электрооборудование, пока шторм не пройдет.", "[station_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_moderate_sound, zlevels = affecting_z)
+			command_announcement.Announce("Вблизи [location_name()] обнаружена сильная электрическая буря. Рекомендуется немедленно обезопасить чувствительное электрооборудование с целью сохранения его работоспособности.", "[station_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_moderate_sound, zlevels = affecting_z)
 		if(EVENT_LEVEL_MAJOR)
-			command_announcement.Announce("Тревога. Сильная электрическая буря была обнаружена в непосредственной близости от [location_name()]. Рекомендуется немедленно обезопасить чувствительное электрооборудование до тех пор, пока шторм не пройдет.", "[station_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_major_sound, zlevels = affecting_z)
+			command_announcement.Announce("Аномальная электрическая буря неизвестной силы была обнаружена в непосредственной близости от [location_name()]. Требуется немедленно обезопасить чувствительное электрооборудование с целью сохранения его работоспособности.", "[station_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_major_sound, zlevels = affecting_z)
 
 /datum/event/electrical_storm/start()
 	..()

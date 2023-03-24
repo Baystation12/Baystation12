@@ -27,12 +27,15 @@
 	desc = "An armor tag with the words PROXIMA CENTAURI RISK CONTROL printed in cyan lettering on it."
 	icon_state = "pcrctag"
 
+/obj/item/clothing/accessory/armor_tag/zpci
+	name = "\improper ZPCI tag"
+	desc = "An armor tag with the words ZONE PROTECTION CONTROL printed in cyan lettering on it."
+	icon_state = "zpcitag"
 
 /obj/item/clothing/accessory/armor_tag/saare
 	name = "\improper SAARE tag"
 	desc = "An armor tag with the acronym SAARE printed in olive-green lettering on it."
 	icon_state = "saaretag"
-
 
 /obj/item/clothing/accessory/armor_tag/press
 	name = "\improper PRESS tag"
@@ -40,48 +43,40 @@
 	icon_state = "presstag"
 	slot_flags = SLOT_BELT
 
-
 /obj/item/clothing/accessory/armor_tag/opos
 	name = "\improper O+ blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as O POSITIVE."
 	icon_state = "opostag"
-
 
 /obj/item/clothing/accessory/armor_tag/oneg
 	name = "\improper O- blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as O NEGATIVE."
 	icon_state = "onegtag"
 
-
 /obj/item/clothing/accessory/armor_tag/apos
 	name = "\improper A+ blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as A POSITIVE."
 	icon_state = "apostag"
-
 
 /obj/item/clothing/accessory/armor_tag/aneg
 	name = "\improper A- blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as A NEGATIVE."
 	icon_state = "anegtag"
 
-
 /obj/item/clothing/accessory/armor_tag/bpos
 	name = "\improper B+ blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as B POSITIVE."
 	icon_state = "bpostag"
-
 
 /obj/item/clothing/accessory/armor_tag/bneg
 	name = "\improper B- blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as B NEGATIVE."
 	icon_state = "bnegtag"
 
-
 /obj/item/clothing/accessory/armor_tag/abpos
 	name = "\improper AB+ blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as AB POSITIVE."
 	icon_state = "abpostag"
-
 
 /obj/item/clothing/accessory/armor_tag/abneg
 	name = "\improper AB- blood patch"

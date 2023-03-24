@@ -115,7 +115,7 @@
 	plushes["plush orange skrell"] = /obj/item/toy/figure/plush/skrell/orange
 	plushes["plush red skrell"] = /obj/item/toy/figure/plush/skrell/red
 	plushes["plush red fox"] = /obj/item/toy/figure/plush/fox
-	plushes["plush black fox"] = /obj/item/toy/figure/plush/fox/niggerfox
+	plushes["plush black fox"] = /obj/item/toy/figure/plush/fox/blackfox
 	plushes["plush orange fox"] = /obj/item/toy/figure/plush/fox/orange
 	gear_tweaks += new /datum/gear_tweak/path(plushes)
 

@@ -13897,6 +13897,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/random_multi/single_item/boombox,
 /obj/item/device/binoculars,
+/obj/item/barrier,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/hangcheck)
 "TD" = (

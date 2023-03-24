@@ -15,6 +15,24 @@
 	contraband = 1
 	supply_method = /decl/supply_method/randomized
 
+/decl/hierarchy/supply_pack/operations/illuminate
+	name = "Gear - Flashlights"
+	contains = list(/obj/item/storage/fancy/supply_box/flashlight = 1)
+	cost = 5
+	containername = "flashlights crate"
+
+/decl/hierarchy/supply_pack/operations/illuminate
+	name = "Gear - Illumination grenades"
+	contains = list(/obj/item/storage/fancy/supply_box/lightgrenade = 1)
+	cost = 8
+	containername = "illumination grenade crate"
+
+/decl/hierarchy/supply_pack/operations/flare
+	name = "Gear - Red flare"
+	contains = list(/obj/item/storage/fancy/supply_box/flare = 1)
+	cost = 6
+	containername = "red flare crate"
+
 /decl/hierarchy/supply_pack/operations/plasma_cutter
 	name = "Equipment - Plasma Cutter"
 	contains = list(/obj/item/gun/energy/plasmacutter)

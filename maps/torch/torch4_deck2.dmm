@@ -3933,10 +3933,12 @@
 	},
 /obj/item/tape_roll,
 /obj/item/tape_roll,
+/obj/item/storage/fancy/supply_box/flashlight,
 /turf/simulated/floor/tiled,
 /area/engineering/engineering_bay)
 "hX" = (
 /obj/structure/closet/secure_closet/engineering_electrical,
+/obj/item/storage/fancy/supply_box/flashlight,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engineering_bay)

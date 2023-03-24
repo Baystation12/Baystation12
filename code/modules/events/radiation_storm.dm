@@ -19,7 +19,7 @@
 		return res
 
 /datum/event/radiation_storm/announce()
-	command_announcement.Announce("Высокие уровни радиации обнаружены в непосредственной близости от [location_name()]. Пожалуйста, эвакуируйтесь в один из экранированных туннелей технического обслуживания.", "[location_name()] Sensor Array", new_sound = GLOB.using_map.radiation_detected_sound, zlevels = affecting_z)
+	command_announcement.Announce("Высокие уровни радиации обнаружены в непосредственной близости от [location_name()].  Немедленно проследуйте в ближайшие туннели технического обслуживания или иные экранированные помещения для обеспечения защиты от воздействия радиации.", "[location_name()] Sensor Array", new_sound = GLOB.using_map.radiation_detected_sound, zlevels = affecting_z)
 
 /datum/event/radiation_storm/start()
 	..()
@@ -41,7 +41,7 @@
 		radiate()
 
 	else if(activeFor == leaveBelt)
-		command_announcement.Announce("[location_name()] прошел радиационный пояс. Пожалуйста, подождите до одной минуты, пока уровень радиации рассеется, и сообщите в лазарет, если вы испытываете симптомы радиационного отправления. Техническое обслуживание вскоре вернется к нормальным параметрам доступа.", "[location_name()] Sensor Array", zlevels = affecting_z)
+		command_announcement.Announce("[location_name()] прошел радиационный пояс. Пожалуйста, подождите до одной минуты, пока уровень радиации рассеется, и сообщите в лазарет, если вы испытываете симптомы радиационного отправления. Доступ в туннели технического обслуживания вскоре вернётся к стандартных параметрам.", "[location_name()] Sensor Array", zlevels = affecting_z)
 
 /datum/event/radiation_storm/proc/radiate()
 	var/radiation_level = rand(15, 35)

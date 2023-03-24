@@ -231,13 +231,15 @@
 	var/atags = list()
 	atags["NTSF tag"] = /obj/item/clothing/accessory/armor_tag/nt
 	atags["PCRC tag"] = /obj/item/clothing/accessory/armor_tag/pcrc
+	atags["ZPCI tag"] = /obj/item/clothing/accessory/armor_tag/zpci
 	atags["SAARE tag"] = /obj/item/clothing/accessory/armor_tag/saare
 	atags["MEDIC tag"] = /obj/item/clothing/accessory/armor_tag/solgov/medic
 	atags["SFP AGENT tag"] = /obj/item/clothing/accessory/armor_tag/solgov/agent
 	atags["SCG tag"] = /obj/item/clothing/accessory/armor_tag/solgov/com
 	atags["POLICE tag"] = /obj/item/clothing/accessory/armor_tag/solgov/com/sec
-	atags["Expeditionary Corps crest"] = /obj/item/clothing/accessory/armor_tag/solgov/ec
-	atags["SCG Flag"] = /obj/item/clothing/accessory/armor_tag/solgov
+	atags["EC crest"] = /obj/item/clothing/accessory/armor_tag/solgov/ec
+	atags["EXO crest"] = /obj/item/clothing/accessory/armor_tag/solgov/exo
+	atags["SCG flag"] = /obj/item/clothing/accessory/armor_tag/solgov
 	gear_tweaks += new/datum/gear_tweak/path(atags)
 
 /datum/gear/tactical/press_tag
@@ -293,12 +295,6 @@
 /datum/gear/clothing/cloak_engineer
 	display_name = "cloak, engineer"
 	path = /obj/item/clothing/accessory/cloak/engineer
-	allowed_branches = CIVILIAN_BRANCHES
-	allowed_roles = ENGINEERING_ROLES
-
-/datum/gear/clothing/cloak_atmos
-	display_name = "cloak, atmos"
-	path = /obj/item/clothing/accessory/cloak/atmos
 	allowed_branches = CIVILIAN_BRANCHES
 	allowed_roles = ENGINEERING_ROLES
 

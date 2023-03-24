@@ -20,10 +20,10 @@
 	desc = "Cute and soft plush fox, it's so nice to hug it. After all, it is fluffy like a real fox."
 	icon_state = "redfox"
 
-/obj/item/toy/figure/plush/fox/niggerfox
+/obj/item/toy/figure/plush/fox/blackfox
 	name = "Plush black fox"
 	desc = "Cute and soft plush fox, it's so nice to hug it. After all, it is fluffy like a real fox."
-	icon_state = "niggerfox"
+	icon_state = "blackfox"
 
 /obj/item/toy/figure/plush/fox/orange
 	name = "Plush orange fox"

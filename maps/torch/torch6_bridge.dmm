@@ -8369,6 +8369,8 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/guncabinet/sidearm/small,
+/obj/item/barrier,
+/obj/item/barrier,
 /turf/simulated/floor/tiled/techfloor,
 /area/aquila/storage)
 "tR" = (
@@ -11668,6 +11670,8 @@
 	icon_state = "0-4"
 	},
 /obj/structure/table/rack,
+/obj/item/barrier,
+/obj/item/barrier,
 /obj/item/device/binoculars,
 /obj/machinery/light,
 /obj/machinery/requests_console{

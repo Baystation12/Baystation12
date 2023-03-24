@@ -39,8 +39,6 @@
 			output += "<a href='byond://?src=\ref[src];show_wiki=1'>Wiki</a>"
 		if (config.rules_url)
 			output += "<a href='byond://?src=\ref[src];show_rules=1'>Rules</a>"
-		if (config.lore_url)
-			output += "<a href='byond://?src=\ref[src];show_lore=1'>Lore</a>"
 	output += "<hr>"
 	if (GAME_STATE > RUNLEVEL_LOBBY)
 		output += "<a href='byond://?src=\ref[src];manifest=1'>Manifest</a>"

@@ -10563,12 +10563,11 @@
 /obj/structure/table/rack{
 	dir = 4
 	},
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
+/obj/item/storage/fancy/supply_box/flare,
+/obj/item/storage/fancy/supply_box/flare{
+	pixel_x = -1;
+	pixel_y = 5
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "aLx" = (
@@ -18101,6 +18100,17 @@
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/center)
+"hec" = (
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/structure/closet/crate/war,
+/obj/item/barrier,
+/obj/item/barrier,
+/obj/item/barrier,
+/obj/item/barrier,
+/obj/item/barrier,
+/obj/item/barrier,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/armoury)
 "hfb" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -19430,6 +19440,13 @@
 "iLA" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light,
+/obj/structure/closet/crate/war,
+/obj/item/barrier,
+/obj/item/barrier,
+/obj/item/barrier,
+/obj/item/barrier,
+/obj/item/barrier,
+/obj/item/barrier,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "iLB" = (
@@ -58381,7 +58398,7 @@ mwA
 jAl
 jAl
 bBv
-aQs
+hec
 aQs
 eRU
 eRU

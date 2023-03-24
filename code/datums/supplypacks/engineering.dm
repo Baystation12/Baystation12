@@ -45,8 +45,9 @@
 	contains = list(/obj/item/storage/belt/utility/full = 3,
 					/obj/item/clothing/suit/storage/hazardvest = 3,
 					/obj/item/clothing/head/welding = 2,
-					/obj/item/clothing/head/hardhat)
-	cost = 6
+					/obj/item/clothing/head/hardhat,
+					/obj/item/storage/fancy/supply_box/flashlight)
+	cost = 8
 	containername = "mechanical maintenance crate"
 
 /decl/hierarchy/supply_pack/engineering/solar
@@ -188,6 +189,12 @@
 	containertype = /obj/structure/closet/crate/secure/large/phoron
 	containername = "\improper Supermatter crate (CAUTION)"
 	access = access_ce
+
+/decl/hierarchy/supply_pack/engineering/cell
+	name = "Power - Advanced power cell"
+	contains = list(/obj/item/storage/fancy/supply_box/cell = 1)
+	cost = 40
+	containername = "power cell crate"
 
 /decl/hierarchy/supply_pack/engineering/fueltank
 	name = "Liquid - Fuel tank"

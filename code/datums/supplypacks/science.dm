@@ -66,7 +66,7 @@
 
 /decl/hierarchy/supply_pack/science/illuminate
 	name = "Gear - Illumination grenades"
-	contains = list(/obj/item/grenade/light = 8)
+	contains = list(/obj/item/storage/fancy/supply_box/lightgrenade = 2)
 	cost = 16
 	containername = "illumination grenade crate"
 

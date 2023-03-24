@@ -1,64 +1,60 @@
 /datum/sprite_accessory/hair/skr/aur
-	name = "Very Long Tentacles"
+	name = "Wavy Very Long Tentacles"
 	icon = 'proxima/icons/mob/human_races/species/skrell/hair.dmi'
-	icon_state = "skrell_verylong"
+	icon_state = "wavy-very_long"
 	gender = FEMALE
 
-/datum/sprite_accessory/hair/skr/aur/short
-	name = "Very Short Tentacles"
-	icon_state = "skrell_veryshort"
+/datum/sprite_accessory/hair/skr/aur/vess
+	name = "Short Tentacles, Vess"
+	icon_state = "very_short"
 	gender = MALE
 
-/datum/sprite_accessory/hair/skr/aur/behind
-	name = "Long Tentacles, behind (left)"
-	icon_state = "skrell_lbehind"
+/datum/sprite_accessory/hair/skr/aur/vels
+	name = "Long Tentacles, Vels"
+	icon_state = "very_long"
 	gender = FEMALE
 
-/datum/sprite_accessory/hair/skr/aur/behind/long
-	name = "Very Long Tentacles, behind (left)"
-	icon_state = "skrell_lbehind_long"
-
-/datum/sprite_accessory/hair/skr/aur/behind/right
-	name = "Long Tentacles, behind (right)"
-	icon_state = "skrell_rbehind"
-
-/datum/sprite_accessory/hair/skr/aur/behind/right/long
-	name = "Very Long Tentacles, behind (right)"
-	icon_state = "skrell_rbehind_long"
-
-/datum/sprite_accessory/hair/skr/aur/behind/both
-	name = "Long Tentacles, behind (both)"
-	icon_state = "skrell_bbehind"
+/datum/sprite_accessory/hair/skr/aur/split
+	name = "Split Tentacles"
+	icon_state = "split"
 	gender = FEMALE
 
-/datum/sprite_accessory/hair/skr/aur/behind/both/long
-	name = "Very Long Tentacles, behind (both)"
-	icon_state = "skrell_bbehind_long"
-
-/datum/sprite_accessory/hair/skr/aur/behind/both/short
-	name = "Short Tentacles, behind (both)"
-	icon_state = "skrell_bbehind_short"
+/datum/sprite_accessory/hair/skr/aur/tied
+	name = "Tied Tentacles"
+	icon_state = "tied-long"
 	gender = MALE
 
-/datum/sprite_accessory/hair/skr/aur/gesture
-	name = "Long Tentacles, gesture (insulted)"
-	icon_state = "skrell_insulted"
+/datum/sprite_accessory/hair/skr/aur/tiedl
+	name = "Tied Very Long Tentacles"
+	icon_state = "tied-very_long"
 	gender = FEMALE
 
-/datum/sprite_accessory/hair/skr/aur/gesture/excited
-	name = "Long Tentacles, gesture (excited)"
-	icon_state = "skrell_excited"
-
-/datum/sprite_accessory/hair/skr/aur/gesture/reserved
-	name = "Long Tentacles, gesture (reserved)"
-	icon_state = "skrell_reserved"
-
-/datum/sprite_accessory/hair/skr/aur/tuux
-	name = "Short Tentacles, Tuux"
-	icon_state = "skrell_tuux"
+/datum/sprite_accessory/hair/skr/aur/scarf
+	name = "Scarf Long Tentacles"
+	icon_state = "scarf-long"
 	gender = MALE
 
-/datum/sprite_accessory/hair/skr/aur/ltuux
-	name = "Long Tentacles, Tuux"
-	icon_state = "skrell_ltuux"
+/datum/sprite_accessory/hair/skr/aur/scarfl
+	name = "Scarf Very Long Tentacles"
+	icon_state = "scarf-very_long"
+	gender = FEMALE
+
+/datum/sprite_accessory/hair/skr/aur/wavyl
+	name = "Wavy Long Tentacles"
+	icon_state = "wavy-long"
+	gender = FEMALE
+
+/datum/sprite_accessory/hair/skr/aur/pullback
+	name = "Pullback Short Tentacles"
+	icon_state = "pullback-short"
+	gender = MALE
+
+/datum/sprite_accessory/hair/skr/aur/pullbackl
+	name = "Pullback Long Tentacles"
+	icon_state = "pullback-long"
+	gender = FEMALE
+
+/datum/sprite_accessory/hair/skr/aur/pullbackvl
+	name = "Pullback Very Long Tentacles"
+	icon_state = "pullback-very_long"
 	gender = FEMALE

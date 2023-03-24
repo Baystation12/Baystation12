@@ -525,6 +525,12 @@
 /decl/closet_appearance/crate/plastic
 	color = COLOR_GRAY80
 
+/decl/closet_appearance/crate/war
+	color = COLOR_DARK_BLUE_GRAY
+	decals = list(
+		"crate_war" = COLOR_GRAY20
+	)
+
 /decl/closet_appearance/crate/oxygen
 	color = COLOR_CYAN_BLUE
 	decals = list(

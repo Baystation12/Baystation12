@@ -22,16 +22,16 @@
 		src.icon_state = "[initial(icon_state)][key_count]"
 
 /obj/item/storage/fancy/examine(mob/user, distance)
-	. = ..()
-	if(distance > 1)
-		return
+    . = ..()
+    if((distance > 1) || (!opened)) //BoS, was "if(distance > 1)"
+        return
 
-	var/key_name = initial(key_type.name)
-	if(!contents.len)
-		to_chat(user, "There are no [key_name]s left in the box.")
-	else
-		var/key_count = count_by_type(contents, key_type)
-		to_chat(user, "There [key_count == 1? "is" : "are"] [key_count] [key_name]\s in the box.")
+    var/key_name = initial(key_type.name)
+    if(!contents.len)
+        to_chat(user, "There are no [key_name]s left in the box.")
+    else
+        var/key_count = count_by_type(contents, key_type)
+        to_chat(user, "There [key_count == 1? "is" : "are"] [key_count] [key_name]\s in the box.")
 
 /*
  * Egg Box

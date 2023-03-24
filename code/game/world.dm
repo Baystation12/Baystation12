@@ -4,7 +4,7 @@
 #define SET_THROTTLE(TIME, REASON) throttle[1] = base_throttle + (TIME); throttle[2] = (REASON);
 
 
-var/global/server_name = "Baystation 12"
+var/global/server_name = "Proxima Project"
 var/global/game_id = null
 
 GLOBAL_VAR(href_logfile)
@@ -96,7 +96,25 @@ GLOBAL_VAR(href_logfile)
 		call(debug_server, "auxtools_init")()
 		enable_debugging()
 
-	name = "[server_name] - [GLOB.using_map.full_name]"
+	var/list/name_titles = list(
+		"UMBRA Protocol",
+		"Into Unknown",
+		"Awaiting for Orders",
+		"Wonder Fleet",
+		"Shining of Stars",
+		"Last Hope",
+		"True Motives",
+		"Code Green",
+		"Murmur of Missing",
+		"Haunting Horror",
+		"Quarter Measurement",
+		"Pioneers of Future",
+		"Anomalous Materials",
+		"Questionable Ethics",
+		"Power Struggle"
+	)
+
+	name = "[server_name] — '[pick(name_titles)]'"
 
 	//logs
 	SetupLogs()

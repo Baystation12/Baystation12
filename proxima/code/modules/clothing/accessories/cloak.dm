@@ -37,7 +37,7 @@
 	icon_state = "miningcloak"
 
 /obj/item/clothing/accessory/cloak/security
-	name = "red cloak"
+	name = "dark cloak"
 	desc = "A simple red and black cloak."
 	icon_state = "seccloak"
 
@@ -50,11 +50,6 @@
 	name = "gold cloak"
 	desc = "A simple gold and brown cloak."
 	icon_state = "engicloak"
-
-/obj/item/clothing/accessory/cloak/atmos
-	name = "yellow cloak"
-	desc = "A trimmed yellow and blue cloak."
-	icon_state = "atmoscloak"
 
 /obj/item/clothing/accessory/cloak/research
 	name = "purple cloak"

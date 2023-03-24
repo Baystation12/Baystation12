@@ -374,14 +374,22 @@
 				/obj/item/toy/figure/psychologist,
 				/obj/item/toy/figure/paramedic,
 				/obj/item/toy/figure/ert,
-				/obj/item/toy/figure/jaba,
+				/obj/item/toy/desk/jaba,
 				/obj/item/toy/figure/dc,
 				/obj/item/toy/figure/boec,
 				/obj/item/toy/figure/xoec,
 				/obj/item/toy/figure/cmoec,
 				/obj/item/toy/figure/cwmf,
 				/obj/item/toy/figure/ceaf,
-				/obj/item/toy/desk/gas)
+				/obj/item/toy/desk/gas,
+				/obj/item/toy/desk/soft,
+				/obj/item/toy/figure/ma,
+				/obj/item/toy/desk/evilslime,
+				/obj/item/toy/figure/pilot,
+				/obj/item/toy/desk/blueskrell,
+				/obj/item/toy/desk/drakon,
+				/obj/item/toy/desk/redskrell,
+				/obj/item/toy/desk/gccjaba)
 
 /obj/random/plushie
 	name = "random plushie"

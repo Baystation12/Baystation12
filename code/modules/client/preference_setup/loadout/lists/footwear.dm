@@ -24,6 +24,19 @@
 	boots += /obj/item/clothing/shoes/desertboots
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(boots)
 
+/datum/gear/shoes/cowboy
+	display_name = "cowboy boots selection"
+	path = /obj/item/clothing/shoes
+	cost = 2
+
+/datum/gear/shoes/cowboy/New()
+	..()
+	var/boots = list()
+	boots += /obj/item/clothing/shoes/cowboy
+	boots += /obj/item/clothing/shoes/cowboy/classic
+	boots += /obj/item/clothing/shoes/cowboy/snakeskin
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(boots)
+
 /datum/gear/shoes/color
 	display_name = "shoe selection"
 	path = /obj/item/clothing/shoes
