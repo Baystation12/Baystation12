@@ -551,14 +551,6 @@
 		holder.callproc.do_args()
 		return
 
-	if (prefs.hotkeys)
-		// If hotkey mode is enabled, then clicking the map will automatically
-		// unfocus the text bar. This removes the red color from the text bar
-		// so that the visual focus indicator matches reality.
-		winset(src, null, "outputwindow.input.background-color=[COLOR_INPUT_DISABLED]")
-	else
-		winset(src, null, "outputwindow.input.focus=true input.background-color=[COLOR_INPUT_ENABLED]")
-
 	return ..()
 
 /**

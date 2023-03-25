@@ -123,6 +123,7 @@ window "mainwindow"
 		anchor2 = -1,-1
 		background-color = none
 		is-default = true
+		statusbar = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		is-maximized = true
 		icon = 'icons\\ss13_64.png'
@@ -169,13 +170,8 @@ window "mapwindow"
 		anchor2 = -1,-1
 		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
 		is-pane = true
-		outer-size = 654x494
+		on-status = ".winset \"statusbar.text=[[*]]\" "
 	elem "map"
 		type = MAP
 		pos = 0,0
@@ -186,6 +182,7 @@ window "mapwindow"
 		font-size = 7
 		is-default = true
 		saved-params = "icon-size"
+		style = ".maptext { font-family: 'Small Fonts'; font-size: 7px; -dm-text-outline: 1px black; color: white; line-height: 1.1; }"
 		on-show = ".winset\"mainwindow.mainvsplit.left=mapwindow\""
 		on-hide = ".winset\"mainwindow.mainvsplit.left=\""
 	elem "lobbybrowser"
@@ -198,6 +195,17 @@ window "mapwindow"
 		is-visible = false
 		is-disabled = true
 		saved-params = ""
+	elem "statusbar"
+		type = LABEL
+		pos = 0,464
+		size = 280x16
+		anchor1 = 0,100
+		is-visible = true
+		text = ""
+		align = left
+		background-color = #171717
+		text-color = #a4bad6
+		border = line
 
 window "outputwindow"
 	elem "outputwindow"
@@ -235,21 +243,23 @@ window "outputwindow"
 		saved-params = ""
 	elem "input"
 		type = INPUT
-		pos = 0,432
-		size = 616x18
-		anchor1 = 1,96
-		anchor2 = 89,100
-		background-color = #d3b5b5
+		pos = 0,430
+		size = 610x20
+		anchor1 = 0,100
+		anchor2 = 100,100
+		background-color = #f0f0f0
 		is-default = true
-		border = sunken
+		border = line
 		saved-params = "command"
 	elem "saybutton"
 		type = BUTTON
-		pos = 618,430
-		size = 40x20
+		pos = 610,430
+		size = 48x20
 		anchor1 = 100,100
 		anchor2 = -1,-1
 		background-color = none
+		border = line
+		is-flat = true
 		saved-params = "is-checked"
 		text = "Chat"
 		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\"\"saybutton.is-checked=true?mebutton.is-checked=false\""

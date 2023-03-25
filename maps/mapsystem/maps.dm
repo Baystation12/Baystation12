@@ -525,6 +525,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	set waitfor = FALSE
 
 	winset(C, "lobbybrowser", "is-disabled=false;is-visible=true")
+	winset(C, "statusbar", "is-visible=false")
 
 	if(isnewplayer(C.mob))
 		var/datum/asset/lobby_assets = get_asset_datum(/datum/asset/simple/lobby)    // Sending fonts+png+mp4 assets to the client
@@ -545,6 +546,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(C.mob) // Check if the client is still connected to something
 		// Hide title screen, allowing player to see the map
 		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")
+		winset(C, "statusbar", "is-visible=true")
 
 /datum/map/proc/set_titlescreen_ready(client/C, ready=FALSE)
 	send_output(C, ready, "lobbybrowser:setReadyStatus")

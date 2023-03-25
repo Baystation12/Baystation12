@@ -32,11 +32,6 @@
 		var/command = macro_set[key]
 		winset(src, "default-\ref[key]", "parent=default;name=[key];command=[command]")
 
-	if(prefs?.hotkeys)
-		winset(src, null, "outputwindow.input.focus=true input.background-color=[COLOR_INPUT_ENABLED]")
-	else
-		winset(src, null, "outputwindow.input.focus=true input.background-color=[COLOR_INPUT_DISABLED]")
-
 	update_special_keybinds()
 
 // byond bug ID:2694120
