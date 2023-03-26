@@ -149,7 +149,7 @@
 	#include "../../mods/sofa/_sofa.dme"
 	#include "../../mods/quantum_mechanic/_quantum_mechanic.dme"
 	#include "../../mods/machinery/atmos_ret_field/_atm_ret_field.dme"
-	#include "../../mods/mortar/mortar.dme"
+	#include "../../mods/mortar/_mortar.dme"
 	#include "../../mods/don_loadout/_don_loadout.dme"
 	#include "../../mods/leroy_beasts_pack/_leroy_beasts.dme"
 	#include "../../mods/machinery/scrap_compactor/_scrap_compactor.dme"

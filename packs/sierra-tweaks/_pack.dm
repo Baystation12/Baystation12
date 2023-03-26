@@ -20,6 +20,7 @@
 #include "mob\stat.dm"
 
 // Objects
+#include "objects\buckling.dm"
 #include "objects\items\fruit_jar.dm"
 #include "objects\items\cash.dm"
 #include "objects\machines\disposal.dm"
