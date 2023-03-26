@@ -63,6 +63,8 @@
 #include "items\projectile\guns\automatic.dm"
 #include "items\projectile\guns\energy\laser_handmade.dm"
 
+#include "items\hookah.dm"
+
 // Machines
 #include "machinery\computer.dm"
 #include "machinery\heater.dm"
