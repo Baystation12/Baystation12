@@ -21,6 +21,7 @@
 
 // Objects
 #include "objects\items\fruit_jar.dm"
+#include "objects\items\cash.dm"
 #include "objects\machines\disposal.dm"
 #include "objects\machines\floor_light.dm"
 #include "objects\structures\cargo.dm"

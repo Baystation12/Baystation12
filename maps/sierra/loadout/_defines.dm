@@ -15,20 +15,20 @@
 	/datum/job/iaa, /datum/job/rd, /datum/job/senior_scientist, \
 	/datum/job/scientist, /datum/job/scientist_assistant, \
 	/datum/job/psychiatrist, \
-	/datum/job/assistant, /datum/job/bartender,    /datum/job/submap/merchant_trainee, \
+	/datum/job/assistant, /datum/job/bartender,    /datum/job/submap/merchant, \
 	/*/datum/job/stowaway,*/ /datum/job/detective)
 
 //For civilian jobs that may have a uniform, but not a strict one
 #define SEMIFORMAL_ROLES list(\
 	/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, \
-	/datum/job/psychiatrist, /datum/job/bartender,    /datum/job/submap/merchant_trainee, \
+	/datum/job/psychiatrist, /datum/job/bartender,    /datum/job/submap/merchant, \
 	/*/datum/job/stowaway,*/ /datum/job/scientist, \
 	/datum/job/senior_scientist, /datum/job/detective)
 
 //For civilian jobs that may have a strict uniform.
 #define SEMIANDFORMAL_ROLES list(\
 	/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, \
-	/datum/job/psychiatrist, /datum/job/bartender,    /datum/job/submap/merchant_trainee, \
+	/datum/job/psychiatrist, /datum/job/bartender,    /datum/job/submap/merchant, \
 	/datum/job/iaa, /datum/job/rd, \
 	/datum/job/senior_scientist, /datum/job/scientist, \
 	/*/datum/job/stowaway,*/ /datum/job/detective)

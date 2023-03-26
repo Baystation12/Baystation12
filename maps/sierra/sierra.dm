@@ -130,6 +130,7 @@
 
 
 	#include "../away/casino/casino.dm"
+	#include "../away/mining/mining.dm"
 	#include "../away/derelict/derelict.dm"
 	#include "../away/errant_pisces/errant_pisces.dm"
 	#include "../away/lar_maria/lar_maria.dm"
@@ -151,6 +152,7 @@
 	#include "../../mods/don_loadout/_don_loadout.dme"
 	#include "../../mods/leroy_beasts_pack/_leroy_beasts.dme"
 	#include "../../mods/machinery/scrap_compactor/_scrap_compactor.dme"
+	#include "../../mods/maps/liberia/_map_liberia.dme"
 
 	#include "../../packs/infinity/_pack.dm"
 	#include "../../packs/sierra-tweaks/_pack.dm"
