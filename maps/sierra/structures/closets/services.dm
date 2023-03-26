@@ -77,6 +77,7 @@
 	desc = "It's a storage unit for bar equipment."
 	req_access = list(access_bar)
 	closet_appearance = /singleton/closet_appearance/cabinet/secure
+	anchored = TRUE
 	//open_sound = 'sound/machines/wooden_closet_open.ogg'
 	//close_sound = 'sound/machines/wooden_closet_close.ogg'
 
@@ -88,7 +89,7 @@
 		/obj/item/reagent_containers/food/drinks/shaker,
 		/obj/item/glass_jar,
 		/obj/item/book/manual/barman_recipes,
-		/obj/item/storage/box/ammo,
+		/obj/item/storage/box/ammo/beanbags,
 		/obj/item/clothing/under/rank/bartender,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/gloves/white,

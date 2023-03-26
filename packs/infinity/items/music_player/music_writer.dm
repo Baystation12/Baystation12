@@ -8,6 +8,7 @@
 	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 100
+	anchored = TRUE
 
 	var/mob/customer //current user
 	var/cooldown = 0 // Every 3 minute after successful re-write.

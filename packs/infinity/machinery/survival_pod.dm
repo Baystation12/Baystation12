@@ -26,3 +26,11 @@
 		ui = new(user, src, ui_key, "_inf-mod-stasis.tmpl", "Stasis Pod UI", 400, 300, state = state)
 		ui.set_initial_data(data)
 		ui.open()
+
+/obj/machinery/sleeper/survival_pod/on_update_icon()
+	if(!occupant)
+		icon_state = "stasis_0"
+	else if(inoperable())
+		icon_state = "stasis_1"
+	else
+		icon_state = "stasis_2"

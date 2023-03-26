@@ -65,7 +65,11 @@
 		/area/turbolift/seconddeck,
 		/area/turbolift/thirddeck,
 		/area/beach,
-		/area/template_noop
+		/area/template_noop,
+		/area/rnd/xenobiology/cell_1,
+		/area/rnd/xenobiology/cell_2,
+		/area/rnd/xenobiology/cell_3,
+		/area/rnd/xenobiology/cell_4
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber

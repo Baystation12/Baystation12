@@ -3587,9 +3587,7 @@
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 9
 	},
-/obj/structure/closet/secure_closet/bar_sierra{
-	anchored = 1
-	},
+/obj/structure/closet/secure_closet/bar_sierra,
 /obj/item/flame/lighter/zippo/brass,
 /obj/machinery/firealarm{
 	pixel_y = 22
@@ -4222,6 +4220,9 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/obj/structure/bed/chair/rounded/brown{
 	dir = 8
 	},
 /turf/simulated/floor/wood/walnut,
@@ -7094,6 +7095,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/bed/chair/rounded/brown{
+	dir = 8
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/cafe)
 "anB" = (
@@ -7665,7 +7669,8 @@
 /obj/machinery/dummy_airlock_controller{
 	id_tag = "engine_airlock";
 	name = "Airlock Remote Terminal";
-	pixel_y = 20
+	pixel_y = 20;
+	icon_state = "airlock_control_off"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -7761,6 +7766,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/dummy_airlock_controller{
+	dir = 4;
+	id_tag = "engine_airlock";
+	name = "Airlock Remote Terminal";
+	pixel_x = 7;
+	pixel_y = 24;
+	icon_state = "airlock_control_off"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "aoH" = (
@@ -7784,13 +7797,6 @@
 	master_tag = "engine_airlock_interior_sensor";
 	pixel_x = -24;
 	pixel_y = -24
-	},
-/obj/machinery/dummy_airlock_controller{
-	dir = 4;
-	id_tag = "engine_airlock";
-	name = "Airlock Remote Terminal";
-	pixel_x = -20;
-	pixel_y = 26
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
@@ -17375,10 +17381,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/compactor)
 "aFx" = (
-/obj/structure/closet/emcloset{
-	anchored = 1;
-	name = "anchored emergency closet"
-	},
+/obj/structure/closet/emcloset/anchored,
 /obj/effect/floor_decal/borderfloor{
 	dir = 6
 	},
@@ -19494,10 +19497,7 @@
 /turf/simulated/floor/plating,
 /area/chapel/main)
 "aJE" = (
-/obj/structure/closet/emcloset{
-	anchored = 1;
-	name = "anchored emergency closet"
-	},
+/obj/structure/closet/emcloset/anchored,
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/borderfloor,
 /obj/structure/extinguisher_cabinet{
@@ -19729,10 +19729,7 @@
 /area/chapel/main)
 "aKf" = (
 /obj/structure/railing/mapped,
-/obj/structure/closet/emcloset{
-	anchored = 1;
-	name = "anchored emergency closet"
-	},
+/obj/structure/closet/emcloset/anchored,
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/industrial/danger,
 /turf/simulated/floor/tiled,
@@ -23546,10 +23543,7 @@
 /area/vacant/gambling)
 "aRF" = (
 /obj/machinery/light/spot,
-/obj/structure/closet/emcloset{
-	anchored = 1;
-	name = "anchored emergency closet"
-	},
+/obj/structure/closet/emcloset/anchored,
 /obj/effect/floor_decal/techfloor,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
@@ -23988,10 +23982,7 @@
 /obj/structure/railing/mapped{
 	dir = 8
 	},
-/obj/structure/closet/emcloset{
-	anchored = 1;
-	name = "anchored emergency closet"
-	},
+/obj/structure/closet/emcloset/anchored,
 /obj/effect/floor_decal/techfloor,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
@@ -24537,7 +24528,7 @@
 	name = "Chamber Vent"
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_3)
+/area/rnd/xenobiology/level1)
 "aTx" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/blast/regular{
@@ -24545,7 +24536,7 @@
 	name = "Chamber Vent"
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_2)
+/area/rnd/xenobiology/level1)
 "aTy" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/camera/network/research{
@@ -24593,7 +24584,7 @@
 	name = "Chamber Vent"
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_1)
+/area/rnd/xenobiology/level1)
 "aTC" = (
 /obj/structure/filingcabinet/chestdrawer,
 /obj/item/folder/nt,
@@ -25134,7 +25125,7 @@
 	pixel_x = 23
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_3)
+/area/rnd/xenobiology/level1)
 "aUA" = (
 /obj/effect/catwalk_plated/white,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -25336,7 +25327,7 @@
 	opacity = 0
 	},
 /turf/simulated/floor/plating,
-/area/rnd/xenobiology/cell_3)
+/area/rnd/xenobiology/level1)
 "aUP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -25377,7 +25368,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
-/area/rnd/xenobiology/cell_3)
+/area/rnd/xenobiology/level1)
 "aUS" = (
 /obj/machinery/atmospherics/binary/pump,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -25545,7 +25536,7 @@
 	},
 /obj/effect/wallframe_spawn/reinforced_phoron/hull,
 /turf/simulated/floor/plating,
-/area/rnd/xenobiology/cell_2)
+/area/rnd/xenobiology/level1)
 "aVe" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
@@ -25574,7 +25565,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_3)
+/area/rnd/xenobiology/level1)
 "aVh" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/rnd/xenobiology/water_cell)
@@ -25616,7 +25607,7 @@
 	dir = 9
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_1)
+/area/rnd/xenobiology/level1)
 "aVp" = (
 /obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning/cee{
@@ -25742,16 +25733,15 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
-/obj/structure/bed/chair/pew/down,
+/obj/structure/bed/chair/pew/down{
+	pixel_x = -3;
+	dir = 4
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/sauna)
 "aVB" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/rnd/xenobiology/level1)
-"aVC" = (
-/mob/living/carbon/slime,
-/turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_1)
 "aVD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -25863,7 +25853,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/blue,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_2)
+/area/rnd/xenobiology/level1)
 "aVN" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden,
 /obj/effect/floor_decal/techfloor{
@@ -25954,7 +25944,7 @@
 	opacity = 0
 	},
 /turf/simulated/floor/plating,
-/area/rnd/xenobiology/cell_1)
+/area/rnd/xenobiology/level1)
 "aWe" = (
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment,
@@ -25983,7 +25973,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/blue,
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_1)
+/area/rnd/xenobiology/level1)
 "aWh" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular{
@@ -26000,7 +25990,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
-/area/rnd/xenobiology/cell_1)
+/area/rnd/xenobiology/level1)
 "aWi" = (
 /obj/machinery/door/window/southleft{
 	dir = 1;
@@ -26021,7 +26011,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/blue,
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_3)
+/area/rnd/xenobiology/level1)
 "aWj" = (
 /obj/random/closet,
 /turf/simulated/floor/tiled/techfloor,
@@ -26165,7 +26155,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_3)
+/area/rnd/xenobiology/level1)
 "aWz" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -26372,6 +26362,9 @@
 /obj/effect/floor_decal/corner/pink/border{
 	dir = 9
 	},
+/obj/structure/closet/crate/medical,
+/obj/item/clothing/suit/straight_jacket,
+/obj/item/clothing/mask/muzzle,
 /turf/simulated/floor/tiled/white,
 /area/medical/maintenance_equipstorage)
 "aWS" = (
@@ -26393,7 +26386,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_2)
+/area/rnd/xenobiology/level1)
 "aWX" = (
 /obj/structure/catwalk,
 /obj/structure/cable/green{
@@ -26411,7 +26404,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_2)
+/area/rnd/xenobiology/level1)
 "aWZ" = (
 /obj/machinery/light/small{
 	dir = 4
@@ -26424,7 +26417,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_2)
+/area/rnd/xenobiology/level1)
 "aXb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
@@ -26433,7 +26426,7 @@
 	dir = 9
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_2)
+/area/rnd/xenobiology/level1)
 "aXc" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -26456,7 +26449,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_1)
+/area/rnd/xenobiology/level1)
 "aXe" = (
 /obj/machinery/alarm{
 	dir = 1;
@@ -26513,7 +26506,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_1)
+/area/rnd/xenobiology/level1)
 "aXj" = (
 /obj/structure/table/woodentable_reinforced/walnut,
 /obj/effect/floor_decal/spline/fancy/wood,
@@ -27094,7 +27087,10 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
-/obj/structure/bed/chair/pew/up,
+/obj/structure/bed/chair/pew/up{
+	pixel_x = -3;
+	dir = 4
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/sauna)
 "aYt" = (
@@ -27782,9 +27778,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
 "aZC" = (
-/obj/structure/closet/crate/medical,
-/obj/item/clothing/suit/straight_jacket,
-/obj/item/clothing/mask/muzzle,
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 8
 	},
@@ -28988,10 +28981,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/gym)
 "bbS" = (
-/obj/structure/closet/emcloset{
-	anchored = 1;
-	name = "anchored emergency closet"
-	},
+/obj/structure/closet/emcloset/anchored,
 /obj/effect/floor_decal/techfloor,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
@@ -31280,7 +31270,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_1)
+/area/rnd/xenobiology/level1)
 "bgN" = (
 /obj/random/obstruction,
 /obj/structure/railing/mapped{
@@ -31359,7 +31349,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_1)
+/area/rnd/xenobiology/level1)
 "bgT" = (
 /obj/machinery/shield_diffuser,
 /obj/structure/cable/green{
@@ -32885,12 +32875,6 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/locker_room)
-"caE" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
-	},
-/turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_2)
 "ccb" = (
 /obj/structure/flora/seaweed,
 /obj/structure/flora/seaweed/large,
@@ -33027,6 +33011,9 @@
 	},
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 8
+	},
+/obj/structure/bed/sofa/l/red{
+	dir = 4
 	},
 /turf/simulated/floor/wood/bamboo,
 /area/crew_quarters/cafe)
@@ -33418,6 +33405,9 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 9
 	},
+/obj/structure/bed/chair/rounded/black{
+	dir = 4
+	},
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/cafe)
 "dMJ" = (
@@ -33574,6 +33564,9 @@
 "dZF" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 6
+	},
+/obj/structure/bed/chair/rounded/black{
+	dir = 1
 	},
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/cafe)
@@ -33853,12 +33846,6 @@
 /obj/effect/floor_decal/spline/fancy/black,
 /turf/simulated/floor/tiled/techmaint,
 /area/crew_quarters/head_big)
-"eQG" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
-	},
-/turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_1)
 "eQS" = (
 /obj/structure/sign/poster{
 	pixel_x = 32
@@ -34942,7 +34929,9 @@
 /area/bridge/nano)
 "iar" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/crusher_base,
+/obj/machinery/crusher_base{
+	icon_state = "rightcap"
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/compactor)
 "iaJ" = (
@@ -35167,10 +35156,7 @@
 /obj/effect/floor_decal/corner/paleblue/bordercorner2{
 	dir = 4
 	},
-/obj/structure/closet/emcloset{
-	anchored = 1;
-	name = "anchored emergency closet"
-	},
+/obj/structure/closet/emcloset/anchored,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -36015,11 +36001,11 @@
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/lounge_big)
 "lAY" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	dir = 9
+/obj/machinery/crusher_base{
+	icon_state = "middle"
 	},
-/turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_3)
+/turf/simulated/floor/plating,
+/area/maintenance/compactor)
 "lCk" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 6
@@ -37549,7 +37535,7 @@
 "pWg" = (
 /mob/living/carbon/slime,
 /turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_3)
+/area/rnd/xenobiology/level1)
 "pWk" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -37625,13 +37611,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/nano)
-"qak" = (
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
-/turf/simulated/wall/r_wall/prepainted,
-/area/crew_quarters/cafe)
 "qdD" = (
 /turf/simulated/floor/tiled,
 /area/crew_quarters/cafe)
@@ -38570,7 +38549,9 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/nano)
 "sDO" = (
-/obj/machinery/crusher_base,
+/obj/machinery/crusher_base{
+	icon_state = "leftcap"
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/compactor)
 "sDZ" = (
@@ -39355,9 +39336,6 @@
 	},
 /turf/simulated/open,
 /area/rnd/xenobiology/level1)
-"usq" = (
-/turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_1)
 "usx" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -39402,10 +39380,7 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
-/obj/structure/closet/emcloset{
-	anchored = 1;
-	name = "anchored emergency closet"
-	},
+/obj/structure/closet/emcloset/anchored,
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/lounge_big)
 "utV" = (
@@ -39859,11 +39834,17 @@
 /turf/simulated/wall/r_wall/hull,
 /area/crew_quarters/game_room)
 "vFA" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/effect/floor_decal/spline/fancy/black{
+	dir = 8
+	},
+/obj/structure/bed/sofa/r/red{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_2)
+/turf/simulated/floor/wood/bamboo,
+/area/crew_quarters/cafe)
 "vGN" = (
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/lounge_big)
@@ -39985,9 +39966,6 @@
 	},
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/lounge_big)
-"vWc" = (
-/turf/simulated/floor/reinforced,
-/area/rnd/xenobiology/cell_3)
 "vWj" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 4
@@ -40128,6 +40106,10 @@
 "wCV" = (
 /obj/structure/bed/sofa/m/lime{
 	dir = 4
+	},
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24
 	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/cafe)
@@ -58617,7 +58599,7 @@ wQu
 rBG
 sMI
 iid
-cyn
+vFA
 cyn
 kub
 qTT
@@ -59425,7 +59407,7 @@ amq
 amq
 amq
 xvn
-amq
+gOB
 jny
 jny
 jny
@@ -59627,7 +59609,7 @@ enD
 wCV
 pmM
 amr
-qak
+gOB
 alc
 qel
 qff
@@ -63257,7 +63239,7 @@ wTP
 acW
 aPU
 aNQ
-sDO
+lAY
 lwx
 uZB
 ahv
@@ -63905,8 +63887,8 @@ aUK
 aTR
 aUO
 aWx
-vWc
-vWc
+aVx
+aVx
 aTw
 atE
 aam
@@ -64106,9 +64088,9 @@ aTP
 aSK
 cJn
 aWi
-lAY
+aVm
 pWg
-vWc
+aVx
 aTw
 atE
 aam
@@ -64310,7 +64292,7 @@ aUp
 aUR
 aUz
 aVg
-vWc
+aVx
 aTw
 atE
 aam
@@ -64712,9 +64694,9 @@ aTU
 aUK
 urA
 aVd
-vFA
-vFA
-vFA
+aWx
+aWx
+aWx
 aTx
 atE
 aam
@@ -65118,7 +65100,7 @@ aUX
 aVd
 aWV
 aWZ
-caE
+aXc
 aTx
 atE
 aam
@@ -65520,9 +65502,9 @@ aTU
 aUK
 aUA
 aWc
-eQG
-usq
-usq
+aWx
+aVx
+aVx
 aTB
 atE
 aam
@@ -65723,8 +65705,8 @@ aSK
 aUb
 aWg
 aVm
-aVC
-usq
+pWg
+aVx
 aTB
 atE
 aam

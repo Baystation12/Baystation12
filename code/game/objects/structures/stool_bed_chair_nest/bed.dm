@@ -37,7 +37,8 @@
 	// Base icon.
 	cache_key = "[base_icon]-[material.name]"
 	if(isnull(stool_cache[cache_key]))
-		var/image/I = image('icons/obj/furniture.dmi', base_icon)
+		// var/image/I = image('icons/obj/furniture.dmi', base_icon) // BAY
+		var/image/I = image(icon, base_icon) //  SIERRA : Bay uses instead of icon path to furniture.dmi
 		if(material_alteration & MATERIAL_ALTERATION_COLOR)
 			I.color = material.icon_colour
 		stool_cache[cache_key] = I
