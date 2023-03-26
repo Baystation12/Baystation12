@@ -1,0 +1,24 @@
+author: cuddleandtea
+delete-after: true
+changes:
+  - bugfix: Music Writer & airlock_controllers_dummy now anchored
+  - tweak: pile_ripper and crusher icon path fix
+  - maptweak: Bartender now has right ammo crate with ammo
+  - maptweak: Deleted 4 broken zones in xenobio
+  - bugfix: furniture now can have any icon, without need of furniture.dmi change
+      or base_icon creating
+  - imageadd: stasis pod now have working icon
+  - maptweak: Added emerg closet in x:130 Y:077 (Quart area)
+  - maptweak: Deleted 2 empty /obj in (Fore Hall area)
+  - maptweak: Added sofas in library
+  - maptweak: 3 led lights added in bar and than removed because there is no need
+      in them right in front of the window
+  - maptweak: Moved up air alarm in bar dorm room
+  - maptweak: Missing sofas and chairs in bar
+  - maptweak: Removed ONLY xenobio areas cell_1, 2, 3
+  - maptweak: Fixed pew up and down in sauna
+  - maptweak: Moved up crate with muzzle in med storage
+  - maptweak: bartender locker is now code anchored not in mapping
+  - maptweak: deleted extra emerg locket stuck in airlock
+  - maptweak: created new category emerglocket/anchored and replaced map anchored
+      ones
