@@ -248,11 +248,11 @@
  * - `A` - The atom that was clicked on.
  */
 /mob/proc/MiddleClickOn(atom/A)
-	swap_hand()
+	pointed(A)
 	return
 
 /mob/proc/AltMiddleClickOn(atom/A)
-	pointed(A)
+	swap_hand()
 
 // In case of use break glass
 /*
