@@ -1,0 +1,11 @@
+#ifndef MODPACK_SCREENTIPS
+#define MODPACK_SCREENTIPS
+
+#include "_screentips.dm"
+
+#include "handler.dm"
+#include "hud.dm"
+#include "preference.dm"
+#include "screentip.dm"
+
+#endif
