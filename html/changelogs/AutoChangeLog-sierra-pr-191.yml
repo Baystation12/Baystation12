@@ -1,5 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - rscadd: Добавил маленький статусбар слева снизу
-  - tweak: Сделал более красвым поле ввода команд
