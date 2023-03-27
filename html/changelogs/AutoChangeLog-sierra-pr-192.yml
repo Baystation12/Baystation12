@@ -1,5 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - tweak: Сменил указание в точку с Альт+СКМ на СКМ
-  - rscadd: Добавил плавную анимацию указания от моба в точку
