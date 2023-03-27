@@ -6,7 +6,6 @@ permissions:
 on:
   pull_request_target:
     branches:
-      - dev
       - dev220
 
 jobs:
