@@ -142,7 +142,7 @@
 	new /obj/item/weldingtool(src)
 	new /obj/item/crowbar(src)
 	new /obj/item/wirecutters(src)
-	new /obj/item/stack/cable_coil/random(src, 30)
+	new /obj/random/single/color/cable_coil(src, 30)
 	update_icon()
 
 

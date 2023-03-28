@@ -6,7 +6,7 @@
 	icon_vend = "tool-vend"
 	base_type = /obj/machinery/vending/tool
 	products = list(
-		/obj/item/stack/cable_coil/random = 10,
+		/obj/random/single/color/cable_coil = 10,
 		/obj/item/crowbar = 5,
 		/obj/item/weldingtool = 3,
 		/obj/item/wirecutters = 5,

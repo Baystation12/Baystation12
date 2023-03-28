@@ -2408,7 +2408,7 @@
 /area/map_template/oldlab/solars)
 "NB" = (
 /obj/structure/table/rack,
-/obj/item/stack/cable_coil/random,
+/obj/random/single/color/cable_coil,
 /obj/item/material/twohanded/jack,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/oldlab/station/southairlock)

@@ -1,3 +1,17 @@
+/// Associative list of colors. Default colors that a cable coil or length of cable can be. Used for multitool interactions.
+GLOBAL_LIST_INIT(cable_default_colors, list(
+	"Black"  = CABLE_COLOR_BLACK,
+	"Blue"   = CABLE_COLOR_BLUE,
+	"Cyan"   = CABLE_COLOR_CYAN,
+	"Green"  = CABLE_COLOR_GREEN,
+	"Orange" = CABLE_COLOR_ORANGE,
+	"Purple" = CABLE_COLOR_PINK,
+	"Red"    = CABLE_COLOR_RED,
+	"Yellow" = CABLE_COLOR_YELLOW,
+	"White"  = CABLE_COLOR_WHITE
+))
+
+
 /obj/item/stack/cable_coil
 
 	var/const/MAX_COIL_AMOUNT = 30
@@ -8,7 +22,7 @@
 	randpixel = 2
 	amount = MAX_COIL_AMOUNT
 	max_amount = MAX_COIL_AMOUNT
-	color = COLOR_MAROON
+	color = CABLE_COLOR_RED
 	desc = "A coil of wiring, used for delicate electronics and basic power transfer."
 	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
@@ -19,6 +33,7 @@
 		MATERIAL_GLASS = 20,
 		MATERIAL_PLASTIC = 20
 	)
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	item_state = "coil"
@@ -57,8 +72,7 @@
 
 
 /obj/item/stack/cable_coil/on_update_icon()
-	if (!color)
-		color = GLOB.possible_cable_colours[pick(GLOB.possible_cable_colours)]
+	color = COLOR_MAROON
 	switch (amount)
 		if (1)
 			icon_state = "coil1"
@@ -107,14 +121,23 @@
 	UpdateItemSize()
 
 
-/obj/item/stack/cable_coil/proc/SetCableColor(_color, mob/living/user)
-	if (!_color)
-		return
-	var/final_color = GLOB.possible_cable_colours[_color]
-	if (!final_color)
-		return
-	color = final_color
-	to_chat(user, SPAN_NOTICE("You change \the [src]'s color to [lowertext(_color)]."))
+/obj/item/stack/cable_coil/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Multitool - Recolor cable coil
+	if (isMultitool(tool))
+		var/new_color = input(user, "Select a color to change to:", "\The [src] - Color Change", null) as null|anything in GLOB.cable_default_colors
+		if (!new_color || !user.use_sanity_check(src))
+			return TRUE
+		var/new_color_code = GLOB.cable_default_colors["[new_color]"]
+		if (get_color() == new_color_code)
+			return TRUE
+		set_color(new_color_code)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] changes \the [src]'s color with \a [tool]."),
+			SPAN_NOTICE("You set \the [src]'s color to '[new_color]' with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
 
 
 /obj/item/stack/cable_coil/proc/can_merge(obj/item/stack/cable_coil/coil)
@@ -135,7 +158,7 @@
 	if(!isturf(target))
 		return
 	var/obj/structure/cable/cable = new (target)
-	cable.cableColor(color)
+	cable.set_color(color)
 	cable.d1 = from_dir
 	cable.d2 = to_dir
 	cable.add_fingerprint(user)
@@ -233,7 +256,7 @@
 			if ((other_cable.d1 == new_from_dir && other_cable.d2 == new_to_dir) || (other_cable.d1 == new_to_dir && other_cable.d2 == new_from_dir))
 				to_chat(user, SPAN_WARNING("There's already a cable at that position."))
 				return
-		cable.cableColor(color)
+		cable.set_color(color)
 		cable.d1 = new_from_dir
 		cable.d2 = new_to_dir
 		cable.add_fingerprint()
@@ -302,9 +325,23 @@
 	return ..(mapload, rand(1, 2), _color)
 
 
-/obj/item/stack/cable_coil/random/Initialize(mapload, _amount)
-	var/_color = GLOB.possible_cable_colours[pick(GLOB.possible_cable_colours)]
-	return ..(mapload, _amount, _color)
+/obj/random/single/color/cable_coil
+	icon = 'icons/obj/power.dmi'
+	icon_state = "coil"
+	spawn_object = /obj/item/stack/cable_coil
+
+
+/obj/random/single/color/cable_coil/color_choices()
+	return list(
+		CABLE_COLOR_YELLOW,
+		CABLE_COLOR_GREEN,
+		CABLE_COLOR_BLUE,
+		CABLE_COLOR_PINK,
+		CABLE_COLOR_ORANGE,
+		CABLE_COLOR_CYAN,
+		CABLE_COLOR_WHITE,
+		CABLE_COLOR_BLACK
+	)
 
 
 /obj/item/stack/cable_coil/cyborg
@@ -314,6 +351,7 @@
 	matter = null
 	uses_charge = 1
 	charge_costs = list(1)
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
 
 
 /obj/item/stack/cable_coil/cyborg/can_merge(obj/item/stack/cable_coil/coil)
@@ -323,10 +361,11 @@
 /obj/item/stack/cable_coil/cyborg/verb/SetCableColorVerb()
 	set name = "Change Cable Colour"
 	set category = "Object"
-	var/response = input("Pick new colour:", "Cable Colour", null, null) as null | anything in GLOB.possible_cable_colours
-	if (isnull(response))
+	var/response = lowertext(input(usr, "Pick new colour:", "Cable Colour", color) as null | color)
+	if (isnull(response) || color == response)
 		return
-	SetCableColor(response, usr)
+	set_color(response)
+	to_chat(usr, SPAN_NOTICE("You change \the [src]'s color to [lowertext(color)]."))
 
 
 /obj/item/stack/cable_coil/fabricator

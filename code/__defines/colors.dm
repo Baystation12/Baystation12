@@ -84,6 +84,17 @@
 #define COLOR_VOX			   "#244238"
 
 
+#define CABLE_COLOR_RED "#800000"
+#define CABLE_COLOR_YELLOW "#ffbf00"
+#define CABLE_COLOR_GREEN "#008000"
+#define CABLE_COLOR_BLUE "#3366cc"
+#define CABLE_COLOR_PINK "#800080"
+#define CABLE_COLOR_ORANGE "#ff9900"
+#define CABLE_COLOR_CYAN "#5ca1cc"
+#define CABLE_COLOR_WHITE "#c0c0c0"
+#define CABLE_COLOR_BLACK "#333333"
+
+
 #define	PIPE_COLOR_GREY        "#808080"
 #define	PIPE_COLOR_RED         "#ff0000"
 #define	PIPE_COLOR_BLUE        "#0000ff"
