@@ -44,7 +44,7 @@
 		// Just in case someone VVs the pronouns to something strange. It'll runtime anyway when it hits usages, better to CRASH() now with a helpful message.
 		CRASH("Pronoun datum was null; key was '[(skipjumpsuit && skipface) ? PLURAL : pronouns]'")
 
-	if(!(user.knows_target(src)))
+	if(!user.knows_target(src))
 		msg += "<EM>Unknown</EM>"
 	else
 		if(src.fake_name)

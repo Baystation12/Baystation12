@@ -54,7 +54,7 @@
 		generate_data()
 		return TRUE
 
-	if (href_list["pronouns"] && (flags & APPEARANCE_PRONOUNS) && (href_list["pronouns"] in owner.species.pronouns))
+	if (href_list["pronouns"] && HAS_FLAGS(flags, APPEARANCE_PRONOUNS) && (href_list["pronouns"] in owner.species.pronouns))
 		owner.change_pronouns(href_list["pronouns"])
 		generate_data()
 		return TRUE

@@ -30,7 +30,8 @@
 	var/faction_verb                        // Verb added when becoming a member of the faction, if any.
 	var/faction_welcome                     // Message shown to faction members.
 	var/faction 							// Actual faction name. Used primarily in stuff like simple_animals seeing if you are a threat or not.
-	var/no_prior_faction = FALSE			// Set to TRUE for offships and antags that wouldn't know the crew
+	/// Set to TRUE for offships and antags that wouldn't know the crew
+	var/no_prior_faction = FALSE
 
 	// Spawn values (autotraitor and game mode)
 	var/hard_cap = 3                        // Autotraitor var. Won't spawn more than this many antags.

@@ -744,14 +744,14 @@ var/global/list/admin_verbs_mod = list(
 		M.facial_hair_style = new_fstyle
 
 	var/new_gender = input(usr, "Please select a bodytype", "Character Generation") as null|anything in all_genders_text_list
-	if (new_gender)
-		if(new_gender == "Male")
+	switch(new_gender)
+		if("Male")
 			M.gender = MALE
-		else if (new_gender == "Female")
+		if ("Female")
 			M.gender = FEMALE
-		else if (new_gender == "Neuter")
+		if ("Neuter")
 			M.gender = NEUTER
-		else
+		if ("Plural")
 			M.gender = PLURAL
 
 	M.update_hair()

@@ -39,7 +39,8 @@
 	var/hair_styles_per_species   = list()					// Custom hair styles, per species -type-, if any. For example if you want a punk gang with handlebars.
 	var/facial_styles_per_species = list()					// Custom facial hair styles, per species -type-, if any. See above as to why
 	var/genders_per_species       = list()					// For gender biases per species -type-
-	var/pronouns_per_species	  = list()					// Custom pronouns, per species -type-, if any
+	/// Custom pronouns, per species -type-, if any
+	var/pronouns_per_species	  = list()
 
 /obj/effect/landmark/corpse/Initialize()
 	..()

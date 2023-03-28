@@ -36,7 +36,13 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.gender = R.read("gender")
 	pref.pronouns = R.read("pronouns")
 	if(R.get_version() < 3 && !(pref.pronouns))
-		pref.pronouns = PRONOUNS_THEY_THEM
+		switch (pref.gender)
+			if (MALE)
+				pref.pronouns = PRONOUNS_HE_HIM
+			if (FEMALE)
+				pref.pronouns = PRONOUNS_SHE_HER
+			else
+				pref.pronouns = PRONOUNS_THEY_THEM
 	pref.head_hair_color = R.read("head_hair_color")
 	if (!pref.head_hair_color)
 		pref.head_hair_color = rgb(R.read("hair_red"), R.read("hair_green"), R.read("hair_blue"))

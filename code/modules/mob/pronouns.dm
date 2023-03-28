@@ -1,7 +1,8 @@
 /datum/pronouns
 	var/key
 	var/formal_term
-	var/list/types = null //what pronouns this includes, used only for multiple pronouns
+	/// what pronouns this includes, used only for multiple pronouns
+	var/list/types = null
 
 	var/He   = "They"
 	var/he   = "they"
