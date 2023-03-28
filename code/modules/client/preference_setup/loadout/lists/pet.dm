@@ -61,13 +61,24 @@
 	pet = /mob/living/carbon/alien/diona
 	w_class = ITEM_SIZE_NORMAL
 
+/obj/item/holder/gear/puppy
+	pet = /mob/living/simple_animal/passive/corgi/puppy
+	w_class = ITEM_SIZE_TINY
+
+/obj/item/holder/gear/opossum
+	pet = /mob/living/simple_animal/passive/opossum
+	w_class = ITEM_SIZE_NORMAL
+
+/obj/item/holder/gear/snake
+	pet = /mob/living/simple_animal/passive/snake
+	w_class = ITEM_SIZE_NORMAL
+
 /datum/gear/pet
 	display_name = "pet selection"
 	description = "A variety of creatures indentured for comfort and amusement."
 	path = /obj/item/holder/gear
 	custom_setup_proc = /obj/item/holder/gear/proc/LoadoutCustomSetup
 	cost = 5
-
 
 /datum/gear/pet/New()
 	..()
@@ -79,4 +90,8 @@
 	options["mouse, white"] = /obj/item/holder/gear/mouse_white
 	options["rat"]	= /obj/item/holder/gear/mouse_rat
 	options["diona nymph"] = /obj/item/holder/gear/nymph
+	options["puppy"] = /obj/item/holder/gear/puppy
+	options["opossum"] = /obj/item/holder/gear/opossum
+	options["snake"] = /obj/item/holder/gear/snake
+
 	gear_tweaks += new /datum/gear_tweak/path (options)

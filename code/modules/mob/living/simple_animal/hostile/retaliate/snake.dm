@@ -49,7 +49,8 @@
 /mob/living/simple_animal/hostile/retaliate/snake/venom //Identical to the one without toxins.
 	venomous = TRUE
 
-/mob/living/simple_animal/hostile/retaliate/snake/cob
+/mob/living/simple_animal/passive/snake
+	ai_holder = /datum/ai_holder/simple_animal/passive
+/mob/living/simple_animal/passive/snake/cob // We dont want a crew pet killing people.
 	name = "Cobby"
 	desc = "A genetically engineered corn snake, spotted with brown diamond patterns over their glimmering copper-colored scales. This one seems particularly lazy."
-	ai_holder = /datum/ai_holder/simple_animal/passive // We dont want a crew pet killing people.

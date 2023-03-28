@@ -6667,7 +6667,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/firstdeck/fore)
 "asA" = (
-/mob/living/simple_animal/hostile/retaliate/snake/cob,
+/mob/living/simple_animal/passive/snake/cob,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "asB" = (
