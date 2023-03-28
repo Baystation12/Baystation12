@@ -1,7 +1,8 @@
 
 
 var/global/all_ui_styles = list(
-	"Midnight"     = 'icons/mob/screen/midnight.dmi',
+	// "Midnight"     = 'icons/mob/screen/midnight.dmi',                 // BAY,
+	"Midnight"     = 'packs/infinity/icons/mob/screen/midnight-inf.dmi', // SIERRA,
 	"Orange"       = 'icons/mob/screen/orange.dmi',
 	"old"          = 'icons/mob/screen/old.dmi',
 	"White"        = 'icons/mob/screen/white.dmi',

@@ -18,6 +18,7 @@
 // Mob
 #include "mob\say.dm"
 #include "mob\stat.dm"
+#include "mob\emotes.dm"
 
 // Objects
 #include "objects\buckling.dm"
