@@ -1,8 +1,3 @@
-
-/singleton/modpack/bstechnican
-	name = "Bluespace technican"
-	dreams = list("bluespace anomalies")
-
 /*
 // Quantum Mechanic is a godmode avatar designed for debugging and admin actions
 // Their primary benefit is the ability to spawn in wherever you are, making it quick to get a human for your needs

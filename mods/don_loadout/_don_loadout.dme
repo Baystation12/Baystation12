@@ -1,5 +1,6 @@
 #ifndef MODPACK_DON_LOADOUT
 #define MODPACK_DON_LOADOUT
+
 #include "_don_loadout.dm"
 
 #include "donations/donations_defines.dm"

@@ -1,10 +1,5 @@
 #define WEBHOOK_SUBMAP_LOADED_LIBERIA "webhook_submap_liberia"
 
-#include "liberia_areas.dm"
-#include "liberia_jobs.dm"
-#include "liberia_shuttles.dm"
-#include "liberia_navpoints.dm"
-
 // Map template data
 /datum/map_template/ruin/away_site/liberia
 	name = "Liberia"

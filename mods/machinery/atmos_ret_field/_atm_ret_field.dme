@@ -1,14 +1,7 @@
 #ifndef MODPACK_ATM_RET_FIELD
 #define MODPACK_ATM_RET_FIELD
 
-#endif
-// BEGIN_INTERNALS
-// END_INTERNALS
-// BEGIN_FILE_DIR
-#define FILE_DIR .
-// END_FILE_DIR
-// BEGIN_PREFERENCES
-// END_PREFERENCES
-// BEGIN_INCLUDE
+#include "_atm_ret_field.dm"
 #include "atmospheric_retention_field.dm"
-// END_INCLUDE
+
+#endif

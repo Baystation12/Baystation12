@@ -1,26 +1,26 @@
 #ifndef MODPACK_TAJARA
 #define MODPACK_TAJARA
+
 #include "_tajara.dm"
 
-//clothing
-
+// Clothing
 #include "clothing/accessories.dm"
 #include "datum/sprite_accessory.dm"
 
 #include "clothing/clothing.dm"
 /*
+SIERRA TODO: Это бля что?
 #include "clothing/glasses.dm"
 #include "clothing/misc.dm"
 #include "clothing/suits.dm"
 #include "clothing/under.dm"
 */
 
-//body and organs
-
+// Body and organs
 #include "datum/culture/tajara_culture.dm"
 #include "datum/species.dm"
 
-
-//language
+// Language
 #include "language/language.dm"
+
 #endif

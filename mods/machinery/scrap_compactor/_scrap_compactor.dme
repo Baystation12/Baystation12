@@ -1,15 +1,8 @@
 #ifndef MODPACK_SCRAP_COMPACTOR
 #define MODPACK_SCRAP_COMPACTOR
 
-#endif
-// BEGIN_INTERNALS
-// END_INTERNALS
-// BEGIN_FILE_DIR
-#define FILE_DIR .
-// END_FILE_DIR
-// BEGIN_PREFERENCES
-// END_PREFERENCES
-// BEGIN_INCLUDE
+#include "_scrap_compactor.dm"
+
 #include "crusher_control.dm"
 #include "crusher_piston.dm"
 #include "scrap.dm"
@@ -18,4 +11,5 @@
 #include "scrap_refine.dm"
 #include "scrap_refinery.dm"
 #include "scrap_stacker.dm"
-// END_INCLUDE
+
+#endif

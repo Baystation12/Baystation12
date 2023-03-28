@@ -2,7 +2,7 @@
 /obj/structure/bed/sofa
 	name = "sofa"
 	desc = "A wide and comfy sofa - no one assistant was ate by it due production! It's made of wood and covered with synthetic leather."
-	icon = 'mods/sofa/furniture.dmi'
+	icon = 'mods/fancy_sofas/furniture.dmi'
 	icon_state = "sofa_preview"
 	base_icon = "sofa"
 	buckle_dir = FALSE
@@ -28,7 +28,7 @@
 
 	cache_key = "[base_icon]-[material.name]-over"
 	if(isnull(stool_cache[cache_key]))
-		var/image/I = image('icons/obj/furniture.dmi', "[base_icon]_over")
+		var/image/I = image('mods/fancy_sofas/furniture.dmi', "[base_icon]_over")
 		if(material_alteration & MATERIAL_ALTERATION_COLOR)
 			I.color = material.icon_colour
 		I.layer = ABOVE_HUMAN_LAYER

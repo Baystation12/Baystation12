@@ -1,13 +1,13 @@
 #ifndef MODPACK_MAP_LIBERIA
 #define MODPACK_MAP_LIBERIA
-#endif
-// BEGIN_INTERNALS
-// END_INTERNALS
-// BEGIN_FILE_DIR
-#define FILE_DIR .
-// END_FILE_DIR
-// BEGIN_PREFERENCES
-// END_PREFERENCES
-// BEGIN_INCLUDE
+
+#include "_map_liberia.dm"
+
 #include "liberia.dm"
-// END_INCLUDE
+
+#include "liberia_areas.dm"
+#include "liberia_jobs.dm"
+#include "liberia_shuttles.dm"
+#include "liberia_navpoints.dm"
+
+#endif

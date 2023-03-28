@@ -1,0 +1,7 @@
+#ifndef MODPACK_MORTAR
+#define MODPACK_MORTAR
+
+#include "_mortar.dm"
+#include "mortar.dm"
+
+#endif

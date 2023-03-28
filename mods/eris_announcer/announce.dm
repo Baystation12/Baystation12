@@ -1,8 +1,3 @@
-
-/singleton/modpack/announce
-	name = "Eris Announce"
-	dreams = list("AI voice")
-
 #define GET_ANNOUNCEMENT_FREQ(X) GLOB.using_map.use_job_frequency_announcement ? get_announcement_frequency(X) : "Common"
 #define ANNOUNSER_NAME "[station_name()] Automated Announcement System"
 
@@ -15,7 +10,6 @@ var/global/command_name
 
 /datum/announcement
 	var/channel_name = "Station Announcements"
-
 
 /datum/announcement/priority/security/New(do_log = 1, new_sound = 'sound/misc/notice2.ogg',do_newscast = 0)
 	..(do_log, new_sound, do_newscast)

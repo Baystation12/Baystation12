@@ -1,19 +1,20 @@
 #ifndef MODPACK_RESOMI
 #define MODPACK_RESOMI
+
 #include "_resomi.dm"
 
-//clothing
+// Clothing
 #include "clothing/clothing.dm"
 #include "clothing/glasses.dm"
 #include "clothing/misc.dm"
 #include "clothing/suits.dm"
 #include "clothing/under.dm"
 
-//body and organs
+// Body and organs
 #include "datum/body/organs.dm"
 #include "datum/culture/resomi_culture.dm"
 #include "datum/species.dm"
 
-//language
+// Language
 #include "language/language.dm"
 #endif

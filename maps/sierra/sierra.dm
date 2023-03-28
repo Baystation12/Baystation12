@@ -143,17 +143,27 @@
 	#include "../away/slavers/slavers_base.dm"
 	#include "../away/voxship/voxship.dm"
 	// #include "../event/iccgn_ship/icgnv_hound.dm" // SIERRA TODO: Пофиксить или удалить
+
+	// USED MODS
 	#include "../../mods/species/resomi/_resomi.dme"
 	#include "../../mods/species/tajara/_tajara.dme"
 	#include "../../mods/screentips/_screentips.dme"
-	#include "../../mods/sofa/_sofa.dme"
+	#include "../../mods/fancy_sofas/_fancy_sofas.dme"
 	#include "../../mods/quantum_mechanic/_quantum_mechanic.dme"
 	#include "../../mods/machinery/atmos_ret_field/_atm_ret_field.dme"
-	#include "../../mods/mortar/_mortar.dme"
 	#include "../../mods/don_loadout/_don_loadout.dme"
-	#include "../../mods/leroy_beasts_pack/_leroy_beasts.dme"
+	#include "../../mods/leroy_beasts/_leroy_beasts.dme"
 	#include "../../mods/machinery/scrap_compactor/_scrap_compactor.dme"
 	#include "../../mods/maps/liberia/_map_liberia.dme"
+
+	// UNUSED MODS
+	// #include "../../mods/_events/mortar/_mortar.dme"
+
+	// Почему UNUSED MODS стоит хранить?
+	// Потому что никто не проверяет использование тех или иных файлов
+	// в коде, и мод просто исчезнет из поля зрения, когда находясь здесь
+	// он всегда напоминает о своём существовании. Небольшая библиотека,
+	// если так вообще можно выразиться.
 
 	#include "../../packs/infinity/_pack.dm"
 	#include "../../packs/sierra-tweaks/_pack.dm"

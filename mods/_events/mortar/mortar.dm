@@ -1,4 +1,3 @@
-
 //Coordinate obsfucator
 //Used by the tactical binoculars and linked systems to prevent coords collection/prefiring
 var/global/obfs_x = 0 //A number between -500 and 500
@@ -24,14 +23,10 @@ var/global/obfs_y = 0 //A number between -500 and 500
 	obfs_x = rand(-500, 500) //A number between -100 and 100
 	obfs_y = rand(-500, 500) //A number between -100 and 100
 
-/singleton/modpack/mortar
-	name = "Mortar's"
-
-
 /obj/structure/mortar
 	name = "Mortar"
 	desc = "Mortar"
-	icon = 'mortar.dmi'
+	icon = 'mods/_events/mortar/icons/mortar.dmi'
 	icon_state = "mortar_m402"
 	var/xinput
 	var/yinput
@@ -166,7 +161,7 @@ var/global/obfs_y = 0 //A number between -500 and 500
 
 		user.visible_message("<span class='notice'>[user] starts loading \a [mortar_shell.name] into [src].</span>",
 		"<span class='notice'>You start loading \a [mortar_shell.name] into [src].</span>")
-		playsound(loc, 'rpgreload.ogg', 50, 1)
+		playsound(loc, 'mods/_events/mortar/sounds/rpgreload.ogg', 50, 1)
 		busy = 1
 
 		if(do_after(user, 15, src))
@@ -174,7 +169,7 @@ var/global/obfs_y = 0 //A number between -500 and 500
 			"<span class='notice'>You load \a [mortar_shell.name] into [src].</span>")
 			visible_message("\icon[src] <span class='danger'>The [name] fires!</span>")
 			user.drop_from_inventory(mortar_shell, src)
-			playsound(loc, 'mortar_fire.ogg', 50, 1)
+			playsound(loc, 'mods/_events/mortar/sounds/mortar_fire.ogg', 50, 1)
 			busy = 0
 			firing = 1
 			flick(icon_state + "_fire", src)
@@ -183,7 +178,7 @@ var/global/obfs_y = 0 //A number between -500 and 500
 			for(var/mob/M in range(7))
 				shake_camera(M, 3, 1)
 			spawn(travel_time) //What goes up
-				playsound(T, 'mortar_falling.ogg', 50, 1)
+				playsound(T, 'mods/_events/mortar/sounds/mortar_falling.ogg', 50, 1)
 				spawn(45) //Must go down //This should always be 45 ticks!
 					mortar_shell.detonate(T)
 					qdel(mortar_shell)
@@ -200,7 +195,7 @@ var/global/obfs_y = 0 //A number between -500 and 500
 /obj/item/mortar_kit
 	name = "\improper M402 mortar portable kit"
 	desc = "A manual, crew-operated mortar system intended to rain down 80mm goodness on anything it's aimed at. Needs to be set down first"
-	icon = 'mortar.dmi'
+	icon = 'mods/_events/mortar/icons/mortar.dmi'
 	icon_state = "mortar_m402_carry"
 	unacidable = 1
 	w_class = 5
@@ -225,7 +220,7 @@ var/global/obfs_y = 0 //A number between -500 and 500
 /obj/item/mortar_shell
 	name = "\improper 80mm mortar shell"
 	desc = "An unlabeled 80mm mortar shell, probably a casing."
-	icon = 'mortar.dmi'
+	icon = 'mods/_events/mortar/icons/mortar.dmi'
 	icon_state = "mortar_ammo_cas"
 	w_class = 5
 	var/list/fragment_types = list(/obj/item/projectile/bullet/pellet/fragment = 1)
@@ -241,7 +236,7 @@ var/global/obfs_y = 0 //A number between -500 and 500
 /obj/item/mortar_shell/he
 	name = "\improper 80mm High Explosive mortar shell"
 	desc = "An 80mm mortar shell, loaded with a Highly Explosive Charge."
-	icon = 'mortar.dmi'
+	icon = 'mods/_events/mortar/icons/mortar.dmi'
 	icon_state = "mortar_ammo_he"
 	spread_range = 0
 	explosion_size = 8
@@ -252,7 +247,7 @@ var/global/obfs_y = 0 //A number between -500 and 500
 /obj/item/mortar_shell/frag
 	name = "\improper 80mm Fragmentation mortar shell"
 	desc = "An 80mm mortar shell, loaded with a small charge surrounded by Deadly Metal Pellets."
-	icon = 'mortar.dmi'
+	icon = 'mods/_events/mortar/icons/mortar.dmi'
 	icon_state = "mortar_ammo_he"
 	fragment_types = list(/obj/item/projectile/bullet/pellet/fragment/mortar = 1)
 	num_fragments = 190  //total number of fragments produced by the grenade
