@@ -108,3 +108,104 @@
 	if (client)
 		return client.fetch_bans()
 	return _fetch_bans(ckey ? ckey : last_ckey, lastKnownIP, computer_id)
+
+
+// Temporary debugging and testing functions
+/proc/_debug_fetch_connections(ckey, ip, cid)
+	var/list/result = _fetch_connections(ckey, ip, cid)
+	var/table = {"
+		<table>
+			<thead>
+				<tr>
+					<th>DATETIME</th>
+					<th>CKEY</th>
+					<th>IP</th>
+					<th>COMPUTERID</th>
+				</tr>
+			</thead>
+			<tbody>
+	"}
+	for (var/list/row in result)
+		table += {"
+				<tr>
+					<td>[row["datetime"]]</td>
+					<td>[row["ckey"]]</td>
+					<td>[row["ip"]]</td>
+					<td>[row["computerid"]]</td>
+				</tr>
+		"}
+	table += {"
+			</tbody>
+		</table>
+	"}
+	show_browser(usr, table, "window=debug")
+
+
+/proc/_debug_fetch_bans(ckey, ip, cid, include_inactive = FALSE)
+	var/list/result = _fetch_bans(ckey, ip, cid, include_inactive)
+	var/table = {"
+		<table>
+			<thead>
+				<tr>
+					<th>BANTIME</th>
+					<th>BANTYPE</th>
+					<th>REASON</th>
+					<th>JOB</th>
+					<th>DURATION</th>
+					<th>EXPIRATION_TIME</th>
+					<th>CKEY</th>
+					<th>IP</th>
+					<th>COMPUTERID</th>
+					<th>A_CKEY</th>
+					<th>UNBANNED</th>
+					<th>EXPIRED</th>
+				</tr>
+			</thead>
+			<tbody>
+	"}
+	for (var/list/row in result)
+		table += {"
+				<tr>
+					<td>[row["bantime"]]</td>
+					<td>[row["bantype"]]</td>
+					<td>[row["reason"]]</td>
+					<td>[row["job"]]</td>
+					<td>[row["duration"]]</td>
+					<td>[row["expiration_time"]]</td>
+					<td>[row["ckey"]]</td>
+					<td>[row["ip"]]</td>
+					<td>[row["computerid"]]</td>
+					<td>[row["a_ckey"]]</td>
+					<td>[row["unbanned"]]</td>
+					<td>[row["expired"]]</td>
+				</tr>
+		"}
+	table += {"
+			</tbody>
+		</table>
+	"}
+	show_browser(usr, table, "window=debug")
+
+
+/client/proc/debug_fetch_connections()
+	RETURN_TYPE(/list)
+	return _debug_fetch_connections(ckey, address, computer_id)
+
+
+/client/proc/debug_fetch_bans()
+	RETURN_TYPE(/list)
+	return _debug_fetch_bans(ckey, address, computer_id)
+
+
+/mob/proc/debug_fetch_connections()
+	RETURN_TYPE(/list)
+	if (client)
+		return client.debug_fetch_connections()
+	return _debug_fetch_connections(ckey ? ckey : last_ckey, lastKnownIP, computer_id)
+
+
+/mob/proc/debug_fetch_bans()
+	RETURN_TYPE(/list)
+	if (client)
+		return client.debug_fetch_bans()
+	return _debug_fetch_bans(ckey ? ckey : last_ckey, lastKnownIP, computer_id)
