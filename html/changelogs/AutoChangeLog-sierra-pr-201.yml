@@ -1,6 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - rscadd: Добавил README.md для модов, чтобы понятней было разработчиком как, куда
-      и что
-  - tweak: Поколдовал с модами, дал им описаний.
