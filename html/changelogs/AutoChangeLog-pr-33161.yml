@@ -1,6 +1,0 @@
-author: rootoo807
-delete-after: true
-changes:
-  - bugfix: Suit cyclers will now always yield correct sprites for refitted voidsuits.
-  - tweak: Torch has a Torch-specific suit cycler in the E-arm, and a Torch-specific
-      pilot suit cycler in exploration storage.

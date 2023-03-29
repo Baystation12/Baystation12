@@ -1,5 +1,0 @@
-author: PurplePineapple
-delete-after: true
-changes:
-  - rscadd: A mob's last say message is now recorded in mind. Antagonists have their
-      last words displayed at round end if they die.

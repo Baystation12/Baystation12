@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - tweak: Exoplanet awakening event should now happen less often.
-  - tweak: Exoplanet awakening will only happen if there are 4+ people on the planet.

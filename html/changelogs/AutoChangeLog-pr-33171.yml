@@ -1,5 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - bugfix: Fixes incorrect calculation of the materials needed by the protolathe
-      to build design
