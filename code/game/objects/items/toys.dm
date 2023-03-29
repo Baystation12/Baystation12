@@ -782,6 +782,10 @@
 	desc = "A plushie of a cute kitten! Watch as it purrs it's way right into your heart."
 	icon_state = "kittenplushie"
 
+/obj/item/toy/plushie/crow
+	name = "crow plush"
+	desc = "A plushie of an adorable crow! Caw caw."
+	icon_state = "crowplushie"
 
 /obj/item/toy/plushie/lizard
 	name = "lizard plush"
