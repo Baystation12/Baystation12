@@ -3,14 +3,7 @@
 	model_text = "Engineering"
 	req_access = list(access_construction)
 	available_modifications = list(/singleton/item_modifier/space_suit/engineering, /singleton/item_modifier/space_suit/atmos)
-	species = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI) //Add Unathi when sprites exist for their suits.
-
-/obj/machinery/suit_cycler/engineering/alt
-	available_modifications = list(
-		/singleton/item_modifier/space_suit/engineering/alt,
-		/singleton/item_modifier/space_suit/atmos/alt,
-		/singleton/item_modifier/space_suit/hazard
-	)
+	species = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/mining
 	name = "Mining suit cycler"
@@ -18,7 +11,6 @@
 	req_access = list(access_mining)
 	available_modifications = list(/singleton/item_modifier/space_suit/mining)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
-
 
 /obj/machinery/suit_cycler/salvage
 	name = "Salvage suit cycler"
@@ -37,7 +29,7 @@
 	name = "Security suit cycler"
 	model_text = "Security"
 	req_access = list(access_security)
-	available_modifications = list(/singleton/item_modifier/space_suit/security, /singleton/item_modifier/space_suit/security/alt)
+	available_modifications = list(/singleton/item_modifier/space_suit/security)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/security/alt
@@ -49,9 +41,6 @@
 	req_access = list(access_medical)
 	available_modifications = list(/singleton/item_modifier/space_suit/medical)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
-
-/obj/machinery/suit_cycler/medical/alt
-	available_modifications = list(/singleton/item_modifier/space_suit/medical/alt)
 
 /obj/machinery/suit_cycler/syndicate
 	name = "Nonstandard suit cycler"
@@ -67,10 +56,3 @@
 	req_access = list(access_mining_office)
 	available_modifications = list(/singleton/item_modifier/space_suit/pilot)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
-
-/obj/machinery/suit_cycler/command
-	name = "Command suit cycler"
-	model_text = "Command"
-	req_access = list(access_bridge)
-	available_modifications = list(/singleton/item_modifier/space_suit/command)
-	species = list(SPECIES_HUMAN,SPECIES_SKRELL)
