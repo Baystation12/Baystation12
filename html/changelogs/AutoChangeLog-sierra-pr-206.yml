@@ -1,0 +1,6 @@
+author: Atufancheg
+delete-after: true
+changes:
+  - bugfix: Локализация активации каналов радиосвязи
+  - bugfix: Улучшено отображение заголовков в NanoUI
+  - bugfix: Терминал APC не отображается в контекстном меню, если закрыт полом
