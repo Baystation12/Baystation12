@@ -1,0 +1,5 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - tweak: Allows ED209s to accept stun revolvers. Making them actually constructable.
+  - tweak: Lets ED209s use the subdermal armour plating from mechfabs.
