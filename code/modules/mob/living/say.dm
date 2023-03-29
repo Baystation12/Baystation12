@@ -42,6 +42,8 @@ var/global/list/department_radio_keys = list(
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
+	  // [BAY]
+/*
 	  ":ê" = "right ear",	".ê" = "right ear",
 	  ":ä" = "left ear",	".ä" = "left ear",
 	  ":ø" = "intercom",	".ø" = "intercom",
@@ -54,6 +56,54 @@ var/global/list/department_radio_keys = list(
 	  ":ö" = "whisper",		".ö" = "whisper",
 	  ":å" = "Mercenary",	".å" = "Mercenary",
 	  ":é" = "Supply",		".é" = "Supply",
+*/
+	  // [/BAY]
+	  
+	  // [SIERRA]
+	  ":к" = "right ear",	".к" = "right ear",
+	  ":д" = "left ear",	".д" = "left ear",
+	  ":ш" = "intercom",	".ш" = "intercom",
+	  ":р" = "department",	".р" = "department",
+	  ":с" = "Command",		".с" = "Command",
+	  ":т" = "Science",		".т" = "Science",
+	  ":ь" = "Medical",		".ь" = "Medical",
+	  ":у" = "Engineering",	".у" = "Engineering",
+	  ":ы" = "Security",	".ы" = "Security",
+	  ":ц" = "whisper",		".ц" = "whisper",
+	  ":е" = "Mercenary",	".е" = "Mercenary",
+	  ":г" = "Supply",		".г" = "Supply",
+	  ":м" = "Service",		".м" = "Service",
+	  ":з" = "AI Private",	".з" = "AI Private",
+	  ":я" = "Entertainment",".я" = "Entertainment",
+	  ":н" = "Exploration",		".н" = "Exploration",
+	  ":а" = "SCG Patrol",	".а" = "SCG Patrol",
+	  ":й" = "ICGN Ship",	".й" = "ICGN Ship",
+	  ":л" = "Recon",		".л" = "Recon",
+	  ":щ" = "Response Team", ".щ" = "Response Team",
+	  ":о" = "Hailing", ".о" = "Hailing",
+
+	  ":К" = "right ear",	".К" = "right ear",
+	  ":Д" = "left ear",	".Д" = "left ear",
+	  ":Ш" = "intercom",	".Ш" = "intercom",
+	  ":Р" = "department",	".Р" = "department",
+	  ":С" = "Command",		".С" = "Command",
+	  ":Т" = "Science",		".Т" = "Science",
+	  ":Ь" = "Medical",		".Ь" = "Medical",
+	  ":У" = "Engineering",	".У" = "Engineering",
+	  ":Ы" = "Security",	".Ы" = "Security",
+	  ":Ц" = "whisper",		".Ц" = "whisper",
+	  ":Е" = "Mercenary",	".Е" = "Mercenary",
+	  ":Г" = "Supply",		".Г" = "Supply",
+	  ":М" = "Service",		".М" = "Service",
+	  ":З" = "AI Private",	".З" = "AI Private",
+	  ":Я" = "Entertainment",".Я" = "Entertainment",
+	  ":Н" = "Exploration",		".Н" = "Exploration",
+	  ":А" = "SCG Patrol",	".А" = "SCG Patrol",
+	  ":Й" = "ICGN Ship",	".Й" = "ICGN Ship",
+	  ":Л" = "Recon",		".Л" = "Recon",
+	  ":Щ" = "Response Team", ".Щ" = "Response Team",
+	  ":О" = "Hailing", ".О" = "Hailing"
+	  // [/SIERRA]
 )
 
 

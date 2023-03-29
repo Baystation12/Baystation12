@@ -18,10 +18,12 @@ body {
     position: absolute;
     top: 6px;
     left: 44px;
-    width: 66%;
+    /* width: 66%; */ /* BAY */
+    width: 70%; /* SIERRA */
     overflow: hidden;
     color: #E9C183;
-    font-size: 16px;
+    /* font-size: 16px; */ /* BAY */
+    font-size: 11px /* SIERRA */
 }
 
 #uiTitle.icon {

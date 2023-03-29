@@ -15,19 +15,23 @@
 /obj/machinery/power/terminal/New()
 	..()
 	var/turf/T = src.loc
-	if(level==ATOM_LEVEL_UNDER_TILE) hide(!T.is_plating())
+	// if(level==ATOM_LEVEL_UNDER_TILE && hide(!T.is_plating()) // BAY
+	if(level==ATOM_LEVEL_UNDER_TILE) set_invisibility(!T.is_plating() ? INVISIBILITY_ABSTRACT : 0) // SIERRA
 	return
 
 /obj/machinery/power/terminal/proc/master_machine()
 	var/obj/machinery/machine = master && master.loc
 	if(istype(machine))
 		return machine
-
+// [BAY]
+/*
 /obj/machinery/power/terminal/hide(do_hide)
 	if(do_hide && level == ATOM_LEVEL_UNDER_TILE)
 		layer = WIRE_TERMINAL_LAYER
 	else
 		reset_plane_and_layer()
+*/
+// [/BAY]
 
 /obj/machinery/power/terminal/connect_to_network()
 	. = ..()
