@@ -633,7 +633,7 @@
 			SPAN_NOTICE("\The [user] starts prying open \the [src]'s maintenance hatch with \a [tool]."),
 			SPAN_NOTICE("You start prying open \the [src]'s maintenance hatch with \a [tool].")
 		)
-		if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) || user.use_sanity_check(src, tool))
+		if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (locked)
 			USE_FEEDBACK_FAILURE("\The [src]'s maintenance hatch is locked and cannot be opened.")
