@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Fixes silicon maintenance hatches not opening when the do after timer
+      completes.
