@@ -1,0 +1,4 @@
+author: ImJustKisik
+delete-after: true
+changes:
+  - bugfix: Инженерами НаноТрейзен исправлена ошибка в программе мониторинга тревог.
