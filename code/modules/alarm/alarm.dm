@@ -63,8 +63,14 @@
 
 /datum/alarm/proc/alarm_z()
 	if(origin)
-		last_z_level = origin.loc ? origin.loc.z : 0
+		last_z_level = origin.get_alarm_z(origin)
 	return last_z_level
+
+/atom/proc/get_alarm_z()
+	return get_z(src)
+
+/area/get_alarm_z()
+	return length(contents) ? get_z(contents[1]) : 0
 
 /datum/alarm/proc/alarm_area()
 	if(!origin)

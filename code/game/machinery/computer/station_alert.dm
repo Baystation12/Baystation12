@@ -21,11 +21,12 @@
 	monitor_type = /datum/nano_module/alarm_monitor/all
 
 /obj/machinery/computer/station_alert/Initialize()
-	alarm_monitor = new monitor_type(src)
-	alarm_monitor.register_alarm(src, /atom/proc/update_icon)
+	// alarm_monitor = new monitor_type(src) // BAY
+	// alarm_monitor.register_alarm(src, /atom/proc/update_icon) // BAY
 	. = ..()
 	if(monitor_type)
 		register_monitor(new monitor_type(src))
+		alarm_monitor.register_alarm(src, /atom/.proc/update_icon) // SIERRA
 
 /obj/machinery/computer/station_alert/Destroy()
 	. = ..()
