@@ -49,7 +49,26 @@
 /mob/living/simple_animal/hostile/retaliate/snake/venom //Identical to the one without toxins.
 	venomous = TRUE
 
-/mob/living/simple_animal/passive/snake
+/mob/living/simple_animal/passive/snake // Nice ones
+	name = "snake"
+	desc = "A medium-sized, lethargic reptile, covered in geometrical patterns. This one seems friendlier than most."
+	icon_state = "snake"
+	icon_living = "snake"
+	icon_dead = "snake-dead"
+	speak_emote = list("hisses")
+	health = 45
+	maxHealth = 45
+	natural_weapon = /obj/item/natural_weapon/bite
+	response_help  = "pets"
+	response_disarm = "swats away"
+	response_harm   = "stomps on"
+	gender = NEUTER
+	holder_type = /obj/item/holder/snake
+	mob_size = MOB_MINISCULE
+	can_escape = TRUE
+	pass_flags = PASS_FLAG_TABLE
+	density = FALSE
+
 	ai_holder = /datum/ai_holder/simple_animal/passive
 /mob/living/simple_animal/passive/snake/cob // We dont want a crew pet killing people.
 	name = "Cobby"
