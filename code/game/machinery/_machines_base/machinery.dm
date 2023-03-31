@@ -263,6 +263,12 @@
 	if(CanUseTopic(user, DefaultTopicState()) > STATUS_CLOSE)
 		return interface_interact(user)
 
+
+/obj/machinery/post_anchor_change()
+	..()
+	power_change()
+
+
 /**
  * If you want to have interface interactions handled for you conveniently, use this.
  * Return `TRUE` for handled.

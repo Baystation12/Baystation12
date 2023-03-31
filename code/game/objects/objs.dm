@@ -125,24 +125,57 @@
 			. |= DAMAGE_FLAG_LASER
 
 /obj/attackby(obj/item/O, mob/user)
-	if(obj_flags & OBJ_FLAG_ANCHORABLE)
-		if(isWrench(O))
-			wrench_floor_bolts(user)
-			update_icon()
-			return
+	if (isWrench(O) && HAS_FLAGS(obj_flags, OBJ_FLAG_ANCHORABLE))
+		wrench_floor_bolts(user, O)
+		return TRUE
 	return ..()
 
-/obj/proc/wrench_floor_bolts(mob/user, delay=20)
-	playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
-	if(anchored)
-		user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
-	else
-		user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
-	if(do_after(user, delay, src, DO_REPAIR_CONSTRUCT))
-		if(!src) return
-		to_chat(user, SPAN_NOTICE("You [anchored? "un" : ""]secured \the [src]!"))
-		anchored = !anchored
-	return 1
+
+/**
+ * Whether or not the object can be anchored in its current state/position. Assumes the anchorable flag has already been checked.
+ *
+ * **Parameters**:
+ * - `tool` - Tool being used to un/anchor the object.
+ * - `user` - User performing the interaction.
+ * - `silent` (Boolean, default `FALSE`) - If set, does not send user feedback messages on failure.
+ *
+ * Returns boolean.
+ */
+/obj/proc/can_anchor(obj/item/tool, mob/user, silent = FALSE)
+	if (isinspace())
+		if (!silent)
+			USE_FEEDBACK_FAILURE("\The [src] cannot be anchored in space.")
+		return FALSE
+	return TRUE
+
+
+/obj/proc/wrench_floor_bolts(mob/user, obj/item/tool, delay = 2 SECONDS)
+	if (!can_anchor(tool, user))
+		return
+	user.visible_message(
+		SPAN_NOTICE("\The [user] begins [anchored ? "un" : ""]securing \the [src] [anchored ? "from" : "to"] the floor with \a [tool]."),
+		SPAN_NOTICE("You begin [anchored ? "un" : ""]securing \the [src] [anchored ? "from" : "to"] the floor with \the [tool].")
+	)
+	playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+	if (!user.do_skilled(delay, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		return
+	user.visible_message(
+		SPAN_NOTICE("\The [user] [anchored ? "un" : ""]secures \the [src] [anchored ? "from" : "to"] the floor with \a [tool]."),
+		SPAN_NOTICE("You [anchored ? "un" : ""]secures \the [src] [anchored ? "from" : "to"] the floor with \the [tool].")
+	)
+	playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+	anchored = !anchored
+	post_anchor_change()
+	return
+
+
+/**
+ * Called when the object's anchor state is changed via `wrench_floor_bolts()`.
+ */
+/obj/proc/post_anchor_change()
+	update_icon()
+	return
+
 
 /obj/attack_hand(mob/living/user)
 	if(Adjacent(user))
