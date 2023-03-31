@@ -22,6 +22,7 @@
 #include "code\__defines\__compile_options.dm"
 #include "code\__defines\__initialization.dm"
 #include "code\__defines\__renderer.dm"
+#include "code\__defines\_excom.dm"
 #include "code\__defines\_renderer.dm"
 #include "code\__defines\admin.dm"
 #include "code\__defines\antagonists.dm"
