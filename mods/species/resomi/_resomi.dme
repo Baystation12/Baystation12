@@ -17,4 +17,9 @@
 
 // Language
 #include "language/language.dm"
+
+
+// Unit tests
+#include "resomi_unit_tests.dm"
+
 #endif

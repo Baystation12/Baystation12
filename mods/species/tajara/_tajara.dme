@@ -23,4 +23,7 @@ SIERRA TODO: Это бля что?
 // Language
 #include "language/language.dm"
 
+// Unit tests
+#include "tajara_unit_tests.dm"
+
 #endif
