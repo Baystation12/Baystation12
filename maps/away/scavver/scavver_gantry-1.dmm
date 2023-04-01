@@ -263,7 +263,6 @@
 	},
 /obj/item/device/paint_sprayer,
 /obj/structure/table/rack,
-/obj/item/device/cable_painter,
 /obj/item/hand_labeler,
 /turf/simulated/floor/airless,
 /area/scavver/gantry/down1)

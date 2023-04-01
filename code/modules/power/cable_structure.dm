@@ -31,6 +31,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	icon_state = "0-1"
 	layer = EXPOSED_WIRE_LAYER
 	color = COLOR_MAROON
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED
 
 	var/d1 = 0
 	var/d2 = 1
@@ -70,25 +71,28 @@ By design, d1 is the smallest direction and d2 is the highest
 	return PN.draw_power(amount)
 
 /obj/structure/cable/yellow
-	color = COLOR_AMBER
+	color = CABLE_COLOR_YELLOW
 
 /obj/structure/cable/green
-	color = COLOR_GREEN
+	color = CABLE_COLOR_GREEN
 
 /obj/structure/cable/blue
-	color = COLOR_CYAN_BLUE
+	color = CABLE_COLOR_BLUE
 
 /obj/structure/cable/pink
-	color = COLOR_PURPLE
+	color = CABLE_COLOR_PINK
 
 /obj/structure/cable/orange
-	color = COLOR_ORANGE
+	color = CABLE_COLOR_ORANGE
 
 /obj/structure/cable/cyan
-	color = COLOR_SKY_BLUE
+	color = CABLE_COLOR_CYAN
 
 /obj/structure/cable/white
-	color = COLOR_SILVER
+	color = CABLE_COLOR_WHITE
+
+/obj/structure/cable/black
+	color = CABLE_COLOR_BLACK
 
 
 // Ghost examining the cable -> tells him the power
@@ -254,12 +258,6 @@ By design, d1 is the smallest direction and d2 is the highest
 			if (prob(25))
 				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				qdel(src)
-
-/obj/structure/cable/proc/cableColor(colorC)
-	var/color_n = "#dd0000"
-	if(colorC)
-		color_n = colorC
-	color = color_n
 
 /////////////////////////////////////////////////
 // Cable laying helpers

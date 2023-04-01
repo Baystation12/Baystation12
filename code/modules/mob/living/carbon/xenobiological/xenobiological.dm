@@ -299,18 +299,31 @@
 				visible_message(SPAN_DANGER("[M] has attempted to punch [src]!"))
 	return
 
-/mob/living/carbon/slime/attackby(obj/item/W, mob/user)
-	if(W.force > 0)
+
+/mob/living/carbon/slime/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Handle 'damage' (Except you can't hit a slime)
+	if (weapon.force)
+		user.setClickCooldown(user.get_attack_speed(weapon))
+		user.do_attack_animation(src)
+		user.visible_message(
+			SPAN_DANGER("\The [user] swings \a [weapon] at \the [src], but it just passes through!"),
+			SPAN_DANGER("You swing \the [weapon] at \the [src], but it just passes through!")
+		)
+		return TRUE
+
+	return ..()
+
+
+/mob/living/carbon/slime/post_use_item(obj/item/tool, mob/user, interaction_handled, use_call, click_params)
+	..()
+
+	// React to attacks
+	if (use_call == "weapon")
 		attacked += 10
-		if(!(stat) && prob(25)) //Only run this check if we're alive or otherwise motile, otherwise surgery will be agonizing for xenobiologists.
-			to_chat(user, SPAN_DANGER("\The [W] passes right through \the [src]!"))
-			return
+		if (Victim && prob(tool.force * 5))
+			Feedstop()
+			step_away(src, user)
 
-	. = ..()
-
-	if(Victim && prob(W.force * 5))
-		Feedstop()
-		step_away(src, user)
 
 /mob/living/carbon/slime/restrained()
 	return 0

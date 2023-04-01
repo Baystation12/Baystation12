@@ -22,20 +22,29 @@
 	ai_holder = /datum/ai_holder/simple_animal/passive
 	var/num_meat = 5
 
-/mob/living/simple_animal/passive/meatbeast/attackby(obj/item/O, mob/living/user)
-	if(stat == CONSCIOUS && is_sharp(O) && (user.a_intent == I_HELP))
-		if(num_meat >= 1)
-			user.visible_message(
-				SPAN_NOTICE("\The [user] harvests meat from [src]"),
-				SPAN_NOTICE("You harvest meat from [src]")
-			)
-			--num_meat
-			new meat_type(get_turf(src))
-			playsound(user, 'sound/weapons/bladeslice.ogg', 15, 1)
-		else
-			to_chat(user, SPAN_NOTICE("Meat protrusions on \the [src] are still growing."))
-	else
-		..()
+
+/mob/living/simple_animal/passive/meatbeast/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Sharp item - Harvest meat
+	if (is_sharp(tool))
+		if (stat)
+			USE_FEEDBACK_FAILURE("\The [src] is not conscious and not in a state to be harvested.")
+			return TRUE
+		if (num_meat <= 0)
+			USE_FEEDBACK_FAILURE("\The [src]'s met protrusions are still growing.")
+			return TRUE
+		num_meat--
+		var/obj/item/meat = new meat_type(loc)
+		playsound(user, 'sound/weapons/bladeslice.ogg', 15, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] harvests some [meat.name] from \the [src] with \a [tool]."),
+			SPAN_NOTICE("You harvest some [meat.name] from \the [src] with \the [tool]."),
+			exclude_mobs = list(src)
+		)
+		to_chat(src, SPAN_NOTICE("\The [user] harvests some [meat.name] from you with \a [tool]."))
+		return TRUE
+
+	return ..()
+
 
 /mob/living/simple_animal/passive/meatbeast/Life()
 	. = ..()

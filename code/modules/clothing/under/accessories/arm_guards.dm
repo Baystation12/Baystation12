@@ -21,8 +21,10 @@
 	body_location = ARMS
 	flags_inv = CLOTHING_BULKY
 
+	// [SIERRA]
 	drop_sound = 'sound/items/drop/axe.ogg'
 	pickup_sound = 'sound/items/pickup/axe.ogg'
+	// [/SIERRA]
 
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_modular_armor_unathi.dmi'

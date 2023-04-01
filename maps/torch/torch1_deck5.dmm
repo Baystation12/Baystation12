@@ -4566,7 +4566,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kv" = (
-/obj/machinery/suit_cycler/pilot,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -4574,6 +4573,7 @@
 /obj/structure/sign/ecplaque{
 	pixel_y = -30
 	},
+/obj/machinery/suit_cycler/pilot/alt,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kw" = (

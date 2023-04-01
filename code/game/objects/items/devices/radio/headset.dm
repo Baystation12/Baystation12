@@ -19,8 +19,10 @@
 	var/ks1type = /obj/item/device/encryptionkey
 	var/ks2type = null
 
+	// [SIERRA]
 	drop_sound = 'sound/items/drop/component.ogg'
 	pickup_sound = 'sound/items/pickup/component.ogg'
+	// [/SIERRA]
 
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_ears_unathi.dmi'

@@ -184,9 +184,10 @@
 		var/tally = W.stacks * 2
 		return . + tally
 
-/mob/living/attackby(obj/item/I, mob/user)
-	for (var/obj/aura/web/W in auras)
-		W.remove_webbing(user)
-		return
+/mob/living/use_tool(obj/item/tool, mob/user, list/click_params)
+	if (length(auras))
+		for (var/obj/aura/web/web in auras)
+			web.remove_webbing(user)
+			return TRUE
 
 	return ..()

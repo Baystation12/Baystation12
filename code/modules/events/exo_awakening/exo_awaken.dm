@@ -3,17 +3,27 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 /datum/event/exo_awakening
 	announceWhen	= 45
 	endWhen			= 75
-	var/stop_spawning = FALSE //set to true once we hit the target mob count of spawned mobs so we stop spawning
-	var/spawned_mobs //total count of all spawned mobs by the event
-	var/list/exoplanet_areas //all possible exoplanet areas the event can take place on
+	///set to true once we hit the target mob count of spawned mobs so we stop spawning
+	var/stop_spawning = FALSE
+	///total count of all spawned mobs by the event
+	var/spawned_mobs
+	///all possible exoplanet areas the event can take place on
+	var/list/exoplanet_areas
 	var/area/chosen_area
 	var/obj/effect/overmap/visitable/sector/chosen_planet
-	var/required_players_count = 2 //how many players we need present on the planet for the event to start
+	///how many players we need present on the planet for the event to start
+	var/required_players_count = 4
 	var/list/players_on_site = list()
-	var/target_mob_count = 0 //overall target mob count, set to nonzero during setup
-	var/datum/mob_list/chosen_mob_list //the chosen list of mobs we will pick from when spawning, also based on severity
-	var/delay_time // Amount of time between the event starting and mobs beginning spawns
-	var/spawning = FALSE // Set to TRUE once the initial delay passes
+	///overall target mob count, set to nonzero during setup
+	var/target_mob_count = 0
+	///the chosen list of mobs we will pick from when spawning, also based on severity
+	var/datum/mob_list/chosen_mob_list
+	/// Amount of time between the event starting and mobs beginning spawns
+	var/delay_time
+	/// Set to TRUE once the initial delay passes
+	var/spawning = FALSE
+	///Set to TRUE when the event fails one or more of the start conditions
+	var/failed = FALSE
 
 /datum/event/exo_awakening/setup()
 	announceWhen = rand(15, 45)
@@ -68,46 +78,36 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 	addtimer(new Callback(src, /datum/event/exo_awakening/proc/start_spawning), delay_time)
 
-//Locates a planet with players on it (prioritizes players from the station).
-//If no suitable planets are found, the event is killed and something else is run instead.
+//Locates a planet with players on it and kills the event if there aren't enough present
 /datum/event/exo_awakening/proc/find_suitable_planet()
-	var/station_players_present = FALSE
 	var/list/sites = list() //a list of sites that have players present
-	var/list/players = list()
 
 	for (var/area/A in exoplanet_areas)
+		var/list/players = list()
 		for (var/mob/M in GLOB.player_list)
 			if (M.stat != DEAD && (get_z(M) in GetConnectedZlevels(A.z)))
 				players += M
+				chosen_area = A
+				chosen_planet = map_sectors["[A.z]"]
+				affecting_z = GetConnectedZlevels(A.z)
 
-				if (get_crewmember_record(M.real_name || M.name))
-					station_players_present = TRUE
-					chosen_area = A
-					chosen_planet = map_sectors["[A.z]"]
-					affecting_z = GetConnectedZlevels(A.z)
-
-		if (length(players))
+		if (length(players) >= required_players_count)
 			sites += A
 			players_on_site[A] = players
 
-		if (station_players_present && (length(players_on_site[A]) >= required_players_count))
-			break
+	if (!length(sites))
+		log_debug("Exoplanet Awakening failed to run, not enough players on any planet. Aborting.")
+		failed = TRUE
+		kill()
+		return
 
-		station_players_present = FALSE
-
-	if (!station_players_present)
-
-		if (!length(sites))
-			log_debug("Exoplanet Awakening failed to run, not enough players on any planet. Aborting.")
-			kill()
-			return
-
-		chosen_area = pick(sites)
-		chosen_planet = map_sectors["[chosen_area.z]"]
-		affecting_z = GetConnectedZlevels(chosen_area.z)
+	chosen_area = pick(sites)
+	chosen_planet = map_sectors["[chosen_area.z]"]
+	affecting_z = GetConnectedZlevels(chosen_area.z)
 
 	if (!chosen_area)
 		log_debug("Exoplanet Awakening failed to start, could not find a planetary area.")
+		failed = TRUE
 		kill()
 
 //Notify all players on the planet that the event is beginning.
@@ -217,6 +217,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	QDEL_NULL(chosen_mob_list)
 	log_debug("Exoplanet Awakening event spawned [spawned_mobs] mobs. It was a level [severity] out of 3 severity.")
 
-	for (var/mob/M in GLOB.player_list)
-		if (M && M.z == chosen_area.z)
-			to_chat(M, SPAN_NOTICE("The planet grows calm, the ground no longer heaving its horrors to the surface."))
+	if (!failed)
+		for (var/mob/M in GLOB.player_list)
+			if (M && M.z == chosen_area.z)
+				to_chat(M, SPAN_NOTICE("The planet grows calm, the ground no longer heaving its horrors to the surface."))

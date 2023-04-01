@@ -28531,7 +28531,7 @@
 /area/crew_quarters/sauna)
 "baY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/item/stack/cable_coil/random,
+/obj/random/single/color/cable_coil,
 /turf/simulated/floor/plating,
 /area/vacant/gambling)
 "baZ" = (

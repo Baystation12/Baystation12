@@ -58,7 +58,7 @@ var/global/list/department_radio_keys = list(
 	  ":é" = "Supply",		".é" = "Supply",
 */
 	  // [/BAY]
-	  
+
 	  // [SIERRA]
 	  ":к" = "right ear",	".к" = "right ear",
 	  ":д" = "left ear",	".д" = "left ear",
@@ -358,7 +358,9 @@ var/global/list/channel_to_radio_key = new
 				if(O) //It's possible that it could be deleted in the meantime.
 					O.hear_talk(src, stars(message), verb, speaking)
 
-	invoke_async(src, /atom/movable/proc/animate_chat, message, speaking, italics, speech_bubble_recipients)
+	invoke_async(src, /atom/movable/proc/animate_chat, message, speaking, italics, speech_bubble_recipients) // SIERRA
+	if(mind)
+		mind.last_words = message
 
 	if(whispering)
 		log_whisper(message, src)

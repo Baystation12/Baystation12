@@ -26437,7 +26437,7 @@
 "Rn" = (
 /obj/structure/table/rack,
 /obj/item/device/flashlight/flare/glowstick/random,
-/obj/item/stack/cable_coil/random,
+/obj/random/single/color/cable_coil,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aft)
 "Ro" = (
@@ -26548,7 +26548,7 @@
 /obj/item/device/multitool,
 /obj/item/storage/box/lights/mixed,
 /obj/item/device/synthesized_instrument/guitar,
-/obj/item/stack/cable_coil/random,
+/obj/random/single/color/cable_coil,
 /obj/random/firstaid,
 /obj/random/material,
 /obj/random/material_rnd_glass,

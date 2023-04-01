@@ -164,8 +164,9 @@
 
 	return ..()
 
-/atom/movable/openspace/mimic/attackby(obj/item/W, mob/user)
-	to_chat(user, SPAN_NOTICE("\The [src] is too far away."))
+/atom/movable/openspace/mimic/can_use_item(obj/item/tool, mob/user, click_params)
+	USE_FEEDBACK_FAILURE("\The [src] is too far away.")
+	return FALSE
 
 /atom/movable/openspace/mimic/attack_hand(mob/user)
 	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
@@ -196,8 +197,9 @@
 	mouse_opacity = 0
 	z_flags = ZMM_IGNORE // Only one of these should ever be visible at a time, the mimic logic will handle that.
 
-/atom/movable/openspace/turf_proxy/attackby(obj/item/W, mob/user)
-	loc.attackby(W, user)
+/atom/movable/openspace/turf_proxy/use_tool(obj/item/tool, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+	return tool.resolve_attackby(loc, user, click_params)
 
 /atom/movable/openspace/turf_proxy/attack_hand(mob/user as mob)
 	loc.attack_hand(user)
@@ -223,8 +225,9 @@
 	ASSERT(isturf(loc))
 	delegate = loc:below
 
-/atom/movable/openspace/turf_mimic/attackby(obj/item/W, mob/user)
-	loc.attackby(W, user)
+/atom/movable/openspace/turf_mimic/use_tool(obj/item/tool, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+	return tool.resolve_attackby(loc, user, click_params)
 
 /atom/movable/openspace/turf_mimic/attack_hand(mob/user as mob)
 	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))

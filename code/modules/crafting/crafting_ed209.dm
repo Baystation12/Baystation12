@@ -27,7 +27,7 @@
 	next_stages = list(/singleton/crafting_stage/ed209_armour)
 
 /singleton/crafting_stage/ed209_armour
-	completion_trigger_type = /obj/item/clothing/accessory/armor_plate
+	completion_trigger_type = /obj/item/organ/internal/augment/armor
 	progress_message = "You layer the armour plating over the frame."
 	item_icon_state = "ed209_4"
 	next_stages = list(/singleton/crafting_stage/welding/ed209)
@@ -45,6 +45,7 @@
 
 /singleton/crafting_stage/ed209_proximity
 	progress_message = "You add the proximity sensor to the frame."
+	completion_trigger_type = /obj/item/device/assembly/prox_sensor
 	next_stages = list(/singleton/crafting_stage/wiring/ed209)
 	item_icon_state = "ed209_6"
 
@@ -57,7 +58,7 @@
 /singleton/crafting_stage/ed209_taser
 	progress_message = "You add the taser to the frame."
 	next_stages = list(/singleton/crafting_stage/screwdriver/ed209)
-	completion_trigger_type = /obj/item/gun/energy/taser
+	completion_trigger_type = /obj/item/gun/energy/stunrevolver
 	item_icon_state = "ed209_7"
 
 /singleton/crafting_stage/screwdriver/ed209

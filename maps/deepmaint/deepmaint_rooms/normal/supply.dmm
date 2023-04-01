@@ -454,7 +454,7 @@
 "OX" = (
 /obj/structure/table/woodentable,
 /obj/machinery/cell_charger,
-/obj/item/stack/cable_coil/random,
+/obj/random/single/color/cable_coil,
 /turf/simulated/floor/carpet/orange,
 /area/map_template/deepmaint)
 "Pd" = (

@@ -38,8 +38,8 @@ jobs:
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+    - name: Checkout repository
+      uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
 
     # Initializes the CodeQL tools for scanning.
     - name: Инициализация CodeQL

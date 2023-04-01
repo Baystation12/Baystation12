@@ -33940,7 +33940,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/item/stack/cable_coil/random,
+/obj/random/single/color/cable_coil,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftport)
 "bfF" = (

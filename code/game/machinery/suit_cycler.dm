@@ -21,26 +21,24 @@
 
 	// Possible modifications to pick between
 	var/list/available_modifications = list(
-		/singleton/item_modifier/space_suit/engineering,
-		/singleton/item_modifier/space_suit/mining,
-		/singleton/item_modifier/space_suit/medical,
-		/singleton/item_modifier/space_suit/security,
 		/singleton/item_modifier/space_suit/atmos,
-		/singleton/item_modifier/space_suit/science,
+		/singleton/item_modifier/space_suit/engineering,
+		/singleton/item_modifier/space_suit/medical,
+		/singleton/item_modifier/space_suit/mining,
 		/singleton/item_modifier/space_suit/pilot,
-		/singleton/item_modifier/space_suit/command
+		/singleton/item_modifier/space_suit/science,
+		/singleton/item_modifier/space_suit/security
 	)
 
 	// Extra modifications to add when emagged, duplicates won't be added
 	var/emagged_modifications = list(
-		/singleton/item_modifier/space_suit/engineering,
-		/singleton/item_modifier/space_suit/mining,
-		/singleton/item_modifier/space_suit/medical,
-		/singleton/item_modifier/space_suit/security,
 		/singleton/item_modifier/space_suit/atmos,
-		/singleton/item_modifier/space_suit/science,
+		/singleton/item_modifier/space_suit/engineering,
+		/singleton/item_modifier/space_suit/medical,
+		/singleton/item_modifier/space_suit/mining,
 		/singleton/item_modifier/space_suit/pilot,
-		/singleton/item_modifier/space_suit/command,
+		/singleton/item_modifier/space_suit/science,
+		/singleton/item_modifier/space_suit/security,
 		/singleton/item_modifier/space_suit/mercenary/emag
 	)
 
@@ -380,11 +378,11 @@
 	if(!target_species || !target_modification)
 		return
 
-	if(helmet) helmet.refit_for_species(target_species)
-	if(suit) suit.refit_for_species(target_species)
-
 	target_modification.RefitItem(helmet)
 	target_modification.RefitItem(suit)
+
+	if(helmet) helmet.refit_for_species(target_species)
+	if(suit) suit.refit_for_species(target_species)
 
 	if(helmet) helmet.SetName("refitted [helmet.name]")
 	if(suit) suit.SetName("refitted [suit.name]")

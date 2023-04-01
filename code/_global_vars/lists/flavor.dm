@@ -72,27 +72,3 @@ GLOBAL_LIST_INIT(numbers_as_words, list("One", "Two", "Three", "Four",
 	"Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve",
 	"Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
 	"Eighteen", "Nineteen"))
-
-GLOBAL_LIST_INIT(possible_cable_colours, SetupCableColors())
-
-/proc/SetupCableColors()
-	. = list()
-
-	var/invalid_cable_coils = list(
-		/obj/item/stack/cable_coil/single,
-		/obj/item/stack/cable_coil/cut,
-		/obj/item/stack/cable_coil/cyborg,
-		/obj/item/stack/cable_coil/fabricator,
-		/obj/item/stack/cable_coil/random
-	)
-
-	var/special_name_mappings = list(/obj/item/stack/cable_coil = "Red")
-
-	for(var/coil_type in (typesof(/obj/item/stack/cable_coil) - invalid_cable_coils))
-		var/name = special_name_mappings[coil_type] || capitalize(copytext_after_last("[coil_type]", "/"))
-
-		var/obj/item/stack/cable_coil/C = coil_type
-		var/color = initial(C.color)
-
-		.[name] = color
-	. = sortAssoc(.)

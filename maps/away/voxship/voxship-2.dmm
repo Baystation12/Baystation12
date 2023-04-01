@@ -808,9 +808,9 @@
 /area/voxship/scavship)
 "ce" = (
 /obj/structure/table/reinforced,
-/obj/item/stack/cable_coil/random,
-/obj/item/stack/cable_coil/random,
-/obj/item/stack/cable_coil/random,
+/obj/random/single/color/cable_coil,
+/obj/random/single/color/cable_coil,
+/obj/random/single/color/cable_coil,
 /obj/item/storage/backpack/weldpack,
 /obj/item/weldingtool/largetank,
 /obj/item/stack/material/steel/ten,

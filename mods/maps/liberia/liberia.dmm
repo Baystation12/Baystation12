@@ -8560,7 +8560,7 @@
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/stack/cable_coil/random,
+/obj/random/single/color/cable_coil,
 /obj/random/bomb_supply,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/liberia/engineeringlobby)

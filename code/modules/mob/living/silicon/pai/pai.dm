@@ -28,6 +28,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SMALL
+	density = FALSE
 
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
@@ -260,25 +261,39 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		icon_state = resting ? "[chassis]_rest" : "[chassis]"
 		to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]"))
 
-//Overriding this will stop a number of headaches down the track.
-/mob/living/silicon/pai/attackby(obj/item/W, mob/user)
-	var/obj/item/card/id/card = W.GetIdCard()
-	if(card && user.a_intent == I_HELP)
-		var/list/new_access = card.GetAccess()
-		idcard.access = new_access
-		visible_message(SPAN_NOTICE("[user] slides [W] across [src]."))
-		to_chat(src, SPAN_NOTICE("Your access has been updated!"))
-		return FALSE // don't continue processing click callstack.
-	if(W.force)
-		visible_message(SPAN_DANGER("[user] attacks [src] with [W]!"))
-		adjustBruteLoss(W.force)
-		updatehealth()
-	else
-		visible_message(SPAN_WARNING("[user] bonks [src] harmlessly with [W]."))
 
-	spawn(1)
-		if(stat != 2) fold()
-	return
+/mob/living/silicon/pai/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Damage handling
+	if (weapon.force)
+		user.setClickCooldown(user.get_attack_speed(weapon))
+		user.do_attack_animation(src)
+		playsound(src, weapon.hitsound, 75, TRUE)
+		user.visible_message(
+			SPAN_DANGER("\The [user] hits \the [src] with \a [weapon]!"),
+			SPAN_DANGER("You hit \the [src] with \the [weapon]!")
+		)
+		adjustBruteLoss(weapon.force)
+		updatehealth()
+		return TRUE
+
+	return ..()
+
+
+/mob/living/silicon/pai/use_tool(obj/item/tool, mob/user, list/click_params)
+	// ID Card - Set pAI access
+	var/obj/item/card/id/id = tool.GetIdCard()
+	if (istype(id))
+		var/id_name = GET_ID_NAME(id, tool)
+		var/list/new_access = id.GetAccess()
+		idcard.access = new_access
+		user.visible_message(
+			SPAN_NOTICE("\The [user] scans \a [tool] over \the [src], updating \his access."),
+			SPAN_NOTICE("You scan [id_name] over \the [src], updating \his access.")
+		)
+		return TRUE
+
+	return ..()
+
 
 /mob/living/silicon/pai/attack_hand(mob/user as mob)
 	visible_message(SPAN_DANGER("[user] boops [src] on the head."))

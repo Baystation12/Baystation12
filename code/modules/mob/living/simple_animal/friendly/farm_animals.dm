@@ -77,17 +77,37 @@
 				var/step = get_step_to(src, food, 0)
 				Move(step)
 
-/mob/living/simple_animal/hostile/retaliate/goat/attackby(obj/item/O as obj, mob/user as mob)
-	var/obj/item/reagent_containers/glass/G = O
-	if(stat == CONSCIOUS && istype(G) && G.is_open_container())
-		user.visible_message(SPAN_NOTICE("[user] milks [src] using \the [O]."))
-		var/transfered = udder.trans_type_to(G, /datum/reagent/drink/milk, rand(5,10))
-		if(G.reagents.total_volume >= G.volume)
-			to_chat(user, SPAN_WARNING("\The [O] is full."))
-		if(!transfered)
-			to_chat(user, SPAN_WARNING("The udder is dry. Wait a bit longer..."))
-	else
-		..()
+/mob/living/simple_animal/hostile/retaliate/goat/get_interactions_info()
+	. = ..()
+	.["Beaker"] = "<p>Milks \the [initial(name)] for milk. The beaker must be open and have room for reagents.</p>"
+
+
+/mob/living/simple_animal/hostile/retaliate/goat/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Glass Reagent Container - Milk the goat
+	if (istype(tool, /obj/item/reagent_containers/glass))
+		if (stat != CONSCIOUS)
+			USE_FEEDBACK_FAILURE("\The [src] is not conscious and cannot be milked in this state.")
+			return TRUE
+		var/obj/item/reagent_containers/glass/glass = tool
+		if (!glass.is_open_container())
+			USE_FEEDBACK_FAILURE("\The [glass] needs to be open before you can milk \the [src] with it.")
+			return TRUE
+		if (glass.reagents.total_volume >= glass.volume)
+			USE_FEEDBACK_FAILURE("\The [glass] is full.")
+			return TRUE
+		var/transfered = udder.trans_type_to(glass, /datum/reagent/drink/milk, rand(10, 15))
+		if (!transfered)
+			USE_FEEDBACK_FAILURE("\The [src]'s udder is dry. Try again later.")
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] milks \the [src] with \a [tool]."),
+			SPAN_NOTICE("You milk \the [src] with \the [tool]."),
+			exclude_mobs = src
+		)
+		to_chat(src, SPAN_NOTICE("\The [user] milks you with \a [tool]."))
+		return TRUE
+
+	return ..()
 
 //cow
 /mob/living/simple_animal/passive/cow
@@ -120,17 +140,39 @@
 	udder = new(50, src)
 	..()
 
-/mob/living/simple_animal/passive/cow/attackby(obj/item/O as obj, mob/user as mob)
-	var/obj/item/reagent_containers/glass/G = O
-	if(stat == CONSCIOUS && istype(G) && G.is_open_container())
-		user.visible_message(SPAN_NOTICE("[user] milks [src] using \the [O]."))
-		var/transfered = udder.trans_type_to(G, /datum/reagent/drink/milk, rand(5,10))
-		if(G.reagents.total_volume >= G.volume)
-			to_chat(user, SPAN_WARNING("\The [O] is full."))
-		if(!transfered)
-			to_chat(user, SPAN_WARNING("The udder is dry. Wait a bit longer..."))
-	else
-		..()
+
+/mob/living/simple_animal/passive/cow/get_interactions_info()
+	. = ..()
+	.["Beaker"] = "<p>Milks \the [initial(name)] for milk. The beaker must be open and have room for reagents.</p>"
+
+
+/mob/living/simple_animal/passive/cow/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Glass Reagent Container - Milk the cow
+	if (istype(tool, /obj/item/reagent_containers/glass))
+		if (stat != CONSCIOUS)
+			USE_FEEDBACK_FAILURE("\The [src] is not conscious and cannot be milked in this state.")
+			return TRUE
+		var/obj/item/reagent_containers/glass/glass = tool
+		if (!glass.is_open_container())
+			USE_FEEDBACK_FAILURE("\The [glass] needs to be open before you can milk \the [src] with it.")
+			return TRUE
+		if (glass.reagents.total_volume >= glass.volume)
+			USE_FEEDBACK_FAILURE("\The [glass] is full.")
+			return TRUE
+		var/transfered = udder.trans_type_to(glass, /datum/reagent/drink/milk, rand(10, 15))
+		if (!transfered)
+			USE_FEEDBACK_FAILURE("\The [src]'s udder is dry. Try again later.")
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] milks \the [src] with \a [tool]."),
+			SPAN_NOTICE("You milk \the [src] with \the [tool]."),
+			exclude_mobs = src
+		)
+		to_chat(src, SPAN_NOTICE("\The [user] milks you with \a [tool]."))
+		return TRUE
+
+	return ..()
+
 
 /mob/living/simple_animal/passive/cow/Life()
 	. = ..()
@@ -243,20 +285,40 @@ var/global/chicken_count = 0
 	..(gibbed, deathmessage, show_dead_message)
 	chicken_count -= 1
 
-/mob/living/simple_animal/passive/chicken/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/reagent_containers/food/snacks/grown)) //feedin' dem chickens
-		var/obj/item/reagent_containers/food/snacks/grown/G = O
-		if(G.seed && G.seed.kitchen_tag == "wheat")
-			if(!stat && eggsleft < 8)
-				user.visible_message(SPAN_NOTICE("[user] feeds [O] to [name]! It clucks happily."),SPAN_NOTICE("You feed [O] to [name]! It clucks happily."))
-				qdel(O)
-				eggsleft += rand(1, 4)
-			else
-				to_chat(user, SPAN_NOTICE("[name] doesn't seem hungry!"))
-		else
-			to_chat(user, "[name] doesn't seem interested in that.")
-	else
-		..()
+
+/mob/living/simple_animal/passive/chicken/get_interactions_info()
+	. = ..()
+	.["Wheat"] = "<p>Feeds \the [initial(name)], allowing it to produce more eggs.</p>"
+
+
+/mob/living/simple_animal/passive/chicken/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Plant - Feed the chicken
+	if (istype(tool, /obj/item/reagent_containers/food/snacks/grown))
+		var/obj/item/reagent_containers/food/snacks/grown/plant = tool
+		if (plant.seed?.kitchen_tag != "wheat")
+			USE_FEEDBACK_FAILURE("\The [src] doesn't seem interested in \the [tool].")
+			return TRUE
+		if (stat != CONSCIOUS)
+			USE_FEEDBACK_FAILURE("\The [src] is in no state to eat right now.")
+			return TRUE
+		if (eggsleft >= 8)
+			USE_FEEDBACK_FAILURE("\The [src] doesn't seem hungry.")
+			return TRUE
+		if (!user.unEquip(tool))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		eggsleft += rand(1, 4)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] feeds \the [src] \a [tool]. It clucks happily."),
+			SPAN_NOTICE("You feed \the [src] \the [tool]. It clucks happily."),
+			exclude_mobs = src
+		)
+		to_chat(src, SPAN_NOTICE("\The [user] feeds you \a [tool]."))
+		qdel(tool)
+		return TRUE
+
+	return ..()
+
 
 /mob/living/simple_animal/passive/chicken/Life()
 	. = ..()
@@ -353,20 +415,39 @@ var/global/chicken_count = 0
 	udder = new(50, src)
 	..()
 
-/mob/living/simple_animal/passive/thoom/attackby(obj/item/O, mob/user)
-	var/obj/item/reagent_containers/glass/G = O
-	if(stat == CONSCIOUS && istype(G) && G.is_open_container())
+
+/mob/living/simple_animal/passive/thoom/get_interactions_info()
+	. = ..()
+	.["Beaker"] = "<p>Milks \the [initial(name)] for EZ Nutrient. The beaker must be open and have room for reagents.</p>"
+
+
+/mob/living/simple_animal/passive/thoom/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Glass Reagent Container - Milk the thoom
+	if (istype(tool, /obj/item/reagent_containers/glass))
+		if (stat != CONSCIOUS)
+			USE_FEEDBACK_FAILURE("\The [src] is not conscious and cannot be milked in this state.")
+			return TRUE
+		var/obj/item/reagent_containers/glass/glass = tool
+		if (!glass.is_open_container())
+			USE_FEEDBACK_FAILURE("\The [glass] needs to be open before you can milk \the [src] with it.")
+			return TRUE
+		if (glass.reagents.total_volume >= glass.volume)
+			USE_FEEDBACK_FAILURE("\The [glass] is full.")
+			return TRUE
+		var/transfered = udder.trans_type_to(glass, /datum/reagent/toxin/fertilizer/eznutrient, rand(10, 15))
+		if (!transfered)
+			USE_FEEDBACK_FAILURE("\The [src]'s gland is dry. Try again later.")
+			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] expunges \the [src] using \the [O]."),
-			SPAN_NOTICE("You expunge \the [src] using \the [O].")
+			SPAN_NOTICE("\The [user] milks \the [src] with \a [tool]."),
+			SPAN_NOTICE("You milk \the [src] with \the [tool]."),
+			exclude_mobs = src
 		)
-		var/transfered = udder.trans_type_to(G, /datum/reagent/toxin/fertilizer/eznutrient, rand(10,15))
-		if(G.reagents.total_volume >= G.volume)
-			to_chat(user, SPAN_WARNING("\The [O] is full."))
-		if(!transfered)
-			to_chat(user, SPAN_WARNING("\The [src]'s gland is dry. Wait a bit longer..."))
-	else
-		..()
+		to_chat(src, SPAN_NOTICE("\The [user] milks you with \a [tool]."))
+		return TRUE
+
+	return ..()
+
 
 /mob/living/simple_animal/passive/thoom/Life()
 	. = ..()

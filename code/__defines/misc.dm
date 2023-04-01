@@ -329,6 +329,7 @@
 // Helper macro for generating stringified name text for IDs located inside objects, i.e. PDAs or wallets. Used for feedback and interaction messages.
 #define GET_ID_NAME(ID, HOLDER) (ID == HOLDER ? "\the [ID]" : "\the [ID] in \the [HOLDER]")
 
+// [SIERRA]
 //NOTE: INTENT_HOTKEY_* defines are not actual intents!
 //they are here to support hotkeys
 #define INTENT_HOTKEY_LEFT  "left"
@@ -345,6 +346,7 @@
 #define AREA_GRAVITY_NEVER  -1 // No gravity, never
 #define AREA_GRAVITY_NORMAL 1 // Gravity in area will act like always
 #define AREA_GRAVITY_ALWAYS 2 // No matter what, gravity always would be
+// [/SIERRA]
 
 // Flags for `use_sanity_check()`
 /// Do not display user feedback messages.

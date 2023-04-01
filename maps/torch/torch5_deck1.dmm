@@ -6667,7 +6667,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/firstdeck/fore)
 "asA" = (
-/mob/living/simple_animal/hostile/retaliate/snake/cob,
+/mob/living/simple_animal/passive/snake/cob,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "asB" = (
@@ -29975,13 +29975,13 @@
 /area/security/brig)
 "xqk" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/suit_cycler,
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
 /obj/machinery/camera/network/command{
 	c_tag = "Emergency Armory - Starboard"
 	},
+/obj/machinery/suit_cycler/torch,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury)
 "xtq" = (

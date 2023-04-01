@@ -51,6 +51,9 @@
 	var/faction 			//associated faction
 	var/datum/changeling/changeling		//changeling holder
 
+	///String. Last spoken message.
+	var/last_words
+
 	var/rev_cooldown = 0
 
 	// the world.time since the mob has been brigged, or -1 if not at all

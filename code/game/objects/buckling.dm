@@ -236,7 +236,7 @@
 	if (buckle_sound)
 		playsound(src, buckle_sound, 20)
 	post_buckle_mob(M)
-	M.throw_alert("buckled", /obj/screen/alert/restrained/buckled)
+	M.throw_alert("buckled", /obj/screen/alert/restrained/buckled) // SIERRA
 	return TRUE
 
 

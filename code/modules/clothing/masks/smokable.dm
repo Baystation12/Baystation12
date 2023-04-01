@@ -21,8 +21,10 @@
 
 	z_flags = ZMM_MANGLE_PLANES
 
+	// [SIERRA]
 	drop_sound = 'sound/items/drop/food.ogg'
 	pickup_sound = 'sound/items/pickup/food.ogg'
+	// [/SIERRA]
 
 
 /obj/item/clothing/mask/smokable/equipped(mob/user, slot)
