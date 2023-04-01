@@ -247,6 +247,7 @@
 #include "code\controllers\subsystems\processing\icon_updates.dm"
 #include "code\controllers\subsystems\processing\nano.dm"
 #include "code\controllers\subsystems\processing\obj.dm"
+#include "code\controllers\subsystems\processing\overmap.dm"
 #include "code\controllers\subsystems\processing\processing.dm"
 #include "code\controllers\subsystems\processing\psi.dm"
 #include "code\controllers\subsystems\processing\temperature.dm"

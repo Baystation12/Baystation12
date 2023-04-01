@@ -8,6 +8,7 @@
 // SS_TICKER
 #define SS_PRIORITY_TIMER          20
 #define SS_PRIORITY_ICON_UPDATE    20  // Queued icon updates. Mostly used by APCs and tables.
+#define SS_PRIORITY_OVERMAP        12  // Handles overmap processing. Keeps things smooth during highpop, ideally. // SIERRA
 
 // Normal
 #define SS_PRIORITY_TICKER         100 // Gameticker.
