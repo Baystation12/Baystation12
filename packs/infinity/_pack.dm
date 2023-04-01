@@ -73,6 +73,7 @@
 #include "machinery\lighting.dm"
 #include "machinery\suit_storage.dm"
 #include "machinery\survival_pod.dm"
+#include "machinery\scrap_compactor\scrap_compactor.dm"
 
 // Mobs
 #include "mobs\simple\fox.dm"

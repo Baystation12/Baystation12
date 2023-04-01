@@ -32,12 +32,12 @@
 
 /obj/item/stack/material/scrap
 	name = MATERIAL_SCRAP
-	icon = 'refine.dmi'
+	icon = 'packs/infinity/machinery/scrap_compactor/icons/refine.dmi'
 	icon_state = "refined"
 	default_type = MATERIAL_SCRAP
 
 /obj/item/stack/material/refined_scrap
 	name = MATERIAL_SCRAP_REFINED
-	icon = 'refine.dmi'
+	icon = 'packs/infinity/machinery/scrap_compactor/icons/refine.dmi'
 	icon_state = "refined"
 	default_type = MATERIAL_SCRAP_REFINED

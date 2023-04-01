@@ -153,7 +153,6 @@
 	#include "../../mods/machinery/atmos_ret_field/_atm_ret_field.dme"
 	#include "../../mods/don_loadout/_don_loadout.dme"
 	#include "../../mods/leroy_beasts/_leroy_beasts.dme"
-	#include "../../mods/machinery/scrap_compactor/_scrap_compactor.dme"
 	#include "../../mods/maps/liberia/_map_liberia.dme"
 
 	// UNUSED MODS

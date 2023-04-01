@@ -18,7 +18,7 @@
 	density = TRUE
 	anchored = FALSE
 	icon_state = "trash_cube"
-	icon = 'refine.dmi'
+	icon = 'packs/infinity/machinery/scrap_compactor/icons/refine.dmi'
 
 /obj/structure/scrap_cube/crush_act()
 	playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
@@ -50,7 +50,7 @@
 /obj/item/scrap_lump
 	name = "unrefined scrap"
 	desc = "This thing is messed up beyond any recognition. Into the grinder it goes!"
-	icon = 'refine.dmi'
+	icon = 'packs/infinity/machinery/scrap_compactor/icons/refine.dmi'
 	icon_state = "unrefined"
 	w_class = 4
 
