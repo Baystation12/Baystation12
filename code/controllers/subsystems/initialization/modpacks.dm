@@ -44,7 +44,7 @@ SUBSYSTEM_DEF(modpacks)
 		return
 
 	if(length(SSmodpacks.loaded_modpacks))
-		. = "<hr><br><center><b><font size = 3>Modpacks List</font></b></center><br><hr><br>"
+		. = "<hr><br><center><b><font size = 3>Список модификаций</font></b></center><br><hr><br>"
 		for(var/modpack in SSmodpacks.loaded_modpacks)
 			var/singleton/modpack/M = SSmodpacks.loaded_modpacks[modpack]
 
@@ -55,13 +55,13 @@ SUBSYSTEM_DEF(modpacks)
 				if(M.desc || M.author)
 					. += "<br>"
 					if(M.desc)
-						. += "<br>Description: [M.desc]"
+						. += "<br>Описание: [M.desc]"
 					if(M.author)
-						. += "<br><i>Author: [M.author]</i>"
+						. += "<br><i>Автор: [M.author]</i>"
 				. += "</div><br>"
 
-		var/datum/browser/popup = new(mob, "modpacks_list", "Modpacks List", 480, 580)
+		var/datum/browser/popup = new(mob, "modpacks_list", "Список Модификаций", 480, 580)
 		popup.set_content(.)
 		popup.open()
 	else
-		to_chat(src, SPAN_WARNING("This server does not include any modpacks."))
+		to_chat(src, SPAN_WARNING("Этот сервер не использует какие-либо модификации."))

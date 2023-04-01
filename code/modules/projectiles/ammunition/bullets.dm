@@ -127,8 +127,10 @@
 /obj/item/ammo_casing/shotgun/flash
 	name = "flash shell"
 	desc = "A chemical shell used to signal distress or provide illumination."
-	icon_state = "fshell"
-	spent_icon = "fshell-spent"
+	// icon_state = "fshell" // BAY
+	// spent_icon = "fshell-spent" // BAY
+	icon_state = "pshell" // SIERRA
+	spent_icon = "pshell-spent" // SIERRA
 	projectile_type = /obj/item/projectile/energy/flash/flare
 	matter = list(MATERIAL_STEEL = 90, MATERIAL_GLASS = 90)
 

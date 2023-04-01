@@ -783,36 +783,36 @@
 		var/starving_alert = /obj/screen/alert/starving
 		var/well_fed = /obj/screen/alert/well_fed
 
-
-
-		switch(nutrition)
-			if(395 to INFINITY)
-				throw_alert("nutrition", fat_alert)
-			if(390 to 395)
-				throw_alert("nutrition", well_fed)
-			if(250 to 390)
-				clear_alert("nutrition")
-			if(150 to 250)
-				throw_alert("nutrition", hungry_alert)
-			else
-				throw_alert("nutrition", starving_alert)
+		if(!isFBP() || !isSynthetic())
+			switch(nutrition)
+				if(395 to INFINITY)
+					throw_alert("nutrition", fat_alert)
+				if(390 to 395)
+					throw_alert("nutrition", well_fed)
+				if(250 to 390)
+					clear_alert("nutrition")
+				if(150 to 250)
+					throw_alert("nutrition", hungry_alert)
+				else
+					throw_alert("nutrition", starving_alert)
 
 		var/over_hydrated = /obj/screen/alert/hydration/full
 		var/hydrated = /obj/screen/alert/hydration/well
 		var/parched = /obj/screen/alert/hydration/low
 		var/hydration_alert = /obj/screen/alert/hydration/very_low
 
-		switch(hydration)
-			if(395 to INFINITY)
-				throw_alert("hydration", over_hydrated)
-			if(390 to 395)
-				throw_alert("hydration", hydrated)
-			if(250 to 390)
-				clear_alert("hydration")
-			if(150 to 250)
-				throw_alert("hydration", parched)
-			else
-				throw_alert("hydration", hydration_alert)
+		if(!isFBP() || !isSynthetic())
+			switch(hydration)
+				if(395 to INFINITY)
+					throw_alert("hydration", over_hydrated)
+				if(390 to 395)
+					throw_alert("hydration", hydrated)
+				if(250 to 390)
+					clear_alert("hydration")
+				if(150 to 250)
+					throw_alert("hydration", parched)
+				else
+					throw_alert("hydration", hydration_alert)
 
 
 		if(cells && isSynthetic())
