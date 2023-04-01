@@ -73,6 +73,10 @@
 		data["max_health"] = sensors.get_max_health()
 		data["heat"] = sensors.heat
 		data["critical_heat"] = sensors.critical_heat
+		data["desired_range"] = sensors.desired_range
+		data["range_choices"] = list()
+		for(var/i in 1 to sensors.max_range)
+			data["range_choices"] += i
 		if(sensors.health_dead)
 			data["status"] = "DESTROYED"
 		else if(!sensors.powered())
@@ -81,6 +85,9 @@
 			data["status"] = "VACUUM SEAL BROKEN"
 		else
 			data["status"] = "OK"
+
+
+
 		var/list/contacts = list()
 
 		var/list/potential_contacts = list()
@@ -146,8 +153,14 @@
 			if(!CanInteract(user,state))
 				return TOPIC_NOACTION
 			if (nrange)
-				sensors.set_range(clamp(round(nrange), 1, world.view))
+				sensors.set_desired_range(clamp(nrange, 1, sensors.max_range))
 			return TOPIC_REFRESH
+		if(href_list["range_choice"])
+			var/nrange = text2num(href_list["range_choice"])
+			if(!CanInteract(user,state))
+				return TOPIC_NOACTION
+			if(nrange)
+				sensors.set_desired_range(clamp(nrange, 1, sensors.max_range))
 		if (href_list["toggle"])
 			sensors.toggle()
 			return TOPIC_REFRESH
@@ -181,10 +194,13 @@
 	construct_state = /singleton/machine_construction/default/panel_closed
 	health_max = 200
 	var/critical_heat = 50 // sparks and takes damage when active & above this heat
-	var/heat_reduction = 1.5 // mitigates this much heat per tick
+	var/heat_reduction = 1.7 // mitigates this much heat per tick
 	var/sensor_strength //used for detecting ships via contacts
 	var/heat = 0
 	var/range = 1
+	var/max_range = 10
+	var/desired_range = 1 // "desired" range, that the actual range will gradually move towards to
+	var/desired_range_instant = FALSE // if true, instantly changes range to desired
 	idle_power_usage = 5000
 
 /obj/machinery/shipsensors/RefreshParts()
@@ -234,6 +250,8 @@
 	. = ..()
 
 /obj/machinery/shipsensors/proc/toggle()
+	if(use_power) // reset desired range when turning off
+		set_desired_range(1)
 	if(!use_power && (health_dead || !in_vacuum()))
 		return // No turning on if broken or misplaced.
 	if(!use_power) //need some juice to kickstart
@@ -245,6 +263,9 @@
 	if(use_power) //can't run in non-vacuum
 		if(!in_vacuum())
 			toggle()
+
+		check_desired_range()
+
 		if(heat > critical_heat)
 			src.visible_message(SPAN_DANGER("\The [src] violently spews out sparks!"))
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -253,7 +274,11 @@
 
 			damage_health(rand(10, 50), DAMAGE_BURN)
 			toggle()
-		heat += idle_power_usage/15000
+
+		heat += idle_power_usage / 15000
+
+	else if(desired_range < range)
+		set_range(range-1) // if power off, only spool down
 
 	if (heat > 0)
 		heat = max(0, heat - heat_reduction)
@@ -262,6 +287,22 @@
 	. = ..()
 	if(use_power && !powered())
 		toggle()
+
+/obj/machinery/shipsensors/proc/check_desired_range()
+	if (desired_range != range)
+		if(desired_range > range)
+			set_range(range+1)
+
+		else if(desired_range < range)
+			set_range(range-1)
+
+		if(desired_range-range <= -max_range/2)
+			set_range(range-1) // if working hard, spool down faster too
+
+/obj/machinery/shipsensors/proc/set_desired_range(nrange)
+	desired_range = nrange
+	if(desired_range_instant)
+		set_range(nrange)
 
 /obj/machinery/shipsensors/proc/set_range(nrange)
 	range = nrange
@@ -280,6 +321,21 @@
 /obj/machinery/shipsensors/RefreshParts()
 	..()
 	heat_reduction = round(total_component_rating_of_type(/obj/item/stock_parts/manipulator) / 3)
+
+
+
+// For small shuttles
+/obj/machinery/shipsensors/weak
+	heat_reduction = 0.35 // Can sustain range 1
+	heat_reduction = 1.7 // Can sustain range 4
+	max_range = 7
+	desc = "Miniturized gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."
+
+/obj/machinery/shipsensors/strong
+	name = "sensors suite"
+	desc = "An upgrade to the standard ship-mounted sensor array, this beast has massive cooling systems running beneath it, allowing it to run hotter for much longer. Can only run in vacuum to protect delicate quantum BS elements."
+	heat_reduction = 3.7 // can sustain range 6
+	max_range = 14
 
 /obj/item/stock_parts/circuitboard/shipsensors
 	name = T_BOARD("broad-band sensor suite")

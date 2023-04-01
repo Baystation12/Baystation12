@@ -14,7 +14,9 @@
 			Range
 		</div>
 		<div class="itemContent">
-			{{:helper.link(data.range, null, { 'range' : 1 }, null, null)}}
+		{{for data.range_choices}}
+				{{:helper.link(value, null, { 'range_choice' : value }, null, value==data.range ? 'selected' : null)}}
+			{{/for}}
 		</div>
 	</div>
 	<div class='item'>
