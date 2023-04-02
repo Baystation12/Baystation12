@@ -22,6 +22,12 @@
 	var/locked = 0
 	var/scan_id = 1
 	var/is_secure = 0
+	/// List of type paths this fridge accepts.
+	var/list/accepted_types = list(
+		/obj/item/reagent_containers/food/snacks/grown,
+		/obj/item/seeds,
+		/obj/item/shellfish
+	)
 
 /obj/machinery/smartfridge/secure
 	is_secure = 1
@@ -45,66 +51,55 @@
 		return list()
 	return ..()
 
-/obj/machinery/smartfridge/proc/accept_check(obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/food/snacks/grown) || istype(O,/obj/item/seeds) || istype(O,/obj/item/shellfish))
-		return 1
-	return 0
+/obj/machinery/smartfridge/proc/accept_check(obj/item/O)
+	if (is_type_in_list(O, accepted_types))
+		return TRUE
+	return FALSE
 
 /obj/machinery/smartfridge/seeds
 	name = "\improper MegaSeed Servitor"
 	desc = "When you need seeds fast!"
-
-/obj/machinery/smartfridge/seeds/accept_check(obj/item/O as obj)
-	if(istype(O,/obj/item/seeds))
-		return 1
-	return 0
+	accepted_types = list(
+		/obj/item/seeds
+	)
 
 /obj/machinery/smartfridge/secure/extract
 	name = "\improper Slime Extract Storage"
 	desc = "A refrigerated storage unit for slime extracts."
 	icon_contents = "slime"
 	req_access = list(access_research)
-
-/obj/machinery/smartfridge/secure/extract/accept_check(obj/item/O as obj)
-	if(istype(O,/obj/item/slime_extract))
-		return 1
-	return 0
+	accepted_types = list(
+		/obj/item/slime_extract
+	)
 
 /obj/machinery/smartfridge/secure/medbay
 	name = "\improper Refrigerated Medicine Storage"
 	desc = "A refrigerated storage unit for storing medicine and chemicals."
 	icon_contents = "chem"
 	req_access = list(list(access_medical,access_chemistry))
-
-/obj/machinery/smartfridge/secure/medbay/accept_check(obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/glass))
-		return 1
-	if(istype(O,/obj/item/storage/pill_bottle))
-		return 1
-	if(istype(O,/obj/item/reagent_containers/pill))
-		return 1
-	return 0
+	accepted_types = list(
+		/obj/item/reagent_containers/glass,
+		/obj/item/storage/pill_bottle,
+		/obj/item/reagent_containers/pill
+	)
 
 /obj/machinery/smartfridge/secure/virology
 	name = "\improper Refrigerated Virus Storage"
 	desc = "A refrigerated storage unit for storing viral material."
 	req_access = list(access_virology)
 	icon_contents = "chem"
-
-/obj/machinery/smartfridge/secure/virology/accept_check(obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/glass/beaker/vial))
-		return 1
-	return 0
+	accepted_types = list(
+		/obj/item/reagent_containers/glass/beaker/vial
+	)
 
 /obj/machinery/smartfridge/chemistry
 	name = "\improper Smart Chemical Storage"
 	desc = "A refrigerated storage unit for medicine and chemical storage."
 	icon_contents = "chem"
-
-/obj/machinery/smartfridge/chemistry/accept_check(obj/item/O as obj)
-	if(istype(O,/obj/item/storage/pill_bottle) || istype(O,/obj/item/reagent_containers))
-		return 1
-	return 0
+	accepted_types = list(
+		/obj/item/storage/pill_bottle,
+		/obj/item/reagent_containers
+	)
 
 /obj/machinery/smartfridge/chemistry/virology
 	name = "\improper Smart Virus Storage"
@@ -117,10 +112,11 @@
 	icon_state = "fridge_dark"
 	icon_base = "fridge_dark"
 	icon_contents = "drink"
-
-/obj/machinery/smartfridge/drinks/accept_check(obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/glass) || istype(O,/obj/item/reagent_containers/food/drinks) || istype(O,/obj/item/reagent_containers/food/condiment))
-		return 1
+	accepted_types = list(
+		/obj/item/reagent_containers/glass,
+		/obj/item/reagent_containers/food/drinks,
+		/obj/item/reagent_containers/food/condiment
+	)
 
 /obj/machinery/smartfridge/foods
 	name = "\improper Hot Foods Display"
@@ -128,25 +124,26 @@
 	icon_state = "fridge_food"
 	icon_state = "fridge_food"
 	icon_contents = "food"
-
-/obj/machinery/smartfridge/foods/accept_check(obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/food/snacks) || istype(O,/obj/item/material/kitchen/utensil))
-		return 1
+	accepted_types = list(
+		/obj/item/reagent_containers/food/snacks,
+		/obj/item/material/kitchen/utensil
+	)
 
 /obj/machinery/smartfridge/drying_rack
 	name = "drying rack"
 	desc = "A machine for drying plants."
 	icon_state = "drying_rack"
+	accepted_types = null
 
-/obj/machinery/smartfridge/drying_rack/accept_check(obj/item/O as obj)
+/obj/machinery/smartfridge/drying_rack/accept_check(obj/item/O)
 	if(istype(O, /obj/item/reagent_containers/food/snacks))
 		var/obj/item/reagent_containers/food/snacks/S = O
-		return S.dried_type
+		return S.dried_type ? TRUE : FALSE
 	else if(istype(O, /obj/item/stack/material))
 		var/obj/item/stack/material/mat = O
 		var/material/skin/skin_mat = mat.material
 		return istype(skin_mat)
-	return 0
+	return FALSE
 
 /obj/machinery/smartfridge/drying_rack/Process()
 	..()
