@@ -1,0 +1,6 @@
+author: LordNest
+delete-after: true
+changes:
+  - rscadd: Добавлена карта SCGF Patrol Craft
+  - maptweak: Удалил лишний АПЦ на карте патруля и добавил новые эмблемы от Вольфора
+  - maptweak: Удалил канистру с бороном
