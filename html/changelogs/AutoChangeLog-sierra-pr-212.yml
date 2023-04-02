@@ -1,4 +1,0 @@
-author: ImJustKisik
-delete-after: true
-changes:
-  - experiment: Овермапа теперь обрабатывается отдельной подсистемой
