@@ -47,7 +47,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	return ..()
 
 
-/obj/structure/cable/Initialize()
+/obj/structure/cable/Initialize(mapload, _color)
 	. = ..()
 	var/dash = findtext(icon_state, "-")
 	d1 = text2num( copytext( icon_state, 1, dash ) )
@@ -58,6 +58,8 @@ By design, d1 is the smallest direction and d2 is the highest
 	if (level == ATOM_LEVEL_UNDER_TILE)
 		hide(!turf.is_plating() && !turf.is_open())
 	GLOB.cable_list += src
+	if (_color)
+		color = _color
 
 
 /obj/structure/cable/drain_power(drain_check, surge, amount = 0)
