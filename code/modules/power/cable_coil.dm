@@ -72,7 +72,6 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 
 
 /obj/item/stack/cable_coil/on_update_icon()
-	color = COLOR_MAROON
 	switch (amount)
 		if (1)
 			icon_state = "coil1"
