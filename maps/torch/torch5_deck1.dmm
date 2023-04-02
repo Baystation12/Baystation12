@@ -21703,6 +21703,7 @@
 	dir = 10
 	},
 /obj/structure/table/standard,
+/obj/item/storage/box/bloodpacks,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "lAC" = (
