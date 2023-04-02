@@ -7,8 +7,6 @@
 	if(player.current)
 		if(jobban_isbanned(player.current, id))
 			return "Player is banned from this antagonist role."
-		if(player.current.faction != MOB_FACTION_NEUTRAL)
-			return "Player is already assigned to a non-neutral faction ([player.current.faction])."
 
 	if(is_type_in_list(player.assigned_job, blacklisted_jobs))
 		return "Player's assigned job ([player.assigned_job]) is blacklisted from this antagonist role."

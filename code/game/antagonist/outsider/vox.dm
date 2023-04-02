@@ -17,7 +17,8 @@ GLOBAL_DATUM_INIT(vox_raiders, /datum/antagonist/vox, new)
 	id_type = /obj/item/card/id/syndicate
 
 	base_to_load = /datum/map_template/ruin/antag_spawn/vox_raider
-
+	faction = "vox raider"
+	no_prior_faction = TRUE
 
 /datum/antagonist/vox/build_candidate_list(datum/game_mode/mode, ghosts_only)
 	candidates = list()

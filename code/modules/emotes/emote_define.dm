@@ -56,19 +56,19 @@
 			to_chat(user, SPAN_WARNING("\The [target] is too far away."))
 			return
 
-	var/datum/gender/user_gender = gender_datums[user.get_visible_gender()]
-	var/datum/gender/target_gender
+	var/datum/pronouns/user_pronouns = user.choose_from_pronouns()
+	var/datum/pronouns/target_pronouns
 	if(target)
-		target_gender = gender_datums[target.get_visible_gender()]
+		target_pronouns = target.choose_from_pronouns()
 
 	var/use_3p
 	var/use_1p
 	if(emote_message_1p)
 		if(target && emote_message_1p_target)
 			use_1p = get_emote_message_1p(user, target, extra_params)
-			use_1p = replacetext(use_1p, "TARGET_THEM", target_gender.him)
-			use_1p = replacetext(use_1p, "TARGET_THEIR", target_gender.his)
-			use_1p = replacetext(use_1p, "TARGET_SELF", target_gender.self)
+			use_1p = replacetext(use_1p, "TARGET_THEM", target_pronouns.him)
+			use_1p = replacetext(use_1p, "TARGET_THEIR", target_pronouns.his)
+			use_1p = replacetext(use_1p, "TARGET_SELF", target_pronouns.self)
 			use_1p = replacetext(use_1p, "TARGET", "<b>\the [target]</b>")
 		else
 			use_1p = get_emote_message_1p(user, null, extra_params)
@@ -77,15 +77,15 @@
 	if(emote_message_3p)
 		if(target && emote_message_3p_target)
 			use_3p = get_emote_message_3p(user, target, extra_params)
-			use_3p = replacetext(use_3p, "TARGET_THEM", target_gender.him)
-			use_3p = replacetext(use_3p, "TARGET_THEIR", target_gender.his)
-			use_3p = replacetext(use_3p, "TARGET_SELF", target_gender.self)
+			use_3p = replacetext(use_3p, "TARGET_THEM", target_pronouns.him)
+			use_3p = replacetext(use_3p, "TARGET_THEIR", target_pronouns.his)
+			use_3p = replacetext(use_3p, "TARGET_SELF", target_pronouns.self)
 			use_3p = replacetext(use_3p, "TARGET", "<b>\the [target]</b>")
 		else
 			use_3p = get_emote_message_3p(user, null, extra_params)
-		use_3p = replacetext(use_3p, "USER_THEM", user_gender.him)
-		use_3p = replacetext(use_3p, "USER_THEIR", user_gender.his)
-		use_3p = replacetext(use_3p, "USER_SELF", user_gender.self)
+		use_3p = replacetext(use_3p, "USER_THEM", user_pronouns.him)
+		use_3p = replacetext(use_3p, "USER_THEIR", user_pronouns.his)
+		use_3p = replacetext(use_3p, "USER_SELF", user_pronouns.self)
 		use_3p = replacetext(use_3p, "USER", "<b>\the [user]</b>")
 		use_3p = capitalize(use_3p)
 

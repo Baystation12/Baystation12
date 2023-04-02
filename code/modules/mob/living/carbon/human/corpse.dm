@@ -20,25 +20,27 @@
 #define CORPSE_SPAWNER_RANDOM_FACIAL_STYLE FLAG(7)
 #define CORPSE_SPAWNER_RANDOM_EYE_COLOR    FLAG(8)
 #define CORPSE_SPAWNER_RANDOM_GENDER       FLAG(9)
+#define CORPSE_SPAWNER_RANDOM_PRONOUNS     FLAG(10)
 
 #define CORPSE_SPAWNER_RANDOM_NAMELESS    ~(CORPSE_SPAWNER_RANDOM_HAIR_STYLE|CORPSE_SPAWNER_RANDOM_FACIAL_STYLE)
-#define CORPSE_SPAWNER_NO_RANDOMIZATION   ~(CORPSE_SPAWNER_RANDOM_NAME|CORPSE_SPAWNER_RANDOM_SKIN_TONE|CORPSE_SPAWNER_RANDOM_SKIN_COLOR|CORPSE_SPAWNER_RANDOM_HAIR_COLOR|CORPSE_SPAWNER_RANDOM_HAIR_STYLE|CORPSE_SPAWNER_RANDOM_FACIAL_STYLE|CORPSE_SPAWNER_RANDOM_EYE_COLOR)
+#define CORPSE_SPAWNER_NO_RANDOMIZATION   ~(CORPSE_SPAWNER_RANDOM_NAME|CORPSE_SPAWNER_RANDOM_SKIN_TONE|CORPSE_SPAWNER_RANDOM_SKIN_COLOR|CORPSE_SPAWNER_RANDOM_HAIR_COLOR|CORPSE_SPAWNER_RANDOM_HAIR_STYLE|CORPSE_SPAWNER_RANDOM_FACIAL_STYLE|CORPSE_SPAWNER_RANDOM_EYE_COLOR|CORPSE_SPAWNER_RANDOM_PRONOUNS)
 
 
 /obj/effect/landmark/corpse
 	name = "Unknown"
-	var/species = list(SPECIES_HUMAN)                 // List of species to pick from.
-	var/corpse_outfits = list(/singleton/hierarchy/outfit) // List of outfits to pick from. Uses pickweight()
+	var/species = list(SPECIES_HUMAN)                 		// List of species to pick from.
+	var/corpse_outfits = list(/singleton/hierarchy/outfit) 	// List of outfits to pick from. Uses pickweight()
 	var/spawn_flags = (~0)
 
-	var/skin_colors_per_species   = list() // Custom skin colors, per species -type-, if any. For example if you want dead Skrell to always have blue headtails, or similar
-	var/skin_tones_per_species    = list() // Custom skin tones, per species -type-, if any. See above as to why.
-	var/eye_colors_per_species    = list() // Custom eye colors, per species -type-, if any. See above as to why.
-	var/hair_colors_per_species   = list() // Custom hair colors, per species -type-, if any. See above as to why.
-	var/hair_styles_per_species   = list() // Custom hair styles, per species -type-, if any. For example if you want a punk gang with handlebars.
-	var/facial_styles_per_species = list() // Custom facial hair styles, per species -type-, if any. See above as to why
-	var/genders_per_species       = list() // For gender biases per species -type-
-
+	var/skin_colors_per_species   = list()					// Custom skin colors, per species -type-, if any. For example if you want dead Skrell to always have blue headtails, or similar
+	var/skin_tones_per_species    = list()					// Custom skin tones, per species -type-, if any. See above as to why.
+	var/eye_colors_per_species    = list()					// Custom eye colors, per species -type-, if any. See above as to why.
+	var/hair_colors_per_species   = list()					// Custom hair colors, per species -type-, if any. See above as to why.
+	var/hair_styles_per_species   = list()					// Custom hair styles, per species -type-, if any. For example if you want a punk gang with handlebars.
+	var/facial_styles_per_species = list()					// Custom facial hair styles, per species -type-, if any. See above as to why
+	var/genders_per_species       = list()					// For gender biases per species -type-
+	/// Custom pronouns, per species -type-, if any
+	var/pronouns_per_species	  = list()
 
 /obj/effect/landmark/corpse/Initialize()
 	..()
@@ -50,6 +52,7 @@
 	var/mob/living/carbon/human/corpse = new (loc, new_species)
 	corpse.adjustOxyLoss(corpse.maxHealth)
 	corpse.setBrainLoss(corpse.maxHealth)
+	corpse.faction = MOB_FACTION_NEUTRAL
 	var/obj/item/organ/internal/heart/heart = corpse.internal_organs_by_name[BP_HEART]
 	if (heart)
 		heart.pulse = PULSE_NONE
@@ -63,9 +66,17 @@
 /obj/effect/landmark/corpse/proc/randomize_appearance(mob/living/carbon/human/M, species_choice)
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_GENDER))
 		if(species_choice in genders_per_species)
-			M.change_gender(pick(genders_per_species[species_choice]))
+			var/choice = pick(genders_per_species[species_choice])
+			M.change_gender(choice)
 		else
 			M.randomize_gender()
+
+	if((spawn_flags & CORPSE_SPAWNER_RANDOM_PRONOUNS))
+		if(species_choice in pronouns_per_species)
+			var/choice = pick(pronouns_per_species[species_choice])
+			M.change_pronouns(choice)
+		else
+			M.randomize_pronouns()
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_SKIN_TONE))
 		if(species_choice in skin_tones_per_species)

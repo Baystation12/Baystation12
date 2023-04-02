@@ -56,34 +56,36 @@
 		return standalone_value_descriptors[check_value]
 
 // Build a species-specific descriptor string.
-/datum/mob_descriptor/proc/get_initial_comparison_component(mob/me, datum/gender/my_gender, datum/gender/other_gender, my_value)
+/datum/mob_descriptor/proc/get_initial_comparison_component(mob/me, datum/pronouns/my_pronouns, datum/pronouns/other_pronouns, my_value)
 	var/species_text
 	if(ishuman(me) && !skip_species_mention)
 		var/mob/living/carbon/human/H = me
 		var/use_name = "\improper [H.species.name]"
 		species_text = " for \a [use_name]"
-	. = "[get_third_person_message_start(my_gender)] [get_standalone_value_descriptor(my_value)][species_text]"
+	. = "[get_third_person_message_start(my_pronouns)] [get_standalone_value_descriptor(my_value)][species_text]"
 
-/datum/mob_descriptor/proc/get_secondary_comparison_component(datum/gender/my_gender, datum/gender/other_gender, my_value, comparing_value)
+/datum/mob_descriptor/proc/get_secondary_comparison_component(datum/pronouns/my_pronouns, datum/pronouns/other_pronouns, my_value, comparing_value)
 	var/raw_value = my_value
 	my_value += comparison_offset
 	var/variance = abs((my_value)-comparing_value)
 	if(variance < 1)
-		. = "[.], [get_comparative_value_string_equivalent(raw_value, my_gender, other_gender)]"
+		. = "[.], [get_comparative_value_string_equivalent(raw_value, my_pronouns, other_pronouns)]"
 	else
 		variance = variance / LAZYLEN(standalone_value_descriptors)
 		if(my_value < comparing_value)
-			. = "[.], [get_comparative_value_string_smaller(variance, my_gender, other_gender)]"
+			. = "[.], [get_comparative_value_string_smaller(variance, my_pronouns, other_pronouns)]"
 		else if(my_value > comparing_value)
-			. = "[.], [get_comparative_value_string_larger(variance, my_gender, other_gender)]"
+			. = "[.], [get_comparative_value_string_larger(variance, my_pronouns, other_pronouns)]"
 
 /datum/mob_descriptor/proc/get_comparative_value_descriptor(my_value, mob/observer, mob/me)
 
 	// Store our gender info for later.
-	var/datum/gender/my_gender = gender_datums[me.get_gender()]
-	var/datum/gender/other_gender = gender_datums[observer.get_gender()]
+	var/datum/pronouns/my_pronouns = GLOB.pronouns.by_key[PRONOUNS_THEY_THEM]
+	if(observer.knows_target(me))
+		my_pronouns = me.choose_from_pronouns()
+	var/datum/pronouns/other_pronouns = observer.choose_from_pronouns()
 
-	. = get_initial_comparison_component(me, my_gender, other_gender, my_value)
+	. = get_initial_comparison_component(me, my_pronouns, other_pronouns, my_value)
 
 	// Append the same-descriptor comparison text.
 	var/comparing_value
@@ -94,20 +96,20 @@
 			comparing_value = human_observer.descriptors[name] + obs_descriptor.comparison_offset
 
 	if(. && !isnull(comparing_value))
-		. = "[.][get_secondary_comparison_component(my_gender, other_gender, my_value, comparing_value)]"
+		. = "[.][get_secondary_comparison_component(my_pronouns, other_pronouns, my_value, comparing_value)]"
 
 	// We're done, add a full stop.
 	. = "[.]. "
 
-/datum/mob_descriptor/proc/get_comparative_value_string_equivalent(my_value, datum/gender/my_gender, datum/gender/other_gender)
+/datum/mob_descriptor/proc/get_comparative_value_string_equivalent(my_value, datum/pronouns/my_pronouns, datum/pronouns/other_pronouns)
 	return comparative_value_descriptor_equivalent
 
-/datum/mob_descriptor/proc/get_comparative_value_string_smaller(value, datum/gender/my_gender, datum/gender/other_gender)
+/datum/mob_descriptor/proc/get_comparative_value_string_smaller(value, datum/pronouns/my_pronouns, datum/pronouns/other_pronouns)
 	var/maxval = LAZYLEN(comparative_value_descriptors_smaller)
 	value = clamp(Ceil(value * maxval), 1, maxval)
 	return comparative_value_descriptors_smaller[value]
 
-/datum/mob_descriptor/proc/get_comparative_value_string_larger(value, datum/gender/my_gender, datum/gender/other_gender)
+/datum/mob_descriptor/proc/get_comparative_value_string_larger(value, datum/pronouns/my_pronouns, datum/pronouns/other_pronouns)
 	var/maxval = LAZYLEN(comparative_value_descriptors_larger)
 	value = clamp(Ceil(value * maxval), 1, maxval)
 	return comparative_value_descriptors_larger[value]

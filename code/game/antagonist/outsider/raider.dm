@@ -19,6 +19,8 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	id_type = /obj/item/card/id/syndicate
 
 	faction = "pirate"
+	no_prior_faction = TRUE
+
 	base_to_load = /datum/map_template/ruin/antag_spawn/heist
 
 	var/list/raider_uniforms = list(

@@ -230,6 +230,7 @@
 	character.fully_replace_character_name(real_name)
 
 	character.gender = gender
+	character.pronouns = pronouns
 	character.age = age
 	character.b_type = b_type
 

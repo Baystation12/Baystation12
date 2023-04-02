@@ -115,6 +115,12 @@
 			M.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
 
+		if(!(M.knows_target(src)) && !isghost(M))
+			for(var/datum/pronouns/entry as anything in GLOB.pronouns.instances)
+				mob_message = replacetext(mob_message, initial(entry.his), "their")
+				mob_message = replacetext(mob_message, initial(entry.him), "them")
+				mob_message = replacetext(mob_message, initial(entry.self), "themselves")
+
 		if((!M.is_blind() && M.see_invisible >= src.invisibility) || narrate)
 			M.show_message(mob_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
@@ -149,6 +155,12 @@
 			if(ghost_skip_message(M))
 				continue
 			mob_message = add_ghost_track(mob_message, M)
+
+		if(!(M.knows_target(src)) && !(isghost(M)))
+			for(var/datum/pronouns/entry as anything in GLOB.pronouns.instances)
+				mob_message = replacetext(mob_message, initial(entry.his), "their")
+				mob_message = replacetext(mob_message, initial(entry.him), "them")
+				mob_message = replacetext(mob_message, initial(entry.self), "themselves")
 
 		if(self_message && M == src)
 			M.show_message(self_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
@@ -672,8 +684,17 @@
 /mob/proc/is_ready()
 	return client && !!mind
 
-/mob/proc/get_gender()
-	return gender
+
+/mob/choose_from_pronouns()
+	if(!pronouns)
+		var/datum/gender/G = gender_datums[gender]
+		return G
+	else
+		var/datum/pronouns/P = GLOB.pronouns.by_key[pronouns]
+		if(P.types)
+			P = GLOB.pronouns.by_key[pick(P.types)]
+		return P
+
 
 /mob/proc/see(message)
 	if(!is_active())
@@ -1211,3 +1232,37 @@
 			break
 	if(old_zflags != z_flags)
 		UPDATE_OO_IF_PRESENT
+
+/mob/verb/introduce()
+	set category = "IC"
+	set name = "Introduce Self"
+	set desc = "Introduce yourself to someone else."
+
+	var/mob/S = src
+	var/mob/U = usr
+
+	if(get_dist(U, S) > 3)
+		to_chat(U, SPAN_WARNING("You're too far away to properly introduce yourself!"))
+		return
+	if((S.stat != CONSCIOUS) || !(S.mind))
+		to_chat(U, SPAN_WARNING("You can't introduce yourself while they're in this state!"))
+		return
+	if((S in U.mind.known_mobs) || (U in S.mind.known_mobs))
+		to_chat(U, SPAN_WARNING("You already know [S.name]!"))
+		return
+
+	var/datum/pronouns/P = choose_from_pronouns(U)
+
+	to_chat(U, SPAN_WARNING("You introduce yourself to [S.name]!"))
+	to_chat(S, SPAN_WARNING("[U.name] introduces [P.self]!"))
+	U.mind.add_known_mob(S)
+	S.mind.add_known_mob(U)
+
+/mob/proc/knows_target(mob/M)
+	if(mind)
+		if((M in mind.known_mobs) || (M.faction == faction) || (M.last_faction == faction) || (M.faction == last_faction))
+			return TRUE
+		else
+			return FALSE
+	else
+		return FALSE

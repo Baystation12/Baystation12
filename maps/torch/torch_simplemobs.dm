@@ -86,7 +86,7 @@
 
 /mob/living/simple_animal/hostile/fleet/ranged/neutral
 	say_list_type = /datum/say_list/fleet/friendly
-	faction = "neutral"
+	faction = MOB_FACTION_CREW
 
 //////////////Bullpup////////////////
 
@@ -102,7 +102,7 @@
 
 /mob/living/simple_animal/hostile/fleet/ranged/bullpup/neutral
 	say_list_type = /datum/say_list/fleet/friendly
-	faction = "neutral"
+	faction = MOB_FACTION_CREW
 
 //////////////Team Leader////////////////
 
@@ -126,7 +126,7 @@
 
 /mob/living/simple_animal/hostile/fleet/ranged/leader/neutral
 	say_list_type = /datum/say_list/fleet/friendly
-	faction = "neutral"
+	faction = MOB_FACTION_CREW
 
 // These guys are chonky. Use them for BIG fights. Or sparingly.
 
@@ -179,7 +179,7 @@
 
 /mob/living/simple_animal/hostile/fleet/space/neutral
 	say_list_type = /datum/say_list/fleet/friendly
-	faction = "neutral"
+	faction = MOB_FACTION_CREW
 
 //////////////Rigsuit - Bullpup////////////////
 
@@ -202,7 +202,7 @@
 
 /mob/living/simple_animal/hostile/fleet/space/ranged/neutral
 	say_list_type = /datum/say_list/fleet/friendly
-	faction = "neutral"
+	faction = MOB_FACTION_CREW
 
 //////////////Rigsuit - Heavy////////////////
 /* Has a special, telegraphed rig-mounted laser cannon */
@@ -294,7 +294,7 @@
 
 /mob/living/simple_animal/hostile/fleet/space/ranged/heavy/neutral
 	say_list_type = /datum/say_list/fleet/friendly
-	faction = "neutral"
+	faction = MOB_FACTION_CREW
 
 /* AI */
 

@@ -54,6 +54,11 @@
 		generate_data()
 		return TRUE
 
+	if (href_list["pronouns"] && HAS_FLAGS(flags, APPEARANCE_PRONOUNS) && (href_list["pronouns"] in owner.species.pronouns))
+		owner.change_pronouns(href_list["pronouns"])
+		generate_data()
+		return TRUE
+
 	if (href_list["skin_tone"] && (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & SPECIES_APPEARANCE_HAS_A_SKIN_TONE))
 		var/high = owner.species.max_skin_tone()
 		var/data = input(usr, "Skin Tone:\n1 (pale) ~ [high] (dark)", "Skin Tone", 35 - owner.skin_tone) as null | num
@@ -146,6 +151,7 @@
 
 	data["specimen"] = owner.species.name
 	data["gender"] = owner.gender
+	data["pronouns"] = owner.pronouns
 
 	data["change_skin_tone"] = (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & SPECIES_APPEARANCE_HAS_A_SKIN_TONE)
 	data["change_skin_color"] = (flags & APPEARANCE_SKIN) && (owner.species.appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_COLOR)
@@ -164,6 +170,12 @@
 		var/list/entries = (data["genders"] = list())
 		for (var/gender_key in owner.species.genders)
 			entries += list(list("gender_name" = gender2text(gender_key), "gender_key" = gender_key))
+
+	data["change_pronouns"] = !!(flags & APPEARANCE_PRONOUNS)
+	if (data["change_pronouns"])
+		var/list/entries = (data["pronouns_list"] = list())
+		for (var/pronouns in owner.species.pronouns)
+			entries += list(list("pronouns_name" = pronouns, "pronouns_key" = pronouns))
 
 	data["change_hair"] = !!(flags & APPEARANCE_HEAD)
 	if (data["change_hair"])

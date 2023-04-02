@@ -18,6 +18,7 @@ GLOBAL_DATUM_INIT(mercs, /datum/antagonist/mercenary, new)
 	min_player_age = 14
 
 	faction = "mercenary"
+	no_prior_faction = TRUE
 
 	base_to_load = /datum/map_template/ruin/antag_spawn/mercenary
 

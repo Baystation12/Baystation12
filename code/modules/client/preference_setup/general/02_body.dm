@@ -3,6 +3,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 /datum/preferences
 	var/species = SPECIES_HUMAN
 	var/gender = MALE					//gender of character (well duh)
+	var/pronouns = PRONOUNS_THEY_THEM
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/head_hair_style = "Bald"				//Hair type
 	var/head_hair_color = "#000000"
@@ -33,6 +34,15 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		pref.species = "human"
 	pref.age = R.read("age")
 	pref.gender = R.read("gender")
+	pref.pronouns = R.read("pronouns")
+	if(R.get_version() < 3 && !(pref.pronouns))
+		switch (pref.gender)
+			if (MALE)
+				pref.pronouns = PRONOUNS_HE_HIM
+			if (FEMALE)
+				pref.pronouns = PRONOUNS_SHE_HER
+			else
+				pref.pronouns = PRONOUNS_THEY_THEM
 	pref.head_hair_color = R.read("head_hair_color")
 	if (!pref.head_hair_color)
 		pref.head_hair_color = rgb(R.read("hair_red"), R.read("hair_green"), R.read("hair_blue"))
@@ -60,6 +70,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 /datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
 	W.write("species", pref.species)
 	W.write("gender", pref.gender)
+	W.write("pronouns", pref.pronouns)
 	W.write("age", pref.age)
 	W.write("head_hair_color", pref.head_hair_color)
 	W.write("facial_hair_color", pref.facial_hair_color)
@@ -90,7 +101,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		pref.species = SPECIES_HUMAN
 	var/datum/species/mob_species = all_species[pref.species]
 
-	pref.gender			= sanitize_inlist(pref.gender, mob_species.genders, pick(mob_species.genders))
+	pref.gender = sanitize_inlist(pref.gender, mob_species.genders, pick(mob_species.genders))
+	pref.pronouns = sanitize_inlist(pref.pronouns, mob_species.pronouns, pick(mob_species.pronouns))
 	pref.age = sanitize_integer(pref.age, mob_species.min_age, mob_species.max_age, initial(pref.age))
 
 	var/low_skin_tone = mob_species ? (35 - mob_species.max_skin_tone()) : -185
@@ -130,7 +142,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	. += "<b>Species</b> [BTN("show_species", "Info")]"
 	. += "<br />[TBTN("set_species", mob_species.name, "Selected")]"
 	. += "<br /><br /><b>Body</b> [BTN("random", "Randomize")]"
-	. += "<br />[TBTN("gender", gender2text(pref.gender), "Gender")]"
+	. += "<br />[TBTN("gender", pref.gender, "Bodytype")]"
+	. += "<br />[TBTN("pronouns", pref.pronouns, "Pronouns")]"
 	. += "<br />[TBTN("age", pref.age, "Age")]"
 	. += "<br />[TBTN("blood_type", pref.b_type, "Blood Type")]"
 	. += "<br />[VTBTN("disabilities", NEARSIGHTED, pref.disabilities & NEARSIGHTED ? "Yes" : "No", "Glasses")]"
@@ -238,8 +251,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		return TOPIC_REFRESH
 
 	else if(href_list["gender"])
-		var/new_gender = input(user, "Choose your character's gender:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.gender) as null|anything in mob_species.genders
 		mob_species = all_species[pref.species]
+		var/new_gender = input(user, "Choose your character's bodytype:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.gender) as null|anything in mob_species.genders
 		if(new_gender && CanUseTopic(user) && (new_gender in mob_species.genders))
 			pref.gender = new_gender
 			if(!(pref.facial_hair_style in mob_species.get_facial_hair_styles(pref.gender)))
@@ -256,6 +269,13 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["random"])
 		pref.randomize_appearance_and_body_for()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if(href_list["pronouns"])
+		var/new_pronouns = input(user, "Choose your character's pronouns:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.pronouns) as null|anything in mob_species.pronouns
+		mob_species = all_species[pref.species]
+		if(new_pronouns && CanUseTopic(user) && (new_pronouns in mob_species.pronouns))
+			pref.pronouns = new_pronouns
+		return TOPIC_REFRESH
 
 	else if(href_list["change_descriptor"])
 		if(mob_species.descriptors)
@@ -302,6 +322,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			mob_species = all_species[pref.species]
 			if(!(pref.gender in mob_species.genders))
 				pref.gender = mob_species.genders[1]
+			if(!(pref.pronouns in mob_species.pronouns))
+				pref.pronouns = mob_species.pronouns[1]
 
 			ResetAllHair()
 
