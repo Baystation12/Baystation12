@@ -14,7 +14,10 @@
 	shuttles_to_initialise = list(
 		/datum/shuttle/autodock/overmap/mule
 	)
-
+	apc_test_exempt_areas = list(
+		/area/liberia/solar1 = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/liberia/solar2 = NO_SCRUBBER|NO_VENT|NO_APC
+	)
 	area_usage_test_exempted_root_areas = list(/area/liberia)
 
 // Overmap objects

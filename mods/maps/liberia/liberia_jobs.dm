@@ -15,12 +15,7 @@
 	outfit_type = /singleton/hierarchy/outfit/job/liberia/merchant/leader
 	whitelisted_species = null
 	blacklisted_species = list(SPECIES_VOX, SPECIES_ALIEN, SPECIES_GOLEM, ) // SPECIES_MANTID_GYNE, SPECIES_MANTID_ALATE, SPECIES_MONARCH_WORKER, SPECIES_MONARCH_QUEEN Not yet... not yet...
-	allowed_branches = list(
-		/datum/mil_branch/civilian
-	)
-	allowed_ranks = list(
-		/datum/mil_rank/civ/civ
-	)
+
 	latejoin_at_spawnpoints = TRUE
 
 	access = list(
@@ -35,8 +30,6 @@
 	give_psionic_implant_on_join = FALSE
 	skill_points = 24
 	economic_power = 10 // We use splitted from station account system, which need lover economic_power to not break things
-
-	account_allowed = TRUE
 
 /datum/job/submap/merchant_leader/equip(mob/living/carbon/human/H)
 	return ..()
@@ -71,12 +64,7 @@
 		"Merchant Medical" = /singleton/hierarchy/outfit/job/liberia/merchant/doctor
 	)
 	outfit_type = /singleton/hierarchy/outfit/job/liberia/merchant
-	allowed_branches = list(
-		/datum/mil_branch/civilian
-	)
-	allowed_ranks = list(
-		/datum/mil_rank/civ/civ
-	)
+
 	latejoin_at_spawnpoints = TRUE
 	access = list(
 		access_merchant
@@ -98,8 +86,6 @@
 
 	economic_power = 4
 	skill_points = 24
-
-	account_allowed = TRUE
 
 /datum/job/submap/merchant/equip(mob/living/carbon/human/H)
 	outfit_type =  H.mind.role_alt_title!="Merchant Assistant" ? alt_titles[H.mind.role_alt_title] : outfit_type
