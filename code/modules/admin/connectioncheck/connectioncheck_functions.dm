@@ -86,6 +86,36 @@
 		. |= _fetch_bans(ckey, ip, cid)
 
 
+/**
+ * Returns a list containing only each unique ckey present in a list of connections provided by `_fetch_connections()`.
+ */
+/proc/_unique_ckeys_from_connections(list/connections)
+	RETURN_TYPE(/list)
+	. = list()
+	for (var/list/connection in connections)
+		. |= connection["ckey"]
+
+
+/**
+ * Returns a list containing only each unique CID present in a list of connections provided by `_fetch_connections()`.
+ */
+/proc/_unique_cids_from_connections(list/connections)
+	RETURN_TYPE(/list)
+	. = list()
+	for (var/list/connection in connections)
+		. |= connection["computerid"]
+
+
+/**
+ * Returns a list containing only each unique IP present in a list of connections provided by `_fetch_connections()`.
+ */
+/proc/_unique_ips_from_connections(list/connections)
+	RETURN_TYPE(/list)
+	. = list()
+	for (var/list/connection in connections)
+		. |= connection["ip"]
+
+
 /client/proc/fetch_connections()
 	RETURN_TYPE(/list)
 	return _fetch_connections(ckey, address, computer_id)
