@@ -28,6 +28,7 @@
 	user.show_message(SPAN_NOTICE(scan_data))
 
 /proc/list_gases(gases)
+	RETURN_TYPE(/list)
 	. = list()
 	for(var/g in gases)
 		. += "[gas_data.name[g]] ([gases[g]]%)"

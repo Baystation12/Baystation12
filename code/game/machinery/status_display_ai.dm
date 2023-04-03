@@ -29,6 +29,7 @@ var/global/list/ai_status_emotions = list(
 	)
 
 /proc/get_ai_emotions(ckey)
+	RETURN_TYPE(/list)
 	var/list/emotions = new
 	for(var/emotion_name in ai_status_emotions)
 		var/datum/ai_emotion/emotion = ai_status_emotions[emotion_name]

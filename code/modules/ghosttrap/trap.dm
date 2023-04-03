@@ -4,11 +4,13 @@
 var/global/list/ghost_traps
 
 /proc/get_ghost_trap(trap_key)
+	RETURN_TYPE(/datum/ghosttrap)
 	if(!ghost_traps)
 		populate_ghost_traps()
 	return ghost_traps[trap_key]
 
 /proc/get_ghost_traps()
+	RETURN_TYPE(/list)
 	if(!ghost_traps)
 		populate_ghost_traps()
 	return ghost_traps

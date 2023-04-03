@@ -48,11 +48,13 @@
 
 //Returns an identity color matrix which does nothing
 /proc/color_identity()
+	RETURN_TYPE(/list)
 	return list(1,0,0, 0,1,0, 0,0,1)
 
 //Moves all colors angle degrees around the color wheel while maintaining intensity of the color and not affecting whites
 //TODO: Need a version that only affects one color (ie shift red to blue but leave greens and blues alone)
 /proc/color_rotation(angle)
+	RETURN_TYPE(/list)
 	if(angle == 0)
 		return color_identity()
 	angle = clamp(angle, -180, 180)
@@ -70,6 +72,7 @@
 
 //Makes everything brighter or darker without regard to existing color or brightness
 /proc/color_brightness(power)
+	RETURN_TYPE(/list)
 	power = clamp(power, -255, 255)
 	power = power/255
 
@@ -90,6 +93,7 @@ var/global/list/delta_index = list(
 
 //Exxagerates or removes brightness
 /proc/color_contrast(value)
+	RETURN_TYPE(/list)
 	value = round(clamp(value, -100, 100))
 	if(value == 0)
 		return color_identity()
@@ -111,6 +115,7 @@ var/global/list/delta_index = list(
 
 //Exxagerates or removes colors
 /proc/color_saturation(value as num)
+	RETURN_TYPE(/list)
 	if(value == 0)
 		return color_identity()
 	value = clamp(value, -100, 100)
@@ -132,6 +137,7 @@ var/global/list/delta_index = list(
 //Given 2 matrices mxn and nxp (row major) it multiplies their members and return an mxp matrix
 //Do make sure your lists actually have this many elements
 /proc/multiply_matrices(list/A, list/B, m, n, p)
+	RETURN_TYPE(/list)
 	var/list/result = new (m * p)
 
 	if(length(A) == m*n && length(B) == n*p)

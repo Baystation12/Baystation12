@@ -72,6 +72,7 @@
 
 
 /proc/get_attached_labels(atom/source)
+	RETURN_TYPE(/list)
 	if (has_extension(source, /datum/extension/labels))
 		var/datum/extension/labels/labels = get_extension(source, /datum/extension/labels)
 		if (length(labels.labels))

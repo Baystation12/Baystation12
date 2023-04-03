@@ -130,6 +130,7 @@
 
 /// A circular random coordinate pair from 0, unit by default, scaled by radius, then rounded if round.
 /proc/CircularRandomCoordinate(radius = 1, round)
+	RETURN_TYPE(/list)
 	var/angle = rand(0, 359)
 	var/x = cos(angle) * radius
 	var/y = sin(angle) * radius
@@ -152,6 +153,7 @@
 * radius outside the scope of the proc, eg as BoundedCircularRandomCoordinate(Frand(1, 3), ...)
 */
 /proc/BoundedCircularRandomCoordinate(radius, center_x, center_y, low_x, low_y, high_x, high_y, round)
+	RETURN_TYPE(/list)
 	var/list/xy = CircularRandomCoordinate(radius, round)
 	var/dx = xy[1]
 	var/dy = xy[2]
@@ -169,12 +171,14 @@
 
 /// Pick a random turf using BoundedCircularRandomCoordinate about x,y on level z
 /proc/CircularRandomTurf(radius, z, center_x, center_y, low_x = 1, low_y = 1, high_x = world.maxx, high_y = world.maxy)
+	RETURN_TYPE(/turf)
 	var/list/xy = BoundedCircularRandomCoordinate(radius, center_x, center_y, low_x, low_y, high_x, high_y, TRUE)
 	return locate(xy[1], xy[2], z)
 
 
 /// Pick a random turf using BoundedCircularRandomCoordinate around the turf of target
 /proc/CircularRandomTurfAround(atom/target, radius, low_x = 1, low_y = 1, high_x = world.maxx, high_y = world.maxy)
+	RETURN_TYPE(/turf)
 	var/turf/turf = get_turf(target)
 	return CircularRandomTurf(radius, turf.z, turf.x, turf.y, low_x, low_y, high_x, high_y)
 

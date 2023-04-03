@@ -83,6 +83,7 @@ var/global/list/meteors_cataclysm = list(\
 	return
 
 /proc/spaceDebrisStartLoc(startSide, Z)
+	RETURN_TYPE(/turf)
 	var/starty
 	var/startx
 	switch(startSide)
@@ -102,6 +103,7 @@ var/global/list/meteors_cataclysm = list(\
 	return T
 
 /proc/spaceDebrisFinishLoc(startSide, Z)
+	RETURN_TYPE(/turf)
 	var/endy
 	var/endx
 	switch(startSide)

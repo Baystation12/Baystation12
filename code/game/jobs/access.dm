@@ -89,6 +89,7 @@
 
 var/global/list/datum/access/priv_all_access_datums
 /proc/get_all_access_datums()
+	RETURN_TYPE(/list)
 	if(!priv_all_access_datums)
 		priv_all_access_datums = init_subtypes(/datum/access)
 		priv_all_access_datums = dd_sortedObjectList(priv_all_access_datums)
@@ -97,6 +98,7 @@ var/global/list/datum/access/priv_all_access_datums
 
 var/global/list/datum/access/priv_all_access_datums_id
 /proc/get_all_access_datums_by_id()
+	RETURN_TYPE(/list)
 	if(!priv_all_access_datums_id)
 		priv_all_access_datums_id = list()
 		for(var/datum/access/A in get_all_access_datums())
@@ -106,6 +108,7 @@ var/global/list/datum/access/priv_all_access_datums_id
 
 var/global/list/datum/access/priv_all_access_datums_region
 /proc/get_all_access_datums_by_region()
+	RETURN_TYPE(/list)
 	if(!priv_all_access_datums_region)
 		priv_all_access_datums_region = list()
 		for(var/datum/access/A in get_all_access_datums())
@@ -116,6 +119,7 @@ var/global/list/datum/access/priv_all_access_datums_region
 	return priv_all_access_datums_region.Copy()
 
 /proc/get_access_ids(access_types = ACCESS_TYPE_ALL)
+	RETURN_TYPE(/list)
 	var/list/L = new()
 	for(var/datum/access/A in get_all_access_datums())
 		if(A.access_type & access_types)
@@ -124,6 +128,7 @@ var/global/list/datum/access/priv_all_access_datums_region
 
 var/global/list/priv_all_access
 /proc/get_all_accesses()
+	RETURN_TYPE(/list)
 	if(!priv_all_access)
 		priv_all_access = get_access_ids()
 
@@ -131,6 +136,7 @@ var/global/list/priv_all_access
 
 var/global/list/priv_station_access
 /proc/get_all_station_access()
+	RETURN_TYPE(/list)
 	if(!priv_station_access)
 		priv_station_access = get_access_ids(ACCESS_TYPE_STATION)
 
@@ -138,6 +144,7 @@ var/global/list/priv_station_access
 
 var/global/list/priv_centcom_access
 /proc/get_all_centcom_access()
+	RETURN_TYPE(/list)
 	if(!priv_centcom_access)
 		priv_centcom_access = get_access_ids(ACCESS_TYPE_CENTCOM)
 
@@ -145,6 +152,7 @@ var/global/list/priv_centcom_access
 
 var/global/list/priv_syndicate_access
 /proc/get_all_syndicate_access()
+	RETURN_TYPE(/list)
 	if(!priv_syndicate_access)
 		priv_syndicate_access = get_access_ids(ACCESS_TYPE_SYNDICATE)
 
@@ -152,6 +160,7 @@ var/global/list/priv_syndicate_access
 
 var/global/list/priv_region_access
 /proc/get_region_accesses(code)
+	RETURN_TYPE(/list)
 	if(code == ACCESS_REGION_ALL)
 		return get_all_station_access()
 
@@ -200,6 +209,7 @@ var/global/list/priv_region_access
 	return AS[id]
 
 /proc/get_all_centcom_jobs()
+	RETURN_TYPE(/list)
 	return list("VIP Guest",
 		"Custodian",
 		"Thunderdome Overseer",
@@ -254,6 +264,7 @@ var/global/list/priv_region_access
 	return missing_id_name
 
 /proc/get_all_job_icons() //For all existing HUD icons
+	RETURN_TYPE(/list)
 	return SSjobs.titles_to_datums + list("Prisoner")
 
 /obj/proc/GetJobName() //Used in secHUD icon generation

@@ -246,6 +246,7 @@
 
 /// Create a new random simple coin at loc and return it.
 /proc/new_simple_coin(loc)
+	RETURN_TYPE(/obj/item/material/coin)
 	var/static/list/simple_coins = subtypesof(/obj/item/material/coin) - typesof(/obj/item/material/coin/challenge)
 	var/obj/item/material/coin = pick(simple_coins)
 	coin = new coin (loc)

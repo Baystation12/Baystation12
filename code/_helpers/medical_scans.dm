@@ -1,4 +1,5 @@
 /mob/living/carbon/human/proc/get_raw_medical_data(tag = FALSE)
+	RETURN_TYPE(/list)
 	var/mob/living/carbon/human/H = src
 	var/list/scan = list()
 
@@ -107,6 +108,7 @@
 	return scan
 
 /proc/display_medical_data_header(list/scan, skill_level = SKILL_DEFAULT)
+	RETURN_TYPE(/list)
 	//In case of problems, abort.
 	var/dat = list()
 
@@ -128,6 +130,7 @@
 	return dat
 
 /proc/display_medical_data_health(list/scan, skill_level = SKILL_DEFAULT)
+	RETURN_TYPE(/list)
 	//In case of problems, abort.
 	if(!scan["name"])
 		return "<center>[SPAN_BAD("<strong>SCAN READOUT ERROR.</strong>")]</center>"

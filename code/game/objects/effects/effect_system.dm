@@ -157,6 +157,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 //and to shortcut all that
 /proc/sparks(n = 3, c = 0, loca)
+	RETURN_TYPE(/datum/effect/effect/system/spark_spread)
 	var/datum/effect/effect/system/spark_spread/S = new
 	S.set_up(n, c, loca)
 	S.start()

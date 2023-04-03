@@ -1,5 +1,6 @@
 var/global/list/mob_hat_cache = list()
 /proc/get_hat_icon(obj/item/hat, offset_x = 0, offset_y = 0)
+	RETURN_TYPE(/image)
 	var/t_state = hat.icon_state
 	if(hat.item_state_slots && hat.item_state_slots[slot_head_str])
 		t_state = hat.item_state_slots[slot_head_str]

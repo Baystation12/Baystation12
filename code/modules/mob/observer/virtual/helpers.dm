@@ -14,6 +14,7 @@
 * Range Helpers *
 ****************/
 /proc/clients_in_range(atom/movable/center_vmob)
+	RETURN_TYPE(/list)
 	. = list()
 
 	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
@@ -23,6 +24,7 @@
 			. |= C
 
 /proc/hearers_in_range(atom/movable/center_vmob, hearing_range = world.view)
+	RETURN_TYPE(/list)
 	. = list()
 
 	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
@@ -31,6 +33,7 @@
 			. |= v_mob.host
 
 /proc/viewers_in_range(atom/movable/center_vmob)
+	RETURN_TYPE(/list)
 	. = list()
 
 	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
@@ -47,6 +50,7 @@
 
 // Gets the hosts of all the virtual mobs that can hear the given movable atom (or rather, it's virtual mob or turf in that existence order)
 /proc/all_hearers(atom/movable/heard_vmob, range = world.view)
+	RETURN_TYPE(/list)
 	. = list()
 
 	ACQUIRE_VIRTUAL_OR_TURF(heard_vmob)
@@ -67,6 +71,7 @@
 
 // Gets the hosts of all virtual mobs that can see the given atom movable as well as its turf
 /proc/all_viewers(mob/observer/virtual/viewed_atom)
+	RETURN_TYPE(/list)
 	. = list()
 
 	viewed_atom = istype(viewed_atom) ? viewed_atom.host : viewed_atom
@@ -84,6 +89,7 @@
 // This proc returns all hosts of virtual mobs in the given atom's view range (using its turf), ignoring invisibility, VIRUAL_ABILITY_SEE, and most other restrictions.
 // In most cases you actually want the all_* procs above. This helper was designed with LOOC in mind.
 /proc/hosts_in_view_range(atom/movable/viewing_atom)
+	RETURN_TYPE(/list)
 	. = list()
 
 	ACQUIRE_VIRTUAL_OR_TURF(viewing_atom)

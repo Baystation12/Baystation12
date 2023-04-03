@@ -9,6 +9,7 @@
  */
 
 /proc/text2numlist(text, delimiter="\n")
+	RETURN_TYPE(/list)
 	var/list/num_list = list()
 	for(var/x in splittext(text, delimiter))
 		num_list += text2num(x)
@@ -16,6 +17,7 @@
 
 // Splits the text of a file at seperator and returns them in a list.
 /proc/file2list(filename, seperator="\n")
+	RETURN_TYPE(/list)
 	return splittext(file2text(filename) || "", seperator)
 
 // Turns a direction into text
@@ -182,6 +184,7 @@
 	return ((y) % 4 == 0 && ((y) % 100 != 0 || (y) % 400 == 0))
 
 /proc/atomtypes2nameassoclist(list/atom_types)
+	RETURN_TYPE(/list)
 	. = list()
 	for(var/atom_type in atom_types)
 		var/atom/A = atom_type
@@ -189,8 +192,10 @@
 	. = sortAssoc(.)
 
 /proc/atomtype2nameassoclist(atom_type)
+	RETURN_TYPE(/list)
 	return atomtypes2nameassoclist(typesof(atom_type))
 
 //Splits the text of a file at seperator and returns them in a list.
 /world/proc/file2list(filename, seperator="\n")
+	RETURN_TYPE(/list)
 	return splittext(file2text(filename), seperator)

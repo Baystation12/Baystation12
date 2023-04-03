@@ -1,6 +1,7 @@
 GLOBAL_VAR(spawntypes)
 
 /proc/spawntypes()
+	RETURN_TYPE(/list)
 	if(!GLOB.spawntypes)
 		GLOB.spawntypes = list()
 		for(var/type in typesof(/datum/spawnpoint)-/datum/spawnpoint)

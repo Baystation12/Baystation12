@@ -211,6 +211,7 @@
 	return data
 
 /proc/blood_splatter(target,datum/reagent/blood/source,large,spray_dir)
+	RETURN_TYPE(/obj/effect/decal/cleanable/blood)
 
 	var/obj/effect/decal/cleanable/blood/B
 	var/decal_type = /obj/effect/decal/cleanable/blood/splatter

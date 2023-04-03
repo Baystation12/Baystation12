@@ -14,6 +14,7 @@
 
 // Global procs.
 /proc/get_antag_data(antag_type)
+	RETURN_TYPE(/datum/antagonist)
 	if(GLOB.all_antag_types_[antag_type])
 		return GLOB.all_antag_types_[antag_type]
 	else
@@ -42,12 +43,14 @@
 			antag.update_all_icons()
 
 /proc/get_antags(atype)
+	RETURN_TYPE(/list)
 	var/datum/antagonist/antag = GLOB.all_antag_types_[atype]
 	if(antag && islist(antag.current_antagonists))
 		return antag.current_antagonists
 	return list()
 
 /proc/player_is_antag(datum/mind/player, only_offstation_roles = 0)
+	RETURN_TYPE(/datum/antagonist)
 	var/list/all_antag_types = GLOB.all_antag_types_
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]

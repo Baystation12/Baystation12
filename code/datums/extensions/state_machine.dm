@@ -7,6 +7,7 @@ var/global/list/state_machines = list()
 		return islist(machines) && machines[base_type]
 
 /proc/add_state_machine(datum/holder, base_type, fsm_type)
+	RETURN_TYPE(/datum/state_machine)
 	if(istype(holder) && base_type)
 		var/holder_ref = "\ref[holder]"
 		var/list/machines = global.state_machines[holder_ref]

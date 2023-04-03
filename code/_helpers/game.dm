@@ -27,18 +27,20 @@
 	return FALSE
 
 /proc/get_area(O)
+	RETURN_TYPE(/area)
 	var/turf/loc = get_turf(O)
 	if(loc)
 		var/area/res = loc.loc
 		.= res
 
 /proc/get_area_name(N) //get area by its name
+	RETURN_TYPE(/area)
 	for(var/area/A in world)
 		if(A.name == N)
 			return A
-	return 0
 
 /proc/get_area_master(const/O)
+	RETURN_TYPE(/area)
 	var/area/A = get_area(O)
 	if (isarea(A))
 		return A
@@ -52,6 +54,7 @@
 // Like view but bypasses luminosity check
 
 /proc/hear(range, atom/source)
+	RETURN_TYPE(/list)
 
 	var/lum = source.luminosity
 	source.luminosity = 6
@@ -83,6 +86,7 @@
 	return level in GLOB.using_map.escape_levels
 
 /proc/circlerange(center=usr,radius=3)
+	RETURN_TYPE(/list)
 
 	var/turf/centerturf = get_turf(center)
 	var/list/turfs = new/list()
@@ -98,6 +102,7 @@
 	return turfs
 
 /proc/circleview(center=usr,radius=3)
+	RETURN_TYPE(/list)
 
 	var/turf/centerturf = get_turf(center)
 	var/list/atoms = new/list()
@@ -113,6 +118,7 @@
 	return atoms
 
 /proc/trange(rad = 0, turf/centre = null) //alternative to range (ONLY processes turfs and thus less intensive)
+	RETURN_TYPE(/list)
 	if(!centre)
 		return
 
@@ -129,6 +135,7 @@
 	return dist
 
 /proc/circlerangeturfs(center=usr,radius=3)
+	RETURN_TYPE(/list)
 	var/turf/centerturf = get_turf(center)
 	. = list()
 	if(!centerturf)
@@ -143,6 +150,7 @@
 			. += T
 
 /proc/circleviewturfs(center=usr,radius=3)		//Is there even a diffrence between this proc and circlerangeturfs()?
+	RETURN_TYPE(/list)
 
 	var/turf/centerturf = get_turf(center)
 	var/list/turfs = new/list()
@@ -164,6 +172,7 @@
 // being unable to hear people due to being in a box within a bag.
 
 /proc/recursive_content_check(atom/O,  list/L = list(), recursion_limit = 3, client_check = 1, sight_check = 1, include_mobs = 1, include_objects = 1)
+	RETURN_TYPE(/list)
 
 	if(!recursion_limit)
 		return L
@@ -192,6 +201,7 @@
 // Returns a list of mobs and/or objects in range of R from source. Used in radio and say code.
 
 /proc/get_mobs_or_objects_in_view(R, atom/source, include_mobs = 1, include_objects = 1)
+	RETURN_TYPE(/list)
 
 	var/turf/T = get_turf(source)
 	var/list/hear = list()
@@ -217,6 +227,7 @@
 
 
 /proc/get_mobs_in_radio_ranges(list/obj/item/device/radio/radios)
+	RETURN_TYPE(/list)
 
 	set background = 1
 
@@ -321,6 +332,7 @@
 		return 0
 
 /proc/get_cardinal_step_away(atom/start, atom/finish) //returns the position of a step from start away from finish, in one of the cardinal directions
+	RETURN_TYPE(/turf)
 	//returns only NORTH, SOUTH, EAST, or WEST
 	var/dx = finish.x - start.x
 	var/dy = finish.y - start.y
@@ -336,6 +348,7 @@
 			return get_step(start, EAST)
 
 /proc/get_mob_by_key(key)
+	RETURN_TYPE(/mob)
 	for(var/mob/M in SSmobs.mob_list)
 		if(M.ckey == lowertext(key))
 			return M
@@ -344,6 +357,7 @@
 
 // Will return a list of active candidates. It increases the buffer 5 times until it finds a candidate which is active within the buffer.
 /proc/get_active_candidates(buffer = 1)
+	RETURN_TYPE(/list)
 
 	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
 	var/i = 0
@@ -356,6 +370,7 @@
 	return candidates
 
 /proc/ScreenText(obj/O, maptext="", screen_loc="CENTER-7,CENTER-7", maptext_height=480, maptext_width=480)
+	RETURN_TYPE(/obj/screen)
 	if(!isobj(O))	O = new /obj/screen/text()
 	O.maptext = maptext
 	O.maptext_height = maptext_height
@@ -402,6 +417,7 @@
 	src.dest_y = dest_y
 
 /proc/projectile_trajectory(src_x, src_y, rotation, angle, power)
+	RETURN_TYPE(/datum/projectile_data)
 
 	// returns the destination (Vx,y) that a projectile shot at [src_x], [src_y], with an angle of [angle],
 	// rotated at [rotation] and with the power of [power]
@@ -428,6 +444,7 @@
 	return hex2num(copytext(hexa,6,8))
 
 /proc/GetHexColors(const/hexa)
+	RETURN_TYPE(/list)
 	return list(
 			GetRedPart(hexa),
 			GetGreenPart(hexa),
@@ -506,6 +523,7 @@
 	return ((temp + T0C))
 
 /proc/getCardinalAirInfo(turf/loc, list/stats=list("temperature"))
+	RETURN_TYPE(/list)
 	var/list/temps = new/list(4)
 	for(var/dir in GLOB.cardinal)
 		var/direction
@@ -550,6 +568,7 @@
 	return (length(GLOB.cult.current_antagonists) > spookiness_threshold)
 
 /proc/getviewsize(view)
+	RETURN_TYPE(/list)
 	var/viewX
 	var/viewY
 	if(isnum(view))

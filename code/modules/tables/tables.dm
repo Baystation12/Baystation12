@@ -469,6 +469,7 @@
 */
 
 /proc/dirs_to_corner_states(list/dirs)
+	RETURN_TYPE(/list)
 	if(!istype(dirs)) return
 
 	var/list/ret = list(NORTHWEST, SOUTHEAST, NORTHEAST, SOUTHWEST)

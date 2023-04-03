@@ -33,6 +33,7 @@ var/global/datum/sortInstance/sortInstance = new()
 
 
 /datum/sortInstance/proc/timSort(start, end)
+	RETURN_TYPE(/list)
 	runBases.Cut()
 	runLens.Cut()
 
@@ -571,6 +572,7 @@ reverse a descending sequence without violating stability.
 
 
 /datum/sortInstance/proc/mergeSort(start, end)
+	RETURN_TYPE(/list)
 	var/remaining = end - start
 
 	//If array is small, do an insertion sort

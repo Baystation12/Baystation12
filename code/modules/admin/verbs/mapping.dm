@@ -319,6 +319,7 @@ var/global/list/debug_verbs = list (
 	log_debug("There are [count] objects of type [type_path] in the game world")
 
 /proc/get_zas_image(turf/T, icon_state)
+	RETURN_TYPE(/image)
 	return image_repository.atom_image(T, 'icons/misc/debug_group.dmi', icon_state, plane = DEFAULT_PLANE, layer = ABOVE_TILE_LAYER)
 
 //Special for Cakey

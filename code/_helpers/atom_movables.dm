@@ -1,4 +1,5 @@
 /proc/get_turf_pixel(atom/movable/AM)
+	RETURN_TYPE(/turf)
 	if(!istype(AM))
 		return
 
@@ -29,6 +30,7 @@
 
 // Walks up the loc tree until it finds a holder of the given holder_type
 /proc/get_holder_of_type(atom/A, holder_type)
+	RETURN_TYPE(/atom)
 	if(!istype(A)) return
 	for(A, A && !istype(A, holder_type), A=A.loc);
 	return A
@@ -52,6 +54,7 @@
 		do_simple_ranged_interaction()
 
 /proc/get_atom_closest_to_atom(atom/a, list/possibilities)
+	RETURN_TYPE(/atom)
 	if(!possibilities || !length(possibilities))
 		return null
 	var/closest_distance = get_dist(a, possibilities[1])

@@ -37,6 +37,7 @@
 	var/list/receiver_reception = new
 
 /proc/get_message_server(z)
+	RETURN_TYPE(/obj/machinery/message_server)
 	if(message_servers)
 		var/list/zlevels = GLOB.using_map.contact_levels
 		if(z)
@@ -60,6 +61,7 @@
 	return TELECOMMS_RECEPTION_NONE
 
 /proc/get_reception(atom/sender, receiver, message = "", do_sleep = 1)
+	RETURN_TYPE(/datum/reception)
 	var/datum/reception/reception = new
 
 	// check if telecomms I/O route 1459 is stable
@@ -73,6 +75,7 @@
 	return reception
 
 /proc/get_receptions(atom/sender, list/atom/receivers, do_sleep = 1)
+	RETURN_TYPE(/datum/receptions)
 	var/datum/receptions/receptions = new
 	receptions.message_server = get_message_server()
 

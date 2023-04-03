@@ -319,6 +319,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 /// Retrieves a list of all fax machines matching the given department tag.
 /proc/get_fax_machines_by_department(department)
+	RETURN_TYPE(/list)
 	if (!department)
 		department = "Unknown"
 	var/list/faxes = list()

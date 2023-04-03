@@ -118,6 +118,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
  */
 
 /proc/get_test_datums()
+	RETURN_TYPE(/list)
 	. = list()
 	for(var/test in subtypesof(/datum/unit_test))
 		var/datum/unit_test/d = test

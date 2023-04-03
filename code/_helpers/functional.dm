@@ -80,6 +80,7 @@
 
 
 /proc/where(list/list_to_filter, list/predicates, list/extra_predicate_input)
+	RETURN_TYPE(/list)
 	. = list()
 	for(var/entry in list_to_filter)
 		var/predicate_input
@@ -92,6 +93,7 @@
 			. += entry
 
 /proc/map(list/list_to_map, map_proc)
+	RETURN_TYPE(/list)
 	. = list()
 	for(var/entry in list_to_map)
 		. += call(map_proc)(entry)

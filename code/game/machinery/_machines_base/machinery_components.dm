@@ -3,6 +3,7 @@
 GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 
 /proc/cache_circuits_by_build_path()
+	RETURN_TYPE(/list)
 	. = list()
 	for(var/board_path in subtypesof(/obj/item/stock_parts/circuitboard))
 		var/obj/item/stock_parts/circuitboard/board = board_path //fake type

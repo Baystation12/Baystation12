@@ -2,6 +2,7 @@
 	List generation helpers
 */
 /proc/get_filtered_areas(list/predicates = list(/proc/is_area_with_turf))
+	RETURN_TYPE(/list)
 	. = list()
 	if(!predicates)
 		return
@@ -12,6 +13,7 @@
 			. += A
 
 /proc/get_area_turfs(area/A, list/predicates)
+	RETURN_TYPE(/list)
 	. = new/list()
 	A = istype(A) ? A : locate(A)
 	if(!A)
@@ -21,6 +23,7 @@
 			. += T
 
 /proc/get_subarea_turfs(area/A, list/predicates)
+	RETURN_TYPE(/list)
 	. = new/list()
 	A = istype(A) ? A.type : A
 	if(!ispath(A))
@@ -32,11 +35,13 @@
 				. += T
 
 /proc/group_areas_by_name(list/predicates)
+	RETURN_TYPE(/list)
 	. = list()
 	for(var/area/A in get_filtered_areas(predicates))
 		group_by(., A.name, A)
 
 /proc/group_areas_by_z_level(list/predicates)
+	RETURN_TYPE(/list)
 	. = list()
 	for(var/area/A in get_filtered_areas(predicates))
 		group_by(., pad_left(num2text(A.z), 3, "0"), A)
@@ -45,21 +50,25 @@
 	Pick helpers
 */
 /proc/pick_subarea_turf(areatype, list/predicates)
+	RETURN_TYPE(/turf)
 	var/list/turfs = get_subarea_turfs(areatype, predicates)
 	if(LAZYLEN(turfs))
 		return pick(turfs)
 
 /proc/pick_area_turf(areatype, list/predicates)
+	RETURN_TYPE(/turf)
 	var/list/turfs = get_area_turfs(areatype, predicates)
 	if(turfs && length(turfs))
 		return pick(turfs)
 
 /proc/pick_area(list/predicates)
+	RETURN_TYPE(/area)
 	var/list/areas = get_filtered_areas(predicates)
 	if(LAZYLEN(areas))
 		. = pick(areas)
 
 /proc/pick_area_and_turf(list/area_predicates, list/turf_predicates)
+	RETURN_TYPE(/turf)
 	var/list/areas = get_filtered_areas(area_predicates)
 	// We loop over all area candidates, until we finally get a valid turf or run out of areas
 	while(!. && length(areas))
@@ -67,6 +76,7 @@
 		. = pick_area_turf(A, turf_predicates)
 
 /proc/pick_area_turf_in_connected_z_levels(list/area_predicates, list/turf_predicates, z_level)
+	RETURN_TYPE(/turf)
 	area_predicates = area_predicates.Copy()
 
 	var/z_levels = GetConnectedZlevels(z_level)
@@ -74,6 +84,7 @@
 	return pick_area_and_turf(area_predicates, turf_predicates)
 
 /proc/pick_area_turf_in_single_z_level(list/area_predicates, list/turf_predicates, z_level)
+	RETURN_TYPE(/turf)
 	area_predicates = area_predicates.Copy()
 	area_predicates[/proc/area_belongs_to_zlevels] = list(z_level)
 	return pick_area_and_turf(area_predicates, turf_predicates)

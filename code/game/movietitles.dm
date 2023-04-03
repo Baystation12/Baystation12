@@ -91,6 +91,7 @@ GLOBAL_LIST(end_titles)
 	return ..()
 
 /proc/generate_titles()
+	RETURN_TYPE(/list)
 	var/list/titles = list()
 	var/list/cast = list()
 	var/list/chunk = list()

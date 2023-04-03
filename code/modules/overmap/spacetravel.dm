@@ -41,6 +41,7 @@ var/global/list/cached_space = list()
 	return 1
 
 /proc/get_deepspace(x,y)
+	RETURN_TYPE(/obj/effect/overmap/visitable/sector/temporary)
 	var/turf/map = locate(x,y,GLOB.using_map.overmap_z)
 	var/obj/effect/overmap/visitable/sector/temporary/res
 	for(var/obj/effect/overmap/visitable/sector/temporary/O in map)

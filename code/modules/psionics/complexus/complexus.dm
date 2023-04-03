@@ -45,6 +45,7 @@
 	return _aura_image
 
 /proc/create_aura_image(newloc)
+	RETURN_TYPE(/image)
 	var/image/aura_image = image(loc = newloc, icon = 'icons/effects/psi_aura_small.dmi', icon_state = "aura")
 	aura_image.blend_mode = BLEND_MULTIPLY
 	aura_image.appearance_flags = DEFAULT_APPEARANCE_FLAGS | NO_CLIENT_COLOR | RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
