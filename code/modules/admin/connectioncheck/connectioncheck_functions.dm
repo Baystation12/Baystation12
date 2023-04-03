@@ -76,12 +76,9 @@
 			. += list(row)
 
 
-/proc/_find_bans_in_connections(ckey, ip, cid)
+/proc/_find_bans_in_connections(list/connections)
 	RETURN_TYPE(/list)
 	. = list()
-	var/list/connections = _fetch_connections(ckey, ip, cid)
-	if (!length(connections))
-		return
 	for (var/list/connection in connections)
 		. |= _fetch_bans(connection["ckey"], connection["ip"], connection["computerid"])
 
