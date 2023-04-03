@@ -1,7 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - tweak: In prefs, character gender has been divided into "bodytype" and "pronouns.
-  - tweak: Pronouns for most mobs can now be set separately from their gender.
-  - tweak: Mobs of a different faction will no longer recognize each other unless
-      introduced with the new "introduce" verb.
