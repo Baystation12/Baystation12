@@ -1808,7 +1808,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/engineering{
 	icon_state = "closed";
-	name = "Starboard Solar Access"
+	name = "Starboard Solar Access";
+	req_access = list(list("ACCESS_TORCH_CREW"));
+	autoset_access = 0
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
@@ -6122,7 +6124,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/maintenance,
+/obj/machinery/door/airlock/maintenance{
+	req_access = list(list("ACCESS_TORCH_CREW"));
+	autoset_access = 0
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -11034,7 +11039,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/engineering{
 	icon_state = "closed";
-	name = "Port Solar Access"
+	name = "Port Solar Access";
+	req_access = list(list("ACCESS_TORCH_CREW"));
+	autoset_access = 0
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable{
@@ -15233,7 +15240,10 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/maintenance,
+/obj/machinery/door/airlock/maintenance{
+	req_access = list(list("ACCESS_TORCH_CREW"));
+	autoset_access = 0
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/aftport)
 "OL" = (
@@ -16823,7 +16833,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
-/obj/machinery/door/airlock/maintenance,
+/obj/machinery/door/airlock/maintenance{
+	req_access = list(list("ACCESS_TORCH_CREW"));
+	autoset_access = 0
+	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/central)
