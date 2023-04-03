@@ -83,7 +83,7 @@
 	if (!length(connections))
 		return
 	for (var/list/connection in connections)
-		. |= _fetch_bans(ckey, ip, cid)
+		. |= _fetch_bans(connection["ckey"], connection["ip"], connection["computerid"])
 
 
 /**
