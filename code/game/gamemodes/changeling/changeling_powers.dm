@@ -211,7 +211,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	changeling_update_languages(changeling.absorbed_languages)
 
-	var/datum/absorbed_dna/newDNA = new(T.real_name, T.dna, T.species.name, T.languages)
+	var/datum/absorbed_dna/newDNA = new(T.real_name, T.dna, T.species.name, T.languages, T.pronouns)
 	absorbDNA(newDNA)
 
 	if(mind && T.mind)
@@ -301,6 +301,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	src.dna = chosen_dna.dna
 	src.real_name = chosen_dna.name
 	src.flavor_text = ""
+	src.pronouns = chosen_dna.pronouns
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src

@@ -315,11 +315,11 @@
 		target.set_dir(GLOB.reverse_dir[target.dir])
 
 /datum/species/nabber/get_additional_examine_text(mob/living/carbon/human/H)
-	var/datum/gender/T = gender_datums[H.get_gender()]
+	var/datum/pronouns/P = H.choose_from_pronouns()
 	if(H.pulling_punches)
-		return "\n[T.His] manipulation arms are out and [T.he] looks ready to use complex items."
+		return "\n[P.His] manipulation arms are out and [P.he] looks ready to use complex items."
 	else
-		return "\n[SPAN_WARNING("[T.His] deadly upper arms are raised and [T.he] looks ready to attack!")]"
+		return "\n[SPAN_WARNING("[P.His] deadly upper arms are raised and [P.he] looks ready to attack!")]"
 
 /datum/species/nabber/handle_post_spawn(mob/living/carbon/human/H)
 	..()
@@ -362,10 +362,10 @@
 /datum/species/nabber/toggle_stance(mob/living/carbon/human/H)
 	if(H.incapacitated())
 		return FALSE
-	var/datum/gender/T = gender_datums[H.get_gender()]
+	var/datum/pronouns/P = H.choose_from_pronouns()
 	to_chat(H, SPAN_NOTICE("You begin to adjust the fluids in your arms, dropping everything and getting ready to swap which set you're using."))
 	var/hidden = H.is_cloaked()
-	if(!hidden) H.visible_message(SPAN_WARNING("\The [H] shifts [T.his] arms."))
+	if(!hidden) H.visible_message(SPAN_WARNING("\The [H] shifts [P.his] arms."))
 	for (var/obj/item/item as anything in H.GetAllHeld())
 		H.unEquip(item)
 	if(do_after(H, 3 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
@@ -378,26 +378,26 @@
 	for (var/obj/item/item as anything in H.GetAllHeld())
 		H.unEquip(item)
 	var/hidden = H.is_cloaked()
-	var/datum/gender/T = gender_datums[H.get_gender()]
+	var/datum/pronouns/P = H.choose_from_pronouns()
 	H.pulling_punches = !H.pulling_punches
 	if(H.pulling_punches)
 		H.current_grab_type = all_grabobjects[GRAB_NORMAL]
 		if(forced)
 			to_chat(H, SPAN_NOTICE("You can't keep your hunting arms prepared and they drop, forcing you to use your manipulation arms."))
 			if(!hidden)
-				H.visible_message(SPAN_NOTICE("[H] falters, [T.his] hunting arms failing."))
+				H.visible_message(SPAN_NOTICE("[H] falters, [P.his] hunting arms failing."))
 		else
 			to_chat(H, SPAN_NOTICE("You relax your hunting arms, lowering the pressure and folding them tight to your thorax. \
 			You reach out with your manipulation arms, ready to use complex items."))
 			if(!hidden)
-				H.visible_message(SPAN_NOTICE("[H] seems to relax as [T.he] folds [T.his] massive curved arms to [T.his] thorax and reaches out \
-				with [T.his] small handlike limbs."))
+				H.visible_message(SPAN_NOTICE("[H] seems to relax as [P.he] folds [P.his] massive curved arms to [P.his] thorax and reaches out \
+				with [P.his] small handlike limbs."))
 	else
 		H.current_grab_type = all_grabobjects[GRAB_NAB]
 		to_chat(H, SPAN_NOTICE("You pull in your manipulation arms, dropping any items and unfolding your massive hunting arms in preparation of grabbing prey."))
 		if(!hidden)
-			H.visible_message(SPAN_WARNING("[H] tenses as [T.he] brings [T.his] smaller arms in close to [T.his] body. [T.His] two massive spiked arms reach \
-			out. [T.He] looks ready to attack."))
+			H.visible_message(SPAN_WARNING("[H] tenses as [P.he] brings [P.his] smaller arms in close to [P.his] body. [P.His] two massive spiked arms reach \
+			out. [P.He] looks ready to attack."))
 
 /datum/species/nabber/check_background(datum/job/job, datum/preferences/prefs)
 	var/singleton/cultural_info/culture/nabber/grade = SSculture.get_culture(prefs.cultural_info[TAG_CULTURE])

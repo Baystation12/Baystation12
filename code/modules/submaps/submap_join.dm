@@ -85,6 +85,7 @@
 			SScustomitems.equip_custom_items(user_human)
 
 		character.job = job.title
+		character.faction = name
 		if(character.mind)
 			character.mind.assigned_job = job
 			character.mind.assigned_role = character.job

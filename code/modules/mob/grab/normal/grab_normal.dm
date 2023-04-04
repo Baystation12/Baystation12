@@ -9,8 +9,8 @@
 	if(affecting != assailant)
 		visible_message(SPAN_WARNING("[assailant] has grabbed [affecting]'s [O.name]!"))
 	else
-		var/datum/gender/T = gender_datums[assailant.get_gender()]
-		visible_message(SPAN_NOTICE("[assailant] has grabbed [T.his] [O.name]!"))
+		var/datum/pronouns/P = assailant.choose_from_pronouns()
+		visible_message(SPAN_NOTICE("[assailant] has grabbed [P.his] [O.name]!"))
 
 	if(!(affecting.a_intent == I_HELP))
 		upgrade(TRUE)

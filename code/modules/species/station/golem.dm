@@ -36,6 +36,7 @@
 
 	death_message = "becomes completely motionless..."
 	genders = list(NEUTER)
+	pronouns = list(PRONOUNS_IT_ITS)
 
 	force_cultural_info = list(
 		TAG_CULTURE =   CULTURE_CULTIST,

@@ -19,7 +19,7 @@
 		fingerprint = md5(H.dna.uni_identity)
 	else
 		fingerprint = "N/A"
-	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species()]\nGender: [gender2text(H.gender)]\nAge: [H.age]\nPlace of Birth: [pob]\nFingerprint: [fingerprint]"
+	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species()]\ Pronouns: [H.pronouns]\nAge: [H.age]\nPlace of Birth: [pob]\nFingerprint: [fingerprint]"
 
 /obj/item/passport/attack_self(mob/user as mob)
 	user.visible_message(

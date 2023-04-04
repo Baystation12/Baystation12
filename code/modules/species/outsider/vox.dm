@@ -137,8 +137,8 @@
 		H.set_internals(H.back)
 
 /datum/species/vox/disfigure_msg(mob/living/carbon/human/H)
-	var/datum/gender/T = gender_datums[H.get_gender()]
-	return "[SPAN_DANGER("[T.His] beak-segments are cracked and chipped! [T.He] [T.is] not even recognizable.")]\n"
+	var/datum/pronouns/P = H.choose_from_pronouns()
+	return "[SPAN_DANGER("[P.His] beak-segments are cracked and chipped! [P.He] [P.is] not even recognizable.")]\n"
 
 /datum/species/vox/skills_from_age(age)
 	. = 8

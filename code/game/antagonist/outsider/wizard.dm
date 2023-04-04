@@ -16,6 +16,7 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 	min_player_age = 18
 
 	faction = "wizard"
+	no_prior_faction = TRUE
 	base_to_load = /datum/map_template/ruin/antag_spawn/wizard
 
 /datum/antagonist/wizard/create_objectives(datum/mind/wizard)

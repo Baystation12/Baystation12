@@ -26,7 +26,11 @@
 		if(!do_not_equip)
 			equip(player.current)
 
-	if(player.current)
+	if(faction && player.current)
+		if(no_prior_faction)
+			player.current.last_faction = faction
+		else
+			player.current.last_faction = player.current.faction
 		player.current.faction = faction
 	return 1
 
@@ -73,7 +77,11 @@
 		if (faction_verb)
 			player.current.verbs -= faction_verb
 		if (faction && player.current.faction == faction)
-			player.current.faction = MOB_FACTION_NEUTRAL
+			if(player.current.faction == player.current.last_faction)
+				player.current.faction = MOB_FACTION_NEUTRAL
+			else
+				player.current.faction = player.current.last_faction
+			player.current.last_faction = faction
 	if(player in current_antagonists)
 		to_chat(player.current, SPAN_DANGER(FONT_LARGE("You are no longer a [role_text]!")))
 		current_antagonists -= player

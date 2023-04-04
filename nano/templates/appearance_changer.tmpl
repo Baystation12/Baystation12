@@ -24,6 +24,19 @@
     </div>
 {{/if}}
 
+{{if data.change_pronouns}}
+	<div class="item">
+        <div class="itemLabelNarrow">
+           Pronouns:
+        </div>
+        <div class="itemContentWide">
+            {{for data.pronouns_list}}
+				{{:helper.link(value.pronouns_name, null, { 'pronouns' : value.pronouns_name}, null, data.pronouns == value.pronouns_key ? 'selected' : null)}}
+			{{/for}}
+        </div>
+    </div>
+{{/if}}
+
 {{if data.change_eye_color || data.change_skin_tone || data.change_skin_color || data.change_hair_color || data.change_facial_hair_color}}
     <div class="item">
         <div class="itemLabelNarrow">
