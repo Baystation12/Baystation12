@@ -120,7 +120,7 @@
 
 /client/proc/fetch_bans()
 	RETURN_TYPE(/list)
-	return _fetch_bans(ckey, address, computer_id)
+	return _find_bans_in_connections(fetch_connections())
 
 
 /mob/proc/fetch_connections()
@@ -132,9 +132,7 @@
 
 /mob/proc/fetch_bans()
 	RETURN_TYPE(/list)
-	if (client)
-		return client.fetch_bans()
-	return _fetch_bans(ckey ? ckey : last_ckey, lastKnownIP, computer_id)
+	return _find_bans_in_connections(fetch_connections())
 
 
 // Temporary debugging and testing functions
