@@ -3,7 +3,7 @@
 	icon_state = "buildmode8"
 
 	var/light_outer_range = 3
-	var/light_max_bright = 3
+	var/light_max_bright = 1
 	var/light_color = COLOR_WHITE
 
 /datum/build_mode/light_maker/Help()

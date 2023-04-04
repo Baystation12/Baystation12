@@ -7,7 +7,7 @@
 /obj/structure/hygiene/sink/attack_hand(mob/user)
 	var/graffiti = FALSE
 	var/target_part = "hands"
-	if (ishuman(user))
+	if (ishuman(user) && user.client)
 		var/mob/living/carbon/human/H = user
 		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
 		var/target_zone = H.zone_sel.selecting

@@ -105,7 +105,7 @@ Class Procs:
 		//Check for knocking people over
 		if(ismob(AM) && differential > vsc.airflow_stun_pressure)
 			var/mob/M = AM
-			invoke_async(M, /mob/proc/playsound_local, null, 'sound/effects/airflow.ogg', 100, FALSE)
+			invoke_async(M, /mob/proc/playsound_local, null, 'sound/effects/airflow.ogg', 28, FALSE)
 			if(M.status_flags & GODMODE)
 				continue
 			M.airflow_stun()

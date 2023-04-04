@@ -134,7 +134,7 @@
 	if(!sound_id)
 		sound_id = "[sequential_id("vent_z[z]")]"
 	if(can_pump())
-		sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/ambience/vent_hum.ogg', 10, range = 7, falloff = 4)
+		sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/ambience/vent_hum.ogg', 20, range = 1, falloff = 1)
 	else
 		QDEL_NULL(sound_token)
 
