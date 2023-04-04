@@ -155,6 +155,18 @@
 			message_staff("[key_name_admin(src)] has joined the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]")
 			break
 
+	// Check connections
+	var/list/connections = fetch_connections()
+	var/list/ckeys = _unique_ckeys_from_connections(connections) - ckey
+	if (length(ckeys))
+		log_debug("[key_name_admin(src)] has connection details associated with other ckeys in the log: [english_list(ckeys)]")
+
+	// Check bans
+	var/list/bans = _find_bans_in_connections(connections)
+	ckeys = _unique_ckeys_from_connections(bans)
+	if (length(bans))
+		log_debug("[key_name_admin(src)] has connection details associated with active bans: [english_list(ckeys)]")
+
 	// Change the way they should download resources.
 	if(config.resource_urls && length(config.resource_urls))
 		src.preload_rsc = pick(config.resource_urls)

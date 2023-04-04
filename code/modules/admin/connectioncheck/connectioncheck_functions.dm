@@ -76,14 +76,41 @@
 			. += list(row)
 
 
-/proc/_find_bans_in_connections(ckey, ip, cid)
+/proc/_find_bans_in_connections(list/connections)
 	RETURN_TYPE(/list)
 	. = list()
-	var/list/connections = _fetch_connections(ckey, ip, cid)
-	if (!length(connections))
-		return
 	for (var/list/connection in connections)
-		. |= _fetch_bans(ckey, ip, cid)
+		. |= _fetch_bans(connection["ckey"], connection["ip"], connection["computerid"])
+
+
+/**
+ * Returns a list containing only each unique ckey present in a list of connections provided by `_fetch_connections()`.
+ */
+/proc/_unique_ckeys_from_connections(list/connections)
+	RETURN_TYPE(/list)
+	. = list()
+	for (var/list/connection in connections)
+		. |= connection["ckey"]
+
+
+/**
+ * Returns a list containing only each unique CID present in a list of connections provided by `_fetch_connections()`.
+ */
+/proc/_unique_cids_from_connections(list/connections)
+	RETURN_TYPE(/list)
+	. = list()
+	for (var/list/connection in connections)
+		. |= connection["computerid"]
+
+
+/**
+ * Returns a list containing only each unique IP present in a list of connections provided by `_fetch_connections()`.
+ */
+/proc/_unique_ips_from_connections(list/connections)
+	RETURN_TYPE(/list)
+	. = list()
+	for (var/list/connection in connections)
+		. |= connection["ip"]
 
 
 /client/proc/fetch_connections()
@@ -93,7 +120,7 @@
 
 /client/proc/fetch_bans()
 	RETURN_TYPE(/list)
-	return _fetch_bans(ckey, address, computer_id)
+	return _find_bans_in_connections(fetch_connections())
 
 
 /mob/proc/fetch_connections()
@@ -105,9 +132,7 @@
 
 /mob/proc/fetch_bans()
 	RETURN_TYPE(/list)
-	if (client)
-		return client.fetch_bans()
-	return _fetch_bans(ckey ? ckey : last_ckey, lastKnownIP, computer_id)
+	return _find_bans_in_connections(fetch_connections())
 
 
 // Temporary debugging and testing functions
