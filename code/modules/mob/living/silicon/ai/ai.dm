@@ -97,12 +97,12 @@ var/global/list/ai_verbs_default = list(
 	var/last_failed_malf_message = null
 	var/last_failed_malf_title = null
 
-	var/datum/ai_icon/selected_sprite			// The selected icon set
+	var/singleton/ai_icon/selected_sprite			// The selected icon set
 	var/carded
 
 	var/multitool_mode = 0
 
-	var/default_ai_icon = /datum/ai_icon/blue
+	var/default_ai_icon = /singleton/ai_icon/blue
 	var/static/list/custom_ai_icons_by_ckey_and_name
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
@@ -268,7 +268,7 @@ var/global/list/ai_verbs_default = list(
 			if(!(dead_icon_state in custom_icon_states))
 				dead_icon_state = ""
 
-			selected_sprite = new/datum/ai_icon("Custom Icon [custom_index++]", alive_icon_state, dead_icon_state, COLOR_WHITE, CUSTOM_ITEM_SYNTH)
+			selected_sprite = new/singleton/ai_icon("Custom Icon [custom_index++]", alive_icon_state, dead_icon_state, COLOR_WHITE, CUSTOM_ITEM_SYNTH)
 			custom_icons += selected_sprite
 	update_icon()
 
@@ -299,9 +299,9 @@ var/global/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/available_icons()
 	. = list()
-	var/all_ai_icons = GET_SINGLETON_SUBTYPE_MAP(/datum/ai_icon)
+	var/all_ai_icons = GET_SINGLETON_SUBTYPE_MAP(/singleton/ai_icon)
 	for(var/ai_icon_type in all_ai_icons)
-		var/datum/ai_icon/ai_icon = all_ai_icons[ai_icon_type]
+		var/singleton/ai_icon/ai_icon = all_ai_icons[ai_icon_type]
 		if(ai_icon.may_used_by_ai(src))
 			dd_insertObjectList(., ai_icon)
 
