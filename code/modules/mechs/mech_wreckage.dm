@@ -6,6 +6,8 @@
 	anchored = TRUE
 	icon_state = "wreck"
 	icon = 'icons/mecha/mech_part_items.dmi'
+	health_max = 100
+	health_min_damage = 20
 	var/prepared
 
 /obj/structure/mech_wreckage/New(newloc, mob/living/exosuit/exosuit, gibbed)
@@ -41,6 +43,14 @@
 			to_chat(user, "You retrieve \the [thing] from \the [src].")
 			return
 	return ..()
+
+
+/obj/structure/mech_wreckage/on_death()
+	. = ..()
+	visible_message(SPAN_WARNING("\The [src] breaks apart!"))
+	new /obj/item/stack/material/steel(loc, rand(1, 3))
+	qdel_self()
+
 
 /obj/structure/mech_wreckage/attackby(obj/item/W, mob/user)
 
