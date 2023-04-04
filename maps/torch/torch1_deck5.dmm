@@ -1301,6 +1301,9 @@
 	dir = 1
 	},
 /obj/structure/table/steel,
+/obj/item/device/drone_designator{
+	network = "torch_transport"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cargo)
 "cK" = (
@@ -1424,6 +1427,9 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4;
 	icon_state = "warningcorner"
+	},
+/obj/item/device/drone_designator{
+	network = "torch_transport"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
@@ -4610,6 +4616,12 @@
 /obj/effect/floor_decal/corner/mauve{
 	dir = 10
 	},
+/obj/item/device/drone_designator{
+	network = "torch_transport"
+	},
+/obj/item/device/drone_designator{
+	network = "torch_transport"
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "kz" = (
@@ -7185,6 +7197,12 @@
 	},
 /obj/item/clothing/glasses/meson{
 	pixel_y = -4
+	},
+/obj/item/device/drone_designator{
+	network = "torch_transport"
+	},
+/obj/item/device/drone_designator{
+	network = "torch_transport"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition)
@@ -13574,6 +13592,12 @@
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/rd)
+"Kf" = (
+/obj/machinery/drone_pad{
+	initial_id_tag = "torch_transport"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/quartermaster/hangar)
 "Kh" = (
 /obj/structure/table/standard,
 /obj/item/folder/nt,
@@ -37195,7 +37219,7 @@ bi
 bi
 bi
 fS
-aX
+Kf
 aJ
 mU
 wj
@@ -37397,7 +37421,7 @@ bi
 bi
 bi
 fS
-aX
+Kf
 aJ
 mU
 vO
