@@ -72,7 +72,6 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 
 
 /obj/item/stack/cable_coil/on_update_icon()
-	color = COLOR_MAROON
 	switch (amount)
 		if (1)
 			icon_state = "coil1"
@@ -157,8 +156,7 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 /obj/item/stack/cable_coil/proc/CreateCable(turf/target, mob/living/user, from_dir, to_dir)
 	if(!isturf(target))
 		return
-	var/obj/structure/cable/cable = new (target)
-	cable.set_color(color)
+	var/obj/structure/cable/cable = new (target, color)
 	cable.d1 = from_dir
 	cable.d2 = to_dir
 	cable.add_fingerprint(user)
