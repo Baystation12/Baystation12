@@ -154,13 +154,13 @@
 	var/list/connections = fetch_connections()
 	var/list/ckeys = _unique_ckeys_from_connections(connections) - ckey
 	if (length(ckeys))
-		log_debug("[key_name_admin(src)] has connection details associated with other ckeys in the log: [english_list(ckeys)]")
+		log_and_message_staff(SPAN_INFO("[key_name_admin(src)] has connection details associated with other ckeys in the log: [english_list(ckeys)]"))
 
 	// Check bans
 	var/list/bans = _find_bans_in_connections(connections)
 	ckeys = _unique_ckeys_from_connections(bans)
 	if (length(bans))
-		log_debug("[key_name_admin(src)] has connection details associated with active bans: [english_list(ckeys)]")
+		log_and_message_staff(SPAN_DANGER("[key_name_admin(src)] has connection details associated with active bans: [english_list(ckeys)]"))
 
 	// Change the way they should download resources.
 	if(config.resource_urls && length(config.resource_urls))
