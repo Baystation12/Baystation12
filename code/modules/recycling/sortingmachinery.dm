@@ -15,6 +15,11 @@
 	var/tag_x
 
 
+/obj/structure/bigDelivery/Destroy()
+	QDEL_NULL(wrapped)
+	return ..()
+
+
 /obj/structure/bigDelivery/damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)
 	// It's only paper. No protection for anything inside.
 	var/content_damage = damage / length(contents)
@@ -156,6 +161,11 @@
 	var/examtext = null
 	var/nameset = 0
 	var/tag_x
+
+
+/obj/item/smallDelivery/Destroy()
+	QDEL_NULL(wrapped)
+	return ..()
 
 
 /obj/item/smallDelivery/damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)
