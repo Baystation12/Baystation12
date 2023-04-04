@@ -4,14 +4,14 @@
     {
       "type": "byond",
       "request": "launch",
-      "name": "DS Debug",
+      "name": "Build & DS Debug",
+      "preLaunchTask": "dm: build - ${command:CurrentDME}",
       "dmb": "${workspaceFolder}/${command:CurrentDMB}"
     },
     {
       "type": "byond",
       "request": "launch",
-      "name": "Build & DS Debug",
-      "preLaunchTask": "dm: build - ${command:CurrentDME}",
+      "name": "DS Debug",
       "dmb": "${workspaceFolder}/${command:CurrentDMB}"
     }
   ]
