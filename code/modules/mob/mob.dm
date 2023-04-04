@@ -1268,7 +1268,7 @@
 
 /mob/proc/knows_target(mob/M)
 	if(mind)
-		if((M in mind.known_mobs) || (M.faction == faction) || (M.last_faction == faction) || (M.faction == last_faction))
+		if((M in mind.known_mobs) || (M.faction == faction) || (M.last_faction == faction) || (M.faction == last_faction) || isghost(src))
 			return TRUE
 		else
 			return FALSE
