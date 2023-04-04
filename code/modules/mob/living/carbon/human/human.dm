@@ -912,7 +912,8 @@
 
 /mob/living/carbon/human/choose_from_pronouns()
 	if(wear_suit && wear_suit.flags_inv & HIDEJUMPSUIT && ((head && head.flags_inv & HIDEMASK) || wear_mask))
-		return PRONOUNS_THEY_THEM
+		var/datum/pronouns/P = GLOB.pronouns.by_key[PRONOUNS_THEY_THEM]
+		return P
 	return ..()
 
 /mob/living/carbon/human/proc/increase_germ_level(n)

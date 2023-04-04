@@ -8,6 +8,7 @@
 	name = "Warrant Officer Punitelli"
 	real_name = name
 	gender = MALE
+	faction = MOB_FACTION_CREW
 	var/obj/item/clothing/C
 	C = new /obj/item/clothing/under/solgov/utility/expeditionary/monkey(src)
 	equip_to_appropriate_slot(C)
