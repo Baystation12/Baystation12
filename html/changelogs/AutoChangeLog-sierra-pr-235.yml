@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - admin: Connecting clients are now checked for association with other known users
+      and active bans. Any matches are displayed as debug logs for testing purposes.
