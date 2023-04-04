@@ -67,10 +67,18 @@
 		become_airtight()
 		return
 	if (isWrench(W))
-		if (airtight)
-			to_chat(user,"You have to readjust the airflow before unwrenching \the [src].")
-			return
-		wrench_floor_bolts(user)
+		return ..()
+
+
+/obj/structure/plasticflaps/can_anchor(obj/item/tool, mob/user, silent)
+	. = ..()
+	if (!.)
+		return
+	if (airtight)
+		if (!silent)
+			USE_FEEDBACK_FAILURE("You have to readjust the airflow before unwrenching \the [src].")
+		return FALSE
+
 
 /obj/structure/plasticflaps/ex_act(severity)
 	switch(severity)

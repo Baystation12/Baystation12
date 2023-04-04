@@ -297,8 +297,7 @@
 				to_chat(user, SPAN_NOTICE("Some items were refused."))
 
 	else if ((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(O))
-		wrench_floor_bolts(user)
-		power_change()
+		return ..()
 
 	else
 		to_chat(user, SPAN_NOTICE("\The [src] smartly refuses [O]."))

@@ -59,16 +59,6 @@
 	return TRUE
 
 
-/obj/machinery/jukebox/attackby(obj/item/I, mob/user)
-	if (isWrench(I))
-		add_fingerprint(user)
-		wrench_floor_bolts(user, 0)
-		power_change()
-		return
-	return ..()
-
-
-
 /obj/machinery/jukebox/old
 	name = "space jukebox"
 	desc = "A battered and hard-loved jukebox in some forgotten style, carefully restored to some semblance of working condition."

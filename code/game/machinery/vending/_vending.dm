@@ -180,9 +180,7 @@
 	if ((. = component_attackby(item, user)))
 		return
 	if ((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(item))
-		wrench_floor_bolts(user)
-		power_change()
-		return
+		return ..()
 
 
 /obj/machinery/vending/MouseDrop_T(obj/item/item, mob/living/user)
