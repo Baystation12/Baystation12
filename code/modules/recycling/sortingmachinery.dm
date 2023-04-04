@@ -133,7 +133,11 @@
 	var/tag_x
 
 /obj/item/smallDelivery/proc/unwrap(mob/user)
-	if (!length(contents) || !Adjacent(user))
+	if (!Adjacent(user))
+		return
+	if (!length(contents))
+		to_chat(user, SPAN_NOTICE("\The [src] was empty!"))
+		qdel_self()
 		return
 
 	user.put_in_hands(wrapped)
