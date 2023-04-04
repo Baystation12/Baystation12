@@ -1,0 +1,7 @@
+author: cuddleandtea
+delete-after: true
+changes:
+  - admin: Light maker power shouldn't be more than 1
+  - sounddel: Vent pump humm is now more quiet
+  - sounddel: Airflow sound is way more quiet now
+  - bugfix: mobs face wash runtime fixed
