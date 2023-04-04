@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Cable coils no longer reset to red when their icon is updated. This corrects
-      both coils changing when you place a cable, and cut cables being red.
