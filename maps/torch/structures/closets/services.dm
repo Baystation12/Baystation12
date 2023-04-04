@@ -63,7 +63,8 @@
 		/obj/item/soap,
 		/obj/item/reagent_containers/glass/rag,
 		/obj/item/storage/belt/janitor,
-		/obj/item/clothing/glasses/hud/janitor
+		/obj/item/clothing/glasses/hud/janitor,
+		/obj/item/grenade/chem_grenade/cleaner = 2
 	)
 
 /obj/structure/closet/secure_closet/bar_torch
