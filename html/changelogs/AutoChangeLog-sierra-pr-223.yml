@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Anchoring/unanchoring objects with a wrench has been refactored with some
+      standardized sanity checks.
