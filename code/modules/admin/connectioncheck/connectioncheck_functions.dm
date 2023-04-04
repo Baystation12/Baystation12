@@ -53,7 +53,8 @@
 	var/DBQuery/query = dbcon.NewQuery("\
 		SELECT `bantime`, `bantype`, `reason`, `job`, `duration`, `expiration_time`, `ckey`, `ip`, `computerid`, `a_ckey`, `unbanned`\
 			FROM `erro_ban`\
-			WHERE `ckey` = '[ckey]' OR `ip` = '[ip]' OR `computerid` = '[cid]'\
+			WHERE `bantype` IN ('PERMABAN', 'TEMPBAN') AND \
+			(`ckey` = '[ckey]' OR `ip` = '[ip]' OR `computerid` = '[cid]')\
 	")
 	query.Execute()
 	var/now = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
