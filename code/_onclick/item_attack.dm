@@ -148,6 +148,18 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (!.)
 		return
 
+	// Unmodifiable area check
+	var/area/area = get_area(src)
+	if (!area?.can_modify_area())
+		USE_FEEDBACK_FAILURE("This area does not allow structural modifications.")
+		return FALSE
+
+
+/turf/can_use_item(obj/item/tool, mob/user, click_params)
+	. = ..()
+	if (!.)
+		return
+
 	// Catwalks
 	var/obj/structure/catwalk/catwalk = locate() in src
 	if (catwalk)
