@@ -279,17 +279,17 @@
 
 /datum/reagent/drink/milk/cream
 	name = "Cream"
-	description = "The fatty, still liquid part of milk. Why don't you mix this with sum scotch, eh?" // Or give it to a cat?
+	description = "The fatty, still liquid part of milk. Why don't you mix this with sum scotch, eh?"
 	taste_description = "creamy milk"
 	color = "#dfd7af"
 
 	glass_name = "cream"
-	glass_desc = "Ewwww..." // Ewwww yourself, this is delicious.
+	glass_desc = "Ewwww..."
 	protein_amount = 1
 
 /datum/reagent/drink/milk/soymilk
 	name = "Soy Milk"
-	description = "An opaque white liquid made from soybeans." // Honestly, Evie, why the fuck do you drink soy latte and stuff like this?
+	description = "An opaque white liquid made from soybeans."
 	taste_description = "soy milk"
 	color = "#dfdfc7"
 
@@ -415,7 +415,7 @@
 	taste_description = "bitter creamy chocolate"
 
 	glass_name = "mocha soy latte"
-	glass_desc = "Coffee, soy, and chocolate, smooth and creamy. You are a culinary pervert"
+	glass_desc = "Coffee, soy, and chocolate, smooth and creamy. You are a culinary pervert."
 
 /datum/reagent/drink/coffee/icecoffee/cafe_latte/mocha
 	name = "Iced Mocha Latte"
@@ -428,11 +428,11 @@
 
 /datum/reagent/drink/coffee/icecoffee/soy_latte/mocha
 	name = "Iced Soy Mocha Latte"
-	description = "Coffee, soy, and chocolate, smooth and creamy. This one's cold."
+	description = "Coffee, soy, and chocolate, smooth and creamy. You are a culinary pervert. This one's cold."
 	taste_description = "cold bitter creamy chocolate"
 
 	glass_name = "iced soy mocha latte"
-	glass_desc = "Coffee, soy, and chocolate, smooth and creamy. This one's cold."
+	glass_desc = "Coffee, soy, and chocolate, smooth and creamy. You are a culinary pervert. This one's cold."
 
 /datum/reagent/drink/coffee/cafe_latte/pumpkin
 	name = "Pumpkin Spice Latte"
@@ -461,11 +461,11 @@
 
 /datum/reagent/drink/coffee/icecoffee/soy_latte/pumpkin
 	name = "Iced Pumpkin Spice Soy Latte"
-	description = "Smells and tastes like Autumn. This one's cold"
+	description = "Smells and tastes like Autumn. You are a culinary pervert. This one's cold"
 	taste_description = "cold bitter creamy pumpkin spice"
 
 	glass_name = "iced pumpkin spice soy latte"
-	glass_desc = "Smells and tastes like Autumn. This one's cold."
+	glass_desc = "Smells and tastes like Autumn. You are a culinary pervert. This one's cold."
 
 /datum/reagent/drink/hot_coco
 	name = "Hot Chocolate"
