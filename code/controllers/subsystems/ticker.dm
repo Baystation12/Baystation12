@@ -357,7 +357,7 @@ Helpers
 
 /datum/controller/subsystem/ticker/proc/create_characters()
 	for(var/mob/new_player/player in GLOB.player_list)
-		if(player && player.ready && player.mind)
+		if(player && player.ready && player.mind && !player.spawning)
 
 			if(player.mind.assigned_role=="AI")
 				player.close_spawn_windows()

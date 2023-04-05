@@ -35,7 +35,7 @@
 	hotkey_keys = list("F11")
 	name = "toggle_fullscreen"
 	full_name = "Toggle Fullscreen"
-	description = "Take a screenshot"
+	description = "Opens game in fullscreen / Collapses to window"
 
 /datum/keybinding/client/toggle_fullscreen/down(client/user)
 	user.toggle_fullscreen()

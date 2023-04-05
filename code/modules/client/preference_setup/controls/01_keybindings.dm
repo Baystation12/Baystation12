@@ -164,7 +164,7 @@
 		if("keybindings_set")
 			var/kb_name = href_list["keybinding"]
 			if(!kb_name)
-				show_browser(user, null, "window=capturekeypress")
+				close_browser(user, "window=capturekeypress")
 				return TOPIC_REFRESH
 
 			var/clear_key = text2num(href_list["clear_key"])
@@ -176,7 +176,7 @@
 						LAZYADD(pref.key_bindings["None"], kb_name)
 					if(!length(pref.key_bindings[old_key]))
 						pref.key_bindings -= old_key
-				show_browser(user, null, "window=capturekeypress")
+				close_browser(user, "window=capturekeypress")
 				user.client.set_macros()
 				return TOPIC_REFRESH
 
@@ -187,7 +187,7 @@
 			var/numpad = text2num(href_list["numpad"]) ? "Numpad" : ""
 
 			if(!new_key) // Just in case (; - not work although keyCode 186 and nothing should break)
-				show_browser(user, null, "window=capturekeypress")
+				close_browser(user, "window=capturekeypress")
 				return TOPIC_REFRESH
 
 			if(global._kbMap[new_key])
@@ -212,7 +212,7 @@
 			pref.key_bindings[full_key] += list(kb_name)
 			pref.key_bindings[full_key] = sortTim(pref.key_bindings[full_key], /proc/cmp_text_asc)
 
-			show_browser(user, null, "window=capturekeypress")
+			close_browser(user, "window=capturekeypress")
 			user.client.set_macros()
 			return TOPIC_REFRESH
 

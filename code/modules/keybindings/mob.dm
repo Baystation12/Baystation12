@@ -122,7 +122,7 @@
 	return TRUE
 
 /datum/keybinding/mob/move_up
-	hotkey_keys = list(",")
+	hotkey_keys = list(",", "=")
 	name = "move_up"
 	full_name = "Move Up"
 	description = "Makes you go up"
@@ -132,7 +132,7 @@
 	M.move_up()
 
 /datum/keybinding/mob/move_down
-	hotkey_keys = list(".")
+	hotkey_keys = list(".", "-")
 	name = "move_down"
 	full_name = "Move Down"
 	description = "Makes you go down"

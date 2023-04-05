@@ -10,6 +10,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 /datum/computer_file/report/crew_record
 	filetype = "CDB"
 	size = 2
+	var/icon/photo_clean_front = null // SIERRA: for AI use
 	var/icon/photo_front = null
 	var/icon/photo_side = null
 	var/static/icon/mugshot = icon('icons/obj/mugshot.dmi', "background")
@@ -29,10 +30,14 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		photo_front.Blend(mugshot,ICON_UNDERLAY,1,1)
 		photo_side = getFlatIcon(H, WEST, always_use_defdir = TRUE)
 		photo_side.Blend(mugshot,ICON_UNDERLAY,1,1)
+
+		photo_clean_front = getFlatIcon(H, SOUTH, always_use_defdir = TRUE) // SIERRA
 	else
 		var/mob/living/carbon/human/dummy = new()
 		photo_front = getFlatIcon(dummy, SOUTH, always_use_defdir = TRUE)
 		photo_side = getFlatIcon(dummy, WEST, always_use_defdir = TRUE)
+
+		photo_clean_front = photo_front // SIERRA
 		qdel(dummy)
 
 	// Add honorifics, etc.
