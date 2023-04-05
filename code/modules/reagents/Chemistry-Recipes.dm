@@ -2219,6 +2219,24 @@
 	required_reagents = list(/datum/reagent/drink/juice/lemon = 1, /datum/reagent/sugar = 1, /datum/reagent/water = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/starch
+	name = "Potato Starch"
+	result = /datum/reagent/nutriment/starch
+	required_reagents = list(/datum/reagent/drink/juice/potato = 1)
+	minimum_temperature = 40 CELSIUS
+
+/datum/chemical_reaction/starch_dilution
+	name = "Diluted Starch"
+	result = /datum/reagent/nutriment/starch/diluted
+	required_reagents = list(/datum/reagent/nutriment/starch = 1, /datum/reagent/water = 1)
+
+/datum/chemical_reaction/kissel/berry
+	name = "Berry Kissel"
+	result = /datum/reagent/drink/kissel/berry
+	required_reagents = list(/datum/reagent/drink/juice/berry = 1, /datum/reagent/sugar = 1, /datum/reagent/nutriment/starch/dilluted = 1)
+	result_amount = 3
+	minimum_temperature = 60 CELSIUS
+
 /datum/chemical_reaction/kiraspecial
 	name = "Kira Special"
 	result = /datum/reagent/drink/kiraspecial

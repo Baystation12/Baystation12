@@ -290,6 +290,22 @@
 	if(volume >= 3)
 		T.wet_floor()
 
+/datum/reagent/nutriment/starch
+	name = "Starch"
+	description = "A powder derived from potato."
+	taste_description = "chalky potato"
+	reagent_state = SOLID
+	nutriment_factor = 1
+	color = "#ffffff"
+
+/datum/reagent/nutriment/starch/diluted
+	name = "Diluted Starch"
+	description = "Starch diluted in water, ready to serve as a drink base."
+	taste_description = "gooey potato"
+	reagent_state = LIQUID
+	nutriment_factor = 1
+	color = "#ffffff"
+
 /datum/reagent/nutriment/sprinkles
 	name = "Sprinkles"
 	description = "Multi-colored little bits of sugar, commonly found on donuts. Loved by cops."

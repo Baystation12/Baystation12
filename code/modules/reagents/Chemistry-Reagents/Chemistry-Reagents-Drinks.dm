@@ -97,7 +97,7 @@
 	color = "#365e30"
 
 	glass_name = "lime juice"
-	glass_desc = "A glass of sweet-sour lime juice"
+	glass_desc = "A glass of sweet-sour lime juice."
 
 /datum/reagent/drink/juice/lime/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -234,6 +234,19 @@
 
 	glass_name = "lettuce juice"
 	glass_desc = "This is just lettuce water. Fresh but boring."
+
+// Kissels
+
+/datum/reagent/drink/kissel/berry
+	name = "Berry Kissel"
+	description = "A delicious jelly-like sweet drink, boiled of several different kinds of berries. Dietary and delicious."
+	taste_description = "viscous berries and sugar"
+	nutrition = 0.3 // Fact: kissel is actually 49 KCAL while garlic juice is 149 KCAL. Dietary and delicious.
+	color = "#7e0059"
+	adj_temp = 6.25
+
+	glass_name = "berry kissel"
+	glass_desc = "Berry kissel. Dietary and delicious."
 
 // Everything else
 
