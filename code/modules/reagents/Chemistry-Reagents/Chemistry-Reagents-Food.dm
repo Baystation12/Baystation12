@@ -302,7 +302,7 @@
 	name = "Diluted Starch"
 	description = "Starch diluted in water, ready to serve as a drink base."
 	taste_description = "gooey potato"
-	reagent_state = SOLID
+	reagent_state = LIQUID
 	nutriment_factor = 1
 	color = "#ffffff"
 
