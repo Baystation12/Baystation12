@@ -3017,6 +3017,9 @@
 /obj/effect/floor_decal/corner/lime/border{
 	dir = 1
 	},
+/obj/structure/closet/medical_wall/filled{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled,
 /area/holocontrol)
 "agd" = (
@@ -19875,6 +19878,9 @@
 	},
 /obj/effect/floor_decal/techfloor/corner{
 	dir = 8
+	},
+/obj/structure/closet/medical_wall/filled{
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/sleep/cryo/south)
