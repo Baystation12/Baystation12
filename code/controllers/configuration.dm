@@ -315,6 +315,9 @@
 
 	var/static/admin_irc = ""
 
+	var/static/admin_discord = ""
+
+	var/static/excom_address = ""
 	var/static/announce_evac_to_irc = FALSE
 
 	var/static/expected_round_length = 3 HOURS
@@ -707,6 +710,10 @@
 				main_irc = value
 			if ("admin_irc")
 				admin_irc = value
+			if ("admin_discord")
+				admin_discord = value
+			if ("excom_address")
+				excom_address = value
 			if ("announce_evac_to_irc")
 				announce_evac_to_irc = TRUE
 			if ("allow_cult_ghostwriter")

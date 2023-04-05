@@ -133,4 +133,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 		adminmsg2adminirc(src, null, "[html_decode(original_msg)] - !![admin_number_afk ? "All admins AFK ([admin_number_afk])" : "No admins online"]!!")
 	else
 		adminmsg2adminirc(src, null, "[html_decode(original_msg)]")
+
+
+	send_to_admin_discord(EXCOM_MSG_AHELP, "HELP: [key_name(src)]: [original_msg]")
 	return

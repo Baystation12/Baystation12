@@ -266,6 +266,12 @@ USEALIENWHITELIST
 ## IRC channel to send adminhelps to.  Leave blank to disable adminhelps-to-irc.
 #ADMIN_IRC #admin
 
+## Discord channel ID to send adminhelps to. Leave blank to disable adminhelps-to-discord. Note: Requires ExComm (https://github.com/Baystation12/ExCom) or a similar Discord Bot
+#ADMIN_DISCORD 123456
+
+## Address and port of the Excom's bot listen server to relay messages to. Sends over HTTP. Example: baystation.xyz:1234, 127.0.0.1:5678
+#EXCOM_ADDRESS localhost:1234
+
 ## Uncommen to allow ghosts to write in blood during Cult rounds.
 ALLOW_CULT_GHOSTWRITER
 
