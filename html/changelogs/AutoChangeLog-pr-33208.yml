@@ -1,0 +1,4 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - tweak: Make pain/status effects of grabber matter for grab strength.
