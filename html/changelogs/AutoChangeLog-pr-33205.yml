@@ -1,8 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Associated ban checks now ignore job bans.
-  - admin: Logs for connections and bans found on clients now appear as staff logs
-      instead of debug logs. Messages for found bans are in red.
-  - admin: Checks on connecting clients are now skipped if the server is performing
-      initialization, to avoid causing connection failures or other lag-related issues.
