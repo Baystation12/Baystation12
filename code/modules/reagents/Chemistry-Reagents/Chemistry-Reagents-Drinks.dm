@@ -97,7 +97,7 @@
 	color = "#365e30"
 
 	glass_name = "lime juice"
-	glass_desc = "A glass of sweet-sour lime juice"
+	glass_desc = "A glass of sweet-sour lime juice."
 
 /datum/reagent/drink/juice/lime/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -235,6 +235,19 @@
 	glass_name = "lettuce juice"
 	glass_desc = "This is just lettuce water. Fresh but boring."
 
+// Kissels
+
+/datum/reagent/drink/kissel/berry
+	name = "Berry Kissel"
+	description = "A delicious jelly-like sweet drink, boiled of several different kinds of berries. Dietary and delicious."
+	taste_description = "viscous berries and sugar"
+	nutrition = 0.3 // Fact: kissel is actually 49 KCAL while garlic juice is 149 KCAL. Dietary and delicious.
+	color = "#7e0059"
+	adj_temp = 6.25
+
+	glass_name = "berry kissel"
+	glass_desc = "Berry kissel. Dietary and delicious."
+
 // Everything else
 
 /datum/reagent/drink/milk
@@ -266,17 +279,17 @@
 
 /datum/reagent/drink/milk/cream
 	name = "Cream"
-	description = "The fatty, still liquid part of milk. Why don't you mix this with sum scotch, eh?"
+	description = "The fatty, still liquid part of milk. Why don't you mix this with sum scotch, eh?" // Or give it to a cat?
 	taste_description = "creamy milk"
 	color = "#dfd7af"
 
 	glass_name = "cream"
-	glass_desc = "Ewwww..."
+	glass_desc = "Ewwww..." // Ewwww yourself, this is delicious.
 	protein_amount = 1
 
 /datum/reagent/drink/milk/soymilk
 	name = "Soy Milk"
-	description = "An opaque white liquid made from soybeans."
+	description = "An opaque white liquid made from soybeans." // Honestly, Evie, why the fuck do you drink soy latte and stuff like this?
 	taste_description = "soy milk"
 	color = "#dfdfc7"
 
@@ -398,11 +411,11 @@
 
 /datum/reagent/drink/coffee/soy_latte/mocha
 	name = "Mocha Soy Latte"
-	description = "Coffee, soy, and chocolate, smooth and creamy."
+	description = "Coffee, soy, and chocolate, smooth and creamy. You are a culinary pervert."
 	taste_description = "bitter creamy chocolate"
 
 	glass_name = "mocha soy latte"
-	glass_desc = "Coffee, soy, and chocolate, smooth and creamy."
+	glass_desc = "Coffee, soy, and chocolate, smooth and creamy. You are a culinary pervert"
 
 /datum/reagent/drink/coffee/icecoffee/cafe_latte/mocha
 	name = "Iced Mocha Latte"
