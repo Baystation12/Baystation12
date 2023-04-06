@@ -26,12 +26,12 @@
 /obj/item/ammo_casing/pistol/small/rubber
 	desc = "A small pistol rubber bullet casing."
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber/holdout
-	icon_state = "pistolcasing_r"
+	icon_state = "smallcasing_r"
 
 /obj/item/ammo_casing/pistol/small/practice
 	desc = "A small pistol practice bullet casing."
 	projectile_type = /obj/item/projectile/bullet/pistol/practice
-	icon_state = "pistolcasing_p"
+	icon_state = "smallcasing_p"
 
 /obj/item/ammo_casing/pistol/magnum
 	desc = "A high-power pistol bullet casing."
