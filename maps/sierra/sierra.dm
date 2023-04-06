@@ -155,6 +155,7 @@
 	#include "../../mods/don_loadout/_don_loadout.dme"
 	#include "../../mods/leroy_beasts/_leroy_beasts.dme"
 	#include "../../mods/maps/liberia/_map_liberia.dme"
+	#include "../../mods/bluespace_kitty/_bluespace_kitty.dme"
 	#include "../../mods/maps/sentinel/_map_sentinel.dme"
 
 	// UNUSED MODS

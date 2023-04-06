@@ -2,7 +2,9 @@ GLOBAL_VAR_INIT(total_runtimes, 0)
 GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 GLOBAL_VAR_INIT(actual_error_file_line, regex("^%% (.*?),(.*?) %% "))
 
+
 #ifdef DEBUG
+
 /world/Error(exception/E)
 	if(!istype(E)) //Something threw an unusual exception
 		log_world("\[[time_stamp()]] Uncaught exception: [E]")
@@ -78,6 +80,7 @@ GLOBAL_VAR_INIT(actual_error_file_line, regex("^%% (.*?),(.*?) %% "))
 		locinfo = log_info_line(usr.loc)
 		if(locinfo)
 			usrinfo += "  usr.loc: [locinfo]"
+
 	// The proceeding mess will almost definitely break if error messages are ever changed
 	var/list/splitlines = splittext(E.desc, "\n")
 	var/list/desclines = list()
