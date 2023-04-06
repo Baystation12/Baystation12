@@ -1718,3 +1718,21 @@
 	)
 	result_path = /obj/item/reagent_containers/food/snacks/seafood_paella
 
+/datum/microwave_recipe/unscotti
+	required_reagents = list(
+		/datum/reagent/sugar = 10,
+		/datum/reagent/drink/syrup_vanilla = 5
+	)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/dough
+	)
+	required_produce = list(
+		"almond" = 3
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/sliceable/unscottiloaf
+
+/datum/microwave_recipe/biscotti
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/slice/unscotti
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/biscotti
