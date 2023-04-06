@@ -77,6 +77,15 @@
 			. += list(row)
 
 
+/**
+ * Checks a list of connections for bans matching any of the list entries.
+ *
+ * **Parameters**:
+ * - `connections` (list) - List of connections. Should be the output of `_fetch_connections()`.
+ * - `include_inactive` (boolean, default `FALSE`) - If set, includes inactive/expired bans in the list.
+ *
+ * Returns list of lists.
+ */
 /proc/_find_bans_in_connections(list/connections, include_inactive = FALSE)
 	RETURN_TYPE(/list)
 	. = list()
