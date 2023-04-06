@@ -178,7 +178,7 @@ SUBSYSTEM_DEF(ticker)
 		to_world(SPAN_INFO("<B>Enjoy the game!</B>"))
 
 	if(!length(GLOB.admins))
-		send2adminirc("Round has started with no admins online.")
+		send_to_admin_discord(EXCOM_MSG_AHELP, "Round has started with no admins online.")
 
 /datum/controller/subsystem/ticker/proc/playing_tick()
 	mode.process()
