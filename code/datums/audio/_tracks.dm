@@ -152,20 +152,19 @@
 	license = /decl/license/cc_by_4_0
 	url = "freemusicarchive.org/music/Chronox_2/Voyager/Chronox_-_02_-_In_Orbit"
 
+/decl/audio/track/lackey
+	source = 'proxima/sound/music/Shadow Stalker (Oathbreakers).ogg'
+	title = "Lackey" // PRX
+	author = "Shadow Stalker"
+	license = /decl/license/grandfathered
+	url = "https://youtu.be/iUUSYt1Myd8"
+
 /decl/audio/track/lasers
 	source = 'sound/music/lasers_rip_apart_the_bulkhead.ogg'
 	title = "Lasers Rip Apart The Bulkhead" // aka Torch Lobby OST
 	author = "Earthcrusher"
 	license = /decl/license/cc_by_nc_sa_3_0
 	url = "https://soundcloud.com/alexanderdivine/lasers-rip-apart-the-bulkhead"
-
-/decl/audio/track/level3_mod
-	display = "Scratch"
-	source = 'sound/music/title1.ogg'
-	title = "Flip-Flap" // lobby jazz banger
-	author = "X-CEED"
-	license = /decl/license/grandfathered
-	url = "https://aminet.net/package/mods/xceed/Flipflap"
 
 /decl/audio/track/lysendraa
 	source = 'sound/music/lysendraa.ogg'
@@ -225,6 +224,13 @@
 	license = /decl/license/cc_by_sa_3_0
 	url = "https://soundcloud.com/mikazu-1/baystation-12-on-the-rocks"
 
+/decl/audio/track/outskirts
+	source = 'proxima/sound/music/wawawawawawawa.ogg'
+	title = "Outskirts" // WAWAWAWAWAWAWA
+	author = "Scared Slugcat"
+	license = /decl/license/grandfathered
+	url = "https://youtu.be/AdGk4PHQDOE"
+
 /decl/audio/track/pwmur
 	source = 'sound/music/pwmur.ogg'
 	title = "Phoron Will Make Us Rich" // EC chill archeo music
@@ -246,6 +252,14 @@
 	collection = "Un mechant party"
 	license = /decl/license/cc_by_nc_nd_4_0
 	url = "http://freemusicarchive.org/music/Quimorucru/Un_mchant_party/Quimorucru_-_Un_mchant_party__Compilation__-_20_Salut_John"
+
+/decl/audio/track/level3_mod
+	display = "Scratch"
+	source = 'sound/music/title1.ogg'
+	title = "Flip-Flap" // lobby jazz banger
+	author = "X-CEED"
+	license = /decl/license/grandfathered
+	url = "https://aminet.net/package/mods/xceed/Flipflap"
 
 /decl/audio/track/space_oddity
 	source = 'sound/music/space_oddity.ogg'
@@ -311,10 +325,3 @@
 	author = "*Kira* Miki"
 	license = /decl/license/grandfathered
 	url = "https://ghyti.bandcamp.com/"
-
-/decl/audio/track/lackey
-	source = 'proxima/sound/music/Shadow Stalker (Oathbreakers).ogg'
-	title = "Lackey" // PRX
-	author = "Shadow Stalker"
-	license = /decl/license/grandfathered
-	url = "https://youtu.be/iUUSYt1Myd8"
