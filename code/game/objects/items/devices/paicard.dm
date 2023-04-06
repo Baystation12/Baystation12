@@ -244,6 +244,7 @@
 			var/datum/dna/dna = usr.dna
 			pai.master = M.real_name
 			pai.master_dna = dna.unique_enzymes
+			pai.faction = M.faction
 			to_chat(pai, SPAN_WARNING("You have been bound to a new master."))
 	if(href_list["request"])
 		src.looking_for_personality = 1

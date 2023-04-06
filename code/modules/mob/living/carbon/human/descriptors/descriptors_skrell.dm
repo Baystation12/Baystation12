@@ -14,14 +14,14 @@
 /datum/mob_descriptor/headtail_length/get_first_person_message_start()
 	. = "Your headtails are"
 
-/datum/mob_descriptor/headtail_length/get_third_person_message_start(datum/gender/my_gender)
-	. = "[my_gender.His] headtails are"
+/datum/mob_descriptor/headtail_length/get_third_person_message_start(datum/pronouns/my_pronouns)
+	. = "[my_pronouns.His] headtails are"
 
-/datum/mob_descriptor/headtail_length/get_comparative_value_string_equivalent(my_value, datum/gender/my_gender, datum/gender/other_gender)
-	. = "indicating [other_gender.he] [other_gender.is] [my_value == 1 ? "male" : "female"] like you"
+/datum/mob_descriptor/headtail_length/get_comparative_value_string_equivalent(my_value, datum/pronouns/my_pronouns, datum/pronouns/other_pronouns)
+	. = "indicating [other_pronouns.he] [other_pronouns.is] [my_value == 1 ? "male" : "female"] like you"
 
-/datum/mob_descriptor/headtail_length/get_comparative_value_string_smaller(value, datum/gender/my_gender, datum/gender/other_gender)
-	. = "indicating [other_gender.he] [other_gender.is] male"
+/datum/mob_descriptor/headtail_length/get_comparative_value_string_smaller(value, datum/pronouns/my_pronouns, datum/pronouns/other_pronouns)
+	. = "indicating [other_pronouns.he] [other_pronouns.is] male"
 
-/datum/mob_descriptor/headtail_length/get_comparative_value_string_larger(value, datum/gender/my_gender, datum/gender/other_gender)
-	. = "indicating [other_gender.he] [other_gender.is] female"
+/datum/mob_descriptor/headtail_length/get_comparative_value_string_larger(value, datum/pronouns/my_pronouns, datum/pronouns/other_pronouns)
+	. = "indicating [other_pronouns.he] [other_pronouns.is] female"

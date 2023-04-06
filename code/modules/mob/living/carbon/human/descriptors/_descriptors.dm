@@ -43,8 +43,8 @@
 	default_value = Ceil(LAZYLEN(standalone_value_descriptors) * 0.5)
 	..()
 
-/datum/mob_descriptor/proc/get_third_person_message_start(datum/gender/my_gender)
-	return "[my_gender.He] [my_gender.is]"
+/datum/mob_descriptor/proc/get_third_person_message_start(datum/pronouns/my_pronouns)
+	return "[my_pronouns.He] [my_pronouns.is]"
 
 /datum/mob_descriptor/proc/get_first_person_message_start()
 	return "You are"

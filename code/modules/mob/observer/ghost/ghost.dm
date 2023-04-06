@@ -10,7 +10,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	blinded = 0
 	anchored = TRUE	//  don't get pushed around
 	universal_speak = TRUE
-
+	pronouns = PRONOUNS_THEY_THEM
 	mob_flags = MOB_FLAG_HOLY_BAD
 	movement_handlers = list(/datum/movement_handler/mob/multiz_connected, /datum/movement_handler/mob/incorporeal)
 
