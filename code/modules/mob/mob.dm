@@ -119,9 +119,9 @@
 
 		if(!(M.knows_target(src)) && !isghost(M))
 			for(var/datum/pronouns/entry as anything in GLOB.pronouns.instances)
-				mob_message = replacetext(mob_message, initial(entry.his), "their")
-				mob_message = replacetext(mob_message, initial(entry.him), "them")
-				mob_message = replacetext(mob_message, initial(entry.self), "themselves")
+				mob_message = replacetext(mob_message, " [initial(entry.his)]", " their")
+				mob_message = replacetext(mob_message, " [initial(entry.him)]", " them")
+				mob_message = replacetext(mob_message, " [initial(entry.self)]", " themselves")
 
 		if((!M.is_blind() && M.see_invisible >= src.invisibility) || narrate)
 			M.show_message(mob_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
@@ -1248,7 +1248,9 @@
 
 	var/mob/S = src
 	var/mob/U = usr
-
+	if(U == S)
+		to_chat(U, SPAN_WARNING("You can't introduce yourself to yourself!"))
+		return
 	if(get_dist(U, S) > 3)
 		to_chat(U, SPAN_WARNING("You're too far away to properly introduce yourself!"))
 		return

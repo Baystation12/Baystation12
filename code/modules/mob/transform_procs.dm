@@ -136,6 +136,11 @@
 			if(mmi_type)
 				O.mmi = new mmi_type(O)
 				O.mmi.transfer_identity(src)
+		if(O.mind.assigned_job && O.mind.assigned_job.faction)
+			O.faction = O.mind.assigned_job.faction
+			O.mind.faction = O.mind.assigned_job.faction
+		else
+			O.mind.faction = faction
 	else
 		O.key = key
 
