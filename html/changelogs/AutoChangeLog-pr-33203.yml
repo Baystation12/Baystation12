@@ -1,0 +1,8 @@
+author: Jux
+delete-after: true
+changes:
+  - bugfix: Borgs and pAIs now adopt faction from their creator.
+  - bugfix: Joining as a borg now loads faction correctly.
+  - bugfix: Species descriptors that want gender will no longer get fed pronouns.
+  - bugfix: Passports no longer merge pronouns and species.
+  - bugfix: MediHuds now correctly identify pronouns as pronouns.
