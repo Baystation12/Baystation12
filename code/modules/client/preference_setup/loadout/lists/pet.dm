@@ -89,15 +89,16 @@
 /datum/gear/pet/New()
 	..()
 	var/list/options = list()
-	options["kitten"] = /obj/item/holder/gear/kitten
-	options["cat, three color"] = /obj/item/holder/gear/cat_three_color
-	options["cat, black"] = /obj/item/holder/gear/cat_black
-	options["corgi, puppy"] = /obj/item/holder/gear/puppy
+	options["black cat"] = /obj/item/holder/gear/cat_black
+	options["calico cat"] = /obj/item/holder/gear/cat_three_color
 	options["corgi"] = /obj/item/holder/gear/corgi
-	options["lizard"] = /obj/item/holder/gear/lizard
-	options["mouse, brown"] = /obj/item/holder/gear/mouse_brown
-	options["mouse, grey"] = /obj/item/holder/gear/mouse_gray
-	options["mouse, white"] = /obj/item/holder/gear/mouse_white
-	//options["rat"]	= /obj/item/holder/gear/mouse_rat
+	options["corgi puppy"] = /obj/item/holder/gear/puppy
 	options["diona nymph"] = /obj/item/holder/gear/nymph
+	options["lizard"] = /obj/item/holder/gear/lizard
+	options["kitten"] = /obj/item/holder/gear/kitten
+	options["brown mouse"] = /obj/item/holder/gear/mouse_brown
+	options["grey mouse"] = /obj/item/holder/gear/mouse_gray
+	options["white mouse"] = /obj/item/holder/gear/mouse_white
+	//options["rat"]	= /obj/item/holder/gear/mouse_rat
+	options["slugcat"] = /obj/item/holder/gear/slugcat
 	gear_tweaks += new /datum/gear_tweak/path (options)
