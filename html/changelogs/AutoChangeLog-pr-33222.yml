@@ -1,0 +1,5 @@
+author: PurplePineapple
+delete-after: true
+changes:
+  - rscadd: Three new positronic cultures. 1st, 2nd, and 3rd Generation.
+  - tweak: Positronics can now select the new human planets that were added over time.
