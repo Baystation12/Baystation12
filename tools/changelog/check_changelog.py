@@ -69,11 +69,19 @@ with open(Path.cwd().joinpath("tools/changelog/tags.yml")) as file:
 
 write_cl['changes'] = []
 
+has_invalid_tag = False
 for k, v in cl_list:
     if k in tags['tags'].keys(): # Check to see if there are any valid tags, as determined by tags.yml
         v = v.rstrip()
         if v not in list(tags['defaults'].values()): # Check to see if the tags are associated with something that isn't the default text
             write_cl['changes'].append({tags['tags'][k]: v})
+    else:
+        print(f"Tag {k} is invalid!")
+        has_invalid_tag = True
+
+if has_invalid_tag:
+    print("CL has invalid tags!")
+    exit(1)
 
 if write_cl['changes']:
     print("CL OK!")
