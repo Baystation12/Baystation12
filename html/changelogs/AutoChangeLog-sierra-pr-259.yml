@@ -1,0 +1,4 @@
+author: SierraHelper
+delete-after: true
+changes:
+  - bugfix: Fix outlying pixel on unbranded arms.
