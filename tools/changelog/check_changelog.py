@@ -36,27 +36,14 @@ pr_labels = pr.labels
 
 CL_INVALID = "CL invalid"
 CL_VALID = "CL valid"
-CL_NOT_NEEDED = "CL not required"
 
 has_valid_label = False
 has_invalid_label = False
-cl_needed = True
 for label in pr_labels:
-    if label.name == CL_NOT_NEEDED:
-        cl_needed = False
     if label.name == CL_VALID:
         has_valid_label = True
     if label.name == CL_INVALID:
         has_invalid_label = True
-
-if not cl_needed:
-    print("No CL needed!")
-    # remove invalid, remove valid
-    if has_invalid_label:
-        pr.remove_from_labels(CL_INVALID)
-    if has_valid_label:
-        pr.remove_from_labels(CL_VALID)
-    exit(0)
 
 write_cl = {}
 try:
@@ -64,12 +51,12 @@ try:
     cl_list = CL_SPLIT.findall(cl.group(3))
 except AttributeError:
     print("No CL found!")
-    # add invalid, remove valid
+    # remove invalid, remove valid
     if not has_invalid_label:
-        pr.add_to_labels(CL_INVALID)
+        pr.remove_from_labels(CL_INVALID)
     if has_valid_label:
         pr.remove_from_labels(CL_VALID)
-    exit(1)
+    exit(0)
 
 
 if cl.group(2) is not None:
