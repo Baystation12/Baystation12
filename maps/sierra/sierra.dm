@@ -169,6 +169,7 @@
 
 	#include "../../packs/infinity/_pack.dm"
 	#include "../../packs/sierra-tweaks/_pack.dm"
+	#include "../../packs/deepmaint/_pack.dm"
 
 
 	#define using_map_DATUM /datum/map/sierra

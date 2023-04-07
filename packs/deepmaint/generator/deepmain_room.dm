@@ -1,3 +1,6 @@
+/datum/map_template/deepmaint_template
+	skip_main_unit_tests = "Is a deepmaint template."
+
 /datum/map_template/deepmaint_template/room
 	name = "Deepmaint Template"
 	var/desc = "Deep. Dark. Marvelous."
