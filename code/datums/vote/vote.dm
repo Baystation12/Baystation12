@@ -104,8 +104,13 @@
 		return 1
 
 	var/text = get_result_announcement()
+	var/admin_text = get_vote_statistics()
+	log_vote(admin_text)
 	log_vote(text)
-	to_world(SPAN_COLOR("purple", "[text]"))
+	to_world(SPAN_COLOR("purple", "[text]\n"))
+
+	for (var/client/C in GLOB.admins)
+		to_chat(C, SPAN_COLOR("purple", "[admin_text]"))
 
 	if(!(result[result[1]] > 0))
 		return 1
@@ -123,6 +128,16 @@
 				runner_ups += display_choices[runner_up]
 			text += english_list(runner_ups)
 
+	return JOINTEXT(text)
+
+/datum/vote/proc/get_vote_statistics()
+	var/list/text = list()
+	text += "<b>Total Votes: [length(votes)]/[length(GLOB.clients)]</b>\n"
+	text += "\n"
+	text += "<b>Votes Per Option:</b>"
+	for(var/R in result)
+		if (result[R] > 0)
+			text += "\n[R]: [result[R]]<br>"
 	return JOINTEXT(text)
 
 
