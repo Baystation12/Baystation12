@@ -68,6 +68,12 @@
 	pet = /mob/living/simple_animal/passive/mouse/white
 	w_class = ITEM_SIZE_TINY
 
+/obj/item/holder/gear/slugcat
+
+	pet = /mob/living/simple_animal/passive/cat/fluff/slugcat
+
+	w_class = ITEM_SIZE_NORMAL
+
 /*
 /obj/item/holder/gear/mouse_rat
 	pet = /mob/living/simple_animal/passive/mouse/rat/chill

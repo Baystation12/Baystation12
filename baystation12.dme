@@ -3326,6 +3326,7 @@
 #include "proxima\code\modules\paperwork\paper.dm"
 #include "proxima\code\modules\research\designs_spacesuit.dm"
 #include "proxima\code\modules\research\designs_weapons.dm"
+#include "proxima\code\modules\mob\slugcat.dm"
 #include "proxima\code\modules\silicon\ai\ai.dm"
 #include "proxima\code\modules\silicon\ai\procs.dm"
 #include "proxima\code\modules\sprite_accessories\accessory_hair.dm"

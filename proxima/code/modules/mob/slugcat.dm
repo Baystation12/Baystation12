@@ -15,9 +15,8 @@
 	icon_dead = "slugcat_dead"
 	speak_emote = list("мурлычет", "мяукает", "булькает")
 	maxbodytemp = 395 // Above 121 Degree Celsius. Yes, hot bath for a slugcat.
-	holder_type = /obj/item/holder/cat/fluff/newt
+	holder_type = /obj/item/holder/cat/fluff/slugcat/newt
 	say_list_type = /datum/say_list/cat/slugcat
-	friend_name = null
 
 /datum/say_list/cat/slugcat
 	speak = list("Мьяу!","Мяу!","Мрррррх!","Шшшш...","Вавававававава!")
@@ -35,6 +34,3 @@
 	gender = FEMALE
 	holder_type = /obj/item/holder/cat/fluff/slugcat/newt
 	say_list_type = /datum/say_list/cat/slugcat
-	friend_name = pick("Damien Hawkins",
-			   "Walter Enderly",
-			   "Eva Chernova")

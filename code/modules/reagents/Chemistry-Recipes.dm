@@ -2233,7 +2233,7 @@
 /datum/chemical_reaction/kissel/berry
 	name = "Berry Kissel"
 	result = /datum/reagent/drink/kissel/berry
-	required_reagents = list(/datum/reagent/drink/juice/berry = 1, /datum/reagent/sugar = 1, /datum/reagent/nutriment/starch/dilluted = 1)
+	required_reagents = list(/datum/reagent/drink/juice/berry = 1, /datum/reagent/sugar = 1, /datum/reagent/nutriment/starch/diluted = 1)
 	result_amount = 3
 	minimum_temperature = 60 CELSIUS
 
