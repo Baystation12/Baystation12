@@ -143,11 +143,9 @@
 #define RELIGION_VOX           "Auralis Reverence"
 
 // IPC cultures.
-#define CULTURE_POSITRONICS    "Union Member"
-
-#define HOME_SYSTEM_ROOT       "Root"
-
-#define FACTION_POSITRONICS    "Positronic Union"
+#define CULTURE_POSITRONICS_GEN1   "First Generation"
+#define CULTURE_POSITRONICS_GEN2   "Second Generation"
+#define CULTURE_POSITRONICS_GEN3   "Third Generation"
 
 // Diona cultures.
 #define CULTURE_DIONA          "Diona Chorus"
