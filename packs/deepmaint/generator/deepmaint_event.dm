@@ -1,15 +1,15 @@
 /datum/event/deepmaint
 	announceWhen = 10
 	endWhen = 2400
-	var/list/free_deepmaint_ladders_copy
+	var/list/free_ladders
 	var/list/spawned_ladders
 
 /datum/event/deepmaint/start()
 	var/attempts = 5
 	spawned_ladders = new/list()
-	free_deepmaint_ladders_copy = free_deepmaint_ladders.Copy()
+	free_ladders = GLOB.free_deepmaint_ladders.Copy()
 	do
-		if (!length(free_deepmaint_ladders_copy))
+		if (!length(free_ladders))
 			break
 
 		create_deepmaint_ladder_connection()
@@ -26,7 +26,8 @@
 		L.target_up = null
 		L.visible_message(SPAN_WARNING("\The [src] suddenly vanishes into nothingness!"))
 		qdel(L)
-
+	LAZYCLEARLIST(spawned_ladders)
+	LAZYCLEARLIST(free_ladders)
 	command_announcement.Announce("All subspace distortions have ceased. All personnel and/or assets not present onboard should be considered lost.")
 
 
@@ -47,8 +48,8 @@
 
 	var/turf/station_turf = pick(ladder_turfs)
 
-	var/turf/deepmaint_turf = pick(free_deepmaint_ladders_copy)
-	free_deepmaint_ladders_copy -= deepmaint_turf
+	var/turf/deepmaint_turf = pick(free_ladders)
+	free_ladders -= deepmaint_turf
 	var/obj/structure/ladder/station_ladder = new (station_turf)
 	var/turf/T = station_ladder.loc
 	T.ChangeTurf(/turf/simulated/open)

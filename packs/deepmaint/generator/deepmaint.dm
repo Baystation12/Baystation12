@@ -3,42 +3,41 @@
 	most of the objects and modifications required exclusively for it will be kept here.
 */
 
-var/global/list/free_deepmaint_ladders = list()
 
-var/global/list/small_deepmaint_room_templates = list()
-
-var/global/list/big_deepmaint_room_templates = list()
+GLOBAL_LIST_EMPTY(free_deepmaint_ladders)
+GLOBAL_LIST_EMPTY(small_deepmaint_room_templates)
+GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 
 /proc/populateDeepMaintMapLists()
-	if(length(big_deepmaint_room_templates) || length(small_deepmaint_room_templates))
+	if(length(GLOB.big_deepmaint_room_templates) || length(GLOB.small_deepmaint_room_templates))
 		return
 	for(var/item in subtypesof(/datum/map_template/deepmaint_template/room))
 		var/datum/map_template/deepmaint_template/temp = item
 		var/datum/map_template/deepmaint_template/S = new temp()
-		small_deepmaint_room_templates += S
+		GLOB.small_deepmaint_room_templates += S
 
 	for(var/item in subtypesof(/datum/map_template/deepmaint_template/big))
 		var/datum/map_template/deepmaint_template/temp = item
 		var/datum/map_template/deepmaint_template/S = new temp()
-		big_deepmaint_room_templates += S
+		GLOB.big_deepmaint_room_templates += S
 
 /obj/procedural/jp_dungeonroom/preexist/square/submap/deepmaint
 	name = "deepmaint room"
 
 /obj/procedural/jp_dungeonroom/preexist/square/submap/deepmaint/New()
 	. = ..()
-	my_map = pick(small_deepmaint_room_templates)
+	my_map = pick(GLOB.small_deepmaint_room_templates)
 
 /obj/procedural/jp_dungeonroom/preexist/square/submap/deepmaint/big
 	name = "deepmaint core room"
 
 /obj/procedural/jp_dungeonroom/preexist/square/submap/deepmaint/big/New()
 	. = ..()
-	my_map = pick(big_deepmaint_room_templates)
+	my_map = pick(GLOB.big_deepmaint_room_templates)
 
 
 /proc/check_deepmaint_list()
-	return (length(free_deepmaint_ladders))
+	return length(GLOB.free_deepmaint_ladders)
 
 /obj/procedural/jp_DungeonGenerator/deepmaint
 	name = "Deep Maintenance Procedural Generator"
@@ -109,7 +108,7 @@ var/global/list/big_deepmaint_room_templates = list()
 			continue
 
 		var/turf/ladder_turf = pick(viable_turfs)
-		free_deepmaint_ladders += ladder_turf
+		GLOB.free_deepmaint_ladders += ladder_turf
 		ladders_to_place--
 		done_rooms += picked_room
 
