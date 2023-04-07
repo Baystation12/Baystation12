@@ -1,0 +1,4 @@
+author: Lentye
+delete-after: true
+changes:
+  - bugfix: Добавил 2 прока на проигрывания звука включения и выключения сварки
