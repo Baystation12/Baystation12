@@ -1,4 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - bugfix: Set AI Core Display verb now works instead of doing nothing
