@@ -65,6 +65,7 @@
 var/global/default_mobloc = null
 
 /proc/create_test_mob_with_mind(turf/mobloc = null, mobtype = /mob/living/carbon/human)
+	RETURN_TYPE(/list)
 	var/list/test_result = list("result" = FAILURE, "msg"    = "", "mobref" = null)
 
 	if(isnull(mobloc))

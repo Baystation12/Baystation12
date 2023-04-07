@@ -74,6 +74,7 @@ SUBSYSTEM_DEF(mapping)
 			away_sites_templates[MT.name] = MT
 
 /proc/generateMapList(filename)
+	RETURN_TYPE(/list)
 	var/list/potentialMaps = list()
 	var/list/Lines = world.file2list(filename)
 	if(!length(Lines))

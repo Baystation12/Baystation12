@@ -57,6 +57,7 @@ the HUD updates properly! */
 	var/turf/Turf
 
 /proc/arrange_hud_process(mob/M, mob/Alt, list/hud_list)
+	RETURN_TYPE(/datum/arranged_hud_process)
 	hud_list |= M
 	var/datum/arranged_hud_process/P = new
 	P.Client = M.client
@@ -83,9 +84,11 @@ the HUD updates properly! */
 	GLOB.jani_hud_users -= src
 
 /mob/proc/in_view(turf/T)
+	RETURN_TYPE(/list)
 	return view(T)
 
 /mob/observer/eye/in_view(turf/T)
+	RETURN_TYPE(/list)
 	var/list/viewed = new
 	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
 		if(get_dist(H, T) <= 7)

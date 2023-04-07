@@ -56,6 +56,7 @@ var/global/repository/client/client_repository = new()
 	return " \[[C.holder.rank]\]"
 
 /proc/client_by_ckey(ckey)
+	RETURN_TYPE(/client)
 	for(var/client/C)
 		if(C.ckey == ckey)
 			return C

@@ -3,6 +3,7 @@
 
 //obtain a weak reference to a datum
 /proc/weakref(datum/D)
+	RETURN_TYPE(/weakref)
 	if(!istype(D))
 		return
 	if(QDELETED(D))

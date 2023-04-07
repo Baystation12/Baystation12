@@ -5,6 +5,7 @@
 
 // Given two areas, find the minimal req_access needed such that (return value) + (area access) >= (other area access) and vice versa
 /proc/req_access_diff(area/first, area/second)
+	RETURN_TYPE(/list)
 	if(!length(first.req_access))
 		return second.req_access.Copy()
 	if(!length(second.req_access))
@@ -17,6 +18,7 @@
 
 // Given two areas, find the minimal req_access needed such that req_access >= (area access) + (other area access)
 /proc/req_access_union(area/first, area/second)
+	RETURN_TYPE(/list)
 	if(!length(first.req_access))
 		return second.req_access.Copy()
 	if(!length(second.req_access))
@@ -28,6 +30,7 @@
 // Comes up with the minimal thing to add to the first argument so that the new list guarantees that the access requirement in the second argument is satisfied.
 // Second argument is a number access code or list thereof (like an entry in req_access); the typecasting is false.
 /proc/get_minimal_requirement(list/req_access, list/requirement)
+	RETURN_TYPE(/list)
 	if(!requirement)
 		return
 	if(!islist(requirement))

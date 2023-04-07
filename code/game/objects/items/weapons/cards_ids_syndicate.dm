@@ -228,6 +228,7 @@
 
 var/global/list/id_card_states
 /proc/id_card_states()
+	RETURN_TYPE(/list)
 	if(!id_card_states)
 		id_card_states = list()
 		for(var/path in typesof(/obj/item/card/id))

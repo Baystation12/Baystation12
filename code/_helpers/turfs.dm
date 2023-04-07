@@ -1,6 +1,7 @@
 // Returns the atom sitting on the turf.
 // For example, using this on a disk, which is in a bag, on a mob, will return the mob because it's on the turf.
 /proc/get_atom_on_turf(atom/movable/M)
+	RETURN_TYPE(/atom)
 	var/atom/mloc = M
 	while(mloc && mloc.loc && !isturf(mloc.loc))
 		mloc = mloc.loc
@@ -15,6 +16,7 @@
 // Picks a turf without a mob from the given list of turfs, if one exists.
 // If no such turf exists, picks any random turf from the given list of turfs.
 /proc/pick_mobless_turf_if_exists(list/start_turfs)
+	RETURN_TYPE(/turf)
 	if(!length(start_turfs))
 		return null
 
@@ -28,6 +30,7 @@
 	return pick(available_turfs)
 
 /proc/get_random_edge_turf(dir, clearance = TRANSITIONEDGE + 1, Z)
+	RETURN_TYPE(/turf)
 	if(!dir)
 		return
 
@@ -42,6 +45,7 @@
 			return locate(clearance, rand(clearance, world.maxy - clearance), Z)
 
 /proc/get_random_turf_in_range(atom/origin, outer_range, inner_range)
+	RETURN_TYPE(/turf)
 	origin = get_turf(origin)
 	if(!origin)
 		return
@@ -56,6 +60,7 @@
 		return pick(turfs)
 
 /proc/screen_loc2turf(text, turf/origin)
+	RETURN_TYPE(/turf)
 	if(!origin)
 		return null
 	var/tZ = splittext(text, ",")
@@ -130,6 +135,7 @@
 //Returns an assoc list that describes how turfs would be changed if the
 //turfs in turfs_src were translated by shifting the src_origin to the dst_origin
 /proc/get_turf_translation(turf/src_origin, turf/dst_origin, list/turfs_src)
+	RETURN_TYPE(/list)
 	var/list/turf_map = list()
 	for(var/turf/source in turfs_src)
 		var/x_pos = (source.x - src_origin.x)
@@ -161,6 +167,7 @@
 
 //Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
 /proc/transport_turf_contents(turf/source, turf/target)
+	RETURN_TYPE(/turf)
 
 	var/turf/new_turf = target.ChangeTurf(source.type, 1, 1)
 	new_turf.transport_properties_from(source)
@@ -192,6 +199,7 @@
 */
 
 /proc/get_turfs_in_range(turf/center, range, list/predicates)
+	RETURN_TYPE(/list)
 	. = list()
 
 	if (!istype(center))
@@ -206,6 +214,7 @@
 */
 
 /proc/pick_turf_in_range(turf/center, range, list/turf_predicates)
+	RETURN_TYPE(/list)
 	var/list/turfs = get_turfs_in_range(center, range, turf_predicates)
 	if (length(turfs))
 		return pick(turfs)

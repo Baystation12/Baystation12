@@ -11,6 +11,7 @@ GLOBAL_LIST_EMPTY(overlay_icon_cache)
 GLOBAL_LIST_EMPTY(species_icon_template_cache)
 
 /proc/overlay_image(icon, icon_state, color, flags, plane, layer)
+	RETURN_TYPE(/image)
 	var/image/ret = image(icon,icon_state)
 	if(plane)
 		ret.plane = plane

@@ -177,6 +177,7 @@
 	return
 
 /proc/seen_turfs_in_range(source, range)
+	RETURN_TYPE(/list)
 	var/turf/pos = get_turf(source)
 	if(pos)
 		. = hear(range, pos)

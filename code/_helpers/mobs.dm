@@ -13,6 +13,7 @@
 #define blocked_mult(blocked) max(1 - (blocked/100), 0)
 
 /proc/mobs_in_view(range, source)
+	RETURN_TYPE(/list)
 	var/list/mobs = list()
 	for(var/atom/movable/AM in view(range, source))
 		var/M = AM.get_mob()
@@ -225,6 +226,7 @@
 		target.do_unique_target_user = null
 
 /proc/able_mobs_in_oview(origin)
+	RETURN_TYPE(/list)
 	var/list/mobs = list()
 	for(var/mob/living/M in oview(origin)) // Only living mobs are considered able.
 		if(!M.is_physically_disabled())
@@ -269,6 +271,7 @@
 
 //Find a dead mob with a brain and client.
 /proc/find_dead_player(find_key, include_observers = 0)
+	RETURN_TYPE(/mob)
 	if(isnull(find_key))
 		return
 

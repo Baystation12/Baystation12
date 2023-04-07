@@ -1223,6 +1223,7 @@ var/global/list/multi_point_spawns
 
 
 /proc/get_random_useful_type()
+	RETURN_TYPE(/obj)
 	var/static/list/options = list(
 		/obj/random/crayon,
 		/obj/item/pen,
@@ -1238,6 +1239,7 @@ var/global/list/multi_point_spawns
 
 
 /proc/get_random_junk_type()
+	RETURN_TYPE(/obj)
 	var/static/list/options = ((\
 		typesof(/obj/item/trash/cigbutt) +\
 		subtypesof(/obj/item/trash)) - list(

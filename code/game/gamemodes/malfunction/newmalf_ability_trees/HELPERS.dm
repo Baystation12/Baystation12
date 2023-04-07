@@ -153,6 +153,7 @@
 // Parameters: None
 // Description: Returns a list of all unhacked APCs. APCs on station Zs are on top of the list.
 /proc/get_unhacked_apcs(mob/living/silicon/ai/user)
+	RETURN_TYPE(/list)
 	var/list/station_apcs = list()
 	var/list/offstation_apcs = list()
 
@@ -171,6 +172,7 @@
 
 // Helper procs which return lists of relevant mobs.
 /proc/get_unlinked_cyborgs(mob/living/silicon/ai/A)
+	RETURN_TYPE(/list)
 	if(!A || !istype(A))
 		return
 
@@ -184,11 +186,13 @@
 	return L
 
 /proc/get_linked_cyborgs(mob/living/silicon/ai/A)
+	RETURN_TYPE(/list)
 	if(!A || !istype(A))
 		return
 	return A.connected_robots
 
 /proc/get_other_ais(mob/living/silicon/ai/A)
+	RETURN_TYPE(/list)
 	if(!A || !istype(A))
 		return
 
@@ -208,6 +212,7 @@
 	admin_attack_log(A, null, message, null, message)
 
 /proc/check_for_interception()
+	RETURN_TYPE(/mob/living/silicon/ai)
 	for(var/mob/living/silicon/ai/A in SSmobs.mob_list)
 		if(A.intercepts_communication)
 			return A

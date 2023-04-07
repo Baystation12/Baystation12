@@ -80,6 +80,7 @@
 
 //Returns list of two elements, 1 is text output, 2 is amoutn of GEP data
 /proc/mineral_scan_results(turf/simulated/target)
+	RETURN_TYPE(/list)
 	var/list/metals = list(
 		ORE_SURFACE = 0,
 		ORE_PRECIOUS = 0,

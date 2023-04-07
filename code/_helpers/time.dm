@@ -203,6 +203,7 @@ var/global/round_start_time = 0
 	return weekdays.Find(time2text(world.timeofday, "DDD"))
 
 /proc/current_month_and_day()
+	RETURN_TYPE(/list)
 	var/time_string = time2text(world.realtime, "MM-DD")
 	var/time_list = splittext(time_string, "-")
 	return list(text2num(time_list[1]), text2num(time_list[2]))

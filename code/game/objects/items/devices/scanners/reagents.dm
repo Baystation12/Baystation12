@@ -18,6 +18,7 @@
 	user.show_message(SPAN_NOTICE(scan_data))
 
 /proc/reagent_scan_results(obj/O, details = 0)
+	RETURN_TYPE(/list)
 	if(isnull(O.reagents))
 		return list("No significant chemical agents found in [O].")
 	if(length(O.reagents.reagent_list) == 0)

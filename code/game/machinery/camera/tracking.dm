@@ -192,6 +192,7 @@
 	ai_camera_list()
 
 /proc/camera_sort(list/L)
+	RETURN_TYPE(/list)
 	var/obj/machinery/camera/a
 	var/obj/machinery/camera/b
 

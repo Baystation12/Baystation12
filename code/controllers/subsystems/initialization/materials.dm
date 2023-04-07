@@ -51,6 +51,7 @@ SUBSYSTEM_DEF(materials)
 		log_error("Unable to acquire material by name '[name]'")
 
 /proc/material_display_name(name)
+	RETURN_TYPE(/material)
 	var/material/material = SSmaterials.get_material_by_name(name)
 	if(material)
 		return material.display_name

@@ -114,6 +114,7 @@
 	return filtered_entries
 
 /proc/filtered_nano_crew_manifest(list/filter, blacklist = FALSE)
+	RETURN_TYPE(/list)
 	var/list/filtered_entries = list()
 	for(var/datum/computer_file/report/crew_record/CR in department_crew_manifest(filter, blacklist))
 		filtered_entries.Add(list(list(
@@ -141,6 +142,7 @@
 		)
 
 /proc/flat_nano_crew_manifest()
+	RETURN_TYPE(/list)
 	. = list()
 	. += filtered_nano_crew_manifest(null, TRUE)
 	. += silicon_nano_crew_manifest(SSjobs.titles_by_department(MSC))

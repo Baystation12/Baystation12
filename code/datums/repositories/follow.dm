@@ -51,6 +51,7 @@ var/global/repository/follow/follow_repository = new()
 			return followed_subtypes[follow_type]
 
 /repository/follow/proc/get_follow_targets()
+	RETURN_TYPE(/list)
 	if(cache && cache.is_valid())
 		return cache.data
 	// The previous cache entry should have no further references and will thus be GCd eventually without qdel
