@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Running the geosample scanner on pitchblende no longer gets stuck in an
-      infinite runtime-error loop.

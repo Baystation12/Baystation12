@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Admins can now view the total votes cast and the number of votes per choice
-      after a vote closes.
