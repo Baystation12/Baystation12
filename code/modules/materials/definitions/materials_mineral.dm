@@ -12,7 +12,7 @@
 		"thousand" = 999,
 		"million" = 704
 		)
-	xarch_source_mineral = "potassium"
+	xarch_source_mineral = /datum/reagent/potassium
 	ore_icon_overlay = "nugget"
 	chem_products = list(
 		/datum/reagent/radium = 10,
