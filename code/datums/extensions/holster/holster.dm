@@ -45,6 +45,11 @@
 			playsound(get_turf(atom_holder), sound_in, 50)
 		if(istype(user))
 			user.stop_aiming(no_message=1)
+		if(istype(I, /obj/item/gun))
+			var/obj/item/gun/G = I
+			G.check_accidents(user)
+			if(user.a_intent == I_HELP && G.has_safety && !G.safety_state && user.skill_check(SKILL_WEAPONS, SKILL_EXPERT))
+				G.toggle_safety(user)
 		holstered = I
 		storage.handle_item_insertion(holstered, 1)
 		holstered.add_fingerprint(user)
@@ -77,7 +82,7 @@
 			if(istype(holstered, /obj/item/gun))
 				var/obj/item/gun/G = holstered
 				G.check_accidents(user)
-				if(G.safety() && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //Experienced shooter will disable safety before shooting.
+				if(G.safety() && user.skill_check(SKILL_WEAPONS, SKILL_EXPERT)) // Experienced shooter will disable safety before shooting.
 					G.toggle_safety(user)
 			usr.visible_message(
 				SPAN_DANGER("\The [user] draws \the [holstered], ready to go!"),
