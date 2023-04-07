@@ -12,6 +12,9 @@
 	var/accessibility_weight = 0
 	var/template_flags = TEMPLATE_FLAG_ALLOW_DUPLICATES
 
+	/// Null, or a string reason for this type to be skipped in unit testing.
+	var/skip_main_unit_tests
+
 /datum/map_template/New(list/paths = null, rename = null)
 	if(paths && !islist(paths))
 		crash_with("Non-list paths passed into map template constructor.")
