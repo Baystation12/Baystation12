@@ -2223,12 +2223,14 @@
 	name = "Potato Starch"
 	result = /datum/reagent/nutriment/starch
 	required_reagents = list(/datum/reagent/drink/juice/potato = 1)
+	result_amount = 1
 	minimum_temperature = 40 CELSIUS
 
 /datum/chemical_reaction/starch_dilution
 	name = "Diluted Starch"
 	result = /datum/reagent/nutriment/starch/diluted
 	required_reagents = list(/datum/reagent/nutriment/starch = 1, /datum/reagent/water = 1)
+	result_amount = 1
 
 /datum/chemical_reaction/kissel/berry
 	name = "Berry Kissel"
