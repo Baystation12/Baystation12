@@ -1,5 +1,5 @@
 /obj/item/device/drone_designator
-	name = "\improper drone telemetry designator"
+	name = "drone telemetry designator"
 	desc = "A tool used to transmit location data to a transport drone."
 	icon = 'icons/obj/eftpos.dmi'
 	icon_state = "eftpos"
@@ -63,9 +63,6 @@
 			return
 		QDEL_NULL(B)
 
-/obj/item/device/drone_designator/get_mechanics_info()
-	. = "<p>This device is used to retrieve items such as crates from away sites. You can use it on a drone pad to synchronize with its network. Use it while in an exterior area to mark an object for pickup.</p>"
-
 /datum/transport_flight
 	var/turf/origin = null
 	var/obj/payload = null
@@ -82,7 +79,6 @@
 	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	active_power_usage = 0 KILOWATTS
-	flag
 	machine_name = "transport drone landing pad"
 	machine_desc = "A small pad for transport drones to deposit their payloads."
 	var/initial_id_tag = null
@@ -125,9 +121,6 @@
 
 	if (current_flight)
 		to_chat(user, "There is a drone en route to this pad. The drone is [ time_to_readable(current_flight.time_of_arrival - world.time) ] away.")
-
-/obj/machinery/drone_pad/get_mechanics_info()
-	. = "<p>This machine serves as a delivery point for payloads. Each additional pad in a network can handle an additional delivery. Use a multitool to set the network.</p>"
 
 /obj/machinery/drone_pad/proc/pickup_animation(obj/target)
 	var/image/object = new
