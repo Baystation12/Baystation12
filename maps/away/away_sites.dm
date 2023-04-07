@@ -3,6 +3,7 @@
 /datum/map_template/ruin/away_site
 	var/list/generate_mining_by_z
 	prefix = "maps/away/"
+	skip_main_unit_tests = "Is an away site."
 
 /datum/map_template/ruin/away_site/after_load(z)
 	if(islist(generate_mining_by_z))

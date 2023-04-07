@@ -39,13 +39,8 @@ SUBSYSTEM_DEF(unit_tests)
 /datum/controller/subsystem/unit_tests/proc/load_map_templates()
 	for(var/map_template_name in (SSmapping.map_templates))
 		var/datum/map_template/map_template = SSmapping.map_templates[map_template_name]
-		// Away sites are supposed to be tested separately in the Away Site environment
-		if(istype(map_template, /datum/map_template/ruin/away_site))
-			report_progress("Skipping template '[map_template]' ([map_template.type]): Is an Away Site")
-			continue
-
-		if (istype(map_template, /datum/map_template/deepmaint_template))
-			report_progress("Skipping template '[map_template]' ([map_template.type]): Is a Deepmaint submap.")
+		if (map_template.skip_main_unit_tests)
+			report_progress("Skipping template '[map_template]' ([map_template.type]): [map_template.skip_main_unit_tests]")
 			continue
 
 		// Suggestion: Do smart things here to squeeze as many templates as possible into the same Z-level
