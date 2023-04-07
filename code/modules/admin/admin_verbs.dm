@@ -208,7 +208,7 @@ var/global/list/admin_verbs_debug = list(
 	/client/proc/reload_webhooks,
 	/client/proc/toggle_planet_repopulating,
 	/client/proc/spawn_exoplanet,
-	/client/proc/profiler_start // SIERRA
+	/client/proc/profiler_start
 	)
 
 var/global/list/admin_verbs_paranoid_debug = list(
