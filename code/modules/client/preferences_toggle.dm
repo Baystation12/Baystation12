@@ -1,6 +1,7 @@
 var/global/list/client_preference_stats_
 
 /proc/client_preference_stats_for_usr(mob/user = usr)
+	RETURN_TYPE(/list)
 	. = list()
 	if(!user)
 		return

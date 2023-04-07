@@ -439,6 +439,7 @@ GLOBAL_LIST_INIT(click_catchers, create_click_catcher())
 	return QDEL_HINT_LETMELIVE
 
 /proc/create_click_catcher()
+	RETURN_TYPE(/list)
 	. = list()
 	for(var/i = 0, i<15, i++)
 		for(var/j = 0, j<15, j++)

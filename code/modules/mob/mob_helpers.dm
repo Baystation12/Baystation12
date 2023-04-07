@@ -184,6 +184,7 @@ var/global/list/organ_rel_size = list(
 //Replaces some of the characters with *, used in whispers. pr = probability of no star.
 //Will try to preserve HTML formatting. re_encode controls whether the returned text is HTML encoded outside tags.
 /proc/stars(n, pr = 25, re_encode = 1)
+	RETURN_TYPE(/list)
 	if (pr < 0)
 		return null
 	else if (pr >= 100)
@@ -208,6 +209,7 @@ var/global/list/organ_rel_size = list(
 
 //Ingnores the possibility of breaking tags.
 /proc/stars_no_html(text, pr, re_encode)
+	RETURN_TYPE(/list)
 	text = html_decode(text) //We don't want to screw up escaped characters
 	. = list()
 	for(var/i = 1, i <= length_char(text), i++)
@@ -397,6 +399,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 			M.show_message(SPAN_INFO("[icon2html(icon, M)] [message]"), 1)
 
 /proc/mobs_in_area(area/A)
+	RETURN_TYPE(/list)
 	var/list/mobs = new
 	for(var/mob/living/M in SSmobs.mob_list)
 		if(get_area(M) == A)

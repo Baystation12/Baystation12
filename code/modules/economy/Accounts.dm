@@ -40,6 +40,7 @@
 
 
 /proc/create_account(account_name = "Default account name", owner_name, starting_funds = 0, account_type = ACCOUNT_TYPE_PERSONAL, obj/machinery/computer/account_database/source_db)
+	RETURN_TYPE(/datum/money_account)
 
 	//create a new account
 	var/datum/money_account/M = new()
@@ -93,11 +94,13 @@
 
 //this returns the first account datum that matches the supplied accnum/pin combination, it returns null if the combination did not match any account
 /proc/attempt_account_access(attempt_account_number, attempt_pin_number, security_level_passed = 0)
+	RETURN_TYPE(/datum/money_account)
 	var/datum/money_account/D = get_account(attempt_account_number)
 	if(D && D.security_level <= security_level_passed && (!D.security_level || D.remote_access_pin == attempt_pin_number) )
 		return D
 
 /proc/get_account(account_number)
+	RETURN_TYPE(/datum/money_account)
 	for(var/datum/money_account/D in all_money_accounts)
 		if(D.account_number == account_number)
 			return D

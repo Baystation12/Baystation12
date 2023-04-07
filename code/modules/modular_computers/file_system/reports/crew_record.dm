@@ -136,6 +136,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 // Gets crew records filtered by set of positions
 /proc/department_crew_manifest(list/filter_positions, blacklist = FALSE)
+	RETURN_TYPE(/list)
 	var/list/matches = list()
 	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
 		var/rank = CR.get_job()
@@ -162,6 +163,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	return dat
 
 /proc/get_crewmember_record(name)
+	RETURN_TYPE(/datum/computer_file/report/crew_record)
 	name = sanitize(name)
 	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
 		if(sanitize(CR.get_name()) == name)

@@ -179,6 +179,7 @@
 * Helpers *
 **********/
 /proc/get_default_outfit_backpack()
+	RETURN_TYPE(/singleton/backpack_outfit)
 	var backpacks = GET_SINGLETON_SUBTYPE_MAP(/singleton/backpack_outfit)
 	for(var/backpack in backpacks)
 		var/singleton/backpack_outfit/bo = backpacks[backpack]

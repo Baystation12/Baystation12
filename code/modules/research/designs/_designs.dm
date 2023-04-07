@@ -67,6 +67,7 @@ other types of metals and chemistry for reagents).
 GLOBAL_LIST_INIT(build_path_to_design_datum_path, populate_design_datum_index())
 
 /proc/populate_design_datum_index()
+	RETURN_TYPE(/list)
 	. = list()
 	for(var/path in typesof(/datum/design))
 		var/datum/design/fake_design = path

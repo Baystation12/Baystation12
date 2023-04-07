@@ -86,6 +86,7 @@ var/global/list/string_slot_flags = list(
 //////////////////////////
 
 /proc/get_mannequin(ckey)
+	RETURN_TYPE(/mob/living/carbon/human/dummy/mannequin)
 	if (!GLOB.mannequins[ckey])
 		GLOB.mannequins[ckey] = new /mob/living/carbon/human/dummy/mannequin
 	return GLOB.mannequins[ckey]
@@ -179,12 +180,14 @@ var/global/list/paramslist_cache = list()
 		paramslist_cache[params_data] = .
 
 /proc/key_number_decode(key_number_data)
+	RETURN_TYPE(/list)
 	var/list/L = params2list(key_number_data)
 	for(var/key in L)
 		L[key] = text2num(L[key])
 	return L
 
 /proc/number_list_decode(number_list_data)
+	RETURN_TYPE(/list)
 	var/list/L = params2list(number_list_data)
 	for(var/i in 1 to length(L))
 		L[i] = text2num(L[i])

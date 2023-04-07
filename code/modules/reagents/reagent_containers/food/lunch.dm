@@ -106,31 +106,37 @@ var/global/list/lunchables_ethanol_reagents_ = list(
 											)
 
 /proc/lunchables_lunches()
+	RETURN_TYPE(/list)
 	if(!(lunchables_lunches_[lunchables_lunches_[1]]))
 		lunchables_lunches_ = init_lunchable_list(lunchables_lunches_)
 	return lunchables_lunches_
 
 /proc/lunchables_snacks()
+	RETURN_TYPE(/list)
 	if(!(lunchables_snacks_[lunchables_snacks_[1]]))
 		lunchables_snacks_ = init_lunchable_list(lunchables_snacks_)
 	return lunchables_snacks_
 
 /proc/lunchables_drinks()
+	RETURN_TYPE(/list)
 	if(!(lunchables_drinks_[lunchables_drinks_[1]]))
 		lunchables_drinks_ = init_lunchable_list(lunchables_drinks_)
 	return lunchables_drinks_
 
 /proc/lunchables_drink_reagents()
+	RETURN_TYPE(/list)
 	if(!(lunchables_drink_reagents_[lunchables_drink_reagents_[1]]))
 		lunchables_drink_reagents_ = init_lunchable_reagent_list(lunchables_drink_reagents_, /datum/reagent/drink)
 	return lunchables_drink_reagents_
 
 /proc/lunchables_ethanol_reagents()
+	RETURN_TYPE(/list)
 	if(!(lunchables_ethanol_reagents_[lunchables_ethanol_reagents_[1]]))
 		lunchables_ethanol_reagents_ = init_lunchable_reagent_list(lunchables_ethanol_reagents_, /datum/reagent/ethanol)
 	return lunchables_ethanol_reagents_
 
 /proc/init_lunchable_list(list/lunches)
+	RETURN_TYPE(/list)
 	. = list()
 	for(var/lunch in lunches)
 		var/obj/O = lunch
@@ -138,6 +144,7 @@ var/global/list/lunchables_ethanol_reagents_ = list(
 	return sortAssoc(.)
 
 /proc/init_lunchable_reagent_list(list/banned_reagents, reagent_types)
+	RETURN_TYPE(/list)
 	. = list()
 	for(var/reagent_type in subtypesof(reagent_types))
 		if(reagent_type in banned_reagents)

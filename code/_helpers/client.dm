@@ -17,6 +17,7 @@
 
 /// Get the client associated with ckey text if it is currently connected
 /proc/ckey2client(text)
+	RETURN_TYPE(/client)
 	if (valid_ckey(text))
 		for (var/client/C as anything in GLOB.clients)
 			if (C.ckey == text)
@@ -25,6 +26,7 @@
 
 /// Get the client associated with key text if it is currently connected
 /proc/key2client(text)
+	RETURN_TYPE(/client)
 	if (valid_key(text))
 		for (var/client/C as anything in GLOB.clients)
 			if (C.key == text)
@@ -33,6 +35,7 @@
 
 /// Null, or a client if thing is a client, a mob with a client, a connected ckey, or null
 /proc/resolve_client(client/thing)
+	RETURN_TYPE(/client)
 	if (istype(thing))
 		return thing
 	if (!thing)
@@ -45,6 +48,7 @@
 
 /// Null or a client from the list of connected clients, chosen by actor if actor is valid
 /proc/select_client(client/actor, message = "Connected clients:", title = "Select Client")
+	RETURN_TYPE(/client)
 	actor = resolve_client(actor)
 	if (!actor)
 		return

@@ -165,6 +165,7 @@
 // excluding source, that match the direction d
 // if unmarked==1, only return those with no powernet
 /proc/power_list(turf/T, source, d, unmarked=0, cable_only = 0)
+	RETURN_TYPE(/list)
 	. = list()
 
 	var/reverse = d ? GLOB.reverse_dir[d] : 0
@@ -222,6 +223,7 @@
 
 //Merge two powernets, the bigger (in cable length term) absorbing the other
 /proc/merge_powernets(datum/powernet/net1, datum/powernet/net2)
+	RETURN_TYPE(/datum/powernet)
 	if(!net1 || !net2) //if one of the powernet doesn't exist, return
 		return
 

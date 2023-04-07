@@ -308,6 +308,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /* It is perfectly possible to create loops with TEMPLATE_FLAG_ALLOW_DUPLICATES and force/allow. Don't. */
 /proc/resolve_site_selection(datum/map_template/ruin/away_site/site, list/selected, list/available, list/unavailable, list/by_type)
+	RETURN_TYPE(/list)
 	var/spawn_cost = 0
 	var/player_cost = 0
 	if (site in selected)

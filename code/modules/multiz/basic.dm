@@ -29,18 +29,21 @@ var/global/list/z_levels = list()// Each bit re... haha just kidding this is a l
 
 // Thankfully, no bitwise magic is needed here.
 /proc/GetAbove(atom/atom)
+	RETURN_TYPE(/turf)
 	var/turf/turf = get_turf(atom)
 	if(!turf)
 		return null
 	return HasAbove(turf.z) ? get_step(turf, UP) : null
 
 /proc/GetBelow(atom/atom)
+	RETURN_TYPE(/turf)
 	var/turf/turf = get_turf(atom)
 	if(!turf)
 		return null
 	return HasBelow(turf.z) ? get_step(turf, DOWN) : null
 
 /proc/GetConnectedZlevels(z)
+	RETURN_TYPE(/list)
 	. = list(z)
 	for(var/level = z, HasBelow(level), level--)
 		. |= level-1
@@ -51,6 +54,7 @@ var/global/list/z_levels = list()// Each bit re... haha just kidding this is a l
 	return zA == zB || (zB in GetConnectedZlevels(zA))
 
 /proc/get_zstep(ref, dir)
+	RETURN_TYPE(/turf)
 	if(dir == UP)
 		. = GetAbove(ref)
 	else if (dir == DOWN)
