@@ -118,7 +118,8 @@
 /obj/item/device/bot_controller
 	name = "remote control"
 	desc = "Used to control something remotely. Even has a tiny screen!"
-	icon_state = "forensic1"
+	icon = 'icons/obj/surgery.dmi'
+	icon_state = "autopsy_scanner"
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	item_state = "electronic"
