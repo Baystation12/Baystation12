@@ -77,11 +77,63 @@
 			. += list(row)
 
 
-/proc/_find_bans_in_connections(list/connections)
+/proc/_find_bans_in_connections(list/connections, include_inactive = FALSE)
 	RETURN_TYPE(/list)
 	. = list()
+
+	var/list/ckeys = list()
+	var/list/ips = list()
+	var/list/cids = list()
+	var/list/final_query_components = list()
+
 	for (var/list/connection in connections)
-		. |= _fetch_bans(connection["ckey"], connection["ip"], connection["computerid"])
+		ckeys |= connection["ckey"]
+		ips |= connection["ip"]
+		cids |= connection["computerid"]
+
+	var/empty_string = ""
+	var/comma_separator = "', '"
+	if (length(ckeys))
+		final_query_components += "`ckey` IN ('[english_list(ckeys, empty_string, comma_separator, comma_separator, empty_string)]')"
+
+	if (length(ips))
+		final_query_components += "`ip` IN ('[english_list(ips, empty_string, comma_separator, comma_separator, empty_string)]')"
+
+	if (length(cids))
+		final_query_components += "`computerid` IN ('[english_list(cids, empty_string, comma_separator, comma_separator, empty_string)]')"
+
+	if (!length(final_query_components))
+		return
+
+	establish_db_connection()
+	if (!dbcon.IsConnected())
+		crash_with("Database connection failed.")
+		return
+	var/DBQuery/query = dbcon.NewQuery({"
+		SELECT `bantime`, `bantype`, `reason`, `job`, `duration`, `expiration_time`, `ckey`, `ip`, `computerid`, `a_ckey`, `unbanned`
+			FROM `erro_ban`
+			WHERE `bantype` IN ('PERMABAN', 'TEMPBAN') AND
+			([english_list(final_query_components, "", "", " OR ", " OR ")])
+	"})
+	query.Execute()
+	var/now = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
+	while (query.NextRow())
+		var/row = list(
+			"bantime" = query.item[1],
+			"bantype" = query.item[2],
+			"reason" = query.item[3],
+			"job" = query.item[4],
+			"duration" = query.item[5],
+			"expiration_time" = query.item[6],
+			"ckey" = query.item[7],
+			"ip" = query.item[8],
+			"computerid" = query.item[9],
+			"a_ckey" = query.item[10],
+			"unbanned" = query.item[11]
+		)
+		row["expired"] = ((row["bantype"] in list("TEMPBAN", "JOB_TEMPBAN")) && now > row["expiration_time"])
+		if (include_inactive || !(row["expired"] || row["unbanned"]))
+			. += list(row)
 
 
 /**
