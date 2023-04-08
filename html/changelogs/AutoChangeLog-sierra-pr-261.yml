@@ -1,7 +1,0 @@
-author: Hubblenaut
-delete-after: true
-changes:
-  - tweak: When having the required weapons skill, guns will automatically have their
-      safety turned on when holstered.
-  - tweak: Skill-based toggling of the gun-safety when drawing/shooting a gun is no
-      longer chance-based.

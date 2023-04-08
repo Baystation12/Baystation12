@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Optimizes some on-connect code that was causing the server to lag when
-      certain users joined.

@@ -1,6 +1,0 @@
-author: Rootoo807
-delete-after: true
-changes:
-  - bugfix: Flash shells, remotes for remote-bots, and re-cooked custom foods have
-      sprites now.
-  - tweak: 7mm bullets use the 7mm sprites instead of the 10mm sprites.
