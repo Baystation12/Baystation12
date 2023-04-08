@@ -26,7 +26,10 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	var/flush_every_ticks = 30 //Every 30 ticks it will look whether it is ready to flush
 	var/flush_count = 0 //this var adds 1 once per tick. When it reaches flush_every_ticks it resets and tries to flush.
 	var/last_sound = 0
-	var/list/allowed_objects = list(/obj/structure/closet)
+	var/list/allowed_objects = list(
+		/obj/structure/closet,
+		/obj/structure/bigDelivery
+	)
 	active_power_usage = 2200	//the pneumatic pump power. 3 HP ~ 2200W
 	idle_power_usage = 100
 	atom_flags = ATOM_FLAG_CLIMBABLE
