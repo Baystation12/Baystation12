@@ -166,6 +166,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		attackby(AM, user)
 		return
 	else if(!is_type_in_list(AM, allowed_objects))
+		USE_FEEDBACK_FAILURE("\The [AM] doesn't fit in \the [src].")
 		return
 
 	// Checks completed, start inserting
