@@ -70,6 +70,8 @@
 
 /datum/job/bartender
 	title = "Bartender"
+	total_positions = 1
+	spawn_positions = 1
 	department = "Обслуживания"
 	department_flag = SRV
 	supervisors = "Главе Персонала"
