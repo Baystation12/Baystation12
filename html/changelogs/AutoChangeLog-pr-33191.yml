@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: The chemistry fridge now accepts IV bags.
+  - maptweak: Medbay now has a box of empty IV bags in the ETC.
