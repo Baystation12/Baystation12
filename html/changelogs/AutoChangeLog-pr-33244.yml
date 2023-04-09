@@ -1,0 +1,4 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Inflatables boxes no longer have a flag on their side when held in hands.
