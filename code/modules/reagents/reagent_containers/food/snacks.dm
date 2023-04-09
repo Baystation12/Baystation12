@@ -221,6 +221,23 @@
 			something.dropInto(loc)
 	. = ..()
 
+/obj/item/reagent_containers/food/snacks/afterattack(obj/item/reagent_containers/food/drinks/glass2/glass, mob/user, proximity)
+	..()
+	if(!proximity)
+		return
+	if(istype(glass))
+		if(w_class != ITEM_SIZE_TINY)
+			to_chat(user, SPAN_NOTICE("\The [src] is too big to properly dip in \the [glass]."))
+			return
+		var/transfered = glass.reagents.trans_to_obj(src, volume)
+		if(transfered)	//if reagents were transfered, show the message
+			to_chat(user, SPAN_NOTICE("You dip \the [src] into \the [glass]."))
+		else			//if not, either the glass was empty, or the food was full
+			if(!glass.reagents.total_volume)
+				to_chat(user, SPAN_NOTICE("\The [glass] is empty."))
+			else
+				to_chat(user, SPAN_NOTICE("\The [src] is full."))
+
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END
 ////////////////////////////////////////////////////////////////////////////////
@@ -2517,6 +2534,7 @@
 	center_of_mass = "x=17;y=6"
 	nutriment_desc = list("salt" = 1, "cracker" = 2)
 	w_class = ITEM_SIZE_TINY
+	volume = 6
 	nutriment_amt = 1
 
 /////////////////////////////////////////////////PIZZA////////////////////////////////////////
@@ -3570,6 +3588,7 @@
 	nutriment_amt = 5
 	nutriment_desc = list("sweetness" = 3, "cookie" = 2)
 	w_class = ITEM_SIZE_TINY
+	volume = 10
 	bitesize = 1
 
 /obj/item/reagent_containers/food/snacks/chocolatebar
@@ -4152,3 +4171,41 @@
 	name = "taco"
 	desc = "Interestingly, the shell has gone soft and the contents have gone stale."
 	icon_state = "ancient_taco"
+
+/obj/item/reagent_containers/food/snacks/sliceable/unscottiloaf
+	name = "loaf of unscotti"
+	desc = "A loaf of unscotti, ready to be sliced into the iconic biscotti shape."
+	icon_state = "unscottiloaf"
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/unscotti
+	slices_num = 4
+	filling_color = "#ffe396"
+	center_of_mass = "x=16;y=9"
+	nutriment_desc = list("cookie" = 5, "almonds" = 3)
+	nutriment_amt = 8
+	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/slice/unscotti
+	name = "unscotti"
+	desc = "An Italian cookie made with almonds. Typically baked again to make biscotti."
+	icon_state = "unscotti"
+	filling_color = "#d27332"
+	bitesize = 4
+	center_of_mass = "x=16;y=4"
+	w_class = ITEM_SIZE_TINY
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/unscottiloaf
+	volume = 7
+
+/obj/item/reagent_containers/food/snacks/slice/unscotti/filled
+	filled = TRUE
+
+/obj/item/reagent_containers/food/snacks/biscotti
+	name = "biscotti"
+	desc = "A twice baked Italian cookie usually served before breakfast, after dinner, or with coffee. This one has almonds."
+	icon_state = "biscotti"
+	filling_color = "#dbc94f"
+	center_of_mass = "x=17;y=18"
+	nutriment_amt = 4
+	nutriment_desc = list("sweetness" = 2, "crumbly cookie" = 2, "almonds" = 1)
+	w_class = ITEM_SIZE_TINY
+	bitesize = 3
+	volume = 9

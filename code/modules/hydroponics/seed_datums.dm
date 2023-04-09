@@ -649,6 +649,7 @@
 	seed_name = "peanut"
 	display_name = "peanut plant"
 	chems = list(/datum/reagent/nutriment = list(1,10))
+	kitchen_tag = "peanut"
 
 /datum/seed/peanuts/New()
 	..()
@@ -1817,3 +1818,22 @@
 	set_trait(TRAIT_IDEAL_LIGHT,5)
 	set_trait(TRAIT_PRODUCT_COLOUR,"#ef5f32")
 	set_trait(TRAIT_PLANT_COLOUR,"#ef5f32")
+
+/datum/seed/almond
+	name = "almond"
+	seed_name = "almond"
+	display_name = "almond plant"
+	chems = list(/datum/reagent/nutriment = list(1,10))
+	kitchen_tag = "almond"
+
+/datum/seed/almond/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,6)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"nuts")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#eddcc8")
+	set_trait(TRAIT_PLANT_ICON,"bush2")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
