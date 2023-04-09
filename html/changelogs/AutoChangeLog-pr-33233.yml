@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: The 'Check Bans' button in the Player Panel now shows all related bans,
+      making it consistant with the admin log on connect.
