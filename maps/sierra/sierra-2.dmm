@@ -23777,7 +23777,6 @@
 /obj/structure/railing/mapped{
 	dir = 1
 	},
-/obj/item/stock_parts/circuitboard/bluespacedrive,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/storage/tech)
 "aSb" = (
