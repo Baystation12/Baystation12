@@ -160,11 +160,11 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		return
 
 	if (prob(5))
-		H.custom_emote("wails!")
+		H.custom_emote(AUDIBLE_MESSAGE,"wails!")
 	else if (prob(5))
-		H.custom_emote("groans!")
+		H.custom_emote(AUDIBLE_MESSAGE,"groans!")
 	if (H.restrained() && prob(8))
-		H.custom_emote("thrashes and writhes!")
+		H.custom_emote(AUDIBLE_MESSAGE,"thrashes and writhes!")
 
 	if (H.lying)
 		walk(H, 0)
