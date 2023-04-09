@@ -10,6 +10,7 @@
 	active_power_usage = 100
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	pixel_x = -8
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 	var/jukebox/jukebox
 
