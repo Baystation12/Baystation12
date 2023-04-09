@@ -264,6 +264,16 @@ BLIND     // can't see anything
 	else
 		return icon_state
 
+/obj/item/clothing/glasses/on_update_icon()
+	if (toggleable)
+		if (active)
+			var/datum/extension/base_icon_state/BIS = get_extension(src, /datum/extension/base_icon_state)
+			icon_state = BIS.base_icon_state
+		else
+			icon_state = off_state
+	else
+		icon_state = initial(icon_state)
+
 /obj/item/clothing/glasses/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
