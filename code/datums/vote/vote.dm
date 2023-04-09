@@ -137,7 +137,7 @@
 	text += "<b>Votes Per Option:</b>"
 	for(var/R in result)
 		if (result[R] > 0)
-			text += "\n[R]: [result[R]]<br>"
+			text += "\n[R]: [result[R]]"
 	return JOINTEXT(text)
 
 
