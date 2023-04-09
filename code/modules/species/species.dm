@@ -243,7 +243,10 @@
 	)
 
 	var/standing_jump_range = 2
-	var/list/maneuvers = list(/singleton/maneuver/leap)
+	var/list/maneuvers = list(
+		/singleton/maneuver/leap,
+		/singleton/maneuver/leap/quick
+	)
 
 	var/list/available_cultural_info = list(
 		TAG_CULTURE =   list(CULTURE_OTHER),
