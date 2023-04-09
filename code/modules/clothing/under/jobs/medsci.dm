@@ -197,9 +197,9 @@
 /obj/item/clothing/under/rank/geneticist_new
 	desc = "It's made of a special fiber which provides minor protection against biohazards."
 	name = "geneticist's jumpsuit"
-	icon_state = "genetics_new"
+	icon_state = "geneticist_new"
 	item_state = "w_suit"
-	worn_state = "genetics_new"
+	worn_state = "geneticist_new"
 	permeability_coefficient = 0.50
 	armor = list(
 		bio = ARMOR_BIO_MINOR

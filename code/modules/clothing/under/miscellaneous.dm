@@ -1,4 +1,4 @@
-/obj/item/clothing/under/pj/red
+/obj/item/clothing/under/redpyjamas
 	name = "red pj's"
 	desc = "Sleepwear."
 	icon_state = "red_pyjamas"
@@ -6,7 +6,7 @@
 	item_state = "w_suit"
 	gender_icons = 1
 
-/obj/item/clothing/under/pj/blue
+/obj/item/clothing/under/bluepyjamas
 	name = "blue pj's"
 	desc = "Sleepwear."
 	icon_state = "blue_pyjamas"
@@ -105,9 +105,9 @@
 /obj/item/clothing/under/space
 	name = "\improper NASA jumpsuit"
 	desc = "It has a NASA logo on it and is made of space-proofed materials."
-	icon_state = "black"
+	icon_state = "syndicate"
 	item_state = "bl_suit"
-	worn_state = "black"
+	worn_state = "syndicate"
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
@@ -217,14 +217,6 @@
 	icon_state = "red_suit"
 	item_state = "r_suit"
 	worn_state = "red_suit"
-
-/obj/item/clothing/under/blackskirt
-	name = "black skirt"
-	desc = "A black skirt, very fancy!"
-	icon_state = "blackskirt"
-	item_state = "bl_suit"
-	worn_state = "blackskirt"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 /obj/item/clothing/under/schoolgirl
 	name = "schoolgirl uniform"
@@ -677,6 +669,7 @@
 	worn_state = "punpun"
 	species_restricted = list(SPECIES_MONKEY)
 	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/punpants
 	name = "monkey pants"
@@ -685,6 +678,7 @@
 	worn_state = "jeansmustang"
 	species_restricted = list(SPECIES_MONKEY)
 	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/rank/psych/turtleneck/sweater
 	desc = "A warm looking sweater and a pair of dark blue slacks."

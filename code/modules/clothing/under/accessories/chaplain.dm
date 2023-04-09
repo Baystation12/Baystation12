@@ -1,6 +1,7 @@
 /obj/item/clothing/accessory/chaplain
 	abstract_type = /obj/item/clothing/accessory/chaplain
 	name = "base chaplain insignia"
+	icon_state = null
 	item_state = "chaplaininsignia"
 	on_rolled_down = ACCESSORY_ROLLED_NONE
 	slot = ACCESSORY_SLOT_INSIGNIA

@@ -146,7 +146,7 @@
 /obj/item/clothing/head/beret/engineering
 	name = "corporate engineering beret"
 	desc = "A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety."
-	icon_state = "beret_orange"
+	icon_state = "beret_corporate_navy"
 
 /obj/item/clothing/head/beret/purple
 	name = "purple beret"
@@ -166,7 +166,7 @@
 /obj/item/clothing/head/beret/deathsquad
 	name = "heavy asset protection beret"
 	desc = "An armored red beret adorned with the crest of corporate asset protection. Doesn't sacrifice style or safety."
-	icon_state = "beret_red"
+	icon_state = "beret_corporate_red"
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_RIFLE,

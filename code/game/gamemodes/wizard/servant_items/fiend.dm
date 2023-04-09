@@ -25,7 +25,7 @@
 	)
 
 /obj/item/clothing/under/lawyer/fiendsuit
-	name = "black suit"
+	name = "black and red suit"
 	desc = "A snappy black suit with red trim. The undershirt's stained with something, though..."
 	icon_state = "fiendsuit"
 

@@ -7,7 +7,7 @@
 		slot_w_uniform_str = 'packs/faction_iccgn/ranks.dmi',
 		slot_wear_suit_str = 'packs/faction_iccgn/ranks.dmi'
 	)
-	icon_state = "error"
+	icon_state = null
 	overlay_state = "error"
 	on_rolled_down = ACCESSORY_ROLLED_NONE
 	w_class = ITEM_SIZE_TINY

@@ -9,21 +9,12 @@
 		slot_w_uniform_str = 'packs/faction_iccgn/clothing.dmi'
 	)
 	sprite_sheets = list()
-	icon_state = "error"
 	body_parts_covered = FULL_TORSO | ARMS | FULL_LEGS
 	siemens_coefficient = 0.9
 	armor = list(
 		melee = ARMOR_MELEE_MINOR,
 		energy = ARMOR_ENERGY_MINOR
 	)
-
-
-/obj/item/clothing/under/iccgn/get_gender_suffix(suffix)
-	return ""
-
-
-/obj/item/clothing/under/iccgn/get_icon_state(mob/user_mob, slot)
-	return item_state_slots[slot]
 
 
 /obj/item/clothing/under/iccgn/pt
@@ -80,7 +71,6 @@
 		slot_wear_suit_str = 'packs/faction_iccgn/clothing.dmi'
 	)
 	sprite_sheets = list()
-	icon_state = "error"
 	body_parts_covered = FULL_TORSO | ARMS
 	siemens_coefficient = 0.9
 	valid_accessory_slots = list(
@@ -205,7 +195,6 @@
 		slot_gloves_str = 'packs/faction_iccgn/clothing.dmi'
 	)
 	sprite_sheets = list()
-	icon_state = "error"
 
 
 /obj/item/clothing/gloves/iccgn/duty
@@ -229,7 +218,6 @@
 		slot_shoes_str = 'packs/faction_iccgn/clothing.dmi'
 	)
 	sprite_sheets = list()
-	icon_state = "error"
 
 
 /obj/item/clothing/shoes/iccgn/utility
@@ -264,7 +252,6 @@
 		slot_head_str = 'packs/faction_iccgn/clothing.dmi'
 	)
 	sprite_sheets = list()
-	icon_state = "error"
 
 
 /obj/item/clothing/head/iccgn/beret

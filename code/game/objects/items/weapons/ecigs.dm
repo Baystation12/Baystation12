@@ -13,7 +13,6 @@
 	body_parts_covered = 0
 	var/brightness_on = 1
 	chem_volume = 0 //ecig has no storage on its own but has reagent container created by parent obj
-	item_state = "ecigoff"
 	var/icon_off
 	var/icon_empty
 	var/power_usage = 450 //value for simple ecig, enough for about 1 cartridge, in JOULES!

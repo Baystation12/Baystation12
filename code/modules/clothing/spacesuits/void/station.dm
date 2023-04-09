@@ -44,6 +44,7 @@
 /obj/item/clothing/suit/space/void/engineering/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 //Mining
 /obj/item/clothing/head/helmet/space/void/mining
@@ -87,6 +88,7 @@
 
 /obj/item/clothing/suit/space/void/mining/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/mining
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 //Medical
 /obj/item/clothing/head/helmet/space/void/medical
@@ -126,6 +128,7 @@
 /obj/item/clothing/suit/space/void/medical/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/medical
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 //Security
 /obj/item/clothing/head/helmet/space/void/security
@@ -170,6 +173,7 @@
 /obj/item/clothing/suit/space/void/security/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/security
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 //Atmospherics
 /obj/item/clothing/head/helmet/space/void/atmos
@@ -216,6 +220,7 @@
 /obj/item/clothing/suit/space/void/atmos/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/atmos
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 //Surplus Voidsuits
 
@@ -255,6 +260,7 @@
 /obj/item/clothing/suit/space/void/engineering/alt/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering/alt
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 //Mining
 /obj/item/clothing/head/helmet/space/void/mining/alt
@@ -270,6 +276,7 @@
 
 /obj/item/clothing/suit/space/void/mining/alt/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/mining/alt
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 //Medical
 /obj/item/clothing/head/helmet/space/void/medical/alt
@@ -306,6 +313,7 @@
 /obj/item/clothing/suit/space/void/medical/alt/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 //Security
 /obj/item/clothing/head/helmet/space/void/security/alt
@@ -338,6 +346,7 @@
 /obj/item/clothing/suit/space/void/security/alt/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/security/alt
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 //Atmospherics
 /obj/item/clothing/head/helmet/space/void/atmos/alt
@@ -355,6 +364,7 @@
 /obj/item/clothing/suit/space/void/atmos/alt/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/atmos/alt
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 //Misc
 /obj/item/clothing/head/helmet/space/void/engineering/salvage
@@ -416,6 +426,7 @@
 /obj/item/clothing/suit/space/void/engineering/salvage/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering/salvage
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 //Pilot
 /obj/item/clothing/head/helmet/space/void/pilot
@@ -448,6 +459,7 @@
 /obj/item/clothing/suit/space/void/pilot/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/pilot
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/space/void/pilot/Initialize()
 	. = ..()
@@ -484,3 +496,4 @@
 /obj/item/clothing/suit/space/void/retro/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/retro
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON

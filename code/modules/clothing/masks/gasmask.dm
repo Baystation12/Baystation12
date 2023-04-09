@@ -203,7 +203,7 @@
 	body_parts_covered = 0
 	species_restricted = list(SPECIES_VOX)
 	filtered_gases = list(GAS_OXYGEN)
-
+	item_flags = ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT | ITEM_FLAG_AIRTIGHT | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/mask/gas/swat/vox
 	name = "alien mask"
@@ -222,6 +222,7 @@
 		GAS_METHYL_BROMIDE,
 		GAS_METHANE
 		)
+	item_flags = ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT | ITEM_FLAG_AIRTIGHT | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/mask/gas/aquabreather
 	name = "aquabreather"
