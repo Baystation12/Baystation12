@@ -1,7 +1,7 @@
 /obj/item/clothing/accessory/storage
 	abstract_type = /obj/item/clothing/accessory/storage
 	name = "base storage accessory"
-	icon_state = "webbing"
+	icon_state = null
 	slot = ACCESSORY_SLOT_UTILITY
 	w_class = ITEM_SIZE_NORMAL
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY

@@ -104,6 +104,7 @@
 	desc = "A plain shirt and pair of pressed black pants."
 	name = "formal outfit"
 	accessories = list(/obj/item/clothing/accessory/red_long)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 
 /obj/item/clothing/under/rank/janitor

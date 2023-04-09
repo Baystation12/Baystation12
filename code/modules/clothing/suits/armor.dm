@@ -244,8 +244,8 @@
 
 /obj/item/clothing/suit/storage/vest/nt/hos
 	name = "commander heavy armored vest"
-	desc = "A synthetic armor vest with COMMANDER printed in gold lettering on the chest. This one has added webbing and ballistic plates."
-	icon_state = "comwebvest"
+	desc = "A synthetic armor vest with COMMANDER printed in silver lettering on the chest. This one has added webbing and ballistic plates."
+	icon_state = "secwebvest"
 
 /obj/item/clothing/suit/storage/vest/pcrc
 	name = "contractor heavy armored vest"
@@ -312,18 +312,23 @@
 
 /obj/item/clothing/suit/armor/pcarrier/light
 	accessories = list(/obj/item/clothing/accessory/armor_plate)
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/armor/pcarrier/light/nt
 	accessories = list(/obj/item/clothing/accessory/armor_plate, /obj/item/clothing/accessory/armor_tag/nt)
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/armor/pcarrier/light/press
 	accessories = list(/obj/item/clothing/accessory/armor_plate, /obj/item/clothing/accessory/armor_tag/press)
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/armor/pcarrier/medium
 	accessories = list(/obj/item/clothing/accessory/armor_plate/medium, /obj/item/clothing/accessory/storage/pouches)
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/armor/pcarrier/medium/nt
 	accessories = list(/obj/item/clothing/accessory/armor_plate/medium, /obj/item/clothing/accessory/storage/pouches, /obj/item/clothing/accessory/armor_tag/nt)
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/armor/pcarrier/blue
 	name = "blue plate carrier"
@@ -351,6 +356,7 @@
 
 /obj/item/clothing/suit/armor/pcarrier/merc
 	accessories = list(/obj/item/clothing/accessory/armor_plate/merc, /obj/item/clothing/accessory/arm_guards/merc, /obj/item/clothing/accessory/leg_guards/merc, /obj/item/clothing/accessory/storage/pouches/large)
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 //Modular specialty armor
 /obj/item/clothing/suit/armor/riot
@@ -405,6 +411,7 @@
 
 /obj/item/clothing/suit/armor/bulletproof/vest //because apparently some map uses this somewhere and I'm too lazy to go looking for and replacing it.
 	accessories = null
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/armor/laserproof
 	name = "ablative vest"

@@ -67,15 +67,6 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 
 
-/obj/item/clothing/suit/cyborg_suit
-	name = "cyborg suit"
-	desc = "Suit for a cyborg costume."
-	icon_state = "death"
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	fire_resist = T0C+5200
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-
-
 /obj/item/clothing/suit/greatcoat
 	name = "great coat"
 	desc = "A heavy great coat."
@@ -202,38 +193,12 @@
 	icon_state = "ianshirt"
 	body_parts_covered = UPPER_TORSO|ARMS
 
-//pyjamas
-//originally intended to be pinstripes >.>
-
-/obj/item/clothing/under/bluepyjamas
-	name = "blue pyjamas"
-	desc = "Slightly old-fashioned sleepwear."
-	icon_state = "blue_pyjamas"
-	item_state = "blue_pyjamas"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
-
-/obj/item/clothing/under/redpyjamas
-	name = "red pyjamas"
-	desc = "Slightly old-fashioned sleepwear."
-	icon_state = "red_pyjamas"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
-
 //coats
 
 /obj/item/clothing/suit/leathercoat
 	name = "leather coat"
 	desc = "A long, thick black leather coat."
 	icon_state = "leathercoat"
-
-/obj/item/clothing/suit/browncoat
-	name = "brown leather coat"
-	desc = "A long, brown leather coat."
-	icon_state = "browncoat"
-
-/obj/item/clothing/suit/neocoat
-	name = "black coat"
-	desc = "A flowing, black coat."
-	icon_state = "neocoat"
 
 //stripper
 /obj/item/clothing/under/stripper
@@ -242,13 +207,13 @@
 /obj/item/clothing/under/stripper/stripper_pink
 	name = "pink swimsuit"
 	desc = "A rather skimpy pink swimsuit."
-	icon_state = "stripper_p_under"
+	icon_state = "stripper_p"
 	siemens_coefficient = 1
 
 /obj/item/clothing/under/stripper/stripper_green
 	name = "green swimsuit"
 	desc = "A rather skimpy green swimsuit."
-	icon_state = "stripper_g_under"
+	icon_state = "stripper_g"
 	siemens_coefficient = 1
 
 /obj/item/clothing/suit/stripper/stripper_pink

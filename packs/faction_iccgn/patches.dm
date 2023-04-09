@@ -17,7 +17,7 @@
 		slot_w_uniform_str = 'packs/faction_iccgn/patches.dmi',
 		slot_wear_suit_str = 'packs/faction_iccgn/patches.dmi'
 	)
-	icon_state = "error"
+	icon_state = null
 	on_rolled_down = ACCESSORY_ROLLED_NONE
 	w_class = ITEM_SIZE_TINY
 	slot = ACCESSORY_SLOT_INSIGNIA

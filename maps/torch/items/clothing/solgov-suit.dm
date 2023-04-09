@@ -50,48 +50,63 @@
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/medical
 	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/medical
 	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/engineering
 	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/engineering
 	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/supply
 	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/supply
 	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/security
 	accessories = list(/obj/item/clothing/accessory/solgov/department/security/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/security
 	accessories = list(/obj/item/clothing/accessory/solgov/department/security/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/service
 	accessories = list(/obj/item/clothing/accessory/solgov/department/service/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/service
 	accessories = list(/obj/item/clothing/accessory/solgov/department/service/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/exploration
 	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/exploration
 	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/research
 	accessories = list(/obj/item/clothing/accessory/solgov/department/research/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/research
 	accessories = list(/obj/item/clothing/accessory/solgov/department/research/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/command/command
 	accessories = list(/obj/item/clothing/accessory/solgov/department/command/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/storage/solgov/service/fleet
 	name = "fleet service jacket"
@@ -514,6 +529,7 @@
 /obj/item/clothing/suit/space/void/engineering/alt/sol/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering/alt/sol
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/space/void/atmos/alt/sol
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
@@ -530,6 +546,7 @@
 /obj/item/clothing/suit/space/void/atmos/alt/sol/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/atmos/alt/sol
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/space/void/pilot/sol
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
@@ -546,6 +563,7 @@
 /obj/item/clothing/suit/space/void/pilot/sol/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/pilot/sol
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/space/void/medical/alt/sol
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
@@ -562,6 +580,7 @@
 /obj/item/clothing/suit/space/void/medical/alt/sol/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt/sol
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/space/void/command
 	name = "command voidsuit"
@@ -587,6 +606,7 @@
 /obj/item/clothing/suit/space/void/command/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/command
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/space/void/exploration
 	name = "exploration voidsuit"
@@ -617,3 +637,4 @@
 /obj/item/clothing/suit/space/void/exploration/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/exploration
 	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON

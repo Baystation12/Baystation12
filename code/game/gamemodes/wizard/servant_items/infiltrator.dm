@@ -21,7 +21,7 @@
 		)
 
 /obj/item/clothing/under/lawyer/infil
-	name = "formal outfit"
+	name = "immaculate formal outfit"
 	desc = "A white dress shirt and navy pants. Snazzy."
 	icon_state = "inf_mob"
 

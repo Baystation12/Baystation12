@@ -123,7 +123,6 @@
 /obj/item/clothing/suit/storage/forensics
 	name = "jacket"
 	desc = "A forensics technician jacket."
-	item_state = "det_suit"
 	body_parts_covered = UPPER_TORSO|ARMS
 	allowed = list(
 		/obj/item/tank/oxygen_emergency,

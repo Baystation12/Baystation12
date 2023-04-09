@@ -43,12 +43,9 @@
 	C.item_state = copy.item_state
 	C.body_parts_covered = copy.body_parts_covered
 
-	if (copy.item_icons)
-		C.item_icons = copy.item_icons.Copy()
-	if (copy.item_state_slots)
-		C.item_state_slots = copy.item_state_slots.Copy()
-	if (copy.sprite_sheets)
-		C.sprite_sheets = copy.sprite_sheets.Copy()
+	C.item_icons = copy.item_icons
+	C.item_state_slots = copy.item_state_slots
+	C.sprite_sheets = copy.sprite_sheets
 
 	OnDisguise(copy)
 	qdel(copy)

@@ -17,7 +17,7 @@
 
 /obj/item/clothing/under/shorts/green
 	name = "green athletic shorts"
-	color = "#3c1818"
+	color = "#159113"
 
 /obj/item/clothing/under/shorts/blue
 	name = "blue athletic shorts"

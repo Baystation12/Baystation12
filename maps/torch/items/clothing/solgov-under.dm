@@ -57,27 +57,35 @@
 
 /obj/item/clothing/under/solgov/utility/expeditionary/command
 	accessories = list(/obj/item/clothing/accessory/solgov/department/command)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/engineering
 	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/security
 	accessories = list(/obj/item/clothing/accessory/solgov/department/security)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/medical
 	accessories = list(/obj/item/clothing/accessory/solgov/department/medical)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/supply
 	accessories = list(/obj/item/clothing/accessory/solgov/department/supply)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/service
 	accessories = list(/obj/item/clothing/accessory/solgov/department/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/exploration
 	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/research
 	accessories = list(/obj/item/clothing/accessory/solgov/department/research)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer
 	name = "expeditionary officer's uniform"
@@ -87,27 +95,35 @@
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
 	accessories = list(/obj/item/clothing/accessory/solgov/department/command)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/engineering
 	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/security
 	accessories = list(/obj/item/clothing/accessory/solgov/department/security)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
 	accessories = list(/obj/item/clothing/accessory/solgov/department/medical)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/supply
 	accessories = list(/obj/item/clothing/accessory/solgov/department/supply)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/service
 	accessories = list(/obj/item/clothing/accessory/solgov/department/service)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/exploration
 	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/officer/research
 	accessories = list(/obj/item/clothing/accessory/solgov/department/research)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet
 	name = "fleet coveralls"
@@ -118,55 +134,68 @@
 
 /obj/item/clothing/under/solgov/utility/fleet/command
 	accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/command/pilot
 	accessories = list(/obj/item/clothing/accessory/solgov/specialty/pilot)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/engineering
 	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/fleet)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/security
 	accessories = list(/obj/item/clothing/accessory/solgov/department/security/fleet)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/medical
 	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/fleet)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/supply
 	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/fleet)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/service
 	accessories = list(/obj/item/clothing/accessory/solgov/department/service/fleet)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/exploration
 	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/fleet)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/polopants
-	name = "fleet polo and pants"
+	name = "fleet polo"
 	desc = "An alternative utility uniform of the SCG Fleet, specially designed for engineering staff. The pants sports some yellow reflective stripes, and have knee pads."
 	icon_state = "navypolopants"
 	worn_state = "navypolopants"
 
 /obj/item/clothing/under/solgov/utility/fleet/polopants/command
+	name = "fleet command polo"
 	desc = "An alternative utility uniform of the SCG Fleet. The pants have knee pads."
 	icon_state = "navypolopantsnostripe"
 	worn_state = "navypolopantscom"
 
 /obj/item/clothing/under/solgov/utility/fleet/polopants/security
+	name = "fleet security polo"
 	desc = "An alternative utility uniform of the SCG Fleet. The pants have knee pads."
 	icon_state = "navypolopantsnostripe"
 	worn_state = "navypolopantssec"
 
 /obj/item/clothing/under/solgov/utility/fleet/polopants/medical
+	name = "fleet medical polo"
 	desc = "An alternative utility uniform of the SCG Fleet, specially designed for medics and doctors. The pants have knee pads."
 	icon_state = "navypolopantsnostripe"
 	worn_state = "navypolopantsmed"
 
 /obj/item/clothing/under/solgov/utility/fleet/polopants/supply
+	name = "fleet supply polo"
 	desc = "An alternative utility uniform of the SCG Fleet. The pants have knee pads."
 	icon_state = "navypolopantsnostripe"
 	worn_state = "navypolopantssup"
 
 /obj/item/clothing/under/solgov/utility/fleet/polopants/service
+	name = "fleet service polo"
 	desc = "An alternative utility uniform of the SCG Fleet. The pants have knee pads."
 	icon_state = "navypolopantsnostripe"
 	worn_state = "navypolopantssrv"
@@ -179,24 +208,31 @@
 
 /obj/item/clothing/under/solgov/utility/fleet/combat/security
 	accessories = list(/obj/item/clothing/accessory/solgov/department/security/fleet)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/combat/medical
 	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/fleet, /obj/item/clothing/accessory/armband/medblue)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/combat/command
 	accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/combat/exploration
 	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/fleet)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/combat/engineering
 	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/fleet)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/combat/service
 	accessories = list(/obj/item/clothing/accessory/solgov/department/service/fleet)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/combat/supply
 	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/fleet)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/army
 	name = "army fatigues"
@@ -207,27 +243,35 @@
 
 /obj/item/clothing/under/solgov/utility/army/command
 	accessories = list(/obj/item/clothing/accessory/solgov/department/command/army)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/army/engineering
 	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/army)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/army/security
 	accessories = list(/obj/item/clothing/accessory/solgov/department/security/army)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/army/medical
 	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/army)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/army/medical/banded
 	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/army, /obj/item/clothing/accessory/armband/medblue)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/army/supply
 	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/army)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/army/service
 	accessories = list(/obj/item/clothing/accessory/solgov/department/service/army)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/army/exploration
 	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/army)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/army/urban
 	name = "urban fatigues"
@@ -335,18 +379,25 @@
 	worn_state = "greydress"
 
 /obj/item/clothing/under/solgov/dress/expeditionary/engineering
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/security
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/medical
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/supply
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/service
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/exploration
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/research
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/skirt
 	name = "expeditionary dress skirt"
@@ -355,18 +406,25 @@
 	worn_state = "greydressfem"
 
 /obj/item/clothing/under/solgov/dress/expeditionary/skirt/engineering
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/skirt/security
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/skirt/medical
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/skirt/supply
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/skirt/service
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/skirt/exploration
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/skirt/research
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command
 	name = "expeditionary officer's dress uniform"
@@ -375,18 +433,25 @@
 	worn_state = "greydress_com"
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/engineering
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/security
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/medical
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/supply
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/service
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/exploration
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/research
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/skirt
 	name = "expeditionary officer's dress skirt"
@@ -395,24 +460,32 @@
 	worn_state = "greydressfem_com"
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/engineering
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/security
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/medical
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/supply
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/service
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/exploration
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/research
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 //misc garbage
 /obj/item/clothing/under/rank/internalaffairs/plain/solgov
 	desc = "A plain shirt and pair of pressed black pants."
 	name = "formal outfit"
 	accessories = list(/obj/item/clothing/accessory/blue_clip)
+	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/monkey
 	name = "adjusted expeditionary uniform"

@@ -450,7 +450,7 @@
 	desc = "A piece of mixed, long meat, with a smoky scent."
 	icon_state = "cigar3off"
 
-	item_state = "cigaroff"
+	item_state = "cigar3off"
 	icon_on = "cigar3on"
 	type_butt = /obj/item/trash/cigbutt/sausagebutt
 	chem_volume = 6
