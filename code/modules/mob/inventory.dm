@@ -62,7 +62,7 @@
 
 
 /// Place I into the first slot it fits in the order of slots_by_priority, returning the slot or falsy.
-/mob/proc/equip_to_appropriate_slot(obj/item/I, skip_storage)
+/mob/proc/equip_to_appropriate_slot(obj/item/I, skip_storage, skip_timer)
 	var/static/list/slots_by_priority = list(
 		slot_back, slot_wear_id, slot_w_uniform, slot_wear_suit,
 		slot_wear_mask, slot_head, slot_shoes, slot_gloves, slot_l_ear,
@@ -71,10 +71,13 @@
 	)
 	if (!istype(I))
 		return
+	var/equip_flags = TRYEQUIP_REDRAW | TRYEQUIP_SILENT
+	if (skip_timer)
+		equip_flags |= TRYEQUIP_INSTANT
 	for (var/slot in slots_by_priority)
 		if (skip_storage && (slot == slot_s_store || slot == slot_l_store || slot == slot_r_store))
 			continue
-		if (equip_to_slot_if_possible(I, slot, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
+		if (equip_to_slot_if_possible(I, slot, equip_flags))
 			return slot //slot is truthy; we can return it for info
 
 
