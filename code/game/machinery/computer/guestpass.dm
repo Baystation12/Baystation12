@@ -34,8 +34,8 @@
 	to_chat(usr, SPAN_NOTICE("Issuing reason: [reason]."))
 
 /obj/item/card/id/guest/proc/expire()
-	color = COLOR_BLACK
-	detail_color = COLOR_BLACK
+	color = COLOR_GRAY20
+	detail_color = COLOR_GRAY15
 	update_icon()
 
 	expired = TRUE
