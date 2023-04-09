@@ -73,7 +73,7 @@
 		/datum/movement_handler/mob/movement
 	)
 
-/mob/living/carbon/human/quantum/can_inject(mob/user, target_zone)
+/mob/living/carbon/human/quantum/can_inject(mob/user, target_zone, ignore_thick_clothing)
 	to_chat(user, SPAN_DANGER("\The [src] disarms you before you can inject them."))
 	user.drop_item()
 	return FALSE

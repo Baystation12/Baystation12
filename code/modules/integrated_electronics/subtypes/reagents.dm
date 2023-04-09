@@ -75,7 +75,7 @@
 	desc = "This scary looking thing is able to pump liquids into, or suck liquids out of, whatever it's pointed at."
 	icon_state = "injector"
 	extended_desc = "This autoinjector can push up to 30 units of reagents into another container or someone else outside of the machine. The target \
-	must be adjacent to the machine, and if it is a person, they cannot be wearing thick clothing. Negative given amounts makes the injector suck out reagents instead."
+	must be adjacent to the machine, and if it is a person who is not carrying it in their pockets or belt, they cannot be wearing thick clothing. Negative given amounts makes the injector suck out reagents instead."
 
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	volume = 30
@@ -184,6 +184,12 @@
 		if(isliving(AM))
 			var/mob/living/L = AM
 			var/injection_status = L.can_inject(null, BP_CHEST)
+			if(L.isEquipped(assembly, slot_l_hand))
+				injection_status = L.can_inject(null, BP_L_HAND)
+			if(L.isEquipped(assembly, slot_r_hand))
+				injection_status = L.can_inject(null, BP_R_HAND)
+			if(L.isEquipped(assembly, slot_l_store) || L.isEquipped(assembly, slot_r_store) || L.isEquipped(assembly, slot_belt))
+				injection_status = L.can_inject(null, BP_CHEST, ignore_thick_clothing = TRUE) //The injector has been put under the thick layer
 			log_world("Injection status? [injection_status]")
 			var/injection_delay = 3 SECONDS
 			if(injection_status == INJECTION_PORT)
@@ -217,6 +223,12 @@
 		if(istype(AM, /mob/living/carbon))
 			var/mob/living/carbon/C = AM
 			var/injection_status = C.can_inject(null, BP_CHEST)
+			if(C.isEquipped(assembly, slot_l_hand))
+				injection_status = C.can_inject(null, BP_L_HAND)
+			if(C.isEquipped(assembly, slot_r_hand))
+				injection_status = C.can_inject(null, BP_R_HAND)
+			if(C.isEquipped(assembly, slot_l_store) || C.isEquipped(assembly, slot_r_store) || C.isEquipped(assembly, slot_belt))
+				injection_status = C.can_inject(null, BP_CHEST, ignore_thick_clothing = TRUE)
 			var/injection_delay = 3 SECONDS
 			if(injection_status == INJECTION_PORT)
 				injection_delay += INJECTION_PORT_DELAY
