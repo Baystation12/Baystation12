@@ -3213,6 +3213,7 @@
 #include "code\modules\xenoarcheaology\tools\suspension_generator.dm"
 #include "code\modules\xenoarcheaology\tools\tools.dm"
 #include "code\modules\xenoarcheaology\tools\tools_pickaxe.dm"
+#include "code\modules\xenoarcheaology\tools\transport_drone.dm"
 #include "code\modules\xenoarcheaology\triggers\_trigger.dm"
 #include "code\modules\xenoarcheaology\triggers\chemical.dm"
 #include "code\modules\xenoarcheaology\triggers\energy.dm"

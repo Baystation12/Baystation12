@@ -93,3 +93,8 @@
 	You can also activate the tray in-hand to dump its contents onto whatever's beneath you.\
 	<br><br>Non-Grab intents can be used to put the tray down onto surfaces without dumping it out, or Harm intent can be used to hit people with the tray itself. \
 	If you're a cyborg, robot, or other non-human, Help intent replaces Grab intent for interactions that use it."
+
+/datum/codex_entry/drone_designator
+	associated_paths = list(/obj/item/device/drone_designator)
+	mechanics_text = "This device is used to retrieve items such as crates from away sites. You can use it on a drone pad to synchronize with its network. Use it while in an exterior area to mark an object for pickup."
+	lore_text = "Common throughout human space, short range transport drones are used for courier roles and to retrieve material shipments from remote areas. This designator can send telemetry data beyond orbit through the use of a compact subspace beacon."
