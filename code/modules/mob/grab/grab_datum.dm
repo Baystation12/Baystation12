@@ -55,6 +55,11 @@
 	var/grab_action = "grab intent"
 	var/harm_action = "harm intent"
 
+	/// Integer. The amount of pixel adjustment made on the X axis. Used to revert the shift.
+	var/adjust_x = 0
+	/// Integer. The amount of pixel adjustment made on the Y axis. Used to revert the shift.
+	var/adjust_y = 0
+
 /*
 	These procs shouldn't be overriden in the children unless you know what you're doing with them; they handle important core functions.
 	Even if you do override them, you should likely be using ..() if you want the behaviour to function properly. That is, of course,
@@ -179,16 +184,44 @@
 
 	switch(adir)
 		if(NORTH)
-			animate(affecting, pixel_x = 0, pixel_y =-shift, 5, 1, LINEAR_EASING)
+			animate(
+				affecting,
+				pixel_x = G.affecting.pixel_x - adjust_x,
+				pixel_y = G.affecting.pixel_y - adjust_y - shift,
+				5, 1, LINEAR_EASING
+			)
+			adjust_x = 0
+			adjust_y = -shift
 			G.draw_affecting_under()
 		if(SOUTH)
-			animate(affecting, pixel_x = 0, pixel_y = shift, 5, 1, LINEAR_EASING)
+			animate(
+				affecting,
+				pixel_x = G.affecting.pixel_x - adjust_x,
+				pixel_y = G.affecting.pixel_y - adjust_y + shift,
+				5, 1, LINEAR_EASING
+			)
+			adjust_x = 0
+			adjust_y = shift
 			G.draw_affecting_over()
 		if(WEST)
-			animate(affecting, pixel_x = shift, pixel_y = 0, 5, 1, LINEAR_EASING)
+			animate(
+				affecting,
+				pixel_x = G.affecting.pixel_x - adjust_x + shift,
+				pixel_y = G.affecting.pixel_y - adjust_y,
+				5, 1, LINEAR_EASING
+			)
+			adjust_x = shift
+			adjust_y = 0
 			G.draw_affecting_under()
 		if(EAST)
-			animate(affecting, pixel_x =-shift, pixel_y = 0, 5, 1, LINEAR_EASING)
+			animate(
+				affecting,
+				pixel_x = G.affecting.pixel_x - adjust_x - shift,
+				pixel_y = G.affecting.pixel_y - adjust_y,
+				5, 1, LINEAR_EASING
+			)
+			adjust_x = -shift
+			adjust_y = 0
 			G.draw_affecting_under()
 
 	affecting.reset_plane_and_layer()
@@ -196,8 +229,14 @@
 /datum/grab/proc/reset_position(obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 
-	if(!affecting.buckled)
-		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
+	animate(
+		affecting,
+		pixel_x = G.affecting.pixel_x - adjust_x,
+		pixel_y = G.affecting.pixel_y - adjust_y,
+		4, 1, LINEAR_EASING
+	)
+	adjust_x = 0
+	adjust_y = 0
 	affecting.reset_plane_and_layer()
 
 // This is called whenever the assailant moves.
