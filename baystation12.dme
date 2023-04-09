@@ -2330,6 +2330,7 @@
 #include "code\modules\mob\living\simple_animal\hostile\drake.dm"
 #include "code\modules\mob\living\simple_animal\hostile\faithful_hound.dm"
 #include "code\modules\mob\living\simple_animal\hostile\faithless.dm"
+#include "code\modules\mob\living\simple_animal\hostile\fleet_robot.dm"
 #include "code\modules\mob\living\simple_animal\hostile\hostile.dm"
 #include "code\modules\mob\living\simple_animal\hostile\leech.dm"
 #include "code\modules\mob\living\simple_animal\hostile\meat_horrors.dm"
