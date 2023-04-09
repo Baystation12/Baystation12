@@ -469,7 +469,7 @@
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet/command
 	utility_extra = list(
 				/obj/item/clothing/under/solgov/utility/fleet/combat/command,
-				/obj/item/clothing/head/beret/solgov/fleet/command,
+				/obj/item/clothing/head/beret/solgov/fleet,
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
