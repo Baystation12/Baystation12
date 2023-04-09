@@ -220,7 +220,7 @@
 
 
 /proc/_debug_fetch_bans(ckey, ip, cid, include_inactive = FALSE)
-	var/list/result = _fetch_bans(ckey, ip, cid, include_inactive)
+	var/list/result = _find_bans_in_connections(_fetch_connections(ckey, ip, cid), include_inactive)
 	var/table = {"
 		<table>
 			<thead>
