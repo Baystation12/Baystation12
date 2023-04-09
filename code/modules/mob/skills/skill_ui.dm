@@ -229,6 +229,9 @@ Similar, but for station antags that have jobs.
 */
 /datum/nano_module/skill_ui/antag/station
 	max_choices = list(0, 0, 2, 1, 1)
+
+/datum/nano_module/skill_ui/antag/rene
+	max_choices = list(0, 1, 1, 0, 0)
 /*
 Similar, but for off-station jobs (Bearcat, Verne, survivor etc.).
 */
