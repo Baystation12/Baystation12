@@ -1,7 +1,7 @@
 /singleton/maneuver
 	var/name = "unnamed"
 	var/delay = 2 SECONDS
-	var/cooldown = 10 SECONDS
+	var/cooldown = 5 SECONDS
 	var/stamina_cost = 10
 	var/reflexive_modifier = 1
 
