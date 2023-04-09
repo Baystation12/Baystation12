@@ -363,7 +363,7 @@ default behaviour is:
 			return 1
 	return 0
 
-/mob/living/proc/can_inject(mob/user, target_zone)
+/mob/living/proc/can_inject(mob/user, target_zone, ignore_thick_clothing)
 	return 1
 
 /mob/living/proc/get_organ_target()

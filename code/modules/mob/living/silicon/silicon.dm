@@ -172,7 +172,7 @@
 	. = ..()
 
 //can't inject synths
-/mob/living/silicon/can_inject(mob/user, target_zone)
+/mob/living/silicon/can_inject(mob/user, target_zone, ignore_thick_clothing)
 	to_chat(user, SPAN_WARNING("The armoured plating is too tough."))
 	return 0
 
