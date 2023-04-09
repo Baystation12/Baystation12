@@ -18,12 +18,14 @@
 
 	say_list_type = /datum/say_list/aquatic
 
-/mob/living/simple_animal/aquatic/New()
-	..()
+
+/mob/living/simple_animal/aquatic/Initialize(mapload)
+	. = ..()
 	default_pixel_x = rand(-12,12)
 	default_pixel_y = rand(-12,12)
 	pixel_x = default_pixel_x
 	pixel_y = default_pixel_y
+
 
 /mob/living/simple_animal/aquatic/Life()
 	if(!submerged())

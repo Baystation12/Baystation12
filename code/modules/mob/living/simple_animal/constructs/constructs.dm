@@ -40,15 +40,17 @@
 /mob/living/simple_animal/construct/cultify()
 	return
 
-/mob/living/simple_animal/construct/New()
-	..()
-	name = text("[initial(name)] ([random_id(/mob/living/simple_animal/construct, 1000, 9999)])")
+
+/mob/living/simple_animal/construct/Initialize()
+	. = ..()
+	SetName("[initial(name)] ([random_id(/mob/living/simple_animal/construct, 1000, 9999)])")
 	real_name = name
 	add_language(LANGUAGE_CULT)
 	add_language(LANGUAGE_CULT_GLOBAL)
 	for(var/spell in construct_spells)
 		add_spell(new spell, "const_spell_ready")
 	update_icon()
+
 
 /mob/living/simple_animal/construct/death(gibbed, deathmessage, show_dead_message)
 	new /obj/item/ectoplasm (src.loc)

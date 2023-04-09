@@ -83,15 +83,17 @@ Teleporter beacon, and its subtypes
 
 	ai_holder = /datum/ai_holder/simple_animal/hivebot/tele
 
-/mob/living/simple_animal/hostile/hivebot/tele/New()
-	..()
-	var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
-	smoke.set_up(5, 0, src.loc)
+
+/mob/living/simple_animal/hostile/hivebot/tele/Initialize(mapload)
+	. = ..()
+	var/datum/effect/effect/system/smoke_spread/smoke = new
+	smoke.set_up(5, 0, loc)
 	smoke.start()
 	visible_message(SPAN_DANGER("\The [src] warps in!"))
-	playsound(src.loc, 'sound/effects/EMPulse.ogg', 25, 1)
+	playsound(src, 'sound/effects/EMPulse.ogg', 25, TRUE)
 	set_AI_busy(TRUE)
 	spawn_time = world.time + spawn_delay
+
 
 /mob/living/simple_animal/hostile/hivebot/tele/proc/warpbots()
 	while(bot_amt > 0 && bot_type)

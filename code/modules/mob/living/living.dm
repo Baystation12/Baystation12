@@ -1,5 +1,5 @@
-/mob/living/New()
-	..()
+/mob/living/Initialize(mapload)
+	. = ..()
 	if(stat == DEAD)
 		add_to_dead_mob_list()
 	else

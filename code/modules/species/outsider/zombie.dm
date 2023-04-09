@@ -510,21 +510,29 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	update_icon()
 
 
-/mob/living/carbon/human/zombie/New(new_loc)
-	..(new_loc, SPECIES_ZOMBIE)
+/mob/living/carbon/human/zombie
+	/// List (`/singleton/hierarchy/outfit`) - List of possible outfits the zombie can spawn as. Randomly chosen during init.
+	var/list/spawn_outfit_options = list(
+		/singleton/hierarchy/outfit/job/science/scientist,
+		/singleton/hierarchy/outfit/job/engineering/engineer,
+		/singleton/hierarchy/outfit/job/cargo/mining,
+		/singleton/hierarchy/outfit/job/medical/chemist
+	)
+
+
+/mob/living/carbon/human/zombie/Initialize(mapload)
+	. = ..(mapload, SPECIES_ZOMBIE)
 
 	var/singleton/cultural_info/culture = get_cultural_value(TAG_CULTURE)
 	SetName(culture.get_random_name(gender))
 	real_name = name
 
-	var/singleton/hierarchy/outfit/outfit = pick(
-		/singleton/hierarchy/outfit/job/science/scientist,\
-		/singleton/hierarchy/outfit/job/engineering/engineer,\
-		/singleton/hierarchy/outfit/job/cargo/mining,\
-		/singleton/hierarchy/outfit/job/medical/chemist\
-	)
-	outfit = outfit_by_type(outfit)
-	outfit.equip(src, OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR)
-
 	ChangeToHusk()
 	zombify()
+
+
+/mob/living/carbon/human/zombie/LateInitialize(mapload)
+	..()
+	var/singleton/hierarchy/outfit/outfit = pick(spawn_outfit_options)
+	outfit = outfit_by_type(outfit)
+	outfit.equip(src, OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR)

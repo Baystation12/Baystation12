@@ -38,8 +38,9 @@
 
 	var/static/amount = 0
 
-/mob/living/bot/mulebot/New()
-	..()
+
+/mob/living/bot/mulebot/Initialize()
+	. = ..()
 
 	var/turf/T = get_turf(loc)
 	var/obj/machinery/navbeacon/N = locate() in T
@@ -50,7 +51,7 @@
 		homeName = "Unset"
 
 	suffix = num2text(++amount)
-	name = "Mulebot #[suffix]"
+	SetName("Mulebot #[suffix]")
 
 
 /mob/living/bot/mulebot/get_antag_interactions_info()

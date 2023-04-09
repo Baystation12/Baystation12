@@ -16,11 +16,13 @@
 
 	var/list/wizardy_spells = list()
 
-/mob/living/simple_animal/familiar/New()
-	..()
+
+/mob/living/simple_animal/familiar/Initialize(maplaod)
+	. = ..()
 	add_language(LANGUAGE_HUMAN_EURO)
 	for(var/spell in wizardy_spells)
 		src.add_spell(new spell, "const_spell_ready")
+
 
 /mob/living/simple_animal/familiar/carcinus
 	name = "carcinus"
@@ -156,11 +158,12 @@
 
 	wizardy_spells = list(/spell/aoe_turf/smoke)
 
-/mob/living/simple_animal/familiar/pet/mouse/New()
-	..()
 
+/mob/living/simple_animal/familiar/pet/mouse/Initialize(mapload)
+	. = ..()
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
+
 
 /mob/living/simple_animal/familiar/pet/cat
 	name = "black cat"
