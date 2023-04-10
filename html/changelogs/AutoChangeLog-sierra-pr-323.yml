@@ -1,6 +1,0 @@
-author: Fenodyree
-delete-after: true
-changes:
-  - tweak: integrated hypo-injectors will inject into the hands if held.
-  - tweak: integrated hypo-injectors will ignore thick material while carried in pockets
-      or on belts.

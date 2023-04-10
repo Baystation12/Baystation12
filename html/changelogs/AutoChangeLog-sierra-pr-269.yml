@@ -1,4 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: The BSD can no longer be constructed.

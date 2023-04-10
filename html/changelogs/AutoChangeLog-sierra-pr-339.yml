@@ -1,5 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - bugfix: Оказавшийся предмет для маппинга в вендомате YouTool заменён на нормальные
-      провода
