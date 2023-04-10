@@ -1,5 +1,0 @@
-author: CrimsonShrike
-delete-after: true
-changes:
-  - rscadd: Transport drone. It can pick up payloads from external areas (such as
-      those on planets) and deliver them to the ship.
