@@ -3,6 +3,7 @@
 	name = "large parcel"
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "deliverycloset"
+	health_max = 5
 	var/obj/wrapped = null
 	density = TRUE
 	var/sortTag = null
@@ -13,11 +14,39 @@
 	var/label_x
 	var/tag_x
 
+
+/obj/structure/bigDelivery/Destroy()
+	QDEL_NULL(wrapped)
+	return ..()
+
+
+/obj/structure/bigDelivery/damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)
+	// It's only paper. No protection for anything inside.
+	var/content_damage = damage / length(contents)
+	for (var/atom/victim as anything in contents)
+		victim.damage_health(content_damage, damage_type, damage_flags, severity, skip_can_damage_check)
+	return ..()
+
+
+/obj/structure/bigDelivery/on_death()
+	. = ..()
+	visible_message(
+		SPAN_WARNING("\The [src]'s wrapping falls away!")
+	)
+	if (wrapped)
+		wrapped.dropInto(loc)
+		wrapped = null
+	for (var/atom/movable/victim as anything in contents)
+		victim.dropInto(loc)
+	qdel_self()
+
+
 /obj/structure/bigDelivery/attack_robot(mob/user as mob)
 	unwrap(user)
 
 /obj/structure/bigDelivery/attack_hand(mob/user as mob)
 	unwrap(user)
+
 
 /obj/structure/bigDelivery/proc/unwrap(mob/user)
 	if(Adjacent(user))
@@ -126,14 +155,45 @@
 	name = "small parcel"
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "deliverycrate3"
+	health_max = 5
 	var/obj/item/wrapped = null
 	var/sortTag = null
 	var/examtext = null
 	var/nameset = 0
 	var/tag_x
 
+
+/obj/item/smallDelivery/Destroy()
+	QDEL_NULL(wrapped)
+	return ..()
+
+
+/obj/item/smallDelivery/damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)
+	// It's only paper. No protection for anything inside.
+	for (var/atom/victim as anything in contents)
+		victim.damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)
+	return ..()
+
+
+/obj/item/smallDelivery/on_death()
+	. = ..()
+	visible_message(
+		SPAN_WARNING("\The [src]'s wrapping falls away!")
+	)
+	if (wrapped)
+		wrapped.dropInto(loc)
+		wrapped = null
+	for (var/atom/movable/victim as anything in contents)
+		victim.dropInto(loc)
+	qdel_self()
+
+
 /obj/item/smallDelivery/proc/unwrap(mob/user)
-	if (!length(contents) || !Adjacent(user))
+	if (!Adjacent(user))
+		return
+	if (!length(contents))
+		to_chat(user, SPAN_NOTICE("\The [src] was empty!"))
+		qdel_self()
 		return
 
 	user.put_in_hands(wrapped)
