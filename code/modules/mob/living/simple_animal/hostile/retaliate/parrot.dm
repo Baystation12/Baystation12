@@ -35,6 +35,8 @@
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SMALL
 
+	blocks_emissive = EMISSIVE_BLOCK_UNIQUE
+
 	speak_emote = list("squawks","says","yells")
 
 	natural_weapon = /obj/item/natural_weapon/beak

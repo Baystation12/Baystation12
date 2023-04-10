@@ -7,6 +7,8 @@
 	animate_movement = 2
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 
+	blocks_emissive = EMISSIVE_BLOCK_GENERIC
+
 	virtual_mob = /mob/observer/virtual/mob
 
 	movement_handlers = list(

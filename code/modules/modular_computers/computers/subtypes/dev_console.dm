@@ -60,6 +60,7 @@
 /obj/machinery/computer/modular/get_keyboard_overlay()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
+		icon_keyboard = os.get_keyboard_state()
 		return os.get_keyboard_overlay()
 
 /obj/machinery/computer/modular/emag_act(remaining_charges, mob/user)
