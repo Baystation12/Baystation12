@@ -92,7 +92,7 @@
 			return
 
 
-/obj/item/material/shard/phoron/default_material = MATERIAL_PHORON_GLASS
+/obj/item/material/shard/phoron/default_material = MATERIAL_PHORON
 
 
 /obj/item/material/shard/shrapnel/name = "shrapnel"

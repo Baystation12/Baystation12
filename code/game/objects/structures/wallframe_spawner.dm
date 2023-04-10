@@ -129,13 +129,13 @@
 /obj/effect/wallframe_spawn/phoron
 	name = "phoron wall frame window spawner"
 	icon_state = "p-wingrille"
-	win_path = /obj/structure/window/phoronbasic/full
+	win_path = /obj/structure/window/boron_basic/full
 
 
 /obj/effect/wallframe_spawn/reinforced_phoron
 	name = "reinforced phoron wall frame window spawner"
 	icon_state = "pr-wingrille"
-	win_path = /obj/structure/window/phoronreinforced/full
+	win_path = /obj/structure/window/boron_reinforced/full
 
 /obj/effect/wallframe_spawn/reinforced_phoron/titanium
 	frame_path = /obj/structure/wall_frame/titanium

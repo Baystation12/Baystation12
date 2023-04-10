@@ -136,7 +136,7 @@
 /obj/machinery/anomaly_container/on_death()
 	visible_message(SPAN_DANGER("\The [src]'s glass cracks and shatters, exploding in a shower of shards!"))
 	for(var/i = 1 to rand(2,4))
-		new /obj/item/material/shard(get_turf(src), MATERIAL_PHORON_GLASS)
+		new /obj/item/material/shard(get_turf(src), MATERIAL_BORON_GLASS)
 	playsound(loc, 'sound/effects/Glassbr1.ogg', 60)
 	if(!contained)
 		return
@@ -179,9 +179,9 @@
 				)
 				return
 			var/obj/item/stack/material/M = P
-			if(istype(M, /obj/item/stack/material/glass/phoronglass))
+			if(istype(M, /obj/item/stack/material/glass/boron))
 				to_chat(user, SPAN_WARNING("\The [M] needs to be reinforced first."))
-			if(istype(P, /obj/item/stack/material/glass/phoronrglass))
+			if(istype(P, /obj/item/stack/material/glass/boron_reinforced))
 				if(M.get_amount() < 10)
 					to_chat(user, SPAN_WARNING("You need at least ten sheets to repair \the [src]."))
 				else

@@ -16,7 +16,8 @@ GLOBAL_LIST_INIT(weighted_minerals_sparse, \
 		MATERIAL_ROCK_SALT =    3, \
 		MATERIAL_POTASH =       3, \
 		MATERIAL_BAUXITE =      3, \
-		MATERIAL_RUTILE = 		3
+		MATERIAL_RUTILE = 		3, \
+		MATERIAL_BORAX = 5
 	))
 
 GLOBAL_LIST_INIT(weighted_minerals_rich, \
@@ -37,7 +38,8 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 		MATERIAL_ROCK_SALT =    1, \
 		MATERIAL_POTASH =       1, \
 		MATERIAL_BAUXITE =      1, \
-		MATERIAL_RUTILE = 		1
+		MATERIAL_RUTILE = 		1, \
+		MATERIAL_BORAX = 2
 	))
 
 /datum/random_map/automata/cave_system
