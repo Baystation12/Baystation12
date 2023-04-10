@@ -32,4 +32,13 @@
 	_input_on = TRUE
 	_output_on = TRUE
 	_fully_charged = TRUE
-	
+
+/obj/machinery/power/smes/buildable/preset/bridgesolars
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/smes_coil/advanced = 1
+	)
+	_input_maxed = TRUE
+	_output_maxed = TRUE
+	_input_on = TRUE
+	_output_on = TRUE
+	_fully_charged = TRUE
