@@ -76,11 +76,15 @@
 /obj/item/gun/launcher/grenade/attack_self(mob/user)
 	pump(user)
 
-/obj/item/gun/launcher/grenade/attackby(obj/item/I, mob/user)
-	if((istype(I, /obj/item/grenade)))
-		load(I, user)
-	else
-		..()
+
+/obj/item/gun/launcher/grenade/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Grenade - Load ammo
+	if (istype(tool, /obj/item/grenade))
+		load(tool, user)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/launcher/grenade/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)

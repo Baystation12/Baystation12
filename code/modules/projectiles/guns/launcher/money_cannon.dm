@@ -129,30 +129,34 @@
 	else
 		return ..()
 
-/obj/item/gun/launcher/money/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/spacecash))
-		var/obj/item/spacecash/bling = W
-		if(bling.worth < 1)
-			to_chat(user, SPAN_WARNING("You can't seem to get the bills to slide into the receptacle."))
-			return
-		if(receptacle_value >= max_capacity)
-			to_chat(user, SPAN_WARNING("There's no space in the receptacle for [bling]."))
-			return
-		else if (receptacle_value && receptacle_value + bling.worth > max_capacity) //If we have enough money to fill it to capacity
-			bling.worth -= max_capacity - receptacle_value
-			receptacle_value = max_capacity
-			to_chat(user, SPAN_NOTICE("You load [src] to capacity with [bling]."))
-			if(!bling.worth)
-				qdel(bling)
-			else
-				bling.update_icon()
-			return
-		receptacle_value += bling.worth
-		to_chat(user, SPAN_NOTICE("You slide [bling.worth] [GLOB.using_map.local_currency_name_singular] into [src]'s receptacle."))
-		qdel(bling)
 
-	else
-		to_chat(user, SPAN_WARNING("That's not going to fit in there."))
+/obj/item/gun/launcher/money/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Money - Load ammo
+	if (istype(tool, /obj/item/spacecash))
+		if (receptacle_value >= max_capacity)
+			USE_FEEDBACK_FAILURE("\The [src] is full.")
+			return TRUE
+		var/obj/item/spacecash/cash = tool
+		if (cash.worth < 1)
+			USE_FEEDBACK_FAILURE("\The [tool] won't fit into \the [src].")
+			return TRUE
+		var/amount_transferred = min(max_capacity, receptacle_value + cash.worth)
+		cash.worth -= amount_transferred
+		receptacle_value += amount_transferred
+		if (!cash.worth)
+			qdel(cash)
+		else
+			cash.update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] loads \a [src] with some [GLOB.using_map.local_currency_name_singular]s."),
+			SPAN_NOTICE("You load \the [src] with [amount_transferred] [GLOB.using_map.local_currency_name_singular]\s.")
+		)
+		if (max_capacity > 1)
+			to_chat(user, SPAN_INFO("\The [src]'s receptable now has [receptacle_value]/[max_capacity] [GLOB.using_map.local_currency_name_singular]\s loaded."))
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/launcher/money/examine(mob/user)
 	. = ..(user)

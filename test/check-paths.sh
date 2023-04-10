@@ -53,7 +53,7 @@ exactly 0 "simulated = 0/1" 'simulated\s*=\s*\d' -P
 exactly 2 "var/ in proc arguments" '(^/[^/].+/.+?\(.*?)var/' -P
 exactly 0 "tmp/ vars" 'var.*/tmp/' -P
 exactly 5 "uses of .len" '\.len\b' -P
-exactly 445 "attackby() override" '\/attackby\((.*)\)'  -P
+exactly 426 "attackby() override" '\/attackby\((.*)\)'  -P
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 
 num=`find ./html/changelogs -not -name "*.yml" | wc -l`

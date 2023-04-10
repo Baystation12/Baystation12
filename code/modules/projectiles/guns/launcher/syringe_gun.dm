@@ -118,18 +118,27 @@
 	else
 		..()
 
-/obj/item/gun/launcher/syringe/attackby(obj/item/A as obj, mob/user as mob)
-	if(istype(A, /obj/item/syringe_cartridge))
-		var/obj/item/syringe_cartridge/C = A
-		if(length(darts) >= max_darts)
-			to_chat(user, SPAN_WARNING("[src] is full!"))
-			return
-		if(!user.unEquip(C, src))
-			return
-		darts += C //add to the end
-		user.visible_message("[user] inserts \a [C] into [src].", SPAN_NOTICE("You insert \a [C] into [src]."))
-	else
-		..()
+
+/obj/item/gun/launcher/syringe/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Syringe Cartridge - Load ammo
+	if (istype(tool, /obj/item/syringe_cartridge))
+		if (length(darts) >= max_darts)
+			USE_FEEDBACK_FAILURE("\The [src] is full.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		darts += tool
+		user.visible_message(
+			SPAN_NOTICE("\The [user] loads \a [src] with \a [tool]."),
+			SPAN_NOTICE("You load \the [src] with \the [tool].")
+		)
+		if (max_darts > 1)
+			to_chat(user, SPAN_INFO("\The [src] now has [length(darts)]/[max_darts] dart\s loaded."))
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/launcher/syringe/rapid
 	name = "syringe gun revolver"

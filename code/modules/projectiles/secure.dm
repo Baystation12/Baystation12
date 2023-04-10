@@ -25,18 +25,27 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 	if(distance <= 0 && is_secure_gun())
 		to_chat(user, "The registration screen shows, \"" + (registered_owner ? "[registered_owner]" : "unregistered") + "\"")
 
-/obj/item/gun/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/card/id) && is_secure_gun())
-		user.visible_message("[user] swipes an ID through \the [src].", range = 3)
-		if(!registered_owner)
-			var/obj/item/card/id/id = W
+
+/obj/item/gun/use_tool(obj/item/tool, mob/user, list/click_params)
+	// ID Card - Register gun
+	if (is_secure_gun())
+		var/obj/item/card/id/id = tool.GetIdCard()
+		if (istype(id))
+			if (registered_owner)
+				USE_FEEDBACK_FAILURE("\The [src] is already registered to \"[registered_owner]\".")
+				return TRUE
 			verbs += /obj/item/gun/proc/reset_registration
 			registered_owner = id.registered_name
-			to_chat(user, SPAN_NOTICE("\The [src] chimes quietly as it registers to \"[registered_owner]\"."))
-		else
-			to_chat(user, SPAN_NOTICE("\The [src] buzzes quietly, refusing to register without first being reset."))
-	else
-		..()
+			var/idname = GET_ID_NAME(id, tool)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] runs \a [tool] over \the [src]'s ID scanner."),
+				SPAN_NOTICE("You scan [idname] over \the [src]'s ID scanner, registering it to \"[registered_owner]\"."),
+				range = 3
+			)
+			return TRUE
+
+	return ..()
+
 
 /obj/item/gun/emag_act(charges, mob/user)
 	if(!charges)
