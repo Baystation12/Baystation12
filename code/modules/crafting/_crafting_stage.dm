@@ -44,7 +44,7 @@
 
 /singleton/crafting_stage/proc/on_insufficient_material(mob/user, obj/item/stack/thing)
 	if(istype(thing))
-		to_chat(user, SPAN_NOTICE("You need at least [stack_consume_amount] [stack_consume_amount == 1 ? thing.singular_name : thing.plural_name] to complete this task."))
+		USE_FEEDBACK_STACK_NOT_ENOUGH(thing, stack_consume_amount, "to complete this task.")
 
 /singleton/crafting_stage/proc/on_progress(mob/user)
 	if(progress_message)
