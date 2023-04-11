@@ -253,7 +253,7 @@
 		result.filling_color = BlendRGB(source.color || "#ffffff", tint, 0.5)
 	else
 		result.filling_color = (source.color || source.filling_color || "#ffffff")
-	if (result.type != /obj/item/reagent_containers/food/snacks/variable && istype(result, /obj/item/reagent_containers/food/snacks/variable))
+	if (result.type != /obj/item/reagent_containers/food/snacks/variable)
 		var/image/I = image(result.icon, result, "[result.icon_state]_filling")
 		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 		I.color = result.filling_color
@@ -391,15 +391,15 @@
 			"desc" = "roasted",
 			"flags" = COOKER_STRIP_RAW
 		),
-		"Personal Pizza" = list(
-			"type" = /obj/item/reagent_containers/food/snacks/variable/pizza,
+		"Pizza" = list(
+			"type" = /obj/item/reagent_containers/food/snacks/sliceable/variable/pizza,
 			"suffix" = "pizza",
 			"desc" = "made into a pizza",
 			"color" = null,
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Bread" = list(
-			"type" = /obj/item/reagent_containers/food/snacks/variable/bread,
+			"type" = /obj/item/reagent_containers/food/snacks/sliceable/variable/bread,
 			"suffix" = "bread",
 			"desc" = "made into bread",
 			"color" = null,
@@ -412,8 +412,8 @@
 			"color" = null,
 			"flags" = COOKER_STRIP_RAW
 		),
-		"Small Cake" = list(
-			"type" = /obj/item/reagent_containers/food/snacks/variable/cake,
+		"Cake" = list(
+			"type" = /obj/item/reagent_containers/food/snacks/sliceable/variable/cake,
 			"suffix" = "cake",
 			"desc" = "made into a cake",
 			"color" = null,
@@ -455,7 +455,7 @@
 			"flags" = COOKER_STRIP_RAW
 		),
 		"Donut" = list(
-			"type" = /obj/item/reagent_containers/food/snacks/variable/donut,
+			"type" = /obj/item/reagent_containers/food/snacks/donut/variable,
 			"suffix" = "donut",
 			"desc" = "made into a donut",
 			"color" = null,
@@ -508,41 +508,92 @@
 	icon = 'icons/obj/food_custom.dmi'
 	bitesize = 2
 
+/obj/item/reagent_containers/food/snacks/sliceable/variable
+	name = "cooked food"
+	icon = 'icons/obj/food_custom.dmi'
+	slice_path = /obj/item/reagent_containers/food/snacks/slice
+	slices_num = 5
+	bitesize = 2
 
-/obj/item/reagent_containers/food/snacks/variable/pizza
-	name = "personal pizza"
-	desc = "A personalized pan pizza meant for only one person."
-	icon_state = "personal_pizza"
+
+/obj/item/reagent_containers/food/snacks/slice/variable
+	name = "cooked food slice"
+	icon = 'icons/obj/food_custom.dmi'
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/variable
+	bitesize = 2
 
 
-/obj/item/reagent_containers/food/snacks/variable/bread
+/obj/item/reagent_containers/food/snacks/sliceable/variable/pizza
+	name = "pizza"
+	desc = "A tasty oven pizza meant to be shared."
+	icon_state = "pizza"
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/variable/pizza
+	slices_num = 6
+	nutriment_amt = 15
+	nutriment_desc = list("pizza crust" = 8, "cheese" = 7)
+
+
+/obj/item/reagent_containers/food/snacks/slice/variable/pizza
+	name = "pizza slice"
+	desc = "A tasty slice of pizza."
+	icon_state = "pizza_slice"
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/variable/pizza
+
+
+/obj/item/reagent_containers/food/snacks/sliceable/variable/bread
 	name = "bread"
 	desc = "Tasty bread."
 	icon_state = "breadcustom"
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/variable/bread
+	nutriment_amt = 6
+	nutriment_desc = list("bread" = 6)
+
+/obj/item/reagent_containers/food/snacks/slice/variable/bread
+	name = "bread slice"
+	desc = "A tasty slice of bread."
+	icon_state = "breadcustom_slice"
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/variable/bread
 
 
 /obj/item/reagent_containers/food/snacks/variable/pie
 	name = "pie"
 	desc = "Tasty pie."
 	icon_state = "piecustom"
+	nutriment_amt = 4
+	nutriment_desc = list("pie" = 4)
 
 
-/obj/item/reagent_containers/food/snacks/variable/cake
+/obj/item/reagent_containers/food/snacks/sliceable/variable/cake
 	name = "cake"
 	desc = "A popular band."
 	icon_state = "cakecustom"
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/variable/cake
+	nutriment_amt = 15
+	nutriment_desc = list("cake" = 8, "sweetness" = 7)
+
+
+/obj/item/reagent_containers/food/snacks/slice/variable/cake
+	name = "cake slice"
+	desc = "A tasty slice of cake."
+	icon_state = "cakecustom_slice"
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/variable/cake
+	trash = /obj/item/trash/plate
 
 
 /obj/item/reagent_containers/food/snacks/variable/pocket
 	name = "hot pocket"
 	desc = "You wanna put a bangin- oh, nevermind."
 	icon_state = "donk"
+	nutriment_amt = 2
+	nutriment_desc = list("heartiness" = 1,"dough" = 2)
 
 
 /obj/item/reagent_containers/food/snacks/variable/kebab
 	name = "kebab"
 	desc = "Remove this!"
 	icon_state = "kabob"
+	nutriment_amt = 3
+	nutriment_desc = list("kebab" = 3)
 
 
 /obj/item/reagent_containers/food/snacks/variable/waffles
@@ -550,6 +601,9 @@
 	desc = "Made with love."
 	icon_state = "waffles"
 	gender = PLURAL
+	nutriment_amt = 4
+	nutriment_desc = list("waffle" = 4)
+	trash = /obj/item/trash/waffles
 
 
 /obj/item/reagent_containers/food/snacks/variable/pancakes
@@ -557,48 +611,67 @@
 	desc = "How does an oven make pancakes?"
 	icon_state = "pancakescustom"
 	gender = PLURAL
+	nutriment_amt = 4
+	nutriment_desc = list("pancake" = 4)
+	trash = /obj/item/trash/plate
 
 
 /obj/item/reagent_containers/food/snacks/variable/cookie
 	name = "cookie"
 	desc = "Sugar snap!"
 	icon_state = "cookie"
+	nutriment_amt = 3
+	nutriment_desc = list("sweetness" = 1, "cookie" = 2)
 
 
-/obj/item/reagent_containers/food/snacks/variable/donut
-	name = "filled donut"
+/obj/item/reagent_containers/food/snacks/donut/variable
+	name = "donut"
 	desc = "Donut eat this!"
+	icon = 'icons/obj/food_custom.dmi'
 	icon_state = "donut"
+	nutriment_amt = 2
+	nutriment_desc = list("donut" = 2)
 
 
 /obj/item/reagent_containers/food/snacks/variable/jawbreaker
 	name = "flavored jawbreaker"
 	desc = "It's like cracking a molar on a rainbow."
 	icon_state = "jawbreaker"
+	nutriment_amt = 2
+	nutriment_desc = list("a toothache" = 1, "sweetness" = 1)
 
 
 /obj/item/reagent_containers/food/snacks/variable/candybar
 	name = "flavored chocolate bar"
 	desc = "Made in a factory downtown."
 	icon_state = "bar"
+	nutriment_amt = 2
+	nutriment_desc = list("chocolate" = 2)
 
 
 /obj/item/reagent_containers/food/snacks/variable/sucker
 	name = "flavored sucker"
 	desc = "Suck, suck, suck."
 	icon_state = "sucker"
+	nutriment_amt = 2
+	nutriment_desc = list("sweetness" = 2)
 
 
 /obj/item/reagent_containers/food/snacks/variable/jelly
 	name = "jelly"
 	desc = "All your friends will be jelly."
 	icon_state = "jellycustom"
+	nutriment_amt = 3
+	nutriment_desc = list("sweetness" = 3)
+	trash = /obj/item/trash/snack_bowl
 
 
 /obj/item/reagent_containers/food/snacks/variable/stuffing
 	name = "stuffing"
 	desc = "Get stuffed."
 	icon_state = "stuffing"
+	nutriment_amt = 3
+	nutriment_desc = list("stuffing" = 3)
 
 
 /obj/item/reagent_containers/food/snacks/variable/shreds
@@ -610,6 +683,8 @@
 	name = "stew"
 	desc = "A hearty classic."
 	icon_state = "stew"
+	nutriment_amt = 4
+	nutriment_desc = list("stew" = 3)
 
 
 /obj/item/material/chopping_board

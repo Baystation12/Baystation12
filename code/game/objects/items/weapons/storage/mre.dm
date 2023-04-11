@@ -215,7 +215,7 @@ MRE Stuff
 	startswith = list(/obj/item/reagent_containers/food/snacks/slice/vegetablepizza/filled)
 
 /obj/item/storage/mrebag/menu4
-	startswith = list(/obj/item/reagent_containers/food/snacks/hamburger)
+	startswith = list(/obj/item/reagent_containers/food/snacks/plainburger)
 
 /obj/item/storage/mrebag/menu5
 	startswith = list(/obj/item/reagent_containers/food/snacks/taco)
