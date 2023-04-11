@@ -83,16 +83,17 @@
 	if(material_flags & USE_MATERIAL_PLURAL_NAME)
 		plural_name = material.sheet_plural_name
 
+	SetName(get_stack_name())
 	if(amount>1)
-		SetName("[material.use_name] [plural_name]")
+		SetName("[name] [plural_name]")
 		desc = "A stack of [get_vague_name()]."
 		gender = PLURAL
 	else
-		SetName("[material.use_name] [singular_name]")
+		SetName("[name] [singular_name]")
 		desc = "[get_vague_name()]."
 		gender = NEUTER
 	if(reinf_material)
-		SetName("reinforced [name]")
+		SetName("[reinf_material.use_name]-reinforced [name]")
 		desc += "\nIt is reinforced with the [reinf_material.use_name] lattice."
 
 /obj/item/stack/material/use(used)
