@@ -4,7 +4,7 @@
 /area/template_noop)
 "az" = (
 /obj/effect/paint/red,
-/turf/simulated/wall/titanium,
+/turf/simulated/wall/r_titanium,
 /area/map_template/icgnv_hound)
 "cc" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -944,6 +944,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/icgnv_hound)
+"PQ" = (
+/obj/effect/paint/iccgn,
+/turf/simulated/wall/r_titanium,
+/area/map_template/icgnv_hound)
 "Rc" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 1
@@ -1248,15 +1252,15 @@ av
 av
 dq
 if
-fM
-fM
-fM
-fM
-fM
-fM
-fM
-fM
-fM
+PQ
+PQ
+PQ
+PQ
+PQ
+PQ
+PQ
+PQ
+PQ
 av
 av
 av
@@ -1279,9 +1283,9 @@ qF
 nT
 CX
 Hg
-fM
-fM
-fM
+PQ
+PQ
+PQ
 az
 az
 av
@@ -1296,7 +1300,7 @@ av
 av
 kd
 if
-fM
+PQ
 os
 rs
 wt
@@ -1319,8 +1323,8 @@ av
 av
 av
 av
-fM
-fM
+PQ
+PQ
 fM
 fM
 ol
@@ -1343,7 +1347,7 @@ av
 av
 av
 mA
-fM
+PQ
 rv
 wU
 DM
@@ -1383,13 +1387,13 @@ av
 (8,1,1) = {"
 av
 av
-fM
+PQ
 fX
 fX
-fM
-fM
-fM
-fM
+PQ
+PQ
+PQ
+PQ
 fM
 fM
 Ec
@@ -1405,8 +1409,8 @@ av
 "}
 (9,1,1) = {"
 av
-fM
-fM
+PQ
+PQ
 gP
 iv
 kg
@@ -1474,8 +1478,8 @@ av
 "}
 (12,1,1) = {"
 av
-fM
-fM
+PQ
+PQ
 hV
 ka
 lg
@@ -1498,13 +1502,13 @@ av
 (13,1,1) = {"
 av
 av
-fM
+PQ
 fX
 fX
-fM
-fM
-fM
-fM
+PQ
+PQ
+PQ
+PQ
 fM
 fM
 Ec
@@ -1550,7 +1554,7 @@ av
 av
 av
 nT
-fM
+PQ
 vw
 yo
 FQ
@@ -1572,13 +1576,13 @@ av
 av
 av
 av
-fM
-fM
-fM
+PQ
+PQ
+PQ
 yt
-fM
-fM
-fM
+PQ
+PQ
+PQ
 Tj
 XY
 az
@@ -1595,13 +1599,13 @@ av
 av
 kd
 if
-fM
+PQ
 pq
 vE
 zn
 Gt
 Mq
-fM
+PQ
 To
 YV
 az
@@ -1624,9 +1628,9 @@ wc
 Aq
 Gw
 MN
-fM
-fM
-fM
+PQ
+PQ
+PQ
 az
 az
 av
@@ -1639,15 +1643,15 @@ av
 av
 dq
 if
-fM
-fM
-fM
-fM
-fM
+PQ
+PQ
+PQ
+PQ
+PQ
 Jz
-fM
-fM
-fM
+PQ
+PQ
+PQ
 av
 av
 av
