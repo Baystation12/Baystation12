@@ -117,9 +117,9 @@
 
 		if(!(M.knows_target(src)) && !isghost(M))
 			for(var/datum/pronouns/entry as anything in GLOB.pronouns.instances)
-				mob_message = replacetext(mob_message, " [initial(entry.his)]", " their")
-				mob_message = replacetext(mob_message, " [initial(entry.him)]", " them")
-				mob_message = replacetext(mob_message, " [initial(entry.self)]", " themselves")
+				mob_message = replacetext(mob_message, " [initial(entry.his)] ", " their ")
+				mob_message = replacetext(mob_message, " [initial(entry.him)] ", " them ")
+				mob_message = replacetext(mob_message, " [initial(entry.self)] ", " themselves ")
 
 		if((!M.is_blind() && M.see_invisible >= src.invisibility) || narrate)
 			M.show_message(mob_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
@@ -158,9 +158,9 @@
 
 		if(!(M.knows_target(src)) && !(isghost(M)))
 			for(var/datum/pronouns/entry as anything in GLOB.pronouns.instances)
-				mob_message = replacetext(mob_message, initial(entry.his), "their")
-				mob_message = replacetext(mob_message, initial(entry.him), "them")
-				mob_message = replacetext(mob_message, initial(entry.self), "themselves")
+				mob_message = replacetext(mob_message, " [initial(entry.his)] ", " their ")
+				mob_message = replacetext(mob_message, " [initial(entry.him)] ", " them ")
+				mob_message = replacetext(mob_message, " [initial(entry.self)] ", " themselves ")
 
 		if(self_message && M == src)
 			M.show_message(self_message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)

@@ -67,10 +67,10 @@
 	if(!resting && stat == CONSCIOUS)
 		if(!is_angry)
 			is_angry = TRUE
-			custom_emote(src, "hisses!")
+			custom_emote(AUDIBLE_MESSAGE, "hisses!")
 		else
 			resting = TRUE
-			custom_emote(src, "dies!")
+			custom_emote(VISIBLE_MESSAGE, "dies!")
 		update_icon()
 
 /mob/living/simple_animal/passive/opossum/on_update_icon()
