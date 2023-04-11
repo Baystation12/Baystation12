@@ -1,3 +1,27 @@
+/material/borax
+	name = MATERIAL_BORAX
+	ore_compresses_to = MATERIAL_BORAX
+	icon_colour = "#9dd6e0"
+	ore_result_amount = 3
+	ore_spread_chance = 15
+	ore_name = "borax"
+	ore_scan_icon = "material_common"
+	ore_icon_overlay = "lump"
+	stack_origin_tech = list(TECH_MATERIAL = 3)
+	chem_products = list(
+		/datum/reagent/space_cleaner = 5,
+		/datum/reagent/water = 3,
+		/datum/reagent/toxin = 2
+	)
+	door_icon_base = "stone"
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
+	icon_base = "stone"
+	table_icon_base = "stone"
+	icon_reinf = "reinf_stone"
+	sale_price = 2
+
+
 /material/pitchblende
 	name = MATERIAL_PITCHBLENDE
 	ore_compresses_to = MATERIAL_PITCHBLENDE

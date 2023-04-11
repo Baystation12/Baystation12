@@ -104,17 +104,17 @@
 /obj/effect/wingrille_spawn/phoron
 	name = "phoron window grille spawner"
 	icon_state = "p-wingrille"
-	win_path = /obj/structure/window/phoronbasic
+	win_path = /obj/structure/window/boron_basic
 
 /obj/effect/wingrille_spawn/reinforced_phoron
 	name = "reinforced phoron window grille spawner"
 	icon_state = "pr-wingrille"
-	win_path = /obj/structure/window/phoronreinforced
+	win_path = /obj/structure/window/boron_reinforced
 
 /obj/effect/wingrille_spawn/reinforced_phoron/full
 	name = "reinforced phoron window grille spawner - full tile"
 	fulltile = TRUE
-	win_path = /obj/structure/window/phoronreinforced/full
+	win_path = /obj/structure/window/boron_reinforced/full
 
 /obj/effect/wingrille_spawn/reinforced/polarized
 	name = "polarized window grille spawner"

@@ -290,7 +290,7 @@
 
 /obj/item/archaeological_find/material/exotic
 	item_type = "rare material lump"
-	possible_materials = list(MATERIAL_ALIENALLOY, MATERIAL_PHORON, MATERIAL_HYDROGEN, MATERIAL_PHORON_GLASS)
+	possible_materials = list(MATERIAL_ALIENALLOY, MATERIAL_PHORON, MATERIAL_HYDROGEN, MATERIAL_BORON_GLASS)
 
 /obj/item/archaeological_find/crystal
 	item_type = "crystal"
