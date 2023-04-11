@@ -17,6 +17,13 @@
 	var/material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 	var/matter_multiplier = 1
 
+
+/obj/item/stack/material/get_stack_name()
+	. = material.use_name
+	if (reinf_material)
+		. = "[reinf_material.use_name]-reinforced [.]"
+
+
 /obj/item/stack/material/Initialize(mapload, amount, _material, _reinf_material)
 	. = ..()
 	if(_material)

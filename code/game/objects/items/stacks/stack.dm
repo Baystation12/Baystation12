@@ -340,6 +340,49 @@
 	else
 		return ..()
 
+
+/**
+ * Returns a string forming a basic name of the stack. By default, this is `name`.
+ *
+ * Has no parameters.
+ */
+/obj/item/stack/proc/get_stack_name()
+	return name
+
+
+/**
+ * Generates a name usable in messages without a specific number attached, i.e. `a sheet of paper` or `some paper sheets`.
+ *
+ * **Parameters**:
+ * - `plural` (Boolean, default `(src.amount == 1)`) - Whether the message uses `plural_name` or `singular_name`, and the proper grammatical rules.
+ *
+ * Returns string.
+ */
+/obj/item/stack/proc/get_vague_name(plural)
+	if (isnull(plural))
+		plural = (src.amount == 1)
+	if (plural)
+		return "some [get_stack_name()] [plural_name]"
+	else
+		return "\a [singular_name] of [get_stack_name()]"
+
+
+/**
+ * Generates a name usable in messages with a specific number attached, i.e. `1 sheet of paper` or `5 paper sheets`.
+ *
+ * **Parameters**:
+ * - `amount` (Integer, default `src.amount`) - The number of items for the message. Also determines whether `plural_name` or `singular_name` are used.
+ *
+ * Returns string.
+ */
+/obj/item/stack/proc/get_exact_name(amount)
+	if (isnull(amount))
+		amount = src.amount
+	if (amount == 1)
+		return "[amount] [singular_name] of [get_stack_name()]"
+	return "[amount] [get_stack_name()] [plural_name]"
+
+
 /*
  * Recipe datum
  */
