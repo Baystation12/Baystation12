@@ -50,9 +50,9 @@
 	. = ..()
 	if(distance <= 1)
 		if(!uses_charge)
-			to_chat(user, "There [src.amount == 1 ? "is" : "are"] [src.amount] [src.singular_name]\s in the stack.")
+			to_chat(user, "There [amount == 1 ? "is 1 [singular_name]" : "are [amount] [plural_name]"] in the stack.")
 		else
-			to_chat(user, "There is enough charge for [get_amount()].")
+			to_chat(user, "There is enough charge for [get_amount() == 1 ? "1 [singular_name]" : "[amount] [plural_name]"].")
 
 /obj/item/stack/attack_self(mob/user as mob)
 	list_recipes(user)
@@ -302,7 +302,7 @@
 			continue
 		var/transfer = src.transfer_to(item)
 		if (transfer)
-			to_chat(user, SPAN_NOTICE("You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s."))
+			to_chat(user, SPAN_NOTICE("You add a new [item.singular_name] to the stack. It now contains [item.get_exact_name(item.amount)]."))
 		if(!amount)
 			break
 
@@ -313,7 +313,7 @@
 
 /obj/item/stack/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)
-		var/N = input("How many stacks of [src] would you like to split off?", "Split stacks", 1) as num|null
+		var/N = input("How many [plural_name] of \the [src] would you like to split off?", "Split stacks", 1) as num|null
 		if(N)
 			var/obj/item/stack/F = src.split(N)
 			if (F)
