@@ -13,6 +13,8 @@
 	mob_push_flags = ~HEAVY //trundle trundle
 	skillset = /datum/skillset/silicon/robot
 
+	blocks_emissive = EMISSIVE_BLOCK_UNIQUE
+
 	var/lights_on = FALSE
 	var/used_power_this_tick = 0
 	var/power_efficiency = 1

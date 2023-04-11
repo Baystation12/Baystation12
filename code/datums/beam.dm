@@ -122,7 +122,7 @@
 		else
 			Pixel_y = round(cos(Angle)+32*cos(Angle)*(N+16)/32)
 
-		//Position the effect so the beam is one continous line
+		//Position the effect so the beam is one continuous line
 		var/a
 		if(abs(Pixel_x)>32)
 			a = Pixel_x > 0 ? round(Pixel_x/32) : Ceilm(Pixel_x/32, 1)
@@ -150,6 +150,12 @@
 	return
 /obj/effect/ebeam/singularity_act()
 	return
+
+//Equivalent to /obj/effect/ebeam, except it also adds an emissive layer
+/obj/effect/ebeam/emissive/on_update_icon()
+	. = ..()
+	var/mutable_appearance/emissive_overlay = emissive_appearance(icon, icon_state, src)
+	overlays += emissive_overlay
 
 /**
  * This is what you use to start a beam. Example: origin.Beam(target, args). **Store the return of this proc if you don't set maxdist or time, you need it to delete the beam.**

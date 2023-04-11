@@ -5,6 +5,7 @@
 	size = 4
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
 	program_icon_state = "security"
+	program_key_state = "security_key"
 	program_menu_icon = "locked"
 	requires_ntnet = TRUE
 	available_on_ntnet = TRUE
