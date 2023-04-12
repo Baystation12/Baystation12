@@ -156,6 +156,8 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			. -= 0
 		else if(locate(/obj/structure/bed, T))
 			. -= 5
+		else if(locate(/obj/structure/roller_bed, T))
+			. -= 5
 		else if(locate(/obj/structure/table, T))
 			. -= 10
 		else if(locate(/obj/effect/rune, T))
