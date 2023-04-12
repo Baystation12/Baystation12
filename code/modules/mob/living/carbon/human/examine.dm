@@ -184,7 +184,7 @@
 	if(ssd_msg && (!should_have_organ(BP_BRAIN) || has_brain()) && stat != DEAD)
 		if(!key)
 			msg += SPAN_DEBUG("[P.He] [P.is] [ssd_msg]. [P.He] won't be recovering any time soon. (Ghosted)") + "\n"
-		else if(!client)
+		else if(!client && !client.is_stealthed())
 			msg += SPAN_DEBUG("[P.He] [P.is] [ssd_msg]. (Disconnected)") + "\n"
 
 	if (admin_paralyzed)
