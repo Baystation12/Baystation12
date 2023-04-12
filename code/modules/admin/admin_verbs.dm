@@ -394,6 +394,9 @@ var/global/list/admin_verbs_mod = list(
 		//ghostize
 		var/mob/body = mob
 		var/mob/observer/ghost/ghost = body.ghostize(1)
+		if (ghost.client.is_stealthed())
+			ghost.set_invisibility(INVISIBILITY_AGHOST)
+			ghost.set_see_invisible(INVISIBILITY_AGHOST)
 		sound_to(usr, sound(null))
 
 		if (!ghost)
