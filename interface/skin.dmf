@@ -1115,7 +1115,7 @@ window "rpane"
 		anchor1 = none
 		anchor2 = none
 		saved-params = "is-checked"
-		text = "Report Issue"
+		text = "Bug Report"
 		command = "link-issue"
 	elem "linkrules"
 		type = BUTTON
