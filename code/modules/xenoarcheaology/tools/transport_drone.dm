@@ -13,6 +13,20 @@
 	else
 		to_chat(user, "The device hasn't been linked to a transport network.")
 
+/obj/item/device/drone_designator/proc/recursive_validate_contents(atom/A, depth = 1)
+	if(depth >= 4)
+		return TRUE
+	if(istype(A, /obj/structure/stasis_cage))
+		return TRUE //This is fine
+	if(istype(A,/mob/living))
+		return FALSE
+
+	for(var/atom/B as anything in A)
+		if(!recursive_validate_contents(B, depth + 1))
+			return FALSE
+
+	return TRUE
+
 /obj/item/device/drone_designator/proc/validate_target(obj/target, mob/user)
 	if (!istype(target))
 		return FALSE
@@ -22,7 +36,7 @@
 	if (target.buckled_mob)
 		to_chat(user, SPAN_WARNING("There is a living being buckled to \the [target]."))
 		return FALSE
-	if (locate(/mob/living) in target && !istype(target, /obj/structure/stasis_cage))
+	if (!recursive_validate_contents(target))
 		to_chat(user, SPAN_WARNING("There is an unsecured lifeform inside \the [target]."))
 		return FALSE
 	return TRUE
@@ -73,6 +87,7 @@
 	desc = "A small pad for transport drones to deposit their payloads at."
 	icon = 'icons/obj/landing_pad.dmi'
 	icon_state = "pad_base"
+	anchored = TRUE
 	density = FALSE
 	layer = ABOVE_CATWALK_LAYER
 	base_type = /obj/machinery/drone_pad
