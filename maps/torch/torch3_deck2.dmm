@@ -12961,10 +12961,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
-"Hb" = (
-/obj/effect/shuttle_landmark/petrov/out,
-/turf/space,
-/area/space)
 "Hc" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green,
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
@@ -16877,11 +16873,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
-"TV" = (
-/obj/structure/ladder,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/techfloor,
-/area/storage/cargo)
 "TW" = (
 /obj/structure/fireaxecabinet{
 	pixel_y = -32
@@ -38696,7 +38687,7 @@ Yy
 Yy
 Fn
 AN
-TV
+Bs
 Bs
 Bs
 Bs
@@ -46710,7 +46701,7 @@ aa
 aa
 aa
 aa
-Hb
+aa
 aa
 aa
 aa

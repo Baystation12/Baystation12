@@ -49,31 +49,6 @@ TORCH_ESCAPE_POD(15)
 TORCH_ESCAPE_POD(16)
 TORCH_ESCAPE_POD(17)
 
-//Petrov
-
-/datum/shuttle/autodock/ferry/petrov
-	name = "Petrov"
-	warmup_time = 10
-	dock_target = "petrov_shuttle_airlock"
-	waypoint_station = "nav_petrov_start"
-	waypoint_offsite = "nav_petrov_out"
-	logging_home_tag = "nav_petrov_start"
-	logging_access = access_petrov_helm
-	ceiling_type = /turf/simulated/floor/shuttle_ceiling
-
-/datum/shuttle/autodock/ferry/petrov/New(_name, obj/effect/shuttle_landmark/initial_location)
-	shuttle_area = subtypesof(/area/shuttle/petrov)
-	..()
-
-/obj/effect/shuttle_landmark/petrov/start
-	name = "First Deck"
-	landmark_tag = "nav_petrov_start"
-	docking_controller = "petrov_shuttle_dock_airlock"
-
-/obj/effect/shuttle_landmark/petrov/out
-	name = "Space near the ship"
-	landmark_tag = "nav_petrov_out"
-
 //Ninja Shuttle.
 /datum/shuttle/autodock/multi/antag/ninja
 	destination_tags = list(

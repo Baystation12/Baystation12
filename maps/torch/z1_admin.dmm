@@ -2529,17 +2529,15 @@
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "auw" = (
+/obj/effect/paint/silver,
 /obj/machinery/button/blast_door{
 	id_tag = "supply_shuttle";
 	name = "Supply Drone Shutter Control"
 	},
-/obj/effect/paint/silver,
 /turf/simulated/wall/r_titanium,
 /area/supply/dock)
 "auy" = (
-/obj/machinery/light/spot{
-	dir = 1
-	},
+/obj/machinery/light/small,
 /turf/simulated/floor/plating,
 /area/supply/dock)
 "auz" = (
@@ -7939,7 +7937,7 @@
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/smokable/transstellar = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/smokable/transstellar=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo/random=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/unsimulated/floor{
 	icon_state = "plating";
@@ -8390,7 +8388,7 @@
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/smokable/transstellar = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/smokable/transstellar=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo/random=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /obj/structure/window/reinforced{
 	dir = 1
@@ -11392,7 +11390,9 @@
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
 "jlA" = (
-/obj/machinery/light/spot,
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/supply/dock)
 "joZ" = (
@@ -26034,7 +26034,7 @@ aab
 aab
 aab
 aab
-atx
+aab
 ath
 aua
 aua
@@ -26236,8 +26236,8 @@ aab
 aab
 aab
 aab
+aab
 atx
-atR
 atR
 atR
 atR
@@ -26438,16 +26438,16 @@ aab
 aab
 aab
 aab
+aab
 atx
 atR
 atR
-auo
 auw
 auQ
 auQ
 auQ
+auQ
 auw
-auo
 atR
 atR
 atx
@@ -26640,15 +26640,15 @@ aab
 aab
 aab
 aab
+aab
 atx
 atR
 rxE
 auo
+jlA
 auz
 auz
-auz
-auz
-auz
+auy
 auo
 auo
 atR
@@ -26842,15 +26842,15 @@ aab
 aab
 aab
 aab
+aab
 atx
 atR
 rxE
 auq
-auy
 auz
 auz
 auz
-jlA
+auz
 auo
 auo
 atR
@@ -27044,11 +27044,11 @@ aab
 aab
 aab
 aab
+aab
 atx
 atR
 rxE
 auq
-auz
 auz
 auX
 auz
@@ -27246,15 +27246,15 @@ aab
 aab
 aab
 aab
+aab
 atx
 atR
 rxE
 auo
+jlA
 auz
 auz
-auz
-auz
-auz
+auy
 auo
 auo
 atR
@@ -27448,16 +27448,16 @@ aab
 aab
 aab
 aab
+aab
 atx
 atR
 atR
-auo
 auw
 auQ
 auQ
 auQ
+auQ
 auw
-auo
 atR
 atR
 atx
@@ -27650,8 +27650,8 @@ aab
 aab
 aab
 aab
+aab
 atx
-atR
 atR
 atR
 atR
@@ -27852,8 +27852,8 @@ aab
 aab
 aab
 aab
+aab
 atx
-atS
 atS
 atS
 atS

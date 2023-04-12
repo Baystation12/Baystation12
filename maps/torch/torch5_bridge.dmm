@@ -9490,7 +9490,7 @@
 /area/maintenance/bridge/forestarboard)
 "xP" = (
 /obj/effect/landmark/map_data{
-	height = 6
+	height = 5
 	},
 /turf/space,
 /area/space)

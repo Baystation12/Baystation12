@@ -69,11 +69,6 @@
 		"nav_deck1_aquila",
 		"nav_vox_raider_dock",
 
-		//start Hanger Deck
-		"nav_merc_hanger",
-		"nav_ninja_hanger",
-		"nav_skipjack_hanger",
-		"nav_ert_hanger",
 	)
 
 /obj/effect/overmap/visitable/ship/landable/exploration_shuttle
