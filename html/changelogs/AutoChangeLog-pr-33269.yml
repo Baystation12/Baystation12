@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Replies to admin-helps should not relay to discord.
