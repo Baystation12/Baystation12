@@ -73,13 +73,11 @@
 	. = ..()
 	strength = 1
 	if (.)
-		var/old_pass_flags = user.pass_flags
-		user.pass_flags |= PASS_FLAG_TABLE
-		user.visible_message(SPAN_DANGER("\The [user] takes a flying leap!"))
+		user.visible_message(SPAN_DANGER("\The [user] pulls off a quick leap!"))
 		if(reflexively)
 			strength *= reflexive_modifier
 		user.jump_layer_shift()
 		animate(user, pixel_z = 16, time = 3, easing = SINE_EASING | EASE_IN)
 		animate(pixel_z = user.default_pixel_z, time = 3, easing = SINE_EASING | EASE_OUT)
-		user.throw_at(get_turf(target), strength, 1, user, FALSE, new Callback(src, /singleton/maneuver/leap/proc/end_leap, user, target, old_pass_flags))
+		user.throw_at(get_turf(target), strength, 1, user, FALSE, new Callback(src, /singleton/maneuver/leap/proc/end_leap, user, target))
 		addtimer(new Callback(user, /mob/living/proc/jump_layer_shift_end), 4.5)
