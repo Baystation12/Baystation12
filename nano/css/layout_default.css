@@ -20,6 +20,8 @@ body {
     left: 44px;
     /* width: 66%; */ /* BAY */
     width: 70%; /* SIERRA */
+    line-height: 12px; /* SIERRA */
+    text-transform: capitalize; /* SIERRA */
     overflow: hidden;
     color: #E9C183;
     /* font-size: 16px; */ /* BAY */
@@ -126,5 +128,3 @@ body {
     padding: 3px 4px 3px 4px;
     margin: 4px 0 4px 0;
 }
-
-

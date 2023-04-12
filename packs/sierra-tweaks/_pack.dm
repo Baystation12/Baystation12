@@ -20,6 +20,9 @@
 #include "mob\stat.dm"
 #include "mob\emotes.dm"
 
+// NTNet
+#include "machinery\NTNet\NTNet-core.dm"
+
 // Objects
 #include "objects\buckling.dm"
 #include "objects\items\fruit_jar.dm"

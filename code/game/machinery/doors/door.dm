@@ -346,6 +346,8 @@
 		return
 	operating = DOOR_OPERATING_YES
 
+	. = TRUE // SIERRA
+
 	do_animate("opening")
 	icon_state = "door0"
 	set_opacity(0)
