@@ -849,7 +849,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	if (config.hub_visible && !world.reachable)
 		message_admins("WARNING: The server will not show up on the hub because byond is detecting that a firewall is blocking incoming connections.")
 
-	send_to_admin_discord(EXCOM_MSG_AHELP, "[key_name(src)]" + long_message)
+	send_to_admin_discord(EXCOM_MSG_AHELP, "[key_name(src, highlight_special_characters = FALSE)]" + long_message)
 	log_and_message_admins(long_message)
 
 /datum/admins/proc/toggletraitorscaling()
