@@ -31,17 +31,8 @@
 	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/head/fleetcover
-	display_name = "fleet utilty cover"
+	display_name = "fleet utility cover"
 	path = /obj/item/clothing/head/solgov/utility/fleet
-	cost = 0
-	allowed_branches = list(
-		/datum/mil_branch/fleet
-	)
-	flags = GEAR_HAS_NO_CUSTOMIZATION
-
-/datum/gear/head/fleetcap
-	display_name = "fleet cap"
-	path = /obj/item/clothing/head/soft/solgov/fleet
 	cost = 0
 	allowed_branches = list(
 		/datum/mil_branch/fleet

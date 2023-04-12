@@ -38,6 +38,11 @@
 	desc = "It's a navy blue field cap with the SCG Fleet crest in a silver colour."
 	icon_state = "fleetsoft"
 
+/obj/item/clothing/head/soft/solgov/fleet/command
+	name = "fleet officer's cap"
+	desc = "It's a navy blue field cap with the SCG Fleet crest in a gold colour."
+	icon_state = "fleetsoft_officer"
+
 /obj/item/clothing/head/solgov/utility
 	name = "utility cover"
 	desc = "An eight-point utility cover."
