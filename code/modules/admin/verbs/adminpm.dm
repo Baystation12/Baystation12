@@ -131,7 +131,7 @@
 		sound_to(C, 'sound/ui/pm-notify.ogg')
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
-	adminmsg2adminirc(src, C, html_decode(msg))
+	send_to_admin_discord(EXCOM_MSG_AHELP, "PM: [key_name(src, highlight_special_characters = FALSE)]->[key_name(C, highlight_special_characters = FALSE)]:[html_decode(msg)]")
 
 	ticket.msgs += new /datum/ticket_msg(src.ckey, C.ckey, msg)
 	update_ticket_panels()
@@ -160,7 +160,7 @@
 //		to_chat(src, SPAN_NOTICE("[msg]"))
 //		return
 
-	adminmsg2adminirc(src, sender, html_decode(msg))
+	send_to_admin_discord(EXCOM_MSG_AHELP, "PM: [key_name(src, highlight_special_characters = FALSE)]->DISC-[sender]:[html_decode(msg)]")
 	msg = sanitize(msg)
 	log_admin("PM: [key_name(src)]->IRC-[sender]: [msg]")
 	admin_pm_repository.store_pm(src, "IRC-[sender]", msg)

@@ -135,5 +135,5 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 		adminmsg2adminirc(src, null, "[html_decode(original_msg)]")
 
 
-	send_to_admin_discord(EXCOM_MSG_AHELP, "HELP: [key_name(src)]: [original_msg]")
+	send_to_admin_discord(EXCOM_MSG_AHELP, "HELP: [key_name(src, highlight_special_characters = FALSE)]: [original_msg]")
 	return
