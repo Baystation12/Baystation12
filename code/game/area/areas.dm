@@ -36,6 +36,12 @@
 		power_equip = 0
 		power_environ = 0
 	power_change()		// all machines set to current power level, also updates lighting icon
+	if (turfs_airless)
+		return INITIALIZE_HINT_LATELOAD
+
+/area/LateInitialize(mapload, ...)
+	..()
+	turfs_airless = FALSE
 
 /area/Destroy()
 	..()

@@ -21,6 +21,10 @@
 	var/singleton/flooring/flooring
 	var/mineral = DEFAULT_WALL_MATERIAL
 
+	// Initialization modifiers for mapping
+	/// Boolean (Default `FALSE`) - If set, the tile will not have atmosphere on init.
+	var/map_airless = FALSE
+
 	thermal_conductivity = 0.040
 	heat_capacity = 10000
 	var/lava = 0
@@ -34,6 +38,10 @@
 	return (A.level == ATOM_LEVEL_UNDER_TILE && !is_plating()) || ..()
 
 /turf/simulated/floor/New(newloc, floortype)
+	var/area/area = get_area(src)
+	if (map_airless || area?.turfs_airless)
+		initial_gas = null
+		temperature = TCMB
 	..(newloc)
 	if(!floortype && initial_flooring)
 		floortype = initial_flooring
