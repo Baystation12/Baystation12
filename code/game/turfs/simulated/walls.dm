@@ -70,23 +70,23 @@
 
 /turf/simulated/wall/proc/calculate_damage_data()
 	// Health
-	var/max_health = material.integrity
+	var/max_health = material.integrity * 1.5
 	if (reinf_material)
-		max_health += round(reinf_material.integrity / 2)
+		max_health += round(reinf_material.integrity * 0.75)
 	set_max_health(max_health)
 
 	// Minimum force required to damage the wall
-	health_min_damage = material.hardness * 1.5
+	health_min_damage = material.hardness * 2.6
 	if (reinf_material)
-		health_min_damage += round(reinf_material.hardness * 1.5)
+		health_min_damage += round(reinf_material.hardness * 1.9)
 	health_min_damage = round(health_min_damage / 10)
 
 	// Brute and burn armor
-	var/brute_armor = material.brute_armor * 0.2
-	var/burn_armor = material.burn_armor * 0.2
+	var/brute_armor = material.brute_armor * 0.4
+	var/burn_armor = material.burn_armor * 0.4
 	if (reinf_material)
-		brute_armor += reinf_material.brute_armor * 0.2
-		burn_armor += reinf_material.burn_armor * 0.2
+		brute_armor += reinf_material.brute_armor * 0.4
+		burn_armor += reinf_material.burn_armor * 0.4
 	// Materials enter armor as divisors, health system uses multipliers
 	if (brute_armor)
 		brute_armor = round(1 / brute_armor, 0.01)
