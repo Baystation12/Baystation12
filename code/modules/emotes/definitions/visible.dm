@@ -316,6 +316,10 @@
 	check_restraints = TRUE
 	emote_message_3p = "USER returns the salute."
 
+/singleton/emote/visible/atten
+	key = "atten"
+	emote_message_3p = "USER stands at attention."
+
 /singleton/emote/visible/rshoulder
 	key = "rshoulder"
 	emote_message_3p = "USER rolls USER_THEIR shoulders."
