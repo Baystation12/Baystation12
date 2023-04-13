@@ -8379,8 +8379,8 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/fore)
 "tm" = (
-/obj/random/loot,
-/obj/random/loot,
+/obj/random/maintenance/clean,
+/obj/random/maintenance/clean,
 /obj/random/trash,
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/fore)
