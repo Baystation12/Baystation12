@@ -19,22 +19,3 @@
 		if(dest_key && CanInteract(usr, GLOB.default_state))
 			shuttle.set_destination(dest_key, usr)
 		return TOPIC_REFRESH
-
-
-/obj/machinery/computer/shuttle_control/multi/antag
-	ui_template = "shuttle_control_console_antag.tmpl"
-
-/obj/machinery/computer/shuttle_control/multi/antag/get_ui_data(datum/shuttle/autodock/multi/antag/shuttle)
-	. = ..()
-	if(istype(shuttle))
-		. += list(
-			"cloaked" = shuttle.cloaked,
-		)
-
-/obj/machinery/computer/shuttle_control/multi/antag/handle_topic_href(datum/shuttle/autodock/multi/antag/shuttle, list/href_list)
-	if((. = ..()) != null)
-		return
-
-	if(href_list["toggle_cloaked"])
-		shuttle.cloaked = !shuttle.cloaked
-		return TOPIC_REFRESH
