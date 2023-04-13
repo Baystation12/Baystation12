@@ -1,0 +1,5 @@
+author: Jux
+delete-after: true
+changes:
+  - bugfix: The skipjack now has all intended navpoints.
+  - bugfix: Audible emotes, like poppy hissing, no longer break with pronouns.
