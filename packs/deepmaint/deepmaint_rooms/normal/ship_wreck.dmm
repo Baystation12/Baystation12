@@ -5,16 +5,16 @@
 "b" = (
 /obj/item/stack/cable_coil/single,
 /obj/effect/landmark/scorcher,
-/turf/simulated/floor/airless{
-	icon_state = "dmg2"
+/turf/simulated/floor{
+	map_airless = 1
 	},
 /area/map_template/deepmaint)
 "c" = (
 /obj/effect/landmark/scorcher,
 /obj/structure/closet/crate/plastic,
 /obj/item/material/twohanded/fireaxe,
-/turf/simulated/floor/airless{
-	icon_state = "dmg1"
+/turf/simulated/floor{
+	map_airless = 1
 	},
 /area/map_template/deepmaint)
 "d" = (
@@ -24,21 +24,28 @@
 "e" = (
 /obj/effect/landmark/scorcher,
 /obj/structure/closet/crate/plastic,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/deepmaint)
 "f" = (
 /obj/item/material/shard/shrapnel/titanium,
 /obj/effect/landmark/scorcher,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/deepmaint)
 "g" = (
-/turf/simulated/floor/airless{
-	icon_state = "dmg2"
+/turf/simulated/floor{
+	icon_state = "dmg2";
+	map_airless = 1
 	},
 /area/map_template/deepmaint)
 "h" = (
 /obj/structure/door_assembly/door_assembly_ext,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/deepmaint)
 "i" = (
 /obj/item/material/shard/shrapnel/titanium,
@@ -51,40 +58,34 @@
 /obj/effect/landmark/scorcher,
 /obj/effect/decal/cleanable/liquid_fuel,
 /mob/living/simple_animal/hostile/carp,
-/turf/simulated/floor/airless{
-	icon_state = "dmg1"
+/turf/simulated/floor{
+	map_airless = 1
 	},
 /area/map_template/deepmaint)
 "k" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/map_template/deepmaint)
 "l" = (
 /obj/machinery/door/airlock/external,
 /obj/effect/mech_shield,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
-"m" = (
-/obj/effect/landmark/scorcher,
-/turf/simulated/floor/airless{
-	icon_state = "dmg1"
-	},
-/area/map_template/deepmaint)
 "n" = (
 /obj/item/stack/material/rods,
 /obj/effect/landmark/scorcher,
 /obj/effect/decal/cleanable/liquid_fuel,
-/turf/simulated/floor/airless,
-/area/map_template/deepmaint)
-"o" = (
-/obj/effect/landmark/scorcher,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/deepmaint)
 "p" = (
 /obj/item/stack/cable_coil/single,
-/turf/simulated/floor/asteroid,
+/turf/simulated/floor/asteroid{
+	map_airless = 1
+	},
 /area/map_template/deepmaint)
 "q" = (
 /obj/effect/mech_shield,
@@ -93,8 +94,8 @@
 "r" = (
 /obj/effect/landmark/scorcher,
 /obj/random/toolbox,
-/turf/simulated/floor/airless{
-	icon_state = "dmg1"
+/turf/simulated/floor{
+	map_airless = 1
 	},
 /area/map_template/deepmaint)
 "s" = (
@@ -103,10 +104,14 @@
 	},
 /obj/effect/gibspawner/robot,
 /obj/effect/landmark/scorcher,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/deepmaint)
 "t" = (
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/deepmaint)
 "v" = (
 /obj/structure/lattice,
@@ -120,11 +125,13 @@
 /obj/structure/wall_frame/titanium,
 /obj/item/stack/material/rods,
 /obj/item/stack/material/rods,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/map_template/deepmaint)
 "y" = (
 /obj/structure/inflatable/door,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/deepmaint)
 "z" = (
 /obj/structure/mech_wreckage/powerloader,
@@ -132,12 +139,16 @@
 /area/map_template/deepmaint)
 "A" = (
 /mob/living/exosuit/premade/firefighter,
-/turf/simulated/floor/asteroid,
+/turf/simulated/floor/asteroid{
+	map_airless = 1
+	},
 /area/map_template/deepmaint)
 "B" = (
 /obj/item/material/shard,
 /obj/structure/door_assembly/door_assembly_ext,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/deepmaint)
 "C" = (
 /obj/structure/sign/warning/vacuum{
@@ -167,12 +178,6 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
-"F" = (
-/obj/effect/landmark/scorcher,
-/turf/simulated/floor/airless{
-	icon_state = "dmg3"
-	},
-/area/map_template/deepmaint)
 "G" = (
 /turf/simulated/mineral,
 /area/map_template/deepmaint)
@@ -188,14 +193,16 @@
 /obj/structure/wall_frame/titanium,
 /obj/item/material/shard,
 /obj/item/stack/material/rods,
-/turf/simulated/floor/airless{
+/turf/simulated/floor{
 	icon_state = "dmg1"
 	},
 /area/map_template/deepmaint)
 "M" = (
 /obj/item/stack/material/rods,
 /obj/effect/landmark/scorcher,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/deepmaint)
 "N" = (
 /obj/item/stack/material/rods,
@@ -205,27 +212,31 @@
 "O" = (
 /obj/structure/wall_frame/titanium,
 /obj/item/material/shard,
-/turf/simulated/floor/airless{
-	icon_state = "dmg3"
+/turf/simulated/floor{
+	map_airless = 1
 	},
 /area/map_template/deepmaint)
 "P" = (
 /obj/item/material/shard,
 /obj/effect/landmark/scorcher,
 /obj/effect/decal/cleanable/liquid_fuel,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/deepmaint)
 "Q" = (
 /obj/item/extinguisher/empty,
 /turf/space,
 /area/map_template/deepmaint)
 "R" = (
-/turf/simulated/floor/asteroid,
+/turf/simulated/floor/asteroid{
+	map_airless = 1
+	},
 /area/map_template/deepmaint)
 "S" = (
 /obj/item/material/shard/shrapnel/titanium,
 /obj/effect/landmark/scorcher,
-/turf/simulated/floor/airless{
+/turf/simulated/floor{
 	icon_state = "dmg1"
 	},
 /area/map_template/deepmaint)
@@ -237,7 +248,9 @@
 	dir = 8
 	},
 /obj/effect/landmark/scorcher,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/deepmaint)
 "V" = (
 /obj/item/stack/material/titanium,
@@ -248,21 +261,21 @@
 /area/map_template/deepmaint)
 "X" = (
 /obj/effect/landmark/scorcher,
-/turf/simulated/floor/airless{
-	icon_state = "dmg2"
+/turf/simulated/floor{
+	map_airless = 1
 	},
 /area/map_template/deepmaint)
 "Y" = (
 /obj/effect/landmark/scorcher,
 /obj/item/stack/material/titanium,
-/turf/simulated/floor/airless{
-	icon_state = "dmg1"
+/turf/simulated/floor{
+	map_airless = 1
 	},
 /area/map_template/deepmaint)
 "Z" = (
 /obj/structure/wall_frame/titanium,
 /obj/item/stack/material/rods,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/map_template/deepmaint)
 
 (1,1,1) = {"
@@ -341,7 +354,7 @@ H
 t
 G
 S
-m
+X
 e
 H
 T
@@ -358,8 +371,8 @@ V
 H
 H
 G
-o
-m
+X
+X
 G
 T
 H
@@ -376,7 +389,7 @@ H
 T
 M
 Y
-F
+X
 H
 v
 H
@@ -392,7 +405,7 @@ y
 H
 T
 r
-S
+f
 f
 G
 v
@@ -408,7 +421,7 @@ q
 z
 v
 x
-o
+X
 X
 c
 T
@@ -425,10 +438,10 @@ W
 G
 H
 L
-F
+X
 s
 j
-o
+X
 O
 R
 R

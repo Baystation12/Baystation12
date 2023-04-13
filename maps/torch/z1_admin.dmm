@@ -10170,10 +10170,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
-"aUZ" = (
-/obj/structure/table/rack,
-/turf/simulated/floor/tiled/airless,
-/area/merchant_station)
 "aVk" = (
 /obj/structure/cable{
 	d2 = 2;
@@ -10181,7 +10177,9 @@
 	},
 /obj/machinery/power/solar,
 /obj/effect/floor_decal/solarpanel,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/merchant_station)
 "aVl" = (
 /obj/structure/table/steel,
@@ -10287,7 +10285,9 @@
 	},
 /obj/machinery/power/solar,
 /obj/effect/floor_decal/solarpanel,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/merchant_station)
 "aVG" = (
 /obj/structure/cable{
@@ -10300,7 +10300,9 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/merchant_station)
 "aVH" = (
 /obj/structure/cable/blue{
@@ -10438,7 +10440,9 @@
 	use_power = 1
 	},
 /obj/effect/floor_decal/industrial/warning/full,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/merchant_station)
 "aWg" = (
 /obj/structure/cable/blue{
@@ -10508,7 +10512,9 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/tracker,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/merchant_station)
 "aWz" = (
 /obj/structure/cable{
@@ -10516,7 +10522,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/merchant_station)
 "aWA" = (
 /obj/structure/cable{
@@ -10534,7 +10542,9 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/merchant_station)
 "aWB" = (
 /obj/structure/cable{
@@ -10545,7 +10555,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 5
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/merchant_station)
 "aWC" = (
 /obj/structure/cable{
@@ -10560,7 +10572,9 @@
 	dir = 4;
 	pixel_y = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/merchant_station)
 "aWD" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -10667,7 +10681,9 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/merchant_station)
 "aWW" = (
 /obj/machinery/power/solar_control/autostart,
@@ -10800,7 +10816,9 @@
 /obj/structure/cable,
 /obj/machinery/power/solar,
 /obj/effect/floor_decal/solarpanel,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/merchant_station)
 "aZb" = (
 /obj/machinery/computer/modular/preset/civilian{
@@ -24783,7 +24801,7 @@ aTL
 aUf
 aUl
 aUF
-aUZ
+aVv
 aVx
 aVS
 aWp

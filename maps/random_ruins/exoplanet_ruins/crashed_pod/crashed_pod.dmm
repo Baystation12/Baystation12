@@ -29,7 +29,9 @@
 	pixel_y = 20;
 	pixel_z = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/crashed_pod)
 "bk" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
@@ -59,7 +61,7 @@
 	id_tag = "crashedpodEast_sensor_chamber";
 	pixel_x = -22
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/crashed_pod)
 "bm" = (
 /obj/machinery/door/airlock/external{
@@ -67,7 +69,9 @@
 	id_tag = "crashedpodEast_exterior_door";
 	locked = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/crashed_pod)
 "bn" = (
 /obj/machinery/airlock_sensor/airlock_exterior{
@@ -81,7 +85,9 @@
 	pixel_y = 20;
 	pixel_z = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/crashed_pod)
 "bo" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
@@ -102,7 +108,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/crashed_pod)
 "bq" = (
 /obj/machinery/atmospherics/portables_connector{
@@ -117,7 +123,7 @@
 	frequency = 1380;
 	id_tag = "crashedpodEast_interior_door"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/crashed_pod)
 "bt" = (
 /obj/machinery/access_button/airlock_interior{
@@ -137,7 +143,9 @@
 	id_tag = "crashedpodWest_pump_out_external";
 	power_rating = 25000
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/crashed_pod)
 "bE" = (
 /obj/machinery/door/airlock/external{
@@ -145,7 +153,9 @@
 	id_tag = "crashedpodWest_exterior_door";
 	locked = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/crashed_pod)
 "bF" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -164,7 +174,7 @@
 	tag_exterior_sensor = "crashedpodWest_sensor_external";
 	tag_interior_door = "crashedpodWest_interior_door"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/crashed_pod)
 "bG" = (
 /obj/machinery/airlock_sensor{
@@ -175,7 +185,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/crashed_pod)
 "bH" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -222,7 +232,7 @@
 	dir = 4;
 	pixel_x = -24
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/crashed_pod)
 "ca" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
@@ -248,7 +258,9 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "ej" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/crashed_pod)
 "ek" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -256,14 +268,16 @@
 	id_tag = "crashedpodEast_pump_out_external";
 	power_rating = 25000
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/crashed_pod)
 "el" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "crashedpodWest_pump";
 	power_rating = 25000
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/crashed_pod)
 "em" = (
 /obj/machinery/door/airlock/external{
@@ -271,7 +285,7 @@
 	id_tag = "crashedpodWest_interior_door"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/crashed_pod)
 "en" = (
 /obj/machinery/atmospherics/binary/pump{
@@ -317,7 +331,9 @@
 /area/map_template/crashed_pod)
 "eE" = (
 /obj/machinery/atmospherics/unary/engine,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/crashed_pod)
 "eG" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
@@ -1055,7 +1071,9 @@
 /obj/machinery/air_sensor{
 	id_tag = "crashed_pod_out"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/crashed_pod)
 "RN" = (
 /obj/structure/table/steel_reinforced,

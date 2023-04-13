@@ -1,3 +1,6 @@
+/area/magshield
+	turfs_airless = TRUE
+
 /area/magshield/south
 	name = "Orbital Station South Wing"
 	icon_state = "south"

@@ -503,7 +503,7 @@
 /obj/machinery/power/solar{
 	id = "XynergySolarStarboard"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "bv" = (
 /obj/structure/cable/yellow{
@@ -516,7 +516,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "bw" = (
 /obj/effect/floor_decal/solarpanel,
@@ -527,7 +527,7 @@
 /obj/machinery/power/solar{
 	id = "XynergySolarStarboard"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "bx" = (
 /obj/machinery/light/small{
@@ -663,7 +663,7 @@
 /obj/machinery/power/solar{
 	id = "XynergySolarPort"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "bR" = (
 /obj/effect/floor_decal/solarpanel,
@@ -674,7 +674,7 @@
 /obj/machinery/power/solar{
 	id = "XynergySolarPort"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "bS" = (
 /obj/structure/cable/yellow{
@@ -692,7 +692,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "bT" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen,
@@ -1383,7 +1383,7 @@
 	id = "n2_in";
 	use_power = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "dB" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -1611,7 +1611,7 @@
 /obj/machinery/power/tracker{
 	id = "XynergySolarStarboard"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "ed" = (
 /obj/structure/cable/yellow{
@@ -1619,7 +1619,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "ee" = (
 /obj/structure/cable/yellow{
@@ -1637,7 +1637,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "ef" = (
 /obj/structure/cable/yellow{
@@ -1655,7 +1655,9 @@
 	master_tag = "xyn_solar_starboard_airlock";
 	pixel_y = 20
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/errant_pisces/solar_starboard)
 "eg" = (
 /obj/machinery/door/airlock/external{
@@ -1894,7 +1896,7 @@
 	master_tag = "xyn_solar_port_airlock";
 	pixel_y = 20
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/errant_pisces/solar_port)
 "eE" = (
 /obj/structure/cable/yellow{
@@ -1912,7 +1914,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "eF" = (
 /obj/machinery/power/tracker{
@@ -1922,7 +1924,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "eG" = (
 /obj/structure/cable/yellow{
@@ -1940,7 +1942,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "eH" = (
 /obj/machinery/door/airlock/external{
@@ -2945,7 +2947,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "gL" = (
 /obj/structure/bed/chair/comfy/green,
@@ -3185,7 +3187,7 @@
 /obj/machinery/power/solar{
 	id = "XynergySolarPort"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "hq" = (
 /turf/simulated/wall/r_wall,
@@ -6221,7 +6223,7 @@
 	icon_state = "pdoor0";
 	id_tag = "xynergy_perimeter_blast"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/errant_pisces/bridge)
 "pq" = (
 /obj/structure/lattice,
@@ -6598,7 +6600,7 @@
 /area/errant_pisces/fishing_wing)
 "qx" = (
 /obj/machinery/shipsensors,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/errant_pisces/bridge)
 "qy" = (
 /obj/structure/closet/firecloset,
@@ -6689,8 +6691,13 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qM" = (
-/turf/simulated/wall/r_wall,
-/area/space)
+/obj/machinery/door/blast/regular/open{
+	dir = 2;
+	icon_state = "pdoor0";
+	id_tag = "xynergy_perimeter_blast"
+	},
+/turf/simulated/floor/reinforced,
+/area/errant_pisces/bridge)
 "qN" = (
 /obj/structure/bed/chair,
 /turf/simulated/floor/plating,
@@ -6763,7 +6770,7 @@
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
-/area/space)
+/area/errant_pisces/fishing_wing)
 "qT" = (
 /obj/structure/net,
 /obj/machinery/access_button/airlock_exterior{
@@ -24374,9 +24381,9 @@ aa
 aa
 bc
 aa
-qM
+og
 qS
-qM
+og
 aa
 aa
 pw
@@ -29422,7 +29429,7 @@ pK
 qa
 po
 qx
-pp
+qM
 qH
 bc
 aa
@@ -29825,7 +29832,7 @@ py
 oS
 qc
 po
-pp
+qM
 pq
 aa
 aa
@@ -30027,7 +30034,7 @@ oS
 oS
 qd
 po
-pp
+qM
 pq
 aa
 aa
@@ -30431,7 +30438,7 @@ oS
 oS
 qf
 po
-pp
+qM
 pq
 aa
 aa
@@ -31037,7 +31044,7 @@ oS
 oS
 qh
 po
-pp
+qM
 pq
 aa
 aa
@@ -31239,7 +31246,7 @@ oS
 oS
 qc
 po
-pp
+qM
 pq
 aa
 aa
@@ -31441,7 +31448,7 @@ oS
 oS
 pA
 po
-pp
+qM
 pq
 aa
 aa
@@ -31643,7 +31650,7 @@ oS
 oS
 pj
 po
-pp
+qM
 pq
 aa
 aa
@@ -31845,7 +31852,7 @@ oS
 pL
 pj
 po
-pp
+qM
 pq
 aa
 aa
@@ -32047,7 +32054,7 @@ pA
 pM
 qc
 po
-pp
+qM
 pq
 aa
 aa
@@ -33254,8 +33261,8 @@ Ph
 oi
 oi
 oi
-pp
-pp
+qM
+qM
 oi
 aa
 aa

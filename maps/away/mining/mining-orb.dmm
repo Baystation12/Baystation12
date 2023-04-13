@@ -29,14 +29,14 @@
 /turf/simulated/wall/sandstone,
 /area/mine/unexplored)
 "aj" = (
-/turf/simulated/floor/airless/stone,
+/turf/simulated/floor/stone,
 /area/mine/explored)
 "ak" = (
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/mine/explored)
 "al" = (
 /obj/structure/monolith,
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/mine/explored)
 "am" = (
 /turf/simulated/wall/alium,
@@ -96,25 +96,25 @@
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 1
 	},
-/turf/simulated/floor/airless/stone,
+/turf/simulated/floor/stone,
 /area/mine/explored)
 "aM" = (
 /obj/item/stool/stone,
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/mine/explored)
 "aN" = (
 /obj/machinery/door/unpowered/simple/sandstone{
 	desc = "It opens and closes. It's absolutely dominated by a huge engraving of some kind of bird.";
 	name = "engraved door"
 	},
-/turf/simulated/floor/airless/stone,
+/turf/simulated/floor/stone,
 /area/mine/explored)
 "aP" = (
 /turf/simulated/floor/exoplanet/water/shallow,
 /area/mine/explored)
 "aQ" = (
 /obj/machinery/door/unpowered/simple/sandstone,
-/turf/simulated/floor/airless/stone,
+/turf/simulated/floor/stone,
 /area/mine/explored)
 "aR" = (
 /obj/effect/shuttle_landmark/orb/nav3,
@@ -348,11 +348,11 @@
 "SY" = (
 /obj/structure/fountain/strange,
 /mob/living/simple_animal/hostile/retaliate/parrot/space,
-/turf/simulated/floor/airless/stone,
+/turf/simulated/floor/stone,
 /area/mine/explored)
 "TP" = (
 /obj/structure/totem,
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/mine/explored)
 
 (1,1,1) = {"

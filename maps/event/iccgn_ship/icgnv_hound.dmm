@@ -166,7 +166,9 @@
 /obj/machinery/porta_turret{
 	req_access = list("ACCESS_SYNDICATE")
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/plating{
+	map_airless = 1
+	},
 /area/map_template/icgnv_hound)
 "ll" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -232,14 +234,18 @@
 /area/map_template/icgnv_hound)
 "mA" = (
 /obj/machinery/shipsensors,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/plating{
+	map_airless = 1
+	},
 /area/map_template/icgnv_hound)
 "mK" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	icon_state = "map_vent_in";
 	pump_direction = 0
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/plating{
+	map_airless = 1
+	},
 /area/map_template/icgnv_hound)
 "mT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -965,7 +971,9 @@
 	density = 1;
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/icgnv_hound)
 "RX" = (
 /obj/effect/floor_decal/techfloor{
@@ -1208,6 +1216,11 @@
 	},
 /obj/machinery/telecomms/allinone/iccgn,
 /turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/icgnv_hound)
+"Zx" = (
+/turf/simulated/floor/plating{
+	map_airless = 1
+	},
 /area/map_template/icgnv_hound)
 "ZS" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -1553,7 +1566,7 @@ av
 av
 av
 av
-nT
+Zx
 PQ
 vw
 yo

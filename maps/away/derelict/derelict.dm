@@ -23,10 +23,10 @@
 	suffixes = list("derelict/derelict-station.dmm")
 	spawn_cost = 1
 	accessibility_weight = 10
-	area_usage_test_exempted_areas = list(/area/AIsattele)
+	area_usage_test_exempted_areas = list(/area/constructionsite/AIsattele)
 	area_usage_test_exempted_root_areas = list(/area/constructionsite, /area/derelict)
 	apc_test_exempt_areas = list(
-		/area/AIsattele = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/constructionsite/AIsattele = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/constructionsite = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/constructionsite/ai = NO_SCRUBBER|NO_VENT,
 		/area/constructionsite/atmospherics = NO_SCRUBBER|NO_VENT,

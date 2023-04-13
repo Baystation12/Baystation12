@@ -1069,7 +1069,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "cL" = (
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/solars)
 "cM" = (
 /obj/machinery/power/solar{
@@ -1082,13 +1082,13 @@
 	dir = 4;
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/solars)
 "cN" = (
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/solars)
 "cO" = (
 /obj/structure/catwalk,
@@ -1229,7 +1229,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/solars)
 "di" = (
 /obj/machinery/light{
@@ -1444,7 +1444,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/solars)
 "dE" = (
 /obj/structure/catwalk,
@@ -1612,7 +1612,7 @@
 	desc = "A flexible superconducting cable for heavy-duty power transfer. It's been labeled 'chaos reigns'.";
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/solars)
 "dX" = (
 /obj/structure/catwalk,
@@ -1756,19 +1756,19 @@
 /area/map_template/hydrobase/station/solarlock)
 "es" = (
 /obj/effect/floor_decal/industrial/warning/corner,
-/turf/simulated/floor/fixed/alium/airless,
-/area/template_noop)
+/turf/simulated/floor/fixed/alium,
+/area/map_template/hydrobase/solars)
 "et" = (
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/fixed/alium/airless,
-/area/template_noop)
+/turf/simulated/floor/fixed/alium,
+/area/map_template/hydrobase/solars)
 "eu" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 8;
 	icon_state = "warningcorner"
 	},
-/turf/simulated/floor/fixed/alium/airless,
-/area/template_noop)
+/turf/simulated/floor/fixed/alium,
+/area/map_template/hydrobase/solars)
 "ev" = (
 /obj/machinery/alarm{
 	dir = 4;
@@ -1963,16 +1963,8 @@
 	dir = 4;
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/solars)
-"eJ" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/fixed/alium/airless,
-/area/template_noop)
 "eK" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -1983,8 +1975,8 @@
 	dir = 4;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/fixed/alium/airless,
-/area/template_noop)
+/turf/simulated/floor/fixed/alium,
+/area/map_template/hydrobase/solars)
 "eL" = (
 /obj/machinery/power/tracker{
 	id = "hydrosolar"
@@ -1993,14 +1985,14 @@
 	dir = 4
 	},
 /turf/simulated/floor/exoplanet/concrete,
-/area/template_noop)
+/area/map_template/hydrobase/solars)
 "eM" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/fixed/alium/airless,
-/area/template_noop)
+/turf/simulated/floor/fixed/alium,
+/area/map_template/hydrobase/solars)
 "eN" = (
 /turf/simulated/wall/alium,
 /area/map_template/hydrobase/station/growB)
@@ -2173,21 +2165,21 @@
 	dir = 4;
 	icon_state = "warningcorner"
 	},
-/turf/simulated/floor/fixed/alium/airless,
-/area/template_noop)
+/turf/simulated/floor/fixed/alium,
+/area/map_template/hydrobase/solars)
 "ff" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/fixed/alium/airless,
-/area/template_noop)
+/turf/simulated/floor/fixed/alium,
+/area/map_template/hydrobase/solars)
 "fg" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1;
 	icon_state = "warningcorner"
 	},
-/turf/simulated/floor/fixed/alium/airless,
-/area/template_noop)
+/turf/simulated/floor/fixed/alium,
+/area/map_template/hydrobase/solars)
 "fh" = (
 /obj/machinery/light{
 	dir = 8;
@@ -2404,7 +2396,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/solars)
 "fH" = (
 /obj/structure/cable{
@@ -2412,7 +2404,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/solars)
 "fI" = (
 /obj/structure/cable{
@@ -2425,7 +2417,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/solars)
 "fJ" = (
 /obj/structure/catwalk,
@@ -2880,7 +2872,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/solars)
 "gE" = (
 /obj/structure/cable{
@@ -2888,7 +2880,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/solars)
 "gF" = (
 /obj/effect/floor_decal/industrial/warning,
@@ -4465,7 +4457,7 @@ aa
 aa
 aa
 aa
-eJ
+fH
 aa
 aa
 aa

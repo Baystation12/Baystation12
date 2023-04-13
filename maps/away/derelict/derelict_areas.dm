@@ -1,8 +1,9 @@
 /area/derelict/ship
 	name = "\improper Abandoned Ship"
 	icon_state = "yellow"
+	turfs_airless = TRUE
 
-/area/AIsattele
+/area/constructionsite/AIsattele
 	name = "\improper AI Satellite Teleporter Room"
 	icon_state = "teleporter"
 	ambience = list('sound/ambience/ambimalf.ogg')
@@ -11,6 +12,7 @@
 	name = "\improper Construction Site"
 	icon_state = "storage"
 	ambience = list('sound/ambience/spookyspace1.ogg', 'sound/ambience/spookyspace2.ogg')
+	turfs_airless = TRUE
 
 /area/constructionsite/storage
 	name = "\improper Construction Site Storage Area"

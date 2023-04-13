@@ -16,6 +16,7 @@
 /area/map_template/datacapsule
 	name = "\improper Ejected Data Capsule"
 	icon_state = "blue"
+	turfs_airless = TRUE
 
 
 

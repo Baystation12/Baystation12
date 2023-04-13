@@ -114,7 +114,9 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/toxins)
 "ar" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -209,7 +211,9 @@
 /obj/machinery/air_sensor{
 	id_tag = "toxins_sensor"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/toxins)
 "aA" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -436,7 +440,7 @@
 	name = "Mixing Chamber Blast Shutters";
 	opacity = 0
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/shuttle/petrov/toxins)
 "aW" = (
 /turf/simulated/wall/prepainted,
@@ -486,7 +490,7 @@
 	name = "Mixing Chamber Blast Shutters";
 	opacity = 0
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/shuttle/petrov/toxins)
 "bf" = (
 /obj/machinery/computer/shuttle_control/explore/exploration_shuttle,
@@ -638,7 +642,9 @@
 	pixel_w = 1;
 	pixel_z = -23
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/toxins)
 "bt" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -9091,7 +9097,9 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/control)
 "tU" = (
 /obj/structure/railing/mapped,
@@ -9782,7 +9790,9 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/isolation)
 "vA" = (
 /obj/structure/cable/cyan{
@@ -10163,7 +10173,9 @@
 	id_tag = "toxin_exhaust";
 	name = "Toxins Exhaust Blast Doors"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/toxins)
 "wW" = (
 /obj/structure/disposalpipe/segment{
@@ -10524,7 +10536,9 @@
 /area/maintenance/fifthdeck/aftstarboard)
 "yf" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/toxins)
 "yi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -11510,7 +11524,9 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/custodial)
 "BY" = (
 /obj/machinery/atmospherics/portables_connector,
@@ -11719,7 +11735,9 @@
 /area/shuttle/petrov/custodial)
 "CT" = (
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/rd)
 "CV" = (
 /obj/structure/table/standard,
@@ -12065,7 +12083,9 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/equipment)
 "DY" = (
 /obj/structure/railing/mapped{
@@ -13339,7 +13359,9 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/cockpit)
 "Jl" = (
 /obj/effect/paint/silver,
@@ -13665,7 +13687,9 @@
 /obj/structure/shuttle/engine/propulsion{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/custodial)
 "Ku" = (
 /obj/structure/cable/cyan{
@@ -14033,7 +14057,9 @@
 /obj/structure/shuttle/engine/propulsion{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/isolation)
 "LN" = (
 /obj/effect/paint/silver,
@@ -14069,7 +14095,9 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 9
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/toxins)
 "LW" = (
 /obj/effect/wallframe_spawn/reinforced/polarized{
@@ -14179,7 +14207,9 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/control)
 "Mt" = (
 /obj/structure/handrail{
@@ -14666,7 +14696,9 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/toxins)
 "Oi" = (
 /obj/machinery/atmospherics/binary/pump,
@@ -14849,7 +14881,9 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/analysis)
 "Pm" = (
 /obj/structure/cable/cyan{
@@ -14957,7 +14991,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/toxins)
 "PK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -15369,7 +15405,9 @@
 /area/maintenance/fifthdeck/fore)
 "Rn" = (
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/rnd)
 "Rp" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -16114,7 +16152,9 @@
 	pump_direction = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/toxins)
 "Ur" = (
 /obj/machinery/vending/generic,
@@ -16485,7 +16525,9 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/isolation)
 "VT" = (
 /turf/simulated/floor/lino,
@@ -16741,7 +16783,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "Xi" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "Xk" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -17037,7 +17079,9 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/eva)
 "Ys" = (
 /obj/machinery/door/airlock/research{
