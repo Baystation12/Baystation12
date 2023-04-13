@@ -142,12 +142,12 @@
 // Placeholders for light tiles and rglass.
 /material/proc/reinforce(mob/user, obj/item/stack/material/used_stack, obj/item/stack/material/target_stack)
 	if(!used_stack.can_use(1))
-		to_chat(user, SPAN_WARNING("You need need at least one [used_stack.singular_name] to reinforce [target_stack]."))
+		USE_FEEDBACK_STACK_NOT_ENOUGH(used_stack, 1, "to reinforce \the [target_stack].")
 		return
 
 	var/needed_sheets = 2 * used_stack.matter_multiplier
 	if(!target_stack.can_use(needed_sheets))
-		to_chat(user, SPAN_WARNING("You need need at least [needed_sheets] [target_stack.plural_name] for reinforcement with [used_stack]."))
+		USE_FEEDBACK_STACK_NOT_ENOUGH(target_stack, needed_sheets, "for reinforcement with \the [used_stack].")
 		return
 
 	var/material/reinf_mat = used_stack.material

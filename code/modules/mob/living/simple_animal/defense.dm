@@ -123,11 +123,11 @@
 			return TRUE
 		adjustBruteLoss(-medical.animal_heal)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] applies a [medical.singular_name] from \a [medical.name] to \the [src]'s injuries."),
-			SPAN_NOTICE("You apply a [medical.singular_name] from \the [medical.name] to \the [src]'s injuries."),
+			SPAN_NOTICE("\The [user] applies [medical.get_vague_name(FALSE)] to \the [src]'s injuries."),
+			SPAN_NOTICE("You apply [medical.get_exact_name(1)] to \the [src]'s injuries."),
 			exclude_mobs = list(src)
 		)
-		to_chat(src, SPAN_NOTICE("\The [user] applies a [medical.singular_name] from \a [medical.name] to your injuries."),)
+		to_chat(src, SPAN_NOTICE("\The [user] applies [medical.get_vague_name(FALSE)] to your injuries."),)
 		return TRUE
 
 	return ..()

@@ -521,8 +521,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to repair \the [src]'s electronics damage.")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts repairing some of the electronics in \the [src] with some [cable.plural_name] of \a [cable]."),
-			SPAN_NOTICE("You start repairing some of the electronics in \the [src] with some [cable.plural_name] of \the [cable]."),
+			SPAN_NOTICE("\The [user] starts repairing some of the electronics in \the [src] with [cable.get_vague_name(FALSE)]."),
+			SPAN_NOTICE("You start repairing some of the electronics in \the [src] with [cable.get_exact_name(1)]."),
 		)
 		if (!do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check())
 			return TRUE
@@ -539,8 +539,8 @@
 		adjustFireLoss(-30)
 		updatehealth()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] repairs some of the electronics in \the [src] with some [cable.plural_name] of \a [cable]."),
-			SPAN_NOTICE("You repair some of the electronics in \the [src] with some [cable.plural_name] of \the [cable]."),
+			SPAN_NOTICE("\The [user] repairs some of the electronics in \the [src] with [cable.get_vague_name(FALSE)]."),
+			SPAN_NOTICE("You repair some of the electronics in \the [src] with some [cable.get_exact_name(1)]."),
 		)
 		return TRUE
 
