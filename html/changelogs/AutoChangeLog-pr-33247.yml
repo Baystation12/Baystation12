@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Jukeboxes can be anchored/unanchored with a wrench again.
-  - bugfix: FLipped iPatches no longer erset their position when toggled on/off.
-  - tweak: Expired guest passes are now a dark gray that still shows sprite details
-      instad of a black void rectangle.
