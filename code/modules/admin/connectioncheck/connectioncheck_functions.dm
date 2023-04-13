@@ -77,6 +77,15 @@
 			. += list(row)
 
 
+/**
+ * Checks a list of connections for bans matching any of the list entries.
+ *
+ * **Parameters**:
+ * - `connections` (list) - List of connections. Should be the output of `_fetch_connections()`.
+ * - `include_inactive` (boolean, default `FALSE`) - If set, includes inactive/expired bans in the list.
+ *
+ * Returns list of lists.
+ */
 /proc/_find_bans_in_connections(list/connections, include_inactive = FALSE)
 	RETURN_TYPE(/list)
 	. = list()
@@ -188,35 +197,148 @@
 	return _find_bans_in_connections(fetch_connections())
 
 
-// Temporary debugging and testing functions
-/proc/_debug_fetch_connections(ckey, ip, cid)
-	var/list/result = _fetch_connections(ckey, ip, cid)
-	var/table = {"
-		<table>
+/proc/_show_associated_connections(mob/user, list/connections, target_ckey, target_ip, target_cid)
+	// Unique Ckeys
+	var/list/unique_ckeys = _unique_ckeys_from_connections(connections)
+	var/unique_ckeys_table = {"
+		<table style='width: 100%;'>
+			<tbody>
+	"}
+	for (var/ckey in unique_ckeys)
+		unique_ckeys_table += {"
+				<tr>
+					<td[ckey == target_ckey ? " class='highlight'" : null]>[ckey]</td>
+				</tr>
+		"}
+	unique_ckeys_table += {"
+			</tbody>
+		</table>
+	"}
+
+	// Unique IP Addresses
+	var/list/unique_ips = _unique_ips_from_connections(connections)
+	var/unique_ips_table = {"
+		<table style='width: 100%;'>
+			<tbody>
+	"}
+	for (var/ip in unique_ips)
+		unique_ips_table += {"
+				<tr>
+					<td[ip == target_ip ? " class='highlight'" : null]>[ip]</td>
+				</tr>
+		"}
+	unique_ips_table += {"
+			</tbody>
+		</table>
+	"}
+
+	// Unique CIDs
+	var/list/unique_cids = _unique_cids_from_connections(connections)
+	var/unique_cids_table = {"
+		<table style='width: 100%;'>
+			<tbody>
+	"}
+	for (var/cid in unique_cids)
+		unique_cids_table += {"
+				<tr>
+					<td[cid == target_cid ? " class='highlight'" : null]>[cid]</td>
+				</tr>
+		"}
+	unique_cids_table += {"
+			</tbody>
+		</table>
+	"}
+
+	// List of all connections
+	var/all_connections_table = {"
+		<table style='width: 100%;'>
 			<thead>
 				<tr>
-					<th>DATETIME</th>
-					<th>CKEY</th>
-					<th>IP</th>
-					<th>COMPUTERID</th>
+					<th>First Seen</th>
+					<th>Ckey</th>
+					<th>IP Address</th>
+					<th>Computer ID</th>
 				</tr>
 			</thead>
 			<tbody>
 	"}
-	for (var/list/row in result)
-		table += {"
+	for (var/list/row in connections)
+		all_connections_table += {"
 				<tr>
 					<td>[row["datetime"]]</td>
-					<td>[row["ckey"]]</td>
-					<td>[row["ip"]]</td>
-					<td>[row["computerid"]]</td>
+					<td[row["ckey"] == target_ckey ? " class='highlight'" : null]>[row["ckey"]]</td>
+					<td[row["ip"] == target_ip ? " class='highlight'" : null]>[row["ip"]]</td>
+					<td[row["computerid"] == target_cid ? " class='highlight'" : null]>[row["computerid"]]</td>
 				</tr>
 		"}
-	table += {"
+	all_connections_table += {"
 			</tbody>
 		</table>
 	"}
-	show_browser(usr, table, "window=debug")
+
+	// Final layout
+	var/final_body = {"
+		<h1>Associated Connections</h1>
+		<h2>Queried Details</h2>
+		<table style='width: 100%;'>
+			<thead>
+				<tr>
+					<th style='width: 33%;'>Ckey</th>
+					<th style='width: 33%;'>IP Address</th>
+					<th style='width: 33%;'>Computer ID</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>[target_ckey ? target_ckey : "N/A"]</td>
+					<td>[target_ip ? target_ip : "N/A"]</td>
+					<td>[target_cid ? target_cid : "N/A"]</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h2>Associated Ckeys, IP Addresses, and Computer IDs</h2>
+		<p><small>NOTE: Rows in this table are not necessarily associated with eachother. This is simply a list of each category's entries for ease of information.<br />
+			Entries matching the current query are <span class='highlight'>highlighted</span>.</small></p>
+		<table style='width: 100%;'>
+			<thead>
+				<tr>
+					<th style='width: 33%;'>Ckeys</th>
+					<th style='width: 33%;'>IP Addresses</th>
+					<th style='width: 33%;'>Computer IDs</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>[unique_ckeys_table]</td>
+					<td>[unique_ips_table]</td>
+					<td>[unique_cids_table]</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h2>All Unique Connections</h2>
+		<p><small>NOTE: This table does not list every single connection ever made, only the first connection seen for each unique combination of ckey, IP, and CID.<br />
+			Entries matching the current query are <span class='highlight'>highlighted</span>.</small></p>
+		[all_connections_table]
+	"}
+	send_rsc(user, 'html/browser/common.css', "common.css")
+	show_browser(user, html_page("Associated Connections ([target_ckey ? target_ckey : "NO CKEY"])", final_body), "window=associatedconnections;size=500x480;")
+
+
+/client/proc/show_associated_connections(mob/user, list/connections)
+	if (isnull(connections))
+		connections = fetch_connections()
+	_show_associated_connections(user, connections, ckey, address, computer_id)
+
+
+/mob/proc/show_associated_connections(mob/user, list/connections)
+	if (client)
+		client.show_associated_connections(user, connections)
+		return
+	if (isnull(connections))
+		connections = fetch_connections()
+	_show_associated_connections(user, connections, ckey ? ckey : last_ckey, lastKnownIP, computer_id)
 
 
 /proc/_debug_fetch_bans(ckey, ip, cid, include_inactive = FALSE)
@@ -265,21 +387,9 @@
 	show_browser(usr, table, "window=debug")
 
 
-/client/proc/debug_fetch_connections()
-	RETURN_TYPE(/list)
-	return _debug_fetch_connections(ckey, address, computer_id)
-
-
 /client/proc/debug_fetch_bans()
 	RETURN_TYPE(/list)
 	return _debug_fetch_bans(ckey, address, computer_id)
-
-
-/mob/proc/debug_fetch_connections()
-	RETURN_TYPE(/list)
-	if (client)
-		return client.debug_fetch_connections()
-	return _debug_fetch_connections(ckey ? ckey : last_ckey, lastKnownIP, computer_id)
 
 
 /mob/proc/debug_fetch_bans()
