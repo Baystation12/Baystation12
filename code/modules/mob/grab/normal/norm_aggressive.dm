@@ -24,6 +24,12 @@
 
 /datum/grab/normal/aggressive/process_effect(obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
+	var/mob/living/carbon/human/assailant = G.assailant
+
+	if (assailant.incapacitated(INCAPACITATION_ALL))
+		affecting.visible_message(SPAN_WARNING("[assailant] lets go of \his grab!"))
+		qdel(G)
+		return
 
 	if(G.target_zone in list(BP_L_HAND, BP_R_HAND))
 		affecting.drop_l_hand()

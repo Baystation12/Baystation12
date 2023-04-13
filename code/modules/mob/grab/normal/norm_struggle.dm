@@ -28,6 +28,11 @@
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
+	if (assailant.incapacitated(INCAPACITATION_ALL))
+		affecting.visible_message(SPAN_WARNING("[assailant] lets go of \his grab!"))
+		qdel(G)
+		return
+
 	if(affecting.incapacitated(INCAPACITATION_UNRESISTING) || affecting.a_intent == I_HELP)
 		affecting.visible_message(SPAN_WARNING("[affecting] isn't prepared to fight back as [assailant] tightens \his grip!"))
 		G.done_struggle = TRUE
