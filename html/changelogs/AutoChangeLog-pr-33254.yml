@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - admin: The window popup for the Check Connections button is now prettified and
+      laid out in a much nicer format.
