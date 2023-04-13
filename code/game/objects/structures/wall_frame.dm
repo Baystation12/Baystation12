@@ -155,7 +155,7 @@
 	dismantle()
 
 /obj/structure/wall_frame/proc/dismantle()
-	new /obj/item/stack/material/steel(get_turf(src), 3)
+	material.place_sheet(get_turf(src), 3)
 	qdel(src)
 
 /obj/structure/wall_frame/get_color()
