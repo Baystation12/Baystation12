@@ -10,10 +10,6 @@
 	name = "Skipjack"
 	defer_initialisation = TRUE
 	warmup_time = 0
-	destination_tags = list(
-		"nav_skipjack_dock",
-		"nav_skipjack_start"
-		)
 	shuttle_area =  /area/map_template/skipjack_station/start
 	dock_target = "skipjack_shuttle"
 	current_location = "nav_skipjack_start"
