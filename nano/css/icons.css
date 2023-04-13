@@ -241,7 +241,7 @@
     width: 16px;
     height: 16px;
     background-image: url(uiIcons16Green.png);
-    background-position: -144px -96px;
+    background-position: -48px -112px; /* Question Mark */
     background-repeat: no-repeat;
     zoom: 0.125;
     margin-left: -1px;
@@ -251,70 +251,102 @@
     background-image: url(uiIcons16Red.png);
 }
 
-/* Command Positions */
-.mapIcon16.rank-captain {
+/* Command Positions - Star */
+.mapIcon16.rank-captain,
+.mapIcon16.rank-commandingofficer,
+.mapIcon16.rank-executiveofficer
+{
     background-position: -224px -112px;
 }
-.mapIcon16.rank-headofpersonnel {
-    background-position: -112px -96px;
+
+/* Command Support Positions - Chainlink */
+.mapIcon16.rank-headofpersonnel,
+.mapIcon16.rank-bridgeofficer,
+.mapIcon16.rank-internalaffairsagent,
+.mapIcon16.rank-solgovrepresentative,
+.mapIcon16.rank-seniorenlistedadvisor,
+.mapIcon16.rank-workplaceliaison
+{
+    background-position: -240 -112px;
 }
-.mapIcon16.rank-headofsecurity {
-    background-position: -112px -128px;
-}
-.mapIcon16.rank-chiefengineer {
+
+/* Engineering Positions - Wrench */
+.mapIcon16.rank-chiefengineer,
+.mapIcon16.rank-engineer,
+.mapIcon16.rank-atmospherictechnician,
+.mapIcon16.rank-seniorengineer,
+.mapIcon16.rank-engineertrainee,
+.mapIcon16.rank-roboticist
+{
     background-position: -176px -112px;
 }
-.mapIcon16.rank-researchdirector {
-    background-position: -128px -128px;
-}
-.mapIcon16.rank-chiefmedicalofficer {
+
+/* Medical Positions - Plus */
+.mapIcon16.rank-chiefmedicalofficer,
+.mapIcon16.rank-medicaldoctor,
+.mapIcon16.rank-geneticist,
+.mapIcon16.rank-psychiatrist,
+.mapIcon16.rank-pharmacist,
+.mapIcon16.rank-paramedic,
+.mapIcon16.rank-physician,
+.mapIcon16.rank-medicalresident,
+.mapIcon16.rank-medicaltechnician,
+.mapIcon16.rank-traineemedicaltechnician,
+.mapIcon16.rank-counselor
+{
     background-position: -32px -128px;
 }
 
-/* Engineering Positions */
-.mapIcon16.rank-engineer {
-    background-position: -176px -112px;
-}
-.mapIcon16.rank-atmospherictechnician {
-    background-position: -176px -112px;
-}
-
-/* Medical Positions */
-.mapIcon16.rank-medicaldoctor {
-    background-position: -32px -128px;
-}
-.mapIcon16.rank-geneticist {
-    background-position: -32px -128px;
-}
-.mapIcon16.rank-psychiatrist {
-    background-position: -32px -128px;
-}
-.mapIcon16.rank-chemist {
-    background-position: -32px -128px;
-}
-
-/* Science Positions */
-.mapIcon16.rank-scientist {
-    background-position: -128px -128px;
-}
-.mapIcon16.rank-geneticist {
-    background-position: -128px -128px;
-}
-.mapIcon16.rank-roboticist {
-    background-position: -128px -128px;
-}
-.mapIcon16.rank-xenobiologist {
+/* Science Positions - Lightbulb */
+.mapIcon16.rank-chiefscienceofficer,
+.mapIcon16.rank-researchdirector,
+.mapIcon16.rank-scientist,
+.mapIcon16.rank-geneticist,
+.mapIcon16.rank-xenobiologist,
+.mapIcon16.rank-seniorresearcher,
+.mapIcon16.rank-researchassistant
+{
     background-position: -128px -128px;
 }
 
-/* Security Positions */
-.mapIcon16.rank-warden {
-    background-position: -112px -128px;
-}
-.mapIcon16.rank-detective {
-    background-position: -112px -128px;
-}
-.mapIcon16.rank-securityofficer {
+/* Security Positions - Key */
+.mapIcon16.rank-headofsecurity,
+.mapIcon16.rank-chiefofsecurity,
+.mapIcon16.rank-warden,
+.mapIcon16.rank-detective,
+.mapIcon16.rank-securityofficer,
+.mapIcon16.rank-brigchief,
+.mapIcon16.rank-forensictechnician,
+.mapIcon16.rank-masteratarms
+{
     background-position: -112px -128px;
 }
 
+/* Exploration Positions - Flag */
+.mapIcon16.rank-pathfinder,
+.mapIcon16.rank-shuttle-pilot,
+.mapIcon16.rank-explorer
+{
+    background-position: -16px -112px
+}
+
+/* Other Crew - Person */
+.mapIcon16.rank-assistant,
+.mapIcon16.rank-cargotechnician,
+.mapIcon16.rank-janitor,
+.mapIcon16.rank-shaftminer
+.mapIcon16.rank-bartender,
+.mapIcon16.rank-cook,
+.mapIcon16.rank-passenger,
+.mapIcon16.rank-chiefsteward,
+.mapIcon16.rank-chaplain,
+.mapIcon16.rank-sanitation,
+.mapIcon16.rank-technician,
+.mapIcon16.rank-steward,
+.mapIcon16.rank-crewman,
+.mapIcon16.rank-deckchief,
+.mapIcon16.rank-decktechnician,
+.mapIcon16.rank-prospector
+{
+    background-position: -144px -96px;
+}
