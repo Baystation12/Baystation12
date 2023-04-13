@@ -1,0 +1,8 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - balance: Plushie bomb explosions have been bumped up a tier from light to heavy.
+  - bugfix: Fixes an oversight where crates wrapped in paper could not be put in disposal
+      bins.
+  - rscadd: Disposal bins now display a feedback message when trying to disposal a
+      large object that the bins don't accept.
