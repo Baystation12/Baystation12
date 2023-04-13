@@ -1,6 +1,0 @@
-author: Atufancheg
-delete-after: true
-changes:
-  - wip: 1.Заведение NTNet ID на уровне машинерии
-  - wip: 2.Включение в терминал команды для подключения к устройствам
-  - tweak: 3.Правки текста заголовка в NanoUI
