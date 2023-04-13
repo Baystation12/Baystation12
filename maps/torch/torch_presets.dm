@@ -183,6 +183,18 @@ var/global/const/NETWORK_PETROV  = "Petrov"
 	_output_on = TRUE
 	_fully_charged = TRUE
 
+// Bridge Solars SMES. For those low pop rounds.
+/obj/machinery/power/smes/buildable/preset/torch/bridge_solar
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/smes_coil = 1
+	)
+	RCon_tag = "Solar - Bridge"
+	_input_maxed = TRUE
+	_output_maxed = TRUE
+	_input_on = TRUE
+	_output_on = TRUE
+	_fully_charged = TRUE
+
 var/global/const/NETWORK_COMMAND = "Command"
 var/global/const/NETWORK_ENGINE  = "Engine"
 var/global/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
