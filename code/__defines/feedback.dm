@@ -11,7 +11,7 @@
 /// ID card lacks access
 #define USE_FEEDBACK_ID_CARD_DENIED(REFUSER, ID_CARD) USE_FEEDBACK_FAILURE("\The [REFUSER] refuses [ID_CARD].")
 /// Item stack did not have enough items. `STACK` is assumed to be of type `/obj/item/stack`.
-#define USE_FEEDBACK_STACK_NOT_ENOUGH(STACK, NEEDED_AMT, ACTION) USE_FEEDBACK_FAILURE("You need at least [NEEDED_AMT] [NEEDED_AMT == 1 ? STACK.singular_name : STACK.plural_name] of \the [STACK] [ACTION]")
+#define USE_FEEDBACK_STACK_NOT_ENOUGH(STACK, NEEDED_AMT, ACTION) USE_FEEDBACK_FAILURE("You need at least [STACK.get_exact_name(NEEDED_AMT)] [ACTION]")
 
 /// Feedback messages intended for use in `use_grab()` overrides. These assume the presence of the `grab` variable.
 #define USE_FEEDBACK_GRAB_FAILURE(MSG) FEEDBACK_FAILURE(grab.assailant, MSG)

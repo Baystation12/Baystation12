@@ -75,7 +75,7 @@
 		//visible message on mobs is defined as visible_message(var/message, var/self_message, var/blind_message)
 		usr.visible_message(SPAN_NOTICE("\The [usr] starts cutting hair off \the [src]"), SPAN_NOTICE("You start cutting the hair off \the [src]"), "You hear the sound of a knife rubbing against flesh")
 		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(usr, SPAN_NOTICE("You cut the hair from this [src.singular_name]"))
+			to_chat(usr, SPAN_NOTICE("You cut the hair from [get_exact_name(1)]"))
 			//Try locating an exisitng stack on the tile and add to there if possible
 			for(var/obj/item/stack/hairlesshide/HS in usr.loc)
 				if(HS.amount < 50)

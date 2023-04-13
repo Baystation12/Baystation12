@@ -304,7 +304,7 @@ Standard helpers for users interacting with machinery parts.
 	if(isstack(part))
 		var/obj/item/stack/stack = part
 		if (!stack.can_use(number))
-			to_chat(user, SPAN_WARNING("You need at least [number] [stack.plural_name] to install into \the [src]."))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, number, "to install into \the [src].")
 			return FALSE
 		install_component(stack.split(number, TRUE))
 	else
