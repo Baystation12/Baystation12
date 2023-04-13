@@ -1,5 +1,7 @@
 /obj/item/crafting_holder
+	/// Path. The current crafting stage this holder is at.
 	var/singleton/crafting_stage/current_crafting_stage
+	/// String. Label name set by a user using a pen.
 	var/label_name
 
 /obj/item/crafting_holder/Initialize(ml, singleton/crafting_stage/initial_stage, obj/item/target, obj/item/tool, mob/user)
@@ -36,6 +38,18 @@
 
 	. = ..()
 
+
+/**
+ * Handles advancing to the next crafting stage. Does not perform any checks to ensure the advancement is valid or
+ * normally possible.
+ *
+ * **Parameters**:
+ * - `next_stage` - The crafting stage to advance to.
+ * - `user` - The mov performing the interaction.
+ * - `tool` - The item being used to advance the stage.
+ *
+ * Has no return value.
+ */
 /obj/item/crafting_holder/proc/advance_to(singleton/crafting_stage/next_stage, mob/user, obj/item/tool)
 	var/obj/item/product = next_stage && next_stage.get_product(src)
 	if(product)
@@ -57,6 +71,12 @@
 	icon = current_crafting_stage.item_icon
 	icon_state = current_crafting_stage.item_icon_state
 
+
+/**
+ * Handles updating the holder's description from the crafting stage.
+ *
+ * Has no parameters or return value.
+ */
 /obj/item/crafting_holder/proc/update_strings()
 	if(current_crafting_stage.item_desc)
 		desc = current_crafting_stage.item_desc
