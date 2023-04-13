@@ -3700,8 +3700,7 @@
 /area/aux_eva)
 "hj" = (
 /obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1"
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/rd)
@@ -10455,8 +10454,7 @@
 	},
 /obj/item/pen,
 /obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/rd)
@@ -13557,8 +13555,7 @@
 	},
 /obj/structure/table/woodentable/walnut,
 /obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
+	dir = 4
 	},
 /turf/simulated/floor/carpet/green,
 /area/crew_quarters/heads/office/cl/backroom)

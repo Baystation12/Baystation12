@@ -3408,7 +3408,6 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/random/obstruction,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -5516,19 +5515,11 @@
 "akX" = (
 /obj/effect/floor_decal/scglogo{
 	dir = 8;
-	icon_state = "2,1"
-	},
-/obj/effect/floor_decal/scglogo{
-	dir = 8;
 	icon_state = "center-right"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "akY" = (
-/obj/effect/floor_decal/scglogo{
-	dir = 8;
-	icon_state = "1,0"
-	},
 /obj/structure/bed/chair/padded/blue,
 /obj/effect/floor_decal/scglogo{
 	dir = 8;

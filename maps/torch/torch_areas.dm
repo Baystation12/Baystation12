@@ -48,6 +48,14 @@
 	name = "\improper Fourth Deck Fore Hallway"
 	icon_state = "hallF"
 
+/area/hallway/primary/fourthdeck/fore/port
+	name = "\improper Fourth Deck Fore Port Hallway"
+	icon_state = "hallF"
+
+/area/hallway/primary/fourthdeck/fore/starboard
+	name = "\improper Fourth Deck Fore Starboard Hallway"
+	icon_state = "hallF"
+
 /area/hallway/primary/fourthdeck/center
 	name = "\improper Fourth Deck Central Hallway"
 	icon_state = "hallC3"
