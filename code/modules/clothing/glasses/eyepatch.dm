@@ -24,6 +24,12 @@
 	update_clothing_icon()
 
 
+/obj/item/clothing/glasses/eyepatch/on_update_icon()
+	..()
+	if (flipped)
+		icon_state += "_r"
+
+
 /obj/item/clothing/glasses/eyepatch/hud
 	name = "iPatch"
 	desc = "For the technologically inclined pirate. It connects directly to the optical nerve of the user, replacing the need for that useless eyeball."
@@ -46,6 +52,7 @@
 	update_icon()
 
 /obj/item/clothing/glasses/eyepatch/hud/on_update_icon()
+	..()
 	overlays.Cut()
 	if(active)
 		var/image/eye = overlay_image(icon, "[icon_state]_eye", flags=RESET_COLOR)
