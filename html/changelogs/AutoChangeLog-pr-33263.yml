@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - balance: Wall health, minimum damage value, and basic resistance values have all
+      been increased to make walls harder to break down without tools. See https://github.com/Baystation12/Baystation12/pull/33263
+      for specific numbers.
