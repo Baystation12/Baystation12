@@ -31,6 +31,7 @@
 		/obj/item/seeds/affelerin = 15,
 		/obj/item/seeds/aghrassh = 15,
 		/obj/item/seeds/algaeseed = 15,
+		/obj/item/seeds/almondseed = 15,
 		/obj/item/seeds/ambrosiavulgarisseed = 15,
 		/obj/item/seeds/appleseed = 15,
 		/obj/item/seeds/bamboo = 15,
