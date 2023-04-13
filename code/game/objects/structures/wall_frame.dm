@@ -33,6 +33,7 @@
 
 	material = SSmaterials.get_material_by_name(materialtype)
 	set_max_health(material.integrity)
+	SetName("[material.use_name] [name]")
 
 	update_connections(1)
 	update_icon()
