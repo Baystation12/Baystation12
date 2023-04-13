@@ -1,0 +1,7 @@
+author: SierraHelper
+delete-after: true
+changes:
+  - tweak: Normal jumps cool down in 5 seconds instead of 10.
+  - tweak: Add quick jump for all species (10 second cooldown, instant one tile jump)
+  - tweak: Make vox leap-grabs instant with a 15 second cooldown.
+  - tweak: increase quick jump/leap grab stamina cost.
