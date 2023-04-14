@@ -1,6 +1,0 @@
-author: SierraHelper
-delete-after: true
-changes:
-  - rscadd: Added almonds, and biscotti and unscotti recipes.
-  - rscadd: Tiny food items can be dipped into glasses to absorb some reagents.
-  - bugfix: Fixed peanut kitchen_tag.

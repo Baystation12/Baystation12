@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - rscadd: Material stacks now include their reinforcement material in the name.
-      I.e., `reinforced glass` is now `steel-reinforced glass`.
-  - rscadd: Feedback messages when using stacks should now tell you how many items
-      from the stack were used.

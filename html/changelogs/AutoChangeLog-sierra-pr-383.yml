@@ -1,6 +1,0 @@
-author: SierraHelper
-delete-after: true
-changes:
-  - bugfix: You will no longer instantly climb tables/railings after switching maneuvers.
-  - tweak: You can now click in the general direction and tackle (still for one tile)
-      in that direction.
