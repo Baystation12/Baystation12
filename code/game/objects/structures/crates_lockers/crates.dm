@@ -3,6 +3,7 @@
 	desc = "A rectangular steel crate."
 	closet_appearance = /singleton/closet_appearance/crate
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	obj_flags = OBJ_FLAG_CAN_TABLE
 	setup = 0
 	storage_types = CLOSET_STORAGE_ITEMS
 	var/points_per_crate = 5

@@ -19,7 +19,7 @@
 	idle_power_usage = 100
 	density = TRUE
 	anchored = TRUE
-	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE | OBJ_FLAG_CAN_TABLE
 	core_skill = SKILL_CHEMISTRY
 	var/can_contaminate = TRUE
 
