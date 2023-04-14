@@ -31,9 +31,11 @@
 	if(holder.stat == CONSCIOUS && prob(50))
 		holder.visible_message(SPAN_WARNING("\The [holder] gets an evil-looking gleam in their eye."))
 
-/mob/living/simple_animal/hostile/retaliate/goat/New()
+
+/mob/living/simple_animal/hostile/retaliate/goat/Initialize(mapload)
+	. = ..()
 	udder = new(50, src)
-	..()
+
 
 /mob/living/simple_animal/hostile/retaliate/goat/Destroy()
 	QDEL_NULL(udder)
@@ -136,9 +138,10 @@
 	ai_holder = /datum/ai_holder/simple_animal/passive/cow
 	say_list_type = /datum/say_list/cow
 
-/mob/living/simple_animal/passive/cow/New()
+
+/mob/living/simple_animal/passive/cow/Initialize(mapload)
 	udder = new(50, src)
-	..()
+	. = ..()
 
 
 /mob/living/simple_animal/passive/cow/get_interactions_info()
@@ -226,10 +229,12 @@
 	ai_holder = /datum/ai_holder/simple_animal/passive/chick
 	say_list_type = /datum/say_list/chick
 
-/mob/living/simple_animal/passive/chick/New()
-	..()
+
+/mob/living/simple_animal/passive/chick/Initialize(mapload)
+	. = ..()
 	pixel_x = rand(-6, 6)
 	pixel_y = rand(0, 10)
+
 
 /mob/living/simple_animal/passive/chick/Life()
 	. = ..()
@@ -270,8 +275,9 @@ var/global/chicken_count = 0
 	ai_holder = /datum/ai_holder/simple_animal/passive/chicken
 	say_list_type = /datum/say_list/chicken
 
-/mob/living/simple_animal/passive/chicken/New()
-	..()
+
+/mob/living/simple_animal/passive/chicken/Initialize(mapload)
+	. = ..()
 	if(!body_color)
 		body_color = pick( list("brown","black","white") )
 	icon_state = "chicken_[body_color]"
@@ -280,6 +286,7 @@ var/global/chicken_count = 0
 	pixel_x = rand(-6, 6)
 	pixel_y = rand(0, 10)
 	chicken_count += 1
+
 
 /mob/living/simple_animal/passive/chicken/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
@@ -411,9 +418,10 @@ var/global/chicken_count = 0
 	ai_holder = /datum/ai_holder/simple_animal/passive
 	say_list_type = /datum/say_list/thoom
 
-/mob/living/simple_animal/passive/thoom/New()
+
+/mob/living/simple_animal/passive/thoom/Initialize(mapload)
 	udder = new(50, src)
-	..()
+	. = ..()
 
 
 /mob/living/simple_animal/passive/thoom/get_interactions_info()

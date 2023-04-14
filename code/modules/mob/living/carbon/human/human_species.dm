@@ -21,40 +21,40 @@
 /mob/living/carbon/human/dummy/mannequin/InitializeHud()
 	return	// Mannequins don't get HUDs
 
-/mob/living/carbon/human/skrell/New(new_loc)
+/mob/living/carbon/human/skrell/Initialize(mapload)
 	head_hair_style = "Skrell Male Tentacles"
-	..(new_loc, SPECIES_SKRELL)
+	. = ..(mapload, SPECIES_SKRELL)
 
-/mob/living/carbon/human/unathi/New(new_loc)
+/mob/living/carbon/human/unathi/Initialize(mapload)
 	head_hair_style = "Unathi Horns"
-	..(new_loc, SPECIES_UNATHI)
+	. = ..(mapload, SPECIES_UNATHI)
 
-/mob/living/carbon/human/vox/New(new_loc)
+/mob/living/carbon/human/vox/Initialize(mapload)
 	head_hair_style = "Long Vox Quills"
-	..(new_loc, SPECIES_VOX)
+	. = ..(mapload, SPECIES_VOX)
 
-/mob/living/carbon/human/diona/New(new_loc)
-	..(new_loc, SPECIES_DIONA)
+/mob/living/carbon/human/diona/Initialize(mapload)
+	. = ..(mapload, SPECIES_DIONA)
 
-/mob/living/carbon/human/machine/New(new_loc)
-	..(new_loc, SPECIES_IPC)
+/mob/living/carbon/human/machine/Initialize(mapload)
+	. = ..(mapload, SPECIES_IPC)
 
-/mob/living/carbon/human/nabber/New(new_loc)
-	pulling_punches = 1
-	..(new_loc, SPECIES_NABBER)
+/mob/living/carbon/human/nabber/Initialize(mapload)
+	pulling_punches = TRUE
+	. = ..(mapload, SPECIES_NABBER)
 
-/mob/living/carbon/human/monkey/New(new_loc)
+/mob/living/carbon/human/monkey/Initialize(mapload)
 	gender = pick(MALE, FEMALE)
-	..(new_loc, SPECIES_MONKEY)
+	. = ..(mapload, SPECIES_MONKEY)
 
-/mob/living/carbon/human/farwa/New(new_loc)
-	..(new_loc, "Farwa")
+/mob/living/carbon/human/farwa/Initialize(mapload)
+	. = ..(mapload, "Farwa")
 
-/mob/living/carbon/human/neaera/New(new_loc)
-	..(new_loc, "Neaera")
+/mob/living/carbon/human/neaera/Initialize(mapload)
+	. = ..(mapload, "Neaera")
 
-/mob/living/carbon/human/stok/New(new_loc)
-	..(new_loc, "Stok")
+/mob/living/carbon/human/stok/Initialize(mapload)
+	. = ..(mapload, "Stok")
 
-/mob/living/carbon/human/adherent/New(new_loc)
-	..(new_loc, SPECIES_ADHERENT)
+/mob/living/carbon/human/adherent/Initialize(mapload)
+	. = ..(mapload, SPECIES_ADHERENT)

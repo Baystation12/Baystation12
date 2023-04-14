@@ -13,8 +13,8 @@
 	var/step_count
 	var/dream_timer
 
-/mob/living/carbon/human/New(new_loc, new_species = null)
 
+/mob/living/carbon/human/Initialize(mapload, new_species = null)
 	grasp_limbs = list()
 	stance_limbs = list()
 
@@ -24,7 +24,7 @@
 
 	if(!species)
 		if(new_species)
-			set_species(new_species,1)
+			set_species(new_species, TRUE)
 		else
 			set_species()
 
@@ -47,7 +47,7 @@
 	hud_list[STATUS_HUD_OOC]  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
 
 	GLOB.human_mobs |= src
-	..()
+	. = ..()
 
 	if(dna)
 		dna.ready_dna(src)
@@ -55,6 +55,7 @@
 		dna.base_skin = base_skin
 		sync_organ_dna()
 	make_blood()
+
 
 /mob/living/carbon/human/Destroy()
 	if (dream_timer)

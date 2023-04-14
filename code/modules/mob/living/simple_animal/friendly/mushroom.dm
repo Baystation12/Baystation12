@@ -28,10 +28,12 @@
 
 	ai_holder = /datum/ai_holder/simple_animal/passive/mushroom
 
-/mob/living/simple_animal/passive/mushroom/New()
-	..()
+
+/mob/living/simple_animal/passive/mushroom/Initialize(mapload)
+	. = ..()
 	harvest_time = world.time
 	total_mushrooms++
+
 
 /mob/living/simple_animal/passive/mushroom/verb/spawn_spores()
 

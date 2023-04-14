@@ -3,19 +3,25 @@
 	id = "Punitelli"
 	item_path = /mob/living/carbon/human/monkey/punitelli
 
-/mob/living/carbon/human/monkey/punitelli/New()
-	..()
+/mob/living/carbon/human/monkey/punitelli
 	name = "Warrant Officer Punitelli"
-	real_name = name
 	gender = MALE
 	faction = MOB_FACTION_CREW
-	var/obj/item/clothing/C
-	C = new /obj/item/clothing/under/solgov/utility/expeditionary/monkey(src)
-	equip_to_appropriate_slot(C)
+
+
+/mob/living/carbon/human/monkey/punitelli/Initialize(mapload)
+	. = ..()
+	real_name = name
+	return INITIALIZE_HINT_LATELOAD
+
+
+/mob/living/carbon/human/monkey/punitelli/LateInitialize(mapload)
+	..()
+	equip_to_appropriate_slot(new /obj/item/clothing/under/solgov/utility/expeditionary/monkey, skip_timer = TRUE)
 	put_in_hands(new /obj/item/reagent_containers/food/drinks/glass2/coffeecup/punitelli)
-	equip_to_appropriate_slot(new /obj/item/clothing/mask/smokable/cigarette/jerichos)
+	equip_to_appropriate_slot(new /obj/item/clothing/mask/smokable/cigarette/jerichos, skip_timer = TRUE)
 	if(prob(50))
-		equip_to_appropriate_slot(new /obj/item/clothing/shoes/sandal)
+		equip_to_appropriate_slot(new /obj/item/clothing/shoes/sandal, skip_timer = TRUE)
 
 /obj/random_multi/single_item/runtime
 	name = "Multi Point - Runtime"

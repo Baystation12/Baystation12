@@ -21,8 +21,8 @@
 	virtual_mob = null // Hear no evil, speak no evil
 
 
-/mob/new_player/New()
-	..()
+/mob/new_player/Initialize(mapload)
+	. = ..()
 	verbs += /mob/proc/toggle_antag_pool
 
 

@@ -1,7 +1,15 @@
-/mob/living/carbon/human/monkey/punpun/New()
-	..()
+/mob/living/carbon/human/monkey/punpun
 	name = "Pun Pun"
+
+
+/mob/living/carbon/human/monkey/punpun/Initialize(mapload)
+	. = ..()
 	real_name = name
+	return INITIALIZE_HINT_LATELOAD
+
+
+/mob/living/carbon/human/monkey/punpun/LateInitialize(mapload)
+	..()
 	var/obj/item/clothing/C
 	if(prob(50))
 		C = new /obj/item/clothing/under/punpun(src)
@@ -13,6 +21,7 @@
 		if(prob(10))
 			C = new/obj/item/clothing/head/collectable/petehat(src)
 			equip_to_appropriate_slot(C)
+
 
 /singleton/hierarchy/outfit/blank_subject
 	name = "Test Subject"
@@ -29,8 +38,10 @@
 		C.has_sensor  = SUIT_LOCKED_SENSORS
 		C.sensor_mode = SUIT_SENSOR_OFF
 
-/mob/living/carbon/human/blank/New(new_loc)
-	..(new_loc, "Vat-Grown Human")
+
+/mob/living/carbon/human/blank/Initialize(mapload)
+	. = ..(mapload, SPECIES_VATGROWN)
+
 
 /mob/living/carbon/human/blank/Initialize()
 	..()

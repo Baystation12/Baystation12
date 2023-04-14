@@ -113,11 +113,12 @@ var/global/list/ai_verbs_default = list(
 	src.verbs -= ai_verbs_default
 	src.verbs += /mob/living/verb/ghost
 
-/mob/living/silicon/ai/New(loc, datum/ai_laws/L, obj/item/device/mmi/B, safety = 0)
+
+/mob/living/silicon/ai/Initialize(mapload, datum/ai_laws/L, obj/item/device/mmi/B, safety = FALSE)
 	announcement = new()
 	announcement.title = "A.I. Announcement"
 	announcement.announcement_type = "A.I. Announcement"
-	announcement.newscast = 1
+	announcement.newscast = TRUE
 
 	var/list/possibleNames = GLOB.ai_names
 
@@ -131,7 +132,7 @@ var/global/list/ai_verbs_default = list(
 
 	fully_replace_character_name(pickedName)
 	anchored = TRUE
-	set_density(1)
+	set_density(TRUE)
 
 	holo_icon = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"))
 	holo_icon_longrange = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"), hologram_color = HOLOPAD_LONG_RANGE)
@@ -147,19 +148,19 @@ var/global/list/ai_verbs_default = list(
 		add_ai_verbs(src)
 
 	//Languages
-	add_language(LANGUAGE_ROBOT_GLOBAL, 1)
-	add_language(LANGUAGE_EAL, 1)
-	add_language(LANGUAGE_HUMAN_EURO, 1)
-	add_language(LANGUAGE_HUMAN_ARABIC, 1)
-	add_language(LANGUAGE_HUMAN_CHINESE, 1)
-	add_language(LANGUAGE_HUMAN_IBERIAN, 1)
-	add_language(LANGUAGE_HUMAN_INDIAN, 1)
-	add_language(LANGUAGE_HUMAN_RUSSIAN, 1)
-	add_language(LANGUAGE_HUMAN_SELENIAN, 1)
-	add_language(LANGUAGE_UNATHI_SINTA, 1)
-	add_language(LANGUAGE_SKRELLIAN, 1)
-	add_language(LANGUAGE_SPACER, 1)
-	add_language(LANGUAGE_SIGN, 0)
+	add_language(LANGUAGE_ROBOT_GLOBAL, TRUE)
+	add_language(LANGUAGE_EAL, TRUE)
+	add_language(LANGUAGE_HUMAN_EURO, TRUE)
+	add_language(LANGUAGE_HUMAN_ARABIC, TRUE)
+	add_language(LANGUAGE_HUMAN_CHINESE, TRUE)
+	add_language(LANGUAGE_HUMAN_IBERIAN, TRUE)
+	add_language(LANGUAGE_HUMAN_INDIAN, TRUE)
+	add_language(LANGUAGE_HUMAN_RUSSIAN, TRUE)
+	add_language(LANGUAGE_HUMAN_SELENIAN, TRUE)
+	add_language(LANGUAGE_UNATHI_SINTA, TRUE)
+	add_language(LANGUAGE_SKRELLIAN, TRUE)
+	add_language(LANGUAGE_SPACER, TRUE)
+	add_language(LANGUAGE_SIGN, FALSE)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -183,7 +184,7 @@ var/global/list/ai_verbs_default = list(
 	hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 
 	ai_list += src
-	..()
+	. = ..()
 	ai_radio = silicon_radio
 	ai_radio.myAi = src
 
