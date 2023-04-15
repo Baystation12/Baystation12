@@ -1,0 +1,4 @@
+author: SierraHelper
+delete-after: true
+changes:
+  - maptweak: Bridge Solar SMES starts on, full, and with 1 magnetic coil in it.
