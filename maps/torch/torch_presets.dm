@@ -186,7 +186,7 @@ var/global/const/NETWORK_PETROV  = "Petrov"
 // Bridge Solars SMES. For those low pop rounds.
 /obj/machinery/power/smes/buildable/preset/torch/bridge_solar
 	uncreated_component_parts = list(
-		/obj/item/stock_parts/smes_coil = 1
+		/obj/item/stock_parts/smes_coil/advanced = 1
 	)
 	RCon_tag = "Solar - Bridge"
 	_input_maxed = TRUE

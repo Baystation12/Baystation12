@@ -13469,16 +13469,14 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/machinery/power/smes/buildable{
-	RCon_tag = "Solar - Bridge";
-	capacity = 1e+007;
-	dir = 4
-	},
 /obj/item/device/radio/intercom{
 	pixel_y = 23
 	},
 /obj/machinery/camera/network/engineering{
 	c_tag = "Solar Control - Bridge";
+	dir = 4
+	},
+/obj/machinery/power/smes/buildable/preset/torch/bridge_solar{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
