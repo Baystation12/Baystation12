@@ -123,8 +123,31 @@
 		else
 			return max(0, 1 + (SKILL_DEFAULT - points) * factor)
 
-/mob/proc/do_skilled(base_delay, skill_path , atom/target = null, factor = 0.3, do_flags = DO_PUBLIC_UNIQUE)
-	return do_after(src, base_delay * skill_delay_mult(skill_path, factor), target, do_flags)
+
+/**
+ * Performs a do_after timer, with a modifier applied to the delay time based on the user's skill in the given skill path.
+ *
+ * **Parameters**
+ * - `base_delay` Integer (Seconds) - Base delay for the timer. This is added to the final delay time.
+ * - `skill_path` Path or list of paths (Subtypes of `/singleton/hierarchy/skill`; Any of `SKILL_*`) - The skill used to modify the delay time. If provided as a list, the skill that produces the smallest timer is used. Passed to `skill_delay_mult()`.
+ * - `target` (Default `null`) - The atom being interacted with. Passed directly to `do_after()`.
+ * - `factor` Float (Default `0.3`) - Modifier factor used to modify the delay applied to the action. Passed to `skill_delay_mult()`.
+ * - `do_flags` Bitflag (Any of `DO_*`; Default `DO_PUBLIC_UNIQUE`) - Flags passed on to `do_after()`.
+ *
+ * Returns boolean. Whether or not the do after check passed.
+ */
+/mob/proc/do_skilled(base_delay, skill_path, atom/target = null, factor = 0.3, do_flags = DO_PUBLIC_UNIQUE)
+	var/final_delay
+	if (islist(skill_path))
+		for (var/path as anything in skill_path)
+			var/check_delay = skill_delay_mult(path, factor)
+			if (check_delay < final_delay)
+				final_delay = check_delay
+	else
+		final_delay = skill_delay_mult(skill_path)
+	final_delay += base_delay
+	return do_after(src, final_delay, target, do_flags)
+
 
 // A generic way of modifying success probabilities via skill values. Higher factor means skills have more effect. fail_chance is the chance at SKILL_NONE.
 /mob/proc/skill_fail_chance(skill_path, fail_chance, no_more_fail = SKILL_MAX, factor = 1)
