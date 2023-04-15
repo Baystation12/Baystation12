@@ -112,7 +112,7 @@
 		/obj/item/disk/botany
 	)
 
-/obj/item/gripper/service //Used to handle food, drinks, and seeds.
+/obj/item/gripper/service //Used to handle food, drinks, seeds, and service fabricator items.
 	name = "service gripper"
 	icon_state = "gripper"
 	desc = "A simple grasping tool used to perform tasks in the service sector, such as handling food, drinks, and seeds."
@@ -120,7 +120,12 @@
 		/obj/item/reagent_containers/glass,
 		/obj/item/reagent_containers/food,
 		/obj/item/seeds,
-		/obj/item/glass_extra
+		/obj/item/glass_extra,
+		/obj/item/clothing/mask/smokable,
+		/obj/item/paper,
+		/obj/item/pen,
+		/obj/item/storage/pill_bottle/dice,
+		/obj/item/dice
 	)
 
 /obj/item/gripper/organ //Used to handle organs.
