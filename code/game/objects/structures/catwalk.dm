@@ -118,7 +118,7 @@
 			SPAN_NOTICE("\The [user] starts plating \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start plating \the [src] with \the [tool].")
 		)
-		if (!do_after(user, 1 SECOND, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled(1 SECOND, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (!stack.use(1))
 			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, 1, "to plate \the [src].")

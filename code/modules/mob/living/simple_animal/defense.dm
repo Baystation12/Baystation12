@@ -88,7 +88,7 @@
 			SPAN_WARNING("\The [user] begins butchering \the [src]'s corpse with \a [tool]."),
 			SPAN_WARNING("You begin \the [src]'s corpse with \the [tool].")
 		)
-		if (!do_after(user, time_to_butcher, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check())
+		if (!user.do_skilled(time_to_butcher, SKILL_COOKING, src) || !user.use_sanity_check())
 			USE_FEEDBACK_FAILURE("Some of \the [src]'s meat is ruined.")
 			subtract_meat(user)
 			return TRUE
