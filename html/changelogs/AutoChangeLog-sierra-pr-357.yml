@@ -1,0 +1,8 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Empty small parcels can now be opened to reveal they are empty. This deletes
+      the parcel.
+  - tweak: Parcels now have 5 hit points and can be damaged by standardized health
+      sources. Any damage parcels take will also be applied to their contents. Paper
+      wrapping isn't armor.
