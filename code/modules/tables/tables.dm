@@ -179,7 +179,7 @@
 	// Wrench - Remove material
 	if (isWrench(weapon))
 		if (!material)
-			USE_FEEDBACK_FAILURE("\The [src] has no plating to remove.")
+			dismantle(weapon, user)
 			return TRUE
 		if (reinforced)
 			USE_FEEDBACK_FAILURE("\The [src]'s reinforcements need to be removed before you can remove the plating.")
