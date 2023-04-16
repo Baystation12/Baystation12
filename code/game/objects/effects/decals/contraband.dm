@@ -132,16 +132,30 @@
 	desc = "[initial(desc)] [design.desc]"
 	icon_state = design.icon_state
 
-/obj/structure/sign/poster/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWirecutter(W))
-		playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-		if(ruined)
-			to_chat(user, SPAN_NOTICE("You remove the remnants of the poster."))
-			qdel(src)
+/obj/structure/sign/poster/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Block interaction
+	if (isScrewdriver(tool))
+		USE_FEEDBACK_FAILURE("You msut use wirecutters to remove \the [src].")
+		return TRUE
+
+	// Wirecutters - Remove poster
+	if (isWirecutter(tool))
+		playsound(src, 'sound/items/Wirecutter.ogg', 50, TRUE)
+		if (ruined)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] removes the remnants of \the [src] with \a [tool]."),
+				SPAN_NOTICE("You remove the remnants of \the [src] with \the [tool].")
+			)
+			qdel_self()
 		else
-			to_chat(user, SPAN_NOTICE("You carefully remove the poster from the wall."))
+			user.visible_message(
+				SPAN_NOTICE("\The [user] removes \the [src] with \a [tool]."),
+				SPAN_NOTICE("You remove \the [src] with \the [tool].")
+			)
 			roll_and_drop(user.loc)
-		return
+		return TRUE
+
+	return ..()
 
 
 /obj/structure/sign/poster/attack_hand(mob/user as mob)
@@ -163,8 +177,9 @@
 		add_fingerprint(user)
 
 /obj/structure/sign/poster/proc/roll_and_drop(turf/newloc)
-	new/obj/item/contraband/poster(newloc, poster_type)
-	qdel(src)
+	var/obj/item/contraband/poster/poster_item = new/obj/item/contraband/poster(newloc, poster_type)
+	transfer_fingerprints_to(poster_item)
+	qdel_self()
 
 /singleton/poster
 	// Name suffix. Poster - [name]

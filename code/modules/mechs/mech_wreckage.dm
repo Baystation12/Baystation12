@@ -6,6 +6,8 @@
 	anchored = TRUE
 	icon_state = "wreck"
 	icon = 'icons/mecha/mech_part_items.dmi'
+	health_max = 100
+	health_min_damage = 20
 	var/prepared
 
 /obj/structure/mech_wreckage/New(newloc, mob/living/exosuit/exosuit, gibbed)
@@ -42,41 +44,50 @@
 			return
 	return ..()
 
-/obj/structure/mech_wreckage/attackby(obj/item/W, mob/user)
 
-	var/cutting
-	if(isWelder(W))
-		var/obj/item/weldingtool/WT = W
-		if(WT.isOn())
-			cutting = TRUE
-		else
-			to_chat(user, SPAN_WARNING("Turn the torch on, first."))
-	else if(istype(W, /obj/item/gun/energy/plasmacutter))
-		cutting = TRUE
+/obj/structure/mech_wreckage/on_death()
+	. = ..()
+	visible_message(SPAN_WARNING("\The [src] breaks apart!"))
+	new /obj/item/stack/material/steel(loc, rand(1, 3))
+	qdel_self()
 
-	if(cutting)
-		if(!prepared)
-			prepared = 1
-			to_chat(user, SPAN_NOTICE("You partially dismantle \the [src]."))
-		else
-			to_chat(user, SPAN_WARNING("\The [src] has already been weakened."))
-		return 1
 
-	else if(isWrench(W))
-		if(prepared)
-			to_chat(user, SPAN_NOTICE("You finish dismantling \the [src]."))
-			new /obj/item/stack/material/steel(get_turf(src),rand(5,10))
-			qdel(src)
-		else
-			to_chat(user, SPAN_WARNING("It's too solid to dismantle. Try cutting through some of the bigger bits."))
-		return 1
-	else if(istype(W) && W.force > 20)
-		visible_message(SPAN_DANGER("\The [src] has been smashed with \the [W] by \the [user]!"))
-		if(prob(20))
-			new /obj/item/stack/material/steel(get_turf(src),rand(1,3))
-			qdel(src)
-		return 1
+/obj/structure/mech_wreckage/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Welding Tool, Plasma Cutter - Cut through wreckage
+	if (istype(tool, /obj/item/gun/energy/plasmacutter) || isWelder(tool))
+		if (prepared)
+			USE_FEEDBACK_FAILURE("\The [src] has already been weakened.")
+			return TRUE
+		if (isWelder(tool))
+			var/obj/item/weldingtool/welder = tool
+			if (!welder.remove_fuel(1, user))
+				return TRUE
+		else if (istype(tool, /obj/item/gun/energy/plasmacutter))
+			var/obj/item/gun/energy/plasmacutter/plasmacutter = tool
+			if (!plasmacutter.slice(user))
+				return TRUE
+		prepared = TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] partially cuts through \the [src] with \a [tool]."),
+			SPAN_NOTICE("You partially cut through \the [src] with \a [tool].")
+		)
+		return TRUE
+
+	// Wrench - Finish dismantling
+	if (isWrench(tool))
+		if (!prepared)
+			USE_FEEDBACK_FAILURE("\The [src] is too solid to dismantle. Try cutting through it first.")
+			return TRUE
+		new /obj/item/stack/material/steel(loc, rand(5, 10))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] finishes dismantling \the [src] with \a [tool]."),
+			SPAN_NOTICE("You finish dismantling \the [src] with \a [tool].")
+		)
+		qdel_self()
+		return TRUE
+
 	return ..()
+
 
 /obj/structure/mech_wreckage/Destroy()
 	for(var/obj/thing in contents)

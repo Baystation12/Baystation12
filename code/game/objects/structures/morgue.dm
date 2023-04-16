@@ -92,20 +92,30 @@
 		return attack_hand(user)
 	else return ..()
 
-/obj/structure/morgue/attackby(P as obj, mob/user as mob)
-	if (istype(P, /obj/item/pen))
-		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
-		if (user.get_active_hand() != P)
-			return
-		if ((!in_range(src, usr) && src.loc != user))
-			return
-		t = sanitizeSafe(t, MAX_NAME_LEN)
-		if (t)
-			src.SetName(text("Morgue- '[]'", t))
+
+/obj/structure/morgue/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Pen - Add label
+	if (istype(tool, /obj/item/pen))
+		var/input = input(user, "What would you like the label to be? Leave null to clear label.", "\The [initial(name)] - Label") as null|text
+		input = sanitizeSafe(input, MAX_NAME_LEN)
+		if (!user.use_sanity_check(src, tool))
+			return TRUE
+		if (!input)
+			SetName(initial(name))
+			user.visible_message(
+				SPAN_NOTICE("\The [user] clears \the [src]'s label with \a [tool]."),
+				SPAN_NOTICE("You clear \the [src]'s label with \the [tool].")
+			)
 		else
-			src.SetName("Morgue")
-	src.add_fingerprint(user)
-	return
+			SetName("[initial(name)] - '[input]'")
+			user.visible_message(
+				SPAN_NOTICE("\The [user] labels \the [src] with \a [tool]."),
+				SPAN_NOTICE("You label \the [src] with \the [tool].")
+			)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/morgue/relaymove(mob/user as mob)
 	if (user.stat)
@@ -258,20 +268,30 @@
 	src.add_fingerprint(user)
 	update()
 
-/obj/structure/crematorium/attackby(P as obj, mob/user as mob)
-	if(istype(P, /obj/item/pen))
-		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
-		if(user.get_active_hand() != P)
-			return
-		if((!in_range(src, usr) > 1 && src.loc != user))
-			return
-		t = sanitizeSafe(t, MAX_NAME_LEN)
-		if(t)
-			src.SetName(text("Crematorium- '[]'", t))
+
+/obj/structure/crematorium/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Pen - Add label
+	if (istype(tool, /obj/item/pen))
+		var/input = input(user, "What would you like the label to be? Leave null to clear label.", "\The [initial(name)] - Label") as null|text
+		input = sanitizeSafe(input, MAX_NAME_LEN)
+		if (!user.use_sanity_check(src, tool))
+			return TRUE
+		if (!input)
+			SetName(initial(name))
+			user.visible_message(
+				SPAN_NOTICE("\The [user] clears \the [src]'s label with \a [tool]."),
+				SPAN_NOTICE("You clear \the [src]'s label with \the [tool].")
+			)
 		else
-			src.SetName("Crematorium")
-	src.add_fingerprint(user)
-	return
+			SetName("[initial(name)] - '[input]'")
+			user.visible_message(
+				SPAN_NOTICE("\The [user] labels \the [src] with \a [tool]."),
+				SPAN_NOTICE("You label \the [src] with \the [tool].")
+			)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/crematorium/relaymove(mob/user as mob)
 	if (user.stat || locked)

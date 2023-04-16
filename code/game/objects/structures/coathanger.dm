@@ -13,18 +13,26 @@
 	coat = null
 	update_icon()
 
-/obj/structure/coatrack/attackby(obj/item/W as obj, mob/user as mob)
-	var/can_hang = 0
-	for (var/T in allowed)
-		if(istype(W,T))
-			can_hang = 1
-	if (can_hang && !coat && user.unEquip(coat, src))
-		user.visible_message("[user] hangs [W] on \the [src].", "You hang [W] on the \the [src]")
-		coat = W
+
+/obj/structure/coatrack/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Anything - Attempt to hang item
+	if (is_type_in_list(tool, allowed))
+		if (coat)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [coat] on it.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		coat = tool
 		update_icon()
-	else
-		to_chat(user, SPAN_NOTICE("You cannot hang [W] on [src]"))
-		return ..()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] hangs \a [tool] on \the [src]."),
+			SPAN_NOTICE("You hang \the [tool] on \the [src].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/coatrack/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	var/can_hang = 0

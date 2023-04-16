@@ -6,6 +6,14 @@
 	layer = ABOVE_WINDOW_LAYER
 	w_class = ITEM_SIZE_NORMAL
 
+/obj/structure/sign/double/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Block interaction
+	if (isScrewdriver(tool))
+		USE_FEEDBACK_FAILURE("\The [src] cannot be removed.")
+		return TRUE
+
+	return ..()
+
 /obj/structure/sign/ex_act(severity)
 	switch(severity)
 		if(EX_ACT_DEVASTATING)
@@ -20,16 +28,25 @@
 		else
 	return
 
-/obj/structure/sign/attackby(obj/item/tool as obj, mob/user as mob)	//deconstruction
-	if(isScrewdriver(tool) && !istype(src, /obj/structure/sign/double))
-		to_chat(user, "You unfasten the sign with your [tool.name].")
-		var/obj/item/sign/S = new(src.loc)
+
+/obj/structure/sign/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Scrwedriver - Unfasten sign
+	if (isScrewdriver(tool))
+		var/obj/item/sign/S = new(loc)
 		S.SetName(name)
 		S.desc = desc
 		S.icon_state = icon_state
 		S.sign_state = icon_state
-		qdel(src)
-	else ..()
+		transfer_fingerprints_to(S)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] unfastens \the [src] with \a [tool]."),
+			SPAN_NOTICE("You unfasten \the [src] with \the [tool].")
+		)
+		qdel_self()
+		return TRUE
+
+	return ..()
+
 
 /obj/item/sign
 	name = "sign"

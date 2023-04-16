@@ -161,20 +161,52 @@
 		to_chat(user, SPAN_NOTICE("You hit the metal foam but bounce off it."))
 	return
 
-/obj/structure/foamedmetal/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/grab))
-		var/obj/item/grab/G = I
-		G.affecting.loc = src.loc
-		visible_message(SPAN_WARNING("[G.assailant] smashes [G.affecting] through the foamed metal wall."))
-		qdel(I)
-		qdel(src)
-		return
 
-	if(prob(I.force * 20 - metal * 25))
-		user.visible_message(SPAN_WARNING("[user] smashes through the foamed metal."), SPAN_NOTICE("You smash through the foamed metal with \the [I]."))
-		qdel(src)
-	else
-		to_chat(user, SPAN_NOTICE("You hit the metal foam to no effect."))
+/obj/structure/foamedmetal/use_grab(obj/item/grab/grab, list/click_params)
+	// Harm intent - Smash through foam
+	if (grab.assailant.a_intent == I_HURT)
+		if (!Adjacent(grab.affecting))
+			USE_FEEDBACK_GRAB_FAILURE("\The [grab.affecting] must be next to \the [src] to smash them into it.")
+			return TRUE
+		grab.assailant.visible_message(
+			SPAN_WARNING("\The [grab.assailant] smashes \the [grab.affecting] through \the [src]!"),
+			SPAN_DANGER("You smash \the [grab.affecting] through \the [src]!"),
+			exclude_mobs = list(grab.affecting)
+		)
+		grab.affecting.show_message(
+			SPAN_DANGER("\The [grab.assailant] smashes you through \the [src]!"),
+			VISIBLE_MESSAGE,
+			SPAN_DANGER("You feel yourself being smashed through something!")
+		)
+		qdel(grab)
+		qdel_self()
+		return TRUE
+
+	return ..()
+
+
+/obj/structure/foamedmetal/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Snowflake damage handling - TODO: Use standardized damage
+	if (weapon.force > 0 && !HAS_FLAGS(weapon.item_flags, ITEM_FLAG_NO_BLUDGEON))
+		user.setClickCooldown(user.get_attack_speed(weapon))
+		user.do_attack_animation(src)
+		if (prob(weapon.force * 20 - metal * 25))
+			playsound(src, damage_hitsound, 75, TRUE)
+			user.visible_message(
+				SPAN_WARNING("\The [user] smashes through \the [src] with \a [weapon]!"),
+				SPAN_DANGER("You smash through \the [src] with \the [weapon]!")
+			)
+			qdel_self()
+			return TRUE
+		playsound(src, damage_hitsound, 50, TRUE)
+		user.visible_message(
+			SPAN_WARNING("\The [user] hits \the [src] with \a [weapon]!"),
+			SPAN_DANGER("You hit \the [src] with \the [weapon]!")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/foamedmetal/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
 	if(air_group)

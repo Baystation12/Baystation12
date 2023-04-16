@@ -30,34 +30,58 @@
 			devices += A
 		to_chat(user,"There are some wires attached to the lid, connected to [english_list(devices)].")
 
-/obj/structure/closet/crate/attackby(obj/item/W as obj, mob/user as mob)
-	if(opened)
-		return ..()
-	else if(istype(W, /obj/item/stack/package_wrap))
-		return
-	else if(istype(W, /obj/item/stack/cable_coil))
-		var/obj/item/stack/cable_coil/C = W
-		if(rigged)
-			to_chat(user, SPAN_NOTICE("[src] is already rigged!"))
-			return
-		if (C.use(1))
-			to_chat(user, SPAN_NOTICE("You rig [src]."))
-			rigged = 1
-			return
-	else if(istype(W, /obj/item/device/assembly_holder) || istype(W, /obj/item/device/assembly))
-		if(rigged)
-			if(!user.unEquip(W, src))
-				return
-			to_chat(user, SPAN_NOTICE("You attach [W] to [src]."))
-			return
-	else if(isWirecutter(W))
-		if(rigged)
-			to_chat(user, SPAN_NOTICE("You cut away the wiring."))
-			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			rigged = 0
-			return
-	else
-		return ..()
+
+/obj/structure/closet/crate/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Below interactions only apply if the crate is closed
+	if (opened)
+		return TRUE
+
+	// Assembly - Attach to rigged crate
+	if (istype(tool, /obj/item/device/assembly_holder) || istype(tool, /obj/item/device/assembly))
+		if (!rigged)
+			USE_FEEDBACK_FAILURE("\The [src] needs to be rigged with wiring before you can attach \the [tool].")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] attaches \a [tool] to \the [src]."),
+			SPAN_NOTICE("You attach \the [tool] to \the [src].")
+		)
+		return TRUE
+
+	// Cable Coil - Rig crate
+	if (isCoil(tool))
+		if (rigged)
+			USE_FEEDBACK_FAILURE("\The [src] is already rigged.")
+			return TRUE
+		var/obj/item/stack/cable_coil/cable
+		if (!cable.use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to rig \the [src].")
+			return TRUE
+		rigged = TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adds some wiring to \the [src] with \a [cable]."),
+			SPAN_NOTICE("You rig \the [src] with 1 [cable.name] [cable.singular_name] from \the [cable].")
+		)
+		return TRUE
+
+	// Wirecutters - Remove wiring
+	if (isWirecutter(tool))
+		if (!rigged)
+			USE_FEEDBACK_FAILURE("\The [src] has no wiring to cut.")
+			return TRUE
+		rigged = FALSE
+		new /obj/item/stack/cable_coil(loc, 1)
+		playsound(src, 'sound/items/Wirecutter.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] cuts \the [src]'s wiring with \a [tool]."),
+			SPAN_NOTICE("You cuts \the [src]'s wiring with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/closet/crate/secure
 	desc = "A secure crate."

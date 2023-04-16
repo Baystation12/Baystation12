@@ -10,18 +10,36 @@
 	var/last_update = 0
 	var/list/stored_ore = list()
 
-/obj/structure/ore_box/attackby(obj/item/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/ore))
-		user.unEquip(W, src)
-	else if (istype(W, /obj/item/storage))
-		var/obj/item/storage/S = W
-		S.hide_from(usr)
-		for(var/obj/item/ore/O in S.contents)
-			S.remove_from_storage(O, src, 1) //This will move the item to this item's contents
-		S.finish_bulk_removal()
-		to_chat(user, SPAN_NOTICE("You empty the satchel into the box."))
 
-	update_ore_count()
+/obj/structure/ore_box/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Ore - Insert ore
+	if (istype(tool, /obj/item/ore))
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		update_ore_count()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] puts \a [tool] in \the [src]."),
+			SPAN_NOTICE("You put \the [tool] in \the [src].")
+		)
+		return TRUE
+
+	// Storage - Bulk insert ore
+	if (istype(tool, /obj/item/storage))
+		var/obj/item/storage/storage = tool
+		storage.hide_from(user)
+		for (var/obj/item/ore/ore in storage.contents)
+			storage.remove_from_storage(ore, src, TRUE)
+		storage.finish_bulk_removal()
+		update_ore_count()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] empties \a [tool] into \the [src]."),
+			SPAN_NOTICE("You empty \the [tool] into \the [src].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/ore_box/proc/update_ore_count()
 

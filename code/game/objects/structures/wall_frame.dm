@@ -51,58 +51,79 @@
 	if(paint_color)
 		to_chat(user, SPAN_NOTICE("It has a smooth coat of paint applied."))
 
-/obj/structure/wall_frame/attackby(obj/item/W, mob/user)
-	src.add_fingerprint(user)
 
-	if (user.a_intent == I_HURT)
-		..()
+/obj/structure/wall_frame/can_use_item(obj/item/tool, mob/user, click_params)
+	. = ..()
+	if (!.)
 		return
 
-	//grille placing
-	if(istype(W, /obj/item/stack/material/rods))
-		for(var/obj/structure/window/WINDOW in loc)
-			if(WINDOW.dir == get_dir(src, user))
-				to_chat(user, SPAN_NOTICE("There is a window in the way."))
-				return
-		place_grille(user, loc, W)
-		return
+	// Windows
+	for (var/obj/structure/window/window in loc)
+		if (window.dir == get_dir(src, user))
+			USE_FEEDBACK_FAILURE("\The [window] blocks access to \the [src].")
+			return FALSE
 
-	//window placing
-	if(istype(W,/obj/item/stack/material))
-		var/obj/item/stack/material/ST = W
-		if(ST.material.opacity > 0.7)
-			return 0
+	// Grilles
+	var/obj/structure/grille/grille = locate() in loc
+	if (grille.density)
+		USE_FEEDBACK_FAILURE("\The [grille] blocks access to \the [src].")
+		return FALSE
 
-		place_window(user, loc, ST)
-		return
 
-	if(isWrench(W))
-		for(var/obj/structure/S in loc)
-			if(istype(S, /obj/structure/window))
-				to_chat(user, SPAN_NOTICE("There is still a window on the low wall!"))
-				return
-			else if(istype(S, /obj/structure/grille))
-				to_chat(user, SPAN_NOTICE("There is still a grille on the low wall!"))
-				return
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-		to_chat(user, SPAN_NOTICE("Now disassembling the low wall..."))
-		if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(user, SPAN_NOTICE("You dissasembled the low wall!"))
-			dismantle()
-		return
+/obj/structure/wall_frame/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Rods - Place Grille
+	if (istype(tool, /obj/item/stack/material/rods))
+		place_grille(user, loc, tool)
+		return TRUE
 
-	if(istype(W, /obj/item/gun/energy/plasmacutter))
-		var/obj/item/gun/energy/plasmacutter/cutter = W
-		if(!cutter.slice(user))
-			return
-		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
-		to_chat(user, SPAN_NOTICE("Now slicing through the low wall..."))
-		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-			to_chat(user, SPAN_WARNING("You have sliced through the low wall!"))
-			dismantle()
-		return
+	// Material Stack - Place window
+	if (istype(tool, /obj/item/stack/material))
+		var/obj/item/stack/material/stack = tool
+		if (stack.material.opacity > 0.7)
+			USE_FEEDBACK_FAILURE("\The [stack] cannot be used to make a window.")
+			return TRUE
+		place_window(user, loc, tool)
+		return TRUE
 
-	..()
+	// Wrench - Dismantle
+	if (isWrench(tool))
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts dismantling \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start dismantling \the [src] with \the [tool].")
+		)
+		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] dismantles \the [src] with \a [tool]."),
+			SPAN_NOTICE("You dismantle \the [src] with \the [tool].")
+		)
+		dismantle()
+		return TRUE
+
+	// Plasmacutter - Dismantle
+	if (istype(tool, /obj/item/gun/energy/plasmacutter))
+		var/obj/item/gun/energy/plasmacutter/plasmacutter = tool
+		if (!plasmacutter.slice(user))
+			return TRUE
+		playsound(src, 'sound/items/Welder.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts slicing \the [src] apart with \a [tool]."),
+			SPAN_NOTICE("You start slicing \the [src] apart with \the [tool].")
+		)
+		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+			return TRUE
+		playsound(src, 'sound/items/Welder.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] slices \the [src] apart with \a [tool]."),
+			SPAN_NOTICE("You slice \the [src] apart with \the [tool].")
+		)
+		dismantle()
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/wall_frame/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1

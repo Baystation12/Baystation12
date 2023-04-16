@@ -136,103 +136,79 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/structure/cable/proc/get_powernet()			//TODO: remove this as it is obsolete
 	return powernet
 
-// Items usable on a cable :
-//   - Wirecutters : cut it duh !
-//   - Cable coil : merge cables
-//   - Multitool : get the power currently passing through the cable
-//
 
-/obj/structure/cable/attackby(obj/item/W, mob/user)
-	var/turf/T = get_turf(src)
-	//sanity checking
-	if(!isturf(T))
-		return
+/obj/structure/cable/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Cable Coil - Join cable
+	if (isCoil(tool))
+		var/obj/item/stack/cable_coil/cable = tool
+		if (!cable.can_use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to add cable to \the [src].")
+			return TRUE
+		cable.JoinCable(src, user)
+		return TRUE
 
-	if(istype(T, /turf/simulated/floor) && !T.is_plating())
-		return
-
-	if(get_dist(T, user) > 1) // make sure it's close enough
-		to_chat(user, SPAN_WARNING("You can't lay cable at a place that far away."))
-		return
-
-	// handle catwalks and plated catwalks
-	var/obj/structure/catwalk/cwalk = locate(/obj/structure/catwalk, T)
-	if(cwalk)
-		if(cwalk.plated_tile && !cwalk.hatch_open)
-			to_chat(user, SPAN_WARNING("Open the catwalk hatch first."))
-			return
-		else if(!cwalk.plated_tile)
-			to_chat(user, SPAN_WARNING("The catwalk is blocking the cable."))
-			return
-
-	if(isWirecutter(W))
-		cut_wire(W, user)
-
-	else if(isCoil(W))
-		var/obj/item/stack/cable_coil/coil = W
-		if (coil.get_amount() < 1)
-			to_chat(user, "Not enough cable")
-			return
-		coil.JoinCable(src, user)
-
-	else if(isMultitool(W))
-
-		if(powernet && (powernet.avail > 0))		// is it powered?
-			to_chat(user, SPAN_WARNING("[get_wattage()] in power network."))
-
-		else
-			to_chat(user, SPAN_WARNING("The cable is not powered."))
-
+	// Multitool - Measure power
+	if (isMultitool(tool))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] scans \the [src] with \a [tool]."),
+			SPAN_NOTICE("You scan \the [src] with \the [tool].")
+		)
 		shock(user, 5, 0.2)
-
-
-	else if(W.edge)
-
-		var/delay_holder
-
-		if(W.force < 5)
-			visible_message(SPAN_WARNING("[user] starts sawing away roughly at the cable with \the [W]."))
-			delay_holder = 8 SECONDS
+		if (!powernet?.avail)
+			to_chat(user, SPAN_WARNING("\The [src] is not powered."))
 		else
-			visible_message(SPAN_WARNING("[user] begins to cut through the cable with \the [W]."))
-			delay_holder = 3 SECONDS
+			to_chat(user, SPAN_INFO("\The [src] has [get_wattage()] flowing through it."))
+		return TRUE
 
-		if(user.do_skilled(delay_holder, SKILL_ELECTRICAL, src, do_flags = DO_REPAIR_CONSTRUCT))
-			cut_wire(W, user)
-			if(W.obj_flags & OBJ_FLAG_CONDUCTIBLE)
-				shock(user, 66, 0.7)
-		else
-			visible_message(SPAN_WARNING("[user] stops cutting before any damage is done."))
+	// Wirecutter - Cut wire
+	if (isWirecutter(tool))
+		cut_wire(tool, user)
+		return TRUE
 
-	src.add_fingerprint(user)
+	// Sharp Objects - Cut cable
+	if (tool.edge)
+		var/delay_time = 3 SECONDS
+		var/delay_message = "cutting through"
+		if (tool.force < 5)
+			delay_time = 8 SECONDS
+			delay_message = "sawing away roughly at"
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts [delay_message] \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start [delay_message] \the [src] with \the [tool].")
+		)
+		if (!user.do_skilled(delay_time, SKILL_ELECTRICAL, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] cuts through \the [src] with \a [tool]."),
+			SPAN_NOTICE("You cut through \the [src] with \a [tool].")
+		)
+		return TRUE
 
-/obj/structure/cable/proc/cut_wire(obj/item/W, mob/user)
-	var/turf/T = get_turf(src)
+	return ..()
 
-	if(d1 == UP || d2 == UP)
-		to_chat(user, SPAN_WARNING("You must cut this cable from above."))
+
+/obj/structure/cable/proc/cut_wire(obj/item/tool, mob/user)
+	if (d1 == UP || d2 == UP)
+		USE_FEEDBACK_FAILURE("You must cut \the [src] from above.")
 		return
-
-	if(breaker_box)
-		to_chat(user, SPAN_WARNING("This cable is connected to a nearby breaker box. Use the breaker box to interact with it."))
+	if (breaker_box)
+		USE_FEEDBACK_FAILURE("\The [src] is connected to \the [breaker_box]. You must use that to interact with this cable.")
 		return
-
-	if (shock(user, 50))
+	if (HAS_FLAGS(tool.obj_flags, OBJ_FLAG_CONDUCTIBLE) && shock(user, 50))
 		return
-
-	new/obj/item/stack/cable_coil(T, (src.d1 ? 2 : 1), color)
-
-	visible_message(SPAN_WARNING("[user] cuts the cable."))
-
-	if(HasBelow(z))
-		for(var/turf/turf in GetBelow(src))
-			for(var/obj/structure/cable/c in turf)
-				if(c.d1 == UP || c.d2 == UP)
+	var/obj/item/stack/cable_coil/cable = new (loc, (d1 ? 2 : 1), color)
+	transfer_fingerprints_to(cable)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] cuts \the [src] with \a [tool]."),
+		SPAN_NOTICE("You cut \the [src] with \the [tool].")
+	)
+	if (HasBelow(z))
+		for (var/turf/turf in GetBelow(src))
+			for (var/obj/structure/cable/c in turf)
+				if (c.d1 == UP || c.d2 == UP)
 					qdel(c)
+	qdel_self()
 
-	investigate_log("was cut by [key_name(usr, usr.client)] in [user.loc.loc]","wires")
-
-	qdel(src)
 
 // shock the user with probability prb
 /obj/structure/cable/proc/shock(mob/user, prb, siemens_coeff = 1.0)

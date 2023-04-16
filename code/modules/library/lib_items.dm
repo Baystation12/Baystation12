@@ -26,30 +26,52 @@
 	update_icon()
 	. = ..()
 
-/obj/structure/bookcase/attackby(obj/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/book))
-		if(!user.unEquip(O, src))
-			return
-		update_icon()
-	else if(istype(O, /obj/item/pen))
-		var/newname = sanitizeSafe(input("What would you like to title this bookshelf?"), MAX_NAME_LEN)
-		if(!newname)
-			return
-		else
-			SetName("bookcase ([newname])")
-	else if(isScrewdriver(O))
-		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-		to_chat(user, SPAN_NOTICE("You begin dismantling \the [src]."))
-		if(do_after(user, 2.5 SECONDS, src, DO_PUBLIC_UNIQUE))
-			to_chat(user, SPAN_NOTICE("You dismantle \the [src]."))
-			new/obj/item/stack/material/wood(get_turf(src), 5)
-			for(var/obj/item/book/b in contents)
-				b.dropInto(loc)
-			qdel(src)
 
-	else
-		..()
-	return
+/obj/structure/bookcase/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Book - Add book to shelf
+	if (istype(tool, /obj/item/book))
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(tool, src)
+			return TRUE
+		update_icon()
+		return TRUE
+
+	// Pen - Title bookshelf
+	if (istype(tool, /obj/item/pen))
+		var/input = input(user, "What would you like to title this bookshelf?", "Bookshelf Title") as null|text
+		input = sanitizeSafe(input, MAX_NAME_LEN)
+		if (!input || !user.use_sanity_check(src, tool))
+			return TRUE
+		SetName("[initial(name)] ([input])")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] re-labels \the [src] with \a [tool]."),
+			SPAN_NOTICE("You re-label \the [src] with \the [tool].")
+		)
+		return TRUE
+
+	// Screwdriver - Dismantle bookshelf
+	if (isScrewdriver(tool))
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] begins dismantling \the [src] with \a [tool]."),
+			SPAN_NOTICE("You begin dismantling \the [src] with \a [tool].")
+		)
+		if (!do_after(user, 2.5 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		var/obj/item/stack/material/wood/wood = new (loc, 5)
+		transfer_fingerprints_to(wood)
+		for (var/obj/item/book/book in contents)
+			book.dropInto(loc)
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] dismantles \the [src] with \a [tool]."),
+			SPAN_NOTICE("You dismantle \the [src] with \a [tool].")
+		)
+		qdel_self()
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/bookcase/attack_hand(mob/user as mob)
 	if(length(contents))

@@ -45,8 +45,11 @@
 		target_up = null
 	return ..()
 
-/obj/structure/ladder/attackby(obj/item/I, mob/user)
-	climb(user, I)
+
+/obj/structure/ladder/use_tool(obj/item/tool, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+	climb(user, tool)
+
 
 /turf/hitby(atom/movable/AM)
 	if(isobj(AM))

@@ -53,53 +53,59 @@
 		// Destroy will drop our wrapped object on the turf, so let it.
 		qdel(src)
 
-/obj/structure/bigDelivery/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/device/destTagger))
-		var/obj/item/device/destTagger/O = W
-		if(O.currTag)
-			if(src.sortTag != O.currTag)
-				to_chat(user, SPAN_NOTICE("You have labeled the destination as [O.currTag]."))
-				if(!src.sortTag)
-					src.sortTag = O.currTag
-					update_icon()
-				else
-					src.sortTag = O.currTag
-				playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
-			else
-				to_chat(user, SPAN_WARNING("The package is already labeled for [O.currTag]."))
-		else
-			to_chat(user, SPAN_WARNING("You need to set a destination first!"))
 
-	else if(istype(W, /obj/item/pen))
-		switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
-			if("Title")
-				var/str = sanitizeSafe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
-				if(!str || !length(str))
-					to_chat(usr, SPAN_WARNING(" Invalid text."))
-					return
-				user.visible_message("\The [user] titles \the [src] with \a [W], marking down: \"[str]\"",\
-				SPAN_NOTICE("You title \the [src]: \"[str]\""),\
-				"You hear someone scribbling a note.")
-				SetName("[name] ([str])")
-				if(!examtext && !nameset)
-					nameset = 1
-					update_icon()
-				else
-					nameset = 1
-			if("Description")
-				var/str = sanitize(input(usr,"Label text?","Set label",""))
-				if(!str || !length(str))
-					to_chat(usr, SPAN_WARNING("Invalid text."))
-					return
-				if(!examtext && !nameset)
-					examtext = str
-					update_icon()
-				else
-					examtext = str
-				user.visible_message("\The [user] labels \the [src] with \a [W], scribbling down: \"[examtext]\"",\
-				SPAN_NOTICE("You label \the [src]: \"[examtext]\""),\
-				"You hear someone scribbling a note.")
-	return
+/obj/structure/bigDelivery/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Destination Tagger - Tag
+	if (istype(tool, /obj/item/device/destTagger))
+		var/obj/item/device/destTagger/tagger = tool
+		if (!tagger.currTag)
+			USE_FEEDBACK_FAILURE("\The [tool] does not have a tag set.")
+			return TRUE
+		if (tagger.currTag == sortTag)
+			USE_FEEDBACK_FAILURE("\The [src] is already tagged for [sortTag].")
+			return TRUE
+		sortTag = tagger.currTag
+		update_icon()
+		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] tags \the [src] with \a [tool]."),
+			SPAN_NOTICE("You tag \the [src] as [sortTag] with \the [tool].")
+		)
+		return TRUE
+
+	// Pen - Label
+	if (istype(tool, /obj/item/pen))
+		var/input = alert(user, "What would you like to alter?", "[name] - Label", "Title", "Description", "Cancel")
+		if (input == "Cancel" || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (input == "Title")
+			var/new_title = input(user, "What would you like to set the label to?", "[name] - Label Title") as null|text
+			new_title = sanitizeSafe(new_title, MAX_NAME_LEN)
+			if (!new_title || !user.use_sanity_check(src, tool))
+				return TRUE
+			user.visible_message(
+				SPAN_NOTICE("\The [user] updates \the [src]'s label with \a [tool]."),
+				SPAN_NOTICE("You set \the [src]'s label title to '[new_title]' with \the [tool].")
+			)
+			SetName("[initial(name)] ([new_title])")
+			update_icon()
+			nameset = TRUE
+		else if (input == "Description")
+			var/new_desc = input(user, "What would you like to set the label to?", "[name] - Label Title") as null|text
+			new_desc = sanitizeSafe(new_desc, MAX_NAME_LEN)
+			if (!new_desc || !user.use_sanity_check(src, tool))
+				return TRUE
+			user.visible_message(
+				SPAN_NOTICE("\The [user] updates \the [src]'s label with \a [tool]."),
+				SPAN_NOTICE("You set \the [src]'s label description to '[new_desc]' with \the [tool].")
+			)
+			examtext = new_desc
+			update_icon()
+			nameset = TRUE
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/bigDelivery/on_update_icon()
 	overlays.Cut()

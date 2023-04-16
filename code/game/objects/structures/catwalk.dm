@@ -74,52 +74,73 @@
 		new plated_tile.build_type(src.loc)
 	qdel(src)
 
-/obj/structure/catwalk/attackby(obj/item/C as obj, mob/user as mob)
-	if(isWelder(C))
-		var/obj/item/weldingtool/WT = C
-		if(WT.remove_fuel(0, user))
-			deconstruct(user)
-		return
-	if(istype(C, /obj/item/gun/energy/plasmacutter))
-		var/obj/item/gun/energy/plasmacutter/cutter = C
-		if(!cutter.slice(user))
-			return
-		deconstruct(user)
-		return
-	if(isCrowbar(C) && plated_tile)
-		if(user.a_intent != I_HELP)
-			return
+
+/obj/structure/catwalk/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Crowbar - Toggle hatch
+	if (isCrowbar(tool))
+		if (!plated_tile)
+			USE_FEEDBACK_FAILURE("\The [src] is not plated and has no hatch to open.")
+			return TRUE
 		hatch_open = !hatch_open
-		if(hatch_open)
-			playsound(src, 'sound/items/Crowbar.ogg', 100, 2)
-			to_chat(user, SPAN_NOTICE("You pry open \the [src]'s maintenance hatch."))
-		else
-			playsound(src, 'sound/items/Deconstruct.ogg', 100, 2)
-			to_chat(user, SPAN_NOTICE("You shut \the [src]'s maintenance hatch."))
 		update_icon()
-		return
-	if(istype(C, /obj/item/stack/tile/mono) && !plated_tile)
-		var/obj/item/stack/tile/floor/ST = C
-		if(!ST.in_use)
-			to_chat(user, SPAN_NOTICE("Placing tile..."))
-			ST.in_use = 1
-			if (!do_after(user, 1 SECOND, src, DO_REPAIR_CONSTRUCT))
-				ST.in_use = 0
-				return
-			to_chat(user, SPAN_NOTICE("You plate \the [src]"))
-			name = "plated catwalk"
-			ST.in_use = 0
-			src.add_fingerprint(user)
-			if(ST.use(1))
-				var/list/singletons = GET_SINGLETON_SUBTYPE_MAP(/singleton/flooring)
-				for(var/flooring_type in singletons)
-					var/singleton/flooring/F = singletons[flooring_type]
-					if(!F.build_type)
-						continue
-					if(ispath(C.type, F.build_type))
-						plated_tile = F
-						break
-				update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] pries \the [src]'s maintenance hatch open with \a [tool]."),
+			SPAN_NOTICE("You pry \the [src]'s maintenance hatch open with \the [tool].")
+		)
+		return TRUE
+
+	// Plasma Cutter - Deconstruct
+	if (istype(tool, /obj/item/gun/energy/plasmacutter))
+		var/obj/item/gun/energy/plasmacutter/cutter = tool
+		if (!cutter.slice(user))
+			return TRUE
+		deconstruct(user)
+		return TRUE
+
+	// Welding Tool - Deconstruct
+	if (isWelder(tool))
+		var/obj/item/weldingtool/welder = tool
+		if (!welder.remove_fuel(1, user))
+			return TRUE
+		deconstruct(user)
+		return TRUE
+
+	// Floor Tile - Plate catwalk
+	if (istype(tool, /obj/item/stack/tile))
+		if (plated_tile)
+			USE_FEEDBACK_FAILURE("\The [src] is already plated.")
+			return TRUE
+		var/obj/item/stack/tile/stack = tool
+		if (!stack.can_use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, 1, "to plate \the [src].")
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts plating \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start plating \the [src] with \the [tool].")
+		)
+		if (!do_after(user, 1 SECOND, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (!stack.use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, 1, "to plate \the [src].")
+			return TRUE
+		var/list/singletons = GET_SINGLETON_SUBTYPE_MAP(/singleton/flooring)
+		for (var/flooring_type in singletons)
+			var/singleton/flooring/F = singletons[flooring_type]
+			if (!F.build_type)
+				continue
+			if (ispath(stack.type, F.build_type))
+				plated_tile = F
+				break
+		update_icon()
+		SetName("plated catwalk")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] plates \the [src] with \a [tool]."),
+			SPAN_NOTICE("You plate \the [src] with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/catwalk/refresh_neighbors()
 	return

@@ -8,32 +8,60 @@
 	anchored = TRUE
 	var/open = 1
 
-/obj/structure/pit/attackby(obj/item/W, mob/user)
-	if( istype(W,/obj/item/shovel) )
-		visible_message(SPAN_NOTICE("\The [user] starts [open ? "filling" : "digging open"] \the [src]"))
-		if( do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) )
-			visible_message(SPAN_NOTICE("\The [user] [open ? "fills" : "digs open"] \the [src]!"))
-			if(open)
-				close(user)
-			else
-				open()
+
+/obj/structure/pit/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Shovel - Dig or fill pit
+	if (istype(tool, /obj/item/shovel))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts [open ? "filling" : "digging open"] \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start [open ? "filling" : "digging open"] \the [src] with \the [tool].")
+		)
+		if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [open ? "fills" : "digs open"] \the [src] with \a [tool]."),
+			SPAN_NOTICE("You [open ? "fill" : "dig open"] \the [src] with \the [tool].")
+		)
+		if (open)
+			close(user)
 		else
-			to_chat(user, SPAN_NOTICE("You stop shoveling."))
-		return
-	if (!open && istype(W,/obj/item/stack/material/wood))
-		if(locate(/obj/structure/gravemarker) in src.loc)
-			to_chat(user, SPAN_NOTICE("There's already a grave marker here."))
-		else
-			visible_message(SPAN_NOTICE("\The [user] starts making a grave marker on top of \the [src]"))
-			if( do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) )
-				visible_message(SPAN_NOTICE("\The [user] finishes the grave marker"))
-				var/obj/item/stack/material/wood/plank = W
-				plank.use(1)
-				new/obj/structure/gravemarker(src.loc)
-			else
-				to_chat(user, SPAN_NOTICE("You stop making a grave marker."))
-		return
-	..()
+			open()
+		return TRUE
+
+	// Wood Material - Add grave marker
+	if (istype(tool, /obj/item/stack/material/wood))
+		if (open)
+			USE_FEEDBACK_FAILURE("\The [src] needs tobe filled before you can add a grave marker.")
+			return TRUE
+		var/obj/structure/gravemarker/grave = locate() in loc
+		if (grave)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [grave].")
+			return TRUE
+		var/obj/item/stack/material/wood/stack = tool
+		if (!stack.can_use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, 1, "to make a grave marker")
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts making a grave marker on top of \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start making a grave marker on top of \the [src] with \the [tool].")
+		)
+		if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (grave)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [grave].")
+			return TRUE
+		if (!stack.use(1))
+			return TRUE
+		var/obj/structure/gravemarker/new_grave = new(loc)
+		new_grave.add_fingerprint(user, tool = tool)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] makes a grave marker on top of \the [src] with \a [tool]."),
+			SPAN_NOTICE("You make a grave marker on top of \the [src] with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/pit/on_update_icon()
 	icon_state = "pit[open]"
@@ -157,14 +185,36 @@
 
 	message = "Here lies [nam], [born] - [died]."
 
-/obj/structure/gravemarker/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/material/hatchet))
-		visible_message(SPAN_WARNING("\The [user] starts hacking away at \the [src] with \the [W]."))
-		if(!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
-			visible_message(SPAN_WARNING("\The [user] hacks \the [src] apart."))
-			new /obj/item/stack/material/wood(src)
-			qdel(src)
-	if(istype(W,/obj/item/pen))
-		var/msg = sanitize(input(user, "What should it say?", "Grave marker", message) as text|null)
-		if(msg)
-			message = msg
+
+/obj/structure/gravemarker/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Hatchet - Remove marker
+	if (istype(tool, /obj/item/material/hatchet))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts hacking away at \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start hacking away at \the [src] with \the [tool].")
+		)
+		if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+			return TRUE
+		var/obj/item/stack/material/wood/stack = new(loc, 1)
+		transfer_fingerprints_to(stack)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] hacks \the [src] apart with \a [tool]."),
+			SPAN_NOTICE("You hack \the [src] apart with \the [tool].")
+		)
+		qdel_self()
+		return TRUE
+
+	// Pen - Label grave
+	if (istype(tool, /obj/item/pen))
+		var/input = input(user, "What should the grave say?", "[src] - Name", message) as null|text
+		input = sanitizeSafe(input, MAX_NAME_LEN)
+		if (!input || input == message || !user.use_sanity_check(src, tool))
+			return TRUE
+		message = input
+		user.visible_message(
+			SPAN_NOTICE("\The [user] labels \the [src] with \a [tool]."),
+			SPAN_NOTICE("You label \the [src] with '[message]' using \the [tool].")
+		)
+		return TRUE
+
+	return ..()

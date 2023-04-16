@@ -62,23 +62,29 @@
 	else
 		to_chat(user, SPAN_WARNING("Someone is already rummaging here!"))
 
-/obj/structure/rubble/attackby(obj/item/I, mob/user)
-	if (user.a_intent == I_HURT)
-		..()
-		return
 
-	if (istype(I, /obj/item/pickaxe))
-		var/obj/item/pickaxe/P = I
-		visible_message("[user] starts clearing away \the [src].")
-		if(do_after(user, P.digspeed, src, DO_PUBLIC_UNIQUE))
-			visible_message("[user] clears away \the [src].")
-			if(lootleft && prob(1))
-				var/obj/item/booty = pickweight(loot)
-				booty = new booty(loc)
-			qdel(src)
-		return
+/obj/structure/rubble/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Pickaxe - Clear rubble
+	if (istype(tool, /obj/item/pickaxe))
+		var/obj/item/pickaxe/pickaxe = tool
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts clearing away \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start clearing away \the [src] with \the [tool].")
+		)
+		if (!do_after(user, pickaxe.digspeed, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (lootleft && prob(1))
+			var/booty = pickweight(loot)
+			new booty(loc)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] clears away \the [src] with \a [tool]."),
+			SPAN_NOTICE("You clear away \the [src] with \the [tool].")
+		)
+		qdel_self()
+		return TRUE
 
-	..()
+	return ..()
+
 
 /obj/structure/rubble/on_death()
 	visible_message(SPAN_WARNING("\The [src] breaks apart!"))

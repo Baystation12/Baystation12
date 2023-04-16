@@ -51,18 +51,32 @@
 	desc = "Impact resistant server rack. You might be able to pry a disk out."
 	var/obj/item/stock_parts/computer/hard_drive/cluster/drive = new /obj/item/stock_parts/computer/hard_drive/cluster
 
-/obj/structure/backup_server/attackby(obj/item/W, mob/user, click_params)
-	if(isCrowbar(W))
-		if (!drive)
-			to_chat(user, SPAN_WARNING("There is nothing else to take from \the [src]."))
-			return
 
-		to_chat(user, SPAN_NOTICE("You pry out the data drive from \the [src]."))
-		playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-		drive.origin_tech = list(TECH_DATA = rand(4,5), TECH_ENGINEERING = rand(4,5), TECH_PHORON = rand(4,5), TECH_COMBAT = rand(2,5), TECH_ESOTERIC = rand(0,6))
-		var/obj/item/stock_parts/computer/hard_drive/cluster/extracted_drive = drive
-		user.put_in_hands(extracted_drive)
+/obj/structure/backup_server/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Crowbar - Remove drive
+	if (isCrowbar(tool))
+		if (!drive)
+			USE_FEEDBACK_FAILURE("\The [src] has no drive to remove.")
+			return TRUE
+		playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
+		drive.origin_tech = list(
+			TECH_DATA = rand(4, 5),
+			TECH_ENGINEERING = rand(4, 5),
+			TECH_PHORON = rand(4, 5),
+			TECH_COMBAT = rand(2, 5),
+			TECH_ESOTERIC = rand(0, 6)
+		)
+		drive.add_fingerprint(user, tool = tool)
+		user.put_in_hands(drive)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] pries a drive from \the [src] with \a [tool]."),
+			SPAN_NOTICE("You pry \a [drive] from \the [src] with \a [tool].")
+		)
 		drive = null
+		return TRUE
+
+	return ..()
+
 
 /obj/effect/landmark/map_load_mark/ejected_datapod
 	name = "random datapod contents"

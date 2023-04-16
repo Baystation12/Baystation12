@@ -249,172 +249,214 @@
 	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
 	return TRUE
 
-/obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
-	if(!istype(W)) return//I really wish I did not need this
 
-	if(W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
-
-	var/area/A = get_area(src)
-	if (!A?.can_modify_area())
-		to_chat(user, SPAN_NOTICE("There appears to be no way to dismantle \the [src]!"))
+/obj/structure/window/can_use_item(obj/item/tool, mob/user, click_params)
+	. = ..()
+	if (!.)
 		return
 
-	if (user.a_intent == I_HURT)
-		..()
-		return
+	// Unmodifiable area check
+	var/area/area = get_area(src)
+	if (!area?.can_modify_area())
+		USE_FEEDBACK_FAILURE("This area does not allow structural modifications.")
+		return FALSE
 
-	if (isScrewdriver(W))
-		if(reinf_material && construction_state >= 1)
-			construction_state = 3 - construction_state
-			update_nearby_icons()
-			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			to_chat(user, (construction_state == 1 ? SPAN_NOTICE("You have unfastened the window from the frame.") : SPAN_NOTICE("You have fastened the window to the frame.")))
-		else if(reinf_material && construction_state == 0)
-			if(!can_install_here(user))
-				return
-			set_anchored(!anchored)
-			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			to_chat(user, (anchored ? SPAN_NOTICE("You have fastened the frame to the floor.") : SPAN_NOTICE("You have unfastened the frame from the floor.")))
-		else
-			if(!can_install_here(user))
-				return
-			set_anchored(!anchored)
-			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			to_chat(user, (anchored ? SPAN_NOTICE("You have fastened the window to the floor.") : SPAN_NOTICE("You have unfastened the window.")))
-		return
 
-	if (isCrowbar(W) && reinf_material && construction_state <= 1 && anchored)
-		construction_state = 1 - construction_state
-		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
-		to_chat(user, (construction_state ? SPAN_NOTICE("You have pried the window into the frame.") : SPAN_NOTICE("You have pried the window out of the frame.")))
-		return
-
-	if (isWrench(W) && !anchored && (!construction_state || !reinf_material))
-		if(!material.stack_type)
-			to_chat(user, SPAN_NOTICE("You're not sure how to dismantle \the [src] properly."))
-		else
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-			user.visible_message(
-				SPAN_WARNING("[user] dismantles \the [src]."),
-				SPAN_NOTICE("You dismantle \the [src].")
-			)
-			dismantle()
-		return
-
-	if (isCoil(W) && is_fulltile())
+/obj/structure/window/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Cable Coil - Polarize window
+	if (isCoil(tool))
 		if (polarized)
-			to_chat(user, SPAN_WARNING("\The [src] is already polarized."))
-			return
-		var/obj/item/stack/cable_coil/C = W
-		if (C.use(1))
-			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
-			polarized = TRUE
-			to_chat(user, SPAN_NOTICE("You wire and polarize \the [src]."))
-		return
-
-	if (isWirecutter(W))
-		if (!polarized)
-			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
-			return
-		new /obj/item/stack/cable_coil(get_turf(user), 1)
-		if (opacity)
-			toggle()
-		polarized = FALSE
-		id = null
-		playsound(loc, 'sound/items/Wirecutter.ogg', 75, 1)
-		to_chat(user, SPAN_NOTICE("You cut the wiring and remove the polarization from \the [src]."))
-		return
-
-	if (isMultitool(W))
-		if (!polarized)
-			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
-			return
-		if (anchored)
-			playsound(loc, 'sound/effects/pop.ogg', 75, 1)
-			to_chat(user, SPAN_NOTICE("You toggle \the [src]'s tinting."))
-			toggle()
-		else
-			var/response = input(user, "New Window ID:", name, id) as null | text
-			if (isnull(response) || user.incapacitated() || !user.Adjacent(src) || user.get_active_hand() != W)
-				return
-			id = sanitizeSafe(response, MAX_NAME_LEN)
-			to_chat(user, SPAN_NOTICE("The new ID of \the [src] is [id]."))
-		return
-
-	if (istype(W, /obj/item/gun/energy/plasmacutter))
-		var/obj/item/gun/energy/plasmacutter/cutter = W
-		if(!cutter.slice(user))
-			return
-		playsound(src, 'sound/items/Welder.ogg', 80, 1)
+			USE_FEEDBACK_FAILURE("\The [src] is already polarized.")
+			return TRUE
+		var/obj/item/stack/cable_coil/cable = tool
+		if (!cable.use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to wire and polarize \the [src].")
+			return TRUE
+		playsound(src, 'sound/effects/sparks1.ogg', 50, TRUE)
+		polarized = TRUE
 		user.visible_message(
-			SPAN_WARNING("[user] has started slicing \the [src] apart!"),
-			SPAN_NOTICE("You start slicing \the [src] apart.")
+			SPAN_NOTICE("\The [user] wires and polarizes \the [src] with \a [tool]."),
+			SPAN_NOTICE("You wire and polarize \the [src] with \the [tool].")
 		)
-		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-			user.visible_message(
-				SPAN_WARNING("[user] slices \the [src] into sheets!"),
-				SPAN_NOTICE("You slice \the [src] into sheets.")
-			)
-			playsound(src, 'sound/items/Welder.ogg', 80, 1)
-			dismantle()
-		return
+		return TRUE
 
-	if (istype(W, /obj/item/stack/material))
+	// Crowbar - Remove reinforced window from frame
+	if (isCrowbar(tool))
+		if (!reinf_material)
+			USE_FEEDBACK_FAILURE("\The [src] doesn't have a reinforced frame to pry out.")
+			return TRUE
+		if (construction_state == 2)
+			USE_FEEDBACK_FAILURE("\The [src] needs to be unfastened from the frame before you can pry it out.")
+			return TRUE
+		if (!anchored)
+			USE_FEEDBACK_FAILURE("\The [src] isn't anchored and doesn't need to be pried.")
+			return TRUE
+		construction_state = 1 - construction_state
+		playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] pries \the [src] [construction_state ? "into" : "out of"] its frame with \a [tool]."),
+			SPAN_NOTICE("You pry \the [src] [construction_state ? "into" : "out of"] its frame with \the [tool].")
+		)
+		return TRUE
+
+	// Material Stack - Repair window
+	if (istype(tool, /obj/item/stack/material))
 		if (!health_damaged())
-			to_chat(user, SPAN_NOTICE("\The [src] does not need repair."))
-			return
-
+			USE_FEEDBACK_FAILURE("\The [src] doesn't need repairs.")
+			return TRUE
 		if ((repair_pending + get_current_health()) >= get_max_health())
-			to_chat(user, SPAN_NOTICE("\The [src] already has enough new [material] applied."))
-			return
-
-		var/obj/item/stack/material/G = W
-		if (material != G.material || reinf_material != G.reinf_material)
-			to_chat(user, SPAN_WARNING("\The [src] must be repaired with the same type of [get_material_display_name()] it was made of."))
-			return
-
-		if (!G.use(1))
-			to_chat(user, SPAN_WARNING("You need more [G] to repair \the [src]."))
-			return
-
+			USE_FEEDBACK_FAILURE("\The [src] already has enough new [material] applied.")
+			return TRUE
+		var/obj/item/stack/material/stack = tool
+		if (material != stack.material || reinf_material != stack.reinf_material)
+			USE_FEEDBACK_FAILURE("\The [src] must be repaired with the same type of [get_material_display_name()] it was made of.")
+			return TRUE
+		if (!stack.use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, 1, "to repair \the [src].")
+			return TRUE
 		repair_pending += get_repaired_per_unit()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] replaces some of \the [src]'s damaged [material]."),
-			SPAN_NOTICE("You replace some of \the [src]'s damaged [material].")
+			SPAN_NOTICE("\The [user] replaces some of \the [src]'s damaged [material] with \a [tool]."),
+			SPAN_NOTICE("You replace some of \the [src]'s damaged [material] with \a [tool].")
 		)
 		if (repair_pending < get_damage_value())
-			to_chat(user, SPAN_WARNING("It looks like it could use more sheets."))
-		return
+			user.show_message(SPAN_WARNING("It looks like it could use more sheets"), VISIBLE_MESSAGE)
+		return TRUE
 
-	if (istype(W, /obj/item/weldingtool))
+	// Multitool
+	// - Toggle tinting (Anchored)
+	// - Set ID (Unanchored)
+	if (isMultitool(tool))
+		if (!polarized)
+			USE_FEEDBACK_FAILURE("\The [src] is not wired and cannot be toggled.")
+			return TRUE
+		// Toggle Tinting
+		if (anchored)
+			toggle()
+			playsound(src, 'sound/effects/pop.ogg', 50, TRUE)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] toggles \the [src]'s tinting with \a [tool]."),
+				SPAN_NOTICE("You toggle \the [src]'s tinting with \the [tool].")
+			)
+			return TRUE
+		// Set ID
+		var/input = input(user, "What ID would you like to set this window to?", "[src] - Polarization ID", id) as null|text
+		input = sanitizeSafe(input, MAX_NAME_LEN)
+		if (!input || input == id || !user.use_sanity_check(src, tool))
+			return TRUE
+		id = input
+		user.visible_message(
+			SPAN_NOTICE("\The [user] configures \the [src] with \a [tool]."),
+			SPAN_NOTICE("You set \the [src]'s polarization ID to '[id]' with \the [tool].")
+		)
+		return TRUE
+
+	// Plasmacutter - Dismantle window
+	if (istype(tool, /obj/item/gun/energy/plasmacutter))
+		var/obj/item/gun/energy/plasmacutter/plasmacutter = tool
+		if (!plasmacutter.slice(user))
+			return TRUE
+		playsound(src, 'sound/items/Welder.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts slicing \the [src] apart with \a [tool]."),
+			SPAN_NOTICE("You start slicing \the [src] apart with \the [tool].")
+		)
+		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+			return TRUE
+		playsound(src, 'sound/items/Welder.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] slices \the [src] apart with \a [tool]."),
+			SPAN_NOTICE("You slice \the [src] apart with \the [tool].")
+		)
+		dismantle()
+		return TRUE
+
+	// Screwdriver - Fasten window
+	if (isScrewdriver(tool))
+		// Reinforced Window
+		if (reinf_material)
+			if (construction_state == 0)
+				if (!can_install_here(user))
+					return TRUE
+				set_anchored(!anchored)
+				playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+				user.visible_message(
+					SPAN_NOTICE("\The [user] fastens \the [src]'s frame to the floor with \a [tool]."),
+					SPAN_NOTICE("You fasten \the [src]'s frame to the floor with \the [tool].")
+				)
+				return TRUE
+			construction_state = 3 - construction_state
+			update_nearby_icons()
+			playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] [construction_state == 1 ? "un" : null]fastens \the [src] [construction_state == 1 ? "from" : "to"] its frame with \a [tool]."),
+				SPAN_NOTICE("You [construction_state == 1 ? "un" : null]fasten \the [src] [construction_state == 1 ? "from" : "to"] its frame with \the [tool].")
+			)
+			return TRUE
+		// Regular Windows
+		if (!anchored && !can_install_here(user))
+			return TRUE
+		set_anchored(!anchored)
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] fastens \the [src] to the floor with \a [tool]."),
+			SPAN_NOTICE("You fasten \the [src] to the floor with \the [tool].")
+		)
+		return TRUE
+
+	// Wirecutters - Remove wiring
+	if (isWirecutter(tool))
+		if (!polarized)
+			USE_FEEDBACK_FAILURE("\The [src] has no wiring to remove.")
+			return TRUE
+		if (opacity)
+			toggle()
+		new /obj/item/stack/cable_coil(user.loc, 1)
+		polarized = FALSE
+		id = null
+		playsound(src, 'sound/items/Wirecutter.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] cuts \the [src]'s wiring with \a [tool]."),
+			SPAN_NOTICE("You cut \the [src]'s wiring with \the [tool].")
+		)
+		return TRUE
+
+	// Wrench - Dismantle
+	if (isWrench(tool))
+		if (anchored || construction_state)
+			USE_FEEDBACK_FAILURE("\The [src] must be detached from the floor[reinf_material ? " and its frame" : null] before you can dismantle it.")
+			return TRUE
+		if (polarized)
+			USE_FEEDBACK_FAILURE("\The [src]'s wiring must be removed before you can dismantle it.")
+			return TRUE
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] dismantles \the [src] with \a [tool]."),
+			SPAN_NOTICE("You dismantle \the [src] with \the [tool].")
+		)
+		dismantle()
+		return TRUE
+
+	// Welding Tool - Finalize repairs
+	if (isWelder(tool))
 		if (!health_damaged())
-			to_chat(user, SPAN_NOTICE("\The [src] does not need repair."))
-			return
-
+			USE_FEEDBACK_FAILURE("\The [src] does not need repairs.")
+			return TRUE
 		if (!repair_pending)
-			to_chat(user, SPAN_WARNING("\The [src] needs some [get_material_display_name()] applied before you can weld it."))
-			return
-
-		var/obj/item/weldingtool/T = W
-		if (!T.welding)
-			to_chat(user, SPAN_WARNING("\The [T] needs to be turned on first."))
-			return
-
-		if (!T.remove_fuel(1, user))
-			return
-
+			USE_FEEDBACK_FAILURE("\The [src] needs some [get_material_display_name()] applied before you can weld it.")
+			return TRUE
+		var/obj/item/weldingtool/welder = tool
+		if (!welder.remove_fuel(1, user))
+			return TRUE
 		restore_health(repair_pending)
 		repair_pending = 0
 		user.visible_message(
-			SPAN_NOTICE("\The [user] welds \the [src]'s [material] into place."),
-			SPAN_NOTICE("You weld \the [src]'s [material] into place.")
+			SPAN_NOTICE("\The [user] welds \the [src]'s [material] into place with \a [tool]."),
+			SPAN_NOTICE("You weld \the [src]'s [material] into place with \the [tool].")
 		)
-		return
+		return TRUE
 
-	if (istype(W, /obj/item/rcd) || istype(W, /obj/item/device/paint_sprayer))
-		return
-
-	..()
+	return ..()
 
 
 /obj/structure/window/proc/dismantle()

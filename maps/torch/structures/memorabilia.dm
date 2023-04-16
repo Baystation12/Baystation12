@@ -29,22 +29,41 @@
 		pixel_z = 8
 	else pixel_z = 0
 
-/obj/structure/decorative/ed209/attackby(obj/item/O, mob/user)
-	. = ..()
-	if(isScrewdriver(O) && user.skill_check(SKILL_DEVICES, SKILL_BASIC))
-		if(!salvaged)
-			var/delay = 2 SECONDS * user.skill_delay_mult(SKILL_DEVICES)
-			user.visible_message(SPAN_NOTICE("\The [user] starts rummaging through \the [src]."), SPAN_NOTICE("You start looking for useful components in \the [src]."))
-			if(do_after(user, delay, src, DO_PUBLIC_UNIQUE) && !salvaged)
-				playsound(user.loc, 'sound/items/Crowbar.ogg', 40, 1)
-				user.visible_message(SPAN_NOTICE("\The [user] detaches some components from \the [src]."), SPAN_NOTICE("You detach some useful components from \the [src]."))
-				var/obj/item/part = pickweight(loot)
-				part = new part(loc)
-				part.forceMove(get_turf(user))
-				user.put_in_hands(part)
-				salvaged = prob(25) //Sometimes more, sometimes less
-		else
-			to_chat(user, SPAN_NOTICE("It doesn't seem like there's anything of use left on this thing."))
+
+/obj/structure/decorative/ed209/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Salvage parts
+	if (isScrewdriver(tool))
+		if (!user.skill_check(SKILL_DEVICES, SKILL_BASIC))
+			USE_FEEDBACK_FAILURE("You're not skill enough to salvage \the [src].")
+			return TRUE
+		if (salvaged)
+			USE_FEEDBACK_FAILURE("It doesn't seem like there's anything of use left on \the [src].")
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts rummaging through \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start looking for useful components \the [src] with \the [tool].")
+		)
+		if (!user.do_skilled(2 SECONDS, SKILL_DEVICES, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (!user.skill_check(SKILL_DEVICES, SKILL_BASIC))
+			USE_FEEDBACK_FAILURE("You're not skill enough to salvage \the [src].")
+			return TRUE
+		if (salvaged)
+			USE_FEEDBACK_FAILURE("It doesn't seem like there's anything of use left on \the [src].")
+			return TRUE
+		playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] detaches some components from \the [src] with \a [tool]."),
+			SPAN_NOTICE("You detach some useful components from \the [src] with \the [tool].")
+		)
+		var/obj/item/part = pickweight(loot)
+		part = new part(get_turf(user))
+		user.put_in_hands(part)
+		salvaged = prob(25) //Sometimes more, sometimes less
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/decorative/md_slug
 	name = "charred mass driver slug"
