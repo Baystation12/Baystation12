@@ -1,0 +1,27 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - balance: Harmful grab actions on structures, such as bashing people against the
+      EC plaque, now set a click cooldown.
+  - bugfix: Removing wiring from a rigged crate now gives back the used cable.
+  - rscadd: Mech wreckage now uses standardized health and damage.
+  - rscdel: AI can no longer remotely unlock a fireaxe cabinet.
+  - tweak: Using a multitool on an abandoned crate now displays the results in a popup
+      window instead of chat.
+  - tweak: Welding various structures now uses 1 unit of fuel.
+  - tweak: Slicing open lockers with energy blades now requires harm intent.
+  - tweak: Dismantling open lockers with any tool now requires harm intent. This allows
+      safely placing items into lockers that would otherwise destroy them.
+  - tweak: Dumping laundry baskest into open lockers now requires harm intent. This
+      allows placing the basket into the closet without dumping it, if desired.
+  - tweak: Clicking closed lockers with an item in hand no longer toggles the locker's
+      lock or opens it. Hand labelers rejoice.
+  - tweak: Fingerprints are now properly transferred and added when dismantling structures,
+      or performing other interactions with structures that replace them with a new
+      instance.
+  - tweak: Harmful grab actions on structures, such as bashing people against the
+      EC plaque, now require harm intent.
+  - tweak: Catwalks now block access to all under-floor objects (Wiring, pipes, etc)
+      and turfs.
+  - tweak: Grilles can now be anchored/unanchored with a wrench instead of a screwdriver.
+  - tweak: Any interaction of items with a grille now performs a shock chance.
