@@ -1,6 +1,0 @@
-author: SierraHelper
-delete-after: true
-changes:
-  - bugfix: Fixes pad not being anchored
-  - bugfix: fixed being able to move living mobs with drone (except in stasis cages,
-      can add similar exceptions as balance considerations permit it)
