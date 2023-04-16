@@ -3322,10 +3322,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/machinery/alarm/server{
-	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"));
-	pixel_x = 22;
-	dir = 8
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 25
 	},
 /turf/simulated/floor/tiled/dark,
 /area/tcommsat/chamber)
@@ -11450,8 +11449,8 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/button/windowtint{
-	pixel_x = 24;
 	id = "diplomatic_office";
+	pixel_x = 24;
 	pixel_y = 6
 	},
 /obj/machinery/light_switch{
