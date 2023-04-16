@@ -111,7 +111,7 @@
 	allowed_magazines = /obj/item/ammo_magazine/rifle
 	accuracy_power = 7
 	accuracy = 2
-	bulk = GUN_BULK_RIFLE + 1
+	bulk = GUN_BULK_HEAVY_RIFLE
 	wielded_item_state = "arifle-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
@@ -168,7 +168,7 @@
 
 /obj/item/gun/projectile/automatic/bullpup_rifle
 	name = "bullpup assault rifle"
-	desc = "The Hephaestus Industries Z8 is one of the oldest weapons currently in service with the SCGDF. Despite its age, it still remains the de-facto main rifle of the SCG Army, due to its ease of handling, cheap production costs, reliability, and plentiful surplus stock."
+	desc = "The Hephaestus Industries Z8 is one of the oldest weapons currently in service with the SCGDF. Despite its age, it still remains the de-facto rifle of the SCG Army, due to its ease of handling, cheap production costs, reliability, and plentiful surplus stock."
 	icon = 'icons/obj/guns/bullpup_rifle.dmi'
 	icon_state = "carbine"
 	item_state = "z8carbine"
@@ -242,16 +242,16 @@
 
 /obj/item/gun/projectile/automatic/bullpup_rifle/light
 	name = "light bullpup assault rifle"
-	desc = "The standard-issue rifle of the SCGDF, the Z9 Pitbull is the modern answer to violence's question. It has been given a blued finish with a Sol yellow stripe on its stock for easy identification of its owner."
+	desc = "The standard-issue rifle of the SCGDF. The Z9 Pitbull is the modern answer to violence's question. It has been given a blued finish with a Sol yellow stripe for easy identification of its owner. It's slightly more accurate than its larger cousin, the Z8."
 	icon = 'icons/obj/guns/bullpup_rifle_light.dmi'
 	item_state = "z9carbine"
 	magazine_type = /obj/item/ammo_magazine/mil_rifle/light
 	one_hand_penalty = 6 //Slightly lighter than the Z8. Still don't try it.
+	bulk = GUN_BULK_LIGHT_RIFLE
 	wielded_item_state = "z9carbine-wielded"
 	firemodes = list( //Two round bursts. More accurate than the Z8 due to less maximum dispersion. More delay between shots, however, so slower.
 		list(mode_name="semi auto",       burst=1,    fire_delay=null,    move_delay=null, use_launcher=null, one_hand_penalty=6, burst_accuracy=null, dispersion=null),
-		list(mode_name="2-round bursts", burst=2,    fire_delay=null, move_delay=6,    use_launcher=null, one_hand_penalty=7, burst_accuracy=list(0,-1), dispersion=list(0.0, 0.6)),
-		list(mode_name="fire grenades",  burst=null, fire_delay=null, move_delay=null, use_launcher=1,    one_hand_penalty=10, burst_accuracy=null, dispersion=null)
+		list(mode_name="2-round bursts", burst=2,    fire_delay=null, move_delay=6,    use_launcher=null, one_hand_penalty=7, burst_accuracy=list(0,-1), dispersion=list(0.0, 0.6))
 		)
 
 
@@ -370,7 +370,7 @@
 	one_hand_penalty = 10
 	accuracy_power = 9
 	accuracy = 1
-	bulk = GUN_BULK_RIFLE + 1
+	bulk = GUN_BULK_HEAVY_RIFLE
 	wielded_item_state = "battlerifle-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
