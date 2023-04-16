@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Mobs no longer become stuck in a certain pixel offset when buckled while
-      in a grab.
-  - tweak: Pixel adjustments for grabs now also appear for diagonal directions, and
-      reset if the grabee and grabber are on the same tile.

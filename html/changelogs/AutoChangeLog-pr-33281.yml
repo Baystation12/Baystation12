@@ -1,6 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Small packages now properly drop their contents when unwrapped.
-  - bugfix: Low walls now drop the appropriate material when dismantled.
-  - rscadd: Low walls now include their constructed material in their name.
