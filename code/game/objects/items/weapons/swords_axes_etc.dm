@@ -63,7 +63,6 @@
 	playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 	add_fingerprint(user)
 	update_icon()
-	update_held_icon()
 
 /obj/item/melee/telebaton/on_update_icon()
 	if(on)

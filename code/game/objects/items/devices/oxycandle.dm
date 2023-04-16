@@ -47,7 +47,6 @@
 		STOP_PROCESSING(SSprocessing, src)
 		on = 2
 		update_icon()
-		update_held_icon()
 		SetName("burnt oxygen candle")
 		desc += "This tube has exhausted its chemicals."
 		return
@@ -79,7 +78,6 @@
 		icon_state = "oxycandle"
 		item_state = icon_state
 		set_light(0)
-	update_held_icon()
 
 /obj/item/device/oxycandle/Destroy()
 	QDEL_NULL(air_contents)
