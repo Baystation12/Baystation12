@@ -55,6 +55,11 @@
 	var/grab_action = "grab intent"
 	var/harm_action = "harm intent"
 
+	/// Integer. The amount of pixel adjustment made on the X axis. Used to revert the shift.
+	var/adjust_x = 0
+	/// Integer. The amount of pixel adjustment made on the Y axis. Used to revert the shift.
+	var/adjust_y = 0
+
 /*
 	These procs shouldn't be overriden in the children unless you know what you're doing with them; they handle important core functions.
 	Even if you do override them, you should likely be using ..() if you want the behaviour to function properly. That is, of course,
@@ -167,6 +172,16 @@
 	admin_attack_log(G.assailant, G.affecting, "[action]s their victim", "was [action]ed", "used [action] on")
 
 
+#define GRAB_ADJUST_ANIMATE(X, Y) animate(\
+	affecting,\
+	pixel_x = G.affecting.pixel_x - adjust_x + X,\
+	pixel_y = G.affecting.pixel_y - adjust_y + Y,\
+	5, 1, LINEAR_EASING\
+);\
+adjust_x = X;\
+adjust_y = Y;
+
+
 /datum/grab/proc/adjust_position(obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
@@ -177,27 +192,32 @@
 		adir = assailant.dir
 		affecting.set_dir(assailant.dir)
 
-	switch(adir)
-		if(NORTH)
-			animate(affecting, pixel_x = 0, pixel_y =-shift, 5, 1, LINEAR_EASING)
-			G.draw_affecting_under()
-		if(SOUTH)
-			animate(affecting, pixel_x = 0, pixel_y = shift, 5, 1, LINEAR_EASING)
-			G.draw_affecting_over()
-		if(WEST)
-			animate(affecting, pixel_x = shift, pixel_y = 0, 5, 1, LINEAR_EASING)
-			G.draw_affecting_under()
-		if(EAST)
-			animate(affecting, pixel_x =-shift, pixel_y = 0, 5, 1, LINEAR_EASING)
-			G.draw_affecting_under()
+	var/x_shift = 0
+	var/y_shift = 0
+	if (HAS_FLAGS(adir, NORTH))
+		y_shift = -shift
+	if (HAS_FLAGS(adir, SOUTH))
+		y_shift = shift
+	if (HAS_FLAGS(adir, WEST))
+		x_shift = shift
+	if (HAS_FLAGS(adir, EAST))
+		x_shift = -shift
+	GRAB_ADJUST_ANIMATE(x_shift, y_shift)
 
+	G.draw_affecting_under()
 	affecting.reset_plane_and_layer()
 
 /datum/grab/proc/reset_position(obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 
-	if(!affecting.buckled)
-		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
+	animate(
+		affecting,
+		pixel_x = G.affecting.pixel_x - adjust_x,
+		pixel_y = G.affecting.pixel_y - adjust_y,
+		4, 1, LINEAR_EASING
+	)
+	adjust_x = 0
+	adjust_y = 0
 	affecting.reset_plane_and_layer()
 
 // This is called whenever the assailant moves.

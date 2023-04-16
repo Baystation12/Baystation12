@@ -279,15 +279,15 @@
 	if (buckle_pixel_shift)
 		if (M == buckled_mob)
 			animate(M, 0.5 SECONDS, TRUE, LINEAR_EASING,
-				pixel_x = M.default_pixel_x + buckle_pixel_shift[1],
-				pixel_y = M.default_pixel_y + buckle_pixel_shift[2],
-				pixel_z = M.default_pixel_z + buckle_pixel_shift[3]
+				pixel_x = M.pixel_x + buckle_pixel_shift[1],
+				pixel_y = M.pixel_y + buckle_pixel_shift[2],
+				pixel_z = M.pixel_z + buckle_pixel_shift[3]
 			)
 		else
 			animate(M, 0.5 SECONDS, TRUE, LINEAR_EASING,
-				pixel_x = M.default_pixel_x,
-				pixel_y = M.default_pixel_y,
-				pixel_z = M.default_pixel_z
+				pixel_x = M.pixel_x - buckle_pixel_shift[1],
+				pixel_y = M.pixel_y - buckle_pixel_shift[2],
+				pixel_z = M.pixel_z - buckle_pixel_shift[3]
 			)
 
 
