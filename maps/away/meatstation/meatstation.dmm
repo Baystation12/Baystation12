@@ -1508,7 +1508,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/mine,
+/obj/structure/mine,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/cargo)
 "dB" = (
@@ -5148,7 +5148,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/mine/dnascramble,
+/obj/structure/mine,
 /obj/machinery/light/small/red{
 	dir = 4
 	},
@@ -5166,7 +5166,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/mine/dnascramble,
+/obj/structure/mine,
 /obj/random/junk,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
@@ -5175,7 +5175,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/meatstation/cargo)
 "ml" = (
-/obj/effect/mine/dnascramble,
+/obj/structure/mine,
 /obj/random/trash,
 /obj/random/junk,
 /turf/simulated/floor/tiled/dark,
@@ -5188,11 +5188,11 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/mine,
+/obj/structure/mine,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "mn" = (
-/obj/effect/mine/dnascramble,
+/obj/structure/mine,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "mo" = (
@@ -5203,7 +5203,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/mine/dnascramble,
+/obj/structure/mine,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
@@ -5219,7 +5219,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/meatstation/cargo)
 "mq" = (
-/obj/effect/mine,
+/obj/structure/mine,
 /obj/machinery/light/small/red{
 	dir = 8
 	},
@@ -5460,7 +5460,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/mine/dnascramble,
+/obj/structure/mine,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "mZ" = (
@@ -6258,7 +6258,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/mine,
+/obj/structure/mine,
 /obj/item/stack/material/rods,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -6411,7 +6411,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "pQ" = (
-/obj/effect/mine/dnascramble,
+/obj/structure/mine,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
 	level = 2
@@ -7514,7 +7514,7 @@
 /turf/simulated/floor/plating,
 /area/meatstation/hydroponics)
 "sA" = (
-/obj/effect/mine,
+/obj/structure/mine,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "sB" = (
@@ -7534,7 +7534,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/mine/dnascramble,
+/obj/structure/mine,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
@@ -7550,7 +7550,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/mine/dnascramble,
+/obj/structure/mine,
 /obj/random/trash,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
@@ -7584,7 +7584,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/mine,
+/obj/structure/mine,
 /obj/random/junk,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
@@ -7619,7 +7619,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/mine,
+/obj/structure/mine,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "sK" = (
@@ -9116,14 +9116,14 @@
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/medical)
 "wc" = (
-/obj/effect/mine,
-/obj/effect/mine,
+/obj/structure/mine,
+/obj/structure/mine,
 /obj/machinery/light/small/red,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "wd" = (
-/obj/effect/mine,
-/obj/effect/mine,
+/obj/structure/mine,
+/obj/structure/mine,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/random/trash,
 /obj/random/junk,
