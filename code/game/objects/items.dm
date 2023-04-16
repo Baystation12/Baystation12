@@ -129,6 +129,23 @@
 		else if(M.r_hand == src)
 			M.update_inv_r_hand()
 
+
+/obj/item/update_icon()
+	var/prior_icon_state = icon_state
+	var/prior_item_state = item_state
+	var/prior_overlays = length(overlays)
+	. = ..()
+	if (item_state != prior_item_state || (!item_state && icon_state != prior_icon_state) || prior_overlays || length(overlays))
+		update_held_icon()
+
+
+/obj/item/set_color(color)
+	var/update_held = color != src.color
+	. = ..()
+	if (update_held)
+		update_held_icon()
+
+
 /obj/item/proc/is_held_twohanded(mob/living/M)
 
 	if(istype(loc, /obj/item/rig_module) || istype(loc, /obj/item/rig))
