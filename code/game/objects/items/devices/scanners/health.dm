@@ -308,7 +308,7 @@
 			degree = "significant"
 		if(50 to 75)
 			degree = "severe"
-		if(75 to 100)
+		if(75 to 99)
 			degree = "extreme"
 		else
 			if(can_heal_overkill)
