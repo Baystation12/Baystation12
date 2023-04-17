@@ -65,11 +65,16 @@
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet
 	utility_shoes = /obj/item/clothing/shoes/dutyboots
 	utility_hat = /obj/item/clothing/head/solgov/utility/fleet
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/fleet, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,/obj/item/clothing/head/soft/solgov/fleet)
+	utility_extra = list(
+		/obj/item/clothing/head/beret/solgov/fleet,
+		/obj/item/clothing/head/ushanka/solgov/fleet,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
+		/obj/item/clothing/head/soft/solgov/fleet
+	)
 
 	service_under = /obj/item/clothing/under/solgov/service/fleet
 	service_skirt = /obj/item/clothing/under/solgov/service/fleet/skirt
-	service_over = null
+	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet
 	service_shoes = /obj/item/clothing/shoes/dress
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/garrison
 
