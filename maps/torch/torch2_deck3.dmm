@@ -7993,9 +7993,6 @@
 /area/space)
 "rK" = (
 /obj/structure/table/marble,
-/obj/machinery/reagent_temperature/cooler{
-	pixel_y = 4
-	},
 /obj/machinery/light{
 	dir = 4
 	},
@@ -9984,9 +9981,6 @@
 /area/maintenance/thirddeck/port)
 "wh" = (
 /obj/structure/table/marble,
-/obj/machinery/reagent_temperature/cooler{
-	pixel_y = 4
-	},
 /obj/machinery/light{
 	dir = 4
 	},
