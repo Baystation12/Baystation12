@@ -84,13 +84,18 @@
 		overlays += get_screen_overlay()
 
 	overlays += get_keyboard_overlay()
+	var/screen_is_glowing = update_glow()
+	if(screen_is_glowing)
+		overlays += emissive_appearance(icon, icon_screen)
+		if(icon_keyboard)
+			overlays += emissive_appearance(icon, "[icon_keyboard]_mask")
 
 /obj/machinery/computer/proc/get_screen_overlay()
-	return overlay_image(icon,icon_screen, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+	return overlay_image(icon,icon_screen)
 
 /obj/machinery/computer/proc/get_keyboard_overlay()
 	if(icon_keyboard)
-		overlays += image(icon, icon_keyboard, overlay_layer)
+		return overlay_image(icon, icon_keyboard, overlay_layer)
 
 /obj/machinery/computer/proc/decode(text)
 	// Adds line breaks
@@ -98,22 +103,16 @@
 	return text
 
 /**
-Makes the computer emit light if the screen is on.
-Returns TRUE if the screen is on, otherwise FALSE.
-*/
+ * Makes the computer emit light if the screen is on.
+ * Returns TRUE if the screen is on, otherwise FALSE.
+ */
 /obj/machinery/computer/proc/update_glow()
-	if(operable())
+	if (operable())
 		set_light(light_max_bright_on, light_inner_range_on, light_outer_range_on, 2, light_color)
 		return TRUE
 	else
 		set_light(0)
 		return FALSE
-
-/obj/machinery/computer/update_overlays()
-	. = ..()
-	var/screen_is_glowing = update_glow()
-	if(screen_is_glowing)
-		. += emissive_appearance(icon, icon_screen)
 
 /obj/machinery/computer/dismantle(mob/user)
 	if(MACHINE_IS_BROKEN(src))

@@ -29,7 +29,7 @@
 	var/climb_speed_mult = 1
 	/// Bitflag (Any of `INIT_*`). Flags for special/additional handling of the `Initialize()` chain. See `code\__defines\misc.dm`.
 	var/init_flags = EMPTY_BITFIELD
-	/// overlays managed by update_overlays() to prevent removing overlays that weren't added by the same proc
+	/// Stores overlays managed by update_overlays() to prevent removing overlays that were not added by the same proc
 	var/list/managed_overlays
 
 /atom/New(loc, ...)
@@ -439,10 +439,10 @@
 	on_update_icon(arglist(args))
 
 	var/list/new_overlays = update_overlays()
-	if(managed_overlays)
+	if (managed_overlays)
 		overlays -= managed_overlays
 		managed_overlays = null
-	if(length(new_overlays))
+	if (length(new_overlays))
 		managed_overlays = new_overlays
 		overlays += new_overlays
 
@@ -457,7 +457,7 @@
 
 /** Updates the overlays of the atom */
 /atom/proc/update_overlays()
-	SHOULD_CALL_PARENT(1)
+	SHOULD_CALL_PARENT(TRUE)
 	. = list()
 
 /**
