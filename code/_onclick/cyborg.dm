@@ -103,8 +103,10 @@
 
 //Give cyborgs hotkey clicks without breaking existing uses of hotkey clicks
 // for non-doors/apcs
-/mob/living/silicon/robot/CtrlShiftClickOn(atom/A)
-	A.BorgCtrlShiftClick(src)
+/mob/living/silicon/robot/CtrlAltClickOn(atom/A)
+	if(A.BorgCtrlAltClick(src))
+		return
+	pointed(A)
 
 /mob/living/silicon/robot/ShiftClickOn(atom/A)
 	A.BorgShiftClick(src)
@@ -115,14 +117,14 @@
 /mob/living/silicon/robot/AltClickOn(atom/A)
 	A.BorgAltClick(src)
 
-/mob/living/silicon/robot/CtrlAltClickOn(atom/A)
-	A.BorgCtrlAltClick(src)
+/mob/living/silicon/robot/CtrlShiftClickOn(atom/A)
+	A.BorgCtrlShiftClick(src)
 
-/atom/proc/BorgCtrlShiftClick(mob/living/silicon/robot/user) //forward to human click if not overriden
-	CtrlShiftClick(user)
+/atom/proc/BorgCtrlAltClick(mob/living/silicon/robot/user) //forward to human click if not overriden
+	CtrlAltClick(user)
 
-/obj/machinery/door/airlock/BorgCtrlShiftClick()
-	AICtrlShiftClick()
+///obj/machinery/door/airlock/BorgCtrlAltClick()
+//	AICtrlAltClick()
 
 /atom/proc/BorgShiftClick(mob/living/silicon/robot/user) //forward to human click if not overriden
 	ShiftClick(user)
@@ -146,9 +148,9 @@
 	AltClick(user)
 	return
 
-/obj/machinery/door/airlock/BorgAltClick() // Eletrifies doors. Forwards to AI code.
+/obj/machinery/door/airlock/BorgCtrlShiftClick() // Eletrifies doors. Forwards to AI code.
 	if (usr.a_intent != I_HELP)
-		AICtrlAltClick()
+		AICtrlShiftClick()
 	else
 		..()
 
@@ -158,8 +160,8 @@
 /obj/machinery/atmospherics/binary/pump/BorgAltClick()
 	return AltClick()
 
-/atom/proc/BorgCtrlAltClick(mob/living/silicon/robot/user)
-	CtrlAltClick(user)
+/atom/proc/BorgCtrlShiftClick(mob/living/silicon/robot/user)
+	CtrlShiftClick(user)
 
 /*
 	As with AI, these are not used in click code,

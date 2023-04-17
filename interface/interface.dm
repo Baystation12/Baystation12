@@ -111,7 +111,7 @@
 \tCtrl + Click = drag
 \tShift + Click = examine
 \tAlt + Click = show entities on turf
-\tCtrl + Alt + Click = interact with certain items"})
+\tCtrl + Alt + Click = point"})
 
 	var/robot_hotkey_mode = SPAN_COLOR("purple", {"Hotkey-Mode: (hotkey-mode must be on)
 \tTAB = toggle hotkey-mode
@@ -156,7 +156,8 @@
 \tCtrl + Click = drag or bolt doors
 \tShift + Click = examine or open doors
 \tAlt + Click = show entities on turf
-\tCtrl + Alt + Click = electrify doors"})
+\tCtrl + Shift + Click = electrify doors
+\tCtrl + Alt + Click = point"})
 
 	if(isrobot(src.mob))
 		to_chat(src, robot_hotkey_mode)

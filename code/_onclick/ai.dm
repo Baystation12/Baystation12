@@ -101,8 +101,8 @@
 	for AI shift, ctrl, and alt clicking.
 */
 
-/mob/living/silicon/ai/CtrlAltClickOn(atom/A)
-	if(!control_disabled && A.AICtrlAltClick(src))
+/mob/living/silicon/ai/CtrlShiftClickOn(atom/A)
+	if(!control_disabled && A.AICtrlShiftClick(src))
 		return
 	..()
 
@@ -131,9 +131,9 @@
 	I have no idea why it was in atoms.dm instead of respective files.
 */
 
-/atom/proc/AICtrlAltClick()
+/atom/proc/AICtrlShiftClick()
 
-/obj/machinery/door/airlock/AICtrlAltClick() // Electrifies doors.
+/obj/machinery/door/airlock/AICtrlShiftClick() // Electrifies doors.
 	if(usr.incapacitated())
 		return
 	if(!electrified_until)
@@ -144,7 +144,7 @@
 		Topic(src, list("command"="electrify_permanently", "activate" = "0"))
 	return 1
 
-/atom/proc/AICtrlShiftClick()
+/atom/proc/AICtrlAltClick()
 	return
 
 /atom/proc/AIShiftClick()

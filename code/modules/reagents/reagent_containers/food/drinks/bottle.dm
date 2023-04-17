@@ -717,6 +717,14 @@
 	reagents.add_reagent(/datum/reagent/ethanol/beer, 30)
 
 
+/obj/item/reagent_containers/food/drinks/bottle/small/beer/fake
+
+
+/obj/item/reagent_containers/food/drinks/bottle/small/beer/fake/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/chloralhydrate/beer2, 50)
+
+
 /obj/item/reagent_containers/food/drinks/bottle/small/ale
 	name = "\improper Magm-Ale"
 	desc = "A true dorf's drink of choice."
