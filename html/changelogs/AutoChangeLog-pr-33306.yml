@@ -1,0 +1,7 @@
+author: Jux
+delete-after: true
+changes:
+  - bugfix: Fleet NCOs now have the NCO wheel cover in dress uniform, replacing the
+      junior enlisted garrison cap, instead of only their service uniform.
+  - bugfix: Engineering NCOs now have the dress beret in their dress uniform extras,
+      matching the other department NCOs.
