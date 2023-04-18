@@ -2930,7 +2930,7 @@
 	dir = 8
 	},
 /obj/structure/closet/secure_closet/medical1,
-/obj/item/reagent_containers/ivbag,
+/obj/item/storage/box/bloodpacks,
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "afQ" = (
