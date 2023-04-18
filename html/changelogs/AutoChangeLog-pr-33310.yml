@@ -1,0 +1,4 @@
+author: Fenodyree
+delete-after: true
+changes:
+  - bugfix: Reduces the amount hardsuit injectors inject to 5u
