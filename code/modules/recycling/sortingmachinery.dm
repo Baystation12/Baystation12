@@ -199,7 +199,9 @@
 		qdel_self()
 		return
 
+	user.drop_from_inventory(src)
 	user.put_in_hands(wrapped)
+	wrapped = null
 	// Take out any other items that might be in the package
 	for(var/obj/item/I in src)
 		user.put_in_hands(I)
