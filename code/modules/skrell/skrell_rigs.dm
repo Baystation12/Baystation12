@@ -221,7 +221,10 @@
 	selectable = TRUE
 
 /obj/item/rig_module/device/multitool/skrell/IsMultitool()
-	return TRUE
+	if(holder)
+		return TRUE
+	else
+		return FALSE
 
 /obj/item/rig_module/device/cable_coil/skrell
 	name = "skrellian cable extruder"
@@ -333,6 +336,6 @@
 
 /obj/item/device/multitool/skrell
 	name = "skrellian multitool"
-	name = "An extreme sophisticated microcomputer capable of interfacing with practically any system."
+	desc = "An extreme sophisticated microcomputer capable of interfacing with practically any system."
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "skrell_multitool"

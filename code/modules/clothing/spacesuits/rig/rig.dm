@@ -753,7 +753,7 @@
 
 	var/obj/item/check_slot
 	var/equip_to
-	var/obj/item/use_obj
+	var/obj/item/clothing/use_obj
 
 	if(!wearer)
 		return
@@ -796,8 +796,11 @@
 			use_obj.forceMove(wearer)
 			if(!wearer.equip_to_slot_if_possible(use_obj, equip_to, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
 				use_obj.forceMove(src)
+				if(wearer.species && use_obj.species_restricted && !(wearer.species in use_obj.species_restricted))
+					FEEDBACK_FAILURE(initiator, "You are unable to deploy \the [piece] as [use_obj.gender == PLURAL ? "they are" : "it is"] not compatible with the anatomy of your species.")
+					return
 				if(check_slot)
-					to_chat(initiator, SPAN_CLASS("danger", "You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way."))
+					FEEDBACK_FAILURE(initiator, "You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.")
 					return
 			else
 				to_chat(wearer, SPAN_NOTICE("Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly."))
