@@ -21,9 +21,9 @@
 
 
 /obj/item/stack/material/get_stack_name()
-	. = material.use_name
+	. = material.display_name
 	if (reinf_material)
-		. = "[reinf_material.use_name]-reinforced [.]"
+		. = "[reinf_material.display_name]-reinforced [.]"
 
 
 /obj/item/stack/material/Initialize(mapload, amount, _material, _reinf_material)
