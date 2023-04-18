@@ -17,7 +17,7 @@
 			active = 1
 
 /obj/machinery/acting/changer
-	name = "Quickee's Plastic Surgeon"
+	name = "\improper Quickee's Plastic Surgeon"
 	desc = "For when you need to be someone else right now."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bioprinter"
@@ -37,7 +37,7 @@
 				H.mind.name = H.name
 
 /obj/machinery/acting/changer/mirror
-	name = "Mirror of Many Faces"
+	name = "\improper Mirror of Many Faces"
 	desc = "For when you need to be someone else right now."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "mirror_broke"

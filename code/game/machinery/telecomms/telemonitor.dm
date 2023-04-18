@@ -8,7 +8,7 @@
 
 
 /obj/machinery/computer/telecomms/monitor
-	name = "Telecommunications Monitor"
+	name = "telecommunications monitor"
 	icon_screen = "comm_monitor"
 	machine_name = "telecomms monitor console"
 	machine_desc = "Tracks the traffic of a telecommunications network, and maintains information about connected machines."

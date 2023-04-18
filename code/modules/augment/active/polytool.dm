@@ -1,5 +1,5 @@
 /obj/item/organ/internal/augment/active/polytool
-	name = "Polytool embedded module"
+	name = "polytool embedded module"
 	action_button_name = "Deploy Tool"
 	icon_state = "multitool"
 	augment_slots = AUGMENT_HAND

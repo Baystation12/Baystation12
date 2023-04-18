@@ -27,7 +27,7 @@
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_ADHERENT)
 
 /obj/item/clothing/head/helmet/nt
-	name = "\improper corporate security helmet"
+	name = "corporate security helmet"
 	desc = "A helmet with 'CORPORATE SECURITY' printed on the back in red lettering."
 	icon_state = "helmet_nt"
 
@@ -156,7 +156,7 @@
 	siemens_coefficient = 1
 
 /obj/item/clothing/head/helmet/augment
-	name = "Augment Array"
+	name = "augment array"
 	desc = "A helmet with optical and cranial augments coupled to it."
 	icon_state = "v62"
 	valid_accessory_slots = null

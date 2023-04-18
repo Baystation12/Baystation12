@@ -153,14 +153,14 @@
 	worn_state = "hos_corporate"
 
 /obj/item/clothing/head/HoS
-	name = "Head of Security Hat"
+	name = "head of security's hat"
 	desc = "The hat of the Head of Security. For showing the officers who's in charge."
 	icon_state = "hoscap"
 	body_parts_covered = 0
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/head/HoS/dermal
-	name = "Dermal Armour Patch"
+	name = "dermal armour patch"
 	desc = "You're not quite sure how you manage to take it on and off, but it implants nicely in your head."
 	icon_state = "dermal"
 	armor = list(

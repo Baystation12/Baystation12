@@ -1,5 +1,5 @@
 /obj/item/clothing/glasses/hud
-	name = "HUD"
+	name = "\improper HUD"
 	desc = "A heads-up display that provides important info in (almost) real time."
 	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 2)
 	var/list/icon/current = list() //the current hud icons
@@ -89,7 +89,7 @@
 	process_sec_hud(M, 1)
 
 /obj/item/clothing/glasses/hud/security/prot
-	name = "HUD goggles"
+	name = "\improper HUD goggles"
 	desc = "A pair of goggles with a SECHUD and polarization toggle."
 	icon_state = "secgoggles"
 	off_state = "degoggles"
@@ -101,7 +101,7 @@
 	desc = "A pair of goggles with a SECHUD and polarization toggle. These ones have eyesight-correcting lenses."
 
 /obj/item/clothing/glasses/hud/security/prot/sunglasses
-	name = "HUD sunglasses"
+	name = "\improper HUD sunglasses"
 	desc = "Glasses with a SECHUD and polarization toggle."
 	icon_state = "sunhud"
 	off_state = "sunhud_off"
@@ -112,7 +112,7 @@
 	desc = "Glasses with a SECHUD and polarization toggle. These ones have eyesight-correcting lenses."
 
 /obj/item/clothing/glasses/hud/security/prot/aviators
-	name = "HUD aviators"
+	name = "\improper HUD aviators"
 	desc = "Aviators with a SECHUD and polarization toggle."
 	icon_state = "sec_avi_on"
 	off_state = "sec_avi_off"

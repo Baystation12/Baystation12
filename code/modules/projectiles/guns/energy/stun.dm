@@ -73,7 +73,7 @@
 	wielded_item_state = "stunrifle-wielded"
 
 /obj/item/gun/energy/crossbow
-	name = "mini energy-crossbow"
+	name = "mini energy crossbow"
 	desc = "A weapon favored by many mercenary stealth specialists."
 	icon = 'icons/obj/guns/energy_crossbow.dmi'
 	icon_state = "crossbow"

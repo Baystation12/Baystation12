@@ -257,7 +257,7 @@
 	info = {"An "internal use only" memo sent from the Commanding Officer to the heads of staff reminding them that bridge officers are qualified in communications and bridge operations and do not, in fact, double as naval infantry. They should not be deployed like such during minor security incidents, citing numerous reports of broken legs and feet being shot due to mishandling of weapons."}
 
 /obj/item/paper/memo/command/comm
-	name = "Zurich Common reminder"
+	name = "\improper Zurich Common reminder"
 	info = {"A memo that has seen better days. It's been crumpled up, dried in coffee and put back up by some vandals. From what's left, it reads: "Speaking good Zurich Common is a must to be an excellent head of staff. Please exercise moderation with accents.""}
 
 /obj/item/paper/memo/command/punishments
@@ -281,11 +281,11 @@
 	info = {"An "internal use only" memorandum sent from Expeditionary Command, detailing the last known locations and naval capacity of several rogue Fifth Fleet vessels, including the SFV Nathan Hale. The data available in the report is uncomfortably sparse."}
 
 /obj/item/paper/memo/command/outpostreport1
-	name = "E-14b outpost report"
+	name = "\improper E-14b outpost report"
 	info = {"An "internal use only" memo detailing the status of the research outpost in the E-14b system. It states that construction is still underway, and suggests efforts would benefit from better communication between EC and Terran engineering personnel."}
 
 /obj/item/paper/memo/command/outpostreport2
-	name = "E-14b outpost report"
+	name = "\improper E-14b outpost report"
 	info = {"An "internal use only" memo detailing the status of the research outpost in the E-14b system. It states that construction has been delayed due to a migration of native ambulatory fungus at the site, and requests that the EC begin looking into low-impact mushroom removal methods."}
 
 /obj/item/paper/memo/command/evasiveflight
@@ -595,7 +595,7 @@
 	info = {"An "internal use only", hand-written note from a brig chief warning personnel not to overuse their hand flashes in order to prevent the bulb from burning out. They further note that a burnt-out flash is useless. A third party has written on this note that burnt-out flashes should instead be brought to robotics. They even underlined it and added exclamation marks for emphasis, wow."}
 
 /obj/item/paper/memo/security/lolly
-	name = "STOP STEALING CANDY FROM MED"
+	name = "\improper STOP STEALING CANDY FROM MED"
 	info = {"Why the fuck do I have to write this to you all when the records say you're all SUPPOSEDLY legal adults? The lollipop jar in medical is for PATIENTS, not MASTERS AT ARMS. Those lollipops contain COLD MEDICINE INSTEAD OF SUGAR. STOP STEALING THEM!!! If you want candy so goddamn much GO TO A VENDING MACHINE. If I see one of you stealing candy from medical, you're being demoted to sanitation tech of maintenance for the rest of your miserable tour here. Clean up and be more professional next shift!"}
 
 /obj/item/paper/memo/security/chaplain

@@ -4,7 +4,7 @@
 	icon_keyboard = "tech_key"
 
 /obj/machinery/computer/telecomms/server
-	name = "Telecommunications Server Monitor"
+	name = "telecommunications server monitor"
 	icon_screen = "comm_logs"
 	machine_name = "telecommunications server monitor console"
 	machine_desc = "A terminal used to view and browse the logs of a telecommunications network."

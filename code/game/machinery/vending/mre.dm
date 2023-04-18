@@ -1,5 +1,5 @@
 /obj/machinery/vending/mredispenser
-	name = "mre-dispenser"
+	name = "\improper MRE dispenser"
 	desc = "A Vending machine filled with MRE's."
 	icon_state = "mrevend"
 	icon_deny = "mrevend-deny"

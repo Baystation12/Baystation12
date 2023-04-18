@@ -186,7 +186,7 @@ Buildable meters
 	qdel(src)	// remove the pipe item
 
 /obj/item/pipe/injector
-	name = "Injector"
+	name = "injector"
 	desc = "Passively injects air into its surroundings. Has a valve attached to it that can control flow rate."
 	connect_types =  CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	icon = 	'icons/atmos/injector.dmi'

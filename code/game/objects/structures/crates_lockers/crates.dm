@@ -85,7 +85,7 @@
 
 /obj/structure/closet/crate/secure
 	desc = "A secure crate."
-	name = "Secure crate"
+	name = "secure crate"
 	closet_appearance = /singleton/closet_appearance/crate/secure
 	setup = CLOSET_HAS_LOCK
 	locked = TRUE
@@ -106,7 +106,7 @@
 	desc = "A internals crate."
 
 /obj/structure/closet/crate/internals/fuel
-	name = "\improper Fuel tank crate"
+	name = "fuel tank crate"
 	desc = "A fuel tank crate."
 
 /obj/structure/closet/crate/internals/fuel/WillContain()

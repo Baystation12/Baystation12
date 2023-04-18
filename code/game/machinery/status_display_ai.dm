@@ -58,7 +58,7 @@ var/global/list/ai_status_emotions = list(
 /obj/machinery/ai_status_display
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "frame"
-	name = "AI display"
+	name = "\improper AI display"
 	anchored = TRUE
 	density = FALSE
 

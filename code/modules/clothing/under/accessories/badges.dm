@@ -216,7 +216,7 @@
 
 
 /obj/item/clothing/accessory/badge/tags/skrell
-	name = "\improper Skrellian holobadge"
+	name = "skrellian holobadge"
 	desc = "A high tech Skrellian holobadge, designed to project information about the owner."
 	icon_state = "skrell_badge"
 	badge_string = null

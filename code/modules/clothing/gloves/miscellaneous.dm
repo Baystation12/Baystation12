@@ -170,7 +170,7 @@
 		)
 
 /obj/item/clothing/gloves/fire
-	desc = "A pair of Gloves specially design for firefight and damage control."
+	desc = "A pair of gloves specially design for firefight and damage control."
 	name = "fire gloves"
 	icon_state = "fire_gloves"
 	item_state = "fire_gloves"

@@ -122,7 +122,7 @@
 	)
 
 /obj/item/storage/box/syndie_kit/cigarette
-	name = "\improper Tricky smokes"
+	name = "\improper tricky smokes"
 	desc = "Smokes so good, you'd think it was a trick!"
 	startswith = list(
 		/obj/item/flame/lighter/zippo = 1,
