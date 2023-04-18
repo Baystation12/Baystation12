@@ -12,7 +12,7 @@
 /area/map_template/sfv_arbiter)
 "aq" = (
 /obj/effect/paint/iccgn,
-/turf/simulated/wall/titanium,
+/turf/simulated/wall/r_titanium,
 /area/map_template/sfv_arbiter)
 "au" = (
 /obj/structure/extinguisher_cabinet{
@@ -166,7 +166,7 @@
 "fu" = (
 /obj/structure/sign/warning/docking_area,
 /obj/effect/paint/iccgn,
-/turf/simulated/wall/titanium,
+/turf/simulated/wall/r_titanium,
 /area/map_template/sfv_arbiter)
 "fO" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -400,7 +400,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "lE" = (
-/turf/simulated/wall/titanium,
+/turf/simulated/wall/r_titanium,
 /area/map_template/sfv_arbiter)
 "lO" = (
 /obj/machinery/portable_atmospherics/canister/oxygen{
@@ -1341,7 +1341,7 @@
 "Kt" = (
 /obj/effect/paint/black,
 /obj/structure/sign/warning/secure_area/armory,
-/turf/simulated/wall/titanium,
+/turf/simulated/wall/r_titanium,
 /area/map_template/sfv_arbiter)
 "Kz" = (
 /obj/structure/catwalk,
@@ -2021,6 +2021,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
+"Te" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/map_template/sfv_arbiter)
 "Tw" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
@@ -2587,7 +2591,7 @@
 "Zu" = (
 /obj/effect/paint/black,
 /obj/effect/paint/iccgn,
-/turf/simulated/wall/titanium,
+/turf/simulated/wall/r_titanium,
 /area/map_template/sfv_arbiter)
 "Zv" = (
 /obj/effect/floor_decal/corner/yellow{
@@ -2914,7 +2918,7 @@ TA
 Oe
 QT
 lu
-WV
+Te
 aq
 aq
 aq
@@ -2990,7 +2994,7 @@ dd
 UO
 Cc
 Jz
-WV
+Te
 Iv
 YA
 ZK
@@ -3009,8 +3013,8 @@ Mx
 Ov
 WV
 WV
-WV
-WV
+Te
+Te
 YA
 ZK
 Ac
@@ -3029,7 +3033,7 @@ HQ
 IH
 Nw
 VW
-WV
+Te
 YA
 ZK
 pd
@@ -3048,7 +3052,7 @@ lA
 aR
 cv
 oP
-WV
+Te
 yf
 df
 Ny
@@ -3067,7 +3071,7 @@ Kz
 iD
 QG
 hz
-WV
+Te
 xX
 ZK
 eQ
