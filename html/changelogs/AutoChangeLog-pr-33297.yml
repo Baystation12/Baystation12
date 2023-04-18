@@ -1,8 +1,0 @@
-author: rootoo807
-delete-after: true
-changes:
-  - tweak: Service borgs can hold smokeables (pipes/cigarettes/etc.) and other objects
-      from the Rapid Service Fabricator.
-  - tweak: Borgs can use Ctrl+Alt+Click as a shortcut to point at things. The shortcut
-      for borgs and AI to electrocute doors has been moved to Ctrl+Shift+Click (on
-      harm intent).
