@@ -3,19 +3,21 @@ NanoBaseCallbacks = function ()
 {
 	// _canClick is used to disable clicks for a short period after each click (to avoid mis-clicks)
 	var _canClick = true;
-	
+
 	var _baseBeforeUpdateCallbacks = {}
-	
+
 	var _baseAfterUpdateCallbacks = {
 		// this callback is triggered after new data is processed
-		// it updates the status/visibility icon and adds click event handling to buttons/links		
+		// it updates the status/visibility icon and adds click event handling to buttons/links
 		status: function (updateData) {
 			var uiStatusClass;
+            // rome-ignore lint/suspicious/noDoubleEquals: Needs checking - this might rely on coercion
 			if (updateData['config']['status'] == 2)
 			{
 				uiStatusClass = 'icon24 uiStatusGood';
 				$('.linkActive').removeClass('inactive');
 			}
+            // rome-ignore lint/suspicious/noDoubleEquals: Needs checking - this might rely on coercion
 			else if (updateData['config']['status'] == 1)
 			{
 				uiStatusClass = 'icon24 uiStatusAverage';
@@ -42,6 +44,7 @@ NanoBaseCallbacks = function ()
                         $('body').oneTime(300, 'enableClick', function () {
                             _canClick = true;
                         });
+                        // rome-ignore lint/suspicious/noDoubleEquals: Needs checking - this might rely on coercion
                         if (updateData['config']['status'] == 2)
                         {
                             $(this).oneTime(300, 'linkPending', function () {
@@ -117,10 +120,3 @@ NanoBaseCallbacks = function ()
         }
 	};
 } ();
- 
-
-
-
-
-
-

@@ -6,9 +6,9 @@ function NanoStateClass() {
 		alert('ERROR: Tried to create a state with an invalid state key: ' + this.key);
 		return;
 	}
-	
+
     this.key = this.key.toLowerCase();
-	
+
 	NanoStateManager.addState(this);*/
 }
 
@@ -18,7 +18,7 @@ NanoStateClass.prototype.contentRendered = false;
 NanoStateClass.prototype.mapInitialised = false;
 
 NanoStateClass.prototype.isCurrent = function () {
-    return NanoStateManager.getCurrentState() == this;
+    return NanoStateManager.getCurrentState() === this;
 };
 
 NanoStateClass.prototype.onAdd = function (previousState) {
@@ -56,7 +56,7 @@ NanoStateClass.prototype.onUpdate = function (data) {
         if (!this.contentRendered || (data['config'].hasOwnProperty('autoUpdateContent') && data['config']['autoUpdateContent']))
         {
             $("#uiContent").html(NanoTemplate.parse('main', data)); // render the 'mail' template to the #mainTemplate div
-            
+
             if (NanoTemplate.templateExists('layoutHeader'))
             {
                 $("#uiHeaderContent").html(NanoTemplate.parse('layoutHeader', data));
@@ -120,5 +120,3 @@ NanoStateClass.prototype.alertText = function (text) {
 
     alert(text);
 };
-
-

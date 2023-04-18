@@ -20,24 +20,24 @@ NanoBaseHelpers = function ()
 
 				var iconHtml = '';
 				var iconClass = 'noIcon';
-				if (typeof icon != 'undefined' && icon)
+				if (typeof icon !== 'undefined' && icon)
 				{
 					iconHtml = '<div class="uiLinkPendingIcon"></div><div class="uiIcon16 icon-' + icon + '"></div>';
 					iconClass = 'hasIcon';
 				}
 
-				if (typeof elementClass == 'undefined' || !elementClass)
+				if (typeof elementClass === 'undefined' || !elementClass)
 				{
 					elementClass = 'link';
 				}
 
 				var elementIdHtml = '';
-				if (typeof elementId != 'undefined' && elementId)
+				if (typeof elementId !== 'undefined' && elementId)
 				{
 					elementIdHtml = 'id="' + elementId + '"';
 				}
 
-				if (typeof status != 'undefined' && status)
+				if (typeof status !== 'undefined' && status)
 				{
 					return '<div unselectable="on" class="link ' + iconClass + ' ' + elementClass + ' ' + status + '" ' + elementIdHtml + '>' + iconHtml + text + '</div>';
 				}
@@ -62,11 +62,11 @@ NanoBaseHelpers = function ()
 			},
 			// Format a string (~string("Hello {0}, how are {1}?", 'Martin', 'you') becomes "Hello Martin, how are you?")
 			string: function() {
-				if (arguments.length == 0)
+				if (arguments.length === 0)
 				{
 					return '';
 				}
-				else if (arguments.length == 1)
+				else if (arguments.length === 1)
 				{
 					return arguments[0];
 				}
@@ -117,22 +117,22 @@ NanoBaseHelpers = function ()
                     }
                 }
 
-				if (typeof styleClass == 'undefined' || !styleClass)
+				if (typeof styleClass === 'undefined' || !styleClass)
 				{
 					styleClass = '';
 				}
 
-				if (typeof showText == 'undefined' || !showText)
+				if (typeof showText === 'undefined' || !showText)
 				{
 					showText = '';
 				}
-				
-				if (typeof difClass == 'undefined' || !difClass)
+
+				if (typeof difClass === 'undefined' || !difClass)
 				{
 					difClass = ''
 				}
-				
-				if(typeof direction == 'undefined' || !direction)
+
+				if(typeof direction === 'undefined' || !direction)
 				{
 					direction = 'width'
 				}
@@ -140,9 +140,9 @@ NanoBaseHelpers = function ()
 				{
 					direction = 'height'
 				}
-				
+
 				var percentage = Math.round((value - rangeMin) / (rangeMax - rangeMin) * 100);
-				
+
 				return '<div class="displayBar' + difClass + ' ' + styleClass + '"><div class="displayBar' + difClass + 'Fill ' + styleClass + '" style="' + direction + ': ' + percentage + '%;"></div><div class="displayBar' + difClass + 'Text ' + styleClass + '">' + showText + '</div></div>';
 			},
 			// Display DNA Blocks (for the DNA Modifier UI)
@@ -165,7 +165,7 @@ NanoBaseHelpers = function ()
 					}
 
 					var parameters;
-					if (paramKey.toUpperCase() == 'UI')
+					if (paramKey.toUpperCase() === 'UI')
 					{
 						parameters = { 'selectUIBlock' : block, 'selectUISubblock' : subblock };
 					}
@@ -175,7 +175,7 @@ NanoBaseHelpers = function ()
 					}
 
                     var status = 'linkActive';
-                    if (block == selectedBlock && subblock == selectedSubblock)
+                    if (block === selectedBlock && subblock === selectedSubblock)
                     {
                         status = 'selected';
                     }
@@ -183,7 +183,7 @@ NanoBaseHelpers = function ()
                     html += '<div class="link ' + status + ' dnaSubBlock" data-href="' + NanoUtility.generateHref(parameters) + '" id="dnaBlock' + index + '">' + characters[index] + '</div>'
 
                     index++;
-                    if (index % blockSize == 0 && index < characters.length)
+                    if (index % blockSize === 0 && index < characters.length)
                     {
 						block++;
                         subblock = 1;
@@ -200,7 +200,7 @@ NanoBaseHelpers = function ()
 				return html;
 			}
 		};
-		
+
 	return {
         addHelpers: function ()
 		{
@@ -214,14 +214,7 @@ NanoBaseHelpers = function ()
 				{
 					NanoTemplate.removeHelper(helperKey);
 				}
-			}            
+			}
         }
 	};
 } ();
- 
-
-
-
-
-
-
