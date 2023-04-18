@@ -1821,7 +1821,13 @@
 		src.access_news_network()
 
 	else if(href_list["ac_set_new_message"])
-		src.admincaster_feed_message.body = sanitize(input(usr, "Write your Feed story", "Network Channel Handler", ""))
+		var/unformatedText = ""
+
+		unformatedText = sanitize(input(usr, "Write your Feed story", "Network Channel Handler", null) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
+		if (!unformatedText || !usr.use_sanity_check(src))
+			return
+
+		src.admincaster_feed_message.body = digitalPencode2html(unformatedText)
 		src.access_news_network()
 
 	else if(href_list["ac_submit_new_message"])
