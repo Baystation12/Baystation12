@@ -75,7 +75,7 @@
 	return thrust_limit * generated_thrust * on
 
 /obj/item/stock_parts/circuitboard/engine/ion
-	name = T_BOARD("ion propulsion device")
+	name = "circuit board (ion propulsion device)"
 	board_type = "machine"
 	icon_state = "mcontroller"
 	build_path = /obj/machinery/ion_engine

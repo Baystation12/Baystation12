@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/tele_beacon
-	name = T_BOARD("teleporter beacon")
+	name = "circuit board (teleporter beacon)"
 	build_path = /obj/machinery/tele_beacon
 	board_type = "machine"
 	origin_tech = list(

@@ -15,7 +15,7 @@
 		U.node.build_network()
 
 /obj/item/stock_parts/circuitboard/unary_atmos/heater
-	name = T_BOARD("gas heating system")
+	name = "circuit board (gas heating system)"
 	build_path = /obj/machinery/atmospherics/unary/heater
 	origin_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 1)
 	req_components = list(
@@ -24,7 +24,7 @@
 							/obj/item/stock_parts/capacitor = 2)
 
 /obj/item/stock_parts/circuitboard/unary_atmos/cooler
-	name = T_BOARD("gas cooling system")
+	name = "circuit board (gas cooling system)"
 	build_path = /obj/machinery/atmospherics/unary/freezer
 	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
 	req_components = list(

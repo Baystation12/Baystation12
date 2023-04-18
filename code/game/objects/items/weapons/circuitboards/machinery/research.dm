@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/rdserver
-	name = T_BOARD("R&D server")
+	name = "circuit board (R&D server)"
 	build_path = /obj/machinery/r_n_d/server
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 3)
@@ -11,7 +11,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/destructive_analyzer
-	name = T_BOARD("destructive analyzer")
+	name = "circuit board (destructive analyzer)"
 	build_path = /obj/machinery/r_n_d/destructive_analyzer
 	board_type = "machine"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2, TECH_DATA = 2)
@@ -24,7 +24,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/autolathe
-	name = T_BOARD("autolathe")
+	name = "circuit board (autolathe)"
 	build_path = /obj/machinery/fabricator
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 2)
@@ -38,7 +38,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/autolathe/micro
-	name = T_BOARD("microlathe")
+	name = "circuit board (microlathe)"
 	build_path = /obj/machinery/fabricator/micro
 	origin_tech = list(TECH_ENGINEERING = 1, TECH_DATA = 1)
 	req_components = list(
@@ -46,7 +46,7 @@
 		/obj/item/stock_parts/manipulator = 1
 	)
 /obj/item/stock_parts/circuitboard/replicator
-	name = T_BOARD("replicator")
+	name = "circuit board (replicator)"
 	build_path = /obj/machinery/fabricator/replicator
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 2, TECH_BIO = 2)
@@ -60,7 +60,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/protolathe
-	name = T_BOARD("protolathe")
+	name = "circuit board (protolathe)"
 	build_path = /obj/machinery/r_n_d/protolathe
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 2)
@@ -73,7 +73,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/circuit_imprinter
-	name = T_BOARD("circuit imprinter")
+	name = "circuit board (circuit imprinter)"
 	build_path = /obj/machinery/r_n_d/circuit_imprinter
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 2)
@@ -86,7 +86,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/mechfab
-	name = T_BOARD("exosuit fabricator")
+	name = "circuit board (exosuit fabricator)"
 	build_path = /obj/machinery/robotics_fabricator
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
@@ -101,7 +101,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/ntnet_relay
-	name = T_BOARD("\improper NTNet quantum relay")
+	name = "circuit board (NTNet quantum relay)"
 	build_path = /obj/machinery/ntnet_relay
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 4)
@@ -114,7 +114,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/suspension_gen
-	name = T_BOARD("suspension generator")
+	name = "circuit board (suspension generator)"
 	build_path = /obj/machinery/suspension_gen
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_MAGNET = 4)
@@ -130,7 +130,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/anomaly_container
-	name = T_BOARD("anomaly container")
+	name = "circuit board (anomaly container)"
 	build_path = /obj/machinery/anomaly_container
 	board_type = "machine"
 	origin_tech = list(TECH_BLUESPACE = 3, TECH_ENGINEERING = 4, TECH_MAGNET = 4)
@@ -145,7 +145,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/cracker
-	name = T_BOARD("molecular cracking unit")
+	name = "circuit board (molecular cracking unit)"
 	build_path = /obj/machinery/portable_atmospherics/cracker
 	board_type = "machine"
 	origin_tech = list(TECH_MAGNET = 4, TECH_ENGINEERING = 3, TECH_MATERIAL = 3)
@@ -158,7 +158,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/doppler_array
-	name = T_BOARD("doppler array")
+	name = "circuit board (doppler array)"
 	build_path = /obj/machinery/doppler_array
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 7, TECH_MATERIAL = 4, TECH_DATA = 4, TECH_BLUESPACE = 3)

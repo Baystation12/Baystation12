@@ -15,5 +15,3 @@
 #define PROTOLATHE    FLAG(1)  //New stuff. Uses glass/metal/chemicals
 #define MECHFAB       FLAG(2)  //Mechfab
 #define CHASSIS       FLAG(3)  //For protolathe, but differently
-
-#define T_BOARD(name)	"circuit board (" + (name) + ")"

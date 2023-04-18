@@ -19,7 +19,7 @@
 	var/const/activation_frequency = 1 MINUTE
 
 /obj/item/stock_parts/circuitboard/radio_beacon
-	name = T_BOARD("transmission beacon")
+	name = "circuit board (transmission beacon)"
 	board_type = "machine"
 	icon_state = "mcontroller"
 	build_path = /obj/machinery/radio_beacon

@@ -243,7 +243,7 @@
 	heat_reduction = round(total_component_rating_of_type(/obj/item/stock_parts/manipulator) / 3)
 
 /obj/item/stock_parts/circuitboard/shipsensors
-	name = T_BOARD("broad-band sensor suite")
+	name = "circuit board (broad-band sensor suite)"
 	board_type = "machine"
 	icon_state = "mcontroller"
 	build_path = /obj/machinery/shipsensors
