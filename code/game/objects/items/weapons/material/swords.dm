@@ -6,7 +6,7 @@
 	item_state = "claymore"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_LARGE
-	force_multiplier = 0.5 // 30 when wielded with hardness 60 (steel)
+	force_multiplier = 0.25 // 15 when wielded with hardness 60 (steel)
 	armor_penetration = 10
 	thrown_force_multiplier = 0.5 // 10 when thrown with weight 20 (steel)
 	sharp = TRUE
