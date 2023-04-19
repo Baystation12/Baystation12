@@ -500,7 +500,7 @@
 		/datum/reagent/blackpepper = 1
 	)
 	required_items = list(
-		/obj/item/reagent_containers/food/snacks/cutlet
+		/obj/item/reagent_containers/food/snacks/meat
 	)
 	result_path = /obj/item/reagent_containers/food/snacks/meatsteak
 
@@ -510,7 +510,7 @@
 		/datum/reagent/nutriment/garlicsauce = 5
 	)
 	required_items = list(
-		/obj/item/reagent_containers/food/snacks/cutlet
+		/obj/item/reagent_containers/food/snacks/meat
 	)
 	required_produce = list(
 		"onion" = 1,

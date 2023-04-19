@@ -11,7 +11,7 @@
 /obj/item/reagent_containers/food/snacks/csandwich
 	name = "sandwich"
 	desc = "The best thing since sliced bread."
-	icon_state = "breadslice"
+	icon_state = "sandwich_top"
 	trash = /obj/item/trash/plate
 	bitesize = 2
 	var/list/ingredients = list()

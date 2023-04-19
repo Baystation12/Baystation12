@@ -15688,7 +15688,7 @@
 "szb" = (
 /obj/effect/floor_decal/spline/fancy/wood,
 /obj/structure/table/woodentable_reinforced/walnut,
-/obj/item/reagent_containers/food/snacks/variable/pizza,
+/obj/item/reagent_containers/food/snacks/sliceable/variable/pizza,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/carpet.dmi';
 	icon_state = "red";
