@@ -5,7 +5,7 @@ RSF
 */
 
 /obj/item/rsf
-	name = "\improper rapid service fabricator"
+	name = "rapid service fabricator"
 	desc = "A device used to rapidly deploy service items."
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "rcd"

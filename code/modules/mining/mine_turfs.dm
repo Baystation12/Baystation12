@@ -349,9 +349,6 @@ var/global/list/mining_floors = list()
 
 
 /turf/simulated/mineral/proc/artifact_debris(severity = 0)
-	//cael's patented random limited drop componentized loot system!
-	//sky's patented not-fucking-retarded overhaul!
-
 	//Give a random amount of loot from 1 to 3 or 5, varying on severity.
 	for(var/j in 1 to rand(1, 3 + max(min(severity, 1), 0) * 2))
 		switch(rand(1,7))
