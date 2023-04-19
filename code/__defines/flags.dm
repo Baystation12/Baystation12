@@ -60,8 +60,15 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define TANK_FLAG_LEAKING    FLAG(2)
 #define TANK_FLAG_WIRED      FLAG(3)
 
-
 #define OVERMAP_SECTOR_BASE              FLAG(0) // Whether or not this sector is a starting sector. Z levels contained in this sector are added to station_levels
 #define OVERMAP_SECTOR_KNOWN             FLAG(1) // Makes the sector show up on nav computers
 #define OVERMAP_SECTOR_IN_SPACE          FLAG(2) // If the sector can be accessed by drifting off the map edge
 #define OVERMAP_SECTOR_UNTARGETABLE      FLAG(3) // If the sector is untargetable by missiles.
+
+// Flags for beds/chairs
+/// The bed/chair cannot be dismantled with a wrench.
+#define BED_FLAG_CANNOT_BE_DISMANTLED FLAG(1)
+/// The bed/chair cannot be padded with material.
+#define BED_FLAG_CANNOT_BE_PADDED FLAG(2)
+/// The bed/chair cannot be made into an electric chair with a shock kit. Only applies to `/obj/structure/bed/chair` subtypes.
+#define BED_FLAG_CANNOT_BE_ELECTRIFIED FLAG(3)

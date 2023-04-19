@@ -5,7 +5,10 @@
 	layer = BELOW_OBJ_LAYER
 	w_class = ITEM_SIZE_NO_CONTAINER
 	health_max = 100
-	var/state = 0
+	var/const/GIRDER_STATE_NORMAL = 0
+	var/const/GIRDER_STATE_REINFORCEMENT_UNSECURED = 1
+	var/const/GIRDER_STATE_REINFORCED = 2
+	var/state = GIRDER_STATE_NORMAL
 	var/cover = 50 //how much cover the girder provides against projectiles.
 	var/material/reinf_material
 	var/reinforcing = 0
@@ -36,102 +39,202 @@
 	anchored = TRUE
 	cover = initial(cover)
 	revive_health()
-	state = 0
+	state = GIRDER_STATE_NORMAL
 	icon_state = initial(icon_state)
 	reinforcing = 0
 	if(reinf_material)
 		reinforce_girder()
 
-/obj/structure/girder/attackby(obj/item/W, mob/user)
-	if (user.a_intent == I_HURT)
-		..()
-		return
 
-	if(isWrench(W) && state == 0)
-		if(anchored && !reinf_material)
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-			to_chat(user, SPAN_NOTICE("Now disassembling the girder..."))
-			if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-				to_chat(user, SPAN_NOTICE("You dissasembled the girder!"))
-				dismantle()
-		else if(!anchored)
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-			to_chat(user, SPAN_NOTICE("Now securing the girder..."))
-			if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-				to_chat(user, SPAN_NOTICE("You secured the girder!"))
+/obj/structure/girder/can_anchor(obj/item/tool, mob/user, silent)
+	if (reinf_material || state != GIRDER_STATE_NORMAL)
+		if (!silent)
+			USE_FEEDBACK_FAILURE("\The [src]'s reinforcements must be removed before it can be moved.")
+		return FALSE
+
+	return ..()
+
+
+/obj/structure/girder/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Crowbar - Dislodge
+	if (isCrowbar(tool))
+		if (!can_anchor(tool, user))
+			return TRUE
+		playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts dislodging \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start dislodging \the [src] with \the [tool].")
+		)
+		if (!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (!can_anchor(tool, user))
+			return TRUE
+		icon_state = "displaced"
+		anchored = FALSE
+		set_max_health(50)
+		cover = 25
+		user.visible_message(
+			SPAN_NOTICE("\The [user] dislodges \the [src] with \a [tool]."),
+			SPAN_NOTICE("You dislodge \the [src] with \a [tool].")
+		)
+		return TRUE
+
+	// Diamond Drill, Plasmacutter, Psiblade (Paramount) - Slice girder
+	if (istype(tool, /obj/item/pickaxe/diamonddrill) || istype(tool, /obj/item/gun/energy/plasmacutter) || istype(tool, /obj/item/psychic_power/psiblade/master/grand/paramount))
+		var/obj/item/gun/energy/plasmacutter/cutter = tool
+		if (istype(cutter) && !cutter.slice(user))
+			return TRUE
+		playsound(loc, 'sound/items/Welder.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts cutting \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start cutting \the [src] with \the [tool].")
+		)
+		if (!do_after(user, (reinf_material ? 4 : 2) SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		playsound(loc, 'sound/items/Welder.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] cuts apart \the [src] with \a [tool]."),
+			SPAN_NOTICE("You cut apart \the [src] with \a [tool].")
+		)
+		if (reinf_material)
+			reinf_material.place_dismantled_product(get_turf(src))
+		dismantle()
+		return TRUE
+
+	// Material - Construct wall or reinforce
+	if (istype(tool, /obj/item/stack/material))
+		if (reinforcing && !reinf_material)
+			reinforce_with_material(tool, user)
+			return TRUE
+		construct_wall(tool, user)
+		return TRUE
+
+	// Screwdriver
+	// - Unsecure support struts
+	// - Allow reinforcement
+	if (isScrewdriver(tool))
+		switch (state)
+			if (GIRDER_STATE_NORMAL)
+				if (!anchored)
+					USE_FEEDBACK_FAILURE("\The [src] needs to be anchored before you can add reinforcements.")
+					return TRUE
+				if (reinf_material)
+					USE_FEEDBACK_FAILURE("\The [src] already has \a [reinf_material.adjective_name] reinforcement.")
+					return TRUE
+				playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+				reinforcing = !reinforcing
+				user.visible_message(
+					SPAN_NOTICE("\The [user] adjusts \the [src] with \a [tool]. It can now be [reinforcing ? "reinforced" : "constructed"]."),
+					SPAN_NOTICE("You adjust \the [src] with \the [tool]. It can now be [reinforcing ? "reinforced" : "constructed"].")
+				)
+				return TRUE
+			if (GIRDER_STATE_REINFORCEMENT_UNSECURED)
+				playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+				user.visible_message(
+					SPAN_NOTICE("\The [user] starts securing \the [src]'s support struts with \a [tool]."),
+					SPAN_NOTICE("You starts securing \the [src]'s support struts with \the [tool].")
+				)
+				if (!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+					return TRUE
+				if (state != GIRDER_STATE_REINFORCEMENT_UNSECURED)
+					USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
+					return TRUE
+				state = GIRDER_STATE_REINFORCED
+				user.visible_message(
+					SPAN_NOTICE("\The [user] secures \the [src]'s support struts with \a [tool]."),
+					SPAN_NOTICE("You secure \the [src]'s support struts with \the [tool].")
+				)
+				return TRUE
+			if (GIRDER_STATE_REINFORCED)
+				playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+				user.visible_message(
+					SPAN_NOTICE("\The [user] starts unsecuring \the [src]'s support struts with \a [tool]."),
+					SPAN_NOTICE("You starts unsecuring \the [src]'s support struts with \the [tool].")
+				)
+				if (!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+					return TRUE
+				if (state != GIRDER_STATE_REINFORCED)
+					USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
+					return TRUE
+				playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+				state = GIRDER_STATE_REINFORCEMENT_UNSECURED
+				user.visible_message(
+					SPAN_NOTICE("\The [user] unsecures \the [src]'s support struts with \a [tool]."),
+					SPAN_NOTICE("You unsecure \the [src]'s support struts with \the [tool].")
+				)
+				return TRUE
+
+	// Wirecutters - Remove reinforcement
+	if (isWirecutter(tool))
+		switch (state)
+			if (GIRDER_STATE_NORMAL)
+				USE_FEEDBACK_FAILURE("\The [src] has no reinforcements to remove.")
+				return TRUE
+			if (GIRDER_STATE_REINFORCEMENT_UNSECURED)
+				playsound(src, 'sound/items/Wirecutter.ogg', 50, TRUE)
+				user.visible_message(
+					SPAN_NOTICE("\The [user] starts removing \the [src]'s support struts with \a [tool]."),
+					SPAN_NOTICE("You start removing \the [src]'s support struts with \the [tool].")
+				)
+				if (!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+					return TRUE
+				if (state != GIRDER_STATE_REINFORCEMENT_UNSECURED)
+					USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
+					return TRUE
+				playsound(src, 'sound/items/Wirecutter.ogg', 50, TRUE)
+				if (reinf_material)
+					reinf_material.place_dismantled_product(get_turf(src))
+					reinf_material = null
 				reset_girder()
-		return
+				user.visible_message(
+					SPAN_NOTICE("\The [user] removes \the [src]'s support struts with \a [tool]."),
+					SPAN_NOTICE("You remove \the [src]'s support struts with \the [tool].")
+				)
+				return TRUE
 
-	if(istype(W, /obj/item/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
-		if(istype(W, /obj/item/gun/energy/plasmacutter))
-			var/obj/item/gun/energy/plasmacutter/cutter = W
-			if(!cutter.slice(user))
-				return
-		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
-		to_chat(user, SPAN_NOTICE("Now slicing apart the girder..."))
-		if(do_after(user, (reinf_material ? 4 : 2) SECONDS, src, DO_PUBLIC_UNIQUE))
-			to_chat(user, SPAN_NOTICE("You slice apart the girder!"))
-			if(reinf_material)
-				reinf_material.place_dismantled_product(get_turf(src))
+	// Wrench - Dismantle girder
+	if (isWrench(tool))
+		if (state != GIRDER_STATE_NORMAL)
+			USE_FEEDBACK_FAILURE("\The [src]'s reinforcements must be removed before it can be dismantled.")
+			return TRUE
+		if (anchored)
+			playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] starts dismantling \the [src] with \a [tool]."),
+				SPAN_NOTICE("You start dismantling \the [src] with \the [tool].")
+			)
+			if (!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+				return TRUE
+			if (state != GIRDER_STATE_NORMAL || !anchored)
+				USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
+				return TRUE
+			playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] dismantles \the [src] with \a [tool]."),
+				SPAN_NOTICE("You dismantle \the [src] with \the [tool].")
+			)
 			dismantle()
-		return
+			return TRUE
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts securing \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start securing \the [src] with \the [tool].")
+		)
+		if (!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (state != GIRDER_STATE_NORMAL || anchored)
+			USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
+			return TRUE
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] secures \the [src] with \a [tool]."),
+			SPAN_NOTICE("You secure \the [src] with \the [tool].")
+		)
+		reset_girder()
+		return TRUE
 
-	if(istype(W, /obj/item/pickaxe/diamonddrill))
-		playsound(src.loc, 'sound/weapons/Genhit.ogg', 100, 1)
-		if(do_after(user, (reinf_material ? 6 : 4) SECONDS, src, DO_PUBLIC_UNIQUE))
-			to_chat(user, SPAN_NOTICE("You drill through the girder!"))
-			if(reinf_material)
-				reinf_material.place_dismantled_product(get_turf(src))
-			dismantle()
-		return
+	return ..()
 
-	if(isScrewdriver(W))
-		if(state == 2)
-			playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-			to_chat(user, SPAN_NOTICE("Now unsecuring support struts..."))
-			if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-				to_chat(user, SPAN_NOTICE("You unsecured the support struts!"))
-				state = 1
-		else if(anchored && !reinf_material)
-			playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-			reinforcing = !reinforcing
-			to_chat(user, SPAN_NOTICE("\The [src] can now be [reinforcing? "reinforced" : "constructed"]!"))
-		return
-
-	if(isWirecutter(W) && state == 1)
-		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
-		to_chat(user, SPAN_NOTICE("Now removing support struts..."))
-		if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(user, SPAN_NOTICE("You removed the support struts!"))
-
-			if(reinf_material)
-				reinf_material.place_dismantled_product(get_turf(src))
-				reinf_material = null
-
-			reset_girder()
-		return
-
-	if(isCrowbar(W) && state == 0 && anchored)
-		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
-		to_chat(user, SPAN_NOTICE("Now dislodging the girder..."))
-		if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(user, SPAN_NOTICE("You dislodged the girder!"))
-			icon_state = "displaced"
-			anchored = FALSE
-			set_max_health(50)
-			cover = 25
-		return
-
-	if(istype(W, /obj/item/stack/material))
-		if(reinforcing && !reinf_material)
-			if(!reinforce_with_material(W, user))
-				return ..()
-		else
-			if(!construct_wall(W, user))
-				return ..()
-		return
-
-	..()
 
 /obj/structure/girder/proc/construct_wall(obj/item/stack/material/S, mob/user)
 	if(S.get_amount() < 2)
@@ -196,7 +299,7 @@
 /obj/structure/girder/proc/reinforce_girder()
 	cover = 75
 	set_max_health(500)
-	state = 2
+	state = GIRDER_STATE_REINFORCED
 	icon_state = "reinforced"
 	reinforcing = 0
 
@@ -219,28 +322,3 @@
 
 /obj/structure/girder/cult/dismantle()
 	qdel(src)
-
-/obj/structure/girder/cult/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-		to_chat(user, SPAN_NOTICE("Now disassembling the girder..."))
-		if(do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(user, SPAN_NOTICE("You dissasembled the girder!"))
-			dismantle()
-
-	else if(istype(W, /obj/item/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
-		if(istype(W, /obj/item/gun/energy/plasmacutter))
-			var/obj/item/gun/energy/plasmacutter/cutter = W
-			if(!cutter.slice(user))
-				return
-		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
-		to_chat(user, SPAN_NOTICE("Now slicing apart the girder..."))
-		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
-			to_chat(user, SPAN_NOTICE("You slice apart the girder!"))
-			dismantle()
-
-	else if(istype(W, /obj/item/pickaxe/diamonddrill))
-		playsound(src.loc, 'sound/weapons/Genhit.ogg', 100, 1)
-		if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
-			to_chat(user, SPAN_NOTICE("You drill through the girder!"))
-			dismantle()

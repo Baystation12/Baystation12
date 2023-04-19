@@ -25,9 +25,26 @@
 	visible_message(SPAN_NOTICE("\The [user] waves through \the [src], causing it to dissipate."))
 	deactivate(user)
 
-/obj/structure/holosign/attackby(obj/W, mob/living/user)
-	visible_message(SPAN_NOTICE("\The [user] waves \a [W] through \the [src], causing it to dissipate."))
+
+/obj/structure/holosign/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+	user.visible_message(
+		SPAN_WARNING("\The [user] swings \a [weapon] at \the [src], causing it to vanish."),
+		SPAN_WARNING("You swing \the [weapon] at \the [src], causing it to vanish.")
+	)
 	deactivate(user)
+	return TRUE
+
+
+/obj/structure/holosign/use_tool(obj/item/tool, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] waves \a [tool] at \the [src], causing it to vanish."),
+		SPAN_NOTICE("You wave \the [tool] at \the [src], causing it to vanish.")
+	)
+	deactivate(user)
+	return TRUE
+
 
 /obj/structure/holosign/proc/deactivate(mob/living/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)

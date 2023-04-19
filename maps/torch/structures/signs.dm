@@ -37,19 +37,32 @@
 		to_chat(usr, directives)
 		return TOPIC_HANDLED
 
-/obj/structure/sign/ecplaque/attackby(obj/I, mob/user)
-	if(istype(I, /obj/item/grab))
-		var/obj/item/grab/G = I
-		if(!ishuman(G.affecting))
-			return
-		G.affecting.apply_damage(5, DAMAGE_BRUTE, BP_HEAD, used_weapon="Metal Plaque")
-		visible_message(SPAN_WARNING("[G.assailant] smashes [G.assailant] into \the [src] face-first!"))
-		playsound(get_turf(src), 'sound/weapons/tablehit1.ogg', 50)
-		to_chat(G.affecting, SPAN_DANGER("[directives]"))
-		admin_attack_log(user, G.affecting, "educated victim on \the [src].", "Was educated on \the [src].", "used \a [src] to educate")
-		G.force_drop()
-	else
-		..()
+
+/obj/structure/sign/ecplaque/use_grab(obj/item/grab/grab, list/click_params)
+	if (!ishuman(grab.affecting))
+		return ..()
+
+	// Harm intent - Bash against the plaque
+	if (grab.assailant.a_intent == I_HURT)
+		grab.assailant.setClickCooldown(grab.assailant.get_attack_speed(grab))
+		grab.affecting.apply_damage(5, DAMAGE_BRUTE, BP_HEAD, used_weapon = src)
+		grab.assailant.visible_message(
+			SPAN_WARNING("\The [grab.assailant] smashes \the [grab.affecting] into \the [src] face-first!"),
+			SPAN_DANGER("You smash \the [grab.affecting] into \the [src] face-first!"),
+			exclude_mobs = list(grab.affecting)
+		)
+		grab.affecting.show_message(
+			SPAN_DANGER("\The [grab.assailant] smashes you into \the [src] face-first!"),
+			VISIBLE_MESSAGE,
+			SPAN_DANGER("You feel your face being smashed into something!")
+		)
+		playsound(src, 'sound/weapons/tablehit1.ogg', 50, TRUE)
+		grab.force_drop()
+		admin_attack_log(grab.assailant, grab.affecting, "educated victim on \the [src].", "Was educated on \the [src].", "used \a [src] to educate")
+		return TRUE
+
+	return ..()
+
 
 /obj/effect/floor_decal/scglogo
 	alpha = 230
@@ -84,14 +97,32 @@
 	pixel_y = -16
 	unacidable = TRUE
 	var/list/fallen = list()
+	var/list/accepted_branches = list(
+		"Expeditionary Corps",
+		"Fleet"
+	)
 
-/obj/structure/sign/memorial/attackby(obj/D, mob/user)
-	if(istype(D, /obj/item/clothing/accessory/badge/solgov/tags))
-		var/obj/item/clothing/accessory/badge/solgov/tags/T = D
-		if(T.owner_branch in list("Expeditionary Corps", "Fleet"))
-			to_chat(user, SPAN_WARNING("You add \the [T.owner_name]'s \the [T] to \the [src]."))
-			fallen += "[T.owner_rank] [T.owner_name] | [T.owner_branch]"
-			qdel(T)
+
+/obj/structure/sign/memorial/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Dog Tags - Add dog tag
+	if (istype(tool, /obj/item/clothing/accessory/badge/solgov/tags))
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		var/obj/item/clothing/accessory/badge/solgov/tags/dog_tags = tool
+		if (!(dog_tags.owner_branch in accepted_branches))
+			USE_FEEDBACK_FAILURE("\The [src] only accepts dog tags from the [english_list(accepted_branches, and_text = " or ")] branches.")
+			return TRUE
+		fallen += "[dog_tags.owner_rank] [dog_tags.owner_name] | [dog_tags.owner_branch]"
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adds \a [tool] to \the [src]."),
+			SPAN_NOTICE("You add \the [dog_tags.owner_name]'s [tool.name] to \the [src].")
+		)
+		qdel(dog_tags)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/sign/memorial/examine(mob/user, distance)
 	. = ..()

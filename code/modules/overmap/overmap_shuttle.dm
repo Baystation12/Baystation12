@@ -143,23 +143,40 @@
 	else
 		icon_state = icon_closed
 
-/obj/structure/fuel_port/attackby(obj/item/W as obj, mob/user as mob)
-	if(isCrowbar(W))
-		if(opened)
-			to_chat(user, "<spawn class='notice'>You tightly shut \the [src] door.")
-			playsound(src.loc, 'sound/effects/locker_close.ogg', 25, 0, -3)
-			opened = 0
-		else
-			to_chat(user, "<spawn class='notice'>You open up \the [src] door.")
-			playsound(src.loc, 'sound/effects/locker_open.ogg', 15, 1, -3)
-			opened = 1
-	else if(istype(W,/obj/item/tank))
-		if(!opened)
-			to_chat(user, "<spawn class='warning'>\The [src] door is still closed!")
-			return
-		if(length(contents) == 0)
-			user.unEquip(W, src)
-	update_icon()
+
+/obj/structure/fuel_port/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Crowbar - Toggle open
+	if (isCrowbar(tool))
+		opened = !opened
+		playsound(src, opened ? 'sound/effects/locker_open.ogg' : 'sound/effects/locker_close.ogg', 50, TRUE)
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [opened ? "opens" : "closes"] \the [src] with \a [tool]."),
+			SPAN_NOTICE("You [opened ? "open" : "close"] \the [src] with \the [tool].")
+		)
+		return TRUE
+
+	// Tank - Insert tank
+	if (istype(tool, /obj/item/tank))
+		if (!opened)
+			USE_FEEDBACK_FAILURE("\The [src] needs to be opened before you can insert \the [tool].")
+			return TRUE
+		var/obj/item/tank/tank = locate() in src
+		if (tank)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [tank] installed.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] inserts \a [tool] in \the [src]."),
+			SPAN_NOTICE("You insert \the [tool] in \the [src].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/fuel_port/attack_robot(mob/user)
 	if (Adjacent(user))

@@ -185,16 +185,6 @@
 	density = TRUE
 	anchored = TRUE
 
-/obj/structure/deity/attackby(obj/item/W as obj, mob/user as mob)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.do_attack_animation(src)
-	playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 50, 1)
-	user.visible_message(
-		SPAN_DANGER("[user] hits \the [src] with \the [W]!"),
-		SPAN_DANGER("You hit \the [src] with \the [W]!"),
-		SPAN_DANGER("You hear something breaking!")
-		)
-	damage_health(W.force, W.damtype)
 
 /obj/structure/deity/on_death()
 	visible_message(SPAN_DANGER("\The [src] crumbles!"))

@@ -60,45 +60,50 @@
 	active_power_usage = 1500
 	field_type = /obj/structure/atmospheric_retention_field/impassable
 
-/obj/machinery/atmospheric_field_generator/attackby(obj/item/W as obj, mob/user as mob)
-	if(isCrowbar(W) && isactive)
-		if(!src) return
-		to_chat(user, "<span class='warning'>You can't open the ARF-G whilst it's running!</span>")
-		return
-	if(isCrowbar(W) && !isactive)
-		if(!src) return
-		to_chat(user, "<span class='notice'>You [hatch_open? "close" : "open"] \the [src]'s access hatch.</span>")
+
+/obj/machinery/atmospheric_field_generator/use_tool(obj/item/tool, mob/user, list/click_params)
+	if(isCrowbar(tool) && isactive)
+		USE_FEEDBACK_FAILURE("You can't open the ARF-G whilst it's running!")
+		return TRUE
+
+	if(isCrowbar(tool) && !isactive)
+		to_chat(user, SPAN_NOTICE("You [hatch_open? "close" : "open"] \the [src]'s access hatch."))
 		hatch_open = !hatch_open
 		update_icon()
 		if(alwaysactive && wires_intact)
 			generate_field()
-		return
-	if(hatch_open && isMultitool(W))
-		if(!src) return
-		to_chat(user, "<span class='notice'>You toggle \the [src]'s activation behavior to [alwaysactive? "emergency" : "always-on"].</span>")
+		return TRUE
+
+	if(hatch_open && isMultitool(tool))
+		to_chat(user, SPAN_NOTICE("You toggle \the [src]'s activation behavior to [alwaysactive? "emergency" : "always-on"]."))
 		alwaysactive = !alwaysactive
 		update_icon()
-		return
-	if(hatch_open && isWirecutter(W))
-		if(!src) return
-		to_chat(user, "<span class='warning'>You [wires_intact? "cut" : "mend"] \the [src]'s wires!</span>")
+		return TRUE
+
+	if(hatch_open && isWirecutter(tool))
+		to_chat(user, SPAN_WARNING("You [wires_intact? "cut" : "mend"] \the [src]'s wires!"))
 		wires_intact = !wires_intact
 		update_icon()
-		return
-	if(hatch_open && istype(W,/obj/item/weldingtool))
-		if(!src) return
-		var/obj/item/weldingtool/WT = W
-		if(!WT.isOn()) return
-		if(WT.get_fuel() < 5) // uses up 5 fuel.
-			to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
-			return
+		return TRUE
+
+	if(hatch_open && (isWelder(tool)))
+		var/obj/item/weldingtool/welder = tool
+		if (!welder.remove_fuel(5, user))
+			to_chat(user, SPAN_WARNING("You need more fuel to complete this task."))
+			return TRUE // uses up 5 fuel.
+
 		user.visible_message("[user] starts to disassemble \the [src].", "You start to disassemble \the [src].")
 		playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
+
 		if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			if(!src || !user || !WT.remove_fuel(5, user)) return
-			to_chat(user, "<span class='notice'>You fully disassemble \the [src]. There were no salvageable parts.</span>")
-			qdel(src)
-		return
+			if(!src || !user || !welder.remove_fuel(5, user))
+				return TRUE
+
+			to_chat(user, SPAN_NOTICE("You fully disassemble \the [src]. There were no salvageable parts."))
+			qdel_self()
+			return TRUE
+
+	return ..()
 
 /obj/machinery/atmospheric_field_generator/perma/Initialize()
 	. = ..()

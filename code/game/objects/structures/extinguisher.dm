@@ -12,19 +12,28 @@
 	..()
 	has_extinguisher = new/obj/item/extinguisher(src)
 
-/obj/structure/extinguisher_cabinet/attackby(obj/item/O, mob/user)
-	if(isrobot(user))
-		return
-	if(istype(O, /obj/item/extinguisher))
-		if(!has_extinguisher && opened && user.unEquip(O, src))
-			has_extinguisher = O
-			to_chat(user, SPAN_NOTICE("You place [O] in [src]."))
-			playsound(src.loc, 'sound/effects/extin.ogg', 50, 0)
-		else
-			opened = !opened
-	else
-		opened = !opened
-	update_icon()
+
+/obj/structure/extinguisher_cabinet/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Extinguisher - Put in cabinet
+	if (istype(tool, /obj/item/extinguisher))
+		if (!opened)
+			USE_FEEDBACK_FAILURE("\The [src] is closed.")
+			return TRUE
+		if (has_extinguisher)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [has_extinguisher].")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		has_extinguisher = tool
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] places \a [tool] in \the [src]."),
+			SPAN_NOTICE("You place \the [tool] in \the [src].")
+		)
+		return TRUE
+
+	return ..()
 
 
 /obj/structure/extinguisher_cabinet/attack_hand(mob/user)

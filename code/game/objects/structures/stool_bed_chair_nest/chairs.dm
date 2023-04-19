@@ -15,22 +15,36 @@
 		rotate(user)
 	return TRUE
 
-/obj/structure/bed/chair/attackby(obj/item/W as obj, mob/user as mob)
-	..()
-	if(!padding_material && istype(W, /obj/item/assembly/shock_kit))
-		var/obj/item/assembly/shock_kit/SK = W
-		if(!SK.status)
-			to_chat(user, SPAN_NOTICE("\The [SK] is not ready to be attached!"))
-			return
-		if(!user.unEquip(SK))
-			return
-		var/obj/structure/bed/chair/e_chair/E = new (src.loc, material.name)
-		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		E.set_dir(dir)
-		E.part = SK
-		SK.forceMove(E)
-		SK.master = E
-		qdel(src)
+
+/obj/structure/bed/chair/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Shock Kit - Attach shock kit
+	if (istype(tool, /obj/item/assembly/shock_kit))
+		if (padding_material)
+			USE_FEEDBACK_FAILURE("\The [src]'s [padding_material.display_name] must be removed before you can attach \the [tool].")
+			return TRUE
+		if (!user.unEquip(tool))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		var/obj/item/assembly/shock_kit/shock_kit = tool
+		if (!shock_kit.status)
+			USE_FEEDBACK_FAILURE("\The [tool] is not ready to be attached to \the [src].")
+			return TRUE
+		var/obj/structure/bed/chair/e_chair/electric_chair = new (loc, material.name)
+		playsound(src, 'sound/items/Deconstruct.ogg', 50, TRUE)
+		electric_chair.set_dir(dir)
+		electric_chair.part = shock_kit
+		shock_kit.forceMove(electric_chair)
+		shock_kit.master = electric_chair
+		transfer_fingerprints_to(electric_chair)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] attaches \a [tool] to \the [src], creating \a [electric_chair]."),
+			SPAN_NOTICE("You attach \the [tool] to \the [src], creating \a [electric_chair].")
+		)
+		qdel_self()
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/bed/chair/post_buckle_mob()
 	update_icon()
@@ -336,11 +350,7 @@
 	color = WOOD_COLOR_GENERIC
 	var/chair_material = MATERIAL_WOOD
 	buckle_movable = FALSE
-
-/obj/structure/bed/chair/wood/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack) || istype(W, /obj/item/wirecutters))
-		return
-	..()
+	bed_flags = BED_FLAG_CANNOT_BE_PADDED
 
 /obj/structure/bed/chair/wood/New(newloc)
 	..(newloc, chair_material)

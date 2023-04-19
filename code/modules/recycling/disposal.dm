@@ -635,39 +635,49 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	sleep(20)	//wait until correct animation frame
 	playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
 
-/obj/structure/disposaloutlet/attackby(obj/item/I, mob/user)
-	if(!I || !user)
-		return
-	src.add_fingerprint(user, 0, I)
-	if(isScrewdriver(I))
-		if(mode==0)
-			mode=1
-			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			to_chat(user, "You remove the screws around the power connection.")
-			return
-		else if(mode==1)
-			mode=0
-			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			to_chat(user, "You attach the screws around the power connection.")
-			return
-	else if(istype(I,/obj/item/weldingtool) && mode==1)
-		var/obj/item/weldingtool/W = I
-		if(W.remove_fuel(0,user))
-			playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-			to_chat(user, "You start slicing the floorweld off the disposal outlet.")
-			if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
-				if(!src || !W.isOn()) return
-				to_chat(user, "You sliced the floorweld off the disposal outlet.")
-				var/obj/structure/disposalconstruct/machine/outlet/C = new (loc, src)
-				src.transfer_fingerprints_to(C)
-				C.anchored = TRUE
-				C.set_density(1)
-				C.update()
-				qdel(src)
-				return
-		else
-			to_chat(user, "You need more welding fuel to complete this task.")
-			return
+
+/obj/structure/disposaloutlet/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Toggle mode/power
+	if (isScrewdriver(tool))
+		mode = !mode
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [mode ? "removes" : "attaches"] the screws around \the [src]'s power connection with \a [tool]."),
+			SPAN_NOTICE("You [mode ? "remove" : "attach"] the screws around \the [src]'s power connection with \the [tool].")
+		)
+		return TRUE
+
+	// Welding Tool - Detach from floor
+	if (isWelder(tool))
+		if (!mode)
+			USE_FEEDBACK_FAILURE("\The [src]'s power connection needs to be disconnected before you can remove \the [src] from the floor.")
+			return TRUE
+		var/obj/item/weldingtool/welder = tool
+		if (!welder.can_use(1, user, "to slice \the [src]'s floorweld."))
+			return TRUE
+		playsound(src, 'sound/items/Welder2.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts slicing \the [src]'s floorweld with \a [tool]."),
+			SPAN_NOTICE("You start slicing \the [src]'s floorweld with \the [tool]."),
+			SPAN_ITALIC("You hear the sound of welding.")
+		)
+		if (!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool) || !welder.remove_fuel(1, user))
+			return TRUE
+		playsound(src, 'sound/items/Welder2.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] slices \the [src]'s floorweld with \a [tool]."),
+			SPAN_NOTICE("You start slices \the [src]'s floorweld with \the [tool].")
+		)
+		var/obj/structure/disposalconstruct/machine/outlet/outlet = new(loc, src)
+		transfer_fingerprints_to(outlet)
+		outlet.anchored = TRUE
+		outlet.set_density(TRUE)
+		outlet.update()
+		qdel_self()
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/disposaloutlet/forceMove()//updates this when shuttle moves. So you can YEET things out the airlock
 	. = ..()

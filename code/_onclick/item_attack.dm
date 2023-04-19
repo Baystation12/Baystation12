@@ -125,11 +125,50 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (!.)
 		return
 
-	// Block interacting with things under platings - In case of t-ray shennanigans or layering glitches
-	var/turf/T = get_turf(src)
-	if (hides_under_flooring() && !T.is_plating())
-		USE_FEEDBACK_FAILURE("You must remove the plating before you can interact with \the [src].")
+	if (hides_under_flooring())
+		// Block interacting with things under platings - In case of t-ray shennanigans or layering glitches
+		var/turf/turf = get_turf(src)
+		if (!turf.is_plating())
+			USE_FEEDBACK_FAILURE("You must remove the plating before you can interact with \the [src].")
+			return FALSE
+
+		// Catwalks
+		var/obj/structure/catwalk/catwalk = locate() in get_turf(src)
+		if (catwalk)
+			if (catwalk.plated_tile && !catwalk.hatch_open)
+				USE_FEEDBACK_FAILURE("\The [catwalk]'s hatch needs to be opened before you can access \the [src].")
+				return FALSE
+			else if (!catwalk.plated_tile)
+				USE_FEEDBACK_FAILURE("\The [catwalk] is blocking access to \the [src].")
+				return FALSE
+
+
+/turf/can_use_item(obj/item/tool, mob/user, click_params)
+	. = ..()
+	if (!.)
+		return
+
+	// Unmodifiable area check
+	var/area/area = get_area(src)
+	if (!area?.can_modify_area())
+		USE_FEEDBACK_FAILURE("This area does not allow structural modifications.")
 		return FALSE
+
+
+/turf/can_use_item(obj/item/tool, mob/user, click_params)
+	. = ..()
+	if (!.)
+		return
+
+	// Catwalks
+	var/obj/structure/catwalk/catwalk = locate() in src
+	if (catwalk)
+		if (catwalk.plated_tile && !catwalk.hatch_open)
+			USE_FEEDBACK_FAILURE("\The [catwalk]'s hatch needs to be opened before you can access \the [src].")
+			return FALSE
+		else if (!catwalk.plated_tile)
+			USE_FEEDBACK_FAILURE("\The [catwalk] is blocking access to \the [src].")
+			return FALSE
 
 
 /**

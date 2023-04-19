@@ -11,7 +11,7 @@
 	var/shattered
 	var/obj/item/material/twohanded/fireaxe/fireaxe
 
-/obj/structure/fireaxecabinet/attack_generic(mob/user, damage, attack_verb, wallbreaker)
+/obj/structure/fireaxecabinet/attack_generic(mob/user, damage, attack_verb = "hits", wallbreaker = FALSE, damtype = DAMAGE_BRUTE, armorcheck = "melee", dam_flags = EMPTY_BITFIELD)
 	attack_animation(user)
 	playsound(user, 'sound/effects/Glasshit.ogg', 50, 1)
 	visible_message(SPAN_DANGER("[user] [attack_verb] \the [src]!"))
@@ -39,9 +39,6 @@
 	..()
 	fireaxe = new(src)
 	update_icon()
-
-/obj/structure/fireaxecabinet/attack_ai(mob/user)
-	toggle_lock(user)
 
 /obj/structure/fireaxecabinet/attack_hand(mob/user)
 	if(!unlocked)
@@ -75,29 +72,63 @@
 		fireaxe = null
 	return ..()
 
-/obj/structure/fireaxecabinet/attackby(obj/item/O, mob/user)
 
-	if(isMultitool(O))
-		toggle_lock(user)
-		return
-
-	if(istype(O, /obj/item/material/twohanded/fireaxe))
-		if(open)
-			if(fireaxe)
-				to_chat(user, SPAN_WARNING("There is already \a [fireaxe] inside \the [src]."))
-			else if(user.unEquip(O))
-				O.forceMove(src)
-				fireaxe = O
-				to_chat(user, SPAN_NOTICE("You place \the [fireaxe] into \the [src]."))
-				update_icon()
-			return
-
-	if(O.force)
-		user.setClickCooldown(10)
-		attack_generic(user, O.force, "bashes")
-		return
+/obj/structure/fireaxecabinet/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Snowflake damage handler - TODO: Replace with standardized damage
+	if (weapon.force > 0 && !HAS_FLAGS(weapon.item_flags, ITEM_FLAG_NO_BLUDGEON))
+		user.setClickCooldown(user.get_attack_speed(weapon))
+		user.do_attack_animation(src)
+		attack_generic(user, weapon.force, pick(weapon.attack_verb), damtype = weapon.damtype, dam_flags = weapon.damage_flags())
+		return TRUE
 
 	return ..()
+
+
+/obj/structure/fireaxecabinet/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Fireaxe - Place inside
+	if (istype(tool, /obj/item/material/twohanded/fireaxe))
+		if (!open)
+			USE_FEEDBACK_FAILURE("\The [src] is closed.")
+			return TRUE
+		if (fireaxe)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [fireaxe] inside.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		fireaxe = tool
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] places \a [tool] into \the [src]."),
+			SPAN_NOTICE("You place \the [tool] into \the [src].")
+		)
+		return TRUE
+
+	// Multitool - Toggle manual lock
+	if (isMultitool(tool))
+		if (open)
+			USE_FEEDBACK_FAILURE("\The [src] must be closed before you can lock it.")
+			return TRUE
+		if (shattered)
+			USE_FEEDBACK_FAILURE("\The [src] is shattered and the lock doesn't function.")
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] begins toggling \the [src]'s maglock with \a [tool]."),
+			SPAN_NOTICE("You begin [unlocked ? "locking" : "unlocking"] \the [src]'s maglock with \the [tool].")
+		)
+		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+			return TRUE
+		playsound(src, 'sound/machines/lockreset.ogg', 50, TRUE)
+		unlocked = !unlocked
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [unlocked ? "unlocks" : "locks"] \the [src]'s maglock with \a [tool]."),
+			SPAN_NOTICE("You [unlocked ? "unlock" : "lock"] \the [src]'s maglock with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/fireaxecabinet/proc/toggle_open(mob/user)
 	if(shattered)
@@ -107,28 +138,4 @@
 		user.setClickCooldown(10)
 		open = !open
 		to_chat(user, SPAN_NOTICE("You [open ? "open" : "close"] \the [src]."))
-	update_icon()
-
-/obj/structure/fireaxecabinet/proc/toggle_lock(mob/user)
-
-
-	if(open)
-		return
-
-	if(shattered)
-		open = 1
-		unlocked = 1
-	else
-		user.setClickCooldown(10)
-		to_chat(user, SPAN_NOTICE("You begin [unlocked ? "enabling" : "disabling"] \the [src]'s maglock."))
-
-		if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-			return
-
-		if(shattered) return
-
-		unlocked = !unlocked
-		playsound(user, 'sound/machines/lockreset.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("You [unlocked ? "disable" : "enable"] the maglock."))
-
 	update_icon()

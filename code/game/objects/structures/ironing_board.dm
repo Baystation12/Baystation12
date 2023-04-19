@@ -124,94 +124,138 @@
 		to_chat(user, "\A [clothing] is spread out across it.")
 
 
-/obj/structure/ironing_board/attackby(obj/item/item, mob/living/user)
-	. = TRUE
-	if (istype(item, /obj/item/clothing))
+/obj/structure/ironing_board/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Iron - Iron mob
+	if (istype(weapon, /obj/item/ironing_iron) && buckled_mob)
+		var/obj/item/ironing_iron/iron = weapon
+		var/zone = user.zone_sel.selecting
+		if (!iron.iron_enabled)
+			weapon.attack(buckled_mob, user, zone, TRUE)
+			return TRUE
+		var/mob/living/carbon/human/human
+		var/obj/item/organ/external/organ
+		if (ishuman(buckled_mob))
+			human = buckled_mob
+			organ = human.get_organ(zone)
+			if (!organ)
+				USE_FEEDBACK_FAILURE("\The [buckled_mob] has no [parse_zone(zone)] to iron.")
+				return TRUE
+		user.visible_message(
+			SPAN_WARNING("\The [user] starts ironing \the [buckled_mob][human ? "'s [parse_zone(zone)]" : null] with \a [weapon]!"),
+			SPAN_DANGER("You start ironing \the [buckled_mob][human ? "'s [parse_zone(zone)]" : null] with \a [weapon]!"),
+			exclude_mobs = list(buckled_mob)
+		)
+		buckled_mob.show_message(
+			SPAN_DANGER("\The [user] starts ironing you[human ? "r [parse_zone(zone)]" : null] with \a [weapon]!"),
+			VISIBLE_MESSAGE,
+			SPAN_DANGER("You feel a hot, searing pain[human ? " in your [parse_zone(zone)]" : null]!")
+		)
+		var/sound_token = GLOB.sound_player.PlayLoopingSound(src, "\ref[src]", 'sound/effects/iron_sizzle.ogg', 80)
+		for (var/i = 1 to 5)
+			if (!do_after(user, 1 SECOND, buckled_mob, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, weapon))
+				break
+			if (organ)
+				organ.take_external_damage(0, rand(3, 5), used_weapon = "Hot metal")
+			else
+				buckled_mob.take_overall_damage(0, rand(3, 5), "Hot metal")
+		qdel(sound_token)
+		return TRUE
+
+	return ..()
+
+
+/obj/structure/ironing_board/use_grab(obj/item/grab/grab, list/click_params)
+	// Put victim on board
+	if (deployed)
+		if (buckled_mob)
+			USE_FEEDBACK_GRAB_FAILURE("\The [src] already has \the [buckled_mob] on it.")
+		else if (clothing)
+			USE_FEEDBACK_GRAB_FAILURE("\The [src] already has \a [clothing] on it.")
+		else
+			USE_FEEDBACK_GRAB_FAILURE("\The [src] is already deployed.")
+		return TRUE
+	if (!can_buckle(grab.affecting, grab.assailant))
+		return TRUE
+	grab.assailant.visible_message(
+		SPAN_NOTICE("\The [grab.assailant] starts buckling \the [grab.affecting] to \the [src]!"),
+		SPAN_NOTICE("You start buckling \the [grab.affecting] to \the [src]!"),
+		exclude_mobs = list(grab.affecting)
+	)
+	grab.affecting.show_message(
+		SPAN_NOTICE("\The [grab.assailant] starts buckling you to \the [src]!")
+	)
+	if (!do_after(grab.assailant, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || QDELETED(grab) || !grab.assailant.use_sanity_check(src, grab.affecting))
+		return TRUE
+	if (!user_buckle_mob(grab.affecting, grab.assailant))
+		return TRUE
+	qdel_self()
+	return TRUE
+
+
+/obj/structure/ironing_board/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Clothing - Add to board
+	if (istype(tool, /obj/item/clothing))
 		if (deployed)
 			if (buckled_mob)
-				to_chat(user, SPAN_WARNING("\The [src] already has \the [buckled_mob] on it."))
-			if (clothing)
-				to_chat(user, SPAN_WARNING("\The [src] already has \a [clothing] on it."))
-			return
-		if (!user.unEquip(item, src))
-			return
-		clothing = item
+				USE_FEEDBACK_FAILURE("\The [src] already has \the [buckled_mob] on it.")
+			else if (clothing)
+				USE_FEEDBACK_FAILURE("\The [src] already has \a [clothing] on it.")
+			else
+				USE_FEEDBACK_FAILURE("\The [src] is already deployed.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		clothing = tool
 		deployed = TRUE
 		update_icon()
-		return
-	if (istype(item, /obj/item/ironing_iron))
-		var/obj/item/ironing_iron/active_iron = item
-		if (clothing)
-			user.visible_message(
-				SPAN_ITALIC("\The [user] starts ironing \a [clothing]."),
-				SPAN_ITALIC("You start ironing \the [clothing]."),
-				range = 5
-			)
-			if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
-				return
-			if (!active_iron.iron_enabled)
-				to_chat(user, SPAN_WARNING("Whoops. The iron was not turned on."))
-				return
-			clothing.ironed_state = WRINKLES_NONE
-			return
-		if (buckled_mob)
-			if (user.a_intent != I_HURT)
-				to_chat(user, SPAN_WARNING("You refrain from touching \the [active_iron] to \the [buckled_mob]."))
-				return
-			var/zone = user.zone_sel.selecting
-			if (!active_iron.iron_enabled)
-				active_iron.attack(buckled_mob, user, zone, TRUE)
-				return
-			var/mob/living/carbon/human/human
-			var/obj/item/organ/external/organ
-			if (ishuman(buckled_mob))
-				human = buckled_mob
-				organ = human.get_organ(zone)
-				if (!organ)
-					to_chat(user, SPAN_WARNING("\The [buckled_mob] has no [parse_zone(zone)] to iron."))
-					return
-			var/message = "ironing \the [buckled_mob][human ? "'s [parse_zone(zone)]" : ""]!"
-			user.visible_message(
-				SPAN_DANGER("\The [user] starts [message]"),
-				SPAN_DANGER("You start [message]")
-			)
-			var/sound_token = GLOB.sound_player.PlayLoopingSound(src, "\ref[src]", 'sound/effects/iron_sizzle.ogg', 80)
-			for (var/i = 1 to 5)
-				if (!do_after(user, 1 SECOND, buckled_mob, DO_PUBLIC_UNIQUE))
-					break
-				if (organ)
-					organ.take_external_damage(0, rand(3, 5), used_weapon = "Hot metal")
-				else
-					buckled_mob.take_overall_damage(0, rand(3, 5), "Hot metal")
-			qdel(sound_token)
-			return
-		if (iron)
-			to_chat(user, SPAN_WARNING("\The [src] already has \a [iron] on it."))
-			return
-		if (!user.unEquip(item, src))
-			return
-		iron = item
-		update_icon()
-		return
-	if (istype(item, /obj/item/grab))
-		if (buckled_mob)
-			to_chat(user, SPAN_WARNING("\The [src] is occupied. Remove \the [buckled_mob] first."))
-			return
-		if (clothing)
-			to_chat(user, SPAN_WARNING("\The [src] is occupied. Remove \the [clothing] first."))
-			return
-		var/obj/item/grab/grab = item
 		user.visible_message(
-			SPAN_ITALIC("\The [user] starts buckling \the [grab.affecting] to \a [src]."),
-			SPAN_ITALIC("You start buckling \the [grab.affecting] to \the [src]."),
-			range = 5
+			SPAN_NOTICE("\The [user] puts \a [tool] on \the [src]."),
+			SPAN_NOTICE("You put \the [tool] on \the [src].")
 		)
-		if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
-			return
-		if (QDELETED(grab) || !user_buckle_mob(grab.affecting, user))
-			return
-		qdel(grab)
-		return
+		return TRUE
+
+	// Iron - Iron contents or add iron
+	if (istype(tool, /obj/item/ironing_iron))
+		var/obj/item/ironing_iron/iron = tool
+		// Clothing
+		if (clothing)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] starts ironing \a [clothing] on \the [src] with \a [tool]."),
+				SPAN_NOTICE("You start ironing \the [clothing] on \the [src] with \the [tool].")
+			)
+			if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+				return TRUE
+			if (!iron.iron_enabled)
+				USE_FEEDBACK_FAILURE("\The [src] wasn't turned on!")
+				return TRUE
+			clothing.ironed_state = WRINKLES_NONE
+			user.visible_message(
+				SPAN_NOTICE("\The [user] irons \a [clothing] on \the [src] with \a [tool]."),
+				SPAN_NOTICE("You iron \the [clothing] on \the [src] with \the [tool].")
+			)
+			return TRUE
+
+		// Mob - Feedback hint, this only works on harm.
+		if (buckled_mob)
+			USE_FEEDBACK_FAILURE("You refrain from ironing \the [buckled_mob].")
+			return TRUE
+
+		// Add Iron
+		if (iron)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [iron] on it.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		iron = tool
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] puts \a [tool] on \the [src]."),
+			SPAN_NOTICE("You put \a [tool] on \the [src].")
+		)
+		return TRUE
+
 	return ..()
 
 

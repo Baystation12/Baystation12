@@ -85,45 +85,71 @@
 /obj/structure/noticeboard/on_update_icon()
 	icon_state = "[base_icon_state][LAZYLEN(notices)]"
 
-/obj/structure/noticeboard/attackby(obj/item/thing, mob/user)
-	if(isScrewdriver(thing))
+
+/obj/structure/noticeboard/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Paper, Photo - Attach
+	if (is_type_in_list(tool, list(/obj/item/paper, /obj/item/photo)))
+		if (jobban_isbanned(user, "Graffitiy"))
+			USE_FEEDBACK_FAILURE("You are banned from leaving persistent information across rounds.")
+			return TRUE
+		if (LAZYLEN(notices) >= max_notices)
+			USE_FEEDBACK_FAILURE("\The [src] is already full of notices. There's no room for \the [tool].")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(tool, user)
+			return TRUE
+		add_paper(tool)
+		SSpersistence.track_value(tool, /datum/persistent/paper)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] pins \a [tool] to \the [src]."),
+			SPAN_NOTICE("You pin \the [tool] to \the [src].")
+		)
+		return TRUE
+
+	// Screwdriver - Set board direction
+	if (isScrewdriver(tool))
 		var/choice = input("Which direction do you wish to place the noticeboard?", "Noticeboard Offset") as null|anything in list("North", "South", "East", "West")
-		if(choice && Adjacent(user) && thing.loc == user && !user.incapacitated())
-			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			switch(choice)
-				if("North")
-					pixel_x = 0
-					pixel_y = 32
-				if("South")
-					pixel_x = 0
-					pixel_y = -32
-				if("East")
-					pixel_x = 32
-					pixel_y = 0
-				if("West")
-					pixel_x = -32
-					pixel_y = 0
-		return
-	else if(isWrench(thing))
-		visible_message(SPAN_WARNING("\The [user] begins dismantling \the [src]."))
-		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			visible_message(SPAN_DANGER("\The [user] has dismantled \the [src]!"))
-			dismantle()
-		return
-	else if(istype(thing, /obj/item/paper) || istype(thing, /obj/item/photo))
-		if(jobban_isbanned(user, "Graffiti"))
-			to_chat(user, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
-		else
-			if(LAZYLEN(notices) < max_notices && user.unEquip(thing, src))
-				add_fingerprint(user)
-				add_paper(thing)
-				to_chat(user, SPAN_NOTICE("You pin \the [thing] to \the [src]."))
-				SSpersistence.track_value(thing, /datum/persistent/paper)
-			else
-				to_chat(user, SPAN_WARNING("You hesitate, certain \the [thing] will not be seen among the many others already attached to \the [src]."))
-		return
-	..()
+		if (!choice || !user.use_sanity_check(src, tool))
+			return TRUE
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+		switch(choice)
+			if("North")
+				pixel_x = 0
+				pixel_y = 32
+			if("South")
+				pixel_x = 0
+				pixel_y = -32
+			if("East")
+				pixel_x = 32
+				pixel_y = 0
+			if("West")
+				pixel_x = -32
+				pixel_y = 0
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adjusts \the [src]'s positioning with \a [tool]."),
+			SPAN_NOTICE("You set \the [src]'s positioning to [choice] with \the [tool].")
+		)
+		return TRUE
+
+	// Wrench - Dismantle board
+	if (isWrench(tool))
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts dismantling \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start dismantling \the [src] with \a [tool].")
+		)
+		if (!do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] dismantles \the [src] with \a [tool]."),
+			SPAN_NOTICE("You dismantle \the [src] with \a [tool].")
+		)
+		dismantle()
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/noticeboard/attack_ai(mob/user)
 	examine(user)

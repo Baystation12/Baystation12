@@ -90,108 +90,141 @@
 		T.update_icon()
 	. = ..()
 
-/obj/structure/table/attackby(obj/item/W, mob/user, click_params)
-	if(!reinforced && !carpeted && material && isWrench(W) && (user.a_intent != I_HELP || issilicon(user))) //robots dont have disarm so it's harm
-		remove_material(W, user)
-		if(!material)
-			update_connections(1)
-			update_icon()
-			for(var/obj/structure/table/T in oview(src, 1))
-				T.update_icon()
-			update_desc()
-			update_material()
-		return 1
 
-	if(!carpeted && !reinforced && !material && isWrench(W) && (user.a_intent != I_HELP || issilicon(user)))
-		dismantle(W, user)
-		return 1
-
-	if (user.a_intent == I_HURT)
-		..()
-		return
-
-	if(reinforced && isScrewdriver(W))
-		remove_reinforced(W, user)
-		if(!reinforced)
-			update_desc()
-			update_icon()
-			update_material()
-		return 1
-
-	if(carpeted && isCrowbar(W))
-		user.visible_message(SPAN_NOTICE("\The [user] removes the carpet from \the [src]."),
-		                              SPAN_NOTICE("You remove the carpet from \the [src]."))
-		new /obj/item/stack/tile/carpet(loc)
-		carpeted = 0
+/obj/structure/table/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	// Carpet - Add carpeting
+	if (istype(weapon, /obj/item/stack/tile/carpet))
+		if (carpeted)
+			USE_FEEDBACK_FAILURE("\The [src] is already carpeted.")
+			return TRUE
+		if (!material)
+			USE_FEEDBACK_FAILURE("\The [src] needs plating before you can carpet it.")
+			return TRUE
+		var/obj/item/stack/tile/carpet/carpet = weapon
+		if (!carpet.use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(carpet, 1, "to pad \the [src].")
+			return TRUE
+		carpeted = TRUE
 		update_icon()
-		return 1
+		user.visible_message(
+			SPAN_NOTICE("\The [user] pads \the [src] with \a [weapon]."),
+			SPAN_NOTICE("You pad \the [src] with \the [weapon].")
+		)
+		return TRUE
 
-	if(!carpeted && material && istype(W, /obj/item/stack/tile/carpet))
-		var/obj/item/stack/tile/carpet/C = W
-		if(C.use(1))
-			user.visible_message(SPAN_NOTICE("\The [user] adds \the [C] to \the [src]."),
-			                              SPAN_NOTICE("You add \the [C] to \the [src]."))
-			carpeted = 1
-			update_icon()
-			return 1
-		else
-			to_chat(user, SPAN_WARNING("You don't have enough carpet!"))
-		return
+	// Crowbar - Remove carpeting
+	if (isCrowbar(weapon))
+		if (!carpeted)
+			USE_FEEDBACK_FAILURE("\The [src] has no carpeting to remove.")
+			return TRUE
+		new /obj/item/stack/tile/carpet(loc)
+		carpeted = FALSE
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes the carpting from \the [src] with \a [weapon]."),
+			SPAN_NOTICE("You remove the carpting from \the [src] with \the [weapon].")
+		)
+		return TRUE
 
-	if(health_damaged() && isWelder(W))
-		var/obj/item/weldingtool/F = W
-		if(F.welding)
-			to_chat(user, SPAN_NOTICE("You begin reparing damage to \the [src]."))
-			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-			if(!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) || !F.remove_fuel(1, user))
-				return
-			user.visible_message(SPAN_NOTICE("\The [user] repairs some damage to \the [src]."),
-			                              SPAN_NOTICE("You repair some damage to \the [src]."))
-			restore_health(get_max_health() / 5) // 20% repair per application
-			return 1
-		return
+	// Energy Blade, Psiblade
+	if (istype(weapon, /obj/item/melee/energy/blade) || istype(weapon, /obj/item/psychic_power/psiblade/master/grand/paramount))
+		var/datum/effect/effect/system/spark_spread/spark_system = new(src)
+		spark_system.set_up(5, EMPTY_BITFIELD, loc)
+		spark_system.start()
+		playsound(loc, 'sound/weapons/blade1.ogg', 50, TRUE)
+		playsound(loc, "sparks", 50, TRUE)
+		user.visible_message(
+			SPAN_WARNING("\The [user] slices \the [src] apart with \a [weapon]."),
+			SPAN_WARNING("You slice \the [src] apart with \the [weapon].")
+		)
+		break_to_parts()
+		return TRUE
 
-	if(!material && can_plate && istype(W, /obj/item/stack/material))
-		material = common_material_add(W, user, "plat")
-		if(material)
-			update_connections(1)
+	// Material - Plate table
+	if (istype(weapon, /obj/item/stack/material))
+		if (material)
+			USE_FEEDBACK_FAILURE("\The [src] is already plated.")
+			return TRUE
+		material = common_material_add(weapon, user, "plat")
+		if (material)
+			update_connections(TRUE)
 			update_icon()
 			update_desc()
 			update_material()
-		return 1
+		return TRUE
 
-	// Handle dismantling or placing things on the table from here on.
-	if(isrobot(user))
-		return
+	// Welding Tool - Repair damage
+	if (isWelder(weapon))
+		if (!health_damaged())
+			USE_FEEDBACK_FAILURE("\The [src] isn't damaged.")
+			return TRUE
+		var/obj/item/weldingtool/welder = weapon
+		if (!welder.can_use(1, user, "to repair \the [src]"))
+			return TRUE
+		playsound(src, 'sound/items/Welder.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts repairing \the [src] with \a [weapon]."),
+			SPAN_NOTICE("You start repairing \the [src] with \the [weapon].")
+		)
+		if (!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, weapon) || !welder.remove_fuel(1))
+			return TRUE
+		playsound(src, 'sound/items/Welder.ogg', 50, TRUE)
+		restore_health(get_max_health() / 5) // 20% repair per application
+		user.visible_message(
+			SPAN_NOTICE("\The [user] repairs some of \the [src]'s damage with \a [weapon]."),
+			SPAN_NOTICE("You repair some of \the [src]'s damage with \the [weapon].")
+		)
+		return TRUE
 
-	if(W.loc != user) // This should stop mounted modules ending up outside the module.
-		return
+	// Wrench - Remove material
+	if (isWrench(weapon))
+		if (!material)
+			USE_FEEDBACK_FAILURE("\The [src] has no plating to remove.")
+			return TRUE
+		if (reinforced)
+			USE_FEEDBACK_FAILURE("\The [src]'s reinforcements need to be removed before you can remove the plating.")
+			return TRUE
+		if (carpeted)
+			USE_FEEDBACK_FAILURE("\The [src]'s carpeting needs to be removed before you can remove the plating.")
+			return TRUE
+		remove_material(weapon, user)
+		if (!material)
+			update_connections(TRUE)
+			update_icon()
+			for (var/obj/structure/table/table in oview(src, 1))
+				table.update_icon()
+			update_desc()
+			update_material()
+		return TRUE
 
-	if(istype(W, /obj/item/melee/energy/blade) || istype(W,/obj/item/psychic_power/psiblade/master/grand/paramount))
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-		spark_system.set_up(5, 0, src.loc)
-		spark_system.start()
-		playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
-		playsound(src.loc, "sparks", 50, 1)
-		user.visible_message(SPAN_DANGER("\The [src] was sliced apart by [user]!"))
-		break_to_parts()
-		return
-
-	if (istype(W, /obj/item/natural_weapon))
-		return ..()
-
-	if(can_plate && !material)
-		to_chat(user, SPAN_WARNING("There's nothing to put \the [W] on! Try adding plating to \the [src] first."))
-		return
-
-	// Placing stuff on tables
-	if(user.unEquip(W, src.loc))
-		if (W.drop_sound)
-			playsound(W.loc, W.drop_sound, 25)
-		auto_align(W, click_params)
-		return 1
+	// Screwdriver - Remove reinforcement
+	if (isScrewdriver(weapon))
+		if (!reinforced)
+			USE_FEEDBACK_FAILURE("\The [src] has no reinforcements to remove.")
+			return TRUE
+		remove_reinforced(weapon, user)
+		if (!reinforced)
+			update_desc()
+			update_icon()
+			update_material()
+		return TRUE
 
 	return ..()
+
+
+/obj/structure/table/use_tool(obj/item/tool, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+
+	// Put things on table
+	if (can_plate && !material)
+		USE_FEEDBACK_FAILURE("\The [src] needs to be plated before you can put \the [tool] on it.")
+		return TRUE
+	if (!user.unEquip(tool, loc))
+		FEEDBACK_UNEQUIP_FAILURE(user, tool)
+		return TRUE
+	auto_align(tool, click_params)
+	return TRUE
+
 
 /obj/structure/table/MouseDrop_T(obj/item/stack/material/what)
 	if(can_reinforce && isliving(usr) && (!usr.stat) && istype(what) && usr.get_active_hand() == what && Adjacent(usr))

@@ -94,29 +94,32 @@
 		return ..()
 
 
-/obj/structure/roller_bed/attackby(obj/item/item, mob/living/user)
-	. = TRUE
-	if (istype(item, /obj/item/reagent_containers/ivbag))
+/obj/structure/roller_bed/use_grab(obj/item/grab/grab, list/click_params)
+	// Buckle victim
+	if (!AttemptBuckle(grab.affecting, grab.assailant))
+		return TRUE
+	qdel(grab)
+	return TRUE
+
+
+/obj/structure/roller_bed/use_tool(obj/item/tool, mob/user, list/click_params)
+	// IV Bag - Attach bag
+	if (istype(tool, /obj/item/reagent_containers/ivbag))
 		if (iv_bag)
-			to_chat(user, SPAN_WARNING("\The [src] already has \a [iv_bag] attached."))
-			return
-		if (!user.unEquip(item, src))
-			return
-		user.visible_message(
-			SPAN_ITALIC("\The [user] hangs \a [item] from \a [src]."),
-			SPAN_ITALIC("You hang \the [item] from \the [src]."),
-			range = 5
-		)
-		iv_bag = item
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [iv_bag] attached")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		iv_bag = tool
 		last_reagent_color = iv_bag.reagents.get_color()
 		update_icon()
-		return
-	if (istype(item, /obj/item/grab))
-		var/obj/item/grab/grab = item
-		if (!AttemptBuckle(grab.affecting, user))
-			return
-		qdel(grab)
-		return
+		user.visible_message(
+			SPAN_NOTICE("\The [user] hangs \a [tool] from \the [src]."),
+			SPAN_NOTICE("You hang \the [tool] from \the [src]."),
+		)
+		return TRUE
+
 	return ..()
 
 

@@ -51,21 +51,36 @@
 	else
 		soundloop.stop()
 
-/obj/structure/hygiene/shower/attackby(obj/item/I as obj, mob/user)
-	if(istype(I, /obj/item/device/scanner/gas))
-		to_chat(user, SPAN_NOTICE("The water temperature seems to be [watertemp]."))
-		return
+/obj/structure/hygiene/shower/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Gas Scanner - Fetch temperature
+	if (istype(tool, /obj/item/device/scanner/gas))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] scans \the [src] with \a [tool]."),
+			SPAN_NOTICE("You scan \the [src] with \the [tool]. The water temperature seems to be [watertemp].")
+		)
+		return TRUE
 
-	if(isWrench(I))
-		var/newtemp = input(user, "What setting would you like to set the temperature valve to?", "Water Temperature Valve") in temperature_settings
-		to_chat(user,SPAN_NOTICE("You begin to adjust the temperature valve with \the [I]."))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			watertemp = newtemp
-			user.visible_message(SPAN_NOTICE("\The [user] adjusts \the [src] with \the [I]."), SPAN_NOTICE("You adjust the shower with \the [I]."))
-			add_fingerprint(user)
-			return
-	. = ..()
+	// Wrench - Set temperature
+	if (isWrench(tool))
+		var/input = input(user, "What setting would you like to set the temperature valve to?", "[name] Water Temperature Valve") as null|anything in temperature_settings
+		if (!input || !user.use_sanity_check(src, tool))
+			return TRUE
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts adjusting \the [src]'s temperature with \a [tool]."),
+			SPAN_NOTICE("You start adjusting \the [src]'s temperature with \the [tool].")
+		)
+		if (!do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		watertemp = input
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adjusts \the [src]'s temperature with \a [tool]."),
+			SPAN_NOTICE("You set \the [src]'s temperature to [watertemp] with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
 
 /obj/structure/hygiene/shower/on_update_icon()
 	cut_overlays()

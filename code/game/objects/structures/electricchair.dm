@@ -6,21 +6,33 @@
 	var/obj/item/assembly/shock_kit/part = null
 	var/last_time = 1.0
 	buckle_movable = FALSE
+	bed_flags = BED_FLAG_CANNOT_BE_ELECTRIFIED | BED_FLAG_CANNOT_BE_PADDED
 
 /obj/structure/bed/chair/e_chair/New()
 	..()
 	overlays += image('icons/obj/objects.dmi', src, "echair_over", MOB_LAYER + 1, dir)
 	return
 
-/obj/structure/bed/chair/e_chair/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W))
-		var/obj/structure/bed/chair/C = new /obj/structure/bed/chair(loc)
-		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-		C.set_dir(dir)
+
+/obj/structure/bed/chair/e_chair/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Wrench - Dismantle electric chair
+	if (isWrench(tool))
+		var/obj/structure/bed/chair/chair = new /obj/structure/bed/chair(loc)
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		chair.set_dir(dir)
 		part.dropInto(loc)
 		part.master = null
+		transfer_fingerprints_to(chair)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \the [part] from \the [chair] with \a [tool]."),
+			SPAN_NOTICE("You remove \the [part] from \the [chair] with \the [tool].")
+		)
 		part = null
-		qdel(src)
+		qdel_self()
+		return TRUE
+
+	return ..()
+
 
 /obj/structure/bed/chair/e_chair/verb/toggle()
 	set name = "Toggle Electric Chair"

@@ -154,20 +154,28 @@
 	return ..()
 
 
-/obj/structure/inflatable/attackby(obj/item/W, mob/user)
-	if(!istype(W) || istype(W, /obj/item/inflatable_dispenser)) return
-
-	if(istype(W, /obj/item/tape_roll) && get_damage_value() >= 3)
-		if(taped)
-			to_chat(user, SPAN_NOTICE("\The [src] can't be patched any more with \the [W]!"))
+/obj/structure/inflatable/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Duct tape - Repair damage
+	if (istype(tool, /obj/item/tape_roll))
+		if (!health_damaged())
+			USE_FEEDBACK_FAILURE("\The [src] doesn't need repair.")
 			return TRUE
-		else
-			taped = TRUE
-			to_chat(user, SPAN_NOTICE("You patch some damage in \the [src] with \the [W]!"))
-			restore_health(3)
+		if (get_damage_value() < 3)
+			USE_FEEDBACK_FAILURE("\The [src] isn't damaged enough to tape it back together.")
 			return TRUE
+		if (taped)
+			USE_FEEDBACK_FAILURE("\The [src] has already been taped up. There's nothing more you can do for it with \the [tool].")
+			return TRUE
+		taped = TRUE
+		restore_health(3)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] patches some of \the [src]'s damage with \a [tool]."),
+			SPAN_NOTICE("You patch some of \the [src]'s damage with \the [tool].")
+		)
+		return TRUE
 
-	..()
+	return ..()
+
 
 /obj/structure/inflatable/on_death()
 	deflate(TRUE)
