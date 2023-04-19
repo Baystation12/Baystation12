@@ -134,6 +134,8 @@
 		return
 	if(damage < 0.1*max_damage)
 		heal_damage(0.1)
+		if(stored_mmi.brainobj)
+			stored_mmi.brainobj.heal_damage(0.1)
 
 /obj/item/organ/internal/mmi_holder/proc/update_from_mmi()
 
@@ -183,3 +185,13 @@
 			if(response == "Yes")
 				persistantMind.transfer_to(stored_mmi.brainmob)
 	qdel(src)
+
+/obj/item/organ/internal/mmi_holder/take_internal_damage(amount, silent=FALSE)
+	..()
+	if(stored_mmi.brainobj)
+		stored_mmi.brainobj.take_internal_damage(amount)
+
+/obj/item/organ/internal/mmi_holder/die()
+	..()
+	if(stored_mmi.brainobj)
+		stored_mmi.brainobj.die()
