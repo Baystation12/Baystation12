@@ -97,25 +97,29 @@
 	var/impatience = 5 //we lose this much from relax_chance each time we calm down
 	var/icon_set = "parrot"
 
+	var/list/spawn_headset_options = list(
+		/obj/item/device/radio/headset/headset_sec,
+		/obj/item/device/radio/headset/headset_eng,
+		/obj/item/device/radio/headset/headset_med,
+		/obj/item/device/radio/headset/headset_sci,
+		/obj/item/device/radio/headset/headset_cargo
+	)
+
 	ai_holder = /datum/ai_holder/simple_animal/retaliate/parrot
 
 
-/mob/living/simple_animal/hostile/retaliate/parrot/New()
-	..()
-	if(!ears)
-		var/headset = pick(/obj/item/device/radio/headset/headset_sec, \
-						/obj/item/device/radio/headset/headset_eng, \
-						/obj/item/device/radio/headset/headset_med, \
-						/obj/item/device/radio/headset/headset_sci, \
-						/obj/item/device/radio/headset/headset_cargo)
+/mob/living/simple_animal/hostile/retaliate/parrot/Initialize(mapload)
+	. = ..()
+	if (!ears && length(spawn_headset_options))
+		var/headset = pick(spawn_headset_options)
 		ears = new headset(src)
 
 	parrot_sleep_dur = parrot_sleep_max //In case someone decides to change the max without changing the duration var
 
-	verbs.Add(/mob/living/simple_animal/hostile/retaliate/parrot/proc/steal_from_ground, \
-			  /mob/living/simple_animal/hostile/retaliate/parrot/proc/steal_from_mob, \
-			  /mob/living/simple_animal/hostile/retaliate/parrot/verb/drop_held_item_player, \
-			  /mob/living/simple_animal/hostile/retaliate/parrot/proc/perch_player)
+	verbs += /mob/living/simple_animal/hostile/retaliate/parrot/proc/steal_from_ground
+	verbs += /mob/living/simple_animal/hostile/retaliate/parrot/proc/steal_from_mob
+	verbs += /mob/living/simple_animal/hostile/retaliate/parrot/verb/drop_held_item_player
+	verbs += /mob/living/simple_animal/hostile/retaliate/parrot/proc/perch_player
 
 	update_icon()
 
@@ -702,11 +706,8 @@
 /mob/living/simple_animal/hostile/retaliate/parrot/Poly
 	name = "Poly"
 	desc = "Poly the Parrot. An expert on quantum cracker theory."
+	spawn_headset_options = list(/obj/item/device/radio/headset/headset_eng)
 
-/mob/living/simple_animal/hostile/retaliate/parrot/Poly/New()
-	ears = new /obj/item/device/radio/headset/headset_eng(src)
-	available_channels = list(":e")
-	..()
 
 /mob/living/simple_animal/hostile/retaliate/parrot/say(message)
 

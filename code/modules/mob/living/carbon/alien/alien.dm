@@ -10,13 +10,13 @@
 	var/death_msg = "lets out a waning guttural screech, green blood bubbling from its maw."
 	var/instance_num
 
-/mob/living/carbon/alien/New()
 
+/mob/living/carbon/alien/Initialize()
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
 	instance_num = rand(1, 1000)
-	name = "[initial(name)] ([instance_num])"
+	SetName("[initial(name)] ([instance_num])")
 	real_name = name
 	regenerate_icons()
 
@@ -25,7 +25,8 @@
 
 	gender = NEUTER
 
-	..()
+	. = ..()
+
 
 /mob/living/carbon/alien/u_equip(obj/item/W as obj)
 	return

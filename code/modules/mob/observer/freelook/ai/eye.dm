@@ -7,18 +7,22 @@
 	name = "Inactive Camera Eye"
 	name_sufix = "Camera Eye"
 
-/mob/observer/eye/cameranet/New()
-	..()
+
+/mob/observer/eye/cameranet/Initialize(mapload)
+	. = ..()
 	visualnet = cameranet
+
 
 /mob/observer/eye/aiEye
 	name = "Inactive AI Eye"
 	name_sufix = "AI Eye"
 	icon_state = "AI-eye"
 
-/mob/observer/eye/aiEye/New()
-	..()
+
+/mob/observer/eye/aiEye/Initialize(mapload)
+	. = ..()
 	visualnet = cameranet
+
 
 /mob/observer/eye/aiEye/setLoc(T, cancel_tracking = 1)
 	. = ..()
@@ -65,9 +69,10 @@
 	eyeobj.possess(src)
 
 // Intiliaze the eye by assigning it's "ai" variable to us. Then set it's loc to us.
-/mob/living/silicon/ai/New()
-	..()
+/mob/living/silicon/ai/Initialize(mapload)
+	. = ..()
 	create_eyeobj()
+
 
 /mob/living/silicon/ai/Destroy()
 	destroy_eyeobj()

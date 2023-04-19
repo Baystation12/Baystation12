@@ -421,9 +421,11 @@
 /mob/living/simple_animal/hostile/carp/holodeck/on_update_icon()
 	return
 
-/mob/living/simple_animal/hostile/carp/holodeck/New()
-	..()
+
+/mob/living/simple_animal/hostile/carp/holodeck/Initialize(mapload, ...)
+	. = ..()
 	set_light(0.5, 0.1, 2) //hologram lighting
+
 
 /mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(safe)
 	var/obj/item/NW = get_natural_weapon()

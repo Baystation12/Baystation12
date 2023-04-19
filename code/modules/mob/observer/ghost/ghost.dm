@@ -33,12 +33,13 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	var/list/hud_images // A list of hud images
 	var/last_revive_notification = null // world.time of last notification, used to avoid spamming players from defibs or cloners.
 
-/mob/observer/ghost/New(mob/body)
+/mob/observer/ghost/Initialize(mapload)
 	see_in_dark = 100
 	verbs += /mob/proc/toggle_antag_pool
 
 	var/turf/T
-	if(ismob(body))
+	if(ismob(loc))
+		var/mob/body = loc
 		T = get_turf(body)               //Where is the body located?
 		attack_logs_ = body.attack_logs_ //preserve our attack logs by copying them to our ghost
 
@@ -73,7 +74,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 	GLOB.ghost_mobs += src
 
-	..()
+	. = ..()
 
 /mob/observer/ghost/Destroy()
 	GLOB.ghost_mobs -= src
