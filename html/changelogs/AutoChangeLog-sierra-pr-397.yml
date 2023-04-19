@@ -1,0 +1,5 @@
+author: PurplePineapple
+delete-after: true
+changes:
+  - imageadd: Adds a set of new sprites for the advanced energy gun and its damaged
+      states based of a certain 2000s computer game.
