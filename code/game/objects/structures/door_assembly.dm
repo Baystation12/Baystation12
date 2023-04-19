@@ -134,7 +134,7 @@
 		if (electronics)
 			USE_FEEDBACK_FAILURE("\The [src] already has \a [electronics] installed.")
 			return TRUE
-		if (!user.unEquip(tool))
+		if (!user.unEquip(tool, src))
 			FEEDBACK_UNEQUIP_FAILURE(user, tool)
 			return TRUE
 		state = ASSEMBLY_STATE_CIRCUIT
