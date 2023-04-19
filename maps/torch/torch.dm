@@ -188,8 +188,4 @@
 
 	#define using_map_DATUM /datum/map/torch
 
-#elif !defined(MAP_OVERRIDE)
-
-	#warn A map has already been included, ignoring Torch
-
 #endif

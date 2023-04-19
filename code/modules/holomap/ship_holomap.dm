@@ -431,4 +431,7 @@
 	station_map = image('icons/480x480.dmi', "stationmap")
 	station_map.overlays |= image('icons/effects/64x64.dmi', "notfound", pixel_x = 7 * WORLD_ICON_SIZE, pixel_y = 7 * WORLD_ICON_SIZE)
 
+/// String (Color HEX code). Color of this area on the holomap. Can be one of `HOLOMAP_AREACOLOR_*`.
+/area/var/holomap_color
+
 #undef HOLOMAP_LEGEND_STYLING

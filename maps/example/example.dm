@@ -10,8 +10,4 @@
 
 	#define using_map_DATUM /datum/map/example
 
-#elif !defined(MAP_OVERRIDE)
-
-	#warn A map has already been included, ignoring Example
-
 #endif
