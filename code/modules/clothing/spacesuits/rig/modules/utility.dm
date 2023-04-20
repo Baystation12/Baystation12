@@ -224,7 +224,7 @@
 	if(!charge)
 		return 0
 
-	var/chems_to_use = 10
+	var/chems_to_use = 5
 	if(charge.charges <= 0)
 		to_chat(H, SPAN_DANGER("Insufficient chems!"))
 		return 0
