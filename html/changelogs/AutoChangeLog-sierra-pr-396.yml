@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Mines will now trigger when stepped on, shot, hit, or affected by an explosion.
