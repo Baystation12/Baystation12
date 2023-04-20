@@ -1056,10 +1056,10 @@
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack,
-/obj/item/stack/material/glass/phoronglass{
+/obj/item/stack/material/glass/boron{
 	amount = 30
 	},
-/obj/item/stack/material/glass/phoronrglass{
+/obj/item/stack/material/glass/boron_reinforced{
 	amount = 20
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -9592,10 +9592,10 @@
 	dir = 9
 	},
 /obj/effect/floor_decal/techfloor/orange/corner,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
@@ -12317,7 +12317,7 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 4
 	},
 /obj/structure/railing/mapped{
@@ -14355,7 +14355,7 @@
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8
 	},
 /obj/structure/railing/mapped{
@@ -26669,7 +26669,7 @@
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/boron_reinforced,
 /obj/structure/railing/mapped{
 	dir = 1
 	},
@@ -33081,8 +33081,8 @@
 /obj/effect/floor_decal/techfloor/orange/corner{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced,
+/obj/structure/window/boron_reinforced{
 	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -33311,7 +33311,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/techfloor/orange,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -33355,7 +33355,7 @@
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8
 	},
 /obj/structure/railing/mapped{
@@ -34977,7 +34977,7 @@
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 8
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 4
 	},
 /obj/structure/railing/mapped{
@@ -35851,7 +35851,7 @@
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/boron_reinforced,
 /obj/machinery/camera/network/command{
 	c_tag = "Gravitation Generator - Generator";
 	dir = 1
@@ -38022,7 +38022,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/techfloor/orange,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 1
 	},
 /obj/structure/railing/mapped,
@@ -38240,7 +38240,7 @@
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8
 	},
 /obj/machinery/light{
@@ -39217,10 +39217,10 @@
 /obj/effect/floor_decal/techfloor/orange/corner{
 	dir = 8
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
@@ -39423,8 +39423,8 @@
 /obj/effect/floor_decal/techfloor/orange/corner{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced,
+/obj/structure/window/boron_reinforced{
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{

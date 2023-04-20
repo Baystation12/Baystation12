@@ -667,16 +667,16 @@
 /obj/item/stack/material/glass/reinforced/fifty
 	amount = 50
 
-/obj/item/stack/material/glass/phoronglass
+/obj/item/stack/material/glass/boron
 	name = "borosilicate glass"
-	default_type = MATERIAL_PHORON_GLASS
+	default_type = MATERIAL_BORON_GLASS
 
-/obj/item/stack/material/glass/phoronrglass
+/obj/item/stack/material/glass/boron_reinforced
 	name = "reinforced borosilicate glass"
-	default_type = MATERIAL_PHORON_GLASS
+	default_type = MATERIAL_BORON_GLASS
 	default_reinf_type = MATERIAL_STEEL
 
-/obj/item/stack/material/glass/phoronrglass/ten
+/obj/item/stack/material/glass/boron_reinforced/ten
 	amount = 10
 
 /obj/item/stack/material/aliumium

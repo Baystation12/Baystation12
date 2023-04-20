@@ -4475,7 +4475,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 4
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
@@ -7440,7 +7440,7 @@
 	pixel_y = 26
 	},
 /obj/machinery/reagent_temperature,
-/obj/structure/table/glass/pglass,
+/obj/structure/table/glass/boron,
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 5
 	},
@@ -8616,7 +8616,7 @@
 "nG" = (
 /obj/item/reagent_containers/glass/beaker/large,
 /obj/item/reagent_containers/dropper,
-/obj/structure/table/glass/pglass,
+/obj/structure/table/glass/boron,
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 4
 	},
@@ -9845,7 +9845,7 @@
 /obj/item/stack/material/phoron,
 /obj/item/stack/material/phoron,
 /obj/item/stack/material/phoron,
-/obj/structure/table/glass/pglass,
+/obj/structure/table/glass/boron,
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/purple/border,
 /obj/item/reagent_containers/glass/beaker/vial/away,
@@ -9910,7 +9910,7 @@
 /obj/item/device/scanner/spectrometer/adv,
 /obj/item/storage/box/syringes,
 /obj/item/storage/box/beakers,
-/obj/structure/table/glass/pglass,
+/obj/structure/table/glass/boron,
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 6
 	},
@@ -11955,7 +11955,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 4
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
@@ -16128,7 +16128,7 @@
 	pump_direction = 0;
 	use_power = 1
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 4
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
@@ -22462,7 +22462,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 4
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,

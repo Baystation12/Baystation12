@@ -1353,11 +1353,11 @@
 	dir = 4
 	},
 /obj/machinery/power/debug_items/infinite_generator,
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced,
+/obj/structure/window/boron_reinforced{
 	dir = 8
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 1
 	},
 /turf/simulated/floor/plating,

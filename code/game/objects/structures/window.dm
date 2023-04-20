@@ -651,23 +651,23 @@
 /obj/structure/window/basic/full/polarized
 	polarized = 1
 
-/obj/structure/window/phoronbasic
+/obj/structure/window/boron_basic
 	name = "phoron window"
-	color = GLASS_COLOR_PHORON
-	init_material = MATERIAL_PHORON_GLASS
+	color = GLASS_COLOR_BORON
+	init_material = MATERIAL_BORON_GLASS
 
-/obj/structure/window/phoronbasic/full
+/obj/structure/window/boron_basic/full
 	dir = 5
 	icon_state = "window_full"
 
-/obj/structure/window/phoronreinforced
+/obj/structure/window/boron_reinforced
 	name = "reinforced borosilicate window"
 	icon_state = "rwindow"
-	color = GLASS_COLOR_PHORON
-	init_material = MATERIAL_PHORON_GLASS
+	color = GLASS_COLOR_BORON
+	init_material = MATERIAL_BORON_GLASS
 	init_reinf_material = MATERIAL_STEEL
 
-/obj/structure/window/phoronreinforced/full
+/obj/structure/window/boron_reinforced/full
 	dir = 5
 	icon_state = "window_full"
 

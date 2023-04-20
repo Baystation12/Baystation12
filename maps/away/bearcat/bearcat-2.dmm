@@ -4711,7 +4711,7 @@
 	pixel_y = 32
 	},
 /obj/machinery/atmospherics/portables_connector,
-/obj/item/stack/material/glass/phoronrglass{
+/obj/item/stack/material/glass/boron_reinforced{
 	amount = 5
 	},
 /obj/machinery/light/small{
@@ -4952,11 +4952,11 @@
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "iV" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8;
 	icon_state = "phoronrwindow"
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 1;
 	icon_state = "phoronrwindow"
 	},
@@ -4964,7 +4964,7 @@
 /turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "iW" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 1;
 	icon_state = "phoronrwindow"
 	},
@@ -4975,11 +4975,11 @@
 /turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "iX" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 4;
 	icon_state = "phoronrwindow"
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 1;
 	icon_state = "phoronrwindow"
 	},
@@ -4994,11 +4994,11 @@
 /turf/simulated/floor/reinforced/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "iY" = (
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/boron_reinforced,
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
-/obj/item/stack/material/glass/phoronrglass{
+/obj/item/stack/material/glass/boron_reinforced{
 	amount = 20
 	},
 /turf/simulated/floor/airless,
@@ -5066,7 +5066,7 @@
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jg" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8;
 	icon_state = "phoronrwindow"
 	},
@@ -5150,8 +5150,8 @@
 /turf/simulated/floor/reinforced,
 /area/ship/scrap/maintenance/engine/aft)
 "jv" = (
-/obj/structure/window/phoronreinforced,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced,
+/obj/structure/window/boron_reinforced{
 	dir = 4;
 	icon_state = "phoronrwindow"
 	},
@@ -5168,7 +5168,7 @@
 /turf/simulated/floor/reinforced,
 /area/ship/scrap/maintenance/engine/aft)
 "jw" = (
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 1;
 	icon_state = "phoronrwindow"
 	},

@@ -1432,7 +1432,7 @@
 	},
 /obj/structure/table/rack,
 /obj/item/stack/material/ocp/fifty,
-/obj/item/stack/material/glass/phoronrglass/ten,
+/obj/item/stack/material/glass/boron_reinforced/ten,
 /obj/item/stack/material/plasteel/fifty,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -5995,7 +5995,7 @@
 /obj/item/stack/material/ocp/fifty,
 /obj/item/stack/material/wood/maple/twentyfive,
 /obj/item/stack/material/wood/maple/twentyfive,
-/obj/item/stack/material/glass/phoronrglass{
+/obj/item/stack/material/glass/boron_reinforced{
 	amount = 30
 	},
 /turf/simulated/floor/tiled,

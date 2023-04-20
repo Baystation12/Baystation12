@@ -19,5 +19,5 @@
 	is_critical = 1
 
 /obj/machinery/door/window/phoronreinforced
-	color = GLASS_COLOR_PHORON
+	color = GLASS_COLOR_BORON
 	health_max = 300

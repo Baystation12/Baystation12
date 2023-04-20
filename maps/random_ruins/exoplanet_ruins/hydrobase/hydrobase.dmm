@@ -230,7 +230,7 @@
 	dir = 4;
 	icon_state = "warningcorner"
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8;
 	icon_state = "phoronrwindow"
 	},
@@ -347,7 +347,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8;
 	icon_state = "phoronrwindow"
 	},
@@ -407,7 +407,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8;
 	icon_state = "phoronrwindow"
 	},
@@ -917,7 +917,7 @@
 /area/map_template/hydrobase/station/growF)
 "ct" = (
 /obj/item/material/knife/kitchen,
-/obj/structure/table/glass/pglass,
+/obj/structure/table/glass/boron,
 /obj/item/material/ashtray/bronze,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
@@ -999,7 +999,7 @@
 	dir = 4;
 	start_pressure = 740.5
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 1;
 	icon_state = "phoronrwindow"
 	},
@@ -1009,7 +1009,7 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 1;
 	icon_state = "phoronrwindow"
 	},
@@ -1020,7 +1020,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 1;
 	icon_state = "phoronrwindow"
 	},
@@ -1034,11 +1034,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 1;
 	icon_state = "phoronrwindow"
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 4
 	},
 /obj/structure/catwalk,
@@ -1057,7 +1057,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "cJ" = (
-/obj/structure/table/glass/pglass,
+/obj/structure/table/glass/boron,
 /obj/item/seeds/random,
 /obj/item/seeds/random,
 /obj/item/seeds/random,
@@ -1492,7 +1492,7 @@
 	},
 /obj/machinery/reagentgrinder/juicer,
 /obj/item/reagent_containers/glass/beaker/large,
-/obj/structure/table/glass/pglass,
+/obj/structure/table/glass/boron,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "dL" = (
@@ -1500,13 +1500,13 @@
 /obj/structure/closet/shipping_wall/filled{
 	pixel_y = 32
 	},
-/obj/structure/table/glass/pglass,
+/obj/structure/table/glass/boron,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "dM" = (
 /obj/structure/catwalk,
 /obj/item/material/kitchen/utensil/spoon,
-/obj/structure/table/glass/pglass,
+/obj/structure/table/glass/boron,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "dN" = (
@@ -1543,7 +1543,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/processing)
 "dQ" = (
-/obj/structure/table/glass/pglass,
+/obj/structure/table/glass/boron,
 /obj/item/storage/box/pillbottles,
 /obj/item/storage/box/pillbottles,
 /obj/item/reagent_containers/glass/beaker/vial/random,
@@ -1556,7 +1556,7 @@
 /obj/machinery/power/solar_control/autostart{
 	id = "hydrosolar"
 	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8;
 	icon_state = "phoronrwindow"
 	},
@@ -1679,7 +1679,7 @@
 /obj/structure/catwalk,
 /obj/item/material/kitchen/rollingpin,
 /obj/item/material/knife/kitchen,
-/obj/structure/table/glass/pglass,
+/obj/structure/table/glass/boron,
 /obj/item/material/ashtray/bronze,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
@@ -1723,11 +1723,11 @@
 /area/map_template/hydrobase/station/processing)
 "eo" = (
 /obj/structure/closet/toolcloset,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8;
 	icon_state = "phoronrwindow"
 	},
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/boron_reinforced,
 /obj/structure/catwalk,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
@@ -1747,7 +1747,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/window/phoronreinforced,
+/obj/structure/window/boron_reinforced,
 /obj/structure/catwalk,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
@@ -2095,7 +2095,7 @@
 /area/map_template/hydrobase/station/processing)
 "eX" = (
 /obj/structure/closet/l3closet/general/multi,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8;
 	icon_state = "phoronrwindow"
 	},
@@ -2134,7 +2134,7 @@
 	icon_state = "4-8"
 	},
 /obj/structure/catwalk,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8;
 	icon_state = "phoronrwindow"
 	},
@@ -2158,7 +2158,7 @@
 	icon_state = "1-8"
 	},
 /obj/structure/catwalk,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 1;
 	icon_state = "phoronrwindow"
 	},
@@ -2291,7 +2291,7 @@
 /area/map_template/hydrobase/station/processing)
 "ft" = (
 /obj/machinery/light,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8;
 	icon_state = "phoronrwindow"
 	},
@@ -2299,7 +2299,7 @@
 /obj/item/ammo_casing/shotgun/emp,
 /obj/item/ammo_casing/shotgun/emp,
 /obj/item/gun/projectile/shotgun/doublebarrel,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 4
 	},
 /obj/item/grenade/chem_grenade/antiweed,

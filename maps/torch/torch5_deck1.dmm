@@ -25203,7 +25203,7 @@
 /obj/item/stack/material/glass/reinforced{
 	amount = 30
 	},
-/obj/item/stack/material/glass/phoronrglass{
+/obj/item/stack/material/glass/boron_reinforced{
 	amount = 5
 	},
 /obj/structure/window/reinforced{
