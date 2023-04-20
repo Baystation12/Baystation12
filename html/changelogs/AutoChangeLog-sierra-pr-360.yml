@@ -1,0 +1,5 @@
+author: SierraHelper
+delete-after: true
+changes:
+  - tweak: Added borax ore.
+  - tweak: Borosilicate glass is made by alloying sand and borax.
