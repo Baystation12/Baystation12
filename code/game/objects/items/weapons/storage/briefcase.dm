@@ -11,3 +11,18 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	allow_slow_dump = TRUE
+
+/obj/item/storage/briefcase/psinull
+	name = "\improper Foundation psi-null case"
+	desc = "A handsome black leather case designed for carry psi-null implants by Cuchulain Foundation."
+	icon_state = "psicase"
+	item_state = "psicase"
+
+/obj/item/storage/briefcase/psinull/New()
+	..()
+	new /obj/item/implantcase/psi(src)
+	new /obj/item/implantcase/psi(src)
+	new /obj/item/implantcase/psi(src)
+	new /obj/item/implanter/psi(src)
+	new /obj/item/implantpad(src)
+	make_exact_fit()

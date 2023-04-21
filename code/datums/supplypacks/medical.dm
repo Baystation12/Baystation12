@@ -130,6 +130,14 @@
 	containername = "medical surplus equipment crate"
 	access = access_medical
 
+/decl/hierarchy/supply_pack/medical/psinull
+	name = "Equipment - Psinull implant (4x)"
+	contains = list(/obj/item/storage/briefcase/psinull)
+	cost = 100
+	containertype = /obj/structure/closet/crate/secure
+	containername = "psinull crate"
+	access = access_medical
+
 /decl/hierarchy/supply_pack/medical/cmogear
 	name = "Gear - Chief medical officer equipment"
 	contains = list(/obj/item/storage/belt/medical,

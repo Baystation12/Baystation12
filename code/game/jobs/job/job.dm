@@ -87,7 +87,7 @@
 	if(H.psi)
 		H.psi.update()
 		if(give_psionic_implant_on_join)
-			var/obj/item/implant/psi_control/imp = new
+			var/obj/item/implant/psi_control/lightcontrol/imp = new
 			imp.implanted(H)
 			imp.forceMove(H)
 			imp.imp_in = H
@@ -96,7 +96,7 @@
 			if(affected)
 				affected.implants += imp
 				imp.part = affected
-			to_chat(H, SPAN_DANGER("As a registered psionic, you are fitted with a psi-dampening control implant. Using psi-power while the implant is active will result in neural shocks and your violation being reported."))
+			to_chat(H, SPAN_DANGER("Как зарегистрированный псионик, вы оснащены специальным контролирующим имплантом для отслеживания всех ваших действий с использованием псионических сил. Имплант имеет разные режимы и они могут изменяться авторизованным персоналом через управляющее оборудование - помните об этом."))
 
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(outfit) . = outfit.equip(H, title, alt_title)

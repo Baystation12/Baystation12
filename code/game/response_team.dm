@@ -138,7 +138,7 @@ var/global/can_call_ert
 
 /datum/evacuation_predicate/ert/New()
 	..()
-	prevent_until = world.time + 30 MINUTES
+	prevent_until = world.time + 5 MINUTES
 
 /datum/evacuation_predicate/ert/is_valid()
 	return world.time < prevent_until

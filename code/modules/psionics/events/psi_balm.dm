@@ -1,8 +1,9 @@
 /datum/event/psi/balm
 	var/static/list/balm_messages = list(
-		"A soothing balm washes over your psyche.",
-		"For a moment, you can hear a distant, familiar voice singing a quiet lullaby.",
-		"A sense of peace and comfort falls over you like a warm blanket."
+		"Псионическая энергия медленно омывает вашу душу, вызывая ранее неизведанные эмоции и ощущения.",
+		"На мгновение вы слышите далекий, знакомый голос, поющий тихую колыбельную.",
+		"Будто тёплое одеяло, вас накрывает чувство покоя и уюта.",
+		"В вашем разуме начинают мелькать давно забытые тёплые воспоминания о прошедшем и будущем, как будто вы проживаете их вновь и проживёте ещё раз после."
 		)
 
 /datum/event/psi/balm/apply_psi_effect(var/datum/psi_complexus/psi)

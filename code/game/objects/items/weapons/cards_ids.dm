@@ -440,6 +440,7 @@ var/global/const/NO_EMAG_ACT = -50
 /obj/item/card/id/centcom/ERT
 	name = "\improper Emergency Response Team ID"
 	assignment = "Emergency Response Team"
+	extra_details = list("onegoldstripe")
 
 /obj/item/card/id/centcom/ERT/New()
 	..()

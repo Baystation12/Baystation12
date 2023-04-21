@@ -1,8 +1,8 @@
 /datum/event/psi/wail
 	var/static/list/whine_messages = list(
-		"A nerve-tearing psychic whine intrudes on your thoughts.",
-		"A horrible, distracting humming sound breaks your train of thought.",
-		"Your head aches as a psychic wail intrudes on your psyche."
+		"Душераздирающий психический вой вторгается в ваши мысли и путает сознание, не давая вам сосредоточиться на чём-либо.",
+		"Ужасный, отвлекающий жужжащий звук нарушает ход ваших мыслей.",
+		"Пугающий сверхъестественный крик вторгается в саму вашу душу и разрывает её изнутри, пытаясь свести вас с ума."
 		)
 
 /datum/event/psi/wail/apply_psi_effect(var/datum/psi_complexus/psi)

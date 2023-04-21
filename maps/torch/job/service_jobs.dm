@@ -9,6 +9,7 @@
 	ideal_character_age = 40
 	economic_power = 6
 	minimal_player_age = 0
+	give_psionic_implant_on_join = TRUE
 	supervisors = "Исполнительному офицеру"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/chaplain
 	alt_titles = list(

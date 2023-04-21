@@ -529,6 +529,15 @@
 		/obj/item/implantcase/imprinting = 3
 		)
 
+/obj/item/storage/box/psinull
+	name = "box of psi-null implants"
+	desc = "A box full of neural implants with psi dampeners."
+	startswith = list(
+		/obj/item/implanter/psi,
+		/obj/item/implantpad,
+		/obj/item/implantcase/psi = 3
+		)
+
 /obj/item/storage/box/detergent
 	name = "detergent pods bag"
 	desc = "A bag full of juicy, yummy detergent pods. This bag has been labeled: Tod Pods, a Waffle Co. product."

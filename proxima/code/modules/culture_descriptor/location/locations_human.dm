@@ -34,7 +34,7 @@
 	ruling_body = "Никс"
 	distance = "30 световых лет"
 	economic_power = 0.85
-	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN)
+	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN, LANGUAGE_GUTTER)
 
 /decl/cultural_info/location/kaldark
 	name = HOME_SYSTEM_NYX_KALDARK
@@ -48,7 +48,7 @@
 	ruling_body = "Никс"
 	distance = "30 световых лет"
 	economic_power = 0.95
-	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN)
+	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN, LANGUAGE_GUTTER)
 
 /decl/cultural_info/location/roanok
 	name = HOME_SYSTEM_NYX_ROANOK
@@ -60,7 +60,7 @@
 	ruling_body = "Никс"
 	distance = "30 световых лет"
 	economic_power = 1.1
-	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN)
+	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN, LANGUAGE_GUTTER)
 
 /decl/cultural_info/location/yuklit
 	name = HOME_SYSTEM_NYX_YUKLIT
@@ -73,7 +73,7 @@
 	ruling_body = "Никс"
 	distance = "30 световых лет"
 	economic_power = 1.1
-	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN)
+	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN, LANGUAGE_GUTTER)
 
 /decl/cultural_info/location/casser
 	name = HOME_SYSTEM_NYX_CASSER
@@ -84,4 +84,4 @@
 	ruling_body = "Никс"
 	distance = "30 световых лет"
 	economic_power = 1
-	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN)
+	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN, LANGUAGE_GUTTER)

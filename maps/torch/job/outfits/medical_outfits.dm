@@ -105,7 +105,9 @@
 /decl/hierarchy/outfit/job/torch/crew/medical/counselor
 	name = OUTFIT_JOB_NAME("Counselor")
 	uniform = /obj/item/clothing/under/rank/psych/turtleneck
-	shoes = /obj/item/clothing/shoes/white
+	head = /obj/item/clothing/head/beret/psionic
+	suit = /obj/item/clothing/suit/storage/toggle/labcoat/foundation
+	shoes = /obj/item/clothing/shoes/black
 	id_types = list(
 		/obj/item/card/id/torch/contractor/medical/counselor,
 		/obj/item/card/id/foundation_civilian)

@@ -62,3 +62,12 @@
 	Расположение здесь единственного известного форонового гиганта - Эребуса, привело к возведению бесчисленных холдингов транс-звездных корпораций и активности пиратов, колонизаторов, работорговцев и других подобных лиц, одним из которых вы, скорее всего, и являетесь.\
 	Население системы многокультурно и здесь можно встретить все слои общества, от честных шахтеров до закаленных преступников, просто желающих разбогатеть."
 	economic_power = 1
+	secondary_langs = list (LANGUAGE_HUMAN_EURO,
+		LANGUAGE_HUMAN_CHINESE,
+		LANGUAGE_HUMAN_ARABIC,
+		LANGUAGE_HUMAN_INDIAN,
+		LANGUAGE_HUMAN_IBERIAN,
+		LANGUAGE_HUMAN_RUSSIAN,
+		LANGUAGE_SPACER,
+		LANGUAGE_GUTTER,
+		LANGUAGE_SIGN)

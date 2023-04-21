@@ -155,12 +155,12 @@
 	desc = "An armored red beret adorned with the crest of corporate asset protection. Doesn't sacrifice style or safety."
 	icon_state = "beret_red"
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH, 
-		bullet = ARMOR_BALLISTIC_RIFLE, 
+		melee = ARMOR_MELEE_VERY_HIGH,
+		bullet = ARMOR_BALLISTIC_RIFLE,
 		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_RESISTANT, 
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_RESISTANT,
 		rad = ARMOR_RAD_MINOR
 	)
 	siemens_coefficient = 0.9
@@ -169,6 +169,11 @@
 	name = "corporate security beret"
 	desc = "A white beret adorned with a corporate logo. For security guards that are more inclined towards style than safety."
 	icon_state = "corpsec_beret"
+
+/obj/item/clothing/head/beret/psionic
+	name = "cuchulain foundation beret"
+	desc = "A navy blue beret adorned with the crest of Cuchulain Foundation. For security guards that are more inclined towards style than safety."
+	icon_state = "beret_psionic"
 
 /obj/item/clothing/head/beret/plaincolor
 	name = "beret"

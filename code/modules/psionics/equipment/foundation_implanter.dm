@@ -1,4 +1,5 @@
 /obj/item/implanter/psi
+	icon_state = "implanter0"
 	name = "psi-null implanter"
 	desc = "An implant gun customized to interact with psi dampeners."
 	var/implanter_mode = PSI_IMPLANT_AUTOMATIC
@@ -16,3 +17,13 @@
 /obj/item/implanter/psi/New()
 	..()
 	imp = new /obj/item/implant/psi_control(src)
+
+/obj/item/implantcase/psi
+	name = "glass case - 'psi-null'"
+	imp = /obj/item/implant/psi_control
+
+/obj/item/implanter/psi/on_update_icon()
+	if (imp)
+		icon_state = "psiimplanter1"
+	else
+		icon_state = "psiimplanter0"

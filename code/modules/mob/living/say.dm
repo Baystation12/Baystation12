@@ -178,7 +178,7 @@ var/global/list/channel_to_radio_key = new
 	message = html_decode(message)
 
 	var/end_char = copytext_char(message, length_char(message), length_char(message) + 1) // INF Localiztion
-	if(!(end_char in list(".", "?", "!", "-", "~", ":")))
+	if(!(end_char in list(".", "?", "!", "-", "~", ":", "\"")))
 		message += "."
 
 	message = html_encode(message)

@@ -479,7 +479,7 @@ armour attachments
 	desc = "An emblem depicting the crest of the SCG Expeditionary Corps."
 	icon_state = "ecflag"
 
-/obj/item/clothing/accessory/armor_tag/solgov/exo
+/obj/item/clothing/accessory/armor_tag/solgov/exo //PRX
 	name = "\improper EXO crest"
 	desc = "An emblem depicting the crest of the Expeditionary Corps Organisation."
 	icon_state = "exoflag"

@@ -151,7 +151,7 @@
 		/obj/item/clothing/under/rank/psych/turtleneck,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/labcoat/foundation,
-		/obj/item/clothing/shoes/white,
+		/obj/item/clothing/shoes/black,
 		/obj/item/storage/pill_bottle/citalopram,
 		/obj/item/storage/pill_bottle/methylphenidate,
 		/obj/item/material/clipboard,
@@ -160,6 +160,9 @@
 		/obj/item/device/tape/random = 3,
 		/obj/item/device/camera,
 		/obj/item/toy/therapy_blue,
+		//proxima code start,
+		/obj/item/storage/briefcase/psinull,
+		//proxima code end,
 		/obj/item/storage/belt/general
 	)
 

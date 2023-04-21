@@ -321,8 +321,19 @@
 		/obj/item/clothing/head/beret,
 		/obj/item/material/knife/folding,
 		/obj/item/device/tape,
-		/obj/item/cell/guncell
+		/obj/item/cell/guncell,
+		/obj/item/device/remote_device
 		)
+
+/obj/item/storage/belt/general/commedfull/Initialize()
+	. = ..()
+	new /obj/item/device/flash (src)
+	new /obj/item/device/megaphone (src)
+	new /obj/item/melee/telebaton (src)
+	new /obj/item/device/holowarrant (src)
+	new /obj/item/device/remote_device/chief_medical_officer (src)
+	new /obj/item/folder/blue (src)
+	queue_icon_update()
 
 /obj/item/storage/belt/janitor
 	name = "janibelt"

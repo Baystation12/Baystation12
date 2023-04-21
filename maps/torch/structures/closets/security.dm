@@ -58,7 +58,6 @@
 		new /datum/atom_creator/weighted(list(/obj/item/gun/energy/gun/small/secure, /obj/item/gun/energy/gun/small/secure, /obj/item/gun/energy/k342/pistol)),
 	)
 
-
 /obj/structure/closet/secure_closet/cos
 	name = "chief of security's locker"
 	req_access = list(access_hos)
@@ -109,9 +108,9 @@
 		/obj/item/device/radio/headset/headset_sec/alt,
 		/obj/item/clothing/glasses/hud/security/prot,
 		/obj/item/taperoll/police,
-		//rubay code,
+		//proxima code start,
 		/obj/item/storage/firstaid/individual/military,
-		//rubay code end,
+		//proxima code end,
 		/obj/item/storage/belt/holster/security,
 		/obj/item/storage/belt/security,
 		/obj/item/gun/energy/gun/secure/preauthorized,
@@ -142,9 +141,9 @@
 		/obj/item/device/flash,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/taperoll/police,
-		//rubay code,
+		//proxima code start,
 		/obj/item/storage/firstaid/individual/military,
-		//rubay code end,
+		//proxima code end,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/device/tape/random = 3,
 		/obj/item/clothing/glasses/hud/security/prot,

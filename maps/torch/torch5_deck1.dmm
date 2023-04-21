@@ -3235,6 +3235,9 @@
 	pixel_y = 32
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/floor_decal/corner/white/border{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/staging)
 "afI" = (
@@ -26855,7 +26858,13 @@
 /obj/item/roller,
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/structure/table/reinforced,
+/obj/structure/window/reinforced{
+	dir = 2
+	},
 /obj/machinery/door/firedoor,
+/obj/effect/floor_decal/corner/white/border{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/staging)
 "rQb" = (

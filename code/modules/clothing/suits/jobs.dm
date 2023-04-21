@@ -255,7 +255,7 @@
 		/obj/item/reagent_containers/ivbag
 	)
 	body_parts_covered = UPPER_TORSO|ARMS
-	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMBAND, ACCESSORY_SLOT_RANK)
 
 /obj/item/clothing/suit/storage/toggle/fr_jacket/ems
 	name = "\improper EMS jacket"

@@ -37,6 +37,10 @@
 	path = /obj/item/clothing/head/mariner
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/head/psi
+	display_name = "Cuchulain Foundation beret"
+	path = /obj/item/clothing/head/beret/psionic
+
 /datum/gear/head/cap
 	display_name = "cap selection"
 	path = /obj/item/clothing/head

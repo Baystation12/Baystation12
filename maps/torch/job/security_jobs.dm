@@ -59,6 +59,7 @@
 	minimum_character_age = list(SPECIES_HUMAN = 25)
 	ideal_character_age = 35
 	skill_points = 14
+	give_psionic_implant_on_join = TRUE
 	alt_titles = list(
 		"Criminal Investigator",
 		"Psionic Sleuth",

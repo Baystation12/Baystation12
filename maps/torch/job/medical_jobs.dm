@@ -307,7 +307,7 @@
 		/datum/computer_file/program/suit_sensors,
 		/datum/computer_file/program/camera_monitor
 	)
-	give_psionic_implant_on_join = FALSE
+	give_psionic_implant_on_join = TRUE
 
 /datum/job/psychiatrist/equip(var/mob/living/carbon/human/H)
 	if(H.mind?.role_alt_title == "Psionic Counselor")
