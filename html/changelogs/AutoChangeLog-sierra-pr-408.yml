@@ -1,0 +1,10 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Fixed an exploit that allowed you to close inflatable doors on yourself.
+  - bugfix: Table frames can now be dismantled again with a wrench on harm intent.
+  - bugfix: Tables can now be reinforced with a stack of material on harm intent.
+  - bugfix: You can place items in open crates again.
+  - bugfix: The Telecomms air alarm no longer requires Research Director access to
+      unlock.
+  - rscdel: Removed the 'Plain' fake nano-ui browser style.
