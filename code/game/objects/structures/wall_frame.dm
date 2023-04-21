@@ -66,7 +66,7 @@
 
 	// Grilles
 	var/obj/structure/grille/grille = locate() in loc
-	if (grille.density)
+	if (grille?.density)
 		USE_FEEDBACK_FAILURE("\The [grille] blocks access to \the [src].")
 		return FALSE
 

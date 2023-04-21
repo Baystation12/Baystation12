@@ -5,6 +5,7 @@
 	anchored = FALSE
 	density = TRUE
 	w_class = ITEM_SIZE_NO_CONTAINER
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 	var/const/ASSEMBLY_STATE_FRAME = 0
 	var/const/ASSEMBLY_STATE_WIRED = 1
@@ -133,7 +134,7 @@
 		if (electronics)
 			USE_FEEDBACK_FAILURE("\The [src] already has \a [electronics] installed.")
 			return TRUE
-		if (!user.unEquip(tool))
+		if (!user.unEquip(tool, src))
 			FEEDBACK_UNEQUIP_FAILURE(user, tool)
 			return TRUE
 		state = ASSEMBLY_STATE_CIRCUIT
