@@ -1,0 +1,7 @@
+author: rootoo807
+delete-after: true
+changes:
+  - tweak: Hardsuits give feedback if they can't be worn due to species incompatibility.
+  - bugfix: Integrated multitool modules can be installed in hardsuits now.
+  - tweak: Landed ship colony away-site uses a distinct archetype (and job roles)
+      from Established colony away-site.
