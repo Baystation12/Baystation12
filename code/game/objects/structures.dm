@@ -89,7 +89,7 @@
 
 /obj/structure/use_grab(obj/item/grab/grab, list/click_params)
 	// Harm intent - Slam face against the structure
-	if (grab.assailant == I_HURT)
+	if (grab.assailant.a_intent == I_HURT)
 		if (!grab.force_danger())
 			USE_FEEDBACK_GRAB_MUST_UPGRADE("to slam their face on \the [src]")
 			return TRUE
