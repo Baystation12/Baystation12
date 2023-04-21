@@ -1068,10 +1068,12 @@
 /obj/item/reagent_containers/food/snacks/meatsteak
 	name = "meat steak"
 	desc = "A piece of hot spicy meat."
-	icon_state = "meatstake"
+	icon_state = "meatsteak"
+	trash = /obj/item/trash/plate
 	filling_color = "#7a3d11"
 	center_of_mass = "x=16;y=13"
 	bitesize = 3
+
 /obj/item/reagent_containers/food/snacks/meatsteak/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
@@ -1085,12 +1087,15 @@
 /obj/item/reagent_containers/food/snacks/loadedsteak
 	name = "loaded steak"
 	desc = "A steak slathered in sauce with sauteed onions and mushrooms."
-	icon_state = "meatstake"
+	icon_state = "meatsteak"
+	trash = /obj/item/trash/plate
+
 	filling_color = "#7a3d11"
 	center_of_mass = "x=16;y=13"
 	nutriment_desc = list("onion" = 2, "mushroom" = 2)
 	nutriment_amt = 4
 	bitesize = 3
+
 /obj/item/reagent_containers/food/snacks/loadedsteak/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
@@ -1106,6 +1111,7 @@
 	nutriment_desc = list("mushroom" = 6)
 	nutriment_amt = 6
 	bitesize = 3
+
 /obj/item/reagent_containers/food/snacks/spacylibertyduff/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/drugs/psilocybin, 6)
@@ -1120,6 +1126,7 @@
 	nutriment_desc = list("jelly" = 3, "mushroom" = 3)
 	nutriment_amt = 6
 	bitesize = 3
+
 /obj/item/reagent_containers/food/snacks/amanitajelly/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/toxin/amatoxin, 6)
