@@ -1,5 +1,5 @@
 /obj/machinery/pipedispenser
-	name = "Pipe Dispenser"
+	name = "pipe dispenser"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
 	density = TRUE
@@ -109,7 +109,7 @@
 	return ..()
 
 /obj/machinery/pipedispenser/disposal
-	name = "Disposal Pipe Dispenser"
+	name = "disposal pipe dispenser"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
 	machine_name = "disposal pipe dispenser"

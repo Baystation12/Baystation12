@@ -267,7 +267,7 @@
 	block_air_zones = TRUE
 
 /obj/machinery/door/blast/regular/escape_pod
-	name = "Escape Pod release Door"
+	name = "escape pod release door"
 
 /obj/machinery/door/blast/regular/escape_pod/Process()
 	if(evacuation_controller.emergency_evacuation && evacuation_controller.state >= EVAC_LAUNCHING && src.icon_state == icon_state_closed)

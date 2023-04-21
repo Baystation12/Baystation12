@@ -9,22 +9,22 @@
 	user.visible_message(SPAN_WARNING("\The [user] gets down on one knee, presenting \the [src]."),SPAN_WARNING("You get down on one knee, presenting \the [src]."))
 
 /obj/item/clothing/ring/cti
-	name = "CTI ring"
+	name = "\improper CTI ring"
 	desc = "A ring commemorating graduation from CTI."
 	icon_state = "cti-grad"
 
 /obj/item/clothing/ring/mariner
-	name = "Mariner University ring"
+	name = "\improper Mariner University ring"
 	desc = "A ring commemorating graduation from Mariner University."
 	icon_state = "mariner-grad"
 
 /obj/item/clothing/ring/fleet
-	name = "Fleet ring"
+	name = "\improper Fleet ring"
 	desc = "A ring commemorating honorable service with the Sol Government's Fleet."
 	icon_state = "fleet"
 
 /obj/item/clothing/ring/ec
-	name = "Expeditionary Corps ring"
+	name = "\improper Expeditionary Corps ring"
 	desc = "A ring commemorating honorable service with the Sol Government's Expeditionary Corps."
 	icon_state = "ec"
 
@@ -91,7 +91,7 @@
 	icon = 'icons/obj/clothing/obj_hands_ring.dmi'
 
 /obj/item/clothing/ring/seal/secgen
-	name = "Secretary-General's official seal"
+	name = "\improper Secretary-General's official seal"
 	desc = "The official seal of the Secretary-General of the Sol Central Government, featured prominently on a silver ring."
 	icon_state = "seal-secgen"
 

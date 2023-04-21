@@ -95,7 +95,7 @@
 
 /obj/item/material/coin/challenge/misc/pcrc
 	default_material = MATERIAL_GOLD
-	name = "pcrc challenge coin"
+	name = "\improper PCRC challenge coin"
 	icon_state = "pcrc"
 	desc = {"\
 		A challenge coin issued by Proxima Centauri Risk Control \
@@ -108,7 +108,7 @@
 
 /obj/item/material/coin/challenge/misc/saare
 	default_material = MATERIAL_SILVER
-	name = "saare challenge coin"
+	name = "\improper SAARE challenge coin"
 	icon_state = "saare"
 	desc = {"\
 		A challenge coin issued by SAARE to its operatives. \

@@ -1,6 +1,6 @@
 /////SINGULARITY SPAWNER
 /obj/machinery/the_singularitygen
-	name = "Gravitational Singularity Generator"
+	name = "gravitational singularity generator"
 	desc = "An Odd Device which produces a Gravitational Singularity when set up."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "TheSingGen"

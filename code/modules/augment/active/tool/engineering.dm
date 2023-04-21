@@ -1,5 +1,5 @@
 /obj/item/organ/internal/augment/active/polytool/engineer
-	name = "\improper Engineering toolset"
+	name = "engineering toolset"
 	action_button_name = "Deploy Engineering Tool"
 	desc = "A lightweight augmentation for the engineer on-the-go. This one comes with a series of common tools."
 	paths = list(

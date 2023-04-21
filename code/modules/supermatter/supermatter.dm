@@ -673,7 +673,7 @@
 
 //Warning lights
 /obj/machinery/rotating_alarm/supermatter
-	name = "Supermatter alarm"
+	name = "supermatter alarm"
 	desc = "An industrial rotating alarm light. This one is used to monitor supermatter engines."
 
 	frame_type = /obj/item/frame/supermatter_alarm

@@ -1,6 +1,6 @@
 /datum/computer_file/program/card_mod
 	filename = "cardmod"
-	filedesc = "ID card modification program"
+	filedesc = "ID Card Modification Program"
 	nanomodule_path = /datum/nano_module/program/card_mod
 	program_icon_state = "id"
 	program_key_state = "id_key"

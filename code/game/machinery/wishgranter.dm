@@ -1,5 +1,5 @@
 /obj/machinery/wish_granter
-	name = "Wish Granter"
+	name = "\improper Wish Granter"
 	desc = "You're not so sure about this, anymore..."
 	icon = 'icons/obj/syndicate_beacon.dmi'
 	icon_state = "syndbeacon"

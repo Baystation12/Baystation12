@@ -25,7 +25,7 @@
 	)
 
 /obj/structure/closet/secure_closet/liaison
-	name = "\improper corporate liaison's locker"
+	name = "corporate liaison's locker"
 	req_access = list(access_liaison)
 	closet_appearance = /singleton/closet_appearance/secure_closet/torch/corporate/liaison
 
@@ -116,7 +116,7 @@
 	)
 
 /obj/structure/closet/secure_closet/guncabinet/PPE
-	name = "Bridge PPE cabinet"
+	name = "bridge PPE cabinet"
 	req_access = list(list(access_armory,access_emergency_armory,access_hos,access_hop,access_ce,access_cmo,access_rd,access_senadv))
 
 /obj/structure/closet/secure_closet/guncabinet/PPE/WillContain()

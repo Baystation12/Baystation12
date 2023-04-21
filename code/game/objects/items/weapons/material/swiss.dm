@@ -124,7 +124,7 @@
 	tools = list(SWISSKNF_LBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER, SWISSKNF_CSCREW)
 
 /obj/item/material/knife/folding/swiss/sec
-	name = "Master-At-Arms' combi-knife"
+	name = "master-at-arms' combi-knife"
 	desc = "A small, red, multi-purpose folding knife. This one adds no special tools."
 	color = COLOR_NT_RED
 

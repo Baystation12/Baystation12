@@ -250,7 +250,7 @@
 		to_chat(user, SPAN_NOTICE("You turn the alert reader on \the [src] [read_alerts ? "on" : "off"]."))
 
 /obj/item/stock_parts/circuitboard/vitals_monitor
-	name = "circuit board (Vitals Monitor)"
+	name = "circuit board (vitals monitor)"
 	build_path = /obj/machinery/vitals_monitor
 	board_type = "machine"
 	req_components = list(

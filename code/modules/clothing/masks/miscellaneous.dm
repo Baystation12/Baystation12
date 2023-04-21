@@ -55,7 +55,7 @@
 	visible_name = "Scoundrel"
 
 /obj/item/clothing/mask/snorkel
-	name = "Snorkel"
+	name = "snorkel"
 	desc = "For the Swimming Savant."
 	icon_state = "snorkel"
 	item_state = "snorkel"
@@ -158,25 +158,25 @@
 	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/mask/rubber/trasen
-	name = "Jack Trasen mask"
+	name = "\improper Jack Trasen mask"
 	desc = "CEO of NanoTrasen corporation. Perfect for scaring the unionizing children."
 	icon_state = "trasen"
 	visible_name = "Jack Trasen"
 
 /obj/item/clothing/mask/rubber/barros
-	name = "Amaya Barros mask"
+	name = "\improper Amaya Barros mask"
 	desc = "Current Secretary-General of Sol Cental Government. Not that the real thing would visit this pigsty."
 	icon_state = "barros"
 	visible_name = "Amaya Barros"
 
 /obj/item/clothing/mask/rubber/admiral
-	name = "Admiral Diwali mask"
+	name = "\improper Admiral Diwali mask"
 	desc = "Admiral that led the infamous last stand at Helios against the Independent Navy in the Gaia conflict. For bridge officers who wish they'd achieve a fraction of that."
 	icon_state = "admiral"
 	visible_name = "Admiral Diwali"
 
 /obj/item/clothing/mask/rubber/turner
-	name = "Charles Turner mask"
+	name = "\improper Charles Turner mask"
 	desc = "Premier of the Gilgamesh Colonial Confederation. Probably shouldn't wear this in front of your veteran uncle."
 	icon_state = "turner"
 	visible_name = "Charles Turner"

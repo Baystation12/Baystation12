@@ -1,5 +1,5 @@
 /obj/item/staff
-	name = "wizards staff"
+	name = "wizard's staff"
 	desc = "Apparently a staff used by the wizard."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "staff"
@@ -17,7 +17,7 @@
 	icon_state = "broom"
 
 /obj/item/staff/gentcane
-	name = "Gentlemans Cane"
+	name = "gentleman's cane"
 	desc = "An ebony can with an ivory tip."
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "cane"

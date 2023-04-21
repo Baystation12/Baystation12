@@ -42,7 +42,7 @@
 
 // Suit cyclers and storage
 /obj/machinery/suit_storage_unit/explorer
-	name = "Exploration Voidsuit Storage Unit"
+	name = "exploration voidsuit storage unit"
 	suit = /obj/item/clothing/suit/space/void/exploration
 	helmet = /obj/item/clothing/head/helmet/space/void/exploration
 	boots = /obj/item/clothing/shoes/magboots
@@ -52,7 +52,7 @@
 	islocked = 1
 
 /obj/machinery/suit_storage_unit/pilot
-	name = "Pilot Voidsuit Storage Unit"
+	name = "pilot voidsuit storage unit"
 	suit = /obj/item/clothing/suit/space/void/pilot
 	helmet = /obj/item/clothing/head/helmet/space/void/pilot
 	boots = /obj/item/clothing/shoes/magboots
@@ -62,7 +62,7 @@
 	islocked = 1
 
 /obj/machinery/suit_storage_unit/command
-	name = "Command Voidsuit Storage Unit"
+	name = "command voidsuit storage unit"
 	suit = /obj/item/clothing/suit/space/void/command
 	helmet = /obj/item/clothing/head/helmet/space/void/command
 	boots = /obj/item/clothing/shoes/magboots
@@ -89,14 +89,14 @@
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/exploration
-	name = "Exploration suit cycler"
+	name = "exploration suit cycler"
 	model_text = "Exploration"
 	req_access = list(access_explorer)
 	available_modifications = list(/singleton/item_modifier/space_suit/sol/explorer)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/command
-	name = "Command suit cycler"
+	name = "command suit cycler"
 	model_text = "Command"
 	req_access = list(access_bridge)
 	available_modifications = list(/singleton/item_modifier/space_suit/sol/command)

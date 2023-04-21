@@ -33,7 +33,7 @@
 
 
 /obj/machinery/rotating_alarm
-	name = "Industrial alarm"
+	name = "industrial alarm"
 	desc = "An industrial rotating alarm light."
 	icon = 'icons/obj/rotating_alarm.dmi'
 	icon_state = "alarm"

@@ -1,6 +1,6 @@
 //Pile of garbage for when a clam is uninstalled or destroyed with +1 dense items inside
 /obj/structure/cargopile
-	name = "\improper spilled cargo"
+	name = "spilled cargo"
 	desc = "The jetsam of some unfortunate power loader."
 	icon = 'icons/obj/rubble.dmi'
 	icon_state = "base"
@@ -726,7 +726,7 @@
 		)
 
 /obj/item/mech_equipment/ionjets
-	name = "\improper exosuit manouvering unit"
+	name = "exosuit maneuvering unit"
 	desc = "A testament to the fact that sometimes more is actually more. These oversized electric resonance boosters allow exosuits to move in microgravity and can even provide brief speed boosts. The stabilizers can be toggled with ctrl-click."
 	icon_state = "mech_jet_off"
 	restricted_hardpoints = list(HARDPOINT_BACK)

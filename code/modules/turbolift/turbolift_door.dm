@@ -1,5 +1,5 @@
 /obj/machinery/door/airlock/lift
-	name = "Elevator Door"
+	name = "elevator door"
 	desc = "Ding."
 	opacity = 0
 	autoclose = FALSE

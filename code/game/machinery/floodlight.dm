@@ -1,7 +1,7 @@
 //these are probably broken
 
 /obj/machinery/floodlight
-	name = "Emergency Floodlight"
+	name = "emergency floodlight"
 	icon = 'icons/obj/machines/floodlight.dmi'
 	icon_state = "flood00"
 	density = TRUE
