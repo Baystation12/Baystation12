@@ -149,9 +149,9 @@
 	if(LAZYLEN(embedded_objects))
 		return amount // heal nothing
 	if(parent_organ)
-		if (damage_type == INJURY_TYPE_BURN && !(parent_organ.burn_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
+		if (damage_type == INJURY_TYPE_BURN && !(parent_organ.burn_ratio < 100 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
 			return amount	//We don't want to heal wounds on irreparable organs.
-		else if(!(parent_organ.brute_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
+		else if(!(parent_organ.brute_ratio < 100 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
 			return amount
 
 	var/healed_damage = min(src.damage, amount)

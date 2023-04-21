@@ -7,11 +7,23 @@
 /obj/item/crafting_holder/Initialize(ml, singleton/crafting_stage/initial_stage, obj/item/target, obj/item/tool, mob/user)
 	. = ..()
 	name = "[target.name] assembly"
-	var/mob/M = target.loc
-	if(istype(M))
-		M.drop_from_inventory(target)
+
+	// Handle various holders
+	// Mob - Drop from inventory and put the crafting holder in place.
+	if(ismob(target.loc))
+		var/mob/M = target.loc
+		M.drop_from_inventory(target, src)
 		M.put_in_hands(src)
-	target.forceMove(src)
+	// Storage - Remove from storage and insert the crafting holder, if possible.
+	else if (istype(target.loc, /obj/item/storage))
+		var/obj/item/storage/storage = target.loc
+		storage.remove_from_storage(target, src)
+		if (storage.can_be_inserted(src))
+			storage.handle_item_insertion(src, TRUE)
+	// If none of the above moved the target, move it now.
+	if (target.loc != src)
+		target.forceMove(src)
+
 	current_crafting_stage = initial_stage
 	update_icon()
 	update_strings()
@@ -56,11 +68,20 @@
 		if(ismob(product) && label_name)
 			var/mob/M = product
 			M.SetName(label_name)
-		if(ismob(src.loc))
-			var/mob/M = src.loc
+
+		// Handle various holders
+		// Mob - Drop from inventory and put the product in place
+		if (ismob(loc))
+			var/mob/M = loc
 			M.drop_from_inventory(src)
 			if(isitem(product))
 				M.put_in_hands(product)
+		// Storage - Remove from storage and insert the product, if possible
+		else if (istype(loc, /obj/item/storage))
+			var/obj/item/storage/storage = loc
+			storage.remove_from_storage(src)
+			if (storage.can_be_inserted(product))
+				storage.handle_item_insertion(product)
 		qdel_self()
 	else
 		current_crafting_stage = next_stage

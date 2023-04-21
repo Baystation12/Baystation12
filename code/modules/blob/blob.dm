@@ -186,6 +186,7 @@
 			USE_FEEDBACK_FAILURE("You fail to collect a sample from \the [src].")
 			return TRUE
 		var/obj/item/sample = new product(user.loc)
+		sample.add_fingerprint(user, tool = tool)
 		pruned = TRUE
 		user.visible_message(
 			SPAN_NOTICE("\The [user] collects \a [sample] from \the [src] with \a [tool]."),
