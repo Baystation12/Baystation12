@@ -8,8 +8,6 @@ GLOBAL_VAR_CONST(PREF_SHORT, "Short")
 GLOBAL_VAR_CONST(PREF_LONG, "Long")
 GLOBAL_VAR_CONST(PREF_SHOW, "Show")
 GLOBAL_VAR_CONST(PREF_HIDE, "Hide")
-GLOBAL_VAR_CONST(PREF_FANCY, "Fancy")
-GLOBAL_VAR_CONST(PREF_PLAIN, "Plain")
 GLOBAL_VAR_CONST(PREF_PRIMARY, "Primary")
 GLOBAL_VAR_CONST(PREF_ALL, "All")
 GLOBAL_VAR_CONST(PREF_OFF, "Off")
@@ -204,11 +202,6 @@ var/global/list/_client_preferences_by_type
 	description ="Progress Bar"
 	key = "SHOW_PROGRESS"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
-
-/datum/client_preference/browser_style
-	description = "Fake NanoUI Browser Style"
-	key = "BROWSER_STYLED"
-	options = list(GLOB.PREF_FANCY, GLOB.PREF_PLAIN)
 
 /datum/client_preference/autohiss
 	description = "Autohiss"

@@ -282,9 +282,9 @@
 			return
 
 	isSwitchingStates = 1
+	set_density(TRUE)
 	flick("door_closing",src)
 	sleep(10)
-	set_density(1)
 	set_opacity(0)
 	state = 0
 	update_icon()

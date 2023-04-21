@@ -143,7 +143,7 @@
 	// Material - Plate table
 	if (istype(weapon, /obj/item/stack/material))
 		if (material)
-			USE_FEEDBACK_FAILURE("\The [src] is already plated.")
+			reinforce_table(weapon, user)
 			return TRUE
 		material = common_material_add(weapon, user, "plat")
 		if (material)
@@ -179,7 +179,7 @@
 	// Wrench - Remove material
 	if (isWrench(weapon))
 		if (!material)
-			USE_FEEDBACK_FAILURE("\The [src] has no plating to remove.")
+			dismantle(weapon, user)
 			return TRUE
 		if (reinforced)
 			USE_FEEDBACK_FAILURE("\The [src]'s reinforcements need to be removed before you can remove the plating.")
@@ -222,6 +222,12 @@
 	if (!user.unEquip(tool, loc))
 		FEEDBACK_UNEQUIP_FAILURE(user, tool)
 		return TRUE
+
+	// [SIERRA]
+	if (tool.drop_sound)
+		playsound(tool.loc, tool.drop_sound, 25)
+	// [/SIERRA]
+
 	auto_align(tool, click_params)
 	return TRUE
 
