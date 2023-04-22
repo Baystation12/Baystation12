@@ -15,8 +15,8 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	volume = 30
 	matter = list(MATERIAL_GLASS = 65)
 
-	drop_sound = 'sound/items/drop/drinkglass.ogg'
-	pickup_sound =  'sound/items/pickup/drinkglass.ogg'
+	drop_sound = "drinks_drop_sound"
+	pickup_sound = "drinks_pickup_sound"
 
 	var/list/extras = list() // List of extras. Two extras maximum
 

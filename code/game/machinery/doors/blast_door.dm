@@ -22,8 +22,8 @@
 	var/icon_state_open_broken = null
 	var/icon_state_closed_broken = null
 
-	var/open_sound = 'sound/machines/blastdoor_open.ogg'
-	var/close_sound = 'sound/machines/blastdoor_close.ogg'
+	var/open_sound = 'packs/sierra-tweaks/sound/effects/blast_open_close.ogg'
+	var/close_sound = 'packs/sierra-tweaks/sound/effects/blast_open_close.ogg'
 
 	closed_layer = ABOVE_WINDOW_LAYER
 	dir = 1
@@ -98,7 +98,7 @@
 // Description: Opens the door. No checks are done inside this proc.
 /obj/machinery/door/blast/proc/force_open()
 	operating = DOOR_OPERATING_YES
-	playsound(src.loc, open_sound, 100, 1)
+	playsound(src.loc, open_sound, 70, 1)
 	flick(icon_state_opening, src)
 	set_density(0)
 	update_nearby_tiles()
@@ -113,7 +113,7 @@
 // Description: Closes the door. No checks are done inside this proc.
 /obj/machinery/door/blast/proc/force_close()
 	operating = DOOR_OPERATING_YES
-	playsound(src.loc, close_sound, 100, 1)
+	playsound(src.loc, close_sound, 70, 1)
 	layer = closed_layer
 	flick(icon_state_closing, src)
 	set_density(1)

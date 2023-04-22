@@ -391,7 +391,7 @@
 			SPAN_DANGER("You hear buzzing coming from the ceiling."),
 			range = 3
 		)
-		playsound(loc, "sound/machines/firedoor.ogg", 50)
+		playsound(loc, 'sound/machines/firedoor.ogg', 50)
 		sleep(2 SECONDS)
 		for(var/turf/turf in locs)
 			for(var/mob/living/M in turf)
@@ -426,7 +426,7 @@
 				M.apply_damage(10, DAMAGE_BRUTE, used_weapon = src)
 				if(direction)
 					M.Move(get_step(src, direction))
-	playsound(loc, close_sound, 25, TRUE)
+	playsound(loc, close_sound, 50, TRUE)
 	closing = FALSE
 	return ..()
 
@@ -444,7 +444,7 @@
 	else
 		log_and_message_admins("has forced open an emergency shutter.")
 	latetoggle()
-	playsound(loc, open_sound, 25, TRUE)
+	playsound(loc, open_sound, 50, 1)
 	return ..()
 
 // Called ten seconds after a firedoor is opened manually during an active alert, to prevent it staying open for long.

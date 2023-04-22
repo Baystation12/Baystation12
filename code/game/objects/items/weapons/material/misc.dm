@@ -149,6 +149,7 @@
 	thrown_force_multiplier = 0.1
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "bashed")
+	hitsound = "swing_hit"
 
 /obj/item/material/cross/wood
 	default_material = MATERIAL_WOOD
