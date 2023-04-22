@@ -1,0 +1,17 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Performing crafting on an item inside a storage container (Backpack, box,
+      etc) now properly removes the targeted object and places the new crafted item
+      in the bag, if applicable.
+  - bugfix: Reinforced material stacks no longer display their reinforcement material
+      twice in their name. `Steel-Reinforced Steel-Reinforced Glass Sheets` -> `Steel-Reinforced
+      Glass Sheets`.
+  - bugfix: Maintenance drones no longer die when traveling through disposals.
+  - bugfix: Using an ID on a bot with an open panel no longer displays two feedback
+      messages.
+  - bugfix: Blob tendrils now have fingerprints added to them when successfully harvested.
+  - bugfix: Repairing borgs now actually works, instead of always saying 'The object
+      does not exist'.
+  - bugfix: External limb that are right on the edge of being irrepairable now actually
+      display as such when scanned, instead of showing 'Extreme'.
