@@ -1,0 +1,5 @@
+author: Jux
+delete-after: true
+changes:
+  - bugfix: MMI organs now transfer damage to the brain they contain.
+  - bugfix: MMI organs now kill the brain they contain if they themselves die.
