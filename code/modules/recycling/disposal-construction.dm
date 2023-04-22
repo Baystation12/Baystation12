@@ -9,7 +9,7 @@
 	anchored = FALSE
 	density = FALSE
 	matter = list(MATERIAL_STEEL = 1850)
-	obj_flags = OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_ANCHORABLE
 	var/sort_type = ""
 	var/dpdir = 0	// directions as disposalpipe
 	var/turn = DISPOSAL_FLIP_FLIP
