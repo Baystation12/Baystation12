@@ -32,6 +32,9 @@ var/global/list/ticket_panels = list()
 
 /datum/ticket/proc/timeoutchecktaken()
 	if (status == TICKET_ASSIGNED)
+		if (is_active())
+			addtimer(new Callback(src, .proc/timeoutchecktaken), 30 MINUTES, TIMER_STOPPABLE)
+			return
 		for (var/datum/client_lite/C in assigned_admins)
 			to_chat(client_by_ckey(C.ckey), SPAN_NOTICE(SPAN_BOLD("Your ticket with [client_by_ckey(owner.ckey)] has timed out and auto-closed.")))
 		close(assigned_admins[1])
