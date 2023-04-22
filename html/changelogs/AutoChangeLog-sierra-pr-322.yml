@@ -1,0 +1,7 @@
+author: cuddleandtea
+delete-after: true
+changes:
+  - soundadd: Звуки для огнетушителя и баллонов
+  - soundadd: Фикс звуков fire и blast доров
+  - soundadd: Фикс звуков удара крестом
+  - soundadd: 12 новых звуков для опускания и поднимания стаканов
