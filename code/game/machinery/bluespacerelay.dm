@@ -1,5 +1,5 @@
 /obj/machinery/bluespacerelay
-	name = "Emergency Bluespace Relay"
+	name = "emergency bluespace relay"
 	desc = "This sends messages through bluespace! Wow!"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "bspacerelay"

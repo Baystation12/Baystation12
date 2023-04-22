@@ -97,7 +97,7 @@
 		return ..()
 
 /obj/machinery/pointdefense
-	name = "\improper point defense battery"
+	name = "point defense battery"
 	icon = 'icons/obj/artillery.dmi'
 	icon_state = "pointdefense"
 	desc = "A Kuiper pattern anti-meteor battery. Capable of destroying most threats in a single salvo."

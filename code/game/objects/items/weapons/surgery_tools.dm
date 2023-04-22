@@ -1,16 +1,3 @@
-/* Surgery Tools
- * Contains:
- *		Retractor
- *		Hemostat
- *		Cautery
- *		Surgical Drill
- *		Scalpel
- *		Circular Saw
- */
-
-/*
- * Retractor
- */
 /obj/item/retractor
 	name = "retractor"
 	desc = "Used to separate the edges of a surgical incision to get to the juicy organs inside."
@@ -130,9 +117,6 @@
 	icon_state = "scalpel_manager_on"
 	force = 7.5
 
-/*
- * Circular Saw
- */
 /obj/item/circular_saw
 	name = "circular saw"
 	desc = "A small and nasty-looking hand saw used to cut through bone, or in an emergency, pizza."
@@ -173,7 +157,7 @@
  * Vascular Recoupler
  */
 /obj/item/FixOVein
-	name = "Vascular Recoupler"
+	name = "vascular recoupler"
 	desc = "Derived from a Vey-Med design, this miniature 3D printer is used to quickly synthetize and thread new organic tissue during surgical procedures."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "fixovein"

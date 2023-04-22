@@ -100,7 +100,7 @@
 	scanner.put_disk_in_hand(holder.wearer)
 
 /obj/item/rig_module/device/rcd
-	name = "RCD mount"
+	name = "\improper RCD mount"
 	desc = "A cell-powered rapid construction device for a hardsuit."
 	icon_state = "rcd"
 	interface_name = "mounted RCD"

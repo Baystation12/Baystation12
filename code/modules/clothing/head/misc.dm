@@ -39,7 +39,7 @@
 	item_state = "pwig"
 
 /obj/item/clothing/head/that
-	name = "top-hat"
+	name = "tophat"
 	desc = "It's an amish looking hat."
 	icon_state = "tophat"
 	item_state = "tophat"
@@ -59,7 +59,7 @@
 	body_parts_covered = 0
 
 /obj/item/clothing/head/plaguedoctorhat
-	name = "plague doctor's hat"
+	name = "plague doctor hat"
 	desc = "These were once used by Plague doctors. They're pretty much useless."
 	icon_state = "plaguedoctor"
 	permeability_coefficient = 0.01

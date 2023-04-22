@@ -1,5 +1,5 @@
 /obj/machinery/keycard_auth
-	name = "Keycard Authentication Device"
+	name = "keycard authentication device"
 	desc = "This device is used to trigger functions which require more than one ID card to authenticate."
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "auth_off"

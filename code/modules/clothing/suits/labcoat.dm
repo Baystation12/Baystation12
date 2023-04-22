@@ -113,7 +113,7 @@
 
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/bishop
-	name = "Bishop labcoat"
+	name = "\improper Bishop labcoat"
 	desc = "A labcoat themed after the prosthetics provided by Bishop Cybernetics."
 	icon_state = "labcoat_bish"
 

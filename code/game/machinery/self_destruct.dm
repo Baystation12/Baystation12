@@ -1,5 +1,5 @@
 /obj/machinery/self_destruct
-	name = "\improper Nuclear Cylinder Inserter"
+	name = "nuclear cylinder inserter"
 	desc = "A hollow space used to insert nuclear cylinders for arming the self destruct."
 	icon = 'icons/obj/machines/self_destruct.dmi'
 	icon_state = "empty"

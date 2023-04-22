@@ -1,5 +1,5 @@
 /obj/item/organ/internal/augment/active/nanounit
-	name = "Nanite MCU"
+	name = "nanite MCU"
 	augment_slots = AUGMENT_CHEST
 	icon_state = "armor-chest"
 	desc = "Nanomachines, son."

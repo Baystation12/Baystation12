@@ -19,7 +19,7 @@
 
 //Skrell space gear. Sleek like a wetsuit.
 /obj/item/clothing/head/helmet/space/void/skrell
-	name = "Skrellian helmet"
+	name = "skrellian helmet"
 	desc = "Smoothly contoured and polished to a shine. Still looks like a fishbowl."
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
@@ -40,7 +40,7 @@
 	icon_state = "skrell_helmet_black"
 
 /obj/item/clothing/suit/space/void/skrell
-	name = "Skrellian voidsuit"
+	name = "skrellian voidsuit"
 	desc = "Seems like a wetsuit with reinforced plating seamlessly attached to it. Very chic."
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,

@@ -1,5 +1,5 @@
 /obj/item/stock_parts/computer/card_slot
-	name = "RFID card slot"
+	name = "\improper RFID card slot"
 	desc = "Slot that allows this computer to write data on RFID cards. Necessary for some programs to run properly."
 	power_usage = 10 //W
 	critical = FALSE
@@ -108,7 +108,7 @@
 	return TRUE
 
 /obj/item/stock_parts/computer/card_slot/broadcaster // read only
-	name = "RFID card broadcaster"
+	name = "\improper RFID card broadcaster"
 	desc = "Reads and broadcasts the RFID signal of an inserted card."
 	can_write = FALSE
 	can_broadcast = TRUE

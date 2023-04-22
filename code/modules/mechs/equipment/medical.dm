@@ -1,5 +1,5 @@
 /obj/item/mech_equipment/sleeper
-	name = "\improper exosuit sleeper"
+	name = "exosuit sleeper"
 	desc = "An exosuit-mounted sleeper designed to mantain patients stabilized on their way to medical facilities."
 	icon_state = "mech_sleeper"
 	restricted_hardpoints = list(HARDPOINT_BACK)
@@ -47,7 +47,7 @@
 		return "[sleeper.occupant]"
 
 /obj/machinery/sleeper/mounted
-	name = "\improper mounted sleeper"
+	name = "mounted sleeper"
 	density = FALSE
 	anchored = FALSE
 	idle_power_usage = 0

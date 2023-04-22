@@ -36,7 +36,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 /obj/machinery/message_server
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "server"
-	name = "Messaging Server"
+	name = "messaging server"
 	density = TRUE
 	anchored = TRUE
 	idle_power_usage = 10

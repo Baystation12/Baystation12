@@ -23,7 +23,7 @@
 	icon_state = "stamp-solgov"
 
 /obj/item/stamp/nt
-	name = "\improper corporate rubber stamp"
+	name = "corporate rubber stamp"
 	icon_state = "stamp-corp"
 
 /obj/item/stamp/deckoff

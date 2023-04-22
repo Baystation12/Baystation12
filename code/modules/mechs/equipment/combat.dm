@@ -230,7 +230,7 @@
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 
 /obj/item/material/hatchet/machete/mech
-	name = "Mechete"
+	name = "mechete"
 	desc = "That thing was too big to be called a machete. Too big, too thick, too heavy, and too rough, it was more like a large hunk of iron."
 	w_class = ITEM_SIZE_GARGANTUAN
 	slot_flags = 0

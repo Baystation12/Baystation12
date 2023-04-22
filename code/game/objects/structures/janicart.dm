@@ -217,7 +217,7 @@
 		overlays += "cart_sign[signs]"
 
 
-//old style retardo-cart
+//old style cart
 /obj/structure/bed/chair/janicart
 	name = "janicart"
 	icon = 'icons/obj/vehicles.dmi'

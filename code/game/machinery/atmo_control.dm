@@ -3,7 +3,7 @@
 	icon_keyboard = "atmos_key"
 	icon_screen = "tank"
 
-	name = "Atmospherics Control Console"
+	name = "atmospherics control console"
 	machine_name = "atmosphere monitoring console"
 	machine_desc = "Allows for the monitoring of the gases in an area by using a connected gas sensor, as well as controlling injection and output."
 

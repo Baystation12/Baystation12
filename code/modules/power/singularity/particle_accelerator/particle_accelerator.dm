@@ -56,7 +56,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 */
 
 /obj/structure/particle_accelerator
-	name = "Particle Accelerator"
+	name = "particle accelerator"
 	desc = "Part of a Particle Accelerator."
 	icon = 'icons/obj/machines/particle_accelerator2.dmi'
 	icon_state = "none"
@@ -82,7 +82,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	. = ..()
 
 /obj/structure/particle_accelerator/end_cap
-	name = "Alpha Particle Generation Array"
+	name = "alpha particle generation array"
 	desc_holder = "This is where Alpha particles are generated from \[REDACTED\]"
 	icon_state = "end_cap"
 	reference = "end_cap"
@@ -244,7 +244,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 
 
 /obj/machinery/particle_accelerator
-	name = "Particle Accelerator"
+	name = "particle accelerator"
 	desc = "Part of a Particle Accelerator."
 	icon = 'icons/obj/machines/particle_accelerator2.dmi'
 	icon_state = "none"

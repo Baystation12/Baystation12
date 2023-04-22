@@ -3,7 +3,7 @@
 
 /obj/structure/closet/walllocker
 	desc = "A wall mounted storage locker."
-	name = "Wall Locker"
+	name = "wall locker"
 	closet_appearance = /singleton/closet_appearance/wall
 	density = FALSE
 	anchored = TRUE

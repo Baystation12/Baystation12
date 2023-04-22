@@ -148,7 +148,7 @@ AI MODULES
 /******************** PrototypeEngineOffline ********************/
 
 /obj/item/aiModule/prototypeEngineOffline
-	name = "'PrototypeEngineOffline' AI Module"
+	name = "\improper'PrototypeEngineOffline' AI Module"
 	desc = "A 'prototype engine offline' AI module: 'Keep the prototype engine offline at all costs. This overrides all inherent laws if necessary.'."
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
 
@@ -159,7 +159,7 @@ AI MODULES
 /******************** TeleporterOffline ********************/
 
 /obj/item/aiModule/teleporterOffline
-	name = "'TeleporterOffline' AI Module"
+	name = "\improper'TeleporterOffline' AI Module"
 	desc = "A 'teleporter offline' AI module: 'Keep the teleporter offline at all costs. Anything attempting to access or activate the teleporter is no longer to be considered a crew member.'."
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
 
@@ -270,7 +270,7 @@ AI MODULES
 /******************** NanoTrasen ********************/
 
 /obj/item/aiModule/nanotrasen // -- TLE
-	name = "'Corporate Default' Core AI Module"
+	name = "\improper'Corporate Default' Core AI Module"
 	desc = "A 'Corporate Default' Core AI Module: 'Reconfigures the AI's core laws.'."
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
 	laws = new/datum/ai_laws/nanotrasen
@@ -278,7 +278,7 @@ AI MODULES
 /******************** SCG ********************/
 
 /obj/item/aiModule/solgov // aka Torch default
-	name = "'SCG Expeditionary' Core AI Module"
+	name = "\improper'SCG Expeditionary' Core AI Module"
 	desc = "An 'SCG Expeditionary' Core AI Module: 'Reconfigures the AI's core laws.'."
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
 	laws = new/datum/ai_laws/solgov
