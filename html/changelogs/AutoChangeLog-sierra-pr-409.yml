@@ -1,5 +1,0 @@
-author: PurplePineapple
-delete-after: true
-changes:
-  - bugfix: Table slamming now works on harm intent with an aggressive grab.
-  - bugfix: Three-Eye's overlay is no longer unintentionally a black screen.
