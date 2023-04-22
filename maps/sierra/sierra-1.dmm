@@ -3131,6 +3131,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/techfloor,
+/obj/effect/shuttle_landmark/reaper/dock,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/thirddeck/fore)
 "fK" = (
@@ -13489,7 +13490,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aft)
 "vE" = (
-/obj/effect/shuttle_landmark/merc/dock,
+/obj/effect/shuttle_landmark/snz/dock,
 /turf/space,
 /area/space)
 "vF" = (
@@ -28599,6 +28600,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
+"Vr" = (
+/obj/effect/shuttle_landmark/merc/dock{
+	name = "NSV Sierra Main Airlock"
+	},
+/turf/space,
+/area/space)
 "Vs" = (
 /obj/machinery/light_switch{
 	dir = 8;
@@ -38492,7 +38499,7 @@ Is
 Is
 Is
 Is
-Is
+Vr
 Is
 Is
 Is
@@ -38695,7 +38702,7 @@ Is
 Is
 Is
 Is
-vE
+Is
 Is
 Is
 Is
@@ -46597,7 +46604,7 @@ Tx
 yM
 yS
 Ml
-Is
+vE
 Is
 Is
 Is

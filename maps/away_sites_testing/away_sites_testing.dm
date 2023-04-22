@@ -21,9 +21,11 @@
 	#include "../away/miningstation/miningstation.dm"
 	#include "../away/scavver/scavver_gantry.dm"
 	#include "../away/voxship/voxship.dm"
+
 // SIERRA TODO: fix that shit
 //	#include "../../mods/maps/liberia/_map_liberia.dme" Uses too many assets from mods and Sierra, which makes separate testing obsolete
 //	#include "../../mods/maps/sentinel/_map_sentinel.dme" Ises too many assets from Torch, which makes separate testing obsolete
+//	#include "../../mods/maps/farfleet/_map_farfleet.dme" Uses too many assets from Faction ICCG pack which makes separate testing obsolete
 
 	#define using_map_DATUM /datum/map/away_sites_testing
 
