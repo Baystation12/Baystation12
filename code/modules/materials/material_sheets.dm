@@ -95,7 +95,6 @@
 		desc = "[get_vague_name()]."
 		gender = NEUTER
 	if(reinf_material)
-		SetName("[reinf_material.use_name]-reinforced [name]")
 		desc += "\nIt is reinforced with the [reinf_material.use_name] lattice."
 
 /obj/item/stack/material/use(used)

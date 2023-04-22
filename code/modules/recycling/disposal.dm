@@ -428,7 +428,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	flick("[icon_state]-flush", src)
 
 	var/wrapcheck = 0
-	var/obj/structure/disposalholder/H = new()	// virtual holder object which actually
+	var/obj/structure/disposalholder/H = new(src)	// virtual holder object which actually
 												// travels through the pipes.
 
 	// handle vomit transportation

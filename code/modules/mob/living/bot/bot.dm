@@ -95,7 +95,6 @@
 	if (istype(id))
 		if (open)
 			USE_FEEDBACK_FAILURE("\The [src]'s access panel must be closed before you can lock it.")
-			to_chat(user, SPAN_WARNING("\The [src]'s access panel must be closed before you can lock it."))
 			return TRUE
 		var/id_name = GET_ID_NAME(id, tool)
 		if (!access_scanner.check_access(id))
