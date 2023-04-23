@@ -1143,7 +1143,6 @@
 /area/ship/skrellscoutship/crew/medbay)
 "dS" = (
 /obj/structure/table/glass,
-/obj/machinery/reagent_temperature/cooler,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
@@ -4544,7 +4543,6 @@
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
 "Al" = (
-/obj/machinery/reagent_temperature/cooler,
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/crew/labs)

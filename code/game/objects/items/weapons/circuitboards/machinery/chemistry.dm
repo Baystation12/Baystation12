@@ -1,5 +1,5 @@
-/obj/item/stock_parts/circuitboard/reagent_heater
-	name = "circuit board (chemical heater)"
+/obj/item/stock_parts/circuitboard/reagent_temp
+	name = "circuit board (thermal regulator)"
 	build_path = /obj/machinery/reagent_temperature
 	board_type = "machine"
 	origin_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 1)
@@ -12,10 +12,6 @@
 		/obj/item/stock_parts/keyboard = 1,
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)
-
-/obj/item/stock_parts/circuitboard/reagent_heater/cooler
-	name = "circuit board (chemical cooler)"
-	build_path = /obj/machinery/reagent_temperature/cooler
 
 /obj/item/stock_parts/circuitboard/sublimator
 	name = "circuit board (reagent sublimator)"

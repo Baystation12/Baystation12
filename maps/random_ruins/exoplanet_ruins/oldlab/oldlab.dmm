@@ -2667,7 +2667,6 @@
 /area/map_template/oldlab/station/hall)
 "SB" = (
 /obj/structure/table/steel,
-/obj/machinery/reagent_temperature/cooler,
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab/station/chem)
 "SL" = (

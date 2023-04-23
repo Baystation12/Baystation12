@@ -1,12 +1,10 @@
 #define MINIMUM_GLOW_TEMPERATURE 323
 #define MINIMUM_GLOW_VALUE       25
 #define MAXIMUM_GLOW_VALUE       255
-#define HEATER_MODE_HEAT         "heat"
-#define HEATER_MODE_COOL         "cool"
 
 /obj/machinery/reagent_temperature
-	name = "chemical heater"
-	desc = "A small electric Bunsen, used to heat beakers and vials of chemicals."
+	name = "thermal regulator"
+	desc = "A small electric device used to heat and cool chemicals."
 	icon = 'icons/obj/machines/heat_sources.dmi'
 	icon_state = "hotplate"
 	atom_flags = ATOM_FLAG_CLIMBABLE
@@ -16,34 +14,24 @@
 	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	machine_name = "chemical heater"
-	machine_desc = "A small, configurable burner used to heat beakers and other chemical containers."
+	machine_name = "thermal regulator"
+	machine_desc = "A small, configurable plate used to heat and cool chemical containers."
 
 	var/image/glow_icon
 	var/image/beaker_icon
 	var/image/on_icon
 
-	var/heater_mode =          HEATER_MODE_HEAT
+	var/heating =			   TRUE
 	var/list/permitted_types = list(/obj/item/reagent_containers/glass)
 	var/max_temperature =      200 CELSIUS
-	var/min_temperature =      40  CELSIUS
+	var/min_temperature =      -100  CELSIUS
 	var/heating_power =        10 // K
 	var/last_temperature
 	var/target_temperature
 	var/obj/item/container
 
-/obj/machinery/reagent_temperature/cooler
-	name = "chemical cooler"
-	desc = "A small electric cooler, used to chill beakers and vials of chemicals."
-	icon_state = "coldplate"
-	heater_mode =      HEATER_MODE_COOL
-	max_temperature =  30 CELSIUS
-	min_temperature = -80 CELSIUS
-	machine_name = "chemical cooler"
-	machine_desc = "Like a chemical heater, but chills things instead of heating them up."
-
 /obj/machinery/reagent_temperature/Initialize()
-	target_temperature = min_temperature
+	target_temperature = 50 CELSIUS
 	. = ..()
 
 /obj/machinery/reagent_temperature/Destroy()
@@ -89,9 +77,9 @@
 /obj/machinery/reagent_temperature/ProcessAtomTemperature()
 	if(use_power >= POWER_USE_ACTIVE)
 		var/last_temperature = temperature
-		if(heater_mode == HEATER_MODE_HEAT && temperature < target_temperature)
+		if(heating && temperature < target_temperature)
 			temperature = min(target_temperature, temperature + heating_power)
-		else if(heater_mode == HEATER_MODE_COOL && temperature > target_temperature)
+		else if(!heating && temperature > target_temperature)
 			temperature = max(target_temperature, temperature - heating_power)
 		if(temperature != last_temperature)
 			if(container)
@@ -143,6 +131,11 @@
 	else
 		set_light(0)
 
+	if(heating)
+		icon_state = "hotplate"
+	else
+		icon_state = "coldplate"
+
 	if(container)
 		if(!beaker_icon)
 			beaker_icon = image(icon, "[icon_state]-beaker")
@@ -154,6 +147,9 @@
 
 	var/dat = list()
 	dat += "<table>"
+
+	dat += "<tr><td>Temperature Mode:</td><td><a href='?src=\ref[src];switch_mode=heating'>[heating ? "Heat" : "Chill"]</a></td></tr>"
+
 	dat += "<tr><td>Target temperature:</td><td>"
 
 	if(target_temperature > min_temperature)
@@ -197,6 +193,12 @@
 
 	return TOPIC_REFRESH
 
+/obj/machinery/reagent_temperature/proc/ToggleMode()
+	heating = !heating
+	update_icon()
+
+	return TOPIC_REFRESH
+
 /obj/machinery/reagent_temperature/OnTopic(mob/user, href_list)
 
 	if(href_list["adjust_temperature"])
@@ -212,11 +214,13 @@
 		eject_beaker(user)
 		. = TOPIC_REFRESH
 
+	if(href_list["switch_mode"])
+		ToggleMode()
+		. = TOPIC_REFRESH
+
 	if(. == TOPIC_REFRESH)
 		interact(user)
 
 #undef MINIMUM_GLOW_TEMPERATURE
 #undef MINIMUM_GLOW_VALUE
 #undef MAXIMUM_GLOW_VALUE
-#undef HEATER_MODE_HEAT
-#undef HEATER_MODE_COOL
