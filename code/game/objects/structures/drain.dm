@@ -64,6 +64,9 @@
 
 /obj/item/drain/attackby(obj/item/thing, mob/user)
 	if(isWrench(thing))
+		if (!isturf(loc))
+			USE_FEEDBACK_FAILURE("\The [src] needs to be placed on the floor before you can secure it.")
+			return TRUE
 		new constructed_type(src.loc)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, SPAN_WARNING("[user] wrenches the [src] down."))
