@@ -787,7 +787,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 				var/temp_dat
 				for(var/M in D.materials)
-					temp_dat += ", [D.materials[M]] [CallMaterialName(M)]"
+					temp_dat += ", [D.materials[M]*(linked_lathe ? linked_lathe.mat_efficiency : 1)] [CallMaterialName(M)]"
 				for(var/T in D.chemicals)
 					temp_dat += ", [D.chemicals[T]*(linked_imprinter ? linked_imprinter.mat_efficiency : 1)] [CallReagentName(T)]"
 				if(temp_dat)
