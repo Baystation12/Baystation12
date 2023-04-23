@@ -43,8 +43,7 @@ var/global/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL
 	for(var/material_needed in design.materials)
 		if(materials[material_needed] < design.materials[material_needed])
 			ret += "[design.materials[material_needed] - materials[material_needed]] [material_needed]"
-	for(var/chemical_needed in design.chemicals)
+	for(var/datum/reagent/chemical_needed as anything in design.chemicals)
 		if(!reagents.has_reagent(chemical_needed, design.chemicals[chemical_needed]))
-			var/datum/reagent/reagent_needed = reagents.get_reagent(chemical_needed)
-			ret += "[design.chemicals[chemical_needed] - reagents.get_reagent_amount(chemical_needed)]u [reagent_needed.name]"
+			ret += "[design.chemicals[chemical_needed] - reagents.get_reagent_amount(chemical_needed)]u [initial(chemical_needed.name)]"
 	return english_list(ret)
