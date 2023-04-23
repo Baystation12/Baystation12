@@ -185,7 +185,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 			extra += "<ul>"
 			for (var/index = 1 to length(L))
 				var/entry = L[index]
-				if(!isnum(entry) && !isnull(entry) && !(varname in view_variables_no_assoc) && L[entry] != null)
+				if(!isnum(entry) && !isnull(entry) && !(varname in view_variables_no_assoc))
 					extra += "<li>[index]: [make_view_variables_value(entry)] -> [make_view_variables_value(L[entry])]</li>"
 				else
 					extra += "<li>[index]: [make_view_variables_value(entry)]</li>"
