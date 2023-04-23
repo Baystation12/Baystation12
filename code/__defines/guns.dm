@@ -24,7 +24,9 @@
 #define MAGAZINE 		4	//The magazine item itself goes inside the gun
 
 
+#define GUN_BULK_LIGHT_RIFLE 4
 #define GUN_BULK_RIFLE  5
+#define GUN_BULK_HEAVY_RIFLE 6
 
 #define BULLET_IMPACT_NONE  "none"
 #define BULLET_IMPACT_METAL "metal"
