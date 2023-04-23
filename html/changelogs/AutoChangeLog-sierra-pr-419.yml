@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Airlock assemblies and disposal pipes can now be anchored.
-  - bugfix: Airlock assemblies no longer drop their circuits on the floor when installed.
