@@ -55,7 +55,7 @@
 		if (rigged)
 			USE_FEEDBACK_FAILURE("\The [src] is already rigged.")
 			return TRUE
-		var/obj/item/stack/cable_coil/cable
+		var/obj/item/stack/cable_coil/cable = tool
 		if (!cable.use(1))
 			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to rig \the [src].")
 			return TRUE
