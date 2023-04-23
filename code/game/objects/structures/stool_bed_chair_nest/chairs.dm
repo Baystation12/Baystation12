@@ -348,12 +348,14 @@
 	base_icon = "wooden_chair"
 	icon_state = "wooden_chair_preview"
 	color = WOOD_COLOR_GENERIC
+	/// String (One of `MATERIAL_*`). Base material for the chair. Only used if `New()` is not passed a material.
 	var/chair_material = MATERIAL_WOOD
 	buckle_movable = FALSE
 	bed_flags = BED_FLAG_CANNOT_BE_PADDED
 
-/obj/structure/bed/chair/wood/New(newloc)
-	..(newloc, chair_material)
+/obj/structure/bed/chair/wood/New(newloc, _material)
+	..(newloc, _material? _material : chair_material)
+	set_color(material.icon_colour)
 
 /obj/structure/bed/chair/wood/mahogany
 	color = WOOD_COLOR_RICH
@@ -398,6 +400,7 @@
 	icon_state = "pew"
 	base_icon = "pew"
 	color = WOOD_COLOR_GENERIC
+	/// String (One of `MATERIAL_*`). Base material for the chair. Only used if `New()` is not passed a material.
 	var/material/pew_material = MATERIAL_WOOD
 	obj_flags = 0
 	buckle_movable = FALSE
@@ -406,8 +409,9 @@
 	icon_state = "pew_left"
 	base_icon = "pew_left"
 
-/obj/structure/bed/chair/pew/New(newloc)
-	..(newloc, pew_material)
+/obj/structure/bed/chair/pew/New(newloc, _material)
+	..(newloc, _material? _material : pew_material)
+	set_color(material.icon_colour)
 
 /obj/structure/bed/chair/pew/mahogany
 	color = WOOD_COLOR_RICH
