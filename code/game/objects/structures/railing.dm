@@ -261,6 +261,7 @@
 		if (anchored)
 			playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
 			set_density(!density)
+			update_icon()
 			user.visible_message(
 				SPAN_NOTICE("\The [user] [density ? "closes" : "opens"] \the [src] with \a [tool]."),
 				SPAN_NOTICE("You [density ? "close" : "open"] \the [src] with \the [tool].")
