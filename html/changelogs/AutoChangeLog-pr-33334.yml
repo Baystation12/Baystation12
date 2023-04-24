@@ -1,4 +1,0 @@
-author: Fenodyree
-delete-after: true
-changes:
-  - bugfix: Protolathe now displays correct material costs after upgrades.

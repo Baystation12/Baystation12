@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Active tickets will no longer timeout after 30 minutes if the staff member
-      assigned is still active.
