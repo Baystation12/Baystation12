@@ -15,7 +15,7 @@ jobs:
     if: github.repository == 'SierraBay/SierraBay12' && github.base_ref == 'dev220' && github.event.pull_request.draft == false
     steps:
       - name: Checkout
-        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
         with:
           persist-credentials: false
           fetch-depth: 25
