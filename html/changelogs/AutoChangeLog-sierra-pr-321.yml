@@ -1,0 +1,6 @@
+author: cuddleandtea
+delete-after: true
+changes:
+  - soundadd: Звук падения карбонов 4 штуки
+  - soundadd: Отдельный звук падения скреллов 4 штуки
+  - soundadd: Звук падения тела через Z уровни 4 штуки (старосыровский)
