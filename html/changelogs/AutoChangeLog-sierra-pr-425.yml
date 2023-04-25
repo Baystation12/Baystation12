@@ -1,4 +1,0 @@
-author: SierraHelper
-delete-after: true
-changes:
-  - bugfix: Fixed display of guest pass terminal log.
