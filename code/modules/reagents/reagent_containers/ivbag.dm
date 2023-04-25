@@ -327,6 +327,18 @@
 	return ..(mapload, "O-")
 
 
+/obj/item/reagent_containers/ivbag/blood/serpentid
+	abstract_type = /obj/item/reagent_containers/ivbag/blood/serpentid
+
+
+/obj/item/reagent_containers/ivbag/blood/serpentid/Initialize(mapload, blood_type)
+	return ..(mapload, blood_type, SPECIES_NABBER)
+
+
+/obj/item/reagent_containers/ivbag/blood/serpentid/oneg/Initialize(mapload)
+	return ..(mapload, "O-")
+
+
 /obj/item/reagent_containers/ivbag/blood/skrell
 	abstract_type = /obj/item/reagent_containers/ivbag/blood/skrell
 
@@ -380,6 +392,13 @@
 	name = "portable freezer (human blood)"
 	startswith = list(
 		/obj/item/reagent_containers/ivbag/blood/human/oneg = 4
+	)
+
+
+/obj/item/storage/box/freezer/blood/serpentid
+	name = "portable freezer (serpentid blood)"
+	startswith = list(
+		/obj/item/reagent_containers/ivbag/blood/serpentid/oneg = 4
 	)
 
 

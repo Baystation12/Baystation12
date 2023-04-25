@@ -82,10 +82,10 @@
 /singleton/hierarchy/supply_pack/medical/nanoblood
 	name = "Refills - Nanoblood"
 	contains = list(/obj/item/reagent_containers/ivbag/nanoblood = 4)
-	cost = 30
+	cost = 40
 	containername = "nanoblood crate"
 
-/singleton/hierarchy/supply_pack/medical/humanblood
+/singleton/hierarchy/supply_pack/medical/human_oneg
 	name = "Refills - Human O- Blood"
 	contains = list(
 		/obj/item/storage/box/freezer/blood/human = 1
@@ -93,20 +93,28 @@
 	cost = 15
 	containername = "human O- blood crate"
 
-/singleton/hierarchy/supply_pack/medical/skrellblood
+/singleton/hierarchy/supply_pack/medical/serpentid_oneg
+	name = "Refills - Serpentid O- Blood"
+	contains = list(
+		/obj/item/storage/box/freezer/blood/serpentid = 1
+	)
+	cost = 25
+	containername = "unathi blood crate"
+
+/singleton/hierarchy/supply_pack/medical/skrell_oneg
 	name = "Refills - Skrell O- Blood"
 	contains = list(
 		/obj/item/storage/box/freezer/blood/skrell = 1
 	)
-	cost = 20
+	cost = 25
 	containername = "skrell blood crate"
 
-/singleton/hierarchy/supply_pack/medical/unathiblood
+/singleton/hierarchy/supply_pack/medical/unathi_oneg
 	name = "Refills - Unathi O- Blood"
 	contains = list(
 		/obj/item/storage/box/freezer/blood/unathi = 1
 	)
-	cost = 20
+	cost = 25
 	containername = "unathi blood crate"
 
 /singleton/hierarchy/supply_pack/medical/bodybag
