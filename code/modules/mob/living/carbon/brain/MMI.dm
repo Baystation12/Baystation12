@@ -1,32 +1,3 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
-/obj/item/device/mmi/digital
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_TOOLS
-
-/obj/item/device/mmi/digital/New()
-	src.brainmob = new(src)
-	src.brainmob.set_stat(CONSCIOUS)
-	src.brainmob.add_language("Robot Talk")
-	src.brainmob.add_language("Encoded Audio Language")
-
-	src.brainmob.container = src
-	src.brainmob.silent = 0
-	PickName()
-	..()
-
-/obj/item/device/mmi/digital/proc/PickName()
-	return
-
-/obj/item/device/mmi/digital/attack_self()
-	return
-
-/obj/item/device/mmi/digital/transfer_identity(mob/living/carbon/H)
-	brainmob.dna = H.dna
-	brainmob.timeofhostdeath = H.timeofdeath
-	brainmob.set_stat(CONSCIOUS)
-	if(H.mind)
-		H.mind.transfer_to(brainmob)
-	return
-
 /obj/item/device/mmi
 	name = "\improper Man-Machine Interface"
 	desc = "A complex life support shell that interfaces between a brain and electronic devices."

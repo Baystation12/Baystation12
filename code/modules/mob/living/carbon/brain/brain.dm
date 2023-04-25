@@ -48,9 +48,6 @@
 	if(istype(loc, /obj/item/device/mmi))
 		use_me = 1
 
-/mob/living/carbon/brain/isSynthetic()
-	return istype(loc, /obj/item/device/mmi/digital)
-
 /mob/living/carbon/brain/binarycheck()
 	return isSynthetic()
 
