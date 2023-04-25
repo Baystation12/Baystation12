@@ -107,6 +107,7 @@
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
 	vital = 1
+	relative_size = 85
 	var/obj/item/device/mmi/stored_mmi
 	var/datum/mind/persistantMind //Mind that the organ will hold on to after being removed, used for transfer_and_delete
 	var/ownerckey // used in the event the owner is out of body
@@ -119,6 +120,13 @@
 	..(new_owner, internal)
 	if(!stored_mmi)
 		stored_mmi = new(src)
+		..()
+
+	if(species)
+		set_max_damage(species.total_health)
+	else
+		set_max_damage(200)
+
 	sleep(-1)
 	update_from_mmi()
 	persistantMind = owner.mind
