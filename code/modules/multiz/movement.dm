@@ -257,6 +257,11 @@
 		return
 
 	..()
+	// [SIERRA]
+	playsound(loc, "smash_sound", 50, 1)
+	if(client) shake_camera(src, 7, 0.5)
+	// [/SIERRA]
+
 	var/min_damage = 7
 	var/max_damage = 14
 	apply_damage(rand(min_damage, max_damage), DAMAGE_BRUTE, BP_HEAD, armor_pen = 50)
