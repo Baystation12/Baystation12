@@ -114,7 +114,7 @@ var/global/list/ai_verbs_default = list(
 	src.verbs += /mob/living/verb/ghost
 
 
-/mob/living/silicon/ai/Initialize(mapload, datum/ai_laws/L, obj/item/device/mmi/B, safety = FALSE)
+/mob/living/silicon/ai/Initialize(mapload, datum/ai_laws/L, obj/item/organ/internal/mmi/B, safety = FALSE)
 	announcement = new()
 	announcement.title = "A.I. Announcement"
 	announcement.announcement_type = "A.I. Announcement"

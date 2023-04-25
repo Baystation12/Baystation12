@@ -15647,8 +15647,8 @@
 	dir = 1
 	},
 /obj/structure/closet/crate/freezer,
-/obj/item/device/mmi,
-/obj/item/device/mmi,
+/obj/item/organ/internal/mmi,
+/obj/item/organ/internal/mmi,
 /obj/machinery/alarm{
 	dir = 8;
 	pixel_x = 24

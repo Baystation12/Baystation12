@@ -63,7 +63,7 @@
 	// Components are basically robot organs.
 	var/list/components = list()
 
-	var/obj/item/device/mmi/mmi = null
+	var/obj/item/organ/internal/mmi/mmi
 
 	var/obj/item/stock_parts/matter_bin/storage = null
 

@@ -59,7 +59,7 @@ SUBSYSTEM_DEF(robots)
 			.[include_override] = modules[include_override]
 
 /datum/controller/subsystem/robots/proc/get_mmi_type_by_title(check_title)
-	. = mmi_types_by_title[lowertext(trimtext(check_title))] || /obj/item/device/mmi
+	. = mmi_types_by_title[lowertext(trimtext(check_title))] || /obj/item/organ/internal/mmi
 
 /datum/controller/subsystem/robots/proc/get_mob_type_by_title(check_title)
 	. = mob_types_by_title[lowertext(trimtext(check_title))] || /mob/living/silicon/robot

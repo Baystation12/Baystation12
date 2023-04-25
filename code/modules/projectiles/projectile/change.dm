@@ -49,8 +49,8 @@
 				new_mob.set_invisibility(0)
 				new_mob.job = "Robot"
 				var/mob/living/silicon/robot/Robot = new_mob
-				Robot.mmi = new /obj/item/device/mmi(new_mob)
-				Robot.mmi.transfer_identity(M)	//Does not transfer key/client.
+				Robot.mmi = new /obj/item/organ/internal/mmi (new_mob)
+				Robot.mmi.steal_brain(M)	//Does not transfer key/client.
 			if("slime")
 				new_mob = new /mob/living/carbon/slime(M.loc)
 				new_mob.universal_speak = TRUE

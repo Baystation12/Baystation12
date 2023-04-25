@@ -23,7 +23,7 @@ var/global/list/empty_playable_ai_cores = list()
 
 	var/datum/ai_laws/laws = new /datum/ai_laws/nanotrasen
 	var/obj/item/stock_parts/circuitboard/circuit = null
-	var/obj/item/device/mmi/brain = null
+	var/obj/item/organ/internal/mmi/brain
 	var/authorized
 
 /obj/structure/AIcore/emag_act(remaining_charges, mob/user, emag_source)
@@ -209,7 +209,7 @@ var/global/list/empty_playable_ai_cores = list()
 
 	// Man-Machine Interface, Positronic Matrix
 	// - State 4 - Install brain, move to State 5
-	if (istype(tool, /obj/item/device/mmi) || istype(tool, /obj/item/organ/internal/posibrain))
+	if (istype(tool, /obj/item/organ/internal/mmi) || istype(tool, /obj/item/organ/internal/posibrain))
 		if (state < STATE_WIRED)
 			USE_FEEDBACK_FAILURE("\The [src] needs to be wired before you can install \the [tool].")
 			return TRUE
@@ -220,8 +220,8 @@ var/global/list/empty_playable_ai_cores = list()
 			USE_FEEDBACK_FAILURE("\The [src]'s panel needs to be removed before you can install \the [tool].")
 			return TRUE
 		var/mob/living/carbon/brain/new_brain
-		if (istype(tool, /obj/item/device/mmi))
-			var/obj/item/device/mmi/mmi = tool
+		if (istype(tool, /obj/item/organ/internal/mmi))
+			var/obj/item/organ/internal/mmi/mmi = tool
 			new_brain = mmi.brainmob
 		else if (istype(tool, /obj/item/organ/internal/posibrain))
 			var/obj/item/organ/internal/posibrain/posibrain = tool
