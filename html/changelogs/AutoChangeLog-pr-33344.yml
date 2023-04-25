@@ -1,0 +1,5 @@
+author: Jux
+delete-after: true
+changes:
+  - bugfix: Unbranded hands no longer have a void between the fingers and body when
+      view from the side on feminine bodies.
