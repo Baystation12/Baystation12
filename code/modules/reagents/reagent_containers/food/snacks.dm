@@ -1711,7 +1711,7 @@
 	bitesize = 2
 
 /obj/item/reagent_containers/food/snacks/boiledrice/use_tool(obj/item/reagent_containers/food/snacks/W as obj, mob/user as mob)
-	if(W.sushi_overlay)
+	if(istype(W) && W.sushi_overlay)
 		new /obj/item/reagent_containers/food/snacks/sushi(get_turf(src), src, W)
 		return TRUE
 	return ..()
