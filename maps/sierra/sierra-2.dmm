@@ -630,6 +630,9 @@
 /obj/effect/floor_decal/corner/paleblue/bordercorner2{
 	dir = 1
 	},
+/obj/structure/closet/shipping_wall/filled{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "abg" = (
@@ -835,6 +838,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
+	},
+/obj/structure/closet/shipping_wall/filled{
+	pixel_y = 32;
+	pixel_x = -32
 	},
 /turf/simulated/floor/tiled,
 /area/hydroponics)
@@ -2746,6 +2753,9 @@
 "afz" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/papershredder,
+/obj/structure/closet/shipping_wall/filled{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/hardstorage)
 "afA" = (
@@ -2911,6 +2921,9 @@
 /obj/effect/floor_decal/techfloor,
 /obj/effect/floor_decal/techfloor{
 	dir = 1
+	},
+/obj/machinery/space_heater/stationary{
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/bluespace/chamber)
@@ -6131,7 +6144,8 @@
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
-/obj/structure/table/steel_reinforced,
+/obj/structure/wall_frame/standard,
+/obj/structure/table/wallf/steel,
 /turf/simulated/floor/plating,
 /area/engineering/engineering_monitoring)
 "alJ" = (
@@ -15162,15 +15176,16 @@
 	dir = 4;
 	id_tag = "lockdown2_6"
 	},
-/obj/structure/table/wallf{
-	dir = 4
-	},
 /obj/machinery/door/window/brigdoor/westleft{
 	id_tag = null;
 	polarized = 1;
 	req_access = list("ACCESS_BRIDGE");
 	id = "bridge_windows";
 	autoset_access = 0
+	},
+/obj/structure/wall_frame/standard,
+/obj/structure/table/wallf{
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/bridge/hall/level_one)
@@ -17725,7 +17740,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	dir = 4
 	},
-/obj/machinery/door/airlock/glass/engineering{
+/obj/machinery/door/airlock/engineering{
 	name = "Quick Access Warehouse"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -20910,6 +20925,9 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 1
 	},
+/obj/machinery/space_heater/stationary{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/bluespace/chamber)
 "aMx" = (
@@ -22901,13 +22919,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
-/obj/machinery/door/airlock/glass/engineering{
-	name = "Quick Access Warehouse"
-	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	id_tag = "eng_lockdown";
 	name = "Engineering Lockdown"
+	},
+/obj/machinery/door/airlock/engineering{
+	name = "Quick Access Warehouse"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/materials_storage)
@@ -34521,13 +34539,13 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/door/airlock/glass/engineering{
-	name = "Quick Access Warehouse"
-	},
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	id_tag = "eng_lockdown";
 	name = "Engineering Lockdown"
+	},
+/obj/machinery/door/airlock/engineering{
+	name = "Quick Access Warehouse"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/materials_storage)
@@ -34810,6 +34828,10 @@
 	dir = 4
 	},
 /obj/machinery/light/led/small,
+/obj/structure/closet/shipping_wall/filled{
+	pixel_x = -25;
+	pixel_y = -4
+	},
 /turf/simulated/floor/wood/ebony,
 /area/crew_quarters/bar)
 "hSe" = (
@@ -39522,10 +39544,6 @@
 	},
 /turf/simulated/floor/wood/mahogany,
 /area/crew_quarters/lounge_big)
-"uLg" = (
-/obj/machinery/space_heater,
-/turf/simulated/wall/r_wall/prepainted,
-/area/engineering/bluespace/chamber)
 "uLL" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -52337,7 +52355,7 @@ awL
 ahU
 abG
 bhG
-uLg
+agw
 afK
 agD
 aCQ
@@ -52539,7 +52557,7 @@ ahQ
 ahU
 abG
 agv
-uLg
+agw
 aMw
 alx
 aIT
@@ -52741,7 +52759,7 @@ ahQ
 wsO
 adz
 adz
-uLg
+agw
 afK
 alT
 lim

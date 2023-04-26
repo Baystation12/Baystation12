@@ -8831,7 +8831,9 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
 	},
-/obj/structure/hygiene/sink,
+/obj/structure/hygiene/sink{
+	pixel_y = -12
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "apd" = (
@@ -11764,7 +11766,7 @@
 	},
 /obj/structure/table/glass,
 /obj/item/modular_computer/laptop/preset/custom_loadout/advanced{
-	dir = 8
+	dir = 3
 	},
 /obj/machinery/alarm{
 	dir = 8;
@@ -15666,7 +15668,7 @@
 	dir = 1
 	},
 /obj/structure/closet/hydrant{
-	pixel_y = 28
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
@@ -20251,6 +20253,9 @@
 	},
 /obj/structure/sign/poster/nyc_unusual_gas{
 	pixel_x = -32
+	},
+/obj/structure/closet/shipping_wall/filled{
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/rnd/development)

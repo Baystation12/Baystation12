@@ -78,6 +78,7 @@
 // Mobs
 #include "mobs\simple\fox.dm"
 #include "mobs\simple\koala.dm"
+#include "mobs\simple\rabbit.dm"
 
 // Structures
 #include "structures\barrier.dm"

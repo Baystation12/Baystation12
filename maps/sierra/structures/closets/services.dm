@@ -87,6 +87,7 @@
 		/obj/item/clothing/head/soft/black,
 		/obj/item/device/radio/headset/headset_service,
 		/obj/item/reagent_containers/food/drinks/shaker,
+		/obj/item/reagent_containers/glass/rag,
 		/obj/item/glass_jar,
 		/obj/item/book/manual/barman_recipes,
 		/obj/item/storage/box/ammo/beanbags,
