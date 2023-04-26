@@ -168,7 +168,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 				if(position[i] < 0)
 					deltas[i] = Ceil(position[i])
 				else if(position[i] > 0)
-					deltas[i] = Floor(position[i])
+					deltas[i] = floor(position[i])
 				if(deltas[i] != 0)
 					position[i] -= deltas[i]
 					position[i] += (deltas[i] > 0) ? -1 : 1

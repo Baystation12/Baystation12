@@ -115,7 +115,7 @@
 	. = ..()
 	if (prob(65))
 		var/obj/item/spacecash/ewallet/stick = new (src)
-		stick.worth = Floor(grand() * 1200)
+		stick.worth = floor(grand() * 1200)
 	else
 		for (var/i = 1 to rand(1, 2))
 			var/type = pick(cash_types)

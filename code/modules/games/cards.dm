@@ -295,7 +295,7 @@
 		overlays += I
 		return
 
-	var/offset = Floor(20/length(cards))
+	var/offset = floor(20/length(cards))
 	var/matrix/M = matrix()
 	M.Update(
 		rotation = (direction & EAST|WEST) ? 90 : 0,

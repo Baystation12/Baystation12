@@ -14,10 +14,6 @@
 #define Ceilp(value, power) ( (power) ** -round(-log((power), (value))) )
 
 
-/// Value or the next integer in a negative direction: Floor(-1.5) = -2 , Floor(1.5) = 1
-#define Floor(value) round(value)
-
-
 /// Value or the next multiple of divisor in a negative direction: Floorm(-1.5, 0.3) = -1.5 , Floorm(-1.5, 0.4) = -1.6
 #define Floorm(value, divisor) ( round((value) / (divisor)) * (divisor) )
 
@@ -118,7 +114,7 @@
 /proc/Drand(x, y, normalize)
 	var/sum = 0
 	for (var/i = 1 to x)
-		sum += Floor(rand() * y)
+		sum += floor(rand() * y)
 	if (normalize)
 		return sum / ((x * y) - x)
 	return sum + x

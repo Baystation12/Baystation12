@@ -386,7 +386,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		if (!BP_IS_ROBOTIC(organ))
 			organ.rejuvenate(1)
 			organ.max_damage *= 2
-			organ.min_broken_damage = Floor(organ.max_damage * 0.75)
+			organ.min_broken_damage = floor(organ.max_damage * 0.75)
 
 	resuscitate()
 	set_stat(CONSCIOUS)

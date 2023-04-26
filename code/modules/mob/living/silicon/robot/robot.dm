@@ -869,7 +869,7 @@
 
 //Robots take half damage from basic attacks.
 /mob/living/silicon/robot/attack_generic(mob/user, damage, attack_message)
-	..(user,Floor(damage/2),attack_message)
+	..(user,floor(damage/2),attack_message)
 
 /mob/living/silicon/robot/get_req_access()
 	return req_access

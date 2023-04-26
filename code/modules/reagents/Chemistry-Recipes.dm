@@ -2499,7 +2499,7 @@
 	..()
 	var/turf/T = get_turf(holder.my_atom)
 	if(istype(T))
-		var/create_stacks = Floor(created_volume)
+		var/create_stacks = floor(created_volume)
 		if(create_stacks > 0)
 			new /obj/item/stack/medical/resin/handmade(T, create_stacks)
 

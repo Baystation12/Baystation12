@@ -20,7 +20,7 @@
 	emagged = TRUE
 
 /obj/item/gun/launcher/money/proc/vomit_cash(mob/vomit_onto, projectile_vomit)
-	var/bundle_worth = Floor(receptacle_value / 10)
+	var/bundle_worth = floor(receptacle_value / 10)
 	if(bundle_worth > max_capacity / 10)
 		bundle_worth = max_capacity / 10
 		log_warning("[src] has more than [max_capacity] currency loaded!")

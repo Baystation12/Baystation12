@@ -846,7 +846,7 @@
 			if ("maximum_round_length")
 				maximum_round_length = text2num(value) MINUTES
 			if ("stat_delay")
-				stat_delay = Floor(text2num(value))
+				stat_delay = floor(text2num(value))
 			if ("warn_autoban_threshold")
 				warn_autoban_threshold = max(0, text2num(value))
 			if ("warn_autoban_duration")

@@ -253,7 +253,7 @@
 	var/blood_volume = owner.get_blood_oxygenation()
 	if(blood_volume < BLOOD_VOLUME_BAD)
 		to_chat(user, SPAN_DANGER("Parts of [src] didn't survive the procedure due to lack of air supply!"))
-		set_max_damage(Floor(max_damage - 0.25*damage))
+		set_max_damage(floor(max_damage - 0.25*damage))
 	heal_damage(damage)
 
 /obj/item/organ/internal/brain/get_scarring_level()

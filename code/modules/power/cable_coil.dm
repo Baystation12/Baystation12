@@ -395,14 +395,14 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 	var/obj/item/cell/cell = get_cell()
 	if (!cell)
 		return 0
-	return Floor(cell.charge / cost_per_cable)
+	return floor(cell.charge / cost_per_cable)
 
 
 /obj/item/stack/cable_coil/fabricator/get_max_amount()
 	var/obj/item/cell/cell = get_cell()
 	if (!cell)
 		return 0
-	return Floor(cell.maxcharge / cost_per_cable)
+	return floor(cell.maxcharge / cost_per_cable)
 
 
 /obj/item/stack/cable_coil/yellow

@@ -78,7 +78,7 @@ return_location()
 	if(angle > -135 && angle < 45)
 		angle = Ceil(angle)
 	else
-		angle = Floor(angle)
+		angle = floor(angle)
 
 	// calculate the offset per increment step
 	if(abs(angle) in list(0, 45, 90, 135, 180))		// check if the angle is a cardinal
