@@ -346,7 +346,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 				full_def = copytext(full_def,variables_start+1,length(full_def))//removing the last '}'
 				fields = readlist(full_def, ";")
 				if(length(fields))
-					if(!trim(fields[length(fields)]))
+					if(!trimtext(fields[length(fields)]))
 						LIST_DEC(fields)
 					for(var/I in fields)
 						var/value = fields[I]

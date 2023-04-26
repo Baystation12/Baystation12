@@ -4,7 +4,7 @@
 #define SET_THROTTLE(TIME, REASON) throttle[1] = base_throttle + (TIME); throttle[2] = (REASON);
 
 
-var/global/server_name = "Baystation 12"
+
 var/global/game_id = null
 
 GLOBAL_VAR(href_logfile)
@@ -96,25 +96,21 @@ GLOBAL_VAR(href_logfile)
 		call_ext(debug_server, "auxtools_init")()
 		enable_debugging()
 
-	name = "[server_name] - [GLOB.using_map.full_name]"
-
-	//logs
 	SetupLogs()
 	var/date_string = time2text(world.realtime, "YYYY/MM/DD")
 	to_file(global.diary, "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]")
 
-	if(config && config.server_name != null && config.server_suffix && world.port > 0)
-		config.server_name += " #[(world.port % 1000) / 100]"
+	if (config)
+		if (config.server_name)
+			name = "[config.server_name]"
+		if (config.log_runtime)
+			var/runtime_log = file("data/logs/runtime/[date_string]_[time2text(world.timeofday, "hh:mm")]_[game_id].log")
+			to_file(runtime_log, "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]")
+			log = runtime_log
+		if (config.log_hrefs)
+			GLOB.href_logfile = file("data/logs/[date_string] hrefs.htm")
 
-	if(config && config.log_runtime)
-		var/runtime_log = file("data/logs/runtime/[date_string]_[time2text(world.timeofday, "hh:mm")]_[game_id].log")
-		to_file(runtime_log, "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]")
-		log = runtime_log // Note that, as you can see, this is misnamed: this simply moves world.log into the runtime log file.
-
-	if (config && config.log_hrefs)
-		GLOB.href_logfile = file("data/logs/[date_string] hrefs.htm")
-
-	if(byond_version < RECOMMENDED_VERSION)
+	if (byond_version < RECOMMENDED_VERSION)
 		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
 
 	callHook("startup")

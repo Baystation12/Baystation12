@@ -9,7 +9,7 @@
 
 /proc/station_name()
 	if(!GLOB.using_map)
-		return server_name
+		return config.server_name
 	if (GLOB.using_map.station_name)
 		return GLOB.using_map.station_name
 

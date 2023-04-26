@@ -28,7 +28,7 @@
 		else
 			sushi_type = topping.name
 			if (text_starts_with(sushi_type, "raw"))
-				sushi_type = trim(copytext(sushi_type, 4))
+				sushi_type = trimtext(copytext(sushi_type, 4))
 		if(topping.reagents)
 			topping.reagents.trans_to(src, topping.reagents.total_volume)
 

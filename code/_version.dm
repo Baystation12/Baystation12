@@ -41,7 +41,9 @@ Retain even if empty - the future exists
 	throw EXCEPTION("refcount not available below 515")
 
 /proc/trimtext(text)
-	var/static/regex/pattern = regex(@"^\s*(.*?)\s*$", "g")
+	var/static/regex/pattern
+	if (!pattern)
+		pattern = regex(@"^\s*(.*?)\s*$", "g")
 	return replacetext_char(text, pattern, "$1")
 
 /proc/trunc(number)

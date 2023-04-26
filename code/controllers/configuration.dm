@@ -2,7 +2,7 @@
 	var/static/atom/movable/clickable_stat/statLine
 
 	/// server name (for world name / status)
-	var/static/server_name
+	var/static/server_name = "Space Station 13"
 
 	/// generate numeric suffix based on server port
 	var/static/server_suffix = FALSE
@@ -454,7 +454,7 @@
 	for (var/line in lines)
 		if (!line)
 			continue
-		line = trim(line)
+		line = trimtext(line)
 		if (!line || line[1] == "#")
 			continue
 		result += line
@@ -582,7 +582,7 @@
 			if ("respawn_menu_delay")
 				respawn_menu_delay = text2num(value)
 				respawn_menu_delay = respawn_menu_delay > 0 ? respawn_menu_delay : 0
-			if ("servername")
+			if ("server_name")
 				server_name = value
 			if ("serversuffix")
 				server_suffix = TRUE

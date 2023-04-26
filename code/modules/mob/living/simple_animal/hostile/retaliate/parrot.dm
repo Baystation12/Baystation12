@@ -730,7 +730,7 @@
 
 	if(copytext_char(message,1,2) == get_prefix_key(/singleton/prefix/radio_channel_selection))
 		var/positioncut = 3
-		message = trim(copytext(message,positioncut))
+		message = trimtext(copytext(message,positioncut))
 
 	message = capitalize(trim_left(message))
 

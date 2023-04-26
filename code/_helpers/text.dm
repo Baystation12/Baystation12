@@ -51,7 +51,7 @@
 
 	if(trim)
 		//Maybe, we need trim text twice? Here and before copytext?
-		input = trim(input)
+		input = trimtext(input)
 
 	return input
 
@@ -268,10 +268,6 @@
 		if (text2ascii(text, i) > 32)
 			return copytext(text, 1, i + 1)
 	return ""
-
-//Returns a string with reserved characters and spaces before the first word and after the last word removed.
-/proc/trim(text)
-	return trim_left(trim_right(text))
 
 //Returns a string with the first element of the string capitalized.
 /proc/capitalize(text)

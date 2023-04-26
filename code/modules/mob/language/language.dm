@@ -48,7 +48,7 @@
 			new_name += pick(syllables)
 		full_name += " [capitalize(lowertext(new_name))]"
 
-	return "[trim(full_name)]"
+	return "[trimtext(full_name)]"
 
 /datum/language
 	var/list/scramble_cache = list()
@@ -73,7 +73,7 @@
 				nword = capitalize(nword)
 				new_sentence = FALSE
 			if(ends_sentence)
-				nword = trim(nword)
+				nword = trimtext(nword)
 				nword = "[nword][input_ending] "
 
 		if(ends_sentence)
@@ -83,7 +83,7 @@
 
 	. = jointext(scrambled_text, null)
 	. = capitalize(.)
-	. = trim(.)
+	. = trimtext(.)
 
 /datum/language/proc/scramble_word(input)
 	if(!syllables || !length(syllables))
