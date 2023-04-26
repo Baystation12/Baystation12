@@ -181,7 +181,7 @@
 	wielded_item_state = "semistrip-wielded"
 
 /obj/item/gun/projectile/sniper/semistrip/on_update_icon()
-	if(length(ammo_magazine.stored_ammo))
+	if(ammo_magazine && length(ammo_magazine.stored_ammo))
 		icon_state = initial(icon_state)
 		wielded_item_state = initial(wielded_item_state)
 	else
