@@ -53,14 +53,23 @@
 		test_result["result"] = FAILURE
 		return test_result
 
+	// Airless areas are skipped
+	if (initial(A.turfs_airless))
+		test_result["result"] = SUCCESS
+		test_result["msg"] = "Area flagged airless. Skipped."
+
 	var/list/GM_checked = list()
 
 	for(var/turf/simulated/T in A)
 
-		if(!istype(T) || isnull(T.zone) || istype(T, /turf/simulated/floor/airless))
+		if(!istype(T) || isnull(T.zone))
 			continue
 		if(T.zone.air in GM_checked)
 			continue
+		var/turf/simulated/floor/floor = T
+		if (istype(floor) && floor.map_airless)
+			continue
+
 
 		var/t_msg = "Turf: [T] |  Location: [T.x] // [T.y] // [T.z]"
 

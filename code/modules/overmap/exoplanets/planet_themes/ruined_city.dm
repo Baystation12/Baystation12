@@ -141,7 +141,7 @@
 
 /datum/random_map/maze/lab
 	wall_type =  /turf/simulated/wall/containment
-	floor_type = /turf/simulated/floor/fixed/alium/airless
+	floor_type = /turf/simulated/floor/fixed/alium
 	preserve_map = 0
 	var/artifacts_to_spawn = 1
 

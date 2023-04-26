@@ -50,6 +50,7 @@
 	name = "SEV Icarus"
 	icon = 'maps/random_ruins/exoplanet_ruins/icarus/icarus.dmi'
 	icon_state = "icarus"
+	turfs_airless = TRUE
 
 /area/map_template/icarus/bridge
 	name = "SEV Icarus Bridge"

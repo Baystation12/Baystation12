@@ -7,7 +7,7 @@
 	icon_state = "4-8"
 	},
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "ab" = (
 /obj/item/device/radio/intercom/map_preset/scavver{
@@ -22,7 +22,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/machinery/fabricator/hacked,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "ae" = (
 /obj/structure/cable{
@@ -30,18 +30,18 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "ai" = (
 /obj/machinery/atmospherics/unary/tank{
 	dir = 4
 	},
 /obj/structure/railing/mapped,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "aq" = (
 /obj/effect/floor_decal/steeldecal/steel_decals_central1,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "as" = (
 /obj/structure/curtain/black,
@@ -57,9 +57,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "aA" = (
 /obj/structure/cable{
@@ -70,15 +68,13 @@
 /obj/structure/railing/mapped{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "aB" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/black{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "aI" = (
 /obj/structure/railing/mapped{
@@ -87,7 +83,7 @@
 	},
 /obj/structure/closet/firecloset,
 /obj/random/drinkbottle,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "aJ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -97,9 +93,7 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "aK" = (
 /obj/structure/railing/mapped{
@@ -112,7 +106,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/portable_atmospherics/powered/scrubber,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "aM" = (
 /obj/structure/railing/mapped{
@@ -125,9 +119,7 @@
 /area/space)
 "aZ" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "bc" = (
 /obj/structure/cable{
@@ -135,7 +127,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "bl" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
@@ -143,14 +135,14 @@
 /obj/structure/railing/mapped/no_density{
 	icon_state = "railing0-0"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "bs" = (
 /obj/structure/cable{
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "bA" = (
 /obj/effect/wallframe_spawn/reinforced_phoron,
@@ -159,14 +151,14 @@
 	id_tag = "scavver_window_teg";
 	name = "Window Blast Door"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "bE" = (
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "bI" = (
 /obj/effect/catwalk_plated,
@@ -188,13 +180,13 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "bV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "bX" = (
 /obj/structure/lattice,
@@ -223,7 +215,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "ce" = (
 /obj/machinery/computer/ship/helm{
@@ -235,7 +227,7 @@
 /obj/machinery/recharger/wallcharger{
 	pixel_y = 24
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "cf" = (
 /obj/effect/paint/red,
@@ -252,7 +244,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "ck" = (
@@ -278,7 +270,9 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor/grid{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "cy" = (
 /obj/machinery/firealarm{
@@ -286,7 +280,7 @@
 	pixel_y = -24
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals_central6,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "cA" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
@@ -305,7 +299,7 @@
 	pressure_checks_default = 2;
 	pump_direction = 0
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "cC" = (
 /obj/structure/fuel_port,
@@ -316,7 +310,7 @@
 /obj/machinery/atmospherics/pipe/cap/visible{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "cS" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
@@ -326,9 +320,7 @@
 /obj/structure/railing/mapped{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "cT" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
@@ -349,7 +341,7 @@
 	pixel_y = 23
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "df" = (
@@ -358,7 +350,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "dj" = (
 /turf/simulated/floor/tiled/monotile,
@@ -370,7 +362,7 @@
 	icon_state = "2-4"
 	},
 /obj/structure/inflatable/door,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "dw" = (
 /obj/structure/cable{
@@ -400,7 +392,7 @@
 	},
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/air,
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "dy" = (
 /obj/structure/railing/mapped{
@@ -408,7 +400,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "dA" = (
 /obj/machinery/atmospherics/unary/vent_pump/tank{
@@ -427,7 +419,7 @@
 /obj/structure/handrail{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "dD" = (
 /obj/structure/cable{
@@ -449,7 +441,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "dO" = (
 /obj/structure/cable{
@@ -458,7 +450,7 @@
 	icon_state = "1-2"
 	},
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "dR" = (
 /obj/machinery/light/spot{
@@ -476,12 +468,12 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "dS" = (
 /obj/machinery/atmospherics/omni/filter,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "dV" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
@@ -512,7 +504,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "eb" = (
 /obj/structure/railing/mapped{
@@ -523,13 +515,13 @@
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "ef" = (
 /obj/machinery/shipsensors{
 	use_power = 0
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/escapepod)
 "ek" = (
 /obj/structure/cable{
@@ -540,7 +532,7 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "er" = (
 /obj/effect/floor_decal/corner/lightgrey{
@@ -565,15 +557,13 @@
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "eH" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "eN" = (
 /turf/space,
@@ -605,7 +595,9 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "fD" = (
 /obj/structure/railing/mapped{
@@ -622,7 +614,7 @@
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "fE" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -635,7 +627,7 @@
 	id = "scavver_teg_in_fuel";
 	use_power = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "fF" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -650,7 +642,7 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/black{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "fL" = (
 /obj/effect/floor_decal/techfloor{
@@ -670,7 +662,7 @@
 	dir = 1
 	},
 /obj/machinery/light/spot,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "fQ" = (
 /obj/structure/railing/mapped{
@@ -682,14 +674,14 @@
 	icon_state = "warning"
 	},
 /obj/machinery/light/spot,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "fS" = (
 /obj/random/tool,
 /obj/effect/floor_decal/steeldecal/steel_decals_central4{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "fV" = (
 /obj/machinery/power/solar,
@@ -704,13 +696,15 @@
 /obj/structure/railing/mapped{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "fX" = (
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "gc" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
@@ -734,7 +728,7 @@
 	id_tag = "scavver_window_teg";
 	name = "Window Blast Door"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "gk" = (
 /obj/effect/floor_decal/corner/lightgrey/mono,
@@ -757,7 +751,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/reagent_dispensers/fueltank,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "gq" = (
 /obj/structure/railing/mapped{
@@ -767,7 +761,7 @@
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "gr" = (
 /obj/structure/cable,
@@ -783,7 +777,7 @@
 /area/scavver/hab)
 "gx" = (
 /obj/machinery/atmospherics/valve,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "gL" = (
 /obj/structure/cable{
@@ -792,7 +786,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "gM" = (
 /obj/structure/cable{
@@ -801,7 +795,7 @@
 	icon_state = "1-8"
 	},
 /obj/structure/inflatable/door,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "gN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
@@ -826,7 +820,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "hp" = (
 /obj/structure/cable{
@@ -837,7 +831,7 @@
 /obj/machinery/power/generator{
 	anchored = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "ht" = (
 /obj/structure/table/rack,
@@ -846,7 +840,7 @@
 /area/scavver/hab)
 "hv" = (
 /obj/effect/wallframe_spawn/reinforced/no_grille,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "hw" = (
 /obj/structure/railing/mapped{
@@ -885,7 +879,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "hH" = (
@@ -902,7 +896,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "hX" = (
 /obj/structure/lattice,
@@ -913,7 +907,7 @@
 	dir = 9
 	},
 /obj/effect/decal/cleanable/liquid_fuel,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "ih" = (
 /obj/effect/floor_decal/corner/lightgrey{
@@ -928,7 +922,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "in" = (
@@ -942,11 +936,11 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "io" = (
 /obj/machinery/atmospherics/omni/filter,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/simulated/floor/tiled/dark,
 /area/scavver/harvestpod)
 "iq" = (
 /obj/structure/cable{
@@ -957,7 +951,7 @@
 /obj/structure/bed/chair/shuttle/white{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "it" = (
 /obj/effect/shuttle_landmark/scavver_gantry/generic/five,
@@ -982,7 +976,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "iI" = (
 /obj/structure/railing/mapped{
@@ -995,7 +989,7 @@
 	icon_state = "4-8"
 	},
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "iT" = (
 /obj/effect/shuttle_landmark/scavver_gantry/generic/desperado,
@@ -1013,7 +1007,7 @@
 	scrubbing = "siphon"
 	},
 /obj/effect/floor_decal/corner/grey/half,
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "iW" = (
 /obj/machinery/atmospherics/omni/filter{
@@ -1023,7 +1017,7 @@
 	},
 /obj/effect/floor_decal/techfloor/orange,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "iY" = (
@@ -1046,7 +1040,7 @@
 /obj/structure/handrail{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "jb" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -1064,7 +1058,7 @@
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "jj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1101,9 +1095,7 @@
 /obj/machinery/power/solar_control/autostart{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "jt" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -1125,7 +1117,7 @@
 "ju" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /obj/machinery/meter,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "jw" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1143,13 +1135,13 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "jz" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "jA" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -1172,9 +1164,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/blue,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "jG" = (
 /obj/structure/railing/mapped{
@@ -1185,7 +1175,7 @@
 	dir = 4;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "jJ" = (
 /obj/structure/cable{
@@ -1210,7 +1200,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 5
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "jO" = (
 /obj/structure/cable{
@@ -1223,14 +1213,14 @@
 	},
 /obj/machinery/portable_atmospherics/canister/empty,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "jS" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
 	},
 /obj/machinery/portable_atmospherics/canister/hydrogen,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "ka" = (
 /obj/structure/cable{
@@ -1238,9 +1228,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "kb" = (
 /obj/effect/paint/red,
@@ -1278,7 +1266,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "kq" = (
 /obj/item/stack/material/steel/fifty,
@@ -1289,9 +1277,7 @@
 /obj/item/stack/material/plasteel/fifty,
 /obj/structure/closet/crate/plastic,
 /obj/structure/railing/mapped,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "ks" = (
 /obj/structure/table/steel_reinforced,
@@ -1308,7 +1294,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "kC" = (
 /obj/structure/railing/mapped{
@@ -1317,9 +1303,7 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "kD" = (
 /obj/machinery/button/blast_door{
@@ -1330,7 +1314,7 @@
 /obj/machinery/atmospherics/valve{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "kJ" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/red,
@@ -1341,16 +1325,14 @@
 	dir = 1
 	},
 /obj/structure/table/rack,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "kP" = (
 /obj/effect/wallframe_spawn/reinforced/no_grille,
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "la" = (
 /obj/structure/cable{
@@ -1358,7 +1340,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "ls" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
@@ -1379,7 +1361,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "lw" = (
 /obj/structure/cable{
@@ -1387,7 +1369,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "lB" = (
 /obj/machinery/computer/shuttle_control/explore/scavver_gantry/two,
@@ -1397,7 +1379,7 @@
 /obj/machinery/recharger/wallcharger{
 	pixel_y = 24
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "lG" = (
 /obj/structure/railing/mapped,
@@ -1405,9 +1387,7 @@
 	dir = 4
 	},
 /obj/structure/closet/crate/plastic,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "lH" = (
 /obj/structure/railing/mapped,
@@ -1415,19 +1395,17 @@
 	dir = 8
 	},
 /obj/item/mop,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "lP" = (
 /obj/machinery/atmospherics/unary/tank{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "lU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "lW" = (
 /obj/machinery/mech_recharger,
@@ -1449,7 +1427,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "me" = (
 /obj/structure/cable{
@@ -1462,7 +1440,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "mh" = (
 /obj/structure/closet/crate/plastic,
@@ -1474,9 +1452,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "mi" = (
 /obj/machinery/power/terminal{
@@ -1491,9 +1467,7 @@
 	icon_state = "0-8"
 	},
 /obj/effect/floor_decal/industrial/hatch/orange,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "ml" = (
 /obj/structure/bed,
@@ -1504,13 +1478,13 @@
 /area/scavver/hab)
 "mq" = (
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "mu" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "mx" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
@@ -1521,7 +1495,9 @@
 	id_tag = "dropodeast_interior_door";
 	locked = 1
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor/grid{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "mB" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
@@ -1529,7 +1505,7 @@
 	},
 /obj/effect/floor_decal/techfloor/orange,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "mC" = (
@@ -1540,7 +1516,7 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "mM" = (
@@ -1549,7 +1525,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/visible/red,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "mN" = (
@@ -1574,7 +1550,7 @@
 	dir = 4
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "mX" = (
 /obj/structure/railing/mapped{
@@ -1582,7 +1558,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/effect/floor_decal/corner_steel_grid,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "mZ" = (
 /obj/structure/cable{
@@ -1594,7 +1570,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "nc" = (
 /obj/item/device/radio/intercom/map_preset/scavver{
@@ -1607,7 +1583,7 @@
 /area/scavver/lifepod)
 "nd" = (
 /obj/machinery/power/breakerbox,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "ne" = (
 /obj/effect/floor_decal/techfloor/orange{
@@ -1617,7 +1593,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "nf" = (
@@ -1628,7 +1604,7 @@
 	},
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/simulated/floor/tiled/dark,
 /area/scavver/harvestpod)
 "nj" = (
 /obj/effect/floor_decal/techfloor/orange,
@@ -1636,7 +1612,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "nl" = (
@@ -1650,9 +1626,7 @@
 /area/scavver/hab)
 "nw" = (
 /obj/machinery/mining/drill,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "nE" = (
 /obj/machinery/air_sensor{
@@ -1661,12 +1635,12 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "nH" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/silver,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "nI" = (
 /obj/effect/floor_decal/techfloor{
@@ -1689,7 +1663,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "nM" = (
 /obj/structure/handrail{
@@ -1698,7 +1672,7 @@
 /obj/machinery/atmospherics/binary/pump/high_power{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "nN" = (
 /obj/effect/floor_decal/corner_steel_grid{
@@ -1709,7 +1683,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "nS" = (
 /obj/structure/cable{
@@ -1720,28 +1694,26 @@
 /obj/structure/railing/mapped{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "nZ" = (
 /obj/effect/floor_decal/steeldecal/steel_decals_central4{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "ok" = (
 /obj/effect/decal/cleanable/liquid_fuel,
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 10
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "om" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 6
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "oo" = (
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -1751,7 +1723,7 @@
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 5
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "oq" = (
 /obj/effect/floor_decal/techfloor/orange{
@@ -1761,14 +1733,14 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "os" = (
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/corner_steel_grid,
 /obj/structure/closet/crate/solar,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "ov" = (
 /obj/item/device/radio/intercom/map_preset/scavver{
@@ -1790,15 +1762,13 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "oB" = (
 /obj/structure/railing/mapped{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "oE" = (
 /obj/effect/floor_decal/techfloor/orange{
@@ -1808,7 +1778,7 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "oH" = (
@@ -1839,10 +1809,10 @@
 	dir = 8
 	},
 /obj/machinery/meter,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "oN" = (
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "oO" = (
 /obj/structure/cable{
@@ -1854,13 +1824,11 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "pa" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/red,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "pc" = (
 /obj/machinery/alarm{
@@ -1875,7 +1843,9 @@
 /area/scavver/hab)
 "pd" = (
 /obj/machinery/atmospherics/unary/engine,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "pl" = (
 /obj/structure/cable{
@@ -1902,7 +1872,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "pq" = (
@@ -1913,24 +1883,20 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "pr" = (
 /obj/machinery/atmospherics/valve,
 /obj/structure/railing/mapped,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "ps" = (
 /obj/structure/railing/mapped{
 	dir = 4
 	},
 /obj/structure/table/rack,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "pu" = (
 /turf/simulated/wall/ocp_wall,
@@ -1943,7 +1909,9 @@
 	icon_state = "4-8"
 	},
 /obj/effect/paint/palegreengray,
-/turf/simulated/floor/plating,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "pK" = (
 /obj/structure/bed/chair/shuttle/black{
@@ -1953,13 +1921,13 @@
 /area/scavver/lifepod)
 "pO" = (
 /obj/structure/closet/crate/hydroponics/prespawned,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "pQ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 10
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "pV" = (
 /obj/structure/lattice,
@@ -1973,7 +1941,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "qh" = (
 /obj/structure/handrail{
@@ -2005,9 +1973,7 @@
 	icon_state = "1-4"
 	},
 /obj/machinery/light/spot,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "qk" = (
 /obj/machinery/computer/air_control{
@@ -2017,7 +1983,7 @@
 	sensor_name = "Yacht Burn Chamber";
 	sensor_tag = "scavver_teg_sensor"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "qn" = (
 /obj/effect/floor_decal/techfloor/orange{
@@ -2027,7 +1993,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "qt" = (
@@ -2056,7 +2022,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "qD" = (
 /obj/structure/lattice,
@@ -2085,7 +2051,7 @@
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "qK" = (
 /obj/machinery/atmospherics/omni/filter{
@@ -2095,7 +2061,7 @@
 	},
 /obj/effect/floor_decal/techfloor/orange,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "qN" = (
@@ -2116,7 +2082,7 @@
 	icon_state = "1-2"
 	},
 /obj/effect/decal/cleanable/liquid_fuel,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "qS" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/blue{
@@ -2127,18 +2093,18 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "qT" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "qU" = (
 /obj/structure/ladder,
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "qV" = (
 /obj/machinery/light,
@@ -2178,7 +2144,7 @@
 /obj/machinery/meter,
 /obj/effect/floor_decal/techfloor/orange,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "ro" = (
@@ -2188,7 +2154,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "rp" = (
 /obj/structure/closet/emcloset,
@@ -2202,9 +2168,7 @@
 "rr" = (
 /obj/machinery/mining/brace,
 /obj/structure/railing/mapped,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "rt" = (
 /obj/structure/cable{
@@ -2212,7 +2176,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "rB" = (
 /obj/structure/cable{
@@ -2220,7 +2184,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "rJ" = (
 /obj/item/storage/bag/trash,
@@ -2243,7 +2207,7 @@
 /obj/machinery/atmospherics/binary/passive_gate{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "rO" = (
 /obj/machinery/door/airlock/external{
@@ -2267,11 +2231,11 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "rU" = (
 /obj/structure/railing/mapped,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "rW" = (
 /obj/machinery/light/spot{
@@ -2285,14 +2249,14 @@
 	icon_state = "railing0-0"
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "rX" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "sc" = (
 /obj/effect/paint/silver,
@@ -2301,14 +2265,16 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/escapepod)
 "si" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 10
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor/grid{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "so" = (
 /turf/simulated/floor/tiled,
@@ -2320,14 +2286,16 @@
 /obj/structure/handrail{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "sq" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 10
 	},
 /obj/machinery/portable_atmospherics/powered/pump/filled,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "st" = (
 /obj/effect/floor_decal/corner/lightgrey{
@@ -2346,7 +2314,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "sB" = (
@@ -2371,7 +2339,7 @@
 	},
 /obj/structure/table/rack,
 /obj/item/stack/material/wood/fifty,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "sE" = (
 /obj/machinery/atmospherics/omni/mixer{
@@ -2381,7 +2349,7 @@
 	tag_west = 1;
 	tag_west_con = 0.15
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "sF" = (
 /obj/structure/lattice,
@@ -2428,7 +2396,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "sW" = (
 /obj/structure/lattice,
@@ -2443,7 +2411,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "sY" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -2458,9 +2426,7 @@
 /obj/structure/railing/mapped{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "ta" = (
 /obj/machinery/hologram/holopad/longrange/remoteship,
@@ -2487,7 +2453,7 @@
 	},
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "tp" = (
@@ -2506,7 +2472,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "tx" = (
 /turf/simulated/floor/tiled/steel_grid{
@@ -2525,7 +2491,7 @@
 	},
 /obj/effect/floor_decal/techfloor/orange,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "tN" = (
@@ -2585,7 +2551,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "tW" = (
 /obj/structure/bed/chair/shuttle/white{
@@ -2597,7 +2563,7 @@
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 10
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "tX" = (
 /obj/structure/lattice,
@@ -2618,7 +2584,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "ug" = (
 /obj/structure/cable{
@@ -2629,13 +2595,13 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/white,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/escapepod)
 "ui" = (
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 9
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "uq" = (
 /obj/structure/table/steel_reinforced,
@@ -2651,7 +2617,7 @@
 	},
 /obj/effect/floor_decal/techfloor/orange/corner,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "uu" = (
@@ -2667,7 +2633,7 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/power/solar/improved,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/escapepod)
 "uz" = (
 /obj/machinery/portable_atmospherics/canister/air,
@@ -2696,7 +2662,9 @@
 /obj/structure/handrail{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor/grid{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "uN" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
@@ -2708,7 +2676,7 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "uU" = (
 /obj/structure/cable,
@@ -2721,13 +2689,13 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/tracker,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/escapepod)
 "uV" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
 /obj/effect/floor_decal/techfloor/orange,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "uZ" = (
@@ -2743,7 +2711,7 @@
 "va" = (
 /obj/structure/cable,
 /obj/machinery/power/solar/improved,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/escapepod)
 "vb" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -2781,7 +2749,7 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "vq" = (
 /obj/machinery/light/spot,
@@ -2792,7 +2760,7 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "vs" = (
@@ -2807,13 +2775,13 @@
 "vt" = (
 /obj/machinery/atmospherics/omni/filter,
 /obj/effect/overmap/visitable/ship/landable/scavver_gantry/three,
-/turf/simulated/floor/tiled/dark/airless,
+/turf/simulated/floor/tiled/dark,
 /area/scavver/harvestpod)
 "vy" = (
 /obj/effect/floor_decal/steeldecal/steel_decals_central4{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "vA" = (
 /obj/structure/lattice,
@@ -2838,7 +2806,7 @@
 /obj/item/storage/med_pouch/radiation,
 /obj/item/storage/med_pouch/radiation,
 /obj/structure/closet/crate/plastic,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "vE" = (
 /obj/effect/paint/palegreengray,
@@ -2856,7 +2824,7 @@
 /obj/machinery/power/solar_control{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "vL" = (
 /obj/structure/railing/mapped{
@@ -2865,7 +2833,7 @@
 	},
 /obj/structure/table/steel_reinforced,
 /obj/machinery/recharger,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "vM" = (
 /obj/structure/railing/mapped{
@@ -2876,7 +2844,7 @@
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/corner_steel_grid,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "vP" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -2884,7 +2852,7 @@
 	anchored = 1;
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "vU" = (
 /obj/structure/railing/mapped{
@@ -2898,7 +2866,7 @@
 /obj/item/stack/material/glass/fifty,
 /obj/item/stack/material/plasteel/fifty,
 /obj/random/contraband,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "vY" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/vulcan{
@@ -2911,7 +2879,7 @@
 /obj/structure/handrail{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/escapepod)
 "vZ" = (
 /obj/structure/railing/mapped{
@@ -2919,14 +2887,14 @@
 	icon_state = "railing0-1"
 	},
 /obj/machinery/mining/brace,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "wa" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "wd" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2945,7 +2913,7 @@
 	dir = 4;
 	target_pressure = 25
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "wl" = (
 /obj/effect/paint/silver,
@@ -2954,7 +2922,7 @@
 	},
 /obj/effect/paint_stripe/red,
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/escapepod)
 "wz" = (
 /obj/structure/lattice,
@@ -2989,7 +2957,7 @@
 /area/space)
 "wG" = (
 /obj/structure/cable,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "wI" = (
 /obj/structure/closet/secure_closet/freezer/fridge/scavver,
@@ -3010,9 +2978,7 @@
 	dir = 8
 	},
 /obj/structure/table/rack,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "wT" = (
 /obj/effect/paint/silver,
@@ -3021,11 +2987,11 @@
 	},
 /obj/effect/paint_stripe/red,
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/escapepod)
 "wU" = (
 /obj/structure/girder/displaced,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "xg" = (
 /obj/structure/table/reinforced,
@@ -3045,9 +3011,7 @@
 	},
 /obj/structure/railing/mapped,
 /obj/structure/ore_box,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "xu" = (
 /obj/effect/floor_decal/corner/lightgrey{
@@ -3079,7 +3043,7 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "xR" = (
 /obj/effect/catwalk_plated/dark,
@@ -3088,7 +3052,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "xU" = (
 /obj/effect/shuttle_landmark/scavver_gantry/generic/charon,
@@ -3118,7 +3082,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "yf" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "yn" = (
 /obj/effect/decal/cleanable/dirt,
@@ -3134,13 +3098,13 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/hab)
 "yr" = (
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "ys" = (
 /obj/structure/cable{
@@ -3149,7 +3113,7 @@
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals_central1,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "yx" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -3181,7 +3145,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "yI" = (
 /obj/structure/flora/pottedplant/minitree,
@@ -3197,7 +3161,7 @@
 /obj/random/smokes,
 /obj/random/snack,
 /obj/random/soap,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "yN" = (
 /obj/structure/table/steel_reinforced,
@@ -3206,18 +3170,18 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "yR" = (
 /obj/structure/wall_frame,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "yT" = (
 /obj/machinery/atmospherics/unary/engine{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/escapepod)
 "yZ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
@@ -3231,7 +3195,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "zf" = (
@@ -3240,7 +3204,7 @@
 	id_tag = "scavver_vent_teg_service";
 	name = "Service Vent"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "zl" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -3300,7 +3264,7 @@
 /obj/machinery/power/solar_control{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Ad" = (
 /obj/structure/lattice,
@@ -3318,7 +3282,9 @@
 /obj/structure/railing/mapped{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "Ag" = (
 /obj/effect/floor_decal/techfloor/orange{
@@ -3331,7 +3297,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "Ah" = (
@@ -3355,11 +3321,11 @@
 	icon_state = "2-4"
 	},
 /obj/effect/decal/cleanable/liquid_fuel,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Ar" = (
 /obj/random/tool,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "Aw" = (
 /obj/effect/catwalk_plated,
@@ -3395,7 +3361,7 @@
 /obj/item/tracker_electronics,
 /obj/item/device/scanner/gas,
 /obj/item/device/multitool,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "AW" = (
 /obj/effect/decal/cleanable/dirt,
@@ -3429,9 +3395,7 @@
 	dir = 4
 	},
 /obj/structure/table/rack,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "Bh" = (
 /obj/effect/decal/cleanable/liquid_fuel,
@@ -3444,7 +3408,9 @@
 /obj/structure/handrail{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "Br" = (
 /obj/structure/railing/mapped{
@@ -3455,7 +3421,7 @@
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Bw" = (
 /obj/machinery/door/airlock/hatch,
@@ -3471,14 +3437,14 @@
 "Bx" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
 /obj/machinery/meter,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "BA" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "BB" = (
 /obj/machinery/button/blast_door{
@@ -3501,7 +3467,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 9
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "BE" = (
 /obj/structure/handrail,
@@ -3530,9 +3496,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/blue,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "BP" = (
 /obj/effect/decal/cleanable/dirt,
@@ -3555,13 +3519,13 @@
 /area/space)
 "Ca" = (
 /obj/structure/girder,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Ce" = (
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Ck" = (
 /obj/structure/lattice,
@@ -3577,7 +3541,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/visible/red,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "CJ" = (
@@ -3609,7 +3573,7 @@
 	id_tag = "scavver_teg_sensor";
 	pixel_x = 24
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "CT" = (
 /obj/effect/floor_decal/techfloor/orange,
@@ -3617,7 +3581,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "CU" = (
@@ -3636,7 +3600,7 @@
 	pixel_x = 24
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "Db" = (
 /obj/structure/cable{
@@ -3649,7 +3613,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Dc" = (
 /obj/structure/railing/mapped{
@@ -3663,7 +3627,7 @@
 /obj/item/reagent_containers/food/snacks/liquidfood,
 /obj/item/reagent_containers/food/snacks/liquidfood,
 /obj/random/firstaid,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Df" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -3671,7 +3635,7 @@
 	anchored = 1;
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Dk" = (
 /obj/structure/ladder,
@@ -3689,7 +3653,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Ds" = (
 /obj/structure/lattice,
@@ -3704,7 +3668,7 @@
 	dir = 8;
 	target_pressure = 15000
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "DE" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red,
@@ -3718,9 +3682,7 @@
 /obj/item/storage/briefcase/inflatable,
 /obj/item/storage/briefcase/inflatable,
 /obj/item/inflatable_dispenser,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "DI" = (
 /obj/structure/cable{
@@ -3741,7 +3703,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/machinery/mech_recharger,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "DY" = (
 /obj/effect/paint/sun,
@@ -3751,20 +3713,22 @@
 "Ef" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /obj/machinery/meter,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Eg" = (
 /obj/structure/handrail{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "Ek" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
 /obj/machinery/meter,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Eo" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -3782,7 +3746,7 @@
 	icon_state = "4-8"
 	},
 /obj/effect/wallframe_spawn/reinforced/no_grille,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "EA" = (
 /obj/structure/cable{
@@ -3793,7 +3757,7 @@
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 10
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "EL" = (
 /obj/structure/cable{
@@ -3803,7 +3767,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "EM" = (
 /obj/structure/lattice,
@@ -3817,7 +3781,7 @@
 /area/space)
 "ES" = (
 /obj/random/toolbox,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "ET" = (
 /obj/structure/cable{
@@ -3831,7 +3795,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "EU" = (
 /obj/effect/catwalk_plated,
@@ -3844,7 +3808,7 @@
 	icon_state = "1-8"
 	},
 /obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Fh" = (
 /obj/structure/railing/mapped{
@@ -3852,14 +3816,14 @@
 	icon_state = "railing0-1"
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Fk" = (
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 1
 	},
 /obj/machinery/meter,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Fl" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -3897,7 +3861,7 @@
 /area/space)
 "FF" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "FK" = (
 /obj/machinery/computer/ship/sensors/spacer{
@@ -3915,7 +3879,7 @@
 	dir = 4
 	},
 /obj/machinery/meter,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "FN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -3949,7 +3913,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "FT" = (
@@ -3984,7 +3948,7 @@
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "Gj" = (
 /obj/structure/flora/pottedplant/subterranean,
@@ -4020,7 +3984,7 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "GH" = (
 /obj/structure/railing/mapped{
@@ -4032,7 +3996,7 @@
 /obj/item/stock_parts/circuitboard/shuttle_console/explore,
 /obj/item/stock_parts/circuitboard/solar_control,
 /obj/random/storage,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "GL" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
@@ -4042,7 +4006,7 @@
 	name = "Access Blast Door"
 	},
 /obj/structure/inflatable/wall,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "GR" = (
 /obj/structure/cable{
@@ -4053,7 +4017,7 @@
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 6
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "GV" = (
 /obj/structure/table/rack,
@@ -4072,17 +4036,17 @@
 /area/scavver/hab)
 "GZ" = (
 /obj/machinery/atmospherics/omni/mixer,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Ha" = (
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Hj" = (
 /obj/random/masks,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "HC" = (
 /obj/structure/railing/mapped{
@@ -4090,7 +4054,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/item/device/flashlight/lantern,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "HF" = (
 /obj/structure/cable{
@@ -4101,7 +4065,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "HM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -4137,13 +4101,13 @@
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "HY" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 10
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Ib" = (
 /obj/machinery/power/port_gen/pacman{
@@ -4154,7 +4118,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Ic" = (
 /obj/structure/cable{
@@ -4168,7 +4132,7 @@
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "Id" = (
 /obj/structure/cable{
@@ -4176,13 +4140,13 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "Ii" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Im" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -4191,7 +4155,7 @@
 /turf/space,
 /area/space)
 "In" = (
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Iy" = (
 /obj/structure/lattice,
@@ -4207,7 +4171,7 @@
 	},
 /obj/structure/handrail,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "IH" = (
@@ -4218,7 +4182,7 @@
 	req_access = list()
 	},
 /obj/structure/cable,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "IK" = (
 /obj/effect/floor_decal/techfloor/orange{
@@ -4229,7 +4193,7 @@
 	icon_state = "railing0-0"
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "IP" = (
@@ -4237,7 +4201,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "IS" = (
 /obj/machinery/door/blast/regular{
@@ -4245,7 +4209,7 @@
 	id_tag = "scavver_vent_teg";
 	name = "Vent"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "IX" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
@@ -4255,7 +4219,7 @@
 	name = "Access Blast Door"
 	},
 /obj/structure/inflatable/door,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "Jc" = (
 /obj/machinery/door/blast/regular/open{
@@ -4280,7 +4244,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "Js" = (
@@ -4292,7 +4256,7 @@
 /obj/item/grenade/chem_grenade/metalfoam,
 /obj/item/grenade/chem_grenade/metalfoam,
 /obj/item/grenade/chem_grenade/metalfoam,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "Jt" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -4354,7 +4318,9 @@
 	id_tag = "dropodeast_interior_door";
 	locked = 1
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/tiled/techfloor/grid{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "Ko" = (
 /obj/structure/reagent_dispensers/water_cooler{
@@ -4370,7 +4336,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "KI" = (
@@ -4405,7 +4371,7 @@
 /obj/item/device/scanner/gas,
 /obj/structure/table/rack,
 /obj/item/tank/hydrogen,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "KX" = (
 /obj/effect/wallframe_spawn/reinforced/no_grille,
@@ -4430,7 +4396,7 @@
 /obj/random/powercell,
 /obj/random/powercell,
 /obj/item/stack/material/plasteel/fifty,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "Lp" = (
 /obj/effect/floor_decal/techfloor{
@@ -4467,16 +4433,14 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/blue,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "LF" = (
 /obj/machinery/power/smes/buildable/preset/scavver/smes{
 	charge = 100000
 	},
 /obj/structure/cable,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "LJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -4495,11 +4459,11 @@
 	dir = 4
 	},
 /obj/machinery/portable_atmospherics/canister/empty/air,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "LP" = (
 /obj/item/stack/material/wood/ebony/twentyfive,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "LS" = (
 /obj/structure/handrail,
@@ -4550,7 +4514,7 @@
 	pixel_x = -18
 	},
 /obj/effect/decal/cleanable/liquid_fuel,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "MI" = (
 /obj/structure/cable{
@@ -4574,7 +4538,7 @@
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "ML" = (
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "MO" = (
 /obj/structure/cable{
@@ -4596,7 +4560,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/grey/half,
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "MP" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
@@ -4625,7 +4589,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "Nf" = (
@@ -4638,11 +4602,11 @@
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "Ng" = (
 /obj/machinery/portable_atmospherics/canister/hydrogen,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Ni" = (
 /obj/effect/floor_decal/corner/lightgrey{
@@ -4656,7 +4620,7 @@
 	dir = 4
 	},
 /obj/machinery/meter,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Nq" = (
 /obj/structure/cable{
@@ -4668,7 +4632,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "Nr" = (
@@ -4727,7 +4691,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 6
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "NK" = (
 /obj/item/gun/energy/plasmacutter,
@@ -4765,7 +4729,7 @@
 /obj/random/single/color/cable_coil,
 /obj/random/single/color/cable_coil,
 /obj/item/device/multitool,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "NQ" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -4792,11 +4756,11 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "Ob" = (
 /obj/machinery/atmospherics/pipe/manifold/visible,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Og" = (
 /obj/structure/cable{
@@ -4804,13 +4768,13 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "Oj" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Oy" = (
 /obj/machinery/airlock_sensor{
@@ -4833,7 +4797,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Pd" = (
 /obj/effect/floor_decal/techfloor/orange/corner{
@@ -4841,7 +4805,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/visible/red,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "Pf" = (
@@ -4862,7 +4826,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Pk" = (
 /obj/effect/floor_decal/corner/lightgrey/mono,
@@ -4877,7 +4841,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "PD" = (
 /obj/structure/railing/mapped{
@@ -4885,7 +4849,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/machinery/portable_atmospherics/canister/hydrogen,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "PW" = (
 /obj/machinery/atmospherics/pipe/zpipe/down/fuel{
@@ -4905,7 +4869,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "Qc" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/vulcan{
@@ -4920,7 +4884,7 @@
 	dir = 4
 	},
 /obj/structure/handrail,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/escapepod)
 "Qd" = (
 /obj/structure/cable,
@@ -4928,7 +4892,9 @@
 /obj/structure/railing/mapped{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "Qh" = (
 /obj/effect/floor_decal/techfloor/orange{
@@ -4939,7 +4905,7 @@
 	},
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "Qn" = (
@@ -4951,7 +4917,7 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "Qt" = (
 /obj/effect/floor_decal/corner/grey/border{
@@ -4959,7 +4925,7 @@
 	},
 /obj/machinery/atmospherics/valve,
 /obj/machinery/portable_atmospherics/canister/air,
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "Qu" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -4979,7 +4945,7 @@
 	dir = 4
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "QB" = (
 /obj/effect/catwalk_plated,
@@ -5003,9 +4969,7 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "QU" = (
 /obj/effect/floor_decal/corner/lightgrey{
@@ -5022,12 +4986,12 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "Rj" = (
 /obj/machinery/atmospherics/pipe/cap/visible,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Rl" = (
 /obj/machinery/air_sensor{
@@ -5037,7 +5001,7 @@
 	dir = 8
 	},
 /obj/structure/inflatable/door,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "Rm" = (
 /obj/effect/paint/black,
@@ -5053,9 +5017,7 @@
 	},
 /obj/machinery/light/spot,
 /obj/effect/floor_decal/industrial/hatch/orange,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "Rv" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -5070,7 +5032,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "RN" = (
 /obj/item/tank/jetpack/oxygen,
@@ -5091,14 +5053,12 @@
 /obj/random/cash,
 /obj/random/plushie,
 /obj/random/single/lighter,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "RY" = (
 /obj/structure/closet/crate/solar,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "Sa" = (
 /obj/structure/railing/mapped{
@@ -5107,11 +5067,11 @@
 	},
 /obj/structure/ladder,
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Sj" = (
 /obj/machinery/pipedispenser,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Sm" = (
 /obj/structure/railing/mapped,
@@ -5120,7 +5080,7 @@
 /obj/item/storage/briefcase/inflatable,
 /obj/item/storage/briefcase/inflatable,
 /obj/item/storage/briefcase/inflatable,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "Sn" = (
 /obj/machinery/light{
@@ -5141,7 +5101,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "SA" = (
@@ -5151,7 +5111,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "SF" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
@@ -5162,21 +5122,19 @@
 	dir = 8
 	},
 /obj/structure/table/rack,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "SS" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "SU" = (
 /obj/machinery/atmospherics/unary/tank{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "SX" = (
 /obj/structure/cable{
@@ -5184,7 +5142,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "SY" = (
 /obj/structure/cable{
@@ -5195,12 +5153,10 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Tf" = (
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "TR" = (
 /obj/effect/decal/cleanable/dirt,
@@ -5222,7 +5178,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Ud" = (
 /obj/structure/handrail{
@@ -5231,7 +5187,7 @@
 /obj/machinery/atmospherics/binary/pump/high_power{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "Uf" = (
 /obj/structure/cable{
@@ -5244,7 +5200,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Ug" = (
 /obj/effect/shuttle_landmark/scavver_gantry/generic/four,
@@ -5260,7 +5216,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "UM" = (
 /obj/effect/floor_decal/corner/lightgrey{
@@ -5280,7 +5236,7 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "UT" = (
 /obj/effect/catwalk_plated/dark,
@@ -5296,7 +5252,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Vb" = (
 /obj/effect/landmark/map_data{
@@ -5373,7 +5329,9 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "VP" = (
 /obj/machinery/light/small{
@@ -5385,7 +5343,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "VQ" = (
 /obj/structure/handrail{
@@ -5404,7 +5362,7 @@
 	pressure_checks_default = 2;
 	pump_direction = 0
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/harvestpod)
 "VS" = (
 /obj/structure/cable{
@@ -5417,11 +5375,11 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "VW" = (
 /obj/effect/decal/cleanable/liquid_fuel,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "VX" = (
 /turf/simulated/wall,
@@ -5446,7 +5404,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Wf" = (
 /obj/structure/bed,
@@ -5476,13 +5434,13 @@
 	dir = 1
 	},
 /obj/machinery/meter,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "WA" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/black{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "WD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -5511,26 +5469,26 @@
 	icon_state = "railing0-1"
 	},
 /obj/machinery/portable_atmospherics/canister/air,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "WG" = (
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 10
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up1)
 "WP" = (
 /obj/effect/floor_decal/techfloor/orange,
 /obj/machinery/atmospherics/pipe/manifold/visible/blue,
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "WR" = (
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 6
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/gantry/up2)
 "WW" = (
 /obj/effect/decal/cleanable/liquid_fuel,
@@ -5540,7 +5498,9 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/scavver/lifepod)
 "WX" = (
 /obj/machinery/door/airlock/external/bolted_open,
@@ -5550,11 +5510,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Xb" = (
 /obj/machinery/seed_storage/garden,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Xd" = (
 /obj/effect/paint/silver,
@@ -5563,7 +5523,7 @@
 "Xj" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Xm" = (
 /obj/structure/cable{
@@ -5572,7 +5532,7 @@
 	icon_state = "4-8"
 	},
 /obj/item/stock_parts/circuitboard/broken,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Xr" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
@@ -5601,7 +5561,7 @@
 /area/scavver/lifepod)
 "Xs" = (
 /obj/machinery/vending/hydronutrients,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Xz" = (
 /obj/effect/floor_decal/corner/grey/diagonal,
@@ -5618,7 +5578,7 @@
 	id_tag = "scavpod_shuttle_interior_sensor";
 	pixel_x = 24
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "XA" = (
 /obj/structure/cable{
@@ -5629,19 +5589,19 @@
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /obj/machinery/meter,
 /obj/effect/floor_decal/corner/grey/diagonal,
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "XF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "XG" = (
 /obj/machinery/atmospherics/binary/passive_gate{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "XI" = (
 /obj/effect/catwalk_plated,
@@ -5677,7 +5637,7 @@
 	dir = 4;
 	icon_state = "railing0-0"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/escapepod)
 "XZ" = (
 /obj/structure/cable{
@@ -5696,7 +5656,7 @@
 	pixel_y = 24;
 	req_access = list()
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "Yd" = (
 /obj/effect/decal/cleanable/dirt,
@@ -5717,7 +5677,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
-	initial_gas = newlist()
+	map_airless = 1
 	},
 /area/scavver/lifepod)
 "Yg" = (
@@ -5742,7 +5702,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "YE" = (
 /obj/structure/cable{
@@ -5751,7 +5711,7 @@
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/liquid_fuel,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "YL" = (
 /obj/structure/lattice,
@@ -5770,9 +5730,7 @@
 	dir = 8
 	},
 /obj/structure/table/rack,
-/turf/simulated/floor/tiled/techfloor{
-	initial_gas = newlist()
-	},
+/turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "Zd" = (
 /obj/machinery/access_button/airlock_interior{
@@ -5793,25 +5751,25 @@
 /area/space)
 "Zx" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/black,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "ZB" = (
 /obj/effect/decal/cleanable/liquid_fuel,
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "ZI" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "ZK" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4;
 	target_pressure = 15000
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 "ZL" = (
 /obj/structure/cable{
@@ -5830,7 +5788,7 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/black{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/scavver/yachtup)
 
 (1,1,1) = {"

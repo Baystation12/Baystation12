@@ -75,7 +75,7 @@
 /area/map_template/icarus/sec)
 "aT" = (
 /obj/structure/grille,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/icarus/driver/east)
 "aV" = (
 /obj/machinery/door/airlock/sol{
@@ -122,7 +122,7 @@
 	icon_state = "pdoor0";
 	opacity = 0
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/icarus/driver/east)
 "bK" = (
 /obj/random/junk,
@@ -172,7 +172,7 @@
 /area/map_template/icarus/driver/east)
 "cZ" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/icarus/driver/west)
 "dn" = (
 /obj/random/trash,
@@ -449,7 +449,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icarus/bridge)
 "lv" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/icarus/driver/west)
 "lA" = (
 /obj/machinery/door/airlock/sol{
@@ -783,7 +783,7 @@
 	opacity = 0
 	},
 /obj/structure/ship_munition/ap_slug,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/icarus/driver/west)
 "wr" = (
 /obj/machinery/computer/modular/preset,
@@ -950,7 +950,7 @@
 	opacity = 0
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/icarus/driver/west)
 "Ck" = (
 /obj/structure/girder,
@@ -1019,7 +1019,7 @@
 /area/map_template/icarus/eng)
 "Ew" = (
 /obj/structure/grille,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/icarus/driver/west)
 "EB" = (
 /obj/random/obstruction,
@@ -1151,7 +1151,7 @@
 /area/map_template/icarus/sec)
 "Jk" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/icarus/driver/east)
 "JO" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1325,7 +1325,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/map_template/icarus/eng)
 "QL" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/map_template/icarus/driver/east)
 "Rm" = (
 /obj/effect/decal/cleanable/dirt,

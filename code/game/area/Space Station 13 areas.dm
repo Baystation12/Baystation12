@@ -79,6 +79,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/planetary_surface = FALSE
 	/// Boolean. Some base_turfs might cause issues with changing turfs, this flags it as a special case. See `/proc/get_base_turf_by_area()`.
 	var/base_turf_special_handling = FALSE
+	/// Boolean (Default `FALSE`) - If set, floor turfs in the area will be set to airless when they initialize. This is unset during `LateInitialize()` to avoid interfering with player-placed tiles.
+	var/turfs_airless = FALSE
 
 /*-----------------------------------------------------------------------------*/
 
@@ -99,6 +101,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	area_flags = AREA_FLAG_EXTERNAL | AREA_FLAG_IS_NOT_PERSISTENT
 	ambience = list('sound/ambience/ambispace1.ogg','sound/ambience/ambispace2.ogg','sound/ambience/ambispace3.ogg','sound/ambience/ambispace4.ogg','sound/ambience/ambispace5.ogg')
 	secure = FALSE
+	turfs_airless = TRUE
 
 /area/space/atmosalert()
 	return

@@ -17,49 +17,49 @@
 /area/mine/explored)
 "al" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "am" = (
 /obj/machinery/constructable_frame/computerframe,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "an" = (
 /obj/machinery/tele_projector,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "ao" = (
 /obj/machinery/tele_pad,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "ap" = (
 /obj/structure/table/glass,
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "aq" = (
 /obj/structure/table/glass,
 /obj/random/maintenance,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "ar" = (
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "as" = (
 /obj/random/junk,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "at" = (
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "av" = (
 /obj/structure/table/glass,
 /obj/random/loot,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "aw" = (
 /obj/random/closet,
 /obj/random/loot,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "ax" = (
 /obj/random/junk,
@@ -71,143 +71,143 @@
 	tag_exterior_door = "lp_north_outer";
 	tag_interior_door = "lp_north_inner"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "ay" = (
 /obj/machinery/constructable_frame/computerframe,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "az" = (
 /obj/structure/table/rack,
 /obj/random/maintenance,
 /obj/random/tool,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "aA" = (
 /obj/structure/table/reinforced,
 /obj/random/maintenance,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "aB" = (
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "aC" = (
 /obj/structure/table/reinforced,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "aE" = (
 /obj/structure/table/reinforced,
 /obj/random/loot,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "aF" = (
 /obj/structure/table/reinforced,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "aG" = (
 /obj/random/maintenance,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "aH" = (
 /obj/structure/barricade,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "aI" = (
 /obj/random/closet,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "aJ" = (
 /obj/structure/table,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "aK" = (
 /obj/machinery/door/airlock/maintenance,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "aL" = (
 /turf/simulated/wall,
 /area/djstation)
 "aM" = (
 /obj/structure/grille,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "aN" = (
 /obj/structure/grille/broken,
 /obj/random/trash,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "aO" = (
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "aP" = (
 /obj/structure/grille/broken,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "aQ" = (
 /obj/random/medical,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "aR" = (
 /obj/structure/bed,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "aS" = (
 /turf/unsimulated/mask,
 /area/mine/explored)
 "aT" = (
 /obj/random/loot,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "aU" = (
 /obj/random/closet,
 /obj/random/maintenance,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "aV" = (
 /obj/structure/flora/pottedplant/dead,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "aW" = (
 /obj/machinery/door/airlock/maintenance,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "aX" = (
 /obj/structure/table/steel,
 /obj/random/maintenance,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "aY" = (
 /obj/random/closet,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "aZ" = (
 /obj/structure/table/rack,
 /obj/random/maintenance,
 /obj/random/maintenance,
 /obj/random/action_figure,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "ba" = (
 /obj/structure/table/rack,
 /obj/random/maintenance,
 /obj/random/maintenance,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "bb" = (
 /obj/structure/table/rack,
 /obj/random/junk,
 /obj/random/maintenance,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "bc" = (
 /obj/structure/girder,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "bd" = (
 /obj/structure/largecrate,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "be" = (
 /obj/random/maintenance,
@@ -260,7 +260,7 @@
 	id_tag = "lp_north_outer";
 	locked = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "lb" = (
 /turf/unsimulated/mask,
@@ -274,13 +274,13 @@
 	master_tag = "lp_north_airlock";
 	pixel_x = 24
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "nb" = (
 /obj/machinery/door/airlock/multi_tile{
 	name = "Glass Airlock"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "ob" = (
 /obj/machinery/door/airlock/external{
@@ -290,19 +290,19 @@
 	locked = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "qb" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "rb" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "sb" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -313,13 +313,13 @@
 	name = "interior access button";
 	pixel_y = 24
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "tb" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 9
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "ub" = (
 /obj/machinery/access_button{
@@ -330,7 +330,7 @@
 	pixel_x = 24;
 	req_access = null
 	},
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "vb" = (
 /obj/machinery/access_button{
@@ -353,7 +353,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "xb" = (
 /obj/random/trash,
@@ -365,7 +365,7 @@
 	dir = 8;
 	id_tag = "lp_east_pump"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "yb" = (
 /obj/random/maintenance,
@@ -377,7 +377,7 @@
 	tag_exterior_door = "lp_east_outer";
 	tag_interior_door = "lp_east_inner"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "zb" = (
 /obj/machinery/door/airlock/external{
@@ -386,23 +386,23 @@
 	id_tag = "lp_east_outer";
 	locked = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "Ab" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 6
 	},
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled,
 /area/djstation)
 "Db" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 "Eb" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/djstation)
 
 (1,1,1) = {"

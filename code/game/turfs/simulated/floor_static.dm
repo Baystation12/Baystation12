@@ -43,10 +43,6 @@
 	var/style = A.hardness % 2 ? "curvy" : "jaggy"
 	icon_state = "[style][(x*y) % 7]"
 
-/turf/simulated/floor/fixed/alium/airless
-	initial_gas = null
-	temperature = TCMB
-
 /turf/simulated/floor/fixed/alium/ex_act(severity)
 	var/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIENALLOY)
 	if(prob(A.explosion_resistance))

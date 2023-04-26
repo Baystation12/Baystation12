@@ -22,6 +22,7 @@
 /area/map_template/hydrobase/solars
 	name = "\improper X207 Solar Array"
 	icon_state = "solar"
+	turfs_airless = TRUE
 
 /area/map_template/hydrobase/station/processing
 	name = "\improper X207 Processing Area"
