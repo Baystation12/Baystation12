@@ -2,10 +2,6 @@
 #define Frand(low, high) ( rand() * ((high) - (low)) + (low) )
 
 
-/// Value or the next integer in a positive direction: Ceil(-1.5) = -1 , Ceil(1.5) = 2
-#define Ceil(value) ( -round(-(value)) )
-
-
 /// Value or the next multiple of divisor in a positive direction. Ceilm(-1.5, 0.3) = -1.5 , Ceilm(-1.5, 0.4) = -1.2
 #define Ceilm(value, divisor) ( -round(-(value) / (divisor)) * (divisor) )
 

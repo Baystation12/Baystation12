@@ -165,9 +165,9 @@
 	feed_sound(target)
 	var/transfer_amount = target.species?.ingest_amount || 10
 	if (user.a_intent == I_DISARM)
-		transfer_amount = Ceil(transfer_amount * 0.5)
+		transfer_amount = ceil(transfer_amount * 0.5)
 	else if (user.a_intent == I_GRAB)
-		transfer_amount = Ceil(transfer_amount * 1.5)
+		transfer_amount = ceil(transfer_amount * 1.5)
 	reagents.trans_to_mob(target, transfer_amount, CHEM_INGEST)
 	return TRUE
 

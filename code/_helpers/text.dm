@@ -220,7 +220,7 @@
 	var/padding_size = length_char(padding)
 	if (!padding_size)
 		return ""
-	var/padding_count = Ceil(size / padding_size)
+	var/padding_count = ceil(size / padding_size)
 	var/list/result = list()
 	for (var/i = padding_count to 1 step -1)
 		result += padding // pow2 strategies could be used here at the cost of complexity

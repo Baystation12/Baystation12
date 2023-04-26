@@ -87,7 +87,7 @@
 				for (var/chem in M.chem_products)
 					sheet_volume += M.chem_products[chem] * skill_multiplier
 				var/obj/item/stack/material/S = I
-				var/used_sheets = min(Ceil((container.reagents.maximum_volume - container.reagents.total_volume) / sheet_volume), S.get_amount())
+				var/used_sheets = min(ceil((container.reagents.maximum_volume - container.reagents.total_volume) / sheet_volume), S.get_amount())
 				var/used_all = used_sheets == S.get_amount()
 				S.use(used_sheets)
 				for (var/chem in M.chem_products)
