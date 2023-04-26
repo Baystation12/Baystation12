@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/bluespacerelay
-	name = T_BOARD("bluespacerelay")
+	name = "circuit board (bluespacerelay)"
 	build_path = /obj/machinery/bluespacerelay
 	board_type = "machine"
 	origin_tech = list(TECH_BLUESPACE = 2, TECH_DATA = 2)

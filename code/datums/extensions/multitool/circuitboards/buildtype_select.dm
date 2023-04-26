@@ -24,6 +24,6 @@
 		if(path && (path in board.get_buildable_types()))
 			board.build_path = path
 			var/obj/thing = path
-			board.SetName(T_BOARD(initial(thing.name)))
+			board.SetName("circuit board ([initial(thing.name)])")
 			return MT_REFRESH
 	return ..()

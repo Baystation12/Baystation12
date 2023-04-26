@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/bioprinter
-	name = T_BOARD("bioprinter")
+	name = "circuit board (bioprinter)"
 	build_path = /obj/machinery/organ_printer/flesh
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 3, TECH_DATA = 3)
@@ -15,7 +15,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/roboprinter
-	name = T_BOARD("prosthetic organ fabricator")
+	name = "circuit board (prosthetic organ fabricator)"
 	build_path = /obj/machinery/organ_printer/robot
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 3)

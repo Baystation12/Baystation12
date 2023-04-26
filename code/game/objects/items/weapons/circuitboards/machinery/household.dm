@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/microwave
-	name = T_BOARD("microwave")
+	name = "circuit board (microwave)"
 	build_path = /obj/machinery/microwave
 	board_type = "machine"
 	origin_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 2)
@@ -14,7 +14,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/gibber
-	name = T_BOARD("meat gibber")
+	name = "circuit board (meat gibber)"
 	build_path = /obj/machinery/gibber
 	board_type = "machine"
 	origin_tech = list(TECH_BIO = 2, TECH_MATERIAL = 2)
@@ -28,7 +28,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/cooker
-	name = T_BOARD("candy machine")
+	name = "circuit board (candy machine)"
 	build_path = /obj/machinery/cooker/candy
 	board_type = "machine"
 	origin_tech = list(TECH_BIO = 1, TECH_MATERIAL = 1)
@@ -47,7 +47,7 @@
 	return subtypesof(/obj/machinery/cooker)
 
 /obj/item/stock_parts/circuitboard/honey
-	name = T_BOARD("honey extractor")
+	name = "circuit board (honey extractor)"
 	build_path = /obj/machinery/honey_extractor
 	board_type = "machine"
 	origin_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 1)
@@ -56,12 +56,12 @@
 		/obj/item/stock_parts/matter_bin = 2)
 
 /obj/item/stock_parts/circuitboard/honey/seed
-	name = T_BOARD("seed extractor")
+	name = "circuit board (seed extractor)"
 	build_path = /obj/machinery/seed_extractor
 	board_type = "machine"
 
 /obj/item/stock_parts/circuitboard/washer
-	name = T_BOARD("washing machine")
+	name = "circuit board (washing machine)"
 	build_path = /obj/machinery/washing_machine
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 1)
@@ -72,7 +72,7 @@
 		/obj/item/pipe = 1)
 
 /obj/item/stock_parts/circuitboard/vending
-	name = T_BOARD("vending machine")
+	name = "circuit board (vending machine)"
 	build_path = /obj/machinery/vending/generic
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 2)
@@ -95,7 +95,7 @@
 		. |= base_type
 
 /obj/item/stock_parts/circuitboard/shipmap
-	name = T_BOARD("ship holomap")
+	name = "circuit board (ship holomap)"
 	board_type = "machine"
 	build_path = /obj/machinery/ship_map
 	origin_tech = list(TECH_ENGINEERING = 1)
