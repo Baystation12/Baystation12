@@ -95,16 +95,49 @@
 	scoped_accuracy = 0
 	wielded_item_state = "boltaction-wielded"
 
+/obj/item/gun/projectile/sniper/panther //semi-automatic only
+	name = "marksman rifle"
+	desc = "An SD-Panther. It is a simple and durable rifle made of stamped steel manufactured by Novaya Zemlya Arms for the Confederation Navy. \
+	While it lacks the burst fire of other military rifles, it's exceptionally accurate and has a powerful optic."
+	icon = 'icons/obj/guns/terran_rifle.dmi'
+	icon_state = "dmr"
+	item_state = "dmr"
+	fire_delay = 8
+	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 4, TECH_ESOTERIC = 5)
+	w_class = ITEM_SIZE_HUGE
+	force = 10
+	caliber = CALIBER_RIFLE
+	slot_flags = SLOT_BACK
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/rifle
+	allowed_magazines = /obj/item/ammo_magazine/rifle
+	one_hand_penalty = 9
+	scoped_accuracy = 6
+	scope_zoom = 1
+	accuracy_power = 9
+	accuracy = 4
+	bulk = GUN_BULK_RIFLE
+	wielded_item_state = "dmr-wielded"
+	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
+	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
+
+/obj/item/gun/projectile/sniper/panther/on_update_icon()
+	if(ammo_magazine)
+		icon_state = "dmr"
+	else
+		icon_state = "dmr-empty"
+	..()
+
 /obj/item/gun/projectile/sniper/garand
 	name = "garand rifle"
 	desc = "The rugged garand is a old semi-automatic weapon popular on the frontier worlds. PING!"
 	icon = 'icons/obj/guns/garand.dmi'
 	icon_state = "garand"
-	item_state = null
+	item_state = "garand"
+	origin_tech = list(TECH_COMBAT = 2)
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	caliber = CALIBER_RIFLE
-	origin_tech = list(TECH_COMBAT = 2)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/iclipr
@@ -114,23 +147,19 @@
 	one_hand_penalty = 9
 	accuracy_power = 5
 	accuracy = 2
-	bulk = GUN_BULK_RIFLE + 1
+	bulk = GUN_BULK_HEAVY_RIFLE
 	wielded_item_state = "garand-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/garand_magout.ogg'
 
-	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=6, one_hand_penalty=8, burst_accuracy=null, dispersion=null)
-		)
-
 /obj/item/gun/projectile/sniper/garand/on_update_icon()
-	..()
-	if (ammo_magazine)
-		icon_state = "garand"
-		wielded_item_state = "garand-wielded"
+	if(ammo_magazine && length(ammo_magazine.stored_ammo))
+		icon_state = initial(icon_state)
+		wielded_item_state = initial(wielded_item_state)
 	else
-		icon_state = "garand-empty"
-		wielded_item_state = "garand-wielded-empty"
+		icon_state = "[initial(icon_state)]-empty"
+		wielded_item_state = "[initial(wielded_item_state)]-empty"
+	..()
 
 /obj/item/gun/projectile/sniper/semistrip
 	name = "carbine rifle"
@@ -145,12 +174,17 @@
 	caliber = CALIBER_PISTOL_MAGNUM
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
 	load_method = SINGLE_CASING|SPEEDLOADER
+	fire_delay = 2
+	one_hand_penalty = 8
 	max_shells = 10
 	accuracy = 1
-	scope_zoom = 0
-	scoped_accuracy = 0
 	wielded_item_state = "semistrip-wielded"
 
-	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=2,  one_hand_penalty=8, burst_accuracy=null, dispersion=null)
-		)
+/obj/item/gun/projectile/sniper/semistrip/on_update_icon()
+	if(length(ammo_magazine.stored_ammo))
+		icon_state = initial(icon_state)
+		wielded_item_state = initial(wielded_item_state)
+	else
+		icon_state = "[initial(icon_state)]-empty"
+		wielded_item_state = "[initial(wielded_item_state)]-empty"
+	..()
