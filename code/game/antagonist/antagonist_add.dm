@@ -44,6 +44,7 @@
 	if(!can_become_antag(player, ignore_role))
 		return 0
 	current_antagonists |= player
+	GLOB.destroyed_event.register(player, src, .proc/remove_antagonist)
 
 	if(faction_verb)
 		player.current.verbs |= faction_verb
@@ -71,7 +72,9 @@
 	return 1
 
 /datum/antagonist/proc/remove_antagonist(datum/mind/player, show_message, implanted)
+	GLOB.destroyed_event.unregister(player, src, .proc/remove_antagonist)
 	if(!istype(player))
+		current_antagonists -= player
 		return 0
 	if (player.current)
 		if (faction_verb)

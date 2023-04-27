@@ -64,16 +64,35 @@
 
 /datum/trader/proc/generate_pool(list/trading_pool)
 	. = list()
+	// Add types
 	for(var/type in trading_pool)
 		var/status = trading_pool[type]
 		if(status & TRADER_THIS_TYPE)
 			. += type
 		if(status & TRADER_SUBTYPES_ONLY)
 			. += subtypesof(type)
-		if(status & TRADER_BLACKLIST)
+
+	// Remove blacklisted
+	for (var/type in .)
+		var/status = trading_pool[type]
+		if (HAS_FLAGS(status, TRADER_BLACKLIST) || !validate_type_for_trade(type))
 			. -= type
-		if(status & TRADER_BLACKLIST_SUB)
+		if (HAS_FLAGS(status, TRADER_BLACKLIST_SUB))
 			. -= subtypesof(type)
+
+
+/**
+ * Validates a given type can be used for trading. Intended to prevent certain items from being attainable via merchants.
+ *
+ * Returns boolean.
+ */
+/datum/trader/proc/validate_type_for_trade(type)
+	if (isatom(type))
+		var/atom/atom = type
+		// Block abstracts
+		if (type == initial(atom.abstract_type))
+			return FALSE
+	return TRUE
 
 
 //If this hits 0 then they decide to up and leave.
