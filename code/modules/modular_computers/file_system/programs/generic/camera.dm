@@ -41,6 +41,12 @@
 	var/obj/machinery/camera/current_camera = null
 	var/current_network = null
 
+
+/datum/nano_module/camera_monitor/Destroy()
+	reset_current()
+	. = ..()
+
+
 /datum/nano_module/camera_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
@@ -143,12 +149,14 @@
 
 	current_camera = C
 	if(current_camera)
+		GLOB.destroyed_event.register(current_camera, src, .proc/reset_current)
 		var/mob/living/L = current_camera.loc
 		if(istype(L))
 			L.tracking_initiated()
 
 /datum/nano_module/camera_monitor/proc/reset_current()
 	if(current_camera)
+		GLOB.destroyed_event.unregister(current_camera, src, .proc/reset_current)
 		var/mob/living/L = current_camera.loc
 		if(istype(L))
 			L.tracking_cancelled()
