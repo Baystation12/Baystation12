@@ -1037,9 +1037,7 @@
 	name = "Engineering External Access"
 	},
 /obj/machinery/shield_diffuser,
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/maintenance/firstdeck/forestarboard)
 "acd" = (
 /turf/simulated/floor/reinforced,
@@ -1248,9 +1246,7 @@
 	volume_rate = 4000
 	},
 /obj/effect/floor_decal/industrial/outline/red,
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "acw" = (
 /turf/simulated/wall/r_titanium,
@@ -1264,9 +1260,7 @@
 	volume_rate = 4000
 	},
 /obj/effect/floor_decal/industrial/outline/red,
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "acy" = (
 /obj/effect/floor_decal/corner/pink{
@@ -3176,9 +3170,7 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "afx" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -3218,9 +3210,7 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "afB" = (
 /obj/structure/roller_bed,
@@ -3727,9 +3717,7 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "agx" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -4271,9 +4259,7 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "ahz" = (
 /obj/effect/floor_decal/spline/plain/beige{
@@ -5082,7 +5068,9 @@
 	injecting = 1;
 	use_power = 1
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/thruster/d1starboard)
 "ajO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -11842,9 +11830,7 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "aQm" = (
 /obj/machinery/light/small{
@@ -12141,17 +12127,13 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "aRh" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "aRj" = (
 /obj/machinery/atmospherics/binary/passive_gate/on{
@@ -12591,9 +12573,7 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "aSk" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -13211,9 +13191,7 @@
 	name = "Engineering External Access"
 	},
 /obj/machinery/shield_diffuser,
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/maintenance/firstdeck/foreport)
 "aUb" = (
 /obj/machinery/door/firedoor,
@@ -14178,9 +14156,7 @@
 	id_tag = "cChamber1sV";
 	name = "Chamber Vent"
 	},
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "bhy" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -14430,9 +14406,7 @@
 	id_tag = "cChamber1pV";
 	name = "Chamber Vent"
 	},
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "btE" = (
 /turf/simulated/floor/tiled/dark,
@@ -23879,9 +23853,7 @@
 /obj/machinery/air_sensor{
 	id_tag = "cChamber1s"
 	},
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
 "otb" = (
 /obj/machinery/light{
@@ -24811,9 +24783,7 @@
 /obj/machinery/air_sensor{
 	id_tag = "cChamber1p"
 	},
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
+/turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "pBb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,

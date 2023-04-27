@@ -3374,7 +3374,7 @@
 /turf/simulated/floor{
 	map_airless = 1
 	},
-/area/space)
+/area/casino/casino_crew_atmos)
 "jv" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 9
@@ -4785,7 +4785,9 @@
 /turf/simulated/wall/r_titanium,
 /area/casino/casino_bow)
 "ns" = (
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/casino/casino_bow)
 "ob" = (
 /obj/structure/table/gamblingtable,

@@ -3647,7 +3647,9 @@
 	lethal = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/aquila/cockpit)
 "ha" = (
 /obj/machinery/camera/network/aquila{
@@ -3680,7 +3682,9 @@
 	enabled = 0;
 	lethal = 1
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/aquila/cockpit)
 "hi" = (
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -13449,7 +13453,9 @@
 "OX" = (
 /obj/machinery/shipsensors,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/aquila/air)
 "Pb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
