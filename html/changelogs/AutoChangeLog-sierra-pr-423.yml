@@ -1,6 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - bugfix: The acid chemical artifact trigger now accepts all acids.
-  - bugfix: The acid chemical artifact trigger now accepts all toxins. There's a lot.
-  - tweak: The volatile chemical artifact trigger now accepts more chemicals.
