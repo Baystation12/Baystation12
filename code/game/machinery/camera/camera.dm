@@ -206,10 +206,23 @@
 	else
 		..()
 
+
+/**
+ * Handles resetting the view of all clients currently viewing this camera. Does not include resetting nano modules.
+ */
+/obj/machinery/camera/proc/disconnect_viewers()
+	for (var/mob/mob as anything in SSmobs.mob_list)
+		if (!mob.client || mob.client.eye != src)
+			continue
+		mob.reset_view()
+
+
 /obj/machinery/camera/proc/deactivate(user as mob, choice = 1)
 	// The only way for AI to reactivate cameras are malf abilities, this gives them different messages.
 	if(istype(user, /mob/living/silicon/ai))
 		user = null
+
+	disconnect_viewers()
 
 	if(choice != 1)
 		return
