@@ -22,5 +22,9 @@
 	safety_icon = "bobcat-safety"
 	magazine_type = /obj/item/ammo_magazine/pistol
 	allowed_magazines = /obj/item/ammo_magazine/pistol
+	banned_magazines = list(
+		/obj/item/ammo_magazine/pistol/double,
+		/obj/item/ammo_magazine/pistol/small
+	)
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ESOTERIC = 4)
 	fire_delay = 4
