@@ -250,6 +250,7 @@
 	. = ..()
 	wires.RandomCutAll()
 
+	deactivate()
 	triggerCameraAlarm()
 	queue_icon_update()
 	update_coverage()
