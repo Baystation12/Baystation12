@@ -16,7 +16,7 @@
 		if(copytext_char(message,1,2) == get_prefix_key(/singleton/prefix/radio_main_channel))
 			var/datum/language/L = all_languages[LANGUAGE_DRONE_GLOBAL]
 			if(istype(L))
-				return L.broadcast(src,trim(copytext(message,2)))
+				return L.broadcast(src,trimtext(copytext(message,2)))
 
 		//Must be concious to speak
 		if (stat)

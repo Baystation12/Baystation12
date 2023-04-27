@@ -282,7 +282,7 @@
 			damage = 8
 			radiation -= 4 * RADIATION_SPEED_COEFFICIENT
 
-		damage = Floor(damage * species.get_radiation_mod(src))
+		damage = floor(damage * species.get_radiation_mod(src))
 		if(damage)
 			adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 			immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
@@ -792,7 +792,7 @@
 		if(cells && isSynthetic())
 			var/obj/item/organ/internal/cell/C = internal_organs_by_name[BP_CELL]
 			if (istype(C))
-				var/chargeNum = clamp(Ceil(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
+				var/chargeNum = clamp(ceil(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
 				cells.icon_state = "charge[chargeNum]"
 			else
 				cells.icon_state = "charge-empty"

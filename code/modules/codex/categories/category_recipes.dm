@@ -19,7 +19,7 @@
 			mechanics_text += "<li>[recipe.required_produce[tag]] [tag]\s</li>"
 		mechanics_text += "</ul>"
 		var/atom/movable/recipe_product = recipe.result_path
-		mechanics_text += "<br>This recipe takes [Ceil(recipe.time/10)] second\s to cook in a microwave and creates \a [initial(recipe_product.name)]."
+		mechanics_text += "<br>This recipe takes [ceil(recipe.time/10)] second\s to cook in a microwave and creates \a [initial(recipe_product.name)]."
 		var/lore_text = recipe.lore_text
 		if(!lore_text)
 			lore_text = initial(recipe_product.desc)

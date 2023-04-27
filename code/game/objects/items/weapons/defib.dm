@@ -51,7 +51,7 @@
 				new_overlays += "[initial(icon_state)]-powered"
 
 	if(bcell)
-		var/ratio = Ceil(bcell.percent()/25) * 25
+		var/ratio = ceil(bcell.percent()/25) * 25
 		new_overlays += "[initial(icon_state)]-charge[ratio]"
 	else
 		new_overlays += "[initial(icon_state)]-nocell"

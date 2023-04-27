@@ -477,7 +477,7 @@ This function completely restores a damaged organ to perfect condition.
 		var/internal_damage
 		if(prob(damage) && sever_artery())
 			internal_damage = TRUE
-		if(prob(Ceil(damage/4)) && sever_tendon())
+		if(prob(ceil(damage/4)) && sever_tendon())
 			internal_damage = TRUE
 		if(internal_damage)
 			owner.custom_pain("You feel something rip in your [name]!", 50, affecting = src)

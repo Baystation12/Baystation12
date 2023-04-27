@@ -46,7 +46,7 @@
 	if(isnull(check_incapacitated))
 		check_incapacitated = (INCAPACITATION_STUNNED|INCAPACITATION_KNOCKOUT)
 	if(can_use(check_incapacitated))
-		value = max(1, Ceil(value * cost_modifier))
+		value = max(1, ceil(value * cost_modifier))
 		if(value <= stamina)
 			stamina -= value
 			ui.update_icon()

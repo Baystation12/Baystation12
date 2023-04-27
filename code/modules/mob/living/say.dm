@@ -194,7 +194,7 @@ var/global/list/channel_to_radio_key = new
 	// This is broadcast to all mobs with the language,
 	// irrespective of distance or anything else.
 	if(speaking && (speaking.flags & HIVEMIND))
-		speaking.broadcast(src,trim(message))
+		speaking.broadcast(src,trimtext(message))
 		return 1
 
 	if((is_muzzled()) && !(speaking && (speaking.flags & SIGNLANG)))

@@ -229,7 +229,7 @@
 	var/result_name = source.name
 	if (flags & COOKER_STRIP_RAW)
 		if (text_starts_with(result_name, "raw"))
-			result_name = trim(copytext(result_name, 4))
+			result_name = trimtext(copytext(result_name, 4))
 	result.SetName("[prefix ? "[prefix] " : ""][result_name][suffix ? " [suffix]" : ""]")
 	var/list/combined_names = result.combined_names
 	if (combined_names)

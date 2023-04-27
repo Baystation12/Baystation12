@@ -384,7 +384,7 @@
 	stop_pulling()
 	to_chat(src, SPAN_WARNING("You slipped on [slipped_on]!"))
 	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
-	Weaken(Floor(stun_duration/2))
+	Weaken(floor(stun_duration/2))
 	return TRUE
 
 /mob/living/carbon/proc/add_chemical_effect(effect, magnitude = 1)

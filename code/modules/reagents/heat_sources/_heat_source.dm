@@ -166,10 +166,10 @@
 
 	dat += "</td></tr>"
 
-	dat += "<tr><td>Current temperature:</td><td>[Floor(temperature - T0C)]C</td></tr>"
+	dat += "<tr><td>Current temperature:</td><td>[floor(temperature - T0C)]C</td></tr>"
 
 	dat += "<tr><td>Loaded container:</td>"
-	dat += "<td>[container ? "[container.name] ([Floor(container.temperature - T0C)]C) <a href='?src=\ref[src];remove_container=1'>Remove</a>" : "None."]</td></tr>"
+	dat += "<td>[container ? "[container.name] ([floor(container.temperature - T0C)]C) <a href='?src=\ref[src];remove_container=1'>Remove</a>" : "None."]</td></tr>"
 
 	dat += "<tr><td>Switched:</td><td><a href='?src=\ref[src];toggle_power=1'>[use_power == POWER_USE_ACTIVE ? "On" : "Off"]</a></td></tr>"
 	dat += "</table>"

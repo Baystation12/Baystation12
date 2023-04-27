@@ -241,61 +241,47 @@
 	last_int_pressure = 0
 
 /obj/item/organ/internal/lungs/proc/handle_temperature_effects(datum/gas_mixture/breath)
-	// Hot air hurts :(
-	if((breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(MUTATION_COLD_RESISTANCE in owner.mutations))
-		var/damage = 0
-		if(breath.temperature <= species.cold_level_1)
-			if(prob(20))
+	if ((breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(MUTATION_COLD_RESISTANCE in owner.mutations))
+		var/breath_damage = 0
+		if (breath.temperature < species.cold_level_1)
+			if (prob(20))
 				to_chat(owner, SPAN_DANGER("You feel your face freezing and icicles forming in your lungs!"))
-			switch(breath.temperature)
-				if(species.cold_level_3 to species.cold_level_2)
-					damage = COLD_GAS_DAMAGE_LEVEL_3
-				if(species.cold_level_2 to species.cold_level_1)
-					damage = COLD_GAS_DAMAGE_LEVEL_2
-				else
-					damage = COLD_GAS_DAMAGE_LEVEL_1
-
-			if(prob(20))
-				owner.apply_damage(damage, DAMAGE_BURN, BP_HEAD, used_weapon = "Excessive Cold")
+			if (breath.temperature < species.cold_level_3)
+				breath_damage = COLD_GAS_DAMAGE_LEVEL_3
+			else if (breath.temperature < species.cold_level_2)
+				breath_damage = COLD_GAS_DAMAGE_LEVEL_2
 			else
-				src.damage += damage
+				breath_damage = COLD_GAS_DAMAGE_LEVEL_1
+			if (prob(20))
+				owner.apply_damage(breath_damage, DAMAGE_BURN, BP_HEAD, used_weapon = "Excessive Cold")
+			else
+				damage += breath_damage
 			owner.fire_alert = 1
-		else if(breath.temperature >= species.heat_level_1)
-			if(prob(20))
+		else if (breath.temperature > species.heat_level_1)
+			if (prob(20))
 				to_chat(owner, SPAN_DANGER("You feel your face burning and a searing heat in your lungs!"))
-
-			switch(breath.temperature)
-				if(species.heat_level_1 to species.heat_level_2)
-					damage = HEAT_GAS_DAMAGE_LEVEL_1
-				if(species.heat_level_2 to species.heat_level_3)
-					damage = HEAT_GAS_DAMAGE_LEVEL_2
-				else
-					damage = HEAT_GAS_DAMAGE_LEVEL_3
-
-			if(prob(20))
-				owner.apply_damage(damage, DAMAGE_BURN, BP_HEAD, used_weapon = "Excessive Heat")
+			if (breath.temperature > species.heat_level_3)
+				breath_damage = HEAT_GAS_DAMAGE_LEVEL_3
+			else if (breath.temperature > species.heat_level_2)
+				breath_damage = HEAT_GAS_DAMAGE_LEVEL_2
 			else
-				src.damage += damage
+				breath_damage = HEAT_GAS_DAMAGE_LEVEL_1
+			if (prob(20))
+				owner.apply_damage(breath_damage, DAMAGE_BURN, BP_HEAD, used_weapon = "Excessive Heat")
+			else
+				damage += breath_damage
 			owner.fire_alert = 2
-
-		//breathing in hot/cold air also heats/cools you a bit
 		var/temp_adj = breath.temperature - owner.bodytemperature
-		if (temp_adj < 0)
-			temp_adj /= (BODYTEMP_COLD_DIVISOR * 5)	//don't raise temperature as much as if we were directly exposed
-		else
-			temp_adj /= (BODYTEMP_HEAT_DIVISOR * 5)	//don't raise temperature as much as if we were directly exposed
-
-		var/relative_density = breath.total_moles / (MOLES_CELLSTANDARD * breath.volume/CELL_VOLUME)
-		temp_adj *= relative_density
-
-		if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
-		if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
-//		log_debug("Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]")
-		owner.bodytemperature += temp_adj
-
-	else if(breath.temperature >= species.heat_discomfort_level)
+		if (temp_adj)
+			if (temp_adj < 0)
+				temp_adj /= (BODYTEMP_COLD_DIVISOR * 5)
+			else
+				temp_adj /= (BODYTEMP_HEAT_DIVISOR * 5)
+			temp_adj *= breath.total_moles / (MOLES_CELLSTANDARD * breath.volume / CELL_VOLUME)
+			owner.bodytemperature += clamp(temp_adj, BODYTEMP_COOLING_MAX, BODYTEMP_HEATING_MAX)
+	else if (breath.temperature >= species.heat_discomfort_level)
 		species.get_environment_discomfort(owner,"heat")
-	else if(breath.temperature <= species.cold_discomfort_level)
+	else if (breath.temperature <= species.cold_discomfort_level)
 		species.get_environment_discomfort(owner,"cold")
 
 /obj/item/organ/internal/lungs/listen()

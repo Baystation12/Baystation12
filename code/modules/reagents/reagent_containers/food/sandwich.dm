@@ -90,7 +90,7 @@
 	SetName(lowertext("[fullname] sandwich"))
 	renamed = 0 //updating removes custom name
 	if(length(name) > 80) SetName("[pick(list("absurd","colossal","enormous","ridiculous"))] sandwich")
-	w_class = Ceil(clamp((length(ingredients)/2),2,4))
+	w_class = ceil(clamp((length(ingredients)/2),2,4))
 
 /obj/item/reagent_containers/food/snacks/csandwich/Destroy()
 	QDEL_NULL_LIST(ingredients)

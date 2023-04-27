@@ -74,7 +74,7 @@
 		crew_data["charge_span"] = "good"
 
 	if(crew_data["true_oxygenation"] != -1)
-		crew_data["pressure"] = "[Floor(120+rand(-5,5))]/[Floor(80+rand(-5,5))]"
+		crew_data["pressure"] = "[floor(120+rand(-5,5))]/[floor(80+rand(-5,5))]"
 		crew_data["true_oxygenation"] = 100
 		crew_data["oxygenation"] = "normal"
 		crew_data["oxygenation_span"] = "good"
@@ -91,7 +91,7 @@
 		crew_data["charge_span"] = "bad"
 
 	if(crew_data["true_oxygenation"] != -1)
-		crew_data["pressure"] = "[Floor((120+rand(-5,5))*0.25)]/[Floor((80+rand(-5,5))*0.25)]"
+		crew_data["pressure"] = "[floor((120+rand(-5,5))*0.25)]/[floor((80+rand(-5,5))*0.25)]"
 		crew_data["true_oxygenation"] = 25
 		crew_data["oxygenation"] = "extremely low"
 		crew_data["oxygenation_span"] = "bad"

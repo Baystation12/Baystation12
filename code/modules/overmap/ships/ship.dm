@@ -166,9 +166,9 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 			if(MOVING(speed[i]))
 				position[i] += speed[i] * OVERMAP_SPEED_CONSTANT
 				if(position[i] < 0)
-					deltas[i] = Ceil(position[i])
+					deltas[i] = ceil(position[i])
 				else if(position[i] > 0)
-					deltas[i] = Floor(position[i])
+					deltas[i] = floor(position[i])
 				if(deltas[i] != 0)
 					position[i] -= deltas[i]
 					position[i] += (deltas[i] > 0) ? -1 : 1
@@ -218,7 +218,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	for(var/i = 1 to 2)
 		if(MOVING(speed[i]))
 			. = min(., ((speed[i] > 0 ? 1 : -1) - position[i]) / speed[i])
-	. = max(Ceil(.),0)
+	. = max(ceil(.),0)
 
 /obj/effect/overmap/visitable/ship/proc/handle_wraparound()
 	var/nx = x

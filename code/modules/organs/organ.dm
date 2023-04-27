@@ -56,7 +56,7 @@ var/global/list/organ_cache = list()
 		given_dna = null
 
 	if(max_damage)
-		min_broken_damage = Floor(max_damage / 2)
+		min_broken_damage = floor(max_damage / 2)
 	else
 		max_damage = min_broken_damage * 2
 

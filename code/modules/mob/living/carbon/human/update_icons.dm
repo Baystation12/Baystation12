@@ -249,8 +249,8 @@ var/global/list/damage_icon_parts = list()
 	var/icon/icon_template = GLOB.species_icon_template_cache[species_key]
 	var/icon/overlay = GLOB.overlay_icon_cache[overlay_key]
 
-	var/x_offset = Ceil(0.5*(icon_template.Width() - (overlay.Width() || 32)))
-	var/y_offset = Ceil(0.5*(icon_template.Height() - (overlay.Height() || 32)))
+	var/x_offset = ceil(0.5*(icon_template.Width() - (overlay.Width() || 32)))
+	var/y_offset = ceil(0.5*(icon_template.Height() - (overlay.Height() || 32)))
 
 	return matrix().Update(
 		offset_x = x_offset - y_offset,

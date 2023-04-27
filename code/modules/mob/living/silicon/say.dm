@@ -66,7 +66,7 @@
 
 	log_say("[key_name(src)] : [message]")
 
-	message = trim(message)
+	message = trimtext(message)
 
 	if (!message)
 		return
@@ -120,7 +120,7 @@
 
 	log_emote("[key_name(src)] : [message]")
 
-	message = trim(message)
+	message = trimtext(message)
 
 	if (!message)
 		return

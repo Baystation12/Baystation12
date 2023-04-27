@@ -136,7 +136,7 @@
 
 /obj/machinery/organ_printer/robot/dismantle()
 	if(stored_matter >= matter_amount_per_sheet)
-		new /obj/item/stack/material/steel(get_turf(src), Floor(stored_matter/matter_amount_per_sheet))
+		new /obj/item/stack/material/steel(get_turf(src), floor(stored_matter/matter_amount_per_sheet))
 	return ..()
 
 /obj/machinery/organ_printer/robot/print_organ(choice)
@@ -155,7 +155,7 @@
 		if((max_stored_matter-stored_matter) >= matter_amount_per_sheet)
 			var/obj/item/stack/S = W
 			var/space_left = max_stored_matter - stored_matter
-			var/sheets_to_take = min(S.amount, Floor(space_left/matter_amount_per_sheet))
+			var/sheets_to_take = min(S.amount, floor(space_left/matter_amount_per_sheet))
 			if(sheets_to_take > 0)
 				add_matter = min(max_stored_matter - stored_matter, sheets_to_take*matter_amount_per_sheet)
 				S.use(sheets_to_take)
@@ -171,7 +171,7 @@
 			if(max_stored_matter == stored_matter)
 				to_chat(user, SPAN_WARNING("\The [src] is too full."))
 			else
-				var/recycle_worth = Floor(products[O.organ_tag][2] * 0.5)
+				var/recycle_worth = floor(products[O.organ_tag][2] * 0.5)
 				if((max_stored_matter-stored_matter) >= recycle_worth)
 					add_matter = recycle_worth
 					qdel(O)

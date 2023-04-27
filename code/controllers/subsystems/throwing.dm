@@ -120,7 +120,7 @@ SUBSYSTEM_DEF(throwing)
 	var/target_travel = (delayed_time + (world.time + world.tick_lag) - start_time) * speed
 	var/prior_travel = dist_travelled ? dist_travelled : -1
 	var/max_travel = speed * MAX_TICKS_TO_MAKE_UP
-	var/tilestomove = Ceil(min(target_travel - prior_travel, max_travel) * scaled_wait)
+	var/tilestomove = ceil(min(target_travel - prior_travel, max_travel) * scaled_wait)
 	while (tilestomove-- > 0)
 		if ((dist_travelled >= maxrange || AM.loc == target_turf) && (A && A.has_gravity()))
 			finalize()

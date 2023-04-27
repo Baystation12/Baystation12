@@ -307,8 +307,8 @@
 /datum/reagent/toxin/phoron/oxygen/touch_turf(turf/simulated/T)
 	if(!istype(T))
 		return
-	T.assume_gas(GAS_OXYGEN, Ceil(volume/2), T20C)
-	T.assume_gas(GAS_PHORON, Ceil(volume/2), T20C)
+	T.assume_gas(GAS_OXYGEN, ceil(volume/2), T20C)
+	T.assume_gas(GAS_PHORON, ceil(volume/2), T20C)
 	remove_self(volume)
 
 /datum/reagent/toxin/cyanide //Fast and Lethal

@@ -18,9 +18,9 @@
 	// Excessive halloss is horrible, just give them enough to make it visible.
 	if(!nohalloss && power)
 		if(affecting)
-			affecting.add_pain(Ceil(power/2))
+			affecting.add_pain(ceil(power/2))
 		else
-			adjustHalLoss(Ceil(power/2))
+			adjustHalLoss(ceil(power/2))
 
 	flash_pain(min(round(2*power)+55, 255))
 
