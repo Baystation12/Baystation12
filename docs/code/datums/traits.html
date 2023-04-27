@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;datums&#x2F;traits&#x2F;README.md - Space Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">Space Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+</header>
+<main>
+<h1>Traits <aside>code/datums/traits/README.md</aside> 
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/datums/traits/README.md">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;traits&#x2F;README.md"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><td colspan="2"><h2 id="what-is-the-purpose-of-traits">What is the purpose of Traits?</h2>
+<p>The main-purpose of traits is to make it easier to adhere to the Open-Closed Principle. When adding a new mob type or species, instead of having to go over all potential interactions and add additional checks for that particular mob or species, simply grant them appropriate traits to achieve the effects that you desire.</p>
+<p>As a specific example: Previously water checked for either the mob type <code>/mob/living/carbon/slime</code> or a species with the <code>IS_SLIME</code> tag, now simply checks for the trait &quot;Water Allergy&quot;. Should one wish to add an additional mob or species with similar reaction to water, one simply grant them said trait.</p>
+<h2 id="what-is-a-trait">What is a Trait?</h2>
+<ul>
+<li>A trait is at this time simply a <code>/decl</code> with a name, description, and potency:
+<ul>
+<li>Simply has the trait, or:</li>
+<li>Minor/Moderate/Major (or a subset thereof)</li>
+</ul>
+</li>
+<li>Traits are currently primarily checked for during various interactions between chemicals and mobs, but can potentially be used anywhere a mob type or species check is currently made.</li>
+<li>Trait checks can either merely check if a mob has a given trait, or have the trait potency affect the effect of the interaction.</li>
+<li>Can be used by both <code>/mob/living</code> and <code>/datum/species</code> subtypes. In the latter case traits are granted to all <code>/mob/living/carbon</code> instances of a given species.</li>
+</ul>
+<h2 id="what-makes-a-good-trait">What makes a good Trait?</h2>
+<p>If you plan to add your own trait, it's worthwhile to consider the following points:</p>
+<ul>
+<li>A trait should potentially be applicable to multiple types of mobs or species.</li>
+<li>However, a trait rarely being applicable to multiple mobs or species is fine, e.g. the &quot;Serpentid Adapted&quot; trait which is currently only relevant to the GAS.</li>
+<li>A trait should generally not be too specific, though there are exceptions.
+<ul>
+<li>&quot;Acetone Resistance&quot; is too specific, due to acetone being a relatively basic chemical.</li>
+<li>&quot;Solvent Resistance&quot; is more appropriate, due to covering a wider range of cases.</li>
+<li>&quot;Phoron Resistance&quot; is acceptable, due to Phoron being such an exotic matter.</li>
+</ul>
+</li>
+</ul>
+<h2 id="future-potential">Future Potential</h2>
+<p>Traits do not necessarily have to be granted to entire <code>/mob/living</code> or <code>/datum/species</code> types, it is technically possible to grant them to individual mob instances as there are procs for doing so.</p>
+<p>Some examples for those inclined to implement practical uses:</p>
+<ul>
+<li>&quot;Toughness&quot;: Increases a mob's max health and/or damage resistance.</li>
+<li>&quot;Precise&quot;: Increases a mob's ability to hit objects, or avoid traps.</li>
+<li>&quot;Clumsy&quot;: Decreases a mob's ability to handle objects with dexterity and finesse.</li>
+</ul>
+<p>However, to reach the highest potential of utilizing individual traits in this manner further work should be done to deal with the situation of multiple sources wanting to add/remove the same trait.</p></td></tr></table></main>
+<footer>
+    baystation12.dme
+    <a href="https://github.com/Baystation12/Baystation12/tree/66b27fdeca7226f6a1fb05fd88e9293698fd3245">66b27fd</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+</body>
+</html>

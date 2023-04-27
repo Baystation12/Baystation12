@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;machinery&#x2F;embedded_controller&#x2F;radio&#x2F;docking_port_multi - Space Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">Space Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+</header>
+<main>
+<h1>docking_port_multi <aside>/<a href="obj.html">obj</a>/<a href="obj/machinery.html">machinery</a>/<a href="obj/machinery/embedded_controller/radio/docking_port_multi.html">embedded_controller/radio/docking_port_multi</a></aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/game/machinery/embedded_controller/airlock_docking_controller_multi.dm#L3">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;embedded_controller&#x2F;airlock_docking_controller_multi.dm 3"/></a></h1>
+
+<p>** DEBUG VERBS ***</p>
+<p>/datum/computer/file/embedded_program/docking/proc/print_state()
+log_debug(&quot;id_tag: [id_tag]&quot;)
+log_debug(&quot;dock_state: [dock_state]&quot;)
+log_debug(&quot;control_mode: [control_mode]&quot;)
+log_debug(&quot;tag_target: [tag_target]&quot;)
+log_debug(&quot;response_sent: [response_sent]&quot;)</p>
+<p>/datum/computer/file/embedded_program/docking/post_signal(datum/signal/signal, comm_line)
+log_debug(&quot;Program [id_tag] sent a message!&quot;)</p>
+<pre><code>print_state()
+log_debug(&quot;[id_tag] sent command \&quot;[signal.data[&quot;command&quot;]]\&quot; to \&quot;[signal.data[&quot;recipient&quot;]]\&quot;&quot;)
+
+..(signal)
+</code></pre>
+<p>/obj/machinery/embedded_controller/radio/airlock/docking_port/verb/view_state()
+set category = &quot;Debug&quot;
+set src in view(1)
+src.program:print_state()</p>
+<p>/obj/machinery/embedded_controller/radio/airlock/docking_port/verb/spoof_signal(command as text, sender as text)
+set category = &quot;Debug&quot;
+set src in view(1)
+var/datum/signal/signal = new
+signal.data[&quot;tag&quot;] = sender
+signal.data[&quot;command&quot;] = command
+signal.data[&quot;recipient&quot;] = id_tag</p>
+<pre><code>src.program:receive_signal(signal)
+</code></pre>
+<p>/obj/machinery/embedded_controller/radio/airlock/docking_port/verb/debug_init_dock(target as text)
+set category = &quot;Debug&quot;
+set src in view(1)
+src.program:initiate_docking(target)</p>
+<p>/obj/machinery/embedded_controller/radio/airlock/docking_port/verb/debug_init_undock()
+set category = &quot;Debug&quot;
+set src in view(1)
+src.program:initiate_undocking()</p></main>
+<footer>
+    baystation12.dme
+    <a href="https://github.com/Baystation12/Baystation12/tree/66b27fdeca7226f6a1fb05fd88e9293698fd3245">66b27fd</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+</body>
+</html>

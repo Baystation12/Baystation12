@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;obj&#x2F;machinery&#x2F;tele_beacon - Space Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">Space Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="obj/machinery/tele_beacon.html#var">Var Details</a> - <a href="obj/machinery/tele_beacon.html#proc">Proc Details</a></header>
+<main>
+<h1>tele_beacon <aside>/<a href="obj.html">obj</a>/<a href="obj/machinery.html">machinery</a>/<a href="obj/machinery/tele_beacon.html">tele_beacon</a></aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/game/machinery/teleporter/beacon.dm#L7">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;teleporter&#x2F;beacon.dm 7"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="obj/machinery/tele_beacon.html#var/autoset_name">autoset_name</a></th><td>Autoset the beacon_name to the beacon's current area.</td></tr>
+            <tr><th><a href="obj/machinery/tele_beacon.html#var/beacon_name">beacon_name</a></th><td>Name of the beacon in the teleporter UI.</td></tr>
+            <tr><th><a href="obj/machinery/tele_beacon.html#var/connected_computers">connected_computers</a></th><td>Lazy list of connected computers.</td></tr>
+            <tr><th><a href="obj/machinery/tele_beacon.html#var/power_cut">power_cut</a></th><td>Whether or not power has been cut via wiring.</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="obj/machinery/tele_beacon.html#proc/connect_computer">connect_computer</a></th><td>Connects the beacon to a computer that's locking onto it. Returns TRUE on connection, FALSE if the connection fails.</td></tr>
+            <tr><th><a href="obj/machinery/tele_beacon.html#proc/disconnect_computer">disconnect_computer</a></th><td>Disconnects a single hub from the beacon.</td></tr>
+            <tr><th><a href="obj/machinery/tele_beacon.html#proc/disconnect_computers">disconnect_computers</a></th><td>Disconnects all hubs from the beacon.</td></tr>
+            <tr><th><a href="obj/machinery/tele_beacon.html#proc/functioning">functioning</a></th><td>Whether or not the beacon is functional and valid for the purposes of teleporter targeting.</td></tr>
+            <tr><th><a href="obj/machinery/tele_beacon.html#proc/generate_name">generate_name</a></th><td>Auto generates the beacon_name based on the area's name.</td></tr>
+            <tr><th><a href="obj/machinery/tele_beacon.html#proc/notify_connection">notify_connection</a></th><td>Plays the 'new connection' beep.</td></tr>
+            <tr><th><a href="obj/machinery/tele_beacon.html#proc/set_power_cut">set_power_cut</a></th><td>Updates the state of power to handle the power wire being messed with.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/autoset_name"><aside class="declaration">var </aside>autoset_name
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/game/machinery/teleporter/beacon.dm#L26">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;teleporter&#x2F;beacon.dm 26"/></a></h3>
+        <p>Autoset the beacon_name to the beacon's current area.</p><h3 id="var/beacon_name"><aside class="declaration">var </aside>beacon_name
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/game/machinery/teleporter/beacon.dm#L24">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;teleporter&#x2F;beacon.dm 24"/></a></h3>
+        <p>Name of the beacon in the teleporter UI.</p><h3 id="var/connected_computers"><aside class="declaration">var </aside>connected_computers
+            <aside>&ndash; /list/obj/machinery/computer/teleporter</aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/game/machinery/teleporter/beacon.dm#L34">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;teleporter&#x2F;beacon.dm 34"/></a></h3>
+        <p>Lazy list of connected computers.</p><h3 id="var/power_cut"><aside class="declaration">var </aside>power_cut
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/game/machinery/teleporter/beacon.dm#L28">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;teleporter&#x2F;beacon.dm 28"/></a></h3>
+        <p>Whether or not power has been cut via wiring.</p><h2 id="proc">Proc Details</h2><h3 id="proc/connect_computer"><aside class="declaration">proc </aside>connect_computer<aside>(/<a href="obj.html">obj</a>/<a href="obj/machinery.html">machinery</a>/<a href="obj/machinery/computer.html">computer</a>/<a href="obj/machinery/computer/teleporter.html">teleporter</a>/computer) 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/game/machinery/teleporter/beacon.dm#L190">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;teleporter&#x2F;beacon.dm 190"/></a></aside>
+        </h3>
+        <p>Connects the beacon to a computer that's locking onto it. Returns TRUE on connection, FALSE if the connection fails.</p><h3 id="proc/disconnect_computer"><aside class="declaration">proc </aside>disconnect_computer<aside>(/<a href="obj.html">obj</a>/<a href="obj/machinery.html">machinery</a>/<a href="obj/machinery/computer.html">computer</a>/<a href="obj/machinery/computer/teleporter.html">teleporter</a>/computer) 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/game/machinery/teleporter/beacon.dm#L210">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;teleporter&#x2F;beacon.dm 210"/></a></aside>
+        </h3>
+        <p>Disconnects a single hub from the beacon.</p><h3 id="proc/disconnect_computers"><aside class="declaration">proc </aside>disconnect_computers<aside>() 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/game/machinery/teleporter/beacon.dm#L223">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;teleporter&#x2F;beacon.dm 223"/></a></aside>
+        </h3>
+        <p>Disconnects all hubs from the beacon.</p><h3 id="proc/functioning"><aside class="declaration">proc </aside>functioning<aside>() 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/game/machinery/teleporter/beacon.dm#L237">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;teleporter&#x2F;beacon.dm 237"/></a></aside>
+        </h3>
+        <p>Whether or not the beacon is functional and valid for the purposes of teleporter targeting.</p><h3 id="proc/generate_name"><aside class="declaration">proc </aside>generate_name<aside>(force) 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/game/machinery/teleporter/beacon.dm#L252">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;teleporter&#x2F;beacon.dm 252"/></a></aside>
+        </h3>
+        <p>Auto generates the beacon_name based on the area's name.</p><h3 id="proc/notify_connection"><aside class="declaration">proc </aside>notify_connection<aside>() 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/game/machinery/teleporter/beacon.dm#L202">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;teleporter&#x2F;beacon.dm 202"/></a></aside>
+        </h3>
+        <p>Plays the 'new connection' beep.</p><h3 id="proc/set_power_cut"><aside class="declaration">proc </aside>set_power_cut<aside>(new_power_cut) 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/game/machinery/teleporter/beacon.dm#L263">
+        <img src="git.png" width="16" height="16" title="code&#x2F;game&#x2F;machinery&#x2F;teleporter&#x2F;beacon.dm 263"/></a></aside>
+        </h3>
+        <p>Updates the state of power to handle the power wire being messed with.</p></main>
+<footer>
+    baystation12.dme
+    <a href="https://github.com/Baystation12/Baystation12/tree/66b27fdeca7226f6a1fb05fd88e9293698fd3245">66b27fd</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;mob&#x2F;living - Space Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">Space Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+ &mdash; <a href="mob/living.html#var">Var Details</a> - <a href="mob/living.html#proc">Proc Details</a></header>
+<main>
+<h1>living <aside>/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a></aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/modules/ai/ai_holder.dm#L30">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;ai&#x2F;ai_holder.dm 30"/></a></h1>
+
+<table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
+            <tr><th><a href="mob/living.html#var/can_be_buckled">can_be_buckled</a></th><td>Whether or not the mob can be buckled to things.</td></tr>
+            <tr><th><a href="mob/living.html#var/is_typing">is_typing</a></th><td>Whether this mob is currently typing, if piloted by a player.</td></tr>
+            <tr><th><a href="mob/living.html#var/jumping">jumping</a></th><td>For leaping and vaulting</td></tr>
+            <tr><th><a href="mob/living.html#var/traits">traits</a></th><td>An associative list of /singleton/trait and trait level - See individual traits for valid levels</td></tr>
+            <tr><th><a href="mob/living.html#var/typing_indicator">typing_indicator</a></th><td>If this mob is or was piloted by a player with typing indicators enabled, an instance of one.</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr>
+            <tr><th><a href="mob/living.html#proc/add_to_dead_mob_list">add_to_dead_mob_list</a></th><td>Death Handling</td></tr>
+            <tr><th><a href="mob/living.html#proc/aura_check">aura_check</a></th><td>Checks the mob for auras and interactions of the given type.</td></tr>
+            <tr><th><a href="mob/living.html#proc/can_centcom_reply">can_centcom_reply</a></th><td>new ban stuff
+new ban stuff
+<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>WARNING!</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>**
+The jobban stuff looks mangled and disgusting
+But it looks beautiful in-game
+-Nodrak
+**<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>WARNING!</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></td></tr>
+            <tr><th><a href="mob/living.html#proc/get_AI_stance">get_AI_stance</a></th><td>Helper proc to check for the AI's stance.
+Returns null if there's no AI holder, or the mob has a player and autopilot is not on.
+Otherwise returns the stance.</td></tr>
+            <tr><th><a href="mob/living.html#proc/has_AI">has_AI</a></th><td>Similar to <code>get_ai_stance()</code> but only returns 1 or 0.</td></tr>
+            <tr><th><a href="mob/living.html#proc/is_AI_busy">is_AI_busy</a></th><td>Set an AI's busy status. Stops the mob from performing any actions while true.</td></tr>
+            <tr><th><a href="mob/living.html#proc/set_AI_busy">set_AI_busy</a></th><td>Helper proc to turn AI 'busy' mode on or off without having to check if there is an AI, to simplify writing code.</td></tr>
+            <tr><th><a href="mob/living.html#proc/set_stat">set_stat</a></th><td>Stat Handling</td></tr>
+            <tr><th><a href="mob/living.html#proc/standard_weapon_hit_effects">standard_weapon_hit_effects</a></th><td>returns false if the effects failed to apply for some reason, true otherwise.</td></tr>
+            <tr><th><a href="mob/living.html#proc/taunt">taunt</a></th><td>'Taunts' the AI into attacking the taunter.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/can_be_buckled"><aside class="declaration">var </aside>can_be_buckled
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/modules/mob/living/living_defines.dm#L6">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 6"/></a></h3>
+        <p>Whether or not the mob can be buckled to things.</p><h3 id="var/is_typing"><aside class="declaration">var </aside>is_typing
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/controllers/subsystems/typing.dm#L204">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;typing.dm 204"/></a></h3>
+        <p>Whether this mob is currently typing, if piloted by a player.</p><h3 id="var/jumping"><aside class="declaration">var </aside>jumping
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/modules/mob/living/living_defines.dm#L59">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defines.dm 59"/></a></h3>
+        <p>For leaping and vaulting</p><h3 id="var/traits"><aside class="declaration">var </aside>traits
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/modules/mob/living/living_maneuvers.dm#L1">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_maneuvers.dm 1"/></a></h3>
+        <p>An associative list of /singleton/trait and trait level - See individual traits for valid levels</p><h3 id="var/typing_indicator"><aside class="declaration">var </aside>typing_indicator
+            <aside>&ndash; /<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/typing_indicator</aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/controllers/subsystems/typing.dm#L200">
+        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;typing.dm 200"/></a></h3>
+        <p>If this mob is or was piloted by a player with typing indicators enabled, an instance of one.</p><h2 id="proc">Proc Details</h2><h3 id="proc/add_to_dead_mob_list">add_to_dead_mob_list<aside>() 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/datums/observation/death.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;observation&#x2F;death.dm 19"/></a></aside>
+        </h3>
+        <p>Death Handling</p><h3 id="proc/aura_check"><aside class="declaration">proc </aside>aura_check<aside>(type) 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/modules/mob/living/living_defense.dm#L82">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defense.dm 82"/></a></aside>
+        </h3>
+        <p>Checks the mob for auras and interactions of the given type.</p>
+<p>Calls one of the <code>aura_check_*</code> procs for each aura in the mobs <code>auras</code> list, based on type provided.
+All parameters after <code>type</code> are passed on to the called proc.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>type</code> (String - One of <code>AURA_TYPE_*</code>) - The type of check to be performed any any found auras.</li>
+<li>Additional parameters depend on aura type:
+<ul>
+<li><code>AURA_TYPE_WEAPON (obj/item/weapon, mob/user, click_params)</code>:
+<ul>
+<li><code>weapon</code> - The item used to attack/interact with the mob.</li>
+<li><code>attacker</code> - The mob performing the attack/interaction.</li>
+<li><code>click_params</code> - List of click parameters.</li>
+</ul>
+</li>
+<li><code>AURA_TYPE_BULLET (obj/item/projectile/proj, def_zone)</code>:
+<ul>
+<li><code>proj</code> - Projectile impacting the mob.</li>
+<li><code>def_zone</code> - Impacted body part target zone.</li>
+</ul>
+</li>
+<li><code>AURA_TYPE_THROWN (atom/movable/thrown_atom, datum/thrownthing/thrown_datum)</code>:
+<ul>
+<li><code>thrown_atom</code> - Atom impacting the mob.</li>
+<li><code>thrown_datum</code> - thrownthing datum instance for the throw chain.</li>
+</ul>
+</li>
+<li><code>AURA_TYPE_LIFE</code> (No additional parameters)</li>
+</ul>
+</li>
+</ul>
+<p>Returns boolean - <code>TRUE</code> if no auras were found or if no auras passed <code>AURA_FALSE</code> in their checks.
+Generally, a <code>FALSE</code> return value means the aura blocks further interaction.</p><h3 id="proc/can_centcom_reply"><aside class="declaration">proc </aside>can_centcom_reply<aside>() 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/modules/admin/topic.dm#L2138">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;admin&#x2F;topic.dm 2138"/></a></aside>
+        </h3>
+        <p>new ban stuff
+new ban stuff
+<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>WARNING!</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>**
+The jobban stuff looks mangled and disgusting
+But it looks beautiful in-game
+-Nodrak
+**<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>WARNING!</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><h3 id="proc/get_AI_stance"><aside class="declaration">proc </aside>get_AI_stance<aside>() 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/modules/ai/ai_holder.dm#L372">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;ai&#x2F;ai_holder.dm 372"/></a></aside>
+        </h3>
+        <p>Helper proc to check for the AI's stance.
+Returns null if there's no AI holder, or the mob has a player and autopilot is not on.
+Otherwise returns the stance.</p><h3 id="proc/has_AI"><aside class="declaration">proc </aside>has_AI<aside>() 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/modules/ai/ai_holder.dm#L380">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;ai&#x2F;ai_holder.dm 380"/></a></aside>
+        </h3>
+        <p>Similar to <code>get_ai_stance()</code> but only returns 1 or 0.</p><h3 id="proc/is_AI_busy"><aside class="declaration">proc </aside>is_AI_busy<aside>() 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/modules/ai/ai_holder.dm#L362">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;ai&#x2F;ai_holder.dm 362"/></a></aside>
+        </h3>
+        <p>Set an AI's busy status. Stops the mob from performing any actions while true.</p><h3 id="proc/set_AI_busy"><aside class="declaration">proc </aside>set_AI_busy<aside>(value) 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/modules/ai/ai_holder.dm#L357">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;ai&#x2F;ai_holder.dm 357"/></a></aside>
+        </h3>
+        <p>Helper proc to turn AI 'busy' mode on or off without having to check if there is an AI, to simplify writing code.</p><h3 id="proc/set_stat">set_stat<aside>(new_stat) 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/datums/observation/stat_set.dm#L20">
+        <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;observation&#x2F;stat_set.dm 20"/></a></aside>
+        </h3>
+        <p>Stat Handling</p><h3 id="proc/standard_weapon_hit_effects"><aside class="declaration">proc </aside>standard_weapon_hit_effects<aside>(/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/I, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/user, effective_force, hit_zone) 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/modules/mob/living/living_defense.dm#L151">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;mob&#x2F;living&#x2F;living_defense.dm 151"/></a></aside>
+        </h3>
+        <p>returns false if the effects failed to apply for some reason, true otherwise.</p><h3 id="proc/taunt"><aside class="declaration">proc </aside>taunt<aside>(/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/taunter, force_target_switch) 
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/modules/ai/ai_holder.dm#L384">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;ai&#x2F;ai_holder.dm 384"/></a></aside>
+        </h3>
+        <p>'Taunts' the AI into attacking the taunter.</p></main>
+<footer>
+    baystation12.dme
+    <a href="https://github.com/Baystation12/Baystation12/tree/66b27fdeca7226f6a1fb05fd88e9293698fd3245">66b27fd</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+</body>
+</html>

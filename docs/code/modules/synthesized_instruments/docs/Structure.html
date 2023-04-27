@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../../../../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>code&#x2F;modules&#x2F;synthesized_instruments&#x2F;docs&#x2F;Structure.txt - Space Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">Space Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+</header>
+<main>
+<h1>code/modules/synthesized_instruments/docs/Structure.txt 
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/modules/synthesized_instruments/docs/Structure.txt">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;synthesized_instruments&#x2F;docs&#x2F;Structure.txt"/></a></h1>
+
+<table class="summary" cellspacing="0">
+        <tr><td colspan="2"><pre><code>This module uses 4 components:
+Real instruments -- the physical manifestation of the instrument, the one that is placed in the world
+Virtual instruments -- the definition of an instrument, that is, what samples it uses, name and category
+Sound player -- used to apply modification to all sounds emitted. Represents the actual source of sound (Right now it does little, but if you want to make certain factors
+further modify sound more you'd start from here)
+Synthesized Song - just like /datum/song it's what parses and plays a melody
+---
+Real instruments inherit from either /obj/structure/synthesized_instrument (static musical instrument) or /obj/item/device/synthesized_instrument (handheld musical instrument)
+---
+Virtual instruments all inherit from /datum/instrument. 
+Virtual instruments should follow this structure: /datum/instrument/category_name/instrument_name.
+
+Refer to any file in ./instrument_data to see how it's done.
+---
+Sound player inherits from /datum/sound_player
+---
+For synthesized song only use /datum/synthesized_song
+---```
+</code></pre></td></tr></table></main>
+<footer>
+    baystation12.dme
+    <a href="https://github.com/Baystation12/Baystation12/tree/66b27fdeca7226f6a1fb05fd88e9293698fd3245">66b27fd</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <link rel="stylesheet" href="dmdoc.css" />
+    <title>&#x2F;datum&#x2F;grid_load_metadata - Space Station 13</title>
+</head>
+<body>
+<header>
+    <a href="index.html">Space Station 13</a> -
+    <a href="index.html#modules">Modules</a> -
+    <a href="index.html#types">Types</a>
+</header>
+<main>
+<h1>grid_load_metadata <aside>/<a href="datum.html">datum</a>/<a href="datum/grid_load_metadata.html">grid_load_metadata</a></aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/66b27fdeca7226f6a1fb05fd88e9293698fd3245/code/modules/maps/dmm_suite.dm#L283">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;maps&#x2F;dmm_suite.dm 283"/></a></h1>
+
+<p>Fill a given tile with its area/turf/objects/mobs
+Variable model is one full map line (e.g /turf/unsimulated/wall{icon_state = &quot;rock&quot;}, /area/mine/explored)</p>
+<p>WORKING :</p>
+<ol>
+<li>
+<p>Read the model string, member by member (delimiter is ',')</p>
+</li>
+<li>
+<p>Get the path of the atom and store it into a list</p>
+</li>
+<li>
+<p>a) Check if the member has variables (text within '{' and '}')</p>
+</li>
+<li>
+<p>b) Construct an associative list with found variables, if any (the atom index in members is the same as its variables in members_attributes)</p>
+</li>
+<li>
+<p>Instanciates the atom with its variables</p>
+</li>
+</ol></main>
+<footer>
+    baystation12.dme
+    <a href="https://github.com/Baystation12/Baystation12/tree/66b27fdeca7226f6a1fb05fd88e9293698fd3245">66b27fd</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+</body>
+</html>
