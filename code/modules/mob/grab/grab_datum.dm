@@ -299,8 +299,6 @@
 	if(shock >= 50)
 		break_strength--
 
-	if (assailant.incapacitated(INCAPACITATION_ALL))
-		break_strength+=5
 	if(assailant.confused)
 		break_strength++
 	if(assailant.eye_blind)
@@ -319,6 +317,10 @@
 		return
 
 	var/break_chance = break_chance_table[clamp(break_strength, 1, length(break_chance_table))]
+
+	if (assailant.incapacitated(INCAPACITATION_ALL))
+		let_go(G)
+
 	if(prob(break_chance))
 		if(can_downgrade_on_resist && !prob((break_chance+100)/2))
 			affecting.visible_message(SPAN_WARNING("[affecting] has loosened [assailant]'s grip!"))
