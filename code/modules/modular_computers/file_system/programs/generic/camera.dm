@@ -150,13 +150,20 @@
 	current_camera = C
 	if(current_camera)
 		GLOB.destroyed_event.register(current_camera, src, .proc/reset_current)
+		GLOB.moved_event.register(current_camera, src, .proc/camera_moved)
 		var/mob/living/L = current_camera.loc
 		if(istype(L))
 			L.tracking_initiated()
 
+/datum/nano_module/camera_monitor/proc/camera_moved(atom/movable/moved_atom, atom/old_loc, atom/new_loc)
+	if (AreConnectedZLevels(get_z(old_loc), get_z(new_loc)))
+		return
+	reset_current()
+
 /datum/nano_module/camera_monitor/proc/reset_current()
 	if(current_camera)
 		GLOB.destroyed_event.unregister(current_camera, src, .proc/reset_current)
+		GLOB.moved_event.register(current_camera, src, .proc/camera_moved)
 		var/mob/living/L = current_camera.loc
 		if(istype(L))
 			L.tracking_cancelled()

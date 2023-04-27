@@ -105,9 +105,11 @@
 					number = max(number, C.number+1)
 			c_tag = "[A.name][number == 1 ? "" : " #[number]"]"
 		invalidateCameraCache()
+	GLOB.moved_event.register(src, src, .proc/camera_moved)
 
 
 /obj/machinery/camera/Destroy()
+	GLOB.moved_event.unregister(src, src, .proc/camera_moved)
 	deactivate(null, 0) //kick anyone viewing out
 	if(assembly)
 		qdel(assembly)
@@ -121,6 +123,13 @@
 		update_icon()
 		update_coverage()
 	return internal_process()
+
+
+/obj/machinery/camera/proc/camera_moved(atom/movable/moved_atom, atom/old_loc, atom/new_loc)
+	if (AreConnectedZLevels(get_z(old_loc), get_z(new_loc)))
+		return
+	disconnect_viewers()
+
 
 /obj/machinery/camera/emp_act(severity)
 	if (!isEmpProof())
