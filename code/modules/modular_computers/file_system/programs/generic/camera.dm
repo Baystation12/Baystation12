@@ -108,6 +108,9 @@
 		if (!os?.get_ntnet_status() && !C.is_helmet_cam)
 			to_chat(usr, "Unable to establish a connection.")
 			return
+		if (C.inoperable(MACHINE_STAT_EMPED))
+			to_chat(usr, "Unable to establish a connection.")
+			return
 
 		switch_to_camera(usr, C)
 		return 1

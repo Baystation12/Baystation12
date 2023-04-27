@@ -41,8 +41,10 @@
 
 /obj/machinery/camera/examine(mob/user)
 	. = ..()
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		to_chat(user, SPAN_WARNING("It is completely demolished."))
+	else if (inoperable(MACHINE_STAT_EMPED))
+		to_chat(user, SPAN_WARNING("It's unpowered."))
 
 /obj/machinery/camera/malf_upgrade(mob/living/silicon/ai/user)
 	..()
@@ -301,7 +303,7 @@
 		else if(dir == EAST)
 			pixel_x = -10
 
-	if (!status || (MACHINE_IS_BROKEN(src)))
+	if (!status || inoperable())
 		icon_state = "[initial(icon_state)]1"
 	else if (GET_FLAGS(stat, MACHINE_STAT_EMPED))
 		icon_state = "[initial(icon_state)]emp"
@@ -323,7 +325,7 @@
 /obj/machinery/camera/proc/can_use()
 	if(!status)
 		return 0
-	if(MACHINE_IS_BROKEN(src) || GET_FLAGS(stat, MACHINE_STAT_EMPED))
+	if(inoperable(MACHINE_STAT_EMPED))
 		return 0
 	return 1
 
