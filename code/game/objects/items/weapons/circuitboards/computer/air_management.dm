@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/air_management
-	name = T_BOARD("atmosphere monitoring console")
+	name = "circuit board (atmosphere monitoring console)"
 	build_path = /obj/machinery/computer/air_control
 	var/console_name
 	var/frequency = 1441
@@ -8,7 +8,7 @@
 	var/list/sensor_information = list()
 
 /obj/item/stock_parts/circuitboard/air_management/supermatter_core
-	name = T_BOARD("core control")
+	name = "circuit board (core control)"
 	build_path = /obj/machinery/computer/air_control/supermatter_core
 	frequency = 1438
 	var/input_tag
@@ -21,7 +21,7 @@
 	var/pressure_setting = 100
 
 /obj/item/stock_parts/circuitboard/air_management/injector_control
-	name = T_BOARD("injector control")
+	name = "circuit board (injector control)"
 	build_path = /obj/machinery/computer/air_control/fuel_injection
 	var/device_tag
 	var/list/device_info

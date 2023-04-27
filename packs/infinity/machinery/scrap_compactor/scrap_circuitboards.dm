@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/crusher
-	name = T_BOARD("crusher")
+	name = "circuit board (crusher)"
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 3)
 	build_path = /obj/machinery/crusher_base
@@ -13,7 +13,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/pile_ripper
-	name = T_BOARD("pile ripper")
+	name = "circuit board (pile ripper)"
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 3)
 	build_path = /obj/machinery/pile_ripper
@@ -25,7 +25,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/recycler
-	name = T_BOARD("recycler")
+	name = "circuit board (recycler)"
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 3)
 	build_path = /obj/machinery/recycler

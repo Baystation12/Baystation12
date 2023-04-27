@@ -212,7 +212,7 @@
 		qdel(src)
 
 /obj/item/stock_parts/circuitboard/unary_atmos/engine//why don't we move this elsewhere?
-	name = T_BOARD("gas thruster")
+	name = "circuit board (gas thruster)"
 	icon_state = "mcontroller"
 	build_path = /obj/machinery/atmospherics/unary/engine
 	origin_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 2)

@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/portable_scrubber
-	name = T_BOARD("portable scrubber")
+	name = "circuit board (portable scrubber)"
 	board_type = "machine"
 	build_path = /obj/machinery/portable_atmospherics/powered/scrubber
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_POWER = 4)
@@ -16,12 +16,12 @@
 	)
 
 /obj/item/stock_parts/circuitboard/portable_scrubber/pump
-	name = T_BOARD("portable pump")
+	name = "circuit board (portable pump)"
 	board_type = "machine"
 	build_path = /obj/machinery/portable_atmospherics/powered/pump
 
 /obj/item/stock_parts/circuitboard/portable_scrubber/huge
-	name = T_BOARD("large portable scrubber")
+	name = "circuit board (large portable scrubber)"
 	board_type = "machine"
 	build_path = /obj/machinery/portable_atmospherics/powered/scrubber/huge
 	origin_tech = list(TECH_ENGINEERING = 5, TECH_POWER = 5, TECH_MATERIAL = 5)
@@ -31,12 +31,12 @@
 							/obj/item/pipe = 4)
 
 /obj/item/stock_parts/circuitboard/portable_scrubber/huge/stationary
-	name = T_BOARD("large stationary portable scrubber")
+	name = "circuit board (large stationary portable scrubber)"
 	board_type = "machine"
 	build_path = /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 
 /obj/item/stock_parts/circuitboard/tray
-	name = T_BOARD("hydroponics tray")
+	name = "circuit board (hydroponics tray)"
 	board_type = "machine"
 	build_path = /obj/machinery/portable_atmospherics/hydroponics
 	origin_tech = list(TECH_BIO = 3, TECH_MATERIAL = 2, TECH_DATA = 1)

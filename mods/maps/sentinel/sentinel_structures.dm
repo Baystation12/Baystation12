@@ -312,7 +312,7 @@
 	// coolinterval = 45 SECONDS This blasted code is /const/ And i just give up
 
 /obj/item/stock_parts/circuitboard/disperser/military
-	name = T_BOARD("impulse cannon control")
+	name = "circuit board (impulse cannon control)"
 	build_path = /obj/machinery/computer/ship/disperser/military
 	origin_tech = list(TECH_ENGINEERING = 6, TECH_COMBAT = 6, TECH_BLUESPACE = 6)
 

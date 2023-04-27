@@ -1,5 +1,5 @@
 /obj/item/stock_parts/circuitboard/gravgen
-	name = T_BOARD("gravitational generator")
+	name = "circuit board (gravitational generator)"
 	build_path = /obj/machinery/gravity_generator
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_MATERIAL = 3, TECH_BLUESPACE = 4)

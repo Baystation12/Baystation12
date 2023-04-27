@@ -338,7 +338,7 @@
 	max_range = 14
 
 /obj/item/stock_parts/circuitboard/shipsensors
-	name = T_BOARD("broad-band sensor suite")
+	name = "circuit board (broad-band sensor suite)"
 	board_type = "machine"
 	icon_state = "mcontroller"
 	build_path = /obj/machinery/shipsensors
