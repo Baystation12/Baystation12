@@ -240,12 +240,11 @@
 /turf/simulated/floor,
 /area/scavver/yachtdown/thrusters)
 "ev" = (
-/obj/structure/lattice,
-/obj/effect/catwalk_plated/dark,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
 	},
-/turf/space,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor,
 /area/space)
 "eB" = (
 /obj/structure/lattice,
@@ -600,10 +599,9 @@
 /turf/simulated/floor,
 /area/scavver/gantry/down2)
 "jy" = (
-/obj/structure/lattice,
-/obj/effect/catwalk_plated/dark,
 /obj/structure/railing/mapped,
-/turf/space,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor,
 /area/space)
 "jz" = (
 /obj/effect/floor_decal/corner/blue{
@@ -615,12 +613,11 @@
 /turf/simulated/floor/tiled,
 /area/scavver/calypso)
 "jH" = (
-/obj/structure/lattice,
-/obj/effect/catwalk_plated/dark,
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/turf/space,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor,
 /area/space)
 "jJ" = (
 /obj/structure/iv_stand,
@@ -773,14 +770,13 @@
 /turf/simulated/floor,
 /area/scavver/yachtdown/thrusters)
 "lD" = (
-/obj/structure/lattice,
-/obj/effect/catwalk_plated/dark,
 /obj/structure/railing/mapped{
 	dir = 8;
 	icon_state = "railing0-1"
 	},
 /obj/random/loot,
-/turf/space,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor,
 /area/space)
 "lV" = (
 /obj/effect/floor_decal/corner/blue{
@@ -798,23 +794,13 @@
 	},
 /turf/simulated/floor/wood/yew,
 /area/scavver/yachtdown)
-"mi" = (
-/obj/structure/railing/mapped{
-	dir = 8;
-	icon_state = "railing0-1"
-	},
-/obj/structure/lattice,
-/obj/effect/catwalk_plated/dark,
-/turf/space,
-/area/space)
 "mo" = (
-/obj/structure/lattice,
-/obj/effect/catwalk_plated/dark,
 /obj/structure/railing/mapped{
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/turf/space,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor,
 /area/space)
 "mU" = (
 /obj/structure/lattice,
@@ -865,11 +851,6 @@
 /area/scavver/gantry/down1)
 "nC" = (
 /obj/effect/shuttle_landmark/scavver_gantry/six,
-/turf/space,
-/area/space)
-"nS" = (
-/obj/structure/lattice,
-/obj/effect/catwalk_plated/dark,
 /turf/space,
 /area/space)
 "nT" = (
@@ -1027,14 +1008,13 @@
 /turf/simulated/floor/wood/yew,
 /area/scavver/yachtdown)
 "qH" = (
-/obj/structure/lattice,
-/obj/effect/catwalk_plated/dark,
 /obj/structure/railing/mapped{
 	dir = 8;
 	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
-/turf/space,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor,
 /area/space)
 "qK" = (
 /obj/structure/lattice,
@@ -1280,8 +1260,7 @@
 /area/scavver/calypso)
 "uR" = (
 /obj/effect/catwalk_plated/dark,
-/obj/structure/lattice,
-/turf/space,
+/turf/simulated/floor,
 /area/space)
 "uY" = (
 /turf/space,
@@ -1665,15 +1644,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/scavver/calypso)
-"BM" = (
-/obj/structure/lattice,
-/obj/effect/catwalk_plated/dark,
-/obj/structure/railing/mapped{
-	dir = 4;
-	icon_state = "railing0-1"
-	},
-/turf/space,
-/area/space)
 "BO" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -2093,8 +2063,6 @@
 /turf/simulated/floor/tiled,
 /area/scavver/calypso)
 "ID" = (
-/obj/structure/lattice,
-/obj/effect/catwalk_plated/dark,
 /obj/structure/railing/mapped{
 	dir = 8;
 	icon_state = "railing0-1"
@@ -2103,11 +2071,10 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/turf/space,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor,
 /area/space)
 "IF" = (
-/obj/structure/lattice,
-/obj/effect/catwalk_plated/dark,
 /obj/structure/railing/mapped{
 	dir = 4;
 	icon_state = "railing0-1"
@@ -2116,7 +2083,8 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/turf/space,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor,
 /area/space)
 "IJ" = (
 /obj/machinery/air_sensor{
@@ -2168,14 +2136,13 @@
 /turf/simulated/floor,
 /area/scavver/gantry/down2)
 "JP" = (
-/obj/structure/lattice,
-/obj/effect/catwalk_plated/dark,
 /obj/structure/railing/mapped{
 	dir = 1;
 	icon_state = "railing0-1"
 	},
 /obj/random/gloves,
-/turf/space,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor,
 /area/space)
 "Ke" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
@@ -2195,11 +2162,10 @@
 /turf/simulated/floor,
 /area/scavver/gantry/down1)
 "KL" = (
-/obj/structure/lattice,
 /obj/random/loot,
-/obj/effect/catwalk_plated/dark,
 /obj/structure/railing/mapped,
-/turf/space,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor,
 /area/space)
 "KP" = (
 /obj/effect/catwalk_plated/dark,
@@ -2457,13 +2423,12 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/scavver/calypso)
 "QQ" = (
-/obj/structure/lattice,
-/obj/effect/catwalk_plated/dark,
 /obj/structure/railing/mapped{
 	dir = 8;
 	icon_state = "railing0-1"
 	},
-/turf/space,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor,
 /area/space)
 "QR" = (
 /obj/structure/railing/mapped{
@@ -2876,13 +2841,12 @@
 /turf/simulated/floor,
 /area/scavver/yachtdown/thrusters)
 "XA" = (
-/obj/effect/catwalk_plated/dark,
 /obj/structure/railing/mapped{
 	dir = 4;
 	icon_state = "railing0-1"
 	},
-/obj/structure/lattice,
-/turf/space,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor,
 /area/space)
 "XC" = (
 /obj/structure/cable{
@@ -2951,14 +2915,13 @@
 /turf/simulated/floor/tiled,
 /area/scavver/calypso)
 "YU" = (
-/obj/structure/lattice,
-/obj/effect/catwalk_plated/dark,
 /obj/structure/railing/mapped{
 	dir = 1;
 	icon_state = "railing0-1"
 	},
 /obj/random/tech_supply,
-/turf/space,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor,
 /area/space)
 "YV" = (
 /obj/effect/paint/black,
@@ -11611,9 +11574,9 @@ UM
 ID
 QQ
 QQ
-mi
-mi
-mi
+QQ
+QQ
+QQ
 QQ
 QQ
 lD
@@ -12673,8 +12636,8 @@ UM
 UM
 UM
 mo
-nS
-nS
+uR
+uR
 dk
 QD
 GK
@@ -13439,8 +13402,8 @@ XH
 ny
 OD
 eY
-nS
-nS
+uR
+uR
 jy
 UM
 UM
@@ -14021,12 +13984,12 @@ mo
 eB
 vM
 UM
-nS
+uR
 UM
 UM
 UM
 UM
-nS
+uR
 UM
 UM
 vM
@@ -14037,7 +14000,7 @@ UM
 UM
 rW
 UM
-nS
+uR
 UM
 UM
 UM
@@ -14173,12 +14136,12 @@ mo
 UM
 vM
 Lg
-nS
+uR
 UM
 UM
 UM
 UM
-nS
+uR
 UM
 vM
 vM
@@ -14189,7 +14152,7 @@ UM
 UM
 vU
 UM
-nS
+uR
 UM
 UM
 UM
@@ -14474,8 +14437,8 @@ UM
 UM
 UM
 mo
-nS
-nS
+uR
+uR
 rs
 SZ
 SZ
@@ -15091,7 +15054,7 @@ vM
 jt
 UM
 UM
-nS
+uR
 UM
 UM
 UM
@@ -15243,7 +15206,7 @@ UM
 vM
 rW
 UM
-nS
+uR
 UM
 UM
 UM
@@ -15386,44 +15349,44 @@ UM
 UM
 UM
 IF
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
-BM
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
+XA
 XA
 IV
-BM
-nS
-BM
-BM
+XA
+uR
+XA
+XA
 jH
 jH
 jH
 jH
-nS
-nS
+uR
+uR
 SF
 Mz
 Mz
@@ -15567,14 +15530,14 @@ UM
 UM
 ky
 UM
-nS
+uR
 UM
 vM
 UM
 UM
 vM
 UM
-nS
+uR
 KL
 mU
 mU
@@ -15719,14 +15682,14 @@ UM
 UM
 ky
 UM
-nS
+uR
 UM
 vM
 Zg
 ua
 sj
 UM
-nS
+uR
 jy
 UM
 UM
