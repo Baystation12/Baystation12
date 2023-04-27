@@ -110,11 +110,21 @@
 			. += list(row)
 
 
+/**
+ * Aliases to `_find_bans_in_connections()` with this client's `fetch_connections()` result.
+ *
+ * Returns list of lists.
+ */
 /client/proc/fetch_bans()
 	RETURN_TYPE(/list)
 	return _find_bans_in_connections(fetch_connections())
 
 
+/**
+ * Aliases to `_find_bans_in_connections()` with this mob's `fetch_connections()` result.
+ *
+ * Returns list of lists.
+ */
 /mob/proc/fetch_bans()
 	RETURN_TYPE(/list)
 	return _find_bans_in_connections(fetch_connections())

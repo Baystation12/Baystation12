@@ -55,6 +55,8 @@
 
 /**
  * Returns a list containing only each unique IP present in a list of connections provided by `_fetch_connections()`.
+ *
+ * Returns list of lists.
  */
 /proc/_unique_ips_from_connections(list/connections)
 	RETURN_TYPE(/list)
@@ -63,11 +65,21 @@
 		. |= connection["ip"]
 
 
+/**
+ * Aliases to `_fetch_connections()` with this client's ckey, address, and CID.
+ *
+ * Returns list of lists.
+ */
 /client/proc/fetch_connections()
 	RETURN_TYPE(/list)
 	return _fetch_connections(ckey, address, computer_id)
 
 
+/**
+ * Aliases to `_fetch_connections()` with this mob's client, if present, or this mob's ckey/last ckey, last IP, and last CID.
+ *
+ * Returns list of lists.
+ */
 /mob/proc/fetch_connections()
 	RETURN_TYPE(/list)
 	if (client)
@@ -75,6 +87,24 @@
 	return _fetch_connections(ckey ? ckey : last_ckey, lastKnownIP, computer_id)
 
 
+/**
+ * Generates and displays an HTML window, displaying data from a `_fetch_connections()` call with the provided
+ *   parameters.
+ *
+ * **WARNING: This proc makes no validation or access checks. Ensure `user` is a valid candidate to receive this
+ *   information before calling.**
+ *
+ * Used by the `Check Connections` button in the player panel.
+ *
+ * **Parameters**:
+ * - `user` - The mob requesing that the window is displayed to.
+ * - `connections` - List generated from a `_fetch_connections()` call.
+ * - `target_ckey` - If provided, highlights ckeys in the window that match this value.
+ * - `target_ip` - If provided, highlights IP addresses in the window that match this value.
+ * - `target_cid` - If provided, highlights CIDs in the window that match this value.
+ *
+ * Has no return value.
+ */
 /proc/_show_associated_connections(mob/user, list/connections, target_ckey, target_ip, target_cid)
 	// Unique Ckeys
 	var/list/unique_ckeys = _unique_ckeys_from_connections(connections)
@@ -204,12 +234,22 @@
 	show_browser(user, html_page("Associated Connections ([target_ckey ? target_ckey : "NO CKEY"])", final_body), "window=associatedconnections;size=500x480;")
 
 
+/**
+ * Aliases to `_show_associated_connections()` using this client's `fetch_connections()` result, ckey, IP address, and CID.
+ *
+ * Has no return value.
+ */
 /client/proc/show_associated_connections(mob/user, list/connections)
 	if (isnull(connections))
 		connections = fetch_connections()
 	_show_associated_connections(user, connections, ckey, address, computer_id)
 
 
+/**
+ * Aliases to `_show_associated_connections()` using this mob's `fetch_connections()` result, ckey, IP address, and CID.
+ *
+ * Has no return value.
+ */
 /mob/proc/show_associated_connections(mob/user, list/connections)
 	if (client)
 		client.show_associated_connections(user, connections)
