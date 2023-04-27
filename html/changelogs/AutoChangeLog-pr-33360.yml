@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: The supermatter core and air waste chambers no longer start with oxygen
+      in them at round start.
