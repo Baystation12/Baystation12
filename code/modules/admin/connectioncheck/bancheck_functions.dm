@@ -43,6 +43,16 @@
 
 
 /**
+ * Returns a list containing only each unique ckey present in a list of connections provided by `_fetch_connections()`.
+ */
+/proc/_unique_ckeys_from_bans(list/bans)
+	RETURN_TYPE(/list)
+	. = list()
+	for (var/list/ban in bans)
+		. |= ban["ckey"]
+
+
+/**
  * Checks a list of connections for bans matching any of the list entries.
  *
  * **Parameters**:
@@ -130,59 +140,119 @@
 	return _find_bans_in_connections(fetch_connections())
 
 
-/proc/_debug_fetch_bans(ckey, ip, cid, include_inactive = FALSE)
-	var/list/result = _find_bans_in_connections(_fetch_connections(ckey, ip, cid), include_inactive)
-	var/table = {"
-		<table>
-			<thead>
-				<tr>
-					<th>BANTIME</th>
-					<th>BANTYPE</th>
-					<th>REASON</th>
-					<th>JOB</th>
-					<th>DURATION</th>
-					<th>EXPIRATION_TIME</th>
-					<th>CKEY</th>
-					<th>IP</th>
-					<th>COMPUTERID</th>
-					<th>A_CKEY</th>
-					<th>UNBANNED</th>
-					<th>EXPIRED</th>
-				</tr>
-			</thead>
+/proc/_show_associated_bans(mob/user, list/bans, target_ckey, target_ip, target_cid)
+	// Unique Ckeys
+	var/list/unique_ckeys = _unique_ckeys_from_bans(bans)
+	var/unique_ckeys_table = {"
+		<table style='width: 100%;'>
 			<tbody>
 	"}
-	for (var/list/row in result)
-		table += {"
+	for (var/ckey in unique_ckeys)
+		unique_ckeys_table += {"
 				<tr>
-					<td>[row["bantime"]]</td>
-					<td>[row["bantype"]]</td>
-					<td>[row["reason"]]</td>
-					<td>[row["job"]]</td>
-					<td>[row["duration"]]</td>
-					<td>[row["expiration_time"]]</td>
-					<td>[row["ckey"]]</td>
-					<td>[row["ip"]]</td>
-					<td>[row["computerid"]]</td>
-					<td>[row["a_ckey"]]</td>
-					<td>[row["unbanned"]]</td>
-					<td>[row["expired"]]</td>
+					<td[ckey == target_ckey ? " class='highlight'" : null]>[ckey]</td>
 				</tr>
 		"}
-	table += {"
+	unique_ckeys_table += {"
 			</tbody>
 		</table>
 	"}
-	show_browser(usr, table, "window=debug")
+
+	// List of all bans
+	var/all_bans_table = {"
+		<table style='width: 100%;'>
+			<thead>
+				<tr>
+					<th>Banned Ckey</th>
+					<th>IP Address</th>
+					<th>Computer ID</th>
+					<th>Status</th>
+					<th>Banning Admin</th>
+				</tr>
+			</thead>
+			<tbody>
+				"}
+	for (var/list/row in bans)
+		var/status = "ACTIVE"
+		if (row["expired"])
+			status = row["unbanned"] ? "UNBANNED" : "EXPIRED"
+		else
+			switch (row["bantype"])
+				if ("PERMABAN")
+					status += " (PERMANENT)"
+				if ("TEMPBAN")
+					status += " (UNTIL [row["expiration_time"]])"
+		all_bans_table += {"
+				<tr[row["expired"] ? " style='color: gray;'" : null]>
+					<td[row["ckey"] == target_ckey ? " class='highlight'" : null]>[row["ckey"] ? row["ckey"] : "<span class='color: gray;'>N/A</span>"]</td>
+					<td[row["ip"] == target_ip ? " class='highlight'" : null]>[row["ip"] ? row["ip"] : "<span class='color: gray;'>N/A</span>"]</td>
+					<td[row["computerid"] == target_cid ? " class='highlight'" : null]>[row["computerid"] ? row["computerid"] : "<span class='color: gray;'>N/A</span>"]</td>
+					<td>[status]</td>
+					<td>[row["a_ckey"]]</td>
+				</tr>
+				<tr[row["expired"] ? " style='color: gray;'" : null]>
+					<th>Reason</th>
+					<td colspan='4'>[row["reason"]]</td>
+				</tr>
+		"}
+	all_bans_table +={"
+			</tbody>
+		</table>
+	"}
+
+	// Final layout
+	var/final_body = {"
+		<h1>Associated Bans</h1>
+		<h2>Queried Details</h2>
+		<table stype='width: 100%;'>
+			<thead>
+				<tr>
+					<th style='width: 33%';>Ckey</th>
+					<th style='width: 33%';>IP Address</th>
+					<th style='width: 33%';>Computer ID</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>[target_ckey ? target_ckey : "N/A"]</td>
+					<td>[target_ip ? target_ip : "N/A"]</td>
+					<td>[target_cid ? target_cid : "N/A"]</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h2>Matching Banned Ckeys</h2>
+		<p><small>Entries matching the current query are <span class='highlight'>highlighted</span>.</small></p>
+		[unique_ckeys_table]
+
+		<h2>All Matching Bans</h2>
+		<p><small>Entries matching the current query are <span class='highlight'>highlighted</span>.</small></p>
+		[all_bans_table]
+	"}
+	send_rsc(user, 'html/browser/common.css', "common.css")
+	show_browser(user, html_page("Associated Bans ([target_ckey ? target_ckey : "NO CKEY"])", final_body), "window=associatedbans;size=700x480;")
 
 
-/client/proc/debug_fetch_bans()
-	RETURN_TYPE(/list)
-	return _debug_fetch_bans(ckey, address, computer_id)
+/**
+ * Aliases to `_show_associated_bans()` using this client's `fetch_bans()` result, ckey, IP address, and CID.
+ *
+ * Has no return value.
+ */
+/client/proc/show_associated_bans(mob/user, list/bans)
+	if (isnull(bans))
+		bans = fetch_bans()
+	_show_associated_bans(user, bans, ckey, address, computer_id)
 
 
-/mob/proc/debug_fetch_bans()
-	RETURN_TYPE(/list)
+/**
+ * Aliases to `_show_associated_bans()` using this mob's `fetch_bans()` result, ckey, IP address, and CID.
+ *
+ * Has no return value.
+ */
+/mob/proc/show_associated_bans(mob/user, list/bans)
 	if (client)
-		return client.debug_fetch_bans()
-	return _debug_fetch_bans(ckey ? ckey : last_ckey, lastKnownIP, computer_id)
+		client.show_associated_bans(user, bans)
+		return
+	if (isnull(bans))
+		bans = fetch_bans()
+	_show_associated_bans(user, bans, ckey ? ckey : last_ckey, lastKnownIP, computer_id)
