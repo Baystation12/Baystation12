@@ -1,3 +1,19 @@
 {
-
+  "linter": {
+    "rules": {
+      "complexity": {
+        "useOptionalChain": "off"
+      },
+      "performance": {
+        "noDelete": "off"
+      },
+      "style": {
+        "noArguments": "off",
+        "noNegationElse": "off",
+        "noVar": "off",
+        "useConst": "off",
+        "useTemplate": "off"
+      }
+    }
+  }
 }
