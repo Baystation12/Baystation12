@@ -54,5 +54,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: dmdoc
-          target-folder: docs/dmdoc
+          target-folder: docs
           clean: true
