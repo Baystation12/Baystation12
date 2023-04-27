@@ -17,6 +17,10 @@
 	desc = "A Hephaestus Industries M19. A light pistol issued as an SCGDF service weapon."
 	magazine_type = /obj/item/ammo_magazine/pistol
 	allowed_magazines = /obj/item/ammo_magazine/pistol
+	banned_magazines = list(
+		/obj/item/ammo_magazine/pistol/double,
+		/obj/item/ammo_magazine/pistol/small
+	)
 	icon = 'maps/torch/icons/obj/weapons.dmi'
 	icon_state = "m19"
 	item_state = "secgundark"
