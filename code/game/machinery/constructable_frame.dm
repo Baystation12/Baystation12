@@ -14,6 +14,7 @@
 	var/obj/item/stock_parts/circuitboard/circuit = null
 	var/expected_machine_type
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	obj_flags = OBJ_FLAG_CAN_TABLE
 
 /obj/machinery/constructable_frame/state_transition(singleton/machine_construction/new_state)
 	. = ..()

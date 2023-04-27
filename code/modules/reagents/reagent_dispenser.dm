@@ -362,6 +362,7 @@
 	amount_per_transfer_from_this = 10
 	initial_reagent_types = list(/datum/reagent/ethanol/beer = 1)
 	atom_flags = ATOM_FLAG_CLIMBABLE
+	obj_flags = OBJ_FLAG_CAN_TABLE
 
 /obj/structure/reagent_dispensers/acid
 	name = "sulphuric acid dispenser"

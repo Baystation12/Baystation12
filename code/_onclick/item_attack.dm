@@ -181,7 +181,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
  *
  * Returns boolean.
  */
-/mob/proc/use_sanity_check(atom/target, obj/item/tool = FALSE, flags = EMPTY_BITFIELD)
+/mob/proc/use_sanity_check(atom/target, atom/tool = FALSE, flags = EMPTY_BITFIELD)
 	if (QDELETED(src))
 		return FALSE
 	var/silent = HAS_FLAGS(flags, SANITY_CHECK_SILENT)
@@ -204,6 +204,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (target.loc == src && HAS_FLAGS(flags, SANITY_CHECK_TARGET_UNEQUIP) && !canUnEquip(target))
 		if (!silent)
 			FEEDBACK_UNEQUIP_FAILURE(src, target)
+		return FALSE
+	if (HAS_FLAGS(flags, SANITY_CHECK_BOTH_ADJACENT) && !Adjacent(tool))
+		if (!silent)
+			FEEDBACK_FAILURE(src, "\The [tool] must stay next to \the [target].")
 		return FALSE
 	return TRUE
 

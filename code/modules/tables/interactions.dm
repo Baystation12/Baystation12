@@ -60,9 +60,9 @@
 
 /obj/structure/table/MouseDrop_T(mob/target, mob/user)
 	if (isrobot(user))
-		return
+		return ..()
 	if (!ismob(target))
-		return
+		return ..()
 	if (target.loc != loc)
 		step(target, get_dir(target, loc))
 	..()
