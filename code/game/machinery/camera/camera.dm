@@ -128,6 +128,7 @@
 			if (!affected_by_emp_until || (world.time < affected_by_emp_until))
 				affected_by_emp_until = max(affected_by_emp_until, world.time + (90 SECONDS / severity))
 			else
+				deactivate(choice = FALSE)
 				set_stat(MACHINE_STAT_EMPED, TRUE)
 				set_light(0)
 				triggerCameraAlarm()
