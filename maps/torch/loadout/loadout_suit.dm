@@ -202,9 +202,8 @@
 	)
 	flags = GEAR_HAS_NO_CUSTOMIZATION
 
-/datum/gear/suit/chest_rig
-	allowed_roles = list(
-		TECHNICAL_ROLES,
-		SECURITY_ROLES,
+/datum/gear/suit/chest_rig/New()
+	allowed_roles = TECHNICAL_ROLES + SECURITY_ROLES + list(
 		/datum/job/doctor
 	)
+	..()
