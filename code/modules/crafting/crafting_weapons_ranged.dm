@@ -73,7 +73,7 @@
 	next_stages = list(/singleton/crafting_stage/zipgun_trigger)
 
 /singleton/crafting_stage/zipgun_trigger
-	completion_trigger_type = /obj/item/device/assembly/mousetrap
+	completion_trigger_type = /obj/item/frame/light_switch
 	item_desc = "A half-built zipgun with a trigger and firing pin assembly loosely fitted into place."
 	item_icon_state = "zipgun3"
 	progress_message = "You take the mousetrap apart and construct a crude trigger for the zipgun."
