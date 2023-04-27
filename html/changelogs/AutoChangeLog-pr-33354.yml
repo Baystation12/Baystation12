@@ -1,9 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: SEV Torch Deck 3 no longer loses pressure during round start.
-  - bugfix: Organs within limbs now probably drop onto the ground when the limb is
-      destroyed/dropped.
-  - bugfix: Cameras now kick you out of their view in the camera app when they are
-      deleted, instead of locking you in a black screen.
-  - tweak: Leaping with a missing limb now has a chance of toppling you over.
