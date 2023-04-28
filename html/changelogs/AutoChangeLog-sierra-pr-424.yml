@@ -1,4 +1,0 @@
-author: Sbotkin
-delete-after: true
-changes:
-  - bugfix: Fixed ninja's hardsuit having wrong chem dispenser.

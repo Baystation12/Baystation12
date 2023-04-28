@@ -1,4 +1,0 @@
-author: SierraHelper
-delete-after: true
-changes:
-  - tweak: Dying while gripping someone drops the grip.
