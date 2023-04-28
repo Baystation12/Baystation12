@@ -32,11 +32,6 @@
 	flick("bell_dingeth", src)
 
 
-/obj/item/material/bell/apply_hit_effect()
-	. = ..()
-	shatter()
-
-
 /obj/item/material/bell/glass
 	default_material = MATERIAL_GLASS
 	normal_sound = 'sound/items/tinkly_bell.ogg'
