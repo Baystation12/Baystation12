@@ -348,8 +348,7 @@
 			SPAN_WARNING("\The [user] starts forcing \the [src]'s emergency [body.hatch_descriptor] release using \a [tool]."),
 			SPAN_WARNING("You start forcing \the [src]'s emergency [body.hatch_descriptor] release using \the [tool].")
 		)
-		var/delay = min(50 * user.skill_delay_mult(SKILL_DEVICES), 50 * user.skill_delay_mult(SKILL_EVA))
-		if (!do_after(user, delay, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled(5 SECONDS, list(SKILL_DEVICES, SKILL_EVA), src) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (!body)
 			USE_FEEDBACK_FAILURE("\The [src] has no cockpit to force.")
@@ -470,8 +469,7 @@
 			SPAN_NOTICE("\The [user] starts removing \the [src]'s power cell with \a [tool]."),
 			SPAN_NOTICE("You start removing \the [src]'s power cell with \the [tool].")
 		)
-		var/delay = 2 SECONDS * user.skill_delay_mult(SKILL_DEVICES)
-		if (!do_after(user, delay, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled(2 SECONDS, SKILL_DEVICES, src) || !user.use_sanity_check(src, tool))
 			return
 		if (!maintenance_protocols)
 			USE_FEEDBACK_FAILURE("\The [src]'s maintenance protocols must be enabled to access the power cell.")
@@ -516,8 +514,7 @@
 			SPAN_NOTICE("\The [user] starts removing \the [src]'s securing bolts with \a [tool]."),
 			SPAN_NOTICE("You start removing \the [src]'s securing bolts with \the [tool].")
 		)
-		var/delay = 6 SECONDS * user.skill_delay_mult(SKILL_DEVICES)
-		if (!do_after(user, delay, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled(6 SECONDS, SKILL_DEVICES, src) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (!maintenance_protocols)
 			USE_FEEDBACK_FAILURE("\The [src]'s maintenance protocols must be enabled to access the securing bolts.")

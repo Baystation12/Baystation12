@@ -167,7 +167,7 @@
 			SPAN_NOTICE("\The [user] starts repairing \the [src] with \a [weapon]."),
 			SPAN_NOTICE("You start repairing \the [src] with \the [weapon].")
 		)
-		if (!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, weapon) || !welder.remove_fuel(1))
+		if (!user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, weapon) || !welder.remove_fuel(1))
 			return TRUE
 		playsound(src, 'sound/items/Welder.ogg', 50, TRUE)
 		restore_health(get_max_health() / 5) // 20% repair per application

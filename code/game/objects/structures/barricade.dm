@@ -39,7 +39,7 @@
 			SPAN_NOTICE("\The [user] starts adding some [tool.name] to \the [src]."),
 			SPAN_NOTICE("You start adding some [tool.name] to \the [src].")
 		)
-		if (!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (spiky)
 			USE_FEEDBACK_FAILURE("\The [src] already has spikes on it.")
@@ -73,7 +73,7 @@
 			SPAN_NOTICE("\The [user] starts repairing \the [src] with some [tool.name]."),
 			SPAN_NOTICE("You start repairing \the [src] with some [tool.name].")
 		)
-		if (!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (!get_damage_value())
 			USE_FEEDBACK_FAILURE("\The [src] doesn't need repairs.")
