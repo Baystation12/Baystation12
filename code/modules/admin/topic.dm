@@ -1082,7 +1082,7 @@
 		if (!check_rights(R_ADMIN))
 			return
 		var/mob/target = locate(href_list["bans"])
-		target.debug_fetch_bans()
+		target.show_associated_bans(usr)
 
 	else if (href_list["cloneother"])
 		if (!check_rights(R_DEBUG))
