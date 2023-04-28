@@ -41,8 +41,10 @@
 
 /obj/machinery/camera/examine(mob/user)
 	. = ..()
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		to_chat(user, SPAN_WARNING("It is completely demolished."))
+	else if (inoperable(MACHINE_STAT_EMPED))
+		to_chat(user, SPAN_WARNING("It's unpowered."))
 
 /obj/machinery/camera/malf_upgrade(mob/living/silicon/ai/user)
 	..()
@@ -105,9 +107,11 @@
 					number = max(number, C.number+1)
 			c_tag = "[A.name][number == 1 ? "" : " #[number]"]"
 		invalidateCameraCache()
+	GLOB.moved_event.register(src, src, .proc/camera_moved)
 
 
 /obj/machinery/camera/Destroy()
+	GLOB.moved_event.unregister(src, src, .proc/camera_moved)
 	deactivate(null, 0) //kick anyone viewing out
 	if(assembly)
 		qdel(assembly)
@@ -122,12 +126,20 @@
 		update_coverage()
 	return internal_process()
 
+
+/obj/machinery/camera/proc/camera_moved(atom/movable/moved_atom, atom/old_loc, atom/new_loc)
+	if (AreConnectedZLevels(get_z(old_loc), get_z(new_loc)))
+		return
+	disconnect_viewers()
+
+
 /obj/machinery/camera/emp_act(severity)
 	if (!isEmpProof())
 		if (prob(100/severity))
 			if (!affected_by_emp_until || (world.time < affected_by_emp_until))
 				affected_by_emp_until = max(affected_by_emp_until, world.time + (90 SECONDS / severity))
 			else
+				deactivate(choice = FALSE)
 				set_stat(MACHINE_STAT_EMPED, TRUE)
 				set_light(0)
 				triggerCameraAlarm()
@@ -206,10 +218,23 @@
 	else
 		..()
 
+
+/**
+ * Handles resetting the view of all clients currently viewing this camera. Does not include resetting nano modules.
+ */
+/obj/machinery/camera/proc/disconnect_viewers()
+	for (var/mob/mob as anything in SSmobs.mob_list)
+		if (!mob.client || mob.client.eye != src)
+			continue
+		mob.reset_view()
+
+
 /obj/machinery/camera/proc/deactivate(user as mob, choice = 1)
 	// The only way for AI to reactivate cameras are malf abilities, this gives them different messages.
 	if(istype(user, /mob/living/silicon/ai))
 		user = null
+
+	disconnect_viewers()
 
 	if(choice != 1)
 		return
@@ -236,6 +261,7 @@
 	. = ..()
 	wires.RandomCutAll()
 
+	deactivate()
 	triggerCameraAlarm()
 	queue_icon_update()
 	update_coverage()
@@ -277,7 +303,7 @@
 		else if(dir == EAST)
 			pixel_x = -10
 
-	if (!status || (MACHINE_IS_BROKEN(src)))
+	if (!status || inoperable())
 		icon_state = "[initial(icon_state)]1"
 	else if (GET_FLAGS(stat, MACHINE_STAT_EMPED))
 		icon_state = "[initial(icon_state)]emp"
@@ -299,7 +325,7 @@
 /obj/machinery/camera/proc/can_use()
 	if(!status)
 		return 0
-	if(MACHINE_IS_BROKEN(src) || GET_FLAGS(stat, MACHINE_STAT_EMPED))
+	if(inoperable(MACHINE_STAT_EMPED))
 		return 0
 	return 1
 
