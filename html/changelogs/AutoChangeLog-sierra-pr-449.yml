@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Do after timer bars should now automatically appear over the user if the
+      target item isn't on a turf, to help ensure visibility as applicable.
