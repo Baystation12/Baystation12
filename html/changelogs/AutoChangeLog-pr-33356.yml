@@ -1,7 +1,0 @@
-author: PurplePineapple
-delete-after: true
-changes:
-  - rscadd: Specific magazines can be blacklisted from a gun using the banned_magazines
-      variable.
-  - bugfix: The small military pistols (Bobcat, M19) now only take single stack 10mm
-      as intended.

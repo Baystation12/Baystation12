@@ -1,9 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Fixes the exploit that allows people to keep camera monitors connected
-      to cameras even after they leave camera range.
-  - rscadd: Cameras that have been EMPed or are in areas with no power no longer function.
-  - tweak: 'Cameras now kick you out of their view in the camera app on the following
-      additional events: EMPed, destroyed through damage, movement to a non-connected
-      z-level.'
