@@ -3109,12 +3109,7 @@
 /area/voxship/shuttle)
 "pB" = (
 /obj/structure/table/reinforced,
-/obj/machinery/reagent_temperature/cooler{
-	pixel_x = -7
-	},
-/obj/machinery/reagent_temperature{
-	pixel_x = 7
-	},
+/obj/machinery/reagent_temperature,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen"=101.383)
 	},

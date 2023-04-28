@@ -1837,14 +1837,7 @@
 /area/map_template/colony/medbay)
 "dW" = (
 /obj/structure/table/steel_reinforced,
-/obj/machinery/reagent_temperature{
-	pixel_x = -7;
-	pixel_y = 5
-	},
-/obj/machinery/reagent_temperature/cooler{
-	pixel_x = 7;
-	pixel_y = 5
-	},
+/obj/machinery/reagent_temperature,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},

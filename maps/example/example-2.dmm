@@ -186,11 +186,6 @@
 "oP" = (
 /turf/space,
 /area/space)
-"oU" = (
-/obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/reagent_temperature/cooler,
-/turf/simulated/floor/tiled/white,
-/area/medical/surgery)
 "oW" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/table/glass,
@@ -266,8 +261,7 @@
 /obj/item/material/kitchen/rollingpin,
 /obj/item/material/chopping_board,
 /obj/item/reagent_containers/food/condiment/small/saltshaker{
-	pixel_x = -3;
-	pixel_y = 0
+	pixel_x = -3
 	},
 /obj/item/reagent_containers/food/condiment/small/peppermill{
 	pixel_x = 3
@@ -1207,7 +1201,7 @@ HE
 HE
 Dh
 HE
-oU
+HE
 HE
 HE
 HE

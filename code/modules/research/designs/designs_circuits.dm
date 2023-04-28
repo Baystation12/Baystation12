@@ -448,15 +448,8 @@
 	name = "chemical heating system"
 	id = "chemheater"
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 1)
-	build_path = /obj/item/stock_parts/circuitboard/reagent_heater
+	build_path = /obj/item/stock_parts/circuitboard/reagent_temp
 	sort_string = "JCAAE"
-
-/datum/design/circuit/reagent_cooler
-	name = "chemical cooling system"
-	id = "chemcooler"
-	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 1)
-	build_path = /obj/item/stock_parts/circuitboard/reagent_heater/cooler
-	sort_string = "JCAAF"
 
 /datum/design/circuit/atmos_control
 	name = "atmospherics control console"

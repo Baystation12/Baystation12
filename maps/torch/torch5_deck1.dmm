@@ -644,7 +644,6 @@
 "abt" = (
 /obj/effect/floor_decal/corner/beige/mono,
 /obj/structure/table/standard,
-/obj/machinery/reagent_temperature/cooler,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "abu" = (
@@ -17529,7 +17528,6 @@
 "gcY" = (
 /obj/structure/table/standard,
 /obj/structure/window/reinforced,
-/obj/machinery/reagent_temperature/cooler,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/misc_lab)
 "geb" = (

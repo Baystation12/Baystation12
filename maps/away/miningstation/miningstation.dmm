@@ -6704,17 +6704,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/kitchen)
-"pt" = (
-/obj/structure/table/marble,
-/obj/machinery/reagent_temperature/cooler,
-/obj/effect/floor_decal/corner/blue{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/blue{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/white,
-/area/miningstation/kitchen)
 "pu" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
@@ -23145,7 +23134,7 @@ nw
 oi
 of
 oG
-pt
+oG
 pA
 pL
 mr
