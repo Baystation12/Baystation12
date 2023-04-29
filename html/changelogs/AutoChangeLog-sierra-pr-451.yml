@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscadd: Drink dispensers can now be rotated with altclick.
