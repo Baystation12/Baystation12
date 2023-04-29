@@ -260,6 +260,7 @@
 	icon_state = "juicer"
 	density = FALSE
 	anchored = FALSE
+	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_CAN_TABLE
 	grind_sound = 'sound/machines/juicer.ogg'
 	max_item_size = ITEM_SIZE_NORMAL
 	skill = SKILL_COOKING

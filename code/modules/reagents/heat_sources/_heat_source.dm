@@ -10,6 +10,7 @@
 	icon = 'icons/obj/machines/heat_sources.dmi'
 	icon_state = "hotplate"
 	atom_flags = ATOM_FLAG_CLIMBABLE
+	obj_flags = OBJ_FLAG_CAN_TABLE
 	anchored = TRUE
 	idle_power_usage = 0
 	active_power_usage = 1.2 KILOWATTS

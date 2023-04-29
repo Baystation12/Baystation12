@@ -30,6 +30,10 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define OBJ_FLAG_CONDUCTIBLE    FLAG(1)  // Conducts electricity. (metal etc.)
 #define OBJ_FLAG_ROTATABLE      FLAG(2)  // Can be rotated with alt-click
 #define OBJ_FLAG_NOFALL		    FLAG(3)  // Will prevent mobs from falling
+/// Can be click+dragged onto a table, rack, etc
+#define OBJ_FLAG_CAN_TABLE      FLAG(4)
+/// Can receive objects with the `OBJ_FLAG_CAN_TABLE` flag
+#define OBJ_FLAG_RECEIVE_TABLE  FLAG(5)
 
 //Flags for items (equipment)
 #define ITEM_FLAG_NO_BLUDGEON               FLAG(0)  // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.

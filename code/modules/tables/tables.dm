@@ -10,6 +10,7 @@
 	throwpass = 1
 	mob_offset = 12
 	health_max = 10
+	obj_flags = OBJ_FLAG_RECEIVE_TABLE
 	var/flipped = 0
 
 	// For racks.

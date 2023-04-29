@@ -9,6 +9,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "fax"
 	insert_anim = "faxsend"
+	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_CAN_TABLE
 	var/send_access = list()
 
 	idle_power_usage = 30

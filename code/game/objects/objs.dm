@@ -20,6 +20,67 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
+/obj/MouseDrop_T(atom/dropped, mob/living/user)
+	// Handle tabling objects
+	if (dropped != src && HAS_FLAGS(obj_flags, OBJ_FLAG_RECEIVE_TABLE) && isobj(dropped))
+		var/obj/object = dropped
+		if (HAS_FLAGS(object.obj_flags, OBJ_FLAG_CAN_TABLE))
+			if (object.anchored)
+				USE_FEEDBACK_FAILURE("\The [object] is firmly anchored and cannot be moved.")
+				return TRUE
+			if (!isturf(loc))
+				USE_FEEDBACK_FAILURE("\The [src] must be on a turf to lift \the [dropped] onto it.")
+				return TRUE
+			if (!user.skill_check(SKILL_HAULING, SKILL_BASIC))
+				USE_FEEDBACK_FAILURE("You're not strong enough to lift \the [dropped] onto \the [src].")
+				return TRUE
+			var/has_blocker = FALSE
+			for (var/atom/thing as anything in get_turf(src))
+				if (thing == src)
+					continue
+				if (ismob(thing) || thing.density)
+					has_blocker = thing
+					break
+			if (has_blocker)
+				USE_FEEDBACK_FAILURE("You can't lift \the [dropped] onto \the [src]. \The [has_blocker] is in the way.")
+				return TRUE
+			user.visible_message(
+				SPAN_NOTICE("\The [user] starts lifting \the [dropped] onto \the [src]."),
+				SPAN_NOTICE("You start lifting \the [dropped] onto \the [src].")
+			)
+			if (!user.do_skilled(6 SECONDS, SKILL_HAULING, src, do_flags = DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, dropped, SANITY_CHECK_BOTH_ADJACENT))
+				return TRUE
+			if (!HAS_FLAGS(obj_flags, OBJ_FLAG_RECEIVE_TABLE))
+				USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
+				return TRUE
+			if (!HAS_FLAGS(object.obj_flags, OBJ_FLAG_CAN_TABLE))
+				USE_FEEDBACK_FAILURE("\The [dropped]'s state has changed.")
+				return TRUE
+			if (object.anchored)
+				USE_FEEDBACK_FAILURE("\The [object] is firmly anchored and cannot be moved.")
+				return TRUE
+			if (!isturf(loc))
+				USE_FEEDBACK_FAILURE("\The [src] must be on a turf to lift \the [dropped] onto it.")
+				return TRUE
+			has_blocker = FALSE
+			for (var/atom/thing as anything in get_turf(src))
+				if (thing == src)
+					continue
+				if (ismob(thing) || thing.density)
+					has_blocker = thing
+					break
+			if (has_blocker)
+				USE_FEEDBACK_FAILURE("You can't lift \the [dropped] onto \the [src]. \The [has_blocker] is in the way.")
+				return TRUE
+			object.forceMove(loc)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] lifts \the [dropped] onto \the [src]."),
+				SPAN_NOTICE("You lift \the [dropped] onto \the [src].")
+			)
+			return TRUE
+
+	return ..()
+
 /obj/item/proc/is_used_on(obj/O, mob/user)
 
 /obj/assume_air(datum/gas_mixture/giver)

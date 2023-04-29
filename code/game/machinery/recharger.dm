@@ -8,6 +8,7 @@
 	anchored = TRUE
 	idle_power_usage = 4
 	active_power_usage = 30 KILOWATTS
+	obj_flags = OBJ_FLAG_CAN_TABLE
 	var/obj/item/charging = null
 	var/list/allowed_devices = list(/obj/item/gun/energy, /obj/item/gun/magnetic/railgun, /obj/item/melee/baton, /obj/item/cell, /obj/item/modular_computer, /obj/item/device/suit_sensor_jammer, /obj/item/stock_parts/computer/battery_module, /obj/item/shield_diffuser, /obj/item/clothing/mask/smokable/ecig, /obj/item/device/radio)
 	var/icon_state_charged = "recharger2"
