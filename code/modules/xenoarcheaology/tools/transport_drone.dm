@@ -1,10 +1,12 @@
 /obj/item/device/drone_designator
 	name = "drone telemetry designator"
-	desc = "A tool used to transmit location data to a transport drone."
-	icon = 'icons/obj/eftpos.dmi'
-	icon_state = "eftpos"
+	desc = "A small, handheld tool used to transmit location data to a transport drone."
+	icon = 'icons/obj/landing_pad.dmi'
+	icon_state = "pad_designator"
 	var/network = null
+	w_class = ITEM_SIZE_SMALL
 	matter = list(MATERIAL_PLASTIC = 60, MATERIAL_GLASS = 200)
+	origin_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
 
 /obj/item/device/drone_designator/examine(mob/user, distance)
 	. = ..()
@@ -115,15 +117,18 @@
 
 /obj/machinery/drone_pad/on_update_icon()
 	. = ..()
+	overlays.Cut()
 	if (current_flight)
-		icon_state = "pad_incoming"
+		overlays += emissive_appearance(icon, "pad_incoming") //we cut the hole, and...
+		overlays += image(icon, "pad_incoming") // add the actual image
 	else
 		var/datum/extension/local_network_member/transport = get_extension(src, /datum/extension/local_network_member)
 		var/network = transport ? transport.id_tag : null
 		if (network && operable())
-			icon_state = "pad_waiting"
-		else
-			icon_state = "pad_base"
+			overlays += emissive_appearance(icon, "pad_waiting")
+			overlays += image(icon, "pad_waiting")
+	if(panel_open)
+		overlays += image(icon, "pad_maintenance")
 
 /obj/machinery/drone_pad/examine(mob/user, distance)
 	. = ..()
@@ -141,7 +146,7 @@
 	var/image/object = new
 	object.appearance = target
 	object.loc = target.loc
-	var/image/drone = image('icons/mob/robots_flying.dmi', target.loc, "drone-standard")
+	var/image/drone = image('icons/obj/landing_pad.dmi', target.loc, "pad_drone")
 	drone.plane = DEFAULT_PLANE
 	drone.layer = ABOVE_PROJECTILE_LAYER
 	drone.alpha = 10
@@ -259,6 +264,7 @@
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1, -3)
 		return TRUE
 
+	update_icon()
 	return ..()
 
 /obj/machinery/drone_pad/RefreshParts()
