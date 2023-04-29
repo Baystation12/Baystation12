@@ -1,0 +1,7 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscadd: 'The following objects can now be moved onto tables by click and dragging
+      them onto said table. You and the object _must_ be adjacent to the table for
+      this to work: Cell chargers, Machine frames, Microwaves, Rechargers, Crates,
+      Fax machines, Blenders, Drink dispensers, Beer kegs, Reagents heaters, coolers.'
