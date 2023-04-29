@@ -1,6 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - rscadd: Adds basic and engineering chest-rigs. They can be selected by TECHNICAL_ROLES,
-      SECURITY_ROLES and MTs in loadout and the basic one can be found occasionally
-      in maint. The engi one replaces the hazard vests in engineering lockers.
