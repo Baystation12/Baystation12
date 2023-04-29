@@ -1,0 +1,5 @@
+author: AzlanonPC
+delete-after: true
+changes:
+  - rscadd: new sprites for telemetry designator, cargo drones, and cargo drone pads.
+  - rscadd: telemetry designators are now small items.
