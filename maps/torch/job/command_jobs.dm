@@ -357,8 +357,8 @@
 	title = "Bridge Officer"
 	department = "Support"
 	department_flag = SPT
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Commanding Officer and heads of staff"
 	selection_color = "#2f2f7f"
 	minimal_player_age = 0
@@ -366,6 +366,13 @@
 	minimum_character_age = list(SPECIES_HUMAN = 22)
 	ideal_character_age = 24
 	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/command/bridgeofficer
+
+	alt_titles = list(
+		"Watch Officer",
+		"Officer Cadet",
+		"Helmsman"
+	)
+
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet = /singleton/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
@@ -401,3 +408,123 @@
 
 /datum/job/bridgeofficer/get_description_blurb()
 	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."
+
+
+/datum/job/connofficer
+	title = "Conn Officer"
+	department = "Support"
+	department_flag = SPT
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Commanding Officer and heads of staff"
+	selection_color = "#2f2f7f"
+	minimal_player_age = 14
+	economic_power = 9
+	minimum_character_age = list(SPECIES_HUMAN = 23)
+	ideal_character_age = 26
+	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet/conn
+
+	alt_titles = list(
+		"Navigator",
+		"Safety Officer" = /singleton/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet/safety,
+		"Gunnery Officer"
+	)
+
+	allowed_branches = list(
+		/datum/mil_branch/fleet
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2
+	)
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
+	                    SKILL_PILOT       = SKILL_ADEPT,
+	                    SKILL_ATMOS       = SKILL_BASIC)
+
+	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
+	skill_points = 22
+
+
+	access = list(
+		access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
+		access_bridge, access_janitor, access_kitchen, access_cargo, access_mailsorting, access_RC_announce, access_keycard_auth,
+		access_solgov_crew, access_aquila, access_aquila_helm, access_guppy, access_guppy_helm, access_external_airlocks,
+		access_eva, access_hangar, access_cent_creed, access_explorer, access_expedition_shuttle, access_expedition_shuttle_helm, access_teleporter,
+		access_torch_fax, access_torch_helm, access_radio_comm, access_radio_eng, access_radio_exp, access_radio_serv, access_radio_sup, access_radio_sec
+	)
+
+	software_on_spawn = list(/datum/computer_file/program/comm,
+							 /datum/computer_file/program/suit_sensors,
+							 /datum/computer_file/program/power_monitor,
+							 /datum/computer_file/program/supermatter_monitor,
+							 /datum/computer_file/program/alarm_monitor,
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/shields_monitor,
+							 /datum/computer_file/program/reports,
+							 /datum/computer_file/program/deck_management)
+
+/datum/job/connofficer/get_description_blurb()
+	return "You are a Conn Officer. You take initiative to ensure safe navigation of the ship, within the directives of your Commanding Officer and Executive Officer. You may issue orders to lower-ranking personnel when neccessary, but so far as possible prefer to bring matters to the attention of relevant department heads to be handled through the normal chain of command. You may be called on to pilot [GLOB.using_map.full_name] in the absence of a junior bridge officer or dedicated helmsman."
+
+/datum/job/connofficer/equip(mob/living/carbon/human/H)
+	if(H.mind?.role_alt_title == "Safety Officer")
+		access -= access_radio_sec
+		access += access_radio_med
+	return ..()
+
+
+/datum/job/ops
+	title = "Operations Officer"
+	department = "Support"
+	department_flag = SPT
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Commanding Officer and heads of staff"
+	selection_color = "#2f2f7f"
+	minimal_player_age = 14
+	economic_power = 9
+	minimum_character_age = list(SPECIES_HUMAN = 23)
+	ideal_character_age = 29
+	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/command/bridgeofficer
+
+	alt_titles = list(
+		"Signal Officer",
+		"Cosmography Officer"
+	)
+
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps,
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/ec/o1,
+		/datum/mil_rank/ec/o3,
+	)
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
+	                    SKILL_PILOT       = SKILL_ADEPT,
+	                    SKILL_COMPUTER    = SKILL_BASIC,
+	                    SKILL_SCIENCE     = SKILL_BASIC)
+
+	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
+	skill_points = 22
+
+
+	access = list(
+		access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
+		access_bridge, access_janitor, access_kitchen, access_cargo, access_mailsorting, access_RC_announce, access_keycard_auth,
+		access_solgov_crew, access_aquila, access_aquila_helm, access_guppy, access_guppy_helm, access_external_airlocks,
+		access_eva, access_hangar, access_cent_creed, access_explorer, access_expedition_shuttle, access_expedition_shuttle_helm, access_teleporter,
+		access_torch_fax, access_torch_helm, access_radio_comm, access_radio_eng, access_radio_exp, access_radio_serv, access_radio_sci, access_radio_sup
+	)
+
+	software_on_spawn = list(/datum/computer_file/program/comm,
+							 /datum/computer_file/program/suit_sensors,
+							 /datum/computer_file/program/power_monitor,
+							 /datum/computer_file/program/supermatter_monitor,
+							 /datum/computer_file/program/alarm_monitor,
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/shields_monitor,
+							 /datum/computer_file/program/reports,
+							 /datum/computer_file/program/deck_management)
+
+/datum/job/ops/get_description_blurb()
+	return "You are an Operations Officer. You monitor sensors and communications channels to coordinate the activity of all departments in support of the exploration mission. You answer to your Commanding Officer and Executive Officer. You may issue orders to lower-ranking personnel when neccessary, but so far as possible, prefer to bring matters to the attention of relevant department heads to be handled through the normal chain of command. You may be called on to pilot [GLOB.using_map.full_name] in the absence of a junior bridge officer or dedicated helmsman."

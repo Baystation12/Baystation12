@@ -116,10 +116,18 @@
 
 /obj/item/device/radio/headset/bridgeofficer
 	name = "bridge officer's headset"
-	desc = "A headset with access to the command, engineering and exploration channels."
+	desc = "A headset with access to the command and various department channels."
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/bridgeofficer
+
+/obj/item/device/radio/headset/bridgeofficer/conn
+	name = "conn officer's headset"
+	ks1type = /obj/item/device/encryptionkey/connofficer
+
+/obj/item/device/radio/headset/bridgeofficer/safety
+	name = "safety officer's headset"
+	ks1type = /obj/item/device/encryptionkey/safetyofficer
 
 /obj/item/device/radio/headset/bridgeofficer/alt
 	name = "bridge officer's bowman headset"

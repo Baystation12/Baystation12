@@ -134,3 +134,11 @@
 	name = OUTFIT_JOB_NAME("Bridge Officer - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots
+
+/singleton/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet/conn
+	name = OUTFIT_JOB_NAME("Conn Officer")
+	l_ear = /obj/item/device/radio/headset/bridgeofficer/conn
+
+/singleton/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet/safety
+	name = OUTFIT_JOB_NAME("Safety Officer")
+	l_ear = /obj/item/device/radio/headset/bridgeofficer/safety
