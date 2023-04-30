@@ -1,9 +1,9 @@
 /**
 ** Callbacks
 Callbacks wrap a target, callable, and arguments to pass. See the dm reference for call().
-When the target is GLOBAL_PROC, the callable is global - otherwise it is a datum (or dead) reference.
+When the target is Callback::GLOBAL, the callable is global - otherwise it is a datum (or dead) reference.
 Callbacks are created with the new keyword via a global alias like:
-- var/datum/callback/instance = new Callback(GLOBAL_PROC, /proc/get_area, someObject)
+- var/datum/callback/instance = new Callback(Callback::GLOBAL, /proc/get_area, someObject)
 Callbacks are thin - they should be used with invoke or invoke_async.
 
 ** Invocation
@@ -27,15 +27,13 @@ datum. For example:
 addTimer(new Callback(myMob, myMob::drop_l_hand()), 10 SECONDS)
 */
 
-var/global/const/GLOBAL_PROC = FALSE
 
-var/global/const/Callback = /datum/callback
-
+var/global/const/datum/callback/Callback = /datum/callback
 
 /datum/callback
-	//var/const/Global = FALSE //515 - GLOBAL_PROC becomes Callback::Global
+	var/const/GLOBAL = FALSE
 	var/identity
-	var/datum/target = GLOBAL_PROC
+	var/datum/target = Callback::GLOBAL
 	var/callable
 	var/list/params
 
@@ -55,14 +53,14 @@ var/global/const/Callback = /datum/callback
 	switch (target)
 		if (null)
 			identity = "(null) [callable]"
-		if (FALSE)
+		if (Callback::GLOBAL)
 			identity = "(global) [callable]"
 		else
 			identity = "([target.type] \ref[target]) [callable]"
 
 
 /proc/invoke(datum/callback/target, callable, ...)
-	if (target == GLOBAL_PROC)
+	if (target == Callback::GLOBAL)
 		var/list/params
 		if (length(args) > 2)
 			params = args.Copy(3)
@@ -85,7 +83,7 @@ var/global/const/Callback = /datum/callback
 
 /proc/invoke_async(datum/callback/target, callable, ...)
 	set waitfor = FALSE
-	if (target == GLOBAL_PROC)
+	if (target == Callback::GLOBAL)
 		var/list/params
 		if (length(args) > 2)
 			params = args.Copy(3)
