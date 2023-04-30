@@ -213,7 +213,7 @@
 // Subtypes
 
 /obj/structure/disposalconstruct/machine
-	obj_flags = 0 // No rotating
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 /obj/structure/disposalconstruct/machine/update_verbs()
 	return // No flipping
