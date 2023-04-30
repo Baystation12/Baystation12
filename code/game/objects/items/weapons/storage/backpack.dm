@@ -406,10 +406,10 @@
 	desc = "A green satchel, filled with slots for diskettes and other workplace tools."
 	icon_state = "satchel-gen"
 
-/obj/item/storage/backpack/satchel/tox
+/obj/item/storage/backpack/satchel/sci
 	name = "science satchel"
 	desc = "It's a stain-resistant satchel, modeled for use in laboratories and other scientific settings."
-	icon_state = "satchel-nt"
+	icon_state = "satchel-sci"
 
 /obj/item/storage/backpack/satchel/sec
 	name = "security satchel"

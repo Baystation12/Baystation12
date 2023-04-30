@@ -78,7 +78,7 @@
 	backpack_type = /obj/item/storage/backpack/toxins
 
 /singleton/cardborg_appearance/science/satchel
-	backpack_type = /obj/item/storage/backpack/satchel/tox
+	backpack_type = /obj/item/storage/backpack/satchel/sci
 
 /singleton/cardborg_appearance/security
 	icon_state = "securityrobot"

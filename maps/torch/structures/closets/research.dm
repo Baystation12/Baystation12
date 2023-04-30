@@ -102,7 +102,8 @@
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clothing/glasses/science,
 		/obj/item/storage/belt/general,
-		/obj/item/storage/backpack/dufflebag
+		/obj/item/storage/backpack/dufflebag,
+		/obj/item/storage/backpack/satchel/sci
 	)
 
 /obj/structure/closet/secure_closet/guard
