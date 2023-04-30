@@ -6,7 +6,7 @@
 	color = COLOR_BROWN_ORANGE
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_SMALL
-	max_storage_space = 8
+	max_storage_space = ITEM_SIZE_SMALL * 3
 	slot_flags = SLOT_ID
 
 	drop_sound = 'sound/items/drop/cloth.ogg'

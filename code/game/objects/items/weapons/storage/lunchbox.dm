@@ -1,5 +1,5 @@
 /obj/item/storage/lunchbox
-	max_storage_space = 8 //slightly smaller than a toolbox
+	max_storage_space = ITEM_SIZE_SMALL * 4
 	name = "rainbow lunchbox"
 	icon_state = "lunchbox_rainbow"
 	item_state = "toolbox_pink"

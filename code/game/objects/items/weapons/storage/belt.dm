@@ -537,16 +537,6 @@
 	max_storage_space = ITEM_SIZE_SMALL * 4
 	slot_flags = SLOT_BELT | SLOT_BACK
 
-/obj/item/storage/belt/waistpack/big
-	name = "large waist pack"
-	desc = "A bag designed to be worn on the waist. Definitely makes your butt look big."
-	icon_state = "fannypack_big_white"
-	item_state = "fannypack_big_white"
-	w_class = ITEM_SIZE_LARGE
-	max_w_class = ITEM_SIZE_NORMAL
-	max_storage_space = ITEM_SIZE_NORMAL * 4
-
-
 /obj/item/storage/belt/fire_belt
 	name = "firefighting equipment belt"
 	desc = "A belt specially designed for firefighting."

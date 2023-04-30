@@ -7,7 +7,7 @@
 	desc = "A small, uncomfortable backpack, fitted with a massive fuel tank on the side. It has a refueling port for most models of portable welding tools and cartridges."
 	icon_state = "welderpack"
 	item_state_slots = list(slot_l_hand_str = "welderpack", slot_r_hand_str = "welderpack")
-	max_storage_space = 20
+	max_storage_space = ITEM_SIZE_NORMAL * 7
 	var/max_fuel = 350
 	var/obj/item/weldingtool/welder
 
