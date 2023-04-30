@@ -36,10 +36,13 @@
 	..()
 
 	var/broken_limb_fail_chance = 0
+	var/missing_limb_fail_chance = 0
 	var/list/broken_limbs = list()
 	for (var/_limb in BP_LEGS_FEET)
 		var/obj/item/organ/external/limb = get_organ(_limb)
-		if (limb.status & ORGAN_BROKEN)
+		if (!limb)
+			missing_limb_fail_chance += 33
+		else if (limb.status & ORGAN_BROKEN)
 			broken_limbs += limb
 			broken_limb_fail_chance += limb.splinted ? 25 : 50
 	if (broken_limb_fail_chance)
@@ -56,3 +59,12 @@
 			to_chat(src, SPAN_DANGER("You feel a sharp pain through your [limb.name] as you land!"))
 			apply_effect(1, EFFECT_STUN)
 			limb.add_pain(15)
+	if (missing_limb_fail_chance)
+		if (prob(missing_limb_fail_chance))
+			visible_message(
+				SPAN_WARNING("\The [src] lands unsteadily and topples over!"),
+				SPAN_DANGER("You land unsteadily, unused to jumping with your missing limb, and topple over!")
+			)
+			// Math should result in 1 missing limb = 2 seconds, 2 missing limbs = 4 seconds, etc.
+			// Note that a foot and a leg is a separate limb, and missing a leg also means you're missing a foot.
+			apply_effect(round(missing_limb_fail_chance / 16.5), EFFECT_WEAKEN)

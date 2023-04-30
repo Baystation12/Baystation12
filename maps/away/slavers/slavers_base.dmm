@@ -2862,12 +2862,6 @@
 	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/maint)
-<<<<<<< ours
-"hg" = (
-/turf/simulated/floor/airless/ceiling,
-/area/slavers_base/powatm)
-=======
->>>>>>> theirs
 "hh" = (
 /obj/random/junk,
 /turf/simulated/floor/ceiling,
