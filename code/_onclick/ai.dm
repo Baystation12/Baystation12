@@ -28,27 +28,43 @@
 
 	var/list/modifiers = params2list(params)
 	if (modifiers["ctrl"] && modifiers["alt"] && modifiers["shift"])
+		if (!control_disabled && A.AICtrlAltShiftClick(src))
+			return TRUE
 		if (CtrlAltShiftClickOn(A))
 			return TRUE
 	else if (modifiers["ctrl"] && modifiers["alt"])
+		if (!control_disabled && A.AICtrlAltClick(src))
+			return TRUE
 		if (CtrlAltClickOn(A))
 			return TRUE
 	else if (modifiers["shift"] && modifiers["ctrl"])
+		if (!control_disabled && A.AICtrlShiftClick(src))
+			return TRUE
 		if (CtrlShiftClickOn(A))
 			return TRUE
 	else if (modifiers["shift"] && modifiers["alt"])
+		if (!control_disabled && A.AIAltShiftClick(src))
+			return TRUE
 		if (AltShiftClickOn(A))
 			return TRUE
 	else if (modifiers["middle"])
+		if (!control_disabled && A.AIMiddleClick(src))
+			return TRUE
 		if (MiddleClickOn(A))
 			return TRUE
 	else if (modifiers["shift"])
+		if (!control_disabled && A.AIShiftClick(src))
+			return TRUE
 		if (ShiftClickOn(A))
 			return TRUE
 	else if (modifiers["alt"])
+		if (!control_disabled && A.AIAltClick(src))
+			return TRUE
 		if (AltClickOn(A))
 			return TRUE
 	else if (modifiers["ctrl"])
+		if (!control_disabled && A.AICtrlClick(src))
+			return TRUE
 		if (CtrlClickOn(A))
 			return TRUE
 
@@ -100,47 +116,6 @@
  */
 /atom/proc/attack_ai(mob/user as mob)
 	return
-
-/*
-	Since the AI handles shift, ctrl, and alt-click differently
-	than anything else in the game, atoms have separate procs
-	for AI shift, ctrl, and alt clicking.
-*/
-
-/mob/living/silicon/ai/CtrlShiftClickOn(atom/A)
-	if(!control_disabled && A.AICtrlShiftClick(src))
-		return TRUE
-	return ..()
-
-/mob/living/silicon/ai/ShiftClickOn(atom/A)
-	if(!control_disabled && A.AIShiftClick(src))
-		return TRUE
-	return ..()
-
-/mob/living/silicon/ai/CtrlClickOn(atom/A)
-	if(!control_disabled && A.AICtrlClick(src))
-		return TRUE
-	return ..()
-
-/mob/living/silicon/ai/AltClickOn(atom/A)
-	if(!control_disabled && A.AIAltClick(src))
-		return TRUE
-	return ..()
-
-/mob/living/silicon/ai/MiddleClickOn(atom/A)
-	if(!control_disabled && A.AIMiddleClick(src))
-		return TRUE
-	return ..()
-
-/mob/living/silicon/ai/AltShiftClickOn(atom/A)
-	if (!control_disabled && A.AIAltShiftClick(src))
-		return TRUE
-	return ..()
-
-/mob/living/silicon/ai/CtrlAltShiftClickOn(atom/A)
-	if (!control_disabled && A.AICtrlAltShiftClick(src))
-		return TRUE
-	return ..()
 
 /*
 	The following criminally helpful code is just the previous code cleaned up;
@@ -201,16 +176,13 @@
 	return TRUE
 
 /atom/proc/AIAltClick(atom/A)
-	return AltClick(A)
+	return FALSE
 
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
 	if(usr.incapacitated())
 		return FALSE
 	Topic(src, list("command"="lethal", "value"="[!lethal]"))
 	return TRUE
-
-/obj/machinery/atmospherics/binary/pump/AIAltClick()
-	return AltClick()
 
 /atom/proc/AIMiddleClick(mob/living/silicon/user)
 	return FALSE
@@ -229,11 +201,11 @@
 
 
 /atom/proc/AIAltShiftClick(atom/A)
-	return AltShiftClick(A)
+	return FALSE
 
 
 /atom/proc/AICtrlAltShiftClick(atom/A)
-	return CtrlAltShiftClick(A)
+	return FALSE
 
 
 //
