@@ -98,7 +98,7 @@
 		var/obj/machinery/power/shield_generator/S = locate(href_list["ref"]) in shields
 		if(S)
 			deselect_shield()
-			GLOB.destroyed_event.register(S, src, /datum/nano_module/shields_monitor/proc/deselect_shield)
+			GLOB.destroyed_event.register(S, src, /datum/nano_module/shields_monitor::deselect_shield())
 			active = S
 		return 1
 

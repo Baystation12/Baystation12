@@ -56,7 +56,7 @@
 	if(activated)
 		activated = FALSE
 	else
-		addtimer(new Callback(src, /datum/artifact_effect/proc/toggle_off), on_time)
+		addtimer(new Callback(src, /datum/artifact_effect::toggle_off()), on_time)
 		activated = TRUE
 		toggled = TRUE
 	if(reveal_toggle && holder)

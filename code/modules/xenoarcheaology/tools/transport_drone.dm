@@ -199,7 +199,7 @@
 
 /obj/machinery/drone_pad/proc/finish_moving()
 	landing_animation(current_flight.payload, src.loc)
-	addtimer(new Callback(current_flight.payload, /atom/movable/proc/forceMove, src.loc), 3 SECONDS)
+	addtimer(new Callback(current_flight.payload, /atom/movable::forceMove(), src.loc), 3 SECONDS)
 	QDEL_NULL(current_flight)
 	update_icon()
 

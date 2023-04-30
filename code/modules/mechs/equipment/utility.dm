@@ -440,7 +440,7 @@
 					alpha = 0,
 					time = 1.25 SECONDS
 				)
-				addtimer(new Callback(warpeffect, /atom/movable/proc/forceMove, null), 1.25 SECONDS)
+				addtimer(new Callback(warpeffect, /atom/movable::forceMove(), null), 1.25 SECONDS)
 				playsound(warpeffect, 'sound/effects/heavy_cannon_blast.ogg', 50, 1)
 
 				var/list/atoms = list()

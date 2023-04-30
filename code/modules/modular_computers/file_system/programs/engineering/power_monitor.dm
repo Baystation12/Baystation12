@@ -93,7 +93,7 @@
 				warning("Powernet sensor with unset ID Tag! [S.x]X [S.y]Y [S.z]Z")
 			else
 				grid_sensors += S
-				GLOB.destroyed_event.register(S, src, /datum/nano_module/power_monitor/proc/remove_sensor)
+				GLOB.destroyed_event.register(S, src, /datum/nano_module/power_monitor::remove_sensor())
 
 /datum/nano_module/power_monitor/proc/remove_sensor(removed_sensor, update_ui = TRUE)
 	if(active_sensor == removed_sensor)
@@ -101,7 +101,7 @@
 		if(update_ui)
 			SSnano.update_uis(src)
 	grid_sensors -= removed_sensor
-	GLOB.destroyed_event.unregister(removed_sensor, src, /datum/nano_module/power_monitor/proc/remove_sensor)
+	GLOB.destroyed_event.unregister(removed_sensor, src, /datum/nano_module/power_monitor::remove_sensor())
 
 // Allows us to process UI clicks, which are relayed in form of hrefs.
 /datum/nano_module/power_monitor/Topic(href, href_list)

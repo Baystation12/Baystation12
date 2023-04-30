@@ -71,7 +71,7 @@
 
 	if (A && yes)
 		A.last_bumped = world.time
-		invoke_async(A, /atom/proc/Bumped, src) // Avoids bad actors sleeping or unexpected side effects, as the legacy behavior was to spawn here
+		invoke_async(A, /atom::Bumped(), src) // Avoids bad actors sleeping or unexpected side effects, as the legacy behavior was to spawn here
 	..()
 
 /atom/movable/proc/forceMove(atom/destination)
@@ -215,8 +215,8 @@
 		GLOB.moved_event.register(master, src, follow_proc)
 		SetInitLoc()
 
-	GLOB.destroyed_event.register(master, src, /datum/proc/qdel_self)
-	GLOB.dir_set_event.register(master, src, /atom/proc/recursive_dir_set)
+	GLOB.destroyed_event.register(master, src, /datum::qdel_self())
+	GLOB.dir_set_event.register(master, src, /atom::recursive_dir_set())
 
 	. = ..()
 

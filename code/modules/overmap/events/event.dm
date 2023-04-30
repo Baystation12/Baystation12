@@ -124,13 +124,13 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 
 	if(!length(active_hazards))
 		hazard_by_turf -= T
-		GLOB.entered_event.unregister(T, src, /singleton/overmap_event_handler/proc/on_turf_entered)
-		GLOB.exited_event.unregister(T, src, /singleton/overmap_event_handler/proc/on_turf_exited)
+		GLOB.entered_event.unregister(T, src, /singleton/overmap_event_handler::on_turf_entered())
+		GLOB.exited_event.unregister(T, src, /singleton/overmap_event_handler::on_turf_exited())
 	else
 		hazard_by_turf |= T
 		hazard_by_turf[T] = active_hazards
-		GLOB.entered_event.register(T, src,/singleton/overmap_event_handler/proc/on_turf_entered)
-		GLOB.exited_event.register(T, src, /singleton/overmap_event_handler/proc/on_turf_exited)
+		GLOB.entered_event.register(T, src, /singleton/overmap_event_handler::on_turf_entered())
+		GLOB.exited_event.register(T, src, /singleton/overmap_event_handler::on_turf_exited())
 
 	for(var/obj/effect/overmap/visitable/ship/ship in T)
 		for(var/datum/event/E in ship_events[ship])

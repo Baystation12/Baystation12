@@ -76,7 +76,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	notify_players()
 	adjust_to_planet_size()
 
-	addtimer(new Callback(src, /datum/event/exo_awakening/proc/start_spawning), delay_time)
+	addtimer(new Callback(src, /datum/event/exo_awakening::start_spawning()), delay_time)
 
 //Locates a planet with players on it and kills the event if there aren't enough present
 /datum/event/exo_awakening/proc/find_suitable_planet()
@@ -189,8 +189,8 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 			var/mob/living/simple_animal/hostile/M = new mob_to_spawn(T)
 			if (istype(M))
 				M.visible_message(SPAN_DANGER("\The [M] bursts forth from the ground!"))
-				GLOB.death_event.register(M,src,/datum/event/exo_awakening/proc/reduce_mob_count)
-				GLOB.destroyed_event.register(M,src,/datum/event/exo_awakening/proc/reduce_mob_count)
+				GLOB.death_event.register(M,src, /datum/event/exo_awakening::reduce_mob_count())
+				GLOB.destroyed_event.register(M,src, /datum/event/exo_awakening::reduce_mob_count())
 				LAZYADD(GLOB.exo_event_mob_count, M)
 
 				if (istype(chosen_planet, /obj/effect/overmap/visitable/sector/exoplanet))
@@ -207,8 +207,8 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	if (M in L)
 		LAZYREMOVE(L,M)
 
-	GLOB.death_event.unregister(M,src,/datum/event/exo_awakening/proc/reduce_mob_count)
-	GLOB.destroyed_event.unregister(M,src,/datum/event/exo_awakening/proc/reduce_mob_count)
+	GLOB.death_event.unregister(M,src, /datum/event/exo_awakening::reduce_mob_count())
+	GLOB.destroyed_event.unregister(M,src, /datum/event/exo_awakening::reduce_mob_count())
 
 /datum/event/exo_awakening/end()
 	if (!chosen_area)

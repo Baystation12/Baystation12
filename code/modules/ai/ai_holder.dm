@@ -43,7 +43,7 @@ if (!(datum.process_flags & AI_FASTPROCESSING)) { \
 
 /mob/living/Destroy()
 	if (ai_holder)
-		GLOB.stat_set_event.unregister(src, ai_holder, /datum/ai_holder/proc/holder_stat_change)
+		GLOB.stat_set_event.unregister(src, ai_holder, /datum/ai_holder::holder_stat_change())
 		QDEL_NULL(ai_holder)
 	return ..()
 

@@ -94,7 +94,7 @@
 	core_landmark = master
 	SetName(_name)
 	landmark_tag = master.shuttle_name + _name
-	GLOB.destroyed_event.register(master, src, /datum/proc/qdel_self)
+	GLOB.destroyed_event.register(master, src, /datum::qdel_self())
 	. = ..()
 
 /obj/effect/shuttle_landmark/visiting_shuttle/Destroy()

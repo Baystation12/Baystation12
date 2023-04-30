@@ -22,7 +22,7 @@
 	var/datum/genetics/side_effect/S = new tp
 
 	S.start(H)
-	addtimer(new Callback(H, /mob/proc/Weaken, rand(0, S.duration / 50)), 20)
+	addtimer(new Callback(H, /mob::Weaken(), rand(0, S.duration / 50)), 20)
 	sleep(S.duration)
 	H.SetWeakened(0)
 	S.finish(H)

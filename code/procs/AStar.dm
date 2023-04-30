@@ -12,7 +12,7 @@ And for the distance one i wrote:
 /turf/proc/Distance
 So an example use might be:
 
-src.path_list = AStar(src.loc, target.loc, /turf/proc/AdjacentTurfs, /turf/proc/Distance)
+src.path_list = AStar(src.loc, target.loc, /turf::AdjacentTurfs(), /turf::Distance())
 
 Note: The path is returned starting at the END node, so i wrote reverselist to reverse it for ease of use.
 

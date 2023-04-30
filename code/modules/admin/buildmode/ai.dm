@@ -124,7 +124,7 @@
 					to_chat(user, SPAN_WARNING("No AI type selected."))
 					return
 				if (!isnull(L.ai_holder))
-					GLOB.stat_set_event.unregister(L, L.ai_holder, /datum/ai_holder/proc/holder_stat_change)
+					GLOB.stat_set_event.unregister(L, L.ai_holder, /datum/ai_holder::holder_stat_change())
 					qdel(L.ai_holder)
 				L.ai_holder = new ai_type (L)
 				to_chat(user, SPAN_NOTICE("\The [L]'s AI type has been changed to [ai_type]"))

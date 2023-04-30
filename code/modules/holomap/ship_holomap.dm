@@ -112,8 +112,8 @@
 			user.client.images |= holomap_datum.station_map
 
 			watching_mob = user
-			GLOB.moved_event.register(watching_mob, src, /obj/machinery/ship_map/proc/checkPosition)
-			GLOB.destroyed_event.register(watching_mob, src, /obj/machinery/ship_map/proc/stopWatching)
+			GLOB.moved_event.register(watching_mob, src, /obj/machinery/ship_map::checkPosition())
+			GLOB.destroyed_event.register(watching_mob, src, /obj/machinery/ship_map::stopWatching())
 			update_use_power(POWER_USE_ACTIVE)
 
 			if(bogus)

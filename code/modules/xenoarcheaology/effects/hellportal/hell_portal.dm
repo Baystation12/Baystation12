@@ -85,7 +85,7 @@
 			gate.parent = src
 			portals += gate
 
-			GLOB.destroyed_event.register(gate, src, /datum/artifact_effect/hellportal/proc/reduce_portal_count)
+			GLOB.destroyed_event.register(gate, src, /datum/artifact_effect/hellportal::reduce_portal_count())
 
 /datum/artifact_effect/hellportal/proc/hurt_players(send_message = TRUE)
 	for (var/mob/living/carbon/human/H in range(effectrange, get_turf(holder)))
