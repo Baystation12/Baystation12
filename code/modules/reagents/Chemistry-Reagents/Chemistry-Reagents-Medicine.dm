@@ -554,7 +554,6 @@
 
 /datum/reagent/arithrazine/affect_blood(mob/living/carbon/M, alien, removed)
 	M.radiation = max(M.radiation - 70 * removed, 0)
-	M.adjustToxLoss(-10 * removed)
 	if(prob(60))
 		M.take_organ_damage(4 * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
 
@@ -842,10 +841,7 @@
 	value = 5
 
 /datum/reagent/rezadone/affect_blood(mob/living/carbon/M, alien, removed)
-	M.adjustCloneLoss(-20 * removed)
-	M.adjustOxyLoss(-2 * removed)
 	M.heal_organ_damage(20 * removed, 20 * removed)
-	M.adjustToxLoss(-20 * removed)
 	if(M.chem_doses[type] > 3 && ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/external/E in H.organs)
@@ -920,7 +916,7 @@
 		remove_self(5)
 		if(M.resuscitate())
 			var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART]
-			heart.take_internal_damage(heart.max_damage * 0.075)
+			heart.take_internal_damage(heart.max_damage * 0.025)
 
 /datum/reagent/lactate
 	name = "Lactic acid"
