@@ -30,25 +30,25 @@
 	if (modifiers["ctrl"] && modifiers["alt"] && modifiers["shift"])
 		if (CtrlAltShiftClickOn(A))
 			return TRUE
-	if (modifiers["ctrl"] && modifiers["alt"])
+	else if (modifiers["ctrl"] && modifiers["alt"])
 		if (CtrlAltClickOn(A))
 			return TRUE
-	if (modifiers["shift"] && modifiers["ctrl"])
+	else if (modifiers["shift"] && modifiers["ctrl"])
 		if (CtrlShiftClickOn(A))
 			return TRUE
-	if (modifiers["shift"] && modifiers["alt"])
+	else if (modifiers["shift"] && modifiers["alt"])
 		if (AltShiftClickOn(A))
 			return TRUE
-	if (modifiers["middle"])
+	else if (modifiers["middle"])
 		if (MiddleClickOn(A))
 			return TRUE
-	if (modifiers["shift"])
+	else if (modifiers["shift"])
 		if (ShiftClickOn(A))
 			return TRUE
-	if (modifiers["alt"])
+	else if (modifiers["alt"])
 		if (AltClickOn(A))
 			return TRUE
-	if (modifiers["ctrl"])
+	else if (modifiers["ctrl"])
 		if (CtrlClickOn(A))
 			return TRUE
 
