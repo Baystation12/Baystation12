@@ -56,7 +56,7 @@
 			SPAN_NOTICE("\The [user] begins dismantling \the [src] with \a [tool]."),
 			SPAN_NOTICE("You begin dismantling \the [src] with \a [tool].")
 		)
-		if (!do_after(user, 2.5 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled(2.5 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		var/obj/item/stack/material/wood/wood = new (loc, 5)
 		transfer_fingerprints_to(wood)

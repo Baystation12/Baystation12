@@ -56,7 +56,7 @@
 			SPAN_NOTICE("\The [user] starts burning away \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start burning away \the [src] with \the [tool].")
 		)
-		if (!do_after(user, 0.5 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool) || !welder.can_use(1, user, "to remove \the [src]"))
+		if (!user.do_skilled(1 SECOND, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool) || !welder.can_use(1, user, "to remove \the [src]"))
 			return TRUE
 		user.visible_message(
 			SPAN_NOTICE("\The [user] clears away \the [src] with \a [tool]."),

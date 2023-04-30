@@ -209,7 +209,7 @@
 			SPAN_NOTICE("\The [user] starts slicing \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start slicing \the [src] with \the [tool].")
 		)
-		if (!do_after(user, 3 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool) || !welder.remove_fuel(1, user))
+		if (!user.do_skilled(3 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool) || !welder.remove_fuel(1, user))
 			return TRUE
 		welded()
 		user.visible_message(
