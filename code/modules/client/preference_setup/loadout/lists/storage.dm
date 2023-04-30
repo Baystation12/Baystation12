@@ -64,11 +64,6 @@
 	cost = 2
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/storage/waistpack/big
-	display_name = "large waist pack"
-	path = /obj/item/storage/belt/waistpack/big
-	cost = 4
-
 /datum/gear/accessory/wallet
 	display_name = "wallet, colour select"
 	path = /obj/item/storage/wallet

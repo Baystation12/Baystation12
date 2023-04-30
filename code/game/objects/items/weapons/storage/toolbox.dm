@@ -14,7 +14,7 @@
 	base_parry_chance = 15
 	w_class = ITEM_SIZE_LARGE
 	max_w_class = ITEM_SIZE_NORMAL
-	max_storage_space = DEFAULT_LARGEBOX_STORAGE //enough to hold all starting contents
+	max_storage_space = ITEM_SIZE_NORMAL * 7
 	origin_tech = list(TECH_COMBAT = 1)
 	attack_verb = list("robusted")
 	use_sound = 'sound/effects/storage/toolbox.ogg'
@@ -42,14 +42,26 @@
 	desc = "Bright blue toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon_state = "blue"
 	item_state = "toolbox_blue"
-	startswith = list(/obj/item/screwdriver, /obj/item/wrench, /obj/item/weldingtool, /obj/item/crowbar, /obj/item/device/scanner/gas, /obj/item/wirecutters)
+	startswith = list(
+		/obj/item/screwdriver,
+		/obj/item/wrench,
+		/obj/item/weldingtool,
+		/obj/item/crowbar,
+		/obj/item/device/scanner/gas,
+		/obj/item/wirecutters
+	)
 
 /obj/item/storage/toolbox/electrical
 	name = "electrical toolbox"
 	desc = "Bright yellow toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon_state = "yellow"
 	item_state = "toolbox_yellow"
-	startswith = list(/obj/item/screwdriver, /obj/item/wirecutters, /obj/item/device/t_scanner, /obj/item/crowbar)
+	startswith = list(
+		/obj/item/screwdriver,
+		/obj/item/wirecutters,
+		/obj/item/device/t_scanner,
+		/obj/item/crowbar
+	)
 
 /obj/item/storage/toolbox/electrical/Initialize()
 	. = ..()
@@ -68,4 +80,12 @@
 	origin_tech = list(TECH_COMBAT = 1, TECH_ESOTERIC = 1)
 	attack_cooldown = 10
 	base_parry_chance = 30
-	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/screwdriver, /obj/item/wrench, /obj/item/weldingtool, /obj/item/crowbar, /obj/item/wirecutters, /obj/item/device/multitool)
+	startswith = list(
+		/obj/item/clothing/gloves/insulated,
+		/obj/item/screwdriver,
+		/obj/item/wrench,
+		/obj/item/weldingtool,
+		/obj/item/crowbar,
+		/obj/item/wirecutters,
+		/obj/item/device/multitool
+	)
