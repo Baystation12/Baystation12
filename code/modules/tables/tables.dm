@@ -92,29 +92,31 @@
 	. = ..()
 
 
-/obj/structure/table/use_weapon(obj/item/weapon, mob/user, list/click_params)
+/obj/structure/table/use_tool(obj/item/tool, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+
 	// Carpet - Add carpeting
-	if (istype(weapon, /obj/item/stack/tile/carpet))
+	if (istype(tool, /obj/item/stack/tile/carpet))
 		if (carpeted)
 			USE_FEEDBACK_FAILURE("\The [src] is already carpeted.")
 			return TRUE
 		if (!material)
 			USE_FEEDBACK_FAILURE("\The [src] needs plating before you can carpet it.")
 			return TRUE
-		var/obj/item/stack/tile/carpet/carpet = weapon
+		var/obj/item/stack/tile/carpet/carpet = tool
 		if (!carpet.use(1))
 			USE_FEEDBACK_STACK_NOT_ENOUGH(carpet, 1, "to pad \the [src].")
 			return TRUE
 		carpeted = TRUE
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] pads \the [src] with \a [weapon]."),
-			SPAN_NOTICE("You pad \the [src] with \the [weapon].")
+			SPAN_NOTICE("\The [user] pads \the [src] with \a [tool]."),
+			SPAN_NOTICE("You pad \the [src] with \the [tool].")
 		)
 		return TRUE
 
 	// Crowbar - Remove carpeting
-	if (isCrowbar(weapon))
+	if (isCrowbar(tool))
 		if (!carpeted)
 			USE_FEEDBACK_FAILURE("\The [src] has no carpeting to remove.")
 			return TRUE
@@ -122,31 +124,31 @@
 		carpeted = FALSE
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] removes the carpting from \the [src] with \a [weapon]."),
-			SPAN_NOTICE("You remove the carpting from \the [src] with \the [weapon].")
+			SPAN_NOTICE("\The [user] removes the carpting from \the [src] with \a [tool]."),
+			SPAN_NOTICE("You remove the carpting from \the [src] with \the [tool].")
 		)
 		return TRUE
 
-	// Energy Blade, Psiblade
-	if (istype(weapon, /obj/item/melee/energy/blade) || istype(weapon, /obj/item/psychic_power/psiblade/master/grand/paramount))
+	// Energy Blade, Psiblade - Dismantle table
+	if (istype(tool, /obj/item/melee/energy/blade) || istype(tool, /obj/item/psychic_power/psiblade/master/grand/paramount))
 		var/datum/effect/effect/system/spark_spread/spark_system = new(src)
 		spark_system.set_up(5, EMPTY_BITFIELD, loc)
 		spark_system.start()
 		playsound(loc, 'sound/weapons/blade1.ogg', 50, TRUE)
 		playsound(loc, "sparks", 50, TRUE)
 		user.visible_message(
-			SPAN_WARNING("\The [user] slices \the [src] apart with \a [weapon]."),
-			SPAN_WARNING("You slice \the [src] apart with \the [weapon].")
+			SPAN_WARNING("\The [user] slices \the [src] apart with \a [tool]."),
+			SPAN_WARNING("You slice \the [src] apart with \the [tool].")
 		)
 		break_to_parts()
 		return TRUE
 
 	// Material - Plate table
-	if (istype(weapon, /obj/item/stack/material))
+	if (istype(tool, /obj/item/stack/material))
 		if (material)
-			reinforce_table(weapon, user)
+			reinforce_table(tool, user)
 			return TRUE
-		material = common_material_add(weapon, user, "plat")
+		material = common_material_add(tool, user, "plat")
 		if (material)
 			update_connections(TRUE)
 			update_icon()
@@ -155,32 +157,32 @@
 		return TRUE
 
 	// Welding Tool - Repair damage
-	if (isWelder(weapon))
+	if (isWelder(tool))
 		if (!health_damaged())
 			USE_FEEDBACK_FAILURE("\The [src] isn't damaged.")
 			return TRUE
-		var/obj/item/weldingtool/welder = weapon
+		var/obj/item/weldingtool/welder = tool
 		if (!welder.can_use(1, user, "to repair \the [src]"))
 			return TRUE
 		playsound(src, 'sound/items/Welder.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts repairing \the [src] with \a [weapon]."),
-			SPAN_NOTICE("You start repairing \the [src] with \the [weapon].")
+			SPAN_NOTICE("\The [user] starts repairing \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start repairing \the [src] with \the [tool].")
 		)
-		if (!user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, weapon) || !welder.remove_fuel(1))
+		if (!user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool) || !welder.remove_fuel(1))
 			return TRUE
 		playsound(src, 'sound/items/Welder.ogg', 50, TRUE)
 		restore_health(get_max_health() / 5) // 20% repair per application
 		user.visible_message(
-			SPAN_NOTICE("\The [user] repairs some of \the [src]'s damage with \a [weapon]."),
-			SPAN_NOTICE("You repair some of \the [src]'s damage with \the [weapon].")
+			SPAN_NOTICE("\The [user] repairs some of \the [src]'s damage with \a [tool]."),
+			SPAN_NOTICE("You repair some of \the [src]'s damage with \the [tool].")
 		)
 		return TRUE
 
 	// Wrench - Remove material
-	if (isWrench(weapon))
+	if (isWrench(tool))
 		if (!material)
-			dismantle(weapon, user)
+			dismantle(tool, user)
 			return TRUE
 		if (reinforced)
 			USE_FEEDBACK_FAILURE("\The [src]'s reinforcements need to be removed before you can remove the plating.")
@@ -188,7 +190,7 @@
 		if (carpeted)
 			USE_FEEDBACK_FAILURE("\The [src]'s carpeting needs to be removed before you can remove the plating.")
 			return TRUE
-		remove_material(weapon, user)
+		remove_material(tool, user)
 		if (!material)
 			update_connections(TRUE)
 			update_icon()
@@ -199,22 +201,16 @@
 		return TRUE
 
 	// Screwdriver - Remove reinforcement
-	if (isScrewdriver(weapon))
+	if (isScrewdriver(tool))
 		if (!reinforced)
 			USE_FEEDBACK_FAILURE("\The [src] has no reinforcements to remove.")
 			return TRUE
-		remove_reinforced(weapon, user)
+		remove_reinforced(tool, user)
 		if (!reinforced)
 			update_desc()
 			update_icon()
 			update_material()
 		return TRUE
-
-	return ..()
-
-
-/obj/structure/table/use_tool(obj/item/tool, mob/user, list/click_params)
-	SHOULD_CALL_PARENT(FALSE)
 
 	// Put things on table
 	if (can_plate && !material)
