@@ -102,7 +102,7 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 	if (BP_IS_BRITTLE(organ))
 		to_chat(user, SPAN_WARNING("\The [target]'s [organ.name] is hard and brittle - \the [src] cannot repair it."))
 		return TRUE
-	var/use_amount = min(amount, Ceil(organ.burn_dam / 3), 5)
+	var/use_amount = min(amount, ceil(organ.burn_dam / 3), 5)
 	if (!can_use(use_amount))
 		to_chat(user, SPAN_WARNING("You don't have enough of \the [src] left to repair \the [target]'s [organ.name]."))
 		return TRUE
@@ -396,14 +396,14 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 	var/obj/item/cell/cell = get_cell()
 	if (!cell)
 		return 0
-	return Floor(cell.charge / cost_per_cable)
+	return floor(cell.charge / cost_per_cable)
 
 
 /obj/item/stack/cable_coil/fabricator/get_max_amount()
 	var/obj/item/cell/cell = get_cell()
 	if (!cell)
 		return 0
-	return Floor(cell.maxcharge / cost_per_cable)
+	return floor(cell.maxcharge / cost_per_cable)
 
 
 /obj/item/stack/cable_coil/yellow

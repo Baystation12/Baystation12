@@ -220,7 +220,7 @@
 
 		if(length(assembly_components) > components_per_page)
 			HTML += "<br>\["
-			for(var/i = 1 to Ceil(length(assembly_components)/components_per_page))
+			for(var/i = 1 to ceil(length(assembly_components)/components_per_page))
 				if((i-1) == interact_page)
 					HTML += " [i]"
 				else
@@ -410,7 +410,7 @@
 	add_allowed_scanner(user.ckey)
 
 	// Make sure we're not on an invalid page
-	interact_page = clamp(interact_page, 0, Ceil(length(assembly_components)/components_per_page)-1)
+	interact_page = clamp(interact_page, 0, ceil(length(assembly_components)/components_per_page)-1)
 
 	return TRUE
 

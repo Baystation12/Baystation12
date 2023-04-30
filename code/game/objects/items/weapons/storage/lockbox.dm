@@ -102,7 +102,7 @@
 
 /obj/item/storage/lockbox/vials/on_update_icon()
 	var/total_contents = count_by_type(contents, /obj/item/reagent_containers/glass/beaker/vial)
-	src.icon_state = "vialbox[Floor(total_contents/2)]"
+	src.icon_state = "vialbox[floor(total_contents/2)]"
 	src.overlays.Cut()
 	if (!broken)
 		overlays += image(icon, src, "led[locked]")

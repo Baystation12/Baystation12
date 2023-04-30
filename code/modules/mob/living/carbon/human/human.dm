@@ -1731,9 +1731,9 @@
 //Get fluffy numbers
 /mob/living/carbon/human/proc/get_blood_pressure()
 	if(status_flags & FAKEDEATH)
-		return "[Floor(120+rand(-5,5))*0.25]/[Floor(80+rand(-5,5)*0.25)]"
+		return "[floor(120+rand(-5,5))*0.25]/[floor(80+rand(-5,5)*0.25)]"
 	var/blood_result = get_blood_circulation()
-	return "[Floor((120+rand(-5,5))*(blood_result/100))]/[Floor((80+rand(-5,5))*(blood_result/100))]"
+	return "[floor((120+rand(-5,5))*(blood_result/100))]/[floor((80+rand(-5,5))*(blood_result/100))]"
 
 //Point at which you dun breathe no more. Separate from asystole crit, which is heart-related.
 /mob/living/carbon/human/nervous_system_failure()

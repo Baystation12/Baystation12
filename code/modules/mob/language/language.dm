@@ -44,11 +44,11 @@
 
 	for(var/i = 0;i<name_count;i++)
 		new_name = ""
-		for(var/x = rand(Floor(syllable_count/syllable_divisor),syllable_count);x>0;x--)
+		for(var/x = rand(floor(syllable_count/syllable_divisor),syllable_count);x>0;x--)
 			new_name += pick(syllables)
 		full_name += " [capitalize(lowertext(new_name))]"
 
-	return "[trim(full_name)]"
+	return "[trimtext(full_name)]"
 
 /datum/language
 	var/list/scramble_cache = list()
@@ -73,7 +73,7 @@
 				nword = capitalize(nword)
 				new_sentence = FALSE
 			if(ends_sentence)
-				nword = trim(nword)
+				nword = trimtext(nword)
 				nword = "[nword][input_ending] "
 
 		if(ends_sentence)
@@ -83,7 +83,7 @@
 
 	. = jointext(scrambled_text, null)
 	. = capitalize(.)
-	. = trim(.)
+	. = trimtext(.)
 
 /datum/language/proc/scramble_word(input)
 	if(!syllables || !length(syllables))

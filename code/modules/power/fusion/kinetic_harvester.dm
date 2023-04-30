@@ -62,7 +62,7 @@
 	for(var/mat in stored)
 		var/material/material = SSmaterials.get_material_by_name(mat)
 		if(material)
-			var/sheets = Floor(stored[mat]/(material.units_per_sheet * 1.5))
+			var/sheets = floor(stored[mat]/(material.units_per_sheet * 1.5))
 			data["materials"] += list(list("material" = mat, "rawamount" = stored[mat], "amount" = sheets, "harvest" = harvesting[mat]))
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -107,7 +107,7 @@
 		var/material/material = SSmaterials.get_material_by_name(mat)
 		if(material)
 			var/sheet_cost = (material.units_per_sheet * 1.5)
-			var/sheets = Floor(stored[mat]/sheet_cost)
+			var/sheets = floor(stored[mat]/sheet_cost)
 			if(sheets > 0)
 				material.place_sheet(loc, sheets)
 				stored[mat] -= sheets * sheet_cost

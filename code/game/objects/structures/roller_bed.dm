@@ -79,7 +79,7 @@
 	if (!iv_bag)
 		to_chat(user, "It has no IV bag attached.")
 		return
-	var/volume = Floor(iv_bag.reagents.total_volume)
+	var/volume = floor(iv_bag.reagents.total_volume)
 	if (!volume)
 		to_chat(user, "It has an empty [iv_bag.name] attached.")
 		return

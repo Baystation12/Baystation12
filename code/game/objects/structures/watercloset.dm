@@ -97,7 +97,7 @@
 	if(fluid_here <= 0)
 		return
 
-	T.remove_fluid(Ceil(fluid_here*drainage))
+	T.remove_fluid(ceil(fluid_here*drainage))
 	T.show_bubbles()
 	if(world.time > last_gurgle + 80)
 		last_gurgle = world.time

@@ -217,7 +217,7 @@
 			auth = 0
 			screen = 0
 		else
-			var/dkey = trim(input(usr, "Please enter the decryption key.") as text|null)
+			var/dkey = trimtext(input(usr, "Please enter the decryption key.") as text|null)
 			if(dkey && dkey != "")
 				if(src.linkedServer.decryptkey == dkey)
 					auth = 1
@@ -252,10 +252,10 @@
 			message = noserver
 		else
 			if(auth)
-				var/dkey = trim(input(usr, "Please enter the decryption key.") as text|null)
+				var/dkey = trimtext(input(usr, "Please enter the decryption key.") as text|null)
 				if(dkey && dkey != "")
 					if(src.linkedServer.decryptkey == dkey)
-						var/newkey = trim(input(usr,"Please enter the new key (3 - 16 characters max):"))
+						var/newkey = trimtext(input(usr,"Please enter the new key (3 - 16 characters max):"))
 						if(length(newkey) <= 3)
 							message = SPAN_NOTICE("NOTICE: Decryption key too short!")
 						else if(length(newkey) > 16)

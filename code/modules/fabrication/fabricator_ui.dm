@@ -72,7 +72,7 @@
 			if(ispath(R.path, /obj/item/stack) && max_sheets >= PRINT_MULTIPLIER_DIVISOR)
 				var/obj/item/stack/R_stack = R.path
 				build_option["multipliers"] = list()
-				for(var/i = 1 to Floor(min(R_stack.max_amount, max_sheets)/PRINT_MULTIPLIER_DIVISOR))
+				for(var/i = 1 to floor(min(R_stack.max_amount, max_sheets)/PRINT_MULTIPLIER_DIVISOR))
 					var/mult = i * PRINT_MULTIPLIER_DIVISOR
 					build_option["multipliers"] += list(list("label" = "x[mult]", "multiplier" = mult))
 			data["build_options"] += list(build_option)

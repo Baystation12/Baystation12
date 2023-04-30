@@ -17,7 +17,7 @@
 
 	var/datum/language/speaking = parse_language(message)
 
-	message = trim(message)
+	message = trimtext(message)
 
 	if(!message || stat)
 		return

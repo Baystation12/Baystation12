@@ -30,7 +30,7 @@
 			if(ispath(mat_path, /material))
 				var/material/mat = SSmaterials.get_material_by_name(mat_name)
 				if(mat && stored_material[mat_path] > mat.units_per_sheet && mat.stack_type)
-					var/sheet_count = Floor(stored_material[mat_path]/mat.units_per_sheet)
+					var/sheet_count = floor(stored_material[mat_path]/mat.units_per_sheet)
 					stored_material[mat_path] -= sheet_count * mat.units_per_sheet
 					mat.place_sheet(get_turf(src), sheet_count)
 			else if(!isnull(stored_material[mat_path]))

@@ -153,7 +153,7 @@
 			to_chat(user, SPAN_NOTICE("[src]'s motors resist your effort."))
 		return
 	if(istype(C, /obj/item/stack/material) && C.get_material_name() == MATERIAL_PLASTEEL)
-		var/amt = Ceil(get_damage_value() / 150)
+		var/amt = ceil(get_damage_value() / 150)
 		if(!amt)
 			to_chat(user, SPAN_NOTICE("\The [src] is already fully functional."))
 			return

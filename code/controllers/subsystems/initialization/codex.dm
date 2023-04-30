@@ -54,7 +54,7 @@ SUBSYSTEM_DEF(codex)
 		var/key = linkRegex.group[4]
 		if(linkRegex.group[2])
 			key = linkRegex.group[3]
-		key = lowertext(trim(key))
+		key = lowertext(trimtext(key))
 		var/datum/codex_entry/linked_entry = get_entry_by_string(key)
 		var/replacement = linkRegex.group[4]
 		if(linked_entry)
@@ -74,10 +74,10 @@ SUBSYSTEM_DEF(codex)
 		return entries_by_string[lowertext(entry)]
 
 /datum/controller/subsystem/codex/proc/add_entry_by_string(string, entry)
-	entries_by_string[lowertext(trim(string))] = entry
+	entries_by_string[lowertext(trimtext(string))] = entry
 
 /datum/controller/subsystem/codex/proc/get_entry_by_string(string)
-	return entries_by_string[lowertext(trim(string))]
+	return entries_by_string[lowertext(trimtext(string))]
 
 /datum/controller/subsystem/codex/proc/present_codex_entry(mob/presenting_to, datum/codex_entry/entry)
 	if(entry && istype(presenting_to) && presenting_to.client)
@@ -90,7 +90,7 @@ SUBSYSTEM_DEF(codex)
 	if(!initialized)
 		return list()
 
-	searching = sanitize(lowertext(trim(searching)))
+	searching = sanitize(lowertext(trimtext(searching)))
 	if(!searching)
 		return list()
 	if(!search_cache[searching])

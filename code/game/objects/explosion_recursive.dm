@@ -49,7 +49,7 @@ var/global/explosion_in_progress = 0
 		severity /= max(3, power / 3) // One third the total explosion power - One third because there are three power levels and I want each one to take up a third of the crater
 		severity = clamp(severity, 1, 3) // Sanity
 		severity = 4 - severity // Invert the value to accomodate lower numbers being a higher severity. Removing this inversion would require a lot of refactoring of math in `ex_act()` handlers.
-		severity = Floor(severity)
+		severity = floor(severity)
 
 		var/x = T.x
 		var/y = T.y

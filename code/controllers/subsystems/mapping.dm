@@ -82,7 +82,7 @@ SUBSYSTEM_DEF(mapping)
 	for (var/t in Lines)
 		if (!t)
 			continue
-		t = trim(t)
+		t = trimtext(t)
 		if (length(t) == 0)
 			continue
 		else if (copytext(t, 1, 2) == "#")

@@ -62,7 +62,7 @@
 				if(SSmaterials.alloy_components[metal])
 					attempt_to_alloy[metal] = TRUE
 				else
-					result = min(sheets_per_tick - sheets, Floor(ores_processing[metal] / M.units_per_sheet))
+					result = min(sheets_per_tick - sheets, floor(ores_processing[metal] / M.units_per_sheet))
 					ores_processing[metal] -= result * M.units_per_sheet
 					result = -(result)
 			else if(ore_mode == ORE_COMPRESS)
@@ -93,7 +93,7 @@
 				var/material/M = thing
 				var/making
 				for(var/otherthing in M.alloy_materials)
-					var/_make = Floor(ores_stored[otherthing] / M.alloy_materials[otherthing])
+					var/_make = floor(ores_stored[otherthing] / M.alloy_materials[otherthing])
 					if(isnull(making) || making > _make)
 						making = _make
 				making = min(sheets_per_tick-sheets, making)
@@ -104,7 +104,7 @@
 					break
 
 /obj/machinery/mineral/processing_unit/proc/attempt_smelt(material/metal, max_result)
-	. = clamp(Floor(ores_stored[metal.name]/metal.units_per_sheet),1,max_result)
+	. = clamp(floor(ores_stored[metal.name]/metal.units_per_sheet),1,max_result)
 	ores_stored[metal.name] -= . * metal.units_per_sheet
 	var/material/M = SSmaterials.get_material_by_name(metal.ore_smelts_to)
 	if(istype(M))
@@ -113,10 +113,10 @@
 		. = -(.)
 
 /obj/machinery/mineral/processing_unit/proc/attempt_compression(material/metal, max_result)
-	var/making = clamp(Floor(ores_stored[metal.name]/metal.units_per_sheet),1,max_result)
+	var/making = clamp(floor(ores_stored[metal.name]/metal.units_per_sheet),1,max_result)
 	if(making >= 2)
 		ores_stored[metal.name] -= making * metal.units_per_sheet
-		. = Floor(making * 0.5)
+		. = floor(making * 0.5)
 		var/material/M = SSmaterials.get_material_by_name(metal.ore_compresses_to)
 		if(istype(M))
 			M.place_sheet(output_turf, .)
@@ -131,7 +131,7 @@
 	for(var/ore in ores_processing)
 		if(!ores_stored[ore] && !report_all_ores) continue
 		var/material/M = SSmaterials.get_material_by_name(ore)
-		var/line = "[capitalize(M.display_name)]</td><td>[Floor(ores_stored[ore] / M.units_per_sheet)] ([ores_stored[ore]]u)"
+		var/line = "[capitalize(M.display_name)]</td><td>[floor(ores_stored[ore] / M.units_per_sheet)] ([ores_stored[ore]]u)"
 		var/status_string
 		if(ores_processing[ore])
 			switch(ores_processing[ore])

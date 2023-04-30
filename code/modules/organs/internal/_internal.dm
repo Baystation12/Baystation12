@@ -10,7 +10,7 @@
 
 /obj/item/organ/internal/New(mob/living/carbon/holder)
 	if(max_damage)
-		min_bruised_damage = Floor(max_damage / 4)
+		min_bruised_damage = floor(max_damage / 4)
 	..()
 	if(istype(holder))
 		holder.internal_organs |= src
@@ -119,9 +119,9 @@
 	return damage >= min_bruised_damage
 
 /obj/item/organ/internal/proc/set_max_damage(ndamage)
-	max_damage = Floor(ndamage)
-	min_broken_damage = Floor(0.75 * max_damage)
-	min_bruised_damage = Floor(0.25 * max_damage)
+	max_damage = floor(ndamage)
+	min_broken_damage = floor(0.75 * max_damage)
+	min_bruised_damage = floor(0.25 * max_damage)
 
 /obj/item/organ/internal/take_general_damage(amount, silent = FALSE)
 	take_internal_damage(amount, silent)
@@ -173,7 +173,7 @@
 	if(damage > min_broken_damage)
 		var/scarring = damage/max_damage
 		scarring = 1 - 0.3 * scarring ** 2 // Between ~15 and 30 percent loss
-		var/new_max_dam = Floor(scarring * max_damage)
+		var/new_max_dam = floor(scarring * max_damage)
 		if(new_max_dam < max_damage)
 			to_chat(user, SPAN_WARNING("Not every part of [src] could be saved, some dead tissue had to be removed, making it more suspectable to damage in the future."))
 			set_max_damage(new_max_dam)
