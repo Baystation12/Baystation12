@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - admin: The `Check Bans` button in the player panel now uses a cleaned up and better
+      organized UI.
