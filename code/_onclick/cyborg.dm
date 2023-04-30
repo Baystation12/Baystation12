@@ -13,28 +13,28 @@
 
 	var/list/modifiers = params2list(params)
 	if (modifiers["ctrl"] && modifiers["alt"] && modifiers["shift"])
-		if (CtrlAltShiftClickOn(A))
+		if (A.BorgCtrlAltShiftClick(src) || A.AICtrlAltShiftClick(src) || CtrlAltShiftClickOn(A))
 			return TRUE
 	else if (modifiers["ctrl"] && modifiers["alt"])
-		if (CtrlAltClickOn(A))
+		if (A.BorgCtrlAltClick(src) || A.AICtrlAltClick(src) || CtrlAltClickOn(A))
 			return TRUE
 	else if (modifiers["shift"] && modifiers["ctrl"])
-		if (CtrlShiftClickOn(A))
+		if (A.BorgCtrlShiftClick(src) || A.AICtrlShiftClick(src) || CtrlShiftClickOn(A))
 			return TRUE
 	else if (modifiers["shift"] && modifiers["alt"])
-		if (AltShiftClickOn(A))
+		if (A.BorgAltShiftClick(src) || A.AIAltShiftClick(src) || AltShiftClickOn(A))
 			return TRUE
 	else if (modifiers["middle"])
-		if (MiddleClickOn(A))
+		if (A.BorgMiddleClick(src) || A.AIMiddleClick(src) || MiddleClickOn(A))
 			return TRUE
 	else if (modifiers["shift"])
-		if (ShiftClickOn(A))
+		if (A.BorgShiftClick(src) || A.AIShiftClick(src) || ShiftClickOn(A))
 			return TRUE
 	else if (modifiers["alt"])
-		if (AltClickOn(A))
+		if (A.BorgAltClick(src) || A.AIAltClick(src) || AltClickOn(A))
 			return TRUE
 	else if (modifiers["ctrl"])
-		if (CtrlClickOn(A))
+		if (A.BorgCtrlClick(src) || A.AICtrlClick(src) || CtrlClickOn(A))
 			return TRUE
 
 	if(incapacitated())
@@ -107,72 +107,32 @@
 	cycle_modules()
 	return TRUE
 
-//Give cyborgs hotkey clicks without breaking existing uses of hotkey clicks
-// for non-doors/apcs
 /mob/living/silicon/robot/CtrlAltClickOn(atom/A)
-	return A.BorgCtrlAltClick(src) || pointed(A)
+	return pointed(A)
 
-/mob/living/silicon/robot/ShiftClickOn(atom/A)
-	return A.BorgShiftClick(src)
+/atom/proc/BorgMiddleClick(mob/living/silicon/robot/user)
+	return FALSE
 
-/mob/living/silicon/robot/CtrlClickOn(atom/A)
-	return A.BorgCtrlClick(src)
+/atom/proc/BorgCtrlAltClick(mob/living/silicon/robot/user)
+	return FALSE
 
-/mob/living/silicon/robot/AltClickOn(atom/A)
-	return A.BorgAltClick(src)
+/atom/proc/BorgShiftClick(mob/living/silicon/robot/user)
+	return FALSE
 
-/mob/living/silicon/robot/CtrlShiftClickOn(atom/A)
-	return A.BorgCtrlShiftClick(src)
-
-/mob/living/silicon/robot/AltShiftClickOn(atom/A)
-	return A.BorgAltShiftClick(src)
-
-/mob/living/silicon/robot/CtrlAltShiftClickOn(atom/A)
-	return A.BorgCtrlAltShiftClick(src)
-
-/atom/proc/BorgCtrlAltClick(mob/living/silicon/robot/user) //forward to human click if not overriden
-	return CtrlAltClick(user)
-
-/atom/proc/BorgShiftClick(mob/living/silicon/robot/user) //forward to human click if not overriden
-	return ShiftClick(user)
-
-/obj/machinery/door/airlock/BorgShiftClick()  // Opens and closes doors! Forwards to AI code.
-	return AIShiftClick()
-
-/atom/proc/BorgCtrlClick(mob/living/silicon/robot/user) //forward to human click if not overriden
-	return CtrlClick(user)
-
-/obj/machinery/door/airlock/BorgCtrlClick() // Bolts doors. Forwards to AI code.
-	return AICtrlClick()
-
-/obj/machinery/power/apc/BorgCtrlClick() // turns off/on APCs. Forwards to AI code.
-	return AICtrlClick()
-
-/obj/machinery/turretid/BorgCtrlClick() //turret control on/off. Forwards to AI code.
-	return AICtrlClick()
+/atom/proc/BorgCtrlClick(mob/living/silicon/robot/user)
+	return FALSE
 
 /atom/proc/BorgAltClick(mob/living/silicon/robot/user)
-	return AltClick(user)
-
-/obj/machinery/door/airlock/BorgCtrlShiftClick() // Eletrifies doors. Forwards to AI code.
-	if (usr.a_intent != I_HELP)
-		return AICtrlShiftClick()
-	return ..()
-
-/obj/machinery/turretid/BorgAltClick() //turret lethal on/off. Forwards to AI code.
-	return AIAltClick()
-
-/obj/machinery/atmospherics/binary/pump/BorgAltClick()
-	return AltClick()
+	return FALSE
 
 /atom/proc/BorgCtrlShiftClick(mob/living/silicon/robot/user)
-	return CtrlShiftClick(user)
+	return FALSE
 
 /atom/proc/BorgAltShiftClick(mob/living/silicon/robot/user)
-	return AIAltShiftClick(user)
+	return FALSE
 
 /atom/proc/BorgCtrlAltShiftClick(mob/living/silicon/robot/user)
-	return AICtrlAltShiftClick(user)
+	return FALSE
 
 /*
 	As with AI, these are not used in click code,
