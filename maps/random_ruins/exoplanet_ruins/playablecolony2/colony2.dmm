@@ -14,15 +14,6 @@
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/map_template/colony2/engineering)
-"an" = (
-/obj/machinery/light/spot{
-	dir = 1
-	},
-/turf/simulated/floor/reinforced/airless,
-/area/map_template/colony2/external)
-"aB" = (
-/turf/simulated/floor/reinforced/airless,
-/area/map_template/colony2/external)
 "aK" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/structure/cable{
@@ -72,7 +63,9 @@
 "bt" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/red,
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "bE" = (
 /obj/effect/paint/ocean,
@@ -127,7 +120,9 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "cz" = (
 /obj/machinery/portable_atmospherics/hydroponics,
@@ -501,7 +496,9 @@
 /obj/machinery/computer/mining{
 	pixel_y = 32
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "hj" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -519,7 +516,9 @@
 /obj/item/device/radio/intercom/map_preset/playablecolony2{
 	pixel_y = 21
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "hT" = (
 /obj/effect/catwalk_plated/dark,
@@ -619,7 +618,9 @@
 	dir = 8;
 	pixel_x = 21
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "kb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -648,13 +649,17 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "kn" = (
 /obj/machinery/atmospherics/unary/tank/nitrogen{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "lj" = (
 /obj/machinery/fabricator/hacked,
@@ -705,14 +710,18 @@
 	dir = 1;
 	id_tag = "playablecolonymain2_pump_out_external"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "nE" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
 	dir = 6
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "nU" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/scrubbers,
@@ -888,7 +897,9 @@
 "rr" = (
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
 /obj/machinery/meter,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "rL" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -896,7 +907,9 @@
 	input_turf = 8;
 	output_turf = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "rM" = (
 /obj/machinery/conveyor{
@@ -907,13 +920,17 @@
 /obj/machinery/computer/mining{
 	pixel_x = 32
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "rO" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 5
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "so" = (
 /obj/machinery/door/airlock/civilian,
@@ -949,7 +966,9 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "sO" = (
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
@@ -959,7 +978,9 @@
 	name = "Atmospheric Pod Blast Shutter"
 	},
 /obj/effect/floor_decal/industrial/hatch,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "sZ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -1012,18 +1033,24 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "uq" = (
 /obj/machinery/atmospherics/valve,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "ux" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/mineral/unloading_machine{
 	input_turf = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "uT" = (
 /obj/machinery/light{
@@ -1055,13 +1082,17 @@
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "vj" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "vn" = (
 /obj/effect/paint/ocean,
@@ -1214,14 +1245,18 @@
 	dir = 4
 	},
 /obj/machinery/meter,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "zk" = (
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "zv" = (
 /obj/effect/catwalk_plated/dark,
@@ -1238,7 +1273,9 @@
 "zZ" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red,
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Af" = (
 /obj/machinery/light{
@@ -1252,7 +1289,9 @@
 /obj/machinery/atmospherics/unary/engine{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Ap" = (
 /obj/machinery/cryopod{
@@ -1375,7 +1414,9 @@
 /obj/machinery/mining/brace{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "BU" = (
 /obj/effect/catwalk_plated/dark,
@@ -1385,7 +1426,9 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony2/storage)
 "BZ" = (
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Ch" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
@@ -1441,7 +1484,9 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "CA" = (
 /obj/machinery/alarm{
@@ -1501,7 +1546,9 @@
 	dir = 4;
 	start_pressure = 120
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "DD" = (
 /obj/machinery/light,
@@ -1526,12 +1573,16 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "DJ" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/blue,
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "DQ" = (
 /obj/effect/floor_decal/corner/paleblue/mono,
@@ -1585,7 +1636,9 @@
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "ED" = (
 /obj/effect/floor_decal/corner/paleblue/mono,
@@ -1610,7 +1663,9 @@
 	name = "Atmospheric Pod Blast Shutter"
 	},
 /obj/effect/floor_decal/industrial/hatch,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Fm" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -1659,7 +1714,9 @@
 	dir = 4;
 	id = "colonymine2"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Gq" = (
 /obj/machinery/door/blast/regular{
@@ -1672,13 +1729,17 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Gt" = (
 /obj/effect/floor_decal/industrial/loading,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/ore_box,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "GS" = (
 /obj/structure/table/steel_reinforced,
@@ -1711,7 +1772,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/supply,
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel,
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Hw" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1725,7 +1788,9 @@
 	dir = 8;
 	start_pressure = 120
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "HK" = (
 /obj/machinery/atmospherics/pipe/simple/visible/supply,
@@ -1733,7 +1798,9 @@
 	dir = 1
 	},
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "HQ" = (
 /obj/structure/table/rack,
@@ -1760,7 +1827,9 @@
 /obj/item/wrench,
 /obj/item/device/spaceflare,
 /obj/item/device/spaceflare,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "HS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1777,7 +1846,9 @@
 /obj/effect/catwalk_plated/dark,
 /obj/machinery/atmospherics/pipe/simple/visible/supply,
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Is" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -1787,7 +1858,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Iz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1823,19 +1896,9 @@
 /obj/machinery/atmospherics/unary/tank/oxygen{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
-/area/map_template/colony2/external)
-"Jq" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
+/turf/simulated/floor/reinforced{
+	map_airless = 1
 	},
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id_tag = "colony2atmos";
-	name = "Atmospheric Pod Blast Shutter"
-	},
-/obj/effect/floor_decal/industrial/hatch,
-/turf/simulated/floor/reinforced,
 /area/map_template/colony2/external)
 "Jr" = (
 /obj/item/stool/bar/padded,
@@ -1880,7 +1943,9 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Kz" = (
 /obj/structure/table/steel_reinforced,
@@ -1907,7 +1972,9 @@
 	name = "Atmospheric Pod Blast Shutter"
 	},
 /obj/effect/floor_decal/industrial/hatch,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "KU" = (
 /obj/machinery/atmospherics/pipe/simple/visible/universal{
@@ -1920,7 +1987,9 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Ls" = (
 /obj/effect/paint/ocean,
@@ -1973,7 +2042,9 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "MN" = (
 /obj/structure/closet/crate/freezer/rations,
@@ -2030,7 +2101,9 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Oc" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -2137,7 +2210,9 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "PF" = (
 /obj/effect/floor_decal/corner/paleblue/mono,
@@ -2153,7 +2228,9 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "PU" = (
 /obj/effect/paint/ocean,
@@ -2161,7 +2238,9 @@
 /area/map_template/colony2/ship)
 "Qi" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Qq" = (
 /obj/effect/floor_decal/corner_steel_grid/diagonal{
@@ -2256,7 +2335,9 @@
 	name = "Atmospheric Pod Blast Shutter"
 	},
 /obj/effect/floor_decal/industrial/hatch,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Rs" = (
 /obj/structure/cable,
@@ -2301,17 +2382,23 @@
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "RE" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/blue,
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "RL" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /obj/machinery/meter,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Sl" = (
 /obj/machinery/power/terminal{
@@ -2333,7 +2420,9 @@
 	name = "Atmospheric Pod Blast Shutter"
 	},
 /obj/effect/floor_decal/industrial/hatch,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "SA" = (
 /obj/machinery/power/port_gen/pacman{
@@ -2355,13 +2444,17 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "SO" = (
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
 	dir = 10
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "SP" = (
 /obj/machinery/portable_atmospherics/hydroponics,
@@ -2418,7 +2511,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel,
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Tr" = (
 /obj/effect/catwalk_plated/dark,
@@ -2439,7 +2534,9 @@
 	name = "Atmospheric Pod Blast Shutter"
 	},
 /obj/effect/floor_decal/industrial/hatch,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Tw" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
@@ -2482,13 +2579,17 @@
 /obj/machinery/atmospherics/unary/tank/oxygen{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "UX" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Vb" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -2516,14 +2617,18 @@
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
 	dir = 5
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Vp" = (
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
 	dir = 9
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Vt" = (
 /obj/structure/cable{
@@ -2568,7 +2673,9 @@
 	name = "Atmospheric Pod Blast Shutter"
 	},
 /obj/effect/floor_decal/industrial/hatch,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "VD" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
@@ -2585,7 +2692,9 @@
 /obj/machinery/air_sensor{
 	id_tag = "Halifax_out"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "VL" = (
 /obj/machinery/access_button/airlock_exterior{
@@ -2599,7 +2708,9 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "VM" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
@@ -2638,7 +2749,9 @@
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Wn" = (
 /obj/effect/catwalk_plated/dark,
@@ -2647,7 +2760,9 @@
 "Wo" = (
 /obj/machinery/atmospherics/pipe/simple/visible/supply,
 /obj/machinery/meter,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Wu" = (
 /obj/machinery/portable_atmospherics/hydroponics,
@@ -2661,7 +2776,9 @@
 /obj/machinery/atmospherics/valve{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Xc" = (
 /obj/structure/hygiene/toilet{
@@ -2687,13 +2804,17 @@
 /obj/machinery/mineral/stacking_machine{
 	input_turf = 2
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Xm" = (
 /obj/machinery/atmospherics/pipe/simple/visible/supply,
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Xt" = (
 /obj/machinery/atmospherics/unary/tank/carbon_dioxide{
@@ -2703,7 +2824,9 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "XB" = (
 /obj/machinery/door/blast/regular{
@@ -2712,19 +2835,25 @@
 	name = "Atmospheric Pod Blast Shutter"
 	},
 /obj/effect/floor_decal/industrial/hatch,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "XO" = (
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "XU" = (
 /obj/machinery/atmospherics/unary/tank/nitrogen{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "XX" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -2744,7 +2873,9 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "YQ" = (
 /obj/machinery/light{
@@ -2764,7 +2895,9 @@
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/colony2/external)
 "Za" = (
 /obj/effect/floor_decal/corner_steel_grid/diagonal,
@@ -2872,14 +3005,14 @@ Dw
 Dw
 Dw
 Ls
-an
+XO
 Ls
 UW
 UW
 UW
 UW
 Ls
-aB
+BZ
 Ls
 UW
 UW
@@ -2950,7 +3083,7 @@ Hw
 UM
 QH
 vn
-an
+XO
 Ls
 HD
 HD
@@ -2958,14 +3091,14 @@ Xt
 HD
 WM
 Ls
-aB
+BZ
 Ls
 Jg
 Jg
 Jg
 Jg
 Ls
-an
+XO
 Ls
 Jg
 Jg
@@ -3085,7 +3218,7 @@ Og
 Ls
 Ls
 Ls
-Jq
+VC
 Ls
 XO
 Ls
@@ -3124,7 +3257,7 @@ vn
 Ls
 Ls
 VF
-aB
+BZ
 Ls
 YI
 BR
@@ -3167,14 +3300,14 @@ QY
 Rw
 YV
 ni
-aB
+BZ
 XB
-aB
-aB
+BZ
+BZ
 vj
-aB
-aB
-aB
+BZ
+BZ
+BZ
 DH
 Pp
 Kr
@@ -3210,10 +3343,10 @@ Vt
 SR
 vh
 ni
-aB
+BZ
 XB
-aB
-aB
+BZ
+BZ
 NX
 jy
 Qi
@@ -3253,7 +3386,7 @@ AE
 Ls
 Ls
 VL
-aB
+BZ
 Ls
 PS
 BR
@@ -3300,7 +3433,7 @@ Og
 Ls
 Ls
 Ls
-Jq
+VC
 Ls
 XO
 Ls
@@ -3386,7 +3519,7 @@ Ls
 Ls
 Ls
 Ls
-Jq
+VC
 Ls
 Og
 Ls
@@ -3423,7 +3556,7 @@ Tr
 Wn
 SA
 AE
-an
+XO
 Ls
 Dw
 Dw
@@ -3431,17 +3564,17 @@ cw
 Dw
 WM
 Ls
-aB
+BZ
 Ls
 kn
 kn
 kn
 kn
 Ls
-an
+XO
 Ls
 hN
-aB
+BZ
 Gt
 ux
 Ls
@@ -3481,7 +3614,7 @@ bt
 bt
 zZ
 Ls
-aB
+BZ
 Ls
 gV
 Cu
@@ -3517,14 +3650,14 @@ HD
 HD
 HD
 Ls
-an
+XO
 Ls
 XU
 XU
 XU
 XU
 Ls
-aB
+BZ
 Ls
 Xl
 sK

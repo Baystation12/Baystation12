@@ -9,7 +9,7 @@
 
 /obj/effect/shuttle_landmark/escape_pod/start
 	name = "Docked"
-	base_turf = /turf/simulated/floor/reinforced/airless
+	base_turf = /turf/simulated/floor/reinforced
 
 /obj/effect/shuttle_landmark/escape_pod/transit
 	name = "In transit"

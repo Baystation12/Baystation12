@@ -4,6 +4,7 @@
 /area/meatstation/cargo
 	name = "Cargo Dock"
 	icon_state = "mscargo"
+	turfs_airless = TRUE
 
 /area/meatstation/cargooffice
 	name = "Cargo Office"
@@ -16,10 +17,12 @@
 /area/meatstation/engineering
 	name = "Engineering"
 	icon_state = "msengineering"
+	turfs_airless = TRUE
 
 /area/meatstation/dorm
 	name = "Dorms"
 	icon_state = "msdorm"
+	turfs_airless = TRUE
 
 /area/meatstation/mess
 	name = "Mess"
@@ -32,6 +35,7 @@
 /area/meatstation/kitchen
 	name = "Kitchen"
 	icon_state = "mskitchen"
+	turfs_airless = TRUE
 
 /area/meatstation/storage
 	name = "Storage"

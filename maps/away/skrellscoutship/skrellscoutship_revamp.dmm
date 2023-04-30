@@ -1700,7 +1700,9 @@
 /obj/machinery/ion_engine{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/ship/skrellscoutship/maintenance/atmos)
 "fH" = (
 /obj/structure/table/rack,
@@ -1940,7 +1942,9 @@
 /obj/machinery/ion_engine{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/ship/skrellscoutship/hangar)
 "gp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1999,12 +2003,6 @@
 	},
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/hangar)
-"gu" = (
-/obj/machinery/ion_engine{
-	dir = 8
-	},
-/turf/simulated/floor/reinforced/airless,
-/area/ship/skrellscoutship/command/armory)
 "gw" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -2818,7 +2816,9 @@
 /area/ship/skrellscoutship/wings/port)
 "iE" = (
 /obj/machinery/shipsensors,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/ship/skrellscoutship/wings/port)
 "iF" = (
 /obj/structure/bed/chair/comfy/red{
@@ -3516,8 +3516,10 @@
 /obj/machinery/ion_engine{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
-/area/ship/skrellscoutship/robotics)
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
+/area/ship/skrellscoutship/command/armory)
 "kG" = (
 /obj/effect/landmark/map_data,
 /obj/effect/overmap/visitable/sector/skrellscoutspace,
@@ -14010,7 +14012,7 @@ Fl
 Fl
 Fl
 Fl
-PT
+Fl
 Gw
 Gw
 Gw
@@ -14107,11 +14109,11 @@ RB
 Nh
 Fl
 Fl
-gu
-gu
-gu
-gu
-gu
+kF
+kF
+kF
+kF
+kF
 kF
 Gw
 Gw

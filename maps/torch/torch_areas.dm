@@ -1,6 +1,6 @@
 /datum/map/torch
 
-	base_floor_type = /turf/simulated/floor/reinforced/airless
+	base_floor_type = /turf/simulated/floor/reinforced
 	base_floor_area = /area/torchexterior
 
 	post_round_safe_areas = list (
@@ -386,7 +386,7 @@
 /area/aquila
 	name = "\improper SEV Aquila"
 	icon_state = "shuttlered"
-	base_turf = /turf/simulated/floor/reinforced/airless
+	base_turf = /turf/simulated/floor/reinforced
 	requires_power = 1
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED | AREA_FLAG_HIDE_FROM_HOLOMAP
@@ -1353,6 +1353,7 @@
 	has_gravity = FALSE
 	turf_initializer = /singleton/turf_initializer/maintenance/space
 	req_access = list(access_external_airlocks, access_maint_tunnels)
+	turfs_airless = TRUE
 
 // CentCom
 
@@ -1399,6 +1400,7 @@
 	has_gravity = FALSE
 	base_turf = /turf/space
 	req_access = list(access_engine_equip)
+	turfs_airless = TRUE
 
 /area/solar/auxstarboard
 	name = "\improper Fore Starboard Solar Array"

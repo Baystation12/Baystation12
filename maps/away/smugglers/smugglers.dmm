@@ -26,9 +26,6 @@
 	},
 /turf/simulated/floor,
 /area/smugglers/base)
-"ah" = (
-/turf/simulated/floor/asteroid,
-/area/space)
 "aj" = (
 /obj/item/ammo_casing/pistol/magnum{
 	pixel_x = 5;
@@ -70,15 +67,12 @@
 "an" = (
 /turf/unsimulated/mask,
 /area/mine/explored)
-"ao" = (
-/turf/space,
-/area/mine/unexplored)
 "ap" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	injecting = 1;
 	use_power = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "aq" = (
 /obj/machinery/door/airlock/external{
@@ -95,7 +89,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/smugglers/base)
 "au" = (
 /obj/item/device/flashlight/flare/glowstick/yellow{
@@ -904,7 +898,7 @@
 /area/smugglers/dorms)
 "cj" = (
 /obj/effect/decal/cleanable/cobweb,
-/turf/simulated/floor/airless/ceiling,
+/turf/simulated/floor/ceiling,
 /area/smugglers/dorms)
 "cl" = (
 /obj/effect/decal/cleanable/dirt,
@@ -935,13 +929,13 @@
 "cp" = (
 /obj/effect/decal/cleanable/vomit,
 /obj/random/medical/lite,
-/turf/simulated/floor/airless/ceiling,
+/turf/simulated/floor/ceiling,
 /area/smugglers/dorms)
 "cq" = (
 /obj/structure/hygiene/toilet{
 	dir = 8
 	},
-/turf/simulated/floor/airless/ceiling,
+/turf/simulated/floor/ceiling,
 /area/smugglers/dorms)
 "cr" = (
 /obj/structure/bed/chair{
@@ -1038,7 +1032,7 @@
 	pixel_y = 30
 	},
 /obj/random/soap,
-/turf/simulated/floor/airless/ceiling,
+/turf/simulated/floor/ceiling,
 /area/smugglers/dorms)
 
 (1,1,1) = {"
@@ -4436,7 +4430,7 @@ aa
 aa
 aa
 aa
-ah
+ab
 af
 ay
 aQ
@@ -4537,7 +4531,7 @@ aa
 aa
 aa
 aa
-ah
+ab
 an
 af
 az
@@ -4640,7 +4634,7 @@ aa
 aa
 aa
 aa
-ao
+aa
 af
 aA
 aO

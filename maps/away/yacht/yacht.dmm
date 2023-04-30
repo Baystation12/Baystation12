@@ -12,8 +12,8 @@
 /area/yacht/bridge)
 "ad" = (
 /obj/machinery/shipsensors,
-/turf/simulated/floor/airless{
-	icon_state = "dmg2"
+/turf/simulated/floor{
+	map_airless = 1
 	},
 /area/yacht/bridge)
 "ae" = (
@@ -177,8 +177,10 @@
 /obj/structure/disposaloutlet{
 	dir = 4
 	},
-/turf/space,
-/area/space)
+/turf/simulated/floor{
+	map_airless = 1
+	},
+/area/yacht/engine)
 "aB" = (
 /turf/simulated/wall/titanium,
 /area/yacht/living)
@@ -714,7 +716,9 @@
 	},
 /obj/machinery/power/solar,
 /obj/effect/floor_decal/solarpanel,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/yacht/engine)
 "cd" = (
 /obj/structure/closet/crate/hydroponics,
@@ -824,8 +828,8 @@
 /obj/effect/decal/cleanable/blood/oil/streak,
 /obj/effect/decal/cleanable/generic,
 /obj/effect/decal/cleanable/molten_item,
-/turf/simulated/floor/airless{
-	icon_state = "dmg2"
+/turf/simulated/floor{
+	map_airless = 1
 	},
 /area/yacht/engine)
 "cq" = (
@@ -845,8 +849,8 @@
 	icon_state = "1-8"
 	},
 /obj/item/stock_parts/circuitboard/broken,
-/turf/simulated/floor/airless{
-	icon_state = "dmg2"
+/turf/simulated/floor{
+	map_airless = 1
 	},
 /area/yacht/engine)
 "cr" = (
@@ -866,8 +870,8 @@
 	icon_state = "1-8"
 	},
 /obj/item/storage/toolbox/syndicate,
-/turf/simulated/floor/airless{
-	icon_state = "dmg2"
+/turf/simulated/floor{
+	map_airless = 1
 	},
 /area/yacht/engine)
 "cs" = (
@@ -887,7 +891,9 @@
 	icon_state = "1-8"
 	},
 /obj/item/plastique,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/yacht/engine)
 "ct" = (
 /obj/structure/cable{
@@ -905,7 +911,9 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/yacht/engine)
 "cu" = (
 /obj/effect/decal/cleanable/dirt,
@@ -914,7 +922,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/yacht/engine)
 "cC" = (
 /obj/structure/cable,
@@ -962,13 +972,17 @@
 	dir = 8;
 	use_power = 1
 	},
-/turf/space,
-/area/space)
+/turf/simulated/floor{
+	map_airless = 1
+	},
+/area/yacht/engine)
 "cL" = (
 /obj/structure/cable,
 /obj/machinery/power/solar,
 /obj/effect/floor_decal/solarpanel,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/yacht/engine)
 "cN" = (
 /obj/structure/closet/toolcloset,
@@ -1216,7 +1230,9 @@
 /obj/machinery/atmospherics/unary/engine{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/yacht/engine)
 "dF" = (
 /obj/effect/shuttle_landmark/nav_yacht/nav3,
@@ -1306,7 +1322,9 @@
 	frequency = 1439;
 	id_tag = "yacht_outer"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/yacht/engine)
 "kb" = (
 /obj/structure/cable{
@@ -1333,7 +1351,7 @@
 	id_tag = "yacht_sensor";
 	pixel_y = -24
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/yacht/engine)
 "lb" = (
 /obj/structure/cable{

@@ -14,9 +14,6 @@
 	light_max_bright = 1
 	light_color = COLOR_BLUE
 
-/turf/simulated/floor/bluegrid/airless
-	initial_gas = null
-
 /turf/simulated/floor/greengrid
 	name = "mainframe floor"
 	icon = 'icons/turf/flooring/circuit.dmi'
@@ -34,9 +31,6 @@
 	light_outer_range = 2
 	light_max_bright = 2
 	light_color = COLOR_RED
-
-/turf/simulated/floor/greengrid/airless
-	initial_gas = null
 
 /turf/simulated/floor/wood
 	name = "wooden floor"
@@ -127,9 +121,6 @@
 	icon_state = "reinforced"
 	initial_flooring = /singleton/flooring/reinforced
 
-/turf/simulated/floor/reinforced/airless
-	initial_gas = null
-
 /turf/simulated/floor/reinforced/airmix
 	initial_gas = list(GAS_OXYGEN = MOLES_O2ATMOS, GAS_NITROGEN = MOLES_N2ATMOS)
 
@@ -189,9 +180,6 @@
 	icon_state = "monotiledark"
 	initial_flooring = /singleton/flooring/tiling/mono/dark
 
-/turf/simulated/floor/tiled/dark/airless
-	initial_gas = null
-
 /turf/simulated/floor/tiled/white
 	name = "white floor"
 	icon_state = "white"
@@ -206,11 +194,6 @@
 	name = "floor"
 	icon_state = "steel_monofloor"
 	initial_flooring = /singleton/flooring/tiling/mono
-
-/turf/simulated/floor/tiled/white/airless
-	name = "airless floor"
-	initial_gas = null
-	temperature = TCMB
 
 /turf/simulated/floor/tiled/freezer
 	name = "tiles"
@@ -306,35 +289,13 @@
 	initial_flooring = /singleton/flooring/linoleum
 
 //ATMOS PREMADES
-/turf/simulated/floor/reinforced/airless
-	name = "vacuum floor"
-	initial_gas = null
-	temperature = TCMB
-
-/turf/simulated/floor/airless
-	name = "airless plating"
-	initial_gas = null
-	temperature = TCMB
-
-/turf/simulated/floor/tiled/airless
-	name = "airless floor"
-	initial_gas = null
-	temperature = TCMB
-
-/turf/simulated/floor/bluegrid/airless
-	name = "airless floor"
-	initial_gas = null
-	temperature = TCMB
-
-/turf/simulated/floor/greengrid/airless
-	name = "airless floor"
-	initial_gas = null
-	temperature = TCMB
-
 /turf/simulated/floor/greengrid/nitrogen
 	initial_gas = list(GAS_NITROGEN = MOLES_N2STANDARD)
 
 // Placeholders
+/turf/simulated/floor/airless
+	map_airless = TRUE
+
 /turf/simulated/floor/airless/lava
 	name = "lava"
 	icon = 'icons/turf/flooring/lava.dmi'
@@ -355,7 +316,7 @@
 	..()
 
 /turf/simulated/floor/light
-/turf/simulated/floor/airless/ceiling
+/turf/simulated/floor/ceiling
 
 /turf/simulated/floor/beach
 	name = "beach"

@@ -235,9 +235,10 @@
 /obj/item/stool/stone/New(newloc)
 	..(newloc,"sandstone")
 
-/turf/simulated/floor/airless/stone
+/turf/simulated/floor/stone
 	name = "temple floor"
 	desc = "You can only imagine what once took place in these halls."
 	icon = 'icons/turf/flooring/cult.dmi'
 	icon_state = "cult_g"
 	color = "#c9ae5e"
+	map_airless = TRUE

@@ -27,13 +27,13 @@
 /area/maintenance/firstdeck/centralstarboard)
 "aaf" = (
 /obj/machinery/atmospherics/unary/tank/hydrogen,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aag" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aah" = (
 /obj/machinery/alarm{
@@ -74,7 +74,7 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aal" = (
 /obj/structure/cable/green{
@@ -94,22 +94,22 @@
 	pixel_y = 32;
 	req_access = list("ACCESS_CONSTRUCTION")
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aan" = (
 /obj/machinery/atmospherics/unary/tank/hydrogen{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aao" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aap" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
 /obj/machinery/meter,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aaq" = (
 /obj/machinery/atmospherics/valve{
@@ -119,7 +119,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aar" = (
 /obj/effect/shuttle_landmark/skipjack/deck2{
@@ -131,7 +131,7 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aat" = (
 /obj/machinery/atmospherics/valve{
@@ -141,29 +141,29 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aau" = (
 /obj/machinery/atmospherics/unary/tank/hydrogen{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aav" = (
 /obj/machinery/atmospherics/unary/tank/hydrogen{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aaw" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aax" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aay" = (
 /obj/structure/sign/warning/compressed_gas{
@@ -178,14 +178,14 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aaA" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
 /obj/machinery/meter,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aaB" = (
 /obj/structure/disposalpipe/trunk{
@@ -202,13 +202,13 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aaD" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aaE" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
@@ -217,7 +217,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aaF" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
@@ -226,7 +226,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aaG" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
@@ -235,7 +235,7 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aaH" = (
 /obj/structure/sign/warning/compressed_gas{
@@ -248,7 +248,7 @@
 /obj/machinery/atmospherics/unary/tank/hydrogen{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aaJ" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -257,7 +257,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aaK" = (
 /obj/machinery/access_button{
@@ -273,7 +273,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/binary/pump/high_power,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aaL" = (
 /obj/machinery/alarm{
@@ -290,7 +290,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aaN" = (
 /obj/machinery/shield_diffuser,
@@ -298,7 +298,7 @@
 	id_tag = "auxfuelvent";
 	name = "Auxiliary Fuel Storage Vent"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/engineering/fuelbay/aux)
 "aaO" = (
 /obj/machinery/door/airlock/external{
@@ -805,7 +805,9 @@
 /area/maintenance/firstdeck/forestarboard)
 "abF" = (
 /obj/machinery/shield_diffuser,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/maintenance/firstdeck/forestarboard)
 "abG" = (
 /obj/effect/floor_decal/corner/beige{
@@ -897,7 +899,9 @@
 	req_access = list("ACCESS_MAINT")
 	},
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/maintenance/firstdeck/forestarboard)
 "abP" = (
 /turf/simulated/wall/r_wall/hull,
@@ -1033,10 +1037,12 @@
 	name = "Engineering External Access"
 	},
 /obj/machinery/shield_diffuser,
-/turf/simulated/floor/tiled/techfloor/grid,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/maintenance/firstdeck/forestarboard)
 "acd" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "ace" = (
 /obj/structure/closet/secure_closet/chemical,
@@ -1242,7 +1248,9 @@
 	volume_rate = 4000
 	},
 /obj/effect/floor_decal/industrial/outline/red,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d1starboard)
 "acw" = (
 /turf/simulated/wall/r_titanium,
@@ -1256,7 +1264,9 @@
 	volume_rate = 4000
 	},
 /obj/effect/floor_decal/industrial/outline/red,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d1port)
 "acy" = (
 /obj/effect/floor_decal/corner/pink{
@@ -3166,7 +3176,9 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d1starboard)
 "afx" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -3206,7 +3218,9 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d1starboard)
 "afB" = (
 /obj/structure/roller_bed,
@@ -3713,7 +3727,9 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d1starboard)
 "agx" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -4255,7 +4271,9 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d1starboard)
 "ahz" = (
 /obj/effect/floor_decal/spline/plain/beige{
@@ -5064,7 +5082,7 @@
 	injecting = 1;
 	use_power = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/thruster/d1starboard)
 "ajO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -10585,7 +10603,7 @@
 /area/maintenance/firstdeck/centralport)
 "aLj" = (
 /obj/structure/grille,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "aLo" = (
 /turf/simulated/floor/tiled/white,
@@ -11368,7 +11386,9 @@
 	injecting = 1;
 	use_power = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/thruster/d1port)
 "aOE" = (
 /obj/structure/table/rack,
@@ -11822,7 +11842,9 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d1port)
 "aQm" = (
 /obj/machinery/light/small{
@@ -12119,13 +12141,17 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d1port)
 "aRh" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d1port)
 "aRj" = (
 /obj/machinery/atmospherics/binary/passive_gate/on{
@@ -12565,7 +12591,9 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d1port)
 "aSk" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -13183,7 +13211,9 @@
 	name = "Engineering External Access"
 	},
 /obj/machinery/shield_diffuser,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/maintenance/firstdeck/foreport)
 "aUb" = (
 /obj/machinery/door/firedoor,
@@ -13343,7 +13373,9 @@
 	dir = 1;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/maintenance/firstdeck/foreport)
 "aUp" = (
 /turf/simulated/wall/r_wall/hull,
@@ -13448,7 +13480,9 @@
 /area/thruster/d1port)
 "aUz" = (
 /obj/machinery/shield_diffuser,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/maintenance/firstdeck/foreport)
 "aUA" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -14144,7 +14178,9 @@
 	id_tag = "cChamber1sV";
 	name = "Chamber Vent"
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d1starboard)
 "bhy" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -14394,7 +14430,9 @@
 	id_tag = "cChamber1pV";
 	name = "Chamber Vent"
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d1port)
 "btE" = (
 /turf/simulated/floor/tiled/dark,
@@ -14598,7 +14636,7 @@
 "bHb" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod12,
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/shuttle/escape_pod12/station)
 "bHp" = (
 /obj/structure/disposalpipe/segment{
@@ -14626,7 +14664,7 @@
 "bIb" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod13,
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/shuttle/escape_pod13/station)
 "bLb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -15663,7 +15701,9 @@
 	pressure_checks_default = 2;
 	use_power = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/thruster/d1port)
 "cYB" = (
 /obj/structure/dispenser,
@@ -23839,7 +23879,9 @@
 /obj/machinery/air_sensor{
 	id_tag = "cChamber1s"
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d1starboard)
 "otb" = (
 /obj/machinery/light{
@@ -24769,7 +24811,9 @@
 /obj/machinery/air_sensor{
 	id_tag = "cChamber1p"
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d1port)
 "pBb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
@@ -26505,7 +26549,9 @@
 	pressure_checks_default = 2;
 	use_power = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/thruster/d1starboard)
 "rDb" = (
 /obj/machinery/atmospherics/portables_connector{

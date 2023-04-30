@@ -215,7 +215,7 @@
 	landmark_tag = "nav_scavver_gantry_lift_bottom"
 	flags = SLANDMARK_FLAG_AUTOSET
 	base_area = /area/scavver/gantry/down1
-	base_turf = /turf/simulated/floor/airless
+	base_turf = /turf/simulated/floor/plating
 
 /singleton/stock_part_preset/radio/receiver/vent_pump/vulcan
 	frequency = 1431

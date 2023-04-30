@@ -351,7 +351,9 @@
 /area/map_template/sfv_arbiter)
 "ld" = (
 /obj/machinery/shipsensors,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/plating{
+	map_airless = 1
+	},
 /area/map_template/sfv_arbiter)
 "ll" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -544,7 +546,9 @@
 	icon_state = "map_vent_in";
 	pump_direction = 0
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor/plating{
+	map_airless = 1
+	},
 /area/map_template/sfv_arbiter)
 "qy" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
@@ -685,7 +689,9 @@
 	icon_state = "map_vent_in";
 	pump_direction = 0
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor/plating{
+	map_airless = 1
+	},
 /area/map_template/sfv_arbiter)
 "vc" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
@@ -1728,7 +1734,9 @@
 /obj/machinery/porta_turret{
 	req_access = list("ACCESS_SYNDICATE")
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/plating{
+	map_airless = 1
+	},
 /area/map_template/sfv_arbiter)
 "Pj" = (
 /turf/simulated/floor/tiled/dark,
@@ -2216,7 +2224,9 @@
 /obj/machinery/ion_engine{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/map_template/sfv_arbiter)
 "VT" = (
 /obj/effect/floor_decal/corner/grey{
@@ -2481,7 +2491,7 @@
 	pixel_x = 7;
 	pixel_y = -4
 	},
-/turf/simulated/floor/tiled/white/airless,
+/turf/simulated/floor/tiled/white,
 /area/map_template/sfv_arbiter)
 "YN" = (
 /obj/effect/floor_decal/corner/grey/mono,

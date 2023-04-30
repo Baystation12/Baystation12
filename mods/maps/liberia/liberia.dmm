@@ -247,7 +247,9 @@
 /turf/simulated/floor,
 /area/liberia/engineeringreactor)
 "aB" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/liberia/solar1)
 "aC" = (
 /obj/machinery/door/window/brigdoor/northleft{
@@ -4985,7 +4987,9 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/liberia/solar1)
 "iK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5209,7 +5213,9 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/liberia/solar1)
 "jd" = (
 /obj/structure/cable/yellow{
@@ -6744,7 +6750,9 @@
 	dir = 4;
 	icon_state = "pipe-c"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/liberia/solar2)
 "nQ" = (
 /turf/simulated/wall/prepainted,
@@ -6802,7 +6810,9 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/liberia/solar2)
 "oN" = (
 /turf/simulated/wall/r_wall/prepainted,
@@ -7284,7 +7294,9 @@
 	dir = 8;
 	icon_state = "pipe-c"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/liberia/solar2)
 "tL" = (
 /obj/effect/wallframe_spawn/no_grille,
@@ -7323,7 +7335,9 @@
 	name = "Aft Port Solar Array"
 	},
 /obj/structure/cable/yellow,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/liberia/solar1)
 "uo" = (
 /obj/effect/floor_decal/borderfloor{
@@ -7501,7 +7515,9 @@
 	dir = 4
 	},
 /obj/machinery/shield_diffuser,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/liberia/solar2)
 "yh" = (
 /obj/effect/floor_decal/borderfloor{
@@ -7597,7 +7613,9 @@
 	dir = 4;
 	id_tag = "merch-ship_sensors"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/liberia/merchantstorage)
 "zQ" = (
 /obj/effect/floor_decal/techfloor{
@@ -7854,7 +7872,9 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/liberia/solar2)
 "Fs" = (
 /turf/simulated/wall/r_wall/prepainted,
@@ -8245,7 +8265,9 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/liberia/solar2)
 "Lm" = (
 /turf/simulated/wall/prepainted,
@@ -8593,7 +8615,9 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/liberia/toiletroom1)
 "Sm" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/liberia/solar2)
 "St" = (
 /turf/simulated/wall/prepainted,
@@ -8812,7 +8836,9 @@
 /area/liberia/personellroom2)
 "Vz" = (
 /obj/structure/disposalpipe/segment,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/liberia/solar2)
 "VP" = (
 /obj/effect/floor_decal/borderfloor/corner{
@@ -8843,7 +8869,9 @@
 	name = "Aft Port Solar Array"
 	},
 /obj/structure/cable/yellow,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/liberia/solar2)
 "VZ" = (
 /obj/machinery/door/airlock{

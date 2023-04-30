@@ -22,13 +22,17 @@
 /obj/machinery/atmospherics/unary/engine{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/thrusters)
 "ag" = (
 /obj/machinery/atmospherics/pipe/vent/high_volume{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/engineering)
 "ah" = (
 /turf/simulated/floor/plating/vox,
@@ -413,7 +417,9 @@
 /turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/thrusters)
 "be" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/fore)
 "bf" = (
 /obj/item/reagent_containers/food/drinks/glass2/flute,
@@ -616,7 +622,9 @@
 /area/voxship/thrusters)
 "bF" = (
 /obj/machinery/shipsensors,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/fore)
 "bG" = (
 /obj/random/junk,
@@ -883,19 +891,25 @@
 /area/space)
 "cp" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/thrusters)
 "cq" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 6
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/thrusters)
 "cr" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 10
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/thrusters)
 "cs" = (
 /obj/machinery/computer/ship/engines{
@@ -1184,14 +1198,18 @@
 /area/voxship/thrusters)
 "cP" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/thrusters)
 "cQ" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /obj/machinery/igniter{
 	id_tag = "Voxship_igniter"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/thrusters)
 "cR" = (
 /obj/machinery/door/blast/regular{
@@ -1199,13 +1217,17 @@
 	id_tag = "vox_fusion"
 	},
 /obj/structure/grille,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/thrusters)
 "cS" = (
 /obj/machinery/atmospherics/pipe/vent/high_volume{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/fore)
 "cT" = (
 /obj/effect/wallframe_spawn/reinforced/hull/vox,
@@ -1452,20 +1474,26 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 5
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/thrusters)
 "do" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/vent/high_volume,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/thrusters)
 "dp" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/thrusters)
 "dq" = (
 /obj/machinery/computer/ship/sensors/vox{
@@ -1644,7 +1672,9 @@
 	id_tag = "vox_engineview";
 	opacity = 0
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/thrusters)
 "dL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
@@ -1652,7 +1682,9 @@
 	id_tag = "voxengine";
 	locked = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/thrusters)
 "dN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1670,7 +1702,9 @@
 /obj/machinery/atmospherics/pipe/vent/high_volume{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/thrusters)
 "dQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1717,7 +1751,9 @@
 /obj/machinery/atmospherics/pipe/vent/high_volume{
 	dir = 8
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/scavship)
 "dW" = (
 /obj/machinery/vending/engivend{
@@ -2461,7 +2497,7 @@
 /area/voxship/engineering)
 "fD" = (
 /obj/effect/wallframe_spawn/reinforced/hull/vox,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/voxship/scavship)
 "fE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/black,
@@ -2520,7 +2556,7 @@
 /area/voxship/scavship)
 "fO" = (
 /obj/item/material/shard,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "fP" = (
 /obj/structure/lattice,
@@ -2529,11 +2565,11 @@
 /area/space)
 "fQ" = (
 /obj/item/stack/material/rods,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "fR" = (
 /obj/item/reagent_containers/food/snacks/clownburger,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "fS" = (
 /obj/item/material/shard,
@@ -2562,7 +2598,7 @@
 /area/voxship/fore)
 "fW" = (
 /obj/random/advdevice,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "fX" = (
 /turf/space,
@@ -2571,7 +2607,9 @@
 /obj/machinery/atmospherics/pipe/vent/high_volume{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/engineering)
 "fZ" = (
 /obj/machinery/door/window,
@@ -2643,7 +2681,9 @@
 /obj/machinery/atmospherics/pipe/vent/high_volume{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/shuttle)
 "gh" = (
 /obj/structure/lattice,
@@ -2713,7 +2753,7 @@
 	name = "Window Shutters";
 	opacity = 0
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/voxship/engineering)
 "go" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -2726,11 +2766,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/voxship/scavship)
 "gq" = (
 /obj/machinery/atmospherics/pipe/vent/high_volume,
-/turf/simulated/floor/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/engineering)
 "gr" = (
 /obj/machinery/seed_extractor,
@@ -2738,7 +2780,7 @@
 /area/voxship/scavship)
 "gs" = (
 /obj/random/loot,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/space)
 "gt" = (
 /obj/random/hat,
@@ -2892,7 +2934,9 @@
 /obj/machinery/atmospherics/unary/engine{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/shuttle)
 "gL" = (
 /obj/machinery/computer/ship/helm{
@@ -3033,7 +3077,9 @@
 /area/voxship/shuttle)
 "hf" = (
 /obj/machinery/shipsensors,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/voxship/shuttle)
 "hg" = (
 /obj/machinery/atmospherics/portables_connector{

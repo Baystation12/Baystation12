@@ -24,7 +24,7 @@
 /turf/simulated/floor/tiled/white,
 /area/aquila/medical)
 "ad" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "ae" = (
 /obj/structure/lattice,
@@ -46,7 +46,7 @@
 	name = "Bridge Auxiliary Solar Array"
 	},
 /obj/effect/floor_decal/solarpanel,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/solar/bridge)
 "ai" = (
 /obj/item/device/radio/intercom{
@@ -135,7 +135,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/solar/bridge)
 "av" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -154,7 +154,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/solar/bridge)
 "aw" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -168,7 +168,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/solar/bridge)
 "ax" = (
 /obj/structure/cable/green{
@@ -321,7 +321,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/solar/bridge)
 "aI" = (
 /obj/structure/cable/yellow,
@@ -330,7 +330,7 @@
 	name = "Bridge Auxiliary Solar Array"
 	},
 /obj/effect/floor_decal/solarpanel,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/solar/bridge)
 "aJ" = (
 /obj/structure/cable/green{
@@ -765,7 +765,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/solar/bridge)
 "bF" = (
 /obj/structure/cable/green{
@@ -1586,7 +1586,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/solar/bridge)
 "cP" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1595,7 +1595,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/solar/bridge)
 "cQ" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1604,7 +1604,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/solar/bridge)
 "cR" = (
 /obj/structure/catwalk,
@@ -2235,7 +2235,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "ec" = (
 /obj/effect/paint/hull,
@@ -2280,7 +2280,7 @@
 	dir = 8;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "ek" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2880,14 +2880,14 @@
 /area/maintenance/bridge/aftstarboard)
 "fj" = (
 /obj/effect/floor_decal/industrial/warning/corner,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "fk" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "fl" = (
 /obj/structure/table/glass,
@@ -2936,7 +2936,7 @@
 	dir = 8;
 	icon_state = "warningcorner"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "fu" = (
 /obj/structure/sign/warning/high_voltage{
@@ -3423,7 +3423,7 @@
 	pixel_x = -24;
 	req_access = list("ACCESS_MAINT")
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "go" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -3638,7 +3638,7 @@
 /area/hallway/primary/bridge/aft)
 "gY" = (
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "gZ" = (
 /obj/machinery/porta_turret{
@@ -3647,7 +3647,7 @@
 	lethal = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/aquila/cockpit)
 "ha" = (
 /obj/machinery/camera/network/aquila{
@@ -3680,7 +3680,7 @@
 	enabled = 0;
 	lethal = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/aquila/cockpit)
 "hi" = (
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -4721,7 +4721,9 @@
 	pressure_checks_default = 2;
 	use_power = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/aquila/air)
 "kI" = (
 /obj/effect/floor_decal/corner/yellow{
@@ -5655,7 +5657,7 @@
 	dir = 10;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "ns" = (
 /obj/structure/table/woodentable_reinforced/walnut,
@@ -5689,7 +5691,7 @@
 	dir = 1;
 	icon_state = "warningcorner"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "nG" = (
 /obj/structure/filingcabinet/chestdrawer{
@@ -5839,7 +5841,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable/yellow,
 /obj/machinery/power/tracker,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "ob" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -7390,7 +7392,9 @@
 /area/crew_quarters/heads/office/xo)
 "sm" = (
 /obj/machinery/shipsensors,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/bridge/storage)
 "so" = (
 /obj/structure/table/standard,
@@ -8125,13 +8129,15 @@
 	dir = 1;
 	icon_state = "warningcee"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "uw" = (
 /obj/machinery/atmospherics/unary/engine{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/aquila/medical)
 "uy" = (
 /turf/simulated/wall/walnut,
@@ -8329,7 +8335,7 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "vb" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -8340,7 +8346,7 @@
 	dir = 1;
 	icon_state = "warningcorner"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "vd" = (
 /obj/machinery/power/shield_generator,
@@ -8551,14 +8557,14 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "vL" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "vO" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -8931,7 +8937,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/solar/bridge)
 "wu" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -8940,7 +8946,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/solar/bridge)
 "ww" = (
 /obj/structure/closet/secure_closet/sea,
@@ -9515,7 +9521,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/solar/bridge)
 "xU" = (
 /obj/structure/cable/green{
@@ -10958,7 +10964,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "El" = (
 /obj/structure/cable/green{
@@ -11143,7 +11149,9 @@
 	pixel_x = 23;
 	pixel_y = 6
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/aquila/airlock)
 "Ff" = (
 /obj/structure/table/rack,
@@ -13214,7 +13222,7 @@
 	pixel_x = 32;
 	pixel_y = -32
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced,
 /area/space)
 "Od" = (
 /obj/machinery/power/apc{
@@ -13441,7 +13449,7 @@
 "OX" = (
 /obj/machinery/shipsensors,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/aquila/air)
 "Pb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -14007,7 +14015,7 @@
 	pixel_x = -32;
 	pixel_y = 32
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor,
 /area/solar/bridge)
 "Rh" = (
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -14405,7 +14413,9 @@
 /obj/machinery/atmospherics/unary/engine{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/aquila/storage)
 "SU" = (
 /obj/structure/cable/green{
@@ -14618,7 +14628,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/bridge/forestarboard)
 "TB" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/bridge/storage)
 "TI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -14992,7 +15004,9 @@
 /obj/machinery/atmospherics/unary/engine{
 	dir = 1
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/aquila/power)
 "Vw" = (
 /obj/effect/floor_decal/corner/blue{
@@ -15434,7 +15448,9 @@
 	id_tag = "bridge sensors";
 	name = "Sensor Shroud"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/bridge/storage)
 "XR" = (
 /obj/structure/cable/green{

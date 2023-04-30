@@ -17,7 +17,9 @@
 	opacity = 0
 	},
 /obj/effect/paint/brown,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "ad" = (
 /obj/machinery/door/airlock/external/bolted/cycling{
@@ -31,7 +33,9 @@
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "ae" = (
 /obj/machinery/door/airlock/external/bolted/cycling{
@@ -50,13 +54,17 @@
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "ag" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "ah" = (
 /obj/effect/paint/brown,
@@ -69,7 +77,9 @@
 	id_tag = "engwindow";
 	opacity = 0
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/escape_port)
 "aj" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
@@ -78,7 +88,9 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "ak" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
@@ -96,12 +108,16 @@
 	id_tag = "cargo_sensor";
 	pixel_x = 25
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "al" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/effect/paint/brown,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "am" = (
 /obj/machinery/door/blast/regular{
@@ -114,7 +130,9 @@
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
 /obj/effect/paint/brown,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "an" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -141,7 +159,9 @@
 	id_tag = "engwindow";
 	opacity = 0
 	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/escape_star)
 "aq" = (
 /obj/effect/paint/brown,
@@ -152,7 +172,9 @@
 	dir = 4
 	},
 /obj/machinery/door/window/southright,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/escape_port)
 "at" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
@@ -161,11 +183,15 @@
 	dir = 4;
 	pixel_x = -22
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "au" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "av" = (
 /obj/structure/ladder/up,
@@ -191,7 +217,9 @@
 	dir = 4
 	},
 /obj/machinery/door/window/southright,
-/turf/simulated/floor/airless,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/escape_star)
 "ay" = (
 /obj/effect/paint/brown,
@@ -239,7 +267,9 @@
 	id_tag = "cargo_in"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "aE" = (
 /obj/machinery/door/airlock/external/bolted/cycling{
@@ -251,7 +281,9 @@
 	pixel_y = -12
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "aF" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -327,7 +359,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/escape_port)
 "aN" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -376,7 +410,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/escape_star)
 "aT" = (
 /turf/simulated/wall,
@@ -387,7 +423,9 @@
 /area/ship/scrap/crew/dorms1)
 "aV" = (
 /obj/item/device/flashlight/lamp,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/gambling)
 "aW" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
@@ -397,7 +435,9 @@
 	icon_state = "bulb1"
 	},
 /obj/item/hand/missing_card,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/gambling)
 "aX" = (
 /obj/structure/cable/green{
@@ -410,7 +450,9 @@
 /obj/machinery/power/apc/derelict{
 	dir = 1
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/gambling)
 "aY" = (
 /obj/machinery/light/small{
@@ -422,7 +464,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "aZ" = (
 /obj/effect/floor_decal/corner/beige{
@@ -485,7 +529,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "bf" = (
 /obj/machinery/power/apc/derelict{
@@ -541,12 +587,16 @@
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
 /obj/effect/paint/brown,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/gambling)
 "bj" = (
 /obj/structure/holostool,
 /obj/item/hand/missing_card,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/gambling)
 "bk" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -558,7 +608,9 @@
 /obj/structure/table/gamblingtable,
 /obj/item/deck/cards,
 /obj/item/dice,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/gambling)
 "bl" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -574,7 +626,9 @@
 	},
 /obj/structure/holostool,
 /obj/item/hand/missing_card,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/gambling)
 "bm" = (
 /obj/machinery/door/airlock/autoname/bearcat,
@@ -589,7 +643,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/gambling)
 "bn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -608,11 +664,15 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "bo" = (
 /obj/machinery/door/airlock/autoname/bearcat,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "bp" = (
 /obj/effect/floor_decal/corner/beige{
@@ -699,7 +759,9 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "bw" = (
 /obj/machinery/door/airlock/autoname/bearcat,
@@ -755,10 +817,14 @@
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
 /obj/effect/paint/brown,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/crew/dorms1)
 "bB" = (
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/gambling)
 "bC" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -767,7 +833,9 @@
 	},
 /obj/structure/holostool,
 /obj/item/hand/missing_card,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/gambling)
 "bD" = (
 /obj/machinery/alarm{
@@ -777,7 +845,9 @@
 	},
 /obj/item/hand/missing_card,
 /obj/item/hand/missing_card,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/gambling)
 "bE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -787,7 +857,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "bF" = (
 /obj/effect/decal/cleanable/dirt,
@@ -942,18 +1014,24 @@
 	icon_state = "16-0"
 	},
 /obj/structure/cable/green,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "bW" = (
 /obj/machinery/floodlight,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken2)
 "bX" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/light_construct/small{
 	dir = 1
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken2)
 "bY" = (
 /obj/structure/cable/green{
@@ -966,7 +1044,9 @@
 /obj/machinery/power/apc/derelict{
 	dir = 1
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken2)
 "bZ" = (
 /obj/effect/paint/brown,
@@ -985,7 +1065,9 @@
 	},
 /obj/effect/decal/cleanable/cobweb,
 /obj/effect/decal/cleanable/cobweb2,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "cb" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -1049,7 +1131,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "ci" = (
 /obj/structure/cable/green{
@@ -1108,11 +1192,15 @@
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
 /obj/effect/paint/brown,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken2)
 "cn" = (
 /obj/structure/inflatable/wall,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken2)
 "co" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1122,7 +1210,9 @@
 	dir = 5
 	},
 /obj/item/cell/high/empty,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken2)
 "cp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1136,7 +1226,9 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken2)
 "cq" = (
 /obj/machinery/door/airlock/autoname/bearcat,
@@ -1152,7 +1244,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken2)
 "cr" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -1171,7 +1265,9 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "cs" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -1215,7 +1311,9 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "cy" = (
 /obj/machinery/door/airlock/autoname/bearcat,
@@ -1272,10 +1370,14 @@
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
 /obj/effect/paint/brown,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/crew/dorms2)
 "cD" = (
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken2)
 "cE" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -1283,7 +1385,9 @@
 	level = 2
 	},
 /obj/structure/inflatable/wall,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken2)
 "cF" = (
 /obj/machinery/alarm{
@@ -1292,7 +1396,9 @@
 	req_access = newlist()
 	},
 /obj/item/stack/cable_coil/green,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken2)
 "cG" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -1338,7 +1444,9 @@
 /area/ship/scrap/broken1)
 "cM" = (
 /obj/structure/girder,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken1)
 "cN" = (
 /obj/effect/paint/brown,
@@ -1353,7 +1461,9 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/autoname/bearcat,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "cP" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -1436,7 +1546,9 @@
 /obj/item/device/radio/intercom/map_preset/bearcat{
 	pixel_y = 22
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken1)
 "cZ" = (
 /obj/machinery/light/small{
@@ -1449,7 +1561,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "da" = (
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -1522,7 +1636,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "dg" = (
 /turf/simulated/wall,
@@ -1581,7 +1697,9 @@
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
 /obj/effect/paint/brown,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken1)
 "dl" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1596,7 +1714,9 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken1)
 "dm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1610,7 +1730,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken1)
 "dn" = (
 /obj/machinery/door/airlock/autoname/bearcat,
@@ -1626,7 +1748,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken1)
 "do" = (
 /obj/effect/floor_decal/corner/beige{
@@ -1713,7 +1837,9 @@
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
 /obj/effect/paint/brown,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/crew/dorms3)
 "dx" = (
 /obj/structure/mopbucket,
@@ -1765,7 +1891,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/autoname/bearcat,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "dC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1775,7 +1903,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "dD" = (
 /obj/effect/paint/brown,
@@ -1814,7 +1944,9 @@
 /area/ship/scrap/crew/dorms3)
 "dH" = (
 /obj/machinery/floodlight,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/broken1)
 "dI" = (
 /obj/item/stool/padded,
@@ -1848,7 +1980,9 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "dL" = (
 /obj/machinery/door/airlock/autoname/bearcat,
@@ -1863,7 +1997,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "dM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1877,7 +2013,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "dN" = (
 /obj/structure/cable/green{
@@ -1896,7 +2034,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "dO" = (
 /obj/machinery/light/small{
@@ -1914,7 +2054,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "dP" = (
 /obj/structure/cable/green{
@@ -1938,7 +2080,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "dQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1952,7 +2096,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "dR" = (
 /obj/structure/cable/green{
@@ -1967,7 +2113,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "dS" = (
 /obj/machinery/door/airlock/autoname/bearcat,
@@ -1982,7 +2130,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "dT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1999,7 +2149,9 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "dU" = (
 /obj/effect/paint/brown,
@@ -2018,7 +2170,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/autoname/bearcat,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/storage)
 "dZ" = (
 /obj/effect/paint/brown,
@@ -2107,7 +2261,9 @@
 	dir = 1;
 	icon_state = "bulb1"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/storage)
 "eh" = (
 /obj/structure/ladder/up,
@@ -2115,7 +2271,9 @@
 /obj/structure/sign/deck/second{
 	pixel_y = 32
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/storage)
 "ei" = (
 /obj/structure/cable/green{
@@ -2130,11 +2288,15 @@
 	pixel_x = 22
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/storage)
 "ej" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/eva)
 "ek" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2150,7 +2312,9 @@
 	},
 /obj/item/device/suit_cooling_unit,
 /obj/item/device/suit_cooling_unit,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/eva)
 "el" = (
 /obj/effect/floor_decal/corner/yellow{
@@ -2174,7 +2338,9 @@
 	opacity = 0
 	},
 /obj/effect/paint/brown,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/eva)
 "en" = (
 /obj/machinery/light/small{
@@ -2209,7 +2375,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/techstorage)
 "eq" = (
 /obj/machinery/door/airlock/autoname/bearcat,
@@ -2224,7 +2392,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/techstorage)
 "er" = (
 /obj/effect/floor_decal/corner/yellow{
@@ -2345,7 +2515,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/eva)
 "ez" = (
 /obj/effect/floor_decal/corner/yellow{
@@ -2380,7 +2552,9 @@
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/eva)
 "eB" = (
 /obj/machinery/light/small{
@@ -2408,7 +2582,9 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/eva)
 "eC" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
@@ -2419,7 +2595,9 @@
 	dir = 5
 	},
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/eva)
 "eD" = (
 /obj/machinery/door/airlock/external/bolted/cycling{
@@ -2439,7 +2617,9 @@
 	name = "External Blast Doors";
 	opacity = 0
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/eva)
 "eE" = (
 /obj/item/stock_parts/capacitor,
@@ -2473,7 +2653,9 @@
 	dir = 1;
 	level = 2
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/techstorage)
 "eG" = (
 /obj/structure/table/rack,
@@ -2483,7 +2665,9 @@
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
 /obj/item/stock_parts/circuitboard/unary_atmos/engine,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/techstorage)
 "eH" = (
 /obj/item/storage/toolbox/mechanical{
@@ -2517,7 +2701,9 @@
 /area/ship/scrap/maintenance/storage)
 "eL" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/storage)
 "eM" = (
 /obj/item/device/radio/intercom/map_preset/bearcat{
@@ -2528,7 +2714,9 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/eva)
 "eN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2598,11 +2786,15 @@
 /obj/item/device/radio/intercom/map_preset/bearcat{
 	pixel_y = -32
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/storage)
 "eU" = (
 /obj/machinery/vending/tool/bearcat,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/storage)
 "eV" = (
 /obj/machinery/suit_cycler/salvage/bearcat,
@@ -2633,7 +2825,9 @@
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
 /obj/effect/paint/brown,
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/storage)
 "fb" = (
 /obj/structure/curtain/open/bed,
@@ -2665,10 +2859,14 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "kV" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/ship/scrap/gambling)
 "lQ" = (
 /obj/machinery/light_switch{
@@ -2681,7 +2879,9 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/broken1)
 "tc" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/ship/scrap/crew/dorms1)
 "tW" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -2707,7 +2907,9 @@
 	dir = 8;
 	pixel_x = 22
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "vU" = (
 /obj/effect/floor_decal/corner/beige{
@@ -2735,7 +2937,9 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/maintenance/eva)
 "En" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/ship/scrap/crew/dorms3)
 "EP" = (
 /obj/machinery/door/airlock/autoname/bearcat,
@@ -2750,10 +2954,14 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/cargo/lower)
 "Gr" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/ship/scrap/crew/dorms2)
 "GU" = (
 /obj/effect/paint/brown,
@@ -2780,7 +2988,9 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/lower)
 "Ro" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -2797,7 +3007,9 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/maintenance/storage)
 "Ul" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/ship/scrap/maintenance/storage)
 "UZ" = (
 /obj/effect/paint/brown,

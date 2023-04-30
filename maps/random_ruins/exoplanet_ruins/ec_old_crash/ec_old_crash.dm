@@ -14,6 +14,7 @@
 /area/map_template/ecship/crew
 	name = "\improper Crew Area"
 	icon_state = "crew_quarters"
+	turfs_airless = TRUE
 
 /area/map_template/ecship/science
 	name = "\improper Science Module"
@@ -30,11 +31,11 @@
 /area/map_template/ecship/engine
 	name = "\improper Engine Exterior"
 	icon_state = "engine"
-	area_flags = AREA_FLAG_EXTERNAL
 
 /area/map_template/ecship/cockpit
 	name = "\improper Cockpit"
 	icon_state = "bridge"
+	turfs_airless = TRUE
 
 //Low pressure setup
 /obj/machinery/atmospherics/unary/vent_pump/low

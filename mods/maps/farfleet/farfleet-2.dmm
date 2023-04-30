@@ -3,7 +3,9 @@
 /turf/space,
 /area/space)
 "ab" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "aj" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
@@ -15,7 +17,9 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "an" = (
 /obj/effect/paint/dark_gunmetal,
@@ -473,7 +477,9 @@
 /obj/machinery/pointdefense{
 	initial_id_tag = "farfleet_pd"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "ey" = (
 /obj/effect/floor_decal/corner/grey_alt/diagonal{
@@ -1443,7 +1449,9 @@
 	initial_id_tag = "farfleet_pd"
 	},
 /obj/structure/cable,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "oJ" = (
 /obj/effect/floor_decal/corner/b_green/diagonal{
@@ -2083,7 +2091,9 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "uA" = (
 /obj/structure/table/reinforced,
@@ -2245,7 +2255,9 @@
 	icon_state = "4-8";
 	pixel_y = 0
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "wd" = (
 /obj/machinery/smartfridge/foods,
@@ -2747,7 +2759,9 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "AC" = (
 /obj/effect/floor_decal/corner/b_green/diagonal{
@@ -3258,7 +3272,9 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "EC" = (
 /obj/structure/cable{
@@ -3500,7 +3516,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "HF" = (
 /obj/effect/paint/silver,
@@ -3576,7 +3594,9 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "IF" = (
 /obj/structure/cable/green{
@@ -3984,7 +4004,9 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "NF" = (
 /obj/structure/cable{
@@ -4231,7 +4253,9 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/ship/farfleet/command/snz_hangar)
 "Qs" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -5000,7 +5024,9 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "WK" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -5212,7 +5238,9 @@
 /obj/machinery/pointdefense{
 	initial_id_tag = "farfleet_pd"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "Zh" = (
 /obj/effect/paint/red,

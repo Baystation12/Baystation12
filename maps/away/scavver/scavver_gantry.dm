@@ -103,18 +103,22 @@
 /area/scavver/gantry/up1
 	name = "\improper Upper Salvage Gantry Arm"
 	icon_state = "gantry_up_1"
+	turfs_airless = TRUE
 
 /area/scavver/gantry/up2
 	name = "\improper Upper Salvage Gantry Spine"
 	icon_state = "gantry_up_2"
+	turfs_airless = TRUE
 
 /area/scavver/gantry/down1
 	name = "\improper Lower Salvage Gantry Arm"
 	icon_state = "gantry_down_1"
+	turfs_airless = TRUE
 
 /area/scavver/gantry/down2
 	name = "\improper Lower Salvage Gantry Spine"
 	icon_state = "gantry_down_2"
+	turfs_airless = TRUE
 
 /area/scavver/gantry/lift
 	name = "\improper Salvage Gantry Lift"
@@ -124,10 +128,12 @@
 /area/scavver/yachtup
 	name = "\improper Private Yacht Upper Deck"
 	icon_state = "gantry_yacht_up"
+	turfs_airless = TRUE
 
 /area/scavver/yachtdown
 	name = "\improper Private Yacht Lower Deck"
 	icon_state = "gantry_yacht_down"
+	turfs_airless = TRUE
 
 /area/scavver/yachtdown/thrusters
 	name = "\improper Private Yacht Lower Deck Thrusters"
@@ -152,11 +158,13 @@
 	name = "\improper ITV Vulcan"
 	icon_state = "gantry_pod"
 	area_flags = AREA_FLAG_RAD_SHIELDED
+	turfs_airless = TRUE
 
 /area/scavver/harvestpod
 	name = "\improper ITV Spiritus"
 	icon_state = "gantry_yacht_down"
 	area_flags = AREA_FLAG_RAD_SHIELDED
+	turfs_airless = TRUE
 
 
 //smes

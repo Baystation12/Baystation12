@@ -185,7 +185,9 @@
 	id_tag = "toxin_exhaust";
 	name = "Toxins Exhaust Blast Doors"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/gas)
 "aA" = (
 /obj/machinery/alarm{
@@ -307,7 +309,9 @@
 	id_tag = "toxin_igniter";
 	pixel_x = -18
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/gas)
 "aO" = (
 /turf/simulated/floor/plating,
@@ -316,7 +320,9 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/gas)
 "aQ" = (
 /obj/effect/floor_decal/borderfloor{
@@ -328,7 +334,9 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 10
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/gas)
 "aS" = (
 /obj/structure/sign/warning/docking_area,
@@ -576,7 +584,9 @@
 	pressure_checks_default = 2;
 	pump_direction = 0
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/gas)
 "bv" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -614,7 +624,9 @@
 /obj/machinery/air_sensor{
 	id_tag = "toxins_sensor"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/gas)
 "by" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -624,7 +636,9 @@
 	frequency = 1441;
 	id = "toxins_in"
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/gas)
 "bz" = (
 /obj/machinery/cryopod{
@@ -776,7 +790,9 @@
 	name = "Unknown Compartament Hatch"
 	},
 /obj/machinery/shield_diffuser,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/command/bsa)
 "bN" = (
 /obj/machinery/door/airlock/external/bolted{
@@ -2515,7 +2531,9 @@
 /obj/machinery/disperser/back{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/command/bsa)
 "eK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
@@ -2907,7 +2925,9 @@
 /obj/machinery/disperser/front{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/command/bsa)
 "ft" = (
 /obj/structure/cable/green{
@@ -4503,7 +4523,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d3starboard)
 "hU" = (
 /obj/machinery/light/small/emergency{
@@ -9708,7 +9730,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/gas)
 "pw" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -9730,7 +9754,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/shuttle/petrov/gas)
 "pz" = (
 /obj/structure/table/standard,
@@ -10894,7 +10920,9 @@
 	name = "Chamber Vent"
 	},
 /obj/machinery/shield_diffuser,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d3port)
 "ru" = (
 /obj/structure/closet/crate,
@@ -12311,7 +12339,9 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d3port)
 "ty" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -12320,7 +12350,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d3port)
 "tz" = (
 /obj/machinery/alarm{
@@ -12802,7 +12834,9 @@
 	use_power = 1
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d3port)
 "uw" = (
 /obj/effect/floor_decal/borderfloor{
@@ -12836,7 +12870,9 @@
 	use_power = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d3port)
 "uA" = (
 /obj/structure/cable/green{
@@ -16429,7 +16465,9 @@
 	use_power = 1
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d3starboard)
 "An" = (
 /obj/machinery/air_sensor/nacelle/second/plasma,
@@ -16702,7 +16740,9 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d3starboard)
 "AQ" = (
 /obj/machinery/air_sensor/nacelle/first/co2,
@@ -16755,7 +16795,9 @@
 	use_power = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d3starboard)
 "AX" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -16768,7 +16810,9 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d3port)
 "AY" = (
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
@@ -16989,13 +17033,17 @@
 	id_tag = "engines-1";
 	pixel_x = -24
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d3starboard)
 "Bs" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d3starboard)
 "Bt" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -17187,7 +17235,9 @@
 	name = "Chamber Vent"
 	},
 /obj/machinery/shield_diffuser,
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d3starboard)
 "BJ" = (
 /obj/structure/sign/warning/vent_port,
@@ -19383,7 +19433,9 @@
 /obj/machinery/disperser/middle{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/command/bsa)
 "FC" = (
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -24526,7 +24578,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 10
 	},
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/thruster/d3port)
 "NW" = (
 /obj/effect/floor_decal/steeldecal/steel_decals6,
@@ -24781,7 +24835,9 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/level2)
 "Ow" = (
-/turf/simulated/floor/reinforced/airless,
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
 /area/space)
 "Ox" = (
 /obj/structure/table/standard,
