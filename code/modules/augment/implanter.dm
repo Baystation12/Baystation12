@@ -161,7 +161,7 @@
 	augment = /obj/item/organ/internal/augment/active/item/popout_shotgun
 
 /obj/item/device/augment_implanter/nerve_dampeners
-	augment = /obj/item/organ/internal/augment/active/nerve_dampeners
+	augment = /obj/item/organ/internal/augment/active/nerve_dampeners/hidden
 
 /obj/item/device/augment_implanter/internal_air_system
 	augment = /obj/item/organ/internal/augment/active/internal_air_system/hidden
