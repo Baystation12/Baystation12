@@ -1,0 +1,5 @@
+author: Jux
+delete-after: true
+changes:
+  - rscdel: Removed big waist packs.
+  - tweak: Surgery kits are now the same weight class as toolboxes.
