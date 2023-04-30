@@ -14,11 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'SierraBay/SierraBay12' && github.base_ref == 'dev220' && github.event.pull_request.draft == false
     steps:
-      - name: Checkout
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
-        with:
-          persist-credentials: false
-          fetch-depth: 25
+      - name: Скачивание файлов
+        run: |
+          wget https://raw.githubusercontent.com/SierraBay/SierraBay12/dev220/tools/changelog/sierra_check_changelog.py
+          wget https://raw.githubusercontent.com/SierraBay/SierraBay12/dev220/tools/changelog/tags.yml
       - name: Установка Python
         uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435
         with:
@@ -30,4 +29,4 @@ jobs:
       - name: Проверка чейнджлога
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-        run: python tools/changelog/sierra_check_changelog.py
+        run: python sierra_check_changelog.py
