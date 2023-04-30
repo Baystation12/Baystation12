@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(typing)
 			istyping_input = 0|1,
 			istyping_hotkey = 0|1
 		), ...)
-		See .proc/GetEntry for details.
+		See GetEntry() for details.
 	*/
 	var/static/list/status = list()
 
