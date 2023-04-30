@@ -253,14 +253,13 @@
  * Returns boolean. Whether or not the interaction was handled.
  */
 /mob/proc/MiddleClickOn(atom/A)
+	if (A.MiddleClick(src))
+		return TRUE
 	swap_hand()
 	return TRUE
 
-// In case of use break glass
-/*
 /atom/proc/MiddleClick(mob/M as mob)
-	return
-*/
+	return FALSE
 
 /**
  * Called when the mob shift+clicks on an atom. By default, this calls the targeted atom's `ShiftClick()` proc.
