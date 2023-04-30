@@ -12026,12 +12026,12 @@
 /obj/machinery/power/supermatter,
 /obj/effect/engine_setup/core,
 /turf/simulated/floor/greengrid{
-	map_airless = TRUE
+	map_airless = 1
 	},
 /area/engineering/engine_room)
 "avY" = (
 /turf/simulated/floor/greengrid{
-	map_airless = TRUE
+	map_airless = 1
 	},
 /area/engineering/engine_room)
 "avZ" = (
