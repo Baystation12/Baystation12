@@ -27,11 +27,17 @@
 		return
 
 	var/list/modifiers = params2list(params)
+	if (modifiers["ctrl"] && modifiers["alt"] && modifiers["shift"])
+		if (CtrlAltShiftClickOn(A))
+			return TRUE
 	if (modifiers["ctrl"] && modifiers["alt"])
 		if (CtrlAltClickOn(A))
 			return TRUE
 	if (modifiers["shift"] && modifiers["ctrl"])
 		if (CtrlShiftClickOn(A))
+			return TRUE
+	if (modifiers["shift"] && modifiers["alt"])
+		if (AltShiftClickOn(A))
 			return TRUE
 	if (modifiers["middle"])
 		if (MiddleClickOn(A))
@@ -126,6 +132,16 @@
 		return
 	..()
 
+/mob/living/silicon/ai/AltShiftClickOn(atom/A)
+	if (!control_disabled && A.AIAltShiftClick(src))
+		return TRUE
+	return ..()
+
+/mob/living/silicon/ai/CtrlAltShiftClickOn(atom/A)
+	if (!control_disabled && A.AICtrlAltShiftClick(src))
+		return TRUE
+	return ..()
+
 /*
 	The following criminally helpful code is just the previous code cleaned up;
 	I have no idea why it was in atoms.dm instead of respective files.
@@ -209,6 +225,15 @@
 	else
 		Topic(src, list("command"="lights", "activate" = "0"))
 	return 1
+
+
+/atom/proc/AIAltShiftClick(atom/A)
+	return AltShiftClick(A)
+
+
+/atom/proc/AICtrlAltShiftClick(atom/A)
+	return CtrlAltShiftClick(A)
+
 
 //
 // Override AdjacentQuick for AltClicking

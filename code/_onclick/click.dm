@@ -67,11 +67,17 @@
 	next_click = world.time + 1
 
 	var/list/modifiers = params2list(params)
+	if (modifiers["ctrl"] && modifiers["alt"] && modifiers["shift"])
+		if (CtrlAltShiftClickOn(A))
+			return TRUE
 	if (modifiers["shift"] && modifiers["ctrl"])
 		if (CtrlShiftClickOn(A))
 			return TRUE
 	if (modifiers["ctrl"] && modifiers["alt"])
 		if (CtrlAltClickOn(A))
+			return TRUE
+	if (modifiers["shift"] && modifiers["alt"])
+		if (AltShiftClickOn(A))
 			return TRUE
 	if (modifiers["middle"])
 		if (MiddleClickOn(A))
@@ -381,6 +387,55 @@
  */
 /atom/proc/CtrlAltClick(mob/user)
 	return
+
+
+/**
+ * Called when the mob alt+shift+clicks on an atom. By default, this calls the atom's `AltShiftClick()` proc.
+ *
+ * **Parameters**:
+ * - `A` - The atom that was clicked on.
+ *
+ * Returns boolean - Whether or not the interaction was handled.
+ */
+/mob/proc/AltShiftClickOn(atom/A)
+	return A.AltShiftClick(src)
+
+
+/**
+ * Called when a mob alt+shift+clicks on the atom.
+ *
+ * **Parameters**:
+ * - `user` - The mob that clicked on the atom.
+ *
+ * Returns boolean - Whether or not the interaction was handled.
+ */
+/atom/proc/AltShiftClick(mob/user)
+	return FALSE
+
+
+/**
+ * Called when the mob ctrl+alt+shift+clicks on an atom. By default, this calls the atom's `CtrlAltShiftClick()` proc.
+ *
+ * **Parameters**:
+ * - `A` - The atom that was clicked on.
+ *
+ * Returns boolean - Whether or not the interaction was handled.
+ */
+/mob/proc/CtrlAltShiftClickOn(atom/A)
+	return A.CtrlAltShiftClick(src)
+
+
+/**
+ * Called when a mob ctrl+alt+shift+clicks on the atom.
+ *
+ * **Parameters**:
+ * - `user` - The mob that clicked on the atom.
+ *
+ * Returns boolean - Whether or not the interaction was handled.
+ */
+/atom/proc/CtrlAltShiftClick(mob/user)
+	return FALSE
+
 
 /*
 	Misc helpers

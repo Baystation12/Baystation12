@@ -12,11 +12,17 @@
 	next_click = world.time + 1
 
 	var/list/modifiers = params2list(params)
+	if (modifiers["ctrl"] && modifiers["alt"] && modifiers["shift"])
+		if (CtrlAltShiftClickOn(A))
+			return TRUE
 	if (modifiers["ctrl"] && modifiers["alt"])
 		if (CtrlAltClickOn(A))
 			return TRUE
 	if (modifiers["shift"] && modifiers["ctrl"])
 		if (CtrlShiftClickOn(A))
+			return TRUE
+	if (modifiers["shift"] && modifiers["alt"])
+		if (AltShiftClickOn(A))
 			return TRUE
 	if (modifiers["middle"])
 		if (MiddleClickOn(A))
@@ -120,6 +126,12 @@
 /mob/living/silicon/robot/CtrlShiftClickOn(atom/A)
 	A.BorgCtrlShiftClick(src)
 
+/mob/living/silicon/robot/AltShiftClickOn(atom/A)
+	return A.BorgAltShiftClick(src)
+
+/mob/living/silicon/robot/CtrlAltShiftClickOn(atom/A)
+	return A.BorgCtrlAltShiftClick(src)
+
 /atom/proc/BorgCtrlAltClick(mob/living/silicon/robot/user) //forward to human click if not overriden
 	CtrlAltClick(user)
 
@@ -162,6 +174,12 @@
 
 /atom/proc/BorgCtrlShiftClick(mob/living/silicon/robot/user)
 	CtrlShiftClick(user)
+
+/atom/proc/BorgAltShiftClick(mob/living/silicon/robot/user)
+	return AIAltShiftClick(user)
+
+/atom/proc/BorgCtrlAltShiftClick(mob/living/silicon/robot/user)
+	return AICtrlAltShiftClick(user)
 
 /*
 	As with AI, these are not used in click code,
