@@ -9,5 +9,5 @@
 	throw_range = 4
 	w_class = ITEM_SIZE_HUGE
 	max_w_class = ITEM_SIZE_NORMAL
-	max_storage_space = DEFAULT_BACKPACK_STORAGE
+	max_storage_space = ITEM_SIZE_NORMAL * 7
 	allow_slow_dump = TRUE

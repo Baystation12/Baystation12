@@ -62,10 +62,10 @@
 	slot_flags = SLOT_BELT
 	startswith = list(/obj/item/paper/cig = 10)
 	can_hold = list(
-  /obj/item/paper/cig,
-  /obj/item/clothing/mask/smokable/cigarette,
-  /obj/item/storage/cigpaper/filters
-)
+		/obj/item/paper/cig,
+		/obj/item/clothing/mask/smokable/cigarette,
+		/obj/item/storage/cigpaper/filters
+	)
 
 /obj/item/storage/cigpaper/fancy
 	name = "\improper Trident cigarette paper"
