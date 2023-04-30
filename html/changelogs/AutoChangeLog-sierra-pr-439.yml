@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: The Errant Pisces south airlock is now connected to the ship's powernet.
+  - maptweak: Crashed pod airlocks now start with atmosphere.
+  - tweak: Exterior mining asteroid turfs no longer have atmosphere.
