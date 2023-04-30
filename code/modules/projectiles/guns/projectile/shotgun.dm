@@ -141,7 +141,6 @@
 	handle_casings = HOLD_CASINGS
 	one_hand_penalty = 4
 	bulk = 4
-	var/recentpumpr = 0 // to prevent spammage
 	wielded_item_state = "rshotgun-wielded"
 	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
 
@@ -177,8 +176,7 @@
 
 		else
 			pump(user)
-
-		recentpumpr = world.time
+		recentpump = world.time + 1 SECOND
 
 /obj/item/gun/projectile/shotgun/pump/sawn/proc/pumpr(mob/living/user)
 	playsound(user, 'sound/weapons/shotgunpump.ogg', 60, 1)
