@@ -1,0 +1,7 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Railings now update their icons when wrenched open and closed.
+  - bugfix: Windows now correctly show 'unfastens' when using a screwdriver on them
+      to detach them from the floor.
+  - bugfix: M1 Garand sprites now properly update when they lack a magazine.
