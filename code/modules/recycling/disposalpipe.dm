@@ -198,6 +198,32 @@
 	broken(prob(0.5))
 
 
+/obj/structure/disposalpipe/can_anchor(obj/item/tool, mob/user, silent)
+	. = ..()
+	if (!.)
+		return
+
+	if (!anchored)
+		// Plating
+		var/turf/turf = get_turf(src)
+		if (!turf.is_plating())
+			if (!silent)
+				USE_FEEDBACK_FAILURE("You must remove the plating before you can secure \the [src].")
+			return FALSE
+
+		// Catwalks
+		var/obj/structure/catwalk/catwalk = locate() in get_turf(src)
+		if (catwalk)
+			if (catwalk.plated_tile && !catwalk.hatch_open)
+				if (!silent)
+					USE_FEEDBACK_FAILURE("\The [catwalk]'s hatch needs to be opened before you can secure \the [src].")
+				return FALSE
+			else if (!catwalk.plated_tile)
+				if (!silent)
+					USE_FEEDBACK_FAILURE("\The [catwalk] is blocking access to the floor.")
+				return FALSE
+
+
 /obj/structure/disposalpipe/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Welding Tool - Cut pipe
 	if (isWelder(tool))
