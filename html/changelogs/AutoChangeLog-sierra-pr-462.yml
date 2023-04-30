@@ -1,0 +1,4 @@
+author: SierraHelper
+delete-after: true
+changes:
+  - tweak: Wallets can't hold syringes.
