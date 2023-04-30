@@ -47,7 +47,7 @@
 	. = ..()
 
 /datum/artifact_effect/proc/ToggleActivate(reveal_toggle = 1)
-	addtimer(new Callback(src, .proc/DoActivation, reveal_toggle), 0)
+	addtimer(new Callback(src, src::DoActivation(), reveal_toggle), 0)
 
 /datum/artifact_effect/proc/DoActivation(reveal_toggle = 1)
 	if (toggled && activated)

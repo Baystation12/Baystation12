@@ -395,7 +395,7 @@
 		'html/images/sfplogo.png',
 		'html/images/falogo.png'
 		)
-	addtimer(new Callback(src, .proc/after_send_resources), 1 SECOND)
+	addtimer(new Callback(src, src::after_send_resources()), 1 SECOND)
 
 
 /client/proc/after_send_resources()

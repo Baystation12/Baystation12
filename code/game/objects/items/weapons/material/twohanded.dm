@@ -171,7 +171,7 @@
 
 				user.do_windup_animation(attacker, attack_cooldown)
 
-				addtimer(new Callback(src, .proc/deflect, user, attacker, AM, home_run ? TT.maxrange * 2 : TT.maxrange, home_run ? TT.speed * 2 : TT.speed), 0)
+				addtimer(new Callback(src, src::deflect(), user, attacker, AM, home_run ? TT.maxrange * 2 : TT.maxrange, home_run ? TT.speed * 2 : TT.speed), 0)
 
 			else
 				playsound(src, 'sound/items/baseball/swing_woosh.wav', 75, 1)

@@ -129,14 +129,14 @@
 			victim.client.eye = src
 		victim.forceMove(src)
 		src.occupant = victim
-		GLOB.destroyed_event.register(occupant, src, .proc/occupant_destroyed)
+		GLOB.destroyed_event.register(occupant, src, src::occupant_destroyed())
 		update_icon()
 
 /obj/machinery/gibber/proc/occupant_destroyed(mob/_occupant)
 	if (occupant == _occupant)
 		occupant = null
 		update_icon()
-	GLOB.destroyed_event.unregister(_occupant, src, .proc/occupant_destroyed)
+	GLOB.destroyed_event.unregister(_occupant, src, src::occupant_destroyed())
 
 /obj/machinery/gibber/verb/eject()
 	set category = "Object"
@@ -157,7 +157,7 @@
 	if (src.occupant.client)
 		src.occupant.client.eye = src.occupant.client.mob
 		src.occupant.client.perspective = MOB_PERSPECTIVE
-	GLOB.destroyed_event.unregister(occupant, src, .proc/occupant_destroyed)
+	GLOB.destroyed_event.unregister(occupant, src, src::occupant_destroyed())
 	src.occupant.dropInto(loc)
 	src.occupant = null
 	update_icon()
@@ -177,7 +177,7 @@
 
 	admin_attack_log(user, occupant, "Gibbed the victim", "Was gibbed", "gibbed")
 	src.occupant.ghostize()
-	addtimer(new Callback(src, .proc/finish_gibbing), gib_time)
+	addtimer(new Callback(src, src::finish_gibbing()), gib_time)
 
 	var/list/gib_products = shuffle(occupant.harvest_meat() | occupant.harvest_skin() | occupant.harvest_bones())
 	if(length(gib_products) <= 0)

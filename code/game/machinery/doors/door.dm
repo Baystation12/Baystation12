@@ -80,7 +80,7 @@
 		set_extension(src, /datum/extension/turf_hand, turf_hand_priority)
 
 /obj/machinery/door/Initialize()
-	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
+	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, src::CheckPenetration())
 	. = ..()
 
 	update_connections(1)

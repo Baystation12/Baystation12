@@ -103,7 +103,7 @@
 		var/datum/effect/effect/system/spark_spread/sparks = new(src)
 		sparks.set_up(10, EMPTY_BITFIELD, src)
 		sparks.start()
-		addtimer(new Callback(src, .proc/explode), 5 SECONDS)
+		addtimer(new Callback(src, src::explode()), 5 SECONDS)
 		return TRUE
 
 	return ..()

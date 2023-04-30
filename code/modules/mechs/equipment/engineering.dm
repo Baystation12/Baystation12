@@ -135,14 +135,14 @@
 			if(istype(MS))
 				MS.shields = src
 				segments += MS
-				GLOB.moved_event.register(MS, src, .proc/on_moved)
+				GLOB.moved_event.register(MS, src, src::on_moved())
 
 		passive_power_use = 0.8 KILOWATTS * length(segments)
 
 		update_icon()
 		owner.update_icon()
-		GLOB.moved_event.register(owner, src, .proc/on_moved)
-		GLOB.dir_set_event.register(owner, src, .proc/on_turned)
+		GLOB.moved_event.register(owner, src, src::on_moved())
+		GLOB.dir_set_event.register(owner, src, src::on_turned())
 
 /obj/item/mech_equipment/atmos_shields/on_update_icon()
 	. = ..()
@@ -151,13 +151,13 @@
 /obj/item/mech_equipment/atmos_shields/deactivate()
 	for(var/obj/effect/mech_shield/MS in segments)
 		if(istype(MS))
-			GLOB.moved_event.unregister(MS, src, .proc/on_moved)
+			GLOB.moved_event.unregister(MS, src, src::on_moved())
 	if(length(segments))
 		owner.visible_message(SPAN_WARNING("The energy shields in front of \the [owner] disappear!"))
 	QDEL_NULL_LIST(segments)
 	passive_power_use = 0
-	GLOB.moved_event.unregister(owner, src, .proc/on_moved)
-	GLOB.dir_set_event.unregister(owner, src, .proc/on_turned)
+	GLOB.moved_event.unregister(owner, src, src::on_moved())
+	GLOB.dir_set_event.unregister(owner, src, src::on_turned())
 	. = ..()
 	update_icon()
 	owner.update_icon()

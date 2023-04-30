@@ -230,7 +230,7 @@
 		audible_message(SPAN_NOTICE("<b>\The [src]</b> pings, Incoming payload. Delivery expected in T - [(flight_time) / (1 SECOND)] seconds."))
 
 
-		active_timer = addtimer(new Callback(src, .proc/finish_moving), flight_time, TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_STOPPABLE)
+		active_timer = addtimer(new Callback(src, src::finish_moving()), flight_time, TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_STOPPABLE)
 		update_icon()
 		return TRUE
 

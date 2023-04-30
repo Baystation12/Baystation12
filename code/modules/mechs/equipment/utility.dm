@@ -350,7 +350,7 @@
 
 /obj/item/mech_equipment/catapult/proc/beamdestroyed()
 	if(beam)
-		GLOB.destroyed_event.unregister(beam, src, .proc/beamdestroyed)
+		GLOB.destroyed_event.unregister(beam, src, src::beamdestroyed())
 		beam = null
 	if(locked)
 		if(owner)
@@ -403,7 +403,7 @@
 						return
 					locked = AM
 					beam = owner.Beam(BeamTarget = target, icon_state = "r_beam", maxdistance = max_dist, beam_type = /obj/effect/ebeam/warp)
-					GLOB.destroyed_event.register(beam, src, .proc/beamdestroyed)
+					GLOB.destroyed_event.register(beam, src, src::beamdestroyed())
 
 					animate(target,pixel_y= initial(target.pixel_y) - 2,time=1 SECOND, easing = SINE_EASING, flags = ANIMATION_PARALLEL, loop = -1)
 					animate(pixel_y= initial(target.pixel_y) + 2,time=1 SECOND)

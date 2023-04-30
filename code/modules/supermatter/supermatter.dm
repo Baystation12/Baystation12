@@ -682,10 +682,10 @@
 
 /obj/machinery/rotating_alarm/supermatter/Initialize()
 	. = ..()
-	GLOB.supermatter_status.register_global(src, .proc/check_supermatter)
+	GLOB.supermatter_status.register_global(src, src::check_supermatter())
 
 /obj/machinery/rotating_alarm/supermatter/Destroy()
-	GLOB.supermatter_status.unregister_global(src, .proc/check_supermatter)
+	GLOB.supermatter_status.unregister_global(src, src::check_supermatter())
 	. = ..()
 
 /obj/machinery/rotating_alarm/supermatter/proc/check_supermatter(obj/machinery/power/supermatter/SM, danger)

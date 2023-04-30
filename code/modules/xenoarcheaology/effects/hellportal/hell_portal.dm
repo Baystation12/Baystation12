@@ -109,8 +109,8 @@
 
 /datum/artifact_effect/hellportal/proc/register_mob(mob/M)
 	mobs += M
-	GLOB.destroyed_event.register(M, src, .proc/unregister_mob)
-	GLOB.death_event.register(M, src, .proc/unregister_mob)
+	GLOB.destroyed_event.register(M, src, src::unregister_mob())
+	GLOB.death_event.register(M, src, src::unregister_mob())
 
 
 /datum/artifact_effect/hellportal/destroyed_effect()

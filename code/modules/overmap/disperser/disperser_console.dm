@@ -54,9 +54,9 @@
 		middle = M
 		back = B
 		if(is_valid_setup())
-			GLOB.destroyed_event.register(F, src, .proc/release_links)
-			GLOB.destroyed_event.register(M, src, .proc/release_links)
-			GLOB.destroyed_event.register(B, src, .proc/release_links)
+			GLOB.destroyed_event.register(F, src, src::release_links())
+			GLOB.destroyed_event.register(M, src, src::release_links())
+			GLOB.destroyed_event.register(B, src, src::release_links())
 			return TRUE
 	return FALSE
 
@@ -68,9 +68,9 @@
 	return FALSE
 
 /obj/machinery/computer/ship/disperser/proc/release_links()
-	GLOB.destroyed_event.unregister(front, src, .proc/release_links)
-	GLOB.destroyed_event.unregister(middle, src, .proc/release_links)
-	GLOB.destroyed_event.unregister(back, src, .proc/release_links)
+	GLOB.destroyed_event.unregister(front, src, src::release_links())
+	GLOB.destroyed_event.unregister(middle, src, src::release_links())
+	GLOB.destroyed_event.unregister(back, src, src::release_links())
 	front = null
 	middle = null
 	back = null

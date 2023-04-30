@@ -212,7 +212,7 @@
 /datum/build_mode/ai/proc/select_AI_mob(mob/living/unit)
 	selected_mobs += unit
 	user.client.images += unit.selected_image
-	GLOB.destroyed_event.register(unit, src, .proc/deselect_AI_mob)
+	GLOB.destroyed_event.register(unit, src, src::deselect_AI_mob())
 
 /datum/build_mode/ai/proc/deselect_AI_mob(mob/living/unit)
 	selected_mobs -= unit

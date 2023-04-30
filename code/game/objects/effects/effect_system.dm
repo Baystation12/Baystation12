@@ -186,7 +186,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /obj/effect/effect/smoke/Initialize()
 	. = ..()
-	addtimer(new Callback(src, .proc/fade_out), time_to_live)
+	addtimer(new Callback(src, src::fade_out()), time_to_live)
 
 /obj/effect/effect/smoke/Crossed(mob/living/carbon/M as mob )
 	..()
