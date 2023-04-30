@@ -73,6 +73,8 @@
 	if(CanPhysicallyInteract(user))
 		opened = !opened
 		update_icon()
+		return TRUE
+	return FALSE
 
 /obj/structure/extinguisher_cabinet/do_simple_ranged_interaction(mob/user)
 	if(has_extinguisher)

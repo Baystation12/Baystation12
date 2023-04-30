@@ -249,10 +249,12 @@
  *
  * **Parameters**:
  * - `A` - The atom that was clicked on.
+ *
+ * Returns boolean. Whether or not the interaction was handled.
  */
 /mob/proc/MiddleClickOn(atom/A)
 	swap_hand()
-	return
+	return TRUE
 
 // In case of use break glass
 /*
@@ -265,21 +267,25 @@
  *
  * **Parameters**:
  * - `A` - The atom that was clicked on.
+ *
+ * Returns boolean. Whether or not the interaction was handled.
  */
 /mob/proc/ShiftClickOn(atom/A)
-	A.ShiftClick(src)
-	return
+	return A.ShiftClick(src)
 
 /**
  * Called when a mob shift+clicks on the atom. By default, this calls the examine proc chain.
  *
  * **Parameters**:
  * - `user` - The mob that clicked on the atom.
+ *
+ * Returns boolean. Whether or not the interaction was handled.
  */
 /atom/proc/ShiftClick(mob/user)
-	if(user.client && user.client.eye == user)
+	if (user.client && user.client.eye == user)
 		user.examinate(src)
-	return
+		return TRUE
+	return FALSE
 
 /**
  * Called when the mob ctrl+clicks on an atom. By default, this calls the targeted atom's `CtrlClick()` proc.
@@ -307,19 +313,19 @@
 	if(Adjacent(user))
 		user.start_pulling(src)
 		return TRUE
-	. = ..()
+	return ..()
 
 /**
  * Called when the mob alt+clicks on an atom. By default, this calls the targeted atom's `on_click/alt` extension's `on_click()` proc, or the atom's `AltClick()` proc.
  *
  * **Parameters**:
  * - `A` - The atom that was clicked on.
+ *
+ * Returns boolean. Whether or not the interaction was handled.
  */
 /mob/proc/AltClickOn(atom/A)
 	var/datum/extension/on_click/alt = get_extension(A, /datum/extension/on_click/alt)
-	if(alt && alt.on_click(src))
-		return
-	A.AltClick(src)
+	return alt?.on_click(src) || A.AltClick(src)
 
 /**
  * Called when a mob alt+clicks the atom. By default, this creates and populates the Turf panel, displaying all objects on the atom's turf.
@@ -337,7 +343,8 @@
 		else
 			user.listed_turf = T
 			user.client.statpanel = "Turf"
-	return 1
+		return TRUE
+	return FALSE
 
 /mob/proc/TurfAdjacent(turf/T)
 	return T.AdjacentQuick(src)
@@ -352,30 +359,33 @@
  *
  * **Parameters**:
  * - `A` - The atom that was clicked on.
+ *
+ * Returns boolean. Whether or not the interaction was handled.
  */
 /mob/proc/CtrlShiftClickOn(atom/A)
-	A.CtrlShiftClick(src)
-	return
+	return A.CtrlShiftClick(src)
 
 /**
  * Called when a mob ctrl+shift+clicks on the atom.
  *
  * **Parameters**:
  * - `user` - The mob that clicked on the atom.
+ *
+ * Returns boolean. Whether or not the interaction was handled.
  */
 /atom/proc/CtrlShiftClick(mob/user)
-	return
+	return FALSE
 
 /**
  * Called when the mob ctrl+alt+clicks on an atom. By default, this calls the atom's `CtrlAltClick()` proc or calls the mob's `pointed()` proc.
  *
  * **Parameters**:
  * - `A` - The atom that was clicked on.
+ *
+ * Returns boolean. Whether or not the interaction was handled.
  */
 /mob/proc/CtrlAltClickOn(atom/A)
-	if(A.CtrlAltClick(src))
-		return
-	pointed(A)
+	return A.CtrlAltClick(src) || pointed(A)
 
 /**
  * Called when a mob ctrl+alt+clicks on the atom.
@@ -386,7 +396,7 @@
  * Returns boolean - Whather or not the interaction was handled.
  */
 /atom/proc/CtrlAltClick(mob/user)
-	return
+	return FALSE
 
 
 /**

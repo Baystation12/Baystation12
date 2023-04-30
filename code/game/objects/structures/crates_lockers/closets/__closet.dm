@@ -550,12 +550,12 @@
 /obj/structure/closet/AltClick(mob/user)
 	if(!src.opened)
 		togglelock(user)
-	else
-		return ..()
+		return TRUE
+	return ..()
 
 /obj/structure/closet/CtrlAltClick(mob/user)
 	verb_toggleopen()
-	return 1
+	return TRUE
 
 /obj/structure/closet/emp_act(severity)
 	for (var/atom/A as anything in src)

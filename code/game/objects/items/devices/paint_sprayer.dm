@@ -306,14 +306,14 @@
 /obj/item/device/paint_sprayer/AltClick()
 	if (!isturf(loc))
 		choose_preset_color()
-	else
-		. = ..()
+		return TRUE
+	return ..()
 
 /obj/item/device/paint_sprayer/CtrlClick()
 	if (!isturf(loc))
 		choose_color()
-	else
-		. = ..()
+		return TRUE
+	return ..()
 
 /obj/item/device/paint_sprayer/verb/choose_color()
 	set name = "Choose color"

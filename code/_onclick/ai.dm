@@ -109,28 +109,28 @@
 
 /mob/living/silicon/ai/CtrlShiftClickOn(atom/A)
 	if(!control_disabled && A.AICtrlShiftClick(src))
-		return
-	..()
+		return TRUE
+	return ..()
 
 /mob/living/silicon/ai/ShiftClickOn(atom/A)
 	if(!control_disabled && A.AIShiftClick(src))
-		return
-	..()
+		return TRUE
+	return ..()
 
 /mob/living/silicon/ai/CtrlClickOn(atom/A)
 	if(!control_disabled && A.AICtrlClick(src))
 		return TRUE
-	. = ..()
+	return ..()
 
 /mob/living/silicon/ai/AltClickOn(atom/A)
 	if(!control_disabled && A.AIAltClick(src))
-		return
-	..()
+		return TRUE
+	return ..()
 
 /mob/living/silicon/ai/MiddleClickOn(atom/A)
 	if(!control_disabled && A.AIMiddleClick(src))
-		return
-	..()
+		return TRUE
+	return ..()
 
 /mob/living/silicon/ai/AltShiftClickOn(atom/A)
 	if (!control_disabled && A.AIAltShiftClick(src))
@@ -148,32 +148,33 @@
 */
 
 /atom/proc/AICtrlShiftClick()
+	return FALSE
 
 /obj/machinery/door/airlock/AICtrlShiftClick() // Electrifies doors.
 	if(usr.incapacitated())
-		return
+		return FALSE
 	if(!electrified_until)
 		// permanent shock
 		Topic(src, list("command"="electrify_permanently", "activate" = "1"))
 	else
 		// disable/6 is not in Topic; disable/5 disables both temporary and permanent shock
 		Topic(src, list("command"="electrify_permanently", "activate" = "0"))
-	return 1
+	return TRUE
 
 /atom/proc/AICtrlAltClick()
-	return
+	return FALSE
 
 /atom/proc/AIShiftClick()
-	return
+	return FALSE
 
 /obj/machinery/door/airlock/AIShiftClick()  // Opens and closes doors!
 	if(usr.incapacitated())
-		return
+		return FALSE
 	if(density)
 		Topic(src, list("command"="open", "activate" = "1"))
 	else
 		Topic(src, list("command"="open", "activate" = "0"))
-	return 1
+	return TRUE
 
 /atom/proc/AICtrlClick()
 	return FALSE
@@ -204,27 +205,27 @@
 
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
 	if(usr.incapacitated())
-		return
+		return FALSE
 	Topic(src, list("command"="lethal", "value"="[!lethal]"))
-	return 1
+	return TRUE
 
 /obj/machinery/atmospherics/binary/pump/AIAltClick()
 	return AltClick()
 
 /atom/proc/AIMiddleClick(mob/living/silicon/user)
-	return 0
+	return FALSE
 
 /obj/machinery/door/airlock/AIMiddleClick() // Toggles door bolt lights.
 	if(usr.incapacitated())
-		return
+		return FALSE
 	if(..())
-		return
+		return TRUE
 
 	if(!src.lights)
 		Topic(src, list("command"="lights", "activate" = "1"))
 	else
 		Topic(src, list("command"="lights", "activate" = "0"))
-	return 1
+	return TRUE
 
 
 /atom/proc/AIAltShiftClick(atom/A)

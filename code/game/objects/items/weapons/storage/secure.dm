@@ -179,5 +179,5 @@
 
 /obj/item/storage/secure/AltClick(/mob/user)
 	if (locked)
-		return
-	..()
+		return FALSE
+	return ..()

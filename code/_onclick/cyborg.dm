@@ -105,26 +105,24 @@
 //Middle click cycles through selected modules.
 /mob/living/silicon/robot/MiddleClickOn(atom/A)
 	cycle_modules()
-	return
+	return TRUE
 
 //Give cyborgs hotkey clicks without breaking existing uses of hotkey clicks
 // for non-doors/apcs
 /mob/living/silicon/robot/CtrlAltClickOn(atom/A)
-	if(A.BorgCtrlAltClick(src))
-		return
-	pointed(A)
+	return A.BorgCtrlAltClick(src) || pointed(A)
 
 /mob/living/silicon/robot/ShiftClickOn(atom/A)
-	A.BorgShiftClick(src)
+	return A.BorgShiftClick(src)
 
 /mob/living/silicon/robot/CtrlClickOn(atom/A)
 	return A.BorgCtrlClick(src)
 
 /mob/living/silicon/robot/AltClickOn(atom/A)
-	A.BorgAltClick(src)
+	return A.BorgAltClick(src)
 
 /mob/living/silicon/robot/CtrlShiftClickOn(atom/A)
-	A.BorgCtrlShiftClick(src)
+	return A.BorgCtrlShiftClick(src)
 
 /mob/living/silicon/robot/AltShiftClickOn(atom/A)
 	return A.BorgAltShiftClick(src)
@@ -133,16 +131,13 @@
 	return A.BorgCtrlAltShiftClick(src)
 
 /atom/proc/BorgCtrlAltClick(mob/living/silicon/robot/user) //forward to human click if not overriden
-	CtrlAltClick(user)
-
-///obj/machinery/door/airlock/BorgCtrlAltClick()
-//	AICtrlAltClick()
+	return CtrlAltClick(user)
 
 /atom/proc/BorgShiftClick(mob/living/silicon/robot/user) //forward to human click if not overriden
-	ShiftClick(user)
+	return ShiftClick(user)
 
 /obj/machinery/door/airlock/BorgShiftClick()  // Opens and closes doors! Forwards to AI code.
-	AIShiftClick()
+	return AIShiftClick()
 
 /atom/proc/BorgCtrlClick(mob/living/silicon/robot/user) //forward to human click if not overriden
 	return CtrlClick(user)
@@ -157,23 +152,21 @@
 	return AICtrlClick()
 
 /atom/proc/BorgAltClick(mob/living/silicon/robot/user)
-	AltClick(user)
-	return
+	return AltClick(user)
 
 /obj/machinery/door/airlock/BorgCtrlShiftClick() // Eletrifies doors. Forwards to AI code.
 	if (usr.a_intent != I_HELP)
-		AICtrlShiftClick()
-	else
-		..()
+		return AICtrlShiftClick()
+	return ..()
 
 /obj/machinery/turretid/BorgAltClick() //turret lethal on/off. Forwards to AI code.
-	AIAltClick()
+	return AIAltClick()
 
 /obj/machinery/atmospherics/binary/pump/BorgAltClick()
 	return AltClick()
 
 /atom/proc/BorgCtrlShiftClick(mob/living/silicon/robot/user)
-	CtrlShiftClick(user)
+	return CtrlShiftClick(user)
 
 /atom/proc/BorgAltShiftClick(mob/living/silicon/robot/user)
 	return AIAltShiftClick(user)

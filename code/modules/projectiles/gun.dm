@@ -615,7 +615,7 @@
 	if(loc == user)
 		toggle_safety(user)
 		return TRUE
-	. = ..()
+	return ..()
 
 /obj/item/gun/proc/safety()
 	return has_safety && safety_state

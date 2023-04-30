@@ -96,7 +96,7 @@
 	if (istype(id))
 		remove_from_storage(id, get_turf(user))
 		user.put_in_hands(id)
-		return
+		return TRUE
 	return ..()
 
 

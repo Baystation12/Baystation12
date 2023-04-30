@@ -138,8 +138,8 @@
 /obj/item/device/personal_shield/AltClick(mob/user)
 	if (loc == user)
 		toggle(user)
-	else
-		. = ..()
+		return TRUE
+	return ..()
 
 /obj/item/device/personal_shield/proc/take_charge()
 	if(!actual_take_charge())
