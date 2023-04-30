@@ -67,24 +67,24 @@
 	next_click = world.time + 1
 
 	var/list/modifiers = params2list(params)
-	if(modifiers["shift"] && modifiers["ctrl"])
-		CtrlShiftClickOn(A)
-		return 1
-	if(modifiers["ctrl"] && modifiers["alt"])
-		CtrlAltClickOn(A)
-		return 1
-	if(modifiers["middle"])
-		MiddleClickOn(A)
-		return 1
-	if(modifiers["shift"])
-		ShiftClickOn(A)
-		return 0
-	if(modifiers["alt"]) // alt and alt-gr (rightalt)
-		AltClickOn(A)
-		return 1
-	if(modifiers["ctrl"])
-		CtrlClickOn(A)
-		return 1
+	if (modifiers["shift"] && modifiers["ctrl"])
+		if (CtrlShiftClickOn(A))
+			return TRUE
+	if (modifiers["ctrl"] && modifiers["alt"])
+		if (CtrlAltClickOn(A))
+			return TRUE
+	if (modifiers["middle"])
+		if (MiddleClickOn(A))
+			return TRUE
+	if (modifiers["shift"])
+		if (ShiftClickOn(A))
+			return TRUE
+	if (modifiers["alt"])
+		if (AltClickOn(A))
+			return TRUE
+	if (modifiers["ctrl"])
+		if (CtrlClickOn(A))
+			return TRUE
 
 	if(stat || paralysis || stunned || weakened || sleeping)
 		return

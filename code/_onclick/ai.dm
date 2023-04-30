@@ -27,24 +27,24 @@
 		return
 
 	var/list/modifiers = params2list(params)
-	if(modifiers["ctrl"] && modifiers["alt"])
-		CtrlAltClickOn(A)
-		return
-	if(modifiers["shift"] && modifiers["ctrl"])
-		CtrlShiftClickOn(A)
-		return
-	if(modifiers["middle"])
-		MiddleClickOn(A)
-		return
-	if(modifiers["shift"])
-		ShiftClickOn(A)
-		return
-	if(modifiers["alt"]) // alt and alt-gr (rightalt)
-		AltClickOn(A)
-		return
-	if(modifiers["ctrl"])
-		CtrlClickOn(A)
-		return
+	if (modifiers["ctrl"] && modifiers["alt"])
+		if (CtrlAltClickOn(A))
+			return TRUE
+	if (modifiers["shift"] && modifiers["ctrl"])
+		if (CtrlShiftClickOn(A))
+			return TRUE
+	if (modifiers["middle"])
+		if (MiddleClickOn(A))
+			return TRUE
+	if (modifiers["shift"])
+		if (ShiftClickOn(A))
+			return TRUE
+	if (modifiers["alt"])
+		if (AltClickOn(A))
+			return TRUE
+	if (modifiers["ctrl"])
+		if (CtrlClickOn(A))
+			return TRUE
 
 	face_atom(A) // change direction to face what you clicked on
 
