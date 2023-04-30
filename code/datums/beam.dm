@@ -171,5 +171,5 @@
  */
 /atom/proc/Beam(atom/BeamTarget,icon_state="b_beam",icon='icons/effects/beam.dmi',time=INFINITY,maxdistance=INFINITY,beam_type=/obj/effect/ebeam)
 	var/datum/beam/newbeam = new(src,BeamTarget,icon,icon_state,time,maxdistance,beam_type)
-	invoke_async(newbeam, /datum/beam/.proc/Start)
+	invoke_async(newbeam, newbeam::Start())
 	return newbeam
