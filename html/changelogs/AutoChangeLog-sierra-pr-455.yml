@@ -1,6 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - tweak: The chemical heater is now a thermal regulator, and can both heat and cool.
-      Science, you see.
-  - rscdel: Chemical coolers no longer exist.
