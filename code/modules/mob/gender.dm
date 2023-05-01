@@ -1,10 +1,10 @@
 
-var/global/list/gender_datums = list()
+GLOBAL_LIST_EMPTY(gender_datums)
 
 /hook/startup/proc/populate_gender_datum_list()
 	for(var/type in subtypesof(/datum/gender))
 		var/datum/gender/G = new type
-		gender_datums[G.key] = G
+		GLOB.gender_datums[G.key] = G
 		if(!G.formal_term)
 			G.formal_term = G.key
 	return 1

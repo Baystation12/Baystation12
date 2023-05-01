@@ -687,7 +687,7 @@
 
 /mob/choose_from_pronouns()
 	if(!pronouns)
-		var/datum/gender/G = gender_datums[gender]
+		var/datum/gender/G = GLOB.gender_datums[gender]
 		return G
 	else
 		var/datum/pronouns/P = GLOB.pronouns.by_key[pronouns]

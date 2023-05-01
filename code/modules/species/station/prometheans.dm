@@ -78,7 +78,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 	prometheans = src
 
 /datum/species/shapeshifter/promethean/hug(mob/living/carbon/human/H,mob/living/target)
-	var/datum/gender/G = gender_datums[target.gender]
+	var/datum/gender/G = GLOB.gender_datums[target.gender]
 	H.visible_message(SPAN_NOTICE("\The [H] glomps [target] to make [G.him] feel better!"), \
 					SPAN_NOTICE("You glomps [target] to make [G.him] feel better!"))
 	H.apply_stored_shock_to(target)
@@ -146,7 +146,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 
 	if(!stored_shock_by_ref["\ref[H]"])
 		return
-	var/datum/gender/G = gender_datums[H.gender]
+	var/datum/gender/G = GLOB.gender_datums[H.gender]
 
 	switch(stored_shock_by_ref["\ref[H]"])
 		if(1 to 10)
