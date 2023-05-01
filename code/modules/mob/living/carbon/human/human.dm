@@ -904,12 +904,13 @@
 		reset_view(0)
 
 /**
- * Retrieves the atom's visible gender. Generally this is just `gender` but some factors may mask or change this.
+ * Retrieves the atom's pronouns. Generally this is just based on `gender` but some factors may mask or change this.
  *
- * Returns a valid gender value. See DM documentation for `/mob/var/gender`.
+ * Returns instance of `/datum/pronouns`.
  */
 /atom/proc/choose_from_pronouns()
-	return GLOB.gender_datums[gender]
+	RETURN_TYPE(/datum/pronouns)
+	return GLOB.pronouns_from_gender[gender]
 
 /mob/living/carbon/human/choose_from_pronouns()
 	if(wear_suit && wear_suit.flags_inv & HIDEJUMPSUIT && ((head && head.flags_inv & HIDEMASK) || wear_mask))
