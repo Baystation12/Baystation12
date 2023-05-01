@@ -42,35 +42,36 @@
 
 
 /**
- * Returns a list containing only each unique ckey present in a list of connections provided by `_fetch_connections()`.
+ * Returns a sorted list containing only each unique ckey present in a list of connections provided by `_fetch_connections()`.
  */
 /proc/_unique_ckeys_from_connections(list/connections)
 	RETURN_TYPE(/list)
 	. = list()
 	for (var/list/connection in connections)
 		. |= connection["ckey"]
+	return sortList(.)
 
 
 /**
- * Returns a list containing only each unique CID present in a list of connections provided by `_fetch_connections()`.
+ * Returns a sorted list containing only each unique CID present in a list of connections provided by `_fetch_connections()`.
  */
 /proc/_unique_cids_from_connections(list/connections)
 	RETURN_TYPE(/list)
 	. = list()
 	for (var/list/connection in connections)
 		. |= connection["computerid"]
+	return sortList(.)
 
 
 /**
- * Returns a list containing only each unique IP present in a list of connections provided by `_fetch_connections()`.
- *
- * Returns list of lists.
+ * Returns a sorted list containing only each unique IP present in a list of connections provided by `_fetch_connections()`.
  */
 /proc/_unique_ips_from_connections(list/connections)
 	RETURN_TYPE(/list)
 	. = list()
 	for (var/list/connection in connections)
 		. |= connection["ip"]
+	return sortList(.)
 
 
 /**

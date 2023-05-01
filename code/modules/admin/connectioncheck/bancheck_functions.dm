@@ -48,13 +48,14 @@
 
 
 /**
- * Returns a list containing only each unique ckey present in a list of connections provided by `_fetch_connections()`.
+ * Returns a sorted list containing only each unique ckey present in a list of connections provided by `_fetch_connections()`.
  */
 /proc/_unique_ckeys_from_bans(list/bans)
 	RETURN_TYPE(/list)
 	. = list()
 	for (var/list/ban in bans)
 		. |= ban["ckey"]
+	return sortList(.)
 
 
 /**
