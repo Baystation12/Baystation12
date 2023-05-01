@@ -212,6 +212,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<hr />
 
 		<h2>Associated Ckeys, IP Addresses, and Computer IDs</h2>
 		<p><small>NOTE: Rows in this table are not necessarily associated with eachother. This is simply a list of each category's entries for ease of information.<br />
@@ -232,6 +233,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<hr />
 
 		<h2>All Unique Connections</h2>
 		<p><small>NOTE: This table does not list every single connection ever made, only the first connection seen for each unique combination of ckey, IP, and CID.<br />

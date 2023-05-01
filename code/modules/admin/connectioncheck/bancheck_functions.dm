@@ -222,10 +222,12 @@
 				</tr>
 			</tbody>
 		</table>
+		<hr />
 
 		<h2>Matching Banned Ckeys</h2>
 		<p><small>Entries matching the current query are <span class='highlight'>highlighted</span>.</small></p>
 		[unique_ckeys_table]
+		<hr />
 
 		<h2>All Matching Bans</h2>
 		<p><small>Entries matching the current query are <span class='highlight'>highlighted</span>.</small></p>
