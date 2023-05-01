@@ -11012,7 +11012,7 @@
 /area/centcom/living)
 "iQN" = (
 /obj/structure/table/glass,
-/obj/machinery/reagent_temperature/cooler{
+/obj/machinery/reagent_temperature{
 	density = 0
 	},
 /obj/effect/floor_decal/corner/beige{
@@ -15884,7 +15884,7 @@
 	pixel_x = 7;
 	pixel_y = 8
 	},
-/obj/machinery/reagent_temperature/cooler,
+/obj/machinery/reagent_temperature,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "white"
@@ -16468,7 +16468,7 @@
 /area/centcom/holding)
 "tSO" = (
 /obj/structure/table/marble,
-/obj/machinery/reagent_temperature/cooler,
+/obj/machinery/reagent_temperature,
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/effect/floor_decal/corner/white/diagonal{
 	dir = 4

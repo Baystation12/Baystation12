@@ -1951,7 +1951,6 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/light,
 /obj/effect/floor_decal/corner/paleblue/mono,
-/obj/machinery/reagent_temperature/cooler,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/commons)
 "KA" = (

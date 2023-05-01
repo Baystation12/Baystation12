@@ -4221,7 +4221,7 @@
 /obj/effect/floor_decal/corner/paleblue/bordercorner2{
 	dir = 8
 	},
-/obj/machinery/reagent_temperature/cooler,
+/obj/machinery/reagent_temperature,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "ahZ" = (
@@ -29917,7 +29917,7 @@
 /area/chapel/office)
 "bdJ" = (
 /obj/structure/table/standard,
-/obj/machinery/reagent_temperature/cooler{
+/obj/machinery/reagent_temperature{
 	density = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{

@@ -4306,7 +4306,7 @@
 /obj/machinery/reagent_temperature{
 	pixel_y = 12
 	},
-/obj/machinery/reagent_temperature/cooler{
+/obj/machinery/reagent_temperature{
 	pixel_y = -4
 	},
 /obj/item/reagent_containers/spray/cleaner{

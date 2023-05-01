@@ -956,7 +956,7 @@
 /obj/machinery/door/airlock/command{
 	autoset_access = 0;
 	name = "Officer's Mess";
-	req_access = list("ACCESS_TORCH_O_MESS", "ACCESS_TORCH_CREW")
+	req_access = list("ACCESS_TORCH_O_MESS","ACCESS_TORCH_CREW")
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
@@ -1086,9 +1086,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/table/marble,
-/obj/machinery/reagent_temperature/cooler{
-	pixel_y = 4
-	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "cM" = (
