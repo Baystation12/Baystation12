@@ -146,15 +146,17 @@
 	// Unique Ckeys
 	var/list/unique_ckeys = _unique_ckeys_from_bans(bans)
 	var/unique_ckeys_table = {"
-		<table style='width: 100%;'>
+		<table class="data hover">
 			<tbody>
 	"}
+	var/stripe = FALSE
 	for (var/ckey in unique_ckeys)
 		unique_ckeys_table += {"
-				<tr>
+				<tr[stripe ? " class='stripe'" : null]>
 					<td[ckey == target_ckey ? " class='highlight'" : null]>[ckey]</td>
 				</tr>
 		"}
+		stripe = !stripe
 	unique_ckeys_table += {"
 			</tbody>
 		</table>
@@ -162,7 +164,7 @@
 
 	// List of all bans
 	var/all_bans_table = {"
-		<table style='width: 100%;'>
+		<table class="data hover">
 			<thead>
 				<tr>
 					<th>Banned Ckey</th>
@@ -174,25 +176,74 @@
 			</thead>
 			<tbody>
 				"}
+	stripe = FALSE
 	for (var/list/row in bans)
+		// Row classes
+		var/classes_row = list()
+		if (stripe)
+			classes_row += "stripe"
+
+		// Ckey classes
+		var/classes_ckey = ""
+		var/ckey = row["ckey"]
+		if (!row["ckey"])
+			classes_ckey = "disabled"
+			ckey = "(EMPTY)"
+		else if (row["ckey"] == target_ckey)
+			classes_ckey = "highlight"
+		if (classes_ckey)
+			classes_ckey = " class='[classes_ckey]'"
+
+		// IP classes
+		var/classes_ip = ""
+		var/ip = row["ip"]
+		if (!row["ip"])
+			classes_ip = "disabled"
+			ip = "(EMPTY)"
+		else if (row["ip"] == target_ip)
+			classes_ip = "highlight"
+		if (classes_ip)
+			classes_ip = " class='[classes_ip]'"
+
+		// CID classes
+		var/classes_cid = ""
+		var/cid = row["computerid"]
+		if (!row["computerid"])
+			classes_cid = "disabled"
+			cid = "(EMPTY)"
+		else if (row["computerid"] == target_cid)
+			classes_cid = "highlight"
+		if (classes_cid)
+			classes_cid = " class='[classes_cid]'"
+
+		// Status cell
 		var/status = "ACTIVE"
 		if (row["expired"])
 			status = row["unbanned"] ? "UNBANNED" : "EXPIRED"
+			classes_row += "disabled"
 		else
 			switch (row["bantype"])
 				if ("PERMABAN")
 					status += " (PERMANENT)"
 				if ("TEMPBAN")
 					status += " (UNTIL [row["expiration_time"]])"
+
+		// Combine row classes
+		if (length(classes_row))
+			classes_row = " class='[english_list(classes_row, "", "", " ", " ")]'"
+		else
+			classes_row = null
+
+		// Build table row
 		all_bans_table += {"
-				<tr[row["expired"] ? " style='color: gray;'" : null]>
-					<td[row["ckey"] == target_ckey ? " class='highlight'" : null]>[row["ckey"] ? row["ckey"] : "<span class='color: gray;'>N/A</span>"]</td>
-					<td[row["ip"] == target_ip ? " class='highlight'" : null]>[row["ip"] ? row["ip"] : "<span class='color: gray;'>N/A</span>"]</td>
-					<td[row["computerid"] == target_cid ? " class='highlight'" : null]>[row["computerid"] ? row["computerid"] : "<span class='color: gray;'>N/A</span>"]</td>
+				<tr[classes_row]>
+					<td[classes_ckey]>[ckey]</td>
+					<td[classes_ip]>[ip]</td>
+					<td[classes_cid]>[cid]</td>
 					<td>[status]</td>
 					<td>[row["a_ckey"]]</td>
 				</tr>
-				<tr[row["expired"] ? " style='color: gray;'" : null]>
+				<tr[classes_row]>
 					<th>Reason</th>
 					<td colspan='4'>[row["reason"]]</td>
 				</tr>
@@ -206,7 +257,7 @@
 	var/final_body = {"
 		<h1>Associated Bans</h1>
 		<h2>Queried Details</h2>
-		<table stype='width: 100%;'>
+		<table class="data">
 			<thead>
 				<tr>
 					<th style='width: 33%';>Ckey</th>
@@ -216,9 +267,9 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>[target_ckey ? target_ckey : "N/A"]</td>
-					<td>[target_ip ? target_ip : "N/A"]</td>
-					<td>[target_cid ? target_cid : "N/A"]</td>
+					<td class='[target_ckey ? "highlight" : "disabled"]'>[target_ckey ? target_ckey : "(EMPTY)"]</td>
+					<td class='[target_ip ? "highlight" : "disabled"]'>[target_ip ? target_ip : "(EMPTY)"]</td>
+					<td class='[target_cid ? "highlight" : "disabled"]'>[target_cid ? target_cid : "(EMPTY)"]</td>
 				</tr>
 			</tbody>
 		</table>

@@ -117,15 +117,17 @@
 	// Unique Ckeys
 	var/list/unique_ckeys = _unique_ckeys_from_connections(connections)
 	var/unique_ckeys_table = {"
-		<table style='width: 100%;'>
+		<table class="data hover">
 			<tbody>
 	"}
+	var/stripe = FALSE
 	for (var/ckey in unique_ckeys)
 		unique_ckeys_table += {"
-				<tr>
+				<tr[stripe ? " class='stripe'" : null]>
 					<td[ckey == target_ckey ? " class='highlight'" : null]>[ckey]</td>
 				</tr>
 		"}
+		stripe = !stripe
 	unique_ckeys_table += {"
 			</tbody>
 		</table>
@@ -134,15 +136,17 @@
 	// Unique IP Addresses
 	var/list/unique_ips = _unique_ips_from_connections(connections)
 	var/unique_ips_table = {"
-		<table style='width: 100%;'>
+		<table class="data hover">
 			<tbody>
 	"}
+	stripe = FALSE
 	for (var/ip in unique_ips)
 		unique_ips_table += {"
-				<tr>
-					<td[ip == target_ip ? " class='highlight'" : null]>[ip]</td>
+				<tr[stripe ? " class='stripe'" : null]>
+					<td style='vertical-align: top;'[ip == target_ip ? " class='highlight'" : null]>[ip]</td>
 				</tr>
 		"}
+		stripe = !stripe
 	unique_ips_table += {"
 			</tbody>
 		</table>
@@ -151,15 +155,17 @@
 	// Unique CIDs
 	var/list/unique_cids = _unique_cids_from_connections(connections)
 	var/unique_cids_table = {"
-		<table style='width: 100%;'>
+		<table class="data hover">
 			<tbody>
 	"}
+	stripe = FALSE
 	for (var/cid in unique_cids)
 		unique_cids_table += {"
-				<tr>
-					<td[cid == target_cid ? " class='highlight'" : null]>[cid]</td>
+				<tr[stripe ? " class='stripe'" : null]>
+					<td style='vertical-align: top;'[cid == target_cid ? " class='highlight'" : null]>[cid]</td>
 				</tr>
 		"}
+		stripe = !stripe
 	unique_cids_table += {"
 			</tbody>
 		</table>
@@ -167,7 +173,7 @@
 
 	// List of all connections
 	var/all_connections_table = {"
-		<table style='width: 100%;'>
+		<table class="data hover">
 			<thead>
 				<tr>
 					<th>First Seen</th>
@@ -178,15 +184,17 @@
 			</thead>
 			<tbody>
 	"}
+	stripe = FALSE
 	for (var/list/row in connections)
 		all_connections_table += {"
-				<tr>
+				<tr[stripe ? " class='stripe'" : null]>
 					<td>[row["datetime"]]</td>
 					<td[row["ckey"] == target_ckey ? " class='highlight'" : null]>[row["ckey"]]</td>
 					<td[row["ip"] == target_ip ? " class='highlight'" : null]>[row["ip"]]</td>
 					<td[row["computerid"] == target_cid ? " class='highlight'" : null]>[row["computerid"]]</td>
 				</tr>
 		"}
+		stripe = !stripe
 	all_connections_table += {"
 			</tbody>
 		</table>
@@ -196,7 +204,7 @@
 	var/final_body = {"
 		<h1>Associated Connections</h1>
 		<h2>Queried Details</h2>
-		<table style='width: 100%;'>
+		<table class="data hover">
 			<thead>
 				<tr>
 					<th style='width: 33%;'>Ckey</th>
@@ -217,7 +225,7 @@
 		<h2>Associated Ckeys, IP Addresses, and Computer IDs</h2>
 		<p><small>NOTE: Rows in this table are not necessarily associated with eachother. This is simply a list of each category's entries for ease of information.<br />
 			Entries matching the current query are <span class='highlight'>highlighted</span>.</small></p>
-		<table style='width: 100%;'>
+		<table class="data"> <!-- Intentionally not set to hover. Nested tables hover instead. -->
 			<thead>
 				<tr>
 					<th style='width: 33%;'>Ckeys</th>
