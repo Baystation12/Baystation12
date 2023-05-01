@@ -909,7 +909,7 @@
  * Returns a valid gender value. See DM documentation for `/mob/var/gender`.
  */
 /atom/proc/choose_from_pronouns()
-	return gender
+	return gender_datums[gender]
 
 /mob/living/carbon/human/choose_from_pronouns()
 	if(wear_suit && wear_suit.flags_inv & HIDEJUMPSUIT && ((head && head.flags_inv & HIDEMASK) || wear_mask))
