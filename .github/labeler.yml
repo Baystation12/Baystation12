@@ -25,3 +25,6 @@ Sound:
 
 Config Update:
 - config/example/**/*
+
+Database:
+- sql/**/*
