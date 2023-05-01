@@ -35,11 +35,14 @@
 			{{:data.valveAttachment}}
 		{{else}}
 			<i>None</i>
-		{{/if}}		
+		{{/if}}
 		{{:helper.link('Remove', 'eject', {'rem_device' : 1}, data.valveAttachment ? null : 'disabled')}}
 		{{if data.valveAttachment}}
 			{{:helper.link('View', 'wrench', {'device' : 1})}}
-		{{/if}}		
+		{{/if}}
+		{{if data.valveAttachment}}
+			{{:helper.link('Trigger', 'activate', {'activate' : 1})}}
+		{{/if}}
 	</div>
 </div>
 
@@ -53,4 +56,3 @@
 		{{:helper.link('Open', 'unlocked', {'open' : 1}, (!data.attachmentOne || !data.attachmentTwo) ? 'disabled' : (data.valveOpen ? 'selected' : null))}}{{:helper.link('Close', 'locked', {'open' : 1}, (!data.attachmentOne || !data.attachmentTwo) ? 'disabled' : (data.valveOpen ? null : 'selected'))}}
 	</div>
 </div>
-

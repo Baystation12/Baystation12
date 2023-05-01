@@ -5,7 +5,7 @@
 	icon_state = "valve_1"
 	var/obj/item/tank/tank_one
 	var/obj/item/tank/tank_two
-	var/obj/item/device/attached_device
+	var/obj/item/device/assembly/attached_device
 	var/mob/attacher = null
 	var/valve_open = 0
 	var/toggle = 1
@@ -120,6 +120,8 @@
 			update_icon()
 		if(href_list["device"])
 			attached_device.attack_self(usr)
+		if(href_list["activate"])
+			attached_device.activate()
 	return 1 // Returning 1 sends an update to attached UIs
 
 /obj/item/device/transfer_valve/process_activation(obj/item/device/D)
