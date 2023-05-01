@@ -3932,7 +3932,6 @@
 "jg" = (
 /obj/item/stack/material/rods,
 /obj/item/material/shard,
-/obj/random/single/meatstation/low/wormscientist,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "jh" = (
@@ -4076,7 +4075,6 @@
 /obj/random/maintenance/clean,
 /obj/item/plastique,
 /obj/effect/decal/cleanable/blood,
-/mob/living/simple_animal/hostile/meatstation/wormscientist,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "ju" = (
