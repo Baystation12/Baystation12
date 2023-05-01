@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: The Meat Station mines are no longer detonated during map initialization.
