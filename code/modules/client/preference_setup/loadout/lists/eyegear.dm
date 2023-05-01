@@ -159,9 +159,17 @@
 
 
 /datum/gear/eyes/material
-	display_name = "Material Goggles"
-	path = /obj/item/clothing/glasses/material
+	display_name = "Material Eyewear"
+	path = /obj/item/clothing/glasses
 	flags = GEAR_HAS_NO_CUSTOMIZATION
+
+
+/datum/gear/eyes/material/New()
+	..()
+	var/list/options = list()
+	options["Material Goggles"] = /obj/item/clothing/glasses/material
+	options["Material Goggles, corrective"] = /obj/item/clothing/glasses/material/prescription
+	gear_tweaks += new /datum/gear_tweak/path (options)
 
 
 /datum/gear/eyes/monocle
