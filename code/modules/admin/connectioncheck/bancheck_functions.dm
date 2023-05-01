@@ -16,7 +16,7 @@
 		crash_with("Database connection failed.")
 		return
 	var/DBQuery/query = dbcon.NewQuery("\
-		SELECT `bantime`, `bantype`, `reason`, `job`, `duration`, `expiration_time`, `ckey`, `ip`, `computerid`, `a_ckey`, `unbanned`\
+		SELECT `bantype`, `reason`, `expiration_time`, `ckey`, `ip`, `computerid`, `a_ckey`, `unbanned`\
 			FROM `erro_ban`\
 			WHERE `bantype` IN ('PERMABAN', 'TEMPBAN') AND \
 			(`ckey` = '[ckey]' OR `ip` = '[ip]' OR `computerid` = '[cid]')\
@@ -25,17 +25,14 @@
 	var/now = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
 	while (query.NextRow())
 		var/row = list(
-			"bantime" = query.item[1],
-			"bantype" = query.item[2],
-			"reason" = query.item[3],
-			"job" = query.item[4],
-			"duration" = query.item[5],
-			"expiration_time" = query.item[6],
-			"ckey" = query.item[7],
-			"ip" = query.item[8],
-			"computerid" = query.item[9],
-			"a_ckey" = query.item[10],
-			"unbanned" = query.item[11]
+			"bantype"         = query.item[1],
+			"reason"          = query.item[2],
+			"expiration_time" = query.item[3],
+			"ckey"            = query.item[4],
+			"ip"              = query.item[5],
+			"computerid"      = query.item[6],
+			"a_ckey"          = query.item[7],
+			"unbanned"        = query.item[8]
 		)
 		row["expired"] = ((row["bantype"] in list("TEMPBAN", "JOB_TEMPBAN")) && now > row["expiration_time"])
 		if (include_inactive || !(row["expired"] || row["unbanned"]))
@@ -94,7 +91,7 @@
 		crash_with("Database connection failed.")
 		return
 	var/DBQuery/query = dbcon.NewQuery({"
-		SELECT `bantime`, `bantype`, `reason`, `job`, `duration`, `expiration_time`, `ckey`, `ip`, `computerid`, `a_ckey`, `unbanned`
+		SELECT `bantype`, `reason`, `expiration_time`, `ckey`, `ip`, `computerid`, `a_ckey`, `unbanned`
 			FROM `erro_ban`
 			WHERE `bantype` IN ('PERMABAN', 'TEMPBAN') AND
 			([english_list(final_query_components, "", "", " OR ", " OR ")])
@@ -103,17 +100,14 @@
 	var/now = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
 	while (query.NextRow())
 		var/row = list(
-			"bantime" = query.item[1],
-			"bantype" = query.item[2],
-			"reason" = query.item[3],
-			"job" = query.item[4],
-			"duration" = query.item[5],
-			"expiration_time" = query.item[6],
-			"ckey" = query.item[7],
-			"ip" = query.item[8],
-			"computerid" = query.item[9],
-			"a_ckey" = query.item[10],
-			"unbanned" = query.item[11]
+			"bantype"         = query.item[1],
+			"reason"          = query.item[2],
+			"expiration_time" = query.item[3],
+			"ckey"            = query.item[4],
+			"ip"              = query.item[5],
+			"computerid"      = query.item[6],
+			"a_ckey"          = query.item[7],
+			"unbanned"        = query.item[8]
 		)
 		row["expired"] = ((row["bantype"] in list("TEMPBAN", "JOB_TEMPBAN")) && now > row["expiration_time"])
 		if (include_inactive || !(row["expired"] || row["unbanned"]))
