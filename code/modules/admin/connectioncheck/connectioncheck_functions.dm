@@ -15,10 +15,18 @@
 	if (!dbcon.IsConnected())
 		crash_with("Database connection failed.")
 		return
+	var/selection = list()
+	if (ckey)
+		selection += "`ckey` = '[ckey]'"
+	if (ip)
+		selection += "`ip` = '[ip]'"
+	if (cid)
+		selection += "`computerid` = '[cid]'"
+	selection = english_list(selection, "", "", " OR ", " OR ")
 	var/DBQuery/query = dbcon.NewQuery("\
 		SELECT `datetime`, `ckey`, `ip`, `computerid`\
 			FROM `erro_connection_log`\
-			WHERE `ckey` = '[ckey]' OR `ip` = '[ip]' OR `computerid` = '[cid]'\
+			WHERE [selection]\
 			GROUP BY `ckey`, `ip`, `computerid`\
 			ORDER BY `datetime`\
 	")

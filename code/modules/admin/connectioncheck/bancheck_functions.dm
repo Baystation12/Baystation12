@@ -15,11 +15,19 @@
 	if (!dbcon.IsConnected())
 		crash_with("Database connection failed.")
 		return
+	var/selection = list()
+	if (ckey)
+		selection += "`ckey` = '[ckey]'"
+	if (ip)
+		selection += "`ip` = '[ip]'"
+	if (cid)
+		selection += "`computerid` = '[cid]'"
+	selection = english_list(selection, "", "", " OR ", " OR ")
 	var/DBQuery/query = dbcon.NewQuery("\
 		SELECT `bantype`, `reason`, `expiration_time`, `ckey`, `ip`, `computerid`, `a_ckey`, `unbanned`\
 			FROM `erro_ban`\
 			WHERE `bantype` IN ('PERMABAN', 'TEMPBAN') AND \
-			(`ckey` = '[ckey]' OR `ip` = '[ip]' OR `computerid` = '[cid]')\
+			([selection])\
 	")
 	query.Execute()
 	var/now = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
