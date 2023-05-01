@@ -97,7 +97,7 @@
 	desc = "A chute to put things into a disposal network."
 	build_icon = 'icons/obj/pipes/disposal.dmi'
 	build_icon_state = "intake"
-	build_path = /obj/structure/disposalconstruct
+	build_path = /obj/structure/disposalconstruct/machine
 	constructed_path = /obj/machinery/disposal/deliveryChute
 
 /datum/pipe/disposal_dispenser/device/sorting

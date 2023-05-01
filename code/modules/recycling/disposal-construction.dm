@@ -240,7 +240,7 @@
 	update_icon()
 
 /obj/structure/disposalconstruct/machine/build(obj/structure/disposalpipe/CP)
-	var/obj/machinery/disposal/P = new /obj/machinery/disposal(src.loc)
+	var/obj/machinery/disposal/P = new constructed_path(src.loc)
 	transfer_fingerprints_to(P)
 	P.set_dir(dir)
 	P.mode = 0 // start with pump off
