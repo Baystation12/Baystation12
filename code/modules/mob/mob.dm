@@ -686,13 +686,13 @@
 
 
 /mob/choose_from_pronouns()
-	if(!pronouns)
-		return GLOB.pronouns.from_gender(gender)
-	else
-		var/datum/pronouns/P = GLOB.pronouns.by_key[pronouns]
-		if(P.types)
-			P = GLOB.pronouns.by_key[pick(P.types)]
-		return P
+	if (!pronouns)
+		return ..()
+
+	var/datum/pronouns/P = GLOB.pronouns.by_key[pronouns]
+	if(P.types)
+		P = GLOB.pronouns.by_key[pick(P.types)]
+	return P
 
 
 /mob/proc/see(message)
