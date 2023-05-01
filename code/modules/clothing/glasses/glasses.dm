@@ -187,7 +187,7 @@
 
 /obj/item/clothing/glasses/material
 	name = "optical material scanner"
-	desc = "Very confusing glasses."
+	desc = "Very confusing goggles."
 	gender = NEUTER
 	icon_state = "material"
 	item_state = "glasses"
@@ -196,6 +196,12 @@
 	toggleable = TRUE
 	vision_flags = SEE_OBJS
 	electric = TRUE
+
+
+/obj/item/clothing/glasses/material/prescription
+	desc = "Very confusing goggles. This set has corrective lenses."
+	prescription = 5
+
 
 /obj/item/clothing/glasses/threedglasses
 	name = "3D glasses"
