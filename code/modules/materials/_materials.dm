@@ -80,6 +80,12 @@
 	// Icons
 	/// String (Colour). Colour applied to products of this material.
 	var/icon_colour
+	/// String. Base icon state for material stacks.
+	var/sheet_icon_base = "sheet"
+	/// String. Icon overlay used for reinforced stacks.
+	var/sheet_icon_reinf = "reinf-overlay"
+	/// Boolean (Default `FALSE`). If set, material stacks will not have alt icons for plural or max.
+	var/sheet_no_plural_icon = FALSE
 	/// String. Wall base icon state. See header.
 	var/wall_icon_base = "metal"
 	/// String. Icon overlay used for reinforced walls.

@@ -5,6 +5,7 @@
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/uranium
 	radioactivity = 12
+	sheet_icon_base = "puck"
 	wall_icon_base = "stone"
 	door_icon_base = "stone"
 	table_icon_base = "stone"
@@ -29,6 +30,7 @@
 	hardness = MATERIAL_FLEXIBLE + 5
 	integrity = 100
 	stack_origin_tech = list(TECH_MATERIAL = 4)
+	sheet_icon_base = "ingot"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	chem_products = list(
@@ -70,6 +72,7 @@
 	weight = 15
 	hardness = MATERIAL_FLEXIBLE + 10
 	stack_origin_tech = list(TECH_MATERIAL = 2)
+	sheet_icon_base = "ingot"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	chem_products = list(
@@ -94,6 +97,7 @@
 	weight = 22
 	hardness = MATERIAL_FLEXIBLE + 10
 	stack_origin_tech = list(TECH_MATERIAL = 3)
+	sheet_icon_base = "ingot"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	chem_products = list(
@@ -152,6 +156,7 @@
 				)
 	integrity = 125
 	weight = 18
+	sheet_icon_base = "sheet-sheen"
 	wall_icon_base = "solid"
 	wall_icon_reinf = "reinf_over"
 	icon_colour = "#cccdcc"
@@ -176,6 +181,7 @@
 	stack_type = /obj/item/stack/material/plasteel
 	integrity = 400
 	melting_point = 6000
+	sheet_icon_base = "sheet-reinf"
 	wall_icon_base = "solid"
 	wall_icon_reinf = "reinf_over"
 	icon_colour = "#a8a9b2"
@@ -216,6 +222,7 @@
 	stack_type = /obj/item/stack/material/ocp
 	integrity = 200
 	melting_point = 12000
+	sheet_icon_base = "sheet-reinf"
 	wall_icon_base = "solid"
 	wall_icon_reinf = "reinf_over"
 	icon_colour = "#9bc6f2"
@@ -235,6 +242,7 @@
 	stack_type = /obj/item/stack/material/osmium
 	icon_colour = "#9999ff"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
+	sheet_icon_base = "ingot"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	construction_difficulty = MATERIAL_VERY_HARD_DIY
@@ -250,6 +258,7 @@
 	stack_type = /obj/item/stack/material/tritium
 	icon_colour = "#777777"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
+	sheet_icon_base = "puck"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	is_fusion_fuel = 1
@@ -264,6 +273,7 @@
 	stack_type = /obj/item/stack/material/deuterium
 	icon_colour = "#999999"
 	stack_origin_tech = list(TECH_MATERIAL = 3)
+	sheet_icon_base = "puck"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	is_fusion_fuel = 1
@@ -275,6 +285,8 @@
 	display_name = "metallic hydrogen"
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/mhydrogen
+	sheet_icon_base = "sheet-mythril"
+	sheet_no_plural_icon = TRUE
 	icon_colour = "#e6c5de"
 	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 6, TECH_MAGNET = 5)
 	is_fusion_fuel = 1
@@ -298,6 +310,7 @@
 	icon_colour = "#deddff"
 	weight = 27
 	stack_origin_tech = list(TECH_MATERIAL = 2)
+	sheet_icon_base = "ingot"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	construction_difficulty = MATERIAL_HARD_DIY
@@ -318,6 +331,7 @@
 	stack_type = /obj/item/stack/material/iron
 	icon_colour = "#5c5454"
 	weight = 22
+	sheet_icon_base = "ingot"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	hitsound = 'sound/weapons/smash.ogg'
@@ -333,6 +347,7 @@
 	name = MATERIAL_VOX
 	display_name = "durable alloy"
 	wall_name = "bulkhead"
+	sheet_icon_base = "vox"
 	stack_type = null
 	icon_colour = "#6c7364"
 	integrity = 1200
@@ -414,6 +429,7 @@
 	lore_text = "A soft natural alloy of gold and silver with a green-gold color, typically used for coinage and decoration."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/electrum
+	sheet_icon_base = "ingot"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	icon_colour = "#e7c697"

@@ -22,6 +22,7 @@
 	xarch_source_mineral = GAS_NITROGEN
 	ore_icon_overlay = "gems"
 	sale_price = 5
+	sheet_icon_base = "diamond"
 	sheet_singular_name = "gem"
 	sheet_plural_name = "gems"
 	value = 70
@@ -47,6 +48,7 @@
 	hardness = MATERIAL_HARD - 5
 	brute_armor = 3
 	door_icon_base = "stone"
+	sheet_icon_base = "brick"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	conductive = 0

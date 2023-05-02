@@ -14,6 +14,7 @@
 		/datum/reagent/toxin = 2
 	)
 	door_icon_base = "stone"
+	sheet_icon_base = "brick"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	wall_icon_base = "stone"
@@ -42,6 +43,7 @@
 		/datum/reagent/radium = 10,
 		/datum/reagent/uranium = 10
 		)
+	sheet_icon_base = "brick"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	sale_price = 2
@@ -77,6 +79,7 @@
 		/datum/reagent/silicon = 20
 		)
 	door_icon_base = "stone"
+	sheet_icon_base = "brick"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	wall_icon_base = "stone"
@@ -97,6 +100,7 @@
 		/datum/reagent/iron = 5
 		)
 	door_icon_base = "stone"
+	sheet_icon_base = "brick"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	wall_icon_base = "stone"
@@ -118,6 +122,7 @@
 		/datum/reagent/lithium = 20
 		)
 	door_icon_base = "stone"
+	sheet_icon_base = "brick"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	wall_icon_base = "stone"
@@ -138,6 +143,7 @@
 		/datum/reagent/mercury  = 20
 	)
 	door_icon_base = "stone"
+	sheet_icon_base = "brick"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	wall_icon_base = "stone"
@@ -158,6 +164,7 @@
 		/datum/reagent/phosphorus = 20
 	)
 	door_icon_base = "stone"
+	sheet_icon_base = "brick"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	wall_icon_base = "stone"
@@ -178,6 +185,7 @@
 		/datum/reagent/sodium = 20
 	)
 	door_icon_base = "stone"
+	sheet_icon_base = "brick"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	wall_icon_base = "stone"
@@ -198,6 +206,7 @@
 		/datum/reagent/potassium = 20
 		)
 	door_icon_base = "stone"
+	sheet_icon_base = "brick"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	wall_icon_base = "stone"
@@ -217,6 +226,7 @@
 		/datum/reagent/aluminium = 15
 		)
 	door_icon_base = "stone"
+	sheet_icon_base = "brick"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	wall_icon_base = "stone"
@@ -249,6 +259,7 @@
 	hardness = MATERIAL_RIGID
 	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_PHORON = 2)
 	door_icon_base = "stone"
+	sheet_icon_base = "sheet-phoron"
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
 	is_fusion_fuel = 1
@@ -276,6 +287,7 @@
 	name = MATERIAL_SUPERMATTER
 	lore_text = "Hypercrystalline supermatter is a subset of non-baryonic 'exotic' matter. It is found mostly in the heart of large stars, and features heavily in bluespace technology."
 	icon_colour = "#ffff00"
+	sheet_icon_base = "diamond"
 	radioactivity = 20
 	stack_origin_tech = list(TECH_BLUESPACE = 2, TECH_MATERIAL = 6, TECH_PHORON = 4)
 	stack_type = null
