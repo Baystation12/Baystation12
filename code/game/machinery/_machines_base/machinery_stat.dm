@@ -45,6 +45,25 @@
 
 
 /**
+ * Updates the machine's stat immunity. This also updates the stat flag itself, if it's set and you're turning on immunity.
+ *
+ * **Parameters**:
+ * - `statflag` (bitfield, One of `MACHINE_STAT_*`) - The stat flag to set immunity of.
+ * - `new_state` (boolean, default `TRUE`) - The new state of the stat immunity flag.
+ *
+ * Returns boolean. Whether or not `stat` was updated during the operation.
+ */
+/obj/machinery/proc/set_stat_immunity(statflag, new_state = TRUE)
+	if (new_state == !!HAS_FLAGS(stat_immune, statflag))
+		return FALSE
+	if (new_state)
+		SET_FLAGS(stat, FALSE)
+		return set_stat(statflag, FALSE)
+	CLEAR_FLAGS(stat_immune, statflag)
+	return FALSE
+
+
+/**
  * Toggles a stat flag.
  *
  * **Parameters**:
