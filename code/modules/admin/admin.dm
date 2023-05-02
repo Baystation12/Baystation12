@@ -1637,3 +1637,15 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 
 	transfer_controller.do_continue_vote = !transfer_controller.do_continue_vote
 	log_and_message_admins("toggled the continue vote [transfer_controller.do_continue_vote ? "ON" : "OFF"]")
+
+/datum/admins/proc/togglemoderequirementchecks()
+	set category = "Server"
+	set desc = "Toggle the gamemode requirement checks on/off. Toggling off will allow any gamemode to start regardless of readied players."
+	set name = "Toggle Gamemode Requirement Checks"
+
+	if (GAME_STATE > RUNLEVEL_LOBBY)
+		to_chat(usr, SPAN_WARNING("You cannot change the gamemode requirement checks after the game has started!"))
+		return
+
+	SSticker.skip_requirement_checks = !SSticker.skip_requirement_checks
+	log_and_message_admins("toggled the gamemode requirement checks [SSticker.skip_requirement_checks ? "OFF" : "ON"]")
