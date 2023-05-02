@@ -5162,17 +5162,6 @@
 /obj/random/junk,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
-"mm" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/mine,
-/turf/simulated/floor/tiled/dark,
-/area/meatstation/swhallway)
 "mo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -5430,6 +5419,17 @@
 	},
 /turf/simulated/floor,
 /area/meatstation/engineering)
+"mY" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/mine,
+/turf/simulated/floor/tiled/dark,
+/area/meatstation/swhallway)
 "mZ" = (
 /obj/random/single/meatstation/low/wormscientist,
 /turf/simulated/floor/tiled,
@@ -25830,9 +25830,9 @@ eo
 pt
 mh
 mj
-aa
+mY
 mo
-mm
+mY
 sB
 uD
 aA
