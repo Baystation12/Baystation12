@@ -31,8 +31,9 @@ var/global/list/image/fluidtrack_cache=list()
 
 /obj/effect/decal/cleanable/blood/tracks/reveal_blood()
 	if(!fluorescent)
-		if(stack && length(stack))
-			for(var/datum/fluidtrack/track in stack)
+		for (var/dir in setdirs)
+			var/datum/fluidtrack/track = setdirs["[dir]"]
+			if (track)
 				track.basecolor = COLOR_LUMINOL
 		..()
 
@@ -51,7 +52,7 @@ var/global/list/image/fluidtrack_cache=list()
 	var/going_state="blood2"
 
 	/**
-	 * List (`"number"` -> `integer`). Map of directional bit flags to indexes in `stack`.
+	 * List (`"number"` -> instances of `/datum/fluidtrack`). Map of directional bit flags to attached fluidtrack isntances.
 	 *
 	 * Indexes are stringified bitflags of the four main cardinal directions, duplicated once. The first set is
 	 *   incoming footsteps, and the second outgoing.
@@ -69,18 +70,15 @@ var/global/list/image/fluidtrack_cache=list()
 	 * ```
 	 */
 	var/list/setdirs=list(
-		"1"=0,
-		"2"=0,
-		"4"=0,
-		"8"=0,
-		"16"=0,
-		"32"=0,
-		"64"=0,
-		"128"=0
+		"1" = null,
+		"2" = null,
+		"4" = null,
+		"8" = null,
+		"16" = null,
+		"32" = null,
+		"64" = null,
+		"128" = null
 	)
-
-	/// List (Instances of `/datum/fluidtrack`). Collection of fluidtracks attached to this track decal.
-	var/list/datum/fluidtrack/stack=list()
 
 /**
  * Add tracks to an existing trail.
@@ -111,15 +109,13 @@ var/global/list/image/fluidtrack_cache=list()
 		if(comingdir&b)
 			// If not wet or not set
 			if(dirs&b)
-				var/sid=setdirs["[b]"]
-				track=stack[sid]
-				if(track.wet==t && track.basecolor==bloodcolor)
+				track = setdirs["[b]"]
+				if (track && track.wet == t && track.basecolor == bloodcolor)
 					continue
 				// Remove existing stack entry
-				stack.Remove(track)
-			track=new /datum/fluidtrack(b,bloodcolor,t)
-			stack.Add(track)
-			setdirs["[b]"]=stack.Find(track)
+				qdel(track)
+			track = new /datum/fluidtrack(b, bloodcolor, t)
+			setdirs["[b]"] = track
 			updated=1
 
 		// GOING BIT (shift up 4)
@@ -127,15 +123,13 @@ var/global/list/image/fluidtrack_cache=list()
 		if(realgoing&b)
 			// If not wet or not set
 			if(dirs&b)
-				var/sid=setdirs["[b]"]
-				track=stack[sid]
-				if(track.wet==t && track.basecolor==bloodcolor)
+				track = setdirs["[b]"]
+				if (track && track.wet == t && track.basecolor == bloodcolor)
 					continue
 				// Remove existing stack entry
-				stack.Remove(track)
-			track=new /datum/fluidtrack(b,bloodcolor,t)
-			stack.Add(track)
-			setdirs["[b]"]=stack.Find(track)
+				qdel(track)
+			track = new /datum/fluidtrack(b, bloodcolor, t)
+			setdirs["[b]"] = track
 			updated=1
 
 	dirs |= comingdir|realgoing
@@ -150,8 +144,10 @@ var/global/list/image/fluidtrack_cache=list()
 	var/truedir=0
 
 	// Update ONLY the overlays that have changed.
-	for(var/datum/fluidtrack/track in stack)
-		var/stack_idx=setdirs["[track.direction]"]
+	for (var/dir in setdirs)
+		var/datum/fluidtrack/track = setdirs["[dir]"]
+		if (!track)
+			continue
 		var/state=coming_state
 		truedir=track.direction
 		if(truedir&240) // Check if we're in the GOING block
@@ -165,7 +161,6 @@ var/global/list/image/fluidtrack_cache=list()
 
 		track.fresh=0
 		track.overlay=I
-		stack[stack_idx]=track
 		overlays += I
 
 /obj/effect/decal/cleanable/blood/tracks/footprints
