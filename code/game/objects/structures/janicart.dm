@@ -52,7 +52,7 @@
 		if (!user.unEquip(tool, src))
 			FEEDBACK_UNEQUIP_FAILURE(tool, src)
 			return TRUE
-		mybag = tool
+		myreplacer = tool
 		update_icon()
 		updateUsrDialog()
 		user.visible_message(
