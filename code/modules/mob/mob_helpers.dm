@@ -42,7 +42,7 @@
 
 
 /mob/living/carbon/is_species(datum/species/S)
-	if (!S) return FALSE
+	if (!S || !species) return FALSE
 	if (istext(S)) return species.name == S
 	if (ispath(S)) return species.name == initial(S.name)
 	return species.name == S.name
