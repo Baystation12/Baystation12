@@ -209,6 +209,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if (!silent)
 			FEEDBACK_FAILURE(src, "\The [tool] must stay next to \the [target].")
 		return FALSE
+	if (HAS_FLAGS(flags, SANITY_CHECK_TOOL_IN_HAND) && get_active_hand() != tool)
+		if (!silent)
+			FEEDBACK_FAILURE(src, "\The [tool] must stay in your active hand.")
+		return FALSE
 	return TRUE
 
 

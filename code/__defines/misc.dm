@@ -330,3 +330,5 @@
 #define SANITY_CHECK_TARGET_UNEQUIP FLAG(2)
 /// Verify the target and tool are adjacent to eachother. Ignored if tool is held by user.
 #define SANITY_CHECK_BOTH_ADJACENT FLAG(3)
+/// Verify the tool is in the user's active hand.
+#define SANITY_CHECK_TOOL_IN_HAND FLAG(4)
