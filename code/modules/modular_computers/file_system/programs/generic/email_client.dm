@@ -91,15 +91,8 @@
 /datum/nano_module/email_client/proc/mail_received(datum/computer_file/data/email_message/received_message)
 	var/mob/living/L = get_holder_of_type(host, /mob/living)
 	if(L)
-		var/list/msg = list()
-		msg += "*--*\n"
-		msg += "[SPAN_NOTICE("New mail received from [received_message.source]:")]\n"
-		msg += "<b>Subject:</b> [received_message.title]\n<b>Message:</b>\n[digitalPencode2html(received_message.stored_data)]\n"
-		if(received_message.attachment)
-			msg += "<b>Attachment:</b> [received_message.attachment.filename].[received_message.attachment.filetype] ([received_message.attachment.size]GQ)\n"
-		msg += "<a href='?src=\ref[src];open;reply=[received_message.uid]'>Reply</a>\n"
-		msg += "*--*"
-		to_chat(L, jointext(msg, null))
+		var/msg = "[SPAN_NOTICE("New mail received from [received_message.source]:")] <b>Subject:</b> [received_message.title]"
+		to_chat(L, msg)
 
 /datum/nano_module/email_client/Destroy()
 	log_out()
