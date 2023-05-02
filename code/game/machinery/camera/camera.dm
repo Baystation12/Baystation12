@@ -223,8 +223,8 @@
  * Handles resetting the view of all clients currently viewing this camera. Does not include resetting nano modules.
  */
 /obj/machinery/camera/proc/disconnect_viewers()
-	for (var/mob/mob as anything in SSmobs.mob_list)
-		if (!mob.client || mob.client.eye != src)
+	for (var/mob/mob as anything in get_mob_with_client_list())
+		if (mob.client.eye != src)
 			continue
 		mob.reset_view()
 
