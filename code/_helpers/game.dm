@@ -26,13 +26,6 @@
 					return TRUE
 	return FALSE
 
-/proc/get_area(O)
-	RETURN_TYPE(/area)
-	var/turf/loc = get_turf(O)
-	if(loc)
-		var/area/res = loc.loc
-		.= res
-
 /proc/get_area_name(N) //get area by its name
 	RETURN_TYPE(/area)
 	for(var/area/A in world)
