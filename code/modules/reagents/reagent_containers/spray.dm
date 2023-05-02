@@ -65,7 +65,6 @@
 			if(!src)
 				return
 			reagents.trans_to_obj(D, amount_per_transfer_from_this)
-			D.set_color()
 			D.set_up(my_target, spray_size, step_delay)
 	return
 
