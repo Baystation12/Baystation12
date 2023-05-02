@@ -120,7 +120,7 @@
 
 	return TRUE
 
-/obj/structure/table/CtrlClick()
+/obj/structure/table/CtrlShiftClick()
 	if(usr && usr.Adjacent(src))
 		if(!flipped)
 			do_flip()
