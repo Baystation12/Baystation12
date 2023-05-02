@@ -216,18 +216,21 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	// Tool checks - Skip these if there is no tool
 	if (!tool)
 		return TRUE
-	if (HAS_FLAGS(flags, SANITY_CHECK_TOOL_UNEQUIP) && !canUnEquip(tool))
-		if (!silent)
-			FEEDBACK_UNEQUIP_FAILURE(src, tool)
-		return FALSE
 	if (HAS_FLAGS(flags, SANITY_CHECK_BOTH_ADJACENT) && tool.loc != src && !tool.Adjacent(target))
 		if (!silent)
 			FEEDBACK_FAILURE(src, "\The [tool] must stay next to \the [target].")
 		return FALSE
-	if (HAS_FLAGS(flags, SANITY_CHECK_TOOL_IN_HAND) && get_active_hand() != tool)
-		if (!silent)
-			FEEDBACK_FAILURE(src, "\The [tool] must stay in your active hand.")
-		return FALSE
+
+	// These checks only apply to items
+	if (isitem(tool))
+		if (HAS_FLAGS(flags, SANITY_CHECK_TOOL_UNEQUIP) && !canUnEquip(tool))
+			if (!silent)
+				FEEDBACK_UNEQUIP_FAILURE(src, tool)
+			return FALSE
+		if (HAS_FLAGS(flags, SANITY_CHECK_TOOL_IN_HAND) && get_active_hand() != tool)
+			if (!silent)
+				FEEDBACK_FAILURE(src, "\The [tool] must stay in your active hand.")
+			return FALSE
 
 	// All checks passed
 	return TRUE
