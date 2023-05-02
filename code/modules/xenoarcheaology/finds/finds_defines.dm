@@ -1,24 +1,16 @@
-var/global/list/responsive_carriers = list(
-	/datum/reagent/carbon,
-	/datum/reagent/potassium,
-	/datum/reagent/hydrazine,
-	"nitrogen",
-	/datum/reagent/mercury,
-	/datum/reagent/iron,
-	"chlorine",
-	/datum/reagent/phosphorus,
-	/datum/reagent/toxin/phoron)
+/// List (path or string -> string). Map of possible response carriers to strings for archaeological finds.
+GLOBAL_LIST_INIT(responsive_carriers_to_finds, list(
+	/datum/reagent/carbon = "Trace organic cells",
+	/datum/reagent/potassium = "Long exposure particles",
+	/datum/reagent/hydrazine = "Trace water particles",
+	"nitrogen" = "Crystalline structures",
+	/datum/reagent/mercury = "Metallic derivative",
+	/datum/reagent/iron = "Metallic composite",
+	"chlorine" = "Metamorphic/igneous rock composite",
+	/datum/reagent/phosphorus = "Metamorphic/sedimentary rock composite",
+	/datum/reagent/toxin/phoron = "Anomalous material"
+))
 
-var/global/list/finds_as_strings = list(
-	"Trace organic cells",
-	"Long exposure particles",
-	"Trace water particles",
-	"Crystalline structures",
-	"Metallic derivative",
-	"Metallic composite",
-	"Metamorphic/igneous rock composite",
-	"Metamorphic/sedimentary rock composite",
-	"Anomalous material")
 
 /proc/get_responsive_reagent(find_type)
 	switch(find_type)
