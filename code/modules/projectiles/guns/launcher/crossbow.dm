@@ -217,6 +217,7 @@
 /obj/item/gun/launcher/crossbow/rapidcrossbowdevice
 	name = "rapid crossbow device"
 	desc = "A hacked RCD turns an innocent construction tool into the penultimate deconstruction tool. Flashforges bolts using matter units when the string is drawn back."
+	fire_sound = 'sound/weapons/rcd_crossbow.ogg'
 	icon_state = "rxb"
 	slot_flags = null
 	draw_time = 10
