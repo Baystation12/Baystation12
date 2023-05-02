@@ -1,0 +1,6 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Added the 'Toggle Gamemode Requirements Check' verb to the Server tab,
+      which when turned on in the lobby will allow any game mode to start even if
+      player/role requirements aren't met.
