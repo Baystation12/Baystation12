@@ -185,7 +185,7 @@
 		VISIBLE_MESSAGE,
 		SPAN_DANGER("You feel your head being dunked in cold water!")
 	)
-	if (!do_after(grab.assailant, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || !grab?.assailant.use_sanity_check(src, grab.affecting))
+	if (!do_after(grab.assailant, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || !grab.use_sanity_check(src))
 		return TRUE
 	grab.assailant.visible_message(
 		SPAN_WARNING("\The [grab.assailant] gives \the [grab.affecting] a swirlie in \the [src]!"),
