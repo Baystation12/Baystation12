@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Interaction checks that needed the items to be adjacent after a timer
+      or input now properly check for adjacency.
