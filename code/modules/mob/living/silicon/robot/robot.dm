@@ -524,7 +524,7 @@
 			SPAN_NOTICE("\The [user] starts repairing some of the electronics in \the [src] with [cable.get_vague_name(FALSE)]."),
 			SPAN_NOTICE("You start repairing some of the electronics in \the [src] with [cable.get_exact_name(1)]."),
 		)
-		if (!do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check())
+		if (!do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (!wiresexposed)
 			USE_FEEDBACK_FAILURE("\The [src]'s wires must be exposed to repair electronics damage.")
