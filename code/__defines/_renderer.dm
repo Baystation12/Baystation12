@@ -166,6 +166,10 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 	name = "Zrenderer [plane]"
 	. = ..()
 
+/atom/movable/renderer/shared/zmimic/Destroy()
+	GLOB.zmimic_renderers -= src
+	return ..()
+
 // Draws the game world; live mobs, items, turfs, etc.
 /atom/movable/renderer/game
 	name = "Game"
