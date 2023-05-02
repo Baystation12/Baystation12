@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Targetless `do_after()` calls, such as breaking handcuffs, no longer instantly
+      succeed.
