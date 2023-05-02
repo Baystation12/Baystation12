@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Light replacers no longer replace trash bags or become stuck in janitorial
-      carts.

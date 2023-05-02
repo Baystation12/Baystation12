@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Robot parts now probably attach and install into robots when used.

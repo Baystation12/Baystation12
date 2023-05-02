@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: The email received notification in chat now only displays the email subject,
-      and no longer includes the full email message.
