@@ -32,6 +32,8 @@ SUBSYSTEM_DEF(ticker)
 	///Set to TRUE when an admin forcefully ends the round.
 	var/forced_end = FALSE
 
+	var/skip_requirement_checks = FALSE
+
 	var/static/list/mode_tags = list()
 
 	var/static/list/mode_names = list()
@@ -329,7 +331,11 @@ Helpers
 	mode_datum.pre_setup() // Makes lists of viable candidates; performs candidate draft for job-override roles; stores the draft result both internally and on the draftee.
 	SSjobs.divide_occupations(mode_datum) // Gives out jobs to everyone who was not selected to antag.
 	var/list/lobby_players = SSticker.lobby_players()
-	var/result = mode_datum.check_startable(lobby_players)
+
+	var/result = FALSE
+	if (!skip_requirement_checks)
+		result = mode_datum.check_startable(lobby_players)
+
 	if(result)
 		mode_datum.fail_setup()
 		SSjobs.reset_occupations()

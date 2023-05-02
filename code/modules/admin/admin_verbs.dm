@@ -98,7 +98,8 @@ var/global/list/admin_verbs_admin = list(
 	/client/proc/check_fax_history,
 	/client/proc/cmd_admin_notarget,
 	/datum/admins/proc/setroundlength,
-	/datum/admins/proc/toggleroundendvote
+	/datum/admins/proc/toggleroundendvote,
+	/datum/admins/proc/togglemoderequirementchecks
 )
 var/global/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
