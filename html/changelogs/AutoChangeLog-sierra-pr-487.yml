@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: 'The following tool interactions have been fixed and should properly work
+      after their pauses:'
