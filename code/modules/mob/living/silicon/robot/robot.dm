@@ -491,7 +491,7 @@
 			if (component.installed)
 				USE_FEEDBACK_FAILURE("\The [src] already has \a [component.wrapped] installed in \the [component] slot.")
 				return TRUE
-			if (!user.unEquip(tool, component))
+			if (!user.unEquip(tool, src))
 				FEEDBACK_UNEQUIP_FAILURE(user, tool)
 				return TRUE
 			component.installed = TRUE
