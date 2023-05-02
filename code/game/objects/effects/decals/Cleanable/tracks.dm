@@ -43,12 +43,33 @@ var/global/list/image/fluidtrack_cache=list()
 	icon = 'icons/effects/fluidtracks.dmi'
 	cleanable_scent = null
 
-	var/dirs=0
+	/// Bitflag. All directions, both incoming and outgoing, that this track decal has prints traveling in. See `setdirs` for a definition of each flag.
+	var/dirs = EMPTY_BITFIELD
+	/// String. Icon state used for incoming tracks during `update_icon()`.
 	var/coming_state="blood1"
+	/// String. Icon state used for outgoing tracks during `update_icon()`.
 	var/going_state="blood2"
-	var/updatedtracks=0
+	/// Bitflag. All flags in `dirs` that have been updated since the last `update_icon()` call. TODO: Appears to be set but never referenced, probably safe to remove.
+	var/updatedtracks = EMPTY_BITFIELD
 
-	// dir = id in stack
+	/**
+	 * List (`"number"` -> `integer`). Map of directional bit flags to indexes in `stack`.
+	 *
+	 * Indexes are stringified bitflags of the four main cardinal directions, duplicated once. The first set is
+	 *   incoming footsteps, and the second outgoing.
+	 *
+	 * Quick reference of each bitflag:
+	 * ```dm
+	 * INCOMING_NORTH = 1
+	 * INCOMING_SOUTH = 2
+	 * INCOMING_EAST = 4
+	 * INCOMING_WEST = 8
+	 * OUTGOING_NORTH = 16
+	 * OUTGOING_SOUTH = 32
+	 * OUTGOING_EAST = 64
+	 * OUTGOING_WEST = 128
+	 * ```
+	 */
 	var/list/setdirs=list(
 		"1"=0,
 		"2"=0,
@@ -60,17 +81,17 @@ var/global/list/image/fluidtrack_cache=list()
 		"128"=0
 	)
 
-	// List of laid tracks and their colors.
+	/// List (Instances of `/datum/fluidtrack`). Collection of fluidtracks attached to this track decal.
 	var/list/datum/fluidtrack/stack=list()
 
-	/**
-	* Add tracks to an existing trail.
-	*
-	* @param DNA bloodDNA to add to collection.
-	* @param comingdir Direction tracks come from, or 0.
-	* @param goingdir Direction tracks are going to (or 0).
-	* @param bloodcolor Color of the blood when wet.
-	*/
+/**
+ * Add tracks to an existing trail.
+ *
+ * @param DNA bloodDNA to add to collection.
+ * @param comingdir Direction tracks come from, or 0.
+ * @param goingdir Direction tracks are going to (or 0).
+ * @param bloodcolor Color of the blood when wet.
+ */
 /obj/effect/decal/cleanable/blood/tracks/proc/AddTracks(list/DNA, comingdir, goingdir, bloodcolor=COLOR_BLOOD_HUMAN)
 	var/updated=0
 	// Shift our goingdir 4 spaces to the left so it's in the GOING bitblock.
