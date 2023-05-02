@@ -166,8 +166,7 @@
 	var/target_loc = target_stack.loc
 	var/obj/item/stack/material/S = target_stack.split(needed_sheets)
 	S.reinf_material = reinf_mat
-	S.update_strings()
-	S.update_icon()
+	S.update_materials()
 	S.dropInto(target_loc)
 
 /material/proc/build_wired_product(mob/user, obj/item/stack/used_stack, obj/item/stack/target_stack)

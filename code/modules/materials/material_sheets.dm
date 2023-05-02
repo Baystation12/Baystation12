@@ -35,20 +35,30 @@
 		return INITIALIZE_HINT_QDEL
 	if(default_reinf_type)
 		reinf_material = SSmaterials.get_material_by_name(default_reinf_type)
-	base_state = icon_state
 
-	if(!stacktype)
-		stacktype = material.stack_type
-	if(islist(material.stack_origin_tech))
+	update_materials()
+
+
+/// Handles updating the stack to accomodate any changes to `material` or `reinf_material`. Also calls `update_strings()` and `update_icon()`.
+/obj/item/stack/material/proc/update_materials()
+	// Generate Icons
+	base_state = material.sheet_icon_base
+	plural_icon_state = "[base_state]-mult"
+	max_icon_state = "[base_state]-max"
+
+	// Update Attributes
+	stacktype = material.stack_type
+	origin_tech.Cut()
+	if (islist(material.stack_origin_tech))
 		origin_tech = material.stack_origin_tech.Copy()
-
-	if(material.conductive)
+	if (material.conductive)
 		obj_flags |= OBJ_FLAG_CONDUCTIBLE
 	else
 		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 
 	update_strings()
 	update_icon()
+
 
 /obj/item/stack/material/list_recipes(mob/user, recipes_sublist)
 	if(!material)
@@ -126,8 +136,7 @@
 	if(istype(other))
 		material = other.material
 		reinf_material = other.reinf_material
-		update_strings()
-		update_icon()
+		update_materials()
 
 /obj/item/stack/material/attackby(obj/item/W, mob/user)
 	if(isCoil(W))
