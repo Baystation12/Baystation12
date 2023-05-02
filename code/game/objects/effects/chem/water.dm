@@ -9,9 +9,6 @@
 	..()
 	QDEL_IN(src, 15 SECONDS) // In case whatever made it forgets to delete it
 
-/obj/effect/effect/water/set_color() // Call it after you move reagents to it
-	icon += reagents.get_color()
-
 /obj/effect/effect/water/proc/set_up(turf/target, step_count = 5, delay = 5)
 	set waitfor = FALSE
 	if(!target)
@@ -63,3 +60,7 @@
 	name = "chemicals"
 	icon = 'icons/obj/chempuff.dmi'
 	icon_state = ""
+
+/obj/effect/effect/water/chempuff/on_reagent_change(max_vol)
+	if (reagents)
+		set_color(reagents.get_color())
