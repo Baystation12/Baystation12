@@ -355,5 +355,5 @@
 #define SANITY_CHECK_TOOL_UNEQUIP FLAG(1)
 /// Verify the target can be unequipped from user. Includes `target.loc == src` check to allow items the user isn't holding.
 #define SANITY_CHECK_TARGET_UNEQUIP FLAG(2)
-/// Verify the target and tool are adjacent to eachother.
+/// Verify the target and tool are adjacent to eachother. Ignored if tool is held by user.
 #define SANITY_CHECK_BOTH_ADJACENT FLAG(3)
