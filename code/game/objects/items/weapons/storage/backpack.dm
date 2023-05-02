@@ -563,3 +563,18 @@
 	name = "corporate security messenger bag"
 	desc = "A small, tactical backpack worn over one shoulder. This one is in EXO colors."
 	icon_state = "courierbagsec_exo"
+
+
+/obj/item/storage/backpack/messenger/black
+	name = "black messenger bag"
+	icon_state = "courierbag-black"
+
+
+/obj/item/storage/backpack/messenger/brown
+	name = "brown messenger bag"
+	icon_state = "courierbag-brown"
+
+
+// prevents consumption by dept versions
+/obj/item/storage/backpack/messenger/grey
+	name = "grey messenger bag"
