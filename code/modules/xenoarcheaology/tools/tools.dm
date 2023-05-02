@@ -170,9 +170,8 @@
 		dat += "Anomaly depth: [current.depth] cm<br>"
 		dat += "Anomaly size: [current.clearance] cm<br>"
 		dat += "Dissonance spread: [current.dissonance_spread]<br>"
-		var/index = responsive_carriers.Find(current.material)
-		if(index > 0 && index <= length(finds_as_strings))
-			dat += "Anomaly material: [finds_as_strings[index]]<br>"
+		if (GLOB.responsive_carriers_to_finds[current.material])
+			dat += "Anomaly material: [GLOB.responsive_carriers_to_finds[current.material]]<br>"
 		else
 			dat += "Anomaly material: Unknown<br>"
 		dat += "<A href='?src=\ref[src];clear=[current.record_index]'>clear entry</a><br>"
