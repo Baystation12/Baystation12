@@ -3326,7 +3326,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/cold{
 	dir = 8;
 	pixel_x = 25
 	},
