@@ -182,6 +182,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * Returns boolean.
  */
 /mob/proc/use_sanity_check(atom/target, atom/tool = FALSE, flags = EMPTY_BITFIELD)
+	// Deletion checks
 	if (QDELETED(src))
 		return FALSE
 	var/silent = HAS_FLAGS(flags, SANITY_CHECK_SILENT)
@@ -193,17 +194,23 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if (!silent)
 			FEEDBACK_FAILURE(src, "[tool ? "\The [tool]" : "The item you were using"] no longer exists.")
 		return FALSE
+
+	// Target checks
 	if (!Adjacent(target))
 		if (!silent)
 			FEEDBACK_FAILURE(src, "You must remain next to \the [target].")
 		return FALSE
-	if (HAS_FLAGS(flags, SANITY_CHECK_TOOL_UNEQUIP) && !canUnEquip(tool))
-		if (!silent)
-			FEEDBACK_UNEQUIP_FAILURE(src, tool)
-		return FALSE
 	if (target.loc == src && HAS_FLAGS(flags, SANITY_CHECK_TARGET_UNEQUIP) && !canUnEquip(target))
 		if (!silent)
 			FEEDBACK_UNEQUIP_FAILURE(src, target)
+		return FALSE
+
+	// Tool checks - Skip these if there is no tool
+	if (!tool)
+		return TRUE
+	if (HAS_FLAGS(flags, SANITY_CHECK_TOOL_UNEQUIP) && !canUnEquip(tool))
+		if (!silent)
+			FEEDBACK_UNEQUIP_FAILURE(src, tool)
 		return FALSE
 	if (HAS_FLAGS(flags, SANITY_CHECK_BOTH_ADJACENT) && tool.loc != src && !tool.Adjacent(target))
 		if (!silent)
@@ -213,6 +220,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if (!silent)
 			FEEDBACK_FAILURE(src, "\The [tool] must stay in your active hand.")
 		return FALSE
+
+	// All checks passed
 	return TRUE
 
 
