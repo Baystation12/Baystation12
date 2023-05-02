@@ -439,6 +439,7 @@
 #include "code\datums\repositories\crew\tracking.dm"
 #include "code\datums\repositories\crew\vital.dm"
 #include "code\datums\repositories\crew\~defines.dm"
+#include "code\datums\singletons\shared_list.dm"
 #include "code\datums\singletons\pools\instance_configurator.dm"
 #include "code\datums\singletons\pools\instance_configurator_auto.dm"
 #include "code\datums\singletons\pools\instance_pool.dm"
