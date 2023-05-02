@@ -49,8 +49,6 @@ var/global/list/image/fluidtrack_cache=list()
 	var/coming_state="blood1"
 	/// String. Icon state used for outgoing tracks during `update_icon()`.
 	var/going_state="blood2"
-	/// Bitflag. All flags in `dirs` that have been updated since the last `update_icon()` call. TODO: Appears to be set but never referenced, probably safe to remove.
-	var/updatedtracks = EMPTY_BITFIELD
 
 	/**
 	 * List (`"number"` -> `integer`). Map of directional bit flags to indexes in `stack`.
@@ -122,7 +120,6 @@ var/global/list/image/fluidtrack_cache=list()
 			track=new /datum/fluidtrack(b,bloodcolor,t)
 			stack.Add(track)
 			setdirs["[b]"]=stack.Find(track)
-			updatedtracks |= b
 			updated=1
 
 		// GOING BIT (shift up 4)
@@ -139,7 +136,6 @@ var/global/list/image/fluidtrack_cache=list()
 			track=new /datum/fluidtrack(b,bloodcolor,t)
 			stack.Add(track)
 			setdirs["[b]"]=stack.Find(track)
-			updatedtracks |= b
 			updated=1
 
 	dirs |= comingdir|realgoing
@@ -171,7 +167,6 @@ var/global/list/image/fluidtrack_cache=list()
 		track.overlay=I
 		stack[stack_idx]=track
 		overlays += I
-	updatedtracks=0 // Clear our memory of updated tracks.
 
 /obj/effect/decal/cleanable/blood/tracks/footprints
 	name = "wet footprints"
