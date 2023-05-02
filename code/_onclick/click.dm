@@ -130,9 +130,9 @@
 	var/sdepth = A.storage_depth(src)
 	if((!isturf(A) && A == loc) || (sdepth != -1 && sdepth <= 1))
 		if(W)
-			var/resolved = W.resolve_attackby(A, src, params)
+			var/resolved = W.resolve_attackby(A, src, modifiers)
 			if(!resolved && A && W)
-				W.afterattack(A, src, 1, params) // 1 indicates adjacency
+				W.afterattack(A, src, 1, modifiers) // 1 indicates adjacency
 		else
 			if(ismob(A)) // No instant mob attacking
 				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -141,7 +141,7 @@
 		trigger_aiming(TARGET_CAN_CLICK)
 		return 1
 
-	if(!loc.allow_click_through(A, params, src)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
+	if(!loc.allow_click_through(A, modifiers, src)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
 		return
 
 	//Atoms on turfs (not on your person)
@@ -151,9 +151,9 @@
 		if(A.Adjacent(src)) // see adjacent.dm
 			if(W)
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
-				var/resolved = W.resolve_attackby(A,src, params)
+				var/resolved = W.resolve_attackby(A,src, modifiers)
 				if(!resolved && A && W)
-					W.afterattack(A, src, 1, params) // 1: clicking something Adjacent
+					W.afterattack(A, src, 1, modifiers) // 1: clicking something Adjacent
 			else
 				if(ismob(A)) // No instant mob attacking
 					setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -163,9 +163,9 @@
 			return
 		else // non-adjacent click
 			if(W)
-				W.afterattack(A, src, 0, params) // 0: not Adjacent
+				W.afterattack(A, src, 0, modifiers) // 0: not Adjacent
 			else
-				RangedAttack(A, params)
+				RangedAttack(A, modifiers)
 
 			trigger_aiming(TARGET_CAN_CLICK)
 	return 1
