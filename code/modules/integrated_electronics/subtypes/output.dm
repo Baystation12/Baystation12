@@ -265,6 +265,7 @@
 /obj/item/integrated_circuit/output/video_camera/Initialize()
 	. = ..()
 	camera = new(src)
+	camera.set_stat_immunity(MACHINE_STAT_NOPOWER, TRUE)
 	camera.replace_networks(list())
 	on_data_written()
 

@@ -58,6 +58,7 @@
 
 	if(ispath(camera))
 		camera = new camera(src)
+		camera.set_stat_immunity(MACHINE_STAT_NOPOWER)
 		camera.set_status(0)
 		camera.is_helmet_cam = TRUE
 
