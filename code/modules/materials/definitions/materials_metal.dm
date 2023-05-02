@@ -5,10 +5,10 @@
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/uranium
 	radioactivity = 12
-	icon_base = "stone"
+	wall_icon_base = "stone"
 	door_icon_base = "stone"
 	table_icon_base = "stone"
-	icon_reinf = "reinf_stone"
+	wall_icon_reinf = "reinf_stone"
 	icon_colour = "#007a00"
 	weight = 22
 	stack_origin_tech = list(TECH_MATERIAL = 5)
@@ -115,8 +115,8 @@
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/steel
 	brute_armor = 7
-	icon_base = "solid"
-	icon_reinf = "reinf_over"
+	wall_icon_base = "solid"
+	wall_icon_reinf = "reinf_over"
 	icon_colour = COLOR_STEEL
 	hitsound = 'sound/weapons/smash.ogg'
 	chem_products = list(
@@ -152,8 +152,8 @@
 				)
 	integrity = 125
 	weight = 18
-	icon_base = "solid"
-	icon_reinf = "reinf_over"
+	wall_icon_base = "solid"
+	wall_icon_reinf = "reinf_over"
 	icon_colour = "#cccdcc"
 	hitsound = 'sound/weapons/smash.ogg'
 	sale_price = 1
@@ -176,8 +176,8 @@
 	stack_type = /obj/item/stack/material/plasteel
 	integrity = 400
 	melting_point = 6000
-	icon_base = "solid"
-	icon_reinf = "reinf_over"
+	wall_icon_base = "solid"
+	wall_icon_reinf = "reinf_over"
 	icon_colour = "#a8a9b2"
 	explosion_resistance = 7.5
 	brute_armor = 8
@@ -202,10 +202,10 @@
 	melting_point = 3000
 	weight = 18
 	stack_type = /obj/item/stack/material/titanium
-	icon_base = "metal"
+	wall_icon_base = "metal"
 	door_icon_base = "metal"
 	icon_colour = "#d1e6e3"
-	icon_reinf = "reinf_metal"
+	wall_icon_reinf = "reinf_metal"
 	construction_difficulty = MATERIAL_VERY_HARD_DIY
 	alloy_materials = null
 	alloy_product = FALSE
@@ -216,8 +216,8 @@
 	stack_type = /obj/item/stack/material/ocp
 	integrity = 200
 	melting_point = 12000
-	icon_base = "solid"
-	icon_reinf = "reinf_over"
+	wall_icon_base = "solid"
+	wall_icon_reinf = "reinf_over"
 	icon_colour = "#9bc6f2"
 	brute_armor = 4
 	burn_armor = 20
@@ -358,9 +358,9 @@
 	display_name = "alien alloy"
 	wall_name = "bulkhead"
 	stack_type = null
-	icon_base = "jaggy"
+	wall_icon_base = "jaggy"
 	door_icon_base = "metal"
-	icon_reinf = "reinf_metal"
+	wall_icon_reinf = "reinf_metal"
 	hitsound = 'sound/weapons/smash.ogg'
 	sheet_singular_name = "chunk"
 	sheet_plural_name = "chunks"
@@ -369,7 +369,7 @@
 	hidden_from_codex = TRUE
 
 /material/aliumium/New()
-	icon_base = "metal"
+	wall_icon_base = "metal"
 	icon_colour = rgb(rand(10,150),rand(10,150),rand(10,150))
 	explosion_resistance = rand(25,40)
 	brute_armor = rand(10,20)

@@ -81,15 +81,15 @@
 	/// String (Colour). Colour applied to products of this material.
 	var/icon_colour
 	/// String. Wall base icon state. See header.
-	var/icon_base = "metal"
+	var/wall_icon_base = "metal"
+	/// String. Icon overlay used for reinforced walls.
+	var/wall_icon_reinf = "reinf_metal"
 	/// String. Unpowered door base icon state. See header.
 	var/door_icon_base = "metal"
-	/// String. Icon overlay used for reinforced walls.
-	var/icon_reinf = "reinf_metal"
 	/// String. Table base icon state.
 	var/table_icon_base = "metal"
 	/// String. Table icon state for reinforcement overlays.
-	var/table_reinf = "reinf_metal"
+	var/table_icon_reinf = "reinf_metal"
 	var/list/stack_origin_tech = list(TECH_MATERIAL = 1) // Research level for stacks.
 
 	// Attributes

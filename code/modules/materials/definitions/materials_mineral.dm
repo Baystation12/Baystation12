@@ -16,9 +16,9 @@
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
-	icon_base = "stone"
+	wall_icon_base = "stone"
 	table_icon_base = "stone"
-	icon_reinf = "reinf_stone"
+	wall_icon_reinf = "reinf_stone"
 	sale_price = 2
 
 
@@ -79,9 +79,9 @@
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
-	icon_base = "stone"
+	wall_icon_base = "stone"
 	table_icon_base = "stone"
-	icon_reinf = "reinf_stone"
+	wall_icon_reinf = "reinf_stone"
 	sale_price = 2
 
 /material/pyrite
@@ -99,9 +99,9 @@
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
-	icon_base = "stone"
+	wall_icon_base = "stone"
 	table_icon_base = "stone"
-	icon_reinf = "reinf_stone"
+	wall_icon_reinf = "reinf_stone"
 	ore_compresses_to = MATERIAL_PYRITE
 	sale_price = 2
 
@@ -120,9 +120,9 @@
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
-	icon_base = "stone"
+	wall_icon_base = "stone"
 	table_icon_base = "stone"
-	icon_reinf = "reinf_stone"
+	wall_icon_reinf = "reinf_stone"
 	sale_price = 2
 
 /material/cinnabar
@@ -140,9 +140,9 @@
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
-	icon_base = "stone"
+	wall_icon_base = "stone"
 	table_icon_base = "stone"
-	icon_reinf = "reinf_stone"
+	wall_icon_reinf = "reinf_stone"
 	sale_price = 2
 
 /material/phosphorite
@@ -160,9 +160,9 @@
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
-	icon_base = "stone"
+	wall_icon_base = "stone"
 	table_icon_base = "stone"
-	icon_reinf = "reinf_stone"
+	wall_icon_reinf = "reinf_stone"
 	sale_price = 2
 
 /material/rocksalt
@@ -180,9 +180,9 @@
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
-	icon_base = "stone"
+	wall_icon_base = "stone"
 	table_icon_base = "stone"
-	icon_reinf = "reinf_stone"
+	wall_icon_reinf = "reinf_stone"
 	sale_price = 2
 
 /material/potash
@@ -200,9 +200,9 @@
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
-	icon_base = "stone"
+	wall_icon_base = "stone"
 	table_icon_base = "stone"
-	icon_reinf = "reinf_stone"
+	wall_icon_reinf = "reinf_stone"
 	sale_price = 2
 
 /material/bauxite
@@ -219,9 +219,9 @@
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
-	icon_base = "stone"
+	wall_icon_base = "stone"
 	table_icon_base = "stone"
-	icon_reinf = "reinf_stone"
+	wall_icon_reinf = "reinf_stone"
 	ore_smelts_to = MATERIAL_ALUMINIUM
 	ore_compresses_to = MATERIAL_BAUXITE
 	sale_price = 1
@@ -242,7 +242,7 @@
 	name = MATERIAL_PHORON
 	stack_type = /obj/item/stack/material/phoron
 	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
-	icon_base = "stone"
+	wall_icon_base = "stone"
 	table_icon_base = "stone"
 	icon_colour = "#e37108"
 	shard_type = SHARD_SHARD

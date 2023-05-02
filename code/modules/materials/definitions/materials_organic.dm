@@ -3,9 +3,9 @@
 	lore_text = "A generic polymeric material. Probably the most flexible and useful substance ever created by human science; mostly used to make disposable cutlery."
 	stack_type = /obj/item/stack/material/plastic
 	flags = MATERIAL_BRITTLE
-	icon_base = "solid"
+	wall_icon_base = "solid"
 	door_icon_base = "plastic"
-	icon_reinf = "reinf_over"
+	wall_icon_reinf = "reinf_over"
 	icon_colour = COLOR_WHITE
 	hardness = MATERIAL_FLEXIBLE
 	weight = 5
@@ -33,8 +33,8 @@
 	stack_type = /obj/item/stack/material/cardboard
 	flags = MATERIAL_BRITTLE
 	integrity = 10
-	icon_base = "solid"
-	icon_reinf = "reinf_over"
+	wall_icon_base = "solid"
+	wall_icon_reinf = "reinf_over"
 	icon_colour = "#aaaaaa"
 	hardness = MATERIAL_SOFT
 	brute_armor = 1
@@ -299,10 +299,10 @@
 /material/growth
 	name = MATERIAL_GROWTH
 	display_name = "organic material"
-	icon_base = "cult"
+	wall_icon_base = "cult"
 	door_icon_base = "cult"
 	table_icon_base = "cult"
-	icon_reinf = "reinf_cult"
+	wall_icon_reinf = "reinf_cult"
 	icon_colour = "#281744"
 	hardness = 80
 	brute_armor = 4

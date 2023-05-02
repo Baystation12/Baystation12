@@ -38,9 +38,9 @@
 	name = MATERIAL_SANDSTONE
 	lore_text = "A clastic sedimentary rock. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
 	stack_type = /obj/item/stack/material/sandstone
-	icon_base = "stone"
+	wall_icon_base = "stone"
 	table_icon_base = "stone"
-	icon_reinf = "reinf_stone"
+	wall_icon_reinf = "reinf_stone"
 	icon_colour = "#d9c179"
 	shard_type = SHARD_STONE_PIECE
 	weight = 22
