@@ -177,7 +177,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * **Parameters**:
  * - `target` - The atom being interacted with.
  * - `tool` - The item being used to interact. Optional. Defaults to `FALSE` to differentiate between a nulled reference and an empty parameter.
- * - `flags` - Bitflags of additional settings. See `code\__defines\misc.dm`.
+ * - `flags` (Bitflag, any of `SANITY_CHECK_*`, default `EMPTY_BITFIELD`) - Bitflags of additional settings. See `code\__defines\misc.dm`.
  *
  * Returns boolean.
  */
