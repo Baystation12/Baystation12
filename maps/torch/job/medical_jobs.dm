@@ -186,7 +186,7 @@
 	department_flag = MED
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "medical personnel, the Corporate Liaison, and the Chief Medical Officer"
+	supervisors = "medical personnel, and the Chief Medical Officer"
 	selection_color = "#013d3b"
 	economic_power = 4
 	minimum_character_age = list(SPECIES_HUMAN = 25)
