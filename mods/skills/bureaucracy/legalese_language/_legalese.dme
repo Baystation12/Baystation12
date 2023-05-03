@@ -1,0 +1,11 @@
+#ifndef MODPACK_LANGUAGE_LEGALESE
+#define MODPACK_LANGUAGE_LEGALESE
+
+#include "_legalese.dm"
+#include "legalese.dm"
+#include "gutter.dm"
+#include "robot_module.dm"
+#include "selenian.dm"
+#include "skill.dm"
+
+#endif
