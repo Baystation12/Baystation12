@@ -1,0 +1,5 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Full-screen hud overlays are half as intense. This is mesons, science huds,
+      NVGs and thermals.
