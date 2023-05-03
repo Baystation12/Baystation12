@@ -1,6 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - bugfix: TTV bombs now have a UI button to activate attached devices directly.
-      While this is nonfunctional for signalers, it allows proximity sensors and timers
-      to work.
