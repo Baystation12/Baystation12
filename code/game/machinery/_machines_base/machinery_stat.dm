@@ -57,7 +57,7 @@
 	if (new_state == !!HAS_FLAGS(stat_immune, statflag))
 		return FALSE
 	if (new_state)
-		SET_FLAGS(stat, FALSE)
+		SET_FLAGS(stat_immune, statflag)
 		return set_stat(statflag, FALSE)
 	CLEAR_FLAGS(stat_immune, statflag)
 	return FALSE
