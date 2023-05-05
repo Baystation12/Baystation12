@@ -13,7 +13,7 @@
 		damage = Proj.damage / 1.5
 	if(Proj.agony)
 		damage += Proj.agony / 6
-		if(health < Proj.agony * 3)
+		if(get_current_health() < Proj.agony * 3)
 			Paralyse(Proj.agony / 20)
 			visible_message(SPAN_WARNING("[src] is stunned momentarily!"))
 
@@ -32,7 +32,7 @@
 	switch(M.a_intent)
 
 		if(I_HELP)
-			if (health > 0)
+			if (get_current_health() > 0)
 				M.visible_message(SPAN_NOTICE("[M] [response_help] \the [src]."))
 				M.update_personal_goal(/datum/goal/achievement/specific_object/pet, type)
 
@@ -111,7 +111,7 @@
 		if (stat == DEAD)
 			USE_FEEDBACK_FAILURE("\The [src] is dead, medical items won't bring \him back to life.")
 			return TRUE
-		if (health >= maxHealth)
+		if (!health_damaged())
 			USE_FEEDBACK_FAILURE("\The [src] doesn't need any healing.")
 			return TRUE
 		var/obj/item/stack/medical/medical = tool

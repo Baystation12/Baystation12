@@ -72,7 +72,7 @@
 	var/threat = guess_threat_level(threatened)
 
 	// Hurt entities contribute less tension.
-	threat *= health
+	threat *= get_current_health()
 	threat /= getMaxHealth()
 
 	// Allies reduce tension instead of adding.
@@ -114,7 +114,7 @@
 
 	var/threat = guess_threat_level(threatened)
 
-	threat *= health
+	threat *= get_current_health()
 	threat /= getMaxHealth()
 
 	// Allies reduce tension instead of adding.
@@ -232,7 +232,7 @@
 
 	// Tension is roughly doubled when about to fall into crit.
 	var/max_health = getMaxHealth()
-	tension *= 2 * max_health / (health + max_health)
+	tension *= 2 * max_health / (get_current_health() + max_health)
 
 	// Being unable to act is really tense.
 	if(incapacitated(INCAPACITATION_DISABLED) && !lying)

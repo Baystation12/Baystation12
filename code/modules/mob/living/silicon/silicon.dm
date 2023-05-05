@@ -146,7 +146,7 @@
 // this function shows the health of the AI in the Status panel
 /mob/living/silicon/proc/show_system_integrity()
 	if(!src.stat)
-		stat(null, text("System integrity: [round((health/maxHealth)*100)]%"))
+		stat(null, text("System integrity: [get_health_percentage()]%"))
 	else
 		stat(null, text("Systems nonfunctional"))
 

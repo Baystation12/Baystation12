@@ -10,8 +10,7 @@
 	response_help  = "puts their hand through"
 	response_disarm = "flails at"
 	response_harm   = "punches"
-	maxHealth = 65
-	health = 65
+	health_max = 65
 	ai_holder = /datum/ai_holder/simple_animal/melee/bluespace
 	say_list = /datum/say_list/bluespace
 	natural_weapon = /obj/item/natural_weapon/bluespace

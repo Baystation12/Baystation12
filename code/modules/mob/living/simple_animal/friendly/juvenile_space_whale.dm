@@ -6,8 +6,7 @@
 	icon_living = "alive"
 	icon_dead = "dead"
 
-	health = 80
-	maxHealth = 80
+	health_max = 80
 	meat_amount = 25
 	skin_amount = 6
 
@@ -54,7 +53,7 @@
 		if(parent.stance == STANCE_IDLE && (pulledby || length(grabbed_by)))
 			var/enemies = pulledby ? list(pulledby) : grabbed_by
 			parent.ai_holder.attackers += enemies
-		if(health < (maxHealth - 5))
+		if(get_damage_value() > 5)
 			walk_to(src, parent, 1, 1 SECONDS)
 			if(parent.stance == STANCE_IDLE && length(ai_holder.attackers))
 				parent.ai_holder.react_to_attack(pick(ai_holder.attackers))

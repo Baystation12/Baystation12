@@ -11,7 +11,7 @@
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
 	faction = "goat"
-	health = 40
+	health_max = 40
 	natural_weapon = /obj/item/natural_weapon/hooves
 
 	meat_type = /obj/item/reagent_containers/food/snacks/meat/goat
@@ -125,7 +125,7 @@
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
-	health = 50
+	health_max = 50
 
 	meat_type = /obj/item/reagent_containers/food/snacks/meat/beef
 	meat_amount = 6
@@ -212,7 +212,7 @@
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
-	health = 1
+	health_max = 1
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	holder_type = /obj/item/holder/small
 	mob_size = MOB_MINISCULE
@@ -259,7 +259,7 @@ var/global/chicken_count = 0
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
-	health = 10
+	health_max = 10
 	pass_flags = PASS_FLAG_TABLE
 	holder_type = /obj/item/holder
 	mob_size = MOB_SMALL
@@ -405,7 +405,7 @@ var/global/chicken_count = 0
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
-	health = 100
+	health_max = 100
 
 	meat_type = /obj/item/reagent_containers/food/snacks/meat/thoom
 	meat_amount = 10

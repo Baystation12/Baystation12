@@ -65,8 +65,8 @@
 
 /mob/living/simple_animal/construct/examine(mob/user)
 	. = ..()
-	if (health < maxHealth)
-		if (health >= maxHealth / 2)
+	if (health_damaged())
+		if (get_health_percentage() > 50)
 			to_chat(user, SPAN_WARNING("It looks slightly dented."))
 		else
 			to_chat(user, SPAN_WARNING(SPAN_BOLD("It looks severely dented!")))
@@ -89,8 +89,7 @@
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "behemoth"
 	icon_living = "behemoth"
-	maxHealth = 250
-	health = 250
+	health_max = 250
 	speak_emote = list("rumbles")
 	response_harm   = "harmlessly punches"
 	harm_intent_damage = 0
@@ -152,8 +151,7 @@
 	icon_state = "floating"
 	icon_living = "floating"
 	icon_dead = "floating_dead"
-	maxHealth = 75
-	health = 75
+	health_max = 75
 	natural_weapon = /obj/item/natural_weapon/wraith
 	speed = -1
 	environment_smash = 1
@@ -185,8 +183,7 @@
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "artificer"
 	icon_living = "artificer"
-	maxHealth = 50
-	health = 50
+	health_max = 50
 	response_harm = "viciously beaten"
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/cult_builder
@@ -206,7 +203,7 @@
 
 /obj/item/natural_weapon/cult_builder/attack(mob/living/M, mob/living/user)
 	if(istype(M, /mob/living/simple_animal/construct))
-		if(M.health < M.maxHealth)
+		if(M.health_damaged())
 			M.adjustBruteLoss(-5)
 			user.visible_message(SPAN_NOTICE("\The [user] mends some of \the [M]'s wounds."))
 		else
@@ -224,8 +221,7 @@
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "behemoth"
 	icon_living = "behemoth"
-	maxHealth = 750
-	health = 750
+	health_max = 750
 	speak_emote = list("rumbles")
 	response_harm   = "harmlessly punched"
 	harm_intent_damage = 0
@@ -254,8 +250,7 @@
 	icon_state = "harvester"
 	icon_living = "harvester"
 	icon_dead = "harvester_dead"
-	maxHealth = 150
-	health = 150
+	health_max = 150
 	natural_weapon = /obj/item/natural_weapon/harvester
 	speed = -1
 	environment_smash = 1
@@ -303,7 +298,7 @@
 /mob/living/simple_animal/construct/armoured/Life()
 	. = ..()
 	if(healths)
-		switch(health)
+		switch(get_current_health())
 			if(250 to INFINITY)		healths.icon_state = "juggernaut_health0"
 			if(208 to 249)			healths.icon_state = "juggernaut_health1"
 			if(167 to 207)			healths.icon_state = "juggernaut_health2"
@@ -317,7 +312,7 @@
 /mob/living/simple_animal/construct/behemoth/Life()
 	. = ..()
 	if(healths)
-		switch(health)
+		switch(get_current_health())
 			if(750 to INFINITY)		healths.icon_state = "juggernaut_health0"
 			if(625 to 749)			healths.icon_state = "juggernaut_health1"
 			if(500 to 624)			healths.icon_state = "juggernaut_health2"
@@ -330,7 +325,7 @@
 /mob/living/simple_animal/construct/builder/Life()
 	. = ..()
 	if(healths)
-		switch(health)
+		switch(get_current_health())
 			if(50 to INFINITY)		healths.icon_state = "artificer_health0"
 			if(42 to 49)			healths.icon_state = "artificer_health1"
 			if(34 to 41)			healths.icon_state = "artificer_health2"
@@ -345,7 +340,7 @@
 /mob/living/simple_animal/construct/wraith/Life()
 	. = ..()
 	if(healths)
-		switch(health)
+		switch(get_current_health())
 			if(75 to INFINITY)		healths.icon_state = "wraith_health0"
 			if(62 to 74)			healths.icon_state = "wraith_health1"
 			if(50 to 61)			healths.icon_state = "wraith_health2"
@@ -359,7 +354,7 @@
 /mob/living/simple_animal/construct/harvester/Life()
 	. = ..()
 	if(healths)
-		switch(health)
+		switch(get_current_health())
 			if(150 to INFINITY)		healths.icon_state = "harvester_health0"
 			if(125 to 149)			healths.icon_state = "harvester_health1"
 			if(100 to 124)			healths.icon_state = "harvester_health2"

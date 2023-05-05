@@ -4,8 +4,7 @@
 	icon_state = "shark"
 	icon_living = "shark"
 	icon_dead = "shark_dead"
-	maxHealth = 150
-	health = 150
+	health_max = 150
 	natural_weapon = /obj/item/natural_weapon/bite/shark
 	break_stuff_probability = 15
 	faction = "sharks"
@@ -32,8 +31,7 @@
 	speed = 0
 	mob_size = MOB_LARGE
 	pixel_x = -16
-	health = 400
-	maxHealth = 400
+	health_max = 400
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite/giantshark
 	break_stuff_probability = 35
@@ -43,4 +41,4 @@
 	skin_amount = 30
 
 /obj/item/natural_weapon/bite/giantshark
-	force = 40 
+	force = 40

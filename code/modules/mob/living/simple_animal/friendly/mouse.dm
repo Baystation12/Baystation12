@@ -10,8 +10,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	turns_per_move = 5
 	see_in_dark = 6
-	maxHealth = 5
-	health = 5
+	health_max = 5
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "stamps on"
@@ -117,8 +116,7 @@
 	desc = "A large rodent, often seen in maintenance areas."
 	body_color = "rat"
 	icon_state = "mouse_rat"
-	maxHealth = 20
-	health = 20
+	health_max = 20
 
 	ai_holder = /datum/ai_holder/simple_animal/melee/evasive
 

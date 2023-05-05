@@ -26,12 +26,12 @@
 
 	handle_statuses()
 
-	if(health <= 0)
+	if(get_current_health() <= 0)
 		death(null,"gives one shrill beep before falling lifeless.")
 
 /mob/living/silicon/pai/updatehealth()
 	if(status_flags & GODMODE)
-		health = 100
+		revive_health()
 		set_stat(CONSCIOUS)
 	else
-		health = 100 - getBruteLoss() - getFireLoss()
+		set_health(get_max_health() - getBruteLoss() - getFireLoss())

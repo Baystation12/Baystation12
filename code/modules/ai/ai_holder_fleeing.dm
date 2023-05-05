@@ -18,7 +18,7 @@
 			return TRUE
 		if (!hostile && !retaliate)
 			return TRUE // We're not hostile and someone attacked us first.
-		if (flee_when_dying && (holder.health / holder.getMaxHealth()) <= dying_threshold)
+		if (flee_when_dying && (holder.get_current_health() / holder.getMaxHealth()) <= dying_threshold)
 			return TRUE // We're gonna die!
 		else if (flee_when_outmatched && holder.get_tension() >= outmatched_threshold)
 			return TRUE // We're fighting something way way stronger then us.

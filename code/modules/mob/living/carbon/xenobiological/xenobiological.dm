@@ -5,8 +5,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	speak_emote = list("chirps")
 
-	maxHealth = 150
-	health = 150
+	health_max = 150
 	gender = NEUTER
 
 	update_icon = 0
@@ -74,7 +73,7 @@
 	return /datum/reagent/slimejelly
 
 /mob/living/carbon/slime/adjustToxLoss(amount)
-	toxloss = clamp(toxloss + amount, 0, maxHealth)
+	toxloss = clamp(toxloss + amount, 0, get_max_health())
 
 /mob/living/carbon/slime/setToxLoss(amount)
 	adjustToxLoss(amount-getToxLoss())
@@ -99,7 +98,7 @@
 
 	var/tally = ..()
 
-	var/health_deficiency = (maxHealth - health)
+	var/health_deficiency = get_damage_value()
 	if(health_deficiency >= 30) tally += (health_deficiency / 25)
 
 	if (bodytemperature < 183.222)
@@ -112,7 +111,7 @@
 		if(reagents.has_reagent(/datum/reagent/frostoil)) // Frostoil also makes them move VEEERRYYYYY slow
 			tally *= 5
 
-	if(health <= 0) // if damaged, the slime moves twice as slow
+	if(get_current_health() <= 0) // if damaged, the slime moves twice as slow
 		tally *= 2
 
 	return tally
@@ -158,7 +157,7 @@
 	. = ..()
 
 	statpanel("Status")
-	stat(null, "Health: [round((health / maxHealth) * 100)]%")
+	stat(null, "Health: [get_damage_percentage()]%")
 	stat(null, "Intent: [a_intent]")
 
 	if (client.statpanel == "Status")

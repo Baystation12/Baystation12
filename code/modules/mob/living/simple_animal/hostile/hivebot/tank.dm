@@ -23,8 +23,7 @@
 /mob/living/simple_animal/hostile/hivebot/tank/meatshield
 	name = "bulky hivebot"
 	desc = "A large robot."
-	maxHealth = 300
-	health = 300
+	health_max = 300
 
 /mob/living/simple_animal/hostile/hivebot/tank/meatshield/Initialize()
 	SetTransform(scale = 1.5)
@@ -35,8 +34,7 @@
 /mob/living/simple_animal/hostile/hivebot/tank/armored
 	name = "armored hivebot"
 	desc = "A robot clad in heavy armor."
-	maxHealth = 150
-	health = 150
+	health_max = 150
 	natural_armor = list(
 				melee	= ARMOR_MELEE_RESISTANT,
 				bullet	= ARMOR_BALLISTIC_PISTOL,

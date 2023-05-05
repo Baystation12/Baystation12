@@ -39,7 +39,7 @@
 		silent = 0
 	else
 		updatehealth()
-		if(health <= 0)
+		if(get_current_health() <= 0)
 			death()
 			blinded = 1
 			silent = 0
@@ -86,7 +86,7 @@
 	update_sight()
 	if (healths)
 		if(stat != DEAD)
-			switch(health)
+			switch(get_current_health())
 				if(100 to INFINITY)
 					healths.icon_state = "health0"
 				if(80 to 100)

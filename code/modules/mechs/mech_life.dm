@@ -33,7 +33,7 @@
 
 
 	updatehealth()
-	if(health <= 0 && stat != DEAD)
+	if(get_current_health() <= 0 && stat != DEAD)
 		death()
 
 	if(emp_damage > 0)

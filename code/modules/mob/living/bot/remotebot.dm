@@ -3,8 +3,7 @@
 	desc = "A remote controlled robot used by lazy people to switch channels and get pizza."
 	icon = 'icons/mob/bot/fetchbot.dmi'
 	icon_state = "fetchbot1"
-	health = 15
-	maxHealth = 15
+	health_max = 15
 
 	var/working = 0
 	var/next_movement_time = 0

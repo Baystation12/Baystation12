@@ -23,7 +23,7 @@
 			L.client.eye = src
 		L.forceMove(src)
 		L.set_sdisability(MUTED)
-		set_max_health(L.health + 100)
+		set_max_health(L.get_current_health() + 100)
 		intialTox = L.getToxLoss()
 		intialFire = L.getFireLoss()
 		intialBrute = L.getBruteLoss()
@@ -66,7 +66,7 @@
 	for(var/mob/living/M in src)
 		M.dropInto(loc)
 		M.unset_sdisability(MUTED)
-		M.take_overall_damage(M.health - get_damage_value(), 0) //any new damage the statue incurred is transfered to the mob
+		M.take_overall_damage(M.get_current_health() - get_damage_value(), 0) //any new damage the statue incurred is transfered to the mob
 		if(M.client)
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE

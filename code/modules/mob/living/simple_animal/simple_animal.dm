@@ -1,8 +1,7 @@
 /mob/living/simple_animal
 	name = "animal"
 	icon = 'icons/mob/simple_animal/animal.dmi'
-	health = 20
-	maxHealth = 20
+	health_max = 20
 	universal_speak = FALSE
 	pronouns = null
 
@@ -170,13 +169,13 @@
 	. = ..()
 
 	if(statpanel("Status") && show_stat_health)
-		stat(null, "Health: [round((health / maxHealth) * 100)]%")
+		stat(null, "Health: [get_health_percentage()]%")
 
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
 	icon_state = icon_dead
 	update_icon()
 	density = FALSE
-	adjustBruteLoss(maxHealth) //Make sure dey dead.
+	adjustBruteLoss(get_max_health()) //Make sure dey dead.
 	walk_to(src,0)
 	return ..(gibbed,deathmessage,show_dead_message)
 

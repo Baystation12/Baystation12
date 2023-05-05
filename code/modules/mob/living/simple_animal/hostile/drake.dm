@@ -16,8 +16,7 @@
 	skull_type = /obj/item/melee/whip/tail
 	bleed_colour = COLOR_VIOLET
 
-	health = 200
-	maxHealth = 200
+	health_max = 200
 	natural_weapon = /obj/item/natural_weapon/claws/drake
 	var/obj/item/melee/whip/tail/tailwhip
 	natural_armor = list(

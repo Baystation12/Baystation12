@@ -129,7 +129,7 @@
 
 	if(inventory_head)
 		var/head_icon_state = inventory_head.icon_state
-		if(health <= 0)
+		if(get_current_health() <= 0)
 			head_icon_state += "2"
 
 		var/icon/head_icon = image('icons/mob/simple_animal/corgi_head.dmi',head_icon_state)
@@ -138,7 +138,7 @@
 
 	if(inventory_back)
 		var/back_icon_state = inventory_back.icon_state
-		if(health <= 0)
+		if(get_current_health() <= 0)
 			back_icon_state += "2"
 
 		var/icon/back_icon = image('icons/mob/simple_animal/corgi_back.dmi',back_icon_state)

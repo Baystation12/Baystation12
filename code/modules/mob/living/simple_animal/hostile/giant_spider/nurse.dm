@@ -9,8 +9,7 @@
 	icon_living = "nurse"
 	icon_dead = "nurse_dead"
 
-	maxHealth = 40
-	health = 40
+	health_max = 40
 
 	movement_cooldown = 3	// A bit faster so that they can inject the eggs easier.
 

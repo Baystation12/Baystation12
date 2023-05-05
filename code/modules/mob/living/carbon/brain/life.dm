@@ -94,7 +94,7 @@
 		blinded = 1
 		silent = 0
 	else				//ALIVE. LIGHTS ARE ON
-		if( !container && (health < config.health_threshold_dead || ((world.time - timeofhostdeath) > config.revival_brain_life)) )
+		if( !container && (get_current_health() < config.health_threshold_dead || ((world.time - timeofhostdeath) > config.revival_brain_life)) )
 			death()
 			blinded = 1
 			silent = 0
@@ -159,7 +159,7 @@
 	update_sight()
 	if (healths)
 		if (stat != 2)
-			switch(health)
+			switch(get_current_health())
 				if(100 to INFINITY)
 					healths.icon_state = "health0"
 				if(80 to 100)

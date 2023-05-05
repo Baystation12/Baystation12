@@ -2,14 +2,14 @@
 /mob/living/carbon/human/updatehealth()
 
 	if(status_flags & GODMODE)
-		health = maxHealth
+		revive_health()
 		set_stat(CONSCIOUS)
 		return
 
-	health = maxHealth - getBrainLoss()
+	set_health(get_max_health() - getBrainLoss())
 
 	//TODO: fix husking
-	if(((maxHealth - getFireLoss()) < config.health_threshold_dead) && stat == DEAD)
+	if(((get_max_health() - getFireLoss()) < config.health_threshold_dead) && stat == DEAD)
 		ChangeToHusk()
 	return
 
@@ -146,7 +146,7 @@
 	else
 		var/obj/item/organ/internal/lungs/breathe_organ = internal_organs_by_name[species.breathing_organ]
 		if(!breathe_organ)
-			return maxHealth/2
+			return get_max_health()/2
 		return breathe_organ.get_oxygen_deprivation()
 
 /mob/living/carbon/human/setOxyLoss(amount)

@@ -7,8 +7,7 @@
 	icon_living = "pit"
 	icon_dead = "pit_dead"
 
-	maxHealth = 115
-	health = 115
+	health_max = 115
 
 	heat_resist = 0.75
 	cold_resist = -0.50

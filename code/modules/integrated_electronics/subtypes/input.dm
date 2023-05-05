@@ -199,13 +199,14 @@
 
 
 		var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
+		var/max_health = H.get_max_health()
 		set_pin_data(IC_OUTPUT, 1, (brain && H.stat != DEAD))
 		set_pin_data(IC_OUTPUT, 2, (H.stat == 0))
-		set_pin_data(IC_OUTPUT, 3, damage_to_severity(100 * H.getBruteLoss() / H.maxHealth))
-		set_pin_data(IC_OUTPUT, 4, damage_to_severity(100 * H.getFireLoss() / H.maxHealth))
-		set_pin_data(IC_OUTPUT, 5, damage_to_severity(100 * H.getToxLoss() / H.maxHealth))
-		set_pin_data(IC_OUTPUT, 6, damage_to_severity(100 * H.getOxyLoss() / H.maxHealth))
-		set_pin_data(IC_OUTPUT, 7, damage_to_severity(100 * H.getCloneLoss() / H.maxHealth))
+		set_pin_data(IC_OUTPUT, 3, damage_to_severity(100 * H.getBruteLoss() / max_health))
+		set_pin_data(IC_OUTPUT, 4, damage_to_severity(100 * H.getFireLoss() / max_health))
+		set_pin_data(IC_OUTPUT, 5, damage_to_severity(100 * H.getToxLoss() / max_health))
+		set_pin_data(IC_OUTPUT, 6, damage_to_severity(100 * H.getOxyLoss() / max_health))
+		set_pin_data(IC_OUTPUT, 7, damage_to_severity(100 * H.getCloneLoss() / max_health))
 		set_pin_data(IC_OUTPUT, 8, H.get_pulse_as_number())
 		set_pin_data(IC_OUTPUT, 9, H.get_blood_oxygenation())
 		set_pin_data(IC_OUTPUT, 10, damage_to_severity(H.get_shock()))
@@ -250,7 +251,7 @@
 		set_pin_data(IC_OUTPUT, 2, T.is_adult)
 		set_pin_data(IC_OUTPUT, 3, T.nutrition/T.get_max_nutrition())
 		set_pin_data(IC_OUTPUT, 4, T.powerlevel)
-		set_pin_data(IC_OUTPUT, 5, round(T.health/T.maxHealth,0.01)*100)
+		set_pin_data(IC_OUTPUT, 5, T.get_health_percentage())
 		set_pin_data(IC_OUTPUT, 6, T.GetMutations())
 		set_pin_data(IC_OUTPUT, 7, T.mutation_chance)
 		set_pin_data(IC_OUTPUT, 8, T.cores)

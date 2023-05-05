@@ -15,8 +15,7 @@
 	meat_amount = 12
 	response_help  = "placates"
 	response_harm   = "assaults"
-	health = 500
-	maxHealth = 500
+	health_max = 500
 	mob_size = MOB_LARGE
 	mob_bump_flag = HEAVY
 	can_escape = TRUE
@@ -101,15 +100,15 @@
 			G.visible_message(SPAN_CLASS("cultannounce", "\The [G]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze."))
 			set_busy(TRUE)
 			if(do_after(G, 6 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
-				var/health_holder = G.health
+				var/health_holder = G.get_current_health()
 				G.visible_message(SPAN_MFAUNA("\The [G] raises its fore-hooves and stomps them into the ground with incredible force!"))
 				explosion(get_step(G,pick(GLOB.cardinal)), 4, EX_ACT_HEAVY)
 				explosion(get_step(G,pick(GLOB.cardinal)), 5, EX_ACT_HEAVY)
 				explosion(get_step(G,pick(GLOB.cardinal)), 7, EX_ACT_HEAVY)
 				set_busy(FALSE)
 				G.spellscast += 2
-				if(!G.health < health_holder)
-					G.health = health_holder //our own magicks cannot harm us
+				if(!G.get_current_health() < health_holder)
+					G.set_health(health_holder) //our own magicks cannot harm us
 			else
 				G.visible_message(SPAN_NOTICE("The [G] loses concentration and huffs haughtily."))
 				set_busy(FALSE)
@@ -145,8 +144,7 @@
 	icon_state = "king_goat2"
 	icon_living = "king_goat2"
 	meat_amount = 36
-	health = 750
-	maxHealth = 750
+	health_max = 750
 	natural_weapon = /obj/item/natural_weapon/goatking/unleashed
 	elemental_weapons = list(
 		BURN = /obj/item/natural_weapon/goatking/fire/unleashed,
@@ -185,8 +183,7 @@
 	icon_state = "goat_guard"
 	icon_living = "goat_guard"
 	icon_dead = "goat_guard_dead"
-	health = 125
-	maxHealth = 125
+	health_max = 125
 	natural_weapon = /obj/item/natural_weapon/goathorns
 
 /obj/item/natural_weapon/goathorns
@@ -201,15 +198,14 @@
 	icon_state = "goat_guard_m"
 	icon_living = "goat_guard_m"
 	icon_dead = "goat_guard_m_dead"
-	health = 200
-	maxHealth = 200
+	health_max = 200
 	natural_weapon = /obj/item/natural_weapon/goathorns
 	move_to_delay = 3
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/proc/phase3_transition()
 	phase3 = TRUE
 	spellscast = 0
-	health = 750
+	set_health(750)
 	new /obj/item/grenade/flashbang/instant(src.loc)
 	QDEL_NULL(boss_theme)
 	boss_theme = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/music/Visager-Miniboss_Fight.ogg', volume = 10, range = 8, falloff = 4, prefer_mute = TRUE)
@@ -232,7 +228,7 @@
 		visible_message(SPAN_MFAUNA("The energy surrounding \the [src]'s horns dissipates."))
 		current_damtype = DAMAGE_BRUTE
 
-	if(health <= 150 && !phase3 && spellscast == 5) //begin phase 3, reset spell limit and heal
+	if(get_current_health() <= 150 && !phase3 && spellscast == 5) //begin phase 3, reset spell limit and heal
 		phase3_transition()
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/proc/OnDeath()

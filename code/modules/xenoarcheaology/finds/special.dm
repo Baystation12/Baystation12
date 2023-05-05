@@ -75,7 +75,7 @@
 	//see if we've identified anyone nearby
 	if(world.time - last_bloodcall > bloodcall_interval && length(nearby_mobs))
 		var/mob/living/carbon/human/M = pop(nearby_mobs)
-		if(M in view(7,src) && M.health > 20)
+		if(M in view(7,src) && M.get_current_health() > 20)
 			if(prob(50))
 				bloodcall(M)
 				nearby_mobs.Add(M)

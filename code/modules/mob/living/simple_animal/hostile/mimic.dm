@@ -26,8 +26,7 @@ GLOBAL_LIST_INIT(mimic_protected, list(
 	response_disarm = "pushes"
 	response_harm = "hits"
 	speed = 4
-	maxHealth = 100
-	health = 100
+	health_max = 100
 
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite
@@ -80,18 +79,17 @@ GLOBAL_LIST_INIT(mimic_protected, list(
 
 		var/obj/item/W = get_natural_weapon()
 		if(istype(O, /obj/structure))
-			health = (anchored * 50) + 50
+			set_max_health((anchored * 50) + 50)
 			destroy_objects = 1
 			if(O.density && O.anchored)
 				knockdown_people = 1
 				W.force = 2 * initial(W.force)
 		else if(istype(O, /obj/item))
 			var/obj/item/I = O
-			health = 15 * I.w_class
+			set_max_health(15 * I.w_class)
 			W.force = 2 + initial(I.force)
 			move_to_delay = 2 * I.w_class
 
-		maxHealth = health
 		if(creator)
 			src.creator = weakref(creator)
 			faction = "\ref[creator]" // very unique

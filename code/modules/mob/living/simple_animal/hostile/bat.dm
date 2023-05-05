@@ -9,9 +9,6 @@
 
 	faction = "scarybat"
 
-	maxHealth = 20
-	health = 20
-
 	attacktext = list("bitten")
 	attack_sound = 'sound/weapons/bite.ogg'
 
@@ -47,5 +44,4 @@
 	return
 
 /mob/living/simple_animal/hostile/scarybat/cult/strong
-	maxHealth = 60
-	health = 60
+	health_max = 60

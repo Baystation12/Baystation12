@@ -408,7 +408,7 @@
 		return
 	fire_act(air, temperature)
 	FireBurn(0.4*vsc.fire_firelevel_multiplier, temperature, pressure)
-	. =  (health <= 0) ? ..() : FALSE
+	. =  (get_current_health() <= 0) ? ..() : FALSE
 
 // Applies direct "cold" damage while checking protection against the cold.
 /mob/living/proc/inflict_cold_damage(amount)

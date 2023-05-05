@@ -6,8 +6,6 @@
 	attack_state = "ed209-c"
 	layer = MOB_LAYER
 	density = TRUE
-	health = 100
-	maxHealth = 100
 
 	is_ranged = 1
 	preparing_arrest_sounds = new()

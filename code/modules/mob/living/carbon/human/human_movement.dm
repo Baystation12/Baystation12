@@ -21,7 +21,7 @@
 	if(CE_SLOWDOWN in chem_effects)
 		tally += chem_effects[CE_SLOWDOWN]
 
-	var/health_deficiency = (maxHealth - health)
+	var/health_deficiency = get_damage_value()
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 
 	if(can_feel_pain())

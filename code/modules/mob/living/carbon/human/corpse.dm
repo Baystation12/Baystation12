@@ -50,8 +50,9 @@
 /obj/effect/landmark/corpse/LateInitialize()
 	var/new_species = pickweight(species)
 	var/mob/living/carbon/human/corpse = new (loc, new_species)
-	corpse.adjustOxyLoss(corpse.maxHealth)
-	corpse.setBrainLoss(corpse.maxHealth)
+	var/max_health = corpse.get_max_health()
+	corpse.adjustOxyLoss(max_health)
+	corpse.setBrainLoss(max_health)
 	corpse.faction = MOB_FACTION_NEUTRAL
 	var/obj/item/organ/internal/heart/heart = corpse.internal_organs_by_name[BP_HEART]
 	if (heart)

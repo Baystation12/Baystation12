@@ -5,8 +5,7 @@
 	icon_living = "tomato"
 	icon_dead = "tomato_dead"
 	turns_per_move = 5
-	maxHealth = 15
-	health = 15
+	health_max = 15
 	response_help  = "prods"
 	response_disarm = "pushes aside"
 	response_harm   = "smacks"

@@ -6,8 +6,7 @@
 	icon_state = "otherthing"
 	icon_living = "otherthing"
 	icon_dead = "otherthing-dead"
-	health = 100
-	maxHealth = 100
+	health_max = 100
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	faction = "creature"
 	speed = 4

@@ -6,8 +6,7 @@
 	icon_living = "lizard"
 	icon_dead = "lizard-dead"
 	speak_emote = list("hisses")
-	health = 5
-	maxHealth = 5
+	health_max = 5
 	natural_weapon = /obj/item/natural_weapon/bite/weak
 	response_help  = "pets"
 	response_disarm = "shoos"

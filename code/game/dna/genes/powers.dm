@@ -161,7 +161,7 @@
 /datum/dna/gene/basic/hulk/OnMobLife(mob/living/carbon/human/M)
 	if(!istype(M))
 		return
-	if (M.health > 25)
+	if (M.get_current_health() > 25)
 		return
 	M.mutations.Remove(MUTATION_HULK)
 	M.update_mutations()

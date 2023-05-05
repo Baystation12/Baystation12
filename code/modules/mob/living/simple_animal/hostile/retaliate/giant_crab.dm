@@ -16,8 +16,7 @@
 	faction = "crabs"
 	pry_time = 2 SECONDS
 
-	health = 350
-	maxHealth = 350
+	health_max = 350
 	natural_weapon = /obj/item/natural_weapon/pincers/giant
 	return_damage_min = 2
 	return_damage_max = 5
@@ -64,7 +63,7 @@
 	if(!.)
 		return FALSE
 
-	if((health > maxHealth / 1.5) && length(ai_holder.attackers) && prob(10))
+	if(get_health_percentage() > 66 && length(ai_holder.attackers) && prob(10))
 		if(victim)
 			release_grab()
 		ai_holder.attackers = list() //TODO: does this still work?

@@ -99,7 +99,7 @@
 
 
 /obj/item/borg/upgrade/restart/action(mob/living/silicon/robot/R)
-	if(R.health < 0)
+	if(R.get_current_health() < 0)
 		to_chat(usr, "You have to repair the robot before using this module!")
 		return 0
 

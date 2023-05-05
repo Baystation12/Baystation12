@@ -9,8 +9,7 @@
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"
 	speed = 2
-	maxHealth = 50
-	health = 50
+	health_max = 50
 	harm_intent_damage = 8
 	natural_weapon = /obj/item/natural_weapon/bite
 	pry_time = 10 SECONDS
@@ -51,8 +50,7 @@
 
 
 /mob/living/simple_animal/hostile/carp/proc/carp_randomify()
-	maxHealth = rand(initial(maxHealth), (1.5 * initial(maxHealth)))
-	health = maxHealth
+	set_max_health(rand(50, 75), TRUE)
 	if (prob(1))
 		carp_color = pick("white", "black")
 	else

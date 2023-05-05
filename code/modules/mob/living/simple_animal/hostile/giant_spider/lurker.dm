@@ -10,8 +10,7 @@
 	icon_living = "lurker"
 	icon_dead = "lurker_dead"
 
-	maxHealth = 90
-	health = 90
+	health_max = 90
 
 	poison_per_bite = 5
 

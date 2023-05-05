@@ -101,7 +101,7 @@
 		var/follow_dist = 4
 		if (friend.stat >= DEAD || friend.is_asystole()) //danger
 			follow_dist = 1
-		else if (friend.stat || friend.health <= 50) //danger or just sleeping
+		else if (friend.stat || friend.get_current_health() <= 50) //danger or just sleeping
 			follow_dist = 2
 		var/near_dist = max(follow_dist - 2, 1)
 		var/current_dist = get_dist(src, friend)
@@ -145,7 +145,7 @@
 								   "brushes against [friend].",
 								   "rubs against [friend].",
 								   "purrs."))
-	else if (friend.health <= 50)
+	else if (friend.get_current_health() <= 50)
 		if (prob(10))
 			var/verb = pick("meows", "mews", "mrowls")
 			audible_emote("[verb] anxiously.")

@@ -9,8 +9,7 @@
 	response_help =  "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "strikes"
-	health = 45
-	maxHealth = 45
+	health_max = 45
 	natural_weapon = /obj/item/natural_weapon/goosefeet
 	pass_flags = PASS_FLAG_TABLE
 	faction = "geese"
@@ -64,8 +63,7 @@
 		W.force = min((W.force + potency), max_damage)
 	if(!loose && prob(25) && (W && W.force >= loose_threshold)) //second wind
 		loose = TRUE
-		health = (initial(health) * 1.5)
-		maxHealth = (initial(maxHealth) * 1.5)
+		set_max_health(68, TRUE)
 		enrage_potency = enrage_potency_loose
 		desc += " The [name] is loose! Oh no!"
 		update_icon()
@@ -76,8 +74,7 @@
 	icon_state = "dire"
 	icon_living = "dire"
 	icon_dead = "dire_dead"
-	health = 250
-	maxHealth = 250
+	health_max = 250
 	enrage_potency = 3
 	loose_threshold = 20
 	max_damage = 35

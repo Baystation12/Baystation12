@@ -40,8 +40,7 @@
 		laser = ARMOR_LASER_SMALL
 		)
 	speed = 8
-	maxHealth = 100
-	health = 100
+	health_max = 100
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/punch
 	can_escape = TRUE
@@ -111,8 +110,7 @@
 	desc = "A Fleet armsman with armaments. This one seems to be more armed than the rest, sporting a Vesper machine-pistol."
 	icon_state = "fleetteamlead"
 	icon_living = "fleetteamlead"
-	maxHealth = 150
-	health = 150
+	health_max = 150
 	casingtype = /obj/item/ammo_casing/pistol
 	projectiletype = /obj/item/projectile/bullet/pistol
 	natural_weapon = /obj/item/gun/projectile/automatic/machine_pistol
@@ -146,8 +144,7 @@
 		laser = ARMOR_LASER_HANDGUNS
 		)
 	speed = 4
-	maxHealth = 200
-	health = 200
+	health_max = 200
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
@@ -216,8 +213,7 @@
 	icon_state = "fleetheavy"
 	icon_living = "fleetheavy"
 	rapid = TRUE
-	maxHealth = 300
-	health = 300
+	health_max = 300
 	special_attack_cooldown = 1.5 MINUTES
 	base_attack_cooldown = 0.5 SECONDS
 	say_list_type = /datum/say_list/fleet/heavy

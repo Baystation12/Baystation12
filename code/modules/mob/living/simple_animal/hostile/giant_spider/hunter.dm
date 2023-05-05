@@ -9,8 +9,7 @@
 	icon_living = "hunter"
 	icon_dead = "hunter_dead"
 
-	maxHealth = 100
-	health = 100
+	health_max = 100
 
 	poison_per_bite = 5
 

@@ -1497,10 +1497,10 @@
 			if(prob(80))	T.break_tile_to_plating()
 			else			T.break_tile()
 
-		if(M.health == 1)
+		if(M.get_current_health() == 1)
 			M.gib()
 		else
-			M.adjustBruteLoss( min( 99 , (M.health - 1) )    )
+			M.adjustBruteLoss( min( 99 , (M.get_current_health() - 1) )    )
 			M.Stun(20)
 			M.Weaken(20)
 			M.stuttering = 20

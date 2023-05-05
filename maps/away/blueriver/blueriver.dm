@@ -40,8 +40,7 @@
 	icon_dead = "hive_executioner_dead"
 	move_to_delay = 5
 	speed = -1
-	health = 280
-	maxHealth = 280
+	health_max = 280
 	can_escape = TRUE
 
 	harm_intent_damage = 8
@@ -109,8 +108,11 @@
 
 /mob/living/simple_animal/hostile/hive_alien/defender/wounded
 	name = "wounded hive defender"
-	health = 80
 	can_escape = FALSE
+
+/mob/living/simple_animal/hostile/hive_alien/defender/wounded/Initialize()
+	. = ..()
+	set_health(80)
 
 /obj/effect/shuttle_landmark/nav_blueriv/nav1
 	name = "Arctic Planet Landing Point #1"

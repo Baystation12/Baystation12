@@ -6,8 +6,7 @@
 	icon_living = "snake"
 	icon_dead = "snake-dead"
 	speak_emote = list("hisses")
-	health = 45
-	maxHealth = 45
+	health_max = 45
 	natural_weapon = /obj/item/natural_weapon/bite
 	response_help  = "pets"
 	response_disarm = "swats away"
@@ -56,8 +55,7 @@
 	icon_living = "snake"
 	icon_dead = "snake-dead"
 	speak_emote = list("hisses")
-	health = 45
-	maxHealth = 45
+	health_max = 45
 	natural_weapon = /obj/item/natural_weapon/bite
 	response_help  = "pets"
 	response_disarm = "swats away"

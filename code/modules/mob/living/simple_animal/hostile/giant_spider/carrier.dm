@@ -6,8 +6,7 @@
 	icon_living = "carrier"
 	icon_dead = "carrier_dead"
 
-	maxHealth = 100
-	health = 100
+	health_max = 100
 
 	natural_weapon = /obj/item/natural_weapon/bite/spider/carrier
 
@@ -42,10 +41,9 @@
 			break
 		if (prob(swarmling_prob))
 			var/mob/living/simple_animal/hostile/giant_spider/swarmling = new swarmling_type(loc)
-			var/swarm_health = round(swarmling.maxHealth * 0.4, 1)
+			var/swarm_health = round(swarmling.get_max_health() * 0.4, 1)
 			swarmling.name = "spiderling"
-			swarmling.maxHealth = swarm_health
-			swarmling.health = swarm_health
+			swarmling.set_max_health(swarm_health, TRUE)
 			swarmling.natural_weapon = /obj/item/natural_weapon/bite/spider/swarmling
 			swarmling.faction = swarmling_faction
 			swarmling.SetTransform(scale = 0.75)

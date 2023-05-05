@@ -5,15 +5,14 @@
 	icon_living = "content"
 	icon_dead = "content_dead"
 	faction = "fishes"
-	maxHealth = 10
-	health = 10
+	health_max = 10
 	mob_size = MOB_TINY
 	density = FALSE
 
 	meat_amount = 1
 	bone_amount = 3
 	skin_amount = 3
-	
+
 /mob/living/simple_animal/aquatic/fish/grump
 	icon_state = "grump"
 	icon_living = "grump"

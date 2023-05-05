@@ -9,8 +9,7 @@ Tiny, weak, and mostly harmless alone. dangerous in groups.
 	icon_state = "leech"
 	icon_living = "leech"
 	icon_dead = "leech_dead"
-	health = 15
-	maxHealth = 15
+	health_max = 15
 	harm_intent_damage = 8
 	natural_weapon = /obj/item/natural_weapon/bite/weak
 	pass_flags = PASS_FLAG_TABLE
@@ -40,8 +39,8 @@ Tiny, weak, and mostly harmless alone. dangerous in groups.
 		if(istype(S) && !length(S.breaches))
 			return
 		H.remove_blood_simple(L.suck_potency)
-		if(L.health < L.maxHealth)
-			L.health += L.suck_potency / 1.5
+		if(L.health_damaged())
+			L.restore_health(L.suck_potency / 1.5)
 		L.belly += clamp(L.suck_potency, 0, 100)
 
 

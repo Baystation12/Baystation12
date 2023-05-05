@@ -7,8 +7,7 @@
 	response_help  = "pets"
 	response_disarm = "pushes aside"
 	response_harm   = "kicks"
-	health = 50
-	maxHealth = 50 //they are beefy
+	health_max = 50 //they are beefy
 	meat_amount = 10
 	bone_amount = 10
 	skin_amount = 0 //skinless chunk of crawling meat

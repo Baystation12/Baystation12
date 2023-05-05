@@ -1,8 +1,7 @@
 // These hivebots are intended for general damage causing, at range.
 
 /mob/living/simple_animal/hostile/hivebot/ranged_damage
-	maxHealth = 60
-	health = 60
+	health_max = 60
 	projectiletype = /obj/item/projectile/bullet/hivebot
 
 // The regular ranged hivebot, that fires somewhat weak projectiles.
@@ -47,8 +46,7 @@
 /mob/living/simple_animal/hostile/hivebot/ranged_damage/strong
 	name = "strong hivebot"
 	desc = "A robot with a crude ballistic weapon and strong armor."
-	maxHealth = 120
-	health = 120
+	health_max = 120
 	projectile_dispersion = 1
 	projectile_accuracy = -0.5
 	projectilesound = 'sound/weapons/gunshot/mech_autocannon.ogg'

@@ -76,7 +76,7 @@
 		else if (T.nutrition < T.get_hunger_nutrition())
 			. += SPAN_WARNING("Warning:\tthe slime is hungry.")
 		. += "Electric charge strength:\t[T.powerlevel]"
-		. += "Health:\t[round((T.health * 100) / T.maxHealth)]%"
+		. += "Health:\t[T.get_health_percentage()]%"
 
 		var/list/mutations = T.GetMutations()
 

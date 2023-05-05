@@ -15,8 +15,7 @@
 	layer = MOB_LAYER
 	anchored = TRUE
 	density = TRUE
-	health = 150
-	maxHealth = 150
+	health_max = 150
 	mob_bump_flag = HEAVY
 
 	min_target_dist = 0

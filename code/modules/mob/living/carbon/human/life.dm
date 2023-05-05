@@ -688,10 +688,12 @@
 		return
 
 	if(stat != DEAD)
-		if(stat == UNCONSCIOUS && health < maxHealth/2)
+		var/half_max_health = get_max_health() / 2
+		var/current_health = get_current_health()
+		if(stat == UNCONSCIOUS && current_health < half_max_health)
 			//Critical damage passage overlay
 			var/severity = 0
-			switch(health - maxHealth/2)
+			switch(current_health - half_max_health)
 				if(-20 to -10)			severity = 1
 				if(-30 to -20)			severity = 2
 				if(-40 to -30)			severity = 3

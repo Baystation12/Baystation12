@@ -460,7 +460,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 			return
 
 		target.reagents.add_reagent(/datum/reagent/zombie, 35) //Just in case they haven't been infected already
-		if (target.getBruteLoss() > target.maxHealth * 1.5)
+		if (target.getBruteLoss() > target.get_max_health() * 1.5)
 			if (target.stat != DEAD)
 				to_chat(src,SPAN_WARNING("You've scraped \the [target] down to the bones already!."))
 				target.zombify()
@@ -488,7 +488,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 		playsound(loc, 'sound/effects/splat.ogg', 20, 1)
 		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), target.species.blood_color)
-		if (target.getBruteLoss() > target.maxHealth*0.75)
+		if (target.getBruteLoss() > target.get_max_health()*0.75)
 			if (prob(50))
 				gibs(get_turf(src), target.dna)
 				src.visible_message(SPAN_DANGER("\The [src] tears out \the [target]'s insides!"))

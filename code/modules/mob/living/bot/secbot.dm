@@ -9,8 +9,7 @@
 	icon_state = "secbot0"
 	var/attack_state = "secbot-c"
 	layer = MOB_LAYER
-	maxHealth = 50
-	health = 50
+	health_max = 50
 	req_access = list(list(access_security, access_forensics_lockers))
 	botcard_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels)
 
@@ -150,11 +149,11 @@
 /mob/living/bot/secbot/bullet_act(obj/item/projectile/P)
 	if (status_flags & GODMODE)
 		return PROJECTILE_FORCE_MISS
-	var/curhealth = health
+	var/curhealth = get_current_health()
 	var/mob/shooter = P.firer
 	. = ..()
 	//if we already have a target just ignore to avoid lots of checking
-	if(!target && health < curhealth && shooter && (shooter in view(world.view, src)))
+	if(!target && get_current_health() < curhealth && shooter && (shooter in view(world.view, src)))
 		react_to_attack(shooter)
 
 /mob/living/bot/secbot/proc/begin_arrest(mob/target, threat)

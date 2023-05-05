@@ -55,6 +55,12 @@
 	return Percent(get_damage_value(), get_max_health(), 0)
 
 /**
+ * Retrieves the atom's current health as a percentage where `100%` is `100`.
+ */
+/atom/proc/get_health_percentage()
+	return Percent(get_current_health(), get_max_health(), 0)
+
+/**
  * Checks if the atom's health can be restored.
  * Should be called before `restore_health()` in most cases.
  * NOTE: Does not include a check for death state by default, to allow repairing/healing atoms back to life.

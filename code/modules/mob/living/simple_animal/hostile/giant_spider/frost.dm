@@ -7,8 +7,7 @@
 	icon_living = "frost"
 	icon_dead = "frost_dead"
 
-	maxHealth = 115
-	health = 115
+	health_max = 115
 
 	poison_per_bite = 5
 	poison_type = /datum/reagent/toxin/cryotoxin

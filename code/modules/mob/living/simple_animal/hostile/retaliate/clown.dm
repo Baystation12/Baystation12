@@ -10,8 +10,7 @@
 	response_disarm = "gently pushes aside"
 	response_harm = "hits"
 	a_intent = I_HURT
-	maxHealth = 75
-	health = 75
+	health_max = 75
 	speed = -1
 	harm_intent_damage = 8
 	can_escape = TRUE

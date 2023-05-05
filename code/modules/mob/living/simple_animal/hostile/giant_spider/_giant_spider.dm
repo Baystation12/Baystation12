@@ -16,8 +16,7 @@
 	icon_dead = "generic_dead"
 
 	faction = "spiders"
-	maxHealth = 110
-	health = 110
+	health_max = 110
 	natural_weapon = /obj/item/natural_weapon/bite/spider
 	pass_flags = PASS_FLAG_TABLE
 	poison_resist = 0.5
@@ -83,8 +82,7 @@
 	overlays -= eye_layer
 
 /mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
-	maxHealth = rand(initial(maxHealth), (1.4 * initial(maxHealth)))
-	health = maxHealth
+	set_max_health(rand(110, 154), TRUE)
 	var/image/I = image(icon = icon, icon_state = "[icon_state]-eyes", layer = EYE_GLOW_LAYER)
 	I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR

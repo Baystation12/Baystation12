@@ -18,7 +18,7 @@
 				var/turf/T = get_turf(S)
 				var/obj/item/remains/xeno/X = new(T)
 				X.desc += "These look like they belong to \a [S.name]."
-				hunger = max(0, hunger - 5*S.maxHealth)
+				hunger = max(0, hunger - 5*S.get_max_health())
 				if(prob(5))
 					S.gib()
 				else
@@ -57,8 +57,7 @@
 	icon_living = "samak"
 	icon_dead = "samak_dead"
 	move_to_delay = 2
-	maxHealth = 125
-	health = 125
+	health_max = 125
 	speed = 2
 	natural_weapon = /obj/item/natural_weapon/claws
 	cold_damage_per_tick = 0
@@ -83,8 +82,7 @@
 	icon_living = "diyaab"
 	icon_dead = "diyaab_dead"
 	move_to_delay = 1
-	maxHealth = 25
-	health = 25
+	health_max = 25
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/claws/weak
 	cold_damage_per_tick = 0
@@ -101,8 +99,7 @@
 	icon_living = "shantak"
 	icon_dead = "shantak_dead"
 	move_to_delay = 1
-	maxHealth = 75
-	health = 75
+	health_max = 75
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/claws
 	cold_damage_per_tick = 0
@@ -158,8 +155,7 @@
 	icon_living = "royalcrab"
 	icon_dead = "royalcrab_dead"
 	move_to_delay = 3
-	maxHealth = 150
-	health = 150
+	health_max = 150
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/pincers
 	natural_armor = list(
@@ -178,8 +174,7 @@
 	icon_living = "char"
 	icon_dead = "char_dead"
 	mob_size = MOB_LARGE
-	health = 45
-	maxHealth = 45
+	health_max = 45
 	natural_weapon = /obj/item/natural_weapon/charbaby
 	speed = 2
 	response_help =  "pats briefly"

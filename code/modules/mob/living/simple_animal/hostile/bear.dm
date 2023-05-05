@@ -8,8 +8,7 @@
 
 	faction = "russian"
 
-	maxHealth = 60
-	health = 60
+	health_max = 60
 
 	movement_cooldown = 0.5 SECONDS
 

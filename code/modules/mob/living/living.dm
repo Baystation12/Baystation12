@@ -206,10 +206,10 @@ default behaviour is:
 
 /mob/living/proc/updatehealth()
 	if(status_flags & GODMODE)
-		health = 100
+		revive_health()
 		set_stat(CONSCIOUS)
 	else
-		health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - getHalLoss()
+		set_health(get_max_health() - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - getHalLoss())
 
 
 //This proc is used for mobs which are affected by pressure to calculate the amount of pressure that actually
@@ -244,12 +244,12 @@ default behaviour is:
 	return btemperature
 
 /mob/living/proc/getBruteLoss()
-	return maxHealth - health
+	return get_damage_value()
 
 /mob/living/proc/adjustBruteLoss(amount)
 	if (status_flags & GODMODE)
 		return
-	health = clamp(health - amount, 0, maxHealth)
+	mod_health(-amount)
 
 /mob/living/proc/getOxyLoss()
 	return 0
@@ -306,10 +306,10 @@ default behaviour is:
 	return
 
 /mob/living/proc/getMaxHealth()
-	return maxHealth
+	return get_max_health()
 
 /mob/living/proc/setMaxHealth(newMaxHealth)
-	maxHealth = newMaxHealth
+	set_max_health(newMaxHealth)
 
 // ++++ROCKDTBEN++++ MOB PROCS //END
 

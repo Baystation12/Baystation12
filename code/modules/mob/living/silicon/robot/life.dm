@@ -70,7 +70,7 @@
 	if (resting) // Just in case. This breaks things so never allow robots to rest.
 		resting = FALSE
 
-	if(health < config.health_threshold_dead && src.stat != 2) //die only once
+	if(get_current_health() < config.health_threshold_dead && src.stat != 2) //die only once
 		death()
 
 	if (src.stat != DEAD) //Alive.
@@ -151,9 +151,9 @@
 				process_med_hud(src, FALSE)
 	if (healths)
 		if (stat != DEAD)
-			var/health_fraction = health / maxHealth
+			var/health_fraction = get_current_health() / get_max_health()
 			if (health_fraction < 0 && !istype(src, /mob/living/silicon/robot/drone))
-				health_fraction = health / -config.health_threshold_dead
+				health_fraction = get_current_health() / -config.health_threshold_dead
 			switch (health_fraction)
 				if (1 to POSITIVE_INFINITY)
 					healths.icon_state = "health0"

@@ -8,8 +8,7 @@
 	icon_living = "phoron"
 	icon_dead = "phoron_dead"
 
-	maxHealth = 225
-	health = 225
+	health_max = 225
 	taser_kill = FALSE //You will need more than a peashooter to kill the juggernaut.
 
 	natural_weapon = /obj/item/natural_weapon/bite/spider/phorogenic

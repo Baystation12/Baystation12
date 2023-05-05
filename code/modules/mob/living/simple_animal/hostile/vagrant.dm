@@ -7,8 +7,7 @@
 	icon_living = "vagrant"
 	icon_dead = "vagrant"
 	icon_gib = "vagrant"
-	maxHealth = 60
-	health = 20
+	health_max = 60
 	speed = 5
 	turns_per_move = 4
 	move_to_delay = 4
@@ -33,6 +32,10 @@
 
 	ai_holder = /datum/ai_holder/hostile/melee/vagrant
 
+/mob/living/simple_animal/hostile/vagrant/Initialize()
+	. = ..()
+	set_health(20)
+
 /datum/ai_holder/hostile/melee/vagrant
 
 /datum/ai_holder/hostile/melee/vagrant/engage_target()
@@ -45,7 +48,7 @@
 			return
 		//This line ensures there's always a reasonable chance of grabbing, while still
 		//Factoring in health
-		if(!V.gripping && (V.cloaked || prob(V.health + ((V.maxHealth - V.health) * 2))))
+		if(!V.gripping && (V.cloaked || prob(V.get_current_health() + ((V.get_damage_value()) * 2))))
 			V.gripping = H
 			V.cloaked = 0
 			V.update_icon()
@@ -60,9 +63,9 @@
 /mob/living/simple_animal/hostile/vagrant/bullet_act(obj/item/projectile/Proj)
 	if (status_flags & GODMODE)
 		return PROJECTILE_FORCE_MISS
-	var/oldhealth = health
+	var/oldhealth = get_current_health()
 	. = ..()
-	if((target_mob != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
+	if((target_mob != Proj.firer) && get_current_health() < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
 		target_mob = Proj.firer
 		turns_per_move = 3
 		ai_holder.walk_to_target()
@@ -84,7 +87,7 @@
 			var/blood_volume = round(gripping.vessel.get_reagent_amount(/datum/reagent/blood))
 			if(blood_volume > 5)
 				gripping.vessel.remove_reagent(/datum/reagent/blood, blood_per_tick)
-				health = min(health + health_per_tick, maxHealth)
+				restore_health(health_per_tick)
 				if(prob(15))
 					to_chat(gripping, SPAN_DANGER("You feel your fluids being drained!"))
 			else
@@ -96,7 +99,7 @@
 	if(stance == STANCE_IDLE && !cloaked)
 		cloaked = 1
 		update_icon()
-	if(health == maxHealth)
+	if(!health_damaged())
 		new/mob/living/simple_animal/hostile/vagrant(src.loc)
 		new/mob/living/simple_animal/hostile/vagrant(src.loc)
 		gib()

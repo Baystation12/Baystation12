@@ -73,8 +73,8 @@
 		return FALSE
 	transformer.status_flags &= ~GODMODE
 	if(share_damage)
-		var/ratio = target.health/target.maxHealth
-		var/damage = transformer.maxHealth - round(transformer.maxHealth*(ratio))
+		var/ratio = target.get_current_health()/target.get_max_health()
+		var/damage = transformer.get_max_health() - round(transformer.get_max_health()*(ratio))
 		for(var/i in 1 to ceil(damage/10))
 			transformer.adjustBruteLoss(10)
 	if(target.mind)
@@ -111,7 +111,7 @@
 
 	level_max = list(Sp_TOTAL = 2, Sp_SPEED = 2, Sp_POWER = 2)
 
-	newVars = list("health" = 50, "maxHealth" = 50)
+	newVars = list("health_current" = 50, "health_max" = 50)
 
 	hud_state = "wiz_poly"
 
@@ -177,8 +177,8 @@
 			newVars = list("name" = "\proper corruption incarnate",
 						"melee_damage_upper" = 25,
 						"resistance" = 6,
-						"health" = 125,
-						"maxHealth" = 125)
+						"health_current" = 125,
+						"health_max" = 125)
 			duration = 0
 			return "You revel in the corruption. There is no turning back."
 

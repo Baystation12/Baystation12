@@ -4,7 +4,7 @@
 		return FALSE
 	//Health
 	if(stat == DEAD)
-		if(health > 0)
+		if(get_current_health() > 0)
 			icon_state = icon_living
 			switch_from_dead_to_living_mob_list()
 			set_stat(CONSCIOUS)
@@ -13,12 +13,9 @@
 
 	handle_atmos()
 
-	if(health <= 0)
+	if(get_current_health() <= 0)
 		death()
 		return
-
-	if(health > maxHealth)
-		health = maxHealth
 
 	handle_stunned()
 	handle_weakened()

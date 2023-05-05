@@ -10,8 +10,7 @@
 	response_disarm = "gently pushes aside"
 	response_harm = "hits"
 	a_intent = I_HURT
-	health = 300
-	maxHealth = 300
+	health_max = 300
 	speed = 8
 	base_attack_cooldown = 2 SECONDS
 	move_to_delay = 6
@@ -84,7 +83,7 @@
 		var/datum/effect/effect/system/spark_spread/sparks = new
 		sparks.set_up(3, 1, src)
 		sparks.start()
-		health += rand(25, 50)
+		restore_health(25, 50)
 	if (!sparked && prob(5))
 		sparked = TRUE
 		var/datum/effect/effect/system/spark_spread/sparks = new
@@ -96,19 +95,20 @@
 			visible_message(SPAN_WARNING("\The [src] suddenly lights up with activity, searching for targets."))
 		else
 			visible_message(SPAN_WARNING("\The [src] dulls its running lights, becoming passive."))
-	if (health / maxHealth > 0.9)
+	var/damage_ratio = get_current_health() / get_max_health()
+	if (damage_ratio > 0.9)
 		icon_state = "[initial(icon_state)]"
 		explode_chance = 0
-	else if (health / maxHealth > 0.7)
+	else if (damage_ratio > 0.7)
 		icon_state = "[initial(icon_state)]2"
 		explode_chance = 0
-	else if (health / maxHealth > 0.5)
+	else if (damage_ratio > 0.5)
 		icon_state = "[initial(icon_state)]1"
 		explode_chance = 0.5
-	else if (health / maxHealth > 0.3)
+	else if (damage_ratio > 0.3)
 		icon_state = "[initial(icon_state)]0"
 		explode_chance = 5
-	else if (health > 0)
+	else if (damage_ratio > 0)
 		icon_state = "[initial(icon_state)]_dead"
 		exploding = FALSE
 		if (!disabled)
@@ -134,7 +134,7 @@
 /mob/living/simple_animal/hostile/retaliate/malf_drone/emp_act(severity)
 	if (status_flags & GODMODE)
 		return
-	health -= rand(3, 15) * (severity + 1)
+	damage_health(rand(3, 15) * (severity + 1))
 	disabled = rand(150, 600)
 	hostile_drone = FALSE
 	walk(src, 0)

@@ -10,8 +10,7 @@
 	response_disarm = "shoves"
 	response_harm = "hits"
 	speed = 4
-	maxHealth = 100
-	health = 100
+	health_max = 100
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/punch
 	can_escape = TRUE
@@ -71,7 +70,7 @@
 		return TRUE
 
 	// Apply damage
-	health -= weapon.force
+	damage_health(weapon.force)
 	user.visible_message(
 		SPAN_WARNING("\The [user] swings \a [weapon] at \the [src]!"),
 		SPAN_DANGER("You swing \the [weapon] at \the [src]!"),
@@ -86,7 +85,7 @@
 	if (status_flags & GODMODE)
 		return PROJECTILE_FORCE_MISS
 	if(prob(65))
-		src.health -= Proj.damage
+		damage_health(Proj.damage)
 	else
 		visible_message(SPAN_DANGER("\The [src] blocks \the [Proj] with its shield!"))
 	return 0
@@ -130,8 +129,7 @@
 	icon_state = "viscerator_attack"
 	icon_living = "viscerator_attack"
 	pass_flags = PASS_FLAG_TABLE
-	health = 15
-	maxHealth = 15
+	health_max = 15
 	natural_weapon = /obj/item/natural_weapon/rotating_blade
 	faction = "syndicate"
 	min_gas = null

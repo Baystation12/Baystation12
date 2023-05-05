@@ -24,8 +24,7 @@ var/global/list/mob_hat_cache = list()
 	real_name = "drone"
 	icon = 'icons/mob/robots_drones.dmi'
 	icon_state = "repairbot"
-	maxHealth = 35
-	health = 35
+	health_max = 35
 	cell_emp_mult = 1
 	universal_speak = FALSE
 	universal_understand = TRUE
@@ -219,7 +218,7 @@ var/global/list/mob_hat_cache = list()
 		var/id_name = GET_ID_NAME(id, tool)
 		// Reboot
 		if (stat == DEAD)
-			if (!config.allow_drone_spawn || emagged || health < -35)
+			if (!config.allow_drone_spawn || emagged || get_current_health() < -35)
 				USE_FEEDBACK_FAILURE("\The [src] interface is fried, and a distressing burned smell wafts from \his interior. You're not rebooting this one.")
 				return TRUE
 			if (!check_access(id))
@@ -283,20 +282,21 @@ var/global/list/mob_hat_cache = list()
 //For some goddamn reason robots have this hardcoded. Redefining it for our fragile friends here.
 /mob/living/silicon/robot/drone/updatehealth()
 	if(status_flags & GODMODE)
-		health = 35
+		revive_health()
 		set_stat(CONSCIOUS)
 		return
-	health = 35 - (getBruteLoss() + getFireLoss())
+	set_health(get_max_health() - (getBruteLoss() + getFireLoss()))
 	return
 
 //Easiest to check this here, then check again in the robot proc.
 //Standard robots use config for crit, which is somewhat excessive for these guys.
 //Drones killed by damage will gib.
 /mob/living/silicon/robot/drone/handle_regular_status_updates()
-	if(health <= -35 && src.stat != DEAD)
+	var/current_health = get_current_health()
+	if(current_health <= -35 && src.stat != DEAD)
 		self_destruct()
 		return
-	if(health <= 0 && src.stat != DEAD)
+	if(current_health <= 0 && src.stat != DEAD)
 		death()
 		return
 	..()

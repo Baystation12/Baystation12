@@ -3,8 +3,7 @@
 	desc = "A small robot. It looks angry."
 	icon_state = "dron"
 	icon_dead = "dron_dead"
-	health = 50
-	maxHealth = 50
+	health_max = 50
 	natural_weapon = /obj/item/natural_weapon/drone_slicer
 	speak_emote = list("blares","buzzes","beeps")
 	faction = "silicon"
