@@ -452,7 +452,7 @@
 	return chosen_species.name
 
 /mob/new_player/choose_from_pronouns()
-	if(!client || !client.prefs)
+	if (!client?.prefs)
 		return ..()
 	return client.prefs.pronouns
 
