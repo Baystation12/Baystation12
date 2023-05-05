@@ -40,7 +40,7 @@
 	var/list/covering_items = H.get_covering_equipped_items(required_free_body_parts)
 	if(length(covering_items))
 		var/obj/item/I = covering_items[1]
-		var/datum/gender/G = gender_datums[I.gender]
+		var/datum/gender/G = GLOB.gender_datums[I.gender]
 		if(adjustment_verb)
 			to_chat(user, SPAN_WARNING("Cannot [adjustment_verb] \the [src]. [english_list(covering_items)] [length(covering_items) == 1 ? G.is : "are"] in the way."))
 		return FALSE

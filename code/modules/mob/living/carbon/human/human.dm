@@ -900,17 +900,17 @@
 		reset_view(0)
 
 /**
- * Retrieves the atom's visible gender. Generally this is just `gender` but some factors may mask or change this.
+ * Retrieves the atom's pronouns. Generally this is just based on `gender` but some factors may mask or change this.
  *
- * Returns a valid gender value. See DM documentation for `/mob/var/gender`.
+ * Returns instance of `/datum/pronouns`.
  */
 /atom/proc/choose_from_pronouns()
-	return gender
+	RETURN_TYPE(/datum/pronouns)
+	return GLOB.pronouns_from_gender[gender]
 
 /mob/living/carbon/human/choose_from_pronouns()
-	if(wear_suit && wear_suit.flags_inv & HIDEJUMPSUIT && ((head && head.flags_inv & HIDEMASK) || wear_mask))
-		var/datum/pronouns/P = GLOB.pronouns.by_key[PRONOUNS_THEY_THEM]
-		return P
+	if (wear_suit && HAS_FLAGS(wear_suit.flags_inv, HIDEJUMPSUIT) && ((head && HAS_FLAGS(head.flags_inv, HIDEMASK)) || wear_mask))
+		return GLOB.pronouns.by_key[PRONOUNS_THEY_THEM]
 	return ..()
 
 /mob/living/carbon/human/proc/increase_germ_level(n)
