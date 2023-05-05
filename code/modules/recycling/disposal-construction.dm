@@ -123,6 +123,25 @@
 	if (!.)
 		return
 	if (!anchored)
+		// Plating
+		var/turf/turf = get_turf(src)
+		if (!turf.is_plating())
+			if (!silent)
+				USE_FEEDBACK_FAILURE("You must remove the plating before you can secure \the [src].")
+			return FALSE
+
+		// Catwalks
+		var/obj/structure/catwalk/catwalk = locate() in get_turf(src)
+		if (catwalk)
+			if (catwalk.plated_tile && !catwalk.hatch_open)
+				if (!silent)
+					USE_FEEDBACK_FAILURE("\The [catwalk]'s hatch needs to be opened before you can secure \the [src].")
+				return FALSE
+			else if (!catwalk.plated_tile)
+				if (!silent)
+					USE_FEEDBACK_FAILURE("\The [catwalk] is blocking access to the floor.")
+				return FALSE
+
 		var/obj/structure/disposalpipe/connected_pipe = locate() in get_turf(src)
 		if (!check_buildability(connected_pipe, user))
 			return FALSE
@@ -212,9 +231,6 @@
 
 // Subtypes
 
-/obj/structure/disposalconstruct/machine
-	obj_flags = 0 // No rotating
-
 /obj/structure/disposalconstruct/machine/update_verbs()
 	return // No flipping
 
@@ -224,7 +240,7 @@
 	update_icon()
 
 /obj/structure/disposalconstruct/machine/build(obj/structure/disposalpipe/CP)
-	var/obj/machinery/disposal/P = new /obj/machinery/disposal(src.loc)
+	var/obj/machinery/disposal/P = new constructed_path(src.loc)
 	transfer_fingerprints_to(P)
 	P.set_dir(dir)
 	P.mode = 0 // start with pump off
