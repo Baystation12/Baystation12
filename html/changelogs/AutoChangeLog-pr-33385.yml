@@ -1,6 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Fixes disposal chute constructs being unanchorable and unrotatable.
-  - bugfix: Fixes disposal pipes and constructs being anchorable on invalid turfs.
-  - bugfix: Fix disposal chutes not remembering direction when built.

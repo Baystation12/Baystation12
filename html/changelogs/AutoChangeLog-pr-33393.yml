@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Fixes a bug that caused preset emotes (I.e., `/stare`) targeting objects
-      to not work.
