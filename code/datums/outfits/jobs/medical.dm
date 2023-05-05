@@ -44,7 +44,7 @@
 	mask = /obj/item/clothing/mask/surgical
 /singleton/hierarchy/outfit/job/medical/doctor/virologist/New()
 	..()
-	BACKPACK_OVERRIDE_VIROLOGY
+	BACKPACK_OVERRIDE_RESEARCH_CORP
 
 /singleton/hierarchy/outfit/job/medical/doctor/nurse
 	name = OUTFIT_JOB_NAME("Nurse")
@@ -71,7 +71,7 @@
 
 /singleton/hierarchy/outfit/job/medical/chemist/New()
 	..()
-	BACKPACK_OVERRIDE_VIROLOGY
+	BACKPACK_OVERRIDE_RESEARCH_CORP
 
 /singleton/hierarchy/outfit/job/medical/geneticist
 	name = OUTFIT_JOB_NAME("Geneticist")

@@ -935,10 +935,10 @@ GLOBAL_LIST_INIT(random_backpacks, list(
 	/obj/item/storage/backpack/security/exo,
 	/obj/item/storage/backpack/command,
 	/obj/item/storage/backpack/industrial,
-	/obj/item/storage/backpack/toxins,
+	/obj/item/storage/backpack/corpsci,
 	/obj/item/storage/backpack/hydroponics,
 	/obj/item/storage/backpack/genetics,
-	/obj/item/storage/backpack/virology,
+	/obj/item/storage/backpack/sci,
 	/obj/item/storage/backpack/chemistry
 ))
 
