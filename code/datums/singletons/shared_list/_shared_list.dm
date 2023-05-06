@@ -1,7 +1,7 @@
 /singleton/shared_list
 	abstract_type = /singleton/shared_list
 	var/max_pick = 8
-	var/list/list
+	VAR_PRIVATE/list/list
 	var/mutable
 
 #if DM_VERSION >= 515
@@ -80,7 +80,7 @@
 	if (!mutable)
 		throw EXCEPTION("[type] is not mutable.")
 		return
-	return list.Add(arglist(args))
+	list.Add(arglist(args))
 
 
 /singleton/shared_list/proc/Copy(Start = 1, End = 0)
@@ -91,7 +91,7 @@
 	if (!mutable)
 		throw EXCEPTION("[type] is not mutable.")
 		return
-	return list.Cut(Start, End)
+	list.Cut(Start, End)
 
 
 /singleton/shared_list/proc/Find(Elem, Start = 1, End = 0)
@@ -129,24 +129,28 @@
 	if (!mutable)
 		throw EXCEPTION("[type] is not mutable.")
 		return
-	return list.Splice(arglist(args))
+	list.Splice(arglist(args))
+
 
 
 /singleton/shared_list/proc/Swap(Index1, Index2)
 	if (!mutable)
 		throw EXCEPTION("[type] is not mutable.")
 		return
-	return list.Swap(Index1, Index2)
+	list.Swap(Index1, Index2)
 
 
+/// The length of the backing list.
 /singleton/shared_list/proc/Len()
 	return length(list)
 
 
-/singleton/shared_list/proc/Ref()
-	return list
+/// TRUE if entry is in the backing list as a value or key.
+/singleton/shared_list/proc/Has(entry)
+	return (entry in list)
 
 
+/// Returns a result, or list of results, randomly selected from the backing list by pick().
 /singleton/shared_list/proc/Pick(count = 1)
 	count = clamp(floor(count), 1, max_pick)
 	if (count == 1)
@@ -157,6 +161,7 @@
 	return result
 
 
+/// Returns a result, or list of results, randomly selected from the backing map by pickweight().
 /singleton/shared_list/proc/PickWeight(count = 1)
 	count = clamp(floor(count), 1, max_pick)
 	if (count == 1)
