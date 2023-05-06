@@ -228,9 +228,7 @@
 	alt_titles = list(
 		"Psychiatrist",
 		"Psychologist",
-		"Psionic Counselor",
 		"Mentalist"
-
 	)
 
 	allowed_branches = list(
@@ -242,11 +240,12 @@
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/ec/o1)
 	min_skill = list(
-		SKILL_BUREAUCRACY = SKILL_BASIC,
-		SKILL_MEDICAL     = SKILL_BASIC
+		SKILL_BUREAUCRACY = SKILL_ADEPT,
+		SKILL_MEDICAL = SKILL_BASIC
 	)
 	max_skill = list(
-		SKILL_MEDICAL     = SKILL_MAX
+		SKILL_MEDICAL = SKILL_ADEPT,
+		SKILL_ANATOMY = SKILL_ADEPT
 	)
 	access = list(
 		access_medical, access_psychiatrist,
@@ -260,9 +259,7 @@
 	give_psionic_implant_on_join = FALSE
 
 /datum/job/psychiatrist/equip(mob/living/carbon/human/H)
-	if(H.mind?.role_alt_title == "Psionic Counselor")
-		psi_faculties = list("[PSI_REDACTION]" = PSI_RANK_OPERANT)
-	if(H.mind?.role_alt_title == "Mentalist")
+	if (H.mind?.role_alt_title == "Mentalist")
 		psi_faculties = list("[PSI_COERCION]" = PSI_RANK_OPERANT)
 	return ..()
 
