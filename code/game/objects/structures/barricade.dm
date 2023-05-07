@@ -109,7 +109,7 @@
 
 //spikey barriers
 /obj/structure/barricade/spike
-	name = "cheval-de-frise"
+	name = "spiked barricade"
 	icon_state = "cheval"
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
 	spiky = TRUE
@@ -124,8 +124,8 @@
 	if(!rod_material_name)
 		rod_material_name = MATERIAL_WOOD
 	rod_material = SSmaterials.get_material_by_name("[rod_material_name]")
-	SetName("cheval-de-frise")
-	desc = "A rather simple [material.display_name] barrier. It menaces with spikes of [rod_material.display_name]."
+	SetName("spiked barricade")
+	desc = "A rather simple [material.display_name] spiked barricade, also known as a cheval-de-frise. It menaces with spikes of [rod_material.display_name] which look like they would hurt to walk in to."
 	damage = (rod_material.hardness * 0.85)
 	overlays += overlay_image(icon, spike_overlay, color = rod_material.icon_colour, flags = RESET_COLOR)
 
@@ -139,7 +139,7 @@
 	var/damage_holder = damage
 	var/target_zone = pick(BP_CHEST, BP_GROIN, BP_L_LEG, BP_R_LEG)
 
-	if(MOVING_DELIBERATELY(victim)) //walking into this is less hurty than running
+	if(MOVING_DELIBERATELY(victim)) //creeping into this is less hurty than walking
 		damage_holder = (damage / 4)
 
 	if(isanimal(victim)) //simple animals have simple health, reduce our damage
