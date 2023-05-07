@@ -1,0 +1,6 @@
+author: Spookerton, Ryan180602
+delete-after: true
+changes:
+  - tweak: Unathi can no longer toggle heal.
+  - tweak: Unathi heal is always on.
+  - tweak: Unathi heal is lesser when suppressed.
