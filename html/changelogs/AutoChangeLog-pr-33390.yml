@@ -1,0 +1,8 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - tweak: Add EC variant of messenger, backpack, satchel.
+  - tweak: Remove nt pack; make virology packs default for science.
+  - tweak: Make a genbelt variant with science stuff for science lockers and trims
+      some extra stuff in science lockers.
+  - tweak: Makes science lockers start with a EC messenger. It's a EC ship after all.
