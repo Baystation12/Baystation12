@@ -1,4 +1,0 @@
-author: Cronac
-delete-after: true
-changes:
-  - bugfix: Fixes sprite overlays breaking when Unathi enter a prone position.
