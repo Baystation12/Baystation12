@@ -1,0 +1,4 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Carbine rifles are now the same w_class as bullpups.
