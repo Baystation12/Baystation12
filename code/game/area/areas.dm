@@ -252,7 +252,7 @@
 	var/area/newarea = get_area(L.loc)
 	var/area/oldarea = L.lastarea
 	if(oldarea.has_gravity != newarea.has_gravity)
-		if(newarea.has_gravity == 1 && !MOVING_DELIBERATELY(L)) // Being ready when you change areas allows you to avoid falling.
+		if(newarea.has_gravity == 1 && MOVING_QUICKLY(L)) // Being not hasty when you change areas allows you to avoid falling.
 			thunk(L)
 		L.update_floating()
 
@@ -326,11 +326,11 @@
 		var/mob/living/carbon/human/H = mob
 		if(!H.buckled && prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_PROF)))
 			if(!MOVING_DELIBERATELY(H))
-				H.AdjustStunned(6)
-				H.AdjustWeakened(6)
-			else
 				H.AdjustStunned(3)
 				H.AdjustWeakened(3)
+			else
+				H.AdjustStunned(1.5)
+				H.AdjustWeakened(1.5)
 			to_chat(mob, SPAN_NOTICE("The sudden appearance of gravity makes you fall to the floor!"))
 
 /// Trigger for the prison break event. Causes lighting to overload and dooes to open. Has no effect if the area lacks an APC or the APC is turned off.
