@@ -97,4 +97,4 @@
 
 	// Non-blocking - Hit everything
 	for (var/atom/A as anything in other_atoms)
-		A.fire_act(adj_turf, adj_air, adj_temp, adj_volume)
+		A.fire_act(adj_air, adj_temp, adj_volume)
