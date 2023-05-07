@@ -1,0 +1,5 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - tweak: Falling due to gravity change drops you for less time.
+  - tweak: Now only sprinting from nograv to grav tile drops you.
