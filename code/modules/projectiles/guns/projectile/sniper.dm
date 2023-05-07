@@ -167,7 +167,7 @@
 	icon = 'icons/obj/guns/semistrip.dmi'
 	icon_state = "semistrip"
 	item_state = "semistrip"
-	w_class = ITEM_SIZE_LARGE
+	w_class = ITEM_SIZE_HUGE
 	force = 10
 	origin_tech = list(TECH_COMBAT = 2)
 	slot_flags = SLOT_BACK
