@@ -6,6 +6,10 @@
 	pda_type = /obj/item/modular_computer/pda/science
 	l_ear = /obj/item/device/radio/headset/science
 
+/singleton/hierarchy/outfit/job/torch/crew/research/New()
+	..()
+	BACKPACK_OVERRIDE_RESEARCH
+
 /singleton/hierarchy/outfit/job/torch/crew/research/cso
 	name = OUTFIT_JOB_NAME("Chief Science Officer - Expeditionary Corps")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/research

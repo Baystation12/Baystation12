@@ -16,9 +16,14 @@ backpack_overrides[/singleton/backpack_outfit/satchel]       = /obj/item/storage
 backpack_overrides[/singleton/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/med;
 
 #define BACKPACK_OVERRIDE_RESEARCH \
-backpack_overrides[/singleton/backpack_outfit/backpack]      = /obj/item/storage/backpack/toxins; \
-backpack_overrides[/singleton/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/tox; \
-backpack_overrides[/singleton/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/viro;
+backpack_overrides[/singleton/backpack_outfit/backpack]      = /obj/item/storage/backpack/sci; \
+backpack_overrides[/singleton/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/sci; \
+backpack_overrides[/singleton/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/sci;
+
+#define BACKPACK_OVERRIDE_RESEARCH_CORP \
+backpack_overrides[/singleton/backpack_outfit/backpack]      = /obj/item/storage/backpack/corpsci; \
+backpack_overrides[/singleton/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/corpsci; \
+backpack_overrides[/singleton/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/corpsci;
 
 #define BACKPACK_OVERRIDE_SECURITY \
 backpack_overrides[/singleton/backpack_outfit/backpack]      = /obj/item/storage/backpack/security; \
@@ -29,11 +34,6 @@ backpack_overrides[/singleton/backpack_outfit/messenger_bag] = /obj/item/storage
 backpack_overrides[/singleton/backpack_outfit/backpack]      = /obj/item/storage/backpack/security/exo; \
 backpack_overrides[/singleton/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/sec/exo; \
 backpack_overrides[/singleton/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/sec/exo;
-
-#define BACKPACK_OVERRIDE_VIROLOGY \
-backpack_overrides[/singleton/backpack_outfit/backpack]      = /obj/item/storage/backpack/virology; \
-backpack_overrides[/singleton/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/vir; \
-backpack_overrides[/singleton/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/viro;
 
 #define BACKPACK_OVERRIDE_COMMAND \
 backpack_overrides[/singleton/backpack_outfit/backpack]		= /obj/item/storage/backpack/command; \

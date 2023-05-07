@@ -18,7 +18,7 @@
 
 /singleton/hierarchy/outfit/job/torch/passenger/research/scientist/New()
 	..()
-	BACKPACK_OVERRIDE_RESEARCH
+	BACKPACK_OVERRIDE_RESEARCH_CORP
 
 /singleton/hierarchy/outfit/job/torch/passenger/research/assist
 	name = OUTFIT_JOB_NAME("Research Assistant - Torch")
