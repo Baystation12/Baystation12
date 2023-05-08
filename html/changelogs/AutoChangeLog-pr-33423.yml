@@ -1,0 +1,7 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: A majority of tool interactions now, by default, require the tool to remain
+      in your active hand, both you and the item (If not in hands) to remain next
+      to the target, and you to be able to physically interact with the target to
+      complete if there is a timer, prompt, or any other pause in the process.
