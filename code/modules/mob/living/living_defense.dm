@@ -179,7 +179,7 @@
 
 		var/miss_chance = max(15*(TT.dist_travelled-2),0)
 
-		if (prob(miss_chance))
+		if (prob(miss_chance) || (istype(src, /mob/living/exosuit) && prob(miss_chance * 0.75)))
 			visible_message(SPAN_NOTICE("\The [O] misses [src] narrowly!"))
 			return
 
