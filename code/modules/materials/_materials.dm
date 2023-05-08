@@ -78,12 +78,24 @@
 	var/destruction_desc = "breaks apart" // Fancy string for barricades/tables/objects exploding.
 
 	// Icons
-	var/icon_colour                                      // Colour applied to products of this material.
-	var/icon_base = "metal"                              // Wall and table base icon tag. See header.
-	var/door_icon_base = "metal"                         // Door base icon tag. See header.
-	var/icon_reinf = "reinf_metal"                       // Overlay used
+	/// String (Colour). Colour applied to products of this material.
+	var/icon_colour
+	/// String. Base icon state for material stacks.
+	var/sheet_icon_base = "sheet"
+	/// String. Icon overlay used for reinforced stacks.
+	var/sheet_icon_reinf = "reinf-overlay"
+	/// Boolean (Default `FALSE`). If set, material stacks will not have alt icons for plural or max.
+	var/sheet_no_plural_icon = FALSE
+	/// String. Wall base icon state. See header.
+	var/wall_icon_base = "metal"
+	/// String. Icon overlay used for reinforced walls.
+	var/wall_icon_reinf = "reinf_metal"
+	/// String. Unpowered door base icon state. See header.
+	var/door_icon_base = "metal"
+	/// String. Table base icon state.
 	var/table_icon_base = "metal"
-	var/table_reinf = "reinf_metal"
+	/// String. Table icon state for reinforcement overlays.
+	var/table_icon_reinf = "reinf_metal"
 	var/list/stack_origin_tech = list(TECH_MATERIAL = 1) // Research level for stacks.
 
 	// Attributes
@@ -160,8 +172,7 @@
 	var/target_loc = target_stack.loc
 	var/obj/item/stack/material/S = target_stack.split(needed_sheets)
 	S.reinf_material = reinf_mat
-	S.update_strings()
-	S.update_icon()
+	S.update_materials()
 	S.dropInto(target_loc)
 
 /material/proc/build_wired_product(mob/user, obj/item/stack/used_stack, obj/item/stack/target_stack)

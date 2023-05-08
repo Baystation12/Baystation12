@@ -19,6 +19,7 @@
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 80
 	weight = 25
+	sheet_icon_base = "diamond"
 	sheet_singular_name = "gem"
 	sheet_plural_name = "gems"
 	door_icon_base = "stone"

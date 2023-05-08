@@ -22,6 +22,7 @@
 	xarch_source_mineral = GAS_NITROGEN
 	ore_icon_overlay = "gems"
 	sale_price = 5
+	sheet_icon_base = "diamond"
 	sheet_singular_name = "gem"
 	sheet_plural_name = "gems"
 	value = 70
@@ -38,15 +39,16 @@
 	name = MATERIAL_SANDSTONE
 	lore_text = "A clastic sedimentary rock. The cost of boosting it to orbit is almost universally much higher than the actual value of the material."
 	stack_type = /obj/item/stack/material/sandstone
-	icon_base = "stone"
+	wall_icon_base = "stone"
 	table_icon_base = "stone"
-	icon_reinf = "reinf_stone"
+	wall_icon_reinf = "reinf_stone"
 	icon_colour = "#d9c179"
 	shard_type = SHARD_STONE_PIECE
 	weight = 22
 	hardness = MATERIAL_HARD - 5
 	brute_armor = 3
 	door_icon_base = "stone"
+	sheet_icon_base = "brick"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	conductive = 0

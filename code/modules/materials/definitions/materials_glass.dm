@@ -9,11 +9,13 @@
 	integrity = 50
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	hardness = MATERIAL_RIGID + 10	
+	hardness = MATERIAL_RIGID + 10
 	melting_point = T0C + 100
 	weight = 14
 	brute_armor = 1
 	burn_armor = 2
+	sheet_icon_base = "sheet-clear"
+	sheet_icon_reinf = "reinf-clear-overlay"
 	table_icon_base = "solid"
 	destruction_desc = "shatters"
 	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
