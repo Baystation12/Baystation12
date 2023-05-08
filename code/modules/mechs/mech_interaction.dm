@@ -400,7 +400,7 @@
 			USE_FEEDBACK_FAILURE("\The [src] has no free hardpoints for \the [tool].")
 			return TRUE
 		var/input = input(user, "Where would you like to install \the [tool]?", "\The [src] - Hardpoint Installation") as null|anything in free_hardpoints
-		if (!input || !user.use_sanity_check(src, tool, SANITY_CHECK_TOOL_UNEQUIP))
+		if (!input || !user.use_sanity_check(src, tool, SANITY_CHECK_DEFAULT | SANITY_CHECK_TOOL_UNEQUIP))
 			return TRUE
 		if (hardpoints[input] != null)
 			USE_FEEDBACK_FAILURE("\The [input] slot on \the [src] is no longer free. It has \a [hardpoints[input]] attached.")

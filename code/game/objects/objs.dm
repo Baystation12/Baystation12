@@ -48,7 +48,7 @@
 				SPAN_NOTICE("\The [user] starts lifting \the [dropped] onto \the [src]."),
 				SPAN_NOTICE("You start lifting \the [dropped] onto \the [src].")
 			)
-			if (!user.do_skilled(6 SECONDS, SKILL_HAULING, src, do_flags = DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, dropped, SANITY_CHECK_BOTH_ADJACENT))
+			if (!user.do_skilled(6 SECONDS, SKILL_HAULING, src, do_flags = DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, dropped))
 				return TRUE
 			if (!HAS_FLAGS(obj_flags, OBJ_FLAG_RECEIVE_TABLE))
 				USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
