@@ -1471,14 +1471,10 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 			H.paralysis = 8000
 			H.admin_paralyzed = TRUE
 			msg = "has paralyzed [key_name(H)]."
-			H.visible_message(SPAN_DEBUG("OOC: \The [H] has been paralyzed by a staff member. Please hold all interactions with them until staff have finished with them."))
-			to_chat(H, SPAN_DEBUG("OOC: You have been paralyzed by a staff member. Please refer to your currently open admin help ticket or, if you don't have one, admin help for assistance."))
 		else
 			H.paralysis = 0
 			H.admin_paralyzed = FALSE
 			msg = "has unparalyzed [key_name(H)]."
-			H.visible_message(SPAN_DEBUG("OOC: \The [H] has been released from paralysis by staff. You may resume interactions with them."))
-			to_chat(H, SPAN_DEBUG("OOC: You have been released from paralysis by staff and can return to your game."))
 		log_and_message_staff(msg)
 
 
