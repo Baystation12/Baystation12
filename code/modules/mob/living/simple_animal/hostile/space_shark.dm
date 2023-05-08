@@ -14,7 +14,6 @@
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	break_stuff_probability = 35
-	faction = "shark"
 	special_attack_min_range = 0
 	special_attack_max_range = 2
 	special_attack_cooldown = 15 SECONDS
