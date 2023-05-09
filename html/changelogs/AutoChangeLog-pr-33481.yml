@@ -1,0 +1,6 @@
+author: Fenodyree
+delete-after: true
+changes:
+  - tweak: Renames cheval-de-frise to spiked barricade and changes it's examine text
+      to indicate walking into it hurts.
+  - tweak: Updates cheval-de-frise sprite.
