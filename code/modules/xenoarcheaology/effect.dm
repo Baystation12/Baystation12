@@ -8,6 +8,7 @@
 	var/chargelevelmax = 10
 	var/artifact_id = ""
 	var/effect_type = 0
+	var/effect_message
 	var/toggled = FALSE
 	var/on_time //time artifact should stay on for when toggled
 
@@ -52,7 +53,6 @@
 /datum/artifact_effect/proc/DoActivation(reveal_toggle = 1)
 	if (toggled && activated)
 		return
-
 	if(activated)
 		activated = FALSE
 	else
@@ -75,6 +75,11 @@
 			toplevelholder = toplevelholder.loc
 		toplevelholder.visible_message(SPAN_WARNING("[icon2html(toplevelholder, viewers(get_turf(toplevelholder)))] [toplevelholder] [display_msg]"))
 
+		if (planar_arrays)
+			var/turf/T = get_turf(toplevelholder)
+			for (var/obj/machinery/planar_array/D in planar_arrays)
+				if (D.scan_level < 3)
+					D.sense_artifact(T.x, T.y, T.z, effectrange, effect_type)
 
 /datum/artifact_effect/proc/DoEffectTouch(mob/user)
 /datum/artifact_effect/proc/DoEffectAura(atom/holder)

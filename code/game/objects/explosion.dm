@@ -94,7 +94,11 @@
 
 	sleep(8)
 
-	return 1
+	if (planar_arrays)
+		for (var/obj/machinery/planar_array/D in planar_arrays)
+			D.sense_explosion(epicenter.x, epicenter.y, epicenter.z, devastation_range, heavy_impact_range, light_impact_range)
+
+	return TRUE
 
 
 

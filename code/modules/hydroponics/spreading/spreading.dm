@@ -3,6 +3,7 @@
 
 /proc/spacevine_infestation(potency_min=70, potency_max=100, maturation_min=5, maturation_max=15)
 	spawn() //to stop the secrets panel hanging
+		var/type = "Vineal"
 		var/turf/T = pick_subarea_turf(/area/hallway , list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))
 		if(T)
 			var/datum/seed/seed = SSplants.create_random_seed(1)
@@ -19,6 +20,9 @@
 			new /obj/effect/vine(T,seed, start_matured = 1)
 
 			log_and_message_admins("Spacevines spawned in \the [get_area(T)]", location = T)
+			if (planar_arrays)
+				for (var/obj/machinery/planar_array/D in planar_arrays)
+					D.sense_blobvine(T.x, T.y, T.z, type)
 			return
 		log_and_message_admins(SPAN_NOTICE("Event: Spacevines failed to find a viable turf."))
 

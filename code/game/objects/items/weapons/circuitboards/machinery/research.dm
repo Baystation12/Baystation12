@@ -157,15 +157,16 @@
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)
 
-/obj/item/stock_parts/circuitboard/doppler_array
+/obj/item/stock_parts/circuitboard/planar_array
 	name = "circuit board (doppler array)"
-	build_path = /obj/machinery/doppler_array
+	build_path = /obj/machinery/planar_array
 	board_type = "machine"
 	origin_tech = list(TECH_ENGINEERING = 7, TECH_MATERIAL = 4, TECH_DATA = 4, TECH_BLUESPACE = 3)
 	req_components = list(
-							/obj/item/stock_parts/scanning_module = 2,
-							/obj/item/stock_parts/computer/hard_drive/cluster = 2,
-							/obj/item/stock_parts/computer/processor_unit/photonic= 1)
+							/obj/item/stock_parts/scanning_module = 1,
+							/obj/item/stock_parts/computer/hard_drive/advanced = 1,
+							/obj/item/stock_parts/manipulator,
+							/obj/item/stock_parts/computer/processor_unit = 1)
 	additional_spawn_components = list(
 		/obj/item/stock_parts/power/apc/buildable = 1
 	)

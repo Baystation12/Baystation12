@@ -59,4 +59,9 @@
 		if ((world.timeofday - time) >= EMPDEBUG)
 			log_and_message_admins("EMPDEBUG: [T.name] - [T.type] - took [world.timeofday - time]ds to process emp_act()!")
 		#endif
+
+	if (planar_arrays)
+		for (var/obj/machinery/planar_array/D in planar_arrays)
+			D.sense_empulse(epicenter.x, epicenter.y, epicenter.z, heavy_range, light_range)
+
 	return TRUE

@@ -475,7 +475,7 @@
 	name = "doppler array"
 	id = "doppler"
 	req_tech = list(TECH_ENGINEERING = 7, TECH_MATERIAL = 4, TECH_DATA = 4, TECH_BLUESPACE = 3)
-	build_path = /obj/item/stock_parts/circuitboard/doppler_array
+	build_path = /obj/item/stock_parts/circuitboard/planar_array
 	sort_string = "JCAAJ"
 
 /datum/design/circuit/secure_airlock
