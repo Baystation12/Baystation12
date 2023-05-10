@@ -1004,7 +1004,11 @@
 							/mob/living/simple_animal/passive/corgi/puppy,
 							/mob/living/simple_animal/passive/cow,
 							/mob/living/simple_animal/passive/chick,
-							/mob/living/simple_animal/passive/chicken
+							/mob/living/simple_animal/passive/chicken,
+							/mob/living/simple_animal/passive/crab,
+							/mob/living/simple_animal/passive/opossum,
+							/mob/living/simple_animal/passive/snake,
+							/mob/living/simple_animal/passive/thoom
 							)
 
 /datum/chemical_reaction/slime/crit/on_reaction(datum/reagents/holder)
