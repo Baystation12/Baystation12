@@ -12,7 +12,7 @@
 		/obj/item/device/flash/synthetic = 4,
 		/obj/item/cell/standard = 4,
 		/obj/item/device/scanner/health = 2,
-		/obj/item/scalpel = 1,
+		/obj/item/scalpel/basic = 1,
 		/obj/item/circular_saw = 1,
 		/obj/item/tank/anesthetic = 2,
 		/obj/item/clothing/mask/breath/medical = 5,

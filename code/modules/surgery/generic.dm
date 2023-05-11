@@ -23,9 +23,7 @@
 /singleton/surgery_step/generic/cut_with_laser
 	name = "Make laser incision"
 	allowed_tools = list(
-		/obj/item/scalpel/laser3 = 95,
-		/obj/item/scalpel/laser2 = 85,
-		/obj/item/scalpel/laser1 = 75,
+		/obj/item/scalpel/laser = 100,
 		/obj/item/melee/energy/sword = 5
 	)
 	min_duration = 90
@@ -59,7 +57,7 @@
 /singleton/surgery_step/generic/managed
 	name = "Make managed incision"
 	allowed_tools = list(
-		/obj/item/scalpel/manager = 100
+		/obj/item/scalpel/ims = 100
 	)
 	min_duration = 80
 	max_duration = 120
@@ -91,7 +89,7 @@
 /singleton/surgery_step/generic/cut_open
 	name = "Make incision"
 	allowed_tools = list(
-		/obj/item/scalpel = 100,
+		/obj/item/scalpel/basic = 100,
 		/obj/item/material/knife = 75,
 		/obj/item/broken_bottle = 50,
 		/obj/item/material/shard = 50

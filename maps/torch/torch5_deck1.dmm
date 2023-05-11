@@ -3620,7 +3620,7 @@
 	pixel_y = 24
 	},
 /obj/item/autopsy_scanner,
-/obj/item/scalpel,
+/obj/item/scalpel/basic,
 /obj/machinery/light/small{
 	dir = 4
 	},
@@ -13670,7 +13670,7 @@
 "aVb" = (
 /obj/structure/table/standard,
 /obj/item/circular_saw,
-/obj/item/scalpel{
+/obj/item/scalpel/basic{
 	pixel_y = 12
 	},
 /obj/machinery/button/blast_door{

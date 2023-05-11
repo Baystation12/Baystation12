@@ -193,7 +193,7 @@
 		/obj/item/circular_saw,
 		/obj/item/hemostat,
 		/obj/item/retractor,
-		/obj/item/scalpel,
+		/obj/item/scalpel/basic,
 		/obj/item/surgicaldrill,
 		/obj/item/bonegel,
 		/obj/item/FixOVein,

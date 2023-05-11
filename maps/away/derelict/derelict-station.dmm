@@ -131,7 +131,7 @@
 /turf/space,
 /area/derelict/ship)
 "as" = (
-/obj/item/scalpel,
+/obj/item/scalpel/basic,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "at" = (

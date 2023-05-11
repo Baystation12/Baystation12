@@ -22,7 +22,7 @@
 		/obj/item/weldingtool/mini,
 		/obj/item/wirecutters,
 		/obj/item/crowbar,
-		/obj/item/scalpel/laser3,
+		/obj/item/scalpel/laser,
 		/obj/item/circular_saw,
 		/obj/item/extinguisher/mini,
 		/obj/item/reagent_containers/syringe,

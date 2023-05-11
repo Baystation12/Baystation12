@@ -938,7 +938,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/item/scalpel{
+/obj/item/scalpel/basic{
 	pixel_y = 12
 	},
 /turf/simulated/floor/tiled/white,
