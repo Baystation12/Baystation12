@@ -5,6 +5,7 @@
 	icon = 'icons/obj/plant_analyzer.dmi'
 	icon_state = "hydro"
 	item_state = "analyzer"
+	matter = list(MATERIAL_PLASTIC = 50, MATERIAL_GLASS = 20, MATERIAL_STEEL = 60)
 	scan_sound = 'sound/effects/fastbeep.ogg'
 	printout_color = "#eeffe8"
 	var/static/list/valid_targets = list(

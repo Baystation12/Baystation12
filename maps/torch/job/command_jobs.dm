@@ -441,13 +441,12 @@
 	                    SKILL_ATMOS        = SKILL_MAX)
 	skill_points = 28
 
-
 	access = list(
-		access_security, access_medical, access_engine, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-		access_teleporter, access_eva, access_bridge, access_all_personal_lockers, access_janitor,
-		access_kitchen, access_cargo, access_RC_announce, access_keycard_auth, access_aquila, access_guppy_helm,
-		access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_torch_fax, access_emergency_armory,
-		access_radio_comm, access_radio_eng, access_radio_med, access_radio_sec, access_radio_serv, access_radio_sup, access_radio_exp
+		access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
+		access_bridge, access_janitor, access_kitchen, access_cargo, access_mailsorting, access_RC_announce, access_keycard_auth,
+		access_solgov_crew, access_aquila, access_aquila_helm, access_guppy, access_guppy_helm, access_external_airlocks,
+		access_eva, access_hangar, access_cent_creed, access_explorer, access_expedition_shuttle, access_expedition_shuttle_helm, access_teleporter,
+		access_torch_fax, access_torch_helm, access_radio_comm, access_radio_eng, access_radio_exp, access_radio_serv, access_radio_sci, access_radio_sup
 		)
 
 	software_on_spawn = list(/datum/computer_file/program/camera_monitor,
@@ -482,10 +481,13 @@
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2
 	)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
-	                    SKILL_PILOT       = SKILL_ADEPT)
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
+	                    SKILL_PILOT       = SKILL_ADEPT,
+						SKILL_FORENSICS   = SKILL_BASIC
+						)
 
-	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
+	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
+						SKILL_FORENSICS   = SKILL_MAX)
 	skill_points = 20
 
 	alt_titles = list("Adjutant","Helmsman","Coordination Officer","Command Secretary") //PRX

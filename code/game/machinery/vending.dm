@@ -1031,7 +1031,7 @@
 	vend_delay = 26
 	base_type = /obj/machinery/vending/hydronutrients
 	products = list(/obj/item/reagent_containers/glass/bottle/eznutrient = 6,/obj/item/reagent_containers/glass/bottle/left4zed = 4,/obj/item/reagent_containers/glass/bottle/robustharvest = 3,/obj/item/plantspray/pests = 20,
-					/obj/item/reagent_containers/syringe = 5,/obj/item/storage/plants = 5)
+					/obj/item/reagent_containers/syringe = 5,/obj/item/storage/plants = 5,/obj/item/device/scanner/plant = 2)
 	premium = list(/obj/item/reagent_containers/glass/bottle/ammonia = 10,/obj/item/reagent_containers/glass/bottle/diethylamine = 5)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 

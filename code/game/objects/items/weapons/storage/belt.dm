@@ -131,7 +131,9 @@
 		/obj/item/clothing/gloves,
 		/obj/item/tape_roll,
 		/obj/item/clothing/head/beret,
-		/obj/item/material/knife/folding
+		/obj/item/material/knife/folding,
+		/obj/item/clothing/head/welding,
+		/obj/item/clothing/glasses/welding
 		)
 
 
