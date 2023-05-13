@@ -1913,7 +1913,7 @@
 /area/slavers_base/hallway)
 "eU" = (
 /obj/machinery/optable,
-/obj/item/scalpel,
+/obj/item/scalpel/basic,
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/light,
 /turf/simulated/floor/tiled,

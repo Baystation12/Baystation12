@@ -121,9 +121,7 @@
 "lM" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/table/glass,
-/obj/item/scalpel/laser1,
-/obj/item/scalpel/laser2,
-/obj/item/scalpel/laser3,
+/obj/item/scalpel/laser,
 /obj/item/device/robotanalyzer,
 /obj/item/device/scanner/health,
 /obj/item/storage/firstaid/adv,

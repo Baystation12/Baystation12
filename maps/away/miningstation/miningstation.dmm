@@ -6907,7 +6907,7 @@
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "pQ" = (
-/obj/item/scalpel,
+/obj/item/scalpel/basic,
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
 	},

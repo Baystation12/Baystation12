@@ -952,7 +952,7 @@
 /area/lar_maria/vir_main)
 "cI" = (
 /obj/structure/table/glass,
-/obj/item/scalpel,
+/obj/item/scalpel/basic,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cJ" = (

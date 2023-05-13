@@ -44,10 +44,8 @@
 	attack_verb = list("drilled")
 
 /obj/item/scalpel
-	name = "scalpel"
-	desc = "A tiny and extremely sharp steel cutting tool used for surgery, dissection, autopsy, and very precise cuts. The cornerstone of any surgical procedure."
 	icon = 'icons/obj/surgery.dmi'
-	icon_state = "scalpel"
+	abstract_type = /obj/item/scalpel
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 10.0
 	sharp = TRUE
@@ -61,30 +59,27 @@
 	matter = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 5000)
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
-/obj/item/scalpel/laser1
-	name = "laser scalpel"
-	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks basic and could be improved."
-	icon_state = "scalpel_laser1_on"
-	damtype = DAMAGE_BURN
+/obj/item/scalpel/basic
+	name = "scalpel"
+	desc = "A tiny and extremely sharp steel cutting tool used for surgery, dissection, autopsy, and very precise cuts. The cornerstone of any surgical procedure."
+	icon_state = "scalpel"
 
-/obj/item/scalpel/laser2
-	name = "laser scalpel"
-	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks somewhat advanced."
-	icon_state = "scalpel_laser2_on"
-	damtype = DAMAGE_BURN
-	force = 12.0
 
-/obj/item/scalpel/laser3
+/obj/item/scalpel/laser
 	name = "laser scalpel"
-	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks to be the pinnacle of precision energy cutlery!"
+	desc = "An advanced scalpel augmented with a directed laser, for more precise cutting without blood entering the field."
 	icon_state = "scalpel_laser3_on"
+	origin_tech = list(TECH_BIO = 5, TECH_MATERIAL = 6, TECH_MAGNET = 4)
+	matter = list(MATERIAL_STEEL = 12500, MATERIAL_GLASS = 7500, MATERIAL_SILVER = 2000, MATERIAL_GOLD = 1500)
 	damtype = DAMAGE_BURN
 	force = 15.0
 
-/obj/item/scalpel/manager
+/obj/item/scalpel/ims
 	name = "incision management system"
 	desc = "A true extension of the surgeon's body, this marvel instantly and completely prepares an incision allowing for the immediate commencement of therapeutic steps."
 	icon_state = "scalpel_manager_on"
+	origin_tech = list(TECH_BIO = 6, TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_DATA = 5)
+	matter = list(MATERIAL_STEEL = 12500, MATERIAL_GLASS = 7500, MATERIAL_SILVER = 1500, MATERIAL_GOLD = 1500, MATERIAL_DIAMOND = 750)
 	force = 7.5
 
 /obj/item/circular_saw

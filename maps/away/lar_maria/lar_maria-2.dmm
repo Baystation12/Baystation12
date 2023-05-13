@@ -2055,7 +2055,7 @@
 "fI" = (
 /obj/structure/table/woodentable,
 /obj/random/toolbox,
-/obj/item/scalpel,
+/obj/item/scalpel/basic,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "fJ" = (

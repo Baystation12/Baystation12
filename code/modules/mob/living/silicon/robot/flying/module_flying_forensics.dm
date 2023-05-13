@@ -21,7 +21,7 @@
 		/obj/item/device/flash,
 		/obj/item/borg/sight/hud/sec,
 		/obj/item/taperoll/police,
-		/obj/item/scalpel/laser1,
+		/obj/item/scalpel/laser,
 		/obj/item/autopsy_scanner,
 		/obj/item/device/scanner/reagent,
 		/obj/item/reagent_containers/spray/luminol,

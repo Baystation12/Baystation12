@@ -2586,7 +2586,7 @@
 	},
 /obj/item/tape_roll,
 /obj/item/retractor,
-/obj/item/scalpel,
+/obj/item/scalpel/basic,
 /turf/simulated/floor/tiled/white,
 /area/ship/scrap/crew/medbay)
 "eP" = (

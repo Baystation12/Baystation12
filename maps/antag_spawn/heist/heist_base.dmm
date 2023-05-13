@@ -1797,7 +1797,7 @@
 	pixel_y = 8
 	},
 /obj/item/hemostat,
-/obj/item/scalpel,
+/obj/item/scalpel/basic,
 /obj/item/stack/medical/advanced/bruise_pack,
 /turf/simulated/floor/shuttle/white,
 /area/map_template/skipjack_station/start)
