@@ -351,7 +351,7 @@ var/global/list/admin_verbs_mod = list(
 	set name = "Adminverbs - Hide Most"
 	set category = "Admin"
 
-	verbs.Remove(/client/proc/hide_most_verbs, admin_verbs_hideable)
+	verbs.Remove( /client::hide_most_verbs(), admin_verbs_hideable)
 	verbs += /client/proc/show_verbs
 
 	to_chat(src, SPAN_CLASS("interface", "Most of your adminverbs have been hidden."))

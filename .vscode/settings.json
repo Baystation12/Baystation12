@@ -42,5 +42,6 @@
   "gitlens.advanced.blame.customArguments": [
     "--ignore-revs-file", ".git-blame-ignore-revs"
 ],
-"diffEditor.ignoreTrimWhitespace": false
+"diffEditor.ignoreTrimWhitespace": false,
+"dreammaker.langserverPath": "C:\\repo\\spacemandmm\\target\\release\\dm-langserver.exe"
 }

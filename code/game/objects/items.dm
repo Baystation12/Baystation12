@@ -300,7 +300,7 @@
 	GLOB.item_unequipped_event.raise_event(src, user)
 
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
-		addtimer(new Callback(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
+		addtimer(new Callback(user, /mob::check_emissive_equipment()), 0, TIMER_UNIQUE)
 
 
 // called just as an item is picked up (loc is not yet changed)
@@ -341,7 +341,7 @@ note this isn't called during the initial dressing of a player
 	GLOB.item_equipped_event.raise_event(src, user, slot)
 
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
-		addtimer(new Callback(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
+		addtimer(new Callback(user, /mob::check_emissive_equipment()), 0, TIMER_UNIQUE)
 
 
 /obj/item/proc/equipped_robot(mob/user)
@@ -750,12 +750,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	user.client.view = viewsize
 	zoom = 1
 
-	GLOB.destroyed_event.register(src, src, /obj/item/proc/unzoom)
-	GLOB.moved_event.register(user, src, /obj/item/proc/unzoom)
-	GLOB.dir_set_event.register(user, src, /obj/item/proc/unzoom)
-	GLOB.item_unequipped_event.register(src, user, /mob/living/proc/unzoom)
+	GLOB.destroyed_event.register(src, src, /obj/item::unzoom())
+	GLOB.moved_event.register(user, src, /obj/item::unzoom())
+	GLOB.dir_set_event.register(user, src, /obj/item::unzoom())
+	GLOB.item_unequipped_event.register(src, user, /mob/living::unzoom())
 
-	GLOB.stat_set_event.register(user, src, /obj/item/proc/unzoom)
+	GLOB.stat_set_event.register(user, src, /obj/item::unzoom())
 
 	user.visible_message("\The [user] peers through [zoomdevicename ? "the [zoomdevicename] of [src]" : "[src]"].")
 
@@ -768,17 +768,17 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return
 	zoom = 0
 
-	GLOB.destroyed_event.unregister(src, src, /obj/item/proc/unzoom)
-	GLOB.moved_event.unregister(user, src, /obj/item/proc/unzoom)
-	GLOB.dir_set_event.unregister(user, src, /obj/item/proc/unzoom)
-	GLOB.item_unequipped_event.unregister(src, user, /mob/living/proc/unzoom)
+	GLOB.destroyed_event.unregister(src, src, /obj/item::unzoom())
+	GLOB.moved_event.unregister(user, src, /obj/item::unzoom())
+	GLOB.dir_set_event.unregister(user, src, /obj/item::unzoom())
+	GLOB.item_unequipped_event.unregister(src, user, /mob/living::unzoom())
 
 	user = user == src ? loc : (user || loc)
 	if(!istype(user))
 		crash_with("[log_info_line(src)]: Zoom user lost]")
 		return
 
-	GLOB.stat_set_event.unregister(user, src, /obj/item/proc/unzoom)
+	GLOB.stat_set_event.unregister(user, src, /obj/item::unzoom())
 
 	if(!user.client)
 		return

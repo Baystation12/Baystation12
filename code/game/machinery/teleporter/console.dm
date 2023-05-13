@@ -57,7 +57,7 @@
 /obj/machinery/computer/teleporter/proc/clear_projector()
 	if (!projector)
 		return
-	GLOB.destroyed_event.unregister(projector, src, /obj/machinery/computer/teleporter/proc/lost_projector)
+	GLOB.destroyed_event.unregister(projector, src, /obj/machinery/computer/teleporter::lost_projector())
 	projector = null
 	set_active(FALSE)
 
@@ -72,13 +72,13 @@
 		return
 	clear_projector()
 	projector = _projector
-	GLOB.destroyed_event.register(projector, src, /obj/machinery/computer/teleporter/proc/lost_projector)
+	GLOB.destroyed_event.register(projector, src, /obj/machinery/computer/teleporter::lost_projector())
 
 
 /obj/machinery/computer/teleporter/proc/clear_pad()
 	if (!pad)
 		return
-	GLOB.destroyed_event.unregister(pad, src, /obj/machinery/computer/teleporter/proc/lost_pad)
+	GLOB.destroyed_event.unregister(pad, src, /obj/machinery/computer/teleporter::lost_pad())
 	pad = null
 	set_active(FALSE)
 
@@ -93,14 +93,14 @@
 		return
 	clear_pad()
 	pad = _pad
-	GLOB.destroyed_event.register(pad, src, /obj/machinery/computer/teleporter/proc/lost_pad)
+	GLOB.destroyed_event.register(pad, src, /obj/machinery/computer/teleporter::lost_pad())
 
 
 /obj/machinery/computer/teleporter/proc/clear_target()
 	if (!target)
 		return
 	var/old_target = target
-	GLOB.destroyed_event.unregister(target, src, /obj/machinery/computer/teleporter/proc/lost_target)
+	GLOB.destroyed_event.unregister(target, src, /obj/machinery/computer/teleporter::lost_target())
 	target = null
 	if (istype(old_target, /obj/machinery/tele_beacon))
 		var/obj/machinery/tele_beacon/beacon = old_target
@@ -123,7 +123,7 @@
 		if (!beacon.connect_computer(src))
 			return FALSE
 	target = _target
-	GLOB.destroyed_event.register(target, src, /obj/machinery/computer/teleporter/proc/lost_target)
+	GLOB.destroyed_event.register(target, src, /obj/machinery/computer/teleporter::lost_target())
 	return TRUE
 
 
@@ -150,7 +150,7 @@
 			deltimer(active_timer)
 			active_timer = null
 	else
-		active_timer = addtimer(new Callback(src, .proc/clear_target), 1 MINUTE, TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_STOPPABLE)
+		active_timer = addtimer(new Callback(src, src::clear_target()), 1 MINUTE, TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_STOPPABLE)
 
 
 /obj/machinery/computer/teleporter/proc/get_targets()

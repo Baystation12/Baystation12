@@ -1,9 +1,9 @@
 /**
 ** Callbacks
 Callbacks wrap a target, callable, and arguments to pass. See the dm reference for call().
-When the target is GLOBAL_PROC, the callable is global - otherwise it is a datum (or dead) reference.
+When the target is Callback::GLOBAL, the callable is global - otherwise it is a datum (or dead) reference.
 Callbacks are created with the new keyword via a global alias like:
-- var/datum/callback/instance = new Callback(GLOBAL_PROC, /proc/get_area, someObject)
+- var/datum/callback/instance = new Callback(Callback::GLOBAL, /proc/get_area, someObject)
 Callbacks are thin - they should be used with invoke or invoke_async.
 
 ** Invocation
@@ -15,15 +15,11 @@ on the first sleep, and so should be used only where results are not required.
 
 ** Callables
 Callables are proc names or proc references, with references preferred for safety (in most cases).
-These vary between 515 and older major versions:
-Before 515:
-- .proc/name refers to the last override of name on target, OR the global proc name.
-After 515:
 - src::name() must be used for the last override, or ::name() for the global.
 - nameof() is available at compile time to resolve safe proc names like nameof(/datum::fooBehavior()).
   This can be preferable to direct refs in complex cases.
 A specific version of a proc may be called by fully specifying its type depth, like
-invoke(myLivingMob, /mob/living/proc/handle_vision)
+invoke(myLivingMob, /mob/living::handle_vision())
 
 ** Timers
 Timers accept callbacks as their first argument. For full timer documentation, see the timedevent
@@ -31,15 +27,13 @@ datum. For example:
 addTimer(new Callback(myMob, myMob::drop_l_hand()), 10 SECONDS)
 */
 
-var/global/const/GLOBAL_PROC = FALSE
 
-var/global/const/Callback = /datum/callback
-
+var/global/const/datum/callback/Callback = /datum/callback
 
 /datum/callback
-	//var/const/Global = FALSE //515 - GLOBAL_PROC becomes Callback::Global
+	var/const/GLOBAL = FALSE
 	var/identity
-	var/datum/target = GLOBAL_PROC
+	var/datum/target = Callback::GLOBAL
 	var/callable
 	var/list/params
 
@@ -59,14 +53,14 @@ var/global/const/Callback = /datum/callback
 	switch (target)
 		if (null)
 			identity = "(null) [callable]"
-		if (FALSE)
+		if (Callback::GLOBAL)
 			identity = "(global) [callable]"
 		else
 			identity = "([target.type] \ref[target]) [callable]"
 
 
 /proc/invoke(datum/callback/target, callable, ...)
-	if (target == GLOBAL_PROC)
+	if (target == Callback::GLOBAL)
 		var/list/params
 		if (length(args) > 2)
 			params = args.Copy(3)
@@ -89,7 +83,7 @@ var/global/const/Callback = /datum/callback
 
 /proc/invoke_async(datum/callback/target, callable, ...)
 	set waitfor = FALSE
-	if (target == GLOBAL_PROC)
+	if (target == Callback::GLOBAL)
 		var/list/params
 		if (length(args) > 2)
 			params = args.Copy(3)

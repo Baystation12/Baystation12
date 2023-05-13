@@ -112,8 +112,8 @@
 			user.client.images |= holomap_datum.station_map
 
 			watching_mob = user
-			GLOB.moved_event.register(watching_mob, src, /obj/machinery/ship_map/proc/checkPosition)
-			GLOB.destroyed_event.register(watching_mob, src, /obj/machinery/ship_map/proc/stopWatching)
+			GLOB.moved_event.register(watching_mob, src, /obj/machinery/ship_map::checkPosition())
+			GLOB.destroyed_event.register(watching_mob, src, /obj/machinery/ship_map::stopWatching())
 			update_use_power(POWER_USE_ACTIVE)
 
 			if(bogus)
@@ -137,7 +137,7 @@
 		if(watching_mob.client)
 			animate(holomap_datum.station_map, alpha = 0, time = 5, easing = LINEAR_EASING)
 			var/mob/M = watching_mob
-			addtimer(new Callback(src, .proc/clear_image, M, holomap_datum.station_map), 5, TIMER_CLIENT_TIME)//we give it time to fade out
+			addtimer(new Callback(src, src::clear_image(), M, holomap_datum.station_map), 5, TIMER_CLIENT_TIME)//we give it time to fade out
 		GLOB.moved_event.unregister(watching_mob, src)
 		GLOB.destroyed_event.unregister(watching_mob, src)
 	watching_mob = null
