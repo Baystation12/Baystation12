@@ -1,0 +1,4 @@
+author: Spookerton
+delete-after: true
+changes:
+  - rscdel: removed all integrated circuit things that can touch reagents.
