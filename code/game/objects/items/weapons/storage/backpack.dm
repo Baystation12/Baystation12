@@ -224,6 +224,15 @@
 		slot_r_hand_str = "rucksack_tan"
 	)
 
+/obj/item/storage/backpack/sci
+	name = "science backpack"
+	desc = "It's a stain-resistant light backpack, modeled for use by Expeditionary Corps science personnel in laboratories and other scientific settings."
+	icon_state = "scipack"
+	item_state_slots = list(
+		slot_l_hand_str = "scipack",
+		slot_r_hand_str = "scipack"
+	)
+
 /*
  * Duffle Types
  */
@@ -429,6 +438,15 @@
 		slot_r_hand_str = "satchel-cap",
 		)
 
+/obj/item/storage/backpack/satchel/sci
+	name = "science satchel"
+	desc = "It's a stain-resistant satchel, modeled for use by Expeditionary Corps science personnel in laboratories and other scientific settings."
+	icon_state = "satchel-sci"
+	item_state_slots = list(
+		slot_l_hand_str = "satchel-sci",
+		slot_r_hand_str = "satchel-sci",
+		)
+
 //Smuggler's satchel
 /obj/item/storage/backpack/satchel/flat
 	name = "\improper Smuggler's satchel"
@@ -545,6 +563,12 @@
 	name = "corporate security messenger bag"
 	desc = "A small, tactical backpack worn over one shoulder. This one is in EXO colors."
 	icon_state = "courierbagsec_exo"
+
+
+/obj/item/storage/backpack/messenger/sci
+	name = "science messenger bag"
+	desc = "A small, stain-resistant backpack worn over one shoulder. This one was modeled for use by Expeditionary Corps science personnel in laboratories and other scientific settings."
+	icon_state = "courierbagsci"
 
 
 /obj/item/storage/backpack/messenger/black
