@@ -79,6 +79,7 @@
 	minimum_character_age = list(SPECIES_HUMAN = 20)
 	ideal_character_age = 20
 	alt_titles = list(
+		"Custodian",
 		"Janitor")
 	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/service/janitor
 	allowed_branches = list(

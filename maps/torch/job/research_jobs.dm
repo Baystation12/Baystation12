@@ -102,8 +102,7 @@
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 30
 	alt_titles = list(
-		"Custodian" = /singleton/hierarchy/outfit/job/torch/passenger/research/assist/janitor,
-		"Testing Assistant" = /singleton/hierarchy/outfit/job/torch/passenger/research/assist/testsubject,
+		"Testing Assistant",
 		"Intern",
 		"Clerk",
 		"Field Assistant")
