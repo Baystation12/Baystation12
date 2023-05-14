@@ -1,0 +1,6 @@
+author: Alex6511
+delete-after: true
+changes:
+  - tweak: The janitor alt-title from science has been moved to the janitor role.
+  - tweak: Test Assistants no longer spawn with a uniform, this uniform has not been
+      removed and is still accessible.
