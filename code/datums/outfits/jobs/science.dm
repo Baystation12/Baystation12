@@ -7,7 +7,7 @@
 
 /singleton/hierarchy/outfit/job/science/New()
 	..()
-	BACKPACK_OVERRIDE_RESEARCH
+	BACKPACK_OVERRIDE_RESEARCH_CORP
 
 /singleton/hierarchy/outfit/job/science/rd
 	name = OUTFIT_JOB_NAME("Chief Science Officer")

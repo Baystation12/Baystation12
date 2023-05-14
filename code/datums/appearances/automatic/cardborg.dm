@@ -75,10 +75,10 @@
 
 /singleton/cardborg_appearance/science
 	icon_state = "droid-science"
-	backpack_type = /obj/item/storage/backpack/toxins
+	backpack_type = /obj/item/storage/backpack/corpsci
 
 /singleton/cardborg_appearance/science/satchel
-	backpack_type = /obj/item/storage/backpack/satchel/tox
+	backpack_type = /obj/item/storage/backpack/satchel/corpsci
 
 /singleton/cardborg_appearance/security
 	icon_state = "securityrobot"

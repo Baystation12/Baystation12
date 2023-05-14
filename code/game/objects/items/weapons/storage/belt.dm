@@ -322,6 +322,16 @@
 		/obj/item/device/tape
 		)
 
+/obj/item/storage/belt/general/full/Initialize()
+	. = ..()
+	new /obj/item/material/clipboard(src)
+	new /obj/item/folder(src)
+	new /obj/item/device/taperecorder(src)
+	new /obj/item/device/camera(src)
+	new /obj/item/taperoll/research(src)
+	new /obj/item/device/tape/random(src)
+	queue_icon_update()
+
 /obj/item/storage/belt/janitor
 	name = "janibelt"
 	desc = "A belt used to hold most janitorial supplies."
