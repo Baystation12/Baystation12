@@ -27,8 +27,8 @@
 
 	var/dat = "<center><b>Recipies</b></center><br><br><i>Item - [text_modifications["Cost"]] Cost</i><br>"
 	for(var/atom/a as anything in recipes)
-		var/cost = recipes[type]
-		dat += "<A href='?src=\ref[src];make_recipe=\ref[type];'>[initial(a.name)]</a> - [cost]<br><i>[initial(a.desc)]</i><br><br>"
+		var/cost = recipes[a]
+		dat += "<A href='?src=\ref[src];make_recipe=\ref[a];'>[initial(a.name)]</a> - [cost]<br><i>[initial(a.desc)]</i><br><br>"
 	show_browser(user, dat, "window=forge")
 
 /obj/structure/deity/blood_forge/CanUseTopic(user)
