@@ -46,7 +46,11 @@
 				return FALSE
 	return TRUE
 
-/spell/construction/cast(target, mob/user)
+/spell/construction/cast(target, mob/living/carbon/user)
+	user.custom_pain(SPAN_WARNING("You wince in pain as you feel blood being ripped from your body in payment to create \the [target[2]]."), 5)
+	user.visible_message(
+		SPAN_WARNING("\The [user] winces in pain as they summon \the [target[2]]!"),
+	)
 	charge_max = target[CONSTRUCT_SPELL_COST]
 	target = target[CONSTRUCT_SPELL_TYPE]
 	var/turf/T = get_turf(user)
