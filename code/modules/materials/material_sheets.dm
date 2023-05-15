@@ -17,7 +17,7 @@
 	var/default_reinf_type
 	var/material/reinf_material
 	var/perunit = SHEET_MATERIAL_AMOUNT
-	var/material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
+	var/material_flags = USE_MATERIAL_COLOR | USE_MATERIAL_SINGULAR_NAME | USE_MATERIAL_PLURAL_NAME | USE_MATERIAL_ICON
 	var/matter_multiplier = 1
 
 
@@ -46,12 +46,14 @@
 /obj/item/stack/material/proc/update_materials(override_icon = FALSE)
 	// Generate Icons
 	if (!override_icon)
-		base_state = material.sheet_icon_base
+		if (HAS_FLAGS(material_flags, USE_MATERIAL_ICON))
+			base_state = material.sheet_icon_base
 		plural_icon_state = "[base_state]-mult"
 		max_icon_state = "[base_state]-max"
 		reinf_state = null
 		if (reinf_material)
-			reinf_state = material.sheet_icon_reinf
+			if (HAS_FLAGS(material_flags, USE_MATERIAL_ICON))
+				reinf_state = material.sheet_icon_reinf
 			plural_reinf_state = "[reinf_state]-mult"
 			max_reinf_state = "[reinf_state]-max"
 
@@ -225,7 +227,7 @@
 
 /obj/item/stack/material/phoron
 	name = "solid phoron"
-	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
+	material_flags = USE_MATERIAL_SINGULAR_NAME | USE_MATERIAL_PLURAL_NAME | USE_MATERIAL_ICON
 	default_type = MATERIAL_PHORON
 
 /obj/item/stack/material/phoron/ten
@@ -277,7 +279,7 @@
 /obj/item/stack/material/mhydrogen
 	name = "metallic hydrogen"
 	default_type = MATERIAL_HYDROGEN
-	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
+	material_flags = USE_MATERIAL_SINGULAR_NAME | USE_MATERIAL_PLURAL_NAME | USE_MATERIAL_ICON
 
 /obj/item/stack/material/mhydrogen/ten
 	amount = 10
@@ -452,7 +454,7 @@
 	name = "leather"
 	desc = "The by-product of mob grinding."
 	default_type = MATERIAL_LEATHER_GENERIC
-	material_flags = USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
+	material_flags = USE_MATERIAL_SINGULAR_NAME | USE_MATERIAL_PLURAL_NAME | USE_MATERIAL_ICON
 
 /obj/item/stack/material/glass
 	name = "glass"

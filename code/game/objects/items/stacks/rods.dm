@@ -4,6 +4,7 @@
 	singular_name = "rod"
 	plural_name = "rods"
 	icon_state = "rod"
+	base_state = "rod"
 	plural_icon_state = "rod-mult"
 	max_icon_state = "rod-max"
 	w_class = ITEM_SIZE_LARGE

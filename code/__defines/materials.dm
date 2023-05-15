@@ -129,6 +129,7 @@
 #define USE_MATERIAL_COLOR            FLAG(0)
 #define USE_MATERIAL_SINGULAR_NAME    FLAG(1)
 #define USE_MATERIAL_PLURAL_NAME      FLAG(2)
+#define USE_MATERIAL_ICON             FLAG(3)
 
 //Arbitrary hardness thresholds
 #define  MATERIAL_SOFT   10
