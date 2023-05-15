@@ -23,7 +23,7 @@
 	var/choice = alert(L, "You feel a weak power enter your mind attempting to convert it.", "Conversion", "Allow Conversion", "Deny Conversion")
 	if(choice == "Allow Conversion")
 		GLOB.godcult.add_antagonist_mind(L.mind,1, "Servant of [linked]", "You willingly give your mind to it, may it bring you fortune", specific_god=linked)
-		log_and_message_admins("has converted [append_admin_tools(L)] into a cultust.", linked)
+		log_and_message_admins("has converted [append_admin_tools(L)] into a cultist.", linked)
 	else
 		to_chat(L, SPAN_WARNING("With little difficulty you force the intrusion out of your mind. May it stay that way."))
 		to_chat(src, SPAN_WARNING("\The [L] decides not to convert."))
@@ -49,4 +49,4 @@
 	var/obj/structure/deity/altar/A = locate() in get_turf(L)
 	A.set_target(L)
 	to_chat(linked, SPAN_NOTICE("You imbue \the [A] with your power, setting forth to force \the [L] to your will."))
-	log_and_message_admins("has force-converted [append_admin_tools(L)] into a cultust.", linked)
+	log_and_message_admins("has force-converted [append_admin_tools(L)] into a cultist.", linked)
