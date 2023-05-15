@@ -41,7 +41,7 @@
 	return 1
 
 /obj/item/melee/cultblade/pickup(mob/living/user as mob)
-	if(!iscultist(user))
+	if(!iscultist(user) && !(user.mind in GLOB.godcult.current_antagonists))
 		to_chat(user, SPAN_WARNING("An overwhelming feeling of dread comes over you as you pick up the cultist's sword. It would be wise to be rid of this blade quickly."))
 		user.make_dizzy(120)
 
