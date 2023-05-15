@@ -30,5 +30,5 @@
 	name = "Phenomena: Exhude Blood"
 	desc = "You extract the raw blood used in your faith and give it to one of your flock"
 	category = "Dark Spells"
-	base_cost = 30
+	base_cost = 60
 	phenomena_path = /datum/phenomena/exhude_blood
