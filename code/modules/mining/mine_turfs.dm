@@ -50,6 +50,7 @@ var/global/list/mining_floors = list()
 /turf/simulated/mineral/Destroy()
 	if (mining_walls["[src.z]"])
 		mining_walls["[src.z]"] -= src
+	GLOB.xeno_artifact_turfs -= src
 	return ..()
 
 /turf/simulated/mineral/can_build_cable()
