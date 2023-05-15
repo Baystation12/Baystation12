@@ -1,4 +1,5 @@
 /mob/living/deity/verb/jump_to_follower()
+	set name = "Jump to Follower"
 	set category = "Godhood"
 
 	if(!minions)
@@ -16,6 +17,12 @@
 	var/choice = input(src, "Jump to follower", "Teleport") as null|anything in could_follow
 	if(choice)
 		follow_follower(choice)
+
+/mob/living/deity/verb/open_menu()
+	set name = "Open Deity Menu"
+	set category = "Godhood"
+
+	ui_interact(src)
 
 /mob/living/deity/proc/follow_follower(mob/living/L)
 	if(!L || L.stat == DEAD || !is_follower(L, TRUE))
