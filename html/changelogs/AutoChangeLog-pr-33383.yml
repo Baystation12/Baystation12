@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Clicking atoms while holding any combination of alt, shift, or control,
+      or middle-clicking them should no longer perform multiple actions (I.e., rotating
+      an object and toggling the turf tab).
