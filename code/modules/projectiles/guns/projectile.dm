@@ -267,9 +267,14 @@
 		to_chat(user, SPAN_WARNING("[src] is empty."))
 	update_icon()
 
-/obj/item/gun/projectile/attackby(obj/item/A as obj, mob/user as mob)
-	if(!load_ammo(A, user))
-		return ..()
+
+/obj/item/gun/projectile/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Anything - Attempt to load ammo
+	if (load_ammo(tool, user))
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/projectile/attack_self(mob/user as mob)
 	if(length(firemodes) > 1)

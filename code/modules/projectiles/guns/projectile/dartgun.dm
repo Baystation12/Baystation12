@@ -104,11 +104,15 @@
 				for(var/datum/reagent/R in B.reagents.reagent_list)
 					to_chat(user, SPAN_NOTICE("[R.volume] units of [R.name]"))
 
-/obj/item/gun/projectile/dartgun/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/reagent_containers/glass))
-		add_beaker(I, user)
-		return 1
-	..()
+
+/obj/item/gun/projectile/dartgun/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Glass Reagent Container - Add beaker
+	if (istype(tool, /obj/item/reagent_containers/glass))
+		add_beaker(tool, user)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/projectile/dartgun/proc/add_beaker(obj/item/reagent_containers/glass/B, mob/user)
 	if(!istype(B, container_type))
