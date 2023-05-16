@@ -191,8 +191,8 @@
 /obj/item/mech_equipment/clamp/CtrlClick(mob/user)
 	if(owner)
 		drop_carrying(user, FALSE)
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/item/mech_equipment/clamp/proc/drop_carrying(mob/user, choose_object)
 	if(!length(carrying))
@@ -774,8 +774,8 @@
 		if (active)
 			stabilizers = !stabilizers
 			to_chat(user, SPAN_NOTICE("You toggle the stabilizers [stabilizers ? "on" : "off"]"))
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/item/mech_equipment/ionjets/proc/activate()
 	passive_power_use = activated_passive_power

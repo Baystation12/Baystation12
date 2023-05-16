@@ -100,7 +100,8 @@
 /obj/item/gun/projectile/shotgun/cane/CtrlClick(mob/user)
 	if (src == user.get_active_hand() || src == user.get_inactive_hand())
 		to_chat(user, SPAN_NOTICE("You [safety_state ? "flick out a hidden trigger on \the [src] and shift your grip" : "flick back the hidden trigger and relax your grip"]."))
-		..()
+		return ..()
+	return FALSE
 
 /obj/item/gun/projectile/shotgun/cane/get_antag_info()
 	. = ..()

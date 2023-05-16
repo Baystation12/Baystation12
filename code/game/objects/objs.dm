@@ -252,7 +252,8 @@
 /obj/AltClick(mob/user)
 	if(obj_flags & OBJ_FLAG_ROTATABLE)
 		rotate(user)
-	..()
+		return TRUE
+	return ..()
 
 /obj/examine(mob/user)
 	. = ..()

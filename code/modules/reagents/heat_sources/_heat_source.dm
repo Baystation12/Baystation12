@@ -68,8 +68,8 @@
 /obj/machinery/reagent_temperature/AltClick(mob/user)
 	if(CanDefaultInteract(user))
 		eject_beaker(user)
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/machinery/reagent_temperature/interface_interact(mob/user)
 	interact(user)

@@ -98,3 +98,4 @@
 
 /obj/item/clothing/mask/monitor/AltClick(mob/user)
 	set_monitor_state(user)
+	return TRUE

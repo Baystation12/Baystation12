@@ -232,22 +232,22 @@
 /obj/machinery/reagentgrinder/AltClick(mob/user)
 	if(CanDefaultInteract(user))
 		detach(user)
-	else
-		..()
+		return TRUE
+	return ..()
 
 
 /obj/machinery/reagentgrinder/CtrlClick(mob/user)
 	if(anchored && CanDefaultInteract(user))
 		grind(user)
-	else
-		..()
+		return TRUE
+	return ..()
 
 
 /obj/machinery/reagentgrinder/CtrlAltClick(mob/user)
 	if(CanDefaultInteract(user))
 		eject(user)
-	else
-		..()
+		return TRUE
+	return ..()
 
 
 /obj/machinery/reagentgrinder/RefreshParts()

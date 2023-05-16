@@ -55,8 +55,8 @@
 		else
 			current_mode = !current_mode
 			to_chat(user, SPAN_NOTICE("You set the shields to [current_mode ? "bubble" : "barrier"] mode."))
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/effect/mech_shield
 	name = "energy shield"

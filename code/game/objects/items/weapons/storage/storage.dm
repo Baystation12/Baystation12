@@ -64,14 +64,14 @@
 					usr.put_in_l_hand(src)
 
 /obj/item/storage/AltClick(mob/usr)
-
 	if(!canremove)
-		return
+		return FALSE
 
 	if ((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated() && Adjacent(usr))
 		src.add_fingerprint(usr)
 		src.open(usr)
 		return TRUE
+	return FALSE
 
 /obj/item/storage/proc/return_inv()
 

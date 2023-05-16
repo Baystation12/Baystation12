@@ -26,13 +26,14 @@
 // Prevents carrying of open laptops inhand.
 // While they work inhand, i feel it'd make tablets lose some of their high-mobility advantage they have over laptops now.
 	if(!CanPhysicallyInteract(user))
-		return
+		return FALSE
 	if(!isturf(loc))
 		to_chat(usr, "\The [src] has to be on a stable surface first!")
-		return
+		return TRUE
 	anchored = !anchored
 	screen_on = anchored
 	update_icon()
+	return TRUE
 
 /obj/item/modular_computer/laptop/on_update_icon()
 	if(anchored)

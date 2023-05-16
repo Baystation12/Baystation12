@@ -111,10 +111,11 @@
 
 /obj/structure/bed/chair/wheelchair/CtrlClick(mob/user)
 	if(in_range(src, user))
-		if(!ishuman(user))	return
+		if(!ishuman(user))
+			return FALSE
 		if(user == buckled_mob)
 			to_chat(user, SPAN_WARNING("You realize you are unable to push the wheelchair you sit in."))
-			return
+			return TRUE
 		if(!pulling)
 			pulling = user
 			user.pulledby = src

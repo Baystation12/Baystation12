@@ -1072,6 +1072,8 @@ BLIND     // can't see anything
 /obj/item/clothing/under/AltClick(mob/user)
 	if(CanPhysicallyInteract(user))
 		set_sensors(user)
+		return TRUE
+	return FALSE
 
 ///////////////////////////////////////////////////////////////////////
 //Rings

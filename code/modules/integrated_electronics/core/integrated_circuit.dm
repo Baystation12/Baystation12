@@ -34,11 +34,11 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	. = ..()
 	external_examine(user)
 
-/obj/item/integrated_circuit/ShiftClick(mob/living/user)
-	if(istype(user))
+/obj/item/integrated_circuit/ShiftClick(mob/user)
+	if (isliving(user))
 		interact(user)
-	else
-		..()
+		return TRUE
+	return ..()
 
 // This should be used when someone is examining while the case is opened.
 /obj/item/integrated_circuit/proc/internal_examine(mob/user)

@@ -345,3 +345,4 @@ var/global/list/all_gps_units = list()
 
 /obj/item/device/gps/AltClick(mob/user)
 	toggle_tracking(user)
+	return TRUE

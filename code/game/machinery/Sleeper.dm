@@ -263,8 +263,8 @@
 /obj/machinery/sleeper/AltClick(mob/user)
 	if(CanDefaultInteract(user))
 		go_out()
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/machinery/sleeper/proc/set_occupant(mob/living/carbon/occupant)
 	src.occupant = occupant
