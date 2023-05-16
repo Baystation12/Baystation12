@@ -443,21 +443,34 @@
 	max_duration = 120
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
 
+
 /singleton/surgery_step/robotics/attach_organ_robotic/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/list/removable_organs = list()
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	for(var/obj/item/organ/I in affected.implants)
-		if ((I.status & ORGAN_CUT_AWAY) && BP_IS_ROBOTIC(I) && !BP_IS_CRYSTAL(I) && (I.parent_organ == target_zone))
-			removable_organs |= I.organ_tag
-	var/organ_to_replace = input(user, "Which organ do you want to reattach?") as null|anything in removable_organs
-	if(!organ_to_replace)
+	var/list/obj/item/organ/candidates = list()
+	for (var/obj/item/organ/organ in affected.implants)
+		if (~organ.status & ORGAN_CUT_AWAY)
+			continue
+		if (~organ.status & ORGAN_ROBOTIC)
+			continue
+		if (organ.status & ORGAN_CRYSTAL)
+			continue
+		if (organ.parent_organ != target_zone)
+			continue
+		if (organ.organ_tag in target.internal_organs_by_name)
+			continue
+		candidates += organ
+	candidates = list_to_map(candidates, /proc/ltm_by_atom_name_numbered)
+	var/obj/item/organ/selected = input(user, "Which organ do you want to reattach?") as null | anything in candidates
+	if (!selected)
 		return FALSE
-	var/obj/item/organ/internal/augment/A = organ_to_replace
-	if(istype(A))
-		if(!(A.augment_flags & AUGMENT_MECHANICAL))
-			to_chat(user, SPAN_WARNING("\the [A] cannot function within a robotic limb"))
+	selected = candidates[selected]
+	if (istype(selected, /obj/item/organ/internal/augment))
+		var/obj/item/organ/internal/augment/augment = selected
+		if (~augment.augment_flags & AUGMENT_MECHANICAL)
+			to_chat(user, SPAN_WARNING("\The [augment] cannot function within a robotic limb."))
 			return FALSE
-	return organ_to_replace
+	return selected
+
 
 /singleton/surgery_step/robotics/attach_organ_robotic/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("[user] begins reattaching [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].", \
@@ -465,17 +478,16 @@
 	..()
 
 /singleton/surgery_step/robotics/attach_organ_robotic/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message(SPAN_NOTICE("[user] has reattached [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].") , \
-	SPAN_NOTICE("You have reattached [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]."))
-
-	var/current_organ = LAZYACCESS(target.surgeries_in_progress, target_zone)
+	var/obj/item/organ/attaching = target.surgeries_in_progress?[target_zone]
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	for (var/obj/item/organ/I in affected.implants)
-		if (I.organ_tag == current_organ)
-			I.status &= ~ORGAN_CUT_AWAY
-			affected.implants -= I
-			I.replaced(target, affected)
-			break
+	affected.implants -= attaching
+	attaching.status &= ~ORGAN_CUT_AWAY
+	attaching.replaced(target, affected)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] has reattached \a [target]'s [attaching] with \a [tool]."),
+		SPAN_NOTICE("You have reattached \the [target]'s [attaching] with \the [tool].")
+	)
+
 
 /singleton/surgery_step/robotics/attach_organ_robotic/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message(SPAN_WARNING("[user]'s hand slips, disconnecting \the [tool]."), \
