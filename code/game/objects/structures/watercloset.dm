@@ -271,6 +271,157 @@
 	return ..()
 
 
+/obj/structure/hygiene/shower
+	name = "shower"
+	desc = "The HS-451. Installed in the 2200s by the Hygiene Division."
+	icon = 'icons/obj/watercloset.dmi'
+	icon_state = "shower"
+	density = FALSE
+	anchored = TRUE
+	clogged = -1
+	can_drain = 1
+	drainage = 0.2 			//showers are tiny, drain a little slower
+
+	var/on = 0
+	var/obj/effect/mist/mymist = null
+	var/ismist = 0				//needs a var so we can make it linger~
+	var/watertemp = "normal"	//freezing, normal, or boiling
+	var/is_washing = 0
+	var/list/temperature_settings = list("normal" = 310, "boiling" = T0C+100, "freezing" = T0C)
+
+/obj/structure/hygiene/shower/New()
+	..()
+	create_reagents(50)
+
+//add heat controls? when emagged, you can freeze to death in it?
+
+/obj/effect/mist
+	name = "mist"
+	icon = 'icons/obj/watercloset.dmi'
+	icon_state = "mist"
+	layer = MOB_LAYER + 1
+	anchored = TRUE
+	mouse_opacity = 0
+
+/obj/structure/hygiene/shower/attack_hand(mob/M)
+	on = !on
+	update_icon()
+	if(on)
+		if (M.loc == loc)
+			wash(M)
+			process_heat(M)
+		for (var/atom/movable/G in src.loc)
+			G.clean_blood()
+
+
+/obj/structure/hygiene/shower/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Gas Scanner - Fetch temperature
+	if (istype(tool, /obj/item/device/scanner/gas))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] scans \the [src] with \a [tool]."),
+			SPAN_NOTICE("You scan \the [src] with \the [tool]. The water temperature seems to be [watertemp].")
+		)
+		return TRUE
+
+	// Wrench - Set temperature
+	if (isWrench(tool))
+		var/input = input(user, "What setting would you like to set the temperature valve to?", "[name] Water Temperature Valve") as null|anything in temperature_settings
+		if (!input || !user.use_sanity_check(src, tool))
+			return TRUE
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts adjusting \the [src]'s temperature with \a [tool]."),
+			SPAN_NOTICE("You start adjusting \the [src]'s temperature with \the [tool].")
+		)
+		if (!do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		watertemp = input
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adjusts \the [src]'s temperature with \a [tool]."),
+			SPAN_NOTICE("You set \the [src]'s temperature to [watertemp] with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
+
+/obj/structure/hygiene/shower/on_update_icon()	//this is terribly unreadable, but basically it makes the shower mist up
+	overlays.Cut()					//once it's been on for a while, in addition to handling the water overlay.
+	if(mymist)
+		qdel(mymist)
+		mymist = null
+
+	if(on)
+		overlays += image('icons/obj/watercloset.dmi', src, "water", MOB_LAYER + 1, dir)
+		if(temperature_settings[watertemp] < T20C)
+			return //no mist for cold water
+		if(!ismist)
+			spawn(50)
+				if(src && on)
+					ismist = 1
+					mymist = new /obj/effect/mist(loc)
+		else
+			ismist = 1
+			mymist = new /obj/effect/mist(loc)
+	else if(ismist)
+		ismist = 1
+		mymist = new /obj/effect/mist(loc)
+		spawn(250)
+			if(src && !on)
+				qdel(mymist)
+				mymist = null
+				ismist = 0
+
+//Yes, showers are super powerful as far as washing goes.
+/obj/structure/hygiene/shower/proc/wash(atom/movable/washing)
+	if(on)
+		wash_mob(washing)
+		if(isturf(loc))
+			var/turf/tile = loc
+			for(var/obj/effect/E in tile)
+				if(istype(E,/obj/effect/decal/cleanable) || istype(E,/obj/effect/overlay))
+					qdel(E)
+		reagents.splash(washing, 10)
+
+/obj/structure/hygiene/shower/Process()
+	..()
+	if(!on) return
+
+	for(var/thing in loc)
+		var/atom/movable/AM = thing
+		var/mob/living/L = thing
+		if(istype(AM) && AM.simulated)
+			wash(AM)
+			if(istype(L))
+				process_heat(L)
+	wash_floor()
+	reagents.add_reagent(/datum/reagent/water, reagents.get_free_space())
+
+/obj/structure/hygiene/shower/proc/wash_floor()
+	if(!ismist && is_washing)
+		return
+	is_washing = 1
+	var/turf/T = get_turf(src)
+	reagents.splash(T, reagents.total_volume)
+	T.clean(src)
+	spawn(100)
+		is_washing = 0
+
+/obj/structure/hygiene/shower/proc/process_heat(mob/living/M)
+	if(!on || !istype(M)) return
+
+	var/water_temperature = temperature_settings[watertemp]
+	var/temp_adj = clamp(water_temperature - M.bodytemperature, BODYTEMP_COOLING_MAX, BODYTEMP_HEATING_MAX)
+	M.bodytemperature += temp_adj
+
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(water_temperature >= H.species.heat_level_1)
+			to_chat(H, SPAN_DANGER("The water is searing hot!"))
+		else if(water_temperature <= H.species.cold_level_1)
+			to_chat(H, SPAN_WARNING("The water is freezing cold!"))
+
 /obj/item/bikehorn/rubberducky
 	name = "rubber ducky"
 	desc = "Rubber ducky you're so fine, you make bathtime lots of fuuun. Rubber ducky I'm awfully fooooond of yooooouuuu~"	//thanks doohl

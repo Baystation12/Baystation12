@@ -62,8 +62,8 @@
 			return TRUE
 		rigged = TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] adds some wiring to \the [src] with \a [cable]."),
-			SPAN_NOTICE("You rig \the [src] with 1 [cable.name] [cable.singular_name] from \the [cable].")
+			SPAN_NOTICE("\The [user] adds some wiring to \the [src] with [cable.get_vague_name(FALSE)]."),
+			SPAN_NOTICE("You rig \the [src] with [cable.get_exact_name(1)].")
 		)
 		return TRUE
 

@@ -45,8 +45,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to wire \the [src].")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts wiring \the [src] with \a [cable]."),
-			SPAN_NOTICE("You start wiring \the [src] with \a [cable.singular_name] of \the [cable].")
+			SPAN_NOTICE("\The [user] starts wiring \the [src] with [cable.get_vague_name(FALSE)]."),
+			SPAN_NOTICE("You start wiring \the [src] with [cable.get_exact_name(1)].")
 		)
 		if (!user.do_skilled(4 SECONDS, SKILL_ELECTRICAL, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -60,8 +60,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to wire \the [src].")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] wires \the [src] with \a [cable]."),
-			SPAN_NOTICE("You wire \the [src] with \a [cable.singular_name] of \the [cable.name].")
+			SPAN_NOTICE("\The [user] wires \the [src] with [cable.get_vague_name(FALSE)]."),
+			SPAN_NOTICE("You wire \the [src] with [cable.get_exact_name(1)].")
 		)
 		return TRUE
 

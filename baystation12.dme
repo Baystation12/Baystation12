@@ -1234,7 +1234,6 @@
 #include "code\game\objects\structures\safe.dm"
 #include "code\game\objects\structures\seaweed.dm"
 #include "code\game\objects\structures\showcase.dm"
-#include "code\game\objects\structures\shower.dm"
 #include "code\game\objects\structures\signs.dm"
 #include "code\game\objects\structures\skele_stand.dm"
 #include "code\game\objects\structures\stasis_cage.dm"

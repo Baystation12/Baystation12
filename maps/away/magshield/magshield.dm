@@ -89,14 +89,14 @@
 	if (istype(tool, /obj/item/stack/material/rods))
 		var/obj/item/stack/material/rods/rods = tool
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts to stick \a [rods.singular_name] into \the [src]'s rotating hands."),
-			SPAN_NOTICE("You start to stick \a [rods.singular_name] into \the [src]'s rotating hands.")
+			SPAN_NOTICE("\The [user] starts to stick [rods.get_vague_name(FALSE)] into \the [src]'s rotating hands."),
+			SPAN_NOTICE("You start to stick [rods.get_exact_name(1)] into \the [src]'s rotating hands.")
 		)
 		if (!do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 			return TRUE
 		user.visible_message(
-			SPAN_WARNING("\The [user] sticks \a [rods.singular_name] into \the [src]'s rotating hands."),
-			SPAN_WARNING("You stick \a [rods.singular_name] into \the [src]'s rotating hands.")
+			SPAN_WARNING("\The [user] sticks [rods.get_vague_name(FALSE)] into \the [src]'s rotating hands."),
+			SPAN_WARNING("You stick [rods.get_exact_name(1)] into \the [src]'s rotating hands.")
 		)
 		rods.use(1)
 		visible_message(SPAN_DANGER("\The [src] stops rotating and releases a cloud of sparks. Better get to a safe distance!"))

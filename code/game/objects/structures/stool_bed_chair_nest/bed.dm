@@ -10,10 +10,11 @@
 	var/material/padding_material
 	var/base_icon = "bed"
 	var/material_alteration = MATERIAL_ALTERATION_ALL
-	var/cache_key
-	var/padding_cache_key
 	/// Bitflags. Bed/chair specific flags.
 	var/bed_flags = EMPTY_BITFIELD
+
+	var/cache_key // SIERRA
+	var/padding_cache_key // SIERRA
 
 
 /obj/structure/bed/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
