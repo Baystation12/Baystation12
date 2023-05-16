@@ -89,11 +89,6 @@
 	else
 		src.SetName("pile of [worth] [GLOB.using_map.local_currency_name]")
 
-	if(length(overlays) <= 2)
-		w_class = ITEM_SIZE_TINY
-	else
-		w_class = ITEM_SIZE_SMALL
-
 /obj/item/spacecash/bundle/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)
 		var/amount = input(usr, "How many [GLOB.using_map.local_currency_name] do you want to take? (0 to [src.worth])", "Take Money", 20) as num
