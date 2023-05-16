@@ -706,11 +706,6 @@ Checks if a list has the same entries and values as an element of big.
 		else
 			checked += value
 
-/proc/assoc_by_proc(list/plain_list, get_initial_value)
-	RETURN_TYPE(/list)
-	. = list()
-	for(var/entry in plain_list)
-		.[call(get_initial_value)(entry)] = entry
 
 /proc/get_initial_name(atom/atom_type)
 	var/atom/A = atom_type
@@ -841,3 +836,37 @@ Checks if a list has the same entries and values as an element of big.
 					for(var/T in typesof(P))
 						L[T] = TRUE
 		return L
+
+
+/// Convert list to a map by calling handler per entry. Map may be supplied as a reference. Handlers should implement a no-params clear.
+/proc/list_to_map(list/list, handler, list/map)
+	RETURN_TYPE(/list)
+	call(handler)()
+	if (!islist(map))
+		map = list()
+	for (var/entry in list)
+		call(handler)(map, entry)
+	call(handler)()
+	return map
+
+
+/// Entry handler for list_to_map. Produces a "name"=ref map, overwriting duplicate names in encounter order.
+/proc/ltm_by_atom_name(list/map, atom/entry)
+	if (!map)
+		return
+	map[entry.name] = entry
+
+
+/// Entry handler for list_to_map. Produces a "name"=ref map, suffixing a count to name for duplicate names.
+/proc/ltm_by_atom_name_numbered(list/map, atom/entry)
+	var/static/list/names_seen
+	if (!map)
+		names_seen = null
+		return
+	if (!names_seen)
+		names_seen = list()
+	var/index = ++names_seen[entry.name]
+	if (index > 1)
+		map["[entry.name] [index]"] = entry
+	else
+		map[entry.name] = entry
