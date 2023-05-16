@@ -1,0 +1,6 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: Records aren't deleted when people exit a round through cryopods.
+  - tweak: If wearing an ID card while being stored by a cryopod, the record associated
+      with the name on that ID has its status updated to "Stored".
