@@ -53,3 +53,7 @@
 
 /obj/item/gun/launcher/alien/spikethrower/on_update_icon()
 	icon_state = "spikethrower[ammo]"
+
+
+/obj/item/gun/launcher/alien/spikethrower/check_accidents()
+	return
