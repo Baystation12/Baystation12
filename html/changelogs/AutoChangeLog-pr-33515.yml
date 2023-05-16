@@ -1,0 +1,5 @@
+author: ''
+delete-after: true
+changes:
+  - bugfix: Fixes the URL's for the new wiki on the SolGov law book, UCMJ book and
+      SOP book.
