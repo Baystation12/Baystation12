@@ -15,7 +15,7 @@
 		spawn(3)
 			var/mob/living/carbon/human/H = player.current
 			if(istype(H))
-				H.change_appearance(APPEARANCE_COMMON, TRUE, state = GLOB.z_state)
+				H.change_appearance(APPEARANCE_COMMON, state = GLOB.z_state)
 	return player.current
 
 /datum/antagonist/proc/update_access(mob/living/player)

@@ -18,15 +18,12 @@
 	. = ..()
 
 
-/datum/nano_module/appearance_changer/New(mob/living/carbon/human/_owner, _flags, _races)
-	..(_owner, null)
-	owner = _owner
-	flags = _flags
+/datum/nano_module/appearance_changer/New(mob/living/carbon/human/owner, flags)
+	..(owner, null)
+	src.owner = owner
+	src.flags = flags
 	if (flags & APPEARANCE_RACE)
-		if (islist(_races))
-			races = _races
-		else
-			races = owner.generate_valid_species(_races)
+		races = owner.generate_valid_species(flags)
 	generate_data()
 
 

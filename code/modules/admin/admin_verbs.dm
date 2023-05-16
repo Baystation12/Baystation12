@@ -654,7 +654,7 @@ var/global/list/admin_verbs_mod = list(
 	if(!H) return
 
 	log_and_message_admins("is altering the appearance of [H].")
-	H.change_appearance(APPEARANCE_ALL, FALSE, usr, state = GLOB.admin_state)
+	H.change_appearance(APPEARANCE_ALL, usr, state = GLOB.admin_state)
 
 /client/proc/change_human_appearance_self()
 	set name = "Change Mob Appearance - Self"
@@ -672,11 +672,11 @@ var/global/list/admin_verbs_mod = list(
 
 	switch(alert("Do you wish for [H] to be allowed to select non-whitelisted races?","Alter Mob Appearance","Yes","No","Cancel"))
 		if("Yes")
-			log_and_message_admins("has allowed [H] to change \his appearance, including races that requires whitelisting")
-			H.change_appearance(APPEARANCE_COMMON, FALSE)
+			log_and_message_admins("has allowed [H] to change \his appearance, ignoring allow lists.")
+			H.change_appearance(APPEARANCE_COMMON | APPEARANCE_SKIP_ALLOW_LIST_CHECK)
 		if("No")
-			log_and_message_admins("has allowed [H] to change \his appearance, excluding races that requires whitelisting.")
-			H.change_appearance(APPEARANCE_COMMON, TRUE)
+			log_and_message_admins("has allowed [H] to change \his appearance, respecting allow lists.")
+			H.change_appearance(APPEARANCE_COMMON)
 
 /client/proc/change_security_level()
 	set name = "Set security level"
