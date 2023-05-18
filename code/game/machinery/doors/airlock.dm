@@ -158,6 +158,10 @@
 
 /obj/machinery/door/airlock/research
 	door_color = COLOR_WHITE
+	stripe_color = COLOR_RESEARCH
+
+/obj/machinery/door/airlock/corporate
+	door_color = COLOR_WHITE
 	stripe_color = COLOR_BOTTLE_GREEN
 
 /obj/machinery/door/airlock/science
