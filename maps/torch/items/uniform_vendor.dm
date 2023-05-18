@@ -178,6 +178,7 @@
 		user_outfit.service_skirt,
 		user_outfit.service_over,
 		user_outfit.service_shoes,
+		user_outfit.service_heels,
 		user_outfit.service_hat,
 		user_outfit.service_gloves
 		)
@@ -189,6 +190,7 @@
 		user_outfit.dress_skirt,
 		user_outfit.dress_over,
 		user_outfit.dress_shoes,
+		user_outfit.dress_heels,
 		user_outfit.dress_hat,
 		user_outfit.dress_gloves
 		)
