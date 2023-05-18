@@ -70,6 +70,7 @@
 
 	if(is_fulltile())
 		layer = FULL_WINDOW_LAYER
+		CLEAR_FLAGS(obj_flags, OBJ_FLAG_ROTATABLE)
 
 	health_min_damage = material.hardness * 1.25
 	if (reinf_material)
