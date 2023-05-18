@@ -118,7 +118,7 @@
 	add_field(/datum/report_field/simple_text, "Suit Sensors locked to MAX?")
 	add_field(/datum/report_field/simple_text, "If needed, provided timely medical aid?")
 	add_field(/datum/report_field/simple_text, "IF YES, what injuries are pre-existing?")
-	add_field(/datum/report_field/text_label/instruction, "This document MUST be submitted to, and reviwed by, the Chief of Security or Brig Chief.")
+	add_field(/datum/report_field/text_label/instruction, "This document MUST be submitted to, and reviewed by, the Chief of Security or Brig Chief.")
 	add_field(/datum/report_field/signature, "Reporting Officer's signature")
 	set_access(access_edit = access_security)
 
@@ -156,3 +156,31 @@
 	add_field(/datum/report_field/text_label/instruction, "THIS LICENSE IS ISSUED 'AT-WILL' AND MAY BE REVOKED AT ANY TIME FOR ANY REASON BY THE COMMANDING OFFICER, EXECUTIVE OFFICER, OR THE CHIEF OF SECURITY. IN THE EVENT OF ILLEGAL CONDUCT, THIS LICENSE MAY BE REVOKED BY ANY LAW ENFORCEMENT OFFICER ACTING IN THE COURSE OF THEIR NORMAL DUTIES. ALL LICENSEES ARE REQUIRED TO ABIDE BY LOCAL LAWS AND REGULATIONS AT ALL TIMES. OPEN CARRY OF LICENSED ITEMS IS GENERALLY NOT PERMITTED UNLESS EXPLICITLY DENOTED. THIS DOCUMENT MUST BE CARRIED BY THE LICENSED PARTY WHEN THEY ARE IN DIRECT OR CONSTRUCTIVE POSSESSION OF THE AFORMENTIONED ITEMS OR WEAPONS THAT THEY ARE AUTHORIZED FOR. COPIES OF THIS DOCUMENT WILL BE FORWARDED TO THE COMMANDING OFFICER, EXECUTIVE OFFICER, CHIEF OF SECURITY, AND BRIG OFFICER FOR REFERENCE.")
 	add_field(/datum/report_field/signature, "Submitting Officer's signature")
 	set_access(access_edit = access_hos)
+
+/datum/computer_file/report/recipient/sec/njp
+	form_name = "SCG-SEC-06"
+	title = "Non-Judicial Punishment"
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/sec/njp/New()
+	..()
+	set_access(access_solgov_crew)
+
+/datum/computer_file/report/recipient/sec/njp/generate_fields()
+	..()
+	add_field(/datum/report_field/text_label/header, "SEV Torch Security Department")
+	add_field(/datum/report_field/text_label/instruction, "To be filled out by a Commissioned Officer or a Non-Commissioned Officer. Report must be signed and submitted for the order to be considered valid. Any paper copies must be stamped.")
+	add_field(/datum/report_field/people/from_manifest, "Accused")
+	add_field(/datum/report_field/simple_text, "Department")
+	add_field(/datum/report_field/people/from_manifest, "Direct superior of the accused")
+	add_field(/datum/report_field/date, "Date Effective")
+	add_field(/datum/report_field/time, "Time Effective")
+	add_field(/datum/report_field/simple_text, "Offense")
+	add_field(/datum/report_field/simple_text, "Description")
+	add_field(/datum/report_field/simple_text, "Punishment")
+	add_field(/datum/report_field/simple_text, "Duration")
+	add_field(/datum/report_field/signature, "Submitting Officer's signature")
+	add_field(/datum/report_field/text_label/instruction, "This document MUST be submitted to, and reviewed by the direct superior officer of the accused.")
+	add_field(/datum/report_field/signature, "Direct superior's signature")
+	add_field(/datum/report_field/text_label/instruction, "The accused has the right to demand trial by court martial. Non-judicial punishment for an offense other than a minor offense is not a bar to trial by court-martial for the same offense.")
+	set_access(access_edit = access_solgov_crew)
