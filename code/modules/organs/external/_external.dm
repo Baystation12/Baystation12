@@ -765,7 +765,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/update_damage_ratios()
 	var/limb_loss_threshold = max_damage * 2
 	brute_ratio = Percent(brute_dam, limb_loss_threshold, 0)
-	burn_ratio = Percent(burn_ratio, limb_loss_threshold, 0)
+	burn_ratio = Percent(burn_dam, limb_loss_threshold, 0)
 
 //Returns 1 if damage_state changed
 /obj/item/organ/external/proc/update_damstate()
