@@ -66,8 +66,8 @@
 	add_field(/datum/report_field/people/from_manifest, "Запрашивающий", required = 1)
 	add_field(/datum/report_field/pencode_text, "Содержание запроса", required = 1)
 	add_field(/datum/report_field/simple_text,"Причина запроса", required = 1)
-	work_fields += add_field(/datum/report_field/people/from_manifest,"Ответственный за запрос", required = 1)
-	work_fields += add_field(/datum/report_field/options/yes_no, "Статус запроса (принят/отклонён)", required = 1)
+	work_fields += add_field(/datum/report_field/people/from_manifest,"Ответственный за запрос",)
+	work_fields += add_field(/datum/report_field/options/yes_no, "Статус запроса (принят/отклонён)")
 	add_field(/datum/report_field/simple_text, "Предоставляемый доступ", required = 1)
 	add_field(/datum/report_field/text_label/instruction, "Доступ обеспечивается сотрудником или его вышестоящим, рассмотревшим и принявшим данный запрос совместно с инженерным составом. Доступ может быть предоставлен на карту сотрудника/ов, выдан виде\
 	гостевой карты или обеспечен иным способом, без дополнительных документов при условии, что он будет изъят по окончанию проведения соответствующих работ.")
