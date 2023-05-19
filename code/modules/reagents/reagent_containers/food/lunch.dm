@@ -13,6 +13,19 @@ var/global/list/lunchables_lunches_ = list(
 									/obj/item/reagent_containers/food/snacks/tossedsalad,
 									/obj/item/reagent_containers/food/snacks/vegetablesoup,
 									/obj/item/reagent_containers/food/snacks/plainsteak
+									/obj/item/reagent_containers/food/snacks/canned/beans
+									/obj/item/reagent_containers/food/snacks/canned/beef
+									/obj/item/reagent_containers/food/snacks/canned/tomato
+									/obj/item/reagent_containers/food/snacks/canned/spinach
+									/obj/item/reagent_containers/food/snacks/canned/berries
+									/obj/item/reagent_containers/food/snacks/hotchili
+									/obj/item/reagent_containers/food/snacks/taco
+									/obj/item/reagent_containers/food/snacks/clam_chowder
+									/obj/item/reagent_containers/food/snacks/bisque
+									/obj/item/reagent_containers/food/snacks/stuffed_clam
+
+
+
 								  )
 
 var/global/list/lunchables_snacks_ = list(
@@ -46,6 +59,18 @@ var/global/list/lunchables_snacks_ = list(
 									/obj/item/reagent_containers/food/snacks/venus,
 									/obj/item/reagent_containers/food/snacks/lunacake,
 									/obj/item/reagent_containers/food/snacks/mars
+									/obj/item/reagent_containers/food/snacks/squid
+									/obj/item/reagent_containers/food/snacks/semki
+									/obj/item/reagent_containers/food/snacks/pistachios
+									/obj/item/reagent_containers/food/snacks/canned/caviar
+									/obj/item/reagent_containers/food/snacks/croutons
+									/obj/item/reagent_containers/food/snacks/salo
+									/obj/item/reagent_containers/food/snacks/driedfish
+									/obj/item/reagent_containers/food/snacks/meatcube
+
+
+
+
 								   )
 
 var/global/list/lunchables_drinks_ = list(
@@ -71,6 +96,8 @@ var/global/list/lunchables_drinks_ = list(
 									/obj/item/reagent_containers/food/drinks/cans/tonic,
 									/obj/item/reagent_containers/food/drinks/cans/sodawater,
 									/obj/item/reagent_containers/food/drinks/cans/rootbeer
+									/obj/item/reagent_containers/food/snacks/shrimp_cocktail
+
 								   )
 
 // This default list is a bit different, it contains items we don't want
