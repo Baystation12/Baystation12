@@ -251,13 +251,13 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/airlock/research{
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/door/airlock/corporate{
 	id_tag = "liaisondoor2";
 	name = "Corporate Liaison";
 	secured_wires = 1
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/cl)
@@ -664,7 +664,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/corporate{
 	id_tag = "liaisondoor3";
 	name = "Corporate Liaison";
 	secured_wires = 1
@@ -839,11 +839,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "bL" = (
-/obj/machinery/door/airlock/research{
-	id_tag = "liaisondoor";
-	name = "Corporate Liaison";
-	secured_wires = 1
-	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
@@ -852,6 +847,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/airlock/corporate{
+	id_tag = "liaisondoor";
+	name = "Corporate Liaison";
+	secured_wires = 1
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/cl)
 "bM" = (
@@ -1632,7 +1632,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/rd)
 "cT" = (
 /obj/structure/table/standard{
@@ -10102,9 +10102,6 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
 "Ao" = (
-/obj/structure/bed/chair/padded/green{
-	dir = 1
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -10112,6 +10109,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/bed/chair/padded/purple{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/rd)
 "Ap" = (
@@ -10214,7 +10214,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/airlock)
 "AE" = (
-/obj/structure/bed/chair/comfy/green,
+/obj/structure/bed/chair/comfy/purple,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/rd)
 "AH" = (
@@ -11809,7 +11809,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/corporate{
 	id_tag = "liaisondoor3";
 	name = "Corporate Liaison";
 	secured_wires = 1
@@ -12294,7 +12294,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "Jj" = (
-/obj/structure/bed/chair/padded/green{
+/obj/structure/bed/chair/padded/purple{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
