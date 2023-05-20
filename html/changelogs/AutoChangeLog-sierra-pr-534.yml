@@ -1,0 +1,5 @@
+author: Alex6511
+delete-after: true
+changes:
+  - tweak: Cash can no longer be used to fly around in EVA, even if you have a lot
+      of it.
