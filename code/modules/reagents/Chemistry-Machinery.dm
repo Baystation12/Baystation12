@@ -96,8 +96,8 @@
 /obj/machinery/chem_master/AltClick(mob/user)
 	if(CanDefaultInteract(user))
 		eject_beaker(user)
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/machinery/chem_master/Topic(href, href_list, state)
 	if(..())

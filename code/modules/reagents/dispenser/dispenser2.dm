@@ -182,8 +182,8 @@
 /obj/machinery/chemical_dispenser/AltClick(mob/user)
 	if(CanDefaultInteract(user))
 		eject_beaker(user)
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/machinery/chemical_dispenser/interface_interact(mob/user)
 	ui_interact(user)

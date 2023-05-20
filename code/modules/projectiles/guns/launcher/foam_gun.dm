@@ -43,8 +43,8 @@
 			darts -= D
 			D.dropInto(user.loc)
 			D.mix_up()
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 /obj/item/gun/launcher/foam/burst
 	name = "foam machine pistol"

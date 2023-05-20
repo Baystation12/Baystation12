@@ -27,24 +27,46 @@
 		return
 
 	var/list/modifiers = params2list(params)
-	if(modifiers["ctrl"] && modifiers["alt"])
-		CtrlAltClickOn(A)
-		return
-	if(modifiers["shift"] && modifiers["ctrl"])
-		CtrlShiftClickOn(A)
-		return
-	if(modifiers["middle"])
-		MiddleClickOn(A)
-		return
-	if(modifiers["shift"])
-		ShiftClickOn(A)
-		return
-	if(modifiers["alt"]) // alt and alt-gr (rightalt)
-		AltClickOn(A)
-		return
-	if(modifiers["ctrl"])
-		CtrlClickOn(A)
-		return
+	if (modifiers["ctrl"] && modifiers["alt"] && modifiers["shift"])
+		if (!control_disabled && A.AICtrlAltShiftClick(src))
+			return TRUE
+		if (CtrlAltShiftClickOn(A))
+			return TRUE
+	else if (modifiers["ctrl"] && modifiers["alt"])
+		if (!control_disabled && A.AICtrlAltClick(src))
+			return TRUE
+		if (CtrlAltClickOn(A))
+			return TRUE
+	else if (modifiers["shift"] && modifiers["ctrl"])
+		if (!control_disabled && A.AICtrlShiftClick(src))
+			return TRUE
+		if (CtrlShiftClickOn(A))
+			return TRUE
+	else if (modifiers["shift"] && modifiers["alt"])
+		if (!control_disabled && A.AIAltShiftClick(src))
+			return TRUE
+		if (AltShiftClickOn(A))
+			return TRUE
+	else if (modifiers["middle"])
+		if (!control_disabled && A.AIMiddleClick(src))
+			return TRUE
+		if (MiddleClickOn(A))
+			return TRUE
+	else if (modifiers["shift"])
+		if (!control_disabled && A.AIShiftClick(src))
+			return TRUE
+		if (ShiftClickOn(A))
+			return TRUE
+	else if (modifiers["alt"])
+		if (!control_disabled && A.AIAltClick(src))
+			return TRUE
+		if (AltClickOn(A))
+			return TRUE
+	else if (modifiers["ctrl"])
+		if (!control_disabled && A.AICtrlClick(src))
+			return TRUE
+		if (CtrlClickOn(A))
+			return TRUE
 
 	face_atom(A) // change direction to face what you clicked on
 
@@ -96,68 +118,38 @@
 	return
 
 /*
-	Since the AI handles shift, ctrl, and alt-click differently
-	than anything else in the game, atoms have separate procs
-	for AI shift, ctrl, and alt clicking.
-*/
-
-/mob/living/silicon/ai/CtrlShiftClickOn(atom/A)
-	if(!control_disabled && A.AICtrlShiftClick(src))
-		return
-	..()
-
-/mob/living/silicon/ai/ShiftClickOn(atom/A)
-	if(!control_disabled && A.AIShiftClick(src))
-		return
-	..()
-
-/mob/living/silicon/ai/CtrlClickOn(atom/A)
-	if(!control_disabled && A.AICtrlClick(src))
-		return TRUE
-	. = ..()
-
-/mob/living/silicon/ai/AltClickOn(atom/A)
-	if(!control_disabled && A.AIAltClick(src))
-		return
-	..()
-
-/mob/living/silicon/ai/MiddleClickOn(atom/A)
-	if(!control_disabled && A.AIMiddleClick(src))
-		return
-	..()
-
-/*
 	The following criminally helpful code is just the previous code cleaned up;
 	I have no idea why it was in atoms.dm instead of respective files.
 */
 
 /atom/proc/AICtrlShiftClick()
+	return FALSE
 
 /obj/machinery/door/airlock/AICtrlShiftClick() // Electrifies doors.
 	if(usr.incapacitated())
-		return
+		return FALSE
 	if(!electrified_until)
 		// permanent shock
 		Topic(src, list("command"="electrify_permanently", "activate" = "1"))
 	else
 		// disable/6 is not in Topic; disable/5 disables both temporary and permanent shock
 		Topic(src, list("command"="electrify_permanently", "activate" = "0"))
-	return 1
+	return TRUE
 
 /atom/proc/AICtrlAltClick()
-	return
+	return FALSE
 
 /atom/proc/AIShiftClick()
-	return
+	return FALSE
 
 /obj/machinery/door/airlock/AIShiftClick()  // Opens and closes doors!
 	if(usr.incapacitated())
-		return
+		return FALSE
 	if(density)
 		Topic(src, list("command"="open", "activate" = "1"))
 	else
 		Topic(src, list("command"="open", "activate" = "0"))
-	return 1
+	return TRUE
 
 /atom/proc/AICtrlClick()
 	return FALSE
@@ -184,31 +176,37 @@
 	return TRUE
 
 /atom/proc/AIAltClick(atom/A)
-	return AltClick(A)
+	return FALSE
 
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
 	if(usr.incapacitated())
-		return
+		return FALSE
 	Topic(src, list("command"="lethal", "value"="[!lethal]"))
-	return 1
-
-/obj/machinery/atmospherics/binary/pump/AIAltClick()
-	return AltClick()
+	return TRUE
 
 /atom/proc/AIMiddleClick(mob/living/silicon/user)
-	return 0
+	return FALSE
 
 /obj/machinery/door/airlock/AIMiddleClick() // Toggles door bolt lights.
 	if(usr.incapacitated())
-		return
+		return FALSE
 	if(..())
-		return
+		return TRUE
 
 	if(!src.lights)
 		Topic(src, list("command"="lights", "activate" = "1"))
 	else
 		Topic(src, list("command"="lights", "activate" = "0"))
-	return 1
+	return TRUE
+
+
+/atom/proc/AIAltShiftClick(atom/A)
+	return FALSE
+
+
+/atom/proc/AICtrlAltShiftClick(atom/A)
+	return FALSE
+
 
 //
 // Override AdjacentQuick for AltClicking

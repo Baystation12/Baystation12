@@ -289,13 +289,15 @@
 /obj/machinery/atmospherics/unary/cryo_cell/AltClick(mob/user)
 	if(CanDefaultInteract(user))
 		go_out()
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/machinery/atmospherics/unary/cryo_cell/CtrlClick(mob/user)
 	if(CanDefaultInteract(user))
 		on = !on
 		update_icon()
+		return TRUE
+	return FALSE
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
 	if (inoperable())

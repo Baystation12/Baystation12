@@ -48,8 +48,8 @@
 /obj/machinery/bodyscanner/AltClick(mob/user)
 	if(CanPhysicallyInteract(user))
 		eject()
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/machinery/bodyscanner/verb/move_inside()
 	set src in oview(1)

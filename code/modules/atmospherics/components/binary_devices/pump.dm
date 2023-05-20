@@ -63,6 +63,7 @@ Thus, the two variables affect pump operation are set in New():
 
 /obj/machinery/atmospherics/binary/pump/AltClick()
 	Topic(src, list("power" = "1"))
+	return TRUE
 
 /obj/machinery/atmospherics/binary/pump/on
 	icon_state = "map_on"

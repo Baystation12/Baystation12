@@ -73,4 +73,4 @@
 	..()
 
 /obj/structure/table/mag/CtrlClick()
-	return
+	return TRUE

@@ -67,12 +67,11 @@
 		. += emissive_appearance(_screen_overlay.icon, _screen_overlay.icon_state)
 
 /obj/item/modular_computer/pda/wrist/AltClick(mob/user)
-	if(!CanPhysicallyInteract(user))
-		return
-	if(card_slot?.stored_card)
-		card_slot.eject_id(user)
-	else
-		..()
+	if(!CanPhysicallyInteract(user) || !card_slot?.stored_card)
+		return ..()
+
+	card_slot.eject_id(user)
+	return TRUE
 
 /obj/item/modular_computer/pda/wrist/attack_hand(mob/user)
 	if(loc == user)

@@ -204,8 +204,8 @@
 /obj/item/reagent_containers/AltClick(mob/user)
 	if(possible_transfer_amounts)
 		set_amount_per_transfer_from_this()
-	else
-		return ..()
+		return TRUE
+	return ..()
 
 /obj/item/reagent_containers/examine(mob/user)
 	. = ..()

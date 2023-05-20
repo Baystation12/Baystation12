@@ -129,6 +129,7 @@
 
 /obj/machinery/microscope/AltClick()
 	remove_sample(usr)
+	return TRUE
 
 /obj/machinery/microscope/MouseDrop(atom/other)
 	if(usr == other)

@@ -50,8 +50,7 @@
 	maptext = "[round((owner.psi.stamina/owner.psi.max_stamina)*100)]%"
 	update_icon()
 
-/obj/screen/psi/hub/Click(location, control, params)
-	var/list/click_params = params2list(params)
+/obj/screen/psi/hub/Click(location, control, click_params)
 	if(click_params["shift"])
 		owner.show_psi_assay(owner)
 		return

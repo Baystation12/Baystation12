@@ -22,6 +22,8 @@
 /obj/item/gun/projectile/revolver/AltClick()
 	if(CanPhysicallyInteract(usr))
 		spin_cylinder()
+		return TRUE
+	return ..()
 
 /obj/item/gun/projectile/revolver/verb/spin_cylinder()
 	set name = "Spin cylinder"
