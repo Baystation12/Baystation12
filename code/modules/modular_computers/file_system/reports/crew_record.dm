@@ -170,13 +170,14 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	dat += "</tt>"
 	return dat
 
+
 /proc/get_crewmember_record(name)
 	RETURN_TYPE(/datum/computer_file/report/crew_record)
-	name = sanitize(name)
-	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
-		if(sanitize(CR.get_name()) == name)
-			return CR
-	return null
+	for (var/datum/computer_file/report/crew_record/record as anything in GLOB.all_crew_records)
+		var/record_name = record?.get_name()
+		if (record_name && html_decode(record_name) == name)
+			return record
+
 
 /proc/GetAssignment(mob/living/carbon/human/H)
 	if(!H)
