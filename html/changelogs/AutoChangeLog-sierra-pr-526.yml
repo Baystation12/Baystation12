@@ -1,0 +1,11 @@
+author: BoNT
+delete-after: true
+changes:
+  - tweak: Laser Scalpels and Incision Management Systems should no longer prompt
+      with a menu each time they are used. Exceptions may apply to specific surgery
+      steps.
+  - tweak: Advanced Laser Scalpels have been renamed to just Laser Scalpels in the
+      Protolathe. They are now a guaranteed improvement over the basic version, for
+      most use cases.
+  - rscdel: Basic and Improved Laser Scalpels have been removed. Tech levels have
+      been adjusted to compensate.
