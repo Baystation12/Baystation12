@@ -47,9 +47,10 @@
 	return TRUE
 
 /spell/construction/cast(target, mob/living/carbon/user)
-	user.custom_pain(SPAN_WARNING("You wince in pain as you feel blood being ripped from your body in payment to create \the [target[2]]."), 5)
+	user.custom_pain(power = 5)
 	user.visible_message(
-		SPAN_WARNING("\The [user] winces in pain as they summon \the [target[2]]!"),
+		SPAN_WARNING("\The [user] winces in pain as they summon \the [initial(target[2].name)]!"),
+		SPAN_WARNING("You wince in pain as you feel blood being ripped from your body in payment to create \the [initial(target[2]).name].")
 	)
 	charge_max = target[CONSTRUCT_SPELL_COST]
 	target = target[CONSTRUCT_SPELL_TYPE]
