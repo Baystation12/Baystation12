@@ -177,11 +177,12 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * **Parameters**:
  * - `target` - The atom being interacted with.
  * - `tool` - The item being used to interact. Optional. Defaults to `FALSE` to differentiate between a nulled reference and an empty parameter.
- * - `flags` - Bitflags of additional settings. See `code\__defines\misc.dm`.
+ * - `flags` (Bitflag, any of `SANITY_CHECK_*`, default `SANITY_CHECK_DEFAULT`) - Bitflags of additional settings. See `code\__defines\misc.dm`.
  *
  * Returns boolean.
  */
-/mob/proc/use_sanity_check(atom/target, atom/tool = FALSE, flags = EMPTY_BITFIELD)
+/mob/proc/use_sanity_check(atom/target, atom/tool = FALSE, flags = SANITY_CHECK_DEFAULT)
+	// Deletion checks
 	if (QDELETED(src))
 		return FALSE
 	var/silent = HAS_FLAGS(flags, SANITY_CHECK_SILENT)
@@ -193,22 +194,45 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if (!silent)
 			FEEDBACK_FAILURE(src, "[tool ? "\The [tool]" : "The item you were using"] no longer exists.")
 		return FALSE
+
+	// Target checks
 	if (!Adjacent(target))
 		if (!silent)
 			FEEDBACK_FAILURE(src, "You must remain next to \the [target].")
-		return FALSE
-	if (HAS_FLAGS(flags, SANITY_CHECK_TOOL_UNEQUIP) && !canUnEquip(tool))
-		if (!silent)
-			FEEDBACK_UNEQUIP_FAILURE(src, tool)
 		return FALSE
 	if (target.loc == src && HAS_FLAGS(flags, SANITY_CHECK_TARGET_UNEQUIP) && !canUnEquip(target))
 		if (!silent)
 			FEEDBACK_UNEQUIP_FAILURE(src, target)
 		return FALSE
+	if (HAS_FLAGS(flags, SANITY_CHECK_INTERACT) && !CanInteractWith(src, target, target.DefaultTopicState()))
+		if (!silent)
+			FEEDBACK_FAILURE(src, "You can't interact with \the [src].")
+		return FALSE
+	if (HAS_FLAGS(flags, SANITY_CHECK_PHYSICALLY_INTERACT) && !CanPhysicallyInteractWith(src, target))
+		if (!silent)
+			FEEDBACK_FAILURE(src, "You can't physically interact with \the [src].")
+		return FALSE
+
+	// Tool checks - Skip these if there is no tool
+	if (!tool)
+		return TRUE
 	if (HAS_FLAGS(flags, SANITY_CHECK_BOTH_ADJACENT) && tool.loc != src && !tool.Adjacent(target))
 		if (!silent)
 			FEEDBACK_FAILURE(src, "\The [tool] must stay next to \the [target].")
 		return FALSE
+
+	// These checks only apply to items
+	if (isitem(tool))
+		if (HAS_FLAGS(flags, SANITY_CHECK_TOOL_UNEQUIP) && !canUnEquip(tool))
+			if (!silent)
+				FEEDBACK_UNEQUIP_FAILURE(src, tool)
+			return FALSE
+		if (HAS_FLAGS(flags, SANITY_CHECK_TOOL_IN_HAND) && get_active_hand() != tool)
+			if (!silent)
+				FEEDBACK_FAILURE(src, "\The [tool] must stay in your active hand.")
+			return FALSE
+
+	// All checks passed
 	return TRUE
 
 

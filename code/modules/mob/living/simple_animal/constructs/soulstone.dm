@@ -152,7 +152,7 @@
 			FEEDBACK_UNEQUIP_FAILURE(user, tool)
 			return TRUE
 		var/input = input(user, "Please choose which type of construct you wish to create.", "[src] Construct Selection") as null|anything in list("Artificer", "Juggernaut", "Wraith")
-		if (!input || !user.use_sanity_check(src, tool, SANITY_CHECK_TOOL_UNEQUIP))
+		if (!input || !user.use_sanity_check(src, tool, SANITY_CHECK_DEFAULT | SANITY_CHECK_TOOL_UNEQUIP))
 			return TRUE
 		if (!soulstone.shade)
 			USE_FEEDBACK_FAILURE("\The [soulstone] has no essence.")

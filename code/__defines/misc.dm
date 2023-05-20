@@ -351,9 +351,17 @@
 // Flags for `use_sanity_check()`
 /// Do not display user feedback messages.
 #define SANITY_CHECK_SILENT FLAG(0)
-/// Verify the tool can be unequipped from user.
+/// Verify the tool can be unequipped from user. Ignored if the tool is not an item.
 #define SANITY_CHECK_TOOL_UNEQUIP FLAG(1)
 /// Verify the target can be unequipped from user. Includes `target.loc == src` check to allow items the user isn't holding.
 #define SANITY_CHECK_TARGET_UNEQUIP FLAG(2)
-/// Verify the target and tool are adjacent to eachother. Ignored if tool is held by user.
+/// Verify the target and tool are adjacent to eachother. Ignored if there is no tool or if tool is held by user.
 #define SANITY_CHECK_BOTH_ADJACENT FLAG(3)
+/// Verify the tool is in the user's active hand. Ignored if the tool is not an item.
+#define SANITY_CHECK_TOOL_IN_HAND FLAG(4)
+/// Check `CanInteractWith(target, user)`. Functionally exclusive with `SANITY_CHECK_PHYSICALLY_INTERACT`.
+#define SANITY_CHECK_INTERACT FLAG(5)
+/// Check `CanPhysicallyInteractWith(target, user)`. Functionally exclusive with `SANITY_CHECK_INTERACT`.
+#define SANITY_CHECK_PHYSICALLY_INTERACT FLAG(6)
+
+#define SANITY_CHECK_DEFAULT (SANITY_CHECK_TOOL_IN_HAND | SANITY_CHECK_BOTH_ADJACENT | SANITY_CHECK_PHYSICALLY_INTERACT)
