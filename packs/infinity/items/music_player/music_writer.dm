@@ -66,7 +66,7 @@
 	return ..()
 
 /obj/machinery/media/music_writer/physical_attack_hand(mob/user)
-	if(locate(user, src.loc))
+	if(get_dist(src, user)<=1)
 		interact(user)
 
 /obj/machinery/media/music_writer/interact(mob/user)

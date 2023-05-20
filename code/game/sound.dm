@@ -77,7 +77,8 @@ GLOBAL_LIST_INIT(smash_sound,list('packs/infinity/sound/effects/gore/smash1.ogg'
 GLOBAL_LIST_INIT(drinks_pickup_sound, list('packs/sierra-tweaks/sound/effects/glass_pickup.ogg','packs/sierra-tweaks/sound/effects/glass2_pickup.ogg','packs/sierra-tweaks/sound/effects/glass3_pickup.ogg','packs/sierra-tweaks/sound/effects/glass4_pickup.ogg','packs/sierra-tweaks/sound/effects/glass5_pickup.ogg','packs/sierra-tweaks/sound/effects/glass6_pickup.ogg'))
 GLOBAL_LIST_INIT(drinks_drop_sound, list('packs/sierra-tweaks/sound/effects/glass_drop.ogg','packs/sierra-tweaks/sound/effects/glass2_drop.ogg','packs/sierra-tweaks/sound/effects/glass3_drop.ogg','packs/sierra-tweaks/sound/effects/glass4_drop.ogg','packs/sierra-tweaks/sound/effects/glass5_drop.ogg','packs/sierra-tweaks/sound/effects/glass6_drop.ogg'))
 GLOBAL_LIST_INIT(tank_drop_sound, list('packs/sierra-tweaks/sound/effects/tank_drop.ogg','packs/sierra-tweaks/sound/effects/tank2_drop.ogg'))
-
+GLOBAL_LIST_INIT(plastic_pickup_sound, list('packs/sierra-tweaks/sound/effects/small_plastic_pickup.ogg'))
+GLOBAL_LIST_INIT(plastic_drop_sound, list('packs/sierra-tweaks/sound/effects/small_plastic_drop.ogg'))
 
 /proc/playsound(atom/source, soundin, vol as num, vary, extrarange as num, falloff, is_global, frequency, is_ambiance = 0)
 
@@ -243,6 +244,8 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 			if ("drinks_pickup_sound") soundin = pick(GLOB.drinks_pickup_sound)
 			if ("drinks_drop_sound") soundin = pick(GLOB.drinks_drop_sound)
 			if ("tank_drop_sound") soundin = pick(GLOB.tank_drop_sound)
+			if ("plastic_pickup_sound") soundin = pick(GLOB.plastic_pickup_sound)
+			if ("plastic_drop_sound") soundin = pick(GLOB.plastic_drop_sound)
 
 	return soundin
 
