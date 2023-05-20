@@ -23,9 +23,6 @@ var/global/list/lunchables_lunches_ = list(
 									/obj/item/reagent_containers/food/snacks/clam_chowder
 									/obj/item/reagent_containers/food/snacks/bisque
 									/obj/item/reagent_containers/food/snacks/stuffed_clam
-
-
-
 								  )
 
 var/global/list/lunchables_snacks_ = list(
@@ -67,10 +64,6 @@ var/global/list/lunchables_snacks_ = list(
 									/obj/item/reagent_containers/food/snacks/salo
 									/obj/item/reagent_containers/food/snacks/driedfish
 									/obj/item/reagent_containers/food/snacks/meatcube
-
-
-
-
 								   )
 
 var/global/list/lunchables_drinks_ = list(
@@ -97,7 +90,6 @@ var/global/list/lunchables_drinks_ = list(
 									/obj/item/reagent_containers/food/drinks/cans/sodawater,
 									/obj/item/reagent_containers/food/drinks/cans/rootbeer
 									/obj/item/reagent_containers/food/snacks/shrimp_cocktail
-
 								   )
 
 // This default list is a bit different, it contains items we don't want
