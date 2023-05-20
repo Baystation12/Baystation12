@@ -84,7 +84,7 @@
 /singleton/surgery_step/slime/saw_core
 	name = "Remove slime core"
 	allowed_tools = list(
-		/obj/item/scalpel/manager = 100,
+		/obj/item/scalpel/ims = 100,
 		/obj/item/circular_saw = 100,
 		/obj/item/material/knife = 75,
 		/obj/item/material/hatchet = 75

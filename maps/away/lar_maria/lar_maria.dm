@@ -147,7 +147,7 @@
 
 /mob/living/simple_animal/hostile/lar_maria/virologist/female
 	icon_state = "virologist_f"
-	weapon = /obj/item/scalpel
+	weapon = /obj/item/scalpel/basic
 	corpse = /obj/effect/landmark/corpse/lar_maria/virologist_female
 
 /obj/effect/landmark/corpse/lar_maria/virologist_female

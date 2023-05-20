@@ -1,5 +1,5 @@
 /datum/fabricator_recipe/medical
-	path = /obj/item/scalpel
+	path = /obj/item/scalpel/basic
 	category = "Medical"
 
 /datum/fabricator_recipe/medical/circularsaw

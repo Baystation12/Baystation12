@@ -26,7 +26,7 @@
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	suit = /obj/item/clothing/suit/apron
 	l_pocket = /obj/item/material/knife/combat
-	r_pocket = /obj/item/scalpel
+	r_pocket = /obj/item/scalpel/basic
 	r_hand = /obj/item/material/twohanded/fireaxe
 
 /singleton/hierarchy/outfit/masked_killer/post_equip(mob/living/carbon/human/H)

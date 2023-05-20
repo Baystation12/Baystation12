@@ -277,7 +277,7 @@
 					/obj/item/device/camera,
 					/obj/item/device/camera_film = 2,
 					/obj/item/autopsy_scanner,
-					/obj/item/scalpel,
+					/obj/item/scalpel/basic,
 					/obj/item/storage/box/masks,
 					/obj/item/storage/box/gloves,
 					/obj/item/pen)
@@ -341,7 +341,7 @@
 					/obj/item/tank/anesthetic,
 					/obj/item/FixOVein,
 					/obj/item/hemostat,
-					/obj/item/scalpel,
+					/obj/item/scalpel/basic,
 					/obj/item/bonegel,
 					/obj/item/retractor,
 					/obj/item/bonesetter,

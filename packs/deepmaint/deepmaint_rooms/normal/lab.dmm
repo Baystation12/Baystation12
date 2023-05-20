@@ -69,7 +69,7 @@
 /area/map_template/deepmaint)
 "fC" = (
 /obj/structure/table/standard,
-/obj/item/scalpel,
+/obj/item/scalpel/basic,
 /obj/effect/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
