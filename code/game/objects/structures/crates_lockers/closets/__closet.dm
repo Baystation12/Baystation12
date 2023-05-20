@@ -332,8 +332,7 @@
 	var/obj/item/card/id/id = tool.GetIdCard()
 	if (istype(id))
 		if (!HAS_FLAGS(setup, CLOSET_HAS_LOCK))
-			USE_FEEDBACK_FAILURE("\The [src] cannot be locked.")
-			return TRUE
+			return ..()
 		togglelock(user, id)
 		return TRUE
 
