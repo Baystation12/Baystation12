@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Full-size windows can be alt-clicked to show the turf tab again.
