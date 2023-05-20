@@ -51,17 +51,17 @@
 	var/image/I
 	var/base_color = paint_color ? paint_color : material.icon_colour
 	if(!density)
-		I = image('icons/turf/wall_masks.dmi', "[material.icon_base]fwall_open")
+		I = image('icons/turf/wall_masks.dmi', "[material.wall_icon_base]fwall_open")
 		I.color = base_color
 		overlays += I
 		return
 
 	for(var/i = 1 to 4)
-		I = image('icons/turf/wall_masks.dmi', "[material.icon_base][wall_connections[i]]", dir = SHIFTL(1, i - 1))
+		I = image('icons/turf/wall_masks.dmi', "[material.wall_icon_base][wall_connections[i]]", dir = SHIFTL(1, i - 1))
 		I.color = base_color
 		overlays += I
 		if(other_connections[i] != "0")
-			I = image('icons/turf/wall_masks.dmi', "[material.icon_base]_other[wall_connections[i]]", dir = SHIFTL(1, i - 1))
+			I = image('icons/turf/wall_masks.dmi', "[material.wall_icon_base]_other[wall_connections[i]]", dir = SHIFTL(1, i - 1))
 			I.color = base_color
 			overlays += I
 
@@ -72,14 +72,14 @@
 			I.color = reinf_color
 			overlays += I
 		else
-			if("[reinf_material.icon_reinf]0" in icon_states('icons/turf/wall_masks.dmi'))
+			if("[reinf_material.wall_icon_reinf]0" in icon_states('icons/turf/wall_masks.dmi'))
 				// Directional icon
 				for(var/i = 1 to 4)
-					I = image('icons/turf/wall_masks.dmi', "[reinf_material.icon_reinf][wall_connections[i]]", dir = SHIFTL(1, i - 1))
+					I = image('icons/turf/wall_masks.dmi', "[reinf_material.wall_icon_reinf][wall_connections[i]]", dir = SHIFTL(1, i - 1))
 					I.color = reinf_color
 					overlays += I
 			else
-				I = image('icons/turf/wall_masks.dmi', reinf_material.icon_reinf)
+				I = image('icons/turf/wall_masks.dmi', reinf_material.wall_icon_reinf)
 				I.color = reinf_color
 				overlays += I
 	var/image/texture = material.get_wall_texture()
@@ -153,7 +153,7 @@
 	other_connections = dirs_to_corner_states(other_dirs)
 
 /turf/simulated/wall/proc/can_join_with(turf/simulated/wall/W)
-	if(material && W.material && material.icon_base == W.material.icon_base)
+	if(material && W.material && material.wall_icon_base == W.material.wall_icon_base)
 		if((reinf_material && W.reinf_material) || (!reinf_material && !W.reinf_material))
 			return 1
 		return 2

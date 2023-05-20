@@ -4,10 +4,13 @@
 /material/scrap
 	name = MATERIAL_SCRAP
 	stack_type = /obj/item/stack/material/scrap
-	icon_base = "metal"
-	door_icon_base = "metal"
 	icon_colour = "#999966"
-	icon_reinf = "reinf_over"
+	sheet_icon_base = "sheet"
+	sheet_icon_reinf = "reinf-overlay"
+	wall_icon_base = "metal"
+	door_icon_base = "metal"
+	wall_icon_reinf = "reinf_over"
+	table_icon_reinf = "reinf_over"
 	shard_can_repair = 0
 	melting_point = 540
 	brute_armor = 3.2

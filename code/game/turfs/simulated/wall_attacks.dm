@@ -8,7 +8,7 @@
 
 	if(density)
 		can_open = WALL_OPENING
-		//flick("[material.icon_base]fwall_opening", src)
+		//flick("[material.wall_icon_base]fwall_opening", src)
 		sleep(15)
 		set_density(0)
 		set_opacity(0)
@@ -22,7 +22,7 @@
 			SSair.mark_for_update(turf)
 	else
 		can_open = WALL_OPENING
-		//flick("[material.icon_base]fwall_closing", src)
+		//flick("[material.wall_icon_base]fwall_closing", src)
 		set_density(1)
 		set_opacity(1)
 		blocks_air = AIR_BLOCKED
