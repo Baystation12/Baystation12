@@ -1,0 +1,8 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Brick stacks are now bricks instead of appearing as sheets.
+  - tweak: The generation of icon states for material stacks has been reworked. Aside
+      from the bugfix and tweak, there should be no real user-facing changes.
+  - tweak: Stacks of reinforced materials now use the reinforced material's color
+      in the visible lattice work.
