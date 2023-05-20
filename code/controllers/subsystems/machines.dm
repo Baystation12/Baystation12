@@ -66,7 +66,9 @@ SUBSYSTEM_DEF(machines)
 
 /datum/controller/subsystem/machines/fire(resumed, no_mc_tick)
 	var/timer
-	if (!resumed || current_step == SSMACHINES_PIPENETS)
+	if (!resumed)
+		current_step = SSMACHINES_PIPENETS
+	if (current_step == SSMACHINES_PIPENETS)
 		timer = world.tick_usage
 		process_pipenets(resumed, no_mc_tick)
 		cost_pipenets = MC_AVERAGE(cost_pipenets, (world.tick_usage - timer) * world.tick_lag)
