@@ -137,20 +137,32 @@
 			return
 	..()
 
-/obj/item/gun/projectile/pistol/holdout/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/silencer))
+
+/obj/item/gun/projectile/pistol/holdout/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Silencer - Attach silencer
+	if (istype(tool, /obj/item/silencer))
 		if (silenced)
-			to_chat(user, SPAN_WARNING("\The [src] is already silenced."))
-			return
-		if(!user.unEquip(I, src))
-			return//put the silencer into the gun
-		to_chat(user, SPAN_NOTICE("You screw \the [I] onto \the [src]."))
+			if (silencer)
+				USE_FEEDBACK_FAILURE("\The [src] already has \a [silencer] attached.")
+			else
+				USE_FEEDBACK_FAILURE("\The [src] is already silenced.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_FAILURE(user, tool)
+			return TRUE
 		silenced = TRUE
-		silencer = I
+		silencer = tool
 		w_class = ITEM_SIZE_NORMAL
 		update_icon()
-		return
-	..()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] screws \a [tool] onto \a [src]."),
+			SPAN_NOTICE("You screw \a [tool] onto \a [src]."),
+			range = 2
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/projectile/pistol/holdout/on_update_icon()
 	..()

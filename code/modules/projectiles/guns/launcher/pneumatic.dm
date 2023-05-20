@@ -65,13 +65,32 @@
 	else
 		return ..()
 
-/obj/item/gun/launcher/pneumatic/attackby(obj/item/W as obj, mob/user as mob)
-	if(!tank && istype(W,/obj/item/tank) && user.unEquip(W, src))
-		tank = W
-		user.visible_message("[user] jams [W] into [src]'s valve and twists it closed.","You jam [W] into [src]'s valve and twist it closed.")
+
+/obj/item/gun/launcher/pneumatic/use_tool(obj/item/tool, mob/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE) // Everything is passed through to item insertion.
+
+	// Tank - Install tank
+	if (istype(tool, /obj/item/tank))
+		if (tank)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [tank] installed.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		tank = tool
 		update_icon()
-	else if(istype(W) && item_storage.can_be_inserted(W, user))
-		item_storage.handle_item_insertion(W)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] jams \a [tool] into \a [src]'s valve and twists it closed."),
+			SPAN_NOTICE("You jam \the [tool] into \the [src]'s valve and twist it closed.")
+		)
+		return TRUE
+
+	// Anything else - Attempt to install
+	if (!item_storage.can_be_inserted(tool, user))
+		return TRUE
+	item_storage.handle_item_insertion(tool)
+	return TRUE
+
 
 /obj/item/gun/launcher/pneumatic/attack_self(mob/user as mob)
 	eject_tank(user)

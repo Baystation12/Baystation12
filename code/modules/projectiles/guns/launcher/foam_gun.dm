@@ -19,15 +19,27 @@
 	var/max_darts = 1
 	var/list/darts = new/list()
 
-/obj/item/gun/launcher/foam/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/foam_dart))
-		if(length(darts) < max_darts)
-			if(!user.unEquip(I, src))
-				return
-			darts += I
-			to_chat(user, SPAN_NOTICE("You slot \the [I] into \the [src]."))
-		else
-			to_chat(user, SPAN_WARNING("\The [src] can hold no more darts."))
+
+/obj/item/gun/launcher/foam/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Foam Dart - Load ammo
+	if (istype(tool, /obj/item/foam_dart))
+		if (length(darts) >= max_darts)
+			USE_FEEDBACK_FAILURE("\The [src] is full.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		darts += tool
+		user.visible_message(
+			SPAN_NOTICE("\The [user] loads \the [src] with \a [tool]."),
+			SPAN_NOTICE("You load \the [src] with \the [tool].")
+		)
+		if (max_darts > 1)
+			to_chat(user, SPAN_INFO("\The [src] now has [length(darts)]/[max_darts] darts loaded."))
+		return TRUE
+
+	return ..()
+
 
 /obj/item/gun/launcher/foam/consume_next_projectile()
 	if(length(darts))
