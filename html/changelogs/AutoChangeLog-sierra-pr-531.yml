@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Fixes a bug where PDAs that had IDs in them couldn't scan rescue or stasis
+      bags,
