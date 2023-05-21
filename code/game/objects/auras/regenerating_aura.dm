@@ -45,8 +45,6 @@
 		H.adjustToxLoss(-tox_mult * config.organ_regeneration_multiplier)
 		H.adjust_nutrition(-nutrition_damage_mult)
 
-	if(!can_regenerate_organs())
-		return AURA_CANCEL
 	if(organ_mult)
 		if(prob(10) && H.nutrition >= 150 && !H.getBruteLoss() && !H.getFireLoss())
 			var/obj/item/organ/external/head/D = H.organs_by_name["head"]
@@ -158,7 +156,7 @@
 		organ_mult = 2
 		grow_chance = 1
 
-	return EMPTY_BITFIELD
+	return ..()
 
 /obj/aura/regenerating/human/unathi/can_regenerate_organs()
 	return can_toggle()
