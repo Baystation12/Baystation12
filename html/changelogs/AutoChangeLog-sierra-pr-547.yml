@@ -1,4 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - bugfix: Body scanners etc produce a correct burn level description.

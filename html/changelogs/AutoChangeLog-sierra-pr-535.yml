@@ -1,4 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - bugfix: secbots don't attack people with html escapable symbols in their names.
