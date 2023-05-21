@@ -17,6 +17,7 @@
 	var/service_skirt = null
 	var/service_over = null
 	var/service_shoes = null
+	var/service_heels = null
 	var/service_hat = null
 	var/service_gloves = null
 	var/service_extra = null
@@ -25,6 +26,7 @@
 	var/dress_skirt = null
 	var/dress_over = null
 	var/dress_shoes = null
+	var/dress_heels = null
 	var/dress_hat = null
 	var/dress_gloves = null
 	var/dress_extra = null
@@ -76,12 +78,14 @@
 	service_skirt = /obj/item/clothing/under/solgov/service/fleet/skirt
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet
 	service_shoes = /obj/item/clothing/shoes/dress
+	service_heels = /obj/item/clothing/shoes/dressheels
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/garrison
 
 	dress_under = /obj/item/clothing/under/solgov/service/fleet
 	dress_skirt = /obj/item/clothing/under/solgov/service/fleet/skirt
 	dress_over = /obj/item/clothing/suit/dress/solgov/fleet/sailor
 	dress_shoes = /obj/item/clothing/shoes/dress
+	dress_heels = /obj/item/clothing/shoes/dressheels
 	dress_hat = /obj/item/clothing/head/solgov/dress/fleet/garrison
 	dress_gloves = /obj/item/clothing/gloves/white
 
