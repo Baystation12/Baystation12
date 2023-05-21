@@ -237,7 +237,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	set waitfor = FALSE
 
 	flick("faxreceive", src)
-	playsound(loc, "sound/machines/dotprinter.ogg", 50, 1)
+	playsound(loc, "packs/sierra-tweaks/sound/machines/printer.ogg", 50, 1)
 	visible_message(SPAN_NOTICE("\The [src] pings, \"New fax received from [origin_department].\""))
 
 	// Notify any linked PDAs
@@ -303,7 +303,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	for(var/client/C as anything in GLOB.admins)
 		if(check_rights((R_ADMIN|R_MOD),0,C))
 			to_chat(C, msg)
-			sound_to(C, 'sound/machines/dotprinter.ogg')
+			sound_to(C, 'packs/sierra-tweaks/sound/machines/printer.ogg')
 
 
 /obj/machinery/photocopier/faxmachine/proc/link_pda(obj/item/modular_computer/pda/pda)
