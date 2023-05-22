@@ -237,36 +237,39 @@
  * Overrideable to allow for different messages, or restricting when the messages can or cannot appear.
  */
 /atom/proc/examine_damage_state(mob/user)
+	var/datum/pronouns/pronouns = choose_from_pronouns()
+
 	if (health_dead)
-		to_chat(user, SPAN_DANGER("It looks broken."))
+		to_chat(user, SPAN_DANGER("[pronouns.He] look[pronouns.s] broken."))
 		return
 
 	var/damage_percentage = get_damage_percentage()
 	switch (damage_percentage)
 		if (0)
-			to_chat(user, SPAN_NOTICE("It looks fully intact."))
+			to_chat(user, SPAN_NOTICE("[pronouns.He] look[pronouns.s] fully intact."))
 		if (1 to 32)
-			to_chat(user, SPAN_WARNING("It looks slightly damaged."))
+			to_chat(user, SPAN_WARNING("[pronouns.He] look[pronouns.s] slightly damaged."))
 		if (33 to 65)
-			to_chat(user, SPAN_WARNING("It looks moderately damaged."))
+			to_chat(user, SPAN_WARNING("[pronouns.He] look[pronouns.s] moderately damaged."))
 		else
-			to_chat(user, SPAN_DANGER("It looks severely damaged."))
+			to_chat(user, SPAN_DANGER("[pronouns.He] look[pronouns.s] severely damaged."))
 
 /mob/examine_damage_state(mob/user)
+	var/datum/pronouns/pronouns = choose_from_pronouns()
 	if (health_dead)
-		to_chat(user, SPAN_DANGER("They look severely hurt and are not moving or responding to anything around them."))
+		to_chat(user, SPAN_DANGER("[pronouns.He] look[pronouns.s] severely hurt and [pronouns.is] not moving or responding to anything around [pronouns.him]."))
 		return
 
 	var/damage_percentage = get_damage_percentage()
 	switch (damage_percentage)
 		if (0)
-			to_chat(user, SPAN_NOTICE("They appear unhurt."))
+			to_chat(user, SPAN_NOTICE("[pronouns.He] appear[pronouns.s] unhurt."))
 		if (1 to 32)
-			to_chat(user, SPAN_WARNING("They look slightly hurt."))
+			to_chat(user, SPAN_WARNING("[pronouns.He] look[pronouns.s] slightly hurt."))
 		if (33 to 65)
-			to_chat(user, SPAN_WARNING("They look moderately hurt."))
+			to_chat(user, SPAN_WARNING("[pronouns.He] look[pronouns.s] moderately hurt."))
 		else
-			to_chat(user, SPAN_DANGER("They look severely hurt."))
+			to_chat(user, SPAN_DANGER("[pronouns.He] look[pronouns.s] severely hurt."))
 
 /**
  * Copies the state of health from one atom to another.
