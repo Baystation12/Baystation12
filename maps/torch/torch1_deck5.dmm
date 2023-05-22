@@ -4957,7 +4957,6 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/hangar)
 "lm" = (
-/obj/effect/floor_decal/industrial/outline/blue,
 /obj/structure/cable/cyan{
 	d1 = 4;
 	d2 = 8;
@@ -4967,6 +4966,7 @@
 	dir = 4
 	},
 /obj/machinery/portable_atmospherics/powered/pump/filled,
+/obj/effect/floor_decal/industrial/outline,
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/atmos)
 "ln" = (
@@ -10001,11 +10001,11 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/phoron)
 "wr" = (
-/obj/machinery/portable_atmospherics/canister/empty,
-/obj/effect/floor_decal/industrial/outline/red,
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
+/obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/atmos)
 "ws" = (
@@ -12324,12 +12324,12 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/phoron)
 "EK" = (
-/obj/machinery/portable_atmospherics/canister/empty,
-/obj/effect/floor_decal/industrial/outline/red,
 /obj/machinery/camera/network/hangar{
 	c_tag = "Atmospheric Storage";
 	dir = 8
 	},
+/obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/atmos)
 "EL" = (
