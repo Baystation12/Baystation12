@@ -215,7 +215,7 @@
 	amount = 10
 
 /obj/item/stack/material/uranium
-	name = "nuranium"
+	name = "uranium"
 	default_type = MATERIAL_URANIUM
 
 /obj/item/stack/material/uranium/ten
