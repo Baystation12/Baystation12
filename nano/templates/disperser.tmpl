@@ -23,6 +23,22 @@
 				{{:helper.link('', 'triangle-1-se', { 'choose' : 6 }, data.overmapdir == 6 ? 'selected' : null, null)}}
 			</div>
 		</div>
+		<div class = 'item'>
+			{{if data.coordinates}}
+				<div class = 'itemContent'>:: X
+					{{:helper.link(data.t_x, null, { 'setx' : 1 }, null, null)}}
+				</div>
+				<div class = 'itemContent'>:: Y
+				{{:helper.link(data.t_y, null, { 'sety' : 1 }, null, null)}}
+				</div>
+				<div class = 'itemContent'>:: Z
+				{{:helper.link(data.t_z, null, { 'setz' : 1 }, null, null)}}
+				</div>
+				{{:helper.link('Reset Coordinates', null, { 'reset' : 1 }, null, null)}}
+			{{else}}
+				{{:helper.link('Set Coordinates', null, { 'sety' : 1, 'setx' : 1, 'setz' : 1 }, null, null)}}
+			{{/if}}
+		</div>
 	</div>
 </div>
 <div style="float:right;width:50%">
@@ -85,7 +101,7 @@
 		</div>
 	</div>
 </div>
-<div class='item'>	
+<div class='item'>
 {{:helper.link("Fire", 'alert', { 'fire' : 1 }, null, null)}}
 </div>
 {{/if}}
