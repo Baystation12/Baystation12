@@ -6,7 +6,8 @@
 	icon_state = "computer"
 
 	core_skill = SKILL_PILOT
-	var/skill_offset = SKILL_ADEPT - 1 //After which skill level it starts to matter. -1, because we have to index from zero
+	/// After which skill level it starts to matter. -1, because we have to index from zero
+	var/skill_offset = SKILL_ADEPT - 1
 
 	icon_keyboard = "rd_key"
 	icon_screen = "teleport"
@@ -14,18 +15,30 @@
 	var/obj/machinery/disperser/front/front
 	var/obj/machinery/disperser/middle/middle
 	var/obj/machinery/disperser/back/back
-	var/const/link_range = 10 //How far can the above stuff be maximum before we start complaining
+	/// How far can the disperser's front/mid/back sections be apart from eachother before we start complaining
+	var/const/link_range = 10
 
 	var/overmapdir = 0
+	/// Coordinates for target
+	var/tx = 0
+	var/ty = 0
+	var/tz = 0
 
-	var/caldigit = 4 //number of digits that needs calibration
-	var/list/calibration //what it is
-	var/list/calexpected //what is should be
+	/// Number of digits that needs calibration
+	var/caldigit = 4
+	/// What it is
+	var/list/calibration
+	/// what is should be
+	var/list/calexpected
 
-	var/range = 1 //range of the explosion
-	var/strength = 1 //strength of the explosion
-	var/next_shot = 0 //round time where the next shot can start from
-	var/const/coolinterval = 2 MINUTES //time to wait between safe shots in deciseconds
+	/// Range of the explosion
+	var/range = 1
+	/// Strength of the explosion
+	var/strength = 1
+	/// Round time where the next shot can start from
+	var/next_shot = 0
+	/// Time to wait between safe shots in deciseconds
+	var/const/coolinterval = 2 MINUTES
 
 /obj/machinery/computer/ship/disperser/Initialize()
 	. = ..()
@@ -36,6 +49,10 @@
 	release_links()
 	. = ..()
 
+/**
+ * Used to handle linking of OFD parts.
+ * If the parts are too far apart from eachother, it won't work.
+ */
 /obj/machinery/computer/ship/disperser/proc/link_parts()
 	if(is_valid_setup())
 		return TRUE
@@ -60,6 +77,9 @@
 			return TRUE
 	return FALSE
 
+/**
+ * Checks order of parts.
+ */
 /obj/machinery/computer/ship/disperser/proc/is_valid_setup()
 	if(front && middle && back)
 		var/everything_in_range = (get_dist(src, front) < link_range) && (get_dist(src, middle) < link_range) && (get_dist(src, back) < link_range)
@@ -67,6 +87,9 @@
 		return everything_in_order && everything_in_range
 	return FALSE
 
+/**
+ * Used for destroying links when unlinked.
+ */
 /obj/machinery/computer/ship/disperser/proc/release_links()
 	GLOB.destroyed_event.unregister(front, src, .proc/release_links)
 	GLOB.destroyed_event.unregister(middle, src, .proc/release_links)
@@ -75,6 +98,9 @@
 	middle = null
 	back = null
 
+/**
+ * Calculating calibration.
+ */
 /obj/machinery/computer/ship/disperser/proc/get_calibration()
 	var/list/calresult[caldigit]
 	for(var/i = 1 to caldigit)
@@ -86,6 +112,9 @@
 			calresult[i] = 0
 	return calresult
 
+/**
+ * Resetting calibration.
+ */
 /obj/machinery/computer/ship/disperser/proc/reset_calibration()
 	calexpected = new /list(caldigit)
 	calibration = new /list(caldigit)
@@ -93,9 +122,13 @@
 		calexpected[i] = rand(0,9)
 		calibration[i] = 0
 
+/**
+ * Calculating accuracy from calibration.
+ */
 /obj/machinery/computer/ship/disperser/proc/cal_accuracy()
 	var/top = 0
-	var/divisor = caldigit * 2 //maximum possible value, aka 100% accuracy
+	// Maximum possible value, aka 100% accuracy
+	var/divisor = caldigit * 2
 	for(var/i in get_calibration())
 		top += i
 	return round(top * 100 / divisor)
@@ -135,6 +168,10 @@
 	else
 		data["calibration"] = calibration
 		data["overmapdir"] = overmapdir
+		data["t_x"] = tx
+		data["t_y"] = ty
+		data["t_z"] = tz
+		data["coordinates"] = tx || ty || tz
 		data["cal_accuracy"] = cal_accuracy()
 		data["strength"] = strength
 		data["range"] = range
@@ -172,11 +209,39 @@
 		overmapdir = sanitize_integer(text2num(href_list["choose"]), 0, 9, 0)
 		reset_calibration()
 
+	if (href_list["setx"])
+		var/newx = input("Input new target x coordinate", "Coordinate input", tx) as num|null
+		if(!CanInteract(user,state))
+			return
+		if (newx)
+			tx = clamp(newx, 1, world.maxx - TRANSITIONEDGE)
+
+	if (href_list["sety"])
+		var/newy = input("Input new target y coordinate", "Coordinate input", ty) as num|null
+		if(!CanInteract(user,state))
+			return
+		if (newy)
+			ty = clamp(newy, 1, world.maxy - TRANSITIONEDGE)
+
+	if (href_list["setz"])
+		var/newz = input("Input new target z coordinate", "Coordinate input", tz) as num|null
+		if(!CanInteract(user,state))
+			return
+		if (newz)
+			tz = clamp(newz, 1, world.maxz)
+
+	if (href_list["reset"])
+		tx = 0
+		ty = 0
+		tz = 0
+
 	if(href_list["calibration"])
 		var/input = input("0-9", "disperser calibration", 0) as num|null
-		if(!isnull(input)) //can be zero so we explicitly check for null
-			var/calnum = sanitize_integer(text2num(href_list["calibration"]), 0, caldigit)//sanitiiiiize
-			calibration[calnum + 1] = sanitize_integer(input, 0, 9, 0)//must add 1 because nanoui indexes from 0
+		// Can be zero so we explicitly check for null
+		if(!isnull(input))
+			var/calnum = sanitize_integer(text2num(href_list["calibration"]), 0, caldigit) // sanitiiiiize
+			// Must add 1 because nanoui indexes from 0
+			calibration[calnum + 1] = sanitize_integer(input, 0, 9, 0)
 
 	if(href_list["skill_calibration"])
 		for(var/i = 1 to min(caldigit, user.get_skill_value(core_skill) - skill_offset))
