@@ -1458,6 +1458,7 @@
 	name = "strange-looking monkey cube"
 	monkey_type = /mob/living/simple_animal/hostile/carp/pike
 
+//define human cubes here
 /obj/item/reagent_containers/food/snacks/spellburger
 	name = "spell burger"
 	desc = "This is absolutely Ei Nath."
