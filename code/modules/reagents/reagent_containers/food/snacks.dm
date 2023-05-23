@@ -1459,6 +1459,45 @@
 	monkey_type = /mob/living/simple_animal/hostile/carp/pike
 
 //define human cubes here
+/obj/item/reagent_containers/food/snacks/humancube
+	name = "odd cube"
+	desc = "A strange looking monkey cube that pulsates and writhes disturbingly"
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+	icon_state = "monkeycube"
+	bitesize = 12
+	filling_color = "#adac7f"
+	center_of_mass = "x=16;y=14"
+
+	var/wrapped = 0
+	var/growing = 0
+	var/spawn_type = /mob/living/carbon/human
+
+/obj/item/reagent_containers/food/snacks/humancube/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
+
+
+/obj/item/reagent_containers/food/snacks/humancube/proc/HumanExpand(var/datum/source_DNA)
+	if(!growing)
+		growing = 1
+		var/mob/human = new spawn_type
+		human.dropInto(src.loc)
+		src.visible_message(SPAN_NOTICE("\The sourced DNA string of the person is [source_DNA]"))
+		qdel(src)
+
+/obj/item/reagent_containers/food/snacks/humancube/on_reagent_change()
+	var/datum/target_DNA = ""
+	if(reagents.has_reagent(/datum/reagent/blood))
+		for(var/datum/reagent/blood/B in src.reagents.reagent_list)
+			//if(B.type == /datum/reagent/blood)
+				//TESTING DNA
+			src.visible_message(SPAN_NOTICE("\The [src] accepts the blood, vibrating slightly before rapidly expanding and twisting"))
+			target_DNA = B.data["blood_DNA"]
+			src.visible_message(SPAN_NOTICE("\The DNA string of the person is [target_DNA]"))
+		HumanExpand(target_DNA)
+
+
+
 /obj/item/reagent_containers/food/snacks/spellburger
 	name = "spell burger"
 	desc = "This is absolutely Ei Nath."
