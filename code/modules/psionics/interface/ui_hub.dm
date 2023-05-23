@@ -51,7 +51,8 @@
 	update_icon()
 
 /obj/screen/psi/hub/Click(location, control, click_params)
-	if(click_params["shift"])
+	var/list/params = params2list(click_params)
+	if(params["shift"])
 		owner.show_psi_assay(owner)
 		return
 
