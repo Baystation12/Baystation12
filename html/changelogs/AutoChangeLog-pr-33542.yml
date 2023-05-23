@@ -1,0 +1,5 @@
+author: BurpleBineapple
+delete-after: true
+changes:
+  - bugfix: Fixes uranium being spelled "nuranium" as a stack. Caused incorrect displays
+      on the merchant console, etc.
