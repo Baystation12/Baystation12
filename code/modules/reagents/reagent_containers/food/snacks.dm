@@ -1460,6 +1460,9 @@
 
 //define human cubes here
 <<<<<<< refs/remotes/ActualBay/dev
+<<<<<<< refs/remotes/ActualBay/dev
+=======
+>>>>>>> more progress on humancube
 /obj/item/reagent_containers/food/snacks/humancube
 	name = "odd cube"
 	desc = "A strange looking monkey cube that pulsates and writhes disturbingly"
@@ -1522,8 +1525,11 @@
 
 
 
+<<<<<<< refs/remotes/ActualBay/dev
 =======
 >>>>>>> Test commit
+=======
+>>>>>>> more progress on humancube
 /obj/item/reagent_containers/food/snacks/spellburger
 	name = "spell burger"
 	desc = "This is absolutely Ei Nath."
