@@ -103,6 +103,7 @@
 
 	if(Proj.ricochet_sounds && prob(15))
 		playsound(src, pick(Proj.ricochet_sounds), 100, 1)
+		new /obj/effect/sparks(get_turf(Proj))
 
 	create_bullethole(Proj)//Potentially infinite bullet holes but most walls don't last long enough for this to be a problem.
 	..()
