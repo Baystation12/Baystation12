@@ -1,0 +1,5 @@
+author: BurpleBineapple
+delete-after: true
+changes:
+  - tweak: Damage and Surgery steps show through underclothes. Armor/Voidsuits is
+      still over this layer.
