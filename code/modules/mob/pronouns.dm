@@ -13,6 +13,8 @@
 	var/is   = "are"
 	var/does = "do"
 	var/self = "themselves"
+	var/s    = ""
+	var/es   = ""
 
 /datum/pronouns/they_them
 	key  = PRONOUNS_THEY_THEM
@@ -31,6 +33,8 @@
 	is   = "is"
 	does = "does"
 	self = "himself"
+	s    = "s"
+	es   = "es"
 
 /datum/pronouns/he_they
 	key  = PRONOUNS_HE_THEY
@@ -50,6 +54,8 @@
 	is   = "is"
 	does = "does"
 	self = "herself"
+	s    = "s"
+	es   = "es"
 
 /datum/pronouns/she_they
 	key  = PRONOUNS_SHE_THEY
@@ -69,6 +75,8 @@
 	is   = "is"
 	does = "does"
 	self = "itself"
+	s    = "s"
+	es   = "es"
 
 
 /datum/pronouns_manager
