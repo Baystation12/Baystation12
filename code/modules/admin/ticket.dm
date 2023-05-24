@@ -10,6 +10,7 @@ var/global/list/ticket_panels = list()
 	var/id
 	var/opened_time
 	var/timeout = FALSE
+	var/last_message_time
 
 /datum/ticket/New(datum/client_lite/owner)
 	src.owner = owner
@@ -111,6 +112,9 @@ var/global/list/ticket_panels = list()
 /datum/ticket/proc/is_active()
 	if(status != TICKET_ASSIGNED)
 		return 0
+
+	if(world.time - last_message_time > 30 MINUTES)
+		return FALSE
 
 	for(var/datum/client_lite/admin in assigned_admins)
 		var/client/admin_client = client_by_ckey(admin.ckey)
