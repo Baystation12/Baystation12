@@ -80,8 +80,3 @@
 /obj/item/storage/box/radiokeys/Initialize()
 	. = ..()
 	make_exact_fit()
-
-/obj/item/device/encryptionkey/heads/sea
-	name = "senior enlisted advisor's encryption key"
-	icon_state = "com_cypherkey"
-	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Medical" = 1, "Supply" = 1, "Service" = 1, "Exploration" = 1, "Hailing" = 1)

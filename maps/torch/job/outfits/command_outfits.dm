@@ -110,7 +110,7 @@
 	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots
-	l_ear = /obj/item/device/radio/headset/sea
+	l_ear = /obj/item/device/radio/headset/heads/torchexec
 	id_types = list(/obj/item/card/id/torch/crew/sea)
 	pda_type = /obj/item/modular_computer/pda/heads
 

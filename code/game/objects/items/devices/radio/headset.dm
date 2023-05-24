@@ -184,10 +184,8 @@
 
 /obj/item/device/radio/headset/headset_com/alt
 	name = "command bowman headset"
-	desc = "A headset with a commanding channel."
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
-	ks1type = /obj/item/device/encryptionkey/headset_com
 	max_keys = 3
 
 /obj/item/device/radio/headset/merchant

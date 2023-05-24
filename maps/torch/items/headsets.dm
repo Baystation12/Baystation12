@@ -6,8 +6,7 @@
 	ks1type = /obj/item/device/encryptionkey/science
 
 /obj/item/device/radio/headset/science/alt
-	name = "research headset"
-	desc = "A headset for researchers."
+	name = "research bowman headset"
 	icon_state = "sci_headset_alt"
 	item_state = "sci_headset_alt"
 
@@ -101,18 +100,6 @@
 	icon_state = "srv_headset_alt"
 	item_state = "headset"
 	max_keys = 3
-
-/obj/item/device/radio/headset/sea
-	name = "senior enlisted advisor's headset"
-	desc = "A headset for the guy or gal who advises the enlisted whilst from a position of seniority."
-	icon_state = "com_headset"
-	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/heads/sea
-
-/obj/item/device/radio/headset/sea/alt
-	name = "senior enlisted advisor's bowman headset"
-	icon_state = "com_headset_alt"
-	item_state = "com_headset_alt"
 
 /obj/item/device/radio/headset/bridgeofficer
 	name = "bridge officer's headset"
