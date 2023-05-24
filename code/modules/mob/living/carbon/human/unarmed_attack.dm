@@ -108,7 +108,6 @@ var/global/list/sparring_attack_cache = list()
 /datum/unarmed_attack/proc/show_attack(mob/living/carbon/human/user, mob/living/carbon/human/target, zone, attack_damage)
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
 	user.visible_message(SPAN_WARNING("[user] [pick(attack_verb)] [target] in the [affecting.name]!"))
-	playsound(user.loc, attack_sound, 25, 1, -1)
 
 /datum/unarmed_attack/proc/handle_eye_attack(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	var/obj/item/organ/internal/eyes/eyes = target.internal_organs_by_name[BP_EYES]
@@ -282,7 +281,5 @@ var/global/list/sparring_attack_cache = list()
 	attack_noun = list("tap","light strike")
 	attack_verb = list("tapped", "lightly struck")
 	damage = 0
-	sharp = TRUE
-	edge = TRUE
 	attack_name = "light hit"
 	should_attack_log = FALSE
