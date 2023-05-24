@@ -1,0 +1,6 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - tweak: OFDs can now take coordinates.
+  - tweak: Accuracy depending on calibration.
+  - tweak: People on the receiving end will feel the effects of an explosion.
