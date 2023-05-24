@@ -104,6 +104,7 @@
 	if(Proj.ricochet_sounds && prob(15))
 		playsound(src, pick(Proj.ricochet_sounds), 100, 1)
 
+	create_bullethole(Proj)//Potentially infinite bullet holes but most walls don't last long enough for this to be a problem.
 	..()
 
 /turf/simulated/wall/proc/clear_plants()
@@ -118,6 +119,7 @@
 
 /turf/simulated/wall/ChangeTurf(newtype, tell_universe = TRUE, force_lighting_update = FALSE, keep_air = FALSE)
 	clear_plants()
+	clear_bulletholes()
 	. = ..(newtype, tell_universe, force_lighting_update, keep_air)
 	var/turf/new_turf = .
 	for (var/turf/simulated/wall/W in RANGE_TURFS(new_turf, 1))
@@ -201,6 +203,7 @@
 			O.forceMove(src)
 
 	clear_plants()
+	clear_bulletholes()
 	material = SSmaterials.get_material_by_name("placeholder")
 	reinf_material = null
 	update_connections(1)
