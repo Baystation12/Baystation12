@@ -204,11 +204,11 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if (!silent)
 			FEEDBACK_UNEQUIP_FAILURE(src, target)
 		return FALSE
-	if (HAS_FLAGS(flags, SANITY_CHECK_INTERACT) && !CanInteractWith(src, target, target.DefaultTopicState()))
+	if (HAS_FLAGS(flags, SANITY_CHECK_TOPIC_INTERACT) && !CanInteractWith(src, target, target.DefaultTopicState()))
 		if (!silent)
 			FEEDBACK_FAILURE(src, "You can't interact with \the [src].")
 		return FALSE
-	if (HAS_FLAGS(flags, SANITY_CHECK_PHYSICALLY_INTERACT) && !CanPhysicallyInteractWith(src, target))
+	if (HAS_FLAGS(flags, SANITY_CHECK_TOPIC_PHYSICALLY_INTERACT) && !CanPhysicallyInteractWith(src, target))
 		if (!silent)
 			FEEDBACK_FAILURE(src, "You can't physically interact with \the [src].")
 		return FALSE
