@@ -1459,10 +1459,7 @@
 	monkey_type = /mob/living/simple_animal/hostile/carp/pike
 
 //define human cubes here
-<<<<<<< refs/remotes/ActualBay/dev
-<<<<<<< refs/remotes/ActualBay/dev
-=======
->>>>>>> more progress on humancube
+
 /obj/item/reagent_containers/food/snacks/humancube
 	name = "odd cube"
 	desc = "A strange looking monkey cube that pulsates and writhes disturbingly"
@@ -1481,112 +1478,42 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
 
 
-/obj/item/reagent_containers/food/snacks/humancube/proc/HumanExpand(var/datum/source_DNA)
-	var/datum/injected_DNA
-	var/datum/injected_name
-	var/datum/injected_pronouns
-	var/datum/injected_species
-	var/datum/injected_gender
-	var/datum/modified
-	for(var/mob/living/carbon/M in SSmobs.mob_list)
-		if(!M.dna)
-			continue
-		if(M.dna.unique_enzymes == source_DNA)
-			injected_DNA = M.dna
-			injected_name = M.real_name
-			injected_pronouns = M.pronouns
-			injected_gender = M.gender
-			//injected_species = M.species.name
-			modified = M
-			break
+/obj/item/reagent_containers/food/snacks/humancube/proc/HumanExpand(var/datum/source_DNA,var/datum/source_name,var/datum/source_species,var/datum/source_pronouns)
 	if(!growing)
 		growing = 1
+		//may need tweaks for other species
 		var/mob/living/carbon/human/H = new spawn_type
-		H.dna = injected_DNA
-		H.real_name = injected_name
-		H.name = injected_name
-		H.setBrainLoss(200)
-		H.change_gender(injected_gender)
-		H.change_pronouns(injected_pronouns)
+		H.dna = source_DNA
+		//temporary, will probably make this based on faction of person injected
+		H.faction = "crew"
+		H.real_name = source_name
+		H.SetName(source_name)
+		H.dna.real_name = source_name
+		H.pronouns = source_pronouns
+		H.change_pronouns(source_pronouns)
+		//src.visible_message(SPAN_WARNING("[injected_species] is the species injected!"))
+		//H.change_species(injected_species)
 		src.visible_message(SPAN_WARNING("[src] transforms!"))
 		H.dropInto(src.loc)
+		H.setBrainLoss(200)
+		H.adjustOxyLoss(H.maxHealth)
 		domutcheck(H, null)
 		H.UpdateAppearance()
 		qdel(src)
 
 /obj/item/reagent_containers/food/snacks/humancube/on_reagent_change()
 	var/datum/target_DNA = ""
+	var/datum/target_name = ""
+	var/datum/target_species = ""
+	var/datum/target_pronouns= ""
 	if(reagents.has_reagent(/datum/reagent/blood))
 		for(var/datum/reagent/blood/B in src.reagents.reagent_list)
 			src.visible_message(SPAN_NOTICE("\The [src] twitches as the blood touches it, rapidly twisting and expanding with a squelching sound"))
-			target_DNA = B.data["blood_DNA"]
-
-		HumanExpand(target_DNA)
-
-
-
-//define human cubes here
-/obj/item/reagent_containers/food/snacks/humancube
-	name = "odd cube"
-	desc = "A strange looking monkey cube that pulsates and writhes disturbingly"
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
-	icon_state = "monkeycube"
-	bitesize = 12
-	filling_color = "#adac7f"
-	center_of_mass = "x=16;y=14"
-
-	var/wrapped = 0
-	var/growing = 0
-	var/spawn_type = /mob/living/carbon/human
-
-/obj/item/reagent_containers/food/snacks/humancube/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
-
-
-/obj/item/reagent_containers/food/snacks/humancube/proc/HumanExpand(var/datum/source_DNA)
-	var/datum/injected_DNA
-	var/datum/injected_name
-	var/datum/injected_pronouns
-	var/datum/injected_species
-	var/datum/injected_gender
-	var/datum/modified
-	for(var/mob/living/carbon/M in SSmobs.mob_list)
-		if(!M.dna)
-			continue
-		if(M.dna.unique_enzymes == source_DNA)
-			injected_DNA = M.dna
-			injected_name = M.real_name
-			injected_pronouns = M.pronouns
-			injected_gender = M.gender
-			//injected_species = M.species.name
-			modified = M
-			break
-	if(!growing)
-		growing = 1
-		var/mob/living/carbon/human/H = new spawn_type
-		H.dna = injected_DNA
-		H.real_name = injected_name
-		H.name = injected_name
-		H.setBrainLoss(200)
-		H.change_gender(injected_gender)
-		H.change_pronouns(injected_pronouns)
-		src.visible_message(SPAN_WARNING("[src] transforms!"))
-		H.dropInto(src.loc)
-		domutcheck(H, null)
-		H.UpdateAppearance()
-		qdel(src)
-
-/obj/item/reagent_containers/food/snacks/humancube/on_reagent_change()
-	var/datum/target_DNA = ""
-	if(reagents.has_reagent(/datum/reagent/blood))
-		for(var/datum/reagent/blood/B in src.reagents.reagent_list)
-			src.visible_message(SPAN_NOTICE("\The [src] twitches as the blood touches it, rapidly twisting and expanding with a squelching sound"))
-			target_DNA = B.data["blood_DNA"]
-
-		HumanExpand(target_DNA)
-
-
+			target_DNA = B.data["full_DNA"]
+			target_name = B.data["blood_real_name"]
+			target_species = B.data["species"]
+			target_pronouns = B.data["pronouns"]
+		HumanExpand(target_DNA,target_name,target_species,target_pronouns)
 
 /obj/item/reagent_containers/food/snacks/spellburger
 	name = "spell burger"
