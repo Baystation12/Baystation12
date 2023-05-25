@@ -1,0 +1,5 @@
+author: Juxtaposed, Ryan180602
+delete-after: true
+changes:
+  - tweak: Add wirehack mechanics to disarm TTVs.
+  - tweak: TTVs need to be armed before they can be activated via the interface.
