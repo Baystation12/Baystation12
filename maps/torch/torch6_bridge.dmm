@@ -3793,14 +3793,6 @@
 /obj/effect/floor_decal/corner/red/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/bridge/fore)
-"hH" = (
-/obj/machinery/camera/network/command{
-	c_tag = "Bridge Exterior";
-	dir = 8
-	},
-/obj/structure/lattice,
-/turf/space,
-/area/space)
 "hI" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 1
@@ -5966,13 +5958,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
-"oA" = (
-/obj/structure/lattice,
-/obj/machinery/camera/network/command{
-	c_tag = "Bridge Exterior - Starboard"
-	},
-/turf/space,
-/area/space)
 "oB" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/bridge/foreport)
@@ -6744,13 +6729,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
-"qA" = (
-/obj/machinery/camera/network/command{
-	c_tag = "Bridge Exterior - Port";
-	dir = 1
-	},
-/turf/space,
-/area/space)
 "qB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -22891,7 +22869,7 @@ zx
 aa
 aa
 ae
-qA
+aa
 tg
 tg
 tg
@@ -23076,13 +23054,13 @@ af
 af
 af
 af
-oA
+ae
 aa
 aa
 vA
 aa
 aa
-hH
+ae
 aa
 aa
 aa

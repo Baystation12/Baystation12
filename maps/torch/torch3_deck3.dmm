@@ -15338,11 +15338,6 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/service_break_room)
-"LB" = (
-/obj/machinery/portable_atmospherics/powered/scrubber,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/techfloor,
-/area/maintenance/thirddeck/foreport)
 "LC" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 8
@@ -17184,6 +17179,8 @@
 	pixel_y = -22
 	},
 /obj/random_multi/single_item/punitelly,
+/obj/machinery/portable_atmospherics/powered/scrubber,
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/thirddeck)
 "QC" = (
@@ -18663,9 +18660,6 @@
 /obj/machinery/computer/modular/preset/civilian{
 	dir = 1;
 	icon_state = "console"
-	},
-/obj/structure/window/reinforced{
-	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
@@ -20446,9 +20440,6 @@
 /obj/machinery/computer/modular/preset/civilian{
 	dir = 1;
 	icon_state = "console"
-	},
-/obj/structure/window/reinforced{
-	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
@@ -34734,7 +34725,7 @@ xU
 dE
 up
 Vx
-LB
+Yb
 Wq
 Qz
 Bm
