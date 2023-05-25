@@ -1,4 +1,6 @@
 {
+  "editor.renderWhitespace": "all",
+
   "files.eol": "\n",
   "files.encoding": "utf8",
   "files.insertFinalNewline": true,
@@ -41,6 +43,7 @@
 
   "gitlens.advanced.blame.customArguments": [
     "--ignore-revs-file", ".git-blame-ignore-revs"
-],
-"diffEditor.ignoreTrimWhitespace": false
+  ],
+
+  "diffEditor.ignoreTrimWhitespace": false
 }
