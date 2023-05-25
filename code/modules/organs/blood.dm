@@ -200,7 +200,6 @@
 	data["donor"] = weakref(src)
 	data["blood_DNA"] = dna.unique_enzymes
 	data["full_DNA"] = dna
-	data["gender"] = src.gender
 	data["pronouns"] = src.pronouns
 	data["blood_real_name"] = dna.real_name
 	data["blood_type"] = dna.b_type
