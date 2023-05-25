@@ -112,21 +112,20 @@
 	return
 
 
-/obj/item/device/assembly_holder/attackby(obj/item/W as obj, mob/user as mob)
-	if(isScrewdriver(W))
-		if(!a_left || !a_right)
-			to_chat(user, SPAN_WARNING("BUG:Assembly part missing, please report this!"))
-			return
+/obj/item/device/assembly_holder/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Toggle secured
+	if (isScrewdriver(tool))
 		a_left.toggle_secure()
 		a_right.toggle_secure()
 		secured = !secured
-		if(secured)
-			to_chat(user, SPAN_NOTICE("\The [src] is ready!"))
-		else
-			to_chat(user, SPAN_NOTICE("\The [src] can now be taken apart!"))
 		update_icon()
-		return
-	..()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adjusts \a [src] with \a [tool]."),
+			SPAN_NOTICE("You adjust \the [src] with \the [tool]. It [secured ? "is now ready to use" : "can now be taken apart"].")
+		)
+		return TRUE
+
+	return ..()
 
 
 /obj/item/device/assembly_holder/attack_self(mob/user as mob)

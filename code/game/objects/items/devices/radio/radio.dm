@@ -596,21 +596,37 @@
 		if (power_usage && cell)
 			to_chat(user, SPAN_NOTICE("\The [src] charge meter reads [round(cell.percent(), 0.1)]%."))
 
-/obj/item/device/radio/attackby(obj/item/W as obj, mob/user as mob)
-	..()
-	user.set_machine(src)
-	if(isScrewdriver(W))
+
+/obj/item/device/radio/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Make attachable
+	if (isScrewdriver(tool))
 		b_stat = !b_stat
-		if (b_stat)
-			user.show_message(SPAN_NOTICE("\The [src] can now be attached and modified!"))
-		else
-			user.show_message(SPAN_NOTICE("\The [src] can no longer be modified or attached!"))
-		updateDialog()
-		return
-	if(!cell && power_usage && istype(W, /obj/item/cell/device) && user.unEquip(W, target = src))
-		to_chat(user, SPAN_NOTICE("You put [W] in \the [src]."))
-		cell = W
-		return
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adjusts \a [src] with \a [tool]."),
+			SPAN_NOTICE("You adjust \the [src] with \the [tool]. It can [b_stat ? "now" : "no longer"] be attached or modified.")
+		)
+		return TRUE
+
+	// Device Cell - Install power cell
+	if (istype(tool, /obj/item/cell/device))
+		if (!power_usage)
+			USE_FEEDBACK_FAILURE("\The [src] doesn't need a power cell.")
+			return TRUE
+		if (cell)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [cell] installed.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		cell = tool
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \a [src]."),
+			SPAN_NOTICE("You install \the [tool] into \the [src].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/device/radio/emp_act(severity)
 	broadcasting = prob(50)
@@ -677,38 +693,45 @@
 		var/datum/robot_component/C = R.components["radio"]
 		R.cell_use_power(C.active_usage)
 
-/obj/item/device/radio/borg/attackby(obj/item/W as obj, mob/user as mob)
-//	..()
-	user.set_machine(src)
-	if (!( isScrewdriver(W) || (istype(W, /obj/item/device/encryptionkey/ ))))
-		return
 
-	if(isScrewdriver(W))
-		if(keyslot)
-			for(var/ch_name in channels)
-				radio_controller.remove_object(src, radiochannels[ch_name])
-				secure_radio_connections[ch_name] = null
-
-			if(keyslot)
-				keyslot.dropInto(user.loc)
-
-			recalculateChannels()
-			to_chat(user, "You pop out the encryption key in the radio!")
-
-		else
-			to_chat(user, "This radio doesn't have any encryption keys!")
-
-	if(istype(W, /obj/item/device/encryptionkey))
-		if(keyslot)
-			to_chat(user, "The radio can't hold another key!")
-			return
-
-		if(!keyslot)
-			if(!user.unEquip(W, src))
-				return
-			keyslot = W
-
+/obj/item/device/radio/borg/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Encryption Key - Insert key
+	if (istype(tool, /obj/item/device/encryptionkey))
+		if (keyslot)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [keyslot] installed.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		keyslot = tool
 		recalculateChannels()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] slots \a [tool] into \a [src]."),
+			SPAN_NOTICE("You slot \the [tool] into \the [src]."),
+			range = 2
+		)
+		return TRUE
+
+	// Screwdriver - Remove encryption key
+	if (isScrewdriver(tool))
+		if (!keyslot)
+			USE_FEEDBACK_FAILURE("\The [src] doesn't have an encryption key to remove.")
+			return TRUE
+		for (var/channel_name in channels)
+			radio_controller.remove_object(src, radiochannels[channel_name])
+			secure_radio_connections[channel_name] = null
+		user.put_in_hands(keyslot)
+		recalculateChannels()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] pops \a [keyslot] out of \a [src] with \a [tool]."),
+			SPAN_NOTICE("You pop \the [keyslot] out of \the [src] with \the [tool]."),
+			range = 2
+		)
+		keyslot = null
+		return TRUE
+
+	return ..()
+
 
 /obj/item/device/radio/borg/recalculateChannels()
 	src.channels = list()

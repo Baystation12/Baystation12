@@ -44,24 +44,39 @@
 /obj/item/device/suit_sensor_jammer/get_cell()
 	return bcell
 
-/obj/item/device/suit_sensor_jammer/attackby(obj/item/I as obj, mob/user as mob)
-	if(isCrowbar(I))
-		if(bcell)
-			to_chat(user, SPAN_NOTICE("You remove \the [bcell]."))
-			disable()
-			bcell.dropInto(loc)
-			bcell = null
-		else
-			to_chat(user, SPAN_WARNING("There is no cell to remove."))
-	else if(istype(I, /obj/item/cell))
-		if(bcell)
-			to_chat(user, SPAN_WARNING("There's already a cell in \the [src]."))
-		else if(user.unEquip(I))
-			I.forceMove(src)
-			bcell = I
-			to_chat(user, SPAN_NOTICE("You insert \the [bcell] into \the [src].."))
-		else
-			to_chat(user, SPAN_WARNING("You're unable to insert the battery."))
+
+/obj/item/device/suit_sensor_jammer/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Crowbar - Remove cell
+	if (isCrowbar(tool))
+		if (!bcell)
+			USE_FEEDBACK_FAILURE("\The [src] has no cell to remove.")
+			return TRUE
+		disable()
+		user.put_in_hands(bcell)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \a [bcell] from \a [src] with \a [tool]."),
+			SPAN_NOTICE("You remove \the [bcell] from \the [src] with \the [tool].")
+		)
+		bcell = null
+		return TRUE
+
+	// Power Cell - Install cell
+	if (istype(tool, /obj/item/cell))
+		if (bcell)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [bcell] installed.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		bcell = tool
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \a [src]."),
+			SPAN_NOTICE("you install \the [tool] into \the [src].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/device/suit_sensor_jammer/on_update_icon()
 	overlays.Cut()

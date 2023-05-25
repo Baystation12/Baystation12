@@ -43,47 +43,65 @@
 	var/mob/living/carbon/brain/brainmob = null//The current occupant.
 	var/obj/item/organ/internal/brain/brainobj = null	//The current brain organ.
 
-/obj/item/device/mmi/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O,/obj/item/organ/internal/brain) && !brainmob) //Time to stick a brain in it --NEO
 
-		var/obj/item/organ/internal/brain/B = O
-		if(B.damage >= B.max_damage)
-			to_chat(user, SPAN_WARNING("That brain is well and truly dead."))
-			return
-		else if(!B.brainmob || !B.can_use_mmi)
-			to_chat(user, SPAN_NOTICE("This brain is completely useless to you."))
-			return
-		if(!user.unEquip(O, src))
-			return
-		user.visible_message(SPAN_NOTICE("\The [user] sticks \a [O] into \the [src]."))
-
-		brainmob = B.brainmob
-		B.brainmob = null
+/obj/item/device/mmi/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Brain - Install brain
+	if (istype(tool, /obj/item/organ/internal/brain))
+		if (brainobj)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [brainobj].")
+			return TRUE
+		var/obj/item/organ/internal/brain/brain = tool
+		if (brain.damage >= brain.max_damage)
+			USE_FEEDBACK_FAILURE("\The [tool] is too damaged to install in \the [src].")
+			return TRUE
+		if (!brain.brainmob || !brain.can_use_mmi)
+			USE_FEEDBACK_FAILURE("\The [src] doesn't accept \the [tool].")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		brainmob = brain.brainmob
+		brain.brainmob = null
 		brainmob.forceMove(src)
 		brainmob.container = src
 		brainmob.set_stat(CONSCIOUS)
-		brainmob.switch_from_dead_to_living_mob_list() //Update dem lists
-
-		brainobj = O
-
+		brainmob.switch_from_dead_to_living_mob_list()
+		brainobj = brain
 		SetName("[initial(name)]: ([brainmob.real_name])")
+		locked = TRUE
 		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \a [src]."),
+			SPAN_NOTICE("You install \the [tool] into \the [src].")
+		)
+		return TRUE
 
-		locked = 1
+	// ID - Toggle MMI lock
+	var/obj/item/card/id/id = tool.GetIdCard()
+	if (istype(id))
+		if (!brainmob)
+			USE_FEEDBACK_FAILURE("\The [src] has no brain to lock.")
+			return TRUE
+		var/id_name = GET_ID_NAME(id, tool)
+		if (!check_access(id))
+			USE_FEEDBACK_ID_CARD_DENIED(src, id_name)
+			return TRUE
+		locked = !locked
+		user.visible_message(
+			SPAN_NOTICE("\The [user] toggles \a [src]'s lock with \a [tool]."),
+			SPAN_NOTICE("You [locked ? "lock" : "unlock"] \the [src] with [id_name].")
+		)
+		return TRUE
 
-		return
+	return ..()
 
-	if((istype(O,/obj/item/card/id)||istype(O,/obj/item/modular_computer)) && brainmob)
-		if(allowed(user))
-			locked = !locked
-			to_chat(user, SPAN_NOTICE("You [locked ? "lock" : "unlock"] the brain holder."))
-		else
-			to_chat(user, SPAN_WARNING("Access denied."))
-		return
-	if(brainmob)
-		O.attack(brainmob, user)//Oh noooeeeee
-		return
-	..()
+
+/obj/item/device/mmi/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	if (brainmob && weapon.attack(brainmob, user))
+		return TRUE
+
+	return ..()
+
 
 	//TODO: ORGAN REMOVAL UPDATE. Make the brain remain in the MMI so it doesn't lose organ data.
 /obj/item/device/mmi/attack_self(mob/user as mob)

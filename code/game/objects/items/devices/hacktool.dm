@@ -23,12 +23,20 @@
 	hack_state = null
 	return ..()
 
-/obj/item/device/multitool/hacktool/attackby(obj/W, mob/user)
-	if(isScrewdriver(W))
+
+/obj/item/device/multitool/hacktool/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Toggle hack mode
+	if (isScrewdriver(tool))
 		in_hack_mode = !in_hack_mode
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-	else
-		..()
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adjusts \a [src] with \a [tool]."),
+			SPAN_NOTICE("You adjust \the [src] with \the [tool]. It is now in [in_hack_mode ? "hacking" : "normal"] mode.")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/device/multitool/hacktool/resolve_attackby(atom/A, mob/user)
 	sanity_check()

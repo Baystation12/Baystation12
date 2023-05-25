@@ -96,19 +96,29 @@
 	if(distance <= 2)
 		to_chat(user, SPAN_NOTICE("Used to extract geological core samples - this one is [sampled_turf ? "full" : "empty"], and has [num_stored_bags] bag[num_stored_bags != 1 ? "s" : ""] remaining."))
 
-/obj/item/device/core_sampler/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/evidencebag))
-		if(length(I.contents))
-			to_chat(user, SPAN_WARNING("\The [I] is full."))
-			return
-		if(num_stored_bags < 10)
-			qdel(I)
-			num_stored_bags += 1
-			to_chat(user, SPAN_NOTICE("You insert \the [I] into \the [src]."))
-		else
-			to_chat(user, SPAN_WARNING("\The [src] can not fit any more bags."))
-	else
-		return ..()
+
+/obj/item/device/core_sampler/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Evidence Bag - Insert bag
+	if (istype(tool, /obj/item/evidencebag))
+		if (length(tool.contents))
+			USE_FEEDBACK_FAILURE("\The [tool] needs to be empty to add it to \the [src].")
+			return TRUE
+		if (num_stored_bags >= 10)
+			USE_FEEDBACK_FAILURE("\The [src] can't hold any more bags.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		num_stored_bags++
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adds \a [tool] to \a [src]."),
+			SPAN_NOTICE("You add \the [tool] to \the [src]. It now holds [num_stored_bags].")
+		)
+		qdel(tool)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/device/core_sampler/proc/sample_item(item_to_sample, mob/user)
 	var/datum/geosample/geo_data

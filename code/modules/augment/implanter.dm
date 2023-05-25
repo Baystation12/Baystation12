@@ -31,26 +31,32 @@
 	augment.examine(user)
 
 
-/obj/item/device/augment_implanter/attackby(obj/item/I, mob/living/user)
-	if (isCrowbar(I) && augment)
+/obj/item/device/augment_implanter/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Crowbar - Remove augment
+	if (isCrowbar(tool))
+		if (!augment)
+			USE_FEEDBACK_FAILURE("\The [src] has no augment to remove.")
+			return TRUE
+		playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_ITALIC("\The [user] starts to remove \the [augment] from \the [src]."),
-			SPAN_WARNING("You start to remove \the [augment] from \the [src]."),
-			SPAN_ITALIC("You hear metal creaking.")
+			SPAN_NOTICE("\The [user] starts to remove \a [augment] from \a [src] with \a [tool]."),
+			SPAN_NOTICE("You start to remove \a [augment] from \the [src] with \the [tool].")
 		)
-		playsound(user, 'sound/items/Crowbar.ogg', 50, TRUE)
-		if (!do_after(user, (I.toolspeed * 10) SECONDS, src, DO_PUBLIC_UNIQUE) || !augment)
-			return
-		user.visible_message(
-			SPAN_ITALIC("\The [user] removes \the [augment] from \the [src]."),
-			SPAN_WARNING("You remove \the [augment] from \the [src]."),
-			SPAN_ITALIC("You hear a clunk.")
-		)
-		playsound(user, 'sound/items/Deconstruct.ogg', 50, TRUE)
+		if (!do_after(user, (tool.toolspeed * 10) SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (!augment)
+			USE_FEEDBACK_FAILURE("\The [src] has no augment to remove.")
+			return TRUE
 		user.put_in_hands(augment)
+		playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \a [augment] from \a [src] with \a [tool]."),
+			SPAN_NOTICE("You remove \a [augment] from \the [src] with \the [tool].")
+		)
 		augment = null
-		return
-	..()
+		return TRUE
+
+	return ..()
 
 
 /obj/item/device/augment_implanter/attack_self(mob/living/carbon/human/user)

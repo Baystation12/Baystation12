@@ -40,12 +40,16 @@
 /obj/item/device/spy_bug/attack_self(mob/user)
 	radio.attack_self(user)
 
-/obj/item/device/spy_bug/attackby(obj/W as obj, mob/living/user as mob)
-	if(istype(W, /obj/item/device/spy_monitor))
-		var/obj/item/device/spy_monitor/SM = W
-		SM.pair(src, user)
-	else
-		..()
+
+/obj/item/device/spy_bug/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Spy Monitor - Pair device
+	if (istype(tool, /obj/item/device/spy_monitor))
+		var/obj/item/device/spy_monitor/spy_monitor = tool
+		spy_monitor.pair(src, user)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/device/spy_bug/hear_talk(mob/M, msg, verb, datum/language/speaking)
 	radio.hear_talk(M, msg, speaking)
@@ -87,11 +91,15 @@
 	radio.attack_self(user)
 	view_cameras(user)
 
-/obj/item/device/spy_monitor/attackby(obj/W as obj, mob/living/user as mob)
-	if(istype(W, /obj/item/device/spy_bug))
-		pair(W, user)
-	else
-		return ..()
+
+/obj/item/device/spy_monitor/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Spy Bug - Pair device
+	if (istype(tool, /obj/item/device/spy_bug))
+		pair(tool, user)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/device/spy_monitor/proc/pair(obj/item/device/spy_bug/SB, mob/living/user)
 	if(SB.camera in cameras)

@@ -18,26 +18,38 @@
 		return
 	..()
 
-/obj/item/device/radio/electropack/attackby(obj/item/W as obj, mob/user as mob)
-	..()
-	if(istype(W, /obj/item/clothing/head/helmet))
-		if(!b_stat)
-			to_chat(user, SPAN_NOTICE("[src] is not ready to be attached!"))
-			return
-		if(!user.unEquip(W) || !user.unEquip(src))
-			return
-		var/obj/item/assembly/shock_kit/A = new /obj/item/assembly/shock_kit( user )
-		A.icon = 'icons/obj/assemblies.dmi'
 
-		W.forceMove(A)
-		W.master = A
-		A.part1 = W
+/obj/item/device/radio/electropack/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Helmet - Attach helmet
+	if (istype(tool, /obj/item/clothing/head/helmet))
+		if (!b_stat)
+			USE_FEEDBACK_FAILURE("\The [src] is not ready to be attached.")
+			return TRUE
+		if (!user.unEquip(tool))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		if (!user.unEquip(src))
+			FEEDBACK_UNEQUIP_FAILURE(user, src)
+			return TRUE
+		var/obj/item/assembly/shock_kit/shock_kit = new(user)
+		user.put_in_hands(shock_kit)
+		tool.forceMove(shock_kit)
+		tool.master = shock_kit
+		tool.transfer_fingerprints_to(shock_kit)
+		shock_kit.part1 = tool
+		forceMove(shock_kit)
+		master = shock_kit
+		shock_kit.part2 = src
+		transfer_fingerprints_to(shock_kit)
+		shock_kit.add_fingerprint(user)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] attaches \a [src] to \a [tool] to create \a [shock_kit]."),
+			SPAN_NOTICE("You attach \the [src] to \the [tool] to create \the [shock_kit].")
+		)
+		return TRUE
 
-		forceMove(A)
-		master = A
-		A.part2 = src
+	return ..()
 
-		user.put_in_hands(A)
 
 /obj/item/device/radio/electropack/Topic(href, href_list)
 	//..()

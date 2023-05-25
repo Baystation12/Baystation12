@@ -43,23 +43,33 @@
 	return ..()
 
 
-/obj/item/device/taperecorder/attackby(obj/item/I, mob/user, params)
-	if(isScrewdriver(I))
+/obj/item/device/taperecorder/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Toggle maintenance cover
+	if (isScrewdriver(tool))
 		maintenance = !maintenance
-		to_chat(user, SPAN_NOTICE("You [maintenance ? "open" : "secure"] the lid."))
-		return
-	if(istype(I, /obj/item/device/tape))
-		if(mytape)
-			to_chat(user, SPAN_NOTICE("There's already a tape inside."))
-			return
-		if(!user.unEquip(I))
-			return
-		I.forceMove(src)
-		mytape = I
-		to_chat(user, SPAN_NOTICE("You insert [I] into [src]."))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [maintenance ? "opens" : "closes"] \a [src]'s lid with \a [tool]."),
+			SPAN_NOTICE("You [maintenance ? "open" : "close"] \the [src]'s lid with \the [tool].")
+		)
+		return TRUE
+
+	// Tape - Insert tape
+	if (istype(tool, /obj/item/device/tape))
+		if (mytape)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [mytape] inside.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		mytape = tool
 		update_icon()
-		return
-	..()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] inserts \a [tool] into \a [src]."),
+			SPAN_NOTICE("You insert \the [tool] into \the [src].")
+		)
+		return TRUE
+
+	return ..()
 
 
 /obj/item/device/taperecorder/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -443,35 +453,59 @@
 	storedinfo += "*\[[time2text(used_capacity*10,"mm:ss")]\] [text]"
 
 
-/obj/item/device/tape/attackby(obj/item/I, mob/user, params)
-	if(user.incapacitated())
-		return
-	if(ruined && isScrewdriver(I))
-		if(!max_capacity)
-			to_chat(user, SPAN_NOTICE("There is no tape left inside."))
-			return
-		to_chat(user, SPAN_NOTICE("You start winding the tape back in..."))
-		if(do_after(user, 12 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(user, SPAN_NOTICE("You wound the tape back in."))
-			fix()
-		return
-	else if(istype(I, /obj/item/pen))
-		if(loc == user)
-			var/new_name = input(user, "What would you like to label the tape?", "Tape labeling") as null|text
-			if(isnull(new_name)) return
-			new_name = sanitizeSafe(new_name)
-			if(new_name)
-				SetName("tape - '[new_name]'")
-				to_chat(user, SPAN_NOTICE("You label the tape '[new_name]'."))
-			else
-				SetName("tape")
-				to_chat(user, SPAN_NOTICE("You scratch off the label."))
-		return
-	else if(isWirecutter(I))
+/obj/item/device/tape/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Magnetic Tape - Join tape
+	if (istype(tool, /obj/item/device/tape/loose))
+		join(user, tool)
+		return TRUE
+
+	// Pen - Label tape
+	if (istype(tool, /obj/item/pen))
+		var/input = input(user, "What would you like to label the tape?", "[initial(name)] - Label") as null|text
+		input = sanitizeSafe(input, MAX_NAME_LEN)
+		if (!input || !user.use_sanity_check(src, tool))
+			return TRUE
+		SetName("[initial(name)] - '[input]'")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] labels \a [src] with \a [tool]."),
+			SPAN_NOTICE("You label \the [src] with \the [tool].")
+		)
+		return TRUE
+
+	// Screwdriver - Fix tape
+	if (isScrewdriver(tool))
+		if (!max_capacity)
+			USE_FEEDBACK_FAILURE("\The [src] has no tape to wind.")
+			return TRUE
+		if (!ruined)
+			USE_FEEDBACK_FAILURE("\The [src]'s tape doesn't need re-winding.")
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts winding \a [src]'s tape back in with \a [tool]."),
+			SPAN_NOTICE("You start winding \the [src]'s tape back in with \the [tool].")
+		)
+		if (!do_after(user, 12 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (!max_capacity)
+			USE_FEEDBACK_FAILURE("\The [src] has no tape to wind.")
+			return TRUE
+		if (!ruined)
+			USE_FEEDBACK_FAILURE("\The [src]'s tape doesn't need re-winding.")
+			return TRUE
+		fix()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] winds \a [src]'s tape back in with \a [tool]."),
+			SPAN_NOTICE("You wind \the [src]'s tape back in with \the [tool].")
+		)
+		return TRUE
+
+	// Wirecutter - Cut tape
+	if (isWirecutter(tool))
 		cut(user)
-	else if(istype(I, /obj/item/device/tape/loose))
-		join(user, I)
-	..()
+		return TRUE
+
+	return ..()
+
 
 /obj/item/device/tape/proc/cut(mob/user)
 	if(!LAZYLEN(timestamp))

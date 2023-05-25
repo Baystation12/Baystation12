@@ -96,20 +96,29 @@
 	return 0
 
 
-/obj/item/device/assembly/attackby(obj/item/W as obj, mob/user as mob)
-	if(isassembly(W))
-		var/obj/item/device/assembly/A = W
-		if((!A.secured) && (!secured))
-			attach_assembly(A,user)
-			return
-	if(isScrewdriver(W))
-		if(toggle_secure())
-			to_chat(user, SPAN_NOTICE("\The [src] is ready!"))
-		else
-			to_chat(user, SPAN_NOTICE("\The [src] can now be attached!"))
-		return
-	..()
-	return
+/obj/item/device/assembly/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Assembly - Attach assembly
+	if (isassembly(tool))
+		if (secured)
+			USE_FEEDBACK_FAILURE("\The [src] is not ready to be modified or attached.")
+			return TRUE
+		var/obj/item/device/assembly/assembly = tool
+		if (!assembly.secured)
+			USE_FEEDBACK_FAILURE("\The [tool] is not ready to be modified or attached.")
+			return TRUE
+		attach_assembly(tool, user)
+		return TRUE
+
+	// Screwdriver - Toggle secured
+	if (isScrewdriver(tool))
+		toggle_secure()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adjusts \a [src] with \a [tool]."),
+			SPAN_NOTICE("You adjust \the [src] with \the [tool]. It [secured ? "is now ready to use" : "can now be taken apart"].")
+		)
+		return TRUE
+
+	return ..()
 
 
 /obj/item/device/assembly/Process()

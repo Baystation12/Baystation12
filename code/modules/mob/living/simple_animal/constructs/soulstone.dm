@@ -64,24 +64,46 @@
 		icon_state = "soulstone"//TODO: cracked sprite
 		SetName("cracked soulstone")
 
-/obj/item/device/soulstone/attackby(obj/item/I, mob/user)
-	..()
-	if (owner_flag != SOULSTONE_OWNER_PURE && istype(I, /obj/item/nullrod))
-		to_chat(user, SPAN_NOTICE("You cleanse \the [src] of taint, purging its shackles to its creator.."))
+
+/obj/item/device/soulstone/use_weapon(obj/item/weapon, mob/user, list/click_params)
+	if (weapon.force < 5)
+		return ..()
+
+	if (full == SOULSTONE_CRACKED)
+		user.visible_message(
+			SPAN_WARNING("\The [user] shatters \a [src] with \a [weapon]!"),
+			SPAN_DANGER("You shatter \the [src] with \the [weapon]!")
+		)
+		shatter()
+		return TRUE
+
+	playsound(src, 'sound/effects/Glasshit.ogg', 75, TRUE)
+	set_full(SOULSTONE_CRACKED)
+	var/scream = ""
+	if (shade?.client)
+		scream = "You hear a terrible scream!"
+	user.visible_message(
+		SPAN_WARNING("\The [user] hits \a [src] with \a [weapon], and it cracks. [scream]"),
+		SPAN_WARNING("You hit \the [src] with \the [weapon], and it cracks. [scream]")
+	)
+	return TRUE
+
+
+/obj/item/device/soulstone/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Null Rod - Purify stone
+	if (istype(tool, /obj/item/nullrod))
+		if (owner_flag == SOULSTONE_OWNER_PURE)
+			USE_FEEDBACK_FAILURE("\The [src] is already pure.")
+			return TRUE
 		owner_flag = SOULSTONE_OWNER_PURE
-		return
-	if(I.force >= 5)
-		if(full != SOULSTONE_CRACKED)
-			user.visible_message(
-				SPAN_WARNING("\The [user] hits \the [src] with \the [I], and it breaks.[shade.client ? " You hear a terrible scream!" : ""]"),
-				SPAN_WARNING("You hit \the [src] with \the [I], and it cracks.[shade.client ? " You hear a terrible scream!" : ""]"),
-				shade.client ? "You hear a scream." : null
-			)
-			playsound(loc, 'sound/effects/Glasshit.ogg', 75)
-			set_full(SOULSTONE_CRACKED)
-		else
-			user.visible_message(SPAN_DANGER("\The [user] shatters \the [src] with \the [I]!"))
-			shatter()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] waves \a [tool] over \a [src]."),
+			SPAN_NOTICE("You cleanse \the [src] of taint with \the [tool], purging its shackles to its creator...")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/device/soulstone/attack(mob/living/simple_animal/M, mob/user)
 	if(M == shade)
