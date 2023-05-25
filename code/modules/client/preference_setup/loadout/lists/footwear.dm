@@ -72,7 +72,7 @@
 
 /datum/gear/shoes/flipflobster
 	display_name = "flip flobsters"
-	path = /obj/item/clothing/shoes/flipflobster
+	path = /obj/item/clothing/shoes/foamclog/flipflobster
 
 /datum/gear/shoes/slippers
 	display_name = "bunny slippers"
