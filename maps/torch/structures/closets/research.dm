@@ -85,79 +85,10 @@
 		/obj/item/device/radio/headset/science,
 		/obj/item/device/radio/headset/science/alt,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/device/tape/random = 2,
 		/obj/item/device/scanner/gas,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/clothing/glasses/science,
 		/obj/item/storage/belt/general/full,
 		/obj/item/storage/backpack/dufflebag,
 		/obj/item/storage/backpack/messenger/sci
-	)
-
-/obj/structure/closet/secure_closet/guard
-	name = "security guard's locker"
-	req_access = list(access_sec_guard)
-	closet_appearance = /singleton/closet_appearance/secure_closet/torch/science
-
-/obj/structure/closet/secure_closet/guard/WillContain()
-	return list(
-		/obj/item/clothing/under/rank/guard,
-		/obj/item/clothing/suit/armor/pcarrier/medium/nt,
-		/obj/item/clothing/head/helmet/nt/guard,
-		/obj/item/clothing/head/soft/sec/corp/guard,
-		/obj/item/clothing/head/beret/guard,
-		/obj/item/clothing/accessory/armband/whitered,
-		/obj/item/device/radio/headset/science,
-		/obj/item/device/radio/headset/science/alt,
-		/obj/item/clothing/mask/gas/half,
-		/obj/item/material/clipboard,
-		/obj/item/folder,
-		/obj/item/device/taperecorder,
-		/obj/item/device/tape/random = 3,
-		/obj/item/storage/belt/holster/security,
-		/obj/item/device/flash,
-		/obj/item/reagent_containers/spray/pepper,
-		/obj/item/melee/baton/loaded,
-		/obj/item/handcuffs = 2,
-		/obj/item/device/flashlight/maglight,
-		/obj/item/clothing/glasses/sunglasses,
-		/obj/item/clothing/glasses/tacgoggles,
-		/obj/item/clothing/mask/balaclava,
-		/obj/item/taperoll/research,
-		/obj/item/device/hailer,
-		/obj/item/clothing/accessory/storage/black_vest,
-		/obj/item/clothing/accessory/badge/holo/NT,
-		/obj/item/device/megaphone,
-		/obj/item/gun/energy/stunrevolver/secure/nanotrasen,
-		/obj/item/clothing/shoes/jackboots,
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/security/exo, /obj/item/storage/backpack/satchel/sec/exo)),
-		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/sec, /obj/item/storage/backpack/messenger/sec/exo))
-	)
-
-/obj/structure/closet/secure_closet/ec_scientist
-	name = "scientist locker"
-	req_access = list(access_research_storage)
-	closet_appearance = /singleton/closet_appearance/secure_closet/torch/science
-
-/obj/structure/closet/secure_closet/ec_scientist/WillContain()
-	return list(
-		/obj/item/clothing/suit/storage/toggle/labcoat/science/ec,
-		/obj/item/device/radio/headset/science,
-		/obj/item/device/radio/headset/science/alt,
-		/obj/item/clothing/mask/gas/half,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/material/clipboard,
-		/obj/item/folder,
-		/obj/item/device/taperecorder,
-		/obj/item/device/tape/random = 3,
-		/obj/item/device/camera,
-		/obj/item/device/scanner/gas,
-		/obj/item/taperoll/research,
-		/obj/item/clothing/gloves/latex,
-		/obj/item/clothing/glasses/science,
-		/obj/item/storage/belt/general,
-		/obj/item/device/scanner/xenobio,
-		/obj/item/device/scanner/plant,
-		/obj/item/storage/backpack/dufflebag
 	)

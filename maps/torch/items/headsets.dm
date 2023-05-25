@@ -6,8 +6,7 @@
 	ks1type = /obj/item/device/encryptionkey/science
 
 /obj/item/device/radio/headset/science/alt
-	name = "research headset"
-	desc = "A headset for researchers."
+	name = "research bowman headset"
 	icon_state = "sci_headset_alt"
 	item_state = "sci_headset_alt"
 
