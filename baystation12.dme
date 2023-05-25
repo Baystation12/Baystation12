@@ -543,6 +543,7 @@
 #include "code\datums\wires\smes.dm"
 #include "code\datums\wires\suit_storage_unit.dm"
 #include "code\datums\wires\taperecorder.dm"
+#include "code\datums\wires\transfer_valve.dm"
 #include "code\datums\wires\wire_description.dm"
 #include "code\datums\wires\wires.dm"
 #include "code\game\atoms.dm"
