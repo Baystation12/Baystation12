@@ -1,4 +1,0 @@
-author: LordNest
-delete-after: true
-changes:
-  - bugfix: Пофиксил агрессивное поведение Boo
