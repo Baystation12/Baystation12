@@ -194,11 +194,15 @@
 	if(amount)
 		vessel.add_reagent(/datum/reagent/blood, amount, get_blood_data())
 	return amount
-
+//we storing pronouns in the blood, homies
 /mob/living/carbon/proc/get_blood_data()
 	var/data = list()
 	data["donor"] = weakref(src)
 	data["blood_DNA"] = dna.unique_enzymes
+	data["full_DNA"] = dna
+	data["gender"] = src.gender
+	data["pronouns"] = src.pronouns
+	data["blood_real_name"] = dna.real_name
 	data["blood_type"] = dna.b_type
 	data["species"] = species.name
 	data["has_oxy"] = species.blood_oxy
