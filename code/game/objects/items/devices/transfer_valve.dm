@@ -7,14 +7,18 @@
 	var/obj/item/tank/tank_two
 	var/obj/item/device/assembly/attached_device
 	var/mob/attacher = null
-	var/valve_open = 0
-	var/toggle = 1
-	movable_flags = MOVABLE_FLAG_PROXMOVE
+	var/valve_open = FALSE
+	var/armed = FALSE
+	var/panel_open= FALSE
+	var/toggle = TRUE
 
+	var/datum/wires/transfer_valve/wires
+
+	movable_flags = MOVABLE_FLAG_PROXMOVE
 /obj/item/device/transfer_valve/proc/process_activation(obj/item/device/D)
 
 /obj/item/device/transfer_valve/IsAssemblyHolder()
-	return 1
+	return TRUE
 
 /obj/item/device/transfer_valve/attackby(obj/item/item, mob/user)
 	var/turf/location = get_turf(src) // For admin logs
@@ -48,8 +52,8 @@
 //TODO: Have this take an assemblyholder
 	else if(isassembly(item))
 		var/obj/item/device/assembly/A = item
-		if(A.secured)
-			to_chat(user, SPAN_NOTICE("The device is secured."))
+		if(armed)
+			to_chat(user, SPAN_NOTICE("The device is armed."))
 			return
 		if(attached_device)
 			to_chat(user, SPAN_WARNING("There is already an device attached to the valve, remove it first."))
@@ -66,16 +70,34 @@
 		log_game("[key_name_admin(user)] attached a [item] to a transfer valve.")
 		attacher = user
 		SSnano.update_uis(src) // update all UIs attached to src
+
+	else if(isScrewdriver(item))
+		if (tank_one && tank_two && attached_device)
+			visible_message(
+				SPAN_NOTICE("\The [user] [panel_open ? "closes" : "opens"] \the [src]'s control panel!"),
+				SPAN_NOTICE("You pry \the [src]'s control panel [panel_open ? "closed" : "open"].")
+			)
+
+			playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+			panel_open= !panel_open
+
+	else if((isWirecutter(item) || isMultitool(item)) && panel_open && armed)
+		return wires.Interact(user)
+
 	return
 
 
 /obj/item/device/transfer_valve/HasProximity(atom/movable/AM as mob|obj)
-	if(!attached_device)	return
+	if(!attached_device)
+		return
 	attached_device.HasProximity(AM)
 	return
 
 
 /obj/item/device/transfer_valve/attack_self(mob/user as mob)
+	if (panel_open)
+		to_chat(user, SPAN_WARNING("The device's panel is open!"))
+		return
 	ui_interact(user)
 
 /obj/item/device/transfer_valve/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
@@ -85,7 +107,8 @@
 	data["attachmentOne"] = tank_one ? tank_one.name : null
 	data["attachmentTwo"] = tank_two ? tank_two.name : null
 	data["valveAttachment"] = attached_device ? attached_device.name : null
-	data["valveOpen"] = valve_open ? 1 : 0
+	data["valveOpen"] = valve_open ? TRUE : FALSE
+	data["armed"] = armed ? TRUE : FALSE
 
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -103,33 +126,38 @@
 /obj/item/device/transfer_valve/Topic(href, href_list)
 	..()
 	if ( usr.stat || usr.restrained() )
-		return 0
+		return FALSE
 	if (src.loc != usr)
-		return 0
-	if(tank_one && href_list["tankone"])
-		remove_tank(tank_one)
-	else if(tank_two && href_list["tanktwo"])
-		remove_tank(tank_two)
-	else if(href_list["open"])
-		toggle_valve()
-	else if(attached_device)
-		if(href_list["rem_device"])
-			attached_device.dropInto(loc)
-			attached_device:holder = null
-			attached_device = null
-			update_icon()
-		if(href_list["device"])
-			attached_device.attack_self(usr)
-		if(href_list["activate"])
-			attached_device.activate()
-	return 1 // Returning 1 sends an update to attached UIs
+		return FALSE
+	if (!armed)
+		if(tank_one && href_list["tankone"])
+			remove_tank(tank_one)
+		else if(tank_two && href_list["tanktwo"])
+			remove_tank(tank_two)
+		else if(href_list["open"])
+			toggle_valve()
+		else if(attached_device)
+			if (href_list["rem_device"])
+				attached_device.dropInto(loc)
+				attached_device:holder = null
+				attached_device = null
+				update_icon()
+			if (href_list["device"])
+				attached_device.attack_self(usr)
+			if (href_list["arm"])
+				toggle_armed()
+	if(armed && href_list["activate"])
+		attached_device.activate()
+		visible_message(SPAN_WARNING("The [attached_device] blips!"), range = 3)
+		message_admins("[key_name_admin(usr)] triggered \the [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.loc.x];Y=[src.loc.y];Z=[src.loc.z]'>JMP</a>)")
+	return TRUE // Returning 1 sends an update to attached UIs
 
 /obj/item/device/transfer_valve/process_activation(obj/item/device/D)
 	if(toggle)
-		toggle = 0
+		toggle = FALSE
 		toggle_valve()
 		spawn(50) // To stop a signal being spammed from a proxy sensor constantly going off or whatever
-			toggle = 1
+			toggle = TRUE
 
 /obj/item/device/transfer_valve/on_update_icon()
 	overlays.Cut()
@@ -169,13 +197,13 @@
 	tank_two.air_contents.volume += tank_one.air_contents.volume
 	var/datum/gas_mixture/temp = tank_one.remove_air_ratio(1)
 	tank_two.assume_air(temp)
-	valve_open = 1
+	valve_open = TRUE
 
 /obj/item/device/transfer_valve/proc/split_gases()
 	if(!valve_open)
 		return
 
-	valve_open = 0
+	valve_open = FALSE
 
 	if(QDELETED(tank_one) || QDELETED(tank_two))
 		return
@@ -185,12 +213,28 @@
 	tank_two.air_contents.volume -=  tank_one.air_contents.volume
 	tank_one.assume_air(temp)
 
+/obj/item/device/transfer_valve/proc/toggle_armed()
+	if (tank_one && tank_two && attached_device)
+		armed = !armed
+	if (armed)
+		wires = new(src)
+	else
+		desc = initial(desc)
+		wires = null
+
+/obj/item/device/transfer_valve/examine(mob/user, distance)
+	. = ..()
+	if (armed && distance < 3)
+		to_chat(user, SPAN_DANGER("This one looks like a bomb."))
+
 	/*
 	Exadv1: I know this isn't how it's going to work, but this was just to check
 	it explodes properly when it gets a signal (and it does).
 	*/
 
 /obj/item/device/transfer_valve/proc/toggle_valve()
+	if (!armed)
+		return
 	if(!valve_open && (tank_one && tank_two))
 		var/turf/bombturf = get_turf(src)
 		var/area/A = get_area(bombturf)

@@ -39,11 +39,9 @@
 		{{:helper.link('Remove', 'eject', {'rem_device' : 1}, data.valveAttachment ? null : 'disabled')}}
 		{{if data.valveAttachment}}
 			{{:helper.link('View', 'wrench', {'device' : 1})}}
+			{{:helper.link('Trigger', 'activate', {'activate' : 1}, data.armed ? null : 'disabled')}}
+			{{:helper.link('Arm', 'alert', {'arm' : 1}, data.armed ? 'disabled' : null, data.armed ? 'redButton' : 'yellowButton')}}
 		{{/if}}
-		{{if data.valveAttachment}}
-			{{:helper.link('Trigger', 'activate', {'activate' : 1})}}
-		{{/if}}
-	</div>
 </div>
 
 <div class="item">&nbsp;</div>
