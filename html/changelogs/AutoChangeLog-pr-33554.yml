@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Incorrect physical interaction checks have been removed from general interactions;
+      Various things that weren't working when clicked on should be working again
+      now.
