@@ -539,7 +539,6 @@
 /area/map_template/ecprobe/solarsp)
 "Hu" = (
 /obj/machinery/computer/ship/helm{
-	req_access = list(list("ACCESS_EXPLO_HELM"));
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/blue/border{
@@ -751,9 +750,7 @@
 /area/map_template/ecprobe/engineering)
 "QE" = (
 /obj/machinery/computer/shuttle_control{
-	dir = 8;
-	req_access = list("ACCESS_TORCH_PETROV_HELM");
-	shuttle_tag = "Petrov"
+	dir = 8
 	},
 /obj/effect/floor_decal/corner/blue/border{
 	dir = 6
