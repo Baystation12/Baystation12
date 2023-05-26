@@ -1,0 +1,5 @@
+author: limelier
+delete-after: true
+changes:
+  - bugfix: Fix name of research bowman headset
+  - rscdel: Clean up researcher's locker by removing extra tapes and the oxygen tank
