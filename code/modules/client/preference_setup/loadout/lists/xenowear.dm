@@ -117,6 +117,17 @@
 	path = /obj/item/clothing/shoes/workboots/toeless
 	sort_category = "Xenowear"
 
+/datum/gear/shoes/clogs_toeless
+	display_name = "toeless foam clogs"
+	path = /obj/item/clothing/shoes/foamclog/toeless
+	flags = GEAR_HAS_COLOR_SELECTION
+	sort_category = "Xenowear"
+
+/datum/gear/shoes/flipflobsters_toeless
+	display_name = "toeless flip flobsters"
+	path = /obj/item/clothing/shoes/foamclog/flipflobster/toeless
+	sort_category = "Xenowear"
+
 // Pre-modified gloves
 
 /datum/gear/gloves/colored/modified

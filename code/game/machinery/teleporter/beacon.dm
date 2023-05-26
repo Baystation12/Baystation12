@@ -129,7 +129,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 			to_chat(user, SPAN_WARNING("It appears to be offline or disabled."))
 		return
 
-	if (user.skill_check(SKILL_DEVICES, SKILL_ADEPT))
+	if (user.skill_check(SKILL_DEVICES, SKILL_TRAINED))
 		if (wires.IsIndexCut(TELEBEACON_WIRE_SIGNALLER))
 			to_chat(user, SPAN_WARNING("The signal lights appear to be disabled."))
 		else if (LAZYLEN(connected_computers))
@@ -275,9 +275,9 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 	wire_count = 3
 	window_y = 500
 	descriptions = list(
-		new /datum/wire_description(TELEBEACON_WIRE_POWER, "This wire is connected to the power supply unit.", SKILL_EXPERT),
-		new /datum/wire_description(TELEBEACON_WIRE_RELAY, "This wire is connected to the remote relay device.", SKILL_PROF),
-		new /datum/wire_description(TELEBEACON_WIRE_SIGNALLER, "This wire is connected to a speaker and several indicator lights.", SKILL_EXPERT)
+		new /datum/wire_description(TELEBEACON_WIRE_POWER, "This wire is connected to the power supply unit.", SKILL_EXPERIENCED),
+		new /datum/wire_description(TELEBEACON_WIRE_RELAY, "This wire is connected to the remote relay device.", SKILL_MASTER),
+		new /datum/wire_description(TELEBEACON_WIRE_SIGNALLER, "This wire is connected to a speaker and several indicator lights.", SKILL_EXPERIENCED)
 	)
 
 
@@ -296,7 +296,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 		. += "<li>The panel seems to be completely unpowered or disabled.</li>"
 	else
 		. += "<li>The panel is powered.</li>"
-		if (user.skill_check(SKILL_ELECTRICAL, SKILL_ADEPT))
+		if (user.skill_check(SKILL_ELECTRICAL, SKILL_TRAINED))
 			. += "<li>The remote relay chip is [IsIndexCut(TELEBEACON_WIRE_RELAY) ? "disconnected" : "connected"].</li>"
 			. += "<li>The connection signaller circuitry is [IsIndexCut(TELEBEACON_WIRE_SIGNALLER) ? "disconnected" : "connected"].</li>"
 		else

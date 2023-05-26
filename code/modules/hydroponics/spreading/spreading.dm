@@ -215,7 +215,7 @@
 		)
 		playsound(src, weapon.hitsound, 50, TRUE)
 		var/chop_time = (get_current_health() / weapon.force) * 0.5 SECONDS
-		if (user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
+		if (user.skill_check(SKILL_BOTANY, SKILL_TRAINED))
 			chop_time *= 0.5
 		if (!do_after(user, round(chop_time), src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, weapon))
 			return TRUE
@@ -242,7 +242,7 @@
 		if (!seed)
 			USE_FEEDBACK_FAILURE("There is nothing on \the [src] to take a sample from.")
 			return TRUE
-		var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
+		var/needed_skill = seed.mysterious ? SKILL_TRAINED : SKILL_BASIC
 		if (prob(user.skill_fail_chance(SKILL_BOTANY, 90, needed_skill)))
 			USE_FEEDBACK_FAILURE("You failed to get a usable sample from \the [src], and damage it in the process.")
 			damage_health(rand(15, 25), tool.damtype)

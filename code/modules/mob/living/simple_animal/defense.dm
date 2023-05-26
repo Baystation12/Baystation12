@@ -92,7 +92,7 @@
 			USE_FEEDBACK_FAILURE("Some of \the [src]'s meat is ruined.")
 			subtract_meat(user)
 			return TRUE
-		if (prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_ADEPT)))
+		if (prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_TRAINED)))
 			subtract_meat(user)
 			user.visible_message(
 				SPAN_WARNING("\The [user] botches harvesting \the [src], and ruins some of the meat in the process."),

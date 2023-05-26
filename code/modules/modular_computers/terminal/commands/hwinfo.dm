@@ -7,7 +7,7 @@
 		"If device is specified by name, runs diagnostic tests."
 	)
 	pattern = "^hwinfo"
-	skill_needed = SKILL_ADEPT
+	skill_needed = SKILL_TRAINED
 
 /datum/terminal_command/hwinfo/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/command = copytext(text, 1, length(name) + 2)

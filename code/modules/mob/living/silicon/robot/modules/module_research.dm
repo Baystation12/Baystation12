@@ -34,15 +34,15 @@
 	)
 	emag = /obj/prefab/hand_teleporter
 	skills = list(
-		SKILL_BUREAUCRACY         = SKILL_EXPERT,
-		SKILL_FINANCE             = SKILL_EXPERT,
-		SKILL_COMPUTER            = SKILL_PROF,
-		SKILL_SCIENCE             = SKILL_PROF,
-		SKILL_DEVICES             = SKILL_PROF,
-		SKILL_ANATOMY             = SKILL_ADEPT,
-		SKILL_CHEMISTRY           = SKILL_ADEPT,
-		SKILL_BOTANY              = SKILL_EXPERT,
-		SKILL_ELECTRICAL          = SKILL_EXPERT
+		SKILL_BUREAUCRACY         = SKILL_EXPERIENCED,
+		SKILL_FINANCE             = SKILL_EXPERIENCED,
+		SKILL_COMPUTER            = SKILL_MASTER,
+		SKILL_SCIENCE             = SKILL_MASTER,
+		SKILL_DEVICES             = SKILL_MASTER,
+		SKILL_ANATOMY             = SKILL_TRAINED,
+		SKILL_CHEMISTRY           = SKILL_TRAINED,
+		SKILL_BOTANY              = SKILL_EXPERIENCED,
+		SKILL_ELECTRICAL          = SKILL_EXPERIENCED
 	)
 /obj/item/robot_module/research/finalize_equipment()
 	. = ..()

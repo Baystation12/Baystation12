@@ -431,7 +431,7 @@
 			to_chat(user, SPAN_WARNING("The plant is dead."))
 			return
 
-		var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
+		var/needed_skill = seed.mysterious ? SKILL_TRAINED : SKILL_BASIC
 		if(prob(user.skill_fail_chance(SKILL_BOTANY, 90, needed_skill)))
 			to_chat(user, SPAN_WARNING("You failed to get a usable sample."))
 		else
@@ -477,7 +477,7 @@
 			user.visible_message(SPAN_NOTICE("[user] starts uprooting the weeds."), SPAN_NOTICE("You remove the weeds from the [src]."))
 			weedlevel = 0
 			if(seed)
-				var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
+				var/needed_skill = seed.mysterious ? SKILL_TRAINED : SKILL_BASIC
 				if(!user.skill_check(SKILL_BOTANY, needed_skill))
 					health -= rand(40,60)
 					check_health(1)
@@ -550,7 +550,7 @@
 	health = (istype(S, /obj/item/seeds/cutting) ? round(seed.get_trait(TRAIT_ENDURANCE)/rand(2,5)) : seed.get_trait(TRAIT_ENDURANCE))
 	lastcycle = world.time
 
-	var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
+	var/needed_skill = seed.mysterious ? SKILL_TRAINED : SKILL_BASIC
 	if(prob(user.skill_fail_chance(SKILL_BOTANY, 40, needed_skill)))
 		dead = 1
 		health = 0

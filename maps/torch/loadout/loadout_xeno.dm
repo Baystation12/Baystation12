@@ -27,6 +27,12 @@
 /datum/gear/uniform/harness
 	allowed_branches = null
 
+/datum/gear/shoes/clogs_toeless
+	allowed_branches = CIVILIAN_BRANCHES
+
+/datum/gear/shoes/flipflobsters_toeless
+	allowed_branches = CIVILIAN_BRANCHES
+
 // Patches
 /datum/gear/accessory/cultex_patch
 	display_name = "Cultural Exchange patch"

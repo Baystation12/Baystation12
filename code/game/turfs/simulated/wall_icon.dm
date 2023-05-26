@@ -72,14 +72,14 @@
 			I.color = reinf_color
 			overlays += I
 		else
-			if("[reinf_material.wall_icon_reinf]0" in icon_states('icons/turf/wall_masks.dmi'))
+			if("[material.wall_icon_reinf]0" in icon_states('icons/turf/wall_masks.dmi'))
 				// Directional icon
 				for(var/i = 1 to 4)
-					I = image('icons/turf/wall_masks.dmi', "[reinf_material.wall_icon_reinf][wall_connections[i]]", dir = SHIFTL(1, i - 1))
+					I = image('icons/turf/wall_masks.dmi', "[material.wall_icon_reinf][wall_connections[i]]", dir = SHIFTL(1, i - 1))
 					I.color = reinf_color
 					overlays += I
 			else
-				I = image('icons/turf/wall_masks.dmi', reinf_material.wall_icon_reinf)
+				I = image('icons/turf/wall_masks.dmi', material.wall_icon_reinf)
 				I.color = reinf_color
 				overlays += I
 	var/image/texture = material.get_wall_texture()

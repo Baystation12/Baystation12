@@ -48,10 +48,10 @@
 	)
 	emag = /obj/item/gun/energy/plasmacutter
 	skills = list(
-		SKILL_ATMOS        = SKILL_EXPERT,
-		SKILL_ENGINES      = SKILL_EXPERT,
-		SKILL_CONSTRUCTION = SKILL_EXPERT,
-		SKILL_ELECTRICAL   = SKILL_EXPERT
+		SKILL_ATMOS        = SKILL_EXPERIENCED,
+		SKILL_ENGINES      = SKILL_EXPERIENCED,
+		SKILL_CONSTRUCTION = SKILL_EXPERIENCED,
+		SKILL_ELECTRICAL   = SKILL_EXPERIENCED
 	)
 
 /obj/item/robot_module/drone/finalize_equipment(mob/living/silicon/robot/R)

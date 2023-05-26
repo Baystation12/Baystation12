@@ -22,11 +22,11 @@
 	emag = /obj/item/stamp/chameleon
 	synths = list(/datum/matter_synth/package_wrap)
 	skills = list(
-		SKILL_BUREAUCRACY         = SKILL_PROF,
-		SKILL_FINANCE             = SKILL_PROF,
-		SKILL_COMPUTER            = SKILL_EXPERT,
-		SKILL_SCIENCE             = SKILL_EXPERT,
-		SKILL_DEVICES             = SKILL_EXPERT
+		SKILL_BUREAUCRACY         = SKILL_MASTER,
+		SKILL_FINANCE             = SKILL_MASTER,
+		SKILL_COMPUTER            = SKILL_EXPERIENCED,
+		SKILL_SCIENCE             = SKILL_EXPERIENCED,
+		SKILL_DEVICES             = SKILL_EXPERIENCED
 	)
 
 /obj/item/robot_module/flying/filing/finalize_synths()

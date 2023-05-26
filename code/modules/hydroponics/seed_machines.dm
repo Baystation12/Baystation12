@@ -203,7 +203,7 @@
 		active = 1
 
 		if(seed && seed.seed)
-			if(prob(user.skill_fail_chance(SKILL_BOTANY, 100, SKILL_ADEPT)))
+			if(prob(user.skill_fail_chance(SKILL_BOTANY, 100, SKILL_TRAINED)))
 				failed_task = 1
 			else
 				genetics = seed.seed
@@ -231,8 +231,8 @@
 		loaded_disk.desc += " The label reads \'gene [SSplants.gene_tag_masks[href_list["get_gene"]]], sampled from [genetics.display_name]\'."
 		eject_disk = 1
 
-		degradation += rand(20,60) + user.skill_fail_chance(SKILL_BOTANY, 100, SKILL_ADEPT)
-		var/expertise = max(0, user.get_skill_value(SKILL_BOTANY) - SKILL_ADEPT)
+		degradation += rand(20,60) + user.skill_fail_chance(SKILL_BOTANY, 100, SKILL_TRAINED)
+		var/expertise = max(0, user.get_skill_value(SKILL_BOTANY) - SKILL_TRAINED)
 		degradation = max(0, degradation - 10*expertise)
 
 		if(degradation >= 100)
@@ -318,7 +318,7 @@
 
 		for(var/datum/plantgene/gene in loaded_disk.genes)
 			seed.seed.apply_gene(gene)
-			var/expertise = max(user.get_skill_value(SKILL_BOTANY) - SKILL_ADEPT)
+			var/expertise = max(user.get_skill_value(SKILL_BOTANY) - SKILL_TRAINED)
 			seed.modified += rand(5,10) + min(-5, 30 * expertise)
 
 	usr.set_machine(src)

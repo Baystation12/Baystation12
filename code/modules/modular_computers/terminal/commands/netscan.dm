@@ -6,7 +6,7 @@
 		"Scans the local network for devices and returns their NIDs."
 	)
 	pattern = "^netscan$"
-	skill_needed = SKILL_EXPERT
+	skill_needed = SKILL_EXPERIENCED
 
 /datum/terminal_command/netscan/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if (!ntnet_global || !terminal.computer.get_ntnet_status())

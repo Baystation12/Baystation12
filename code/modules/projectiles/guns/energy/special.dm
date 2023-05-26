@@ -160,7 +160,7 @@
 
 	// As an industrial tool the plasma cutter's safety training falls under construction.
 	gun_skill = SKILL_CONSTRUCTION
-	safety_skill = SKILL_ADEPT
+	safety_skill = SKILL_TRAINED
 
 /obj/item/gun/energy/plasmacutter/mounted
 	name = "mounted plasma cutter"

@@ -53,9 +53,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if ((item_flags & ITEM_FLAG_TRY_ATTACK) && attack(A, user))
 		use_call = "attack"
 		. = TRUE
-	if (!. && A == user)
-		use_call = "user"
-		. = user.use_user(src, click_params)
 	if (!. && user.a_intent == I_HURT)
 		use_call = "weapon"
 		. = A.use_weapon(src, user, click_params)
@@ -204,11 +201,11 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if (!silent)
 			FEEDBACK_UNEQUIP_FAILURE(src, target)
 		return FALSE
-	if (HAS_FLAGS(flags, SANITY_CHECK_INTERACT) && !CanInteractWith(src, target, target.DefaultTopicState()))
+	if (HAS_FLAGS(flags, SANITY_CHECK_TOPIC_INTERACT) && !CanInteractWith(src, target, target.DefaultTopicState()))
 		if (!silent)
 			FEEDBACK_FAILURE(src, "You can't interact with \the [src].")
 		return FALSE
-	if (HAS_FLAGS(flags, SANITY_CHECK_PHYSICALLY_INTERACT) && !CanPhysicallyInteractWith(src, target))
+	if (HAS_FLAGS(flags, SANITY_CHECK_TOPIC_PHYSICALLY_INTERACT) && !CanPhysicallyInteractWith(src, target))
 		if (!silent)
 			FEEDBACK_FAILURE(src, "You can't physically interact with \the [src].")
 		return FALSE
@@ -234,35 +231,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 	// All checks passed
 	return TRUE
-
-
-/**
- * Interaction handler for using an item on yourself. This is called and the result checked before the other `use_*`
- * interaction procs are called, regardless of user intent.
- *
- * **Parameters**:
- * - `tool` - The item being used by the mob.
- * - `click_params` - List of click parameters.
- *
- * Returns boolean to indicate whether the attack call was handled or not. If `FALSE`, the next `use_*` proc in the
- * resolve chain will be called.
- */
-/mob/proc/use_user(obj/item/tool, list/click_params = list())
-	SHOULD_CALL_PARENT(TRUE)
-	return FALSE
-
-
-/mob/living/carbon/human/use_user(obj/item/tool, list/click_params)
-	// Devouring
-	if (zone_sel.selecting == BP_MOUTH && can_devour(tool, silent = TRUE))
-		var/obj/item/blocked = check_mouth_coverage()
-		if (blocked)
-			FEEDBACK_FAILURE(src, "\The [blocked] is in the way!")
-			return TRUE
-		devour(tool)
-		return TRUE
-
-	return ..()
 
 
 /**
@@ -335,6 +303,19 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /mob/living/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Surgery is handled by the tool
 	if (can_operate(src, user) && tool.do_surgery(src, user))
+		return TRUE
+
+	return ..()
+
+
+/mob/living/carbon/human/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Anything on Self - Devour
+	if (user == src && zone_sel.selecting == BP_MOUTH && can_devour(tool, silent = TRUE))
+		var/obj/item/blocked = check_mouth_coverage()
+		if (blocked)
+			USE_FEEDBACK_FAILURE("\The [blocked] is in the way!")
+			return TRUE
+		devour(tool)
 		return TRUE
 
 	return ..()

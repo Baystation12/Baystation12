@@ -8,7 +8,7 @@
 	)
 	pattern = "^relays$"
 	req_access = list(list(access_network, access_network_admin))
-	skill_needed = SKILL_EXPERT
+	skill_needed = SKILL_EXPERIENCED
 
 /datum/terminal_command/relays/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	. = list("[name]: Number of relays found: [length(ntnet_global.relays)]")
