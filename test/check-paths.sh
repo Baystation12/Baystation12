@@ -14,9 +14,13 @@ exactly() { # exactly N name search [mode] [filter]
 	num="$(grep "$mode" "$search" $filter | wc -l || true)"
 
 	if [ $num -eq $count ]; then
-		echo "$num $name"
+		echo "[1;32mOK[0m $num $name"
 	else
-		echo "$(tput setaf 9)$num $name (expecting exactly $count)$(tput sgr0)"
+		echo "[1;31mFAIL[0m $num $name (expecting exactly $count)"
+		if [ $1 -lt 30 ]; then
+			echo "entries:"
+			grep "$mode" "$search" $filter
+		fi
 		FAILED=1
 	fi
 }
