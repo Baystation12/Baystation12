@@ -232,5 +232,5 @@
 
 /datum/say_list/lar_maria
 	speak = list("Die!", "Fresh meat!", "Hurr!", "You said help will come!", "I did nothing!", "Eat my fist!", "One for the road!")
-	emote_see = list("cries", "grins insanely", "itches fiercly", "scratches his face", "shakes his fists above his head")
+	emote_see = list("cries", "grins insanely", "itches fiercly", "scratches their face", "shakes their fists above their head")
 	emote_hear = list("roars", "giggles", "breathes loudly", "mumbles", "yells something unintelligible")
