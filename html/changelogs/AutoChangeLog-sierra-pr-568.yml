@@ -1,0 +1,5 @@
+author: PurplePineapple
+delete-after: true
+changes:
+  - tweak: Damage layers such as wounds, gauze, and splints are applied above your
+      clothes. Armor and voidsuits still go over them.
