@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>cbrand picker</title>
+<style>
+html, body {
+	background-color: #222;
+	color: #eee;
+}
+</style>
+<script type="module">
+/* samples the "height" at distance t (0..1) into
+the otherwise dimensionless parametric curve along
+p0 -> p1 -> p2 -> p3, each also generally 0..1*/
+const cubic_interp = (t, p0, p1, p2, p3) => {
+	const t2 = t * t
+	const t3 = t2 * t
+	return p0 + (-p0 * 3 + t * (3 * p0 - p0 * t)) * t
+		+ (3 * p1 + t * (-6 * p1 + p1 * 3 * t)) * t
+		+ (p2 * 3 - p2 * 3 * t) * t2
+		+ p3 * t3
+}
+
+const random_iterations = 5e4
+
+const ctx = document.querySelector('canvas').getContext('2d')
+const out = document.querySelector('#out')
+
+const inputs = [ ...document.querySelectorAll('input') ]
+	.reduce(function (inputs, input) {
+		inputs[input.id] = input
+		return inputs
+	}, {})
+
+function getInput (...ids) {
+	return ids.map(id => Number.parseFloat(inputs[id].value))
+}
+
+function getInputY () {
+	return getInput('p1y', 'p2y', 'p3y', 'p4y')
+}
+
+let lastInputs
+
+requestAnimationFrame(function frame() {
+	requestAnimationFrame(frame)
+	let inputs = getInputY()
+	let sig = inputs.join()
+	if (sig === lastInputs)
+		return
+	lastInputs = sig
+	const { clientWidth: w, clientHeight: h } = ctx.canvas
+	ctx.strokeStyle = 'black'
+	ctx.fillStyle = 'black'
+	ctx.fillRect(0,0,w,h)
+	const [ y1, y2, y3, y4 ] = inputs
+	ctx.strokeStyle = 'dodgerblue'
+	ctx.lineWidth = 1.0
+	ctx.fillStyle = 'dodgerblue'
+	const results = new Array(101).fill(0)
+	for (let i = 1; i < random_iterations; ++i)
+		++results[Math.round(cubic_interp(Math.random(), y1, y2, y3, y4) * 100)]
+	let lowest = 100
+	let highest = 0
+	let mode = 0
+	let mode_val = 0
+	for (let i = 0; i <= 100; ++i) {
+		let val = results[i]
+		if (!val)
+			continue
+		if (val > mode_val) {
+			mode = i
+			mode_val = val
+		}
+		if (i < lowest)
+			lowest = i
+		if (i > highest)
+			highest = i
+	}
+	for (let i = lowest; i <= highest; ++i) {
+		let val = results[i]
+		ctx.fillRect(w, h - i * 0.01 * h, -((val / mode_val) * (w / 2)), h * 0.01)
+	}
+	ctx.strokeStyle = 'firebrick'
+	ctx.lineWidth = 4.0
+	ctx.beginPath()
+	ctx.moveTo(0, h - y1 * h)
+	for (let i = 1; i <= 100; ++i)
+		ctx.lineTo(i / 100 * w, h - cubic_interp(i / 100, y1, y2, y3, y4) * h)
+	ctx.stroke()
+	ctx.strokeStyle = 'white'
+	ctx.lineWidth = 1.0
+	ctx.strokeText(`${(highest/100).toFixed(2)}`, w/2 - 40, h - (highest * 0.01 * h) + 12)
+	ctx.strokeText(`${(lowest/100).toFixed(2)}`, w/2 - 40, h - (lowest * 0.01 * h) - 12)
+	ctx.strokeStyle = 'green'
+	ctx.strokeRect(0, 0, w, h)
+	out.innerText = `You use: cbrand(${y1}, ${y2}, ${y3}, ${y4})`
+})
+</script>
+</head>
+<body>
+<p><input id="p1y" type="range" min="0" max="1" step="0.01" value="0"></p>
+<p><input id="p2y" type="range" min="0" max="1" step="0.01" value="0.8"></p>
+<p><input id="p3y" type="range" min="0" max="1" step="0.01" value="0.2"></p>
+<p><input id="p4y" type="range" min="0" max="1" step="0.01" value="1"></p>
+<p>red line: the curve. Neat.</p>
+<p>blue bars: the relative distribution of random picks into the curve. What you care about.</p>
+<p>white numbers: the minium and maximum values possible. ish.</p>
+<p><canvas id="shape" width="500" height="500"></canvas></p>
+<p id="out"></p>
+</body>
+</html>
