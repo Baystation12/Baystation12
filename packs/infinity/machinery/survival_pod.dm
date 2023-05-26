@@ -4,6 +4,7 @@
 	desc = "A comfortable pod for stasing of wounded occupants. Similar pods were on first humanity's colonial ships. Now days, you can see them in EMT centers with stasis setting from 20x to 22x."
 	icon = 'packs/infinity/icons/obj/Cryogenic2.dmi'
 	icon_state = "stasis_0"
+	base_type = /obj/machinery/sleeper/survival_pod
 	stasis = 20
 	active_power_usage = 55000
 
@@ -34,3 +35,24 @@
 		icon_state = "stasis_1"
 	else
 		icon_state = "stasis_2"
+
+/obj/item/stock_parts/circuitboard/sleeper/survival_pod
+	name = "circuit board (stasis pod)"
+	build_path = /obj/machinery/sleeper/survival_pod
+	board_type = "machine"
+	origin_tech = list(TECH_ENGINEERING = 3, TECH_BIO = 5, TECH_DATA = 3)
+	req_components = list (
+		/obj/item/stock_parts/scanning_module = 1,
+		/obj/item/stock_parts/manipulator = 2)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/apc/buildable = 1
+	)
+
+/datum/design/circuit/sleeper/survival_pod
+	name = "stasis pod"
+	id = "survival_pod"
+	req_tech = list(TECH_ENGINEERING = 3, TECH_BIO = 5, TECH_DATA = 3)
+	build_path = /obj/item/stock_parts/circuitboard/sleeper/survival_pod
+	sort_string = "FACAG"
