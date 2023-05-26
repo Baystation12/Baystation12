@@ -2891,8 +2891,8 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Fourth Deck - Pathfinder's Office";
+/obj/machinery/camera/network/exploration{
+	c_tag = "Pathfinder's Office";
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
