@@ -10,6 +10,42 @@
 
 	allowed_spawns = list()
 
+	area_usage_test_exempted_areas = list(
+		/area/beach,
+		/area/centcom,
+		/area/centcom/holding,
+		/area/centcom/specops,
+		/area/chapel,
+		/area/hallway,
+		/area/maintenance,
+		/area/medical,
+		/area/overmap,
+		/area/engineering,
+		/area/rnd,
+		/area/rnd/xenobiology,
+		/area/rnd/xenobiology/xenoflora,
+		/area/rnd/xenobiology/xenoflora_storage,
+		/area/security,
+		/area/security/prison,
+		/area/security/brig,
+		/area/shuttle,
+		/area/shuttle/escape,
+		/area/shuttle/escape/centcom,
+		/area/shuttle/specops,
+		/area/shuttle/specops/centcom,
+		/area/shuttle/syndicate_elite,
+		/area/shuttle/syndicate_elite/mothership,
+		/area/shuttle/syndicate_elite/station,
+		/area/turbolift,
+		/area/supply,
+		/area/syndicate_elite_squad,
+		/area/template_noop,
+		/area/rnd/xenobiology/cell_1,
+		/area/rnd/xenobiology/cell_2,
+		/area/rnd/xenobiology/cell_3,
+		/area/rnd/xenobiology/cell_4
+	)
+
 /datum/map/away_sites_testing/build_away_sites()
 	var/list/unsorted_sites = list_values(SSmapping.away_sites_templates)
 	var/list/sorted_sites = sortTim(unsorted_sites, /proc/cmp_sort_templates_tallest_to_shortest)
