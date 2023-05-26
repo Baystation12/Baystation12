@@ -392,6 +392,25 @@
 	hardness = rand(15,100)
 	integrity = rand(200,400)
 	melting_point = rand(400,10000)
+
+	// Randomize icons
+	if (rand(0, 1))
+		sheet_icon_base = pick(list("sheet", "sheet-reinf", "sheet-clear", "sheet-sheen", "sheet-glass-reinf"))
+		sheet_icon_reinf = "reinf_overlay"
+	else
+		sheet_icon_base = pick(list("sheet-wood", "diamond", "ingot", "sheet-card", "brick", "rod", "puck", "skin", "bone", "vox"))
+		sheet_icon_reinf = null
+	wall_icon_base = pick(list("metal", "stone", "solid", "cult", "wood"))
+	switch (wall_icon_base)
+		if ("wood")
+			wall_icon_reinf = "reinf_metal"
+		if ("solid")
+			wall_icon_reinf = "reinf_over"
+		else
+			wall_icon_reinf = "reinf_[wall_icon_reinf]"
+	door_icon_base = pick(list("metal", "stone", "plastic", "cult", "wood"))
+	table_icon_base = pick(list("metal", "solid", "stone", "cult", "wood"))
+
 	..()
 
 /material/aliumium/place_dismantled_girder(turf/target, material/reinf_material)
