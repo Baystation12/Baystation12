@@ -10,43 +10,92 @@ html, body {
 }
 </style>
 <script type="module">
-/* samples the "height" at distance t (0..1) into
-the otherwise dimensionless parametric curve along
-p0 -> p1 -> p2 -> p3, each also generally 0..1*/
-const cubic_interp = (t, p0, p1, p2, p3) => {
-	const t2 = t * t
-	const t3 = t2 * t
-	return p0 + (-p0 * 3 + t * (3 * p0 - p0 * t)) * t
-		+ (3 * p1 + t * (-6 * p1 + p1 * 3 * t)) * t
-		+ (p2 * 3 - p2 * 3 * t) * t2
-		+ p3 * t3
+
+const quadratic_interp = (t, p0, p1, p2) => {
+	const mt = 1 - t
+	return p0 * mt * mt +
+		2 * p1 * mt * t +
+		p2 * t * t
 }
 
-const random_iterations = 5e4
+const cubic_interp = (t, p0, p1, p2, p3) => {
+	const t2 = t * t
+	const mt = 1 - t
+	const mt2 = mt * mt
+	return p0 * mt2 * mt +
+		3 * p1 * mt2 * t +
+		3 * p2 * mt * t2 +
+		p3 * t2 * t
+}
+
+const quartic_interp = (t, p0, p1, p2, p3, p4) => {
+	const t2 = t * t
+	const t3 = t2 * t
+	const mt = 1 - t
+	const mt2 = mt * mt
+	const mt3 = mt2 * mt
+	return p0 * mt3 * mt +
+		4 * p1 * mt3 * t +
+		6 * p2 * mt2 * t2 +
+		4 * p3 * mt * t3 +
+		p4 * t3 * t
+}
+
+const random_iterations = 1e5
 
 const ctx = document.querySelector('canvas').getContext('2d')
 const out = document.querySelector('#out')
 
-const inputs = [ ...document.querySelectorAll('input') ]
+const inputs = [ ...document.querySelectorAll('input[type="range"]') ]
 	.reduce(function (inputs, input) {
 		inputs[input.id] = input
 		return inputs
 	}, {})
+
+let interp_func = quadratic_interp
+let procname = 'interp2'
+
+const funcSelector = document.querySelector('select')
+
+funcSelector.addEventListener('change', updateInterpFunc)
+
+function updateInterpFunc () {
+	if (funcSelector.value === 'quadratic') {
+		inputs['p4y'].setAttribute('hidden', true)
+		inputs['p5y'].setAttribute('hidden', true)
+		interp_func = quadratic_interp
+		procname = 'poly_interp2'
+	}
+	else if (funcSelector.value === 'cubic') {
+		inputs['p4y'].removeAttribute('hidden')
+		inputs['p5y'].setAttribute('hidden', true)
+		interp_func = cubic_interp
+		procname = 'poly_interp3'
+	}
+	else {
+		inputs['p4y'].removeAttribute('hidden')
+		inputs['p5y'].removeAttribute('hidden')
+		interp_func = quartic_interp
+		procname = 'poly_interp4'
+	}
+}
 
 function getInput (...ids) {
 	return ids.map(id => Number.parseFloat(inputs[id].value))
 }
 
 function getInputY () {
-	return getInput('p1y', 'p2y', 'p3y', 'p4y')
+	return getInput('p1y', 'p2y', 'p3y', 'p4y', 'p5y')
 }
+
+updateInterpFunc()
 
 let lastInputs
 
 requestAnimationFrame(function frame() {
 	requestAnimationFrame(frame)
 	let inputs = getInputY()
-	let sig = inputs.join()
+	let sig = inputs.join() + funcSelector.value
 	if (sig === lastInputs)
 		return
 	lastInputs = sig
@@ -60,7 +109,7 @@ requestAnimationFrame(function frame() {
 	ctx.fillStyle = 'dodgerblue'
 	const results = new Array(101).fill(0)
 	for (let i = 1; i < random_iterations; ++i)
-		++results[Math.round(cubic_interp(Math.random(), y1, y2, y3, y4) * 100)]
+		++results[Math.round(interp_func(Math.random(), ...inputs) * 100)]
 	let lowest = 100
 	let highest = 0
 	let mode = 0
@@ -82,12 +131,12 @@ requestAnimationFrame(function frame() {
 		let val = results[i]
 		ctx.fillRect(w, h - i * 0.01 * h, -((val / mode_val) * (w / 2)), h * 0.01)
 	}
-	ctx.strokeStyle = 'firebrick'
+	ctx.strokeStyle = 'darkred'
 	ctx.lineWidth = 4.0
 	ctx.beginPath()
-	ctx.moveTo(0, h - y1 * h)
+	ctx.moveTo(0, h - inputs[0] * h)
 	for (let i = 1; i <= 100; ++i)
-		ctx.lineTo(i / 100 * w, h - cubic_interp(i / 100, y1, y2, y3, y4) * h)
+		ctx.lineTo(i / 100 * w, h - interp_func(i / 100, ...inputs) * h)
 	ctx.stroke()
 	ctx.strokeStyle = 'white'
 	ctx.lineWidth = 1.0
@@ -95,19 +144,25 @@ requestAnimationFrame(function frame() {
 	ctx.strokeText(`${(lowest/100).toFixed(2)}`, w/2 - 40, h - (lowest * 0.01 * h) - 12)
 	ctx.strokeStyle = 'green'
 	ctx.strokeRect(0, 0, w, h)
-	out.innerText = `You use: cbrand(${y1}, ${y2}, ${y3}, ${y4})`
+	out.innerText = `${procname}(${inputs.join(', ')}, rand())`
 })
 </script>
 </head>
 <body>
+<select>
+<option value="quadratic">quadratic</option>
+<option value="cubic">cubic</option>
+<option value="quartic">quartic</option>
+</select>
 <p><input id="p1y" type="range" min="0" max="1" step="0.01" value="0"></p>
 <p><input id="p2y" type="range" min="0" max="1" step="0.01" value="0.8"></p>
 <p><input id="p3y" type="range" min="0" max="1" step="0.01" value="0.2"></p>
 <p><input id="p4y" type="range" min="0" max="1" step="0.01" value="1"></p>
-<p>red line: the curve. Neat.</p>
-<p>blue bars: the relative distribution of random picks into the curve. What you care about.</p>
-<p>white numbers: the minium and maximum values possible. ish.</p>
+<p><input id="p5y" type="range" min="0" max="1" step="0.01" value="1"></p>
+<p>red line: the sample curve.</p>
+<p>blue bars: the distribution, given random 0..1 numbers.</p>
+<p>white numbers: rough min/max values possible.</p>
+<p>dm call: <span id="out"></span></p>
 <p><canvas id="shape" width="500" height="500"></canvas></p>
-<p id="out"></p>
 </body>
 </html>
