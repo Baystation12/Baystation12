@@ -145,7 +145,7 @@
 				final_delay = check_delay
 	else
 		final_delay = skill_delay_mult(skill_path, factor)
-	final_delay += base_delay
+	final_delay *= base_delay
 	return do_after(src, final_delay, target, do_flags)
 
 
