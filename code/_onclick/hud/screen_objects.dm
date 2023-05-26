@@ -63,7 +63,7 @@
 	if(!(owner in usr))
 		return 1
 
-	owner.ui_action_click()
+	owner.ui_action_click(owner)
 	return 1
 
 /obj/screen/storage

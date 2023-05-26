@@ -17,7 +17,7 @@
 	if(!hood)
 		hood = new hoodtype(src)
 
-/obj/item/clothing/suit/storage/hooded/ui_action_click()
+/obj/item/clothing/suit/storage/hooded/ui_action_click(mob/living/user)
 	ToggleHood()
 
 /obj/item/clothing/suit/storage/hooded/equipped(mob/user, slot)

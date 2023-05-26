@@ -152,7 +152,7 @@
 /obj/item/scrubpack/attack_self(mob/user)
 	toggle(user)
 
-/obj/item/scrubpack/ui_action_click()
+/obj/item/scrubpack/ui_action_click(mob/living/user)
 	toggle(usr)
 
 /obj/item/scrubpack/proc/set_sound_state(on_off)
