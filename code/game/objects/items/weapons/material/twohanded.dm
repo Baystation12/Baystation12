@@ -158,7 +158,7 @@
 
 		var/bad_arc = reverse_direction(user.dir) //arc of directions from which we cannot block
 		if(check_shield_arc(user, bad_arc, damage_source, attacker))
-			if(!prob(user.skill_fail_chance(SKILL_HAULING, 50, SKILL_EXPERT)))
+			if(!prob(user.skill_fail_chance(SKILL_HAULING, 50, SKILL_EXPERIENCED)))
 				. = TRUE
 				//You hit it!
 				playsound(src, pick('sound/items/baseball/baseball_hit_01.wav', 'sound/items/baseball/baseball_hit_02.wav'), 75, 1)
@@ -189,7 +189,7 @@
 	var/obj/O = target
 	if(istype(O))
 		if(is_held_twohanded(user) && !O.anchored && proximity_flag && isturf(O.loc) && O.w_class <= ITEM_SIZE_SMALL)
-			if(!prob(user.skill_fail_chance(SKILL_HAULING, 20, SKILL_EXPERT)))
+			if(!prob(user.skill_fail_chance(SKILL_HAULING, 20, SKILL_EXPERIENCED)))
 				var/skill = 0.25 + (user.get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)
 				var/dist = O.throw_range * skill
 				O.throw_at(get_ranged_target_turf(user, user.dir, dist), dist, O.throw_speed * skill, user, TRUE)

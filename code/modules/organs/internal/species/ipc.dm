@@ -58,7 +58,7 @@
 /obj/item/organ/internal/posibrain/attack_self(mob/user)
 	if (!user.IsAdvancedToolUser())
 		return
-	if (user.skill_check(SKILL_DEVICES, SKILL_ADEPT))
+	if (user.skill_check(SKILL_DEVICES, SKILL_TRAINED))
 		if (status & ORGAN_DEAD || !brainmob)
 			to_chat(user, SPAN_WARNING("\The [src] is ruined; it will never turn on again."))
 			return
@@ -143,7 +143,7 @@
 	if (distance > 3)
 		return
 	var/msg = ""
-	if (isghost(user) || user.skill_check(SKILL_DEVICES, SKILL_ADEPT))
+	if (isghost(user) || user.skill_check(SKILL_DEVICES, SKILL_TRAINED))
 		if ((status & ORGAN_DEAD) || damage)
 			if ((status & ORGAN_DEAD))
 				msg += SPAN_ITALIC("It is ruined and lifeless, damaged beyond hope of recovery.")

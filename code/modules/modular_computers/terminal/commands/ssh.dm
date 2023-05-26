@@ -8,7 +8,7 @@
 	)
 	pattern = "^ssh"
 	req_access = list(access_network_admin)
-	skill_needed = SKILL_EXPERT
+	skill_needed = SKILL_EXPERIENCED
 
 /datum/terminal_command/check_access(mob/user, datum/terminal/terminal)
 	if(terminal.computer.emagged() && !istype(terminal, /datum/terminal/remote))

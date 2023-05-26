@@ -8,7 +8,7 @@
 	)
 	pattern = "^log"
 	req_access = list(list(access_network, access_network_admin))
-	skill_needed = SKILL_EXPERT
+	skill_needed = SKILL_EXPERIENCED
 
 /datum/terminal_command/log/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/argument = copytext(text, length(name) + 2, 0)

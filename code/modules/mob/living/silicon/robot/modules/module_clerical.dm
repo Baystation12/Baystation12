@@ -3,11 +3,11 @@
 		"Service" = TRUE
 	)
 	skills = list(
-		SKILL_BUREAUCRACY         = SKILL_PROF,
-		SKILL_FINANCE             = SKILL_PROF,
-		SKILL_COMPUTER            = SKILL_EXPERT,
-		SKILL_SCIENCE             = SKILL_EXPERT,
-		SKILL_DEVICES             = SKILL_EXPERT
+		SKILL_BUREAUCRACY         = SKILL_MASTER,
+		SKILL_FINANCE             = SKILL_MASTER,
+		SKILL_COMPUTER            = SKILL_EXPERIENCED,
+		SKILL_SCIENCE             = SKILL_EXPERIENCED,
+		SKILL_DEVICES             = SKILL_EXPERIENCED
 	)
 
 /obj/item/robot_module/clerical/butler
@@ -40,12 +40,12 @@
 	)
 	emag = /obj/item/reagent_containers/food/drinks/bottle/small/beer/fake
 	skills = list(
-		SKILL_BUREAUCRACY         = SKILL_PROF,
-		SKILL_COMPUTER            = SKILL_EXPERT,
-		SKILL_COOKING             = SKILL_PROF,
-		SKILL_BOTANY              = SKILL_PROF,
+		SKILL_BUREAUCRACY         = SKILL_MASTER,
+		SKILL_COMPUTER            = SKILL_EXPERIENCED,
+		SKILL_COOKING             = SKILL_MASTER,
+		SKILL_BOTANY              = SKILL_MASTER,
 		SKILL_MEDICAL             = SKILL_BASIC,
-		SKILL_CHEMISTRY           = SKILL_ADEPT
+		SKILL_CHEMISTRY           = SKILL_TRAINED
 	)
 
 /obj/item/robot_module/clerical/butler/finalize_equipment()

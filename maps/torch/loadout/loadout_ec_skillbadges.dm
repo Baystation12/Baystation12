@@ -12,7 +12,7 @@
 	display_name = "Field Xenobotany Specialist badge"
 	path = /obj/item/clothing/accessory/solgov/skillbadge/botany
 	allowed_skills = list(
-		SKILL_BOTANY = SKILL_ADEPT
+		SKILL_BOTANY = SKILL_TRAINED
 	)
 
 /datum/gear/skill/botany/stripe
@@ -23,7 +23,7 @@
 	display_name = "Xenofauna Acquisition Specialist badge"
 	path = /obj/item/clothing/accessory/solgov/skillbadge/netgun
 	allowed_skills = list(
-		SKILL_WEAPONS = SKILL_ADEPT
+		SKILL_WEAPONS = SKILL_TRAINED
 	)
 
 /datum/gear/skill/netgun/stripe
@@ -34,7 +34,7 @@
 	display_name = "Void Mobility Specialist badge"
 	path = /obj/item/clothing/accessory/solgov/skillbadge/eva
 	allowed_skills = list(
-		SKILL_EVA = SKILL_ADEPT
+		SKILL_EVA = SKILL_TRAINED
 	)
 
 /datum/gear/skill/eva/stripe
@@ -63,7 +63,7 @@
 	display_name = "Electrical Specialist badge"
 	path = /obj/item/clothing/accessory/solgov/skillbadge/electric
 	allowed_skills = list(
-		SKILL_ELECTRICAL = SKILL_ADEPT
+		SKILL_ELECTRICAL = SKILL_TRAINED
 	)
 
 /datum/gear/skill/electric/stripe
@@ -74,5 +74,5 @@
 	display_name = "Research Specialist badge"
 	path = /obj/item/clothing/accessory/solgov/skillbadge/science
 	allowed_skills = list(
-		SKILL_SCIENCE = SKILL_ADEPT
+		SKILL_SCIENCE = SKILL_TRAINED
 	)

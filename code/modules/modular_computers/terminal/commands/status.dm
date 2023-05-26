@@ -8,7 +8,7 @@
 	)
 	pattern = "^status$"
 	req_access = list(list(access_network, access_network_admin))
-	skill_needed = SKILL_EXPERT
+	skill_needed = SKILL_EXPERIENCED
 
 /datum/terminal_command/status/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(!terminal.computer.get_ntnet_status())

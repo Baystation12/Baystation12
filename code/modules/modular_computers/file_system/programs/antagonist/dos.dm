@@ -99,7 +99,7 @@
 		operator_skill = usr.get_skill_value(SKILL_COMPUTER)
 
 		var/list/sources_to_show = list(computer.get_network_tag())
-		var/extra_to_show = 2 * max(operator_skill - SKILL_ADEPT, 0)
+		var/extra_to_show = 2 * max(operator_skill - SKILL_TRAINED, 0)
 		if(extra_to_show)
 			for(var/i = 1, i <= extra_to_show, i++)
 				var/nid = pick(ntnet_global.registered_nids)

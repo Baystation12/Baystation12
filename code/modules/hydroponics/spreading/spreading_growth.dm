@@ -151,7 +151,7 @@
 		if(!istype(check_turf))
 			continue
 		for(var/mob/living/M in check_turf.contents)
-			if(prob(5) || !M.skill_check(SKILL_BOTANY, SKILL_PROF))
+			if(prob(5) || !M.skill_check(SKILL_BOTANY, SKILL_MASTER))
 				targets |= M
 	if(length(targets))
 		return targets

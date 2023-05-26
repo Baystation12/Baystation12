@@ -108,7 +108,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 
 /obj/item/rpd/interact(mob/user)
 	popup = new (user, "Pipe List", "[src] menu")
-	popup.set_content(get_console_data(user.skill_check(SKILL_ATMOS,SKILL_EXPERT) ? GLOB.rpd_pipe_selection_skilled : GLOB.rpd_pipe_selection, TRUE))
+	popup.set_content(get_console_data(user.skill_check(SKILL_ATMOS,SKILL_EXPERIENCED) ? GLOB.rpd_pipe_selection_skilled : GLOB.rpd_pipe_selection, TRUE))
 	popup.open()
 
 /obj/item/rpd/OnTopic(user, list/href_list)
@@ -136,7 +136,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 	if(istype(A, /obj/item/pipe))
 		recycle(A,user)
 	else
-		if(user.skill_fail_prob(SKILL_ATMOS, 80, SKILL_ADEPT))
+		if(user.skill_fail_prob(SKILL_ATMOS, 80, SKILL_TRAINED))
 			var/C = pick(GLOB.rpd_pipe_selection)
 			P = pick(GLOB.rpd_pipe_selection[C])
 			user.visible_message(SPAN_WARNING("[user] cluelessly fumbles with \the [src]."))
