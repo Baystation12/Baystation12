@@ -22,11 +22,11 @@
 		/datum/mil_rank/fleet/e8,
 	)
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
-	                    SKILL_EVA          = SKILL_ADEPT,
-	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
-	                    SKILL_ELECTRICAL   = SKILL_ADEPT,
+	                    SKILL_EVA          = SKILL_TRAINED,
+	                    SKILL_CONSTRUCTION = SKILL_TRAINED,
+	                    SKILL_ELECTRICAL   = SKILL_TRAINED,
 	                    SKILL_ATMOS        = SKILL_BASIC,
-	                    SKILL_ENGINES      = SKILL_ADEPT)
+	                    SKILL_ENGINES      = SKILL_TRAINED)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
@@ -82,7 +82,7 @@
 	)
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
 	                    SKILL_EVA          = SKILL_BASIC,
-	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
+	                    SKILL_CONSTRUCTION = SKILL_TRAINED,
 	                    SKILL_ELECTRICAL   = SKILL_BASIC,
 	                    SKILL_ATMOS        = SKILL_BASIC,
 	                    SKILL_ENGINES      = SKILL_BASIC)
@@ -135,12 +135,12 @@
 	no_skill_buffs = TRUE
 
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
-	                    SKILL_HAULING      = SKILL_ADEPT,
-	                    SKILL_EVA          = SKILL_ADEPT,
-	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
-	                    SKILL_ELECTRICAL   = SKILL_ADEPT,
-	                    SKILL_ATMOS        = SKILL_ADEPT,
-	                    SKILL_ENGINES      = SKILL_ADEPT)
+	                    SKILL_HAULING      = SKILL_TRAINED,
+	                    SKILL_EVA          = SKILL_TRAINED,
+	                    SKILL_CONSTRUCTION = SKILL_TRAINED,
+	                    SKILL_ELECTRICAL   = SKILL_TRAINED,
+	                    SKILL_ATMOS        = SKILL_TRAINED,
+	                    SKILL_ENGINES      = SKILL_TRAINED)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
@@ -189,21 +189,21 @@
 		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/civ/contractor
 	)
-	min_skill = list(   SKILL_COMPUTER		= SKILL_ADEPT,
-	                    SKILL_DEVICES		= SKILL_ADEPT,
-	                    SKILL_EVA           = SKILL_ADEPT,
-	                    SKILL_ANATOMY       = SKILL_ADEPT,
+	min_skill = list(   SKILL_COMPUTER		= SKILL_TRAINED,
+	                    SKILL_DEVICES		= SKILL_TRAINED,
+	                    SKILL_EVA           = SKILL_TRAINED,
+	                    SKILL_ANATOMY       = SKILL_TRAINED,
 						SKILL_CONSTRUCTION  = SKILL_BASIC,
 						SKILL_ELECTRICAL    = SKILL_BASIC,
 	                    SKILL_MECH          = HAS_PERK)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
-	                    SKILL_ATMOS        = SKILL_EXPERT,
-	                    SKILL_ENGINES      = SKILL_EXPERT,
+	                    SKILL_ATMOS        = SKILL_EXPERIENCED,
+	                    SKILL_ENGINES      = SKILL_EXPERIENCED,
 	                    SKILL_DEVICES      = SKILL_MAX,
-	                    SKILL_MEDICAL      = SKILL_EXPERT,
-	                    SKILL_ANATOMY      = SKILL_EXPERT)
+	                    SKILL_MEDICAL      = SKILL_EXPERIENCED,
+	                    SKILL_ANATOMY      = SKILL_EXPERIENCED)
 	skill_points = 20
 
 	access = list(

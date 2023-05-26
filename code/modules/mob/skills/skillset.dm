@@ -115,13 +115,7 @@
 // A generic way of modifying times via skill values
 /mob/proc/skill_delay_mult(skill_path, factor = 0.3)
 	var/points = get_skill_value(skill_path)
-	switch(points)
-		if(SKILL_BASIC)
-			return max(0, 1 + 3*factor)
-		if(SKILL_NONE)
-			return max(0, 1 + 6*factor)
-		else
-			return max(0, 1 + (SKILL_DEFAULT - points) * factor)
+	return max(0, 1 + (SKILL_BASELINE - points) * factor)
 
 
 /**
@@ -144,12 +138,12 @@
 			if (check_delay < final_delay)
 				final_delay = check_delay
 	else
-		final_delay = skill_delay_mult(skill_path)
-	final_delay += base_delay
+		final_delay = skill_delay_mult(skill_path, factor)
+	final_delay *= base_delay
 	return do_after(src, final_delay, target, do_flags)
 
 
-// A generic way of modifying success probabilities via skill values. Higher factor means skills have more effect. fail_chance is the chance at SKILL_NONE.
+// A generic way of modifying success probabilities via skill values. Higher factor means skills have more effect. fail_chance is the chance at SKILL_UNSKILLED.
 /mob/proc/skill_fail_chance(skill_path, fail_chance, no_more_fail = SKILL_MAX, factor = 1)
 	var/points = get_skill_value(skill_path)
 	if(points >= no_more_fail)

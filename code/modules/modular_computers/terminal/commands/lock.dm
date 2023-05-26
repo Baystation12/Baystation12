@@ -8,7 +8,7 @@
 		"WARNING: All files on affected device will be read-only, and new files cannot be created."
 	)
 	pattern = "^lock"
-	skill_needed = SKILL_ADEPT
+	skill_needed = SKILL_TRAINED
 
 /datum/terminal_command/lock/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/list/arguments = get_arguments(text)

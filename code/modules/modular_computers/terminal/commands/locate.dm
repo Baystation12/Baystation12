@@ -8,7 +8,7 @@
 	)
 	pattern = "locate"
 	req_access = list(list(access_network, access_network_admin))
-	skill_needed = SKILL_PROF
+	skill_needed = SKILL_MASTER
 
 /datum/terminal_command/locate/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/list/arguments = get_arguments(text)

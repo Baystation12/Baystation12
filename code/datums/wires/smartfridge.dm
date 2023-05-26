@@ -4,7 +4,7 @@
 	descriptions = list(
 		new /datum/wire_description(SMARTFRIDGE_WIRE_ELECTRIFY, "This wire seems to be carrying a heavy current."),
 		new /datum/wire_description(SMARTFRIDGE_WIRE_THROW, "This wire leads to the item dispensor force controls."),
-		new /datum/wire_description(SMARTFRIDGE_WIRE_IDSCAN, "This wire is connected to the ID scanning panel.", SKILL_EXPERT)
+		new /datum/wire_description(SMARTFRIDGE_WIRE_IDSCAN, "This wire is connected to the ID scanning panel.", SKILL_EXPERIENCED)
 	)
 
 /datum/wires/smartfridge/secure

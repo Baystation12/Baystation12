@@ -5,7 +5,7 @@
 	)
 	upgrade_locked = TRUE
 	skills = list(
-		SKILL_FINANCE = SKILL_PROF
+		SKILL_FINANCE = SKILL_MASTER
 	) // For the money launcher, of course
 
 /obj/item/robot_module/uncertified/party

@@ -100,7 +100,7 @@
 	path = /obj/item/clothing/accessory/solgov/specialty/pilot
 	flags = GEAR_HAS_NO_CUSTOMIZATION
 	allowed_skills = list(
-		SKILL_PILOT = SKILL_ADEPT
+		SKILL_PILOT = SKILL_TRAINED
 	)
 	allowed_branches = list(
 		/datum/mil_branch/fleet,

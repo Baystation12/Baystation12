@@ -52,7 +52,7 @@
 	defer_initialisation = TRUE
 	knockdown = FALSE
 	flags = SHUTTLE_FLAGS_PROCESS
-	skill_needed = SKILL_NONE
+	skill_needed = SKILL_UNSKILLED
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/skrell
 
 /obj/effect/shuttle_landmark/skrellscoutship/start
@@ -67,7 +67,7 @@
 	shuttle_area = /area/ship/skrellscoutshuttle
 	defer_initialisation = TRUE
 	flags = SHUTTLE_FLAGS_PROCESS
-	skill_needed = SKILL_NONE
+	skill_needed = SKILL_UNSKILLED
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/skrell
 	mothershuttle = "Skrellian Scout"
 

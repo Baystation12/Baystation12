@@ -30,12 +30,12 @@
 	)
 	emag = /obj/item/gun/energy/laser/mounted
 	skills = list(
-		SKILL_BUREAUCRACY         = SKILL_PROF,
-		SKILL_COMPUTER            = SKILL_EXPERT,
-		SKILL_FORENSICS           = SKILL_PROF,
-		SKILL_WEAPONS             = SKILL_EXPERT,
-		SKILL_CONSTRUCTION        = SKILL_ADEPT,
-		SKILL_ANATOMY             = SKILL_ADEPT
+		SKILL_BUREAUCRACY         = SKILL_MASTER,
+		SKILL_COMPUTER            = SKILL_EXPERIENCED,
+		SKILL_FORENSICS           = SKILL_MASTER,
+		SKILL_WEAPONS             = SKILL_EXPERIENCED,
+		SKILL_CONSTRUCTION        = SKILL_TRAINED,
+		SKILL_ANATOMY             = SKILL_TRAINED
 	)
 
 /obj/item/robot_module/flying/forensics/respawn_consumable(mob/living/silicon/robot/R, amount)
