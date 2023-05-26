@@ -1,0 +1,17 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - maptweak: Remove external bridge cameras. (B-Deck Bridge)
+  - maptweak: Remap chemistry lab to be a bit bigger, while not taking up more space
+      than normal in the medbay. (D-1 Med)
+  - maptweak: Remove `NO IDLE` sign between cryo-lab, replace with bodyscan screen.
+      (D-1 Med)
+  - maptweak: Replace BC's crowbar with prybar. (D-1 Sec)
+  - maptweak: Replace FT's cigarette pack spawn with a random cigarette pack spawn.
+      (D-1 Sec)
+  - maptweak: Add General Intercom to D1 Briefing Room. (D-1 Mid)
+  - maptweak: Shift scrubber spawn a bit to not be inconvenient on ladders. (D-3 Behind
+      SecCP)
+  - maptweak: Remove glass panes between consoles. (D-3 Rec Room)
+  - maptweak: Make PF office cameras belong to Exploration network. (D-4 PF Office)
+  - maptweak: Replace Atmos Storage waste canisters with oxygen canisters. (D-5 Hangar)
