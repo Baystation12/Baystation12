@@ -8,6 +8,8 @@
 #define SKILL_MIN      1 // Min skill value selectable
 #define SKILL_MAX      5 // Max skill value selectable
 #define SKILL_DEFAULT  4 //most mobs will default to this
+/// Baseline skill level used for determining mechanical skill multipliers.
+#define SKILL_BASELINE 3
 
 #define SKILL_EASY     1
 #define SKILL_AVERAGE  2

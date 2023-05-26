@@ -115,13 +115,7 @@
 // A generic way of modifying times via skill values
 /mob/proc/skill_delay_mult(skill_path, factor = 0.3)
 	var/points = get_skill_value(skill_path)
-	switch(points)
-		if(SKILL_BASIC)
-			return max(0, 1 + 3*factor)
-		if(SKILL_NONE)
-			return max(0, 1 + 6*factor)
-		else
-			return max(0, 1 + (SKILL_DEFAULT - points) * factor)
+	return max(0, 1 + (SKILL_BASELINE - points) * factor)
 
 
 /**
