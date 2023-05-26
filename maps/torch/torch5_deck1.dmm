@@ -579,22 +579,8 @@
 /obj/structure/sign/warning/nosmoking_1{
 	pixel_y = 24
 	},
-/obj/structure/table/rack{
-	dir = 8
-	},
 /obj/effect/floor_decal/corner/beige/mono,
-/obj/item/storage/box/autoinjectors,
-/obj/item/reagent_containers/spray/cleaner{
-	desc = "Someone has crossed out the 'Space' from Space Cleaner and written in Chemistry. Scrawled on the back is, 'Okay, whoever filled this with polytrinic acid, it was only funny the first time. It was hard enough replacing the CMO's first cat!'";
-	name = "Chemistry Cleaner"
-	},
-/obj/item/stack/package_wrap/twenty_five,
-/obj/item/hand_labeler,
-/obj/item/storage/box/beakers,
-/obj/item/reagent_containers/dropper,
-/obj/item/storage/box/beakers/insulated,
-/obj/item/storage/box/freezer,
-/obj/item/device/scanner/spectrometer,
+/obj/machinery/chemical_dispenser/full,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "abn" = (
@@ -603,11 +589,7 @@
 	pixel_y = 32
 	},
 /obj/effect/floor_decal/corner/beige/mono,
-/obj/structure/table/standard,
-/obj/item/reagent_containers/glass/beaker/large,
-/obj/item/reagent_containers/glass/beaker/large,
-/obj/item/reagent_containers/glass/beaker/insulated/large,
-/obj/item/reagent_containers/dropper,
+/obj/machinery/reagentgrinder,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "abo" = (
@@ -628,13 +610,9 @@
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue/autopsy)
 "abr" = (
-/obj/effect/floor_decal/corner/beige{
-	dir = 10
-	},
-/obj/effect/floor_decal/corner/beige{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/white,
+/obj/effect/floor_decal/corner/beige/mono,
+/obj/machinery/chem_master,
+/turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "abs" = (
 /obj/machinery/light{
@@ -646,30 +624,35 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 10
 	},
+/obj/structure/table/standard,
+/obj/item/reagent_containers/glass/beaker/insulated/large,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/dropper,
+/obj/item/stack/material/phoron{
+	amount = 6
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "abt" = (
-/obj/effect/floor_decal/corner/beige{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/white,
+/obj/structure/table/standard,
+/obj/effect/floor_decal/corner/beige/mono,
+/turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "abu" = (
-/obj/effect/floor_decal/corner/beige{
-	dir = 5
-	},
-/obj/effect/floor_decal/corner/beige{
-	dir = 10
-	},
 /obj/structure/cable/green{
-	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2"
+	icon_state = "0-2"
 	},
-/obj/effect/floor_decal/corner/beige{
-	dir = 10
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24
 	},
-/turf/simulated/floor/tiled/white,
+/obj/structure/table/standard,
+/obj/machinery/reagent_temperature,
+/obj/effect/floor_decal/corner/beige/mono,
+/turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "abv" = (
 /obj/effect/floor_decal/corner/beige{
@@ -680,6 +663,9 @@
 	},
 /obj/effect/floor_decal/corner/beige{
 	dir = 5
+	},
+/obj/machinery/light{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
@@ -724,14 +710,8 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/wallframe_spawn/reinforced/no_grille,
-/obj/machinery/door/blast/shutters{
-	density = 0;
-	dir = 4;
-	icon_state = "shutter0";
-	id_tag = "chemcounter";
-	name = "Chemistry Counter Shutters";
-	opacity = 0
+/obj/machinery/door/airlock/glass/medical{
+	name = "Chemistry"
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
@@ -759,9 +739,10 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/chemical_dispenser/full,
-/obj/effect/floor_decal/corner/beige/mono,
-/turf/simulated/floor/tiled/white/monotile,
+/obj/effect/floor_decal/corner/beige{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "abB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -775,12 +756,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4;
-	icon_state = "pipe-c"
-	},
 /obj/effect/floor_decal/corner/beige{
-	dir = 9
+	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
@@ -796,10 +773,12 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
+/obj/effect/floor_decal/corner/beige{
+	dir = 5
 	},
-/obj/machinery/reagentgrinder,
+/obj/effect/floor_decal/corner/beige{
+	dir = 5
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "abD" = (
@@ -814,9 +793,8 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 6
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 2;
-	icon_state = "pipe-c"
+/obj/effect/floor_decal/corner/beige{
+	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
@@ -833,24 +811,14 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/structure/table/standard,
-/obj/item/device/radio/intercom/department/medbay{
-	dir = 8;
-	pixel_x = 24
-	},
 /obj/effect/floor_decal/corner/beige/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "abH" = (
 /obj/machinery/door/firedoor,
-/obj/effect/wallframe_spawn/reinforced/no_grille,
-/obj/machinery/door/blast/shutters{
-	density = 0;
-	dir = 4;
-	icon_state = "shutter0";
-	id_tag = "chemcounter";
-	name = "Chemistry Counter Shutters";
-	opacity = 0
+/obj/machinery/smartfridge/secure/medbay{
+	dir = 1;
+	req_access = list(list("ACCESS_CHEMISTRY","ACCESS_MEDICAL_EQUIP"))
 	},
 /turf/simulated/floor/plating,
 /area/medical/chemistry)
@@ -896,9 +864,11 @@
 /obj/machinery/light_switch{
 	pixel_y = -22
 	},
-/obj/machinery/chem_master,
-/obj/effect/floor_decal/corner/beige/mono,
-/turf/simulated/floor/tiled/white/monotile,
+/obj/structure/table/standard,
+/obj/effect/floor_decal/corner/beige{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "abL" = (
 /turf/simulated/wall/r_wall/prepainted,
@@ -930,12 +900,14 @@
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/firstdeck/centralstarboard)
 "abQ" = (
-/obj/structure/disposalpipe/segment,
-/obj/structure/bed/chair/comfy/blue{
-	dir = 8
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/disposalpipe/trunk,
+/obj/machinery/disposal,
+/obj/effect/floor_decal/corner/beige{
+	dir = 10
 	},
 /obj/effect/floor_decal/corner/beige{
-	dir = 9
+	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
@@ -969,19 +941,18 @@
 	dir = 1
 	},
 /obj/structure/table/standard,
-/obj/machinery/reagent_temperature,
-/turf/simulated/floor/tiled/white/monotile,
+/obj/effect/floor_decal/corner/beige{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "abU" = (
-/obj/structure/bed/chair/comfy/blue{
-	dir = 8
-	},
 /obj/effect/floor_decal/corner/beige{
 	dir = 6
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 1;
-	icon_state = "pipe-c"
+/obj/structure/bed/chair/padded/blue,
+/obj/effect/floor_decal/corner/beige{
+	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
@@ -1084,11 +1055,11 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 32
 	},
-/obj/machinery/disposal,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/disposalpipe/trunk{
-	dir = 8
-	},
+/obj/structure/closet/secure_closet/chemical,
+/obj/item/storage/box/pillbottles,
+/obj/item/book/manual/chemistry_recipes,
+/obj/item/device/radio/headset/headset_med,
+/obj/item/clothing/glasses/science,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "acf" = (
@@ -1452,7 +1423,6 @@
 /area/maintenance/firstdeck/aftstarboard)
 "acO" = (
 /obj/structure/disposalpipe/segment,
-/obj/structure/table/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/window/northleft{
 	name = "Chemistry Desk"
@@ -1465,6 +1435,7 @@
 	name = "Chemistry Counter Shutters";
 	opacity = 0
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "acP" = (
@@ -1499,10 +1470,6 @@
 	dir = 4;
 	icon_state = "pipe-c"
 	},
-/obj/machinery/smartfridge/secure/medbay{
-	dir = 1;
-	req_access = list(list("ACCESS_CHEMISTRY","ACCESS_MEDICAL_EQUIP"))
-	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -1512,6 +1479,7 @@
 	name = "Chemistry Counter Shutters";
 	opacity = 0
 	},
+/obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/medical/chemistry)
 "acV" = (
@@ -16117,7 +16085,6 @@
 /area/hallway/primary/firstdeck/center)
 "dEb" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/random_multi/single_item/skelestand,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftstarboard)
 "dFb" = (
@@ -25276,9 +25243,8 @@
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/xenoflora)
 "qcl" = (
-/obj/structure/table/rack,
-/obj/item/storage/box/bodybags,
-/obj/random/firstaid,
+/obj/random_multi/single_item/skelestand,
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftstarboard)
 "qdb" = (
@@ -29095,22 +29061,11 @@
 /turf/simulated/floor/tiled/monotile,
 /area/security/brig)
 "uUK" = (
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_y = 24
-	},
-/obj/effect/floor_decal/corner/beige/mono,
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/structure/table/standard,
-/obj/item/stack/material/phoron{
-	amount = 6
-	},
-/turf/simulated/floor/tiled/white/monotile,
-/area/medical/chemistry)
+/obj/structure/table/rack,
+/obj/random/firstaid,
+/obj/item/storage/box/bodybags,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/firstdeck/aftstarboard)
 "uVf" = (
 /obj/machinery/atmospherics/valve/digital{
 	dir = 4;
@@ -29506,13 +29461,27 @@
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "vKA" = (
-/obj/structure/closet/secure_closet/chemical,
-/obj/item/clothing/glasses/science,
-/obj/item/book/manual/chemistry_recipes,
-/obj/item/storage/box/pillbottles,
-/obj/item/device/radio/headset/headset_med,
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 8;
+	pixel_x = 24
+	},
 /obj/effect/floor_decal/corner/beige/mono,
-/turf/simulated/floor/tiled/white,
+/obj/structure/table/rack{
+	dir = 8
+	},
+/obj/item/device/scanner/spectrometer,
+/obj/item/storage/box/freezer,
+/obj/item/storage/box/beakers/insulated,
+/obj/item/reagent_containers/dropper,
+/obj/item/storage/box/beakers,
+/obj/item/hand_labeler,
+/obj/item/stack/package_wrap/twenty_five,
+/obj/item/reagent_containers/spray/cleaner{
+	desc = "Someone has crossed out the 'Space' from Space Cleaner and written in Chemistry. Scrawled on the back is, 'Okay, whoever filled this with polytrinic acid, it was only funny the first time. It was hard enough replacing the CMO's first cat!'";
+	name = "Chemistry Cleaner"
+	},
+/obj/item/storage/box/autoinjectors,
+/turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "vMm" = (
 /obj/structure/closet/crate,
@@ -30360,9 +30329,13 @@
 /turf/simulated/floor/tiled,
 /area/security/detectives_office)
 "yfd" = (
-/obj/machinery/door/airlock/glass/medical{
-	name = "Chemistry"
+/obj/effect/floor_decal/corner/beige{
+	dir = 10
 	},
+/obj/effect/floor_decal/corner/beige{
+	dir = 5
+	},
+/obj/structure/bed/chair/comfy/blue,
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "yfH" = (
@@ -51503,7 +51476,7 @@ ayA
 dcb
 dDb
 acf
-yfd
+acf
 aby
 abH
 acf
@@ -51907,7 +51880,7 @@ uXe
 kaS
 acf
 abs
-abr
+yfd
 abB
 abQ
 acO
@@ -52310,7 +52283,7 @@ uXe
 uXe
 dRC
 acf
-uUK
+acf
 abu
 abD
 abU
@@ -52510,9 +52483,9 @@ adw
 uXe
 uXe
 uXe
-qcl
-acL
-abs
+uXe
+uUK
+acf
 abv
 abG
 ace
@@ -52713,10 +52686,10 @@ sde
 sde
 sde
 dEb
-acL
-vKA
-mJY
+qcl
 acf
+mJY
+vKA
 acf
 acf
 aeo
