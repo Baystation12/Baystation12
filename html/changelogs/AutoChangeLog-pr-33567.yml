@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscadd: Alien alloy now has random icons for sheet stacks, as well as constructed
+      tables, doors, and walls.
