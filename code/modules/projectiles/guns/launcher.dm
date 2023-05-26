@@ -6,6 +6,8 @@
 	w_class = ITEM_SIZE_HUGE
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
+	screen_shake = 1
+	space_recoil = 1
 
 	var/release_force = 0
 	var/throw_distance = 10

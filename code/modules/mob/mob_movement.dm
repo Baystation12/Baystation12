@@ -162,6 +162,10 @@
 		if ((A != src.loc && A && A.z == src.z))
 			src.last_move = get_dir(A, src.loc)
 
+	if(!inertia_moving)
+		inertia_next_move = world.time + inertia_move_delay
+		space_drift(direct ? direct : last_move)
+
 /client/Move(n, direction)
 	if(!user_acted(src))
 		return
@@ -169,51 +173,76 @@
 		return // Moved here to avoid nullrefs below
 	return mob.SelfMove(direction)
 
-// Checks whether this mob is allowed to move in space
-// Return 1 for movement, 0 for none,
-// -1 to allow movement but with a chance of slipping
-/mob/proc/Allow_Spacemove(check_drift = 0)
-	if(!Check_Dense_Object()) //Nothing to push off of so end here
-		return 0
 
-	if(restrained()) //Check to see if we can do things
-		return 0
+/mob/Process_Spacemove(allow_movement)
+	. = ..()
+	if(.)
+		return
 
-	return -1
+	var/atom/movable/backup = get_spacemove_backup()
+	if(backup)
+		if(istype(backup) && allow_movement)
+			return backup
+		return -1
 
-//Checks if a mob has solid ground to stand on
-//If there's no gravity then there's no up or down so naturally you can't stand on anything.
-//For the same reason lattices in space don't count - those are things you grip, presumably.
-/mob/proc/check_solid_ground()
-	if(istype(loc, /turf/space))
-		return 0
+/mob/proc/space_do_move(allow_move, direction)
+	if(ismovable(allow_move))//push off things in space
+		handle_space_pushoff(allow_move, direction)
+		allow_move = -1
 
-	if(!lastarea)
-		lastarea = get_area(src)
-	if(!lastarea || !lastarea.has_gravity)
+	if(allow_move == -1 && handle_spaceslipping())
 		return 0
 
 	return 1
 
-/mob/proc/Check_Dense_Object() //checks for anything to push off or grip in the vicinity. also handles magboots on gravity-less floors tiles
+/mob/proc/handle_space_pushoff(atom/movable/AM, direction)
+	if(AM.anchored)
+		return
 
+	if(ismob(AM))
+		var/mob/M = AM
+		if(M.check_space_footing())
+			return
+
+	AM.inertia_ignore = src
+	if(step(AM, turn(direction, 180)))
+		to_chat(src, "<span class='info'>You push off of [AM] to propel yourself.</span>")
+		inertia_ignore = AM
+
+/mob/proc/get_spacemove_backup()
 	var/shoegrip = Check_Shoegrip()
 
-	for(var/turf/simulated/T in trange(1,src)) //we only care for non-space turfs
-		if(T.density)	//walls work
-			return 1
-		else
-			var/area/A = T.loc
-			if(A.has_gravity || (shoegrip && !isopenspace(T)))
-				return 1
+	for(var/thing in trange(1,src))//checks for walls or grav turf first
+		var/turf/T = thing
+		if(T.density || T.is_wall() || (T.is_floor() && (shoegrip || T.has_gravity())))
+			return T
 
-	for(var/obj/O in orange(1, src))
-		if(istype(O, /obj/structure/lattice))
-			return 1
-		if(istype(O, /obj/structure/catwalk))
-			return 1
-		if(O && O.density && O.anchored)
-			return 1
+	var/obj/item/grab/G = locate() in src
+	for(var/A in range(1, get_turf(src)))
+		if(istype(A,/atom/movable))
+			var/atom/movable/AM = A
+			if(AM == src || AM == inertia_ignore || !AM.simulated || !AM.mouse_opacity || AM == buckled)	//mouse_opacity is hacky as hell, need better solution
+				continue
+			if(ismob(AM))
+				var/mob/M = AM
+				if(M.buckled)
+					continue
+			if(AM.density || !AM.CanPass(src))
+				if(AM.anchored)
+					return AM
+				if(G && AM == G.affecting)
+					continue
+				. = AM
+
+/mob/proc/check_space_footing()	//checks for gravity or maglockable turfs to prevent space related movement
+	if(has_gravity() || anchored || buckled)
+		return 1
+
+	if(Check_Shoegrip())
+		for(var/thing in trange(1,src))	//checks for turfs that one can maglock to
+			var/turf/T = thing
+			if(T.density || T.is_wall() || T.is_floor())
+				return 1
 
 	return 0
 
@@ -224,8 +253,7 @@
 /mob/proc/handle_spaceslipping()
 	if(prob(skill_fail_chance(SKILL_EVA, slip_chance(10), SKILL_EXPERIENCED)))
 		to_chat(src, SPAN_WARNING("You slipped!"))
-		src.inertia_dir = src.last_move
-		step(src, src.inertia_dir)
+		step(src,turn(last_move, pick(45,-45)))
 		return 1
 	return 0
 

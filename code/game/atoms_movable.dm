@@ -33,6 +33,101 @@
 	///Internal holder for emissive blocker object, DO NOT USE DIRECTLY. Use blocks_emissive
 	var/mutable_appearance/em_block
 
+	var/inertia_dir = 0
+	var/atom/inertia_last_loc
+	var/inertia_moving = 0
+	var/inertia_next_move = 0
+	var/inertia_move_delay = 5
+	var/atom/movable/inertia_ignore
+
+//call this proc to start space drifting
+/atom/movable/proc/space_drift(direction)//move this down
+	if(!loc || direction & (UP|DOWN) || Process_Spacemove(0))
+		inertia_dir = 0
+		inertia_ignore = null
+		return 0
+
+	inertia_dir = direction
+	if(!direction)
+		return 1
+	inertia_last_loc = loc
+	SSspacedrift.processing[src] = src
+	return 1
+
+//return 0 to space drift, 1 to stop, -1 for mobs to handle space slips
+/atom/movable/proc/Process_Spacemove(allow_movement)
+	if(!simulated)
+		return 1
+
+	if(has_gravity())
+		return 1
+
+	if(length(pulledby))
+		return 1
+
+	if(throwing)
+		return 1
+
+	if(anchored)
+		return 1
+
+	if(!isturf(loc))
+		return 1
+
+	if(locate(/obj/structure/lattice) in range(1, get_turf(src))) //Not realistic but makes pushing things in space easier
+		return -1
+
+	return 0
+
+/atom/movable/hitby(atom/movable/AM, datum/thrownthing/TT)
+	. = ..()
+	process_momentum(AM,TT)
+
+/atom/movable/proc/process_momentum(atom/movable/AM, datum/thrownthing/TT)//physic isn't an exact science
+	. = momentum_power(AM,TT)
+
+	if(.)
+		momentum_do(.,TT,AM)
+
+/atom/movable/proc/momentum_power(atom/movable/AM, datum/thrownthing/TT)
+	if(anchored)
+		return 0
+
+	. = (AM.get_mass()*TT.speed)/(get_mass()*min(AM.throw_speed,2))
+	if(has_gravity())
+		. *= 0.5
+
+/atom/movable/proc/momentum_do(power, datum/thrownthing/TT)
+	var/direction = TT.init_dir
+	switch(power)
+		if(0.75 to INFINITY)		//blown backward, also calls being pinned to walls
+			throw_at(get_edge_target_turf(src, direction), min((TT.maxrange - TT.dist_travelled) * power, 10), throw_speed * min(power, 1.5))
+
+		if(0.5 to 0.75)	//knocks them back and changes their direction
+			step(src, direction)
+
+		if(0.25 to 0.5)	//glancing change in direction
+			var/drift_dir
+			if(direction & (NORTH|SOUTH))
+				if(inertia_dir & (NORTH|SOUTH))
+					drift_dir |= (direction & (NORTH|SOUTH)) & (inertia_dir & (NORTH|SOUTH))
+				else
+					drift_dir |= direction & (NORTH|SOUTH)
+			else
+				drift_dir |= inertia_dir & (NORTH|SOUTH)
+			if(direction & (EAST|WEST))
+				if(inertia_dir & (EAST|WEST))
+					drift_dir |= (direction & (EAST|WEST)) & (inertia_dir & (EAST|WEST))
+				else
+					drift_dir |= direction & (EAST|WEST)
+			else
+				drift_dir |= inertia_dir & (EAST|WEST)
+			space_drift(drift_dir)
+
+/atom/movable/proc/get_mass()
+	return 1.5
+
+
 /atom/movable/Initialize()
 	if (!isnull(config.glide_size))
 		glide_size = config.glide_size
@@ -68,6 +163,9 @@
 /atom/movable/Bump(atom/A, yes)
 	if(!QDELETED(throwing))
 		throwing.hit_atom(A)
+
+	if(inertia_dir)
+		inertia_dir = 0
 
 	if (A && yes)
 		A.last_bumped = world.time

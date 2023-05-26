@@ -345,16 +345,27 @@
 			temp_windoor.open()
 
 /// Returns boolean. Whether or not the area is considered to have gravity.
-/area/proc/has_gravity()
+/area/has_gravity()
 	return has_gravity
 
 /area/space/has_gravity()
 	return 0
 
-/proc/has_gravity(atom/AT, turf/T)
-	if(!T)
-		T = get_turf(AT)
-	var/area/A = get_area(T)
+/atom/proc/has_gravity()
+	var/area/A = get_area(src)
+	if(A && A.has_gravity())
+		return 1
+	return 0
+
+/mob/has_gravity()
+	if(!lastarea)
+		lastarea = get_area(src)
+	if(!lastarea || !lastarea.has_gravity())
+		return 0
+	return 1
+
+/turf/has_gravity()
+	var/area/A = loc
 	if(A && A.has_gravity())
 		return 1
 	return 0

@@ -8,7 +8,7 @@
 		return 1
 	return 0
 
-/mob/living/silicon/robot/Allow_Spacemove()
+/mob/living/silicon/robot/Process_Spacemove()
 	if(module)
 		for(var/obj/item/tank/jetpack/J in module.equipment)
 			if(J && J.allow_thrust(0.01))

@@ -125,10 +125,7 @@
 
 			if(M.slip("the [floor_type] floor", slip_stun))
 				addtimer(new Callback(M, /mob/proc/slip_handler, M.dir, slip_dist - 1, 1), 1)
-			else
-				M.inertia_dir = 0
-		else
-			M.inertia_dir = 0
+
 
 /mob/proc/slip_handler(dir, dist, delay)
 	if (dist > 0)

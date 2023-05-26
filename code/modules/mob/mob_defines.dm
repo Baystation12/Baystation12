@@ -136,8 +136,6 @@
 
 	var/in_throw_mode = 0
 
-	var/inertia_dir = 0
-
 //	var/job = null//Living
 
 	var/can_pull_size = ITEM_SIZE_NO_CONTAINER // Maximum w_class the mob can pull.

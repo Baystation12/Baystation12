@@ -147,8 +147,8 @@
 	master.disrupt()
 
 /obj/effect/dummy/chameleon/relaymove(mob/user, direction)
-	var/area/A = get_area(src)
-	if(!A || !A.has_gravity()) return //No magical space movement!
+	if(!has_gravity())
+		return //No magical space movement!
 
 	if(can_move)
 		can_move = 0

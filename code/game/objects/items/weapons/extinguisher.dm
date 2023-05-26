@@ -140,16 +140,16 @@
 
 		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
 
-		var/direction = get_dir(src,target)
+		var/direction = get_dir(target, src)
 
 		if(user.buckled && isobj(user.buckled))
-			addtimer(new Callback(src, .proc/propel_object, user.buckled, user, turn(direction,180)), 0)
+			addtimer(new Callback(src, .proc/propel_object, user.buckled, user, direction), 0)
 
 		addtimer(new Callback(src, .proc/do_spray, target), 0)
 
-		if((istype(usr.loc, /turf/space)) || (usr.lastarea.has_gravity == 0))
-			user.inertia_dir = get_dir(target, user)
-			step(user, user.inertia_dir)
+		if(!user.check_space_footing())
+			step(user, direction)
+
 	else
 		return ..()
 	return

@@ -78,7 +78,6 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 	var/turf/T = locate(new_x, new_y, z)
 	if(T)
 		forceMove(T)
-		inertia_dir = 0
 		throwing = null
 		to_chat(src, SPAN_NOTICE("You cannot move further in this direction."))
 
