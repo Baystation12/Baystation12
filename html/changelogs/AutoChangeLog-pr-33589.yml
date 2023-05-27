@@ -1,0 +1,5 @@
+author: BoNT
+delete-after: true
+changes:
+  - rscadd: Slime surgery with laser scalpels & incision management systems will create
+      both incisions in a single step.
