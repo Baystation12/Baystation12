@@ -46,6 +46,9 @@
 	. += "Use a screwdriver to open the panel."
 	. += "Use a parts replacer to view installed parts."
 
+/singleton/machine_construction/default/panel_closed/cannot_print
+	cannot_print = TRUE
+
 /singleton/machine_construction/default/panel_open
 	up_state = /singleton/machine_construction/default/panel_closed
 	down_state = /singleton/machine_construction/default/deconstructed

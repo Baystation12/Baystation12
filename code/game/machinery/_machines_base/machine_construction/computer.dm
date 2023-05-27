@@ -10,3 +10,6 @@
 /singleton/machine_construction/default/panel_open/computer
 	up_state = /singleton/machine_construction/default/panel_closed/computer
 	needs_board = "computer"
+
+/singleton/machine_construction/default/panel_closed/computer/cannot_print
+	cannot_print = TRUE

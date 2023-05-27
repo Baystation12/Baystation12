@@ -102,13 +102,6 @@
 	build_path = /obj/item/stock_parts/circuitboard/roboprinter
 	sort_string = "FAGAK"
 
-/datum/design/circuit/bioprinter
-	name = "synthetic organ fabricator"
-	id = "bioprinter"
-	req_tech = list(TECH_BIO = 6, TECH_DATA = 3)
-	build_path = /obj/item/stock_parts/circuitboard/bioprinter
-	sort_string = "FAGAL"
-
 /datum/design/circuit/teleconsole
 	name = "teleporter control console"
 	id = "teleconsole"
@@ -328,50 +321,44 @@
 	id = "air_management"
 	build_path = /obj/item/stock_parts/circuitboard/air_management
 	sort_string = "JAAAB"
-/datum/design/circuit/area_atmos
-	name = "area air control console"
-	id = "area_atmos"
-	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
-	build_path = /obj/item/stock_parts/circuitboard/area_atmos
-	sort_string = "JAAAC"
 
 /datum/design/circuit/rcon_console
 	name = "RCON remote control console"
 	id = "rcon_console"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_POWER = 5)
 	build_path = /obj/item/stock_parts/circuitboard/rcon_console
-	sort_string = "JAAAD"
+	sort_string = "JAAAC"
 
 /datum/design/circuit/dronecontrol
 	name = "drone control console"
 	id = "dronecontrol"
 	req_tech = list(TECH_DATA = 4)
 	build_path = /obj/item/stock_parts/circuitboard/drone_control
-	sort_string = "JAAAE"
+	sort_string = "JAAAD"
 
 /datum/design/circuit/powermonitor
 	name = "power monitoring console"
 	id = "powermonitor"
 	build_path = /obj/item/stock_parts/circuitboard/powermonitor
-	sort_string = "JAAAF"
+	sort_string = "JAAAE"
 
 /datum/design/circuit/solarcontrol
 	name = "solar control console"
 	id = "solarcontrol"
 	build_path = /obj/item/stock_parts/circuitboard/solar_control
-	sort_string = "JAAAG"
+	sort_string = "JAAAF"
 
 /datum/design/circuit/supermatter_control
 	name = "core monitoring console"
 	id = "supermatter_control"
 	build_path = /obj/item/stock_parts/circuitboard/air_management/supermatter_core
-	sort_string = "JAAAH"
+	sort_string = "JAAAG"
 
 /datum/design/circuit/injector
 	name = "injector control console"
 	id = "injector"
 	build_path = /obj/item/stock_parts/circuitboard/air_management/injector_control
-	sort_string = "JAAAI"
+	sort_string = "JAAAH"
 
 /datum/design/circuit/pacman
 	name = "PACMAN-type generator"

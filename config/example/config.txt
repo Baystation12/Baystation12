@@ -225,7 +225,7 @@ GUEST_BAN
 # TICKLAG 0.333333
 
 ## Defines world tick rate. Use this OR ticklag, not both. Defaults to 30.
-FPS 20
+FPS 40
 
 ## Whether the server will talk to other processes through socket_talk
 SOCKET_TALK 0

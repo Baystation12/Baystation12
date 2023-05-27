@@ -193,6 +193,7 @@
 	desc = "It's a machine that prints replacement organs."
 	icon_state = "bioprinter"
 	base_type = /obj/machinery/organ_printer/flesh
+	construct_state = /singleton/machine_construction/default/panel_closed/cannot_print
 	machine_name = "bioprinter"
 	machine_desc = "Bioprinters can create surrogate organs for many species by using a blood sample from the intended recipient. Uses meat for biological matter."
 	// null amount means it will calculate the cost based on get_organ_cost()
