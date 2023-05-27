@@ -22,6 +22,12 @@
 	item_cost = 25
 	path = /obj/item/clothing/accessory/armor_plate/sneaky/tactical
 
+/datum/uplink_item/item/stealth_items/corpse_cube
+	name = "Corpse Cube"
+	desc = "For when reports of death were greatly exaggerated. Creates a fake corpse of the person whose blood is injected into the cube. \
+	 Do not eat. Mechanical parts not included."
+	item_cost = 20
+	path = /obj/item/storage/box/syndie_kit/corpse_cube
 /datum/uplink_item/item/stealth_items/balaclava
 	name = "Balaclava"
 	item_cost = 1

@@ -1458,6 +1458,87 @@
 	name = "strange-looking monkey cube"
 	monkey_type = /mob/living/simple_animal/hostile/carp/pike
 
+//define human cubes here
+
+/obj/item/reagent_containers/food/snacks/corpse_cube
+	name = "odd fleshy cube"
+	desc = "A strangely large, veiny and deformed monkey cube that pulsates and writhes disturbingly"
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+	icon_state = "corpsecube"
+	bitesize = 12
+	filling_color = "#adac7f"
+	center_of_mass = "x=16;y=14"
+
+	var/wrapped = 0
+	var/growing = 0
+	var/spawn_type = /mob/living/carbon/human
+
+/obj/item/reagent_containers/food/snacks/corpse_cube/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
+
+
+/obj/item/reagent_containers/food/snacks/corpse_cube/proc/CorpseExpand(var/datum/source_DNA,var/datum/source_name,var/datum/source_species,var/datum/source_pronouns)
+	if(!growing)
+		growing = 1
+		var/mob/living/carbon/human/H = new spawn_type
+		H.dna = source_DNA
+		//currently hardcoded since traitor item, but could be changed to use SSmob_list. No real good solution outside that or adding faction to blood and further bloating that.
+		H.faction = "crew"
+		H.real_name = source_name
+		H.SetName(source_name)
+		H.dna.real_name = source_name
+		H.pronouns = source_pronouns
+		H.change_pronouns(source_pronouns)
+		H.change_species(source_species)
+		src.visible_message(SPAN_WARNING("[src] transforms, the dummy body's features twisting and cracking as it imitates the provided blood!"))
+		H.dropInto(src.loc)
+		H.setBrainLoss(200)
+		H.adjustOxyLoss(H.maxHealth)
+		domutcheck(H, null)
+		H.UpdateAppearance()
+		qdel(src)
+
+/obj/item/reagent_containers/food/snacks/corpse_cube/on_reagent_change()
+	var/datum/target_DNA = ""
+	var/datum/target_name = ""
+	var/datum/target_species = ""
+	var/datum/target_pronouns= ""
+	if(reagents.has_reagent(/datum/reagent/blood))
+		for(var/datum/reagent/blood/B in src.reagents.reagent_list)
+			target_DNA = B.data["full_DNA"]
+			target_name = B.data["blood_real_name"]
+			target_species = B.data["species"]
+			target_pronouns = B.data["pronouns"]
+		playsound(loc, 'sound/effects/corpsecube.ogg', 60)
+		sleep(2)
+		CorpseExpand(target_DNA,target_name,target_species,target_pronouns)
+
+/obj/item/reagent_containers/food/snacks/corpse_cube/OnConsume(mob/living/consumer, mob/living/feeder)
+	set waitfor = FALSE
+	if (ishuman(consumer))
+		var/mob/living/carbon/human/human = consumer
+		to_chat(human, FONT_LARGE(SPAN_DANGER("You feel something shifting and slithering throughout your body ...")))
+		var/obj/item/organ/external/organ = human.get_organ(BP_CHEST)
+		var/obj/item/organ/external/unluckylimb1 = human.get_organ(pick(BP_ALL_LIMBS))
+		var/obj/item/organ/external/unluckylimb2 = human.get_organ(pick(BP_ALL_LIMBS))
+		organ.add_pain(30)
+		sleep(3 SECONDS)
+		organ.fracture()
+		sleep(3 SECONDS)
+		unluckylimb1.add_pain(50)
+		unluckylimb1.fracture()
+		unluckylimb2.add_pain(50)
+		unluckylimb2.fracture()
+		organ.take_external_damage(50, 0, EMPTY_BITFIELD, "Agonizing pain")
+		organ.damage_internal_organs(50, 0, EMPTY_BITFIELD)
+		human.AdjustWeakened(5)
+		human.AdjustStunned(5)
+
+	else
+		consumer.kill_health()
+
+
 /obj/item/reagent_containers/food/snacks/spellburger
 	name = "spell burger"
 	desc = "This is absolutely Ei Nath."
