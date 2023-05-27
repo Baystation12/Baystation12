@@ -14,11 +14,11 @@
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/security/warden
 	allowed_branches = list(/datum/mil_branch/employee)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_TRAINED,
 	                    SKILL_EVA         = SKILL_BASIC,
 	                    SKILL_HAULING	  = SKILL_BASIC,
 	                    SKILL_COMBAT      = SKILL_BASIC,
-	                    SKILL_WEAPONS     = SKILL_ADEPT,
+	                    SKILL_WEAPONS     = SKILL_TRAINED,
 	                    SKILL_FORENSICS   = SKILL_BASIC)
 
 	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
@@ -67,7 +67,7 @@
 	                    SKILL_EVA         = SKILL_BASIC,
 	                    SKILL_COMBAT      = SKILL_BASIC,
 	                    SKILL_WEAPONS     = SKILL_BASIC,
-	                    SKILL_FORENSICS   = SKILL_ADEPT)
+	                    SKILL_FORENSICS   = SKILL_TRAINED)
 
 	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
 	                    SKILL_WEAPONS     = SKILL_MAX,
@@ -108,7 +108,7 @@
 	                    SKILL_EVA         = SKILL_BASIC,
 	                    SKILL_COMBAT      = SKILL_BASIC,
 	                    SKILL_HAULING     = SKILL_BASIC,
-	                    SKILL_WEAPONS     = SKILL_ADEPT,
+	                    SKILL_WEAPONS     = SKILL_TRAINED,
 	                    SKILL_FORENSICS   = SKILL_BASIC)
 
 	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,

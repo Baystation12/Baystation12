@@ -135,7 +135,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	for(var/skill in skill_reqs)
 		var/penalty = delicate ? 40 : 20
 		. -= max(0, penalty * (skill_reqs[skill] - user.get_skill_value(skill)))
-		if(user.skill_check(skill, SKILL_PROF))
+		if(user.skill_check(skill, SKILL_MASTER))
 			. += 20
 
 	if(ishuman(user))

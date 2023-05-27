@@ -17,8 +17,8 @@
 	var/datum/access/target_access = null
 	var/list/restricted_access_codes = list(access_change_ids) // access codes that are not hackable due to balance reasons
 	var/list/skill_restricted_access_codes = list(
-		access_network = SKILL_EXPERT,
-		access_network_admin = SKILL_PROF
+		access_network = SKILL_EXPERIENCED,
+		access_network_admin = SKILL_MASTER
 	)
 
 /datum/computer_file/program/access_decrypter/on_shutdown(forced)
@@ -46,7 +46,7 @@
 	progress += get_speed()
 
 	if(progress >= target_progress)
-		if(prob(20 * max(SKILL_ADEPT - operator_skill, 0))) // Oops
+		if(prob(20 * max(SKILL_TRAINED - operator_skill, 0))) // Oops
 			var/list/valid_access_values = get_all_station_access()
 			valid_access_values -= restricted_access_codes
 			valid_access_values -= RFID.stored_card.access
@@ -100,10 +100,10 @@
 		return TOPIC_HANDLED
 
 /datum/computer_file/program/access_decrypter/proc/get_sneak_chance()
-	return max(operator_skill - SKILL_ADEPT, 0) * 30
+	return max(operator_skill - SKILL_TRAINED, 0) * 30
 
 /datum/computer_file/program/access_decrypter/proc/get_speed()
-	var/skill_speed_modifier = 1 + (operator_skill - SKILL_ADEPT)/(SKILL_MAX - SKILL_MIN)
+	var/skill_speed_modifier = 1 + (operator_skill - SKILL_TRAINED)/(SKILL_MAX - SKILL_MIN)
 	var/obj/item/stock_parts/computer/processor_unit/CPU = computer.get_component(PART_CPU)
 	return CPU?.processing_power * skill_speed_modifier
 

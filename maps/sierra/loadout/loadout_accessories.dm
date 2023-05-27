@@ -7,7 +7,7 @@
 	path = /obj/item/clothing/accessory/solgov/specialty/pilot
 	// [INF]
 	// allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/adjutant, /datum/job/exploration_leader, /datum/job/explorer_pilot)
-	allowed_skills = list(SKILL_PILOT = SKILL_EXPERT)
+	allowed_skills = list(SKILL_PILOT = SKILL_EXPERIENCED)
 	// [INF/] by hacso
 
 /datum/gear/accessory/armband_security

@@ -282,7 +282,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	. = ..()
 	var/list/extra_data = list("<br>")
 	if (atmosphere)
-		if (user.skill_check(SKILL_SCIENCE, SKILL_ADEPT))
+		if (user.skill_check(SKILL_SCIENCE, SKILL_TRAINED))
 			var/list/gases = list()
 			for (var/g in atmosphere.gas)
 				if (atmosphere.gas[g] > atmosphere.total_moles * 0.05)
@@ -300,7 +300,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	if (length(animals) && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
 		extra_data += "Life traces detected"
 
-	if (LAZYLEN(spawned_features) && user.skill_check(SKILL_SCIENCE, SKILL_ADEPT))
+	if (LAZYLEN(spawned_features) && user.skill_check(SKILL_SCIENCE, SKILL_TRAINED))
 		var/ruin_num = 0
 		for (var/datum/map_template/ruin/exoplanet/R in spawned_features)
 			if (!(R.ruin_tags & RUIN_NATURAL))

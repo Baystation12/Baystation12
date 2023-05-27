@@ -17,11 +17,11 @@
 
 	skill_points = 24
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
-	                    SKILL_EVA          = SKILL_ADEPT,
-	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
-	                    SKILL_ELECTRICAL   = SKILL_ADEPT,
-	                    SKILL_ATMOS        = SKILL_ADEPT,
-	                    SKILL_ENGINES      = SKILL_ADEPT)
+	                    SKILL_EVA          = SKILL_TRAINED,
+	                    SKILL_CONSTRUCTION = SKILL_TRAINED,
+	                    SKILL_ELECTRICAL   = SKILL_TRAINED,
+	                    SKILL_ATMOS        = SKILL_TRAINED,
+	                    SKILL_ENGINES      = SKILL_TRAINED)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
 						SKILL_COMPUTER     = SKILL_MAX,
@@ -75,11 +75,11 @@
 
 	skill_points = 20
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
-	                    SKILL_EVA          = SKILL_ADEPT,
-	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
-	                    SKILL_ELECTRICAL   = SKILL_ADEPT,
-	                    SKILL_ATMOS        = SKILL_ADEPT,
-	                    SKILL_ENGINES      = SKILL_ADEPT)
+	                    SKILL_EVA          = SKILL_TRAINED,
+	                    SKILL_CONSTRUCTION = SKILL_TRAINED,
+	                    SKILL_ELECTRICAL   = SKILL_TRAINED,
+	                    SKILL_ATMOS        = SKILL_TRAINED,
+	                    SKILL_ENGINES      = SKILL_TRAINED)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
@@ -172,9 +172,9 @@
 	allowed_ranks = list(/datum/mil_rank/civ/nt, /datum/mil_rank/civ/contractor)
 
 	skill_points = 12
-	min_skill = list(   SKILL_COMPUTER     = SKILL_ADEPT,
+	min_skill = list(   SKILL_COMPUTER     = SKILL_TRAINED,
 	                    SKILL_CONSTRUCTION = SKILL_BASIC,
-	                    SKILL_ELECTRICAL   = SKILL_ADEPT)
+	                    SKILL_ELECTRICAL   = SKILL_TRAINED)
 
 	max_skill = list(   SKILL_ELECTRICAL   = SKILL_MAX,
 	                    SKILL_COMPUTER	   = SKILL_MAX)

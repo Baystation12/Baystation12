@@ -35,8 +35,8 @@
 /obj/item/gun/projectile/shotgun/pump/attack_self(mob/living/user as mob)
 	if(world.time >= recentpump + 10)
 		if(!is_held_twohanded(user))
-			var/fail_chance = user.skill_fail_chance(SKILL_WEAPONS, 90, SKILL_EXPERT, 0.25)
-			var/drop_chance = user.skill_fail_chance(SKILL_WEAPONS, 50, SKILL_EXPERT, 0.5)
+			var/fail_chance = user.skill_fail_chance(SKILL_WEAPONS, 90, SKILL_EXPERIENCED, 0.25)
+			var/drop_chance = user.skill_fail_chance(SKILL_WEAPONS, 50, SKILL_EXPERIENCED, 0.5)
 
 			if (!fail_chance)
 				user.visible_message(
@@ -146,8 +146,8 @@
 /obj/item/gun/projectile/shotgun/pump/sawn/attack_self(mob/living/user)
 	if(world.time >= recentpump + 10)
 		if(!is_held_twohanded(user))
-			var/fail_chance = user.skill_fail_chance(SKILL_WEAPONS, 90, SKILL_EXPERT, 0.25)
-			var/drop_chance = user.skill_fail_chance(SKILL_WEAPONS, 50, SKILL_EXPERT, 0.5)
+			var/fail_chance = user.skill_fail_chance(SKILL_WEAPONS, 90, SKILL_EXPERIENCED, 0.25)
+			var/drop_chance = user.skill_fail_chance(SKILL_WEAPONS, 50, SKILL_EXPERIENCED, 0.5)
 
 			if (!fail_chance)
 				user.visible_message(

@@ -10,7 +10,7 @@
 		"It is recommended that the user ensure that the target device is accessible."
 	)
 	pattern = "^proxy"
-	skill_needed = SKILL_EXPERT
+	skill_needed = SKILL_EXPERIENCED
 
 /datum/terminal_command/proxy/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/list/arguments = get_arguments(text)

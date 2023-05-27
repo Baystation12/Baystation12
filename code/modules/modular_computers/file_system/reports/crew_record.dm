@@ -125,7 +125,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		var/skills = list()
 		for(var/singleton/hierarchy/skill/S in GLOB.skills)
 			var/level = H.get_skill_value(S.type)
-			if(level > SKILL_NONE)
+			if(level > SKILL_UNSKILLED)
 				skills += "[S.name], [S.levels[level]]"
 
 		set_skillset(jointext(skills,"\n"))

@@ -7,7 +7,7 @@
 	shuttle_area = /area/ship/reaper
 	defer_initialisation = TRUE
 	flags = SHUTTLE_FLAGS_PROCESS
-	skill_needed = SKILL_NONE
+	skill_needed = SKILL_UNSKILLED
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/merc
 
 /obj/machinery/computer/shuttle_control/explore/away_scg_patrol/reaper
@@ -47,4 +47,3 @@
 	name = "NSV Sierra Dock"
 	landmark_tag = "nav_reaper_dock"
 	docking_controller = "nuke_shuttle_dock_airlock"
-

@@ -144,12 +144,12 @@
 
 /datum/trader/proc/skill_curve(skill)
 	switch(skill)
-		if(SKILL_EXPERT)
+		if(SKILL_EXPERIENCED)
 			. = 1
-		if(SKILL_EXPERT to SKILL_MAX)
-			. = 1 + (SKILL_EXPERT - skill) * 0.2
+		if(SKILL_EXPERIENCED to SKILL_MAX)
+			. = 1 + (SKILL_EXPERIENCED - skill) * 0.2
 		else
-			. = 1 + (SKILL_EXPERT - skill) ** 2
+			. = 1 + (SKILL_EXPERIENCED - skill) ** 2
 	//This condition ensures that the buy price is higher than the sell price on generic goods, i.e. the merchant can't be exploited
 	. = max(., price_rng/((margin - 1)*(200 - price_rng)))
 

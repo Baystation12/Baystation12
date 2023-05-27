@@ -25,8 +25,8 @@
 	)
 	min_skill = list(
 		SKILL_BUREAUCRACY = SKILL_BASIC,
-		SKILL_MEDICAL     = SKILL_ADEPT,
-		SKILL_ANATOMY     = SKILL_EXPERT,
+		SKILL_MEDICAL     = SKILL_TRAINED,
+		SKILL_ANATOMY     = SKILL_EXPERIENCED,
 		SKILL_CHEMISTRY   = SKILL_BASIC,
 		SKILL_VIROLOGY    = SKILL_BASIC
 	)
@@ -168,7 +168,7 @@
 	allowed_ranks = list(/datum/mil_rank/civ/nt, /datum/mil_rank/civ/contractor)
 	min_skill = list(
 		SKILL_MEDICAL = SKILL_BASIC,
-		SKILL_CHEMISTRY = SKILL_ADEPT
+		SKILL_CHEMISTRY = SKILL_TRAINED
 	)
 	max_skill = list(
 		SKILL_MEDICAL = SKILL_MAX,

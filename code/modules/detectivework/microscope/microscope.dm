@@ -48,7 +48,7 @@
 		to_chat(user, SPAN_NOTICE("You stop examining \the [sample]."))
 		return
 
-	if(!user.skill_check(SKILL_FORENSICS, SKILL_ADEPT))
+	if(!user.skill_check(SKILL_FORENSICS, SKILL_TRAINED))
 		to_chat(user, SPAN_WARNING("You can't figure out what it means..."))
 		return
 

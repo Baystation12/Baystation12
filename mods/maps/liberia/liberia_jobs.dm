@@ -24,7 +24,7 @@
 
 	announced = FALSE
 	min_skill = list(
-		SKILL_FINANCE = SKILL_ADEPT,
+		SKILL_FINANCE = SKILL_TRAINED,
 		SKILL_PILOT   = SKILL_BASIC
 	)
 	give_psionic_implant_on_join = FALSE

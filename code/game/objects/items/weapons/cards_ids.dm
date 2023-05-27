@@ -144,7 +144,7 @@
 
 /obj/item/card/emag_broken/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 0 && (user.skill_check(SKILL_DEVICES, SKILL_ADEPT) || player_is_antag(user.mind)))
+	if(distance <= 0 && (user.skill_check(SKILL_DEVICES, SKILL_TRAINED) || player_is_antag(user.mind)))
 		to_chat(user, SPAN_WARNING("You can tell the components are completely fried; whatever use it may have had before is gone."))
 
 /obj/item/card/emag_broken/get_antag_info()

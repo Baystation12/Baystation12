@@ -74,7 +74,7 @@ var/global/list/tank_gauge_cache = list()
 		if (GET_FLAGS(tank_flags, TANK_FLAG_WIRED))
 			mods += "some wires"
 		if (proxyassembly.assembly)
-			mods += user.skill_check(SKILL_DEVICES, SKILL_ADEPT) ? "an ignition assembly" : "a device"
+			mods += user.skill_check(SKILL_DEVICES, SKILL_TRAINED) ? "an ignition assembly" : "a device"
 		if (length(mods))
 			to_chat(user, "[english_list(mods)] are attached.")
 	else

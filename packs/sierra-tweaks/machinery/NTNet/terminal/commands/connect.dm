@@ -8,7 +8,7 @@
 		"In red and orange code you can override airlock access by using override key. Like this: 'connect y421 -open -override Yota11'"
 	)
 	pattern = "^connect"
-	skill_needed = SKILL_ADEPT
+	skill_needed = SKILL_TRAINED
 
 /datum/terminal_command/connect/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/list/txt = splittext(text, " ")

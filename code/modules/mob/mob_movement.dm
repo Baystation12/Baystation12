@@ -242,7 +242,7 @@
 
 //return 1 if slipped, 0 otherwise
 /mob/proc/handle_spaceslipping()
-	if(prob(skill_fail_chance(SKILL_EVA, slip_chance(10), SKILL_EXPERT)))
+	if(prob(skill_fail_chance(SKILL_EVA, slip_chance(10), SKILL_EXPERIENCED)))
 		to_chat(src, SPAN_WARNING("You slipped!"))
 		src.inertia_dir = src.last_move
 		step(src, src.inertia_dir)

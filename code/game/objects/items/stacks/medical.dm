@@ -295,7 +295,7 @@
 				return
 			user.visible_message(SPAN_DANGER("[user] starts to apply \the [src] to their [limb]."), SPAN_DANGER("You start to apply \the [src] to your [limb]."), SPAN_DANGER("You hear something being wrapped."))
 		if(user.do_skilled(5 SECONDS, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
-			if((M == user && prob(75)) || prob(user.skill_fail_chance(SKILL_MEDICAL,50, SKILL_ADEPT)))
+			if((M == user && prob(75)) || prob(user.skill_fail_chance(SKILL_MEDICAL,50, SKILL_TRAINED)))
 				user.visible_message(SPAN_DANGER("\The [user] fumbles [src]."), SPAN_DANGER("You fumble [src]."), SPAN_DANGER("You hear something being wrapped."))
 				return
 			var/obj/item/stack/medical/splint/S = split(1, TRUE)

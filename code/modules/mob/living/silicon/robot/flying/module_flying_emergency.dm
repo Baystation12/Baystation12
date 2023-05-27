@@ -36,10 +36,10 @@
 	emag = /obj/item/reagent_containers/spray
 	skills = list(
 		SKILL_ANATOMY      = SKILL_BASIC,
-		SKILL_MEDICAL      = SKILL_PROF,
-		SKILL_EVA          = SKILL_EXPERT,
-		SKILL_CONSTRUCTION = SKILL_EXPERT,
-		SKILL_ELECTRICAL   = SKILL_EXPERT
+		SKILL_MEDICAL      = SKILL_MASTER,
+		SKILL_EVA          = SKILL_EXPERIENCED,
+		SKILL_CONSTRUCTION = SKILL_EXPERIENCED,
+		SKILL_ELECTRICAL   = SKILL_EXPERIENCED
 	)
 
 /obj/item/robot_module/flying/emergency/finalize_emag()

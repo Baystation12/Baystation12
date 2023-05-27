@@ -77,7 +77,7 @@
 		if(16) to_chat(user, "It has lenses and a scope.")
 		if(17) to_chat(user, "It has processed and calibrated lenses.")
 	if(ishuman(user))
-		if(user.skill_check(SKILL_DEVICES, SKILL_EXPERT))
+		if(user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
 			switch(buildstate)
 				if(0) to_chat(user, "Looks like you need something as lenses frame... A pipe?")
 				if(1) to_chat(user, "The pipe is unsecured - fix it with tape roll.")
@@ -105,7 +105,7 @@
 		to_chat(user, SPAN_NOTICE("You cannot interact with [src] while it in your hands."))
 		return TRUE
 	if(ishuman(user))
-		if(!(user.skill_check(SKILL_DEVICES, SKILL_EXPERT)))
+		if(!(user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED)))
 			to_chat(user, SPAN_NOTICE("You don't know enough about devices to assemble it..."))
 	switch(buildstate)
 		if(0)

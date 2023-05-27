@@ -557,5 +557,5 @@
 	. = ..()
 	if(distance <= 1)
 		to_chat(user, SPAN_NOTICE("It looks long enough to hold [max_capacity] seconds worth of recording."))
-		if(doctored && user.skill_check(SKILL_FORENSICS, SKILL_PROF))
+		if(doctored && user.skill_check(SKILL_FORENSICS, SKILL_MASTER))
 			to_chat(user, SPAN_NOTICE("It has been tampered with..."))

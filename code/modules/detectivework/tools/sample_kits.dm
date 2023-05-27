@@ -165,7 +165,7 @@
 /obj/item/forensics/sample_kit/afterattack(atom/A, mob/user, proximity)
 	if(!proximity)
 		return
-	if(user.skill_check(SKILL_FORENSICS, SKILL_ADEPT) && can_take_sample(user, A))
+	if(user.skill_check(SKILL_FORENSICS, SKILL_TRAINED) && can_take_sample(user, A))
 		take_sample(user,A)
 		. = 1
 	else

@@ -214,8 +214,8 @@
 	if(hasHUD(user, HUD_SCIENCE))
 		var/prec = user.skill_fail_chance(SKILL_CHEMISTRY, 10)
 		to_chat(user, SPAN_NOTICE("The [src] contains: [reagents.get_reagents(precision = prec)]."))
-	else if((loc == user) && user.skill_check(SKILL_CHEMISTRY, SKILL_EXPERT))
-		to_chat(user, SPAN_NOTICE("Using your chemistry knowledge, you identify the following reagents in \the [src]: [reagents.get_reagents(!user.skill_check(SKILL_CHEMISTRY, SKILL_PROF), 5)]."))
+	else if((loc == user) && user.skill_check(SKILL_CHEMISTRY, SKILL_EXPERIENCED))
+		to_chat(user, SPAN_NOTICE("Using your chemistry knowledge, you identify the following reagents in \the [src]: [reagents.get_reagents(!user.skill_check(SKILL_CHEMISTRY, SKILL_MASTER), 5)]."))
 
 /obj/item/reagent_containers/ex_act(severity)
 	if(reagents)

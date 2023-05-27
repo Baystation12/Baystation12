@@ -148,7 +148,7 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 					 SKILL_WEAPONS = SKILL_BASIC,
 					 SKILL_HAULING = SKILL_BASIC,
 					 SKILL_MEDICAL = SKILL_BASIC,
-					 SKILL_PILOT = SKILL_ADEPT,
+					 SKILL_PILOT = SKILL_TRAINED,
 					 SKILL_EVA = SKILL_BASIC)
 
 
@@ -177,7 +177,7 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 					 SKILL_WEAPONS = SKILL_BASIC,
 					 SKILL_HAULING = SKILL_BASIC,
 					 SKILL_MEDICAL = SKILL_BASIC,
-					 SKILL_PILOT = SKILL_ADEPT,
+					 SKILL_PILOT = SKILL_TRAINED,
 					 SKILL_EVA = SKILL_BASIC)
 
 	access = list(access_away_iccgn, access_away_iccgn_droptroops, access_away_iccgn_sergeant, access_away_iccgn_captain, access_engine_equip)
@@ -205,8 +205,8 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 	is_semi_antagonist = TRUE
 	min_skill = list(SKILL_COMBAT  = SKILL_BASIC,
 					 SKILL_WEAPONS = SKILL_BASIC,
-					 SKILL_HAULING = SKILL_ADEPT,
-					 SKILL_MEDICAL = SKILL_EXPERT,
+					 SKILL_HAULING = SKILL_TRAINED,
+					 SKILL_MEDICAL = SKILL_EXPERIENCED,
 					 SKILL_ANATOMY = SKILL_BASIC,
 					 SKILL_CHEMISTRY = SKILL_BASIC,
 					 SKILL_EVA = SKILL_BASIC)
@@ -235,14 +235,14 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 	is_semi_antagonist = TRUE
 	min_skill = list(SKILL_COMBAT  = SKILL_BASIC,
 					 SKILL_WEAPONS = SKILL_BASIC,
-					 SKILL_HAULING = SKILL_ADEPT,
+					 SKILL_HAULING = SKILL_TRAINED,
 					 SKILL_MEDICAL = SKILL_BASIC,
-					 SKILL_PILOT = SKILL_ADEPT,
-					 SKILL_EVA = SKILL_ADEPT,
-					 SKILL_CONSTRUCTION = SKILL_ADEPT,
-					 SKILL_ELECTRICAL = SKILL_ADEPT,
+					 SKILL_PILOT = SKILL_TRAINED,
+					 SKILL_EVA = SKILL_TRAINED,
+					 SKILL_CONSTRUCTION = SKILL_TRAINED,
+					 SKILL_ELECTRICAL = SKILL_TRAINED,
 					 SKILL_ATMOS  = SKILL_BASIC,
-					 SKILL_ENGINES = SKILL_ADEPT,
+					 SKILL_ENGINES = SKILL_TRAINED,
 					 SKILL_DEVICES = SKILL_BASIC)
 
 	access = list(access_away_iccgn, access_engine_equip)
@@ -267,12 +267,12 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 	required_language = LANGUAGE_HUMAN_RUSSIAN
 	whitelisted_species = list(SPECIES_HUMAN)
 	is_semi_antagonist = TRUE
-	min_skill = list(SKILL_BUREAUCRACY = SKILL_ADEPT,
+	min_skill = list(SKILL_BUREAUCRACY = SKILL_TRAINED,
 					 SKILL_COMBAT  = SKILL_BASIC,
 					 SKILL_WEAPONS = SKILL_BASIC,
 					 SKILL_HAULING = SKILL_BASIC,
 					 SKILL_MEDICAL = SKILL_BASIC,
-					 SKILL_PILOT = SKILL_ADEPT,
+					 SKILL_PILOT = SKILL_TRAINED,
 					 SKILL_EVA = SKILL_BASIC)
 
 	access = list(access_away_iccgn, access_away_iccgn_droptroops, access_away_iccgn_sergeant, access_away_iccgn_captain, access_engine_equip)

@@ -20,7 +20,7 @@
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e8
 	)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_TRAINED,
 	                    SKILL_FINANCE     = SKILL_BASIC,
 	                    SKILL_HAULING     = SKILL_BASIC,
 	                    SKILL_EVA         = SKILL_BASIC,
@@ -94,7 +94,7 @@
 		"Drill Technician",
 		"Shaft Miner",
 		"Salvage Technician")
-	min_skill = list(   SKILL_HAULING = SKILL_ADEPT,
+	min_skill = list(   SKILL_HAULING = SKILL_TRAINED,
 	                    SKILL_EVA     = SKILL_BASIC)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)

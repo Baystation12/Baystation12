@@ -22,7 +22,7 @@
 
 /obj/item/device/augment_implanter/examine(mob/user)
 	. = ..()
-	if (isobserver(user) || (user.mind && user.mind.special_role != null) || user.skill_check(SKILL_DEVICES, SKILL_PROF))
+	if (isobserver(user) || (user.mind && user.mind.special_role != null) || user.skill_check(SKILL_DEVICES, SKILL_MASTER))
 		to_chat(user, "A single-use augment installer with no medical knowledge necessary! " + SPAN_DANGER("Painkillers not included!"))
 	if (isnull(augment))
 		to_chat(user, "It seems to be empty.")

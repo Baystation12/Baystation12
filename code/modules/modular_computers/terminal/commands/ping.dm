@@ -6,7 +6,7 @@
 		"Checks connection to the given nid (number), or directly to NTNet relay if no nid is given."
 	)
 	pattern = "^ping"
-	skill_needed = SKILL_ADEPT
+	skill_needed = SKILL_TRAINED
 
 /datum/terminal_command/ping/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/list/arguments = get_arguments(text)

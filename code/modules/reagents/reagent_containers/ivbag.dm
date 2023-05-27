@@ -158,7 +158,7 @@
 	)
 	if (!user.do_skilled(5 SECONDS, SKILL_MEDICAL, target)) //slower than stands and beds
 		return
-	if (prob(user.skill_fail_chance(SKILL_MEDICAL, 80, SKILL_ADEPT))) // harder than stands and beds
+	if (prob(user.skill_fail_chance(SKILL_MEDICAL, 80, SKILL_TRAINED))) // harder than stands and beds
 		user.visible_message(
 			SPAN_DANGER("\The [user] fishes for a vein on \the [target] and fails, stabbing them instead!"),
 			SPAN_DANGER("You fish inexpertly for a vein on \the [target] and stab them instead!"),

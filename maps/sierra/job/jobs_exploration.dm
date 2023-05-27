@@ -14,15 +14,15 @@
 	allowed_branches = list(/datum/mil_branch/employee)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
 	min_skill = list(	SKILL_BUREAUCRACY = SKILL_BASIC,
-						SKILL_EVA         = SKILL_ADEPT,
-						SKILL_SCIENCE     = SKILL_ADEPT,
+						SKILL_EVA         = SKILL_TRAINED,
+						SKILL_SCIENCE     = SKILL_TRAINED,
 						SKILL_PILOT       = SKILL_BASIC,
 						SKILL_MEDICAL     = SKILL_BASIC)
 
 	max_skill = list(	SKILL_PILOT       = SKILL_MAX,
 						SKILL_SCIENCE     = SKILL_MAX,
-						SKILL_COMBAT      = SKILL_EXPERT,
-						SKILL_WEAPONS     = SKILL_EXPERT)
+						SKILL_COMBAT      = SKILL_EXPERIENCED,
+						SKILL_WEAPONS     = SKILL_EXPERIENCED)
 	skill_points = 22
 
 	access = list(access_el, access_explorer, access_eva, access_bridge, access_heads, access_emergency_storage, access_tech_storage, access_guppy_helm, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_hangar)
@@ -61,8 +61,8 @@
 
 
 	max_skill = list(	SKILL_SCIENCE = SKILL_MAX,
-						SKILL_COMBAT  = SKILL_EXPERT,
-						SKILL_WEAPONS = SKILL_EXPERT)
+						SKILL_COMBAT  = SKILL_EXPERIENCED,
+						SKILL_WEAPONS = SKILL_EXPERIENCED)
 	required_role = list("Exploration Leader", "Expeditionary Pilot")
 
 	access = list(access_explorer, access_eva, access_emergency_storage, access_guppy_helm, access_expedition_shuttle, access_guppy, access_hangar)
@@ -95,13 +95,13 @@
 	allowed_ranks = list(/datum/mil_rank/civ/nt, /datum/mil_rank/civ/contractor)
 	min_skill = list(	SKILL_EVA     = SKILL_BASIC,
 						SKILL_SCIENCE = SKILL_BASIC,
-						SKILL_PILOT   = SKILL_ADEPT,
+						SKILL_PILOT   = SKILL_TRAINED,
 						SKILL_MEDICAL = SKILL_BASIC)
 
 	max_skill = list(	SKILL_SCIENCE = SKILL_MAX,
 						SKILL_PILOT   = SKILL_MAX,
-						SKILL_COMBAT  = SKILL_EXPERT,
-						SKILL_WEAPONS = SKILL_EXPERT)
+						SKILL_COMBAT  = SKILL_EXPERIENCED,
+						SKILL_WEAPONS = SKILL_EXPERIENCED)
 
 	access = list(	access_explorer, access_eva, access_emergency_storage, access_guppy_helm,
 					access_expedition_shuttle, access_guppy, access_hangar, access_expedition_shuttle_helm)
@@ -144,8 +144,8 @@
 
 	max_skill = list(	SKILL_MEDICAL = SKILL_MAX,
 						SKILL_SCIENCE = SKILL_MAX,
-						SKILL_COMBAT  = SKILL_EXPERT,
-						SKILL_WEAPONS = SKILL_EXPERT)
+						SKILL_COMBAT  = SKILL_EXPERIENCED,
+						SKILL_WEAPONS = SKILL_EXPERIENCED)
 	required_role = list("Exploration Leader", "Expeditionary Pilot")
 
 	access = list(	access_explorer, access_eva, access_emergency_storage, access_field_med,
@@ -193,8 +193,8 @@
 	max_skill = list(	SKILL_CONSTRUCTION = SKILL_MAX,
 						SKILL_ELECTRICAL   = SKILL_MAX,
 						SKILL_SCIENCE      = SKILL_MAX,
-						SKILL_COMBAT       = SKILL_EXPERT,
-						SKILL_WEAPONS      = SKILL_EXPERT)
+						SKILL_COMBAT       = SKILL_EXPERIENCED,
+						SKILL_WEAPONS      = SKILL_EXPERIENCED)
 	required_role = list("Exploration Leader", "Expeditionary Pilot")
 
 	access = list(	access_explorer, access_eva, access_emergency_storage, access_field_eng,

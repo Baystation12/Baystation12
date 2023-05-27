@@ -157,9 +157,9 @@
 		return
 	else if (user.mind?.special_role)
 		level = 2
-	else if (user.skill_check(SKILL_DEVICES, SKILL_PROF))
+	else if (user.skill_check(SKILL_DEVICES, SKILL_MASTER))
 		level = 2
-	else if (user.skill_check(SKILL_DEVICES, SKILL_ADEPT))
+	else if (user.skill_check(SKILL_DEVICES, SKILL_TRAINED))
 		level = 1
 	if (!level)
 		return

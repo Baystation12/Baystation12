@@ -400,7 +400,7 @@ SIERRA_ESCAPE_POD(9)
 	fuel_consumption = 2
 	logging_home_tag = "nav_hangar_guppy"
 	logging_access = access_guppy_helm
-	skill_needed = SKILL_NONE
+	skill_needed = SKILL_UNSKILLED
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/sierra
 	warmup_time = 5
 

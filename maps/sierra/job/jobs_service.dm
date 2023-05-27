@@ -56,7 +56,7 @@
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/service/cook
 	allowed_branches = list(/datum/mil_branch/employee, /datum/mil_branch/civilian, /datum/mil_branch/contractor)
 	allowed_ranks = list(/datum/mil_rank/civ/nt, /datum/mil_rank/civ/contractor, /datum/mil_rank/civ/civ)
-	min_skill = list(	SKILL_COOKING   = SKILL_ADEPT,
+	min_skill = list(	SKILL_COOKING   = SKILL_TRAINED,
 						SKILL_BOTANY    = SKILL_BASIC,
 						SKILL_CHEMISTRY = SKILL_BASIC)
 

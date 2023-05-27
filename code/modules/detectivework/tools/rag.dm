@@ -162,7 +162,7 @@
 				)
 
 				var/grab_time = 6 SECONDS
-				if (user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+				if (user.skill_check(SKILL_COMBAT, SKILL_TRAINED))
 					grab_time = 3 SECONDS
 
 				if (do_after(user, grab_time, target, DO_PUBLIC_UNIQUE))

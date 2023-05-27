@@ -19,7 +19,7 @@
 	to_chat(user, SPAN_NOTICE("You start to pry open \the [src]."))
 	if (!user.do_skilled(2 SECONDS, SKILL_COOKING, user))
 		return TRUE
-	if (!prob(user.skill_fail_chance(SKILL_COOKING, 80, SKILL_ADEPT)))
+	if (!prob(user.skill_fail_chance(SKILL_COOKING, 80, SKILL_TRAINED)))
 		to_chat(user, SPAN_NOTICE("You carefully clean and open \the [src]."))
 		new snack_path (get_turf(src))
 		qdel(src)

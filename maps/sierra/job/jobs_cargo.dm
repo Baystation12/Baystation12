@@ -11,7 +11,7 @@
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/supply/quartermaster
 	allowed_branches = list(/datum/mil_branch/employee)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_TRAINED,
 	                    SKILL_FINANCE     = SKILL_BASIC,
 	                    SKILL_HAULING     = SKILL_BASIC,
 	                    SKILL_EVA         = SKILL_BASIC)
@@ -78,7 +78,7 @@
 		"Shaft Miner",
 		"Salvage Technician")
 	min_skill = list(   SKILL_MECH    = SKILL_BASIC,
-	                    SKILL_HAULING = SKILL_ADEPT,
+	                    SKILL_HAULING = SKILL_TRAINED,
 	                    SKILL_EVA     = SKILL_BASIC)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
