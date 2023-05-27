@@ -70,7 +70,7 @@
 
 	qdel(G)
 
-/obj/item/tank/jetpack/ui_action_click()
+/obj/item/tank/jetpack/ui_action_click(mob/living/user)
 	toggle()
 
 

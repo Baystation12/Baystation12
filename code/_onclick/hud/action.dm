@@ -65,7 +65,7 @@
 		if(AB_ITEM, AB_ITEM_USE_ICON)
 			if(target)
 				var/obj/item/item = target
-				item.ui_action_click()
+				item.ui_action_click(owner)
 		//if(AB_SPELL)
 		//	if(target)
 		//		var/obj/effect/proc_holder/spell = target

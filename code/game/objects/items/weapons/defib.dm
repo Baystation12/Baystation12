@@ -67,7 +67,7 @@
 	else
 		to_chat(user, "There is no cell inside.")
 
-/obj/item/defibrillator/ui_action_click()
+/obj/item/defibrillator/ui_action_click(mob/living/user)
 	toggle_paddles()
 
 /obj/item/defibrillator/attack_hand(mob/user)

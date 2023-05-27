@@ -25,7 +25,7 @@
 	var/charge_consumption = 2 KILOWATTS	// energy usage at full power
 	var/thermostat = T20C
 
-/obj/item/device/suit_cooling_unit/ui_action_click()
+/obj/item/device/suit_cooling_unit/ui_action_click(mob/living/user)
 	toggle(usr)
 
 /obj/item/device/suit_cooling_unit/Initialize()
