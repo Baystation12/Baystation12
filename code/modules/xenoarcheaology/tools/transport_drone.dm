@@ -18,7 +18,7 @@
 /obj/item/device/drone_designator/proc/recursive_validate_contents(atom/A, depth = 1)
 	if(depth >= 4)
 		return TRUE
-	if(istype(A, /obj/structure/stasis_cage))
+	if(istype(A, /obj/machinery/stasis_cage))
 		return TRUE //This is fine
 	if(istype(A,/mob/living))
 		return FALSE

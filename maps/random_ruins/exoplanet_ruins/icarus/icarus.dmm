@@ -158,7 +158,7 @@
 /area/map_template/icarus/sci)
 "cF" = (
 /obj/effect/landmark/clear,
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /turf/template_noop,
 /area/template_noop)
 "cS" = (

@@ -1006,7 +1006,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/cargo)
 "cu" = (
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/cargo)
 "cw" = (
@@ -6652,7 +6652,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/cargo)
 "qF" = (
@@ -6663,7 +6663,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/cargo)
 "qG" = (
@@ -8689,7 +8689,7 @@
 /turf/simulated/floor/reinforced,
 /area/meatstation/lab)
 "vg" = (
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/simulated/floor/reinforced,
@@ -9681,12 +9681,12 @@
 /turf/simulated/floor/lino,
 /area/meatstation/mess)
 "xH" = (
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/white,
 /area/meatstation/lab)
 "xI" = (
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -10155,7 +10155,7 @@
 /turf/simulated/floor/tiled,
 /area/meatstation/centerhallway)
 "yV" = (
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /obj/effect/floor_decal/corner/red/border{
 	dir = 4
 	},
@@ -10295,7 +10295,7 @@
 /turf/simulated/floor/reinforced,
 /area/meatstation/lab)
 "zm" = (
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /obj/effect/decal/cleanable/cobweb2,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5

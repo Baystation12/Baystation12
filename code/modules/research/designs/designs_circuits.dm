@@ -275,6 +275,13 @@
 	build_path = /obj/item/stock_parts/circuitboard/anomaly_container
 	sort_string = "HABAL"
 
+/datum/design/circuit/stasis_cage
+	name = "stasis cage"
+	id = "stasis cage"
+	req_tech = list(TECH_BLUESPACE = 3, TECH_ENGINEERING = 4, TECH_BIO = 3)
+	build_path = /obj/item/stock_parts/circuitboard/stasis_cage
+	sort_string = "HABAM"
+
 /datum/design/circuit/rdservercontrol
 	name = "R&D server control console"
 	id = "rdservercontrol"
