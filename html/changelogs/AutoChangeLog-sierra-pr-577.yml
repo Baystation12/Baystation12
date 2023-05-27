@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - balance: Skill level now plays a stronger role in the time it takes to perform
+      skilled actions. Lower skills will have much longer timers, while higher skills
+      have shorter timers.
