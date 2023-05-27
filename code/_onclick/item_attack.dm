@@ -35,8 +35,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /**
  * Called when the item is in the active hand and another atom is clicked. This is generally called by `ClickOn()`.
  *
- * This passes down to `attack()`, `use_user()`, `use_grab()`, `use_weapon()`, `use_tool()`, and `attackby()`, in that order, depending on item
- * flags and user's intent.
+ * This passes down to `attack()`, `use_user()`, `use_grab()`, `use_weapon()`, `use_tool()`, `attackby()`, and
+ * `use_on()`, in that order, depending on item flags and user's intent.
  *
  * **Parameters**:
  * - `atom` - The atom that was clicked.
@@ -50,9 +50,12 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return FALSE
 	atom.pre_use_item(src, user, click_params)
 	var/use_call
-	if ((item_flags & ITEM_FLAG_TRY_ATTACK) && attack(atom, user))
-		use_call = "attack"
-		. = TRUE
+	if (HAS_FLAGS(item_flags, ITEM_FLAG_TRY_ATTACK))
+		use_call = "on"
+		. = use_on(atom, user, click_params)
+		if (!. && attack(atom, user))
+			use_call = "attack"
+			. = TRUE
 	if (!. && user.a_intent == I_HURT)
 		use_call = "weapon"
 		. = atom.use_weapon(src, user, click_params)
@@ -62,6 +65,9 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (!.)
 		use_call = "attackby"
 		. = atom.attackby(src, user, click_params)
+	if (!. && !HAS_FLAGS(item_flags, ITEM_FLAG_TRY_ATTACK))
+		use_call = "on"
+		. = use_on(atom, user, click_params)
 	if (!.)
 		use_call = null
 	atom.post_use_item(src, user, ., use_call, click_params)
@@ -344,6 +350,23 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	return
 
 
+/**
+ * Called when the item is in the active hand and another atom is clicked. This is generally called by the target's
+ * `resolve_attackby()` proc.
+ *
+ * **Parameters**:
+ * - `target` - The atom that was clicked on.
+ * - `user` - The mob clicking on the target.
+ * - `click_parameters` - List of click parameters. See BYOND's `Click()` documentation.
+ *
+ * Returns boolean to indicate whether the use call was handled or not.
+ */
+/obj/item/proc/use_on(atom/target, mob/user, click_parameters)
+	SHOULD_CALL_PARENT(TRUE)
+	return FALSE
+
+
+//I would prefer to rename this attack_as_weapon(), but that would involve touching hundreds of files.
 /**
  * Called when a mob is clicked while the item is in the active hand and the interaction is not valid for surgery. Generally called by the mob's `attackby()` proc.
  *
