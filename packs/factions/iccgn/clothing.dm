@@ -4,9 +4,9 @@
 	abstract_type = /obj/item/clothing/under/iccgn
 	name = "base uniform, ICCGN"
 	desc = "You should not see this."
-	icon = 'packs/faction_iccgn/clothing.dmi'
+	icon = 'packs/factions/iccgn/clothing.dmi'
 	item_icons = list(
-		slot_w_uniform_str = 'packs/faction_iccgn/clothing.dmi'
+		slot_w_uniform_str = 'packs/factions/iccgn/clothing.dmi'
 	)
 	sprite_sheets = list()
 	body_parts_covered = FULL_TORSO | ARMS | FULL_LEGS
@@ -66,9 +66,9 @@
 	abstract_type = /obj/item/clothing/suit/iccgn
 	name = "base jacket, ICCGN"
 	desc = "You should not see this."
-	icon = 'packs/faction_iccgn/clothing.dmi'
+	icon = 'packs/factions/iccgn/clothing.dmi'
 	item_icons = list(
-		slot_wear_suit_str = 'packs/faction_iccgn/clothing.dmi'
+		slot_wear_suit_str = 'packs/factions/iccgn/clothing.dmi'
 	)
 	sprite_sheets = list()
 	body_parts_covered = FULL_TORSO | ARMS
@@ -190,9 +190,9 @@
 	abstract_type = /obj/item/clothing/gloves/iccgn
 	name = "base gloves, ICCGN"
 	desc = "You should not see this."
-	icon = 'packs/faction_iccgn/clothing.dmi'
+	icon = 'packs/factions/iccgn/clothing.dmi'
 	item_icons = list(
-		slot_gloves_str = 'packs/faction_iccgn/clothing.dmi'
+		slot_gloves_str = 'packs/factions/iccgn/clothing.dmi'
 	)
 	sprite_sheets = list()
 
@@ -213,9 +213,9 @@
 	abstract_type = /obj/item/clothing/shoes/iccgn
 	name = "base shoes, ICCGN"
 	desc = "You should not see this."
-	icon = 'packs/faction_iccgn/clothing.dmi'
+	icon = 'packs/factions/iccgn/clothing.dmi'
 	item_icons = list(
-		slot_shoes_str = 'packs/faction_iccgn/clothing.dmi'
+		slot_shoes_str = 'packs/factions/iccgn/clothing.dmi'
 	)
 	sprite_sheets = list()
 
@@ -247,9 +247,9 @@
 	abstract_type = /obj/item/clothing/head/iccgn
 	name = "base hat, ICCGN"
 	desc = "You should not see this."
-	icon = 'packs/faction_iccgn/clothing.dmi'
+	icon = 'packs/factions/iccgn/clothing.dmi'
 	item_icons = list(
-		slot_head_str = 'packs/faction_iccgn/clothing.dmi'
+		slot_head_str = 'packs/factions/iccgn/clothing.dmi'
 	)
 	sprite_sheets = list()
 

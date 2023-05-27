@@ -1,6 +1,6 @@
 /obj/item/material/coin/challenge/gcc
 	abstract_type = /obj/item/material/coin/challenge/gcc
-	icon = 'packs/faction_iccgn/coins.dmi'
+	icon = 'packs/factions/iccgn/coins.dmi'
 	icon_state = "error"
 
 

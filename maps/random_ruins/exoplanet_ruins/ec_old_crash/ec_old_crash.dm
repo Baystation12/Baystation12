@@ -1,3 +1,5 @@
+#include "../../../../packs/factions/scgec/_pack.dm"
+
 /datum/map_template/ruin/exoplanet/ec_old_crash
 	name = "Expeditionary Ship"
 	id = "ec_old_wreck"
@@ -48,14 +50,6 @@
 
 /turf/simulated/floor/tiled/white/lowpressure
 	initial_gas = list(GAS_CO2 = MOLES_O2STANDARD)
-
-/obj/item/disk/astrodata
-	name = "astronomical data disk"
-	desc = "A disk with a wealth of astronomical data recorded. Astrophysicists at the EC Observatory would love to see this."
-	icon = 'icons/obj/cloning.dmi'
-	icon_state = "datadisk0"
-	item_state = "card-id"
-	w_class = ITEM_SIZE_SMALL
 
 /obj/item/ecletters
 	name = "bundle of letters"
