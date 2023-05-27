@@ -26,7 +26,7 @@
 /singleton/surgery_step/slime/cut_flesh
 	name = "Make incision in slime"
 	allowed_tools = list(
-		/obj/item/scalpel = 100,
+		/obj/item/scalpel/basic = 100,
 		/obj/item/material/knife = 75,
 		/obj/item/material/shard = 50
 	)
@@ -55,7 +55,7 @@
 /singleton/surgery_step/slime/cut_innards
 	name = "Dissect innards"
 	allowed_tools = list(
-		/obj/item/scalpel = 100,
+		/obj/item/scalpel/basic = 100,
 		/obj/item/material/knife = 75,
 		/obj/item/material/shard = 50
 	)
@@ -77,6 +77,34 @@
 /singleton/surgery_step/slime/cut_innards/fail_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
 	user.visible_message(SPAN_WARNING("[user]'s hand slips, tearing [target]'s innards with \the [tool]!"), \
 	SPAN_WARNING("Your hand slips, tearing [target]'s innards with \the [tool]!"))
+
+//////////////////////////////////////////////////////////////////
+//	slime flesh & innards laser cutting surgery step
+//////////////////////////////////////////////////////////////////
+/singleton/surgery_step/slime/cut_laser
+	name = "Make laser incision in slime"
+	allowed_tools = list(
+		/obj/item/scalpel/laser = 100,
+		/obj/item/scalpel/ims = 100
+	)
+	min_duration = 1 SECOND
+	max_duration = 2 SECONDS
+
+/singleton/surgery_step/slime/cut_laser/can_use(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
+	return ..() && istype(target) && target.core_removal_stage < 2
+
+/singleton/surgery_step/slime/cut_laser/begin_step(mob/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
+	user.visible_message("[user] starts slicing through to the [target]'s silky innards apart with \the [tool].", \
+	"You start slicing through to the [target]'s silky innards apart with \the [tool].")
+
+/singleton/surgery_step/slime/cut_laser/end_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
+	user.visible_message(SPAN_NOTICE("[user] slices [target]'s innards apart with \the [tool], exposing the cores."),	\
+	SPAN_NOTICE("You slice [target]'s innards apart with \the [tool], exposing the cores."))
+	target.core_removal_stage = 2
+
+/singleton/surgery_step/slime/cut_laser/fail_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
+	user.visible_message(SPAN_WARNING("[user]'s hand slips, tearing [target]'s innards with \the [tool]!"), \
+	SPAN_WARNING("Your hand slips, searing [target]'s innards with \the [tool]!"))
 
 //////////////////////////////////////////////////////////////////
 //	slime core removal surgery step
