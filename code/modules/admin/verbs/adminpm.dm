@@ -133,6 +133,7 @@
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
 	send_to_admin_discord(EXCOM_MSG_AHELP, "PM: [key_name(src, highlight_special_characters = FALSE)]->[key_name(C, highlight_special_characters = FALSE)]:[html_decode(msg)]")
 
+	ticket.last_message_time = world.time
 	ticket.msgs += new /datum/ticket_msg(src.ckey, C.ckey, msg)
 	if(establish_db_connection())
 		var/sql_text = "[src.ckey] -> [C.ckey]: [sanitizeSQL(msg)]\n"
