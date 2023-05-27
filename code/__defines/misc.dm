@@ -359,9 +359,9 @@
 #define SANITY_CHECK_BOTH_ADJACENT FLAG(3)
 /// Verify the tool is in the user's active hand. Ignored if the tool is not an item.
 #define SANITY_CHECK_TOOL_IN_HAND FLAG(4)
-/// Check `CanInteractWith(target, user)`. Functionally exclusive with `SANITY_CHECK_PHYSICALLY_INTERACT`.
-#define SANITY_CHECK_INTERACT FLAG(5)
-/// Check `CanPhysicallyInteractWith(target, user)`. Functionally exclusive with `SANITY_CHECK_INTERACT`.
-#define SANITY_CHECK_PHYSICALLY_INTERACT FLAG(6)
+/// Check `CanInteractWith(target, user)`. Only use this for Topic() revalidation. Functionally exclusive with `SANITY_CHECK_TOPIC_PHYSICALLY_INTERACT`.
+#define SANITY_CHECK_TOPIC_INTERACT FLAG(5)
+/// Check `CanPhysicallyInteractWith(target, user)`. Only use this for Topic() revalidation. Functionally exclusive with `SANITY_CHECK_TOPIC_INTERACT`.
+#define SANITY_CHECK_TOPIC_PHYSICALLY_INTERACT FLAG(6)
 
-#define SANITY_CHECK_DEFAULT (SANITY_CHECK_TOOL_IN_HAND | SANITY_CHECK_BOTH_ADJACENT | SANITY_CHECK_PHYSICALLY_INTERACT)
+#define SANITY_CHECK_DEFAULT (SANITY_CHECK_TOOL_IN_HAND | SANITY_CHECK_BOTH_ADJACENT)
