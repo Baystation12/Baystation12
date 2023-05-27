@@ -82,7 +82,7 @@
 		explosion(middle, rand(6, 9))
 	next_shot = coolinterval + world.time
 
-	if(prob(100 - cal_accuracy()))
+	if(prob(100 - accuracy))
 		if(chargetype == OVERMAP_WEAKNESS_DROPPOD)
 			// Remove it in case it's a droppod.
 			atomcharge.forceMove(locate(rand(1,world.maxx),rand(1,world.maxy), GLOB.using_map.get_empty_zlevel()))
@@ -155,7 +155,7 @@
 		if (tz == 0 || !AreConnectedZLevels(tz, areaturf.z))
 			tz = areaturf.z
 
-		targetturf = locate(rand(tx + (100 - cal_accuracy()), tx - (100 - cal_accuracy())), rand(ty + (100 - cal_accuracy()), ty - (100 - cal_accuracy())), tz)
+		targetturf = locate(rand(tx + (100 - accuracy), tx - (100 - accuracy)), rand(ty + (100 - accuracy), ty - (100 - accuracy)), tz)
 
 	else if (tx == 0 && ty == 0 && tz == 0)
 		targetturf = areaturf
