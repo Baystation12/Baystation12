@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Reinforced walls and tables with a combination of two different materials
-      now use the current reinforced material icon.
