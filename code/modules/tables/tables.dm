@@ -393,7 +393,7 @@
 		// Reinforcements
 		if(reinforced)
 			for(var/i = 1 to 4)
-				I = image(icon, "[reinforced.table_icon_reinf]_[connections[i]]", dir = SHIFTL(1, i - 1))
+				I = image(icon, "[material.table_icon_reinf]_[connections[i]]", dir = SHIFTL(1, i - 1))
 				I.color = reinforced.icon_colour
 				I.alpha = 255 * reinforced.opacity
 				overlays += I
@@ -431,7 +431,7 @@
 			name = "table frame"
 
 		if(reinforced)
-			var/image/I = image(icon, "[reinforced.table_icon_reinf]_flip[type]")
+			var/image/I = image(icon, "[material.table_icon_reinf]_flip[type]")
 			I.color = reinforced.icon_colour
 			I.alpha = 255 * reinforced.opacity
 			overlays += I
