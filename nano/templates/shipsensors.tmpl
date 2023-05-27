@@ -94,7 +94,9 @@
 		<b>{{:data.last_scan.name}}</b> at {{:data.last_scan.location}}
 		{{:helper.link('Print', 'print' ,{ 'print' : 1 }, null, null)}}
 		<div class='block'>
-			{{:data.last_scan.data}}
+			{{for data.last_scan.data}}
+				{{:value}}<br><br>
+			{{/for}}
 		</div>
 	{{else}}
 		N/A

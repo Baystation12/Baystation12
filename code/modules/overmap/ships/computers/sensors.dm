@@ -181,7 +181,11 @@
 
 	if (href_list["print"])
 		playsound(loc, "sound/machines/dotprinter.ogg", 30, 1)
-		new/obj/item/paper/(get_turf(src), last_scan["data"], "paper (Sensor Scan - [last_scan["name"]])", L = print_language)
+		var/scan_data = ""
+		for(var/scan in last_scan["data"])
+			scan_data += scan + "\n"
+
+		new/obj/item/paper/(get_turf(src), scan_data, "paper (Sensor Scan - [last_scan["name"]])", L = print_language)
 		return TOPIC_HANDLED
 
 /obj/machinery/shipsensors

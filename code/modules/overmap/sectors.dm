@@ -25,6 +25,8 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 	/// null | num | list. If a num or a (num, num) list, the radius or random bounds for placing this sector near the main map's overmap icon.
 	var/list/place_near_main
 
+	var/blob_count = 0
+
 /obj/effect/overmap/visitable/Initialize()
 	. = ..()
 	if(. == INITIALIZE_HINT_QDEL)
