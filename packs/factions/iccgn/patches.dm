@@ -12,10 +12,10 @@
 	abstract_type = /obj/item/clothing/accessory/iccgn_patch
 	name = "base uniform patch, ICCGN"
 	desc = "You should not see this."
-	icon = 'packs/faction_iccgn/patches.dmi'
+	icon = 'packs/factions/iccgn/patches.dmi'
 	accessory_icons = list(
-		slot_w_uniform_str = 'packs/faction_iccgn/patches.dmi',
-		slot_wear_suit_str = 'packs/faction_iccgn/patches.dmi'
+		slot_w_uniform_str = 'packs/factions/iccgn/patches.dmi',
+		slot_wear_suit_str = 'packs/factions/iccgn/patches.dmi'
 	)
 	icon_state = "error"
 	on_rolled_down = ACCESSORY_ROLLED_NONE

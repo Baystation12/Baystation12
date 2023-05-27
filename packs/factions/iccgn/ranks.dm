@@ -2,10 +2,10 @@
 	abstract_type = /obj/item/clothing/accessory/iccgn_rank
 	name = "base rank insignia, ICCGN"
 	desc = "You should not see this."
-	icon = 'packs/faction_iccgn/ranks.dmi'
+	icon = 'packs/factions/iccgn/ranks.dmi'
 	accessory_icons = list(
-		slot_w_uniform_str = 'packs/faction_iccgn/ranks.dmi',
-		slot_wear_suit_str = 'packs/faction_iccgn/ranks.dmi'
+		slot_w_uniform_str = 'packs/factions/iccgn/ranks.dmi',
+		slot_wear_suit_str = 'packs/factions/iccgn/ranks.dmi'
 	)
 	icon_state = "error"
 	overlay_state = "error"

@@ -169,7 +169,7 @@
 	// он всегда напоминает о своём существовании. Небольшая библиотека,
 	// если так вообще можно выразиться.
 
-	#include "../../packs/faction_iccgn/_pack.dm"
+	#include "../../packs/factions/iccgn/_pack.dm"
 	#include "../../packs/infinity/_pack.dm"
 	#include "../../packs/sierra-tweaks/_pack.dm"
 	#include "../../packs/deepmaint/_pack.dm"
