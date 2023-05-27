@@ -252,19 +252,51 @@
 	color = COLOR_RED
 
 /obj/item/clothing/shoes/foamclog
-	name = "foam clog"
+	name = "foam clogs"
 	desc = "Made from durable foam resin that retains its spongy feel."
 	icon_state = "foamclog"
 	can_add_hidden_item = FALSE
 	can_add_cuffs = FALSE
+	var/clipped = FALSE
+	var/icon_state_modified = "foamclog-toeless"
+
+/obj/item/clothing/shoes/foamclog/use_tool(obj/item/W, mob/user)
+	if(istype(W, /obj/item/wirecutters) || istype(W, /obj/item/scalpel))
+		if (clipped)
+			to_chat(user, SPAN_NOTICE("\The [src] have already been modified!"))
+			update_icon()
+			return ..()
+		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+		user.visible_message(SPAN_WARNING("\The [user] modifies \the [src] with \the [W]."),SPAN_WARNING("You modify \the [src] with \the [W]."))
+		cut_clogs()
+		return ..()
+
+/obj/item/clothing/shoes/foamclog/proc/cut_clogs()
+	clipped = TRUE
+	name = "toe-less [name]"
+	desc = "[desc]<br>They have been modified to accommodate a different shape."
+	icon_state = icon_state_modified
+	if("exclude" in species_restricted)
+		species_restricted -= SPECIES_UNATHI
+	update_icon()
+	return
+
+/obj/item/clothing/shoes/foamclog/toeless/Initialize()
+	. = ..()
+	cut_clogs()
 
 /obj/item/clothing/shoes/foamclog/random/New()
 	..()
 	color = get_random_colour()
 
-/obj/item/clothing/shoes/flipflobster
+/obj/item/clothing/shoes/foamclog/flipflobster
 	name = "flip flobsters"
 	desc = "Made from durable foam resin that retains its spongy feel. These are shaped as lobsters."
 	icon_state = "flipflobster"
 	can_add_hidden_item = FALSE
 	can_add_cuffs = FALSE
+	icon_state_modified = "flipflobster-toeless"
+
+/obj/item/clothing/shoes/foamclog/flipflobster/toeless/Initialize()
+	. = ..()
+	cut_clogs()
