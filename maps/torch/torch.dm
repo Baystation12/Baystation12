@@ -1,6 +1,6 @@
 #if !defined(using_map_DATUM)
 
-	#include "../../packs/faction_iccgn/_pack.dm"
+	#include "../../packs/factions/iccgn/_pack.dm"
 	#include "../../packs/event_2022jul30/_pack.dm"
 	#include "../../packs/deepmaint/_pack.dm"
 

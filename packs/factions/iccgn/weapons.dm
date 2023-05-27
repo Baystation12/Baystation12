@@ -1,7 +1,7 @@
 /obj/item/gun/projectile/pistol/optimus
 	name = "military pistol"
 	desc = "A HelTek Optimus. A heavy pistol best known as one of the Confederation Navy's service weapons."
-	icon = 'packs/faction_iccgn/weapons.dmi'
+	icon = 'packs/factions/iccgn/weapons.dmi'
 	icon_state = "optimus"
 	item_state = "secgundark"
 	safety_icon = "optimus-safety"
@@ -15,7 +15,7 @@
 /obj/item/gun/projectile/pistol/bobcat
 	name = "military pistol"
 	desc = "An Amaranth Armorers P87 Bobcat. A market pistol issued as a Confederation Navy service weapon."
-	icon = 'packs/faction_iccgn/weapons.dmi'
+	icon = 'packs/factions/iccgn/weapons.dmi'
 	w_class = ITEM_SIZE_SMALL
 	icon_state = "bobcat"
 	item_state = "secgundark"
