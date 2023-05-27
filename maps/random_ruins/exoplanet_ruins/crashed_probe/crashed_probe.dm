@@ -1,3 +1,5 @@
+#include "../../../../packs/factions/scgec/_pack.dm"
+
 /datum/map_template/ruin/exoplanet/crashed_probe
 	name = "Expeditionary Probe"
 	id = "crashed_probe"
