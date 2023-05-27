@@ -3288,6 +3288,7 @@
 #include "code\unit_tests\~helpers.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
+#include "maps\_map_include.dm"
 #include "maps\_maps.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE
