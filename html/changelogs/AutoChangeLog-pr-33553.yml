@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Tickets now timeout after (roughly) 30 minutes of inactivity.
