@@ -1,0 +1,8 @@
+author: rootoo807
+delete-after: true
+changes:
+  - rscadd: Adds toe-less foam clogs and toe-less flip flobsters. Both are available
+      in loadout under the Xenowear section.
+  - rscadd: Using wirecutters or a scalpel on foam clogs/flip flobsters now chops
+      the toes off. Three cheers for OSHA violations.
+  - tweak: Updates Unathi onmob sprites (sec aviators, EC ranks) to match new sprites.
