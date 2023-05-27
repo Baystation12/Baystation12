@@ -224,6 +224,23 @@
 	/// Health state tracker to prevent redundant var updates in `process_core_health()
 	var/core_health_state = null
 
+
+/obj/effect/blob/core/Initialize()
+	. = ..()
+	var/obj/effect/overmap/visitable/visitable = map_sectors["[get_z(src)]"]
+	if (!visitable)
+		return
+	if (++visitable.blob_count == 1)
+		visitable.add_scan_data("blob", SPAN_COLOR(COLOR_RED, "Level-7 biohazard outbreak detected."))
+
+
+/obj/effect/blob/core/Destroy()
+	var/obj/effect/overmap/visitable/visitable = map_sectors["[get_z(src)]"]
+	if (visitable && --visitable.blob_count == 0)
+		visitable.remove_scan_data("blob")
+	return ..()
+
+
 /*
 the master core becomes more vulnereable to damage as it weakens,
 but it also becomes more aggressive, and channels more of its energy into regenerating rather than spreading
