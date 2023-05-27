@@ -24,6 +24,8 @@
 	var/ty = 0
 	var/tz = 0
 
+	var/accuracy = 0
+
 	/// Number of digits that needs calibration
 	var/caldigit = 4
 	/// What it is
@@ -131,6 +133,7 @@
 	var/divisor = caldigit * 2
 	for(var/i in get_calibration())
 		top += i
+	accuracy = round(top * 100 / divisor)
 	return round(top * 100 / divisor)
 
 /obj/machinery/computer/ship/disperser/proc/get_next_shot_seconds()
