@@ -1,7 +1,7 @@
 /atom/movable
 	layer = OBJ_LAYER
 
-	glide_size = 5
+	glide_size = 4
 
 	animate_movement = SLIDE_STEPS
 
