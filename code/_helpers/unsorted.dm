@@ -1066,12 +1066,9 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 
 	virtual_mob = null
 
-/mob/dview/Destroy(forced)
-	if(forced)
-		GLOB.dview_mob = new/mob/dview()
-		return ..()
-	crash_with("Prevented attempt to delete dview mob: [log_info_line(src)]")
-	return QDEL_HINT_LETMELIVE // Prevents destruction
+/mob/dview/Destroy()
+	SHOULD_CALL_PARENT(FALSE)
+	return QDEL_HINT_LETMELIVE
 
 /**
  * Sets the atom's color and light values to those of `origin`.

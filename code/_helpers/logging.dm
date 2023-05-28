@@ -148,8 +148,6 @@ GLOBAL_VAR_INIT(log_end, (ascii2text(13))) // CRLF for all logs
 	to_world_log("## UNIT_TEST ##: [text]")
 	log_debug(text)
 
-/proc/log_qdel(text)
-	to_file(GLOB.world_qdel_log, "\[[time_stamp()]]QDEL: [text]")
 
 /proc/log_world(text)
 	to_world_log(text)

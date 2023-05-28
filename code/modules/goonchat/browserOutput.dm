@@ -42,7 +42,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 	var/list/connectionHistory = list()
 
 
-/datum/chatOutput/Destroy(force)
+/datum/chatOutput/Destroy()
 	SSping.chats -= src
 	return ..()
 
