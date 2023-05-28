@@ -285,7 +285,7 @@
 /// Generate random hex up to char length nibbles
 /proc/randhex(nibbles)
 	for (var/i = 1 to nibbles)
-		. += text2num(rand(0, 15), 16)
+		. += num2text(rand(0, 15), 1, 16)
 
 
 /// Increase the size of L by 1 at the end. Is the old last entry index.
