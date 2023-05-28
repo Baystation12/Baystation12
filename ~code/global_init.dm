@@ -7,7 +7,7 @@
 	5. The gameticker is created.
 */
 
-var/global/datum/global_init/init = new
+var/global/datum/global_init/__global_init = new
 
 /*
 	Pre-map initialization stuff should go here.
@@ -15,4 +15,3 @@ var/global/datum/global_init/init = new
 /datum/global_init/New()
 	config = new
 	callHook("global_init")
-	qdel(src) //we're done

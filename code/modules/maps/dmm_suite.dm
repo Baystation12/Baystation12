@@ -73,9 +73,6 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 	var/static/regex/trimRegex = new/regex("^\[\\s\n]+|\[\\s\n]+$", "g")
 	var/static/list/modelCache = list()
 	var/static/space_key
-	#ifdef TESTING
-	var/static/turfsSkipped
-	#endif
 
 /**
  * Construct the model map and control the loading process
@@ -96,17 +93,10 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 	//How I wish for RAII
 	Master.StartLoadingMap()
 	space_key = null
-	#ifdef TESTING
-	turfsSkipped = 0
-	#endif
 	initialized_areas_by_type = initialized_areas_by_type || list()
 	if(!(world.area in initialized_areas_by_type))
 		initialized_areas_by_type[world.area] = locate(world.area)
 	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y, initialized_areas_by_type)
-	#ifdef TESTING
-	if(turfsSkipped)
-		testing("Skipped loading [turfsSkipped] default turfs")
-	#endif
 	Master.StopLoadingMap()
 
 /dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, initialized_areas_by_type)
@@ -235,10 +225,6 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 									if (M)
 										atoms_to_initialise += M.atoms_to_initialise
 										atoms_to_delete += M.atoms_to_delete
-								#ifdef TESTING
-								else
-									++turfsSkipped
-								#endif
 								CHECK_TICK
 							maxx = max(maxx, xcrd)
 							++xcrd
