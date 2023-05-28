@@ -107,8 +107,6 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	to_world_log("## UNIT_TEST ##: [text]")
 	log_debug(text)
 
-/proc/log_qdel(text)
-	to_file(GLOB.world_qdel_log, "\[[time_stamp()]]QDEL: [text]")
 
 //This replaces world.log so it displays both in DD and the file
 /proc/log_world(text)
