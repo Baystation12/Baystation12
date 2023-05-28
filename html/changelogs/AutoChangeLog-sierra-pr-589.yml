@@ -1,7 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - rscadd: Ships that scan the Torch will now show if the ship is currently dealing
-      with a spider infestation or a Blob.
-  - rscadd: Exoplanets undergoing the 'Exoplanet Awakening' will now display as such
-      on scans.
