@@ -186,3 +186,35 @@ var/global/datum/evacuation_controller/evacuation_controller
 
 /datum/evacuation_controller/proc/should_call_autotransfer_vote()
 	return (state == EVAC_IDLE)
+
+
+/datum/evacuation_controller/proc/UpdateStat()
+	var/stat_text = "Invalid State"
+	switch (state)
+		if (EVAC_IDLE)
+			stat_text = "Idle"
+		if (EVAC_PREPPING)
+			stat_text = "Preparing"
+			stat_text += " | Emergency: [emergency_evacuation ? "Y" : "N"]"
+			stat_text += " | Called At: [worldtime2stationtime(evac_called_at)]"
+			stat_text += " | Ready In: [time_to_readable(evac_ready_time - world.time)]"
+			stat_text += " | No Return: [world.time > evac_no_return ? "Y" : "In [time_to_readable(evac_no_return - world.time)]"]"
+			stat_text += " | Recall: [recall ? "Y ([time_to_readable(auto_recall_time - world.time)])" : "N"]"
+		if (EVAC_LAUNCHING)
+			stat_text = "Launching"
+			stat_text += " | Emergency: [emergency_evacuation ? "Y" : "N"]"
+			stat_text += " | Called At: [worldtime2stationtime(evac_called_at)]"
+			stat_text += " | Launch In: [time_to_readable(evac_launch_time - world.time)]"
+		if (EVAC_IN_TRANSIT)
+			stat_text = "In Transit"
+			stat_text += " | Emergency: [emergency_evacuation ? "Y" : "N"]"
+			stat_text += " | Called At: [worldtime2stationtime(evac_called_at)]"
+			stat_text += " | Arrive In: [time_to_readable(evac_arrival_time - world.time)]"
+		if (EVAC_COOLDOWN)
+			stat_text = "Cooldown"
+			stat_text += " | Emergency: [emergency_evacuation ? "Y" : "N"]"
+			stat_text += " | Idle In: [time_to_readable(evac_cooldown_time - world.time)]"
+		if (EVAC_COMPLETE)
+			stat_text = "Complete"
+			stat_text += " | Emergency: [emergency_evacuation ? "Y" : "N"]"
+	return stat_text

@@ -12,7 +12,9 @@ SUBSYSTEM_DEF(evac)
 
 
 /datum/controller/subsystem/evac/UpdateStat(time)
-	return ..()
+	if (PreventUpdateStat(time))
+		return ..()
+	return ..(evacuation_controller.UpdateStat())
 
 
 /datum/controller/subsystem/evac/fire(resumed, no_mc_tick)
