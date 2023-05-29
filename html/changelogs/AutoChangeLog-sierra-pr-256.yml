@@ -1,6 +1,0 @@
-author: PurplePineapple
-delete-after: true
-changes:
-  - rscadd: Three new positronic cultures. 1st, 2nd, and 3rd Generation.
-  - rscdel: All mentions of Root and the Positronic Union have been removed.
-  - tweak: Positronics can now select the new human planets that were added over time.
