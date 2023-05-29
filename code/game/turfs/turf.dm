@@ -92,7 +92,7 @@
 		QDEL_NULL(mimic_proxy)
 
 	..()
-	return QDEL_HINT_IWILLGC
+	return QDEL_HINT_LETMELIVE
 
 /turf/proc/is_solid_structure()
 	return 1
