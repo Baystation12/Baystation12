@@ -11,7 +11,7 @@ SUBSYSTEM_DEF(statistics)
 		return
 
 	// Set 'announce' to TRUE, if want to notify players about their earnings :D
-	update_player_exp(announce = TRUE)
+	update_player_exp()
 
 /**
   * This proc will update all players EXP end SPECIES_EXP at once. It will calculate amount of time to add dynamically based on the SS fire time.

@@ -65,26 +65,16 @@
 			stat("Next Continue Vote:", "[max(round(transfer_controller.time_till_transfer_vote() / 600, 1), 0)] minutes")
 
 /mob/new_player/Topic(href, href_list) // This is a full override; does not call parent.
-	if(usr != src || !client)
+	if (usr != src)
+		return TOPIC_NOACTION
+	if (!client)
 		return TOPIC_NOACTION
 
-	if(href_list["lobby_setup"])
+	// if (href_list["show_preferences"]) // BAY
+	if (href_list["lobby_setup"]) // SIERRA
 		client.prefs.open_setup_window(src)
 		return 1
-
-	if(href_list["lobby_init"])
-		GLOB.using_map.update_titlescreen(client)
-		return 1
-	if(href_list["lobby_changelog"])
-		client.changes()
-		return 1
-	if (href_list["lobby_github"])
-		client.link_url(config.source_url, "Source", TRUE)
-		return 1
-	if (href_list["lobby_discord"])
-		client.link_url(config.discord_url, "Discord", TRUE)
-		return 1
-	if (href_list["lobby_wiki"] || href_list["show_wiki"])
+	if (href_list["show_wiki"])
 		client.link_url(config.wiki_url, "Wiki", TRUE)
 		return 1
 	if (href_list["show_rules"])
@@ -94,26 +84,52 @@
 		client.link_url(config.lore_url, "Lore", TRUE)
 		return 1
 
-	if(href_list["lobby_ready"])
+	// [SIERRA]
+	if(href_list["lobby_init"])
+		GLOB.using_map.update_titlescreen(client)
+		return 1
+	if (href_list["lobby_wiki"])
+		client.link_url(config.wiki_url, "Wiki", TRUE)
+		return 1
+	if (href_list["lobby_discord"])
+		client.link_url(config.discord_url, "Discord", TRUE)
+		return 1
+	if(href_list["lobby_changelog"])
+		client.changes()
+		return 1
+	if (href_list["lobby_github"])
+		client.link_url(config.source_url, "Source", TRUE)
+		return 1
+	// [/SIERRA]
 
+	// if (href_list["ready"]) // BAY
+	if (href_list["lobby_ready"])
+		// ready = GAME_STATE > RUNLEVEL_LOBBY ? 0 : text2num(href_list["ready"]) // BAY
+
+		// [SIERRA] - lobby
 		if(GAME_STATE <= RUNLEVEL_LOBBY)
 			ready = !ready
 			GLOB.using_map.set_titlescreen_ready(client, ready)
+		// [/SIERRA]
 
+		// [SIERRA] - ss220 dependency
 		if(config.minimum_byondacc_age && client.player_age <= config.minimum_byondacc_age)
 			if(!client.discord_id || (client.discord_id && length(client.discord_id) == 32))
 				client.load_player_discord(client)
 				to_chat(usr, "<span class='danger'>Вам необходимо привязать дискорд-профиль к аккаунту!</span>")
 				to_chat(usr, "<span class='warning'>Нажмите 'Привязка Discord' во вкладке 'Special Verbs' для получения инструкций.</span>")
 				return FALSE
+		// [/SIERRA]
 
 	if(href_list["lobby_observe"])
+		// [SIERRA] - ss220 dependency
 		if(config.minimum_byondacc_age && client.player_age <= config.minimum_byondacc_age)
 			if(!client.discord_id || (client.discord_id && length(client.discord_id) == 32))
 				client.load_player_discord(client)
 				to_chat(usr, "<span class='danger'>Вам необходимо привязать дискорд-профиль к аккаунту!</span>")
 				to_chat(usr, "<span class='warning'>Нажмите 'Привязка Discord' во вкладке 'Special Verbs' для получения инструкций.</span>")
 				return FALSE
+		// [/SIERRA]
 
 		if(GAME_STATE < RUNLEVEL_LOBBY)
 			to_chat(src, SPAN_WARNING("Please wait for server initialization to complete..."))
@@ -157,12 +173,14 @@
 			return
 
 	if(href_list["lobby_join"])
+		// [SIERRA] - ss220 dependency
 		if(config.minimum_byondacc_age && client.player_age <= config.minimum_byondacc_age)
 			if(!client.discord_id || (client.discord_id && length(client.discord_id) == 32))
 				client.load_player_discord(client)
 				to_chat(usr, "<span class='danger'>Вам необходимо привязать дискорд-профиль к аккаунту!</span>")
 				to_chat(usr, "<span class='warning'>Нажмите 'Привязка Discord' во вкладке 'Special Verbs' для получения инструкций.</span>")
 				return FALSE
+		// [/SIERRA]
 
 		if(GAME_STATE != RUNLEVEL_GAME)
 			to_chat(usr, SPAN_WARNING("The round has either not started yet or already ended."))

@@ -180,7 +180,7 @@
 	prefs.last_ip = address				//these are gonna be used for banning
 	prefs.last_id = computer_id			//these are gonna be used for banning
 	apply_fps(prefs.clientfps)
-	load_player_discord(src)
+	load_player_discord(src) // SIERRA - ss220 dependency
 
 	. = ..()	//calls mob.Login()
 
@@ -618,7 +618,8 @@
 
 	var/sql_ckey = sql_sanitize_text(C.ckey)
 
-	var/DBQuery/query = dbcon.NewQuery("SELECT discord_id, discord_name FROM [sqlfdbkdbutil].player WHERE ckey = '[sql_ckey]'")
+	// var/DBQuery/query = dbcon.NewQuery("SELECT discord_id, discord_name FROM erro_player WHERE ckey = '[sql_ckey]'") // BAY
+	var/DBQuery/query = dbcon.NewQuery("SELECT discord_id, discord_name FROM erro_player WHERE ckey = '[sql_ckey]'") // SIERRA
 	query.Execute()
 
 	if(query.NextRow())
@@ -646,7 +647,8 @@
 	var/token = md5("[world.time+rand(1000,1000000)]")
 	if(dbcon.IsConnected())
 		var/sql_ckey = sql_sanitize_text(ckey(key))
-		var/DBQuery/query_update_token = dbcon.NewQuery("UPDATE [sqlfdbkdbutil].player SET discord_id='[token]' WHERE ckey='[sql_ckey]'")
+		// var/DBQuery/query_update_token = dbcon.NewQuery("UPDATE erro_player SET discord_id='[token]' WHERE ckey='[sql_ckey]'") // BAY
+		var/DBQuery/query_update_token = dbcon.NewQuery("UPDATE erro_player SET discord_id='[token]' WHERE ckey='[sql_ckey]'") // SIERRA
 
 		if(!query_update_token.Execute())
 			to_chat(usr, "<span class='warning'>Ошибка записи токена в БД! Обратитесь к администрации.</span>")

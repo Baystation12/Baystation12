@@ -41,6 +41,11 @@
 	var/server = ""
 	var/port = 3306
 
+/DBConnection/VV_hidden()
+	return ..() + list(NAMEOF(src, _db_con), NAMEOF(src, dbi), NAMEOF(src, user),
+	 				   NAMEOF(src, password), NAMEOF(src, default_cursor),  NAMEOF(src, server),
+					   NAMEOF(src, port))
+
 /DBConnection/New(dbi_handler,username,password_handler,cursor_handler)
 	src.dbi = dbi_handler
 	src.user = username

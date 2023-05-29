@@ -22,8 +22,10 @@
 
 	var/staffwarn = null
 
+	// [SIERRA] - ss220 dependency
 	var/discord_id = null
 	var/discord_name = null
+	// [/SIERRA]
 
 		///////////////
 		//SOUND STUFF//

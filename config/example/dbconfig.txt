@@ -23,3 +23,7 @@ PASSWORD mypassword
 FEEDBACK_DATABASE test
 FEEDBACK_LOGIN mylogin
 FEEDBACK_PASSWORD mypassword
+
+
+## SBAY ##
+UTILITY_DATABASE tgstation

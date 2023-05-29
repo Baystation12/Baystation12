@@ -25,7 +25,7 @@
 	selection = english_list(selection, "", "", " OR ", " OR ")
 	var/DBQuery/query = dbcon.NewQuery("\
 		SELECT `bantype`, `reason`, `expiration_time`, `ckey`, `ip`, `computerid`, `a_ckey`, `unbanned`\
-			FROM `erro_ban`\
+			FROM [sqlfdbkdbutil].`ban`\
 			WHERE `bantype` IN ('PERMABAN', 'TEMPBAN') AND \
 			([selection])\
 	")
@@ -101,7 +101,7 @@
 		return
 	var/DBQuery/query = dbcon.NewQuery({"
 		SELECT `bantype`, `reason`, `expiration_time`, `ckey`, `ip`, `computerid`, `a_ckey`, `unbanned`
-			FROM `erro_ban`
+			FROM [sqlfdbkdbutil].`ban`
 			WHERE `bantype` IN ('PERMABAN', 'TEMPBAN') AND
 			([english_list(final_query_components, "", "", " OR ", " OR ")])
 	"})

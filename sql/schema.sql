@@ -3,7 +3,7 @@
  */
 
 
-CREATE TABLE IF NOT EXISTS `erro_ban` (
+CREATE TABLE IF NOT EXISTS `ban` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `bantime` datetime NOT NULL,
   `serverip` text NOT NULL,
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `erro_connection_log`
 (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`datetime` DATETIME DEFAULT now() NOT NULL,
-	`server_ip` VARCHAR(32) NOT NULL,
+	`serverip` VARCHAR(32) NOT NULL,
 	`server_port` INT(5) UNSIGNED NOT NULL,
 	`ckey` VARCHAR(32) NOT NULL,
 	`ip` VARCHAR(32) NOT NULL,

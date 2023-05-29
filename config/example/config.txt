@@ -468,8 +468,17 @@ RADIATION_LOWER_LIMIT 0.15
 ## Not recommended for live use.
 #RUN_EMPTY_LEVELS
 
+
+
+## ============ ##
+##    SIERRA    ##
+## ============ ##
+
 ## Uncomment to use ckey whitelist ticket system with SQL
 #USEWHITELIST_DATABASE
 
 ## Server to reroute to. Used when USEWHITELIST_DATABASE enabled
 #OVERFLOW_SERVER_URL byond://example.com:1234
+
+## Minimum age of byond account that allowed to play withoud discord verification
+#MINIMUM_BYONDACC_AGE 10

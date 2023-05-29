@@ -171,6 +171,22 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		s["roundduration"] = roundduration2text()
 		s["map"] = replacetext(GLOB.using_map.full_name, "\improper", "") //Done to remove the non-UTF-8 text macros
 
+		// [SIERRA] - ss220 dependency
+		s["roundtime"] = roundduration2text()
+
+		switch(GAME_STATE)
+			if(RUNLEVEL_INIT)
+				s["ticker_state"] = 0
+			if(RUNLEVEL_LOBBY)
+				s["ticker_state"] = 1
+			if(RUNLEVEL_SETUP)
+				s["ticker_state"] = 2
+			if(RUNLEVEL_GAME)
+				s["ticker_state"] = 3
+			if(RUNLEVEL_POSTGAME)
+				s["ticker_state"] = 4
+		// [/SIERRA]
+
 		var/active = 0
 		var/list/players = list()
 		var/list/admins = list()
@@ -192,6 +208,11 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 			s["playerlist"] = list2params(players)
 			s["adminlist"] = list2params(admins)
 			s["active_players"] = active
+
+		// [SIERRA] - ss220 dependency
+		if(input["format"] == "json")
+			return json_encode(s)
+		// [/SIERRA]
 
 		return list2params(s)
 
@@ -268,6 +289,47 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	if (!config.comms_password)
 		SET_THROTTLE(10 SECONDS, "Comms Not Enabled")
 		return "Not enabled"
+
+	// [SIERRA] - ss220 dependency - QUEUE ENGINE SUPPORT
+	else if(copytext(T,1,15) == "playerlist_ext")
+		if(!config.comms_password)
+			return "Not enabled"
+		var/input[] = params2list(T)
+		if(input["key"] != config.comms_password)
+			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
+			return "Bad Key"
+
+		var/list/players = list()
+		var/list/just_keys = list()
+
+		var/list/disconnected_observers = list()
+
+		for(var/mob/M in GLOB.dead_mobs)
+			if(!M.last_ckey)
+				continue
+			if(M.client)
+				continue
+			var/ckey = ckey(M.last_ckey)
+			disconnected_observers[ckey] = ckey
+
+		for(var/client/C as anything in GLOB.clients)
+			var/ckey = C.ckey
+			players[ckey] = ckey
+			just_keys += ckey
+
+		for(var/mob/M in GLOB.alive_mobs)
+			if(!M.last_ckey)
+				continue
+			var/ckey = ckey(M.last_ckey)
+			if(players[ckey])
+				continue
+			if(disconnected_observers[ckey])
+				continue
+			players[ckey] = ckey
+			just_keys += ckey
+
+		return json_encode(just_keys)
+	// [/SIERRA]
 
 	else if(copytext(T,1,5) == "laws")
 		var/input[] = params2list(T)
