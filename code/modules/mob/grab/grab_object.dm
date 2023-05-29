@@ -333,3 +333,25 @@
 
 /obj/item/grab/proc/resolve_openhand_attack()
 		return current_grab.resolve_openhand_attack(src)
+
+
+/**
+ * Validates that `assailant` can still perform an action with `affecting` and `target`. Performs some grab-specific
+ *   checks, then passes through to `assailant.use_sanity_check()` with both `src` and `affecting`.
+ *
+ * **Parameters**:
+ * - `target` - The atom being interacted with.
+ * - `flags` (Bitflag, any of `SANITY_CHECK_*`, default `SANITY_CHECK_DEFAULT`) - Bitflags of additional settings. See `code\__defines\misc.dm`.
+ *
+ * Returns boolean.
+ */
+/obj/item/grab/proc/use_sanity_check(atom/target, flags = SANITY_CHECK_DEFAULT)
+	if (QDELETED(src) || QDELETED(assailant))
+		return FALSE
+	// Sanity check the grab itself
+	if (!assailant.use_sanity_check(target, src, flags))
+		return FALSE
+	// Sanity check the victim
+	if (!assailant.use_sanity_check(target, affecting, flags))
+		return FALSE
+	return TRUE
