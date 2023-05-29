@@ -15,37 +15,23 @@ var/global/const/QDEL_HINT_HARDDEL_NOW = 4
 
 
 /// datum.gc_destroyed signal value
-var/global/const/GC_QUEUED_FOR_QUEUING = -1
-
-/// datum.gc_destroyed signal value
-var/global/const/GC_QUEUED_FOR_HARD_DEL = -2
-
-/// datum.gc_destroyed signal value
-var/global/const/GC_CURRENTLY_BEING_QDELETED = -3
+var/global/const/GC_CURRENTLY_BEING_QDELETED = -1
 
 
 SUBSYSTEM_DEF(garbage)
 	name = "Garbage"
 	priority = SS_PRIORITY_GARBAGE
-	wait = 2 SECONDS
+	wait = 10 SECONDS
 	flags = SS_POST_FIRE_TIMING | SS_BACKGROUND | SS_NO_INIT | SS_NEEDS_SHUTDOWN
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	init_order = SS_INIT_GARBAGE
-
-	/// fire() step state. Currently adding from the prequeue to the check queue.
-	var/const/GC_QUEUE_PREQUEUE = 1
-
-	/// fire() step state. Currently checking entries in the check queue.
-	var/const/GC_QUEUE_CHECK = 2
-
-	/// fire() step state. Currently hard deleting entries in the hard deletion queue.
-	var/const/GC_QUEUE_HARDDELETE = 3
 
 	var/static/last_tick_enqueues = 0
 	var/static/last_tick_deletions = 0
 	var/static/last_tick_collections = 0
 	var/static/total_deletions = 0
 	var/static/total_collections = 0
+	var/static/failed_collections = 0
 
 	var/static/list/datum/qdel_details/details_by_path = list(
 		/datum/qdel_details = new /datum/qdel_details
@@ -53,15 +39,11 @@ SUBSYSTEM_DEF(garbage)
 
 	var/static/pause_deletion_queue = FALSE
 
-	var/static/collection_time_limit = 30 SECONDS
-	var/static/deletion_time_limit = 10 SECONDS
+	var/static/collection_time_limit = 60 SECONDS
 
-	var/static/collections_failed = 0
-
-	var/static/list/datum/pre_queue = list()
 	var/static/list/datum/collection_queue = list()
+
 	var/static/list/datum/deletion_queue = list()
-	var/static/run_step = GC_QUEUE_PREQUEUE
 
 
 /datum/controller/subsystem/garbage/Shutdown()
@@ -73,6 +55,8 @@ SUBSYSTEM_DEF(garbage)
 		if (details.failures)
 			qdel_log += "\tFailures: [details.failures]"
 		qdel_log += "\tqdel() Count: [details.qdels]"
+		if (details.extra_qdels)
+			qdel_log += "\tunecessary qdel() Count: [details.extra_qdels]"
 		qdel_log += "\tDestroy() Cost: [details.destroy_time]ms"
 		if (details.hard_deletes)
 			qdel_log += "\tTotal Hard Deletes [details.hard_deletes]"
@@ -89,53 +73,15 @@ SUBSYSTEM_DEF(garbage)
 	if (PreventUpdateStat(time))
 		return ..()
 	..({"\
-		prequeue: [length(pre_queue)], collection queue: [length(collection_queue)], deletion queue: [length(deletion_queue)]\n\
-		last run: [last_tick_deletions + last_tick_collections], collected: [total_collections], deleted: [total_deletions], failed: [collections_failed]\n\
+		collection queue: [length(collection_queue)], deletion queue: [length(deletion_queue)]\n\
+		last run: [last_tick_deletions + last_tick_collections], collected: [total_collections], deleted: [total_deletions], failed: [failed_collections]\n\
 	"})
 
 
 /datum/controller/subsystem/garbage/fire()
-	run_step = GC_QUEUE_PREQUEUE
-	while (state == SS_RUNNING)
-		switch (run_step)
-			if (GC_QUEUE_PREQUEUE)
-				HandlePreQueue()
-				run_step = GC_QUEUE_CHECK
-			if (GC_QUEUE_CHECK)
-				HandleCollectionQueue()
-				run_step = GC_QUEUE_HARDDELETE
-			if (GC_QUEUE_HARDDELETE)
-				if (!pause_deletion_queue)
-					HandleDeletionQueue()
-				break
-	if (state == SS_PAUSED)
-		state = SS_RUNNING
-
-
-/datum/controller/subsystem/garbage/proc/HandlePreQueue()
-	var/size = length(pre_queue)
-	if (!size)
-		return
-	var/bound
-	var/cut_until = 1
-	for (var/i = 1 to size)
-		++cut_until
-		var/datum/datum = pre_queue[i]
-		if (!datum)
-			continue
-		var/time = world.time
-		var/reftext = "\ref[datum]"
-		switch (datum.gc_destroyed)
-			if (GC_QUEUED_FOR_HARD_DEL)
-				deletion_queue[datum] = time
-			else
-				collection_queue[reftext] = time
-		datum.gc_destroyed = time
-		if (++bound == 50)
-			bound = 0
-			if (MC_TICK_CHECK)
-				break
-	pre_queue.Cut(1, cut_until)
+	HandleCollectionQueue()
+	if (!pause_deletion_queue && state == SS_RUNNING)
+		HandleDeletionQueue()
 
 
 /datum/controller/subsystem/garbage/proc/HandleCollectionQueue()
@@ -164,10 +110,8 @@ SUBSYSTEM_DEF(garbage)
 			continue
 		var/path = datum.type
 		var/datum/qdel_details/details = details_by_path[path]
-		if (!details.failures)
-			to_world_log("GC: [reftext] [path] unable to be collected")
 		++details.failures
-		++collections_failed
+		++failed_collections
 		deletion_queue[datum] = world.time
 	if (cut_until)
 		collection_queue.Cut(1, cut_until)
@@ -177,17 +121,12 @@ SUBSYSTEM_DEF(garbage)
 	var/size = length(deletion_queue)
 	if (!size)
 		return
-	var/cutoff_time = world.time - deletion_time_limit
 	var/cut_until = 1
 	for (var/i = 1 to size)
 		++cut_until
 		var/datum/datum = deletion_queue[i]
 		if (!datum)
 			continue
-		var/queue_time = deletion_queue[datum]
-		if (queue_time > cutoff_time)
-			--cut_until
-			break
 		HardDelete(datum)
 		if (MC_TICK_CHECK)
 			break
@@ -220,13 +159,29 @@ SUBSYSTEM_DEF(garbage)
 
 
 /datum/qdel_details
-	var/qdels = 0 //Total number of times it's passed thru qdel.
-	var/destroy_time = 0 //Total amount of milliseconds spent processing this type's Destroy()
-	var/failures = 0 //Times it was queued for soft deletion but failed to soft delete.
-	var/hard_deletes = 0 //Different from failures because it also includes QDEL_HINT_HARDDEL deletions
-	var/hard_delete_time = 0 //Total amount of milliseconds spent hard deleting this type.
-	var/no_hint = 0 //Number of times it's not even bother to give a qdel hint
-	var/slept_destroy = 0 //Number of times it's slept in its destroy
+	/// Number of times the associated path has been queued for deletion
+	var/qdels = 0
+
+	/// Number of times an instance was queued more than once
+	var/extra_qdels = 0
+
+	/// Total milliseconds spent on Destroy calls
+	var/destroy_time = 0
+
+	/// Number of times rolled over from collection to deletion
+	var/failures = 0
+
+	/// Number of times hard deleted, failure and intended
+	var/hard_deletes = 0
+
+	/// Total milliseconds spent on del calls
+	var/hard_delete_time = 0
+
+	/// Number of times Destroy did not return a QDEL_HINT_*
+	var/no_hint = 0
+
+	/// Number of times Destroy calls slept
+	var/slept_destroy = 0
 
 
 /proc/cmp_qdel_details_time(datum/qdel_details/A, datum/qdel_details/B)
@@ -236,77 +191,64 @@ SUBSYSTEM_DEF(garbage)
 	if (!.)
 		. = B.failures - A.failures
 	if (!.)
+		. = B.extra_qdels - A.extra_qdels
+	if (!.)
 		. = B.qdels - A.qdels
 
 
 /// Queue datum D for garbage collection / deletion. Calls the datum's Destroy() and sets its gc_destroyed value.
 /proc/qdel(datum/datum)
+	var/static/list/details_by_path = SSgarbage.details_by_path
+	var/static/list/collection_queue = SSgarbage.collection_queue
+	var/static/list/deletion_queue = SSgarbage.deletion_queue
 	if (!datum)
 		return
 	if (!istype(datum))
 		crash_with("qdel() can only handle /datum (sub)types, was passed: [log_info_line(datum)]")
-		del(datum)
 		return
-	var/static/list/details_by_path = SSgarbage.details_by_path
 	var/datum/qdel_details/details = details_by_path[datum.type]
 	if (!details)
 		details = new
 		details_by_path[datum.type] = details
 	++details.qdels
-	if (isnull(datum.gc_destroyed))
-		datum.gc_destroyed = GC_CURRENTLY_BEING_QDELETED
-		var/start_time = world.time
-		var/start_tick = world.tick_usage
-		var/hint = datum.Destroy()
-		if (world.time != start_time)
-			++details.slept_destroy
-		else
-			details.destroy_time += (world.tick_usage - start_tick) * world.tick_lag
-		var/static/immediate = TRUE
-		if (immediate)
-			immediate = Master.current_runlevel < RUNLEVEL_GAME
-		var/static/list/pre_queue = SSgarbage.pre_queue
-		var/static/list/collection_queue = SSgarbage.collection_queue
-		var/static/list/deletion_queue = SSgarbage.deletion_queue
-		switch(hint)
-			if (QDEL_HINT_QUEUE)
-				if (ismovable(datum))
-					var/atom/movable/movable = datum
-					if (movable.loc)
-						crash_with("QDEL_HINT_QUEUE: [movable] loc not null after Destroy")
-						movable.forceMove(null)
-				if (immediate)
-					datum.gc_destroyed = world.time
-					collection_queue["\ref[datum]"] = world.time
-				else
-					pre_queue += datum
-					datum.gc_destroyed = GC_QUEUED_FOR_QUEUING
-			if (QDEL_HINT_IWILLGC)
-				datum.gc_destroyed = world.time
-			if (QDEL_HINT_LETMELIVE)
-				datum.gc_destroyed = null
-			if (QDEL_HINT_HARDDEL)
-				if (ismovable(datum))
-					var/atom/movable/movable = datum
-					if (movable.loc)
-						crash_with("QDEL_HINT_HARDDEL: [movable] loc not null after Destroy")
-						movable.forceMove(null)
-				if (datum.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
-					if (immediate)
-						datum.gc_destroyed = world.time
-						deletion_queue[datum] = world.time
-					else
-						datum.gc_destroyed = GC_QUEUED_FOR_HARD_DEL
-						pre_queue += datum
-			if (QDEL_HINT_HARDDEL_NOW)
-				SSgarbage.HardDelete(datum)
+	switch (datum.gc_destroyed)
+		if (null)
+			datum.gc_destroyed = GC_CURRENTLY_BEING_QDELETED
+			var/start_time = world.time
+			var/start_tick = world.tick_usage
+			var/hint = datum.Destroy()
+			if (world.time != start_time)
+				++details.slept_destroy
 			else
-				++details.no_hint
-				if (immediate)
+				details.destroy_time += (world.tick_usage - start_tick) * world.tick_lag
+			switch (hint)
+				if (QDEL_HINT_QUEUE)
+					if (ismovable(datum))
+						var/atom/movable/movable = datum
+						if (movable.loc)
+							crash_with("QDEL_HINT_QUEUE: [movable] loc not null after Destroy")
+							movable.forceMove(null)
 					datum.gc_destroyed = world.time
 					collection_queue["\ref[datum]"] = world.time
+				if (QDEL_HINT_IWILLGC)
+					datum.gc_destroyed = world.time
+				if (QDEL_HINT_LETMELIVE)
+					datum.gc_destroyed = null
+				if (QDEL_HINT_HARDDEL)
+					if (ismovable(datum))
+						var/atom/movable/movable = datum
+						if (movable.loc)
+							crash_with("QDEL_HINT_HARDDEL: [movable] loc not null after Destroy")
+							movable.forceMove(null)
+					datum.gc_destroyed = world.time
+					deletion_queue[datum] = world.time
+				if (QDEL_HINT_HARDDEL_NOW)
+					SSgarbage.HardDelete(datum)
 				else
-					pre_queue += datum
-					datum.gc_destroyed = GC_QUEUED_FOR_QUEUING
-	else if (datum.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
-		CRASH("[datum.type] destroy proc was called multiple times, likely due to a qdel loop in the Destroy logic")
+					++details.no_hint
+					datum.gc_destroyed = world.time
+					collection_queue["\ref[datum]"] = world.time
+		if (GC_CURRENTLY_BEING_QDELETED)
+			crash_with("GC_CURRENTLY_BEING_QDELETED: [datum.type] Destroy() called more than once.")
+		else
+			++details.extra_qdels

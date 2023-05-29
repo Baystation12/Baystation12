@@ -275,13 +275,12 @@
 	var/list/checked_pipes = list()
 	var/list/bad_pipelines = list()
 	for(var/datum/pipeline/P)
-		for(var/thing in P.members)
-			var/obj/machinery/atmospherics/pipe/pipe = thing
-			if(!checked_pipes[thing])
-				checked_pipes[thing] = P
+		for(var/obj/machinery/atmospherics/pipe/pipe in P.members)
+			if(!checked_pipes[pipe])
+				checked_pipes[pipe] = P
 				continue
 			LAZYDISTINCTADD(bad_pipelines[P], pipe)
-			LAZYDISTINCTADD(bad_pipelines[checked_pipes[thing]], pipe) // Missed it the first time; thought it was good.
+			LAZYDISTINCTADD(bad_pipelines[checked_pipes[pipe]], pipe) // Missed it the first time; thought it was good.
 
 	if(length(bad_pipelines))
 		for(var/datum/pipeline/badboy in bad_pipelines)
