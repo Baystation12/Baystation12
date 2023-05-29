@@ -1,0 +1,7 @@
+author: Alex6511
+delete-after: true
+changes:
+  - maptweak: Exoplanet types have been overhauled, planets atmospheres will now be
+      more consistent
+  - maptweak: Artic Planetoid has been renamed Artic dwarf planet, because a planetoid
+      is not a planet type recognized by the IAU
