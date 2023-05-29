@@ -969,6 +969,7 @@
 	var/mob/living/H = user
 	if(istype(H) && can_climb(H) && target == user)
 		do_climb(target)
+		return TRUE
 	else
 		return ..()
 
