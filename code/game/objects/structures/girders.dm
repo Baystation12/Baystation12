@@ -65,7 +65,7 @@
 			SPAN_NOTICE("\The [user] starts dislodging \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start dislodging \the [src] with \the [tool].")
 		)
-		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (!can_anchor(tool, user))
 			return TRUE
@@ -134,7 +134,7 @@
 					SPAN_NOTICE("\The [user] starts securing \the [src]'s support struts with \a [tool]."),
 					SPAN_NOTICE("You starts securing \the [src]'s support struts with \the [tool].")
 				)
-				if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+				if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 					return TRUE
 				if (state != GIRDER_STATE_REINFORCEMENT_UNSECURED)
 					USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
@@ -151,7 +151,7 @@
 					SPAN_NOTICE("\The [user] starts unsecuring \the [src]'s support struts with \a [tool]."),
 					SPAN_NOTICE("You starts unsecuring \the [src]'s support struts with \the [tool].")
 				)
-				if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+				if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 					return TRUE
 				if (state != GIRDER_STATE_REINFORCED)
 					USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
@@ -176,7 +176,7 @@
 					SPAN_NOTICE("\The [user] starts removing \the [src]'s support struts with \a [tool]."),
 					SPAN_NOTICE("You start removing \the [src]'s support struts with \the [tool].")
 				)
-				if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+				if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 					return TRUE
 				if (state != GIRDER_STATE_REINFORCEMENT_UNSECURED)
 					USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
@@ -203,7 +203,7 @@
 				SPAN_NOTICE("\The [user] starts dismantling \the [src] with \a [tool]."),
 				SPAN_NOTICE("You start dismantling \the [src] with \the [tool].")
 			)
-			if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 				return TRUE
 			if (state != GIRDER_STATE_NORMAL || !anchored)
 				USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
@@ -220,7 +220,7 @@
 			SPAN_NOTICE("\The [user] starts securing \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start securing \the [src] with \the [tool].")
 		)
-		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (state != GIRDER_STATE_NORMAL || anchored)
 			USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")

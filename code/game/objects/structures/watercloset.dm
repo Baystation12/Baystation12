@@ -46,7 +46,7 @@
 			SPAN_NOTICE("\The [user] strives valiantly to unclog \the [src] with \a [tool]!"),
 			SPAN_NOTICE("You attempt to unclog \the [src] with \the [tool].")
 		)
-		if (!do_after(user, 4.5 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+		if (!do_after(user, (tool.toolspeed * 4.5) SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (!clogged)
 			USE_FEEDBACK_FAILURE("\The [src] isn't clogged.")
@@ -209,7 +209,7 @@
 			SPAN_NOTICE("\The [user] starts to [cistern ? "lift" : "replace"] \the [src]'s cistern with \a [tool]."),
 			SPAN_NOTICE("You start to [cistern ? "lift" : "replace"] \the [src]'s cistern with \the [tool].")
 		)
-		if (!do_after(user, 3 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!do_after(user, (tool.toolspeed * 3) SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, TRUE)
 		user.visible_message(
@@ -333,7 +333,7 @@
 			SPAN_NOTICE("\The [user] starts adjusting \the [src]'s temperature with \a [tool]."),
 			SPAN_NOTICE("You start adjusting \the [src]'s temperature with \the [tool].")
 		)
-		if (!do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!do_after(user, (tool.toolspeed * 5) SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		watertemp = input
 		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)

@@ -280,7 +280,7 @@ var/global/list/turret_icons
 			//If the turret is destroyed, you can remove it with a crowbar to
 			//try and salvage its components
 			to_chat(user, SPAN_NOTICE("You begin prying the metal coverings off."))
-			if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
+			if(do_after(user, (I.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 				if(prob(70))
 					to_chat(user, SPAN_NOTICE("You remove the turret and salvage some components."))
 					if(installation)
@@ -313,7 +313,7 @@ var/global/list/turret_icons
 		)
 
 		wrenching = 1
-		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
+		if(do_after(user, (I.toolspeed * 5) SECONDS, src, DO_REPAIR_CONSTRUCT))
 			//This code handles moving the turret around. After all, it's a portable turret!
 			if(!anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
@@ -699,7 +699,7 @@ var/global/list/turret_icons
 					return
 
 				playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
-				if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
+				if(do_after(user, (I.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 					if(!src || !WT.remove_fuel(5, user)) return
 					build_step = 1
 					to_chat(user, "You remove the turret's interior metal armor.")
@@ -776,7 +776,7 @@ var/global/list/turret_icons
 					to_chat(user, SPAN_NOTICE("You need more fuel to complete this task."))
 
 				playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
-				if(do_after(user, 3 SECONDS, src, DO_REPAIR_CONSTRUCT))
+				if(do_after(user, (I.toolspeed * 3) SECONDS, src, DO_REPAIR_CONSTRUCT))
 					if(!src || !WT.remove_fuel(5, user))
 						return
 					build_step = 8
