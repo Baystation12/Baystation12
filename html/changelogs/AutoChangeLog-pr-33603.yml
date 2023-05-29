@@ -1,6 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Evacuation subsystem now displays stat information in the MC tab, including
-      current stage, time to next stage, time evac was called, and the point of no
-      return status.
