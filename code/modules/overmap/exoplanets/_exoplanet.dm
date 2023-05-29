@@ -62,9 +62,10 @@ GLOBAL_VAR(planet_repopulation_disabled)
 
 	//Either a type or a list of types and weights. You must include all types if it's a list
 	var/list/habitability_distribution = list(
-		HABITABILITY_IDEAL = 10,
-		HABITABILITY_OKAY = 40,
-		HABITABILITY_BAD = 50
+		HABITABILITY_IDEAL = 5,
+		HABITABILITY_LESSIDEAL = 20,
+		HABITABILITY_BAD = 25,
+		HABITABILITY_UNINHABITABLE = 50
 	)
 	var/habitability_class
 
@@ -141,6 +142,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	generate_daycycle()
 	generate_planet_image()
 	START_PROCESSING(SSobj, src)
+	log_debug("Planet generation finished with habitability: [habitability_class] and atmosphere: [english_list(atmosphere.gas)]")
 
 //attempt at more consistent history generation for xenoarch finds.
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_engravings()

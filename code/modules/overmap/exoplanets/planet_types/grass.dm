@@ -6,7 +6,7 @@
 	rock_colors = list(COLOR_ASTEROID_ROCK, COLOR_GRAY80, COLOR_BROWN)
 	plant_colors = list("#0e1e14","#1a3e38","#5a7467","#9eab88","#6e7248", "RANDOM")
 	map_generators = list(/datum/random_map/noise/exoplanet/grass)
-	habitability_distribution = list(HABITABILITY_IDEAL = 70, HABITABILITY_OKAY = 20, HABITABILITY_BAD = 5)
+	habitability_distribution = list(HABITABILITY_IDEAL = 70, HABITABILITY_LESSIDEAL = 20, HABITABILITY_BAD = 5, HABITABILITY_UNINHABITABLE = 0)
 	has_trees = TRUE
 	flora_diversity = 7
 	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
@@ -16,12 +16,6 @@
 	if(prob(40))
 		lightlevel = rand(1,7)/10	//give a chance of twilight jungle
 	..()
-
-/obj/effect/overmap/visitable/sector/exoplanet/grass/generate_atmosphere()
-	..()
-	if(atmosphere)
-		atmosphere.temperature = T20C + rand(10, 30)
-		atmosphere.update_values()
 
 /obj/effect/overmap/visitable/sector/exoplanet/grass/get_surface_color()
 	return grass_color
@@ -93,12 +87,6 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/grass/terraformed/generate_habitability()
 	habitability_class = HABITABILITY_IDEAL
-
-/obj/effect/overmap/visitable/sector/exoplanet/grass/terraformed/generate_atmosphere()
-	..()
-	if(atmosphere)
-		atmosphere.temperature = T0C + rand(0, 50)
-		atmosphere.update_values()
 
 /obj/effect/overmap/visitable/sector/exoplanet/grass/generate_map()
 	lightlevel = rand(0.7,0.9)/10
