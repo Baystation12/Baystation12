@@ -498,3 +498,42 @@ meteor_act
 	if (was_burned)
 		fire_act(air, temperature)
 	return FALSE
+
+/mob/living/carbon/human/hit_impact(damage, dir)
+	if(incapacitated(INCAPACITATION_DEFAULT|INCAPACITATION_BUCKLED_PARTIALLY))
+		return
+	if(damage < 30)
+		..()
+		return
+
+	var/r_dir = GLOB.reverse_dir[dir]
+	var/hit_dirs = (r_dir in GLOB.cardinal) ? r_dir : list(r_dir & NORTH|SOUTH, r_dir & EAST|WEST)
+
+	var/stumbled = FALSE
+
+	if(prob(20 + damage))
+		stumbled = TRUE
+		step(src, pick(GLOB.cardinal - hit_dirs))
+
+	for(var/atom/movable/A in oview(1))
+		if(!A.Adjacent(src) || prob(15 + damage))
+			continue
+
+		else if(istype(A, /obj/machinery/door))
+			var/obj/machinery/door/D = A
+			D.Bumped(src)
+
+		else if(istype(A, /obj/machinery/button))
+			A.attack_hand(src)
+
+		else if(istype(A, /obj/item) || prob(33))
+			if(A.anchored)
+				continue
+			step(A, pick(GLOB.cardinal))
+
+		else
+			continue
+		stumbled = TRUE
+
+	if(stumbled)
+		visible_message(SPAN_WARNING("[src] stumbles around."))
