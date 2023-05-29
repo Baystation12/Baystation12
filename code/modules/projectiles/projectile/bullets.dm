@@ -165,6 +165,7 @@
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	damage = 65
 	armor_penetration = 10
+	knockback = 1
 
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
 	name = "beanbag"
@@ -185,6 +186,7 @@
 	pellets = 6
 	range_step = 1
 	spread_step = 50
+	knockback = 1
 
 /obj/item/projectile/bullet/pellet/shotgun/flechette
 	name = "flechette"
@@ -198,6 +200,7 @@
 	spread_step = 2
 	penetration_modifier = 0.5
 	hitchance_mod = 5
+	knockback = 0
 
 /* "Rifle" rounds */
 
