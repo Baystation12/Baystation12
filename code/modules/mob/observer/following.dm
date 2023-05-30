@@ -2,8 +2,8 @@
 	var/atom/following
 
 /mob/observer/Destroy()
-	. = ..()
 	stop_following()
+	return ..()
 
 /mob/observer/proc/stop_following()
 	if(!following)
