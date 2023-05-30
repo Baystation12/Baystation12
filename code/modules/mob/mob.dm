@@ -20,6 +20,11 @@
 	if(mind && mind.current == src)
 		spellremove(src)
 	ghostize()
+	if (istype(ability_master))
+		QDEL_NULL(ability_master)
+	move_intent = null
+	lastarea = null
+	mind = null
 	return ..()
 
 /mob/proc/remove_screen_obj_references()
@@ -36,10 +41,12 @@
 	healths = null
 	throw_icon = null
 	nutrition_icon = null
+	hydration_icon = null
 	pressure = null
 	pain = null
 	item_use_icon = null
 	gun_move_icon = null
+	radio_use_icon = null
 	gun_setting_icon = null
 	ability_master = null
 	zone_sel = null
