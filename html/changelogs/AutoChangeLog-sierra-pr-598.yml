@@ -1,6 +1,0 @@
-author: ImJustKisik
-delete-after: true
-changes:
-  - rscadd: Bullets now leave holes.
-  - rscadd: Ricochet sparkles.
-  - rscadd: Shotgun blast knocks back whoever is hit.
