@@ -29,6 +29,15 @@
 		***********************************************************</span>
 "}
 
+
+/datum/build_mode/ai/Destroy()
+	LAZYCLEARLIST(selected_mobs)
+	LAZYCLEARLIST(overlayed_mobs)
+	ai_type = null
+	buildmode_hud = null
+	return ..()
+
+
 /datum/build_mode/ai/Help()
 	to_chat(user, SPAN_NOTICE(help_text))
 
@@ -280,5 +289,3 @@
 			if(L.x >= low_x && L.x <= hi_x && L.y >= low_y && L.y <= hi_y)
 				if (L.ai_holder)
 					holder.select_AI_mob(L)
-
-	return
