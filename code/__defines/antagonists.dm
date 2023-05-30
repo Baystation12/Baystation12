@@ -1,3 +1,3 @@
-#define ANTAG_SERVANT "servant"
-#define ANTAG_APPRENTICE "apprentice"
+#define ANTAG_SERVANT "Servant"
+#define ANTAG_APPRENTICE "Apprentice"
 #define ANTAG_WIZARD "Space Wizard"

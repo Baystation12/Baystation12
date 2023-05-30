@@ -80,35 +80,25 @@
 	icon_state = "passport_scg2"
 	desc = "A passport from Eos, within Sol Central Government space."
 
-/obj/item/passport/ceti_epsilon
-	name = "\improper Ceti Epsilon passport"
-	icon_state = "passport_scg2"
-	desc = "A passport from Ceti Epsilon, within Sol Central Government space."
+/obj/item/passport/scg/gauss
+	name = "\improper Gauss passport"
+	desc = "A passport from Gauss, within Sol Central Government space."
 
-/obj/item/passport/iolaus
-	name = "\improper Iolaus passport"
-	icon_state = "passport_scg2"
-	desc = "A passport from Iolaus, within Sol Central Government space."
+/obj/item/passport/independent/kaldark
+	name = "\improper Kaldark passport"
+	desc = "A passport from Kaldark, an independent colony."
 
-/obj/item/passport/pirx
-	name = "\improper Pirx passport"
-	icon_state = "passport_scg2"
-	desc = "A passport from Pirx, within Sol Central Government space."
+/obj/item/passport/independent/brinkburn
+	name = "\improper Brinkburn passport"
+	desc = "A passport from Brinkburn, an independent colony."
 
-/obj/item/passport/tadmor
-	name = "\improper Tadmor passport"
-	icon_state = "passport_scg2"
-	desc = "A passport from Tadmor, within Sol Central Government space."
+/obj/item/passport/independent/mirania
+	name = "\improper Mirania passport"
+	desc = "A passport from Mirania, an independent colony."
 
-/obj/item/passport/brahe
-	name = "\improper Brahe passport"
-	icon_state = "passport_scg2"
-	desc = "A passport from Brahe, within Sol Central Government space."
-
-/obj/item/passport/saffar
-	name = "\improper Saffar passport"
-	icon_state = "passport_scg2"
-	desc = "A passport from Yuklid V, within Sol Central Government space."
+/obj/item/passport/independent/avalon
+	name = "\improper Avalon passport"
+	desc = "A passport from Avalon, an independent colony."
 
 /obj/item/passport/south_gaia
 	name = "\improper Southern Gaia passport"

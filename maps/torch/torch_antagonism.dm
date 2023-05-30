@@ -1,27 +1,27 @@
 //Makes sure we don't get any merchant antags as a balance concern. Can also be used for future Torch specific antag restrictions.
 /datum/antagonist/changeling
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/sea, /datum/job/qm, /datum/job/chief_engineer, /datum/job/cmo, /datum/job/hos, /datum/job/cyborg, /datum/job/merchant, /datum/job/captain, /datum/job/hop, /datum/job/submap, /datum/job/synthetic, /datum/job/rd)
+	blacklisted_jobs = list(/datum/job/ai, /datum/job/sea, /datum/job/qm, /datum/job/chief_engineer, /datum/job/cmo, /datum/job/hos, /datum/job/cyborg, /datum/job/merchant, /datum/job/captain, /datum/job/hop, /datum/job/submap, /datum/job/synthetic, /datum/job/rd, /datum/job/jua)
 	protected_jobs = list(/datum/job/medical_trainee, /datum/job/engineer_trainee, /datum/job/junior_doctor, /datum/job/research_guard)
 
 /datum/antagonist/godcultist
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/sea, /datum/job/qm, /datum/job/chief_engineer, /datum/job/cmo, /datum/job/hos, /datum/job/rd, /datum/job/cyborg, /datum/job/chaplain, /datum/job/merchant, /datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/submap, /datum/job/synthetic)
+	blacklisted_jobs = list(/datum/job/ai, /datum/job/sea, /datum/job/qm, /datum/job/chief_engineer, /datum/job/cmo, /datum/job/hos, /datum/job/rd, /datum/job/cyborg, /datum/job/chaplain, /datum/job/merchant, /datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/submap, /datum/job/synthetic, /datum/job/jua)
 	protected_jobs = list(/datum/job/medical_trainee, /datum/job/engineer_trainee, /datum/job/junior_doctor)
 
 /datum/antagonist/cultist
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/sea, /datum/job/qm, /datum/job/chief_engineer, /datum/job/cmo, /datum/job/hos, /datum/job/rd, /datum/job/cyborg, /datum/job/chaplain, /datum/job/psychiatrist, /datum/job/merchant, /datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/submap, /datum/job/synthetic)
+	blacklisted_jobs = list(/datum/job/ai, /datum/job/sea, /datum/job/qm, /datum/job/chief_engineer, /datum/job/cmo, /datum/job/hos, /datum/job/rd, /datum/job/cyborg, /datum/job/chaplain, /datum/job/psychiatrist, /datum/job/merchant, /datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/submap, /datum/job/synthetic, /datum/job/jua)
 	protected_jobs = list(/datum/job/medical_trainee, /datum/job/engineer_trainee, /datum/job/junior_doctor, /datum/job/research_guard)
 
 /datum/antagonist/loyalists
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/sea, /datum/job/qm, /datum/job/chief_engineer, /datum/job/cmo, /datum/job/hos, /datum/job/rd, /datum/job/rd, /datum/job/cyborg, /datum/job/submap, /datum/job/merchant)
+	blacklisted_jobs = list(/datum/job/ai, /datum/job/sea, /datum/job/qm, /datum/job/chief_engineer, /datum/job/cmo, /datum/job/hos, /datum/job/rd, /datum/job/rd, /datum/job/cyborg, /datum/job/submap, /datum/job/merchant, /datum/job/jua)
 	protected_jobs = list(/datum/job/officer, /datum/job/medical_trainee, /datum/job/engineer_trainee, /datum/job/junior_doctor)
 
 /datum/antagonist/revolutionary
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/sea, /datum/job/qm, /datum/job/chief_engineer, /datum/job/cmo, /datum/job/hos, /datum/job/rd, /datum/job/cyborg, /datum/job/submap, /datum/job/merchant, /datum/job/synthetic)
+	blacklisted_jobs = list(/datum/job/ai, /datum/job/sea, /datum/job/qm, /datum/job/chief_engineer, /datum/job/cmo, /datum/job/hos, /datum/job/rd, /datum/job/cyborg, /datum/job/submap, /datum/job/merchant, /datum/job/synthetic, /datum/job/jua)
 	restricted_jobs = list(/datum/job/captain, /datum/job/hop)
 	protected_jobs = list(/datum/job/officer, /datum/job/medical_trainee, /datum/job/engineer_trainee, /datum/job/junior_doctor, /datum/job/research_guard)
 
 /datum/antagonist/traitor
-	blacklisted_jobs = list(/datum/job/merchant, /datum/job/sea, /datum/job/qm, /datum/job/chief_engineer, /datum/job/cmo, /datum/job/rd, /datum/job/captain, /datum/job/hop, /datum/job/ai, /datum/job/submap, /datum/job/hos, /datum/job/medical_trainee, /datum/job/engineer_trainee, /datum/job/junior_doctor, /datum/job/research_guard, /datum/job/synthetic)
+	blacklisted_jobs = list(/datum/job/merchant, /datum/job/sea, /datum/job/qm, /datum/job/chief_engineer, /datum/job/cmo, /datum/job/rd, /datum/job/captain, /datum/job/hop, /datum/job/ai, /datum/job/submap, /datum/job/hos, /datum/job/medical_trainee, /datum/job/engineer_trainee, /datum/job/junior_doctor, /datum/job/research_guard, /datum/job/synthetic, /datum/job/jua)
 
 /datum/antagonist/ert
 	var/sic //Second-In-Command

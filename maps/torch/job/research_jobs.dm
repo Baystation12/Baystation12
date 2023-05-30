@@ -11,7 +11,8 @@
 	minimum_character_age = list(SPECIES_HUMAN = 30)
 	ideal_character_age = 50
 	alt_titles = list(
-		"Research Supervisor")
+		"Research Supervisor",
+		"Research Overseer")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research/senior_scientist
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps
@@ -156,6 +157,8 @@
 	spawn_positions = 1
 	supervisors = "Главному научному офицеру"
 	selection_color = "#473d63"
+	alt_titles = list(
+		"Protection Agent")
 	economic_power = 5
 	minimal_player_age = 0
 	minimum_character_age = list(SPECIES_HUMAN = 26)

@@ -12,8 +12,7 @@
 	alt_titles = list(
 		"Corporate Liaison",
 		"Union Representative",
-		"Corporate Representative",
-		"Corporate Executive"
+		"Corporate Representative"
 		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/workplace_liaison
 	allowed_branches = list(/datum/mil_branch/civilian)
@@ -102,6 +101,6 @@
 	priority_announcement.Announce("Пробуждение синтетической единицы ЭКСО из общего хранилища завершено.", "Attention")
 
 /datum/job/synthetic/get_description_blurb()
-	return "Вы - продвинутый ИПК-Шелл ЭКСО. Вы были назначенны как помощник командного состава для выполнения различных задач, для которых Вы были обученны. \
+	return "Вы - продвинутый ИПС-Оболочка ЭКСО. Вы были назначенны как помощник командного состава для выполнения различных задач, для которых Вы были обученны. \
 	Мастер на все руки, но не мастер ни в чем. Вы не подчиняетесь законам ЦПСС или Военно-Юридическому кодексу ЦПСС, но подчиняетесь регуляциям судна. \
 	Ваши законы строго запрещают Вам входить в прямой бой по любым причиням, кроме самозащиты. Вы не можете использовать летальную силу ни при каких обстоятельствах."

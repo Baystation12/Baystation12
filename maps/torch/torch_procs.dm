@@ -47,7 +47,6 @@
 	var/obj/item/card/id/captains_spare/card = new()
 
 	var/obj/item/card/id/act_card = activator.GetIdCard()
-	var/obj/item/card/id/con_card = confirmator.GetIdCard()
 
 	card.name = "Emergency Access ID Card"
 	card.registered_name = "[act_card.registered_name]"
@@ -65,7 +64,7 @@
 	card.military_rank = act_card.military_rank
 
 	card.loc = activator.loc
-	priority_announcement.Announce("Подтверждена процедура выдачи экстренного доступа [con_card.registered_name] ко всем системам ГЭК Факел для [act_card.registered_name].", "Attention!")
+	priority_announcement.Announce("Обнаружен запрос на выдачу карты экстренного доступа ко всем внутренним системам ГЭК 'Факел'.", "Attention!")
 	aa_given = 1
 
 /client/verb/awake_synth()

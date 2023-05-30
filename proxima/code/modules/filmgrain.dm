@@ -20,10 +20,7 @@ GLOBAL_VAR_INIT(film_grain_stat, FALSE)
 		SPAN_NOTICE("Это облегчение... Будто камень с плечь."),
 		SPAN_WARNING("Вам кажется, что в ваших глазах потемнело, а все вокруг стало каким то другим. Возможно, вам стоит передохнуть...")
 	)
-	var/horysound = list(
-		'proxima/sound/ambience/horror_3.ogg',
-		'proxima/sound/misc/statue/scare1.ogg'
-	)
+
 	for (var/mob/living/carbon/human/H in SSmobs.mob_list)
 		if(!H.film_grain) continue
 		if(H.client)
@@ -33,6 +30,6 @@ GLOBAL_VAR_INIT(film_grain_stat, FALSE)
 				H.client.screen -= H.film_grain
 
 			to_chat(H, horytext[stat+1])
-			sound_to(H, horysound[stat+1])
+			sound_to(H, sound('proxima/sound/ambience/horror_3.ogg'))
 
 	log_and_message_admins("film grain toggled to [stat]")

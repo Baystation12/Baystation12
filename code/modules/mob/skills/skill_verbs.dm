@@ -58,7 +58,7 @@ Robots and antags can instruct.
 */
 /datum/skill_verb/instruct
 	the_verb = /mob/proc/instruct
-	cooldown = 15 MINUTES
+	cooldown = 20 MINUTES
 
 /datum/skill_verb/instruct/should_have_verb(datum/skillset/given_skillset)
 	if(!..())
@@ -76,7 +76,7 @@ Robots and antags can instruct.
 
 /mob/proc/instruct(mob/living/carbon/human/target as mob in oview(2))
 	set category = "IC"
-	set name = "Instruct"
+	set name = "Teach"
 	set src = usr
 
 	var/datum/skill_verb/instruct/SV = skillset.fetch_verb_datum(/datum/skill_verb/instruct)

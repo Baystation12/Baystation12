@@ -44,12 +44,10 @@
 					break
 
 
-
 	for(var/mob/living/simple_animal/passive/mouse/snack in oview(src,5))
 		if(snack.stat < DEAD && prob(15))
 			audible_emote(pick("шипит и плюется!","мурчит в ярости!","поглядывает на [snack] с голодом."))
 		break
-
 
 
 	turns_since_scan++
@@ -69,8 +67,7 @@
 				if(!O.invisibility && O.name)
 					visible += O
 			if(visible.len)
-				var/atom/A = pick(visible)
-				visible_emote("внезапно останавливается и пялится на что-то незримое [istype(A) ? " рядом с [A]":""].")
+				visible_emote("внезапно останавливается и смотрит на что-то незримое.")
 
 /mob/living/simple_animal/passive/cat/proc/handle_movement_target()
 	//if our target is neither inside a turf or inside a human(???), stop

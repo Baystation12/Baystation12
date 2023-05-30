@@ -5,7 +5,7 @@
 	department_flag = SUP
 	total_positions = 3
 	spawn_positions = 3
-	supervisors = "Начальнику палубы и Исполнительному офицеру"
+	supervisors = "Офицеру обеспечения"
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 24
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/tech
@@ -49,7 +49,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/cargo_tech/get_description_blurb()
-	return "Вы - Палубный техник. Ваша задача - доставлять заказы в пункт назначения и разгружать дрон доставки. Вы подчиняетесь Исполнительному офицеру и Начальнику палубы. \
+	return "Вы - Палубный техник. Ваша задача - доставлять заказы в пункт назначения и разгружать дрон доставки.\
 	Не забывайте сортировать мусор и зарабатывать кредиты снабжения для своего отдела."
 
 /datum/job/mining
@@ -59,7 +59,7 @@
 	department_flag = SUP
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "Начальнику палубы, корпоративному связному и Исполнительному офицеру"
+	supervisors = "Офицеру обеспечения"
 	economic_power = 7
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 25

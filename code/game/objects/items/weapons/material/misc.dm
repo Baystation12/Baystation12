@@ -135,7 +135,6 @@
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
 	worth_multiplier = 20
 
-
 /obj/item/material/cross
 	name = "cross"
 	desc = "It's a cross, commonly used as a holy symbol by Christians."

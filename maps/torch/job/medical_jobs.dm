@@ -50,7 +50,7 @@
 							 /datum/computer_file/program/camera_monitor)
 
 /datum/job/senior_doctor/get_description_blurb()
-	return "Вы - Врач. Ваша обязанность - проводить операции и обучать врачей-ординаторов. Вы подчиняетесь Главному медицинскому офицеру. \
+	return "Вы - Врач. Ваша обязанность - проводить операции и обучать врачей-ординаторов.\
 	Обеспечивайте бесперебойную работу медицинского отсека и следите за количеством лекарств, крови и прочего. Жизнь людей - в ваших руках."
 
 /datum/job/junior_doctor
@@ -101,7 +101,7 @@
 							 /datum/computer_file/program/camera_monitor)
 
 /datum/job/junior_doctor/get_description_blurb()
-	return "Вы - Врач-ординатор. Ваша обязанность - проводить лечение пациентов и обучатся тонкостям медицины благодаря помощи старших врачей. Вы подчиняетесь Главному медицинскому офицеру. \
+	return "Вы - Врач-ординатор. Ваша обязанность - проводить лечение пациентов и обучатся тонкостям медицины благодаря помощи старших врачей.\
 	Лечите людей, проводите операции и постарайтесь никого не убить."
 
 /datum/job/doctor
@@ -132,7 +132,6 @@
 		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/army/e3,
-		//datum/mil_rank/army/e4,
 		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/army/e5,
 		/datum/mil_rank/army/e6,
@@ -211,11 +210,11 @@
 							 /datum/computer_file/program/camera_monitor)
 
 /datum/job/medical_trainee/get_description_blurb()
-	return "Вы - Парамедик-стажёр. Вы учитесь основам медицины благодаря помощи Ваших более опытных коллег. Вы подчиняетесь остальному медицинскому персоналу."
+	return "Вы - Парамедик-стажёр. Вы учитесь основам медицины благодаря помощи Ваших более опытных коллег."
 
 
 /datum/job/chemist
-	title = "Pharmacist"
+	title = "Pharmacologist"
 	department = "Медицинский"
 	department_flag = MED
 	total_positions = 1
@@ -274,7 +273,7 @@
 	alt_titles = list(
 		"Psychiatrist",
 		"Psionic Counselor" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/mentalist,
-		"Mentalist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/mentalist
+		"Psionic Mentalist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/mentalist
 	)
 
 	allowed_branches = list(
@@ -317,4 +316,4 @@
 	return ..()
 
 /datum/job/psychiatrist/get_description_blurb()
-		return "Вы - Консультант. Ваша главная обязанность - поддерживать ментальное здоровье экипажа в тонусе. Вы подчиняетесь Главному медицинскому офицеру."
+		return "Вы - Консультант. Ваша главная обязанность - поддерживать ментальное здоровье экипажа в тонусе."

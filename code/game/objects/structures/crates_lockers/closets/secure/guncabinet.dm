@@ -12,14 +12,6 @@
 	. = ..()
 	update_icon()
 
-/obj/structure/closet/secure_closet/guncabinet/toggle()
-	..()
-	update_icon()
-
-/obj/structure/closet/secure_closet/guncabinet/open() //There are plenty of things that can open it that don't use toggle
-	..()
-	update_icon()
-
 /obj/structure/closet/secure_closet/guncabinet/on_update_icon()
 	overlays.Cut()
 	if(opened)
@@ -54,4 +46,3 @@
 				overlays += icon(src.icon,"locked")
 			else
 				overlays += icon(src.icon,"open")
-

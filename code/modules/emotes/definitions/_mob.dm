@@ -79,7 +79,6 @@
 
 /mob/living/carbon/human
 	default_emotes = list(
-		/decl/emote/visible/adjust,
 		/decl/emote/visible/blink,
 		/decl/emote/visible/scratch,
 		/decl/emote/audible/synth,

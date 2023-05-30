@@ -1052,6 +1052,8 @@
 					holder.icon_state = "hudprisoner"
 				if("Parolled")
 					holder.icon_state = "hudparolled"
+				if("Suspected")
+					holder.icon_state = "hudsuspected"
 				if("Released")
 					holder.icon_state = "hudreleased"
 		hud_list[WANTED_HUD] = holder
