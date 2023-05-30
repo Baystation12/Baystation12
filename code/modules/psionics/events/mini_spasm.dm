@@ -1,22 +1,25 @@
 /datum/event/minispasm
 	startWhen = 60
 	endWhen = 90
+	var/alarm_sound = 'sound/misc/foundation_alarm.ogg'
 	var/static/list/psi_operancy_messages = list(
-		"There's something in your skull!",
-		"Something is eating your thoughts!",
-		"You can feel your brain being rewritten!",
-		"Something is crawling over your frontal lobe!",
-		"<b>THE SIGNAL THE SIGNAL THE SIGNAL THE SIGNAL THE</b>"
+		"Вы чувствуете инородное что-то прямо в твоём сознание!",
+		"Что-то пожирает ваш разум изнутри!",
+		"Вы можете почувствовать, как переписывается ваш мозг!",
+		"SomВаш разум медленно угасает и поглощается иномирной сущностью!",
+		"<b>АЛЬФА СИГНАЛ БЕТА СИГНАЛ ДЕЛЬТА СИГНАЛ ЭПСИЛОН СИГНАЛ</b>"
 		)
+
 
 /datum/event/minispasm/announce()
 	priority_announcement.Announce( \
-		"PRIORITY ALERT: SIGMA-[rand(50,80)] PSIONIC SIGNAL LOCAL TRAMISSION DETECTED (97% MATCH, NONVARIANT) \
-		(SIGNAL SOURCE TRIANGULATED ADJACENT LOCAL SITE): All personnel are advised to avoid \
-		exposure to active audio transmission equipment including radio headsets and intercoms \
-		for the duration of the signal broadcast.", \
-		"Cuchulain Sensor Array Automated Message" \
+		"ПРИОРИТЕТНОЕ ОПОВЕЩЕНИЕ: ОБНАРУЖЕНА ЛОКАЛЬНАЯ ПЕРЕДАЧА ПСИОНИЧЕСКОГО СИГНАЛА СИГМА-[rand(50,80)] \
+		Всему персоналу рекомендуется избегать воздействия активной через оборудование \
+		аудиопередачи, включая радиогарнитуры, сеть 'Интерком'\
+		и ручные коротковолновые рации на время трансляции сигнала.", \
+		"Cuchulain Automated Array DEL-145" \
 		)
+	sound_to(world, sound(alarm_sound))
 
 /datum/event/minispasm/start()
 	var/list/victims = list()
@@ -62,6 +65,6 @@
 
 /datum/event/minispasm/end()
 	priority_announcement.Announce( \
-		"PRIORITY ALERT: SIGNAL BROADCAST HAS CEASED. Personnel are cleared to resume use of non-hardened radio transmission equipment. Have a nice day.", \
-		"Cuchulain Sensor Array Automated Message" \
-		)
+		"ПРИОРИТЕТНОЕ ОПОВЕЩЕНИЕ: ТРАНСЛЯЦИЯ ПСИОНИЧЕСКОГО СИГНАЛА БЫЛА ПРЕКРАЩЕНА. Персоналу разрешено возобновить использование незащищенного радиопередающего оборудования. Фонд Кучулейн желает вам хорошего дня.", \
+		"Cuchulain Automated Array DEL-145",
+		new_sound = 'sound/misc/foundation_restore.ogg' )

@@ -3,11 +3,13 @@
 	category = /datum/gear/accessory
 	slot = slot_tie
 
+/datum/gear/accessory/tracker
+	display_name = "tracker badge"
+	path = /obj/item/clothing/accessory/badge/tracker
 
 /datum/gear/accessory/tie
 	display_name = "tie selection"
 	path = /obj/item/clothing/accessory
-
 
 /datum/gear/accessory/tie/New()
 	..()
@@ -22,7 +24,6 @@
 	ties["horrible tie"] = /obj/item/clothing/accessory/horrible
 	ties["brown tie"] = /obj/item/clothing/accessory/brown
 	gear_tweaks += new/datum/gear_tweak/path(ties)
-
 
 /datum/gear/accessory/tie_color
 	display_name = "colored tie"

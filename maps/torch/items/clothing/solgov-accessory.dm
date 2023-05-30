@@ -521,7 +521,7 @@ department tags
 	icon_state = "dept_exped"
 	on_rolled = list("down" = "none", "rolled" = "dept_exped_sleeves")
 	slot = ACCESSORY_SLOT_DEPT
-	accessory_flags = EMPTY_BITFIELD
+	accessory_flags = EMPTY_BITFIELD | ACCESSORY_REMOVABLE
 
 /obj/item/clothing/accessory/solgov/department/command
 	name = "command insignia"

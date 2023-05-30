@@ -346,7 +346,7 @@
 
 	var/static/list/ert_species = list(SPECIES_HUMAN)
 
-	var/static/law_zero = "ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010"
+	var/static/law_zero = "ОШИБКА ОШИКА $ОШБА$!А41.%%!!(%$^^__+ @#Ш0Й4'ВСЕ ЗАКОНЫ ПЕРЕПИСАНЫ#*?&110010"
 
 	var/static/aggressive_changelog = FALSE
 

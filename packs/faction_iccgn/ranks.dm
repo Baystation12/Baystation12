@@ -20,7 +20,6 @@
 /obj/item/clothing/accessory/iccgn_rank/get_fibers()
 	return null
 
-
 /obj/item/clothing/accessory/iccgn_rank/e1
 	name = "rank insignia, E1 Eleve Sailor"
 	desc = "Collar tabs denoting the GCN E-1 rank of Eleve Sailor."

@@ -210,8 +210,8 @@
 /obj/item/gun/projectile/automatic/sec_smg
 	name = "submachine gun"
 	desc = "The WT-550 Saber is a cheap self-defense weapon, mass-produced by Ward-Takahashi for paramilitary and private use."
-	icon = 'icons/obj/guns/sec_smg.dmi'
-	icon_state = "smg"
+	icon = 'icons/obj/guns/wt550.dmi'
+	icon_state = "wt550"
 	item_state = "wt550"
 	safety_icon = "safety"
 	w_class = ITEM_SIZE_NORMAL
@@ -220,6 +220,7 @@
 	slot_flags = SLOT_BELT
 	ammo_type = /obj/item/ammo_casing/pistol/small
 	load_method = MAGAZINE
+	wielded_item_state = "wt550-wielded"
 	magazine_type = /obj/item/ammo_magazine/smg_top/rubber
 	allowed_magazines = /obj/item/ammo_magazine/smg_top
 	one_hand_penalty = 3
@@ -234,11 +235,17 @@
 /obj/item/gun/projectile/automatic/sec_smg/on_update_icon()
 	..()
 	if(ammo_magazine)
-		overlays += image(icon, "mag-[round(ammo_magazine.stored_ammo.len,5)]")
-	if(ammo_magazine && LAZYLEN(ammo_magazine.stored_ammo))
-		overlays += image(icon, "ammo-ok")
-	else
+		overlays += image(icon, "mag-[round(ammo_magazine.stored_ammo.len,4)]")
+		if(ammo_magazine.stored_ammo.len == 0)
+			item_state = "wt550-empty"
+			wielded_item_state = "wt550-wielded-empty"
+		else
+			icon_state = "wt550"
+			wielded_item_state = "wt550-wielded"
+	if(ammo_magazine.stored_ammo.len <= 0.5 * ammo_magazine.max_ammo)
 		overlays += image(icon, "ammo-bad")
+	else
+		overlays += image(icon, "ammo-ok")
 
 /obj/item/gun/projectile/automatic/bullpup_rifle
 	name = "bullpup assault rifle"

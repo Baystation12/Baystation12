@@ -19,7 +19,7 @@
 		return
 
 	M.visible_message(SPAN_DANGER("[M]\'s arm begins to twist and rip!"),
-							SPAN_LING("Our arm twists and mutates, transforming it into a deadly blade."),
+							SPAN_LING("Our arm twists and mutates, transforming it into a grotesque shield."),
 							SPAN_DANGER("You hear organic matter ripping and tearing!"))
 	playsound(get_turf(src), 'proxima/sound/effects/lingextends.ogg', 50, 1)
 	spawn(6)
