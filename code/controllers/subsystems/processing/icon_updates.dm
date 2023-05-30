@@ -1,37 +1,49 @@
-PROCESSING_SUBSYSTEM_DEF(icon_update)
+SUBSYSTEM_DEF(icon_update)
 	name = "Icon Updates"
 	wait = 1	// ticks
 	flags = SS_TICKER
 	priority = SS_PRIORITY_ICON_UPDATE
 	init_order = SS_INIT_ICON_UPDATE
-	var/list/queue = list()
+	var/static/list/queue = list()
 
 
-/datum/controller/subsystem/processing/icon_update/Initialize(start_uptime)
+/datum/controller/subsystem/icon_update/Recover()
+	LIST_RESIZE(queue, 0)
+
+
+/datum/controller/subsystem/icon_update/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("queue: [length(queue)]")
+
+
+/datum/controller/subsystem/icon_update/Initialize(start_uptime)
 	fire(FALSE, TRUE)
 
 
-/datum/controller/subsystem/processing/icon_update/fire(resumed = FALSE, no_mc_tick = FALSE)
-	var/list/curr = queue
-
-	if (!length(curr))
+/datum/controller/subsystem/icon_update/fire(resumed, no_mc_tick)
+	if (!length(queue))
 		suspend()
 		return
-
-	while (length(curr))
-		var/atom/A = curr[length(curr)]
-		var/list/argv = curr[A]
-		LIST_DEC(curr)
-
-		if (islist(argv))
-			A.update_icon(arglist(argv))
+	var/list/params
+	var/cut_until = 1
+	for (var/atom/atom as anything in queue)
+		++cut_until
+		if (!atom)
+			continue
+		params = queue[atom]
+		if (islist(params))
+			atom.update_icon(arglist(params))
 		else
-			A.update_icon()
-
+			atom.update_icon()
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
+			queue.Cut(1, cut_until)
 			return
+	queue.Cut()
+	suspend()
+
 
 /**
  * Adds the atom to the icon_update subsystem to be queued for icon updates. Use this if you're going to be pushing a
@@ -39,4 +51,5 @@ PROCESSING_SUBSYSTEM_DEF(icon_update)
  */
 /atom/proc/queue_icon_update(...)
 	SSicon_update.queue[src] = length(args) ? args : TRUE
-	SSicon_update.wake()
+	if (SSicon_update.suspended)
+		SSicon_update.wake()
