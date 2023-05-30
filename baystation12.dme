@@ -1173,6 +1173,7 @@
 #include "code\game\objects\items\weapons\tanks\tanks.dm"
 #include "code\game\objects\items\weapons\tools\crowbar.dm"
 #include "code\game\objects\items\weapons\tools\screwdriver.dm"
+#include "code\game\objects\items\weapons\tools\swapper.dm"
 #include "code\game\objects\items\weapons\tools\weldingtool.dm"
 #include "code\game\objects\items\weapons\tools\wirecutter.dm"
 #include "code\game\objects\items\weapons\tools\wrench.dm"

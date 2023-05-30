@@ -44,7 +44,7 @@
 		/obj/item/clothing/gloves/insulated,
 		/obj/item/device/radio/headset/heads/ce,
 		/obj/item/device/radio/headset/heads/ce/alt,
-		/obj/item/storage/belt/utility/full,
+		/obj/item/storage/belt/utility/engi_command,
 		/obj/item/clothing/suit/storage/engineering_chest_rig,
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/multitool,

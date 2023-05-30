@@ -139,6 +139,7 @@
 		/obj/item/hemostat = 100,
 		/obj/item/wirecutters = 75,
 		/obj/item/material/knife = 75,
+		/obj/item/swapper/jaws_of_life = 50,
 		/obj/item/material/kitchen/utensil/fork = 20
 	)
 	min_duration = 60

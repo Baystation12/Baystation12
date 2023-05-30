@@ -36,6 +36,7 @@
 	name = "Unscrew maintenance hatch"
 	allowed_tools = list(
 		/obj/item/screwdriver = 100,
+		/obj/item/swapper/power_drill = 100,
 		/obj/item/material/coin = 50,
 		/obj/item/material/knife = 50
 	)
@@ -71,6 +72,7 @@
 	name = "Secure maintenance hatch"
 	allowed_tools = list(
 		/obj/item/screwdriver = 100,
+		/obj/item/swapper/power_drill = 100,
 		/obj/item/material/coin = 50,
 		/obj/item/material/knife = 50
 	)
@@ -107,6 +109,7 @@
 	allowed_tools = list(
 		/obj/item/retractor = 100,
 		/obj/item/crowbar = 100,
+		/obj/item/swapper/jaws_of_life = 100,
 		/obj/item/material/kitchen/utensil = 50
 	)
 
@@ -143,6 +146,7 @@
 	allowed_tools = list(
 		/obj/item/retractor = 100,
 		/obj/item/crowbar = 100,
+		/obj/item/swapper/jaws_of_life = 100,
 		/obj/item/material/kitchen/utensil = 50
 	)
 
@@ -339,6 +343,7 @@
 		/obj/item/stack/nanopaste = 100,
 		/obj/item/bonegel = 30,
 		/obj/item/screwdriver = 70,
+		/obj/item/swapper/power_drill = 100,
 	)
 	min_duration = 70
 	max_duration = 90
@@ -438,6 +443,7 @@
 	name = "Reattach prosthetic organ"
 	allowed_tools = list(
 		/obj/item/screwdriver = 100,
+		/obj/item/swapper/power_drill = 100,
 	)
 	min_duration = 100
 	max_duration = 120
