@@ -7,7 +7,7 @@ config_setting should be one of the following:
 - empty string - use TgsTargetBroadcast with `admin_only = FALSE`
 - other string - use TgsChatBroadcast with the tag that matches config_setting, only works with TGS4, if using TGS3 the above method is used
 */
-/proc/send2chat(message, config_setting)
+/proc/send2chat(datum/tgs_message_content/message, config_setting)
 	if(config_setting == null || !world.TgsAvailable())
 		return
 
@@ -62,18 +62,93 @@ config_setting should be one of the following:
 /proc/fax2TGS(var/o3, var/from3, var/to3, var/by3, var/intercepted3 = null)
 	var/list/admins = get_admin_counts()["present"]
 	var/obj/item/item = o3
+
+	var/datum/tgs_message_content/message = new("[admins.len = 0 ? "<@&984927384513953852> активных админов с Банхамером нет\n" : null]")
+	var/datum/tgs_chat_embed/structure/embed = new()
+	message.embed = embed
+	embed.title = "Перехват факса"
+	embed.colour = "#00d0ff"
+	embed.author = new /datum/tgs_chat_embed/provider/author/glob("Сервер 'PRX'")
+	//embed.footer = new /datum/tgs_chat_embed/footer("Сервер 'PRX'")
+	//embed.url = NON_BYOND_URL
+	if (intercepted3)
+		embed.description = "***ФАКС БЫЛ ПЕРЕХВАЧЕН, ПОЛУЧАТЕЛЬ ЕГО __НЕ ВИДИТ__***"
+	var/datum/tgs_chat_embed/field/from = new ("ОТ", "[from3]")
+	var/datum/tgs_chat_embed/field/where = new ("КУДА", "[to3]")
+	var/datum/tgs_chat_embed/field/sentBy = new ("ОТПРАВИЛ", "[by3]")
+	from.is_inline = TRUE
+	where.is_inline = TRUE
+	sentBy.is_inline = TRUE
+	embed.fields = list(from, where, sentBy)
+
 	if(istype(item, /obj/item/paper))
-		world.TgsTargetedChatBroadcast("[admins.len = 0 ? "<@&984927384513953852> активных админов с Банхамером нет\n" : null]__**Перехват факса**__[intercepted3 ? "\n***ФАКС БЫЛ ПЕРЕХВАЧЕН, ПОЛУЧАТЕЛЬ ЕГО __НЕ ВИДИТ__***: [intercepted3]":""]\n**ОТ:** __[from3]__\n**КУДА:** __[to3]__\n**ОТПРАВИЛ:** __[by3]__\n[paper2text(item)]", TRUE)
+		var/obj/item/paper/paper = item
+		embed.fields += paper2embed(paper)
+
 	else if (istype(item, /obj/item/photo))
-		world.TgsTargetedChatBroadcast("[admins.len = 0 ? "<@&984927384513953852> активных админов с Банхамером нет\n" : null]__**Перехват факса**__[intercepted3 ? "\n***ФАКС БЫЛ ПЕРЕХВАЧЕН, ПОЛУЧАТЕЛЬ ЕГО __НЕ ВИДИТ__***: [intercepted3]":""]\n**ОТ:** __[from3]__\n**КУДА:** __[to3]__\n**ОТПРАВИЛ:** __[by3]__\n[photo2text(item)]", TRUE)
+		var/obj/item/photo/photo = item
+		embed.fields += photo2embed(photo)
+
 	else if (istype(item, /obj/item/paper_bundle))
-		world.TgsTargetedChatBroadcast("[admins.len = 0 ? "<@&984927384513953852> активных админов с Банхамером нет\n" : null]__**Перехват факса**__[intercepted3 ? "\n***ФАКС БЫЛ ПЕРЕХВАЧЕН, ПОЛУЧАТЕЛЬ ЕГО __НЕ ВИДИТ__***: [intercepted3]":""]\n**ОТ:** __[from3]__\n**КУДА:** __[to3]__\n**ОТПРАВИЛ:** __[by3]__", TRUE)
-		var/list/pack = bundle2text(item)
+		var/obj/item/paper_bundle/bundle = item
+		var/list/pack = bundle2embed(bundle)
 		var/i = 10
-		for(var/string in pack)
+		for(var/subMessage in pack)
 			i += 10
-			addtimer(CALLBACK(world, /world/proc/TgsTargetedChatBroadcast, string, TRUE), i)
+			addtimer(CALLBACK(world, /world/proc/TgsTargetedChatBroadcast, subMessage, TRUE), i)
+
+	world.TgsTargetedChatBroadcast(message, TRUE)
 	return TRUE
+
+// Костыль для превращения факса в эмбед
+/proc/paper2embed(var/obj/item/paper/paper)
+	. = list()
+
+	var/datum/tgs_chat_embed/field/paper_name = new ("Название бумаги", "*[paper.name]*")
+	var/datum/tgs_chat_embed/field/paper_language = new ("Язык написания", "*[paper.language.name]*")
+	var/datum/tgs_chat_embed/field/paper_content = new ("Содержимое (чистый HTML)", "```html\n[paper.info]```")
+	var/datum/tgs_chat_embed/field/paper_stamps = new ("Стоят печати", "[replacetext_char(replacetext_char(replacetext_char(paper.stamps, "<BR>", "\n"), "<i>", "*"), "</i>", "*")]")
+
+	. += paper_name
+	. += paper_language
+	. += paper_content
+	if (paper.stamps)
+		. += paper_stamps
+
+// Костыль для превращения фото в эмбед
+/proc/photo2embed(var/obj/item/photo/photo)
+	. = list()
+
+	var/datum/tgs_chat_embed/field/photo_name = new ("Название фото", "*[photo.name]*")
+	var/datum/tgs_chat_embed/field/photo_scribble
+	if (photo.scribble)
+		photo_scribble = new ("Подпись с обратной стороны", "*[photo.scribble]*")
+	var/datum/tgs_chat_embed/field/photo_size = new ("Размер фото в (тайлах)", "*[photo.photo_size]X[photo.photo_size]*")
+	var/datum/tgs_chat_embed/field/photo_desc
+	if (photo.desc)
+		photo_desc = new ("Описание", "*[photo.desc]*")
+	. += photo_name
+	if (photo_scribble)
+		. += photo_scribble
+	. += photo_size
+	if (photo_desc)
+		. += photo_desc
+
+/proc/bundle2embed(var/obj/item/paper_bundle/bundle)
+	. = list()
+
+	for (var/page = 1, page <= bundle.pages.len, page++)
+		var/datum/tgs_message_content/message = new("")
+		var/datum/tgs_chat_embed/structure/embed = new()
+		message.embed = embed
+		embed.title = "===== Страница [page]/[bundle.pages.len] ====="
+		embed.colour = "#00d0ff"
+		var/obj/item/obj = bundle.pages[page]
+		embed.fields = istype(obj, /obj/item/paper) ? paper2embed(obj) : istype(obj, /obj/item/photo) ? photo2embed(obj) : list(new /datum/tgs_chat_embed/field("НЕИЗВЕСТНЫЙ ТИП БЮРОКРАТИЧЕСКОГО ОРУДИЯ ПЫТОК.", "[obj.type]"))
+		embed.author = new /datum/tgs_chat_embed/provider/author/glob("Сервер 'PRX'")
+		//embed.footer = new /datum/tgs_chat_embed/footer("Сервер 'PRX'")
+		//embed.url = NON_BYOND_URL
+		. += message
 
 //
 // Костыль для превращения факса в текст

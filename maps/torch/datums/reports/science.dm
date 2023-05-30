@@ -158,7 +158,7 @@
 	sci_fields += add_field(/datum/report_field/people/from_manifest, "Полное имя и должность ответственного за проведения исследования", required = 1)
 	rd_fields += add_field(/datum/report_field/signature, "Подпись Главного Научного Офицера")
 	sci_fields += add_field(/datum/report_field/signature, "Подпись ответственного", required = 1)
-	add_field(/datum/report_field/signature, "Подпись добровольца", required = 1)
+	add_field(/datum/report_field/signature, "Подпись добровольца")
 	for(var/datum/report_field/field in rd_fields)
 		field.set_access(access_edit = access_rd)
 	for(var/datum/report_field/field in sci_fields)

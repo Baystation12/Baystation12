@@ -1,7 +1,6 @@
 
 /datum/computer_file/report/recipient/medical
 	logo = "\[solcrest\]"
-	form_name = "SCG-MED-00"
 
 /datum/computer_file/report/recipient/medical/generate_fields()
 	..()
@@ -17,13 +16,13 @@
 	add_field(/datum/report_field/text_label/header, "ГЭК \"Факел\" - Медицинский отдел")
 	add_field(/datum/report_field/date, "Дата Инцидента")
 	add_field(/datum/report_field/time, "Время Инцидента")
-	add_field(/datum/report_field/people/from_manifest, "Пациент")
-	add_field(/datum/report_field/people/from_manifest, "Лечащий Врач")
+	add_field(/datum/report_field/people/from_manifest, "Пациент", required = 1)
+	add_field(/datum/report_field/people/from_manifest, "Лечащий Врач", required = 1)
 	add_field(/datum/report_field/pencode_text, "Травмы")
 	add_field(/datum/report_field/pencode_text, "Ход Лечения")
 	add_field(/datum/report_field/pencode_text, "Другие заметки")
 	add_field(/datum/report_field/text_label/instruction, "Подписываясь ниже, я подтверждаю, что все вышесказанное фактически верно, насколько мне известно.")
-	add_field(/datum/report_field/signature, "Подпись лечащего врача")
+	add_field(/datum/report_field/signature, "Подпись лечащего врача", required = 1)
 
 /datum/computer_file/report/recipient/medical/insanity_resolution
 	form_name = "SCG-MED-02"
@@ -112,7 +111,7 @@
 	add_field(/datum/report_field/text_label/instruction,"Рецепт действителен 30 (тридцать) стандартных земных суток с момента выдачи, начиная со дня получения.")
 	add_field(/datum/report_field/date, "Дата выдачи рецепта")
 	add_field(/datum/report_field/pencode_text, "Постановление врача", required = 1)
-	cmo_fields += add_field(/datum/report_field/signature, "Подпись главного врача", required = 1)
+	cmo_fields += add_field(/datum/report_field/signature, "Подпись главного врача")
 	set_access(access_edit = access_medical)
 	for(var/datum/report_field/field in cmo_fields)
 		field.set_access(access_edit = access_cmo)

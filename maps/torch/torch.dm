@@ -37,6 +37,7 @@
 	#include "datums/reports/medical.dm"
 	#include "datums/reports/science.dm"
 	#include "datums/reports/security.dm"
+	#include "datums/reports/service.dm"
 	#include "datums/reports/solgov.dm"
 	#include "datums/reports/deck.dm"
 	#include "datums/shackle_law_sets.dm"

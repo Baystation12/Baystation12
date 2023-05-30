@@ -1,4 +1,13 @@
-#define IRC_STATUS_THROTTLE 5
+#define IRC_STATUS_THROTTLE		5
+#define NON_BYOND_URL			"https://bay.proxima.fun/"
+#define RESTART_COUNTER_PATH	"data/round_counter.txt"
+#define ROUNDWAITERROLEID		"839057002046947329"
+#define RUNWAITERROLEID			"896359984634425344"
+
+/datum/tgs_chat_embed/provider/author/glob
+	name = "Сервер 'PRX'"
+	url = NON_BYOND_URL
+	icon_url = "https://media.discordapp.net/attachments/1019304147671076975/1062958307096154172/Logo-Proxima-Mini.png"
 
 /datum/tgs_chat_command/ircstatus
 	name = "status"
@@ -13,9 +22,35 @@
 	last_irc_status = rtod
 	var/list/adm = get_admin_counts()
 	var/list/allmins = adm["total"]
-	var/status = "**Админы: [allmins.len]**\nАктивные: __*[english_list(adm["present"])]*__\nАФК: __*[english_list(adm["afk"])]*__\nСкрыты: __*[english_list(adm["stealth"])]*__\nБез бана: __*[english_list(adm["noflags"])]*__\n\n"
-	status += "**Игроки: [GLOB.clients.len]**\nАктивные: `[get_active_player_count(0,1,0)]`\nПубличный режим: ||__*[PUBLIC_GAME_MODE]*__||\nНастоящий режим: ||__*[SSticker.mode ? SSticker.mode.name : "Не начался"]*__||"
-	return status
+
+	var/datum/tgs_message_content/message = new ("")
+	var/datum/tgs_chat_embed/structure/embed = new()
+	message.embed = embed
+	var/datum/tgs_chat_embed/field/adminCount	= new ("Админы", "[allmins.len]")
+	var/datum/tgs_chat_embed/field/afk			= new ("АФК", "[english_list(adm["afk"])]")
+	var/datum/tgs_chat_embed/field/activeAdmins	= new ("Активные админы", "[english_list(adm["present"])]")
+	var/datum/tgs_chat_embed/field/stealth		= new ("Скрыты", "[english_list(adm["stealth"])]")
+	var/datum/tgs_chat_embed/field/useless		= new ("Сотрудники без флага +BAN", "[english_list(adm["noflags"])]")
+	var/datum/tgs_chat_embed/field/players		= new ("Игроки", "[GLOB.clients.len]")
+	var/datum/tgs_chat_embed/field/activePlayers= new ("Активные игроки", "[get_active_player_count(0,1,0)]")
+	var/datum/tgs_chat_embed/field/modePublic	= new ("Публичный режим", "||[PUBLIC_GAME_MODE]||")
+	var/datum/tgs_chat_embed/field/modeReal		= new ("Реальный режим", "||[SSticker.mode ? SSticker.mode.name : "Не начался"]||")
+	adminCount.is_inline = TRUE
+	afk.is_inline = TRUE
+	stealth.is_inline = TRUE
+	players.is_inline = TRUE
+	activePlayers.is_inline = TRUE
+	//modePublic.is_inline = TRUE
+	modeReal.is_inline = TRUE
+	embed.fields = list(adminCount, activeAdmins, afk, stealth, useless, players, activePlayers, modePublic, modeReal)
+	embed.colour = "#00ff8c"
+
+	embed.title = "Статус сервера Proxima"
+	embed.author = new /datum/tgs_chat_embed/provider/author/glob("Сервер 'PRX'")
+	//embed.footer = new /datum/tgs_chat_embed/footer("Сервер 'PRX'")
+	//embed.url = NON_BYOND_URL
+
+	return message
 
 /datum/tgs_chat_command/irccheck
 	name = "check"
@@ -27,7 +62,31 @@
 	if(rtod - last_irc_check < IRC_STATUS_THROTTLE)
 		return
 	last_irc_check = rtod
-	return "[game_id ? "**Раунд №** `[game_id]`\n" : ""]Игроков: `[GLOB.clients.len]`\nКарта: __[GLOB.using_map.full_name]__\nРежим: ||__[PUBLIC_GAME_MODE]__||\nРаунд: __[GAME_STATE != RUNLEVEL_LOBBY ? (GAME_STATE != RUNLEVEL_POSTGAME ? "Активен" : "Заканчивается") : "Подготавливается"]__\n**Заходи к нам: <[get_world_url()]>**"
+
+	var/datum/tgs_message_content/message = new ("")
+	var/datum/tgs_chat_embed/structure/embed = new()
+	message.embed = embed
+	var/datum/tgs_chat_embed/field/round		= new ("Раунд №", "[game_id ? "[game_id]" : "НЕТ АЙДИ"]")
+	var/datum/tgs_chat_embed/field/players		= new ("Игроки", "[GLOB.clients.len]")
+	var/datum/tgs_chat_embed/field/map			= new ("Карта", "[GLOB.using_map.full_name]")
+	var/datum/tgs_chat_embed/field/modePublic	= new ("Режим", "||[PUBLIC_GAME_MODE]||")
+	var/datum/tgs_chat_embed/field/gameStatus	= new ("Статус игры", "[GAME_STATE != RUNLEVEL_LOBBY ? (GAME_STATE != RUNLEVEL_POSTGAME ? "Активен" : "Заканчивается") : "Подготавливается"]")
+
+	round.is_inline = TRUE
+	players.is_inline = TRUE
+	//map.is_inline = TRUE
+	modePublic.is_inline = TRUE
+	gameStatus.is_inline = TRUE
+	embed.fields = list(round, players, map, modePublic, gameStatus)
+	embed.colour = "#ffae00"
+
+
+	embed.title = "Статус сервера Proxima"
+	embed.author = new /datum/tgs_chat_embed/provider/author/glob("Сервер 'PRX'")
+	//embed.footer = new /datum/tgs_chat_embed/footer("Сервер 'PRX'")
+	//embed.url = NON_BYOND_URL
+
+	return message
 
 /datum/tgs_chat_command/ircmanifest
 	name = "manifest"
@@ -41,7 +100,19 @@
 	last_irc_check = rtod
 
 	if(GAME_STATE == RUNLEVEL_LOBBY)
-		return "Раунд еще подготавливается..."
+		return new /datum/tgs_message_content("Раунд еще подготавливается...")
+
+	var/datum/tgs_message_content/message = new ("")
+	var/datum/tgs_chat_embed/structure/embed = new()
+	message.embed = embed
+
+	embed.colour = "#ff003c"
+	embed.fields = list()
+
+	embed.title = "Манифест экипажа на сервере Proxima"
+	embed.author = new /datum/tgs_chat_embed/provider/author/glob("Сервер 'PRX'")
+	//embed.footer = new /datum/tgs_chat_embed/footer("Сервер 'PRX'")
+	//embed.url = NON_BYOND_URL
 
 	var/list/msg = list()
 	var/list/positions = list()
@@ -65,12 +136,16 @@
 				if ("bot") depString = "Синтетики"
 				if ("civ") depString = "Гражданские"
 				else depString = dept
-			msg += "__**[depString]**__"
 			for(var/list/person in dept_list)
 				var/datum/mil_branch/branch_obj = GLOB.mil_branches.get_branch(person["branch"])
 				var/datum/mil_rank/rank_obj = GLOB.mil_branches.get_rank(person["branch"], person["milrank"])
-				msg += "*[person["rank"]]* - `[branch_obj != null ? "[branch_obj.name_short] " : ""][((rank_obj != null) && (rank_obj.name_short != "")) ? "[rank_obj.name_short] " : ""][replacetext_char(person["name"], "&#39;", "'")]`"
-	return jointext(msg, "\n")
+				msg += "*[person["rank"]]* - `[((branch_obj != null) && (branch_obj.name_short) && (branch_obj.name_short != "")) ? "[branch_obj.name_short] " : ""][((rank_obj != null) && (rank_obj.name_short) && (rank_obj.name_short != "")) ? "[rank_obj.name_short] " : ""][replacetext_char(person["name"], "&#39;", "'")]`"
+
+			var/datum/tgs_chat_embed/field/depEntry	= new ("[depString]", jointext(msg, "\n"))
+			embed.fields += depEntry
+
+			msg = list()
+	return message
 
 /** -- Отвечать на тикеты из дискорда? Я подумаю над этим
 /datum/tgs_chat_command/ahelp
@@ -133,7 +208,23 @@
 			msg.Insert(1, line)
 		else
 			msg += line
-	return "__**Админов онлайн: [can_investigate?"[active_staff]/[total_staff]":"[active_staff]"]**__\n[jointext(msg,"\n")]"
+
+	var/datum/tgs_message_content/message = new ("")
+	var/datum/tgs_chat_embed/structure/embed = new()
+	message.embed = embed
+
+	embed.colour = "#ff0000"
+
+	embed.title = "Список администрации на сервере Proxima"
+	embed.author = new /datum/tgs_chat_embed/provider/author/glob("Сервер 'PRX'")
+	//embed.footer = new /datum/tgs_chat_embed/footer("Сервер 'PRX'")
+	//embed.url = NON_BYOND_URL
+
+	var/datum/tgs_chat_embed/field/adminCount	= new ("Админы онлайн", "[can_investigate?"[active_staff]/[total_staff]":"[active_staff]"]")
+	var/datum/tgs_chat_embed/field/adminList	= new ("Список администрации", jointext(msg, "\n"))
+	embed.fields = list(adminCount, adminList)
+
+	return message
 
 GLOBAL_LIST(round_end_notifiees)
 
@@ -144,11 +235,11 @@ GLOBAL_LIST(round_end_notifiees)
 
 /datum/tgs_chat_command/notify/Run(datum/tgs_chat_user/sender, params)
 	if(GAME_STATE == RUNLEVEL_POSTGAME)
-		return "[sender.mention], раунд уже закончился!"
+		return new /datum/tgs_message_content("[sender.mention], раунд уже закончился!")
 	LAZYINITLIST(GLOB.round_end_notifiees)
 	GLOB.round_end_notifiees[sender.mention] = TRUE
-	return "Я уведомлю [sender.mention] когда раунд закончится."
-
+	return new /datum/tgs_message_content("Я уведомлю [sender.mention] когда раунд закончится.")
+/*
 /datum/tgs_chat_command/fax
 	name = "fax"
 	help_text = "Используется для просмотра, создания и овтетов на факсы. Используйте без параметров для помощи"
@@ -360,3 +451,4 @@ GLOBAL_LIST(round_end_notifiees)
 		else
 			// Я могу только прочитать или написать факс
 			return "Не удалось распознать аргумент `[parampampam[1]]`"
+*/

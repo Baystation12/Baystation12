@@ -1,8 +1,8 @@
 //I'M FUCKING INVICIBLE!!!!!
 
 /obj/item/melee/sword/raiden
-	name = "High frequency sword"
-	desc = "a high-frequency sword, its blade is specially sharpened using a blue-space machine. The sword is barely felt in the hand, which means that it is incredibly light. and on the handle is written: 'an instrument of justice'"
+	name = "high-frequency sword"
+	desc = "a high-frequency sword, its blade is specially sharpened using a blue-space machine. The sword is barely felt in the hand, which means that it is incredibly light. There are words 'an instrument of justice' engraved on it."
 	icon = 'proxima/icons/obj/weapons/melee.dmi'
 	icon_state = "hfrequency0"
 	force = 45
@@ -18,7 +18,7 @@
 
 /obj/item/melee/energy/machete/sundowner
 	name = "high-frequency machete"
-	desc = "a high-frequency machete, its blade is specially equipped to deliver fast and cutting blows. The machete is barely felt in the hand, which means that it is incredibly light. you feel like fucked up INVICIBLE"
+	desc = "a high-frequency machete, its blade is specially equipped to deliver fast and cutting blows. The machete is barely felt in the hand, which means that it is incredibly light. You feel fucking INVICIBLE!"
 	icon = 'proxima/icons/obj/weapons/melee.dmi'
 	icon_state = "hfmachete0"
 	active_icon = "hfmachete1"
@@ -41,7 +41,7 @@
 
 /obj/item/melee/energy/minuano
 	name = "high-frequency katana"
-	desc = "a high-frequency katana, its blade is specially equipped to deliver fast and cutting blows. The sword is barely felt in the hand, which means that it is incredibly light. you feel like jet stream"
+	desc = "a high-frequency katana, its blade is specially equipped to deliver fast and cutting blows. The sword is barely felt in the hand, which means that it is incredibly light. You feel swift like a jet stream."
 	icon = 'proxima/icons/obj/weapons/melee.dmi'
 	icon_state = "murasama2"
 	active_icon = "murasama2_a"
