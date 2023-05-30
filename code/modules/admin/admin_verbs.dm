@@ -408,9 +408,6 @@ var/list/admin_verbs_xeno = list(
 		var/mob/observer/ghost/ghost = body.ghostize(1)
 		sound_to(usr, sound(null))
 
-		if (!ghost)
-			to_chat(src, FONT_COLORED("red", "You are already admin-ghosted."))
-			return
 		ghost.admin_ghosted = 1
 		if(body)
 			body.teleop = ghost
