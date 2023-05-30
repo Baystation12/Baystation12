@@ -45,6 +45,7 @@ if (!(datum.process_flags & AI_FASTPROCESSING)) { \
 	if (ai_holder)
 		GLOB.stat_set_event.unregister(src, ai_holder, /datum/ai_holder/proc/holder_stat_change)
 		QDEL_NULL(ai_holder)
+	ai_status_image = null
 	return ..()
 
 
