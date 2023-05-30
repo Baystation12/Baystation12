@@ -15,8 +15,10 @@
 /datum/progressbar/private/Destroy()
 	if (client && bar)
 		client.images -= bar
-	qdel(bar)
-	. = ..()
+	actor = null
+	bar = null
+	client = null
+	return ..()
 
 /datum/progressbar/private/New(mob/actor, max_progress, atom/actee, display_on_actor = FALSE)
 	actee = actee || actor
@@ -58,8 +60,10 @@
 /datum/progressbar/public/Destroy()
 	if (actor && bar)
 		actor.vis_contents -= bar
+	actor = null
+	actee = null
 	qdel(bar)
-	. = ..()
+	return ..()
 
 /datum/progressbar/public/New(atom/movable/actor, max_progress, atom/movable/actee, display_on_actor = FALSE)
 	actee = actee || actor

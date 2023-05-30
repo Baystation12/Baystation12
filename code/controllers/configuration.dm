@@ -436,6 +436,8 @@
 
 	var/static/run_empty_levels = FALSE
 
+	var/static/deletion_starts_paused = FALSE
+
 
 /datum/configuration/New()
 	load_config()
@@ -855,6 +857,8 @@
 				run_empty_levels = TRUE
 			if ("warn_if_staff_same_ip")
 				warn_if_staff_same_ip = TRUE
+			if ("deletion_starts_paused")
+				deletion_starts_paused = TRUE
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 
