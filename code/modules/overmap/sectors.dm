@@ -25,7 +25,14 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 	/// null | num | list. If a num or a (num, num) list, the radius or random bounds for placing this sector near the main map's overmap icon.
 	var/list/place_near_main
 
+	var/designation //Actual name of the object.
+	var/class //Imagine a ship or station's class. "NSV" Sierra, "SEV" Torch, ...
+	var/obfuscated_name = "unidentified object"
+	var/obfuscated_desc = "This object is not displaying its IFF signature."
+	var/obfuscated = FALSE //Whether we hide our name and class or not.
+
 	var/blob_count = 0
+
 
 /obj/effect/overmap/visitable/Initialize()
 	. = ..()
@@ -65,6 +72,8 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 		qdel(E)
 
 	docking_codes = "[ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))]"
+
+	update_name()
 
 	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
 
@@ -141,6 +150,32 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 /obj/effect/overmap/visitable/MouseExited()
 	closeToolTip(usr) //No reason not to, really
 	..()
+
+
+/obj/effect/overmap/visitable/proc/update_name()
+	if(!designation)
+		return
+	if(obfuscated)
+		return
+	name = get_real_name()
+
+/obj/effect/overmap/visitable/proc/get_real_name()
+	return class ? "[class] [designation]" : designation
+
+/obj/effect/overmap/visitable/proc/set_new_designation(new_name)
+	designation = new_name
+	update_name()
+
+/obj/effect/overmap/visitable/proc/set_new_class(new_class)
+	class = new_class
+	update_name()
+
+/obj/effect/overmap/visitable/proc/update_obfuscated(new_state) //TRUE is obfuscated.
+	if(new_state)
+		name = obfuscated_name
+		desc = obfuscated_desc
+	else
+		update_name()
 
 /obj/effect/overmap/visitable/sector
 	name = "generic sector"

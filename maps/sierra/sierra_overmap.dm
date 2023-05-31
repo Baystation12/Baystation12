@@ -1,5 +1,6 @@
 /obj/effect/overmap/visitable/ship/sierra
-	name = "NSV Sierra"
+	class = "NSV"
+	designation = "Sierra"
 	desc = "A space object with wide of 121.2 meters, length of 214.5 meters and high near 14.3 meters. A Self Indentification Signal classifices \
 	the target as NanoTrasen Science Vessel, a property of NanoTrasen Corporation."
 	fore_dir = WEST
