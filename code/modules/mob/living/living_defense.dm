@@ -13,12 +13,6 @@
 		. = 1 - (1 - .) * (1 - armor_datum.get_blocked(damage_type, damage_flags, armor_pen, damage)) // multiply the amount we let through
 	. = min(1, .)
 
-
-/mob/living/proc/hit_impact(damage, dir)
-	if(incapacitated(INCAPACITATION_DEFAULT|INCAPACITATION_BUCKLED_PARTIALLY))
-		return
-	shake_animation(damage)
-
 /mob/living/proc/get_armors_by_zone(def_zone, damage_type, damage_flags)
 	. = list()
 	var/natural_armor = get_extension(src, /datum/extension/armor)
@@ -28,7 +22,6 @@
 		. += get_extension(psi, /datum/extension/armor)
 
 /mob/living/bullet_act(obj/item/projectile/P, def_zone)
-
 	if (status_flags & GODMODE)
 		return PROJECTILE_FORCE_MISS
 
@@ -43,14 +36,8 @@
 	var/damage = P.damage
 	var/flags = P.damage_flags()
 	var/damaged
-	var/hit_dir = get_dir(P, src)
-
-	if(P.knockback)
-		throw_at(get_edge_target_turf(src, hit_dir), P.knockback, P.knockback)
-
 	if(!P.nodamage)
 		damaged = apply_damage(damage, P.damage_type, def_zone, flags, P, P.armor_penetration)
-		hit_impact(P.damage, hit_dir)
 		bullet_impact_visuals(P, def_zone, damaged)
 	if(damaged || P.nodamage) // Run the block computation if we did damage or if we only use armor for effects (nodamage)
 		. = get_blocked_ratio(def_zone, P.damage_type, flags, P.armor_penetration, P.damage)

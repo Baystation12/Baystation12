@@ -22,6 +22,4 @@
 			src.embed(I, hit_zone, supplied_wound = created_wound)
 			I.has_embedded()
 
-	hit_impact(effective_force)
-
 	return 1
