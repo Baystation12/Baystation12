@@ -155,6 +155,8 @@
 
 #define QDEL_NULL(x) if(x) { qdel(x) ; x = null }
 
+#define QDEL_NULL_SCREEN(item) if(client) { client.screen -= item; }; QDEL_NULL(item)
+
 #define QDEL_IN(item, time) addtimer(new Callback(item, /datum/proc/qdel_self), time, TIMER_STOPPABLE)
 
 #define DROP_NULL(x) if(x) { x.dropInto(loc); x = null; }
