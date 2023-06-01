@@ -1,0 +1,8 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - tweak: Stasis cages are now constructable/deconstructable.
+  - tweak: Stasis cages can now be hacked to bolt the lid, release, or allow people
+      in it.
+  - tweak: Stasis cages can be damaged, emp'd and broken completely.
+  - tweak: Stasis cages can be upgraded with better capacitor/cell.
