@@ -256,7 +256,7 @@
 	if (A.MiddleClick(src))
 		return TRUE
 	// swap_hand() // BAY
-	pointed() // SIERRA
+	pointed(A) // SIERRA
 	return TRUE
 
 /atom/proc/MiddleClick(mob/M as mob)
