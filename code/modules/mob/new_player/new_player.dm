@@ -1,6 +1,12 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
-
 /mob/new_player
+	universal_speak = TRUE
+	invisibility = 101
+	density = FALSE
+	stat = DEAD
+	movement_handlers = list()
+	anchored = TRUE	//  don't get pushed around
+	virtual_mob = null // Hear no evil, speak no evil
+
 	var/ready = 0
 	var/respawned_time = 0
 	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
@@ -8,17 +14,11 @@
 	var/totalPlayersReady = 0
 	var/datum/browser/panel
 	var/show_invalid_jobs = 0
-	universal_speak = TRUE
 
-	invisibility = 101
 
-	density = FALSE
-	stat = DEAD
-
-	movement_handlers = list()
-	anchored = TRUE	//  don't get pushed around
-
-	virtual_mob = null // Hear no evil, speak no evil
+/mob/new_player/Destroy()
+	QDEL_NULL(panel)
+	return ..()
 
 
 /mob/new_player/Initialize(mapload)

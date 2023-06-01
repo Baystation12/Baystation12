@@ -33,7 +33,7 @@
 	QDEL_NULL_LIST(build_modes)
 	QDEL_NULL_LIST(build_buttons)
 	to_chat(user, "Build Mode Disabled")
-	. = ..()
+	return ..()
 
 /datum/click_handler/build_mode/proc/StartTimer()
 	timer_handle = addtimer(new Callback(src, .proc/TimerEvent), 1 SECOND, TIMER_UNIQUE | TIMER_STOPPABLE | TIMER_LOOP)
