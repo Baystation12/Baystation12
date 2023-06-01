@@ -111,10 +111,10 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/rifle
 	allowed_magazines = /obj/item/ammo_magazine/rifle
-	one_hand_penalty = 9
-	scoped_accuracy = 6
+	one_hand_penalty = 8
+	scoped_accuracy = 8
 	scope_zoom = 1
-	accuracy_power = 9
+	accuracy_power = 8
 	accuracy = 4
 	bulk = GUN_BULK_RIFLE
 	wielded_item_state = "dmr-wielded"
