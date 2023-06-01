@@ -137,9 +137,25 @@
 	req_components = list(
 		/obj/item/stock_parts/matter_bin = 3,
 		/obj/item/stock_parts/manipulator = 1,
-		/obj/item/stock_parts/micro_laser = 1)
+		/obj/item/stock_parts/micro_laser = 1
+	)
 	additional_spawn_components = list(
 		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/battery/buildable/stock = 1,
+		/obj/item/cell/high = 1
+	)
+
+/obj/item/stock_parts/circuitboard/stasis_cage
+	name = "circuit board (stasis cage)"
+	build_path = /obj/machinery/stasis_cage
+	board_type = "machine"
+	origin_tech = list(TECH_BLUESPACE = 3, TECH_ENGINEERING = 4, TECH_BIO = 3)
+	req_components = list(
+		/obj/item/stock_parts/matter_bin = 2,
+		/obj/item/stock_parts/capacitor = 1
+	)
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen = 1,
 		/obj/item/stock_parts/power/battery/buildable/stock = 1,
 		/obj/item/cell/high = 1
 	)
