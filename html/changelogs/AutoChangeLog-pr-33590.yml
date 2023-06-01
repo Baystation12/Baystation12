@@ -1,5 +1,0 @@
-author: BoNT
-delete-after: true
-changes:
-  - bugfix: Laser scalpels and IMS will check if there is already an existing incision,
-      like regular scalpels.

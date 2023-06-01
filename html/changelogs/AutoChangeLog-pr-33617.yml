@@ -1,7 +1,0 @@
-author: BurpleBineapple
-delete-after: true
-changes:
-  - bugfix: Scoped guns now no longer throw your camera across the map with recoil
-      and will properly reset to initial values.
-  - tweak: The Panther has 2 tiles extra of scoped accuracy to be more usable at below
-      Master WE.
