@@ -1,4 +1,4 @@
-/mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
+/mob/Destroy()
 	STOP_PROCESSING_MOB(src)
 	GLOB.dead_mobs -= src
 	GLOB.alive_mobs -= src
@@ -22,8 +22,12 @@
 	if(mind && mind.current == src)
 		spellremove(src)
 	ghostize()
-	..()
-	return QDEL_HINT_HARDDEL
+	if (istype(ability_master))
+		QDEL_NULL(ability_master)
+	move_intent = null
+	lastarea = null
+	mind = null
+	return ..()
 
 /mob/proc/remove_screen_obj_references()
 	QDEL_NULL_SCREEN(hands)
@@ -39,10 +43,12 @@
 	QDEL_NULL_SCREEN(healths)
 	QDEL_NULL_SCREEN(throw_icon)
 	QDEL_NULL_SCREEN(nutrition_icon)
+	QDEL_NULL_SCREEN(hydration_icon)
 	QDEL_NULL_SCREEN(pressure)
 	QDEL_NULL_SCREEN(pain)
 	QDEL_NULL_SCREEN(item_use_icon)
 	QDEL_NULL_SCREEN(gun_move_icon)
+	QDEL_NULL_SCREEN(radio_use_icon )
 	QDEL_NULL_SCREEN(gun_setting_icon)
 	QDEL_NULL_SCREEN(ability_master)
 	QDEL_NULL_SCREEN(zone_sel)

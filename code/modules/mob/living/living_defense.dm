@@ -345,8 +345,12 @@
 	return
 
 /mob/living/update_action_buttons()
-	if(!hud_used) return
-	if(!client) return
+	if(!hud_used)
+		return
+	if(!client)
+		return
+	if (QDELING(src))
+		return
 
 	if(hud_used.hud_shown != 1)	//Hud toggled to minimal
 		return

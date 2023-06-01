@@ -149,4 +149,4 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 
 /datum/movement_handler/mob/Destroy()
 	mob = null
-	. = ..()
+	return ..()

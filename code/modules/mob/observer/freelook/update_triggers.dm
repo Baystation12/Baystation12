@@ -13,7 +13,7 @@
 /atom/Destroy()
 	if(opacity)
 		updateVisibility(src)
-	. = ..()
+	return ..()
 
 // DOORS
 

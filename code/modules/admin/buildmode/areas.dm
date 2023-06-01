@@ -22,7 +22,9 @@ Shift + Right Click - Select point B
 /datum/build_mode/areas/Destroy()
 	UnselectArea()
 	Unselected()
-	. = ..()
+	coordinate_A = null
+	coordinate_B = null
+	return ..()
 
 /datum/build_mode/areas/Help()
 	to_chat(user, SPAN_NOTICE(help_text))
@@ -55,15 +57,12 @@ Shift + Right Click - Select point B
 		selected_area = R
 		to_chat(user, "Picked area [selected_area.name]")
 	else if (selected_area)
-
 		if (parameters["left"] && parameters["shift"])
 			coordinate_A = get_turf(A)
 			to_chat(user, SPAN_NOTICE("Defined [coordinate_A] ([coordinate_A.type]) as point A."))
-
 		if (parameters["right"] && parameters["shift"])
 			coordinate_B = get_turf(A)
 			to_chat(user, SPAN_NOTICE("Defined [coordinate_B] ([coordinate_B.type]) as point B."))
-
 		if (coordinate_A && coordinate_B)
 			to_chat(user, SPAN_NOTICE("Area coordinates set. Defining area."))
 			Log("Created an area with name [selected_area] from [log_info_line(coordinate_A)] to [log_info_line(coordinate_B)]")
@@ -71,9 +70,6 @@ Shift + Right Click - Select point B
 			make_area(coords[1], coords[2], coords[3], coords[4], coords[5], selected_area)
 			coordinate_A = null
 			coordinate_B = null
-
-
-
 		ChangeArea(T, selected_area)
 		to_chat(user, "Set area of turf [T.name] to [selected_area.name]")
 	else

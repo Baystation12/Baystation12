@@ -742,7 +742,7 @@ default behaviour is:
 		return
 	if(W in organs)
 		return
-	. = ..()
+	return ..()
 
 //damage/heal the mob ears and adjust the deaf amount
 /mob/living/adjustEarDamage(damage, deaf)
@@ -826,7 +826,7 @@ default behaviour is:
 		for(var/a in auras)
 			remove_aura(a)
 	GLOB.living_players -= src
-	qdel(selected_image)
+	selected_image = null
 	return ..()
 
 /mob/living/proc/melee_accuracy_mods()

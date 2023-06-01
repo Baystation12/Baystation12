@@ -32,11 +32,11 @@
 
 /obj/item/clothing/Destroy()
 	for (var/obj/item/clothing/accessory/A as anything in accessories)
-		remove_accessory(null, A)
+		remove_accessory(null, A, TRUE)
 		qdel(A)
 	accessories.Cut()
 	accessories = null
-	. = ..()
+	return ..()
 
 
 // Updates the icons of the mob wearing the clothing item, if any.
