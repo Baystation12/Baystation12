@@ -1,0 +1,4 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - bugfix: Фиксит работоспособность тыканья в объекты на СКМ
