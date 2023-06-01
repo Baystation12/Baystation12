@@ -8,7 +8,7 @@
 	map_generators = list(/datum/random_map/noise/exoplanet/snow, /datum/random_map/noise/ore/poor)
 	surface_color = "#e8faff"
 	water_color = "#b5dfeb"
-	habitability_distribution = list(HABITABILITY_IDEAL = 30, HABITABILITY_OKAY = 50, HABITABILITY_BAD = 10)
+	habitability_distribution = list(HABITABILITY_IDEAL = 10, HABITABILITY_LESSIDEAL = 40, HABITABILITY_BAD = 40, HABITABILITY_UNINHABITABLE = 10)
 	has_trees = TRUE
 	flora_diversity = 4
 	fauna_types = list(/mob/living/simple_animal/hostile/retaliate/beast/samak, /mob/living/simple_animal/hostile/retaliate/beast/diyaab, /mob/living/simple_animal/hostile/retaliate/beast/shantak)
@@ -17,11 +17,14 @@
 /obj/effect/overmap/visitable/sector/exoplanet/snow/generate_atmosphere()
 	..()
 	if(atmosphere)
-		var/limit = 0
-		if(habitability_class <= HABITABILITY_OKAY)
-			var/datum/species/human/H = /datum/species/human
-			limit = initial(H.cold_level_1) + rand(1,10)
-		atmosphere.temperature = max(T0C - rand(10, 100), limit)
+		switch(habitability_class)
+			if(HABITABILITY_IDEAL, HABITABILITY_LESSIDEAL)
+				atmosphere.temperature = skewedGaussian(200, 268.15, 0.5) // favors around 32F (273.15K)
+			if(HABITABILITY_BAD)
+				atmosphere.temperature = skewedGaussian(200, 268.15, 2) // favors around 200K
+			else
+				atmosphere.temperature = rand(50, 268.15)
+
 		atmosphere.update_values()
 
 /datum/random_map/noise/exoplanet/snow

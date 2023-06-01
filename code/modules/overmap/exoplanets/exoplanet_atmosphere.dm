@@ -15,7 +15,7 @@
 		var/badflag = 0
 
 		//Breathable planet
-		if (habitability_class == HABITABILITY_OKAY)
+		if (habitability_class == HABITABILITY_LESSIDEAL) // has oxygen in the atmosphere and won't have an oxidizer or fuel, but may not be perfect.
 			atmosphere.gas[GAS_OXYGEN] += MOLES_O2STANDARD
 			total_moles -= MOLES_O2STANDARD
 			badflag = XGM_GAS_FUEL|XGM_GAS_CONTAMINANT
@@ -42,6 +42,17 @@
 			atmosphere.gas[ng] += part
 			total_moles = max(total_moles - part, 0)
 			i++
+
+		switch (habitability_class)
+			if (HABITABILITY_IDEAL, HABITABILITY_LESSIDEAL)
+				atmosphere.temperature = rangedGaussian(233.15, 333.15, 294.261, 1)
+			if (HABITABILITY_BAD)
+				atmosphere.temperature = rand(233.15, 333.15)
+			else
+				atmosphere.temperature = rand(50, 1000)
+
+
+		atmosphere.update_values()
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_atmosphere_color()
 	var/list/colors = list()
