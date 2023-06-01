@@ -22537,7 +22537,7 @@
 /area/maintenance/seconddeck/foreport)
 "aPu" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/water_cell)
 "aPv" = (
@@ -22557,7 +22557,7 @@
 	name = "Xenobiology Aqua Xenopen";
 	pixel_y = 29
 	},
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/water_cell)

@@ -4440,7 +4440,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/ship/farfleet/crew/freezer)
 "Se" = (
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /obj/effect/floor_decal/industrial/outline/green,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/farfleet/maintenance/anomaly)

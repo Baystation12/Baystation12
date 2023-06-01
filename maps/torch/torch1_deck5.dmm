@@ -4083,7 +4083,7 @@
 /area/command/pilot)
 "jz" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/expedition/storage)
 "jA" = (
@@ -14260,7 +14260,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "Mz" = (
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/camera/network/petrov{
 	c_tag = "Petrov - Equipment";

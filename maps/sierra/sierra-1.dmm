@@ -24053,7 +24053,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /obj/effect/floor_decal/borderfloor{
 	dir = 10
 	},
@@ -24064,7 +24064,7 @@
 /turf/simulated/floor/tiled,
 /area/rnd/xenobiology/storage)
 "Nd" = (
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -20
@@ -24081,7 +24081,7 @@
 /obj/machinery/light,
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/purple/border,
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled,
 /area/rnd/xenobiology/storage)

@@ -1659,7 +1659,7 @@
 /area/ship/skrellscoutship/robotics)
 "fy" = (
 /obj/effect/floor_decal/industrial/outline/red,
-/obj/structure/stasis_cage,
+/obj/machinery/stasis_cage,
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/robotics)
 "fA" = (
