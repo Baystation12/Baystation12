@@ -184,7 +184,7 @@
 	grab.affecting.show_message(
 		SPAN_NOTICE("\The [grab.assailant] starts buckling you to \the [src]!")
 	)
-	if (!do_after(grab.assailant, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || QDELETED(grab) || !grab.assailant.use_sanity_check(src, grab.affecting))
+	if (!do_after(grab.assailant, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || QDELETED(grab) || !grab.use_sanity_check(src))
 		return TRUE
 	if (!user_buckle_mob(grab.affecting, grab.assailant))
 		return TRUE

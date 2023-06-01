@@ -160,7 +160,7 @@
 		VISIBLE_MESSAGE,
 		SPAN_DANGER("You feel someone trying to force you into a bed or chair!")
 	)
-	if (!do_after(grab.assailant, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || QDELETED(grab) || !grab.assailant.use_sanity_check(src, grab.affecting))
+	if (!do_after(grab.assailant, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || !grab.use_sanity_check(src))
 		return TRUE
 	grab.assailant.visible_message(
 		SPAN_WARNING("\The [grab.assailant] buckles \the [grab.affecting] to \the [src]."),

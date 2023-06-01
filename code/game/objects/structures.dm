@@ -118,7 +118,7 @@
 		if (occupied)
 			USE_FEEDBACK_GRAB_FAILURE("There's \a [occupied] blocking \the [src].")
 			return TRUE
-		if (!do_after(grab.assailant, 3 SECONDS, grab.affecting, DO_PUBLIC_UNIQUE) || !grab.assailant.use_sanity_check(src, grab))
+		if (!do_after(grab.assailant, 3 SECONDS, grab.affecting, DO_PUBLIC_UNIQUE) || !grab.use_sanity_check(src))
 			return TRUE
 		occupied = turf_is_crowded()
 		if (occupied)
