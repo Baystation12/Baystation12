@@ -1,6 +1,8 @@
 /obj
 	layer = OBJ_LAYER
 	animate_movement = 2
+	// glide_size = 3 // BAY
+	glide_size = 7 // SIERRA
 
 	var/obj_flags
 
