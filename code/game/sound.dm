@@ -1,40 +1,6 @@
-//Sound environment defines. Reverb preset for sounds played in an area, see sound datum reference for more.
-#define GENERIC 0
-#define PADDED_CELL 1
-#define ROOM 2
-#define BATHROOM 3
-#define LIVINGROOM 4
-#define STONEROOM 5
-#define AUDITORIUM 6
-#define CONCERT_HALL 7
-#define CAVE 8
-#define ARENA 9
-#define HANGAR 10
-#define CARPETED_HALLWAY 11
-#define HALLWAY 12
-#define STONE_CORRIDOR 13
-#define ALLEY 14
-#define FOREST 15
-#define CITY 16
-#define MOUNTAINS 17
-#define QUARRY 18
-#define PLAIN 19
-#define PARKING_LOT 20
-#define SEWER_PIPE 21
-#define UNDERWATER 22
-#define DRUGGED 23
-#define DIZZY 24
-#define PSYCHOTIC 25
+//[SIERRA]
+// MOVED TO __defines\sound.dm
 
-#define STANDARD_STATION STONEROOM
-#define LARGE_ENCLOSED HANGAR
-#define SMALL_ENCLOSED BATHROOM
-#define TUNNEL_ENCLOSED CAVE
-#define LARGE_SOFTFLOOR CARPETED_HALLWAY
-#define MEDIUM_SOFTFLOOR LIVINGROOM
-#define SMALL_SOFTFLOOR ROOM
-#define ASTEROID CAVE
-#define SPACE UNDERWATER
 
 GLOBAL_LIST_INIT(shatter_sound,list('sound/effects/Glassbr1.ogg','sound/effects/Glassbr2.ogg','sound/effects/Glassbr3.ogg'))
 GLOBAL_LIST_INIT(explosion_sound,list('sound/effects/Explosion1.ogg','sound/effects/Explosion2.ogg'))
@@ -80,29 +46,71 @@ GLOBAL_LIST_INIT(tank_drop_sound, list('packs/sierra-tweaks/sound/effects/tank_d
 GLOBAL_LIST_INIT(plastic_pickup_sound, list('packs/sierra-tweaks/sound/effects/small_plastic_pickup.ogg'))
 GLOBAL_LIST_INIT(plastic_drop_sound, list('packs/sierra-tweaks/sound/effects/small_plastic_drop.ogg'))
 
-/proc/playsound(atom/source, soundin, vol as num, vary, extrarange as num, falloff, is_global, frequency, is_ambiance = 0)
-
-	soundin = get_sfx(soundin) // same sound for everyone
-
+/proc/playsound(atom/source, soundin, vol as num, vary, extrarange as num, falloff, is_global, frequency, is_ambiance = 0,  ignore_walls = TRUE, zrange = 2, override_env, envdry, envwet)
 	if(isarea(source))
 		error("[source] is an area and is trying to make the sound: [soundin]")
 		return
+
+	soundin = get_sfx(soundin) // same sound for everyone
 	frequency = vary && isnull(frequency) ? get_rand_frequency() : frequency // Same frequency for everybody
+
 	var/turf/turf_source = get_turf(source)
+	var/maxdistance = (world.view + extrarange) * 2
 
  	// Looping through the player list has the added bonus of working for mobs inside containers
-	for (var/mob/M in GLOB.player_list)
+	var/list/listeners = GLOB.player_list
+	if(!ignore_walls) //these sounds don't carry through walls
+		listeners = listeners & hearers(maxdistance, turf_source)
+
+	for(var/P in listeners)
+		var/mob/M = P
 		if(!M || !M.client)
 			continue
-		if(get_dist(M, turf_source) <= (world.view + extrarange) * 2)
+
+		if(get_dist(M, turf_source) <= maxdistance)
 			var/turf/T = get_turf(M)
-			if(T && T.z == turf_source.z && (!is_ambiance || M.get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES))
-				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global, extrarange)
+
+			if(T && (T.z == turf_source.z || (zrange && AreConnectedZLevels(T.z, turf_source.z) && abs(T.z - turf_source.z) <= zrange)) && (!is_ambiance || M.get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES))
+				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global, extrarange, override_env, envdry, envwet)
 
 var/global/const/FALLOFF_SOUNDS = 0.5
 
-/mob/proc/playsound_local(turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, extrarange)
-	if(!src.client || ear_deaf > 0)	return
+//Applies mob-specific and environment specific adjustments to volume value given
+/proc/adjust_volume_for_hearer(volume, turf/turf_source, atom/listener)
+	if(ismob(listener))
+		var/mob/M = listener
+		if(M.ear_deaf)
+			return 0
+		volume *= M.get_sound_volume_multiplier()
+
+	var/turf/T = get_turf(listener)
+	var/datum/gas_mixture/hearer_env = T.return_air()
+	var/datum/gas_mixture/source_env = turf_source.return_air()
+
+	var/pressure_factor = 1.0
+	if (hearer_env && source_env)
+		var/pressure = min(hearer_env.return_pressure(), source_env.return_pressure())
+		if (pressure < ONE_ATMOSPHERE)
+			pressure_factor = max((pressure - SOUND_MINIMUM_PRESSURE)/(ONE_ATMOSPHERE - SOUND_MINIMUM_PRESSURE), 0)
+	else //in space
+		pressure_factor = 0
+
+	if (get_dist(T, turf_source) <= 1)
+		pressure_factor = max(pressure_factor, 0.15)	//hearing through contact
+
+	volume *= pressure_factor
+
+	if(istype(T,/turf/simulated) && istype(turf_source,/turf/simulated))
+		var/turf/simulated/sim_source = turf_source
+		var/turf/simulated/sim_destination = T
+		if(sim_destination.zone != sim_source.zone)
+			volume -= 30
+	return volume
+
+/mob/proc/playsound_local(turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, extrarange, override_env, envdry, envwet)
+	if(!src.client || ear_deaf > 0)
+		return
+
 	var/sound/S = soundin
 	if(!istype(S))
 		soundin = get_sfx(soundin)
@@ -116,40 +124,16 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 		else if (vary)
 			S.frequency = get_rand_frequency()
 
-	//sound volume falloff with pressure
-	var/pressure_factor = 1.0
-
-	S.volume *= get_sound_volume_multiplier()
-
 	var/turf/T = get_turf(src)
+	S.volume = adjust_volume_for_hearer(S.volume, turf_source, src)
+
 	// 3D sounds, the technology is here!
+
 	if(isturf(turf_source))
 		//sound volume falloff with distance
 		var/distance = get_dist(T, turf_source)
 
 		S.volume -= max(distance - (world.view + extrarange), 0) * 2 //multiplicative falloff to add on top of natural audio falloff.
-
-		var/datum/gas_mixture/hearer_env = T.return_air()
-		var/datum/gas_mixture/source_env = turf_source.return_air()
-
-		if (hearer_env && source_env)
-			var/pressure = min(hearer_env.return_pressure(), source_env.return_pressure())
-
-			if (pressure < ONE_ATMOSPHERE)
-				pressure_factor = max((pressure - SOUND_MINIMUM_PRESSURE)/(ONE_ATMOSPHERE - SOUND_MINIMUM_PRESSURE), 0)
-		else //in space
-			pressure_factor = 0
-
-		if (distance <= 1)
-			pressure_factor = max(pressure_factor, 0.15)	//hearing through contact
-
-		S.volume *= pressure_factor
-
-		if(istype(T,/turf/simulated) && istype(turf_source,/turf/simulated))
-			var/turf/simulated/sim_source = turf_source
-			var/turf/simulated/sim_destination = T
-			if(sim_destination.zone != sim_source.zone)
-				S.volume -= 30
 
 		if (S.volume <= 0)
 			return	//no volume means no sound
@@ -158,9 +142,12 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 		S.x = dx
 		var/dz = turf_source.y - T.y // Hearing from infront/behind
 		S.z = dz
-		// The y value is for above your head, but there is no ceiling in 2d spessmens.
-		S.y = 1
+		var/dy = (turf_source.z - T.z) * ZSOUND_DISTANCE_PER_Z // Hearing from above/below. There is ceiling in 2d spessmans.
+		S.y = (dy < 0) ? dy - 1 : dy + 1 //We want to make sure there's *always* at least one extra unit of distance. This helps normalize sound that's emitting from the turf you're on.
 		S.falloff = (falloff ? falloff : FALLOFF_SOUNDS)
+
+		if(!override_env)
+			envdry = abs(turf_source.z - T.z) * ZSOUND_DRYLOSS_PER_Z
 
 	if(!is_global)
 
@@ -178,17 +165,17 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 				S.environment = UNDERWATER
 			else if (T?.is_flooded(M.lying))
 				S.environment = UNDERWATER
-			else if (pressure_factor < 0.5)
-				S.environment = SPACE
 			else
 				var/area/A = get_area(src)
 				S.environment = A.sound_env
-
-		else if (pressure_factor < 0.5)
-			S.environment = SPACE
 		else
 			var/area/A = get_area(src)
 			S.environment = A.sound_env
+
+	var/list/echo_list = new(18)
+	echo_list[ECHO_DIRECT] = envdry
+	echo_list[ECHO_ROOM] = envwet
+	S.echo = echo_list
 
 	sound_to(src, S)
 

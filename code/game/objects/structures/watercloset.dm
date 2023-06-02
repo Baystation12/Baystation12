@@ -271,6 +271,11 @@
 	return ..()
 
 
+#define SHOWER_FREEZING "freezing"
+#define SHOWER_NORMAL "normal"
+#define SHOWER_BOILING "boiling"
+
+
 /obj/structure/hygiene/shower
 	name = "shower"
 	desc = "The HS-451. Installed in the 2200s by the Hygiene Division."
@@ -282,37 +287,36 @@
 	can_drain = 1
 	drainage = 0.2 			//showers are tiny, drain a little slower
 
-	var/on = 0
-	var/obj/effect/mist/mymist = null
-	var/ismist = 0				//needs a var so we can make it linger~
-	var/watertemp = "normal"	//freezing, normal, or boiling
-	var/is_washing = 0
-	var/list/temperature_settings = list("normal" = 310, "boiling" = T0C+100, "freezing" = T0C)
+	var/image/shower_water
+	var/on = FALSE
+	var/ismist = FALSE
+	var/obj/effect/mist/mist
+	var/watertemp = SHOWER_NORMAL	///can be freezing, normal, or boiling
+	var/is_washing = FALSE
+	var/list/temperature_settings = list( SHOWER_FREEZING = T0C, SHOWER_NORMAL = 310, SHOWER_BOILING = T0C+100,)
 
-/obj/structure/hygiene/shower/New()
-	..()
+/obj/structure/hygiene/shower/Initialize()
+	. = ..()
 	create_reagents(50)
+	shower_water = image(icon, src, "water", ABOVE_HUMAN_LAYER, dir)
+
+/obj/structure/hygiene/shower/Destroy()
+	QDEL_NULL(reagents)
+	QDEL_NULL(mist)
+	. = ..()
 
 //add heat controls? when emagged, you can freeze to death in it?
-
-/obj/effect/mist
-	name = "mist"
-	icon = 'icons/obj/watercloset.dmi'
-	icon_state = "mist"
-	layer = MOB_LAYER + 1
-	anchored = TRUE
-	mouse_opacity = 0
 
 /obj/structure/hygiene/shower/attack_hand(mob/M)
 	on = !on
 	update_icon()
+	handle_mist()
 	if(on)
 		if (M.loc == loc)
 			wash(M)
 			process_heat(M)
 		for (var/atom/movable/G in src.loc)
 			G.clean_blood()
-
 
 /obj/structure/hygiene/shower/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Gas Scanner - Fetch temperature
@@ -345,33 +349,30 @@
 
 	return ..()
 
-
-/obj/structure/hygiene/shower/on_update_icon()	//this is terribly unreadable, but basically it makes the shower mist up
-	overlays.Cut()					//once it's been on for a while, in addition to handling the water overlay.
-	if(mymist)
-		qdel(mymist)
-		mymist = null
+/obj/structure/hygiene/shower/on_update_icon()
+	cut_overlays()
 
 	if(on)
-		overlays += image('icons/obj/watercloset.dmi', src, "water", MOB_LAYER + 1, dir)
-		if(temperature_settings[watertemp] < T20C)
-			return //no mist for cold water
-		if(!ismist)
-			spawn(50)
-				if(src && on)
-					ismist = 1
-					mymist = new /obj/effect/mist(loc)
-		else
-			ismist = 1
-			mymist = new /obj/effect/mist(loc)
-	else if(ismist)
-		ismist = 1
-		mymist = new /obj/effect/mist(loc)
-		spawn(250)
-			if(src && !on)
-				qdel(mymist)
-				mymist = null
-				ismist = 0
+		add_overlay(shower_water)
+
+
+/obj/structure/hygiene/shower/proc/handle_mist()
+	// If there is no mist, and the shower was turned on (on a non-freezing temp): make mist in 5 seconds
+	if(!mist && on && temperature_settings != SHOWER_FREEZING)
+		addtimer(new Callback(src, .proc/make_mist), 5 SECONDS)
+
+	// If there was already mist, and the shower was turned off (or made cold): remove the existing mist in 25 sec
+	if(mist && (!on || temperature_settings == SHOWER_FREEZING))
+		addtimer(new Callback(src, .proc/clear_mist), 25 SECONDS)
+
+
+/obj/structure/hygiene/shower/proc/clear_mist()
+	if(mist && (!on || temperature_settings == SHOWER_FREEZING))
+		qdel(mist)
+
+/obj/structure/hygiene/shower/proc/make_mist()
+	if(!mist && on && temperature_settings != SHOWER_FREEZING)
+		mist = new(loc)
 
 //Yes, showers are super powerful as far as washing goes.
 /obj/structure/hygiene/shower/proc/wash(atom/movable/washing)
@@ -401,12 +402,12 @@
 /obj/structure/hygiene/shower/proc/wash_floor()
 	if(!ismist && is_washing)
 		return
-	is_washing = 1
+	is_washing = TRUE
 	var/turf/T = get_turf(src)
 	reagents.splash(T, reagents.total_volume)
 	T.clean(src)
 	spawn(100)
-		is_washing = 0
+		is_washing = FALSE
 
 /obj/structure/hygiene/shower/proc/process_heat(mob/living/M)
 	if(!on || !istype(M)) return
@@ -419,8 +420,21 @@
 		var/mob/living/carbon/human/H = M
 		if(water_temperature >= H.species.heat_level_1)
 			to_chat(H, SPAN_DANGER("The water is searing hot!"))
+			M.adjustFireLoss(5)
 		else if(water_temperature <= H.species.cold_level_1)
 			to_chat(H, SPAN_WARNING("The water is freezing cold!"))
+
+/obj/effect/mist
+	name = "mist"
+	icon = 'icons/obj/watercloset.dmi'
+	icon_state = "mist"
+	layer = ABOVE_HUMAN_LAYER
+	anchored = TRUE
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
+
+#undef SHOWER_FREEZING
+#undef SHOWER_NORMAL
+#undef SHOWER_BOILING
 
 /obj/item/bikehorn/rubberducky
 	name = "rubber ducky"
