@@ -32,3 +32,4 @@
 /datum/artifact_trigger/gas/phoron
 	name = "concentration of phoron"
 	gas_needed = list(GAS_PHORON = 5)
+	trigger_type = TRIGGER_COMPLEX

@@ -10,6 +10,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	density = TRUE
 	layer = ABOVE_OBJ_LAYER
 	req_access = list(access_research)
+	idle_power_usage = 0
 	active_power_usage = 5 KILOWATTS
 	use_power = POWER_USE_IDLE
 	power_channel = LOCAL
@@ -29,7 +30,6 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	var/god = FALSE //Check if mob had godmode before being contained
 
 	var/obj/item/stock_parts/power/battery/battery
-	var/obj/item/cell/cell
 
 /obj/machinery/stasis_cage/Initialize()
 	. = ..()
@@ -39,7 +39,6 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	airtank.adjust_gas(GAS_NITROGEN, MOLES_N2STANDARD)
 
 	battery = get_component_of_type(/obj/item/stock_parts/power/battery)
-	cell = battery.get_cell()
 
 	var/mob/living/A = locate() in loc
 	if(!A)
@@ -133,8 +132,8 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 			to_chat(user, "\The [contained] is kept inside.")
 	if (broken)
 		to_chat(user, SPAN_WARNING("\The [src]'s lid is broken. It probably can not be used."))
-	if (cell)
-		to_chat(user, "\The [src]'s power gauge shows [cell.percent()]% remaining.")
+	if (battery.get_cell())
+		to_chat(user, "\The [src]'s power gauge shows [battery.cell.percent()]% remaining.")
 
 /obj/machinery/stasis_cage/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Crowbar - Pry thing out of cage
@@ -245,7 +244,8 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	QDEL_NULL(airtank)
 	QDEL_NULL(contained)
 	QDEL_NULL(battery)
-	QDEL_NULL(cell)
+	if (battery.get_cell())
+		QDEL_NULL(battery.cell)
 	return ..()
 
 /obj/machinery/stasis_cage/emp_act(severity)
@@ -265,7 +265,8 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	broken = TRUE
 	new /obj/effect/sparks(get_turf(src))
 
-	cell.emp_act(severity)
+	if (battery.get_cell())
+		battery.cell.emp_act(severity)
 
 	update_icon()
 
@@ -308,9 +309,6 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	if (!allowed(user))
 		to_chat(user, "\The [src] blinks, refusing access.")
 		return
-	if (!isanimal(target) && !istype(target.buckled, /obj/effect/energy_net))
-		to_chat(user, SPAN_WARNING("\The [target] needs to be in a net to be captured!"))
-		return
 	if (!stat && !istype(target.buckled, /obj/effect/energy_net))
 		to_chat(user, "It's going to be difficult to convince \the [target] to move into \the [src] without capturing it in a net.")
 		return
@@ -323,6 +321,8 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	playsound(src, 'sound/items/shuttle_beacon_prepare.ogg', 100)
 	Bumped(user)
 	if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
+		var/obj/effect/energy_net/EN = target.buckled
+		qdel(EN)
 		contain(user, target)
 
 /datum/wires/stasis_cage
