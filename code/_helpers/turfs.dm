@@ -218,3 +218,21 @@
 	var/list/turfs = get_turfs_in_range(center, range, turf_predicates)
 	if (length(turfs))
 		return pick(turfs)
+
+
+/// Uses get_circle_coordinates to return a list of turfs on the in-bounds edge of the circle.
+/proc/get_circle_turfs(radius, center_x, center_y, z)
+	if (z < 1 || z > world.maxz)
+		return list()
+	var/maxx = world.maxx
+	var/maxy = world.maxx
+	var/list/result = list()
+	for (var/xy in get_circle_coordinates(radius, center_x, center_y))
+		var/x = xy & 0xFFF
+		var/y = SHIFTR(xy, 12)
+		if (x < 1 || x > maxx)
+			continue
+		if (y < 1 || y > maxy)
+			continue
+		result += locate(x, y, z)
+	return result
