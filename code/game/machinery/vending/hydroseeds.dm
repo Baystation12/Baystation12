@@ -86,7 +86,8 @@
 			var/name = S.name
 			var/datum/stored_items/vending_products/product = new/datum/stored_items/vending_products(src, entry, name)
 			product.price = (entry in prices) ? prices[entry] : 0
-			product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
+			product.rarity = (entry in rare_products) ? rare_products[entry] : 100 //If product is not declared rare, defaults to 100.
+			product.amount = (current_list[1][entry]) ? current_list[1][entry] : prob(product.rarity) * rand(1,floor(product.rarity/10)) //Is rare product going to spawn? If so, how many between 1 and rarity/10; so more common products have a bigger cap. Also; if regular product has no amount defined returns rand(1,10)
 			product.category = category
 			product_records.Add(product)
 

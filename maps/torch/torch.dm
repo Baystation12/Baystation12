@@ -66,6 +66,7 @@
 	#include "items/machinery.dm"
 	#include "items/manuals.dm"
 	#include "items/stamps.dm"
+	#include "items/medal_dispenser.dm"
 	#include "items/uniform_vendor.dm"
 	#include "items/rigs.dm"
 	#include "items/solbanner.dm"

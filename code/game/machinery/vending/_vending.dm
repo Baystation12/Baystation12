@@ -44,7 +44,8 @@
 	var/status_message = "" // Status screen messages like "insufficient funds", displayed in NanoUI
 	var/status_error = 0 // Set to 1 if status_message is an error
 	var/list/prices = list() // Prices for each product as (/item/path = price). Unlisted items are free.
-	var/list/products	= list() // Stock for each product as (/item/path = count)
+	var/list/rare_products = list() //Probability of each rare product of spawning in. Need to have value of 'null' associated with it in product list for this to work. Main limitation is cannot spawn more than 1 rare product.
+	var/list/products	= list() // Stock for each product as (/item/path = count). If you want product amount to be randomized between 1-10/based on rarity then make /item/path = null
 	var/list/contraband	= list() // Stock for products hidden by the contraband wire as (/item/path = count)
 	var/list/premium = list() // Stock for products hidden by coin insertion as (/item/path = count)
 
@@ -474,8 +475,9 @@
 		for (var/entry in current_list[1])
 			var/datum/stored_items/vending_products/product = new/datum/stored_items/vending_products(src, entry)
 			product.price = (entry in prices) ? prices[entry] : 0
+			product.rarity = (entry in rare_products) ? rare_products[entry] : 100 //If product is not declared rare, defaults to 100.
 			if (populate_parts)
-				product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
+				product.amount = (current_list[1][entry]) ? current_list[1][entry] : prob(product.rarity) * rand(1,floor(product.rarity/10)) //Is rare product going to spawn? If so, how many between 1 and rarity/10; so more common products have a bigger cap. Also; if regular product has no amount defined returns rand(1,10)
 			product.category = category
 			product_records.Add(product)
 
