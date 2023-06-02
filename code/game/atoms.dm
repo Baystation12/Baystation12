@@ -111,8 +111,7 @@
 
 /atom/Destroy()
 	QDEL_NULL(reagents)
-	LAZYCLEARLIST(managed_overlays)
-	return ..()
+	. = ..()
 
 /**
  * Called when the atom is affected by luminol. Reveals blood present on the atom, or blood decal atoms.

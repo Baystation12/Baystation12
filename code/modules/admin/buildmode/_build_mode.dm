@@ -14,8 +14,7 @@
 /datum/build_mode/Destroy()
 	QDEL_NULL(overlay)
 	host = null
-	user = null
-	return ..()
+	. = ..()
 
 /datum/build_mode/proc/OnClick(atom/A, list/parameters)
 	return
