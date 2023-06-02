@@ -26,9 +26,8 @@
 /mob/observer/eye/Destroy()
 	release(owner)
 	owner = null
-	LAZYCLEARLIST(visibleChunks)
 	visualnet = null
-	return ..()
+	. = ..()
 
 /mob/observer/eye/Move(n, direct)
 	if(owner == src)

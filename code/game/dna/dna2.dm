@@ -83,12 +83,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	var/base_skin = ""
 	var/list/body_markings = list()
 
-
-/datum/dna/Destroy()
-	LAZYCLEARLIST(body_markings)
-	return ..()
-
-
 // Make a copy of this strand.
 // USE THIS WHEN COPYING STUFF OR YOU'LL GET CORRUPTION!
 /datum/dna/proc/Clone()

@@ -12,13 +12,6 @@ Null key is always #000000.
 	)
 	var/list/assigned = list()
 
-
-/color_pool/Destroy()
-	LAZYCLEARLIST(available)
-	LAZYCLEARLIST(assigned)
-	return ..()
-
-
 /color_pool/proc/get(key)
 	if (isnull(key))
 		return "#000000"
