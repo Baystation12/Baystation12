@@ -68,11 +68,6 @@
 	)
 
 
-/obj/machinery/vending/hydroseeds/vend(datum/stored_items/vending_products/products, mob/living/user)
-	..()
-	flick("[icon_state]-shelf[rand(3)]", src)
-
-
 /obj/machinery/vending/hydroseeds/build_inventory()
 	var/list/all_products = list(
 		list(products, VENDOR_CATEGORY_NORMAL),
