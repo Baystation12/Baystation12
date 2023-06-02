@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `erro_player` (
   `lastadminrank` text DEFAULT NULL,
   `staffwarn` text DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `ckey` (`ckey`) USING HASH,
+  UNIQUE KEY `ckey` (`ckey`(768)) USING HASH,
   KEY `ckey_2` (`ckey`(768)),
   KEY `ip` (`ip`(768)),
   KEY `computerid` (`computerid`(768))
@@ -151,3 +151,26 @@ CREATE TABLE IF NOT EXISTS `budget`
 	`is_valid` boolean DEFAULT true NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/* SS220 ban table */
+ALTER TABLE `ban`
+  MODIFY COLUMN `serverip` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  MODIFY COLUMN `bantype` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  MODIFY COLUMN `reason` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  MODIFY COLUMN `job` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  MODIFY COLUMN `ckey` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  MODIFY COLUMN `computerid` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  MODIFY COLUMN `ip` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  MODIFY COLUMN `a_ckey` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  MODIFY COLUMN `a_computerid` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  MODIFY COLUMN `a_ip` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  MODIFY COLUMN `who` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  MODIFY COLUMN `adminwho` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  MODIFY COLUMN `edits` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  MODIFY COLUMN `unbanned` tinyint(1) DEFAULT NULL,
+  MODIFY COLUMN `unbanned_datetime` datetime DEFAULT NULL,
+  MODIFY COLUMN `unbanned_ckey` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  MODIFY COLUMN `unbanned_computerid` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  MODIFY COLUMN `unbanned_ip` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  ADD INDEX `computerid` (`computerid`),
+  ADD INDEX `ip` (`ip`);
