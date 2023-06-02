@@ -10705,7 +10705,7 @@
 /turf/space,
 /area/space)
 "asn" = (
-/obj/machinery/jukebox/old,
+/obj/machinery/jukebox/custom_tape/old,
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 8
 	},

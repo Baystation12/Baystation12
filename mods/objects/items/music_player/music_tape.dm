@@ -1,4 +1,4 @@
-// Music tape code :3
+// Music tape code.
 /obj/item/music_tape
 	name = "tape"
 	desc = "Magnetic tape adapted to outdated but proven music formats such as ogg, midi and module files."

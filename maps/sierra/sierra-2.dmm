@@ -13101,7 +13101,7 @@
 	pixel_y = -6;
 	req_access = list("ACCESS_BAR")
 	},
-/obj/machinery/jukebox/old,
+/obj/machinery/jukebox/custom_tape/old,
 /obj/machinery/light/led/small,
 /turf/simulated/floor/wood/ebony,
 /area/crew_quarters/bar)
@@ -36991,7 +36991,7 @@
 /turf/space,
 /area/space)
 "okY" = (
-/obj/machinery/jukebox,
+/obj/machinery/jukebox/custom_tape,
 /turf/simulated/floor/carpet/purple,
 /area/crew_quarters/lounge_big)
 "onA" = (

@@ -2841,7 +2841,7 @@
 	dir = 1;
 	icon_state = "tube1"
 	},
-/obj/machinery/jukebox,
+/obj/machinery/jukebox/custom_tape,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gv" = (

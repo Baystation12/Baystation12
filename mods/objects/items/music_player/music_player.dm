@@ -1,3 +1,4 @@
+// This pack is transfered from infinity pack without redaction and in some day needs to be rewieved. As for example sounds transfered in sounds.dm
 GLOBAL_LIST_EMPTY(music_players)
 
 #define PANEL_CLOSED 0

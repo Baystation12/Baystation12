@@ -1,0 +1,10 @@
+#ifndef MODPACK_MUSIC_PLAYER
+#define MODPACK_MUSIC_PLAYER
+
+#include "music_player.dm"
+#include "music_tape.dm"
+#include "music_writer.dm"
+#include "subtypes_player.dm"
+#include "subtypes_tape.dm"
+
+#endif

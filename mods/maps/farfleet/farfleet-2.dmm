@@ -1441,7 +1441,7 @@
 /obj/effect/floor_decal/corner/b_green/diagonal{
 	dir = 8
 	},
-/obj/machinery/jukebox/old,
+/obj/machinery/jukebox/custom_tape/old,
 /turf/simulated/floor/tiled/white,
 /area/ship/farfleet/crew/canteen)
 "oH" = (

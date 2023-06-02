@@ -4314,7 +4314,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/liberia/personellroom2)
 "hk" = (
-/obj/machinery/jukebox/old,
+/obj/machinery/jukebox/custom_tape/old,
 /turf/simulated/floor/wood/walnut,
 /area/liberia/bar)
 "hl" = (

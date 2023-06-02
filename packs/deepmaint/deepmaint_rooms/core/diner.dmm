@@ -221,7 +221,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "zH" = (
-/obj/machinery/jukebox/old,
+/obj/machinery/jukebox/custom_tape/old,
 /turf/simulated/floor/wood/yew,
 /area/map_template/deepmaint)
 "zM" = (

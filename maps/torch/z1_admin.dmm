@@ -8376,7 +8376,7 @@
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aOB" = (
-/obj/machinery/jukebox,
+/obj/machinery/jukebox/custom_tape,
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -22

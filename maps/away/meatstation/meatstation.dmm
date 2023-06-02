@@ -828,7 +828,7 @@
 /turf/simulated/floor/plating,
 /area/meatstation/dorm)
 "cf" = (
-/obj/machinery/jukebox/old,
+/obj/machinery/jukebox/custom_tape/old,
 /turf/simulated/floor/tiled,
 /area/meatstation/dorm)
 "cg" = (

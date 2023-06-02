@@ -4720,7 +4720,7 @@
 	},
 /area/tdome/tdomeadmin)
 "aBx" = (
-/obj/machinery/jukebox/old,
+/obj/machinery/jukebox/custom_tape/old,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -11551,7 +11551,7 @@
 	},
 /area/centcom)
 "jMH" = (
-/obj/machinery/jukebox/old,
+/obj/machinery/jukebox/custom_tape/old,
 /obj/effect/floor_decal/carpet/purple{
 	dir = 1
 	},

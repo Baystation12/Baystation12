@@ -1174,7 +1174,7 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 9
 	},
-/obj/machinery/jukebox/old,
+/obj/machinery/jukebox/custom_tape/old,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/crew/saloon)
 "cv" = (
