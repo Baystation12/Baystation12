@@ -134,7 +134,7 @@
 		return
 	emagged = TRUE
 	req_access.Cut()
-	vendor_wires.UpdateShowContraband(TRUE)
+	UpdateShowContraband(TRUE)
 	SSnano.update_uis(src)
 	to_chat(user, "You short out the product lock on \the [src].")
 	return 1
