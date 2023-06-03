@@ -26,6 +26,7 @@ SUBSYSTEM_DEF(supply)
 		"manifest" = "From exported manifests",
 		"crate" = "From exported crates",
 		"gep" = "From uploaded good explorer points",
+		"anomaly" = "From scanned and categorized anomalies",
 		"total" = "Total" // If you're adding additional point sources, add it here in a new line. Don't forget to put a comma after the old last line.
 	)
 
@@ -34,13 +35,13 @@ SUBSYSTEM_DEF(supply)
 
 	//Build master supply list
 	var/singleton/hierarchy/supply_pack/root = GET_SINGLETON(/singleton/hierarchy/supply_pack)
-	for(var/singleton/hierarchy/supply_pack/sp in root.children)
+	for (var/singleton/hierarchy/supply_pack/sp in root.children)
 		if(sp.is_category())
 			for(var/singleton/hierarchy/supply_pack/spc in sp.get_descendents())
 				spc.setup()
 				master_supply_list += spc
 
-	for(var/material/mat in SSmaterials.materials)
+	for (var/material/mat in SSmaterials.materials)
 		if(mat.sale_price > 0)
 			point_source_descriptions[mat.display_name] = "From exported [mat.display_name]"
 
@@ -64,14 +65,15 @@ SUBSYSTEM_DEF(supply)
 
 	//To stop things being sent to centcomm which should not be sent to centcomm. Recursively checks for these types.
 /datum/controller/subsystem/supply/proc/forbidden_atoms_check(atom/A)
-	if(istype(A,/mob/living))
-		return 1
-	if(istype(A,/obj/item/disk/nuclear))
-		return 1
-	if(istype(A,/obj/machinery/nuclearbomb))
-		return 1
-	if(istype(A,/obj/machinery/tele_beacon))
-		return 1
+	if (istype(A, /mob/living))
+		if (istype(A, /mob/living/simple_animal/hostile/human))
+			return TRUE
+	if (istype(A, /obj/item/disk/nuclear))
+		return TRUE
+	if (istype(A, /obj/machinery/nuclearbomb))
+		return TRUE
+	if (istype(A, /obj/machinery/tele_beacon))
+		return TRUE
 
 	for(var/i=1, i<=length(A.contents), i++)
 		var/atom/B = A.contents[i]
@@ -113,7 +115,68 @@ SUBSYSTEM_DEF(supply)
 					// Must sell ore detector disks in crates
 					if(istype(A, /obj/item/disk/survey))
 						var/obj/item/disk/survey/D = A
-						add_points_from_source(round(D.Value() * 0.005), "gep")
+						add_points_from_source(round(D.Value() * 0.05), "gep")
+
+			// Sell artefacts (in anomaly cages)
+			if (istype(AM, /obj/machinery/anomaly_container))
+				var/obj/machinery/anomaly_container/AC = AM
+				callHook("sell_anomalycage", list(AC, subarea))
+				if (AC.contained)
+					var/obj/machinery/artifact/C = AC.contained
+					var/list/my_effects
+					if (C.my_effect)
+						var/datum/artifact_effect/eone = C.my_effect
+						my_effects += eone
+					if (C.secondary_effect)
+						var/datum/artifact_effect/etwo = C.secondary_effect
+						my_effects += etwo
+					//Different effects and trigger combos give different rewards
+
+					if (AC.attached_paper) //Needs to have a scan sheet of the anomaly to the container.
+						if (istype(AC.attached_paper, /obj/item/paper/anomaly_scan))
+							var/obj/item/paper/anomaly_scan/P = AC.attached_paper
+							if (!P.is_copy)
+								for (var/datum/artifact_effect/E in my_effects)
+									switch (E.effect_type)
+										if (EFFECT_UNKNOWN, EFFECT_PSIONIC)
+											points += 20
+										if (EFFECT_ENERGY, EFFECT_ELECTRO)
+											points += 30
+										if (EFFECT_ORGANIC, EFFECT_SYNTH)
+											points += 40
+										if (EFFECT_BLUESPACE, EFFECT_PARTICLE)
+											points += 50
+										else
+											points += 10
+											//In case there's ever a broken artifact, it's still worth SOMETHING
+									switch (E.trigger.trigger_type)
+										if (TRIGGER_SIMPLE)
+											points += 5
+										if (TRIGGER_COMPLEX)
+											points += 10
+										else
+											points += 2
+
+				add_points_from_source(points, "anomaly")
+
+			//Only for animals in stasis cages.
+			if (istype(AM, /obj/machinery/stasis_cage))
+				var/obj/machinery/stasis_cage/SC = AM
+				var/points_per_animal = 10
+				callHook("sell_animal", list(SC, subarea))
+				if (SC.contained)
+					var/mob/living/simple_animal/CA = SC.contained
+					if (istype(CA, /mob/living/simple_animal/hostile/human))
+						return
+					if (istype(CA, /mob/living/simple_animal/passive))
+						add_points_from_source(points_per_animal, "animal")
+					if (istype(CA, /mob/living/simple_animal/hostile/retaliate/beast))
+						add_points_from_source((points_per_animal * 2), "animal")
+						return //So that it doesn't give points twice for beasts
+					if (istype(CA, /mob/living/simple_animal/hostile))
+						add_points_from_source((points_per_animal * 4), "animal")
+					if (CA.stat != DEAD) //Alive gives more.
+						add_points_from_source((point_sources["animal"] * 2), "animal")
 
 			qdel(AM)
 
@@ -170,7 +233,7 @@ SUBSYSTEM_DEF(supply)
 			info +="CONTENTS:<br><ul>"
 
 			slip = new /obj/item/paper/manifest(A, JOINTEXT(info))
-			slip.is_copy = 0
+			slip.is_copy = FALSE
 
 		//spawn the stuff, finish generating the manifest while you're at it
 		if(SP.access)

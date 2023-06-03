@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/pirate
+/mob/living/simple_animal/hostile/human/pirate
 	name = "Pirate"
 	desc = "Does what he wants cause a pirate is free."
 	icon_state = "piratemelee"
@@ -24,7 +24,7 @@
 
 	ai_holder = /datum/ai_holder/simple_animal/melee/pirate
 
-/mob/living/simple_animal/hostile/pirate/ranged
+/mob/living/simple_animal/hostile/human/pirate/ranged
 	name = "Pirate Gunner"
 	icon_state = "pirateranged"
 	icon_living = "pirateranged"
@@ -38,7 +38,7 @@
 
 	ai_holder = /datum/ai_holder/simple_animal/pirate/ranged
 
-/mob/living/simple_animal/hostile/pirate/death(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/hostile/human/pirate/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
 	if(corpse)
 		new corpse (src.loc)
