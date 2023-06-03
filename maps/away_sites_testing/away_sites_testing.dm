@@ -21,6 +21,7 @@
 	#include "../away/miningstation/miningstation.dm"
 	#include "../away/scavver/scavver_gantry.dm"
 	#include "../away/voxship/voxship.dm"
+	#include "../away/supermatter_powerplant/supermatter_powerplant.dm"
 
 	#define using_map_DATUM /datum/map/away_sites_testing
 
