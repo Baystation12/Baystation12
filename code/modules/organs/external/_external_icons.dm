@@ -1,5 +1,8 @@
 var/global/list/limb_icon_cache = list()
 
+/// Layer for bodyparts that should appear behind every other bodypart - Mostly, legs when facing WEST or EAST
+#define BODYPARTS_LOW_LAYER -2
+
 /obj/item/organ/external/set_dir()
 	return
 
@@ -82,26 +85,30 @@ var/global/list/limb_icon_cache = list()
 	else if(owner && owner.gender == FEMALE)
 		gender = "_f"
 
-	icon_state = "[icon_name][gender]"
+
+	var/chosen_icon = ""
+	var/chosen_icon_state = ""
+
+	chosen_icon_state = "[icon_name][gender]"
 	if(species.base_skin_colours && !isnull(species.base_skin_colours[base_skin]))
-		icon_state += species.base_skin_colours[base_skin]
+		chosen_icon_state += species.base_skin_colours[base_skin]
 
 	icon_cache_key = "[icon_state]_[species ? species.name : SPECIES_HUMAN]"
 
 	if(force_icon)
-		icon = force_icon
+		chosen_icon = force_icon
 	else if (BP_IS_ROBOTIC(src))
-		icon = 'icons/mob/human_races/cyberlimbs/robotic.dmi'
+		chosen_icon = 'icons/mob/human_races/cyberlimbs/robotic.dmi'
 	else if (!dna)
-		icon = 'icons/mob/human_races/species/human/body.dmi'
+		chosen_icon = 'icons/mob/human_races/species/human/body.dmi'
 	else if (status & ORGAN_MUTATED)
-		icon = species.deform
+		chosen_icon = species.deform
 	else if (owner && (MUTATION_SKELETON in owner.mutations))
-		icon = 'icons/mob/human_races/species/human/skeleton.dmi'
+		chosen_icon = 'icons/mob/human_races/species/human/skeleton.dmi'
 	else
-		icon = species.get_icobase(owner)
+		chosen_icon = species.get_icobase(owner)
 
-	mob_icon = apply_colouration(new/icon(icon, icon_state))
+	var/icon/mob_icon = apply_colouration(new/icon(chosen_icon, chosen_icon_state))
 
 	var/list/sorted = list()
 	for(var/E in markings)
@@ -116,7 +123,6 @@ var/global/list/limb_icon_cache = list()
 			icon_cache_key += "[M.name][color]"
 			ADD_SORTED(sorted, list(list(M.draw_order, I, M)), /proc/cmp_marking_order)
 	for (var/entry in sorted)
-		overlays |= entry[2]
 		mob_icon.Blend(entry[2], entry[3]["layer_blend"])
 
 	if(body_hair && islist(h_col) && length(h_col) >= 3)
@@ -129,12 +135,49 @@ var/global/list/limb_icon_cache = list()
 
 	if(model)
 		icon_cache_key += "_model_[model]"
-	dir = EAST
-	icon = mob_icon
 
-/obj/item/organ/external/proc/get_icon()
+	//Fix leg layering here
+	//Alternatively you could use masks but it's about same amount of work
+	if(icon_position & (LEFT | RIGHT))
+		var/icon/under_icon = new('icons/mob/human.dmi',"blank")
+		under_icon.Insert(new/icon(mob_icon,dir=NORTH),dir=NORTH)
+		under_icon.Insert(new/icon(mob_icon,dir=SOUTH),dir=SOUTH)
+		if(!(icon_position & LEFT))
+			under_icon.Insert(new/icon(mob_icon,dir=EAST),dir=EAST)
+		if(!(part.icon_position & RIGHT))
+			under_icon.Insert(new/icon(mob_icon,dir=WEST),dir=WEST)
+		//At this point, the icon has all the valid states for both left and right leg overlays
+		var/mutable_appearance/upper_appearance = mutable_appearance(under_icon, chosen_icon_state)
+		upper_appearance.layer = FLOAT_LAYER
+		mob_overlays += upper_appearance
+
+		if(part.icon_position & LEFT)
+			under_icon.Insert(new/icon(mob_icon,dir=EAST),dir=EAST)
+		if(part.icon_position & RIGHT)
+			under_icon.Insert(new/icon(mob_icon,dir=WEST),dir=WEST)
+
+		var/mutable_appearance/under_appearance = mutable_appearance(under_icon, chosen_icon_state)
+		upper_appearance.layer = BODYPARTS_LOW_LAYER
+		mob_overlays += under_appearance
+	else
+		var/mutable_appearance/limb_appearance = mutable_appearance(mob_icon, chosen_icon_state)
+		if(part.icon_position & UNDER)
+			limb_appearance.layer = BODYPARTS_LOW_LAYER
+		mob_overlays += limb_appearance
+
+	if(blocks_emissive)
+		var/mutable_appearance/limb_em_block = emissive_blocker(chosen_icon, chosen_icon_state, FLOAT_LAYER, alpha = limb_appearance.alpha)
+		limb_em_block.dir = dir
+		mob_overlays += limb_em_block
+
+	overlays += mob_overlays
+
+	dir = EAST
+	icon = null
+
+/obj/item/organ/external/proc/get_overlays()
 	update_icon()
-	return mob_icon
+	return mob_overlays
 
 // Returns an image for use by the human health dolly HUD element.
 // If the limb is in pain, it will be used as a minimum damage
