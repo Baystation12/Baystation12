@@ -135,10 +135,8 @@
 		while(null in owner.organs)
 			owner.organs -= null
 
-	if (autopsy_data)
-		autopsy_data.Cut()
-	hud_damage_image = null
-	species = null
+	if(autopsy_data)    autopsy_data.Cut()
+
 	return ..()
 
 /obj/item/organ/external/set_dna(datum/dna/new_dna)

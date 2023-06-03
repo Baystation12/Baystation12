@@ -113,15 +113,14 @@
 /obj/item/clothing/proc/accessory_deleted(obj/item/clothing/accessory/A)
 	remove_accessory(null, A)
 
-/obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A, no_update)
+/obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A)
 	if(!A || !(A in accessories))
 		return
 
 	A.on_removed(user)
 	accessories -= A
-	if (!no_update)
-		update_accessory_slowdown()
-		update_clothing_icon()
+	update_accessory_slowdown()
+	update_clothing_icon()
 	GLOB.destroyed_event.unregister(A, src, .proc/accessory_deleted)
 
 

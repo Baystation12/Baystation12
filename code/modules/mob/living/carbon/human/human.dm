@@ -19,7 +19,7 @@
 	stance_limbs = list()
 
 	if(!dna)
-		dna = new
+		dna = new /datum/dna(null)
 		// Species name is handled by set_species()
 
 	if(!species)
@@ -61,25 +61,11 @@
 	if (dream_timer)
 		deltimer(dream_timer)
 		dream_timer = null
-	. = ..()
 	GLOB.human_mobs -= src
 	worn_underwear = null
 	for(var/organ in organs)
 		qdel(organ)
-	default_language = null
-	LAZYCLEARLIST(cultural_info)
-	LAZYCLEARLIST(bad_external_organs)
-	LAZYCLEARLIST(hud_list)
-	LAZYCLEARLIST(languages)
-	LAZYCLEARLIST(usable_emotes)
-	char_branch = null
-	char_rank = null
-	species = null
-	backpack_setup = null
-	QDEL_NULL(vessel)
-	QDEL_NULL(dna)
-	LAZYCLEARLIST(overlays_standing)
-
+	return ..()
 
 /mob/living/carbon/human/get_ingested_reagents()
 	if(should_have_organ(BP_STOMACH))
@@ -1150,18 +1136,24 @@
 
 
 /mob/living/carbon/human/proc/set_species(new_species, default_colour = 1)
-	if (!dna)
-		if (!new_species)
+	if(!dna)
+		if(!new_species)
 			new_species = SPECIES_HUMAN
-		dna = new
-	else if (!new_species)
-		new_species = dna.species
-	if (!all_species[new_species])
+	else
+		if(!new_species)
+			new_species = dna.species
+
+	// No more invisible screaming wheelchairs because of set_species() typos.
+	if(!all_species[new_species])
 		new_species = SPECIES_HUMAN
-	dna.species = new_species
-	if (species)
-		if (species.name && species.name == new_species)
+	if(dna)
+		dna.species = new_species
+
+	if(species)
+
+		if(species.name && species.name == new_species)
 			return
+
 		// Clear out their species abilities.
 		species.remove_base_auras(src)
 		species.remove_inherent_verbs(src)
@@ -1226,19 +1218,15 @@
 	bone_material = species.bone_material
 	bone_amount =   species.bone_amount
 
-	if (!vessel)
-		vessel = new (species.blood_volume, src)
-	if (vessel.total_volume < species.blood_volume)
-		vessel.maximum_volume = species.blood_volume
-		vessel.add_reagent(/datum/reagent/blood, species.blood_volume - vessel.total_volume)
-	else if (vessel.total_volume > species.blood_volume)
-		vessel.remove_reagent(/datum/reagent/blood, vessel.total_volume - species.blood_volume)
-		vessel.maximum_volume = species.blood_volume
-	dna.ready_dna(src)
-	fixblood()
-
 	spawn(0)
 		regenerate_icons()
+		if(vessel.total_volume < species.blood_volume)
+			vessel.maximum_volume = species.blood_volume
+			vessel.add_reagent(/datum/reagent/blood, species.blood_volume - vessel.total_volume)
+		else if(vessel.total_volume > species.blood_volume)
+			vessel.remove_reagent(/datum/reagent/blood, vessel.total_volume - species.blood_volume)
+			vessel.maximum_volume = species.blood_volume
+		fixblood()
 
 	// Rebuild the HUD and visual elements.
 	if(client)

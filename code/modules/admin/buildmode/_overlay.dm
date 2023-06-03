@@ -20,14 +20,14 @@
 			M.screen_loc = "CENTER[x < 0 ? "-" : "+"][abs(x)],CENTER[y < 0 ? "-" : "+"][abs(y)]"
 			M.appearance_flags = DEFAULT_APPEARANCE_FLAGS | KEEP_APART|RESET_COLOR|RESET_ALPHA|RESET_TRANSFORM|NO_CLIENT_COLOR|TILE_BOUND
 			display_atoms += M
-	..()
+	. = ..()
 
 /datum/buildmode_overlay/Destroy()
 	Hide()
-	LAZYCLEARLIST(display_atoms)
+	display_atoms = null
 	buildmode = null
 	user = null
-	return ..()
+	. = ..()
 
 /datum/buildmode_overlay/proc/Show()
 	if (shown || QDELETED(user?.client))

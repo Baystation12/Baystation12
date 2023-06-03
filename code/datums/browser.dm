@@ -6,23 +6,14 @@
 	var/height = 0
 	var/atom/ref = null
 	var/window_options = "focus=0;can_close=1;can_minimize=1;can_maximize=0;can_resize=1;titlebar=1;" // window option is set using window_id
-	var/list/stylesheets = list()
-	var/list/scripts = list()
+	var/stylesheets[0]
+	var/scripts[0]
 	var/title_image
 	var/head_elements
 	var/body_elements
 	var/head_content = ""
 	var/content = ""
 	var/title_buttons = ""
-
-
-/datum/browser/Destroy()
-	user = null
-	ref = null
-	LAZYCLEARLIST(stylesheets)
-	LAZYCLEARLIST(scripts)
-	title_image = null
-	return ..()
 
 
 /datum/browser/New(nuser, nwindow_id, ntitle = 0, nwidth = 0, nheight = 0, atom/nref = null)
