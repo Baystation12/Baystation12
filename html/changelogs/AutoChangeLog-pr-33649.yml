@@ -1,0 +1,4 @@
+author: LordNest
+delete-after: true
+changes:
+  - rscadd: Cleanbots and Farmbots use sprites ported from [source]
