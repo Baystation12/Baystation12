@@ -23,7 +23,7 @@ function download_rust_g {
     echo "Using cached rust_g."
     cp "$HOME/librust_g/librust_g.so" $PWD/librust_g.so
   else
-    wget -O $PWD/librust_g.so "https://raw.githubusercontent.com/SierraBay/SierraBay12/3660bb8e0becaea80659d21a3e78b85aa9f8f890/librust_g.so"
+    wget -O $PWD/librust_g.so "https://github.com/ss220-space/rust-g-tg/releases/download/2.0.0-ss220/librust_g.so"
     mkdir -p $HOME/librust_g
     cp $PWD/librust_g.so $HOME/librust_g/librust_g.so
   fi
