@@ -113,7 +113,9 @@
 		spawn(rand(0, 15))
 			icon_state = "[initial(icon_state)]-off"
 	if (panel_open)
-		add_overlay(image(icon, "[initial(icon_state)]-panel"))
+		overlays += image(icon, "[initial(icon_state)]-panel")
+	if(!vend_ready)
+		overlays += image(icon, "[initial(icon_state)]-shelf[rand(3)]")
 
 
 /obj/machinery/vending/ex_act(severity)
@@ -134,7 +136,7 @@
 		return
 	emagged = TRUE
 	req_access.Cut()
-	vendor_wires.UpdateShowContraband(TRUE)
+	UpdateShowContraband(TRUE)
 	SSnano.update_uis(src)
 	to_chat(user, "You short out the product lock on \the [src].")
 	return 1
@@ -381,6 +383,7 @@
 	status_message = "Vending..."
 	status_error = FALSE
 	SSnano.update_uis(src)
+	update_icon()
 	if (product.category & VENDOR_CATEGORY_COIN)
 		if(!coin)
 			to_chat(user, SPAN_NOTICE("You need to insert a coin to get this item."))
@@ -415,6 +418,7 @@
 		status_message = ""
 		status_error = FALSE
 		vend_ready = TRUE
+		update_icon()
 		currently_vending = null
 		SSnano.update_uis(src)
 
