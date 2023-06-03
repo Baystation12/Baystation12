@@ -85,6 +85,10 @@
 /obj/structure/filingcabinet/chestdrawer,
 /obj/effect/decal/cleanable/cobweb2,
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/iff_beacon{
+	dir = 8;
+	pixel_x = 20
+	},
 /turf/simulated/floor/wood/walnut,
 /area/yacht/bridge)
 "aq" = (

@@ -2253,6 +2253,10 @@
 	dir = 4
 	},
 /obj/structure/table/steel,
+/obj/machinery/iff_beacon{
+	dir = 4;
+	pixel_x = -22
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
 "en" = (
@@ -12968,10 +12972,6 @@
 /obj/machinery/seed_storage/garden,
 /turf/simulated/floor/tiled,
 /area/hydroponics/third_deck_storage)
-"uH" = (
-/obj/effect/paint_stripe/yellow,
-/turf/simulated/wall/r_titanium,
-/area/guppy_hangar/start)
 "uI" = (
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/beige/border,
@@ -17563,10 +17563,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/center)
-"Cm" = (
-/obj/effect/paint_stripe/blue,
-/turf/simulated/wall/r_titanium,
-/area/exploration_shuttle/cockpit)
 "Cn" = (
 /obj/effect/paint/nt_white,
 /obj/effect/paint_stripe/nt_red,
@@ -30553,6 +30549,10 @@
 	},
 /obj/machinery/cell_charger,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/iff_beacon{
+	dir = 1;
+	pixel_y = -22
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/guppy_hangar/start)
 "YZ" = (
@@ -52887,7 +52887,7 @@ Ho
 Hx
 GW
 HT
-Cm
+UG
 Iw
 em
 Vc
@@ -54523,7 +54523,7 @@ GQ
 Fs
 AT
 Ji
-uH
+Ur
 DE
 Ur
 Ur

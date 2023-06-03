@@ -1266,6 +1266,9 @@
 	dir = 4;
 	pixel_x = -21
 	},
+/obj/machinery/iff_beacon/table{
+	pixel_y = 8
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/lifepod)
 "kw" = (
@@ -2090,7 +2093,7 @@
 	dir = 1;
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/smokable/transstellar = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/smokable/transstellar=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo/random=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
@@ -4336,6 +4339,10 @@
 /obj/item/device/scanner/gas,
 /obj/structure/table/rack,
 /obj/item/tank/hydrogen,
+/obj/machinery/iff_beacon{
+	dir = 8;
+	pixel_x = 20
+	},
 /turf/simulated/floor,
 /area/scavver/harvestpod)
 "KX" = (
@@ -4566,6 +4573,9 @@
 /obj/item/device/radio/map_preset/scavver,
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 1
+	},
+/obj/machinery/iff_beacon/table{
+	pixel_y = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)

@@ -62,6 +62,10 @@
 	},
 /obj/item/device/radio/map_preset/bearcat,
 /obj/item/cell/high,
+/obj/machinery/iff_beacon/table{
+	dir = 4;
+	pixel_x = -6
+	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/command/bridge)
 "aj" = (

@@ -23929,7 +23929,6 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/radio_beacon,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/bridge)
 "aNu" = (

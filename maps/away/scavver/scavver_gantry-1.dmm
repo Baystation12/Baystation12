@@ -709,6 +709,10 @@
 	dir = 8;
 	pixel_x = 20
 	},
+/obj/machinery/iff_beacon/table/name_change{
+	dir = 4;
+	pixel_x = 8
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/calypso)
 "kU" = (

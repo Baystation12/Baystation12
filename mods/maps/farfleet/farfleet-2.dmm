@@ -2246,6 +2246,9 @@
 /obj/machinery/pointdefense_control{
 	initial_id_tag = "snz_pd"
 	},
+/obj/machinery/iff_beacon{
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/snz)
 "wb" = (

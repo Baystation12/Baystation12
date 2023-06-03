@@ -844,6 +844,13 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
+"Sr" = (
+/obj/machinery/iff_beacon{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled,
+/area/bluespaceriver/ship)
 
 (1,1,1) = {"
 aa
@@ -3025,7 +3032,7 @@ ac
 ac
 an
 ao
-au
+Sr
 ay
 aG
 aO

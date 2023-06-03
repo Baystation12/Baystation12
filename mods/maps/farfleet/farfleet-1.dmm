@@ -496,6 +496,7 @@
 	req_access = list("ACCESS_ICCGN")
 	},
 /obj/structure/cable,
+/obj/item/stack/material/glass/boron,
 /turf/simulated/floor/tiled,
 /area/ship/farfleet/engineering/storage)
 "bC" = (
@@ -997,13 +998,13 @@
 /turf/simulated/floor/tiled,
 /area/ship/farfleet/command/equipment)
 "dm" = (
-/obj/structure/window/phoronreinforced{
-	dir = 1
-	},
-/obj/structure/window/phoronreinforced{
+/obj/structure/table/steel_reinforced,
+/obj/structure/window/boron_reinforced{
 	dir = 8
 	},
-/obj/structure/table/steel_reinforced,
+/obj/structure/window/boron_reinforced{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/farfleet/command/launcher)
 "do" = (
@@ -1849,7 +1850,6 @@
 "gJ" = (
 /obj/structure/table/rack,
 /obj/item/stack/material/ocp/fifty,
-/obj/item/stack/material/glass/phoronrglass/ten,
 /obj/item/stack/material/plasteel/fifty,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -2693,12 +2693,12 @@
 /obj/machinery/computer/ship/disperser/military{
 	dir = 1
 	},
-/obj/structure/window/phoronreinforced{
-	dir = 4
-	},
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -24
+	},
+/obj/structure/window/boron_reinforced{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/farfleet/command/launcher)
@@ -3356,24 +3356,26 @@
 /obj/machinery/button/alternate/door/bolts{
 	pixel_y = 28;
 	name = "Impulse Cannon Access";
-	id_tag = "pcannon";
-	pixel_x = 7
+	id_tag = "pcannon"
 	},
 /obj/machinery/button/blast_door{
 	pixel_y = 28;
-	pixel_x = -6;
+	pixel_x = -10;
 	id_tag = "pcbridge";
 	name = "Last Stand Shutters Control";
 	desc = "Bridge blast door control panel. If you press this not at the drill, there is a bad news for you. Die as a man."
 	},
 /obj/machinery/button/blast_door{
-	pixel_y = 38;
-	pixel_x = 8;
+	pixel_y = 28;
+	pixel_x = 10;
 	name = "Sensors Protection";
 	id_tag = "pcsensors"
 	},
 /obj/item/paper/farfleet/engines{
 	language = "Pan-Slavic"
+	},
+/obj/machinery/iff_beacon{
+	pixel_y = 38
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/command/bridge)
@@ -3501,7 +3503,7 @@
 /area/ship/farfleet/engineering/atmospherics)
 "oi" = (
 /obj/structure/table/steel_reinforced,
-/obj/structure/window/phoronreinforced{
+/obj/structure/window/boron_reinforced{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -3700,7 +3702,7 @@
 /area/ship/farfleet/crew/brig/emergency_armory)
 "pw" = (
 /obj/effect/floor_decal/industrial/outline/blue,
-/obj/machinery/telecomms/server/presets/farfleet,
+/obj/machinery/telecomms/allinone/iccgn,
 /turf/simulated/floor/tiled/steel_grid,
 /area/ship/farfleet/crew/comms)
 "pH" = (
@@ -3973,9 +3975,6 @@
 /obj/item/stack/material/ocp/fifty,
 /obj/item/stack/material/wood/maple/twentyfive,
 /obj/item/stack/material/wood/maple/twentyfive,
-/obj/item/stack/material/glass/phoronrglass{
-	amount = 30
-	},
 /turf/simulated/floor/tiled,
 /area/ship/farfleet/engineering/storage)
 "rM" = (
@@ -4237,14 +4236,14 @@
 /turf/simulated/floor/plating,
 /area/ship/farfleet/engineering/hallway)
 "tp" = (
-/obj/structure/window/phoronreinforced{
-	dir = 1
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	icon_state = "map_vent_out";
 	dir = 1
 	},
 /obj/structure/bed/chair,
+/obj/structure/window/boron_reinforced{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/farfleet/command/launcher)
 "tr" = (
@@ -6554,15 +6553,15 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/farfleet/medbay)
 "Pq" = (
-/obj/structure/window/phoronreinforced{
-	dir = 1
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
 /obj/machinery/door/window/phoronreinforced{
 	dir = 4;
 	name = "Impulse Cannon Control"
+	},
+/obj/structure/window/boron_reinforced{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/farfleet/command/launcher)

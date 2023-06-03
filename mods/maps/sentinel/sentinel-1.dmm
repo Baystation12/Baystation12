@@ -2131,6 +2131,9 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
 	},
+/obj/machinery/iff_beacon/table{
+	pixel_y = 8
+	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/patrol/command/bridge)
 "ea" = (
@@ -4614,6 +4617,10 @@
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	dir = 10
+	},
+/obj/machinery/iff_beacon{
+	dir = 8;
+	pixel_x = 22
 	},
 /turf/simulated/floor/plating,
 /area/ship/reaper)

@@ -150,6 +150,9 @@
 "av" = (
 /obj/structure/table/steel_reinforced,
 /obj/random/handgun,
+/obj/machinery/iff_beacon/table{
+	pixel_y = 8
+	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "aw" = (
