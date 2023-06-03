@@ -156,7 +156,7 @@
 			if(0)
 				return
 			if(FARMBOT_COLLECT)
-				action = "water" // Needs a better one
+				action = "collect" // Needs a better one
 				update_icons()
 				visible_message(SPAN_NOTICE("[src] starts [T.dead? "removing the plant from" : "harvesting"] \the [A]."))
 				busy = 1
