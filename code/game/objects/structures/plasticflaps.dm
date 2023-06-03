@@ -49,7 +49,7 @@
 			SPAN_NOTICE("\The [user] starts deconstructing \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start deconstructing \the [src] with \the [tool].")
 		)
-		if (!user.do_skilled(3 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 3) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (anchored)
 			USE_FEEDBACK_FAILURE("\The [src] has to be unanchored before you can deconstruct it.")

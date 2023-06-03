@@ -201,6 +201,7 @@
 	name = "Widen incision"
 	allowed_tools = list(
 		/obj/item/retractor = 100,
+		/obj/item/swapper/jaws_of_life = 80,
 		/obj/item/crowbar = 75,
 		/obj/item/material/knife = 50,
 		/obj/item/material/kitchen/utensil/fork = 50

@@ -10,7 +10,7 @@
 /singleton/surgery_step/cavity
 	shock_level = 40
 	delicate = 1
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
+	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT | SURGERY_NO_ROBOTIC
 
 /singleton/surgery_step/cavity/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
@@ -25,6 +25,7 @@
 	name = "Hollow out cavity"
 	allowed_tools = list(
 		/obj/item/surgicaldrill = 100,
+		/obj/item/swapper/power_drill = 90,
 		/obj/item/pen = 75,
 		/obj/item/stack/material/rods = 50
 	)

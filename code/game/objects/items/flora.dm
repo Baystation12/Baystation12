@@ -25,7 +25,7 @@
 	else
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 		visible_message(SPAN_NOTICE("\The [user] starts trimming the [src] with \the [S]."))
-		if (do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if (do_after(user, (S.toolspeed * 6) SECONDS, src, DO_PUBLIC_UNIQUE))
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 			to_chat (user, SPAN_NOTICE("You trim \the [src] with \the [S]. You probably should've used a pair of scissors."))
 			trimmed = TRUE

@@ -167,7 +167,7 @@
 			SPAN_NOTICE("\The [user] starts repairing \the [src] with \a [weapon]."),
 			SPAN_NOTICE("You start repairing \the [src] with \the [weapon].")
 		)
-		if (!user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, weapon) || !welder.remove_fuel(1))
+		if (!user.do_skilled((weapon.toolspeed * 2) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, weapon) || !welder.remove_fuel(1))
 			return TRUE
 		playsound(src, 'sound/items/Welder.ogg', 50, TRUE)
 		restore_health(get_max_health() / 5) // 20% repair per application
@@ -297,7 +297,7 @@
 	                              SPAN_NOTICE("You begin removing the [type_holding] holding \the [src]'s [M.display_name] [what] in place."))
 	if(sound)
 		playsound(src.loc, sound, 50, 1)
-	if(!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
+	if(!do_after(user, delay, src, DO_REPAIR_CONSTRUCT))
 		manipulating = 0
 		return M
 	user.visible_message(SPAN_NOTICE("\The [user] removes the [M.display_name] [what] from \the [src]."),
@@ -306,24 +306,27 @@
 	manipulating = 0
 	return null
 
-/obj/structure/table/proc/remove_reinforced(obj/item/screwdriver/S, mob/user)
-	reinforced = common_material_remove(user, reinforced, 40, "reinforcements", "screws", 'sound/items/Screwdriver.ogg')
+/obj/structure/table/proc/remove_reinforced(obj/item/S, mob/user)
+	reinforced = common_material_remove(user, reinforced, (S.toolspeed * 4) SECONDS, "reinforcements", "screws", 'sound/items/Screwdriver.ogg')
 
-/obj/structure/table/proc/remove_material(obj/item/wrench/W, mob/user)
-	material = common_material_remove(user, material, 20, "plating", "bolts", 'sound/items/Ratchet.ogg')
+/obj/structure/table/proc/remove_material(obj/item/W, mob/user)
+	material = common_material_remove(user, material, (W.toolspeed * 2) SECONDS, "plating", "bolts", 'sound/items/Ratchet.ogg')
 
-/obj/structure/table/proc/dismantle(obj/item/wrench/W, mob/user)
+/obj/structure/table/proc/dismantle(obj/item/W, mob/user)
+	if (!isWrench(W))
+		return
+
 	reset_mobs_offset()
 	if(manipulating) return
 	manipulating = 1
 	user.visible_message(SPAN_NOTICE("\The [user] begins dismantling \the [src]."),
-	                              SPAN_NOTICE("You begin dismantling \the [src]."))
+								SPAN_NOTICE("You begin dismantling \the [src]."))
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	if(!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
+	if(!do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 		manipulating = 0
 		return
 	user.visible_message(SPAN_NOTICE("\The [user] dismantles \the [src]."),
-	                              SPAN_NOTICE("You dismantle \the [src]."))
+								SPAN_NOTICE("You dismantle \the [src]."))
 	new /obj/item/stack/material/steel(src.loc)
 	qdel(src)
 	return

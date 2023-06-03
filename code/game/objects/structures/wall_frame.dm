@@ -93,7 +93,7 @@
 			SPAN_NOTICE("\The [user] starts dismantling \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start dismantling \the [src] with \the [tool].")
 		)
-		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
 		user.visible_message(
@@ -113,7 +113,7 @@
 			SPAN_NOTICE("\The [user] starts slicing \the [src] apart with \a [tool]."),
 			SPAN_NOTICE("You start slicing \the [src] apart with \the [tool].")
 		)
-		if (!user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 2) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		playsound(src, 'sound/items/Welder.ogg', 50, TRUE)
 		user.visible_message(

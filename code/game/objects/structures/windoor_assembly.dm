@@ -197,7 +197,7 @@
 			SPAN_NOTICE("\The [user] starts removing \the [src]'s circuits with \a [tool]."),
 			SPAN_NOTICE("You start removing \the [src]'s circuits with \the [tool].")
 		)
-		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (!electronics)
 			USE_FEEDBACK_FAILURE("\The [src] has no circuit to remove.")
@@ -226,7 +226,7 @@
 			SPAN_NOTICE("\The [user] starts cutting \the [src]'s wiring with \a [tool]."),
 			SPAN_NOTICE("You start cutting \the [src]'s wiring with \the [tool].")
 		)
-		if (!user.do_skilled(4 SECONDS, SKILL_ELECTRICAL, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_ELECTRICAL, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (state != WINDOOR_STATE_WIRED)
 			USE_FEEDBACK_FAILURE("\The [src] has no wiring to remove.")
@@ -261,7 +261,7 @@
 			SPAN_NOTICE("\The [user] starts dismantling \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start dismantling \the [src] with \the [tool].")
 		)
-		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (state != WINDOOR_STATE_FRAME)
 			USE_FEEDBACK_FAILURE("\The [src]'s wiring must be removed before you can dismantle it.")
@@ -294,7 +294,7 @@
 			SPAN_NOTICE("\The [user] starts prying \the [src] into its frame with \a [tool]."),
 			SPAN_NOTICE("You start prying \the [src] into its frame with \the [tool].")
 		)
-		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (!electronics)
 			USE_FEEDBACK_FAILURE("\The [src] needs a circuit board before you can complete it.")

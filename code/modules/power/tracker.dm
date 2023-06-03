@@ -61,7 +61,7 @@
 	if(isCrowbar(W))
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message(SPAN_NOTICE("[user] begins to take the glass off the solar tracker."))
-		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
+		if(do_after(user, (W.toolspeed * 5) SECONDS, src, DO_REPAIR_CONSTRUCT))
 			var/obj/item/solar_assembly/S = locate() in src
 			if(S)
 				S.dropInto(loc)

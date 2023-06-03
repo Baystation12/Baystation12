@@ -127,7 +127,7 @@
 			return
 		to_chat(user, SPAN_NOTICE("You start dismantling \the [src]..."))
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if (do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if (do_after(user, (I.toolspeed * 3) SECONDS, src, DO_PUBLIC_UNIQUE))
 			user.visible_message(SPAN_NOTICE("\The [user] dismantles \the [src]."), SPAN_NOTICE("You dismantle \the [src]."))
 			new /obj/item/beehive_assembly(loc)
 			qdel(src)

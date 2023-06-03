@@ -626,7 +626,7 @@ var/global/list/ai_verbs_default = list(
 			SPAN_NOTICE("\The [user] starts [anchored ? "unbolting" : "bolting"] \the [src] from the floor with \a [tool]."),
 			SPAN_NOTICE("You start [anchored ? "unbolting" : "bolting"] \the [src] from the floor with \the [tool].")
 		)
-		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		anchored = !anchored
 		user.visible_message(

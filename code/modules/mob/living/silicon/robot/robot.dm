@@ -547,7 +547,7 @@
 					SPAN_NOTICE("\The [user] starts closing \the [src]'s maintenance hatch with \a [tool]."),
 					SPAN_NOTICE("You start closing \the [src]'s maintenance hatch with \a [tool]."),
 				)
-				if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+				if (!do_after(user, (tool.toolspeed * 5) SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 					return TRUE
 				if (!opened)
 					USE_FEEDBACK_FAILURE("\The [src]'s maintenance hatch is already closed.")
@@ -572,7 +572,7 @@
 					SPAN_NOTICE("\The [user] starts removing \the [src]'s [mmi.name] with \a [tool]."),
 					SPAN_NOTICE("You start removing \the [src]'s [mmi.name] with \a [tool]."),
 				)
-				if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+				if (!do_after(user, (tool.toolspeed * 5) SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 					return TRUE
 				if (!mmi)
 					USE_FEEDBACK_FAILURE("\The [src] has no longer has a brain to remove.")
@@ -625,7 +625,7 @@
 			SPAN_NOTICE("\The [user] starts prying open \the [src]'s maintenance hatch with \a [tool]."),
 			SPAN_NOTICE("You start prying open \the [src]'s maintenance hatch with \a [tool].")
 		)
-		if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+		if (!do_after(user, (tool.toolspeed * 5) SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (locked)
 			USE_FEEDBACK_FAILURE("\The [src]'s maintenance hatch is locked and cannot be opened.")
@@ -805,7 +805,7 @@
 			SPAN_NOTICE("\The [user] starts repairing some of the dents on \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start repairing some of the dents on \the [src] with \the [tool]."),
 		)
-		if (!do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+		if (!do_after(user, (tool.toolspeed * 1) SECOND, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (!getBruteLoss())
 			USE_FEEDBACK_FAILURE("\The [src] has no physical damage to repair.")
