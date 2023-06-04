@@ -442,6 +442,7 @@
 #include "code\datums\singletons\pools\instance_configurator.dm"
 #include "code\datums\singletons\pools\instance_configurator_auto.dm"
 #include "code\datums\singletons\pools\instance_pool.dm"
+#include "code\datums\singletons\pools\pool_behavior.dm"
 #include "code\datums\singletons\shared_list\_shared_list.dm"
 #include "code\datums\singletons\shared_list\path.dm"
 #include "code\datums\singletons\shared_list\sound.dm"

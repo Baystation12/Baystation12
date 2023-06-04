@@ -9,10 +9,10 @@ var/global/datum/globals/GLOB
 	var/static/atom/movable/clickable_stat/__stat_line
 
 
-/datum/globals/Destroy()
+/datum/globals/Destroy(force)
 	if (!GLOB || GLOB == src)
 		GLOB = src
-		return QDEL_HINT_LETMELIVE
+		return 1 //QDEL_HINT_LETMELIVE
 	return ..()
 
 
@@ -78,6 +78,7 @@ var/global/datum/globals/GLOB
 
 #define GLOBAL_LIST_EMPTY(X) GLOBAL_LIST_INIT(X, list())
 
+#if !defined(TESTING)
 /// Prevents the GLOB member from being shown in View Variables.
 #define GLOBAL_PROTECT(X) \
 /datum/globals/proc/GI_P_##X() { \
@@ -89,3 +90,6 @@ var/global/datum/globals/GLOB
 	done = TRUE; \
 	VV_hidden(#X); \
 }
+#else
+#define GLOBAL_PROTECT(X)
+#endif

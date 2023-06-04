@@ -288,7 +288,7 @@
 	var/z = -1
 	var/displayed_level = 1 //Index of level to display
 
-/datum/station_holomap/Destroy()
+/datum/station_holomap/Destroy(force)
 	QDEL_NULL(station_map)
 	QDEL_NULL(cursor)
 	QDEL_NULL_LIST(legend)
@@ -296,7 +296,7 @@
 	QDEL_NULL_LIST(lbuttons)
 	QDEL_NULL_LIST(maptexts)
 	QDEL_NULL_LIST(z_levels)
-	return ..()
+	. = ..()
 
 /datum/station_holomap/proc/initialize_holomap(turf/T, isAI = null, mob/user = null, reinit = FALSE)
 	z = T.z

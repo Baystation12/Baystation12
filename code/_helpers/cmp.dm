@@ -49,6 +49,15 @@
 /proc/cmp_text_dsc(a,b)
 	return sorttext(a, b)
 
+/proc/cmp_qdel_item_time(datum/qdel_item/A, datum/qdel_item/B)
+	. = B.hard_delete_time - A.hard_delete_time
+	if (!.)
+		. = B.destroy_time - A.destroy_time
+	if (!.)
+		. = B.failures - A.failures
+	if (!.)
+		. = B.qdels - A.qdels
+
 /proc/cmp_ruincost_priority(datum/map_template/ruin/A, datum/map_template/ruin/B)
 	return initial(A.spawn_cost) - initial(B.spawn_cost)
 
