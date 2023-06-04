@@ -21,8 +21,8 @@ var/global/const/GC_CURRENTLY_BEING_QDELETED = -1
 SUBSYSTEM_DEF(garbage)
 	name = "Garbage"
 	priority = SS_PRIORITY_GARBAGE
-	wait = 10 SECONDS
-	flags = SS_POST_FIRE_TIMING | SS_BACKGROUND | SS_NEEDS_SHUTDOWN
+	wait = 2 SECONDS
+	flags = SS_POST_FIRE_TIMING | SS_BACKGROUND | SS_NO_INIT | SS_NEEDS_SHUTDOWN
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	init_order = SS_INIT_GARBAGE
 
@@ -67,10 +67,6 @@ SUBSYSTEM_DEF(garbage)
 			qdel_log += "\tNo hint: [details.no_hint] times"
 	var/log_file = file("[GLOB.log_directory]/qdel.log")
 	to_file(log_file, jointext(qdel_log, "\n"))
-
-
-/datum/controller/subsystem/garbage/Initialize(start_uptime)
-	pause_deletion_queue = config.deletion_starts_paused
 
 
 /datum/controller/subsystem/garbage/UpdateStat(time)
