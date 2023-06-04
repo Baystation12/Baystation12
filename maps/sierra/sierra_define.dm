@@ -132,7 +132,7 @@
 		"Third Deck - Hangar - Atmospherics Storage",
 		"Third Deck - Water Cistern"
 		)
-
+/*
 	lobby_tracks = list(
 		// Absconditus - Zhay Tee		--,
 		/singleton/audio/track/absconditus,
@@ -165,19 +165,19 @@
 		// /singleton/audio/track/dilbert,
 
 		// 80s All Over Again - A Drop A Day		--,
-		/singleton/audio/track/eighties,
+		// /singleton/audio/track/eighties,
 
 		// Local Forecast (Elevator) - Kevin MacLeod		--,
 		// /singleton/audio/track/elevator,
 
 		// every light is blinking at once - Earthcrusher		--,
-		/singleton/audio/track/elibao,
+		// /singleton/audio/track/elibao,
 
 		// Endless Space - SolusLunes		--,
 		/singleton/audio/track/endless_space,
 
 		// Epic Intro 2015 - Sascha Ende		--,
-		/singleton/audio/track/epicintro2015,
+		// /singleton/audio/track/epicintro2015,
 
 		// Epic Intro 2017 - Sascha Ende		--,
 		/singleton/audio/track/epicintro2017,
@@ -186,7 +186,7 @@
 		/singleton/audio/track/floating,
 
 		// Hull Rupture - Mikazu		--,
-		/singleton/audio/track/hull_rupture,
+		// /singleton/audio/track/hull_rupture,
 
 		// Human - Borrtex		--,
 		/singleton/audio/track/human,
@@ -204,13 +204,13 @@
 		// /singleton/audio/track/lysendraa,
 
 		// Marhaba - Ian Alex Mac		--,
-		/singleton/audio/track/marhaba,
+		// /singleton/audio/track/marhaba,
 
 		// Martian Cowboy - Kevin MacLeod		--,
 		/singleton/audio/track/martiancowboy,
 
 		// Misanthropic Corridors - Mikazu		--,
-		/singleton/audio/track/misanthropic_corridors,
+		// /singleton/audio/track/misanthropic_corridors,
 
 		// Monument - Six Umbrellas		--,
 		// /singleton/audio/track/monument,
@@ -222,13 +222,13 @@
 		// /singleton/audio/track/one_loop,
 
 		// On the Rocks - Mikazu		--,
-		/singleton/audio/track/on_the_rocks,
+		// /singleton/audio/track/on_the_rocks,
 
 		// phoron will make us rich - Earthcrusher		--,
 		// /singleton/audio/track/pwmur,
 
 		// Rimward Cruise - Mikazu		--,
-		/singleton/audio/track/rimward_cruise,
+		// /singleton/audio/track/rimward_cruise,
 
 		// Salut John - Quimorucru		--,
 		// /singleton/audio/track/salutjohn,
@@ -237,10 +237,10 @@
 		/singleton/audio/track/space_oddity,
 
 		// Sektor11 - MashedByMachines		--,
-		/singleton/audio/track/thunderdome,
+		// /singleton/audio/track/thunderdome,
 
 		// Torch: A Light in the Darkness - L. Luke Leimer/LorenLuke		--,
-		/singleton/audio/track/torch,
+		// /singleton/audio/track/torch, // ПОКА Я ЖИВОЙ НИКАКОГО ТОРЧА НЕ БУДЕТ
 
 		// Torn - Macamoto		--,
 		/singleton/audio/track/torn,
@@ -249,11 +249,12 @@
 		/singleton/audio/track/treacherous_voyage,
 
 		// Voidsent - Mikazu		--,
-		/singleton/audio/track/voidsent,
+		// /singleton/audio/track/voidsent,
 
 		// Wake - Ryan Little		--,
 		/singleton/audio/track/wake,
 
 		// Wild Encounters - A Drop A Day		--,
-		/singleton/audio/track/wildencounters
+		// /singleton/audio/track/wildencounters
 	)
+*/
