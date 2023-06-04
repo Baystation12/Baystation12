@@ -100,3 +100,21 @@
 	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 6000, MATERIAL_ALUMINIUM = 4000, MATERIAL_PHORON = 4000)
 	build_path = /obj/item/weldingtool/electric
 	sort_string = "VAGAK"
+
+/datum/design/item/tool/power_drill
+	name = "power drill"
+	desc = "a portable power drill that can swap between bolt and screw heads for a range of fixings"
+	id = "power_drill"
+	req_tech = list(TECH_ENGINEERING = 4, TECH_POWER = 4)
+	materials = list(MATERIAL_STEEL = 100, MATERIAL_ALUMINIUM = 100, MATERIAL_PLASTIC = 6000)
+	build_path = /obj/item/swapper/power_drill
+	sort_string = "VAGAL"
+
+/datum/design/item/tool/jaws_of_life
+	name = "hydraulic prying tool"
+	desc = "a portable hydraulic rescue tool that can swap between prying and cutting heads for a range of breaching techniques"
+	id = "jaws_of_life"
+	req_tech = list(TECH_ENGINEERING = 5, TECH_POWER = 4)
+	materials = list(MATERIAL_STEEL = 6000, MATERIAL_ALUMINIUM = 1000, MATERIAL_PLASTIC = 750)
+	build_path = /obj/item/swapper/jaws_of_life
+	sort_string = "VAGAM"

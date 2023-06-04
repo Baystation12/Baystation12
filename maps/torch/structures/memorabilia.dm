@@ -43,7 +43,7 @@
 			SPAN_NOTICE("\The [user] starts rummaging through \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start looking for useful components \the [src] with \the [tool].")
 		)
-		if (!user.do_skilled(2 SECONDS, SKILL_DEVICES, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 2) SECONDS, SKILL_DEVICES, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (!user.skill_check(SKILL_DEVICES, SKILL_BASIC))
 			USE_FEEDBACK_FAILURE("You're not skill enough to salvage \the [src].")

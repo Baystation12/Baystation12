@@ -116,7 +116,7 @@
 			SPAN_NOTICE("\The [user] begins toggling \the [src]'s maglock with \a [tool]."),
 			SPAN_NOTICE("You begin [unlocked ? "locking" : "unlocking"] \the [src]'s maglock with \the [tool].")
 		)
-		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+		if (!do_after(user, (tool.toolspeed * 2) SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 			return TRUE
 		playsound(src, 'sound/machines/lockreset.ogg', 50, TRUE)
 		unlocked = !unlocked

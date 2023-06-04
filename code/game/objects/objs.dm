@@ -220,7 +220,7 @@
 		SPAN_NOTICE("You begin [anchored ? "un" : ""]securing \the [src] [anchored ? "from" : "to"] the floor with \the [tool].")
 	)
 	playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
-	if (!user.do_skilled(delay, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+	if (!user.do_skilled((tool.toolspeed * delay), SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 		return
 	user.visible_message(
 		SPAN_NOTICE("\The [user] [anchored ? "un" : ""]secures \the [src] [anchored ? "from" : "to"] the floor with \a [tool]."),

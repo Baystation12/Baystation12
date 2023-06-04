@@ -60,7 +60,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 				SPAN_NOTICE("You start to [anchored ? "disconnect" : "connect"] \the [src] [anchored ? "to" : "from"] \the [T].")
 			)
 
-			if (!do_after(user, 3 SECONDS, src, DO_REPAIR_CONSTRUCT))
+			if (!do_after(user, (I.toolspeed * 3) SECONDS, src, DO_REPAIR_CONSTRUCT))
 				return TRUE
 
 			anchored = !anchored

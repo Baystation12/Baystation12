@@ -56,7 +56,7 @@
 			"You start to repair \the [src]'s locking clamps with \the [I].",
 			"You hear a hissing flame."
 		)
-		if (do_after(user, 15 SECONDS, src, DO_REPAIR_CONSTRUCT))
+		if (do_after(user, (I.toolspeed * 15) SECONDS, src, DO_REPAIR_CONSTRUCT))
 			to_chat(user, SPAN_NOTICE("There - Good as new."))
 			emagged = FALSE
 			if (locked)

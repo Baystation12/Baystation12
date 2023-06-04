@@ -231,7 +231,7 @@
 						SPAN_NOTICE("You start to weld \the [src] to the floor."),
 						SPAN_ITALIC("You hear welding.")
 					)
-					if (do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
+					if (do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 						if (!WT.isOn())
 							return
 						state = EMITTER_WELDED
@@ -252,7 +252,7 @@
 						SPAN_NOTICE("You start to cut \the [src] free from the floor."),
 						SPAN_ITALIC("You hear welding.")
 					)
-					if (do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
+					if (do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 						if (!WT.isOn())
 							return
 						state = EMITTER_WRENCHED

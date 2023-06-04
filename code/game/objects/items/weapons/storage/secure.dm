@@ -27,14 +27,14 @@
 		playsound(loc, "sparks", 50, 1)
 		return
 	if (isScrewdriver(W))
-		if (do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
+		if (do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 			open = ! open
 			user.show_message(SPAN_NOTICE("You [open ? "open" : "close"] the service panel."))
 		return
 	if (isMultitool(W) && (open == 1)&& (!l_hacking))
 		user.show_message(SPAN_NOTICE("Now attempting to reset internal memory, please hold."), 1)
 		l_hacking = 1
-		if (do_after(usr, 10 SECONDS, src, DO_REPAIR_CONSTRUCT))
+		if (do_after(usr, (W.toolspeed * 10) SECONDS, src, DO_REPAIR_CONSTRUCT))
 			if (prob(40))
 				l_setshort = 1
 				l_set = 0

@@ -16,7 +16,7 @@
 			SPAN_NOTICE("\The [user] starts [open ? "filling" : "digging open"] \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start [open ? "filling" : "digging open"] \the [src] with \the [tool].")
 		)
-		if (!user.do_skilled(5 SECONDS, SKILL_HAULING, src) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 5) SECONDS, SKILL_HAULING, src) || !user.use_sanity_check(src, tool))
 			return TRUE
 		user.visible_message(
 			SPAN_NOTICE("\The [user] [open ? "fills" : "digs open"] \the [src] with \a [tool]."),
@@ -193,7 +193,7 @@
 			SPAN_NOTICE("\The [user] starts hacking away at \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start hacking away at \the [src] with \the [tool].")
 		)
-		if (!user.do_skilled(2 SECONDS, list(SKILL_CONSTRUCTION, SKILL_HAULING), src) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 2) SECONDS, list(SKILL_CONSTRUCTION, SKILL_HAULING), src) || !user.use_sanity_check(src, tool))
 			return TRUE
 		var/obj/item/stack/material/wood/stack = new(loc, 1)
 		transfer_fingerprints_to(stack)

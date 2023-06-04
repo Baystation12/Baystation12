@@ -192,7 +192,7 @@
 			SPAN_NOTICE("\The [user] starts removing \the [src]'s [electronics.name] with \a [tool]."),
 			SPAN_NOTICE("You start removing \the [src]'s [electronics.name] with \the [tool].")
 		)
-		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (!electronics)
 			USE_FEEDBACK_FAILURE("\The [src] has no circuit to remove.")
@@ -301,7 +301,7 @@
 			SPAN_NOTICE("\The [user] starts finishing \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start finishing \the [src] with \the [tool].")
 		)
-		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (state != ASSEMBLY_STATE_CIRCUIT)
 			USE_FEEDBACK_FAILURE("\The [src] needs a circuit before you can finish it.")
@@ -339,7 +339,7 @@
 				SPAN_NOTICE("\The [user] starts welding \the [src]'s [glass_noun] off with \a [tool]."),
 				SPAN_NOTICE("You start welding \the [src]'s [glass_noun] off with \the [tool].")
 			)
-			if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 				return TRUE
 			if (!glass)
 				USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
@@ -373,7 +373,7 @@
 			SPAN_NOTICE("\The [user] starts dismantling \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start dismantling \the [src] with \the [tool].")
 		)
-		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (anchored)
 			USE_FEEDBACK_FAILURE("\The [src] must be unanchored before you can dismantle it.")
@@ -404,7 +404,7 @@
 			SPAN_NOTICE("\The [user] starts cutting \the [src]'s wires with \a [tool]."),
 			SPAN_NOTICE("You start cutting \the [src]'s wires with \the [tool].")
 		)
-		if (!user.do_skilled(4 SECONDS, SKILL_ELECTRICAL, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 4) SECONDS, SKILL_ELECTRICAL, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (state < ASSEMBLY_STATE_WIRED)
 			USE_FEEDBACK_FAILURE("\The [src] has no wiring to remove.")
