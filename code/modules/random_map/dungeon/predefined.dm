@@ -12,5 +12,5 @@
 /datum/random_map/winding_dungeon/premade/New()
 	loot_common += subtypesof(/obj/item/reagent_containers/food) + subtypesof(/obj/item/material) + subtypesof(/obj/item/melee)
 	loot_uncommon += subtypesof(/obj/item/gun/projectile) + subtypesof(/obj/item/ammo_magazine)
-	monsters_rare += typesof(/mob/living/simple_animal/hostile/syndicate) + typesof(/mob/living/simple_animal/hostile/pirate)
+	monsters_rare += typesof(/mob/living/simple_animal/hostile/human/syndicate) + typesof(/mob/living/simple_animal/hostile/human/pirate)
 	..()

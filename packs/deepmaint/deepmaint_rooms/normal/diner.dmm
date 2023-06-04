@@ -33,7 +33,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "fM" = (
-/mob/living/simple_animal/hostile/syndicate/melee,
+/mob/living/simple_animal/hostile/human/syndicate/melee,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "fO" = (
@@ -268,7 +268,7 @@
 /area/map_template/deepmaint)
 "NV" = (
 /obj/item/stool/bar/padded,
-/mob/living/simple_animal/hostile/syndicate,
+/mob/living/simple_animal/hostile/human/syndicate,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "OF" = (
@@ -283,7 +283,7 @@
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "QU" = (
-/mob/living/simple_animal/hostile/syndicate/ranged,
+/mob/living/simple_animal/hostile/human/syndicate/ranged,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "Rh" = (
