@@ -24,7 +24,8 @@
 		skybox.screen_loc = "CENTER:[-224 - T.x],CENTER:[-224 - T.y]"
 
 /mob/Login()
-	..()
+	. = ..()
+	sleep(1)
 	client.update_skybox(1)
 
 /mob/Move()
