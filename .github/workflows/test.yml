@@ -13,53 +13,41 @@ env:
 
 jobs:
   PreFlight:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
-      - name: checkout
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
-      - name: paths-filter
-        uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50
+      - uses: actions/checkout@v3
+      - name: Paths Filter
+        uses: dorny/paths-filter@v2
         id: filter
         with:
           filters: .github/workflow-config/preflight-filters.yml
     outputs:
       dm: ${{ steps.filter.outputs.dm }}
   DreamChecker:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: PreFlight
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+      - uses: actions/checkout@v3
       - name: Setup Cache
-        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
+        uses: actions/cache@v3
         with:
           path: $HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION
-          key: ${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}
+          key: "${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}"
       - name: Install Dreamchecker
         run:  scripts/install-spaceman-dmm.sh dreamchecker
       - name: Run Dreamchecker
         run: ~/dreamchecker
-      # - name: Run Failure Webhook
-      #   env:
-      #     JOB_STATUS: ${{ job.status }}
-      #     WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-      #     HOOK_OS_NAME: ${{ runner.os }}
-      #     WORKFLOW_NAME: ${{ github.workflow }}
-      #   if: ${{ failure() }}
-      #   run: |
-      #     wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
-      #     chmod +x send.sh
-      #     ./send.sh failure $WEBHOOK_URL
   Code:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs:
     - PreFlight
     - DreamChecker
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+      - uses: actions/checkout@v3
       - name: Setup Cache
-        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
+        uses: actions/cache@v3
         with:
           path: $HOME/BYOND-$BYOND_MAJOR.$BYOND_MINOR
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
@@ -69,125 +57,37 @@ jobs:
         env:
           TEST: CODE
         run: test/run-test.sh
-      # - name: Run Failure Webhook
-      #   env:
-      #     JOB_STATUS: ${{ job.status }}
-      #     WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-      #     HOOK_OS_NAME: ${{ runner.os }}
-      #     WORKFLOW_NAME: ${{ github.workflow }}
-      #   if: ${{ failure() }}
-      #   run: |
-      #     wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
-      #     chmod +x send.sh
-      #     ./send.sh failure $WEBHOOK_URL
-  ExampleMap:
-    runs-on: ubuntu-20.04
+  Maps:
+    strategy:
+      matrix:
+        map:
+          - example
+          - sierra
+          - away_sites_testing
+    runs-on: ubuntu-22.04
     needs:
     - PreFlight
     - DreamChecker
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+      - uses: actions/checkout@v3
       - name: Setup Cache
-        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
+        uses: actions/cache@v3
         with:
           path: $HOME/BYOND-$BYOND_MAJOR.$BYOND_MINOR
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
-      - name: Download rust_g
-        run: scripts/download_rust_g.sh
-      - name: Install rust_g deps
+      - name: Install rust_g
         run: |
           sudo dpkg --add-architecture i386
           sudo apt update || true
-          sudo apt install libssl1.1:i386
-          ldd librust_g.so
+          sudo apt remove -y libssl1.1:amd64 || true
+          sudo apt install libgcc-s1:i386
+          sudo apt install -o APT::Immediate-Configure=false libc6:i386
+          wget http://ftp.de.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1n-0+deb11u4_i386.deb
+          sudo dpkg -i libssl1.1_1.1.1n-0+deb11u4_i386.deb
+          ./scripts/download_rust_g.sh
       - name: Run Tests
         env:
           TEST: MAP
-          MAP_PATH: example
+          MAP_PATH: ${{ matrix.map }}
         run: test/run-test.sh
-      # - name: Run Failure Webhook
-      #   env:
-      #     JOB_STATUS: ${{ job.status }}
-      #     WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-      #     HOOK_OS_NAME: ${{ runner.os }}
-      #     WORKFLOW_NAME: ${{ github.workflow }}
-      #   if: ${{ failure() }}
-      #   run: |
-      #     wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
-      #     chmod +x send.sh
-      #     ./send.sh failure $WEBHOOK_URL
-  SierraMap:
-    runs-on: ubuntu-20.04
-    needs:
-    - PreFlight
-    - DreamChecker
-    if: needs.PreFlight.outputs.dm == 'true'
-    steps:
-      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
-      - name: Setup Cache
-        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
-        with:
-          path: $HOME/BYOND-$BYOND_MAJOR.$BYOND_MINOR
-          key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
-      - name: Download rust_g
-        run: scripts/download_rust_g.sh
-      - name: Install rust_g deps
-        run: |
-          sudo dpkg --add-architecture i386
-          sudo apt update || true
-          sudo apt install libssl1.1:i386
-          ldd librust_g.so
-      - name: Run Tests
-        env:
-          TEST: MAP
-          MAP_PATH: sierra
-        run: test/run-test.sh
-      # - name: Run Failure Webhook
-      #   env:
-      #     JOB_STATUS: ${{ job.status }}
-      #     WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-      #     HOOK_OS_NAME: ${{ runner.os }}
-      #     WORKFLOW_NAME: ${{ github.workflow }}
-      #   if: ${{ failure() }}
-      #   run: |
-      #     wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
-      #     chmod +x send.sh
-      #     ./send.sh failure $WEBHOOK_URL
-  AwaySites:
-    runs-on: ubuntu-20.04
-    needs:
-    - PreFlight
-    - DreamChecker
-    if: needs.PreFlight.outputs.dm == 'true'
-    steps:
-      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
-      - name: Setup Cache
-        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
-        with:
-          path: $HOME/BYOND-$BYOND_MAJOR.$BYOND_MINOR
-          key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
-      - name: Download rust_g
-        run: scripts/download_rust_g.sh
-      - name: Install rust_g deps
-        run: |
-          sudo dpkg --add-architecture i386
-          sudo apt update || true
-          sudo apt install libssl1.1:i386
-          ldd librust_g.so
-      - name: Run Tests
-        env:
-          TEST: MAP
-          MAP_PATH: away_sites_testing
-        run: test/run-test.sh
-      # - name: Run Failure Webhook
-      #   env:
-      #     JOB_STATUS: ${{ job.status }}
-      #     WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-      #     HOOK_OS_NAME: ${{ runner.os }}
-      #     WORKFLOW_NAME: ${{ github.workflow }}
-      #   if: ${{ failure() }}
-      #   run: |
-      #     wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
-      #     chmod +x send.sh
-      #     ./send.sh failure $WEBHOOK_URL
