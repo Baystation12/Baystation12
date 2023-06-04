@@ -63,7 +63,7 @@ jobs:
       - name: Setup Cache
         uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
         with:
-          path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
+          path: $HOME/BYOND-$BYOND_MAJOR.$BYOND_MINOR
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
       - name: Install Dependencies
         run: sudo apt-get install -y uchardet
@@ -93,7 +93,7 @@ jobs:
       - name: Setup Cache
         uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
         with:
-          path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
+          path: $HOME/BYOND-$BYOND_MAJOR.$BYOND_MINOR
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
       - name: Run Tests
         env:
@@ -122,7 +122,7 @@ jobs:
       - name: Setup Cache
         uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
         with:
-          path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
+          path: $HOME/BYOND-$BYOND_MAJOR.$BYOND_MINOR
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
       - name: Run Tests
         env:
@@ -151,7 +151,7 @@ jobs:
       - name: Setup Cache
         uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
         with:
-          path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
+          path: $HOME/BYOND-$BYOND_MAJOR.$BYOND_MINOR
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
       - name: Run Tests
         env:
