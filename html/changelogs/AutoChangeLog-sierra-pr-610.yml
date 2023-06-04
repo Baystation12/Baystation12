@@ -1,0 +1,4 @@
+author: ImJustKisik
+delete-after: true
+changes:
+  - bugfix: Белый космос больше не является проблемой
