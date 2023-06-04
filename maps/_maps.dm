@@ -46,4 +46,8 @@ GLOBAL_DATUM_INIT(using_map, /datum/map, new using_map_DATUM)
 #include "random_ruins\exoplanet_ruins\tar_anomaly\tar_anomaly.dm"
 #include "random_ruins\exoplanet_ruins\trash_heap\trash_heap.dm"
 #include "random_ruins\exoplanet_ruins\crashed_probe\crashed_probe.dm"
+#include "random_ruins\exoplanet_ruins\iccgn\iccgn.dm"
+#include "random_ruins\exoplanet_ruins\scga\scga.dm"
+#include "random_ruins\exoplanet_ruins\cappoint1\cappoint1.dm"
+#include "random_ruins\exoplanet_ruins\cappoint2\cappoint2.dm"
 #include "random_ruins\space_ruins\space_ruins.dm"

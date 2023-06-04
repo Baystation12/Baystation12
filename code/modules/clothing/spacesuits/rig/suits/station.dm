@@ -442,17 +442,18 @@
 	)
 
 /obj/item/rig/zero
-	name = "null suit control module"
-	suit_type = "null hardsuit"
-	desc = "A very lightweight suit designed to allow use inside mechs and starfighters. It feels like you're wearing nothing at all."
+	name = "SCGA mechsuit operator control module"
+	suit_type = "pilot hardsuit"
+	desc = "A medium-weight protective rigsuit option for SCGA mechanised exosuit operators."
 	icon_state = "null_rig"
 	armor = list(
 		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_MINOR
+		rad = ARMOR_RAD_MINOR,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		bomb = ARMOR_BOMB_PADDED
 	)
 	online_slowdown = 0
 	offline_slowdown = 1
-	offline_vision_restriction = TINT_HEAVY //You're wearing a flash protective space suit without light compensation, think it makes sense
 
 	//Bans the most common combat items, idea is that this isn't a mass built shouldergun rig.
 	banned_modules = list(
@@ -463,8 +464,8 @@
 
 	chest_type = /obj/item/clothing/suit/space/rig/zero
 	helm_type = /obj/item/clothing/head/helmet/space/rig/zero
-	boot_type = null
-	glove_type = null
+	boot_type = /obj/item/clothing/shoes/magboots/rig/zero
+	glove_type = /obj/item/clothing/gloves/rig/zero
 	max_pressure_protection = null
 	min_pressure_protection = 0
 
@@ -490,6 +491,10 @@
 		/obj/item/device/suit_cooling_unit
 	)
 
+/obj/item/clothing/shoes/magboots/rig/zero
+
+/obj/item/clothing/gloves/rig/zero
+
 /obj/item/rig/zero/on_update_icon(update_mob_icon)
 	..()
 	//Append the f for female states
@@ -502,3 +507,38 @@
 	if(user.gender == FEMALE && !findtext(chest.icon_state,"_f", -2))
 		chest.icon_state = "[chest.icon_state]_f"
 	chest.update_icon(1)
+
+/obj/item/rig/zero/iccgn
+	name = "ICCGN exosuit pilot control module"
+	suit_type = "pilot hardsuit"
+	desc = "A high mobility, flexibility, and reliability assuring rig-kit for ICCGN Hunter-Killer pilots."
+	icon_state = "gcc_rig"
+	armor = list(
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_MINOR,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		bomb = ARMOR_BOMB_PADDED
+	)
+	online_slowdown = 0
+	offline_slowdown = 1
+
+	chest_type = /obj/item/clothing/suit/space/rig/iccgn
+	helm_type = /obj/item/clothing/head/helmet/space/rig/iccgn
+	boot_type = /obj/item/clothing/shoes/magboots/rig/iccgn
+	glove_type = /obj/item/clothing/gloves/rig/iccgn
+
+/obj/item/clothing/suit/space/rig/iccgn
+	breach_threshold = 18
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	allowed = list(
+		/obj/item/device/flashlight,
+		/obj/item/tank,
+		/obj/item/device/suit_cooling_unit
+	)
+
+/obj/item/clothing/head/helmet/space/rig/iccgn
+	camera = null
+
+/obj/item/clothing/shoes/magboots/rig/iccgn
+
+/obj/item/clothing/gloves/rig/iccgn

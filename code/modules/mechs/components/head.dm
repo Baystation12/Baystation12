@@ -145,7 +145,7 @@
 	gender = PLURAL
 	exosuit_desc_string = "simple collision detection sensors"
 	desc = "A primitive set of sensors designed to work in tandem with most MKI Eyeball platforms."
-	max_damage = 100
+	max_damage = 120
 	power_use = 0
 
 /obj/item/mech_component/sensors/powerloader/prebuild()
@@ -174,7 +174,7 @@
 	exosuit_desc_string = "a reinforced monoeye"
 	desc = "A solitary sensor moves inside a recessed slit in the armour plates."
 	icon_state = "heavy_head"
-	max_damage = 120
+	max_damage = 200
 	power_use = 0
 
 /obj/item/mech_component/sensors/heavy/prebuild()
@@ -190,6 +190,7 @@
 	vision_flags = SEE_MOBS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	power_use = 200
+	max_damage = 150
 
 /obj/item/mech_component/sensors/combat/prebuild()
 	..()

@@ -39,3 +39,18 @@
 	install_system(new /obj/item/mech_equipment/mounted_system/taser(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/mounted_system/taser/laser(src), HARDPOINT_RIGHT_HAND)
 	install_system(new /obj/item/mech_equipment/shields(src), HARDPOINT_BACK)
+
+/mob/living/exosuit/premade/heavy/scga/Initialize()
+	. = ..()
+	if(arms)
+		arms.color = COLOR_OLIVE
+	if(legs)
+		legs.color = COLOR_OLIVE
+	if(head)
+		head.color = COLOR_OLIVE
+	if(body)
+		body.color = COLOR_OLIVE
+
+/mob/living/exosuit/premade/heavy/scga/spawn_mech_equipment()
+	install_system(new /obj/item/mech_equipment/mounted_system/taser/laser/autocannon(src), HARDPOINT_LEFT_HAND)
+	install_system(new /obj/item/mech_equipment/mounted_system/taser/laser/chaingun(src), HARDPOINT_RIGHT_HAND)

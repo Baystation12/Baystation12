@@ -1,0 +1,645 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"b" = (
+/obj/structure/table/rack,
+/obj/item/gun/projectile/automatic/machine_pistol/usi,
+/obj/item/ammo_magazine/machine_pistol,
+/obj/item/ammo_magazine/machine_pistol,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"c" = (
+/turf/simulated/wall/titanium,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"d" = (
+/obj/structure/table/rack,
+/obj/item/storage/backpack/rucksack/green,
+/obj/item/storage/backpack/rucksack/green,
+/obj/item/storage/backpack/rucksack/green,
+/obj/item/storage/backpack/rucksack/green,
+/obj/item/storage/backpack/rucksack/green,
+/obj/item/storage/backpack/rucksack/green,
+/obj/item/storage/backpack/rucksack/green,
+/obj/item/storage/backpack/rucksack/green,
+/obj/item/storage/backpack/rucksack/green,
+/obj/item/storage/backpack/rucksack/green,
+/obj/item/storage/backpack/rucksack/green,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"e" = (
+/obj/effect/landmark/clear,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"f" = (
+/obj/machinery/mech_recharger,
+/mob/living/exosuit/premade/heavy/scga,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"g" = (
+/obj/structure/table/rack,
+/obj/item/gun/projectile/automatic/bullpup_rifle,
+/obj/item/gun/projectile/automatic/bullpup_rifle,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"h" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"i" = (
+/obj/structure/table/rack,
+/obj/item/rig/military,
+/obj/item/rig/military,
+/obj/item/rig/military,
+/obj/item/rig/military,
+/obj/item/rig/military,
+/obj/item/rig/military,
+/obj/item/rig/military,
+/obj/item/rig/military,
+/obj/item/rig/military,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"l" = (
+/obj/structure/table/rack,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"n" = (
+/obj/structure/table/rack,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/suit/armor/pcarrier/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/leg_guards/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/storage/pouches/green,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/obj/item/clothing/accessory/armor_plate/merc,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"q" = (
+/obj/structure/table/rack,
+/obj/item/storage/backpack/messenger/brown,
+/obj/item/storage/backpack/messenger/brown,
+/obj/item/storage/backpack/messenger/brown,
+/obj/item/storage/backpack/messenger/brown,
+/obj/item/storage/backpack/messenger/brown,
+/obj/item/storage/backpack/messenger/brown,
+/obj/item/storage/backpack/messenger/brown,
+/obj/item/storage/backpack/messenger/brown,
+/obj/item/storage/backpack/messenger/brown,
+/obj/item/storage/backpack/messenger/brown,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"r" = (
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/helmet_cover/green,
+/obj/item/clothing/accessory/ubac/green,
+/obj/item/clothing/accessory/ubac/green,
+/obj/item/clothing/accessory/ubac/green,
+/obj/item/clothing/accessory/ubac/green,
+/obj/item/clothing/accessory/ubac/green,
+/obj/item/clothing/accessory/ubac/green,
+/obj/item/clothing/accessory/ubac/green,
+/obj/item/clothing/accessory/ubac/green,
+/obj/item/clothing/accessory/ubac/green,
+/obj/item/clothing/accessory/ubac/green,
+/obj/item/clothing/accessory/ubac/green,
+/obj/item/clothing/accessory/ubac/green,
+/obj/item/clothing/accessory/ubac/green,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"x" = (
+/obj/structure/table/rack,
+/obj/item/gun/projectile/pistol/m19,
+/obj/item/gun/projectile/pistol/m19,
+/obj/item/gun/projectile/pistol/m19,
+/obj/item/gun/projectile/pistol/m19,
+/obj/item/gun/projectile/pistol/m19,
+/obj/item/gun/projectile/pistol/m19,
+/obj/item/gun/projectile/pistol/m19,
+/obj/item/gun/projectile/pistol/m19,
+/obj/item/gun/projectile/pistol/m19,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"A" = (
+/obj/structure/table/rack,
+/obj/item/rig/zero,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"B" = (
+/obj/machinery/telecomms/allinone/ert,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"C" = (
+/obj/structure/table/rack,
+/obj/item/gun/projectile/pistol/m22f,
+/obj/item/gun/projectile/pistol/m22f,
+/obj/item/gun/projectile/pistol/m22f,
+/obj/item/gun/projectile/pistol/m22f,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"D" = (
+/obj/structure/table/rack,
+/obj/structure/table/rack,
+/obj/item/gun/launcher/grenade,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/grenade/frag/high_yield,
+/obj/item/grenade/frag/high_yield,
+/obj/item/grenade/frag/high_yield,
+/obj/item/grenade/frag,
+/obj/item/grenade/frag,
+/obj/item/grenade/smokebomb,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"F" = (
+/obj/structure/table/rack,
+/obj/item/storage/firstaid/combat,
+/obj/item/storage/firstaid/combat,
+/obj/item/storage/firstaid/combat,
+/obj/item/storage/box/autoinjectors,
+/obj/item/storage/box/autoinjectors,
+/obj/item/reagent_containers/hypospray,
+/obj/item/defibrillator/compact/combat/loaded,
+/obj/item/defibrillator/compact/combat/loaded,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"G" = (
+/obj/structure/table/rack,
+/obj/item/gun/projectile/automatic/bullpup_rifle/light,
+/obj/item/gun/projectile/automatic/bullpup_rifle/light,
+/obj/item/gun/projectile/automatic/bullpup_rifle/light,
+/obj/item/gun/projectile/automatic/bullpup_rifle/light,
+/obj/item/gun/projectile/automatic/bullpup_rifle/light,
+/obj/item/ammo_magazine/mil_rifle/light,
+/obj/item/ammo_magazine/mil_rifle/light,
+/obj/item/ammo_magazine/mil_rifle/light,
+/obj/item/ammo_magazine/mil_rifle/light,
+/obj/item/ammo_magazine/mil_rifle/light,
+/obj/item/ammo_magazine/mil_rifle/light,
+/obj/item/ammo_magazine/mil_rifle/light,
+/obj/item/ammo_magazine/mil_rifle/light,
+/obj/item/ammo_magazine/mil_rifle/light,
+/obj/item/ammo_magazine/mil_rifle/light,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"K" = (
+/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"L" = (
+/obj/structure/table/rack,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"M" = (
+/obj/structure/table/rack,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"N" = (
+/obj/structure/table/rack,
+/obj/item/gun/projectile/shotgun/pump/combat,
+/obj/item/gun/projectile/shotgun/pump/combat,
+/obj/item/storage/box/ammo/shotgunammo,
+/obj/item/storage/box/ammo/shotgunshells,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"Q" = (
+/obj/structure/table/rack,
+/obj/item/storage/firstaid/stab,
+/obj/item/storage/firstaid/stab,
+/obj/item/storage/firstaid/stab,
+/obj/item/storage/firstaid/surgery,
+/obj/item/storage/box/syringes,
+/obj/item/storage/box/syringes,
+/obj/item/reagent_containers/hypospray,
+/obj/item/reagent_containers/chem_disp_cartridge/bicaridine,
+/obj/item/reagent_containers/chem_disp_cartridge/bicaridine,
+/obj/item/reagent_containers/chem_disp_cartridge/dermaline,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/chem_disp_cartridge/tramadol,
+/obj/item/reagent_containers/chem_disp_cartridge/tramadol,
+/obj/item/reagent_containers/chem_disp_cartridge/dexalin_p,
+/obj/item/reagent_containers/chem_disp_cartridge/dexalin_p,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"R" = (
+/obj/machinery/mech_recharger,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"S" = (
+/obj/structure/table/rack,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/device/radio/headset/ert,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"V" = (
+/obj/structure/table/rack,
+/obj/item/storage/belt/utility/full,
+/obj/item/storage/belt/utility/full,
+/obj/item/clothing/glasses/tacgoggles,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"Y" = (
+/obj/machinery/floodlight,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+
+(1,1,1) = {"
+c
+K
+K
+K
+c
+c
+c
+c
+c
+c
+"}
+(2,1,1) = {"
+c
+Y
+Q
+F
+c
+B
+R
+f
+Y
+c
+"}
+(3,1,1) = {"
+c
+a
+e
+e
+c
+e
+e
+a
+a
+c
+"}
+(4,1,1) = {"
+K
+G
+e
+e
+c
+V
+A
+b
+a
+c
+"}
+(5,1,1) = {"
+K
+g
+e
+i
+c
+c
+c
+c
+c
+c
+"}
+(6,1,1) = {"
+K
+N
+e
+c
+d
+q
+l
+r
+n
+c
+"}
+(7,1,1) = {"
+K
+C
+e
+e
+a
+e
+e
+e
+a
+a
+"}
+(8,1,1) = {"
+c
+e
+e
+e
+e
+e
+e
+e
+a
+a
+"}
+(9,1,1) = {"
+c
+Y
+e
+x
+D
+L
+M
+h
+S
+c
+"}
+(10,1,1) = {"
+c
+K
+K
+K
+c
+c
+c
+c
+c
+c
+"}

@@ -69,9 +69,9 @@
 	name = "exosuit legs"
 	exosuit_desc_string = "reinforced hydraulic legs"
 	desc = "Wide and stable but not particularly fast."
-	max_damage = 70
-	move_delay = 4
-	turn_delay = 4
+	max_damage = 100
+	move_delay = 3
+	turn_delay = 3
 	power_use = 10
 
 	mech_step_sound = 'sound/mecha/mechstep03.ogg'
@@ -125,9 +125,9 @@
 	exosuit_desc_string = "heavy hydraulic legs"
 	desc = "Oversized actuators struggle to move these armoured legs. "
 	icon_state = "heavy_legs"
-	move_delay = 5
+	move_delay = 6
 	turn_delay = 5
-	max_damage = 160
+	max_damage = 220
 	power_use = 100
 
 	mech_turn_sound = 'sound/mecha/mechmove01.ogg'
@@ -138,8 +138,9 @@
 	exosuit_desc_string = "sleek hydraulic legs"
 	icon_state = "combat_legs"
 	move_delay = 3
-	turn_delay = 3
+	turn_delay = 1
 	power_use = 20
+	max_damage = 120
 
 	mech_turn_sound = 'sound/mecha/mechmove03.ogg'
 	mech_step_sound = 'sound/mecha/mechstep03.ogg'

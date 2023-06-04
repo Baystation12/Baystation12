@@ -6,6 +6,12 @@
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
 
+/obj/item/mech_equipment/mounted_system/taser/flakgun
+	name = "\improper FAC-29 \"Gorgon\" flakcannon"
+	desc = "A light mech-mounted stubber-gun, for firing flechette flak rounds."
+	icon_state = "mech_ballistic"
+	holding_type = /obj/item/gun/energy/taser/carbine/mounted/mech/flakgun
+
 /obj/item/mech_equipment/mounted_system/taser/MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, mob/user)
 	. = ..()
 
@@ -26,6 +32,24 @@
 	icon_state = "mech_lasercarbine"
 	holding_type = /obj/item/gun/energy/lasercannon/mounted/mech
 
+/obj/item/mech_equipment/mounted_system/taser/laser/ramfire
+	name = "\improper DZ-411 \"Ramfire\" minirocket pod"
+	desc = "An exosuit-mounted rocketpod with mini-rocket bores."
+	icon_state = "mech_resin"
+	holding_type = /obj/item/gun/energy/lasercannon/mounted/mech/ramfire
+
+/obj/item/mech_equipment/mounted_system/taser/laser/chaingun
+	name = "\improper MAG-10 \"Hurricane\" chaingun"
+	desc = "An exosuit-mounted automated chaingun, chambered in low-powered caliber."
+	icon_state = "mech_ballistic"
+	holding_type = /obj/item/gun/energy/lasercannon/mounted/mech/chaingun
+
+/obj/item/mech_equipment/mounted_system/taser/laser/autocannon
+	name = "\improper AMG-21 \"Trebuchet\" heavy autocannon"
+	desc = "An exosuit-mounted automated chaingun, chambered in low-powered caliber."
+	icon_state = "mech_ballistic2"
+	holding_type = /obj/item/gun/energy/lasercannon/mounted/mech/autocannon
+
 /obj/item/gun/energy/taser/carbine/mounted/mech
 	use_external_power = TRUE
 	has_safety = FALSE
@@ -33,6 +57,19 @@
 	burst = 3
 	burst_delay = 3
 	dispersion = list(-1.5,1,1.5)
+
+/obj/item/gun/energy/taser/carbine/mounted/mech/flakgun
+	name = "\improper FAC-412 \"Gorgon\" flakcannon"
+	projectile_type = /obj/item/projectile/bullet/pellet/shotgun/flechette
+	use_external_power = TRUE
+	has_safety = FALSE
+	self_recharge = TRUE
+	burst = 4
+	burst_delay = 0
+	max_shots = 8
+	charge_cost = 20
+	recharge_time = 7
+	dispersion = list(-2 ,1.5, 2)
 
 /obj/item/gun/energy/ionrifle/mounted/mech
 	use_external_power = TRUE
@@ -46,6 +83,48 @@
 	self_recharge = TRUE
 	fire_delay = 15
 	accuracy = 2
+
+/obj/item/gun/energy/lasercannon/mounted/mech/ramfire
+	name = "\improper DZ-411 \"Ramfire\" minirocket pod"
+	projectile_type = /obj/item/projectile/bullet/gyro
+	use_external_power = TRUE
+	has_safety = FALSE
+	self_recharge = TRUE
+	fire_delay = 15
+	accuracy = 2
+	burst = 2
+	burst_delay = 3
+	max_shots = 6
+	charge_cost = 20
+	recharge_time = 10
+
+/obj/item/gun/energy/lasercannon/mounted/mech/chaingun
+	name = "\improper MAG-10 \"Hurricane\" chaingun"
+	projectile_type = /obj/item/projectile/bullet/pistol
+	use_external_power = TRUE
+	has_safety = FALSE
+	self_recharge = TRUE
+	fire_delay = 5
+	accuracy = 2
+	burst = 4
+	burst_delay = 2
+	max_shots = 30
+	charge_cost = 10
+	recharge_time = 3
+
+/obj/item/gun/energy/lasercannon/mounted/mech/autocannon
+	name = "\improper AMG-21 \"Trebuchet\" heavy autocannon"
+	projectile_type = /obj/item/projectile/bullet/rifle/shell/apds
+	use_external_power = TRUE
+	has_safety = FALSE
+	self_recharge = TRUE
+	fire_delay = 5
+	accuracy = 1
+	burst = 1
+	burst_delay = 2
+	max_shots = 1
+	charge_cost = 50
+	recharge_time = 10
 
 /obj/item/gun/energy/get_hardpoint_maptext()
 	if (charge_cost <= 0)

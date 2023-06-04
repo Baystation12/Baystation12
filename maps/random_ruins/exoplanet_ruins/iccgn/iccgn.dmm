@@ -1,0 +1,514 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"b" = (
+/obj/structure/table/rack,
+/obj/item/gun/projectile/automatic/merc_smg,
+/obj/item/ammo_magazine/smg,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"c" = (
+/turf/simulated/wall/titanium,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"d" = (
+/obj/structure/table/rack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/obj/item/storage/backpack/rucksack,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"e" = (
+/obj/effect/landmark/clear,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"f" = (
+/obj/machinery/mech_recharger,
+/mob/living/exosuit/premade/combat/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"g" = (
+/obj/effect/landmark/clear,
+/obj/structure/table/rack,
+/obj/item/gun/projectile/automatic/merc_smg,
+/obj/item/gun/projectile/automatic/merc_smg,
+/obj/item/gun/projectile/automatic/merc_smg,
+/obj/item/gun/projectile/automatic/merc_smg,
+/obj/item/gun/projectile/automatic/merc_smg,
+/obj/item/gun/projectile/automatic/merc_smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"h" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/obj/item/clothing/mask/gas/aquabreather,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"i" = (
+/obj/effect/landmark/clear,
+/obj/effect/wallframe_spawn/reinforced_phoron,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"j" = (
+/obj/structure/table/rack,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"l" = (
+/obj/structure/table/rack,
+/obj/item/rig/military/iccgn,
+/obj/item/rig/military/iccgn,
+/obj/item/rig/military/iccgn,
+/obj/item/rig/military/iccgn,
+/obj/item/rig/military/iccgn,
+/obj/item/rig/military/iccgn,
+/obj/item/rig/military/iccgn,
+/obj/item/rig/military/iccgn,
+/obj/item/rig/military/iccgn,
+/obj/item/rig/military/iccgn,
+/obj/item/rig/military/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"q" = (
+/obj/structure/table/rack,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/obj/item/storage/backpack/messenger/black,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"r" = (
+/obj/effect/wallframe_spawn/reinforced_phoron,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"v" = (
+/obj/structure/table/rack,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/obj/item/card/id/syndicate,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"x" = (
+/obj/structure/table/rack,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/obj/item/ammo_magazine/pistol,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"y" = (
+/obj/structure/table/rack,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"A" = (
+/obj/structure/table/rack,
+/obj/item/storage/belt/utility/full,
+/obj/item/storage/belt/utility/full,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"C" = (
+/obj/effect/landmark/clear,
+/obj/structure/table/rack,
+/obj/item/gun/projectile/pistol/magnum_pistol,
+/obj/item/gun/projectile/pistol/magnum_pistol,
+/obj/item/ammo_magazine/magnum,
+/obj/item/ammo_magazine/magnum,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"D" = (
+/obj/structure/table/rack,
+/obj/structure/table/rack,
+/obj/item/gun/launcher/grenade,
+/obj/item/grenade/frag,
+/obj/item/grenade/frag,
+/obj/item/grenade/frag,
+/obj/item/grenade/smokebomb,
+/obj/item/grenade/smokebomb,
+/obj/item/grenade/smokebomb,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"F" = (
+/obj/structure/table/rack,
+/obj/item/storage/firstaid/combat,
+/obj/item/storage/firstaid/combat,
+/obj/item/storage/firstaid/combat,
+/obj/item/reagent_containers/hypospray,
+/obj/item/storage/box/autoinjectors,
+/obj/item/defibrillator/compact/combat/loaded,
+/obj/item/defibrillator/compact/combat/loaded,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"G" = (
+/obj/effect/landmark/clear,
+/obj/structure/table/rack,
+/obj/item/gun/projectile/sniper/panther,
+/obj/item/gun/projectile/sniper/panther,
+/obj/item/gun/projectile/sniper/panther,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"I" = (
+/obj/structure/table/rack,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"L" = (
+/obj/structure/table/rack,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"M" = (
+/obj/structure/table/rack,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"N" = (
+/obj/effect/landmark/clear,
+/obj/structure/table/rack,
+/obj/item/gun/projectile/heavysniper/ant,
+/obj/item/ammo_casing/shell/apds,
+/obj/item/ammo_casing/shell/apds,
+/obj/item/ammo_casing/shell/apds,
+/obj/item/ammo_casing/shell/apds,
+/obj/item/ammo_casing/shell/apds,
+/obj/item/ammo_casing/shell/apds,
+/obj/item/ammo_casing/shell/apds,
+/obj/item/ammo_casing/shell/apds,
+/obj/item/ammo_casing/shell/apds,
+/obj/item/ammo_casing/shell/apds,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"Q" = (
+/obj/structure/table/rack,
+/obj/item/storage/firstaid/stab,
+/obj/item/storage/firstaid/stab,
+/obj/item/storage/firstaid/stab,
+/obj/item/storage/firstaid/surgery,
+/obj/item/reagent_containers/hypospray,
+/obj/item/storage/box/autoinjectors,
+/obj/item/reagent_containers/chem_disp_cartridge/bicaridine,
+/obj/item/reagent_containers/chem_disp_cartridge/dermaline,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/chem_disp_cartridge/dexalin_p,
+/obj/item/reagent_containers/chem_disp_cartridge/dexalin_p,
+/obj/item/reagent_containers/chem_disp_cartridge/tramadol,
+/obj/item/reagent_containers/chem_disp_cartridge/tramadol,
+/obj/item/reagent_containers/chem_disp_cartridge/rezadone,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"R" = (
+/obj/machinery/mech_recharger,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"S" = (
+/obj/machinery/acting/changer/mirror,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"V" = (
+/obj/structure/table/rack,
+/obj/item/rig/zero/iccgn,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+"Y" = (
+/obj/machinery/floodlight,
+/turf/simulated/floor/plating,
+/area/map_template/icarus{
+	requires_power = 0
+	})
+
+(1,1,1) = {"
+c
+r
+r
+r
+c
+c
+c
+c
+c
+c
+"}
+(2,1,1) = {"
+c
+a
+Q
+F
+c
+a
+R
+f
+Y
+c
+"}
+(3,1,1) = {"
+c
+a
+e
+e
+c
+a
+a
+a
+a
+c
+"}
+(4,1,1) = {"
+r
+G
+e
+e
+c
+V
+A
+b
+a
+c
+"}
+(5,1,1) = {"
+r
+g
+e
+l
+c
+c
+c
+c
+c
+c
+"}
+(6,1,1) = {"
+r
+N
+e
+y
+d
+q
+I
+j
+v
+c
+"}
+(7,1,1) = {"
+r
+C
+e
+a
+a
+e
+e
+e
+a
+a
+"}
+(8,1,1) = {"
+c
+e
+e
+S
+a
+S
+e
+e
+a
+a
+"}
+(9,1,1) = {"
+c
+Y
+e
+x
+D
+L
+M
+h
+Y
+c
+"}
+(10,1,1) = {"
+c
+r
+r
+i
+c
+c
+c
+c
+c
+c
+"}

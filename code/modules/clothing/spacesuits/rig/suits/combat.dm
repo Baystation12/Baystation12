@@ -90,8 +90,8 @@
 	icon_state = "military_rig"
 	suit_type = "military hardsuit"
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_AP,
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_RIFLE,
 		laser = ARMOR_LASER_RIFLES,
 		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_RESISTANT,
@@ -166,3 +166,53 @@
 		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/cooling_unit
 		)
+
+/obj/item/rig/military/iccgn
+	name = "iccgn hardsuit control module"
+	desc = "An bulky rigsuit for frontline combat. Used by the Orbital Navy forces."
+	icon_state = "gcc_elite"
+	armor = list(
+		melee = ARMOR_MELEE_VERY_HIGH,
+		bullet = ARMOR_BALLISTIC_AP,
+		laser = ARMOR_LASER_RIFLES,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_MINOR
+		)
+	chest_type = /obj/item/clothing/suit/space/rig/military/iccgn
+	helm_type = /obj/item/clothing/head/helmet/space/rig/military/iccgn
+	boot_type = /obj/item/clothing/shoes/magboots/rig/military/iccgn
+	glove_type = /obj/item/clothing/gloves/rig/military/iccgn
+
+/obj/item/clothing/head/helmet/space/rig/military/iccgn
+
+/obj/item/clothing/suit/space/rig/military/iccgn
+	allowed = list(
+		/obj/item/device/flashlight,
+		/obj/item/tank,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/handcuffs,
+		/obj/item/device/t_scanner,
+		/obj/item/rcd,
+		/obj/item/crowbar,
+		/obj/item/screwdriver,
+		/obj/item/weldingtool,
+		/obj/item/wirecutters,
+		/obj/item/wrench,
+		/obj/item/device/multitool,
+		/obj/item/device/radio,
+		/obj/item/device/scanner/gas,
+		/obj/item/storage/briefcase/inflatable,
+		/obj/item/melee/baton,
+		/obj/item/gun,
+		/obj/item/storage/firstaid,
+		/obj/item/reagent_containers/hypospray,
+		/obj/item/roller_bed,
+		/obj/item/device/suit_cooling_unit
+	)
+
+/obj/item/clothing/shoes/magboots/rig/military/iccgn
+
+/obj/item/clothing/gloves/rig/military/iccgn

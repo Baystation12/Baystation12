@@ -36,3 +36,21 @@
 	for(var/obj/thing in list(arms,legs,head,body))
 		thing.color = COLOR_WHITE
 
+/mob/living/exosuit/premade/combat/iccgn
+	name = "GCMU Hunter-Killer"
+	desc = "A fast and loose armour destroyer. Used to flush out entrenched units."
+
+/mob/living/exosuit/premade/combat/iccgn/Initialize()
+	. = ..()
+	if(arms)
+		arms.color = CABLE_COLOR_RED
+	if(legs)
+		legs.color = COLOR_GRAY20
+	if(head)
+		head.color = COLOR_GRAY20
+	if(body)
+		body.color = COLOR_GRAY20
+
+/mob/living/exosuit/premade/combat/iccgn/spawn_mech_equipment()
+	install_system(new /obj/item/mech_equipment/mounted_system/taser/laser/ramfire(src), HARDPOINT_LEFT_HAND)
+	install_system(new /obj/item/mech_equipment/mounted_system/taser/flakgun(src), HARDPOINT_RIGHT_HAND)
