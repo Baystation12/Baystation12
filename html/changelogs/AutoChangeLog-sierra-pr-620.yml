@@ -1,5 +1,0 @@
-author: emmanuelbassil
-delete-after: true
-changes:
-  - bugfix: Emagging a vending machine unlocks hidden items again.
-  - bugfix: Fixes seed vendor disappearing for a second when vending items.

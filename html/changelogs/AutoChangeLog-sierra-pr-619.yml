@@ -1,5 +1,0 @@
-author: LordNest
-delete-after: true
-changes:
-  - bugfix: у бармена теперь есть доступ в бар
-  - maptweak: добавил транспондеры на карту
