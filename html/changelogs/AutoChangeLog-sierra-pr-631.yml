@@ -1,0 +1,8 @@
+author: Ryan180602, Juxtaposed
+delete-after: true
+changes:
+  - rscadd: Allow artefacts to be exported. Worth is calculated based on effects/trigger.
+      Needs the scan-sheet on the anomaly container.
+  - rscadd: Allow simplemobs (caged animals) to be exported. Worth is based on passive/retaliate/hostile.
+  - bugfix: Stasis cages now properly delete nets when containing animals.
+  - bugfix: Stasis cages cells and power usage are fixed.
