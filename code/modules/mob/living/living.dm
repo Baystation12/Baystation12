@@ -601,8 +601,7 @@ default behaviour is:
 				return set_dir(get_dir(src, pulling))
 
 /mob/living/proc/handle_pull_damage(mob/living/puller)
-	var/area/A = get_area(src)
-	if(!A.has_gravity)
+	if(!has_gravity())
 		return
 	var/turf/location = get_turf(src)
 	if(lying && prob(getBruteLoss() / 6))
@@ -742,7 +741,7 @@ default behaviour is:
 		return
 	if(W in organs)
 		return
-	return ..()
+	. = ..()
 
 //damage/heal the mob ears and adjust the deaf amount
 /mob/living/adjustEarDamage(damage, deaf)
@@ -826,7 +825,7 @@ default behaviour is:
 		for(var/a in auras)
 			remove_aura(a)
 	GLOB.living_players -= src
-	selected_image = null
+	qdel(selected_image)
 	return ..()
 
 /mob/living/proc/melee_accuracy_mods()

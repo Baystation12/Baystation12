@@ -119,7 +119,7 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 9
 	},
-/mob/living/simple_animal/hostile/pirate,
+/mob/living/simple_animal/hostile/human/pirate,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "oV" = (
@@ -251,7 +251,7 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 5
 	},
-/mob/living/simple_animal/hostile/pirate/ranged,
+/mob/living/simple_animal/hostile/human/pirate/ranged,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "Mz" = (
@@ -353,7 +353,7 @@
 	},
 /area/map_template/deepmaint)
 "Zg" = (
-/mob/living/simple_animal/hostile/pirate/ranged,
+/mob/living/simple_animal/hostile/human/pirate/ranged,
 /turf/simulated/floor/plating{
 	icon_state = "asteroidplating"
 	},

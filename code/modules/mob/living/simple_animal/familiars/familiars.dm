@@ -69,7 +69,7 @@
 
 	wizardy_spells = list(/spell/aoe_turf/conjure/forcewall)
 
-/mob/living/simple_animal/familiar/pike/Allow_Spacemove(check_drift = 0)
+/mob/living/simple_animal/familiar/pike/Process_Spacemove()
 	return 1	//No drifting in space for space carp!	//original comments do not steal
 
 /mob/living/simple_animal/familiar/horror

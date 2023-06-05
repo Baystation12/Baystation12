@@ -78,24 +78,26 @@
 		return MOVEMENT_PROCEED
 	return (MOVEMENT_PROCEED|MOVEMENT_HANDLED)
 
+/datum/movement_handler/mob/space
+	var/allow_move
+
 // Space movement
 /datum/movement_handler/mob/space/DoMove(direction, mob/mover)
-	if(!mob.check_solid_ground())
-		var/allowmove = mob.Allow_Spacemove(0)
-		if(!allowmove)
+	if(!mob.has_gravity())
+		if(!allow_move)
 			return MOVEMENT_HANDLED
-		else if(allowmove == -1 && mob.handle_spaceslipping()) //Check to see if we slipped
+		if(!mob.space_do_move(allow_move, direction))
 			return MOVEMENT_HANDLED
-		else
-			mob.inertia_dir = 0 //If not then we can reset inertia and move
 
 /datum/movement_handler/mob/space/MayMove(mob/mover, is_external)
 	if(IS_NOT_SELF(mover) && is_external)
 		return MOVEMENT_PROCEED
 
-	if(!mob.check_solid_ground())
-		if(!mob.Allow_Spacemove(0))
+	if(!mob.has_gravity())
+		allow_move = mob.Process_Spacemove(1)
+		if(!allow_move)
 			return MOVEMENT_STOP
+
 	return MOVEMENT_PROCEED
 
 // Buckle movement
@@ -270,7 +272,7 @@
 /mob/living/carbon/human/get_stamina_used_per_step()
 	var/mod = (1-((get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)))
 	if(species && (species.species_flags & SPECIES_FLAG_LOW_GRAV_ADAPTED))
-		if(has_gravity(src))
+		if(has_gravity())
 			mod *= 1.2
 		else
 			mod *= 0.8

@@ -229,7 +229,7 @@
 				to_chat(user, SPAN_NOTICE("You start prying out the circuits from \the [src]."))
 
 				playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-				if (do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) && buildstage == 1)
+				if (do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT) && buildstage == 1)
 					user.visible_message(
 
 					SPAN_NOTICE("\The [user] has pried the circuits out of \the [src]."),

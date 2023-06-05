@@ -131,7 +131,8 @@
 		/obj/item/clothing/gloves,
 		/obj/item/tape_roll,
 		/obj/item/clothing/head/beret,
-		/obj/item/material/knife/folding
+		/obj/item/material/knife/folding,
+		/obj/item/swapper
 		)
 
 
@@ -156,7 +157,14 @@
 	new /obj/item/device/t_scanner(src)
 	update_icon()
 
-
+/obj/item/storage/belt/utility/engi_command/New()
+	..()
+	new /obj/item/swapper/power_drill(src)
+	new /obj/item/weldingtool(src)
+	new /obj/item/swapper/jaws_of_life(src)
+	new /obj/random/single/color/cable_coil(src, 30)
+	new /obj/item/device/t_scanner(src)
+	update_icon()
 
 /obj/item/storage/belt/medical
 	name = "medical belt"

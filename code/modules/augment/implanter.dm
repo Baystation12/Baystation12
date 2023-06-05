@@ -39,7 +39,7 @@
 			SPAN_ITALIC("You hear metal creaking.")
 		)
 		playsound(user, 'sound/items/Crowbar.ogg', 50, TRUE)
-		if (!do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE) || !augment)
+		if (!do_after(user, (I.toolspeed * 10) SECONDS, src, DO_PUBLIC_UNIQUE) || !augment)
 			return
 		user.visible_message(
 			SPAN_ITALIC("\The [user] removes \the [augment] from \the [src]."),

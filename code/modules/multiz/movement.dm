@@ -110,7 +110,7 @@
 	return 0
 
 /mob/living/carbon/human/can_ztravel()
-	if(Allow_Spacemove())
+	if(Process_Spacemove())
 		return 1
 
 	if(Check_Shoegrip())	//scaling hull with magboots
@@ -119,7 +119,7 @@
 				return 1
 
 /mob/living/silicon/robot/can_ztravel()
-	if(Allow_Spacemove()) //Checks for active jetpack
+	if(Process_Spacemove()) //Checks for active jetpack
 		return 1
 
 	for(var/turf/simulated/T in trange(1,src)) //Robots get "magboots"
@@ -142,8 +142,7 @@
 		return
 
 	// No gravity in space, apparently.
-	var/area/area = get_area(src)
-	if(!area.has_gravity())
+	if(!has_gravity())
 		return
 
 	if(throwing)
@@ -289,8 +288,7 @@
 	var/turf/T = get_turf(A)
 	var/turf/above = GetAbove(src)
 	if(above && T.Adjacent(bound_overlay) && above.CanZPass(src, UP)) //Certain structures will block passage from below, others not
-		var/area/location = get_area(loc)
-		if(location.has_gravity && !can_overcome_gravity())
+		if(loc.has_gravity() && !can_overcome_gravity())
 			return FALSE
 
 		visible_message(SPAN_NOTICE("[src] starts climbing onto \the [A]!"), SPAN_NOTICE("You start climbing onto \the [A]!"))

@@ -12,7 +12,7 @@
 		if(!silent)
 			to_chat(user, SPAN_WARNING("You are buckled down and cannot maneuver!"))
 		return FALSE
-	if(!has_gravity(user))
+	if(!user.has_gravity())
 		if(!silent)
 			to_chat(user, SPAN_WARNING("You cannot maneuver in zero gravity!"))
 		return FALSE

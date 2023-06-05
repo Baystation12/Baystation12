@@ -13,7 +13,7 @@
 	if(isWelder(W))
 		if(damaged)
 			user.visible_message("[user] begins to repair [src].", "You begin repairing [src].")
-			if(do_after(usr, 10 SECONDS, src, DO_REPAIR_CONSTRUCT))
+			if(do_after(usr, (W.toolspeed * 10) SECONDS, src, DO_REPAIR_CONSTRUCT))
 				var/obj/item/weldingtool/w
 				if(w.burn_fuel(10))
 					damaged = 0

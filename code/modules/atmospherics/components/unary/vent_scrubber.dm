@@ -219,7 +219,7 @@
 		to_chat(user, SPAN_NOTICE("Now welding \the [src]."))
 		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 
-		if(!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT))
+		if(!do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 			to_chat(user, SPAN_NOTICE("You must remain close to finish this task."))
 			return 1
 

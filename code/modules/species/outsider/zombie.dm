@@ -177,12 +177,8 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	addtimer(new Callback(src, .proc/handle_action, H), rand(10, 20))
 
 /datum/species/zombie/proc/handle_action(mob/living/carbon/human/H)
-	if (QDELING(H))
-		return
 	var/dist = 128
 	for(var/mob/living/M in hearers(H, 15))
-		if (QDELING(M))
-			continue
 		if ((ishuman(M) || istype(M, /mob/living/exosuit)) && !M.is_species(SPECIES_ZOMBIE) && !M.is_species(SPECIES_DIONA)) //Don't attack fellow zombies, or diona
 			if (istype(M, /mob/living/exosuit))
 				var/mob/living/exosuit/MC = M

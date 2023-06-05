@@ -51,6 +51,7 @@
 	var/const/fancyfont = "Garamond"
 
 	var/scan_file_type = /datum/computer_file/data/text
+	var/is_copy = TRUE
 
 /obj/item/paper/New(loc, text, title, list/md = null, datum/language/L = null)
 	..(loc)
@@ -555,7 +556,12 @@
 //For supply.
 /obj/item/paper/manifest
 	name = "supply manifest"
-	var/is_copy = 1
+
+
+//For anomalies.
+/obj/item/paper/anomaly_scan
+	name = "anomaly scan result"
+
 /*
  * Premade paper
  */

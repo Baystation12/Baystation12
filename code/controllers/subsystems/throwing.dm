@@ -1,10 +1,10 @@
-#define MAX_THROWING_DIST 1280 // 5 z-levels on default width
 #define MAX_TICKS_TO_MAKE_UP 3 //how many missed ticks will we attempt to make up for this run.
 
 
 SUBSYSTEM_DEF(throwing)
 	name = "Throwing"
 	wait = 1
+	priority = SS_PRIORITY_THROWING
 	flags = SS_NO_INIT | SS_KEEP_TIMING
 
 	/// An atom => thrownthing map of current throws
@@ -113,7 +113,6 @@ SUBSYSTEM_DEF(throwing)
 	if (dist_travelled && hitcheck(get_turf(thrownthing)))
 		finalize()
 		return
-	var/area/A = get_area(AM.loc)
 	var/atom/step
 	last_move = world.time
 	var/scaled_wait = world.tick_lag * SSthrowing.wait
@@ -122,7 +121,7 @@ SUBSYSTEM_DEF(throwing)
 	var/max_travel = speed * MAX_TICKS_TO_MAKE_UP
 	var/tilestomove = ceil(min(target_travel - prior_travel, max_travel) * scaled_wait)
 	while (tilestomove-- > 0)
-		if ((dist_travelled >= maxrange || AM.loc == target_turf) && (A && A.has_gravity()))
+		if (dist_travelled >= maxrange || AM.loc == target_turf)
 			finalize()
 			return
 		if (dist_travelled <= max(dist_x, dist_y)) //if we haven't reached the target yet we home in on it, otherwise we use the initial direction
@@ -141,14 +140,8 @@ SUBSYSTEM_DEF(throwing)
 			return
 		AM.Move(step, get_dir(AM, step))
 		if (!AM.throwing) // we hit something during our move
-			finalize(hit = TRUE)
 			return
 		dist_travelled++
-		if (dist_travelled > MAX_THROWING_DIST)
-			finalize()
-			return
-		sleep(-1)
-		A = get_area(AM.loc)
 
 
 /datum/thrownthing/proc/finalize(hit = FALSE, t_target = null)
@@ -164,9 +157,8 @@ SUBSYSTEM_DEF(throwing)
 				break
 		if (!hit)
 			thrownthing.throw_impact(get_turf(thrownthing), src)
-	if(ismob(thrownthing))
-		var/mob/M = thrownthing
-		M.inertia_dir = init_dir
+			thrownthing.space_drift(init_dir)
+
 	if(t_target && !QDELETED(thrownthing))
 		thrownthing.throw_impact(t_target, src)
 	if (callback)

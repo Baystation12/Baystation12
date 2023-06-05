@@ -138,7 +138,7 @@
 			SPAN_NOTICE("\The [user] starts dismantling \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start dismantling \the [src] with \a [tool].")
 		)
-		if (!user.do_skilled(5 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+		if (!user.do_skilled((tool.toolspeed * 5) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
 		user.visible_message(

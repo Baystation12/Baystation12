@@ -437,11 +437,11 @@
 		..()
 		return
 
-	if(istype(I, /obj/item/wrench))
+	if(isWrench(I))
 		if(istype(loc, /turf) && (IC_FLAG_ANCHORABLE & circuit_flags))
 			user.visible_message(SPAN_NOTICE("\The [user] wrenches \the [src]'s anchoring bolts [anchored ? "back" : "into position"]."))
 			playsound(get_turf(user), 'sound/items/Ratchet.ogg',50)
-			if(user.do_skilled(5 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT))
+			if(user.do_skilled((I.toolspeed * 5) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT))
 				anchored = !anchored
 		return
 

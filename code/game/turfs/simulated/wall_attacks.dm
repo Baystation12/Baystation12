@@ -304,7 +304,7 @@
 				if(isScrewdriver(W))
 					to_chat(user, SPAN_NOTICE("You begin removing the support lines."))
 					playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
-					if(!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || construction_stage != 5)
+					if(!do_after(user, (W.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT) || construction_stage != 5)
 						return
 					construction_stage = 4
 					update_icon()
@@ -336,7 +336,7 @@
 				if(cut_cover)
 					to_chat(user, SPAN_NOTICE("You begin slicing through the metal cover."))
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
-					if(!do_after(user, 6 SECONDS, src, strict_timer_flags ? DO_PUBLIC_UNIQUE : DO_REPAIR_CONSTRUCT) || construction_stage != 4)
+					if(!do_after(user, (W.toolspeed * 6) SECONDS, src, strict_timer_flags ? DO_PUBLIC_UNIQUE : DO_REPAIR_CONSTRUCT) || construction_stage != 4)
 						return
 					construction_stage = 3
 					update_icon()
@@ -346,7 +346,7 @@
 				if(isCrowbar(W))
 					to_chat(user, SPAN_NOTICE("You struggle to pry off the cover."))
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-					if(!do_after(user, 10 SECONDS, src, DO_REPAIR_CONSTRUCT) || construction_stage != 3)
+					if(!do_after(user, (W.toolspeed * 10) SECONDS, src, DO_REPAIR_CONSTRUCT) || construction_stage != 3)
 						return
 					construction_stage = 2
 					update_icon()
@@ -356,7 +356,7 @@
 				if(isWrench(W))
 					to_chat(user, SPAN_NOTICE("You start loosening the anchoring bolts which secure the support rods to their frame."))
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
-					if(!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || construction_stage != 2)
+					if(!do_after(user, (W.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT) || construction_stage != 2)
 						return
 					construction_stage = 1
 					update_icon()
@@ -381,7 +381,7 @@
 				if(cut_cover)
 					to_chat(user, SPAN_NOTICE("You begin slicing through the support rods."))
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
-					if(!do_after(user, 7 SECONDS, src, strict_timer_flags ? DO_PUBLIC_UNIQUE : DO_REPAIR_CONSTRUCT) || construction_stage != 1)
+					if(!do_after(user, (W.toolspeed * 7) SECONDS, src, strict_timer_flags ? DO_PUBLIC_UNIQUE : DO_REPAIR_CONSTRUCT) || construction_stage != 1)
 						return
 					construction_stage = 0
 					update_icon()
@@ -392,7 +392,7 @@
 				if(isCrowbar(W))
 					to_chat(user, SPAN_NOTICE("You struggle to pry off the outer sheath."))
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-					if(!do_after(user, 10 SECONDS, src, DO_REPAIR_CONSTRUCT) || !W || !T )	return
+					if(!do_after(user, (W.toolspeed * 10) SECONDS, src, DO_REPAIR_CONSTRUCT) || !W || !T )	return
 					if(user.loc == T && user.get_active_hand() == W )
 						to_chat(user, SPAN_NOTICE("You pry off the outer sheath."))
 						dismantle_wall()

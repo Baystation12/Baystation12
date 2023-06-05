@@ -163,7 +163,7 @@
 		user.visible_message(SPAN_WARNING("\The [user] dismantles the power terminal from \the [machine]."), \
 							"You begin to cut the cables...")
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		if(do_after(user, 5 SECONDS, machine, DO_REPAIR_CONSTRUCT))
+		if(do_after(user, (I.toolspeed * 5) SECONDS, machine, DO_REPAIR_CONSTRUCT))
 			if(terminal && (machine == loc) && machine.components_are_accessible(type))
 				if (prob(50) && electrocute_mob(user, terminal.powernet, terminal))
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread

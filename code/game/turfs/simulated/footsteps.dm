@@ -53,7 +53,7 @@
 		return
 
 	// don't need to step as often when you hop around
-	if((step_count % 3) && !has_gravity(src))
+	if((step_count % 3) && !has_gravity())
 		return
 
 	if(istype(move_intent, /singleton/move_intent/creep)) //We don't make sounds if we're tiptoeing

@@ -7,7 +7,7 @@
 	var/chargelevel = 0
 	var/chargelevelmax = 10
 	var/artifact_id = ""
-	var/effect_type = 0
+	var/effect_type = EFFECT_UNKNOWN
 	var/toggled = FALSE
 	var/on_time //time artifact should stay on for when toggled
 

@@ -383,31 +383,8 @@ meteor_act
 					affecting.embed(I, supplied_wound = created_wound)
 					I.has_embedded()
 
-		// Begin BS12 momentum-transfer code.
-		var/mass = 1.5
-		if(istype(O, /obj/item))
-			var/obj/item/I = O
-			mass = I.w_class/THROWNOBJ_KNOCKBACK_DIVISOR
-		var/momentum = TT.speed*mass
+		process_momentum(AM, TT)
 
-		if(momentum >= THROWNOBJ_KNOCKBACK_SPEED)
-			var/dir = TT.init_dir
-
-			visible_message(SPAN_WARNING("\The [src] staggers under the impact!"),SPAN_WARNING("You stagger under the impact!"))
-
-			if(!src.isinspace())
-				src.throw_at(get_edge_target_turf(src,dir),1,momentum - THROWNOBJ_KNOCKBACK_SPEED)
-
-			if(!O || !src) return
-
-			if(O.loc == src && O.sharp && !(mob_flags & MOB_FLAG_UNPINNABLE)) //Projectile is embedded and suitable for pinning.
-				var/turf/T = near_wall(dir,2)
-
-				if(T)
-					src.forceMove(T)
-					visible_message(SPAN_WARNING("[src] is pinned to the wall by [O]!"),SPAN_WARNING("You are pinned to the wall by [O]!"))
-					src.anchored = TRUE
-					src.pinned += O
 	else
 		..()
 

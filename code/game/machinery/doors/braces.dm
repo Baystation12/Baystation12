@@ -120,7 +120,7 @@
 				SPAN_ITALIC("\The [user] begins repairing damage on \a [src]."),
 				SPAN_ITALIC("You begin repairing damage on the [src].")
 			)
-			if (do_after(user, 3 SECONDS, airlock, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+			if (do_after(user, (item.toolspeed * 3) SECONDS, airlock, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				user.visible_message(
 					SPAN_ITALIC("\The [user] repairs damage on \a [src]."),
 					SPAN_ITALIC("You repair damage on the [src].")

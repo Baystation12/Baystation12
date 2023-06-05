@@ -7,6 +7,7 @@
 	damage_flags = DAMAGE_FLAG_BULLET | DAMAGE_FLAG_SHARP
 	embed = TRUE
 	penetration_modifier = 1.0
+	space_knockback = 1
 	var/mob_passthrough_check = 0
 	var/is_pellet = FALSE
 
