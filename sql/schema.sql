@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `erro_player` (
   `lastadminrank` text DEFAULT NULL,
   `staffwarn` text DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `ckey` (`ckey`) USING HASH,
+  UNIQUE KEY `ckey` (`ckey`(768)) USING HASH,
   KEY `ckey_2` (`ckey`(768)),
   KEY `ip` (`ip`(768)),
   KEY `computerid` (`computerid`(768))
