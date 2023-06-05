@@ -62,5 +62,5 @@
 	icon_dead = "[carp_color]_dead"
 
 
-/mob/living/simple_animal/hostile/carp/Allow_Spacemove(check_drift)
+/mob/living/simple_animal/hostile/carp/Process_Spacemove()
 	return TRUE
