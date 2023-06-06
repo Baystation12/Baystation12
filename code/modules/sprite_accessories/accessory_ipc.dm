@@ -20,3 +20,16 @@
 /datum/sprite_accessory/marking/ipc/morpheus
 	name = "Morpheus Optics (IPC)"
 	icon_state = "morpheus_optics"
+
+/datum/sprite_accessory/marking/ipc/antenna
+	name = "Angled Antennas (IPC)"
+	icon_state = "antenna_dual"
+	blend = ICON_MULTIPLY
+
+/datum/sprite_accessory/marking/ipc/antenna/left
+	name = "Left Antenna (IPC)"
+	icon_state = "antenna_left"
+
+/datum/sprite_accessory/marking/ipc/antenna/right
+	name = "Right Antenna (IPC)"
+	icon_state = "antenna_right"
