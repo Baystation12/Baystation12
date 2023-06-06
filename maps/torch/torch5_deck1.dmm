@@ -21721,6 +21721,7 @@
 	},
 /obj/structure/table/standard,
 /obj/item/storage/box/bloodpacks,
+/obj/item/storage/box/glucose,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "lAC" = (
