@@ -24,6 +24,9 @@
 	/// icon_state to flick() when vending
 	var/icon_vend
 
+	/// Total number of overlays that can be randomly picked from when an item is being vended.
+	var/max_overlays = 1
+
 	/// icon_state to flick() when refusing to vend
 	var/icon_deny
 
@@ -115,7 +118,7 @@
 	if (panel_open)
 		overlays += image(icon, "[initial(icon_state)]-panel")
 	if(!vend_ready)
-		overlays += image(icon, "[initial(icon_state)]-shelf[rand(3)]")
+		overlays += image(icon, "[initial(icon_state)]-shelf[rand(max_overlays)]")
 
 
 /obj/machinery/vending/ex_act(severity)
