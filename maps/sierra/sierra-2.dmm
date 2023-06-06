@@ -25096,7 +25096,9 @@
 	dir = 4
 	},
 /obj/effect/catwalk_plated/white,
-/obj/structure/hygiene/sink,
+/obj/structure/hygiene/sink{
+	pixel_y = -12
+	},
 /obj/machinery/button/blast_door{
 	dir = 1;
 	id_tag = "xenobio1";
@@ -25252,7 +25254,6 @@
 	dir = 4
 	},
 /obj/effect/catwalk_plated/white,
-/obj/structure/hygiene/sink,
 /obj/machinery/button/blast_door{
 	dir = 1;
 	id_tag = "xenobio2";
@@ -25279,6 +25280,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
 	dir = 4
 	},
+/obj/structure/hygiene/sink{
+	pixel_y = -12
+	},
 /turf/simulated/open,
 /area/rnd/xenobiology/level1)
 "aUE" = (
@@ -25286,7 +25290,6 @@
 	dir = 4
 	},
 /obj/effect/catwalk_plated/white,
-/obj/structure/hygiene/sink,
 /obj/machinery/button/blast_door{
 	dir = 1;
 	id_tag = "xenobio3_vent";
@@ -25302,6 +25305,9 @@
 	pixel_x = -6;
 	pixel_y = -21;
 	req_access = list("ACCESS_RESEARCH")
+	},
+/obj/structure/hygiene/sink{
+	pixel_y = -12
 	},
 /turf/simulated/open,
 /area/rnd/xenobiology/level1)
@@ -26550,6 +26556,10 @@
 	},
 /obj/effect/floor_decal/corner/purple/bordercorner2{
 	dir = 4
+	},
+/obj/structure/hygiene/sink{
+	dir = 4;
+	pixel_x = 11
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/level1)
@@ -33161,6 +33171,7 @@
 	c_tag = "Cryogenic Storage - Third Cryopods";
 	dir = 4
 	},
+/obj/structure/closet/emcloset/anchored,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/sleep/cryo)
 "cDx" = (
@@ -33619,6 +33630,16 @@
 "dXt" = (
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/water_cell)
+"dYe" = (
+/obj/effect/floor_decal/borderfloor{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/lime/border{
+	dir = 1
+	},
+/obj/machinery/ship_map,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/seconddeck/center)
 "dYg" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -37916,6 +37937,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
+/obj/structure/closet/emcloset/anchored,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/sleep/cryo)
 "qCK" = (
@@ -38085,6 +38107,7 @@
 	dir = 8;
 	pixel_x = 24
 	},
+/obj/structure/closet/emcloset/anchored,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/sleep/cryo)
 "qXN" = (
@@ -57938,7 +57961,7 @@ deW
 kyz
 vPg
 amq
-mZD
+dYe
 aiB
 aVI
 aYh

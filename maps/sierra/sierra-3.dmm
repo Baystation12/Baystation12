@@ -956,8 +956,10 @@
 	pixel_x = -1;
 	pixel_y = -24
 	},
-/obj/structure/hygiene/sink,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/hygiene/sink{
+	pixel_y = -12
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/heads/captain/secret_room/level_two)
 "acc" = (
@@ -40992,6 +40994,16 @@
 /obj/random/trash,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
+"rrt" = (
+/obj/effect/floor_decal/borderfloor{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/machinery/ship_map,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/firstdeck/aft)
 "rwo" = (
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue)
@@ -42181,7 +42193,6 @@
 	},
 /area/space)
 "vky" = (
-/obj/structure/hygiene/sink,
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/purple/border,
 /obj/effect/floor_decal/borderfloorwhite/corner2{
@@ -42189,6 +42200,9 @@
 	},
 /obj/effect/floor_decal/corner/purple/bordercorner2{
 	dir = 9
+	},
+/obj/structure/hygiene/sink{
+	pixel_y = -12
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
@@ -65320,7 +65334,7 @@ kmz
 eNQ
 qaE
 spL
-aBF
+rrt
 aDF
 aFp
 aGW

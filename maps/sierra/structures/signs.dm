@@ -7,7 +7,7 @@
 
 
 /obj/structure/sign/memorial/sierra
-	name = "\improper NSV Sierra memorial"
+	name = "\improper NSV Sierra model"
 	icon = 'maps/sierra/structures/memorial/sierra_memorial.dmi'
 	icon_state = "sierra"
 
@@ -29,7 +29,7 @@
 
 	set_light(0.8, 2, 5, 2, COLOR_TEAL)
 
-	desc = "You see a holographic sign that says: 'Memorial of N.S.V. Sierra - Modified Mako Class'"
+	desc = "You see a holographic sign that says: 'Model of N.S.V. Sierra - Modified Mako Class'"
 	description = {"<div style="max-width: 480px; margin: 12px auto;"><div style="border: 1px solid #4e9bcf; padding: 20px; color: #4e9bcf; margin-bottom: 10px; font-family: monospace;"><div style="font-size: 14px; text-align: center; font-weight: bold;"><div>N.S.V. Sierra - Modified Mako Class</div><div>NanoTrasen Registry 3525 - Blume Ship Yards.</div></div><hr style="border-color: #4e9bcf;"><div style="font-style: italic; text-align: center;"><div>Earth - Fourth Vessel To Bear The Name</div><div>Launched [GLOB.using_map.game_year - 12] - Sol Central Government</div><div>"Travels to the abyss always pays off"</div></div><hr style="border-color: #4e9bcf;"><div>Special thanks to the engineers of section '#2179-INF'.<br><br>Adjustment Engineers: [developers] for invaluable contributions to the development of the NSV Sierra.</div></div><div class="notice">Next comes an extremely long list of names and job titles, as well as a photograph of the team of engineers responsible for building this ship.</div></div>"}
 
 	update_icon()
