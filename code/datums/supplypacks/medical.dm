@@ -117,6 +117,16 @@
 	cost = 25
 	containername = "unathi blood crate"
 
+
+/singleton/hierarchy/supply_pack/medical/glucose
+	name = "Refills - Glucose"
+	contains = list(
+		/obj/item/storage/box/glucose = 2
+	)
+	cost = 15
+	containername = "glucose crate"
+
+
 /singleton/hierarchy/supply_pack/medical/bodybag
 	name = "Equipment - Body bags"
 	contains = list(/obj/item/storage/box/bodybags = 3)

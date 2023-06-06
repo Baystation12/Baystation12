@@ -375,12 +375,28 @@
 	return ..(mapload, "O-")
 
 
+/obj/item/reagent_containers/ivbag/glucose/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment/glucose, volume)
+	AddLabel("Glucose")
+	UpdateItemSize()
+
+
 /obj/item/storage/box/bloodpacks
 	name = "blood packs box"
 	desc = "This box contains empty blood packs."
 	icon_state = "sterile"
 	startswith = list(
 		/obj/item/reagent_containers/ivbag = 7
+	)
+
+
+/obj/item/storage/box/glucose
+	name = "glucose box"
+	desc = "This box contains glucose IV bags."
+	icon_state = "sterile"
+	startswith = list(
+		/obj/item/reagent_containers/ivbag/glucose = 7
 	)
 
 
