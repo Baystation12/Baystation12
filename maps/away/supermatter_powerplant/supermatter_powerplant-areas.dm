@@ -1,7 +1,25 @@
 /area/supermatter_powerplant
 	icon = 'maps/away/supermatter_powerplant/supermatter_powerplant-sprites.dmi'
 
-// The Areas of the place in the space
+// The surface of the place (Best place ngl)
+
+/area/supermatter_powerplant/ground
+	name = "Lush Planet Surface"
+	icon_state = "ground"
+	ambience = list('sound/ambience/ambimine.ogg', 'sound/ambience/song_game.ogg')
+	sound_env = ASTEROID
+	planetary_surface = TRUE
+
+// The areas that are just under the surface
+
+/area/supermatter_powerplant/underground_2
+	name = "Yellowstone Underground"
+	icon_state = "supermatter_complex-1"
+	ambience = list('sound/ambience/spookyspace1.ogg', 'sound/ambience/spookyspace2.ogg')
+	sound_env = ASTEROID
+
+
+// The furthest most downest place areas....
 /area/supermatter_powerplant/hangar
 	name = "Yellowstone Hangar"
 	icon_state = "supermatter_powerplant-1"
@@ -61,3 +79,9 @@
 /area/supermatter_powerplant/engineering
 	name = "Yellowstone Engineering Storage"
 	icon_state = "supermatter_powerplant-15"
+
+/area/supermatter_powerplant/underground_1
+	name = "Yellowstone Deep Underground"
+	icon_state = "supermatter_powerplant-16"
+	ambience = list('sound/ambience/spookyspace1.ogg', 'sound/ambience/spookyspace2.ogg')
+	sound_env = ASTEROID
