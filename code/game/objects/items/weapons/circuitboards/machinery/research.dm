@@ -157,7 +157,8 @@
 	additional_spawn_components = list(
 		/obj/item/stock_parts/console_screen = 1,
 		/obj/item/stock_parts/power/battery/buildable/stock = 1,
-		/obj/item/cell/high = 1
+		/obj/item/cell/high = 1,
+		/obj/item/stock_parts/power/apc = 1
 	)
 
 /obj/item/stock_parts/circuitboard/cracker
