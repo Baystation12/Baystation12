@@ -1,14 +1,15 @@
 /datum/preferences
-	var/clientfps = 40
-	var/ooccolor = "#010000" //Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
-
+	var/clientfps = CLIENT_DEFAULT_FPS
+	var/ooccolor = "#010000"
 	var/UI_style = "Midnight"
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
 
+
 /datum/category_item/player_setup_item/player_global/ui
 	name = "UI"
 	sort_order = 1
+
 
 /datum/category_item/player_setup_item/player_global/ui/load_preferences(datum/pref_record_reader/R)
 	pref.UI_style = R.read("UI_style")
@@ -17,6 +18,7 @@
 	pref.ooccolor = R.read("ooccolor")
 	pref.clientfps = R.read("clientfps")
 
+
 /datum/category_item/player_setup_item/player_global/ui/save_preferences(datum/pref_record_writer/W)
 	W.write("UI_style", pref.UI_style)
 	W.write("UI_style_color", pref.UI_style_color)
@@ -24,12 +26,14 @@
 	W.write("ooccolor", pref.ooccolor)
 	W.write("clientfps", pref.clientfps)
 
+
 /datum/category_item/player_setup_item/player_global/ui/sanitize_preferences()
 	pref.UI_style		= sanitize_inlist(pref.UI_style, all_ui_styles, initial(pref.UI_style))
 	pref.UI_style_color	= sanitize_hexcolor(pref.UI_style_color, initial(pref.UI_style_color))
 	pref.UI_style_alpha	= sanitize_integer(pref.UI_style_alpha, 0, 255, initial(pref.UI_style_alpha))
 	pref.ooccolor		= sanitize_hexcolor(pref.ooccolor, initial(pref.ooccolor))
-	pref.clientfps	    = sanitize_integer(pref.clientfps, CLIENT_MIN_FPS, CLIENT_MAX_FPS, initial(pref.clientfps))
+	sanitize_client_fps()
+
 
 /datum/category_item/player_setup_item/player_global/ui/content(mob/user)
 	. += "<b>UI Settings</b><br>"
@@ -44,6 +48,7 @@
 		else
 			. += "<a href='?src=\ref[src];select_ooc_color=1'><b>[pref.ooccolor]</b></a> <table style='display:inline;' bgcolor='[pref.ooccolor]'><tr><td>__</td></tr></table> <a href='?src=\ref[src];reset=ooc'>reset</a><br>"
 	. += "<b>Client FPS:</b> <a href='?src=\ref[src];select_fps=1'><b>[pref.clientfps]</b></a><br>"
+
 
 /datum/category_item/player_setup_item/player_global/ui/OnTopic(href,list/href_list, mob/user)
 	if(href_list["select_style"])
@@ -71,18 +76,13 @@
 			return TOPIC_REFRESH
 
 	else if(href_list["select_fps"])
-		var/version_message
-		if (user.client && user.client.byond_version < 511)
-			version_message = "\nYou need to be using byond version 511 or later to take advantage of this feature, your version of [user.client.byond_version] is too low"
-		if (world.byond_version < 511)
-			version_message += "\nThis server does not currently support client side fps. You can set now for when it does."
-		var/new_fps = input(user, "Choose your desired fps.[version_message]\n(0 = synced with server tick rate (currently:[world.fps]))", "Global Preference") as num|null
-		if (isnum(new_fps) && CanUseTopic(user))
-			pref.clientfps = clamp(new_fps, CLIENT_MIN_FPS, CLIENT_MAX_FPS)
-
+		var/response = input(user, "[CLIENT_MIN_FPS] - [CLIENT_MAX_FPS] (default [CLIENT_DEFAULT_FPS])", "Select Target FPS") as null | num
+		if (isnum(response) && CanUseTopic(user))
+			pref.clientfps = response
+			sanitize_client_fps()
 			var/mob/target_mob = preference_mob()
-			if(target_mob && target_mob.client)
-				target_mob.client.apply_fps(pref.clientfps)
+			if (target_mob?.client)
+				target_mob.client.fps = pref.clientfps
 			return TOPIC_REFRESH
 
 	else if(href_list["reset"])
@@ -96,6 +96,11 @@
 		return TOPIC_REFRESH
 
 	return ..()
+
+
+/datum/category_item/player_setup_item/player_global/ui/proc/sanitize_client_fps()
+	pref.clientfps = clamp(floor(pref.clientfps), CLIENT_MIN_FPS, CLIENT_MAX_FPS)
+
 
 /proc/can_select_ooc_color(mob/user)
 	return config.allow_admin_ooccolor && check_rights(R_ADMIN, 0, user)
