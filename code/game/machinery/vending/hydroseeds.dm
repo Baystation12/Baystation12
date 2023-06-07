@@ -3,6 +3,7 @@
 	desc = "When you need seeds fast!"
 	icon_state = "seeds"
 	icon_vend = "seeds-vend"
+	max_overlays = 3
 	icon_deny = "seeds-deny"
 	base_type = /obj/machinery/vending/hydroseeds
 	product_slogans = {"\
