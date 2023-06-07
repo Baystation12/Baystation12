@@ -1734,7 +1734,7 @@
 "dL" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/firstaid/adv,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/surgery)
 "dM" = (

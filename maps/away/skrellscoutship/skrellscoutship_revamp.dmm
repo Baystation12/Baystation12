@@ -1199,7 +1199,7 @@
 	pixel_x = -6;
 	pixel_y = 6
 	},
-/obj/item/storage/box/gloves{
+/obj/item/storage/box/nitrilegloves{
 	pixel_x = 7;
 	pixel_y = -3
 	},
@@ -4711,7 +4711,7 @@
 /area/ship/skrellscoutship/crew/rec)
 "Ds" = (
 /obj/structure/table/glass,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/nitrilegloves,
 /obj/item/storage/box/syringes{
 	pixel_x = 4;
 	pixel_y = 4

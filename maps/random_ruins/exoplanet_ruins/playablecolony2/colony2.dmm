@@ -478,7 +478,7 @@
 "gw" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/storage/firstaid/adv,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony2/ship)
 "gD" = (
