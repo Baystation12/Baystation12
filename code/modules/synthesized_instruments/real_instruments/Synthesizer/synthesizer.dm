@@ -30,4 +30,4 @@
 	name = "space minimoog"
 	desc = "This is a minimoog, like a space piano, but more spacey!"
 	icon_state = "minimoog"
-	obj_flags = OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_ANCHORABLE
