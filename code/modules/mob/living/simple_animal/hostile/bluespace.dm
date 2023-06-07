@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/bluespace
 	name = "bluespace figment"
-	desc = "An fragmented spectre from another dimension."
+	desc = "A fragmented spectre from another dimension."
 	icon = 'icons/mob/simple_animal/bluespace.dmi'
 	icon_state = "figment"
 	icon_living = "figment"
