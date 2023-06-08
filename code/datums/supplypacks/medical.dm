@@ -4,7 +4,10 @@
 
 /singleton/hierarchy/supply_pack/medical/gloves
 	name = "Refills - Sterile gloves"
-	contains = list(/obj/item/storage/box/gloves = 4)
+	contains = list(
+		/obj/item/storage/box/latexgloves = 2,
+		/obj/item/storage/box/nitrilegloves = 2
+	)
 	cost = 20
 	containername = "medical crate"
 
@@ -275,7 +278,8 @@
 					/obj/item/clothing/head/surgery/blue,
 					/obj/item/clothing/head/surgery/green,
 					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves)
+					/obj/item/storage/box/latexgloves
+	)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
 	containername = "medical scrubs crate"
@@ -289,8 +293,9 @@
 					/obj/item/autopsy_scanner,
 					/obj/item/scalpel/basic,
 					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves,
-					/obj/item/pen)
+					/obj/item/storage/box/latexgloves,
+					/obj/item/pen
+	)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "autopsy equipment crate"
@@ -314,7 +319,8 @@
 					/obj/item/clothing/suit/storage/toggle/labcoat/virologist,
 					/obj/item/clothing/suit/storage/toggle/labcoat/chemist,
 					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves)
+					/obj/item/storage/box/latexgloves
+	)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
 	containername = "medical uniform crate"
@@ -329,7 +335,8 @@
 					/obj/item/clothing/mask/gas = 5,
 					/obj/item/tank/oxygen = 5,
 					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves)
+					/obj/item/storage/box/latexgloves
+	)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
 	containername = "medical biohazard equipment crate"
@@ -366,8 +373,9 @@
 	contains = list(/obj/item/clothing/under/rank/medical/scrubs/green = 2,
 					/obj/item/clothing/head/surgery/green = 2,
 					/obj/item/storage/box/masks,
-					/obj/item/storage/box/gloves,
-					/obj/item/storage/belt/medical = 3)
+					/obj/item/storage/box/latexgloves,
+					/obj/item/storage/belt/medical = 3
+	)
 	cost = 15
 	containertype = /obj/structure/closet/crate
 	containername = "sterile clothes crate"

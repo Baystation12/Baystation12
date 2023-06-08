@@ -114,12 +114,19 @@
 					/obj/item/reagent_containers/food/snacks/proteinbar = 1,
 					/obj/item/device/oxycandle = 1)
 
-/obj/item/storage/box/gloves
-	name = "box of sterile gloves"
-	desc = "Contains sterile gloves."
+/obj/item/storage/box/latexgloves
+	name = "box of sterile latex gloves"
+	desc = "Contains sterile latex gloves."
 	icon_state = "latex"
-	startswith = list(/obj/item/clothing/gloves/latex = 6,
-					/obj/item/clothing/gloves/latex/nitrile = 2)
+	startswith = list(/obj/item/clothing/gloves/latex = 14)
+
+
+/obj/item/storage/box/nitrilegloves
+	name = "box of sterile nitrile gloves"
+	desc = "Contains sterile nitrile gloves."
+	icon_state = "latex"
+	startswith = list(/obj/item/clothing/gloves/latex/nitrile = 14)
+
 
 /obj/item/storage/box/masks
 	name = "box of sterile masks"

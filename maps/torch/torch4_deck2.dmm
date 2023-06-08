@@ -11548,7 +11548,7 @@
 /obj/item/storage/box/beakers,
 /obj/item/storage/box/bodybags,
 /obj/item/storage/box/masks,
-/obj/item/storage/box/gloves{
+/obj/item/storage/box/latexgloves{
 	pixel_x = 4;
 	pixel_y = 4
 	},
