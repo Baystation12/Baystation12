@@ -1,0 +1,10 @@
+author: emmanuelbassil
+delete-after: true
+changes:
+  - bugfix: You will now be able to dismantle unreinforced windows that spawn in with
+      the map
+  - bugfix: Leather sheets and material hydrogen sheets will no longer disappear when
+      in stacks greater than 2
+  - bugfix: Pianos and the minimoog can be unwrenched and wrenched at your heart's
+      content again.
+  - bugfix: Can now properly disassemble/reassemble washing machines.
