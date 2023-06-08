@@ -973,6 +973,9 @@
 	c_tag = "Charon - Cockpit";
 	dir = 1
 	},
+/obj/structure/handrail{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
 "bW" = (
@@ -1178,6 +1181,10 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/machinery/alarm{
+	pixel_y = 24;
+	req_access = list("ACCESS_TORCH_CREW")
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
 "cv" = (
@@ -1366,21 +1373,10 @@
 /area/exploration_shuttle/medical)
 "cR" = (
 /obj/structure/bed/padded,
-/obj/item/device/radio/intercom{
-	dir = 8;
-	pixel_x = 21
-	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/medical)
 "cS" = (
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
-/obj/structure/handrail{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -1520,8 +1516,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
 "dh" = (
-/obj/machinery/hologram/holopad/longrange,
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
@@ -1680,9 +1674,17 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/hologram/holopad/longrange,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/handrail{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/medical)
 "dA" = (
+/obj/structure/handrail{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
 "dB" = (
@@ -1841,16 +1843,15 @@
 "dW" = (
 /obj/structure/cable/cyan,
 /obj/structure/table/steel_reinforced,
-/obj/machinery/alarm{
-	dir = 8;
-	pixel_x = 24;
-	req_access = list("ACCESS_TORCH_CREW")
-	},
 /obj/machinery/power/apc/shuttle/charon{
 	name = "south bump";
 	pixel_y = -28
 	},
 /obj/item/storage/firstaid/radiation,
+/obj/item/device/radio/intercom{
+	dir = 8;
+	pixel_x = 21
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
 "dY" = (
@@ -1860,6 +1861,10 @@
 	},
 /obj/effect/shuttle_landmark/torch/hangar/exploration_shuttle,
 /obj/effect/overmap/visitable/ship/landable/exploration_shuttle,
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cargo)
 "dZ" = (
@@ -11276,8 +11281,8 @@
 /area/maintenance/fifthdeck/aftstarboard)
 "AW" = (
 /obj/effect/paint/hull,
-/obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/medical)
 "AY" = (
@@ -34418,9 +34423,9 @@ by
 bg
 ag
 cw
-cw
-dj
 AW
+dj
+cw
 cw
 cw
 ez
