@@ -13202,6 +13202,7 @@
 "RV" = (
 /obj/structure/table/woodentable,
 /obj/machinery/chemical_dispenser/bar_coffee/full{
+	dir = 8;
 	pixel_y = 3
 	},
 /obj/machinery/light/small{
@@ -14998,7 +14999,9 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/center)
 "WD" = (
-/obj/structure/synthesized_instrument/synthesizer/minimoog,
+/obj/structure/synthesized_instrument/synthesizer/minimoog{
+	dir = 4
+	},
 /obj/item/device/radio/intercom/entertainment{
 	dir = 4;
 	pixel_x = -22
@@ -15503,7 +15506,9 @@
 /area/hallway/primary/fourthdeck/center)
 "XW" = (
 /obj/structure/table/woodentable,
-/obj/machinery/chemical_dispenser/bar_soft/full,
+/obj/machinery/chemical_dispenser/bar_soft/full{
+	dir = 8
+	},
 /obj/item/modular_computer/telescreen/preset/generic{
 	pixel_x = 32
 	},
