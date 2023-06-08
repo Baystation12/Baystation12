@@ -286,7 +286,7 @@
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/mhydrogen
 	sheet_icon_base = "sheet-mythril"
-	sheet_no_plural_icon = TRUE
+	sheet_has_plural_icon = FALSE
 	icon_colour = "#e6c5de"
 	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 6, TECH_MAGNET = 5)
 	is_fusion_fuel = 1

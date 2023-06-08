@@ -84,8 +84,8 @@
 	var/sheet_icon_base = "sheet"
 	/// String. Icon overlay used for reinforced stacks.
 	var/sheet_icon_reinf = "reinf-overlay"
-	/// Boolean (Default `FALSE`). If set, material stacks will not have alt icons for plural or max.
-	var/sheet_no_plural_icon = FALSE
+	/// Boolean (Default `TRUE`). If set, material stacks will have alt icons for plural or max.
+	var/sheet_has_plural_icon = TRUE
 	/// String. Wall base icon state. See header.
 	var/wall_icon_base = "metal"
 	/// String. Icon overlay used for reinforced walls.

@@ -273,7 +273,7 @@
 	name = MATERIAL_LEATHER_GENERIC
 	icon_colour = "#5c4831"
 	sheet_icon_base = "sheet-leather"
-	sheet_no_plural_icon = TRUE
+	sheet_has_plural_icon = FALSE
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+300

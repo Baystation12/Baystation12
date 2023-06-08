@@ -48,14 +48,16 @@
 	if (!override_icon)
 		if (HAS_FLAGS(material_flags, USE_MATERIAL_ICON))
 			base_state = material.sheet_icon_base
-		plural_icon_state = "[base_state]-mult"
-		max_icon_state = "[base_state]-max"
+		if (material.sheet_has_plural_icon)
+			plural_icon_state = "[base_state]-mult"
+			max_icon_state = "[base_state]-max"
 		reinf_state = null
 		if (reinf_material)
 			if (HAS_FLAGS(material_flags, USE_MATERIAL_ICON))
 				reinf_state = material.sheet_icon_reinf
-			plural_reinf_state = "[reinf_state]-mult"
-			max_reinf_state = "[reinf_state]-max"
+			if (material.sheet_has_plural_icon)
+				plural_reinf_state = "[reinf_state]-mult"
+				max_reinf_state = "[reinf_state]-max"
 
 	// Update Attributes
 	stacktype = material.stack_type
