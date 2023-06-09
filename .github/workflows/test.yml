@@ -59,6 +59,7 @@ jobs:
         run: test/run-test.sh
   Maps:
     strategy:
+      fail-fast: false
       matrix:
         map:
           - example
