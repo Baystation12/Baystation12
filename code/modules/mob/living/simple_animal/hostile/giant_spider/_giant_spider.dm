@@ -14,7 +14,6 @@
 	icon_state = "generic"
 	icon_living = "generic"
 	icon_dead = "generic_dead"
-	// has_eye_glow = TRUE
 
 	faction = "spiders"
 	maxHealth = 110
@@ -33,9 +32,10 @@
 
 	response_harm   = "punches"
 
-	pry_time = 8 SECONDS
+	pry_time = 6 SECONDS
 	pry_desc = "clawing"
 
+	movement_cooldown = 2
 
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
@@ -47,8 +47,10 @@
 	ai_holder = /datum/ai_holder/simple_animal/melee
 
 	var/poison_type = /datum/reagent/toxin/venom	// The reagent that gets injected when it attacks.
-	var/poison_chance = 20			// Chance for injection to occur.
-	var/poison_per_bite = 5			// Amount added per injection.
+	/// Chance for injection to occur.
+	var/poison_chance = 20
+	/// Amount added per injection.
+	var/poison_per_bite = 5
 
 	var/image/eye_layer
 
