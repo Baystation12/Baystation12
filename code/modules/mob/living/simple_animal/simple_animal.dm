@@ -82,7 +82,7 @@
 	var/obj/item/card/id/myid// An ID card if they have one to give them access to stuff.
 
 	//Movement things.
-	var/movement_cooldown = 5			// Lower is faster.
+	var/movement_cooldown = 3			// Lower is faster.
 	var/movement_sound = null			// If set, will play this sound when it moves on its own will.
 	var/turn_sound = null				// If set, plays the sound when the mob's dir changes in most cases.
 	var/movement_shake_radius = 0		// If set, moving will shake the camera of all living mobs within this radius slightly.
