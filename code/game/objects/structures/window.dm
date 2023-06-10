@@ -16,7 +16,10 @@
 	var/damaged_reinf = FALSE
 	var/init_material = MATERIAL_GLASS
 	var/init_reinf_material = null
-	var/construction_state = 2
+	var/const/CONSTRUCT_STATE_COMPLETE = 2
+	var/const/CONSTRUCT_STATE_ANCHORED = 1
+	var/const/CONSTRUCT_STATE_UNANCHORED = 0
+	var/construction_state = CONSTRUCT_STATE_COMPLETE
 	var/id
 	var/polarized = 0
 	var/basestate = "window"
@@ -79,7 +82,7 @@
 
 	if (constructed)
 		set_anchored(FALSE)
-		construction_state = 0
+		construction_state = CONSTRUCT_STATE_UNANCHORED
 
 	base_color = get_color()
 
@@ -104,11 +107,11 @@
 
 	if (reinf_material)
 		switch (construction_state)
-			if (0)
+			if (CONSTRUCT_STATE_UNANCHORED)
 				to_chat(user, SPAN_WARNING("The window is not in the frame."))
-			if (1)
+			if (CONSTRUCT_STATE_ANCHORED)
 				to_chat(user, SPAN_WARNING("The window is pried into the frame but not yet fastened."))
-			if (2)
+			if (CONSTRUCT_STATE_COMPLETE)
 				to_chat(user, SPAN_NOTICE("The window is fastened to the frame."))
 
 	if (anchored)
@@ -286,13 +289,16 @@
 		if (!reinf_material)
 			USE_FEEDBACK_FAILURE("\The [src] doesn't have a reinforced frame to pry out.")
 			return TRUE
-		if (construction_state == 2)
+		if (construction_state == CONSTRUCT_STATE_COMPLETE)
 			USE_FEEDBACK_FAILURE("\The [src] needs to be unfastened from the frame before you can pry it out.")
 			return TRUE
 		if (!anchored)
 			USE_FEEDBACK_FAILURE("\The [src] isn't anchored and doesn't need to be pried.")
 			return TRUE
-		construction_state = 1 - construction_state
+		if (construction_state == CONSTRUCT_STATE_ANCHORED)
+			construction_state = CONSTRUCT_STATE_UNANCHORED
+		else
+			construction_state = CONSTRUCT_STATE_ANCHORED
 		playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
 		user.visible_message(
 			SPAN_NOTICE("\The [user] pries \the [src] [construction_state ? "into" : "out of"] its frame with \a [tool]."),
@@ -376,27 +382,35 @@
 	if (isScrewdriver(tool))
 		// Reinforced Window
 		if (reinf_material)
-			if (construction_state == 0)
-				if (!can_install_here(user))
+			switch(construction_state)
+				if (CONSTRUCT_STATE_UNANCHORED)
+					if (!can_install_here(user))
+						return TRUE
+					set_anchored(!anchored)
+					playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+					user.visible_message(
+						SPAN_NOTICE("\The [user] [!anchored ? "un" : null]fastens \the [src] [!anchored ? "from" : "to"] the floor with \a [tool]."),
+						SPAN_NOTICE("You [!anchored ? "un" : null]fasten \the [src] [!anchored ? "from" : "to"] the floor with \the [tool].")
+					)
 					return TRUE
-				set_anchored(!anchored)
-				playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
-				user.visible_message(
-					SPAN_NOTICE("\The [user] [!anchored ? "un" : null]fastens \the [src] [!anchored ? "from" : "to"] the floor with \a [tool]."),
-					SPAN_NOTICE("You [!anchored ? "un" : null]fasten \the [src] [!anchored ? "from" : "to"] the floor with \the [tool].")
-				)
-				return TRUE
-			construction_state = 3 - construction_state
+				if (CONSTRUCT_STATE_ANCHORED)
+					construction_state = CONSTRUCT_STATE_COMPLETE
+				if (CONSTRUCT_STATE_COMPLETE)
+					construction_state = CONSTRUCT_STATE_ANCHORED
 			update_nearby_icons()
 			playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
 			user.visible_message(
-				SPAN_NOTICE("\The [user] [construction_state == 1 ? "un" : null]fastens \the [src] [construction_state == 1 ? "from" : "to"] its frame with \a [tool]."),
-				SPAN_NOTICE("You [construction_state == 1 ? "un" : null]fasten \the [src] [construction_state == 1 ? "from" : "to"] its frame with \the [tool].")
+				SPAN_NOTICE("\The [user] [construction_state == CONSTRUCT_STATE_ANCHORED ? "un" : null]fastens \the [src] [construction_state == CONSTRUCT_STATE_ANCHORED ? "from" : "to"] its frame with \a [tool]."),
+				SPAN_NOTICE("You [construction_state == CONSTRUCT_STATE_ANCHORED ? "un" : null]fasten \the [src] [construction_state == CONSTRUCT_STATE_ANCHORED ? "from" : "to"] its frame with \the [tool].")
 			)
 			return TRUE
 		// Regular Windows
 		if (!anchored && !can_install_here(user))
 			return TRUE
+		if (anchored)
+			construction_state = CONSTRUCT_STATE_UNANCHORED
+		else
+			construction_state = CONSTRUCT_STATE_ANCHORED
 		set_anchored(!anchored)
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
 		user.visible_message(

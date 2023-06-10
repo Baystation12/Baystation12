@@ -152,7 +152,7 @@
 		return TRUE
 
 	else if (!(W.item_flags & ITEM_FLAG_WASHER_ALLOWED))
-		if (isScrewdriver(W) || isCrowbar(W) || isWrench(W))
+		if (isScrewdriver(W) || isCrowbar(W) || isWrench(W) || can_add_component(W))
 			return ..()
 
 		to_chat(user, SPAN_WARNING("\The [W] can't be washed in \the [src]!"))

@@ -214,6 +214,7 @@
 	var/datum/instrument/instruments = list()
 	var/path = /datum/instrument
 	var/sound_player = /datum/sound_player
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 /obj/structure/synthesized_instrument/Initialize()
 	. = ..()
