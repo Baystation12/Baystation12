@@ -12,12 +12,12 @@
 SUBSYSTEM_DEF(garbage)
 	name = "Garbage"
 	priority = SS_PRIORITY_GARBAGE
-	wait = 2 SECONDS
+	wait = 25 SECONDS
 	flags = SS_POST_FIRE_TIMING | SS_BACKGROUND | SS_NO_INIT | SS_NEEDS_SHUTDOWN
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	init_order = SS_INIT_GARBAGE
 
-	var/static/list/collection_timeout = list(0, 30 SECONDS, 10 SECONDS)	// deciseconds to wait before moving something up in the queue to the next level
+	var/static/list/collection_timeout = list(0, 150 SECONDS, 25 SECONDS)	// deciseconds to wait before moving something up in the queue to the next level
 
 	//Stat tracking
 	var/static/delslasttick = 0            // number of del()'s we've done this tick
@@ -247,7 +247,10 @@ SUBSYSTEM_DEF(garbage)
 	var/type = D.type
 	var/refID = "\ref[D]"
 
-	del(D)
+	//We need to delete only clients so that they can be disconnected
+	//For everything else - log it and fix how their destructor works
+	if(isclient(D))
+		del(D)
 
 	tick = world.tick_usage - tick + ((world.time - ticktime) / world.tick_lag * 100)
 
