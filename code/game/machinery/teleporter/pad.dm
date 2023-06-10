@@ -11,6 +11,8 @@
 
 	var/obj/machinery/computer/teleporter/computer
 
+	///Has a high chance to teleport the user to a semi random location when TRUE.
+	var/interference = FALSE
 
 /obj/machinery/tele_pad/Destroy()
 	if (computer)
@@ -49,6 +51,8 @@
 	if (istype(computer.target, /obj/machinery/tele_beacon))
 		var/obj/machinery/tele_beacon = computer.target
 		tele_beacon.use_power_oneoff(1 KILOWATTS)
+	if (interference && prob(75))
+		do_unstable_teleport_safe(AM)
 	do_teleport(AM, T)
 	computer.set_timer()
 
@@ -78,6 +82,10 @@
 		I.layer = ABOVE_LIGHTING_LAYER
 		overlays += I
 		set_light(0.4, 1.2, 4, 10)
+
+		if (interference && prob(20))
+			visible_message(SPAN_WARNING("The teleporter sparks ominously!"))
+			sparks(3, 1, loc)
 	else
 		set_light(0)
 		update_use_power(POWER_USE_IDLE)

@@ -12,12 +12,20 @@
 	anchored = TRUE
 	obj_flags = OBJ_FLAG_NOFALL
 
+	var/const/climb_time = 2 SECONDS
+
+	var/static/list/climbsounds = list('sound/effects/ladder.ogg','sound/effects/ladder2.ogg','sound/effects/ladder3.ogg','sound/effects/ladder4.ogg')
+
 	var/allowed_directions = DOWN
 	var/obj/structure/ladder/target_up
 	var/obj/structure/ladder/target_down
 
-	var/const/climb_time = 2 SECONDS
-	var/static/list/climbsounds = list('sound/effects/ladder.ogg','sound/effects/ladder2.ogg','sound/effects/ladder3.ogg','sound/effects/ladder4.ogg')
+	/// Used by the BSD Instability event. If TRUE, it may cause the user to be teleported to a random other ladder.
+	var/bluespace_affected = FALSE
+
+	///Chance for a person climbing the ladder to be teleported to a random other ladder while bluespace affected.
+	var/displacement_chance = 30
+
 
 /obj/structure/ladder/Initialize()
 	. = ..()
@@ -123,6 +131,9 @@
 
 	if(do_after(M, climb_time, src, DO_PUBLIC_UNIQUE))
 		climbLadder(M, target_ladder, I)
+		if (bluespace_affected && prob(20))
+			to_chat(M, SPAN_WARNING("You feel like you didn't end up where you were supposed to..."))
+
 		for (var/obj/item/grab/G in M)
 			G.adjust_position(force = 1)
 
@@ -133,6 +144,18 @@
 	if((!target_up && !target_down) || (target_up && !istype(target_up.loc, /turf/simulated/open) || (target_down && !istype(target_down.loc, /turf))))
 		to_chat(M, SPAN_NOTICE("\The [src] is incomplete and can't be climbed."))
 		return
+
+	if (bluespace_affected)
+		var/list/obj/structure/ladder/other_ladders= list()
+		for (var/obj/structure/ladder/ladder)
+			if (src != ladder && (ladder.z in GetConnectedZlevels(ladder.z)))
+				other_ladders += ladder
+		if (prob(displacement_chance))
+			if (target_up)
+				target_up = pick(other_ladders)
+			if (target_down)
+				target_down = pick(other_ladders)
+
 	if(target_down && target_up)
 		var/direction = alert(M,"Do you want to go up or down?", "Ladder", "Up", "Down", "Cancel")
 
@@ -217,6 +240,13 @@
 	anchored = TRUE
 	layer = RUNE_LAYER
 
+	///Used by the BSD instability event. Causes users to sometimes randomly appear on the wrong stairs
+	var/bluespace_affected = FALSE
+
+	/// Chance of a user being displaced to a random set of stairs while its bluespace affected.
+	var/displacement_chance = 30
+
+
 /obj/structure/stairs/Initialize()
 	for(var/turf/turf in locs)
 		var/turf/simulated/open/above = GetAbove(turf)
@@ -238,6 +268,16 @@
 		var/turf/target = get_step(above, dir)
 		var/turf/source = A.loc
 		if(above.CanZPass(source, UP) && target.Enter(A, src))
+			if (bluespace_affected)
+				var/list/obj/structure/other_stairs= list()
+				for (var/obj/structure/stairs/stair)
+					if (src != stair && (stair.z in GetConnectedZlevels(above.z)))
+						other_stairs += stair
+				var/obj/structure/stairs/other_stair = pick(other_stairs)
+				if (prob(displacement_chance))
+					target = get_turf(other_stair)
+					if (prob(20))
+						to_chat(A, SPAN_WARNING("You feel turned around..."))
 			A.forceMove(target)
 			if(isliving(A))
 				var/mob/living/L = A
