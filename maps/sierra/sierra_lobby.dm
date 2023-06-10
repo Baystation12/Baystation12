@@ -42,18 +42,21 @@
 	author = "Duke Gneiss"
 	title = "Downtown"
 	license = /singleton/license/cc_by_nc_sa_3_0
+	url = "https://www.youtube.com/watch?v=x9FdMJJYqmU"
 
 /singleton/audio/track/metropolis
 	source = 'sound/music/lobby/Gneiss-Metropolis.ogg'
 	author = "Duke Gneiss"
 	title = "Metropolis"
 	license = /singleton/license/cc_by_nc_sa_3_0
+	url = "https://soundcloud.com/dukegneiss/metropolis"
 
 /singleton/audio/track/bluespace
 	source = 'sound/music/lobby/Gneiss-Bluespace.ogg'
 	author = "Duke Gneiss"
 	title = "Bluespace"
 	license = /singleton/license/cc_by_nc_sa_3_0
+	url = "https://soundcloud.com/dukegneiss/bluespace"
 
 /singleton/audio/track/dasmalefitz
 	source = 'sound/music/lobby/faunts-das_malefitz.ogg'
