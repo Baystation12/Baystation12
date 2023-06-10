@@ -154,9 +154,6 @@
 
 	..()
 
-/mob/living/carbon/slime/Allow_Spacemove()
-	return 1
-
 /mob/living/carbon/slime/Stat()
 	. = ..()
 

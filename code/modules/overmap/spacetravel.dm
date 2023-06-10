@@ -67,7 +67,7 @@ var/global/list/cached_space = list()
 	return isnull(client)
 
 /mob/living/carbon/human/lost_in_space()
-	return isnull(client) && !last_ckey && stat == DEAD
+	return isnull(client) && (!last_ckey || stat == DEAD)
 
 /proc/overmap_spacetravel(turf/space/T, atom/movable/A)
 	if (!T || !A)

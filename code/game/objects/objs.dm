@@ -282,3 +282,6 @@
  */
 /obj/proc/is_safe_to_step(mob/living/L)
 	return TRUE
+
+/obj/get_mass()
+	return min(2**(w_class-1), 100)

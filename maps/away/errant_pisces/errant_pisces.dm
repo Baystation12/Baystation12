@@ -139,8 +139,7 @@
 		icon_state = "net_roll"
 
 /obj/item/stack/net/proc/attach_wall_check()//checks if wall can be attached to something vertical such as walls or another net-wall
-	var/area/A = get_area(src)
-	if (!A.has_gravity)
+	if (!has_gravity())
 		return 1
 	var/turf/T = get_turf(src)
 	for (var/turf/AT in T.CardinalTurfs(FALSE))

@@ -189,14 +189,7 @@ var/global/const/enterloopsanity = 100
 
 	if(ismob(A))
 		var/mob/M = A
-		if(!M.check_solid_ground())
-			inertial_drift(M)
-			//we'll end up checking solid ground again but we still need to check the other things.
-			//Ususally most people aren't in space anyways so hopefully this is acceptable.
-			M.update_floating()
-		else
-			M.inertia_dir = 0
-			M.make_floating(0) //we know we're not on solid ground so skip the checks to save a bit of processing
+		M.make_floating(0) //we know we're not on solid ground so skip the checks to save a bit of processing
 
 	var/objects = 0
 	if(A && (A.movable_flags & MOVABLE_FLAG_PROXMOVE))
@@ -218,20 +211,6 @@ var/global/const/enterloopsanity = 100
 
 /turf/proc/protects_atom(atom/A)
 	return FALSE
-
-/turf/proc/inertial_drift(atom/movable/A)
-	if(!(A.last_move))	return
-	if((ismob(A) && src.x > 2 && src.x < (world.maxx - 1) && src.y > 2 && src.y < (world.maxy-1)))
-		var/mob/M = A
-		if(M.Allow_Spacemove(1)) //if this mob can control their own movement in space then they shouldn't be drifting
-			M.inertia_dir  = 0
-			return
-		spawn(5)
-			if(M && !(M.anchored) && !(M.pulledby) && (M.loc == src))
-				if(!M.inertia_dir)
-					M.inertia_dir = M.last_move
-				step(M, M.inertia_dir)
-	return
 
 /turf/proc/levelupdate()
 	for(var/obj/O in src)
@@ -313,11 +292,14 @@ var/global/const/enterloopsanity = 100
 			if(length(M.pinned))
 				return
 
-		var/intial_dir = TT.init_dir
-		spawn(2)
-			step(AM, turn(intial_dir, 180))
+			if(M.pinned)
+				return
+		addtimer(new Callback(src, /turf/proc/bounce_off, AM, TT.init_dir), 2)
 
 	..()
+
+/turf/proc/bounce_off(atom/movable/AM, direction)
+	step(AM, turn(direction, 180))
 
 /turf/proc/can_engrave()
 	return FALSE
