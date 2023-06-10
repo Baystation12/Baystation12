@@ -1824,6 +1824,7 @@
 #include "code\modules\events\blob.dm"
 #include "code\modules\events\brain_expansion.dm"
 #include "code\modules\events\brand_intelligence.dm"
+#include "code\modules\events\bsd_instability.dm"
 #include "code\modules\events\camera_damage.dm"
 #include "code\modules\events\communications_blackout.dm"
 #include "code\modules\events\computer_damage.dm"

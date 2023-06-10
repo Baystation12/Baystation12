@@ -402,3 +402,16 @@
 	wall_smooth = SMOOTH_NONE
 	space_smooth = SMOOTH_NONE
 	height = -FLUID_OVER_MOB_HEAD * 2
+
+
+/singleton/flooring/bluespace
+	name = "bluespace floor"
+	desc = "Infinite bluespace. It gives you a piercing headache if you stare at it for too long."
+	icon = 'icons/turf/space.dmi'
+	icon_base = "bluespace"
+	flags = TURF_ACID_IMMUNE
+	build_type = null
+	footstep_type = /singleton/footsteps/tiles
+	floor_smooth = SMOOTH_NONE
+	wall_smooth = SMOOTH_NONE
+	space_smooth = SMOOTH_NONE
