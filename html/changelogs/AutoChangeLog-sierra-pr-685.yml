@@ -1,0 +1,4 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - bugfix: Возвращены ссылки трём песням из лобби
