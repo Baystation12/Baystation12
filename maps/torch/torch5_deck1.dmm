@@ -1424,9 +1424,6 @@
 "acO" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/window/northleft{
-	name = "Chemistry Desk"
-	},
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -5239,6 +5236,10 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/item/device/radio/intercom/entertainment{
+	dir = 4;
+	pixel_x = -22
+	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "ajX" = (
@@ -16245,12 +16246,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
-"dQb" = (
-/obj/item/device/radio/intercom/broadcasting{
-	pixel_y = 21
-	},
-/turf/simulated/floor/tiled/dark,
-/area/command/conference)
 "dRb" = (
 /obj/structure/table/rack,
 /obj/item/storage/box/bodybags{
@@ -22005,7 +22000,7 @@
 "mgb" = (
 /obj/structure/table/steel,
 /obj/item/material/ashtray/bronze,
-/obj/item/storage/fancy/smokable/professionals,
+/obj/random/smokes,
 /turf/simulated/floor/tiled,
 /area/security/detectives_office)
 "mhb" = (
@@ -42990,7 +42985,7 @@ hBr
 sbJ
 tTY
 njj
-dQb
+alZ
 kCl
 chO
 iPj
