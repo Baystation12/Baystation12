@@ -1,0 +1,4 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - bugfix: Transport drone pad scanners upgrade now works
