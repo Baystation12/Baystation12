@@ -6,6 +6,8 @@
 	icon = 'icons/obj/undies_wardrobe.dmi'
 	icon_state = "closed"
 	density = TRUE
+	anchored = TRUE
+	obj_flags = OBJ_FLAG_ANCHORABLE
 	var/static/list/amount_of_underwear_by_id_card
 
 
