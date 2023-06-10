@@ -1,0 +1,4 @@
+author: SierraHelper
+delete-after: true
+changes:
+  - tweak: Holopads can now have PDAs registered to be notified on call.
