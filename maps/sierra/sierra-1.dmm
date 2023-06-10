@@ -4147,6 +4147,13 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/scan)
+"hl" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/drone_pad{
+	desc = "A small pad for transport drones to deposit their payloads at. Requires network reestablishment after Bluespace jump via multitool"
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/hangar)
 "hm" = (
 /obj/item/device/radio/intercom{
 	dir = 4;
@@ -8753,6 +8760,13 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/airlock_canisters)
+"nM" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/crate,
+/obj/item/device/drone_designator,
+/obj/item/device/multitool,
+/turf/simulated/floor/tiled,
+/area/quartermaster/hangar)
 "nN" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 1
@@ -54234,8 +54248,8 @@ VF
 Ql
 ZD
 Js
-GQ
-GQ
+nM
+hl
 Fs
 ZX
 Zw
