@@ -187,7 +187,7 @@
 "oW" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/table/glass,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
 /obj/item/storage/box/masks,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)

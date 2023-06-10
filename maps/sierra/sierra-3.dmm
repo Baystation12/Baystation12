@@ -2890,7 +2890,7 @@
 /obj/item/storage/box/masks{
 	pixel_y = 6
 	},
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 10
 	},
@@ -9420,7 +9420,7 @@
 /obj/item/clothing/suit/storage/toggle/labcoat,
 /obj/item/storage/box/evidence,
 /obj/item/storage/box/syringes,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
 /obj/machinery/light_switch{
 	dir = 1;
 	pixel_x = -6;

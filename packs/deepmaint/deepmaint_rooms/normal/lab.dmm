@@ -93,7 +93,7 @@
 "gu" = (
 /obj/structure/table/rack,
 /obj/item/storage/box/masks,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
 /obj/effect/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)

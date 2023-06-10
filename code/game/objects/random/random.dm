@@ -762,7 +762,7 @@
 		/obj/item/storage/box/autoinjectors = 3,
 		/obj/item/storage/box/beakers = 4,
 		/obj/item/storage/box/syringes = 4,
-		/obj/item/storage/box/gloves = 4,
+		/obj/item/storage/box/latexgloves = 4,
 		/obj/item/storage/box/large = 3,
 		/obj/item/storage/box/glowsticks = 4,
 		/obj/item/storage/wallet = 2,

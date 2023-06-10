@@ -568,7 +568,7 @@
 	},
 /obj/structure/table/glass,
 /obj/item/storage/box/masks,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
 /obj/item/reagent_containers/spray/sterilizine,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -1978,7 +1978,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/table/glass,
 /obj/item/storage/box/masks,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fs" = (

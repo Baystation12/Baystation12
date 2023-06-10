@@ -4717,7 +4717,7 @@
 /obj/structure/table/reinforced,
 /obj/item/storage/box/autoinjectors,
 /obj/item/storage/box/beakers,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
 /obj/item/storage/box/pillbottles,
 /obj/item/bodybag/cryobag,
 /obj/item/bodybag/cryobag,
@@ -6680,7 +6680,7 @@
 /area/centcom/holding)
 "aJo" = (
 /obj/structure/table/standard,
-/obj/item/storage/box/gloves{
+/obj/item/storage/box/latexgloves{
 	pixel_x = 3;
 	pixel_y = 4
 	},
@@ -6725,7 +6725,7 @@
 /area/tdome)
 "aJw" = (
 /obj/structure/table/standard,
-/obj/item/storage/box/gloves{
+/obj/item/storage/box/latexgloves{
 	pixel_x = 3;
 	pixel_y = 4
 	},

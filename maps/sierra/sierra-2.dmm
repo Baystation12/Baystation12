@@ -27511,8 +27511,8 @@
 /obj/item/storage/box/syringes,
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/paleblue/border,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
+/obj/item/storage/box/nitrilegloves,
 /turf/simulated/floor/tiled/white,
 /area/medical/maintenance_equipstorage)
 "aYZ" = (

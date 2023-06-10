@@ -4569,7 +4569,7 @@
 /area/errant_pisces/science_wing)
 "ly" = (
 /obj/structure/table/standard,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lz" = (

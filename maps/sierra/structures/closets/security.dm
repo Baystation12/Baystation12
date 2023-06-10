@@ -99,7 +99,7 @@
 		/obj/item/taperoll/police,
 		/obj/item/storage/box/evidence,
 		/obj/item/storage/box/swabs,
-		/obj/item/storage/box/gloves,
+		/obj/item/storage/box/latexgloves,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape/random = 3,
 		/obj/item/device/holowarrant,

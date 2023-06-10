@@ -2802,8 +2802,8 @@
 /obj/random/snack,
 /obj/random/snack,
 /obj/random/snack,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
+/obj/item/storage/box/nitrilegloves,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/farfleet/crew/hydroponics)

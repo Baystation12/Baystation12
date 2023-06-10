@@ -1013,8 +1013,8 @@
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/glasses/hud/health,
 /obj/item/clothing/glasses/hud/health,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
+/obj/item/storage/box/nitrilegloves,
 /obj/item/storage/box/masks,
 /turf/unsimulated/floor{
 	dir = 1;

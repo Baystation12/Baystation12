@@ -19900,7 +19900,7 @@
 "Gp" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack/dark,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
 /obj/item/storage/box/bloodpacks,
 /obj/item/storage/box/beakers,
 /obj/item/storage/box/masks,

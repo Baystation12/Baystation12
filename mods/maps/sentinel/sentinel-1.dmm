@@ -355,8 +355,8 @@
 /obj/random/snack,
 /obj/random/snack,
 /obj/random/snack,
-/obj/item/storage/box/gloves,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
+/obj/item/storage/box/nitrilegloves,
 /turf/simulated/floor/tiled/monotile,
 /area/ship/patrol/crew/cargo)
 "aM" = (
@@ -5288,7 +5288,7 @@
 	},
 /obj/item/storage/box/masks,
 /obj/item/storage/box/freezer,
-/obj/item/storage/box/gloves,
+/obj/item/storage/box/latexgloves,
 /obj/machinery/vending/wallmed1{
 	dir = 4;
 	pixel_x = -24
