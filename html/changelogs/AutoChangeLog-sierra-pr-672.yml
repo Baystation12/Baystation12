@@ -1,0 +1,9 @@
+author: ImJustKisik
+delete-after: true
+changes:
+  - rscadd: 'Adds SpaceDrift subsystem, that: allows for objects to drift through
+      space, makes magboots effective at reducing a lot of space related movement,
+      adds in fancy gun knock back recoil, and recoil for being shot, improve throwing
+      momentum, allow you to knock other things around with throws.'
+  - tweak: Reworked all spaceslips failure - Using a jetpack with untrained EVA is
+      now a high stress activity
