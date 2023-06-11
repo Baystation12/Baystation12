@@ -1,0 +1,6 @@
+author: emmanuelbassil
+delete-after: true
+changes:
+  - tweak: Vending machines now have the ability to spawn 'rare' items based on chance.
+      Functionality to randomize amount of stuff in the machine as well.
+  - tweak: Cola vending machine now has a random chance to spawn with two rare drinks.
