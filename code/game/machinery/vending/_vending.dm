@@ -47,9 +47,15 @@
 	var/status_message = "" // Status screen messages like "insufficient funds", displayed in NanoUI
 	var/status_error = 0 // Set to 1 if status_message is an error
 	var/list/prices = list() // Prices for each product as (/item/path = price). Unlisted items are free.
-	var/list/products	= list() // Stock for each product as (/item/path = count)
-	var/list/contraband	= list() // Stock for products hidden by the contraband wire as (/item/path = count)
-	var/list/premium = list() // Stock for products hidden by coin insertion as (/item/path = count)
+
+	/// Stock for each product as (/item/path = count). Set to '0' if you want the vendor to randomly spawn between 1 and 10 items.
+	var/list/products	= list()
+	///Probability of each rare product of spawning in, max amount increases with large value. Need to have value of '0' associated with it in product list for this to work.
+	var/list/rare_products = list()
+	/// Stock for products hidden by the contraband wire as (/item/path = count)
+	var/list/contraband	= list()
+	/// Stock for products hidden by coin insertion as (/item/path = count)
+	var/list/premium = list()
 
 	var/list/product_records = list()
 	var/product_slogans = "" //String of slogans spoken out loud, separated by semicolons
@@ -481,8 +487,11 @@
 		for (var/entry in current_list[1])
 			var/datum/stored_items/vending_products/product = new/datum/stored_items/vending_products(src, entry)
 			product.price = (entry in prices) ? prices[entry] : 0
+			product.rarity = (entry in rare_products) ? rare_products[entry] : 100
 			if (populate_parts)
-				product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
+				product.amount = current_list[1][entry]
+				if (!product.amount)
+					product.amount = prob(product.rarity) * rand(1,ceil(product.rarity/10))
 			product.category = category
 			product_records.Add(product)
 
