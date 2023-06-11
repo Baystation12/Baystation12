@@ -61,6 +61,7 @@
 			to_chat(user, SPAN_NOTICE("You secure the welder."))
 		else
 			to_chat(user, SPAN_NOTICE("The welder can now be attached and modified."))
+		playsound(src, 'sound/items/Screwdriver.ogg', 10, 1)
 		src.add_fingerprint(user)
 		return
 
@@ -87,6 +88,7 @@
 		user.visible_message("[user] slots \a [W] into \the [src].", "You slot \a [W] into \the [src].")
 		w_class = tank.size_in_use
 		force = tank.unlit_force
+		playsound(src, 'sound/items/cap_close.ogg', 10, 1)
 		update_icon()
 		return
 
@@ -101,6 +103,7 @@
 			tank = null
 			w_class = initial(w_class)
 			force = initial(force)
+			playsound(src, 'sound/items/cap_open.ogg', 10, 1)
 			update_icon()
 		else
 			to_chat(user, SPAN_DANGER("Turn off the welder first!"))
@@ -256,7 +259,7 @@
 				src.force = tank.lit_force
 				src.damtype = DAMAGE_BURN
 			welding = 1
-			playsound(loc, 'sound/items/welderactivate.ogg', 50, 1) // SIERRA
+			playsound(src, 'sound/items/welderactivate.ogg', 10, 1)
 			update_icon()
 			START_PROCESSING(SSobj, src)
 		else
@@ -276,7 +279,7 @@
 			src.force = tank.unlit_force
 		src.damtype = DAMAGE_BRUTE
 		src.welding = 0
-		playsound(loc, 'sound/items/welderdeactivate.ogg', 50, 1) // SIERRA
+		playsound(src, 'sound/items/welderdeactivate.ogg', 10, 1)
 		update_icon()
 
 /obj/item/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
