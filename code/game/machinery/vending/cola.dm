@@ -26,7 +26,9 @@
 		/obj/item/reagent_containers/food/drinks/cans/waterbottle = 2,
 		/obj/item/reagent_containers/food/drinks/cans/space_up = 1,
 		/obj/item/reagent_containers/food/drinks/cans/iced_tea = 1,
-		/obj/item/reagent_containers/food/drinks/cans/grape_juice = 1
+		/obj/item/reagent_containers/food/drinks/cans/grape_juice = 1,
+		/obj/item/reagent_containers/food/drinks/cans/cola_pork = 10,
+		/obj/item/reagent_containers/food/drinks/cans/syndicola = 5
 	)
 	products = list(
 		/obj/item/reagent_containers/food/drinks/cans/cola = 10,
@@ -36,7 +38,14 @@
 		/obj/item/reagent_containers/food/drinks/cans/waterbottle = 10,
 		/obj/item/reagent_containers/food/drinks/cans/space_up = 10,
 		/obj/item/reagent_containers/food/drinks/cans/iced_tea = 10,
-		/obj/item/reagent_containers/food/drinks/cans/grape_juice = 10
+		/obj/item/reagent_containers/food/drinks/cans/grape_juice = 10,
+		/obj/item/reagent_containers/food/drinks/cans/cola_pork = 0,
+		/obj/item/reagent_containers/food/drinks/cans/syndicola = 0
+	)
+	rare_products = list(
+		/obj/item/reagent_containers/food/drinks/cans/cola_pork = 75,
+		/obj/item/reagent_containers/food/drinks/cans/syndicola = 30
+
 	)
 	contraband = list(
 		/obj/item/reagent_containers/food/drinks/cans/thirteenloko = 5,
