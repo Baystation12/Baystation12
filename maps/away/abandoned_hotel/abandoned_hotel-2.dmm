@@ -54,6 +54,8 @@
 /area/abandoned_hotel/overlook)
 "an" = (
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -110,7 +112,7 @@
 	dir = 1
 	},
 /obj/effect/spider/stickyweb,
-/turf/simulated/floor/carpet/magenta,
+/turf/simulated/floor/plating,
 /area/abandoned_hotel/rooms)
 "aC" = (
 /obj/structure/cable/yellow{
@@ -250,6 +252,8 @@
 /area/abandoned_hotel/rooms)
 "bM" = (
 /obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -374,6 +378,8 @@
 /area/abandoned_hotel/rooms)
 "dp" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/alarm,
@@ -384,6 +390,8 @@
 /area/abandoned_hotel/rooms)
 "dt" = (
 /obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/carpet/green,
@@ -422,6 +430,8 @@
 /area/abandoned_hotel/atmos)
 "dF" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
@@ -516,6 +526,8 @@
 /area/abandoned_hotel/rooms)
 "eJ" = (
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/carpet/green,
@@ -640,6 +652,8 @@
 	dir = 8
 	},
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/window/northright,
@@ -670,6 +684,8 @@
 /area/abandoned_hotel/rooms)
 "ga" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
@@ -678,6 +694,8 @@
 "gb" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/plating,
@@ -718,6 +736,8 @@
 /area/abandoned_hotel/evac)
 "gs" = (
 /obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/carpet/green,
@@ -737,6 +757,7 @@
 	pixel_y = 16
 	},
 /obj/structure/cable{
+	d2 = 2;
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/plating,
@@ -811,6 +832,8 @@
 	dir = 4
 	},
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock,
@@ -822,10 +845,14 @@
 	dir = 9
 	},
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/cable{
-	icon_state = "4-8"
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
 /area/abandoned_hotel/atmos)
@@ -838,6 +865,8 @@
 	dir = 1
 	},
 /obj/structure/cable{
+	d1 = 32;
+	d2 = 8;
 	icon_state = "32-8"
 	},
 /turf/simulated/open,
@@ -893,7 +922,7 @@
 "hD" = (
 /obj/effect/decal/cleanable/cobweb,
 /obj/structure/largecrate,
-/turf/simulated/floor/tiled/old_cargo,
+/turf/simulated/floor/plating,
 /area/abandoned_hotel/overlook)
 "hK" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
@@ -1070,12 +1099,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/turf/simulated/floor/carpet/blue3,
+/turf/simulated/floor/plating,
 /area/abandoned_hotel/rooms)
 "jD" = (
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable/yellow{
-	dir = 1
+	d2 = 2;
+	dir = 0;
+	icon_state = "0-2"
 	},
 /obj/structure/lattice,
 /turf/space,
@@ -1097,6 +1128,8 @@
 /area/abandoned_hotel/overlook)
 "kw" = (
 /obj/structure/cable{
+	d1 = 5;
+	d2 = 8;
 	icon_state = "5-8"
 	},
 /turf/simulated/floor/plating,
@@ -1187,6 +1220,8 @@
 /area/abandoned_hotel/evac)
 "mb" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1329,6 +1364,8 @@
 /area/space)
 "oE" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -1358,8 +1395,15 @@
 	},
 /turf/simulated/floor/plating,
 /area/abandoned_hotel/atmos)
+"pF" = (
+/obj/structure/bookcase,
+/obj/effect/spider/stickyweb/dark,
+/turf/simulated/floor/plating,
+/area/abandoned_hotel/rooms)
 "pK" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1377,6 +1421,8 @@
 /area/abandoned_hotel/rooms)
 "pY" = (
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock,
@@ -1410,8 +1456,14 @@
 	},
 /turf/simulated/floor/tiled,
 /area/abandoned_hotel/evac)
+"qe" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/abandoned_hotel/evac)
 "qi" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/wood/walnut,
@@ -1438,10 +1490,11 @@
 /turf/simulated/floor/carpet/green,
 /area/abandoned_hotel/rooms)
 "qt" = (
+/obj/item/frame/apc,
 /obj/structure/cable{
+	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/item/frame/apc,
 /turf/simulated/floor/tiled/old_cargo,
 /area/abandoned_hotel/overlook)
 "qu" = (
@@ -1511,7 +1564,8 @@
 	dir = 8
 	},
 /obj/structure/cable/yellow{
-	dir = 4
+	d2 = 8;
+	icon_state = "0-8"
 	},
 /turf/simulated/floor/plating,
 /area/abandoned_hotel/solar)
@@ -1613,6 +1667,8 @@
 /area/abandoned_hotel/rooms)
 "tc" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/carpet/green,
@@ -1658,6 +1714,8 @@
 /area/abandoned_hotel/rooms)
 "tW" = (
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1669,6 +1727,8 @@
 /area/abandoned_hotel/rooms)
 "tY" = (
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1678,7 +1738,7 @@
 "tZ" = (
 /obj/structure/table/woodentable/walnut,
 /obj/effect/spider/stickyweb,
-/turf/simulated/floor/carpet/blue3,
+/turf/simulated/floor/plating,
 /area/abandoned_hotel/rooms)
 "uf" = (
 /obj/effect/floor_decal/spline/fancy/black{
@@ -1757,13 +1817,17 @@
 /area/abandoned_hotel/overlook)
 "uZ" = (
 /obj/structure/cable{
-	icon_state = "1-2"
-	},
-/obj/structure/cable{
+	d1 = 1;
+	d2 = 10;
 	icon_state = "1-10"
 	},
 /obj/machinery/light/small{
 	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
 /area/abandoned_hotel/solar)
@@ -1820,9 +1884,6 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/cable{
-	icon_state = "0-4"
-	},
 /obj/machinery/power/apc{
 	dir = 8;
 	pixel_x = -25
@@ -1830,10 +1891,16 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
 /turf/simulated/floor/tiled,
 /area/abandoned_hotel/evac)
 "wQ" = (
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -2033,16 +2100,20 @@
 /obj/item/device/oxycandle{
 	icon_state = "oxycandle_burnt"
 	},
-/turf/simulated/floor/tiled/old_cargo,
+/turf/simulated/floor/plating,
 /area/abandoned_hotel/overlook)
 "Bd" = (
 /obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
 /turf/simulated/floor/wood/walnut,
 /area/abandoned_hotel/rooms)
 "Bg" = (
@@ -2128,6 +2199,8 @@
 /area/abandoned_hotel/rooms)
 "CK" = (
 /obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2168,6 +2241,8 @@
 /area/abandoned_hotel/solar)
 "DA" = (
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/carpet/green,
@@ -2211,6 +2286,8 @@
 /area/abandoned_hotel/rooms)
 "EG" = (
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -2234,6 +2311,8 @@
 	dir = 4
 	},
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2262,6 +2341,8 @@
 /area/abandoned_hotel/rooms)
 "Fq" = (
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -2269,6 +2350,9 @@
 /obj/machinery/door/airlock,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
+/area/abandoned_hotel/overlook)
+"Ft" = (
+/turf/simulated/floor/plating,
 /area/abandoned_hotel/overlook)
 "Fw" = (
 /obj/effect/floor_decal/corner/red,
@@ -2301,6 +2385,8 @@
 /area/abandoned_hotel/rooms)
 "Gi" = (
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -2324,6 +2410,8 @@
 /area/abandoned_hotel/rooms)
 "Gx" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -2333,11 +2421,11 @@
 /turf/simulated/floor/wood/walnut,
 /area/abandoned_hotel/rooms)
 "GV" = (
+/obj/machinery/power/smes/buildable/preset,
 /obj/structure/cable{
+	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/item/stock_parts/smes_coil/weak,
-/obj/machinery/constructable_frame,
 /turf/simulated/floor/plating,
 /area/abandoned_hotel/solar)
 "Hh" = (
@@ -2346,6 +2434,10 @@
 	dir = 4
 	},
 /turf/simulated/floor/wood/walnut,
+/area/abandoned_hotel/rooms)
+"Hp" = (
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/plating,
 /area/abandoned_hotel/rooms)
 "Hr" = (
 /obj/effect/floor_decal/corner/red,
@@ -2375,6 +2467,8 @@
 /area/abandoned_hotel/rooms)
 "HD" = (
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
 	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2394,6 +2488,8 @@
 /area/abandoned_hotel/rooms)
 "HN" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2409,7 +2505,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/carpet/blue3,
+/turf/simulated/floor/plating,
 /area/abandoned_hotel/rooms)
 "HX" = (
 /obj/structure/table/woodentable/walnut,
@@ -2480,6 +2576,8 @@
 	dir = 4
 	},
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -2525,6 +2623,10 @@
 	},
 /turf/simulated/floor/tiled/old_cargo,
 /area/abandoned_hotel/overlook)
+"LT" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/abandoned_hotel/overlook)
 "Md" = (
 /obj/structure/bookcase,
 /obj/effect/decal/cleanable/dirt,
@@ -2532,6 +2634,8 @@
 /area/abandoned_hotel/rooms)
 "MA" = (
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -2548,6 +2652,8 @@
 /area/abandoned_hotel/evac)
 "MJ" = (
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -2651,13 +2757,17 @@
 /area/abandoned_hotel/rooms)
 "Oi" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/structure/cable{
-	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/carpet/green,
 /area/abandoned_hotel/rooms)
 "Op" = (
@@ -2681,17 +2791,21 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/abandoned_hotel/overlook)
 "OC" = (
-/obj/structure/cable{
-	icon_state = "1-8"
-	},
-/obj/structure/cable{
-	icon_state = "1-4"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
 	},
 /turf/simulated/floor/carpet/green,
 /area/abandoned_hotel/rooms)
@@ -2714,6 +2828,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
@@ -2734,6 +2850,8 @@
 	dir = 4
 	},
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
@@ -2782,6 +2900,8 @@
 /area/abandoned_hotel/rooms)
 "QZ" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -2819,6 +2939,8 @@
 /area/abandoned_hotel/rooms)
 "Sl" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/light{
@@ -2902,6 +3024,8 @@
 /area/abandoned_hotel/rooms)
 "TT" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2947,6 +3071,8 @@
 /area/abandoned_hotel/atmos)
 "UQ" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -3062,6 +3188,8 @@
 /area/abandoned_hotel/overlook)
 "WT" = (
 /obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -3137,6 +3265,8 @@
 /area/abandoned_hotel/rooms)
 "YC" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -3186,6 +3316,8 @@
 /area/abandoned_hotel/overlook)
 "ZO" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/light{
@@ -3201,6 +3333,8 @@
 /area/abandoned_hotel/rooms)
 "ZZ" = (
 /obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
@@ -21279,7 +21413,7 @@ if
 Uq
 ge
 sB
-WU
+Hp
 gY
 Uq
 fj
@@ -21684,7 +21818,7 @@ Uq
 aA
 nH
 Bo
-WU
+Hp
 Uq
 no
 rW
@@ -22886,7 +23020,7 @@ ax
 xi
 ob
 gl
-ob
+Ft
 Zk
 dp
 Cm
@@ -23290,7 +23424,7 @@ Ov
 ok
 gl
 gl
-ob
+Ft
 Ov
 Bd
 tW
@@ -23692,7 +23826,7 @@ ZN
 ZN
 Ov
 ok
-gl
+LT
 WI
 ob
 Ov
@@ -23894,7 +24028,7 @@ ZN
 ZN
 Ov
 ok
-ob
+Ft
 ob
 Qf
 Ov
@@ -27143,7 +27277,7 @@ ip
 hN
 KP
 AY
-UZ
+Hp
 tL
 iD
 bs
@@ -27548,7 +27682,7 @@ Uq
 YS
 jA
 Ld
-Su
+pF
 iD
 bs
 aa
@@ -29767,7 +29901,7 @@ aa
 gt
 hk
 gt
-uP
+qe
 gt
 hk
 gt
