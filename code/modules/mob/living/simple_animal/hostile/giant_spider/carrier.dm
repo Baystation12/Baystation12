@@ -16,6 +16,8 @@
 
 	movement_cooldown = 8
 
+	mob_size = MOB_LARGE
+
 	var/spiderling_count = 0
 	var/spiderling_type = /obj/effect/spider/spiderling
 	var/swarmling_type = /mob/living/simple_animal/hostile/giant_spider/hunter
