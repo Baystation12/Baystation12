@@ -3002,7 +3002,7 @@
 	pixel_x = -30
 	},
 /obj/random/smokes,
-/obj/item/storage/box/matches,
+/obj/item/storage/fancy/matches/matchbox,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},

@@ -11755,7 +11755,7 @@
 /obj/structure/table/rack,
 /obj/random/junk,
 /obj/random/maintenance/solgov,
-/obj/item/storage/box/matches,
+/obj/item/storage/fancy/matches/matchbox,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
 "DI" = (

@@ -37,7 +37,8 @@
 		/obj/item/passport,
 		/obj/item/clothing/accessory/pride_pin,
 		/obj/item/clothing/accessory/pronouns,
-		/obj/item/storage/chewables/rollable
+		/obj/item/storage/chewables/rollable,
+		/obj/item/storage/fancy/matches/matchbook
 	)
 
 	/// If this wallet contains ID cards, the one that is displayed through its window.

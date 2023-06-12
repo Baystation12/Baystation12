@@ -5,6 +5,8 @@
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 	blocks_emissive = EMISSIVE_BLOCK_GENERIC
 
+	//BYOND sometimes doesn't add an 'es' to make a word plural when it should; pluralname is a workaround. Only use if it doesn't work traditionally. For example match becomes matchs without this.
+	var/pluralname = "iteme"
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
 	var/r_speed = 1.0

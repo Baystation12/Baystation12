@@ -1231,7 +1231,7 @@ var/global/list/multi_point_spawns
 		/obj/item/pen/blue,
 		/obj/item/pen/red,
 		/obj/item/pen/multi,
-		/obj/item/storage/box/matches,
+		/obj/item/storage/fancy/matches/matchbook,
 		/obj/item/stack/material/cardboard,
 		/obj/item/storage/fancy/smokable/transstellar,
 		/obj/item/deck/cards
