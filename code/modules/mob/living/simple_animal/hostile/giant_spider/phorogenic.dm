@@ -22,6 +22,8 @@
 	poison_per_bite = 0.5
 	poison_type = /datum/reagent/toxin/phoron
 
+	mob_size = MOB_LARGE
+
 	var/exploded = FALSE
 	var/explosion_radius = 7
 	var/explosion_max_power = EX_ACT_DEVASTATING

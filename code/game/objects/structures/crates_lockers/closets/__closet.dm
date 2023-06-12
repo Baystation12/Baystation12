@@ -84,10 +84,14 @@
 	return 1
 
 /obj/structure/closet/proc/can_close()
-	for(var/obj/structure/closet/closet in get_turf(src))
-		if(closet != src)
-			return 0
-	return 1
+	for(var/atom/movable/object in get_turf(src))
+		if (istype(object, /obj/structure/closet) && object != src)
+			return FALSE
+		if (istype(object, /mob/living))
+			var/mob/living/L = object
+			if (L.mob_size >= MOB_LARGE)
+				return FALSE
+	return TRUE
 
 /obj/structure/closet/proc/dump_contents()
 	for(var/mob/M in src)
