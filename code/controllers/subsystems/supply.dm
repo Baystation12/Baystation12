@@ -66,7 +66,8 @@ SUBSYSTEM_DEF(supply)
 	//To stop things being sent to centcomm which should not be sent to centcomm. Recursively checks for these types.
 /datum/controller/subsystem/supply/proc/forbidden_atoms_check(atom/A)
 	if (istype(A, /mob/living))
-		if (istype(A, /mob/living/simple_animal/hostile/human))
+		var/mob/living/mob = A
+		if (istype(mob, /mob/living/simple_animal/hostile/human) || mob.mind)
 			return TRUE
 	if (istype(A, /obj/item/disk/nuclear))
 		return TRUE
@@ -78,7 +79,7 @@ SUBSYSTEM_DEF(supply)
 	for(var/i=1, i<=length(A.contents), i++)
 		var/atom/B = A.contents[i]
 		if(.(B))
-			return 1
+			return TRUE
 
 /datum/controller/subsystem/supply/proc/sell()
 	var/list/material_count = list()
