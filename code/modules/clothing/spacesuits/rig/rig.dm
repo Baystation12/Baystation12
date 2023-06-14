@@ -46,13 +46,13 @@
 
 	// Keeps track of what this rig should spawn with.
 	var/suit_type = "hardsuit"
-	var/list/initial_modules
-	var/chest_type = /obj/item/clothing/suit/space/rig
-	var/helm_type =  /obj/item/clothing/head/helmet/space/rig
-	var/boot_type =  /obj/item/clothing/shoes/magboots/rig
-	var/glove_type = /obj/item/clothing/gloves/rig
-	var/cell_type =  /obj/item/cell/high
-	var/air_type =   /obj/item/tank/oxygen
+	var/list/obj/item/rig_module/initial_modules
+	var/obj/item/clothing/suit/chest_type = /obj/item/clothing/suit/space/rig
+	var/obj/item/clothing/head/helm_type =  /obj/item/clothing/head/helmet/space/rig
+	var/obj/item/clothing/shoes/boot_type =  /obj/item/clothing/shoes/magboots/rig
+	var/obj/item/clothing/gloves/glove_type = /obj/item/clothing/gloves/rig
+	var/obj/item/cell/cell_type =  /obj/item/cell/high
+	var/obj/item/tank/air_type =   /obj/item/tank/oxygen
 
 	//Component/device holders.
 	var/obj/item/tank/air_supply                       // Air tank, if any.
