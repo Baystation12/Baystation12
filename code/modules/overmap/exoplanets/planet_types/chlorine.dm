@@ -9,7 +9,7 @@
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	surface_color = "#a3b879"
 	water_color = COLOR_BOTTLE_GREEN
-	habitability_distribution = list(HABITABILITY_IDEAL = 0, HABITABILITY_LESSIDEAL = 0, HABITABILITY_BAD = 30, HABITABILITY_UNINHABITABLE = 70)
+	habitability_distribution = HABITABILITY_BAD
 	has_trees = FALSE
 	flora_diversity = 5
 	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/hostile/retaliate/beast/samak/alt, /mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
@@ -29,6 +29,7 @@
 	..()
 	if(atmosphere)
 		atmosphere.adjust_gas(GAS_CHLORINE, MOLES_O2STANDARD)
+		atmosphere.temperature = T100C - rand(0, 100)
 		atmosphere.update_values()
 
 /datum/random_map/noise/exoplanet/chlorine

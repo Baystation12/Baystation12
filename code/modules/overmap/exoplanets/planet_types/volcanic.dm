@@ -10,7 +10,7 @@
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	surface_color = "#261e19"
 	water_color = "#c74d00"
-	habitability_distribution = HABITABILITY_UNINHABITABLE
+	habitability_distribution = HABITABILITY_BAD
 	has_trees = FALSE
 	flora_diversity = 3
 	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/hostile/retaliate/beast/shantak/lava, /mob/living/simple_animal/hostile/retaliate/beast/charbaby)
@@ -19,10 +19,10 @@
 /obj/effect/overmap/visitable/sector/exoplanet/volcanic/get_atmosphere_color()
 	return COLOR_GRAY20
 
-/obj/effect/overmap/visitable/sector/exoplanet/desert/generate_atmosphere()
+/obj/effect/overmap/visitable/sector/exoplanet/volcanic/generate_atmosphere()
 	..()
 	if(atmosphere)
-		atmosphere.temperature = rand(513.15, 1000)
+		atmosphere.temperature = T20C + rand(220, 800)
 		atmosphere.update_values()
 
 /obj/effect/overmap/visitable/sector/exoplanet/volcanic/adapt_seed(datum/seed/S)
