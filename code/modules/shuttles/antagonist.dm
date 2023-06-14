@@ -16,5 +16,4 @@
 /obj/machinery/computer/shuttle_control/multi/ninja
 	name = "stealth shuttle control console"
 	req_access = list(access_syndicate)
-	shuttle_tag = "Ninja"
-
+	shuttle_tag = "Tremulous Intent"

@@ -228,7 +228,7 @@
 	casingtype = /obj/item/ammo_casing/rifle
 	projectiletype = /obj/item/projectile/bullet/rifle
 	natural_weapon = /obj/item/gun/projectile/automatic/l6_saw
-	weapon1 = /obj/item/rig_module/mounted/lcannon
+	weapon1 = /obj/item/rig_module/mounted/energy/lcannon
 
 	var/attack_mode = ATTACK_MODE_SAW
 	var/num_shots

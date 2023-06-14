@@ -20,7 +20,7 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/merc
 
 	initial_modules = list(
-		/obj/item/rig_module/mounted/lcannon,
+		/obj/item/rig_module/mounted/energy/lcannon,
 		/obj/item/rig_module/vision/thermal,
 		/obj/item/rig_module/grenade_launcher,
 		/obj/item/rig_module/ai_container,
@@ -38,6 +38,24 @@
 		/obj/item/rig_module/electrowarfare_suite,
 		/obj/item/rig_module/cooling_unit
 		)
+
+///Variant for Operative gamemode
+/obj/item/rig/merc/ninja
+	cell_type =  /obj/item/cell/hyper
+
+	initial_modules = list(
+		/obj/item/rig_module/mounted/energy/lcannon,
+		/obj/item/rig_module/vision,
+		/obj/item/rig_module/chem_dispenser/ninja,
+		/obj/item/rig_module/voice,
+		/obj/item/rig_module/grenade_launcher/ninja,
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/power_sink,
+		/obj/item/rig_module/datajack,
+		/obj/item/rig_module/self_destruct,
+		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets
+	)
 
 /obj/item/clothing/gloves/rig/merc
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS | ITEM_FLAG_AIRTIGHT

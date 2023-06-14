@@ -47,11 +47,11 @@
 	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 
 /obj/item/clothing/shoes/magboots/rig/light
-	name = "shoes"
+	name = "boots"
 	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 
 /obj/item/clothing/head/helmet/space/rig/light
-	name = "hood"
+	name = "helmet"
 	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 
 /obj/item/rig/light/hacker
@@ -123,7 +123,7 @@
 	initial_modules = list(
 		/obj/item/rig_module/teleporter,
 		/obj/item/rig_module/stealth_field,
-		/obj/item/rig_module/mounted/energy_blade,
+		/obj/item/rig_module/mounted/energy/energy_blade,
 		/obj/item/rig_module/vision,
 		/obj/item/rig_module/voice,
 		/obj/item/rig_module/fabricator/energy_net,
@@ -133,12 +133,13 @@
 		/obj/item/rig_module/power_sink,
 		/obj/item/rig_module/datajack,
 		/obj/item/rig_module/self_destruct,
-		/obj/item/rig_module/cooling_unit
+		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets
 		)
 
 /obj/item/rig/light/ninja/verb/rename_suit()
-	set name = "Name Ninja Suit"
-	set desc = "Rename your black voidsuit."
+	set name = "Name Operative Suit"
+	set desc = "Rename your hardsuit."
 	set category = "Object"
 	var/mob/M = usr
 	if(!M.mind) return 0
@@ -154,8 +155,8 @@
 
 
 /obj/item/rig/light/ninja/verb/rewrite_suit_desc()
-	set name = "Describe Ninja suit"
-	set desc = "Give your voidsuit a custom description."
+	set name = "Describe Operative suit"
+	set desc = "Give your hardsuit a custom description."
 	set category = "Object"
 	var/mob/M = usr
 	if(!M.mind) return 0
@@ -175,6 +176,90 @@
 /obj/item/clothing/suit/space/rig/light/ninja
 	breach_threshold = 38 //comparable to regular hardsuits
 	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
+
+/obj/item/rig/light/ninja/sol
+	name = "solar operative suit control module"
+	desc = "A sleek, military hardsuit with no model number or identifying logos besides a small Solar crest on its control module. Get tactical, marine."
+	suit_type = "operative"
+	icon_state = "solop_rig"
+	online_slowdown = 1
+	offline_slowdown = 2
+	initial_modules = list(
+		/obj/item/rig_module/vision,
+		/obj/item/rig_module/chem_dispenser/ninja,
+		/obj/item/rig_module/voice,
+		/obj/item/rig_module/grenade_launcher/ninja,
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/personal_shield,
+		/obj/item/rig_module/power_sink,
+		/obj/item/rig_module/datajack,
+		/obj/item/rig_module/self_destruct,
+		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets
+		)
+
+/obj/item/rig/light/ninja/gcc
+	name = "gilgamesh heavy suit control module"
+	desc = "A ridiculously bulky military hardsuit with no model number or identifying logos besides a small ICCG crest on its control module. This suit is built like a tank and weighs as much as one."
+	suit_type = "heavy"
+	icon_state = "gcc_rig"
+	online_slowdown = 2 ///chunky
+	offline_slowdown = 4
+	armor = list(
+		melee = ARMOR_MELEE_VERY_HIGH,
+		bullet = ARMOR_BALLISTIC_RIFLE,
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED
+		)
+	initial_modules = list(
+		/obj/item/rig_module/vision,
+		/obj/item/rig_module/chem_dispenser/ninja,
+		/obj/item/rig_module/voice,
+		/obj/item/rig_module/grenade_launcher/ninja,
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/power_sink,
+		/obj/item/rig_module/datajack,
+		/obj/item/rig_module/self_destruct,
+		/obj/item/rig_module/mounted/ballistic/minigun,
+		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets
+		)
+
+/obj/item/clothing/suit/space/rig/light/ninja/gcc
+	breach_threshold = 50 ///chunky
+
+/obj/item/rig/light/ninja/corpo
+	name = "corporate mercenary suit control module"
+	desc = "A light hardsuit with minimal armor plating. The control panel marks it as a Hephaestus X-11 Lightweight, a mobile combat suit commonly issued to corporate security teams."
+	suit_type = "corporate"
+	icon_state = "corpo_rig"
+	online_slowdown = -1 ///speedster suit
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED
+	)
+
+	initial_modules = list(
+		/obj/item/rig_module/actuators,
+		/obj/item/rig_module/mounted/arm_blade,
+		/obj/item/rig_module/mounted/energy/ion,
+		/obj/item/rig_module/vision,
+		/obj/item/rig_module/chem_dispenser/ninja,
+		/obj/item/rig_module/voice,
+		/obj/item/rig_module/grenade_launcher/ninja,
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/power_sink,
+		/obj/item/rig_module/datajack,
+		/obj/item/rig_module/self_destruct,
+		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets
+		)
 
 /obj/item/rig/light/stealth
 	name = "stealth suit control module"

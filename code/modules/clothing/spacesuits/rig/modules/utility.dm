@@ -166,8 +166,10 @@
 		list("dylovene",      "dylovene",      /datum/reagent/dylovene,          20),
 		list("glucose",       "glucose",       /datum/reagent/nutriment/glucose, 80),
 		list("hyronalin",     "hyronalin",     /datum/reagent/hyronalin,         20),
+		list("bicaridine",    "bicaridine",    /datum/reagent/bicaridine,        20),
 		list("dermaline",     "dermaline",     /datum/reagent/dermaline,         20),
 		list("spaceacillin",  "spaceacillin",  /datum/reagent/spaceacillin,      20),
+		list("coagulant",     "coagulant",     /datum/reagent/coagulant,         20),
 		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          20)
 		)
 

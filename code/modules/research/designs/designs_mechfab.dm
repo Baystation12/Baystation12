@@ -748,7 +748,7 @@
 /datum/design/item/mechfab/rig/plasmacutter
 	category = "Hardsuits"
 	name = "Plasma Cutter"
-	build_path = /obj/item/rig_module/mounted/plasmacutter
+	build_path = /obj/item/rig_module/mounted/energy/plasmacutter
 	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GLASS = 1000, MATERIAL_PLASTIC = 1000, MATERIAL_GOLD = 700, MATERIAL_PHORON = 500)
 	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6, TECH_COMBAT = 4)
 	id = "rig_plasmacutter"
@@ -829,7 +829,7 @@
 /datum/design/item/mechfab/rig/taser
 	category = "Hardsuits"
 	name = "Electrolaser"
-	build_path = /obj/item/rig_module/mounted/taser
+	build_path = /obj/item/rig_module/mounted/energy/taser
 	materials = list(MATERIAL_STEEL = 4000, MATERIAL_PLASTIC = 2500, MATERIAL_GLASS = 2000, MATERIAL_GOLD = 1000)
 	req_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
 	id = "rig_taser"
@@ -838,7 +838,7 @@
 /datum/design/item/mechfab/rig/egun
 	category = "Hardsuits"
 	name = "Energy Gun"
-	build_path = /obj/item/rig_module/mounted/egun
+	build_path = /obj/item/rig_module/mounted/energy/egun
 	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 3000, MATERIAL_PLASTIC = 2500, MATERIAL_GOLD = 2000, MATERIAL_SILVER = 1000)
 	req_tech = list(TECH_POWER = 6, TECH_COMBAT = 6, TECH_ENGINEERING = 6)
 	id = "rig_egun"
