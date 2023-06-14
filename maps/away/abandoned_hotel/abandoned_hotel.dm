@@ -4,6 +4,11 @@
 	name = "Cinnamon Resort"
 	desc = "Sensors detect a hotel with a low power profile."
 	icon_state = "object"
+	initial_generic_waypoints = list(
+		"nav_cinnamon_hotel_1",
+		"nav_cinnamon_hotel_2",
+		"nav_cinnamon_hotel_3",
+	)
 
 /datum/map_template/ruin/away_site/abandoned_hotel
 	name = "Cinnamon Resort"
@@ -24,7 +29,7 @@
 // Landing Markers
 
 /obj/effect/shuttle_landmark/abandoned_hotel/one
-	name = "Cinnamon Resort Docked"
+	name = "Cinnamon Resort East"
 	landmark_tag = "nav_cinnamon_hotel_1"
 
 /obj/effect/shuttle_landmark/abandoned_hotel/two
