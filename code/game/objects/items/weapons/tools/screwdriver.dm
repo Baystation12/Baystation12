@@ -16,6 +16,7 @@
 	attack_verb = list("stabbed")
 	lock_picking_level = 5
 	sharp = TRUE
+	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 
 	var/build_from_parts = TRUE
 	var/valid_colours = list(COLOR_RED, COLOR_CYAN_BLUE, COLOR_PURPLE, COLOR_CHESTNUT, COLOR_GREEN, COLOR_TEAL, COLOR_ASSEMBLY_YELLOW, COLOR_BOTTLE_GREEN, COLOR_VIOLET, COLOR_GRAY80, COLOR_GRAY20)

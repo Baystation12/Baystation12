@@ -62,7 +62,7 @@
 	name = "holdout revolver"
 	desc = "The al-Maliki & Mosley Partner is a concealed-carry revolver made for people who do not trust automatic pistols any more than the people they're dealing with."
 	icon_state = "holdout"
-	item_state = "pen"
+	item_state = "pistol"
 	caliber = CALIBER_PISTOL_SMALL
 	ammo_type = /obj/item/ammo_casing/pistol/small
 	w_class = ITEM_SIZE_SMALL
