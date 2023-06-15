@@ -1,0 +1,5 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - rscadd: Add a cosmetic auto-surgery kit to uplink for 12TC. So now, you can be
+      a different person (fully so with a syndi-ID and arrivals device).
