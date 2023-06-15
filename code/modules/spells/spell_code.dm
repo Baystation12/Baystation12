@@ -61,8 +61,6 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 	var/hud_state = "" //name of the icon used in generating the spell hud object
 	var/override_base = ""
 
-
-	var/mob/living/deity/connected_god //Do we have this spell based off a boon from a god?
 	var/obj/screen/connected_button
 
 	var/hidden_from_codex = FALSE
