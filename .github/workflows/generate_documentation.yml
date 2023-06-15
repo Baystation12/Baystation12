@@ -41,7 +41,7 @@ jobs:
       - name: Setup Cache
         uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
         with:
-          path: $HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION
+          path: ~/spaceman_dmm/${{ env.SPACEMAN_DMM_VERSION }}
           key: ${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}
       - name: Install dmdoc
         run:  scripts/install-spaceman-dmm.sh dmdoc
