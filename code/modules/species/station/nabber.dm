@@ -18,7 +18,7 @@
 
 	skin_material = MATERIAL_SKIN_CHITIN
 	bone_material = null
-	speech_sounds = list('sound/voice/bug.ogg')
+	speech_sounds = list('sound/voice/Bug.ogg')
 	speech_chance = 2
 
 	warning_low_pressure = 50

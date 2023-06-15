@@ -494,10 +494,10 @@
 		safety = new_safety
 		if(safety)
 			make_announcement("beeps, \"Safety protocols enabled!\"", "notice")
-			playsound(get_turf(src), 'sound/machines/defib_safetyon.ogg', 50, 0)
+			playsound(get_turf(src), 'sound/machines/defib_SafetyOn.ogg', 50, 0)
 		else
 			make_announcement("beeps, \"Safety protocols disabled!\"", "warning")
-			playsound(get_turf(src), 'sound/machines/defib_safetyoff.ogg', 50, 0)
+			playsound(get_turf(src), 'sound/machines/defib_safetyOff.ogg', 50, 0)
 		update_icon()
 	..()
 

@@ -18,13 +18,13 @@
 /datum/instrument/piano/fluid_harpsichord
 	name = "FluidR3 Harpsichord"
 	id = "r3harpsi"
-	samples = list("36"='code/modules/synthesized_instruments/samples/piano/fluid_harpsi/c2.ogg',
-				   "48"='code/modules/synthesized_instruments/samples/piano/fluid_harpsi/c3.ogg',
-				   "60"='code/modules/synthesized_instruments/samples/piano/fluid_harpsi/c4.ogg',
-				   "72"='code/modules/synthesized_instruments/samples/piano/fluid_harpsi/c5.ogg',
-				   "84"='code/modules/synthesized_instruments/samples/piano/fluid_harpsi/c6.ogg',
-				   "96"='code/modules/synthesized_instruments/samples/piano/fluid_harpsi/c7.ogg',
-				   "108"='code/modules/synthesized_instruments/samples/piano/fluid_harpsi/c8.ogg')
+	samples = list("36"='code/modules/synthesized_instruments/samples/piano/fluid_harpsi/C2.ogg',
+				   "48"='code/modules/synthesized_instruments/samples/piano/fluid_harpsi/C3.ogg',
+				   "60"='code/modules/synthesized_instruments/samples/piano/fluid_harpsi/C4.ogg',
+				   "72"='code/modules/synthesized_instruments/samples/piano/fluid_harpsi/C5.ogg',
+				   "84"='code/modules/synthesized_instruments/samples/piano/fluid_harpsi/C6.ogg',
+				   "96"='code/modules/synthesized_instruments/samples/piano/fluid_harpsi/C7.ogg',
+				   "108"='code/modules/synthesized_instruments/samples/piano/fluid_harpsi/C8.ogg')
 
 
 /datum/instrument/piano/crisis_harpsichord
