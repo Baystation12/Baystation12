@@ -529,6 +529,13 @@
 	safety = 0
 	wielded = 1
 
+/obj/item/shockpaddles/rig/attack()
+	var/obj/item/rig_module/device/defib/module = src.loc
+	if(!module.holder.hands_deployed)
+		make_announcement("buzzes, \"Error - Hardsuit gauntlets are not deployed.\"", "warning")
+		return 1
+	..()
+
 /obj/item/shockpaddles/rig/check_charge(charge_amt)
 	if(istype(src.loc, /obj/item/rig_module/device/defib))
 		var/obj/item/rig_module/device/defib/module = src.loc

@@ -61,6 +61,12 @@
 	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 6)
 	device = /obj/item/pickaxe/diamonddrill
 
+/obj/item/rig_module/device/drill/engage()
+	if(!holder.hands_deployed)
+		to_chat(holder.wearer, SPAN_DANGER ("You can't use \the [src] without deploying your [initial(holder.gloves.name)]"))
+		return 0
+	..()
+
 /obj/item/rig_module/device/anomaly_scanner
 	name = "anomaly scanner module"
 	desc = "You think it's called an Elder Sarsparilla or something."
@@ -115,6 +121,10 @@
 
 /obj/item/rig_module/device/engage(atom/target)
 	if(!..() || !device)
+		return 0
+
+	if(!holder.hands_deployed)
+		to_chat(holder.wearer, SPAN_DANGER ("You can't use \the [src] without deploying your [initial(holder.gloves.name)]"))
 		return 0
 
 	if(!target)
@@ -210,6 +220,9 @@
 		return 0
 
 	var/mob/living/carbon/human/H = holder.wearer
+
+	if(holder.hands_deployed)
+		to_chat(H, SPAN_DANGER("You can't use \the [src] without deploying your [initial(holder.gloves.name)]."))
 
 	if(!charge_selected)
 		to_chat(H, SPAN_DANGER("You have not selected a chemical type."))
@@ -312,6 +325,9 @@
 
 	if(!..())
 		return 0
+
+	if(!holder.helmet_deployed)
+		to_chat(holder.wearer, SPAN_DANGER("You can't use \the [src] without deploying your [holder.helmet.name]"))
 
 	var/choice= input("Would you like to toggle the synthesiser or set the name?") as null|anything in list("Enable","Disable","Set Name")
 
@@ -539,6 +555,8 @@
 
 /obj/item/rig_module/kinetic_module/engage(atom/target, mob/living/user, inrange, params)
 	. = ..()
+	if(!holder.hands_deployed)
+		to_chat(user, SPAN_DANGER("You can't use \the [src] without deploying your [initial(holder.gloves.name)]."))
 	if(.)
 		if(!locked && (get_dist(holder.wearer, target) <= max_dist))
 			var/atom/movable/AM = target

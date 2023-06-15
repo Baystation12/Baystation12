@@ -55,6 +55,9 @@
 	if(!check() || !device)
 		return 0
 
+	if(!holder.hands_deployed)
+		to_chat(holder.wearer, SPAN_DANGER("You can't activate the flash without deploying your [holder.gloves.name]"))
+
 	if(!holder.cell.check_charge(use_power_cost * CELLRATE))
 		to_chat(holder.wearer,SPAN_WARNING("Not enough stored power."))
 		return 0
@@ -134,6 +137,10 @@
 		return 0
 
 	var/mob/living/carbon/human/H = holder.wearer
+
+	if(!holder.chest_deployed)
+		to_chat(H, SPAN_DANGER("You can't fire the [src] without deploying your [holder.chest.name]"))
+		return 0
 
 	if(!charge_selected)
 		to_chat(H, SPAN_DANGER("You have not selected a grenade type."))
@@ -220,6 +227,10 @@
 	if(!..() || !gun)
 		return 0
 
+	if(!holder.chest_deployed)
+		to_chat(holder.wearer, SPAN_DANGER("You can't fire \the [gun] without deploying your [holder.chest.name]."))
+		return 0
+
 	if(!target)
 		gun.attack_self(holder.wearer)
 		return
@@ -286,6 +297,9 @@
 
 	if(!check() || !gun)
 		return 0
+
+	if(!holder.hands_deployed)
+		to_chat(holder.wearer, SPAN_DANGER("You can't fire \the [gun] without deploying your [holder.chest.name]."))
 
 	if(holder.wearer.a_intent == I_HURT || !target.Adjacent(holder.wearer))
 		gun.Fire(target,holder.wearer)

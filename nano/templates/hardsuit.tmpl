@@ -1,11 +1,11 @@
-<!-- 
+<!--
 Title: Integrated Hardsuit Controller
 Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
  -->
 
 <style type="text/css">
 	.inlineBlock {
-		padding: 2px; 
+		padding: 2px;
 		display: inline-block;
 	}
 	.extraTopPadding {
@@ -16,7 +16,7 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 		margin-left: 5px;
 	}
 	.paddedBorderBlue {
-		border: 1px solid #517087; 
+		border: 1px solid #517087;
 		padding: 2px;
 	}
 	.redText {
@@ -136,6 +136,11 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 				<div class='fixedLeftWider'>
 					{{:helper.capitalizeFirstLetter(data.gauntlets)}}
 				</div>
+				{{if data.sealing != 1}}
+					<div class='fixedLeft'>
+						{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_piece' : 'gauntlets'}, null)}}
+					</div>
+				{{/if}}
 			</div>
 			<div class='inlineBlock'>
 				<div class='fixedLeft boldText'>
@@ -144,6 +149,11 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 				<div class='fixedLeftWider'>
 					{{:helper.capitalizeFirstLetter(data.boots)}}
 				</div>
+				{{if data.sealing != 1}}
+					<div class='fixedLeft'>
+						{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_piece' : 'boots'}, null)}}
+					</div>
+				{{/if}}
 			</div>
 			<div class='inlineBlock'>
 				<div class='fixedLeft boldText'>
@@ -152,6 +162,11 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 				<div class='fixedLeftWider'>
 					{{:helper.capitalizeFirstLetter(data.chest)}}
 				</div>
+				{{if data.sealing != 1}}
+					<div class='fixedLeft'>
+						{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_piece' : 'chest'}, null)}}
+					</div>
+				{{/if}}
 			</div>
 		</div>
 
@@ -200,7 +215,7 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 		{{if data.seals == 1 || data.sealing == 1}}
 			<h3><div class = 'bad'>HARDSUIT SYSTEMS OFFLINE</div></h3>
 		{{else}}
-			<h3>Selected primary system: 
+			<h3>Selected primary system:
 				{{if data.primarysystem}}
 					{{:helper.capitalizeFirstLetter(data.primarysystem)}}
 				{{else}}
@@ -225,9 +240,9 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 									{{/if}}
 									<div class='floatLeft' style='width: 100%; clear: left'>
 										<div class='caption floatLeft average' style='width: 20%; margin: 0'>
-												Engage: {{:value.engagecost}} 
-												Activate: {{:value.activecost}} 
-												Passive: {{:value.passivecost}} 
+												Engage: {{:value.engagecost}}
+												Activate: {{:value.activecost}}
+												Passive: {{:value.passivecost}}
 										</div>
 										<div class='caption floatLeft' style='width: 25%; margin: 0'>
 												{{:value.desc}}

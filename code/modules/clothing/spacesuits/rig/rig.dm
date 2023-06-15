@@ -88,6 +88,12 @@
 	var/offline = 1                                           // Should we be applying suit maluses?
 	var/online_slowdown = 1                                   // If the suit is deployed and powered, it sets slowdown to this.
 	var/offline_slowdown = 3                                  // If the suit is deployed and unpowered, it sets slowdown to this.
+
+	var/helmet_deployed = 0                                   // Keeps track of if the part is deployed for module checks
+	var/chest_deployed = 0
+	var/hands_deployed = 0
+	var/boots_deployed = 0
+
 	var/vision_restriction = TINT_NONE
 	var/offline_vision_restriction = TINT_HEAVY               // tint value given to helmet
 	var/airtight = 1 //If set, will adjust ITEM_FLAG_AIRTIGHT flags on components. Otherwise it should leave them untouched.
@@ -203,15 +209,18 @@
 		air_supply = new air_type(src)
 	if(glove_type)
 		gloves = new glove_type(src)
+		verbs |= /obj/item/rig/proc/toggle_gauntlets
 	if(helm_type)
 		helmet = new helm_type(src)
 		verbs |= /obj/item/rig/proc/toggle_helmet
 	if(boot_type)
 		boots = new boot_type(src)
+		verbs |= /obj/item/rig/proc/toggle_boots
 	if(chest_type)
 		chest = new chest_type(src)
 		if(allowed)
 			chest.allowed = allowed
+		verbs |= /obj/item/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
 		if(!istype(piece))
@@ -789,6 +798,15 @@
 						use_obj.canremove = 1
 						holder.drop_from_inventory(use_obj, src)
 						use_obj.canremove = 0
+					switch(piece)
+						if("helmet")
+							helmet_deployed = 0
+						if("gauntlets")
+							hands_deployed = 0
+						if("boots")
+							boots_deployed = 0
+						if("chest")
+							chest_deployed = 0
 
 		else if (deploy_mode != ONLY_RETRACT)
 			if(check_slot && check_slot == use_obj)
@@ -804,6 +822,15 @@
 					return
 			else
 				to_chat(wearer, SPAN_NOTICE("Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly."))
+				switch(piece)
+					if("helmet")
+						helmet_deployed = 1
+					if("gauntlets")
+						hands_deployed = 1
+					if("boots")
+						boots_deployed = 1
+					if("chest")
+						chest_deployed = 1
 
 	if(piece == "helmet" && helmet)
 		helmet.update_light(wearer)

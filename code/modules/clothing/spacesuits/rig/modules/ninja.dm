@@ -37,6 +37,10 @@
 
 	var/mob/living/carbon/human/H = holder.wearer
 
+	if(!(holder.chest_deployed || holder.boots_deployed || holder.hands_deployed || holder.helmet_deployed))
+		to_chat(H, SPAN_WARNING("You cannot cloak without fully deploying your hardsuit."))
+		return 0
+
 	if(H.add_cloaking_source(src))
 		anim(H, 'icons/effects/effects.dmi', "electricity",null,20,null)
 
@@ -84,6 +88,10 @@
 /obj/item/rig_module/teleporter/engage(atom/target, notify_ai)
 
 	var/mob/living/carbon/human/H = holder.wearer
+
+	if(!(holder.chest_deployed || holder.boots_deployed || holder.hands_deployed || holder.helmet_deployed))
+		to_chat(H, SPAN_WARNING("You cannot use the teleport without fully deploying your hardsuit."))
+		return 0
 
 	if(!istype(H.loc, /turf))
 		to_chat(H, SPAN_WARNING("You cannot teleport out of your current location."))
