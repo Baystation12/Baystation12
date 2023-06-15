@@ -72,6 +72,6 @@
 
 
 /obj/aura/nanoaura/Destroy()
-	to_chat(user, SPAN_WARNING("\The nanites dissolve!"))
+	to_chat(user, SPAN_WARNING("The nanites dissolve!"))
 	unit = null
 	return ..()

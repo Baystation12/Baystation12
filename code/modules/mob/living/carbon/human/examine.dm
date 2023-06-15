@@ -268,7 +268,7 @@
 					else if(!parsedembed.Find("multiple [embedded.name]"))
 						parsedembed.Remove(embedded.name)
 						parsedembed.Add("multiple "+embedded.name)
-				wound_flavor_text["[E.name]"] += "The [wound.desc] on [P.his] [E.name] has \a [english_list(parsedembed, and_text = " and \a ", comma_text = ", \a ")] sticking out of it!<br>"
+				wound_flavor_text["[E.name]"] += "The [wound.desc] on [P.his] [E.name] has \a [english_list(parsedembed, and_text = " and a ", comma_text = ", a ")] sticking out of it!<br>"
 	for(var/hidden in hidden_bleeders)
 		wound_flavor_text[hidden] = "[P.He] [P.has] blood soaking through [hidden] around [P.his] [english_list(hidden_bleeders[hidden])]!<br>"
 
