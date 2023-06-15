@@ -22,6 +22,9 @@
 
 	var/staffwarn = null
 
+	/// List that stores the object and parameters related to the selected target during mouse events in the client. Allows the client to remember the target selected during a "MouseDown" event or update the selection during a "MouseDrag" event.
+	var/list/selected_target[2]
+
 		///////////////
 		//SOUND STUFF//
 		///////////////
