@@ -16,6 +16,7 @@
 	attack_verb = list("stabbed")
 	lock_picking_level = 5
 	sharp = TRUE
+	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 
 	drop_sound = 'sound/items/drop/screwdriver.ogg'
 	pickup_sound = 'sound/items/pickup/screwdriver.ogg'
