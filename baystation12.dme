@@ -978,6 +978,7 @@
 #include "code\game\objects\items\devices\boombox.dm"
 #include "code\game\objects\items\devices\chameleonproj.dm"
 #include "code\game\objects\items\devices\debugger.dm"
+#include "code\game\objects\items\devices\dna_sampler.dm"
 #include "code\game\objects\items\devices\dociler.dm"
 #include "code\game\objects\items\devices\flash.dm"
 #include "code\game\objects\items\devices\flashlight.dm"

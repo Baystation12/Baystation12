@@ -1361,8 +1361,8 @@
 	filling_color = "#adac7f"
 	center_of_mass = "x=16;y=14"
 
-	var/wrapped = 0
-	var/growing = 0
+	var/wrapped = FALSE
+	var/growing = FALSE
 	var/monkey_type = /mob/living/carbon/human/monkey
 
 /obj/item/reagent_containers/food/snacks/monkeycube/Initialize()
@@ -1375,7 +1375,7 @@
 
 /obj/item/reagent_containers/food/snacks/monkeycube/proc/Expand()
 	if(!growing)
-		growing = 1
+		growing = TRUE
 		src.visible_message(SPAN_NOTICE("\The [src] expands!"))
 		var/mob/monkey = new monkey_type
 		monkey.dropInto(src.loc)
@@ -1385,7 +1385,7 @@
 	icon_state = "monkeycube"
 	desc = "Just add water!"
 	to_chat(user, SPAN_NOTICE("You unwrap \the [src]."))
-	wrapped = 0
+	wrapped = FALSE
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	var/trash = new /obj/item/trash/cubewrapper(get_turf(user))
 	user.put_in_hands(trash)
@@ -1420,7 +1420,7 @@
 	icon_state = "monkeycubewrap"
 	item_flags = 0
 	obj_flags = 0
-	wrapped = 1
+	wrapped = TRUE
 
 /obj/item/reagent_containers/food/snacks/monkeycube/farwacube
 	name = "farwa cube"
@@ -1473,6 +1473,84 @@
 	nutriment_desc = list("magic" = 3, "buns" = 3)
 	nutriment_amt = 6
 	bitesize = 2
+
+//corpse cube for the antag item
+/obj/item/reagent_containers/food/snacks/corpse_cube
+	name = "odd fleshy cube"
+	desc = "A strangely large, veiny and deformed monkey cube that pulsates and writhes disturbingly"
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+	icon_state = "corpsecube"
+	bitesize = 12
+	filling_color = "#adac7f"
+	center_of_mass = "x=16;y=14"
+
+	var/wrapped = FALSE
+	var/growing = FALSE
+	var/spawn_type = /mob/living/carbon/human
+
+/obj/item/reagent_containers/food/snacks/corpse_cube/use_tool(obj/item/device/dna_sampler/W, mob/user)
+	if(istype(W))
+		if (W.loaded == 1)
+			to_chat(user, "You inject the DNA sample into the cube.")
+			CorpseExpand(W.src_dna,W.src_name,W.src_species,W.src_pronouns,W.src_faction)
+			W.loaded = FALSE
+			W.icon_state = "dnainjector0"
+			W.src_dna = null
+			W.src_pronouns = ""
+			W.src_faction = ""
+			W.src_name = ""
+			W.src_species = ""
+		else
+			to_chat(user,"The cube doesn't so much as twitch without a DNA sample.")
+	return ..()
+
+
+/obj/item/reagent_containers/food/snacks/corpse_cube/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
+
+/obj/item/reagent_containers/food/snacks/corpse_cube/proc/CorpseExpand(source_DNA,source_name,source_species,source_pronouns, source_faction)
+	if(!growing)
+		growing = TRUE
+		var/mob/living/carbon/human/H = new spawn_type
+		H.dna = source_DNA
+		playsound(loc, 'sound/effects/corpsecube.ogg', 60)
+		H.faction = source_faction
+		H.real_name = source_name
+		H.SetName(source_name)
+		H.dna.real_name = source_name
+		H.pronouns = source_pronouns
+		H.change_pronouns(source_pronouns)
+		H.change_species(source_species)
+		src.visible_message(SPAN_WARNING("[src] transforms, the dummy body's features twisting and cracking as it imitates the provided blood!"))
+		H.dropInto(src.loc)
+		H.setBrainLoss(200)
+		H.adjustOxyLoss(H.maxHealth)
+		domutcheck(H, null)
+		H.UpdateAppearance()
+		qdel(src)
+
+/obj/item/reagent_containers/food/snacks/corpse_cube/OnConsume(mob/living/consumer, mob/living/feeder)
+	set waitfor = FALSE
+	if (ishuman(consumer))
+		var/mob/living/carbon/human/human = consumer
+		to_chat(human, FONT_LARGE(SPAN_DANGER("You feel something shifting and slithering throughout your body ...")))
+		var/obj/item/organ/external/organ = human.get_organ(BP_CHEST)
+		var/obj/item/organ/external/unluckylimb1 = human.get_organ(pick(BP_ALL_LIMBS))
+		var/obj/item/organ/external/unluckylimb2 = human.get_organ(pick(BP_ALL_LIMBS))
+		organ.add_pain(30)
+		organ.fracture()
+		unluckylimb1.add_pain(50)
+		unluckylimb1.fracture()
+		unluckylimb2.add_pain(50)
+		unluckylimb2.fracture()
+		organ.take_external_damage(50, 0, EMPTY_BITFIELD, "Agonizing pain")
+		organ.damage_internal_organs(50, 0, EMPTY_BITFIELD)
+		human.AdjustWeakened(5)
+		human.AdjustStunned(5)
+
+	else
+		consumer.kill_health()
 
 /obj/item/reagent_containers/food/snacks/bigbiteburger
 	name = "big bite burger"
