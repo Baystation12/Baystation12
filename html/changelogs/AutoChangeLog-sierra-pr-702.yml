@@ -1,0 +1,5 @@
+author: Gy1ta23
+delete-after: true
+changes:
+  - tweak: screwdrivers can now be hidden in boots like knives
+  - tweak: gave the holdout revolver an inhand sprite, copying the holdout pistol
