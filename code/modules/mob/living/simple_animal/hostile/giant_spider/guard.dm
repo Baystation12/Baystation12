@@ -19,9 +19,6 @@
 
 /obj/item/natural_weapon/bite/spider/strong
 
-/datum/ai_holder/simple_animal/melee/spider/guard
-	var/datum/ai_holder/simple_animal/melee/spider/nurse/paired_nurse
-
 /datum/ai_holder/simple_animal/melee/spider/guard/find_target(list/possible_targets, has_targets_list)
 	. = ..()
 	var/mob/living/simple_animal/hostile/giant_spider/guard/G = holder
