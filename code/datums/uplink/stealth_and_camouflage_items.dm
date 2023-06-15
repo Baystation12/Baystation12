@@ -52,6 +52,12 @@
 	item_cost = 20
 	path = /obj/item/storage/backpack/chameleon/sydie_kit
 
+/datum/uplink_item/item/stealth_items/corpse_cube
+	name = "Fake Corpse Cube"
+	desc = "For when reports of death were greatly exaggerated. Bundled with a DNA sampler for extracting a target's DNA to inject into the cube."
+	item_cost = 20
+	path = /obj/item/storage/box/syndie_kit/corpse_cube
+
 /datum/uplink_item/item/stealth_items/voice
 	name = "Modified Gas Mask"
 	desc = "A fully functioning gas mask that is able to conceal your face and has a built in voice modulator, \

@@ -159,3 +159,8 @@
 		/obj/item/clothing/suit/armor/pcarrier/merc,
 		/obj/item/clothing/head/helmet/merc
 	)
+/obj/item/storage/box/syndie_kit/corpse_cube
+	startswith = list(
+		/obj/item/device/dna_sampler,
+		/obj/item/reagent_containers/food/snacks/corpse_cube
+	)
