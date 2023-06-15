@@ -10,14 +10,14 @@
 // BEGIN RESEARCH DATUMS
 
 /datum/malf_research_ability/passive/intellicard_interception
-	ability = new/datum/game_mode/malfunction/verb/intellicard_interception()
+	ability = /datum/game_mode/malfunction/verb/intellicard_interception
 	price = 250
 	next = new/datum/malf_research_ability/passive/subtle_algorithms()
 	name = "T1 - Intellicard Interception"
 
 
 /datum/malf_research_ability/passive/subtle_algorithms
-	ability = new/datum/game_mode/malfunction/verb/subtle_algorithms()
+	ability = /datum/game_mode/malfunction/verb/subtle_algorithms
 	price = 1000
 	next = new/datum/malf_research_ability/passive/relay_suppression()
 	name = "T2 - Subtle Algorithms"

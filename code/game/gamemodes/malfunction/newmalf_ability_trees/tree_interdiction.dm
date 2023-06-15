@@ -10,28 +10,28 @@
 // BEGIN RESEARCH DATUMS
 
 /datum/malf_research_ability/interdiction/recall_shuttle
-	ability = new/datum/game_mode/malfunction/verb/recall_shuttle()
+	ability = /datum/game_mode/malfunction/verb/recall_shuttle
 	price = 250
 	next = new/datum/malf_research_ability/interdiction/unlock_cyborg()
 	name = "T1 - Recall Shuttle"
 
 
 /datum/malf_research_ability/interdiction/unlock_cyborg
-	ability = new/datum/game_mode/malfunction/verb/unlock_cyborg()
+	ability = /datum/game_mode/malfunction/verb/unlock_cyborg
 	price = 1000
 	next = new/datum/malf_research_ability/interdiction/hack_cyborg()
 	name = "T2 - Unlock Cyborg"
 
 
 /datum/malf_research_ability/interdiction/hack_cyborg
-	ability = new/datum/game_mode/malfunction/verb/hack_cyborg()
+	ability = /datum/game_mode/malfunction/verb/hack_cyborg
 	price = 2000
 	next = new/datum/malf_research_ability/interdiction/hack_ai()
 	name = "T3 - Hack Cyborg"
 
 
 /datum/malf_research_ability/interdiction/hack_ai
-	ability = new/datum/game_mode/malfunction/verb/hack_ai()
+	ability = /datum/game_mode/malfunction/verb/hack_ai
 	price = 4000
 	name = "T4 - Hack AI"
 

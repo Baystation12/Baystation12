@@ -23,7 +23,7 @@
 		chameleon_choices = sortAssoc(choices)
 
 	atom_holder = holder
-	chameleon_verb += new/atom/proc/chameleon_appearance(atom_holder,"Change [atom_holder.name] Appearance")
+	chameleon_verb = /atom/proc/chameleon_appearance
 
 /datum/extension/chameleon/Destroy()
 	. = ..()
