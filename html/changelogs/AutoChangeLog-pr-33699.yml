@@ -1,4 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed spacedrift affecting objects that were currently being pulled.

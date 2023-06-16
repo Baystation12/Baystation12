@@ -1,6 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - tweak: Rigs get some storage on the suit part. Most get 2x normal items of freeform,
-      lights get 3x small, and zeros get nothing. It can be dumped out via the panel->wrench
-      pathway when not worn.
