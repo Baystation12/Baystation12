@@ -8,7 +8,7 @@
 	map_generators = list(/datum/random_map/noise/exoplanet/desert, /datum/random_map/noise/ore/rich)
 	surface_color = "#d6cca4"
 	water_color = null
-	habitability_distribution = list(HABITABILITY_IDEAL = 10, HABITABILITY_LESSIDEAL = 40, HABITABILITY_BAD = 40, HABITABILITY_UNINHABITABLE = 10)
+	habitability_distribution = list(HABITABILITY_IDEAL = 30, HABITABILITY_OKAY = 50, HABITABILITY_BAD = 10)
 	has_trees = FALSE
 	flora_diversity = 4
 	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/voxslug, /mob/living/simple_animal/hostile/retaliate/beast/antlion)
@@ -22,14 +22,11 @@
 /obj/effect/overmap/visitable/sector/exoplanet/desert/generate_atmosphere()
 	..()
 	if(atmosphere)
-		switch(habitability_class)
-			if(HABITABILITY_IDEAL, HABITABILITY_LESSIDEAL)
-				atmosphere.temperature = skewedGaussian(310.93, 333.15, 2) // favors around 100F (310.93K)
-			if(HABITABILITY_BAD)
-				atmosphere.temperature = skewedGaussian(310.93, 333.15, 0.5) // favors around 140F (333.15K)
-			else
-				atmosphere.temperature = rand(310, 1000)
-
+		var/limit = 1000
+		if(habitability_class <= HABITABILITY_OKAY)
+			var/datum/species/human/H = /datum/species/human
+			limit = initial(H.heat_level_1) - rand(1,10)
+		atmosphere.temperature = min(T20C + rand(20, 100), limit)
 		atmosphere.update_values()
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/adapt_seed(datum/seed/S)
