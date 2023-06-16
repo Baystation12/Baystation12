@@ -27,7 +27,7 @@
 	name = "fractal touch"
 	attack_verb = list("slashed", "phased through", "drained")
 	hitsound = 'sound/hallucinations/growl1.ogg'
-	force = 15
+	force = 10
 	sharp = TRUE
 	edge = TRUE
 

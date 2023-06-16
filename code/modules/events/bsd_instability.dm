@@ -1,5 +1,5 @@
 /datum/event/bsd_instability
-	endWhen	= 250
+	endWhen	= 800
 
 	var/list/obj/machinery/tele_pad/pads = list()
 	var/list/obj/machinery/bluespacedrive/drives = list()
@@ -7,8 +7,8 @@
 	var/list/obj/structure/ladders = list()
 	var/list/mob/living/simple_animal/hostile/bluespace/mobs = list()
 	var/effects_per_tick = 5
-	var/maximum_mobs = 15
-	var/mob_spawn_chance = 4
+	var/maximum_mobs = 10
+	var/mob_spawn_chance = 3
 
 	/// Whether or not the 'pulse' should happen, changed to true if the probability check passes in setup()
 	var/should_do_pulse = FALSE
@@ -52,7 +52,7 @@
 		drive.set_light(1, 8, 25, 15, COLOR_CYAN_BLUE)
 		if (severity <= EVENT_LEVEL_MODERATE)
 			continue
-		drive.create_flash(TRUE)
+		addtimer(new Callback(drive, /obj/machinery/bluespacedrive/proc/create_flash, TRUE), 2 SECONDS)
 	if (severity <= EVENT_LEVEL_MODERATE)
 		return
 	for (var/obj/structure/stairs/stair in world)
@@ -97,7 +97,8 @@
 		if (isdeaf(mob))
 			continue
 		if (!(get_z(mob) in affecting_z))
-			sound_to(mob, 'sound/ambience/bsd_alarm.ogg')
+			continue
+		sound_to(mob, 'sound/ambience/bsd_alarm.ogg')
 
 
 /datum/event/bsd_instability/end()

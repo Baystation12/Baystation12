@@ -24,7 +24,7 @@
 	var/bluespace_affected = FALSE
 
 	///Chance for a person climbing the ladder to be teleported to a random other ladder while bluespace affected.
-	var/displacement_chance = 30
+	var/displacement_chance = 15
 
 
 /obj/structure/ladder/Initialize()
@@ -114,6 +114,13 @@
 	var/obj/structure/ladder/target_ladder = getTargetLadder(M)
 	if(!target_ladder)
 		return
+	if (bluespace_affected && prob(displacement_chance))
+		var/list/obj/structure/ladder/other_ladders= list()
+		var/list/zlevels = GetConnectedZlevels(z)
+		for (var/obj/structure/ladder/ladder)
+			if (src != ladder && (ladder.z in zlevels))
+				other_ladders += ladder
+		target_ladder = pick(other_ladders)
 	if(!M.Move(get_turf(src)))
 		to_chat(M, SPAN_NOTICE("You fail to reach \the [src]."))
 		return
@@ -144,17 +151,6 @@
 	if((!target_up && !target_down) || (target_up && !istype(target_up.loc, /turf/simulated/open) || (target_down && !istype(target_down.loc, /turf))))
 		to_chat(M, SPAN_NOTICE("\The [src] is incomplete and can't be climbed."))
 		return
-
-	if (bluespace_affected)
-		var/list/obj/structure/ladder/other_ladders= list()
-		for (var/obj/structure/ladder/ladder)
-			if (src != ladder && (ladder.z in GetConnectedZlevels(ladder.z)))
-				other_ladders += ladder
-		if (prob(displacement_chance))
-			if (target_up)
-				target_up = pick(other_ladders)
-			if (target_down)
-				target_down = pick(other_ladders)
 
 	if(target_down && target_up)
 		var/direction = alert(M,"Do you want to go up or down?", "Ladder", "Up", "Down", "Cancel")
@@ -244,7 +240,7 @@
 	var/bluespace_affected = FALSE
 
 	/// Chance of a user being displaced to a random set of stairs while its bluespace affected.
-	var/displacement_chance = 30
+	var/displacement_chance = 15
 
 
 /obj/structure/stairs/Initialize()
