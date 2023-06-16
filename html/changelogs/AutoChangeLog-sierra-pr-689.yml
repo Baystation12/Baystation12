@@ -1,6 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - tweak: Most simple mobs have had their movement speed increased to match current
-      player speeds, so you can no longer out-walk them.
-  - tweak: Phoron spiders will explode in 1-3 seconds instead of 3-5.

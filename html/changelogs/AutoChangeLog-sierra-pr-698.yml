@@ -1,4 +1,0 @@
-author: Ryan180602
-delete-after: true
-changes:
-  - tweak: Makes sure ckey checks are done when shuttle pod taking off.

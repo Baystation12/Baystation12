@@ -1,6 +1,0 @@
-author: Bam4000
-delete-after: true
-changes:
-  - bugfix: Fixed the landing markers for the Abandoned Hotel Away Site.
-  - bugfix: Fixed the spawning of a parent circuit board (that was a dumb mistake)
-  - tweak: Tweaked the abandoned hotel a bit
