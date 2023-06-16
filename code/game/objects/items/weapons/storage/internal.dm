@@ -91,6 +91,7 @@
 	max_w_class = slot_size
 	..()
 
-/obj/item/storage/internal/pouch/New(var/newloc, var/storage_space)
+/obj/item/storage/internal/pouch/New(newloc, storage_space, max_w_class)
 	max_storage_space = storage_space
+	src.max_w_class = max_w_class || src.max_w_class
 	..()

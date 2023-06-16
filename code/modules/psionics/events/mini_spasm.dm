@@ -37,7 +37,7 @@
 	set waitfor = 0
 
 	if(iscarbon(victim) && !victim.isSynthetic())
-		var/list/disabilities = list(NEARSIGHTED, EPILEPSY, NERVOUS)
+		var/list/disabilities = list(NEARSIGHTED, NERVOUS)
 		for(var/disability in disabilities)
 			if(victim.disabilities & disability)
 				disabilities -= disability

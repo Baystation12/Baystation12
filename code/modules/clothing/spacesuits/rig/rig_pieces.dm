@@ -53,15 +53,55 @@
 		)
 	var/list/supporting_limbs = list() //If not-null, automatically splints breaks. Checked when removing the suit.
 	equip_delay = null
+	var/obj/item/storage/internal/storage
+	var/max_w_class = ITEM_SIZE_NORMAL
+	var/slots = 2 STORAGE_FREEFORM
+
+
+/obj/item/clothing/suit/space/rig/Destroy()
+	LAZYCLEARLIST(supporting_limbs)
+	QDEL_NULL(storage)
+	return ..()
+
+
+/obj/item/clothing/suit/space/rig/Initialize()
+	. = ..()
+	if (slots && max_w_class)
+		if (slots < 0)
+			storage = new /obj/item/storage/internal/pouch (src, (-slots) * BASE_STORAGE_COST(max_w_class), max_w_class)
+		else
+			storage = new /obj/item/storage/internal/pockets (src, slots, max_w_class)
+
+
+/obj/item/clothing/suit/space/rig/attack_hand(mob/living/user)
+	if (storage?.handle_attack_hand(user))
+		..(user)
+
+/obj/item/clothing/suit/space/rig/MouseDrop(obj/over)
+	if (storage?.handle_mousedrop(usr, over))
+		..(over)
+
+
+/obj/item/clothing/suit/space/rig/emp_act(severity)
+	storage?.emp_act(severity)
+	..()
+
+
+/obj/item/clothing/suit/space/rig/attempt_store_item(obj/item/I, mob/user, silent)
+	if (storage?.can_be_inserted(I, user, TRUE) && storage.handle_item_insertion(I, silent))
+		return TRUE
+	return ..()
 
 
 /obj/item/clothing/suit/space/rig/equipped(mob/M)
 	check_limb_support(M)
 	..()
 
-/obj/item/clothing/suit/space/rig/dropped(var/mob/user)
+
+/obj/item/clothing/suit/space/rig/dropped(mob/user)
 	check_limb_support(user)
 	..()
+
 
 // Some space suits are equipped with reactive membranes that support broken limbs
 /obj/item/clothing/suit/space/rig/proc/can_support(var/mob/living/carbon/human/user)

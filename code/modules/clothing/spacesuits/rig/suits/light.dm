@@ -28,7 +28,19 @@
 /obj/item/clothing/suit/space/rig/light
 	name = "suit"
 	breach_threshold = 18 //comparable to voidsuits
-	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC, SPECIES_SHELL)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
+	allowed = list(
+		/obj/item/gun,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/melee/baton,
+		/obj/item/handcuffs,
+		/obj/item/tank,
+		/obj/item/device/suit_cooling_unit,
+		/obj/item/cell
+	)
+	max_w_class = ITEM_SIZE_SMALL
+	slots = 3 STORAGE_FREEFORM
 
 /obj/item/clothing/gloves/rig/light
 	name = "gloves"

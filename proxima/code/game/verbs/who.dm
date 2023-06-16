@@ -111,3 +111,51 @@
 	description ="Who: Show in a separate window"
 	key = "WINDOW_WHO"
 	default_value = GLOB.PREF_NO
+
+/client/verb/staffwho()
+	set category = "Admin"
+	set name = "Staffwho"
+
+	var/list/msg = list()
+	var/active_staff = 0
+	var/total_staff = 0
+	var/can_investigate = check_rights(R_INVESTIGATE, 0)
+
+	for(var/client/C in GLOB.admins)
+		var/line = list()
+		if(!can_investigate && C.is_stealthed())
+			continue
+		total_staff++
+		if(check_rights(R_ADMIN,0,C))
+			line += "\t[C], <b>["\improper[C.holder.rank]"]</b>"
+		else
+			line += "\t[C], ["\improper[C.holder.rank]"]"
+		if(!C.is_afk())
+			active_staff++
+		if(can_investigate)
+			if(C.is_afk())
+				line += " (AFK - [C.inactivity2text()])"
+			if(isghost(C.mob))
+				line += " - Наблюдает"
+			else if(istype(C.mob,/mob/new_player))
+				line += " - Лобби"
+			else
+				line += " - Играет"
+			if(C.is_stealthed())
+				line += " (Невидимость)"
+			if(C.get_preference_value(/datum/client_preference/show_ooc) == GLOB.PREF_HIDE)
+				line += " <font color='#002eb8'><b><s>(OOC)</s></b></font>"
+			if(C.get_preference_value(/datum/client_preference/show_looc) == GLOB.PREF_HIDE)
+				line += " <font color='#3a9696'><b><s>(LOOC)</s></b></font>"
+			if(C.get_preference_value(/datum/client_preference/show_aooc) == GLOB.PREF_HIDE)
+				line += " <font color='#960018'><b><s>(AOOC)</s></b></font>"
+			if(C.get_preference_value(/datum/client_preference/show_dsay) == GLOB.PREF_HIDE)
+				line += " <font color='#530fad'><b><s>(DSAY)</s></b></font>"
+		line = jointext(line,null)
+		if(check_rights(R_ADMIN,0,C))
+			msg.Insert(1, line)
+		else
+			msg += line
+
+	to_chat(src, "<b>Сотрудники [active_staff]/[total_staff]:</b>")
+	to_chat(src, jointext(msg,"\n"))

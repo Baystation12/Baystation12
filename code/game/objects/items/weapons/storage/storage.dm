@@ -341,18 +341,24 @@
 		if(0)
 			to_chat(usr, "\The [src] now picks up one item at a time.")
 
+
+/obj/item/storage/proc/DoQuickEmpty()
+	var/turf/into = get_turf(src)
+	if (!into)
+		return
+	for(var/atom/movable/movable in contents)
+		remove_from_storage(movable, into, TRUE)
+	finish_bulk_removal()
+
+
 /obj/item/storage/verb/quick_empty()
 	set name = "Empty Contents"
 	set category = "Object"
-
 	if((!ishuman(usr) && (src.loc != usr)) || usr.stat || usr.restrained())
 		return
-
-	var/turf/T = get_turf(src)
 	hide_from(usr)
-	for(var/obj/item/I in contents)
-		remove_from_storage(I, T, 1)
-	finish_bulk_removal()
+	DoQuickEmpty()
+
 
 /obj/item/storage/verb/dump_contents()
 	set name = "Dump Contents"

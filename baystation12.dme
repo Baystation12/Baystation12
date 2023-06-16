@@ -3310,7 +3310,6 @@
 #include "proxima\code\modules\clothing\suits\suits.dm"
 #include "proxima\code\modules\clothing\under\under.dm"
 #include "proxima\code\modules\clothing\under\accessories\armor_tag.dm"
-#include "proxima\code\modules\clothing\under\accessories\wristwatches.dm"
 #include "proxima\code\modules\culture_descriptor\culture\cultures_human.dm"
 #include "proxima\code\modules\culture_descriptor\faction\factions_other.dm"
 #include "proxima\code\modules\culture_descriptor\location\locations_human.dm"
