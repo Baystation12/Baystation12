@@ -62,7 +62,7 @@
 	if(has_gravity())
 		return 1
 
-	if(length(pulledby))
+	if(pulledby)
 		return 1
 
 	if(throwing)
