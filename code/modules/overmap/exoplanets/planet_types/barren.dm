@@ -10,7 +10,7 @@
 	features_budget = 6
 	surface_color = "#807d7a"
 	water_color = null
-	habitability_distribution = list(HABITABILITY_IDEAL = 0, HABITABILITY_LESSIDEAL = 0, HABITABILITY_BAD = 75, HABITABILITY_UNINHABITABLE = 25)
+	habitability_distribution = HABITABILITY_BAD
 	has_trees = FALSE
 
 /obj/effect/overmap/visitable/sector/exoplanet/barren/generate_atmosphere()

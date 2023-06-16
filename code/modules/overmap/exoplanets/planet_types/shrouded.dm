@@ -17,6 +17,13 @@
 					   /mob/living/simple_animal/hostile/retaliate/beast/shantak/alt,
 					   /mob/living/simple_animal/hostile/leech)
 
+
+/obj/effect/overmap/visitable/sector/exoplanet/shrouded/generate_atmosphere()
+	..()
+	if(atmosphere)
+		atmosphere.temperature = T20C - rand(10, 20)
+		atmosphere.update_values()
+
 /obj/effect/overmap/visitable/sector/exoplanet/shrouded/get_atmosphere_color()
 	return COLOR_BLACK
 
