@@ -39,6 +39,8 @@
 		/obj/item/device/suit_cooling_unit,
 		/obj/item/cell
 	)
+	max_w_class = ITEM_SIZE_SMALL
+	slots = 3 STORAGE_FREEFORM
 
 /obj/item/clothing/gloves/rig/light
 	name = "gloves"

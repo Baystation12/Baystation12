@@ -489,6 +489,8 @@
 		/obj/item/tank,
 		/obj/item/device/suit_cooling_unit
 	)
+	max_w_class = null
+	slots = null
 
 /obj/item/rig/zero/on_update_icon(update_mob_icon)
 	..()
