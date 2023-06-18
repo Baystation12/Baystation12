@@ -122,7 +122,7 @@ var/global/solar_gen_rate = 1500
 
 /obj/machinery/power/solar/set_broken(new_state)
 	. = ..()
-	if(. && new_state && !health_dead)
+	if(. && new_state && !health_dead())
 		kill_health()
 
 /obj/machinery/power/solar/on_death()

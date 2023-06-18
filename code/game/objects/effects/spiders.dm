@@ -154,7 +154,7 @@
 
 /obj/effect/spider/spiderling/post_use_item(obj/item/tool, mob/user, interaction_handled, use_call, click_params)
 	. = ..()
-	if (interaction_handled && !health_dead)
+	if (interaction_handled && !health_dead())
 		disturbed()
 
 

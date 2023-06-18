@@ -534,7 +534,7 @@
 		return FALSE
 	if (get_max_health())
 		fire_act(air, temperature)
-		if (!health_dead)
+		if (!health_dead())
 			return FALSE
 	visible_message(SPAN_DANGER("\The [src] sizzles and melts away, consumed by the lava!"))
 	playsound(src, 'sound/effects/flare.ogg', 100, 3)

@@ -42,6 +42,14 @@
 /atom/proc/health_damaged()
 	return get_current_health() < get_max_health()
 
+
+/**
+ * Whether or not the atom is currently dead.
+ */
+/atom/proc/health_dead()
+	return health_dead
+
+
 /**
  * Retrieves the atom's current damage, or `null` if not using health.
  */
@@ -77,7 +85,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if (!get_max_health())
 		return FALSE
-	if (health_dead)
+	if (health_dead())
 		return FALSE
 	if (!damage || damage < health_min_damage)
 		return FALSE
@@ -239,7 +247,7 @@
 /atom/proc/examine_damage_state(mob/user)
 	var/datum/pronouns/pronouns = choose_from_pronouns()
 
-	if (health_dead)
+	if (health_dead())
 		to_chat(user, SPAN_DANGER("[pronouns.He] look[pronouns.s] broken."))
 		return
 
@@ -256,7 +264,7 @@
 
 /mob/examine_damage_state(mob/user)
 	var/datum/pronouns/pronouns = choose_from_pronouns()
-	if (health_dead)
+	if (health_dead())
 		to_chat(user, SPAN_DANGER("[pronouns.He] look[pronouns.s] severely hurt and [pronouns.is] not moving or responding to anything around [pronouns.him]."))
 		return
 

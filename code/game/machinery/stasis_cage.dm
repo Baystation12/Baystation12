@@ -74,7 +74,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	if (!is_powered())
 		to_chat(user, SPAN_WARNING("\The [src] is unpowered."))
 		return
-	if (health_dead)
+	if (health_dead())
 		to_chat(usr, SPAN_NOTICE("\The [src] is completely destroyed."))
 		return
 
@@ -100,7 +100,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	if (!is_powered())
 		to_chat(usr, SPAN_WARNING("\The [src] is unpowered."))
 		return
-	if (health_dead)
+	if (health_dead())
 		to_chat(usr, SPAN_WARNING("\The [src] is completely destroyed."))
 		return
 	user.visible_message(
@@ -173,7 +173,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 
 	// Coil - Repair cage
 	if (isCoil(tool))
-		if (health_dead)
+		if (health_dead())
 			if (contained)
 				USE_FEEDBACK_FAILURE("\The [src] must be emptied before repairs can be done!")
 				return TRUE
@@ -204,7 +204,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	// Wrench - Repair lid
 	if (isWrench(tool))
 		if (broken)
-			if (health_dead)
+			if (health_dead())
 				USE_FEEDBACK_FAILURE("You need to repair the rest of \the [src] first!")
 				return TRUE
 			user.visible_message(
@@ -249,7 +249,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	return ..()
 
 /obj/machinery/stasis_cage/emp_act(severity)
-	if (health_dead)
+	if (health_dead())
 		return
 	if (inoperable())
 		return
@@ -272,7 +272,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 
 /obj/machinery/stasis_cage/on_update_icon()
 	overlays.Cut()
-	if (health_dead)
+	if (health_dead())
 		icon_state = "[initial(icon_state)]_dead"
 	else if (is_powered())
 		if (contained)

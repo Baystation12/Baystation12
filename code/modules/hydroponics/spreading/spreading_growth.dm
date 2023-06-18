@@ -57,7 +57,7 @@
 
 	//Take damage from bad environment if any
 	damage_health(seed.handle_environment(T, T.return_air(), null, 1))
-	if(health_dead)
+	if(health_dead())
 		return
 
 	//Vine fight!

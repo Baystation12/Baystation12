@@ -270,7 +270,7 @@
 /obj/machinery/door/post_health_change(health_mod, prior_health, damage_type)
 	. = ..()
 	queue_icon_update()
-	if (health_mod < 0 && !health_dead)
+	if (health_mod < 0 && !health_dead())
 		var/initial_damage_percentage = round((prior_health / get_max_health()) * 100)
 		var/damage_percentage = get_damage_percentage()
 		if (damage_percentage >= 75 && initial_damage_percentage < 75)
