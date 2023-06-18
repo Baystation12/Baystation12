@@ -43,9 +43,6 @@
 	..()
 	turfs_airless = FALSE
 
-/area/Destroy()
-	..()
-	return QDEL_HINT_HARDDEL
 
 // Changes the area of T to A. Do not do this manually.
 // Area is expected to be a non-null instance.

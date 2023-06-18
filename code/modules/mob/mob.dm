@@ -1,9 +1,10 @@
-/mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
+/mob/Destroy()
 	STOP_PROCESSING_MOB(src)
 	GLOB.dead_mobs -= src
 	GLOB.alive_mobs -= src
 	GLOB.player_list -= src
 	unset_machine()
+	QDEL_NULL(ability_master)
 	QDEL_NULL(hud_used)
 	if(istype(skillset))
 		QDEL_NULL(skillset)
@@ -20,8 +21,7 @@
 	if(mind && mind.current == src)
 		spellremove(src)
 	ghostize()
-	..()
-	return QDEL_HINT_HARDDEL
+	return ..()
 
 /mob/proc/remove_screen_obj_references()
 	hands = null

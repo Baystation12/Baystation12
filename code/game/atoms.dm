@@ -110,6 +110,7 @@
 	return
 
 /atom/Destroy()
+	LAZYCLEARLIST(managed_overlays)
 	QDEL_NULL(reagents)
 	. = ..()
 

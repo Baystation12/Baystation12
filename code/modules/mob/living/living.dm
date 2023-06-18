@@ -825,7 +825,7 @@ default behaviour is:
 		for(var/a in auras)
 			remove_aura(a)
 	GLOB.living_players -= src
-	qdel(selected_image)
+	QDEL_NULL(selected_image)
 	return ..()
 
 /mob/living/proc/melee_accuracy_mods()
