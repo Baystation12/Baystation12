@@ -281,6 +281,8 @@
 
 /**
  * Copies the state of health from one atom to another.
+ *
+ * Does not support mobs that don't use standardized health.
  */
 /proc/copy_health(atom/source_atom, atom/target_atom)
 	if (!source_atom || QDELETED(target_atom) || !source_atom.health_max || !target_atom.health_max)
