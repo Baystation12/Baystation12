@@ -104,8 +104,8 @@
 			var/list/current_mounts = list()
 			if(cell) current_mounts   += "cell"
 			if(air_supply) current_mounts += "tank"
+			if (length(chest?.storage?.contents)) current_mounts += "storage"
 			if(installed_modules && length(installed_modules)) current_mounts += "system module"
-
 			var/to_remove = input("Which would you like to modify?") as null|anything in current_mounts
 			if(!to_remove)
 				return
@@ -137,6 +137,18 @@
 					user.put_in_hands(air_supply)
 					to_chat(user, "You detach and remove \the [air_supply].")
 					air_supply = null
+
+				if ("storage")
+					if (!length(chest?.storage?.contents))
+						to_chat(user, "There is nothing in the storage to remove.")
+						return
+					chest.storage.DoQuickEmpty()
+					user.visible_message(
+						SPAN_ITALIC("\The [user] ejects the contents of \a [src]'s storage."),
+						SPAN_ITALIC("You eject the contents of \the [src]'s storage."),
+						SPAN_ITALIC("You hear things clatter to the floor."),
+						range = 5
+					)
 
 				if("system module")
 
