@@ -4,6 +4,7 @@
 	GLOB.alive_mobs -= src
 	GLOB.player_list -= src
 	unset_machine()
+	QDEL_NULL(ability_master)
 	QDEL_NULL(hud_used)
 	if(istype(skillset))
 		QDEL_NULL(skillset)

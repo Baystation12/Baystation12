@@ -2,16 +2,26 @@
 	name = "Abilities"
 	icon = 'icons/mob/screen_spells.dmi'
 	icon_state = "grey_spell_ready"
+	screen_loc = ui_spell_master // TODO: Rename
 	var/list/obj/screen/ability/ability_objects = list()
 	var/list/obj/screen/ability/spell_objects = list()
-	var/showing = 0 // If we're 'open' or not.
-
+	var/showing = FALSE // If we're 'open' or not.
 	var/open_state = "master_open"		// What the button looks like when it's 'open', showing the other buttons.
 	var/closed_state = "master_closed"	// Button when it's 'closed', hiding everything else.
+	var/mob/my_mob // The mob that possesses this hud object.
 
-	screen_loc = ui_spell_master // TODO: Rename
 
-	var/mob/my_mob = null // The mob that possesses this hud object.
+/obj/screen/movable/ability_master/Destroy()
+	remove_all_abilities()
+	LAZYCLEARLIST(ability_objects)
+	LAZYCLEARLIST(spell_objects)
+	if(my_mob)
+		my_mob.ability_master = null
+		if(my_mob.client && my_mob.client.screen)
+			my_mob.client.screen -= src
+		my_mob = null
+	return ..()
+
 
 /obj/screen/movable/ability_master/New(newloc,owner)
 	if(owner)
@@ -21,18 +31,7 @@
 		CRASH("ERROR: ability_master's New() was not given an owner argument.  This is a bug.")
 	..()
 
-/obj/screen/movable/ability_master/Destroy()
-	. = ..()
-	//Get rid of the ability objects.
-	remove_all_abilities()
-	ability_objects.Cut()
 
-	// After that, remove ourselves from the mob seeing us, so we can qdel cleanly.
-	if(my_mob)
-		my_mob.ability_master = null
-		if(my_mob.client && my_mob.client.screen)
-			my_mob.client.screen -= src
-		my_mob = null
 /obj/screen/movable/ability_master/MouseDrop()
 	if(showing)
 		return
