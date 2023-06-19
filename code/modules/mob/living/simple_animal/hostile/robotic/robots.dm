@@ -41,7 +41,7 @@
 	firing_lanes = TRUE
 
 /mob/living/simple_animal/hostile/hivebot/ranged_damage/fleet_robot/death()
-	src.visible_message(SPAN_DANGER("\The [src]'s body ruptures and explodes!"))
+	visible_message(SPAN_DANGER("\The [src]'s body ruptures and explodes!"))
 	playsound(src,'sound/weapons/smg_empty_alarm.ogg', 50, 1, -6)
 	explosion(loc, explosion_radius, explosion_max_power)
 	var/turf/origin = get_turf(src)
@@ -192,7 +192,7 @@
 
 /mob/living/simple_animal/hostile/fleet_heavy/shoot_target(atom/A)
 	set waitfor = FALSE
-	src.visible_message(SPAN_DANGER("\The [src]'s weapons begin humming loudly as they're aimed against [A]!"))
+	visible_message(SPAN_DANGER("\The [src]'s weapons begin humming loudly as they're aimed against [A]!"))
 	playsound(src,'sound/weapons/smg_empty_alarm.ogg', 50, 1, -6)
 	//This thing doesn't actually shoot at you, it shoots at where you were when proc was called. Bit of a different thing.
 	. = ..(get_turf(A))
@@ -210,7 +210,7 @@
 	set_AI_busy(FALSE)
 
 /mob/living/simple_animal/hostile/fleet_heavy/death()
-	src.visible_message(SPAN_DANGER("\The [src]'s back begins to crack and hum!"))
+	visible_message(SPAN_DANGER("\The [src]'s back begins to crack and hum!"))
 	playsound(src,'sound/effects/cascade.ogg', 50, 1, -6)
 	var/delay = rand(explosion_delay_lower, explosion_delay_upper)
 	addtimer(new Callback(src, .proc/flash, delay), 0)
@@ -231,7 +231,7 @@
 /mob/living/simple_animal/hostile/fleet_heavy/proc/detonate()
 	// The actual boom.
 	if (src && !exploded)
-		src.visible_message(SPAN_DANGER("\The [src]'s body detonates!"))
+		visible_message(SPAN_DANGER("\The [src]'s body detonates!"))
 		exploded = TRUE
 		explosion(loc, explosion_radius, explosion_max_power)
 		qdel(src)
@@ -286,7 +286,7 @@
 		playsound(user,'sound/effects/basscannon.ogg',35,1)
 		new /obj/effect/effect/smoke/illumination(user.loc, 5, 4, 1, "#ffffff")
 		return AURA_FALSE|AURA_CANCEL
-	src.visible_message(SPAN_DANGER("\The [src]'s exposed back dents and buckles!"))
+	visible_message(SPAN_DANGER("\The [src]'s exposed back dents and buckles!"))
 	playsound(user,'sound/items/Welder2.ogg',35,1)
 	return EMPTY_BITFIELD
 
