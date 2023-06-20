@@ -357,5 +357,5 @@
 	)
 	containername = "plushies crate"
 	num_contained = 5
-	supply_method = /decl/supply_method/randomized/
+	supply_method = /decl/supply_method/randomized
 	cost = 25
