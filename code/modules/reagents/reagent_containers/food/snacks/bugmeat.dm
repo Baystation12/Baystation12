@@ -3,6 +3,7 @@
 	desc = "What a horrible idea. Who funded this?"
 	icon = 'icons/obj/food_bugmeat.dmi'
 	icon_state = "box"
+	open_sound = 'sound/effects/storage/box.ogg'
 	storage_slots = 6
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL

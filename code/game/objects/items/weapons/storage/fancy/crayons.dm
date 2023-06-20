@@ -3,6 +3,7 @@
 	desc = "A box of crayons for all your rune drawing needs."
 	icon = 'icons/obj/crayons.dmi'
 	icon_state = "crayonbox"
+	open_sound = 'sound/effects/storage/box.ogg'
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
@@ -18,7 +19,8 @@
 
 
 /obj/item/storage/fancy/crayons/on_update_icon()
+	icon_state = "[initial(icon_state)][opened ? "open" : ""]"
 	overlays.Cut()
-	overlays += image('icons/obj/crayons.dmi', "crayonbox")
+	overlays += image('icons/obj/crayons.dmi', icon_state)
 	for (var/obj/item/pen/crayon/crayon in contents)
 		overlays += image('icons/obj/crayons.dmi', crayon.colourName)

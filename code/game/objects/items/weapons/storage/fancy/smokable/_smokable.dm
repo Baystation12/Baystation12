@@ -3,6 +3,7 @@
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigpacket"
 	item_state = "cigpacket"
+	open_sound = 'sound/effects/storage/smallbox.ogg'
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
@@ -43,8 +44,9 @@
 		return ..()
 	. = TRUE
 	if (!opened)
-		opened = TRUE
-		update_icon()
+		opened = !opened
+		playsound(src.loc, src.open_sound, 50, 0, -5)
+		queue_icon_update()
 	var/obj/item/clothing/mask/smokable/smokable = locate() in contents
 	if (!smokable)
 		to_chat(user, SPAN_WARNING("\The [src] has nothing smokable left inside."))

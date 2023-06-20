@@ -3,6 +3,7 @@
 	desc = "A pencil case for all those schoolboys to carry."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "pencil_case"
+	open_sound = 'sound/effects/storage/unzip.ogg'
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6 * ITEM_SIZE_TINY
