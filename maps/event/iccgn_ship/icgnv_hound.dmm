@@ -31,7 +31,7 @@
 /area/map_template/icgnv_hound)
 "dq" = (
 /obj/structure/lattice,
-/obj/machinery/light/navigation,
+/obj/machinery/nav_light,
 /turf/space,
 /area/map_template/icgnv_hound)
 "fM" = (
@@ -128,11 +128,6 @@
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/map_template/icgnv_hound)
-"kd" = (
-/obj/structure/lattice,
-/obj/machinery/light/navigation/delay3,
-/turf/space,
 /area/map_template/icgnv_hound)
 "kg" = (
 /obj/effect/floor_decal/techfloor{
@@ -1311,7 +1306,7 @@ av
 av
 av
 av
-kd
+dq
 if
 PQ
 os
@@ -1610,7 +1605,7 @@ av
 av
 av
 av
-kd
+dq
 if
 PQ
 pq

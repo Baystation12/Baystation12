@@ -132,11 +132,6 @@
 	},
 /turf/simulated/floor,
 /area/scavver/gantry/down2)
-"cv" = (
-/obj/structure/lattice,
-/obj/machinery/light/navigation/delay5,
-/turf/space,
-/area/space)
 "cB" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -248,7 +243,7 @@
 /area/space)
 "eB" = (
 /obj/structure/lattice,
-/obj/machinery/light/navigation/delay2,
+/obj/machinery/nav_light,
 /turf/space,
 /area/space)
 "eC" = (
@@ -1103,11 +1098,6 @@
 	},
 /turf/simulated/floor,
 /area/scavver/gantry/down1)
-"rW" = (
-/obj/structure/lattice,
-/obj/machinery/light/navigation,
-/turf/space,
-/area/space)
 "rZ" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
@@ -11727,7 +11717,7 @@ JP
 UM
 vM
 UM
-rW
+eB
 UM
 UM
 UM
@@ -12035,7 +12025,7 @@ ZS
 Ee
 CZ
 vM
-rW
+eB
 jy
 UM
 UM
@@ -12795,7 +12785,7 @@ ny
 ny
 xQ
 vM
-rW
+eB
 jy
 UM
 UM
@@ -13548,7 +13538,7 @@ UM
 UM
 UM
 mo
-rW
+eB
 JF
 CZ
 ny
@@ -13707,7 +13697,7 @@ rS
 ny
 CZ
 Sw
-rW
+eB
 jy
 vM
 vM
@@ -13998,7 +13988,7 @@ UM
 UM
 UM
 UM
-rW
+eB
 UM
 uR
 UM
@@ -14467,7 +14457,7 @@ AV
 ny
 CZ
 vM
-rW
+eB
 jy
 UM
 qC
@@ -15204,7 +15194,7 @@ UM
 UM
 UM
 vM
-rW
+eB
 UM
 uR
 UM
@@ -15217,7 +15207,7 @@ UM
 UM
 UM
 UM
-cv
+eB
 UM
 UM
 UM
