@@ -308,3 +308,54 @@
 	)
 	cost = 25
 	containername = "pronoun badge crate"
+
+/decl/hierarchy/supply_pack/nonessent/lcplushies
+	name = "Toy - Random Shell Plusies Crate"
+	contains = list(
+		/obj/item/toy/plush/ayin = 1,
+		/obj/item/toy/plush/carmen = 1,
+		/obj/item/toy/plush/malkuth = 1,
+		/obj/item/toy/plush/yesod = 1,
+		/obj/item/toy/plush/netzach = 1,
+		/obj/item/toy/plush/hod = 1,
+		/obj/item/toy/plush/lisa = 1,
+		/obj/item/toy/plush/enoch = 1,
+		/obj/item/toy/plush/chesed = 1,
+		/obj/item/toy/plush/gebura = 1,
+		/obj/item/toy/plush/hokma = 1,
+		/obj/item/toy/plush/binah = 1,
+		/obj/item/toy/plush/angela = 1,
+		/obj/item/toy/plush/yisang = 1,
+		/obj/item/toy/plush/faust = 1,
+		/obj/item/toy/plush/don = 1,
+		/obj/item/toy/plush/ryoshu = 1,
+		/obj/item/toy/plush/meursault = 1,
+		/obj/item/toy/plush/honglu = 1,
+		/obj/item/toy/plush/heathcliff = 1,
+		/obj/item/toy/plush/ishmael = 1,
+		/obj/item/toy/plush/rodion = 1,
+		/obj/item/toy/plush/sinclair = 1,
+		/obj/item/toy/plush/dante = 1,
+		/obj/item/toy/plush/outis = 1,
+		/obj/item/toy/plush/gregor = 1,
+		/obj/item/toy/plush/pierre = 1,
+		/obj/item/toy/plush/myo = 1,
+		/obj/item/toy/plush/rabbit = 1,
+		/obj/item/toy/plush/yuri = 1,
+		/obj/item/toy/plush/blank = 1,
+		/obj/item/toy/plush/qoh = 1,
+		/obj/item/toy/plush/kog = 1,
+		/obj/item/toy/plush/kod = 1,
+		/obj/item/toy/plush/sow = 1,
+		/obj/item/toy/plush/nihil = 1,
+		/obj/item/toy/plush/bigbird = 1,
+		/obj/item/toy/plush/mosb = 1,
+		/obj/item/toy/plush/big_bad_wolf = 1,
+		/obj/item/toy/plush/melt = 1,
+		/obj/item/toy/plush/scorched = 1,
+		/obj/item/toy/plush/bongbong = 1,
+	)
+	containername = "plushies crate"
+	num_contained = 5
+	supply_method = /decl/supply_method/randomized/
+	cost = 25

@@ -40,14 +40,8 @@
 	icon_state = "ayin"
 	gender = MALE
 
-/obj/item/toy/plush/benjamin
-	name = "benjamin plushie"
-	desc = "A plushie depicting a researcher that resembles Hokma a bit too much."
-	icon_state = "benjamin"
-	gender = MALE
-
 /obj/item/toy/plush/carmen
-	name = "carmen plushie"
+	name = "Carmen plushie"
 	desc = "A plushie depicting an ambitious and altruistic researcher."
 	icon_state = "carmen"
 	gender = FEMALE
@@ -60,134 +54,134 @@
 	gender = FEMALE
 
 /obj/item/toy/plush/yesod
-	name = "yesod plushie"
-	desc = "A plushie depicting a researcher in a turtleneck."
+	name = "Gabriel plushie"
+	desc = "A plushie depicting a Shell Research Unit in a turtleneck."
 	icon_state = "yesod"
 	gender = MALE
 
 /obj/item/toy/plush/netzach
-	name = "netzach plushie"
-	desc = "A plushie depicting a person that likes alcohol a bit too much."
+	name = "Giovani plushie"
+	desc = "A plushie depicting a Shell Unit that likes alcohol a bit too much."
 	icon_state = "netzach"
 	gender = MALE
 
 /obj/item/toy/plush/hod
-	name = "hod plushie"
-	desc = "A plushie depicting a person who hopes to make everything right."
+	name = "Michel plushie"
+	desc = "A plushie depicting a Shell Unit who hopes to make everything right."
 	icon_state = "hod"
 	gender = FEMALE
 
 /obj/item/toy/plush/lisa
-	name = "tiphereth-A plushie"
-	desc = "A plushie depicting a person with high expectations."
+	name = "Lisa plushie"
+	desc = "A plushie depicting a Shell Unit with high expectations."
 	icon_state = "lisa"
 	gender = FEMALE
 
 /obj/item/toy/plush/enoch
-	name = "tiphereth-B plushie"
-	desc = "A plushie depicting an optimistic person with kind heart."
+	name = "Enoch plushie"
+	desc = "A plushie depicting an optimistic Shell Unit with kind heart."
 	icon_state = "enoch"
 	gender = MALE
 
 /obj/item/toy/plush/chesed
-	name = "chesed plushie"
-	desc = "A plushie depicting a sleepy person with a mug of coffee in their hand."
+	name = "Daniel plushie"
+	desc = "A plushie depicting a sleepy Shell Unit with a mug of coffee in their hand."
 	icon_state = "chesed"
 	gender = MALE
 
 /obj/item/toy/plush/gebura
-	name = "gebura plushie"
-	desc = "A plushie depicting very strong and brave person."
+	name = "Kali plushie"
+	desc = "A plushie depicting very strong and brave Shell Unit."
 	icon_state = "gebura"
 	gender = FEMALE
 
 /obj/item/toy/plush/hokma
-	name = "hokma plushie"
-	desc = "A plushie depicting a wise person with a fancy monocle. He knows much more than you."
+	name = "Benjamin plushie"
+	desc = "A plushie depicting a wise Shell Unit with a fancy monocle. He knows much more than you."
 	icon_state = "hokma"
 	gender = MALE
 
 /obj/item/toy/plush/binah
-	name = "binah plushie"
-	desc = "A plushie depicting a sadistic person who lacks any emotions."
+	name = "Garion plushie"
+	desc = "A plushie depicting a sadistic Shell Unit who lacks any emotions."
 	icon_state = "binah"
 	gender = FEMALE
 
 /obj/item/toy/plush/angela
-	name = "angela plushie"
-	desc = "A plushie depicting Lobotomy Corporation's AI."
+	name = "Angela plushie"
+	desc = "A plushie depicting The Supreme AI."
 	icon_state = "angela"
 	gender = FEMALE
 
 	//Limbus Sinners
 /obj/item/toy/plush/yisang
-	name = "yi sang plushie"
+	name = "Yi sang plushie"
 	desc = "A plushie depicting a ruminating sinner."
 	icon_state = "yisang"
 	gender = MALE
 
 /obj/item/toy/plush/faust
-	name = "faust plushie"
+	name = "Faust plushie"
 	desc = "A plushie depicting an insufferable sinner."
 	icon_state = "faust"
 	gender = FEMALE
 
 /obj/item/toy/plush/don
-	name = "don quixote plushie"
+	name = "Don Quixote plushie"
 	desc = "A plushie depicting a heroic sinner."
 	icon_state = "don"
 	gender = FEMALE
 
 /obj/item/toy/plush/ryoshu
-	name = "ryoshu plushie"
+	name = "Ryoshu plushie"
 	desc = "A plushie depicting a artistic sinner."
 	icon_state = "ryoshu"
 	gender = FEMALE
 
 /obj/item/toy/plush/meursault
-	name = "meursault plushie"
+	name = "Meursault plushie"
 	desc = "A plushie depicting a neutral sinner."
 	icon_state = "meursault"
 	gender = MALE
 
 /obj/item/toy/plush/honglu
-	name = "hong lu plushie"
+	name = "Hong Lu plushie"
 	desc = "A plushie depicting a sheltered sinner."
 	icon_state = "honglu"
 	gender = MALE
 
 /obj/item/toy/plush/heathcliff
-	name = "heathcliff plushie"
+	name = "Heathcliff plushie"
 	desc = "A plushie depicting a brash sinner."
 	icon_state = "heathcliff"
 	gender = MALE
 
 /obj/item/toy/plush/ishmael
-	name = "ishmael plushie"
+	name = "Ishmael plushie"
 	desc = "A plushie depicting a reliable sinner."
 	icon_state = "ishmael"
 	gender = FEMALE
 
 /obj/item/toy/plush/rodion
-	name = "rodion plushie"
+	name = "Rodion plushie"
 	desc = "A plushie depicting a backstreets born sinner."
 	icon_state = "rodion"
 	gender = FEMALE
 
 /obj/item/toy/plush/sinclair
-	name = "sinclair plushie"
+	name = "Sinclair plushie"
 	desc = "A plushie depicting a insecure sinner."
 	icon_state = "sinclair"
 	gender = MALE
 
 /obj/item/toy/plush/dante
-	name = "dante plushie"
+	name = "Dante plushie"
 	desc = "A plushie depicting a clock headed manager."
 	icon_state = "dante"
 	gender = MALE
 
 /obj/item/toy/plush/outis
-	name = "outis plushie"
+	name = "Outis plushie"
 	desc = "A plushie depicting a strategic sinner."
 	icon_state = "outis"
 	gender = FEMALE
@@ -200,36 +194,36 @@
 
 // Misc LC stuff
 /obj/item/toy/plush/pierre
-	name = "pierre plushie"
+	name = "Pierre plushie"
 	desc = "A plushie depicting a friendly cook."
 	icon_state = "pierre"
 	gender = FEMALE
 
 /obj/item/toy/plush/myo
-	name = "myo plushie"
+	name = "Myo plushie"
 	desc = "A plushie depicting a mercenary captain."
 	icon_state = "myo"
 	gender = FEMALE
 
 /obj/item/toy/plush/rabbit
 	name = "rabbit plushie"
-	desc = "A plushie depicting a mercenary."
+	desc = "A plushie depicting a Tau Cetian mercenary."
 	icon_state = "rabbit"
 
 /obj/item/toy/plush/yuri
 	name = "yuri plushie"
-	desc = "A plushie depicting an L corp employee who had the potential to walk alongside the sinners."
+	desc = "A plushie depicting an The Cuchulain Foundation employee."
 	icon_state = "yuri"
 	gender = FEMALE
 
-/obj/item/toy/plush/attackby(obj/item/I, mob/living/user, params)
-	. = ..()
-	if(istype(I, /obj/item/food/grown/apple/gold))
-		if(do_after(user, 2 SECONDS, target = user))
-			user.visible_message("<span class='notice'>[src] is violently absorbed by the [I]!</span>")
-			qdel(src)
-			return
-		to_chat(user, "<span class='notice'>You feel as if you prevented something weird and terrible from happening again.</span>")
+// /obj/item/toy/plush/attackby(obj/item/I, mob/living/user, params)
+// 	. = ..()
+// 	if(istype(I, /obj/item/reagent_containers/food/snacks/grown/goldapple))
+// 		if(do_after(user, 2 SECONDS, target = user))
+// 			user.visible_message("<span class='notice'>[src] is violently absorbed by the [I]!</span>")
+// 			qdel(src)
+// 			return
+// 		to_chat(user, "<span class='notice'>You feel as if you prevented something weird and terrible from happening again.</span>")
 
 /obj/item/toy/plush/blank
 	name = "plushie blank"
@@ -296,17 +290,61 @@
 // Others
 /obj/item/toy/plush/bongbong
 	name = "bongbong plushie"
-	desc = "A plushie depicting the Lobotomy Corporation"
+	desc = "A plushie depicting the The Cuchulain Foundation"
 	icon_state = "bongbong"
 
-/obj/item/toy/plush/fumo
-	name = "cirno fumo"
-	desc = "A plushie depicting an adorable ice fairy. It's cold to the touch."
-	icon_state = "fumo_cirno"
+//Spawners
+/obj/random_multi/single_item/malkuth
+	name = "Multi Point - Malkuth"
+	id = "Malkuth"
+	item_path = /obj/item/toy/plush/malkuth
 
-// Special
-/obj/item/toy/plush/bongy
-	name = "bongy plushie"
-	desc = "It looks like a raw chicken. A cute raw chicken!"
-	icon = 'icons/obj/plushes.dmi'
-	icon_state = "bongy"
+/obj/random_multi/single_item/netzach
+	name = "Multi Point - Netzach"
+	id = "Netzach"
+	item_path = /obj/item/toy/plush/netzach
+
+/obj/random_multi/single_item/yesod
+	name = "Multi Point - Yesod"
+	id = "Yesod"
+	item_path = /obj/item/toy/plush/yesod
+
+/obj/random_multi/single_item/hod
+	name = "Multi Point - Hod"
+	id = "Hod"
+	item_path = /obj/item/toy/plush/hod
+
+/obj/random_multi/single_item/enoch
+	name = "Multi Point - Enoch"
+	id = "Enoch"
+	item_path = /obj/item/toy/plush/enoch
+
+/obj/random_multi/single_item/lisa
+	name = "Multi Point - Lisa"
+	id = "Lisa"
+	item_path = /obj/item/toy/plush/lisa
+
+/obj/random_multi/single_item/chesed
+	name = "Multi Point - Chesed"
+	id = "Chesed"
+	item_path = /obj/item/toy/plush/chesed
+
+/obj/random_multi/single_item/gebura
+	name = "Multi Point - Gebura"
+	id = "Gebura"
+	item_path = /obj/item/toy/plush/gebura
+
+/obj/random_multi/single_item/hokma
+	name = "Multi Point - Hokma"
+	id = "Hokma"
+	item_path = /obj/item/toy/plush/hokma
+
+/obj/random_multi/single_item/binah
+	name = "Multi Point - Binah"
+	id = "Binah"
+	item_path = /obj/item/toy/plush/binah
+
+/obj/random_multi/single_item/angela
+	name = "Multi Point - Angela"
+	id = "Angela"
+	item_path = /obj/item/toy/plush/angela
