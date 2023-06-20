@@ -6226,7 +6226,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
-/turf/simulated/open,
+/turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/foreport)
 "vi" = (
 /obj/effect/floor_decal/industrial/warning,
@@ -7688,9 +7688,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
-"zS" = (
-/turf/simulated/open,
-/area/maintenance/fourthdeck/foreport)
 "zZ" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 6
@@ -11877,7 +11874,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
-/turf/simulated/open,
+/turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/foreport)
 "Oh" = (
 /obj/structure/table/standard,
@@ -12089,13 +12086,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/diplomatic_office)
-"OS" = (
-/obj/structure/railing/mapped{
-	dir = 1;
-	icon_state = "railing0-1"
-	},
-/turf/simulated/open,
-/area/maintenance/fourthdeck/foreport)
 "OT" = (
 /obj/machinery/status_display,
 /turf/simulated/wall/r_wall/prepainted,
@@ -31425,9 +31415,9 @@ OX
 sf
 TJ
 PE
-OS
-zS
-zS
+Or
+DQ
+DQ
 DT
 DT
 JB
