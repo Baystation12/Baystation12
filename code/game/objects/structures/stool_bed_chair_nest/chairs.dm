@@ -187,6 +187,22 @@
 /obj/structure/bed/chair/comfy/captain/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	..(newloc,MATERIAL_STEEL,"blue")
 
+/obj/structure/bed/chair/comfy/captain/co
+	name = "CO chair"
+	desc = "It's a chair. Annotated with \"CO\" on the rear."
+
+/obj/structure/bed/chair/comfy/captain/xo
+	name = "XO chair"
+	desc = "It's a chair. Annotated with \"XO\" on the rear."
+
+/obj/structure/bed/chair/comfy/captain/conn
+	name = "CONN chair"
+	desc = "It's a chair. Annotated with \"CONN\" on the rear."
+
+/obj/structure/bed/chair/comfy/captain/ood
+	name = "OOD chair"
+	desc = "It's a chair. Annotated with \"OOD\" on the rear."
+
 /obj/structure/bed/chair/armchair
 	name = "armchair"
 	desc = "It's an armchair. It looks comfy."

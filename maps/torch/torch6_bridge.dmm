@@ -1662,16 +1662,17 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/meeting_room)
 "cV" = (
-/obj/machinery/computer/modular/preset/aislot/sysadmin{
-	dir = 1;
-	icon_state = "console"
-	},
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/machinery/power/apc/super/critical{
 	name = "south bump";
 	pixel_y = -24
 	},
 /obj/structure/cable/green,
+/obj/structure/table/glass,
+/obj/random_multi/single_item/memo_exploration,
+/obj/random_multi/single_item/memo_research,
+/obj/random_multi/single_item/memo_engineering,
+/obj/random_multi/single_item/memo_security,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "cW" = (
@@ -2195,7 +2196,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "dU" = (
-/obj/structure/table/glass,
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/machinery/button/blast_door{
 	id_tag = "bridge blast";
@@ -2205,7 +2205,9 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
-/obj/item/storage/box/donut,
+/obj/machinery/computer/ship/navigation{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "dV" = (
@@ -2439,8 +2441,8 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "ew" = (
-/obj/structure/table/glass,
 /obj/effect/floor_decal/corner/blue/mono,
+/obj/structure/table/glass,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "ex" = (
@@ -4906,25 +4908,6 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
-"lt" = (
-/obj/structure/table/glass,
-/obj/effect/floor_decal/corner/blue{
-	dir = 9
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/item/reagent_containers/food/drinks/glass2/coffeecup/SCG{
-	pixel_x = -5;
-	pixel_y = 5
-	},
-/obj/random_multi/single_item/memo_command,
-/obj/random_multi/single_item/memo_supply,
-/obj/random_multi/single_item/memo_medical,
-/turf/simulated/floor/tiled/dark,
-/area/bridge)
 "lu" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1
@@ -5546,12 +5529,19 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/aft)
 "nf" = (
+/obj/structure/table/glass,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/SCG{
+	pixel_x = -5;
+	pixel_y = 5
+	},
+/obj/random_multi/single_item/memo_command,
+/obj/random_multi/single_item/memo_supply,
+/obj/random_multi/single_item/memo_medical,
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
-/obj/machinery/computer/ship/sensors,
-/turf/simulated/floor/tiled/dark/monotile,
+/turf/simulated/floor/tiled/dark,
 /area/bridge)
 "ni" = (
 /obj/structure/handrail{
@@ -6536,7 +6526,7 @@
 	icon_state = "2-4"
 	},
 /obj/structure/bed/chair/comfy/blue{
-	dir = 8
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -6574,9 +6564,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/structure/bed/chair/comfy/blue{
-	dir = 8
-	},
+/obj/structure/bed/chair/comfy/blue,
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "qi" = (
@@ -8354,6 +8342,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/bed/chair/comfy/captain/conn{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "vj" = (
@@ -9797,9 +9788,6 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/structure/bed/chair/comfy/blue{
-	dir = 8
-	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "zh" = (
@@ -9927,6 +9915,9 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/structure/bed/chair/comfy/captain/ood{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -10063,11 +10054,12 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/machinery/computer/ship/navigation{
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 8
+	},
+/obj/machinery/computer/modular/preset/cardslot/command{
+	dir = 4;
+	icon_state = "console"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -10366,7 +10358,6 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/fore)
 "BE" = (
-/obj/structure/table/glass,
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/machinery/button/blast_door{
 	id_tag = "bridge blast";
@@ -10377,6 +10368,9 @@
 	dir = 8
 	},
 /obj/machinery/rotating_alarm/security_alarm{
+	dir = 4
+	},
+/obj/machinery/computer/ship/sensors{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -10560,9 +10554,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/aquila/crew)
 "Ch" = (
-/obj/structure/bed/chair/comfy/captain{
-	dir = 8
-	},
 /obj/effect/floor_decal/scglogo{
 	icon_state = "center-left"
 	},
@@ -10580,6 +10571,9 @@
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
+	},
+/obj/structure/bed/chair/comfy/blue{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -10688,17 +10682,6 @@
 /obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/aquila/airlock)
-"CE" = (
-/obj/structure/table/glass,
-/obj/effect/floor_decal/corner/blue/mono,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/item/device/radio,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/bridge)
 "CH" = (
 /obj/structure/sign/directions/bridge{
 	dir = 8;
@@ -11200,12 +11183,11 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/machinery/computer/modular/preset/cardslot/command{
-	dir = 4;
-	icon_state = "console"
-	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 1
+	},
+/obj/machinery/computer/ship/engines{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -11217,10 +11199,9 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/storage)
 "FE" = (
-/obj/machinery/computer/modular/preset/engineering{
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/blue/mono,
+/obj/structure/table/glass,
+/obj/item/storage/box/donut,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "FG" = (
@@ -11323,9 +11304,9 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/machinery/computer/modular/preset/cardslot/command{
+/obj/machinery/computer/ship/helm{
 	dir = 4;
-	icon_state = "console"
+	req_access = list(list("ACCESS_TORCH_HELM"))
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -11489,14 +11470,6 @@
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
-"GV" = (
-/obj/machinery/computer/modular/preset/cardslot/command{
-	dir = 4;
-	icon_state = "console"
-	},
-/obj/effect/floor_decal/corner/blue/mono,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/bridge)
 "GW" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden,
 /obj/machinery/meter,
@@ -11949,7 +11922,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/chair/comfy/captain/co{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -13798,7 +13771,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/meeting_room)
 "Qw" = (
-/obj/structure/table/glass,
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
 	},
@@ -13807,10 +13779,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/random_multi/single_item/memo_security,
-/obj/random_multi/single_item/memo_engineering,
-/obj/random_multi/single_item/memo_research,
-/obj/random_multi/single_item/memo_exploration,
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Qz" = (
@@ -13900,10 +13868,11 @@
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/sgr)
 "QW" = (
-/obj/machinery/computer/ship/engines{
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/blue/mono,
+/obj/machinery/computer/modular/preset/cardslot/command{
+	dir = 4;
+	icon_state = "console"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "QX" = (
@@ -13939,8 +13908,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "Ra" = (
+/obj/structure/table/glass,
 /obj/effect/floor_decal/corner/blue/mono,
-/obj/machinery/computer/modular/preset/security,
+/obj/item/device/radio,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "Rb" = (
@@ -14074,19 +14044,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
-"Rq" = (
-/obj/machinery/computer/ship/helm{
-	dir = 4;
-	req_access = list(list("ACCESS_TORCH_HELM"))
-	},
-/obj/effect/floor_decal/corner/blue/mono,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/bridge)
 "Rs" = (
 /obj/machinery/light{
 	dir = 4;
@@ -14650,7 +14607,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/structure/bed/chair/comfy/blue{
+/obj/structure/bed/chair/comfy/captain/xo{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -15233,12 +15190,15 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/xo)
 "WW" = (
-/obj/structure/table/glass,
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/computer/modular/preset/cardslot/command{
+	dir = 4;
+	icon_state = "console"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
@@ -23463,11 +23423,11 @@ TB
 sm
 HE
 Ra
-CE
+WW
 BE
 QW
-Rq
-GV
+WW
+QW
 dU
 WW
 FE
@@ -23666,7 +23626,7 @@ DE
 Ie
 nf
 If
-lt
+Qw
 vg
 zg
 zN
