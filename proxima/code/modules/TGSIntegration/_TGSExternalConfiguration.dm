@@ -21,7 +21,7 @@
 #define TGS_WRITE_GLOBAL(Name, Value) global._tgs_##Name = ##Value
 
 /// Disallow ANYONE from reflecting a given `path`, security measure to prevent in-game use of DD -> TGS capabilities.
-#define TGS_PROTECT_DATUM(Path)
+#define TGS_PROTECT_DATUM(Path) // Nope. But close GLOBAL_PROTECT(Path)
 
 /// Display an announcement `message` from the server to all players.
 #define TGS_WORLD_ANNOUNCE(message) to_world(html_encode(message))

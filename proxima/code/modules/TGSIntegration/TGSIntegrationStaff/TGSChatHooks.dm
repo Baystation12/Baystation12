@@ -152,3 +152,27 @@
 		return TRUE
 	send2chat(new /datum/tgs_message_content("**[admin_rank == null ? null : admin_rank][ckey]:** *[replacetext_char(replacetext_char(message, "&#39;", "'"), " &#34;", "\"")]*"), "ooc-chat")
 	return TRUE
+
+
+
+// Max online notifier
+var/max_client = 0
+var/timer = null
+
+/client/New()
+	. = ..()
+	max_client = max(max_client, GLOB.clients.len)
+
+/hook/roundstart/proc/round_status_notifier()
+	send2chat(new /datum/tgs_message_content("**Раунд начался!**\nКоличество экипажа: [GLOB.clients.len].[max_client != GLOB.clients.len ? " А ведь их было [max_client]!":""]"), "launch-alert")
+	timer = addtimer(CALLBACK(GLOBAL_PROC, .proc/gen_report), 25 MINUTES, TIMER_UNIQUE | TIMER_STOPPABLE | TIMER_LOOP)
+	return TRUE
+
+/proc/gen_report()
+	max_client = max(max_client, GLOB.clients.len)
+	send2chat(new /datum/tgs_message_content("**Отчет по раунду.**\n__Продолжительность:__ *[roundduration2text()]*\n__Онлайн:__ *[GLOB.clients.len]*\n__Пиковый онлайн:__ *[max_client]*"), "launch-alert")
+
+/hook/roundend/proc/round_status_notifier()
+	deltimer(timer)
+	timer = null
+	return TRUE
