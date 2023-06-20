@@ -55,3 +55,21 @@
 			new cash_type(src)
 		else
 			break
+
+/obj/structure/closet/secure_closet/freezer/kitchen/empty
+	name = "kitchen cabinet"
+	req_access = newlist()
+
+/obj/structure/closet/secure_closet/freezer/kitchen/empty/WillContain()
+	return newlist()
+
+/obj/structure/closet/secure_closet/freezer/fridge/empty
+	name = "kitchen cabinet"
+	req_access = newlist()
+
+/obj/structure/closet/secure_closet/freezer/fridge/empty/WillContain()
+	return newlist()
+
+/obj/structure/closet/secure_closet/freezer/fridge/empty/opened
+	name = "fridge"
+	opened = 1

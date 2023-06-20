@@ -48,6 +48,19 @@
 	environ = 0
 	locked = 0
 	coverlocked = 0
+	req_access = newlist()
+
+/obj/machinery/power/apc/inactive/open_empty
+	lighting = 0
+	equipment = 0
+	environ = 0
+	locked = 0
+	coverlocked = 0
+	opened = 1
+	icon_state = "apcmaint"
+
+/obj/machinery/power/apc/inactive/open_empty
+	cell_type = newlist()
 
 /obj/machinery/power/apc/critical
 	is_critical = 1
