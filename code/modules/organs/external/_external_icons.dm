@@ -77,6 +77,10 @@ var/global/list/limb_icon_cache = list()
 
 /obj/item/organ/external/var/icon_cache_key
 /obj/item/organ/external/on_update_icon(regenerate = 0)
+	var/husk_color_mod = rgb(96,88,80)
+	var/hulk_color_mod = rgb(48,224,40)
+
+
 	var/gender = "_m"
 	if(!(limb_flags & ORGAN_FLAG_GENDERED_ICON))
 		gender = null
@@ -93,7 +97,7 @@ var/global/list/limb_icon_cache = list()
 	if(species.base_skin_colours && !isnull(species.base_skin_colours[base_skin]))
 		chosen_icon_state += species.base_skin_colours[base_skin]
 
-	icon_cache_key = "[icon_state]_[species ? species.name : SPECIES_HUMAN]"
+	icon_cache_key = "[chosen_icon_state]_[species ? species.name : SPECIES_HUMAN]"
 
 	if(force_icon)
 		chosen_icon = force_icon
@@ -109,6 +113,24 @@ var/global/list/limb_icon_cache = list()
 		chosen_icon = species.get_icobase(owner)
 
 	var/icon/mob_icon = apply_colouration(new/icon(chosen_icon, chosen_icon_state))
+
+	if (owner && (MUTATION_HUSK in owner.mutations))
+		mob_icon.ColorTone(husk_color_mod)
+	if (owner && (MUTATION_HULK in owner.mutations))
+		var/list/tone = ReadRGB(hulk_color_mod)
+		mob_icon.MapColors(rgb(tone[1],0,0),rgb(0,tone[2],0),rgb(0,0,tone[3]))
+
+	//Handle husk overlay.
+	if(husk)
+		var/husk_icon = species.get_husk_icon(src)
+		if(husk_icon)
+			var/icon/mask = new/icon(chosen_icon)
+			var/blood = species.get_blood_colour(src)
+			var/icon/husk_over = new(species.husk_icon,"")
+			mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
+			husk_over.Blend(mask, ICON_ADD)
+			husk_over.Blend(blood, ICON_MULTIPLY)
+			base_icon.Blend(husk_over, ICON_OVERLAY)
 
 	var/list/sorted = list()
 	for(var/E in markings)
@@ -138,7 +160,8 @@ var/global/list/limb_icon_cache = list()
 
 	//Fix leg layering here
 	//Alternatively you could use masks but it's about same amount of work
-	if(icon_position & (LEFT | RIGHT))
+	//if(icon_position & (LEFT | RIGHT))
+	if(false)
 		var/icon/under_icon = new('icons/mob/human.dmi',"blank")
 		under_icon.Insert(new/icon(mob_icon,dir=NORTH),dir=NORTH)
 		under_icon.Insert(new/icon(mob_icon,dir=SOUTH),dir=SOUTH)

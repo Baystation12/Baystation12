@@ -9,6 +9,7 @@ var/global/list/tail_icon_cache = list() //key is [species.race_key][skin_color]
 
 GLOBAL_LIST_EMPTY(overlay_icon_cache)
 GLOBAL_LIST_EMPTY(species_icon_template_cache)
+GLOBAL_LIST_EMPTY(limb_overlays_cache)
 
 /proc/overlay_image(icon, icon_state, color, flags, plane, layer)
 	RETURN_TYPE(/image)
@@ -119,33 +120,34 @@ Please contact me on #coderbus IRC. ~Carn x
 */
 
 //Human Overlays Indexes/////////
-#define HO_MUTATIONS_LAYER  1
-#define HO_SKIN_LAYER       2
-#define HO_SURGERY_LAYER    3 //bs12 specific.
-#define HO_UNDERWEAR_LAYER  4
-#define HO_UNIFORM_LAYER    5
-#define HO_DAMAGE_LAYER     6
-#define HO_ID_LAYER         7
-#define HO_SHOES_LAYER      8
-#define HO_GLOVES_LAYER     9
-#define HO_BELT_LAYER       10
-#define HO_SUIT_LAYER       11
-#define HO_TAIL_LAYER       12 //bs12 specific. this hack is probably gonna come back to haunt me
-#define HO_GLASSES_LAYER    13
-#define HO_BELT_LAYER_ALT   14
-#define HO_SUIT_STORE_LAYER 15
-#define HO_BACK_LAYER       16
-#define HO_HAIR_LAYER       17 //TODO: make part of head layer?
-#define HO_GOGGLES_LAYER    18
-#define HO_EARS_LAYER       19
-#define HO_FACEMASK_LAYER   20
-#define HO_HEAD_LAYER       21
-#define HO_COLLAR_LAYER     22
-#define HO_HANDCUFF_LAYER   23
-#define HO_L_HAND_LAYER     24
-#define HO_R_HAND_LAYER     25
-#define HO_FIRE_LAYER       26 //If you're on fire
-#define TOTAL_LAYERS        26
+#define HO_BODY_LAYER       1
+#define HO_MUTATIONS_LAYER  2
+#define HO_SKIN_LAYER       3
+#define HO_SURGERY_LAYER    4 //bs12 specific.
+#define HO_UNDERWEAR_LAYER  5
+#define HO_UNIFORM_LAYER    6
+#define HO_DAMAGE_LAYER     7
+#define HO_ID_LAYER         8
+#define HO_SHOES_LAYER      9
+#define HO_GLOVES_LAYER     10
+#define HO_BELT_LAYER       11
+#define HO_SUIT_LAYER       12
+#define HO_TAIL_LAYER       13 //bs12 specific. this hack is probably gonna come back to haunt me
+#define HO_GLASSES_LAYER    14
+#define HO_BELT_LAYER_ALT   15
+#define HO_SUIT_STORE_LAYER 16
+#define HO_BACK_LAYER       17
+#define HO_HAIR_LAYER       18 //TODO: make part of head layer?
+#define HO_GOGGLES_LAYER    19
+#define HO_EARS_LAYER       20
+#define HO_FACEMASK_LAYER   21
+#define HO_HEAD_LAYER       22
+#define HO_COLLAR_LAYER     23
+#define HO_HANDCUFF_LAYER   24
+#define HO_L_HAND_LAYER     25
+#define HO_R_HAND_LAYER     26
+#define HO_FIRE_LAYER       27 //If you're on fire
+#define TOTAL_LAYERS        28
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -322,23 +324,64 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)
 		queue_icon_update()
 
-//BASE MOB SPRITE
+/mob/living/carbon/human
+	var/list/icon_render_keys = list()
+
 /mob/living/carbon/human/proc/update_body(update_icons=1)
-	var/husk_color_mod = rgb(96,88,80)
-	var/hulk_color_mod = rgb(48,224,40)
+
 
 	var/husk = (MUTATION_HUSK in src.mutations)
 	var/fat = (MUTATION_FAT in src.mutations)
 	var/hulk = (MUTATION_HULK in src.mutations)
 	var/skeleton = (MUTATION_SKELETON in src.mutations)
 
+	//Update all limbs and visible organs one by one
+	var/list/needs_update = list()
+	var/limb_count_update = FALSE
+	var/list/missing_bodyparts = list()
+
+	for(var/organ_tag in species.has_limbs)
+		var/obj/item/organ/external/limb = organs_by_name[organ_tag]
+		if(!isnull(limb))
+			limb.update_icon() //Regenerate limb keys - TODO, it probably makes more sense to break out some of that code into its own function
+			var/old_key = icon_render_keys?[organ_tag] //Checks the mob's icon render key list for the bodypart
+			icon_render_keys[organ_tag] = !husk ? json_encode(limb.generate_icon_key()) : json_encode(limb.generate_husk_key()) //Generates a key for the current bodypart
+
+			if(icon_render_keys[organ_tag] != old_key) //If the keys match, that means the limb doesn't need to be redrawn
+				needs_update += limb
+		else
+			//Limb is missing?
+			missing_bodyparts += organ_tag
+
+	for(var/missing_limb in missing_bodyparts)
+		icon_render_keys -= missing_limb //Removes dismembered limbs from the key list
+
+	if(!needs_update.len && !limb_count_update)
+		return
+
+	//GENERATE NEW LIMBS
+	var/list/new_limbs = list()
+	for(var/obj/item/organ/external/limb in organs)
+		if(limb in needs_update)
+			var/list/limb_overlays = limb.get_overlays()
+			GLOB.limb_overlays_cache[icon_render_keys[limb.organ_tag]] = limb_overlays
+			new_limbs += limb_overlays
+		else
+			new_limbs += GLOB.limb_overlays_cache[icon_render_keys[limb.organ_tag]]
+
+	if(new_limbs.len)
+		overlays_standing[HO_BODY_LAYER] = new_limbs
+
+	return
+
+
 	//CACHING: Generate an index key from visible bodyparts.
 	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
 
 	//Create a new, blank icon for our mob to use.
-	if(stand_icon)
-		qdel(stand_icon)
-	stand_icon = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi',"blank")
+	// if(stand_icon)
+	// 	qdel(stand_icon)
+	// stand_icon = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi',"blank")
 
 	var/g = "male"
 	if(gender == FEMALE)
