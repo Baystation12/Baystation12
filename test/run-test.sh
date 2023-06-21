@@ -225,7 +225,7 @@ function run_byond_tests {
     if [[ "$CI" == "true" ]]; then
         msg "installing BYOND"
         ./install-byond.sh || exit 1
-        source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
+        source ~/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
     fi
     run_test "build map unit tests" "scripts/dm.sh -DUNIT_TEST -M$MAP_PATH baystation12.dme"
     run_test "check no warnings in build" "grep ', 0 warnings' build_log.txt"

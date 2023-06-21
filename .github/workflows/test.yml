@@ -32,8 +32,8 @@ jobs:
       - name: Setup Cache
         uses: actions/cache@v3
         with:
-          path: $HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION
-          key: "${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}"
+          path: ~/spaceman_dmm/${{ env.SPACEMAN_DMM_VERSION }}
+          key: ${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}
       - name: Install Dreamchecker
         run:  scripts/install-spaceman-dmm.sh dreamchecker
       - name: Run Dreamchecker
@@ -49,7 +49,7 @@ jobs:
       - name: Setup Cache
         uses: actions/cache@v3
         with:
-          path: $HOME/BYOND-$BYOND_MAJOR.$BYOND_MINOR
+          path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
       - name: Install Dependencies
         run: sudo apt-get install -y uchardet
@@ -75,7 +75,7 @@ jobs:
       - name: Setup Cache
         uses: actions/cache@v3
         with:
-          path: $HOME/BYOND-$BYOND_MAJOR.$BYOND_MINOR
+          path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
       - name: Install rust_g
         run: |
