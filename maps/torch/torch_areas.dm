@@ -736,6 +736,14 @@
 	name = "Bluespace Drive Containment"
 	icon_state = "engineering"
 	color = COLOR_BLUE_LIGHT
+	sound_env = LARGE_ENCLOSED
+	req_access = list(list(access_engine_equip, access_heads), access_engine, access_maint_tunnels)
+
+/area/engineering/bluespacebay
+	name = "Bluespace Drive Containment Control Room"
+	icon_state = "engineering"
+	color = COLOR_LUMINOL
+	sound_env = SMALL_ENCLOSED
 	req_access = list(list(access_engine_equip, access_heads), access_engine, access_maint_tunnels)
 
 /area/engineering/atmos/aux
@@ -1536,12 +1544,6 @@
 	icon_state = "engine"
 	sound_env = LARGE_ENCLOSED
 	req_access = list(access_engine, access_engine_equip)
-
-/area/engineering/drone_fabrication
-	name = "\improper Engineering Drone Fabrication"
-	icon_state = "drone_fab"
-	sound_env = SMALL_ENCLOSED
-	req_access = list(access_robotics)
 
 /area/engineering/engine_monitoring
 	name = "\improper Engine Monitoring Room"
