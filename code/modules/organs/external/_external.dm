@@ -34,7 +34,6 @@
 	var/model                          // Used when caching robolimb icons.
 	var/force_icon                     // Used to force override of species-specific limb icons (for prosthetics).
 	var/list/mob_overlays              // Cached limb overlays
-	var/list/mob_underlays              // Cached limb underlays
 	var/skin_tone                         // Skin tone.
 	var/base_skin = ""                    // Skin base.
 	var/list/s_col                     // skin colour
@@ -100,7 +99,7 @@
 	if(owner)
 		replaced(owner)
 		sync_colour_to_human(owner)
-	get_icon()
+	get_overlays()
 
 	slowdown = species.get_slowdown(owner)
 

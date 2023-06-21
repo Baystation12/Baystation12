@@ -744,6 +744,9 @@ The _flatIcons list is a cache for generated icon files.
 
 	for(var/I in layers)
 
+		if(I:plane == EMISSIVE_PLANE) //Just replace this with whatever it is TG is doing these days sometime. Getflaticon breaks emissives
+			continue
+
 		if(I:alpha == 0)
 			continue
 

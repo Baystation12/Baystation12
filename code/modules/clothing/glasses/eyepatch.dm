@@ -64,19 +64,10 @@
 	if(active)
 		var/image/eye = overlay_image(res.icon, "[icon_state]_eye", flags=RESET_COLOR)
 		eye.color = eye_color
-		//eye.layer = ABOVE_HUMAN_LAYER
 		eye.layer = FLOAT_LAYER
 		res.overlays += eye
 		res.overlays += emissive_appearance(res.icon, "[icon_state]_eye", -15)
 		user_mob.z_flags |= ZMM_MANGLE_PLANES
-	return res
-
-/obj/item/clothing/glasses/eyepatch/hud/test/get_mob_overlay(mob/user_mob, slot)
-	var/image/res = ..()
-	if(active)
-		var/image/eyeglow = emissive_appearance(res.icon, "[icon_state]_eye")
-		eyeglow.layer = ABOVE_HUMAN_LAYER
-		res.overlays += eyeglow
 	return res
 
 /obj/item/clothing/glasses/eyepatch/hud/security

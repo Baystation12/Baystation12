@@ -20,6 +20,8 @@
 
 	new_player_panel()
 
+	CreateRenderers()
+
 	if(!SScharacter_setup.initialized)
 		SScharacter_setup.newplayers_requiring_init += src
 	else
