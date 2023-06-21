@@ -376,3 +376,19 @@
 	icon = 'icons/turf/flooring/pool.dmi'
 	icon_state = "pool"
 	initial_flooring = /singleton/flooring/pool
+
+/turf/simulated/floor/bluespace
+	name = "bluespace"
+	icon = 'icons/turf/space.dmi'
+	icon_state = "bluespace"
+	initial_flooring = /singleton/flooring/bluespace
+
+/turf/simulated/floor/bluespace/Entered(mob/living/L)
+	. = ..()
+
+	if(istype(L) && prob(75))
+		L.visible_message(
+			SPAN_WARNING("\The [L] starts flickering in and out of existence as they step onto the bluespace!"),
+			SPAN_WARNING("You feel your entire body tingle, and something pulling you away!")
+		)
+		addtimer(new Callback(GLOBAL_PROC, /proc/do_unstable_teleport_safe, L, GetConnectedZlevels(L.z)), rand(30, 80))

@@ -405,7 +405,7 @@
 
 
 /singleton/flooring/bluespace
-	name = "bluespace floor"
+	name = "bluespace"
 	desc = "Infinite bluespace. It gives you a piercing headache if you stare at it for too long."
 	icon = 'icons/turf/space.dmi'
 	icon_base = "bluespace"
