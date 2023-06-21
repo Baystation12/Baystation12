@@ -705,7 +705,7 @@
 /obj/machinery/door/airlock/highsecurity{
 	autoset_access = 0;
 	name = "Secure Tech Storage";
-	req_access = list("ACCESS_BRIDGE","ACCESS_TECH_STORAGE")
+	req_access = list("ACCESS_TORCH_SENIOR_ENG","ACCESS_TECH_STORAGE")
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
