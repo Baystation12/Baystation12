@@ -67,9 +67,6 @@
 	display_name = "sterile mask"
 	path = /obj/item/clothing/mask/surgical
 
-/datum/gear/head/bandana
-	allowed_branches = CIVILIAN_BRANCHES
-
 /datum/gear/head/beanie
 	allowed_branches = CIVILIAN_BRANCHES
 
