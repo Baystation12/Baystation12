@@ -1522,7 +1522,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/turf/simulated/floor/tiled/monotile,
+/turf/simulated/floor/tiled,
 /area/exploration_shuttle/medical)
 "di" = (
 /obj/structure/cable/cyan{
@@ -1679,7 +1679,7 @@
 /obj/structure/handrail{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
 "dA" = (
 /obj/structure/handrail{
