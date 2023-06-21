@@ -1,0 +1,10 @@
+author: Mucker
+delete-after: true
+changes:
+  - bugfix: Ladders should no longer be bugged after the BSD event runs.
+  - tweak: BSD event lasts longer.
+  - tweak: Bluespace turfs spawned by the BSD event will teleport mobs to a random
+      place if stepped on (sometimes).
+  - tweak: Mobs affected by the 'pulse' from the BSD event will now have their position
+      swapped with other mobs, instead of teleported randomly.
+  - tweak: Bluespace figments do 5 less damage on hit.
