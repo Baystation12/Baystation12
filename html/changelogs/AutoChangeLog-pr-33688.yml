@@ -1,0 +1,9 @@
+author: emmanuelbassil,Azlan
+delete-after: true
+changes:
+  - rscadd: Adds matchbook, a smaller version of matchboxes with 3 matches that fit
+      in your ear slot, pockets, and wallets.
+  - tweak: Matchbook available in same vending machines where matchboxes are and loadout.
+  - tweak: New sprites for matchboxes and the matchbook, courtesy of Azlan
+  - tweak: Matchbox sprites were supposed to open/close and change as they are emptied,
+      this now works.
