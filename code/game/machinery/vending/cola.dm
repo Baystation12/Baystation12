@@ -31,14 +31,14 @@
 		/obj/item/reagent_containers/food/drinks/cans/syndicola = 5
 	)
 	products = list(
-		/obj/item/reagent_containers/food/drinks/cans/cola = 10,
-		/obj/item/reagent_containers/food/drinks/cans/space_mountain_wind = 10,
-		/obj/item/reagent_containers/food/drinks/cans/dr_gibb = 10,
-		/obj/item/reagent_containers/food/drinks/cans/ionbru = 10,
-		/obj/item/reagent_containers/food/drinks/cans/waterbottle = 10,
-		/obj/item/reagent_containers/food/drinks/cans/space_up = 10,
-		/obj/item/reagent_containers/food/drinks/cans/iced_tea = 10,
-		/obj/item/reagent_containers/food/drinks/cans/grape_juice = 10,
+		/obj/item/reagent_containers/food/drinks/cans/cola = 0,
+		/obj/item/reagent_containers/food/drinks/cans/space_mountain_wind = 0,
+		/obj/item/reagent_containers/food/drinks/cans/dr_gibb = 0,
+		/obj/item/reagent_containers/food/drinks/cans/ionbru = 0,
+		/obj/item/reagent_containers/food/drinks/cans/waterbottle = 0,
+		/obj/item/reagent_containers/food/drinks/cans/space_up = 0,
+		/obj/item/reagent_containers/food/drinks/cans/iced_tea = 0,
+		/obj/item/reagent_containers/food/drinks/cans/grape_juice = 0,
 		/obj/item/reagent_containers/food/drinks/cans/cola_pork = 0,
 		/obj/item/reagent_containers/food/drinks/cans/syndicola = 0
 	)

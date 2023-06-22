@@ -50,16 +50,26 @@
 
 	/// Stock for each product as (/item/path = count). Set to '0' if you want the vendor to randomly spawn between 1 and 10 items.
 	var/list/products	= list()
+
 	///Probability of each rare product of spawning in, max amount increases with large value. Need to have value of '0' associated with it in product list for this to work.
 	var/list/rare_products = list()
+
 	/// Stock for products hidden by the contraband wire as (/item/path = count)
 	var/list/contraband	= list()
+
 	/// Stock for products hidden by coin insertion as (/item/path = count)
 	var/list/premium = list()
+
+	///Minimum number of possible non-rare product that can be randomly spawned. This can be set by vending machine not item. Minimum rare product is set as 1 by default.
+	var/minrandom = 1
+
+	///Maximum number of possible non-rare products that can be randomly spawned. This can be set by vending machine not item. Maximum rare product depends on rarity.
+	var/maxrandom = 10
 
 	var/list/product_records = list()
 	var/product_slogans = "" //String of slogans spoken out loud, separated by semicolons
 	var/product_ads = "" //String of small ad messages in the vending screen
+	var/colored_entries = TRUE
 	var/list/ads_list = list()
 	var/list/slogan_list = list()
 	var/shut_up = TRUE //Stop spouting those godawful pitches!
@@ -90,6 +100,8 @@
 		last_slogan = world.time + rand(0, slogan_delay)
 	if (product_ads)
 		ads_list += splittext(product_ads, ";")
+	if (minrandom > maxrandom)
+		minrandom = maxrandom
 	build_inventory(populate_parts)
 
 
@@ -145,6 +157,8 @@
 		return
 	emagged = TRUE
 	req_access.Cut()
+	for (var/datum/stored_items/vending_products/product as anything in product_records)
+		product.price = 0
 	UpdateShowContraband(TRUE)
 	SSnano.update_uis(src)
 	to_chat(user, "You short out the product lock on \the [src].")
@@ -490,9 +504,18 @@
 			product.rarity = (entry in rare_products) ? rare_products[entry] : 100
 			if (populate_parts)
 				product.amount = current_list[1][entry]
-				if (!product.amount)
+				if (!product.amount && product.rarity < 100)
 					product.amount = prob(product.rarity) * rand(1,ceil(product.rarity/10))
+				if (!product.amount && product.rarity == 100)
+					product.amount = rand(minrandom,maxrandom)
 			product.category = category
+			if (colored_entries)
+				if (product.category == VENDOR_CATEGORY_NORMAL && product.rarity < 100)
+					product.display_color = COLOR_GOLD
+				if (product.category == VENDOR_CATEGORY_HIDDEN)
+					product.display_color = COLOR_DARK_ORANGE
+				if (product.category == VENDOR_CATEGORY_COIN)
+					product.display_color = COLOR_LIME
 			product_records.Add(product)
 
 

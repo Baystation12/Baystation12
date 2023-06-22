@@ -21,8 +21,8 @@
 /obj/structure/largecrate/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Crowbar - Open crate
 	if (isCrowbar(tool))
-		var/obj/item/stack/material/wood = new(loc)
-		transfer_fingerprints_to(wood)
+		var/obj/item/stack/material/wood/A = new(loc)
+		transfer_fingerprints_to(A)
 		for (var/atom/movable/item as anything in contents)
 			item.dropInto(loc)
 		user.visible_message(
