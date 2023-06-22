@@ -1,17 +1,11 @@
 var/global/const/NETWORK_AQUILA      = "Aquila"
 var/global/const/NETWORK_BRIDGE      = "Bridge"
 var/global/const/NETWORK_CHARON     = "Charon"
-var/global/const/NETWORK_EXPEDITION  = "Expedition"
 var/global/const/NETWORK_FIRST_DECK  = "First Deck"
 var/global/const/NETWORK_FOURTH_DECK = "Fourth Deck"
-var/global/const/NETWORK_POD         = "General Utility Pod"
 var/global/const/NETWORK_SECOND_DECK = "Second Deck"
-var/global/const/NETWORK_SUPPLY      = "Supply"
-var/global/const/NETWORK_HANGAR      = "Hangar"
-var/global/const/NETWORK_EXPLO       = "Exploration"
 var/global/const/NETWORK_THIRD_DECK  = "Third Deck"
 var/global/const/NETWORK_FIFTH_DECK  = "Fifth Deck"
-var/global/const/NETWORK_PETROV  = "Petrov"
 
 /datum/map/torch/get_network_access(network)
 	switch(network)
@@ -21,16 +15,6 @@ var/global/const/NETWORK_PETROV  = "Petrov"
 			return access_heads
 		if(NETWORK_CHARON)
 			return access_expedition_shuttle
-		if(NETWORK_POD)
-			return access_guppy
-		if(NETWORK_SUPPLY)
-			return access_mailsorting
-		if(NETWORK_HANGAR)
-			return access_hangar
-		if(NETWORK_EXPLO)
-			return access_explorer
-		if(NETWORK_PETROV)
-			return access_petrov
 	return get_shared_network_access(network) || ..()
 
 /datum/map/torch
@@ -42,20 +26,12 @@ var/global/const/NETWORK_PETROV  = "Petrov"
 		NETWORK_FOURTH_DECK,
 		NETWORK_FIFTH_DECK,
 		NETWORK_BRIDGE,
-		NETWORK_COMMAND,
 		NETWORK_ENGINEERING,
-		NETWORK_ENGINE,
 		NETWORK_MEDICAL,
 		NETWORK_RESEARCH,
 		NETWORK_SECURITY,
-		NETWORK_SUPPLY,
-		NETWORK_EXPEDITION,
-		NETWORK_EXPLO,
-		NETWORK_HANGAR,
 		NETWORK_AQUILA,
 		NETWORK_CHARON,
-		NETWORK_POD,
-		NETWORK_PETROV,
 		NETWORK_ALARM_ATMOS,
 		NETWORK_ALARM_CAMERA,
 		NETWORK_ALARM_FIRE,
@@ -78,9 +54,6 @@ var/global/const/NETWORK_PETROV  = "Petrov"
 /obj/machinery/camera/network/exploration_shuttle
 	network = list(NETWORK_CHARON)
 
-/obj/machinery/camera/network/expedition
-	network = list(NETWORK_EXPEDITION)
-
 /obj/machinery/camera/network/first_deck
 	network = list(NETWORK_FIRST_DECK)
 
@@ -90,38 +63,17 @@ var/global/const/NETWORK_PETROV  = "Petrov"
 /obj/machinery/camera/network/fifth_deck
 	network = list(NETWORK_FIFTH_DECK)
 
-/obj/machinery/camera/network/pod
-	network = list(NETWORK_POD)
-
 /obj/machinery/camera/network/second_deck
 	network = list(NETWORK_SECOND_DECK)
-
-/obj/machinery/camera/network/supply
-	network = list(NETWORK_SUPPLY)
-
-/obj/machinery/camera/network/hangar
-	network = list(NETWORK_HANGAR)
-
-/obj/machinery/camera/network/exploration
-	network = list(NETWORK_EXPLO)
 
 /obj/machinery/camera/network/third_deck
 	network = list(NETWORK_THIRD_DECK)
 
-/obj/machinery/camera/network/command
-	network = list(NETWORK_COMMAND)
-
 /obj/machinery/camera/network/crescent
 	network = list(NETWORK_CRESCENT)
 
-/obj/machinery/camera/network/engine
-	network = list(NETWORK_ENGINE)
-
 /obj/machinery/camera/network/engineering_outpost
 	network = list(NETWORK_ENGINEERING_OUTPOST)
-
-/obj/machinery/camera/network/petrov
-	network = list(NETWORK_PETROV)
 
 // Motion
 /obj/machinery/camera/motion/engineering_outpost
@@ -129,7 +81,7 @@ var/global/const/NETWORK_PETROV  = "Petrov"
 
 // All Upgrades
 /obj/machinery/camera/all/command
-	network = list(NETWORK_COMMAND)
+	network = list(NETWORK_BRIDGE)
 
 
 //
