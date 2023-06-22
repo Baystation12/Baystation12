@@ -1,7 +1,0 @@
-author: Ryan180602
-delete-after: true
-changes:
-  - maptweak: Swaps BSD with AI Upload, centralises the BSD, gives it a bit more security,
-      but ways of access.
-  - maptweak: D2 Shield-Room SMES is now on the main-grid. New AI Upload room has
-      its own SMES (on the main grid).
