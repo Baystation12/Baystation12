@@ -8,7 +8,7 @@
 
 /singleton/hierarchy/outfit/pirate/norm
 	name = "Pirate - Normal"
-	head = /obj/item/clothing/mask/bandana/red
+	head = /obj/item/clothing/head/bandana
 
 /singleton/hierarchy/outfit/pirate/space
 	name = "Pirate - Space"

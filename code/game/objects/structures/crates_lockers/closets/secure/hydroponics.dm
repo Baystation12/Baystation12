@@ -11,7 +11,6 @@
 		/obj/item/device/scanner/plant,
 		/obj/item/device/radio/headset/headset_service,
 		/obj/item/clothing/mask/bandana/botany,
-		/obj/item/clothing/head/bandana/green,
 		/obj/item/material/minihoe,
 		/obj/item/material/hatchet,
 		/obj/item/wirecutters/clippers,
