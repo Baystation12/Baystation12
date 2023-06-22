@@ -5,7 +5,7 @@
 		"Science" = TRUE,
 		"Exploration" = TRUE
 	)
-	networks = list(NETWORK_EXPEDITION)
+	networks = list(NETWORK_RESEARCH)
 	sprites = list(
 		"Drone"  = "drone-science",
 		"Eyebot" = "eyebot-science"

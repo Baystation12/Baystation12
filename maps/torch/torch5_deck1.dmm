@@ -558,8 +558,7 @@
 	pixel_x = 11
 	},
 /obj/machinery/camera/network/medbay{
-	c_tag = "Infirmary - Autopsy";
-	dir = 8
+	c_tag = "Medical - Autopsy"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/morgue/autopsy)
@@ -829,10 +828,6 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/obj/machinery/camera/network/first_deck{
-	c_tag = "Command Hallway - Aft";
-	dir = 4
-	},
 /obj/effect/landmark{
 	name = "lightsout"
 	},
@@ -984,10 +979,6 @@
 "abX" = (
 /obj/machinery/r_n_d/destructive_analyzer,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/camera/network/research{
-	c_tag = "Research - Development Laboratory";
-	dir = 8
-	},
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24
@@ -1047,10 +1038,6 @@
 	name = "Chemistry Counter Lockdown Control";
 	pixel_x = -6;
 	pixel_y = -24
-	},
-/obj/machinery/camera/network/medbay{
-	c_tag = "Infirmary - Chemistry";
-	dir = 8
 	},
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 32
@@ -2310,6 +2297,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
+/obj/machinery/camera/network/medbay{
+	c_tag = "Medical - Lobby"
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/medicalhallway)
 "aeo" = (
@@ -2995,10 +2985,6 @@
 	dir = 4
 	},
 /obj/machinery/hologram/holopad,
-/obj/machinery/camera/network/medbay{
-	c_tag = "Infirmary - Lobby";
-	dir = 1
-	},
 /obj/machinery/rotating_alarm/security_alarm{
 	dir = 1
 	},
@@ -3836,10 +3822,6 @@
 	name = "Infirmary Staging Exit";
 	pixel_y = -23
 	},
-/obj/machinery/camera/network/medbay{
-	c_tag = "Infirmary - Staging";
-	dir = 1
-	},
 /obj/effect/floor_decal/sign/tr,
 /obj/machinery/light/spot,
 /turf/simulated/floor/tiled/white,
@@ -4164,10 +4146,6 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},
-/obj/machinery/camera/network/medbay{
-	c_tag = "Infirmary - Counselor's Office";
-	dir = 4
-	},
 /obj/machinery/light{
 	dir = 8
 	},
@@ -4225,10 +4203,6 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
 "ahv" = (
-/obj/machinery/camera/network/medbay{
-	c_tag = "Infirmary - Counselor's Therapy Room";
-	dir = 4
-	},
 /obj/machinery/light{
 	dir = 8
 	},
@@ -4300,14 +4274,6 @@
 "ahF" = (
 /obj/structure/bed/chair,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/tiled/techfloor,
-/area/crew_quarters/safe_room/firstdeck)
-"ahG" = (
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck - Safe Room";
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/firstdeck)
 "ahH" = (
@@ -4461,9 +4427,6 @@
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
-	},
-/obj/machinery/camera/network/engineering{
-	c_tag = "Substation - First Deck"
 	},
 /obj/machinery/light/small{
 	dir = 4
@@ -5433,9 +5396,6 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/machinery/camera/network/medbay{
-	c_tag = "Medical Safe Room"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/medical)
 "akK" = (
@@ -5494,10 +5454,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/firstdeck)
 "akV" = (
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck Fore Hallway - Starboard Maintenence";
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 1
 	},
@@ -6159,10 +6115,6 @@
 	req_access = list("ACCESS_SECURITY")
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/camera/network/security{
-	c_tag = "Security Wing - Evidence Storage";
-	dir = 8
-	},
 /turf/simulated/floor/tiled/dark,
 /area/security/evidence)
 "apf" = (
@@ -7055,10 +7007,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck - Stairs";
-	dir = 4
-	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "auF" = (
@@ -7242,10 +7190,6 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},
-/obj/machinery/camera/network/medbay{
-	c_tag = "Infirmary - Examination Room";
-	dir = 1
-	},
 /obj/item/device/radio/intercom/department/medbay{
 	dir = 1;
 	pixel_y = -28
@@ -7307,10 +7251,6 @@
 	pixel_x = -24
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck Hallway - Emergency Armory Entrance";
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/aft)
@@ -7493,6 +7433,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 4
+	},
+/obj/machinery/camera/network/first_deck{
+	c_tag = "First Deck Hallway - Emergency Armory"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/firstdeck/aft)
@@ -8534,10 +8477,6 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/machinery/camera/network/command{
-	c_tag = "Bridge - Emergency Armory - Access";
-	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/command/armoury/access)
@@ -9750,7 +9689,7 @@
 /obj/random/maintenance/solgov/clean,
 /obj/random/maintenance/solgov/clean,
 /obj/machinery/camera/network/first_deck{
-	c_tag = "Auxiliary Cryogenic Storage - Port";
+	c_tag = "First Deck Cryogenics - Fore";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -9777,7 +9716,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/personal,
 /obj/machinery/camera/network/first_deck{
-	c_tag = "Auxiliary Cryogenic Storage - Starboard";
+	c_tag = "First Deck Cryogenics - Aft";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -10178,6 +10117,10 @@
 "aJm" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/camera/network/bridge{
+	c_tag = "Emergency Armory - Supplies";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury)
 "aJn" = (
@@ -10435,10 +10378,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "aKy" = (
-/obj/machinery/camera/network/security{
-	c_tag = "Security Wing - Equipment Storage";
-	dir = 8
-	},
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 21
@@ -10690,6 +10629,9 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/machinery/camera/network/security{
+	c_tag = "Security  - Temporary Confinement"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/wing)
 "aLE" = (
@@ -10744,7 +10686,7 @@
 /area/security/brig)
 "aLL" = (
 /obj/machinery/camera/network/security{
-	c_tag = "Brig - Center";
+	c_tag = "Security - Extended Confinement";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -10931,10 +10873,6 @@
 	},
 /obj/effect/floor_decal/corner/red/half,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
-/obj/machinery/camera/network/security{
-	c_tag = "Security Hallway - Cells";
 	dir = 1
 	},
 /obj/machinery/rotating_alarm/security_alarm{
@@ -11196,7 +11134,7 @@
 	pixel_x = -21
 	},
 /obj/machinery/camera/network/security{
-	c_tag = "Brig - Bunk Room";
+	c_tag = "Security - Extended Bunks";
 	dir = 4
 	},
 /obj/structure/bedsheetbin,
@@ -12163,7 +12101,7 @@
 "aRm" = (
 /obj/machinery/barrier,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/camera/network/command{
+/obj/machinery/camera/network/bridge{
 	c_tag = "Bridge - Emergency Armory - Port";
 	dir = 1
 	},
@@ -13515,10 +13453,6 @@
 /obj/structure/sign/warning/internals_required{
 	pixel_x = 32
 	},
-/obj/machinery/camera/network/research{
-	c_tag = "Xenobiology - Entry";
-	dir = 1
-	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/entry)
 "aUE" = (
@@ -13653,7 +13587,7 @@
 	icon_state = "pipe-c"
 	},
 /obj/machinery/camera/network/research{
-	c_tag = "Xenobiology - Fore"
+	c_tag = "Research - Xenobiology Fore"
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "xenobio1";
@@ -13689,7 +13623,7 @@
 	icon_state = "pipe-c"
 	},
 /obj/machinery/camera/network/research{
-	c_tag = "Xenobiology - Aft"
+	c_tag = "Research - Xenobiology Aft"
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "xenobio4_vent";
@@ -15385,10 +15319,6 @@
 "cDO" = (
 /obj/structure/table/steel,
 /obj/item/storage/box/evidence,
-/obj/machinery/camera/network/security{
-	c_tag = "Security Wing - Processing";
-	dir = 4
-	},
 /obj/item/device/radio/intercom/department/security{
 	dir = 4;
 	pixel_x = -21
@@ -15634,10 +15564,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/foyer/storeroom)
 "cWR" = (
-/obj/machinery/camera/network/security{
-	c_tag = "Security Wing - Interview Room 1";
-	dir = 1
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
@@ -16226,6 +16152,9 @@
 /obj/structure/sign/directions/med{
 	pixel_y = 32
 	},
+/obj/machinery/camera/network/first_deck{
+	c_tag = "First Deck Hallway - Midships Aft"
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
 "dNb" = (
@@ -16634,10 +16563,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue/autopsy)
 "equ" = (
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck - Ladders";
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/research/half,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/monotile,
@@ -18042,9 +17967,6 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/storage)
 "hcb" = (
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck Hallway - Ladders"
-	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
@@ -19196,9 +19118,6 @@
 /obj/machinery/recharger/wallcharger{
 	pixel_y = 24
 	},
-/obj/machinery/camera/network/engineering{
-	c_tag = "Engineering - Robotics Office"
-	},
 /obj/item/book/manual/ripley_build_and_repair,
 /obj/item/book/manual/robotics_cyborgs,
 /turf/simulated/floor/tiled,
@@ -19413,16 +19332,6 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/entry)
-"iPj" = (
-/obj/effect/floor_decal/corner/blue{
-	dir = 9
-	},
-/obj/machinery/camera/network/first_deck{
-	c_tag = "Briefing Room";
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/command/conference)
 "iPV" = (
 /obj/structure/cable/green{
 	d1 = 2;
@@ -19561,10 +19470,6 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck Hallway - Aft";
-	dir = 1
-	},
 /obj/machinery/light,
 /obj/effect/floor_decal/corner/research/half,
 /turf/simulated/floor/tiled/monotile,
@@ -19619,7 +19524,7 @@
 	dir = 8
 	},
 /obj/machinery/camera/network/medbay{
-	c_tag = "Infirmary - Treatment Centre";
+	c_tag = "Medical - Treament Center";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -19856,6 +19761,10 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},
+/obj/machinery/camera/network/first_deck{
+	c_tag = "First Deck Hallway - Aft";
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "jpt" = (
@@ -20014,6 +19923,9 @@
 "jxG" = (
 /obj/effect/floor_decal/corner/paleblue/half{
 	dir = 4
+	},
+/obj/machinery/camera/network/first_deck{
+	c_tag = "First Deck Hallway - Stairs"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/fore)
@@ -20345,12 +20257,12 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/machinery/camera/network/command{
-	c_tag = "Emergency Armory - Tactical";
-	dir = 1
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/machinery/camera/network/bridge{
+	c_tag = "Emergency Armory - Tactical";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
@@ -20538,11 +20450,6 @@
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -21
-	},
-/obj/machinery/camera/network/medbay{
-	c_tag = "Infirmary - Robotics Laboratory";
-	dir = 4;
-	network = list("Medical, Engineering")
 	},
 /obj/effect/floor_decal/corner/yellow/mono,
 /turf/simulated/floor/tiled/white/monotile,
@@ -20742,7 +20649,7 @@
 	pixel_x = -24
 	},
 /obj/machinery/camera/network/security{
-	c_tag = "Security Hallway - Center";
+	c_tag = "Security Hallway - Port";
 	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -21259,10 +21166,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/chargebay)
 "lcI" = (
-/obj/machinery/camera/network/security{
-	c_tag = "Security Wing - Armory";
-	dir = 8
-	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack,
 /obj/item/clothing/head/helmet/ablative,
@@ -21342,7 +21245,7 @@
 /area/maintenance/firstdeck/centralport)
 "lgb" = (
 /obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck Hallway - Auxiliary Cryogenic Storage"
+	c_tag = "First Deck Hallway - Midships Fore"
 	},
 /obj/structure/cable/green{
 	d2 = 2;
@@ -21416,9 +21319,6 @@
 	},
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/camera/network/research{
-	c_tag = "Research - Entry"
-	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/rnd/entry)
 "lkp" = (
@@ -21676,7 +21576,7 @@
 	pixel_y = -20
 	},
 /obj/machinery/camera/network/research{
-	c_tag = "Research - Lockers";
+	c_tag = "Research - Lobby";
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -22081,7 +21981,7 @@
 	dir = 4
 	},
 /obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck Fore Hallway - Starboard";
+	c_tag = "First Deck Hallway - Fore Starboard";
 	dir = 1
 	},
 /obj/structure/disposalpipe/segment{
@@ -22301,10 +22201,6 @@
 	id_tag = "Cell 2";
 	pixel_x = -24
 	},
-/obj/machinery/camera/network/security{
-	c_tag = "Brig - Cell Two";
-	dir = 4
-	},
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22
@@ -22382,10 +22278,6 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/camera/network/medbay{
-	c_tag = "Infirmary - Operating Theatre 2";
-	dir = 1
-	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery2)
 "mzb" = (
@@ -22414,25 +22306,6 @@
 /obj/item/storage/box/swabs,
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
-"mCi" = (
-/obj/structure/bed/padded,
-/obj/item/bedsheet/orange,
-/obj/effect/floor_decal/corner/red{
-	dir = 10
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
-/obj/machinery/camera/network/security{
-	c_tag = "Brig - Cell One";
-	dir = 8
-	},
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_y = -26
-	},
-/turf/simulated/floor/tiled,
-/area/security/wing)
 "mCk" = (
 /obj/structure/table/steel,
 /obj/item/book/manual/sol_sop,
@@ -22589,7 +22462,7 @@
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/machinery/camera/network/first_deck{
-	c_tag = "Command Hallway - Fore";
+	c_tag = "First Deck Hallway - Fore";
 	dir = 8
 	},
 /obj/structure/disposalpipe/segment,
@@ -22719,8 +22592,8 @@
 /turf/simulated/floor/plating,
 /area/security/detectives_office)
 "mWb" = (
-/obj/machinery/camera/network/command{
-	c_tag = "Vault - Interior";
+/obj/machinery/camera/network/bridge{
+	c_tag = "Self Destruct";
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -22809,10 +22682,6 @@
 /area/security/nuke_storage)
 "ngb" = (
 /obj/structure/table/rack,
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck - Teleporter";
-	dir = 4
-	},
 /obj/random/tech_supply,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/teleporter/firstdeck)
@@ -23026,6 +22895,10 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
+/obj/machinery/camera/network/security{
+	c_tag = "Security Hallway - Starboard";
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "nqb" = (
@@ -23147,10 +23020,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/machinery/camera/network/security{
-	c_tag = "Checkpoint - Deck One";
-	dir = 4
-	},
 /obj/machinery/newscaster/security_unit{
 	pixel_x = -32
 	},
@@ -23243,10 +23112,6 @@
 /obj/structure/table/steel,
 /obj/machinery/photocopier/faxmachine{
 	department = "Torch - Brig Chief"
-	},
-/obj/machinery/camera/network/security{
-	c_tag = "Security Wing - Brig Chief";
-	dir = 4
 	},
 /obj/machinery/newscaster/security_unit{
 	pixel_x = -32
@@ -23532,7 +23397,7 @@
 	dir = 4
 	},
 /obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck Fore Hallway - Port"
+	c_tag = "First Deck Hallway - Fore Port"
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -23761,10 +23626,6 @@
 /obj/effect/floor_decal/corner/red/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/security_torch,
-/obj/machinery/camera/network/security{
-	c_tag = "Security Wing - Locker Room";
-	dir = 8
-	},
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 26
@@ -24402,10 +24263,6 @@
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = -32
 	},
-/obj/machinery/camera/network/research{
-	c_tag = "Research - Hallway";
-	dir = 1
-	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "pdb" = (
@@ -24977,14 +24834,6 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology/xenoflora)
-"pNb" = (
-/obj/machinery/atmospherics/portables_connector,
-/obj/effect/floor_decal/industrial/outline/blue,
-/obj/machinery/camera/network/research{
-	c_tag = "Research - Miscellaneous Laboratory"
-	},
-/turf/simulated/floor/tiled/white,
-/area/rnd/misc_lab)
 "pOb" = (
 /obj/machinery/seed_extractor,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -25592,10 +25441,6 @@
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck - Safe Room Entrance";
-	dir = 4
-	},
 /obj/effect/floor_decal/techfloor,
 /obj/effect/floor_decal/corner_techfloor_grid{
 	dir = 1
@@ -26012,10 +25857,6 @@
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 8
 	},
-/obj/machinery/camera/network/research{
-	c_tag = "Research - Xenobotany Environment";
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/research/mono,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
@@ -26183,7 +26024,7 @@
 "rkb" = (
 /obj/machinery/atmospherics/valve,
 /obj/machinery/camera/network/research{
-	c_tag = "Research - Xenobotany Laboratory";
+	c_tag = "Research - Xenobotany";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -27305,7 +27146,7 @@
 /area/rnd/misc_lab)
 "srb" = (
 /obj/machinery/camera/network/research{
-	c_tag = "Research - Miscellaneous Test Chamber";
+	c_tag = "Research - Misc. Test Chamber";
 	dir = 8;
 	network = list("Research","Miscellaneous Reseach")
 	},
@@ -28102,6 +27943,10 @@
 	pixel_y = -24
 	},
 /obj/structure/cable/green,
+/obj/machinery/camera/network/security{
+	c_tag = "Security - Brig Armory";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/armoury)
 "thb" = (
@@ -29443,10 +29288,6 @@
 /area/medical/medicalhallway)
 "vIP" = (
 /obj/structure/filingcabinet/chestdrawer,
-/obj/machinery/camera/network/security{
-	c_tag = "Security Wing - Investigations";
-	dir = 4
-	},
 /turf/simulated/floor/tiled,
 /area/security/detectives_office)
 "vJO" = (
@@ -29562,10 +29403,6 @@
 	dir = 5
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/machinery/camera/network/medbay{
-	c_tag = "Infirmary - Equipment Storage";
-	dir = 4
-	},
 /obj/structure/closet/hydrant{
 	pixel_x = -32
 	},
@@ -30002,9 +29839,6 @@
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
-/obj/machinery/camera/network/command{
-	c_tag = "Emergency Armory - Starboard"
-	},
 /obj/machinery/suit_cycler/torch,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury)
@@ -30038,10 +29872,6 @@
 	pixel_x = 6;
 	pixel_y = -24
 	},
-/obj/machinery/camera/network/medbay{
-	c_tag = "Infirmary - Operating Theatre 1";
-	dir = 1
-	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "xxl" = (
@@ -30071,18 +29901,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/office)
-"xzj" = (
-/obj/effect/floor_decal/techfloor,
-/obj/machinery/camera/network/command{
-	c_tag = "Emergency Armory - Port";
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark,
-/area/command/armoury)
 "xzK" = (
 /obj/structure/bed/chair/padded/red,
 /obj/machinery/camera/network/security{
-	c_tag = "Security Wing - Lobby"
+	c_tag = "Security  - Lobby"
 	},
 /obj/effect/floor_decal/corner/red{
 	dir = 5
@@ -39552,7 +39374,7 @@ adK
 tWZ
 gvC
 ahE
-ahG
+ahE
 kzy
 adK
 qWE
@@ -39987,7 +39809,7 @@ bob
 jpt
 oby
 nkh
-mCi
+wEb
 aNH
 uKa
 tKE
@@ -42989,7 +42811,7 @@ njj
 alZ
 kCl
 chO
-iPj
+iEb
 iEb
 kCl
 dzG
@@ -54930,7 +54752,7 @@ abk
 jZb
 pfb
 aHi
-pNb
+pKb
 qmb
 qOb
 qSb
@@ -57954,7 +57776,7 @@ aHT
 aBa
 aHT
 uZO
-xzj
+ooN
 aQr
 aRm
 eRU

@@ -65,7 +65,7 @@
 
 /obj/item/clothing/head/helmet/space/rig/industrial
 	light_overlay = "helmet_light_wide"
-	camera = /obj/machinery/camera/network/mining
+	camera = /obj/machinery/camera/network/helmet
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 
 /obj/item/clothing/suit/space/rig/industrial
@@ -131,7 +131,7 @@
 
 /obj/item/clothing/head/helmet/space/rig/eva
 	light_overlay = "helmet_light_alt"
-	camera = /obj/machinery/camera/network/engineering
+	camera = /obj/machinery/camera/network/helmet
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 	sprite_sheets = list(
 		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_head_skrell.dmi',
@@ -220,7 +220,7 @@
 
 /obj/item/clothing/head/helmet/space/rig/ce
 	light_overlay = "helmet_light_alt"
-	camera = /obj/machinery/camera/network/engineering
+	camera = /obj/machinery/camera/network/helmet
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi',
@@ -278,7 +278,7 @@
 
 /obj/item/clothing/head/helmet/space/rig/hazmat
 	light_overlay = "helmet_light_dual"
-	camera = /obj/machinery/camera/network/research
+	camera = /obj/machinery/camera/network/helmet
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 
 /obj/item/clothing/suit/space/rig/hazmat
@@ -342,7 +342,7 @@
 
 /obj/item/clothing/head/helmet/space/rig/medical
 	light_overlay = "helmet_light_wide"
-	camera = /obj/machinery/camera/network/medbay
+	camera = /obj/machinery/camera/network/helmet
 	species_restricted = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_IPC)
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi',
@@ -409,7 +409,7 @@
 
 /obj/item/clothing/head/helmet/space/rig/hazard
 	light_overlay = "helmet_light_dual"
-	camera = /obj/machinery/camera/network/security
+	camera = /obj/machinery/camera/network/helmet
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI, SPECIES_IPC)
 
 /obj/item/clothing/suit/space/rig/hazard

@@ -242,9 +242,6 @@
 /obj/structure/sign/deck/third{
 	pixel_y = 32
 	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Head"
-	},
 /obj/effect/floor_decal/corner/green{
 	dir = 5
 	},
@@ -301,9 +298,6 @@
 /turf/space,
 /area/space)
 "bc" = (
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Ladders"
-	},
 /obj/effect/floor_decal/corner/yellow{
 	dir = 4
 	},
@@ -414,9 +408,6 @@
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/gym)
 "bx" = (
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Hydroponics -  Storage"
-	},
 /obj/machinery/biogenerator,
 /obj/effect/floor_decal/corner/green{
 	dir = 5
@@ -1628,10 +1619,6 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Hydroponics - Aft";
-	dir = 1
-	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled,
 /area/hydroponics)
@@ -2682,13 +2669,6 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/service_break_room)
-"gi" = (
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Sanitation Supplies";
-	dir = 1
-	},
-/turf/simulated/floor/tiled/steel_grid,
-/area/janitor/storage)
 "gk" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -3158,10 +3138,6 @@
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "hk" = (
-/obj/machinery/camera/network/engineering{
-	c_tag = "Substation - Third Deck";
-	dir = 1
-	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/substation/thirddeck)
@@ -3528,6 +3504,14 @@
 /obj/structure/window/reinforced/polarized/full,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/head/sauna)
+"hQ" = (
+/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Third Deck Hallway - Fore";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/hallway/primary/thirddeck/fore)
 "hT" = (
 /obj/structure/stairs/west,
 /obj/effect/floor_decal/corner/yellow/half{
@@ -3632,10 +3616,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/gym)
 "ih" = (
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Mess Hall - Cold Room";
-	dir = 1
-	},
 /obj/structure/closet/crate/freezer,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
@@ -4129,9 +4109,6 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Mess Hall - Center"
-	},
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
@@ -4207,10 +4184,6 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/head/sauna)
 "jm" = (
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck - Ladders";
-	dir = 1
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
@@ -5529,10 +5502,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Mess Hall - Bar";
-	dir = 4
-	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/bar)
 "mm" = (
@@ -5608,10 +5577,6 @@
 	},
 /obj/machinery/alarm{
 	pixel_y = 24
-	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Holodeck Control";
-	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/holocontrol)
@@ -6004,10 +5969,6 @@
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -21
-	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Fore Starboard";
-	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
@@ -6501,7 +6462,7 @@
 /area/hallway/primary/thirddeck/fore)
 "oW" = (
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Stairwell";
+	c_tag = "Third Deck Hallway - Stairs";
 	dir = 8
 	},
 /obj/item/device/radio/intercom{
@@ -6687,6 +6648,10 @@
 /obj/machinery/rotating_alarm/security_alarm{
 	dir = 1
 	},
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Third Deck - Mess Hall";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "pg" = (
@@ -6703,10 +6668,6 @@
 "pi" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
-	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Mess Hall - Port";
-	dir = 1
 	},
 /obj/machinery/computer/arcade,
 /turf/simulated/floor/tiled/white,
@@ -7291,9 +7252,6 @@
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
 "qU" = (
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Cryogenic Storage"
-	},
 /obj/effect/floor_decal/corner/green{
 	dir = 1
 	},
@@ -7474,9 +7432,6 @@
 /area/hallway/primary/thirddeck/aft)
 "rv" = (
 /obj/machinery/hologram/holopad,
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Holodeck - Center"
-	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/alarm{
 	dir = 4;
@@ -8392,7 +8347,7 @@
 /area/hallway/primary/thirddeck/fore)
 "ts" = (
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Fore Central";
+	c_tag = "Third Deck Hallway - Fore Center";
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -8539,14 +8494,11 @@
 /area/thruster/d3port)
 "tL" = (
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Center";
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/green{
-	dir = 10
+	c_tag = "Third Deck Hallway - Fore Starboard";
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
-/area/hallway/primary/thirddeck/center)
+/area/hallway/primary/thirddeck/fore)
 "tN" = (
 /obj/structure/bed/chair/pew/left/mahogany,
 /obj/machinery/light{
@@ -8579,6 +8531,10 @@
 	},
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -32
+	},
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Third Deck Hallway - Midships Aft";
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/center)
@@ -9146,7 +9102,7 @@
 	pixel_y = -28
 	},
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Observation Bubble";
+	c_tag = "Third Deck Hallway - Observation";
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -9575,9 +9531,6 @@
 /obj/machinery/atm{
 	pixel_y = 32
 	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Teleporter"
-	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "wP" = (
@@ -9653,10 +9606,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/sleep/bunk)
 "wY" = (
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Cryogenic Storage - Fore Starboard";
-	dir = 4
-	},
 /obj/machinery/vending/cola{
 	dir = 4
 	},
@@ -9739,10 +9688,6 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/seed_storage/garden,
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Hydroponics - Fore";
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/green{
 	dir = 10
 	},
@@ -10028,13 +9973,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/security/habcheck)
-"xV" = (
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Saferoom"
-	},
-/obj/structure/bed/chair,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/crew_quarters/safe_room/thirddeck)
 "xW" = (
 /obj/machinery/door/window/brigdoor{
 	dir = 8
@@ -10169,7 +10107,7 @@
 /area/crew_quarters/recreation)
 "yk" = (
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Cryogenic Storage - Aft Starboard";
+	c_tag = "Third Deck Cryogenics - Aft";
 	dir = 8
 	},
 /obj/structure/table/standard,
@@ -10255,15 +10193,6 @@
 /obj/item/pen,
 /turf/simulated/floor/carpet/purple,
 /area/chapel/office)
-"yD" = (
-/obj/machinery/suit_storage_unit/engineering/alt/sol,
-/obj/machinery/camera/network/engineering{
-	c_tag = "Engineering - EVA";
-	dir = 8
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/hardstorage)
 "yE" = (
 /obj/structure/table/rack,
 /turf/simulated/floor/plating,
@@ -10933,9 +10862,6 @@
 "AM" = (
 /obj/structure/closet/toolcloset,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck - Auxillary Storage"
-	},
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
@@ -11370,10 +11296,6 @@
 /area/hallway/primary/thirddeck/fore)
 "Cc" = (
 /obj/structure/table/standard,
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck - Teleporter";
-	dir = 1
-	},
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
 "Cf" = (
@@ -11610,10 +11532,6 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/hallway/primary/thirddeck/fore)
 "CL" = (
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Chapel";
-	dir = 4
-	},
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24
@@ -12053,6 +11971,10 @@
 	department = "Cryogenic Storage";
 	pixel_x = -32
 	},
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Third Deck Cryogenics - Fore";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
 "DO" = (
@@ -12149,8 +12071,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/service_break_room)
 "DU" = (
-/obj/machinery/camera/network/command{
-	c_tag = "Fire Control - Storage";
+/obj/machinery/camera/network/bridge{
+	c_tag = "Fire Control - Munitions";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -12363,20 +12285,12 @@
 	dir = 9
 	},
 /obj/structure/filingcabinet,
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Chief Steward's Office";
-	dir = 1
-	},
 /obj/effect/floor_decal/spline/plain/green{
 	dir = 4
 	},
 /turf/simulated/floor/wood/maple,
 /area/crew_quarters/chief_steward)
 "Et" = (
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Cryogenic Storage - Fore Port";
-	dir = 4
-	},
 /obj/machinery/vending/coffee{
 	dir = 4
 	},
@@ -13574,6 +13488,15 @@
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/port)
+"HF" = (
+/obj/effect/floor_decal/corner/green{
+	dir = 5
+	},
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Third Deck Hallway - Midships Fore"
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/thirddeck/center)
 "HG" = (
 /obj/structure/largecrate,
 /obj/random/maintenance/solgov,
@@ -13622,9 +13545,6 @@
 "HL" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
-	},
-/obj/machinery/camera/network/command{
-	c_tag = "Fire Control - Access"
 	},
 /turf/simulated/floor/plating,
 /area/command/disperser)
@@ -13777,6 +13697,10 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
+/obj/machinery/camera/network/bridge{
+	c_tag = "Fire Control - Operations";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark,
 /area/command/disperser)
 "Ih" = (
@@ -13842,10 +13766,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "Ir" = (
-/obj/machinery/camera/network/command{
-	c_tag = "Fire Control - Controls";
-	dir = 4
-	},
 /obj/machinery/computer/ship/disperser{
 	dir = 4
 	},
@@ -15616,9 +15536,6 @@
 	pixel_x = 9;
 	pixel_y = -1
 	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Service Break Room"
-	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/service_break_room)
 "Md" = (
@@ -15877,9 +15794,6 @@
 "MP" = (
 /obj/structure/table/woodentable,
 /obj/effect/floor_decal/spline/fancy/wood,
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Recreation Room"
-	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/recreation)
 "MR" = (
@@ -16781,6 +16695,16 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/thirddeck)
+"Pu" = (
+/obj/effect/floor_decal/corner/yellow{
+	dir = 9
+	},
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Third Deck - Ladders";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/hallway/primary/thirddeck/center)
 "Pv" = (
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/fore)
@@ -17363,9 +17287,6 @@
 	pixel_x = -32
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/camera/network/third_deck{
-	dir = 4
-	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/gym)
 "Rh" = (
@@ -18299,10 +18220,6 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Computer Lab";
-	dir = 1
-	},
 /turf/simulated/floor/lino,
 /area/crew_quarters/office)
 "TN" = (
@@ -18377,10 +18294,6 @@
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Chapel - Chaplain's Office";
-	dir = 4
-	},
 /turf/simulated/floor/tiled/dark,
 /area/chapel/office)
 "TZ" = (
@@ -18571,10 +18484,6 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Chapel - Memorial Room";
-	dir = 1
 	},
 /obj/effect/floor_decal/corner/purple{
 	dir = 5
@@ -19847,10 +19756,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
 "XJ" = (
-/obj/machinery/camera/network/security{
-	c_tag = "Checkpoint - Deck Three";
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/red{
 	dir = 10
 	},
@@ -20091,6 +19996,10 @@
 	},
 /obj/structure/closet/crate/hydroponics/beekeeping,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Third Deck - Hydroponics";
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/hydroponics)
 "Yp" = (
@@ -20116,12 +20025,6 @@
 	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 6
-	},
-/turf/simulated/floor/tiled,
-/area/hallway/primary/thirddeck/fore)
-"Yu" = (
-/obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Commissary"
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
@@ -30467,7 +30370,7 @@ gB
 gB
 gB
 gB
-Yu
+VU
 sN
 yH
 ma
@@ -31304,7 +31207,7 @@ bR
 Mf
 uj
 kC
-gi
+el
 eU
 eU
 aa
@@ -31478,7 +31381,7 @@ UP
 sI
 gB
 Ch
-VU
+tL
 WB
 Sd
 mU
@@ -33512,7 +33415,7 @@ CF
 eH
 wR
 xR
-wR
+hQ
 Bm
 jR
 lK
@@ -33716,7 +33619,7 @@ qL
 xT
 xh
 Bm
-xV
+jR
 NY
 tG
 DI
@@ -38959,7 +38862,7 @@ nk
 jc
 OB
 fB
-Xn
+HF
 sj
 dC
 uU
@@ -39163,7 +39066,7 @@ fB
 fB
 tF
 sj
-tL
+dC
 uU
 uU
 uU
@@ -41794,7 +41697,7 @@ OW
 IV
 Pr
 bf
-bf
+Pu
 bg
 AI
 BA
@@ -42995,7 +42898,7 @@ xv
 XC
 ds
 uh
-yD
+uh
 dM
 dM
 eI
