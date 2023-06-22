@@ -1,7 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - maptweak: Most of the Torch's cameras have been removed. Areas exempt are generally
-      hallways, main ship entrance points, shuttle cockpits, and high traffic or high
-      security areas.
-  - maptweak: Some cameras have had their positions adjusted.
