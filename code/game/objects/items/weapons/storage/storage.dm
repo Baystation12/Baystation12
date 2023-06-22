@@ -34,6 +34,9 @@
 	var/opened = null
 	var/open_sound = null
 
+	///This is to prevent open sound and use sound playing on the same click if you're opening a closed box.
+	var/open_sound_played = FALSE
+
 /obj/item/storage/Destroy()
 	QDEL_NULL(storage_ui)
 	. = ..()
@@ -98,17 +101,19 @@
 /obj/item/storage/proc/open(mob/user as mob)
 	if (virtual)
 		return
-	if(!opened)
+	if(!opened && src.open_sound)
 		playsound(src.loc, src.open_sound, 50, 0, -5)
-		opened = 1
+		open_sound_played = TRUE
+		to_chat(user, "You open \the [src]")
 		queue_icon_update()
-	if (src.use_sound)
+	if (src.use_sound && !open_sound_played)
 		playsound(src.loc, src.use_sound, 50, 0, -5)
 	if (isrobot(user) && user.hud_used)
 		var/mob/living/silicon/robot/robot = user
 		if(robot.shown_robot_modules) //The robot's inventory is open, need to close it first.
 			robot.hud_used.toggle_show_robot_modules()
-
+	open_sound_played = FALSE
+	opened = TRUE //Regular boxes don't open and close; need opened set True to once. Fancy boxes do; code handled in _fancy.dm
 	prepare_ui()
 	storage_ui.on_open(user)
 	storage_ui.show_to(user)

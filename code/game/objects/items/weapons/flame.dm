@@ -29,6 +29,7 @@
 ///////////
 /obj/item/flame/match
 	name = "match"
+	pluralname = "matche"
 	desc = "A simple match stick, used for lighting fine smokables."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "match_unlit"

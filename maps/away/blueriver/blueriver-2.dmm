@@ -110,7 +110,7 @@
 	},
 /obj/item/storage/pill_bottle/antitox,
 /obj/item/cell/standard,
-/obj/item/storage/box/matches,
+/obj/item/storage/fancy/matches/matchbox,
 /obj/random/maintenance/clean,
 /obj/random/cash,
 /obj/item/paper{

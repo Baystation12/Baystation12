@@ -169,9 +169,13 @@
 	display_name = "pipe, corn"
 	path = /obj/item/clothing/mask/smokable/pipe/cobpipe
 
+/datum/gear/matchbox
+	display_name = "matchbox"
+	path = /obj/item/storage/fancy/matches/matchbox
+
 /datum/gear/matchbook
 	display_name = "matchbook"
-	path = /obj/item/storage/box/matches
+	path = /obj/item/storage/fancy/matches/matchbook
 
 /datum/gear/lighter
 	display_name = "cheap lighter"

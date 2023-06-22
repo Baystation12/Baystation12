@@ -1165,6 +1165,7 @@
 #include "code\game\objects\items\weapons\storage\fancy\crackers.dm"
 #include "code\game\objects\items\weapons\storage\fancy\crayons.dm"
 #include "code\game\objects\items\weapons\storage\fancy\egg_box.dm"
+#include "code\game\objects\items\weapons\storage\fancy\matchbox.dm"
 #include "code\game\objects\items\weapons\storage\fancy\pencilcase.dm"
 #include "code\game\objects\items\weapons\storage\fancy\vials.dm"
 #include "code\game\objects\items\weapons\storage\fancy\smokable\_smokable.dm"

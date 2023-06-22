@@ -1,7 +1,8 @@
 /obj/item/storage/fancy/egg_box
+	name = "egg box"
 	icon = 'icons/obj/food.dmi'
 	icon_state = "eggbox"
-	name = "egg box"
+	open_sound = 'sound/effects/storage/smallbox.ogg'
 	storage_slots = 12
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL

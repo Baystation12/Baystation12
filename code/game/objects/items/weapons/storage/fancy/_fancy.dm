@@ -1,5 +1,6 @@
 /obj/item/storage/fancy
 	item_state = "syringe_kit"
+	var/sealed = TRUE
 
 	/// The item type this container cares about for behaviors like icon generation.
 	var/obj/item/key_type
@@ -34,17 +35,20 @@
 	. = ..()
 	if (distance > 2)
 		return
+	if (sealed)
+		to_chat(user, "It is sealed and brand new.")
+		return
 	if (!opened)
-		to_chat(user, "It is sealed.")
+		to_chat(user, "It is closed.")
 		return
 	var/display_message
 	switch (key_type_count)
 		if (0)
-			display_message = "are no [initial(key_type.name)]\s"
+			display_message = "are no [initial(key_type.pluralname) ? initial(key_type.pluralname) : initial(key_type.name)]\s"
 		if (1)
 			display_message = "is 1 [initial(key_type.name)]"
 		else
-			display_message = "are [key_type_count] [initial(key_type.name)]\s"
+			display_message = "are [key_type_count] [initial(key_type.pluralname) ? initial(key_type.pluralname) : initial(key_type.name)]\s"
 	to_chat(user, "There [display_message] left in \the [src].")
 	switch (other_type_count)
 		if (0)
@@ -55,6 +59,23 @@
 			display_message = "Some[key_type_count ? " other" : ""] things are"
 	if (display_message)
 		to_chat(user, "[display_message] inside[key_type_count ? " as well" : ""].")
+
+/obj/item/storage/fancy/attack_self(mob/user)
+	. = ..()
+	opened = !opened
+	playsound(loc, open_sound, 50, 0, -5)
+	if (sealed)
+		to_chat(user, "You unseal and open \the [src].")
+		sealed = FALSE
+	else
+		to_chat(user, "You [opened? "open" : "close"] \the [src]")
+	queue_icon_update()
+
+/obj/item/storage/fancy/open(mob/user as mob)
+	if(sealed)
+		to_chat(user, "You need to unseal \the [src] first!")
+		return
+	..()
 
 
 /obj/item/storage/fancy/proc/UpdateTypeCounts()

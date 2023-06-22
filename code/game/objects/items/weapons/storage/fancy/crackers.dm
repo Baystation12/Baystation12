@@ -2,6 +2,7 @@
 	name = "\improper Getmore Crackers"
 	icon = 'icons/obj/food.dmi'
 	icon_state = "crackerbag"
+	open_sound = 'sound/effects/crinkle.ogg'
 	storage_slots = 6
 	max_w_class = ITEM_SIZE_TINY
 	w_class = ITEM_SIZE_SMALL

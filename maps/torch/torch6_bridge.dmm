@@ -12398,7 +12398,7 @@
 /obj/machinery/keycard_auth/torch{
 	pixel_x = 26
 	},
-/obj/item/storage/box/matches,
+/obj/item/storage/fancy/matches/matchbox,
 /obj/random/smokes,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
