@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Planet atmospheric generation has been reverted to its previous state
-      due to various issues.
