@@ -144,11 +144,11 @@
 
 
 /// Creates a blinding flash of light that will blind and deafen those in range, and change turfs to bluespace
-/obj/machinery/bluespacedrive/proc/create_flash(change_turf)
+/obj/machinery/bluespacedrive/proc/create_flash(change_turf, range)
 	playsound(src, "sound/effects/supermatter.ogg", 100, TRUE)
 	var/list/victims = list()
 	var/list/objs = list()
-	get_mobs_and_objs_in_view_fast(loc, 7, victims, objs)
+	get_mobs_and_objs_in_view_fast(loc, range, victims, objs)
 	for (var/mob/living/living in victims)
 		if (living.client)
 			to_chat(living, SPAN_DANGER(FONT_LARGE("The Drive's field cracks open briefly, emitting a blinding flash of blue light and a deafenening screech!")))
@@ -159,8 +159,8 @@
 		living.ear_deaf = max(living.ear_deaf, 15)
 	if (!change_turf)
 		return
-	for (var/turf/simulated/floor/floor in range(4, src))
-		if (prob(40))
+	for (var/turf/simulated/floor/floor in range(range, src))
+		if (prob(25))
 			continue
 		floor.ChangeTurf(/turf/simulated/floor/bluespace)
 

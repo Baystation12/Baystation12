@@ -1,5 +1,5 @@
 /datum/event/bsd_instability
-	endWhen	= 800
+	endWhen	= 350
 
 	var/list/obj/machinery/tele_pad/pads = list()
 	var/list/obj/machinery/bluespacedrive/drives = list()
@@ -9,6 +9,7 @@
 	var/effects_per_tick = 5
 	var/maximum_mobs = 10
 	var/mob_spawn_chance = 3
+	var/turf_conversion_range = 5
 
 	/// Whether or not the 'pulse' should happen, changed to true if the probability check passes in setup()
 	var/should_do_pulse = FALSE
@@ -52,7 +53,7 @@
 		drive.set_light(1, 8, 25, 15, COLOR_CYAN_BLUE)
 		if (severity <= EVENT_LEVEL_MODERATE)
 			continue
-		addtimer(new Callback(drive, /obj/machinery/bluespacedrive/proc/create_flash, TRUE), 2 SECONDS)
+		addtimer(new Callback(drive, /obj/machinery/bluespacedrive/proc/create_flash, TRUE, turf_conversion_range), 2 SECONDS)
 	if (severity <= EVENT_LEVEL_MODERATE)
 		return
 	for (var/obj/structure/stairs/stair in world)
@@ -107,7 +108,7 @@
 	for (var/obj/machinery/bluespacedrive/drive in drives)
 		drive.instability_event_active = FALSE
 		drive.set_light(1, 5, 15, 10, COLOR_CYAN)
-		for (var/turf/simulated/floor/floor in range(3, drive))
+		for (var/turf/simulated/floor/floor in range(turf_conversion_range, drive))
 			if (istype(floor.flooring, /singleton/flooring/bluespace))
 				floor.set_flooring(GET_SINGLETON(initial(floor.flooring)))
 	for (var/obj/structure/stairs/stair in stairs)
