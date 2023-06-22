@@ -41,16 +41,17 @@
 #define AI_CAMERA_LUMINOSITY 6
 
 // Camera networks
-#define NETWORK_CRESCENT "Crescent"
-#define NETWORK_ENGINEERING "Engineering"
-#define NETWORK_ERT "ZeEmergencyResponseTeam"
-#define NETWORK_EXODUS "Exodus"
-#define NETWORK_MEDICAL "Medical"
-#define NETWORK_MERCENARY "MercurialNet"
-#define NETWORK_MINE "Mining"
-#define NETWORK_RESEARCH "Research"
-#define NETWORK_SECURITY "Security"
-#define NETWORK_THUNDER "Thunderdome"
+var/global/const/NETWORK_CRESCENT       = "Crescent"
+var/global/const/NETWORK_ENGINEERING       = "Engineering"
+var/global/const/NETWORK_ERT       = "ERT"
+var/global/const/NETWORK_EXODUS       = "Exodus"
+var/global/const/NETWORK_MEDICAL       = "Medical"
+var/global/const/NETWORK_MERCENARY       = "MercurialNet"
+var/global/const/NETWORK_MINE       = "Mining"
+var/global/const/NETWORK_RESEARCH       = "Research"
+var/global/const/NETWORK_SECURITY       = "Security"
+var/global/const/NETWORK_THUNDER       = "Thunderdome"
+var/global/const/NETWORK_HELMETS       = "Helmet Cameras"
 
 #define NETWORK_ALARM_ATMOS "Atmosphere Alarms"
 #define NETWORK_ALARM_CAMERA "Camera Alarms"

@@ -20,6 +20,8 @@
 			return access_research
 		if(NETWORK_THUNDER)
 			return 0
+		if(NETWORK_HELMETS)
+			return access_eva
 
 	return access_security // Default for all other networks
 

@@ -34,7 +34,7 @@
 	light_overlay = "helmet_light_dual"
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
-	camera = /obj/machinery/camera/network/command
+	camera = /obj/machinery/camera/network/helmet
 	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC) //no available icons for aliens
 
 /obj/item/clothing/suit/space/rig/command
@@ -348,7 +348,7 @@
 	siemens_coefficient = 0
 
 /obj/item/clothing/head/helmet/space/rig/command/exploration
-	camera = /obj/machinery/camera/network/exploration
+	camera = /obj/machinery/camera/network/helmet
 	icon_state = "command_exp_rig"
 	light_overlay = "helmet_light_wide"
 	brightness_on = 0.8
@@ -384,4 +384,4 @@
  */
 
 /obj/item/clothing/head/helmet/space/rig/industrial
-	camera = /obj/machinery/camera/network/supply
+	camera = /obj/machinery/camera/network/helmet
