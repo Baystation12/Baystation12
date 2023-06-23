@@ -15,23 +15,26 @@ var/global/const/NETWORK_FIFTH_DECK  = "Fifth Deck"
 			return access_heads
 		if(NETWORK_CHARON)
 			return access_expedition_shuttle
+		if(NETWORK_HELMETS)
+			return access_solgov_crew
 	return get_shared_network_access(network) || ..()
 
 /datum/map/torch
 	// Networks that will show up as options in the camera monitor program
 	station_networks = list(
+		NETWORK_BRIDGE,
 		NETWORK_FIRST_DECK,
 		NETWORK_SECOND_DECK,
 		NETWORK_THIRD_DECK,
 		NETWORK_FOURTH_DECK,
 		NETWORK_FIFTH_DECK,
-		NETWORK_BRIDGE,
 		NETWORK_ENGINEERING,
 		NETWORK_MEDICAL,
 		NETWORK_RESEARCH,
 		NETWORK_SECURITY,
 		NETWORK_AQUILA,
 		NETWORK_CHARON,
+		NETWORK_HELMETS,
 		NETWORK_ALARM_ATMOS,
 		NETWORK_ALARM_CAMERA,
 		NETWORK_ALARM_FIRE,
