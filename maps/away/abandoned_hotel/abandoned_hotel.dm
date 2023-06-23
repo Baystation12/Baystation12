@@ -4,7 +4,6 @@
 	name = "Cinnamon Resort"
 	desc = "Sensors detect a hotel with a low power profile."
 	icon_state = "object"
-	known = FALSE
 	initial_generic_waypoints = list(
 		"nav_cinnamon_hotel_1",
 		"nav_cinnamon_hotel_2",

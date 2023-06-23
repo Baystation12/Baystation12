@@ -25,6 +25,15 @@
 			{{:helper.link(data.viewing ? 'Engaged' : 'Disengaged', 'shuffle', { 'viewing' : 1 }, null, data.viewing ? 'selected' : null)}}
 		</div>
 	</div>
+	<div class='item'>
+		<div class="itemLabel">
+			Contact readout
+		</div>
+		<div class="itemContent">
+			{{:helper.link(data.muted ? 'Disabled' : 'Enabled', data.muted ? 'volume-off' : 'volume-on', { 'mute' : 1 }, null, null)}}
+		</div>
+	</div>
+
 </fieldset>
 <fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
 	<legend style="text-align:center">Status</legend>

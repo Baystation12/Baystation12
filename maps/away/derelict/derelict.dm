@@ -4,7 +4,7 @@
 	name = "debris field"
 	desc = "A large field of miscellanious debris."
 	icon_state = "object"
-	known = FALSE
+
 
 	initial_generic_waypoints = list(
 		"nav_derelict_1",
