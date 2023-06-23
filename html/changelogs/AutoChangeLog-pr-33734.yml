@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Added a button to the player panel called 'Equip Loadout' that equips the
+      player's currently saved loadout.
