@@ -1,5 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - bugfix: Helmet cams can be observed again.
-  - tweak: Helmet cams require SolGov crew access instead of EVA access.

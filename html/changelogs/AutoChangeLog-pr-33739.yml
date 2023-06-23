@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Fixes radio signal and distress signal scans having line breaks after
-      every character.
