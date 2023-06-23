@@ -390,3 +390,27 @@
 	name = "Multi Point - Angela"
 	id = "Angela"
 	item_path = /obj/item/toy/plush/angela
+
+/obj/item/toy/plush/fumo
+	icon = 'proxima/icons/obj/fumo.dmi'
+	name = "Plushie black witch"
+	desc = "The black witch from the popular Yangui cartoon, well, one is pretty cute."
+	icon_state = "fumoplushie_marisa"
+	gender = FEMALE
+
+/obj/item/toy/plush/fumo/cirno
+	icon = 'proxima/icons/obj/fumo.dmi'
+	name = "Plushie winter fairy"
+	desc = "Silly winter fairy from the popular Yangui cartoon . You have to squeeze her cheeks."
+	icon_state = "fumoplushie_cirno"
+	gender = FEMALE
+
+/obj/random_multi/single_item/witch
+	name = "Multi Point - witch"
+	id = "witch"
+	item_path = /obj/item/toy/plush/fumo
+
+/obj/random_multi/single_item/cirno
+	name = "Multi Point - fairy"
+	id = "fairy"
+	item_path = /obj/item/toy/plush/fumo/cirno

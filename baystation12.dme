@@ -3299,6 +3299,7 @@
 #include "proxima\code\modules\poraz_corgi.dm"
 #include "proxima\code\modules\species.dm"
 #include "proxima\code\modules\admin\xeno_whitelist.dm"
+#include "proxima\code\modules\chem\terran_milk.dm"
 #include "proxima\code\modules\clothing\_clothing.dm"
 #include "proxima\code\modules\clothing\accessories\cloak.dm"
 #include "proxima\code\modules\clothing\accessories\sweater.dm"

@@ -1360,6 +1360,8 @@
 					/obj/item/reagent_containers/food/snacks/salo = 7,
 					/obj/item/reagent_containers/food/snacks/driedfish = 7,
 					/obj/item/reagent_containers/food/snacks/pistachios = 7,
+					/obj/item/reagent_containers/food/snacks/canned/varenka = 1,
+					/obj/item/reagent_containers/food/snacks/canned/sgushenka = 3
 					)
 
 	contraband = list(/obj/item/reagent_containers/food/snacks/canned/caviar/true = 1)
