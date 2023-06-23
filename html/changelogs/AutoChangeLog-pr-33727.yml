@@ -1,0 +1,7 @@
+author: jux
+delete-after: true
+changes:
+  - tweak: Secure tech storage now requires Tech Storage + Senior Engi Access, instead
+      of Tech + Bridge access
+  - tweak: Senior engineers now always have trained IT and atmospherics, but lose
+      4 skill points
