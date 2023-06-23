@@ -159,10 +159,10 @@
 	var/obj/effect/overmap/source
 
 /obj/effect/overmap/radio/get_scan_data(mob/user)
-	return "A radio signal originating at \the [source].<br><br> \
+	return list("A radio signal originating at \the [source].<br><br> \
 	---BEGINNING OF TRANSMISSION---<br><br> \
 	[message] \
-	<br><br>---END OF TRANSMISSION---"
+	<br><br>---END OF TRANSMISSION---")
 
 /obj/effect/overmap/radio/proc/set_origin(obj/effect/overmap/origin)
 	GLOB.moved_event.register(origin, src, /obj/effect/overmap/radio/proc/follow)
@@ -187,7 +187,7 @@
 	color = COLOR_NT_RED
 
 /obj/effect/overmap/radio/distress/get_scan_data(mob/user)
-	return "A unilateral, broadband data broadcast originating at \the [source] carrying only an emergency code sequence."
+	return list("A unilateral, broadband data broadcast originating at \the [source] carrying only an emergency code sequence.")
 
 /obj/effect/overmap/radio/distress/Initialize()
 	..()
