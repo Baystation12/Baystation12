@@ -93,6 +93,7 @@ var/global/floorIsLava = 0
 
 	if (!istype(M, /mob/new_player) && !istype(M, /mob/observer))
 		body += "<A HREF='?src=\ref[src];cryo=\ref[M]'>Cryo Character</A> | "
+		body += "<A HREF='?src=\ref[src];equip_loadout=\ref[M]'>Equip Loadout</A> | "
 
 	if(M.client)
 		body += "<A HREF='?src=\ref[src];sendtoprison=\ref[M]'>Prison</A> | "
