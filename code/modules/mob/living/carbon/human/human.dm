@@ -5,7 +5,7 @@
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
 
-	var/list/hud_list[10]
+	var/list/hud_list[11]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/obj/item/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
 	var/list/stance_limbs
@@ -38,6 +38,7 @@
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud_med.dmi', src, "100")
 	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
 	hud_list[LIFE_HUD]	      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
+	hud_list[TRIAGE_HUD]      = new /image/hud_overlay('icons/mob/hud_med.dmi', src, triage_tag)
 	hud_list[ID_HUD]          = new /image/hud_overlay(GLOB.using_map.id_hud_icons, src, "hudunknown")
 	hud_list[WANTED_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPLOYAL_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
@@ -512,6 +513,17 @@
 					read = 1
 			if(!read)
 				to_chat(user, SPAN_WARNING("Unable to locate a data core entry for this person."))
+			return TOPIC_HANDLED
+
+	if(href_list["triagetag"])
+		if(hasHUD(usr, "medical"))
+			var/static/list/tags = list()
+			if(!length(tags))
+				for(var/thing in list(TRIAGE_NONE, TRIAGE_GREEN, TRIAGE_YELLOW, TRIAGE_ORANGE, TRIAGE_RED, TRIAGE_BLACK))
+					tags[thing] = image(icon = 'icons/mob/screen/triage_tag.dmi', icon_state = thing)
+			var/chosen_tag = show_radial_menu(usr, src, tags, radius = 42, tooltips = TRUE)
+			if(chosen_tag)
+				triage_tag = chosen_tag
 			return TOPIC_HANDLED
 
 	if (href_list["webbed"])
