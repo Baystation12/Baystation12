@@ -22,11 +22,13 @@ the HUD updates properly! */
 		if(local_scanner)
 			P.Client.images += patient.hud_list[HEALTH_HUD]
 			P.Client.images += patient.hud_list[STATUS_HUD]
+			P.Client.images += patient.hud_list[TRIAGE_HUD]
 		else
 			if(hassensorlevel(patient, SUIT_SENSOR_VITAL))
 				P.Client.images += patient.hud_list[HEALTH_HUD]
 			if(hassensorlevel(patient, SUIT_SENSOR_BINARY))
 				P.Client.images += patient.hud_list[LIFE_HUD]
+				P.Client.images += patient.hud_list[TRIAGE_HUD]
 
 //Security HUDs. Pass a value for the second argument to enable implant viewing or other special features.
 /proc/process_sec_hud(mob/M, advanced_mode, mob/Alt)
