@@ -327,7 +327,7 @@
 
 		msg += "[SPAN_CLASS("deptradio", "Physical status:")] <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
 		msg += "[SPAN_CLASS("deptradio", "Medical records:")] <a href='?src=\ref[src];medrecord=`'>\[View\]</a>\n"
-
+		msg += "[SPAN_CLASS("deptradio"  "Triage Tag ::")] <a href='?src=\ref[src];triagetag=1'>\[[triage_tag]\]</a>\n"
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
 
