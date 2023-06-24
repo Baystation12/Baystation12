@@ -961,11 +961,11 @@
 	if (GET_BIT(hud_updateflag, HEALTH_HUD) && hud_list[HEALTH_HUD])
 		var/image/holder = hud_list[HEALTH_HUD]
 		if(stat == DEAD || status_flags & FAKEDEATH)
-				holder.icon_state = "0" 	// X_X
-			else if(is_asystole())
-				holder.icon_state = "flatline"
-			else
-				holder.icon_state = "[pulse()]"
+			holder.icon_state = "0" 	// X_X
+		else if(is_asystole())
+			holder.icon_state = "flatline"
+		else
+			holder.icon_state = "[pulse()]"
 			hud_list[HEALTH_HUD] = holder
 		if(hud_list[TRIAGE_HUD])
 			var/image/holder = hud_list[TRIAGE_HUD]
