@@ -59,7 +59,7 @@
 
 /obj/effect/overmap/visitable/ship/landable/old_snz
 	name = "SNZ-210 Personnel Carrier"
-	desc = "SNZ-210 Personnel Carrier. Multipurpose shuttle, used for personnel delivery. Was obsolete even before Gaia Conflict."
+	desc = "SNZ-210 Personnel Carrier. Multipurpose shuttle, used for personnel delivery. Was obsolete even before the Gaia Conflict."
 	shuttle = "SNZ-210 Personnel Carrier"
 	fore_dir = WEST
 	color = "#8dc0d8"
