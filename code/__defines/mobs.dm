@@ -389,6 +389,15 @@
 #define SURGERY_RETRACTED 2
 #define SURGERY_ENCASED 3
 
+// triage tags
+#define TRIAGE_NONE "None"
+#define TRIAGE_GREEN "Green"
+#define TRIAGE_YELLOW "Yellow"
+#define TRIAGE_ORANGE "Yellow"
+#define TRIAGE_RED "Red"
+#define TRIAGE_BLACK "Black"
+
+
 #define STASIS_MISC     "misc"
 #define STASIS_CRYOBAG  "cryobag"
 #define STASIS_COLD     "cold"

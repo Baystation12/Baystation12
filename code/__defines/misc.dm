@@ -11,7 +11,6 @@
 #define INVISIBILITY_LIGHTING    20
 #define INVISIBILITY_LEVEL_ONE   35
 #define INVISIBILITY_LEVEL_TWO   45
-#define INVISIBILITY_OVERMAP     50
 #define INVISIBILITY_OBSERVER    60
 #define INVISIBILITY_EYE         61
 #define INVISIBILITY_SYSTEM      99
@@ -44,6 +43,7 @@
 #define SPECIALROLE_HUD 8 // AntagHUD image.
 #define  STATUS_HUD_OOC 9 // STATUS_HUD without virus DB check for someone being ill.
 #define 	  LIFE_HUD 10 // STATUS_HUD that only reports dead or alive
+#define     TRIAGE_HUD 11 // a HUD that creates a bar above the user showing their medical status
 
 // Shuttle moving status.
 #define SHUTTLE_IDLE      0
@@ -260,8 +260,9 @@
 
 //Planet habitability class
 #define HABITABILITY_IDEAL  1
-#define HABITABILITY_OKAY  2
+#define HABITABILITY_LESSIDEAL  2
 #define HABITABILITY_BAD  3
+#define HABITABILITY_UNINHABITABLE  4
 
 #ifndef WINDOWS_HTTP_POST_DLL_LOCATION
 #define WINDOWS_HTTP_POST_DLL_LOCATION "lib/byhttp.dll"
