@@ -25261,7 +25261,7 @@
 	},
 /obj/machinery/light,
 /obj/structure/closet/crate/freezer,
-/obj/item/device/mmi,
+/obj/item/organ/internal/mmi,
 /obj/item/reagent_containers/ivbag/nanoblood,
 /obj/item/reagent_containers/ivbag/blood/human/oneg,
 /obj/item/reagent_containers/ivbag/blood/human/oneg,
@@ -28293,7 +28293,7 @@
 	pixel_x = -24
 	},
 /obj/structure/closet/crate/freezer,
-/obj/item/device/mmi,
+/obj/item/organ/internal/mmi,
 /obj/item/reagent_containers/ivbag/nanoblood,
 /obj/item/reagent_containers/ivbag/blood/human/oneg,
 /obj/item/reagent_containers/ivbag/blood/human/oneg,

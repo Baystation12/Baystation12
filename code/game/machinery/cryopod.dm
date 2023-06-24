@@ -166,7 +166,7 @@
 		/obj/item/integrated_circuit/input/teleporter_locator,
 		/obj/item/card/id/captains_spare,
 		/obj/item/aicard,
-		/obj/item/device/mmi,
+		/obj/item/organ/internal/mmi,
 		/obj/item/device/paicard,
 		/obj/item/gun,
 		/obj/item/pinpointer,
@@ -348,8 +348,8 @@
 
 		var/preserve = null
 		// Snowflaaaake.
-		if(istype(W, /obj/item/device/mmi))
-			var/obj/item/device/mmi/brain = W
+		if(istype(W, /obj/item/organ/internal/mmi))
+			var/obj/item/organ/internal/mmi/brain = W
 			if(brain.brainmob && brain.brainmob.client && brain.brainmob.key)
 				preserve = 1
 			else

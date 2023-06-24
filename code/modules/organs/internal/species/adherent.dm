@@ -8,6 +8,7 @@
 	action_button_name = "Reset Ident"
 	var/next_rename
 	var/rename_delay = 15 MINUTES
+	can_use_mmi = FALSE
 
 /obj/item/organ/internal/brain/adherent/refresh_action_button()
 	. = ..()

@@ -144,7 +144,7 @@ var/global/list/organ_cache = list()
 		var/obj/item/organ/O = loc
 		return O.is_preserved()
 	else
-		return (istype(loc,/obj/item/device/mmi) || istype(loc,/obj/structure/closet/body_bag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer) || istype(loc,/obj/item/storage/box/freezer))
+		return (istype(loc,/obj/item/organ/internal/mmi) || istype(loc,/obj/structure/closet/body_bag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer) || istype(loc,/obj/item/storage/box/freezer))
 
 /obj/item/organ/examine(mob/user)
 	. = ..(user)

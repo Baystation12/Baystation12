@@ -24,17 +24,17 @@
 
 /mob/living/carbon/brain/say_understands(other)//Goddamn is this hackish, but this say code is so odd
 	if (istype(other, /mob/living/silicon/ai))
-		if(!(container && istype(container, /obj/item/device/mmi)))
+		if(!(container && istype(container, /obj/item/organ/internal/mmi)))
 			return 0
 		else
 			return 1
 	if (istype(other, /mob/living/silicon/pai))
-		if(!(container && istype(container, /obj/item/device/mmi)))
+		if(!(container && istype(container, /obj/item/organ/internal/mmi)))
 			return 0
 		else
 			return 1
 	if (istype(other, /mob/living/silicon/robot))
-		if(!(container && istype(container, /obj/item/device/mmi)))
+		if(!(container && istype(container, /obj/item/organ/internal/mmi)))
 			return 0
 		else
 			return 1
@@ -45,11 +45,8 @@
 	return ..()
 
 /mob/living/carbon/brain/UpdateLyingBuckledAndVerbStatus()
-	if(istype(loc, /obj/item/device/mmi))
+	if(istype(loc, /obj/item/organ/internal/mmi))
 		use_me = 1
-
-/mob/living/carbon/brain/isSynthetic()
-	return istype(loc, /obj/item/device/mmi/digital)
 
 /mob/living/carbon/brain/binarycheck()
 	return isSynthetic()

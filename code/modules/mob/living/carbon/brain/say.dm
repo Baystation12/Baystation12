@@ -5,7 +5,7 @@
 
 	message = sanitize(message)
 
-	if(!(container && istype(container, /obj/item/device/mmi)))
+	if(!(container && istype(container, /obj/item/organ/internal/mmi)))
 		return //No MMI, can't speak, bucko./N
 	else
 		var/datum/language/speaking = parse_language(message)
@@ -31,8 +31,9 @@
 			speaking.broadcast(src,trimtext(message))
 			return
 
-		if(istype(container, /obj/item/device/mmi/radio_enabled))
-			var/obj/item/device/mmi/radio_enabled/R = container
-			if(R.radio)
-				spawn(0) R.radio.hear_talk(src, sanitize(message), verb, speaking)
+		if(istype(container, /obj/item/organ/internal/mmi/radio))
+			var/obj/item/organ/internal/mmi/radio/mmi = container
+			if (mmi.radio)
+				spawn(0)
+					mmi.radio.hear_talk(src, sanitize(message), verb, speaking)
 		..(trimtext(message), speaking, verb)

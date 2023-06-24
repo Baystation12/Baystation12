@@ -23,11 +23,17 @@
 	var/healed_threshold = 1
 	var/oxygen_reserve = 6
 
+
+/obj/item/organ/internal/brain/Destroy()
+	QDEL_NULL(brainmob)
+	return ..()
+
+
 /obj/item/organ/internal/brain/robotize()
 	replace_self_with(/obj/item/organ/internal/posibrain)
 
 /obj/item/organ/internal/brain/mechassist()
-	replace_self_with(/obj/item/organ/internal/mmi_holder)
+	replace_self_with(/obj/item/organ/internal/mmi)
 
 /obj/item/organ/internal/brain/getToxLoss()
 	return 0
@@ -58,9 +64,6 @@
 	..()
 	damage_threshold_value = round(max_damage / damage_threshold_count)
 
-/obj/item/organ/internal/brain/Destroy()
-	QDEL_NULL(brainmob)
-	. = ..()
 
 /obj/item/organ/internal/brain/proc/transfer_identity(mob/living/carbon/H)
 

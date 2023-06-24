@@ -60,7 +60,7 @@
 			update_icon()
 
 	// Install an MMI/brain.
-	else if(istype(W, /obj/item/device/mmi) || istype(W, /obj/item/organ/internal/posibrain))
+	else if(istype(W, /obj/item/organ/internal/mmi) || istype(W, /obj/item/organ/internal/posibrain))
 
 		if(!istype(loc,/turf))
 			to_chat(user, SPAN_WARNING("You can't put \the [W] in without the frame being on the ground."))
@@ -71,9 +71,9 @@
 			return
 
 		var/mob/living/carbon/brain/B
-		if(istype(W, /obj/item/device/mmi))
-			var/obj/item/device/mmi/M = W
-			B = M.brainmob
+		if(istype(W, /obj/item/organ/internal/mmi))
+			var/obj/item/organ/internal/mmi/mmi = W
+			B = mmi.brainmob
 		else
 			var/obj/item/organ/internal/posibrain/P = W
 			B = P.brainmob

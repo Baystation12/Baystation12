@@ -499,68 +499,6 @@
 	user.visible_message(SPAN_WARNING("[user]'s hand slips, disconnecting \the [tool]."), \
 	SPAN_WARNING("Your hand slips, disconnecting \the [tool]."))
 
-//////////////////////////////////////////////////////////////////
-//	mmi installation surgery step
-//////////////////////////////////////////////////////////////////
-/singleton/surgery_step/robotics/install_mmi
-	name = "Install MMI"
-	allowed_tools = list(
-		/obj/item/device/mmi = 100
-	)
-	min_duration = 60
-	max_duration = 80
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
-
-/singleton/surgery_step/robotics/install_mmi/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/device/mmi/M = tool
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected && istype(M))
-		if(!M.brainmob || !M.brainmob.client || !M.brainmob.ckey || M.brainmob.stat >= DEAD)
-			to_chat(user, SPAN_WARNING("That brain is not usable."))
-		else if(BP_IS_CRYSTAL(affected))
-			to_chat(user, SPAN_WARNING("The crystalline interior of \the [affected] is incompatible with \the [M]."))
-		else if(!target.isSynthetic())
-			to_chat(user, SPAN_WARNING("You cannot install a computer brain into a meat body."))
-		else if(!target.should_have_organ(BP_BRAIN))
-			to_chat(user, SPAN_WARNING("You're pretty sure [target.species.name_plural] don't normally have a brain."))
-		else if(target.internal_organs[BP_BRAIN])
-			to_chat(user, SPAN_WARNING("Your subject already has a brain."))
-		else
-			return TRUE
-	return FALSE
-
-/singleton/surgery_step/robotics/install_mmi/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = ..()
-	if(affected && target_zone == BP_HEAD)
-		return affected
-
-/singleton/surgery_step/robotics/install_mmi/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] starts installing \the [tool] into [target]'s [affected.name].", \
-	"You start installing \the [tool] into [target]'s [affected.name].")
-	..()
-
-/singleton/surgery_step/robotics/install_mmi/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(!user.unEquip(tool))
-		return
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_NOTICE("[user] has installed \the [tool] into [target]'s [affected.name]."), \
-	SPAN_NOTICE("You have installed \the [tool] into [target]'s [affected.name]."))
-
-	var/obj/item/device/mmi/M = tool
-	var/obj/item/organ/internal/mmi_holder/holder = new(target, 1)
-	target.internal_organs_by_name[BP_BRAIN] = holder
-	tool.forceMove(holder)
-	holder.stored_mmi = tool
-	holder.update_from_mmi()
-
-	if(M.brainmob && M.brainmob.mind)
-		M.brainmob.mind.transfer_to(target)
-
-/singleton/surgery_step/robotics/install_mmi/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message(SPAN_WARNING("[user]'s hand slips."), \
-	SPAN_WARNING("Your hand slips."))
-
 /singleton/surgery_step/internal/remove_organ/robotic
 	name = "Remove robotic component"
 	can_infect = 0
@@ -572,54 +510,6 @@
 	robotic_surgery = TRUE
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
 
-/singleton/surgery_step/remove_mmi
-	name = "Remove MMI"
-	min_duration = 60
-	max_duration = 80
-	allowed_tools = list(
-		/obj/item/hemostat = 100,
-		/obj/item/wirecutters = 75,
-		/obj/item/material/kitchen/utensil/fork = 20
-	)
-	can_infect = 0
-	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_FLESH | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
-
-/singleton/surgery_step/remove_mmi/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
-	return SURGERY_SKILLS_ROBOTIC
-
-/singleton/surgery_step/remove_mmi/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = ..()
-	if(affected && (locate(/obj/item/device/mmi) in affected.implants))
-		return affected
-
-/singleton/surgery_step/remove_mmi/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message( \
-	"\The [user] starts poking around inside [target]'s [affected.name] with \the [tool].", \
-	"You start poking around inside [target]'s [affected.name] with \the [tool]." )
-	target.custom_pain("The pain in your [affected.name] is living hell!",1,affecting = affected)
-	..()
-
-/singleton/surgery_step/remove_mmi/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected)
-		var/obj/item/device/mmi/mmi = locate() in affected.implants
-		if(affected && mmi)
-			user.visible_message( \
-			SPAN_NOTICE("\The [user] removes \the [mmi] from \the [target]'s [affected.name] with \the [tool]."), \
-			SPAN_NOTICE("You  remove \the [mmi] from \the [target]'s [affected.name] with \the [tool]."))
-			target.remove_implant(mmi, TRUE, affected)
-		else
-			user.visible_message( \
-			SPAN_NOTICE("\The [user] could not find anything inside [target]'s [affected.name]."), \
-			SPAN_NOTICE("You could not find anything inside [target]'s [affected.name]."))
-
-/singleton/surgery_step/remove_mmi/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message( \
-	SPAN_WARNING("\The [user]'s hand slips, damaging \the [target]'s [affected.name] with \the [tool]!"), \
-	SPAN_WARNING("Your hand slips, damaging \the [target]'s [affected.name] with \the [tool]!"))
-	affected.take_external_damage(3, 0, used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //					BROKEN PROSTHETIC SURGERY					//
