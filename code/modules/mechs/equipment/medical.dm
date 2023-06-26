@@ -7,7 +7,7 @@
 	equipment_delay = 30 //don't spam it on people pls
 	active_power_use = 0 //Usage doesn't really require power. We don't want people stuck inside
 	origin_tech = list(TECH_DATA = 2, TECH_BIO = 3)
-	passive_power_use = 1.5 KILOWATTS
+	passive_power_use = 0 //Raised to 1.5 KW when patient is present.
 	var/obj/machinery/sleeper/mounted/sleeper = null
 
 /obj/item/mech_equipment/sleeper/Initialize()
@@ -40,6 +40,8 @@
 		if(ishuman(target) && !sleeper.occupant)
 			owner.visible_message(SPAN_NOTICE("\The [src] is lowered down to load [target]"))
 			sleeper.go_in(target, user)
+			if(sleeper.occupant) //Just in case they're deleted while being loaded in or something.
+				passive_power_use = 1.5 KILOWATTS
 		else to_chat(user, SPAN_WARNING("You cannot load that in!"))
 
 /obj/item/mech_equipment/sleeper/get_hardpoint_maptext()
@@ -56,6 +58,8 @@
 	stasis_power = 0
 	interact_offline = TRUE
 	stat_immune = MACHINE_STAT_NOPOWER
+	base_chemicals = list("Inaprovaline" = /datum/reagent/inaprovaline, "Paracetamol" = /datum/reagent/paracetamol, "Dylovene" = /datum/reagent/dylovene, "Dexalin" = /datum/reagent/dexalin, "Kelotane" = /datum/reagent/kelotane, "Bicaridine" = /datum/reagent/bicaridine, "Dermaline" = /datum/reagent/dermaline, "Tramadol" = /datum/reagent/tramadol, "Dexalin Plus" = /datum/reagent/dexalinp, "Hyronalin" = /datum/reagent/hyronalin)
+	//Same chems as upgraded sleepers.
 
 /obj/machinery/sleeper/mounted/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.mech_state)
 	. = ..()
@@ -66,7 +70,13 @@
 		return S.owner
 	return null
 
-//You cannot modify these, it'd probably end with something in nullspace. In any case basic meds are plenty for an ambulance
+/obj/machinery/sleeper/mounted/go_out()
+	..()
+	var/obj/item/mech_equipment/sleeper/S = loc
+	if(istype(S))
+		S.passive_power_use = 0 //No passive power drain when the sleeper is empty. Set to 1.5 KW when patient is inside.
+
+//You cannot modify these, it'd probably end with something in nullspace. We're giving them built-in upgraded meds to compensate.
 /obj/machinery/sleeper/mounted/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/reagent_containers/glass))
 		if(!user.unEquip(I, src))
@@ -78,60 +88,98 @@
 		beaker = I
 		user.visible_message(SPAN_NOTICE("\The [user] adds \a [I] to \the [src]."), SPAN_NOTICE("You add \a [I] to \the [src]."))
 
+#define MEDIGEL_SALVE 1
+#define MEDIGEL_SCAN  2
+
 /obj/item/mech_equipment/mender
-	name = "exosuit medigel spray"
-	desc = "An exosuit-mounted matrix of medical gel nozzles and radiation emitters designed to treat wounds before transporting patient."
+	name = "exosuit medigel-scanner matrix"
+	desc = "An exosuit-mounted matrix of medical gel nozzles and radiation emitters designed to treat wounds before transporting patient, with an integrated health scanning suite for field analysis of injuries."
 	icon_state = "mech_mender"
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_MEDICAL)
 	active_power_use = 0 //Usage doesn't really require power. It's per wound
 	origin_tech = list(TECH_DATA = 2, TECH_BIO = 3)
 	var/list/apply_sounds = list('sound/effects/spray.ogg', 'sound/effects/spray2.ogg', 'sound/effects/spray3.ogg')
+	var/mode = MEDIGEL_SALVE
+	var/obj/item/device/scanner/health/scanner = null
+
+/obj/item/mech_equipment/mender/Initialize()
+	. = ..()
+	scanner = new /obj/item/device/scanner/health/mech(src)
+	scanner.forceMove(src)
+
+/obj/item/mech_equipment/mender/Destroy()
+	QDEL_NULL(scanner)
+	. = ..()
+
+/obj/item/mech_equipment/mender/get_hardpoint_maptext()
+	if (mode == MEDIGEL_SALVE)
+		return "Gel"
+	return "Scan"
+
+/obj/item/mech_equipment/mender/attack_self(mob/user)
+	. = ..()
+	if(.)
+		mode = mode == MEDIGEL_SALVE ? MEDIGEL_SCAN : MEDIGEL_SALVE
+		to_chat(user, SPAN_NOTICE("You set \the [src] to [mode == MEDIGEL_SALVE ? "dispense medigel" : "scan for injuries"]."))
+		update_icon()
 
 /obj/item/mech_equipment/mender/afterattack(atom/target, mob/living/user, inrange, params)
 	. = ..()
-	if(.)
-		if (istype(target, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = target
-			var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
+	if (mode == MEDIGEL_SALVE)
+		if (.)
+			if (istype(target, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = target
+				var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
-			if(affecting.is_bandaged() && affecting.is_disinfected() && affecting.is_salved())
-				to_chat(user, SPAN_WARNING("The wounds on \the [H]'s [affecting.name] have already been treated."))
-				return
-			else
-				if(!LAZYLEN(affecting.wounds))
+				if(affecting.is_bandaged() && affecting.is_disinfected() && affecting.is_salved())
+					to_chat(user, SPAN_WARNING("The wounds on \the [H]'s [affecting.name] have already been treated."))
 					return
-				owner.visible_message(SPAN_NOTICE("\The [owner] extends \the [src] towards \the [H]'s [affecting.name]."))
-				var/large_wound = FALSE
-				for (var/datum/wound/W as anything in affecting.wounds)
-					if (W.bandaged && W.disinfected && W.salved)
-						continue
-					var/delay = (W.damage / 4) * user.skill_delay_mult(SKILL_MEDICAL, 0.8)
-					owner.setClickCooldown(delay)
-					if(!do_after(user, delay, target))
-						break
+				else
+					if(!LAZYLEN(affecting.wounds))
+						return
+					owner.visible_message(SPAN_NOTICE("\The [owner] extends \the [src] towards \the [H]'s [affecting.name]."))
+					var/large_wound = FALSE
+					for (var/datum/wound/W as anything in affecting.wounds)
+						if (W.bandaged && W.disinfected && W.salved)
+							continue
+						var/delay = (W.damage / 4) * user.skill_delay_mult(SKILL_MEDICAL, 0.8)
+						owner.setClickCooldown(delay)
+						if(!do_after(user, delay, target))
+							break
 
-					var/obj/item/cell/C = owner.get_cell()
-					if(istype(C))
-						C.use(0.01 KILOWATTS) //Does cost power, so not a freebie, specially with large amount of wounds
-					else
-						return //Early out, cell is gone
+						var/obj/item/cell/C = owner.get_cell()
+						if(istype(C))
+							C.use(0.01 KILOWATTS) //Does cost power, so not a freebie, specially with large amount of wounds
+						else
+							return //Early out, cell is gone
 
-					if (W.current_stage <= W.max_bleeding_stage)
-						owner.visible_message(SPAN_NOTICE("\The [owner] covers \a [W.desc] on \the [H]'s [affecting.name] with large globs of medigel."))
-						large_wound = TRUE
-					else if (W.damage_type == INJURY_TYPE_BRUISE)
-						owner.visible_message(SPAN_NOTICE("\The [owner] sprays \a [W.desc] on \the [H]'s [affecting.name] with a fine layer of medigel."))
-					else
-						owner.visible_message(SPAN_NOTICE("\The [owner] drizzles some medigel over \a [W.desc] on \the [H]'s [affecting.name]."))
-					playsound(owner, pick(apply_sounds), 20)
-					W.bandage()
-					W.disinfect()
-					W.salve()
-					if (H.stat == UNCONSCIOUS && prob(25))
-						to_chat(H, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
-				if(large_wound)
-					owner.visible_message(SPAN_NOTICE("\The [src]'s UV matrix glows faintly as it cures the medigel."))
-					playsound(owner, 'sound/items/Welder2.ogg', 10)
-				affecting.update_damages()
-				H.update_bandages(TRUE)
+						if (W.current_stage <= W.max_bleeding_stage)
+							owner.visible_message(SPAN_NOTICE("\The [owner] covers \a [W.desc] on \the [H]'s [affecting.name] with large globs of medigel."))
+							large_wound = TRUE
+						else if (W.damage_type == INJURY_TYPE_BRUISE)
+							owner.visible_message(SPAN_NOTICE("\The [owner] sprays \a [W.desc] on \the [H]'s [affecting.name] with a fine layer of medigel."))
+						else
+							owner.visible_message(SPAN_NOTICE("\The [owner] drizzles some medigel over \a [W.desc] on \the [H]'s [affecting.name]."))
+						playsound(owner, pick(apply_sounds), 20)
+						W.bandage()
+						W.disinfect()
+						W.salve()
+						if (H.stat == UNCONSCIOUS && prob(25))
+							to_chat(H, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
+					if(large_wound)
+						owner.visible_message(SPAN_NOTICE("\The [src]'s UV matrix glows faintly as it cures the medigel."))
+						playsound(owner, 'sound/items/Welder2.ogg', 10)
+					affecting.update_damages()
+					H.update_bandages(TRUE)
+	else if(mode == MEDIGEL_SCAN)
+		if(.)
+			if (istype(target, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = target
+				medical_scan_action(H, user, scanner)
+
+/obj/item/device/scanner/health/mech
+	name = "exosuit health analyzer"
+
+#undef MEDIGEL_SALVE
+#undef MEDIGEL_SCAN
