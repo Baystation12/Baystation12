@@ -16,8 +16,8 @@
 	var/mob/living/carbon/human/occupant = null
 	var/list/base_chemicals = list("Inaprovaline" = /datum/reagent/inaprovaline, "Paracetamol" = /datum/reagent/paracetamol, "Dylovene" = /datum/reagent/dylovene, "Dexalin" = /datum/reagent/dexalin)
 	var/list/available_chemicals = list()
-	var/list/upgrade_chemicals = list("Kelotane" = /datum/reagent/kelotane)
-	var/list/upgrade2_chemicals = list("Hyronalin" = /datum/reagent/hyronalin)
+	var/list/upgrade_chemicals = list("Kelotane" = /datum/reagent/kelotane, "Bicaridine" = /datum/reagent/bicaridine)
+	var/list/upgrade2_chemicals = list("Dermaline" = /datum/reagent/dermaline, "Tramadol" = /datum/reagent/tramadol, "Dexalin Plus" = /datum/reagent/dexalinp, "Hyronalin" = /datum/reagent/hyronalin)
 	var/list/antag_chemicals = list("Hair Remover" = /datum/reagent/toxin/hair_remover, "Chloral Hydrate" = /datum/reagent/chloralhydrate)
 	var/obj/item/reagent_containers/glass/beaker = null
 	var/filtering = 0
@@ -315,7 +315,7 @@
 
 	T = total_component_rating_of_type(/obj/item/stock_parts/manipulator)
 	available_chemicals = base_chemicals.Copy()
-	if (T >= 4)
+	if (T >= 4 )
 		available_chemicals |= upgrade_chemicals
 	if (T >= 6)
 		available_chemicals |= upgrade2_chemicals
