@@ -315,7 +315,7 @@
 
 	T = total_component_rating_of_type(/obj/item/stock_parts/manipulator)
 	available_chemicals = base_chemicals.Copy()
-	if (T >= 4 )
+	if (T >= 4)
 		available_chemicals |= upgrade_chemicals
 	if (T >= 6)
 		available_chemicals |= upgrade2_chemicals
