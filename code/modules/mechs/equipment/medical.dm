@@ -113,11 +113,9 @@
 	. = ..()
 
 /obj/item/mech_equipment/mender/get_hardpoint_maptext()
-	var/string
-	if(mode == MEDIGEL_SALVE)
-		string += "Gel"
-	else string += "Scan"
-	return string
+	if (mode == MEDIGEL_SALVE)
+		return "Gel"
+	return "Scan"
 
 /obj/item/mech_equipment/mender/attack_self(mob/user)
 	. = ..()
