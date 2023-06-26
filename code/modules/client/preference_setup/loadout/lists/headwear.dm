@@ -15,10 +15,15 @@
 
 /datum/gear/head/bandana/New()
 	..()
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(typesof(/obj/item/clothing/mask/bandana) + typesof(/obj/item/clothing/head/bandana))
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(subtypesof(/obj/item/clothing/mask/bandana) + /obj/item/clothing/head/bandana)
+
+/datum/gear/head/custom_bandana
+	display_name = "bandana, colour select"
+	path = /obj/item/clothing/mask/bandana
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/beanie
-	display_name = "beanie, color select"
+	display_name = "beanie, colour select"
 	path = /obj/item/clothing/head/beanie
 	flags = GEAR_HAS_COLOR_SELECTION
 
