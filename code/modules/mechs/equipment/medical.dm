@@ -126,8 +126,8 @@
 
 /obj/item/mech_equipment/mender/afterattack(atom/target, mob/living/user, inrange, params)
 	. = ..()
-	if(mode == MEDIGEL_SALVE)
-		if(.)
+	if (mode == MEDIGEL_SALVE)
+		if (.)
 			if (istype(target, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = target
 				var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
