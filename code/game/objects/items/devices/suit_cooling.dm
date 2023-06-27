@@ -109,31 +109,39 @@
 		turn_on()
 	to_chat(user, SPAN_NOTICE("You switch \the [src] [on ? "on" : "off"]."))
 
-/obj/item/device/suit_cooling_unit/attackby(obj/item/W as obj, mob/user as mob)
-	if(isScrewdriver(W))
-		if(cover_open)
-			cover_open = 0
-			to_chat(user, "You screw the panel into place.")
-		else
-			cover_open = 1
-			to_chat(user, "You unscrew the panel.")
-		playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
-		update_icon()
-		return
 
-	if (istype(W, /obj/item/cell))
-		if(cover_open)
-			if(cell)
-				to_chat(user, "There is a [cell] already installed here.")
-			else
-				if(!user.unEquip(W, src))
-					return
-				cell = W
-				to_chat(user, "You insert the [cell].")
+/obj/item/device/suit_cooling_unit/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Toggle cover
+	if (isScrewdriver(tool))
+		cover_open = !cover_open
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
 		update_icon()
-		return
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [cover_open ? "opens" : "closes"] \a [src]'s panel with \a [tool]."),
+			SPAN_NOTICE("You [cover_open ? "open" : "close"] \the [src]'s panel with \the [tool].")
+		)
+		return TRUE
+
+	// Power Cell - Install cell
+	if (istype(tool, /obj/item/cell))
+		if (!cover_open)
+			USE_FEEDBACK_FAILURE("\The [src]'s panel is closed.")
+			return TRUE
+		if (cell)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [cell] installed.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		cell = tool
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \a [src]."),
+			SPAN_NOTICE("You install \the [tool] into \the [src].")
+		)
 
 	return ..()
+
 
 /obj/item/device/suit_cooling_unit/on_update_icon()
 	overlays.Cut()

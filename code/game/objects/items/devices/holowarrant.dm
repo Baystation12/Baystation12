@@ -54,20 +54,31 @@
 	active = temp
 	update_icon()
 
-/obj/item/device/holowarrant/attackby(obj/item/W, mob/user)
-	if(active)
-		var/obj/item/card/id/I = W.GetIdCard()
-		if(I && check_access_list(I.GetAccess()))
-			var/choice = alert(user, "Would you like to authorize this warrant?","Warrant authorization","Yes","No")
-			if(choice == "Yes")
-				active.fields["auth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
-			user.visible_message(SPAN_NOTICE("You swipe \the [I] through the [src]."), \
-					SPAN_NOTICE("[user] swipes \the [I] through the [src]."))
-			broadcast_security_hud_message("\A [active.fields["arrestsearch"]] warrant for <b>[active.fields["namewarrant"]]</b> has been authorized by [I.assignment ? I.assignment+" " : ""][I.registered_name].", src)
-		else
-			to_chat(user, SPAN_NOTICE("A red \"Access Denied\" light blinks on \the [src]"))
-		return 1
-	..()
+
+/obj/item/device/holowarrant/use_tool(obj/item/tool, mob/user, list/click_params)
+	// ID Card - Authorize warrant
+	var/obj/item/card/id/id = tool.GetIdCard()
+	if (istype(id))
+		if (!active)
+			USE_FEEDBACK_FAILURE("\The [src] has no warrant to authorize.")
+			return TRUE
+		var/id_name = GET_ID_NAME(id, tool)
+		if (!check_access(id))
+			USE_FEEDBACK_ID_CARD_DENIED(src, id_name)
+			return TRUE
+		var/input = alert(user, "Would you like to authorize this warrant?", "\The [src] - Authorization", "Yes", "No")
+		if (input != "Yes" || !user.use_sanity_check(src, tool))
+			return TRUE
+		active.fields["auth"] = "[id.registered_name] - [id.assignment ? id.assignment : "(Unknown)"]"
+		broadcast_security_hud_message("\A [active.fields["arrestsearch"]] warrant for <b>[active.fields["namewarrant"]]</b> has been authorized by [id.assignment ? id.assignment+" " : ""][id.registered_name].", src)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] scans \a [tool] with \a [src]."),
+			SPAN_NOTICE("You authorize \the [src]'s warrant with [id_name].")
+		)
+		return TRUE
+
+	return ..()
+
 
 //hit other people with it
 /obj/item/device/holowarrant/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)

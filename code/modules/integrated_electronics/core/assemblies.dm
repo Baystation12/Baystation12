@@ -432,94 +432,135 @@
 				visible_message(SPAN_NOTICE("\The [user] points \the [src] towards \the [target]."))
 
 
-/obj/item/device/electronic_assembly/attackby(obj/item/I, mob/living/user)
-	if (user.a_intent == I_HURT)
-		..()
-		return
-
-	if(isWrench(I))
-		if(istype(loc, /turf) && (IC_FLAG_ANCHORABLE & circuit_flags))
-			user.visible_message(SPAN_NOTICE("\The [user] wrenches \the [src]'s anchoring bolts [anchored ? "back" : "into position"]."))
-			playsound(get_turf(user), 'sound/items/Ratchet.ogg',50)
-			if(user.do_skilled((I.toolspeed * 5) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT))
-				anchored = !anchored
-		return
-
-	if(istype(I, /obj/item/integrated_circuit))
-		if(!user.canUnEquip(I))
-			return FALSE
-		if(try_add_component(I, user))
-			return TRUE
-		else
-			for(var/obj/item/integrated_circuit/input/S in assembly_components)
-				S.attackby_react(I,user,user.a_intent)
-			return ..()
-
-	if(istype(I, /obj/item/device/multitool) || istype(I, /obj/item/device/integrated_electronics/wirer) || istype(I, /obj/item/device/integrated_electronics/debugger))
-		if(opened)
-			interact(user)
-			return TRUE
-		else
-			to_chat(user, SPAN_DANGER("\The [src]'s hatch is closed, so you can't fiddle with the internal components."))
-			for(var/obj/item/integrated_circuit/input/S in assembly_components)
-				S.attackby_react(I,user,user.a_intent)
-			return ..()
-
-	if(istype(I, /obj/item/cell))
-		if(!opened)
-			to_chat(user, SPAN_DANGER("\The [src]'s hatch is closed, so you can't access \the [src]'s power supply."))
-			for(var/obj/item/integrated_circuit/input/S in assembly_components)
-				S.attackby_react(I,user,user.a_intent)
-			return ..()
-		if(battery)
-			to_chat(user, SPAN_DANGER("\The [src] already has \a [battery] installed. Remove it first if you want to replace it."))
-			for(var/obj/item/integrated_circuit/input/S in assembly_components)
-				S.attackby_react(I,user,user.a_intent)
-			return ..()
-		var/obj/item/cell/cell = I
-		if(user.unEquip(I,loc))
-			user.drop_from_inventory(I, loc)
-			cell.forceMove(src)
-			battery = cell
-			playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
-			to_chat(user, SPAN_NOTICE("You slot \the [cell] inside \the [src]."))
-			return TRUE
-		return FALSE
-
-	if(istype(I, /obj/item/device/integrated_electronics/detailer))
-		var/obj/item/device/integrated_electronics/detailer/D = I
-		detail_color = D.detail_color
+/obj/item/device/electronic_assembly/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Assembly Detailer - Set color
+	if (istype(tool, /obj/item/device/integrated_electronics/detailer))
+		var/obj/item/device/integrated_electronics/detailer/detailer = tool
+		detail_color = detailer.detail_color
 		update_icon()
-		return
+		user.visible_message(
+			SPAN_NOTICE("\The [user] re-colors \a [src] with \a [tool]."),
+			SPAN_NOTICE("You re-color \the [src] with \the [tool].")
+		)
+		return TRUE
 
-	if(istype(I, /obj/item/screwdriver))
-		var/hatch_locked = FALSE
-		for(var/obj/item/integrated_circuit/manipulation/hatchlock/H in assembly_components)
-			// If there's more than one hatch lock, only one needs to be enabled for the assembly to be locked
-			if(H.lock_enabled)
-				hatch_locked = TRUE
-				break
+	// Integrated Circuit - Install circuit
+	if (istype(tool, /obj/item/integrated_circuit))
+		if (!user.canUnEquip(tool))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		if (try_add_component(tool, user))
+			return TRUE
+		return ..()
 
-		if(hatch_locked)
-			to_chat(user, SPAN_NOTICE("The screws are covered by a locking mechanism!"))
-			return FALSE
+	// Multitool, wirer, debugger - Interact
+	if (isMultitool(tool) || istype(tool, /obj/item/device/integrated_electronics/wirer) || istype(tool, /obj/item/device/integrated_electronics/debugger))
+		if (!opened)
+			USE_FEEDBACK_FAILURE("\The [src]'s hatch needs to be opened before you can access the internal components.")
+			return TRUE
+		interact(user)
+		return TRUE
 
-		playsound(src, 'sound/items/Screwdriver.ogg', 25)
+	// Power Cell - Install battery
+	if (istype(tool, /obj/item/cell))
+		if (!opened)
+			USE_FEEDBACK_FAILURE("\The [src]'s hatch needs to be opened before you can install \the [tool].")
+			return TRUE
+		if (battery)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [battery] installed.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		battery = tool
+		playsound(src, 'sound/items/Deconstruct.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \a [src]."),
+			SPAN_NOTICE("You install \the [tool] into \the [src].")
+		)
+		return TRUE
+
+	// Screwdriver - Toggle panel
+	if (isScrewdriver(tool))
+		for (var/obj/item/integrated_circuit/manipulation/hatchlock/hatchlock in assembly_components)
+			if (hatchlock.lock_enabled)
+				USE_FEEDBACK_FAILURE("\The [src]'s [hatchlock.name] is locked and prevents you from opening the panel.")
+				return TRUE
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
 		opened = !opened
-		to_chat(user, SPAN_NOTICE("You [opened ? "open" : "close"] the maintenance hatch of \the [src]."))
 		update_icon()
-		return
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [opened ? "opens" : "closes"] \a [src]'s panel with \a [tool]."),
+			SPAN_NOTICE("You [opened ? "open" : "close"] \the [src]'s panel with \the [tool].")
+		)
+		return TRUE
 
-	if(isCoil(I))
-		var/obj/item/stack/cable_coil/C = I
-		if(health_damaged() && do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) && C.use(1))
-			user.visible_message(SPAN_NOTICE("\The [user] patches up \the [src]."))
-			restore_health(5)
-		return
+	// Wrench - Toggle anchoring bolts
+	if (isWrench(tool))
+		if (!HAS_FLAGS(circuit_flags, IC_FLAG_ANCHORABLE))
+			USE_FEEDBACK_FAILURE("\The [src] can't be anchored.")
+			return TRUE
+		if (!isturf(loc))
+			USE_FEEDBACK_FAILURE("\The [src] needs to be on the floor to be anchored.")
+			return TRUE
+		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts wrenching \a [src] [anchored ? "from" : "to"] the floor with \a [tool]."),
+			SPAN_NOTICE("You start wrenching \the [src] [anchored ? "from" : "to"] the floor with \the [tool].")
+		)
+		if (!user.do_skilled(tool.toolspeed, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (!HAS_FLAGS(circuit_flags, IC_FLAG_ANCHORABLE))
+			USE_FEEDBACK_FAILURE("\The [src] can't be anchored.")
+			return TRUE
+		if (!isturf(loc))
+			USE_FEEDBACK_FAILURE("\The [src] needs to be on the floor to be anchored.")
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] wrenches \a [src] [anchored ? "from" : "to"] the floor with \a [tool]."),
+			SPAN_NOTICE("You wrenches \the [src] [anchored ? "from" : "to"] the floor with \the [tool].")
+		)
+		anchored = !anchored
+		return TRUE
 
-	for(var/obj/item/integrated_circuit/input/S in assembly_components)
-		S.attackby_react(I,user,user.a_intent)
-	..()
+	// Cable Coil - Repair damage
+	if (isCoil(tool))
+		if (!health_damaged())
+			USE_FEEDBACK_FAILURE("\The [src] doesn't need repair.")
+			return TRUE
+		var/obj/item/stack/cable_coil/cable = tool
+		if (!cable.can_use(5))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 5, "to repair \the [src].")
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts repairing some of \a [src]'s damage with [cable.get_vague_name(TRUE)]."),
+			SPAN_NOTICE("You start repairing some of \the [src]'s damage with [cable.get_exact_name(5)].")
+		)
+		if (!user.do_skilled(1 SECOND, SKILL_DEVICES, src) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (!health_damaged())
+			USE_FEEDBACK_FAILURE("\The [src] doesn't need repair.")
+			return TRUE
+		if (!cable.use(5))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 5, "to repair \the [src].")
+			return TRUE
+		restore_health(5)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] repairs some of \a [src]'s damage with [cable.get_vague_name(TRUE)]."),
+			SPAN_NOTICE("You repair some of \the [src]'s damage with [cable.get_exact_name(5)].")
+		)
+		return TRUE
+
+	// Everything else - Handle component reactions
+	var/result = FALSE
+	for (var/obj/item/integrated_circuit/component in assembly_components)
+		if (component.attackby_react(tool, user, user.a_intent))
+			result = TRUE
+	if (result)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/device/electronic_assembly/attack_self(mob/user)
 	interact(user)

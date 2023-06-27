@@ -46,22 +46,41 @@
 			to_chat(user, "There is no cell in \the [src].")
 	to_chat(user, "The internal capacitor currently has [round(currently_stored_power/max_stored_power * 100)]% charge.")
 
-/obj/item/device/personal_shield/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/cell))
-		if(!open)
-			to_chat(user, SPAN_WARNING("\The [src] needs to be open first."))
-		else if(power_cell)
-			to_chat(user, SPAN_WARNING("\The [src] already has a battery."))
-		else if(user.unEquip(W, src))
-			user.visible_message("\The [user] installs \the [W] into \the [src].", SPAN_NOTICE("You install \the [W] into \the [src]."))
-			power_cell = W
-			START_PROCESSING(SSobj, src)
-			update_icon()
-	if(isScrewdriver(W))
-		playsound(src, 'sound/items/Screwdriver.ogg', 15, 1)
-		user.visible_message("\The [user] [open ? "screws" : "unscrews"] the top of \the [src].", SPAN_NOTICE("You [open ? "screw" : "unscrew"] the top of \the [src]."))
-		open = !open
+
+/obj/item/device/personal_shield/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Power Cell - Install cell
+	if (istype(tool, /obj/item/cell))
+		if (!open)
+			USE_FEEDBACK_FAILURE("\The [src]'s panel needs to be open before you can install \the [tool].")
+			return TRUE
+		if (power_cell)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [power_cell] installed.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		power_cell = tool
+		START_PROCESSING(SSobj, src)
 		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \a [src]."),
+			SPAN_NOTICE("You install \the [tool] into \the [src].")
+		)
+		return TRUE
+
+	// Screwdriver - Toggle panel
+	if (isScrewdriver(tool))
+		open = !open
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [open ? "opens" : "closes"] \a [src]'s panel with \a [tool]."),
+			SPAN_NOTICE("You [open ? "open" : "close"] \the [src]'s panel with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/device/personal_shield/attack_self(mob/living/user)
 	if (open && power_cell)

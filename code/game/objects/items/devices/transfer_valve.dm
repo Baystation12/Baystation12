@@ -20,71 +20,79 @@
 /obj/item/device/transfer_valve/IsAssemblyHolder()
 	return TRUE
 
-/obj/item/device/transfer_valve/attackby(obj/item/item, mob/user)
-	var/turf/location = get_turf(src) // For admin logs
-	if(istype(item, /obj/item/tank))
 
-		var/T1_weight = 0
-		var/T2_weight = 0
-		if(tank_one && tank_two)
-			to_chat(user, SPAN_WARNING("There are already two tanks attached, remove one first."))
-			return
-
-		if(!user.unEquip(item, src))
-			return
-		if(!tank_one)
-			tank_one = item
-		else
-			tank_two = item
-			message_admins("[key_name_admin(user)] attached both tanks to a transfer valve. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
-			log_game("[key_name_admin(user)] attached both tanks to a transfer valve.")
-		to_chat(user, SPAN_NOTICE("You attach the tank to the transfer valve."))
-
-		T1_weight = tank_one.w_class
-		if(tank_two)
-			T2_weight = tank_two.w_class
-
-		src.w_class = max(initial(src.w_class),T1_weight,T2_weight) //gets w_class of biggest object, because you shouldn't be able to just shove tanks in and have them be tiny.
-
-		update_icon()
-
-		SSnano.update_uis(src) // update all UIs attached to src
-//TODO: Have this take an assemblyholder
-	else if(isassembly(item))
-		var/obj/item/device/assembly/A = item
-		if(armed)
-			to_chat(user, SPAN_NOTICE("The device is armed."))
-			return
-		if(attached_device)
-			to_chat(user, SPAN_WARNING("There is already an device attached to the valve, remove it first."))
-			return
-		if(!user.unEquip(item, src))
-			return
-		attached_device = A
-		to_chat(user, SPAN_NOTICE("You attach the [item] to the valve controls and secure it."))
-		A.holder = src
-		A.toggle_secure()	//this calls update_icon(), which calls update_icon() on the holder (i.e. the bomb).
-
-		GLOB.bombers += "[key_name(user)] attached a [item] to a transfer valve."
-		message_admins("[key_name_admin(user)] attached a [item] to a transfer valve. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
-		log_game("[key_name_admin(user)] attached a [item] to a transfer valve.")
+/obj/item/device/transfer_valve/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Assembly - Attach device
+	if (isassembly(tool))
+		if (armed)
+			USE_FEEDBACK_FAILURE("\The [src] is armed and cannot be modified.")
+			return TRUE
+		if (attached_device)
+			USE_FEEDBACK_FAILURE("\The [src] already has \a [attached_device] attached.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		attached_device = tool
+		attached_device.holder = src
+		attached_device.toggle_secure()
 		attacher = user
-		SSnano.update_uis(src) // update all UIs attached to src
+		SSnano.update_uis(src)
+		GLOB.bombers += "[key_name(user)] attach \a [tool] to a transfer valve."
+		log_and_message_admins("[key_name_admin(user)] attached \a [tool] to a transfer valve.", user, get_turf(src))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] attaches \a [tool] to \a [src]."),
+			SPAN_NOTICE("You attach \the [tool] to \the [src].")
+		)
+		return TRUE
 
-	else if(isScrewdriver(item))
-		if (tank_one && tank_two && attached_device)
-			visible_message(
-				SPAN_NOTICE("\The [user] [panel_open ? "closes" : "opens"] \the [src]'s control panel!"),
-				SPAN_NOTICE("You pry \the [src]'s control panel [panel_open ? "closed" : "open"].")
-			)
+	// Multitool, Wirecutters - Open wire panel
+	if (isMultitool(tool) || isWirecutter(tool))
+		if (!armed)
+			USE_FEEDBACK_FAILURE("\The [src] isn't armed.")
+			return TRUE
+		if (!panel_open)
+			USE_FEEDBACK_FAILURE("\The [src]'s panel is closed.")
+			return TRUE
+		wires.Interact(user)
+		return TRUE
 
-			playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
-			panel_open= !panel_open
+	// Screwdriver - Toggle control panel
+	if (isScrewdriver(tool))
+		if (!tank_one || !tank_two || !attached_device)
+			USE_FEEDBACK_FAILURE("\The [src] isn't assembled.")
+			return TRUE
+		panel_open = !panel_open
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [panel_open ? "opens" : "closes"] \a [src]'s control panel with \a [tool]."),
+			SPAN_NOTICE("You [panel_open ? "open" : "close"] \the [src]'s control panel with \the [tool].")
+		)
+		return TRUE
 
-	else if((isWirecutter(item) || isMultitool(item)) && panel_open && armed)
-		return wires.Interact(user)
+	// Tank - Attach tank
+	if (istype(tool, /obj/item/tank))
+		if (tank_one && tank_two)
+			USE_FEEDBACK_FAILURE("\The [src] already has two tanks attached.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
+		if (!tank_one)
+			tank_one = tool
+		else
+			tank_two = tool
+			log_and_message_admins("[key_name_admin(user)] attached both tanks to a transfer valve.", user, get_turf(src))
+		w_class = max(initial(w_class), tank_one.w_class, tank_two?.w_class)
+		update_icon()
+		SSnano.update_uis(src)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] attaches \a [tool] to \a [src]."),
+			SPAN_NOTICE("You attach \the [tool] to \the [src].")
+		)
+		return TRUE
 
-	return
+	return ..()
 
 
 /obj/item/device/transfer_valve/HasProximity(atom/movable/AM as mob|obj)

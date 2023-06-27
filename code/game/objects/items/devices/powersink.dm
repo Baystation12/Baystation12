@@ -64,30 +64,37 @@
 		STOP_PROCESSING_POWER_OBJECT(src)
 	. = ..()
 
-/obj/item/device/powersink/attackby(obj/item/I, mob/user)
-	if(isScrewdriver(I))
-		if(mode == DISCONNECTED)
-			var/turf/T = loc
-			if(isturf(T) && !!T.is_plating())
-				attached = locate() in T
-				if(!attached)
-					to_chat(user, SPAN_WARNING("This device must be placed over an exposed, powered cable node!"))
-				else
-					set_mode(CLAMPED_OFF)
-					user.visible_message( \
-						"[user] attaches \the [src] to the cable.", \
-						SPAN_NOTICE("You attach \the [src] to the cable."),
-						SPAN_CLASS("italics", "You hear some wires being connected to something."))
-			else
-				to_chat(user, SPAN_WARNING("This device must be placed over an exposed, powered cable node!"))
-		else
+
+/obj/item/device/powersink/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Screwdriver - Toggle connection to cable
+	if (isScrewdriver(tool))
+		if (mode != DISCONNECTED)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] detaches \a [src] from \the [attached] with \a [tool]."),
+				SPAN_NOTICE("You detach \the [src] from \the [attached] with \the [tool].")
+			)
 			set_mode(DISCONNECTED)
-			user.visible_message( \
-				"[user] detaches \the [src] from the cable.", \
-				SPAN_NOTICE("You detach \the [src] from the cable."),
-				SPAN_CLASS("italics", "You hear some wires being disconnected from something."))
-	else
-		return ..()
+			return TRUE
+		if (!isturf(loc))
+			USE_FEEDBACK_FAILURE("\The [src] must be placed on the ground before you can connect it.")
+			return TRUE
+		var/turf/turf = loc
+		if (!turf.is_plating())
+			USE_FEEDBACK_FAILURE("\The [turf]'s plating must be removed before you can connect \the [src].")
+			return TRUE
+		attached = locate() in turf
+		if (!attached)
+			USE_FEEDBACK_FAILURE("\The [src] must be placed over an exposed, powered cable node before it can be connected.")
+			return TRUE
+		set_mode(CLAMPED_OFF)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] attaches \a [src] to \the [attached] with \a [tool]."),
+			SPAN_NOTICE("You attach \the [src] to \the [attached] with \the [tool].")
+		)
+		return TRUE
+
+	return ..()
+
 
 /obj/item/device/powersink/attack_ai()
 	return

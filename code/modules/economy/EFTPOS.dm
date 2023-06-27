@@ -110,39 +110,66 @@
 	else
 		show_browser(user, null,"window=eftpos")
 
-/obj/item/device/eftpos/attackby(obj/item/O as obj, user as mob)
 
-	var/obj/item/card/id/I = O.GetIdCard()
+/obj/item/device/eftpos/use_tool(obj/item/tool, mob/user, list/click_params)
+	// ID - Pay via account
+	var/obj/item/card/id/id = tool.GetIdCard()
+	if (istype(id))
+		if (!linked_account)
+			visible_message(
+				SPAN_WARNING("\The [src] buzzes, \"Unable to connect to linked account.\""),
+				SPAN_WARNING("You hear a robotic voice buzz, \"Unable to connect to linked account.\"")
+			)
+			return TRUE
+		scan_card(id, tool)
+		return TRUE
 
-	if(I)
-		if(linked_account)
-			scan_card(I, O)
-		else
-			to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("Unable to connect to linked account.")]")
-	else if (istype(O, /obj/item/spacecash/ewallet))
-		var/obj/item/spacecash/ewallet/E = O
-		if (linked_account)
-			if(transaction_locked && !transaction_paid)
-				if(transaction_amount <= E.worth)
-					//transfer the money
-					var/purpose = (transaction_purpose ? transaction_purpose : "None supplied.")
-					purpose += ", paid by [E.owner_name]"
+	// Charge Card - Pay via charge
+	if (istype(tool, /obj/item/spacecash/ewallet))
+		if (!linked_account)
+			visible_message(
+				SPAN_WARNING("\The [src] buzzes, \"Unable to connect to linked account.\""),
+				SPAN_WARNING("You hear a robotic voice buzz, \"Unable to connect to linked account.\"")
+			)
+			return TRUE
+		if (!transaction_locked)
+			visible_message(
+				SPAN_WARNING("\The [src] buzzes, \"No transaction locked or configured.\""),
+				SPAN_WARNING("You hear a robotic voice buzz, \"No transaction locked or configured.\"")
+			)
+			return TRUE
+		if (transaction_paid)
+			visible_message(
+				SPAN_WARNING("\The [src] buzzes, \"Transaction is already paid.\""),
+				SPAN_WARNING("You hear a robotic voice buzz, \"Transaction is already paid.\"")
+			)
+			return TRUE
+		var/obj/item/spacecash/ewallet/charge_card = tool
+		if (charge_card.worth < transaction_amount)
+			visible_message(
+				SPAN_WARNING("\The [src] buzzes, \"Insufficient funds.\""),
+				SPAN_WARNING("You hear a robotic voice buzz, \"Insufficient funds.\"")
+			)
+			return TRUE
+		var/purpose = transaction_purpose ? transaction_purpose : "None supplied."
+		purpose += ", paid by [charge_card.owner_name]"
+		if (!linked_account.deposit(transaction_amount, purpose, machine_id))
+			visible_message(
+				SPAN_WARNING("\The [src] buzzes, \"Transaction error. Please try again.\""),
+				SPAN_WARNING("You hear a robotic voice buzz, \"Transaction error. Please try again.\"")
+			)
+			return TRUE
+		charge_card.worth -= transaction_amount
+		transaction_paid = TRUE
+		playsound(src, 'sound/machines/chime.ogg', 50, TRUE)
+		visible_message(
+			SPAN_NOTICE("\The [src] chimes, \"Transaction payment successful.\""),
+			SPAN_NOTICE("You hear a robotic voice chime, \"Transaction payment successful.\"")
+		)
+		return TRUE
 
-					if(linked_account.deposit(transaction_amount, purpose, machine_id))
-						E.worth -= transaction_amount
+	return ..()
 
-						playsound(src, 'sound/machines/chime.ogg', 50, 1)
-						src.visible_message("[icon2html(src, viewers(get_turf(src)))] \The [src] chimes.")
-						transaction_paid = 1
-					else
-						to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("Transaction failed! Please try again.")]")
-				else
-					to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("\The [O] doesn't have that much money!")]")
-		else
-			to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("EFTPOS is not connected to an account.")]")
-
-	else
-		..()
 
 /obj/item/device/eftpos/Topic(href, href_list)
 	if(href_list["choice"])

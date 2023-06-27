@@ -183,16 +183,23 @@ var/global/photo_count = 0
 	to_chat(user, "You switch the camera [on ? "on" : "off"].")
 	return
 
-/obj/item/device/camera/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/device/camera_film))
-		if(pictures_left)
-			to_chat(user, SPAN_NOTICE("[src] still has some film in it!"))
-			return
-		to_chat(user, SPAN_NOTICE("You insert [I] into [src]."))
-		qdel(I)
+
+/obj/item/device/camera/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Camera Film - Add film
+	if (istype(tool, /obj/item/device/camera_film))
+		if (pictures_left)
+			USE_FEEDBACK_FAILURE("\The [src] already has film in it.")
+			return TRUE
 		pictures_left = pictures_max
-		return
-	..()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adds \a [tool] to \a [src]."),
+			SPAN_NOTICE("You add \the [tool] to \the [src]."),
+			range = 2
+		)
+		qdel(tool)
+		return TRUE
+
+	return ..()
 
 
 /obj/item/device/camera/proc/get_mobs(turf/the_turf as turf)

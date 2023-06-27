@@ -61,71 +61,124 @@
 	qdel(O)
 	return TRUE
 
-/obj/item/device/integrated_circuit_printer/attackby(obj/item/O, mob/user)
-	if(istype(O, /obj/item/stack/material))
-		var/obj/item/stack/material/M = O
-		var/amt = M.amount
-		if(amt * SHEET_MATERIAL_AMOUNT + materials[M.material.name] > metal_max)
-			amt = -round(-(metal_max - materials[M.material.name]) / SHEET_MATERIAL_AMOUNT) //round up
-		if(M.use(amt))
-			materials[M.material.name] = min(metal_max, materials[M.material.name] + amt * SHEET_MATERIAL_AMOUNT)
-			to_chat(user, SPAN_WARNING("You insert [M.material.display_name] into \the [src]."))
-			if(user)
-				attack_self(user) // We're really bad at refreshing the UI, so this is the best we've got.
-	if(istype(O, /obj/item/disk/integrated_circuit/upgrade/advanced))
-		if(upgraded)
-			to_chat(user, SPAN_WARNING("[src] already has this upgrade. "))
+
+/obj/item/device/integrated_circuit_printer/use_tool(obj/item/tool, mob/user, list/click_params)
+	// Electronic Assembly - Recycle assembly
+	if (istype(tool, /obj/item/device/electronic_assembly))
+		var/obj/item/device/electronic_assembly/assembly = tool
+		if (assembly.battery)
+			USE_FEEDBACK_FAILURE("You must remove \the [tool]'s power cell before it can be recycled.")
 			return TRUE
-		to_chat(user, SPAN_NOTICE("You install [O] into [src]. "))
+		if (recycling)
+			USE_FEEDBACK_FAILURE("\The [src] is already busy recycling.")
+			return TRUE
+		if (!length(assembly.assembly_components))
+			recycle(assembly)
+			return TRUE
+		if (!assembly.opened)
+			USE_FEEDBACK_FAILURE("\The [tool]'s panel needs to be open before you can recycle the components.")
+			return TRUE
+		for (var/obj/item/integrated_circuit/component as anything in assembly.assembly_components)
+			if (!component.removable)
+				USE_FEEDBACK_FAILURE(SPAN_WARNING("\The [tool] has an unremovable [component.name] in the casing, preventing you from recycling it."))
+				return TRUE
+		playsound(src, 'sound/items/electronic_assembly_emptying.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts recycling \a [tool] with \a [src]."),
+			SPAN_NOTICE("You start recycling \the [tool] with \the [src].")
+		)
+		if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (assembly.battery)
+			USE_FEEDBACK_FAILURE("You must remove \the [tool]'s power cell before it can be recycled.")
+			return TRUE
+		if (recycling)
+			USE_FEEDBACK_FAILURE("\The [src] is already busy recycling.")
+			return TRUE
+		if (!length(assembly.assembly_components))
+			USE_FEEDBACK_FAILURE("\The [src] no longer has components to recycle.")
+			return TRUE
+		if (!assembly.opened)
+			USE_FEEDBACK_FAILURE("\The [tool]'s panel needs to be open before you can recycle the components.")
+			return TRUE
+		for (var/obj/item/integrated_circuit/component as anything in assembly.assembly_components)
+			if (!component.removable)
+				USE_FEEDBACK_FAILURE(SPAN_WARNING("\The [tool] has an unremovable [component.name] in the casing, preventing you from recycling it."))
+				return TRUE
+		recycling = TRUE
+		for (var/component as anything in assembly.assembly_components)
+			recycle(component, null, assembly)
+		recycling = FALSE
+		playsound(src, 'sound/items/electronic_assembly_empty.ogg', 50, TRUE)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] recycles \a [tool]'s components with \a [src]."),
+			SPAN_NOTICE("You recycle \the [tool]'s components with \the [src].")
+		)
+		return TRUE
+
+	// Integrated Circuit - Recycle circuit
+	if (istype(tool, /obj/item/integrated_circuit))
+		recycle(tool, user)
+		return TRUE
+
+	// Integrated Circuit Printer Advanced Upgrade Disk - Upgrade printer
+	if (istype(tool, /obj/item/disk/integrated_circuit/upgrade/advanced))
+		if (upgraded)
+			USE_FEEDBACK_FAILURE("\The [src] already has the advanced designs upgrade.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
 		upgraded = TRUE
-		if(user)
-			attack_self(user)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \a [src]."),
+			SPAN_NOTICE("You install \the [tool] into \the [src].")
+		)
+		attack_self(user)
+		qdel(tool)
 		return TRUE
 
-	if(istype(O, /obj/item/disk/integrated_circuit/upgrade/clone))
-		if(fast_clone)
-			to_chat(user, SPAN_WARNING("[src] already has this upgrade. "))
+	// Integrated Circuit Printer Clone Upgrade Disk - Upgrade printer
+	if (istype(tool, /obj/item/disk/integrated_circuit/upgrade/clone))
+		if (fast_clone)
+			USE_FEEDBACK_FAILURE("\The [src] already has the instant cloner upgrade.")
 			return TRUE
-		to_chat(user, SPAN_NOTICE("You install [O] into [src]. Circuit cloning will now be instant. "))
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
+			return TRUE
 		fast_clone = TRUE
-		if(user)
-			attack_self(user)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] installs \a [tool] into \a [src]."),
+			SPAN_NOTICE("You install \the [tool] into \the [src].")
+		)
+		attack_self(user)
+		qdel(tool)
 		return TRUE
 
-	if(istype(O, /obj/item/device/electronic_assembly))
-		var/obj/item/device/electronic_assembly/EA = O //microtransactions not included
-		if(EA.battery)
-			to_chat(user, SPAN_WARNING("Remove [EA]'s power cell first!"))
-			return
-		if(length(EA.assembly_components))
-			if(recycling)
-				return
-			if(!EA.opened)
-				to_chat(user, SPAN_WARNING("You can't reach [EA]'s components to remove them!"))
-				return
-			for(var/V in EA.assembly_components)
-				var/obj/item/integrated_circuit/IC = V
-				if(!IC.removable)
-					to_chat(user, SPAN_WARNING("[EA] has irremovable components in the casing, preventing you from emptying it."))
-					return
-			to_chat(user, SPAN_NOTICE("You begin recycling [EA]'s components..."))
-			playsound(src, 'sound/items/electronic_assembly_emptying.ogg', 50, TRUE)
-			if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || recycling) //short channel so you don't accidentally start emptying out a complex assembly
-				return
-			recycling = TRUE
-			for(var/V in EA.assembly_components)
-				recycle(V, null, EA)
-			to_chat(user, SPAN_NOTICE("You recycle all the components[length(EA.assembly_components) ? " you could " : " "]from [EA]!"))
-			playsound(src, 'sound/items/electronic_assembly_empty.ogg', 50, TRUE)
-			recycling = FALSE
+	// Material Stack - Add material
+	if (istype(tool, /obj/item/stack/material))
+		var/obj/item/stack/material/material_stack = tool
+		var/stack_amount = material_stack.amount
+		var/material_amount = stack_amount * SHEET_MATERIAL_AMOUNT
+		var/remaining_space = metal_max - materials[material_stack.get_material_name()]
+		// Limit inserted material to max or below
+		if (material_amount > remaining_space)
+			stack_amount = floor(remaining_space / SHEET_MATERIAL_AMOUNT)
+			material_amount = stack_amount * SHEET_MATERIAL_AMOUNT
+		// Insert material
+		if (!material_stack.use(stack_amount))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(material_stack, stack_amount, "to load \the [src].")
 			return TRUE
-		else
-			return recycle(EA, user)
-
-	if(istype(O, /obj/item/integrated_circuit))
-		return recycle(O, user)
+		materials[material_stack.get_material_name()] += material_amount
+		user.visible_message(
+			SPAN_NOTICE("\The [user] loads [material_stack.get_vague_name(stack_amount > 1)] into \a [src]."),
+			SPAN_NOTICE("You load [material_stack.get_exact_name(stack_amount)] into \the [src].")
+		)
+		attack_self(user)
+		return TRUE
 
 	return ..()
+
 
 /obj/item/device/integrated_circuit_printer/attack_self(mob/user)
 	interact(user)
