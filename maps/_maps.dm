@@ -25,6 +25,8 @@ GLOBAL_DATUM_INIT(using_map, /datum/map, new using_map_DATUM)
 #include "away_sites_testing\away_sites_testing_define.dm"
 #include "random_ruins\exoplanet_ruins\exoplanet_ruins.dm"
 // TMP: #include "random_ruins\exoplanet_ruins\crashed_pod\crashed_pod.dm"
+#include "random_ruins\exoplanet_ruins\transshipment\transshipment.dm"
+#include "random_ruins\exoplanet_ruins\crashed_pod\crashed_pod.dm"
 #include "random_ruins\exoplanet_ruins\datacapsule\datacapsule.dm"
 #include "random_ruins\exoplanet_ruins\deserted_lab\deserted_lab.dm"
 #include "random_ruins\exoplanet_ruins\drill_site\drill_site.dm"
