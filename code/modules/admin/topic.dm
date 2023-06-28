@@ -2159,6 +2159,39 @@
 				show_player_panel(M)
 			return
 
+	if (href_list["equip_loadout"])
+		var/mob/living/carbon/human/M = locate(href_list["equip_loadout"])
+		if (!ishuman(M))
+			return
+
+		var/response = alert("This will delete the player's current gear and spawn their loadout instead, are you sure?",,"Yes","No") == "Yes"
+
+		if (response)
+			var/datum/job/job = SSjobs.get_by_title(M.job)
+			var/list/spawn_in_storage
+
+			var/alt_title = null
+			if(M.mind)
+				alt_title = M.mind.role_alt_title
+
+			M.delete_inventory(TRUE)
+			job.equip(M, M.mind ? M.mind.role_alt_title : "", M.char_branch, M.char_rank)
+			spawn_in_storage = SSjobs.equip_custom_loadout(M, job)
+
+			var/mob/other_mob = job.handle_variant_join(M, alt_title)
+			if(other_mob)
+				job.post_equip_rank(other_mob, alt_title || rank)
+				return other_mob
+
+			if (spawn_in_storage)
+				for(var/datum/gear/G in spawn_in_storage)
+					G.spawn_in_storage_or_drop(M, M.client.prefs.Gear()[G.display_name])
+
+			log_and_message_admins("has equipped [M.ckey]/([M]) with their spawn loadout.")
+
+			show_player_panel(M)
+			return
+
 
 /mob/living/proc/can_centcom_reply()
 	return 0
