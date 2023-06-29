@@ -280,7 +280,7 @@
 	else if(prob(1))
 		src.visible_message(SPAN_NOTICE("\The [src] skitters."))
 
-	if(amount_grown > 0)
+	if (istype(loc, /turf) && amount_grown > 0)
 		amount_grown += rand(0,2)
 
 /obj/effect/decal/cleanable/spiderling_remains
