@@ -64,9 +64,6 @@ var/global/list/ticket_panels = list()
 
 	update_ticket_panels()
 
-	for (var/datum/timedevent/T as anything in active_timers)
-		deltimer(T.id)
-
 	return 1
 
 /datum/ticket/proc/take(datum/client_lite/assigned_admin)

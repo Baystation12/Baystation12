@@ -168,26 +168,4 @@ if(Datum.is_processing) {\
 * SStimer
 ****/
 
-/// Create a hash from the timer's configuration and don't run it if one already exists.
-#define TIMER_UNIQUE FLAG(0)
-
-/// For timers with TIMER_UNIQUE, do not include the timer's delay as part of its uniquenes.
-#define TIMER_NO_HASH_WAIT FLAG(4)
-
-/// For timers with TIMER_UNIQUE, replace the old timer instead of discarding the new one.
-#define TIMER_OVERRIDE FLAG(1)
-
-/// Use real world time instead of server time. More expensive and should be reserved for client display like animations and sounds.
-#define TIMER_CLIENT_TIME FLAG(2)
-
-/// The call to addtimer() will return a timer ID which may be passed to deltimer() to stop it if it still exists.
-#define TIMER_STOPPABLE FLAG(3)
-
-/// Repeat the timer until it's deleted or the parent is destroyed.
-#define TIMER_LOOP FLAG(5)
-
-/// The default timer ID.
-#define TIMER_ID_NULL -1
-
-/// Automatically adding filename and line to the timer's arguments for debugging purposes.
-#define addtimer(args...) _addtimer(args, file = __FILE__, line = __LINE__)
+#define addtimer(args...) _addtimer(args, source ="[__FILE__]#[__LINE__]")
