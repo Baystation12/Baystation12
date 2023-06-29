@@ -637,6 +637,7 @@
 "abt" = (
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/beige/mono,
+/obj/machinery/reagent_temperature,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "abu" = (
@@ -650,7 +651,6 @@
 	pixel_y = 24
 	},
 /obj/structure/table/standard,
-/obj/machinery/reagent_temperature,
 /obj/effect/floor_decal/corner/beige/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
