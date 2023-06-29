@@ -737,6 +737,7 @@
 /obj/machinery/door/airlock/glass{
 	name = "Cockpit"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/exploration_shuttle/cockpit)
 "bz" = (
@@ -4025,6 +4026,7 @@
 	id_tag = "mine_warehouse";
 	name = "Storage Shutters"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/expedition/storage)
 "jt" = (
@@ -5242,6 +5244,7 @@
 	id_tag = "hanger_atmos_storage";
 	name = "Storage Shutters"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/atmos)
 "mb" = (
@@ -7672,6 +7675,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/atmos)
 "qR" = (
@@ -10041,6 +10045,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/cockpit)
 "wA" = (
@@ -10067,6 +10072,7 @@
 /area/maintenance/fifthdeck/aftport)
 "wE" = (
 /obj/machinery/door/airlock/hatch/maintenance,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/isolation)
 "wF" = (
@@ -10766,6 +10772,7 @@
 	icon_state = "1-2"
 	},
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/analysis)
 "yQ" = (
@@ -11248,6 +11255,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/hatch/maintenance,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/maint)
 "AZ" = (
@@ -11721,6 +11729,7 @@
 	icon_state = "1-2"
 	},
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/rnd)
 "CX" = (
@@ -11914,6 +11923,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell1)
 "Dz" = (
@@ -12076,6 +12086,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/equipment)
 "Ee" = (
@@ -12471,6 +12482,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell3)
 "Gc" = (
@@ -13045,6 +13057,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/equipment)
 "Ia" = (
@@ -14371,6 +14384,7 @@
 	name = "Research Checkpoint Shutters";
 	opacity = 0
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/control)
 "Np" = (
@@ -14594,6 +14608,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/custodial)
 "Og" = (
@@ -14689,6 +14704,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/isolation)
 "OG" = (
@@ -15312,6 +15328,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/hallwaya)
 "Rj" = (
@@ -15437,6 +15454,7 @@
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell2)
 "RN" = (
@@ -16032,6 +16050,7 @@
 /obj/machinery/door/airlock/research{
 	name = "Control Room"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/control)
 "Um" = (
@@ -16174,6 +16193,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/rd)
 "UO" = (

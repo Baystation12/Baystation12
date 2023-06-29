@@ -865,6 +865,7 @@
 /obj/machinery/door/airlock/glass/engineering{
 	name = "Server Room"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/tcommsat/chamber)
 "cV" = (
@@ -1667,6 +1668,7 @@
 	id_tag = "qm_warehouse2";
 	name = "Warehouse Shutters"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/storage/upper)
 "fB" = (
@@ -1710,6 +1712,7 @@
 /obj/machinery/door/airlock/highsecurity{
 	name = "Server Room"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/tcommsat/computer)
 "fK" = (
@@ -2360,6 +2363,7 @@
 	id_tag = "starboardaux_warehouse";
 	name = "Warehouse Shutters"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_grid,
 /area/storage/auxillary/starboard)
 "hT" = (
@@ -4088,6 +4092,7 @@
 /obj/machinery/door/airlock/civilian{
 	name = "Emergency Storage"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/fourthdeck/aft)
 "od" = (
@@ -4463,6 +4468,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 8
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/teleporter/fourthdeck)
 "pM" = (
@@ -6442,6 +6448,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/hangcheck)
 "vH" = (
@@ -8385,6 +8392,7 @@
 	id_tag = "portaux_warehouse";
 	name = "Warehouse Shutters"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_grid,
 /area/storage/auxillary/port)
 "CT" = (
@@ -9560,6 +9568,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fourthdeck/aft)
 "Hg" = (
@@ -13658,6 +13667,7 @@
 /obj/machinery/door/airlock/engineering{
 	name = "Engineering Hard Storage"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/hardstorage)
 "SZ" = (

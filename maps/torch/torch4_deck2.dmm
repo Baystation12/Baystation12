@@ -5533,6 +5533,7 @@
 	id_tag = "engstorage";
 	name = "Engineering Storage Shutters"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/storage)
 "mr" = (
@@ -7958,6 +7959,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/storage)
 "sK" = (
@@ -13590,6 +13592,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/assembly/robotics/surgery)
 "IM" = (
@@ -16612,6 +16615,11 @@
 	},
 /turf/simulated/open,
 /area/hallway/primary/seconddeck/center)
+"SG" = (
+/obj/machinery/door/airlock/maintenance,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/maintenance/seconddeck/forestarboard)
 "SH" = (
 /obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/item/device/radio/intercom{
@@ -30861,7 +30869,7 @@ bd
 bd
 QR
 bd
-GY
+SG
 Gs
 Wf
 Os

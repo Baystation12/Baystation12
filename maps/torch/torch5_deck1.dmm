@@ -1377,6 +1377,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/freezer,
 /area/medical/medicalhallway)
 "acJ" = (
@@ -3256,6 +3257,7 @@
 /obj/item/modular_computer/telescreen/preset/medical{
 	pixel_y = 32
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/staging)
 "afI" = (
@@ -9644,10 +9646,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/freezer,
 /area/security/brig)
-"aGY" = (
-/obj/machinery/door/airlock/hatch/maintenance,
-/turf/simulated/floor/tiled/steel_ridged,
-/area/hallway/primary/firstdeck/fore)
 "aGZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -13749,6 +13747,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/cell_1)
 "aVv" = (
@@ -13795,6 +13794,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/cell_4)
 "aVF" = (
@@ -21456,6 +21456,7 @@
 /area/crew_quarters/head/deck1)
 "ltt" = (
 /obj/machinery/door/unpowered/simple/plastic/open,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/deck1)
 "lvb" = (
@@ -24512,6 +24513,7 @@
 "pvb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /obj/machinery/smartfridge,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/rnd/xenobiology/xenoflora)
 "pwb" = (
@@ -26619,6 +26621,7 @@
 /obj/item/roller_bed,
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/structure/table/reinforced,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/staging)
 "rQb" = (
@@ -27777,6 +27780,7 @@
 /area/security/wing)
 "sYU" = (
 /obj/structure/curtain/open/shower,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/deck1)
 "sZb" = (
@@ -28119,6 +28123,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/cell_2)
 "tqb" = (
@@ -28139,6 +28144,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/cell_3)
 "trb" = (
@@ -28957,6 +28963,7 @@
 	name = "First Deck Teleporter Access Shutters"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/teleporter/firstdeck)
 "uXJ" = (
@@ -44043,7 +44050,7 @@ nHf
 aDP
 aEZ
 aGi
-aGY
+aph
 jTV
 aJG
 aKR

@@ -887,6 +887,7 @@
 	locked = 1;
 	name = "Old Mess"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/vacant/mess)
 "co" = (
@@ -1923,6 +1924,7 @@
 /area/crew_quarters/head)
 "eE" = (
 /obj/machinery/door/unpowered/simple/plastic/open,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "eF" = (
@@ -6593,6 +6595,7 @@
 /obj/machinery/door/window/brigdoor/eastleft{
 	name = "Bar"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/lino,
 /area/crew_quarters/bar)
 "pd" = (
@@ -9087,6 +9090,7 @@
 	name = "Bar Shutters"
 	},
 /obj/item/material/ashtray/glass,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/lino,
 /area/crew_quarters/bar)
 "vt" = (
@@ -10232,6 +10236,7 @@
 	name = "Third Deck Teleporter Access Shutters"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/teleporter/thirddeck)
 "yP" = (
@@ -10732,6 +10737,7 @@
 	dir = 4
 	},
 /obj/item/material/bell/glass,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "At" = (
@@ -17050,6 +17056,7 @@
 	id_tag = "kitchen";
 	name = "Kitchen Shutters"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "Qv" = (
@@ -18204,6 +18211,7 @@
 	id_tag = "kitchen";
 	name = "Kitchen Shutters"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "TI" = (
@@ -18792,6 +18800,7 @@
 	id_tag = "bar";
 	name = "Bar Shutters"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/lino,
 /area/crew_quarters/bar)
 "Vi" = (
