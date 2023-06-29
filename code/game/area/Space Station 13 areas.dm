@@ -16,7 +16,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area
 	/// Boolean. Whether or not the area has an active fire alarm. Do not modify directly; Use `./fire_alert()` and `./fire_reset()` instead.
-	var/fire = null
+	var/fire = FALSE
 	/// Integer (`0`, `1`, or `2`). Whether or not the area has an active atmosphere alarm and the level of the atmosphere alarm. Do not modify directly; Use `./atmosalert()` instead.
 	var/atmosalm = 0
 	/// Boolean. Whether or not the area is in 'party light' mode. Do not modify directly; Use `./partyalert()` or `./partyreset()` instead.
