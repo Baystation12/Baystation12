@@ -9,6 +9,7 @@
 	place_near_main = list(2, 4)
 	icon_state = "meteor4"
 	hide_from_reports = TRUE
+	sensor_visibility = 10
 	initial_generic_waypoints = list(
 		"nav_merc_start",
 		"nav_merc_1",

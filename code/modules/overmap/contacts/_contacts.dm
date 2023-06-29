@@ -26,7 +26,7 @@
 
 	images += marker
 
-	radar = image(loc = effect, icon = 'icons/obj/overmap.dmi', icon_state = "sensor_range")
+	radar = image(loc = effect, icon = 'icons/obj/overmap.dmi', icon_state = "sensor_range", pixel_x = effect.pixel_x, pixel_y = effect.pixel_y)
 	radar.tag = "radar"
 	radar.filters = filter(type="blur", size = 1)
 
@@ -41,10 +41,10 @@
 		shield_image.pixel_x = 8
 		marker.overlays += shield_image
 
-	radar.transform = null
-	radar.alpha = 255
+	if(range > 0)
+		radar.transform = null
+		radar.alpha = 255
 
-	if(range > 1)
 		images |= radar
 
 		var/matrix/M = matrix()

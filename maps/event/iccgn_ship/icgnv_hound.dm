@@ -12,6 +12,7 @@
 	desc = "Sensors readings are confused and inaccurate on this grid sector."
 	icon_state = "event"
 	hide_from_reports = TRUE
+	sensor_visibility = 10
 
 /obj/effect/overmap/visitable/ship/landable/icgnv_hound
 	name = "ICGNV Hound"

@@ -30,8 +30,8 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/burn_delay = 1 SECOND           // how often ship can do burns
 	var/fore_dir = NORTH                // what dir ship flies towards for purpose of moving stars effect procs
 
-	//List of ships known at roundstart - put types here.
-	var/base_sensor_visibility
+	/// How much it increases identification process each scan
+	var/base_sensor_visibility = 10
 
 	var/list/navigation_viewers // list of weakrefs to people viewing the overmap via this ship
 
@@ -49,7 +49,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	max_speed = round(max_speed, SHIP_MOVE_RESOLUTION)
 	SSshuttle.ships += src
 	START_PROCESSING(SSobj, src)
-	base_sensor_visibility = round((vessel_mass/SENSOR_COEFFICENT),1)
+	base_sensor_visibility = initial(base_sensor_visibility) + round(sqrt(vessel_mass/SENSOR_COEFFICENT),1)
 
 /obj/effect/overmap/visitable/ship/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -81,11 +81,13 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/get_scan_data(mob/user)
 	. = ..()
-	. += "<br>Mass: [vessel_mass] tons."
+	var/list/extra_data = list("Mass: [vessel_mass] tons.")
 	if(!is_still())
-		. += "<br>Heading: [get_heading_angle()], speed [get_speed() * 1000]"
+		extra_data += "Heading: [get_heading_angle()], speed [get_speed() * 1000]"
 	if(instant_contact)
-		. += "<br>It is broadcasting a distress signal."
+		extra_data += "<b>It is broadcasting a distress signal.</b>"
+	. += jointext(extra_data, "<br>")
+
 
 //Projected acceleration based on information from engines
 /obj/effect/overmap/visitable/ship/proc/get_acceleration()

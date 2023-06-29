@@ -45,7 +45,7 @@
 /obj/effect/overmap/visitable/ship/scavver_gantry
 	name = "Unknown Vessel"
 	desc = "Sensor array detects a medium-sized vessel of irregular shape. Vessel origin is unidentifiable."
-	vessel_mass = 1200
+	vessel_mass = 3600
 	fore_dir = NORTH
 	burn_delay = 2 SECONDS
 	hide_from_reports = TRUE

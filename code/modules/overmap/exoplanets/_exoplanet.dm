@@ -4,6 +4,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	name = "exoplanet"
 	icon_state = "globe"
 	sector_flags = OVERMAP_SECTOR_KNOWN
+	sensor_visibility = 60
 	var/area/planetary_area
 	var/list/seeds = list()
 	var/list/fauna_types = list()		// possible types of mobs to spawn
@@ -280,7 +281,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 
 /obj/effect/overmap/visitable/sector/exoplanet/get_scan_data(mob/user)
 	. = ..()
-	var/list/extra_data = list("<br>")
+	var/list/extra_data = list()
 	if (atmosphere)
 		if (user.skill_check(SKILL_SCIENCE, SKILL_TRAINED))
 			var/list/gases = list()
@@ -292,7 +293,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 			extra_data += "Atmosphere pressure [atmosphere.return_pressure()*inaccuracy] kPa, temperature [atmosphere.temperature*inaccuracy] K"
 		else if (user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
 			extra_data += "Atmosphere present"
-		extra_data += "<br>"
+		extra_data += ""
 
 	if (length(seeds) && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
 		extra_data += "Xenoflora detected"
