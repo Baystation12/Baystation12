@@ -266,13 +266,13 @@
 
 // Bandanas below
 /obj/item/clothing/mask/bandana
-	name = "black bandana"
-	desc = "A fine bandana with nanotech lining. Can be worn on the head or face."
+	name = "bandana"
+	desc = "A soft piece of cloth. Can be worn on the head or face."
 	flags_inv = HIDEFACE
 	slot_flags = SLOT_MASK|SLOT_HEAD
 	body_parts_covered = FACE
-	icon_state = "bandblack"
-	item_state = "bandblack"
+	icon_state = "bandana"
+	item_state = "bandana"
 	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL | ITEM_FLAG_WASHER_ALLOWED
 	w_class = ITEM_SIZE_SMALL
 
@@ -299,47 +299,37 @@
 	return ..()
 
 /obj/item/clothing/mask/bandana/red
-	name = "red bandana"
-	icon_state = "bandred"
-	item_state = "bandred"
+	color = COLOR_MAROON
 
 /obj/item/clothing/mask/bandana/blue
-	name = "blue bandana"
-	icon_state = "bandblue"
-	item_state = "bandblue"
+	color = COLOR_NAVY_BLUE
 
-/obj/item/clothing/mask/bandana/green
-	name = "green bandana"
-	icon_state = "bandgreen"
-	item_state = "bandgreen"
+/obj/item/clothing/mask/bandana/yellow
+	color = COLOR_YELLOW_GRAY
 
-/obj/item/clothing/mask/bandana/gold
-	name = "gold bandana"
-	icon_state = "bandgold"
-	item_state = "bandgold"
+/obj/item/clothing/mask/bandana/black
+	color = COLOR_GRAY20
 
-/obj/item/clothing/mask/bandana/orange
-	name = "orange bandana"
+/obj/item/clothing/mask/bandana/engi
+	name = "engineering bandana"
 	icon_state = "bandorange"
 	item_state = "bandorange"
-
-/obj/item/clothing/mask/bandana/purple
-	name = "purple bandana"
-	icon_state = "bandpurple"
-	item_state = "bandpurple"
+	desc = "A soft piece of cloth that can be worn on the head or face. This one is orange and yellow."
 
 /obj/item/clothing/mask/bandana/botany
 	name = "botany bandana"
 	icon_state = "bandbotany"
 	item_state = "bandbotany"
+	desc = "A soft piece of cloth that can be worn on the head or face. This one is green and blue."
 
 /obj/item/clothing/mask/bandana/camo
 	name = "camo bandana"
 	icon_state = "bandcamo"
 	item_state = "bandcamo"
+	desc = "A soft piece of cloth that can be worn on the head or face. This one is camo."
 
 /obj/item/clothing/mask/bandana/skull
 	name = "skull bandana"
-	desc = "A fine black bandana with nanotech lining and a skull emblem. Can be worn on the head or face."
 	icon_state = "bandskull"
 	item_state = "bandskull"
+	desc = "A soft piece of cloth that can be worn on the head or face. This one is black with a skull on it."

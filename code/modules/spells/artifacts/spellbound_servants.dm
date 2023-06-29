@@ -92,7 +92,7 @@
 	name = "Familiar"
 	desc = "A friend! Or are they a pet? They can transform into animals, and take some particular traits from said creatures."
 	spiel = "This form of yours is weak in comparison to your transformed form, but that certainly won't pose a problem, considering the fact that you have an alternative. Whatever it is you can turn into, use its powers wisely and serve your Master as well as possible!"
-	equipment = list(/obj/item/clothing/head/bandana/familiarband = slot_head,
+	equipment = list(/obj/item/clothing/head/familiarband = slot_head,
 					/obj/item/clothing/under/familiargarb = slot_w_uniform)
 
 /datum/spellbound_type/servant/familiar/modify_servant(list/equipment, mob/living/carbon/human/H)
