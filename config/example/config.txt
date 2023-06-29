@@ -221,15 +221,6 @@ GUEST_BAN
 ## Where your users can go to tell you they've changed
 # BANAPPEALS https://example.com
 
-## Defines world tick rate relative to 10/sec at 1 and 20/sec at 0.5. Use this OR fps, not both. Defaults to 0.333333
-# TICKLAG 0.333333
-
-## Defines world tick rate. Use this OR ticklag, not both. Defaults to 30.
-FPS 40
-
-## Whether the server will talk to other processes through socket_talk
-SOCKET_TALK 0
-
 ## Comment this out to disable automuting
 #AUTOMUTE_ON
 

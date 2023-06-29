@@ -114,8 +114,6 @@
 	/// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/static/continous_rounds = FALSE
 
-	var/static/fps = 40
-
 	var/static/list/resource_urls
 
 	/// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
@@ -683,10 +681,6 @@
 				kick_inactive = text2num(value)
 			if ("use_irc_bot")
 				use_irc_bot = TRUE
-			if ("fps")
-				fps = round(text2num(value))
-				if (fps <= 0)
-					fps = initial(fps)
 			if ("allow_antag_hud")
 				antag_hud_allowed = TRUE
 			if ("antag_hud_restricted")

@@ -71,7 +71,6 @@ var/global/datum/controller/master/Master = new
 		global.diary = file("data/logs/[time2text(world.timeofday, "YYYY/MM/DD", -world.timezone)].log")
 	if (!config)
 		config = new
-		world.fps = config.fps
 	total_run_times = list()
 	// Highlander-style: there can only be one! Kill off the old and replace it with the new.
 	var/list/_subsystems = list()
