@@ -992,6 +992,16 @@ window "mainwindow"
 		saved-params = "splitter"
 		right = "rpane"
 		is-vert = true
+	elem "tooltip"
+		type = BROWSER
+		pos = 0,0
+		size = 999x999
+		anchor1 = none
+		anchor2 = none
+		background-color = none
+		is-visible = false
+		saved-params = ""
+
 	elem "input"
 		type = INPUT
 		pos = 3,420
