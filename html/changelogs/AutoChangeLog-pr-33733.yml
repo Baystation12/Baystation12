@@ -1,0 +1,9 @@
+author: Karl Johansson
+delete-after: true
+changes:
+  - tweak: Buckshot accuracy is now calculated once per shot, rather than individually
+      for each pellet.
+  - tweak: Shotguns are generally more accurate at range (to account for accuracy
+      only being calculated once)
+  - bugfix: Fixes pump shotgun sprites inaccurately displaying the condition of the
+      shotgun
