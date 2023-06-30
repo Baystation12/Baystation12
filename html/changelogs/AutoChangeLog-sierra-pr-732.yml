@@ -1,6 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - rscadd: There's now colour select bandanas available using a new sprite. Replaces
-      the single-colour bandanas, but not the special ones.
-  - bugfix: The familiar's headband is no longer a bandana available in loadout.
