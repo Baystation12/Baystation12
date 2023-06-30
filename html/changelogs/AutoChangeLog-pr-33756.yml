@@ -1,0 +1,5 @@
+author: CrimsonShrike
+delete-after: true
+changes:
+  - tweak: Ipatch now uses new emissive system and will glow in dark when on.
+  - bugfix: Fixes mobs occluding all emissives, including their own
