@@ -1,7 +1,7 @@
 /datum/gear/trinket/scg_challenge_coin
 	display_name = "sol challenge coin selection"
 	description = "A selection of challenge coins for identification, collection or simply bragging rights"
-	path = /obj/item/material/coin/challenge/sol
+	path = /obj/item/material/coin/challenge
 	cost = 1
 
 
@@ -9,7 +9,7 @@
 	..()
 	var/list/options = list()
 	options["fleet"] = /obj/item/material/coin/challenge/sol/fleet
-	options["army"] = /obj/item/material/coin/challenge/sol/army
+	options["army"] = /obj/item/material/coin/challenge/scga/army
 	options["armsmen"] = /obj/item/material/coin/challenge/sol/armsmen
 	options["gaia conflict"] = /obj/item/material/coin/challenge/sol/gaia
 	options["observatory"] = /obj/item/material/coin/challenge/sol/observatory

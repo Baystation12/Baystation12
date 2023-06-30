@@ -20,8 +20,6 @@
 	boots += /obj/item/clothing/shoes/jackboots
 	boots += /obj/item/clothing/shoes/workboots
 	boots += /obj/item/clothing/shoes/dutyboots
-	boots += /obj/item/clothing/shoes/jungleboots
-	boots += /obj/item/clothing/shoes/desertboots
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(boots)
 
 /datum/gear/shoes/color

@@ -12,7 +12,7 @@
 "d" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/under/color/black,
-/obj/item/clothing/shoes/jungleboots,
+/obj/item/clothing/shoes/jackboots,
 /obj/item/clothing/mask/breath,
 /turf/simulated/floor/carpet/green,
 /area/template_noop)
