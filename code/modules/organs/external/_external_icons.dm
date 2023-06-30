@@ -8,12 +8,7 @@ var/global/list/limb_icon_cache = list()
 
 /obj/item/organ/external/proc/compile_icon()
 	overlays.Cut()
-	 // This is a kludge, only one icon has more than one generation of children though.
-	for(var/obj/item/organ/external/organ in contents)
-		if(organ.children && length(organ.children))
-			for(var/obj/item/organ/external/child in organ.children)
-				overlays += child.mob_overlays
-		overlays += organ.mob_overlays
+	update_icon()
 
 /obj/item/organ/external/proc/sync_colour_to_human(mob/living/carbon/human/human)
 	skin_tone = null
@@ -105,7 +100,7 @@ var/global/list/limb_icon_cache = list()
 	for(var/E in markings)
 		var/datum/sprite_accessory/marking/M = E
 		if (M.draw_target == MARKING_TARGET_SKIN)
-			. += "-[M.name][color]"
+			. += "-[M.name][markings[E]]"
 
 	if(body_hair && islist(h_col) && length(h_col) >= 3)
 		. += "[body_hair]-[icon_name]-[h_col[1]][h_col[2]][h_col[3]]"
@@ -119,7 +114,7 @@ var/global/list/limb_icon_cache = list()
 	return .
 
 /obj/item/organ/external/on_update_icon(regenerate = 0)
-
+	overlays.Cut()
 	mob_overlays = list()
 
 	var/husk_color_mod = rgb(96,88,80)

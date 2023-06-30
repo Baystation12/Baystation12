@@ -97,7 +97,7 @@
 /obj/item/organ/external/head/get_icon_key()
 	. = ..()
 
-	if(owner.makeup_style && !BP_IS_ROBOTIC(src) && (species && (species.appearance_flags & SPECIES_APPEARANCE_HAS_LIPS)))
+	if(owner?.makeup_style && !BP_IS_ROBOTIC(src) && (species && (species.appearance_flags & SPECIES_APPEARANCE_HAS_LIPS)))
 		. += "[owner.makeup_style]"
 	else
 		. += "nolips"
@@ -131,7 +131,7 @@
 
 /obj/item/organ/external/head/proc/get_hair_icon()
 	var/image/res = image(species.icon_template,"")
-	if(owner.facial_hair_style)
+	if(owner?.facial_hair_style)
 		var/datum/sprite_accessory/facial_hair_style = GLOB.facial_hair_styles_list[owner.facial_hair_style]
 		if(facial_hair_style)
 			if(!facial_hair_style.species_allowed || (species.get_bodytype(owner) in facial_hair_style.species_allowed))
@@ -141,7 +141,7 @@
 						facial_s.Blend(owner.facial_hair_color, facial_hair_style.blend)
 					res.overlays |= facial_s
 
-	if (owner.head_hair_style)
+	if (owner?.head_hair_style)
 		var/icon/HI
 		var/datum/sprite_accessory/hair/H = GLOB.hair_styles_list[owner.head_hair_style]
 		if ((owner.head?.flags_inv & BLOCKHEADHAIR) && !(H.flags & VERY_SHORT))
