@@ -6111,7 +6111,6 @@
 "FJ" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/access_button{
-	active_timers = "interior access button";
 	command = "cycle_exterior";
 	frequency = 1379;
 	master_tag = "oldlab_airlock";

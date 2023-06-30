@@ -1,7 +1,6 @@
 /datum
 	var/gc_destroyed //Time when this object was destroyed.
 	var/is_processing = FALSE
-	var/list/active_timers  //for SStimer
 
 	/// If this datum is pooled, the pool it belongs to.
 	var/singleton/instance_pool/instance_pool
@@ -18,12 +17,6 @@
 	SHOULD_NOT_SLEEP(TRUE)
 	tag = null
 	SSnano && SSnano.close_uis(src)
-	var/list/timers = active_timers
-	active_timers = null
-	for(var/datum/timedevent/timer as anything in timers)
-		if (timer.spent)
-			continue
-		qdel(timer)
 	if (extensions)
 		for (var/expansion_key in extensions)
 			var/list/extension = extensions[expansion_key]
