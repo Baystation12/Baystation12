@@ -755,6 +755,16 @@
 						no_damage = 0
 					health_images += E.get_damage_hud_image()
 
+				// Apply wound overlays
+				for(var/obj/item/organ/external/O in organs)
+					if(O.is_stump() || O.damage_state == "00")
+						continue
+					var/icon/doll_wounds = new /icon(species.get_damage_overlays(src), O.damage_state)
+					doll_wounds.Blend(new /icon(species.get_damage_mask(src), O.icon_name), ICON_MULTIPLY)
+					doll_wounds.Blend((BP_IS_ROBOTIC(O) ? SYNTH_BLOOD_COLOUR : O.species.get_blood_colour(src)), ICON_MULTIPLY)
+					health_images += doll_wounds
+					health_images += image(species.bandages_icon, "[O.icon_name][O.bandage_level()]")
+
 				// Apply a fire overlay if we're burning.
 				if(on_fire)
 					health_images += image('icons/mob/screen1_health.dmi',"burning")
