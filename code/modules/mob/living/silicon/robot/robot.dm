@@ -79,7 +79,6 @@
 	var/list/req_access = list(access_robotics)
 	var/ident = 0
 	var/modtype = "Default"
-	var/datum/effect/effect/system/ion_trail_follow/ion_trail = null
 	var/datum/effect/effect/system/spark_spread/spark_system //So they can initialize sparks whenever/N
 	var/lawupdate = TRUE //Cyborgs will sync their laws with their AI by default
 	var/lockcharge //If a robot is locked down

@@ -185,7 +185,7 @@
 	description = "Gaia is the sole planet in the Galilei system, serving as the DMZ between the SCG and the GCC. \
 	It is an agricultural world, though the recent Gaia Conflict has left the planet's surface scarred. The planet is divided into the \
 	Sol-Controlled <b>Gaian Administrative Area</b> and Independent-Backed <b>Protectorate of Gaia</b>, with the International City of New Venice remaining a neutral zone inside the DMZ. \
-	The planet's population remain divided even 10 years after the Gaian Conflict. While Gaia is divided \the current Mayor of New Venice serves as a vital mediator between both sides. \
+	The planet's population remain divided even 10 years after the Gaian Conflict. While Gaia is divided the current Mayor of New Venice serves as a vital mediator between both sides. \
 	<br><br> The Gaian People are tired of war, and are growing bitter to their present situation.  They suffered hard twenty years prior, and won't let themselves suffer again."
 	capital = "New Venice"
 	economic_power = 1.0

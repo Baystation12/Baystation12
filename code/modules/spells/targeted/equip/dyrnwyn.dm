@@ -24,7 +24,7 @@
 	var/obj/item/W = new new_type (null, material)
 	W.SetName("\improper Dyrnwyn")
 	W.damtype = DAMAGE_BURN
-	W.hitsound = 'sound/items/welder2.ogg'
+	W.hitsound = 'sound/items/Welder2.ogg'
 	W.slowdown_per_slot[slot_l_hand] = 0.25
 	W.slowdown_per_slot[slot_r_hand] = 0.25
 	return W

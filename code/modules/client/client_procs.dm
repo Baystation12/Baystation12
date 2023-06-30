@@ -394,7 +394,7 @@
 		'html/images/xynlogo.png',
 		'html/images/daislogo.png',
 		'html/images/eclogo.png',
-		'html/images/fleetlogo.png',
+		'html/images/FleetLogo.png',
 		'html/images/sfplogo.png',
 		'html/images/falogo.png'
 		)

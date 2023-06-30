@@ -151,7 +151,7 @@
 	unsuitable_atmos_damage = 15
 	var/corpse = /obj/effect/landmark/corpse/abolitionist
 	var/weapon = /obj/item/gun/energy/laser
-	projectilesound = 'sound/weapons/laser.ogg'
+	projectilesound = 'sound/weapons/Laser.ogg'
 	ranged = 1
 	projectiletype = /obj/item/projectile/beam
 	faction = "extremist abolitionists"

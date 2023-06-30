@@ -68,7 +68,7 @@
 		return
 	if (validate_target(target, user))
 		var/datum/beam/B = user.Beam(BeamTarget = T, icon_state = "n_beam", maxdistance = get_dist(user, T), beam_type = /obj/effect/ebeam)
-		user.visible_message(SPAN_NOTICE("\The [user] points \the [src] at \the target."))
+		user.visible_message(SPAN_NOTICE("\The [user] points \the [src] at \the [target]."))
 		playsound(src,'sound/effects/scanbeep.ogg',30,0)
 		if(do_after(user, 2 SECONDS, target, (DO_PUBLIC_UNIQUE & ~DO_USER_SAME_HAND) | DO_MOVE_CHECKS_TURFS))
 			QDEL_NULL(B)

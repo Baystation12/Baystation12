@@ -49,47 +49,47 @@ GLOBAL_LIST_INIT(terminal_fails, init_subtypes(/datum/terminal_skill_fail))
 	terminal.computer.visible_notification(message)
 	return list()
 
-/datum/terminal_skill_fail/operator
+/datum/terminal_skill_fail/antag
 	require_ntnet = TRUE
 	message = "Accessing network operator resources!"
 
-/datum/terminal_skill_fail/operator/can_run(mob/user, datum/terminal/terminal)
+/datum/terminal_skill_fail/antag/can_run(mob/user, datum/terminal/terminal)
 	if(!has_access(list(list(access_network, access_network_admin)), user.GetAccess()))
 		return
 	return ..()
 
-/datum/terminal_skill_fail/operator/access
+/datum/terminal_skill_fail/antag/access
 	message = "Attempting to brute force network admin credentials... unsuccesful. Attempt logged."
 
-/datum/terminal_skill_fail/operator/access/execute(datum/terminal/terminal)
+/datum/terminal_skill_fail/antag/access/execute(datum/terminal/terminal)
 	ntnet_global.add_log_with_ids_check("Unauthorised access attempt to primary keycode database.", terminal.computer.get_component(PART_NETWORK))
 	return ..()
 
-/datum/terminal_skill_fail/operator/dos
+/datum/terminal_skill_fail/antag/dos
 	message = "Sending content of dev/random to relay... Connection denied due to excess traffic."
 
-/datum/terminal_skill_fail/operator/dos/execute(datum/terminal/terminal)
+/datum/terminal_skill_fail/antag/dos/execute(datum/terminal/terminal)
 	var/obj/machinery/ntnet_relay/R = pick(ntnet_global.relays)
 	if (!istype(R))
 		return "Unable to locate Quantum Relay to attack."
 	ntnet_global.add_log_with_ids_check("Excess traffic flood targeting Quantum Relay ([R.uid]) detected from 1 device\s: [terminal.computer.get_network_tag()]")
 	return ..()
 
-/datum/terminal_skill_fail/operator/camera
+/datum/terminal_skill_fail/antag/camera
 	message = "Accessing raw camera feed... unsuccesful. Attempt logged."
 
-/datum/terminal_skill_fail/operator/camera/execute(datum/terminal/terminal)
+/datum/terminal_skill_fail/antag/camera/execute(datum/terminal/terminal)
 	var/network = pick(GLOB.using_map.station_networks)
 	if (!network)
 		return "Unable to locate camera network to access."
 	ntnet_global.add_log_with_ids_check("Unauthorised access detected to camera network [network].", terminal.computer.get_component(PART_NETWORK))
 	return ..()
 
-/datum/terminal_skill_fail/operator/email_logs
+/datum/terminal_skill_fail/antag/email_logs
 	weight = 2
 	message = "System log backup successful. Chosen method: email attachment. Recipients: all."
 
-/datum/terminal_skill_fail/operator/email_logs/execute(datum/terminal/terminal)
+/datum/terminal_skill_fail/antag/email_logs/execute(datum/terminal/terminal)
 	var/datum/computer_file/data/email_account/S = ntnet_global.find_email_by_name(EMAIL_SYSADMIN)
 	if(!istype(S))
 		return list()

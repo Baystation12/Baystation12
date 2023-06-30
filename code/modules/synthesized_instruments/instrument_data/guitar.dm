@@ -24,16 +24,16 @@
 /datum/instrument/guitar/clean_crisis
 	name = "Crisis Clean Guitar"
 	id = "ccleangt"
-	samples = list("36"='code/modules/synthesized_instruments/samples/guitar/crisis_clean/c2.ogg',
-				   "48"='code/modules/synthesized_instruments/samples/guitar/crisis_clean/c3.ogg',
-				   "60"='code/modules/synthesized_instruments/samples/guitar/crisis_clean/c4.ogg',
-				   "72"='code/modules/synthesized_instruments/samples/guitar/crisis_clean/c5.ogg')
+	samples = list("36"='code/modules/synthesized_instruments/samples/guitar/crisis_clean/C2.ogg',
+				   "48"='code/modules/synthesized_instruments/samples/guitar/crisis_clean/C3.ogg',
+				   "60"='code/modules/synthesized_instruments/samples/guitar/crisis_clean/C4.ogg',
+				   "72"='code/modules/synthesized_instruments/samples/guitar/crisis_clean/C5.ogg')
 
 
 /datum/instrument/guitar/muted_crisis
 	name = "Crisis Muted Guitar"
 	id = "cmutedgt"
-	samples = list("36"='code/modules/synthesized_instruments/samples/guitar/crisis_muted/c2.ogg',
-				   "48"='code/modules/synthesized_instruments/samples/guitar/crisis_muted/c3.ogg',
-				   "60"='code/modules/synthesized_instruments/samples/guitar/crisis_muted/c4.ogg',
-				   "72"='code/modules/synthesized_instruments/samples/guitar/crisis_muted/c5.ogg')
+	samples = list("36"='code/modules/synthesized_instruments/samples/guitar/crisis_muted/C2.ogg',
+				   "48"='code/modules/synthesized_instruments/samples/guitar/crisis_muted/C3.ogg',
+				   "60"='code/modules/synthesized_instruments/samples/guitar/crisis_muted/C4.ogg',
+				   "72"='code/modules/synthesized_instruments/samples/guitar/crisis_muted/C5.ogg')

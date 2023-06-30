@@ -130,14 +130,14 @@
 		to_chat(user, SPAN_WARNING("There is no tank in \the [src]."))
 		return
 	if(GET_FLAGS(stat, MACHINE_STAT_MAINT))
-		to_chat(user, SPAN_WARNING("Please close \the maintenance hatch first."))
+		to_chat(user, SPAN_WARNING("Please close the maintenance hatch first."))
 		return
 	if(!Adjacent(target))
 		to_chat(user, SPAN_WARNING("Please stay close to \the [src]."))
 		return
 	//when there is a breather:
 	if(breather && target != breather)
-		to_chat(user, SPAN_WARNING("\The pump is already in use."))
+		to_chat(user, SPAN_WARNING("The pump is already in use."))
 		return
 	//Checking if breather is still valid
 	if(target == breather && target.wear_mask != contained)
