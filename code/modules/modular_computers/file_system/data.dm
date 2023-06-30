@@ -47,7 +47,7 @@
 	anchored = TRUE
 	unacidable = TRUE
 	simulated = FALSE
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 	/// The name that the file will have once it's created.
 	var/file_name = "helloworld"
 	/// The contents of this file. Uses paper formatting.

@@ -237,7 +237,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	anchored = TRUE
 	unacidable = TRUE
 	simulated = FALSE
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 
 /obj/effect/voxartifactspawner/Initialize(mapload)
 	GLOB.vox_artifact_spawners += src

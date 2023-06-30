@@ -340,7 +340,7 @@
 	on_impact(A)
 
 	set_density(0)
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 
 	qdel(src)
 	return 1
@@ -457,7 +457,7 @@
 
 //"Tracing" projectile
 /obj/item/projectile/test //Used to see if you can hit them.
-	invisibility = 101 //Nope!  Can't see me!
+	invisibility = INVISIBILITY_ABSTRACT //Nope!  Can't see me!
 	yo = null
 	xo = null
 	var/result = 0 //To pass the message back to the gun.

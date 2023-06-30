@@ -5,7 +5,7 @@
 	anchored = TRUE
 	unacidable = TRUE
 	simulated = FALSE
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 	var/delete_me = 0
 
 /obj/effect/landmark/New()
@@ -83,7 +83,7 @@
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
 	anchored = TRUE
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 
 /obj/effect/landmark/start/New()
 	..()

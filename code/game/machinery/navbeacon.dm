@@ -25,7 +25,7 @@ var/global/list/navbeacons = list()
 	navbeacons += src
 
 /obj/machinery/navbeacon/hide(intact)
-	set_invisibility(intact ? 101 : 0)
+	set_invisibility(intact ? INVISIBILITY_ABSTRACT : 0)
 	update_icon()
 
 /obj/machinery/navbeacon/on_update_icon()

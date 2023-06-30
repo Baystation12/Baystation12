@@ -6,7 +6,7 @@
 	anchored = TRUE
 	unacidable = TRUE
 	simulated = FALSE
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 
 	var/landmark_tag
 	//ID of the controller on the dock side
