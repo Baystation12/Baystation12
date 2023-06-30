@@ -966,13 +966,6 @@
 /area/crew_quarters
 	holomap_color = HOLOMAP_AREACOLOR_CREW
 
-/area/crew_quarters/bar
-	name = "\improper Bar"
-	icon_state = "bar"
-	sound_env = LARGE_SOFTFLOOR
-	req_access = list(access_kitchen)
-	lighting_tone = AREA_LIGHTING_WARM
-
 /area/crew_quarters/cryolocker
 	name = "\improper Cryogenic Storage Wardrobe"
 	icon_state = "locker"
