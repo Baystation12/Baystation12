@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - maptweak: Added a manual valve between the supply and waste pipes in the xenoflora
+      lab.
