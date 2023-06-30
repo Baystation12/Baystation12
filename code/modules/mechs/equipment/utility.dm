@@ -846,7 +846,7 @@
 	equipment_delay = 10
 
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 2, TECH_MAGNET = 2)
-	var/obj/machinery/camera/network/thunder/camera
+	var/obj/machinery/camera/network/helmet/camera
 	var/list/additional_networks //If you want to make a subtype for mercs, ert etc... Write here the extra networks
 
 /obj/item/mech_equipment/camera/Destroy()
@@ -859,6 +859,7 @@
 	camera.c_tag = "null"
 	camera.set_status(FALSE)
 	camera.is_helmet_cam = TRUE //Can transmit locally regardless of network
+	camera.set_stat_immunity(MACHINE_STAT_NOPOWER) //Camera power comes from the mech, not the camera itself.
 
 /obj/item/mech_equipment/camera/installed(mob/living/exosuit/_owner)
 	. = ..()

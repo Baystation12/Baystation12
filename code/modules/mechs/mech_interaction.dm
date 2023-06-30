@@ -184,7 +184,7 @@
 	if(A == src)
 		setClickCooldown(5)
 		return attack_self(user)
-	else if(adj)
+	else if(adj && user.a_intent == I_HURT) //Prevents accidental slams.
 		setClickCooldown(arms ? arms.action_delay : 7) // You've already commited to applying fist, don't turn and back out now!
 		playsound(src.loc, legs.mech_step_sound, 60, 1)
 		src.visible_message(SPAN_DANGER("\The [src] steps back, preparing for a slam!"), blind_message = SPAN_DANGER("You hear the loud hissing of hydraulics!"))
@@ -194,6 +194,9 @@
 			if(istype(T))
 				do_attack_effect(T, "smash")
 			playsound(src.loc, arms.punch_sound, 50, 1)
+	else if(istype(A, /obj/structure/ladder))
+		var/obj/structure/ladder/L = A
+		L.climb(src) //Those are some real sturdy ladders.
 	return
 
 /mob/living/exosuit/proc/set_hardpoint(hardpoint_tag)
