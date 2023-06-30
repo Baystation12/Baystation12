@@ -1,20 +1,21 @@
 SUBSYSTEM_DEF(ping)
 	name = "Ping"
-	flags = SS_NO_INIT
-	runlevels = RUNLEVELS_ALL
-	wait = 30 SECONDS
+	flags = SS_NO_INIT | SS_BACKGROUND
+	wait = 15 SECONDS
 	var/static/list/datum/chatOutput/chats = list()
-	var/static/list/datum/chatOutput/queue = list()
+	var/static/saved_index = 1
+
+
+/datum/controller/subsystem/ping/UpdateStat(time)
+	if (PreventUpdateStat(time))
+		return ..()
+	..("Chats: [length(chats)]")
 
 
 /datum/controller/subsystem/ping/fire(resumed, no_mc_tick)
-	if (!resumed)
-		if (!length(chats))
-			return
-		queue = chats.Copy()
-	var/cut_until = 1
-	for (var/datum/chatOutput/chat as anything in chats)
-		++cut_until
+	var/datum/chatOutput/chat
+	for (var/index = saved_index to length(chats))
+		chat = chats[index]
 		if (QDELETED(chat))
 			continue
 		if (chat.loaded && !chat.broken)
@@ -22,6 +23,6 @@ SUBSYSTEM_DEF(ping)
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
-			queue.Cut(1, cut_until)
+			saved_index = index
 			return
-	queue.Cut()
+	saved_index = 1
