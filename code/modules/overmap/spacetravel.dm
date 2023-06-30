@@ -5,7 +5,7 @@ var/global/list/cached_space = list()
 
 /obj/effect/overmap/visitable/sector/temporary
 	name = "Deep Space"
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 
 /obj/effect/overmap/visitable/sector/temporary/Initialize(mapload, nx, ny, nz)
 	. = ..()

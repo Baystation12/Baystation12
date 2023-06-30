@@ -245,7 +245,7 @@
 	..()
 
 /obj/item/projectile/bullet/blank
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 	damage = 1
 	embed = FALSE
 
@@ -266,7 +266,7 @@
 
 /obj/item/projectile/bullet/pistol/cap
 	name = "cap"
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 	fire_sound = null
 	damage_type = DAMAGE_PAIN
 	damage_flags = 0

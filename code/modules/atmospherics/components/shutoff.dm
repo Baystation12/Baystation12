@@ -51,7 +51,7 @@
 
 /obj/machinery/atmospherics/valve/shutoff/hide(do_hide)
 	if(istype(loc, /turf/simulated))
-		set_invisibility(do_hide ? 101 : 0)
+		set_invisibility(do_hide ? INVISIBILITY_ABSTRACT : 0)
 	update_underlays()
 
 /obj/machinery/atmospherics/valve/shutoff/Process()

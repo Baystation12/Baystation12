@@ -254,7 +254,7 @@ var/global/list/narsie_list = list()
 				if(!(AM2.singuloCanEat()))
 					continue
 
-				if (101 == AM2.invisibility)
+				if (INVISIBILITY_ABSTRACT == AM2.invisibility)
 					continue
 
 				addtimer(new Callback(AM2, /atom/proc/singularity_pull, src, current_size), 0)

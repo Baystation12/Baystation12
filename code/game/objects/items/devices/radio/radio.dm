@@ -868,7 +868,7 @@
 	listening = 0
 
 /obj/item/device/radio/announcer
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 	listening = 0
 	canhear_range = 0
 	anchored = TRUE

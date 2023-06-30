@@ -6,7 +6,7 @@
 
 /obj/effect/manifest/Initialize()
 	. = ..()
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 
 /obj/effect/manifest/proc/manifest()
 	var/dat = "<B>Crew Manifest</B>:<BR>"

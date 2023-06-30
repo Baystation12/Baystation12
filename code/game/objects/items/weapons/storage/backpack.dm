@@ -471,7 +471,7 @@
 	..()
 
 /obj/item/storage/backpack/satchel/flat/hide(i)
-	set_invisibility(i ? 101 : 0)
+	set_invisibility(i ? INVISIBILITY_ABSTRACT : 0)
 	anchored = i ? TRUE : FALSE
 	alpha = i ? 128 : initial(alpha)
 

@@ -9,7 +9,7 @@
 	anchored = TRUE
 	layer = PROJECTILE_LAYER
 	density = FALSE
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 	var/strength = 0
 	var/ticks_recovering = 10
 
@@ -34,7 +34,7 @@
 	//if we take too much damage, drop out - the generator will bring us back up if we have enough power
 	ticks_recovering = min(ticks_recovering + 2, 10)
 	if(strength < 1)
-		set_invisibility(101)
+		set_invisibility(INVISIBILITY_ABSTRACT)
 		set_density(0)
 		ticks_recovering = 10
 		strength = 0
@@ -53,7 +53,7 @@
 		set_invisibility(0)
 		set_density(1)
 	else if(strength < 1)
-		set_invisibility(101)
+		set_invisibility(INVISIBILITY_ABSTRACT)
 		set_density(0)
 
 	if (density != old_density)

@@ -66,7 +66,7 @@
 // hide called by levelupdate if turf intact status changes
 // change visibility status and force update of icon
 /obj/structure/disposalconstruct/hide(intact)
-	set_invisibility((intact && level==ATOM_LEVEL_UNDER_TILE) ? 101: 0)	// hide if floor is intact
+	set_invisibility((intact && level==ATOM_LEVEL_UNDER_TILE) ? INVISIBILITY_ABSTRACT : 0)	// hide if floor is intact
 	update()
 
 /obj/structure/disposalconstruct/proc/flip()

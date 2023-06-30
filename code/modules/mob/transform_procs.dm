@@ -9,7 +9,7 @@
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	stunned = 1
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 	for(var/t in organs)
 		qdel(t)
 	var/atom/movable/overlay/animation = new /atom/movable/overlay(src)
@@ -58,7 +58,7 @@
 		drop_from_inventory(W)
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 	return ..()
 
 /mob/proc/AIize(move=1)
@@ -119,7 +119,7 @@
 	regenerate_icons()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 	for(var/t in organs)
 		qdel(t)
 
@@ -160,7 +160,7 @@
 	regenerate_icons()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 	for(var/t in organs)
 		qdel(t)
 
@@ -193,7 +193,7 @@
 	regenerate_icons()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 	for(var/t in organs)	//this really should not be necessary
 		qdel(t)
 
@@ -222,7 +222,7 @@
 	regenerate_icons()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
-	set_invisibility(101)
+	set_invisibility(INVISIBILITY_ABSTRACT)
 
 	for(var/t in organs)
 		qdel(t)

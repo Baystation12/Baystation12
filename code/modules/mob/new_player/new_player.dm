@@ -1,6 +1,6 @@
 /mob/new_player
 	universal_speak = TRUE
-	invisibility = 101
+	invisibility = INVISIBILITY_ABSTRACT
 	density = FALSE
 	stat = DEAD
 	movement_handlers = list()

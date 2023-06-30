@@ -98,7 +98,7 @@
 	if(length(ability_objects))
 		set_invisibility(0)
 	else
-		set_invisibility(101)
+		set_invisibility(INVISIBILITY_ABSTRACT)
 
 /obj/screen/movable/ability_master/proc/add_ability(name_given)
 	if(!name) return

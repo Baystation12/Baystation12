@@ -1063,7 +1063,7 @@
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(M)
 	M.icon = null
 	M.overlays.Cut()
-	M.set_invisibility(101)
+	M.set_invisibility(INVISIBILITY_ABSTRACT)
 	for(var/obj/item/W in M)
 		if(istype(W, /obj/item/implant)) //TODO: Carn. give implants a dropped() or something
 			qdel(W)
