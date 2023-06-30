@@ -13,7 +13,7 @@
 	mob_push_flags = ~HEAVY //trundle trundle
 	skillset = /datum/skillset/silicon/robot
 
-	blocks_emissive = EMISSIVE_BLOCK_UNIQUE
+	blocks_emissive = EMISSIVE_BLOCK_NONE
 
 	var/lights_on = FALSE
 	var/used_power_this_tick = 0
@@ -878,8 +878,12 @@
 			var/image/eye_overlay = eye_overlays[eye_icon_state]
 			if(!eye_overlay)
 				eye_overlay = image(icon, eye_icon_state)
-				eye_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-				eye_overlay.layer = EYE_GLOW_LAYER
+				var/mutable_appearance/A = emissive_appearance(icon, eye_icon_state)
+				A.render_target = "*I am testing stuff ok"
+				eye_overlay.filters += filter(type = "layer", render_source = "*I am testing stuff ok")
+				eye_overlay.overlays += A
+				//eye_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+				//eye_overlay.layer = EYE_GLOW_LAYER
 				eye_overlays[eye_icon_state] = eye_overlay
 				z_flags |= ZMM_MANGLE_PLANES
 			overlays += eye_overlay

@@ -9,6 +9,7 @@ var/global/list/tail_icon_cache = list() //key is [species.race_key][skin_color]
 
 GLOBAL_LIST_EMPTY(overlay_icon_cache)
 GLOBAL_LIST_EMPTY(species_icon_template_cache)
+GLOBAL_LIST_EMPTY(limb_overlays_cache)
 
 /proc/overlay_image(icon, icon_state, color, flags, plane, layer)
 	RETURN_TYPE(/image)
@@ -119,33 +120,34 @@ Please contact me on #coderbus IRC. ~Carn x
 */
 
 //Human Overlays Indexes/////////
-#define HO_MUTATIONS_LAYER  1
-#define HO_SKIN_LAYER       2
-#define HO_SURGERY_LAYER    3 //bs12 specific.
-#define HO_UNDERWEAR_LAYER  4
-#define HO_UNIFORM_LAYER    5
-#define HO_DAMAGE_LAYER     6
-#define HO_ID_LAYER         7
-#define HO_SHOES_LAYER      8
-#define HO_GLOVES_LAYER     9
-#define HO_BELT_LAYER       10
-#define HO_SUIT_LAYER       11
-#define HO_TAIL_LAYER       12 //bs12 specific. this hack is probably gonna come back to haunt me
-#define HO_GLASSES_LAYER    13
-#define HO_BELT_LAYER_ALT   14
-#define HO_SUIT_STORE_LAYER 15
-#define HO_BACK_LAYER       16
-#define HO_HAIR_LAYER       17 //TODO: make part of head layer?
-#define HO_GOGGLES_LAYER    18
-#define HO_EARS_LAYER       19
-#define HO_FACEMASK_LAYER   20
-#define HO_HEAD_LAYER       21
-#define HO_COLLAR_LAYER     22
-#define HO_HANDCUFF_LAYER   23
-#define HO_L_HAND_LAYER     24
-#define HO_R_HAND_LAYER     25
-#define HO_FIRE_LAYER       26 //If you're on fire
-#define TOTAL_LAYERS        26
+#define HO_BODY_LAYER       1
+#define HO_MUTATIONS_LAYER  2
+#define HO_SKIN_LAYER       3
+#define HO_SURGERY_LAYER    4 //bs12 specific.
+#define HO_UNDERWEAR_LAYER  5
+#define HO_UNIFORM_LAYER    6
+#define HO_DAMAGE_LAYER     7
+#define HO_ID_LAYER         8
+#define HO_SHOES_LAYER      9
+#define HO_GLOVES_LAYER     10
+#define HO_BELT_LAYER       11
+#define HO_SUIT_LAYER       12
+#define HO_TAIL_LAYER       13 //bs12 specific. this hack is probably gonna come back to haunt me
+#define HO_GLASSES_LAYER    14
+#define HO_BELT_LAYER_ALT   15
+#define HO_SUIT_STORE_LAYER 16
+#define HO_BACK_LAYER       17
+#define HO_HAIR_LAYER       18 //TODO: make part of head layer?
+#define HO_GOGGLES_LAYER    19
+#define HO_EARS_LAYER       20
+#define HO_FACEMASK_LAYER   21
+#define HO_HEAD_LAYER       22
+#define HO_COLLAR_LAYER     23
+#define HO_HANDCUFF_LAYER   24
+#define HO_L_HAND_LAYER     25
+#define HO_R_HAND_LAYER     26
+#define HO_FIRE_LAYER       27 //If you're on fire
+#define TOTAL_LAYERS        28
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -322,129 +324,46 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)
 		queue_icon_update()
 
-//BASE MOB SPRITE
+/mob/living/carbon/human
+	var/list/icon_render_keys = list()
+
 /mob/living/carbon/human/proc/update_body(update_icons=1)
-	var/husk_color_mod = rgb(96,88,80)
-	var/hulk_color_mod = rgb(48,224,40)
-
-	var/husk = (MUTATION_HUSK in src.mutations)
-	var/fat = (MUTATION_FAT in src.mutations)
-	var/hulk = (MUTATION_HULK in src.mutations)
-	var/skeleton = (MUTATION_SKELETON in src.mutations)
-
-	//CACHING: Generate an index key from visible bodyparts.
-	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
-
-	//Create a new, blank icon for our mob to use.
-	if(stand_icon)
-		qdel(stand_icon)
-	stand_icon = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi',"blank")
-
-	var/g = "male"
-	if(gender == FEMALE)
-		g = "female"
-
-	var/icon_key = "[species.get_race_key(src)][g][skin_tone][skin_color]"
-	if(makeup_style)
-		icon_key += "[makeup_style]"
-	else
-		icon_key += "nolips"
-	var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[species.vision_organ ? species.vision_organ : BP_EYES]
-	if(istype(eyes))
-		icon_key += "[rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3])]"
-	else
-		icon_key += "#000000"
+	//Update all limbs and visible organs one by one
+	var/list/needs_update = list()
+	var/limb_count_update = FALSE
+	var/list/missing_bodyparts = list()
 
 	for(var/organ_tag in species.has_limbs)
-		var/obj/item/organ/external/part = organs_by_name[organ_tag]
-		if(isnull(part) || part.is_stump())
-			icon_key += "0"
-			continue
-		for (var/E in part.markings)
-			var/datum/sprite_accessory/marking/M = E
-			var/color = part.markings[E]
-			icon_key += "[M.name][color]"
-		if(part)
-			icon_key += "[part.species.get_race_key(part.owner)]"
-			icon_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
-			icon_key += "[part.skin_tone]"
-			icon_key += "[part.base_skin]"
-			if(part.s_col && length(part.s_col) >= 3)
-				icon_key += "[rgb(part.s_col[1],part.s_col[2],part.s_col[3])]"
-				icon_key += "[part.s_col_blend]"
-			if(part.body_hair && part.h_col && length(part.h_col) >= 3)
-				icon_key += "[rgb(part.h_col[1],part.h_col[2],part.h_col[3])]"
-			else
-				icon_key += "#000000"
-			for(var/E in part.markings)
-				var/datum/sprite_accessory/marking/M = E
-				var/color = part.markings[E]
-				icon_key += "[M.name][color]"
-		if(BP_IS_ROBOTIC(part))
-			icon_key += "2[part.model ? "-[part.model]": ""]"
-		else if(part.status & ORGAN_DEAD)
-			icon_key += "3"
+		var/obj/item/organ/external/limb = organs_by_name[organ_tag]
+		if(!isnull(limb))
+			var/old_key = icon_render_keys?[organ_tag] //Checks the mob's icon render key list for the bodypart
+			var/new_key = json_encode(limb.get_icon_key()) //Generates a key for the current bodypart
+			icon_render_keys[organ_tag] = new_key
+
+			if(icon_render_keys[organ_tag] != old_key) //If the keys match, that means the limb doesn't need to be redrawn
+				needs_update += limb
 		else
-			icon_key += "1"
+			//Limb is missing?
+			missing_bodyparts += organ_tag
+			limb_count_update = TRUE
 
-	icon_key = "[icon_key][husk ? 1 : 0][fat ? 1 : 0][hulk ? 1 : 0][skeleton ? 1 : 0]"
+	for(var/missing_limb in missing_bodyparts)
+		icon_render_keys -= missing_limb
 
-	var/icon/base_icon
-	if(human_icon_cache[icon_key])
-		base_icon = human_icon_cache[icon_key]
-	else
-		//BEGIN CACHED ICON GENERATION.
-		var/obj/item/organ/external/chest = get_organ(BP_CHEST)
-		base_icon = chest.get_icon()
-
-		for(var/obj/item/organ/external/part in (organs-chest))
-			var/icon/temp = part.get_icon()
-			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
-			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
-			if(part.icon_position & (LEFT | RIGHT))
-				var/icon/temp2 = new('icons/mob/human.dmi',"blank")
-				temp2.Insert(new/icon(temp,dir=NORTH),dir=NORTH)
-				temp2.Insert(new/icon(temp,dir=SOUTH),dir=SOUTH)
-				if(!(part.icon_position & LEFT))
-					temp2.Insert(new/icon(temp,dir=EAST),dir=EAST)
-				if(!(part.icon_position & RIGHT))
-					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
-				base_icon.Blend(temp2, ICON_OVERLAY)
-				if(part.icon_position & LEFT)
-					temp2.Insert(new/icon(temp,dir=EAST),dir=EAST)
-				if(part.icon_position & RIGHT)
-					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
-				base_icon.Blend(temp2, ICON_UNDERLAY)
-			else if(part.icon_position & UNDER)
-				base_icon.Blend(temp, ICON_UNDERLAY)
+	if(length(needs_update) || limb_count_update)
+		//GENERATE NEW LIMBS
+		var/list/new_limbs = list()
+		for(var/obj/item/organ/external/limb in organs)
+			if(limb in needs_update)
+				var/list/limb_overlays = limb.get_overlays()
+				GLOB.limb_overlays_cache[icon_render_keys[limb.organ_tag]] = limb_overlays
+				new_limbs += limb_overlays
 			else
-				base_icon.Blend(temp, ICON_OVERLAY)
+				new_limbs += GLOB.limb_overlays_cache[icon_render_keys[limb.organ_tag]]
 
-		if(!skeleton)
-			if(husk)
-				base_icon.ColorTone(husk_color_mod)
-			else if(hulk)
-				var/list/tone = ReadRGB(hulk_color_mod)
-				base_icon.MapColors(rgb(tone[1],0,0),rgb(0,tone[2],0),rgb(0,0,tone[3]))
+		if(length(new_limbs))
+			overlays_standing[HO_BODY_LAYER] = new_limbs
 
-		//Handle husk overlay.
-		if(husk)
-			var/husk_icon = species.get_husk_icon(src)
-			if(husk_icon)
-				var/icon/mask = new(base_icon)
-				var/blood = species.get_blood_colour(src)
-				var/icon/husk_over = new(species.husk_icon,"")
-				mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
-				husk_over.Blend(mask, ICON_ADD)
-				husk_over.Blend(blood, ICON_MULTIPLY)
-				base_icon.Blend(husk_over, ICON_OVERLAY)
-
-		human_icon_cache[icon_key] = base_icon
-
-	//END CACHED ICON GENERATION.
-	stand_icon.Blend(base_icon,ICON_OVERLAY)
-
-	//tail
 	update_tail_showing(0)
 
 	if(update_icons)

@@ -94,8 +94,19 @@
 		if (burn_dam > 40)
 			disfigure(INJURY_TYPE_BURN)
 
-/obj/item/organ/external/head/on_update_icon()
+/obj/item/organ/external/head/get_icon_key()
+	. = ..()
 
+	if(owner.makeup_style && !BP_IS_ROBOTIC(src) && (species && (species.appearance_flags & SPECIES_APPEARANCE_HAS_LIPS)))
+		. += "[owner.makeup_style]"
+	else
+		. += "nolips"
+
+	var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
+	if(eyes)
+		. += "[rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3])]"
+
+/obj/item/organ/external/head/on_update_icon()
 	..()
 
 	if(owner)
@@ -103,21 +114,20 @@
 		if(draw_eyes)
 			var/icon/I = get_eyes()
 			if(I)
-				overlays |= I
-				mob_icon.Blend(I, ICON_OVERLAY)
+				var/mutable_appearance/eye_appearance = mutable_appearance(I, flags = DEFAULT_APPEARANCE_FLAGS)
+				mob_overlays |= eye_appearance
 
 			// Floating eyes or other effects.
 			var/image/eye_glow = get_eye_overlay()
 			if(eye_glow) overlays |= eye_glow
 
 		if(owner.makeup_style && !BP_IS_ROBOTIC(src) && (species && (species.appearance_flags & SPECIES_APPEARANCE_HAS_LIPS)))
-			var/icon/lip_icon = new/icon('icons/mob/human_races/species/human/lips.dmi', "lips_[owner.makeup_style]_s")
-			overlays |= lip_icon
-			mob_icon.Blend(lip_icon, ICON_OVERLAY)
+			var/mutable_appearance/lip_appearance = mutable_appearance('icons/mob/human_races/species/human/lips.dmi', "lips_[owner.makeup_style]_s",flags = DEFAULT_APPEARANCE_FLAGS)
+			mob_overlays |= lip_appearance
 
-		overlays |= get_hair_icon()
+	overlays = mob_overlays
 
-	return mob_icon
+	overlays |= get_hair_icon() //Hair is handled separately for mob icon so we do not add it to mob_overlays Maybe this should change sometime
 
 /obj/item/organ/external/head/proc/get_hair_icon()
 	var/image/res = image(species.icon_template,"")
@@ -154,6 +164,7 @@
 					ADD_SORTED(sorted_hair_markings, list(list(M.draw_order, I)), /proc/cmp_marking_order)
 			for (var/entry in sorted_hair_markings)
 				HI.Blend(entry[2], ICON_OVERLAY)
+			//TODO : Add emissive blocker here if hair should block it. Else, leave as is
 			res.overlays |= HI
 
 	var/list/sorted_head_markings = list()
@@ -189,7 +200,6 @@
 					0,0,0,1,
 					rgb[1] / 255, rgb[2] / 255, rgb[3] / 255, 0
 				)
-			icon_cache_key += "[M.name][color]"
 			ADD_SORTED(sorted_head_markings, list(list(M.draw_order, I)), /proc/cmp_marking_order)
 	for (var/entry in sorted_head_markings)
 		res.overlays |= entry[2]
