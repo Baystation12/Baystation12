@@ -1,6 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed some bluespace turfs not reverting after the BSD event runs.
-  - tweak: The BSD event now only runs for about 18 minutes.
-  - tweak: The BSD event should happen less often now (it's not THAT broken).

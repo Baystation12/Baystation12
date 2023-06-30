@@ -56,6 +56,21 @@
 		-->
 		<div class="commit sansserif">
 
+			<h2 class="date">30 June 2023</h2>
+			<h3 class="author">Karl Johansson updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Buckshot accuracy is now calculated once per shot, rather than individually for each pellet.</li>
+				<li class="tweak">Shotguns are generally more accurate at range (to account for accuracy only being calculated once)</li>
+				<li class="bugfix">Fixes pump shotgun sprites inaccurately displaying the condition of the shotgun</li>
+			</ul>
+			<h3 class="author">Mucker updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Spiderlings should no longer grow while not on a turf (no more surprise spiders-armies popping out of cocoons)</li>
+				<li class="bugfix">Fixed some bluespace turfs not reverting after the BSD event runs.</li>
+				<li class="tweak">The BSD event now only runs for about 18 minutes.</li>
+				<li class="tweak">The BSD event should happen less often now (it's not THAT broken).</li>
+			</ul>
+
 			<h2 class="date">27 June 2023</h2>
 			<h3 class="author">Jux updated:</h3>
 			<ul class="changes bgimages16">
@@ -640,37 +655,6 @@
 			<ul class="changes bgimages16">
 				<li class="rscadd">new sprites for telemetry designator, cargo drones, and cargo drone pads.</li>
 				<li class="rscadd">telemetry designators are now small items.</li>
-			</ul>
-
-			<h2 class="date">28 April 2023</h2>
-			<h3 class="author">Imienny updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Vox Raiders now have objective to retrieve "Apex Shards" spawning randomly on torch during Vox Raiders.</li>
-			</ul>
-			<h3 class="author">Jux updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds basic and engineering chest-rigs. They can be selected by TECHNICAL_ROLES, SECURITY_ROLES and MTs in loadout and the basic one can be found occasionally in maint. The engi one replaces the hazard vests in engineering lockers.</li>
-				<li class="tweak">The chemical heater is now a thermal regulator, and can both heat and cool. Science, you see.</li>
-				<li class="rscdel">Chemical coolers no longer exist.</li>
-			</ul>
-			<h3 class="author">PurplePineapple updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Specific magazines can be blacklisted from a gun using the banned_magazines variable.</li>
-				<li class="bugfix">The small military pistols (Bobcat, M19) now only take single stack 10mm as intended.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Make plaid skirts be selectable under "skirts, selection"</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Do after timer bars should now automatically appear over the user if the target item isn't on a turf, to help ensure visibility as applicable.</li>
-				<li class="rscadd">The following objects can now be moved onto tables by click+dragging them onto said table. You and the object _must_ be adjacent to the table for this to work: Cell chargers, Machine frames, Microwaves, Rechargers, Crates, Fax machines, Blenders, Drink dispensers, Beer kegs, Reagents heaters/coolers.</li>
-				<li class="bugfix">The supermatter core and air waste chambers no longer start with oxygen in them at round start.</li>
-				<li class="bugfix">Fixes the exploit that allows people to keep camera monitors connected to cameras even after they leave camera range.</li>
-				<li class="rscadd">Cameras that have been EMPed or are in areas with no power no longer function.</li>
-				<li class="tweak">Cameras now kick you out of their view in the camera app on the following additional events: EMPed, destroyed through damage, movement to a non-connected z-level.</li>
-				<li class="admin">The `Check Bans` button in the player panel now uses a cleaned up and better organized UI.</li>
 			</ul>
 		</div>
 

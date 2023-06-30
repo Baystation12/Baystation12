@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Spiderlings should no longer grow while not on a turf (no more surprise
-      spiders-armies popping out of cocoons)
