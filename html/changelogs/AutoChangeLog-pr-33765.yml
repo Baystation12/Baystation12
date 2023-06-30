@@ -1,4 +1,0 @@
-author: Karl Johansson
-delete-after: true
-changes:
-  - rscadd: Adds wound and bandage overlays to the health display on the HUD

@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Fixes fire alarms becoming stuck in alarm monitoring programs.
