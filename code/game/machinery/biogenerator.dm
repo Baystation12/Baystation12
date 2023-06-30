@@ -39,6 +39,7 @@
 			/obj/item/reagent_containers/glass/bottle/robustharvest = 120),
 		"Leather" = list(
 			/obj/item/storage/wallet = 100,
+			/obj/item/stack/material/leather = 100,
 			/obj/item/clothing/gloves/thick/botany = 250,
 			/obj/item/storage/belt/utility = 300,
 			/obj/item/storage/backpack/satchel = 400,
