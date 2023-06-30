@@ -51,17 +51,6 @@
 	slot_flags = SLOT_BELT
 	applies_material_colour = FALSE
 
-/obj/item/material/sword/replica/officersword/army
-	name = "army NCO's sword"
-	desc = "A polished sword issued to SCG Army NCOs."
-	icon_state = "armysword"
-
-/obj/item/material/sword/replica/officersword/armyofficer
-	name = "army officer's sword"
-	desc = "A curved sword issued to SCG Army officers."
-	icon_state = "armyofficersword"
-	item_state = "armyofficersword"
-
 /obj/item/material/sword/replica/officersword/pettyofficer
 	name = "chief petty officer's cutlass"
 	desc = "A polished cutlass issued to chief petty officers of the fleet."

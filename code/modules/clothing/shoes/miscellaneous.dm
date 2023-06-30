@@ -52,35 +52,6 @@
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/shoes/jungleboots
-	name = "jungle boots"
-	desc = "A pair of durable brown boots. Waterproofed for use planetside."
-	icon_state = "jungle"
-	force = 3
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_MINOR
-		)
-	siemens_coefficient = 0.7
-
-/obj/item/clothing/shoes/desertboots
-	name = "desert boots"
-	desc = "A pair of durable tan boots. Designed for use in hot climates."
-	icon_state = "desert"
-	force = 3
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_MINOR
-		)
-	siemens_coefficient = 0.7
 
 /obj/item/clothing/shoes/dutyboots
 	name = "duty boots"

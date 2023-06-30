@@ -2809,7 +2809,7 @@
 /area/map_template/hydrobase/station/dockport)
 "gx" = (
 /obj/item/clothing/under/overalls,
-/obj/item/clothing/shoes/desertboots,
+/obj/item/clothing/shoes/jackboots,
 /obj/structure/closet,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)

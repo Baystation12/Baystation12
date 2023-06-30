@@ -1,7 +1,7 @@
 /datum/gear/head/solberet
 	display_name = "SolGov beret selection"
 	description = "A beret denoting service in an organization within SolGov."
-	path = /obj/item/clothing/head/beret/solgov
+	path = /obj/item/clothing/head/beret
 	allowed_branches = SOLGOV_BRANCHES
 	flags = GEAR_HAS_NO_CUSTOMIZATION
 
@@ -14,7 +14,6 @@
 	berets["customs and trade beret"] = /obj/item/clothing/head/beret/solgov/customs
 	berets["government research beret"] = /obj/item/clothing/head/beret/solgov/research
 	berets["health service beret"] = /obj/item/clothing/head/beret/solgov/health
-	berets["diplomatic security beret"] = /obj/item/clothing/head/beret/solgov/diplomatic
 	berets["border security beret"] = /obj/item/clothing/head/beret/solgov/borderguard
 	gear_tweaks += new/datum/gear_tweak/path(berets)
 

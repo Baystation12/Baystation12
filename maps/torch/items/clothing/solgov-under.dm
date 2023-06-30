@@ -29,12 +29,6 @@
 	icon_state = "fleetpt"
 	worn_state = "fleetpt"
 
-/obj/item/clothing/under/solgov/pt/army
-	name = "army pt uniform"
-	desc = "Does NOT leave much to the imagination."
-	icon_state = "armypt"
-	worn_state = "armypt"
-
 
 //Utility
 
@@ -234,58 +228,6 @@
 	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/fleet)
 	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
-/obj/item/clothing/under/solgov/utility/army
-	name = "army fatigues"
-	desc = "The utility uniform of the SCG Army, made from durable material."
-	icon_state = "greenutility"
-	item_state = "jensensuit"
-	worn_state = "greenutility"
-
-/obj/item/clothing/under/solgov/utility/army/command
-	accessories = list(/obj/item/clothing/accessory/solgov/department/command/army)
-	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
-
-/obj/item/clothing/under/solgov/utility/army/engineering
-	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/army)
-	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
-
-/obj/item/clothing/under/solgov/utility/army/security
-	accessories = list(/obj/item/clothing/accessory/solgov/department/security/army)
-	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
-
-/obj/item/clothing/under/solgov/utility/army/medical
-	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/army)
-	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
-
-/obj/item/clothing/under/solgov/utility/army/medical/banded
-	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/army, /obj/item/clothing/accessory/armband/medblue)
-	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
-
-/obj/item/clothing/under/solgov/utility/army/supply
-	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/army)
-	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
-
-/obj/item/clothing/under/solgov/utility/army/service
-	accessories = list(/obj/item/clothing/accessory/solgov/department/service/army)
-	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
-
-/obj/item/clothing/under/solgov/utility/army/exploration
-	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/army)
-	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
-
-/obj/item/clothing/under/solgov/utility/army/urban
-	name = "urban fatigues"
-	desc = "An urban version of the SCG Army utility uniform, made from durable material."
-	icon_state = "greyutility"
-	item_state = "gy_suit"
-	worn_state = "greyutility"
-
-/obj/item/clothing/under/solgov/utility/army/tan
-	name = "tan fatigues"
-	desc = "A tan version of the SCG Army utility uniform, made from durable material."
-	icon_state = "tanutility"
-	item_state = "johnny"
-	worn_state = "tanutility"
 
 //Service
 
@@ -310,33 +252,6 @@
 	icon_state = "whiteservicefem"
 	worn_state = "whiteservicefem"
 
-/obj/item/clothing/under/solgov/service/army
-	name = "army service uniform"
-	desc = "The service uniform of the SCG Army. Slimming."
-	icon_state = "greenservice"
-	item_state = "johnny"
-	worn_state = "greenservice"
-	accessories = list(/obj/item/clothing/accessory/brown)
-
-/obj/item/clothing/under/solgov/service/army/skirt
-	name = "army service skirt"
-	desc = "The service uniform skirt of the SCG Army. Slimming."
-	icon_state = "greenservicefem"
-	worn_state = "greenservicefem"
-
-/obj/item/clothing/under/solgov/service/army/command
-	name = "marine officer's service uniform"
-	desc = "The service uniform of the SCG Army. Slimming and stylish."
-	icon_state = "greenservice_com"
-	item_state = "johnny"
-	worn_state = "greenservice_com"
-	accessories = list(/obj/item/clothing/accessory/brown)
-
-/obj/item/clothing/under/solgov/service/army/command/skirt
-	name = "marine officer's service skirt"
-	desc = "The service uniform skirt of the SCG Army. Slimming and stylish."
-	icon_state = "greenservicefem_com"
-	worn_state = "greenservicefem_com"
 
 //Dress
 /obj/item/clothing/under/solgov/mildress
@@ -346,29 +261,6 @@
 	worn_state = "greydress"
 	siemens_coefficient = 0.9
 
-/obj/item/clothing/under/solgov/mildress/army
-	name = "army dress uniform"
-	desc = "The dress uniform of the SCG Army, class given form."
-	icon_state = "blackdress"
-	worn_state = "blackdress"
-
-/obj/item/clothing/under/solgov/mildress/army/skirt
-	name = "army dress skirt"
-	desc = "A  feminine version of the SCG Army dress uniform, class given form."
-	icon_state = "blackdressfem"
-	worn_state = "blackdressfem"
-
-/obj/item/clothing/under/solgov/mildress/army/command
-	name = "army officer's dress uniform"
-	desc = "The dress uniform of the SCG Army, even classier in gold."
-	icon_state = "blackdress"
-	worn_state = "blackdress_com"
-
-/obj/item/clothing/under/solgov/mildress/army/command/skirt
-	name = "army officer's dress skirt"
-	desc = "A feminine version of the SCG Army dress uniform, even classier in gold."
-	icon_state = "blackdressfem"
-	worn_state = "blackdressfem_com"
 
 //dress
 

@@ -1,6 +1,7 @@
 #if !defined(using_map_DATUM)
 
 	#include "../../packs/factions/iccgn/_pack.dm"
+	#include "../../packs/factions/scga/_pack.dm"
 	#include "../../packs/factions/scgec/_pack.dm"
 	#include "../../packs/event_2022jul30/_pack.dm"
 	#include "../../packs/deepmaint/_pack.dm"
@@ -111,7 +112,6 @@
 	#include "job/outfits/security_outfits.dm"
 	#include "job/outfits/service_outfits.dm"
 	#include "job/outfits/supply_outfits.dm"
-	#include "job/outfits/unused_outfits.dm"
 
 	#include "language/human/euro.dm"
 	#include "language/human/misc/spacer.dm"

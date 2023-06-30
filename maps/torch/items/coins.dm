@@ -15,17 +15,6 @@
 	"}
 
 
-/obj/item/material/coin/challenge/sol/army
-	default_material = MATERIAL_BRONZE
-	name = "army challenge coin"
-	icon_state = "army"
-	desc = {"\
-		A challenge coin distributed by the SCG Army. On the \
-		front is the insignia of the Army, and on the back is the \
-		emblem of the SCG inscribed with various dates.\
-	"}
-
-
 /obj/item/material/coin/challenge/sol/armsmen
 	default_material = MATERIAL_BRONZE
 	name = "armsmen challenge coin"
