@@ -139,7 +139,7 @@
 /// Sets a fire alarm in the area, if one is not already active.
 /area/proc/fire_alert()
 	if(!fire)
-		fire = 1	//used for firedoor checks
+		fire = TRUE	//used for firedoor checks
 		update_icon()
 		mouse_opacity = 0
 		if(!all_doors)
@@ -155,7 +155,7 @@
 /// Clears an active fire alarm from the area.
 /area/proc/fire_reset()
 	if (fire)
-		fire = 0	//used for firedoor checks
+		fire = FALSE	//used for firedoor checks
 		update_icon()
 		mouse_opacity = 0
 		if(!all_doors)
