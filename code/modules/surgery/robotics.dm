@@ -415,7 +415,7 @@
 	if(!LAZYLEN(attached_organs))
 		to_chat(user, SPAN_WARNING("There are no appropriate internal components to decouple."))
 		return FALSE
-	var/organ_to_remove = input(user, "Which organ do you want to prepare for removal?") as null|anything in attached_organs
+	var/organ_to_remove = show_radial_menu(user, tool, attached_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
 	if(organ_to_remove)
 		return organ_to_remove
 
@@ -466,7 +466,7 @@
 			continue
 		candidates += organ
 	candidates = list_to_map(candidates, /proc/ltm_by_atom_name_numbered)
-	var/obj/item/organ/selected = input(user, "Which organ do you want to reattach?") as null | anything in candidates
+	var/obj/item/organ/selected = show_radial_menu(user, tool, candidates, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
 	if (!selected)
 		return FALSE
 	selected = candidates[selected]
