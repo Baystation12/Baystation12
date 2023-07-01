@@ -31,28 +31,6 @@
 	return 1
 
 
-/obj/item/device/assembly_holder/attach(obj/item/device/assembly/D, obj/item/device/assembly/D2, mob/user)
-	if((!D)||(!D2))
-		return 0
-	if((!istype(D))||(!istype(D2)))
-		return 0
-	if((D.secured)||(D2.secured))
-		return 0
-	if(user)
-		user.drop_from_inventory(D)
-		user.drop_from_inventory(D2)
-	D.holder = src
-	D2.holder = src
-	D.forceMove(src)
-	D2.forceMove(src)
-	a_left = D
-	a_right = D2
-	SetName("[D.name]-[D2.name] assembly")
-	update_icon()
-	usr.put_in_hands(src)
-	return 1
-
-
 /obj/item/device/assembly_holder/on_update_icon()
 	overlays.Cut()
 	if(a_left)
