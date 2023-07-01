@@ -411,7 +411,9 @@
 	for(var/organ in target.internal_organs_by_name)
 		var/obj/item/organ/I = target.internal_organs_by_name[organ]
 		if(I && !(I.status & ORGAN_CUT_AWAY) && !BP_IS_CRYSTAL(I) && I.parent_organ == target_zone)
-			LAZYADD(attached_organs, organ)
+			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
+			radial_button.name = "Detach \the [I.name]"
+			LAZYSET(attached_organs, I.organ_tag, radial_button)
 	if(!LAZYLEN(attached_organs))
 		to_chat(user, SPAN_WARNING("There are no appropriate internal components to decouple."))
 		return FALSE
@@ -464,12 +466,14 @@
 			continue
 		if (organ.organ_tag in target.internal_organs_by_name)
 			continue
-		candidates += organ
-	candidates = list_to_map(candidates, /proc/ltm_by_atom_name_numbered)
+		var/image/radial_button = image(icon = organ.icon, icon_state = organ.icon_state)
+		radial_button.name = "Reattach \the [organ.name]"
+		LAZYSET(candidates, organ, radial_button)
+	// candidates = list_to_map(candidates, /proc/ltm_by_atom_name_numbered)
 	var/obj/item/organ/selected = show_radial_menu(user, tool, candidates, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
 	if (!selected)
 		return FALSE
-	selected = candidates[selected]
+	// selected = candidates[selected]
 	if (istype(selected, /obj/item/organ/internal/augment))
 		var/obj/item/organ/internal/augment/augment = selected
 		if (~augment.augment_flags & AUGMENT_MECHANICAL)
