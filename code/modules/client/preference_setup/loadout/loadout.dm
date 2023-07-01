@@ -398,10 +398,10 @@ var/global/list/gear_datums = list()
 		augment.onRoundstart()
 		return
 	var/atom/container = subject.equip_to_storage(item)
-	if (container)
-		to_chat(subject, SPAN_NOTICE("Placing \the [item] in your [container.name]!"))
-	else if (subject.equip_to_appropriate_slot(item))
+	if (subject.equip_to_appropriate_slot(item))
 		to_chat(subject, SPAN_NOTICE("Placing \the [item] in your inventory!"))
+	else if (container)
+		to_chat(subject, SPAN_NOTICE("Placing \the [item] in your [container.name]!"))
 	else if (subject.put_in_hands(item))
 		to_chat(subject, SPAN_NOTICE("Placing \the [item] in your hands!"))
 	else
