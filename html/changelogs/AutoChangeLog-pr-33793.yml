@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Hailer message length limit reduce from 1,024 to 64.
