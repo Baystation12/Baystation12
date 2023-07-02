@@ -31,3 +31,7 @@
 	display_name = "tacticool turtleneck"
 	path = /obj/item/clothing/under/syndicate/tacticool
 	slot = slot_w_uniform
+
+/datum/gear/tactical/fake_ballistic
+	display_name = "Budget Ballistic Goggles"
+	path = /obj/item/clothing/glasses/ballistic/fake

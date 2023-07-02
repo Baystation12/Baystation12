@@ -93,6 +93,10 @@
 	client_color = list(0.1, 0.1, 0.1, 0.3, 0.3, 0.3, 0.3, 0.3, 0.7)
 	priority = 300
 
+/datum/client_color/nvg
+	client_color = list(0.2, 0.2, 0.2, 0.2, 0.5, 0.5, 0.2, 0.3, 0.5)
+	priority = 200
+
 //Disabilities, could be hooked to brain damage or chargen if so desired.
 /datum/client_color/deuteranopia
 	client_color = list(0.47,0.38,0.15, 0.54,0.31,0.15, 0,0.3,0.7)

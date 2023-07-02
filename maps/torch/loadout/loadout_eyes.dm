@@ -32,3 +32,8 @@
 
 
 /datum/gear/eyes/blindfold/allowed_branches = CIVILIAN_BRANCHES
+
+
+/datum/gear/tactical/fake_ballistic
+	allowed_roles = CASUAL_ROLES
+	allowed_branches = CIVILIAN_BRANCHES

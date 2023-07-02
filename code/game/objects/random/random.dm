@@ -841,7 +841,13 @@
 				/obj/item/clothing/glasses/hud/security/prot = 2,
 				/obj/item/clothing/glasses/hud/security/prot/sunglasses = 3,
 				/obj/item/clothing/glasses/hud/security/prot/aviators = 1,
-				/obj/item/clothing/glasses/tacgoggles = 1)
+				/obj/item/clothing/glasses/tacgoggles = 1,
+				/obj/item/clothing/glasses/ballistic = 3,
+				/obj/item/clothing/glasses/ballistic/prescription = 2,
+				/obj/item/clothing/glasses/ballistic/fake = 6,
+				/obj/item/clothing/glasses/ballistic/security = 1,
+				/obj/item/clothing/glasses/ballistic/engineer = 2,
+				/obj/item/clothing/glasses/ballistic/medic = 2)
 
 /obj/random/hat
 	name = "random headgear"
@@ -1049,6 +1055,9 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/clothing/suit/storage/vest/merc = 3,
 				/obj/item/clothing/suit/straight_jacket = 6,
 				/obj/item/clothing/head/helmet/merc = 3,
+				/obj/item/clothing/head/helmet/old_commonwealth = 1,
+				/obj/item/clothing/head/helmet/old_confederation = 1,
+				/obj/item/clothing/head/helmet/old_special_ops = 1,
 				/obj/item/stack/material/diamond/ten = 7,
 				/obj/item/stack/material/glass/boron_reinforced/ten = 7,
 				/obj/item/stack/material/marble/ten = 8,
@@ -1079,7 +1088,9 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/circular_saw = 7,
 				/obj/item/scalpel/basic = 7,
 				/obj/item/melee/baton/loaded = 9,
-				/obj/item/device/radio/headset/syndicate = 6)
+				/obj/item/device/radio/headset/syndicate = 6,
+				/obj/item/clothing/accessory/glassesmod/nvg = 1,
+				/obj/item/clothing/accessory/glassesmod/thermal = 1)
 
 /obj/random/voidhelmet
 	name = "Random Voidsuit Helmet"
