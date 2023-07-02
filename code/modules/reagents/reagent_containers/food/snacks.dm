@@ -1485,7 +1485,7 @@
 	if(istype(W))
 		if (W.loaded == 1)
 			to_chat(user, "You inject the DNA sample into the cube.")
-			CorpseExpand(W.src_dna,W.src_name,W.src_species,W.src_pronouns,W.src_faction)
+			CorpseExpand(W.src_dna,W.src_name,W.src_species,W.src_pronouns,W.src_faction,W.src_flavor)
 			W.loaded = FALSE
 			W.icon_state = "dnainjector0"
 			W.src_dna = null
@@ -1493,6 +1493,7 @@
 			W.src_faction = ""
 			W.src_name = ""
 			W.src_species = ""
+			W.src_flavor = ""
 		else
 			to_chat(user,"The cube doesn't so much as twitch without a DNA sample.")
 	return ..()
@@ -1502,7 +1503,7 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
 
-/obj/item/reagent_containers/food/snacks/corpse_cube/proc/CorpseExpand(source_DNA,source_name,source_species,source_pronouns, source_faction)
+/obj/item/reagent_containers/food/snacks/corpse_cube/proc/CorpseExpand(source_DNA,source_name,source_species,source_pronouns, source_faction, source_flavor)
 	if(!growing)
 		growing = TRUE
 		var/mob/living/carbon/human/H = new spawn_type
@@ -1515,6 +1516,7 @@
 		H.pronouns = source_pronouns
 		H.change_pronouns(source_pronouns)
 		H.change_species(source_species)
+		H.flavor_texts = source_flavor
 		src.visible_message(SPAN_WARNING("[src] transforms, the dummy body's features twisting and cracking as it imitates the provided blood!"))
 		H.dropInto(src.loc)
 		H.setBrainLoss(200)
