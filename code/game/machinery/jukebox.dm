@@ -11,6 +11,7 @@
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	pixel_x = -8
 	obj_flags = OBJ_FLAG_ANCHORABLE
+	layer = ABOVE_WINDOW_LAYER
 
 	var/jukebox/jukebox
 
@@ -66,3 +67,4 @@
 	icon = 'icons/obj/jukebox.dmi'
 	icon_state = "jukebox2"
 	pixel_x = 0
+	layer = STRUCTURE_LAYER
