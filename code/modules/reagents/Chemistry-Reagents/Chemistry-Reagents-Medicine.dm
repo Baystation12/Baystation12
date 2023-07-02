@@ -445,6 +445,7 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#561ec3"
+	metabolism = REM * 0.5
 	overdose = 10
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -462,7 +463,7 @@
 					// peridaxon only heals minor brain damage
 					if(I.damage >= I.min_bruised_damage)
 						continue
-				I.heal_damage(removed)
+				I.heal_damage(3 * removed)
 
 /datum/reagent/ryetalyn
 	name = "Ryetalyn"
@@ -554,7 +555,6 @@
 
 /datum/reagent/arithrazine/affect_blood(mob/living/carbon/M, removed)
 	M.radiation = max(M.radiation - 70 * removed, 0)
-	M.adjustToxLoss(-10 * removed)
 	if(prob(60))
 		M.take_organ_damage(4 * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
 
