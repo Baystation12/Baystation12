@@ -93,8 +93,34 @@
 
 /obj/item/rcd/attack_self(mob/user)
 	//Change the mode
-	work_id++
-	work_mode = next_in_list(work_mode, work_modes)
+	var/list/options = list(
+		"Airlocks" = mutable_appearance('icons/screen/radial.dmi', "airlock"),
+		"Floors & Walls" = mutable_appearance('icons/screen/radial.dmi', "wallfloor"),
+		"Wall Frames" = mutable_appearance('icons/screen/radial.dmi', "grillewindow"),
+		"Machine Frame" = mutable_appearance('icons/screen/radial.dmi', "machine"),
+		"Computer Frame" = mutable_appearance('icons/screen/radial.dmi', "computer_dir"),
+		"Deconstruction" = mutable_appearance('icons/screen/radial.dmi', "delete"),
+	)
+	var/choice = show_radial_menu(user, src, options, require_near = TRUE, radius = 42, tooltips = TRUE, check_locs = list(src))
+
+	if (!choice)
+		return
+
+
+	switch(choice)
+		if ("Airlocks")
+			work_mode = GET_SINGLETON(/singleton/hierarchy/rcd_mode/airlock)
+		if ("Floors & Walls")
+			work_mode = GET_SINGLETON(/singleton/hierarchy/rcd_mode/floor_and_walls)
+		if ("Wall Frames")
+			work_mode = GET_SINGLETON(/singleton/hierarchy/rcd_mode/wall_frame)
+		if ("Machine & Computer Frame")
+			work_mode = GET_SINGLETON(/singleton/hierarchy/rcd_mode/machine_frame)
+		if ("Deconstruction")
+			work_mode = GET_SINGLETON(/singleton/hierarchy/rcd_mode/deconstruction)
+
+		work_id = work_mode.work_id
+
 	to_chat(user, SPAN_NOTICE("Changed mode to '[work_mode]'"))
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 	if(prob(20)) src.spark_system.start()
