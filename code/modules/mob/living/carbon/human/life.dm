@@ -755,16 +755,6 @@
 						no_damage = 0
 					health_images += E.get_damage_hud_image()
 
-				// Apply wound overlays
-				for(var/obj/item/organ/external/O in organs)
-					if(O.is_stump() || O.damage_state == "00")
-						continue
-					var/icon/doll_wounds = new /icon(species.get_damage_overlays(src), O.damage_state)
-					doll_wounds.Blend(new /icon(species.get_damage_mask(src), O.icon_name), ICON_MULTIPLY)
-					doll_wounds.Blend((BP_IS_ROBOTIC(O) ? SYNTH_BLOOD_COLOUR : O.species.get_blood_colour(src)), ICON_MULTIPLY)
-					health_images += doll_wounds
-					health_images += image(species.bandages_icon, "[O.icon_name][O.bandage_level()]")
-
 				// Apply a fire overlay if we're burning.
 				if(on_fire)
 					health_images += image('icons/mob/screen1_health.dmi',"burning")
@@ -976,7 +966,12 @@
 			holder.icon_state = "flatline"
 		else
 			holder.icon_state = "[pulse()]"
-		hud_list[HEALTH_HUD] = holder
+			hud_list[HEALTH_HUD] = holder
+
+	if(hud_list[TRIAGE_HUD])
+		var/image/holder = hud_list[TRIAGE_HUD]
+		holder.icon_state = triage_tag
+		hud_list[TRIAGE_HUD] = holder
 
 	if (GET_BIT(hud_updateflag, LIFE_HUD) && hud_list[LIFE_HUD])
 		var/image/holder = hud_list[LIFE_HUD]
@@ -990,8 +985,7 @@
 		var/image/holder = hud_list[STATUS_HUD]
 		if(stat == DEAD || status_flags & FAKEDEATH)
 			holder.icon_state = "huddead"
-
-		else if(has_brain_worms())
+		if(has_brain_worms())
 			var/mob/living/simple_animal/borer/B = has_brain_worms()
 			if(B.controlling)
 				holder.icon_state = "hudbrainworm"
@@ -999,7 +993,7 @@
 				holder.icon_state = "hudhealthy"
 		else
 			holder.icon_state = "hudhealthy"
-
+			hud_list[STATUS_HUD] = holder
 		var/image/holder2 = hud_list[STATUS_HUD_OOC]
 		if(stat == DEAD)
 			holder2.icon_state = "huddead"
@@ -1007,9 +1001,8 @@
 			holder2.icon_state = "hudbrainworm"
 		else
 			holder2.icon_state = "hudhealthy"
+			hud_list[STATUS_HUD_OOC] = holder2
 
-		hud_list[STATUS_HUD] = holder
-		hud_list[STATUS_HUD_OOC] = holder2
 
 	if (GET_BIT(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
 		var/image/holder = hud_list[ID_HUD]

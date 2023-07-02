@@ -268,7 +268,7 @@
 					else if(!parsedembed.Find("multiple [embedded.name]"))
 						parsedembed.Remove(embedded.name)
 						parsedembed.Add("multiple "+embedded.name)
-				wound_flavor_text["[E.name]"] += "The [wound.desc] on [P.his] [E.name] has \a [english_list(parsedembed, and_text = " and a ", comma_text = ", a ")] sticking out of it!<br>"
+				wound_flavor_text["[E.name]"] += "The [wound.desc] on [P.his] [E.name] has \a [english_list(parsedembed, and_text = " and \a ", comma_text = ", \a ")] sticking out of it!<br>"
 	for(var/hidden in hidden_bleeders)
 		wound_flavor_text[hidden] = "[P.He] [P.has] blood soaking through [hidden] around [P.his] [english_list(hidden_bleeders[hidden])]!<br>"
 
@@ -327,7 +327,7 @@
 
 		msg += "[SPAN_CLASS("deptradio", "Physical status:")] <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
 		msg += "[SPAN_CLASS("deptradio", "Medical records:")] <a href='?src=\ref[src];medrecord=`'>\[View\]</a>\n"
-
+		msg += "[SPAN_CLASS("deptradio",  "Triage Tag:")] <a href='?src=\ref[src];triagetag=1'>\[[triage_tag]\]</a>\n"
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
 

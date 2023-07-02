@@ -157,6 +157,7 @@
 	#define HUD_BASE_LAYER               2
 	#define HUD_ITEM_LAYER               3
 	#define HUD_ABOVE_ITEM_LAYER         4
+	#define HUD_ABOVE_HUD_LAYER          5
 
 /// This plane masks out lighting, to create an "emissive" effect for e.g glowing screens in otherwise dark areas.
 #define EMISSIVE_PLANE 10

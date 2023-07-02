@@ -3,7 +3,7 @@
 	mob_push_flags = ~HEAVY
 	mob_swap_flags = ~HEAVY
 
-	blocks_emissive = EMISSIVE_BLOCK_NONE //Humans need to decide per bodypart if they block or not, therefore we ignore baseline functionality
+	blocks_emissive = EMISSIVE_BLOCK_UNIQUE
 
 	/// The style of head hair applied to this mob
 	var/head_hair_style = "Bald"
@@ -108,3 +108,5 @@
 	var/list/descriptors
 
 	var/last_smelt = 0
+
+	var/triage_tag = TRIAGE_NONE
