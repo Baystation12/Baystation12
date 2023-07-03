@@ -1,6 +1,0 @@
-author: Vex8tion
-delete-after: true
-changes:
-  - tweak: Removed arithrazine's ability to heal internal organs
-  - tweak: Peridaxon's metabolism rate is now halved, and it now heals for slightly
-      more per tick
