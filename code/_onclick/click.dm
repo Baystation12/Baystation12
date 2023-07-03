@@ -335,6 +335,11 @@
  * Returns boolean - Whether or not the action was handled.
  */
 /atom/proc/AltClick(mob/user)
+
+	if (ismob(src))
+		var/mob/M = src
+		M.get_radial_menu(user)
+
 	var/turf/T = get_turf(src)
 	if(T && user.TurfAdjacent(T))
 		if(user.listed_turf == T)

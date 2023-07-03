@@ -55,7 +55,9 @@
 	if(!istype(user))
 		return
 	if(user.client && user.client.inquisitive_ghost)
-		user.examinate(src)
+		if (ismob(src))
+			var/mob/M = src
+			M.get_radial_menu(user)
 	return
 
 

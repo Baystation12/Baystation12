@@ -1266,3 +1266,35 @@
 
 /mob/get_mass()
 	return mob_size
+
+/mob/proc/get_radial_menu(mob/user)
+
+	var/list/options = list(
+		"Examine" = mutable_appearance('icons/screen/radial.dmi', "radial_examine"),
+		"Point At" = mutable_appearance('icons/screen/radial.dmi', "radial_point"),
+	)
+
+	if (check_rights(R_MOD, FALSE, user.client))
+		var/image/radial_button = image(icon = 'icons/screen/radial.dmi', icon_state = "radial_slice")
+		radial_button.name = "Paralyze"
+		options["Paralyze"] = radial_button
+		radial_button.name = "Player Panel"
+		options["Player Panel"] = radial_button
+		radial_button.name = "View Variables"
+		options["View Variables"] = radial_button
+
+	var/choice = show_radial_menu(user, src, options, radius = 42, tooltips = TRUE)
+
+	if (choice)
+		var/datum/admins/holder = user.client.holder
+		switch(choice)
+			if ("Player Panel")
+				holder.show_player_panel(src)
+			if ("View Variables")
+				user.client.debug_variables(src)
+			if ("Paralyze")
+				holder.paralyze_mob(src)
+			if ("Examine")
+				user.examinate(src)
+			if ("Point At")
+				user.pointed(src)

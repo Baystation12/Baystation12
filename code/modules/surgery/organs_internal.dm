@@ -158,8 +158,7 @@
 		if(!LAZYLEN(removable_organs))
 			to_chat(user, SPAN_WARNING("You can't find any removable organs."))
 		else
-			var/obj/item/organ/organ_to_remove = removable_organs[1]
-			if(length(removable_organs) == 1)
+			if (length(removable_organs) == 1)
 				return removable_organs[1]
 			return show_radial_menu(user, tool, removable_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
 	return FALSE
