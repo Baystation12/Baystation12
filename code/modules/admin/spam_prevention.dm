@@ -3,7 +3,7 @@ GLOBAL_LIST_EMPTY(ckey_to_act_time)
 GLOBAL_LIST_EMPTY(ckey_punished_for_spam) // this round; to avoid redundant record-keeping.
 
 // Should be checked on all instant client verbs.
-/proc/user_acted(client/C)
+/proc/user_acted(client/C, admin_message = "was kicked due to possible spam abuse.", client_message = "Possible spam abuse detected; you are being kicked from the server.")
 	var/ckey = C && C.ckey
 	if(!ckey)
 		return FALSE
@@ -20,8 +20,10 @@ GLOBAL_LIST_EMPTY(ckey_punished_for_spam) // this round; to avoid redundant reco
 
 	// Punitive action
 	. = FALSE
-	log_and_message_admins("Kicking due to possible spam abuse", C)
-	to_chat(C, SPAN_DANGER("Possible spam abuse detected; you are being kicked from the server."))
+	if(admin_message)
+		log_and_message_admins(admin_message, C)
+	if(client_message)
+		to_chat(C, SPAN_DANGER(client_message))
 	if(GLOB.ckey_punished_for_spam[ckey])
 		qdel(C)
 		return

@@ -205,6 +205,10 @@
 
 #define COLOR_WEBHOOK_DEFAULT 0x8bbbd5
 
+// Colors for input/hotkey panel.
+#define COLOR_INPUT_DISABLED "#f0f0f0"
+#define COLOR_INPUT_ENABLED "#d3b5b5"
+
 #define COLOR_DARKMODE_BACKGROUND "#202020"
 #define COLOR_DARKMODE_DARKBACKGROUND "#171717"
 #define COLOR_DARKMODE_TEXT "#a4bad6"

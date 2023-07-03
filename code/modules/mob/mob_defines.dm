@@ -3,7 +3,7 @@
 	plane = DEFAULT_PLANE
 	layer = MOB_LAYER
 
-	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE | LONG_GLIDE
 	animate_movement = 2
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 
@@ -70,6 +70,9 @@
 	Changing this around would probably require a good look-over the pre-existing code.
 	*/
 	var/obj/screen/zone_sel/zone_sel = null
+
+	/// Cursor icon used when holding shift over things.
+	var/examine_cursor_icon = 'icons/effects/mouse_pointers/examine_pointer.dmi'
 
 	var/use_me = 1 //Allows all mobs to use the me verb by default, will have to manually specify they cannot
 	var/damageoverlaytemp = 0

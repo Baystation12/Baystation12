@@ -1,9 +1,10 @@
 /atom/movable
 	layer = OBJ_LAYER
 
-	glide_size = 4
+	glide_size = 8
 
 	animate_movement = SLIDE_STEPS
+	appearance_flags = TILE_BOUND | PIXEL_SCALE | LONG_GLIDE
 
 	var/waterproof = TRUE
 	var/movable_flags
@@ -391,6 +392,15 @@
 		var/turf/T = locate(new_x, new_y, new_z)
 		if(T)
 			forceMove(T)
+
+
+/**
+* A wrapper for setDir that should only be able to fail by living mobs.
+*
+* Called from [/atom/movable/proc/keyLoop], this exists to be overwritten by living mobs with a check to see if we're actually alive enough to change directions
+*/
+/atom/movable/proc/keybind_face_direction(direction)
+	return
 
 /atom/movable/proc/get_bullet_impact_effect_type()
 	return BULLET_IMPACT_NONE

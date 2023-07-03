@@ -49,6 +49,9 @@
 	..()
 
 /datum/preferences/proc/setup()
+	// give them default keybinds too
+	key_bindings = deepCopyList(global.hotkey_keybinding_list_by_key)
+
 	if(!length(GLOB.skills))
 		GET_SINGLETON(/singleton/hierarchy/skill)
 	player_setup = new(src)
