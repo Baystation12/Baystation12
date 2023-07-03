@@ -96,9 +96,11 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 		if ("analyzeClientData")
 			data = analyzeClientData(arglist(params))
 		if ("swaptodarkmode")
-			swaptodarkmode()
+			owner.prefs.dark_theme = TRUE
+			owner.update_client_theme()
 		if ("swaptolightmode")
-			swaptolightmode()
+			owner.prefs.dark_theme = FALSE
+			owner.update_client_theme()
 	if(data)
 		ehjax_send(data = data)
 
@@ -121,6 +123,15 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 	winset(owner, "output", "is-visible=false")
 	winset(owner, "browseroutput", "is-disabled=false;is-visible=true")
 
+/client/verb/ChatOutputCopyText()
+	set name = "Chat Output Copy Text"
+	set hidden = TRUE
+
+	if (chatOutput?.loaded)
+		chatOutput.copyText()
+
+/datum/chatOutput/proc/copyText()
+	send_output(owner, null, "browseroutput:copyText")
 
 /datum/chatOutput/proc/updatePing()
 	if (!owner)
@@ -274,15 +285,6 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 		to_chat_immediate(target, message, handle_whitespace, trailing_newline)
 		return
 	SSchat.queue(target, message, handle_whitespace, trailing_newline)
-
-
-/datum/chatOutput/proc/swaptolightmode() //Dark mode light mode stuff. Yell at KMC if this breaks! (See darkmode.dm for documentation)
-	owner.force_white_theme()
-
-
-/datum/chatOutput/proc/swaptodarkmode()
-	owner.force_dark_theme()
-
 
 #undef MAX_COOKIE_LENGTH
 #undef SPAM_TRIGGER_AUTOMUTE

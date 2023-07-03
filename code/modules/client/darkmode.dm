@@ -12,6 +12,12 @@ This then swaps the window theme automatically
 Thanks to spacemaniac and mcdonald for help with the JS side of this.
 */
 
+/client/proc/update_client_theme()
+	if (prefs.dark_theme)
+		force_dark_theme()
+	else
+		force_white_theme()
+
 /client/proc/force_white_theme() //There's no way round it. We're essentially changing the skin by hand. It's painful but it works, and is the way Lummox suggested.
 	//Main windows
 	winset(src, "infowindow", "background-color = [COLOR_DARKMODE_DARKBACKGROUND];background-color = none")
@@ -30,28 +36,26 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 	winset(src, "split", "background-color = [COLOR_DARKMODE_BACKGROUND];background-color = none")
 	winset(src, "mainvsplit", "background-color = [COLOR_DARKMODE_BACKGROUND];background-color = none")
 	//Buttons
-	winset(src, "textb", "background-color = #494949;background-color = none")
+	winset(src, "textb", "background-color = #494949;background-color = #ffffff")
 	winset(src, "textb", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
-	winset(src, "infob", "background-color = #494949;background-color = none")
+	winset(src, "infob", "background-color = #494949;background-color = #ffffff")
 	winset(src, "infob", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
-	winset(src, "linkrules", "background-color = #494949;background-color = none")
+	winset(src, "linkrules", "background-color = #494949;background-color = #ffffff")
 	winset(src, "linkrules", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
-	winset(src, "linklore", "background-color = #494949;background-color = none")
+	winset(src, "linklore", "background-color = #494949;background-color = #ffffff")
 	winset(src, "linklore", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
-	winset(src, "linkwiki", "background-color = #494949;background-color = none")
+	winset(src, "linkwiki", "background-color = #494949;background-color = #ffffff")
 	winset(src, "linkwiki", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
-	winset(src, "linkforum", "background-color = #494949;background-color = none")
+	winset(src, "linkforum", "background-color = #494949;background-color = #ffffff")
 	winset(src, "linkforum", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
-	winset(src, "linkdiscord", "background-color = #494949;background-color = none")
+	winset(src, "linkdiscord", "background-color = #494949;background-color = #ffffff")
 	winset(src, "linkdiscord", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
-	winset(src, "changelog", "background-color = #494949;background-color = none")
+	winset(src, "changelog", "background-color = #494949;background-color = #ffffff")
 	winset(src, "changelog", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
-	winset(src, "linksource", "background-color = #494949;background-color = none")
+	winset(src, "linksource", "background-color = #494949;background-color = #ffffff")
 	winset(src, "linksource", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
-	winset(src, "linkissue", "background-color = #494949;background-color = none")
+	winset(src, "linkissue", "background-color = #494949;background-color = #ffffff")
 	winset(src, "linkissue", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
-	winset(src, "hotkey_toggle", "background-color = #494949;background-color = none")
-	winset(src, "hotkey_toggle", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
 	//Status and verb tabs
 	winset(src, "output", "background-color = [COLOR_DARKMODE_BACKGROUND];background-color = none")
 	winset(src, "output", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
@@ -66,12 +70,15 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 	winset(src, "info", "prefix-color = [COLOR_DARKMODE_TEXT];prefix-color = #000000")
 	winset(src, "info", "suffix-color = [COLOR_DARKMODE_TEXT];suffix-color = #000000")
 	//Say, OOC, me Buttons etc.
-	winset(src, "saybutton", "background-color = [COLOR_DARKMODE_BACKGROUND];background-color = none")
+	winset(src, "saybutton", "background-color = [COLOR_DARKMODE_BACKGROUND];background-color = #ffffff")
 	winset(src, "saybutton", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
 	winset(src, "asset_cache_browser", "background-color = [COLOR_DARKMODE_BACKGROUND];background-color = none")
 	winset(src, "asset_cache_browser", "background-color = [COLOR_DARKMODE_BACKGROUND];background-color = none")
-	//winset(src, "input", "background-color = [COLOR_DARKMODE_BACKGROUND];background-color = none")
-	//winset(src, "input", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
+
+	update_hotkey_mode() // Updates input color and focus
+
+	winset(src, "hotkeytoggle", "background-color = #494949;background-color = #ffffff")
+	winset(src, "hotkeytoggle", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
 
 /client/proc/force_dark_theme() //Inversely, if theyre using white theme and want to swap to the superior dark theme, let's get WINSET() ing
 	//Main windows
@@ -91,28 +98,26 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 	winset(src, "split", "background-color = none;background-color = [COLOR_DARKMODE_BACKGROUND]")
 	winset(src, "mainvsplit", "background-color = none;background-color = [COLOR_DARKMODE_BACKGROUND]")
 	//Buttons
-	winset(src, "textb", "background-color = none;background-color = #494949")
+	winset(src, "textb", "background-color = #ffffff;background-color = #494949")
 	winset(src, "textb", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
-	winset(src, "infob", "background-color = none;background-color = #494949")
+	winset(src, "infob", "background-color = #ffffff;background-color = #494949")
 	winset(src, "infob", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
-	winset(src, "linkrules", "background-color = none;background-color = #494949")
+	winset(src, "linkrules", "background-color = #ffffff;background-color = #494949")
 	winset(src, "linkrules", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
-	winset(src, "linklore", "background-color = none;background-color = #494949")
+	winset(src, "linklore", "background-color = #ffffff;background-color = #494949")
 	winset(src, "linklore", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
-	winset(src, "linkwiki", "background-color = none;background-color = #494949")
+	winset(src, "linkwiki", "background-color = #ffffff;background-color = #494949")
 	winset(src, "linkwiki", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
-	winset(src, "linkforum", "background-color = none;background-color = #494949")
+	winset(src, "linkforum", "background-color = #ffffff;background-color = #494949")
 	winset(src, "linkforum", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
-	winset(src, "linkdiscord", "background-color = none;background-color = #494949")
+	winset(src, "linkdiscord", "background-color = #ffffff;background-color = #494949")
 	winset(src, "linkdiscord", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
-	winset(src, "changelog", "background-color = none;background-color = #494949")
+	winset(src, "changelog", "background-color = #ffffff;background-color = #494949")
 	winset(src, "changelog", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
-	winset(src, "linksource", "background-color = none;background-color = #494949")
+	winset(src, "linksource", "background-color = #ffffff;background-color = #494949")
 	winset(src, "linksource", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
-	winset(src, "linkissue", "background-color = none;background-color = #494949")
+	winset(src, "linkissue", "background-color = #ffffff;background-color = #494949")
 	winset(src, "linkissue", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
-	winset(src, "hotkey_toggle", "background-color = none;background-color = #494949")
-	winset(src, "hotkey_toggle", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
 	//Status and verb tabs
 	winset(src, "output", "background-color = none;background-color = [COLOR_DARKMODE_DARKBACKGROUND]")
 	winset(src, "output", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
@@ -127,10 +132,12 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 	winset(src, "info", "prefix-color = #000000;prefix-color = [COLOR_DARKMODE_TEXT]")
 	winset(src, "info", "suffix-color = #000000;suffix-color = [COLOR_DARKMODE_TEXT]")
 	//Say, OOC, me Buttons etc.
-	winset(src, "saybutton", "background-color = none;background-color = #494949")
+	winset(src, "saybutton", "background-color = #ffffff;background-color = #494949")
 	winset(src, "saybutton", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
 	winset(src, "asset_cache_browser", "background-color = none;background-color = [COLOR_DARKMODE_BACKGROUND]")
 	winset(src, "asset_cache_browser", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
 
-	//winset(src, "input", "background-color = none;background-color = [COLOR_DARKMODE_BACKGROUND]")
-	//winset(src, "input", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
+	update_hotkey_mode() // Updates input color and focus
+
+	winset(src, "hotkeytoggle", "background-color = #ffffff;background-color = #494949")
+	winset(src, "hotkeytoggle", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")

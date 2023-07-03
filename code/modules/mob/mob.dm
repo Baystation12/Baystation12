@@ -480,7 +480,7 @@
 	if (GLOB.changelog_hash && prefs.lastchangelog != GLOB.changelog_hash)
 		prefs.lastchangelog = GLOB.changelog_hash
 		SScharacter_setup.queue_preferences_save(prefs)
-		winset(src, "rpane.changelog", "background-color=none;font-style=;")
+		winset(src, "rpane.changelog", "font-style=;")
 
 /mob/verb/cancel_camera()
 	set name = "Cancel Camera View"
@@ -1218,6 +1218,19 @@
 	if(ear_deaf)
 		return 0
 	return 1
+
+/// Update the mouse pointer of the attached client in this mob.
+/mob/proc/update_mouse_pointer()
+	if(!client)
+		return
+
+	client.mouse_pointer_icon = initial(client.mouse_pointer_icon)
+
+	if(examine_cursor_icon && client.keys_held["Shift"])
+		client.mouse_pointer_icon = examine_cursor_icon
+
+/mob/keybind_face_direction(direction)
+	facedir(direction)
 
 /mob/proc/check_emissive_equipment()
 	var/old_zflags = z_flags

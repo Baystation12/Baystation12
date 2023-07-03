@@ -3,6 +3,7 @@
 
 	// see login.dm
 	if(my_client)
+		winset(my_client, "mapwindow.statusbar", "is-visible=true")
 		GLOB.using_map.hide_titlescreen(my_client)
 		my_client = null
 
