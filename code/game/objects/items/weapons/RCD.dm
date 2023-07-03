@@ -119,7 +119,7 @@
 		if ("Deconstruction")
 			work_mode = GET_SINGLETON(/singleton/hierarchy/rcd_mode/deconstruction)
 
-		work_id = work_mode.work_id
+	work_id++
 
 	to_chat(user, SPAN_NOTICE("Changed mode to '[work_mode]'"))
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
