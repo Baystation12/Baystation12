@@ -176,12 +176,12 @@ Please contact me on #coderbus IRC. ~Carn x
 		var/entry = visible_overlays[i]
 		if(istype(entry, /image))
 			var/image/overlay = entry
-			if(i != HO_DAMAGE_LAYER)
+			if(i != HO_DAMAGE_LAYER && i != HO_BODY_LAYER)
 				overlay.transform = get_lying_offset(overlay)
 			overlays_to_apply += overlay
 		else if(istype(entry, /list))
 			for(var/image/overlay in entry)
-				if(i != HO_DAMAGE_LAYER)
+				if(i != HO_DAMAGE_LAYER && i != HO_BODY_LAYER)
 					overlay.transform = get_lying_offset(overlay)
 				overlays_to_apply += overlay
 
