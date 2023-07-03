@@ -81,6 +81,6 @@
 	return list(
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
-		/obj/item/clothing/mask/gas/half,
+		/obj/item/clothing/mask/gas,
 		/obj/item/tank/oxygen_emergency_extended
 	)
