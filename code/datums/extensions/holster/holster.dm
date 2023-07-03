@@ -15,12 +15,6 @@
 	src.sound_out = sound_out || src.sound_out
 	src.can_holster = can_holster
 
-	atom_holder.verbs += /atom/proc/holster_verb
-
-/datum/extension/holster/Destroy()
-	. = ..()
-	atom_holder.verbs -= /atom/proc/holster_verb
-
 /datum/extension/holster/proc/can_holster(obj/item/I)
 	if(can_holster)
 		if(is_type_in_list(I,can_holster))
@@ -117,15 +111,49 @@
  * Verb to handle quick-holstering an item in the mob's active hand, or retrieving an item from this atom's holster
  * extension.
  */
-/atom/proc/holster_verb(holster_name in get_holsters())
+/mob/living/verb/holster_verb()
 	set name = "Holster"
 	set category = "Object"
-	set src in usr
 
 	if(usr.incapacitated())
 		return
 
-	var/datum/extension/holster/H = get_holsters()[holster_name]
+	var/list/holsters = list()
+	for (var/obj/item/item in contents)
+		if (has_extension(item, /datum/extension/holster))
+			holsters += item.get_holsters()
+			continue
+
+		if (istype(item, /obj/item/clothing))
+			var/obj/item/clothing/C = item
+
+			if (length(C.accessories))
+				for (var/obj/item/clothing/accessory/A in C.accessories)
+					if (has_extension(A, /datum/extension/holster))
+						holsters += A.get_holsters()
+						continue
+
+
+	if (!length(holsters))
+		to_chat(usr, SPAN_WARNING("You have no holster(s) equipped!"))
+		return
+
+	var/holster_name
+	if (length(holsters) > 1)
+		var/list/options = list()
+		for (var/holster in holsters)
+			var/datum/extension/holster/H = holsters[holster]
+			var/atom/holder = H.atom_holder
+			options[holster] = mutable_appearance(holder.icon, holder.icon_state)
+
+		holster_name = show_radial_menu(usr, usr, options, tooltips = TRUE, use_labels = TRUE)
+
+		if (!holster_name)
+			return
+	else
+		holster_name = holsters[1]
+
+	var/datum/extension/holster/H = holsters[holster_name]
 	if(!H)
 		return
 
