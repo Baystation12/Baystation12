@@ -2,30 +2,6 @@
 /datum/gear/uniform
 	allowed_branches = CIVILIAN_BRANCHES
 
-/datum/gear/uniform/fleet_service
-	display_name = "fleet service uniform"
-	path = /obj/item/clothing/under/solgov/service/fleet
-	allowed_branches = list(
-		/datum/mil_branch/fleet
-	)
-	flags = GEAR_HAS_NO_CUSTOMIZATION
-
-/datum/gear/uniform/fleet_service_skirt
-	display_name = "fleet service skirt"
-	path = /obj/item/clothing/under/solgov/service/fleet/skirt
-	allowed_branches = list(
-		/datum/mil_branch/fleet
-	)
-	flags = GEAR_HAS_NO_CUSTOMIZATION
-
-/datum/gear/uniform/ec_service
-	display_name = "expeditionary service uniform"
-	path = /obj/item/clothing/under/solgov/service/expeditionary
-	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps
-	)
-	flags = GEAR_HAS_NO_CUSTOMIZATION
-
 /datum/gear/uniform/utility
 	display_name = "Contractor Utility Uniform"
 	path = /obj/item/clothing/under/solgov/utility
