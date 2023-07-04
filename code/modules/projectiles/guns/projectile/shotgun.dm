@@ -129,6 +129,8 @@
 
 	return ..()
 
+/obj/item/gun/projectile/shotgun/pump/empty
+	starts_loaded = FALSE
 
 /obj/item/gun/projectile/shotgun/pump/sawn
 	name = "riot shotgun"
@@ -222,6 +224,9 @@
 			var/image/I = image(icon, "shell")
 			I.pixel_x = i * 2
 			overlays += I
+
+/obj/item/gun/projectile/shotgun/pump/combat/empty
+	starts_loaded = FALSE
 
 /obj/item/gun/projectile/shotgun/doublebarrel
 	name = "double-barreled shotgun"

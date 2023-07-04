@@ -34,6 +34,9 @@
 	fire_delay = 6
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 
+/obj/item/gun/projectile/pistol/sec/empty
+	starts_loaded = FALSE
+
 /obj/item/gun/projectile/pistol/sec/lethal
 	magazine_type = /obj/item/ammo_magazine/pistol
 

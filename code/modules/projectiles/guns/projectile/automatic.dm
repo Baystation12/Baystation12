@@ -145,7 +145,7 @@
 	slot_flags = SLOT_BELT
 	ammo_type = /obj/item/ammo_casing/pistol/small
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/smg_top/rubber
+	magazine_type = /obj/item/ammo_magazine/smg_top
 	allowed_magazines = /obj/item/ammo_magazine/smg_top
 	accuracy_power = 7
 	one_hand_penalty = 3
@@ -165,6 +165,9 @@
 		overlays += image(icon, "ammo-ok")
 	else
 		overlays += image(icon, "ammo-bad")
+
+/obj/item/gun/projectile/automatic/sec_smg/empty
+	starts_loaded = FALSE
 
 /obj/item/gun/projectile/automatic/bullpup_rifle
 	name = "bullpup assault rifle"
