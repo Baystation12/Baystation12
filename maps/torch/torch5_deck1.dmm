@@ -5692,6 +5692,7 @@
 "alV" = (
 /obj/structure/closet/secure_closet/forensics,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/item/clothing/accessory/armor_tag/solgov/agent,
 /turf/simulated/floor/tiled/monotile,
 /area/security/detectives_office)
 "alW" = (
@@ -10160,6 +10161,9 @@
 	},
 /obj/structure/cable/green,
 /obj/item/crowbar/prybar,
+/obj/item/clothing/accessory/armor_tag/solgov/lead{
+	desc = "An armor tag denoting the ship's brig chief."
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/bo)
 "aJp" = (
