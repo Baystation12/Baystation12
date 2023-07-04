@@ -127,6 +127,12 @@
 
 	return dist
 
+/proc/get_bearing(atom/source, atom/destination)
+	var/bearing = round(90 - Atan2(destination.x - source.x, destination.y - source.y),5)
+	if(bearing < 0)
+		bearing += 360
+	return bearing
+
 /proc/circlerangeturfs(center=usr,radius=3)
 	RETURN_TYPE(/list)
 	var/turf/centerturf = get_turf(center)

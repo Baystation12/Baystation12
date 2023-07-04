@@ -22,6 +22,7 @@
 	desc = "Sensor array detects a small asteroid cluster."
 	icon_state = "meteor4"
 	hide_from_reports = TRUE
+	sensor_visibility = 10
 	initial_generic_waypoints = list(
 		"nav_voxbase_1"
 	)

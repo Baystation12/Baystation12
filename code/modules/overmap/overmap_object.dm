@@ -10,7 +10,7 @@
 
 	var/requires_contact = FALSE	// Whether or not the effect must be identified by ship sensors before being seen.
 	var/instant_contact  = FALSE	// Do we instantly identify ourselves to any ship in sensors range?
-	var/sensor_visibility = 10		// How likely it is to increase identification process each scan.
+	var/sensor_visibility = 20		// How much it increases identification process each scan.
 
 	var/list/known_ships = list()	 //List of ships known at roundstart - put types here.
 

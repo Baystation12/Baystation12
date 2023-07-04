@@ -38,9 +38,7 @@
 		for(var/obj/effect/overmap/visitable/O in space_things)
 			var/location_desc = " at present co-ordinates."
 			if(O.loc != torch.loc)
-				var/bearing = round(90 - Atan2(O.x - torch.x, O.y - torch.y),5) //fucking triangles how do they work
-				if(bearing < 0)
-					bearing += 360
+				var/bearing = get_bearing(torch, O)
 				location_desc = ", bearing [bearing]."
 			welcome_text += "<li>\A <b>[O.name]</b>[location_desc]</li>"
 

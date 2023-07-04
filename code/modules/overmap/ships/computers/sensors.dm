@@ -1,3 +1,5 @@
+#define SENSORS_STRENGTH_COEFFICIENT 7
+
 /obj/machinery/computer/ship/sensors
 	name = "sensors console"
 	icon_keyboard = "teleport_key"
@@ -81,31 +83,47 @@
 			data["status"] = "VACUUM SEAL BROKEN"
 		else
 			data["status"] = "OK"
-		var/list/contacts = list()
+		var/list/known_contacts = list()
+		var/list/unknown_contacts = list()
 
 		var/list/potential_contacts = list()
 
-		for(var/obj/effect/overmap/nearby in view(7,linked))
-			if(nearby.requires_contact) // Some ships require.
-				continue
-			potential_contacts |= nearby
+		if (sensors?.use_power)
+			for(var/obj/effect/overmap/nearby in view(round(sensors.range,1), linked))
+				if(nearby.requires_contact) // Some ships require.
+					continue
+				potential_contacts |= nearby
 
-		// Effects that require contact are only added to the contacts if they have been identified.
-		// Allows for coord tracking out of range of the player's view.
-		for(var/obj/effect/overmap/visitable/identified_contact in contact_datums)
-			potential_contacts |= identified_contact
+		for(var/obj/effect/overmap/visitable/contact in objects_in_view)
+			if (contact in contact_datums)
+				potential_contacts |= contact
+			else
+				var/bearing_variability = round(300/sensors.sensor_strength, 5)
+				unknown_contacts.Add(list(list(
+					"name" = contact.unknown_id,
+					"bearing" = inaccurate_bearing(get_bearing(linked, contact), bearing_variability),
+					"variability" = bearing_variability,
+					"progress" = objects_in_view[contact]
+				)))
 
-		for(var/obj/effect/overmap/O in potential_contacts)
-			if(linked == O)
+		for(var/obj/effect/overmap/contact in potential_contacts)
+			if(linked == contact)
 				continue
-			if(!O.scannable)
+			if(!contact.scannable)
 				continue
-			var/bearing = round(90 - Atan2(O.x - linked.x, O.y - linked.y),5)
-			if(bearing < 0)
-				bearing += 360
-			contacts.Add(list(list("name"=O.name, "color"= O.get_color(), "ref"="\ref[O]", "bearing"=bearing)))
-		if(length(contacts))
-			data["contacts"] = contacts
+			known_contacts.Add(list(list(
+				"name" = contact.name,
+				"color" = contact.get_color(),
+				"ref" = "\ref[contact]",
+				"bearing" = get_bearing(linked, contact)
+			)))
+
+		if(length(unknown_contacts))
+			data["unknown_contacts"] = unknown_contacts
+
+		if(length(known_contacts))
+			data["known_contacts"] = known_contacts
+
 		data["last_scan"] = last_scan
 	else
 		data["status"] = "MISSING"
@@ -170,7 +188,7 @@
 		playsound(loc, "sound/machines/dotprinter.ogg", 30, 1)
 		var/scan_data = ""
 		for(var/scan in last_scan["data"])
-			scan_data += scan + "\n"
+			scan_data += scan + "\n\n"
 
 		new/obj/item/paper/(get_turf(src), scan_data, "paper (Sensor Scan - [last_scan["name"]])", L = print_language)
 		return TOPIC_HANDLED
@@ -190,10 +208,15 @@
 	var/heat = 0
 	var/range = 1
 	idle_power_usage = 5000
+	base_type = /obj/machinery/shipsensors
+	maximum_component_parts = list(/obj/item/stock_parts = 10) // Circuit, 5 manipulators, 3 subspace shit and 1 tesla coil
+
+/obj/machinery/shipsensors/upgraded
+	uncreated_component_parts = list(/obj/item/stock_parts/manipulator/nano = 2)
 
 /obj/machinery/shipsensors/RefreshParts()
 	..()
-	sensor_strength = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 5)
+	sensor_strength = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 5) * SENSORS_STRENGTH_COEFFICIENT
 
 /obj/machinery/shipsensors/attackby(obj/item/W, mob/user)
 	if (isWelder(W) && user.a_intent != I_HURT)
@@ -292,10 +315,10 @@
 	build_path = /obj/machinery/shipsensors
 	origin_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 5, TECH_BLUESPACE = 3)
 	req_components = list(
-							/obj/item/stock_parts/subspace/ansible = 1,
-							/obj/item/stock_parts/subspace/filter = 1,
-							/obj/item/stock_parts/subspace/treatment = 1,
-							/obj/item/stock_parts/manipulator = 3)
-	additional_spawn_components = list(
-		/obj/item/stock_parts/power/apc/buildable = 1
+		/obj/item/stock_parts/subspace/ansible = 1,
+		/obj/item/stock_parts/subspace/filter = 1,
+		/obj/item/stock_parts/subspace/treatment = 1,
+		/obj/item/stock_parts/manipulator = 3
 	)
+
+#undef SENSORS_STRENGTH_COEFFICIENT

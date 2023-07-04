@@ -71,30 +71,42 @@
 </fieldset>
 <fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
 	<legend style="text-align:center">Contacts</legend>
-{{if data.contacts}}
-	<table>
-	{{for data.contacts}}
-	<tr>
-	<div class='item'>
-		<td>{{:helper.link('Scan', 'search' ,{ 'scan' : value.ref }, null, null)}}</td>
-		<td><span style="color: {{:value.color}};">{{:value.name}}</span>, bearing {{:value.bearing}}</td>
-	</div>
-	</tr>
-	{{/for}}
-	</table>
-{{else}}
-	None
-{{/if}}
+	{{if data.known_contacts || data.unknown_contacts }}
+		<table>
+		{{for data.known_contacts}}
+			<tr>
+				<td>
+					<div class='item'>
+						<td>{{:helper.link('Scan', 'search' ,{ 'scan' : value.ref }, null, null)}}</td>
+						<td><span style="color: {{:value.color}};">{{:value.name}}</span>, bearing {{:value.bearing}}</td>
+					</div>
+				</td>
+			</tr>
+		{{/for}}
+		{{for data.unknown_contacts}}
+		<tr>
+			<div class='item' style="padding-bottom: 10px;">
+				<span>{{:value.progress}}% - {{:value.name}}, bearing {{:value.bearing}} +/- {{:value.variability}}</span>
+				{{:helper.displayBar(value.progress, 0, 100, 'good')}}
+			</div>
+		</tr>
+		{{/for}}
+		</table>
+	{{else}}
+		None
+	{{/if}}
 </fieldset>
 <fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
 	<legend style="text-align:center">Scan data</legend>
 	{{if data.last_scan}}
-		<b>{{:data.last_scan.name}}</b> at {{:data.last_scan.location}}
-		{{:helper.link('Print', 'print' ,{ 'print' : 1 }, null, null)}}
+		<table>
+			<tr>
+				<td>{{:helper.link('Print', 'print' ,{ 'print' : 1 }, null, null)}}</td>
+				<td><b>{{:data.last_scan.name}}</b> at {{:data.last_scan.location}}</td>
+			</tr>
+		</table>
 		<div class='block'>
-			{{for data.last_scan.data}}
-				{{:value}}<br><br>
-			{{/for}}
+			{{:data.last_scan.data.join("<hr style='border-color: #202020;'>")}}
 		</div>
 	{{else}}
 		N/A

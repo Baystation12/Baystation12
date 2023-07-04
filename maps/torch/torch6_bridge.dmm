@@ -7320,7 +7320,7 @@
 /turf/simulated/floor/carpet,
 /area/crew_quarters/heads/office/xo)
 "sm" = (
-/obj/machinery/shipsensors,
+/obj/machinery/shipsensors/upgraded,
 /turf/simulated/floor/reinforced{
 	map_airless = 1
 	},
