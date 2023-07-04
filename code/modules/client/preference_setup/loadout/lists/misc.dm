@@ -28,6 +28,10 @@
 	display_name = "deck of tarot cards"
 	path = /obj/item/deck/tarot
 
+/datum/gear/cards/une
+	display_name = "deck of une cards"
+	path = /obj/item/deck/cards/une
+
 /datum/gear/holder
 	display_name = "card holder"
 	path = /obj/item/deck/holder
