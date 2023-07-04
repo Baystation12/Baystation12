@@ -1,6 +1,9 @@
 /mob/living/health_resistances = null // Not currently supported in health passthrough
 
 
+/mob/living/use_weapon_hitsound = TRUE
+
+
 /mob/living/get_current_health()
 	if (maxHealth)
 		return health

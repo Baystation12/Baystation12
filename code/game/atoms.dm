@@ -294,7 +294,7 @@
 			damage = P.get_structure_damage()
 		if (!can_damage_health(damage, P.damage_type, P.damage_flags))
 			return
-		playsound(src, damage_hitsound, 75)
+		playsound(src, use_weapon_hitsound ? P.hitsound : damage_hitsound, 75)
 		damage_health(damage, P.damage_type, P.damage_flags, skip_can_damage_check = TRUE)
 
 /**
@@ -557,10 +557,14 @@
 		var/damage = 0
 		var/damage_type = DAMAGE_BRUTE
 		var/damage_flags = EMPTY_BITFIELD
+		var/damage_hitsound = src.damage_hitsound
 		if (isobj(AM))
 			var/obj/O = AM
 			damage = O.throwforce
 			damage_type = O.damtype
+			if (use_weapon_hitsound && isitem(O))
+				var/obj/item/I = O
+				damage_hitsound = I.hitsound
 		else if (ismob(AM))
 			var/mob/M = AM
 			damage = M.mob_size

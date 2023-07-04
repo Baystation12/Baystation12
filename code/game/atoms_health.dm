@@ -22,6 +22,9 @@
 /// Sound effect played when hit
 /atom/var/damage_hitsound = 'sound/weapons/genhit.ogg'
 
+/// Boolean. If set, uses the item's hit sound file instead of the source atom's when attacked.
+/atom/var/use_weapon_hitsound = FALSE
+
 /**
  * Retrieves the atom's current health, or `null` if not using health
  */
