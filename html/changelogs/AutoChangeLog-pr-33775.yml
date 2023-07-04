@@ -1,0 +1,16 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - bugfix: Fixed overmap placeholder objects visibility and big objects positioning.
+  - bugfix: Fixed overmap animation of distant objects.
+  - bugfix: Sensors mute now mutes sensors.
+  - balance: Sensor scan progress formula has changed completely to be less vessel-mass-based.
+      Sensors scan everything a way more faster than before.
+  - maptweak: Placed a little better sensors on Torch.
+  - rscadd: Scan progress added to UI instead of chat spamming.
+  - rscadd: Sensors have a memory and will remember anyone who goes out of range,
+      however every turn off progress goes down by 18 percents.
+  - tweak: Sensors view is round now.
+  - tweak: Slightly improved sensor scan display look.
+  - tweak: Slavage Gantry now twice as heavy.
+  - tweak: Made overmap darker, much better on the eyes.
