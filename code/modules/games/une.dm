@@ -59,7 +59,7 @@
 		unecardimg.color = cardhexcolor
 	..()
 
-/obj/item/hand/une/update_icon()
+/obj/item/hand/une/on_update_icon()
 	if(concealed)
 		icon_state = "unecard_down"
 		overlays -= unecardimg
