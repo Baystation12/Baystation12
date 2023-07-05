@@ -10,8 +10,8 @@
 	icon = 'icons/obj/une_cards.dmi'
 	icon_state = "deck_full"
 
-/obj/item/deck/cards/une/New()
-	..()
+/obj/item/deck/cards/une/Initialize()
+	. = ..()
 	for(var/i = 0 to 9)
 		cards += new/obj/item/hand/une(src, src, "Red [i]", "[i]", REDCARD)
 		cards += new/obj/item/hand/une(src, src, "Yellow [i]", "[i]", YELLOWCARD)
