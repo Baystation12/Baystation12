@@ -124,7 +124,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 			if(X.is_afk())
 				admin_number_afk++
 			if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)
-				sound_to(X, 'sound/ui/pm-notify.ogg')
+				sound_to(X, sound('sound/ui/pm-notify.ogg', volume = 40))
 			to_chat(X, msg)
 	//show it to the person adminhelping too
 	to_chat(src, SPAN_CLASS("staff_pm", "PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]"))
