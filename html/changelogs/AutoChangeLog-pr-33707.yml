@@ -1,6 +1,0 @@
-author: Ryan180602
-delete-after: true
-changes:
-  - tweak: The Torch will be removed from the overmap during jump.
-  - tweak: If the drive is missing/destroyed, there will be no jump, round will simply
-      end after the same amount of time.
