@@ -1,0 +1,5 @@
+author: Alex6511
+delete-after: true
+changes:
+  - tweak: Torch side navigation light colors are laterally accurate. Dorsal and ventral
+      colors also included, should someone do something absurd and vertical!
