@@ -4679,7 +4679,7 @@
 /area/crew_quarters/heads/office/xo)
 "kE" = (
 /obj/structure/lattice,
-/obj/machinery/light/navigation/delay2,
+/obj/machinery/nav_light/starboard,
 /turf/space,
 /area/space)
 "kH" = (
@@ -6160,7 +6160,7 @@
 /area/aquila/airlock)
 "pe" = (
 /obj/structure/lattice,
-/obj/machinery/light/navigation/delay5,
+/obj/machinery/nav_light,
 /turf/space,
 /area/space)
 "pf" = (
@@ -6728,6 +6728,11 @@
 /obj/machinery/recharger,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/storage)
+"qN" = (
+/obj/structure/lattice,
+/obj/machinery/nav_light/port,
+/turf/space,
+/area/space)
 "qO" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/bridge/storage)
@@ -22547,7 +22552,6 @@ aa
 aa
 aa
 aa
-pe
 aa
 aa
 aa
@@ -22563,7 +22567,8 @@ aa
 aa
 aa
 aa
-pe
+aa
+aa
 aa
 aa
 aa
@@ -22749,23 +22754,23 @@ af
 af
 af
 aa
-ae
+aa
 aa
 aa
 zx
 aa
 aa
-kE
 aa
 aa
 aa
-kE
+aa
+aa
 aa
 aa
 zx
 aa
 aa
-ae
+aa
 aa
 tg
 tg
@@ -22951,23 +22956,23 @@ af
 af
 af
 af
-ae
+aa
 aa
 aa
 vA
 aa
 aa
-ae
 aa
 aa
 aa
-ae
+aa
+aa
 aa
 aa
 vA
 aa
 aa
-ae
+aa
 tg
 tg
 tg
@@ -23138,8 +23143,8 @@ aa
 aa
 aa
 aa
-aa
-aa
+kE
+ae
 af
 af
 af
@@ -23183,8 +23188,8 @@ uy
 tg
 tg
 tg
-aa
-aa
+ae
+qN
 aa
 aa
 aa
@@ -45179,7 +45184,7 @@ aa
 aa
 aa
 aa
-aa
+ae
 aa
 aa
 aa
@@ -45381,7 +45386,7 @@ aa
 aa
 aa
 aa
-aa
+pe
 aa
 aa
 aa

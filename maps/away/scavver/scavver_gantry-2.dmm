@@ -2090,7 +2090,7 @@
 	dir = 1;
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/smokable/transstellar = 10, /obj/item/storage/fancy/matches/matchbox = 10, /obj/item/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/smokable/transstellar=10,/obj/item/storage/fancy/matches/matchbox=10,/obj/item/flame/lighter/zippo/random=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
@@ -2993,11 +2993,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
-"xC" = (
-/obj/structure/lattice,
-/obj/machinery/light/navigation,
-/turf/space,
-/area/space)
 "xH" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -3501,7 +3496,7 @@
 /area/scavver/yachtup)
 "Ck" = (
 /obj/structure/lattice,
-/obj/machinery/light/navigation/delay2,
+/obj/machinery/nav_light,
 /turf/space,
 /area/space)
 "CB" = (
@@ -14511,7 +14506,7 @@ zU
 eN
 hX
 eN
-xC
+Ck
 eN
 eN
 eN
@@ -14819,7 +14814,7 @@ jG
 fQ
 fr
 Nz
-xC
+Ck
 tX
 Im
 Im
@@ -16491,7 +16486,7 @@ yr
 ML
 fr
 Nz
-xC
+Ck
 tX
 bX
 sW
@@ -16750,7 +16745,7 @@ eN
 eN
 eN
 zU
-xC
+Ck
 hX
 eN
 UT
@@ -16771,7 +16766,7 @@ eN
 eN
 eN
 hX
-xC
+Ck
 eN
 UT
 eN
@@ -16781,7 +16776,7 @@ eN
 eN
 eN
 eN
-xC
+Ck
 eN
 eN
 cc
@@ -17973,7 +17968,7 @@ eN
 SY
 eN
 hX
-xC
+Ck
 eN
 UT
 eN
@@ -17992,7 +17987,7 @@ eN
 eN
 eN
 hX
-xC
+Ck
 eN
 eN
 UT
@@ -18001,7 +17996,7 @@ eN
 eN
 eN
 eN
-xC
+Ck
 eN
 eN
 eN
