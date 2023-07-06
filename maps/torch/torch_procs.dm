@@ -56,6 +56,15 @@
 				else
 					to_chat(Player, SPAN_COLOR("red", "<b>You did not survive the events on [station_name()]...</b>"))
 
+
+/datum/map/torch/ship_jump()
+	for(var/obj/effect/overmap/visitable/ship/torch/torch)
+		new /obj/effect/ftl (get_turf(torch))
+		qdel(torch)
+		animate(torch, time = 0.5 SECONDS)
+		animate(alpha = 0, time = 0.5 SECONDS)
+
+
 /datum/map/torch/roundend_summary(list/data)
 	var/desc
 	var/survivors = data["surviving_total"]
