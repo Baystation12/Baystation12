@@ -60,9 +60,9 @@
 	..()
 
 /obj/item/hand/une/on_update_icon()
+	overlays.Cut()
 	if(concealed)
 		icon_state = "unecard_down"
-		overlays -= unecardimg
 		pixel_x = -5
 	else
 		icon_state = "unecard_up"
