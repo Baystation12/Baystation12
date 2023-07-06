@@ -323,16 +323,9 @@
 		if(!isnum(sql_id))
 			return
 
-	var/admin_rank = "Player"
-	if(src.holder)
-		admin_rank = src.holder.rank
-		for(var/client/C in GLOB.clients)
-			if(C.staffwarn)
-				C.mob.send_staffwarn(src, "is connected", 0)
-
 	var/sql_ip = sql_sanitize_text(src.address)
 	var/sql_computerid = sql_sanitize_text(src.computer_id)
-	var/sql_admin_rank = sql_sanitize_text(admin_rank)
+	var/sql_admin_rank = sql_sanitize_text("Player")
 
 
 	if(sql_id)

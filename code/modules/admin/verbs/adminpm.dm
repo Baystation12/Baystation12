@@ -128,7 +128,7 @@
 	//play the receiving admin the adminhelp sound (if they have them enabled)
 	//non-admins shouldn't be able to disable this
 	if(C.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)
-		sound_to(C, 'sound/ui/pm-notify.ogg')
+		sound_to(C, sound('sound/ui/pm-notify.ogg', volume = 70))
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
 	send_to_admin_discord(EXCOM_MSG_AHELP, "PM: [key_name(src, highlight_special_characters = FALSE)]->[key_name(C, highlight_special_characters = FALSE)]:[html_decode(msg)]")
