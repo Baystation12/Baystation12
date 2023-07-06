@@ -53,11 +53,11 @@
 	icon_state = "unecard_down"
 	var/image/unecardimg
 
-/obj/item/hand/une/New(NewLoc, cardsource, newcardname, truecardname, cardhexcolor)
+/obj/item/hand/une/Initialize(mapload, cardsource, newcardname, truecardname, cardhexcolor)
 	unecardimg = image('icons/obj/une_cards.dmi', truecardname)
-	if(cardhexcolor != BLACKCARD)
+	if (cardhexcolor != BLACKCARD)
 		unecardimg.color = cardhexcolor
-	..()
+	return ..()
 
 /obj/item/hand/une/on_update_icon()
 	overlays.Cut()
