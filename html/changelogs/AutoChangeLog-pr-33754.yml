@@ -1,0 +1,6 @@
+author: Dr. Farson
+delete-after: true
+changes:
+  - tweak: Split armor tags into separate loadout options - flags, blood type, and
+      corporate insignia.
+  - rscadd: Added a fleet flag armor tag.
