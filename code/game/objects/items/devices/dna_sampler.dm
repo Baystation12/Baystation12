@@ -13,12 +13,15 @@
 	var/src_faction = ""
 	var/src_dna = null
 	var/src_species = ""
+	var/src_flavor = ""
+
 /obj/item/device/dna_sampler/examine(mob/user)
 	. = ..()
 	if(loaded == TRUE)
 		to_chat(user, SPAN_WARNING("\The [src] is currently loaded with a DNA sample of [src_name]"))
 	else
 		to_chat(user, SPAN_WARNING("\The [src] is currently empty"))
+
 /obj/item/device/dna_sampler/attack_self(mob/user)
 	if(loaded == TRUE && alert("Are you sure you wish to flush the current DNA sequence?",,"Yes","No") == "Yes")
 		loaded = FALSE
@@ -29,7 +32,9 @@
 		src_faction = ""
 		src_name = ""
 		src_species = ""
-/obj/item/device/dna_sampler/attack(mob/living/carbon/L, mob/user)
+		src_flavor = ""
+
+/obj/item/device/dna_sampler/attack(mob/living/carbon/human/L, mob/user)
 	var/allow = L.can_inject(user, check_zone(user.zone_sel.selecting))
 	if(!allow)
 		return
@@ -44,3 +49,4 @@
 	src_pronouns = L.pronouns
 	src_faction = L.faction
 	src_species = L.species.name
+	src_flavor = L.flavor_texts
