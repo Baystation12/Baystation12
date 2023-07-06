@@ -4,7 +4,6 @@
 	#include "../../packs/factions/scga/_pack.dm"
 	#include "../../packs/factions/scgec/_pack.dm"
 	#include "../../packs/event_2022jul30/_pack.dm"
-	#include "../../packs/deepmaint/_pack.dm"
 
 	#include "torch_announcements.dm"
 	#include "torch_antagonism.dm"
