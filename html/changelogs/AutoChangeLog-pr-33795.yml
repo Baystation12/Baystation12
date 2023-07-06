@@ -1,0 +1,4 @@
+author: Fre3bie
+delete-after: true
+changes:
+  - tweak: Corpse Cube now copies the flavour text with the DNA sampler.
