@@ -134,3 +134,52 @@
 
 /datum/gear/head/deckcrew
 	allowed_roles = SUPPLY_ROLES
+
+
+/datum/gear/tactical/armor_tag_flag
+	display_name = "Armor Tag Selection - Flags"
+	path = /obj/item/clothing/accessory/armor_tag
+	flags = GEAR_HAS_NO_CUSTOMIZATION
+
+
+/datum/gear/tactical/armor_tag_flag/New()
+	..()
+	var/list/options = list()
+	options["SCG flag"] = /obj/item/clothing/accessory/armor_tag/solgov
+	options["EC flag"] = /obj/item/clothing/accessory/armor_tag/solgov/ec
+	options["Fleet flag"] =  /obj/item/clothing/accessory/armor_tag/solgov/fleet
+	gear_tweaks += new /datum/gear_tweak/path (options)
+
+
+/datum/gear/tactical/armor_tag_blood
+	display_name = "Armor Tag Selection - Blood Type"
+	path = /obj/item/clothing/accessory/armor_tag
+	flags = GEAR_HAS_NO_CUSTOMIZATION
+
+
+/datum/gear/tactical/armor_tag_blood/New()
+	..()
+	var/list/options = list()
+	options["O+ blood patch"] = /obj/item/clothing/accessory/armor_tag/opos
+	options["O- blood patch"] = /obj/item/clothing/accessory/armor_tag/oneg
+	options["A+ blood patch"] = /obj/item/clothing/accessory/armor_tag/apos
+	options["A- blood patch"] = /obj/item/clothing/accessory/armor_tag/aneg
+	options["AB+ blood patch"] = /obj/item/clothing/accessory/armor_tag/abpos
+	options["AB- blood patch"] = /obj/item/clothing/accessory/armor_tag/abneg
+	options["B+ blood patch"] = /obj/item/clothing/accessory/armor_tag/bpos
+	options["B- blood patch"] = /obj/item/clothing/accessory/armor_tag/bneg
+	gear_tweaks += new /datum/gear_tweak/path (options)
+
+
+/datum/gear/tactical/armor_tag_corporate
+	display_name = "Armor Tag Selection - Corporate Insignia"
+	path = /obj/item/clothing/accessory/armor_tag
+	flags = GEAR_HAS_NO_CUSTOMIZATION
+
+
+/datum/gear/tactical/armor_tag_corporate/New()
+	..()
+	var/list/options = list()
+	options["SAARE tag"] = /obj/item/clothing/accessory/armor_tag/saare
+	options["PCRC tag"] =  /obj/item/clothing/accessory/armor_tag/pcrc
+	gear_tweaks += new /datum/gear_tweak/path (options)

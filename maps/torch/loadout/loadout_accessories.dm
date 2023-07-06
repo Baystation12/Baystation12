@@ -196,9 +196,6 @@
 		/datum/job/pathfinder,
 		/datum/job/explorer)
 
-/datum/gear/tactical/armor_deco
-	allowed_roles = ARMORED_ROLES
-
 /datum/gear/tactical/press_tag
 	display_name = "Press tag"
 	path = /obj/item/clothing/accessory/armor_tag/press
