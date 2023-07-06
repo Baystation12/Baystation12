@@ -105,7 +105,7 @@
 
 /obj/item/mech_component/control_module/examine(mob/user)
 	. = ..()
-	to_chat(user, SPAN_NOTICE("It has [max_installed_software - LAZYLEN(installed_software)] empty slot\s remaining out of [max_installed_software]."))
+	to_chat(user, SPAN_NOTICE("It has [max_installed_software - length(installed_software)] empty slot\s remaining out of [max_installed_software]."))
 
 /obj/item/mech_component/control_module/attackby(obj/item/thing, mob/user)
 

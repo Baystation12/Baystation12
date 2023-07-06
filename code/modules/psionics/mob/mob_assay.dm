@@ -74,7 +74,7 @@
 				dat += "<table width = 100% border = 1><tr><td colspan = 2><h2>Psi-power Usage</h2></td></tr>"
 				for(var/faculty_id in psi.ranks)
 					var/list/check_powers = psi.get_powers_by_faculty(faculty_id)
-					if(LAZYLEN(check_powers))
+					if(length(check_powers))
 						var/singleton/psionic_faculty/faculty = SSpsi.get_faculty(faculty_id)
 						dat += "<tr><td colspan = 2>[use_He_has] access to the following psi-powers within the <b>[faculty.name] faculty</b>:</td></tr>"
 						for(var/singleton/psionic_power/power in check_powers)

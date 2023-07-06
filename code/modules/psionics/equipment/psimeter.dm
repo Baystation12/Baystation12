@@ -26,7 +26,7 @@
 	if(!use_power) return
 
 	var/list/dat = list()
-	if(LAZYLEN(last_assay))
+	if(length(last_assay))
 		dat = last_assay
 	else
 		dat += "<h2>TELESTO Mark I Psi-Meter</h2><hr><table border = 1 width = 100%><tr><td colspan = 2><b>Candidates</b></td></tr>"

@@ -8,7 +8,7 @@
 		if(hasvar(thing, "initial_id_tag") && !isnull(thing:initial_id_tag) && has_extension(thing, /datum/extension/local_network_member))
 			LAZYADD(check_machines, get_extension(thing, /datum/extension/local_network_member))
 
-	if(LAZYLEN(check_machines))
+	if(length(check_machines))
 		var/list/failed_ids
 		for(var/thing in check_machines)
 			var/datum/extension/local_network_member/lanm = thing
@@ -17,7 +17,7 @@
 				var/obj/device = lanm.holder
 				LAZYADD(failed_ids, "[device.type] ([device.x],[device.y],[device.z]) - [device:initial_id_tag]")
 
-		if(LAZYLEN(failed_ids))
+		if(length(failed_ids))
 			fail("Some fusion devices had IDs but no valid network:\n[jointext(failed_ids, "\n")]")
 		else
 			pass("All fusion devices with IDs have a valid network.")

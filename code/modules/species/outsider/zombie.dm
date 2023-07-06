@@ -182,7 +182,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		if ((ishuman(M) || istype(M, /mob/living/exosuit)) && !M.is_species(SPECIES_ZOMBIE) && !M.is_species(SPECIES_DIONA)) //Don't attack fellow zombies, or diona
 			if (istype(M, /mob/living/exosuit))
 				var/mob/living/exosuit/MC = M
-				if (!LAZYLEN(MC.pilots))
+				if (!length(MC.pilots))
 					continue //Don't attack empty mechs
 			if (M.stat == DEAD && target)
 				continue //Only eat corpses when no living (and able) targets are around

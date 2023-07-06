@@ -45,7 +45,7 @@
 		return
 
 	var/atom/movable/product
-	if(LAZYLEN(instances))
+	if(length(instances))
 		product = instances[length(instances)]	// Remove the last added product
 		LAZYREMOVE(instances, product)
 	else

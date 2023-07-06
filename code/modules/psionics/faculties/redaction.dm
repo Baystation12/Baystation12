@@ -76,7 +76,7 @@
 
 				if(imp.w_class >= removal_size && !istype(imp, /obj/item/implant))
 					valid_objects += imp
-			if(LAZYLEN(valid_objects))
+			if(length(valid_objects))
 				var/removing = pick(valid_objects)
 				target.remove_implant(removing, TRUE)
 				to_chat(user, SPAN_NOTICE("You extend a tendril of psychokinetic-redactive power and carefully tease \the [removing] free of \the [E]."))

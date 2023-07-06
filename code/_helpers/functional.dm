@@ -5,7 +5,7 @@
 #define PREPARE_ARGUMENTS \
 	var/extra_arguments = predicates[predicate];\
 	var/list/predicate_input = input;\
-	if(LAZYLEN(extra_arguments)) {\
+	if(length(extra_arguments)) {\
 		predicate_input = predicate_input.Copy();\
 		predicate_input += list(extra_arguments);\
 	}

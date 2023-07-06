@@ -44,7 +44,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 
 /obj/machinery/photocopier/faxmachine/Destroy()
-	if (LAZYLEN(linked_pdas))
+	if (length(linked_pdas))
 		for (var/obj/item/modular_computer/pda/pda as anything in linked_pdas)
 			unlink_pda(pda)
 		linked_pdas = null
@@ -128,7 +128,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 	var/dat = "Fax Machine ([department])<BR>"
 
-	dat += "Linked PDAs: [LAZYLEN(linked_pdas)]<br />"
+	dat += "Linked PDAs: [length(linked_pdas)]<br />"
 
 	var/scan_name
 	if(scan)
@@ -241,7 +241,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	visible_message(SPAN_NOTICE("\The [src] pings, \"New fax received from [origin_department].\""))
 
 	// Notify any linked PDAs
-	if (LAZYLEN(linked_pdas))
+	if (length(linked_pdas))
 		for (var/obj/item/modular_computer/pda/pda as anything in linked_pdas)
 			if (!AreConnectedZLevels(get_z(src), get_z(pda)))
 				continue

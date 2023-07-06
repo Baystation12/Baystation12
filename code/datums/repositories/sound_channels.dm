@@ -18,7 +18,7 @@ GLOBAL_VAR_INIT(ambience_channel_common, GLOB.sound_channels.RequestChannel("AMB
 
 /repository/sound_channels/proc/RequestChannel(key)
 	. = RequestChannels(key, 1)
-	return LAZYLEN(.) && .[1]
+	return length(.) && .[1]
 
 /repository/sound_channels/proc/RequestChannels(key, amount)
 	if(!key)

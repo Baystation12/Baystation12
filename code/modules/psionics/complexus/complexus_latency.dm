@@ -1,6 +1,6 @@
 /datum/psi_complexus/proc/check_latency_trigger(trigger_strength = 0, source, redactive = FALSE)
 
-	if(!LAZYLEN(latencies) || world.time < next_latency_trigger)
+	if(!length(latencies) || world.time < next_latency_trigger)
 		return FALSE
 
 	if(!prob(trigger_strength))

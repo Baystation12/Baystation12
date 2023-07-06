@@ -69,7 +69,7 @@
 			if(!T.z != src.z)
 				continue
 			turf_targets += T
-	if(!LAZYLEN(turf_targets)) //oh no
+	if(!length(turf_targets)) //oh no
 		addtimer(new Callback(src, .proc/emerge, 2 SECONDS))
 		return
 	var/turf/T = pick(turf_targets)

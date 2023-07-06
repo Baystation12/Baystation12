@@ -12,7 +12,7 @@
 
 /datum/persistent/paper/CreateEntryInstance(turf/creating, list/tokens)
 	var/obj/structure/noticeboard/board = locate() in creating
-	if(requires_noticeboard && LAZYLEN(board.notices) >= board.max_notices)
+	if(requires_noticeboard && length(board.notices) >= board.max_notices)
 		return
 	var/obj/item/paper/paper = new paper_type(creating)
 	paper.set_content(tokens["message"], tokens["title"])

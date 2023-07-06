@@ -55,13 +55,13 @@
 		if(istype(A, /obj/machinery/seed_storage))
 			visible_message(SPAN_DANGER("\The [src] headbutts \the [A]!"))
 			var/obj/machinery/seed_storage/G = A
-			if(LAZYLEN(G.piles))
+			if(length(G.piles))
 				var/datum/seed_pile/pile = pick(G.piles)
 				var/obj/item/seeds/S = pick(pile.seeds)
 				if(S)
 					pile.amount -= 1
 					pile.seeds  -= S
-					if(pile.amount <= 0 || LAZYLEN(pile.seeds) <= 0)
+					if(pile.amount <= 0 || length(pile.seeds) <= 0)
 						G.piles -= pile
 						qdel(pile)
 					S.forceMove(get_turf(G))

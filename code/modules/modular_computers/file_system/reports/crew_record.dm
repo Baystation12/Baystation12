@@ -70,7 +70,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 			var/organ_data = list("Fully synthetic body")
 			for(var/obj/item/organ/internal/augment/A in H.internal_organs)
 				organ_data += "installed augment - [A.name]"
-			if (LAZYLEN(organ_data))
+			if (length(organ_data))
 				set_implants(jointext(organ_data, "\[*\]"))
 		else
 			var/organ_data = list("\[*\]")
@@ -105,7 +105,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 				var/extra_note = culture.get_qualifications()
 				if(extra_note)
 					LAZYADD(qualifications, extra_note)
-			if(LAZYLEN(qualifications))
+			if(length(qualifications))
 				employment_record = "[employment_record ? "[employment_record]\[br\]" : ""][jointext(qualifications, "\[br\]>")]"
 	set_emplRecord(employment_record)
 

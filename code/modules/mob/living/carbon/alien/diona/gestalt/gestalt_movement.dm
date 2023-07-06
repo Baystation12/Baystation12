@@ -13,7 +13,7 @@
 
 	else if(istype(AM, /obj/structure/diona_gestalt) && AM != src) // Combine!?
 		var/obj/structure/diona_gestalt/gestalt = AM
-		if(LAZYLEN(gestalt.nymphs))
+		if(length(gestalt.nymphs))
 			for(var/nimp in gestalt.nymphs)
 				roll_up_atom(nimp, silent = TRUE)
 			gestalt.nymphs.Cut()

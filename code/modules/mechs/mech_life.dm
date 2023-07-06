@@ -90,7 +90,7 @@
 
 /mob/living/exosuit/death(gibbed)
 	// Eject the pilot.
-	if(LAZYLEN(pilots))
+	if(length(pilots))
 		hatch_locked = 0 // So they can get out.
 		for(var/pilot in pilots)
 			eject(pilot, silent=1)

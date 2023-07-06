@@ -83,14 +83,14 @@
 	report.info = "<b>Scanned item:</b><br>[scaned_object]<br><br>"
 	if("gunshot_residue" in evidence)
 		report.info += "<b>Gunpowder residue analysis report #[report_num]</b>: [scaned_object]<br>"
-		if(LAZYLEN(evidence["gunshot_residue"]))
+		if(length(evidence["gunshot_residue"]))
 			report.info += "Residue from the following bullets detected:"
 			for(var/residue in evidence["gunshot_residue"])
 				report.info += "[SPAN_NOTICE("[residue]")]<br><br>"
 		else
 			report.info += "No gunpowder residue found."
 	if("fibers" in evidence)
-		if(LAZYLEN(evidence["fibers"]))
+		if(length(evidence["fibers"]))
 			report.info += "Molecular analysis on provided sample has determined the presence of unique fiber strings.<br><br>"
 			for(var/fiber in evidence["fibers"])
 				report.info += "[SPAN_NOTICE("Most likely match for fibers: [fiber]")]<br><br>"
@@ -98,7 +98,7 @@
 			report.info += "No fibers found."
 	if("prints" in evidence)
 		report.info += "<b>Fingerprint analysis report</b>: [scaned_object]<br>"
-		if(LAZYLEN(evidence["prints"]))
+		if(length(evidence["prints"]))
 			report.info += "Surface analysis has determined unique fingerprint strings:<br><br>"
 			for(var/prints in evidence["prints"])
 				report.info += SPAN_NOTICE("Fingerprint string: ")

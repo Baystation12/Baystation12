@@ -132,7 +132,7 @@
 			stored_ammo += new ammo_type(src)
 	if(caliber)
 		LAZYINSERT(labels, caliber, 1)
-	if(LAZYLEN(labels))
+	if(length(labels))
 		SetName("[name] ([english_list(labels, and_text = ", ")])")
 	update_icon()
 

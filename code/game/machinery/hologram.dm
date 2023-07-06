@@ -164,7 +164,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 	targetpad.icon_state = "[targetpad.base_icon]1"
 	targetpad.audible_message("<b>\The [src]</b> announces, \"Incoming communications request from [targetpad.sourcepad.loc.loc].\"")
 	// Notify any linked PDAs
-	if (LAZYLEN(targetpad.linked_pdas))
+	if (length(targetpad.linked_pdas))
 		for (var/obj/item/modular_computer/pda/pda as anything in targetpad.linked_pdas)
 			if (!AreConnectedZLevels(get_z(targetpad), get_z(pda)))
 				continue
@@ -459,7 +459,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	for (var/mob/living/master in masters)
 		clear_holo(master)
 
-	if (LAZYLEN(linked_pdas))
+	if (length(linked_pdas))
 		for (var/obj/item/modular_computer/pda/pda as anything in linked_pdas)
 			unlink_pda(pda)
 		linked_pdas = null

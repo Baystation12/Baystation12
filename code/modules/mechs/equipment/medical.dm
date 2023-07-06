@@ -99,7 +99,7 @@
 				to_chat(user, SPAN_WARNING("The wounds on \the [H]'s [affecting.name] have already been treated."))
 				return
 			else
-				if(!LAZYLEN(affecting.wounds))
+				if(!length(affecting.wounds))
 					return
 				owner.visible_message(SPAN_NOTICE("\The [owner] extends \the [src] towards \the [H]'s [affecting.name]."))
 				var/large_wound = FALSE

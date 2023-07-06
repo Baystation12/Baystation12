@@ -40,12 +40,12 @@
 			all_entries -= entry
 			all_entries.Insert(1, entry)
 
-	if(LAZYLEN(all_entries) == 1)
+	if(length(all_entries) == 1)
 		SScodex.present_codex_entry(mob, all_entries[1])
 	else
-		if(LAZYLEN(all_entries) > 1)
+		if(length(all_entries) > 1)
 			var/list/codex_data = list("<h3><b>[length(all_entries)] matches</b> for '[searching]':</h3>")
-			if(LAZYLEN(all_entries) > max_codex_entries_shown)
+			if(length(all_entries) > max_codex_entries_shown)
 				codex_data += "Showing first <b>[max_codex_entries_shown]</b> entries. <b>[length(all_entries) - 5] result\s</b> omitted.</br>"
 			codex_data += "<table width = 100%>"
 			for(var/i = 1 to min(length(all_entries), max_codex_entries_shown))

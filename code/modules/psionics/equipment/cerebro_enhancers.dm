@@ -52,7 +52,7 @@
 		return
 
 	var/removed
-	var/slots_left = max_boosted_faculties - LAZYLEN(boosted_faculties)
+	var/slots_left = max_boosted_faculties - length(boosted_faculties)
 	var/singleton/psionic_faculty/faculty = SSpsi.get_faculty(choice)
 	if(faculty.id in boosted_faculties)
 		LAZYREMOVE(boosted_faculties, faculty.id)
@@ -64,7 +64,7 @@
 		LAZYADD(boosted_faculties, faculty.id)
 	UNSETEMPTY(boosted_faculties)
 
-	slots_left = max_boosted_faculties - LAZYLEN(boosted_faculties)
+	slots_left = max_boosted_faculties - length(boosted_faculties)
 	to_chat(user, SPAN_NOTICE("You [removed ? "remove" : "install"] the [choice] brainboard [removed ? "from" : "in"] \the [src]. There [slots_left!=1 ? "are" : "is"] [slots_left] slot\s left."))
 
 /obj/item/clothing/head/helmet/space/psi_amp/proc/deintegrate()
@@ -131,8 +131,8 @@
 	if(!canremove)
 		return
 
-	if(LAZYLEN(boosted_faculties) < max_boosted_faculties)
-		to_chat(usr, SPAN_NOTICE("You still have [max_boosted_faculties - LAZYLEN(boosted_faculties)] facult[LAZYLEN(boosted_faculties) == 1 ? "y" : "ies"] to select. Use \the [src] in-hand to select them."))
+	if(length(boosted_faculties) < max_boosted_faculties)
+		to_chat(usr, SPAN_NOTICE("You still have [max_boosted_faculties - length(boosted_faculties)] facult[length(boosted_faculties) == 1 ? "y" : "ies"] to select. Use \the [src] in-hand to select them."))
 		return
 
 	var/mob/living/carbon/human/H = loc

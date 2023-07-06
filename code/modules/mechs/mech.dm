@@ -123,14 +123,14 @@
 	for(var/obj/item/mech_component/comp in list(arms, legs, head, body))
 		if(comp.exosuit_desc_string)
 			LAZYADD(component_descriptions, comp.exosuit_desc_string)
-		if(LAZYLEN(comp.has_hardpoints))
+		if(length(comp.has_hardpoints))
 			for(var/hardpoint in comp.has_hardpoints)
 				hardpoints[hardpoint] = null
 
 	if(head && head.radio)
 		radio = new(src)
 
-	if(LAZYLEN(component_descriptions))
+	if(length(component_descriptions))
 		desc = "[desc] It has been built with [english_list(component_descriptions)]."
 
 	// Create HUD.
@@ -180,9 +180,9 @@
 
 /mob/living/exosuit/examine(mob/user)
 	. = ..()
-	if(LAZYLEN(pilots) && (!hatch_closed || body.pilot_coverage < 100 || body.transparent_cabin))
+	if(length(pilots) && (!hatch_closed || body.pilot_coverage < 100 || body.transparent_cabin))
 		to_chat(user, "It is being piloted by [english_list(pilots, nothing_text = "nobody")].")
-	if(body && LAZYLEN(body.pilot_positions))
+	if(body && length(body.pilot_positions))
 		to_chat(user, "It can seat [length(body.pilot_positions)] pilot\s total.")
 	if(length(hardpoints))
 		to_chat(user, "It has the following hardpoints:")

@@ -61,7 +61,7 @@
 	var/list/injectors = list()
 	if(lan)
 		var/list/fuel_injectors = lan.get_devices(/obj/machinery/fusion_fuel_injector)
-		for(var/i = 1 to LAZYLEN(fuel_injectors))
+		for(var/i = 1 to length(fuel_injectors))
 			var/list/injector = list()
 			var/obj/machinery/fusion_fuel_injector/I = fuel_injectors[i]
 			injector["id"] =       "#[i]"

@@ -43,7 +43,7 @@
 	if(!check_general_join_blockers(joining, job))
 		return
 
-	if(!LAZYLEN(job.spawnpoints))
+	if(!length(job.spawnpoints))
 		to_chat(joining, SPAN_WARNING("There are no available spawn points for that job."))
 
 	var/turf/spawn_turf = get_turf(pick(job.spawnpoints))

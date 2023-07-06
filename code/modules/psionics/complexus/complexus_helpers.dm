@@ -1,6 +1,6 @@
 /datum/psi_complexus/proc/cancel()
 	sound_to(owner, sound('sound/effects/psi/power_fail.ogg'))
-	if(LAZYLEN(manifested_items))
+	if(length(manifested_items))
 		for(var/thing in manifested_items)
 			owner.drop_from_inventory(thing)
 			qdel(thing)

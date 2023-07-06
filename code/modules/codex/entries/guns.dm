@@ -39,7 +39,7 @@
 	if(scope_zoom)
 		traits += "It has a magnifying optical scope. It can be toggled with Use Scope verb."
 
-	if(LAZYLEN(firemodes) > 1)
+	if(length(firemodes) > 1)
 		traits += "It has multiple firemodes. Click it in hand to cycle them."
 
 	return jointext(traits, "<br>")

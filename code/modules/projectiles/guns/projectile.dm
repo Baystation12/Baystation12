@@ -107,7 +107,7 @@
 		if(EJECT_CASINGS) //eject casing onto ground.
 			chambered.dropInto(loc)
 			chambered.throw_at(get_ranged_target_turf(get_turf(src),turn(loc.dir,270),1), rand(0,1), 5)
-			if(LAZYLEN(chambered.fall_sounds))
+			if(length(chambered.fall_sounds))
 				playsound(loc, pick(chambered.fall_sounds), 50, 1)
 		if(CYCLE_CASINGS) //cycle the casing back to the end.
 			if(ammo_magazine)
@@ -252,7 +252,7 @@
 			var/turf/T = get_turf(user)
 			if(T)
 				for(var/obj/item/ammo_casing/C in loaded)
-					if(LAZYLEN(C.fall_sounds))
+					if(length(C.fall_sounds))
 						playsound(loc, pick(C.fall_sounds), 50, 1)
 					C.forceMove(T)
 					count++

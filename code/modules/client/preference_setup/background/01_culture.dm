@@ -35,7 +35,7 @@
 	for(var/token in tokens)
 		var/list/_cultures
 		GET_ALLOWED_VALUES(_cultures, token)
-		if(!LAZYLEN(_cultures))
+		if(!length(_cultures))
 			pref.cultural_info[token] = GLOB.using_map.default_cultural_info[token]
 		else
 			var/current_value = pref.cultural_info[token]

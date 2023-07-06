@@ -172,7 +172,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		icon_state = null
 		visible_overlays = overlays_standing
 
-	for(var/i = 1 to LAZYLEN(visible_overlays))
+	for(var/i = 1 to length(visible_overlays))
 		var/entry = visible_overlays[i]
 		if(istype(entry, /image))
 			var/image/overlay = entry

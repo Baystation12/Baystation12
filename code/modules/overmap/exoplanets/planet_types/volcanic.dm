@@ -134,7 +134,7 @@
 		var/destroyed = AM.lava_act(environment, 5000 + environment.temperature, pressure)
 		if(destroyed == TRUE)
 			victims -= W
-	if(!LAZYLEN(victims))
+	if(!length(victims))
 		return PROCESS_KILL
 
 /turf/simulated/floor/exoplanet/lava/get_footstep_sound(mob/caller)

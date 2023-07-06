@@ -128,7 +128,7 @@ var/global/list/all_gps_units = list()
 	else
 		adding_sites = GetConnectedZlevels(origin.z)
 
-	if(LAZYLEN(adding_sites))
+	if(length(adding_sites))
 		LAZYDISTINCTADD(reachable_z_levels, adding_sites)
 	return (target.z in reachable_z_levels)
 

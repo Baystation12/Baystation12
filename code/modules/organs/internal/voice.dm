@@ -8,7 +8,7 @@
 /obj/item/organ/internal/voicebox/Initialize()
 	. = ..()
 	var/list/language_datums = list()
-	if(LAZYLEN(assists_languages))
+	if(length(assists_languages))
 		for(var/L in assists_languages)
 			var/lang = all_languages[L]
 			if(lang) language_datums[lang] = TRUE

@@ -252,7 +252,7 @@
 	// We also make sure that there is at least one valid branch-rank combo for the species.
 	if(!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
 		return TRUE
-	return LAZYLEN(get_branch_rank(S))
+	return length(get_branch_rank(S))
 
 /datum/job/proc/is_species_whitelist_allowed(client/C)
 	if (isnull(use_species_whitelist))
@@ -387,7 +387,7 @@
 			reasons["Your species choice does not allow it."] = TRUE
 		if(!S.check_background(src, caller.prefs))
 			reasons["Your background choices do not allow it."] = TRUE
-	if(LAZYLEN(reasons))
+	if(length(reasons))
 		. = reasons
 
 /datum/job/proc/dress_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)

@@ -443,7 +443,7 @@
 					LAZYDISTINCTADD(possible_reactions, cur_reaction)
 
 			//if there are no possible reactions here, abandon this primary reactant and move on
-			if(!LAZYLEN(possible_reactions))
+			if(!length(possible_reactions))
 				continue
 
 			/// Sort based on reaction priority to avoid deut-deut eating all the deut before deut-trit can run etc.

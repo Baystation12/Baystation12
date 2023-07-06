@@ -345,7 +345,7 @@
 		new frame_type(get_turf(src), dir)
 	for(var/I in component_parts)
 		uninstall_component(I, refresh_parts = FALSE)
-	while(LAZYLEN(uncreated_component_parts))
+	while(length(uncreated_component_parts))
 		var/path = uncreated_component_parts[1]
 		uninstall_component(path, refresh_parts = FALSE)
 	for(var/obj/O in src)

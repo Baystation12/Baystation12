@@ -19,7 +19,7 @@
 	for(var/obj/item/paper/note in get_turf(src))
 		note.forceMove(src)
 		LAZYADD(notices, note)
-		if(LAZYLEN(notices) >= max_notices)
+		if(length(notices) >= max_notices)
 			break
 
 	// Automatically place noticeboards that aren't mapped to specific positions.
@@ -83,7 +83,7 @@
 	dismantle()
 
 /obj/structure/noticeboard/on_update_icon()
-	icon_state = "[base_icon_state][LAZYLEN(notices)]"
+	icon_state = "[base_icon_state][length(notices)]"
 
 
 /obj/structure/noticeboard/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -92,7 +92,7 @@
 		if (jobban_isbanned(user, "Graffitiy"))
 			USE_FEEDBACK_FAILURE("You are banned from leaving persistent information across rounds.")
 			return TRUE
-		if (LAZYLEN(notices) >= max_notices)
+		if (length(notices) >= max_notices)
 			USE_FEEDBACK_FAILURE("\The [src] is already full of notices. There's no room for \the [tool].")
 			return TRUE
 		if (!user.unEquip(tool, src))

@@ -91,7 +91,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	INCREMENT_WORLD_Z_SIZE
 	forceMove(locate(1,1,world.maxz))
 
-	if (LAZYLEN(possible_themes))
+	if (length(possible_themes))
 		var/datum/exoplanet_theme/T = pick(possible_themes)
 		themes += new T
 		possible_themes -= T
@@ -300,7 +300,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	if (length(animals) && user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
 		extra_data += "Life traces detected"
 
-	if (LAZYLEN(spawned_features) && user.skill_check(SKILL_SCIENCE, SKILL_TRAINED))
+	if (length(spawned_features) && user.skill_check(SKILL_SCIENCE, SKILL_TRAINED))
 		var/ruin_num = 0
 		for (var/datum/map_template/ruin/exoplanet/R in spawned_features)
 			if (!(R.ruin_tags & RUIN_NATURAL))

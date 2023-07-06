@@ -21,7 +21,7 @@
 
 // Use the tray in-hand to dump out all its items.
 /obj/item/tray/attack_self(mob/living/user)
-	if (LAZYLEN(carrying))
+	if (length(carrying))
 		var/turf/T = get_turf(user)
 		overlays.Cut()
 		for (var/obj/item/carried in carrying)
@@ -102,7 +102,7 @@
 
 	var/turf/T = get_turf(A)
 
-	if (LAZYLEN(carrying))
+	if (length(carrying))
 		if (istype(A, /obj/structure/table)) // If we're a table, prioritize dumping stuff out
 			overlays.Cut()
 			for (var/obj/item/carried in carrying)
@@ -124,7 +124,7 @@
 					add_item_overlay(carried) // Re-add overlays for items we're keeping on the tray, since we fully cut overlays earlier
 			if (!fed_in)
 				to_chat(user, SPAN_WARNING("Nothing in \the [src] is valid for \the [A]!"))
-			else if (LAZYLEN(carrying))
+			else if (length(carrying))
 				user.visible_message(SPAN_NOTICE("[user] fills \the [A] with \the [src]."), SPAN_NOTICE("You fill \the [A] with some of \the [src]'s contents."))
 			else
 				user.visible_message(SPAN_NOTICE("[user] fills \the [A] with \the [src]."), SPAN_NOTICE("You fill \the [A] with \the [src]."))

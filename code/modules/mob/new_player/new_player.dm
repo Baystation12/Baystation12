@@ -320,7 +320,7 @@
 			for(var/raisin in job.get_unavailable_reasons(client))
 				hidden_reasons[raisin] = TRUE
 
-	if(LAZYLEN(job_summaries))
+	if(length(job_summaries))
 		dat += job_summaries
 	else
 		dat += "<tr><td>No available positions.</td></tr>"
@@ -341,14 +341,14 @@
 					for(var/raisin in job.get_unavailable_reasons(client))
 						hidden_reasons[raisin] = TRUE
 
-			if(LAZYLEN(job_summaries))
+			if(length(job_summaries))
 				dat += job_summaries
 			else
 				dat += "No available positions."
 	// END SUBMAP JOBS
 
 	dat += "</table></center>"
-	if(LAZYLEN(hidden_reasons))
+	if(length(hidden_reasons))
 		var/list/additional_dat = list("<br><b>Some roles have been hidden from this list for the following reasons:</b><br>")
 		for(var/raisin in hidden_reasons)
 			additional_dat += "[raisin]<br>"

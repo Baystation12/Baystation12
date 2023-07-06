@@ -16,9 +16,9 @@
 		else
 			icon_state = "[initial(icon_state)]-e"
 	if(ammo_indicator)
-		if(!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
+		if(!ammo_magazine || !length(ammo_magazine.stored_ammo))
 			overlays += image(icon, "[initial(icon_state)]-ammo0")
-		else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
+		else if(length(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
 			overlays += image(icon, "[initial(icon_state)]-ammo1")
 		else
 			overlays += image(icon, "[initial(icon_state)]-ammo2")

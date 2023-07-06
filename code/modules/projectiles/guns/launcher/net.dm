@@ -86,13 +86,13 @@
 		load(new /obj/item/net_shell)
 
 /obj/item/gun/launcher/net/borg/can_load(obj/item/net_shell/S, mob/user)
-	if(LAZYLEN(shells) >= max_shells)
+	if(length(shells) >= max_shells)
 		to_chat(user, SPAN_WARNING("\The [src] already has the maximum number of shells loaded."))
 		return FALSE
 	return TRUE
 
 /obj/item/gun/launcher/net/borg/proc/update_chambered_shell()
-	if(!chambered && LAZYLEN(shells))
+	if(!chambered && length(shells))
 		chambered = shells[1]
 		LAZYREMOVE(shells, chambered)
 
@@ -110,4 +110,4 @@
 
 /obj/item/gun/launcher/net/borg/examine(mob/user)
 	. = ..()
-	to_chat(user, "There are [LAZYLEN(shells)] shell\s loaded.")
+	to_chat(user, "There are [length(shells)] shell\s loaded.")

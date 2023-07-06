@@ -28,8 +28,8 @@
 		node.graph = src
 
 /datum/graph/Destroy()
-	if(length(nodes) || LAZYLEN(pending_connections) || LAZYLEN(pending_disconnections))
-		crash_with("Prevented attempt to delete a network that still has nodes: [length(nodes)] - [LAZYLEN(pending_connections)] - [LAZYLEN(pending_disconnections)]")
+	if(length(nodes) || length(pending_connections) || length(pending_disconnections))
+		crash_with("Prevented attempt to delete a network that still has nodes: [length(nodes)] - [length(pending_connections)] - [length(pending_disconnections)]")
 		return QDEL_HINT_LETMELIVE
 	. = ..()
 
@@ -117,7 +117,7 @@
 	return
 
 /datum/graph/proc/ProcessPendingConnections()
-	while(LAZYLEN(pending_connections))
+	while(length(pending_connections))
 		var/datum/node/N = pending_connections[length(pending_connections)]
 		var/list/new_neighbours = pending_connections[N]
 		LIST_DEC(pending_connections)
@@ -138,7 +138,7 @@
 				edges[new_neighbour] = neighbour_edges
 			neighbour_edges |= N
 
-	if(!LAZYLEN(pending_disconnections))
+	if(!length(pending_disconnections))
 		return
 
 	for(var/pending_node_disconnect in pending_disconnections)

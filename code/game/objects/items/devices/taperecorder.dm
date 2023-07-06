@@ -508,7 +508,7 @@
 
 
 /obj/item/device/tape/proc/cut(mob/user)
-	if(!LAZYLEN(timestamp))
+	if(!length(timestamp))
 		to_chat(user, SPAN_NOTICE("There's nothing on this tape!"))
 		return
 	var/list/output = list("<center>")

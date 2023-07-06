@@ -67,7 +67,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	add_fingerprint(user, 0, I)
 	if(mode<=0) // It's off
 		if(isScrewdriver(I))
-			if(length(contents) > LAZYLEN(component_parts))
+			if(length(contents) > length(component_parts))
 				to_chat(user, "Eject the items first!")
 				return
 			if(mode==0) // It's off but still not unscrewed
@@ -81,7 +81,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 				to_chat(user, "You attach the screws around the power connection.")
 				return
 		else if(isWelder(I) && mode==-1)
-			if(length(contents) > LAZYLEN(component_parts))
+			if(length(contents) > length(component_parts))
 				to_chat(user, "Eject the items first!")
 				return
 			var/obj/item/weldingtool/W = I
@@ -362,7 +362,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		return
 
 	// 	check for items/vomit in disposal - occupied light
-	if(length(contents) > LAZYLEN(component_parts) || reagents.total_volume)
+	if(length(contents) > length(component_parts) || reagents.total_volume)
 		overlays += image('icons/obj/pipes/disposal.dmi', "dispover-full")
 
 	// charging and ready light
@@ -380,7 +380,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 	flush_count++
 	if( flush_count >= flush_every_ticks )
-		if( length(contents) > LAZYLEN(component_parts) || reagents.total_volume)
+		if( length(contents) > length(component_parts) || reagents.total_volume)
 			if(mode == 2)
 				spawn(0)
 					flush()

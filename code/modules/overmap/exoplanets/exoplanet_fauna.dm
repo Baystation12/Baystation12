@@ -62,7 +62,7 @@
 	name = "spawn exoplanet animal"
 
 /obj/effect/landmark/exoplanet_spawn/proc/do_spawn(obj/effect/overmap/visitable/sector/exoplanet/planet)
-	if (LAZYLEN(planet.fauna_types))
+	if (length(planet.fauna_types))
 		var/beastie = pick(planet.fauna_types)
 		var/mob/M = new beastie(get_turf(src))
 		planet.adapt_animal(M)
@@ -72,7 +72,7 @@
 	name = "spawn exoplanet megafauna"
 
 /obj/effect/landmark/exoplanet_spawn/megafauna/do_spawn(obj/effect/overmap/visitable/sector/exoplanet/planet)
-	if (LAZYLEN(planet.megafauna_types))
+	if (length(planet.megafauna_types))
 		var/beastie = pick(planet.megafauna_types)
 		var/mob/M = new beastie(get_turf(src))
 		planet.adapt_animal(M)

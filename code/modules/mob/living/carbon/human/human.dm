@@ -1201,10 +1201,10 @@
 	pixel_y = default_pixel_y
 	pixel_z = default_pixel_z
 
-	if(LAZYLEN(descriptors))
+	if(length(descriptors))
 		descriptors = null
 
-	if(LAZYLEN(species.descriptors))
+	if(length(species.descriptors))
 		descriptors = list()
 		for(var/desctype in species.descriptors)
 			var/datum/mob_descriptor/descriptor = species.descriptors[desctype]
@@ -1304,7 +1304,7 @@
 		var/datum/language/lang = thing
 		add_language(lang.name)
 
-	if(LAZYLEN(default_languages) && isnull(default_language))
+	if(length(default_languages) && isnull(default_language))
 		default_language = default_languages[1]
 
 /mob/living/carbon/human/proc/bloody_doodle()

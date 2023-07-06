@@ -52,7 +52,7 @@
 		return
 
 	var/has_pilot_with_client = owner.client
-	if(!has_pilot_with_client && LAZYLEN(owner.pilots))
+	if(!has_pilot_with_client && length(owner.pilots))
 		for(var/thing in owner.pilots)
 			var/mob/pilot = thing
 			if(pilot.client)
@@ -108,7 +108,7 @@
 	else
 		value = min(value, BAR_CAP)
 		// Draw statbar.
-		if(!LAZYLEN(GLOB.hardpoint_bar_cache))
+		if(!length(GLOB.hardpoint_bar_cache))
 			for(var/i=0;i<BAR_CAP;i++)
 				var/image/bar = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar")
 				bar.pixel_x = 24+(i*2)

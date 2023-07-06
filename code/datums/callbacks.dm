@@ -75,7 +75,7 @@ var/global/const/Callback = /datum/callback
 		return
 	else if (istype(target))
 		var/list/params = list(target.target, target.callable)
-		if (LAZYLEN(target.params))
+		if (length(target.params))
 			params += target.params
 		if (length(args) > 1)
 			params += args.Copy(2)

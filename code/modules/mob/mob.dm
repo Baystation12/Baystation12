@@ -354,13 +354,13 @@
 		crash_with("Improper /examine() override: [log_info_line(A)]")
 	if(get_skill_value(SKILL_FORENSICS) >= SKILL_EXPERIENCED && get_dist(src, A) <= (get_skill_value(SKILL_FORENSICS) - SKILL_TRAINED))
 		var/clue
-		if(LAZYLEN(A.suit_fibers))
+		if(length(A.suit_fibers))
 			to_chat(src, SPAN_NOTICE("You notice some fibers embedded in \the [A]."))
 			clue = 1
-		if(LAZYLEN(A.fingerprints))
+		if(length(A.fingerprints))
 			to_chat(src, SPAN_NOTICE("You notice a partial print on \the [A]."))
 			clue = 1
-		if(LAZYLEN(A.gunshot_residue))
+		if(length(A.gunshot_residue))
 			if(isliving(src))
 				var/mob/living/M = src
 				if(M.isSynthetic())
@@ -373,7 +373,7 @@
 				to_chat(src, SPAN_NOTICE("You notice a faint acrid smell coming from \the [A]."))
 			clue = 1
 		//Noticing wiped blood is a bit harder
-		if((get_skill_value(SKILL_FORENSICS) >= SKILL_MASTER) && LAZYLEN(A.blood_DNA))
+		if((get_skill_value(SKILL_FORENSICS) >= SKILL_MASTER) && length(A.blood_DNA))
 			to_chat(src, SPAN_WARNING("You notice faint blood traces on \The [A]."))
 			clue = 1
 		if(clue && has_client_color(/datum/client_color/noir))
@@ -923,7 +923,7 @@
 	return (length(embedded) > 0)
 
 /mob/proc/remove_implant(obj/item/implant, surgical_removal = FALSE)
-	if(!LAZYLEN(get_visible_implants(0))) //Yanking out last object - removing verb.
+	if(!length(get_visible_implants(0))) //Yanking out last object - removing verb.
 		verbs -= /mob/proc/yank_out_object
 	for(var/obj/item/O in pinned)
 		if(O == implant)

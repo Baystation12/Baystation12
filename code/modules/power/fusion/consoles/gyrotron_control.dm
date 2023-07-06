@@ -50,7 +50,7 @@
 	var/list/gyrotrons = list()
 	if(lan && gyrotrons)
 		var/list/lan_gyrotrons = lan.get_devices(/obj/machinery/power/emitter/gyrotron)
-		for(var/i = 1 to LAZYLEN(lan_gyrotrons))
+		for(var/i = 1 to length(lan_gyrotrons))
 			var/list/gyrotron = list()
 			var/obj/machinery/power/emitter/gyrotron/G = lan_gyrotrons[i]
 			gyrotron["id"] =        "#[i]"

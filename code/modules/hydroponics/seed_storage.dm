@@ -109,7 +109,7 @@
 
 /obj/machinery/seed_storage/Initialize(mapload)
 	. = ..()
-	if (LAZYLEN(starting_seeds))
+	if (length(starting_seeds))
 		for(var/typepath in starting_seeds)
 			var/amount = starting_seeds[typepath]
 			if(isnull(amount))

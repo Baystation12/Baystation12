@@ -5,7 +5,7 @@ var/global/const/MOVEMENT_PROCEED = FLAG(2)
 var/global/const/MOVEMENT_STOP    = FLAG(3)
 
 #define INIT_MOVEMENT_HANDLERS \
-if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
+if(length(movement_handlers) && ispath(movement_handlers[1])) { \
 	var/new_handlers = list(); \
 	for(var/path in movement_handlers){ \
 		var/arguments = movement_handlers[path];   \
@@ -22,7 +22,7 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 
 // We don't want to check for subtypes, hence why we don't call is_path_in_list(), etc.
 /atom/movable/proc/HasMovementHandler(handler_path)
-	if(!LAZYLEN(movement_handlers))
+	if(!length(movement_handlers))
 		return FALSE
 	if(ispath(movement_handlers[1]))
 		return (handler_path in movement_handlers)
@@ -39,7 +39,7 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	. = new handler_path(src)
 
 	// If a handler_path_to_add_before was given, attempt to find it and insert our handler just before it
-	if(handler_path_to_add_before && LAZYLEN(movement_handlers))
+	if(handler_path_to_add_before && length(movement_handlers))
 		var/index = 0
 		for(var/handler in movement_handlers)
 			index++

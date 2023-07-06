@@ -22,17 +22,17 @@
 		name_language = default_language
 
 	// Remove any overlap for the sake of presentation.
-	if(LAZYLEN(additional_langs))
+	if(length(additional_langs))
 		additional_langs -= language
 		additional_langs -= name_language
 		additional_langs -= default_language
 		UNSETEMPTY(additional_langs)
 
-	if(LAZYLEN(secondary_langs))
+	if(length(secondary_langs))
 		secondary_langs -= language
 		secondary_langs -= name_language
 		secondary_langs -= default_language
-		if(LAZYLEN(additional_langs))
+		if(length(additional_langs))
 			secondary_langs -= additional_langs
 		UNSETEMPTY(secondary_langs)
 
@@ -81,9 +81,9 @@
 /singleton/cultural_info/proc/get_text_details()
 	. = list()
 	var/list/spoken_langs = get_spoken_languages()
-	if(LAZYLEN(spoken_langs))
+	if(length(spoken_langs))
 		. += "<b>Language(s):</b> [english_list(spoken_langs)]."
-	if(LAZYLEN(secondary_langs))
+	if(length(secondary_langs))
 		. += "<b>Optional language(s):</b> [english_list(secondary_langs)]."
 	if(!isnull(economic_power))
 		. += "<b>Economic power:</b> [round(100 * economic_power)]%"
@@ -92,7 +92,7 @@
 	. = list()
 	if(language)                  . |= language
 	if(default_language)          . |= default_language
-	if(LAZYLEN(additional_langs)) . |= additional_langs
+	if(length(additional_langs)) . |= additional_langs
 
 /singleton/cultural_info/proc/get_formal_name_suffix()
 	return

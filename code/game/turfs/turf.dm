@@ -366,7 +366,7 @@ var/global/const/enterloopsanity = 100
  * Returns false if stepping into a tile would cause harm (e.g. open space while unable to fly, water tile while a slime, lava, etc).
  */
 /turf/proc/is_safe_to_enter(mob/living/L)
-	if(LAZYLEN(dangerous_objects))
+	if(length(dangerous_objects))
 		for(var/obj/O in dangerous_objects)
 			if(!O.is_safe_to_step(L))
 				return FALSE

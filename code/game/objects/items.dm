@@ -201,7 +201,7 @@
 		else
 			desc_comp += "No tech origins detected.<BR>"
 
-		if(LAZYLEN(matter))
+		if(length(matter))
 			desc_comp += "[SPAN_NOTICE("Extractable materials:")]<BR>"
 			for(var/mat in matter)
 				desc_comp += "[SSmaterials.get_material_by_name(mat)]<BR>"

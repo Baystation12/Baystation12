@@ -243,7 +243,7 @@
 		else
 			if(E.is_stump())
 				wound_flavor_text[E.name] += "<b>[P.He] [P.has] a stump where [P.his] [organ_descriptor] should be.</b>\n"
-				if(LAZYLEN(E.wounds) && E.parent)
+				if(length(E.wounds) && E.parent)
 					wound_flavor_text[E.name] += "[P.He] [P.has] [E.get_wounds_desc()] on [P.his] [E.parent.name].<br>"
 			else
 				if(!is_synth && BP_IS_ROBOTIC(E) && (E.parent && !BP_IS_ROBOTIC(E.parent) && !BP_IS_ASSISTED(E.parent)))
@@ -259,7 +259,7 @@
 
 		for(var/datum/wound/wound in E.wounds)
 			var/list/embedlist = wound.embedded_objects
-			if(LAZYLEN(embedlist))
+			if(length(embedlist))
 				shown_objects += embedlist
 				var/parsedembed[0]
 				for(var/obj/embedded in embedlist)

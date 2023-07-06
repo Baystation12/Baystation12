@@ -263,7 +263,7 @@
 	if(istype(W,/obj/item/reagent_containers/syringe))
 		var/obj/item/reagent_containers/syringe/S = W
 		var/datum/reagent/blood/injected = locate() in S.reagents.reagent_list //Grab some blood
-		if(injected && LAZYLEN(injected.data))
+		if(injected && length(injected.data))
 			var/loaded_dna = injected.data
 			var/weakref/R = loaded_dna["donor"]
 			var/mob/living/carbon/human/H = R.resolve()

@@ -29,7 +29,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 			req_components = req_components.Copy()
 			if(board.additional_spawn_components)
 				req_components += board.additional_spawn_components
-			if(LAZYLEN(req_components))
+			if(length(req_components))
 				LAZYINITLIST(uncreated_component_parts)
 				for(var/type in req_components)
 					uncreated_component_parts[type] += (req_components[type] || 1)
@@ -350,7 +350,7 @@ Standard helpers for users interacting with machinery parts.
 	if(!construct_state)
 		return
 	var/list/requirements = construct_state.get_requirements(src)
-	if(LAZYLEN(requirements))
+	if(length(requirements))
 		for(var/required_type in requirements)
 			var/needed = requirements[required_type]
 			var/present = number_of_components(required_type)

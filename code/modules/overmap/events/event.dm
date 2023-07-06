@@ -185,7 +185,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	. = ..()
 	icon_state = pick(event_icon_states)
 	overmap_event_handler.update_hazards(loc)
-	if(LAZYLEN(colors))
+	if(length(colors))
 		color = pick(colors)
 
 /obj/effect/overmap/event/Move()

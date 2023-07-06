@@ -57,7 +57,7 @@
 	if(!gun)
 		gun = new(src)
 		equipment += gun
-	if(LAZYLEN(gun.shells) < gun.max_shells)
+	if(length(gun.shells) < gun.max_shells)
 		gun.load(new /obj/item/net_shell)
 
 	for(var/flagtype in flag_types)

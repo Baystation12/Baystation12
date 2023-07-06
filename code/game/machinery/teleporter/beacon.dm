@@ -132,7 +132,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 	if (user.skill_check(SKILL_DEVICES, SKILL_TRAINED))
 		if (wires.IsIndexCut(TELEBEACON_WIRE_SIGNALLER))
 			to_chat(user, SPAN_WARNING("The signal lights appear to be disabled."))
-		else if (LAZYLEN(connected_computers))
+		else if (length(connected_computers))
 			to_chat(user, SPAN_WARNING("The signal lights indicate it has an active teleporter connection."))
 
 
@@ -163,7 +163,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 	else if (functioning())
 		if (wires.IsIndexCut(TELEBEACON_WIRE_RELAY) || wires.IsIndexCut(TELEBEACON_WIRE_SIGNALLER))
 			icon_state += "_offline"
-		else if (LAZYLEN(connected_computers))
+		else if (length(connected_computers))
 			icon_state += "_locked"
 	else
 		icon_state += "_unpowered"
@@ -215,13 +215,13 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 	if (computer.target == src)
 		computer.lost_target()
 	update_icon()
-	if (!LAZYLEN(connected_computers))
+	if (!length(connected_computers))
 		update_use_power(POWER_USE_IDLE)
 
 
 /// Disconnects all hubs from the beacon.
 /obj/machinery/tele_beacon/proc/disconnect_computers()
-	if (!LAZYLEN(connected_computers))
+	if (!length(connected_computers))
 		return
 
 	for (var/obj/machinery/computer/teleporter/computer in connected_computers)

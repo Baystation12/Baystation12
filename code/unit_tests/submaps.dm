@@ -13,7 +13,7 @@
 			non_unique_descriptors |= "[checked_submaps[arch.descriptor]] - [arch.descriptor]"
 		else
 			checked_submaps[arch.descriptor] = arch.type
-	if(LAZYLEN(non_unique_descriptors))
+	if(length(non_unique_descriptors))
 		fail("Some submap archetypes do not have unique descriptors:\n[jointext(non_unique_descriptors, "\n")].")
 	else
 		pass("All submap archetypes had unique descriptors.")

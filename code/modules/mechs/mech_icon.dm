@@ -38,7 +38,7 @@
 	if(body)
 		new_overlays += get_mech_image(body.decal, "[body.icon_state]_cockpit", body.on_mech_icon, overlay_layer = MECH_INTERMEDIATE_LAYER)
 	update_pilots(FALSE)
-	if(LAZYLEN(pilot_overlays))
+	if(length(pilot_overlays))
 		new_overlays += pilot_overlays
 	if(body)
 		new_overlays += get_mech_image(body.decal, "[body.icon_state]_overlay[hatch_closed ? "" : "_open"]", body.on_mech_icon, body.color, MECH_COCKPIT_LAYER)
@@ -67,19 +67,19 @@
 	overlays = new_overlays
 
 /mob/living/exosuit/proc/update_pilots(update_overlays = TRUE)
-	if(update_overlays && LAZYLEN(pilot_overlays))
+	if(update_overlays && length(pilot_overlays))
 		overlays -= pilot_overlays
 	pilot_overlays = null
 	if(body && !(body.hide_pilot))
-		for(var/i = 1 to LAZYLEN(pilots))
+		for(var/i = 1 to length(pilots))
 			var/mob/pilot = pilots[i]
 			var/image/draw_pilot = new
 			draw_pilot.appearance = pilot
 			var/rel_pos = dir == NORTH ? -1 : 1
-			draw_pilot.layer = MECH_PILOT_LAYER + (body ? ((LAZYLEN(body.pilot_positions)-i)*0.001 * rel_pos) : 0)
+			draw_pilot.layer = MECH_PILOT_LAYER + (body ? ((length(body.pilot_positions)-i)*0.001 * rel_pos) : 0)
 			draw_pilot.plane = FLOAT_PLANE
 			draw_pilot.appearance_flags = KEEP_TOGETHER
-			if(body && i <= LAZYLEN(body.pilot_positions))
+			if(body && i <= length(body.pilot_positions))
 				var/list/offset_values = body.pilot_positions[i]
 				var/list/directional_offset_values = offset_values["[dir]"]
 				draw_pilot.pixel_x = pilot.default_pixel_x + directional_offset_values["x"]
@@ -94,7 +94,7 @@
 			draw_pilot.filters = filter(type = "alpha", icon = icon(body.on_mech_icon, "[body.icon_state]_pilot_mask[hatch_closed ? "" : "_open"]", dir), x = diff_x, y = diff_y)
 
 			LAZYADD(pilot_overlays, draw_pilot)
-		if(update_overlays && LAZYLEN(pilot_overlays))
+		if(update_overlays && length(pilot_overlays))
 			overlays += pilot_overlays
 
 /mob/living/exosuit/regenerate_icons()

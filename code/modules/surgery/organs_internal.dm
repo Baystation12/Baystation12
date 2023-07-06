@@ -100,7 +100,7 @@
 		var/obj/item/organ/I = target.internal_organs_by_name[organ]
 		if(I && !(I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
 			LAZYDISTINCTADD(attached_organs, organ)
-	if(!LAZYLEN(attached_organs))
+	if(!length(attached_organs))
 		to_chat(user, SPAN_WARNING("You can't find any organs to separate."))
 	else
 		var/obj/item/organ/organ_to_remove = attached_organs[1]
@@ -152,7 +152,7 @@
 		for(var/obj/item/organ/internal/I in affected.implants)
 			if(I.status & ORGAN_CUT_AWAY)
 				LAZYDISTINCTADD(removable_organs, I)
-		if(!LAZYLEN(removable_organs))
+		if(!length(removable_organs))
 			to_chat(user, SPAN_WARNING("You can't find any removable organs."))
 		else
 			var/obj/item/organ/organ_to_remove = removable_organs[1]
@@ -328,7 +328,7 @@
 		if(I && (I.status & ORGAN_CUT_AWAY))
 			LAZYADD(attachable_organs, I)
 
-	if(!LAZYLEN(attachable_organs))
+	if(!length(attachable_organs))
 		return FALSE
 
 	var/obj/item/organ/organ_to_replace = input(user, "Which organ do you want to reattach?") as null|anything in attachable_organs

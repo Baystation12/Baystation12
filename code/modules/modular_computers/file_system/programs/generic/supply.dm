@@ -49,7 +49,7 @@
 	var/list/data = host.initial_data()
 	var/is_admin = emagged || check_access(user, admin_access)
 	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
-	if(!LAZYLEN(category_names) || !LAZYLEN(category_contents) || current_security_level != security_state.current_security_level || emagged_memory != emagged )
+	if(!length(category_names) || !length(category_contents) || current_security_level != security_state.current_security_level || emagged_memory != emagged )
 		generate_categories()
 		current_security_level = security_state.current_security_level
 		emagged_memory = emagged

@@ -51,7 +51,7 @@
 
 /obj/item/stock_parts/proc/stop_processing(obj/machinery/machine)
 	LAZYREMOVE(machine.processing_parts, src)
-	if(!LAZYLEN(machine.processing_parts))
+	if(!length(machine.processing_parts))
 		STOP_PROCESSING_MACHINE(machine, MACHINERY_PROCESS_COMPONENTS)
 	unset_status(machine, PART_STAT_PROCESSING)
 

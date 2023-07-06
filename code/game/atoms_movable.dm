@@ -149,7 +149,7 @@
 		if (pulledby.pulling == src)
 			pulledby.pulling = null
 		pulledby = null
-	if (LAZYLEN(movement_handlers) && !ispath(movement_handlers[1]))
+	if (length(movement_handlers) && !ispath(movement_handlers[1]))
 		QDEL_NULL_LIST(movement_handlers)
 	if (bound_overlay)
 		QDEL_NULL(bound_overlay)

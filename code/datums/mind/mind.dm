@@ -151,7 +151,7 @@
 		if(can_modify)
 			var/did_generate_goal = generate_goals(assigned_job, TRUE, 1, bypass_goal_checks = is_admin)
 			if(did_generate_goal && goals)
-				var/datum/goal/goal = goals[LAZYLEN(goals)]
+				var/datum/goal/goal = goals[length(goals)]
 				to_chat(current, SPAN_NOTICE("<b>You have received a new goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
 				if(usr != current)
 					to_chat(usr, SPAN_NOTICE("<b>You have added a new goal to \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
@@ -189,7 +189,7 @@
 			if(generate_goals(assigned_job, TRUE, 1, bypass_goal_checks = TRUE))
 				delete_goal(assigned_job, goal, TRUE)
 				if(goals)
-					goal = goals[LAZYLEN(goals)]
+					goal = goals[length(goals)]
 					if(usr == current)
 						to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
 					else

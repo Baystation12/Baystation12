@@ -83,7 +83,7 @@
 	. = ..()
 
 /obj/effect/shuttle_landmark/ship/cannot_depart(datum/shuttle/shuttle)
-	if(LAZYLEN(visitors))
+	if(length(visitors))
 		return "Grappled by other shuttle; cannot manouver."
 
 /obj/effect/shuttle_landmark/visiting_shuttle

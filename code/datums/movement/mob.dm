@@ -6,7 +6,7 @@
 /datum/movement_handler/mob/relayed_movement/MayMove(mob/mover, is_external)
 	if(is_external)
 		return MOVEMENT_PROCEED
-	if(mover == mob && !(prevent_host_move && LAZYLEN(allowed_movers) && !LAZYISIN(allowed_movers, mover)))
+	if(mover == mob && !(prevent_host_move && length(allowed_movers) && !LAZYISIN(allowed_movers, mover)))
 		return MOVEMENT_PROCEED
 	if(LAZYISIN(allowed_movers, mover))
 		return MOVEMENT_PROCEED
@@ -182,7 +182,7 @@
 			to_chat(mob, SPAN_NOTICE("You're buckled to \the [mob.buckled]!"))
 		return MOVEMENT_STOP
 
-	if(LAZYLEN(mob.pinned))
+	if(length(mob.pinned))
 		if(mover == mob)
 			to_chat(mob, SPAN_NOTICE("You're pinned down by \a [mob.pinned[1]]!"))
 		return MOVEMENT_STOP

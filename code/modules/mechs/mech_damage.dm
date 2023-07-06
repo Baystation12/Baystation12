@@ -20,7 +20,7 @@
 /mob/living/exosuit/apply_effect(effect = 0, effecttype = EFFECT_STUN, blocked = 0)
 	if(!effect || (blocked >= 100))
 		return 0
-	if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
+	if(length(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
 		if(effect > 0 && effecttype == DAMAGE_RADIATION)
 			effect = max((1-(get_armors_by_zone(null, DAMAGE_RADIATION)/100))*effect/(blocked+1),0)
 		var/mob/living/pilot = pick(pilots)
@@ -35,7 +35,7 @@
 
 	switch(def_zone)
 		if(BP_HEAD , BP_CHEST, BP_MOUTH, BP_EYES)
-			if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
+			if(length(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
 				var/mob/living/pilot = pick(pilots)
 				var/zone = pilot.resolve_item_attack(I, user, def_zone)
 				if(zone)
@@ -47,7 +47,7 @@
 	return def_zone //Careful with effects, mechs shouldn't be stunned
 
 /mob/living/exosuit/hitby(atom/movable/AM, datum/thrownthing/TT)
-	if (!hatch_closed && (LAZYLEN(pilots) < length(body.pilot_positions)))
+	if (!hatch_closed && (length(pilots) < length(body.pilot_positions)))
 		var/mob/living/M = AM
 		if (istype(M))
 			var/chance = 50 //Throwing someone at an empty exosuit MAY put them in the seat
@@ -61,7 +61,7 @@
 					visible_message(SPAN_NOTICE("[message]"))
 					return
 
-	if (LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
+	if (length(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
 		var/mob/living/pilot = pick(pilots)
 		return pilot.hitby(AM, TT)
 	. = ..()
@@ -71,7 +71,7 @@
 		return PROJECTILE_FORCE_MISS
 	switch(def_zone)
 		if(BP_HEAD , BP_CHEST, BP_MOUTH, BP_EYES)
-			if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
+			if(length(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
 				var/mob/living/pilot = pick(pilots)
 				return pilot.bullet_act(P, def_zone, used_weapon)
 	..()

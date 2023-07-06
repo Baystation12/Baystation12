@@ -67,7 +67,7 @@
 	var/list/turrets = list()
 	if(lan)
 		var/list/pointdefense_turrets = lan.get_devices(/obj/machinery/pointdefense)
-		for(var/i = 1 to LAZYLEN(pointdefense_turrets))
+		for(var/i = 1 to length(pointdefense_turrets))
 			var/list/turret = list()
 			var/obj/machinery/pointdefense/PD = pointdefense_turrets[i]
 			turret["id"] =          "#[i]"

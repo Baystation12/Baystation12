@@ -776,7 +776,7 @@
 
 /atom/attack_hand(mob/user)
 	..()
-	if(LAZYLEN(climbers) && !(user in climbers))
+	if(length(climbers) && !(user in climbers))
 		user.visible_message(SPAN_WARNING("[user.name] shakes \the [src]."), \
 					SPAN_NOTICE("You shake \the [src]."))
 		object_shaken()

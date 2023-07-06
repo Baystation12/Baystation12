@@ -155,7 +155,7 @@
 
 /mob/living/simple_animal/Initialize()
 	. = ..()
-	if(LAZYLEN(natural_armor))
+	if(length(natural_armor))
 		set_extension(src, armor_type, natural_armor)
 	if(!icon_living)
 		icon_living = initial(icon_state)

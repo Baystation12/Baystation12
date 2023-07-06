@@ -256,7 +256,7 @@
 	if(result == PROJECTILE_FORCE_MISS)
 		if(!silenced)
 			target_mob.visible_message(SPAN_NOTICE("\The [src] misses [target_mob] narrowly!"))
-			if(LAZYLEN(miss_sounds))
+			if(length(miss_sounds))
 				playsound(target_mob.loc, pick(miss_sounds), 60, 1)
 		return 0
 

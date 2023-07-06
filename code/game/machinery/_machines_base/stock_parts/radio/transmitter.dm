@@ -16,7 +16,7 @@
 		buffer |= data
 
 /obj/item/stock_parts/radio/transmitter/proc/transmit()
-	if(!LAZYLEN(buffer))
+	if(!length(buffer))
 		return
 	var/datum/signal/signal = new()
 	signal.source = src
@@ -44,7 +44,7 @@
 	..()
 	sanitize_events(machine, transmit_on_change)
 	sanitize_events(machine, transmit_on_tick)
-	if(LAZYLEN(transmit_on_tick))
+	if(length(transmit_on_tick))
 		start_processing(machine)
 	for(var/thing in transmit_on_change)
 		var/singleton/public_access/public_variable/variable = transmit_on_change[thing]

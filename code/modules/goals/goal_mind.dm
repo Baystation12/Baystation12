@@ -5,13 +5,13 @@
 	if(current)
 		if(department_goals && current.get_preference_value(/datum/client_preference/show_department_goals) == GLOB.PREF_SHOW)
 			to_chat(current, SPAN_NOTICE(department_goals))
-		if(LAZYLEN(goals))
+		if(length(goals))
 			to_chat(current, SPAN_NOTICE("<br><br><b>You had the following personal goals this round:</b><br>[jointext(summarize_goals(TRUE), "<br>")]"))
 
 /datum/mind/proc/summarize_goals(show_success = FALSE, allow_modification = FALSE, mob/caller)
 	. = list()
-	if(LAZYLEN(goals))
-		for(var/i = 1 to LAZYLEN(goals))
+	if(length(goals))
+		for(var/i = 1 to length(goals))
 			var/datum/goal/goal = goals[i]
 			. += "[i]. [goal.summarize(show_success, allow_modification, caller)]"
 
@@ -28,7 +28,7 @@
 		for(var/token in H.cultural_info)
 			var/singleton/cultural_info/culture = H.get_cultural_value(token)
 			var/list/new_goals = culture.get_possible_personal_goals(job ? job.department_flag : null)
-			if(LAZYLEN(new_goals))
+			if(length(new_goals))
 				available_goals |= new_goals
 
 	var/min_goals = 0
@@ -36,14 +36,14 @@
 	if(job)
 		min_goals = job.min_goals
 		max_goals = job.max_goals
-		if(LAZYLEN(job.possible_goals))
+		if(length(job.possible_goals))
 			available_goals |= job.possible_goals
 
 	if(isnull(add_amount))
 		add_amount = rand(min_goals, max_goals)
 
 	if (!bypass_goal_checks)
-		add_amount = min(max(0, max_goals - LAZYLEN(goals)), add_amount)
+		add_amount = min(max(0, max_goals - length(goals)), add_amount)
 		if(add_amount <= 0)
 			if(!is_spawning)
 				to_chat(src.current, SPAN_WARNING("Your job doesn't allow for any more distractions."))
@@ -55,15 +55,15 @@
 				to_chat(src.current, SPAN_WARNING("Your preferences do not allow you to add random goals."))
 			return FALSE
 
-	if(LAZYLEN(goals))
+	if(length(goals))
 		for (var/datum/goal/mind_goal in goals)
 			LAZYREMOVE(available_goals, mind_goal.type)
-		if(!LAZYLEN(available_goals))
+		if(!length(available_goals))
 			if(!is_spawning)
 				to_chat(src.current, SPAN_WARNING("There are no more goals available."))
 			return FALSE
 
-	for(var/i = 1 to min(LAZYLEN(available_goals), add_amount))
+	for(var/i = 1 to min(length(available_goals), add_amount))
 		var/goal = pick_n_take(available_goals)
 		new goal(src)
 	return TRUE
@@ -71,7 +71,7 @@
 /datum/mind/proc/delete_goal(datum/job/job, datum/goal/goal, override_min_goals)
 	var/min_goals = job ? job.min_goals : 1
 
-	if(!override_min_goals && LAZYLEN(goals) == min_goals)
+	if(!override_min_goals && length(goals) == min_goals)
 		to_chat(src.current, SPAN_WARNING("Your job needs you to have at least [min_goals] distraction\s."))
 		return FALSE
 	else

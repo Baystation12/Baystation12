@@ -127,7 +127,7 @@
 	if(href_list["new_val"])
 		var/thing = href_list["new_val"]
 		var/singleton/public_access/variable = selected_events && selected_events[thing]
-		if(!variable || !LAZYLEN(valid_events))
+		if(!variable || !length(valid_events))
 			return MT_REFRESH
 		var/valid_variables = list()
 		for(var/path in valid_events)
@@ -140,7 +140,7 @@
 		selected_events[thing] = new_var
 		return MT_REFRESH
 	if(href_list["add"])
-		if(!LAZYLEN(valid_events))
+		if(!length(valid_events))
 			return MT_REFRESH
 		LAZYSET(selected_events, copytext(md5(num2text(rand(0, 1))), 1, 11), valid_events[pick(valid_events)]) // random key
 		return MT_REFRESH

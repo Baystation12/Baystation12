@@ -126,7 +126,7 @@
 
 	var/turf/parent = loc
 	ASSERT(isturf(parent))
-	if (LAZYLEN(parent.ao_overlays_mimic))
+	if (length(parent.ao_overlays_mimic))
 		overlays += parent.ao_overlays_mimic
 
 	if (bound_overlay)

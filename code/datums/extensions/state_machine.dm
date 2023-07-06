@@ -77,7 +77,7 @@ var/global/list/state_machines = list()
 /datum/state_machine/proc/evaluate()
 	var/datum/holder_instance = get_holder()
 	var/list/options = current_state.get_open_transitions(holder_instance)
-	if(LAZYLEN(options))
+	if(length(options))
 		var/singleton/state_transition/choice = choose_transition(options)
 		current_state.exited_state(holder_instance)
 		current_state = choice.target

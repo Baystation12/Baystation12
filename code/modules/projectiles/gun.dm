@@ -32,7 +32,7 @@
 		gun.vars[propname] = settings[propname]
 
 /datum/firemode/proc/restore_original_settings(obj/item/gun/gun)
-	if (LAZYLEN(original_settings))
+	if (length(original_settings))
 		for (var/propname in original_settings)
 			gun.vars[propname] = original_settings[propname]
 

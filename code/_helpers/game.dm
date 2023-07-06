@@ -18,7 +18,7 @@
 	return max_z
 
 /proc/living_observers_present(list/zlevels)
-	if(LAZYLEN(zlevels))
+	if(length(zlevels))
 		for(var/mob/M in GLOB.player_list) //if a tree ticks on the empty zlevel does it really tick
 			if(M.stat != DEAD) //(no it doesn't)
 				var/turf/T = get_turf(M)

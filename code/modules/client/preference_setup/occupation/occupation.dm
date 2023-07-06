@@ -111,7 +111,7 @@
 			var/datum/job/lastJob
 			var/list/map_job_list = map_data["jobs"]
 			var/index = -1
-			if(splitLimit) limit = round((LAZYLEN(map_job_list)+1)/2)
+			if(splitLimit) limit = round((length(map_job_list)+1)/2)
 
 			for(var/datum/job/job in map_job_list)
 
@@ -120,10 +120,10 @@
 				var/branch_string = ""
 				var/rank_branch_string = ""
 				var/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : GLOB.mil_branches.spawn_branches(S)
-				if(GLOB.using_map && (GLOB.using_map.flags & MAP_HAS_BRANCH) && LAZYLEN(branch_rank))
+				if(GLOB.using_map && (GLOB.using_map.flags & MAP_HAS_BRANCH) && length(branch_rank))
 					player_branch = GLOB.mil_branches.get_branch(pref.branches[job.title])
 					if(player_branch)
-						if(LAZYLEN(branch_rank) > 1)
+						if(length(branch_rank) > 1)
 							branch_string += "<td width='10%' align='left'><a href='?src=\ref[src];char_branch=1;checking_job=\ref[job]'>[player_branch.name_short || player_branch.name]</a></td>"
 						else
 							branch_string += "<td width='10%' align='left'>[player_branch.name_short || player_branch.name]</td>"
@@ -131,10 +131,10 @@
 					branch_string = "<td>-</td>"
 				if(player_branch)
 					var/ranks = branch_rank[player_branch.name] || GLOB.mil_branches.spawn_ranks(player_branch.name, S)
-					if(LAZYLEN(ranks))
+					if(length(ranks))
 						player_rank = GLOB.mil_branches.get_rank(player_branch.name, pref.ranks[job.title])
 						if(player_rank)
-							if(LAZYLEN(ranks) > 1)
+							if(length(ranks) > 1)
 								rank_branch_string += "<td width='10%' align='left'><a href='?src=\ref[src];char_rank=1;checking_job=\ref[job]'>[player_rank.name_short || player_rank.name]</a></td>"
 							else
 								rank_branch_string += "<td width='10%' align='left'>[player_rank.name_short || player_rank.name]</td>"
@@ -251,17 +251,17 @@
 
 /datum/category_item/player_setup_item/proc/validate_branch_and_rank()
 
-	if(LAZYLEN(pref.branches))
+	if(length(pref.branches))
 		for(var/job_name in pref.branches)
 			if(!(job_name in SSjobs.titles_to_datums))
 				pref.branches -= job_name
 
-	if(LAZYLEN(pref.ranks))
+	if(length(pref.ranks))
 		var/list/removing_ranks
 		for(var/job_name in pref.ranks)
 			var/datum/job/job = SSjobs.get_by_title(job_name, TRUE)
 			if(!job) LAZYADD(removing_ranks, job_name)
-		if(LAZYLEN(removing_ranks))
+		if(length(removing_ranks))
 			pref.ranks -= removing_ranks
 
 	var/datum/species/S = preference_species()
@@ -272,13 +272,13 @@
 		var/datum/mil_branch/player_branch = pref.branches[job.title] ? GLOB.mil_branches.get_branch(pref.branches[job.title]) : null
 		var/branch_rank = job.allowed_branches ? job.get_branch_rank(S) : GLOB.mil_branches.spawn_branches(S)
 		if(!player_branch || !(player_branch.name in branch_rank))
-			player_branch = LAZYLEN(branch_rank) ? GLOB.mil_branches.get_branch(branch_rank[1]) : null
+			player_branch = length(branch_rank) ? GLOB.mil_branches.get_branch(branch_rank[1]) : null
 
 		if(player_branch)
 			var/datum/mil_rank/player_rank = pref.ranks[job.title] ? GLOB.mil_branches.get_rank(player_branch.name, pref.ranks[job.title]) : null
 			var/ranks = branch_rank[player_branch.name] || GLOB.mil_branches.spawn_ranks(player_branch.name, S)
 			if(!player_rank || !(player_rank.name in ranks))
-				player_rank = LAZYLEN(ranks) ? GLOB.mil_branches.get_rank(player_branch.name, ranks[1]) : null
+				player_rank = length(ranks) ? GLOB.mil_branches.get_rank(player_branch.name, ranks[1]) : null
 
 			// Now make the assignments
 			pref.branches[job.title] = player_branch.name

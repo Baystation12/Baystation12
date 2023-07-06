@@ -5,7 +5,7 @@
 	var/list/blacklisted_objects
 
 /datum/goal/achievement/specific_object/New()
-	if(LAZYLEN(blacklisted_objects))
+	if(length(blacklisted_objects))
 		possible_objects -= blacklisted_objects
 	object_path = pick(possible_objects)
 	possible_objects = null

@@ -51,10 +51,10 @@
 	if(ammo_magazine)
 		overlays += image(icon, "mag")
 
-	if(!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
+	if(!ammo_magazine || !length(ammo_magazine.stored_ammo))
 		icon_state = "mpistolen-empty"
 		overlays += image(icon, "[initial(icon_state)]-ammo0")
-	else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
+	else if(length(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
 		overlays += image(icon, "[initial(icon_state)]-ammo1")
 	else
 		overlays += image(icon, "[initial(icon_state)]-ammo2")
@@ -161,7 +161,7 @@
 	..()
 	if(ammo_magazine)
 		overlays += image(icon, "mag-[round(length(ammo_magazine.stored_ammo),5)]")
-	if(ammo_magazine && LAZYLEN(ammo_magazine.stored_ammo))
+	if(ammo_magazine && length(ammo_magazine.stored_ammo))
 		overlays += image(icon, "ammo-ok")
 	else
 		overlays += image(icon, "ammo-bad")

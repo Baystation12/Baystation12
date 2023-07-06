@@ -7,7 +7,7 @@
 		spots = get_infestation_turfs()
 
 		for(var/j = 0 to drons)
-			if(!LAZYLEN(spots))
+			if(!length(spots))
 				continue
 
 			var/turf/T = pick_n_take(spots)

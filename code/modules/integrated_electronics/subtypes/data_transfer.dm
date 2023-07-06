@@ -80,7 +80,7 @@
 		return
 	var/output_index = get_pin_data(IC_INPUT, 1)
 	if(!isnull(output_index) && (output_index >= 1 && output_index <= length(outputs)))
-		for(var/i in 1 to LAZYLEN(outputs)) //Clear everything out
+		for(var/i in 1 to length(outputs)) //Clear everything out
 			set_pin_data(IC_OUTPUT,i,null)
 		var/datum/integrated_io/O = outputs[output_index]
 		set_pin_data(IC_OUTPUT, output_index,get_pin_data(IC_INPUT, 2))

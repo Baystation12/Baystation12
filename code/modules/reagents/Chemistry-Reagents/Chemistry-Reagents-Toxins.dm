@@ -1153,7 +1153,7 @@
 		. = ..()
 	if(istype(M))
 		for(var/obj/item/organ/external/E in M.organs)
-			if(LAZYLEN(E.implants))
+			if(length(E.implants))
 				for(var/obj/effect/spider/spider in E.implants)
 					if(prob(25))
 						E.implants -= spider

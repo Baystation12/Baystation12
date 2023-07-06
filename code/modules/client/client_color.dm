@@ -15,7 +15,7 @@
 	color_type - a typepath (subtyped from /datum/client_color)
 */
 /mob/proc/has_client_color(color_type)
-	if(!ispath(/datum/client_color) || !LAZYLEN(client_colors))
+	if(!ispath(/datum/client_color) || !length(client_colors))
 		return FALSE
 	for(var/thing in client_colors)
 		var/datum/client_color/col = thing

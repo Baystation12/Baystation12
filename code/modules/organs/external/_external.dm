@@ -452,7 +452,7 @@ This function completely restores a damaged organ to perfect condition.
 		owner.organs_by_name[organ_tag] = null
 		owner.organs_by_name -= organ_tag
 		while(null in owner.organs) owner.organs -= null
-	if(LAZYLEN(children))
+	if(length(children))
 		for(var/obj/item/organ/external/E in children)
 			E.remove_rejuv()
 		children.Cut()
@@ -494,7 +494,7 @@ This function completely restores a damaged organ to perfect condition.
 		owner.remove_blood(fluid_loss)
 
 	// first check whether we can widen an existing wound
-	if(!surgical && LAZYLEN(wounds) && prob(max(50+(number_wounds-1)*10,90)))
+	if(!surgical && length(wounds) && prob(max(50+(number_wounds-1)*10,90)))
 		if ((type == INJURY_TYPE_CUT || type == INJURY_TYPE_BRUISE) && damage >= 5)
 			//we need to make sure that the wound we are going to worsen is compatible with the type of damage...
 			var/list/compatible_wounds = list()
@@ -710,7 +710,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		//configurable regen speed woo, no-regen hardcore or instaheal hugbox, choose your destiny
 		heal_amt = heal_amt * config.organ_regeneration_multiplier
 		// amount of healing is spread over all the wounds
-		heal_amt = heal_amt / (LAZYLEN(wounds) + 1)
+		heal_amt = heal_amt / (length(wounds) + 1)
 		// making it look prettier on scanners
 		heal_amt = round(heal_amt,0.1)
 		var/dam_type = DAMAGE_BRUTE
@@ -849,7 +849,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		disintegrate = DROPLIMB_BLUNT //splut
 
 	var/list/organ_msgs = get_droplimb_messages_for(disintegrate, clean)
-	if(LAZYLEN(organ_msgs) >= 3)
+	if(length(organ_msgs) >= 3)
 		owner.visible_message(SPAN_DANGER("[organ_msgs[1]]"), \
 			SPAN_CLASS("moderate", "<b>[organ_msgs[2]]</b>"), \
 			SPAN_DANGER("[organ_msgs[3]]"))

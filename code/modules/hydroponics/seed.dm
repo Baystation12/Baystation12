@@ -186,7 +186,7 @@
 		return
 	if(!(environment) || !(environment.gas))
 		return
-	if(LAZYLEN(exude_gasses) || LAZYLEN(consume_gasses ))
+	if(length(exude_gasses) || length(consume_gasses ))
 		return
 	if(!(light_supplied) || !(get_trait(TRAIT_REQUIRES_WATER)))
 		return

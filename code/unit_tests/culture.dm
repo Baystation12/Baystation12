@@ -69,7 +69,7 @@
 				if(!islist(species.available_cultural_info[token]))
 					fails++
 					log_bad("Available cultural info for [species_name] tag '[token]' is invalid type, must be a list.")
-				else if(!LAZYLEN(species.available_cultural_info[token]))
+				else if(!length(species.available_cultural_info[token]))
 					fails++
 					log_bad("Available cultural info for [species_name] tag '[token]' is empty, must have at least one entry.")
 				else

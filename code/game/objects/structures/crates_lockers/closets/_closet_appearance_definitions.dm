@@ -16,7 +16,7 @@
 
 /singleton/closet_appearance/New()
 	// Build our colour and decal lists.
-	if(LAZYLEN(extra_decals))
+	if(length(extra_decals))
 		if(!decals)
 			decals = list()
 		for(var/thing in extra_decals)

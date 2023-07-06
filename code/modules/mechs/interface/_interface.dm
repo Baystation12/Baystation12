@@ -1,7 +1,7 @@
 #define BAR_CAP 12
 
 /mob/living/exosuit/proc/refresh_hud()
-	if(LAZYLEN(pilots))
+	if(length(pilots))
 		for(var/thing in pilots)
 			var/mob/pilot = thing
 			if(pilot.client)
@@ -11,7 +11,7 @@
 
 /mob/living/exosuit/InitializeHud()
 	zone_sel = new
-	if(!LAZYLEN(hud_elements))
+	if(!length(hud_elements))
 		var/i = 1
 		for(var/hardpoint in hardpoints)
 			var/obj/screen/exosuit/hardpoint/H = new(src, hardpoint)

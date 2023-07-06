@@ -50,12 +50,12 @@
 		..()
 
 /datum/job/submap/is_species_allowed(datum/species/S)
-	if(LAZYLEN(whitelisted_species) && !(S.name in whitelisted_species))
+	if(length(whitelisted_species) && !(S.name in whitelisted_species))
 		return FALSE
 	if(S.name in blacklisted_species)
 		return FALSE
 	if(owner && owner.archetype)
-		if(LAZYLEN(owner.archetype.whitelisted_species) && !(S.name in owner.archetype.whitelisted_species))
+		if(length(owner.archetype.whitelisted_species) && !(S.name in owner.archetype.whitelisted_species))
 			return FALSE
 		if(S.name in owner.archetype.blacklisted_species)
 			return FALSE
@@ -66,14 +66,14 @@
 	if(LAZYACCESS(minimum_character_age, S.get_bodytype()) && (prefs.age < minimum_character_age[S.get_bodytype()]))
 		to_chat(feedback, SPAN_CLASS("boldannounce", "Not old enough. Minimum character age is [minimum_character_age[S.get_bodytype()]]."))
 		return TRUE
-	if(LAZYLEN(whitelisted_species) && !(prefs.species in whitelisted_species))
+	if(length(whitelisted_species) && !(prefs.species in whitelisted_species))
 		to_chat(feedback, SPAN_CLASS("boldannounce", "Your current species, [prefs.species], is not permitted as [title] on \a [owner.archetype.descriptor]."))
 		return TRUE
 	if(prefs.species in blacklisted_species)
 		to_chat(feedback, SPAN_CLASS("boldannounce", "Your current species, [prefs.species], is not permitted as [title] on \a [owner.archetype.descriptor]."))
 		return TRUE
 	if(owner && owner.archetype)
-		if(LAZYLEN(owner.archetype.whitelisted_species) && !(prefs.species in owner.archetype.whitelisted_species))
+		if(length(owner.archetype.whitelisted_species) && !(prefs.species in owner.archetype.whitelisted_species))
 			to_chat(feedback, SPAN_CLASS("boldannounce", "Your current species, [prefs.species], is not permitted on \a [owner.archetype.descriptor]."))
 			return TRUE
 		if(prefs.species in owner.archetype.blacklisted_species)

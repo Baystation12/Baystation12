@@ -5,7 +5,7 @@
 */
 
 /mob/living/carbon/human/proc/show_descriptors_to(mob/user)
-	if(LAZYLEN(descriptors))
+	if(length(descriptors))
 		if(user == src)
 			for(var/entry in descriptors)
 				var/datum/mob_descriptor/descriptor = species.descriptors[entry]
@@ -38,9 +38,9 @@
 		chargen_label = name
 	if(!chargen_value_descriptors)
 		chargen_value_descriptors = list()
-		for(var/i = 1 to LAZYLEN(standalone_value_descriptors))
+		for(var/i = 1 to length(standalone_value_descriptors))
 			chargen_value_descriptors[standalone_value_descriptors[i]] = i
-	default_value = ceil(LAZYLEN(standalone_value_descriptors) * 0.5)
+	default_value = ceil(length(standalone_value_descriptors) * 0.5)
 	..()
 
 /datum/mob_descriptor/proc/get_third_person_message_start(datum/pronouns/my_pronouns)
@@ -52,7 +52,7 @@
 /datum/mob_descriptor/proc/get_standalone_value_descriptor(check_value)
 	if(isnull(check_value))
 		check_value = default_value
-	if(check_value && LAZYLEN(standalone_value_descriptors) >= check_value)
+	if(check_value && length(standalone_value_descriptors) >= check_value)
 		return standalone_value_descriptors[check_value]
 
 // Build a species-specific descriptor string.
@@ -71,7 +71,7 @@
 	if(variance < 1)
 		. = "[.], [get_comparative_value_string_equivalent(raw_value, my_pronouns, other_pronouns)]"
 	else
-		variance = variance / LAZYLEN(standalone_value_descriptors)
+		variance = variance / length(standalone_value_descriptors)
 		if(my_value < comparing_value)
 			. = "[.], [get_comparative_value_string_smaller(variance, my_pronouns, other_pronouns)]"
 		else if(my_value > comparing_value)
@@ -91,7 +91,7 @@
 	var/comparing_value
 	if(ishuman(observer))
 		var/mob/living/carbon/human/human_observer = observer
-		if(LAZYLEN(human_observer.descriptors) && !isnull(human_observer.species.descriptors[name]) && !isnull(human_observer.descriptors[name]))
+		if(length(human_observer.descriptors) && !isnull(human_observer.species.descriptors[name]) && !isnull(human_observer.descriptors[name]))
 			var/datum/mob_descriptor/obs_descriptor = human_observer.species.descriptors[name]
 			comparing_value = human_observer.descriptors[name] + obs_descriptor.comparison_offset
 
@@ -105,11 +105,11 @@
 	return comparative_value_descriptor_equivalent
 
 /datum/mob_descriptor/proc/get_comparative_value_string_smaller(value, datum/pronouns/my_pronouns, datum/pronouns/other_pronouns)
-	var/maxval = LAZYLEN(comparative_value_descriptors_smaller)
+	var/maxval = length(comparative_value_descriptors_smaller)
 	value = clamp(ceil(value * maxval), 1, maxval)
 	return comparative_value_descriptors_smaller[value]
 
 /datum/mob_descriptor/proc/get_comparative_value_string_larger(value, datum/pronouns/my_pronouns, datum/pronouns/other_pronouns)
-	var/maxval = LAZYLEN(comparative_value_descriptors_larger)
+	var/maxval = length(comparative_value_descriptors_larger)
 	value = clamp(ceil(value * maxval), 1, maxval)
 	return comparative_value_descriptors_larger[value]

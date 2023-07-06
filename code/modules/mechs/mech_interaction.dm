@@ -152,7 +152,7 @@
 			if(failed)
 				var/list/other_atoms = orange(1, A)
 				A = null
-				while(LAZYLEN(other_atoms))
+				while(length(other_atoms))
 					var/atom/picked = pick_n_take(other_atoms)
 					if(istype(picked) && picked.simulated)
 						A = picked
@@ -239,7 +239,7 @@
 		if(!silent)
 			to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is closed."))
 		return FALSE
-	if(LAZYLEN(pilots) >= LAZYLEN(body.pilot_positions))
+	if(length(pilots) >= length(body.pilot_positions))
 		if(!silent)
 			to_chat(user, SPAN_WARNING("\The [src] is occupied to capacity."))
 		return FALSE
@@ -532,7 +532,7 @@
 /mob/living/exosuit/attack_hand(mob/user)
 	// Drag the pilot out if possible.
 	if(user.a_intent == I_HURT)
-		if(!LAZYLEN(pilots))
+		if(!length(pilots))
 			to_chat(user, SPAN_WARNING("There is nobody inside \the [src]."))
 		else if(!hatch_closed)
 			var/mob/pilot = pick(pilots)

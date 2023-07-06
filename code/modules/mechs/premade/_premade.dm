@@ -33,7 +33,7 @@
 	desc = "It seems to have been roughly thrown together and then spraypainted a single colour."
 
 /mob/living/exosuit/premade/random/Initialize(mapload, obj/structure/heavy_vehicle_frame/source_frame, super_random = FALSE, using_boring_colours = FALSE)
-	//if(!prob(100/(LAZYLEN(GLOB.mech_decals)+1)))
+	//if(!prob(100/(length(GLOB.mech_decals)+1)))
 	//	decal = pick(GLOB.mech_decals)
 
 	var/list/use_colours

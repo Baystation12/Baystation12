@@ -35,7 +35,7 @@
 
 /datum/extension/armor/ablative/proc/get_visible_damage()
 	var/list/damages = get_damage()
-	if(!LAZYLEN(damages))
+	if(!length(damages))
 		return
 	var/result = list()
 	for(var/key in damages)

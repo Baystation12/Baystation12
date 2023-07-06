@@ -610,7 +610,7 @@
 		var/list/misc_roles = list("Dionaea", "Graffiti")
 		//Other roles  (BLUE, because I have no idea what other color to make this)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(misc_roles)]'>Other Roles</th></tr><tr align='center'>"
+		jobs += "<tr bgcolor='ccccff'><th colspan='[length(misc_roles)]'>Other Roles</th></tr><tr align='center'>"
 		for(var/entry in misc_roles)
 			if(jobban_isbanned(M, entry))
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[entry];jobban4=\ref[M]'>[SPAN_COLOR("red", "[entry]")]</a></td>"
@@ -621,7 +621,7 @@
 	// Channels
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		var/list/channels = GET_SINGLETON_SUBTYPE_MAP(/singleton/communication_channel)
-		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(channels)]'>Channel Bans</th></tr><tr align='center'>"
+		jobs += "<tr bgcolor='ccccff'><th colspan='[length(channels)]'>Channel Bans</th></tr><tr align='center'>"
 		for(var/channel_type in channels)
 			var/singleton/communication_channel/channel = channels[channel_type]
 			if(jobban_isbanned(M, channel.name))
@@ -797,7 +797,7 @@
 
 		//Unbanning job list
 		//all jobs in job list are banned already OR we didn't give a reason (implying they shouldn't be banned)
-		if(LAZYLEN(SSjobs.titles_to_datums)) //at least 1 banned job exists in job list so we have stuff to unban.
+		if(length(SSjobs.titles_to_datums)) //at least 1 banned job exists in job list so we have stuff to unban.
 			if(!config.ban_legacy_system)
 				to_chat(usr, "Unfortunately, database based unbanning cannot be done through this panel")
 				DB_ban_panel(M.ckey)

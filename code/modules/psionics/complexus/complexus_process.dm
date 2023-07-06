@@ -20,7 +20,7 @@
 			highest_rank = check_rank
 
 	UNSETEMPTY(latencies)
-	var/rank_count = max(1, LAZYLEN(ranks))
+	var/rank_count = max(1, length(ranks))
 	if(force || last_rating != ceil(combined_rank/rank_count))
 		if(highest_rank <= 1)
 			if(highest_rank == 0)

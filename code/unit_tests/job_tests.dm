@@ -68,7 +68,7 @@
 			else
 				checked_titles[job_title] = job_type
 
-	if(LAZYLEN(non_unique_titles))
+	if(length(non_unique_titles))
 		fail("Some jobs share a title:\n[jointext(non_unique_titles, "\n")]")
 	else
 		pass("All jobs have a unique title.")

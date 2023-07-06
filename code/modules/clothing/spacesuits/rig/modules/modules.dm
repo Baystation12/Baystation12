@@ -160,17 +160,17 @@
 			to_chat(user, SPAN_WARNING("\The [rig] cannot mount this type of module."))
 		return FALSE
 
-	if (LAZYLEN(rig.installed_modules))
+	if (length(rig.installed_modules))
 		for (var/obj/item/rig_module/installed_module as anything in rig.installed_modules)
 			if (!installed_module.redundant && installed_module.type == type)
 				if (user)
 					to_chat(user, SPAN_WARNING("\The [rig] already has \a [installed_module] installed."))
 				return FALSE
-			if (LAZYLEN(banned_modules) && is_type_in_list(installed_module, banned_modules))
+			if (length(banned_modules) && is_type_in_list(installed_module, banned_modules))
 				if (user)
 					to_chat(user, SPAN_WARNING("\The [installed_module] already installed in \the [rig] is not compatible with \the [src]."))
 				return FALSE
-			if (LAZYLEN(installed_module.banned_modules) && is_type_in_list(src, installed_module.banned_modules))
+			if (length(installed_module.banned_modules) && is_type_in_list(src, installed_module.banned_modules))
 				if (user)
 					to_chat(user, SPAN_WARNING("\The [installed_module] already installed in \the [rig] is not compatible with \the [src]."))
 				return FALSE

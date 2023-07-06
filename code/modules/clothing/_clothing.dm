@@ -180,7 +180,7 @@
 /obj/item/clothing/examine(mob/user)
 	. = ..()
 	var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor/ablative)
-	if(istype(armor_datum) && LAZYLEN(armor_datum.get_visible_damage()))
+	if(istype(armor_datum) && length(armor_datum.get_visible_damage()))
 		to_chat(user, SPAN_WARNING("It has some <a href='?src=\ref[src];list_armor_damage=1'>damage</a>."))
 
 /obj/item/clothing/CanUseTopic(user)

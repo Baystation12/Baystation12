@@ -619,7 +619,7 @@
 			species_icon =  sprite_sheets[wearer.species.get_bodytype(wearer)]
 		mob_icon = image("icon" = species_icon, "icon_state" = "[icon_state]")
 
-	if(equipment_overlay_icon && LAZYLEN(installed_modules))
+	if(equipment_overlay_icon && length(installed_modules))
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)
 				chest.overlays += image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]", "dir" = SOUTH)
@@ -639,7 +639,7 @@
 	if(slot != slot_back_str || offline)
 		return ret
 
-	if(equipment_overlay_icon && LAZYLEN(installed_modules))
+	if(equipment_overlay_icon && length(installed_modules))
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)
 				ret.overlays += image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]")

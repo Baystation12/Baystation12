@@ -92,13 +92,13 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	. = ..()
 
 /obj/item/integrated_circuit/emp_act(severity)
-	for(var/k in 1 to LAZYLEN(inputs))
+	for(var/k in 1 to length(inputs))
 		var/datum/integrated_io/I = inputs[k]
 		I.scramble()
-	for(var/k in 1 to LAZYLEN(outputs))
+	for(var/k in 1 to length(outputs))
 		var/datum/integrated_io/O = outputs[k]
 		O.scramble()
-	for(var/k in 1 to LAZYLEN(activators))
+	for(var/k in 1 to length(activators))
 		var/datum/integrated_io/activate/A = activators[k]
 		A.scramble()
 	..()
@@ -157,7 +157,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	HTML += "</colgroup>"
 
 	var/column_width = 3
-	var/row_height = max(LAZYLEN(inputs), LAZYLEN(outputs), 1)
+	var/row_height = max(length(inputs), length(outputs), 1)
 
 	for(var/i = 1 to row_height)
 		HTML += "<tr>"
@@ -177,7 +177,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 								words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[linked]</a> \
 								@ <a href='?src=\ref[linked.holder]'>[linked.holder.displayed_name]</a><br>"
 
-						if(LAZYLEN(outputs) > LAZYLEN(inputs))
+						if(length(outputs) > length(inputs))
 							height = 1
 				if(2)
 					if(i == 1)
@@ -196,12 +196,12 @@ a creative player the means to solve many problems.  Circuits are held inside an
 								words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[linked]</a> \
 								@ <a href='?src=\ref[linked.holder]'>[linked.holder.displayed_name]</a><br>"
 
-						if(LAZYLEN(inputs) > LAZYLEN(outputs))
+						if(length(inputs) > length(outputs))
 							height = 1
 			HTML += "<td align='center' rowspan='[height]'>[jointext(words, null)]</td>"
 		HTML += "</tr>"
 
-	for(var/i in 1 to LAZYLEN(activators))
+	for(var/i in 1 to length(activators))
 		var/datum/integrated_io/io = activators[i]
 		var/words = list()
 
@@ -308,12 +308,12 @@ a creative player the means to solve many problems.  Circuits are held inside an
 			interact(user)
 
 /obj/item/integrated_circuit/proc/push_data()
-	for(var/k in 1 to LAZYLEN(outputs))
+	for(var/k in 1 to length(outputs))
 		var/datum/integrated_io/O = outputs[k]
 		O.push_data()
 
 /obj/item/integrated_circuit/proc/pull_data()
-	for(var/k in 1 to LAZYLEN(inputs))
+	for(var/k in 1 to length(inputs))
 		var/datum/integrated_io/I = inputs[k]
 		I.push_data()
 

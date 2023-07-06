@@ -326,11 +326,11 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				available_cultural_info[token] = list()
 			available_cultural_info[token] |= additional_available_cultural_info[token]
 
-		else if(!LAZYLEN(available_cultural_info[token]))
+		else if(!length(available_cultural_info[token]))
 			var/list/map_systems = GLOB.using_map.available_cultural_info[token]
 			available_cultural_info[token] = map_systems.Copy()
 
-		if(LAZYLEN(available_cultural_info[token]) && !default_cultural_info[token])
+		if(length(available_cultural_info[token]) && !default_cultural_info[token])
 			var/list/avail_systems = available_cultural_info[token]
 			default_cultural_info[token] = avail_systems[1]
 
@@ -342,7 +342,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	else
 		hud = new()
 
-	if(LAZYLEN(descriptors))
+	if(length(descriptors))
 		var/list/descriptor_datums = list()
 		for(var/desctype in descriptors)
 			var/datum/mob_descriptor/descriptor = new desctype
@@ -819,8 +819,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			if(has_organ[breathing_organ])
 				dat += "</br><b>They breathe [gas_data.name[breath_type]].</b>"
 				dat += "</br><b>They exhale [gas_data.name[exhale_type]].</b>"
-			if(LAZYLEN(poison_types))
-				dat += "</br><b>[capitalize(english_list(poison_types))] [LAZYLEN(poison_types) == 1 ? "is" : "are"] poisonous to them.</b>"
+			if(length(poison_types))
+				dat += "</br><b>[capitalize(english_list(poison_types))] [length(poison_types) == 1 ? "is" : "are"] poisonous to them.</b>"
 			dat += "</small>"
 		dat += "</td>"
 	dat += "</tr>"

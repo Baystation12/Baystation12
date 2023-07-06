@@ -115,11 +115,11 @@
 		return
 
 	user.visible_message(SPAN_NOTICE("[user] starts inspecting [owner]'s [name] carefully."))
-	if(LAZYLEN(wounds))
+	if(length(wounds))
 		to_chat(user, SPAN_WARNING("You find [get_wounds_desc()]"))
 		var/list/stuff = list()
 		for(var/datum/wound/wound in wounds)
-			if(LAZYLEN(wound.embedded_objects))
+			if(length(wound.embedded_objects))
 				stuff |= wound.embedded_objects
 		if(length(stuff))
 			to_chat(user, SPAN_WARNING("There's [english_list(stuff)] sticking out of [owner]'s [name]."))

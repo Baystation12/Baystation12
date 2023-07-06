@@ -387,7 +387,7 @@ var/global/list/mining_floors = list()
 	name = "mineral deposit"
 
 /turf/simulated/mineral/random/New(newloc, mineral_name, default_mineral_list = GLOB.weighted_minerals_sparse)
-	if(!mineral_name && LAZYLEN(default_mineral_list))
+	if(!mineral_name && length(default_mineral_list))
 		mineral_name = pickweight(default_mineral_list)
 
 	if(!mineral && mineral_name)

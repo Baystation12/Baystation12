@@ -305,8 +305,8 @@
 	if(!cursor || reinit)
 		cursor = image('icons/misc/holomap_markers.dmi', "you")
 		cursor.layer = HUD_ABOVE_ITEM_LAYER
-	if(!LAZYLEN(legend) || reinit)
-		if(LAZYLEN(legend))
+	if(!length(legend) || reinit)
+		if(length(legend))
 			QDEL_NULL_LIST(legend)
 		LAZYINITLIST(legend)
 		LAZYADD(legend, new /obj/screen/legend(null ,HOLOMAP_AREACOLOR_COMMAND, "■ Command"))
@@ -343,7 +343,7 @@
 			z_levels = O.map_z.Copy()
 
 			if(z_count > 1)
-				if(!LAZYLEN(lbuttons))
+				if(!length(lbuttons))
 					//Add the buttons for switching levels
 					LAZYADD(lbuttons, new /obj/screen/levelselect/up(null, src))
 					LAZYADD(lbuttons, new /obj/screen/levelselect/down(null, src))

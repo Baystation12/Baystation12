@@ -74,7 +74,7 @@ SUBSYSTEM_DEF(jobs)
 			var/datum/job/job = get_by_path(jobtype)
 			if(job)
 				LAZYADD(submap_job_datums, job)
-		if(LAZYLEN(submap_job_datums))
+		if(length(submap_job_datums))
 			job_lists_by_map_name[arch.descriptor] = list("jobs" = submap_job_datums, "default_to_hidden" = TRUE)
 
 	// Update global map blacklists and whitelists.
@@ -327,7 +327,7 @@ SUBSYSTEM_DEF(jobs)
 						unassigned_roundstart -= player
 						break
 
-		if(LAZYLEN(deferred_jobs))
+		if(length(deferred_jobs))
 			for(var/mob/new_player/player in unassigned_roundstart)
 				for(var/datum/job/job in deferred_jobs)
 					if(attempt_role_assignment(player, job, level, mode))

@@ -9,7 +9,7 @@
 		return ..()
 	var/mob/living/carbon/human/H = owner
 	..()
-	if(istype(H) && !LAZYLEN(H.organs))
+	if(istype(H) && !length(H.organs))
 		H.death()
 	if(prob(25) && !skip_nymph)
 		spawn_diona_nymph(get_turf(src))
