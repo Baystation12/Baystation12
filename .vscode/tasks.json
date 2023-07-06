@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "dreammaker",
+      "dme": "baystation12.dme",
+      "problemMatcher": ["$dreammaker"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "label": "dm: build - baystation12.dme"
+    }
+  ]
+}
