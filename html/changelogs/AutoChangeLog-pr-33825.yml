@@ -1,7 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - tweak: The adminpm noise is now plays at a lower volume by default, and also plays
-      when someone in your line of sight is paralyzed.
-  - tweak: The staffwarn noise is significantly quieter, and staffwarns only notify
-      staff when a player joins the round.
