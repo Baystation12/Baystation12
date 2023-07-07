@@ -699,7 +699,7 @@
 	sort_order = 12
 
 /datum/mil_rank/army/o3
-	name = "Marine Captain"
+	name = "Captain Major"
 	name_short = "MCPT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/officer/o3)
 	sort_order = 13
@@ -723,34 +723,16 @@
 	sort_order = 16
 
 /datum/mil_rank/army/o7
-	name = "Brigadier General"
-	name_short = "BGen"
+	name = "Colonel General"
+	name_short = "ColGen"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag)
 	sort_order = 17
 
 /datum/mil_rank/army/o8
-	name = "Major General"
-	name_short = "MajGen"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag/o8)
-	sort_order = 18
-
-/datum/mil_rank/army/o9
-	name = "Lieutenant General"
-	name_short = "LTG"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag/o9)
-	sort_order = 19
-
-/datum/mil_rank/army/o10
-	name = "General"
-	name_short = "GEN"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag/o10)
-	sort_order = 20
-
-/datum/mil_rank/army/o10_alt
 	name = "General of the Marine Corps"
 	name_short = "GenMarCor"
-	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag/o10_alt)
-	sort_order = 20
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/flag/o8)
+	sort_order = 18
 
 /*
  *  Civilians
