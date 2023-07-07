@@ -14,9 +14,8 @@
 	path = /obj/item/clothing/shoes
 	cost = 2
 
-/datum/gear/shoes/boots/New()
+/datum/gear/shoes/boots/New(boots = list())
 	..()
-	var/boots = list()
 	boots += /obj/item/clothing/shoes/jackboots
 	boots += /obj/item/clothing/shoes/workboots
 	boots += /obj/item/clothing/shoes/dutyboots
