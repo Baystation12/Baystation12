@@ -138,7 +138,7 @@ var/global/list/radial_menus = list()
 		if(length(current) == max_elements)
 			page_data[page] = current
 			page++
-			length(page_data)++
+			LIST_INC(page_data)
 			current = list()
 		if(paged && length(current) == max_elements - 1)
 			current += NEXT_PAGE_ID
