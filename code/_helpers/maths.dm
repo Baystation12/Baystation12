@@ -231,3 +231,8 @@
 		break
 
 	return final_temp
+
+/proc/Wrap(val, min, max)
+	var/d = max - min
+	var/t = round((val - min) / d)
+	return val - (t * d)
