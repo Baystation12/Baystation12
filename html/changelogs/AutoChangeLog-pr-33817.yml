@@ -1,4 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - rscadd: The 'Remove Accessory' Verb now uses a radial menu.
