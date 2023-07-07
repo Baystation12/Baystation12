@@ -178,8 +178,8 @@
 		if (ass.accessory_flags & ACCESSORY_REMOVABLE)
 			removables |= ass
 
-	if(LAZYLEN(accessories) > 1)
-		A = show_radial_menu(usr, usr, make_item_radial_menu_choices(accessories), radius = 42, tooltips = TRUE)
+	if(length(removables) > 1)
+		A = show_radial_menu(usr, usr, make_item_radial_menu_choices(removables), radius = 42, tooltips = TRUE)
 	else
 		A = accessories[1]
 	src.remove_accessory(usr,A)
