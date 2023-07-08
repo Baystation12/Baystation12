@@ -45,3 +45,12 @@
 
 #define LAST_CKEY(M) (M.ckey || M.last_ckey)
 #define LAST_KEY(M)  (M.key || M.last_ckey)
+
+///Max length of a keypress command before it's considered to be a forged packet/bogus command
+#define MAX_KEYPRESS_COMMANDLENGTH 16
+///Maximum keys that can be bound to one button
+#define MAX_COMMANDS_PER_KEY 5
+///Maximum keys per keybind
+#define MAX_KEYS_PER_KEYBIND 3
+///Length of held key buffer
+#define HELD_KEY_BUFFER_LENGTH 15
