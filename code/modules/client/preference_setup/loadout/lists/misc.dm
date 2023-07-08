@@ -28,9 +28,9 @@
 	display_name = "deck of tarot cards"
 	path = /obj/item/deck/tarot
 
-/datum/gear/cards/une
+/datum/gear/une
 	display_name = "deck of une cards"
-	path = /obj/item/deck/cards/une
+	path = /obj/item/deck/une
 
 /datum/gear/holder
 	display_name = "card holder"
