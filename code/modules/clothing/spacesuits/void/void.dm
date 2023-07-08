@@ -191,13 +191,12 @@ else if(##equipment_var) {\
 		to_chat(H, "<span class='notice'>You retract your suit helmet.</span>")
 		helmet.canremove = 1
 		playsound(loc, helmet_retract_sound, 30)
-		H.drop_from_inventory(helmet, src)
+		H.drop_from_inventory(helmet, slot_head)
 	else
 		if(H.head)
 			to_chat(H, "<span class='danger'>You cannot deploy your helmet while wearing \the [H.head].</span>")
 			return
 		if(H.equip_to_slot_if_possible(helmet, slot_head))
-			helmet.pickup(H)
 			helmet.canremove = 0
 			playsound(loc, helmet_deploy_sound, 30)
 			to_chat(H, "<span class='info'>You deploy your suit helmet, sealing you off from the world.</span>")
