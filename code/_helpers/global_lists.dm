@@ -165,16 +165,6 @@ var/global/list/string_slot_flags = list(
 		var/datum/grab/G = all_grabstates[grabstate_name]
 		G.refresh_updown()
 
-	// Keybindings
-	for(var/datum/keybinding/keybinding as anything in subtypesof(/datum/keybinding))
-		if(!initial(keybinding.name))
-			continue
-		var/datum/keybinding/instance = new keybinding
-		global.keybindings_by_name[instance.name] = instance
-		if(length(instance.hotkey_keys))
-			for(var/bound_key in instance.hotkey_keys)
-				global.hotkey_keybinding_list_by_key[bound_key] += list(instance.name)
-
 	return 1
 
 //*** params cache

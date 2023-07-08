@@ -250,7 +250,7 @@
 
 /obj/machinery/cryopod/Destroy()
 	if(occupant)
-		occupant.forceMove(get_step(loc, SOUTH))
+		occupant.forceMove(loc)
 	. = ..()
 
 /obj/machinery/cryopod/Initialize()
