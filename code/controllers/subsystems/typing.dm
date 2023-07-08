@@ -225,16 +225,6 @@ SUBSYSTEM_DEF(typing)
 	if (message)
 		say_verb(message)
 
-/mob/verb/whisper_wrapper()
-	set name = ".Whisper"
-	set hidden = TRUE
-
-	SStyping.UpdateVerbState(client, TRUE)
-	var/message = input("","whisper (text)") as null | text
-	SStyping.UpdateVerbState(client, FALSE)
-	if (message)
-		whisper(message)
-
 
 /mob/verb/me_wrapper()
 	set name = ".Me"

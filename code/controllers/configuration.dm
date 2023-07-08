@@ -436,7 +436,6 @@
 
 	var/static/deletion_starts_paused = FALSE
 
-	var/static/allow_diagonal_movement = FALSE
 
 /datum/configuration/New()
 	load_config()
@@ -900,8 +899,6 @@
 				maximum_stamina_recovery = value
 			if ("maximum_mushrooms")
 				maximum_mushrooms = value
-			if("allow_diagonal_movement")
-				config.allow_diagonal_movement = TRUE
 			if ("use_loyalty_implants")
 				use_loyalty_implants = TRUE
 			else
