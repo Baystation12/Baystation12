@@ -1,5 +1,0 @@
-author: LordNest
-delete-after: true
-changes:
-  - rscadd: Ported input subsystem and keybinding from Nebula. Added Gliding for mob
-      movement.
