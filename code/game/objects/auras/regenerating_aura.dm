@@ -19,6 +19,7 @@
 	var/grow_threshold = 0
 	var/ignore_tag//organ tag to ignore
 	var/last_nutrition_warning = 0
+	var/last_no_regen_warning = 0
 	var/innate_heal = TRUE // Whether the aura is on, basically.
 
 
@@ -33,6 +34,9 @@
 		return EMPTY_BITFIELD
 	if(H.nutrition < nutrition_damage_mult)
 		low_nut_warning()
+		return EMPTY_BITFIELD
+	if(H.chem_effects[CE_NOREGEN] > 0)
+		no_regen_warning()
 		return EMPTY_BITFIELD
 
 	if(brute_mult && H.getBruteLoss())
@@ -97,6 +101,13 @@
 	if (last_nutrition_warning + 1 MINUTE < world.time)
 		to_chat(user, SPAN_WARNING("You need more energy to regenerate your [wound_type || "wounds"]."))
 		last_nutrition_warning = world.time
+		return 1
+	return 0
+
+/obj/aura/regenerating/human/proc/no_regen_warning(wound_type)
+	if (last_no_regen_warning + 1 MINUTE < world.time)
+		to_chat(user, SPAN_WARNING("Something is preventing you from regenerating your [wound_type || "wounds"]!"))
+		last_no_regen_warning = world.time
 		return 1
 	return 0
 

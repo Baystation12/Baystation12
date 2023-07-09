@@ -42,6 +42,7 @@
 #define CE_ENERGETIC     "energetic"    // Speeds up stamina recovery.
 #define	CE_VOICELOSS     "whispers"     // Lowers the subject's voice to a whisper
 #define CE_STIMULANT     "stimulants"   // Makes it harder to disarm someone
+#define CE_NOREGEN		 "regenblocker" // Prevents regeneration (from species and healing chems)
 
 //reagent flags
 #define IGNORE_MOB_SIZE    FLAG(0)

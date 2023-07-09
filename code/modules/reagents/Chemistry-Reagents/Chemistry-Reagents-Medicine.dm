@@ -37,6 +37,8 @@
 	value = 4.9
 
 /datum/reagent/bicaridine/affect_blood(mob/living/carbon/M, removed)
+	if (M.chem_effects[CE_NOREGEN])
+		return
 	if (!IS_METABOLICALLY_INERT(M))
 		M.heal_organ_damage(6 * removed, 0)
 		M.add_chemical_effect(CE_PAINKILLER, 10)
@@ -62,6 +64,8 @@
 	value = 2.9
 
 /datum/reagent/kelotane/affect_blood(mob/living/carbon/M, removed)
+	if (M.chem_effects[CE_NOREGEN])
+		return
 	if (!IS_METABOLICALLY_INERT(M))
 		M.heal_organ_damage(0, 6 * removed)
 
@@ -78,6 +82,8 @@
 	value = 3.9
 
 /datum/reagent/dermaline/affect_blood(mob/living/carbon/M, removed)
+	if (M.chem_effects[CE_NOREGEN])
+		return
 	if (!IS_METABOLICALLY_INERT(M))
 		M.heal_organ_damage(0, 12 * removed)
 
@@ -162,6 +168,8 @@
 	value = 6
 
 /datum/reagent/tricordrazine/affect_blood(mob/living/carbon/M, removed)
+	if (M.chem_effects[CE_NOREGEN])
+		return
 	if (!IS_METABOLICALLY_INERT(M))
 		M.heal_organ_damage(3 * removed, 3 * removed)
 
@@ -181,8 +189,11 @@
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-100 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 1)
-		M.heal_organ_damage(30 * removed, 30 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
+		if (M.chem_effects[CE_NOREGEN])
+			return
+		else
+			M.heal_organ_damage(30 * removed, 30 * removed)
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			for(var/obj/item/organ/internal/I in H.internal_organs)
@@ -209,8 +220,11 @@
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-300 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 2)
-		M.heal_organ_damage(50 * removed, 50 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
+		if (M.chem_effects[CE_NOREGEN])
+			return
+		else
+			M.heal_organ_damage(50 * removed, 50 * removed)
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			for(var/obj/item/organ/internal/I in H.internal_organs)
@@ -844,7 +858,7 @@
 /datum/reagent/rezadone/affect_blood(mob/living/carbon/M, removed)
 	M.adjustCloneLoss(-20 * removed)
 	M.adjustOxyLoss(-2 * removed)
-	M.heal_organ_damage(20 * removed, 20 * removed)
+	M.heal_organ_damage(20 * removed, 20 * removed) //Bypasses noexcutite regenblock because space magic.
 	M.adjustToxLoss(-20 * removed)
 	if(M.chem_doses[type] > 3 && ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -856,17 +870,19 @@
 
 /datum/reagent/noexcutite
 	name = "Noexcutite"
-	description = "A thick, syrupy liquid that has a lethargic effect. Used to cure cases of jitteriness."
+	description = "A thick, syrupy liquid that has a lethargic effect. Used to cure cases of jitteriness and prevent tissue regeneration."
 	taste_description = "numbing coldness"
 	reagent_state = LIQUID
 	color = "#bc018a"
+	metabolism = REM * 0.005
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/noexcutite/affect_blood(mob/living/carbon/M, removed)
-	if (IS_METABOLICALLY_INERT(M))
+	if (!IS_METABOLICALLY_INERT(M))
 		M.make_jittery(-50)
+		M.add_chemical_effect(CE_NOREGEN, 1)
 
 /datum/reagent/antidexafen
 	name = "Antidexafen"
