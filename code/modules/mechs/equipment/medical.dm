@@ -7,7 +7,7 @@
 	equipment_delay = 30 //don't spam it on people pls
 	active_power_use = 0 //Usage doesn't really require power. We don't want people stuck inside
 	origin_tech = list(TECH_DATA = 2, TECH_BIO = 3)
-	passive_power_use = 1.5 KILOWATTS
+	passive_power_use = 0 //Raised to 1.5 KW when patient is present.
 	var/obj/machinery/sleeper/mounted/sleeper = null
 
 /obj/item/mech_equipment/sleeper/Initialize()
@@ -56,6 +56,7 @@
 	stasis_power = 0
 	interact_offline = TRUE
 	stat_immune = MACHINE_STAT_NOPOWER
+	base_chemicals = list("Inaprovaline" = /datum/reagent/inaprovaline, "Paracetamol" = /datum/reagent/paracetamol, "Dylovene" = /datum/reagent/dylovene, "Dexalin" = /datum/reagent/dexalin, "Kelotane" = /datum/reagent/kelotane, "Hyronalin" = /datum/reagent/hyronalin)
 
 /obj/machinery/sleeper/mounted/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.mech_state)
 	. = ..()
@@ -65,6 +66,18 @@
 	if(istype(S))
 		return S.owner
 	return null
+
+/obj/machinery/sleeper/mounted/go_in()
+	..()
+	var/obj/item/mech_equipment/sleeper/S = loc
+	if(istype(S) && occupant)
+		S.passive_power_use = 1.5 KILOWATTS
+
+/obj/machinery/sleeper/mounted/go_out()
+	..()
+	var/obj/item/mech_equipment/sleeper/S = loc
+	if(istype(S))
+		S.passive_power_use = 0 //No passive power drain when the sleeper is empty. Set to 1.5 KW when patient is inside.
 
 //You cannot modify these, it'd probably end with something in nullspace. In any case basic meds are plenty for an ambulance
 /obj/machinery/sleeper/mounted/attackby(obj/item/I, mob/user)
@@ -78,26 +91,39 @@
 		beaker = I
 		user.visible_message(SPAN_NOTICE("\The [user] adds \a [I] to \the [src]."), SPAN_NOTICE("You add \a [I] to \the [src]."))
 
+#define MEDIGEL_SALVE 1
+#define MEDIGEL_SCAN  2
+
 /obj/item/mech_equipment/mender
-	name = "exosuit medigel spray"
-	desc = "An exosuit-mounted matrix of medical gel nozzles and radiation emitters designed to treat wounds before transporting patient."
+	name = "exosuit medigel-scanner matrix"
+	desc = "An exosuit-mounted matrix of medical gel nozzles and radiation emitters designed to treat wounds before transporting patient, with an integrated health scanning suite for field analysis of injuries."
 	icon_state = "mech_mender"
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_MEDICAL)
 	active_power_use = 0 //Usage doesn't really require power. It's per wound
 	origin_tech = list(TECH_DATA = 2, TECH_BIO = 3)
 	var/list/apply_sounds = list('sound/effects/spray.ogg', 'sound/effects/spray2.ogg', 'sound/effects/spray3.ogg')
+	var/mode = MEDIGEL_SALVE
+	var/obj/item/device/scanner/health/scanner = null
+
+/obj/item/mech_equipment/mender/attack_self(mob/user)
+	if(!.)
+		return
+	mode = mode == MEDIGEL_SALVE ? MEDIGEL_SCAN : MEDIGEL_SALVE
+	to_chat(user, SPAN_NOTICE("You set \the [src] to [mode == MEDIGEL_SALVE ? "dispense medigel" : "scan for injuries"]."))
+	update_icon()
 
 /obj/item/mech_equipment/mender/afterattack(atom/target, mob/living/user, inrange, params)
 	. = ..()
-	if(.)
+	if (!.)
+		return
+	if (mode == MEDIGEL_SALVE)
 		if (istype(target, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = target
 			var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
 			if(affecting.is_bandaged() && affecting.is_disinfected() && affecting.is_salved())
 				to_chat(user, SPAN_WARNING("The wounds on \the [H]'s [affecting.name] have already been treated."))
-				return
 			else
 				if(!LAZYLEN(affecting.wounds))
 					return
@@ -135,3 +161,13 @@
 					playsound(owner, 'sound/items/Welder2.ogg', 10)
 				affecting.update_damages()
 				H.update_bandages(TRUE)
+	else if(mode == MEDIGEL_SCAN)
+		if (istype(target, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = target
+			medical_scan_action(H, user, scanner)
+
+/obj/item/device/scanner/health/mech
+	name = "exosuit health analyzer"
+
+#undef MEDIGEL_SALVE
+#undef MEDIGEL_SCAN
