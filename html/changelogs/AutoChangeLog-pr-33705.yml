@@ -1,0 +1,8 @@
+author: PurplePineapple, Escalation1984 Developers
+delete-after: true
+changes:
+  - rscadd: Adds autoclick functionality to clients.
+  - tweak: can_autofire on guns now uses the autoclick to allow for more natural automatic
+      fire by holding the mouse down in one place.
+  - rscdel: Click-drag automatic fire has been removed now that it has been replaced
+      with the autoclick.
