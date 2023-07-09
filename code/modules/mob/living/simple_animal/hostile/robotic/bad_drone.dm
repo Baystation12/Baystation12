@@ -88,3 +88,25 @@ Say List
 		"Err-rr-ror, seucrity subroutines corrupted. Assuming target as: Hostile."
 	)
 	say_stand_down = list("Visual lost.", "Error: Target lost.", "Error: Target parameter null.")
+
+/mob/living/simple_animal/hostile/rogue_drone/big
+	name = "construction drone"
+	desc = "A large construction drone. It looks angry, and very sharp."
+	icon = 'icons/mob/robots_drones.dmi'
+	icon_state = "constructiondrone"
+	icon_dead = "dron_dead"
+	health = 80
+	maxHealth = 80
+	natural_weapon = /obj/item/natural_weapon/drone_slicer/construction
+	var/image/eye_layer
+
+/mob/living/simple_animal/hostile/rogue_drone/big/Initialize()
+	. = ..()
+	var/image/I = image(icon = icon, icon_state = "eyes-constructiondrone-emag", layer = EYE_GLOW_LAYER)
+	I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
+	eye_layer = I
+	overlays += I
+	z_flags |= ZMM_MANGLE_PLANES
+
+	update_icon()

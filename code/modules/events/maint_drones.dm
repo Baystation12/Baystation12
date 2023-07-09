@@ -11,7 +11,10 @@
 				continue
 
 			var/turf/T = pick_n_take(spots)
-			new/mob/living/simple_animal/hostile/rogue_drone(T)
+			if (severity > EVENT_LEVEL_MUNDANE && prob(10))
+				new/mob/living/simple_animal/hostile/rogue_drone/big(T)
+			else
+				new/mob/living/simple_animal/hostile/rogue_drone(T)
 
 /datum/event/rogue_maint_drones/announce()
 	var/stealth_chance = 70 - 20*severity

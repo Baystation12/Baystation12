@@ -71,6 +71,9 @@
 	edge = TRUE
 	show_in_message = TRUE
 
+/obj/item/natural_weapon/drone_slicer/construction
+	force = 18
+
 /obj/item/natural_weapon/beak
 	name = "beak"
 	gender = NEUTER
