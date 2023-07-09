@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - bugfix: Fixed the boots loadout menu select, jungle boots have been readded as
+      'tan' SCGA boots.
