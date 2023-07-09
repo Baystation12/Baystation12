@@ -62,7 +62,7 @@
 	waterproof = FALSE
 
 	var/burst = 1
-	var/can_autofire = FALSE
+	var/can_autofire = FALSE /// checks if the gun will continue firing if the mouse button is held down
 	var/fire_delay = 6 	//delay after shooting before the gun can be used again. Cannot be less than [burst_delay+1]
 	var/burst_delay = 2	//delay between shots, if firing in bursts
 	var/move_delay = 1
@@ -647,9 +647,6 @@
 		target.visible_message(SPAN_DANGER("\The [src] goes off during the struggle!"))
 		afterattack(shoot_to,target)
 		return 1
-
-/obj/item/gun/proc/can_autofire()
-	return (can_autofire && world.time >= next_fire_time)
 
 /obj/item/gun/proc/check_accidents(mob/living/user, message = "[user] fumbles with \the [src] and it goes off!",skill_path = gun_skill, fail_chance = 20, no_more_fail = safety_skill, factor = 2)
 	if(istype(user))
