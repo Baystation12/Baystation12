@@ -1,0 +1,10 @@
+author: TheNightingale
+delete-after: true
+changes:
+  - rscadd: Exosuit medigel dispensers now come with a built-in health analyzer alternate
+      mode.
+  - bugfix: Exosuits now require harm intent to slam, preventing unintentional slams
+      when changing equipment.
+  - bugfix: Exosuit cameras now actually work.
+  - bugfix: Exosuit sleepers no longer act as power sinks when empty.
+  - bugfix: Exosuit floodlights are no longer required in order to climb ladders.
