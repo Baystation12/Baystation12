@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: The lift now declares Telecommunications on Deck 4 instead of Deck 3.

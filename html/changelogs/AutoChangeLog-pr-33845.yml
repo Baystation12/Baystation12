@@ -1,4 +1,0 @@
-author: TheNightingale
-delete-after: true
-changes:
-  - tweak: Suit sensor consoles now beep when someone's critical.
