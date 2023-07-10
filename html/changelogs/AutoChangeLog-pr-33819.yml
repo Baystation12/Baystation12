@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - rscadd: Added rogue construction drones to the rogue maintenance drone event (moderate
-      - major only).
