@@ -131,3 +131,9 @@
 	max_shots = 4
 	projectile_type = /obj/item/projectile/beam/confuseray
 	combustion = 0
+
+/obj/item/gun/energy/confuseray/weak
+	name = "taser"
+	desc = "The W-T Mk. 2 Disorientator is a small, low capacity, and short-ranged energy projector. It suffers some reliability issues compared to later models, but it's very affordable."
+	max_shots = 2
+	projectile_type = /obj/item/projectile/beam/confuseray/weak

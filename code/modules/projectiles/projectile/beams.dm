@@ -361,6 +361,25 @@
 
 	return 1
 
+/obj/item/projectile/beam/confuseray/weak
+	name = "taser beam"
+	icon_state = "stun"
+	fire_sound = 'sound/weapons/Taser.ogg'
+
+	muzzle_type = /obj/effect/projectile/stun/muzzle
+	tracer_type = /obj/effect/projectile/stun/tracer
+	impact_type = /obj/effect/projectile/stun/impact
+
+/obj/item/projectile/beam/confuseray/weak/on_hit(atom/target, blocked = 0)
+	if (prob(33))
+		return 0
+	if(istype(target, /mob/living))
+		var/mob/living/L = target
+		agony = 50
+		L.stun_effect_act(stun, agony, def_zone, src)
+
+	return 1
+
 /obj/item/projectile/beam/particle
 	name = "particle lance"
 	icon_state = "particle"

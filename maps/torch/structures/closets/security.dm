@@ -52,8 +52,9 @@
 		/obj/item/storage/belt/security,
 		/obj/item/material/knife/folding/swiss/sec,
 		/obj/item/storage/backpack/dufflebag/sec,
+		/obj/item/gun/energy/confuseray/weak,
 		/obj/item/gun/projectile/pistol/m19/empty,
-		/obj/item/ammo_magazine/pistol/rubber = 3
+		/obj/item/ammo_magazine/pistol = 3
 	)
 
 
@@ -84,10 +85,10 @@
 		/obj/item/device/taperecorder,
 		/obj/item/material/knife/folding/swiss/officer,
 		/obj/item/device/personal_shield,
-		/obj/item/storage/backpack/dufflebag/sec,
+		/obj/item/ammo_magazine/pistol/double = 3,
 		/obj/item/gun/projectile/pistol/m22f/empty,
-		/obj/item/ammo_magazine/pistol/double = 1,
-		/obj/item/ammo_magazine/pistol/double/rubber = 2
+		/obj/item/storage/backpack/dufflebag/sec,
+		/obj/item/gun/energy/confuseray
 	)
 
 /obj/structure/closet/secure_closet/brigchief
@@ -115,8 +116,8 @@
 		/obj/item/material/knife/folding/swiss/sec,
 		/obj/item/storage/backpack/dufflebag/sec,
 		/obj/item/gun/projectile/pistol/m22f/empty,
-		/obj/item/ammo_magazine/pistol/double = 1,
-		/obj/item/ammo_magazine/pistol/double/rubber = 2
+		/obj/item/ammo_magazine/pistol/double = 3,
+		/obj/item/gun/energy/confuseray/weak
 	)
 
 /obj/structure/closet/secure_closet/forensics
@@ -148,7 +149,8 @@
 		/obj/item/material/knife/folding/swiss/sec,
 		/obj/item/storage/backpack/dufflebag/sec,
 		/obj/item/gun/projectile/pistol/sec/empty,
-		/obj/item/ammo_magazine/pistol/rubber = 2
+		/obj/item/ammo_magazine/pistol = 3,
+		/obj/item/gun/energy/confuseray/weak
 	)
 
 /obj/structure/closet/bombclosetsecurity/WillContain()
