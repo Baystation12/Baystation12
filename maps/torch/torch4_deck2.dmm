@@ -14522,7 +14522,7 @@
 	},
 /obj/machinery/button/blast_door{
 	desc = "A remote control-switch for the observation shutters.";
-	id_tag = "bsd_observation";
+	id_tag = "fusion_observation";
 	name = "Chamber Observation";
 	pixel_x = 11;
 	pixel_y = 29
