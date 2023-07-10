@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Fixes certain floor decals disappearing when a turf initializes or updates
+      its icons.
