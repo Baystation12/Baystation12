@@ -58,15 +58,15 @@
 
 /obj/machinery/chem_master/attackby(obj/item/B as obj, mob/user as mob)
 
-	if(istype(B, /obj/item/reagent_containers/glass))
+	if(istype(B, /obj/item/reagent_containers/glass) || istype(B, /obj/item/reagent_containers/ivbag))
 
 		if(beaker)
-			to_chat(user, "A beaker is already loaded into the machine.")
+			to_chat(user, "A container is already loaded into the machine.")
 			return
 		if(!user.unEquip(B, src))
 			return
 		beaker = B
-		to_chat(user, "You add the beaker to the machine!")
+		to_chat(user, "You add the container to the machine!")
 		icon_state = "mixer1"
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 

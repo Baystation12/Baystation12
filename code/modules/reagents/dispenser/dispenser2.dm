@@ -83,7 +83,7 @@
 			to_chat(user, SPAN_NOTICE("You remove \the [C] from \the [src]."))
 			C.dropInto(loc)
 
-	else if(istype(W, /obj/item/reagent_containers/glass) || istype(W, /obj/item/reagent_containers/food))
+	else if(istype(W, /obj/item/reagent_containers/glass) || istype(W, /obj/item/reagent_containers/food) || istype(W, /obj/item/reagent_containers/ivbag))
 		if(container)
 			to_chat(user, SPAN_WARNING("There is already \a [container] on \the [src]!"))
 			return
@@ -91,7 +91,7 @@
 		var/obj/item/reagent_containers/RC = W
 
 		if(!accept_drinking && istype(RC,/obj/item/reagent_containers/food))
-			to_chat(user, SPAN_WARNING("This machine only accepts beakers!"))
+			to_chat(user, SPAN_WARNING("This machine only accepts beakers and IV bags!"))
 			return
 
 		if(!RC.is_open_container())
