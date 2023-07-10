@@ -11,6 +11,8 @@
 	fire_delay = 7
 	ammo_indicator = TRUE
 
+/obj/item/gun/projectile/pistol/m22f/empty
+	starts_loaded = FALSE
 
 /obj/item/gun/projectile/pistol/m19
 	name = "military pistol"
@@ -27,3 +29,6 @@
 	safety_icon = "m19-safety"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
 	fire_delay = 5
+
+/obj/item/gun/projectile/pistol/m19/empty
+	starts_loaded = FALSE

@@ -52,7 +52,8 @@
 		/obj/item/storage/belt/security,
 		/obj/item/material/knife/folding/swiss/sec,
 		/obj/item/storage/backpack/dufflebag/sec,
-		/obj/item/gun/energy/gun/small/secure
+		/obj/item/gun/projectile/pistol/m19/empty,
+		/obj/item/ammo_magazine/pistol/rubber = 3
 	)
 
 
@@ -73,7 +74,6 @@
 		/obj/item/storage/belt/holster/security/full,
 		/obj/item/storage/belt/security,
 		/obj/item/device/megaphone,
-		/obj/item/gunbox,
 		/obj/item/melee/telebaton,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/device/hailer,
@@ -84,7 +84,10 @@
 		/obj/item/device/taperecorder,
 		/obj/item/material/knife/folding/swiss/officer,
 		/obj/item/device/personal_shield,
-		/obj/item/storage/backpack/dufflebag/sec
+		/obj/item/storage/backpack/dufflebag/sec,
+		/obj/item/gun/projectile/pistol/m22f/empty,
+		/obj/item/ammo_magazine/pistol/double = 1,
+		/obj/item/ammo_magazine/pistol/double/rubber = 2
 	)
 
 /obj/structure/closet/secure_closet/brigchief
@@ -102,7 +105,6 @@
 		/obj/item/taperoll/police,
 		/obj/item/storage/belt/holster/security/full,
 		/obj/item/storage/belt/security,
-		/obj/item/gun/energy/gun/secure/preauthorized,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/handcuffs,
 		/obj/item/device/hailer,
@@ -111,7 +113,10 @@
 		/obj/item/clothing/gloves/thick,
 		/obj/item/device/flashlight/maglight,
 		/obj/item/material/knife/folding/swiss/sec,
-		/obj/item/storage/backpack/dufflebag/sec
+		/obj/item/storage/backpack/dufflebag/sec,
+		/obj/item/gun/projectile/pistol/m22f/empty,
+		/obj/item/ammo_magazine/pistol/double = 1,
+		/obj/item/ammo_magazine/pistol/double/rubber = 2
 	)
 
 /obj/structure/closet/secure_closet/forensics
@@ -126,7 +131,6 @@
 		/obj/item/device/radio/headset/headset_sec/alt,
 		/obj/item/clothing/head/helmet/solgov/security,
 		/obj/item/clothing/suit/armor/pcarrier/medium/security,
-		/obj/item/gun/energy/gun/small/secure,
 		/obj/item/device/flash,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/taperoll/police,
@@ -142,7 +146,9 @@
 		/obj/item/storage/belt/security,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/material/knife/folding/swiss/sec,
-		/obj/item/storage/backpack/dufflebag/sec
+		/obj/item/storage/backpack/dufflebag/sec,
+		/obj/item/gun/projectile/pistol/sec/empty,
+		/obj/item/ammo_magazine/pistol/rubber = 2
 	)
 
 /obj/structure/closet/bombclosetsecurity/WillContain()
