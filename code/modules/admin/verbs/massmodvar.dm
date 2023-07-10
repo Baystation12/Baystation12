@@ -243,7 +243,7 @@
 
 		if("type")
 			var/new_value
-			new_value = input("Enter type:","Type",O.vars[variable]) as null|anything in typesof(/obj,/mob,/area,/turf)
+			new_value = select_subpath(within_scope = /datum)
 			if(new_value == null) return
 			O.vars[variable] = new_value
 			if(method)
