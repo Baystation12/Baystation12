@@ -222,3 +222,11 @@
 	item_cost = 12
 	path = /obj/item/gun/projectile/heavysniper/boltaction
 	antag_roles = list(MODE_REVOLUTIONARY)
+
+
+/datum/uplink_item/item/visible_weapons/magshot
+	name = "Auto Shotgun"
+	desc = "A drum-fed, selective fire shotgun. Inaccurate outside of close range, but capable of turning your enemies into a fine mist."
+	item_cost = 60
+	path = /obj/item/gun/projectile/shotgun/magshot
+	antag_roles = list(MODE_MERCENARY)

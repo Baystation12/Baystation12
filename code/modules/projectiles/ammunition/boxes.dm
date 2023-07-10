@@ -368,3 +368,26 @@
 	matter = list(MATERIAL_STEEL = 1500)
 	max_ammo = 8
 	multiple_sprites = TRUE
+
+/obj/item/ammo_magazine/shotgunmag
+	name = "shotgun magazine"
+	desc = "A magazine for semi-automatic shotguns."
+	icon_state = "drum"
+	caliber = CALIBER_SHOTGUN
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/shotgun
+	matter = list(MATERIAL_STEEL = 2400)
+	max_ammo = 15
+	multiple_sprites = TRUE
+
+/obj/item/ammo_magazine/shotgunmag/shot
+	labels = list("shot")
+	ammo_type = /obj/item/ammo_casing/shotgun/pellet
+
+/obj/item/ammo_magazine/shotgunmag/flechette
+	labels = list("flechette")
+	ammo_type = /obj/item/ammo_casing/shotgun/flechette
+
+/obj/item/ammo_magazine/shotgunmag/beanbag
+	labels = list("beanbag")
+	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
