@@ -1,0 +1,4 @@
+author: TheNightingale
+delete-after: true
+changes:
+  - tweak: Chem dispensers and chemmasters now accept IV bags.
