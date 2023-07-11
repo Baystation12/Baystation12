@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - bugfix: Giant spider counts are now capped at 30 globally (to start) so they don't
+      consume everything everywhere.
