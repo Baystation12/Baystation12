@@ -1,9 +1,0 @@
-author: Azlan, Jux
-delete-after: true
-changes:
-  - rscadd: Adds a select fire, drum fed shotgun to gun spawners and merc uplinks,
-      sprited by Azlan!
-  - rscadd: Adds shotgun drums to lathes and uplinks, sprited by Azlan!
-  - tweak: Individual shotgun shells are now a little less than half their old material
-      cost.
-  - tweak: The random projectile weapon spawner now favors old-fashioned items less.

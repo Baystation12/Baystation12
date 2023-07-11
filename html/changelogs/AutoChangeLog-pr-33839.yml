@@ -1,4 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Moved the 'path' variable type in VV menus to 'type'.
