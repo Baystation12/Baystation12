@@ -1,0 +1,8 @@
+author: Jux
+delete-after: true
+changes:
+  - maptweak: Secarm has been divided in two, with more advanced ballistic weaponry,
+      the ammo for said weapons and lethal handgun ammo requiring COS access.
+  - tweak: Secarm now has ion pistols instead of ion rifles.
+  - tweak: The BC and COS no longer spawn with lethal ammo in their lockers, and FTs
+      now have an m19.
