@@ -1094,10 +1094,15 @@
 	icon_state = "security"
 	req_access = list(access_brig)
 
+/area/security/secure_storage
+	name = "\improper Security - Secure Storage"
+	icon_state = "security"
+	req_access = list(access_armory)
+
 /area/security/armoury
 	name = "\improper Security - Armory"
 	icon_state = "Warden"
-	req_access = list(access_armory)
+	req_access = list(access_hos)
 
 /area/security/detectives_office
 	name = "\improper Security - Investigations Office"

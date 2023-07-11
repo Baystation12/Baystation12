@@ -141,6 +141,9 @@ var/global/const/access_o_mess = "ACCESS_TORCH_O_MESS"
 /datum/access/hos
 	desc = "Chief of Security"
 
+/datum/access/armory
+	desc = "Brig Chief"
+
 /datum/access/hop
 	desc = "Executive Officer"
 
