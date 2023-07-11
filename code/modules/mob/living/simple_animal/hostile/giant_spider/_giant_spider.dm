@@ -4,6 +4,8 @@
 	Thick material will prevent injections, similar to other means of injections.
 */
 
+GLOBAL_VAR_INIT(MAX_SPIDER_COUNT, 30)
+GLOBAL_VAR_INIT(SPIDER_COUNT, 0)
 
 // The base spider, in the 'walking tank' family.
 /mob/living/simple_animal/hostile/giant_spider
@@ -75,11 +77,12 @@
 	get_light_and_color(parent)
 	spider_randomify()
 	update_icon()
+	GLOB.SPIDER_COUNT += 1
 	. = ..()
 
 /mob/living/simple_animal/hostile/giant_spider/death(gibbed, deathmessage, show_dead_message)
 	. = ..()
-
+	GLOB.SPIDER_COUNT -= 1
 	overlays -= eye_layer
 
 /mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values

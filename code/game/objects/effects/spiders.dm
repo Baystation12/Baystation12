@@ -259,6 +259,9 @@
 					break
 
 		if(amount_grown >= 100)
+			if (GLOB.SPIDER_COUNT >= GLOB.MAX_SPIDER_COUNT)
+				amount_grown = 1
+				return
 			new greater_form(src.loc, src)
 			qdel(src)
 	else if(isorgan(loc))
