@@ -134,3 +134,21 @@
 	desc = "A stripper clip used to load bolt action rifles. Contains just 5 rounds."
 	item_cost = 2
 	path = /obj/item/ammo_magazine/speedloader/clip
+
+/datum/uplink_item/item/ammo/shotgun_drum_buckshot
+	name = "Shotgun Drum Magazine"
+	desc = "A drum magazine that can hold fifteen 12g shotgun shells. Loaded with buckshot."
+	item_cost = 12
+	path = /obj/item/ammo_magazine/shotgunmag/shot
+
+/datum/uplink_item/item/ammo/shotgun_drum_slugs
+	name = "Shotgun Slug Drum Magazine"
+	desc = "A drum magazine that can hold fifteen 12g shotgun shells. Loaded with slugs."
+	item_cost = 12
+	path = /obj/item/ammo_magazine/shotgunmag
+
+/datum/uplink_item/item/ammo/shotgun_drum_flechette
+	name = "Shotgun Flechette Drum Magazine"
+	desc = "A drum magazine that can hold fifteen 12g shotgun shells. Loaded with flechettes."
+	item_cost = 12
+	path = /obj/item/ammo_magazine/shotgunmag/flechette

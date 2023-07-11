@@ -118,6 +118,8 @@
 	if(handle_casings != HOLD_CASINGS)
 		chambered = null
 
+	update_icon()
+
 #define EXP_TAC_RELOAD 1 SECOND
 #define PROF_TAC_RELOAD 0.5 SECONDS
 #define EXP_SPD_RELOAD 0.5 SECONDS
@@ -301,7 +303,7 @@
 			playsound(user, auto_eject_sound, 40, 1)
 		ammo_magazine.update_icon()
 		ammo_magazine = null
-		update_icon() //make sure to do this after unsetting ammo_magazine
+	update_icon() //make sure to do this after unsetting ammo_magazine
 
 /obj/item/gun/projectile/examine(mob/user)
 	. = ..()

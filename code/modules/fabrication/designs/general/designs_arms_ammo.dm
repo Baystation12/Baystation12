@@ -134,3 +134,19 @@
 /datum/fabricator_recipe/arms_ammo/hidden/rifleinternalclip
 	name = "ammunition (en-bloc clip)"
 	path = /obj/item/ammo_magazine/iclipr
+
+/datum/fabricator_recipe/arms_ammo/hidden/slugdrum
+	name = "ammunition (drum magazine, slug)"
+	path = /obj/item/ammo_magazine/shotgunmag
+
+/datum/fabricator_recipe/arms_ammo/hidden/shotdrum
+	name = "ammunition (drum magazine, buckshot)"
+	path = /obj/item/ammo_magazine/shotgunmag/shot
+
+/datum/fabricator_recipe/arms_ammo/hidden/flechettedrum
+	name = "ammunition (drum magazine, flechette)"
+	path = /obj/item/ammo_magazine/shotgunmag/flechette
+
+/datum/fabricator_recipe/arms_ammo/hidden/beandrum
+	name = "ammunition (drum magazine, beanbag)"
+	path = /obj/item/ammo_magazine/shotgunmag/beanbag

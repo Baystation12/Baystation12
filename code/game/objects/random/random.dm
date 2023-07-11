@@ -306,26 +306,26 @@
 	icon_state = "revolver"
 
 /obj/random/projectile/spawn_choices()
-	return list(/obj/item/gun/projectile/automatic/battlerifle = 4,
-				/obj/item/gun/projectile/sniper/garand = 4,
-				/obj/item/gun/projectile/sniper/semistrip = 4,
+	return list(/obj/item/gun/projectile/automatic/battlerifle = 2,
+				/obj/item/gun/projectile/sniper/garand = 3,
+				/obj/item/gun/projectile/sniper/semistrip = 2,
 				/obj/item/gun/projectile/shotgun/pump = 3,
 				/obj/item/gun/projectile/automatic/merc_smg = 2,
-				/obj/item/gun/projectile/automatic/assault_rifle = 2,
+				/obj/item/gun/projectile/automatic/assault_rifle = 3,
 				/obj/item/gun/projectile/automatic/bullpup_rifle = 2,
 				/obj/item/gun/projectile/pistol/sec = 4,
-				/obj/item/gun/projectile/pistol/holdout = 4,
-				/obj/item/gun/projectile/pirate = 5,
-				/obj/item/gun/projectile/revolver = 2,
+				/obj/item/gun/projectile/pistol/holdout = 2,
+				/obj/item/gun/projectile/pirate = 2,
+				/obj/item/gun/projectile/revolver = 4,
 				/obj/item/gun/projectile/automatic/sec_smg = 3,
-				/obj/item/gun/projectile/revolver/holdout = 4,
-				/obj/item/gun/projectile/revolver = 2,
-				/obj/item/gun/projectile/shotgun/doublebarrel = 4,
+				/obj/item/gun/projectile/revolver/holdout = 2,
+				/obj/item/gun/projectile/shotgun/doublebarrel = 3,
 				/obj/item/gun/projectile/shotgun/doublebarrel/sawn = 3,
 				/obj/item/gun/projectile/heavysniper = 1,
 				/obj/item/gun/projectile/shotgun/pump/combat = 2,
-				/obj/item/gun/projectile/pistol/throwback = 1,
-				/obj/item/gun/projectile/pistol/broomstick = 1)
+				/obj/item/gun/projectile/pistol/throwback = 3,
+				/obj/item/gun/projectile/pistol/broomstick = 1,
+				/obj/item/gun/projectile/shotgun/magshot = 3)
 
 /obj/random/handgun
 	name = "Random Handgun"
