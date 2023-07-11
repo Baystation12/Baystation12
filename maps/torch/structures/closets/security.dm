@@ -53,7 +53,8 @@
 		/obj/item/material/knife/folding/swiss/sec,
 		/obj/item/storage/backpack/dufflebag/sec,
 		/obj/item/gun/projectile/pistol/m19/empty,
-		/obj/item/ammo_magazine/pistol/rubber = 3
+		/obj/item/ammo_magazine/pistol/rubber = 2,
+		/obj/item/ammo_magazine/pistol/pepperball = 1
 	)
 
 
@@ -87,7 +88,8 @@
 		/obj/item/storage/backpack/dufflebag/sec,
 		/obj/item/gun/projectile/pistol/m22f/empty,
 		/obj/item/ammo_magazine/pistol/double = 1,
-		/obj/item/ammo_magazine/pistol/double/rubber = 2
+		/obj/item/ammo_magazine/pistol/double/pepperball = 1,
+		/obj/item/ammo_magazine/pistol/double/rubber = 1
 	)
 
 /obj/structure/closet/secure_closet/brigchief
@@ -116,7 +118,8 @@
 		/obj/item/storage/backpack/dufflebag/sec,
 		/obj/item/gun/projectile/pistol/m22f/empty,
 		/obj/item/ammo_magazine/pistol/double = 1,
-		/obj/item/ammo_magazine/pistol/double/rubber = 2
+		/obj/item/ammo_magazine/pistol/double/pepperball = 1,
+		/obj/item/ammo_magazine/pistol/double/rubber = 1
 	)
 
 /obj/structure/closet/secure_closet/forensics
@@ -148,7 +151,8 @@
 		/obj/item/material/knife/folding/swiss/sec,
 		/obj/item/storage/backpack/dufflebag/sec,
 		/obj/item/gun/projectile/pistol/sec/empty,
-		/obj/item/ammo_magazine/pistol/rubber = 2
+		/obj/item/ammo_magazine/pistol/pepperball = 1,
+		/obj/item/ammo_magazine/pistol/rubber = 1
 	)
 
 /obj/structure/closet/bombclosetsecurity/WillContain()

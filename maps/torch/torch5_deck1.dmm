@@ -15082,6 +15082,7 @@
 /obj/structure/sign/warning/secure_area{
 	dir = 1
 	},
+/obj/item/storage/box/ammo/doublestack/pepperball,
 /turf/simulated/wall/prepainted,
 /area/security/armoury)
 "ctb" = (
@@ -18820,6 +18821,10 @@
 	},
 /turf/simulated/wall/prepainted,
 /area/medical/staging)
+"iiO" = (
+/obj/item/storage/box/ammo/pistol/pepperball,
+/turf/simulated/wall/r_wall/hull,
+/area/maintenance/firstdeck/foreport)
 "ikj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -29237,6 +29242,11 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
+/obj/structure/table/rack,
+/obj/item/storage/box/ammo/pistol/pepperball,
+/obj/item/storage/box/ammo/pistol/pepperball,
+/obj/item/storage/box/ammo/doublestack/pepperball,
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "vIn" = (
@@ -37560,7 +37570,7 @@ tAS
 tAS
 tAS
 tAS
-tAS
+iiO
 tAS
 tAS
 tAS

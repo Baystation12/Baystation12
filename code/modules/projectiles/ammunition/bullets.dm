@@ -11,6 +11,11 @@
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
 	icon_state = "pistolcasing_r"
 
+/obj/item/ammo_casing/pistol/pepperball
+	desc = "A rubber pistol pepperball casing."
+	projectile_type = /obj/item/projectile/bullet/pistol/pepperball
+	icon_state = "pistolcasing_pb"
+
 /obj/item/ammo_casing/pistol/practice
 	desc = "A practice pistol bullet casing."
 	projectile_type = /obj/item/projectile/bullet/pistol/practice
@@ -27,6 +32,11 @@
 	desc = "A small pistol rubber bullet casing."
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber/holdout
 	icon_state = "smallcasing_r"
+
+/obj/item/ammo_casing/pistol/small/pepperball
+	desc = "A small pistol pepperball casing."
+	projectile_type = /obj/item/projectile/bullet/pistol/pepperball
+	icon_state = "pistolcasing_pb"
 
 /obj/item/ammo_casing/pistol/small/practice
 	desc = "A small pistol practice bullet casing."

@@ -187,6 +187,10 @@
 	labels = list("rubber")
 	ammo_type = /obj/item/ammo_casing/pistol/rubber
 
+/obj/item/ammo_magazine/pistol/pepperball
+	labels = list("pepperball")
+	ammo_type = /obj/item/ammo_casing/pistol/pepperball
+
 /obj/item/ammo_magazine/pistol/double
 	name = "doublestack pistol magazine"
 	icon_state = "pistol_mag"
@@ -196,6 +200,10 @@
 /obj/item/ammo_magazine/pistol/double/rubber
 	labels = list("rubber")
 	ammo_type = /obj/item/ammo_casing/pistol/rubber
+
+/obj/item/ammo_magazine/pistol/double/pepperball
+	labels = list("pepperball")
+	ammo_type = /obj/item/ammo_casing/pistol/pepperball
 
 /obj/item/ammo_magazine/pistol/double/practice
 	labels = list("practice")

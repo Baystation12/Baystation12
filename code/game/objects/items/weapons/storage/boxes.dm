@@ -212,6 +212,10 @@
 	name = "box of pistol magazines - rubber"
 	startswith = list(/obj/item/ammo_magazine/pistol/rubber = 7)
 
+/obj/item/storage/box/ammo/pistol/pepperball
+	name = "box of pistol magazines - pepperball"
+	startswith = list(/obj/item/ammo_magazine/pistol/pepperball = 7)
+
 /obj/item/storage/box/ammo/doublestack
 	name = "box of doublestack magazines - lethal"
 	startswith = list(/obj/item/ammo_magazine/pistol/double = 6)
@@ -219,6 +223,10 @@
 /obj/item/storage/box/ammo/doublestack/rubber
 	name = "box of doublestack magazines - rubber"
 	startswith = list(/obj/item/ammo_magazine/pistol/double/rubber = 6)
+
+/obj/item/storage/box/ammo/doublestack/pepperball
+	name = "box of doublestack magazines - rubber"
+	startswith = list(/obj/item/ammo_magazine/pistol/double/pepperball = 6)
 
 /obj/item/storage/box/ammo/smg
 	name = "box of SMG magazines - lethal"
