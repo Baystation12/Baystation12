@@ -37,7 +37,7 @@
 
 /obj/machinery/shield/post_health_change(health_mod, prior_health, damage_type)
 	. = ..()
-	if (health_dead)
+	if (health_dead())
 		return
 	if (health_mod < -1) // To prevent slow degradation proccing this constantly
 		set_opacity(TRUE)

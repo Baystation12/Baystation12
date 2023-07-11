@@ -75,7 +75,7 @@
 		data["max_health"] = sensors.get_max_health()
 		data["heat"] = sensors.heat
 		data["critical_heat"] = sensors.critical_heat
-		if(sensors.health_dead)
+		if(sensors.health_dead())
 			data["status"] = "DESTROYED"
 		else if(!sensors.powered())
 			data["status"] = "NO POWER"
@@ -252,7 +252,7 @@
 	overlays.Cut()
 	if(use_power)
 		icon_state = "sensors"
-	if(health_dead)
+	if(health_dead())
 		icon_state = "sensors_broken"
 	else
 		icon_state = "sensors_off"
@@ -261,7 +261,7 @@
 	. = ..()
 
 /obj/machinery/shipsensors/proc/toggle()
-	if(!use_power && (health_dead || !in_vacuum()))
+	if(!use_power && (health_dead() || !in_vacuum()))
 		return // No turning on if broken or misplaced.
 	if(!use_power) //need some juice to kickstart
 		use_power_oneoff(idle_power_usage*5)

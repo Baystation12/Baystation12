@@ -129,7 +129,7 @@
 
 /obj/structure/inflatable/bullet_act(obj/item/projectile/Proj)
 	. = ..()
-	if (health_dead)
+	if (health_dead())
 		return PROJECTILE_CONTINUE
 
 /obj/structure/inflatable/ex_act(severity)

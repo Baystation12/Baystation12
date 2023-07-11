@@ -49,7 +49,7 @@
 		SPAN_NOTICE("\The [user] starts cutting through \the [src] with \a [weapon]."),
 		SPAN_NOTICE("You start cutting through \the [src] with \the [weapon].")
 	)
-	while (!health_dead)
+	while (!health_dead())
 		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, weapon))
 			return TRUE
 		user.visible_message(

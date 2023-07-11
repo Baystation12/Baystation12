@@ -118,7 +118,7 @@
 
 
 /obj/machinery/bluespacedrive/examine_damage_state(mob/user)
-	if (health_dead)
+	if (health_dead())
 		to_chat(user, SPAN_DANGER("Its field is completely destroyed, the core revealed under the arcing debris."))
 		return
 	var/damage_percentage = get_damage_percentage()

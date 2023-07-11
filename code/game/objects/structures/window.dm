@@ -532,7 +532,7 @@
 		)
 
 /obj/structure/window/proc/deanchor(atom/impact_origin)
-	if (!health_dead && get_damage_percentage() >= 85)
+	if (!health_dead() && get_damage_percentage() >= 85)
 		set_anchored(FALSE)
 		step(src, get_dir(impact_origin, src))
 

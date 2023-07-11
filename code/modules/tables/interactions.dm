@@ -44,7 +44,7 @@
 
 /obj/structure/table/bullet_act(obj/item/projectile/P)
 	. = ..()
-	if (health_dead)
+	if (health_dead())
 		return PROJECTILE_CONTINUE
 
 /obj/structure/table/CheckExit(atom/movable/O as mob|obj, target as turf)

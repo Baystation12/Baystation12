@@ -116,7 +116,7 @@
 
 /obj/machinery/artifact/MouseDrop(obj/machinery/anomaly_container/over_object, mob/user)
 	if(istype(over_object) && CanMouseDrop(over_object, usr))
-		if (over_object.health_dead)
+		if (over_object.health_dead())
 			visible_message(SPAN_WARNING("\The [over_object]'s containment is broken shut."))
 			return
 		if (!over_object.allowed(usr))
