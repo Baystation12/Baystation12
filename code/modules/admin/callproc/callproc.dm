@@ -138,9 +138,10 @@
 				current = input("Enter number for [length(arguments)+1]\th argument") as null|num
 				if(isnull(current)) return CANCEL
 
-			if("type")
-				current = input("Select type for [length(arguments)+1]\th argument") as null|anything in typesof(/obj, /mob, /area, /turf)
-				if(isnull(current)) return CANCEL
+			if ("type")
+				current = select_subpath(within_scope = /datum)
+				if (isnull(current))
+					return CANCEL
 
 			if("obj reference")
 				current = input("Select object for [length(arguments)+1]\th argument") as null|obj in world
@@ -172,10 +173,6 @@
 							; // do nothing
 						if("Cancel")
 							return CANCEL
-			if ("path")
-				current = text2path(input("Enter path for [length(arguments)+1]\th argument") as null|text)
-				if (isnull(current))
-					return CANCEL
 
 			if("marked datum")
 				current = C.holder.marked_datum()
