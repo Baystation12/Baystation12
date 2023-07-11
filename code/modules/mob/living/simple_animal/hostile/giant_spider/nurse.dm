@@ -163,6 +163,10 @@
 	if(!istype(T))
 		return FALSE
 
+	if (GLOB.SPIDER_COUNT >= GLOB.MAX_SPIDER_COUNT)
+		next_egg_time = world.time + rand(minimum_disturbed_time, maximum_disturbed_time)
+		return FALSE
+
 	var/obj/effect/spider/eggcluster/E = locate() in T
 	if(E)
 		return FALSE // Already got eggs here.
