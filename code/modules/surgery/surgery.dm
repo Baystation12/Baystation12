@@ -197,12 +197,11 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
 	// Which surgery, if any, do we actually want to do?
 	var/singleton/surgery_step/S
-	if(LAZYLEN(possible_surgeries) == 1)
-		S = possible_surgeries[1]
-	else if(LAZYLEN(possible_surgeries) >= 1)
-		if(user.client) // In case of future autodocs.
-			S = S = show_radial_menu(user, M, possible_surgeries, radius = 42, use_labels = TRUE, require_near = TRUE, check_locs = list(src))
-		if(S && !user.skill_check_multiple(S.get_skill_reqs(user, M, src, zone)))
+	if (user.client && length(possible_surgeries))
+		S = show_radial_menu(user, M, possible_surgeries, radius = 42, use_labels = TRUE, require_near = TRUE, check_locs = list(src))
+		if (!user.use_sanity_check(M))
+			S = null
+		if (S && !user.skill_check_multiple(S.get_skill_reqs(user, M, src, zone)))
 			S = pick(possible_surgeries)
 
 	var/obj/item/gripper/gripper = user.get_active_hand()

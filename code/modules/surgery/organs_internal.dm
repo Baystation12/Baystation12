@@ -105,9 +105,9 @@
 	if(!LAZYLEN(attached_organs))
 		to_chat(user, SPAN_WARNING("You can't find any organs to separate."))
 	else
-		if(length(attached_organs) == 1)
-			return attached_organs[1]
-		return show_radial_menu(user, tool, attached_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
+		var/choice = show_radial_menu(user, tool, attached_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
+		if (choice && user.use_sanity_check(target, tool))
+			return choice
 	return FALSE
 
 /singleton/surgery_step/internal/detatch_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -157,9 +157,9 @@
 		if(!LAZYLEN(removable_organs))
 			to_chat(user, SPAN_WARNING("You can't find any removable organs."))
 		else
-			if (length(removable_organs) == 1)
-				return removable_organs[1]
-			return show_radial_menu(user, tool, removable_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
+			var/choice = show_radial_menu(user, tool, removable_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
+			if (choice && user.use_sanity_check(target, tool))
+				return choice
 	return FALSE
 
 /singleton/surgery_step/internal/remove_organ/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
@@ -334,7 +334,7 @@
 		return FALSE
 
 	var/obj/item/organ/organ_to_replace = show_radial_menu(user, tool, attachable_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
-	if(!organ_to_replace)
+	if(!organ_to_replace || !user.use_sanity_check(target, tool))
 		return FALSE
 
 	if(organ_to_replace.parent_organ != affected.organ_tag)
@@ -421,10 +421,8 @@
 			LAZYSET(dead_organs, I, radial_button)
 	if(!length(dead_organs))
 		return FALSE
-	var/obj/item/organ/internal/organ_to_fix = dead_organs[1]
-	if(length(dead_organs) > 1)
-		organ_to_fix = show_radial_menu(user, tool, dead_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
-	if(!organ_to_fix)
+	var/obj/item/organ/internal/organ_to_fix = show_radial_menu(user, tool, dead_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
+	if(!organ_to_fix || !user.use_sanity_check(target, tool))
 		return FALSE
 	if(!organ_to_fix.can_recover())
 		to_chat(user, SPAN_WARNING("The [organ_to_fix.name] is necrotic and can't be saved, it will need to be replaced."))

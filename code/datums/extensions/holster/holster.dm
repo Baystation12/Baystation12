@@ -140,9 +140,8 @@
 			return
 	else
 		holster_name = holsters[1]
-
 	var/datum/extension/holster/H = holsters[holster_name]
-	if(!H)
+	if (!H || !usr.use_sanity_check(H.atom_holder))
 		return
 
 	if(!H.holstered)
