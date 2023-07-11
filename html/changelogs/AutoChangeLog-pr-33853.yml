@@ -1,0 +1,4 @@
+author: TheNightingale
+delete-after: true
+changes:
+  - maptweak: Adds rainbow table flags to the Torch.
