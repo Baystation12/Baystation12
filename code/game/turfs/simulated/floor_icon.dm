@@ -73,7 +73,7 @@ var/global/list/flooring_cache = list()
 
 	if(decals && length(decals))
 		for(var/image/I in decals)
-			if (I.layer < layer)
+			if (floor(I.layer) != floor(layer))
 				continue
 			overlays |= I
 
