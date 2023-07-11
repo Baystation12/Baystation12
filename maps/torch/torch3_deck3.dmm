@@ -15813,6 +15813,7 @@
 "MP" = (
 /obj/structure/table/woodentable,
 /obj/effect/floor_decal/spline/fancy/wood,
+/obj/item/tableflag/rainbow,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/recreation)
 "MR" = (

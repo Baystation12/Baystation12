@@ -12677,6 +12677,7 @@
 "LN" = (
 /obj/structure/table/woodentable/walnut,
 /obj/item/material/ashtray/glass,
+/obj/item/tableflag/rainbow/pride,
 /turf/simulated/floor/carpet/blue2,
 /area/bridge/meeting_room)
 "LP" = (
