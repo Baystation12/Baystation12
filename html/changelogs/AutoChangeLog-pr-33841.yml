@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - rscadd: Spider nurses will now lay eggs if left undisturbed for too long, making
+      spiders a persistent threat if not totally eradicated.
