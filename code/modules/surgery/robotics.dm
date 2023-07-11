@@ -411,13 +411,16 @@
 	for(var/organ in target.internal_organs_by_name)
 		var/obj/item/organ/I = target.internal_organs_by_name[organ]
 		if(I && !(I.status & ORGAN_CUT_AWAY) && !BP_IS_CRYSTAL(I) && I.parent_organ == target_zone)
-			LAZYADD(attached_organs, organ)
+			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
+			radial_button.name = "Detach \the [I.name]"
+			LAZYSET(attached_organs, I.organ_tag, radial_button)
 	if(!LAZYLEN(attached_organs))
 		to_chat(user, SPAN_WARNING("There are no appropriate internal components to decouple."))
 		return FALSE
-	var/organ_to_remove = input(user, "Which organ do you want to prepare for removal?") as null|anything in attached_organs
-	if(organ_to_remove)
+	var/organ_to_remove = show_radial_menu(user, tool, attached_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
+	if (organ_to_remove && user.use_sanity_check(target, tool))
 		return organ_to_remove
+	return FALSE
 
 /singleton/surgery_step/robotics/detatch_organ_robotic/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("[user] starts to decouple [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].", \
@@ -464,12 +467,12 @@
 			continue
 		if (organ.organ_tag in target.internal_organs_by_name)
 			continue
-		candidates += organ
-	candidates = list_to_map(candidates, /proc/ltm_by_atom_name_numbered)
-	var/obj/item/organ/selected = input(user, "Which organ do you want to reattach?") as null | anything in candidates
-	if (!selected)
+		var/image/radial_button = image(icon = organ.icon, icon_state = organ.icon_state)
+		radial_button.name = "Reattach \the [organ.name]"
+		LAZYSET(candidates, organ, radial_button)
+	var/obj/item/organ/selected = show_radial_menu(user, tool, candidates, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
+	if (!selected || !user.use_sanity_check(target, tool))
 		return FALSE
-	selected = candidates[selected]
 	if (istype(selected, /obj/item/organ/internal/augment))
 		var/obj/item/organ/internal/augment/augment = selected
 		if (~augment.augment_flags & AUGMENT_MECHANICAL)

@@ -36,27 +36,6 @@
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	H.examine_holster(user)
 
-
-/obj/item/clothing/accessory/storage/holster/on_attached(obj/item/clothing/under/S, mob/user as mob)
-	..()
-	parent.verbs += /atom/proc/holster_verb
-
-
-/obj/item/clothing/accessory/storage/holster/on_removed(mob/user as mob)
-	if (parent)
-		var/remove_verb = TRUE
-		if (has_extension(parent, /datum/extension/holster))
-			remove_verb = FALSE
-		for (var/obj/accessory in parent.accessories)
-			if (accessory == src)
-				continue
-			if (has_extension(accessory, /datum/extension/holster))
-				remove_verb = FALSE
-		if (remove_verb)
-			parent.verbs -= /atom/proc/holster_verb
-	..()
-
-
 /obj/item/clothing/accessory/storage/holster/armpit
 	name = "armpit holster"
 	desc = "A worn-out handgun holster. Perfect for concealed carry."
