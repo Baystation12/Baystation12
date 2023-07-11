@@ -58,6 +58,11 @@
 	bulk = 0
 	fire_delay = 9
 
+/obj/item/gun/projectile/revolver/medium/sec
+	ammo_type = /obj/item/ammo_casing/pistol/rubber
+	desc = "The Lumoco Arms' Solid Pro is the less-than-lethal variant of the standard Solid. Utilised by law enforcement parties on select planetary police precincts across Sol."
+	starts_loaded = FALSE
+
 /obj/item/gun/projectile/revolver/holdout
 	name = "holdout revolver"
 	desc = "The al-Maliki & Mosley Partner is a concealed-carry revolver made for people who do not trust automatic pistols any more than the people they're dealing with."

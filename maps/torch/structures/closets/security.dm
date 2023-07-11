@@ -147,8 +147,8 @@
 		/obj/item/clothing/gloves/thick,
 		/obj/item/material/knife/folding/swiss/sec,
 		/obj/item/storage/backpack/dufflebag/sec,
-		/obj/item/gun/projectile/pistol/sec/empty,
-		/obj/item/ammo_magazine/pistol/rubber = 2
+		/obj/item/gun/projectile/revolver/medium/sec,
+		/obj/item/ammo_magazine/speedloader/rubber = 2
 	)
 
 /obj/structure/closet/bombclosetsecurity/WillContain()
