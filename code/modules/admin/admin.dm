@@ -1474,28 +1474,26 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	set name = "Toggle Paralyze"
 	set desc = "Toggles paralyze state, which stuns, blinds and mutes the victim."
 
+	var/msg
+
 	if(!isliving(H))
 		return
 
 	if(check_rights(R_INVESTIGATE))
 		if (!H.admin_paralyzed)
+			H.paralysis = 8000
 			H.admin_paralyzed = TRUE
-
-			to_chat(H, SPAN_DEBUG("OOC: You have been paralyzed by a staff member. Please refer to your currently open admin help ticket or, if you don't have one, admin help for assistance."))
-			sound_to(H, sound('sound/ui/pm-notify.ogg', volume = 40))
-
+			msg = "has paralyzed [key_name(H)]."
 			H.visible_message(SPAN_DEBUG("OOC: \The [H] has been paralyzed by a staff member. Please hold all interactions with them until staff have finished with them."))
-			for(var/mob/M in viewers())
-				sound_to(M, sound('sound/ui/pm-notify.ogg', volume = 40))
-
-			log_and_message_staff("has paralyzed [key_name(H)].")
+			to_chat(H, SPAN_DEBUG("OOC: You have been paralyzed by a staff member. Please refer to your currently open admin help ticket or, if you don't have one, admin help for assistance."))
 		else
+			H.paralysis = 0
 			H.admin_paralyzed = FALSE
-
+			msg = "has unparalyzed [key_name(H)]."
 			H.visible_message(SPAN_DEBUG("OOC: \The [H] has been released from paralysis by staff. You may resume interactions with them."))
 			to_chat(H, SPAN_DEBUG("OOC: You have been released from paralysis by staff and can return to your game."))
+		log_and_message_staff(msg)
 
-			log_and_message_staff("has unparalyzed [key_name(H)].")
 
 /datum/admins/proc/sendFax()
 	set category = "Special Verbs"
