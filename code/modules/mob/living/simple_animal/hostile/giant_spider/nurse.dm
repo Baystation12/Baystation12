@@ -29,12 +29,25 @@
 
 	var/mob/living/simple_animal/hostile/giant_spider/guard/paired_guard
 
+	/// The next time the spider can lay. This is set to a random time between the minimum and maximum times.
+	var/next_egg_time = 0
+
+	/// The minimum amount of time the spider must wait before laying eggs again.
+	var/minimum_disturbed_time = 5 MINUTES
+
+	/// The maximum amount of time the spider can wait before laying eggs again.
+	var/maximum_disturbed_time = 10 MINUTES
+
 /obj/item/natural_weapon/bite/spider/nurse
 	force = 10
 
 /datum/ai_holder/simple_animal/melee/nurse_spider
 	mauling = TRUE		// The nurse puts mobs into webs by attacking, so it needs to attack in crit
 	handle_corpse = TRUE	// Lets the nurse wrap dead things
+
+/mob/living/simple_animal/hostile/giant_spider/nurse/Initialize(mapload, atom/parent)
+	. = ..()
+	next_egg_time = world.time + (rand(3, 8) MINUTES)
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/inject_poison(mob/living/L, target_zone)
 	..() // Inject the stoxin here.
@@ -60,6 +73,7 @@
 
 	if(isliving(A))
 		var/mob/living/L = A
+		next_egg_time = world.time + rand(minimum_disturbed_time, maximum_disturbed_time)
 		if(!L.stat)
 			return ..()
 
@@ -114,8 +128,8 @@
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/handle_special()
 	set waitfor = FALSE
-	if(get_AI_stance() == STANCE_IDLE && !is_AI_busy() && isturf(loc))
-		if(fed)
+	if (get_AI_stance() == STANCE_IDLE && !is_AI_busy() && isturf(loc))
+		if (fed || next_egg_time < world.time)
 			lay_eggs(loc)
 		else
 			web_tile(loc)
@@ -149,9 +163,6 @@
 	if(!istype(T))
 		return FALSE
 
-	if(!fed)
-		return FALSE
-
 	var/obj/effect/spider/eggcluster/E = locate() in T
 	if(E)
 		return FALSE // Already got eggs here.
@@ -173,6 +184,10 @@
 	set_AI_busy(FALSE)
 	new egg_type(T)
 	fed--
+	if (fed < 0)
+		fed = 0
+
+	next_egg_time = world.time + rand(minimum_disturbed_time, maximum_disturbed_time)
 	laying_eggs = FALSE
 	return TRUE
 
