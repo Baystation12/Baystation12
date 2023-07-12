@@ -30179,7 +30179,7 @@
 /turf/simulated/wall/prepainted,
 /area/security/processing)
 "xRu" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/security/armoury)
 "xSd" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
