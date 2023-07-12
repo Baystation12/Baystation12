@@ -121,6 +121,12 @@
 	var/datum/action/owner
 	screen_loc = "WEST,NORTH"
 
+
+/obj/screen/movable/action_button/Initialize(mapload, _owner)
+	. = ..(mapload)
+	owner = _owner
+
+
 /obj/screen/movable/action_button/Click(location,control,params)
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"])
