@@ -292,6 +292,14 @@ var/global/list/_client_preferences_by_type
 	options = list(GLOB.PREF_YES, GLOB.PREF_NO)
 	default_value = GLOB.PREF_YES
 
+
+/datum/client_preference/surgery_skip_radial
+	description = "Skip the radial menu for single-option surgeries."
+	key = "SURGERY_SKIP_RADIAL"
+	options = list(GLOB.PREF_YES, GLOB.PREF_NO)
+	default_value = GLOB.PREF_NO
+
+
 /********************
 * General Staff Preferences *
 ********************/
