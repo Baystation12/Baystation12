@@ -100,7 +100,7 @@
 	var/mob/living/L = target
 
 	L.apply_effects(0, weaken, paralyze, stutter, eyeblur, drowsy, 0, blocked)
-	L.stun_effect_act(stun, agony, def_zone, src)
+	L.stun_effect_act(stun, (agony - blocked), def_zone, src)
 	//radiation protection is handled separately from other armour types.
 	L.apply_damage(irradiate, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 
