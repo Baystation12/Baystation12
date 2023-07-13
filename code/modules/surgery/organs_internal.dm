@@ -95,19 +95,21 @@
 	surgery_candidate_flags = SURGERY_NO_CRYSTAL | SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT
 
 /singleton/surgery_step/internal/detatch_organ/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/list/attached_organs
-	for(var/organ in target.internal_organs_by_name)
+	var/list/attached_organs = list()
+	for (var/organ in target.internal_organs_by_name)
 		var/obj/item/organ/I = target.internal_organs_by_name[organ]
-		if(I && !(I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
+		if (I && !(I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
 			radial_button.name = "Detach \the [I.name]"
-			LAZYSET(attached_organs, I.organ_tag, radial_button)
-	if(!LAZYLEN(attached_organs))
+			attached_organs[I.organ_tag] = radial_button
+	if (!length(attached_organs))
 		to_chat(user, SPAN_WARNING("You can't find any organs to separate."))
-	else
-		var/choice = show_radial_menu(user, tool, attached_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
-		if (choice && user.use_sanity_check(target, tool))
-			return choice
+		return FALSE
+	if (length(attached_organs) == 1 && user.get_preference_value(/datum/client_preference/surgery_skip_radial))
+		return attached_organs[1]
+	var/choice = show_radial_menu(user, tool, attached_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
+	if (choice && user.use_sanity_check(target, tool))
+		return choice
 	return FALSE
 
 /singleton/surgery_step/internal/detatch_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -147,19 +149,23 @@
 
 /singleton/surgery_step/internal/remove_organ/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected)
-		var/list/removable_organs
-		for(var/obj/item/organ/internal/I in affected.implants)
-			if(I.status & ORGAN_CUT_AWAY)
-				var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
-				radial_button.name = "Remove \the [I.name]"
-				LAZYSET(removable_organs, I, radial_button)
-		if(!LAZYLEN(removable_organs))
-			to_chat(user, SPAN_WARNING("You can't find any removable organs."))
-		else
-			var/choice = show_radial_menu(user, tool, removable_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
-			if (choice && user.use_sanity_check(target, tool))
-				return choice
+	if (!affected)
+		return FALSE
+	var/list/removable_organs = list()
+	for (var/obj/item/organ/internal/I in affected.implants)
+		if (~I.status & ORGAN_CUT_AWAY)
+			continue
+		var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
+		radial_button.name = "Remove \the [I.name]"
+		removable_organs[I] = radial_button
+	if (!length(removable_organs))
+		to_chat(user, SPAN_WARNING("You can't find any removable organs."))
+		return FALSE
+	if (length(removable_organs) == 1 && user.get_preference_value(/datum/client_preference/surgery_skip_radial))
+		return removable_organs[1]
+	var/choice = show_radial_menu(user, tool, removable_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
+	if (choice && user.use_sanity_check(target, tool))
+		return choice
 	return FALSE
 
 /singleton/surgery_step/internal/remove_organ/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
@@ -333,7 +339,12 @@
 	if(!LAZYLEN(attachable_organs))
 		return FALSE
 
-	var/obj/item/organ/organ_to_replace = show_radial_menu(user, tool, attachable_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
+	var/obj/item/organ/organ_to_replace
+	if (length(attachable_organs) == 1 && user.get_preference_value(/datum/client_preference/surgery_skip_radial))
+		organ_to_replace = attachable_organs[1]
+	else
+		organ_to_replace = show_radial_menu(user, tool, attachable_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
+
 	if(!organ_to_replace || !user.use_sanity_check(target, tool))
 		return FALSE
 
@@ -421,6 +432,8 @@
 			LAZYSET(dead_organs, I, radial_button)
 	if(!length(dead_organs))
 		return FALSE
+	if (length(dead_organs) == 1 && user.get_preference_value(/datum/client_preference/surgery_skip_radial))
+		return dead_organs[1]
 	var/obj/item/organ/internal/organ_to_fix = show_radial_menu(user, tool, dead_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
 	if(!organ_to_fix || !user.use_sanity_check(target, tool))
 		return FALSE

@@ -417,6 +417,8 @@
 	if(!LAZYLEN(attached_organs))
 		to_chat(user, SPAN_WARNING("There are no appropriate internal components to decouple."))
 		return FALSE
+	if (length(attached_organs) == 1 && user.get_preference_value(/datum/client_preference/surgery_skip_radial))
+		return attached_organs[1]
 	var/organ_to_remove = show_radial_menu(user, tool, attached_organs, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
 	if (organ_to_remove && user.use_sanity_check(target, tool))
 		return organ_to_remove
@@ -470,6 +472,8 @@
 		var/image/radial_button = image(icon = organ.icon, icon_state = organ.icon_state)
 		radial_button.name = "Reattach \the [organ.name]"
 		LAZYSET(candidates, organ, radial_button)
+	if (length(candidates) == 1 && user.get_preference_value(/datum/client_preference/surgery_skip_radial))
+		return candidates[1]
 	var/obj/item/organ/selected = show_radial_menu(user, tool, candidates, radius = 42, require_near = TRUE, use_labels = TRUE, check_locs = list(tool))
 	if (!selected || !user.use_sanity_check(target, tool))
 		return FALSE

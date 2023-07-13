@@ -198,7 +198,10 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	// Which surgery, if any, do we actually want to do?
 	var/singleton/surgery_step/S
 	if (user.client && length(possible_surgeries))
-		S = show_radial_menu(user, M, possible_surgeries, radius = 42, use_labels = TRUE, require_near = TRUE, check_locs = list(src))
+		if (length(possible_surgeries) == 1 && user.get_preference_value(/datum/client_preference/surgery_skip_radial))
+			S = possible_surgeries[1]
+		else
+			S = show_radial_menu(user, M, possible_surgeries, radius = 42, use_labels = TRUE, require_near = TRUE, check_locs = list(src))
 		if (!user.use_sanity_check(M))
 			S = null
 		if (S && !user.skill_check_multiple(S.get_skill_reqs(user, M, src, zone)))
