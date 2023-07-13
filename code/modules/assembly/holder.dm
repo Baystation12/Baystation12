@@ -176,6 +176,7 @@
 
 /obj/item/device/assembly_holder/timer_igniter
 	name = "timer-igniter assembly"
+	var/default_time = 5 //Allows creation of grenade subtypes with different timers.
 
 
 /obj/item/device/assembly_holder/timer_igniter/New()
@@ -184,7 +185,7 @@
 	ign.secured = 1
 	ign.holder = src
 	var/obj/item/device/assembly/timer/tmr = new(src)
-	tmr.time=5
+	tmr.time = default_time
 	tmr.secured = 1
 	tmr.holder = src
 	START_PROCESSING(SSobj, tmr)
