@@ -188,6 +188,24 @@
 				break
 		icon_state = (new_state)? new_state : initial(icon_state)
 
+	overlays.Cut()
+
+	if (ammo_type == /obj/item/ammo_casing/pistol/rubber)
+		overlays += image(icon, "[initial(icon_state)]_r")
+	else if (ammo_type == /obj/item/ammo_casing/pistol/practice)
+		overlays += image(icon, "[initial(icon_state)]_p")
+
+	else if (ammo_type == /obj/item/ammo_casing/pistol/small/rubber)
+		overlays += image(icon, "[initial(icon_state)]_r")
+	else if (ammo_type == /obj/item/ammo_casing/pistol/small/practice)
+		overlays += image(icon, "[initial(icon_state)]_p")
+
+	else if (ammo_type == /obj/item/ammo_casing/rifle/military/practice)
+		overlays += image(icon, "[initial(icon_state)]_p")
+
+	else
+		icon_state = initial(icon_state)
+
 /obj/item/ammo_magazine/examine(mob/user)
 	. = ..()
 	to_chat(user, "There [(length(stored_ammo) == 1)? "is" : "are"] [length(stored_ammo)] round\s left!")
