@@ -120,6 +120,16 @@
 /obj/screen/movable/action_button
 	var/datum/action/owner
 	screen_loc = "WEST,NORTH"
+	/// String. Title of the tooltip displayed on hover. Set during `Initialize()`, defaults to `owner.target.name`.
+	var/tooltip_title
+
+
+/obj/screen/movable/action_button/Initialize(mapload, _owner)
+	. = ..(mapload)
+	owner = _owner
+	if (owner?.target)
+		tooltip_title = owner.target.name
+
 
 /obj/screen/movable/action_button/Click(location,control,params)
 	var/list/modifiers = params2list(params)
@@ -130,6 +140,15 @@
 		return
 	owner.Trigger()
 	return 1
+
+
+/obj/screen/movable/action_button/MouseEntered(location, control, params)
+	openToolTip(usr, src, params, tooltip_title, name)
+
+
+/obj/screen/movable/action_button/MouseExited(location, control, params)
+	closeToolTip(usr)
+
 
 /obj/screen/movable/action_button/proc/UpdateIcon()
 	if(!owner)
