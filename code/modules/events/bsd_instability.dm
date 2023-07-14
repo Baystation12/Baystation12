@@ -14,6 +14,11 @@
 	/// Whether or not the 'pulse' should happen, changed to true if the probability check passes in setup()
 	var/should_do_pulse = FALSE
 
+	/// List of turfs converted to bluespace by the BSD event.
+	var/list/converted_turfs = list()
+
+	var/number_turfs_to_convert = 30
+
 
 /datum/event/bsd_instability/setup()
 	if (severity <= EVENT_LEVEL_MODERATE)
@@ -53,7 +58,16 @@
 		drive.set_light(1, 8, 25, 15, COLOR_CYAN_BLUE)
 		if (severity <= EVENT_LEVEL_MODERATE)
 			continue
+
 		addtimer(new Callback(drive, /obj/machinery/bluespacedrive/proc/create_flash, TRUE, turf_conversion_range), 2 SECONDS)
+		for (var/i = 0 to number_turfs_to_convert)
+			var/turf/turf = pick_area_turf_in_single_z_level(
+				list(/proc/is_not_space_area),
+				z_level = pick(affecting_z)
+			)
+			turf.ChangeTurf(/turf/simulated/floor/bluespace)
+			converted_turfs += turf
+
 	if (severity <= EVENT_LEVEL_MODERATE)
 		return
 	for (var/obj/structure/stairs/stair in world)
@@ -108,9 +122,8 @@
 	for (var/obj/machinery/bluespacedrive/drive in drives)
 		drive.instability_event_active = FALSE
 		drive.set_light(1, 5, 15, 10, COLOR_CYAN)
-		for (var/turf/simulated/floor/floor in range(turf_conversion_range, drive))
-			if (istype(floor.flooring, /singleton/flooring/bluespace))
-				floor.set_flooring(GET_SINGLETON(initial(floor.flooring)))
+	for (var/turf/floor in converted_turfs)
+		floor.ChangeTurf(/turf/simulated/floor/plating)
 	for (var/obj/structure/stairs/stair in stairs)
 		stair.bluespace_affected = FALSE
 	for (var/obj/structure/ladder/ladder in ladders)

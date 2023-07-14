@@ -159,13 +159,6 @@
 		living.ear_deaf = max(living.ear_deaf, 15)
 	if (!change_turf)
 		return
-	for (var/turf/simulated/floor/floor in range(range, src))
-		if (prob(25))
-			continue
-		floor.ChangeTurf(/turf/simulated/floor/bluespace)
-
-
-
 
 /particles/bluespace_torus
 	width = 700
@@ -221,18 +214,21 @@
 	if (being && prob(50))
 		//swap places with another mob
 		var/list/zlevels = GetConnectedZlevels(being.z)
-		for (var/mob/living/mob as anything in mobs_to_switch)
-			if (!(mob.z in zlevels))
-				continue
-			if (mob != being)
-				var/source_position = being.loc
-				var/other_position = mob.loc
-				do_teleport(mob, source_position)
-				do_teleport(being, other_position)
-				mobs_to_switch -= mob
-				mobs_to_switch -= being
-				to_chat(mob, SPAN_DANGER("A wave of energy washes over you, and you find yourself somewhere else!"))
-				to_chat(being, SPAN_DANGER("A wave of energy washes over you, and you find yourself somewhere else!"))
-				return
+		if (prob(50))
+			for (var/mob/living/mob as anything in mobs_to_switch)
+				if (!(mob.z in zlevels))
+					continue
+					if (mob != being)
+						var/source_position = being.loc
+						var/other_position = mob.loc
+						do_teleport(mob, source_position)
+						do_teleport(being, other_position)
+						mobs_to_switch -= mob
+						mobs_to_switch -= being
+						to_chat(being, SPAN_DANGER("A wave of energy washes over you, and you find yourself somewhere else!"))
+		else
+			do_unstable_teleport_safe(being, GetConnectedZlevels(being.z))
+
+		to_chat(being, SPAN_DANGER("A wave of energy washes over you, and you find yourself somewhere else!"))
 	else
 		to_chat(being, SPAN_WARNING("A wave of energy washes over you, giving you a strange and uneasy feeling..."))
