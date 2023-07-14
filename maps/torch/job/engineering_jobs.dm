@@ -190,7 +190,7 @@
 		/datum/mil_rank/civ/contractor
 	)
 	min_skill = list(   SKILL_COMPUTER		= SKILL_TRAINED,
-	                    SKILL_DEVICES		= SKILL_TRAINED,
+	                    SKILL_DEVICES		= SKILL_EXPERIENCED,
 	                    SKILL_EVA           = SKILL_TRAINED,
 	                    SKILL_ANATOMY       = SKILL_TRAINED,
 						SKILL_CONSTRUCTION  = SKILL_BASIC,

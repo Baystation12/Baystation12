@@ -326,6 +326,8 @@
 	amount = 25
 	max_amount = 25
 
+
+//What gets made by chemistry. For people with crystal organs, it's better than crystallising agent. For those without, it's a bit of a gamble.
 /obj/item/stack/medical/resin/handmade
 	name = "resin globules"
 	desc = "A lump of slick, shiny resin. Used to repair damage to crystalline bodyparts."
@@ -334,11 +336,13 @@
 	heal_brute = 5
 	heal_burn =  5
 
+
 /obj/item/stack/medical/resin/check_limb_state(mob/user, obj/item/organ/external/limb)
 	if(!BP_IS_ROBOTIC(limb) && !BP_IS_CRYSTAL(limb))
 		to_chat(user, SPAN_WARNING("You cannot use \the [src] to treat an organic limb."))
 		return FALSE
 	return TRUE
+
 
 /obj/item/stack/medical/resin/attack(mob/living/carbon/M, mob/user)
 	. = ..()
@@ -347,16 +351,33 @@
 		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 		if((affecting.brute_dam + affecting.burn_dam) <= 0)
 			to_chat(user, SPAN_WARNING("\The [M]'s [affecting.name] is undamaged."))
-			return 1
+			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts patching fractures on \the [M]'s [affecting.name]."), \
-			SPAN_NOTICE("You start patching fractures on \the [M]'s [affecting.name].") )
+			SPAN_NOTICE("\The [user] starts patching damage on \the [M]'s [affecting.name]."), \
+			SPAN_NOTICE("You start patching damage on \the [M]'s [affecting.name].") )
 		playsound(src, pick(apply_sounds), 25)
-		if(!do_after(user, 1 SECOND, M, DO_MEDICAL))
-			to_chat(user, SPAN_NOTICE("You must stand still to patch fractures."))
-			return 1
+		if(!do_after(user, 2 SECOND, M, DO_MEDICAL))
+			to_chat(user, SPAN_NOTICE("You must stand still to patch damage."))
+			return TRUE
 		user.visible_message( \
-			SPAN_NOTICE("\The [user] patches the fractures on \the [M]'s [affecting.name] with resin."), \
-			SPAN_NOTICE("You patch fractures on \the [M]'s [affecting.name] with resin."))
-		affecting.heal_damage(heal_brute, heal_burn, robo_repair = TRUE)
+			SPAN_NOTICE("\The [user] patches the damage on \the [M]'s [affecting.name] with resin."), \
+			SPAN_NOTICE("You patch damage on \the [M]'s [affecting.name] with resin."))
 		use(1)
+		if(BP_IS_CRYSTAL(affecting))
+			if(prob(75))
+				to_chat(M, SPAN_NOTICE("Fresh crystals seem to form over your [affecting.name]."))
+			affecting.heal_damage(rand(heal_brute - 2, heal_brute + 4), rand(heal_burn - 2, heal_burn + 4), robo_repair = TRUE)
+			return TRUE
+		if(BP_IS_BRITTLE(affecting))
+			if(!prob(user.get_skill_value(SKILL_DEVICES) * 20)) //80% to 0% chance, depending on skill, for your brittle organ to hurt and then heal.
+				to_chat(H, SPAN_DANGER("Crystals are forming around your [affecting.name], damaging internal integrity!"))
+				for(var/i = 1 to rand(1,3))
+					new /obj/item/material/shard(get_turf(affecting), MATERIAL_STEEL)
+				affecting.take_external_damage(rand(20,40), 0)
+			if(prob(30))
+				if(!M.isSynthetic())
+					M.emote("scream")
+					M.Weaken(2)
+				affecting.status |= ORGAN_BRITTLE // 30% chance to brittle your limb/organ, and if you're organic, you get weakened.
+		affecting.heal_damage(heal_brute, heal_burn, robo_repair = TRUE)
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
