@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - rscadd: Action buttons now have tooltips denoting the target object and the action.

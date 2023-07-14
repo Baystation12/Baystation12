@@ -1,7 +1,0 @@
-author: jux
-delete-after: true
-changes:
-  - tweak: 10mm rubber bullets do 15 brute, up from 5, and 15 agony, down from 30.
-      Holdout rubber bullets do 10 brute, up from 5, and 10 agony, down from 20. Shotgun
-      beanbags do 20 brute, down from 25, and 30 agony, down from 60.
-  - tweak: Projectiles that deal agony reduce agony dealt by the armor blocking it.
