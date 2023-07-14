@@ -244,22 +244,25 @@ note dizziness decrements automatically in the mob's Life() proc.
 	animate(I, alpha = 175, pixel_x = 0, pixel_y = 0, pixel_z = 0, time = 3)
 
 /mob/proc/spin(spintime, speed)
-	spawn()
-		var/D = dir
-		while(spintime >= speed)
-			sleep(speed)
-			switch(D)
-				if(NORTH)
-					D = EAST
-				if(SOUTH)
-					D = WEST
-				if(EAST)
-					D = SOUTH
-				if(WEST)
-					D = NORTH
-			set_dir(D)
-			spintime -= speed
-	return
+	set waitfor = FALSE
+	if (!spintime || !speed)
+		return
+	spintime = clamp(spintime, 1, 10 SECONDS)
+	speed = clamp(speed, 1, 2 SECONDS)
+	var/D = dir
+	while(spintime >= speed)
+		sleep(speed)
+		switch(D)
+			if(NORTH)
+				D = EAST
+			if(SOUTH)
+				D = WEST
+			if(EAST)
+				D = SOUTH
+			if(WEST)
+				D = NORTH
+		set_dir(D)
+		spintime -= speed
 
 /mob/proc/phase_in(turf/T)
 	if(!T)
