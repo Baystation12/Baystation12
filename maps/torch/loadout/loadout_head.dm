@@ -60,33 +60,25 @@
 	allowed_roles = STERILE_ROLES
 
 /datum/gear/head/beret
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/sterile_mask
 	display_name = "sterile mask"
 	path = /obj/item/clothing/mask/surgical
 
 /datum/gear/head/beanie
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/head/bow
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/head/cap
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/head/hairflower
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/head/hardhat
 	allowed_roles = TECHNICAL_ROLES
 
 /datum/gear/head/formalhat
-	allowed_roles = FORMAL_ROLES
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/head/informalhat
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/head/welding
 	allowed_roles = TECHNICAL_ROLES

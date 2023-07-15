@@ -17,7 +17,7 @@
 /datum/gear/eyes/janitor/allowed_roles = SERVICE_ROLES
 
 
-/datum/gear/eyes/aviators_shutter/allowed_branches = CIVILIAN_BRANCHES
+/datum/gear/eyes/aviators_shutter
 
 
 /datum/gear/eyes/welding/allowed_roles = TECHNICAL_ROLES
@@ -28,7 +28,7 @@
 	..()
 
 
-/datum/gear/eyes/monocle/allowed_branches = CIVILIAN_BRANCHES
+/datum/gear/eyes/monocle
 
 
-/datum/gear/eyes/blindfold/allowed_branches = CIVILIAN_BRANCHES
+/datum/gear/eyes/blindfold

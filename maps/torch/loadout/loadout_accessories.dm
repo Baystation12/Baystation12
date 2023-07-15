@@ -168,10 +168,8 @@
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/accessory/tie
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/accessory/tie_color
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/accessory/neckerchief
 
@@ -199,63 +197,41 @@
 /datum/gear/tactical/press_tag
 	display_name = "Press tag"
 	path = /obj/item/clothing/accessory/armor_tag/press
-	allowed_roles = list(
-		/datum/job/assistant
-	)
 	flags = GEAR_HAS_NO_CUSTOMIZATION
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/tactical/helm_covers
 	allowed_roles = ARMORED_ROLES
 
 /datum/gear/clothing/hawaii
-	allowed_roles = SEMIFORMAL_ROLES
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/scarf
 
 /datum/gear/clothing/flannel
-	allowed_roles = SEMIFORMAL_ROLES
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/vest
-	allowed_roles = FORMAL_ROLES
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/suspenders
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/suspenders/colorable
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/wcoat
-	allowed_roles = FORMAL_ROLES
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/zhongshan
-	allowed_roles = FORMAL_ROLES
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/dashiki
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/thawb
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/sherwani
-	allowed_roles = FORMAL_ROLES
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/qipao
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/sweater
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/tangzhuang
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/accessory/bowtie
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/accessory/ftu_pin
 	allowed_branches = CIVILIAN_BRANCHES
