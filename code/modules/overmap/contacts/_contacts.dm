@@ -26,9 +26,10 @@
 
 	images += marker
 
-	radar = image(loc = effect, icon = 'icons/obj/overmap.dmi', icon_state = "sensor_range", pixel_x = effect.pixel_x, pixel_y = effect.pixel_y)
+	radar = image(loc = effect.loc, icon = 'icons/obj/overmap.dmi', icon_state = "sensor_range", pixel_x = effect.pixel_x, pixel_y = effect.pixel_y)
 	radar.tag = "radar"
 	radar.filters = filter(type="blur", size = 1)
+	radar.mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 
 /datum/overmap_contact/proc/update_marker_icon(range = 0)
@@ -44,6 +45,9 @@
 	if(range > 0)
 		radar.transform = null
 		radar.alpha = 255
+		radar.loc = effect.loc
+		radar.pixel_x = effect.pixel_x
+		radar.pixel_y = effect.pixel_y
 
 		images |= radar
 
