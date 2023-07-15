@@ -1,0 +1,5 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - tweak: Point To arrow is animated now and visible only if the pointing player
+      is visible.
