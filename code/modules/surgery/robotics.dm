@@ -20,14 +20,14 @@
 
 /singleton/surgery_step/robotics/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	. = ..()
-	//Compensating for anatomy skill req in base proc
-	. += 10
 	if(!user.skill_check(SKILL_DEVICES, SKILL_TRAINED))
+		. -= 30
+	if(!user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
 		. -= 20
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
-		. += 10
+	if(user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
+		. += 35
 	if(user.skill_check(SKILL_DEVICES, SKILL_MASTER))
-		. += 20
+		. += 30
 
 //////////////////////////////////////////////////////////////////
 //	 unscrew robotic limb hatch surgery step
@@ -35,13 +35,13 @@
 /singleton/surgery_step/robotics/unscrew_hatch
 	name = "Unscrew maintenance hatch"
 	allowed_tools = list(
-		/obj/item/screwdriver = 100,
+		/obj/item/screwdriver = 60,
 		/obj/item/swapper/power_drill = 100,
-		/obj/item/material/coin = 50,
-		/obj/item/material/knife = 50
+		/obj/item/material/coin = 30,
+		/obj/item/material/knife = 40
 	)
-	min_duration = 90
-	max_duration = 110
+	min_duration = 50
+	max_duration = 90
 
 /singleton/surgery_step/robotics/unscrew_hatch/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
@@ -71,13 +71,13 @@
 /singleton/surgery_step/robotics/screw_hatch
 	name = "Secure maintenance hatch"
 	allowed_tools = list(
-		/obj/item/screwdriver = 100,
+		/obj/item/screwdriver = 60,
 		/obj/item/swapper/power_drill = 100,
-		/obj/item/material/coin = 50,
-		/obj/item/material/knife = 50
+		/obj/item/material/coin = 30,
+		/obj/item/material/knife = 40
 	)
-	min_duration = 90
-	max_duration = 110
+	min_duration = 50
+	max_duration = 90
 
 /singleton/surgery_step/robotics/screw_hatch/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
@@ -107,10 +107,10 @@
 /singleton/surgery_step/robotics/open_hatch
 	name = "Open maintenance hatch"
 	allowed_tools = list(
-		/obj/item/retractor = 100,
-		/obj/item/crowbar = 100,
-		/obj/item/swapper/jaws_of_life = 100,
-		/obj/item/material/kitchen/utensil = 50
+		/obj/item/retractor = 40,
+		/obj/item/crowbar = 60,
+		/obj/item/swapper/jaws_of_life = 80,
+		/obj/item/material/kitchen/utensil = 30
 	)
 
 	min_duration = 30
@@ -130,7 +130,7 @@
 /singleton/surgery_step/robotics/open_hatch/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message(SPAN_NOTICE("[user] opens the maintenance hatch on [target]'s [affected.name] with \the [tool]."), \
-	 SPAN_NOTICE("You open the maintenance hatch on [target]'s [affected.name] with \the [tool]."))
+	SPAN_NOTICE("You open the maintenance hatch on [target]'s [affected.name] with \the [tool]."))
 	affected.hatch_state = HATCH_OPENED
 
 /singleton/surgery_step/robotics/open_hatch/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -144,10 +144,10 @@
 /singleton/surgery_step/robotics/close_hatch
 	name = "Close maintenance hatch"
 	allowed_tools = list(
-		/obj/item/retractor = 100,
-		/obj/item/crowbar = 100,
-		/obj/item/swapper/jaws_of_life = 100,
-		/obj/item/material/kitchen/utensil = 50
+		/obj/item/retractor = 40,
+		/obj/item/crowbar = 60,
+		/obj/item/swapper/jaws_of_life = 80,
+		/obj/item/material/kitchen/utensil = 30
 	)
 
 	min_duration = 70
@@ -182,18 +182,23 @@
 /singleton/surgery_step/robotics/repair_brute
 	name = "Repair damage to prosthetic"
 	allowed_tools = list(
-		/obj/item/weldingtool = 100,
-		/obj/item/gun/energy/plasmacutter = 50,
+		/obj/item/weldingtool = 35,
+		/obj/item/weldingtool/electric = 50,
+		/obj/item/gun/energy/plasmacutter = 25,
 		/obj/item/psychic_power/psiblade/master = 100
 	)
 
-	min_duration = 50
-	max_duration = 60
+	min_duration = 70
+	max_duration = 90
 
 /singleton/surgery_step/robotics/repair_brute/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	. = ..()
 	if(user.skill_check(SKILL_CONSTRUCTION, SKILL_BASIC))
+		. += 5
+	if(user.skill_check(SKILL_CONSTRUCTION, SKILL_TRAINED))
 		. += 10
+	if(!user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
+		. -= 10
 
 /singleton/surgery_step/robotics/repair_brute/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -244,14 +249,18 @@
 //////////////////////////////////////////////////////////////////
 /singleton/surgery_step/robotics/repair_brittle
 	name = "Reinforce prosthetic"
-	allowed_tools = list(/obj/item/stack/nanopaste = 100)
+	allowed_tools = list(/obj/item/stack/nanopaste = 50)
 	min_duration = 50
 	max_duration = 60
 
 /singleton/surgery_step/robotics/repair_brittle/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	. = ..()
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_TRAINED))
 		. += 10
+	if(user.skill_check(SKILL_CONSTRUCTION, SKILL_TRAINED))
+		. += 10
+	if(!user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
+		. -= 15
 
 /singleton/surgery_step/robotics/repair_brittle/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
@@ -282,16 +291,20 @@
 /singleton/surgery_step/robotics/repair_burn
 	name = "Repair burns on prosthetic"
 	allowed_tools = list(
-		/obj/item/stack/cable_coil = 100
+		/obj/item/stack/cable_coil = 50
 	)
-	min_duration = 50
-	max_duration = 60
+	min_duration = 70
+	max_duration = 90
 
 /singleton/surgery_step/robotics/repair_burn/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	. = ..()
 
 	if(user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
+		. += 5
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_TRAINED))
 		. += 10
+	if(!user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
+		. -= 10
 
 /singleton/surgery_step/robotics/repair_burn/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -340,13 +353,13 @@
 /singleton/surgery_step/robotics/fix_organ_robotic //For artificial organs
 	name = "Repair prosthetic organ"
 	allowed_tools = list(
-		/obj/item/stack/nanopaste = 100,
-		/obj/item/bonegel = 30,
-		/obj/item/screwdriver = 70,
-		/obj/item/swapper/power_drill = 100,
+		/obj/item/stack/nanopaste = 60,
+		/obj/item/bonegel = 20,
+		/obj/item/screwdriver = 30,
+		/obj/item/swapper/power_drill = 50,
 	)
-	min_duration = 70
-	max_duration = 90
+	min_duration = 80
+	max_duration = 110
 	surgery_candidate_flags = SURGERY_NO_STUMP
 
 /singleton/surgery_step/robotics/fix_organ_robotic/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
@@ -400,7 +413,7 @@
 /singleton/surgery_step/robotics/detatch_organ_robotic
 	name = "Decouple prosthetic organ"
 	allowed_tools = list(
-		/obj/item/device/multitool = 100
+		/obj/item/device/multitool = 70
 	)
 	min_duration = 90
 	max_duration = 110
@@ -447,8 +460,8 @@
 /singleton/surgery_step/robotics/attach_organ_robotic
 	name = "Reattach prosthetic organ"
 	allowed_tools = list(
-		/obj/item/screwdriver = 100,
-		/obj/item/swapper/power_drill = 100,
+		/obj/item/screwdriver = 50,
+		/obj/item/swapper/power_drill = 70,
 	)
 	min_duration = 100
 	max_duration = 120
@@ -653,8 +666,8 @@
 /singleton/surgery_step/robone/weld
 	name = "Begin structural support repair"
 	allowed_tools = list(
-		/obj/item/weldingtool = 100,
-		/obj/item/tape_roll = 75,
+		/obj/item/weldingtool = 50,
+		/obj/item/tape_roll = 30,
 		/obj/item/bonegel = 30
 	)
 	min_duration = 50
@@ -695,8 +708,8 @@
 /singleton/surgery_step/robone/realign_support
 	name = "Realign support"
 	allowed_tools = list(
-		/obj/item/wrench = 100,
-		/obj/item/bonesetter = 75
+		/obj/item/wrench = 70,
+		/obj/item/bonesetter = 50
 	)
 	min_duration = 60
 	max_duration = 70
@@ -757,8 +770,8 @@
 /singleton/surgery_step/robone/finish
 	name = "Finish structural support repair"
 	allowed_tools = list(
-		/obj/item/weldingtool = 100,
-		/obj/item/tape_roll = 75,
+		/obj/item/weldingtool = 50,
+		/obj/item/tape_roll = 30,
 		/obj/item/bonegel = 30
 	)
 	min_duration = 50
