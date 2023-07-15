@@ -1,20 +1,27 @@
 #define SENSOR_TIME_DELAY 0.2 SECONDS
 /datum/overmap_contact
 
-	var/name  = "Unknown"	 // Contact name.
-	var/image/marker		 // Image overlay attached to the contact.
-	var/pinged = FALSE		 // Used to animate overmap effects.
-	var/list/images = list() // Our list of images to cast to users.
-	var/image/radar			 // Radar image for sonar esque effect
+	/// Contact name
+	var/name  = "Unknown"
+	/// Used to animate overmap effects
+	var/pinged = FALSE
 
-	// The sensor console holding this data.
-	var/obj/machinery/computer/ship/sensors/owner
+	/// Our list of images to cast to users
+	var/list/images = list()
 
-	// The actual overmap effect associated with this.
+	/// Image overlay attached to the contact
+	var/image/marker
+	/// Radar image for sonar esque effect
+	var/image/radar
+
+	/// The sensor console holding this data
+	var/obj/machinery/shipsensors/owner
+
+	/// The actual overmap effect associated with this
 	var/obj/effect/overmap/effect
 
 /datum/overmap_contact/New(obj/machinery/computer/ship/sensors/creator, obj/effect/overmap/source)
-	// Update local tracking information.
+	// Update local tracking information
 	owner =  creator
 	effect = source
 	name =   effect.name
@@ -22,7 +29,12 @@
 
 	marker = new(loc = effect)
 	marker.appearance = effect
-	marker.alpha = 0 // Marker fades in on detection.
+	marker.alpha = 0 // Marker fades in on detection
+
+	// Needs to be reset to be accurate in position and directions
+	marker.pixel_x = 0
+	marker.pixel_y = 0
+	marker.transform = null
 
 	images += marker
 
@@ -37,12 +49,12 @@
 
 	marker.overlays.Cut()
 
-	if(check_effect_shield())
+	if (check_effect_shield())
 		var/image/shield_image = image(icon = 'icons/obj/overmap.dmi', icon_state = "shield")
 		shield_image.pixel_x = 8
 		marker.overlays += shield_image
 
-	if(range > 0)
+	if (range > 0)
 		radar.transform = null
 		radar.alpha = 255
 		radar.loc = effect.loc
@@ -60,27 +72,27 @@
 	images -= radar
 
 /datum/overmap_contact/proc/show()
-	if(!owner)
+	if (!owner)
 		return
-	var/list/showing = owner.linked?.navigation_viewers || owner.viewers
-	if(length(showing))
+	var/list/showing = owner.linked?.navigation_viewers
+	if (length(showing))
 		for(var/weakref/W in showing)
 			var/mob/M = W.resolve()
-			if(istype(M) && M.client)
+			if (istype(M) && M.client)
 				M.client.images |= images
 
 /datum/overmap_contact/proc/check_effect_shield()
 	var/obj/effect/overmap/visitable/visitable_effect = effect
-	if(!visitable_effect || !istype(visitable_effect))
+	if (!visitable_effect || !istype(visitable_effect))
 		return FALSE
-	for(var/obj/machinery/power/shield_generator/S in SSmachines.machinery)
-		if(S.z in visitable_effect.map_z)
-			if(S.running == SHIELD_RUNNING)
+	for (var/obj/machinery/power/shield_generator/S in SSmachines.machinery)
+		if (S.z in visitable_effect.map_z)
+			if (S.running == SHIELD_RUNNING)
 				return TRUE
 	return FALSE
 
 /datum/overmap_contact/proc/ping()
-	if(pinged)
+	if (pinged)
 		return
 	pinged = TRUE
 	show()
@@ -92,14 +104,14 @@
 	pinged = FALSE
 
 /datum/overmap_contact/Destroy()
-	if(owner)
-		var/list/showing = owner.linked?.navigation_viewers || owner.viewers
-		if(length(showing))
-			for(var/weakref/W in showing)
+	if (owner)
+		var/list/showing = owner.linked?.navigation_viewers
+		if (length(showing))
+			for (var/weakref/W in showing)
 				var/mob/M = W.resolve()
-				if(istype(M) && M.client)
+				if (istype(M) && M.client)
 					M.client.images -= images
-		if(effect)
+		if (effect)
 			owner.contact_datums -= effect
 		owner = null
 	effect = null
