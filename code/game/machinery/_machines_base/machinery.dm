@@ -10,7 +10,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	w_class = ITEM_SIZE_NO_CONTAINER
 	layer = STRUCTURE_LAYER // Layer under items
-	init_flags = INIT_MACHINERY_PROCESS_SELF
+	init_flags = INIT_MACHINERY_START_PROCESSING
 	throw_speed = 1
 	throw_range = 5
 
@@ -81,8 +81,8 @@
 	. = ..()
 	if(d)
 		set_dir(d)
-	if (init_flags & INIT_MACHINERY_PROCESS_ALL)
-		START_PROCESSING_MACHINE(src, init_flags & INIT_MACHINERY_PROCESS_ALL)
+	if (init_flags & INIT_MACHINERY_START_PROCESSING)
+		START_PROCESSING_MACHINE(src, INIT_MACHINERY_START_PROCESSING)
 	SSmachines.machinery += src // All machines should remain in this list, always.
 	if(ispath(wires))
 		wires = new wires(src)
