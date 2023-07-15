@@ -389,12 +389,14 @@
 	if(istype(A, /obj/effect/decal/point))
 		return 0
 
-	var/tile = get_turf(A)
+	var/turf/tile = get_turf(A)
 	if (!tile)
 		return 0
 
-	var/obj/P = new /obj/effect/decal/point(tile)
+	var/turf/mob_tile = get_turf(src)
+	var/obj/P = new /obj/effect/decal/point(mob_tile)
 	P.set_invisibility(invisibility)
+	animate(P, pixel_x = (tile.x - mob_tile.x) * world.icon_size + A.pixel_x, pixel_y = (tile.y - mob_tile.y) * world.icon_size + A.pixel_y, time = 3, easing = EASE_OUT)
 	face_atom(A)
 	return 1
 
