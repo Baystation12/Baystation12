@@ -1,4 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - bugfix: Tooltips are no longer displayed on the radar waves.

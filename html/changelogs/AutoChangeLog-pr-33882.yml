@@ -1,7 +1,0 @@
-author: Ryan180602
-delete-after: true
-changes:
-  - tweak: Makes robot surgery less successful for non-roboticists.
-  - tweak: Makes resin apply brittle to prosthetics (and damage if used further).
-      All depending on skill and chance.
-  - tweak: Roboticists now get Experienced CD by default.
