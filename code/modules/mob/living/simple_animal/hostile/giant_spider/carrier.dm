@@ -6,8 +6,8 @@
 	icon_living = "carrier"
 	icon_dead = "carrier_dead"
 
-	maxHealth = 100
-	health = 100
+	maxHealth = 60
+	health = 60
 
 	natural_weapon = /obj/item/natural_weapon/bite/spider/carrier
 

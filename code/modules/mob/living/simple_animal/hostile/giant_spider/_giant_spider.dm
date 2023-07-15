@@ -18,8 +18,8 @@ GLOBAL_VAR_INIT(SPIDER_COUNT, 0)
 	icon_dead = "generic_dead"
 
 	faction = "spiders"
-	maxHealth = 110
-	health = 110
+	maxHealth = 70
+	health = 70
 	natural_weapon = /obj/item/natural_weapon/bite/spider
 	pass_flags = PASS_FLAG_TABLE
 	poison_resist = 0.5
@@ -38,6 +38,7 @@ GLOBAL_VAR_INIT(SPIDER_COUNT, 0)
 	pry_desc = "clawing"
 
 	movement_cooldown = 2
+	base_attack_cooldown = 1 SECOND
 
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
@@ -71,7 +72,7 @@ GLOBAL_VAR_INIT(SPIDER_COUNT, 0)
 	// use_astar = FALSE
 
 /obj/item/natural_weapon/bite/spider
-	force = 20
+	force = 15
 
 /mob/living/simple_animal/hostile/giant_spider/Initialize(mapload, atom/parent)
 	get_light_and_color(parent)
