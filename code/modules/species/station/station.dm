@@ -258,6 +258,8 @@
 		/singleton/trait/general/permeable_skin = TRAIT_LEVEL_MINOR
 	)
 
+	bodyfall_sound = 'sound/effects/bodyfall_skrell.ogg'
+
 /datum/species/skrell/get_sex(mob/living/carbon/human/H)
 	return istype(H) && (H.descriptors["headtail length"] == 1 ? MALE : FEMALE)
 

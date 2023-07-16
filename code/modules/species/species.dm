@@ -228,6 +228,7 @@
 
 	var/pass_flags = 0
 	var/breathing_sound = 'sound/voice/monkey.ogg'
+	var/bodyfall_sound = 'sound/effects/bodyfall.ogg'
 	var/list/equip_adjust = list()
 	var/list/equip_overlays = list()
 
