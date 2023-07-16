@@ -56,15 +56,6 @@
 			if (prob(25))
 				src.set_density(0)
 
-/obj/machinery/optable/attackby(obj/item/O, mob/user)
-	if (istype(O, /obj/item/grab))
-		var/obj/item/grab/G = O
-		if(iscarbon(G.affecting) && check_table(G.affecting))
-			take_victim(G.affecting,usr)
-			qdel(O)
-			return
-	return ..()
-
 /obj/machinery/optable/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state))
@@ -103,12 +94,6 @@
 	else
 		return 0
 
-
-/obj/machinery/optable/MouseDrop_T(mob/target, mob/user)
-	if (target.loc != loc)
-		step(target, get_dir(target, loc))
-	..()
-
 /obj/machinery/optable/proc/check_victim()
 	if(!victim || !victim.lying || victim.loc != loc)
 		suppressing = FALSE
@@ -135,14 +120,18 @@
 /obj/machinery/optable/proc/take_victim(mob/living/carbon/C, mob/living/carbon/user as mob)
 	if (C == user)
 		user.visible_message("[user] climbs on \the [src].","You climb on \the [src].")
+		add_fingerprint(user)
 	else
 		visible_message(SPAN_NOTICE("\The [C] has been laid on \the [src] by [user]."))
+		add_fingerprint(C)
+		add_fingerprint(user)
 	if (C.client)
 		C.client.perspective = EYE_PERSPECTIVE
 		C.client.eye = src
 	C.Weaken(5)
 	C.dropInto(loc)
-	src.add_fingerprint(user)
+	C.set_dir(SOUTH) //Make patient lie on their back.
+	C.remove_grabs_and_pulls()
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
 		src.victim = H
@@ -156,10 +145,19 @@
 	var/mob/living/M = user
 	if(user.stat || user.restrained() || !iscarbon(target) || !check_table(target))
 		return
+	for (var/obj/item/grab/grab in target.grabbed_by)
+		if (grab.assailant == target || grab.assailant == user)
+			continue
+		USE_FEEDBACK_FAILURE("\The [target] is being grabbed by \the [grab.assailant] and can't be placed on \the [src].")
+		return
 	if(istype(M))
 		take_victim(target,user)
 	else
 		return ..()
+
+/obj/machinery/optable/use_grab(obj/item/grab/grab, list/click_params)
+	MouseDrop_T(grab.affecting, grab.assailant) //Grab will be deleted at level of take_victim if all checks pass.
+	return TRUE
 
 /obj/machinery/optable/climb_on()
 	if(usr.stat || !ishuman(usr) || usr.restrained() || !check_table(usr))

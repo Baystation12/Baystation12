@@ -208,16 +208,6 @@
 			return // Temperature will be adjusted on Entered()
 		beaker =  G
 		user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
-	else if(istype(G, /obj/item/grab))
-		var/obj/item/grab/grab = G
-		if(!ismob(grab.affecting))
-			return
-		for(var/mob/living/carbon/slime/M in range(1,grab.affecting))
-			if(M.Victim == grab.affecting)
-				to_chat(user, "[grab.affecting.name] will not fit into the cryo because they have a slime latched onto their head.")
-				return
-		if(put_mob(grab.affecting))
-			qdel(G)
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/on_update_icon()
@@ -299,52 +289,81 @@
 		return TRUE
 	return FALSE
 
-/obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
-	if (inoperable())
-		to_chat(usr, SPAN_WARNING("The cryo cell is not functioning."))
-		return
-	if (!istype(M))
-		to_chat(usr, SPAN_DANGER("The cryo cell cannot handle such a lifeform!"))
-		return
-	if (occupant)
-		to_chat(usr, SPAN_DANGER("The cryo cell is already occupied!"))
-		return
-	if (M.abiotic())
-		to_chat(usr, SPAN_WARNING("Subject may not have abiotic items on."))
-		return
-	if(!node)
-		to_chat(usr, SPAN_WARNING("The cell is not correctly connected to its pipe network!"))
-		return
-	if (M.client)
-		M.client.perspective = EYE_PERSPECTIVE
-		M.client.eye = src
-	M.stop_pulling()
-	M.forceMove(src)
-	M.ExtinguishMob()
-	if(M.health > -100 && (M.health < 0 || M.sleeping))
-		to_chat(M, SPAN_NOTICE("<b>You feel a cold liquid surround you. Your skin starts to freeze up.</b>"))
-	occupant = M
+/obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/target, mob/user)
+	add_fingerprint(user) //Add fingerprints for trying to go in.
+	if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
+		return FALSE
+	if (!user_can_move_target_inside(target, user))
+		return FALSE
+	if (target.client)
+		target.client.perspective = EYE_PERSPECTIVE
+		target.client.eye = src
+	target.stop_pulling()
+	target.forceMove(src)
+	target.ExtinguishMob()
+	if (target.health > -100 && (target.health < 0 || target.sleeping))
+		to_chat(target, SPAN_NOTICE("<b>You feel a cold liquid surround you. Your skin starts to freeze up.</b>"))
+	occupant = target
 	current_heat_capacity = HEAT_CAPACITY_HUMAN
 	update_use_power(POWER_USE_ACTIVE)
-	add_fingerprint(usr)
+	if (user != target)
+		add_fingerprint(target) //Add fingerprints of the person stuffed in.
 	update_icon()
 	SetName("[name] ([occupant])")
-	return 1
+	target.remove_grabs_and_pulls()
+	return TRUE
 
-	//Like grab-putting, but for mouse-dropping.
-/obj/machinery/atmospherics/unary/cryo_cell/MouseDrop_T(mob/target, mob/user)
-	if(!CanMouseDrop(target, user))
-		return
+/obj/machinery/atmospherics/unary/cryo_cell/proc/user_can_move_target_inside(mob/target, mob/user)
+	if (!user.use_sanity_check(src, target))
+		return FALSE
 	if (!istype(target))
-		return
+		to_chat(user, SPAN_WARNING("\The [src] cannot handle such a lifeform!"))
+		return FALSE
+	if (user.incapacitated() || !istype(user))
+		return FALSE
+	if (!target.simulated)
+		return FALSE
+	if (inoperable())
+		to_chat(user, SPAN_WARNING("\The [src] is not functioning."))
+		return FALSE
+	if (occupant)
+		to_chat(user, SPAN_WARNING("\The [src] is already occupied!"))
+		return FALSE
+	if (target.abiotic())
+		to_chat(user, SPAN_WARNING("[user == target ? "You" : "[target]"] can't enter \the [src] while wearing abiotic items."))
+		return FALSE
 	if (target.buckled)
-		to_chat(user, SPAN_WARNING("Unbuckle the subject before attempting to move them."))
-		return
-	user.visible_message(SPAN_NOTICE("\The [user] begins placing \the [target] into \the [src]."), SPAN_NOTICE("You start placing \the [target] into \the [src]."))
-	if(!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
-		return
-	put_mob(target)
+		to_chat(user, SPAN_WARNING("Unbuckle [user == target ? "yourself" : "\the [target]"] before attempting to [user == target ? "enter \the [src]" : "move them"]."))
+		return FALSE
+	if (panel_open)
+		to_chat(user, SPAN_WARNING("Close the maintenance panel before attempting to place [user == target ? "yourself" : "\the [target]"] in \the [src]."))
+		return FALSE
+	for (var/mob/living/carbon/slime/slime in range(1,target))
+		if (slime.Victim == target)
+			to_chat(user, "[target] will not fit into \the [src] because they have a slime latched onto their head.")
+			return FALSE
+	if (!node)
+		to_chat(usr, SPAN_WARNING("The cell is not correctly connected to its pipe network!"))
+		return FALSE
+	for (var/obj/item/grab/grab in target.grabbed_by)
+		if (grab.assailant == user || grab.assailant == target)
+			continue
+		to_chat(user, SPAN_WARNING("\The [target] is being grabbed by [grab.assailant] and can't be placed in \the [src]."))
+		return FALSE
+	return TRUE
 
+/obj/machinery/atmospherics/unary/cryo_cell/MouseDrop_T(mob/target, mob/user)
+	if (!CanMouseDrop(target, user) || !ismob(target))
+		return
+	if (!user_can_move_target_inside(target, user))
+		return
+
+	user.visible_message(SPAN_NOTICE("\The [user] begins placing \the [target] into \the [src]."), SPAN_NOTICE("You start placing \the [target] into \the [src]."))
+	put_mob(target, user)
+
+/obj/machinery/atmospherics/unary/cryo_cell/use_grab(obj/item/grab/grab, list/click_params) //Grab is deleted at the level of put_mob if all checks are passed.
+	MouseDrop_T(grab.affecting, grab.assailant)
+	return TRUE
 
 /obj/machinery/atmospherics/unary/cryo_cell/verb/move_eject()
 	set name = "Eject occupant"
@@ -369,13 +388,9 @@
 	set name = "Move Inside"
 	set category = "Object"
 	set src in oview(1)
-	for(var/mob/living/carbon/slime/M in range(1,usr))
-		if(M.Victim == usr)
-			to_chat(usr, "You're too busy getting your life sucked out of you.")
-			return
 	if (usr.stat != 0)
 		return
-	put_mob(usr)
+	put_mob(usr, usr)
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/return_air()

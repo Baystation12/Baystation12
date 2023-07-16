@@ -199,8 +199,8 @@
 
 	else if(isWrench(O))
 		user.visible_message( \
-			SPAN_NOTICE("\The [user] begins [anchored ? "securing" : "unsecuring"] the microwave."), \
-			SPAN_NOTICE("You attempt to [anchored ? "secure" : "unsecure"] the microwave.")
+			SPAN_NOTICE("\The [user] begins [anchored ? "unsecuring" : "securing"] the microwave."), \
+			SPAN_NOTICE("You attempt to [anchored ? "unsecure" : "secure"] the microwave.")
 			)
 		if (do_after(user, (O.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 			anchored = !anchored

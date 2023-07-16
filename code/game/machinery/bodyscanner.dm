@@ -90,34 +90,6 @@
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, mob/user)
-	if(istype(G))
-		var/mob/M = G.affecting
-		if(!user_can_move_target_inside(M, user))
-			return
-		move_target_inside(M,user)
-		qdel(G)
-		return TRUE
-	return ..()
-
-/obj/machinery/bodyscanner/proc/user_can_move_target_inside(mob/target, mob/user)
-	if(!istype(user) || !istype(target))
-		return FALSE
-	if(user.incapacitated())
-		return FALSE
-	if(!target.simulated)
-		return FALSE
-	if(occupant)
-		to_chat(user, SPAN_WARNING("\The [src] is already occupied!"))
-		return FALSE
-	if(target.abiotic())
-		to_chat(user, SPAN_WARNING("[user == target ? "You" : "[target]"] can't enter \the [src] while wearing abiotic items."))
-		return FALSE
-	if(target.buckled)
-		to_chat(user, SPAN_WARNING("Unbuckle [user == target ? "yourself" : "\the [target]"] before attempting to [user == target ? "enter \the [src]" : "move them"]."))
-		return FALSE
-	return TRUE
-
 /obj/machinery/bodyscanner/proc/move_target_inside(mob/target, mob/user)
 	target.forceMove(src)
 	occupant = target
@@ -126,22 +98,55 @@
 	update_icon()
 	drop_contents()
 	SetName("[name] ([occupant])")
-
-	add_fingerprint(user)
+	target.remove_grabs_and_pulls()
+	target.stop_pulling()
+	if (user != target)
+		add_fingerprint(target) //Add fingerprints of the person stuffed in.
 
 /obj/machinery/bodyscanner/on_update_icon()
-	if(!occupant)
+	if (!occupant)
 		icon_state = "body_scanner_0"
-	else if(inoperable())
+	else if (inoperable())
 		icon_state = "body_scanner_1"
 	else
 		icon_state = "body_scanner_2"
 
-//Like grap-put, but for mouse-drop.
-/obj/machinery/bodyscanner/MouseDrop_T(mob/target, mob/user)
-	if(!CanMouseDrop(target, user) || !istype(target))
+/obj/machinery/bodyscanner/proc/user_can_move_target_inside(mob/target, mob/user)
+	if (!user.use_sanity_check(src, target))
 		return FALSE
-	if(!user_can_move_target_inside(target, user))
+	if (!istype(target))
+		to_chat(user, SPAN_WARNING("\The [src] cannot handle such a lifeform!"))
+		return FALSE
+	if (user.incapacitated() || !istype(user))
+		return FALSE
+	if (!target.simulated)
+		return FALSE
+	if (inoperable())
+		to_chat(user, SPAN_WARNING("\The [src] is not functioning."))
+		return FALSE
+	if (occupant)
+		to_chat(user, SPAN_WARNING("\The [src] is already occupied!"))
+		return FALSE
+	if (target.abiotic())
+		to_chat(user, SPAN_WARNING("[user == target ? "You" : "[target]"] can't enter \the [src] while wearing abiotic items."))
+		return FALSE
+	if (target.buckled)
+		to_chat(user, SPAN_WARNING("Unbuckle [user == target ? "yourself" : "\the [target]"] before attempting to [user == target ? "enter \the [src]" : "move them"]."))
+		return FALSE
+	if (panel_open)
+		to_chat(user, SPAN_WARNING("Close the maintenance panel before attempting to place [user == target ? "yourself" : "\the [target]"] in \the [src]."))
+		return FALSE
+	for (var/obj/item/grab/grab in target.grabbed_by)
+		if (grab.assailant == user || grab.assailant == target)
+			continue
+		to_chat(user, SPAN_WARNING("\The [target] is being grabbed by [grab.assailant] and can't be placed in \the [src]."))
+		return FALSE
+	return TRUE
+
+/obj/machinery/bodyscanner/MouseDrop_T(mob/target, mob/user)
+	if (!CanMouseDrop(target, user) || !ismob(target))
+		return
+	if (!user_can_move_target_inside(target, user))
 		return
 	if (user == target)
 		user.visible_message(
@@ -150,14 +155,21 @@
 			SPAN_ITALIC("You hear metal clanking, then a pressurized hiss.")
 		)
 		move_target_inside(target, user)
-		return
-	user.visible_message(
-		SPAN_NOTICE("\The [user] begins placing \the [target] into \the [src]."),
-		SPAN_NOTICE("You start placing \the [target] into \the [src].")
-	)
-	if(!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || !user_can_move_target_inside(target, user))
-		return
-	move_target_inside(target,user)
+	else
+		user.visible_message(
+			SPAN_NOTICE("\The [user] begins placing \the [target] into \the [src]."),
+			SPAN_NOTICE("You start placing \the [target] into \the [src].")
+		)
+		add_fingerprint(user)
+		if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
+			return
+		if (!user_can_move_target_inside(target, user))
+			return
+		move_target_inside(target,user)
+
+/obj/machinery/bodyscanner/use_grab(obj/item/grab/grab, list/click_params)
+	MouseDrop_T(grab.affecting, grab.assailant)
+	return TRUE
 
 /obj/machinery/bodyscanner/ex_act(severity)
 	switch(severity)

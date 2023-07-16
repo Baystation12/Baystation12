@@ -86,8 +86,9 @@
 		return FALSE
 	var/list/grabbed_by_mobs = list()
 	for (var/obj/item/grab/grab in target.grabbed_by)
-		if (grab.assailant != user)
-			grabbed_by_mobs += grab.assailant
+		if (grab.assailant == user || grab.assailant == target)
+			continue
+		grabbed_by_mobs += "\the [grab.assailant]"
 	if (length(grabbed_by_mobs))
 		if (!silent)
 			to_chat(user, SPAN_WARNING("\The [target] is being grabbed by [english_list(grabbed_by_mobs)] and can't be buckled by you."))
@@ -329,6 +330,7 @@
 				exclude_mobs = list(M)
 			)
 			to_chat(M, SPAN_DANGER("\The [user] buckles you to \the [src]."))
+			add_fingerprint(M)
 
 
 /**
