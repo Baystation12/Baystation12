@@ -98,6 +98,8 @@
 		/singleton/emote/exertion/synthetic/creak
 	)
 
+	bodyfall_sound = 'sound/effects/bodyfall_machine.ogg'
+
 /datum/species/machine/handle_death(mob/living/carbon/human/H)
 	..()
 	if(istype(H.wear_mask,/obj/item/clothing/mask/monitor))

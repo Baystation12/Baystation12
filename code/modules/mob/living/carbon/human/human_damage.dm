@@ -107,6 +107,8 @@
 	amount *= species.weaken_mod
 	if(amount <= 0 || (MUTATION_HULK in mutations)) return
 	..(amount)
+	if (species?.bodyfall_sound)
+		playsound(loc, species.bodyfall_sound, 50, TRUE, -1)
 
 /mob/living/carbon/human/Paralyse(amount)
 	amount *= species.paralysis_mod
