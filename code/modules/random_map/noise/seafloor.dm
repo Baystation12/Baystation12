@@ -3,13 +3,6 @@
 	smoothing_iterations = 3
 	target_turf_type = /turf/simulated/ocean
 
-/datum/random_map/noise/seafloor/replace_space
-	descriptor = "seafloor (replace space)"
-	target_turf_type = /turf/space
-
-/datum/random_map/noise/seafloor/replace_space/get_appropriate_path(value)
-	return /turf/simulated/ocean
-
 /datum/random_map/noise/seafloor/get_appropriate_path(value)
 	return
 
