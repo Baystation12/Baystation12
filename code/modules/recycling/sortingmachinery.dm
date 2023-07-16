@@ -499,38 +499,24 @@
 		M.forceMove(src)
 	src.flush()
 
+
 /obj/machinery/disposal/deliveryChute/flush()
-	flushing = 1
-	flick("intake-closing", src)
-	var/obj/structure/disposalholder/H = new()	// virtual holder object which actually
-												// travels through the pipes.
-	air_contents = new()		// new empty gas resv.
+	var/obj/structure/disposalholder/holder = ..()
+	for (var/mob/living/living as anything in holder.held_mobs)
+		if (prob(50))
+			continue
+		if (ishuman(living))
+			var/mob/living/carbon/human/human = living
+			var/obj/item/organ/external/limb = human.get_damageable_organs()
+			if (!length(limb))
+				continue
+			limb = pick(limb)
+			limb.take_external_damage(50, used_weapon = "Blunt Trauma")
+			to_chat(human, "\The [src]'s mechanisms crush your [limb.name]!")
+			continue
+		living.apply_damage(50, used_weapon = "Blunt Trauma")
+		to_chat(living, "\The [src]'s mechanisms crush you!")
 
-	sleep(10)
-	playsound(src, 'sound/machines/disposalflush.ogg', 50, 0, 0)
-	sleep(5) // wait for animation to finish
-
-	if(prob(35))
-		for(var/mob/living/carbon/human/L in src)
-			var/list/obj/item/organ/external/crush = L.get_damageable_organs()
-			if(!length(crush))
-				return
-
-			var/obj/item/organ/external/E = pick(crush)
-
-			E.take_external_damage(45, used_weapon = "Blunt Trauma")
-			to_chat(L, "\The [src]'s mechanisms crush your [E.name]!")
-
-	H.init(src)	// copy the contents of disposer to holder
-
-	H.start(src) // start the holder processing movement
-	flushing = 0
-	// now reset disposal state
-	flush = 0
-	if(mode == 2)	// if was ready,
-		mode = 1	// switch to charging
-	update_icon()
-	return
 
 /obj/machinery/disposal/deliveryChute/attackby(obj/item/I, mob/user)
 	if(!I || !user)

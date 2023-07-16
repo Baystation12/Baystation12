@@ -4,6 +4,7 @@
 	var/list/gas = list()
 	//Temperature in Kelvin of this gas mix.
 	var/temperature = 0
+	var/start_temperature = 0
 
 	//Sum of all the gas moles in this mix.  Updated by update_values()
 	var/total_moles = 0
@@ -11,6 +12,7 @@
 	var/volume = CELL_VOLUME
 	//Size of the group this gas_mixture is representing.  1 for Singletons.
 	var/group_multiplier = 1
+	var/start_group_multiplier = 1
 
 	//List of active tile overlays for this gas_mixture.  Updated by check_tile_graphic()
 	var/list/graphic = list()
@@ -20,7 +22,14 @@
 /datum/gas_mixture/New(_volume = CELL_VOLUME, _temperature = 0, _group_multiplier = 1)
 	volume = _volume
 	temperature = _temperature
+	start_temperature = _temperature
 	group_multiplier = _group_multiplier
+	start_group_multiplier = _group_multiplier
+
+/datum/gas_mixture/proc/clear()
+	gas = list()
+	temperature = start_temperature
+	group_multiplier = start_group_multiplier
 
 /datum/gas_mixture/proc/get_gas(gasid)
 	if(!length(gas))

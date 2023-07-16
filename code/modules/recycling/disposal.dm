@@ -415,52 +415,31 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if (power_draw > 0)
 		use_power_oneoff(power_draw)
 
+
 // perform a flush
 /obj/machinery/disposal/proc/flush()
-
-	flushing = 1
+	flushing = TRUE
 	flick("[icon_state]-flush", src)
-
-	var/wrapcheck = 0
-	var/obj/structure/disposalholder/H = new(src)	// virtual holder object which actually
-												// travels through the pipes.
-
-	// handle vomit transportation
-	// flush the vomit out and put vomit into the disposalholder
-	reagents.trans_to_holder(H.create_reagents(500), reagents.total_volume)
-
-	var/list/stuff = contents - component_parts
-	//Hacky test to get drones to mail themselves through disposals.
-	for(var/mob/living/silicon/robot/drone/D in stuff)
-		wrapcheck = 1
-
-	for(var/obj/item/smallDelivery/O in stuff)
-		wrapcheck = 1
-
-	if(wrapcheck == 1)
-		H.tomail = 1
-
+	var/obj/structure/disposalholder/holder = new (src, contents - component_parts, reagents, air_contents)
 	sleep(10)
-	if(last_sound < world.time + 1)
-		playsound(src, 'sound/machines/disposalflush.ogg', 50, 0, 0)
+	if (last_sound < world.time + 5)
+		playsound(src, 'sound/machines/disposalflush.ogg', 50, FALSE)
 		last_sound = world.time
-	sleep(5) // wait for animation to finish
-
-
-	H.init(src, air_contents)	// copy the contents of disposer to holder
-	air_contents = new(PRESSURE_TANK_VOLUME)	// new empty gas resv.
-
-	for (var/mob/M in H.check_mob(stuff))
-		if (M.ckey)
-			admin_attack_log(null, M, null, "Was flushed down [src].", "has been flushed down [src].")
-	H.start(src) // start the holder processing movement
-	flushing = 0
-	// now reset disposal state
+	sleep(5)
+	holder.start(src)
+	flushing = FALSE
 	flush = 0
-	if(mode == 2)	// if was ready,
-		mode = 1	// switch to charging
+	if(mode == 2)
+		mode = 1
 	update_icon()
-	return
+	if (!holder.active)
+		return holder
+	for (var/mob/mob as anything in holder.held_mobs)
+		if (!mob.ckey)
+			continue
+		admin_attack_log(null, mob, "Was flushed down [src].", "has been flushed down [src].")
+	return holder
+
 
 // called when holder is expelled from a disposal
 // should usually only occur if the pipe network is modified

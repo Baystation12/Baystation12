@@ -323,3 +323,22 @@
 	if(damflags & DAMAGE_FLAG_BIO)
 		res += "bio"
 	return english_list(res)
+
+
+/// Returns a list of mobs in the contents of the atom, up to the given nested depth.
+/proc/mobs_in_contents(atom/atom, depth = 2)
+	var/list/result = list()
+	if (!istype(atom))
+		return result
+	var/list/queue = list(atom)
+	do
+		var/list/next = list()
+		for (var/atom/check as anything in queue)
+			for (var/atom/held in check)
+				if (ismob(held))
+					result += held
+				else
+					next += held
+		queue = next
+	while (depth-- > 0 && length(queue))
+	return result
