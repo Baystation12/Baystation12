@@ -4,7 +4,8 @@
 	sprites = list(
 		"Basic" = "robot_old",
 		"Android" = "droid",
-		"Default" = "robot"
+		"Default" = "robot",
+		"Enzymi" = "enzymi+Standard"
 	)
 	equipment = list(
 		/obj/item/device/flash,

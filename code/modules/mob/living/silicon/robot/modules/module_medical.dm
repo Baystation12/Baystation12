@@ -22,7 +22,8 @@
 		"Basic" = "Medbot",
 		"Standard" = "surgeon",
 		"Advanced Droid" = "droid-medical",
-		"Needles" = "medicalrobot"
+		"Needles" = "medicalrobot",
+		"Enzymi" = "enzymi+Surgeon"
 		)
 	equipment = list(
 		/obj/item/device/flash,
@@ -98,7 +99,8 @@
 		"Basic" = "Medbot",
 		"Standard" = "surgeon",
 		"Advanced Droid" = "droid-medical",
-		"Needles" = "medicalrobot"
+		"Needles" = "medicalrobot",
+		"Enzymi" = "enzymi+Crisis"
 	)
 	equipment = list(
 		/obj/item/crowbar,

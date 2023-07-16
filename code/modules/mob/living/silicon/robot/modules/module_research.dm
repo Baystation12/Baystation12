@@ -8,7 +8,8 @@
 		NETWORK_RESEARCH
 	)
 	sprites = list(
-		"Droid" = "droid-science"
+		"Droid" = "droid-science",
+		"Enzymi" = "enzymi+Research"
 	)
 	equipment = list(
 		/obj/item/device/flash,

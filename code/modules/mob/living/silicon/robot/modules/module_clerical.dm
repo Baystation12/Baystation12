@@ -18,6 +18,7 @@
 		"Kent" = "toiletbot",
 		"Bro" = "Brobot",
 		"Rich" = "maximillion",
+		"Enzymi" = "enzymi+Service",
 		"Default" = "Service2"
 	)
 	equipment = list(
@@ -77,6 +78,7 @@
 		"Kent" =     "toiletbot",
 		"Bro" =      "Brobot",
 		"Rich" =     "maximillion",
+		"Enzymi" = "enzymi+Cleric",
 		"Default" =  "Service2"
 	)
 	equipment = list(
