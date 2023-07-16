@@ -18,7 +18,7 @@
 
 // Used by update statements, this is to handle shit like preventing editing the /datum/admins though SDQL but WITHOUT +PERMISSIONS.
 // Assumes the variable actually exists.
-/datum/proc/SDQL_update(const/var_name, new_value)
+/datum/proc/SDQL_update(var_name, new_value)
 	vars[var_name] = new_value
 	return 1
 

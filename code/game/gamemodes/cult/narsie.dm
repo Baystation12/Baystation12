@@ -156,7 +156,7 @@ var/global/list/narsie_list = list()
 	T.set_density(0)
 	set_light(1)
 
-/obj/singularity/narsie/large/consume(const/atom/A) //Has its own consume proc because it doesn't need energy and I don't want BoHs to explode it. --NEO
+/obj/singularity/narsie/large/consume(atom/A) //Has its own consume proc because it doesn't need energy and I don't want BoHs to explode it. --NEO
 //NEW BEHAVIOUR
 	if(narsie_behaviour == "CultStation13")
 	//MOB PROCESSING
@@ -166,7 +166,7 @@ var/global/list/narsie_list = list()
 	else if(narsie_behaviour == "Nar-Singulo")
 		old_narsie(A)
 
-/obj/singularity/narsie/proc/new_narsie(const/atom/A)
+/obj/singularity/narsie/proc/new_narsie(atom/A)
 	if (ismob(A) && (get_dist(A, src) <= 7))
 		var/mob/M = A
 
@@ -190,7 +190,7 @@ var/global/list/narsie_list = list()
 				T.holy = 0 //Nar-Sie doesn't give a shit about sacred grounds.
 			T.cultify()
 
-/obj/singularity/narsie/proc/old_narsie(const/atom/A)
+/obj/singularity/narsie/proc/old_narsie(atom/A)
 	if(!(A.singuloCanEat()))
 		return 0
 
@@ -222,7 +222,7 @@ var/global/list/narsie_list = list()
 			var/turf/T2 = A
 			T2.ChangeTurf(get_base_turf_by_area(A))
 
-/obj/singularity/narsie/consume(const/atom/A) //This one is for the small ones.
+/obj/singularity/narsie/consume(atom/A) //This one is for the small ones.
 	if(!(A.singuloCanEat()))
 		return 0
 
@@ -305,7 +305,7 @@ var/global/list/narsie_list = list()
 		return
 		//no living humans, follow a ghost instead.
 
-/obj/singularity/narsie/proc/acquire(const/mob/food)
+/obj/singularity/narsie/proc/acquire(mob/food)
 	var/capname = uppertext(name)
 
 	to_chat(target, SPAN_NOTICE("<b>[capname] HAS LOST INTEREST IN YOU.</b>"))

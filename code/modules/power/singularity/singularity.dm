@@ -281,7 +281,7 @@
 
 	return
 
-/obj/singularity/proc/consume(const/atom/A)
+/obj/singularity/proc/consume(atom/A)
 	src.energy += A.singularity_act(src, current_size)
 	return
 
@@ -366,7 +366,7 @@
 			return 0
 	return 1
 
-/obj/singularity/proc/can_move(const/turf/T)
+/obj/singularity/proc/can_move(turf/T)
 	if (!isturf(T))
 		return 0
 
