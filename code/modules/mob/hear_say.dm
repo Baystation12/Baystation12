@@ -75,6 +75,8 @@
 	if (italics)
 		display_message = "<i>[display_message]</i>"
 
+	var/runechat_message = display_message
+
 	var/display_controls
 	if (is_ghost)
 		if (display_name != speaker.real_name && speaker.real_name)
@@ -109,6 +111,11 @@
 		display_message = language.format_message(display_message, display_verb)
 
 	on_hear_say({"[SPAN_CLASS("game say", "[display_controls][SPAN_CLASS("name", display_name)][alt_name] [display_message]")]"})
+
+	if (istype(language, /datum/language/noise))
+		create_chat_message(speaker, runechat_message, italics, list("emote"))
+	else
+		create_chat_message(speaker, capitalize(runechat_message), italics, list())
 
 
 /mob/proc/on_hear_say(message)

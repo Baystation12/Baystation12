@@ -9,8 +9,15 @@
 #define UNSETEMPTY(L) if (L && !length(L)) L = null
 // Removes I from list L, and sets I to null if it is now empty
 #define LAZYREMOVE(L, I) if(L) { L -= I; if(!length(L)) { L = null; } }
+// Removes the value V from the item K, if the item K is empty will remove it from the list, if the list is empty will set the list to null
+#define LAZYREMOVEASSOC(L, K, V) if(L) { if(L[K]) { L[K] -= V; if(!length(L[K])) L -= K; } if(!length(L)) L = null; }
 // Adds I to L, initalizing L if necessary
 #define LAZYADD(L, I) if(!L) { L = list(); } L += I;
+// Adds to the item K the value V, if the list is null it will initialize it
+#define LAZYADDASSOC(L, K, V) if(!L) { L = list(); } L[K] += V;
+// This is used to add onto lazy assoc list when the value you're adding is a /list/.
+// This one has extra safety over lazyaddassoc because the value could be null (and thus cant be used to += objects)
+#define LAZYADDASSOCLIST(L, K, V) if(!L) { L = list(); } L[K] += list(V);
 // Insert I into L at position X, initalizing L if necessary
 #define LAZYINSERT(L, I, X) if(!L) { L = list(); } L.Insert(X, I);
 // Adds I to L, initalizing L if necessary, if I is not already in L

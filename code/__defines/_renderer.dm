@@ -220,6 +220,11 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 	group = RENDER_GROUP_SCREEN
 	plane = HUD_PLANE
 
+/atom/movable/renderer/runechat
+	name = "Runechat"
+	group = RENDER_GROUP_SCREEN
+	plane = RUNECHAT_PLANE
+
 
 /* *
 * Group renderers

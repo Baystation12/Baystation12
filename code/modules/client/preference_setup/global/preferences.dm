@@ -303,6 +303,24 @@ var/global/list/_client_preferences_by_type
 	options = list(GLOB.PREF_YES, GLOB.PREF_NO)
 	default_value = GLOB.PREF_NO
 
+/datum/client_preference/runechat_mob
+	description = "Enable mob runechat"
+	key = "RUNECHAT_MOB"
+	options = list(GLOB.PREF_YES, GLOB.PREF_NO)
+	default_value = GLOB.PREF_YES
+
+/datum/client_preference/runechat_obj
+	description = "Enable obj runechat"
+	key = "RUNECHAT_OBJ"
+	options = list(GLOB.PREF_YES, GLOB.PREF_NO)
+	default_value = GLOB.PREF_YES
+
+/datum/client_preference/runechat_messages_length
+	description = "Length of runechat messages"
+	key = "RUNECHAT_MESSAGES_LENGTH"
+	options = list(GLOB.PREF_SHORT, GLOB.PREF_LONG)
+	default_value = GLOB.PREF_SHORT
+
 
 /********************
 * General Staff Preferences *

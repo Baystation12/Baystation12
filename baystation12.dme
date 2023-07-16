@@ -264,6 +264,7 @@
 #include "code\datums\browser.dm"
 #include "code\datums\callbacks.dm"
 #include "code\datums\category.dm"
+#include "code\datums\chat_message.dm"
 #include "code\datums\cinematic.dm"
 #include "code\datums\datum.dm"
 #include "code\datums\footsteps.dm"
