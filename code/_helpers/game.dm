@@ -32,7 +32,7 @@
 		if(A.name == N)
 			return A
 
-/proc/get_area_master(const/O)
+/proc/get_area_master(O)
 	RETURN_TYPE(/area)
 	var/area/A = get_area(O)
 	if (isarea(A))
@@ -433,16 +433,16 @@
 
 	return new /datum/projectile_data(src_x, src_y, time, distance, power_x, power_y, dest_x, dest_y)
 
-/proc/GetRedPart(const/hexa)
+/proc/GetRedPart(hexa)
 	return hex2num(copytext(hexa,2,4))
 
-/proc/GetGreenPart(const/hexa)
+/proc/GetGreenPart(hexa)
 	return hex2num(copytext(hexa,4,6))
 
-/proc/GetBluePart(const/hexa)
+/proc/GetBluePart(hexa)
 	return hex2num(copytext(hexa,6,8))
 
-/proc/GetHexColors(const/hexa)
+/proc/GetHexColors(hexa)
 	RETURN_TYPE(/list)
 	return list(
 			GetRedPart(hexa),
@@ -450,7 +450,7 @@
 			GetBluePart(hexa)
 		)
 
-/proc/MixColors(const/list/colors)
+/proc/MixColors(list/colors)
 	var/list/reds = list()
 	var/list/blues = list()
 	var/list/greens = list()
