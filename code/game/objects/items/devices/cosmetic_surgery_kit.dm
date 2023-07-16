@@ -50,5 +50,8 @@
 	user.real_name = response
 	user.SetName(response)
 	user.dna.real_name = response
+	var/obj/item/organ/external/head/H = user.organs_by_name[BP_HEAD]
+	if (istype(H) && H.forehead_graffiti)
+		H.forehead_graffiti = null
 	if (user.mind)
 		user.mind.name = user.name
