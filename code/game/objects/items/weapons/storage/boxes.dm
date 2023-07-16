@@ -228,6 +228,10 @@
 	name = "box of SMG magazines - rubber"
 	startswith = list(/obj/item/ammo_magazine/smg_top/rubber = 7)
 
+/obj/item/storage/box/ammo/light_bullpup
+	name = "box of light bullpup magazines"
+	startswith = list(/obj/item/ammo_magazine/mil_rifle/light = 6)
+
 /obj/item/storage/box/flashbangs
 	name = "box of flashbangs"
 	desc = "A box containing 7 antipersonnel flashbang grenades.<br> WARNING: These devices are extremely dangerous and can cause blindness or deafness from repeated use."

@@ -261,8 +261,6 @@
 		list(mode_name="2-round bursts", burst=2,    fire_delay=null, move_delay=6,    use_launcher=null, one_hand_penalty=7, burst_accuracy=list(0,-1), dispersion=list(0.0, 0.6))
 		)
 
-
-
 /obj/item/gun/projectile/automatic/l6_saw
 	name = "light machine gun"
 	desc = "An unbranded machine gun, based off a design made long ago."
