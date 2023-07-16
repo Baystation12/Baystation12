@@ -72,12 +72,15 @@
 
 
 /// Start moving the holder at the given disposal unit
-/obj/structure/disposalholder/proc/start(obj/machinery/disposal/D)
-	if(!D.trunk)
-		D.expel(src)	// no trunk connected, so expel immediately
+/obj/structure/disposalholder/proc/start()
+	var/obj/machinery/disposal/disposal = loc
+	if (!istype(disposal))
 		return
-	forceMove(D.trunk)
-	active = 1
+	if (!disposal.trunk)
+		disposal.expel(src)
+		return
+	forceMove(disposal.trunk)
+	active = TRUE
 	set_dir(DOWN)
 	START_PROCESSING(SSdisposals, src)
 
