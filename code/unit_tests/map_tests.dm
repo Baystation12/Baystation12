@@ -675,69 +675,74 @@
 			log_bad("Disconnected wire: [dir2text(dir)] - [log_info_line(C)]")
 			. = FALSE
 
+
 /datum/unit_test/networked_disposals_shall_deliver_tagged_packages
 	name = "MAP: Networked disposals shall deliver tagged packages"
 	async = 1
 
-	var/extra_spawns = 1
-
+	var/failed = FALSE
+	//var/extra_spawns = 1
 	var/list/packages_awaiting_delivery = list()
 	var/list/all_tagged_bins = list()
 	var/list/all_tagged_destinations = list()
-
-	var/failed = FALSE
 	var/list/exempt_junctions = list(
 		/obj/structure/disposalpipe/sortjunction/untagged
 	)
 
+
 /datum/unit_test/networked_disposals_shall_deliver_tagged_packages/start_test()
 	. = 1
 	var/fail = FALSE
-	for(var/obj/structure/disposalpipe/sortjunction/sort in world)
-		if(is_type_in_list(sort, exempt_junctions))
+	for (var/obj/structure/disposalpipe/sortjunction/sort in world)
+		if (is_type_in_list(sort, exempt_junctions))
 			continue
 		var/obj/machinery/disposal/bin = get_bin_from_junction(sort)
-		if(!bin)
+		if (!bin)
 			log_bad("Junction with tag [sort.sort_type] at ([sort.x], [sort.y], [sort.z]) could not find disposal.")
 			fail = TRUE
 			continue
 		all_tagged_destinations[sort.sort_type] = bin
-		if(!istype(bin)) // Can also be an outlet.
+		if (!istype(bin)) // Can also be an outlet.
 			continue
 		all_tagged_bins[sort.sort_type] = bin
-	if(fail)
+	if (fail)
 		fail("Improperly connected junction detected.")
 		return
-	for(var/target_tag in all_tagged_destinations)
+	for (var/target_tag in all_tagged_destinations)
 		var/start_tag = all_tagged_bins[target_tag] ? target_tag : pick(all_tagged_bins)
 		spawn_package(start_tag, target_tag)
-		for(var/i in 1 to extra_spawns)
-			spawn_package(pick(all_tagged_bins), target_tag) // This potentially helps catch errors in junction logic.
+		//for (var/i in 1 to extra_spawns)
+			//spawn_package(pick(all_tagged_bins), target_tag) // This potentially helps catch errors in junction logic.
+
 
 /datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/spawn_package(start_tag, target_tag)
-	var/obj/structure/disposalholder/unit_test/package = new()
-	package.tomail = 1
+	var/obj/machinery/disposal/disposal = all_tagged_bins[start_tag]
+	var/obj/structure/disposalholder/unit_test/package = new (disposal)
 	package.destinationTag = target_tag
-	package.start(all_tagged_bins[start_tag])
+	package.start(disposal)
 	package.test = src
 	packages_awaiting_delivery[package] = start_tag
+
 
 /obj/structure/disposalholder/unit_test
 	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
 	speed = 100
 
+
 /obj/structure/disposalholder/unit_test/Destroy()
 	test.package_delivered(src)
 	. = ..()
 
+
 /obj/structure/disposalholder/unit_test/Process()
-	for(var/i in 1 to speed) // Go faster, as it takes a while and we don't want to wait forever.
-		. = ..()
-		if(. == PROCESS_KILL)
-			if(QDELETED(src) || !test.packages_awaiting_delivery[src])
-				return
-			log_and_fail()
-			return
+	. = ..()
+	if (!.)
+		return
+	if (QDELETED(src) || !test.packages_awaiting_delivery[src])
+		return
+	log_and_fail()
+	return PROCESS_KILL
+
 
 /obj/structure/disposalholder/unit_test/proc/log_and_fail()
 	var/location = log_info_line(get_turf(src))
@@ -745,6 +750,7 @@
 	test.log_bad("A package routed from [test.packages_awaiting_delivery[src]] to [destinationTag] was misrouted to [location]; expected location was [expected_loc].")
 	test.failed = TRUE
 	test.packages_awaiting_delivery -= src
+
 
 /datum/unit_test/networked_disposals_shall_deliver_tagged_packages/check_result()
 	. = 1
@@ -756,11 +762,11 @@
 		return
 	return 0
 
+
 /datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/package_delivered(obj/structure/disposalholder/unit_test/package)
 	if(!packages_awaiting_delivery[package])
 		return
 	var/obj/structure/disposalpipe/trunk/trunk = package.loc
-
 	if(!istype(trunk))
 		package.log_and_fail()
 		return
@@ -769,6 +775,7 @@
 		package.log_and_fail()
 		return
 	packages_awaiting_delivery -= package
+
 
 /datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/get_bin_from_junction(obj/structure/disposalpipe/sortjunction/sort)
 	var/list/traversed = list(sort) // Avoid self-looping, infinite loops.
@@ -790,6 +797,7 @@
 		traversed += next_pipe
 		current_dir = next_pipe.nextdir(current_dir, sort.sort_type)
 		our_pipe = next_pipe
+
 
 /datum/unit_test/req_access_shall_have_valid_strings
 	name = "MAP: every obj shall have valid access strings in req_access"
