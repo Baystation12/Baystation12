@@ -143,7 +143,7 @@
 		return
 	var/crutches = 0
 	for (var/obj/item/cane/C as anything in GetAllHeld(/obj/item/cane))
-		if(istype(C))
+		if(istype(C) && C.can_support)
 			crutches++
 	for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 		var/obj/item/organ/external/E = get_organ(organ_name)

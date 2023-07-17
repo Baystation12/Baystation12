@@ -1,6 +1,16 @@
 /datum/gear/cane
 	display_name = "cane"
-	path = /obj/item/cane
+	path = /obj/item
+
+/datum/gear/cane/New()
+	..()
+	var/canes = list()
+	canes["cane"] = /obj/item/cane
+	canes["crutch, single"] = /obj/item/cane/crutch
+	canes["crutches, box of two"] = /obj/item/storage/box/large/crutches
+	canes["telescopic cane"] = /obj/item/cane/telescopic
+	canes["white guide cane"] = /obj/item/cane/white
+	gear_tweaks += new/datum/gear_tweak/path(canes)
 
 /datum/gear/union_card
 	display_name = "union membership"
