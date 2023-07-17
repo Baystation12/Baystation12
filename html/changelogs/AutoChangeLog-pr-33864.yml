@@ -1,0 +1,6 @@
+author: TheNightingale
+delete-after: true
+changes:
+  - rscadd: Vitals monitors can now be upgraded with scanning modules to show broken
+      bones and arterial bleeding.
+  - tweak: Vitals monitors now show BP, BO and temperature by default.
