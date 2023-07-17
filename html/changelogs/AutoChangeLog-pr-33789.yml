@@ -1,0 +1,12 @@
+author: emmanuelbassil
+delete-after: true
+changes:
+  - tweak: Can now use grabs to put mobs in sleepers. This is already existing behavior
+      for cryopods and bodyscanners.
+  - tweak: Can no longer put a mob in a sleeper/cryotube/cryopod/body scanners if
+      they are being grabbed by someone other than you.
+  - tweak: Added eject verb to sleeper. Remember, you can use Alt+Click to eject people
+      from sleepers.
+  - bugfix: Fixed bug where a mob could not be buckled if mob was grabbing itself.
+  - bugfix: Grabs and pulls now properly release when you put a mob in a sleeper,
+      cryopod, body scanner, or cryotube
