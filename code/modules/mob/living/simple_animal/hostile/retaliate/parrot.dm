@@ -672,11 +672,11 @@
 			var/obj/item/grenade/G = held_item
 			G.dropInto(loc)
 			G.detonate()
-			to_chat(src, "You let go of the [held_item]!")
+			to_chat(src, "You let go of \the [held_item]!")
 			held_item = null
 			return 1
 
-	to_chat(src, "You drop the [held_item].")
+	to_chat(src, "You drop \the [held_item].")
 
 	held_item.dropInto(loc)
 	held_item = null

@@ -59,6 +59,12 @@
 		if (G.force_danger())
 			return TRUE
 
+///Remove all grabs applied to target mob. Useful when mob is entering a compartment where they're not supposed to be grabbed.
+/mob/proc/remove_grabs_and_pulls()
+	for (var/obj/item/grab/G in grabbed_by)
+		qdel(G)
+	if(pulledby)
+		pulledby.stop_pulling()
 
 /proc/isdeaf(mob/living/M)
 	return istype(M) && (M.ear_deaf || M.sdisabilities & DEAFENED)
