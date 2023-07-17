@@ -4,14 +4,13 @@ Callbacks wrap a target, callable, and arguments to pass. See the dm reference f
 When the target is GLOBAL_PROC, the callable is global - otherwise it is a datum (or dead) reference.
 Callbacks are created with the new keyword via a global alias like:
 - var/datum/callback/instance = new Callback(GLOBAL_PROC, /proc/get_area, someObject)
-Callbacks are thin - they should be used with invoke or invoke_async.
+Callbacks are thin - they should be used with invoke or addtimer.
 
 ** Invocation
-invoke and invoke_async call a callable against a target with optional params. They accept either:
+invoke call a callable against a target with optional params. It accept either:
 invoke(target, callable, params...)
 or invoke(<callback>, extra params...)
-and return the result of calling those. invoke_async does not wait for an outcome and will return (.)
-on the first sleep, and so should be used only where results are not required.
+and return the result of calling those.
 
 ** Callables
 Callables are proc names or proc references, with references preferred for safety (in most cases).
@@ -77,27 +76,6 @@ var/global/const/Callback = /datum/callback
 		var/list/params = list(target.target, target.callable)
 		if (LAZYLEN(target.params))
 			params += target.params
-		if (length(args) > 1)
-			params += args.Copy(2)
-		return invoke(arglist(params))
-	else
-		var/list/params
-		if (length(args) > 2)
-			params = args.Copy(3)
-		return call(target, callable)(arglist(params))
-
-
-/proc/invoke_async(datum/callback/target, callable, ...)
-	set waitfor = FALSE
-	if (target == GLOBAL_PROC)
-		var/list/params
-		if (length(args) > 2)
-			params = args.Copy(3)
-		return call(callable)(arglist(params))
-	else if (QDELETED(target))
-		return
-	else if (istype(target))
-		var/list/params = list(target.target, target.callable) + target.params
 		if (length(args) > 1)
 			params += args.Copy(2)
 		return invoke(arglist(params))

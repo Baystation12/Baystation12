@@ -54,7 +54,7 @@ SUBSYSTEM_DEF(timer)
 			return
 		target = timer.callback.target
 		if (target == GLOBAL_PROC || !QDELETED(target))
-			invoke_async(timer.callback)
+			INVOKE_ASYNC(target, timer.callback.callable, arglist(timer.callback.params))
 			if (timer.flags & TIMER_LOOP)
 				_addtimer(timer, subsystem = src)
 		else if (timer.hash)
