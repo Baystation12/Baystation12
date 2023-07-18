@@ -36,7 +36,7 @@
 	return ..()
 
 
-/mob/living/proc/general_health_adjustment(damage, damage_type, damage_flags = EMPTY_BITFIELD)
+/mob/living/proc/general_health_adjustment(damage, damage_type, damage_flags = EMPTY_BITFIELD, def_zone, obj/item/used_weapon = null)
 	var/prior_death_state = health_dead()
 	// Convert damage types to types recognized by legacy mob health
 	switch (damage_type)
@@ -57,7 +57,7 @@
 		if (DAMAGE_BRAIN)
 			adjustBrainLoss(damage)
 		else
-			apply_damage(damage, damage_type, damage_flags = damage_flags, silent = TRUE)
+			apply_damage(damage, damage_type, def_zone, damage_flags, used_weapon, silent = TRUE)
 	return prior_death_state != health_dead()
 
 
