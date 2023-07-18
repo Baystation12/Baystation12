@@ -6,7 +6,9 @@
 	config_path = "config/sierra_config.txt"
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 
-	welcome_sound = list('sound/AI/welcome.ogg', 'sound/AI/welcome_alt.ogg')
+	// Authored by CuddleAndTea
+	// https://clips.twitch.tv/MildIgnorantJayGivePLZ-CvZlfeclHBx4Ye1l
+	welcome_sound = 'maps/sierra/sound/welcome.ogg'
 
 	load_legacy_saves = TRUE
 

@@ -38,42 +38,42 @@
 	// TRACKS //
 
 /singleton/audio/track/downtown
-	source = 'sound/music/lobby/Gneiss-Downtown.ogg'
+	source = 'maps/sierra/sound/music/lobby/Gneiss-Downtown.ogg'
 	author = "Duke Gneiss"
 	title = "Downtown"
 	license = /singleton/license/cc_by_nc_sa_3_0
 	url = "https://www.youtube.com/watch?v=x9FdMJJYqmU"
 
 /singleton/audio/track/metropolis
-	source = 'sound/music/lobby/Gneiss-Metropolis.ogg'
+	source = 'maps/sierra/sound/music/lobby/Gneiss-Metropolis.ogg'
 	author = "Duke Gneiss"
 	title = "Metropolis"
 	license = /singleton/license/cc_by_nc_sa_3_0
 	url = "https://soundcloud.com/dukegneiss/metropolis"
 
 /singleton/audio/track/bluespace
-	source = 'sound/music/lobby/Gneiss-Bluespace.ogg'
+	source = 'maps/sierra/sound/music/lobby/Gneiss-Bluespace.ogg'
 	author = "Duke Gneiss"
 	title = "Bluespace"
 	license = /singleton/license/cc_by_nc_sa_3_0
 	url = "https://soundcloud.com/dukegneiss/bluespace"
 
 /singleton/audio/track/dasmalefitz
-	source = 'sound/music/lobby/faunts-das_malefitz.ogg'
+	source = 'maps/sierra/sound/music/lobby/faunts-das_malefitz.ogg'
 	author = "Faunts"
 	title = "Das Malefitz"
 	license = /singleton/license/cc_by_nc_sa_3_0
 	url = "https://fauntsmusic.bandcamp.com/track/das-malefitz"
 
 /singleton/audio/track/welcome_to_lunar_industries
-	source = 'sound/music/lobby/faunts-das_malefitz.ogg'
+	source = 'maps/sierra/sound/music/lobby/Welcome_to_Lunar_Industries.ogg'
 	author = "Clint Mansell - Moon OST #1"
 	title = "Welcome To Lunar Industries"
 	license = /singleton/license/cc_by_nc_sa_3_0
 	url = "https://soundcloud.com/moe-abdelkader/clint-mansell-moon-ost-1-welcome-to-lunar-industries"
 
 /singleton/audio/track/space_asshole
-	source = 'sound/music/lobby/space_asshole.ogg'
+	source = 'maps/sierra/sound/music/lobby/space_asshole.ogg'
 	title = "Space Asshole"
 	author = "Chris Remo"
 	license = /singleton/license/cc_by_4_0
