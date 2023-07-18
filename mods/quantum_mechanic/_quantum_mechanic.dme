@@ -1,0 +1,7 @@
+#ifndef MODPACK_QUANTUM_MECHANIC
+#define MODPACK_QUANTUM_MECHANIC
+
+#include "_quantum_mechanic.dm"
+#include "quantum_mechanic.dm"
+
+#endif

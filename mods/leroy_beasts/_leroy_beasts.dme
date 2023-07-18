@@ -1,0 +1,7 @@
+#ifndef MODPACK_LEROY_BEASTS
+#define MODPACK_LEROY_BEASTS
+
+#include "_leroy_beasts.dm"
+#include "beasts.dm"
+
+#endif

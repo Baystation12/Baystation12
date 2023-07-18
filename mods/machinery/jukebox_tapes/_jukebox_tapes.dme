@@ -1,0 +1,9 @@
+#ifndef MODPACK_JUKEBOX_TAPES
+#define MODPACK_JUKEBOX_TAPES
+
+#include "_jukebox_tapes.dm"
+
+#include "audio\jukebox.dm"
+#include "machinery\jukebox.dm"
+
+#endif

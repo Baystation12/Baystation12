@@ -1,0 +1,13 @@
+#ifndef MODPACK_MAP_LIBERIA
+#define MODPACK_MAP_LIBERIA
+
+#include "_map_liberia.dm"
+
+#include "liberia.dm"
+
+#include "liberia_areas.dm"
+#include "liberia_jobs.dm"
+#include "liberia_shuttles.dm"
+#include "liberia_navpoints.dm"
+
+#endif
