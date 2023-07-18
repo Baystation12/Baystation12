@@ -181,8 +181,16 @@ SUBSYSTEM_DEF(machines)
 				machine.is_processing = null
 			processing -= machine
 			continue
-		if (machine.ProcessAll(wait) == PROCESS_KILL)
-			processing -= machine
+
+		if(machine.processing_flags & MACHINERY_PROCESS_COMPONENTS)
+			for(var/thing in machine.processing_parts)
+				var/obj/item/stock_parts/part = thing
+				if(part.machine_process(machine) == PROCESS_KILL)
+					part.stop_processing()
+
+		if((machine.processing_flags & MACHINERY_PROCESS_SELF) && machine.Process(wait) == PROCESS_KILL)
+			STOP_PROCESSING_MACHINE(machine, MACHINERY_PROCESS_SELF)
+
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
