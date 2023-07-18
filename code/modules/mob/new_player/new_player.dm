@@ -413,6 +413,10 @@
 	new_character.regenerate_icons()
 
 	new_character.key = key		//Manually transfer the key to log them in
+
+	new_character.overlay_fullscreen("init_blackout", /obj/screen/fullscreen/blackout/above_hud)
+	new_character.clear_fullscreen("init_blackout", 30)
+
 	return new_character
 
 /mob/new_player/proc/ViewManifest()

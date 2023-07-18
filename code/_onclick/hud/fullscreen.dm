@@ -95,6 +95,13 @@
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
 	layer = BLIND_LAYER
 
+/obj/screen/fullscreen/blackout/above_hud
+	icon = 'icons/mob/screen1.dmi'
+	icon_state = "black"
+	screen_loc = "WEST,SOUTH to EAST,NORTH"
+	plane = HUD_PLANE
+	layer = HUD_ABOVE_HUD_LAYER
+
 /obj/screen/fullscreen/impaired
 	icon_state = "impairedoverlay"
 	layer = IMPAIRED_LAYER
