@@ -190,31 +190,34 @@
 
 	Fire(A,user,params) //Otherwise, fire normally.
 
-/obj/item/gun/attack(atom/A, mob/living/user, def_zone)
-	var/suicide
-	if (user == A)
+
+/obj/item/gun/resolve_attackby(atom/atom, mob/living/user, click_params)
+	var/suicide = FALSE
+	if (user == atom)
 		suicide = TRUE
-		if (user.zone_sel.selecting == BP_MOUTH && (!user.aiming || !user.aiming.active))
+		if (user.zone_sel.selecting == BP_MOUTH && (!user.aiming?.active))
 			user.toggle_gun_mode()
-	if (user.aiming && user.aiming.active) //if aim mode, don't pistol whip - even on harm intent
-		if (user.aiming.aiming_at != A)
+	if (user.aiming?.active) //if aim mode, don't pistol whip - even on harm intent
+		if (user.aiming.aiming_at != atom)
 			var/checkperm
 			if (suicide)
-				if (!(user.aiming.target_permissions & TARGET_CAN_CLICK))
+				if (!GET_FLAGS(user.aiming.target_permissions, TARGET_CAN_CLICK))
 					user.aiming.toggle_permission(TARGET_CAN_CLICK, TRUE)
 					checkperm = TRUE
-			PreFire(A, user)
+			PreFire(atom, user)
 			if (checkperm)
 				addtimer(new Callback(user.aiming, /obj/aiming_overlay/proc/toggle_permission, TARGET_CAN_CLICK, TRUE), 1)
 		else
 			if (suicide && user.zone_sel.selecting == BP_MOUTH && istype(user, /mob/living/carbon/human))
 				handle_suicide(user)
 			else
-				Fire(A, user, pointblank=1)
-	else if (user.a_intent == I_HURT) //point blank shooting
-		Fire(A, user, pointblank=1)
-	else
-		return ..() //Pistolwhippin'
+				Fire(atom, user, pointblank = TRUE)
+		return TRUE
+	if (user.a_intent == I_HURT) //point blank shooting
+		Fire(atom, user, pointblank = TRUE)
+		return TRUE
+	return ..()
+
 
 /obj/item/gun/dropped(mob/living/user)
 	check_accidents(user)
