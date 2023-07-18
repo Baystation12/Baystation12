@@ -8,3 +8,4 @@
 	name = "suspenders"
 	desc = "They suspend the illusion of the mime's play."
 	icon_state = "suspenders_color"
+	polychromic = TRUE

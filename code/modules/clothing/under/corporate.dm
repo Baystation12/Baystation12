@@ -75,7 +75,7 @@
 	icon_state = "suit"
 	item_state = "bl_suit"
 	worn_state = "suit"
-	accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket, /obj/item/clothing/accessory/corptie)
+	accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket, /obj/item/clothing/accessory/tie/corptie)
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	gender_icons = 1
 	sprite_sheets = list(
@@ -124,7 +124,7 @@
 	desc = "A set of NanoTrasen-issued suit pants and shirt that particularly enthusiastic company executives tend to wear."
 	icon_state = "suit_nt"
 	worn_state = "suit_nt"
-	accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket/nanotrasen, /obj/item/clothing/accessory/corptie/nanotrasen)
+	accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket/nanotrasen, /obj/item/clothing/accessory/tie/corptie/nanotrasen)
 
 //Heph. Industries
 /obj/item/clothing/under/rank/guard/heph
@@ -167,7 +167,7 @@
 	desc = "A set of Hephaestus Industries-issued suit pants and shirt that particularly enthusiastic company executives tend to wear."
 	icon_state = "suit_heph"
 	worn_state = "suit_heph"
-	accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket/heph, /obj/item/clothing/accessory/corptie/heph)
+	accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket/heph, /obj/item/clothing/accessory/tie/corptie/heph)
 
 //Zeng-Hu
 /obj/item/clothing/under/rank/scientist/zeng
@@ -194,7 +194,7 @@
 	desc = "A set of Zeng-Hu Pharmaceuticals-issued suit pants and shirt that particularly enthusiastic company executives tend to wear."
 	icon_state = "suit_zeng"
 	worn_state = "suit_zeng"
-	accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket/zeng, /obj/item/clothing/accessory/corptie/zeng)
+	accessories = list(/obj/item/clothing/accessory/toggleable/corpjacket/zeng, /obj/item/clothing/accessory/tie/corptie/zeng)
 
 //Bishop
 /obj/item/clothing/under/rank/roboticist/bishop

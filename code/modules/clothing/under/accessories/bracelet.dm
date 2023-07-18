@@ -3,3 +3,4 @@
 	desc = "A simple bracelet with a clasp."
 	icon_state = "bracelet"
 	body_location = HANDS
+	polychromic = TRUE

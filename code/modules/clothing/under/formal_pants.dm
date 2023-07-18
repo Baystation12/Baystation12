@@ -10,26 +10,31 @@
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_pants_unathi.dmi',
 		)
+	polychromic = TRUE
 
 /obj/item/clothing/under/formal_pants/red
 	name = "red pants"
 	desc = "Bright red pants. Overflowing with personality."
 	color = "#7f0000"
+	polychromic = FALSE
 
 /obj/item/clothing/under/formal_pants/black
 	name = "black pants"
 	desc = "These pants are dark, like your soul."
 	color = "#1f1f1f"
+	polychromic = FALSE
 
 /obj/item/clothing/under/formal_pants/tan
 	name = "tan pants"
 	desc = "Some tan pants. You look like a white collar worker with these on."
 	color = "#75634f"
+	polychromic = FALSE
 
 /obj/item/clothing/under/formal_pants/khaki
 	name = "khaki pants"
 	desc = "A pair of dust beige khaki pants."
 	color = "#75634f"
+	polychromic = FALSE
 
 //Baggy Pants//
 
@@ -37,23 +42,28 @@
 	name = "baggy pants"
 	desc = "Plain baggy pants."
 	icon_state = "baggy_pants"
+	polychromic = TRUE
 
 /obj/item/clothing/under/formal_pants/baggy/red
 	name = "baggy red pants"
 	desc = "Bright red pants. Overflowing with personality."
 	color = "#7f0000"
+	polychromic = FALSE
 
 /obj/item/clothing/under/formal_pants/baggy/black
 	name = "baggy black pants"
 	desc = "These pants are dark, like your soul."
 	color = "#262626"
+	polychromic = FALSE
 
 /obj/item/clothing/under/formal_pants/baggy/tan
 	name = "baggy tan pants"
 	desc = "Some tan pants. You look like a white collar worker with these on."
 	color = "#75634f"
+	polychromic = FALSE
 
 /obj/item/clothing/under/formal_pants/baggy/khaki
 	name = "baggy khaki pants"
 	desc = "A pair of dust beige khaki pants."
 	color = "#75634f"
+	polychromic = FALSE

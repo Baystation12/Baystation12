@@ -61,10 +61,12 @@
 	name = "flats"
 	desc = "Sleek flats."
 	icon_state = "flatswhite"
+	polychromic = TRUE
 
 /obj/item/clothing/shoes/flats/black
 	name = "black flats"
 	color = COLOR_GRAY15
+	polychromic = FALSE
 
 /obj/item/clothing/shoes/hightops
 	name = "white high tops"

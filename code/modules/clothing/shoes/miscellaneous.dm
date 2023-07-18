@@ -197,6 +197,7 @@
 	name = "athletic shoes"
 	desc = "A pair of sleek atheletic shoes. Made by and for the sporty types."
 	icon_state = "sportshoe"
+	polychromic = TRUE
 
 /obj/item/clothing/shoes/laceup/sneakies
 	desc = "The height of fashion, and they're pre-polished. Upon further inspection, the soles appear to be on backwards. They look uncomfortable."
@@ -209,16 +210,19 @@
 	icon_state = "heels"
 	desc = "A pair of colourable high heels."
 	can_add_cuffs = FALSE
+	polychromic = TRUE
 
 /obj/item/clothing/shoes/heels/black
 	name = "black high heels"
 	desc = "A pair of black high heels."
 	color = COLOR_GRAY15
+	polychromic = FALSE
 
 /obj/item/clothing/shoes/heels/red
 	name = "red high heels"
 	desc = "A pair of red high heels."
 	color = COLOR_RED
+	polychromic = FALSE
 
 /obj/item/clothing/shoes/foamclog
 	name = "foam clogs"

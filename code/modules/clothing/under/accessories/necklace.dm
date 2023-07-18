@@ -3,3 +3,4 @@
 	desc = "A simple necklace."
 	icon_state = "necklace"
 	slot_flags = SLOT_MASK | SLOT_TIE
+	polychromic = TRUE

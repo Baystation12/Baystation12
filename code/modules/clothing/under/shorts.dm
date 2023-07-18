@@ -10,6 +10,7 @@
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_pants_unathi.dmi',
 		)
+	polychromic = TRUE
 
 /obj/item/clothing/under/shorts/red
 	name = "red athletic shorts"
@@ -36,6 +37,7 @@
 	desc = "Some jeans! Just in short form!"
 	icon_state = "jeans_shorts"
 	worn_state = "jeans_shorts"
+	polychromic = FALSE
 
 /obj/item/clothing/under/shorts/jeans/female
 	name = "jeans short shorts"
@@ -97,6 +99,7 @@
 	desc = "For that island getaway. It's five o'clock somewhere, right?"
 	icon_state = "tanpants_shorts"
 	worn_state = "tanpants_shorts"
+	polychromic = FALSE
 
 /obj/item/clothing/under/shorts/khaki/female
 	name = "khaki short shorts"

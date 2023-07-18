@@ -31,6 +31,7 @@
 	icon_state = "bow"
 	name = "hair bow"
 	desc = "A ribbon tied into a bow with a clip on the back to attach to hair."
+	polychromic = TRUE
 
 /obj/item/clothing/head/powdered_wig
 	name = "powdered wig"
@@ -130,6 +131,7 @@
 		slot_r_hand_str = "det_hat",
 		)
 	siemens_coefficient = 0.9
+	polychromic = TRUE
 
 
 /obj/item/clothing/head/mariner
@@ -137,6 +139,7 @@
 	desc = "A cap loved by farmers, sailors and rabblerousers in the whole galaxy."
 	icon_state = "mariner_white"
 	siemens_coefficient = 0.9
+	polychromic = TRUE
 
 /obj/item/clothing/head/pirate
 	name = "pirate hat"
@@ -279,12 +282,14 @@
 	icon_state = "hijab"
 	body_parts_covered = 0
 	flags_inv = BLOCKHAIR
+	polychromic = TRUE
 
 /obj/item/clothing/head/kippa
 	name = "kippa"
 	desc = "A small, brimless cap."
 	icon_state = "kippa"
 	body_parts_covered = 0
+	polychromic = TRUE
 
 /obj/item/clothing/head/turban
 	name = "turban"
@@ -292,6 +297,7 @@
 	icon_state = "turban"
 	body_parts_covered = 0
 	flags_inv = BLOCKHEADHAIR //Shows beards!
+	polychromic = TRUE
 
 /obj/item/clothing/head/cowboy_hat
 	name = "cowboy hat"
@@ -306,6 +312,7 @@
 	icon_state = "taqiyah"
 	item_state = "taqiyah"
 	body_parts_covered = 0
+	polychromic = TRUE
 
 /obj/item/clothing/head/rastacap
 	name = "rastacap"
@@ -338,6 +345,7 @@
 	icon_state = "beanie"
 	item_state = "beanie"
 	body_parts_covered = 0
+	polychromic = TRUE
 
 /obj/item/clothing/head/helmet/facecover
 	name = "face cover"

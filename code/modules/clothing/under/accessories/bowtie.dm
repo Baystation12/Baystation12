@@ -36,6 +36,7 @@
 	name = "bowtie"
 	desc = "A neosilk hand-tied bowtie."
 	icon_state = "bowtie"
+	polychromic = TRUE
 
 
 /obj/item/clothing/accessory/bowtie/ugly

@@ -11,6 +11,7 @@
 	darkness_view = -1
 	toggleable = TRUE
 	activation_sound = null
+	polychromic = TRUE
 
 /obj/item/clothing/glasses/blindfold/Initialize()
 	. = ..()
@@ -38,3 +39,4 @@
 	item_flags = null
 	w_class = ITEM_SIZE_TINY
 	toggleable = FALSE
+	polychromic = FALSE

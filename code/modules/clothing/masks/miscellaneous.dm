@@ -232,6 +232,7 @@
 	item_state = "bandana"
 	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL | ITEM_FLAG_WASHER_ALLOWED
 	w_class = ITEM_SIZE_SMALL
+	polychromic = TRUE
 
 /obj/item/clothing/mask/bandana/equipped(mob/user, slot)
 	switch(slot)
@@ -271,21 +272,25 @@
 	icon_state = "bandorange"
 	item_state = "bandorange"
 	desc = "A soft piece of cloth that can be worn on the head or face. This one is orange and yellow."
+	polychromic = FALSE
 
 /obj/item/clothing/mask/bandana/botany
 	name = "botany bandana"
 	icon_state = "bandbotany"
 	item_state = "bandbotany"
 	desc = "A soft piece of cloth that can be worn on the head or face. This one is green and blue."
+	polychromic = FALSE
 
 /obj/item/clothing/mask/bandana/camo
 	name = "camo bandana"
 	icon_state = "bandcamo"
 	item_state = "bandcamo"
 	desc = "A soft piece of cloth that can be worn on the head or face. This one is camo."
+	polychromic = FALSE
 
 /obj/item/clothing/mask/bandana/skull
 	name = "skull bandana"
 	icon_state = "bandskull"
 	item_state = "bandskull"
 	desc = "A soft piece of cloth that can be worn on the head or face. This one is black with a skull on it."
+	polychromic = FALSE

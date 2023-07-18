@@ -5,6 +5,7 @@
 	var/rolled
 	var/tucked
 	var/buttoned
+	polychromic = TRUE
 
 
 /obj/item/clothing/accessory/flannel/on_update_icon()

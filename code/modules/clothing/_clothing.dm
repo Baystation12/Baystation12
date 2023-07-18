@@ -18,6 +18,8 @@
 
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
 
+	/// Should this item be able to change colors/names?
+	var/polychromic = FALSE
 
 /obj/item/clothing/Initialize()
 	. = ..()
@@ -204,6 +206,30 @@
 		for(var/key in damages)
 			to_chat(user, "<li><b>[capitalize(damages[key])]</b> damage to the <b>[key]</b> armor.")
 		return TOPIC_HANDLED
+
+/obj/item/clothing/verb/change_color()
+	set name = "Change Polychromic Clothing"
+	set category = "Object"
+	set desc = "Change the color and name of [src]."
+	set src in usr
+	if (usr.incapacitated())
+		return
+	var/new_color = input(usr, "Pick a new color for \the [src]. Be warned, this can't be changed later!", "Clothing Color", color) as null | color
+	if (!new_color || usr.incapacitated())
+		return
+	var/new_name = sanitize(input(usr, "Enter a new name for \the [src]. Be warned, this can't be changed later!", "Clothing Name", name)  as text|null, MAX_NAME_LEN)
+	if (!new_name || usr.incapacitated())
+		return
+	name = new_name
+	color = new_color
+	update_icon() //Updates icon in inventory
+	usr.regenerate_icons() //Updates visual clothing overlay on mob
+	verbs -= /obj/item/clothing/verb/change_color //Remove the verb - one time only!
+
+/obj/item/clothing/New()
+	if (!polychromic)
+		verbs -= /obj/item/clothing/verb/change_color
+	..()
 
 ///////////////////////////////////////////////////////////////////////
 // Ears: headsets, earmuffs and tiny objects

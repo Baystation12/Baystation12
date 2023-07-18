@@ -50,6 +50,7 @@
 	icon_state = "skirt_short"
 	worn_state = "skirt_short"
 	body_parts_covered = LOWER_TORSO
+	polychromic = TRUE
 
 // dresses
 /obj/item/clothing/under/skirt_c/dress
@@ -58,6 +59,7 @@
 	icon_state = "shortdress"
 	worn_state = "shortdress"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	polychromic = TRUE
 
 /obj/item/clothing/under/skirt_c/dress/long
 	name = "maxi dress"

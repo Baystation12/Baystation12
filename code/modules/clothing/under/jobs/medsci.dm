@@ -142,6 +142,7 @@
 	icon_state = "scrubs"
 	worn_state = "scrubs"
 	gender_icons = 1
+	polychromic = TRUE
 
 /obj/item/clothing/under/rank/medical/scrubs/blue
 	name = "blue scrubs"

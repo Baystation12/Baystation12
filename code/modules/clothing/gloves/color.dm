@@ -2,18 +2,22 @@
 	desc = "A pair of gloves, they don't look special in any way."
 	item_state = "lgloves"
 	icon_state = "white"
+	polychromic = TRUE
 
 /obj/item/clothing/gloves/color/modified
 	item_flags = ITEM_FLAG_PREMODIFIED | ITEM_FLAG_WASHER_ALLOWED
 
 /obj/item/clothing/gloves/color/white
 	color = COLOR_WHITE
+	polychromic = FALSE
 
 /obj/item/clothing/gloves/color/black
 	color = COLOR_BLACK
+	polychromic = FALSE
 
 /obj/item/clothing/gloves/color/white/modified
 	item_flags = ITEM_FLAG_PREMODIFIED | ITEM_FLAG_WASHER_ALLOWED
+	polychromic = FALSE
 
 /obj/item/clothing/gloves/color/evening
 	desc = "A pair of gloves that reach past the elbow. Fancy!"

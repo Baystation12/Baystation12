@@ -2,3 +2,4 @@
 	name = "neckerchief"
 	desc = "A piece of cloth tied around the neck. A favorite of Scouts, Sailors and Partisans everywhere."
 	icon_state = "neckerchief"
+	polychromic = TRUE

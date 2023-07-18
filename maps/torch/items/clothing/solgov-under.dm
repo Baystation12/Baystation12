@@ -244,7 +244,7 @@
 	icon_state = "whiteservice"
 	item_state = "nursesuit"
 	worn_state = "whiteservice"
-	accessories = list(/obj/item/clothing/accessory/navy)
+	accessories = list(/obj/item/clothing/accessory/tie/navy)
 
 /obj/item/clothing/under/solgov/service/fleet/skirt
 	name = "fleet service skirt"
@@ -376,7 +376,7 @@
 /obj/item/clothing/under/rank/internalaffairs/plain/solgov
 	desc = "A plain shirt and pair of pressed black pants."
 	name = "formal outfit"
-	accessories = list(/obj/item/clothing/accessory/blue_clip)
+	accessories = list(/obj/item/clothing/accessory/tie/blue_clip)
 	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/expeditionary/monkey

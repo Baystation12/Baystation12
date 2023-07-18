@@ -10,41 +10,49 @@
 		)
 	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND, ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_RANK)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
+	polychromic = TRUE
 
 /obj/item/clothing/suit/storage/toggle/labcoat/cmo
 	name = "chief medical officer's labcoat"
 	desc = "Bluer than the standard model."
 	icon_state = "labcoat_cmo"
+	polychromic = FALSE
 
 /obj/item/clothing/suit/storage/toggle/labcoat/cmoalt
 	name = "chief medical officer's labcoat"
 	desc = "A labcoat with command blue highlights."
 	icon_state = "labcoat_cmoalt"
+	polychromic = FALSE
 
 /obj/item/clothing/suit/storage/toggle/labcoat/mad
 	name = "The Mad's labcoat"
 	desc = "It makes you look capable of konking someone on the noggin and shooting them into space."
 	icon_state = "labgreen"
+	polychromic = FALSE
 
 /obj/item/clothing/suit/storage/toggle/labcoat/genetics
 	name = "geneticist labcoat"
 	desc = "A suit that protects against minor chemical spills. Has a blue stripe on the shoulder."
 	icon_state = "labcoat_gen"
+	polychromic = FALSE
 
 /obj/item/clothing/suit/storage/toggle/labcoat/chemist
 	name = "pharmacist labcoat"
 	desc = "A suit that protects against minor chemical spills. Has an orange stripe on the shoulder."
 	icon_state = "labcoat_chem"
+	polychromic = FALSE
 
 /obj/item/clothing/suit/storage/toggle/labcoat/virologist
 	name = "virologist labcoat"
 	desc = "A suit that protects against minor chemical spills. Offers slightly more protection against biohazards than the standard model. Has a green stripe on the shoulder."
 	icon_state = "labcoat_vir"
+	polychromic = FALSE
 
 /obj/item/clothing/suit/storage/toggle/labcoat/blue
 	name = "blue-edged labcoat"
 	desc = "A suit that protects against minor chemical spills. This one has blue trim."
 	icon_state = "blue_edge_labcoat"
+	polychromic = FALSE
 
 /obj/item/clothing/suit/storage/toggle/labcoat/coat
 	name = "coat"
@@ -60,16 +68,19 @@
 		bio = ARMOR_BIO_MINOR
 		)
 	species_restricted = list(SPECIES_IPC)
+	polychromic = FALSE
 
 /obj/item/clothing/suit/storage/toggle/labcoat/foundation
 	name = "\improper Foundation labcoat"
 	desc = "A medical labcoat with a Cuchulain Foundation crest stencilled on the back."
 	icon_state = "labcoat_foundation"
+	polychromic = FALSE
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science
 	name = "\improper EXO labcoat"
 	desc = "A coat that protects against minor chemical spills. It has a green stripe on the shoulder and green trim on the sleeves, denoting it as a Expeditionary Corps Organisation labcoat."
 	icon_state = "labcoat_TL"
+	polychromic = FALSE
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/ec
 	name = "\improper EC labcoat"
@@ -122,6 +133,7 @@
 	desc = "A full-body labcoat covered in green and black designs, denoting it as an Expeditionary Corps Organisation management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
 	icon_state = "labcoat_rd"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	polychromic = FALSE
 
 /obj/item/clothing/suit/storage/toggle/labcoat/rd/nanotrasen
 	name = "\improper NT research director's labcoat"

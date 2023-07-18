@@ -91,14 +91,14 @@
 		melee = ARMOR_MELEE_SMALL
 		)
 	siemens_coefficient = 0.9
-	accessories = list(/obj/item/clothing/accessory/blue_clip)
+	accessories = list(/obj/item/clothing/accessory/tie/blue_clip)
 
 /obj/item/clothing/under/det/grey
 	icon_state = "detective2"
 	worn_state = "detective2"
 	gender_icons = 1
 	desc = "A serious-looking tan dress shirt paired with freshly-pressed black slacks."
-	accessories = list(/obj/item/clothing/accessory/red_long)
+	accessories = list(/obj/item/clothing/accessory/tie/red_long)
 
 /obj/item/clothing/under/det/black
 	icon_state = "detective3"
@@ -106,7 +106,7 @@
 	item_state = "sl_suit"
 	gender_icons = 1
 	desc = "An immaculate white dress shirt, paired with a pair of dark grey dress pants, a red tie, and a charcoal vest."
-	accessories = list(/obj/item/clothing/accessory/red_long, /obj/item/clothing/accessory/toggleable/suit_vest)
+	accessories = list(/obj/item/clothing/accessory/tie/red_long, /obj/item/clothing/accessory/toggleable/suit_vest)
 
 /obj/item/clothing/head/det
 	name = "fedora"

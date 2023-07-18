@@ -96,3 +96,4 @@
 	item_icons = list(slot_glasses_str = 'icons/obj/clothing/aviators.dmi')
 	item_state_slots = list(slot_glasses_str = "shutter_onmob")
 	darkness_view = -1
+	polychromic = TRUE

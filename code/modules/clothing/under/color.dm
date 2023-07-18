@@ -16,6 +16,7 @@
 	gender_icons = 1
 	has_sensor = 2
 	sensor_mode = SUIT_SENSOR_TRACKING
+	polychromic = FALSE
 
 /obj/item/clothing/under/color/blackjumpshorts
 	name = "black jumpsuit shorts"
@@ -23,6 +24,7 @@
 	icon_state = "black"
 	item_state = "bl_suit"
 	worn_state = "blackshortsf"
+	polychromic = FALSE
 
 // coloured jumpsuits, male pattern
 
@@ -33,6 +35,7 @@
 	item_state = "jumpsuit"
 	worn_state = "jumpsuit"
 	gender_icons = 1
+	polychromic = TRUE
 
 // legacy colours - these are used somewhere in the game, but aren't available in the loadout
 

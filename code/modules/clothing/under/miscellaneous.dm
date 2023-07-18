@@ -436,6 +436,7 @@
 	icon_state = "shortjumpskirt"
 	item_state = "w_suit"
 	worn_state = "shortjumpskirt"
+	polychromic = TRUE
 
 /obj/item/clothing/under/captainformal
 	name = "captain's formal uniform"
@@ -472,7 +473,7 @@
 	item_state = "bl_suit"
 	worn_state = "charcoal_suit"
 	gender_icons = 1
-	accessories = list(/obj/item/clothing/accessory/navy, /obj/item/clothing/accessory/toggleable/charcoal_jacket)
+	accessories = list(/obj/item/clothing/accessory/tie/navy, /obj/item/clothing/accessory/toggleable/charcoal_jacket)
 
 /obj/item/clothing/under/suit_jacket/navy
 	name = "navy suit"
@@ -481,7 +482,7 @@
 	item_state = "bl_suit"
 	worn_state = "navy_suit"
 	gender_icons = 1
-	accessories = list(/obj/item/clothing/accessory/red, /obj/item/clothing/accessory/toggleable/navy_jacket)
+	accessories = list(/obj/item/clothing/accessory/tie/red, /obj/item/clothing/accessory/toggleable/navy_jacket)
 
 /obj/item/clothing/under/suit_jacket/burgundy
 	name = "burgundy suit"
@@ -490,7 +491,7 @@
 	item_state = "r_suit"
 	worn_state = "burgundy_suit"
 	gender_icons = 1
-	accessories = list(/obj/item/clothing/accessory/black, /obj/item/clothing/accessory/toggleable/burgundy_jacket)
+	accessories = list(/obj/item/clothing/accessory/tie/black, /obj/item/clothing/accessory/toggleable/burgundy_jacket)
 
 /obj/item/clothing/under/suit_jacket/checkered
 	name = "checkered suit"
@@ -499,7 +500,7 @@
 	item_state = "gy_suit"
 	worn_state = "checkered_suit"
 	gender_icons = 1
-	accessories = list(/obj/item/clothing/accessory/black, /obj/item/clothing/accessory/toggleable/checkered_jacket)
+	accessories = list(/obj/item/clothing/accessory/tie/black, /obj/item/clothing/accessory/toggleable/checkered_jacket)
 
 /obj/item/clothing/under/suit_jacket/tan
 	name = "tan suit"
@@ -508,7 +509,7 @@
 	item_state = "lb_suit"
 	worn_state = "tan_suit"
 	gender_icons = 1
-	accessories = list(/obj/item/clothing/accessory/yellow, /obj/item/clothing/accessory/toggleable/tan_jacket)
+	accessories = list(/obj/item/clothing/accessory/tie/yellow, /obj/item/clothing/accessory/toggleable/tan_jacket)
 
 /obj/item/clothing/under/serviceoveralls
 	name = "workman outfit"
@@ -524,6 +525,7 @@
 	item_state = "mai_yang"
 	worn_state = "mai_yang"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	polychromic = TRUE
 
 /obj/item/clothing/under/abaya
 	name = "abaya"
@@ -532,6 +534,7 @@
 	item_state = "abaya"
 	worn_state = "abaya"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	polychromic = TRUE
 
 /obj/item/clothing/under/blazer
 	name = "blue blazer"
@@ -665,6 +668,7 @@
 	name = "sweater"
 	icon_state = "turtleneck"
 	worn_state = "turtleneck"
+	polychromic = TRUE
 
 /obj/item/clothing/under/savage_hunter
 	name = "savage hunter's hides"
@@ -727,3 +731,4 @@
 	icon_state = "kimono"
 	worn_state = "kimono"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	polychromic = TRUE

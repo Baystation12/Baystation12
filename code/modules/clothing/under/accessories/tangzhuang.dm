@@ -3,3 +3,4 @@
 	desc = "A traditional Chinese coat tied together with straight, symmetrical knots."
 	icon_state = "tangzhuang"
 	body_location = UPPER_TORSO | LOWER_TORSO
+	polychromic = TRUE

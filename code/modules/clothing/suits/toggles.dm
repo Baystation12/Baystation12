@@ -171,6 +171,7 @@
 	action_button_name = "Toggle Hood"
 	hoodtype = /obj/item/clothing/head/hoodiehood
 	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
+	polychromic = TRUE
 
 /obj/item/clothing/head/hoodiehood
 	name = "hoodie hood"
@@ -181,3 +182,4 @@
 	cold_protection = HEAD
 	flags_inv = HIDEEARS | BLOCKHAIR
 	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
+	polychromic = TRUE

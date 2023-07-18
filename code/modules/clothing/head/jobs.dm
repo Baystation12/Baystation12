@@ -55,6 +55,7 @@
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs."
 	icon_state = "surgcap"
 	flags_inv = BLOCKHEADHAIR
+	polychromic = TRUE
 
 /obj/item/clothing/head/surgery/purple
 	name = "purple surgical cap"
@@ -187,3 +188,4 @@
 	name = "beret"
 	desc = "A simple, solid color beret. This one has no emblems or insignia on it."
 	icon_state = "beret_white"
+	polychromic = TRUE
