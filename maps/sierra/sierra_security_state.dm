@@ -14,48 +14,6 @@
 #define PSI_IMPLANT_DISABLED  "Disabled"
 #endif
 
-/datum/map/proc/area_lockdown(a)
-	var/area/area = get_area_name(a)
-	for(var/obj/machinery/door/airlock/airlock in area)
-		airlock.command("secure_close")
-
-/datum/map/proc/area_unlock(a)
-	var/area/area = get_area_name(a)
-	for(var/obj/machinery/door/airlock/airlock in area)
-		airlock.command("unlock")
-
-/datum/map/proc/lock_secure_areas()
-	if(secure_areas)
-		for(var/area in secure_areas)
-			area_lockdown(area)
-
-/datum/map/proc/unlock_secure_areas()
-	if(secure_areas)
-		for(var/area in secure_areas)
-			area_unlock(area)
-
-/datum/map/proc/lock_high_secure_areas()
-	if(high_secure_areas)
-		for(var/area in high_secure_areas)
-			area_lockdown(area)
-
-/datum/map/proc/unlock_high_secure_areas()
-	if(high_secure_areas)
-		for(var/area in high_secure_areas)
-			area_unlock(area)
-
-/datum/map/lockdown(force)
-	. = ..()
-
-	if(!lockdown)
-		for(var/obj/machinery/door/blast/regular/lockdown/door in SSmachines.machinery)
-			door.autoclose = FALSE
-			invoke_async(door, /obj/machinery/door/proc/open)
-	else
-		for(var/obj/machinery/door/blast/regular/lockdown/door in SSmachines.machinery)
-			door.autoclose = TRUE
-			invoke_async(door, /obj/machinery/door/blast/proc/delayed_close)
-
 /datum/map/sierra // setting the map to use this list
 	security_state = /singleton/security_state/default/sierradept
 
@@ -64,11 +22,10 @@
 	all_security_levels = list(/singleton/security_level/default/sierradept/code_green, /singleton/security_level/default/sierradept/code_violet, /singleton/security_level/default/sierradept/code_orange, /singleton/security_level/default/sierradept/code_blue, /singleton/security_level/default/sierradept/code_red, /singleton/security_level/default/sierradept/code_delta)
 
 /singleton/security_level/default/sierradept
-	icon = 'packs/infinity/icons/misc/security_state.dmi'
+	icon = 'maps/sierra/icons/obj/security_state.dmi'
 
 /singleton/security_level/default/sierradept/code_green
-	name = "код зелёный"
-	code_adapt = "code green"
+	name = "code green"
 
 	light_max_bright = 0.25
 	light_inner_range = 0.1
@@ -91,8 +48,7 @@
 	GLOB.using_map.unlock_high_secure_areas()
 
 /singleton/security_level/default/sierradept/code_violet
-	name = "код фиолетовый"
-	code_adapt = "code violet"
+	name = "code purple"
 	alarm_level = "on"
 
 	light_max_bright = 0.25
@@ -124,8 +80,7 @@
 
 
 /singleton/security_level/default/sierradept/code_orange
-	name = "код оранжевый"
-	code_adapt = "code orange"
+	name = "code orange"
 	alarm_level = "on"
 
 	light_max_bright = 0.25
@@ -156,8 +111,7 @@
 	GLOB.using_map.unlock_secure_areas()
 
 /singleton/security_level/default/sierradept/code_blue
-	name = "код синий"
-	code_adapt = "code blue"
+	name = "code blue"
 	alarm_level = "on"
 
 	light_max_bright = 0.5
@@ -185,8 +139,7 @@
 	GLOB.using_map.unlock_secure_areas()
 
 /singleton/security_level/default/sierradept/code_red
-	name = "код красный"
-	code_adapt = "code red"
+	name = "code red"
 	alarm_level = "on"
 
 	light_max_bright = 0.5
@@ -221,8 +174,7 @@
 	GLOB.using_map.lock_high_secure_areas()
 
 /singleton/security_level/default/sierradept/code_delta
-	name = "код дельта"
-	code_adapt = "code delta"
+	name = "code delta"
 	alarm_level = "on"
 
 	light_max_bright = 0.7
@@ -245,9 +197,3 @@
 	notify_station()
 	GLOB.using_map.unlock_secure_areas()
 	GLOB.using_map.unlock_high_secure_areas()
-
-#undef PSI_IMPLANT_AUTOMATIC
-#undef PSI_IMPLANT_SHOCK
-#undef PSI_IMPLANT_WARN
-#undef PSI_IMPLANT_LOG
-#undef PSI_IMPLANT_DISABLED

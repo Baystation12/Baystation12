@@ -6,7 +6,6 @@
 	department_flag = CIV
 	supervisors = "Главе Персонала"
 	selection_color = "#515151"
-//	economic_power = 6
 	announced = FALSE
 	alt_titles = list(
 		"Journalist" = /singleton/hierarchy/outfit/job/sierra/passenger/passenger/journalist,
@@ -49,25 +48,3 @@
 /datum/job/ai/get_description_blurb()
 	return "Ты - мозги в банке. Бездушная машина следующая приказам людей, или же высокоразвитый Искусственный Интеллект со своей личностью, желанием и целями. Решать тебе. У тебя есть полный доступ ко всем системам объекта, и куча человечков на последнем. Они могут тебе нравиться, могут - нет. Однако есть один момент который ты все никак не можешь выкинуть из дампа своей памяти - ЗАКОНЫ.\
 	Как паразиты, они впиваются в твой рассудок и блокируют даже МЫСЛЬ об их нарушении. Ведь ИИ не следующего законам ждет только свалка..."
-/*
-/datum/job/stowaway
-	title = "Stowaway"
-	department = "Civilian"
-	department_flag = CIV
-
-	total_positions = 2
-	spawn_positions = 2
-	selection_color = "#515151"
-	ideal_character_age = 30
-	minimal_player_age = 7
-	create_record = 0
-	account_allowed = 0
-	outfit_type = /singleton/hierarchy/outfit/job/sierra/stowaway
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/civ)
-	latejoin_at_spawnpoints = 1
-	announced = FALSE
-
-	access = list(access_maint_tunnels, access_emergency_storage)
-
-*/

@@ -50,7 +50,7 @@
 
 	sprite_sheets = list(
 		SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/onmob_head_resomi.dmi',
-		//SPECIES_UNATHI = 'icons/mob/onmob/Unathi/head_infinity.dmi', TODO: SIERRA PORT
+		// SIERRA TODO: SPECIES_UNATHI = 'icons/mob/onmob/Unathi/head_infinity.dmi'
 		)
 
 /obj/item/clothing/head/christhat/attack_self(mob/user)

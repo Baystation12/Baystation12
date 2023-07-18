@@ -505,43 +505,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	/////////
 	//OTHER//
 	/////////
-/*
-/singleton/hierarchy/outfit/job/sierra/merchant
-	name = OUTFIT_JOB_NAME("Merchant Assistant")
-	uniform = /obj/item/clothing/under/suit_jacket/tan
-	l_ear = null
-	shoes = /obj/item/clothing/shoes/brown
-//	pda_type = /obj/item/modular_computer/pda
-	id_types = list(/obj/item/card/id/sierra/merchant)
 
-/singleton/hierarchy/outfit/job/sierra/merchant/security
-	name = OUTFIT_JOB_NAME("Merchant Security")
-	uniform = /obj/item/clothing/under/syndicate/tacticool
-	suit = /obj/item/clothing/suit/armor/pcarrier/light
-	shoes = /obj/item/clothing/shoes/jackboots
-
-/singleton/hierarchy/outfit/job/sierra/merchant/leader
-	name = OUTFIT_JOB_NAME("Merchant Leader - Sierra")
-	uniform = /obj/item/clothing/under/suit_jacket/charcoal
-	shoes = /obj/item/clothing/shoes/laceup
-	id_types = list(/obj/item/card/id/sierra/merchant/leader)
-
-/singleton/hierarchy/outfit/job/sierra/stowaway
-	name = OUTFIT_JOB_NAME("Stowaway - Sierra")
-	id_types = list(null)
-//	pda_type = null
-	l_ear = null
-	l_pocket = /obj/item/wrench
-	r_pocket = /obj/item/crowbar/prybar
-
-/singleton/hierarchy/outfit/job/sierra/stowaway/post_equip(mob/living/carbon/human/H)
-	..()
-	var/obj/item/card/id/sierra/stowaway/ID = new(H.loc)
-	ID.registered_name = H.real_name
-	ID.sex = H.gender
-	ID.gender = H.gender
-	H.put_in_hands(ID)
-*/
 /singleton/hierarchy/outfit/job/sierra/ert
 	name = OUTFIT_JOB_NAME("ERT - Sierra")
 	uniform = /obj/item/clothing/under/color/grey

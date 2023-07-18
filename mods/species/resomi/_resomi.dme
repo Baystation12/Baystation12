@@ -3,6 +3,8 @@
 
 #include "_resomi.dm"
 
+#include "gear.dm"
+
 // Clothing
 #include "clothing/clothing.dm"
 #include "clothing/glasses.dm"

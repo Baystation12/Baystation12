@@ -41,7 +41,8 @@
 	#include "datums/supplypacks/security.dm"
 	#include "datums/supplypacks/science.dm"
 
-	#include "game/antagonist/languages.dm"
+	#include "game/languages.dm"
+	#include "game/lockdown.dm"
 
 	#include "items/cards_ids.dm"
 	#include "items/documents.dm"
@@ -92,7 +93,6 @@
 
 	#include "structures/closets.dm"
 	#include "structures/other.dm"
-	#include "structures/override.dm"
 	#include "structures/signs.dm"
 
 	#include "structures/closets/_closets_appearances.dm"
@@ -122,11 +122,11 @@
 	#include "loadout/loadout_xeno.dm"
 	#include "loadout/~defines.dm"
 
-	#include "sierra-1.dmm"
-	#include "sierra-2.dmm"
-	#include "sierra-3.dmm"
-	#include "sierra-4.dmm"
-	#include "sierra-5.dmm"
+	#include "z1_sierra_deck3.dmm"
+	#include "z2_sierra_deck2.dmm"
+	#include "z3_sierra_deck1.dmm"
+	#include "z4_admin.dmm"
+	#include "z5_transit.dmm"
 	#include "../away/empty.dmm"
 
 
@@ -152,19 +152,19 @@
 	#include "../event/iccgn_ship/icgnv_hound.dm" // SIERRA TODO: Пофиксить или удалить
 
 	// USED MODS
-	#include "../../mods/species/resomi/_resomi.dme"
-	#include "../../mods/species/tajara/_tajara.dme"
-	#include "../../mods/screentips/_screentips.dme"
-	#include "../../mods/fancy_sofas/_fancy_sofas.dme"
-	#include "../../mods/quantum_mechanic/_quantum_mechanic.dme"
-	#include "../../mods/machinery/atmos_ret_field/_atm_ret_field.dme"
-	#include "../../mods/don_loadout/_don_loadout.dme"
-	#include "../../mods/leroy_beasts/_leroy_beasts.dme"
-	#include "../../mods/maps/liberia/_map_liberia.dme"
-	#include "../../mods/bluespace_kitty/_bluespace_kitty.dme"
-	#include "../../mods/maps/sentinel/_map_sentinel.dme"
-	#include "../../mods/skills/bureaucracy/legalese_language/_legalese.dme"
-	#include "../../mods/maps/farfleet/_map_farfleet.dme"
+	// #include "../../mods/species/resomi/_resomi.dme"
+	// #include "../../mods/species/tajara/_tajara.dme"
+	// #include "../../mods/screentips/_screentips.dme"
+	// #include "../../mods/fancy_sofas/_fancy_sofas.dme"
+	// #include "../../mods/quantum_mechanic/_quantum_mechanic.dme"
+	// #include "../../mods/machinery/atmos_ret_field/_atm_ret_field.dme"
+	// #include "../../mods/don_loadout/_don_loadout.dme"
+	// #include "../../mods/leroy_beasts/_leroy_beasts.dme"
+	// #include "../../mods/maps/liberia/_map_liberia.dme"
+	// #include "../../mods/bluespace_kitty/_bluespace_kitty.dme"
+	// #include "../../mods/maps/sentinel/_map_sentinel.dme"
+	// #include "../../mods/skills/bureaucracy/legalese_language/_legalese.dme"
+	// #include "../../mods/maps/farfleet/_map_farfleet.dme"
 
 	// UNUSED MODS
 	// #include "../../mods/_events/mortar/_mortar.dme"

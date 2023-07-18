@@ -8,8 +8,9 @@
 	w_class = ITEM_SIZE_TINY
 	force = 1
 	throwforce = 0
-	pickup_sound = "plastic_pickup_sound"
-	drop_sound = "plastic_drop_sound"
+	// SIERRA TODO: port to Bay12 drop sounds
+	// pickup_sound = "plastic_pickup_sound"
+	// drop_sound = "plastic_drop_sound"
 
 	matter = list(MATERIAL_PLASTIC = 20, MATERIAL_STEEL = 5, MATERIAL_GLASS= 5)
 

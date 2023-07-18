@@ -75,13 +75,6 @@
 	name = "Second Deck - Laundry Room"
 	icon_state = "Sleep"
 
-/*
-/area/maintenance/abandoned_compartment
-	name = "Second Deck - Abandoned - Bar"
-	turf_initializer = /singleton/turf_initializer/maintenance/heavy
-	icon_state = "cafeteria"
-*/
-
 /area/maintenance/abandoned_hydroponics
 	name = "Second Deck - Abandoned - Hydroponics"
 	icon_state = "hydro"
@@ -89,14 +82,13 @@
 
 /area/maintenance/abandoned_common
 	name = "Second Deck - Abandoned - Actors Room"
-	icon = 'packs/infinity/icons/turf/areas.dmi'
+	icon = 'maps/sierra/icons/turf/areas.dmi'
 	icon_state = "music_room"
 	turf_initializer = /singleton/turf_initializer/maintenance/heavy
 
 /* COMMAND AREAS
  * =============
  */
-
 /area/crew_quarters/heads/cobed
 	name = "Second Deck - Command - Captain's Quarters"
 	sound_env = MEDIUM_SOFTFLOOR
@@ -132,10 +124,10 @@
 	name = "Second Deck - Bridge"
 	icon_state = "bridge"
 	req_access = list(access_bridge)
-	ambience = list('packs/infinity/sound/SS2/ambience/ambbridge.wav')
+	ambience = list('maps/sierra/sound/ambience/bridge.wav')
 
 /area/bridge/nano
-	icon = 'packs/infinity/icons/turf/areas.dmi'
+	icon = 'maps/sierra/icons/turf/areas.dmi'
 	icon_state = "bridge_room"
 
 /area/bridge/meeting_room
@@ -156,7 +148,6 @@
 /* ENGINEERING AREAS
  * =================
  */
-
 /area/engineering/hallway
 	name = "Second Deck - Engineering - Hallway"
 	icon_state = "engineering_workshop"
@@ -241,7 +232,7 @@
 /area/shield/seconddeck
 	name = "Second Deck - Shield Generator"
 
-	// Storage
+// Storage
 /area/storage/tech
 	name = "Second Deck - Engineering - Technical Storage"
 	icon_state = "storage"
@@ -250,11 +241,6 @@
 /* VACANT AREAS
  * ============
  */
-/*
-/area/vacant/mess
-	name = "Second Deck - Abandoned - Officer's Mess"
-	icon_state = "bar"
-*/
 /area/vacant/gambling
 	name = "Second Deck - Gambling Room"
 	icon_state = "restrooms"
@@ -274,7 +260,6 @@
 /* CREW AREAS
  * ==========
  */
-
 /area/hydroponics
 	name = "Second Deck - Service - Hydroponics"
 	icon_state = "hydro"
@@ -304,12 +289,6 @@
 	name = "Second Deck - Living - Sauna"
 	icon_state = "sauna"
 	sound_env = SMALL_ENCLOSED
-/*
-/area/grove/theta // /area/ai_abadoned
-	name = "Second Deck - Grove - Theta"
-	icon_state = "garden"
-	sound_env = LARGE_SOFTFLOOR
-*/
 
 /area/crew_quarters/head
 	name = "Second Deck - Living - Restroom"
@@ -327,17 +306,10 @@
 	icon_state = "game_room_inf"
 	sound_env = SMALL_ENCLOSED
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-/*
-/area/crew_quarters/showers
-	name = "Second Deck - Living - Private Showers"
-	icon_state = "toilet"
-	sound_env = SMALL_ENCLOSED
-*/
+
 /area/crew_quarters/gym
 	name = "Second Deck - Living - Gym"
 	icon_state = "fitness"
-
-
 
 /area/crew_quarters/actor
 	name = "Second Deck - Service - Actor"
@@ -372,7 +344,7 @@
 
 /area/crew_quarters/sleep/cryo
 	name = "Second Deck - Living - Cryogenic Storage"
-	icon = 'packs/infinity/icons/turf/areas.dmi'
+	icon = 'maps/sierra/icons/turf/areas.dmi'
 	icon_state = "cryo"
 
 /area/crew_quarters/sleep/cryo/south
@@ -383,7 +355,6 @@
 	name = "Second Deck - Living - Adherent Maintenence"
 	icon_state = "robotics"
 
-	// CHAPEL AREAS //cut this shit and replace faster
 /area/chapel/main
 	name = "Second Deck - Chapel"
 	icon_state = "chapel"
@@ -404,15 +375,6 @@
 /* MEDBAY AREAS
  * ============
  */
-/*
-/area/medical/virology
-	name = "Second Deck - Abandoned - Virology"
-	req_access = list()
-
-/area/medical/virologyaccess
-	name = "Second Deck - Abandoned - Virology Access"
-	req_access = list()
-*/
 /area/medical/maintenance_equipstorage
 	name = "Second Deck - Infirmary - Lower Storage"
 	icon_state = "medbay4"

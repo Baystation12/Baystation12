@@ -68,7 +68,7 @@
 /obj/item/book/manual/nt_sop
 	name = "NT Standard Operating Procedures"
 	desc = "SOP aboard the NSV Sierra."
-	icon = 'packs/infinity/icons/obj/library.dmi'
+	icon = 'maps/sierra/icons/obj/library.dmi'
 	icon_state = "bookNTsop"
 	author = "Employee Materials"
 	title = "Standard Operating Procedure"
@@ -91,7 +91,7 @@
 /obj/item/book/manual/nt_tc
 	name = "NT Threat Codes"
 	desc = "TC aboard the NSV Sierra."
-	icon = 'packs/infinity/icons/obj/library.dmi'
+	icon = 'maps/sierra/icons/obj/library.dmi'
 	icon_state = "bookNTtc"
 	author = "Ship Rule Materials"
 	title = "Threat Codes"
@@ -146,7 +146,7 @@
 /obj/item/folder/envelope/captain/Initialize()
 	. = ..()
 	var/memo = {"
-	<tt><center><b><font color='red'>СЕКРЕТНО<br>КОДОВОЕ СЛОВО: СИЕРРА</font></b>
+	<tt><center><b><font color='red'>СЕКРЕТНО<br>КОДОВОЕ СЛОВО: СЬЕРРА</font></b>
 	<h3>ЦЕНТРАЛЬНОЕ КОМАНДОВАНИЕ</h3>
 	<img src = ntlogo.png>
 	</center>

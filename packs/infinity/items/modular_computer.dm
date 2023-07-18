@@ -37,11 +37,11 @@
 /obj/item/modular_computer/pda/wrist/on_update_icon()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	icon_state = icon_state_unpowered
-	cut_overlays()
+	overlays.Cut()
 
 	if(os)
 		var/image/_screen_overlay = os.get_screen_overlay()
-		add_overlay(overlay_image(_screen_overlay.icon, _screen_overlay.icon_state, flags = RESET_COLOR))
+		overlays.Add(overlay_image(_screen_overlay.icon, _screen_overlay.icon_state, flags = RESET_COLOR))
 
 	if(enabled)
 		set_light(0.2, 0.1, light_strength, l_color = (bsod || os.updating) ? "#0000ff" : light_color)
@@ -52,7 +52,7 @@
 		var/image/I = image(icon = icon, icon_state = "wc_stripe")
 		I.appearance_flags |= RESET_COLOR
 		I.color = stripe_color
-		add_overlay(I)
+		overlays.Add(I)
 
 	var/mob/living/carbon/human/H = loc
 	if(istype(H) && H.wear_id == src)

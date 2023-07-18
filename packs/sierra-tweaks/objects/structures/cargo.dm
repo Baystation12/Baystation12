@@ -13,7 +13,8 @@
 /obj/structure/cart/Move()
 	. = ..()
 	if(load && !istype(load, /datum/vehicle_dummy_load))
-		load.set_glide_size(src.glide_size)
+		// SIERRA TODO: Wait till SSInput
+		// load.set_glide_size(src.glide_size)
 		load.forceMove(src.loc)
 		var/todir = src.dir
 		if(istype(load, /obj/structure/closet/crate))
@@ -216,10 +217,11 @@
 
 	return TRUE
 
-/obj/structure/cart/get_additional_speed_decrease()
-	. = ..()
-	if (haswheels)
-		return 0.1
+// SIERRA TODO: Port to Bay12
+// /obj/structure/cart/get_additional_speed_decrease()
+// 	. = ..()
+// 	if (haswheels)
+// 		return 0.1
 
 /datum/codex_entry/cargo_cart
 	associated_paths = list(/obj/structure/cart)

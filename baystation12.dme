@@ -232,6 +232,7 @@
 #include "code\controllers\subsystems\initialization\misc.dm"
 #include "code\controllers\subsystems\initialization\misc_early.dm"
 #include "code\controllers\subsystems\initialization\misc_late.dm"
+#include "code\controllers\subsystems\initialization\modpacks.dm"
 #include "code\controllers\subsystems\initialization\persistence.dm"
 #include "code\controllers\subsystems\initialization\robots.dm"
 #include "code\controllers\subsystems\initialization\webhooks.dm"
@@ -3306,5 +3307,7 @@
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
 #include "maps\_maps.dm"
+#include "mods\_modpack.dm"
+#include "mods\global_modpacks.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE

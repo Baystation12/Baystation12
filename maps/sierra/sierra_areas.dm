@@ -11,10 +11,9 @@
 		/area/shuttle/escape_pod/escape_pod3/station,
 		/area/shuttle/escape_pod/escape_pod4/station,
 		/area/shuttle/escape_pod/escape_pod5/station,
-//		/area/shuttle/escape_pod/escape_pod6/station,
+		/area/shuttle/escape_pod/escape_pod6/station,
 		/area/shuttle/escape_pod/escape_pod7/station,
 		/area/shuttle/escape_pod/escape_pod8/station,
-		/area/shuttle/escape_pod/escape_pod9/station,
 		/area/shuttle/transport1/centcom,
 		/area/shuttle/administration/centcom,
 		/area/shuttle/specops/centcom,
@@ -65,7 +64,7 @@
 
 #include "areas/multideck.dm"
 #include "areas/shuttles.dm"
-#include "areas/sierra1.dm"
-#include "areas/sierra2.dm"
-#include "areas/sierra3.dm"
-#include "areas/sierra4.dm"
+#include "areas/z1_sierra_deck3.dm"
+#include "areas/z2_sierra_deck2.dm"
+#include "areas/z3_sierra_deck1.dm"
+#include "areas/z4_admin.dm"

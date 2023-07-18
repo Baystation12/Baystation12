@@ -115,7 +115,7 @@ GLOBAL_LIST_INIT(recomended_holoplants_colors, list(COLOR_PALE_RED_GRAY,COLOR_BL
 	if (QDELETED(src))
 		return
 	interference = TRUE
-	cut_overlays()
+	overlays.Cut()
 	set_light(0, l_outer_range = 0, l_color = plant_color)
 	sleep(3)
 	if(QDELETED(src))

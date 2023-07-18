@@ -11,10 +11,12 @@
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/supply/quartermaster
 	allowed_branches = list(/datum/mil_branch/employee)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_TRAINED,
-	                    SKILL_FINANCE     = SKILL_BASIC,
-	                    SKILL_HAULING     = SKILL_BASIC,
-	                    SKILL_EVA         = SKILL_BASIC)
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_FINANCE     = SKILL_BASIC,
+		SKILL_HAULING     = SKILL_BASIC,
+		SKILL_EVA         = SKILL_BASIC
+	)
 
 	skill_points = 14
 
@@ -27,7 +29,8 @@
 	software_on_spawn = list(/datum/computer_file/program/supply,
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
-	//need_exp_to_play = 2 TODO: SIERRA PORT
+	// SIERRA TODO: need_exp_to_play
+	// need_exp_to_play = 2
 
 /datum/job/qm/get_description_blurb()
 	return " Квартирмейстр, так же известен как КМ, отвечает за работу отдела снабжения (который по другому называют Карго).\
@@ -44,9 +47,11 @@
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/supply/tech
 	allowed_branches = list(/datum/mil_branch/employee, /datum/mil_branch/contractor)
 	allowed_ranks = list(/datum/mil_rank/civ/nt, /datum/mil_rank/civ/contractor)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
-	                    SKILL_FINANCE     = SKILL_BASIC,
-	                    SKILL_HAULING     = SKILL_BASIC)
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_BASIC,
+		SKILL_FINANCE     = SKILL_BASIC,
+		SKILL_HAULING     = SKILL_BASIC
+	)
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm, access_commissary,
 						access_cargo_bot, access_mining_office, access_mailsorting, access_expedition_shuttle, access_guppy, access_hangar)
@@ -77,9 +82,11 @@
 		"Drill Technician",
 		"Shaft Miner",
 		"Salvage Technician")
-	min_skill = list(   SKILL_MECH    = SKILL_BASIC,
-	                    SKILL_HAULING = SKILL_TRAINED,
-	                    SKILL_EVA     = SKILL_BASIC)
+	min_skill = list(
+		SKILL_MECH    = SKILL_BASIC,
+		SKILL_HAULING = SKILL_TRAINED,
+		SKILL_EVA     = SKILL_BASIC
+	)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 
@@ -108,9 +115,11 @@
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/supply/assistant
 	allowed_branches = list(/datum/mil_branch/employee, /datum/mil_branch/civilian, /datum/mil_branch/contractor)
 	allowed_ranks = list(/datum/mil_rank/civ/nt, /datum/mil_rank/civ/contractor, /datum/mil_rank/civ/civ)
-	min_skill = list(	SKILL_BUREAUCRACY = SKILL_BASIC,
-						SKILL_FINANCE     = SKILL_BASIC,
-						SKILL_HAULING     = SKILL_BASIC)
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_BASIC,
+		SKILL_FINANCE     = SKILL_BASIC,
+		SKILL_HAULING     = SKILL_BASIC
+	)
 
 	access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mining_office, access_mailsorting, access_hangar, access_guppy, access_guppy_helm, access_commissary)
 

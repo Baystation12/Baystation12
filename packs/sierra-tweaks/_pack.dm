@@ -18,7 +18,6 @@
 // Mob
 #include "mob\say.dm"
 #include "mob\stat.dm"
-#include "mob\emotes.dm"
 #include "mob\bodyfall_sound.dm"
 
 // NTNet

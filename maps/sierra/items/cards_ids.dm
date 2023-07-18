@@ -200,28 +200,3 @@
 
 /obj/item/card/id/sierra/merchant/leader
 	desc = "An identification card issued to Merchant Leaders, indicating their right to sell and buy goods."
-
-
-//Stowaway
-/*
-/obj/item/card/id/sierra/stowaway
-	desc = "An identification card issued to personnel aboard the NSV Sierra. Looks like the photo fell off this one."
-	job_access_type = /datum/job/stowaway
-	color = "#b4cbd7"
-
-/obj/item/card/id/sierra/stowaway/New()
-	..()
-	var/species = SPECIES_HUMAN
-	if(prob(10))
-		species = pick(SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_IPC)
-	var/datum/species/S = all_species[species]
-	var/decl/cultural_info/culture/C = SSculture.get_culture(S.default_cultural_info[TAG_CULTURE])
-	var/gender = pick(MALE,FEMALE)
-	assignment = "Passenger"
-	registered_name = C.get_random_name(gender)
-	sex = capitalize(gender)
-	age = rand(19,25)
-	fingerprint_hash = md5(registered_name)
-	dna_hash = md5(fingerprint_hash)
-	blood_type = RANDOM_BLOOD_TYPE
-*/

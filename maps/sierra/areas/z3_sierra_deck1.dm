@@ -21,11 +21,7 @@
 /area/maintenance/firstdeck/forestarboard
 	name = "First Deck - Maintenance - Fore-Starboard"
 	icon_state = "fsmaint"
-/*
-/area/maintenance/firstdeck/fore
-	name = "First Deck - Maintenance - Fore"
-	icon_state = "fmaint"
-*/
+
 /area/maintenance/firstdeck/foreport
 	name = "First Deck - Maintenance - Fore-Port"
 	icon_state = "fpmaint"
@@ -57,18 +53,13 @@
 /area/hallway/primary/firstdeck/fore_stairwell
 	name = "First Deck - Stairwell - Fore"
 	icon_state = "hallC2"
-/*
-/area/crew_quarters/safe_room/firstdeck
-	name = "First Deck - Safe Room"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-*/
+
 /area/maintenance/substation/firstdeck
 	name = "First Deck - Substation"
 
 /* COMMAND AREAS
  * =============
  */
-
 /area/crew_quarters/heads/office/hop
 	name = "First Deck - Command - HoP's Office"
 	icon_state = "heads_hop"
@@ -99,13 +90,12 @@
 
 /area/bridge/adjutants
 	name = "First Deck - Adjutants Room"
-	icon = 'packs/infinity/icons/turf/areas.dmi'
+	icon = 'maps/sierra/icons/turf/areas.dmi'
 	icon_state = "bridge_gun"
 
 /* ENGINEERING AREAS
  * =================
  */
-
 /area/engineering/auxpower
 	name = "First Deck - Engineering - Auxiliary Power Storage"
 	icon_state = "engine_smes"
@@ -117,7 +107,7 @@
 	sound_env = SMALL_ENCLOSED
 	req_access = list(access_ai_upload)
 
-	// Solars
+// Solars
 /area/maintenance/solar
 	name = "First Deck - Solar - Port"
 	icon_state = "SolarcontrolP"
@@ -144,14 +134,14 @@
 	name = "First Deck - Solar - Port Array"
 	icon_state = "panelsP"
 
-	// Storage
+// Storage
 /area/storage/bridge
 	name = "First Deck - Bridge - Storage"
 	icon_state = "bridge"
 	sound_env = SMALL_ENCLOSED
 	req_access = list(access_bridge)
 
-	// Tcomm
+// Tcomm
 /area/tcommsat/
 	ambience = list(
 		'sound/ambience/ambisin2.ogg',
@@ -173,28 +163,19 @@
 	name = "First Deck - Telecoms - Storage"
 	icon_state = "tcomsatstore"
 
-	//thusters
-
+// Thusters
 /area/thruster/d1port
 	name = "First Deck - Nacelle - Port "
 
 /area/thruster/d1starboard
 	name = "First Deck - Nacelle - Starboard"
 
-// AI
-/*
-/area/maintenance/battle_data_servers
-	name = "First Deck - Battle Data Servers"
-	req_access = list(access_maint_tunnels)
-
-/area/ai_monitored
-	name = "AI Monitored Area"
-*/
 /area/storage/eva
 	name = "First Deck - EVA"
 	icon_state = "eva"
 	req_access = list(access_eva)
 
+// AI
 /area/turret_protected
 	req_access = list(access_ai_upload)
 	ambience = list(
@@ -219,7 +200,6 @@
 /* RND AREAS
  * =========
  */
-
 /area/rnd/misc_lab
 	name = "First Deck - RND - Miscellaneous Lab"
 	icon_state = "misclab"
@@ -266,12 +246,6 @@
 	name = "First Deck - RND - Robotics Lab"
 	icon_state = "robotics"
 
-/* not found on Sierra
-/area/assembly/robotics_surgery
-	name = "Robotics Operating Theatre"
-	icon_state = "robotics"
-*/
-
 /* CREW AREAS
  * ==========
  */
@@ -289,14 +263,10 @@
 
 /area/crew_quarters/lounge/upper
 	name = "First Deck - Living - Library"
-/*
-/area/crew_quarters/sleep/cryo/first_deck
-	name = "First Deck - Cryogenic Storage"
-*/
-/* SECURITY AREAS
- *
- */
 
+/* SECURITY AREAS
+ * ==============
+ */
 /area/security/sierra/hallway
 	name = "First Deck - Security - Hallway - Fore"
 	sound_env = LARGE_ENCLOSED
@@ -366,7 +336,6 @@
 /* MEDBAY AREAS
  * ============
  */
-
 /area/medical/equipstorage
 	name = "First Deck - Infirmary - Storage"
 	icon_state = "medbay4"
@@ -374,11 +343,7 @@
 /area/hallway/infirmary
 	name = "First Deck - Infirmary - Hallway"
 	icon_state = "medbay"
-/*
-/area/medical/starboard_hallway
-	name = "First Deck - Infirmary - Hallway - Starboard"
-	icon_state = "medbay2"
-*/
+
 /area/medical/infirmreception
 	name = "First Deck - Infirmary - Reception"
 	icon_state = "medbay2"
@@ -387,11 +352,7 @@
 	name = "First Deck - Infirmary - Locker Room"
 	icon_state = "locker"
 	req_access = list(access_medical_equip)
-/*
-/area/medical/subacute
-	name = "First Deck - Infirmary - Sub-Acute Ward"
-	icon_state = "patients"
-*/
+
 /area/medical/mentalhealth
 	name = "First Deck - Infirmary - Mental Health"
 	icon_state = "medbay3"

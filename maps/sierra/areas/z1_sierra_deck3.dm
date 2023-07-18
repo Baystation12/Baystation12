@@ -66,8 +66,7 @@
 /* ENGINEERING AREAS
  * =================
  */
-
-	// Storage
+// Storage
 /area/storage/primary
 	name = "Third Deck - Primary Tool Storage"
 	icon_state = "primarystorage"
@@ -80,16 +79,16 @@
 	name = "Third Deck - Supply - Central Airlock's Canisters"
 	req_access = list(list(access_cargo, access_engine))
 
-	//thusters
+// Thusters
 /area/thruster/d3port
 	name = "Third Deck - Nacelle - Port"
 
 /area/thruster/d3starboard
 	name = "Third Deck - Nacelle - Starboard"
+
 /* VACANT AREAS
  * ============
  */
-
 /area/vacant
 	name = "Vacant Area"
 	icon_state = "construction"
@@ -111,7 +110,6 @@
 /* SUPPLY AREAS
  * ============
  */
-
 /area/quartermaster
 	req_access = list(access_cargo)
 
@@ -180,7 +178,6 @@
 /* CREW AREAS
  * ==========
  */
-
 /area/janitor
 	name = "Third Deck - Service - Custodial Closet"
 	icon_state = "janitor"
@@ -192,7 +189,6 @@
 /* SECURITY AREAS
  *
  */
-
 /area/security/sierra/dockcheck
 	name = "Third Deck - Security - Fore Docks Checkpoint"
 	icon_state = "checkpoint1"

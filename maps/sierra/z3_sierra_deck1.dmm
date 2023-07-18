@@ -1018,32 +1018,32 @@
 /obj/effect/paint_stripe/nt_red,
 /obj/effect/paint/nt_white,
 /turf/simulated/wall/r_titanium,
-/area/shuttle/escape_pod/escape_pod7/station)
+/area/shuttle/escape_pod/escape_pod6/station)
 "ach" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod7,
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
-/area/shuttle/escape_pod/escape_pod7/station)
+/area/shuttle/escape_pod/escape_pod6/station)
 "aci" = (
 /obj/effect/paint_stripe/nt_red,
 /obj/effect/paint/nt_white,
 /turf/simulated/wall/r_titanium,
-/area/shuttle/escape_pod/escape_pod8/station)
+/area/shuttle/escape_pod/escape_pod7/station)
 "acj" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod8,
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
-/area/shuttle/escape_pod/escape_pod8/station)
+/area/shuttle/escape_pod/escape_pod7/station)
 "ack" = (
 /obj/effect/paint_stripe/nt_red,
 /obj/effect/paint/nt_white,
 /turf/simulated/wall/r_titanium,
-/area/shuttle/escape_pod/escape_pod9/station)
+/area/shuttle/escape_pod/escape_pod8/station)
 "acl" = (
 /obj/effect/shuttle_landmark/escape_pod/start/pod9,
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
-/area/shuttle/escape_pod/escape_pod9/station)
+/area/shuttle/escape_pod/escape_pod8/station)
 "acm" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/solar/starboard)
@@ -1319,7 +1319,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/escape_pod/escape_pod7/station)
+/area/shuttle/escape_pod/escape_pod6/station)
 "acV" = (
 /obj/machinery/cryopod{
 	dir = 1
@@ -1331,7 +1331,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/escape_pod/escape_pod8/station)
+/area/shuttle/escape_pod/escape_pod7/station)
 "acW" = (
 /obj/machinery/cryopod{
 	dir = 1
@@ -1343,7 +1343,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/escape_pod/escape_pod9/station)
+/area/shuttle/escape_pod/escape_pod8/station)
 "acX" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -1725,7 +1725,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/shuttle/escape_pod/escape_pod7/station)
+/area/shuttle/escape_pod/escape_pod6/station)
 "adI" = (
 /obj/machinery/status_display{
 	pixel_x = 32
@@ -1737,7 +1737,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/shuttle/escape_pod/escape_pod8/station)
+/area/shuttle/escape_pod/escape_pod7/station)
 "adJ" = (
 /obj/structure/bed/chair/shuttle{
 	dir = 1
@@ -1749,7 +1749,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/shuttle/escape_pod/escape_pod9/station)
+/area/shuttle/escape_pod/escape_pod8/station)
 "adK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
@@ -2219,7 +2219,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/shuttle/escape_pod/escape_pod7/station)
+/area/shuttle/escape_pod/escape_pod6/station)
 "aez" = (
 /obj/item/device/radio/intercom{
 	dir = 8;
@@ -2237,7 +2237,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/shuttle/escape_pod/escape_pod8/station)
+/area/shuttle/escape_pod/escape_pod7/station)
 "aeA" = (
 /obj/item/device/radio/intercom{
 	dir = 8;
@@ -2255,7 +2255,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/shuttle/escape_pod/escape_pod9/station)
+/area/shuttle/escape_pod/escape_pod8/station)
 "aeB" = (
 /obj/structure/table/rack,
 /obj/random/maintenance,
@@ -2605,7 +2605,7 @@
 /obj/effect/paint/red,
 /obj/effect/paint_stripe/red,
 /turf/simulated/wall/r_titanium,
-/area/shuttle/escape_pod/escape_pod7/station)
+/area/shuttle/escape_pod/escape_pod6/station)
 "afo" = (
 /obj/machinery/door/airlock/external/escapepod{
 	id_tag = "escape_pod_7_hatch";
@@ -2613,7 +2613,7 @@
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/escape_pod/escape_pod7/station)
+/area/shuttle/escape_pod/escape_pod6/station)
 "afp" = (
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "burst_s"
@@ -2621,7 +2621,7 @@
 /obj/effect/paint/red,
 /obj/effect/paint_stripe/red,
 /turf/simulated/wall/r_titanium,
-/area/shuttle/escape_pod/escape_pod8/station)
+/area/shuttle/escape_pod/escape_pod7/station)
 "afq" = (
 /obj/machinery/door/airlock/external/escapepod{
 	id_tag = "escape_pod_8_hatch";
@@ -2629,7 +2629,7 @@
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/escape_pod/escape_pod8/station)
+/area/shuttle/escape_pod/escape_pod7/station)
 "afr" = (
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "burst_s"
@@ -2637,7 +2637,7 @@
 /obj/effect/paint/red,
 /obj/effect/paint_stripe/red,
 /turf/simulated/wall/r_titanium,
-/area/shuttle/escape_pod/escape_pod9/station)
+/area/shuttle/escape_pod/escape_pod8/station)
 "afs" = (
 /obj/machinery/door/airlock/external/escapepod{
 	id_tag = "escape_pod_9_hatch";
@@ -2645,7 +2645,7 @@
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/escape_pod/escape_pod9/station)
+/area/shuttle/escape_pod/escape_pod8/station)
 "aft" = (
 /obj/structure/table/rack,
 /obj/random/maintenance,

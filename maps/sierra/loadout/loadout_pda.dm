@@ -41,7 +41,7 @@
 		. = item
 
 
-/* TODO: SIERRA PORT
+/* SIERRA TODO:
 /datum/gear/utility/wrist_computer
 	display_name = "Wrist computer selection"
 	path = /obj/item/modular_computer/pda/wrist

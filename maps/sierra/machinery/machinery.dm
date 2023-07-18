@@ -139,7 +139,7 @@
 		var/kek = user.client.holder
 		if (!istype(kek,/datum/admins))
 			visible_message("[src] beeps, \"DNA check failed! Heads was warned!\"")
-			log_fax("[key_name(user)] found admin fax machine and use it without admin rights!")
+			log_admin("[key_name(user)] found admin fax machine and use it without admin rights!")
 			for(var/client/C in GLOB.admins)
 				if((R_INVESTIGATE) & C.holder.rights)
 					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name(user)] found admin fax machine and use it without admin rights!([admin_jump_link(user, src)]))</span>")

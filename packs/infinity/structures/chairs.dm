@@ -24,32 +24,33 @@
 /obj/structure/bed/chair/office/brown/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
 
-/obj/structure/bed/chair/office/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_RED_CLOTH)
+// SIERRA TODO: port to Bay12 colored clothing
+// /obj/structure/bed/chair/office/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+// 	..(newloc, newmaterial, MATERIAL_RED_CLOTH)
 
-/obj/structure/bed/chair/office/teal/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_TEAL_CLOTH)
+// /obj/structure/bed/chair/office/teal/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+// 	..(newloc, newmaterial, MATERIAL_TEAL_CLOTH)
 
-/obj/structure/bed/chair/office/dark/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_BLACK_CLOTH)
+// /obj/structure/bed/chair/office/dark/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+// 	..(newloc, newmaterial, MATERIAL_BLACK_CLOTH)
 
-/obj/structure/bed/chair/office/green/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_GREEN_CLOTH)
+// /obj/structure/bed/chair/office/green/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+// 	..(newloc, newmaterial, MATERIAL_GREEN_CLOTH)
 
-/obj/structure/bed/chair/office/purple/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_PURPLE_CLOTH)
+// /obj/structure/bed/chair/office/purple/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+// 	..(newloc, newmaterial, MATERIAL_PURPLE_CLOTH)
 
-/obj/structure/bed/chair/office/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_BLUE_CLOTH)
+// /obj/structure/bed/chair/office/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+// 	..(newloc, newmaterial, MATERIAL_BLUE_CLOTH)
 
-/obj/structure/bed/chair/office/beige/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_BEIGE_CLOTH)
+// /obj/structure/bed/chair/office/beige/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+// 	..(newloc, newmaterial, MATERIAL_BEIGE_CLOTH)
 
-/obj/structure/bed/chair/office/lime/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_LIME_CLOTH)
+// /obj/structure/bed/chair/office/lime/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+// 	..(newloc, newmaterial, MATERIAL_LIME_CLOTH)
 
-/obj/structure/bed/chair/office/yellow/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_YELLOW_CLOTH)
+// /obj/structure/bed/chair/office/yellow/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+// 	..(newloc, newmaterial, MATERIAL_YELLOW_CLOTH)
 
 /obj/structure/bed/chair/office/light/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	..(newloc, newmaterial, MATERIAL_CLOTH)
@@ -59,17 +60,19 @@
 /obj/structure/bed/chair/shuttle/hard/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	..(newloc, MATERIAL_STEEL, padding_material)
 
-/obj/structure/bed/chair/shuttle/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, MATERIAL_STEEL, MATERIAL_BLUE_CLOTH)
+// SIERRA TODO: port to Bay12 colored clothing
+// /obj/structure/bed/chair/shuttle/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+// 	..(newloc, MATERIAL_STEEL, MATERIAL_BLUE_CLOTH)
 
-/obj/structure/bed/chair/shuttle/black/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, MATERIAL_STEEL ,MATERIAL_BLACK_CLOTH)
+// /obj/structure/bed/chair/shuttle/black/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+// 	..(newloc, MATERIAL_STEEL ,MATERIAL_BLACK_CLOTH)
 
 /obj/structure/bed/chair/shuttle/white/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	..(newloc, MATERIAL_STEEL, MATERIAL_CLOTH)
 
-/obj/structure/bed/chair/shuttle/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, MATERIAL_STEEL, MATERIAL_RED_CLOTH)
+// SIERRA TODO: port to Bay12 colored clothing
+// /obj/structure/bed/chair/shuttle/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+// 	..(newloc, MATERIAL_STEEL, MATERIAL_RED_CLOTH)
 
-/obj/structure/bed/chair/shuttle/green/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, MATERIAL_STEEL, MATERIAL_GREEN_CLOTH)
+// /obj/structure/bed/chair/shuttle/green/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+// 	..(newloc, MATERIAL_STEEL, MATERIAL_GREEN_CLOTH)

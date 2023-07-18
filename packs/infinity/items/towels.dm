@@ -9,8 +9,9 @@
 	force = 0.3 // Big soft towel is more harmless
 	attack_verb = list("whipped")
 	hitsound = 'sound/weapons/towelwhip.ogg'
-	drop_sound = 'sound/items/drop/cloth.ogg'
-	pickup_sound = 'sound/items/pickup/cloth.ogg'
+	// SIERRA TODO: port to Bay12 drop sounds
+	// drop_sound = 'sound/items/drop/cloth.ogg'
+	// pickup_sound = 'sound/items/pickup/cloth.ogg'
 
 	var/beach_towel = /obj/structure/towel
 

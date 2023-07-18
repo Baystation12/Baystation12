@@ -6,10 +6,12 @@
 
 	minimal_player_age = 14
 	ideal_character_age = 45
+	economic_power = 8
+	skill_points = 26
+
 	total_positions = 2
 	spawn_positions = 2
 	selection_color = "#013d3b"
-	economic_power = 8
 	alt_titles = list(
 		"Xenosurgeon" = /singleton/hierarchy/outfit/job/sierra/crew/medical/senior/xenosurgeon,
 		"Trauma Surgeon" = /singleton/hierarchy/outfit/job/sierra/crew/medical/senior/traumasurgeon
@@ -30,29 +32,22 @@
 		SKILL_CHEMISTRY   = SKILL_BASIC,
 		SKILL_VIROLOGY    = SKILL_BASIC
 	)
-
 	max_skill = list(
 		SKILL_MEDICAL     = SKILL_MAX,
 		SKILL_ANATOMY     = SKILL_MAX
 	)
-	skill_points = 26
-
 	access = list(
 		access_medical, access_morgue, access_virology,
 		access_maint_tunnels, access_emergency_storage, access_crematorium,
 		access_surgery, access_eva, access_external_airlocks,
 		access_medical_equip, access_senmed, access_hangar,
-//		access_chemistry
 	)
-
-
-
 	software_on_spawn = list(
 		/datum/computer_file/program/suit_sensors,
 		/datum/computer_file/program/camera_monitor
 	)
-
-	// TODO: SIERRA PORT need_exp_to_play = 2
+	// SIERRA TODO: need_exp_to_play
+	// need_exp_to_play = 2
 
 /datum/job/senior_doctor/get_description_blurb()
 	return "Хирург - основная медицинская сила корабля. В отличие от парамедика, который обычно заботится о том, чтобы вытащить пострадавших из места происшествия и оказать базовую неотложную помощь на месте,\
@@ -63,11 +58,13 @@
 	supervisors = "Главному Врачу"
 	department = "Медицинский"
 	department_flag = MED
-
 	total_positions = 3
 	spawn_positions = 3
-	economic_power = 7
+
 	ideal_character_age = 40
+	economic_power = 7
+	skill_points = 22
+
 	alt_titles = list(
 		"Paramedic" = /singleton/hierarchy/outfit/job/sierra/crew/medical/doctor/paramedic
 	)
@@ -96,14 +93,10 @@
 		access_eva, access_surgery, access_medical_equip,
 		access_hangar
 	)
-
-
-
 	software_on_spawn = list(
 		/datum/computer_file/program/suit_sensors,
 		/datum/computer_file/program/camera_monitor
 	)
-	skill_points = 22
 
 /datum/job/doctor/get_description_blurb()
 	return "В отличии от хирургов, врач, а также парамедик, занимаются лечением обычных ранений и травм. Обычно они не имеют высшего медицинского образования, но они всё равно являются опорой медбея."
@@ -114,20 +107,26 @@
 	department = "Медицинский"
 	department_flag = MED
 
+	ideal_character_age = 30
+	economic_power = 3
+	skill_points = 18
+
 	total_positions = 2
 	spawn_positions = 2
 	selection_color = "#013d3b"
-	economic_power = 3
-	ideal_character_age = 30
 	alt_titles = list(
 		"Orderly" = /singleton/hierarchy/outfit/job/sierra/crew/medical/doctor/orderly,
 		"Nurse" = /singleton/hierarchy/outfit/job/sierra/crew/medical/doctor/nurse
 	)
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/medical/doctor
 	allowed_branches = list(
-		/datum/mil_branch/employee, /datum/mil_branch/contractor
+		/datum/mil_branch/employee,
+		/datum/mil_branch/contractor
 	)
-	allowed_ranks = list(/datum/mil_rank/civ/nt, /datum/mil_rank/civ/contractor)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/nt,
+		/datum/mil_rank/civ/contractor
+	)
 	min_skill = list(
 		SKILL_EVA = SKILL_BASIC,
 		SKILL_MEDICAL = SKILL_BASIC
@@ -135,13 +134,11 @@
 	max_skill = list(
 		SKILL_MEDICAL = SKILL_MAX
 	)
-	skill_points = 18
 	access = list(
 		access_medical, access_morgue, access_surgery,
 		access_medical_equip, access_maint_tunnels, access_emergency_storage,
 		access_external_airlocks, access_hangar
 	)
-
 	software_on_spawn = list(
 		/datum/computer_file/program/suit_sensors,
 		/datum/computer_file/program/camera_monitor
@@ -155,14 +152,15 @@
 	title = "Chemist"
 	supervisors = "Главному Врачу"
 	department = "Медицинский"
-
 	department_flag = MED
+
+	ideal_character_age = 30
+	economic_power = 5
+	skill_points = 18
 
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#013d3b"
-	economic_power = 5
-	ideal_character_age = 30
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/medical/doctor/chemist
 	allowed_branches = list(/datum/mil_branch/employee, /datum/mil_branch/contractor)
 	allowed_ranks = list(/datum/mil_rank/civ/nt, /datum/mil_rank/civ/contractor)
@@ -174,7 +172,6 @@
 		SKILL_MEDICAL = SKILL_MAX,
 		SKILL_CHEMISTRY = SKILL_MAX
 	)
-	skill_points = 18
 	access = list(
 		access_medical, access_maint_tunnels, access_emergency_storage,
 		access_medical_equip, access_chemistry
@@ -189,13 +186,13 @@
 	title = "Counselor"
 	supervisors = "Главному Врачу"
 	department = "Медицинский"
-
 	department_flag = MED
+
+	ideal_character_age = 40
+	economic_power = 8
 
 	total_positions = 1
 	spawn_positions = 1
-	ideal_character_age = 40
-	economic_power = 8
 	alt_titles = list(
 		"Mentalist" = /singleton/hierarchy/outfit/job/sierra/crew/medical/counselor/mentalist
 	)
@@ -221,7 +218,6 @@
 		access_medical, access_morgue, access_chapel_office,
 		access_crematorium, access_psychiatrist
 	)
-
 	software_on_spawn = list(
 		/datum/computer_file/program/suit_sensors,
 		/datum/computer_file/program/camera_monitor

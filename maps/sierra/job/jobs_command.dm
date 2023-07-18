@@ -4,9 +4,12 @@
 	supervisors = "Центральному Командованию"
 	department_flag = COM
 	head_position = 1
+
 	minimal_player_age = 21
-	economic_power = 20
 	ideal_character_age = 50
+	economic_power = 20
+	skill_points = 25
+
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/command/captain
 	total_positions = 1
 	spawn_positions = 1
@@ -18,25 +21,18 @@
 		/datum/mil_rank/civ/nt
 	)
 	min_skill = list(
-		SKILL_BUREAUCRACY	=	SKILL_TRAINED,
-		SKILL_PILOT			=	SKILL_TRAINED
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_PILOT       = SKILL_TRAINED
 	)
-
-	max_skill = list(
-		SKILL_PILOT			=	SKILL_MAX
-	)
-
-
-	skill_points = 25
-
+	max_skill = list(SKILL_PILOT = SKILL_MAX)
 	software_on_spawn = list(
 		/datum/computer_file/program/comm,
 		/datum/computer_file/program/card_mod,
 		/datum/computer_file/program/camera_monitor,
 		/datum/computer_file/program/reports
 	)
-
-//	need_exp_to_play = 10 TODO: SIERRA PORT
+	// SIERRA TODO: need_exp_to_play
+	// need_exp_to_play = 10
 
 /datum/job/captain/get_description_blurb()
 	return "Капитан ответственен за ИКН Сьерра и всё, что на нем находится.\
@@ -48,9 +44,12 @@
 	supervisors = "Капитану"
 	department = "Командный"
 	department_flag = COM|SRV
+
 	minimal_player_age = 21
-	economic_power = 12
 	ideal_character_age = 45
+	economic_power = 12
+	skill_points = 20
+
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/command/hop
 	allowed_branches = list(
 		/datum/mil_branch/employee
@@ -61,14 +60,9 @@
 	min_skill = list(
 		SKILL_BUREAUCRACY	=	SKILL_TRAINED,
 		SKILL_PILOT			=	SKILL_BASIC
+
 	)
-
-	max_skill = list(
-		SKILL_PILOT			=	SKILL_MAX
-	)
-
-	skill_points = 20
-
+	max_skill = list(SKILL_PILOT = SKILL_MAX)
 	access = list(
 		access_seceva, access_guard, access_security, access_brig, access_armory,
 		access_forensics_lockers, access_heads, access_medical, access_morgue,
@@ -86,9 +80,6 @@
 		access_tox_storage, access_research, access_mining, access_mining_office, access_mining_station,
 		access_xenobiology, access_xenoarch, access_petrov, access_petrov_helm, access_actor
 	)
-
-
-
 	software_on_spawn = list(
 		/datum/computer_file/program/comm,
 		/datum/computer_file/program/card_mod,
@@ -96,20 +87,18 @@
 		/datum/computer_file/program/reports
 	)
 
-
-
-
-
-
 /datum/job/hop
 	title = "Head of Personnel"
 	supervisors = "Капитану"
 	department = "Командный"
 	department_flag = COM
+
 	minimal_player_age = 14
-	economic_power = 14
-	minimum_character_age = list(SPECIES_HUMAN = 35)
 	ideal_character_age = 45
+	economic_power = 14
+	skill_points = 30
+
+	minimum_character_age = list(SPECIES_HUMAN = 35)
 	head_position = 1
 	total_positions = 1
 	spawn_positions = 1
@@ -121,16 +110,18 @@
 	allowed_ranks = list(
 		/datum/mil_rank/civ/nt
 	)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_TRAINED,
-	                    SKILL_COMPUTER    = SKILL_BASIC,
-	                    SKILL_PILOT       = SKILL_BASIC)
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_COMPUTER    = SKILL_BASIC,
+		SKILL_PILOT       = SKILL_BASIC
+	)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
-	skill_points = 30
-
-//	need_exp_to_play = 5   TODO: SIERRA PORT
-//	exp_track_branch = COM TODO: SIERRA PORT
+	// SIERRA TODO: need_exp_to_play
+	// need_exp_to_play = 5
+	// SIERRA TODO: exp_track_branch
+	// exp_track_branch = COM
 
 	access = list(
 		access_seceva, access_guard, access_security, access_brig, access_armory,
@@ -149,11 +140,12 @@
 		access_tox_storage, access_research, access_mining, access_mining_office, access_mining_station,
 		access_xenobiology, access_xenoarch, access_petrov, access_petrov_helm, access_actor
 	)
-
-	software_on_spawn = list(/datum/computer_file/program/comm,
-							 /datum/computer_file/program/card_mod,
-							 /datum/computer_file/program/camera_monitor,
-							 /datum/computer_file/program/reports)
+	software_on_spawn = list(
+		/datum/computer_file/program/comm,
+		/datum/computer_file/program/card_mod,
+		/datum/computer_file/program/camera_monitor,
+		/datum/computer_file/program/reports
+	)
 
 /datum/job/hop/get_description_blurb()
 	return "В роли Главы Персонала, или ГП, как Вас иногда будут звать, Вы обязаны отвечать за то, чтобы все отделы были укомплектованы персоналом и работали ради прибыли своей корпорации.\
@@ -171,9 +163,12 @@
 	total_positions = 1
 	spawn_positions = 1
 	req_admin_notify = 1
-	economic_power = 20
+
 	minimal_player_age = 14
 	ideal_character_age = 60
+	economic_power = 20
+	skill_points = 36
+
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/research/rd
 	allowed_branches = list(
 		/datum/mil_branch/employee
@@ -189,6 +184,7 @@
 		SKILL_ANATOMY		=	SKILL_BASIC,
 		SKILL_DEVICES		=	SKILL_BASIC,
 		SKILL_SCIENCE		=	SKILL_TRAINED
+
 	)
 
 	max_skill = list(
@@ -196,7 +192,6 @@
 		SKILL_DEVICES		=	SKILL_MAX,
 		SKILL_SCIENCE		=	SKILL_MAX
 	)
-	skill_points = 36
 
 	access = list(
 		access_tox, access_tox_storage, access_emergency_storage,
@@ -209,17 +204,16 @@
 		access_guppy, access_hangar, access_petrov, access_petrov_helm,
 		access_guppy_helm, access_explorer, access_el
 	)
-
-
-
 	software_on_spawn = list(
 		/datum/computer_file/program/comm,
 		/datum/computer_file/program/aidiag,
 		/datum/computer_file/program/camera_monitor,
 		/datum/computer_file/program/reports
 	)
-	// TODO: SIERRA PORT need_exp_to_play = 5
-	// TODO: SIERRA PORT exp_track_branch = SCI
+	// SIERRA TODO: need_exp_to_play
+	// need_exp_to_play = 5
+	// SIERRA TODO: exp_track_branch
+	// exp_track_branch = SCI
 
 /datum/job/rd/get_description_blurb()
 	return "Директор Исследований несет ответственность за рабочую деятельность Научно-Исследовательского Отдела на борту объекта,\
@@ -250,6 +244,7 @@
 		SKILL_ANATOMY		=	SKILL_EXPERIENCED,
 		SKILL_CHEMISTRY		=	SKILL_BASIC,
 		SKILL_VIROLOGY		=	SKILL_BASIC
+
 	)
 
 	max_skill = list(
@@ -279,8 +274,10 @@
 		/datum/computer_file/program/reports
 	)
 
-	// TODO: SIERRA PORT need_exp_to_play = 5
-	// TODO: SIERRA PORT exp_track_branch = MED
+	// SIERRA TODO: need_exp_to_play
+	// need_exp_to_play = 5
+	// SIERRA TODO: exp_track_branch
+	// exp_track_branch = MED
 
 /datum/job/cmo/get_description_blurb()
 	return "Главный врач или CMO, является высшим авторитетом, когда речь заходит о сохранении здоровья экипажа.\
@@ -314,6 +311,7 @@
 		SKILL_ELECTRICAL	=	SKILL_TRAINED,
 		SKILL_ATMOS			=	SKILL_TRAINED,
 		SKILL_ENGINES		=	SKILL_EXPERIENCED
+
 	)
 
 	max_skill = list(
@@ -350,8 +348,10 @@
 		/datum/computer_file/program/reports
 	)
 
-	// TODO: SIERRA PORT need_exp_to_play = 5
-	// TODO: SIERRA PORT exp_track_branch = ENG
+	// SIERRA TODO: need_exp_to_play
+	// need_exp_to_play = 5
+	// SIERRA TODO: exp_track_branch
+	// exp_track_branch = ENG
 
 /datum/job/chief_engineer/get_description_blurb()
 	return "Главный инженер - руководитель и администратор инженерного отдела, \
@@ -380,6 +380,7 @@
 		SKILL_COMBAT		=	SKILL_TRAINED,
 		SKILL_WEAPONS		=	SKILL_TRAINED,
 		SKILL_FORENSICS		=	SKILL_BASIC
+
 	)
 
 	max_skill = list(
@@ -408,8 +409,10 @@
 		/datum/computer_file/program/reports
 	)
 
-	// TODO: SIERRA PORT need_exp_to_play = 5
-	// TODO: SIERRA PORT exp_track_branch = SEC
+	// SIERRA TODO: need_exp_to_play
+	// need_exp_to_play = 5
+	// SIERRA TODO: exp_track_branch
+	// exp_track_branch = SEC
 
 /datum/job/hos/get_description_blurb()
 	return "Глава службы безопасности, или ГСБ, является главой правоохранительных органов и главным защитником членов экипажа на борту корабля.\
@@ -455,7 +458,8 @@
 		/datum/computer_file/program/reports
 	)
 
-	// TODO: SIERRA PORT need_exp_to_play = 2
+	// SIERRA TODO: need_exp_to_play
+	// need_exp_to_play = 2
 
 /datum/job/iaa/get_description_blurb()
 	return "Агент Внутренних Дел - уникальная роль для Вас на борту ИКН Сьерра. Он выступает от лица Центрального Командования NanoTrasen на борту корабля,\
@@ -472,9 +476,12 @@
 	spawn_positions = 3
 	supervisors = "Капитану и остальным главам"
 	selection_color = "#2f2f7f"
+
 	minimal_player_age = 18
-	economic_power = 7
 	ideal_character_age = 24
+	economic_power = 7
+	skill_points = 20
+
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/command/adjutant
 	allowed_branches = list(/datum/mil_branch/employee)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
@@ -482,14 +489,7 @@
 		SKILL_BUREAUCRACY	=	SKILL_BASIC,
 		SKILL_PILOT			=	SKILL_TRAINED
 	)
-
-	max_skill = list(
-		SKILL_PILOT			=	SKILL_MAX
-	)
-
-	skill_points = 20
-
-
+	max_skill = list(SKILL_PILOT = SKILL_MAX)
 	access = list(
 		access_sec_doors, access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
 		access_heads, access_bridge, access_janitor, access_kitchen, access_actor, access_cargo,
@@ -497,8 +497,6 @@
 		access_external_airlocks, access_expedition_shuttle, access_eva, access_hangar,
 		access_explorer, access_expedition_shuttle_helm, access_gun, access_bar
 	)
-
-
 
 	software_on_spawn = list(
 		/datum/computer_file/program/comm,

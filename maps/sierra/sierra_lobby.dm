@@ -1,6 +1,4 @@
 /datum/map/sierra
-	lobby_screens = list('packs/infinity/title_screens/infinity-2020.png')
-
 	lobby_tracks = list(
 		// Endless Space - SolusLunes		--,
 		/singleton/audio/track/endless_space,
@@ -34,9 +32,7 @@
 	)
 
 
-
 	// TRACKS //
-
 /singleton/audio/track/downtown
 	source = 'maps/sierra/sound/music/lobby/Gneiss-Downtown.ogg'
 	author = "Duke Gneiss"

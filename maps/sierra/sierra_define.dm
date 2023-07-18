@@ -1,4 +1,3 @@
-
 /datum/map/sierra
 	name = "\improper Sierra"
 	full_name = "\improper NSV Sierra"
@@ -114,12 +113,9 @@
 	)
 
 	high_secure_areas = list(
-	//	"First Deck - Security - Armory",			WikiPedia's
-	//	"First Deck - Security - Armory Lobby",		Lie
-	//	"First Deck - Vault",
-	//	"AI Chamber",
 		"Second Deck - AI Upload",
-		"Second Deck - AI Upload Access")
+		"Second Deck - AI Upload Access"
+	)
 
 	secure_areas = list(
 		"Second Deck - Engine - Supermatter",
@@ -133,7 +129,7 @@
 		"Third Deck - Hangar",
 		"Third Deck - Hangar - Atmospherics Storage",
 		"Third Deck - Water Cistern"
-		)
+	)
 /*
 	lobby_tracks = list(
 		// Absconditus - Zhay Tee		--,

@@ -3,6 +3,8 @@
 
 #include "_tajara.dm"
 
+#include "gears.dm"
+
 // Clothing
 #include "clothing/accessories.dm"
 #include "datum/sprite_accessory.dm"

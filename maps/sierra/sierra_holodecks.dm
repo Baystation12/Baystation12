@@ -39,10 +39,10 @@
 		"meetinghall"      = new/datum/holodeck_program(/area/holodeck/source_meetinghall),
 		"courtroom"        = new/datum/holodeck_program(/area/holodeck/source_courtroom, list('sound/music/traitor.ogg')),
 		"voleyball"        = new/datum/holodeck_program(/area/holodeck/source_volleyball, list('sound/music/THUNDERDOME.ogg')),
-		"cafe"             = new/datum/holodeck_program(/area/holodeck/source_cafe, list('packs/infinity/sound/music/newyear/eminem_lovethewayyoulie.ogg')),
+		"cafe"             = new/datum/holodeck_program(/area/holodeck/source_cafe, list('maps/sierra/sound/music/eminem_lovethewayyoulie.ogg')),
 		"wildlifecarp"     = new/datum/holodeck_program(/area/holodeck/source_wildlife),
 		"paradeground"     = new/datum/holodeck_program(/area/holodeck/source_military),
-		"temple"           = new/datum/holodeck_program(/area/holodeck/source_temple, list('packs/infinity/sound/music/newyear/river-flows-in-you.ogg')),
+		"temple"           = new/datum/holodeck_program(/area/holodeck/source_temple, list('maps/sierra/sound/music/river_flows_in_you.ogg')),
 		"plaza"            = new/datum/holodeck_program(/area/holodeck/source_plaza, list('sound/music/europa/WildEncounters.ogg')),
 		"turnoff"          = new/datum/holodeck_program(/area/holodeck/source_plating)
 	)
