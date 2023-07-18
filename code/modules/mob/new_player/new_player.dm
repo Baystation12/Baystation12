@@ -236,6 +236,12 @@
 
 	SSjobs.assign_role(src, job.title, 1)
 
+	close_spawn_windows()
+	spawning = TRUE
+	GLOB.using_map.fade_titlescreen(client)
+	addtimer(new Callback(src, .proc/latespawn_create_character, job, spawn_turf, spawnpoint), 2 SECONDS)
+
+/mob/new_player/proc/latespawn_create_character(datum/job/job, turf/spawn_turf, datum/spawnpoint/spawnpoint)
 	var/mob/living/character = create_character(spawn_turf)	//creates the human and transfers vars and mind
 	if(!character)
 		return 0

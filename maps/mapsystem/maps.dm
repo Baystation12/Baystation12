@@ -519,6 +519,9 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		// Hide title screen, allowing player to see the map
 		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")
 
+/datum/map/proc/fade_titlescreen(client/C)
+	send_output(C, null, "lobbybrowser:fadeTitlescreen")
+
 /datum/map/proc/roundend_player_status()
 	for(var/mob/Player in GLOB.player_list)
 		if(Player.mind && !isnewplayer(Player))

@@ -29,4 +29,20 @@
 		<img id="bg-image" src='titlescreen.png'>
 	</body>
 
+	<script>
+		var backgroundImage = document.getElementById("bg-image");
+		function fadeTitlescreen() {
+      // 1/0.04 = 25 iterations
+      // 25*50ms = 1250ms = 1.25s
+      var opacity = 1;
+      var fadeInterval = setInterval(function () {
+        opacity -= 0.04;
+        if (opacity <= 0) {
+          opacity = 0;
+          clearInterval(fadeInterval);
+        }
+        backgroundImage.style.opacity = opacity;
+      }, 50);
+    }
+	</script>
 </html>

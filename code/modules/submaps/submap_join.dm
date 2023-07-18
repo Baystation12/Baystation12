@@ -60,6 +60,12 @@
 	joining.faction = name
 	job.current_positions++
 
+	joining.close_spawn_windows()
+	joining.spawning = TRUE
+	GLOB.using_map.fade_titlescreen(joining.client)
+	addtimer(new Callback(src, .proc/join_as_create_character, joining, job, spawn_turf), 2 SECONDS)
+
+/datum/submap/proc/join_as_create_character(mob/new_player/joining, datum/job/submap/job, turf/spawn_turf)
 	var/mob/living/character = joining.create_character(spawn_turf)
 	if(istype(character))
 
