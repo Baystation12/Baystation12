@@ -171,10 +171,10 @@
 	icon_state = "engine"
 	sound_env = LARGE_ENCLOSED
 	area_flags = AREA_FLAG_ION_SHIELDED
-	ambience = list(\
-	'sound/ambience/engineering/engineering1.ogg',\
-	'sound/ambience/engineering/engineering2.ogg',\
-	'sound/ambience/engineering/engineering3.ogg'\
+	ambience = list(
+		'maps/sierra/sound/ambience/engineering1.ogg',
+		'maps/sierra/sound/ambience/engineering2.ogg',
+		'maps/sierra/sound/ambience/engineering3.ogg'
 	)
 	req_access = list(access_engine_equip)
 
@@ -186,10 +186,10 @@
 /area/engineering/engine_monitoring
 	name = "Second Deck - Engine - Monitoring"
 	icon_state = "engine_monitoring"
-	ambience = list(\
-	'sound/ambience/engineering/engineering1.ogg',\
-	'sound/ambience/engineering/engineering2.ogg',\
-	'sound/ambience/engineering/engineering3.ogg'\
+	ambience = list(
+		'maps/sierra/sound/ambience/engineering1.ogg',
+		'maps/sierra/sound/ambience/engineering2.ogg',
+		'maps/sierra/sound/ambience/engineering3.ogg'
 	)
 
 /area/engineering/engine_smes
@@ -212,11 +212,11 @@
 /area/engineering/atmos
 	name = "Second Deck - Engineering - Atmospherics"
 	icon_state = "atmos"
-	ambience = list(\
-	'sound/ambience/engineering/engineering1.ogg',\
-	'sound/ambience/engineering/engineering2.ogg',\
-	'sound/ambience/engineering/engineering3.ogg',\
-	'sound/ambience/engineering/atmospherics1.ogg'\
+	ambience = list(
+		'maps/sierra/sound/ambience/engineering1.ogg',
+		'maps/sierra/sound/ambience/engineering2.ogg',
+		'maps/sierra/sound/ambience/engineering3.ogg',
+		'maps/sierra/sound/ambience/atmospherics1.ogg'
 	)
 	sound_env = LARGE_ENCLOSED
 	req_access = list(access_atmospherics)
@@ -387,11 +387,11 @@
 /area/chapel/main
 	name = "Second Deck - Chapel"
 	icon_state = "chapel"
-	ambience = list(\
-	'sound/ambience/chapel/chapel1.ogg',\
-	'sound/ambience/chapel/chapel2.ogg',\
-	'sound/ambience/chapel/chapel3.ogg',\
-	'sound/ambience/chapel/chapel4.ogg'\
+	ambience = list(
+		'maps/sierra/sound/ambience/chapel1.ogg',
+		'maps/sierra/sound/ambience/chapel2.ogg',
+		'maps/sierra/sound/ambience/chapel3.ogg',
+		'maps/sierra/sound/ambience/chapel4.ogg'
 	)
 	sound_env = LARGE_ENCLOSED
 

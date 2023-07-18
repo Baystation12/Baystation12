@@ -164,13 +164,13 @@
 	icon_state = "hangar"
 	sound_env = LARGE_ENCLOSED
 	req_access = list(access_hangar)
-	ambience = list(\
-	'sound/ambience/hangar/hangar1.ogg',\
-	'sound/ambience/hangar/hangar2.ogg',\
-	'sound/ambience/hangar/hangar3.ogg',\
-	'sound/ambience/hangar/hangar4.ogg',\
-	'sound/ambience/hangar/hangar5.ogg',\
-	'sound/ambience/hangar/hangar6.ogg'\
+	ambience = list(
+		'maps/sierra/sound/ambience/hangar1.ogg',
+		'maps/sierra/sound/ambience/hangar2.ogg',
+		'maps/sierra/sound/ambience/hangar3.ogg',
+		'maps/sierra/sound/ambience/hangar4.ogg',
+		'maps/sierra/sound/ambience/hangar5.ogg',
+		'maps/sierra/sound/ambience/hangar6.ogg'
 	)
 
 /area/quartermaster/hangar_atmos

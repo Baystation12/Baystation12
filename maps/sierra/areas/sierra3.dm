@@ -154,11 +154,11 @@
 	// Tcomm
 /area/tcommsat/
 	ambience = list(
-			'sound/ambience/ambisin2.ogg',
-			'sound/ambience/signal.ogg',
-			'sound/ambience/ambigen10.ogg',
-			'sound/ambience/ai/ambservers.wav'
-		)
+		'sound/ambience/ambisin2.ogg',
+		'sound/ambience/signal.ogg',
+		'sound/ambience/ambigen10.ogg',
+		'maps/sierra/sound/ambience/aiservers.wav'
+	)
 	req_access = list(access_tcomsat)
 
 /area/tcommsat/chamber
@@ -197,14 +197,15 @@
 
 /area/turret_protected
 	req_access = list(access_ai_upload)
-	ambience = list(\
-		'sound/ambience/ai/ambimalf.ogg',\
-		'sound/ambience/ai/ambservers.wav',\
-		'packs/infinity/sound/ambience/ai_port_hum.ogg',\
-		'sound/ambience/ai/ai2.ogg',\
-		'sound/ambience/ai/ai3.ogg'\
-		)
-	forced_ambience = list('sound/ambience/ai/ambxerxes_looped.wav')
+	ambience = list(
+		'maps/sierra/sound/ambience/aimalf.ogg',
+		'maps/sierra/sound/ambience/aiservers.wav',
+		'maps/sierra/sound/ambience/aiporthum.ogg',
+		'maps/sierra/sound/ambience/ai1.ogg',
+		'maps/sierra/sound/ambience/ai2.ogg',
+		'maps/sierra/sound/ambience/ai3.ogg'
+	)
+	forced_ambience = list('maps/sierra/sound/ambience/ambxerxes_looped.wav')
 
 /area/turret_protected/ai
 	name = "AI Chamber"
