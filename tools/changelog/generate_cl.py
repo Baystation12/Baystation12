@@ -50,7 +50,7 @@ if not pr_list.totalCount:
 
 pr = pr_list[0]
 
-pr_body = pr.body
+pr_body = pr.body or ""
 pr_number = pr.number
 pr_author = pr.user.login
 
@@ -64,7 +64,7 @@ except AttributeError:
 
 
 if cl.group(2) is not None:
-    write_cl['author'] = cl.group(2).lstrip()
+    write_cl['author'] = cl.group(2).strip() or pr_author
 else:
     write_cl['author'] = pr_author
 
@@ -89,8 +89,8 @@ if write_cl['changes']:
         cl_contents.seek(0)
 
         #Push the newly generated changelog to the master branch so that it can be compiled
-        repo.create_file(f"html/changelogs/AutoChangeLog-pr-{pr_number}.yml", f"Automatic changelog generation for PR #{pr_number} [ci skip]", content=f'{cl_contents.read()}', branch='dev', committer=InputGitAuthor(git_name, git_email))
+        repo.create_file(f"html/changelogs/AutoChangeLog-sierra-pr-{pr_number}.yml", f"Чейнджлог для PR #{pr_number} [ci skip]", content=f'{cl_contents.read()}', branch='dev-sierra', committer=InputGitAuthor(git_name, git_email))
     print("Done!")
 else:
     print("No CL changes detected!")
-    exit(0) # Change to a '1' if you want the action to count lacking CL changes as a failure
+    exit(1) # Change to a '1' if you want the action to count lacking CL changes as a failure

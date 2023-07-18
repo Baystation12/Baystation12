@@ -16,7 +16,7 @@ permissions:
 
 on:
   pull_request:
-    branches: [ "dev" ]
+    branches: [ "dev-sierra" ]
     paths: [ "tools/**", "nano/**" ]
   schedule:
     - cron: '45 15 * * 4'

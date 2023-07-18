@@ -4,10 +4,8 @@ permissions:
   contents: read
 
 on:
-  push:
-    branches: [ "dev" ]
   pull_request:
-    branches: [ "dev" ]
+    branches: [ "dev-sierra" ]
 env:
   BYOND_MAJOR: "514"
   BYOND_MINOR: "1589"
