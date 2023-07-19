@@ -31,15 +31,14 @@
 /obj/item/clothing/head/hardhat/white
 	icon_state = "hardhat0_white"
 
-/obj/item/clothing/head/hardhat/dblue
+/obj/item/clothing/head/hardhat/blue
 	icon_state = "hardhat0_dblue"
 
-/obj/item/clothing/head/hardhat/EMS
-	name = "\improper EMS helmet"
-	desc = "A polymer helmet worn by EMTs throughout human space to protect their head. This one comes with an attached flashlight and has 'Medic' written on its back in blue lettering."
-	icon_state = "EMS_helmet"
+/obj/item/clothing/head/hardhat/light
+	name = "light damage control helmet"
+	desc = "A lighter polymer helmet commonly used by engineers and first responders throughout human space. It comes with a built-in flashlight and has 'Damage Control' written on its back in yellow lettering."
+	icon_state = "Damage-Control-Helmet-light"
 	light_overlay = "EMS_light"
-	w_class = ITEM_SIZE_NORMAL
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_MINOR,
@@ -48,10 +47,15 @@
 		bio = ARMOR_BIO_MINOR
 	)
 
+/obj/item/clothing/head/hardhat/light/medic
+	name = "\improper EMS helmet"
+	desc = "A polymer helmet worn by EMTs throughout human space to protect their head. This one comes with an attached flashlight and has 'Medic' written on its back in blue lettering."
+	icon_state = "EMS_helmet"
+
 /obj/item/clothing/head/hardhat/firefighter
-	icon_state = "Firefighter-Helmet"
 	name = "firefighter helmet"
 	desc = "A complete, face covering helmet specially designed for firefighting. It is airtight and has a port for internals."
+	icon_state = "Firefighter-Helmet"
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	permeability_coefficient = 0
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
@@ -63,7 +67,8 @@
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
 	flash_protection = FLASH_PROTECTION_MAJOR
 
-/obj/item/clothing/head/hardhat/firefighter/Chief
+/obj/item/clothing/head/hardhat/firefighter/chief
+	name = "chief firefighter helmet"
 	icon_state = "Firefighter-Helmet-Chief"
 
 /obj/item/clothing/head/hardhat/damage_control
@@ -74,34 +79,29 @@
 	flags_inv = HIDEEARS|BLOCKHAIR
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
 
-/obj/item/clothing/head/hardhat/damage_control/Yellow
+/obj/item/clothing/head/hardhat/damage_control/yellow
 	name = "senior damage control helmet"
 	icon_state = "Damage-Control-Helmet-Yellow"
 
-/obj/item/clothing/head/hardhat/damage_control/White
+/obj/item/clothing/head/hardhat/damage_control/white
 	name = "chief damage control helmet"
 	icon_state = "Damage-Control-Helmet-White"
 
-/obj/item/clothing/head/hardhat/damage_control/EMB
+/obj/item/clothing/head/hardhat/damage_control/emergency
 	name = "\improper Emergency Management Bureau helmet"
 	desc = "The helmet currently issued by the emergency management bureau, commonly used by engineers and first responders throughout the human space. Comes with a built-in flashlight."
 	icon_state = "Damage-Control-Helmet-EMB"
 
-/obj/item/clothing/head/hardhat/damage_control/EMB_Ancient
+/obj/item/clothing/head/hardhat/damage_control/emergency_old
 	name = "ancient red EMB helmet"
 	desc = "This helmet used to be issued by the emergency management bureau once upon a time, and is still being used in frontier systems. Comes with a built-in flashlight."
 	icon_state = "EMB-ancient-red"
 	light_overlay = "EMB-ancient_light"
 
-/obj/item/clothing/head/hardhat/damage_control/EMB_Ancient/yellow
+/obj/item/clothing/head/hardhat/damage_control/emergency_old/yellow
 	name = "ancient yellow EMB helmet"
 	icon_state = "EMB-ancient-yellow"
 
-/obj/item/clothing/head/hardhat/damage_control/EMB_Ancient/white
+/obj/item/clothing/head/hardhat/damage_control/emergency_old/white
 	name = "ancient white EMB helmet"
 	icon_state = "EMB-ancient-white"
-
-/obj/item/clothing/head/hardhat/EMS/DC_light
-	name = "light damage control helmet"
-	desc = "A lighter polymer helmet commonly used by engineers and first responders throughout the human space. It comes with a built-in flashlight and has 'Damage Control' written on its back in yellow lettering."
-	icon_state = "Damage-Control-Helmet-light"
