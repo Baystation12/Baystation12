@@ -6,6 +6,8 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light-p"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	refund_amt = 1
+	var/obj/machinery/button_type = /obj/machinery/light_switch
 
 /obj/item/frame/light_switch/windowtint
 	name = "window tint switch frame"
@@ -13,6 +15,7 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light-p"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	button_type = /obj/machinery/button/windowtint
 
 GLOBAL_LIST_INIT(possible_switch_offsets, list(
 		"North" = list(
@@ -58,28 +61,23 @@ GLOBAL_LIST_INIT(possible_switch_offsets, list(
 			break
 	return 1
 
-/obj/item/frame/light_switch/attackby(obj/item/tool as obj, mob/user as mob)	//construction
-	if(isWrench(tool))
-		new /obj/item/stack/material/steel( get_turf(src.loc), 1 )
-		qdel(src)
-	else if(istype(tool, /obj/item/screwdriver) && isturf(user.loc))
-		var/obj/machinery/light_switch/S = new (user.loc)
-		if(position_with_direction(S, user))
-			to_chat(user, "You fasten \the [S] with your [tool].")
-			qdel(src)
-		else
-			qdel(S)
-	else ..()
 
-/obj/item/frame/light_switch/windowtint/attackby(obj/item/tool as obj, mob/user as mob)
-	if(isWrench(tool))
-		new /obj/item/stack/material/steel( get_turf(src.loc), 1 )
-		qdel(src)
-	else if(istype(tool, /obj/item/screwdriver) && isturf(user.loc))
-		var/obj/machinery/button/windowtint/S = new(user.loc)
-		if(position_with_direction(S, user))
-			to_chat(user, "You fasten \the [S] with your [tool].")
-			qdel(src)
+/obj/item/frame/light_switch/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	// Screwdriver - Fasten switch
+	if (isScrewdriver(tool))
+		if (!isturf(loc))
+			USE_FEEDBACK_FAILURE("\The [src] has to be on a turf to be fastened.")
+			return TRUE
+		var/obj/machinery/button = new button_type(loc)
+		if (position_with_direction(button, user))
+			user.visible_message(
+				SPAN_NOTICE("\The [user] fastens \a [button] with \a [tool]."),
+				SPAN_NOTICE("You fasten \the [button] with \the [tool].")
+			)
+			transfer_fingerprints_to(button)
+			qdel_self()
 		else
-			qdel(S)
-	else ..()
+			qdel(button)
+		return TRUE
+
+	return ..()
