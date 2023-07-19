@@ -408,7 +408,7 @@
 
 /obj/structure/closet/attack_ghost(mob/ghost)
 	if(ghost.client && ghost.client.inquisitive_ghost)
-		ghost.examinate(src)
+		examinate(ghost, src)
 		if (!src.opened)
 			to_chat(ghost, "It contains: [english_list(contents)].")
 

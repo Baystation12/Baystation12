@@ -30,7 +30,7 @@
 /obj/item/clothing/accessory/badge/OnTopic(mob/user, list/href_list)
 	if (href_list["look_at_me"])
 		if (istype(user))
-			user.examinate(src)
+			examinate(user, src)
 			return TOPIC_HANDLED
 
 

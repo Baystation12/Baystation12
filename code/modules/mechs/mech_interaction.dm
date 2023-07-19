@@ -68,7 +68,7 @@
 
 	var/modifiers = params2list(params)
 	if(modifiers["shift"])
-		user.examinate(A)
+		examinate(user, A)
 		return
 
 	if(modifiers["ctrl"])
