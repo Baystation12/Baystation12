@@ -322,7 +322,7 @@
 	caliber = CALIBER_RIFLE_MILITARY
 	matter = list(MATERIAL_STEEL = 1800)
 	ammo_type = /obj/item/ammo_casing/rifle/military
-	max_ammo = 15
+	max_ammo = 18
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/mil_rifle/heavy
@@ -339,7 +339,7 @@
 	icon_state = "bullpup_light"
 	labels = list("light")
 	ammo_type = /obj/item/ammo_casing/rifle/military/light
-	max_ammo = 20
+	max_ammo = 14
 
 /obj/item/ammo_magazine/mil_rifle/light/empty
 	initial_ammo = 0
