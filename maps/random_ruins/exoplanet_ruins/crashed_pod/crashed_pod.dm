@@ -6,7 +6,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	description = "A crashed survival pod from a destroyed ship."
 	suffixes = list("crashed_pod/crashed_pod.dmm")
 	spawn_cost = 1.5
-	player_cost = 4
+	player_cost = 2
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_NO_RADS
 	ruin_tags = RUIN_HUMAN|RUIN_WRECK
 	spawn_weight = 0.33

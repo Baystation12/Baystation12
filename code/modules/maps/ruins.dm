@@ -13,7 +13,15 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 
 	var/list/available = list()
 	var/list/selected = list()
-	var/remaining = budget
+	var/ruin_budget = budget
+	var/player_budget = -(GLOB.using_map.min_offmap_players)
+
+	for (var/client/C)
+		++player_budget
+
+	for (var/datum/map_template/ruin/map in SSmapping.map_templates)
+		if (map.loaded && map.player_cost)
+			player_budget -= map.player_cost
 
 	for(var/datum/map_template/ruin/ruin in potentialRuins)
 		if (ruin.id in GLOB.banned_ruin_ids)
@@ -23,9 +31,9 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 	if (!length(available))
 		UNLINT(WARNING("No ruins available - Not generating ruins"))
 
-	while (remaining > 0 && length(available))
+	while (ruin_budget > 0 && length(available))
 		var/datum/map_template/ruin/ruin = pickweight(available)
-		if (ruin.spawn_cost > remaining)
+		if (ruin.spawn_cost > ruin_budget || ruin.player_cost > player_budget)
 			available -= ruin
 			continue
 
@@ -54,18 +62,19 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 
 			load_ruin(choice, ruin)
 			selected += ruin
-			if (ruin.spawn_cost > 0)
-				remaining -= ruin.spawn_cost
+			if (ruin.spawn_cost > 0 || ruin.player_cost > 0)
+				ruin_budget -= ruin.spawn_cost
+				player_budget -= ruin.player_cost
 			if (!(ruin.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
 				GLOB.banned_ruin_ids += ruin.id
 				available -= ruin
 			break
 
-	if (remaining)
+	if (ruin_budget)
 		log_world("Ruin loader had no ruins to pick from with [budget] left to spend.")
 
 	if (length(selected))
-		report_progress("Finished selecting planet ruins ([english_list(selected)]) for [budget - remaining] cost of [budget] budget.")
+		report_progress("Finished selecting planet ruins ([english_list(selected)]) for [budget - ruin_budget] cost of [budget] budget.")
 
 	return selected
 
