@@ -139,6 +139,7 @@
 	. += new/datum/stack_recipe/furniture/table_frame(src)
 	. += new/datum/stack_recipe/shield(src)
 	. += new/datum/stack_recipe/furniture/truss(src)
+	. += new/datum/stack_recipe/woodenstaff(src)
 
 /material/wood/mahogany/generate_recipes(reinforce_material)
 	. = ..()

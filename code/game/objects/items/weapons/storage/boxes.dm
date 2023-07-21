@@ -488,6 +488,15 @@
 	desc = "A box full of headsets."
 	startswith = list(/obj/item/device/radio/headset = 7)
 
+/obj/item/storage/box/large/crutches
+	name = "crutches box"
+	desc = "A box designed to hold a pair of crutches."
+	startswith = list(/obj/item/cane/crutch = 2)
+
+/obj/item/storage/box/large/crutches/Initialize()
+	. = ..()
+	make_exact_fit()
+
 //Spare Armbands
 
 /obj/item/storage/box/armband/engine
