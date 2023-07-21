@@ -195,7 +195,7 @@
 	V.attached_device = S
 
 	S.holder = V
-	S.toggle_secure()
+	S.set_secure(TRUE)
 
 	V.update_icon()
 	return INITIALIZE_HINT_QDEL
