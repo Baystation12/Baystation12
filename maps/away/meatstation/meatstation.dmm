@@ -3563,7 +3563,6 @@
 	dir = 8
 	},
 /obj/item/inflatable_duck,
-/obj/random/single/meatstation/low/wormguard,
 /obj/machinery/light/small/red{
 	dir = 4
 	},
@@ -5320,10 +5319,6 @@
 /turf/simulated/floor,
 /area/meatstation/engineering)
 "mL" = (
-/obj/random/single/meatstation/low/wormguard,
-/turf/simulated/floor,
-/area/meatstation/engineering)
-"mM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -5335,9 +5330,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/random/single/meatstation/low/wormguard,
-/turf/simulated/floor,
-/area/meatstation/engineering)
+/turf/simulated/floor/tiled/dark,
+/area/meatstation/medical)
 "mN" = (
 /obj/structure/table/woodentable/ebony,
 /obj/machinery/light/small/red{
@@ -5895,13 +5889,6 @@
 /obj/effect/floor_decal/corner/green/diagonal,
 /turf/simulated/floor/tiled/monotile,
 /area/meatstation/hydroponics)
-"ot" = (
-/obj/effect/floor_decal/corner/black/border{
-	dir = 1
-	},
-/obj/random/single/meatstation/low/wormguard,
-/turf/simulated/floor/tiled,
-/area/meatstation/centerhallway)
 "ou" = (
 /obj/machinery/portable_atmospherics/powered/pump/filled,
 /turf/simulated/floor/tiled/dark,
@@ -6448,7 +6435,6 @@
 	pixel_x = -23;
 	pixel_y = -3
 	},
-/obj/random/single/meatstation/low/wormguard,
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 8
 	},
@@ -7684,10 +7670,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/medical)
-"sW" = (
-/obj/random/single/meatstation/low/wormguard,
-/turf/space,
-/area/space)
 "sX" = (
 /obj/structure/hygiene/toilet{
 	dir = 8
@@ -23583,7 +23565,7 @@ aa
 fm
 fm
 cK
-sI
+cK
 wf
 fm
 fm
@@ -28258,7 +28240,7 @@ ah
 aV
 gR
 sQ
-tX
+mL
 op
 sT
 cE
@@ -28419,7 +28401,7 @@ ah
 ah
 ah
 ah
-ot
+yb
 bh
 rv
 ah
@@ -31441,7 +31423,7 @@ aa
 as
 ap
 as
-mM
+bz
 ae
 aa
 aa
@@ -31642,7 +31624,7 @@ lY
 aa
 nr
 ae
-mL
+as
 bz
 ae
 aa
@@ -31669,7 +31651,7 @@ ac
 hL
 bI
 qr
-sd
+bD
 kx
 ac
 ww
@@ -33677,7 +33659,7 @@ bQ
 hS
 aa
 aa
-sW
+aa
 bx
 sb
 bC
