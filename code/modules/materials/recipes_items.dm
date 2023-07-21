@@ -344,3 +344,9 @@
 	difficulty = 1
 	time = 5
 
+/datum/stack_recipe/woodenstaff
+	title = "staff"
+	result_type = /obj/item/cane/staff
+	req_amount = 5
+	difficulty = 0
+	time = 25

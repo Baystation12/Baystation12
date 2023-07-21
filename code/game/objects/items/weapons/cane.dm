@@ -10,6 +10,60 @@
 	matter = list(MATERIAL_ALUMINIUM = 50)
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
 	base_parry_chance = 30
+	/// Should it support you while moving with injuries?
+	var/can_support = TRUE
+
+/obj/item/cane/staff
+	name = "wooden staff"
+	desc = "A long, polished staff with a curved hook at the end, suitable for leaning on."
+	icon_state = "woodstaff"
+	item_state = "woodstaff"
+	force = 10.0
+	matter = null
+	w_class = ITEM_SIZE_LARGE
+
+/obj/item/cane/white
+	name = "white guide cane"
+	desc = "A white-and-red guide cane to aid the visually impaired."
+	icon_state = "whitecane"
+	item_state = "whitecane"
+	can_support = FALSE
+
+/obj/item/cane/crutch
+	name = "crutch"
+	desc = "A long stick with a forked crosspiece, used to aid in walking."
+	icon_state = "crutch"
+	item_state = "crutch"
+
+/obj/item/cane/telescopic
+	name = "telescopic cane"
+	desc = "A sturdy, compact cane that can retract into the handle when not in use."
+	icon_state = "telecane"
+	item_state = "telecane"
+	w_class = ITEM_SIZE_SMALL
+	var/extended = FALSE
+
+/obj/item/cane/telescopic/attack_self(mob/user)
+	if(!extended)
+		user.visible_message(SPAN_NOTICE("[user] extends \the [src] with a flick of their wrist."))
+		icon_state = "[initial(icon_state)]_active"
+		item_state = "[initial(item_state)]_active"
+		w_class = ITEM_SIZE_LARGE
+		extended = TRUE
+		can_support = TRUE
+	else
+		user.visible_message(SPAN_NOTICE("[user] retracts \the [src] back into its handle."))
+		icon_state = "[initial(icon_state)]"
+		item_state = "[initial(item_state)]"
+		w_class = initial(w_class)
+		extended = FALSE
+		can_support = FALSE
+
+/obj/item/cane/telescopic/holocane
+	name = "holo-cane"
+	desc = "A high-tech energy cane that projects a hardlight hologram, for the sophisticated scientist."
+	icon_state = "holocane"
+	item_state = "holocane"
 
 /obj/item/cane/concealed
 	var/concealed_blade
