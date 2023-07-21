@@ -1,0 +1,27 @@
+<h3>Stasis Pod</h3>
+{{if !data.power}}
+	<div class="item">
+	<div class="itemLabel">
+		NO POWER
+	</div>
+	{{if data.occupant}}
+		<div class="itemContent">
+			{{:helper.link("Eject occupant", null, {'eject' : 0})}}
+		</div>
+	{{/if}}
+{{else}}
+	{{if data.occupant}}
+		<div class="item">
+			<div class="statusDisplay">
+				{{:data.occupant}}
+			</div>
+			<div class="itemContent">
+				{{:helper.link("Eject occupant", null, {'eject' : 0})}}
+			</div>
+		</div>
+	{{else}}
+		<div class="item">
+			No occupant.
+		</div>
+	{{/if}}
+{{/if}}
