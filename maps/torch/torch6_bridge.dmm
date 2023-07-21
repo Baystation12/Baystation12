@@ -7789,7 +7789,7 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/secure_closet/guncabinet/sidearm/small,
+/obj/structure/closet/secure_closet/guncabinet/sidearm,
 /turf/simulated/floor/tiled/techfloor,
 /area/aquila/storage)
 "tR" = (
@@ -13078,7 +13078,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/closet/secure_closet/guncabinet/sidearm/combined,
+/obj/structure/closet/secure_closet/guncabinet/sidearm,
 /obj/structure/sign/warning/nosmoking_1{
 	dir = 4;
 	pixel_x = -37

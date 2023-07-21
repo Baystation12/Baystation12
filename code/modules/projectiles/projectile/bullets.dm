@@ -157,7 +157,7 @@
 	fire_sound = 'sound/weapons/gunshot/gunshot_4mm.ogg'
 	damage = 23
 	penetrating = 1
-	armor_penetration = 70
+	armor_penetration = 40
 	embed = FALSE
 	distance_falloff = 2
 
@@ -208,7 +208,6 @@
 	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
 	damage = 45
 	armor_penetration = 25
-	penetration_modifier = 1.5
 	penetrating = 1
 	distance_falloff = 1.5
 
@@ -216,7 +215,7 @@
 	fire_sound = 'sound/weapons/gunshot/gunshot2.ogg'
 	damage = 40
 	armor_penetration = 35
-	penetration_modifier = 1
+	distance_falloff = 1
 
 /obj/item/projectile/bullet/rifle/shell
 	fire_sound = 'sound/weapons/gunshot/sniper.ogg'

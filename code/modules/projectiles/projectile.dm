@@ -321,7 +321,7 @@
 				attack_mob(M, distance)
 
 	//penetrating projectiles can pass through things that otherwise would not let them
-	if(!passthrough && penetrating > 0)
+	if(!passthrough && penetrating > 3)
 		if(check_penetrate(A))
 			passthrough = 1
 		penetrating--
