@@ -1,4 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed the fall-down sound constantly triggering in some cases.
