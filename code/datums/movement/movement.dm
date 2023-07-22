@@ -142,11 +142,21 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 /datum/movement_handler/mob
 	expected_host_type = /mob
 	VAR_PROTECTED/mob/mob
+	VAR_PROTECTED/next_feedback
 
-/datum/movement_handler/mob/New(host)
-	..()
-	src.mob = host
 
 /datum/movement_handler/mob/Destroy()
 	mob = null
 	. = ..()
+
+
+/datum/movement_handler/mob/New(host)
+	..()
+	mob = host
+
+
+/datum/movement_handler/mob/proc/DoFeedback(feedback)
+	if (next_feedback > world.time)
+		return
+	next_feedback = world.time + 1 SECOND
+	to_chat(mob, feedback)
