@@ -17,7 +17,6 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	requires_contact = TRUE
 	var/moving_state = "ship_moving"
 	var/list/consoles
-	var/list/sensors
 
 	var/vessel_mass = 10000             // tonnes, arbitrary number, affects acceleration provided by engines
 	var/vessel_size = SHIP_SIZE_LARGE	// arbitrary number, affects how likely are we to evade meteors
@@ -55,16 +54,11 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 /obj/effect/overmap/visitable/ship/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	SSshuttle.ships -= src
-	if(length(consoles))
+	if(LAZYLEN(consoles))
 		for(var/obj/machinery/computer/ship/machine in consoles)
 			if(machine.linked == src)
 				machine.linked = null
 		consoles = null
-	if (length(sensors))
-		for (var/obj/machinery/shipsensors/machine in sensors)
-			if (machine.linked == src)
-				machine.linked = null
-		sensors = null
 	. = ..()
 
 /obj/effect/overmap/visitable/ship/relaymove(mob/user, direction, accel_limit)
