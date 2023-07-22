@@ -1,5 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - rscadd: Added Try again button to the legacy chat that appears when goonchat load
-      fails.
