@@ -293,6 +293,7 @@
 	if(!use_power) //need some juice to kickstart
 		use_power_oneoff(idle_power_usage*5)
 	update_use_power(!use_power)
+	power_change()
 	queue_icon_update()
 
 /obj/machinery/shipsensors/Process()
