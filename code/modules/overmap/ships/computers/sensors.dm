@@ -34,10 +34,6 @@
 		return
 	find_sensors()
 
-/obj/machinery/computer/ship/sensors/Process()
-	..()
-	update_sound()
-
 /obj/machinery/computer/ship/sensors/proc/update_sound()
 	if(!working_sound)
 		return
@@ -52,34 +48,11 @@
 	else if(sound_token)
 		QDEL_NULL(sound_token)
 
-/obj/machinery/computer/ship/sensors/proc/state_visible(text)
-	visible_message(SPAN_NOTICE("<b>\The [src]</b> states, \"[text]\""))
-
-/obj/machinery/computer/ship/sensors/proc/alert_unknown_contact(contact_id, bearing, bearing_variability)
-	if (muted)
-		return
-	state_visible("Unknown contact designation '[contact_id]' detected nearby, bearing [bearing], error +/- [bearing_variability]. Beginning trace.")
-	playsound(loc, "sound/machines/sensors/contactgeneric.ogg", 10, 1) //Let players know there's something nearby
-
-/obj/machinery/computer/ship/sensors/proc/alert_contact_identified(contact_name, bearing)
-	if (muted)
-		return
-	state_visible("New contact identified, designation [contact_name], bearing [bearing].")
-	playsound(loc, "sound/machines/sensors/newcontact.ogg", 30, 1)
-
-/obj/machinery/computer/ship/sensors/proc/alert_contact_lost(contact_name)
-	if (muted)
-		return
-	state_visible("Contact lost with [contact_name].")
-	playsound(loc, "sound/machines/sensors/contact_lost.ogg", 30, 1)
-
 /obj/machinery/computer/ship/sensors/proc/find_sensors()
 	if(!linked)
 		return
 	for(var/obj/machinery/shipsensors/S in SSmachines.machinery)
 		if(linked.check_ownership(S))
-			LAZYADD(S.linked_consoles, src)
-			S.link_ship(linked)
 			sensor_ref = weakref(S)
 			break
 
@@ -121,8 +94,8 @@
 					continue
 				potential_contacts |= nearby
 
-		for(var/obj/effect/overmap/visitable/contact in sensors.objects_in_view)
-			if (contact in sensors.contact_datums)
+		for(var/obj/effect/overmap/visitable/contact in objects_in_view)
+			if (contact in contact_datums)
 				potential_contacts |= contact
 			else
 				var/bearing_variability = round(300/sensors.sensor_strength, 5)
@@ -130,7 +103,7 @@
 					"name" = contact.unknown_id,
 					"bearing" = inaccurate_bearing(get_bearing(linked, contact), bearing_variability),
 					"variability" = bearing_variability,
-					"progress" = sensors.objects_in_view[contact]
+					"progress" = objects_in_view[contact]
 				)))
 
 		for(var/obj/effect/overmap/contact in potential_contacts)
@@ -200,15 +173,15 @@
 	if (href_list["scan"])
 		var/obj/effect/overmap/O = locate(href_list["scan"])
 		if(istype(O) && !QDELETED(O))
-			if((O in view(7,linked))|| (O in sensors.contact_datums))
+			if((O in view(7,linked))|| (O in contact_datums))
 				playsound(loc, "sound/effects/ping.ogg", 50, 1)
 				LAZYSET(last_scan, "data", O.get_scan_data(user))
 				LAZYSET(last_scan, "location", "[O.x],[O.y]")
 				LAZYSET(last_scan, "name", "[O]")
-				state_visible("Successfully scanned \the [O].")
+				to_chat(user, SPAN_NOTICE("Successfully scanned \the [O]."))
 				return TOPIC_HANDLED
 
-		state_visible(SPAN_WARNING("Could not get a scan from \the [O]!"))
+		to_chat(user, SPAN_WARNING("Could not get a scan from \the [O]!"))
 		return TOPIC_HANDLED
 
 	if (href_list["print"])
@@ -296,7 +269,6 @@
 	queue_icon_update()
 
 /obj/machinery/shipsensors/Process()
-	..()
 	if(use_power) //can't run in non-vacuum
 		if(!in_vacuum())
 			toggle()
