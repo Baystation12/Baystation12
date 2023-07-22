@@ -107,7 +107,11 @@
 				objects_in_current_view.Add(tracked_effect)
 				objects_in_view[tracked_effect] = 100
 
-	for (var/obj/effect/overmap/contact in view(sensor_range, linked))
+	var/obj/effect/overmap/overmap_obj = linked
+	if (istype(linked.loc, /obj/effect/overmap/visitable))
+		overmap_obj = linked.loc
+
+	for (var/obj/effect/overmap/contact in view(sensor_range, overmap_obj))
 		if (contact == linked)
 			continue
 		if (!contact.requires_contact)	// Only some effects require contact for visibility.
@@ -115,9 +119,9 @@
 
 		// Made like in proc/circlerangeturfs()
 		// Makes the view round
-		if (linked.z == contact.z)
-			var/dx = contact.x - linked.x
-			var/dy = contact.y - linked.y
+		if (overmap_obj.z == contact.z)
+			var/dx = contact.x - overmap_obj.x
+			var/dy = contact.y - overmap_obj.y
 			var/rsq = sensor_range * (sensor_range+1)
 			if (dx**2 + dy**2 > rsq)
 				continue
@@ -150,7 +154,7 @@
 
 		// Generate contact information for this overmap object.
 		if (!record) // Begin attempting to identify ship.
-			var/bearing = get_bearing(linked, contact)
+			var/bearing = get_bearing(overmap_obj, contact)
 
 			// The chance of detection decreases with distance to the target ship.
 			if (contact.scannable)
@@ -166,7 +170,7 @@
 						objects_in_view[contact] = memorized_objects[contact]
 				else
 					var/progress = sensor_strength * contact.sensor_visibility * SENSORS_DISTANCE_COEFFICIENT
-					progress /= max(get_dist_euclidian(linked, contact), 0.5)
+					progress /= max(get_dist_euclidian(overmap_obj, contact), 0.5)
 					objects_in_view[contact] += round(progress / 100)
 
 					memorized_objects[contact] = min(objects_in_view[contact], 100)
@@ -185,7 +189,7 @@
 		// Update identification information for this record.
 		record.update_marker_icon()
 
-		var/time_delay = max((SENSOR_TIME_DELAY * get_dist_euclidian(linked, contact)),1)
+		var/time_delay = max((SENSOR_TIME_DELAY * get_dist_euclidian(overmap_obj, contact)),1)
 		addtimer(new Callback(record, .proc/ping), time_delay)
 
 /obj/machinery/shipsensors/use_tool(obj/item/tool, mob/living/user, list/click_params)
