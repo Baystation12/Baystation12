@@ -4,7 +4,6 @@ with an /obj/effect/overmap/visitable/ship present elsewhere on that z level, or
 somewhere on that shuttle. Subtypes of these can be then used to perform ship overmap movement functions.
 */
 /obj/machinery/computer/ship
-	var/datum/browser/reconnect_popup
 	var/obj/effect/overmap/visitable/ship/linked
 	var/list/viewers // Weakrefs to mobs in direct-view mode.
 	var/extra_view = 0 // how much the view is increased by when the mob is in overmap mode.
@@ -15,7 +14,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 		return
 	if(sector.check_ownership(src))
 		linked = sector
-		LAZYADD(linked.consoles, src)
+		LAZYSET(linked.consoles, src, TRUE)
 		return 1
 
 /obj/machinery/computer/ship/Destroy()
@@ -37,10 +36,9 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 			return
 
 /obj/machinery/computer/ship/proc/display_reconnect_dialog(mob/user, flavor)
-	if (!reconnect_popup)
-		reconnect_popup = new (user, "[src]", "[src]")
-		reconnect_popup.set_content("<center><strong>[SPAN_COLOR("red", "Error</strong>")]<br>Unable to connect to [flavor].<br><a href='?src=\ref[src];sync=1'>Reconnect</a></center>")
-	reconnect_popup.open()
+	var/datum/browser/popup = new (user, "[src]", "[src]")
+	popup.set_content("<center><strong>[SPAN_COLOR("red", "Error</strong>")]<br>Unable to connect to [flavor].<br><a href='?src=\ref[src];sync=1'>Reconnect</a></center>")
+	popup.open()
 
 /obj/machinery/computer/ship/interface_interact(mob/user)
 	ui_interact(user)
@@ -50,8 +48,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	if(..())
 		return TOPIC_HANDLED
 	if(href_list["sync"])
-		if (sync_linked() && reconnect_popup)
-			reconnect_popup.close()
+		sync_linked()
 		return TOPIC_REFRESH
 	if(href_list["close"])
 		unlook(user)
@@ -70,7 +67,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	if(user.client)
 		user.client.view = world.view + extra_view
 	if(linked)
-		for(var/obj/machinery/shipsensors/sensor in linked.sensors)
+		for(var/obj/machinery/computer/ship/sensors/sensor in linked.consoles)
 			sensor.reveal_contacts(user)
 	GLOB.moved_event.register(user, src, /obj/machinery/computer/ship/proc/unlook)
 	if (!isghost(user))
@@ -84,7 +81,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	if(user.client)
 		user.client.view = world.view
 	if(linked)
-		for(var/obj/machinery/shipsensors/sensor in linked.sensors)
+		for(var/obj/machinery/computer/ship/sensors/sensor in linked.consoles)
 			sensor.hide_contacts(user)
 	GLOB.moved_event.unregister(user, src, /obj/machinery/computer/ship/proc/unlook)
 	GLOB.stat_set_event.unregister(user, src, /obj/machinery/computer/ship/proc/unlook)
@@ -116,8 +113,6 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	. = ..()
 
 /obj/machinery/computer/ship/sensors/Destroy()
-	var/obj/machinery/shipsensors/sensor = sensor_ref.resolve()
-	LAZYREMOVE(sensor.linked_consoles, src)
 	sensor_ref = null
 	if(LAZYLEN(viewers))
 		for(var/weakref/W in viewers)
