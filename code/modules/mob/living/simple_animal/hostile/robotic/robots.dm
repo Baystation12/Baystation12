@@ -8,11 +8,15 @@
 	icon_dead = "fleetlaser"
 	faction = "hivebot"
 	projectiletype = /obj/item/projectile/beam/smalllaser
-	base_attack_cooldown = 10
+	base_attack_cooldown = 1 SECOND
 	projectilesound = 'sound/weapons/Laser.ogg'
-	projectile_dispersion = 0
-	projectile_accuracy = 1
+	projectile_dispersion = 0.5
+	projectile_accuracy = -1
 	speed = 7
+	needs_reload = TRUE
+	reload_max = 6
+	reload_time = 2 SECONDS
+	reload_sound = 'sound/mecha/internaldmgalarm.ogg'
 
 	natural_armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
@@ -33,12 +37,16 @@
 	maxHealth = 100
 	health = 100
 
+/mob/living/simple_animal/hostile/hivebot/ranged_damage/fleet_robot/Process_Spacemove()
+	return 1
+
 /datum/ai_holder/simple_animal/ranged/kiting/threatening/deimos
 	speak_chance = 0
 	threaten = FALSE
 	moonwalk = TRUE
-	violent_breakthrough = FALSE
+	violent_breakthrough = TRUE
 	firing_lanes = TRUE
+	run_if_this_close = 3
 
 /mob/living/simple_animal/hostile/hivebot/ranged_damage/fleet_robot/death()
 	visible_message(SPAN_DANGER("\The [src]'s body ruptures and explodes!"))
@@ -70,17 +78,25 @@
 	projectilesound = 'sound/weapons/Laser.ogg'
 	icon_state = "fleetmagnetic"
 	icon_dead = "fleetmagnetic"
+	projectile_dispersion = 1
+	projectile_accuracy = 0
+	base_attack_cooldown = 2 SECONDS
+	needs_reload = FALSE
 
 // Ballistic version of the defending robots. Deals way more damage than your regular bot.
 
 /mob/living/simple_animal/hostile/hivebot/ranged_damage/fleet_robot/ballistic
 	desc = "A relatively recent model of a 'tracker' security subaltern, armed with a sub-machine gun."
-	projectiletype = /obj/item/projectile/bullet/flechette
-	casingtype = /obj/item/ammo_casing/flechette
+	projectiletype = /obj/item/projectile/bullet/pistol/holdout
+	casingtype = /obj/item/ammo_casing/pistol/small
 	projectilesound = 'sound/weapons/gunshot/gunshot_smg.ogg'
-	base_attack_cooldown = 4
+	base_attack_cooldown = 0.5 SECONDS
+	projectile_dispersion = 2
 	icon_state = "fleetrifle"
 	icon_dead = "fleetrifle"
+	reload_max = 12
+	reload_time = 2 SECONDS
+	reload_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
 /obj/item/projectile/beam/bunkerbuster
 	name = "accelerated particle projection"
@@ -157,10 +173,11 @@
 	ranged_attack_delay = 1 SECOND //How much time we wait before really shooting
 
 /datum/ai_holder/simple_animal/ranged/kiting/threatening/fleet_heavy
-	firing_lanes = TRUE        // Lets you use others as shields
+	firing_lanes = FALSE        // Lets you use others as shields
 	returns_home = TRUE     // So it won't chase you forever
-	violent_breakthrough = FALSE //It won't try to break walls and such maybe? Modify as needed
+	violent_breakthrough = TRUE //It won't try to break walls and such maybe? Modify as needed
 	moonwalk = TRUE
+	run_if_this_close = 3
 
 /mob/living/simple_animal/hostile/fleet_heavy/ranged_pre_animation(atom/A)
 	//Create an effect that will ease out
@@ -236,7 +253,7 @@
 		explosion(loc, explosion_radius, explosion_max_power)
 		qdel(src)
 
-/mob/living/simple_animal/hostile/fleet_heavy/Process_Spacemove(check_drift)
+/mob/living/simple_animal/hostile/fleet_heavy/Process_Spacemove()
 	return TRUE
 
 /obj/aura/mobshield
