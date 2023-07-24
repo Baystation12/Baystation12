@@ -1,7 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - bugfix: Rogue drones, fleet tracker bots and space syndies can now move in space.
-  - tweak: Fleet robots now miss more often, fire less rapidly, won't hesitate to
-      break things and won't run away from targets unless they're a bit closer.
-  - tweak: Hullbreakers are now less afraid to break hulls.
