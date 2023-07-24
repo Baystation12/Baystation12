@@ -27,7 +27,6 @@
 	projectiletype = /obj/item/projectile/beam/blue
 	projectilesound = 'sound/weapons/Laser.ogg'
 	projectile_dispersion = 0.5
-	projectile_accuracy = -1
 
 // Shoots EMPs, to screw over other robots.
 /mob/living/simple_animal/hostile/hivebot/ranged_damage/ion
