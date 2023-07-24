@@ -17,15 +17,15 @@
 
 /datum/shuttle/autodock/overmap/proc/refresh_fuel_ports_list() //loop through all
 	fuel_ports = list()
-	for(var/area/A in shuttle_area)
-		for(var/obj/structure/fuel_port/fuel_port_in_area in A)
+	for (var/area/A in shuttle_area)
+		for (var/obj/structure/fuel_port/fuel_port_in_area in A)
 			fuel_port_in_area.parent_shuttle = src
 			fuel_ports += fuel_port_in_area
 
 /datum/shuttle/autodock/overmap/fuel_check()
 	if (!src.try_consume_fuel()) //insufficient fuel
-		for(var/area/A in shuttle_area)
-			for(var/mob/living/M in A)
+		for (var/area/A in shuttle_area)
+			for (var/mob/living/M in A)
 				M.show_message("<spawn class='warning'>You hear the shuttle engines sputter... perhaps it doesn't have enough fuel?", AUDIBLE_MESSAGE,
 				"<spawn class='warning'>The shuttle shakes but fails to take off.", VISIBLE_MESSAGE)
 				return 0 //failure!
@@ -64,7 +64,7 @@
 	var/list/res = list()
 	for (var/obj/effect/overmap/visitable/S in range(get_turf(waypoint_sector(current_location)), range))
 		var/list/waypoints = S.get_waypoints(name)
-		for(var/obj/effect/shuttle_landmark/LZ in waypoints)
+		for (var/obj/effect/shuttle_landmark/LZ in waypoints)
 			if (LZ.is_valid(src))
 				res["[waypoints[LZ]] - [LZ.name]"] = LZ
 	return res
@@ -85,20 +85,20 @@
 	if (!length(fuel_ports))
 		return 0 //Nowhere to get fuel from
 	var/list/obj/item/tank/fuel_tanks = list()
-	for(var/obj/structure/FP in fuel_ports) //loop through fuel ports and assemble list of all fuel tanks
+	for (var/obj/structure/FP in fuel_ports) //loop through fuel ports and assemble list of all fuel tanks
 		var/obj/item/tank/FT = locate() in FP
 		if (FT)
 			fuel_tanks += FT
 	if (!length(fuel_tanks))
 		return 0 //can't launch if you have no fuel TANKS in the ports
 	var/total_flammable_gas_moles = 0
-	for(var/obj/item/tank/FT in fuel_tanks)
+	for (var/obj/item/tank/FT in fuel_tanks)
 		total_flammable_gas_moles += FT.air_contents.get_by_flag(XGM_GAS_FUEL)
 	if (total_flammable_gas_moles < fuel_consumption) //not enough fuel
 		return 0
 	// We are going to succeed if we got to here, so start consuming that fuel
 	var/fuel_to_consume = fuel_consumption
-	for(var/obj/item/tank/FT in fuel_tanks) //loop through tanks, consume their fuel one by one
+	for (var/obj/item/tank/FT in fuel_tanks) //loop through tanks, consume their fuel one by one
 		var/fuel_available = FT.air_contents.get_by_flag(XGM_GAS_FUEL)
 		if (!fuel_available) // Didn't even have fuel.
 			continue

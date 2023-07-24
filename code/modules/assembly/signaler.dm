@@ -104,7 +104,7 @@
 	radio_connection.post_signal(src, signal)
 	return
 /*
-	for(var/obj/item/device/assembly/signaler/S in world)
+	for (var/obj/item/device/assembly/signaler/S in world)
 		if (!S)	continue
 		if (S == src)	continue
 		if ((S.frequency == src.frequency) && (S.code == src.code))
@@ -132,7 +132,7 @@
 	pulse(1)
 
 	if (!holder)
-		for(var/mob/O in hearers(1, src.loc))
+		for (var/mob/O in hearers(1, src.loc))
 			O.show_message(text("[icon2html(src, O)] *beep* *beep*"), 3, "*beep* *beep*", 2)
 	return
 

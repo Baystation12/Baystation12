@@ -14,7 +14,7 @@
 		var/turf/T = get_step(src, dir)
 		if (T)
 			var/inv_dir = turn(dir, 180)
-			for(var/obj/structure/cable/C in T)
+			for (var/obj/structure/cable/C in T)
 				if (C.d1 == inv_dir || C.d2 == inv_dir)
 					input = C
 					return 1
@@ -54,7 +54,7 @@
 		var/turf/T = get_step(src, dir)
 		if (T)
 			var/inv_dir = turn(dir, 180)
-			for(var/obj/structure/cable/C in T)
+			for (var/obj/structure/cable/C in T)
 				if (C.d1 == inv_dir || C.d2 == inv_dir)
 					output = C
 					return 1
@@ -99,7 +99,7 @@
 		var/turf/T = get_step(src, dir_input)
 		if (T)
 			var/inv_dir = turn(dir_input, 180)
-			for(var/obj/structure/cable/C in T)
+			for (var/obj/structure/cable/C in T)
 				if (C.d1 == inv_dir || C.d2 == inv_dir)
 					input = C
 
@@ -107,7 +107,7 @@
 		var/turf/T = get_step(src, dir_output)
 		if (T)
 			var/inv_dir = turn(dir_output, 180)
-			for(var/obj/structure/cable/C in T)
+			for (var/obj/structure/cable/C in T)
 				if (C.d1 == inv_dir || C.d2 == inv_dir)
 					output = C
 
@@ -162,7 +162,7 @@
 		var/turf/T = get_step(src, dir_input1)
 		if (T)
 			var/inv_dir = turn(dir_input1, 180)
-			for(var/obj/structure/cable/C in T)
+			for (var/obj/structure/cable/C in T)
 				if (C.d1 == inv_dir || C.d2 == inv_dir)
 					input1 = C
 
@@ -170,7 +170,7 @@
 		var/turf/T = get_step(src, dir_input2)
 		if (T)
 			var/inv_dir = turn(dir_input2, 180)
-			for(var/obj/structure/cable/C in T)
+			for (var/obj/structure/cable/C in T)
 				if (C.d1 == inv_dir || C.d2 == inv_dir)
 					input2 = C
 
@@ -178,7 +178,7 @@
 		var/turf/T = get_step(src, dir_output)
 		if (T)
 			var/inv_dir = turn(dir_output, 180)
-			for(var/obj/structure/cable/C in T)
+			for (var/obj/structure/cable/C in T)
 				if (C.d1 == inv_dir || C.d2 == inv_dir)
 					output = C
 

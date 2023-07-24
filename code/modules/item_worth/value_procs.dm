@@ -3,7 +3,7 @@
 
 /obj/Value()
 	. = ..()
-	for(var/a in contents)
+	for (var/a in contents)
 		. += get_value(a)
 
 /obj/machinery/Value()
@@ -29,7 +29,7 @@
 /obj/item/reagent_containers/Value()
 	. = ..()
 	if (reagents)
-		for(var/a in reagents.reagent_list)
+		for (var/a in reagents.reagent_list)
 			var/datum/reagent/reg = a
 			. += reg.Value() * reg.volume
 	. = round(.)

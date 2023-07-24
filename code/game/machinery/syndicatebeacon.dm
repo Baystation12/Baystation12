@@ -97,7 +97,7 @@
 	if (surplus() < 1500)
 		if (user) to_chat(user, SPAN_NOTICE("The connected wire doesn't have enough current."))
 		return
-	for(var/obj/singularity/singulo in world)
+	for (var/obj/singularity/singulo in world)
 		if (singulo.z == z)
 			singulo.target = src
 	icon_state = "[icontype]1"
@@ -109,7 +109,7 @@
 
 
 /obj/machinery/power/singularity_beacon/proc/Deactivate(mob/user = null)
-	for(var/obj/singularity/singulo in world)
+	for (var/obj/singularity/singulo in world)
 		if (singulo.target == src)
 			singulo.target = null
 	icon_state = "[icontype]0"

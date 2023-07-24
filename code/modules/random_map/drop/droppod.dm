@@ -43,8 +43,8 @@
 	var/y_midpoint = ceil(limit_y / 2)
 
 	// Draw walls/floors/doors.
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
+	for (var/x = 1, x <= limit_x, x++)
+		for (var/y = 1, y <= limit_y, y++)
 			var/current_cell = get_map_cell(x,y)
 			if (!current_cell)
 				continue
@@ -109,7 +109,7 @@
 
 	// Splatter anything under us that survived the explosion.
 	if (value != SD_EMPTY_TILE && length(T.contents))
-		for(var/atom/movable/AM in T)
+		for (var/atom/movable/AM in T)
 			if (AM.simulated && !isobserver(AM))
 				qdel(AM)
 
@@ -164,13 +164,13 @@
 		var/spawn_count = input("How many mobs do you wish the pod to contain?", "Drop Pod Selection", null) as num
 		if (spawn_count <= 0)
 			return
-		for(var/i=0;i<spawn_count;i++)
+		for (var/i=0;i<spawn_count;i++)
 			var/mob/living/M = new spawn_path()
 			M.tag = "awaiting drop"
 			spawned_mobs |= M
 	else
 		var/list/candidates = list()
-		for(var/client/player in GLOB.clients)
+		for (var/client/player in GLOB.clients)
 			if (player.mob && isghost(player.mob))
 				candidates |= player
 
@@ -198,7 +198,7 @@
 		if (spawned_mob)
 			qdel(spawned_mob)
 		if (length(spawned_mobs))
-			for(var/mob/living/M in spawned_mobs)
+			for (var/mob/living/M in spawned_mobs)
 				spawned_mobs -= M
 				M.tag = null
 				qdel(M)

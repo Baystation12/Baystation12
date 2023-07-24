@@ -20,7 +20,7 @@
 /proc/roboscan(mob/living/M, mob/living/user)
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, text(SPAN_WARNING("You try to analyze the floor's vitals!")))
-		for(var/mob/O in viewers(M, null))
+		for (var/mob/O in viewers(M, null))
 			O.show_message(text(SPAN_WARNING("[user] has analyzed the floor's vitals!")), 1)
 		user.show_message(text(SPAN_NOTICE("Analyzing Results for The floor:\n\t Overall Status: Healthy")), 1)
 		user.show_message(text(SPAN_NOTICE("\t Damage Specifics: [0]-[0]-[0]-[0]")), 1)
@@ -51,7 +51,7 @@
 			var/list/damaged = H.get_damaged_components(1,1,1)
 			user.show_message(SPAN_NOTICE("Localized Damage:"),1)
 			if (length(damaged)>0)
-				for(var/datum/robot_component/org in damaged)
+				for (var/datum/robot_component/org in damaged)
 					var/message = "\t [capitalize(org.name)]: "
 					message += (org.installed == -1) ? SPAN_COLOR("red", "<b>DESTROYED</b> ") : ""
 					message += (org.electronics_damage > 0) ? SPAN_COLOR("#ffa500", org.electronics_damage) : "0"
@@ -90,7 +90,7 @@
 			to_chat(user, SPAN_NOTICE("External prosthetics:"))
 
 			var/organ_found
-			for(var/obj/item/organ/external/E in H.organs)
+			for (var/obj/item/organ/external/E in H.organs)
 				if (!BP_IS_ROBOTIC(E))
 					continue
 				organ_found = 1
@@ -102,7 +102,7 @@
 
 			to_chat(user, SPAN_NOTICE("Internal prosthetics:"))
 			organ_found = null
-			for(var/obj/item/organ/O in H.internal_organs)
+			for (var/obj/item/organ/O in H.internal_organs)
 				if (!BP_IS_ROBOTIC(O))
 					continue
 				organ_found = 1

@@ -22,7 +22,7 @@
 
 /datum/department/proc/summarize_goals(show_success = FALSE)
 	. = list()
-	for(var/i = 1 to LAZYLEN(goals))
+	for (var/i = 1 to LAZYLEN(goals))
 		var/datum/goal/goal = goals[i]
 		. += "[i]. [goal.summarize(show_success)]"
 

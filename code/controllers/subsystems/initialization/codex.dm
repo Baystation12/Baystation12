@@ -21,29 +21,29 @@ SUBSYSTEM_DEF(codex)
 	linkRegex = regex(@"<(span|l)(\s+codexlink='([^>]*)'|)>([^<]+)</(span|l)>","g")
 
 	// Create general hardcoded entries.
-	for(var/ctype in typesof(/datum/codex_entry))
+	for (var/ctype in typesof(/datum/codex_entry))
 		var/datum/codex_entry/centry = ctype
 		if (initial(centry.display_name) || initial(centry.associated_paths) || initial(centry.associated_strings))
 			centry = new centry()
-			for(var/associated_path in centry.associated_paths)
+			for (var/associated_path in centry.associated_paths)
 				entries_by_path[associated_path] = centry
-			for(var/associated_string in centry.associated_strings)
+			for (var/associated_string in centry.associated_strings)
 				add_entry_by_string(associated_string, centry)
 			if (centry.display_name)
 				add_entry_by_string(centry.display_name, centry)
 			centry.update_links()
 
 	// Create categorized entries.
-	for(var/ctype in subtypesof(/datum/codex_category))
+	for (var/ctype in subtypesof(/datum/codex_category))
 		var/datum/codex_category/cat = new ctype
 		cat.Initialize()
 		qdel(cat)
 
 	// Create the index file for later use.
-	for(var/thing in SScodex.entries_by_path)
+	for (var/thing in SScodex.entries_by_path)
 		var/datum/codex_entry/entry = SScodex.entries_by_path[thing]
 		index_file[entry.display_name] = entry
-	for(var/thing in SScodex.entries_by_string)
+	for (var/thing in SScodex.entries_by_string)
 		var/datum/codex_entry/entry = SScodex.entries_by_string[thing]
 		index_file[entry.display_name] = entry
 	index_file = sortAssoc(index_file)
@@ -99,7 +99,7 @@ SUBSYSTEM_DEF(codex)
 			results = list(entries_by_string[searching])
 		else
 			results = list()
-			for(var/entry_title in entries_by_string)
+			for (var/entry_title in entries_by_string)
 				var/datum/codex_entry/entry = entries_by_string[entry_title]
 				if (findtext(entry.display_name, searching) || \
 				 findtext(entry.lore_text, searching) || \

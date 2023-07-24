@@ -33,7 +33,7 @@ var/global/list/cached_space = list()
 
 /obj/effect/overmap/visitable/sector/temporary/proc/can_die(mob/observer)
 	testing("Checking if sector at [map_z[1]] can die.")
-	for(var/mob/M in GLOB.player_list)
+	for (var/mob/M in GLOB.player_list)
 		if (M != observer && (M.z in map_z))
 			testing("There are people on it.")
 			return 0
@@ -43,7 +43,7 @@ var/global/list/cached_space = list()
 	RETURN_TYPE(/obj/effect/overmap/visitable/sector/temporary)
 	var/turf/map = locate(x,y,GLOB.using_map.overmap_z)
 	var/obj/effect/overmap/visitable/sector/temporary/res
-	for(var/obj/effect/overmap/visitable/sector/temporary/O in map)
+	for (var/obj/effect/overmap/visitable/sector/temporary/O in map)
 		res = O
 		break
 	if (istype(res))
@@ -57,7 +57,7 @@ var/global/list/cached_space = list()
 		return new /obj/effect/overmap/visitable/sector/temporary(null, x, y, ++world.maxz)
 
 /atom/movable/proc/lost_in_space()
-	for(var/atom/movable/AM in contents)
+	for (var/atom/movable/AM in contents)
 		if (!AM.lost_in_space())
 			return FALSE
 	return TRUE
@@ -105,7 +105,7 @@ var/global/list/cached_space = list()
 
 	var/turf/map = locate(M.x,M.y,GLOB.using_map.overmap_z)
 	var/obj/effect/overmap/visitable/TM
-	for(var/obj/effect/overmap/visitable/O in map)
+	for (var/obj/effect/overmap/visitable/O in map)
 		if (O != M && HAS_FLAGS(O.sector_flags, OVERMAP_SECTOR_IN_SPACE) && prob(50))
 			TM = O
 			break

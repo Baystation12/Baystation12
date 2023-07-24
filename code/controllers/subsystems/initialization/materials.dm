@@ -29,7 +29,7 @@ SUBSYSTEM_DEF(materials)
 	alloy_products =    list()
 	processable_ores =  list()
 
-	for(var/type in subtypesof(/material))
+	for (var/type in subtypesof(/material))
 		var/material/new_mineral = new type
 		if (new_mineral.name)
 			materials += new_mineral
@@ -38,7 +38,7 @@ SUBSYSTEM_DEF(materials)
 				processable_ores[new_mineral.name] = TRUE
 			if (new_mineral.alloy_product && LAZYLEN(new_mineral.alloy_materials))
 				alloy_products[new_mineral] = TRUE
-				for(var/component in new_mineral.alloy_materials)
+				for (var/component in new_mineral.alloy_materials)
 					processable_ores[component] = TRUE
 					alloy_components[component] = TRUE
 

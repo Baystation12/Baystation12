@@ -11,7 +11,7 @@ Aoe turf spells have two useful flags: IGNOREDENSE and IGNORESPACE. These are ex
 /spell/aoe_turf/choose_targets(mob/user = usr)
 	var/list/targets = list()
 
-	for(var/turf/target in view_or_range(range, holder, selection_type))
+	for (var/turf/target in view_or_range(range, holder, selection_type))
 		if (!(target in view_or_range(inner_radius, holder, selection_type)))
 			if (target.density && (spell_flags & IGNOREDENSE))
 				continue

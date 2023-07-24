@@ -15,8 +15,8 @@ GLOBAL_LIST_INIT(local_networks, new)
 	. = ..()
 
 /datum/local_network/proc/within_radius(atom/checking)
-	for(var/entity_list in network_entities)
-		for(var/entity in entity_list)
+	for (var/entity_list in network_entities)
+		for (var/entity in entity_list)
 			if (get_dist(entity, checking) > network_size)
 				return FALSE
 	return TRUE
@@ -52,7 +52,7 @@ GLOBAL_LIST_INIT(local_networks, new)
 	return !isnull(entities[device])
 
 /datum/local_network/proc/get_devices(device_type)
-	for(var/entity_type in network_entities)
+	for (var/entity_type in network_entities)
 		if (ispath(entity_type, device_type))
 			return network_entities[entity_type]
 
@@ -70,8 +70,8 @@ GLOBAL_LIST_INIT(multilevel_local_networks, new)
 	. = ..()
 
 /datum/local_network/multilevel/within_radius(atom/checking)
-	for(var/entity_list in network_entities)
-		for(var/atom/entity in entity_list)
+	for (var/entity_list in network_entities)
+		for (var/atom/entity in entity_list)
 			if (!(get_z(entity) in GetConnectedZlevels(get_z(checking))))
 				return FALSE
 	return TRUE

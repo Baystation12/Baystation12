@@ -9,7 +9,7 @@
 		var/mob/living/carbon/human/H = M
 		if (!H.should_have_organ(BP_HEART))
 			return
-	for(var/datum/dna/gene/gene in dna_genes)
+	for (var/datum/dna/gene/gene in dna_genes)
 		if (!M || !M.dna)
 			return
 		if (!gene.block)

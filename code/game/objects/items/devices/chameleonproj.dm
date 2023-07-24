@@ -78,7 +78,7 @@
 		spawn(50) can_use = 1
 
 /obj/item/device/chameleon/proc/eject_all()
-	for(var/atom/movable/A in active_dummy)
+	for (var/atom/movable/A in active_dummy)
 		A.forceMove(active_dummy.loc)
 		if (ismob(A))
 			var/mob/M = A
@@ -131,17 +131,17 @@
 
 
 /obj/effect/dummy/chameleon/attack_hand()
-	for(var/mob/M in src)
+	for (var/mob/M in src)
 		to_chat(M, SPAN_WARNING("Your chameleon-projector deactivates."))
 	master.disrupt()
 
 /obj/effect/dummy/chameleon/ex_act()
-	for(var/mob/M in src)
+	for (var/mob/M in src)
 		to_chat(M, SPAN_WARNING("Your chameleon-projector deactivates."))
 	master.disrupt()
 
 /obj/effect/dummy/chameleon/bullet_act()
-	for(var/mob/M in src)
+	for (var/mob/M in src)
 		to_chat(M, SPAN_WARNING("Your chameleon-projector deactivates."))
 	..()
 	master.disrupt()

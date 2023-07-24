@@ -301,7 +301,7 @@
 			else
 				data += " - Radiometric dating shows age of [G.age_thousand * 1000 + G.age] years<br>"
 			data += " - Chromatographic analysis shows the following materials present:<br>"
-			for(var/carrier in G.find_presence)
+			for (var/carrier in G.find_presence)
 				if (G.find_presence[carrier] && GLOB.responsive_carriers_to_finds[carrier])
 					data += "	> [100 * G.find_presence[carrier]]% [GLOB.responsive_carriers_to_finds[carrier]]<br>"
 

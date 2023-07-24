@@ -119,7 +119,7 @@
 		ntnet_global.relays.Remove(src)
 		ntnet_global.add_log("Quantum Relay ([uid]) connection severed. Current amount of linked relays: [length(NTNet.relays)]")
 		NTNet = null
-	for(var/datum/computer_file/program/ntnet_dos/D in dos_sources)
+	for (var/datum/computer_file/program/ntnet_dos/D in dos_sources)
 		D.target = null
 		D.error = "Connection to quantum relay severed"
 	..()

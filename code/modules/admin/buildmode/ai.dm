@@ -150,7 +150,7 @@
 		if (istype(A, /atom)) // Force attack.
 			if (pa["alt"])
 				var/i = 0
-				for(var/mob/living/unit in selected_mobs)
+				for (var/mob/living/unit in selected_mobs)
 					var/datum/ai_holder/AI = unit.ai_holder
 					AI.give_target(A)
 					i++
@@ -165,7 +165,7 @@
 		if (isturf(T)) // Move or reposition.
 			var/forced = 0
 			var/told = 0
-			for(var/mob/living/unit in selected_mobs)
+			for (var/mob/living/unit in selected_mobs)
 				var/datum/ai_holder/AI = unit.ai_holder
 				AI.lose_follow()
 				AI.home_turf = T
@@ -185,7 +185,7 @@
 			var/mob/living/L = A
 			var/i = 0 // Attacking mobs.
 			var/j = 0 // Following mobs.
-			for(var/mob/living/unit in selected_mobs)
+			for (var/mob/living/unit in selected_mobs)
 				var/datum/ai_holder/AI = unit.ai_holder
 				if (!AI)
 					return
@@ -251,7 +251,7 @@
 		return
 
 	var/datum/build_mode/ai/holder = buildmode
-	for(var/datum/build_mode/ai/H)
+	for (var/datum/build_mode/ai/H)
 		if (H.user == user)
 			holder = H
 			break
@@ -260,7 +260,7 @@
 	if (pa["ctrl"])
 		//Holding shift prevents the deselection of existing
 		if (!pa["shift"])
-			for(var/mob/living/unit in holder.selected_mobs)
+			for (var/mob/living/unit in holder.selected_mobs)
 				holder.deselect_AI_mob(unit)
 
 		var/turf/c1 = get_turf(fromatom)
@@ -274,7 +274,7 @@
 		var/hi_y = max(c1.y,c2.y)
 		var/z = c1.z
 
-		for(var/mob/living/L in GLOB.alive_mobs)
+		for (var/mob/living/L in GLOB.alive_mobs)
 			if (L.z != z || L.client)
 				continue
 			if (L.x >= low_x && L.x <= hi_x && L.y >= low_y && L.y <= hi_y)

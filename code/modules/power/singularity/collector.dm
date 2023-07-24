@@ -109,7 +109,7 @@ var/global/list/rad_collectors = list()
 		if (P)
 			to_chat(user, SPAN_NOTICE("Remove the phoron tank first."))
 			return 1
-		for(var/obj/machinery/power/rad_collector/R in get_turf(src))
+		for (var/obj/machinery/power/rad_collector/R in get_turf(src))
 			if (R != src)
 				to_chat(user, SPAN_WARNING("You cannot install more than one collector on the same spot."))
 				return 1

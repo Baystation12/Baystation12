@@ -18,7 +18,7 @@
 	if (!possible_transfer_amounts)
 		src.verbs -= /obj/structure/reagent_dispensers/verb/set_amount_per_transfer_from_this
 
-	for(var/reagent_type in initial_reagent_types)
+	for (var/reagent_type in initial_reagent_types)
 		var/reagent_ratio = initial_reagent_types[reagent_type]
 		reagents.add_reagent(reagent_type, reagent_ratio * initial_capacity)
 
@@ -31,7 +31,7 @@
 
 	to_chat(user, SPAN_NOTICE("It contains:"))
 	if (reagents && length(reagents.reagent_list))
-		for(var/datum/reagent/R in reagents.reagent_list)
+		for (var/datum/reagent/R in reagents.reagent_list)
 			to_chat(user, SPAN_NOTICE("[R.volume] units of [R.name]"))
 	else
 		to_chat(user, SPAN_NOTICE("Nothing."))
@@ -283,7 +283,7 @@
 			explode()
 
 /obj/structure/reagent_dispensers/fueltank/proc/explode()
-	for(var/datum/reagent/R in reagents.reagent_list)
+	for (var/datum/reagent/R in reagents.reagent_list)
 		R.ex_act(src, 1)
 	qdel(src)
 

@@ -38,7 +38,7 @@
 			dat += "<br>Current Network: <a href='?src=\ref[src];network=1'>[network]</a><br>"
 			if (length(machinelist))
 				dat += "<br>Detected Network Entities:<ul>"
-				for(var/obj/machinery/telecomms/T in machinelist)
+				for (var/obj/machinery/telecomms/T in machinelist)
 					dat += "<li><a href='?src=\ref[src];viewmachine=[T.id]'>\ref[T] [T.name]</a> ([T.id])</li>"
 				dat += "</ul>"
 				dat += "<br><a href='?src=\ref[src];operation=release'>\[Flush Buffer\]</a>"
@@ -54,7 +54,7 @@
 			dat += "<br>Current Network: [network]<br>"
 			dat += "Selected Network Entity: [SelectedMachine.name] ([SelectedMachine.id])<br>"
 			dat += "Linked Entities: <ol>"
-			for(var/obj/machinery/telecomms/T in SelectedMachine.links)
+			for (var/obj/machinery/telecomms/T in SelectedMachine.links)
 				if (!T.hide)
 					dat += "<li><a href='?src=\ref[src];viewmachine=[T.id]'>\ref[T.id] [T.name]</a> ([T.id])</li>"
 			dat += "</ol>"
@@ -76,7 +76,7 @@
 
 	if (href_list["viewmachine"])
 		screen = 1
-		for(var/obj/machinery/telecomms/T in machinelist)
+		for (var/obj/machinery/telecomms/T in machinelist)
 			if (T.id == href_list["viewmachine"])
 				SelectedMachine = T
 				break
@@ -96,7 +96,7 @@
 					temp = SPAN_COLOR("#d70b00", "- FAILED: CANNOT PROBE WHEN BUFFER FULL -")
 
 				else
-					for(var/obj/machinery/telecomms/T in range(25, src))
+					for (var/obj/machinery/telecomms/T in range(25, src))
 						if (T.network == network)
 							machinelist.Add(T)
 

@@ -22,7 +22,7 @@
 
 /obj/item/robot_module/security/respawn_consumable(mob/living/silicon/robot/R, amount)
 	..()
-	for(var/obj/item/gun/energy/T in equipment)
+	for (var/obj/item/gun/energy/T in equipment)
 		if (T && T.power_supply)
 			if (T.power_supply.charge < T.power_supply.maxcharge)
 				T.power_supply.give(T.charge_cost * amount)

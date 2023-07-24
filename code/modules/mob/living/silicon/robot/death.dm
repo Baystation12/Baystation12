@@ -6,7 +6,7 @@
 
 /mob/living/silicon/robot/death(gibbed,deathmessage, show_dead_message)
 	if (module)
-		for(var/obj/item/gripper/G in module.equipment)
+		for (var/obj/item/gripper/G in module.equipment)
 			G.drop_gripped_item()
 	locked = FALSE
 	remove_robot_verbs()

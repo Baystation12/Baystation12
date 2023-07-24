@@ -241,7 +241,7 @@
 	var/result = FALSE
 
 	// First, we will try to peacefully make a path, I.E opening a door we have access to.
-	for(var/direction in directions_to_try)
+	for (var/direction in directions_to_try)
 		result = destroy_surroundings(direction, violent = FALSE)
 		if (result)
 			break
@@ -249,7 +249,7 @@
 	// Alright, lets smash some shit instead, if it didn't work and we're allowed to be violent.
 	if (!result && can_violently_breakthrough())
 		ai_log("breakthrough() : Starting violent pass.", AI_LOG_DEBUG)
-		for(var/direction in directions_to_try)
+		for (var/direction in directions_to_try)
 			result = destroy_surroundings(direction, violent = TRUE)
 			if (result)
 				break
@@ -269,7 +269,7 @@
 	// First, give peace a chance.
 	if (!violent)
 		ai_log("destroy_surroundings() : Going to try to peacefully clear [problem_turf].", AI_LOG_DEBUG)
-		for(var/obj/machinery/door/D in problem_turf)
+		for (var/obj/machinery/door/D in problem_turf)
 			if (D.density && holder.Adjacent(D))
 
 				//Try to open the door if we're allowed too.
@@ -288,7 +288,7 @@
 	else
 		ai_log("destroy_surroundings() : Going to try to violently clear [problem_turf].", AI_LOG_DEBUG)
 		// First, kill windows in the way.
-		for(var/obj/structure/window/W in problem_turf)
+		for (var/obj/structure/window/W in problem_turf)
 			if (W.dir == GLOB.reverse_dir[holder.dir]) // So that windows get smashed in the right order
 				ai_log("destroy_surroundings() : Attacking side window.", AI_LOG_INFO)
 				return melee_attack(W)
@@ -298,19 +298,19 @@
 				return melee_attack(W)
 
 		// Kill hull shields in the way.
-		for(var/obj/effect/energy_field/shield in problem_turf)
+		for (var/obj/effect/energy_field/shield in problem_turf)
 			if (shield.density) // Don't attack shields that are already down.
 				ai_log("destroy_surroundings() : Attacking hull shield.", AI_LOG_INFO)
 				return melee_attack(shield)
 
 		// Kill common obstacle in the way like tables.
-		for(var/obstacle in valid_obstacles_by_priority)
+		for (var/obstacle in valid_obstacles_by_priority)
 			obstacle = locate(obstacle) in problem_turf
 			if (obstacle)
 				ai_log("destroy_surroundings() : Attacking generic structure.", AI_LOG_INFO)
 				return melee_attack(obstacle)
 
-		for(var/obj/machinery/door/D in problem_turf) // Required since firelocks take up the same turf.
+		for (var/obj/machinery/door/D in problem_turf) // Required since firelocks take up the same turf.
 			if (D.density)
 				ai_log("destroy_surroundings() : Attacking closed door.", AI_LOG_INFO)
 				return melee_attack(D)

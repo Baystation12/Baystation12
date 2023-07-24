@@ -12,7 +12,7 @@
 
 /datum/artifact_trigger/gas/on_gas_exposure(datum/gas_mixture/gas)
 	. = TRUE
-	for(var/g in gas_needed)
+	for (var/g in gas_needed)
 		var/percentage = round(gas.gas[g]/gas.total_moles * 100, 0.01)
 		if (percentage < gas_needed[g])
 			return FALSE

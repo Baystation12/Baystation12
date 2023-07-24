@@ -84,10 +84,10 @@ var/global/vs_control/vsc = new
 	settings = vars.Copy()
 
 	var/datum/D = new() //Ensure only unique vars are put through by making a datum and removing all common vars.
-	for(var/V in D.vars)
+	for (var/V in D.vars)
 		settings -= V
 
-	for(var/V in settings)
+	for (var/V in settings)
 		if (findtextEx(V,"_RANDOM") || findtextEx(V,"_DESC") || findtextEx(V,"_METHOD"))
 			settings -= V
 
@@ -98,7 +98,7 @@ var/global/vs_control/vsc = new
 /vs_control/proc/ChangeSettingsDialog(mob/user,list/L)
 	//var/which = input(user,"Choose a setting:") in L
 	var/dat = ""
-	for(var/ch in L)
+	for (var/ch in L)
 		if (findtextEx(ch,"_RANDOM") || findtextEx(ch,"_DESC") || findtextEx(ch,"_METHOD") || findtextEx(ch,"_NAME")) continue
 		var/vw
 		var/vw_desc = "No Description."
@@ -176,7 +176,7 @@ var/global/vs_control/vsc = new
 		ChangeSettingsDialog(user,settings)
 
 /vs_control/proc/RandomizeWithProbability()
-	for(var/V in settings)
+	for (var/V in settings)
 		var/newvalue
 		if ("[V]_RANDOM" in vars)
 			if (isnum(vars["[V]_RANDOM"]))
@@ -188,7 +188,7 @@ var/global/vs_control/vsc = new
 		V = newvalue
 
 /vs_control/proc/ChangePhoron()
-	for(var/V in plc.settings)
+	for (var/V in plc.settings)
 		plc.Randomize(V)
 
 /vs_control/proc/SetDefault(mob/user)
@@ -331,10 +331,10 @@ var/global/vs_control/vsc = new
 	settings = vars.Copy()
 
 	var/datum/D = new() //Ensure only unique vars are put through by making a datum and removing all common vars.
-	for(var/V in D.vars)
+	for (var/V in D.vars)
 		settings -= V
 
-	for(var/V in settings)
+	for (var/V in settings)
 		if (findtextEx(V,"_RANDOM") || findtextEx(V,"_DESC"))
 			settings -= V
 

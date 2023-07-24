@@ -29,7 +29,7 @@ var/global/jobban_keylist[0]		//to store the keys & ranks
 	return 0
 
 /proc/ckey_is_jobbanned(check_key, rank)
-	for(var/s in jobban_keylist)
+	for (var/s in jobban_keylist)
 		if (findtext(s,"[check_key] - [rank]") == 1 )
 			var/startpos = findtext(s, "## ")+3
 			if (startpos && startpos<length(s))

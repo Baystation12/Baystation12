@@ -78,7 +78,7 @@
 	if (!H.restrained() && H.shock_stage < 40 && prob(3))
 		var/maxdam = 0
 		var/obj/item/organ/external/damaged_organ = null
-		for(var/obj/item/organ/external/E in H.organs)
+		for (var/obj/item/organ/external/E in H.organs)
 			if (!E.can_feel_pain()) continue
 			var/dam = E.get_damage()
 			// make the choice of the organ depend on damage,
@@ -97,7 +97,7 @@
 			else
 				H.custom_emote("rubs [P.his] [damaged_organ.name] carefully.")
 
-		for(var/obj/item/organ/I in H.internal_organs)
+		for (var/obj/item/organ/I in H.internal_organs)
 			if ((I.status & ORGAN_DEAD) || BP_IS_ROBOTIC(I)) continue
 			if (I.damage > 2) if (prob(2))
 				var/obj/item/organ/external/parent = H.get_organ(I.parent_organ)
@@ -393,7 +393,7 @@
 	var/lost_limb_count = length(has_limbs) - length(H.organs)
 	if (lost_limb_count >= DIONA_LIMB_DEATH_COUNT)
 		return TRUE
-	for(var/thing in H.bad_external_organs)
+	for (var/thing in H.bad_external_organs)
 		var/obj/item/organ/external/E = thing
 		if (E && E.is_stump())
 			lost_limb_count++
@@ -430,7 +430,7 @@
 	if (!H || H.species.name != name) return
 
 	var/nymph_count = 0
-	for(var/mob/living/carbon/alien/diona/nymph in H)
+	for (var/mob/living/carbon/alien/diona/nymph in H)
 		nymph_count++
 		if (nymph_count >= 3) return
 
@@ -465,7 +465,7 @@
 		if (H.loc.is_flooded(lying_mob = TRUE))
 			is_in_water = TRUE
 		else
-			for(var/obj/structure/hygiene/shower/shower in H.loc)
+			for (var/obj/structure/hygiene/shower/shower in H.loc)
 				if (shower.on)
 					is_in_water = TRUE
 					break

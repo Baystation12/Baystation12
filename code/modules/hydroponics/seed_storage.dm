@@ -110,7 +110,7 @@
 /obj/machinery/seed_storage/Initialize(mapload)
 	. = ..()
 	if (LAZYLEN(starting_seeds))
-		for(var/typepath in starting_seeds)
+		for (var/typepath in starting_seeds)
 			var/amount = starting_seeds[typepath]
 			if (isnull(amount))
 				amount = 1
@@ -302,7 +302,7 @@
 	else if (istype(O, /obj/item/storage/plants))
 		var/obj/item/storage/P = O
 		var/loaded = 0
-		for(var/obj/item/seeds/G in P.contents)
+		for (var/obj/item/seeds/G in P.contents)
 			++loaded
 			P.remove_from_storage(G, src, 1)
 			add(G, 1)

@@ -34,7 +34,7 @@
 	if (!ghost_ability_check())
 		return
 
-	for(var/obj/machinery/light/L in range(3))
+	for (var/obj/machinery/light/L in range(3))
 		L.flicker()
 
 	ghost_magic_cd = world.time + 30 SECONDS
@@ -58,7 +58,7 @@
 		return
 
 	var/num_doodles = 0
-	for(var/obj/effect/decal/cleanable/blood/writing/W in T)
+	for (var/obj/effect/decal/cleanable/blood/writing/W in T)
 		num_doodles++
 	if (num_doodles > 4)
 		to_chat(src, SPAN_WARNING("There is no space to write on!"))
@@ -67,7 +67,7 @@
 	var/obj/effect/decal/cleanable/blood/choice
 	if (!bloodless)
 		var/list/choices = list()
-		for(var/obj/effect/decal/cleanable/blood/B in range(1))
+		for (var/obj/effect/decal/cleanable/blood/B in range(1))
 			if (B.amount > 0)
 				choices += B
 
@@ -143,7 +143,7 @@
 	var/turf/T = get_turf(src)
 
 	var/list/obj/item/choices = list()
-	for(var/obj/item/I in range(1))
+	for (var/obj/item/I in range(1))
 		if (I.w_class <= 2)
 			choices += I
 
@@ -175,7 +175,7 @@
 		return
 
 	var/list/mob/living/choices = list()
-	for(var/mob/living/M in range(1))
+	for (var/mob/living/M in range(1))
 		choices += M
 
 	var/mob/living/choice = input(src, "Whom do you want to whisper to?") as null|anything in choices
@@ -207,7 +207,7 @@
 		return
 
 	var/list/mob/living/carbon/human/choices = list()
-	for(var/mob/living/carbon/human/H in range(1))
+	for (var/mob/living/carbon/human/H in range(1))
 		choices += H
 
 	var/mob/living/carbon/human/choice = input(src, "Whom do you want to scratch?") as null|anything in choices
@@ -235,7 +235,7 @@
 		return
 
 	var/list/mob/living/carbon/human/choices = list()
-	for(var/mob/living/carbon/human/H in range(1))
+	for (var/mob/living/carbon/human/H in range(1))
 		choices += H
 
 	var/mob/living/carbon/human/choice = input(src, "Whom do you want to scare?") as null|anything in choices

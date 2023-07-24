@@ -236,7 +236,7 @@
 	var/actual_meat_amount = round(max(1,(meat_amount / 2) + skill_level / 2))
 	user.visible_message(SPAN_DANGER("\The [user] chops up \the [src]!"))
 	if (meat_type && actual_meat_amount > 0 && (stat == DEAD))
-		for(var/i=0;i<actual_meat_amount;i++)
+		for (var/i=0;i<actual_meat_amount;i++)
 			var/obj/item/meat = new meat_type(get_turf(src))
 			meat.SetName("[src.name] [meat.name]")
 			if (can_bleed)
@@ -325,7 +325,7 @@
 	var/old_dir = dir
 	. = ..()
 	if (. && movement_shake_radius)
-		for(var/mob/living/L in range(movement_shake_radius, src))
+		for (var/mob/living/L in range(movement_shake_radius, src))
 			shake_camera(L, 1, 1)
 	if (turn_sound && dir != old_dir)
 		playsound(src, turn_sound, 50, 1)

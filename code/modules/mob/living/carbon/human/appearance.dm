@@ -184,7 +184,7 @@
 /mob/living/carbon/human/proc/generate_valid_hairstyles(check_gender = 1)
 	. = list()
 	var/list/hair_styles = species.get_hair_styles()
-	for(var/hair_style in hair_styles)
+	for (var/hair_style in hair_styles)
 		var/datum/sprite_accessory/S = hair_styles[hair_style]
 		if (check_gender)
 			if (gender == MALE && S.gender == FEMALE)
@@ -197,6 +197,6 @@
 	return species.get_facial_hair_styles(gender)
 
 /mob/living/carbon/human/proc/force_update_limbs()
-	for(var/obj/item/organ/external/O in organs)
+	for (var/obj/item/organ/external/O in organs)
 		O.sync_colour_to_human(src)
 	update_body(0)

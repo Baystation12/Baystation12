@@ -168,12 +168,12 @@
 
 	var/direction = 16
 
-	for(var/wallDir in GLOB.cardinal)
+	for (var/wallDir in GLOB.cardinal)
 		var/turf/newTurf = get_step(T,wallDir)
 		if (newTurf && newTurf.density)
 			direction |= wallDir
 
-	for(var/obj/effect/vine/shroom in T.contents)
+	for (var/obj/effect/vine/shroom in T.contents)
 		if (shroom == src)
 			continue
 		if (shroom.floor) //special
@@ -183,7 +183,7 @@
 
 	var/list/dirList = list()
 
-	for(var/i=1,i<=16, i = SHIFTL(i, 1))
+	for (var/i=1,i<=16, i = SHIFTL(i, 1))
 		if (direction & i)
 			dirList += i
 

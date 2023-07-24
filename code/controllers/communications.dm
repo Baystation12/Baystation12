@@ -374,7 +374,7 @@ var/global/datum/controller/radio/radio_controller
 	if (start_point)
 		z_levels = GetConnectedZlevels(start_point.z)
 
-	for(var/obj/device in devices[radio_filter])
+	for (var/obj/device in devices[radio_filter])
 		if (device == source)
 			continue
 		var/turf/end_point = get_turf(device)
@@ -434,5 +434,5 @@ var/global/datum/controller/radio/radio_controller
 		. += "data\[\"[i]\"\] = \"[data[i]]\"\n"
 		if (islist(data[i]))
 			var/list/L = data[i]
-			for(var/t in L)
+			for (var/t in L)
 				. += "data\[\"[i]\"\] list has: [t]"

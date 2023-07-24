@@ -63,7 +63,7 @@ var/global/list/image/splatter_cache=list()
 	if (blood_size == BLOOD_SIZE_NO_MERGE)
 		return
 	if (isturf(loc))
-		for(var/obj/effect/decal/cleanable/blood/B in loc)
+		for (var/obj/effect/decal/cleanable/blood/B in loc)
 			if (B == src)
 				continue
 			if (B.blood_size == BLOOD_SIZE_NO_MERGE)
@@ -201,7 +201,7 @@ var/global/list/image/splatter_cache=list()
 /obj/effect/decal/cleanable/blood/writing/New()
 	..()
 	if (LAZYLEN(random_icon_states))
-		for(var/obj/effect/decal/cleanable/blood/writing/W in loc)
+		for (var/obj/effect/decal/cleanable/blood/writing/W in loc)
 			random_icon_states.Remove(W.icon_state)
 		icon_state = pick(random_icon_states)
 	else

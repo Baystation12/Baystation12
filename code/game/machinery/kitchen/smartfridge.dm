@@ -41,7 +41,7 @@
 	update_icon()
 
 /obj/machinery/smartfridge/Destroy()
-	for(var/datum/stored_items/S in item_records)
+	for (var/datum/stored_items/S in item_records)
 		qdel(S)
 	item_records = null
 	return ..()
@@ -169,8 +169,8 @@
 			icon_state = "drying_rack-close"
 
 /obj/machinery/smartfridge/drying_rack/proc/dry()
-	for(var/datum/stored_items/I in item_records)
-		for(var/thing in I.instances)
+	for (var/datum/stored_items/I in item_records)
+		for (var/thing in I.instances)
 			var/remove_thing = FALSE
 			if (istype(thing, /obj/item/reagent_containers/food/snacks))
 				var/obj/item/reagent_containers/food/snacks/S = thing
@@ -283,7 +283,7 @@
 	else if (istype(O, /obj/item/storage))
 		var/obj/item/storage/bag/P = O
 		var/plants_loaded = 0
-		for(var/obj/G in P.contents)
+		for (var/obj/G in P.contents)
 			if (accept_check(G) && P.remove_from_storage(G, src, 1))
 				plants_loaded++
 				stock_item(G)
@@ -310,7 +310,7 @@
 		return 1
 
 /obj/machinery/smartfridge/proc/stock_item(obj/item/O)
-	for(var/datum/stored_items/I in item_records)
+	for (var/datum/stored_items/I in item_records)
 		if (istype(O, I.item_path) && O.name == I.item_name)
 			stock(I, O)
 			return
@@ -378,7 +378,7 @@
 		if (count > 0)
 			if ((count - amount) < 0)
 				amount = count
-			for(var/i = 1 to amount)
+			for (var/i = 1 to amount)
 				I.get_product(get_turf(src))
 				update_icon()
 
@@ -391,7 +391,7 @@
 	if (!target)
 		return 0
 
-	for(var/datum/stored_items/I in src.item_records)
+	for (var/datum/stored_items/I in src.item_records)
 		throw_item = I.get_product(loc)
 		if (!throw_item)
 			continue

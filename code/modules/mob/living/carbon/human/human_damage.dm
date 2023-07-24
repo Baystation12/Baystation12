@@ -44,7 +44,7 @@
 //Straight pain values, not affected by painkillers etc
 /mob/living/carbon/human/getHalLoss()
 	var/amount = 0
-	for(var/obj/item/organ/external/E in organs)
+	for (var/obj/item/organ/external/E in organs)
 		amount += E.get_pain()
 	return amount
 
@@ -70,7 +70,7 @@
 //These procs fetch a cumulative total damage from all organs
 /mob/living/carbon/human/getBruteLoss()
 	var/amount = 0
-	for(var/obj/item/organ/external/O in organs)
+	for (var/obj/item/organ/external/O in organs)
 		if (BP_IS_ROBOTIC(O) && !O.vital)
 			continue //robot limbs don't count towards shock and crit
 		amount += O.brute_dam
@@ -78,7 +78,7 @@
 
 /mob/living/carbon/human/getFireLoss()
 	var/amount = 0
-	for(var/obj/item/organ/external/O in organs)
+	for (var/obj/item/organ/external/O in organs)
 		if (BP_IS_ROBOTIC(O) && !O.vital)
 			continue //robot limbs don't count towards shock and crit
 		amount += O.burn_dam
@@ -120,7 +120,7 @@
 
 /mob/living/carbon/human/getCloneLoss()
 	var/amount = 0
-	for(var/obj/item/organ/external/E in organs)
+	for (var/obj/item/organ/external/E in organs)
 		amount += E.get_genetic_damage()
 	return amount
 
@@ -173,7 +173,7 @@
 	if ((species.species_flags & SPECIES_FLAG_NO_POISON) || isSynthetic())
 		return 0
 	var/amount = 0
-	for(var/obj/item/organ/internal/I in internal_organs)
+	for (var/obj/item/organ/internal/I in internal_organs)
 		amount += I.getToxLoss()
 	return amount
 
@@ -214,7 +214,7 @@
 		pick_organs -= brain
 		pick_organs += brain
 
-	for(var/obj/item/organ/internal/I in pick_organs)
+	for (var/obj/item/organ/internal/I in pick_organs)
 		if (amount <= 0)
 			break
 		if (heal)
@@ -247,7 +247,7 @@
 //Returns a list of damaged organs
 /mob/living/carbon/human/proc/get_damaged_organs(brute, burn)
 	var/list/obj/item/organ/external/parts = list()
-	for(var/obj/item/organ/external/O in organs)
+	for (var/obj/item/organ/external/O in organs)
 		if ((brute && O.brute_dam) || (burn && O.burn_dam))
 			parts += O
 	return parts
@@ -255,7 +255,7 @@
 //Returns a list of damageable organs
 /mob/living/carbon/human/proc/get_damageable_organs()
 	var/list/obj/item/organ/external/parts = list()
-	for(var/obj/item/organ/external/O in organs)
+	for (var/obj/item/organ/external/O in organs)
 		if (O.is_damageable())
 			parts += O
 	return parts
@@ -345,7 +345,7 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 	var/dam_flags = (sharp? DAMAGE_FLAG_SHARP : 0)|(edge? DAMAGE_FLAG_EDGE : 0)
 	var/brute_avg = brute / length(parts)
 	var/burn_avg = burn / length(parts)
-	for(var/obj/item/organ/external/E in parts)
+	for (var/obj/item/organ/external/E in parts)
 		if (QDELETED(E))
 			continue
 		if (E.owner != src)
@@ -375,7 +375,7 @@ This function restores the subjects blood to max.
 This function restores all organs.
 */
 /mob/living/carbon/human/restore_all_organs(ignore_prosthetic_prefs)
-	for(var/bodypart in BP_BY_DEPTH)
+	for (var/bodypart in BP_BY_DEPTH)
 		var/obj/item/organ/external/current_organ = organs_by_name[bodypart]
 		if (istype(current_organ))
 			current_organ.rejuvenate(ignore_prosthetic_prefs)
@@ -406,9 +406,9 @@ This function restores all organs.
 					var/old_damage = damage
 					var/tally
 					silent = TRUE // Will damage a lot of organs, probably, so avoid spam.
-					for(var/zone in organ_rel_size)
+					for (var/zone in organ_rel_size)
 						tally += organ_rel_size[zone]
-					for(var/zone in organ_rel_size)
+					for (var/zone in organ_rel_size)
 						damage = old_damage * organ_rel_size[zone]/tally
 						def_zone = zone
 						. = .() || .

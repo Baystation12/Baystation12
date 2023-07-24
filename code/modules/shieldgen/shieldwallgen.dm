@@ -50,7 +50,7 @@
 			user.visible_message("\The [user] turned the shield generator off.", \
 				"You turn off the shield generator.", \
 				"You hear heavy droning fade out.")
-			for(var/dir in list(1,2,4,8)) src.cleanup(dir)
+			for (var/dir in list(1,2,4,8)) src.cleanup(dir)
 		else
 			src.active = 1
 			update_icon()
@@ -148,7 +148,7 @@
 				"You hear heavy droning fade out")
 			src.active = 0
 			update_icon()
-			for(var/dir in list(1,2,4,8)) src.cleanup(dir)
+			for (var/dir in list(1,2,4,8)) src.cleanup(dir)
 
 /obj/machinery/shieldwallgen/proc/setup_field(NSEW = 0)
 	var/turf/T = get_turf(src)
@@ -170,7 +170,7 @@
 	else if (NSEW == 8)
 		oNSEW = 4
 
-	for(var/dist = 0, dist <= (max_range+1), dist += 1) // checks out to 8 tiles away for another generator
+	for (var/dist = 0, dist <= (max_range+1), dist += 1) // checks out to 8 tiles away for another generator
 		T = get_step(T2, NSEW)
 		T2 = T
 		steps += 1
@@ -187,7 +187,7 @@
 
 	T2 = src.loc
 
-	for(var/dist = 0, dist < steps, dist += 1) // creates each field tile
+	for (var/dist = 0, dist < steps, dist += 1) // creates each field tile
 		var/field_dir = get_dir(T2,get_step(T2, NSEW))
 		T = get_step(T2, NSEW)
 		T2 = T
@@ -232,7 +232,7 @@
 	var/turf/T = src.loc
 	var/turf/T2 = src.loc
 
-	for(var/dist = 0, dist <= (max_range+1), dist += 1) // checks out to 8 tiles away for fields
+	for (var/dist = 0, dist <= (max_range+1), dist += 1) // checks out to 8 tiles away for fields
 		T = get_step(T2, NSEW)
 		T2 = T
 		if (locate(/obj/machinery/shieldwall) in T)

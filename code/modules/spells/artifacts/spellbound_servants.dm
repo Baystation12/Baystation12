@@ -26,13 +26,13 @@
 		H.real_name = name_choice
 
 /datum/spellbound_type/proc/equip_servant(mob/living/carbon/human/H)
-	for(var/stype in spells)
+	for (var/stype in spells)
 		var/spell/S = new stype()
 		if (S.spell_flags & NEEDSCLOTHES)
 			S.spell_flags &= ~NEEDSCLOTHES
 		H.add_spell(S)
 	. = list()
-	for(var/etype in equipment)
+	for (var/etype in equipment)
 		var/obj/item/I = new etype(get_turf(H))
 		if (istype(I, /obj/item/clothing))
 			I.canremove = 0
@@ -208,7 +208,7 @@
 		return
 	last_called = world.time + 30 SECONDS
 	var/datum/ghosttrap/G = get_ghost_trap("wizard familiar")
-	for(var/mob/observer/ghost/ghost in GLOB.player_list)
+	for (var/mob/observer/ghost/ghost in GLOB.player_list)
 		if (G.assess_candidate(ghost,null,FALSE))
 			to_chat(ghost,"[SPAN_NOTICE("<b>A wizard is requesting a Spell-Bound Servant!</b>")] (<a href='?src=\ref[src];master=\ref[user]'>Join</a>)")
 
@@ -251,7 +251,7 @@
 		use_type(pick(types),user)
 		return
 	var/dat = "<center><b><h3>Summoning Stone</h3></b><i>Choose a companion to help you.</i><br><br></center>"
-	for(var/type in types)
+	for (var/type in types)
 		var/datum/spellbound_type/SB = type
 		dat += "<br><a href='byond://?src=\ref[src];type=[type]'>[initial(SB.name)]</a> - [initial(SB.desc)]"
 	show_browser(user,dat,"window=summoning")
@@ -267,7 +267,7 @@
 			var/area/picked_area = pareas[a]
 			pareas -= a
 			var/list/turfs = get_area_turfs(picked_area)
-			for(var/t in turfs)
+			for (var/t in turfs)
 				var/turf/T = t
 				if (T.density)
 					turfs -= T

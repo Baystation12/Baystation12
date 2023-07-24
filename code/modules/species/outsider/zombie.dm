@@ -135,7 +135,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		else if (prob(5))
 			playsound(H.loc, 'sound/hallucinations/wail.ogg', 15, 1)
 
-	for(var/obj/item/organ/I in H.internal_organs)
+	for (var/obj/item/organ/I in H.internal_organs)
 		if (I.damage > 0)
 			I.damage = max(I.damage - heal_rate, 0)
 
@@ -178,7 +178,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 /datum/species/zombie/proc/handle_action(mob/living/carbon/human/H)
 	var/dist = 128
-	for(var/mob/living/M in hearers(H, 15))
+	for (var/mob/living/M in hearers(H, 15))
 		if ((ishuman(M) || istype(M, /mob/living/exosuit)) && !M.is_species(SPECIES_ZOMBIE) && !M.is_species(SPECIES_DIONA)) //Don't attack fellow zombies, or diona
 			if (istype(M, /mob/living/exosuit))
 				var/mob/living/exosuit/MC = M
@@ -199,7 +199,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 		if (!H.Adjacent(target))
 			var/turf/dir = get_step_towards(H, target)
-			for(var/type in obstacles) //Break obstacles
+			for (var/type in obstacles) //Break obstacles
 				var/obj/obstacle = locate(type) in dir
 				if (obstacle)
 					H.face_atom(obstacle)
@@ -222,7 +222,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 				if (H.Adjacent(target)) //Check we're still next to them
 					H.consume()
 
-		for(var/mob/living/M in hearers(H, 15))
+		for (var/mob/living/M in hearers(H, 15))
 			if (target == M) //If our target is still nearby
 				return
 		target = null //Target lost
@@ -393,7 +393,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 	if (skillset && skillset.skill_list)
 		skillset.skill_list = list()
-		for(var/singleton/hierarchy/skill/S in GLOB.skills) //Only want trained CQC and athletics
+		for (var/singleton/hierarchy/skill/S in GLOB.skills) //Only want trained CQC and athletics
 			skillset.skill_list[S.type] = SKILL_UNSKILLED
 		skillset.skill_list[SKILL_HAULING] = SKILL_TRAINED
 		skillset.skill_list[SKILL_COMBAT] = SKILL_TRAINED

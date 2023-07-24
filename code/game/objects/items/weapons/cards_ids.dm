@@ -241,7 +241,7 @@ var/global/const/NO_EMAG_ACT = -50
 /obj/item/card/id/on_update_icon()
 	overlays.Cut()
 	overlays += overlay_image(icon, "[icon_state]_colors", detail_color, RESET_COLOR)
-	for(var/detail in extra_details)
+	for (var/detail in extra_details)
 		overlays += overlay_image(icon, detail, flags=RESET_COLOR)
 
 /obj/item/card/id/CanUseTopic(user)
@@ -292,7 +292,7 @@ var/global/const/NO_EMAG_ACT = -50
 	id_card.formal_name_prefix = initial(id_card.formal_name_prefix)
 	id_card.formal_name_suffix = initial(id_card.formal_name_suffix)
 	if (client && client.prefs)
-		for(var/culturetag in client.prefs.cultural_info)
+		for (var/culturetag in client.prefs.cultural_info)
 			var/singleton/cultural_info/culture = SSculture.get_culture(client.prefs.cultural_info[culturetag])
 			if (culture)
 				id_card.formal_name_prefix = "[culture.get_formal_name_prefix()][id_card.formal_name_prefix]"
@@ -322,7 +322,7 @@ var/global/const/NO_EMAG_ACT = -50
 		if (char_rank)
 			var/singleton/rank_category/category = char_rank.rank_category()
 			if (category)
-				for(var/add_access in category.add_accesses)
+				for (var/add_access in category.add_accesses)
 					id_card.access.Add(add_access)
 
 /obj/item/card/id/proc/dat()
@@ -520,7 +520,7 @@ var/global/const/NO_EMAG_ACT = -50
 /obj/item/card/id/foundation/attack_self(mob/living/user)
 	. = ..()
 	if (istype(user))
-		for(var/mob/M in viewers(world.view, get_turf(user))-user)
+		for (var/mob/M in viewers(world.view, get_turf(user))-user)
 			if (user.psi && isliving(M))
 				var/mob/living/L = M
 				if (!L.psi)

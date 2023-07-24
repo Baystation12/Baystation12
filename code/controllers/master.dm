@@ -81,7 +81,7 @@ var/global/datum/controller/master/Master = new
 		else
 			var/list/subsytem_types = subtypesof(/datum/controller/subsystem)
 			sortTim(subsytem_types, /proc/cmp_subsystem_init)
-			for(var/I in subsytem_types)
+			for (var/I in subsytem_types)
 				_subsystems += new I
 		Master = src
 	if (!GLOB)
@@ -96,7 +96,7 @@ var/global/datum/controller/master/Master = new
 	processing = FALSE
 	sortTim(subsystems, /proc/cmp_subsystem_init)
 	reverseRange(subsystems)
-	for(var/datum/controller/subsystem/ss in subsystems)
+	for (var/datum/controller/subsystem/ss in subsystems)
 		if (ss.flags & SS_NEEDS_SHUTDOWN)
 			var/time = Uptime()
 			report_progress("Shutting down [ss] subsystem...")
@@ -267,7 +267,7 @@ var/global/datum/controller/master/Master = new
 
 		var/ss_runlevels = SS.runlevels
 		var/added_to_any = FALSE
-		for(var/I in 1 to length(GLOB.bitflags))
+		for (var/I in 1 to length(GLOB.bitflags))
 			if (ss_runlevels & GLOB.bitflags[I])
 				while(length(runlevel_sorted_subsystems) < I)
 					runlevel_sorted_subsystems += list(list())
@@ -281,7 +281,7 @@ var/global/datum/controller/master/Master = new
 	//these sort by lower priorities first to reduce the number of loops needed to add subsequent SS's to the queue
 	//(higher subsystems will be sooner in the queue, adding them later in the loop means we don't have to loop thru them next queue add)
 	sortTim(tickersubsystems, /proc/cmp_subsystem_priority)
-	for(var/level in runlevel_sorted_subsystems)
+	for (var/level in runlevel_sorted_subsystems)
 		sortTim(level, /proc/cmp_subsystem_priority)
 		level += tickersubsystems
 
@@ -339,7 +339,7 @@ var/global/datum/controller/master/Master = new
 				cached_runlevel = checking_runlevel
 				current_runlevel_subsystems = runlevel_sorted_subsystems[cached_runlevel]
 				var/stagger = world.time
-				for(var/I in current_runlevel_subsystems)
+				for (var/I in current_runlevel_subsystems)
 					var/datum/controller/subsystem/SS = I
 					if (SS.next_fire <= world.time)
 						stagger += world.tick_lag * rand(1, 5)
@@ -550,7 +550,7 @@ var/global/datum/controller/master/Master = new
 		log_world("MC: SoftReset: Bad list contents: '[subsystems]' '[ticker_SS]' '[runlevel_SS]'")
 		return
 	var/subsystemstocheck = subsystems + ticker_SS
-	for(var/I in runlevel_SS)
+	for (var/I in runlevel_SS)
 		subsystemstocheck |= I
 
 	for (var/thing in subsystemstocheck)
@@ -559,7 +559,7 @@ var/global/datum/controller/master/Master = new
 			//list(SS) is so if a list makes it in the subsystem list, we remove the list, not the contents
 			subsystems -= list(SS)
 			ticker_SS -= list(SS)
-			for(var/I in runlevel_SS)
+			for (var/I in runlevel_SS)
 				I -= list(SS)
 			log_world("MC: SoftReset: Found bad entry in subsystem list, '[SS]'")
 			continue
@@ -601,13 +601,13 @@ var/global/datum/controller/master/Master = new
 	//disallow more than one map to load at once, multithreading it will just cause race conditions
 	while(map_loading)
 		stoplag()
-	for(var/S in subsystems)
+	for (var/S in subsystems)
 		var/datum/controller/subsystem/SS = S
 		SS.StartLoadingMap()
 	map_loading = TRUE
 
 /datum/controller/master/StopLoadingMap(bounds = null)
 	map_loading = FALSE
-	for(var/S in subsystems)
+	for (var/S in subsystems)
 		var/datum/controller/subsystem/SS = S
 		SS.StopLoadingMap()

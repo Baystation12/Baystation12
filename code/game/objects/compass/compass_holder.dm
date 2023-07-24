@@ -42,7 +42,7 @@ var/global/list/angle_step_to_dir = list(
 
 	var/effective_compass_period = compass_period/compass_interval
 	LAZYCLEARLIST(compass_static_labels)
-	for(var/i in 0 to (360/effective_compass_period)-1)
+	for (var/i in 0 to (360/effective_compass_period)-1)
 
 		var/image/compass_marker/I = new
 		I.loc = src
@@ -111,7 +111,7 @@ var/global/list/angle_step_to_dir = list(
 	wp.hidden = TRUE
 
 /obj/compass_holder/proc/hide_waypoints(rebuild_overlays = FALSE)
-	for(var/id in compass_waypoints)
+	for (var/id in compass_waypoints)
 		hide_waypoint(id)
 	if (rebuild_overlays)
 		rebuild_overlay_lists(TRUE)
@@ -124,7 +124,7 @@ var/global/list/angle_step_to_dir = list(
 	var/turf/T = get_compass_origin()
 	if (istype(T))
 		var/translate_val = get_label_offset()
-		for(var/id in compass_waypoints)
+		for (var/id in compass_waypoints)
 			var/datum/compass_waypoint/wp = compass_waypoints[id]
 			if (should_show(wp))
 				wp.recalculate_heading(T.x, T.y, translate_val)

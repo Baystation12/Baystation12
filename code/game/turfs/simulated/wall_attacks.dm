@@ -18,7 +18,7 @@
 		set_light(0)
 		src.blocks_air = 0
 		set_opacity(0)
-		for(var/turf/simulated/turf in loc)
+		for (var/turf/simulated/turf in loc)
 			SSair.mark_for_update(turf)
 	else
 		can_open = WALL_OPENING
@@ -32,7 +32,7 @@
 		set_light(0.4, 0.1, 1)
 		src.blocks_air = 1
 		set_opacity(1)
-		for(var/turf/simulated/turf in loc)
+		for (var/turf/simulated/turf in loc)
 			SSair.mark_for_update(turf)
 
 	can_open = WALL_CAN_OPEN
@@ -42,7 +42,7 @@
 	if (!SSair)
 		return
 
-	for(var/turf/simulated/turf in loc)
+	for (var/turf/simulated/turf in loc)
 		update_thermal(turf)
 		SSair.mark_for_update(turf)
 
@@ -181,7 +181,7 @@
 			if ( WT.remove_fuel(0,user) )
 				to_chat(user, SPAN_NOTICE("You burn away the fungi with \the [WT]."))
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
-				for(var/obj/effect/overlay/wallrot/WR in src)
+				for (var/obj/effect/overlay/wallrot/WR in src)
 					qdel(WR)
 				return
 		else if (!is_sharp(W) && W.force >= 10 || W.force >= 20)

@@ -69,12 +69,12 @@
 	tokens -= oldtoken
 
 /datum/sound_player/proc/on_turf_entered_relay(atom/enteree)
-	for(var/datum/sound_token/instrument/I in tokens)
+	for (var/datum/sound_token/instrument/I in tokens)
 		I.PrivAddListener(enteree)
 
 /datum/sound_player/proc/on_turfs_changed_relay(list/prior_turfs, list/current_turfs)
 	seen_turfs = current_turfs
-	for(var/datum/sound_token/instrument/I in tokens)
+	for (var/datum/sound_token/instrument/I in tokens)
 		I.PrivLocateListeners(prior_turfs.Copy(), current_turfs.Copy())
 
 /datum/sound_player/proc/apply_modifications(sound/what, note_num, which_line, which_note) // You don't need to override this

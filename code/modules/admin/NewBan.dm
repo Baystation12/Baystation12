@@ -201,7 +201,7 @@ var/global/savefile/Banlist
 	var/i
 	var/last
 
-	for(i=0, i<1001, i++)
+	for (i=0, i<1001, i++)
 		var/a = pick(1,0)
 		var/b = pick(1,0)
 		if (b)

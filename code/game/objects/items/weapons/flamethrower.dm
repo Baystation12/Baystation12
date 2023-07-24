@@ -166,7 +166,7 @@
 	beaker_reagents.trans_to_holder(my_fraction, FLAMETHROWER_RELEASE_AMOUNT * length(turflist), safety = TRUE)
 	var/fire_colour = null
 	var/highest_amount = 0
-	for(var/datum/reagent/R in beaker_reagents.reagent_list)
+	for (var/datum/reagent/R in beaker_reagents.reagent_list)
 		power += R.accelerant_quality * FLAMETHROWER_POWER_MULTIPLIER //Flamethrowers inflate flammability compared to a pool of fuel
 		if (R.volume > highest_amount && R.accelerant_quality > 0)
 			highest_amount = R.volume
@@ -179,7 +179,7 @@
 	playsound(src, pick('sound/weapons/guns/flamethrower1.ogg','sound/weapons/guns/flamethrower2.ogg','sound/weapons/guns/flamethrower3.ogg' ), 50, TRUE, -3)
 
 	operating = TRUE //anti-spam tool, is unset when the flame projectile goes away
-	for(var/turf/T in turflist)
+	for (var/turf/T in turflist)
 		if (T.density || istype(T, /turf/space))
 			break
 		if (!previousturf && length(turflist)>1)

@@ -12,7 +12,7 @@
 	..(newloc)
 
 	if (istype(topping))
-		for(var/taste_thing in topping.nutriment_desc)
+		for (var/taste_thing in topping.nutriment_desc)
 			if (!nutriment_desc[taste_thing]) nutriment_desc[taste_thing] = 0
 			nutriment_desc[taste_thing] += topping.nutriment_desc[taste_thing]
 

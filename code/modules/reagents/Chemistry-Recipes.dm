@@ -39,7 +39,7 @@
 // This proc returns a list of all reagents it wants to use; if the holder has several reactions that use the same reagent, it will split the reagent evenly between them
 /datum/chemical_reaction/proc/get_used_reagents()
 	. = list()
-	for(var/reagent in required_reagents)
+	for (var/reagent in required_reagents)
 		. += reagent
 
 /datum/chemical_reaction/proc/get_reaction_flags(datum/reagents/holder)
@@ -49,14 +49,14 @@
 	var/data = send_data(holder)
 
 	var/reaction_volume = holder.maximum_volume
-	for(var/reactant in required_reagents)
+	for (var/reactant in required_reagents)
 		var/A = holder.get_reagent_amount(reactant) / required_reagents[reactant] / limit // How much of this reagent we are allowed to use
 		if (reaction_volume > A)
 			reaction_volume = A
 
 	var/reaction_flags = get_reaction_flags(holder)
 
-	for(var/reactant in required_reagents)
+	for (var/reactant in required_reagents)
 		holder.remove_reagent(reactant, reaction_volume * required_reagents[reactant], safety = 1)
 
 	//add the product
@@ -538,7 +538,7 @@
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(2, 1, location)
 	s.start()
-	for(var/mob/living/carbon/M in viewers(world.view, location))
+	for (var/mob/living/carbon/M in viewers(world.view, location))
 		switch(get_dist(M, location))
 			if (0 to 1)
 				if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
@@ -640,7 +640,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 
-	for(var/mob/M in viewers(5, location))
+	for (var/mob/M in viewers(5, location))
 		to_chat(M, SPAN_WARNING("The solution spews out foam!"))
 
 	var/datum/effect/effect/system/foam_spread/s = new()
@@ -659,7 +659,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 
-	for(var/mob/M in viewers(5, location))
+	for (var/mob/M in viewers(5, location))
 		to_chat(M, SPAN_WARNING("The solution spews out a metalic foam!"))
 
 	var/datum/effect/effect/system/foam_spread/s = new()
@@ -677,7 +677,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 
-	for(var/mob/M in viewers(5, location))
+	for (var/mob/M in viewers(5, location))
 		to_chat(M, SPAN_WARNING("The solution spews out a metalic foam!"))
 
 	var/datum/effect/effect/system/foam_spread/s = new()
@@ -964,7 +964,7 @@
 
 /datum/chemical_reaction/slime/monkey/on_reaction(datum/reagents/holder)
 	..()
-	for(var/i = 1, i <= 3, i++)
+	for (var/i = 1, i <= 3, i++)
 		new /obj/item/reagent_containers/food/snacks/monkeycube(get_turf(holder.my_atom))
 
 //Green
@@ -1039,16 +1039,16 @@
 	..()
 	var/list/borks = typesof(/obj/item/reagent_containers/food/snacks) - /obj/item/reagent_containers/food/snacks
 	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
-	for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
+	for (var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
 		if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
 			M.flash_eyes()
 
-	for(var/i = 1, i <= 4 + rand(1,2), i++)
+	for (var/i = 1, i <= 4 + rand(1,2), i++)
 		var/chosen = pick(borks)
 		var/obj/B = new chosen(get_turf(holder.my_atom))
 		if (B)
 			if (prob(50))
-				for(var/j = 1, j <= rand(1, 3), j++)
+				for (var/j = 1, j <= rand(1, 3), j++)
 					step(B, pick(NORTH, SOUTH, EAST, WEST))
 
 /datum/chemical_reaction/slime/mixer
@@ -1062,16 +1062,16 @@
 	..()
 	var/list/mixers = typesof(/obj/item/reagent_containers/food/drinks) - typesof(/obj/item/reagent_containers/food/drinks/glass2)
 	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
-	for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
+	for (var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
 		if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
 			M.flash_eyes()
 
-	for(var/i = 1, i <= 4 + rand(1,2), i++)
+	for (var/i = 1, i <= 4 + rand(1,2), i++)
 		var/chosen = pick(mixers)
 		var/obj/B = new chosen(get_turf(holder.my_atom))
 		if (B)
 			if (prob(50))
-				for(var/j = 1, j <= rand(1, 3), j++)
+				for (var/j = 1, j <= rand(1, 3), j++)
 					step(B, pick(NORTH, SOUTH, EAST, WEST))
 
 //Blue
@@ -1096,7 +1096,7 @@
 	..()
 	sleep(50)
 	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
-	for(var/mob/living/M in range (get_turf(holder.my_atom), 7))
+	for (var/mob/living/M in range (get_turf(holder.my_atom), 7))
 		M.bodytemperature -= 140
 		to_chat(M, SPAN_WARNING("You feel a chill!"))
 
@@ -1211,7 +1211,7 @@
 
 /datum/chemical_reaction/slime/bloodlust/on_reaction(datum/reagents/holder)
 	..()
-	for(var/mob/living/carbon/slime/slime in viewers(get_turf(holder.my_atom), null))
+	for (var/mob/living/carbon/slime/slime in viewers(get_turf(holder.my_atom), null))
 		slime.rabid = 1
 		slime.visible_message(SPAN_WARNING("The [slime] is driven into a frenzy!"))
 
@@ -1284,7 +1284,7 @@
 	required = /obj/item/slime_extract/sepia
 
 /datum/chemical_reaction/slime/film/on_reaction(datum/reagents/holder)
-	for(var/i in 1 to result_amount)
+	for (var/i in 1 to result_amount)
 		new /obj/item/device/camera_film(get_turf(holder.my_atom))
 	..()
 
@@ -1309,9 +1309,9 @@
 
 /datum/chemical_reaction/slime/teleport/on_reaction(datum/reagents/holder)
 	var/list/turfs = list()
-	for(var/turf/T in orange(holder.my_atom,6))
+	for (var/turf/T in orange(holder.my_atom,6))
 		turfs += T
-	for(var/atom/movable/a in viewers(holder.my_atom,2))
+	for (var/atom/movable/a in viewers(holder.my_atom,2))
 		if (!a.simulated)
 			continue
 		a.forceMove(pick(turfs))
@@ -1370,7 +1370,7 @@
 /datum/chemical_reaction/tofu/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	..()
 	var/location = get_turf(holder.my_atom)
-	for(var/i = 1, i <= created_volume, i++)
+	for (var/i = 1, i <= created_volume, i++)
 		new /obj/item/reagent_containers/food/snacks/tofu(location)
 
 /datum/chemical_reaction/chocolate_bar
@@ -1383,7 +1383,7 @@
 /datum/chemical_reaction/chocolate_bar/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	..()
 	var/location = get_turf(holder.my_atom)
-	for(var/i = 1, i <= created_volume, i++)
+	for (var/i = 1, i <= created_volume, i++)
 		new /obj/item/reagent_containers/food/snacks/chocolatebar(location)
 
 /datum/chemical_reaction/chocolate_bar2
@@ -1396,7 +1396,7 @@
 /datum/chemical_reaction/chocolate_bar2/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	..()
 	var/location = get_turf(holder.my_atom)
-	for(var/i = 1, i <= created_volume, i++)
+	for (var/i = 1, i <= created_volume, i++)
 		new /obj/item/reagent_containers/food/snacks/chocolatebar(location)
 
 /datum/chemical_reaction/chocolate_milk
@@ -1536,7 +1536,7 @@
 /datum/chemical_reaction/rawmeatball/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	..()
 	var/location = get_turf(holder.my_atom)
-	for(var/i = 1, i <= created_volume, i++)
+	for (var/i = 1, i <= created_volume, i++)
 		new /obj/item/reagent_containers/food/snacks/rawmeatball(location)
 
 /datum/chemical_reaction/dough
@@ -1549,7 +1549,7 @@
 /datum/chemical_reaction/dough/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	..()
 	var/location = get_turf(holder.my_atom)
-	for(var/i = 1, i <= created_volume, i++)
+	for (var/i = 1, i <= created_volume, i++)
 		new /obj/item/reagent_containers/food/snacks/dough(location)
 
 /datum/chemical_reaction/soydough
@@ -1562,7 +1562,7 @@
 /datum/chemical_reaction/soydough/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	..()
 	var/location = get_turf(holder.my_atom)
-	for(var/i = 1, i <= created_volume, i++)
+	for (var/i = 1, i <= created_volume, i++)
 		new /obj/item/reagent_containers/food/snacks/dough(location)
 
 //batter reaction as food precursor, for things that don't use pliable dough precursor.
@@ -1598,7 +1598,7 @@
 /datum/chemical_reaction/syntiflesh/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	..()
 	var/location = get_turf(holder.my_atom)
-	for(var/i = 1, i <= created_volume, i++)
+	for (var/i = 1, i <= created_volume, i++)
 		new /obj/item/reagent_containers/food/snacks/meat/syntiflesh(location)
 
 /datum/chemical_reaction/hot_ramen

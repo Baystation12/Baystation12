@@ -107,7 +107,7 @@ GLOBAL_LIST_INIT(terminal_commands, init_subtypes(/datum/terminal_command))
 		return syntax_error()
 	if (!length(arguments))
 		. = list("The following commands are available.", "Some may require additional access.")
-		for(var/command in GLOB.terminal_commands)
+		for (var/command in GLOB.terminal_commands)
 			var/datum/terminal_command/command_datum = command
 			if (user.skill_check(command_datum.core_skill, command_datum.skill_needed))
 				. += command_datum.name

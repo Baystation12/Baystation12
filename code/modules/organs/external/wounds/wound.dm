@@ -36,7 +36,7 @@
 
 	// reading from a list("stage" = damage) is pretty difficult, so build two separate
 	// lists from them instead
-	for(var/V in stages)
+	for (var/V in stages)
 		desc_list += V
 		damage_list += stages[V]
 
@@ -195,7 +195,7 @@
 	return 1
 
 /datum/wound/proc/bleeding()
-	for(var/obj/item/thing in embedded_objects)
+	for (var/obj/item/thing in embedded_objects)
 		if (thing.w_class > ITEM_SIZE_SMALL)
 			return FALSE
 	if (bandaged || clamped)

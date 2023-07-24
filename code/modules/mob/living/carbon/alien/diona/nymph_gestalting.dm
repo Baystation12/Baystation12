@@ -25,7 +25,7 @@
 		var/mob/living/carbon/human/H = loc
 		if (H.species.name == SPECIES_DIONA)
 			var/nymph_count = 0
-			for(var/mob/living/carbon/alien/diona/chirp in H)
+			for (var/mob/living/carbon/alien/diona/chirp in H)
 				nymph_count++
 				if (nymph_count >= 3)
 					break

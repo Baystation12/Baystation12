@@ -65,7 +65,7 @@
 
 /datum/terminal_command/file/proc/output_file_list(list/drives, max_lines)
 	var/list/O = list()
-	for(var/did in drives)
+	for (var/did in drives)
 		var/obj/item/stock_parts/computer/hard_drive/D = drives[did]
 		if (!istype(D))
 			continue
@@ -78,7 +78,7 @@
 			O += "No files found on device."
 		else
 			var/i = 0
-			for(var/datum/computer_file/F in D.stored_files)
+			for (var/datum/computer_file/F in D.stored_files)
 				if (length(O) >= max_lines) // There's a line limit in the terminal, so if we approach it, break off and just list number of files on the drives.
 					O += ".. [(length(D.stored_files) - i)] additional files."
 					break

@@ -76,7 +76,7 @@ Tiny, weak, and mostly harmless alone. dangerous in groups.
 		burst()
 
 /obj/structure/leech_spawner/proc/burst()
-	for(var/i in 1 to number_to_spawn)
+	for (var/i in 1 to number_to_spawn)
 		new /mob/living/simple_animal/hostile/leech(get_turf(src))
 	visible_message(SPAN_MFAUNA("A swarm of leeches burst out from \the [src]!"))
 	playsound(src, 'sound/voice/BugHiss.ogg', 50, 5)

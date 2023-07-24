@@ -6,7 +6,7 @@
 /obj/item/pack/spaceball/SetupCards()
 	var/datum/playingcard/P
 	var/i
-	for(i=0;i<5;i++)
+	for (i=0;i<5;i++)
 		P = new()
 		if (prob(1))
 			P.name = "Spaceball Jones, [GLOB.using_map.game_year] Brickburn Galaxy Trekers"

@@ -10,7 +10,7 @@
 
 /datum/persistent/graffiti/CheckTurfContents(turf/T, list/tokens)
 	var/too_much_graffiti = 0
-	for(var/obj/effect/decal/writing/W in .)
+	for (var/obj/effect/decal/writing/W in .)
 		too_much_graffiti++
 		if (too_much_graffiti >= 5)
 			return FALSE
@@ -35,7 +35,7 @@
 	.["author"] =  save_graffiti.author || "unknown"
 	.["message"] = save_graffiti.message
 
-/datum/persistent/graffiti/GetAdminDataStringFor(thing, can_modify, mob/user)
+/datum/persistent/graffiti/GetAdminDataStringfor (thing, can_modify, mob/user)
 	var/obj/effect/decal/writing/save_graffiti = thing
 	if (can_modify)
 		. = "<td colspan = 2>[save_graffiti.message]</td><td>[save_graffiti.author]</td><td><a href='byond://?src=\ref[src];caller=\ref[user];remove_entry=\ref[thing]'>Destroy</a></td>"

@@ -14,7 +14,7 @@
 
 		var/datum/nano_module/alarm_monitor/monitor = new(SA)
 		monitor.alarm_handlers.Cut()
-		for(var/alarm_handler in alarm_handlers)
+		for (var/alarm_handler in alarm_handlers)
 			monitor.alarm_handlers += alarm_handler
 
 		SA.register_monitor(monitor)
@@ -24,6 +24,6 @@
 	if (..(SA))
 		alarm_handlers.Cut()
 		if (SA.alarm_monitor)
-			for(var/alarm_handler in SA.alarm_monitor.alarm_handlers)
+			for (var/alarm_handler in SA.alarm_monitor.alarm_handlers)
 				alarm_handlers += alarm_handler
 		return 1

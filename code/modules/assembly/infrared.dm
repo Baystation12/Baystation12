@@ -117,14 +117,14 @@
 
 /proc/create_update_and_delete_beams(active, visible, dir, list/seen_turfs, list/existing_beams)
 	if (!active)
-		for(var/b in existing_beams)
+		for (var/b in existing_beams)
 			qdel(b)
 		existing_beams.Cut()
 		return
 
 	var/list/turfs_that_need_beams = seen_turfs.Copy()
 
-	for(var/b in existing_beams)
+	for (var/b in existing_beams)
 		var/obj/effect/beam/ir_beam/beam = b
 		if (beam.loc in turfs_that_need_beams)
 			turfs_that_need_beams -= beam.loc
@@ -136,7 +136,7 @@
 	if (!visible)
 		return
 
-	for(var/t in turfs_that_need_beams)
+	for (var/t in turfs_that_need_beams)
 		var/obj/effect/beam/ir_beam/beam = new(t)
 		existing_beams += beam
 		beam.set_dir(dir)

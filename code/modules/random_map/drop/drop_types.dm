@@ -17,7 +17,7 @@ var/global/list/datum/supply_drop_loot/supply_drop
 
 /datum/supply_drop_loot/proc/drop(turf/T)
 	var/C = container ? new container(T) : T
-	for(var/content in contents())
+	for (var/content in contents())
 		new content(C)
 
 /datum/supply_drop_loot/dd_SortValue()

@@ -21,12 +21,12 @@
 
 /obj/item/robot_parts/robot_suit/on_update_icon()
 	overlays.Cut()
-	for(var/part in required_parts)
+	for (var/part in required_parts)
 		if (parts[part])
 			overlays += "[part]+o"
 
 /obj/item/robot_parts/robot_suit/proc/check_completion()
-	for(var/part in required_parts)
+	for (var/part in required_parts)
 		if (!parts[part])
 			return FALSE
 	return TRUE
@@ -93,7 +93,7 @@
 		var/ghost_can_reenter = 0
 		if (B.mind)
 			if (!B.key)
-				for(var/mob/observer/ghost/G in GLOB.player_list)
+				for (var/mob/observer/ghost/G in GLOB.player_list)
 					if (G.can_reenter_corpse && G.mind == B.mind)
 						ghost_can_reenter = 1
 						break
@@ -146,12 +146,12 @@
 
 /obj/item/robot_parts/robot_suit/Destroy()
 	parts.Cut()
-	for(var/thing in contents)
+	for (var/thing in contents)
 		qdel(thing)
 	. = ..()
 
 /obj/item/robot_parts/robot_suit/proc/dismantled_from(mob/living/silicon/robot/donor)
-	for(var/thing in required_parts - list(BP_CHEST, BP_HEAD))
+	for (var/thing in required_parts - list(BP_CHEST, BP_HEAD))
 		var/part_type = required_parts[thing]
 		parts[thing] = new part_type(src)
 	var/obj/item/robot_parts/chest/chest = (locate() in donor.contents) || new

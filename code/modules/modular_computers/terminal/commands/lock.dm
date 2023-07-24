@@ -25,7 +25,7 @@
 	if (!length(arguments))
 		. = list()
 		. += "[name]: Listing storage device status..."
-		for(var/did in drives)
+		for (var/did in drives)
 			D = drives[did]
 			if (!istype(D))
 				continue

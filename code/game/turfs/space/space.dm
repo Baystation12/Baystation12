@@ -47,7 +47,7 @@
 
 // override for space turfs, since they should never hide anything
 /turf/space/levelupdate()
-	for(var/obj/O in src)
+	for (var/obj/O in src)
 		O.hide(0)
 
 /turf/space/is_solid_structure()

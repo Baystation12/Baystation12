@@ -22,7 +22,7 @@
 	var/list/transformed_dudes = list() //Who we transformed. Transformed = Transformation. Both mobs.
 
 /spell/targeted/shapeshift/cast(list/targets, mob/user)
-	for(var/m in targets)
+	for (var/m in targets)
 		var/mob/living/M = m
 		if (M.stat == DEAD)
 			to_chat(user, "[name] can only transform living targets.")
@@ -34,17 +34,17 @@
 		var/new_mob = pick(possible_transformations)
 
 		var/mob/living/trans = new new_mob(get_turf(M))
-		for(var/varName in newVars) //stolen shamelessly from Conjure
+		for (var/varName in newVars) //stolen shamelessly from Conjure
 			if (varName in trans.vars)
 				trans.vars[varName] = newVars[varName]
 		//Give them our languages
-		for(var/l in M.languages)
+		for (var/l in M.languages)
 			var/datum/language/L = l
 			trans.add_language(L.name)
 
 		trans.SetName("[trans.name] ([M])")
 		if (istype(M,/mob/living/carbon/human) && drop_items)
-			for(var/obj/item/I in M.contents)
+			for (var/obj/item/I in M.contents)
 				M.drop_from_inventory(I)
 		if (M.mind)
 			M.mind.transfer_to(trans)
@@ -75,7 +75,7 @@
 	if (share_damage)
 		var/ratio = target.health/target.maxHealth
 		var/damage = transformer.maxHealth - round(transformer.maxHealth*(ratio))
-		for(var/i in 1 to ceil(damage/10))
+		for (var/i in 1 to ceil(damage/10))
 			transformer.adjustBruteLoss(10)
 	if (target.mind)
 		target.mind.transfer_to(transformer)

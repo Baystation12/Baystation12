@@ -61,7 +61,7 @@
 		CRASH("Duplicate types found: [english_list(duplicate_values)]")
 	// valid_paths, but with names sanitized to remove \improper
 	var/list/valid_paths_san = list()
-	for(var/path_name in valid_paths)
+	for (var/path_name in valid_paths)
 		if (!istext(path_name))
 			CRASH("Expected a text key, was [log_info_line(path_name)]")
 		var/selection_type = valid_paths[path_name]
@@ -119,14 +119,14 @@
 
 /datum/gear_tweak/contents/get_default()
 	. = list()
-	for(var/i = 1 to length(valid_contents))
+	for (var/i = 1 to length(valid_contents))
 		. += "Random"
 
 /datum/gear_tweak/contents/get_metadata(user, list/metadata, title)
 	. = list()
-	for(var/i = length(metadata) to (length(valid_contents) - 1))
+	for (var/i = length(metadata) to (length(valid_contents) - 1))
 		metadata += "Random"
-	for(var/i = 1 to length(valid_contents))
+	for (var/i = 1 to length(valid_contents))
 		var/entry = input(user, "Choose an entry.", CHARACTER_PREFERENCE_INPUT_TITLE, metadata[i]) as null|anything in (valid_contents[i] + list("Random", "None"))
 		if (entry)
 			. += entry
@@ -136,7 +136,7 @@
 /datum/gear_tweak/contents/tweak_item(owner, obj/item/I, list/metadata)
 	if (length(metadata) != length(valid_contents))
 		return
-	for(var/i = 1 to length(valid_contents))
+	for (var/i = 1 to length(valid_contents))
 		var/path
 		var/list/contents = valid_contents[i]
 		if (metadata[i] == "Random")
@@ -300,7 +300,7 @@ Custom Description
 
 	var/list/names = list()
 	var/counter = 1
-	for(var/i in ValidProcessors)
+	for (var/i in ValidProcessors)
 		if (i)
 			var/obj/O = i
 			names[initial(O.name)] = counter++
@@ -314,7 +314,7 @@ Custom Description
 
 	names = list()
 	counter = 1
-	for(var/i in ValidBatteries)
+	for (var/i in ValidBatteries)
 		if (i)
 			var/obj/O = i
 			names[initial(O.name)] = counter++
@@ -328,7 +328,7 @@ Custom Description
 
 	names = list()
 	counter = 1
-	for(var/i in ValidHardDrives)
+	for (var/i in ValidHardDrives)
 		if (i)
 			var/obj/O = i
 			names[initial(O.name)] = counter++
@@ -342,7 +342,7 @@ Custom Description
 
 	names = list()
 	counter = 1
-	for(var/i in ValidNetworkCards)
+	for (var/i in ValidNetworkCards)
 		if (i)
 			var/obj/O = i
 			names[initial(O.name)] = counter++
@@ -356,7 +356,7 @@ Custom Description
 
 	names = list()
 	counter = 1
-	for(var/i in ValidNanoPrinters)
+	for (var/i in ValidNanoPrinters)
 		if (i)
 			var/obj/O = i
 			names[initial(O.name)] = counter++
@@ -370,7 +370,7 @@ Custom Description
 
 	names = list()
 	counter = 1
-	for(var/i in ValidCardSlots)
+	for (var/i in ValidCardSlots)
 		if (i)
 			var/obj/O = i
 			names[initial(O.name)] = counter++
@@ -384,7 +384,7 @@ Custom Description
 
 	names = list()
 	counter = 1
-	for(var/i in ValidTeslaLinks)
+	for (var/i in ValidTeslaLinks)
 		if (i)
 			var/obj/O = i
 			names[initial(O.name)] = counter++
@@ -398,7 +398,7 @@ Custom Description
 
 /datum/gear_tweak/tablet/get_default()
 	. = list()
-	for(var/i in 1 to TWEAKABLE_COMPUTER_PART_SLOTS)
+	for (var/i in 1 to TWEAKABLE_COMPUTER_PART_SLOTS)
 		. += 1
 
 /datum/gear_tweak/tablet/tweak_item(user, obj/item/modular_computer/tablet/I, list/metadata)

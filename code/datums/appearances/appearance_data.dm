@@ -8,11 +8,11 @@
 	src.priority = priority
 	src.images = images
 	src.viewers = list()
-	for(var/viewer in viewers)
+	for (var/viewer in viewers)
 		AddViewer(viewer, FALSE)
 
 /datum/appearance_data/Destroy()
-	for(var/viewer in viewers)
+	for (var/viewer in viewers)
 		RemoveViewer(viewer)
 	src.images = null
 	src.viewers = null

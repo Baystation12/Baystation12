@@ -98,7 +98,7 @@
 		user.visible_message("\The [user] begins to read a passage from \the [src]...", "You begin to read a passage from \the [src]...")
 		if (do_after(user, 5 SECONDS, src, do_flags = DO_PUBLIC_UNIQUE))
 			user.visible_message("\The [user] reads a passage from \the [src].", "You read a passage from \the [src].")
-			for(var/mob/living/carbon/human/H in view(user))
+			for (var/mob/living/carbon/human/H in view(user))
 				if (user.get_cultural_value(TAG_RELIGION) == H.get_cultural_value(TAG_RELIGION))
 					to_chat(H, SPAN_NOTICE("You feel calm and relaxed, at one with the universe."))
 
@@ -125,7 +125,7 @@
 	if (!icon_changed)
 		var/mob/M = usr
 
-		for(var/i = 10; i >= 0; i -= 1)
+		for (var/i = 10; i >= 0; i -= 1)
 			if (src && !M.stat && in_range(M,src))
 				var/icon_picked = input(M, "Icon?", "Book Icon", null) in list("don't change", "bible", "koran", "scrapbook", "white", "holylight", "atheist", "kojiki", "torah", "kingyellow", "ithaqua", "necronomicon", "ninestar")
 				if (icon_picked != "don't change" && icon_picked)

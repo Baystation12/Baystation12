@@ -26,7 +26,7 @@ var/global/list/stored_shock_by_ref = list()
 			var/list/shifts = equip_adjust[slot]
 
 			// Apply all pixel shifts for each direction.
-			for(var/shift_facing in shifts)
+			for (var/shift_facing in shifts)
 				var/list/facing_list = shifts[shift_facing]
 				var/use_dir = text2num(shift_facing)
 				var/icon/equip = new(mob_icon, icon_state = mob_state, dir = use_dir)
@@ -51,7 +51,7 @@ var/global/list/stored_shock_by_ref = list()
 		return FALSE
 	else if (!isnull(max_players))
 		var/player_count = 0
-		for(var/mob/living/carbon/human/H in GLOB.alive_mobs)
+		for (var/mob/living/carbon/human/H in GLOB.alive_mobs)
 			if (H.client && H.key && H.species == src)
 				player_count++
 				if (player_count >= max_players)
@@ -74,7 +74,7 @@ var/global/list/stored_shock_by_ref = list()
 	if (!istype(organ, /obj/item/organ/external))
 		return
 	var/obj/item/organ/external/limb = organ
-	for(var/bp_tag in has_organ)
+	for (var/bp_tag in has_organ)
 		var/obj/item/organ/internal/I = has_organ[bp_tag]
 		if (initial(I.parent_organ) == organ.organ_tag)
 			limb.cavity_max_w_class = max(limb.cavity_max_w_class, get_resized_organ_w_class(initial(I.w_class)))

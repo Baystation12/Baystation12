@@ -18,7 +18,7 @@ var/global/list/fusion_reactions
 /proc/get_fusion_reaction(p_react, s_react, m_energy)
 	if (!fusion_reactions)
 		fusion_reactions = list()
-		for(var/rtype in typesof(/singleton/fusion_reaction) - /singleton/fusion_reaction)
+		for (var/rtype in typesof(/singleton/fusion_reaction) - /singleton/fusion_reaction)
 			var/singleton/fusion_reaction/cur_reaction = new rtype()
 			if (!fusion_reactions[cur_reaction.p_react])
 				fusion_reactions[cur_reaction.p_react] = list()
@@ -136,14 +136,14 @@ var/global/list/fusion_reactions
 	// Copied from the SM for proof of concept. //Not any more --Cirra //Use the whole z proc --Leshana
 	SSradiation.z_radiate(locate(1, 1, holder.z), radiation_level, 1)
 
-	for(var/mob/living/mob in GLOB.alive_mobs)
+	for (var/mob/living/mob in GLOB.alive_mobs)
 		var/turf/T = get_turf(mob)
 		if (T && (holder.z == T.z))
 			if (istype(mob, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = mob
 				H.hallucination(rand(100,150), 51)
 
-	for(var/obj/machinery/fusion_fuel_injector/I in range(world.view, origin))
+	for (var/obj/machinery/fusion_fuel_injector/I in range(world.view, origin))
 		if (I.cur_assembly && I.cur_assembly.fuel_type == MATERIAL_SUPERMATTER)
 			explosion(get_turf(I), 6)
 			spawn(5)

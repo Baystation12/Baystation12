@@ -12,7 +12,7 @@
 			host.visible_message(SPAN_DANGER("\The [host] is malformed and unable to survive. It expires pitifully, leaving behind some seeds."))
 
 			var/total_yield = rand(1,3)
-			for(var/j = 0;j<=total_yield;j++)
+			for (var/j = 0;j<=total_yield;j++)
 				var/obj/item/seeds/S = new(get_turf(host))
 				S.seed_type = name
 				S.update_seed()

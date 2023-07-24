@@ -101,7 +101,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 	// Regenerate limbs and heal damage if we have any. Copied from Bay xenos code.
 	// Theoretically the only internal organ a slime will have
 	// is the slime core. but we might as well be thorough.
-	for(var/obj/item/organ/I in H.internal_organs)
+	for (var/obj/item/organ/I in H.internal_organs)
 		if (I.damage > 0)
 			I.damage = max(I.damage - heal_rate, 0)
 			if (prob(5))
@@ -109,7 +109,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 			return 1
 
 	// Replace completely missing limbs.
-	for(var/limb_type in has_limbs)
+	for (var/limb_type in has_limbs)
 		var/obj/item/organ/external/E = H.organs_by_name[limb_type]
 		if (E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
 			E.removed()

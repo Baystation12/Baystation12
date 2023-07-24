@@ -84,7 +84,7 @@
 	if (psi_latency_chance && prob(psi_latency_chance))
 		H.set_psi_rank(pick(PSI_COERCION, PSI_REDACTION, PSI_ENERGISTICS, PSI_PSYCHOKINESIS), 1, defer_update = TRUE)
 	if (islist(psi_faculties))
-		for(var/psi in psi_faculties)
+		for (var/psi in psi_faculties)
 			H.set_psi_rank(psi, psi_faculties[psi], take_larger = TRUE, defer_update = TRUE)
 	if (H.psi)
 		H.psi.update()
@@ -126,7 +126,7 @@
 	// Get an average economic power for our cultures.
 	var/culture_mod =   0
 	var/culture_count = 0
-	for(var/token in H.cultural_info)
+	for (var/token in H.cultural_info)
 		var/singleton/cultural_info/culture = H.get_cultural_value(token)
 		if (culture && !isnull(culture.economic_power))
 			culture_count++
@@ -179,14 +179,14 @@
 /datum/job/proc/apply_fingerprints(mob/living/carbon/human/target)
 	if (!istype(target))
 		return 0
-	for(var/obj/item/item in target.contents)
+	for (var/obj/item/item in target.contents)
 		apply_fingerprints_to_item(target, item)
 	return 1
 
 /datum/job/proc/apply_fingerprints_to_item(mob/living/carbon/human/holder, obj/item/item)
 	item.add_fingerprint(holder,1)
 	if (length(item.contents))
-		for(var/obj/item/sub_item in item.contents)
+		for (var/obj/item/sub_item in item.contents)
 			apply_fingerprints_to_item(holder, sub_item)
 
 /datum/job/proc/is_position_available()
@@ -241,7 +241,7 @@
 
 /datum/job/proc/get_active_count()
 	var/active = 0
-	for(var/mob/M in GLOB.player_list)
+	for (var/mob/M in GLOB.player_list)
 		if (check_is_active(M))
 			active++
 	return active
@@ -272,14 +272,14 @@
 	. = species_branch_rank_cache_[S]
 
 	var/spawn_branches = GLOB.mil_branches.spawn_branches(S)
-	for(var/branch_type in allowed_branches)
+	for (var/branch_type in allowed_branches)
 		var/datum/mil_branch/branch = GLOB.mil_branches.get_branch_by_type(branch_type)
 		if (branch.name in spawn_branches)
 			if (!allowed_ranks || !(GLOB.using_map.flags & MAP_HAS_RANK))
 				LAZYADD(., branch.name)
 				continue // Screw this rank stuff, we're good.
 			var/spawn_ranks = branch.spawn_ranks(S)
-			for(var/rank_type in allowed_ranks)
+			for (var/rank_type in allowed_ranks)
 				var/datum/mil_rank/rank = rank_type
 				if (initial(rank.name) in spawn_ranks)
 					LAZYADD(.[branch.name], initial(rank.name))
@@ -336,7 +336,7 @@
 //Returns human-readable list of branches this job allows.
 /datum/job/proc/get_branches()
 	var/list/res = list()
-	for(var/T in allowed_branches)
+	for (var/T in allowed_branches)
 		var/datum/mil_branch/B = GLOB.mil_branches.get_branch_by_type(T)
 		res += B.name
 	return english_list(res)
@@ -345,7 +345,7 @@
 /datum/job/proc/get_ranks(branch)
 	var/list/res = list()
 	var/datum/mil_branch/B = GLOB.mil_branches.get_branch(branch)
-	for(var/T in allowed_ranks)
+	for (var/T in allowed_ranks)
 		var/datum/mil_rank/R = T
 		if (B && !(initial(R.name) in B.ranks))
 			continue
@@ -413,7 +413,7 @@
 
 /datum/job/proc/get_roundstart_spawnpoint()
 	var/list/loc_list = list()
-	for(var/obj/effect/landmark/start/sloc in landmarks_list)
+	for (var/obj/effect/landmark/start/sloc in landmarks_list)
 		if (sloc.name != title)	continue
 		if (locate(/mob/living) in sloc.loc)	continue
 		loc_list += sloc
@@ -432,7 +432,7 @@
 /datum/job/proc/get_spawnpoint(client/C)
 
 	if (!C)
-		CRASH("Null client passed to get_spawnpoint_for() proc!")
+		CRASH("Null client passed to get_spawnpoint_for () proc!")
 
 	var/mob/H = C.mob
 	var/spawnpoint = C.prefs.spawnpoint
@@ -456,7 +456,7 @@
 
 	if (!spawnpos)
 		// Step through all spawnpoints and pick first appropriate for job
-		for(var/spawntype in GLOB.using_map.allowed_spawns)
+		for (var/spawntype in GLOB.using_map.allowed_spawns)
 			var/datum/spawnpoint/candidate = spawntypes()[spawntype]
 			if (candidate.check_job_spawning(title))
 				spawnpos = candidate
@@ -473,7 +473,7 @@
 	if (is_semi_antagonist && person.mind)
 		GLOB.provocateurs.add_antagonist(person.mind)
 
-/datum/job/proc/get_alt_title_for(client/C)
+/datum/job/proc/get_alt_title_for (client/C)
 	return C.prefs.GetPlayerAltTitle(src)
 
 /datum/job/proc/clear_slot()

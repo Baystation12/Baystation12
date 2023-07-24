@@ -42,7 +42,7 @@
 /singleton/appearance_handler/cardborg/proc/init_appearances()
 	if (!appearances)
 		appearances = list()
-		for(var/singleton/cardborg_appearance/ca in init_subtypes(/singleton/cardborg_appearance))
+		for (var/singleton/cardborg_appearance/ca in init_subtypes(/singleton/cardborg_appearance))
 			appearances[ca.backpack_type] = ca
 
 /singleton/cardborg_appearance

@@ -162,7 +162,7 @@
 	log_ability_use(user, "system override (STARTED)")
 	var/list/remaining_apcs = list()
 	var/list/valid_zlevels = GetConnectedZlevels(user.z)
-	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
+	for (var/obj/machinery/power/apc/A in SSmachines.machinery)
 		if (!(A.z in valid_zlevels)) 		// Only station APCs
 			continue
 		if (A.hacker == user || A.aidisabled) 		// This one is already hacked, or AI control is disabled on it.
@@ -193,7 +193,7 @@
 	to_chat(user, "## ESTIMATED DURATION: [round((duration+300)/600)] MINUTES")
 	user.system_override = 1
 	// Now actually begin the hack. Each APC takes 10 seconds.
-	for(var/obj/machinery/power/apc/A in shuffle(remaining_apcs))
+	for (var/obj/machinery/power/apc/A in shuffle(remaining_apcs))
 		sleep(100)
 		if (!user || user.stat == DEAD)
 			return
@@ -206,7 +206,7 @@
 	to_chat(user, "## REACHABLE APC SYSTEMS OVERTAKEN. BYPASSING PRIMARY FIREWALL.")
 	sleep(1 MINUTE)
 	// Hack all APCs, including those built during hack sequence.
-	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
+	for (var/obj/machinery/power/apc/A in SSmachines.machinery)
 		if ((!A.hacker || A.hacker != src) && !A.aidisabled && (A.z in valid_zlevels))
 			A.ai_hack(src)
 

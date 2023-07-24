@@ -97,7 +97,7 @@ var/global/list/limb_icon_cache = list()
 		if (s_col && length(s_col) >= 3)
 			. += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]_[s_col_blend]"
 
-	for(var/E in markings)
+	for (var/E in markings)
 		var/datum/sprite_accessory/marking/M = E
 		if (M.draw_target == MARKING_TARGET_SKIN)
 			. += "-[M.name][markings[E]]"
@@ -173,7 +173,7 @@ var/global/list/limb_icon_cache = list()
 			mob_icon.Blend(husk_over, ICON_OVERLAY)
 
 	var/list/sorted = list()
-	for(var/E in markings)
+	for (var/E in markings)
 		var/datum/sprite_accessory/marking/M = E
 		if (M.draw_target == MARKING_TARGET_SKIN)
 			var/color = markings[E]
@@ -256,7 +256,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 		var/cache_key = "dambase-[json_encode(get_icon_key())]"
 		if (!cache_key || !limb_icon_cache[cache_key])
 			var/list/appearances = get_overlays()
-			for(var/image/I as anything in appearances) //Mutable appearances are a type of image
+			for (var/image/I as anything in appearances) //Mutable appearances are a type of image
 				I.dir = SOUTH
 				I.icon_state = null
 				if (species)

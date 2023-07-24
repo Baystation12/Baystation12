@@ -5,11 +5,11 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 /proc/cache_circuits_by_build_path()
 	RETURN_TYPE(/list)
 	. = list()
-	for(var/board_path in subtypesof(/obj/item/stock_parts/circuitboard))
+	for (var/board_path in subtypesof(/obj/item/stock_parts/circuitboard))
 		var/obj/item/stock_parts/circuitboard/board = board_path //fake type
 		if (initial(board.buildtype_select))
 			board = new board_path()
-			for(var/path in board.get_buildable_types())
+			for (var/path in board.get_buildable_types())
 				.[path] = board_path
 			continue
 		.[initial(board.build_path)] = board_path
@@ -31,14 +31,14 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 				req_components += board.additional_spawn_components
 			if (LAZYLEN(req_components))
 				LAZYINITLIST(uncreated_component_parts)
-				for(var/type in req_components)
+				for (var/type in req_components)
 					uncreated_component_parts[type] += (req_components[type] || 1)
 
 	// Create the parts we are supposed to have. If not full_populate, this is only hard-baked parts, and more will be added later.
-	for(var/component_path in uncreated_component_parts)
+	for (var/component_path in uncreated_component_parts)
 		var/number = uncreated_component_parts[component_path] || 1
 		LAZYREMOVE(uncreated_component_parts, component_path)
-		for(var/i in 1 to number)
+		for (var/i in 1 to number)
 			install_component(component_path, refresh_parts = FALSE)
 
 	// Apply presets. If not full_populate, this is done later.
@@ -50,10 +50,10 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		return
 
 	var/list/processed_parts = list()
-	for(var/path in stock_part_presets)
+	for (var/path in stock_part_presets)
 		var/singleton/stock_part_preset/preset = GET_SINGLETON(path)
 		var/number = stock_part_presets[path] || 1
-		for(var/obj/item/stock_parts/part in component_parts)
+		for (var/obj/item/stock_parts/part in component_parts)
 			if (processed_parts[part])
 				continue // only apply one preset per part
 			if (istype(part, preset.expected_part_type))
@@ -67,7 +67,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 /obj/machinery/proc/can_apply_preset_to(obj/item/stock_parts/part)
 	if (!stock_part_presets)
 		return
-	for(var/path in stock_part_presets)
+	for (var/path in stock_part_presets)
 		var/singleton/stock_part_preset/preset = GET_SINGLETON(path)
 		if (istype(part, preset.expected_part_type))
 			return preset
@@ -82,17 +82,17 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 /// Returns a list of subtypes of the given component type, with associated value = number of that component.
 /obj/machinery/proc/types_of_component(part_type)
 	. = list()
-	for(var/obj/component in component_parts)
+	for (var/obj/component in component_parts)
 		if (istype(component, part_type))
 			.[component.type]++
-	for(var/path in uncreated_component_parts)
+	for (var/path in uncreated_component_parts)
 		if (ispath(path, part_type))
 			.[path] += uncreated_component_parts[path]
 
 /// Returns a component instance of the given `part_type`, or `null` if no such type is present. `strict` forces strict type comparisons and disallows subtypes.
 /obj/machinery/proc/get_component_of_type(part_type, strict = FALSE)
 	if (strict)
-		for(var/obj/component in component_parts)
+		for (var/obj/component in component_parts)
 			if (component.type == part_type)
 				return component
 		return force_init_component(part_type)
@@ -100,7 +100,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	. = locate(part_type) in component_parts
 	if (.)
 		return
-	for(var/path in uncreated_component_parts)
+	for (var/path in uncreated_component_parts)
 		if (ispath(path, part_type))
 			return force_init_component(path)
 
@@ -191,11 +191,11 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 /// Returns the total combined component ratings for the provided `part_type`.
 /obj/machinery/proc/total_component_rating_of_type(part_type)
 	. = 0
-	for(var/thing in component_parts)
+	for (var/thing in component_parts)
 		if (istype(thing, part_type))
 			var/obj/item/stock_parts/part = thing
 			. += part.rating
-	for(var/path in uncreated_component_parts)
+	for (var/path in uncreated_component_parts)
 		if (ispath(path, part_type))
 			var/obj/item/stock_parts/comp = path
 			. += initial(comp.rating) * uncreated_component_parts[path]
@@ -207,7 +207,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		return material && material.number_of_type(part_type)
 	var/list/comps = types_of_component(part_type)
 	. = 0
-	for(var/path in comps)
+	for (var/path in comps)
 		. += comps[path]
 
 /// Use to block interactivity if panel is not open, etc. `path` is the type path to check accessibility for. Returns boolean.
@@ -218,7 +218,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 /obj/machinery/proc/can_add_component(obj/item/stock_parts/component, mob/user)
 	if (!istype(component)) // Random items. Only insert if actually needed.
 		var/list/missing = missing_parts()
-		for(var/path in missing)
+		for (var/path in missing)
 			if (istype(component, path))
 				return missing[path]
 		return 0
@@ -227,7 +227,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	if (!components_are_accessible(component.type))
 		to_chat(user, SPAN_WARNING("The insertion point for \the [component] is inaccessible!"))
 		return 0
-	for(var/path in maximum_component_parts)
+	for (var/path in maximum_component_parts)
 		if (istype(component, path) && (number_of_components(path) == maximum_component_parts[path]))
 			to_chat(user, SPAN_WARNING("There are too many parts of this type installed in \the [src] already!"))
 			return 0
@@ -243,7 +243,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 
 /// Passes `attackby()` calls through to components within the machine, if they are accessible.
 /obj/machinery/proc/component_attackby(obj/item/I, mob/user)
-	for(var/obj/item/stock_parts/part in component_parts)
+	for (var/obj/item/stock_parts/part in component_parts)
 		if (!components_are_accessible(part.type))
 			continue
 		if ((. = part.attackby(I, user)))
@@ -252,7 +252,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 
 /// Passes `attack_hand()` calls through to components within the machine, if they are accessible.
 /obj/machinery/proc/component_attack_hand(mob/user)
-	for(var/obj/item/stock_parts/part in component_parts)
+	for (var/obj/item/stock_parts/part in component_parts)
 		if (!components_are_accessible(part.type))
 			continue
 		if ((. = part.attack_hand(user)))
@@ -265,20 +265,20 @@ Standard helpers for users interacting with machinery parts.
 
 /// Handles replacement of components by a user using a part replacer. Returns boolean.
 /obj/machinery/proc/part_replacement(mob/user, obj/item/storage/part_replacer/part_replacer)
-	for(var/obj/item/stock_parts/component_part in component_parts)
+	for (var/obj/item/stock_parts/component_part in component_parts)
 		if (!component_part.base_type)
 			continue
 		if (!(component_part.part_flags & PART_FLAG_HAND_REMOVE))
 			continue
 
-		for(var/obj/item/stock_parts/new_component_part in part_replacer.contents)
+		for (var/obj/item/stock_parts/new_component_part in part_replacer.contents)
 			if (istype(new_component_part, component_part.base_type) && new_component_part.rating > component_part.rating)
 				replace_part(user, part_replacer, component_part, new_component_part)
 				. = TRUE
 				playsound(loc, 'sound/items/rped.ogg', 70)
 				break
 
-	for(var/path in uncreated_component_parts)
+	for (var/path in uncreated_component_parts)
 		var/obj/item/stock_parts/component_part = path
 		var/part_count = uncreated_component_parts[path]
 		if (!(initial(component_part.part_flags) & PART_FLAG_HAND_REMOVE))
@@ -286,7 +286,7 @@ Standard helpers for users interacting with machinery parts.
 		var/base_type = initial(component_part.base_type)
 		if (base_type)
 			for (var/i = 1 to part_count)
-				for(var/obj/item/stock_parts/new_component_part in part_replacer.contents)
+				for (var/obj/item/stock_parts/new_component_part in part_replacer.contents)
 					if (istype(new_component_part, base_type) && new_component_part.rating > initial(component_part.rating))
 						replace_part(user, part_replacer, component_part, new_component_part)
 						. = TRUE
@@ -319,7 +319,7 @@ Standard helpers for users interacting with machinery parts.
 /// Handles removal of a component by a user. Returns boolean.
 /obj/machinery/proc/part_removal(mob/user)
 	var/list/removable_parts = list()
-	for(var/path in types_of_component(/obj/item/stock_parts))
+	for (var/path in types_of_component(/obj/item/stock_parts))
 		var/obj/item/stock_parts/part = path
 		if (!(initial(part.part_flags) & PART_FLAG_HAND_REMOVE))
 			continue
@@ -351,7 +351,7 @@ Standard helpers for users interacting with machinery parts.
 		return
 	var/list/requirements = construct_state.get_requirements(src)
 	if (LAZYLEN(requirements))
-		for(var/required_type in requirements)
+		for (var/required_type in requirements)
 			var/needed = requirements[required_type]
 			var/present = number_of_components(required_type)
 			if (present < needed)

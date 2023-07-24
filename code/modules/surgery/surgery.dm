@@ -41,12 +41,12 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 		return 0
 
 	if (allowed_species)
-		for(var/species in allowed_species)
+		for (var/species in allowed_species)
 			if (target.species.get_bodytype(target) == species)
 				return 1
 
 	if (disallowed_species)
-		for(var/species in disallowed_species)
+		for (var/species in disallowed_species)
 			if (target.species.get_bodytype(target) == species)
 				return 0
 
@@ -132,7 +132,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 		. -= 10
 
 	var/skill_reqs = get_skill_reqs(user, target, tool, target_zone)
-	for(var/skill in skill_reqs)
+	for (var/skill in skill_reqs)
 		var/penalty = delicate ? 40 : 20
 		. -= max(0, penalty * (skill_reqs[skill] - user.get_skill_value(skill)))
 		if (user.skill_check(skill, SKILL_MASTER))
@@ -188,7 +188,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	// What surgeries does our tool/target enable?
 	var/list/possible_surgeries
 	var/list/all_surgeries = GET_SINGLETON_SUBTYPE_MAP(/singleton/surgery_step)
-	for(var/singleton in all_surgeries)
+	for (var/singleton in all_surgeries)
 		var/singleton/surgery_step/S = all_surgeries[singleton]
 		if (S.name && S.tool_quality(src) && S.can_use(user, M, zone, src))
 			var/image/radial_button = image(icon = icon, icon_state = icon_state)
@@ -215,7 +215,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			// Keep track of which tools we know aren't appropriate for surgery on help intent.
 			if (GLOB.surgery_tool_exception_cache[type])
 				return FALSE
-			for(var/tool in GLOB.surgery_tool_exceptions)
+			for (var/tool in GLOB.surgery_tool_exceptions)
 				if (istype(src, tool))
 					GLOB.surgery_tool_exception_cache[type] = TRUE
 					return FALSE

@@ -81,7 +81,7 @@
 	update_icon()
 
 	/* // Use this to look for cameras that have the same c_tag.
-	for(var/obj/machinery/camera/C in cameranet.cameras)
+	for (var/obj/machinery/camera/C in cameranet.cameras)
 		var/list/tempnetwork = C.network&src.network
 		if (C != src && C.c_tag == src.c_tag && length(tempnetwork))
 			to_world_log("[src.c_tag] [src.x] [src.y] [src.z] conflicts with [C.c_tag] [C.x] [C.y] [C.z]")
@@ -101,7 +101,7 @@
 		number = 1
 		var/area/A = get_area(src)
 		if (A)
-			for(var/obj/machinery/camera/C in A)
+			for (var/obj/machinery/camera/C in A)
 				if (C == src) continue
 				if (C.number)
 					number = max(number, C.number+1)
@@ -209,7 +209,7 @@
 		var/itemname = X.name
 		var/info = X.info
 		to_chat(U, "You hold \a [itemname] up to the camera ...")
-		for(var/mob/living/silicon/ai/O in GLOB.alive_mobs)
+		for (var/mob/living/silicon/ai/O in GLOB.alive_mobs)
 			if (!O.client) continue
 			if (U.name == "Unknown") to_chat(O, "<b>[U]</b> holds \a [itemname] up to one of your cameras ...")
 			else to_chat(O, "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U];trackname=[U.name]'>[U]</a></b> holds \a [itemname] up to one of your cameras ...")
@@ -348,7 +348,7 @@
 /atom/proc/auto_turn()
 	//Automatically turns based on nearby walls.
 	var/turf/simulated/wall/T = null
-	for(var/i = 1, i <= 8; i += i)
+	for (var/i = 1, i <= 8; i += i)
 		T = get_ranged_target_turf(src, i, 1)
 		if (istype(T))
 			//If someone knows a better way to do this, let me know. -Giacom
@@ -366,14 +366,14 @@
 //Return a working camera that can see a given mob
 //or null if none
 /proc/seen_by_camera(mob/M)
-	for(var/obj/machinery/camera/C in oview(4, M))
+	for (var/obj/machinery/camera/C in oview(4, M))
 		if (C.can_use())	// check if camera disabled
 			return C
 	return null
 
 /proc/near_range_camera(mob/M)
 
-	for(var/obj/machinery/camera/C in range(4, M))
+	for (var/obj/machinery/camera/C in range(4, M))
 		if (C.can_use())	// check if camera disabled
 			return C
 
@@ -405,7 +405,7 @@
 /obj/machinery/camera/proc/add_networks(list/networks)
 	var/network_added
 	network_added = 0
-	for(var/network_name in networks)
+	for (var/network_name in networks)
 		if (!(network_name in src.network))
 			network += network_name
 			network_added = 1
@@ -416,7 +416,7 @@
 /obj/machinery/camera/proc/remove_networks(list/networks)
 	var/network_removed
 	network_removed = 0
-	for(var/network_name in networks)
+	for (var/network_name in networks)
 		if (network_name in src.network)
 			network -= network_name
 			network_removed = 1
@@ -430,7 +430,7 @@
 		update_coverage(1)
 		return
 
-	for(var/new_network in networks)
+	for (var/new_network in networks)
 		if (!(new_network in network))
 			network = networks
 			update_coverage(1)

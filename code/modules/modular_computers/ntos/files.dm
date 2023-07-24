@@ -5,7 +5,7 @@
 		if (hidden)
 			return disk.stored_files
 		else
-			for(var/datum/computer_file/F in disk.stored_files)
+			for (var/datum/computer_file/F in disk.stored_files)
 				if (!F.hidden)
 					. += F
 

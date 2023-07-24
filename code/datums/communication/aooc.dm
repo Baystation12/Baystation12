@@ -28,7 +28,7 @@
 /singleton/communication_channel/aooc/do_communicate(client/C, message)
 	var/datum/admins/holder = C.holder
 
-	for(var/client/target in GLOB.clients)
+	for (var/client/target in GLOB.clients)
 		if (check_rights(R_INVESTIGATE, FALSE, target))
 			receive_communication(C, target, SPAN_AOOC("<EM>[get_options_bar(C, 0, 1, 1)]:</EM> [SPAN_CLASS("message linkify", "[message]")]"))
 		else if (target.mob?.mind?.special_role)

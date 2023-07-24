@@ -36,7 +36,7 @@ GLOBAL_DATUM(unit_test_last_obj_random_creation, /atom/movable)
 	var/heaviest_weight = -1
 	var/heaviest_choice
 
-	for(var/choice in choices)
+	for (var/choice in choices)
 		var/path = unit_test_select_heaviest(choice)
 		var/weight = unit_test_weight_of_path(path)
 		if (weight > heaviest_weight)

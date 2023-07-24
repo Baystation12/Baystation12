@@ -66,7 +66,7 @@
 		if (reagents.should_admin_log())
 			admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [reagentlist()]")
 		reagents.trans_to(target, reagents.total_volume)
-		for(var/mob/O in viewers(2, user))
+		for (var/mob/O in viewers(2, user))
 			O.show_message(SPAN_WARNING("[user] puts something in \the [target]."), 1)
 		qdel(src)
 	return

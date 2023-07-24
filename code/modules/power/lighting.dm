@@ -490,7 +490,7 @@
 	flickering = TRUE
 	spawn(0)
 		if (on && get_status() == LIGHT_OK)
-			for(var/i = 0; i < amount; i++)
+			for (var/i = 0; i < amount; i++)
 				if (get_status() != LIGHT_OK) break
 				on = !on
 				update_icon(FALSE)

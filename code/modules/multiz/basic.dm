@@ -8,7 +8,7 @@ var/global/list/z_levels = list()// Each bit re... haha just kidding this is a l
 		return
 	if (_height)
 		height = _height
-	for(var/i = (loc.z - height + 1) to (loc.z-1))
+	for (var/i = (loc.z - height + 1) to (loc.z-1))
 		if (length(z_levels) <i)
 			LIST_RESIZE(z_levels, i)
 		z_levels[i] = TRUE
@@ -45,9 +45,9 @@ var/global/list/z_levels = list()// Each bit re... haha just kidding this is a l
 /proc/GetConnectedZlevels(z)
 	RETURN_TYPE(/list)
 	. = list(z)
-	for(var/level = z, HasBelow(level), level--)
+	for (var/level = z, HasBelow(level), level--)
 		. |= level-1
-	for(var/level = z, HasAbove(level), level++)
+	for (var/level = z, HasAbove(level), level++)
 		. |= level+1
 
 /proc/AreConnectedZLevels(zA, zB)

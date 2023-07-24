@@ -83,7 +83,7 @@
 	last_recharge = world.time
 
 	if (difference > 0)
-		for(var/mob/pilot in owner.pilots)
+		for (var/mob/pilot in owner.pilots)
 			to_chat(pilot, SPAN_DANGER("Warning: Deflector shield failure detect, shutting down"))
 		toggle()
 		playsound(owner.loc,'sound/mecha/internaldmgalarm.ogg',35,1)
@@ -311,8 +311,8 @@
 					turfs += front
 					turfs += get_step(front, turn(owner.dir, -90))
 					turfs += get_step(front, turn(owner.dir,  90))
-					for(var/turf/T in turfs)
-						for(var/mob/living/M in T)
+					for (var/turf/T in turfs)
+						for (var/mob/living/M in T)
 							if (!M.Adjacent(owner))
 								continue
 							M.attack_generic(owner, (owner.arms ? owner.arms.melee_damage * 0.2 : 0), "slammed")

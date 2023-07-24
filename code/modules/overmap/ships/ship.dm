@@ -56,7 +56,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	STOP_PROCESSING(SSobj, src)
 	SSshuttle.ships -= src
 	if (length(consoles))
-		for(var/obj/machinery/computer/ship/machine in consoles)
+		for (var/obj/machinery/computer/ship/machine in consoles)
 			if (machine.linked == src)
 				machine.linked = null
 		consoles = null
@@ -105,7 +105,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/proc/get_vessel_mass()
 	. = vessel_mass
-	for(var/obj/effect/overmap/visitable/ship/ship in src)
+	for (var/obj/effect/overmap/visitable/ship/ship in src)
 		. += ship.get_vessel_mass()
 
 /obj/effect/overmap/visitable/ship/proc/get_speed()
@@ -134,7 +134,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 /obj/effect/overmap/visitable/ship/proc/adjust_speed(n_x, n_y)
 	CHANGE_SPEED_BY(speed[1], n_x)
 	CHANGE_SPEED_BY(speed[2], n_y)
-	for(var/zz in map_z)
+	for (var/zz in map_z)
 		if (is_still())
 			toggle_move_stars(zz)
 		else
@@ -180,7 +180,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 /obj/effect/overmap/visitable/ship/Process()
 	if (!halted && !is_still())
 		var/list/deltas = list(0,0)
-		for(var/i = 1 to 2)
+		for (var/i = 1 to 2)
 			if (MOVING(speed[i]))
 				position[i] += speed[i] * OVERMAP_SPEED_CONSTANT
 				if (position[i] < 0)
@@ -206,9 +206,9 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 		dir = get_heading()
 	else
 		icon_state = initial(icon_state)
-	for(var/obj/machinery/computer/ship/machine in consoles)
+	for (var/obj/machinery/computer/ship/machine in consoles)
 		if (machine.z in map_z)
-			for(var/weakref/W in machine.viewers)
+			for (var/weakref/W in machine.viewers)
 				var/mob/M = W.resolve()
 				if (istype(M) && M.client)
 					M.client.pixel_x = pixel_x
@@ -216,11 +216,11 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	..()
 
 /obj/effect/overmap/visitable/ship/proc/burn()
-	for(var/datum/ship_engine/E in engines)
+	for (var/datum/ship_engine/E in engines)
 		. += E.burn()
 
 /obj/effect/overmap/visitable/ship/proc/get_total_thrust()
-	for(var/datum/ship_engine/E in engines)
+	for (var/datum/ship_engine/E in engines)
 		. += E.get_thrust()
 
 /obj/effect/overmap/visitable/ship/proc/can_burn()
@@ -228,13 +228,13 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 		return 0
 	if (world.time < last_burn + burn_delay)
 		return 0
-	for(var/datum/ship_engine/E in engines)
+	for (var/datum/ship_engine/E in engines)
 		. |= E.can_burn()
 
 //deciseconds to next step
 /obj/effect/overmap/visitable/ship/proc/ETA()
 	. = INFINITY
-	for(var/i = 1 to 2)
+	for (var/i = 1 to 2)
 		if (MOVING(speed[i]))
 			. = min(., ((speed[i] > 0 ? 1 : -1) - position[i]) / speed[i])
 	. = max(ceil(.),0)
@@ -278,9 +278,9 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/populate_sector_objects()
 	..()
-	for(var/obj/machinery/computer/ship/S in SSmachines.machinery)
+	for (var/obj/machinery/computer/ship/S in SSmachines.machinery)
 		S.attempt_hook_up(src)
-	for(var/datum/ship_engine/E in ship_engines)
+	for (var/datum/ship_engine/E in ship_engines)
 		if (check_ownership(E.holder))
 			engines |= E
 

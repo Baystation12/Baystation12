@@ -20,12 +20,12 @@
 
 /datum/event/minispasm/start()
 	var/list/victims = list()
-	for(var/obj/item/device/radio/radio in GLOB.listening_objects)
+	for (var/obj/item/device/radio/radio in GLOB.listening_objects)
 		if (radio.on)
-			for(var/mob/living/victim in range(radio.canhear_range, radio.loc))
+			for (var/mob/living/victim in range(radio.canhear_range, radio.loc))
 				if (isnull(victims[victim]) && victim.stat == CONSCIOUS && !victim.ear_deaf)
 					victims[victim] = radio
-	for(var/thing in victims)
+	for (var/thing in victims)
 		var/mob/living/victim = thing
 		var/obj/item/device/radio/source = victims[victim]
 		do_spasm(victim, source)
@@ -35,7 +35,7 @@
 
 	if (iscarbon(victim) && !victim.isSynthetic())
 		var/list/disabilities = list(NEARSIGHTED, EPILEPSY, NERVOUS)
-		for(var/disability in disabilities)
+		for (var/disability in disabilities)
 			if (victim.disabilities & disability)
 				disabilities -= disability
 		if (length(disabilities))
@@ -51,7 +51,7 @@
 		victim.seizure()
 		var/new_latencies = rand(2,4)
 		var/list/faculties = list(PSI_COERCION, PSI_REDACTION, PSI_ENERGISTICS, PSI_PSYCHOKINESIS)
-		for(var/i = 1 to new_latencies)
+		for (var/i = 1 to new_latencies)
 			to_chat(victim, SPAN_DANGER(FONT_LARGE(pick(psi_operancy_messages))))
 			victim.adjustBrainLoss(rand(10,20))
 			victim.set_psi_rank(pick_n_take(faculties), 1)

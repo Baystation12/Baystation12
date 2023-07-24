@@ -35,7 +35,7 @@
 				. += "NONE"
 			else
 				var/list_of_accesses = list()
-				for(var/access_id in access_list)
+				for (var/access_id in access_list)
 					if (check_functionality()) // Read the access, or show "RD_ERR"
 						var/datum/access/access_information = get_access_by_id(access_id)
 						var/access_type = access_information.access_type

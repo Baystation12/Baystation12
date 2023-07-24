@@ -141,7 +141,7 @@
 
 /singleton/random_chem_effect/random_properties/proc/set_caches(datum/reagent/random/prototype, list/whitelist)
 	LAZYSET(reaction_rate_cache, prototype.type, 1.5 * rand() + 0.5)
-	for(var/i = 1, i <= number_of_reaction_modifiers, i++)
+	for (var/i = 1, i <= number_of_reaction_modifiers, i++)
 		if (length(whitelist))
 			LAZYINITLIST(distillation_inhibitor_cache)
 			LAZYADD(distillation_inhibitor_cache[prototype.type], pick_n_take(whitelist))
@@ -200,14 +200,14 @@
 	var/list/interactions = list()
 	if (chem_skill == SKILL_MASTER)
 		. += "Heating: "
-	for(var/interaction in distillation_inhibitor_cache[reagent.type])
+	for (var/interaction in distillation_inhibitor_cache[reagent.type])
 		var/datum/reagent/R = interaction
 		interactions += initial(R.name)
 	if (chem_skill == SKILL_MASTER)
 		. += english_list(interactions)
 		interactions.Cut()
 		. += ". Cooling: "
-	for(var/interaction in cooling_enhancer_cache[reagent.type])
+	for (var/interaction in cooling_enhancer_cache[reagent.type])
 		var/datum/reagent/R = interaction
 		interactions += initial(R.name)
 	if (chem_skill <= SKILL_MASTER)

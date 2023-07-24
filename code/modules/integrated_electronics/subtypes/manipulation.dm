@@ -261,7 +261,7 @@
 		switch(get_pin_data(IC_INPUT, 2))
 			if (0)
 				var/list/harvest_output = TR.harvest()
-				for(var/i in 1 to length(harvest_output))
+				for (var/i in 1 to length(harvest_output))
 					harvest_output[i] = weakref(harvest_output[i])
 
 				if (length(harvest_output))
@@ -318,7 +318,7 @@
 		activate_pin(2)
 		return
 	var/list/seed_output = list()
-	for(var/i in 1 to rand(1,4))
+	for (var/i in 1 to rand(1,4))
 		var/obj/item/seeds/seeds = new(get_turf(O))
 		seeds.seed = SSplants.seeds[O.plantname]
 		seeds.seed_type = SSplants.seeds[O.seed.name]
@@ -364,7 +364,7 @@
 		if (mode == -1)
 			if (length(contents))
 				var/obj/item/U
-				for(U in contents)
+				for (U in contents)
 					U.forceMove(T)
 	update_outputs()
 	activate_pin(2)
@@ -384,7 +384,7 @@
 	if (length(contents))
 		var/turf/T = get_turf(src)
 		var/obj/item/U
-		for(U in contents)
+		for (U in contents)
 			U.forceMove(T)
 	update_outputs()
 	push_data()

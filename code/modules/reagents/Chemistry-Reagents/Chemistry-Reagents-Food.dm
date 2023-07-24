@@ -17,7 +17,7 @@
 
 	//add the new taste data
 	LAZYINITLIST(data)
-	for(var/taste in newdata)
+	for (var/taste in newdata)
 		if (taste in data)
 			data[taste] += newdata[taste]
 		else
@@ -25,11 +25,11 @@
 
 	//cull all tastes below 10% of total
 	var/totalFlavor = 0
-	for(var/taste in data)
+	for (var/taste in data)
 		totalFlavor += data[taste]
 	if (!totalFlavor)
 		return
-	for(var/taste in data)
+	for (var/taste in data)
 		if (data[taste]/totalFlavor < 0.1)
 			data -= taste
 
@@ -430,7 +430,7 @@
 	else
 		protection = list(M.wear_mask)
 
-	for(var/obj/item/I in protection)
+	for (var/obj/item/I in protection)
 		if (I)
 			if (I.body_parts_covered & EYES)
 				eyes_covered = 1

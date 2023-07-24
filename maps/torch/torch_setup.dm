@@ -25,7 +25,7 @@
 		welcome_text += "Time since last port visit:<br /><b>[rand(60,180)] days</b><br /><hr>"
 		welcome_text += "Scan results show the following points of interest:<br />"
 
-		for(var/zlevel in map_sectors)
+		for (var/zlevel in map_sectors)
 			var/obj/effect/overmap/visitable/O = map_sectors[zlevel]
 			if (O.name == torch.name)
 				continue
@@ -35,7 +35,7 @@
 				continue
 			space_things |= O
 
-		for(var/obj/effect/overmap/visitable/O in space_things)
+		for (var/obj/effect/overmap/visitable/O in space_things)
 			var/location_desc = " at present co-ordinates."
 			if (O.loc != torch.loc)
 				var/bearing = get_bearing(torch, O)

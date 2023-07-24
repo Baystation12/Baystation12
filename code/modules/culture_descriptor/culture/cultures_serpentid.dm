@@ -23,7 +23,7 @@
 
 	// Update our desc based on available jobs for this rank.
 	var/list/job_titles = list()
-	for(var/jobtype in valid_jobs)
+	for (var/jobtype in valid_jobs)
 		var/datum/job/job = jobtype
 		LAZYADD(job_titles, initial(job.title))
 	if (!LAZYLEN(job_titles))
@@ -32,7 +32,7 @@
 
 	// Set up our qualifications.
 	LAZYADD(qualifications, "<b>[name]</b>")
-	for(var/role in job_titles)
+	for (var/role in job_titles)
 		LAZYADD(qualifications, "Safe for [role].")
 
 	// Add our hidden jobs since we're done building the desc.

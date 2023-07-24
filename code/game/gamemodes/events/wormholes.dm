@@ -5,9 +5,9 @@
 /proc/wormhole_event(list/zlevels = GLOB.using_map.station_levels, event_duration = 3000)
 	spawn()
 		var/list/pick_turfs = list()
-		for(var/z in zlevels)
+		for (var/z in zlevels)
 			var/list/turfs = block(locate(1, 1, z), locate(world.maxx, world.maxy, z))
-			for(var/turf/simulated/floor/T in turfs)
+			for (var/turf/simulated/floor/T in turfs)
 				pick_turfs += T
 
 		if (length(pick_turfs))

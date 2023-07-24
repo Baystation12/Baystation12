@@ -70,7 +70,7 @@
 	var/remaining_energy = active_power_usage
 
 	if (repair && !fully_repaired())
-		for(var/obj/item/mech_component/MC in charging)
+		for (var/obj/item/mech_component/MC in charging)
 			if (MC)
 				MC.repair_brute_damage(repair)
 				MC.repair_burn_damage(repair)

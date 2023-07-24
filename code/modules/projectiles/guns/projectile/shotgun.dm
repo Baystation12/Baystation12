@@ -217,7 +217,7 @@
 /obj/item/gun/projectile/shotgun/pump/combat/on_update_icon()
 	..()
 	if (length(loaded) > 3)
-		for(var/i = 0 to length(loaded) - 4)
+		for (var/i = 0 to length(loaded) - 4)
 			var/image/I = image(icon, "shell")
 			I.pixel_x = i * 2
 			overlays += I

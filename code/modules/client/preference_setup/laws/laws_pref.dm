@@ -6,7 +6,7 @@
 	if (!laws || !length(laws))
 		return
 	var/datum/ai_laws/custom_lawset = new
-	for(var/law in laws)
+	for (var/law in laws)
 		custom_lawset.add_inherent_law(law)
 	return custom_lawset
 
@@ -55,7 +55,7 @@
 			if (!length(pref.laws))
 				. += "<b>You currently have no laws.</b><br>"
 			else
-				for(var/i in 1 to length(pref.laws))
+				for (var/i in 1 to length(pref.laws))
 					. += "[i]) [pref.laws[i]]<br>"
 
 			. += "Law sets: <a href='?src=\ref[src];lawsets=1'>Load Set</a><br>"
@@ -71,7 +71,7 @@
 		var/list/valid_lawsets = list()
 		var/list/all_lawsets = subtypesof(/datum/ai_laws)
 
-		for(var/law_set_type in all_lawsets)
+		for (var/law_set_type in all_lawsets)
 			var/datum/ai_laws/ai_laws = law_set_type
 			var/ai_law_name = initial(ai_laws.name)
 			if (initial(ai_laws.shackles)) // Now this is one terribly snowflaky var
@@ -85,7 +85,7 @@
 			var/datum/ai_laws/lawset = new path()
 			var/list/datum/ai_law/laws = lawset.all_laws()
 			pref.laws.Cut()
-			for(var/datum/ai_law/law in laws)
+			for (var/datum/ai_law/law in laws)
 				pref.laws += sanitize_text("[law.law]", default="")
 		return TOPIC_REFRESH
 	return ..()

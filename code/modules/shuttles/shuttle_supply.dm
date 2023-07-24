@@ -57,7 +57,7 @@
 	if (!at_station())
 		return 0	//if badmins want to send forbidden atoms on the supply shuttle from centcom we don't care
 
-	for(var/area/A in shuttle_area)
+	for (var/area/A in shuttle_area)
 		if (SSsupply.forbidden_atoms_check(A))
 			return 1
 

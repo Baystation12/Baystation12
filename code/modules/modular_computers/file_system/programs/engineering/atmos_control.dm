@@ -30,7 +30,7 @@
 		log_debug("\The [src] was given an unexpected req_access: [req_access]")
 
 	if (monitored_alarm_ids)
-		for(var/obj/machinery/alarm/alarm in SSmachines.machinery)
+		for (var/obj/machinery/alarm/alarm in SSmachines.machinery)
 			if (alarm.alarm_id && (alarm.alarm_id in monitored_alarm_ids))
 				monitored_alarms += alarm
 		// machines may not yet be ordered at this point
@@ -55,7 +55,7 @@
 	var/alarmsDanger[0]
 
 	// TODO: Move these to a cache, similar to cameras
-	for(var/obj/machinery/alarm/alarm in (length(monitored_alarms) ? monitored_alarms : SSmachines.machinery))
+	for (var/obj/machinery/alarm/alarm in (length(monitored_alarms) ? monitored_alarms : SSmachines.machinery))
 		var/Z = get_host_z()
 		if ((!length(monitored_alarms)) && (!Z || !AreConnectedZLevels(Z, alarm.z)))
 			continue

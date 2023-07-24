@@ -95,7 +95,7 @@
 	//Disturb treated burns
 	if (brute > 5)
 		var/disturbed = 0
-		for(var/datum/wound/burn/W in wounds)
+		for (var/datum/wound/burn/W in wounds)
 			if ((W.disinfected || W.salved) && prob(brute + W.damage))
 				W.disinfected = 0
 				W.salved = 0
@@ -150,7 +150,7 @@
 
 	var/list/victims = list()
 	var/organ_hit_chance = 0
-	for(var/obj/item/organ/internal/I in internal_organs)
+	for (var/obj/item/organ/internal/I in internal_organs)
 		if (I.damage < I.max_damage)
 			victims[I] = I.relative_size
 			organ_hit_chance += I.relative_size
@@ -176,7 +176,7 @@
 		return
 
 	//Heal damage on the individual wounds
-	for(var/datum/wound/W in wounds)
+	for (var/datum/wound/W in wounds)
 		if (brute == 0 && burn == 0)
 			break
 
@@ -253,7 +253,7 @@
 	else if (is_dislocated())
 		lasting_pain += 5
 	var/tox_dam = 0
-	for(var/obj/item/organ/internal/I in internal_organs)
+	for (var/obj/item/organ/internal/I in internal_organs)
 		tox_dam += I.getToxLoss()
 	return pain + lasting_pain + 0.7 * brute_dam + 0.8 * burn_dam + 0.3 * tox_dam + 0.5 * get_genetic_damage()
 

@@ -17,7 +17,7 @@ SUBSYSTEM_DEF(vote)
 
 /datum/controller/subsystem/vote/Initialize(start_uptime)
 	vote_prototypes = list()
-	for(var/vote_type in subtypesof(/datum/vote))
+	for (var/vote_type in subtypesof(/datum/vote))
 		var/datum/vote/fake_vote = vote_type
 		if (initial(fake_vote.manual_allowed))
 			vote_prototypes[vote_type] = new vote_type
@@ -42,7 +42,7 @@ SUBSYSTEM_DEF(vote)
 			reset()
 			return
 		if (VOTE_PROCESS_ONGOING)
-			for(var/client/C in voting)
+			for (var/client/C in voting)
 				show_panel(C.mob)
 
 /datum/controller/subsystem/vote/UpdateStat(time)
@@ -58,7 +58,7 @@ SUBSYSTEM_DEF(vote)
 
 /datum/controller/subsystem/vote/proc/reset()
 	active_vote = null
-	for(var/client/C in voting)
+	for (var/client/C in voting)
 		close_panel(C.mob)
 	voting.Cut()
 
@@ -96,7 +96,7 @@ SUBSYSTEM_DEF(vote)
 			. += "(<a href='?src=\ref[src];cancel=1'>Cancel Vote</a>) "
 	else
 		. += "<h2>Start a vote:</h2><hr><ul>"
-		for(var/vote_type in vote_prototypes)
+		for (var/vote_type in vote_prototypes)
 			var/datum/vote/vote_datum = vote_prototypes[vote_type]
 			. += "<li><a href='?src=\ref[src];vote=\ref[vote_datum.type]'>"
 			if (vote_datum.can_run(C.mob))

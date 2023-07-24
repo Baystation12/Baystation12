@@ -55,13 +55,13 @@
 	A.contents.Add(T)
 	if (old_area)
 		old_area.Exited(T, A)
-		for(var/atom/movable/AM in T)
+		for (var/atom/movable/AM in T)
 			old_area.Exited(AM, A)  // Note: this _will_ raise exited events.
 	A.Entered(T, old_area)
-	for(var/atom/movable/AM in T)
+	for (var/atom/movable/AM in T)
 		A.Entered(AM, old_area) // Note: this will _not_ raise moved or entered events. If you change this, you must also change everything which uses them.
 
-	for(var/obj/machinery/M in T)
+	for (var/obj/machinery/M in T)
 		M.area_changed(old_area, A) // They usually get moved events, but this is the one way an area can change without triggering one.
 
 /// Returns list (`/obj/machinery/camera`). A list of all cameras in the area.
@@ -111,7 +111,7 @@
 		air_doors_activated = 1
 		if (!all_doors)
 			return
-		for(var/obj/machinery/door/firedoor/E in all_doors)
+		for (var/obj/machinery/door/firedoor/E in all_doors)
 			if (!E.blocked)
 				if (E.operating)
 					E.nextstate = FIREDOOR_CLOSED
@@ -125,7 +125,7 @@
 		air_doors_activated = 0
 		if (!all_doors)
 			return
-		for(var/obj/machinery/door/firedoor/E in all_doors)
+		for (var/obj/machinery/door/firedoor/E in all_doors)
 			E.locked = FALSE
 			if (!E.blocked)
 				if (E.operating)
@@ -144,7 +144,7 @@
 		mouse_opacity = 0
 		if (!all_doors)
 			return
-		for(var/obj/machinery/door/firedoor/D in all_doors)
+		for (var/obj/machinery/door/firedoor/D in all_doors)
 			if (!D.blocked)
 				if (D.operating)
 					D.nextstate = FIREDOOR_CLOSED
@@ -160,7 +160,7 @@
 		mouse_opacity = 0
 		if (!all_doors)
 			return
-		for(var/obj/machinery/door/firedoor/D in all_doors)
+		for (var/obj/machinery/door/firedoor/D in all_doors)
 			D.locked = FALSE
 			if (!D.blocked)
 				if (D.operating)
@@ -197,7 +197,7 @@
 		party = 0
 		mouse_opacity = 0
 		update_icon()
-		for(var/obj/machinery/door/firedoor/D in src)
+		for (var/obj/machinery/door/firedoor/D in src)
 			if (!D.blocked)
 				if (D.operating)
 					D.nextstate = FIREDOOR_OPEN
@@ -226,14 +226,14 @@
 /area/proc/set_lightswitch(new_switch)
 	if (lightswitch != new_switch)
 		lightswitch = new_switch
-		for(var/obj/machinery/light_switch/L in src)
+		for (var/obj/machinery/light_switch/L in src)
 			L.sync_state()
 		update_icon()
 		power_change()
 
 /// Calls `set_emergency_lighting(enable)` on all `/obj/machinery/light` in src.
 /area/proc/set_emergency_lighting(enable)
-	for(var/obj/machinery/light/M in src)
+	for (var/obj/machinery/light/M in src)
 		M.set_emergency_lighting(enable)
 
 
@@ -306,7 +306,7 @@
 /area/proc/gravitychange(gravitystate = 0)
 	has_gravity = gravitystate
 
-	for(var/mob/M in src)
+	for (var/mob/M in src)
 		if (has_gravity)
 			thunk(M)
 		M.update_floating()
@@ -334,11 +334,11 @@
 /area/proc/prison_break()
 	var/obj/machinery/power/apc/theAPC = get_apc()
 	if (theAPC && theAPC.operating)
-		for(var/obj/machinery/power/apc/temp_apc in src)
+		for (var/obj/machinery/power/apc/temp_apc in src)
 			temp_apc.overload_lighting(70)
-		for(var/obj/machinery/door/airlock/temp_airlock in src)
+		for (var/obj/machinery/door/airlock/temp_airlock in src)
 			temp_airlock.prison_open()
-		for(var/obj/machinery/door/window/temp_windoor in src)
+		for (var/obj/machinery/door/window/temp_windoor in src)
 			temp_windoor.open()
 
 /// Returns boolean. Whether or not the area is considered to have gravity.
@@ -371,7 +371,7 @@
 /area/proc/get_dimensions()
 	var/list/res = list("x"=1,"y"=1)
 	var/list/min = list("x"=world.maxx,"y"=world.maxy)
-	for(var/turf/T in src)
+	for (var/turf/T in src)
 		res["x"] = max(T.x, res["x"])
 		res["y"] = max(T.y, res["y"])
 		min["x"] = min(T.x, min["x"])

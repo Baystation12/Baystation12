@@ -7,10 +7,10 @@
 		manifestation_powers = list()
 		powers_by_faculty =    list()
 
-		for(var/faculty in ranks)
+		for (var/faculty in ranks)
 			var/relevant_rank = get_rank(faculty)
 			var/singleton/psionic_faculty/faculty_singleton = SSpsi.get_faculty(faculty)
-			for(var/thing in faculty_singleton.powers)
+			for (var/thing in faculty_singleton.powers)
 				var/singleton/psionic_power/power = thing
 				if (relevant_rank >= power.min_rank)
 					if (!powers_by_faculty[power.faculty]) powers_by_faculty[power.faculty] = list()

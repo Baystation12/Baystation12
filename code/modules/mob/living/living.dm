@@ -82,7 +82,7 @@ default behaviour is:
 		if (istype(AM, /mob/living))
 			var/mob/living/tmob = AM
 
-			for(var/mob/living/M in range(tmob, 1))
+			for (var/mob/living/M in range(tmob, 1))
 				if (length(tmob.pinned) ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/grab, length(tmob.grabbed_by))) )
 					if ( !(world.time % 5) )
 						to_chat(src, SPAN_WARNING("[tmob] is restrained, you cannot push past"))
@@ -99,7 +99,7 @@ default behaviour is:
 				forceMove(tmob.loc)
 				tmob.forceMove(oldloc)
 				now_pushing = 0
-				for(var/mob/living/carbon/slime/slime in view(1,tmob))
+				for (var/mob/living/carbon/slime/slime in view(1,tmob))
 					if (slime.Victim == tmob)
 						slime.UpdateFeed()
 				return
@@ -144,7 +144,7 @@ default behaviour is:
 
 				var/t = get_dir(src, AM)
 				if (istype(AM, /obj/structure/window))
-					for(var/obj/structure/window/win in get_step(AM,t))
+					for (var/obj/structure/window/win in get_step(AM,t))
 						now_pushing = 0
 						return
 				step(AM, t)
@@ -155,7 +155,7 @@ default behaviour is:
 							step(tmob.buckled, t)
 				if (ishuman(AM))
 					var/mob/living/carbon/human/M = AM
-					for(var/obj/item/grab/G in M.grabbed_by)
+					for (var/obj/item/grab/G in M.grabbed_by)
 						step(G.assailant, get_dir(G.assailant, AM))
 						G.adjust_position()
 				if (saved_dir)
@@ -166,7 +166,7 @@ default behaviour is:
 	var/turf/T = get_turf(swapper)
 	if (T?.density)
 		return 1
-	for(var/atom/movable/A in T)
+	for (var/atom/movable/A in T)
 		if (A == swapper)
 			continue
 		if (!A.CanPass(swapee, T, 1))
@@ -324,15 +324,15 @@ default behaviour is:
 		L += Storage.return_inv()
 
 		//Leave this commented out, it will cause storage items to exponentially add duplicate to the list
-		//for(var/obj/item/storage/S in Storage.return_inv()) //Check for storage items
+		//for (var/obj/item/storage/S in Storage.return_inv()) //Check for storage items
 		//	L += get_contents(S)
 
-		for(var/obj/item/gift/G in Storage.return_inv()) //Check for gift-wrapped items
+		for (var/obj/item/gift/G in Storage.return_inv()) //Check for gift-wrapped items
 			L += G.gift
 			if (istype(G.gift, /obj/item/storage))
 				L += get_contents(G.gift)
 
-		for(var/obj/item/smallDelivery/D in Storage.return_inv()) //Check for package wrapped items
+		for (var/obj/item/smallDelivery/D in Storage.return_inv()) //Check for package wrapped items
 			L += D.wrapped
 			if (istype(D.wrapped, /obj/item/storage)) //this should never happen
 				L += get_contents(D.wrapped)
@@ -341,24 +341,24 @@ default behaviour is:
 	else
 
 		L += src.contents
-		for(var/obj/item/storage/S in src.contents)	//Check for storage items
+		for (var/obj/item/storage/S in src.contents)	//Check for storage items
 			L += get_contents(S)
 
-		for(var/obj/item/gift/G in src.contents) //Check for gift-wrapped items
+		for (var/obj/item/gift/G in src.contents) //Check for gift-wrapped items
 			L += G.gift
 			if (istype(G.gift, /obj/item/storage))
 				L += get_contents(G.gift)
 
-		for(var/obj/item/smallDelivery/D in src.contents) //Check for package wrapped items
+		for (var/obj/item/smallDelivery/D in src.contents) //Check for package wrapped items
 			L += D.wrapped
 			if (istype(D.wrapped, /obj/item/storage)) //this should never happen
 				L += get_contents(D.wrapped)
 		return L
 
-/mob/living/proc/check_contents_for(A)
+/mob/living/proc/check_contents_for (A)
 	var/list/L = src.get_contents()
 
-	for(var/obj/B in L)
+	for (var/obj/B in L)
 		if (B.type == A)
 			return 1
 	return 0
@@ -528,7 +528,7 @@ default behaviour is:
 		s_active.close(src)
 
 	if (update_slimes)
-		for(var/mob/living/carbon/slime/M in view(1,src))
+		for (var/mob/living/carbon/slime/M in view(1,src))
 			M.UpdateFeed()
 
 /mob/living/proc/can_pull()
@@ -659,7 +659,7 @@ default behaviour is:
 		to_chat(src, SPAN_WARNING("You wriggle out of \the [M]'s grip!"))
 
 		// Update whether or not this mob needs to pass emotes to contents.
-		for(var/atom/A in M.contents)
+		for (var/atom/A in M.contents)
 			if (istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/holder))
 				return
 		M.status_flags &= ~PASSEMOTES
@@ -689,7 +689,7 @@ default behaviour is:
 
 /mob/living/proc/resist_grab()
 	var/resisting = 0
-	for(var/obj/item/grab/G in grabbed_by)
+	for (var/obj/item/grab/G in grabbed_by)
 		resisting++
 		G.handle_resist()
 	if (resisting)
@@ -823,7 +823,7 @@ default behaviour is:
 
 /mob/living/Destroy()
 	if (auras)
-		for(var/a in auras)
+		for (var/a in auras)
 			remove_aura(a)
 	GLOB.living_players -= src
 	QDEL_NULL(selected_image)
@@ -874,7 +874,7 @@ default behaviour is:
 /mob/living/water_act(depth)
 	..()
 	wash_mob(src)
-	for(var/thing in get_equipped_items(TRUE))
+	for (var/thing in get_equipped_items(TRUE))
 		if (isnull(thing)) continue
 		var/atom/movable/A = thing
 		if (A.simulated && !A.waterproof)

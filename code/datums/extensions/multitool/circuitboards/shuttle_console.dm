@@ -12,7 +12,7 @@
 	var/obj/item/stock_parts/circuitboard/shuttle_console/board = holder
 	if (href_list["sync"])
 		var/new_name
-		for(var/shuttle_name in SSshuttle.shuttles)
+		for (var/shuttle_name in SSshuttle.shuttles)
 			var/datum/shuttle/shuttle = SSshuttle.shuttles[shuttle_name]
 			if (get_area(board) in shuttle.shuttle_area)
 				new_name = shuttle_name

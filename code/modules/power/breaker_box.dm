@@ -21,7 +21,7 @@
 
 /obj/machinery/power/breakerbox/Destroy()
 	..()
-	for(var/datum/nano_module/rcon/R in world)
+	for (var/datum/nano_module/rcon/R in world)
 		R.FindDevices()
 
 /obj/machinery/power/breakerbox/activated
@@ -70,7 +70,7 @@
 		return TRUE
 
 	busy = 1
-	for(var/mob/O in viewers(user))
+	for (var/mob/O in viewers(user))
 		O.show_message(text(SPAN_WARNING("\The [user] started reprogramming \the [src]!")), 1)
 
 	if (do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
@@ -100,13 +100,13 @@
 	if (on)
 		icon_state = icon_state_on
 		var/list/connection_dirs = list()
-		for(var/direction in directions)
-			for(var/obj/structure/cable/C in get_step(src,direction))
+		for (var/direction in directions)
+			for (var/obj/structure/cable/C in get_step(src,direction))
 				if (C.d1 == turn(direction, 180) || C.d2 == turn(direction, 180))
 					connection_dirs += direction
 					break
 
-		for(var/direction in connection_dirs)
+		for (var/direction in connection_dirs)
 			var/obj/structure/cable/C = new/obj/structure/cable(src.loc)
 			C.d1 = 0
 			C.d2 = direction
@@ -124,7 +124,7 @@
 
 	else
 		icon_state = icon_state_off
-		for(var/obj/structure/cable/C in src.loc)
+		for (var/obj/structure/cable/C in src.loc)
 			qdel(C)
 
 // Used by RCON to toggle the breaker box.

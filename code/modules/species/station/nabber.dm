@@ -194,7 +194,7 @@
 
 	//nabbers should not be trying to break their fall on stairs.
 	var/turf/T = GetBelow(H.loc)
-	for(var/obj/O in T)
+	for (var/obj/O in T)
 		if (istype(O, /obj/structure/stairs))
 			return TRUE
 	if (mixture)
@@ -212,7 +212,7 @@
 	var/turf/T = GetBelow(H.loc)
 
 	//Nabbers should not be trying to break their fall on stairs.
-	for(var/obj/O in T)
+	for (var/obj/O in T)
 		if (istype(O, /obj/structure/stairs))
 			return FALSE
 
@@ -270,7 +270,7 @@
 
 			var/image_key = "[H.species.get_race_key(src)]"
 
-			for(var/organ_tag in H.species.has_limbs)
+			for (var/organ_tag in H.species.has_limbs)
 				var/obj/item/organ/external/part = H.organs_by_name[organ_tag]
 				if (isnull(part) || part.is_stump())
 					image_key += "0"

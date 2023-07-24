@@ -13,7 +13,7 @@
 
 /obj/structure/cargopile/on_update_icon()
 	overlays.Cut()
-	for(var/obj/thing in contents)
+	for (var/obj/thing in contents)
 		var/image/I = new
 		I.appearance = thing.appearance
 		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
@@ -29,14 +29,14 @@
 		if (!chosen_obj)
 			return
 		if (chosen_obj.density)
-			for(var/atom/A in get_turf(src))
+			for (var/atom/A in get_turf(src))
 				if (A != src && A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 					to_chat(user, SPAN_WARNING("\The [A] blocks you from pulling out \the [chosen_obj]."))
 					return
 		if (!do_after(user, 0.5 SECONDS, src, DO_PUBLIC_UNIQUE)) return
 		if (!chosen_obj) return
 		if (chosen_obj.density)
-			for(var/atom/A in get_turf(src))
+			for (var/atom/A in get_turf(src))
 				if (A != src && A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 					to_chat(user, SPAN_WARNING("\The [A] blocks you from pulling out \the [chosen_obj]."))
 					return
@@ -204,7 +204,7 @@
 	if (!chosen_obj)
 		return
 	if (chosen_obj.density)
-		for(var/atom/A in get_turf(src))
+		for (var/atom/A in get_turf(src))
 			if (A != owner && A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 				to_chat(user, SPAN_WARNING("\The [A] blocks you from putting down \the [chosen_obj]."))
 				return
@@ -229,7 +229,7 @@
 /obj/item/mech_equipment/clamp/proc/create_spill()
 	if (length(carrying))
 		var/denseCount = 0
-		for(var/obj/load in carrying)
+		for (var/obj/load in carrying)
 			if (load.density)
 				denseCount += 1
 			if (denseCount > 1)
@@ -237,12 +237,12 @@
 
 		if (denseCount > 1)
 			var/obj/structure/cargopile/pile = new(get_turf(src))
-			for(var/obj/load in carrying)
+			for (var/obj/load in carrying)
 				load.forceMove(pile)
 				carrying -= load
 			pile.update_icon()
 		else
-			for(var/obj/load in carrying)
+			for (var/obj/load in carrying)
 				var/turf/location = get_turf(src)
 				var/list/turfs = location.AdjacentTurfsSpace()
 				if (load.density)
@@ -354,7 +354,7 @@
 		beam = null
 	if (locked)
 		if (owner)
-			for(var/pilot in owner.pilots)
+			for (var/pilot in owner.pilots)
 				to_chat(pilot, SPAN_NOTICE("Lock on \the [locked] disengaged."))
 		endanimation()
 		locked = null
@@ -448,7 +448,7 @@
 					atoms = range(target,3)
 				else
 					atoms = orange(target,3)
-				for(var/atom/movable/A in atoms)
+				for (var/atom/movable/A in atoms)
 					if (A.anchored || !A.simulated) continue
 					var/dist = 5-get_dist(A,target)
 					A.throw_at(get_edge_target_turf(A,get_dir(target, A)),dist,0.7)
@@ -567,7 +567,7 @@
 		if (!ore_box)
 			continue
 		var/list/atoms_in_range = range(1, at_turf)
-		for(var/obj/item/ore/ore in atoms_in_range)
+		for (var/obj/item/ore/ore in atoms_in_range)
 			if (!(get_dir(owner, ore) & owner.dir))
 				continue
 			ore.Move(ore_box)
@@ -891,7 +891,7 @@
 
 	if (isScrewdriver(W))
 		var/list/all_networks = list()
-		for(var/network in GLOB.using_map.station_networks)
+		for (var/network in GLOB.using_map.station_networks)
 			if (has_access(get_camera_access(network), GetIdCard(user)))
 				all_networks += network
 

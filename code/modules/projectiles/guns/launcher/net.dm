@@ -82,7 +82,7 @@
 /obj/item/gun/launcher/net/borg/Initialize()
 	. = ..()
 	// Start fully loaded
-	for(var/i in 1 to (max_shells + 1))
+	for (var/i in 1 to (max_shells + 1))
 		load(new /obj/item/net_shell)
 
 /obj/item/gun/launcher/net/borg/can_load(obj/item/net_shell/S, mob/user)

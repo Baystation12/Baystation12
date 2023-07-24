@@ -138,7 +138,7 @@
 		// if tried to drain more than available on powernet
 		// now look for APCs and drain their cells
 		if (drained < drain_rate)
-			for(var/obj/machinery/power/terminal/T in PN.nodes)
+			for (var/obj/machinery/power/terminal/T in PN.nodes)
 				// Enough power drained this tick, no need to torture more APCs
 				if (drained >= drain_rate)
 					break

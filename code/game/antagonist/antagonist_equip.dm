@@ -9,7 +9,7 @@
 
 	// This could use work.
 	if (flags & ANTAG_CLEAR_EQUIPMENT)
-		for(var/obj/item/thing in player.contents)
+		for (var/obj/item/thing in player.contents)
 			if (player.canUnEquip(thing))
 				qdel(thing)
 		//mainly for vox antag compatibility. Should not effect item spawning.

@@ -23,7 +23,7 @@
 	cast_sound = 'sound/magic/mandswap.ogg'
 
 /spell/targeted/swap/cast(list/targets, mob/user)
-	for(var/mob/T in targets)
+	for (var/mob/T in targets)
 		var/turf/aT = get_turf(T)
 		var/turf/bT = get_turf(user)
 

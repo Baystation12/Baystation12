@@ -53,11 +53,11 @@ var/global/intercom_range_display_status = 0
 
 
 
-	for(var/obj/effect/debugging/camera_range/C in world)
+	for (var/obj/effect/debugging/camera_range/C in world)
 		qdel(C)
 
 	if (camera_range_display_status)
-		for(var/obj/machinery/camera/C in cameranet.cameras)
+		for (var/obj/machinery/camera/C in cameranet.cameras)
 			new/obj/effect/debugging/camera_range(C.loc)
 
 
@@ -68,14 +68,14 @@ var/global/intercom_range_display_status = 0
 
 	var/list/obj/machinery/camera/CL = list()
 
-	for(var/obj/machinery/camera/C in cameranet.cameras)
+	for (var/obj/machinery/camera/C in cameranet.cameras)
 		CL += C
 
 	var/output = {"<B>CAMERA ANNOMALITIES REPORT</B><HR>
 <B>The following annomalities have been detected. The ones in red need immediate attention: Some of those in black may be intentional.</B><BR><ul>"}
 
-	for(var/obj/machinery/camera/C1 in CL)
-		for(var/obj/machinery/camera/C2 in CL)
+	for (var/obj/machinery/camera/C1 in CL)
+		for (var/obj/machinery/camera/C2 in CL)
 			if (C1 != C2)
 				if (C1.c_tag == C2.c_tag)
 					output += "<li>[SPAN_COLOR("red", "c_tag match for sec. cameras at \[[C1.x], [C1.y], [C1.z]\] ([C1.loc.loc]) and \[[C2.x], [C2.y], [C2.z]\] ([C2.loc.loc]) - c_tag is [C1.c_tag]")]</li>"
@@ -87,7 +87,7 @@ var/global/intercom_range_display_status = 0
 		if (!T || !isturf(T) || !T.density )
 			if (!(locate(/obj/structure/grille,T)))
 				var/window_check = 0
-				for(var/obj/structure/window/W in T)
+				for (var/obj/structure/window/W in T)
 					if (W.dir == turn(C1.dir,180) || (W.dir in list(NORTHEAST,SOUTHEAST,SOUTHWEST,NORTHWEST)) )
 						window_check = 1
 						break
@@ -106,12 +106,12 @@ var/global/intercom_range_display_status = 0
 	else
 		intercom_range_display_status = 1
 
-	for(var/obj/effect/debugging/marker/M in world)
+	for (var/obj/effect/debugging/marker/M in world)
 		qdel(M)
 
 	if (intercom_range_display_status)
-		for(var/obj/item/device/radio/intercom/I in world)
-			for(var/turf/T in orange(7,I))
+		for (var/obj/item/device/radio/intercom/I in world)
+			for (var/turf/T in orange(7,I))
 				var/obj/effect/debugging/marker/F = new/obj/effect/debugging/marker(T)
 				if (!(F in view(7,I.loc)))
 					qdel(F)
@@ -176,10 +176,10 @@ var/global/list/debug_verbs = list (
 	if (recurse_level > 10)
 		return
 
-	for(var/turf/T in Z.contents)
+	for (var/turf/T in Z.contents)
 		images += get_zas_image(T, "yellow")
 		testZAScolors_turfs += T
-	for(var/connection_edge/zone/edge in Z.edges)
+	for (var/connection_edge/zone/edge in Z.edges)
 		var/zone/connected = edge.get_connected_zone(Z)
 		if (connected in testZAScolors_zones)
 			continue
@@ -208,22 +208,22 @@ var/global/list/debug_verbs = list (
 		usedZAScolors = 1
 
 	testZAScolors_zones += location.zone
-	for(var/turf/T in location.zone.contents)
+	for (var/turf/T in location.zone.contents)
 		images += get_zas_image(T, "green")
 		testZAScolors_turfs += T
-	for(var/connection_edge/zone/edge in location.zone.edges)
+	for (var/connection_edge/zone/edge in location.zone.edges)
 		var/zone/Z = edge.get_connected_zone(location.zone)
 		testZAScolors_zones += Z
-		for(var/turf/T in Z.contents)
+		for (var/turf/T in Z.contents)
 			images += get_zas_image(T, "blue")
 			testZAScolors_turfs += T
-		for(var/connection_edge/zone/z_edge in Z.edges)
+		for (var/connection_edge/zone/z_edge in Z.edges)
 			var/zone/connected = z_edge.get_connected_zone(Z)
 			if (connected in testZAScolors_zones)
 				continue
 			recurse_zone(connected,1)
 
-	for(var/turf/T in range(25,location))
+	for (var/turf/T in range(25,location))
 		if (!istype(T))
 			continue
 		if (T in testZAScolors_turfs)
@@ -238,7 +238,7 @@ var/global/list/debug_verbs = list (
 	testZAScolors_turfs.Cut()
 	testZAScolors_zones.Cut()
 
-	for(var/image/i in images)
+	for (var/image/i in images)
 		if (i.icon == 'icons/misc/debug_group.dmi')
 			images.Remove(i)
 
@@ -268,7 +268,7 @@ var/global/list/debug_verbs = list (
 
 	var/list/atom/atom_list = list()
 
-	for(var/atom/A in world)
+	for (var/atom/A in world)
 		if (istype(A,type_path))
 			var/atom/B = A
 			while(!(isturf(B.loc)))
@@ -282,9 +282,9 @@ var/global/list/debug_verbs = list (
 					atom_list += A
 	/*
 	var/atom/temp_atom
-	for(var/i = 0; i <= (length(atom_list)/10); i++)
+	for (var/i = 0; i <= (length(atom_list)/10); i++)
 		var/line = ""
-		for(var/j = 1; j <= 10; j++)
+		for (var/j = 1; j <= 10; j++)
 			if (i*10+j <= length(atom_list))
 				temp_atom = atom_list[i*10+j]
 				line += " no.[i+10+j]@\[[temp_atom.x], [temp_atom.y], [temp_atom.z]\]; "
@@ -303,14 +303,14 @@ var/global/list/debug_verbs = list (
 
 	var/count = 0
 
-	for(var/atom/A in world)
+	for (var/atom/A in world)
 		if (istype(A,type_path))
 			count++
 	/*
 	var/atom/temp_atom
-	for(var/i = 0; i <= (length(atom_list)/10); i++)
+	for (var/i = 0; i <= (length(atom_list)/10); i++)
 		var/line = ""
-		for(var/j = 1; j <= 10; j++)
+		for (var/j = 1; j <= 10; j++)
 			if (i*10+j <= length(atom_list))
 				temp_atom = atom_list[i*10+j]
 				line += " no.[i+10+j]@\[[temp_atom.x], [temp_atom.y], [temp_atom.z]\]; "
@@ -328,7 +328,7 @@ var/global/list/debug_verbs = list (
 	set name = "Find Leaky Pipes"
 
 	var/list/baddies = list("LEAKY PIPES")
-	for(var/obj/machinery/atmospherics/pipe/P in SSmachines.machinery)
+	for (var/obj/machinery/atmospherics/pipe/P in SSmachines.machinery)
 		if (P.leaking)
 			baddies += "[P] ([P.x],[P.y],[P.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[P.x];Y=[P.y];Z=[P.z]'>JMP</a>)"
 

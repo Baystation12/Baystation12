@@ -29,11 +29,11 @@
 		if (target.blocks_air||blocks_air)
 			return 0
 
-		for(var/obj/obstacle in src)
+		for (var/obj/obstacle in src)
 			if (!obstacle.CanPass(mover, target, height, air_group))
 				return 0
 		if (target != src)
-			for(var/obj/obstacle in target)
+			for (var/obj/obstacle in target)
 				if (!obstacle.CanPass(mover, src, height, air_group))
 					return 0
 
@@ -42,7 +42,7 @@
 
 /// Convenience function for atoms to update turfs they occupy
 /atom/movable/proc/update_nearby_tiles(need_rebuild)
-	for(var/turf/simulated/turf in locs)
+	for (var/turf/simulated/turf in locs)
 		SSair.mark_for_update(turf)
 	fluid_update()
 	return 1

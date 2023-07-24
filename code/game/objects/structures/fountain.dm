@@ -41,7 +41,7 @@
 
 
 /obj/structure/fountain/strange/proc/time_dilation(mob/living/carbon/human/user)
-	for(var/mob/living/L in oviewers(7, src))
+	for (var/mob/living/L in oviewers(7, src))
 		L.flash_eyes(3)
 		L.eye_blurry += 9
 	visible_message(SPAN_WARNING("\The [src] erupts in a bright flash of light!"))

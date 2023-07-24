@@ -169,7 +169,7 @@
 	var/obj/effect/effect
 
 /spell/targeted/heal_target/trance/cast(list/targets, mob/user)
-	for(var/t in targets)
+	for (var/t in targets)
 		var/mob/living/L = t
 		var/turf/T = get_turf(L)
 		effect = new /obj/effect/rift(T)
@@ -203,7 +203,7 @@
 	density = FALSE
 
 /obj/effect/rift/Destroy()
-	for(var/o in contents)
+	for (var/o in contents)
 		var/atom/movable/M = o
 		M.dropInto(loc)
 	. = ..()
@@ -225,7 +225,7 @@
 /spell/targeted/revoke/cast(list/targets, mob/living/user)
 	if (alert(user, "Are you sure?", "Alert", "Yes", "No") == "Yes" && alert(user, "Are you ABSOLUTELY SURE?", "Alert", "Absolutely!", "No") == "Absolutely!")
 		var/should_wait = 1
-		for(var/t in targets)
+		for (var/t in targets)
 			var/mob/living/M = t
 			M.rejuvenate()
 			if (M.client) //We've got a dude
@@ -238,7 +238,7 @@
 
 
 /spell/targeted/revoke/proc/check_for_revoke(list/targets)
-	for(var/t in targets)
+	for (var/t in targets)
 		var/mob/M = t
 		if (M.client)
 			revoke_spells()
@@ -251,9 +251,9 @@
 		return
 	var/mob/living/M = holder
 	if (M.mind)
-		for(var/s in M.mind.learned_spells)
+		for (var/s in M.mind.learned_spells)
 			if (istype(s, /spell/toggle_armor)) //Can keep the armor n junk.
 				continue
 			M.remove_spell(s)
-	for(var/a in M.auras)
+	for (var/a in M.auras)
 		M.remove_aura(a)

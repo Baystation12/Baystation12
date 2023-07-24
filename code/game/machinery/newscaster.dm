@@ -87,7 +87,7 @@
 	if (photo)
 		newMsg.img = photo.img
 		newMsg.caption = photo.scribble
-	for(var/datum/feed_channel/FC in network_channels)
+	for (var/datum/feed_channel/FC in network_channels)
 		if (FC.channel_name == channel_name)
 			insert_message_in_channel(FC, newMsg) //Adding message to the network's appropriate feed_channel
 			break
@@ -101,10 +101,10 @@
 	alert_readers(FC.announcement)
 
 /datum/feed_network/proc/alert_readers(annoncement)
-	for(var/obj/machinery/newscaster/NEWSCASTER in newscasters)
+	for (var/obj/machinery/newscaster/NEWSCASTER in newscasters)
 		NEWSCASTER.newsAlert(annoncement)
 		NEWSCASTER.update_icon()
-	for(var/datum/nano_module/program/newscast/program in news_programs)
+	for (var/datum/nano_module/program/newscast/program in news_programs)
 		program.news_alert(annoncement)
 
 var/global/list/datum/feed_network/news_network = list()     //The global news-network, which is coincidentally a global list.
@@ -251,7 +251,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 				if ( !length(connected_group.network_channels) )
 					dat+="<I>No active channels found...</I>"
 				else
-					for(var/datum/feed_channel/CHANNEL in connected_group.network_channels)
+					for (var/datum/feed_channel/CHANNEL in connected_group.network_channels)
 						if (CHANNEL.is_admin_channel)
 							dat+="<B>[SPAN_STYLE("background-color: LightGreen", "<A href='?src=\ref[src];show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A>")]</B><BR>"
 						else
@@ -296,7 +296,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 			if (7)
 				dat+="[SPAN_COLOR("maroon", "<B>ERROR: Could not submit Feed Channel to Network.</B>")]<HR><BR>"
 				var/list/existing_authors = list()
-				for(var/datum/feed_channel/FC in connected_group.network_channels)
+				for (var/datum/feed_channel/FC in connected_group.network_channels)
 					if (FC.author == "\[REDACTED\]")
 						existing_authors += FC.backup_author
 					else
@@ -306,7 +306,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 				if (src.channel_name=="" || src.channel_name == "\[REDACTED\]")
 					dat+="[SPAN_COLOR("maroon", "Invalid channel name.")]<BR>"
 				var/check = 0
-				for(var/datum/feed_channel/FC in connected_group.network_channels)
+				for (var/datum/feed_channel/FC in connected_group.network_channels)
 					if (FC.channel_name == src.channel_name)
 						check = 1
 						break
@@ -319,7 +319,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 				var/total_num=length(connected_group.network_channels)
 				var/active_num=total_num
 				var/message_num=0
-				for(var/datum/feed_channel/FC in connected_group.network_channels)
+				for (var/datum/feed_channel/FC in connected_group.network_channels)
 					if (!FC.censored)
 						message_num += length(FC.messages)    //Dont forget, datum/feed_channel's var messages is a list of datum/feed_message
 					else
@@ -338,7 +338,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 						dat+="<I>No feed messages found in channel...</I><BR>"
 					else
 						var/i = 0
-						for(var/datum/feed_message/MESSAGE in src.viewing_channel.messages)
+						for (var/datum/feed_message/MESSAGE in src.viewing_channel.messages)
 							++i
 							dat+="-[MESSAGE.body] <BR>"
 							if (MESSAGE.img)
@@ -359,7 +359,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 				if (!length(connected_group.network_channels))
 					dat+="<I>No feed channels found active...</I><BR>"
 				else
-					for(var/datum/feed_channel/CHANNEL in connected_group.network_channels)
+					for (var/datum/feed_channel/CHANNEL in connected_group.network_channels)
 						dat+="<A href='?src=\ref[src];pick_censor_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (SPAN_COLOR("red", "***")) : null ]<BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A>"
 			if (11)
@@ -370,7 +370,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 				if (!length(connected_group.network_channels))
 					dat+="<I>No feed channels found active...</I><BR>"
 				else
-					for(var/datum/feed_channel/CHANNEL in connected_group.network_channels)
+					for (var/datum/feed_channel/CHANNEL in connected_group.network_channels)
 						dat+="<A href='?src=\ref[src];pick_d_notice=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (SPAN_COLOR("red", "***")) : null ]<BR>"
 
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Back</A>"
@@ -382,7 +382,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 				if ( !length(viewing_channel.messages) )
 					dat+="<I>No feed messages found in channel...</I><BR>"
 				else
-					for(var/datum/feed_message/MESSAGE in src.viewing_channel.messages)
+					for (var/datum/feed_message/MESSAGE in src.viewing_channel.messages)
 						dat+="-[MESSAGE.body] <BR>[FONT_SMALL("\[[MESSAGE.message_type] by [SPAN_COLOR("maroon", MESSAGE.author)]\]")]<BR>"
 						dat+="[FONT_NORMAL("<A href='?src=\ref[src];censor_channel_story_body=\ref[MESSAGE]'>[(MESSAGE.body == "\[REDACTED\]") ? ("Undo story censorship") : ("Censor story")]</A>  -  <A href='?src=\ref[src];censor_channel_story_author=\ref[MESSAGE]'>[(MESSAGE.author == "\[REDACTED\]") ? ("Undo Author Censorship") : ("Censor message Author")]</A>")]<BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[10]'>Back</A>"
@@ -396,7 +396,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 					if ( !length(viewing_channel.messages) )
 						dat+="<I>No feed messages found in channel...</I><BR>"
 					else
-						for(var/datum/feed_message/MESSAGE in src.viewing_channel.messages)
+						for (var/datum/feed_message/MESSAGE in src.viewing_channel.messages)
 							dat+="-[MESSAGE.body] <BR>[FONT_SMALL("\[[MESSAGE.message_type] by [SPAN_COLOR("maroon", MESSAGE.author)]\]")]<BR>"
 
 				dat+="<BR><A href='?src=\ref[src];setScreen=[11]'>Back</A>"
@@ -488,14 +488,14 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 		else if (href_list["submit_new_channel"])
 			//var/list/existing_channels = list() //OBSOLETE
 			var/list/existing_authors = list()
-			for(var/datum/feed_channel/FC in connected_group.network_channels)
+			for (var/datum/feed_channel/FC in connected_group.network_channels)
 				//existing_channels += FC.channel_name
 				if (FC.author == "\[REDACTED\]")
 					existing_authors += FC.backup_author
 				else
 					existing_authors  +=FC.author
 			var/check = 0
-			for(var/datum/feed_channel/FC in connected_group.network_channels)
+			for (var/datum/feed_channel/FC in connected_group.network_channels)
 				if (FC.channel_name == src.channel_name)
 					check = 1
 					break
@@ -512,7 +512,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 		else if (href_list["set_channel_receiving"])
 			//var/list/datum/feed_channel/available_channels = list()
 			var/list/available_channels = list()
-			for(var/datum/feed_channel/F in connected_group.network_channels)
+			for (var/datum/feed_channel/F in connected_group.network_channels)
 				if ( (!F.locked || F.author == scanned_user) && !F.censored)
 					available_channels += F.channel_name
 			src.channel_name = input(usr, "Choose receiving Feed Channel", "Network Channel Handler") in available_channels
@@ -625,7 +625,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 			var/choice = alert("Please confirm Wanted Issue removal","Network Security Handler","Confirm","Cancel")
 			if (choice=="Confirm")
 				connected_group.wanted_issue = null
-				for(var/obj/machinery/newscaster/NEWSCASTER in connected_group.newscasters)
+				for (var/obj/machinery/newscaster/NEWSCASTER in connected_group.newscasters)
 					NEWSCASTER.update_icon()
 				src.screen=17
 			src.updateUsrDialog()
@@ -810,12 +810,12 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 						dat+="<I>Other than the title, the rest of the newspaper is unprinted...</I>"
 				else
 					dat+="Contents:<BR><ul>"
-					for(var/datum/feed_channel/NP in src.news_content)
+					for (var/datum/feed_channel/NP in src.news_content)
 						src.pages++
 					if (src.important_message)
 						dat+="<B>[SPAN_COLOR("red", "**")]Important Security Announcement[SPAN_COLOR("red", "**")]</B> [FONT_NORMAL("\[page [src.pages+2]\]")]<BR>"
 					var/temp_page=0
-					for(var/datum/feed_channel/NP in src.news_content)
+					for (var/datum/feed_channel/NP in src.news_content)
 						temp_page++
 						dat+="<B>[NP.channel_name]</B> [FONT_NORMAL("\[page [temp_page+1]\]")]<BR>"
 					dat+="</ul>"
@@ -823,7 +823,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 					dat+="<BR><I>There is a small scribble near the end of this page... It reads: \"[src.scribble]\"</I>"
 				dat+= "<HR><DIV STYLE='float:right;'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV> <div style='float:left;'><A href='?src=\ref[human_user];mach_close=newspaper_main'>Done reading</A></DIV>"
 			if (1) // X channel pages inbetween.
-				for(var/datum/feed_channel/NP in src.news_content)
+				for (var/datum/feed_channel/NP in src.news_content)
 					src.pages++ //Let's get it right again.
 				var/datum/feed_channel/C = src.news_content[src.curr_page]
 				dat+="[FONT_HUGE("<B>[C.channel_name]</B>")][FONT_SMALL(" \[created by: [SPAN_COLOR("maroon", C.author)]\]")]<BR><BR>"
@@ -835,7 +835,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 					else
 						dat+="<ul>"
 						var/i = 0
-						for(var/datum/feed_message/MESSAGE in C.messages)
+						for (var/datum/feed_message/MESSAGE in C.messages)
 							++i
 							dat+="-[MESSAGE.body] <BR>"
 							if (MESSAGE.img)
@@ -848,7 +848,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 					dat+="<BR><I>There is a small scribble near the end of this page... It reads: \"[src.scribble]\"</I>"
 				dat+= "<BR><HR><DIV STYLE='float:left;'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV> <DIV STYLE='float:right;'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV>"
 			if (2) //Last page
-				for(var/datum/feed_channel/NP in src.news_content)
+				for (var/datum/feed_channel/NP in src.news_content)
 					src.pages++
 				if (src.important_message!=null)
 					dat+="<DIV STYLE='float:center;'>[FONT_HUGE("<B>Wanted Issue:</B>")]</DIV><BR><BR>"
@@ -942,7 +942,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 
 /obj/machinery/newscaster/proc/print_paper()
 	var/obj/item/newspaper/NEWSPAPER = new /obj/item/newspaper
-	for(var/datum/feed_channel/FC in connected_group.network_channels)
+	for (var/datum/feed_channel/FC in connected_group.network_channels)
 		NEWSPAPER.news_content += FC
 	if (connected_group.wanted_issue)
 		NEWSPAPER.important_message = connected_group.wanted_issue

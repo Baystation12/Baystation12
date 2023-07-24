@@ -33,7 +33,7 @@ var/global/list/sounds_cache = list()
 
 	log_admin("[key_name(src)] played sound [S]")
 	message_admins("[key_name_admin(src)] played sound [S]", 1)
-	for(var/mob/M in GLOB.player_list)
+	for (var/mob/M in GLOB.player_list)
 		if (M.get_preference_value(/datum/client_preference/play_admin_midis) == GLOB.PREF_YES)
 			sound_to(M, uploaded_sound)
 

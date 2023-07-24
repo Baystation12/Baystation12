@@ -38,7 +38,7 @@ GLOBAL_LIST_INIT(possible_switch_offsets, list(
 
 
 /obj/item/frame/light_switch/proc/position_with_direction(obj/item/frame/light_switch/S as obj, mob/user as mob)
-	for(var/i = 5; i >= 0; i -= 1)
+	for (var/i = 5; i >= 0; i -= 1)
 		var/direction_choice = input(user, "In which direction?", "Select direction.") as null|anything in GLOB.possible_switch_offsets
 		if (!direction_choice || user.incapacitated() || !user.Adjacent(src))
 			return 0

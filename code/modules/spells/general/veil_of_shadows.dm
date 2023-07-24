@@ -48,7 +48,7 @@
 		light_steps--
 		return
 	light_steps = initial(light_steps)
-	for(var/obj/machinery/light/light in view(1,holder))
+	for (var/obj/machinery/light/light in view(1,holder))
 		light.flicker(20)
 
 /spell/veil_of_shadows/Destroy()

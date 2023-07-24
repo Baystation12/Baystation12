@@ -127,7 +127,7 @@
 		//Bleeding out
 		var/blood_max = 0
 		var/list/do_spray = list()
-		for(var/obj/item/organ/external/temp in owner.organs)
+		for (var/obj/item/organ/external/temp in owner.organs)
 
 			if (BP_IS_ROBOTIC(temp))
 				continue
@@ -135,7 +135,7 @@
 			var/open_wound
 			if (temp.status & ORGAN_BLEEDING)
 
-				for(var/datum/wound/W in temp.wounds)
+				for (var/datum/wound/W in temp.wounds)
 
 					if (!open_wound && (W.damage_type == INJURY_TYPE_CUT || W.damage_type == INJURY_TYPE_PIERCE) && W.damage && !W.is_treated())
 						open_wound = TRUE

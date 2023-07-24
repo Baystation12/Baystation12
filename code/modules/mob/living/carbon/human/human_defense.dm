@@ -51,9 +51,9 @@ meteor_act
 /mob/living/carbon/human/get_blocked_ratio(def_zone, damage_type, damage_flags, armor_pen, damage)
 	if (!def_zone && (damage_flags & DAMAGE_FLAG_DISPERSED))
 		var/tally
-		for(var/zone in organ_rel_size)
+		for (var/zone in organ_rel_size)
 			tally += organ_rel_size[zone]
-		for(var/zone in organ_rel_size)
+		for (var/zone in organ_rel_size)
 			def_zone = zone
 			. += .() * organ_rel_size/tally
 		return
@@ -69,9 +69,9 @@ meteor_act
 
 	. = list()
 	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
-	for(var/obj/item/clothing/gear in protective_gear)
+	for (var/obj/item/clothing/gear in protective_gear)
 		if (length(gear.accessories))
-			for(var/obj/item/clothing/accessory/bling in gear.accessories)
+			for (var/obj/item/clothing/accessory/bling in gear.accessories)
 				if (bling.body_parts_covered & def_zone.body_part)
 					var/armor = get_extension(bling, /datum/extension/armor)
 					if (armor)
@@ -92,8 +92,8 @@ meteor_act
 	var/siemens_coefficient = max(species.siemens_coefficient,0)
 
 	var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes) // What all are we checking?
-	for(var/obj/item/clothing/C in clothing_items)
-		for(var/obj/item/clothing/accessories in C.accessories)
+	for (var/obj/item/clothing/C in clothing_items)
+		for (var/obj/item/clothing/accessories in C.accessories)
 			if (accessories.body_parts_covered & def_zone.body_part)
 				siemens_coefficient *= accessories.siemens_coefficient
 		if (istype(C) && (C.body_parts_covered & def_zone.body_part)) // Is that body part being targeted covered?
@@ -103,7 +103,7 @@ meteor_act
 
 /mob/living/carbon/human/proc/check_head_coverage()
 
-	for(var/obj/item/clothing/bp in list(head, wear_mask, wear_suit, w_uniform))
+	for (var/obj/item/clothing/bp in list(head, wear_mask, wear_suit, w_uniform))
 		if (bp.body_parts_covered & HEAD)
 			return 1
 	return 0
@@ -111,7 +111,7 @@ meteor_act
 //Used to check if they can be fed food/drinks/pills
 /mob/living/carbon/human/check_mouth_coverage()
 	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform)
-	for(var/obj/item/gear in protective_gear)
+	for (var/obj/item/gear in protective_gear)
 		if (istype(gear) && (gear.body_parts_covered & FACE) && !(gear.item_flags & ITEM_FLAG_FLEXIBLEMATERIAL))
 			return gear
 
@@ -137,7 +137,7 @@ meteor_act
 		if (BP_L_FOOT, BP_R_FOOT)
 			bodypart = FEET
 
-	for(var/obj/item/clothing/C in list(head, wear_mask, wear_suit, w_uniform, gloves, shoes, glasses))
+	for (var/obj/item/clothing/C in list(head, wear_mask, wear_suit, w_uniform, gloves, shoes, glasses))
 		if (C.body_parts_covered & bodypart)
 			return C
 	return null
@@ -150,7 +150,7 @@ meteor_act
 		P.redirect(P.starting.x + rand(-2,2), P.starting.y + rand(-2,2), get_turf(src), src)
 		return PROJECTILE_FORCE_MISS
 
-	for(var/obj/item/shield in list(l_hand, r_hand, wear_suit))
+	for (var/obj/item/shield in list(l_hand, r_hand, wear_suit))
 		if (!shield) continue
 		. = shield.handle_shield(src, damage, damage_source, attacker, def_zone, attack_text)
 		if (.) return
@@ -281,7 +281,7 @@ meteor_act
 		if (hit_zone)
 			organ = get_organ(hit_zone)
 		var/list/bloody = get_covering_equipped_items(organ.body_part)
-		for(var/obj/item/clothing/C in bloody)
+		for (var/obj/item/clothing/C in bloody)
 			C.add_blood(src)
 			C.update_clothing_icon()
 
@@ -445,7 +445,7 @@ meteor_act
 		"hands" = THERMAL_PROTECTION_HAND_LEFT + THERMAL_PROTECTION_HAND_RIGHT
 		)
 
-	for(var/obj/item/clothing/C in src.get_equipped_items())
+	for (var/obj/item/clothing/C in src.get_equipped_items())
 		if (C.permeability_coefficient == 1 || !C.body_parts_covered)
 			continue
 		if (C.body_parts_covered & HEAD)
@@ -463,7 +463,7 @@ meteor_act
 		if (C.body_parts_covered & HANDS)
 			perm_by_part["hands"] *= C.permeability_coefficient
 
-	for(var/part in perm_by_part)
+	for (var/part in perm_by_part)
 		perm += perm_by_part[part]
 
 	return perm

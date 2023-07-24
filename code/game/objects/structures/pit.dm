@@ -74,7 +74,7 @@
 	name = "pit"
 	desc = "Watch your step, partner."
 	open = 1
-	for(var/atom/movable/A in src)
+	for (var/atom/movable/A in src)
 		A.forceMove(src.loc)
 	update_icon()
 
@@ -82,7 +82,7 @@
 	name = "mound"
 	desc = "Some things are better left buried."
 	open = 0
-	for(var/atom/movable/A in src.loc)
+	for (var/atom/movable/A in src.loc)
 		if (!A.anchored && A != user)
 			A.forceMove(src)
 	update_icon()
@@ -106,7 +106,7 @@
 	to_chat(escapee, SPAN_WARNING("You start digging your way out of \the [src] (this will take about [breakout_time] minute\s)"))
 	visible_message(SPAN_DANGER("Something is scratching its way out of \the [src]!"))
 
-	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
+	for (var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
 		playsound(src.loc, 'sound/weapons/bite.ogg', 100, 1)
 
 		if (!do_after(escapee, 5 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))

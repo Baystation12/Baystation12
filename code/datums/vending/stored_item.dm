@@ -66,7 +66,7 @@
 /datum/stored_items/proc/merge(datum/stored_items/other)
 	if (other.item_path != item_path)
 		return FALSE
-	for(var/atom/movable/thing in other.instances)
+	for (var/atom/movable/thing in other.instances)
 		other.instances -= thing
 		if (thing in instances)
 			amount-- // Don't double-count
@@ -79,5 +79,5 @@
 
 /datum/stored_items/proc/migrate(atom/new_storing_obj)
 	storing_object = new_storing_obj
-	for(var/atom/movable/thing in instances)
+	for (var/atom/movable/thing in instances)
 		thing.forceMove(new_storing_obj)

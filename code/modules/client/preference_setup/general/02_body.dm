@@ -127,7 +127,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.body_descriptors = list()
 
 	if (LAZYLEN(mob_species.descriptors))
-		for(var/entry in mob_species.descriptors)
+		for (var/entry in mob_species.descriptors)
 			var/datum/mob_descriptor/descriptor = mob_species.descriptors[entry]
 			if (istype(descriptor))
 				if (isnull(last_descriptors[entry]))
@@ -267,7 +267,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_REFRESH
 
 	else if (href_list["random"])
-		pref.randomize_appearance_and_body_for()
+		pref.randomize_appearance_and_body_for ()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if (href_list["pronouns"])
@@ -303,7 +303,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if (href_list["set_species"])
 
 		var/list/species_to_pick = list()
-		for(var/species in playable_species)
+		for (var/species in playable_species)
 			if (!GLOB.skip_allow_lists && !check_rights(R_ADMIN, 0) && config.usealienwhitelist)
 				var/datum/species/current_species = all_species[species]
 				if (!(current_species.spawn_flags & SPECIES_CAN_JOIN))
@@ -440,7 +440,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			var/datum/sprite_accessory/marking/mark_style = GLOB.body_marking_styles_list[M]
 			disallowed_markings |= mark_style.disallows
 		var/list/usable_markings = pref.body_markings.Copy() ^ GLOB.body_marking_styles_list.Copy()
-		for(var/M in usable_markings)
+		for (var/M in usable_markings)
 			var/datum/sprite_accessory/S = usable_markings[M]
 			if (is_type_in_list(S, disallowed_markings) || (S.species_allowed && !(mob_species.get_bodytype() in S.species_allowed)) || (S.subspecies_allowed && !(mob_species.name in S.subspecies_allowed)))
 				usable_markings -= M
@@ -531,10 +531,10 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		switch(new_state)
 			if ("Normal")
 				if (limb == BP_CHEST)
-					for(var/other_limb in (BP_ALL_LIMBS - BP_CHEST))
+					for (var/other_limb in (BP_ALL_LIMBS - BP_CHEST))
 						pref.organ_data[other_limb] = null
 						pref.rlimb_data[other_limb] = null
-						for(var/internal_organ in list(BP_HEART,BP_EYES,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_STOMACH,BP_BRAIN))
+						for (var/internal_organ in list(BP_HEART,BP_EYES,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_STOMACH,BP_BRAIN))
 							pref.organ_data[internal_organ] = null
 				pref.organ_data[limb] = null
 				pref.rlimb_data[limb] = null
@@ -554,7 +554,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				var/datum/species/temp_species = pref.species ? all_species[pref.species] : all_species[SPECIES_HUMAN]
 				var/tmp_species = temp_species.get_bodytype(user)
 				var/list/usable_manufacturers = list()
-				for(var/company in chargen_robolimbs)
+				for (var/company in chargen_robolimbs)
 					var/datum/robolimb/M = chargen_robolimbs[company]
 					if (tmp_species in M.species_cannot_use)
 						continue
@@ -579,12 +579,12 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					pref.organ_data[third_limb] = null
 
 				if (limb == BP_CHEST)
-					for(var/other_limb in BP_ALL_LIMBS - BP_CHEST)
+					for (var/other_limb in BP_ALL_LIMBS - BP_CHEST)
 						pref.organ_data[other_limb] = "cyborg"
 						pref.rlimb_data[other_limb] = choice
 					if (!pref.organ_data[BP_BRAIN])
 						pref.organ_data[BP_BRAIN] = "assisted"
-					for(var/internal_organ in list(BP_HEART,BP_EYES,BP_LUNGS,BP_LIVER,BP_KIDNEYS))
+					for (var/internal_organ in list(BP_HEART,BP_EYES,BP_LUNGS,BP_LIVER,BP_KIDNEYS))
 						pref.organ_data[internal_organ] = "mechanical"
 
 		return TOPIC_REFRESH_UPDATE_PREVIEW
@@ -671,7 +671,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 /datum/category_item/player_setup_item/physical/body/proc/sanitize_organs()
 	var/datum/species/mob_species = all_species[pref.species]
 	if (mob_species && mob_species.spawn_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
-		for(var/name in pref.organ_data)
+		for (var/name in pref.organ_data)
 			var/status = pref.organ_data[name]
 			if (status in list("assisted","mechanical"))
 				pref.organ_data[name] = null

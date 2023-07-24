@@ -107,7 +107,7 @@
 		return 0
 
 	var/datum/rig_charge/accepted_item
-	for(var/charge in charges)
+	for (var/charge in charges)
 		var/datum/rig_charge/charge_datum = charges[charge]
 		if (input_device.type == charge_datum.product_type)
 			accepted_item = charge_datum
@@ -352,7 +352,7 @@
 	if (!M)
 		return
 
-	for(var/obj/item/melee/energy/blade/blade in M.contents)
+	for (var/obj/item/melee/energy/blade/blade in M.contents)
 		qdel(blade)
 
 /obj/item/rig_module/fabricator

@@ -33,7 +33,7 @@
 	.["message"] = paper.info || ""
 	.["title"] =   paper.name || "paper"
 
-/datum/persistent/paper/GetAdminDataStringFor(thing, can_modify, mob/user)
+/datum/persistent/paper/GetAdminDataStringfor (thing, can_modify, mob/user)
 	var/obj/item/paper/paper = thing
 	if (can_modify)
 		. = "<td style='background-color:[paper.color]'>[paper.info]</td><td>[paper.name]</td><td>[paper.last_modified_ckey]</td><td><a href='byond://?src=\ref[src];caller=\ref[user];remove_entry=\ref[thing]'>Destroy</a></td>"

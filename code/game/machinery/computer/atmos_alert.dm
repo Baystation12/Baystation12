@@ -30,10 +30,10 @@ var/global/list/minor_air_alarms = list()
 	var/major_alarms[0]
 	var/minor_alarms[0]
 
-	for(var/datum/alarm/alarm in GLOB.atmosphere_alarm.major_alarms(get_z(src)))
+	for (var/datum/alarm/alarm in GLOB.atmosphere_alarm.major_alarms(get_z(src)))
 		major_alarms[LIST_PRE_INC(major_alarms)] = list("name" = sanitize(alarm.alarm_name()), "ref" = "\ref[alarm]")
 
-	for(var/datum/alarm/alarm in GLOB.atmosphere_alarm.minor_alarms(get_z(src)))
+	for (var/datum/alarm/alarm in GLOB.atmosphere_alarm.minor_alarms(get_z(src)))
 		minor_alarms[LIST_PRE_INC(minor_alarms)] = list("name" = sanitize(alarm.alarm_name()), "ref" = "\ref[alarm]")
 
 	data["priority_alarms"] = major_alarms
@@ -60,7 +60,7 @@ var/global/list/minor_air_alarms = list()
 	if (href_list["clear_alarm"])
 		var/datum/alarm/alarm = locate(href_list["clear_alarm"]) in GLOB.atmosphere_alarm.alarms
 		if (alarm)
-			for(var/datum/alarm_source/alarm_source in alarm.sources)
+			for (var/datum/alarm_source/alarm_source in alarm.sources)
 				var/obj/machinery/alarm/air_alarm = alarm_source.source
 				if (istype(air_alarm))
 					var/list/new_ref = list("atmos_reset" = 1)

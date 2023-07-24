@@ -102,7 +102,7 @@ var/global/list/image/fluidtrack_cache=list()
 	var/datum/fluidtrack/track
 
 	// Process 4 bits
-	for(var/bi=0;bi<4;bi++)
+	for (var/bi=0;bi<4;bi++)
 		b = SHIFTL(1, bi)
 		// COMING BIT
 		// If setting

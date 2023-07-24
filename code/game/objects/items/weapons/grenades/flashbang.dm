@@ -12,10 +12,10 @@
 	var/list/objs = list()
 	var/turf/T = get_turf(src)
 	get_mobs_and_objs_in_view_fast(T, 7, victims, objs)
-	for(var/mob/living/carbon/M in victims)
+	for (var/mob/living/carbon/M in victims)
 		bang(T, M)
 
-	for(var/obj/effect/blob/B in objs)       		//Blob damage here
+	for (var/obj/effect/blob/B in objs)       		//Blob damage here
 		var/damage = round(30/(get_dist(B,T)+1))
 		B.damage_health(damage, DAMAGE_SHOCK)
 
@@ -96,16 +96,16 @@
 /obj/item/grenade/flashbang/clusterbang/detonate(mob/living/user)
 	var/numspawned = rand(4,8)
 	var/again = 0
-	for(var/more = numspawned,more > 0,more--)
+	for (var/more = numspawned,more > 0,more--)
 		if (prob(35))
 			again++
 			numspawned --
 
-	for(,numspawned > 0, numspawned--)
+	for (,numspawned > 0, numspawned--)
 		new /obj/item/grenade/flashbang/cluster(src.loc)//Launches flashbangs
 		playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 
-	for(,again > 0, again--)
+	for (,again > 0, again--)
 		new /obj/item/grenade/flashbang/clusterbang/segment(src.loc)//Creates a 'segment' that launches a few more flashbangs
 		playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 	qdel(src)
@@ -131,11 +131,11 @@
 
 /obj/item/grenade/flashbang/clusterbang/segment/detonate(mob/living/user)
 	var/numspawned = rand(4,8)
-	for(var/more = numspawned,more > 0,more--)
+	for (var/more = numspawned,more > 0,more--)
 		if (prob(35))
 			numspawned --
 
-	for(,numspawned > 0, numspawned--)
+	for (,numspawned > 0, numspawned--)
 		new /obj/item/grenade/flashbang/cluster(src.loc)
 		playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 	qdel(src)

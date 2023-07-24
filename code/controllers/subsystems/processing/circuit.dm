@@ -25,7 +25,7 @@ PROCESSING_SUBSYSTEM_DEF(circuit)
 	//Cached lists for free performance
 	var/atom/def = /obj/item/integrated_circuit
 	var/default_name = initial(def.name)
-	for(var/path in typesof(/obj/item/integrated_circuit))
+	for (var/path in typesof(/obj/item/integrated_circuit))
 		var/obj/item/integrated_circuit/IC = path
 		var/name = initial(IC.name)
 		if (name == default_name)
@@ -42,7 +42,7 @@ PROCESSING_SUBSYSTEM_DEF(circuit)
 		var/list/category_list = circuit_fabricator_recipe_list[category]
 		category_list += IC // Populating the fabricator categories
 
-	for(var/path in typesof(/obj/item/device/electronic_assembly))
+	for (var/path in typesof(/obj/item/device/electronic_assembly))
 		var/obj/item/device/electronic_assembly/A = path
 		var/name = initial(A.name)
 		all_assemblies[name] = path

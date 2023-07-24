@@ -110,7 +110,7 @@
 /mob/living/simple_animal/passive/opossum/poppy/proc/check_keywords(message)
 	if (!client && stat == CONSCIOUS)
 		message = lowertext(message)
-		for(var/aaa in aaa_words)
+		for (var/aaa in aaa_words)
 			if (findtext(message, aaa))
 				respond_to_damage()
 				return

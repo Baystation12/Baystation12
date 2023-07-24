@@ -68,7 +68,7 @@
 	var/bad_tests = 0
 
 	// obj/item/storage/internal cannot be tested sadly, as they expect their host object to create them
-	for(var/storage_type in subtypesof(/obj/item/storage) - typesof(/obj/item/storage/internal))
+	for (var/storage_type in subtypesof(/obj/item/storage) - typesof(/obj/item/storage/internal))
 		var/obj/item/storage/S = new storage_type(null) //should be fine to put it in nullspace...
 		var/bad_msg = "[ascii_red]--------------- [S.name] \[[S.type]\]"
 		bad_tests += test_storage_capacity(S, bad_msg)
@@ -88,7 +88,7 @@
 		bad_tests++
 
 	var/total_storage_space = 0
-	for(var/obj/item/I in S.contents)
+	for (var/obj/item/I in S.contents)
 		if (I.w_class > S.max_w_class)
 			log_unit_test("[bad_msg] Contains an item \[[I.type]\] that is too big to be held ([I.w_class] / [S.max_w_class]). [ascii_reset]")
 			bad_tests++

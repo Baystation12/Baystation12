@@ -108,7 +108,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 			if ("submit")
 				if (candidate)
 					candidate.ready = 1
-					for(var/obj/item/device/paicard/p in world)
+					for (var/obj/item/device/paicard/p in world)
 						if (p.looking_for_personality == 1)
 							p.alertUpdate()
 				close_browser(usr, "window=paiRecruit")
@@ -118,7 +118,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 
 /datum/paiController/proc/recruitWindow(mob/M as mob, allowSubmit = 1)
 	var/datum/paiCandidate/candidate
-	for(var/datum/paiCandidate/c in pai_candidates)
+	for (var/datum/paiCandidate/c in pai_candidates)
 		if (!istype(c) || !istype(M))
 			break
 		if (c.key == M.key)
@@ -262,10 +262,10 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 /datum/paiController/proc/findPAI(obj/item/device/paicard/p, mob/user)
 	requestRecruits(user)
 	var/list/available = list()
-	for(var/datum/paiCandidate/c in paiController.pai_candidates)
+	for (var/datum/paiCandidate/c in paiController.pai_candidates)
 		if (c.ready)
 			var/found = 0
-			for(var/mob/observer/ghost/o in GLOB.player_list)
+			for (var/mob/observer/ghost/o in GLOB.player_list)
 				if (o.key == c.key && o.MayRespawn())
 					found = 1
 			if (found)
@@ -341,7 +341,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 	"}
 	dat += "<p>Displaying available AI personalities from central database... If there are no entries, or if a suitable entry is not listed, check again later as more personalities may be added.</p>"
 
-	for(var/datum/paiCandidate/c in available)
+	for (var/datum/paiCandidate/c in available)
 		dat += {"
 				<table class="desc">
 					<tr class="d0">
@@ -378,7 +378,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 
 /datum/paiController/proc/requestRecruits(mob/user)
 	inquirer = user
-	for(var/mob/observer/ghost/O in GLOB.player_list)
+	for (var/mob/observer/ghost/O in GLOB.player_list)
 		if (!O.MayRespawn())
 			continue
 		if (jobban_isbanned(O, "pAI"))

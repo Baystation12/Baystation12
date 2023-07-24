@@ -177,7 +177,7 @@ var/global/solar_gen_rate = 1500
 		if (istype(E))
 			steps = 5
 
-	for(var/i = 1 to steps)
+	for (var/i = 1 to steps)
 		ax += GLOB.sun_dx
 		ay += GLOB.sun_dy
 
@@ -301,7 +301,7 @@ var/global/solar_gen_rate = 1500
 	return -1
 
 /obj/machinery/power/solar_control/Destroy()
-	for(var/obj/machinery/power/solar/M in connected_panels)
+	for (var/obj/machinery/power/solar/M in connected_panels)
 		M.unset_control()
 	if (connected_tracker)
 		connected_tracker.unset_control()
@@ -320,7 +320,7 @@ var/global/solar_gen_rate = 1500
 //search for unconnected panels and trackers in the computer powernet and connect them
 /obj/machinery/power/solar_control/proc/search_for_connected()
 	if (powernet)
-		for(var/obj/machinery/power/M in powernet.nodes)
+		for (var/obj/machinery/power/M in powernet.nodes)
 			if (istype(M, /obj/machinery/power/solar))
 				var/obj/machinery/power/solar/S = M
 				if (!S.control) //i.e unconnected
@@ -463,7 +463,7 @@ var/global/solar_gen_rate = 1500
 
 //rotates the panel to the passed angle
 /obj/machinery/power/solar_control/proc/set_panels(cdir)
-	for(var/obj/machinery/power/solar/S in connected_panels)
+	for (var/obj/machinery/power/solar/S in connected_panels)
 		S.adir = cdir //instantly rotates the panel
 		S.occlusion()//and
 		S.update_icon() //update it

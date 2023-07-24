@@ -466,11 +466,11 @@ var/global/bomb_set
 /obj/machinery/nuclearbomb/station/Initialize()
 	. = ..()
 	verbs -= /obj/machinery/nuclearbomb/verb/toggle_deployable
-	for(var/turf/simulated/floor/T in get_area(src))
+	for (var/turf/simulated/floor/T in get_area(src))
 		if (istype(T.flooring, /singleton/flooring/reinforced/circuit/red))
 			flash_tiles += T
 	update_icon()
-	for(var/obj/machinery/self_destruct/ch in get_area(src))
+	for (var/obj/machinery/self_destruct/ch in get_area(src))
 		inserters += ch
 
 /obj/machinery/nuclearbomb/station/attackby(obj/item/O as obj, mob/user as mob)
@@ -485,7 +485,7 @@ var/global/bomb_set
 		return
 
 /obj/machinery/nuclearbomb/station/start_bomb()
-	for(var/inserter in inserters)
+	for (var/inserter in inserters)
 		var/obj/machinery/self_destruct/sd = inserter
 		if (!istype(sd) || !sd.armed)
 			to_chat(usr, SPAN_WARNING("An inserter has not been armed or is damaged."))
@@ -544,7 +544,7 @@ var/global/bomb_set
 		icon_state = "idle"
 
 	if (!last_turf_state || target_icon_state != last_turf_state)
-		for(var/thing in flash_tiles)
+		for (var/thing in flash_tiles)
 			var/turf/simulated/floor/T = thing
 			if (!istype(T.flooring, /singleton/flooring/reinforced/circuit/red))
 				flash_tiles -= T

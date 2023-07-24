@@ -34,7 +34,7 @@
 
 // We autobuild our z levels.
 /obj/effect/overmap/visitable/ship/landable/find_z_levels()
-	for(var/i = 0 to multiz)
+	for (var/i = 0 to multiz)
 		INCREMENT_WORLD_Z_SIZE
 		map_z += world.maxz
 
@@ -43,7 +43,7 @@
 	add_landmark(landmark, shuttle)
 
 	var/visitor_dir = fore_dir
-	for(var/landmark_name in list("FORE", "PORT", "AFT", "STARBOARD"))
+	for (var/landmark_name in list("FORE", "PORT", "AFT", "STARBOARD"))
 		var/turf/visitor_turf = get_ranged_target_turf(center_loc, visitor_dir, round(min(world.maxx/4, world.maxy/4)))
 		var/obj/effect/shuttle_landmark/visiting_shuttle/visitor_landmark = new (visitor_turf, landmark, landmark_name)
 		add_landmark(visitor_landmark)
@@ -144,7 +144,7 @@
 	var/obj/effect/overmap/visitable/target = map_sectors["[into.z]"]
 	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]
 	if (into.landmark_tag == shuttle_datum.motherdock) // If our motherdock is a landable ship, it won't be found properly here so we need to find it manually.
-		for(var/obj/effect/overmap/visitable/ship/landable/landable in SSshuttle.ships)
+		for (var/obj/effect/overmap/visitable/ship/landable/landable in SSshuttle.ships)
 			if (landable.shuttle == shuttle_datum.mothershuttle)
 				target = landable
 				break

@@ -67,7 +67,7 @@
 
 /obj/machinery/door/firedoor/Initialize()
 	. = ..()
-	for(var/obj/machinery/door/firedoor/F in loc)
+	for (var/obj/machinery/door/firedoor/F in loc)
 		if (F != src)
 			return INITIALIZE_HINT_QDEL
 	var/area/A = get_area(src)
@@ -76,14 +76,14 @@
 	LAZYADD(A.all_doors, src)
 	areas_added = list(A)
 
-	for(var/direction in GLOB.cardinal)
+	for (var/direction in GLOB.cardinal)
 		A = get_area(get_step(src,direction))
 		if (istype(A) && !(A in areas_added))
 			LAZYADD(A.all_doors, src)
 			areas_added += A
 
 /obj/machinery/door/firedoor/Destroy()
-	for(var/area/A in areas_added)
+	for (var/area/A in areas_added)
 		LAZYREMOVE(A.all_doors, src)
 	. = ..()
 
@@ -102,7 +102,7 @@
 	if (pdiff >= FIREDOOR_MAX_PRESSURE_DIFF)
 		to_chat(user, SPAN_WARNING("WARNING: Current pressure differential is [pdiff] kPa! Opening door may result in injury!"))
 	to_chat(user, "<b>Sensor readings:</b>")
-	for(var/index = 1; index <= length(tile_info); index++)
+	for (var/index = 1; index <= length(tile_info); index++)
 		var/o = "&nbsp;&nbsp;"
 		switch(index)
 			if (1)
@@ -126,7 +126,7 @@
 	if (islist(users_to_open) && length(users_to_open))
 		var/users_to_open_string = users_to_open[1]
 		if (length(users_to_open) >= 2)
-			for(var/i = 2 to length(users_to_open))
+			for (var/i = 2 to length(users_to_open))
 				users_to_open_string += ", [users_to_open[i]]"
 		to_chat(user, "These people have opened \the [src] during an alert: [users_to_open_string].")
 
@@ -138,7 +138,7 @@
 	return 0
 
 /obj/machinery/door/firedoor/proc/get_alarm()
-	for(var/area/A in areas_added) //Checks if there are fire alarms in any areas associated with that firedoor
+	for (var/area/A in areas_added) //Checks if there are fire alarms in any areas associated with that firedoor
 		if (A.fire || A.air_doors_activated)
 			return TRUE
 	return FALSE
@@ -340,7 +340,7 @@
 
 		tile_info = getCardinalAirInfo(loc,list("temperature", "pressure"))
 		var/old_alerts = dir_alerts
-		for(var/index = 1; index <= 4; index++)
+		for (var/index = 1; index <= 4; index++)
 			var/list/tileinfo = tile_info[index]
 			if (tileinfo == null)
 				continue // Bad data.
@@ -382,8 +382,8 @@
 	closing = TRUE
 	latetoggle()
 	var/list/people = list()
-	for(var/turf/turf in locs)
-		for(var/mob/living/M in turf)
+	for (var/turf/turf in locs)
+		for (var/mob/living/M in turf)
 			people += M
 	if (length(people))
 		visible_message(
@@ -393,10 +393,10 @@
 		)
 		playsound(loc, "sound/machines/firedoor.ogg", 50)
 		sleep(2 SECONDS)
-		for(var/turf/turf in locs)
-			for(var/mob/living/M in turf)
+		for (var/turf/turf in locs)
+			for (var/mob/living/M in turf)
 				var/direction
-				for(var/d in GLOB.cardinal)
+				for (var/d in GLOB.cardinal)
 					var/turf/T = get_step(src, d)
 					var/area/A = get_area(T)
 					if (istype(A) && !A.atmosalm && !turf_contains_dense_objects(T))
@@ -407,7 +407,7 @@
 						if (istype(A) && !A.atmosalm && !turf_contains_dense_objects(T))
 							direction = d
 				if (!direction) //Let's try again but this time ignore atmos alarms
-					for(var/d in GLOB.cardinal)
+					for (var/d in GLOB.cardinal)
 						var/turf/T = get_step(src, d)
 						var/area/A = get_area(T)
 						if (istype(A) && !turf_contains_dense_objects(T))
@@ -456,11 +456,11 @@
 // Only opens when all areas connecting with our turf have an air alarm and are cleared
 /obj/machinery/door/firedoor/proc/can_safely_open()
 	var/turf/neighbour
-	for(var/dir in GLOB.cardinal)
+	for (var/dir in GLOB.cardinal)
 		neighbour = get_step(loc, dir)
 		if (neighbour.c_airblock(loc) & AIR_BLOCKED)
 			continue
-		for(var/obj/O in loc)
+		for (var/obj/O in loc)
 			if (istype(O, /obj/machinery/door))
 				continue
 			. |= O.c_airblock(neighbour)
@@ -508,9 +508,9 @@
 			lights_overlay += "palert"
 			do_set_light = TRUE
 		if (dir_alerts)
-			for(var/d=1; d<=4; d++)
+			for (var/d=1; d<=4; d++)
 				var/cdir = GLOB.cardinal[d]
-				for(var/i=1; i<=length(ALERT_STATES); i++)
+				for (var/i=1; i<=length(ALERT_STATES); i++)
 					if (dir_alerts[d] & SHIFTL(1, (i - 1)))
 						overlays += new/icon(icon, "alert_[ALERT_STATES[i]]", dir = cdir)
 						do_set_light = TRUE

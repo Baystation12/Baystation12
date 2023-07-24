@@ -170,7 +170,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 ///////////////////////////
 
 /spell/proc/before_cast(list/targets)
-	for(var/atom/target in targets)
+	for (var/atom/target in targets)
 		if (overlay)
 			var/location
 			if (istype(target,/mob/living))
@@ -188,7 +188,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 /spell/proc/after_cast(list/targets)
 	if (cast_sound)
 		playsound(get_turf(holder),cast_sound,50,1)
-	for(var/atom/target in targets)
+	for (var/atom/target in targets)
 		var/location = get_turf(target)
 		if (istype(target,/mob/living) && message)
 			to_chat(target, text("[message]"))
@@ -234,7 +234,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 		return 0
 
 	if (spell_flags & CONSTRUCT_CHECK)
-		for(var/turf/T in range(holder, 1))
+		for (var/turf/T in range(holder, 1))
 			if (findNullRod(T))
 				return 0
 
@@ -305,7 +305,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 		return 0
 
 	var/list/valid_targets = view_or_range(range, holder, selection_type)
-	for(var/target in targets)
+	for (var/target in targets)
 		if (!(target in valid_targets))
 			return 0
 	return 1

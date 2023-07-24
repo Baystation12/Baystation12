@@ -51,7 +51,7 @@
 	var/list/obj/machinery/machines = list()
 	var/list/obj/structure/cable/cables = list()
 
-	for(var/atom/A in atoms)
+	for (var/atom/A in atoms)
 		if (istype(A, /turf))
 			turfs += A
 		if (istype(A, /obj/structure/cable))
@@ -134,7 +134,7 @@
 	init_atoms(atoms_to_initialise)
 	init_shuttles(shuttle_state)
 	after_load(initial_z)
-	for(var/light_z = initial_z to world.maxz)
+	for (var/light_z = initial_z to world.maxz)
 		create_lighting_overlays_zlevel(light_z)
 	log_game("Z-level [name] loaded at [x],[y],[world.maxz]")
 	loaded++
@@ -177,7 +177,7 @@
 	return TRUE
 
 /datum/map_template/proc/after_load(z)
-	for(var/obj/effect/landmark/map_load_mark/mark in subtemplates_to_spawn)
+	for (var/obj/effect/landmark/map_load_mark/mark in subtemplates_to_spawn)
 		subtemplates_to_spawn -= mark
 		if (LAZYLEN(mark.templates))
 			var/template = pick(mark.templates)

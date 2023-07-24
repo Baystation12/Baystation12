@@ -47,7 +47,7 @@
 	real_name = name
 	add_language(LANGUAGE_CULT)
 	add_language(LANGUAGE_CULT_GLOBAL)
-	for(var/spell in construct_spells)
+	for (var/spell in construct_spells)
 		add_spell(new spell, "const_spell_ready")
 	update_icon()
 

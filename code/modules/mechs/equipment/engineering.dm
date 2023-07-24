@@ -130,7 +130,7 @@
 			turfs += get_step(front, turn(owner.dir,  90))
 
 		segments = list()
-		for(var/turf/T in turfs)
+		for (var/turf/T in turfs)
 			var/obj/effect/mech_shield/MS = new(T)
 			if (istype(MS))
 				MS.shields = src
@@ -149,7 +149,7 @@
 	icon_state = "mech_atmoshield[active ? "_on" : "_off"]"
 
 /obj/item/mech_equipment/atmos_shields/deactivate()
-	for(var/obj/effect/mech_shield/MS in segments)
+	for (var/obj/effect/mech_shield/MS in segments)
 		if (istype(MS))
 			GLOB.moved_event.unregister(MS, src, .proc/on_moved)
 	if (length(segments))

@@ -35,11 +35,11 @@
 	overlays.Cut()
 	if (a_left)
 		overlays += "[a_left.icon_state]_left"
-		for(var/O in a_left.attached_overlays)
+		for (var/O in a_left.attached_overlays)
 			overlays += "[O]_l"
 	if (a_right)
 		overlays += "[a_right.icon_state]_right"
-		for(var/O in a_right.attached_overlays)
+		for (var/O in a_right.attached_overlays)
 			overlays += "[O]_r"
 	if (master)
 		master.update_icon()

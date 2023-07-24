@@ -34,7 +34,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 /obj/item/reagent_containers/food/drinks/glass2/examine(mob/M)
 	. = ..()
 
-	for(var/I in extras)
+	for (var/I in extras)
 		if (istype(I, /obj/item/glass_extra))
 			to_chat(M, "There is \a [I] in \the [src].")
 		else if (istype(I, /obj/item/reagent_containers/food/snacks/fruit_slice))
@@ -63,7 +63,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		if (("fizz" in R.glass_special))
 			return 1
 		var/totalfizzy = 0
-		for(var/datum/reagent/re in reagents.reagent_list)
+		for (var/datum/reagent/re in reagents.reagent_list)
 			if ("fizz" in re.glass_special)
 				totalfizzy += re.volume
 		if (totalfizzy >= reagents.total_volume / 5) // 20% fizzy by volume
@@ -77,7 +77,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		var/datum/reagent/R = reagents.get_master_reagent()
 		if (!("vapor" in R.glass_special))
 			var/totalvape = 0
-			for(var/datum/reagent/re in reagents.reagent_list)
+			for (var/datum/reagent/re in reagents.reagent_list)
 				if ("vapor" in re.glass_special)
 					totalvape += re.volume
 			if (totalvape >= volume * 0.6) // 60% vapor by container volume
@@ -167,7 +167,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		if (has_vapor())
 			over_liquid |= image(icon, src, "[base_icon]_vapor")
 
-		for(var/S in R.glass_special)
+		for (var/S in R.glass_special)
 			if ("[base_icon]_[S]" in icon_states(icon))
 				under_liquid |= image(icon, src, "[base_icon]_[S]")
 			else if ("[base_icon][amnt]_[S]" in icon_states(icon))
@@ -189,7 +189,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		desc = custom_desc || initial(desc)
 
 	var/side = "left"
-	for(var/item in extras)
+	for (var/item in extras)
 		if (istype(item, /obj/item/glass_extra))
 			var/obj/item/glass_extra/GE = item
 			var/image/I = image(icon, src, "[base_icon]_[GE.glass_addition][side]")

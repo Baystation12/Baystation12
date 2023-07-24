@@ -29,7 +29,7 @@
 /obj/item/reagent_containers/borghypo/Initialize()
 	. = ..()
 
-	for(var/T in reagent_ids)
+	for (var/T in reagent_ids)
 		reagent_volumes[T] = volume
 		var/datum/reagent/R = T
 		reagent_names += initial(R.name)
@@ -50,7 +50,7 @@
 	if (isrobot(loc))
 		var/mob/living/silicon/robot/R = loc
 		if (R && R.cell)
-			for(var/T in reagent_ids)
+			for (var/T in reagent_ids)
 				if (reagent_volumes[T] < volume)
 					R.cell.use(charge_cost)
 					reagent_volumes[T] = min(reagent_volumes[T] + 5, volume)

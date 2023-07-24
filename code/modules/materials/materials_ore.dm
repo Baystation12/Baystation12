@@ -24,7 +24,7 @@
 	..(newloc)
 
 /obj/item/ore/Initialize()
-	for(var/stuff in matter)
+	for (var/stuff in matter)
 		var/material/M = SSmaterials.get_material_by_name(stuff)
 		if (M)
 			name = M.ore_name

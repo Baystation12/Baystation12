@@ -28,7 +28,7 @@
 	else
 		overlays.Cut()
 	var/offset = 1
-	for(var/thing in components)
+	for (var/thing in components)
 		var/obj/screen/psi/component = thing
 		component.update_icon()
 		if (!component.invisibility) component.screen_loc = "EAST-[++offset]:28,CENTER-3:11"
@@ -36,7 +36,7 @@
 /obj/screen/psi/hub/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
 	owner = null
-	for(var/thing in components)
+	for (var/thing in components)
 		qdel(thing)
 	components.Cut()
 	. = ..()

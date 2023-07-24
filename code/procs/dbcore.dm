@@ -117,7 +117,7 @@
 	var/list/results
 	if (length(columns))
 		results = list()
-		for(var/C in columns)
+		for (var/C in columns)
 			results+=C
 			var/DBColumn/cur_col = columns[C]
 			results[C] = src.item[(cur_col.position+1)]

@@ -56,7 +56,7 @@
 		if (beaker)
 			if (beaker.reagents.total_volume < beaker.reagents.maximum_volume)
 				var/pumped = 0
-				for(var/datum/reagent/x in occupant.reagents.reagent_list)
+				for (var/datum/reagent/x in occupant.reagents.reagent_list)
 					occupant.reagents.trans_to_obj(beaker, pump_speed)
 					pumped++
 				if (ishuman(occupant))
@@ -68,7 +68,7 @@
 			if (beaker.reagents.total_volume < beaker.reagents.maximum_volume)
 				var/datum/reagents/ingested = occupant.get_ingested_reagents()
 				if (ingested)
-					for(var/datum/reagent/x in ingested.reagent_list)
+					for (var/datum/reagent/x in ingested.reagent_list)
 						ingested.trans_to_obj(beaker, pump_speed)
 		else
 			toggle_pump()
@@ -99,7 +99,7 @@
 	data["power"] = inoperable() ? 0 : 1
 
 	var/list/reagents = list()
-	for(var/T in available_chemicals)
+	for (var/T in available_chemicals)
 		var/list/reagent = list()
 		reagent["name"] = T
 		if (occupant && occupant.reagents)
@@ -285,7 +285,7 @@
 	occupant.dropInto(loc)
 	set_occupant(null)
 
-	for(var/obj/O in (contents - component_parts)) // In case an object was dropped inside or something. Excludes the beaker and component parts.
+	for (var/obj/O in (contents - component_parts)) // In case an object was dropped inside or something. Excludes the beaker and component parts.
 		if (O == beaker)
 			continue
 		O.dropInto(loc)

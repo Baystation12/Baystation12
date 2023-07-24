@@ -43,12 +43,12 @@
 	if (!door_type)
 		return 0
 	var/turf/T = locate(xorigin+x-1,yorigin+y-1,zorigin)
-	for(var/i = -1; i <= 1; i++)
-		for(var/j = -1; j <= 1; j++)
+	for (var/i = -1; i <= 1; i++)
+		for (var/j = -1; j <= 1; j++)
 			var/turf/check = locate(T.x + i, T.y + j, T.z)
 			if (!check)
 				continue
-			for(var/atom/movable/M in check.contents)
+			for (var/atom/movable/M in check.contents)
 				if (!istype(M, /atom/movable/lighting_overlay) && M.density)
 					return 0
 	if (!T)

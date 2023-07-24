@@ -63,7 +63,7 @@
 	if (!.)
 		return FALSE
 	if (prob(ai_holder.speak_chance))
-		for(var/mob/M in view())
+		for (var/mob/M in view())
 			sound_to(M, 'sound/effects/mousesqueek.ogg')
 	if (!ckey && stat == CONSCIOUS && prob(0.5))
 		set_stat(UNCONSCIOUS)

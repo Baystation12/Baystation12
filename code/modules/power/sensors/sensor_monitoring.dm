@@ -58,7 +58,7 @@
 
 // Verifies if any warnings were registered by connected sensors.
 /obj/machinery/computer/power_monitor/proc/check_warnings()
-	for(var/obj/machinery/power/sensor/S in power_monitor.grid_sensors)
+	for (var/obj/machinery/power/sensor/S in power_monitor.grid_sensors)
 		if (S.check_grid_warning())
 			return 1
 	return 0

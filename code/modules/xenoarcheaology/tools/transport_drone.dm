@@ -23,7 +23,7 @@
 	if (istype(A,/mob/living))
 		return FALSE
 
-	for(var/atom/B as anything in A)
+	for (var/atom/B as anything in A)
 		if (!recursive_validate_contents(B, depth + 1))
 			return FALSE
 
@@ -47,7 +47,7 @@
 	var/datum/local_network/lan = network ? GLOB.multilevel_local_networks[network] : null
 	if (lan)
 		var/list/drone_pads = lan.get_devices(/obj/machinery/drone_pad)
-		for(var/obj/machinery/drone_pad/pad in drone_pads)
+		for (var/obj/machinery/drone_pad/pad in drone_pads)
 			if (pad.attempt_to_transport(target, user, src))
 				return
 		to_chat(user, SPAN_WARNING("It would seem there are no available drones to process this request!"))

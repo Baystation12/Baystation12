@@ -39,7 +39,7 @@
 /obj/effect/forcefield/bullet_act(obj/item/projectile/Proj, def_zone)
 	var/turf/T = get_turf(src.loc)
 	if (T)
-		for(var/mob/M in T)
+		for (var/mob/M in T)
 			Proj.on_hit(M,M.bullet_act(Proj, def_zone))
 	return
 

@@ -24,7 +24,7 @@ LINEN BINS
 		user.visible_message(SPAN_NOTICE("\The [user] begins cutting up \the [src] with \a [I]."), SPAN_NOTICE("You begin cutting up \the [src] with \the [I]."))
 		if (do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			to_chat(user, SPAN_NOTICE("You cut \the [src] into pieces!"))
-			for(var/i in 1 to rand(2,5))
+			for (var/i in 1 to rand(2,5))
 				new /obj/item/reagent_containers/glass/rag(get_turf(src))
 			qdel(src)
 		return

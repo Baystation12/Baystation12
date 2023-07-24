@@ -120,11 +120,11 @@
 
 	// Generate hardpoint list.
 	var/list/component_descriptions
-	for(var/obj/item/mech_component/comp in list(arms, legs, head, body))
+	for (var/obj/item/mech_component/comp in list(arms, legs, head, body))
 		if (comp.exosuit_desc_string)
 			LAZYADD(component_descriptions, comp.exosuit_desc_string)
 		if (LAZYLEN(comp.has_hardpoints))
-			for(var/hardpoint in comp.has_hardpoints)
+			for (var/hardpoint in comp.has_hardpoints)
 				hardpoints[hardpoint] = null
 
 	if (head && head.radio)
@@ -165,7 +165,7 @@
 	QDEL_NULL(head)
 	QDEL_NULL(body)
 
-	for(var/hardpoint in hardpoint_hud_elements)
+	for (var/hardpoint in hardpoint_hud_elements)
 		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
 		H.owner = null
 		H.holding = null
@@ -186,13 +186,13 @@
 		to_chat(user, "It can seat [length(body.pilot_positions)] pilot\s total.")
 	if (length(hardpoints))
 		to_chat(user, "It has the following hardpoints:")
-		for(var/hardpoint in hardpoints)
+		for (var/hardpoint in hardpoints)
 			var/obj/item/I = hardpoints[hardpoint]
 			to_chat(user, "- [hardpoint]: [istype(I) ? "[I]" : "nothing"].")
 	else
 		to_chat(user, "It has no visible hardpoints.")
 
-	for(var/obj/item/mech_component/thing in list(arms, legs, head, body))
+	for (var/obj/item/mech_component/thing in list(arms, legs, head, body))
 		if (!thing)
 			continue
 

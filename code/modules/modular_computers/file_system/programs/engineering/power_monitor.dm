@@ -40,14 +40,14 @@
 	refresh_sensors()
 
 /datum/nano_module/power_monitor/Destroy()
-	for(var/grid_sensor in grid_sensors)
+	for (var/grid_sensor in grid_sensors)
 		remove_sensor(grid_sensor, FALSE)
 	grid_sensors = null
 	. = ..()
 
 // Checks whether there is an active alarm, if yes, returns 1, otherwise returns 0.
 /datum/nano_module/power_monitor/proc/has_alarm()
-	for(var/obj/machinery/power/sensor/S in grid_sensors)
+	for (var/obj/machinery/power/sensor/S in grid_sensors)
 		if (S.check_grid_warning())
 			return 1
 	return 0
@@ -62,7 +62,7 @@
 	var/obj/machinery/power/sensor/focus = null
 
 	// Build list of data from sensor readings.
-	for(var/obj/machinery/power/sensor/S in grid_sensors)
+	for (var/obj/machinery/power/sensor/S in grid_sensors)
 		sensors.Add(list(list(
 		"name" = S.name_tag,
 		"alarm" = S.check_grid_warning()
@@ -87,7 +87,7 @@
 /datum/nano_module/power_monitor/proc/refresh_sensors()
 	grid_sensors = list()
 	var/connected_z_levels = GetConnectedZlevels(get_host_z())
-	for(var/obj/machinery/power/sensor/S in SSmachines.machinery)
+	for (var/obj/machinery/power/sensor/S in SSmachines.machinery)
 		if ((S.long_range) || (S.loc.z in connected_z_levels)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			if (S.name_tag == "#UNKN#") // Default name. Shouldn't happen!
 				warning("Powernet sensor with unset ID Tag! [S.x]X [S.y]Y [S.z]Z")

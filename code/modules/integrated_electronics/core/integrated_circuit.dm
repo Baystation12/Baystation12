@@ -92,13 +92,13 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	. = ..()
 
 /obj/item/integrated_circuit/emp_act(severity)
-	for(var/k in 1 to LAZYLEN(inputs))
+	for (var/k in 1 to LAZYLEN(inputs))
 		var/datum/integrated_io/I = inputs[k]
 		I.scramble()
-	for(var/k in 1 to LAZYLEN(outputs))
+	for (var/k in 1 to LAZYLEN(outputs))
 		var/datum/integrated_io/O = outputs[k]
 		O.scramble()
-	for(var/k in 1 to LAZYLEN(activators))
+	for (var/k in 1 to LAZYLEN(activators))
 		var/datum/integrated_io/activate/A = activators[k]
 		A.scramble()
 	..()
@@ -159,9 +159,9 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	var/column_width = 3
 	var/row_height = max(LAZYLEN(inputs), LAZYLEN(outputs), 1)
 
-	for(var/i = 1 to row_height)
+	for (var/i = 1 to row_height)
 		HTML += "<tr>"
-		for(var/j = 1 to column_width)
+		for (var/j = 1 to column_width)
 			var/datum/integrated_io/io = null
 			var/words = list()
 			var/height = 1
@@ -172,7 +172,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 						words += "<b><a href='?src=\ref[src];act=wire;pin=\ref[io]'>[io.display_pin_type()] [io.name]</a> \
 						<a href='?src=\ref[src];act=data;pin=\ref[io]'>[io.display_data(io.data)]</a></b><br>"
 						if (length(io.linked))
-							for(var/k in 1 to length(io.linked))
+							for (var/k in 1 to length(io.linked))
 								var/datum/integrated_io/linked = io.linked[k]
 								words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[linked]</a> \
 								@ <a href='?src=\ref[linked.holder]'>[linked.holder.displayed_name]</a><br>"
@@ -191,7 +191,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 						words += "<b><a href='?src=\ref[src];act=wire;pin=\ref[io]'>[io.display_pin_type()] [io.name]</a> \
 						<a href='?src=\ref[src];act=data;pin=\ref[io]'>[io.display_data(io.data)]</a></b><br>"
 						if (length(io.linked))
-							for(var/k in 1 to length(io.linked))
+							for (var/k in 1 to length(io.linked))
 								var/datum/integrated_io/linked = io.linked[k]
 								words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[linked]</a> \
 								@ <a href='?src=\ref[linked.holder]'>[linked.holder.displayed_name]</a><br>"
@@ -201,14 +201,14 @@ a creative player the means to solve many problems.  Circuits are held inside an
 			HTML += "<td align='center' rowspan='[height]'>[jointext(words, null)]</td>"
 		HTML += "</tr>"
 
-	for(var/i in 1 to LAZYLEN(activators))
+	for (var/i in 1 to LAZYLEN(activators))
 		var/datum/integrated_io/io = activators[i]
 		var/words = list()
 
 		words += "<b><a href='?src=\ref[src];act=wire;pin=\ref[io]'>[SPAN_COLOR("#ff0000", io)]</a> "
 		words += "<a href='?src=\ref[src];act=data;pin=\ref[io]'>[SPAN_COLOR("#ff0000", io.data ? "\<PULSE OUT\>" : "\<PULSE IN\>")]</a></b><br>"
 		if (length(io.linked))
-			for(var/k in 1 to length(io.linked))
+			for (var/k in 1 to length(io.linked))
 				var/datum/integrated_io/linked = io.linked[k]
 				words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[SPAN_COLOR("#ff0000", linked)]</a> \
 				@ <a href='?src=\ref[linked.holder]'>[SPAN_COLOR("#ff0000", linked.holder.displayed_name)]</a><br>"
@@ -308,12 +308,12 @@ a creative player the means to solve many problems.  Circuits are held inside an
 			interact(user)
 
 /obj/item/integrated_circuit/proc/push_data()
-	for(var/k in 1 to LAZYLEN(outputs))
+	for (var/k in 1 to LAZYLEN(outputs))
 		var/datum/integrated_io/O = outputs[k]
 		O.push_data()
 
 /obj/item/integrated_circuit/proc/pull_data()
-	for(var/k in 1 to LAZYLEN(inputs))
+	for (var/k in 1 to LAZYLEN(inputs))
 		var/datum/integrated_io/I = inputs[k]
 		I.push_data()
 
@@ -354,15 +354,15 @@ a creative player the means to solve many problems.  Circuits are held inside an
 /obj/item/integrated_circuit/proc/disconnect_all()
 	var/datum/integrated_io/I
 
-	for(var/i in inputs)
+	for (var/i in inputs)
 		I = i
 		I.disconnect_all()
 
-	for(var/i in outputs)
+	for (var/i in outputs)
 		I = i
 		I.disconnect_all()
 
-	for(var/i in activators)
+	for (var/i in activators)
 		I = i
 		I.disconnect_all()
 

@@ -29,7 +29,7 @@
 	update_strings()
 
 /obj/item/crafting_holder/Destroy()
-	for(var/thing in contents)
+	for (var/thing in contents)
 		qdel(thing)
 	. = ..()
 

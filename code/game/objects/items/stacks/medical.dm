@@ -371,7 +371,7 @@
 		if (BP_IS_BRITTLE(affecting))
 			if (!prob(user.get_skill_value(SKILL_DEVICES) * 20)) //80% to 0% chance, depending on skill, for your brittle organ to hurt and then heal.
 				to_chat(H, SPAN_DANGER("Crystals are forming around your [affecting.name], damaging internal integrity!"))
-				for(var/i = 1 to rand(1,3))
+				for (var/i = 1 to rand(1,3))
 					new /obj/item/material/shard(get_turf(affecting), MATERIAL_STEEL)
 				affecting.take_external_damage(rand(20,40), 0)
 			if (prob(30))

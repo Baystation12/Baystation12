@@ -31,10 +31,10 @@ var/global/repository/area/area_repository = new()
 	var/list/grouped_areas = call(area_group_proc)(area_predicates)
 	grouped_areas = sortAssoc(grouped_areas)
 	. = list()
-	for(var/area_key in grouped_areas)
+	for (var/area_key in grouped_areas)
 		var/list/list_of_areas = grouped_areas[area_key]
 		list_of_areas = sortAtom(list_of_areas)
-		for(var/area/A in list_of_areas)
+		for (var/area/A in list_of_areas)
 			if (A.has_turfs())
 				.[call(naming_proc)(A)] = A
 

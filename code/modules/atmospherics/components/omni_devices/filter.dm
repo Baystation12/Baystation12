@@ -57,7 +57,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 /obj/machinery/atmospherics/omni/filter/Initialize()
 	. = ..()
 	rebuild_filtering_list()
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
 
 /obj/machinery/atmospherics/omni/filter/Destroy()
@@ -67,7 +67,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 	. = ..()
 
 /obj/machinery/atmospherics/omni/filter/sort_ports()
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		if (P.update)
 			if (output == P)
 				output = null
@@ -102,7 +102,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 
 	var/delta = clamp((output_air ? (max_output_pressure - output_air.return_pressure()) : 0), 0, max_output_pressure)
 	var/transfer_moles_max = calculate_transfer_moles(input_air, output_air, delta, (output && output.network && output.network.volume) ? output.network.volume : 0)
-	for(var/datum/omni_port/filter_output in gas_filters)
+	for (var/datum/omni_port/filter_output in gas_filters)
 		delta = clamp((filter_output.air ? (max_output_pressure - filter_output.air.return_pressure()) : 0), 0, max_output_pressure)
 		transfer_moles_max = min(transfer_moles_max, (calculate_transfer_moles(input_air, filter_output.air, delta, (filter_output && filter_output.network && filter_output.network.volume) ? filter_output.network.volume : 0)))
 
@@ -121,7 +121,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 			input.network.update = 1
 		if (output.network)
 			output.network.update = 1
-		for(var/datum/omni_port/P in gas_filters)
+		for (var/datum/omni_port/P in gas_filters)
 			if (P.network)
 				P.network.update = 1
 
@@ -154,7 +154,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 	data["config"] = configuring
 
 	var/portData[0]
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		if (!configuring && P.mode == 0)
 			continue
 
@@ -229,7 +229,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 
 /obj/machinery/atmospherics/omni/filter/proc/switch_filter(dir, mode)
 	//check they aren't trying to disable the input or output ~this can only happen if they hack the cached tmpl file
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		if (P.dir == dir)
 			if (P.mode == ATM_INPUT || P.mode == ATM_OUTPUT)
 				return
@@ -242,7 +242,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 	var/datum/omni_port/target_port = null
 	var/list/other_ports = new()
 
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		if (P.dir == port)
 			target_port = P
 		else
@@ -260,7 +260,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 	else
 		return
 
-	for(var/datum/omni_port/P in other_ports)
+	for (var/datum/omni_port/P in other_ports)
 		if (P.mode == mode)
 			var/old_mode = P.mode
 			P.mode = previous_mode
@@ -271,7 +271,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 
 /obj/machinery/atmospherics/omni/filter/proc/rebuild_filtering_list()
 	filtering_outputs.Cut()
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		var/gasid = GLOB.filter_mode_to_gas_id["[P.mode]"]
 		if (gasid)
 			filtering_outputs[gasid] = P.air

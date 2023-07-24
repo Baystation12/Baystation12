@@ -46,7 +46,7 @@
 /obj/item/integrated_circuit/output/screen/medium/do_work()
 	..()
 	var/list/nearby_things = range(0, get_turf(src))
-	for(var/mob/M in nearby_things)
+	for (var/mob/M in nearby_things)
 		var/obj/O = assembly ? assembly : src
 		to_chat(M, SPAN_NOTICE("[icon2html(O, M)] [stuff_to_display]"))
 

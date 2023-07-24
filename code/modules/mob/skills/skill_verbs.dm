@@ -3,12 +3,12 @@
 GLOBAL_LIST_INIT(skill_verbs, init_subtypes(/datum/skill_verb))
 
 /datum/skillset/proc/fetch_verb_datum(given_type)
-	for(var/datum/skill_verb/SV in skill_verbs)
+	for (var/datum/skill_verb/SV in skill_verbs)
 		if (SV.type == given_type)
 			return SV
 
 /datum/skillset/proc/update_verbs()
-	for(var/datum/skill_verb/SV in skill_verbs)
+	for (var/datum/skill_verb/SV in skill_verbs)
 		SV.update_verb()
 
 /datum/skill_verb
@@ -70,7 +70,7 @@ Robots and antags can instruct.
 /datum/skill_verb/instruct/should_see_verb()
 	if (!..())
 		return
-	for(var/singleton/hierarchy/skill/S in GLOB.skills)
+	for (var/singleton/hierarchy/skill/S in GLOB.skills)
 		if (skillset.owner.skill_check(S.type, SKILL_EXPERIENCED))
 			return 1
 
@@ -94,7 +94,7 @@ Robots and antags can instruct.
 		return
 
 	var/options = list()
-	for(var/singleton/hierarchy/skill/S in GLOB.skills)
+	for (var/singleton/hierarchy/skill/S in GLOB.skills)
 		if (!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERIENCED))
 			options[S.name] = S
 	if (!length(options))

@@ -31,7 +31,7 @@
 	registered -= module
 
 /datum/shuttle_log/proc/update_registred()
-	for(var/datum/nano_module/module in registered)
+	for (var/datum/nano_module/module in registered)
 		SSnano.update_uis(module)
 
 /datum/shuttle_log/proc/submit_report(datum/shuttle_mission/mission, datum/computer_file/report/report, mob/user)
@@ -83,7 +83,7 @@
 		return
 	if (name)
 		mission.name = name
-		for(var/datum/computer_file/report/recipient/shuttle/report in mission.other_reports)
+		for (var/datum/computer_file/report/recipient/shuttle/report in mission.other_reports)
 			report.mission.set_value(name)
 		update_registred()
 
@@ -112,7 +112,7 @@
 	process_queue()
 
 /datum/shuttle_log/proc/mission_from_ID(given_id)
-	for(var/datum/shuttle_mission/mission in (missions + queued_missions))
+	for (var/datum/shuttle_mission/mission in (missions + queued_missions))
 		if (given_id == mission.ID)
 			return mission
 

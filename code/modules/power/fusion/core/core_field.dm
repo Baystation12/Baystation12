@@ -87,7 +87,7 @@
 	catcher.SetSize(1)
 	particle_catchers.Add(catcher)
 
-	for(var/iter=1,iter<=6,iter++)
+	for (var/iter=1,iter<=6,iter++)
 		catcher = new (locate(src.x-iter,src.y,src.z))
 		catcher.parent = src
 		catcher.SetSize((iter*2)+1)
@@ -172,7 +172,7 @@
 	if (uptake_gas)
 		uptake_gas = uptake_gas.remove_by_flag(XGM_GAS_FUSION_FUEL, rand(50,100))
 	if (uptake_gas && uptake_gas.total_moles)
-		for(var/gasname in uptake_gas.gas)
+		for (var/gasname in uptake_gas.gas)
 			if (uptake_gas.gas[gasname]*10 > reactants[gasname])
 				AddParticles(gasname, uptake_gas.gas[gasname]*10)
 				uptake_gas.adjust_gas(gasname, -(uptake_gas.gas[gasname]), update=FALSE)
@@ -193,7 +193,7 @@
 		plasma_temperature -= lost
 
 	//handle some reactants formatting
-	for(var/reactant in reactants)
+	for (var/reactant in reactants)
 		var/amount = reactants[reactant]
 		if (amount < 1)
 			reactants.Remove(reactant)
@@ -262,7 +262,7 @@
 					plasma_temperature -= lost_plasma
 
 					if (fuel_loss)
-						for(var/particle in reactants)
+						for (var/particle in reactants)
 							var/lost_fuel = reactants[particle]*percent_unstable
 							radiation += lost_fuel
 							reactants[particle] -= lost_fuel
@@ -341,7 +341,7 @@
 	var/turf/T = get_turf(src)
 	if (istype(T))
 		var/datum/gas_mixture/plasma
-		for(var/reactant in reactants)
+		for (var/reactant in reactants)
 			if (!gas_data.name[reactant])
 				continue
 			if (!plasma)
@@ -356,7 +356,7 @@
 		plasma = null
 
 	// Radiate all our unspent fuel and energy.
-	for(var/particle in reactants)
+	for (var/particle in reactants)
 		radiation += reactants[particle]
 		reactants.Remove(particle)
 	radiation += plasma_temperature/2
@@ -368,13 +368,13 @@
 /obj/effect/fusion_em_field/proc/Radiate()
 	if (istype(loc, /turf))
 		var/empsev = max(1, min(3, ceil(size/2)))
-		for(var/atom/movable/AM in range(max(1,floor(size/2)), loc))
+		for (var/atom/movable/AM in range(max(1,floor(size/2)), loc))
 
 			if (AM == src || AM == owned_core || !AM.simulated)
 				continue
 
 			var/skip_obstacle
-			for(var/ignore_path in ignore_types)
+			for (var/ignore_path in ignore_types)
 				if (istype(AM, ignore_path))
 					skip_obstacle = TRUE
 					break
@@ -398,7 +398,7 @@
 		changed = newsize
 		UpdateVisuals()
 
-	for(var/obj/effect/fusion_particle_catcher/catcher in particle_catchers)
+	for (var/obj/effect/fusion_particle_catcher/catcher in particle_catchers)
 		catcher.UpdateSize()
 	return changed
 
@@ -412,7 +412,7 @@
 	if (length(react_pool))
 		//determine a random amount to actually react this cycle, and remove it from the standard pool
 		//this is a hack, and quite nonrealistic :(
-		for(var/reactant in react_pool)
+		for (var/reactant in react_pool)
 			react_pool[reactant] = rand(floor(react_pool[reactant]/2),react_pool[reactant])
 			reactants[reactant] -= react_pool[reactant]
 			if (!react_pool[reactant])
@@ -435,7 +435,7 @@
 
 			//loop through and work out all the possible reactions
 			var/list/possible_reactions
-			for(var/cur_s_react in possible_s_reacts)
+			for (var/cur_s_react in possible_s_reacts)
 				if (possible_s_reacts[cur_s_react] < 1)
 					continue
 				var/singleton/fusion_reaction/cur_reaction = get_fusion_reaction(cur_p_react, cur_s_react)
@@ -494,9 +494,9 @@
 				last_reactants += amount_reacting
 
 				// Create the reaction products.
-				for(var/reactant in cur_reaction.products)
+				for (var/reactant in cur_reaction.products)
 					var/success = 0
-					for(var/check_reactant in produced_reactants)
+					for (var/check_reactant in produced_reactants)
 						if (check_reactant == reactant)
 							produced_reactants[reactant] += cur_reaction.products[reactant] * amount_reacting
 							success = 1
@@ -512,11 +512,11 @@
 				possible_reactions.Remove(cur_reaction.s_react)
 
 		// Loop through the newly produced reactants and add them to the pool.
-		for(var/reactant in produced_reactants)
+		for (var/reactant in produced_reactants)
 			AddParticles(reactant, produced_reactants[reactant])
 
 		// Check whether there are reactants left, and add them back to the pool.
-		for(var/reactant in react_pool)
+		for (var/reactant in react_pool)
 			AddParticles(reactant, react_pool[reactant])
 
 	UpdateVisuals()

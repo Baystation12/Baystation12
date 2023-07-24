@@ -23,7 +23,7 @@
 		return ""
 
 	var/dat = "<br><table cellspacing=5><tr><td><B>[role_text_plural]</B></td><td></td></tr>"
-	for(var/datum/mind/player in current_antagonists)
+	for (var/datum/mind/player in current_antagonists)
 		var/mob/M = player.current
 		dat += "<tr>"
 		if (M)

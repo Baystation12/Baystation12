@@ -19,7 +19,7 @@
 // Could use buffers, but am afraid of multitool interaction clashes.
 /datum/extension/interactive/multitool/radio/proc/aquire_target(obj/item/device/multitool/M, mob/user)
 	var/candidates = list()
-	for(var/obj/machinery/new_machine in view(2, user))
+	for (var/obj/machinery/new_machine in view(2, user))
 		candidates += new_machine
 	if (!length(candidates))
 		to_chat(user, "You fail to import configuration settings from anything. Try standing near a machine.")
@@ -96,7 +96,7 @@
 /datum/extension/interactive/multitool/radio/proc/event_list_to_selection_table(table_tag, list/selected_events)
 	. = list()
 	. += "<table>"
-	for(var/thing in selected_events)
+	for (var/thing in selected_events)
 		. += "<tr>"
 		. += "<td><a href='?src=\ref[src];[table_tag]=1;remove=[thing]'>(-)</a></td>"
 		. += "<td><a href='?src=\ref[src];[table_tag]=1;rename=[thing]'>[thing]</a></td>"
@@ -130,7 +130,7 @@
 		if (!variable || !LAZYLEN(valid_events))
 			return MT_REFRESH
 		var/valid_variables = list()
-		for(var/path in valid_events)
+		for (var/path in valid_events)
 			valid_variables += valid_events[path]
 		var/new_var = input(user, "Select a new action for this item:", "Action Select", thing) as null|anything in valid_variables
 		if (!new_var || (extension_status(user) != STATUS_INTERACTIVE))

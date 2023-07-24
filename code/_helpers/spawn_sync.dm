@@ -9,7 +9,7 @@
 	//Create new spawn_sync datum
 	var/datum/spawn_sync/sync = new()
 
-	for(var/obj/O in list)
+	for (var/obj/O in list)
 		//Call start_worker(), passing it first the object, then a string of the name of the proc you want called, then
 		// any and all arguments you want passed to the proc.
 		sync.start_worker(O, "do_something", arg1, arg2)

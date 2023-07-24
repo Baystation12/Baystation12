@@ -98,7 +98,7 @@ Class Procs:
 	ASSERT(!into.invalid)
 #endif
 	c_invalidate()
-	for(var/turf/simulated/T in contents)
+	for (var/turf/simulated/T in contents)
 		into.add(T)
 		T.update_graphic(graphic_remove = air.graphic)
 		#ifdef ZASDBG
@@ -106,24 +106,24 @@ Class Procs:
 		#endif
 
 	//rebuild the old zone's edges so that they will be possessed by the new zone
-	for(var/connection_edge/E in edges)
+	for (var/connection_edge/E in edges)
 		if (E.contains_zone(into))
 			continue //don't need to rebuild this edge
-		for(var/turf/T in E.connecting_turfs)
+		for (var/turf/T in E.connecting_turfs)
 			SSair.mark_for_update(T)
 
 /zone/proc/c_invalidate()
 	invalid = 1
 	SSair.remove_zone(src)
 	#ifdef ZASDBG
-	for(var/turf/simulated/T in contents)
+	for (var/turf/simulated/T in contents)
 		T.dbg(invalid_zone)
 	#endif
 
 /zone/proc/rebuild()
 	if (invalid) return //Short circuit for explosions where rebuild is called many times over.
 	c_invalidate()
-	for(var/turf/simulated/T in contents)
+	for (var/turf/simulated/T in contents)
 		T.update_graphic(graphic_remove = air.graphic) //we need to remove the overlays so they're not doubled when the zone is rebuilt
 		//T.dbg(invalid_zone)
 		T.needs_air_update = 0 //Reset the marker so that it will be added to the list.
@@ -147,18 +147,18 @@ Class Procs:
 
 	// Update gas overlays.
 	if (air.check_tile_graphic(graphic_add, graphic_remove))
-		for(var/turf/simulated/T in contents)
+		for (var/turf/simulated/T in contents)
 			T.update_graphic(graphic_add, graphic_remove)
 		graphic_add.Cut()
 		graphic_remove.Cut()
 
 	// Update connected edges.
-	for(var/connection_edge/E in edges)
+	for (var/connection_edge/E in edges)
 		if (E.sleeping)
 			E.recheck()
 
 	// Handle condensation from the air.
-	for(var/g in air.gas)
+	for (var/g in air.gas)
 		var/product = gas_data.condensation_products[g]
 		if (product && air.temperature <= gas_data.condensation_points[g])
 			var/condensation_area = air.group_multiplier
@@ -174,8 +174,8 @@ Class Procs:
 	// Update atom temperature.
 	if (abs(air.temperature - last_air_temperature) >= ATOM_TEMPERATURE_EQUILIBRIUM_THRESHOLD)
 		last_air_temperature = air.temperature
-		for(var/turf/simulated/T in contents)
-			for(var/check_atom in T.contents)
+		for (var/turf/simulated/T in contents)
+			for (var/check_atom in T.contents)
 				var/atom/checking = check_atom
 				if (checking.simulated)
 					QUEUE_TEMPERATURE_ATOMS(checking)
@@ -183,7 +183,7 @@ Class Procs:
 
 /zone/proc/dbg_data(mob/M)
 	to_chat(M, name)
-	for(var/g in air.gas)
+	for (var/g in air.gas)
 		to_chat(M, "[gas_data.name[g]]: [air.gas[g]]")
 	to_chat(M, "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)")
 	to_chat(M, "O2 per N2: [(air.gas[GAS_NITROGEN] ? air.gas[GAS_OXYGEN]/air.gas[GAS_NITROGEN] : "N/A")] Moles: [air.total_moles]")
@@ -194,7 +194,7 @@ Class Procs:
 	var/zone_edges = 0
 	var/space_edges = 0
 	var/space_coefficient = 0
-	for(var/connection_edge/E in edges)
+	for (var/connection_edge/E in edges)
 		if (E.type == /connection_edge/zone) zone_edges++
 		else
 			space_edges++
@@ -204,5 +204,5 @@ Class Procs:
 	to_chat(M, "Zone Edges: [zone_edges]")
 	to_chat(M, "Space Edges: [space_edges] ([space_coefficient] connections)")
 
-	//for(var/turf/T in unsimulated_contents)
+	//for (var/turf/T in unsimulated_contents)
 //		to_chat(M, "[T] at ([T.x],[T.y])")

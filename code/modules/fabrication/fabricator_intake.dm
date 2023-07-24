@@ -6,7 +6,7 @@
 /obj/machinery/fabricator/proc/take_reagents(obj/item/thing, mob/user, destructive = FALSE)
 	if (!thing.reagents || (!destructive && !thing.is_open_container()))
 		return SUBSTANCE_TAKEN_NONE
-	for(var/datum/reagent/R in thing.reagents.reagent_list)
+	for (var/datum/reagent/R in thing.reagents.reagent_list)
 		if (!base_storage_capacity[R.type])
 			continue
 		var/taking_reagent = min(R.volume, storage_capacity[R.type] - stored_material[R.type])
@@ -31,7 +31,7 @@
 	. = SUBSTANCE_TAKEN_NONE
 	var/stacks_used = 1
 	var/mat_colour = thing.color
-	for(var/mat in thing.matter)
+	for (var/mat in thing.matter)
 		var/material/material_def = SSmaterials.get_material_by_name(mat)
 		if (!material_def || !base_storage_capacity[material_def.type])
 			continue

@@ -60,7 +60,7 @@
 		var/obj/item/card/id/id_card = card_slot.stored_card
 		if (is_centcom)
 			var/list/all_centcom_access = list()
-			for(var/access in get_all_centcom_access())
+			for (var/access in get_all_centcom_access())
 				all_centcom_access.Add(list(list(
 					"desc" = replacetext(get_centcom_access_desc(access), " ", "&nbsp"),
 					"ref" = access,
@@ -68,9 +68,9 @@
 			data["all_centcom_access"] = all_centcom_access
 		else
 			var/list/regions = list()
-			for(var/i = 1; i <= 8; i++)
+			for (var/i = 1; i <= 8; i++)
 				var/list/accesses = list()
-				for(var/access in get_region_accesses(i))
+				for (var/access in get_region_accesses(i))
 					if (get_access_desc(access))
 						accesses.Add(list(list(
 							"desc" = replacetext(get_access_desc(access), " ", "&nbsp"),
@@ -92,7 +92,7 @@
 /datum/nano_module/program/card_mod/proc/format_jobs(list/jobs)
 	var/obj/item/card/id/id_card = program.computer.get_inserted_id()
 	var/list/formatted = list()
-	for(var/job in jobs)
+	for (var/job in jobs)
 		formatted.Add(list(list(
 			"display_name" = replacetext(job, " ", "&nbsp"),
 			"target_rank" = id_card && id_card.assignment ? id_card.assignment : "Unassigned",
@@ -147,7 +147,7 @@
 								"}
 
 						var/known_access_rights = get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM)
-						for(var/A in id_card.access)
+						for (var/A in id_card.access)
 							if (A in known_access_rights)
 								contents += "  [get_access_desc(A)]"
 
@@ -232,7 +232,7 @@
 				var/access_type = href_list["access_target"]
 				var/access_allowed = text2num(href_list["allowed"])
 				if (access_type in get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM))
-					for(var/access in user_id_card.access)
+					for (var/access in user_id_card.access)
 						var/region_type = get_access_region_by_id(access_type)
 						if (access in GLOB.using_map.access_modify_region[region_type])
 							id_card.access -= access_type

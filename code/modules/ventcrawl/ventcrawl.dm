@@ -66,7 +66,7 @@ var/global/list/ventcrawl_machinery = list(
 	return ..()
 
 /mob/living/proc/ventcrawl_carry()
-	for(var/atom/A in contents)
+	for (var/atom/A in contents)
 		if (!is_allowed_vent_crawl_item(A))
 			to_chat(src, SPAN_WARNING("You can't carry \the [A] while ventcrawling!"))
 			return FALSE
@@ -81,7 +81,7 @@ var/global/list/ventcrawl_machinery = list(
 /mob/proc/start_ventcrawl()
 	var/atom/pipe
 	var/list/pipes = list()
-	for(var/obj/machinery/atmospherics/unary/U in range(1))
+	for (var/obj/machinery/atmospherics/unary/U in range(1))
 		if (is_type_in_list(U,ventcrawl_machinery) && Adjacent(U) && U.can_crawl_through())
 			pipes |= U
 	if (!pipes || !length(pipes))
@@ -108,7 +108,7 @@ var/global/list/ventcrawl_machinery = list(
 			vent_found = null
 
 	if (!vent_found)
-		for(var/obj/machinery/atmospherics/machine in range(1,src))
+		for (var/obj/machinery/atmospherics/machine in range(1,src))
 			if (is_type_in_list(machine, ventcrawl_machinery))
 				vent_found = machine
 
@@ -162,8 +162,8 @@ var/global/list/ventcrawl_machinery = list(
 	var/datum/pipe_network/network = starting_machine.return_network(starting_machine)
 	if (!network)
 		return
-	for(var/datum/pipeline/pipeline in network.line_members)
-		for(var/obj/machinery/atmospherics/A in (pipeline.members || pipeline.edges))
+	for (var/datum/pipeline/pipeline in network.line_members)
+		for (var/obj/machinery/atmospherics/A in (pipeline.members || pipeline.edges))
 			if (!A.pipe_image)
 				A.pipe_image = image(A, A.loc, dir = A.dir)
 			A.pipe_image.layer = ABOVE_LIGHTING_LAYER
@@ -175,7 +175,7 @@ var/global/list/ventcrawl_machinery = list(
 	is_ventcrawling = 0
 	//candrop = 1
 	if (client)
-		for(var/image/current_image in pipes_shown)
+		for (var/image/current_image in pipes_shown)
 			client.images -= current_image
 		client.eye = src
 

@@ -107,7 +107,7 @@
 	var/orig_slot = default_slot
 
 	S.cd = "/torch"
-	for(var/slot = 1 to 40)
+	for (var/slot = 1 to 40)
 		if (!S.dir.Find("character[slot]"))
 			continue
 		S.cd = "/torch/character[slot]"
@@ -248,7 +248,7 @@
 	character.base_skin = base_skin
 
 	// Replace any missing limbs.
-	for(var/name in BP_ALL_LIMBS)
+	for (var/name in BP_ALL_LIMBS)
 		var/obj/item/organ/external/O = character.organs_by_name[name]
 		if (!O && organ_data[name] != "amputated")
 			var/list/organ_data = character.species.has_limbs[name]
@@ -257,7 +257,7 @@
 			O = new limb_path(character)
 
 	// Destroy/cyborgize organs and limbs. The order is important for preserving low-level choices for robolimb sprites being overridden.
-	for(var/name in BP_BY_DEPTH)
+	for (var/name in BP_BY_DEPTH)
 		var/status = organ_data[name]
 		var/obj/item/organ/external/O = character.organs_by_name[name]
 		if (!O)
@@ -268,7 +268,7 @@
 			character.organs_by_name[O.organ_tag] = null
 			character.organs -= O
 			if (O.children) // This might need to become recursive.
-				for(var/obj/item/organ/external/child in O.children)
+				for (var/obj/item/organ/external/child in O.children)
 					character.organs_by_name[child.organ_tag] = null
 					character.organs -= child
 					qdel(child)
@@ -286,7 +286,7 @@
 	//For species that don't care about your silly prefs
 	character.species.handle_limbs_setup(character)
 	if (!is_preview_copy)
-		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_STOMACH))
+		for (var/name in list(BP_HEART,BP_EYES,BP_BRAIN,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_STOMACH))
 			var/status = organ_data[name]
 			if (!status)
 				continue
@@ -300,7 +300,7 @@
 	QDEL_NULL_LIST(character.worn_underwear)
 	character.worn_underwear = list()
 
-	for(var/underwear_category_name in all_underwear)
+	for (var/underwear_category_name in all_underwear)
 		var/datum/category_group/underwear/underwear_category = GLOB.underwear.categories_by_name[underwear_category_name]
 		if (underwear_category)
 			var/underwear_item_name = all_underwear[underwear_category_name]
@@ -314,15 +314,15 @@
 
 	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
-	for(var/N in character.organs_by_name)
+	for (var/N in character.organs_by_name)
 		var/obj/item/organ/external/O = character.organs_by_name[N]
 		O.markings.Cut()
 
-	for(var/M in body_markings)
+	for (var/M in body_markings)
 		var/datum/sprite_accessory/marking/mark_datum = GLOB.body_marking_styles_list[M]
 		var/mark_color = "[body_markings[M]]"
 
-		for(var/BP in mark_datum.body_parts)
+		for (var/BP in mark_datum.body_parts)
 			var/obj/item/organ/external/O = character.organs_by_name[BP]
 			if (O)
 				O.markings[mark_datum] = mark_color
@@ -337,10 +337,10 @@
 	if (is_preview_copy)
 		return
 
-	for(var/token in cultural_info)
+	for (var/token in cultural_info)
 		character.set_cultural_value(token, cultural_info[token], defer_language_update = TRUE)
 	character.update_languages()
-	for(var/lang in alternate_languages)
+	for (var/lang in alternate_languages)
 		character.add_language(lang)
 
 	character.flavor_texts["general"] = flavor_texts["general"]
@@ -360,7 +360,7 @@
 	character.exploit_record = exploit_record
 
 	if (LAZYLEN(character.descriptors))
-		for(var/entry in body_descriptors)
+		for (var/entry in body_descriptors)
 			character.descriptors[entry] = body_descriptors[entry]
 
 	if (!character.isSynthetic())
@@ -373,7 +373,7 @@
 	dat += "<tt><center>"
 
 	dat += "<b>Select a character slot to load</b><hr>"
-	for(var/i=1, i<= config.character_slots, i++)
+	for (var/i=1, i<= config.character_slots, i++)
 		var/name = (slot_names && slot_names[get_slot_key(i)]) || "Character[i]"
 		if (i==default_slot)
 			name = "<b>[name]</b>"

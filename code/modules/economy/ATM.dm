@@ -45,7 +45,7 @@
 		if (ticks_left_locked_down <= 0)
 			number_incorrect_tries = 0
 
-	for(var/obj/item/spacecash/S in src)
+	for (var/obj/item/spacecash/S in src)
 		S.dropInto(loc)
 		if (prob(50))
 			playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
@@ -163,7 +163,7 @@
 							t += "<td><b>Value</b></td>"
 							t += "<td><b>Source terminal ID</b></td>"
 							t += "</tr>"
-							for(var/datum/transaction/T in authenticated_account.transaction_log)
+							for (var/datum/transaction/T in authenticated_account.transaction_log)
 								t += "<tr>"
 								t += "<td>[T.date]</td>"
 								t += "<td>[T.time]</td>"
@@ -379,7 +379,7 @@
 					R.info += "<td><b>Value</b></td>"
 					R.info += "<td><b>Source terminal ID</b></td>"
 					R.info += "</tr>"
-					for(var/datum/transaction/T in authenticated_account.transaction_log)
+					for (var/datum/transaction/T in authenticated_account.transaction_log)
 						R.info += "<tr>"
 						R.info += "<td>[T.date]</td>"
 						R.info += "<td>[T.time]</td>"

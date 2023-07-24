@@ -10,7 +10,7 @@
 
 /datum/unit_test/overmap_test/shall_have_non_white_color/start_test()
 	var/list/invalid_overmap_types = list()
-	for(var/omt in subtypesof(/obj/effect/overmap))
+	for (var/omt in subtypesof(/obj/effect/overmap))
 		var/obj/overmap = omt
 		var/color = initial(overmap.color)
 		if (!color || color == COLOR_WHITE)

@@ -67,7 +67,7 @@ D [1]/  ||
 		if (length(my_list))
 			result += "<br>"
 			var/pos = 0
-			for(var/line in my_list)
+			for (var/line in my_list)
 				result += "[display_data(line)]"
 				pos++
 				if (pos != length(my_list))
@@ -130,17 +130,17 @@ D [1]/  ||
 		holder.on_data_written()
 
 /datum/integrated_io/proc/push_data()
-	for(var/k in 1 to length(linked))
+	for (var/k in 1 to length(linked))
 		var/datum/integrated_io/io = linked[k]
 		io.write_data_to_pin(data)
 
 /datum/integrated_io/activate/push_data()
-	for(var/k in 1 to length(linked))
+	for (var/k in 1 to length(linked))
 		var/datum/integrated_io/io = linked[k]
 		SScircuit_components.queue_component(io.holder, TRUE, io.ord)
 
 /datum/integrated_io/proc/pull_data()
-	for(var/k in 1 to length(linked))
+	for (var/k in 1 to length(linked))
 		var/datum/integrated_io/io = linked[k]
 		write_data_to_pin(io.data)
 
@@ -156,7 +156,7 @@ D [1]/  ||
 
 // Iterates over every linked pin and disconnects them.
 /datum/integrated_io/proc/disconnect_all()
-	for(var/pin in linked)
+	for (var/pin in linked)
 		disconnect_pin(pin)
 
 /datum/integrated_io/proc/disconnect_pin(datum/integrated_io/pin)

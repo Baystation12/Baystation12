@@ -7,7 +7,7 @@
 
 /mob/living/simple_animal/borer/proc/reset_ui_callback()
 	if (world.time >= last_special)
-		for(var/obj/thing in hud_elements)
+		for (var/obj/thing in hud_elements)
 			thing.color = null
 
 /obj/screen/borer

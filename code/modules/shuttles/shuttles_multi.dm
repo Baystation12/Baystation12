@@ -17,7 +17,7 @@
 /datum/shuttle/autodock/multi/proc/build_destinations_cache()
 	last_cache_rebuild_time = world.time
 	destinations_cache.Cut()
-	for(var/destination_tag in destination_tags)
+	for (var/destination_tag in destination_tags)
 		var/obj/effect/shuttle_landmark/landmark = SSshuttle.get_landmark(destination_tag)
 		if (istype(landmark))
 			destinations_cache["[landmark.name]"] = landmark

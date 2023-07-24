@@ -105,7 +105,7 @@
 /obj/item/Initialize()
 	. = ..()
 	if (islist(armor))
-		for(var/type in armor)
+		for (var/type in armor)
 			if (armor[type]) // Don't set it if it gives no armor anyway, which is many items.
 				set_extension(src, armor_type, armor, armor_degradation_speed)
 				break
@@ -196,14 +196,14 @@
 		if (origin_tech)
 			desc_comp += "[SPAN_NOTICE("Testing potentials:")]<BR>"
 			//var/list/techlvls = params2list(origin_tech)
-			for(var/T in origin_tech)
+			for (var/T in origin_tech)
 				desc_comp += "Tech: Level [origin_tech[T]] [CallTechName(T)] <BR>"
 		else
 			desc_comp += "No tech origins detected.<BR>"
 
 		if (LAZYLEN(matter))
 			desc_comp += "[SPAN_NOTICE("Extractable materials:")]<BR>"
-			for(var/mat in matter)
+			for (var/mat in matter)
 				desc_comp += "[SSmaterials.get_material_by_name(mat)]<BR>"
 		else
 			desc_comp += "[SPAN_DANGER("No extractable materials detected.")]<BR>"
@@ -580,7 +580,7 @@ var/global/list/slot_flags_enumeration = list(
 
 	var/mob/living/carbon/human/H = M
 	if (istype(H))
-		for(var/obj/item/protection in list(H.head, H.wear_mask, H.glasses))
+		for (var/obj/item/protection in list(H.head, H.wear_mask, H.glasses))
 			if (protection && (protection.body_parts_covered & EYES))
 				// you can't stab someone in the eyes wearing a mask!
 				to_chat(user, SPAN_WARNING("You're going to need to remove the eye covering first."))
@@ -602,7 +602,7 @@ var/global/list/slot_flags_enumeration = list(
 		var/obj/item/organ/internal/eyes/eyes = H.internal_organs_by_name[BP_EYES]
 
 		if (H != user)
-			for(var/mob/O in (viewers(M) - user - M))
+			for (var/mob/O in (viewers(M) - user - M))
 				O.show_message(SPAN_DANGER("[M] has been stabbed in the eye with [src] by [user]."), 1)
 			to_chat(M, SPAN_DANGER("[user] stabs you in the eye with [src]!"))
 			to_chat(user, SPAN_DANGER("You stab [M] in the eye with [src]!"))

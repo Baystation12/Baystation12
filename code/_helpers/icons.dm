@@ -186,7 +186,7 @@ mob
 
 		Stress_Test()
 			set name = "5. Stress Test"
-			for(var/i = 0 to 1000)
+			for (var/i = 0 to 1000)
 				// The third parameter forces it to generate a new one, even if it's already cached
 				getFlatIcon(src,0,2)
 				if (prob(5))
@@ -195,7 +195,7 @@ mob
 
 		Cache_Test()
 			set name = "6. Cache Test"
-			for(var/i = 0 to 1000)
+			for (var/i = 0 to 1000)
 				getFlatIcon(src)
 			Browse_Icon()
 
@@ -327,7 +327,7 @@ world
 	if (text2ascii(rgb) == 35) ++start // skip opening #
 	var/ch,which=0,r=0,g=0,b=0,alpha=0,usealpha
 	var/digits=0
-	for(i=start, i<=length(rgb), ++i)
+	for (i=start, i<=length(rgb), ++i)
 		ch = text2ascii(rgb, i)
 		if (ch < 48 || (ch > 57 && ch < 65) || (ch > 70 && ch < 97) || ch > 102) break
 		++digits
@@ -336,7 +336,7 @@ world
 	var/single = digits < 6
 	if (digits != 3 && digits != 4 && digits != 6 && digits != 8) return
 	if (digits == 4 || digits == 8) usealpha = 1
-	for(i=start, digits>0, ++i)
+	for (i=start, digits>0, ++i)
 		ch = text2ascii(rgb, i)
 		if (ch >= 48 && ch <= 57) ch -= 48
 		else if (ch >= 65 && ch <= 70) ch -= 55
@@ -378,7 +378,7 @@ world
 	if (text2ascii(hsv) == 35) ++start // skip opening #
 	var/ch,which=0,hue=0,sat=0,val=0,alpha=0,usealpha
 	var/digits=0
-	for(i=start, i<=length(hsv), ++i)
+	for (i=start, i<=length(hsv), ++i)
 		ch = text2ascii(hsv, i)
 		if (ch < 48 || (ch > 57 && ch < 65) || (ch > 70 && ch < 97) || ch > 102) break
 		++digits
@@ -386,7 +386,7 @@ world
 	if (digits > 7) usealpha = 1
 	if (digits <= 4) ++which
 	if (digits <= 2) ++which
-	for(i=start, digits>0, ++i)
+	for (i=start, digits>0, ++i)
 		ch = text2ascii(hsv, i)
 		if (ch >= 48 && ch <= 57) ch -= 48
 		else if (ch >= 65 && ch <= 70) ch -= 55
@@ -712,7 +712,7 @@ The _flatIcons list is a cache for generated icon files.
 						currentLayer = A.layer+(1000+currentLayer)/1000
 
 				// Sort add into layers list
-				for(cmpIndex=1,cmpIndex<=length(layers),cmpIndex++)
+				for (cmpIndex=1,cmpIndex<=length(layers),cmpIndex++)
 					compare = layers[cmpIndex]
 					if (currentLayer < layers[compare]) // Associated value is the calculated layer
 						layers.Insert(cmpIndex,current)
@@ -742,7 +742,7 @@ The _flatIcons list is a cache for generated icon files.
 	var/addY1
 	var/addY2
 
-	for(var/I in layers)
+	for (var/I in layers)
 
 		if (I:plane == EMISSIVE_PLANE) //Just replace this with whatever it is TG is doing these days sometime. Getflaticon breaks emissives
 			continue
@@ -791,7 +791,7 @@ The _flatIcons list is a cache for generated icon files.
 /proc/getIconMask(atom/A)//By yours truly. Creates a dynamic mask for a mob/whatever. /N
 	RETURN_TYPE(/icon)
 	var/icon/alpha_mask = new(A.icon,A.icon_state)//So we want the default icon and icon state of A.
-	for(var/I in A.overlays)//For every image in overlays. var/image/I will not work, don't try it.
+	for (var/I in A.overlays)//For every image in overlays. var/image/I will not work, don't try it.
 		if (I:layer>A.layer)	continue//If layer is greater than what we need, skip it.
 		var/icon/image_overlay = new(I:icon,I:icon_state)//Blend only works with icon objects.
 		//Also, icons cannot directly set icon_state. Slower than changing variables but whatever.
@@ -805,7 +805,7 @@ The _flatIcons list is a cache for generated icon files.
 	var/icon/alpha_mask = getIconMask(src)//Which is why I created that proc. Also a little slow since it's blending a bunch of icons together but good enough.
 	opacity_icon.AddAlphaMask(alpha_mask)//Likely the main source of lag for this proc. Probably not designed to run each tick.
 	opacity_icon.ChangeOpacity(0.4)//Front end for MapColors so it's fast. 0.5 means half opacity and looks the best in my opinion.
-	for(var/i=0,i<5,i++)//And now we add it as overlays. It's faster than creating an icon and then merging it.
+	for (var/i=0,i<5,i++)//And now we add it as overlays. It's faster than creating an icon and then merging it.
 		var/image/I = image("icon" = opacity_icon, "icon_state" = A.icon_state, "layer" = layer+0.8)//So it's above other stuff but below weapons and the like.
 		switch(i)//Now to determine offset so the result is somewhat blurred.
 			if (1)	I.pixel_x--
@@ -834,7 +834,7 @@ The _flatIcons list is a cache for generated icon files.
 /proc/build_composite_icon(atom/A)
 	RETURN_TYPE(/icon)
 	var/icon/composite = icon(A.icon, A.icon_state, A.dir, 1)
-	for(var/O in A.overlays)
+	for (var/O in A.overlays)
 		var/image/I = O
 		composite.Blend(icon(I.icon, I.icon_state, I.dir, 1), ICON_OVERLAY)
 	return composite
@@ -861,7 +861,7 @@ The _flatIcons list is a cache for generated icon files.
 			gap = round(gap / 1.3) // 1.3 is the emperic comb sort coefficient
 		if (gap < 1)
 			gap = 1
-		for(var/i = 1; gap + i <= length(result); i++)
+		for (var/i = 1; gap + i <= length(result); i++)
 			var/atom/l = result[i]		//Fucking hate
 			var/atom/r = result[gap+i]	//how lists work here
 			if (l.plane > r.plane || (l.plane == r.plane && l.layer > r.layer))		//no "result[i].layer" for me
@@ -878,8 +878,8 @@ lighting determines lighting capturing (optional), suppress_errors suppreses err
 	RETURN_TYPE(/icon)
 	var/list/turfstocapture = list()
 	//Lines below determine what tiles will be rendered
-	for(var/xoff = 0 to range)
-		for(var/yoff = 0 to range)
+	for (var/xoff = 0 to range)
+		for (var/yoff = 0 to range)
 			var/turf/T = locate(tx + xoff,ty + yoff,tz)
 			if (T)
 				if (cap_mode == CAPTURE_MODE_REGULAR)
@@ -894,9 +894,9 @@ lighting determines lighting capturing (optional), suppress_errors suppreses err
 					return
 	//Lines below determine what objects will be rendered
 	var/list/atoms = list()
-	for(var/turf/T in turfstocapture)
+	for (var/turf/T in turfstocapture)
 		atoms.Add(T)
-		for(var/atom/A in T)
+		for (var/atom/A in T)
 			if (istype(A, /atom/movable/lighting_overlay) && lighting) //Special case for lighting
 				atoms.Add(A)
 				continue
@@ -907,7 +907,7 @@ lighting determines lighting capturing (optional), suppress_errors suppreses err
 	var/icon/cap = icon('icons/effects/96x96.dmi', "")
 	cap.Scale(range*32, range*32)
 	cap.Blend("#000", ICON_OVERLAY)
-	for(var/atom/A in atoms)
+	for (var/atom/A in atoms)
 		if (A)
 			var/icon/img = getFlatIcon(A)
 			if (istype(img, /icon))

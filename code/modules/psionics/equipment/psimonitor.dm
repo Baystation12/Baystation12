@@ -81,7 +81,7 @@
 	dat += "<h2>Active Psionic Dampeners</h2><hr>"
 	dat += "<center><table>"
 	dat += "<tr><td><b>Operant</b></td><td><b>System load</b></td><td><b>Mode</b></td></tr>"
-	for(var/thing in SSpsi.psi_dampeners)
+	for (var/thing in SSpsi.psi_dampeners)
 		var/obj/item/implant/psi_control/implant = thing
 		if (!implant.imp_in)
 			continue
@@ -96,7 +96,7 @@
 	if (show_violations)
 		dat += "<h2>Psionic Control Violations <a href='?src=\ref[src];show_violations=0'>-</a></h2><hr><center><table>"
 		if (length(psi_violations))
-			for(var/i =  1 to length(psi_violations))
+			for (var/i =  1 to length(psi_violations))
 				var/entry = psi_violations[i]
 				dat += "<tr><td><br>[entry]</td><td>[authorized ? "<a href='?src=\ref[src];remove_violation=[i]'>Remove</a>" : ""]</td></tr>"
 		else

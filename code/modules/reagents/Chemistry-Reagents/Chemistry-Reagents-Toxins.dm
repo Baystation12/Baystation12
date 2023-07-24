@@ -460,7 +460,7 @@
 	if (istype(T, /turf/simulated/wall))
 		var/turf/simulated/wall/W = T
 		if (locate(/obj/effect/overlay/wallrot) in W)
-			for(var/obj/effect/overlay/wallrot/E in W)
+			for (var/obj/effect/overlay/wallrot/E in W)
 				qdel(E)
 			W.visible_message(SPAN_NOTICE("The fungi are completely dissolved by the solution!"))
 
@@ -1016,7 +1016,7 @@
 		return
 	H.chem_doses[type] = 0
 	var/list/meatchunks = list()
-	for(var/limb_tag in list(BP_R_ARM, BP_L_ARM, BP_R_LEG,BP_L_LEG))
+	for (var/limb_tag in list(BP_R_ARM, BP_L_ARM, BP_R_LEG,BP_L_LEG))
 		var/obj/item/organ/external/E = H.get_organ(limb_tag)
 		if (E && !E.is_stump() && !BP_IS_ROBOTIC(E) && E.species.name != SPECIES_PROMETHEAN)
 			meatchunks += E
@@ -1032,7 +1032,7 @@
 	if (!wrapped_species_by_ref["\ref[H]"])
 		wrapped_species_by_ref["\ref[H]"] = H.species.name
 	meatchunks = list(O) | O.children
-	for(var/obj/item/organ/external/E in meatchunks)
+	for (var/obj/item/organ/external/E in meatchunks)
 		E.species = all_species[SPECIES_PROMETHEAN]
 		E.skin_tone = null
 		E.s_col = ReadRGB("#05ff9b")
@@ -1064,7 +1064,7 @@
 	M.icon = null
 	M.overlays.Cut()
 	M.set_invisibility(INVISIBILITY_ABSTRACT)
-	for(var/obj/item/W in M)
+	for (var/obj/item/W in M)
 		if (istype(W, /obj/item/implant)) //TODO: Carn. give implants a dropped() or something
 			qdel(W)
 			continue
@@ -1152,9 +1152,9 @@
 	if (!HAS_TRAIT(M, /singleton/trait/general/serpentid_adapted))
 		. = ..()
 	if (istype(M))
-		for(var/obj/item/organ/external/E in M.organs)
+		for (var/obj/item/organ/external/E in M.organs)
 			if (LAZYLEN(E.implants))
-				for(var/obj/effect/spider/spider in E.implants)
+				for (var/obj/effect/spider/spider in E.implants)
 					if (prob(25))
 						E.implants -= spider
 						M.visible_message(SPAN_NOTICE("The dying form of \a [spider] emerges from inside \the [M]'s [E.name]."))

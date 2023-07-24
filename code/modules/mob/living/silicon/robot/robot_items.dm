@@ -28,12 +28,12 @@
 				to_chat(user, "You activate the analyzer's microlaser, analyzing \the [loaded_item] and breaking it down.")
 				flick("portable_analyzer_scan", src)
 				playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-				for(var/T in loaded_item.origin_tech)
+				for (var/T in loaded_item.origin_tech)
 					files.UpdateTech(T, loaded_item.origin_tech[T])
 					to_chat(user, "\The [loaded_item] had level [loaded_item.origin_tech[T]] in [CallTechName(T)].")
 				loaded_item = null
-				for(var/obj/I in contents)
-					for(var/mob/M in I.contents)
+				for (var/obj/I in contents)
+					for (var/mob/M in I.contents)
 						M.death()
 					if (istype(I,/obj/item/stack/material))//Only deconstructs one sheet at a time instead of the entire stack
 						var/obj/item/stack/material/S = I
@@ -53,10 +53,10 @@
 			to_chat(user, "The [src] is empty.  Put something inside it first.")
 	if (response == "Sync")
 		var/success = 0
-		for(var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
-			for(var/datum/tech/T in files.known_tech) //Uploading
+		for (var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
+			for (var/datum/tech/T in files.known_tech) //Uploading
 				S.files.AddTech2Known(T)
-			for(var/datum/tech/T in S.files.known_tech) //Downloading
+			for (var/datum/tech/T in S.files.known_tech) //Downloading
 				files.AddTech2Known(T)
 			success = 1
 			files.RefreshResearch()
@@ -90,7 +90,7 @@
 		var/obj/item/I = target
 		I.forceMove(src)
 		loaded_item = I
-		for(var/mob/M in viewers())
+		for (var/mob/M in viewers())
 			M.show_message(text(SPAN_NOTICE("[user] adds the [I] to the [src].")), 1)
 		desc = initial(desc) + "<br>It is holding \the [loaded_item]."
 		flick("portable_analyzer_load", src)
@@ -433,7 +433,7 @@
 
 /obj/item/robot_rack/Initialize(mapload, starting_objects = 0)
 	. = ..()
-	for(var/i = 1, i <= min(starting_objects, capacity), i++)
+	for (var/i = 1, i <= min(starting_objects, capacity), i++)
 		held += new object_type(src)
 
 /obj/item/robot_rack/attack_self(mob/user)
@@ -526,13 +526,13 @@
 	var/generating_power
 	var/using_item
 
-	for(var/thing in contents)
+	for (var/thing in contents)
 		var/atom/A = thing
 		if (istype(A, /obj/item/reagent_containers/food/snacks/grown))
 			generating_power = base_power_generation
 			using_item = A
 		else
-			for(var/fuel_type in fuel_types)
+			for (var/fuel_type in fuel_types)
 				if (istype(A, fuel_type))
 					generating_power = fuel_types[fuel_type] * base_power_generation
 					using_item = A

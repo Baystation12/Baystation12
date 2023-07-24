@@ -91,14 +91,14 @@
 	return new_turf.is_plating()
 
 /obj/machinery/floorlayer/proc/TakeNewStack()
-	for(var/obj/item/stack/tile/tile in contents)
+	for (var/obj/item/stack/tile/tile in contents)
 		T = tile
 		return 1
 	return 0
 
 /obj/machinery/floorlayer/proc/SortStacks()
-	for(var/obj/item/stack/tile/tile1 in contents)
-		for(var/obj/item/stack/tile/tile2 in contents)
+	for (var/obj/item/stack/tile/tile1 in contents)
+		for (var/obj/item/stack/tile/tile2 in contents)
 			tile2.transfer_to(tile1)
 
 /obj/machinery/floorlayer/proc/layFloor(turf/w_turf)
@@ -115,5 +115,5 @@
 	SortStacks()
 
 /obj/machinery/floorlayer/proc/CollectTiles(turf/w_turf)
-	for(var/obj/item/stack/tile/tile in w_turf)
+	for (var/obj/item/stack/tile/tile in w_turf)
 		TakeTile(tile)

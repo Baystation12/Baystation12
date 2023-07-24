@@ -61,7 +61,7 @@
 	limit_y = 50
 
 /datum/random_map/winding_dungeon/New(seed, tx, ty, tz, tlx, tly, do_not_apply, do_not_announce, list/variable_list)
-	for(var/variable in variable_list)
+	for (var/variable in variable_list)
 		if (variable in src.vars)
 			src.vars[variable] = variable_list[variable]
 	..()
@@ -85,7 +85,7 @@
 
 /datum/random_map/winding_dungeon/apply_to_map()
 	logging("You have [length(rooms)] # of rooms")
-	for(var/datum/room/R in rooms)
+	for (var/datum/room/R in rooms)
 		if (!priority_process)
 			sleep(-1)
 		R.apply_to_map(origin_x,origin_y,origin_z,src)
@@ -108,7 +108,7 @@
 				logging("Sanity limit reached on loot spawning #[num_of_loot]")
 				num_of_loot = 0
 
-	for(var/datum/room/R in rooms)
+	for (var/datum/room/R in rooms)
 		rooms -= R
 		qdel(R)
 
@@ -146,7 +146,7 @@
 	var/turf/T = locate((origin_x-1)+x,(origin_y-1)+y,origin_z)
 	if (T && !T.density)
 		var/can = 1
-		for(var/atom/movable/M in T)
+		for (var/atom/movable/M in T)
 			if (istype(M,/mob/living) || M.density)
 				can = 0
 				break
@@ -156,10 +156,10 @@
 /datum/random_map/winding_dungeon/generate_map()
 	logging("Winding Dungeon Generation Start")
 	//first generate the border
-	for(var/xx = 1, xx <= limit_x, xx++)
+	for (var/xx = 1, xx <= limit_x, xx++)
 		map[get_map_cell(xx,1)] = BORDER_CHAR
 		map[get_map_cell(xx,limit_y)] = BORDER_CHAR
-	for(var/yy = 1, yy < limit_y, yy++)
+	for (var/yy = 1, yy < limit_y, yy++)
 		map[get_map_cell(1,yy)] = BORDER_CHAR
 		map[get_map_cell(limit_x,yy)] = BORDER_CHAR
 
@@ -169,7 +169,7 @@
 	var/result = carve_area(first_room_x,first_room_y,first_room_width,first_room_height, FLOOR_CHAR, ARTIFACT_TURF_CHAR)
 	logging("First room result: [result ? "Success" : "Failure"]")
 	var/sanity = 0
-	for(sanity = 0, sanity < 1000, sanity++)
+	for (sanity = 0, sanity < 1000, sanity++)
 		if (!priority_process)
 			sleep(-1)
 
@@ -189,7 +189,7 @@
 		var/width = 1 //width of room
 		var/height = 1 //height of room.
 		var/isRoom = 1 //whether we are a room or not
-		for(var/testing = 0, testing < 1000, testing++)
+		for (var/testing = 0, testing < 1000, testing++)
 			if (length(open_positions))
 				var/list/coords = splittext(pick(open_positions), ":") //pop a coord from the list.
 				newx = text2num(coords[1])
@@ -282,12 +282,12 @@
 	open_positions.Cut()
 
 /datum/random_map/winding_dungeon/proc/carve_area(truex,truey,width,height,char, wall_char)
-	for(var/mode = 0, mode <= 1, mode++)
-		for(var/ytemp = truey, ytemp < truey + height, ytemp++)
+	for (var/mode = 0, mode <= 1, mode++)
+		for (var/ytemp = truey, ytemp < truey + height, ytemp++)
 			if (!mode && (ytemp < 0 || ytemp > limit_y))
 				logging("We are beyond our x limits")
 				return 0
-			for(var/xtemp = truex, xtemp < truex + width, xtemp++)
+			for (var/xtemp = truex, xtemp < truex + width, xtemp++)
 				if (!mode)
 					if (xtemp < 0 || xtemp > limit_x)
 						logging("We are beyond our x limits")

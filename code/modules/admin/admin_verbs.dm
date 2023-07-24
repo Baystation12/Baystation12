@@ -772,9 +772,9 @@ var/global/list/admin_verbs_mod = list(
 	if (!holder) return
 
 	var/list/jobs = list()
-	for(var/thing in SSmapping.submaps)
+	for (var/thing in SSmapping.submaps)
 		var/datum/submap/submap = thing
-		for(var/otherthing in submap.jobs)
+		for (var/otherthing in submap.jobs)
 			var/datum/job/submap/job = submap.jobs[otherthing]
 			if (!job.is_position_available())
 				jobs["[job.title] - [submap.name]"] = job
@@ -796,9 +796,9 @@ var/global/list/admin_verbs_mod = list(
 	if (!holder) return
 
 	var/list/jobs = list()
-	for(var/thing in SSmapping.submaps)
+	for (var/thing in SSmapping.submaps)
 		var/datum/submap/submap = thing
-		for(var/otherthing in submap.jobs)
+		for (var/otherthing in submap.jobs)
 			var/datum/job/submap/job = submap.jobs[otherthing]
 			if (job.is_position_available())
 				jobs["[job.title] - [submap.name]"] = job

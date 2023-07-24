@@ -44,7 +44,7 @@
 	host.status_flags |= PASSEMOTES
 	forceMove(host)
 
-	for(var/obj/thing in hud_elements)
+	for (var/obj/thing in hud_elements)
 		thing.alpha =        255
 		thing.invisibility = 0
 

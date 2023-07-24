@@ -76,7 +76,7 @@
 		return
 	var/list/showing = owner.linked?.navigation_viewers
 	if (length(showing))
-		for(var/weakref/W in showing)
+		for (var/weakref/W in showing)
 			var/mob/M = W.resolve()
 			if (istype(M) && M.client)
 				M.client.images |= images

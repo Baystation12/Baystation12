@@ -21,12 +21,12 @@
 			return
 
 		//DESTROYING STUFF AT THE EPICENTER
-		for(var/mob/living/M in orange(1,src))
+		for (var/mob/living/M in orange(1,src))
 			qdel(M)
-		for(var/obj/O in orange(1,src))
+		for (var/obj/O in orange(1,src))
 			qdel(O)
 		var/base_turf = get_base_turf_by_area(src)
-		for(var/turf/simulated/ST in orange(1,src))
+		for (var/turf/simulated/ST in orange(1,src))
 			if (ST.type == base_turf)
 				continue
 			ST.ChangeTurf(base_turf)
@@ -63,7 +63,7 @@
 	if (!isturf(loc))	//blackhole cannot be contained inside anything. Weird stuff might happen
 		qdel(src)
 		return
-	for(var/t = -r, t < r, t++)
+	for (var/t = -r, t < r, t++)
 		affect_coord(x+t, y-r, ex_act_force, pull_chance, turf_removal_chance)
 		affect_coord(x-t, y+r, ex_act_force, pull_chance, turf_removal_chance)
 		affect_coord(x+r, y+t, ex_act_force, pull_chance, turf_removal_chance)
@@ -77,12 +77,12 @@
 
 	//Pulling and/or ex_act-ing movable atoms in that turf
 	if ( prob(pull_chance) )
-		for(var/obj/O in T.contents)
+		for (var/obj/O in T.contents)
 			if (O.anchored)
 				O.ex_act(ex_act_force)
 			else
 				step_towards(O,src)
-		for(var/mob/living/M in T.contents)
+		for (var/mob/living/M in T.contents)
 			step_towards(M,src)
 
 	//Destroying the turf

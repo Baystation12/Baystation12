@@ -22,13 +22,13 @@
 			var/mob/M = get_holder_of_type(holder, /mob)
 			if (istype(M))
 				var/list/visible = get_visible_damage()
-				for(var/k in visible)
+				for (var/k in visible)
 					if (LAZYACCESS(last_reported_damage, k) != visible[k])
 						LAZYSET(last_reported_damage, k, visible[k])
 						to_chat(M, SPAN_WARNING("The [k] armor on your [holder] has [visible[k]] damage now!"))
 
 /datum/extension/armor/ablative/proc/get_damage()
-	for(var/key in armor_values)
+	for (var/key in armor_values)
 		var/damage = max_armor_values[key] - armor_values[key]
 		if (damage > 0)
 			LAZYSET(., key, damage)
@@ -38,7 +38,7 @@
 	if (!LAZYLEN(damages))
 		return
 	var/result = list()
-	for(var/key in damages)
+	for (var/key in damages)
 		switch(round(100 * damages[key]/max_armor_values[key]))
 			if (5 to 10)
 				result[key] = "minor"

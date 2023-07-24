@@ -25,7 +25,7 @@
 	if (!istype(AM))
 		return
 	var/list/zlevels = GetConnectedZlevels(AM.z)
-	for(var/obj/item/gun/G in GLOB.secure_weapons)
+	for (var/obj/item/gun/G in GLOB.secure_weapons)
 		var/out_of_range = FALSE
 		var/area_name = "OUT OF RANGE"
 		var/turf/T = get_turf(G)
@@ -36,7 +36,7 @@
 			area_name = sanitize(A.name)
 
 		var/list/modes = list()
-		for(var/i = 1 to length(G.firemodes))
+		for (var/i = 1 to length(G.firemodes))
 			if (G.authorized_modes[i] == ALWAYS_AUTHORIZED)
 				continue
 			var/datum/firemode/firemode = G.firemodes[i]

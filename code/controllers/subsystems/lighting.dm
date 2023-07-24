@@ -73,10 +73,10 @@ SUBSYSTEM_DEF(lighting)
 
 		if (next_stats_update <= world.time)
 			next_stats_update = world.time + update_stats_every
-			for(var/stat_name in stats_queues)
+			for (var/stat_name in stats_queues)
 				var/stat_sum = 0
 				var/list/stats_queue = stats_queues[stat_name]
-				for(var/count in stats_queue)
+				for (var/count in stats_queue)
 					stat_sum += count
 				stats_queue.Cut()
 

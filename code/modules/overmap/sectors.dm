@@ -53,14 +53,14 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 		home = locate(start_x, start_y, GLOB.using_map.overmap_z)
 	forceMove(home)
 
-	for(var/obj/effect/overmap/event/E in loc)
+	for (var/obj/effect/overmap/event/E in loc)
 		qdel(E)
 
 	if (HAS_FLAGS(sector_flags, OVERMAP_SECTOR_KNOWN))
 		LAZYADD(GLOB.known_overmap_sectors, src)
 		layer = ABOVE_LIGHTING_LAYER
 		plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		for(var/obj/machinery/computer/ship/helm/H as anything in GLOB.overmap_helm_computers)
+		for (var/obj/machinery/computer/ship/helm/H as anything in GLOB.overmap_helm_computers)
 			H.add_known_sector(src)
 
 	docking_codes = "[ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))]"
@@ -85,7 +85,7 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 	map_z = GetConnectedZlevels(z)
 
 /obj/effect/overmap/visitable/proc/register_z_levels()
-	for(var/zlevel in map_z)
+	for (var/zlevel in map_z)
 		map_sectors["[zlevel]"] = src
 
 	GLOB.using_map.player_levels |= map_z
@@ -118,12 +118,12 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 
 /obj/effect/overmap/visitable/proc/get_waypoints(shuttle_name)
 	. = list()
-	for(var/obj/effect/overmap/visitable/contained in src)
+	for (var/obj/effect/overmap/visitable/contained in src)
 		. += contained.get_waypoints(shuttle_name)
-	for(var/thing in generic_waypoints)
+	for (var/thing in generic_waypoints)
 		.[thing] = name
 	if (shuttle_name in restricted_waypoints)
-		for(var/thing in restricted_waypoints[shuttle_name])
+		for (var/thing in restricted_waypoints[shuttle_name])
 			.[thing] = name
 
 /obj/effect/overmap/visitable/proc/generate_skybox()
@@ -152,14 +152,14 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 /obj/effect/overmap/visitable/sector/Initialize()
 	. = ..()
 	if (HAS_FLAGS(sector_flags, OVERMAP_SECTOR_KNOWN))
-		for(var/obj/machinery/computer/ship/helm/H as anything in GLOB.overmap_helm_computers)
+		for (var/obj/machinery/computer/ship/helm/H as anything in GLOB.overmap_helm_computers)
 			update_known_connections(TRUE)
 
 
 /obj/effect/overmap/visitable/sector/update_known_connections(notify = FALSE)
 	. = ..()
 
-	for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
+	for (var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
 		H.add_known_sector(src, notify)
 
 

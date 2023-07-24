@@ -20,7 +20,7 @@
 	var/list/types = list()
 
 	var/i
-	for(i = 2; i <= length(query_list); i += 2)
+	for (i = 2; i <= length(query_list); i += 2)
 		types += query_list[i]
 
 		if (i + 1 >= length(query_list) || query_list[i + 1] != ",")
@@ -32,7 +32,7 @@
 
 	if (i <= length(query_list))
 		if (lowertext(query_list[i]) in list("from", "in"))
-			for(i++; i <= length(query_list); i += 2)
+			for (i++; i <= length(query_list); i += 2)
 				from += query_list[i]
 
 				if (i + 1 >= length(query_list) || query_list[i + 1] != ",")
@@ -47,7 +47,7 @@
 
 	if (lowertext(query_list[1]) == "update")
 		if (i <= length(query_list) && lowertext(query_list[i]) == "set")
-			for(i++; i <= length(query_list); i++)
+			for (i++; i <= length(query_list); i++)
 				if (i + 2 <= length(query_list) && query_list[i + 1] == "=")
 					set_vars += query_list[i]
 					set_vars[query_list[i]] = query_list[i + 2]
@@ -74,7 +74,7 @@
 	if ("world" in from)
 		from_objs += world
 	else
-		for(var/f in from)
+		for (var/f in from)
 			if (copytext(f, 1, 2) == "'" || copytext(f, 1, 2) == "\"")
 				from_objs += locate(copytext(f, 2, length(f)))
 			else if (copytext(f, 1, 2) != "/")
@@ -82,68 +82,68 @@
 			else
 				var/f2 = text2path(f)
 				if (text_starts_with(f, "/mob"))
-					for(var/mob/m in world)
+					for (var/mob/m in world)
 						if (istype(m, f2))
 							from_objs += m
 
 				else if (text_starts_with(f, "/turf/space"))
-					for(var/turf/space/m in world)
+					for (var/turf/space/m in world)
 						if (istype(m, f2))
 							from_objs += m
 
 				else if (text_starts_with(f, "/turf/simulated"))
-					for(var/turf/simulated/m in world)
+					for (var/turf/simulated/m in world)
 						if (istype(m, f2))
 							from_objs += m
 
 				else if (text_starts_with(f, "/turf/unsimulated"))
-					for(var/turf/unsimulated/m in world)
+					for (var/turf/unsimulated/m in world)
 						if (istype(m, f2))
 							from_objs += m
 
 				else if (text_starts_with(f, "/turf"))
-					for(var/turf/m in world)
+					for (var/turf/m in world)
 						if (istype(m, f2))
 							from_objs += m
 
 				else if (text_starts_with(f, "/area"))
-					for(var/area/m in world)
+					for (var/area/m in world)
 						if (istype(m, f2))
 							from_objs += m
 
 				else if (text_starts_with(f, "/obj/item"))
-					for(var/obj/item/m in world)
+					for (var/obj/item/m in world)
 						if (istype(m, f2))
 							from_objs += m
 
 				else if (text_starts_with(f, "/obj/machinery"))
-					for(var/obj/machinery/m in world)
+					for (var/obj/machinery/m in world)
 						if (istype(m, f2))
 							from_objs += m
 
 				else if (text_starts_with(f, "/obj"))
-					for(var/obj/m in world)
+					for (var/obj/m in world)
 						if (istype(m, f2))
 							from_objs += m
 
 				else if (text_starts_with(f, "/atom"))
-					for(var/atom/m in world)
+					for (var/atom/m in world)
 						if (istype(m, f2))
 							from_objs += m
 /*
 				else
-					for(var/datum/m in world)
+					for (var/datum/m in world)
 						if (istype(m, f2))
 							from_objs += m
 */
 
 	var/list/objs = list()
 
-	for(var/from_obj in from_objs)
+	for (var/from_obj in from_objs)
 		if ("*" in types)
 			objs += from_obj:contents
 		else
-			for(var/f in types)
+			for (var/f in types)
 				if (copytext(f, 1, 2) == "'" || copytext(f, 1, 2) == "\"")
 					objs += locate(copytext(f, 2, length(f))) in from_obj
 				else if (copytext(f, 1, 2) != "/")
@@ -151,64 +151,64 @@
 				else
 					var/f2 = text2path(f)
 					if (text_starts_with(f, "/mob"))
-						for(var/mob/m in from_obj)
+						for (var/mob/m in from_obj)
 							if (istype(m, f2))
 								objs += m
 
 					else if (text_starts_with(f, "/turf/space"))
-						for(var/turf/space/m in from_obj)
+						for (var/turf/space/m in from_obj)
 							if (istype(m, f2))
 								objs += m
 
 					else if (text_starts_with(f, "/turf/simulated"))
-						for(var/turf/simulated/m in from_obj)
+						for (var/turf/simulated/m in from_obj)
 							if (istype(m, f2))
 								objs += m
 
 					else if (text_starts_with(f, "/turf/unsimulated"))
-						for(var/turf/unsimulated/m in from_obj)
+						for (var/turf/unsimulated/m in from_obj)
 							if (istype(m, f2))
 								objs += m
 
 					else if (text_starts_with(f, "/turf"))
-						for(var/turf/m in from_obj)
+						for (var/turf/m in from_obj)
 							if (istype(m, f2))
 								objs += m
 
 					else if (text_starts_with(f, "/area"))
-						for(var/area/m in from_obj)
+						for (var/area/m in from_obj)
 							if (istype(m, f2))
 								objs += m
 
 					else if (text_starts_with(f, "/obj/item"))
-						for(var/obj/item/m in from_obj)
+						for (var/obj/item/m in from_obj)
 							if (istype(m, f2))
 								objs += m
 
 					else if (text_starts_with(f, "/obj/machinery"))
-						for(var/obj/machinery/m in from_obj)
+						for (var/obj/machinery/m in from_obj)
 							if (istype(m, f2))
 								objs += m
 
 					else if (text_starts_with(f, "/obj"))
-						for(var/obj/m in from_obj)
+						for (var/obj/m in from_obj)
 							if (istype(m, f2))
 								objs += m
 
 					else if (text_starts_with(f, "/atom"))
-						for(var/atom/m in from_obj)
+						for (var/atom/m in from_obj)
 							if (istype(m, f2))
 								objs += m
 
 					else
-						for(var/datum/m in from_obj)
+						for (var/datum/m in from_obj)
 							if (istype(m, f2))
 								objs += m
 
 
-	for(var/datum/t in objs)
+	for (var/datum/t in objs)
 		var/currently_false = 0
-		for(i = 1, i - 1 < length(where), i++)
+		for (i = 1, i - 1 < length(where), i++)
 			var/v = where[i++]
 			var/compare_op = where[i++]
 			if (!(compare_op in list("==", "=", "<>", "<", ">", "<=", ">=", "!=")))
@@ -216,7 +216,7 @@
 				return
 
 			var/j
-			for(j = i, j <= length(where), j++)
+			for (j = i, j <= length(where), j++)
 				if (lowertext(where[j]) in list("and", "or", ";"))
 					break
 
@@ -262,30 +262,30 @@
 	to_chat(usr, SPAN_NOTICE("SQDL Query: [query_text]"))
 	message_admins("[usr] executed SDQL query: \"[query_text]\".")
 /*
-	for(var/t in types)
+	for (var/t in types)
 		to_chat(usr, "Type: [t]")
-	for(var/t in from)
+	for (var/t in from)
 		to_chat(usr, "From: [t]")
-	for(var/t in set_vars)
+	for (var/t in set_vars)
 		to_chat(usr, "Set: [t] = [set_vars[t]]")
 	if (length(where))
 		var/where_str = ""
-		for(var/t in where)
+		for (var/t in where)
 			where_str += "[t] "
 
 		to_chat(usr, "Where: [where_str]")
 
 	to_chat(usr, "From objects:")
-	for(var/datum/t in from_objs)
+	for (var/datum/t in from_objs)
 		to_chat(usr, t)
 
 	to_chat(usr, "Objects:")
-	for(var/datum/t in objs)
+	for (var/datum/t in objs)
 		to_chat(usr, t)
 */
 	switch(lowertext(query_list[1]))
 		if ("delete")
-			for(var/datum/t in objs)
+			for (var/datum/t in objs)
 				// turfs are special snowflakes that explode if qdeleted
 				if (isturf(t))
 					var/turf/T = t
@@ -294,19 +294,19 @@
 					qdel(t)
 
 		if ("update")
-			for(var/datum/t in objs)
+			for (var/datum/t in objs)
 				objs[t] = list()
-				for(var/v in set_vars)
+				for (var/v in set_vars)
 					if (v in t.vars)
 						objs[t][v] = SDQL_text2value(t, set_vars[v])
 
-			for(var/datum/t in objs)
-				for(var/v in objs[t])
+			for (var/datum/t in objs)
+				for (var/v in objs[t])
 					t.vars[v] = objs[t][v]
 
 		if ("select")
 			var/text = ""
-			for(var/datum/t in objs)
+			for (var/datum/t in objs)
 				if (istype(t, /atom))
 					var/atom/a = t
 
@@ -384,7 +384,7 @@
 	var/list/query_list = list()
 	var/len = length(query_text)
 
-	for(var/i = 1, i <= len, i++)
+	for (var/i = 1, i <= len, i++)
 		var/char = copytext(query_text, i, i + 1)
 
 		if (char in whitespace)
@@ -420,7 +420,7 @@
 
 			word = "'"
 
-			for(i++, i <= len, i++)
+			for (i++, i <= len, i++)
 				char = copytext(query_text, i, i + 1)
 
 				if (char == "'")
@@ -448,7 +448,7 @@
 
 			word = "\""
 
-			for(i++, i <= len, i++)
+			for (i++, i <= len, i++)
 				char = copytext(query_text, i, i + 1)
 
 				if (char == "\"")

@@ -142,7 +142,7 @@
 	//Nearby turfs may also trigger a fire (will only start fires if there's fuel, currently)
 	//Guaranteed fire spread in the last tick
 	if (prob(50 + fire_power) || fire_power == 1)
-		for(var/direction in GLOB.cardinal)
+		for (var/direction in GLOB.cardinal)
 			var/turf/simulated/other_tile = get_step(T, direction)
 
 			if (istype(other_tile))
@@ -151,7 +151,7 @@
 						continue
 					other_tile.hotspot_expose( effective_temperature, TURF_FIRE_VOLUME)
 
-	for(var/atom/movable/burning_atom as anything in T)
+	for (var/atom/movable/burning_atom as anything in T)
 		burning_atom.fire_act(exposed_temperature = effective_temperature, exposed_volume = TURF_FIRE_VOLUME)
 	if (interact_with_atmos)
 		if (prob(fire_power) && istype(T, /turf/simulated/floor))

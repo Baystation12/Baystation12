@@ -46,7 +46,7 @@
 
 /obj/screen/movable/ability_master/proc/toggle_open(forced_state = 0)
 	if (showing && (forced_state != 2)) // We are closing the ability master, hide the abilities.
-		for(var/obj/screen/ability/O in ability_objects)
+		for (var/obj/screen/ability/O in ability_objects)
 			if (my_mob && my_mob.client)
 				my_mob.client.screen -= O
 //			O.handle_icon_updates = 0
@@ -74,7 +74,7 @@
 	var/y_position = decode_screen_Y(screen_loc_Y[1], my_mob)
 	var/y_pix = screen_loc_Y[2]
 
-	for(var/i = 1; i <= length(ability_objects); i++)
+	for (var/i = 1; i <= length(ability_objects); i++)
 		var/obj/screen/ability/A = ability_objects[i]
 		var/xpos = x_position + (x_position < 8 ? 1 : -1)*(i%7)
 		var/ypos = y_position + (y_position < 8 ? round(i/7) : -round(i/7))
@@ -89,7 +89,7 @@
 		if (!(src in user.client.screen))
 			user.client.screen += src
 	var/i = 1
-	for(var/obj/screen/ability/ability in ability_objects)
+	for (var/obj/screen/ability/ability in ability_objects)
 		ability.update_icon(forced)
 		ability.maptext = "[i]" // Slot number
 		i++
@@ -127,29 +127,29 @@
 //		qdel(src)
 
 /obj/screen/movable/ability_master/proc/remove_all_abilities()
-	for(var/obj/screen/ability/A in ability_objects)
+	for (var/obj/screen/ability/A in ability_objects)
 		remove_ability(A)
 
 /obj/screen/movable/ability_master/proc/get_ability_by_name(name_to_search)
-	for(var/obj/screen/ability/A in ability_objects)
+	for (var/obj/screen/ability/A in ability_objects)
 		if (A.name == name_to_search)
 			return A
 	return null
 
 /obj/screen/movable/ability_master/proc/get_ability_by_proc_ref(proc_ref)
-	for(var/obj/screen/ability/verb_based/V in ability_objects)
+	for (var/obj/screen/ability/verb_based/V in ability_objects)
 		if (V.verb_to_call == proc_ref)
 			return V
 	return null
 
 /obj/screen/movable/ability_master/proc/get_ability_by_instance(obj/instance)
-	for(var/obj/screen/ability/obj_based/O in ability_objects)
+	for (var/obj/screen/ability/obj_based/O in ability_objects)
 		if (O.object == instance)
 			return O
 	return null
 
 /obj/screen/movable/ability_master/proc/get_ability_by_spell(spell/s)
-	for(var/screen in spell_objects)
+	for (var/screen in spell_objects)
 		var/obj/screen/ability/spell/S = screen
 		if (S.spell == s)
 			return S
@@ -352,7 +352,7 @@
 
 
 /obj/screen/movable/ability_master/proc/update_spells(forced = 0)
-	for(var/obj/screen/ability/spell/spell in spell_objects)
+	for (var/obj/screen/ability/spell/spell in spell_objects)
 		spell.update_charge(forced)
 
 /obj/screen/ability/spell/proc/update_charge(forced_update = 0)
@@ -401,7 +401,7 @@
 	spell.perform(usr)
 
 /obj/screen/movable/ability_master/proc/silence_spells(amount)
-	for(var/obj/screen/ability/spell/spell in spell_objects)
+	for (var/obj/screen/ability/spell/spell in spell_objects)
 		spell.spell.silenced = amount
 		spell.spell.process()
 		spell.update_charge(1)

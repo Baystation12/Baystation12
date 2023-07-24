@@ -38,7 +38,7 @@ This is /obj/machinery level code to properly manage power usage from the area.
 		return FALSE
 	var/oldstat = stat
 	set_stat(MACHINE_STAT_NOPOWER, TRUE)
-	for(var/thing in power_components)
+	for (var/thing in power_components)
 		var/obj/item/stock_parts/power/power = thing
 		if ((!is_powered()) && power.can_provide_power(src))
 			set_stat(MACHINE_STAT_NOPOWER, FALSE)
@@ -67,7 +67,7 @@ This is /obj/machinery level code to properly manage power usage from the area.
 	if (chan == POWER_CHAN)
 		chan = power_channel
 	. = amount
-	for(var/thing in power_components)
+	for (var/thing in power_components)
 		var/obj/item/stock_parts/power/power = thing
 		var/used = power.use_power_oneoff(src, ., chan)
 		. -= used
@@ -79,7 +79,7 @@ This is /obj/machinery level code to properly manage power usage from the area.
 	if (chan == POWER_CHAN)
 		chan = power_channel
 	. = amount
-	for(var/thing in power_components)
+	for (var/thing in power_components)
 		var/obj/item/stock_parts/power/power = thing
 		var/used = power.can_use_power_oneoff(src, ., chan)
 		. -= used

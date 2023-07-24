@@ -119,7 +119,7 @@
 			if (istype(armor_datum) && armor_datum.sealed && wearing_rig.helmet == head)
 				check_gear |= wearing_rig
 
-		for(var/obj/item/gear in check_gear)
+		for (var/obj/item/gear in check_gear)
 			if (!gear)
 				continue
 			var/obj/item/voice_changer/changer = locate() in gear
@@ -166,7 +166,7 @@
 	switch(message_mode)
 		if ("intercom")
 			if (!src.restrained())
-				for(var/obj/item/device/radio/I in view(1))
+				for (var/obj/item/device/radio/I in view(1))
 					if (I.intercom_handling)
 						I.talk_into(src, message, null, verb, speaking)
 						I.add_fingerprint(src)
@@ -226,7 +226,7 @@
 
 /mob/living/carbon/human/can_speak(datum/language/speaking)
 	if (species && speaking && (speaking.name in species.assisted_langs))
-		for(var/obj/item/organ/internal/voicebox/I in src.internal_organs)
+		for (var/obj/item/organ/internal/voicebox/I in src.internal_organs)
 			if (I.is_usable() && I.assists_languages[speaking])
 				return TRUE
 		return FALSE

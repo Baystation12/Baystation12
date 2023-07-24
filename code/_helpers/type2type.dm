@@ -11,7 +11,7 @@
 /proc/text2numlist(text, delimiter="\n")
 	RETURN_TYPE(/list)
 	var/list/num_list = list()
-	for(var/x in splittext(text, delimiter))
+	for (var/x in splittext(text, delimiter))
 		num_list += text2num(x)
 	return num_list
 
@@ -170,7 +170,7 @@
 	var/mDays = 0;
 	var/monthIndex = 0;
 
-	for(var/m in monthsInDays)
+	for (var/m in monthsInDays)
 		monthIndex++
 		if (tmpDays > m)
 			mDays = m
@@ -186,7 +186,7 @@
 /proc/atomtypes2nameassoclist(list/atom_types)
 	RETURN_TYPE(/list)
 	. = list()
-	for(var/atom_type in atom_types)
+	for (var/atom_type in atom_types)
 		var/atom/A = atom_type
 		.[initial(A.name)] = atom_type
 	. = sortAssoc(.)

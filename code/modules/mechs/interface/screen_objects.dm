@@ -53,7 +53,7 @@
 
 	var/has_pilot_with_client = owner.client
 	if (!has_pilot_with_client && LAZYLEN(owner.pilots))
-		for(var/thing in owner.pilots)
+		for (var/thing in owner.pilots)
 			var/mob/pilot = thing
 			if (pilot.client)
 				has_pilot_with_client = TRUE
@@ -109,7 +109,7 @@
 		value = min(value, BAR_CAP)
 		// Draw statbar.
 		if (!LAZYLEN(GLOB.hardpoint_bar_cache))
-			for(var/i=0;i<BAR_CAP;i++)
+			for (var/i=0;i<BAR_CAP;i++)
 				var/image/bar = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar")
 				bar.pixel_x = 24+(i*2)
 				if (i>5)
@@ -119,7 +119,7 @@
 				else
 					bar.color = "#ff0000"
 				GLOB.hardpoint_bar_cache += bar
-		for(var/i=1;i<=value;i++)
+		for (var/i=1;i<=value;i++)
 			new_overlays += GLOB.hardpoint_bar_cache[i]
 	overlays = new_overlays
 
@@ -307,7 +307,7 @@
 			usr.setClickCooldown(0.2 SECONDS)
 			to_chat(usr, SPAN_NOTICE("The diagnostics panel blinks several times as it updates:"))
 			playsound(owner.loc,'sound/effects/scanbeep.ogg',30,0)
-			for(var/obj/item/mech_component/MC in list(owner.arms, owner.legs, owner.body, owner.head))
+			for (var/obj/item/mech_component/MC in list(owner.arms, owner.legs, owner.body, owner.head))
 				if (MC)
 					MC.return_diagnostics(usr)
 

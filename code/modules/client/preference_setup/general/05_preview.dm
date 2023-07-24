@@ -39,13 +39,13 @@
 	if (preview_gear && !(previewJob && preview_job && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))
 		// Equip custom gear loadout, replacing any job items
 		var/list/loadout_taken_slots = list()
-		for(var/thing in Gear())
+		for (var/thing in Gear())
 			var/datum/gear/G = gear_datums[thing]
 			if (G)
 				var/permitted = 0
 				if (G.allowed_roles && length(G.allowed_roles))
 					if (previewJob)
-						for(var/job_type in G.allowed_roles)
+						for (var/job_type in G.allowed_roles)
 							if (previewJob.type == job_type)
 								permitted = 1
 				else

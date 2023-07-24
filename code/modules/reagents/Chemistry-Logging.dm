@@ -22,7 +22,7 @@ var/global/list/chemical_reaction_logs = list()
 		return
 
 	var/html = ""
-	for(var/entry in chemical_reaction_logs)
+	for (var/entry in chemical_reaction_logs)
 		html += "[entry]<br>"
 
 	show_browser(usr, html, "window=chemlogs")

@@ -38,7 +38,7 @@
 		log_bad("Sanity Check - Missing HUD icon: hudcentcom")
 		failed_sanity_checks++
 
-	for(var/job_name in SSjobs.titles_to_datums)
+	for (var/job_name in SSjobs.titles_to_datums)
 		var/datum/job/J = SSjobs.titles_to_datums[job_name]
 		var/hud_icon_state = J.hud_icon
 		if (!(hud_icon_state in job_huds))
@@ -57,11 +57,11 @@
 /datum/unit_test/jobs_shall_have_a_unique_title/start_test()
 	var/list/checked_titles = list()
 	var/list/non_unique_titles = list()
-	for(var/job_type in SSjobs.types_to_datums)
+	for (var/job_type in SSjobs.types_to_datums)
 		var/datum/job/job = SSjobs.types_to_datums[job_type]
 		var/list/titles_to_check = job.alt_titles ? job.alt_titles.Copy() : list()
 		titles_to_check += job.title
-		for(var/job_title in titles_to_check)
+		for (var/job_title in titles_to_check)
 			if (checked_titles[job_title])
 				non_unique_titles += "[job_title] ([job_type])"
 				non_unique_titles |= "[job_title] ([checked_titles[job_title]])"

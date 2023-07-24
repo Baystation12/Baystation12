@@ -295,14 +295,14 @@
 /obj/item/rig_module/datajack/proc/load_data(incoming_data)
 
 	if (islist(incoming_data))
-		for(var/entry in incoming_data)
+		for (var/entry in incoming_data)
 			load_data(entry)
 		return 1
 
 	if (istype(incoming_data, /datum/tech))
 		var/data_found
 		var/datum/tech/new_data = incoming_data
-		for(var/datum/tech/current_data in stored_research)
+		for (var/datum/tech/current_data in stored_research)
 			if (current_data.id == new_data.id)
 				data_found = 1
 				if (current_data.level < new_data.level)

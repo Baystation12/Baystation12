@@ -1,7 +1,7 @@
 /mob/living/carbon/human/proc/monkeyize()
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/obj/item/W in src)
+	for (var/obj/item/W in src)
 		if (W==w_uniform) // will be torn
 			continue
 		drop_from_inventory(W)
@@ -10,7 +10,7 @@
 	stunned = 1
 	icon = null
 	set_invisibility(INVISIBILITY_ABSTRACT)
-	for(var/t in organs)
+	for (var/t in organs)
 		qdel(t)
 	var/atom/movable/overlay/animation = new /atom/movable/overlay(src)
 	animation.icon_state = "blank"
@@ -28,7 +28,7 @@
 		gib()
 		return
 
-	for(var/obj/item/W in src)
+	for (var/obj/item/W in src)
 		drop_from_inventory(W)
 	set_species(species.primitive_form)
 	dna.SetSEState(GLOB.MONKEYBLOCK,1)
@@ -46,7 +46,7 @@
 /mob/living/carbon/human/AIize(move=1) // 'move' argument needs defining here too because BYOND is dumb
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/t in organs)
+	for (var/t in organs)
 		qdel(t)
 	QDEL_NULL_LIST(worn_underwear)
 	return ..(move)
@@ -54,7 +54,7 @@
 /mob/living/carbon/AIize()
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/obj/item/W in src)
+	for (var/obj/item/W in src)
 		drop_from_inventory(W)
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
@@ -79,21 +79,21 @@
 
 	if (move)
 		var/obj/loc_landmark
-		for(var/obj/effect/landmark/start/sloc in landmarks_list)
+		for (var/obj/effect/landmark/start/sloc in landmarks_list)
 			if (sloc.name != "AI")
 				continue
 			if (locate(/mob/living) in sloc.loc)
 				continue
 			loc_landmark = sloc
 		if (!loc_landmark)
-			for(var/obj/effect/landmark/tripai in landmarks_list)
+			for (var/obj/effect/landmark/tripai in landmarks_list)
 				if (tripai.name == "tripai")
 					if ((locate(/mob/living) in tripai.loc) || (locate(/obj/structure/AIcore) in tripai.loc))
 						continue
 					loc_landmark = tripai
 		if (!loc_landmark)
 			to_chat(O, "Oh god sorry we can't find an unoccupied AI spawn location, so we're spawning you on top of someone.")
-			for(var/obj/effect/landmark/start/sloc in landmarks_list)
+			for (var/obj/effect/landmark/start/sloc in landmarks_list)
 				if (sloc.name == "AI")
 					loc_landmark = sloc
 		if (!loc_landmark)
@@ -114,13 +114,13 @@
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	QDEL_NULL_LIST(worn_underwear)
-	for(var/obj/item/W in src)
+	for (var/obj/item/W in src)
 		drop_from_inventory(W)
 	regenerate_icons()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(INVISIBILITY_ABSTRACT)
-	for(var/t in organs)
+	for (var/t in organs)
 		qdel(t)
 
 	var/mob/living/silicon/robot/O = new supplied_robot_type( loc )
@@ -155,20 +155,20 @@
 /mob/living/carbon/human/proc/slimeize(adult as num, reproduce as num)
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/obj/item/W in src)
+	for (var/obj/item/W in src)
 		drop_from_inventory(W)
 	regenerate_icons()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(INVISIBILITY_ABSTRACT)
-	for(var/t in organs)
+	for (var/t in organs)
 		qdel(t)
 
 	var/mob/living/carbon/slime/new_slime
 	if (reproduce)
 		var/number = pick(14;2,3,4)	//reproduce (has a small chance of producing 3 or 4 offspring)
 		var/list/babies = list()
-		for(var/i=1,i<=number,i++)
+		for (var/i=1,i<=number,i++)
 			var/mob/living/carbon/slime/M = new/mob/living/carbon/slime(loc)
 			M.set_nutrition(round(nutrition/number))
 			step_away(M,src)
@@ -188,13 +188,13 @@
 /mob/living/carbon/human/proc/corgize()
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/obj/item/W in src)
+	for (var/obj/item/W in src)
 		drop_from_inventory(W)
 	regenerate_icons()
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(INVISIBILITY_ABSTRACT)
-	for(var/t in organs)	//this really should not be necessary
+	for (var/t in organs)	//this really should not be necessary
 		qdel(t)
 
 	var/mob/living/simple_animal/passive/corgi/new_corgi = new /mob/living/simple_animal/passive/corgi (loc)
@@ -216,7 +216,7 @@
 
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
-	for(var/obj/item/W in src)
+	for (var/obj/item/W in src)
 		drop_from_inventory(W)
 
 	regenerate_icons()
@@ -224,7 +224,7 @@
 	icon = null
 	set_invisibility(INVISIBILITY_ABSTRACT)
 
-	for(var/t in organs)
+	for (var/t in organs)
 		qdel(t)
 
 	var/mob/new_mob = new mobpath(src.loc)

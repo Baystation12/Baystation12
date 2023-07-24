@@ -96,7 +96,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	put_on_mob(M, TC, "[amount] telecrystal\s")
 
 /singleton/uplink_source/proc/find_in_mob(mob/M, type)
-	for(var/item in M.get_equipped_items(TRUE))
+	for (var/item in M.get_equipped_items(TRUE))
 		if (!istype(item, type))
 			continue
 		var/obj/item/I = item
@@ -123,10 +123,10 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 	if (!priority_order || !length(priority_order))
 		priority_order = list()
-		for(var/entry in GLOB.default_uplink_source_priority)
+		for (var/entry in GLOB.default_uplink_source_priority)
 			priority_order += GET_SINGLETON(entry)
 
-	for(var/entry in priority_order)
+	for (var/entry in priority_order)
 		var/singleton/uplink_source/US = entry
 		if (US.setup_uplink_source(M, amount) != SETUP_FAILED)
 			return TRUE

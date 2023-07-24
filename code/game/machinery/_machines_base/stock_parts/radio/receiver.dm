@@ -33,11 +33,11 @@
 	var/obj/machinery/machine = loc
 	if (!istype(machine))
 		return
-	for(var/thing in receive_and_write)
+	for (var/thing in receive_and_write)
 		if (!isnull(signal.data[thing]))
 			var/singleton/public_access/public_variable/variable = receive_and_write[thing]
 			variable.write_var_protected(machine, signal.data[thing])
-	for(var/thing in receive_and_call)
+	for (var/thing in receive_and_call)
 		if (!isnull(signal.data[thing]))
 			var/singleton/public_access/public_method/method = receive_and_call[thing]
 			method.perform(machine, signal.data[thing])

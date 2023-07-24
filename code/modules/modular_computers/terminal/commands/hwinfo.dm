@@ -17,7 +17,7 @@
 	var/argument = copytext(text, length(name) + 2, 0)
 	if (!argument)
 		. = list("[name]: Hardware Detected:")
-		for(var/obj/item/stock_parts/computer/ch in  terminal.computer.get_all_components())
+		for (var/obj/item/stock_parts/computer/ch in  terminal.computer.get_all_components())
 			. += ch.name
 		return
 	else

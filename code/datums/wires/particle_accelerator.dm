@@ -46,7 +46,7 @@ var/global/const/PARTICLE_LIMIT_POWER_WIRE = 8 // Determines how strong the PA c
 
 		if (PARTICLE_STRENGTH_WIRE)
 
-			for(var/i = 1; i < 3; i++)
+			for (var/i = 1; i < 3; i++)
 				C.remove_strength()
 
 		if (PARTICLE_INTERFACE_WIRE)

@@ -19,7 +19,7 @@
 
 	//Flavour text for robots.
 	pref.flavour_texts_robot["Default"] = R.read("flavour_texts_robot_Default")
-	for(var/module in SSrobots.all_module_names)
+	for (var/module in SSrobots.all_module_names)
 		pref.flavour_texts_robot[module] = R.read("flavour_texts_robot_[module]")
 
 /datum/category_item/player_setup_item/physical/flavor/save_character(datum/pref_record_writer/W)
@@ -34,7 +34,7 @@
 	W.write("flavor_texts_feet", pref.flavor_texts["feet"])
 
 	W.write("flavour_texts_robot_Default", pref.flavour_texts_robot["Default"])
-	for(var/module in SSrobots.all_module_names)
+	for (var/module in SSrobots.all_module_names)
 		W.write("flavour_texts_robot_[module]", pref.flavour_texts_robot[module])
 
 /datum/category_item/player_setup_item/physical/flavor/sanitize_character()
@@ -122,7 +122,7 @@
 	HTML += "<a href='?src=\ref[src];flavour_text_robot=Default'>Default:</a> "
 	HTML += TextPreview(pref.flavour_texts_robot["Default"])
 	HTML += "<hr />"
-	for(var/module in SSrobots.all_module_names)
+	for (var/module in SSrobots.all_module_names)
 		HTML += "<a href='?src=\ref[src];flavour_text_robot=[module]'>[module]:</a> "
 		HTML += TextPreview(pref.flavour_texts_robot[module])
 		HTML += "<br>"

@@ -42,7 +42,7 @@
 	var/atom/target
 	if (can_target() && extra_params)
 		extra_params = lowertext(extra_params)
-		for(var/atom/thing in view(user))
+		for (var/atom/thing in view(user))
 			if (extra_params == lowertext(thing.name))
 				target = thing
 				break

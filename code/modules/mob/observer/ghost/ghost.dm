@@ -81,7 +81,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	qdel(ghost_multitool)
 	ghost_multitool = null
 	if (hud_images)
-		for(var/image/I in hud_images)
+		for (var/image/I in hud_images)
 			show_hud_icon(I.icon_state, FALSE)
 		hud_images = null
 	return ..()
@@ -114,7 +114,7 @@ Works together with spawning an observer, noted above.
 
 	if (antagHUD)
 		var/list/target_list = list()
-		for(var/mob/living/target in oview(src, 14))
+		for (var/mob/living/target in oview(src, 14))
 			if (target.mind && target.mind.special_role)
 				target_list += target
 		if (length(target_list))
@@ -125,15 +125,15 @@ Works together with spawning an observer, noted above.
 
 /mob/observer/ghost/proc/process_medHUD(mob/M)
 	var/client/C = M.client
-	for(var/mob/living/carbon/human/patient in oview(M, 14))
+	for (var/mob/living/carbon/human/patient in oview(M, 14))
 		C.images += patient.hud_list[HEALTH_HUD]
 		C.images += patient.hud_list[STATUS_HUD_OOC]
 
 /mob/observer/ghost/proc/assess_targets(list/target_list, mob/observer/ghost/U)
 	var/client/C = U.client
-	for(var/mob/living/carbon/human/target in target_list)
+	for (var/mob/living/carbon/human/target in target_list)
 		C.images += target.hud_list[SPECIALROLE_HUD]
-	for(var/mob/living/silicon/target in target_list)
+	for (var/mob/living/silicon/target in target_list)
 		C.images += target.hud_list[SPECIALROLE_HUD]
 	return 1
 
@@ -378,7 +378,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/mob/living/simple_animal/passive/mouse/host
 	var/obj/machinery/atmospherics/unary/vent_pump/vent_found
 	var/list/found_vents = list()
-	for(var/obj/machinery/atmospherics/unary/vent_pump/v in SSmachines.machinery)
+	for (var/obj/machinery/atmospherics/unary/vent_pump/v in SSmachines.machinery)
 		if (!v.welded && v.z == T.z)
 			found_vents.Add(v)
 	if (length(found_vents))

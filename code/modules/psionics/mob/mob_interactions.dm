@@ -1,6 +1,6 @@
 #define INVOKE_PSI_POWERS(holder, powers, target, return_on_invocation) \
 	if (holder && holder.psi && holder.psi.can_use()) { \
-		for(var/thing in powers) { \
+		for (var/thing in powers) { \
 			var/singleton/psionic_power/power = thing; \
 			var/obj/item/result = power.invoke(holder, target); \
 			if (result) { \

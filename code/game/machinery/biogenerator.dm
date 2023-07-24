@@ -97,7 +97,7 @@
 	else if (istype(O, /obj/item/storage/plants))
 		var/obj/item/storage/plants/P = O
 		var/hadPlants = 0
-		for(var/obj/item/reagent_containers/food/snacks/grown/G in P.contents)
+		for (var/obj/item/reagent_containers/food/snacks/grown/G in P.contents)
 			hadPlants = 1
 			P.remove_from_storage(G, src, 1) //No UI updates until we are all done.
 			ingredients++
@@ -134,11 +134,11 @@
 	if (state == BG_READY)
 		data["points"] = points
 		var/list/listed_types = list()
-		for(var/c_type =1 to length(products))
+		for (var/c_type =1 to length(products))
 			type_name = products[c_type]
 			var/list/current_content = products[type_name]
 			var/list/listed_products = list()
-			for(var/c_product =1 to length(current_content))
+			for (var/c_product =1 to length(current_content))
 				path = current_content[c_product]
 				var/atom/A = path
 				name = initial(A.name)
@@ -193,7 +193,7 @@
 		return
 
 	var/S = 0
-	for(var/obj/item/reagent_containers/food/snacks/grown/I in contents)
+	for (var/obj/item/reagent_containers/food/snacks/grown/I in contents)
 		S += 5
 		ingredients--
 		if (I.reagents.get_reagent_amount(/datum/reagent/nutriment) < 0.1)

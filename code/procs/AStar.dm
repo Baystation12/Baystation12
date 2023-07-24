@@ -86,7 +86,7 @@ length to avoid portals or something i guess?? Not that they're counted right no
 		if (max_node_depth)
 			if (current.nodes_traversed >= max_node_depth)
 				continue
-		for(var/datum/datum in call(current.position, adjacent)(id))
+		for (var/datum/datum in call(current.position, adjacent)(id))
 			if (datum == exclude)
 				continue
 			var/best_estimated_cost = current.estimated_cost + call(current.position, dist)(datum)

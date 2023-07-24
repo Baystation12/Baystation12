@@ -43,7 +43,7 @@
 		hall_delay *= 2
 	next_hallucination = world.time + hall_delay
 	var/list/candidates = list()
-	for(var/T in subtypesof(/datum/hallucination))
+	for (var/T in subtypesof(/datum/hallucination))
 		var/datum/hallucination/H = new T
 		if (H.can_affect(src))
 			candidates += H
@@ -136,12 +136,12 @@
 /datum/hallucination/talking/can_affect(mob/living/carbon/C)
 	if (!..())
 		return 0
-	for(var/mob/living/M in oview(C))
+	for (var/mob/living/M in oview(C))
 		return TRUE
 
 /datum/hallucination/talking/start()
 	var/sanity = 5 //even insanity needs some sanity
-	for(var/mob/living/talker in oview(holder))
+	for (var/mob/living/talker in oview(holder))
 		if (talker.stat)
 			continue
 		var/message
@@ -201,10 +201,10 @@
 
 /datum/hallucination/mirage/start()
 	var/list/possible_points = list()
-	for(var/turf/simulated/floor/F in view(holder, world.view+1))
+	for (var/turf/simulated/floor/F in view(holder, world.view+1))
 		possible_points += F
 	if (length(possible_points))
-		for(var/i = 1 to number)
+		for (var/i = 1 to number)
 			var/image/thing = generate_mirage()
 			things += thing
 			thing.loc = pick(possible_points)
@@ -248,11 +248,11 @@
 /datum/hallucination/fakeattack/can_affect(mob/living/carbon/C)
 	if (!..())
 		return 0
-	for(var/mob/living/M in oview(C,1))
+	for (var/mob/living/M in oview(C,1))
 		return TRUE
 
 /datum/hallucination/fakeattack/start()
-	for(var/mob/living/M in oview(holder,1))
+	for (var/mob/living/M in oview(holder,1))
 		to_chat(holder, SPAN_CLASS("danger", "[M] has punched [holder]!"))
 		holder.playsound_local(get_turf(holder),"punch",50)
 

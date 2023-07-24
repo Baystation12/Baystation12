@@ -59,7 +59,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		signal.data["slow"] = netlag
 	*/
 // Loop through all linked machines and send the signal or copy.
-	for(var/obj/machinery/telecomms/machine in links)
+	for (var/obj/machinery/telecomms/machine in links)
 		if (filter && !istype( machine, filter ))
 			continue
 		if (!machine.on)
@@ -133,17 +133,17 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	if (length(autolinkers))
 		// Links nearby machines
 		if (!long_range_link)
-			for(var/obj/machinery/telecomms/T in orange(20, src))
+			for (var/obj/machinery/telecomms/T in orange(20, src))
 				add_link(T)
 		else
-			for(var/obj/machinery/telecomms/T in telecomms_list)
+			for (var/obj/machinery/telecomms/T in telecomms_list)
 				add_link(T)
 	. = ..()
 	update_power()
 
 /obj/machinery/telecomms/Destroy()
 	telecomms_list -= src
-	for(var/obj/machinery/telecomms/comm in telecomms_list)
+	for (var/obj/machinery/telecomms/comm in telecomms_list)
 		comm.links -= src
 	links = list()
 	..()
@@ -153,7 +153,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/turf/position = get_turf(src)
 	var/turf/T_position = get_turf(T)
 	if ((position.z == T_position.z) || (src.long_range_link && T.long_range_link))
-		for(var/x in autolinkers)
+		for (var/x in autolinkers)
 			if (T.autolinkers.Find(x))
 				if (src != T)
 					links |= T
@@ -386,7 +386,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		// Try sending it!
 		var/list/try_send = list(/obj/machinery/telecomms/server, /obj/machinery/telecomms/hub, /obj/machinery/telecomms/broadcaster, /obj/machinery/telecomms/bus)
 		var/i = 0
-		for(var/send in try_send)
+		for (var/send in try_send)
 			if (i)
 				signal.data["slow"] += rand(0, 1) // slow the signal down only slightly
 			i++
@@ -557,7 +557,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 /obj/machinery/telecomms/server/proc/update_logs()
 	// start deleting the very first log entry
 	if (logs >= 400)
-		for(var/i = 1, i <= logs, i++) // locate the first garbage collectable log entry and remove it
+		for (var/i = 1, i <= logs, i++) // locate the first garbage collectable log entry and remove it
 			var/datum/comm_log_entry/L = log_entries[i]
 			if (L.garbage_collector)
 				log_entries.Remove(L)
@@ -574,7 +574,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	update_logs()
 
 /obj/machinery/telecomms/server/proc/get_channel_info(freq)
-	for(var/list/rule in channel_tags)
+	for (var/list/rule in channel_tags)
 		if (rule[1] == freq)
 			return list(rule[2], rule[3])
 	return list(format_frequency(freq), channel_color_presets["Global Green"])

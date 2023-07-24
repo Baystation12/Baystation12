@@ -5,7 +5,7 @@
 	/*
 	// Limit signatures to official crew members
 	var/personnel_list[] = list()
-	for(var/datum/data/record/t in data_core.locked) //Look in data core locked.
+	for (var/datum/data/record/t in data_core.locked) //Look in data core locked.
 		personnel_list.Add(t.fields["name"])
 	personnel_list.Add("Anonymous")
 

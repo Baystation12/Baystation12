@@ -46,8 +46,8 @@
 		coordinate_B = null
 
 /datum/build_mode/room_builder/proc/make_room(low_bound_x, low_bound_y, high_bound_x, high_bound_y, z_level, turf/wall_type, turf/floor_type, only_walls, only_floors)
-	for(var/i = low_bound_x, i <= high_bound_x, i++)
-		for(var/j = low_bound_y, j <= high_bound_y, j++)
+	for (var/i = low_bound_x, i <= high_bound_x, i++)
+		for (var/j = low_bound_y, j <= high_bound_y, j++)
 			var/turf/T = locate(i, j, z_level)
 			if (!only_floors && (i == low_bound_x || i == high_bound_x || j == low_bound_y || j == high_bound_y))
 				if (ispath(wall_type, /turf))

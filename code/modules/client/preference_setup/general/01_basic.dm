@@ -57,7 +57,7 @@
 
 	else if (href_list["spawnpoint"])
 		var/list/spawnkeys = list()
-		for(var/spawntype in spawntypes())
+		for (var/spawntype in spawntypes())
 			spawnkeys += spawntype
 		var/choice = input(user, "Where would you like to spawn when late-joining?") as null|anything in spawnkeys
 		if (!choice || !spawntypes()[choice] || !CanUseTopic(user))	return TOPIC_NOACTION

@@ -57,6 +57,6 @@ var/global/repository/client/client_repository = new()
 
 /proc/client_by_ckey(ckey)
 	RETURN_TYPE(/client)
-	for(var/client/C)
+	for (var/client/C)
 		if (C.ckey == ckey)
 			return C

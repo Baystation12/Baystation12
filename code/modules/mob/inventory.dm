@@ -95,7 +95,7 @@
 			return backpack
 
 	// Try to place it in any item that can store stuff, on the mob.
-	for(var/obj/item/storage/S in src.contents)
+	for (var/obj/item/storage/S in src.contents)
 		if (S.can_be_inserted(newitem, src, 1))
 			newitem.forceMove(S)
 			return S
@@ -299,7 +299,7 @@
 
 /mob/proc/get_inventory_slot(obj/item/I)
 	var/slot = 0
-	for(var/s in slot_first to slot_last) //kind of worries me
+	for (var/s in slot_first to slot_last) //kind of worries me
 		if (get_equipped_item(s) == I)
 			slot = s
 			break
@@ -356,20 +356,20 @@
 		if (r_hand) . += r_hand
 
 /mob/proc/delete_inventory(include_carried = FALSE)
-	for(var/entry in get_equipped_items(include_carried))
+	for (var/entry in get_equipped_items(include_carried))
 		drop_from_inventory(entry)
 		qdel(entry)
 
 // Returns all currently covered body parts
 /mob/proc/get_covered_body_parts()
 	. = 0
-	for(var/entry in get_equipped_items())
+	for (var/entry in get_equipped_items())
 		var/obj/item/I = entry
 		. |= I.body_parts_covered
 
 // Returns the first item which covers any given body part
 /mob/proc/get_covering_equipped_item(body_parts)
-	for(var/entry in get_equipped_items())
+	for (var/entry in get_equipped_items())
 		var/obj/item/I = entry
 		if (I.body_parts_covered & body_parts)
 			return I
@@ -377,7 +377,7 @@
 // Returns all items which covers any given body part
 /mob/proc/get_covering_equipped_items(body_parts)
 	. = list()
-	for(var/entry in get_equipped_items())
+	for (var/entry in get_equipped_items())
 		var/obj/item/I = entry
 		if (I.body_parts_covered & body_parts)
 			. += I

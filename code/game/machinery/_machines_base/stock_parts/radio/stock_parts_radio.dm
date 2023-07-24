@@ -30,7 +30,7 @@
 	. = ..()
 
 /obj/item/stock_parts/radio/proc/sanitize_events(obj/machinery/machine, list/events)
-	for(var/thing in events)
+	for (var/thing in events)
 		if (!is_valid_event(machine, events[thing]))
 			LAZYREMOVE(events, thing)
 

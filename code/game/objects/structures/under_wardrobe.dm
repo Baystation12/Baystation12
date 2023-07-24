@@ -58,7 +58,7 @@
 	dat += "<b>Underwear</b><br><hr>"
 	dat += "You may claim [id ? length(GLOB.underwear.categories) - LAZYACCESS(amount_of_underwear_by_id_card, id) : 0] more article\s this shift.<br><br>"
 	dat += "<b>Available Categories</b><br><hr>"
-	for(var/datum/category_group/underwear/UWC in GLOB.underwear.categories)
+	for (var/datum/category_group/underwear/UWC in GLOB.underwear.categories)
 		dat += "[UWC.name] <a href='?src=\ref[src];select_underwear=[UWC.name]'>(Select)</a><br>"
 	dat = jointext(dat,null)
 	show_browser(H, dat, "window=wardrobe;size=400x250")
@@ -88,7 +88,7 @@
 			return
 
 		var/list/metadata_list = list()
-		for(var/tweak in UWI.tweaks)
+		for (var/tweak in UWI.tweaks)
 			var/datum/gear_tweak/gt = tweak
 			var/metadata = gt.get_metadata(H, title = "Adjust underwear")
 			if (!metadata)
@@ -120,7 +120,7 @@
 
 /obj/structure/undies_wardrobe/proc/exlude_none(list/L)
 	. = L.Copy()
-	for(var/e in .)
+	for (var/e in .)
 		var/datum/category_item/underwear/UWI = e
 		if (!UWI.underwear_type)
 			. -= UWI

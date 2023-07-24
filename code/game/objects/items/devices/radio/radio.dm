@@ -142,7 +142,7 @@
 /obj/item/device/radio/proc/list_secure_channels(mob/user)
 	var/dat[0]
 
-	for(var/ch_name in channels)
+	for (var/ch_name in channels)
 		var/chan_stat = channels[ch_name]
 		var/listening = !!(chan_stat & FREQ_LISTENING) != 0
 
@@ -152,7 +152,7 @@
 
 /obj/item/device/radio/proc/list_internal_channels(mob/user)
 	var/dat[0]
-	for(var/internal_chan in internal_channels)
+	for (var/internal_chan in internal_channels)
 		if (has_channel_access(user, internal_chan))
 			dat.Add(list(list("chan" = internal_chan, "display_name" = get_frequency_default_name(text2num(internal_chan)), "chan_span" = frequency_span_class(text2num(internal_chan)))))
 
@@ -455,11 +455,11 @@
 
 	  //#### Sending the signal to all subspace receivers ####//
 
-		for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
+		for (var/obj/machinery/telecomms/receiver/R in telecomms_list)
 			R.receive_signal(signal)
 
 		// Allinone can act as receivers.
-		for(var/obj/machinery/telecomms/allinone/R in telecomms_list)
+		for (var/obj/machinery/telecomms/allinone/R in telecomms_list)
 			R.receive_signal(signal)
 
 		// Receiving code can be located in Telecommunications.dm
@@ -467,7 +467,7 @@
 			return TRUE //Huzzah, sent via subspace
 
 		else //Less huzzah, we have to fallback
-			for(var/obj/item/device/radio/R in loc)
+			for (var/obj/item/device/radio/R in loc)
 				if (!R.subspace_transmission)
 					return R.talk_into(M, message, channel, verb, speaking)
 			return FALSE
@@ -518,7 +518,7 @@
 	var/obj/item/cell/has_cell = get_cell()
 	if (has_cell && has_cell.percent() < 20)
 		signal.data["compression"] = max(0, 80 - has_cell.percent()*3)
-	for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
+	for (var/obj/machinery/telecomms/receiver/R in telecomms_list)
 		R.receive_signal(signal)
 
 	sleep(rand(10,25)) // wait a little...
@@ -739,13 +739,13 @@
 
 	var/mob/living/silicon/robot/D = src.loc
 	if (istype(D.module))
-		for(var/ch_name in D.module.channels)
+		for (var/ch_name in D.module.channels)
 			if (ch_name in src.channels)
 				continue
 			src.channels += ch_name
 			src.channels[ch_name] += D.module.channels[ch_name]
 	if (keyslot)
-		for(var/ch_name in keyslot.channels)
+		for (var/ch_name in keyslot.channels)
 			if (ch_name in src.channels)
 				continue
 			src.channels += ch_name

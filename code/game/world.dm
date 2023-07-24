@@ -21,12 +21,12 @@ GLOBAL_VAR(href_logfile)
 /proc/text_find_mobs(search_string, restrict_type = null)
 	var/list/search = params2list(search_string)
 	var/list/ckeysearch = list()
-	for(var/text in search)
+	for (var/text in search)
 		ckeysearch += ckey(text)
 
 	var/list/match = list()
 
-	for(var/mob/M in SSmobs.mob_list)
+	for (var/mob/M in SSmobs.mob_list)
 		if (restrict_type && !istype(M, restrict_type))
 			continue
 		var/strings = list(M.name, M.ckey)
@@ -37,18 +37,18 @@ GLOBAL_VAR(href_logfile)
 			var/mob/living/carbon/human/H = M
 			if (H.species)
 				strings += H.species.name
-		for(var/text in strings)
+		for (var/text in strings)
 			if (ckey(text) in ckeysearch)
 				match[M] += 10 // an exact match is far better than a partial one
 			else
-				for(var/searchstr in search)
+				for (var/searchstr in search)
 					if (findtext(text, searchstr))
 						match[M] += 1
 
 	var/maxstrength = 0
-	for(var/mob/M in match)
+	for (var/mob/M in match)
 		maxstrength = max(match[M], maxstrength)
-	for(var/mob/M in match)
+	for (var/mob/M in match)
 		if (match[M] < maxstrength)
 			match -= M
 
@@ -146,7 +146,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 
 	else if (T == "players")
 		var/n = 0
-		for(var/mob/M in GLOB.player_list)
+		for (var/mob/M in GLOB.player_list)
 			if (M.client)
 				n++
 		return n
@@ -172,7 +172,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		var/list/players = list()
 		var/list/admins = list()
 		var/legacy = input["status"] != "2"
-		for(var/client/C in GLOB.clients)
+		for (var/client/C in GLOB.clients)
 			if (C.holder)
 				if (C.is_stealthed())
 					continue	//so stealthmins aren't revealed by the hub
@@ -196,14 +196,14 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		var/list/positions = list()
 		var/list/nano_crew_manifest = nano_crew_manifest()
 		// We rebuild the list in the format external tools expect
-		for(var/dept in nano_crew_manifest)
+		for (var/dept in nano_crew_manifest)
 			var/list/dept_list = nano_crew_manifest[dept]
 			if (length(dept_list) > 0)
 				positions[dept] = list()
-				for(var/list/person in dept_list)
+				for (var/list/person in dept_list)
 					positions[dept][person["name"]] = person["rank"]
 
-		for(var/k in positions)
+		for (var/k in positions)
 			positions[k] = list2params(positions[k]) // converts positions["heads"] = list("Bob"="Captain", "Bill"="CMO") into positions["heads"] = "Bob=Captain&Bill=CMO"
 
 		return list2params(positions)
@@ -242,7 +242,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		var/target = ckey(input["target"])
 
 		var/client/C
-		for(var/client/K in GLOB.clients)
+		for (var/client/K in GLOB.clients)
 			if (K.ckey == target)
 				C = K
 				break
@@ -297,9 +297,9 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 				"supplied" = S.laws.supplied_laws
 			)
 
-			for(var/law_type in lawset_parts)
+			for (var/law_type in lawset_parts)
 				var/laws = list()
-				for(var/datum/ai_law/L in lawset_parts[law_type])
+				for (var/datum/ai_law/L in lawset_parts[law_type])
 					laws += L.law
 				info[law_type] = list2params(laws)
 
@@ -309,7 +309,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 
 		else
 			var/list/ret = list()
-			for(var/mob/M in match)
+			for (var/mob/M in match)
 				ret[M.key] = M.name
 			return list2params(ret)
 
@@ -359,7 +359,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 			return list2params(info)
 		else
 			var/list/ret = list()
-			for(var/mob/M in match)
+			for (var/mob/M in match)
 				ret[M.key] = M.name
 			return list2params(ret)
 
@@ -382,7 +382,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		var/client/C
 		var/req_ckey = ckey(input["adminmsg"])
 
-		for(var/client/K in GLOB.clients)
+		for (var/client/K in GLOB.clients)
 			if (K.ckey == req_ckey)
 				C = K
 				break
@@ -404,7 +404,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		sound_to(C, sound('sound/ui/pm-notify.ogg', volume = 40))
 		to_chat(C, message)
 
-		for(var/client/A as anything in GLOB.admins)
+		for (var/client/A as anything in GLOB.admins)
 			if (A != C)
 				to_chat(A, amessage)
 		return "Message Successful"
@@ -446,12 +446,12 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	Master.Shutdown()
 
 	var/datum/chatOutput/co
-	for(var/client/C in GLOB.clients)
+	for (var/client/C in GLOB.clients)
 		co = C.chatOutput
 		if (co)
 			co.ehjax_send(data = "roundrestart")
 	if (config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
-		for(var/client/C in GLOB.clients)
+		for (var/client/C in GLOB.clients)
 			send_link(C, "byond://[config.server]")
 
 	if (config.wait_for_sigusr1_reboot && reason != 3)

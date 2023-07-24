@@ -20,7 +20,7 @@
 /datum/uplink_random_selection/proc/get_random_item(telecrystals, obj/item/device/uplink/U, list/bought_items)
 	var/const/attempts = 50
 
-	for(var/i = 0; i < attempts; i++)
+	for (var/i = 0; i < attempts; i++)
 		var/datum/uplink_random_item/RI = pick(items)
 		if (!prob(RI.keep_probability))
 			continue
@@ -38,7 +38,7 @@ var/global/list/uplink_random_selections_
 /proc/get_uplink_random_selection_by_type(uplist_selection_type)
 	if (!uplink_random_selections_)
 		uplink_random_selections_ = init_subtypes(/datum/uplink_random_selection)
-		for(var/datum/entry in uplink_random_selections_)
+		for (var/datum/entry in uplink_random_selections_)
 			uplink_random_selections_[entry.type] = entry
 	return uplink_random_selections_[uplist_selection_type]
 
@@ -106,7 +106,7 @@ var/global/list/uplink_random_selections_
 
 /datum/uplink_random_selection/blacklist/New()
 	..()
-	for(var/uplink_item_type in subtypesof(/datum/uplink_item/item))
+	for (var/uplink_item_type in subtypesof(/datum/uplink_item/item))
 		var/datum/uplink_item/item/ui = uplink_item_type
 		if (!initial(ui.name))
 			continue
@@ -117,7 +117,7 @@ var/global/list/uplink_random_selections_
 
 /datum/uplink_random_selection/blacklist/get_random_item(telecrystals, obj/item/device/uplink/U, list/bought_items)
 	var/const/attempts = 50
-	for(var/i = 0; i < attempts; i++)
+	for (var/i = 0; i < attempts; i++)
 		var/datum/uplink_random_item/RI = pick(items)
 		if (!prob(RI.keep_probability))
 			continue
@@ -131,12 +131,12 @@ var/global/list/uplink_random_selections_
 
 #ifdef DEBUG
 /proc/debug_uplink_purchage_log()
-	for(var/antag_type in GLOB.all_antag_types_)
+	for (var/antag_type in GLOB.all_antag_types_)
 		var/datum/antagonist/A = GLOB.all_antag_types_[antag_type]
 		A.print_player_summary()
 
 /proc/debug_uplink_item_assoc_list()
-	for(var/key in uplink.items_assoc)
+	for (var/key in uplink.items_assoc)
 		log_debug("[key] - [uplink.items_assoc[key]]")
 
 #endif

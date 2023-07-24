@@ -295,7 +295,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 		S = sound(file=pick('sound/ambience/seag1.ogg','sound/ambience/seag2.ogg','sound/ambience/seag3.ogg'), volume=100)
 		sound_delay = rand(0, 50)
 
-	for(var/mob/living/carbon/human/H in src)
+	for (var/mob/living/carbon/human/H in src)
 		if (H.client)
 			mysound.status = SOUND_UPDATE
 			if (S)

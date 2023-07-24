@@ -1,6 +1,6 @@
 /proc/count_drones()
 	var/drones = 0
-	for(var/mob/living/silicon/robot/drone/D in world)
+	for (var/mob/living/silicon/robot/drone/D in world)
 		if (D.key && D.client)
 			drones++
 	return drones
@@ -118,7 +118,7 @@
 	if (!fabricator)
 
 		var/list/all_fabricators = list()
-		for(var/obj/machinery/drone_fabricator/DF in SSmachines.machinery)
+		for (var/obj/machinery/drone_fabricator/DF in SSmachines.machinery)
 			if (!DF.is_powered() || !DF.produce_drones || DF.drone_progress < 100)
 				continue
 			all_fabricators[DF.fabricator_tag] = DF

@@ -128,7 +128,7 @@
 	var/turf/turf = get_turf(src)
 	if (!turf)
 		return
-	for(var/obj/item/stack/material/held as anything in contents)
+	for (var/obj/item/stack/material/held as anything in contents)
 		held.forceMove(turf)
 	cur_sheets = 0
 	update_icon()

@@ -83,7 +83,7 @@
 		return
 	if (!check_functionality())
 		return
-	for(var/datum/computer_file/F in stored_files)
+	for (var/datum/computer_file/F in stored_files)
 		if (F.filename == filename)
 			return F
 
@@ -207,7 +207,7 @@
 /// Loops through all stored files and recalculates used_capacity of this drive
 /obj/item/stock_parts/computer/hard_drive/proc/recalculate_size()
 	var/total_size = 0
-	for(var/datum/computer_file/F in stored_files)
+	for (var/datum/computer_file/F in stored_files)
 		total_size += F.size
 	used_capacity = total_size
 
@@ -234,7 +234,7 @@
 /// Validates filename
 /obj/item/stock_parts/computer/hard_drive/proc/validate_name(filename)
 	var/list/badchars = list("/","\\",":","*","?","\"","<",">","|","#",".",","," ")
-	for(var/char in badchars)
+	for (var/char in badchars)
 		if (findtext(filename, char))
 			return FALSE
 	return TRUE

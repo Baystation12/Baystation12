@@ -23,7 +23,7 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 		if (map.loaded && map.player_cost)
 			player_budget -= map.player_cost
 
-	for(var/datum/map_template/ruin/ruin in potentialRuins)
+	for (var/datum/map_template/ruin/ruin in potentialRuins)
 		if (ruin.id in GLOB.banned_ruin_ids)
 			continue
 		available[ruin] = ruin.spawn_weight
@@ -81,9 +81,9 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 /proc/load_ruin(turf/central_turf, datum/map_template/template)
 	if (!template)
 		return FALSE
-	for(var/i in template.get_affected_turfs(central_turf, 1))
+	for (var/i in template.get_affected_turfs(central_turf, 1))
 		var/turf/T = i
-		for(var/mob/living/simple_animal/monster in T)
+		for (var/mob/living/simple_animal/monster in T)
 			qdel(monster)
 	template.load(central_turf,centered = TRUE)
 	var/datum/map_template/ruin = template

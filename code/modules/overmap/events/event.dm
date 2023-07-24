@@ -14,7 +14,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	var/list/candidate_turfs = block(locate(OVERMAP_EDGE, OVERMAP_EDGE, z_level),locate(overmap_size - OVERMAP_EDGE, overmap_size - OVERMAP_EDGE,z_level))
 	candidate_turfs = where(candidate_turfs, /proc/can_not_locate, /obj/effect/overmap/visitable)
 
-	for(var/i = 1 to number_of_events)
+	for (var/i = 1 to number_of_events)
 		if (!length(candidate_turfs))
 			break
 		var/overmap_event_type = pick(subtypesof(/datum/overmap_event))
@@ -23,7 +23,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 		var/list/event_turfs = acquire_event_turfs(datum_spawn.count, datum_spawn.radius, candidate_turfs, datum_spawn.continuous)
 		candidate_turfs -= event_turfs
 
-		for(var/event_turf in event_turfs)
+		for (var/event_turf in event_turfs)
 			var/type = pick(datum_spawn.hazards)
 			new type(event_turf)
 
@@ -59,7 +59,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	else
 		fitting_turfs = trange(range, origin_turf)
 	fitting_turfs = shuffle(fitting_turfs)
-	for(var/turf/T in fitting_turfs)
+	for (var/turf/T in fitting_turfs)
 		if (T in candidate_turfs)
 			return T
 
@@ -67,7 +67,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	if (!(ship in ship_events))
 		ship_events += ship
 
-	for(var/event_type in hazard.events)
+	for (var/event_type in hazard.events)
 		if (is_event_active(ship,event_type, hazard.difficulty))//event's already active, don't bother
 			continue
 		var/datum/event_meta/EM = new(hazard.difficulty, "Overmap event - [hazard.name]", event_type, add_to_queue = FALSE, is_one_shot = TRUE)
@@ -80,7 +80,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 		LAZYADD(ship_events[ship], E)
 
 /singleton/overmap_event_handler/proc/stop_hazard(obj/effect/overmap/visitable/ship/ship, obj/effect/overmap/event/hazard)
-	for(var/event_type in hazard.events)
+	for (var/event_type in hazard.events)
 		var/datum/event/E = is_event_active(ship,event_type,hazard.difficulty)
 		if (E)
 			E.kill()
@@ -88,7 +88,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 
 /singleton/overmap_event_handler/proc/is_event_active(ship, event_type, severity)
 	if (!ship_events[ship])	return
-	for(var/datum/event/E in ship_events[ship])
+	for (var/datum/event/E in ship_events[ship])
 		if (E.type == event_type && E.severity == severity)
 			return E
 
@@ -98,7 +98,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	if (new_loc == old_loc)
 		return
 
-	for(var/obj/effect/overmap/event/E in hazard_by_turf[new_loc])
+	for (var/obj/effect/overmap/event/E in hazard_by_turf[new_loc])
 		start_hazard(ship, E)
 
 /singleton/overmap_event_handler/proc/on_turf_exited(turf/old_loc, obj/effect/overmap/visitable/ship/ship, new_loc)
@@ -107,7 +107,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	if (new_loc == old_loc)
 		return
 
-	for(var/obj/effect/overmap/event/E in hazard_by_turf[old_loc])
+	for (var/obj/effect/overmap/event/E in hazard_by_turf[old_loc])
 		if (is_event_included(hazard_by_turf[new_loc],E))
 			continue
 		stop_hazard(ship,E)
@@ -117,7 +117,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 		return
 
 	var/list/active_hazards = list()
-	for(var/obj/effect/overmap/event/E in T)
+	for (var/obj/effect/overmap/event/E in T)
 		if (is_event_included(active_hazards, E, TRUE))
 			continue
 		active_hazards += E
@@ -132,23 +132,23 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 		GLOB.entered_event.register(T, src,/singleton/overmap_event_handler/proc/on_turf_entered)
 		GLOB.exited_event.register(T, src, /singleton/overmap_event_handler/proc/on_turf_exited)
 
-	for(var/obj/effect/overmap/visitable/ship/ship in T)
-		for(var/datum/event/E in ship_events[ship])
+	for (var/obj/effect/overmap/visitable/ship/ship in T)
+		for (var/datum/event/E in ship_events[ship])
 			if (is_event_in_turf(E,T))
 				continue
 			E.kill()
 			LAZYREMOVE(ship_events[ship], E)
 
-		for(var/obj/effect/overmap/event/E in active_hazards)
+		for (var/obj/effect/overmap/event/E in active_hazards)
 			start_hazard(ship,E)
 
 /singleton/overmap_event_handler/proc/is_event_in_turf(datum/event/E, turf/T)
-	for(var/obj/effect/overmap/event/hazard in hazard_by_turf[T])
+	for (var/obj/effect/overmap/event/hazard in hazard_by_turf[T])
 		if (E in hazard.events && E.severity == hazard.difficulty)
 			return TRUE
 
 /singleton/overmap_event_handler/proc/is_event_included(list/hazards, obj/effect/overmap/event/E, equal_or_better)//this proc is only used so it can break out of 2 loops cleanly
-	for(var/obj/effect/overmap/event/A in hazards)
+	for (var/obj/effect/overmap/event/A in hazards)
 		if (istype(A,E.type) || istype(E,A.type))
 			if (same_entries(A.events, E.events))
 				if (equal_or_better)

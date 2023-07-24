@@ -110,7 +110,7 @@
 
 	var/sound_played
 
-	for(var/mob/living/L in T)
+	for (var/mob/living/L in T)
 		if (L.stat == DEAD)
 			continue
 		if (!sound_played)
@@ -161,7 +161,7 @@
 /obj/effect/blob/proc/attempt_attack(list/dirs)
 	var/attackDir = pick(dirs)
 	var/turf/T = get_step(src, attackDir)
-	for(var/mob/living/victim in T)
+	for (var/mob/living/victim in T)
 		if (victim.stat == DEAD)
 			continue
 		attack_living(victim)
@@ -322,7 +322,7 @@ regen() will cover update_icon() for this proc
 	sleep(0)
 	process_core_health()
 	regen()
-	for(var/I in 1 to times_to_pulse)
+	for (var/I in 1 to times_to_pulse)
 		pulse(20, GLOB.alldirs)
 	attempt_attack(GLOB.alldirs)
 	attempt_attack(GLOB.alldirs)

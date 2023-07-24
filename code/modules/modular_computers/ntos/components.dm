@@ -3,11 +3,11 @@
 
 /datum/extension/interactive/ntos/proc/get_all_components()
 	. = list()
-	for(var/obj/item/stock_parts/P in holder)
+	for (var/obj/item/stock_parts/P in holder)
 		. += P
 
 /datum/extension/interactive/ntos/proc/find_hardware_by_name(partname)
-	for(var/obj/item/stock_parts/P in holder)
+	for (var/obj/item/stock_parts/P in holder)
 		if (findtext(P.name, partname))
 			return P
 

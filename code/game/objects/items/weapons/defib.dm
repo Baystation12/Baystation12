@@ -277,7 +277,7 @@
 
 /obj/item/shockpaddles/proc/check_contact(mob/living/carbon/human/H)
 	if (!combat)
-		for(var/obj/item/clothing/cloth in list(H.wear_suit, H.w_uniform))
+		for (var/obj/item/clothing/cloth in list(H.wear_suit, H.w_uniform))
 			if ((cloth.body_parts_covered & UPPER_TORSO) && (cloth.item_flags & ITEM_FLAG_THICKMATERIAL))
 				return FALSE
 	return TRUE

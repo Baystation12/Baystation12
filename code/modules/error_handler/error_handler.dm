@@ -82,7 +82,7 @@ GLOBAL_VAR_INIT(actual_error_file_line, new/regex("^%% (.*?),(.*?) %% "))
 	var/list/splitlines = splittext(E.desc, "\n")
 	var/list/desclines = list()
 	if (LAZYLEN(splitlines) > ERROR_USEFUL_LEN) // If there aren't at least three lines, there's no info
-		for(var/line in splitlines)
+		for (var/line in splitlines)
 			if (LAZYLEN(line) < 3 || findtext(line, "source file:") || findtext(line, "usr.loc:"))
 				continue
 			if (findtext(line, "usr:"))
@@ -103,7 +103,7 @@ GLOBAL_VAR_INIT(actual_error_file_line, new/regex("^%% (.*?),(.*?) %% "))
 		GLOB.error_cache.log_error(E, desclines, actual_file = efile, actual_line = eline)
 
 	to_world_log("\[[time_stamp()]] Runtime in [erroruid]: [E]")
-	for(var/line in desclines)
+	for (var/line in desclines)
 		to_world_log(line)
 
 #endif

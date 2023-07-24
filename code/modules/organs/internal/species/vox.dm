@@ -90,7 +90,7 @@
 
 		// Handle some post-metabolism reagent processing for generally inedible foods.
 		if (ingested.total_volume > 0)
-			for(var/datum/reagent/R in ingested.reagent_list)
+			for (var/datum/reagent/R in ingested.reagent_list)
 				var/inedible_nutriment_amount = gains_nutriment_from_inedible_reagents[R.type]
 				if (inedible_nutriment_amount > 0)
 					owner.adjust_nutrition(inedible_nutriment_amount)
@@ -98,8 +98,8 @@
 		// Do we have any objects to digest?
 		var/list/check_materials
 		var/updated_stacks
-		for(var/obj/item/food in contents)
-			for(var/mat in food.matter)
+		for (var/obj/item/food in contents)
+			for (var/mat in food.matter)
 				if (!can_digest_matter[mat] && !can_process_matter[mat])
 					continue
 
@@ -121,7 +121,7 @@
 					stored_matter[mat] += digested
 
 		// Convert stored matter into sheets.
-		for(var/mat in check_materials)
+		for (var/mat in check_materials)
 			var/material/M = SSmaterials.get_material_by_name(mat)
 			if (M && M.stack_type && stored_matter[mat] >= M.units_per_sheet)
 
@@ -132,7 +132,7 @@
 					stored_matter -= mat
 
 				// Merge them into other stacks.
-				for(var/obj/item/stack/material/mat_stack in contents)
+				for (var/obj/item/stack/material/mat_stack in contents)
 					if (mat_stack.material == M && mat_stack.amount < mat_stack.max_amount)
 						var/taking_sheets = min(sheets, mat_stack.max_amount - mat_stack.amount)
 						mat_stack.set_amount(mat_stack.amount + taking_sheets)
@@ -229,7 +229,7 @@
 	var/obj/item/organ/external/head = owner.get_organ(parent_organ)
 	owner.visible_message(SPAN_DANGER("\The [src] rips gaping holes in \the [owner]'s [head.name] as it is torn loose!"))
 	head.take_external_damage(rand(15,20))
-	for(var/obj/item/organ/internal/O in head.contents)
+	for (var/obj/item/organ/internal/O in head.contents)
 		O.take_internal_damage(rand(30,70))
 	do_backup()
 	..()

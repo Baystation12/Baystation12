@@ -54,7 +54,7 @@
 	var/T = 0
 	var/obj/item/stock_parts/building_material/mat = get_component_of_type(/obj/item/stock_parts/building_material)
 	if (mat)
-		for(var/obj/item/reagent_containers/glass/G in mat.materials)
+		for (var/obj/item/reagent_containers/glass/G in mat.materials)
 			T += G.volume
 		if (!reagents)
 			create_reagents(T)
@@ -146,28 +146,28 @@
 	queue.Cut(index, index + 1)
 
 /obj/machinery/r_n_d/protolathe/proc/canBuild(datum/design/D)
-	for(var/M in D.materials)
+	for (var/M in D.materials)
 		if (materials[M] < D.materials[M] * mat_efficiency)
 			return 0
-	for(var/C in D.chemicals)
+	for (var/C in D.chemicals)
 		if (!reagents.has_reagent(C, D.chemicals[C] * mat_efficiency))
 			return 0
 	return 1
 
 /obj/machinery/r_n_d/protolathe/proc/build(datum/design/D)
 	var/power = active_power_usage
-	for(var/M in D.materials)
+	for (var/M in D.materials)
 		power += round(D.materials[M] / 5)
 	power = max(active_power_usage, power)
 	use_power_oneoff(power)
-	for(var/M in D.materials)
+	for (var/M in D.materials)
 		materials[M] = max(0, materials[M] - D.materials[M] * mat_efficiency)
-	for(var/C in D.chemicals)
+	for (var/C in D.chemicals)
 		reagents.remove_reagent(C, D.chemicals[C] * mat_efficiency)
 
 	if (D.build_path)
 		var/obj/new_item = D.Fabricate(loc, src)
 		if (mat_efficiency != 1) // No matter out of nowhere
 			if (new_item.matter && length(new_item.matter) > 0)
-				for(var/i in new_item.matter)
+				for (var/i in new_item.matter)
 					new_item.matter[i] = new_item.matter[i] * mat_efficiency

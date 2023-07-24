@@ -47,16 +47,16 @@
 	ert_outfit.equip(player)
 
 	if (player.char_rank && player.char_rank.accessory)
-		for(var/accessory_path in player.char_rank.accessory)
+		for (var/accessory_path in player.char_rank.accessory)
 			var/list/accessory_data = player.char_rank.accessory[accessory_path]
 			if (islist(accessory_data))
 				var/amt = accessory_data[1]
 				var/list/accessory_args = accessory_data.Copy()
 				accessory_args[1] = src
-				for(var/i in 1 to amt)
+				for (var/i in 1 to amt)
 					player.equip_to_slot_or_del(new accessory_path(arglist(accessory_args)), slot_tie)
 			else
-				for(var/i in 1 to (isnull(accessory_data)? 1 : accessory_data))
+				for (var/i in 1 to (isnull(accessory_data)? 1 : accessory_data))
 					player.equip_to_slot_or_del(new accessory_path(src), slot_tie)
 
 	return 1

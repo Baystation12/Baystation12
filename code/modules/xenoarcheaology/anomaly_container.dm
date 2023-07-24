@@ -135,7 +135,7 @@
 	return
 /obj/machinery/anomaly_container/on_death()
 	visible_message(SPAN_DANGER("\The [src]'s glass cracks and shatters, exploding in a shower of shards!"))
-	for(var/i = 1 to rand(2,4))
+	for (var/i = 1 to rand(2,4))
 		new /obj/item/material/shard(get_turf(src), MATERIAL_BORON_GLASS)
 	playsound(loc, 'sound/effects/Glassbr1.ogg', 60)
 	if (!contained)

@@ -69,7 +69,7 @@
 
 /obj/item/gun/projectile/dartgun/Initialize()
 	if (starting_chems)
-		for(var/chem in starting_chems)
+		for (var/chem in starting_chems)
 			var/obj/B = new container_type(src)
 			B.reagents.add_reagent(chem, 60)
 			beakers += B
@@ -99,9 +99,9 @@
 	. = ..()
 	if (length(beakers))
 		to_chat(user, SPAN_NOTICE("\The [src] contains:"))
-		for(var/obj/item/reagent_containers/glass/beaker/B in beakers)
+		for (var/obj/item/reagent_containers/glass/beaker/B in beakers)
 			if (B.reagents && length(B.reagents.reagent_list))
-				for(var/datum/reagent/R in B.reagents.reagent_list)
+				for (var/datum/reagent/R in B.reagents.reagent_list)
 					to_chat(user, SPAN_NOTICE("[R.volume] units of [R.name]"))
 
 
@@ -136,7 +136,7 @@
 /obj/item/gun/projectile/dartgun/proc/fill_dart(obj/item/projectile/bullet/chemdart/dart)
 	if (length(mixing))
 		var/mix_amount = dart.reagent_amount/length(mixing)
-		for(var/obj/item/reagent_containers/glass/beaker/B in mixing)
+		for (var/obj/item/reagent_containers/glass/beaker/B in mixing)
 			B.reagents.trans_to_obj(dart, mix_amount)
 
 /obj/item/gun/projectile/dartgun/attack_self(mob/user)
@@ -149,13 +149,13 @@
 	if (!length(beakers))
 		dat += "There are no beakers inserted!<br><br>"
 	else
-		for(var/i in 1 to length(beakers))
+		for (var/i in 1 to length(beakers))
 			var/obj/item/reagent_containers/glass/beaker/B = beakers[i]
 			if (!istype(B)) continue
 
 			dat += "Beaker [i] contains: "
 			if (B.reagents && length(B.reagents.reagent_list))
-				for(var/datum/reagent/R in B.reagents.reagent_list)
+				for (var/datum/reagent/R in B.reagents.reagent_list)
 					dat += "<br>    [R.volume] units of [R.name], "
 				if (B in mixing)
 					dat += "<A href='?src=\ref[src];stop_mix=[i]'>[SPAN_COLOR("green", "Mixing")]</A> "

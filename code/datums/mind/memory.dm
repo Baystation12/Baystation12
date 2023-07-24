@@ -20,7 +20,7 @@
 	ShowMemory(remover)
 
 /datum/mind/proc/ClearMemories(list/tags)
-	for(var/mem in memories)
+	for (var/mem in memories)
 		var/datum/memory/M = mem
 		// If no tags were supplied OR if there is any union between the given tags and memory tags
 		//  then remove the memory
@@ -31,14 +31,14 @@
 	if (!istype(target))
 		return
 
-	for(var/mem in memories)
+	for (var/mem in memories)
 		var/datum/memory/M = mem
 		M.Copy(target)
 
 /datum/mind/proc/MemoryTags()
 	. = list()
 	var/list/all_antag_types = GLOB.all_antag_types_
-	for(var/antag_type in all_antag_types)
+	for (var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		if (antag.is_antagonist(src))
 			. += antag_type
@@ -50,7 +50,7 @@
 	var/list/output = list()
 	var/last_owner_name
 	// We pretend that memories are stored in some semblance of an order
-	for(var/mem in memories)
+	for (var/mem in memories)
 		var/datum/memory/M = mem
 		var/owner_name = M.OwnerName()
 		if (owner_name != last_owner_name && current)
@@ -62,7 +62,7 @@
 		output += "<HR><B>Objectives:</B>"
 
 		var/obj_count = 1
-		for(var/datum/objective/objective in objectives)
+		for (var/datum/objective/objective in objectives)
 			output += "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
 			obj_count++
 
@@ -159,7 +159,7 @@
 		return
 
 	var/relevant_memories = 0
-	for(var/mem in target.memories)
+	for (var/mem in target.memories)
 		var/datum/memory/M = mem
 		if (M.type == memory_type)
 			relevant_memories++

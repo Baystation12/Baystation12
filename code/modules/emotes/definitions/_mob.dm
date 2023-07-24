@@ -3,7 +3,7 @@
 
 /mob/proc/update_emotes(skip_sort)
 	usable_emotes.Cut()
-	for(var/emote in default_emotes)
+	for (var/emote in default_emotes)
 		var/singleton/emote/emote_datum = GET_SINGLETON(emote)
 		if (emote_datum.check_user(src))
 			usable_emotes[emote_datum.key] = emote_datum

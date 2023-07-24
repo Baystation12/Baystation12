@@ -31,13 +31,13 @@ SUBSYSTEM_DEF(unit_tests)
 	//Start the Round.
 	//
 	SSticker.master_mode = "extended"
-	for(var/test_datum_type in get_test_datums())
+	for (var/test_datum_type in get_test_datums())
 		queue += new test_datum_type
 	log_unit_test("[length(queue)] unit tests loaded.")
 
 
 /datum/controller/subsystem/unit_tests/proc/load_map_templates()
-	for(var/map_template_name in (SSmapping.map_templates))
+	for (var/map_template_name in (SSmapping.map_templates))
 		var/datum/map_template/map_template = SSmapping.map_templates[map_template_name]
 		if (map_template.skip_main_unit_tests)
 			report_progress("Skipping template '[map_template]' ([map_template.type]): [map_template.skip_main_unit_tests]")
@@ -94,7 +94,7 @@ SUBSYSTEM_DEF(unit_tests)
 	var/list/async = current_async
 	while (length(async))
 		var/datum/unit_test/test = current_async[length(async)]
-		for(var/S in test.subsystems_to_await())
+		for (var/S in test.subsystems_to_await())
 			var/datum/controller/subsystem/subsystem = S
 			if (subsystem.times_fired < 1)
 				return

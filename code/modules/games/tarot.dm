@@ -10,17 +10,17 @@
 	..()
 
 	var/datum/playingcard/P
-	for(var/name in list("Fool","Magician","High Priestess","Empress","Emperor","Hierophant","Lovers","Chariot","Strength","Hermit","Wheel of Fortune","Justice","Hanged Man","Death","Temperance","Devil","Tower","Star","Moon","Sun","Judgement","World"))
+	for (var/name in list("Fool","Magician","High Priestess","Empress","Emperor","Hierophant","Lovers","Chariot","Strength","Hermit","Wheel of Fortune","Justice","Hanged Man","Death","Temperance","Devil","Tower","Star","Moon","Sun","Judgement","World"))
 		P = new()
 		P.name = "[name]"
 		P.card_icon = "tarot_major"
 		P.back_icon = "card_back_tarot"
 		P.desc = "Some sort of major tarot card."
 		cards += P
-	for(var/suit in list("wands","pentacles","cups","swords"))
+	for (var/suit in list("wands","pentacles","cups","swords"))
 
 
-		for(var/number in list("ace","two","three","four","five","six","seven","eight","nine","ten","page","knight","queen","king"))
+		for (var/number in list("ace","two","three","four","five","six","seven","eight","nine","ten","page","knight","queen","king"))
 			P = new()
 			P.name = "[number] of [suit]"
 			P.card_icon = "tarot_[suit]"

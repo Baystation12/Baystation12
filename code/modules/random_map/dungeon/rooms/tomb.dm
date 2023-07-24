@@ -10,7 +10,7 @@
 	item_spawns = list()
 	direction = pick(0,1)
 	var/limit = (direction ? height : width)
-	for(var/i = 0, i < limit - 2, i++)
+	for (var/i = 0, i < limit - 2, i++)
 		var/truex = xorigin + (direction ? 0 : i) + x
 		var/truey = yorigin + (direction ? i : 0) + y
 		var/turf/T1 = locate(truex,truey,zorigin)

@@ -82,9 +82,9 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	if (listequal(turfs_in_range, new_turfs))
 		return
 
-	for(var/t in (turfs_in_range - new_turfs))
+	for (var/t in (turfs_in_range - new_turfs))
 		GLOB.opacity_set_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
-	for(var/t in (new_turfs - turfs_in_range))
+	for (var/t in (new_turfs - turfs_in_range))
 		GLOB.opacity_set_event.register(t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
 
 	turfs_in_range = new_turfs
@@ -95,9 +95,9 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 		GLOB.moved_event.unregister(holder, src, /datum/proximity_trigger/proc/on_holder_moved)
 	GLOB.dir_set_event.unregister(holder, src, /datum/proximity_trigger/proc/register_turfs)
 
-	for(var/t in turfs_in_range)
+	for (var/t in turfs_in_range)
 		GLOB.opacity_set_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
-	for(var/t in seen_turfs_)
+	for (var/t in seen_turfs_)
 		GLOB.entered_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_entered)
 
 	call(proc_owner, on_turfs_changed)(seen_turfs_.Copy(), list())
@@ -112,9 +112,9 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 
 	call(proc_owner, on_turfs_changed)(seen_turfs_.Copy(), new_seen_turfs_.Copy())
 
-	for(var/t in (seen_turfs_ - new_seen_turfs_))
+	for (var/t in (seen_turfs_ - new_seen_turfs_))
 		GLOB.entered_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_entered)
-	for(var/t in (new_seen_turfs_ - seen_turfs_))
+	for (var/t in (new_seen_turfs_ - seen_turfs_))
 		GLOB.entered_event.register(t, src, /datum/proximity_trigger/proc/on_turf_entered)
 
 	seen_turfs_ = new_seen_turfs_
@@ -140,7 +140,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	if (!center)
 		return
 
-	for(var/T in dview(range_, center))
+	for (var/T in dview(range_, center))
 		if (T in turfs_in_range)
 			. += T
 
@@ -170,7 +170,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	visible_message("[A] entered my range!")
 
 /obj/item/proxy_debug/proc/update_turfs(list/old_turfs, list/new_turfs)
-	for(var/turf/T in old_turfs)
+	for (var/turf/T in old_turfs)
 		T.overlays -= overlay
-	for(var/turf/T in new_turfs)
+	for (var/turf/T in new_turfs)
 		T.overlays += overlay

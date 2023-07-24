@@ -55,15 +55,15 @@
 		// Combined with UI updates this adds quite nice effect to the UI
 		var/percentage = PRG.target.dos_overload * 100 / PRG.target.dos_capacity
 		var/list/strings[0]
-		for(var/j, j<10, j++)
+		for (var/j, j<10, j++)
 			var/string = ""
-			for(var/i, i<20, i++)
+			for (var/i, i<20, i++)
 				string = "[string][prob(percentage)]"
 			strings.Add(string)
 		data["dos_strings"] = strings
 	else
 		var/list/relays[0]
-		for(var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
+		for (var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
 			relays.Add(R.uid)
 		data["relays"] = relays
 		data["focus"] = PRG.target ? PRG.target.uid : null
@@ -80,7 +80,7 @@
 	if (..())
 		return TOPIC_HANDLED
 	if (href_list["PRG_target_relay"])
-		for(var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
+		for (var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
 			if ("[R.uid]" == href_list["PRG_target_relay"])
 				target = R
 		return TOPIC_HANDLED
@@ -101,7 +101,7 @@
 		var/list/sources_to_show = list(computer.get_network_tag())
 		var/extra_to_show = 2 * max(operator_skill - SKILL_TRAINED, 0)
 		if (extra_to_show)
-			for(var/i = 1, i <= extra_to_show, i++)
+			for (var/i = 1, i <= extra_to_show, i++)
 				var/nid = pick(ntnet_global.registered_nids)
 				var/datum/extension/interactive/ntos/os = ntnet_global.registered_nids[nid]
 				if (os.get_ntnet_status())

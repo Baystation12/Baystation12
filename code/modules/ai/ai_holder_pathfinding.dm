@@ -48,7 +48,7 @@
 		path = new_path
 		ai_log("get_path() : Made new path.", AI_LOG_DEBUG)
 		if (path_display)
-			for(var/turf/T in path)
+			for (var/turf/T in path)
 				T.overlays |= path_overlay
 	else
 		ai_log("get_path() : Failed to make new path. Exiting.", AI_LOG_DEBUG)

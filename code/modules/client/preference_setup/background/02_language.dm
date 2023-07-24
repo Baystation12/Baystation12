@@ -23,7 +23,7 @@
 	. += "<b>Languages</b><br>"
 	var/list/show_langs = get_language_text()
 	if (LAZYLEN(show_langs))
-		for(var/lang in show_langs)
+		for (var/lang in show_langs)
 			. += lang
 	else
 		. += "Your current species, faction or home system selection does not allow you to choose additional languages.<br>"
@@ -61,19 +61,19 @@
 	if (!user)
 		return
 
-	for(var/thing in pref.cultural_info)
+	for (var/thing in pref.cultural_info)
 		var/singleton/cultural_info/culture = SSculture.get_culture(pref.cultural_info[thing])
 		if (istype(culture))
 			var/list/langs = culture.get_spoken_languages()
 			if (LAZYLEN(langs))
-				for(var/checklang in langs)
+				for (var/checklang in langs)
 					free_languages[checklang] =    TRUE
 					allowed_languages[checklang] = TRUE
 			if (LAZYLEN(culture.secondary_langs))
-				for(var/checklang in culture.secondary_langs)
+				for (var/checklang in culture.secondary_langs)
 					allowed_languages[checklang] = TRUE
 
-	for(var/thing in all_languages)
+	for (var/thing in all_languages)
 		var/datum/language/lang = all_languages[thing]
 		if (user.has_admin_rights() || (!(lang.flags & RESTRICTED) && (lang.flags & WHITELISTED) && is_alien_whitelisted(user, lang)))
 			allowed_languages[thing] = TRUE
@@ -90,12 +90,12 @@
 		pref.alternate_languages = list()
 	var/preference_mob = preference_mob()
 	rebuild_language_cache(preference_mob)
-	for(var/L in pref.alternate_languages)
+	for (var/L in pref.alternate_languages)
 		var/datum/language/lang = all_languages[L]
 		if (!lang || !is_allowed_language(preference_mob, lang))
 			pref.alternate_languages -= L
 	if (LAZYLEN(free_languages))
-		for(var/lang in free_languages)
+		for (var/lang in free_languages)
 			pref.alternate_languages -= lang
 			pref.alternate_languages.Insert(1, lang)
 
@@ -106,7 +106,7 @@
 /datum/category_item/player_setup_item/background/languages/proc/get_language_text()
 	sanitize_alt_languages()
 	if (LAZYLEN(pref.alternate_languages))
-		for(var/i = 1 to length(pref.alternate_languages))
+		for (var/i = 1 to length(pref.alternate_languages))
 			var/lang = pref.alternate_languages[i]
 			if (free_languages[lang])
 				LAZYADD(., "- [lang] (required).<br>")

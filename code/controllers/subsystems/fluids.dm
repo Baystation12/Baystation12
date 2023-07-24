@@ -84,7 +84,7 @@ SUBSYSTEM_DEF(fluids)
 						F.equalizing_fluids += other
 						downward_fluid_overlay_position = length(F.equalizing_fluids)
 			UPDATE_FLUID_BLOCKED_DIRS(F.start_loc)
-			for(var/spread_dir in GLOB.cardinal)
+			for (var/spread_dir in GLOB.cardinal)
 				if (F.start_loc.fluid_blocked_dirs & spread_dir)
 					continue
 				var/turf/T = get_step(F.start_loc, spread_dir)
@@ -137,7 +137,7 @@ SUBSYSTEM_DEF(fluids)
 
 			var/setting_dir = 0
 
-			for(var/obj/effect/fluid/other in F.equalizing_fluids)
+			for (var/obj/effect/fluid/other in F.equalizing_fluids)
 				if (!istype(other) || QDELETED(other) || other.fluid_amount <= FLUID_DELETING)
 					F.equalizing_fluids -= other
 					continue
@@ -154,7 +154,7 @@ SUBSYSTEM_DEF(fluids)
 			if (islist(F.equalizing_fluids) && length(F.equalizing_fluids) > 1)
 				F.equalize_avg_depth = floor(F.equalize_avg_depth/length(F.equalizing_fluids))
 				F.equalize_avg_temp = floor(F.equalize_avg_temp/length(F.equalizing_fluids))
-				for(var/thing in F.equalizing_fluids)
+				for (var/thing in F.equalizing_fluids)
 					var/obj/effect/fluid/other = thing
 					if (!QDELETED(other))
 						SET_FLUID_DEPTH(other, F.equalize_avg_depth)
@@ -179,7 +179,7 @@ SUBSYSTEM_DEF(fluids)
 			if (F.flow_amount >= 10)
 				if (prob(1))
 					playsound(F.loc, 'sound/effects/slosh.ogg', 25, 1)
-				for(var/atom/movable/AM in F.loc.contents)
+				for (var/atom/movable/AM in F.loc.contents)
 					if (isnull(pushing_atoms[AM]) && AM.is_fluid_pushable(F.flow_amount))
 						pushing_atoms[AM] = TRUE
 						step(AM, F.dir)
@@ -205,7 +205,7 @@ SUBSYSTEM_DEF(fluids)
 			var/obj/effect/fluid/F = processing_fluids[af_index++]
 			var/turf/T = get_turf(F)
 			if (istype(T) && !QDELETED(F))
-				for(var/atom/movable/A in T.contents)
+				for (var/atom/movable/A in T.contents)
 					if (A.simulated && !A.waterproof)
 						A.water_act(F.fluid_amount)
 			if (MC_TICK_CHECK)

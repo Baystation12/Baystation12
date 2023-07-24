@@ -10,7 +10,7 @@
 
 /mob/living/silicon/ai/Initialize(mapload)
 	silicon_subsystems.Cut()
-	for(var/subtype in subtypesof(/datum/nano_module))
+	for (var/subtype in subtypesof(/datum/nano_module))
 		var/datum/nano_module/NM = subtype
 		if (initial(NM.available_to_ai))
 			silicon_subsystems += NM
@@ -24,13 +24,13 @@
 	)
 
 /mob/living/silicon/Destroy()
-	for(var/subsystem in silicon_subsystems)
+	for (var/subsystem in silicon_subsystems)
 		remove_subsystem(subsystem)
 	silicon_subsystems.Cut()
 	. = ..()
 
 /mob/living/silicon/proc/init_subsystems()
-	for(var/subsystem_type in silicon_subsystems)
+	for (var/subsystem_type in silicon_subsystems)
 		init_subsystem(subsystem_type)
 
 /mob/living/silicon/proc/init_subsystem(subsystem_type)
@@ -78,7 +78,7 @@
 		return
 	if (!statpanel("Subsystems"))
 		return
-	for(var/subsystem_type in silicon_subsystems)
+	for (var/subsystem_type in silicon_subsystems)
 		var/stat_silicon_subsystem/SSS = silicon_subsystems[subsystem_type]
 		stat(SSS)
 

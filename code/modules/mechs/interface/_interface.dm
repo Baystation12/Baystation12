@@ -2,7 +2,7 @@
 
 /mob/living/exosuit/proc/refresh_hud()
 	if (LAZYLEN(pilots))
-		for(var/thing in pilots)
+		for (var/thing in pilots)
 			var/mob/pilot = thing
 			if (pilot.client)
 				pilot.client.screen |= hud_elements
@@ -13,7 +13,7 @@
 	zone_sel = new
 	if (!LAZYLEN(hud_elements))
 		var/i = 1
-		for(var/hardpoint in hardpoints)
+		for (var/hardpoint in hardpoints)
 			var/obj/screen/exosuit/hardpoint/H = new(src, hardpoint)
 			H.screen_loc = "1:6,[15-i]" //temp
 			hud_elements |= H
@@ -35,7 +35,7 @@
 			additional_hud_elements += /obj/screen/exosuit/toggle/air
 		i = 0
 		var/pos = 7
-		for(var/additional_hud in additional_hud_elements)
+		for (var/additional_hud in additional_hud_elements)
 			var/obj/screen/exosuit/M = new additional_hud(src)
 			M.screen_loc = "1:6,[pos]:[i]"
 			hud_elements |= M
@@ -57,7 +57,7 @@
 	refresh_hud()
 
 /mob/living/exosuit/handle_hud_icons()
-	for(var/hardpoint in hardpoint_hud_elements)
+	for (var/hardpoint in hardpoint_hud_elements)
 		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
 		if (H) H.update_system_info()
 	handle_hud_icons_health()
@@ -87,7 +87,7 @@
 		return
 
 	var/list/part_to_state = list("legs" = legs,"body" = body,"head" = head,"arms" = arms)
-	for(var/part in part_to_state)
+	for (var/part in part_to_state)
 		var/state = 0
 		var/obj/item/mech_component/MC = part_to_state[part]
 		if (MC)
@@ -112,14 +112,14 @@
 		hud_health.overlays |= GLOB.mech_damage_overlay_cache["[part]-[state]"]
 
 /mob/living/exosuit/proc/reset_hardpoint_color()
-	for(var/hardpoint in hardpoint_hud_elements)
+	for (var/hardpoint in hardpoint_hud_elements)
 		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
 		if (H)
 			H.color = COLOR_WHITE
 
 /mob/living/exosuit/setClickCooldown(timeout)
 	. = ..()
-	for(var/hardpoint in hardpoint_hud_elements)
+	for (var/hardpoint in hardpoint_hud_elements)
 		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
 		if (H)
 			H.color = "#a03b3b"

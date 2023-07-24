@@ -126,7 +126,7 @@
 
 	var/list/newgases = gas_data.gases.Copy()
 	newgases ^= atmosphere.gas
-	for(var/gas in newgases)
+	for (var/gas in newgases)
 		if (gas_data.flags[gas] & (XGM_GAS_OXIDIZER|XGM_GAS_FUEL))
 			newgases -= gas
 	if (length(newgases))

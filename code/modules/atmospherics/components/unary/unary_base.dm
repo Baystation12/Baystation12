@@ -44,7 +44,7 @@
 
 	var/node_connect = dir
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,node_connect))
+	for (var/obj/machinery/atmospherics/target in get_step(src,node_connect))
 		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node = target

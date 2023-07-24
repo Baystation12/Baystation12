@@ -90,7 +90,7 @@
 	dat += "<b>Chocolate cones:</b> <a href='?src=\ref[src];cone=[CONE_CHOC]'><b>Dispense</b></a> <a href='?src=\ref[src];make=[CONE_CHOC];amount=1'><b>Make</b></a> <a href='?src=\ref[src];make=[CONE_CHOC];amount=5'><b>x5</b></a> [product_types[CONE_CHOC]] cones left. (Ingredients: flour, sugar, coco powder)<br></div>"
 	dat += "<br>"
 	dat += "<b>VAT CONTENT</b><br>"
-	for(var/datum/reagent/R in reagents.reagent_list)
+	for (var/datum/reagent/R in reagents.reagent_list)
 		dat += "[R.name]: [R.volume]"
 		dat += "<A href='?src=\ref[src];disposeI=\ref[R]'>Purge</A><BR>"
 	dat += "<a href='?src=\ref[src];refresh=1'>Refresh</a> <a href='?src=\ref[src];close=1'>Close</a>"
@@ -122,13 +122,13 @@
 		..()
 
 /obj/machinery/icecream_vat/proc/make(mob/user, make_type, amount)
-	for(var/R in get_ingredient_list(make_type))
+	for (var/R in get_ingredient_list(make_type))
 		if (reagents.has_reagent(R, amount))
 			continue
 		amount = 0
 		break
 	if (amount)
-		for(var/R in get_ingredient_list(make_type))
+		for (var/R in get_ingredient_list(make_type))
 			reagents.remove_reagent(R, amount)
 		product_types[make_type] += amount
 		var/flavour = get_flavour_name(make_type)

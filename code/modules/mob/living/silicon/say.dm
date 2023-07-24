@@ -32,7 +32,7 @@
 		if (message_mode == "general")
 			message_mode = null
 		if (message_mode == "intercom")
-			for(var/obj/item/device/radio/I in view(1))
+			for (var/obj/item/device/radio/I in view(1))
 				if (I.intercom_handling)
 					I.talk_into(src, message, null, verb, speaking)
 					used_radios += I
@@ -90,12 +90,12 @@
 			var/list/hear = hear(7, T)
 			var/list/hearturfs = list()
 
-			for(var/I in hear)
+			for (var/I in hear)
 				if (ismob(I))
 					var/mob/M = I
 					listening += M
 					hearturfs += M.locs[1]
-					for(var/obj/O in M.contents)
+					for (var/obj/O in M.contents)
 						listening_obj |= O
 				else if (isobj(I))
 					var/obj/O = I
@@ -103,7 +103,7 @@
 					listening_obj |= O
 
 
-			for(var/mob/M in GLOB.player_list)
+			for (var/mob/M in GLOB.player_list)
 				if (M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH)
 					M.hear_say(message,verb,speaking,null,null, src)
 					continue
@@ -130,7 +130,7 @@
 		var/rendered = "[SPAN_CLASS("game say", "[SPAN_CLASS("name", name)] [SPAN_CLASS("message", message)]")]"
 		to_chat(src, "<i>[SPAN_CLASS("game say", "Holopad action relayed, [SPAN_CLASS("name", real_name)] [SPAN_CLASS("message", message)]")]</i>")
 
-		for(var/mob/M in viewers(T.loc))
+		for (var/mob/M in viewers(T.loc))
 			M.show_message(rendered, 2)
 	else //This shouldn't occur, but better safe then sorry.
 		to_chat(src, "No holopad connected.")

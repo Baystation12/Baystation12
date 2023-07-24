@@ -110,9 +110,9 @@
 		var/data = "No scan information available."
 		if (bloodsamp.dna != null || bloodsamp.trace_dna != null)
 			data = "Spectometric analysis on provided sample has determined the presence of DNA.<br><br>"
-			for(var/blood in bloodsamp.dna)
+			for (var/blood in bloodsamp.dna)
 				data += "[SPAN_NOTICE("Blood type: [bloodsamp.dna[blood]]<br>DNA: [blood]")]<br><br>"
-			for(var/trace in bloodsamp.trace_dna)
+			for (var/trace in bloodsamp.trace_dna)
 				data += "[SPAN_NOTICE("Trace DNA: [trace]")]<br><br>"
 		else
 			data += "No DNA found.<br>"

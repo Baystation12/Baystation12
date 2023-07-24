@@ -50,16 +50,16 @@ research holder datum.
 	var/list/known_designs = list()			//List of available designs.
 
 /datum/research/New()		//Insert techs into possible_tech here. Known_tech automatically updated.
-	for(var/T in typesof(/datum/tech) - /datum/tech)
+	for (var/T in typesof(/datum/tech) - /datum/tech)
 		known_tech += new T(src)
-	for(var/D in typesof(/datum/design) - /datum/design)
+	for (var/D in typesof(/datum/design) - /datum/design)
 		possible_designs += new D(src)
 	RefreshResearch()
 
 /datum/research/techonly
 
 /datum/research/techonly/New()
-	for(var/T in typesof(/datum/tech) - /datum/tech)
+	for (var/T in typesof(/datum/tech) - /datum/tech)
 		known_tech += new T(src)
 	RefreshResearch()
 
@@ -71,10 +71,10 @@ research holder datum.
 
 	var/list/k_tech = list()
 
-	for(var/datum/tech/known in known_tech)
+	for (var/datum/tech/known in known_tech)
 		k_tech[known.id] = known.level
 
-	for(var/req in D.req_tech)
+	for (var/req in D.req_tech)
 		if (isnull(k_tech[req]) || k_tech[req] < D.req_tech[req])
 			return 0
 
@@ -83,7 +83,7 @@ research holder datum.
 //Adds a tech to known_tech list. Checks to make sure there aren't duplicates and updates existing tech's levels if needed.
 //Input: datum/tech; Output: Null
 /datum/research/proc/AddTech2Known(datum/tech/T)
-	for(var/datum/tech/known in known_tech)
+	for (var/datum/tech/known in known_tech)
 		if (T.id == known.id)
 			if (T.level > known.level)
 				known.level = T.level
@@ -94,7 +94,7 @@ research holder datum.
 	if (!length(known_designs)) // Special case
 		known_designs.Add(D)
 		return
-	for(var/i = 1 to length(known_designs))
+	for (var/i = 1 to length(known_designs))
 		var/datum/design/A = known_designs[i]
 		if (A.id == D.id) // We are guaranteed to reach this if the ids are the same, because sort_string will also be the same
 			return
@@ -107,10 +107,10 @@ research holder datum.
 //Refreshes known_tech and known_designs list
 //Input/Output: n/a
 /datum/research/proc/RefreshResearch()
-	for(var/datum/design/PD in possible_designs)
+	for (var/datum/design/PD in possible_designs)
 		if (DesignHasReqs(PD))
 			AddDesign2Known(PD)
-	for(var/datum/tech/T in known_tech)
+	for (var/datum/tech/T in known_tech)
 		T = clamp(T.level, 0, 20)
 	return
 
@@ -118,19 +118,19 @@ research holder datum.
 //Input: Tech's ID and Level; Output: null
 /datum/research/proc/UpdateTech(ID, level)
 	// If a "brain expansion" event is active, we gain 1 extra level
-	for(var/datum/event/E in SSevent.active_events)
+	for (var/datum/event/E in SSevent.active_events)
 		if (istype(E, /datum/event/brain_expansion))
 			level += 1
 			break
 
-	for(var/datum/tech/KT in known_tech)
+	for (var/datum/tech/KT in known_tech)
 		if (KT.id == ID && KT.level <= level)
 			KT.level = max(KT.level + 1, level - 1)
 	return
 
 // A simple helper proc to find the name of a tech with a given ID.
 /proc/CallTechName(ID)
-	for(var/T in subtypesof(/datum/tech))
+	for (var/T in subtypesof(/datum/tech))
 		var/datum/tech/check_tech = T
 		if (initial(check_tech.id) == ID)
 			return  initial(check_tech.name)

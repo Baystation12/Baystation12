@@ -23,7 +23,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 		return
 	else
-		for(var/obj/effect/decal/cleanable/ash/A in contents)
+		for (var/obj/effect/decal/cleanable/ash/A in contents)
 			A.dropInto(loc)
 			user.visible_message("\The [user] pours \the [A] out from \the [src].", "You pour \the [A] out from \the [src].")
 

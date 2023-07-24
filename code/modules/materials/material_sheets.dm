@@ -92,11 +92,11 @@
 /obj/item/stack/material/proc/update_strings()
 	// Update from material datum.
 	matter = material.get_matter()
-	for(var/mat in matter)
+	for (var/mat in matter)
 		matter[mat] = round(matter[mat]*matter_multiplier*amount)
 	if (reinf_material)
 		var/list/rmatter = reinf_material.get_matter()
-		for(var/mat in rmatter)
+		for (var/mat in rmatter)
 			rmatter[mat] = round(0.5*rmatter[mat]*matter_multiplier*amount)
 			matter[mat] += rmatter[mat]
 

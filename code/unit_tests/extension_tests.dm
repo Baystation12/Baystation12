@@ -12,13 +12,13 @@
 	set_extension(O, /datum/extension/test_one)
 
 	var/number_of_failures = 0
-	for(var/extension in O.extensions)
+	for (var/extension in O.extensions)
 		if (!islist(O.extensions[extension]))
 			log_unit_test("[extension] was initalized.")
 			number_of_failures++
 
 	var/datum/extension/one = get_extension(O, /datum/extension/test_one)
-	for(var/extension in O.extensions)
+	for (var/extension in O.extensions)
 		if (islist(O.extensions[extension]))
 			log_unit_test("[extension] was not initalized.")
 			number_of_failures++
@@ -48,7 +48,7 @@
 	set_extension(O, /datum/extension/test_two)
 
 	var/number_of_failures = 0
-	for(var/extension in O.extensions)
+	for (var/extension in O.extensions)
 		if (islist(O.extensions[extension]))
 			log_unit_test("[extension] was not initalized.")
 			number_of_failures++

@@ -21,7 +21,7 @@ var/global/list/pai_software_by_key = list()
 var/global/list/default_pai_software = list()
 /hook/startup/proc/populate_pai_software_list()
 	var/r = 1 // I would use ., but it'd sacrifice runtime detection
-	for(var/type in typesof(/datum/pai_software) - /datum/pai_software)
+	for (var/type in typesof(/datum/pai_software) - /datum/pai_software)
 		var/datum/pai_software/P = new type()
 		if (pai_software_by_key[P.id])
 			var/datum/pai_software/O = pai_software_by_key[P.id]
@@ -62,7 +62,7 @@ var/global/list/default_pai_software = list()
 	// Software we have not bought
 	var/not_bought_software[0]
 
-	for(var/key in pai_software_by_key)
+	for (var/key in pai_software_by_key)
 		var/datum/pai_software/S = pai_software_by_key[key]
 		var/software_data[0]
 		software_data["name"] = S.name
@@ -80,7 +80,7 @@ var/global/list/default_pai_software = list()
 
 	// Emotions
 	var/emotions[0]
-	for(var/name in pai_emotions)
+	for (var/name in pai_emotions)
 		var/emote[0]
 		emote["name"] = name
 		emote["id"] = pai_emotions[name]

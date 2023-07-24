@@ -25,7 +25,7 @@
 		bundle_worth = max_capacity / 10
 		log_warning("[src] has more than [max_capacity] currency loaded!")
 	var/turf/T = get_turf(vomit_onto)
-	for(var/i = 1 to 10)
+	for (var/i = 1 to 10)
 		var/nv = bundle_worth
 		if (i <= (receptacle_value - 10 * bundle_worth))
 			nv++
@@ -35,7 +35,7 @@
 		bling.worth = nv
 		bling.update_icon()
 		if (projectile_vomit)
-			for(var/j = 1, j <= rand(2, 4), j++)
+			for (var/j = 1, j <= rand(2, 4), j++)
 				step(bling, pick(GLOB.cardinal))
 
 	if (projectile_vomit)

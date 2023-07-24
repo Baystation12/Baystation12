@@ -55,7 +55,7 @@
 				else
 					low_nut_warning("head")
 
-		for(var/bpart in shuffle(H.internal_organs_by_name - BP_BRAIN))
+		for (var/bpart in shuffle(H.internal_organs_by_name - BP_BRAIN))
 			var/obj/item/organ/internal/regen_organ = H.internal_organs_by_name[bpart]
 			if (BP_IS_ROBOTIC(regen_organ))
 				continue
@@ -70,7 +70,7 @@
 						low_nut_warning(regen_organ.name)
 
 	if (prob(grow_chance))
-		for(var/limb_type in H.species.has_limbs)
+		for (var/limb_type in H.species.has_limbs)
 			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
 			if (E && E.organ_tag != BP_HEAD && !E.vital && (E.is_stump() || E.status & ORGAN_DEAD))	//Skips heads and vital bits...
 				if (H.nutrition > grow_threshold)
@@ -88,7 +88,7 @@
 				H.update_body()
 				return
 			else if (H.nutrition > grow_threshold) //We don't subtract any nut here, but let's still only heal wounds when we have nut.
-				for(var/datum/wound/W in E.wounds)
+				for (var/datum/wound/W in E.wounds)
 					if (W.wound_damage() == 0 && prob(50))
 						qdel(W)
 	return AURA_CANCEL

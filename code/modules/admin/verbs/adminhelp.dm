@@ -10,22 +10,22 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 	//explode the input msg into a list
 	var/list/msglist = splittext(msg, " ")
 
-	for(var/mob/M in SSmobs.mob_list)
+	for (var/mob/M in SSmobs.mob_list)
 		var/list/indexing = list(M.real_name, M.name)
 		if (M.mind)	indexing += M.mind.name
 
-		for(var/string in indexing)
+		for (var/string in indexing)
 			var/list/L = splittext(string, " ")
 			var/surname_found = 0
 			//surnames
-			for(var/i=length(L), i>=1, i--)
+			for (var/i=length(L), i>=1, i--)
 				var/word = ckey(L[i])
 				if (word)
 					surnames[word] = M
 					surname_found = i
 					break
 			//forenames
-			for(var/i=1, i<surname_found, i++)
+			for (var/i=1, i<surname_found, i++)
 				var/word = ckey(L[i])
 				if (word)
 					forenames[word] = M
@@ -35,7 +35,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 	var/ai_found = 0
 	msg = ""
 	var/list/mobs_found = list()
-	for(var/original_word in msglist)
+	for (var/original_word in msglist)
 		var/word = ckey(original_word)
 		if (word)
 			if (!(word in adminhelp_ignored_words))
@@ -97,7 +97,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 	else if (ticket.status == TICKET_ASSIGNED)
 		// manually check that the target client exists here as to not spam the usr for each logged out admin on the ticket
 		var/admin_found = 0
-		for(var/datum/client_lite/admin in ticket.assigned_admins)
+		for (var/datum/client_lite/admin in ticket.assigned_admins)
 			var/client/admin_client = client_by_ckey(admin.ckey)
 			if (admin_client)
 				admin_found = 1
@@ -119,7 +119,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 
 	var/admin_number_afk = 0
 
-	for(var/client/X as anything in GLOB.admins)
+	for (var/client/X as anything in GLOB.admins)
 		if ((R_ADMIN|R_MOD) & X.holder.rights)
 			if (X.is_afk())
 				admin_number_afk++

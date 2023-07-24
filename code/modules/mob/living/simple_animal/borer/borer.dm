@@ -252,14 +252,14 @@
 #define COLOR_BORER_RED "#ff5555"
 /mob/living/simple_animal/borer/proc/set_ability_cooldown(amt)
 	last_special = world.time + amt
-	for(var/obj/thing in hud_elements)
+	for (var/obj/thing in hud_elements)
 		thing.color = COLOR_BORER_RED
 	addtimer(new Callback(src, /mob/living/simple_animal/borer/proc/reset_ui_callback), amt)
 #undef COLOR_BORER_RED
 
 /mob/living/simple_animal/borer/proc/leave_host()
 
-	for(var/obj/thing in hud_elements)
+	for (var/obj/thing in hud_elements)
 		thing.alpha =        0
 		thing.invisibility = INVISIBILITY_MAXIMUM
 

@@ -37,7 +37,7 @@ effective or pretty fucking useless.
 		return
 
 	var/list/stun_victims = list()
-	for(var/mob/living/carbon/human/M in orange(10, user))
+	for (var/mob/living/carbon/human/M in orange(10, user))
 		stun_victims += M
 		spawn()
 			if (prob(50))

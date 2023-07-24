@@ -113,7 +113,7 @@
 		data["ai_isdead"] = (A.stat == DEAD)
 
 		var/list/all_laws[0]
-		for(var/datum/ai_law/L in A.laws.all_laws())
+		for (var/datum/ai_law/L in A.laws.all_laws())
 			all_laws.Add(list(list(
 			"index" = L.index,
 			"text" = L.law

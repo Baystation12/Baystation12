@@ -26,7 +26,7 @@
 	if (!reward)
 		to_chat(user, "\The [src] does not know what to make of you.")
 		return
-	for(var/spell/S in user.mind.learned_spells)
+	for (var/spell/S in user.mind.learned_spells)
 		if (istype(S,reward))
 			to_chat(user, "\The [src] can do no more for you.")
 			return
@@ -114,7 +114,7 @@
 	return hands
 
 /spell/moghes_blessing/cast(list/targets, mob/user)
-	for(var/obj/item/I in targets)
+	for (var/obj/item/I in targets)
 		set_extension(I, /datum/extension/moghes_blessing)
 
 /datum/extension/moghes_blessing

@@ -6,7 +6,7 @@
 /datum/trader/ship/unique/New()
 	..()
 	wanted_items = list()
-	for(var/type in possible_wanted_items)
+	for (var/type in possible_wanted_items)
 		var/status = possible_wanted_items[type]
 		if (status & TRADER_THIS_TYPE)
 			wanted_items += type

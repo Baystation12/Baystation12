@@ -69,7 +69,7 @@
 					to_chat(usr,"Too many lines!")
 					src.player.song.lines.Cut(maximum_lines+1)
 				var/linenum = 1
-				for(var/l in src.player.song.lines)
+				for (var/l in src.player.song.lines)
 					if (length(l) > maximum_line_length)
 						to_chat(usr, "Line [linenum] too long!")
 						src.player.song.lines.Remove(l)

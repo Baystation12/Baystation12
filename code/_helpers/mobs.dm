@@ -15,7 +15,7 @@
 /proc/mobs_in_view(range, source)
 	RETURN_TYPE(/list)
 	var/list/mobs = list()
-	for(var/atom/movable/AM in view(range, source))
+	for (var/atom/movable/AM in view(range, source))
 		var/M = AM.get_mob()
 		if (M)
 			mobs += M
@@ -84,7 +84,7 @@
 
 /proc/RoundHealth(health)
 	var/list/icon_states = icon_states('icons/mob/hud_med.dmi')
-	for(var/icon_state in icon_states)
+	for (var/icon_state in icon_states)
 		if (health >= text2num(icon_state))
 			return icon_state
 	return icon_states[length(icon_states)] // If we had no match, return the last element
@@ -235,7 +235,7 @@
 /proc/able_mobs_in_oview(origin)
 	RETURN_TYPE(/list)
 	var/list/mobs = list()
-	for(var/mob/living/M in oview(origin)) // Only living mobs are considered able.
+	for (var/mob/living/M in oview(origin)) // Only living mobs are considered able.
 		if (!M.is_physically_disabled())
 			mobs += M
 	return mobs
@@ -285,14 +285,14 @@
 	var/mob/selected = null
 
 	if (include_observers)
-		for(var/mob/M in GLOB.player_list)
+		for (var/mob/M in GLOB.player_list)
 			if ((M.stat != DEAD) || (!M.client))
 				continue
 			if (M.ckey == find_key)
 				selected = M
 				break
 	else
-		for(var/mob/living/M in GLOB.player_list)
+		for (var/mob/living/M in GLOB.player_list)
 			//Dead people only thanks!
 			if ((M.stat != DEAD) || (!M.client))
 				continue

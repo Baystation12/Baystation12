@@ -108,7 +108,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if (istype(I, /obj/item/storage/bag/trash))
 		var/obj/item/storage/bag/trash/T = I
 		to_chat(user, SPAN_NOTICE("You empty the bag."))
-		for(var/obj/item/O in T.contents)
+		for (var/obj/item/O in T.contents)
 			T.remove_from_storage(O,src, 1)
 		T.finish_bulk_removal()
 		update_icon()
@@ -332,7 +332,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 // eject the contents of the disposal unit
 /obj/machinery/disposal/proc/eject()
-	for(var/atom/movable/AM in (contents - component_parts))
+	for (var/atom/movable/AM in (contents - component_parts))
 		AM.forceMove(src.loc)
 		AM.pipe_eject(0)
 	if (reagents.total_volume)
@@ -431,10 +431,10 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 	var/list/stuff = contents - component_parts
 	//Hacky test to get drones to mail themselves through disposals.
-	for(var/mob/living/silicon/robot/drone/D in stuff)
+	for (var/mob/living/silicon/robot/drone/D in stuff)
 		wrapcheck = 1
 
-	for(var/obj/item/smallDelivery/O in stuff)
+	for (var/obj/item/smallDelivery/O in stuff)
 		wrapcheck = 1
 
 	if (wrapcheck == 1)
@@ -469,7 +469,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	var/turf/target
 	playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
 	if (H) // Somehow, someone managed to flush a window which broke mid-transit and caused the disposal to go in an infinite loop trying to expel null, hopefully this fixes it
-		for(var/atom/movable/AM in H)
+		for (var/atom/movable/AM in H)
 			target = get_offset_target_turf(src.loc, rand(5)-rand(5), rand(5)-rand(5))
 
 			AM.forceMove(src.loc)
@@ -516,7 +516,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	. = ..(mapload)
 	if (!id_tag)
 		id_tag = newid
-	for(var/obj/structure/disposalpipe/diversion_junction/D in GLOB.diversion_junctions)
+	for (var/obj/structure/disposalpipe/diversion_junction/D in GLOB.diversion_junctions)
 		if (D.id_tag && !D.linked && D.id_tag == src.id_tag)
 			junctions += D
 			D.linked = src
@@ -539,7 +539,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		return FALSE
 	. = TRUE
 	on = !on
-	for(var/obj/structure/disposalpipe/diversion_junction/D in junctions)
+	for (var/obj/structure/disposalpipe/diversion_junction/D in junctions)
 		if (D.id_tag == src.id_tag)
 			D.active = on
 	if (on)
@@ -566,7 +566,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if (!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated() || !id_tag)
 		return
 	var/found = 0
-	for(var/obj/structure/disposalpipe/diversion_junction/D in world)
+	for (var/obj/structure/disposalpipe/diversion_junction/D in world)
 		if (D.id_tag == src.id_tag)
 			found = 1
 			break
@@ -612,7 +612,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 				H.reagents.trans_to_obj(splat, H.reagents.total_volume)
 				splat.update_icon()
 
-		for(var/atom/movable/AM in H)
+		for (var/atom/movable/AM in H)
 			AM.forceMove(src.loc)
 			AM.pipe_eject(dir)
 			// Drones keep smashing windows from being fired out of chutes.

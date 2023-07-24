@@ -167,7 +167,7 @@ SUBSYSTEM_DEF(ticker)
 	create_characters() //Create player characters and transfer them
 	collect_minds()
 	equip_characters()
-	for(var/mob/living/carbon/human/H in GLOB.player_list)
+	for (var/mob/living/carbon/human/H in GLOB.player_list)
 		if (H.mind && !player_is_antag(H.mind, only_offstation_roles = 1))
 			var/datum/job/job = SSjobs.get_by_title(H.mind.assigned_role)
 			if (job && job.create_record)
@@ -365,7 +365,7 @@ Helpers
 		mode.announce()
 
 /datum/controller/subsystem/ticker/proc/create_characters()
-	for(var/mob/new_player/player in GLOB.player_list)
+	for (var/mob/new_player/player in GLOB.player_list)
 		if (player && player.ready && player.mind)
 			if (player.mind.assigned_role=="AI")
 				player.close_spawn_windows()
@@ -399,12 +399,12 @@ Helpers
 
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
-	for(var/mob/living/player in GLOB.player_list)
+	for (var/mob/living/player in GLOB.player_list)
 		if (player.mind)
 			minds += player.mind
 
 /datum/controller/subsystem/ticker/proc/equip_characters()
-	for(var/mob/living/carbon/human/player in GLOB.player_list)
+	for (var/mob/living/carbon/human/player in GLOB.player_list)
 		if (player && player.mind && player.mind.assigned_role)
 			if (!player_is_antag(player.mind, only_offstation_roles = 1))
 				SSjobs.equip_rank(player, player.mind.assigned_role, 0)
@@ -423,14 +423,14 @@ Helpers
 			looking_for_antags = 0
 			antag.update_current_antag_max(mode)
 			antag.build_candidate_list(mode, needs_ghost)
-			for(var/datum/mind/candidate in antag.candidates)
+			for (var/datum/mind/candidate in antag.candidates)
 				if (!(candidate in antag_pool))
 					antag.candidates -= candidate
 					log_debug("[candidate.key] was not in the antag pool and could not be selected.")
 		else
 			antag.update_current_antag_max(mode)
 			antag.build_candidate_list(mode, needs_ghost)
-			for(var/datum/mind/candidate in antag.candidates)
+			for (var/datum/mind/candidate in antag.candidates)
 				if (isghostmind(candidate))
 					antag.candidates -= candidate
 					log_debug("[candidate.key] is a ghost and can not be selected.")
@@ -479,7 +479,7 @@ Helpers
 	delay_notified = 1
 
 /datum/controller/subsystem/ticker/proc/handle_tickets()
-	for(var/datum/ticket/ticket in tickets)
+	for (var/datum/ticket/ticket in tickets)
 		if (ticket.is_active())
 			if (!delay_notified)
 				message_staff(SPAN_WARNING("<b>Automatically delaying restart due to active tickets.</b>"))
@@ -491,7 +491,7 @@ Helpers
 
 /datum/controller/subsystem/ticker/proc/declare_completion()
 	to_world("<br><br><br><H1>A round of [mode.name] has ended!</H1>")
-	for(var/client/C)
+	for (var/client/C)
 		if (!C.credits)
 			C.RollCredits()
 
@@ -499,14 +499,14 @@ Helpers
 
 	to_world("<br>")
 
-	for(var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)
+	for (var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)
 		var/show_ai_key = aiPlayer.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW
 		to_world("<b>[aiPlayer.name][show_ai_key ? " (played by [aiPlayer.key])" : ""]'s laws at the [aiPlayer.stat == 2 ? "time of their deactivation" : "end of round"] were:</b>")
 		aiPlayer.show_laws(1)
 
 		if (length(aiPlayer.connected_robots))
 			var/minions = "<b>[aiPlayer.name]'s loyal minions were:</b>"
-			for(var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
+			for (var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
 				var/show_robot_key = robo.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW
 				minions += " [robo.name][show_robot_key ? "(played by: [robo.key])" : ""][robo.stat ? " (deactivated)" : ""],"
 			to_world(minions)
@@ -532,7 +532,7 @@ Helpers
 	if (length(all_money_accounts))
 		var/datum/money_account/max_profit = all_money_accounts[1]
 		var/datum/money_account/max_loss = all_money_accounts[1]
-		for(var/datum/money_account/D in all_money_accounts)
+		for (var/datum/money_account/D in all_money_accounts)
 			if (D == vendor_account) //yes we know you get lots of money
 				continue
 			var/saldo = D.get_balance()
@@ -551,7 +551,7 @@ Helpers
 	//Print a list of antagonists to the server log
 	var/list/total_antagonists = list()
 	//Look into all mobs in world, dead or alive
-	for(var/datum/mind/Mind in minds)
+	for (var/datum/mind/Mind in minds)
 		var/temprole = Mind.special_role
 		if (temprole)							//if they are an antagonist of some sort.
 			if (temprole in total_antagonists)	//If the role exists already, add the name to it
@@ -562,7 +562,7 @@ Helpers
 
 	//Now print them all into the log!
 	log_game("Antagonists at round end were...")
-	for(var/i in total_antagonists)
+	for (var/i in total_antagonists)
 		log_game("[i]s[total_antagonists[i]].")
 
 /datum/controller/subsystem/ticker/proc/start_now(mob/user)

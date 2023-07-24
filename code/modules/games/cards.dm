@@ -25,7 +25,7 @@
 /obj/item/deck/inherit_custom_item_data(datum/custom_item/citem)
 	. = ..()
 	if (islist(citem.additional_data["extra_cards"]))
-		for(var/card_singleton in citem.additional_data["extra_cards"])
+		for (var/card_singleton in citem.additional_data["extra_cards"])
 			if (islist(card_singleton))
 				var/datum/playingcard/custom/P = new()
 				if (!isnull(card_singleton["name"]))
@@ -56,7 +56,7 @@
 	..()
 
 	var/datum/playingcard/P
-	for(var/suit in list("spades","clubs","diamonds","hearts"))
+	for (var/suit in list("spades","clubs","diamonds","hearts"))
 
 		var/colour
 		if (suit == "spades" || suit == "clubs")
@@ -64,14 +64,14 @@
 		else
 			colour = "red_"
 
-		for(var/number in list("ace","two","three","four","five","six","seven","eight","nine","ten"))
+		for (var/number in list("ace","two","three","four","five","six","seven","eight","nine","ten"))
 			P = new()
 			P.name = "[number] of [suit]"
 			P.card_icon = "[colour]num"
 			P.back_icon = "card_back"
 			cards += P
 
-		for(var/number in list("jack","queen","king"))
+		for (var/number in list("jack","queen","king"))
 			P = new()
 			P.name = "[number] of [suit]"
 			P.card_icon = "[colour]col"
@@ -79,7 +79,7 @@
 			cards += P
 
 
-	for(var/i = 0,i<2,i++)
+	for (var/i = 0,i<2,i++)
 		P = new()
 		P.name = "joker"
 		P.card_icon = "joker"
@@ -88,7 +88,7 @@
 /obj/item/deck/attackby(obj/O, mob/user)
 	if (istype(O,/obj/item/hand))
 		var/obj/item/hand/H = O
-		for(var/datum/playingcard/P in H.cards)
+		for (var/datum/playingcard/P in H.cards)
 			cards += P
 		qdel(O)
 		to_chat(user, "You place your cards on the bottom of \the [src].")
@@ -141,7 +141,7 @@
 		return
 
 	var/list/players = list()
-	for(var/mob/living/player in viewers(3))
+	for (var/mob/living/player in viewers(3))
 		if (!player.stat)
 			players += player
 	//players -= usr
@@ -167,7 +167,7 @@
 /obj/item/hand/attackby(obj/O, mob/user)
 	if (istype(O,/obj/item/hand))
 		var/obj/item/hand/H = O
-		for(var/datum/playingcard/P in cards)
+		for (var/datum/playingcard/P in cards)
 			H.cards += P
 		H.concealed = src.concealed
 		qdel(src)
@@ -238,7 +238,7 @@
 	if (src.loc == user)
 		// build the list of cards in the hand
 		var/list/to_discard = list()
-		for(var/datum/playingcard/P in cards)
+		for (var/datum/playingcard/P in cards)
 			to_discard[P.name] = P
 		var/discarding = null
 		//don't prompt if only 1 card
@@ -267,7 +267,7 @@
 	. = ..()
 	if ((!concealed || src.loc == user) && length(cards))
 		to_chat(user, "It contains: ")
-		for(var/datum/playingcard/P in cards)
+		for (var/datum/playingcard/P in cards)
 			to_chat(user, "The [P.name].")
 
 /obj/item/hand/on_update_icon(direction = 0)
@@ -303,7 +303,7 @@
 		offset_y = direction == SOUTH ? 4 : 0
 	)
 	var/i = 0
-	for(var/datum/playingcard/P in cards)
+	for (var/datum/playingcard/P in cards)
 		var/image/I = P.card_image(concealed, src.icon)
 		//I.pixel_x = origin+(offset*i)
 		switch(direction)
@@ -336,7 +336,7 @@
 /obj/item/hand/missing_card/Initialize()
 	. = ..()
 	var/list/deck_list = list()
-	for(var/obj/item/deck/D in world)
+	for (var/obj/item/deck/D in world)
 		if (isturf(D.loc))		//Decks hiding in inventories are safe. Respect the sanctity of loadout items.
 			deck_list += D
 

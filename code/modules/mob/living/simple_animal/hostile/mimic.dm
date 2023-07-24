@@ -107,18 +107,18 @@ GLOBAL_LIST_INIT(mimic_protected, list(
 		C.forceMove(src.loc)
 
 		if (istype(C,/obj/structure/closet))
-			for(var/atom/movable/M in src)
+			for (var/atom/movable/M in src)
 				M.forceMove(C)
 
 		if (istype(C,/obj/item/storage))
 			var/obj/item/storage/S = C
-			for(var/atom/movable/M in src)
+			for (var/atom/movable/M in src)
 				if (S.can_be_inserted(M,null,1))
 					S.handle_item_insertion(M)
 				else
 					M.forceMove(src.loc)
 
-		for(var/atom/movable/M in src)
+		for (var/atom/movable/M in src)
 			M.dropInto(loc)
 		qdel(src)
 

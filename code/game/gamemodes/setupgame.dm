@@ -25,7 +25,7 @@
 		GLOB.DIFFMUT = rand(0,20)
 
 	var/list/numsToAssign=new()
-	for(var/i=1;i<DNA_SE_LENGTH;i++)
+	for (var/i=1;i<DNA_SE_LENGTH;i++)
 		numsToAssign += i
 
 	//testing("Assigning DNA blocks:")
@@ -70,7 +70,7 @@
 
 	// And the genes that actually do the work. (domutcheck improvements)
 	var/list/blocks_assigned[DNA_SE_LENGTH]
-	for(var/gene_type in typesof(/datum/dna/gene))
+	for (var/gene_type in typesof(/datum/dna/gene))
 		var/datum/dna/gene/G = new gene_type
 		if (G.block)
 			if (G.block in blocks_assigned)

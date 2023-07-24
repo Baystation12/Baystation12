@@ -14,7 +14,7 @@
 	var/list/bad_decal_colour
 	var/list/bad_decal_state
 
-	for(var/check_appearance in typesof(/singleton/closet_appearance)-except_appearances)
+	for (var/check_appearance in typesof(/singleton/closet_appearance)-except_appearances)
 		var/singleton/closet_appearance/closet = GET_SINGLETON(check_appearance)
 		if (!closet)
 			LAZYADD(bad_singleton, "[check_appearance]")
@@ -28,14 +28,14 @@
 			LAZYADD(bad_base_icon, "[closet.type]")
 		else
 			var/list/base_states = icon_states(closet.base_icon)
-			for(var/thing in check_base_states)
+			for (var/thing in check_base_states)
 				if (!(thing in base_states))
 					LAZYADD(bad_base_state, "[closet.type] - [thing] - [closet.base_icon]")
 		if (LAZYLEN(closet.decals) && !closet.decal_icon)
 			LAZYADD(bad_decal_icon, "[closet.type]")
 		else
 			var/list/decal_states = icon_states(closet.decal_icon)
-			for(var/thing in closet.decals)
+			for (var/thing in closet.decals)
 				if (isnull(closet.decals[thing]))
 					LAZYADD(bad_decal_colour, "[check_appearance] - [thing]")
 				if (!(thing in decal_states))

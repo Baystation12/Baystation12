@@ -16,7 +16,7 @@
 		received_moves = list()
 	received_moves.Cut()
 
-	for(var/global_listener in GLOB.moved_event.global_listeners)
+	for (var/global_listener in GLOB.moved_event.global_listeners)
 		GLOB.moved_event.unregister_global(global_listener)
 
 	stored_global_listen_count = GLOB.global_listen_count.Copy()
@@ -28,19 +28,19 @@
 	sanity_check_events("Post-Test")
 
 /datum/unit_test/observation/proc/sanity_check_events(phase)
-	for(var/entry in GLOB.all_observable_events)
+	for (var/entry in GLOB.all_observable_events)
 		var/singleton/observ/event = entry
 		if (null in event.global_listeners)
 			fail("[phase]: [event] - The global listeners list contains a null entry.")
 
-		for(var/event_source in event.event_sources)
-			for(var/list/list_of_listeners in event.event_sources[event_source])
+		for (var/event_source in event.event_sources)
+			for (var/list/list_of_listeners in event.event_sources[event_source])
 				if (isnull(list_of_listeners))
 					fail("[phase]: [event] - The event source list contains a null entry.")
 				else if (!istype(list_of_listeners))
 					fail("[phase]: [event] - The list of listeners was not of the expected type. Was [list_of_listeners.type].")
 				else
-					for(var/listener in list_of_listeners)
+					for (var/listener in list_of_listeners)
 						if (isnull(listener))
 							fail("[phase]: [event] - The event source listener list contains a null entry.")
 						else
@@ -48,15 +48,15 @@
 							if (isnull(proc_calls))
 								fail("[phase]: [event] - [listener] - The proc call list was null.")
 							else
-								for(var/proc_call in proc_calls)
+								for (var/proc_call in proc_calls)
 									if (isnull(proc_call))
 										fail("[phase]: [event] - [listener]- The proc call list contains a null entry.")
 
-	for(var/entry in (GLOB.global_listen_count - stored_global_listen_count))
+	for (var/entry in (GLOB.global_listen_count - stored_global_listen_count))
 		fail("[phase]: global_listen_count - Contained [log_info_line(entry)].")
-	for(var/entry in (GLOB.event_sources_count - stored_event_sources_count))
+	for (var/entry in (GLOB.event_sources_count - stored_event_sources_count))
 		fail("[phase]: event_sources_count - Contained [log_info_line(entry)].")
-	for(var/entry in (GLOB.event_listen_count - stored_event_listen_count))
+	for (var/entry in (GLOB.event_listen_count - stored_event_listen_count))
 		fail("[phase]: event_listen_count - Contained [log_info_line(entry)].")
 
 /datum/unit_test/observation/proc/conduct_test()
@@ -66,7 +66,7 @@
 	received_moves[LIST_PRE_INC(received_moves)] =  list(am, old_loc, new_loc)
 
 /datum/unit_test/observation/proc/dump_received_moves()
-	for(var/entry in received_moves)
+	for (var/entry in received_moves)
 		var/list/l = entry
 		log_unit_test("[l[1]] - [l[2]] - [l[3]]")
 

@@ -12,7 +12,7 @@
 
 
 /datum/event/brand_intelligence/start()
-	for(var/obj/machinery/vending/V in SSmachines.machinery)
+	for (var/obj/machinery/vending/V in SSmachines.machinery)
 		if (V.z in affecting_z)
 			vendingMachines += weakref(V)
 
@@ -51,7 +51,7 @@
 /datum/event/brand_intelligence/end()
 	originMachine.shut_up = 1
 	originMachine.shooting_chance = initial(originMachine.shooting_chance)
-	for(var/weakref/W in infectedVendingMachines)
+	for (var/weakref/W in infectedVendingMachines)
 		var/obj/machinery/vending/infectedMachine = W.resolve()
 		if (!infectedMachine)
 			continue

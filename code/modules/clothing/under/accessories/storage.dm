@@ -198,5 +198,5 @@
 /obj/item/clothing/accessory/storage/bandolier/safari/Initialize()
 	. = ..()
 	if (container)
-		for(var/i = 1 to abs(slots))
+		for (var/i = 1 to abs(slots))
 			new /obj/item/net_shell (container)

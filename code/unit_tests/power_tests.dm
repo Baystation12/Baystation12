@@ -13,7 +13,7 @@
 	var/reverse = GLOB.reverse_dir[dir]
 
 	. = list() //can have multiple connected neighbours for a dir, e.g. Y-junctions
-	for(var/obj/structure/cable/other in T)
+	for (var/obj/structure/cable/other in T)
 		if (other.d1 == reverse || other.d2 == reverse)
 			. += other
 
@@ -22,7 +22,7 @@
 	var/list/found_cables = list()
 
 	//there is a cable list, but for testing purposes we search every cable in the world
-	for(var/obj/structure/cable/C in world)
+	for (var/obj/structure/cable/C in world)
 		if (C in found_cables)
 			continue
 		var/list/to_search = list(C)
@@ -31,7 +31,7 @@
 			var/obj/structure/cable/next = to_search[length(to_search)]
 			LIST_DEC(to_search)
 			searched += next
-			for(var/obj/structure/cable/other in get_connected_neighbours(next))
+			for (var/obj/structure/cable/other in get_connected_neighbours(next))
 				if (other in searched)
 					continue
 				if (next.powernet != other.powernet)
@@ -54,9 +54,9 @@
 
 /datum/unit_test/areas_apc_uniqueness/start_test()
 	var/failure = ""
-	for(var/area/A in world)
+	for (var/area/A in world)
 		var/obj/machinery/power/apc/found_apc = null
-		for(var/obj/machinery/power/apc/APC in A)
+		for (var/obj/machinery/power/apc/APC in A)
 			if (!found_apc)
 				found_apc = APC
 				continue
@@ -76,11 +76,11 @@
 /datum/unit_test/area_power_tally_accuracy/start_test()
 	var/failed = FALSE
 	var/list/channel_names = list("equip", "light", "environ")
-	for(var/area/A in world)
+	for (var/area/A in world)
 		var/list/old_values = list(A.used_equip, A.used_light, A.used_environ)
 		A.retally_power()
 		var/list/new_values = list(A.used_equip, A.used_light, A.used_environ)
-		for(var/i in 1 to length(old_values))
+		for (var/i in 1 to length(old_values))
 			if (abs(old_values[i] - new_values[i]) > 1) // Round because there can in fact be roundoff error here apparently.
 				failed = TRUE
 				log_bad("The area [A.name] had improper power use values on the [channel_names[i]] channel: was [old_values[i]] but should be [new_values[i]].")

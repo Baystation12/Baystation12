@@ -18,7 +18,7 @@ var/global/repository/follow/follow_repository = new()
 	followed_objects_assoc = list()
 	followed_subtypes = list()
 
-	for(var/fht in subtypesof(/datum/follow_holder))
+	for (var/fht in subtypesof(/datum/follow_holder))
 		var/datum/follow_holder/fh = fht
 		followed_subtypes[initial(fh.followed_type)] = fht
 
@@ -46,7 +46,7 @@ var/global/repository/follow/follow_repository = new()
 	qdel(follow_holder)
 
 /repository/follow/proc/get_follow_type(atom/movable/AM)
-	for(var/follow_type in followed_subtypes)
+	for (var/follow_type in followed_subtypes)
 		if (istype(AM, follow_type))
 			return followed_subtypes[follow_type]
 
@@ -59,19 +59,19 @@ var/global/repository/follow/follow_repository = new()
 	cache = new(5 SECONDS)
 
 	var/list/followed_by_name = list()
-	for(var/followed_object in followed_objects)
+	for (var/followed_object in followed_objects)
 		var/datum/follow_holder/fh = followed_object
 		if (fh.show_entry())
 			group_by(followed_by_name, fh.get_name(TRUE), fh)
 
 	var/list/L = list()
 
-	for(var/followed_name in followed_by_name)
+	for (var/followed_name in followed_by_name)
 		var/list/followed_things = followed_by_name[followed_name]
 		if (length(followed_things) == 1)
 			ADD_SORTED(L, followed_things[1], /proc/cmp_follow_holder)
 		else
-			for(var/i = 1 to length(followed_things))
+			for (var/i = 1 to length(followed_things))
 				var/datum/follow_holder/followed_thing = followed_things[i]
 				followed_thing.instance = i
 				followed_thing.get_name(TRUE)

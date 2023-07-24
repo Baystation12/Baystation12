@@ -27,7 +27,7 @@
 		flavor_text += "a tear at the [amputation_point] so severe that it hangs by a scrap of flesh"
 
 	var/list/wound_descriptors = list()
-	for(var/datum/wound/W in wounds)
+	for (var/datum/wound/W in wounds)
 		var/this_wound_desc = W.desc
 		if (W.damage_type == INJURY_TYPE_BURN && W.salved)
 			this_wound_desc = "salved [this_wound_desc]"
@@ -58,14 +58,14 @@
 
 		if (!encased || how_open() >= SURGERY_ENCASED)
 			var/list/bits = list()
-			for(var/obj/item/organ/internal/organ in internal_organs)
+			for (var/obj/item/organ/internal/organ in internal_organs)
 				bits += organ.get_visible_state()
-			for(var/obj/item/implant in implants)
+			for (var/obj/item/implant in implants)
 				bits += implant.name
 			if (length(bits))
 				wound_descriptors["[english_list(bits)] visible in the wounds"] = 1
 
-	for(var/wound in wound_descriptors)
+	for (var/wound in wound_descriptors)
 		switch(wound_descriptors[wound])
 			if (1)
 				flavor_text += "a [wound]"
@@ -94,7 +94,7 @@
 		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_BROKEN]'>[capitalize(broken_description)]</span>" : capitalize(broken_description)
 	if (implants && length(implants))
 		var/unknown_body = 0
-		for(var/I in implants)
+		for (var/I in implants)
 			var/obj/item/implant/imp = I
 			if (istype(I,/obj/item/implant))
 				if (imp.hidden)
@@ -118,7 +118,7 @@
 	if (LAZYLEN(wounds))
 		to_chat(user, SPAN_WARNING("You find [get_wounds_desc()]"))
 		var/list/stuff = list()
-		for(var/datum/wound/wound in wounds)
+		for (var/datum/wound/wound in wounds)
 			if (LAZYLEN(wound.embedded_objects))
 				stuff |= wound.embedded_objects
 		if (length(stuff))
@@ -132,7 +132,7 @@
 
 	var/list/badness = list()
 	var/list/symptoms = GET_SINGLETON_SUBTYPE_MAP(/singleton/diagnostic_sign)
-	for(var/S in symptoms)
+	for (var/S in symptoms)
 		var/singleton/diagnostic_sign/sign = symptoms[S]
 		if (sign.manifested_in(src))
 			badness += sign.get_description(user)
@@ -164,7 +164,7 @@
 
 /obj/item/organ/external/listen()
 	var/list/sounds = list()
-	for(var/obj/item/organ/internal/I in internal_organs)
+	for (var/obj/item/organ/internal/I in internal_organs)
 		var/gutsound = I.listen()
 		if (gutsound)
 			sounds += gutsound

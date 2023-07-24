@@ -9,7 +9,7 @@
 				return soft_type
 		return default_attack
 
-	for(var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
+	for (var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
 		if (u_attack.is_usable(src, target, hit_zone))
 			if (pulling_punches)
 				var/datum/unarmed_attack/soft_variant = u_attack.get_sparring_variant()
@@ -330,7 +330,7 @@
 	set src = usr
 
 	var/list/choices = list()
-	for(var/thing in species.unarmed_attacks)
+	for (var/thing in species.unarmed_attacks)
 		var/datum/unarmed_attack/u_attack = thing
 		choices[u_attack.attack_name] = u_attack
 

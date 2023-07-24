@@ -80,7 +80,7 @@
 	else if (istype(i, /obj/item/paper_bundle))
 		to_chat(user, SPAN_NOTICE("You loosen \the [i] and add its papers into \the [src]."))
 		var/was_there_a_photo = 0
-		for(var/obj/item/bundleitem in i) //loop through items in bundle
+		for (var/obj/item/bundleitem in i) //loop through items in bundle
 			if (istype(bundleitem, /obj/item/paper)) //if item is paper, add into the bin
 				papers.Add(bundleitem)
 				update_icon()

@@ -32,7 +32,7 @@
 	UnarmedAttack(target)
 
 /mob/living/bot/medbot/lookForTargets()
-	for(var/mob/living/carbon/human/H in view(7, src)) // Time to find a patient!
+	for (var/mob/living/carbon/human/H in view(7, src)) // Time to find a patient!
 		if (confirmTarget(H))
 			target = H
 			if (last_newpatient_speak + 300 < world.time)
@@ -256,7 +256,7 @@
 
 	// If they're injured, we're using a beaker, and they don't have on of the chems in the beaker
 	if (reagent_glass && use_beaker && ((H.getBruteLoss() >= heal_threshold) || (H.getToxLoss() >= heal_threshold) || (H.getToxLoss() >= heal_threshold) || (H.getOxyLoss() >= (heal_threshold + 15))))
-		for(var/datum/reagent/R in reagent_glass.reagents.reagent_list)
+		for (var/datum/reagent/R in reagent_glass.reagents.reagent_list)
 			if (!H.reagents.has_reagent(R))
 				return 1
 			continue

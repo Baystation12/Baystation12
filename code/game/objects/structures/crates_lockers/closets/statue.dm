@@ -49,7 +49,7 @@
 
 /obj/structure/closet/statue/Process()
 	timer--
-	for(var/mob/living/M in src) //Go-go gadget stasis field
+	for (var/mob/living/M in src) //Go-go gadget stasis field
 		M.setToxLoss(intialTox)
 		M.adjustFireLoss(intialFire - M.getFireLoss())
 		M.adjustBruteLoss(intialBrute - M.getBruteLoss())
@@ -60,10 +60,10 @@
 		qdel(src)
 
 /obj/structure/closet/statue/dump_contents()
-	for(var/obj/O in src)
+	for (var/obj/O in src)
 		O.dropInto(loc)
 
-	for(var/mob/living/M in src)
+	for (var/mob/living/M in src)
 		M.dropInto(loc)
 		M.unset_sdisability(MUTED)
 		M.take_overall_damage(M.health - get_damage_value(), 0) //any new damage the statue incurred is transfered to the mob

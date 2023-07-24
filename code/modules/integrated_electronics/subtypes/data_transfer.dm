@@ -17,7 +17,7 @@
 	var/number_of_pins = 2
 
 /obj/item/integrated_circuit/transfer/multiplexer/Initialize()
-	for(var/i = 1 to number_of_pins)
+	for (var/i = 1 to number_of_pins)
 		inputs["input [i]"] = IC_PINTYPE_ANY // This is just a string since pins don't get built until ..() is called.
 
 	complexity = number_of_pins
@@ -67,7 +67,7 @@
 	var/number_of_pins = 2
 
 /obj/item/integrated_circuit/transfer/demultiplexer/Initialize()
-	for(var/i = 1 to number_of_pins)
+	for (var/i = 1 to number_of_pins)
 		outputs["output [i]"] = IC_PINTYPE_ANY
 	complexity = number_of_pins
 
@@ -80,7 +80,7 @@
 		return
 	var/output_index = get_pin_data(IC_INPUT, 1)
 	if (!isnull(output_index) && (output_index >= 1 && output_index <= length(outputs)))
-		for(var/i in 1 to LAZYLEN(outputs)) //Clear everything out
+		for (var/i in 1 to LAZYLEN(outputs)) //Clear everything out
 			set_pin_data(IC_OUTPUT,i,null)
 		var/datum/integrated_io/O = outputs[output_index]
 		set_pin_data(IC_OUTPUT, output_index,get_pin_data(IC_INPUT, 2))
@@ -120,7 +120,7 @@
 	var/number_of_pins = 2
 
 /obj/item/integrated_circuit/transfer/pulsedemultiplexer/Initialize()
-	for(var/i = 1 to number_of_pins)
+	for (var/i = 1 to number_of_pins)
 		activators["output [i]"] = IC_PINTYPE_PULSE_OUT
 	complexity = number_of_pins
 

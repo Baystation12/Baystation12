@@ -45,7 +45,7 @@
 	var/list/target_turfs = getcircle(T, spreading_range)
 	var/fragments_per_projectile = round(fragment_number/length(target_turfs))
 
-	for(var/turf/O in target_turfs)
+	for (var/turf/O in target_turfs)
 		sleep(0)
 		var/fragment_type = pickweight(fragtypes)
 		var/obj/item/projectile/bullet/pellet/fragment/P = new fragment_type(T)
@@ -68,7 +68,7 @@
 				recursion_limit--
 
 		//Make sure to hit any mobs in the source turf
-		for(var/mob/living/M in T)
+		for (var/mob/living/M in T)
 			//lying on a frag grenade while the grenade is on the ground causes you to absorb most of the shrapnel.
 			//you will most likely be dead, but others nearby will be spared the fragments that hit you instead.
 			if (M.lying && isturf(src.loc))

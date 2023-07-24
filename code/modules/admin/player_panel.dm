@@ -93,7 +93,7 @@
 
 				function clearAll(){
 					var spans = document.getElementsByTagName('span');
-					for(var i = 0; i < spans.length; i++){
+					for (var i = 0; i < spans.length; i++){
 						var span = spans\[i\];
 
 						var id = span.getAttribute("id");
@@ -103,7 +103,7 @@
 
 						var pass = 1;
 
-						for(var j = 0; j < locked_tabs.length; j++){
+						for (var j = 0; j < locked_tabs.length; j++){
 							if (locked_tabs\[j\]==id){
 								pass = 0;
 								break;
@@ -132,7 +132,7 @@
 					}
 
 					var pass = 1;
-					for(var j = 0; j < locked_tabs.length; j++){
+					for (var j = 0; j < locked_tabs.length; j++){
 						if (locked_tabs\[j\]==id){
 							pass = 0;
 							break;
@@ -156,7 +156,7 @@
 					//document.write("a");
 					var index = 0;
 					var pass = 0;
-					for(var j = 0; j < locked_tabs.length; j++){
+					for (var j = 0; j < locked_tabs.length; j++){
 						if (locked_tabs\[j\]==id){
 							pass = 1;
 							index = j;
@@ -214,7 +214,7 @@
 
 	var/list/mobs = sortmobs()
 	var/i = 1
-	for(var/entry in mobs)
+	for (var/entry in mobs)
 		var/mob/M = entry
 		if (!istype(M))
 			continue
@@ -340,7 +340,7 @@
 		dat += "<a href='?src=\ref[src];delay_round_end=1'>[SSticker.delay_end ? "End Round Normally" : "Delay Round End"]</a><br>"
 		dat += "<hr>"
 		var/list/all_antag_types = GLOB.all_antag_types_
-		for(var/antag_type in all_antag_types)
+		for (var/antag_type in all_antag_types)
 			var/datum/antagonist/A = all_antag_types[antag_type]
 			dat += A.get_check_antag_output(src)
 		dat += "</body></html>"

@@ -44,14 +44,14 @@
 	if (!M)	return
 	M.dna.check_integrity()
 	if (UI)
-		for(var/i = 1, i <= DNA_UI_LENGTH-1, i++)
+		for (var/i = 1, i <= DNA_UI_LENGTH-1, i++)
 			if (prob(prob))
 				M.dna.SetUIValue(i,rand(1,4095),1)
 		M.dna.UpdateUI()
 		M.UpdateAppearance()
 
 	else
-		for(var/i = 1, i <= DNA_SE_LENGTH-1, i++)
+		for (var/i = 1, i <= DNA_SE_LENGTH-1, i++)
 			if (prob(prob))
 				M.dna.SetSEValue(i,rand(1,4095),1)
 		M.dna.UpdateSE()
@@ -166,14 +166,14 @@
 				H.gender = MALE
 
 		//Body markings
-		for(var/tag in dna.body_markings)
+		for (var/tag in dna.body_markings)
 			var/obj/item/organ/external/E = H.organs_by_name[tag]
 			if (E)
 				var/list/marklist = dna.body_markings[tag]
 				E.markings = marklist.Copy()
 
 		//Base skin and blend
-		for(var/obj/item/organ/external/E in H.organs)
+		for (var/obj/item/organ/external/E in H.organs)
 			E.set_dna(E.dna)
 
 		//Hair

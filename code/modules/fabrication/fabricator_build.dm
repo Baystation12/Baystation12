@@ -49,7 +49,7 @@
 		multiplier = 1
 
 	// Check if sufficient resources exist.
-	for(var/material in recipe.resources)
+	for (var/material in recipe.resources)
 		if (stored_material[material] < round(recipe.resources[material] * mat_efficiency) * multiplier)
 			return
 
@@ -61,7 +61,7 @@
 	queued_orders +=       order
 
 	// Remove/earmark resources.
-	for(var/material in recipe.resources)
+	for (var/material in recipe.resources)
 		var/removed_mat = round(recipe.resources[material] * mat_efficiency) * multiplier
 		stored_material[material] = max(0, stored_material[material] - removed_mat)
 		order.earmarked_materials[material] = removed_mat

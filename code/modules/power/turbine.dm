@@ -143,7 +143,7 @@
 		overlays += image('icons/obj/pipes.dmi', "turb-o", FLY_LAYER)
 
 
-	for(var/mob/M in viewers(1, src))
+	for (var/mob/M in viewers(1, src))
 		if ((M.client && M.machine == src))
 			src.interact(M)
 	AutoUpdateAI(src)
@@ -199,11 +199,11 @@
 
 /obj/machinery/computer/turbine_computer/Initialize()
 	. = ..()
-	for(var/obj/machinery/compressor/C in SSmachines.machinery)
+	for (var/obj/machinery/compressor/C in SSmachines.machinery)
 		if (id_tag == C.comp_id)
 			compressor = C
 	doors = new /list()
-	for(var/obj/machinery/door/blast/P in SSmachines.machinery)
+	for (var/obj/machinery/door/blast/P in SSmachines.machinery)
 		if (P.id_tag == id_tag)
 			doors += P
 
@@ -248,7 +248,7 @@
 		src.compressor.starter = !src.compressor.starter
 		. = TOPIC_REFRESH
 	else if (href_list["doors"])
-		for(var/obj/machinery/door/blast/D in src.doors)
+		for (var/obj/machinery/door/blast/D in src.doors)
 			if (door_status == 0)
 				spawn( 0 )
 					D.open()

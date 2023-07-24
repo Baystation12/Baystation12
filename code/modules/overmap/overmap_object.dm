@@ -25,7 +25,7 @@
 
 /obj/effect/overmap/proc/get_scan_data(mob/user)
 	var/temp_data = list()
-	for(var/id in scans)
+	for (var/id in scans)
 		var/datum/sector_scan/scan = scans[id]
 		if (!scan.required_skill || user.skill_check(scan.required_skill, scan.required_skill_level))
 			temp_data += scan.description
@@ -51,13 +51,13 @@
 
 /obj/effect/overmap/Crossed(obj/effect/overmap/visitable/other)
 	if (istype(other))
-		for(var/obj/effect/overmap/visitable/O in loc)
+		for (var/obj/effect/overmap/visitable/O in loc)
 			SSskybox.rebuild_skyboxes(O.map_z)
 
 /obj/effect/overmap/Uncrossed(obj/effect/overmap/visitable/other)
 	if (istype(other))
 		SSskybox.rebuild_skyboxes(other.map_z)
-		for(var/obj/effect/overmap/visitable/O in loc)
+		for (var/obj/effect/overmap/visitable/O in loc)
 			SSskybox.rebuild_skyboxes(O.map_z)
 
 /obj/effect/overmap/on_update_icon()

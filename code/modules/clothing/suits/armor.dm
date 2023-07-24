@@ -106,7 +106,7 @@
 	if (prob(50))
 		user.visible_message(SPAN_DANGER("The reactive teleport system flings [user] clear of the attack!"))
 		var/list/turfs = new/list()
-		for(var/turf/T in orange(6, user))
+		for (var/turf/T in orange(6, user))
 			if (istype(T,/turf/space)) continue
 			if (T.density) continue
 			if (T.x>world.maxx-6 || T.x<6)	continue

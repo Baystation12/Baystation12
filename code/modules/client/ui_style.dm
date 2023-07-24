@@ -53,7 +53,7 @@ var/global/all_tooltip_styles = list(
 
 	var/icon/ic = all_ui_styles[UI_style_new]
 
-	for(var/obj/screen/I in icons)
+	for (var/obj/screen/I in icons)
 		if (I.name in list(I_HELP, I_HURT, I_DISARM, I_GRAB)) continue
 		I.icon = ic
 		I.color = UI_style_color_new

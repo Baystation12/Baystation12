@@ -19,7 +19,7 @@
 	if (!buffs)
 		return
 	var/list/temp_buffs = buffs.Copy()
-	for(var/skill_type in temp_buffs)
+	for (var/skill_type in temp_buffs)
 		var/has_now = target.get_skill_value(skill_type)
 		var/current_buff = buffs[skill_type]
 		var/new_buff = clamp(has_now + current_buff, SKILL_MIN, SKILL_MAX) - has_now
@@ -55,7 +55,7 @@
 //returns a list of buffs of the given type.
 /mob/proc/fetch_buffs_of_type(buff_type, subtypes = 1)
 	. = list()
-	for(var/datum/skill_buff/buff in skillset.skill_buffs)
+	for (var/datum/skill_buff/buff in skillset.skill_buffs)
 		if (subtypes && istype(buff, buff_type))
 			. += buff
 		else if (!subtypes && (buff.type == buff_type))

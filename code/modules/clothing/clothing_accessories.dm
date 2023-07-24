@@ -44,7 +44,7 @@
 /obj/item/clothing/attack_hand(mob/user)
 	//only forward to the attached accessory if the clothing is equipped (not in a storage)
 	if (length(accessories) && src.loc == user)
-		for(var/obj/item/clothing/accessory/A in accessories)
+		for (var/obj/item/clothing/accessory/A in accessories)
 			A.attack_hand(user)
 		return
 	return ..()
@@ -71,7 +71,7 @@
 
 /obj/item/clothing/examine(mob/user)
 	. = ..()
-	for(var/obj/item/clothing/accessory/A in accessories)
+	for (var/obj/item/clothing/accessory/A in accessories)
 		if (!(A.accessory_flags & ACCESSORY_HIDDEN))
 			to_chat(user, "[icon2html(A, user)] \A [A] is attached to it.")
 	switch(ironed_state)
@@ -88,7 +88,7 @@
 
 /obj/item/clothing/proc/update_accessory_slowdown()
 	slowdown_accessory = 0
-	for(var/obj/item/clothing/accessory/A in accessories)
+	for (var/obj/item/clothing/accessory/A in accessories)
 		slowdown_accessory += A.slowdown
 
 /**
@@ -174,7 +174,7 @@
 	if (!length(accessories)) return
 	var/obj/item/clothing/accessory/A
 	var/list/removables = list()
-	for(var/obj/item/clothing/accessory/ass in accessories)
+	for (var/obj/item/clothing/accessory/ass in accessories)
 		if (ass.accessory_flags & ACCESSORY_REMOVABLE)
 			removables |= ass
 
@@ -198,7 +198,7 @@
 
 	var/choice = alert("Are you sure you want to remove all accessories from \the [src]?", "Confirmation", "Yes", "No")
 	if (choice == "Yes")
-		for(var/obj/item/clothing/accessory/ac in accessories)
+		for (var/obj/item/clothing/accessory/ac in accessories)
 			if (ac.accessory_flags & ACCESSORY_REMOVABLE)
 				src.remove_accessory(usr,ac)
 
@@ -207,6 +207,6 @@
 
 /obj/item/clothing/emp_act(severity)
 	if (length(accessories))
-		for(var/obj/item/clothing/accessory/A in accessories)
+		for (var/obj/item/clothing/accessory/A in accessories)
 			A.emp_act(severity)
 	..()

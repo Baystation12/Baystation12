@@ -79,7 +79,7 @@
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	if (ingested && length(ingested.reagent_list) > 1) // Need to have at least 2 reagents - cabon and something to remove
 		var/effect = 1 / (length(ingested.reagent_list) - 1)
-		for(var/datum/reagent/R in ingested.reagent_list)
+		for (var/datum/reagent/R in ingested.reagent_list)
 			if (R == src)
 				continue
 			ingested.remove_reagent(R.type, removed * effect)
@@ -373,7 +373,7 @@
 		if (ishuman(M)) // Applies disfigurement
 			var/mob/living/carbon/human/H = M
 			var/screamed
-			for(var/obj/item/organ/external/affecting in H.organs)
+			for (var/obj/item/organ/external/affecting in H.organs)
 				if (!screamed && affecting.can_feel_pain())
 					screamed = 1
 					H.emote("scream")
@@ -385,7 +385,7 @@
 	if ((istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (volume > meltdose))
 		var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
 		I.desc = "Looks like this was \an [O] some time ago."
-		for(var/mob/M in viewers(5, O))
+		for (var/mob/M in viewers(5, O))
 			to_chat(M, SPAN_WARNING("\The [O] melts."))
 		qdel(O)
 		remove_self(meltdose) // 10 units of acid will not melt EVERYTHING on the tile

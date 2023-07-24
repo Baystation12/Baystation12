@@ -24,11 +24,11 @@
 		resources = list()
 	var/obj/item/I = new path
 	if (length(I.matter))
-		for(var/material in I.matter)
+		for (var/material in I.matter)
 			var/material/M = SSmaterials.get_material_by_name(material)
 			if (istype(M) && !ignore_materials[M.type])
 				resources[M.type] = I.matter[material] * FABRICATOR_EXTRA_COST_FACTOR
 	if (I.reagents && length(I.reagents.reagent_list))
-		for(var/datum/reagent/R in I.reagents.reagent_list)
+		for (var/datum/reagent/R in I.reagents.reagent_list)
 			resources[R.type] = R.volume * FABRICATOR_EXTRA_COST_FACTOR
 	qdel(I)

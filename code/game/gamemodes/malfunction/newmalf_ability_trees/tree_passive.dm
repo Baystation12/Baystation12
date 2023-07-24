@@ -77,5 +77,5 @@
 
 	user.hacked_apcs_hidden = !user.hacked_apcs_hidden
 	to_chat(user, "You [user.hacked_apcs_hidden ? "enable" : "disable"] subtle algorithms on all of your hacked APCs.")
-	for(var/obj/machinery/power/apc/A in user.hacked_apcs)
+	for (var/obj/machinery/power/apc/A in user.hacked_apcs)
 		A.update_icon()

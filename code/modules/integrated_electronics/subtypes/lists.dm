@@ -131,9 +131,9 @@
 	var/list/output_list2 = list()
 	var/list/output = list()
 
-	for(var/input_item in input_list)
+	for (var/input_item in input_list)
 		if (sample_list)
-			for(var/sample_item in sample_list)
+			for (var/sample_item in sample_list)
 				if (!isnull(sample_item))
 					if (istext(input_item) && istext(sample_item) && findtext(input_item, sample_item))
 						output += input_item
@@ -181,7 +181,7 @@
 /obj/item/integrated_circuit/lists/listset/do_work()
 	var/list/input_list = get_pin_data(IC_INPUT, 1)
 	var/list/output_list = list()
-	for(var/e in input_list)
+	for (var/e in input_list)
 		if (e in output_list)
 			continue
 		output_list.Add(e)
@@ -246,7 +246,7 @@
 	var/index = get_pin_data(IC_INPUT, 2)
 
 	if (length(input_list))
-		for(var/j in 1 to length(input_list))
+		for (var/j in 1 to length(input_list))
 			var/I = input_list[j]
 			if (j != index)
 				red_list.Add(I)
@@ -364,14 +364,14 @@
 	var/number_of_pins = 16
 
 /obj/item/integrated_circuit/lists/constructor/Initialize()
-	for(var/i = 1 to number_of_pins)
+	for (var/i = 1 to number_of_pins)
 		inputs["input [i]"] = IC_PINTYPE_ANY // This is just a string since pins don't get built until ..() is called.
 	complexity = number_of_pins / 2
 	. = ..()
 
 /obj/item/integrated_circuit/lists/constructor/do_work()
 	var/list/output_list = list()
-	for(var/i = 1 to number_of_pins)
+	for (var/i = 1 to number_of_pins)
 		var/data = get_pin_data(IC_INPUT, i)
 
 		// No nested lists
@@ -410,7 +410,7 @@
 	var/number_of_pins = 16
 
 /obj/item/integrated_circuit/lists/deconstructor/Initialize()
-	for(var/i = 1 to number_of_pins)
+	for (var/i = 1 to number_of_pins)
 		outputs["output [i]"] = IC_PINTYPE_ANY // This is just a string since pins don't get built until ..() is called.
 	complexity = number_of_pins / 2
 	. = ..()
@@ -419,7 +419,7 @@
 	var/list/input_list = get_pin_data(IC_INPUT, 1)
 	var/start_index = get_pin_data(IC_INPUT, 2)
 
-	for(var/i = 1 to number_of_pins)
+	for (var/i = 1 to number_of_pins)
 		var/list_index = i + start_index - 1
 		if (list_index > length(input_list))
 			set_pin_data(IC_OUTPUT, i, null)

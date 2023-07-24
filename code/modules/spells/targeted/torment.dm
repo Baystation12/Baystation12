@@ -22,7 +22,7 @@
 
 /spell/targeted/torment/cast(list/targets, mob/user)
 	gibs(user.loc)
-	for(var/mob/living/carbon/human/H in targets)
+	for (var/mob/living/carbon/human/H in targets)
 		H.adjustHalLoss(loss)
 
 /spell/targeted/torment/empower_spell()

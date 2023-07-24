@@ -67,7 +67,7 @@
 			ret.overlays	+= bloodsies
 
 	if (length(accessories))
-		for(var/obj/item/clothing/accessory/A in accessories)
+		for (var/obj/item/clothing/accessory/A in accessories)
 			ret.overlays |= A.get_mob_overlay(user_mob, slot)
 	return ret
 
@@ -201,7 +201,7 @@
 		var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor/ablative)
 		var/list/damages = armor_datum.get_visible_damage()
 		to_chat(user, "\The [src] [icon2html(src, user)] has some damage:")
-		for(var/key in damages)
+		for (var/key in damages)
 			to_chat(user, "<li><b>[capitalize(damages[key])]</b> damage to the <b>[key]</b> armor.")
 		return TOPIC_HANDLED
 
@@ -1095,5 +1095,5 @@ BLIND     // can't see anything
 
 /obj/item/clothing/get_pressure_weakness(pressure,zone)
 	. = ..()
-	for(var/obj/item/clothing/accessory/A in accessories)
+	for (var/obj/item/clothing/accessory/A in accessories)
 		. = min(., A.get_pressure_weakness(pressure,zone))

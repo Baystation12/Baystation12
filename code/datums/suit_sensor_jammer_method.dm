@@ -5,7 +5,7 @@
 
 /suit_sensor_jammer_method/New(holder, proc_call)
 	..()
-	for(var/jammer_method in jammer_methods)
+	for (var/jammer_method in jammer_methods)
 		var/jammer_method_type = jammer_methods[jammer_method]
 		jammer_methods[jammer_method] = new jammer_method_type(holder, proc_call)
 
@@ -13,11 +13,11 @@
 	return name
 
 /suit_sensor_jammer_method/proc/enable()
-	for(var/jammer_method in jammer_methods)
+	for (var/jammer_method in jammer_methods)
 		crew_repository.add_modifier(jammer_method, jammer_methods[jammer_method])
 
 /suit_sensor_jammer_method/proc/disable()
-	for(var/jammer_method in jammer_methods)
+	for (var/jammer_method in jammer_methods)
 		crew_repository.remove_modifier(jammer_method, jammer_methods[jammer_method])
 
 /suit_sensor_jammer_method/random

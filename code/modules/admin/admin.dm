@@ -7,25 +7,25 @@ var/global/floorIsLava = 0
 /proc/message_admins(msg)
 	msg = SPAN_CLASS("log_message", "[SPAN_CLASS("prefix", "ADMIN LOG:")] [SPAN_CLASS("message", msg)]")
 	log_adminwarn(msg)
-	for(var/client/C as anything in GLOB.admins)
+	for (var/client/C as anything in GLOB.admins)
 		if (R_ADMIN & C.holder.rights)
 			to_chat(C, msg)
 /proc/message_staff(msg)
 	msg = SPAN_CLASS("log_message", "[SPAN_CLASS("prefix", "STAFF LOG:")] [SPAN_CLASS("message", msg)]")
 	log_adminwarn(msg)
-	for(var/client/C as anything in GLOB.admins)
+	for (var/client/C as anything in GLOB.admins)
 		if (C && C.holder && (R_INVESTIGATE & C.holder.rights))
 			to_chat(C, msg)
 /proc/msg_admin_attack(text) //Toggleable Attack Messages
 	log_attack(text)
 	var/rendered = SPAN_CLASS("log_message", "[SPAN_CLASS("prefix", "ATTACK:")] [SPAN_CLASS("message", text)]")
-	for(var/client/C as anything in GLOB.admins)
+	for (var/client/C as anything in GLOB.admins)
 		if (check_rights(R_INVESTIGATE, 0, C))
 			if (C.get_preference_value(/datum/client_preference/staff/show_attack_logs) == GLOB.PREF_SHOW)
 				var/msg = rendered
 				to_chat(C, msg)
 /proc/admin_notice(message, rights)
-	for(var/mob/M in SSmobs.mob_list)
+	for (var/mob/M in SSmobs.mob_list)
 		if (check_rights(rights, 0, M))
 			to_chat(M, message)
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
@@ -61,7 +61,7 @@ var/global/floorIsLava = 0
 	var/mob/living/exosuit/E = M
 	if (istype(E) && E.pilots)
 		body += "<br><b>Exosuit pilots:</b><br>"
-		for(var/mob/living/pilot in E.pilots)
+		for (var/mob/living/pilot in E.pilots)
 			body += "[pilot] "
 			body += " \[<A href='?src=\ref[src];pilot=\ref[pilot]'>link</a>\]<br>"
 
@@ -140,11 +140,11 @@ var/global/floorIsLava = 0
 			body += "<a href='?src=\ref[psyker.psi];remove_psionics=1'>Remove psionics.</a><br/><br/>"
 			body += "<a href='?src=\ref[psyker.psi];trigger_psi_latencies=1'>Trigger latencies.</a><br/>"
 		body += "<table width = '100%'>"
-		for(var/faculty in list(PSI_COERCION, PSI_PSYCHOKINESIS, PSI_REDACTION, PSI_ENERGISTICS))
+		for (var/faculty in list(PSI_COERCION, PSI_PSYCHOKINESIS, PSI_REDACTION, PSI_ENERGISTICS))
 			var/singleton/psionic_faculty/faculty_singleton = SSpsi.get_faculty(faculty)
 			var/faculty_rank = psyker.psi ? psyker.psi.get_rank(faculty) : 0
 			body += "<tr><td><b>[faculty_singleton.name]</b></td>"
-			for(var/i = 1 to LAZYLEN(GLOB.psychic_ranks_to_strings))
+			for (var/i = 1 to LAZYLEN(GLOB.psychic_ranks_to_strings))
 				var/psi_title = GLOB.psychic_ranks_to_strings[i]
 				if (i == faculty_rank)
 					psi_title = "<b>[psi_title]</b>"
@@ -192,7 +192,7 @@ var/global/floorIsLava = 0
 				body += "<br><br>"
 				body += "<b>DNA Blocks:</b><br><table border='0'><tr><th>&nbsp;</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>"
 				var/bname
-				for(var/block=1;block<=DNA_SE_LENGTH;block++)
+				for (var/block=1;block<=DNA_SE_LENGTH;block++)
 					if (((block-1)%5)==0)
 						body += "</tr><tr><th>[block-1]</th>"
 					bname = assigned_blocks[block]
@@ -248,7 +248,7 @@ var/global/floorIsLava = 0
 	// language toggles
 	body += "<br><br><b>Languages:</b><br>"
 	var/f = 1
-	for(var/k in all_languages)
+	for (var/k in all_languages)
 		var/datum/language/L = all_languages[k]
 		if (!(L.flags & INNATE))
 			if (!f) body += " | "
@@ -291,7 +291,7 @@ var/global/floorIsLava = 0
 	from_save(S, note_keys)
 
 	if (filter_term)
-		for(var/t in note_keys)
+		for (var/t in note_keys)
 			if (findtext(lowertext(t), lowertext(filter_term)))
 				continue
 			note_keys -= t
@@ -303,7 +303,7 @@ var/global/floorIsLava = 0
 	else
 		dat += "<table>"
 		note_keys = sortList(note_keys)
-		for(var/t in note_keys)
+		for (var/t in note_keys)
 			dat += "<tr><td><a href='?src=\ref[src];notes=show;ckey=[t]'>[t]</a></td></tr>"
 		dat += "</table><br>"
 
@@ -449,7 +449,7 @@ var/global/floorIsLava = 0
 			if ( !length(torch_network.network_channels) )
 				dat+="<I>No active channels found...</I>"
 			else
-				for(var/datum/feed_channel/CHANNEL in torch_network.network_channels)
+				for (var/datum/feed_channel/CHANNEL in torch_network.network_channels)
 					if (CHANNEL.is_admin_channel)
 						dat+="<B><span style='background-color: LightGreen'><A href='?src=\ref[src];ac_show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A></span></B><BR>"
 					else
@@ -496,7 +496,7 @@ var/global/floorIsLava = 0
 			if (src.admincaster_feed_channel.channel_name =="" || src.admincaster_feed_channel.channel_name == "\[REDACTED\]")
 				dat+="[SPAN_COLOR("maroon", "Invalid channel name.")]<BR>"
 			var/check = 0
-			for(var/datum/feed_channel/FC in torch_network.network_channels)
+			for (var/datum/feed_channel/FC in torch_network.network_channels)
 				if (FC.channel_name == src.admincaster_feed_channel.channel_name)
 					check = 1
 					break
@@ -515,7 +515,7 @@ var/global/floorIsLava = 0
 					dat+="<I>No feed messages found in channel...</I><BR>"
 				else
 					var/i = 0
-					for(var/datum/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
+					for (var/datum/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
 						i++
 						dat+="-[MESSAGE.body] <BR>"
 						if (MESSAGE.img)
@@ -536,7 +536,7 @@ var/global/floorIsLava = 0
 			if (!length(torch_network.network_channels))
 				dat+="<I>No feed channels found active...</I><BR>"
 			else
-				for(var/datum/feed_channel/CHANNEL in torch_network.network_channels)
+				for (var/datum/feed_channel/CHANNEL in torch_network.network_channels)
 					dat+="<A href='?src=\ref[src];ac_pick_censor_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (SPAN_COLOR("red", "***")) : null ]<BR>"
 			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Cancel</A>"
 		if (11)
@@ -549,7 +549,7 @@ var/global/floorIsLava = 0
 			if (!length(torch_network.network_channels))
 				dat+="<I>No feed channels found active...</I><BR>"
 			else
-				for(var/datum/feed_channel/CHANNEL in torch_network.network_channels)
+				for (var/datum/feed_channel/CHANNEL in torch_network.network_channels)
 					dat+="<A href='?src=\ref[src];ac_pick_d_notice=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (SPAN_COLOR("red", "***")) : null ]<BR>"
 
 			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Back</A>"
@@ -561,7 +561,7 @@ var/global/floorIsLava = 0
 			if ( !length(admincaster_feed_channel.messages) )
 				dat+="<I>No feed messages found in channel...</I><BR>"
 			else
-				for(var/datum/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
+				for (var/datum/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
 					dat+={"
 						-[MESSAGE.body] <BR>[FONT_SMALL("\[Story by [SPAN_COLOR("maroon", MESSAGE.author)]\]")]<BR>
 						[FONT_NORMAL("<A href='?src=\ref[src];ac_censor_channel_story_body=\ref[MESSAGE]'>[(MESSAGE.body == "\[REDACTED\]") ? ("Undo story censorship") : ("Censor story")]</A>  -  <A href='?src=\ref[src];ac_censor_channel_story_author=\ref[MESSAGE]'>[(MESSAGE.author == "\[REDACTED\]") ? ("Undo Author Censorship") : ("Censor message Author")]</A>")]<BR>
@@ -581,7 +581,7 @@ var/global/floorIsLava = 0
 				if ( !length(admincaster_feed_channel.messages) )
 					dat+="<I>No feed messages found in channel...</I><BR>"
 				else
-					for(var/datum/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
+					for (var/datum/feed_message/MESSAGE in src.admincaster_feed_channel.messages)
 						dat+="-[MESSAGE.body] <BR>[FONT_SMALL("\[Story by [SPAN_COLOR("maroon", MESSAGE.author)]\]")]<BR>"
 
 			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[11]'>Back</A>"
@@ -657,7 +657,7 @@ var/global/floorIsLava = 0
 	if (!check_rights(R_BAN))	return
 
 	var/dat = "<B>Job Bans!</B><HR><table>"
-	for(var/t in jobban_keylist)
+	for (var/t in jobban_keylist)
 		var/r = t
 		if ( findtext(r,"##") )
 			r = copytext( r, 1, findtext(r,"##") )//removes the description
@@ -693,7 +693,7 @@ var/global/floorIsLava = 0
 
 	// Print the header with category selection buttons.
 	var/dat = "<B>The first rule of adminbuse is: you don't talk about the adminbuse.</B><HR>"
-	for(var/datum/admin_secret_category/category in admin_secrets.categories)
+	for (var/datum/admin_secret_category/category in admin_secrets.categories)
 		if (!category.can_view(usr))
 			continue
 		if (active_category == category)
@@ -706,7 +706,7 @@ var/global/floorIsLava = 0
 	if (istype(active_category) && active_category.can_view(usr))
 		if (active_category.desc)
 			dat += "<I>[active_category.desc]</I><BR>"
-		for(var/datum/admin_secret_item/item in active_category.items)
+		for (var/datum/admin_secret_item/item in active_category.items)
 			if (!item.can_view(usr))
 				continue
 			dat += "<A href='?src=\ref[src];admin_secrets=\ref[item]'>[item.name()]</A><BR>"
@@ -1001,7 +1001,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 
 	if (M)
 		if (SSticker.mode.antag_templates && length(SSticker.mode.antag_templates))
-			for(var/datum/antagonist/antag in SSticker.mode.antag_templates)
+			for (var/datum/antagonist/antag in SSticker.mode.antag_templates)
 				if (antag.is_antagonist(M))
 					return 2
 		if (M.special_role)
@@ -1027,7 +1027,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		log_admin("[key_name(usr)] mass-spawned closets (icon debug), if this is a live server you should yell at them.")
 		var/x = 0
 		var/y = 0
-		for(var/check_appearance in typesof(/singleton/closet_appearance))
+		for (var/check_appearance in typesof(/singleton/closet_appearance))
 			x++
 			if (x > 10)
 				x = 0
@@ -1061,7 +1061,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		return
 
 	var/list/possible_items = list()
-	for(var/datum/custom_item/item in SScustomitems.custom_items_by_ckey[owner])
+	for (var/datum/custom_item/item in SScustomitems.custom_items_by_ckey[owner])
 		possible_items[item.item_name] = item
 	var/item_to_spawn = input("Select an item to spawn.", "Spawn Custom Item") as null|anything in possible_items
 	if (item_to_spawn && possible_items[item_to_spawn])
@@ -1084,10 +1084,10 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		to_chat(usr, "Custom item list not populated.")
 		return
 
-	for(var/assoc_key in SScustomitems.custom_items_by_ckey)
+	for (var/assoc_key in SScustomitems.custom_items_by_ckey)
 		to_chat(usr, "[assoc_key] has:")
 		var/list/current_items = SScustomitems.custom_items_by_ckey[assoc_key]
-		for(var/datum/custom_item/item in current_items)
+		for (var/datum/custom_item/item in current_items)
 			to_chat(usr, "- name: [item.item_name] icon: [item.item_icon_state] path: [item.item_path] desc: [item.item_desc]")
 
 /datum/admins/proc/spawn_plant(seedtype in SSplants.seeds)
@@ -1112,7 +1112,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	var/list/types = typesof(/atom)
 	var/list/matches = new()
 
-	for(var/path in types)
+	for (var/path in types)
 		if (findtext("[path]", object))
 			matches += path
 
@@ -1254,7 +1254,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 
 	if (SSticker.mode.antag_tags && length(SSticker.mode.antag_tags))
 		out += "<b>Core antag templates:</b></br>"
-		for(var/antag_tag in SSticker.mode.antag_tags)
+		for (var/antag_tag in SSticker.mode.antag_tags)
 			out += "<a href='?src=\ref[SSticker.mode];debug_antag=[antag_tag]'>[antag_tag]</a>.</br>"
 
 	if (SSticker.mode.round_autoantag)
@@ -1269,7 +1269,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 
 	out += "<b>All antag ids:</b>"
 	if (SSticker.mode.antag_templates && length(SSticker.mode.antag_templates))
-		for(var/datum/antagonist/antag in SSticker.mode.antag_templates)
+		for (var/datum/antagonist/antag in SSticker.mode.antag_templates)
 			antag.update_current_antag_max(SSticker.mode)
 			out += " <a href='?src=\ref[SSticker.mode];debug_antag=[antag.id]'>[antag.id]</a>"
 			out += " ([antag.get_antag_count()]/[antag.cur_max]) "
@@ -1306,7 +1306,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 
 /datum/admins/proc/output_ai_laws()
 	var/ai_number = 0
-	for(var/mob/living/silicon/S in SSmobs.mob_list)
+	for (var/mob/living/silicon/S in SSmobs.mob_list)
 		ai_number++
 		if (isAI(S))
 			to_chat(usr, "<b>AI [key_name(S, usr)]'s laws:</b>")
@@ -1541,7 +1541,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	var/data = "<center><b>Fax History:</b></center><br>"
 
 	if (GLOB.adminfaxes)
-		for(var/obj/item/item in GLOB.adminfaxes)
+		for (var/obj/item/item in GLOB.adminfaxes)
 			data += "[item.name] - <a href='?_src_=holder;AdminFaxView=\ref[item]'>view message</a><br>"
 	else
 		data += "<center>No faxes yet.</center>"
@@ -1594,12 +1594,12 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		to_chat(src.owner, SPAN_NOTICE("Message reply to transmitted successfully."))
 		if (P.sender) // sent as a reply
 			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(P.sender)]")
-			for(var/client/C as anything in GLOB.admins)
+			for (var/client/C as anything in GLOB.admins)
 				if ((R_INVESTIGATE) & C.holder.rights)
 					to_chat(C, SPAN_CLASS("log_message", "[SPAN_CLASS("prefix", "FAX LOG:")][key_name_admin(src.owner)] replied to a fax message from [key_name_admin(P.sender)] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)"))
 		else
 			log_admin("[key_name(src.owner)] has sent a fax message to [P.department]")
-			for(var/client/C as anything in GLOB.admins)
+			for (var/client/C as anything in GLOB.admins)
 				if ((R_INVESTIGATE) & C.holder.rights)
 					to_chat(C, SPAN_CLASS("log_message", "[SPAN_CLASS("prefix", "FAX LOG:")][key_name_admin(src.owner)] has sent a fax message to [P.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)"))
 	else

@@ -21,7 +21,7 @@
 		to_chat(mover, SPAN_WARNING("Gravity stops you from moving upward."))
 		return MOVEMENT_HANDLED
 
-	for(var/atom/A in destination)
+	for (var/atom/A in destination)
 		if (!A.CanMoveOnto(mob, start, 1.5, direction))
 			to_chat(mover, SPAN_WARNING("\The [A] blocks you."))
 			return MOVEMENT_HANDLED

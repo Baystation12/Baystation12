@@ -194,7 +194,7 @@ var/global/obj/screen/robot_inventory
 			if (r.module.emag in r.module.equipment)
 				r.module.equipment.Remove(r.module.emag)
 
-		for(var/atom/movable/A in r.module.equipment)
+		for (var/atom/movable/A in r.module.equipment)
 			if (!r.IsHolding(A))
 				//Module is not currently active
 				r.client.screen += A
@@ -212,7 +212,7 @@ var/global/obj/screen/robot_inventory
 	else
 		//Modules display is hidden
 		//r.client.screen -= robot_inventory	//"store" icon
-		for(var/atom/A in r.module?.equipment)
+		for (var/atom/A in r.module?.equipment)
 			if (!r.IsHolding(A))
 				//Module is not currently active
 				r.client.screen -= A

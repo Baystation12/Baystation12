@@ -31,7 +31,7 @@ GLOBAL_DATUM_INIT(cinematic, /datum/cinematic, new)
 
 	//Let's not discuss how this worked previously.
 	var/list/viewers = list()
-	for(var/mob/living/M in GLOB.alive_mobs)
+	for (var/mob/living/M in GLOB.alive_mobs)
 		if (M.client)
 			M.client.screen += cinematic_screen //show every client the cinematic
 			viewers[M.client] = M.stunned
@@ -42,7 +42,7 @@ GLOBAL_DATUM_INIT(cinematic, /datum/cinematic, new)
 	//Otherwise if its a verb it will continue on afterwards.
 	sleep(30 SECONDS)
 
-	for(var/client/C in viewers)
+	for (var/client/C in viewers)
 		if (C.mob)
 			C.mob.stunned = viewers[C]
 		C.screen -= cinematic_screen

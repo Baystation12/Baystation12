@@ -34,8 +34,8 @@
 // Diamond-square algorithm.
 /datum/random_map/noise/seed_map()
 	// Instantiate the grid.
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
+	for (var/x = 1, x <= limit_x, x++)
+		for (var/y = 1, y <= limit_y, y++)
 			map[TRANSLATE_COORD(x,y)] = 0
 
 	// Now dump in the actual random data.
@@ -119,10 +119,10 @@
 /datum/random_map/noise/cleanup()
 	var/is_not_border_left
 	var/is_not_border_right
-	for(var/i = 1 to smoothing_iterations)
+	for (var/i = 1 to smoothing_iterations)
 		var/list/next_map[limit_x*limit_y]
-		for(var/x = 1 to limit_x)
-			for(var/y = 1 to limit_y)
+		for (var/x = 1 to limit_x)
+			for (var/y = 1 to limit_y)
 				var/current_cell = TRANSLATE_COORD(x,y)
 				next_map[current_cell] = map[current_cell]
 				var/val_count = 1
@@ -172,12 +172,12 @@
 
 	if (smooth_single_tiles)
 		var/list/buddies = list()
-		for(var/x in 1 to limit_x - 1)
-			for(var/y in 1 to limit_y - 1)
+		for (var/x in 1 to limit_x - 1)
+			for (var/y in 1 to limit_y - 1)
 				var/mapcell = get_map_cell(x,y)
 				var/list/neighbors = get_neighbors(x, y)
 				buddies.Cut()
-				for(var/cell in neighbors)
+				for (var/cell in neighbors)
 					if (noise2value(map[cell]) == noise2value(map[mapcell]))
 						buddies |= cell
 				if (!length(buddies))
@@ -187,13 +187,13 @@
 	. = list()
 	if (!include_diagonals)
 		var/static/list/ortho_offsets = list(list(-1, 0), list(1, 0), list(0, 1), list(0,-1))
-		for(var/list/offset in ortho_offsets)
+		for (var/list/offset in ortho_offsets)
 			var/tmp_cell = get_map_cell(x+offset[1],y+offset[2])
 			if (tmp_cell)
 				. += tmp_cell
 	else
-		for(var/dx in -1 to 1)
-			for(var/dy in -1 to 1)
+		for (var/dx in -1 to 1)
+			for (var/dy in -1 to 1)
 				var/tmp_cell = get_map_cell(x+dx,y+dy)
 				if (tmp_cell)
 					. += tmp_cell

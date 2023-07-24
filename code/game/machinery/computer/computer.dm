@@ -118,7 +118,7 @@
 /obj/machinery/computer/dismantle(mob/user)
 	if (MACHINE_IS_BROKEN(src))
 		to_chat(user, SPAN_NOTICE("The broken glass falls out."))
-		for(var/obj/item/stock_parts/console_screen/screen in component_parts)
+		for (var/obj/item/stock_parts/console_screen/screen in component_parts)
 			qdel(screen)
 			new /obj/item/material/shard(loc)
 	else

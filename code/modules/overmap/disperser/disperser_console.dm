@@ -59,7 +59,7 @@
 	if (is_valid_setup())
 		return TRUE
 
-	for(var/obj/machinery/disperser/front/F in SSmachines.machinery)
+	for (var/obj/machinery/disperser/front/F in SSmachines.machinery)
 		if (get_dist(src, F) >= link_range)
 			continue
 		var/backwards = turn(F.dir, 180)
@@ -105,7 +105,7 @@
  */
 /obj/machinery/computer/ship/disperser/proc/get_calibration()
 	var/list/calresult[caldigit]
-	for(var/i = 1 to caldigit)
+	for (var/i = 1 to caldigit)
 		if (calibration[i] == calexpected[i])
 			calresult[i] = 2
 		else if (calibration[i] in calexpected)
@@ -120,7 +120,7 @@
 /obj/machinery/computer/ship/disperser/proc/reset_calibration()
 	calexpected = new /list(caldigit)
 	calibration = new /list(caldigit)
-	for(var/i = 1 to caldigit)
+	for (var/i = 1 to caldigit)
 		calexpected[i] = rand(0,9)
 		calibration[i] = 0
 
@@ -131,7 +131,7 @@
 	var/top = 0
 	// Maximum possible value, aka 100% accuracy
 	var/divisor = caldigit * 2
-	for(var/i in get_calibration())
+	for (var/i in get_calibration())
 		top += i
 	accuracy = round(top * 100 / divisor)
 	return round(top * 100 / divisor)
@@ -247,7 +247,7 @@
 			calibration[calnum + 1] = sanitize_integer(input, 0, 9, 0)
 
 	if (href_list["skill_calibration"])
-		for(var/i = 1 to min(caldigit, user.get_skill_value(core_skill) - skill_offset))
+		for (var/i = 1 to min(caldigit, user.get_skill_value(core_skill) - skill_offset))
 			calibration[i] = calexpected[i]
 
 	if (href_list["strength"])

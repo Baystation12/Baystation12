@@ -3,7 +3,7 @@
 
 /datum/unit_test/loadout_test_shall_have_name_cost_path/start_test()
 	var/failed = 0
-	for(var/gear_name in gear_datums)
+	for (var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
 
 		if (!G.display_name)
@@ -27,15 +27,15 @@
 
 /datum/unit_test/loadout_test_shall_have_valid_icon_states/start_test()
 	var/failed = FALSE
-	for(var/gear_name in gear_datums)
+	for (var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
 		var/list/path_tweaks = list()
-		for(var/datum/gear_tweak/path/p in G.gear_tweaks)
+		for (var/datum/gear_tweak/path/p in G.gear_tweaks)
 			path_tweaks += p
 
 		if (length(path_tweaks))
-			for(var/datum/gear_tweak/path/p in path_tweaks)
-				for(var/path_name in p.valid_paths)
+			for (var/datum/gear_tweak/path/p in path_tweaks)
+				for (var/path_name in p.valid_paths)
 					var/path_type = p.valid_paths[path_name]
 					if (!type_has_valid_icon_state(path_type))
 						var/atom/A = path_type
@@ -65,10 +65,10 @@
 
 /datum/unit_test/loadout_test_gear_path_tweaks_shall_be_of_gear_path/start_test()
 	var/failed = 0
-	for(var/gear_name in gear_datums)
+	for (var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
-		for(var/datum/gear_tweak/path/p in G.gear_tweaks)
-			for(var/path_name in p.valid_paths)
+		for (var/datum/gear_tweak/path/p in G.gear_tweaks)
+			for (var/path_name in p.valid_paths)
 				var/path_type = p.valid_paths[path_name]
 				if (!ispath(path_type, G.path))
 					log_unit_test("[G] - [path_type] ('[path_name]'): Was not a path of [G.path].")
@@ -86,10 +86,10 @@
 /datum/unit_test/loadout_test_gear_path_tweaks_shall_have_unique_keys/start_test()
 	var/path_entries_by_gear_path_and_name = list()
 
-	for(var/gear_name in gear_datums)
+	for (var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
-		for(var/datum/gear_tweak/path/p in G.gear_tweaks)
-			for(var/path_name in p.valid_paths)
+		for (var/datum/gear_tweak/path/p in G.gear_tweaks)
+			for (var/path_name in p.valid_paths)
 				group_by(path_entries_by_gear_path_and_name, "[G] - [p] - [path_name]", path_name)
 
 	var/number_of_issues = number_of_issues(path_entries_by_gear_path_and_name, "Path Tweak Names")
@@ -108,11 +108,11 @@
 	name = "LOADOUT: Custom setup tweaks shall have valid procs"
 
 /datum/unit_test/loadout_custom_setup_tweaks_shall_have_valid_procs/start_test()
-	for(var/gear_name in gear_datums)
+	for (var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
 		var/datum/instance
 		var/mob/user
-		for(var/datum/gear_tweak/custom_setup/cs in G.gear_tweaks)
+		for (var/datum/gear_tweak/custom_setup/cs in G.gear_tweaks)
 			instance = instance || new G.path()
 			user = user || new()
 			cs.tweak_item(user, instance)

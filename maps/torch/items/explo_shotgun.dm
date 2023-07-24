@@ -94,7 +94,7 @@
 					reinforced.dropInto(loc)
 					reinforced.throw_at(C, 2, 10)
 					reinforced = null
-				for(var/zone in list(BP_L_HAND, BP_R_HAND, BP_HEAD))
+				for (var/zone in list(BP_L_HAND, BP_R_HAND, BP_HEAD))
 					C.apply_damage(rand(10,20), def_zone=zone)
 			else
 				visible_message(SPAN_DANGER("[src] explodes!"))

@@ -3,10 +3,10 @@
 	var/groups = rand(3,8)
 
 	var/list/spots
-	for(var/i = 0 to groups)
+	for (var/i = 0 to groups)
 		spots = get_infestation_turfs()
 
-		for(var/j = 0 to drons)
+		for (var/j = 0 to drons)
 			if (!LAZYLEN(spots))
 				continue
 

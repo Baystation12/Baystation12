@@ -19,7 +19,7 @@ var/global/list/gear_datums = list()
 /hook/startup/proc/populate_gear_list()
 
 	//create a list of gear datums to sort
-	for(var/geartype in typesof(/datum/gear)-/datum/gear)
+	for (var/geartype in typesof(/datum/gear)-/datum/gear)
 		var/datum/gear/G = geartype
 		if (initial(G.category) == geartype)
 			continue
@@ -36,7 +36,7 @@ var/global/list/gear_datums = list()
 		LC.gear[use_name] = gear_datums[use_name]
 
 	loadout_categories = sortAssoc(loadout_categories)
-	for(var/loadout_category in loadout_categories)
+	for (var/loadout_category in loadout_categories)
 		var/datum/loadout_category/LC = loadout_categories[loadout_category]
 		LC.gear = sortAssoc(LC.gear)
 	return 1
@@ -58,12 +58,12 @@ var/global/list/gear_datums = list()
 /datum/category_item/player_setup_item/loadout/proc/valid_gear_choices(max_cost)
 	. = list()
 	var/mob/preference_mob = preference_mob()
-	for(var/gear_name in gear_datums)
+	for (var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
 		var/okay = 1
 		if (G.whitelisted && preference_mob)
 			okay = 0
-			for(var/species in G.whitelisted)
+			for (var/species in G.whitelisted)
 				if (is_species_whitelisted(preference_mob, species))
 					okay = 1
 					break
@@ -74,9 +74,9 @@ var/global/list/gear_datums = list()
 		. += gear_name
 
 /datum/category_item/player_setup_item/loadout/proc/skill_check(list/jobs, list/skills_required)
-	for(var/datum/job/J in jobs)
+	for (var/datum/job/J in jobs)
 		. = TRUE
-		for(var/R in skills_required)
+		for (var/R in skills_required)
 			if (pref.get_total_skill_value(J, R) < skills_required[R])
 				. = FALSE
 				break
@@ -90,16 +90,16 @@ var/global/list/gear_datums = list()
 	if (length(pref.gear_list) < config.loadout_slots)
 		LIST_RESIZE(pref.gear_list, config.loadout_slots)
 
-	for(var/index = 1 to config.loadout_slots)
+	for (var/index = 1 to config.loadout_slots)
 		var/list/gears = pref.gear_list[index]
 
 		if (istype(gears))
-			for(var/gear_name in gears)
+			for (var/gear_name in gears)
 				if (!(gear_name in gear_datums))
 					gears -= gear_name
 
 			var/total_cost = 0
-			for(var/gear_name in gears)
+			for (var/gear_name in gears)
 				if (!gear_datums[gear_name])
 					gears -= gear_name
 				else if (!(gear_name in valid_gear_choices()))
@@ -117,7 +117,7 @@ var/global/list/gear_datums = list()
 	. = list()
 	var/total_cost = 0
 	var/list/gears = pref.gear_list[pref.gear_slot]
-	for(var/i = 1; i <= length(gears); i++)
+	for (var/i = 1; i <= length(gears); i++)
 		var/datum/gear/G = gear_datums[gears[i]]
 		if (G)
 			total_cost += G.cost
@@ -137,7 +137,7 @@ var/global/list/gear_datums = list()
 
 	. += "<tr><td colspan=3><center><b>"
 	var/firstcat = 1
-	for(var/category in loadout_categories)
+	for (var/category in loadout_categories)
 
 		if (firstcat)
 			firstcat = 0
@@ -146,7 +146,7 @@ var/global/list/gear_datums = list()
 
 		var/datum/loadout_category/LC = loadout_categories[category]
 		var/category_cost = 0
-		for(var/gear in LC.gear)
+		for (var/gear in LC.gear)
 			if (gear in pref.gear_list[pref.gear_slot])
 				var/datum/gear/G = LC.gear[gear]
 				category_cost += G.cost
@@ -166,11 +166,11 @@ var/global/list/gear_datums = list()
 	. += "<tr><td colspan=3><b><center>[LC.category]</center></b></td></tr>"
 	. += "<tr><td colspan=3><hr></td></tr>"
 	var/jobs = list()
-	for(var/job_title in (pref.job_medium|pref.job_low|pref.job_high))
+	for (var/job_title in (pref.job_medium|pref.job_low|pref.job_high))
 		var/datum/job/J = SSjobs.get_by_title(job_title)
 		if (J)
 			dd_insertObjectList(jobs, J)
-	for(var/gear_name in LC.gear)
+	for (var/gear_name in LC.gear)
 		if (!(gear_name in valid_gear_choices()))
 			continue
 		var/list/entry = list()
@@ -185,7 +185,7 @@ var/global/list/gear_datums = list()
 			var/bad_job = 0
 			entry += "<br><i>"
 			var/list/jobchecks = list()
-			for(var/datum/job/J in jobs)
+			for (var/datum/job/J in jobs)
 				if (J.type in G.allowed_roles)
 					jobchecks += SPAN_COLOR("#55cc55", J.title)
 					good_job = 1
@@ -197,14 +197,14 @@ var/global/list/gear_datums = list()
 
 		if (allowed && G.allowed_branches)
 			var/list/branches = list()
-			for(var/datum/job/J in jobs)
+			for (var/datum/job/J in jobs)
 				if (pref.branches[J.title])
 					branches |= pref.branches[J.title]
 			if (length(branches))
 				var/list/branch_checks = list()
 				var/good_branch = 0
 				entry += "<br><i>"
-				for(var/branch in branches)
+				for (var/branch in branches)
 					var/datum/mil_branch/player_branch = GLOB.mil_branches.get_branch(branch)
 					if (player_branch.type in G.allowed_branches)
 						branch_checks += SPAN_COLOR("#55cc55", player_branch.name)
@@ -217,7 +217,7 @@ var/global/list/gear_datums = list()
 
 		if (allowed && G.allowed_skills)
 			var/list/skills_required = list()//make it into instances? instead of path
-			for(var/skill in G.allowed_skills)
+			for (var/skill in G.allowed_skills)
 				var/singleton/hierarchy/skill/instance = GET_SINGLETON(skill)
 				skills_required[instance] = G.allowed_skills[skill]
 
@@ -225,7 +225,7 @@ var/global/list/gear_datums = list()
 
 			entry += "<br><i>"
 			var/list/skill_checks = list()
-			for(var/R in skills_required)
+			for (var/R in skills_required)
 				var/singleton/hierarchy/skill/S = R
 				var/skill_entry
 				skill_entry += "[S.levels[skills_required[R]]]"
@@ -240,7 +240,7 @@ var/global/list/gear_datums = list()
 		entry += "</tr>"
 		if (ticked)
 			entry += "<tr><td colspan=3>"
-			for(var/datum/gear_tweak/tweak in G.gear_tweaks)
+			for (var/datum/gear_tweak/tweak in G.gear_tweaks)
 				var/contents = tweak.get_contents(get_tweak_metadata(G, tweak))
 				if (contents)
 					entry += " <a href='?src=\ref[src];gear=\ref[G];tweak=\ref[tweak]'>[contents]</a>"
@@ -278,7 +278,7 @@ var/global/list/gear_datums = list()
 			pref.gear_list[pref.gear_slot] -= TG.display_name
 		else
 			var/total_cost = 0
-			for(var/gear_name in pref.gear_list[pref.gear_slot])
+			for (var/gear_name in pref.gear_list[pref.gear_slot])
 				var/datum/gear/G = gear_datums[gear_name]
 				if (istype(G)) total_cost += G.cost
 			if ((total_cost+TG.cost) <= config.max_gear_cost)
@@ -352,7 +352,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/proc/get_description(metadata)
 	. = description
-	for(var/datum/gear_tweak/gt in gear_tweaks)
+	for (var/datum/gear_tweak/gt in gear_tweaks)
 		. = gt.tweak_description(., metadata["[gt]"])
 
 /datum/gear_data
@@ -365,10 +365,10 @@ var/global/list/gear_datums = list()
 
 /datum/gear/proc/spawn_item(user, location, metadata)
 	var/datum/gear_data/gd = new(path, location)
-	for(var/datum/gear_tweak/gt in gear_tweaks)
+	for (var/datum/gear_tweak/gt in gear_tweaks)
 		gt.tweak_gear_data(metadata && metadata["[gt]"], gd)
 	var/item = new gd.path(gd.location)
-	for(var/datum/gear_tweak/gt in gear_tweaks)
+	for (var/datum/gear_tweak/gt in gear_tweaks)
 		gt.tweak_item(user, item, metadata && metadata["[gt]"])
 	return item
 

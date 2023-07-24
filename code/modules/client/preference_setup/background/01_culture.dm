@@ -6,7 +6,7 @@
 		write_to = list(S.force_cultural_info[check_key] = TRUE); \
 	} else { \
 		write_to = list(); \
-		for(var/cul in S.available_cultural_info[check_key]) { \
+		for (var/cul in S.available_cultural_info[check_key]) { \
 			write_to[cul] = TRUE; \
 		} \
 	}
@@ -24,7 +24,7 @@
 /datum/category_item/player_setup_item/background/culture/New()
 	hidden = list()
 	expanded = list()
-	for(var/token in tokens)
+	for (var/token in tokens)
 		hidden[token] = TRUE
 		expanded[token] = FALSE
 	..()
@@ -32,7 +32,7 @@
 /datum/category_item/player_setup_item/background/culture/sanitize_character()
 	if (!islist(pref.cultural_info))
 		pref.cultural_info = list()
-	for(var/token in tokens)
+	for (var/token in tokens)
 		var/list/_cultures
 		GET_ALLOWED_VALUES(_cultures, token)
 		if (!LAZYLEN(_cultures))
@@ -43,18 +43,18 @@
 				pref.cultural_info[token] = _cultures[1]
 
 /datum/category_item/player_setup_item/background/culture/load_character(datum/pref_record_reader/R)
-	for(var/token in tokens)
+	for (var/token in tokens)
 		var/load_val
 		load_val = R.read(token)
 		pref.cultural_info[token] = load_val
 
 /datum/category_item/player_setup_item/background/culture/save_character(datum/pref_record_writer/W)
-	for(var/token in tokens)
+	for (var/token in tokens)
 		W.write(token, pref.cultural_info[token])
 
 /datum/category_item/player_setup_item/background/culture/content()
 	. = list()
-	for(var/token in tokens)
+	for (var/token in tokens)
 		var/singleton/cultural_info/culture = SSculture.get_culture(pref.cultural_info[token])
 		var/title = "<a href='?src=\ref[src];expand_options_[token]=1'>[tokens[token]]</a><b>- </b>[pref.cultural_info[token]]"
 		var/append_text = "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
@@ -81,7 +81,7 @@
 
 /datum/category_item/player_setup_item/background/culture/OnTopic(href,list/href_list, mob/user)
 
-	for(var/token in tokens)
+	for (var/token in tokens)
 
 		if (href_list["toggle_verbose_[token]"])
 			hidden[token] = !hidden[token]

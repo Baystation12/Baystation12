@@ -42,7 +42,7 @@
 /datum/preferences/proc/get_level_cost(datum/job/job, singleton/hierarchy/skill/S, level)
 	var/min = get_min_skill(job, S)
 	. = 0
-	for(var/i=min+1, i <= level, i++)
+	for (var/i=min+1, i <= level, i++)
 		. += S.get_cost(i)
 
 /datum/preferences/proc/get_max_affordable(datum/job/job, singleton/hierarchy/skill/S)
@@ -53,7 +53,7 @@
 	var/max = get_max_skill(job, S)
 	var/budget = points_by_job[job]
 	. = max
-	for(var/i=current_level+1, i <= max, i++)
+	for (var/i=current_level+1, i <= max, i++)
 		if (budget - S.get_cost(i) < 0)
 			return i-1
 		budget -= S.get_cost(i)
@@ -64,12 +64,12 @@
 		GET_SINGLETON(/singleton/hierarchy/skill)
 
 	pref.skills_allocated = list()
-	for(var/job_type in SSjobs.types_to_datums)
+	for (var/job_type in SSjobs.types_to_datums)
 		var/datum/job/job = SSjobs.get_by_path(job_type)
 		if ("[job.type]" in pref.skills_saved)
 			var/S = pref.skills_saved["[job.type]"]
 			var/L = list()
-			for(var/singleton/hierarchy/skill/skill in GLOB.skills)
+			for (var/singleton/hierarchy/skill/skill in GLOB.skills)
 				if ("[skill.type]" in S)
 					L[skill] = S["[skill.type]"]
 			if (length(L))
@@ -77,10 +77,10 @@
 
 /datum/category_item/player_setup_item/occupation/proc/save_skills()
 	pref.skills_saved = list()
-	for(var/datum/job/job in pref.skills_allocated)
+	for (var/datum/job/job in pref.skills_allocated)
 		var/S = pref.skills_allocated[job]
 		var/L = list()
-		for(var/singleton/hierarchy/skill/skill in S)
+		for (var/singleton/hierarchy/skill/skill in S)
 			L["[skill.type]"] = S[skill]
 		if (length(L))
 			pref.skills_saved["[job.type]"] = L
@@ -89,7 +89,7 @@
 /datum/preferences/proc/sanitize_skills(list/input)
 	. = list()
 	var/datum/species/S = all_species[species]
-	for(var/job_name in SSjobs.titles_to_datums)
+	for (var/job_name in SSjobs.titles_to_datums)
 		var/datum/job/job = SSjobs.get_by_title(job_name)
 		var/input_skills = list()
 		if ((job in input) && istype(input[job], /list))
@@ -98,7 +98,7 @@
 		var/L = list()
 		var/sum = 0
 
-		for(var/singleton/hierarchy/skill/skill in GLOB.skills)
+		for (var/singleton/hierarchy/skill/skill in GLOB.skills)
 			if (skill in input_skills)
 				var/min = get_min_skill(job, skill)
 				var/max = get_max_skill(job, skill)
@@ -121,7 +121,7 @@
 /datum/preferences/proc/check_skill_prerequisites(datum/job/job, singleton/hierarchy/skill/S)
 	if (!S.prerequisites)
 		return TRUE
-	for(var/skill_type in S.prerequisites)
+	for (var/skill_type in S.prerequisites)
 		var/singleton/hierarchy/skill/prereq = GET_SINGLETON(skill_type)
 		var/value = get_min_skill(job, prereq) + LAZYACCESS(skills_allocated[job], prereq)
 		if (value < S.prerequisites[skill_type])
@@ -132,7 +132,7 @@
 	var/allocation = skills_allocated[job]
 	if (!allocation)
 		return
-	for(var/singleton/hierarchy/skill/S in allocation)
+	for (var/singleton/hierarchy/skill/S in allocation)
 		if (!check_skill_prerequisites(job, S))
 			clear_skill(job, S)
 			.() // restart checking from the beginning, as after doing this we don't know whether what we've already checked is still fine.
@@ -188,12 +188,12 @@
 
 	dat += "<table>"
 	var/singleton/hierarchy/skill/skill = GET_SINGLETON(/singleton/hierarchy/skill)
-	for(var/singleton/hierarchy/skill/cat in skill.children)
+	for (var/singleton/hierarchy/skill/cat in skill.children)
 		dat += "<tr><th colspan = 4><b>[cat.name]</b>"
 		dat += "</th></tr>"
-		for(var/singleton/hierarchy/skill/S in cat.children)
+		for (var/singleton/hierarchy/skill/S in cat.children)
 			dat += get_skill_row(job, S)
-			for(var/singleton/hierarchy/skill/perk in S.children)
+			for (var/singleton/hierarchy/skill/perk in S.children)
 				dat += get_skill_row(job, perk)
 	dat += "</table>"
 	return JOINTEXT(dat)
@@ -205,7 +205,7 @@
 	var/cap = pref.get_max_affordable(job, S) //if selecting the skill would make you overspend, it won't be shown
 	dat += "<tr style='text-align:left;'>"
 	dat += "<th><a href='?src=\ref[src];skillinfo=\ref[S]'>[S.name] ([pref.get_spent_points(job, S)])</a></th>"
-	for(var/i = SKILL_MIN, i <= SKILL_MAX, i++)
+	for (var/i = SKILL_MIN, i <= SKILL_MAX, i++)
 		dat += skill_to_button(S, job, level, i, min, cap)
 	dat += "</tr>"
 	return JOINTEXT(dat)

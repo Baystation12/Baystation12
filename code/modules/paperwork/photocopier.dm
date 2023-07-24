@@ -43,7 +43,7 @@
 
 /obj/machinery/photocopier/OnTopic(user, href_list, state)
 	if (href_list["copy"])
-		for(var/i = 0, i < copies, i++)
+		for (var/i = 0, i < copies, i++)
 			if (toner <= 0)
 				break
 			if (istype(copyitem, /obj/item/paper))
@@ -213,7 +213,7 @@
 //If need_toner is 0, the copies will still be lightened when low on toner, however it will not be prevented from printing. TODO: Implement print queues for fax machines and get rid of need_toner
 /obj/machinery/photocopier/proc/bundlecopy(obj/item/paper_bundle/bundle, need_toner=1)
 	var/obj/item/paper_bundle/p = new /obj/item/paper_bundle (src)
-	for(var/obj/item/W in bundle.pages)
+	for (var/obj/item/W in bundle.pages)
 		if (toner <= 0 && need_toner)
 			toner = 0
 			visible_message(SPAN_NOTICE("A red light on \the [src] flashes, indicating that it is out of toner."))

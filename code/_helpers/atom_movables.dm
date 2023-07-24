@@ -32,7 +32,7 @@
 /proc/get_holder_of_type(atom/A, holder_type)
 	RETURN_TYPE(/atom)
 	if (!istype(A)) return
-	for(A, A && !istype(A, holder_type), A=A.loc);
+	for (A, A && !istype(A, holder_type), A=A.loc);
 	return A
 
 /atom/movable/proc/throw_at_random(include_own_turf, maxrange, speed)
@@ -59,7 +59,7 @@
 		return null
 	var/closest_distance = get_dist(a, possibilities[1])
 	. = possibilities[1]
-	for(var/p in (possibilities - possibilities[1]))
+	for (var/p in (possibilities - possibilities[1]))
 		var/dist = get_dist(a, p)
 		if (dist < closest_distance)
 			closest_distance = dist

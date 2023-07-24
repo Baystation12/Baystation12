@@ -4,7 +4,7 @@ GLOBAL_LIST_EMPTY(gender_datums)
 GLOBAL_LIST_EMPTY(pronouns_from_gender)
 
 /hook/startup/proc/populate_gender_datum_list()
-	for(var/type in subtypesof(/datum/gender))
+	for (var/type in subtypesof(/datum/gender))
 		var/datum/gender/G = new type
 		GLOB.gender_datums[G.key] = G
 		if (!G.formal_term)

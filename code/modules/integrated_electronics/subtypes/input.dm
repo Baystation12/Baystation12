@@ -295,7 +295,7 @@
 	var/obj/machinery/portable_atmospherics/hydroponics/H = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/portable_atmospherics/hydroponics)
 	if (!istype(H)) //Invalid input
 		return
-	for(var/i=1, i<=length(outputs), i++)
+	for (var/i=1, i<=length(outputs), i++)
 		set_pin_data(IC_OUTPUT, i, null)
 	if (H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
 		if (H.seed)
@@ -338,11 +338,11 @@
 	var/obj/machinery/portable_atmospherics/hydroponics/H = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/portable_atmospherics/hydroponics)
 	if (!istype(H)) //Invalid input
 		return
-	for(var/i=1, i<=length(outputs), i++)
+	for (var/i=1, i<=length(outputs), i++)
 		set_pin_data(IC_OUTPUT, i, null)
 	if (H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
 		if (H.seed)
-			for(var/chem_path in H.seed.chems)
+			for (var/chem_path in H.seed.chems)
 				var/datum/reagent/R = chem_path
 				greagents.Add(initial(R.name))
 
@@ -467,14 +467,14 @@
 
 	if (scanned_turf in view(circuit_turf)) // This is a camera. It can't examine things that it can't see.
 		var/list/turf_contents = new()
-		for(var/obj/U in scanned_turf)
+		for (var/obj/U in scanned_turf)
 			turf_contents += weakref(U)
-		for(var/mob/U in scanned_turf)
+		for (var/mob/U in scanned_turf)
 			turf_contents += weakref(U)
 		set_pin_data(IC_OUTPUT, 1, turf_contents)
 		set_pin_data(IC_OUTPUT, 3, area_name)
 		var/list/St = new()
-		for(var/obj/effect/decal/cleanable/crayon/I in scanned_turf)
+		for (var/obj/effect/decal/cleanable/crayon/I in scanned_turf)
 			St.Add(I.icon_state)
 		if (length(St))
 			set_pin_data(IC_OUTPUT, 2, jointext(St, ",", 1, 0))
@@ -535,7 +535,7 @@
 
 	var/list/nearby_things = range(1, get_turf(src))
 	var/list/valid_things = list()
-	for(var/atom/thing in nearby_things)
+	for (var/atom/thing in nearby_things)
 		if (thing.type != desired_type)
 			continue
 		valid_things.Add(thing)
@@ -579,10 +579,10 @@
 		var/turf/T = get_turf(src)
 		var/list/nearby_things = view(radius,T)
 		var/list/valid_things = list()
-		for(var/item in input_list)
+		for (var/item in input_list)
 			if (!isnull(item) && !isnum(item))
 				if (istext(item))
-					for(var/i in nearby_things)
+					for (var/i in nearby_things)
 						var/atom/thing = i
 						if (ismob(thing) && !isliving(thing))
 							continue
@@ -591,7 +591,7 @@
 				else
 					var/atom/A = item
 					var/desired_type = A.type
-					for(var/i in nearby_things)
+					for (var/i in nearby_things)
 						var/atom/thing = i
 						if (thing.type != desired_type)
 							continue
@@ -642,7 +642,7 @@
 		var/atom/A = I.data.resolve()
 		if (A)
 			var/desired_type = A.type
-			for(var/i in nearby_things)
+			for (var/i in nearby_things)
 				var/atom/thing = i
 				if (ismob(thing) && !isliving(thing))
 					continue
@@ -650,7 +650,7 @@
 					valid_things.Add(thing)
 	else if (istext(I.data))
 		var/DT = I.data
-		for(var/i in nearby_things)
+		for (var/i in nearby_things)
 			var/atom/thing = i
 			if (ismob(thing) && !isliving(thing))
 				continue
@@ -1109,7 +1109,7 @@
 		return
 	var/turf/T = get_turf(src)
 	if (O in view(T)) // This is a camera. It can't examine thngs,that it can't see.
-		for(var/I in 1 to length(mtypes))
+		for (var/I in 1 to length(mtypes))
 			var/amount = O.matter[mtypes[I]]
 			if (amount)
 				set_pin_data(IC_OUTPUT, I, amount)
@@ -1148,7 +1148,7 @@
 	power_draw_per_use = 5
 
 /obj/item/integrated_circuit/input/atmospheric_analyzer/do_work()
-	for(var/i=1 to 6)
+	for (var/i=1 to 6)
 		set_pin_data(IC_OUTPUT, i, null)
 	var/atom/target = get_pin_data_as_type(IC_INPUT, 1, /atom)
 	var/atom/movable/acting_object = get_object()
@@ -1166,7 +1166,7 @@
 	var/list/gases = air_contents.gas
 	var/list/gas_names = list()
 	var/list/gas_amounts = list()
-	for(var/id in gases)
+	for (var/id in gases)
 		var/name = gas_data.name[id]
 		var/amt = round(gases[id], 0.001)
 		gas_names.Add(name)

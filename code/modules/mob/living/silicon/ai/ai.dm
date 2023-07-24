@@ -33,7 +33,7 @@ var/global/list/ai_verbs_default = list(
 /proc/AutoUpdateAI(obj/subject)
 	var/is_in_use = 0
 	if (subject!=null)
-		for(var/A in ai_list)
+		for (var/A in ai_list)
 			var/mob/living/silicon/ai/M = A
 			if ((M.client && M.machine == subject))
 				is_in_use = 1
@@ -197,7 +197,7 @@ var/global/list/ai_verbs_default = list(
 	to_chat(src, "For department channels, use the following say commands:")
 
 	var/radio_text = ""
-	for(var/i = 1 to length(silicon_radio.channels))
+	for (var/i = 1 to length(silicon_radio.channels))
 		var/channel = silicon_radio.channels[i]
 		var/key = get_radio_key_from_channel(channel)
 		radio_text += "[key] - [channel]"
@@ -207,7 +207,7 @@ var/global/list/ai_verbs_default = list(
 	to_chat(src, radio_text)
 
 	//Prevents more than one active core spawning on the same tile. Technically just a sanitization for roundstart join
-	for(var/obj/structure/AIcore/deactivated/C in src.loc)
+	for (var/obj/structure/AIcore/deactivated/C in src.loc)
 		qdel(C)
 
 	if (GLOB.malf && !(mind in GLOB.malf.current_antagonists))
@@ -219,7 +219,7 @@ var/global/list/ai_verbs_default = list(
 	eyeobj.possess(src)
 
 /mob/living/silicon/ai/Destroy()
-	for(var/robot in connected_robots)
+	for (var/robot in connected_robots)
 		var/mob/living/silicon/robot/S = robot
 		S.connected_ai = null
 	connected_robots.Cut()
@@ -247,10 +247,10 @@ var/global/list/ai_verbs_default = list(
 	var/custom_index = 1
 	var/custom_icon_states = icon_states(CUSTOM_ITEM_SYNTH)
 
-	for(var/line in lines)
+	for (var/line in lines)
 	// split & clean up
 		var/list/Entry = splittext(line, ":")
-		for(var/i = 1 to length(Entry))
+		for (var/i = 1 to length(Entry))
 			Entry[i] = trimtext(Entry[i])
 
 		if (length(Entry) < 2)
@@ -301,7 +301,7 @@ var/global/list/ai_verbs_default = list(
 /mob/living/silicon/ai/proc/available_icons()
 	. = list()
 	var/all_ai_icons = GET_SINGLETON_SUBTYPE_MAP(/singleton/ai_icon)
-	for(var/ai_icon_type in all_ai_icons)
+	for (var/ai_icon_type in all_ai_icons)
 		var/singleton/ai_icon/ai_icon = all_ai_icons[ai_icon_type]
 		if (ai_icon.may_used_by_ai(src))
 			dd_insertObjectList(., ai_icon)
@@ -485,7 +485,7 @@ var/global/list/ai_verbs_default = list(
 		if (!C.can_use())
 			continue
 		var/list/tempnetwork = difflist(C.network, GLOB.restricted_camera_networks, 1)
-		for(var/i in tempnetwork)
+		for (var/i in tempnetwork)
 			cameralist[i] = i
 
 	cameralist = sortAssoc(cameralist)
@@ -505,7 +505,7 @@ var/global/list/ai_verbs_default = list(
 
 	src.network = network
 
-	for(var/obj/machinery/camera/C in cameranet.cameras)
+	for (var/obj/machinery/camera/C in cameranet.cameras)
 		if (!C.can_use())
 			continue
 		if (network in C.network)
@@ -538,7 +538,7 @@ var/global/list/ai_verbs_default = list(
 
 		var/personnel_list[] = list()
 
-		for(var/datum/computer_file/report/crew_record/t in GLOB.all_crew_records)//Look in data core locked.
+		for (var/datum/computer_file/report/crew_record/t in GLOB.all_crew_records)//Look in data core locked.
 			personnel_list["[t.get_name()]: [t.get_rank()]"] = t.photo_front//Pull names, rank, and image.
 
 		if (length(personnel_list))

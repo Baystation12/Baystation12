@@ -23,7 +23,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/proc/find_target()
 	var/list/possible_targets = list()
-	for(var/datum/mind/possible_target in SSticker.minds)
+	for (var/datum/mind/possible_target in SSticker.minds)
 		if (possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != DEAD))
 			possible_targets += possible_target
 	if (length(possible_targets) > 0)
@@ -31,7 +31,7 @@ var/global/list/all_objectives = list()
 
 
 /datum/objective/proc/find_target_by_role(role, role_type = 0)//Option sets either to check assigned role or special role. Default to assigned.
-	for(var/datum/mind/possible_target in SSticker.minds)
+	for (var/datum/mind/possible_target in SSticker.minds)
 		if ((possible_target != owner) && ishuman(possible_target.current) && ((role_type ? possible_target.special_role : possible_target.assigned_role) == role) )
 			target = possible_target
 			break
@@ -306,11 +306,11 @@ var/global/list/all_objectives = list()
 	target_amount = rand (lowbound,highbound)
 	var/n_p = 1 //autowin
 	if (GAME_STATE == RUNLEVEL_SETUP)
-		for(var/mob/new_player/P in GLOB.player_list)
+		for (var/mob/new_player/P in GLOB.player_list)
 			if (P.client && P.ready && P.mind!=owner)
 				n_p ++
 	else if (GAME_STATE == RUNLEVEL_GAME)
-		for(var/mob/living/carbon/human/P in GLOB.player_list)
+		for (var/mob/living/carbon/human/P in GLOB.player_list)
 			if (P.client && !(P.mind.changeling) && P.mind!=owner)
 				n_p ++
 	target_amount = min(target_amount, n_p)
@@ -329,7 +329,7 @@ var/global/list/all_objectives = list()
 	var/list/possible_targets = list()
 	var/list/priority_targets = list()
 
-	for(var/datum/mind/possible_target in SSticker.minds)
+	for (var/datum/mind/possible_target in SSticker.minds)
 		if (possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != DEAD) && (!possible_target.special_role))
 			possible_targets += possible_target
 			for (var/path in roles)
@@ -446,7 +446,7 @@ var/global/list/all_objectives = list()
 /datum/objective/cult/sacrifice/find_target()
 	var/list/possible_targets = list()
 	if (!length(possible_targets))
-		for(var/mob/living/carbon/human/player in GLOB.player_list)
+		for (var/mob/living/carbon/human/player in GLOB.player_list)
 			if (player.mind && !(player.mind in GLOB.cult.current_antagonists))
 				possible_targets += player.mind
 	if (length(possible_targets) > 0)

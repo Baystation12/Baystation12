@@ -1,14 +1,14 @@
 /mob/living/proc/modify_damage_by_armor(def_zone, damage, damage_type, damage_flags, mob/living/victim, armor_pen, silent = FALSE)
 	var/list/armors = get_armors_by_zone(def_zone, damage_type, damage_flags)
 	. = args.Copy(2)
-	for(var/armor in armors)
+	for (var/armor in armors)
 		var/datum/extension/armor/armor_datum = armor
 		. = armor_datum.apply_damage_modifications(arglist(.))
 
 /mob/living/proc/get_blocked_ratio(def_zone, damage_type, damage_flags, armor_pen, damage)
 	var/list/armors = get_armors_by_zone(def_zone, damage_type, damage_flags)
 	. = 0
-	for(var/armor in armors)
+	for (var/armor in armors)
 		var/datum/extension/armor/armor_datum = armor
 		. = 1 - (1 - .) * (1 - armor_datum.get_blocked(damage_type, damage_flags, armor_pen, damage)) // multiply the amount we let through
 	. = min(1, .)
@@ -84,7 +84,7 @@
 		return TRUE
 	. = TRUE
 	var/list/newargs = args - args[1]
-	for(var/a in auras)
+	for (var/a in auras)
 		var/obj/aura/aura = a
 		var/result = EMPTY_BITFIELD
 		switch(type)
@@ -124,7 +124,7 @@
 	if (status_flags & GODMODE)
 		return
 	var/list/L = get_contents()
-	for(var/obj/O in L)
+	for (var/obj/O in L)
 		O.emp_act(severity)
 	..()
 
@@ -338,10 +338,10 @@
 
 /mob/living/proc/handle_actions()
 	//Pretty bad, i'd use picked/dropped instead but the parent calls in these are nonexistent
-	for(var/datum/action/A in actions)
+	for (var/datum/action/A in actions)
 		if (A.CheckRemoval(src))
 			A.Remove(src)
-	for(var/obj/item/I in src)
+	for (var/obj/item/I in src)
 		if (I.action_button_name)
 			if (!I.action)
 				I.action = new I.default_action_type
@@ -358,7 +358,7 @@
 		return
 
 	client.screen -= hud_used.hide_actions_toggle
-	for(var/datum/action/A in actions)
+	for (var/datum/action/A in actions)
 		if (A.button)
 			client.screen -= A.button
 
@@ -375,7 +375,7 @@
 		return
 
 	var/button_number = 0
-	for(var/datum/action/A in actions)
+	for (var/datum/action/A in actions)
 		button_number++
 		if (A.button == null)
 			var/obj/screen/movable/action_button/N = new(hud_used, A)

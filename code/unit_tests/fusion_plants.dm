@@ -4,13 +4,13 @@
 /datum/unit_test/fusion_network_test/start_test()
 
 	var/list/check_machines
-	for(var/thing in SSmachines.machinery)
+	for (var/thing in SSmachines.machinery)
 		if (hasvar(thing, "initial_id_tag") && !isnull(thing:initial_id_tag) && has_extension(thing, /datum/extension/local_network_member))
 			LAZYADD(check_machines, get_extension(thing, /datum/extension/local_network_member))
 
 	if (LAZYLEN(check_machines))
 		var/list/failed_ids
-		for(var/thing in check_machines)
+		for (var/thing in check_machines)
 			var/datum/extension/local_network_member/lanm = thing
 			var/datum/local_network/lan = lanm.get_local_network()
 			if (!lan || !lan.network_entities[lanm.holder.type] || !lan.network_entities[lanm.holder.type][lanm.holder])

@@ -13,7 +13,7 @@
 	hud_state = "analyze"
 
 /spell/targeted/analyze/cast(list/targets, mob/user)
-	for(var/a in targets)
+	for (var/a in targets)
 		var/mob/living/carbon/human/H = a
 		new /obj/effect/temporary(get_turf(a),5, 'icons/effects/effects.dmi', "repel_missiles")
 		to_chat(user,medical_scan_results(H,1))

@@ -20,7 +20,7 @@
 	if (air && air.volume)
 		temporarily_store_air()
 		QDEL_NULL(air)
-	for(var/obj/machinery/atmospherics/pipe/P in members)
+	for (var/obj/machinery/atmospherics/pipe/P in members)
 		P.parent = null
 	leaks.Cut()
 	members.Cut()
@@ -31,7 +31,7 @@
 	//Check to see if pressure is within acceptable limits
 	var/pressure = air.return_pressure()
 	if (pressure > maximum_pressure)
-		for(var/obj/machinery/atmospherics/pipe/member in members)
+		for (var/obj/machinery/atmospherics/pipe/member in members)
 			if (!member.check_pressure(pressure))
 				members.Remove(member)
 				break //Only delete 1 pipe per process
@@ -39,7 +39,7 @@
 /datum/pipeline/proc/temporarily_store_air()
 	//Update individual gas_mixtures by volume ratio
 
-	for(var/obj/machinery/atmospherics/pipe/member in members)
+	for (var/obj/machinery/atmospherics/pipe/member in members)
 		member.air_temporary = new
 		member.air_temporary.copy_from(air)
 		member.air_temporary.volume = member.volume
@@ -64,13 +64,13 @@
 		leaks |= base
 
 	while(length(possible_expansions)>0)
-		for(var/obj/machinery/atmospherics/pipe/borderline in possible_expansions)
+		for (var/obj/machinery/atmospherics/pipe/borderline in possible_expansions)
 
 			var/list/result = borderline.pipeline_expansion()
 			var/edge_check = length(result)
 
 			if (length(result)>0)
-				for(var/obj/machinery/atmospherics/pipe/item in result)
+				for (var/obj/machinery/atmospherics/pipe/item in result)
 					if (item.in_stasis)
 						continue
 					if (!members.Find(item))
@@ -107,8 +107,8 @@
 	network = new_network
 	network.leaks |= leaks
 
-	for(var/obj/machinery/atmospherics/pipe/edge in edges)
-		for(var/obj/machinery/atmospherics/result in edge.pipeline_expansion())
+	for (var/obj/machinery/atmospherics/pipe/edge in edges)
+		for (var/obj/machinery/atmospherics/result in edge.pipeline_expansion())
 			if (!istype(result,/obj/machinery/atmospherics/pipe) && (result!=reference))
 				result.network_expand(new_network, edge)
 

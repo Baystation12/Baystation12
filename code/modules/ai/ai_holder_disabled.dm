@@ -48,7 +48,7 @@
 			var/unsafe = FALSE
 
 			tile_test:
-				for(var/dir_tested in GLOB.cardinal)
+				for (var/dir_tested in GLOB.cardinal)
 					var/turf/turf_tested = get_step(holder, dir_tested)
 					// Look for unsafe tiles.
 					if (!turf_tested.is_safe_to_enter(holder))
@@ -56,7 +56,7 @@
 						break
 
 					// Look for allies.
-					for(var/mob/living/L in turf_tested)
+					for (var/mob/living/L in turf_tested)
 						if (holder.IIsAlly(L))
 							unsafe = TRUE
 							break tile_test

@@ -53,7 +53,7 @@
 
 /obj/machinery/mineral/proc/find_console()
 	if (ispath(console))
-		for(var/c in GLOB.alldirs)
+		for (var/c in GLOB.alldirs)
 			var/turf/T = get_step(loc, c)
 			if (T)
 				var/obj/machinery/computer/mining/tmpconsole = locate(console) in T

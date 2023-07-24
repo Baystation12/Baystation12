@@ -13,7 +13,7 @@
 
 /obj/machinery/computer/operating/New()
 	..()
-	for(var/D in list(NORTH,EAST,SOUTH,WEST))
+	for (var/D in list(NORTH,EAST,SOUTH,WEST))
 		table = locate(/obj/machinery/optable, get_step(src, D))
 		if (table)
 			table.computer = src

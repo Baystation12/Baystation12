@@ -68,7 +68,7 @@
 		if (pk_rank >= PSI_RANK_LATENT && redaction_rank >= PSI_RANK_MASTER)
 			var/removal_size = clamp(5-pk_rank, 0, 5)
 			var/valid_objects = list()
-			for(var/thing in E.implants)
+			for (var/thing in E.implants)
 				var/obj/imp = thing
 
 				if (!imp)
@@ -97,7 +97,7 @@
 				E.stage = 0
 				return TRUE
 
-		for(var/datum/wound/W in E.wounds)
+		for (var/datum/wound/W in E.wounds)
 			if (W.bleeding())
 				if (redaction_rank >= PSI_RANK_MASTER || W.wound_damage() < 30)
 					to_chat(user, SPAN_NOTICE("You knit together severed veins and broken flesh, stemming the bleeding."))
@@ -109,7 +109,7 @@
 					to_chat(user, SPAN_NOTICE("This [W.desc] is beyond your power to heal."))
 
 		if (redaction_rank >= PSI_RANK_GRANDMASTER)
-			for(var/obj/item/organ/internal/I in E.internal_organs)
+			for (var/obj/item/organ/internal/I in E.internal_organs)
 				if (!BP_IS_ROBOTIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0)
 					to_chat(user, SPAN_NOTICE("You encourage the damaged tissue of \the [I] to repair itself."))
 					var/heal_rate = redaction_rank
@@ -179,7 +179,7 @@
 			user.psi.backblast(rand(10,25))
 			return TRUE
 
-		for(var/mob/observer/G in GLOB.dead_mobs)
+		for (var/mob/observer/G in GLOB.dead_mobs)
 			if (G.mind && G.mind.current == target && G.client)
 				to_chat(G, SPAN_NOTICE(FONT_LARGE("<b>Your body has been revived, <b>Re-Enter Corpse</b> to return to it.</b>")))
 				break

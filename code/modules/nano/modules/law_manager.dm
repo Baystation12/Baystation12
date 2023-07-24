@@ -23,7 +23,7 @@
 		init_subtypes(/datum/ai_laws, admin_laws)
 		admin_laws = dd_sortedObjectList(admin_laws)
 
-		for(var/datum/ai_laws/laws in admin_laws)
+		for (var/datum/ai_laws/laws in admin_laws)
 			if (laws.selectable)
 				player_laws += laws
 
@@ -138,7 +138,7 @@
 		owner.laws.show_laws(owner)
 		if (isAI(owner))
 			var/mob/living/silicon/ai/AI = owner
-			for(var/mob/living/silicon/robot/R in AI.connected_robots)
+			for (var/mob/living/silicon/robot/R in AI.connected_robots)
 				to_chat(R, SPAN_DANGER("Law Notice"))
 				R.laws.show_laws(R)
 		if (usr != owner)
@@ -185,14 +185,14 @@
 
 /datum/nano_module/law_manager/proc/package_laws(list/data, field, list/datum/ai_law/laws)
 	var/packaged_laws[0]
-	for(var/datum/ai_law/AL in laws)
+	for (var/datum/ai_law/AL in laws)
 		packaged_laws[LIST_PRE_INC(packaged_laws)] = list("law" = AL.law, "index" = AL.get_index(), "state" = owner.laws.get_state_law(AL), "ref" = "\ref[AL]")
 	data[field] = packaged_laws
 	data["has_[field]"] = length(packaged_laws)
 
 /datum/nano_module/law_manager/proc/package_multiple_laws(list/datum/ai_laws/laws)
 	var/law_sets[0]
-	for(var/datum/ai_laws/ALs in laws)
+	for (var/datum/ai_laws/ALs in laws)
 		var/packaged_laws[0]
 		package_laws(packaged_laws, "zeroth_laws", list(ALs.zeroth_law, ALs.zeroth_law_borg))
 		package_laws(packaged_laws, "ion_laws", ALs.ion_laws)
@@ -214,6 +214,6 @@
 /datum/nano_module/law_manager/proc/sync_laws(mob/living/silicon/ai/AI)
 	if (!AI)
 		return
-	for(var/mob/living/silicon/robot/R in AI.connected_robots)
+	for (var/mob/living/silicon/robot/R in AI.connected_robots)
 		R.sync()
 	log_and_message_admins("has syncronized [AI]'s laws with its borgs.")

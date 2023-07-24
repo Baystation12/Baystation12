@@ -32,7 +32,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 /obj/machinery/computer/ship/proc/attempt_hook_up_recursive(obj/effect/overmap/visitable/ship/sector)
 	if (attempt_hook_up(sector))
 		return sector
-	for(var/obj/effect/overmap/visitable/ship/candidate in sector)
+	for (var/obj/effect/overmap/visitable/ship/candidate in sector)
 		if ((. = .(candidate)))
 			return
 
@@ -70,7 +70,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	if (user.client)
 		user.client.view = world.view + extra_view
 	if (linked)
-		for(var/obj/machinery/shipsensors/sensor in linked.sensors)
+		for (var/obj/machinery/shipsensors/sensor in linked.sensors)
 			sensor.reveal_contacts(user)
 	GLOB.moved_event.register(user, src, /obj/machinery/computer/ship/proc/unlook)
 	if (!isghost(user))
@@ -84,7 +84,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	if (user.client)
 		user.client.view = world.view
 	if (linked)
-		for(var/obj/machinery/shipsensors/sensor in linked.sensors)
+		for (var/obj/machinery/shipsensors/sensor in linked.sensors)
 			sensor.hide_contacts(user)
 	GLOB.moved_event.unregister(user, src, /obj/machinery/computer/ship/proc/unlook)
 	GLOB.stat_set_event.unregister(user, src, /obj/machinery/computer/ship/proc/unlook)
@@ -120,7 +120,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	LAZYREMOVE(sensor.linked_consoles, src)
 	sensor_ref = null
 	if (LAZYLEN(viewers))
-		for(var/weakref/W in viewers)
+		for (var/weakref/W in viewers)
 			var/M = W.resolve()
 			if (M)
 				unlook(M)

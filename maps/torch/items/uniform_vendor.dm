@@ -39,10 +39,10 @@
 		var/datum/job/job = SSjobs.get_by_path(ID.job_access_type)
 		if (job)
 			uniforms = find_uniforms(ID.military_rank, ID.military_branch, job.department_flag)
-		for(var/T in uniforms)
+		for (var/T in uniforms)
 			dat += "<b>[T]</b> <a href='byond://?src=\ref[src];get_all=[T]'>Select All</a>"
 			var/list/uniform = uniforms[T]
-			for(var/piece in uniform)
+			for (var/piece in uniform)
 				if (piece)
 					var/obj/item/clothing/C = piece
 					if (piece in selected_outfit)
@@ -76,7 +76,7 @@
 		if (!(href_list["get_all"] in uniforms))
 			return TOPIC_NOACTION
 		var/list/addition = uniforms[href_list["get_all"]]
-		for(var/G in addition)
+		for (var/G in addition)
 			if (can_issue(G))
 				selected_outfit |= addition
 		. = TOPIC_REFRESH
@@ -124,7 +124,7 @@
 /obj/machinery/uniform_vendor/proc/find_uniforms(datum/mil_rank/user_rank, datum/mil_branch/user_branch, department) //returns 1 if found branch and thus has a base uniform, 2, branch and department, 0 if failed.
 	var/singleton/hierarchy/mil_uniform/user_outfit = GET_SINGLETON(/singleton/hierarchy/mil_uniform)
 	var/mil_uniforms = user_outfit
-	for(var/singleton/hierarchy/mil_uniform/child in user_outfit.children)
+	for (var/singleton/hierarchy/mil_uniform/child in user_outfit.children)
 		if (is_type_in_list(user_branch, child.branches))
 			user_outfit = child
 	if (user_outfit == mil_uniforms) //We haven't found a branch
@@ -132,27 +132,27 @@
 
 	// we have found a branch.
 	if (department == COM) //Command only has one variant and they have to be an officer
-		for(var/singleton/hierarchy/mil_uniform/child in user_outfit.children)
+		for (var/singleton/hierarchy/mil_uniform/child in user_outfit.children)
 			if (child.departments & COM)
 				user_outfit = child
-				for(var/singleton/hierarchy/mil_uniform/seniorchild in user_outfit.children) //Check for variants of command outfits
+				for (var/singleton/hierarchy/mil_uniform/seniorchild in user_outfit.children) //Check for variants of command outfits
 					if (user_rank.sort_order >= seniorchild.min_rank && user_outfit.min_rank < seniorchild.min_rank)
 						user_outfit = seniorchild
 	else
 		var/tmp_department = department
 		tmp_department &= ~COM //Parse departments, with complete disconsideration to the command flag (so we don't flag 2 outfit trees)
 
-		for(var/singleton/hierarchy/mil_uniform/child in user_outfit.children) //find base department outfit
+		for (var/singleton/hierarchy/mil_uniform/child in user_outfit.children) //find base department outfit
 			if (child.departments & tmp_department)
 				user_outfit = child
 				break
-		for(var/singleton/hierarchy/mil_uniform/child in user_outfit.children) //find highest applicable ranking department outfit
+		for (var/singleton/hierarchy/mil_uniform/child in user_outfit.children) //find highest applicable ranking department outfit
 			if (user_rank.sort_order >= child.min_rank && user_outfit.min_rank < child.min_rank)
 				user_outfit = child
 		if (department & COM) //user is in command of their department
 			if (user_outfit.children[1])// Command outfit exists
 				user_outfit = user_outfit.children[1]
-				for(var/singleton/hierarchy/mil_uniform/child in user_outfit.children) //Check for variants of command outfits
+				for (var/singleton/hierarchy/mil_uniform/child in user_outfit.children) //Check for variants of command outfits
 					if (user_rank.sort_order >= child.min_rank && user_outfit.min_rank < child.min_rank)
 						user_outfit = child
 
@@ -206,7 +206,7 @@
 	var/list/checkedout = issued_items[user_id()]
 	if (length(selected_outfit) > 1)
 		var/obj/item/clothingbag/bag = new /obj/item/clothingbag
-		for(var/item in selected_outfit)
+		for (var/item in selected_outfit)
 			new item(bag)
 			checkedout += item
 		bag.dropInto(loc)

@@ -13,7 +13,7 @@
 
 /datum/skillset/New(mob/mob)
 	owner = mob
-	for(var/datum/skill_verb/SV in GLOB.skill_verbs)
+	for (var/datum/skill_verb/SV in GLOB.skill_verbs)
 		if (SV.should_have_verb(src))
 			SV.give_to_skillset(src)
 	..()
@@ -28,7 +28,7 @@
 
 /datum/skillset/proc/get_value(skill_path)
 	. = skill_list[skill_path] || default_value
-	for(var/datum/skill_buff/SB in skill_buffs)
+	for (var/datum/skill_buff/SB in skill_buffs)
 		. += SB.buffs[skill_path]
 
 /datum/skillset/proc/obtain_from_mob(mob/mob)
@@ -56,7 +56,7 @@
 /datum/skillset/proc/update_special_effects()
 	if (!owner)
 		return
-	for(var/singleton/hierarchy/skill/skill in GLOB.skills)
+	for (var/singleton/hierarchy/skill/skill in GLOB.skills)
 		skill.update_special_effects(owner, get_value(skill.type))
 
 /datum/skillset/proc/obtain_from_client(datum/job/job, client/given_client, override = 0)
@@ -70,7 +70,7 @@
 	var/allocation = given_client.prefs.skills_allocated[job] || list()
 	skill_list = list()
 
-	for(var/singleton/hierarchy/skill/S in GLOB.skills)
+	for (var/singleton/hierarchy/skill/S in GLOB.skills)
 		var/min = job ? given_client.prefs.get_min_skill(job, S) : SKILL_MIN
 		skill_list[S.type] = min + (allocation[S] || 0)
 	on_levels_change()
@@ -81,7 +81,7 @@
 
 	skill_list = list()
 
-	for(var/singleton/hierarchy/skill/S in GLOB.skills)
+	for (var/singleton/hierarchy/skill/S in GLOB.skills)
 		skill_list[S.type] = job.get_min_skill(S)
 	on_levels_change()
 
@@ -104,7 +104,7 @@
 
 //Passing a list in format of 'skill = level_needed'
 /mob/proc/skill_check_multiple(skill_reqs)
-	for(var/skill in skill_reqs)
+	for (var/skill in skill_reqs)
 		. = skill_check(skill, skill_reqs[skill])
 		if (!.)
 			return
@@ -171,5 +171,5 @@
 	NM.ui_interact(owner)
 
 /datum/skillset/proc/refresh_uis()
-	for(var/nano_module in nm_viewing)
+	for (var/nano_module in nm_viewing)
 		SSnano.update_uis(nano_module)

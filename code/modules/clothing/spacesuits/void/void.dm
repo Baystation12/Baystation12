@@ -107,7 +107,7 @@ else if (##equipment_var) {\
 /obj/item/clothing/suit/space/void/examine(user,distance)
 	. = ..()
 	var/list/part_list = new
-	for(var/obj/item/I in list(helmet,boots,tank))
+	for (var/obj/item/I in list(helmet,boots,tank))
 		part_list += "\a [I]"
 	to_chat(user, "\The [src] has [english_list(part_list)] installed.")
 	if (tank && distance <= 1)

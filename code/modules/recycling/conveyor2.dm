@@ -74,7 +74,7 @@
 	var/list/affecting = list()
 
 	var/items_moved = 0
-	for(var/thing in loc)
+	for (var/thing in loc)
 		if (thing == src)
 			continue
 		if (items_moved >= 10)
@@ -87,7 +87,7 @@
 		addtimer(new Callback(src, .proc/post_process, affecting), 1) // slight delay to prevent infinite propagation due to map order
 
 /obj/machinery/conveyor/proc/post_process(list/affecting)
-	for(var/A in affecting)
+	for (var/A in affecting)
 		if (TICK_CHECK)
 			break
 		var/atom/movable/AM = A
@@ -178,7 +178,7 @@
 
 	spawn(5)		// allow map load
 		conveyors = list()
-		for(var/obj/machinery/conveyor/C in world)
+		for (var/obj/machinery/conveyor/C in world)
 			if (C.id == id)
 				conveyors += C
 
@@ -201,7 +201,7 @@
 		return
 	operated = 0
 
-	for(var/obj/machinery/conveyor/C in conveyors)
+	for (var/obj/machinery/conveyor/C in conveyors)
 		C.operating = position
 		C.setmove()
 
@@ -214,7 +214,7 @@
 	update_icon()
 
 	// find any switches with same id as this one, and set their positions to match us
-	for(var/obj/machinery/conveyor_switch/S in world)
+	for (var/obj/machinery/conveyor_switch/S in world)
 		if (S.id == src.id)
 			S.position = position
 			S.update_icon()
@@ -276,7 +276,7 @@
 	var/cdir = get_dir(A, user)
 	if (!(cdir in GLOB.cardinal) || A == user.loc)
 		return
-	for(var/obj/machinery/conveyor/CB in A)
+	for (var/obj/machinery/conveyor/CB in A)
 		if (CB.dir == cdir || CB.dir == turn(cdir,180))
 			return
 		cdir |= CB.dir
@@ -304,7 +304,7 @@
 	if (!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
 		return
 	var/found = 0
-	for(var/obj/machinery/conveyor/C in view())
+	for (var/obj/machinery/conveyor/C in view())
 		if (C.id == src.id)
 			found = 1
 			break
@@ -323,7 +323,7 @@
 	if (!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
 		return
 	var/found = 0
-	for(var/obj/machinery/conveyor/C in view())
+	for (var/obj/machinery/conveyor/C in view())
 		if (C.id == src.id)
 			found = 1
 			break

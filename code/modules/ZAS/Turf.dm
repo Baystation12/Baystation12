@@ -18,9 +18,9 @@
 		return 1
 
 	#ifdef MULTIZAS
-	for(var/d = 1, d < 64, d *= 2)
+	for (var/d = 1, d < 64, d *= 2)
 	#else
-	for(var/d = 1, d < 16, d *= 2)
+	for (var/d = 1, d < 16, d *= 2)
 	#endif
 
 		var/turf/unsim = get_step(src, d)
@@ -79,7 +79,7 @@
 	if (!(. & (. - 1)))
 		return TRUE
 
-	for(var/dir in GLOB.csrfz_check)
+	for (var/dir in GLOB.csrfz_check)
 		//for each pair of "adjacent" cardinals (e.g. NORTH and WEST, but not NORTH and SOUTH)
 		if ((dir & check_dirs) == dir)
 			//check that they are connected by the corner turf
@@ -125,9 +125,9 @@
 
 	var/list/postponed
 	#ifdef MULTIZAS
-	for(var/d = 1, d < 64, d *= 2)
+	for (var/d = 1, d < 64, d *= 2)
 	#else
-	for(var/d = 1, d < 16, d *= 2)
+	for (var/d = 1, d < 16, d *= 2)
 	#endif
 
 		var/turf/unsim = get_step(src, d)
@@ -231,7 +231,7 @@
 
 	//At this point, a zone should have happened. If it hasn't, don't add more checks, fix the bug.
 
-	for(var/turf/T in postponed)
+	for (var/turf/T in postponed)
 		SSair.connect(src, T)
 
 /turf/proc/post_update_air_properties()

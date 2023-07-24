@@ -68,7 +68,7 @@
 /obj/item/reagent_containers/food/drinks/self_feed_message(mob/user)
 	to_chat(user, SPAN_NOTICE("You swallow a gulp from \the [src]."))
 	if (user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
-		for(var/datum/reagent/R in reagents.reagent_list)
+		for (var/datum/reagent/R in reagents.reagent_list)
 			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R.type)
 
 /obj/item/reagent_containers/food/drinks/feed_sound(mob/user)
@@ -91,7 +91,7 @@
 
 /obj/item/reagent_containers/food/drinks/proc/get_filling_state()
 	var/percent = round((reagents.total_volume / volume) * 100)
-	for(var/k in cached_number_list_decode(filling_states))
+	for (var/k in cached_number_list_decode(filling_states))
 		if (percent <= k)
 			return k
 

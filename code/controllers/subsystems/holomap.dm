@@ -36,7 +36,7 @@ SUBSYSTEM_DEF(minimap)
 		generateHolomap(z)
 
 	//Update machinery if it has not been
-	for(var/obj/machinery/ship_map/M in station_holomaps)
+	for (var/obj/machinery/ship_map/M in station_holomaps)
 		if (istype(M) && !QDELETED(M))
 			M.update_map_data()
 
@@ -48,7 +48,7 @@ SUBSYSTEM_DEF(minimap)
 
 	var/icon/combinedareas = icon(HOLOMAP_ICON, "blank")
 
-	for(var/area/A in data.holomap_areas)
+	for (var/area/A in data.holomap_areas)
 		var/icon/single = data.holomap_areas[A]
 		if (A.holomap_color)
 			single.Blend(A.holomap_color, ICON_MULTIPLY)
@@ -95,8 +95,8 @@ SUBSYSTEM_DEF(minimap)
 	if (world.maxy + offset_y > canvas.Height())
 		crash_with("Minimap for z=[zlevel] : world.maxy ([world.maxy]) + holomap_offset_y ([offset_y]) must be <= [canvas.Height()]")
 
-	for(var/x = 1 to world.maxx)
-		for(var/y = 1 to world.maxy)
+	for (var/x = 1 to world.maxx)
+		for (var/y = 1 to world.maxy)
 			var/turf/tile = locate(x, y, zlevel)
 			var/area/A
 			if (tile)
@@ -121,8 +121,8 @@ SUBSYSTEM_DEF(minimap)
 	var/offset_x = HOLOMAP_PIXEL_OFFSET_X
 	var/offset_y = HOLOMAP_PIXEL_OFFSET_Y
 
-	for(var/x = 1 to world.maxx)
-		for(var/y = 1 to world.maxy)
+	for (var/x = 1 to world.maxx)
+		for (var/y = 1 to world.maxy)
 			var/turf/tile = locate(x, y, zlevel)
 			if (tile && tile.loc)
 				var/area/areaToPaint = tile.loc

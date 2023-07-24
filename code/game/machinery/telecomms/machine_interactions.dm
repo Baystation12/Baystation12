@@ -51,7 +51,7 @@
 		return MCS_BLOCK
 
 /obj/machinery/telecomms/dismantle()
-	for(var/obj/x in (contents - component_parts))
+	for (var/obj/x in (contents - component_parts))
 		x.dropInto(loc)
 	. = ..()
 
@@ -93,7 +93,7 @@
 		dat += "<br>Linked Network Entities: <ol>"
 
 		var/i = 0
-		for(var/obj/machinery/telecomms/T in links)
+		for (var/obj/machinery/telecomms/T in links)
 			i++
 			if (T.hide && !src.hide)
 				continue
@@ -104,7 +104,7 @@
 
 		i = 0
 		if (length(freq_listening))
-			for(var/x in freq_listening)
+			for (var/x in freq_listening)
 				i++
 				if (i < length(freq_listening))
 					dat += "[format_frequency(x)] GHz<a href='?src=\ref[src];delete=[x]'>\[X\]</a>; "
@@ -118,7 +118,7 @@
 		dat += "<br><br>Channel Tagging Rules: <ol>"
 
 		if (length(channel_tags))
-			for(var/list/rule in channel_tags)
+			for (var/list/rule in channel_tags)
 				dat +="<li>[format_frequency(rule[1])] -> [rule[2]] ([rule[3]]) <a href='?src=\ref[src];deletetagrule=[rule[1]]'>\[X\]</a></li>"
 
 		dat += "</ol>"
@@ -249,7 +249,7 @@
 						temp = SPAN_COLOR("#666633", "-% Too many characters in new network tag %-")
 
 					else
-						for(var/obj/machinery/telecomms/T in links)
+						for (var/obj/machinery/telecomms/T in links)
 							T.links.Remove(src)
 
 						network = newnet
@@ -277,7 +277,7 @@
 						updateUsrDialog()
 						return
 
-					for(var/list/rule in channel_tags)
+					for (var/list/rule in channel_tags)
 						if (rule[1] == freq)
 							temp = SPAN_COLOR("#660000", "-% Tagging rule already defined %-")
 							updateUsrDialog()
@@ -307,7 +307,7 @@
 
 		var/freq = text2num(href_list["deletetagrule"])
 		var/rule_delete
-		for(var/list/rule in channel_tags)
+		for (var/list/rule in channel_tags)
 			if (rule[1] == freq)
 				rule_delete = rule
 		temp = SPAN_COLOR("#666633", "-% Removed tagging rule: [rule_delete[1]] -> [rule_delete[2]] %-")

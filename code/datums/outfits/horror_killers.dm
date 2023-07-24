@@ -32,7 +32,7 @@
 /singleton/hierarchy/outfit/masked_killer/post_equip(mob/living/carbon/human/H)
 	..()
 	var/victim = get_mannequin(H.ckey)
-	for(var/obj/item/carried_item in H.get_equipped_items(TRUE))
+	for (var/obj/item/carried_item in H.get_equipped_items(TRUE))
 		carried_item.add_blood(victim) //Oh yes, there will be blood.. just not blood from the killer because that's odd
 
 /singleton/hierarchy/outfit/reaper
@@ -52,9 +52,9 @@
 /singleton/hierarchy/outfit/reaper/post_equip(mob/living/carbon/human/H)
 	..()
 	var/obj/item/storage/secure/briefcase/sec_briefcase = new(H)
-	for(var/obj/item/briefcase_item in sec_briefcase)
+	for (var/obj/item/briefcase_item in sec_briefcase)
 		qdel(briefcase_item)
-	for(var/i=3, i>0, i--)
+	for (var/i=3, i>0, i--)
 		new /obj/item/spacecash/bundle/c1000(sec_briefcase)
 	new /obj/item/gun/energy/crossbow(sec_briefcase)
 	new /obj/item/gun/projectile/revolver(sec_briefcase)

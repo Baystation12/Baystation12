@@ -60,7 +60,7 @@ Frequency:
 			if (sr)
 				src.temp += "<B>Located Beacons:</B><BR>"
 
-				for(var/obj/machinery/tele_beacon/W in world)
+				for (var/obj/machinery/tele_beacon/W in world)
 					if (!W.functioning())
 						continue
 					var/turf/tr = get_turf(W)
@@ -114,7 +114,7 @@ Frequency:
 		if (istype(src.loc, /mob))
 			attack_self(src.loc)
 		else
-			for(var/mob/M in viewers(1, src))
+			for (var/mob/M in viewers(1, src))
 				if (M.client)
 					src.attack_self(M)
 	return

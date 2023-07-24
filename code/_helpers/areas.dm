@@ -8,7 +8,7 @@
 		return
 	if (!islist(predicates))
 		predicates = list(predicates)
-	for(var/area/A)
+	for (var/area/A)
 		if (all_predicates_true(list(A), predicates))
 			. += A
 
@@ -18,7 +18,7 @@
 	A = istype(A) ? A : locate(A)
 	if (!A)
 		return
-	for(var/turf/T in A.contents)
+	for (var/turf/T in A.contents)
 		if (!predicates || all_predicates_true(list(T), predicates))
 			. += T
 
@@ -28,22 +28,22 @@
 	A = istype(A) ? A.type : A
 	if (!ispath(A))
 		return
-	for(var/sub_area_type in typesof(A))
+	for (var/sub_area_type in typesof(A))
 		var/area/sub_area = locate(sub_area_type)
-		for(var/turf/T in sub_area.contents)
+		for (var/turf/T in sub_area.contents)
 			if (!predicates || all_predicates_true(list(T), predicates))
 				. += T
 
 /proc/group_areas_by_name(list/predicates)
 	RETURN_TYPE(/list)
 	. = list()
-	for(var/area/A in get_filtered_areas(predicates))
+	for (var/area/A in get_filtered_areas(predicates))
 		group_by(., A.name, A)
 
 /proc/group_areas_by_z_level(list/predicates)
 	RETURN_TYPE(/list)
 	. = list()
-	for(var/area/A in get_filtered_areas(predicates))
+	for (var/area/A in get_filtered_areas(predicates))
 		group_by(., pad_left(num2text(A.z), 3, "0"), A)
 
 /*

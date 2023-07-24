@@ -238,7 +238,7 @@
 
 /mob/living/bot/proc/handleAI()
 	if (length(ignore_list))
-		for(var/atom/A in ignore_list)
+		for (var/atom/A in ignore_list)
 			if (!A || !A.loc || prob(1))
 				ignore_list -= A
 	handleRegular()
@@ -248,7 +248,7 @@
 		else
 			handleRangedTarget()
 		if (!wait_if_pulled || !pulledby)
-			for(var/i = 1 to target_speed)
+			for (var/i = 1 to target_speed)
 				sleep(20 / (target_speed + 1))
 				stepToTarget()
 		if (max_frustration && frustration > max_frustration * target_speed)
@@ -258,7 +258,7 @@
 		lookForTargets()
 		if (will_patrol && !pulledby && !target)
 			if (patrol_path && length(patrol_path))
-				for(var/i = 1 to patrol_speed)
+				for (var/i = 1 to patrol_speed)
 					sleep(20 / (patrol_speed + 1))
 					handlePatrol()
 				if (max_frustration && frustration > max_frustration * patrol_speed)
@@ -325,7 +325,7 @@
 	var/obj/machinery/navbeacon/targ = locate() in get_turf(src)
 
 	if (!targ)
-		for(var/obj/machinery/navbeacon/N in navbeacons)
+		for (var/obj/machinery/navbeacon/N in navbeacons)
 			if (!N.codes["patrol"])
 				continue
 			if (get_dist(src, N) < minDist)
@@ -333,7 +333,7 @@
 				targ = N
 
 	if (targ && targ.codes["next_patrol"])
-		for(var/obj/machinery/navbeacon/N in navbeacons)
+		for (var/obj/machinery/navbeacon/N in navbeacons)
 			if (N.location == targ.codes["next_patrol"])
 				targ = N
 				break
@@ -399,9 +399,9 @@
 /turf/proc/CardinalTurfsWithAccess(obj/item/card/id/ID)
 	var/L[] = new()
 
-	//	for(var/turf/simulated/t in oview(src,1))
+	//	for (var/turf/simulated/t in oview(src,1))
 
-	for(var/d in GLOB.cardinal)
+	for (var/d in GLOB.cardinal)
 		var/turf/simulated/T = get_step(src, d)
 		if (istype(T) && !T.density)
 			if (!LinkBlockedWithAccess(src, T, ID))
@@ -432,7 +432,7 @@
 	if (DirBlockedWithAccess(B,rdir, ID))
 		return 1
 
-	for(var/obj/O in B)
+	for (var/obj/O in B)
 		if (O.density && !istype(O, /obj/machinery/door) && !(O.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 			return 1
 
@@ -441,12 +441,12 @@
 // Returns true if direction is blocked from loc
 // Checks doors against access with given ID
 /proc/DirBlockedWithAccess(turf/loc,dir,obj/item/card/id/ID)
-	for(var/obj/structure/window/D in loc)
+	for (var/obj/structure/window/D in loc)
 		if (!D.density)			continue
 		if (D.dir == SOUTHWEST)	return 1
 		if (D.dir == dir)		return 1
 
-	for(var/obj/machinery/door/D in loc)
+	for (var/obj/machinery/door/D in loc)
 		if (!D.density)			continue
 		if (istype(D, /obj/machinery/door/window))
 			if ( dir & D.dir )	return !D.check_access(ID)

@@ -99,7 +99,7 @@
 			//if the effect works by touch, activate it on anyone viewing the console
 			if (inserted_battery.battery_effect.effect == EFFECT_TOUCH)
 				var/list/nearby = viewers(1, src)
-				for(var/mob/M in nearby)
+				for (var/mob/M in nearby)
 					if (M.machine == src)
 						inserted_battery.battery_effect.DoEffectTouch(M)
 
@@ -127,7 +127,7 @@
 			cur_artifact = null
 			var/articount = 0
 			var/obj/machinery/artifact/analysed
-			for(var/obj/machinery/artifact/A in get_turf(owned_scanner))
+			for (var/obj/machinery/artifact/A in get_turf(owned_scanner))
 				analysed = A
 				articount++
 
@@ -204,7 +204,7 @@
 								var/datum/artifact_effect/E = new effecttype(inserted_battery)
 
 								//duplicate it's unique settings
-								for(var/varname in list("chargelevelmax","artifact_id","effect","effectrange","trigger"))
+								for (var/varname in list("chargelevelmax","artifact_id","effect","effectrange","trigger"))
 									E.vars[varname] = source_effect.vars[varname]
 
 								//copy the new datum into the battery

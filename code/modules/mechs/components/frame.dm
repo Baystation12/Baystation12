@@ -27,7 +27,7 @@
 
 /obj/structure/heavy_vehicle_frame/set_color(new_colour)
 	var/painted_component = FALSE
-	for(var/obj/item/mech_component/comp in list(body, arms, legs, head))
+	for (var/obj/item/mech_component/comp in list(body, arms, legs, head))
 		if (comp.set_color(new_colour))
 			painted_component = TRUE
 	if (painted_component)

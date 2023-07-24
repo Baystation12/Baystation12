@@ -7,7 +7,7 @@
 	var/list/skipped_organ_types = list(/obj/item/organ/external, /obj/item/organ/internal)
 
 	var/list/failed_organ_types = list()
-	for(var/organ_type in (subtypesof(/obj/item/organ) - skipped_organ_types))
+	for (var/organ_type in (subtypesof(/obj/item/organ) - skipped_organ_types))
 		var/obj/item/organ/O = organ_type
 		if (!initial(O.max_damage))
 			failed_organ_types += O
@@ -24,7 +24,7 @@
 
 /datum/unit_test/species_organ_creation/proc/check_internal_organs(mob/living/carbon/human/H, datum/species/species)
 	. = 1
-	for(var/organ_tag in species.has_organ)
+	for (var/organ_tag in species.has_organ)
 		var/obj/item/organ/internal/I = H.internal_organs_by_name[organ_tag]
 		if (!istype(I))
 			fail("[species.name] failed to register internal organ for tag \"[organ_tag]\" to internal_organs_by_name.")
@@ -45,7 +45,7 @@
 
 /datum/unit_test/species_organ_creation/proc/check_external_organs(mob/living/carbon/human/H, datum/species/species)
 	. = 1
-	for(var/organ_tag in species.has_limbs)
+	for (var/organ_tag in species.has_limbs)
 		var/obj/item/organ/external/E = H.organs_by_name[organ_tag]
 		if (!istype(E))
 			fail("[species.name] failed to register external organ for tag \"[organ_tag]\" to organs_by_name.")
@@ -67,7 +67,7 @@
 
 /datum/unit_test/species_organ_creation/proc/check_organ_parents(mob/living/carbon/human/H, datum/species/species)
 	. = 1
-	for(var/obj/item/organ/external/E in H.organs)
+	for (var/obj/item/organ/external/E in H.organs)
 		if (!E.parent_organ)
 			continue
 		var/obj/item/organ/external/parent = H.organs_by_name[E.parent_organ]
@@ -88,7 +88,7 @@
 			. = 0
 			continue
 
-	for(var/obj/item/organ/internal/I in H.organs)
+	for (var/obj/item/organ/internal/I in H.organs)
 		if (!I.parent_organ)
 			fail("[species.name] internal organ [I] did not have a parent_organ tag.")
 			. = 0
@@ -109,7 +109,7 @@
 
 /datum/unit_test/species_organ_creation/start_test()
 	var/failcount = 0
-	for(var/datum/species/species in all_species)
+	for (var/datum/species/species in all_species)
 		var/mob/living/carbon/human/test_subject = new(null, species.name)
 
 		var/fail = 0
@@ -234,14 +234,14 @@
 
 /datum/unit_test/species_organ_lists_update/start_test()
 	var/failcount = 0
-	for(var/datum/species/species in all_species)
+	for (var/datum/species/species in all_species)
 		var/mob/living/carbon/human/test_subject = new(null, species.name)
 
-		for(var/O in test_subject.internal_organs)
+		for (var/O in test_subject.internal_organs)
 			if (!test_internal_organ(test_subject, O))
 				failcount++
 
-		for(var/O in test_subject.organs)
+		for (var/O in test_subject.organs)
 			if (!test_external_organ(test_subject, O))
 				failcount++
 

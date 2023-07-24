@@ -93,7 +93,7 @@
 /mob/living/exosuit/premade/powerloader/old/Initialize()
 	. = ..()
 	var/list/parts = list(arms,legs,head,body)
-	for(var/obj/item/mech_component/MC in parts)
+	for (var/obj/item/mech_component/MC in parts)
 		if (prob(35))
 			MC.color = rgb(255,rand(188, 225),rand(55, 136))
 	//Damage it

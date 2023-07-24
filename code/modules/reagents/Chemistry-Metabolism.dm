@@ -17,6 +17,6 @@
 
 /datum/reagents/metabolism/proc/metabolize()
 	if (parent)
-		for(var/datum/reagent/current in reagent_list)
+		for (var/datum/reagent/current in reagent_list)
 			current.on_mob_life(parent, metabolism_class)
 		update_total()

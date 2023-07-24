@@ -24,12 +24,12 @@
 	..()
 	if (transmit_on_change)
 		part.transmit_on_change = list()
-		for(var/key in transmit_on_change)
+		for (var/key in transmit_on_change)
 			part.transmit_on_change[key] = GET_SINGLETON(transmit_on_change[key])
 
 	if (transmit_on_tick)
 		part.transmit_on_tick = list()
-		for(var/key in transmit_on_tick)
+		for (var/key in transmit_on_tick)
 			part.transmit_on_tick[key] = GET_SINGLETON(transmit_on_tick[key])
 
 /singleton/stock_part_preset/radio/event_transmitter
@@ -45,7 +45,7 @@
 
 	if (transmit_on_event)
 		part.transmit_on_event = list()
-		for(var/key in transmit_on_event)
+		for (var/key in transmit_on_event)
 			part.transmit_on_event[key] = GET_SINGLETON(transmit_on_event[key])
 
 /singleton/stock_part_preset/radio/receiver
@@ -58,10 +58,10 @@
 
 	if (receive_and_write)
 		part.receive_and_write = list()
-		for(var/key in receive_and_write)
+		for (var/key in receive_and_write)
 			part.receive_and_write[key] = GET_SINGLETON(receive_and_write[key])
 
 	if (receive_and_call)
 		part.receive_and_call = list()
-		for(var/key in receive_and_call)
+		for (var/key in receive_and_call)
 			part.receive_and_call[key] = GET_SINGLETON(receive_and_call[key])

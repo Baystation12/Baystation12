@@ -57,10 +57,10 @@
 	pref.alternate_option	= sanitize_integer(pref.alternate_option, 0, 2, initial(pref.alternate_option))
 	pref.job_high	        = sanitize(pref.job_high, null)
 	if (pref.job_medium && length(pref.job_medium))
-		for(var/i in 1 to length(pref.job_medium))
+		for (var/i in 1 to length(pref.job_medium))
 			pref.job_medium[i]  = sanitize(pref.job_medium[i])
 	if (pref.job_low && length(pref.job_low))
-		for(var/i in 1 to length(pref.job_low))
+		for (var/i in 1 to length(pref.job_low))
 			pref.job_low[i]  = sanitize(pref.job_low[i])
 	if (!pref.player_alt_titles) pref.player_alt_titles = new()
 
@@ -70,7 +70,7 @@
 
 	pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		//this proc also automatically computes and updates points_by_job
 
-	for(var/job_type in SSjobs.types_to_datums)
+	for (var/job_type in SSjobs.types_to_datums)
 		var/datum/job/job = SSjobs.types_to_datums[job_type]
 		var/alt_title = pref.player_alt_titles[job.title]
 		if (alt_title && !(alt_title in job.alt_titles))
@@ -90,7 +90,7 @@
 	. += "<br>"
 
 	// Display everything.
-	for(var/job_map in SSjobs.job_lists_by_map_name)
+	for (var/job_map in SSjobs.job_lists_by_map_name)
 
 		var/list/map_data = SSjobs.job_lists_by_map_name[job_map]
 		if (isnull(pref.hiding_maps[job_map]))
@@ -113,7 +113,7 @@
 			var/index = -1
 			if (splitLimit) limit = round((LAZYLEN(map_job_list)+1)/2)
 
-			for(var/datum/job/job in map_job_list)
+			for (var/datum/job/job in map_job_list)
 
 				var/datum/mil_rank/player_rank
 				var/datum/mil_branch/player_branch
@@ -189,7 +189,7 @@
 					if ((index < limit) && (lastJob != null))
 						//If the cells were broken up by a job in the splitJob list then it will fill in the rest of the cells with
 						//the last job's selection color. Creating a rather nice effect.
-						for(var/i = 0, i < (limit - index), i += 1)
+						for (var/i = 0, i < (limit - index), i += 1)
 							. += "<tr bgcolor='[lastJob.selection_color]'><td width='40%' align='right'><a>&nbsp</a></td><td><a>&nbsp</a></td></tr>"
 					. += "</table></td><td width='20%'><table width='100%' cellpadding='1' cellspacing='0'>"
 					index = 0
@@ -252,20 +252,20 @@
 /datum/category_item/player_setup_item/proc/validate_branch_and_rank()
 
 	if (LAZYLEN(pref.branches))
-		for(var/job_name in pref.branches)
+		for (var/job_name in pref.branches)
 			if (!(job_name in SSjobs.titles_to_datums))
 				pref.branches -= job_name
 
 	if (LAZYLEN(pref.ranks))
 		var/list/removing_ranks
-		for(var/job_name in pref.ranks)
+		for (var/job_name in pref.ranks)
 			var/datum/job/job = SSjobs.get_by_title(job_name, TRUE)
 			if (!job) LAZYADD(removing_ranks, job_name)
 		if (LAZYLEN(removing_ranks))
 			pref.ranks -= removing_ranks
 
 	var/datum/species/S = preference_species()
-	for(var/job_name in SSjobs.titles_to_datums)
+	for (var/job_name in SSjobs.titles_to_datums)
 
 		var/datum/job/job = SSjobs.get_by_title(job_name)
 
@@ -385,7 +385,7 @@
 		HTML += "<h2>[S.name]</h2>"
 		HTML += "[S.desc]<br>"
 		var/i
-		for(i=1, i <= length(S.levels), i++)
+		for (i=1, i <= length(S.levels), i++)
 			var/level_name = S.levels[i]
 			HTML +=	"<br><b>[level_name]</b>: [S.levels[level_name]]<br>"
 		show_browser(user, jointext(HTML, null), "window=\ref[user]skillinfo")
@@ -411,7 +411,7 @@
 
 		if (job.allowed_branches)
 			dat += "You can be of following ranks:"
-			for(var/T in job.allowed_branches)
+			for (var/T in job.allowed_branches)
 				var/datum/mil_branch/B = GLOB.mil_branches.get_branch_by_type(T)
 				dat += "<li>[B.name]: [job.get_ranks(B.name)]"
 		dat += "<hr style='clear:left;'>"
@@ -515,7 +515,7 @@
 /datum/category_item/player_setup_item/proc/prune_job_prefs()
 	var/allowed_titles = list()
 
-	for(var/job_type in SSjobs.types_to_datums)
+	for (var/job_type in SSjobs.types_to_datums)
 		var/datum/job/job = SSjobs.types_to_datums[job_type]
 		allowed_titles += job.title
 
@@ -534,11 +534,11 @@
 	if (pref.job_high && !(pref.job_high in allowed_titles))
 		pref.job_high = null
 
-	for(var/job_title in pref.job_medium)
+	for (var/job_title in pref.job_medium)
 		if (!(job_title in allowed_titles))
 			pref.job_medium -= job_title
 
-	for(var/job_title in pref.job_low)
+	for (var/job_title in pref.job_low)
 		if (!(job_title in allowed_titles))
 			pref.job_low -= job_title
 

@@ -116,7 +116,7 @@
 			data["error"] = "I/O ERROR: Unable to access hard drive."
 		else
 			var/list/files[0]
-			for(var/datum/computer_file/F in PRG.computer.get_all_files())
+			for (var/datum/computer_file/F in PRG.computer.get_all_files())
 				files.Add(list(list(
 					"name" = F.filename,
 					"type" = F.filetype,
@@ -128,7 +128,7 @@
 			if (RHDD)
 				data["usbconnected"] = TRUE
 				var/list/usbfiles[0]
-				for(var/datum/computer_file/F in PRG.computer.get_all_files(disk = RHDD))
+				for (var/datum/computer_file/F in PRG.computer.get_all_files(disk = RHDD))
 					usbfiles.Add(list(list(
 						"name" = F.filename,
 						"type" = F.filetype,

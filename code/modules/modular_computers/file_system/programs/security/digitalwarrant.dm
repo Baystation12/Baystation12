@@ -34,7 +34,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		var/list/arrestwarrants = list()
 		var/list/searchwarrants = list()
 		var/list/archivedwarrants = list()
-		for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
+		for (var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 			var/charges = W.fields["charges"]
 			if (length(charges) > 50)
 				charges = copytext(charges, 1, 50) + "..."
@@ -71,7 +71,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 
 	if (href_list["editwarrant"])
 		. = TRUE
-		for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
+		for (var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 			if (W.uid == text2num(href_list["editwarrant"]))
 				activewarrant = W
 				break
@@ -90,14 +90,14 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 
 	if (href_list["sendtoarchive"])
 		. = TRUE
-		for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
+		for (var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 			if (W.uid == text2num(href_list["sendtoarchive"]))
 				W.archived = TRUE
 				break
 
 	if (href_list["restore"])
 		. = TRUE
-		for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
+		for (var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 			if (W.uid == text2num(href_list["restore"]))
 				W.archived = FALSE
 				break
@@ -130,7 +130,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 	if (href_list["deletewarrant"])
 		. = TRUE
 		if (!activewarrant)
-			for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
+			for (var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 				if (W.uid == text2num(href_list["deletewarrant"]))
 					activewarrant = W
 					break
@@ -144,7 +144,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 			return
 		if (!activewarrant)
 			var/puid = text2num(href_list["printwarrant"])
-			for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
+			for (var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 				if (W.uid == puid)
 					activewarrant = W
 					break
@@ -157,7 +157,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 	if (href_list["editwarrantname"])
 		. = TRUE
 		var/namelist = list()
-		for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+		for (var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
 			namelist += "[CR.get_name()] \[[CR.get_job()]\]"
 		var/new_person = sanitize(input(usr, "Please input name") as null|anything in namelist)
 		if (CanInteract(user, GLOB.default_state))
@@ -211,7 +211,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		if (!J)
 			to_chat(user, "Lookup error: Unable to locate specified job in access database.")
 			return
-		for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+		for (var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
 			if (CR.get_name() == activewarrant.fields["namewarrant"] && CR.get_job() == J.title)
 				warrant_subject = CR
 

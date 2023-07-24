@@ -71,7 +71,7 @@
 	addtimer(new Callback(src, /obj/machinery/washing_machine/proc/wash), 20 SECONDS)
 
 /obj/machinery/washing_machine/proc/wash()
-	for(var/atom/A in (contents - component_parts))
+	for (var/atom/A in (contents - component_parts))
 		if (detergent)
 			A.clean_blood()
 		if (isitem(A))
@@ -90,7 +90,7 @@
 	QDEL_NULL(detergent)
 
 	//Tanning!
-	for(var/obj/item/stack/hairlesshide/HH in contents)
+	for (var/obj/item/stack/hairlesshide/HH in contents)
 		var/obj/item/stack/wetleather/WL = new(src)
 		WL.amount = HH.amount
 		qdel(HH)
@@ -140,7 +140,7 @@
 			detergent = W
 			return TRUE
 	if (istype(W, /obj/item/holder)) // Mob holder
-		for(var/mob/living/doggy in W)
+		for (var/mob/living/doggy in W)
 			doggy.forceMove(src)
 		qdel(W)
 		state |= WASHER_STATE_FULL
@@ -182,7 +182,7 @@
 			var/mob/M = locate(/mob/living) in src
 			if (M)
 				M.gib()
-		for(var/atom/movable/O in (contents - component_parts))
+		for (var/atom/movable/O in (contents - component_parts))
 			O.dropInto(loc)
 		state &= ~WASHER_STATE_FULL
 		update_icon()

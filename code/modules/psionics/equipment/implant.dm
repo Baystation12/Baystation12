@@ -49,7 +49,7 @@
 	if (!malfunction)
 		overload = 100
 		if (imp_in)
-			for(var/thing in SSpsi.psi_monitors)
+			for (var/thing in SSpsi.psi_monitors)
 				var/obj/machinery/psi_monitor/monitor = thing
 				monitor.report_failure(src)
 	. = ..()
@@ -92,7 +92,7 @@
 
 		// If all we're doing is logging the incident then just pass back stress without changing it.
 		if (source && source == imp_in && implanted)
-			for(var/thing in SSpsi.psi_monitors)
+			for (var/thing in SSpsi.psi_monitors)
 				var/obj/machinery/psi_monitor/monitor = thing
 				monitor.report_violation(src, stress)
 			if (use_psi_mode == PSI_IMPLANT_LOG)

@@ -36,7 +36,7 @@ SUBSYSTEM_DEF(chat)
 		message += "<br>"
 	var/twiceEncoded = url_encode(url_encode(message)) // Double encode so that JS can consume utf-8
 	if (islist(target))
-		for(var/I in target)
+		for (var/I in target)
 			queuePartTwo(I, message, original_message, twiceEncoded)
 	else
 		queuePartTwo(target, message, original_message, twiceEncoded)

@@ -16,7 +16,7 @@
 /spell/hand/duration/sunwrath/cast_hand(atom/A, mob/user)
 	var/turf/T = get_turf(user)
 	var/list/turfs = getline(T,A) - T
-	for(var/t in turfs)
+	for (var/t in turfs)
 		var/turf/turf = t
 		if (turf.density || istype(turf, /turf/space))
 			break
@@ -29,5 +29,5 @@
 	pressure = 3000
 
 /obj/effect/fake_fire/sunwrath/Process() //Override, so we burn mobs only
-	for(var/mob/living/L in loc)
+	for (var/mob/living/L in loc)
 		L.FireBurn(firelevel,last_temperature,pressure)

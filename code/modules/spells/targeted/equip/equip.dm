@@ -12,8 +12,8 @@
 
 /spell/targeted/equip_item/cast(list/targets, mob/user = usr)
 	..()
-	for(var/mob/living/L in targets)
-		for(var/slot_id in equipped_summons)
+	for (var/mob/living/L in targets)
+		for (var/slot_id in equipped_summons)
 			var/to_create = equipped_summons[slot_id]
 			if (cmptext(slot_id,"active hand"))
 				slot_id = (user.hand ? slot_l_hand : slot_r_hand)
@@ -35,7 +35,7 @@
 
 	if (duration)
 		spawn(duration)
-			for(var/obj/item/to_remove in summoned_items)
+			for (var/obj/item/to_remove in summoned_items)
 				qdel(to_remove)
 
 /spell/targeted/equip_item/proc/summon_item(newtype)

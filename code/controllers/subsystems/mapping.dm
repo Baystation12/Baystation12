@@ -18,7 +18,7 @@ SUBSYSTEM_DEF(mapping)
 /datum/controller/subsystem/mapping/Initialize(start_uptime)
 	// Load templates and build away sites.
 	preloadTemplates()
-	for(var/atype in subtypesof(/singleton/submap_archetype))
+	for (var/atype in subtypesof(/singleton/submap_archetype))
 		submap_archetypes[atype] = new atype
 
 
@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(mapping)
 
 /datum/controller/subsystem/mapping/proc/preloadTemplates(path = "maps/templates/") //see master controller setup
 	var/list/filelist = flist(path)
-	for(var/map in filelist)
+	for (var/map in filelist)
 		var/datum/map_template/T = new(paths = "[path][map]", rename = "[map]")
 		map_templates[T.name] = T
 	preloadBlacklistableTemplates()
@@ -47,7 +47,7 @@ SUBSYSTEM_DEF(mapping)
 
 	var/list/banned_maps = list() + banned_exoplanet_dmms + banned_space_dmms + banned_away_site_dmms
 
-	for(var/item in sortList(subtypesof(/datum/map_template), /proc/cmp_ruincost_priority))
+	for (var/item in sortList(subtypesof(/datum/map_template), /proc/cmp_ruincost_priority))
 		var/datum/map_template/map_template_type = item
 		// screen out the abstract subtypes
 		if (!initial(map_template_type.id))

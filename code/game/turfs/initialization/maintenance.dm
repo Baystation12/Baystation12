@@ -26,7 +26,7 @@
 	T.dirt = get_dirt_amount()
 	// If a neighbor is dirty, then we get dirtier.
 	var/how_dirty = dirty_neighbors(cardinal_turfs)
-	for(var/i = 0; i < how_dirty; i++)
+	for (var/i = 0; i < how_dirty; i++)
 		T.dirt += rand(0,5)
 	T.update_dirt()
 
@@ -48,7 +48,7 @@
 
 /singleton/turf_initializer/maintenance/proc/dirty_neighbors(list/cardinal_turfs)
 	var/how_dirty = 0
-	for(var/turf/simulated/T in cardinal_turfs)
+	for (var/turf/simulated/T in cardinal_turfs)
 		// Considered dirty if more than halfway to visible dirt
 		if (T.dirt > 25)
 			how_dirty++
@@ -59,7 +59,7 @@
 	if (!north_turf || !north_turf.density)
 		return
 
-	for(var/dir in list(WEST, EAST))	// For the sake of efficiency, west wins over east in the case of 1-tile valid spots, rather than doing pick()
+	for (var/dir in list(WEST, EAST))	// For the sake of efficiency, west wins over east in the case of 1-tile valid spots, rather than doing pick()
 		var/turf/neighbour = get_step(T, dir)
 		if (neighbour && neighbour.density)
 			if (dir == WEST)

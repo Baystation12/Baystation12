@@ -52,14 +52,14 @@
 		find_presence[/datum/reagent/mercury] = rand(1, 500) / 100
 	find_presence["chlorine"] = rand(500, 2500) / 100
 
-	for(var/datum/find/F in container.finds)
+	for (var/datum/find/F in container.finds)
 		var/responsive_reagent = get_responsive_reagent(F.find_type)
 		find_presence[responsive_reagent] = F.dissonance_spread
 
 	var/total_presence = 0
-	for(var/carrier in find_presence)
+	for (var/carrier in find_presence)
 		total_presence += find_presence[carrier]
-	for(var/carrier in find_presence)
+	for (var/carrier in find_presence)
 		find_presence[carrier] = find_presence[carrier] / total_presence
 
 /datum/geosample/proc/UpdateNearbyArtifactInfo(turf/simulated/mineral/container)

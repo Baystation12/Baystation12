@@ -103,14 +103,14 @@
 				break
 
 	var/who
-	for(var/client/C in GLOB.clients)
+	for (var/client/C in GLOB.clients)
 		if (!who)
 			who = "[C]"
 		else
 			who += ", [C]"
 
 	var/adminwho
-	for(var/client/C as anything in GLOB.admins)
+	for (var/client/C as anything in GLOB.admins)
 		if (!adminwho)
 			adminwho = "[C]"
 		else
@@ -341,16 +341,16 @@
 	output += "<tr><td width='50%' align='right'><b>Duration:</b> <input type='text' name='dbbaddduration'></td>"
 	output += "<td width='50%' align='right'><b>Job:</b><select name='dbbanaddjob'>"
 	output += "<option value=''>--</option>"
-	for(var/j in SSjobs.titles_to_datums)
+	for (var/j in SSjobs.titles_to_datums)
 		output += "<option value='[j]'>[j]</option>"
-	for(var/j in SSjobs.titles_by_department(MSC))
+	for (var/j in SSjobs.titles_by_department(MSC))
 		output += "<option value='[j]'>[j]</option>"
 	var/list/bantypes = list("traitor","changeling","operative","revolutionary","cultist","wizard") //For legacy bans.
 	var/list/all_antag_types = GLOB.all_antag_types_
-	for(var/antag_type in all_antag_types) // Grab other bans.
+	for (var/antag_type in all_antag_types) // Grab other bans.
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		bantypes |= antag.id
-	for(var/j in bantypes)
+	for (var/j in bantypes)
 		output += "<option value='[j]'>[j]</option>"
 	output += "</select></td></tr></table>"
 	output += "<b>Reason:<br></b><textarea name='dbbanreason' cols='50'></textarea><br>"

@@ -15,8 +15,8 @@
 	cast_sound = 'sound/magic/knock.ogg'
 
 /spell/aoe_turf/knock/cast(list/targets)
-	for(var/turf/T in targets)
-		for(var/obj/machinery/door/door in T.contents)
+	for (var/turf/T in targets)
+		for (var/obj/machinery/door/door in T.contents)
 			spawn(1)
 				if (istype(door,/obj/machinery/door/airlock))
 					var/obj/machinery/door/airlock/AL = door //casting is important

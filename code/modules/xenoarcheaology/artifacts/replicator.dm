@@ -64,7 +64,7 @@
 	/obj/item/grenade/chem_grenade/metalfoam)
 
 	var/quantity = rand(5, 15)
-	for(var/i=0, i<quantity, i++)
+	for (var/i=0, i<quantity, i++)
 		var/button_desc = "a [pick("yellow","purple","green","blue","red","orange","white")], "
 		button_desc += "[pick("round","square","diamond","heart","dog","human")] shaped "
 		button_desc += "[pick("toggle","switch","lever","button","pad","hole")]"
@@ -118,7 +118,7 @@
 /obj/machinery/replicator/interact(mob/user)
 	var/dat = "The control panel displays an incomprehensible selection of controls, many with unusual markings or text around them.<br>"
 	dat += "<br>"
-	for(var/index=1, index<=length(construction), index++)
+	for (var/index=1, index<=length(construction), index++)
 		dat += "<A href='?src=\ref[src];activate=[index]'>\[[construction[index]]\]</a><br>"
 
 	show_browser(user, dat, "window=alien_replicator")

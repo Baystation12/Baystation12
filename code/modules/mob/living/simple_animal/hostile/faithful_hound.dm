@@ -35,7 +35,7 @@
 		var/list/mobs = list()
 		var/list/objs = list()
 		get_mobs_and_objs_in_view_fast(get_turf(src),5, mobs, objs, 0)
-		for(var/mob/living/m in mobs)
+		for (var/mob/living/m in mobs)
 			if ((m == src) || (m in allowed_mobs) || m.faction == faction)
 				continue
 			var/new_aggress = 1

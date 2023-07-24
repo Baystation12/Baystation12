@@ -10,7 +10,7 @@
 //  in order for subtypes of src's type to detect each other
 #define DELETE_IF_DUPLICATE_OF(X) \
 	var/other_init = FALSE; \
-	for(var/existing in get_turf(src)) { \
+	for (var/existing in get_turf(src)) { \
 		if (existing == src) { \
 			continue; \
 		} \

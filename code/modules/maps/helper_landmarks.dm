@@ -15,7 +15,7 @@
 
 /obj/effect/landmark/carnage_mark/LateInitialize()
 	var/area/A = get_area(src)
-	for(var/atom/movable/AM in A)
+	for (var/atom/movable/AM in A)
 		if (AM && !AM.anchored && AM.simulated && prob(movement_prob))
 			spawn()
 				AM.throw_at_random(FALSE, movement_range, 1)
@@ -64,7 +64,7 @@
 		shuttle_datum = shuttle
 
 /obj/effect/landmark/delete_on_shuttle/proc/delete_everything()
-	for(var/O in loc)
+	for (var/O in loc)
 		if (is_type_in_list(O,typetodelete))
 			qdel(O)
 	qdel(src)

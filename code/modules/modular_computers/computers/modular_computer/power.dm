@@ -47,7 +47,7 @@
 /obj/item/modular_computer/proc/handle_power()
 	var/power_usage = screen_on ? base_active_power_usage : base_idle_power_usage
 	if (enabled)
-		for(var/obj/item/stock_parts/computer/H in get_all_components())
+		for (var/obj/item/stock_parts/computer/H in get_all_components())
 			if (H.enabled)
 				power_usage += H.power_usage
 		last_power_usage = power_usage

@@ -8,7 +8,7 @@ var/global/singleton/appearance_manager/appearance_manager = new()
 	..()
 	appearances_ = list()
 	appearance_handlers_ = list()
-	for(var/entry in subtypesof(/singleton/appearance_handler))
+	for (var/entry in subtypesof(/singleton/appearance_handler))
 		appearance_handlers_[entry] += new entry()
 
 /singleton/appearance_manager/proc/get_appearance_handler(handler_type)
@@ -36,7 +36,7 @@ var/global/singleton/appearance_manager/appearance_manager = new()
 
 /singleton/appearance_manager/proc/remove_appearances(mob/viewer)
 	var/PriorityQueue/pq = appearances_[viewer]
-	for(var/entry in pq.L)
+	for (var/entry in pq.L)
 		var/datum/appearance_data/ad = entry
 		ad.RemoveViewer(viewer, FALSE)
 	appearances_[viewer] -= viewer
@@ -51,7 +51,7 @@ var/global/singleton/appearance_manager/appearance_manager = new()
 	var/PriorityQueue/pq = appearances_[viewer]
 	if (!pq)
 		return
-	for(var/entry in pq.L)
+	for (var/entry in pq.L)
 		var/datum/appearance_data/ad = entry
 		viewer.client.images -= ad.images
 
@@ -61,6 +61,6 @@ var/global/singleton/appearance_manager/appearance_manager = new()
 	var/PriorityQueue/pq = appearances_[viewer]
 	if (!pq)
 		return
-	for(var/entry in pq.L)
+	for (var/entry in pq.L)
 		var/datum/appearance_data/ad = entry
 		viewer.client.images |= ad.images

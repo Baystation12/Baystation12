@@ -300,7 +300,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	msg += "Receiving '[sent.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[sent]'>view message</a>"
 	msg = SPAN_NOTICE(msg)
 
-	for(var/client/C as anything in GLOB.admins)
+	for (var/client/C as anything in GLOB.admins)
 		if (check_rights((R_ADMIN|R_MOD),0,C))
 			to_chat(C, msg)
 			sound_to(C, 'sound/machines/dotprinter.ogg')

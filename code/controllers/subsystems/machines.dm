@@ -103,7 +103,7 @@ SUBSYSTEM_DEF(machines)
 
 /// Rebuilds power networks from scratch. Called by world initialization and elevators.
 /datum/controller/subsystem/machines/proc/makepowernets()
-	for(var/datum/powernet/powernet as anything in powernets)
+	for (var/datum/powernet/powernet as anything in powernets)
 		qdel(powernet)
 	powernets.Cut()
 	setup_powernets_for_cables(GLOB.cable_list)
@@ -183,7 +183,7 @@ SUBSYSTEM_DEF(machines)
 			continue
 
 		if (machine.processing_flags & MACHINERY_PROCESS_COMPONENTS)
-			for(var/thing in machine.processing_parts)
+			for (var/thing in machine.processing_parts)
 				var/obj/item/stock_parts/part = thing
 				if (part.machine_process(machine) == PROCESS_KILL)
 					part.stop_processing()

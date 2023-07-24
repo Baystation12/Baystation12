@@ -95,7 +95,7 @@
 	update_nearby_tiles()
 	var/turf/location = loc
 	. = ..()
-	for(var/obj/structure/window/W in orange(1, location))
+	for (var/obj/structure/window/W in orange(1, location))
 		W.update_connections()
 		W.queue_icon_update()
 
@@ -187,7 +187,7 @@
 		visible_message(SPAN_WARNING("\The [src] shatters!"))
 
 	var/debris_count = round(get_glass_cost() / rand(1, 4))
-	for(var/i = 1 to debris_count)
+	for (var/i = 1 to debris_count)
 		material.place_shard(loc)
 		if (reinf_material)
 			debris_count = rand(0, 1)
@@ -547,7 +547,7 @@
 
 	var/newdir=turn(dir, 90)
 	if (!is_fulltile())
-		for(var/obj/structure/window/W in loc)
+		for (var/obj/structure/window/W in loc)
 			if (W.dir == newdir)
 				to_chat(user, SPAN_NOTICE("There's already a window facing that direction here!"))
 				return
@@ -579,7 +579,7 @@
 //This proc is used to update the icons of nearby windows. It should not be confused with update_nearby_tiles(), which is an atmos proc!
 /obj/structure/window/proc/update_nearby_icons()
 	update_icon()
-	for(var/obj/structure/window/W in orange(src, 1))
+	for (var/obj/structure/window/W in orange(src, 1))
 		W.update_icon()
 
 // Visually connect with every type of window as long as it's full-tile.
@@ -618,14 +618,14 @@
 
 	var/img_dir
 	if (is_on_frame())
-		for(var/i = 1 to 4)
+		for (var/i = 1 to 4)
 			img_dir = SHIFTL(1, i - 1)
 			if (other_connections[i] != "0")
 				process_icon(basestate, "_other_onframe", "_onframe", connections[i], img_dir, damage_alpha)
 			else
 				process_icon(basestate, "_onframe", "_onframe", connections[i], img_dir, damage_alpha)
 	else
-		for(var/i = 1 to 4)
+		for (var/i = 1 to 4)
 			img_dir = SHIFTL(1, i - 1)
 			if (other_connections[i] != "0")
 				process_icon(basestate, "_other", "", connections[i], img_dir, damage_alpha)
@@ -739,7 +739,7 @@
 /obj/structure/window/proc/can_install_here(mob/user)
 	//only care about full tile. Border can be installed anywhere
 	if (!anchored && is_fulltile())
-		for(var/obj/O in loc)
+		for (var/obj/O in loc)
 			if ((O != src) && O.density && !(O.atom_flags & ATOM_FLAG_CHECKS_BORDER) \
 			&& !(istype(O, /obj/structure/wall_frame) || istype(O, /obj/structure/grille)))
 				to_chat(user, SPAN_NOTICE("There isn't enough space to install \the [src]."))
@@ -779,7 +779,7 @@
 /obj/machinery/button/windowtint/activate()
 	if (operating)
 		return
-	for(var/obj/structure/window/W in range(src,range))
+	for (var/obj/structure/window/W in range(src,range))
 		if (W.polarized && (W.id == src.id || !W.id))
 			W.toggle()
 	..()
@@ -833,7 +833,7 @@
 	if (!ST.can_use(required_amount))
 		to_chat(user, SPAN_NOTICE("You do not have enough sheets."))
 		return
-	for(var/obj/structure/window/WINDOW in loc)
+	for (var/obj/structure/window/WINDOW in loc)
 		if (WINDOW.dir == dir_to_set)
 			to_chat(user, SPAN_NOTICE("There is already a window facing this way there."))
 			return
@@ -842,7 +842,7 @@
 			return
 	to_chat(user, SPAN_NOTICE("You start placing the window."))
 	if (do_after(user, 2 SECONDS, loc, DO_REPAIR_CONSTRUCT))
-		for(var/obj/structure/window/WINDOW in loc)
+		for (var/obj/structure/window/WINDOW in loc)
 			if (WINDOW.dir == dir_to_set)//checking this for a 2nd time to check if a window was made while we were waiting.
 				to_chat(user, SPAN_NOTICE("There is already a window facing this way there."))
 				return

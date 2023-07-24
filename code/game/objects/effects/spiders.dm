@@ -70,7 +70,7 @@
 		if (istype(loc, /obj/item/organ/external))
 			O = loc
 
-		for(var/i=0, i<num, i++)
+		for (var/i=0, i<num, i++)
 			var/spiderling = new spider_type(src.loc, src)
 			if (O)
 				O.implants += spiderling
@@ -218,7 +218,7 @@
 		if (get_dist(src, entry_vent) <= 1)
 			if (entry_vent.network && length(entry_vent.network.normal_members))
 				var/list/vents = list()
-				for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in entry_vent.network.normal_members)
+				for (var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in entry_vent.network.normal_members)
 					vents.Add(temp_vent)
 				if (!length(vents))
 					entry_vent = null
@@ -252,7 +252,7 @@
 					pixel_y = clamp(pixel_y + rand(min_y, max_y), -shift_range, shift_range)
 		else if (prob(5))
 			//vent crawl!
-			for(var/obj/machinery/atmospherics/unary/vent_pump/v in view(7,src))
+			for (var/obj/machinery/atmospherics/unary/vent_pump/v in view(7,src))
 				if (!v.welded)
 					entry_vent = v
 					walk_to(src, entry_vent, 5)
@@ -305,7 +305,7 @@
 	icon_state = pick("cocoon1","cocoon2","cocoon3")
 
 
-	for(var/atom/movable/O in loc)
+	for (var/atom/movable/O in loc)
 		if (!O.anchored)
 			O.forceMove(src)
 
@@ -316,7 +316,7 @@
 
 /obj/effect/spider/cocoon/Destroy()
 	src.visible_message(SPAN_WARNING("\The [src] splits open."))
-	for(var/atom/movable/A in contents)
+	for (var/atom/movable/A in contents)
 		A.dropInto(loc)
 		if (istype(A, /mob/living))
 			var/mob/living/L = A

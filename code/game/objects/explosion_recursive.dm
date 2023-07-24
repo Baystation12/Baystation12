@@ -24,7 +24,7 @@ var/global/explosion_in_progress = 0
 	explosion_turfs[epicenter] = power
 
 	//This steap handles the gathering of turfs which will be ex_act() -ed in the next step. It also ensures each turf gets the maximum possible amount of power dealt to it.
-	for(var/direction in GLOB.cardinal)
+	for (var/direction in GLOB.cardinal)
 		var/turf/T = get_step(epicenter, direction)
 		var/adj_power = power - epicenter.get_explosion_resistance()
 		if (shaped)
@@ -39,7 +39,7 @@ var/global/explosion_in_progress = 0
 			T.explosion_spread(adj_power, direction)
 
 	//This step applies the ex_act effects for the explosion, as planned in the previous step.
-	for(var/spot in explosion_turfs)
+	for (var/spot in explosion_turfs)
 		var/turf/T = spot
 		if (explosion_turfs[T] <= 0) continue
 		if (!T) continue
@@ -59,7 +59,7 @@ var/global/explosion_in_progress = 0
 			T = locate(x,y,z)
 
 		var/throw_target = get_edge_target_turf(T, get_dir(epicenter,T))
-		for(var/atom_movable in T.contents)
+		for (var/atom_movable in T.contents)
 			var/atom/movable/AM = atom_movable
 			if (AM && AM.simulated && !T.protects_atom(AM))
 				AM.ex_act(severity)
@@ -117,7 +117,7 @@ var/global/explosion_in_progress = 0
 
 /turf/get_explosion_resistance()
 	. = ..()
-	for(var/obj/O in src)
+	for (var/obj/O in src)
 		. += O.get_explosion_resistance()
 
 /turf/space/explosion_resistance = 3

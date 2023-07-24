@@ -61,7 +61,7 @@
 
 	//mobs in range check
 	var/users_in_range = 0
-	for(var/mob/living/L in orange(1,src))
+	for (var/mob/living/L in orange(1,src))
 		if (L.ckey && L.client)
 			if (L.client.is_afk(300) || L.incapacitated())//no playing with braindeads or corpses or handcuffed dudes.
 				to_chat(M, SPAN_WARNING("[L] doesn't seem to be paying attention..."))

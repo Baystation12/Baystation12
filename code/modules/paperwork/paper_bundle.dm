@@ -38,7 +38,7 @@
 
 	// merging bundles
 	else if (istype(W, /obj/item/paper_bundle))
-		for(var/obj/O in W)
+		for (var/obj/O in W)
 			O.forceMove(src)
 			O.add_fingerprint(user)
 			pages.Add(O)
@@ -200,7 +200,7 @@
 	set src in usr
 
 	to_chat(usr, SPAN_NOTICE("You loosen the bundle."))
-	for(var/obj/O in src)
+	for (var/obj/O in src)
 		O.dropInto(usr.loc)
 		O.reset_plane_and_layer()
 		O.add_fingerprint(usr)
@@ -214,7 +214,7 @@
 	underlays.Cut()
 	var/i = 0
 	var/photo
-	for(var/obj/O in src)
+	for (var/obj/O in src)
 		var/image/img = image('icons/obj/bureaucracy.dmi')
 		if (istype(O, /obj/item/paper))
 			img.icon_state = O.icon_state

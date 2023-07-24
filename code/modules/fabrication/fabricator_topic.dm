@@ -19,13 +19,13 @@
 	if (istype(order) && currently_building != order && is_functioning())
 		if (order in queued_orders)
 			// Refund some mats.
-			for(var/mat in order.earmarked_materials)
+			for (var/mat in order.earmarked_materials)
 				stored_material[mat] = min(stored_material[mat] + (order.earmarked_materials[mat] * 0.9), storage_capacity[mat])
 			queued_orders -= order
 		qdel(order)
 
 /obj/machinery/fabricator/proc/try_dump_material(mat_name)
-	for(var/mat_path in stored_substances_to_names)
+	for (var/mat_path in stored_substances_to_names)
 		if (stored_substances_to_names[mat_path] == mat_name)
 			if (ispath(mat_path, /material))
 				var/material/mat = SSmaterials.get_material_by_name(mat_name)

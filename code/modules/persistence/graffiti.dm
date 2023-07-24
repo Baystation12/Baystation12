@@ -23,7 +23,7 @@
 
 /obj/effect/decal/writing/Initialize()
 	var/list/random_icon_states = icon_states(icon)
-	for(var/obj/effect/decal/writing/W in loc)
+	for (var/obj/effect/decal/writing/W in loc)
 		random_icon_states.Remove(W.icon_state)
 	if (length(random_icon_states))
 		icon_state = pick(random_icon_states)

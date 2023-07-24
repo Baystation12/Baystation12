@@ -15,10 +15,10 @@
 	QDEL_NULL_LIST(internal_organs)
 	QDEL_NULL_LIST(hallucinations)
 	if (loc)
-		for(var/mob/M in contents)
+		for (var/mob/M in contents)
 			M.dropInto(loc)
 	else
-		for(var/mob/M in contents)
+		for (var/mob/M in contents)
 			qdel(M)
 	return ..()
 
@@ -77,7 +77,7 @@
 					gib()
 
 /mob/living/carbon/gib()
-	for(var/mob/M in contents)
+	for (var/mob/M in contents)
 		if (is_species(SPECIES_DIONA) && istype(M, /mob/living/carbon/alien/diona) && (M.stat != DEAD))
 			continue
 		M.dropInto(loc)
@@ -479,7 +479,7 @@
 	stasis_value = 0
 	if ((species && (species.species_flags & SPECIES_FLAG_NO_SCAN)) || isSynthetic())
 		return
-	for(var/source in stasis_sources)
+	for (var/source in stasis_sources)
 		stasis_value += stasis_sources[source]
 	stasis_sources.Cut()
 

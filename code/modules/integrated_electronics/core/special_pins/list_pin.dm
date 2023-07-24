@@ -18,7 +18,7 @@
 	t += "<a href='?src=\ref[src];clear=1'>\[Clear\]</a><br>"
 	t += "<hr>"
 	var/i = 0
-	for(var/line in my_list)
+	for (var/line in my_list)
 		i++
 		t += "#[i] | [display_data(line)]  |  "
 		t += "<a href='?src=\ref[src];edit=1;pos=[i]'>\[Edit\]</a>  |  "

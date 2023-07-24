@@ -143,19 +143,19 @@
 	var/node1_dir
 	var/node2_dir
 
-	for(var/direction in GLOB.cardinal)
+	for (var/direction in GLOB.cardinal)
 		if (direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction
 			else if (!node2_dir)
 				node2_dir = direction
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
+	for (var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
 				break
-	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
+	for (var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
 		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node2 = target

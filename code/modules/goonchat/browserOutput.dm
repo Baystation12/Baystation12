@@ -82,7 +82,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 	if (usr.client != owner)
 		return TRUE
 	var/list/params = list() // Build proc parameters from the form "param[paramname]=thing"
-	for(var/key in href_list)
+	for (var/key in href_list)
 		if (length(key) > 7 && findtext(key, "param")) // 7 is the amount of characters in the basic param key template.
 			params[copytext(key, 7, -1)] = href_list[key]
 	var/data // Data to be sent back to the chat.
@@ -112,7 +112,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 		return
 	loaded = TRUE
 	showChat()
-	for(var/message in messageQueue)
+	for (var/message in messageQueue)
 		to_chat(owner, message, handle_whitespace = FALSE) // whitespace has already been handled by the original to_chat
 	messageQueue = null
 	sendClientData()
@@ -184,7 +184,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 				message_admins("[key_name(src.owner)] was kicked for an invalid ban cookie)")
 				qdel(owner)
 				return
-			for(var/i in length(connectionHistory) to 1 step -1)
+			for (var/i in length(connectionHistory) to 1 step -1)
 				if (QDELETED(owner))
 					return
 				var/list/row = src.connectionHistory[i]
@@ -234,7 +234,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 	if (islist(target))
 		// Do the double-encoding outside the loop to save nanoseconds
 		var/twiceEncoded = url_encode(url_encode(message))
-		for(var/I in target)
+		for (var/I in target)
 			var/client/C = resolve_client(I) //Grab us a client if possible
 
 			if (!C)

@@ -31,7 +31,7 @@
 			stage=0
 			icon_state = initial(icon_state)
 		else if (length(beakers))
-			for(var/obj/B in beakers)
+			for (var/obj/B in beakers)
 				if (istype(B))
 					beakers -= B
 					user.put_in_hands(B)
@@ -137,7 +137,7 @@
 /obj/item/grenade/chem_grenade/detonate(mob/living/user)
 	if (!stage || stage<2) return
 	var/has_reagents = 0
-	for(var/obj/item/reagent_containers/glass/G in beakers)
+	for (var/obj/item/reagent_containers/glass/G in beakers)
 		if (G.reagents.total_volume) has_reagents = 1
 	active = 0
 	if (!has_reagents)
@@ -152,14 +152,14 @@
 				det_time = 10*T.time
 		return
 	playsound(loc, 'sound/effects/bamf.ogg', 50, 1)
-	for(var/obj/item/reagent_containers/glass/G in beakers)
+	for (var/obj/item/reagent_containers/glass/G in beakers)
 		G.reagents.trans_to_obj(src, G.reagents.total_volume)
 	if (src.reagents.total_volume) //The possible reactions didnt use up all reagents.
 		var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
 		steam.set_up(10, 0, get_turf(src))
 		steam.attach(src)
 		steam.start()
-		for(var/atom/A in view(affected_area, loc))
+		for (var/atom/A in view(affected_area, loc))
 			if ( A == src )
 				continue
 			reagents.touch(A)

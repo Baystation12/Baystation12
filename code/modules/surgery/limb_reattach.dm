@@ -128,7 +128,7 @@
 	SPAN_NOTICE("You have connected tendons and muscles in [target]'s [E.amputation_point] with [tool]."))
 	E.status &= ~ORGAN_CUT_AWAY
 	if (E.children)
-		for(var/obj/item/organ/external/C in E.children)
+		for (var/obj/item/organ/external/C in E.children)
 			C.status &= ~ORGAN_CUT_AWAY
 	target.update_body()
 	target.updatehealth()
@@ -174,7 +174,7 @@
 	SPAN_NOTICE("You have attached \the [tool] to [target]."))
 
 	if (L.part)
-		for(var/part_name in L.part)
+		for (var/part_name in L.part)
 			if (!isnull(target.get_organ(part_name)))
 				continue
 			var/list/organ_data = target.species.has_limbs["[part_name]"]

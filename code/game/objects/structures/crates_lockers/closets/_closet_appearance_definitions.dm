@@ -19,9 +19,9 @@
 	if (LAZYLEN(extra_decals))
 		if (!decals)
 			decals = list()
-		for(var/thing in extra_decals)
+		for (var/thing in extra_decals)
 			decals[thing] = extra_decals[thing]
-	for(var/thing in decals)
+	for (var/thing in decals)
 		if (isnull(decals[thing]))
 			decals[thing] = color
 
@@ -41,7 +41,7 @@
 	open_icon.Blend(color, BLEND_ADD)
 	open_icon.Blend(icon(base_icon, "interior"), ICON_OVERLAY)
 	if (decal_icon)
-		for(var/thing in decals)
+		for (var/thing in decals)
 			var/icon/this_decal_icon = icon(decal_icon, "[thing]_open")
 			this_decal_icon.Blend(decals[thing], BLEND_ADD)
 			open_icon.Blend(this_decal_icon, ICON_OVERLAY)
@@ -52,7 +52,7 @@
 		closed_emagged_icon.Blend(icon(base_icon, "lock"), ICON_OVERLAY)
 	closed_emagged_icon.Blend(color, BLEND_ADD)
 	if (decal_icon)
-		for(var/thing in decals)
+		for (var/thing in decals)
 			var/icon/this_decal_icon = icon(decal_icon, thing)
 			this_decal_icon.Blend(decals[thing], BLEND_ADD)
 			closed_emagged_icon.Blend(this_decal_icon, ICON_OVERLAY)

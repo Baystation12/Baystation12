@@ -98,7 +98,7 @@
 		return
 
 	var/datum/reagents/R = new/datum/reagents(100, GLOB.temp_reagents_holder)
-	for(var/rid in chems)
+	for (var/rid in chems)
 		var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/3))
 		R.add_reagent(rid,injecting)
 
@@ -162,7 +162,7 @@
 		if (!affecting)
 			return
 
-		for(var/obj/item/clothing/C in list(target.head, target.wear_mask, target.wear_suit, target.w_uniform, target.gloves, target.shoes))
+		for (var/obj/item/clothing/C in list(target.head, target.wear_mask, target.wear_suit, target.w_uniform, target.gloves, target.shoes))
 			if (C && (C.body_parts_covered & affecting.body_part) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 				affecting = null
 				break
@@ -172,7 +172,7 @@
 
 		if (affecting)
 			to_chat(target, SPAN_DANGER("You are stung by \the [fruit] in your [affecting.name]!"))
-			for(var/rid in chems)
+			for (var/rid in chems)
 				var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/5))
 				target.reagents.add_reagent(rid,injecting)
 		else
@@ -210,11 +210,11 @@
 			if (flesh_colour) splat.color = get_trait(TRAIT_PRODUCT_COLOUR)
 
 	if (chems)
-		for(var/mob/living/M in T.contents)
+		for (var/mob/living/M in T.contents)
 			if (!M.reagents)
 				continue
 			var/body_coverage = HEAD|FACE|EYES|UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-			for(var/obj/item/clothing/clothes in M)
+			for (var/obj/item/clothing/clothes in M)
 				if (M.IsHolding(clothes))
 					continue
 				body_coverage &= ~(clothes.body_parts_covered)
@@ -225,7 +225,7 @@
 			if (istype(H))
 				R = H.touching
 			if (istype(R))
-				for(var/chem in chems)
+				for (var/chem in chems)
 					R.add_reagent(chem,min(5,max(1,get_trait(TRAIT_POTENCY)/3)))
 
 //Applies an effect to a target atom.
@@ -251,7 +251,7 @@
 			closed_turfs |= T
 			valid_turfs |= T
 
-			for(var/dir in GLOB.alldirs)
+			for (var/dir in GLOB.alldirs)
 				var/turf/neighbor = get_step(T,dir)
 				if (!neighbor || (neighbor in closed_turfs) || (neighbor in open_turfs))
 					continue
@@ -261,7 +261,7 @@
 				// Check for windows.
 				var/no_los
 				var/turf/last_turf = origin_turf
-				for(var/turf/target_turf in getline(origin_turf,neighbor))
+				for (var/turf/target_turf in getline(origin_turf,neighbor))
 					if (!last_turf.Enter(target_turf) || target_turf.density)
 						no_los = 1
 						break
@@ -273,8 +273,8 @@
 					continue
 				open_turfs |= neighbor
 
-		for(var/turf/T in valid_turfs)
-			for(var/mob/living/M in T.contents)
+		for (var/turf/T in valid_turfs)
+			for (var/mob/living/M in T.contents)
 				apply_special_effect(M)
 			splatter(T,thrown)
 		if (origin_turf)
@@ -286,7 +286,7 @@
 		splatted = apply_special_effect(target,thrown)
 	else if (istype(target,/turf))
 		splatted = 1
-		for(var/mob/living/M in target.contents)
+		for (var/mob/living/M in target.contents)
 			apply_special_effect(M)
 
 	if (get_trait(TRAIT_JUICY) && splatted)
@@ -301,7 +301,7 @@
 	// Handle gas consumption.
 	if (consume_gasses && length(consume_gasses))
 		var/missing_gas = 0
-		for(var/gas in consume_gasses)
+		for (var/gas in consume_gasses)
 			if (environment && environment.gas && environment.gas[gas] && \
 			 environment.gas[gas] >= consume_gasses[gas])
 				if (!check_only)
@@ -322,7 +322,7 @@
 
 	// Handle gas production.
 	if (exude_gasses && length(exude_gasses) && !check_only)
-		for(var/gas in exude_gasses)
+		for (var/gas in exude_gasses)
 			environment.adjust_gas(gas, max(1,round((exude_gasses[gas]*(get_trait(TRAIT_POTENCY)/5))/length(exude_gasses))))
 
 	//Handle temperature change.
@@ -343,7 +343,7 @@
 		if (abs(light_supplied - get_trait(TRAIT_IDEAL_LIGHT)) > get_trait(TRAIT_LIGHT_TOLERANCE))
 			health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
 
-	for(var/obj/effect/effect/smoke/chem/smoke in range(1, current_turf))
+	for (var/obj/effect/effect/smoke/chem/smoke in range(1, current_turf))
 		if (smoke.reagents.has_reagent(/datum/reagent/toxin/plantbgone))
 			return 100
 
@@ -409,7 +409,7 @@
 								"eir", "lip", "sum", "lor", "em", "tem", "por", "invi", "dunt", "ut", "la", "bore", "mag", "na",
 								"al", "i", "qu", "yam", "er", "at", "sed", "di", "am", "vol", "up", "tua", "at", "ve", "ro", "eos",
 								"et", "ac", "cus")
-	for(var/i in 1 to num)
+	for (var/i in 1 to num)
 		var/syl = pick(possible_name)
 		possible_name -= syl
 		name += syl
@@ -494,7 +494,7 @@
 
 		if (prob(30))	banned_chems |= typesof(/datum/reagent/toxin)
 
-		for(var/x=1;x<=additional_chems;x++)
+		for (var/x=1;x<=additional_chems;x++)
 			var/new_chem = pick(subtypesof(/datum/reagent))
 			if (new_chem in banned_chems)
 				x--
@@ -570,7 +570,7 @@
 
 	//This looks like shit, but it's a lot easier to read/change this way.
 	var/total_mutations = rand(1,1+degree)
-	for(var/i = 0;i<total_mutations;i++)
+	for (var/i = 0;i<total_mutations;i++)
 		switch(rand(0,11))
 			if (0) //Plant cancer!
 				set_trait(TRAIT_ENDURANCE,get_trait(TRAIT_ENDURANCE)-rand(10,20),null,0)
@@ -639,13 +639,13 @@
 	// We handle this before we do the rest of the looping, as normal traits don't really include lists.
 	switch(gene.genetype)
 		if (GENE_BIOCHEMISTRY)
-			for(var/trait in list(TRAIT_YIELD, TRAIT_ENDURANCE))
+			for (var/trait in list(TRAIT_YIELD, TRAIT_ENDURANCE))
 				if (get_trait(trait) > 0) set_trait(trait,get_trait(trait),null,1,0.85)
 
 			LAZYINITLIST(chems)
 
 			var/list/gene_value = gene.values["[TRAIT_CHEMS]"]
-			for(var/rid in gene_value)
+			for (var/rid in gene_value)
 
 				var/list/gene_chem = gene_value[rid]
 
@@ -653,7 +653,7 @@
 					chems[rid] = gene_chem.Copy()
 					continue
 
-				for(var/i=1;i<=length(gene_chem);i++)
+				for (var/i=1;i<=length(gene_chem);i++)
 
 					if (isnull(gene_chem[i])) gene_chem[i] = 0
 
@@ -666,7 +666,7 @@
 			if (islist(new_gasses))
 				if (!exude_gasses) exude_gasses = list()
 				exude_gasses |= new_gasses
-				for(var/gas in exude_gasses)
+				for (var/gas in exude_gasses)
 					exude_gasses[gas] = max(1,round(exude_gasses[gas]*0.8))
 
 			gene.values["[TRAIT_EXUDE_GASSES]"] = null
@@ -680,7 +680,7 @@
 			product_type = gene.values["product_type"]
 			gene.values["product_type"] = null
 
-	for(var/trait in gene.values)
+	for (var/trait in gene.values)
 		set_trait(trait,gene.values["[trait]"])
 
 	update_growth_stages()
@@ -725,7 +725,7 @@
 		if (GENE_SPECIAL)
 			traits_to_copy = list(TRAIT_TELEPORTING)
 
-	for(var/trait in traits_to_copy)
+	for (var/trait in traits_to_copy)
 		P.values["[trait]"] = get_trait(trait)
 	return (P ? P : 0)
 
@@ -764,7 +764,7 @@
 				total_yield = max(1,total_yield)
 
 		. = list()
-		for(var/i = 0;i<total_yield;i++)
+		for (var/i = 0;i<total_yield;i++)
 			var/obj/item/product
 			if (product_type)
 				product = new product_type(get_turf(user),name)

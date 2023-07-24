@@ -10,7 +10,7 @@
 		var/turf/simulated/wall/center = null
 
 		// 100 attempts
-		for(var/i=0, i<100, i++)
+		for (var/i=0, i<100, i++)
 			var/turf/candidate = locate(rand(1, world.maxx), rand(1, world.maxy), 1)
 			if (istype(candidate, /turf/simulated/wall))
 				center = candidate
@@ -22,7 +22,7 @@
 			// Have a chance to rot lots of other walls.
 			var/rotcount = 0
 			var/actual_severity = severity * rand(5, 10)
-			for(var/turf/simulated/wall/W in range(5, center)) if (prob(50))
+			for (var/turf/simulated/wall/W in range(5, center)) if (prob(50))
 				W.rot()
 				rotcount++
 

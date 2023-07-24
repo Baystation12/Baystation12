@@ -91,7 +91,7 @@
 			H.unequip_item()
 	if (!held && !H.restrained() && prob(5))
 		var/list/touchables = list()
-		for(var/obj/O in range(1,get_turf(H)))
+		for (var/obj/O in range(1,get_turf(H)))
 			if (O.simulated && O.Adjacent(H) && !is_type_in_list(O, no_touchie))
 				touchables += O
 		if (length(touchables))

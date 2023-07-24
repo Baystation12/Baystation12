@@ -68,7 +68,7 @@ var/global/list/mining_floors = list()
 
 	overlays.Cut()
 
-	for(var/direction in GLOB.cardinal)
+	for (var/direction in GLOB.cardinal)
 		var/turf/turf_to_check = get_step(src,direction)
 		if (update_neighbors && istype(turf_to_check,/turf/simulated/floor/asteroid))
 			var/turf/simulated/floor/asteroid/T = turf_to_check
@@ -126,7 +126,7 @@ var/global/list/mining_floors = list()
 
 /turf/simulated/mineral/proc/MineralSpread()
 	if (istype(mineral) && mineral.ore_spread_chance > 0)
-		for(var/trydir in GLOB.cardinal)
+		for (var/trydir in GLOB.cardinal)
 			if (prob(mineral.ore_spread_chance))
 				var/turf/simulated/mineral/target_turf = get_step(src, trydir)
 				if (istype(target_turf) && isnull(target_turf.mineral))
@@ -303,7 +303,7 @@ var/global/list/mining_floors = list()
 		var/pain = 0
 		if (prob(50))
 			pain = 1
-		for(var/mob/living/M in range(src, 200))
+		for (var/mob/living/M in range(src, 200))
 			to_chat(M, SPAN_COLOR("red", "<b>[pick("A high pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!</b>"))
 			if (pain)
 				flick("pain",M.pain)
@@ -351,7 +351,7 @@ var/global/list/mining_floors = list()
 
 /turf/simulated/mineral/proc/artifact_debris(severity = 0)
 	//Give a random amount of loot from 1 to 3 or 5, varying on severity.
-	for(var/j in 1 to rand(1, 3 + max(min(severity, 1), 0) * 2))
+	for (var/j in 1 to rand(1, 3 + max(min(severity, 1), 0) * 2))
 		switch(rand(1,7))
 			if (1)
 				var/obj/item/stack/material/rods/R = new(src)
@@ -371,12 +371,12 @@ var/global/list/mining_floors = list()
 
 			if (5)
 				var/quantity = rand(1,3)
-				for(var/i=0, i<quantity, i++)
+				for (var/i=0, i<quantity, i++)
 					new /obj/item/material/shard(src)
 
 			if (6)
 				var/quantity = rand(1,3)
-				for(var/i=0, i<quantity, i++)
+				for (var/i=0, i<quantity, i++)
 					new /obj/item/material/shard/phoron(src)
 
 			if (7)
@@ -459,7 +459,7 @@ var/global/list/mining_floors = list()
 		)
 
 	var/valid_tool
-	for(var/valid_type in usable_tools)
+	for (var/valid_type in usable_tools)
 		if (istype(W,valid_type))
 			valid_tool = 1
 			break
@@ -484,13 +484,13 @@ var/global/list/mining_floors = list()
 	else if (istype(W,/obj/item/storage/ore))
 		var/obj/item/storage/ore/S = W
 		if (S.collection_mode)
-			for(var/obj/item/ore/O in contents)
+			for (var/obj/item/ore/O in contents)
 				O.attackby(W,user)
 				return
 	else if (istype(W,/obj/item/storage/bag/fossils))
 		var/obj/item/storage/bag/fossils/S = W
 		if (S.collection_mode)
-			for(var/obj/item/fossil/F in contents)
+			for (var/obj/item/fossil/F in contents)
 				F.attackby(W,user)
 				return
 
@@ -503,7 +503,7 @@ var/global/list/mining_floors = list()
 	if (dug)
 		return
 
-	for(var/i=0;i<(rand(3)+2);i++)
+	for (var/i=0;i<(rand(3)+2);i++)
 		new/obj/item/ore/glass(src)
 
 	dug = 1
@@ -515,7 +515,7 @@ var/global/list/mining_floors = list()
 	overlays.Cut()
 
 	var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)
-	for(var/direction in step_overlays)
+	for (var/direction in step_overlays)
 
 		if (istype(get_step(src, step_overlays[direction]), /turf/space))
 			var/image/aster_edge = image('icons/turf/flooring/asteroid.dmi', "asteroid_edges", dir = step_overlays[direction])
@@ -535,7 +535,7 @@ var/global/list/mining_floors = list()
 
 	if (update_neighbors)
 		var/list/all_step_directions = list(NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST)
-		for(var/direction in all_step_directions)
+		for (var/direction in all_step_directions)
 			var/turf/simulated/floor/asteroid/A
 			if (istype(get_step(src, direction), /turf/simulated/floor/asteroid))
 				A = get_step(src, direction)

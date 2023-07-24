@@ -22,11 +22,11 @@
 	var/turf/simulated/open/O = GetAbove(src)
 	var/atom/climb_target
 	if (istype(O))
-		for(var/turf/T in trange(1,O))
+		for (var/turf/T in trange(1,O))
 			if (!isopenspace(T) && T.is_floor())
 				climb_target = T
 			else
-				for(var/obj/I in T)
+				for (var/obj/I in T)
 					if (I.obj_flags & OBJ_FLAG_NOFALL)
 						climb_target = I
 						break
@@ -54,7 +54,7 @@
 		stop_pulling()
 		return 0
 
-	for(var/atom/A in destination)
+	for (var/atom/A in destination)
 		if (!A.CanMoveOnto(pulling, start, 1.5, direction))
 			to_chat(src, SPAN_WARNING("\The [A] blocks the [pulling] you were pulling."))
 			stop_pulling()
@@ -92,7 +92,7 @@
 			if (((T.height + T.get_fluid_depth()) >= FLUID_DEEP) || T.get_fluid_depth() >= FLUID_MAX_DEPTH)
 				return can_float()
 
-			for(var/atom/a in src.loc)
+			for (var/atom/a in src.loc)
 				if (a.atom_flags & ATOM_FLAG_CLIMBABLE)
 					return 1
 
@@ -101,7 +101,7 @@
 				/obj/item/stool,
 				/obj/structure/bed,
 			)
-		for(var/type in objects_to_stand_on)
+		for (var/type in objects_to_stand_on)
 			if (locate(type) in src.loc)
 				return 1
 	return 0
@@ -114,7 +114,7 @@
 		return 1
 
 	if (Check_Shoegrip())	//scaling hull with magboots
-		for(var/turf/simulated/T in trange(1,src))
+		for (var/turf/simulated/T in trange(1,src))
 			if (T.density)
 				return 1
 
@@ -122,7 +122,7 @@
 	if (Process_Spacemove()) //Checks for active jetpack
 		return 1
 
-	for(var/turf/simulated/T in trange(1,src)) //Robots get "magboots"
+	for (var/turf/simulated/T in trange(1,src)) //Robots get "magboots"
 		if (T.density)
 			return 1
 
@@ -176,12 +176,12 @@
 
 	//Override will make checks from different location used for prediction
 	if (location_override)
-		for(var/obj/O in location_override)
+		for (var/obj/O in location_override)
 			if (O.obj_flags & OBJ_FLAG_NOFALL)
 				return FALSE
 
 		var/turf/below = GetBelow(location_override)
-		for(var/atom/A in below)
+		for (var/atom/A in below)
 			if (!A.CanPass(src, location_override))
 				return FALSE
 
@@ -235,7 +235,7 @@
 	else
 		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the deck.")
 		if (fall_damage())
-			for(var/mob/living/M in landing.contents)
+			for (var/mob/living/M in landing.contents)
 				if (M == src)
 					continue
 				visible_message("\The [src] hits \the [M.name]!")
@@ -270,7 +270,7 @@
 	weakened = max(weakened, 3)
 	if (prob(skill_fail_chance(SKILL_HAULING, 40, SKILL_EXPERIENCED, 2)))
 		var/list/victims = list()
-		for(var/tag in list(BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM))
+		for (var/tag in list(BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM))
 			var/obj/item/organ/external/E = get_organ(tag)
 			if (E && !E.is_stump() && !E.dislocated && !BP_IS_ROBOTIC(E))
 				victims += E

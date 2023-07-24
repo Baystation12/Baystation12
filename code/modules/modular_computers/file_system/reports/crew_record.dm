@@ -37,7 +37,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	if (H)
 		formal_name = H.real_name
 		if (H.client && H.client.prefs)
-			for(var/culturetag in H.client.prefs.cultural_info)
+			for (var/culturetag in H.client.prefs.cultural_info)
 				var/singleton/cultural_info/culture = SSculture.get_culture(H.client.prefs.cultural_info[culturetag])
 				if (H.char_rank && H.char_rank.name_short)
 					formal_name = "[formal_name][culture.get_formal_name_suffix()]"
@@ -68,16 +68,16 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	if (H)
 		if (H.isSynthetic())
 			var/organ_data = list("Fully synthetic body")
-			for(var/obj/item/organ/internal/augment/A in H.internal_organs)
+			for (var/obj/item/organ/internal/augment/A in H.internal_organs)
 				organ_data += "installed augment - [A.name]"
 			if (LAZYLEN(organ_data))
 				set_implants(jointext(organ_data, "\[*\]"))
 		else
 			var/organ_data = list("\[*\]")
-			for(var/obj/item/organ/external/E in H.organs)
+			for (var/obj/item/organ/external/E in H.organs)
 				if (BP_IS_ROBOTIC(E))
 					organ_data += "[E.model ? "[E.model] " : null][E.name] prosthetic"
-			for(var/obj/item/organ/internal/I in H.internal_organs)
+			for (var/obj/item/organ/internal/I in H.internal_organs)
 				if (BP_IS_ASSISTED(I))
 					organ_data += I.get_mechanical_assisted_descriptor()
 				else if (BP_IS_ROBOTIC(I))
@@ -100,7 +100,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 			employment_record = html_decode(H.gen_record)
 		if (H.client && H.client.prefs)
 			var/list/qualifications
-			for(var/culturetag in H.client.prefs.cultural_info)
+			for (var/culturetag in H.client.prefs.cultural_info)
 				var/singleton/cultural_info/culture = SSculture.get_culture(H.client.prefs.cultural_info[culturetag])
 				var/extra_note = culture.get_qualifications()
 				if (extra_note)
@@ -115,7 +115,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 	if (H)
 		var/skills = list()
-		for(var/singleton/hierarchy/skill/S in GLOB.skills)
+		for (var/singleton/hierarchy/skill/S in GLOB.skills)
 			var/level = H.get_skill_value(S.type)
 			if (level > SKILL_UNSKILLED)
 				skills += "[S.name], [S.levels[level]]"
@@ -138,7 +138,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 /proc/department_crew_manifest(list/filter_positions, blacklist = FALSE)
 	RETURN_TYPE(/list)
 	var/list/matches = list()
-	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+	for (var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
 		var/rank = CR.get_job()
 		if (blacklist)
 			if (!(rank in filter_positions))
@@ -153,7 +153,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 /proc/record_to_html(datum/computer_file/report/crew_record/CR, access)
 	var/dat = "<tt><H2>RECORD DATABASE DATA DUMP</H2><i>Generated on: [stationdate2text()] [stationtime2text()]</i><br>******************************<br>"
 	dat += "<table>"
-	for(var/datum/report_field/F in CR.fields)
+	for (var/datum/report_field/F in CR.fields)
 		if (F.verify_access(access))
 			dat += "<tr><td><b>[F.display_name()]</b>"
 			if (F.needs_big_box)
@@ -239,21 +239,21 @@ FIELD_LONG("Exploitable Information", antagRecord, access_syndicate, access_synd
 		return
 	. = list()
 	. |= "Unset"
-	for(var/rank in branch.ranks)
+	for (var/rank in branch.ranks)
 		var/datum/mil_rank/RA = branch.ranks[rank]
 		. |= RA.name
 
 /datum/report_field/options/crew_record/sex/proc/record_pronouns()
 	. = list()
 	. |= "Unset"
-	for(var/entry in GLOB.pronouns.by_key)
+	for (var/entry in GLOB.pronouns.by_key)
 		var/datum/pronouns/P = GLOB.pronouns.by_key[entry]
 		. |= P.formal_term
 
 /datum/report_field/options/crew_record/branch/proc/record_branches()
 	. = list()
 	. |= "Unset"
-	for(var/B in GLOB.mil_branches.branches)
+	for (var/B in GLOB.mil_branches.branches)
 		var/datum/mil_branch/BR = GLOB.mil_branches.branches[B]
 		. |= BR.name
 

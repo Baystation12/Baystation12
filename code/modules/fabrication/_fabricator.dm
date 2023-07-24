@@ -52,7 +52,7 @@
 	. = ..()
 	if (length(storage_capacity))
 		var/list/material_names = list()
-		for(var/thing in storage_capacity)
+		for (var/thing in storage_capacity)
 			material_names += "[storage_capacity[thing]] [stored_substances_to_names[thing]]"
 		to_chat(user, SPAN_NOTICE("It can store [english_list(material_names)]."))
 	if (has_recycler)
@@ -63,7 +63,7 @@
 	. = ..()
 	// Initialize material storage lists.
 	stored_material = list()
-	for(var/mat in base_storage_capacity)
+	for (var/mat in base_storage_capacity)
 		stored_material[mat] = 0
 
 		// Update global type to string cache.
@@ -122,13 +122,13 @@
 	var/mb_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
 	var/man_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0.5, 3.5)
 	storage_capacity = list()
-	for(var/mat in base_storage_capacity)
+	for (var/mat in base_storage_capacity)
 		storage_capacity[mat] = mb_rating * base_storage_capacity[mat]
 	mat_efficiency = initial(mat_efficiency) - man_rating * 0.1
 	build_time_multiplier = initial(build_time_multiplier) * man_rating
 
 /obj/machinery/fabricator/dismantle()
-	for(var/mat in stored_material)
+	for (var/mat in stored_material)
 		if (ispath(mat, /material))
 			var/mat_name = stored_substances_to_names[mat]
 			var/material/M = SSmaterials.get_material_by_name(mat_name)

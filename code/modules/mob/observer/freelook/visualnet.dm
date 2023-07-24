@@ -17,10 +17,10 @@
 
 /datum/visualnet/Destroy()
 	visual_nets -= src
-	for(var/source in sources)
+	for (var/source in sources)
 		remove_source(source, FALSE)
 	sources.Cut()
-	for(var/chunk in chunks)
+	for (var/chunk in chunks)
 		var/chunk_datum = chunks[chunk]
 		qdel(chunk_datum)
 	chunks.Cut()
@@ -56,8 +56,8 @@
 		var/x2 = min(world.maxx, T.x + 16) & ~0xf
 		var/y2 = min(world.maxy, T.y + 16) & ~0xf
 
-		for(var/x = x1; x <= x2; x += 16)
-			for(var/y = y1; y <= y2; y += 16)
+		for (var/x = x1; x <= x2; x += 16)
+			for (var/y = y1; y <= y2; y += 16)
 				. += get_chunk(x, y, T.z)
 
 	if (full_update)
@@ -66,16 +66,16 @@
 	var/list/remove = eye.visibleChunks - .
 	var/list/add = . - eye.visibleChunks
 
-	for(var/chunk in remove)
+	for (var/chunk in remove)
 		var/datum/chunk/c = chunk
 		c.remove_eye(eye)
 
-	for(var/chunk in add)
+	for (var/chunk in add)
 		var/datum/chunk/c = chunk
 		c.add_eye(eye)
 
 /datum/visualnet/proc/remove_eye(mob/observer/eye/eye)
-	for(var/chunk in eye.visibleChunks)
+	for (var/chunk in eye.visibleChunks)
 		var/datum/chunk/c = chunk
 		c.remove_eye(eye)
 
@@ -160,8 +160,8 @@
 	var/x2 = min(world.maxx, T.x + 8) & ~0xf
 	var/y2 = min(world.maxy, T.y + 8) & ~0xf
 
-	for(var/x = x1; x <= x2; x += 16)
-		for(var/y = y1; y <= y2; y += 16)
+	for (var/x = x1; x <= x2; x += 16)
+		for (var/y = y1; y <= y2; y += 16)
 			if (is_chunk_generated(x, y, T.z))
 				var/datum/chunk/c = get_chunk(x, y, T.z)
 				call(c, proc_call)(arglist(proc_args))

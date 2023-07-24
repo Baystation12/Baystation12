@@ -37,8 +37,8 @@ If its complexity is lower than our theme's then
 
 /datum/room/proc/apply_to_map(xorigin,yorigin,zorigin, datum/random_map/map)
 	if (room_theme)
-		for(var/i = 0, i < width, i++)
-			for(var/j = 0, j < height, j++)
+		for (var/i = 0, i < width, i++)
+			for (var/j = 0, j < height, j++)
 				var/truex = xorigin + x + i - 1
 				var/truey = yorigin + y + j - 1
 				var/cell = map.get_map_cell(x+i,y+j)
@@ -90,7 +90,7 @@ If its complexity is lower than our theme's then
 	var/turf/T = locate(rx,ry,zorigin)
 	if (!T || T.density)
 		return 0
-	for(var/obj/o in T)
+	for (var/obj/o in T)
 		return 0
 	new type(T)
 	return 1

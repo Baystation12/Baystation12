@@ -19,7 +19,7 @@
 	if (length(inputs))
 		var/list/saved_inputs = list()
 
-		for(var/index in 1 to length(inputs))
+		for (var/index in 1 to length(inputs))
 			var/datum/integrated_io/input = inputs[index]
 
 			// Don't waste space saving the default values
@@ -65,7 +65,7 @@
 		if (!inputs_amt || inputs_amt < length(loaded_inputs))
 			return "Input values list out of bounds at [init_name]."
 
-		for(var/list/input in loaded_inputs)
+		for (var/list/input in loaded_inputs)
 			if (length(input) != 3)
 				return "Malformed input data at [init_name]."
 
@@ -94,7 +94,7 @@
 	if (component_params["inputs"])
 		var/list/loaded_inputs = component_params["inputs"]
 
-		for(var/list/input in loaded_inputs)
+		for (var/list/input in loaded_inputs)
 			var/index = input[1]
 			//var/input_type = input[2]
 			var/input_value = input[3]
@@ -181,7 +181,7 @@
 
 	// Block 2. Components.
 	var/list/components = list()
-	for(var/c in assembly.assembly_components)
+	for (var/c in assembly.assembly_components)
 		var/obj/item/integrated_circuit/component = c
 		components.Add(list(component.save()))
 	blocks["components"] = components
@@ -191,19 +191,19 @@
 	var/list/wires = list()
 	var/list/saved_wires = list()
 
-	for(var/c in assembly.assembly_components)
+	for (var/c in assembly.assembly_components)
 		var/obj/item/integrated_circuit/component = c
 		var/list/all_pins = list()
-		for(var/l in list(component.inputs, component.outputs, component.activators))
+		for (var/l in list(component.inputs, component.outputs, component.activators))
 			if (l) //If it isn't null
 				all_pins += l
 
-		for(var/p in all_pins)
+		for (var/p in all_pins)
 			var/datum/integrated_io/pin = p
 			var/list/params = pin.get_pin_parameters()
 			var/text_params = params.Join()
 
-			for(var/p2 in pin.linked)
+			for (var/p2 in pin.linked)
 				var/datum/integrated_io/pin2 = p2
 				var/list/params2 = pin2.get_pin_parameters()
 				var/text_params2 = params2.Join()
@@ -270,7 +270,7 @@
 		return "Invalid components list."	// No components or damaged components list
 
 	var/list/assembly_components = list()
-	for(var/C in blocks["components"])
+	for (var/C in blocks["components"])
 		var/list/component_params = C
 
 		if (!islist(component_params) || !length(component_params))
@@ -293,7 +293,7 @@
 		// Update estimated assembly complexity, taken space and material cost
 		blocks["complexity"] += component.complexity
 		blocks["used_space"] += component.size
-		for(var/material in component.matter)
+		for (var/material in component.matter)
 			blocks["cost"][material] += component.matter[material]
 
 		// Check if the assembly requires printer upgrades
@@ -317,7 +317,7 @@
 		if (!islist(blocks["wires"]))
 			return "Invalid wiring list."	// Damaged wires list
 
-		for(var/w in blocks["wires"])
+		for (var/w in blocks["wires"])
 			var/list/wire = w
 
 			if (!islist(wire) || length(wire) != 2)
@@ -347,7 +347,7 @@
 
 
 	// Block 2. Components.
-	for(var/component_params in blocks["components"])
+	for (var/component_params in blocks["components"])
 		var/obj/item/integrated_circuit/component_path = all_components[component_params["type"]]
 		var/obj/item/integrated_circuit/component = new component_path(assembly)
 		assembly.add_component(component)
@@ -356,7 +356,7 @@
 
 	// Block 3. Wires.
 	if (blocks["wires"])
-		for(var/w in blocks["wires"])
+		for (var/w in blocks["wires"])
 			var/list/wire = w
 			var/datum/integrated_io/IO = assembly.get_pin_ref_list(wire[1])
 			var/datum/integrated_io/IO2 = assembly.get_pin_ref_list(wire[2])

@@ -33,7 +33,7 @@
 
 	// Instantiate our job list.
 	jobs = list()
-	for(var/crew_job in archetype.crew_jobs)
+	for (var/crew_job in archetype.crew_jobs)
 		var/datum/job/submap/job = new crew_job(src, archetype.crew_jobs[crew_job])
 		if (!job.whitelisted_species)
 			job.whitelisted_species = archetype.whitelisted_species
@@ -52,9 +52,9 @@
 
 	// Add the spawn points to the appropriate job list.
 	var/added_spawnpoint
-	for(var/check_z in GetConnectedZlevels(associated_z))
-		for(var/thing in block(locate(1, 1, check_z), locate(world.maxx, world.maxy, check_z)))
-			for(var/obj/effect/submap_landmark/spawnpoint/landmark in thing)
+	for (var/check_z in GetConnectedZlevels(associated_z))
+		for (var/thing in block(locate(1, 1, check_z), locate(world.maxx, world.maxy, check_z)))
+			for (var/obj/effect/submap_landmark/spawnpoint/landmark in thing)
 				var/datum/job/submap/job = jobs[landmark.name]
 				if (istype(job))
 					job.spawnpoints += landmark

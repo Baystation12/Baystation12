@@ -45,7 +45,7 @@ var/global/nttransfer_uid = 0
 	..()
 	// Server mode
 	if (provided_file)
-		for(var/datum/computer_file/program/nttransfer/C in connected_clients)
+		for (var/datum/computer_file/program/nttransfer/C in connected_clients)
 			// Transfer speed is limited by device which uses slower connectivity.
 			// We can have multiple clients downloading at same time, but let's assume we use some sort of multicast transfer
 			// so they can all run on same speed.
@@ -68,7 +68,7 @@ var/global/nttransfer_uid = 0
 		finalize_download()
 
 	if (provided_file) // Server mode, disconnect all clients
-		for(var/datum/computer_file/program/nttransfer/P in connected_clients)
+		for (var/datum/computer_file/program/nttransfer/P in connected_clients)
 			P.crash_download("Connection terminated by remote server")
 		downloaded_file = null
 	..(forced)
@@ -121,7 +121,7 @@ var/global/nttransfer_uid = 0
 		data["upload_filename"] = "[PRG.provided_file.filename].[PRG.provided_file.filetype]"
 	else if (PRG.upload_menu)
 		var/list/all_files[0]
-		for(var/datum/computer_file/F in PRG.computer.get_all_files())
+		for (var/datum/computer_file/F in PRG.computer.get_all_files())
 			all_files.Add(list(list(
 				"uid" = F.uid,
 				"filename" = "[F.filename].[F.filetype]",
@@ -130,7 +130,7 @@ var/global/nttransfer_uid = 0
 		data["upload_filelist"] = all_files
 	else
 		var/list/all_servers[0]
-		for(var/datum/computer_file/program/nttransfer/P in ntnet_global.fileservers)
+		for (var/datum/computer_file/program/nttransfer/P in ntnet_global.fileservers)
 			if (!P.provided_file)
 				continue
 			all_servers.Add(list(list(
@@ -154,7 +154,7 @@ var/global/nttransfer_uid = 0
 		return TOPIC_HANDLED
 	if (href_list["PRG_downloadfile"])
 		. = TOPIC_HANDLED
-		for(var/datum/computer_file/program/nttransfer/P in ntnet_global.fileservers)
+		for (var/datum/computer_file/program/nttransfer/P in ntnet_global.fileservers)
 			if ("[P.unique_token]" == href_list["PRG_downloadfile"])
 				remote = P
 				break
@@ -175,7 +175,7 @@ var/global/nttransfer_uid = 0
 		finalize_download()
 		if (src in ntnet_global.fileservers)
 			ntnet_global.fileservers.Remove(src)
-		for(var/datum/computer_file/program/nttransfer/T in connected_clients)
+		for (var/datum/computer_file/program/nttransfer/T in connected_clients)
 			T.crash_download("Remote server has forcibly closed the connection")
 		provided_file = null
 		return
@@ -191,7 +191,7 @@ var/global/nttransfer_uid = 0
 		return
 	if (href_list["PRG_uploadfile"])
 		. = TOPIC_HANDLED
-		for(var/datum/computer_file/F in computer.get_all_files())
+		for (var/datum/computer_file/F in computer.get_all_files())
 			if ("[F.uid]" == href_list["PRG_uploadfile"])
 				if (F.unsendable)
 					error = "I/O Error: File locked."

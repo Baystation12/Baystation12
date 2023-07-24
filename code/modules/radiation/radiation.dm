@@ -34,7 +34,7 @@
 
 /turf/proc/calc_rad_resistance()
 	cached_rad_resistance = 0
-	for(var/obj/O in src.contents)
+	for (var/obj/O in src.contents)
 		if (!(O.rad_resistance_modifier <= 0) && O.density)
 			var/material/M = O.get_material()
 			if (!M)	continue
@@ -76,5 +76,5 @@
 /mob/living/rad_act(severity)
 	if (severity > RAD_LEVEL_LOW)
 		apply_damage(severity, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
-		for(var/atom/I in src)
+		for (var/atom/I in src)
 			I.rad_act(severity)

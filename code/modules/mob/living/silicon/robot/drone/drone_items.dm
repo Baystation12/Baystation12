@@ -197,7 +197,7 @@
 	set category = "Silicon Commands"
 	if (!wrapped)
 		// Ensure fumbled items are accessible.
-		for(var/obj/item/thing in src.contents)
+		for (var/obj/item/thing in src.contents)
 			thing.dropInto(loc)
 		return
 
@@ -219,7 +219,7 @@
 
 	// Ensure fumbled items are accessible.
 	if (!wrapped)
-		for(var/obj/item/thing in src.contents)
+		for (var/obj/item/thing in src.contents)
 			wrapped = thing
 			update_icon()
 			break
@@ -251,7 +251,7 @@
 
 		//Check if the item is blacklisted.
 		var/grab = 0
-		for(var/typepath in can_hold)
+		for (var/typepath in can_hold)
 			if (istype(I,typepath))
 				grab = 1
 				break
@@ -358,7 +358,7 @@
 	//Used to give the right message.
 	var/grabbed_something = 0
 
-	for(var/mob/M in T)
+	for (var/mob/M in T)
 		if (istype(M,/mob/living/simple_animal/passive/lizard) || istype(M,/mob/living/simple_animal/passive/mouse))
 			src.loc.visible_message(SPAN_DANGER("[src.loc] sucks [M] into its decompiler. There's a horrible crunching noise."),SPAN_DANGER("It's a bit of a struggle, but you manage to suck [M] into your decompiler. It makes a series of visceral crunching noises."))
 			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
@@ -399,7 +399,7 @@
 		else
 			continue
 
-	for(var/obj/W in T)
+	for (var/obj/W in T)
 		//Different classes of items give different commodities.
 		if (istype(W,/obj/item/trash/cigbutt))
 			if (plastic)

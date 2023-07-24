@@ -6,7 +6,7 @@
 
 /material/proc/create_recipe_list(base_type)
 	. = list()
-	for(var/recipe_type in subtypesof(base_type))
+	for (var/recipe_type in subtypesof(base_type))
 		. += new recipe_type(src)
 
 /material/proc/generate_recipes(reinforce_material)

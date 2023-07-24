@@ -124,7 +124,7 @@
 		visible_message(SPAN_DANGER("\The [src] flashes a bit as it eventually fades out in a rain of sparks!"))
 	fail(range * 2)
 
-	for(var/obj/effect/shield/S in range(range, src))
+	for (var/obj/effect/shield/S in range(range, src))
 		// Don't affect shields owned by other shield generators
 		if (S.gen != src.gen)
 			continue
@@ -159,7 +159,7 @@
 			return
 		if (SHIELD_BREACHED_FAILURE)
 			fail_adjacent_segments(rand(8, 16), hitby)
-			for(var/obj/effect/shield/S in field_segments)
+			for (var/obj/effect/shield/S in field_segments)
 				S.fail(1)
 			return
 
@@ -339,10 +339,10 @@
 		addtimer(new Callback(src, .proc/spread_impact_effect, i, affected_shields), 2)
 
 /obj/effect/shield/proc/spread_impact_effect(i, list/affected_shields = list())
-	for(var/direction in GLOB.cardinal)
+	for (var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)
 		if (T) // Incase we somehow stepped off the map.
-			for(var/obj/effect/shield/F in T)
+			for (var/obj/effect/shield/F in T)
 				if (!(F in affected_shields))
 					F.impact_effect(i, affected_shields) // Spread the effect to them
 

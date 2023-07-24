@@ -93,7 +93,7 @@
 /datum/random_map/noise/exoplanet/proc/spawn_flora(turf/T, big)
 	if (big)
 		new /obj/effect/landmark/exoplanet_spawn/large_plant(T)
-		for(var/turf/neighbor in RANGE_TURFS(T, 1))
+		for (var/turf/neighbor in RANGE_TURFS(T, 1))
 			spawn_grass(neighbor)
 	else
 		new /obj/effect/landmark/exoplanet_spawn/plant(T)
@@ -110,11 +110,11 @@
 	..()
 	if (!water_type || !water_level || !coast_type)
 		return
-	for(var/x in 1 to limit_x - 1)
-		for(var/y in 1 to limit_y - 1)
+	for (var/x in 1 to limit_x - 1)
+		for (var/y in 1 to limit_y - 1)
 			var/mapcell = get_map_cell(x,y)
 			if (noise2value(map[mapcell]) < water_level)
 				var/neighbors = get_neighbors(x, y, TRUE)
-				for(var/cell in neighbors)
+				for (var/cell in neighbors)
 					if (noise2value(map[cell]) >= water_level)
 						map[cell] = COAST_VALUE

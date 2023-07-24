@@ -28,7 +28,7 @@
 
 /obj/item/device/soulstone/proc/shatter()
 	playsound(loc, "shatter", 70, 1)
-	for(var/i=1 to rand(2,5))
+	for (var/i=1 to rand(2,5))
 		new /obj/item/material/shard(get_turf(src), MATERIAL_NULLGLASS)
 	qdel(src)
 
@@ -116,7 +116,7 @@
 	if (M.stat != DEAD && !M.is_asystole())
 		to_chat(user, SPAN_NOTICE("Kill or maim the victim first."))
 		return
-	for(var/obj/item/W in M)
+	for (var/obj/item/W in M)
 		M.drop_from_inventory(W)
 	M.dust()
 	set_full(SOULSTONE_ESSENCE)

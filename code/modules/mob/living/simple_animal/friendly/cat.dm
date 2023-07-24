@@ -35,7 +35,7 @@
 	//MICE!
 	if ((src.loc) && isturf(src.loc))
 		if (!resting && !buckled)
-			for(var/mob/living/simple_animal/passive/mouse/M in loc)
+			for (var/mob/living/simple_animal/passive/mouse/M in loc)
 				if (!M.stat)
 					M.death()
 					visible_emote(pick("bites \the [M]!","toys with \the [M].","chomps on \the [M]!"))
@@ -45,7 +45,7 @@
 
 
 
-	for(var/mob/living/simple_animal/passive/mouse/snack in oview(src,5))
+	for (var/mob/living/simple_animal/passive/mouse/snack in oview(src,5))
 		if (snack.stat < DEAD && prob(15))
 			audible_emote(pick("hisses and spits!","mrowls fiercely!","eyes [snack] hungrily."))
 		break
@@ -65,7 +65,7 @@
 		if (spook)
 			var/turf/T = spook.loc
 			var/list/visible = list()
-			for(var/obj/O in T.contents)
+			for (var/obj/O in T.contents)
 				if (!O.invisibility && O.name)
 					visible += O
 			if (length(visible))
@@ -81,7 +81,7 @@
 	if ( !movement_target || !(movement_target.loc in oview(src, 4)) )
 		movement_target = null
 		set_AI_busy(FALSE)
-		for(var/mob/living/simple_animal/passive/mouse/snack in oview(src)) //search for a new target
+		for (var/mob/living/simple_animal/passive/mouse/snack in oview(src)) //search for a new target
 			if (isturf(snack.loc) && !snack.stat)
 				movement_target = snack
 				break

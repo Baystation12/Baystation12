@@ -10,16 +10,16 @@ GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
 		/datum/pipe/pipe_dispenser/he,
 		/datum/pipe/pipe_dispenser/device
 		)
-	for(var/category_type in categories)
-		for(var/recipe_type in subtypesof(category_type))
+	for (var/category_type in categories)
+		for (var/recipe_type in subtypesof(category_type))
 			LAZYADD(GLOB.all_pipe_datums_by_category[category_type], new recipe_type())
 
 	var/disposal_categories = list(
 		/datum/pipe/disposal_dispenser/simple,
 		/datum/pipe/disposal_dispenser/device)
 
-	for(var/category_type in disposal_categories)
-		for(var/recipe_type in subtypesof(category_type))
+	for (var/category_type in disposal_categories)
+		for (var/recipe_type in subtypesof(category_type))
 			LAZYADD(GLOB.all_disposal_pipe_datums_by_category[category_type], new recipe_type())
 
 

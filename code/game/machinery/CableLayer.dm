@@ -96,7 +96,7 @@
 	if (!istype(new_turf) || !dismantleFloor(new_turf))
 		return reset()
 	var/fdirn = turn(M_Dir,180)
-	for(var/obj/structure/cable/LC in new_turf)		// check to make sure there's not a cable there already
+	for (var/obj/structure/cable/LC in new_turf)		// check to make sure there's not a cable there already
 		if (LC.d1 == fdirn || LC.d2 == fdirn)
 			return reset()
 	if (!use_cable(1))

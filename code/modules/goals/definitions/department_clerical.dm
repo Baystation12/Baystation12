@@ -11,7 +11,7 @@
 /datum/goal/department/paperwork/New()
 	SSgoals.pending_goals |= src
 	var/list/signatory_job_titles = list()
-	for(var/job_type in signatory_job_list)
+	for (var/job_type in signatory_job_list)
 		var/datum/job/job = job_type
 		signatory_job_titles |= "[initial(job.total_positions) == 1 ? "the" : "a"] [initial(job.title)]"
 	waiting_for_signatories_description = replacetext(waiting_for_signatories_description, "%STAFF%", english_list(signatory_job_titles, and_text = " or "))
@@ -62,10 +62,10 @@
 
 /datum/goal/department/paperwork/proc/generate_signatory_list()
 	. = list()
-	for(var/mob/M in GLOB.alive_mobs)
+	for (var/mob/M in GLOB.alive_mobs)
 		if (!M.mind?.assigned_job)
 			continue
-		for(var/job_type in signatory_job_list)
+		for (var/job_type in signatory_job_list)
 			if (istype(M.mind.assigned_job, job_type))
 				. |= M.real_name
 				break

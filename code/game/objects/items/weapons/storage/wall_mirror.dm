@@ -88,7 +88,7 @@
 	changer.ui_interact(user)
 
 /proc/clear_mirror_ui_cache(list/ui_cache)
-	for(var/W in ui_cache)
+	for (var/W in ui_cache)
 		var/changer = ui_cache[W]
 		qdel(changer)
 	LAZYCLEARLIST(ui_cache)

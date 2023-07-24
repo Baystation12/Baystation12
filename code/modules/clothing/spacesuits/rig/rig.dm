@@ -157,7 +157,7 @@
 /obj/item/rig/examine(mob/user)
 	. = ..()
 	if (wearer)
-		for(var/obj/item/piece in list(helmet,gloves,chest,boots))
+		for (var/obj/item/piece in list(helmet,gloves,chest,boots))
 			if (!piece || piece.loc != wearer)
 				continue
 			to_chat(user, "[icon2html(piece, user)] \The [piece] [piece.gender == PLURAL ? "are" : "is"] deployed.")
@@ -187,7 +187,7 @@
 	START_PROCESSING(SSobj, src)
 
 	if (initial_modules && length(initial_modules))
-		for(var/path in initial_modules)
+		for (var/path in initial_modules)
 			var/obj/item/rig_module/module = new path(src)
 			if (!module.can_install(src))
 				crash_with("\A [module] ([module.type]) failed to initialize within \a [src].")
@@ -213,7 +213,7 @@
 		if (allowed)
 			chest.allowed = allowed
 
-	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
+	for (var/obj/item/piece in list(gloves,helmet,boots,chest))
 		if (!istype(piece))
 			continue
 		piece.canremove = 0
@@ -235,7 +235,7 @@
 	update_icon(1)
 
 /obj/item/rig/Destroy()
-	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
+	for (var/obj/item/piece in list(gloves,boots,helmet,chest))
 		qdel(piece)
 	STOP_PROCESSING(SSobj, src)
 	qdel(wires)
@@ -276,7 +276,7 @@
 	canremove = 1
 	if (istype(chest))
 		chest.check_limb_support(wearer)
-	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
+	for (var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if (!piece) continue
 		piece.icon_state = "[initial(icon_state)]"
 		if (airtight)
@@ -325,7 +325,7 @@
 		if (!wearer)
 			failed_to_seal = 1
 		else
-			for(var/list/piece_data in list(list(wearer.shoes,boots,"boots",boot_type),list(wearer.gloves,gloves,"gloves",glove_type),list(wearer.head,helmet,"helmet",helm_type),list(wearer.wear_suit,chest,"chest",chest_type)))
+			for (var/list/piece_data in list(list(wearer.shoes,boots,"boots",boot_type),list(wearer.gloves,gloves,"gloves",glove_type),list(wearer.head,helmet,"helmet",helm_type),list(wearer.wear_suit,chest,"chest",chest_type)))
 
 				var/obj/item/piece = piece_data[1]
 				var/obj/item/compare_piece = piece_data[2]
@@ -377,7 +377,7 @@
 	sealing = null
 
 	if (failed_to_seal)
-		for(var/obj/item/piece in list(helmet,boots,gloves,chest))
+		for (var/obj/item/piece in list(helmet,boots,gloves,chest))
 			if (!piece) continue
 			piece.icon_state = "[initial(icon_state)][!seal_target ? "" : "_sealed"]"
 		canremove = !seal_target
@@ -396,7 +396,7 @@
 		to_chat(initiator, SPAN_INFO("Suit adjustment complete. Suit is now [canremove ? "unsealed" : "sealed"]."))
 
 	if (canremove)
-		for(var/obj/item/rig_module/module in installed_modules)
+		for (var/obj/item/rig_module/module in installed_modules)
 			module.deactivate()
 	if (airtight)
 		update_component_sealed()
@@ -404,7 +404,7 @@
 
 
 /obj/item/rig/proc/update_component_sealed()
-	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
+	for (var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if (canremove)
 			piece.max_pressure_protection = initial(piece.max_pressure_protection)
 			piece.min_pressure_protection = initial(piece.min_pressure_protection)
@@ -429,7 +429,7 @@
 
 	// If we've lost any parts, grab them back.
 	var/mob/living/M
-	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
+	for (var/obj/item/piece in list(gloves,boots,helmet,chest))
 		if (piece.loc != src && !(wearer && piece.loc == wearer))
 			if (istype(piece.loc, /mob/living))
 				M = piece.loc
@@ -452,7 +452,7 @@
 
 			if (electrified > 0)
 				electrified = 0
-			for(var/obj/item/rig_module/module in installed_modules)
+			for (var/obj/item/rig_module/module in installed_modules)
 				module.deactivate()
 		else
 			if (istype(wearer) && !wearer.wearing_rig)
@@ -472,7 +472,7 @@
 			malfunctioning--
 			malfunction()
 
-		for(var/obj/item/rig_module/module in installed_modules)
+		for (var/obj/item/rig_module/module in installed_modules)
 			if (!cell.checked_use(module.Process() * CELLRATE))
 				module.deactivate()//turns off modules when your cell is dry
 
@@ -510,7 +510,7 @@
 
 	// This is largely for cancelling stealth and whatever.
 	if (mod && mod.disruptive)
-		for(var/obj/item/rig_module/module in (installed_modules - mod))
+		for (var/obj/item/rig_module/module in (installed_modules - mod))
 			if (module.active && module.disruptable)
 				module.deactivate()
 
@@ -567,7 +567,7 @@
 
 	var/list/module_list = list()
 	var/i = 1
-	for(var/obj/item/rig_module/module in installed_modules)
+	for (var/obj/item/rig_module/module in installed_modules)
 		var/list/module_data = list(
 			"index" =             i,
 			"name" =              "[module.interface_name]",
@@ -590,7 +590,7 @@
 			module_data["charges"] = list()
 			module_data["chargetype"] = module.charge_selected
 
-			for(var/chargetype in module.charges)
+			for (var/chargetype in module.charges)
 				var/datum/rig_charge/charge = module.charges[chargetype]
 				module_data["charges"] += list(list("caption" = "[chargetype] ([charge.charges])", "index" = "[chargetype]"))
 
@@ -620,7 +620,7 @@
 		mob_icon = image("icon" = species_icon, "icon_state" = "[icon_state]")
 
 	if (equipment_overlay_icon && LAZYLEN(installed_modules))
-		for(var/obj/item/rig_module/module in installed_modules)
+		for (var/obj/item/rig_module/module in installed_modules)
 			if (module.suit_overlay)
 				chest.overlays += image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]", "dir" = SOUTH)
 
@@ -640,7 +640,7 @@
 		return ret
 
 	if (equipment_overlay_icon && LAZYLEN(installed_modules))
-		for(var/obj/item/rig_module/module in installed_modules)
+		for (var/obj/item/rig_module/module in installed_modules)
 			if (module.suit_overlay)
 				ret.overlays += image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]")
 	return ret
@@ -716,7 +716,7 @@
 		return 1
 
 /obj/item/rig/proc/notify_ai(message)
-	for(var/obj/item/rig_module/ai_container/module in installed_modules)
+	for (var/obj/item/rig_module/ai_container/module in installed_modules)
 		if (module.integrated_ai && module.integrated_ai.client && !module.integrated_ai.stat)
 			to_chat(module.integrated_ai, "[message]")
 			. = 1
@@ -838,12 +838,12 @@
 			H.wear_suit = null
 			qdel(garbage)
 
-	for(var/piece in list("helmet","gauntlets","chest","boots"))
+	for (var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, H, ONLY_DEPLOY)
 
 /obj/item/rig/dropped(mob/user)
 	..()
-	for(var/piece in list("helmet","gauntlets","chest","boots"))
+	for (var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, user, ONLY_RETRACT)
 	if (wearer)
 		wearer.wearing_rig = null
@@ -906,7 +906,7 @@
 	//This way the chances of a module being disabled aren't so remote.
 	var/list/valid_modules = list()
 	var/list/damaged_modules = list()
-	for(var/obj/item/rig_module/module in installed_modules)
+	for (var/obj/item/rig_module/module in installed_modules)
 		if (module.damage < 2)
 			valid_modules |= module
 			if (module.damage > 0)
@@ -947,7 +947,7 @@
 		if (!(locate(/obj/item/rig_module/ai_container) in contents))
 			return 0
 		var/found_ai
-		for(var/obj/item/rig_module/ai_container/module in contents)
+		for (var/obj/item/rig_module/ai_container/module in contents)
 			if (module.damage >= 2)
 				continue
 			if (module.integrated_ai && module.integrated_ai.client && !module.integrated_ai.stat)

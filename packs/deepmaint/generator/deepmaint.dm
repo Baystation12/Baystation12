@@ -11,12 +11,12 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 /proc/populateDeepMaintMapLists()
 	if (length(GLOB.big_deepmaint_room_templates) || length(GLOB.small_deepmaint_room_templates))
 		return
-	for(var/item in subtypesof(/datum/map_template/deepmaint_template/room))
+	for (var/item in subtypesof(/datum/map_template/deepmaint_template/room))
 		var/datum/map_template/deepmaint_template/temp = item
 		var/datum/map_template/deepmaint_template/S = new temp()
 		GLOB.small_deepmaint_room_templates += S
 
-	for(var/item in subtypesof(/datum/map_template/deepmaint_template/big))
+	for (var/item in subtypesof(/datum/map_template/deepmaint_template/big))
 		var/datum/map_template/deepmaint_template/temp = item
 		var/datum/map_template/deepmaint_template/S = new temp()
 		GLOB.big_deepmaint_room_templates += S
@@ -50,7 +50,7 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 	var/turf/t2 = line[2]
 	var/direction = get_dir(t1, t2)
 	var/list/walls = list()
-	for(var/turf/A in getAdjacent(t1))
+	for (var/turf/A in getAdjacent(t1))
 		var/length = length(line)
 		var/turf/T = A
 		walls += T
@@ -113,7 +113,7 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 		done_rooms += picked_room
 
 /obj/procedural/jp_DungeonGenerator/deepmaint/proc/populateCorridors()
-	for(var/turf/T in path_turfs)
+	for (var/turf/T in path_turfs)
 		if (prob(30))
 			new /obj/effect/decal/cleanable/dirt(T)
 

@@ -40,7 +40,7 @@
 	name = "Crew monitor"
 
 /datum/nano_module/crew_monitor/proc/has_alerts()
-	for(var/z_level in GLOB.using_map.map_levels)
+	for (var/z_level in GLOB.using_map.map_levels)
 		if (crew_repository.has_health_alert(z_level))
 			return TRUE
 	return FALSE

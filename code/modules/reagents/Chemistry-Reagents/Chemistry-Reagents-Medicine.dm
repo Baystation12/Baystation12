@@ -46,7 +46,7 @@
 	if (ishuman(M))
 		M.add_chemical_effect(CE_BLOCKAGE, (15 + volume - overdose)/100)
 		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/external/E in H.organs)
+		for (var/obj/item/organ/external/E in H.organs)
 			if (E.status & ORGAN_ARTERY_CUT && prob(2))
 				E.status &= ~ORGAN_ARTERY_CUT
 
@@ -106,11 +106,11 @@
 
 	var/removing = (4 * removed)
 	var/datum/reagents/ingested = M.get_ingested_reagents()
-	for(var/datum/reagent/R in ingested.reagent_list)
+	for (var/datum/reagent/R in ingested.reagent_list)
 		if ((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
 			ingested.remove_reagent(R.type, removing)
 			return
-	for(var/datum/reagent/R in M.reagents.reagent_list)
+	for (var/datum/reagent/R in M.reagents.reagent_list)
 		if ((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
 			M.reagents.remove_reagent(R.type, removing)
 			return
@@ -185,7 +185,7 @@
 		M.add_chemical_effect(CE_PULSE, -2)
 		if (ishuman(M))
 			var/mob/living/carbon/human/H = M
-			for(var/obj/item/organ/internal/I in H.internal_organs)
+			for (var/obj/item/organ/internal/I in H.internal_organs)
 				if (!BP_IS_ROBOTIC(I))
 					I.heal_damage(20*removed)
 
@@ -213,7 +213,7 @@
 		M.add_chemical_effect(CE_PULSE, -2)
 		if (ishuman(M))
 			var/mob/living/carbon/human/H = M
-			for(var/obj/item/organ/internal/I in H.internal_organs)
+			for (var/obj/item/organ/internal/I in H.internal_organs)
 				if (!BP_IS_ROBOTIC(I))
 					I.heal_damage(30*removed)
 
@@ -232,7 +232,7 @@
 		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
 		if (ishuman(M))
 			var/mob/living/carbon/human/H = M
-			for(var/obj/item/organ/internal/I in H.internal_organs)
+			for (var/obj/item/organ/internal/I in H.internal_organs)
 				if (BP_IS_ROBOTIC(I))
 					I.heal_damage(20*removed)
 
@@ -314,7 +314,7 @@
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	if (ingested)
 		var/list/pool = M.reagents.reagent_list | ingested.reagent_list
-		for(var/datum/reagent/ethanol/booze in pool)
+		for (var/datum/reagent/ethanol/booze in pool)
 			if (M.chem_doses[booze.type] < 2) //let them experience false security at first
 				continue
 			. = 1
@@ -454,7 +454,7 @@
 /datum/reagent/peridaxon/affect_blood(mob/living/carbon/M, removed)
 	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/internal/I in H.internal_organs)
+		for (var/obj/item/organ/internal/I in H.internal_organs)
 			if (!BP_IS_ROBOTIC(I))
 				if (I.organ_tag == BP_BRAIN)
 					// if we have located an organic brain, apply side effects
@@ -523,7 +523,7 @@
 	M.confused = 0
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	if (ingested)
-		for(var/datum/reagent/R in ingested.reagent_list)
+		for (var/datum/reagent/R in ingested.reagent_list)
 			if (istype(R, /datum/reagent/ethanol))
 				M.chem_doses[R.type] = max(M.chem_doses[R.type] - removed * 5, 0)
 
@@ -598,7 +598,7 @@
 /datum/reagent/sterilizine/affect_touch(mob/living/carbon/M, removed)
 	if (M.germ_level < INFECTION_LEVEL_TWO) // rest and antibiotics is required to cure serious infections
 		M.germ_level -= min(removed*20, M.germ_level)
-	for(var/obj/item/I in M.contents)
+	for (var/obj/item/I in M.contents)
 		I.was_bloodied = null
 	M.was_bloodied = null
 
@@ -608,9 +608,9 @@
 
 /datum/reagent/sterilizine/touch_turf(turf/T)
 	T.germ_level -= min(volume*20, T.germ_level)
-	for(var/obj/item/I in T.contents)
+	for (var/obj/item/I in T.contents)
 		I.was_bloodied = null
-	for(var/obj/effect/decal/cleanable/blood/B in T)
+	for (var/obj/effect/decal/cleanable/blood/B in T)
 		qdel(B)
 
 /datum/reagent/leporazine
@@ -848,7 +848,7 @@
 	M.adjustToxLoss(-20 * removed)
 	if (M.chem_doses[type] > 3 && ishuman(M))
 		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/external/E in H.organs)
+		for (var/obj/item/organ/external/E in H.organs)
 			E.status |= ORGAN_DISFIGURED //currently only matters for the head, but might as well disfigure them all.
 	if (M.chem_doses[type] > 10)
 		M.make_dizzy(5)
@@ -1034,10 +1034,10 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 	if (ishuman(M))
-		for(var/obj/item/organ/external/E in M.organs)
+		for (var/obj/item/organ/external/E in M.organs)
 			if (E.status & ORGAN_ARTERY_CUT && prob(10))
 				E.status &= ~ORGAN_ARTERY_CUT
-			for(var/datum/wound/W in E.wounds)
+			for (var/datum/wound/W in E.wounds)
 				if (W.bleeding() && prob(20))
 					W.bleed_timer = 0
 					W.clamped = TRUE

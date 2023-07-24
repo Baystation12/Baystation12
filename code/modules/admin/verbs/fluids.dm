@@ -6,7 +6,7 @@
 	if (!check_rights(R_SPAWN)) return
 	var/mob/user = usr
 	if (istype(user) && user.client)
-		for(var/thing in trange(1, get_turf(user)))
+		for (var/thing in trange(1, get_turf(user)))
 			var/turf/T = thing
 			T.add_fluid(2000, /datum/reagent/water)
 

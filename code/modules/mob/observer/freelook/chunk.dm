@@ -60,7 +60,7 @@
 	src.y = y
 	src.z = z
 
-	for(var/turf/t in range(10, locate(x + 8, y + 8, z)))
+	for (var/turf/t in range(10, locate(x + 8, y + 8, z)))
 		if (t.x >= x && t.y >= y && t.x < x + 16 && t.y < y + 16)
 			turfs[t] = t
 
@@ -71,7 +71,7 @@
 	visibleTurfs &= turfs
 	obscuredTurfs = turfs - visibleTurfs
 
-	for(var/turf in obscuredTurfs)
+	for (var/turf in obscuredTurfs)
 		var/turf/t = turf
 		obscured += obfuscation.get_obfuscation(t)
 
@@ -81,7 +81,7 @@
 
 /datum/chunk/proc/add_sources(list/sources)
 	var/turf/center = locate(x + 8, y + 8, z)
-	for(var/entry in sources)
+	for (var/entry in sources)
 		var/atom/A = entry
 		if (get_dist(get_turf(A), center) > 16)
 			continue
@@ -149,22 +149,22 @@
 	visibleTurfs = newVisibleTurfs
 	obscuredTurfs = turfs - newVisibleTurfs
 
-	for(var/turf in visAdded)
+	for (var/turf in visAdded)
 		var/turf/t = turf
 		if (obfuscation.has_obfuscation(t))
 			var/image/obfuscation_image = obfuscation.get_obfuscation(t)
 			obscured -= obfuscation_image
-			for(var/eye in seenby)
+			for (var/eye in seenby)
 				var/mob/observer/eye/m = eye
 				if (m && m.owner && m.owner.client)
 					m.owner.client.images -= obfuscation_image
 
-	for(var/turf in visRemoved)
+	for (var/turf in visRemoved)
 		var/turf/t = turf
 		if (obscuredTurfs[t])
 			var/image/obfuscation_image = obfuscation.get_obfuscation(t)
 			obscured += obfuscation_image
-			for(var/eye in seenby)
+			for (var/eye in seenby)
 				var/mob/observer/eye/m = eye
 				if (m && m.owner && m.owner.client)
 					m.owner.client.images += obfuscation_image

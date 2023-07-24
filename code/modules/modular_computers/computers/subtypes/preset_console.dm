@@ -26,7 +26,7 @@
 	. = ..()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if (os)
-		for(var/program_type in default_software)
+		for (var/program_type in default_software)
 			os.create_file(new program_type())
 		if (autorun_program)
 			os.set_autorun(initial(autorun_program.filename))

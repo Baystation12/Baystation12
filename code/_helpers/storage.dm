@@ -6,8 +6,8 @@
 		var/datum/atom_creator/atom_creator = atom_paths
 		atom_creator.create(loc)
 	else if (islist(atom_paths))
-		for(var/atom_path in atom_paths)
-			for(var/i = 1 to max(1, atom_paths[atom_path]))
+		for (var/atom_path in atom_paths)
+			for (var/i = 1 to max(1, atom_paths[atom_path]))
 				create_objects_in_loc(loc, atom_path)
 	else if (ispath(atom_paths))
 		new atom_paths(loc)
@@ -43,7 +43,7 @@
 		CRASH("Invalid number of arguments. Expected 1, was [length(args)]")
 	if (!istype(paths))
 		CRASH("Invalid argument type. Expected /list, was [log_info_line(paths)]")
-	for(var/path in paths)
+	for (var/path in paths)
 		var/probability = paths[path]
 		if (!(isnull(probability) || (isnum(probability) && probability > 0)))
 			CRASH("Invalid probability. Expected null or a number greater than 0, was [log_info_line(probability)]")

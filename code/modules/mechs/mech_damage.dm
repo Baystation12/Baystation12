@@ -117,9 +117,9 @@
 			var/old_damage = damage
 			var/tally
 			silent = FALSE
-			for(var/obj/item/part in list(arms, legs, body, head))
+			for (var/obj/item/part in list(arms, legs, body, head))
 				tally += part.w_class
-			for(var/obj/item/part in list(arms, legs, body, head))
+			for (var/obj/item/part in list(arms, legs, body, head))
 				damage = old_damage * part.w_class/tally
 				def_zone = BP_CHEST
 				if (part == arms)
@@ -149,7 +149,7 @@
 		if (DAMAGE_BURN)
 			adjustFireLoss(damage, target)
 		if (DAMAGE_RADIATION)
-			for(var/mob/living/pilot in pilots)
+			for (var/mob/living/pilot in pilots)
 				pilot.apply_damage(damage, DAMAGE_RADIATION, def_zone, damage_flags, used_weapon)
 
 	if ((damagetype == DAMAGE_BRUTE || damagetype == DAMAGE_BURN) && prob(25+(damage*2)))
@@ -171,14 +171,14 @@
 
 /mob/living/exosuit/getFireLoss()
 	var/total = 0
-	for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
+	for (var/obj/item/mech_component/MC in list(arms, legs, body, head))
 		if (MC)
 			total += MC.burn_damage
 	return total
 
 /mob/living/exosuit/getBruteLoss()
 	var/total = 0
-	for(var/obj/item/mech_component/MC in list(arms, legs, body, head))
+	for (var/obj/item/mech_component/MC in list(arms, legs, body, head))
 		if (MC)
 			total += MC.brute_damage
 	return total
@@ -189,18 +189,18 @@
 	var/ratio = get_blocked_ratio(null, DAMAGE_BURN, null, (3-severity) * 20) // HEAVY = 40; LIGHT = 20
 
 	if (ratio >= 0.5)
-		for(var/mob/living/m in pilots)
+		for (var/mob/living/m in pilots)
 			to_chat(m, SPAN_NOTICE("Your Faraday shielding absorbed the pulse!"))
 		return
 	else if (ratio > 0)
-		for(var/mob/living/m in pilots)
+		for (var/mob/living/m in pilots)
 			to_chat(m, SPAN_NOTICE("Your Faraday shielding mitigated the pulse!"))
 
 	emp_damage += round((12 - (severity*3))*( 1 - ratio))
-	for(var/obj/item/thing in list(arms,legs,head,body))
+	for (var/obj/item/thing in list(arms,legs,head,body))
 		thing.emp_act(severity)
 	if (!hatch_closed || !prob(body.pilot_coverage))
-		for(var/thing in pilots)
+		for (var/thing in pilots)
 			var/mob/pilot = thing
 			pilot.emp_act(severity)
 	..()

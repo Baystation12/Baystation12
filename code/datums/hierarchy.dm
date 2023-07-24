@@ -6,7 +6,7 @@
 
 /singleton/hierarchy/Initialize()
 	children = list()
-	for(var/subtype in subtypesof(type))
+	for (var/subtype in subtypesof(type))
 		var/singleton/hierarchy/child = GET_SINGLETON(subtype) // Might be a grandchild, which has already been handled.
 		if (child.parent_type == type)
 			dd_insertObjectList(children, child)
@@ -23,7 +23,7 @@
 	if (!children)
 		return
 	. = children.Copy()
-	for(var/singleton/hierarchy/child in children)
+	for (var/singleton/hierarchy/child in children)
 		if (child.children)
 			. += child.get_descendents()
 

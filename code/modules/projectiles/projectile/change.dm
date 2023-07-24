@@ -21,7 +21,7 @@
 			if (Robot.mmi)
 				qdel(Robot.mmi)
 		else
-			for(var/obj/item/W in M)
+			for (var/obj/item/W in M)
 				if (istype(W, /obj/item/implant))	//TODO: Carn. give implants a dropped() or something
 					qdel(W)
 					continue
@@ -30,7 +30,7 @@
 		var/mob/living/new_mob
 
 		var/options = list("robot", "slime")
-		for(var/t in all_species)
+		for (var/t in all_species)
 			options += t
 		if (ishuman(M))
 			var/mob/living/carbon/human/H = M
@@ -78,7 +78,7 @@
 				H.set_species(randomize)
 				H.universal_speak = TRUE
 				var/datum/preferences/A = new() //Randomize appearance for the human
-				A.randomize_appearance_and_body_for(H)
+				A.randomize_appearance_and_body_for (H)
 
 		if (new_mob)
 			for (var/spell/S in M.mind.learned_spells)

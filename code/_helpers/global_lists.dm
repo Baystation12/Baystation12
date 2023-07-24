@@ -97,7 +97,7 @@ var/global/list/string_slot_flags = list(
 
 	//Hair - Initialise all /datum/sprite_accessory/hair into an list indexed by hair-style name
 	paths = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair
-	for(var/path in paths)
+	for (var/path in paths)
 		var/datum/sprite_accessory/hair/H = path
 		if (!initial(H.name))
 			continue
@@ -106,7 +106,7 @@ var/global/list/string_slot_flags = list(
 
 	//Facial Hair - Initialise all /datum/sprite_accessory/facial_hair into an list indexed by facialhair-style name
 	paths = typesof(/datum/sprite_accessory/facial_hair) - /datum/sprite_accessory/facial_hair
-	for(var/path in paths)
+	for (var/path in paths)
 		var/datum/sprite_accessory/facial_hair/H = path
 		if (!initial(H.name))
 			continue
@@ -115,7 +115,7 @@ var/global/list/string_slot_flags = list(
 
 	//Body markings - Initialise all /datum/sprite_accessory/marking into an list indexed by marking name
 	paths = typesof(/datum/sprite_accessory/marking) - /datum/sprite_accessory/marking
-	for(var/path in paths)
+	for (var/path in paths)
 		var/datum/sprite_accessory/marking/M = path
 		if (!initial(M.name))
 			continue
@@ -124,7 +124,7 @@ var/global/list/string_slot_flags = list(
 
 	//Languages and species.
 	paths = typesof(/datum/language)-/datum/language
-	for(var/T in paths)
+	for (var/T in paths)
 		var/datum/language/L = new T
 		all_languages[L.name] = L
 
@@ -135,7 +135,7 @@ var/global/list/string_slot_flags = list(
 
 	var/rkey = 0
 	paths = typesof(/datum/species)
-	for(var/T in paths)
+	for (var/T in paths)
 
 		rkey++
 
@@ -151,17 +151,17 @@ var/global/list/string_slot_flags = list(
 
 	//Grabs
 	paths = typesof(/datum/grab) - /datum/grab
-	for(var/T in paths)
+	for (var/T in paths)
 		var/datum/grab/G = new T
 		if (G.state_name)
 			all_grabstates[G.state_name] = G
 
 	paths = typesof(/obj/item/grab) - /obj/item/grab
-	for(var/T in paths)
+	for (var/T in paths)
 		var/obj/item/grab/G = T
 		all_grabobjects[initial(G.type_name)] = T
 
-	for(var/grabstate_name in all_grabstates)
+	for (var/grabstate_name in all_grabstates)
 		var/datum/grab/G = all_grabstates[grabstate_name]
 		G.refresh_updown()
 
@@ -182,13 +182,13 @@ var/global/list/paramslist_cache = list()
 /proc/key_number_decode(key_number_data)
 	RETURN_TYPE(/list)
 	var/list/L = params2list(key_number_data)
-	for(var/key in L)
+	for (var/key in L)
 		L[key] = text2num(L[key])
 	return L
 
 /proc/number_list_decode(number_list_data)
 	RETURN_TYPE(/list)
 	var/list/L = params2list(number_list_data)
-	for(var/i in 1 to length(L))
+	for (var/i in 1 to length(L))
 		L[i] = text2num(L[i])
 	return L

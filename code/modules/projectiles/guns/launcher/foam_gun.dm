@@ -51,7 +51,7 @@
 /obj/item/gun/launcher/foam/CtrlAltClick(mob/user)
 	if (length(darts) && src.loc == user)
 		to_chat(user, "You empty \the [src].")
-		for(var/obj/item/foam_dart/D in darts)
+		for (var/obj/item/foam_dart/D in darts)
 			darts -= D
 			D.dropInto(user.loc)
 			D.mix_up()

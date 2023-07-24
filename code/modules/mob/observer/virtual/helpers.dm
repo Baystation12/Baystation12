@@ -18,7 +18,7 @@
 	. = list()
 
 	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
-	for(var/mob/observer/virtual/v_mob in range(world.view, center_vmob))
+	for (var/mob/observer/virtual/v_mob in range(world.view, center_vmob))
 		var/client/C = v_mob.get_client()
 		if (C)
 			. |= C
@@ -28,7 +28,7 @@
 	. = list()
 
 	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
-	for(var/mob/observer/virtual/v_mob in range(hearing_range, center_vmob))
+	for (var/mob/observer/virtual/v_mob in range(hearing_range, center_vmob))
 		if (v_mob.abilities & VIRTUAL_ABILITY_HEAR)
 			. |= v_mob.host
 
@@ -37,7 +37,7 @@
 	. = list()
 
 	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
-	for(var/mob/observer/virtual/v_mob in range(world.view, center_vmob))
+	for (var/mob/observer/virtual/v_mob in range(world.view, center_vmob))
 		if (v_mob.abilities & VIRTUAL_ABILITY_SEE)
 			. |= v_mob.host
 
@@ -54,7 +54,7 @@
 	. = list()
 
 	ACQUIRE_VIRTUAL_OR_TURF(heard_vmob)
-	for(var/mob/observer/virtual/v_mob in hearers(range, heard_vmob))
+	for (var/mob/observer/virtual/v_mob in hearers(range, heard_vmob))
 		if (v_mob.abilities & VIRTUAL_ABILITY_HEAR)
 			. |= v_mob.host
 
@@ -79,7 +79,7 @@
 	if (!T)
 		return
 
-	for(var/mob/observer/virtual/seeing_v_mob in viewers(world.view, viewed_atom))
+	for (var/mob/observer/virtual/seeing_v_mob in viewers(world.view, viewed_atom))
 		if (!(seeing_v_mob.abilities & VIRTUAL_ABILITY_SEE))
 			continue
 		var/atom/movable/host = seeing_v_mob.host
@@ -94,7 +94,7 @@
 
 	ACQUIRE_VIRTUAL_OR_TURF(viewing_atom)
 	// As per http://www.byond.com/docs/ref/info.html#/proc/view by using a non-mob/client this automatically skips the vast majority of sight checks
-	for(var/mob/observer/virtual/v_mob in viewers(world.view, get_turf(viewing_atom.loc)))
+	for (var/mob/observer/virtual/v_mob in viewers(world.view, get_turf(viewing_atom.loc)))
 		. |= v_mob.host
 
 /*

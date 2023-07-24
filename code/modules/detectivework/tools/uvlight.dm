@@ -32,19 +32,19 @@
 
 /obj/item/device/uv_light/proc/clear_last_scan()
 	if (length(scanned))
-		for(var/atom/O in scanned)
+		for (var/atom/O in scanned)
 			O.set_invisibility(scanned[O])
 			if (O.fluorescent == ATOM_FLOURESCENCE_ACTVE)
 				O.fluorescent = ATOM_FLOURESCENCE_INACTIVE
 		scanned.Cut()
 	if (length(stored_alpha))
-		for(var/atom/O in stored_alpha)
+		for (var/atom/O in stored_alpha)
 			O.alpha = stored_alpha[O]
 			if (O.fluorescent == ATOM_FLOURESCENCE_ACTVE)
 				O.fluorescent = ATOM_FLOURESCENCE_INACTIVE
 		stored_alpha.Cut()
 	if (length(reset_objects))
-		for(var/obj/item/I in reset_objects)
+		for (var/obj/item/I in reset_objects)
 			I.overlays -= I.blood_overlay
 			if (I.fluorescent == ATOM_FLOURESCENCE_ACTVE)
 				I.fluorescent = ATOM_FLOURESCENCE_INACTIVE
@@ -57,9 +57,9 @@
 		var/turf/origin = get_turf(src)
 		if (!origin)
 			return
-		for(var/turf/T in range(range, origin))
+		for (var/turf/T in range(range, origin))
 			var/use_alpha = 255 - (step_alpha * get_dist(origin, T))
-			for(var/atom/A in T.contents)
+			for (var/atom/A in T.contents)
 				if (A.fluorescent == ATOM_FLOURESCENCE_INACTIVE)
 					A.fluorescent = ATOM_FLOURESCENCE_ACTVE
 					if (A.invisibility)

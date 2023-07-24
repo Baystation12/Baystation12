@@ -31,7 +31,7 @@
 	if (controller)
 		controller.bot = null
 		controller = null
-	for(var/i in 1 to rand(3,5))
+	for (var/i in 1 to rand(3,5))
 		var/obj/item/stack/material/cardboard/C = new(src.loc)
 		if (prob(50))
 			C.forceMove(get_step(src, pick(GLOB.alldirs)))

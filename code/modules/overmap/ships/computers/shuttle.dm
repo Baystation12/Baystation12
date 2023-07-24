@@ -10,7 +10,7 @@
 	. = ..()
 	if (istype(shuttle))
 		var/total_gas = 0
-		for(var/obj/structure/fuel_port/FP in shuttle.fuel_ports) //loop through fuel ports
+		for (var/obj/structure/fuel_port/FP in shuttle.fuel_ports) //loop through fuel ports
 			var/obj/item/tank/fuel_tank = locate() in FP
 			if (fuel_tank)
 				total_gas += fuel_tank.air_contents.total_moles

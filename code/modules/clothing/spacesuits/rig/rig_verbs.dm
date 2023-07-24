@@ -166,7 +166,7 @@
 		return
 
 	var/list/selectable = list()
-	for(var/obj/item/rig_module/module in installed_modules)
+	for (var/obj/item/rig_module/module in installed_modules)
 		if (module.selectable)
 			selectable |= module
 
@@ -202,7 +202,7 @@
 		return
 
 	var/list/selectable = list()
-	for(var/obj/item/rig_module/module in installed_modules)
+	for (var/obj/item/rig_module/module in installed_modules)
 		if (module.toggleable)
 			selectable |= module
 
@@ -240,7 +240,7 @@
 		return
 
 	var/list/selectable = list()
-	for(var/obj/item/rig_module/module in installed_modules)
+	for (var/obj/item/rig_module/module in installed_modules)
 		if (module.usable)
 			selectable |= module
 

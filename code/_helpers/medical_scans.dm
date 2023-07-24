@@ -55,7 +55,7 @@
 	scan["reagents"] = list()
 
 	if (H.reagents.total_volume)
-		for(var/datum/reagent/R in H.reagents.reagent_list)
+		for (var/datum/reagent/R in H.reagents.reagent_list)
 			var/list/reagent  = list()
 			reagent["name"]= R.name
 			reagent["quantity"] = round(H.reagents.get_reagent_amount(R.type),1)
@@ -64,7 +64,7 @@
 
 	scan["external_organs"] = list()
 
-	for(var/obj/item/organ/external/E in H.organs)
+	for (var/obj/item/organ/external/E in H.organs)
 		var/list/O = list()
 		O["name"] = E.name
 		O["is_stump"] = E.is_stump()
@@ -79,7 +79,7 @@
 
 	scan["internal_organs"] = list()
 
-	for(var/obj/item/organ/internal/I in H.internal_organs)
+	for (var/obj/item/organ/internal/I in H.internal_organs)
 		if (istype(I, /obj/item/organ/internal/augment))
 			var/obj/item/organ/internal/augment/A = I
 			if (~A.augment_flags & AUGMENT_SCANNABLE)
@@ -98,7 +98,7 @@
 
 	scan["missing_organs"] = list()
 
-	for(var/organ_name in H.species.has_organ)
+	for (var/organ_name in H.species.has_organ)
 		if (!locate(H.species.has_organ[organ_name]) in H.internal_organs)
 			scan["missing_organs"] += organ_name
 	if (H.sdisabilities & BLINDED)
@@ -263,7 +263,7 @@
 		*/
 		var/other_reagent = FALSE
 
-		for(var/list/R in scan["reagents"])
+		for (var/list/R in scan["reagents"])
 			if (R["scannable"])
 				subdat += "<tr><td colspan='2'>[R["quantity"]]u [R["name"]]</td></tr>"
 			else
@@ -307,7 +307,7 @@
 	dat += "<tr><th>Organ</th><th>Damage</th><th>Status</th></tr>"
 	subdat = list()
 
-	for(var/list/E in scan["external_organs"])
+	for (var/list/E in scan["external_organs"])
 		if (!E)
 			break
 		var/row = list()
@@ -358,7 +358,7 @@
 	*/
 	if (skill_level >= SKILL_BASIC)
 		dat += "<tr><th colspan='3'><center>Internal Organs</center></th></tr>"
-		for(var/list/I in scan["internal_organs"])
+		for (var/list/I in scan["internal_organs"])
 			var/row = list()
 			var/inflamed = I["inflamed"] || FALSE
 			row += "<tr><td><span[inflamed ? " class='bad'" : ""]>[I["name"]]</span></td>"
@@ -379,7 +379,7 @@
 		dat += shuffle(subdat)
 	else
 		dat += subdat
-	for(var/organ_name in scan["missing_organs"])
+	for (var/organ_name in scan["missing_organs"])
 		if (organ_name != "appendix")
 			dat += "<tr><td colspan='3'>[SPAN_BAD("No [organ_name] detected.")]</td></tr>"
 		else

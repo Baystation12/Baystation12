@@ -3,7 +3,7 @@
 
 /datum/persistent/filth/trash/CheckTurfContents(turf/T, list/tokens)
 	var/too_much_trash = 0
-	for(var/obj/item/trash/trash in T)
+	for (var/obj/item/trash/trash in T)
 		too_much_trash++
 		if (too_much_trash >= 5)
 			return FALSE

@@ -40,7 +40,7 @@
 
 /datum/genetics/side_effect/genetic_burn/finish(mob/living/carbon/human/H)
 	if (!H.reagents.has_reagent(/datum/reagent/dexalin))
-		for(var/organ_name in BP_ALL_LIMBS)
+		for (var/organ_name in BP_ALL_LIMBS)
 			var/obj/item/organ/external/E = H.get_organ(organ_name)
 			E.take_external_damage(0, 5, 0)
 

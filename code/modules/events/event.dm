@@ -27,7 +27,7 @@
 		return 0
 
 	var/job_weight = 0
-	for(var/role in role_weights)
+	for (var/role in role_weights)
 		if (role in active_with_role)
 			job_weight += active_with_role[role] * role_weights[role]
 

@@ -11,7 +11,7 @@
 
 		var/current_storage =  list()
 		data["material_storage"] =  current_storage
-		for(var/material in stored_material)
+		for (var/material in stored_material)
 			var/list/material_data = list()
 			var/mat_name = capitalize(stored_substances_to_names[material])
 			material_data["name"] =        mat_name
@@ -34,7 +34,7 @@
 
 		data["build_queue"] = list()
 		if (length(queued_orders))
-			for(var/datum/fabricator_build_order/order in queued_orders)
+			for (var/datum/fabricator_build_order/order in queued_orders)
 				var/list/order_data = list()
 				order_data["name"] = order.target_recipe.name
 				order_data["multiplier"] = order.multiplier
@@ -47,7 +47,7 @@
 			data["build_queue"] += list(order_data)
 
 		data["build_options"] = list()
-		for(var/datum/fabricator_recipe/R in SSfabrication.get_recipes(fabricator_class))
+		for (var/datum/fabricator_recipe/R in SSfabrication.get_recipes(fabricator_class))
 			if (R.hidden && !(fab_status_flags & FAB_HACKED) || (show_category != "All" && show_category != R.category))
 				continue
 			var/list/build_option = list()
@@ -61,7 +61,7 @@
 			else
 				//Make sure it's buildable and list required resources.
 				var/list/material_components = list()
-				for(var/material in R.resources)
+				for (var/material in R.resources)
 					var/sheets = round(stored_material[material]/round(R.resources[material]*mat_efficiency))
 					if (isnull(max_sheets) || max_sheets > sheets)
 						max_sheets = sheets
@@ -72,7 +72,7 @@
 			if (ispath(R.path, /obj/item/stack) && max_sheets >= PRINT_MULTIPLIER_DIVISOR)
 				var/obj/item/stack/R_stack = R.path
 				build_option["multipliers"] = list()
-				for(var/i = 1 to floor(min(R_stack.max_amount, max_sheets)/PRINT_MULTIPLIER_DIVISOR))
+				for (var/i = 1 to floor(min(R_stack.max_amount, max_sheets)/PRINT_MULTIPLIER_DIVISOR))
 					var/mult = i * PRINT_MULTIPLIER_DIVISOR
 					build_option["multipliers"] += list(list("label" = "x[mult]", "multiplier" = mult))
 			data["build_options"] += list(build_option)

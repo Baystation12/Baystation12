@@ -247,7 +247,7 @@
 
 /obj/machinery/organ_printer/flesh/attackby(obj/item/W, mob/user)
 	// Load with matter for printing.
-	for(var/path in amount_list)
+	for (var/path in amount_list)
 		if (istype(W, path))
 			if (max_stored_matter == stored_matter)
 				to_chat(user, SPAN_WARNING("\The [src] is too full."))
@@ -281,12 +281,12 @@
 	if (!loaded_species)
 		return
 	var/list/organs = list()
-	for(var/organ in loaded_species.has_organ)
+	for (var/organ in loaded_species.has_organ)
 		organs += loaded_species.has_organ[organ]
-	for(var/organ in loaded_species.has_limbs)
+	for (var/organ in loaded_species.has_limbs)
 		if ((loaded_species.name == SPECIES_NABBER) || (organ == BP_GROIN))
 			organs += loaded_species.has_limbs[organ]["path"]
-	for(var/organ in organs)
+	for (var/organ in organs)
 		var/obj/item/organ/O = organ
 		if (check_printable(organ))
 			.[initial(O.organ_tag)] = list(O, get_organ_cost(O))

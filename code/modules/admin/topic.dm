@@ -70,7 +70,7 @@
 
 		var/mob/playermob
 
-		for(var/mob/M in GLOB.player_list)
+		for (var/mob/M in GLOB.player_list)
 			if (M.ckey == banckey)
 				playermob = M
 				break
@@ -172,7 +172,7 @@
 		else if (task == "permissions")
 			if (!D)	return
 			var/list/permissionlist = list()
-			for(var/i=1, i<=R_MAXPERMISSION, i = SHIFTL(i, 1))
+			for (var/i=1, i<=R_MAXPERMISSION, i = SHIFTL(i, 1))
 				permissionlist[rights2text(i)] = i
 			var/new_permission = input("Select a permission to turn on/off", "Permission toggle", null, null) as null|anything in permissionlist
 			if (!new_permission)	return
@@ -344,7 +344,7 @@
 	//Command (Blue)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr align='center' bgcolor='ccccff'><th colspan='[length(SSjobs.titles_by_department(COM))]'><a href='?src=\ref[src];jobban3=commanddept;jobban4=\ref[M]'>Command Positions</a></th></tr><tr align='center'>"
-		for(var/jobPos in SSjobs.titles_by_department(COM))
+		for (var/jobPos in SSjobs.titles_by_department(COM))
 			if (!jobPos)	continue
 			var/datum/job/job = SSjobs.get_by_title(jobPos)
 			if (!job) continue
@@ -364,7 +364,7 @@
 	//Command Support (Sky Blue)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr bgcolor='87ceeb'><th colspan='[length(SSjobs.titles_by_department(SPT))]'><a href='?src=\ref[src];jobban3=supportdept;jobban4=\ref[M]'>Command Support Positions</a></th></tr><tr align='center'>"
-		for(var/jobPos in SSjobs.titles_by_department(SPT))
+		for (var/jobPos in SSjobs.titles_by_department(SPT))
 			if (!jobPos)	continue
 			var/datum/job/job = SSjobs.get_by_title(jobPos)
 			if (!job) continue
@@ -385,7 +385,7 @@
 		counter = 0
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr bgcolor='ffddf0'><th colspan='[length(SSjobs.titles_by_department(SEC))]'><a href='?src=\ref[src];jobban3=securitydept;jobban4=\ref[M]'>Security Positions</a></th></tr><tr align='center'>"
-		for(var/jobPos in SSjobs.titles_by_department(SEC))
+		for (var/jobPos in SSjobs.titles_by_department(SEC))
 			if (!jobPos)	continue
 			var/datum/job/job = SSjobs.get_by_title(jobPos)
 			if (!job) continue
@@ -406,7 +406,7 @@
 		counter = 0
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr bgcolor='fff5cc'><th colspan='[length(SSjobs.titles_by_department(ENG))]'><a href='?src=\ref[src];jobban3=engineeringdept;jobban4=\ref[M]'>Engineering Positions</a></th></tr><tr align='center'>"
-		for(var/jobPos in SSjobs.titles_by_department(ENG))
+		for (var/jobPos in SSjobs.titles_by_department(ENG))
 			if (!jobPos)	continue
 			var/datum/job/job = SSjobs.get_by_title(jobPos)
 			if (!job) continue
@@ -427,7 +427,7 @@
 		counter = 0
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr bgcolor='ffeef0'><th colspan='[length(SSjobs.titles_by_department(MED))]'><a href='?src=\ref[src];jobban3=medicaldept;jobban4=\ref[M]'>Medical Positions</a></th></tr><tr align='center'>"
-		for(var/jobPos in SSjobs.titles_by_department(MED))
+		for (var/jobPos in SSjobs.titles_by_department(MED))
 			if (!jobPos)	continue
 			var/datum/job/job = SSjobs.get_by_title(jobPos)
 			if (!job) continue
@@ -448,7 +448,7 @@
 		counter = 0
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr bgcolor='e79fff'><th colspan='[length(SSjobs.titles_by_department(SCI))]'><a href='?src=\ref[src];jobban3=sciencedept;jobban4=\ref[M]'>Science Positions</a></th></tr><tr align='center'>"
-		for(var/jobPos in SSjobs.titles_by_department(SCI))
+		for (var/jobPos in SSjobs.titles_by_department(SCI))
 			if (!jobPos)	continue
 			var/datum/job/job = SSjobs.get_by_title(jobPos)
 			if (!job) continue
@@ -468,7 +468,7 @@
 	//Exploration (Pale Purple)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr bgcolor='b784a7'><th colspan='[length(SSjobs.titles_by_department(EXP))]'><a href='?src=\ref[src];jobban3=explorationdept;jobban4=\ref[M]'>Exploration Positions</a></th></tr><tr align='center'>"
-		for(var/jobPos in SSjobs.titles_by_department(EXP))
+		for (var/jobPos in SSjobs.titles_by_department(EXP))
 			if (!jobPos)	continue
 			var/datum/job/job = SSjobs.get_by_title(jobPos)
 			if (!job) continue
@@ -488,7 +488,7 @@
 	//Service (Tea Green)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr bgcolor='d0f0c0'><th colspan='[length(SSjobs.titles_by_department(SRV))]'><a href='?src=\ref[src];jobban3=servicedept;jobban4=\ref[M]'>Service Positions</a></th></tr><tr align='center'>"
-		for(var/jobPos in SSjobs.titles_by_department(SRV))
+		for (var/jobPos in SSjobs.titles_by_department(SRV))
 			if (!jobPos)	continue
 			var/datum/job/job = SSjobs.get_by_title(jobPos)
 			if (!job) continue
@@ -509,7 +509,7 @@
 	//Supply (Khaki)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr bgcolor='f0e68c'><th colspan='[length(SSjobs.titles_by_department(SUP))]'><a href='?src=\ref[src];jobban3=supplydept;jobban4=\ref[M]'>Supply Positions</a></th></tr><tr align='center'>"
-		for(var/jobPos in SSjobs.titles_by_department(SUP))
+		for (var/jobPos in SSjobs.titles_by_department(SUP))
 			if (!jobPos)	continue
 			var/datum/job/job = SSjobs.get_by_title(jobPos)
 			if (!job) continue
@@ -530,7 +530,7 @@
 		counter = 0
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr bgcolor='dddddd'><th colspan='[length(SSjobs.titles_by_department(CIV))]'><a href='?src=\ref[src];jobban3=civiliandept;jobban4=\ref[M]'>Civilian Positions</a></th></tr><tr align='center'>"
-		for(var/jobPos in SSjobs.titles_by_department(CIV))
+		for (var/jobPos in SSjobs.titles_by_department(CIV))
 			if (!jobPos)	continue
 			var/datum/job/job = SSjobs.get_by_title(jobPos)
 			if (!job) continue
@@ -557,7 +557,7 @@
 		counter = 0
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr bgcolor='ccffcc'><th colspan='[length(SSjobs.titles_by_department(MSC))+1]'><a href='?src=\ref[src];jobban3=nonhumandept;jobban4=\ref[M]'>Non-human Positions</a></th></tr><tr align='center'>"
-		for(var/jobPos in SSjobs.titles_by_department(MSC))
+		for (var/jobPos in SSjobs.titles_by_department(MSC))
 			if (!jobPos)	continue
 			var/datum/job/job = SSjobs.get_by_title(jobPos)
 			if (!job) continue
@@ -593,7 +593,7 @@
 		#define ANTAG_COLUMNS 5
 		var/list/all_antag_types = GLOB.all_antag_types_
 		var/i = 1
-		for(var/antag_type in all_antag_types)
+		for (var/antag_type in all_antag_types)
 			var/datum/antagonist/antag = all_antag_types[antag_type]
 			if (!antag || !antag.id)
 				continue
@@ -611,7 +611,7 @@
 		//Other roles  (BLUE, because I have no idea what other color to make this)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(misc_roles)]'>Other Roles</th></tr><tr align='center'>"
-		for(var/entry in misc_roles)
+		for (var/entry in misc_roles)
 			if (jobban_isbanned(M, entry))
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[entry];jobban4=\ref[M]'>[SPAN_COLOR("red", "[entry]")]</a></td>"
 			else
@@ -622,7 +622,7 @@
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		var/list/channels = GET_SINGLETON_SUBTYPE_MAP(/singleton/communication_channel)
 		jobs += "<tr bgcolor='ccccff'><th colspan='[LAZYLEN(channels)]'>Channel Bans</th></tr><tr align='center'>"
-		for(var/channel_type in channels)
+		for (var/channel_type in channels)
 			var/singleton/communication_channel/channel = channels[channel_type]
 			if (jobban_isbanned(M, channel.name))
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[channel.name];jobban4=\ref[M]'>[SPAN_COLOR("red", "[channel.name]")]</a></td>"
@@ -656,75 +656,75 @@
 		var/list/job_list = list()
 		switch(href_list["jobban3"])
 			if ("commanddept")
-				for(var/jobPos in SSjobs.titles_by_department(COM))
+				for (var/jobPos in SSjobs.titles_by_department(COM))
 					if (!jobPos)	continue
 					var/datum/job/temp = SSjobs.get_by_title(jobPos)
 					if (!temp) continue
 					job_list += temp.title
 			if ("supportdept")
-				for(var/jobPos in SSjobs.titles_by_department(SPT))
+				for (var/jobPos in SSjobs.titles_by_department(SPT))
 					if (!jobPos)	continue
 					var/datum/job/temp = SSjobs.get_by_title(jobPos)
 					if (!temp) continue
 					job_list += temp.title
 			if ("securitydept")
-				for(var/jobPos in SSjobs.titles_by_department(SEC))
+				for (var/jobPos in SSjobs.titles_by_department(SEC))
 					if (!jobPos)	continue
 					var/datum/job/temp = SSjobs.get_by_title(jobPos)
 					if (!temp) continue
 					job_list += temp.title
 			if ("engineeringdept")
-				for(var/jobPos in SSjobs.titles_by_department(ENG))
+				for (var/jobPos in SSjobs.titles_by_department(ENG))
 					if (!jobPos)	continue
 					var/datum/job/temp = SSjobs.get_by_title(jobPos)
 					if (!temp) continue
 					job_list += temp.title
 			if ("medicaldept")
-				for(var/jobPos in SSjobs.titles_by_department(MED))
+				for (var/jobPos in SSjobs.titles_by_department(MED))
 					if (!jobPos)	continue
 					var/datum/job/temp = SSjobs.get_by_title(jobPos)
 					if (!temp) continue
 					job_list += temp.title
 			if ("sciencedept")
-				for(var/jobPos in SSjobs.titles_by_department(SCI))
+				for (var/jobPos in SSjobs.titles_by_department(SCI))
 					if (!jobPos)	continue
 					var/datum/job/temp = SSjobs.get_by_title(jobPos)
 					if (!temp) continue
 					job_list += temp.title
 			if ("explorationdept")
-				for(var/jobPos in SSjobs.titles_by_department(EXP))
+				for (var/jobPos in SSjobs.titles_by_department(EXP))
 					if (!jobPos)	continue
 					var/datum/job/temp = SSjobs.get_by_title(jobPos)
 					if (!temp) continue
 					job_list += temp.title
 			if ("servicedept")
-				for(var/jobPos in SSjobs.titles_by_department(SRV))
+				for (var/jobPos in SSjobs.titles_by_department(SRV))
 					if (!jobPos)	continue
 					var/datum/job/temp = SSjobs.get_by_title(jobPos)
 					if (!temp) continue
 					job_list += temp.title
 			if ("supplydept")
-				for(var/jobPos in SSjobs.titles_by_department(SUP))
+				for (var/jobPos in SSjobs.titles_by_department(SUP))
 					if (!jobPos)	continue
 					var/datum/job/temp = SSjobs.get_by_title(jobPos)
 					if (!temp) continue
 					job_list += temp.title
 			if ("civiliandept")
-				for(var/jobPos in SSjobs.titles_by_department(CIV))
+				for (var/jobPos in SSjobs.titles_by_department(CIV))
 					if (!jobPos)	continue
 					var/datum/job/temp = SSjobs.get_by_title(jobPos)
 					if (!temp) continue
 					job_list += temp.title
 			if ("nonhumandept")
 				job_list += "pAI"
-				for(var/jobPos in SSjobs.titles_by_department(MSC))
+				for (var/jobPos in SSjobs.titles_by_department(MSC))
 					if (!jobPos)	continue
 					var/datum/job/temp = SSjobs.get_by_title(jobPos)
 					if (!temp) continue
 					job_list += temp.title
 			if ("Syndicate")
 				var/list/all_antag_types = GLOB.all_antag_types_
-				for(var/antagPos in all_antag_types)
+				for (var/antagPos in all_antag_types)
 					if (!antagPos) continue
 					var/datum/antagonist/temp = all_antag_types[antagPos]
 					if (!temp) continue
@@ -734,7 +734,7 @@
 
 		//Create a list of unbanned jobs within job_list
 		var/list/notbannedlist = list()
-		for(var/job in job_list)
+		for (var/job in job_list)
 			if (!jobban_isbanned(M, job))
 				notbannedlist += job
 
@@ -757,7 +757,7 @@
 
 					var/msg
 					var/mins_readable = time_to_readable(mins MINUTES)
-					for(var/job in notbannedlist)
+					for (var/job in notbannedlist)
 						ban_unban_log_save("[key_name(usr)] temp-jobbanned [key_name(M)] from [job] for [mins_readable]. reason: [reason]")
 						log_admin("[key_name(usr)] temp-jobbanned [key_name(M)] from [job] for [mins_readable]")
 						DB_ban_record(BANTYPE_JOB_TEMP, M, mins, reason, job)
@@ -778,7 +778,7 @@
 					var/reason = sanitize(input(usr,"Reason?","Please State Reason","") as text|null)
 					if (reason)
 						var/msg
-						for(var/job in notbannedlist)
+						for (var/job in notbannedlist)
 							ban_unban_log_save("[key_name(usr)] perma-jobbanned [key_name(M)] from [job]. reason: [reason]")
 							log_admin("[key_name(usr)] perma-banned [key_name(M)] from [job]")
 							DB_ban_record(BANTYPE_JOB_PERMA, M, -1, reason, job)
@@ -803,7 +803,7 @@
 				DB_ban_panel(M.ckey)
 				return
 			var/msg
-			for(var/job in SSjobs.titles_to_datums)
+			for (var/job in SSjobs.titles_to_datums)
 				var/reason = jobban_isbanned(M, job)
 				if (!reason) continue //skip if it isn't jobbanned anyway
 				switch(alert("Job: '[job]' Reason: '[reason]' Un-jobban?","Please Confirm","Yes","No"))
@@ -955,7 +955,7 @@
 		if (SSticker.mode)
 			return alert(usr, "The game has already started.", null, null, null, null)
 		var/dat = {"<B>What mode do you wish to play?</B><HR>"}
-		for(var/mode in SSticker.mode_tags)
+		for (var/mode in SSticker.mode_tags)
 			dat += {"<A href='?src=\ref[src];c_mode2=[mode]'>[SSticker.mode_names[mode]]</A><br>"}
 		dat += {"<A href='?src=\ref[src];c_mode2=secret'>Secret</A><br>"}
 		dat += {"<A href='?src=\ref[src];c_mode2=random'>Random</A><br>"}
@@ -970,7 +970,7 @@
 		if (SSticker.master_mode != "secret")
 			return alert(usr, "The game mode has to be secret!", null, null, null, null)
 		var/dat = {"<B>What game mode do you want to force secret to be? Use this if you want to change the game mode, but want the players to believe it's secret. This will only work if the current game mode is secret.</B><HR>"}
-		for(var/mode in SSticker.mode_tags)
+		for (var/mode in SSticker.mode_tags)
 			dat += {"<A href='?src=\ref[src];f_secret2=[mode]'>[SSticker.mode_names[mode]]</A><br>"}
 		dat += {"<A href='?src=\ref[src];f_secret2=secret'>Random (default)</A><br>"}
 		dat += {"Now: [SSticker.secret_force_mode]"}
@@ -1125,7 +1125,7 @@
 		locker.locked = 1
 
 		//strip their stuff and stick it in the crate
-		for(var/obj/item/I in M)
+		for (var/obj/item/I in M)
 			M.drop_from_inventory(I, locker)
 		M.update_icons()
 
@@ -1157,7 +1157,7 @@
 			to_chat(usr, "This cannot be used on instances of type /mob/living/silicon/ai")
 			return
 
-		for(var/obj/item/I in M)
+		for (var/obj/item/I in M)
 			M.drop_from_inventory(I)
 
 		M.Paralyse(5)
@@ -1182,7 +1182,7 @@
 			to_chat(usr, "This cannot be used on instances of type /mob/living/silicon/ai")
 			return
 
-		for(var/obj/item/I in M)
+		for (var/obj/item/I in M)
 			M.drop_from_inventory(I)
 
 		M.Paralyse(5)
@@ -1229,7 +1229,7 @@
 			to_chat(usr, "This cannot be used on instances of type /mob/living/silicon/ai")
 			return
 
-		for(var/obj/item/I in M)
+		for (var/obj/item/I in M)
 			M.drop_from_inventory(I)
 
 		if (istype(M, /mob/living/carbon/human))
@@ -1364,7 +1364,7 @@
 		var/mob/M = locate(href_list["take_question"])
 		if (ismob(M))
 			var/take_msg = SPAN_NOTICE("<b>[key_name(usr.client)]</b> is attending to <b>[key_name(M)]'s</b> message.")
-			for(var/client/X as anything in GLOB.admins)
+			for (var/client/X as anything in GLOB.admins)
 				if ((R_ADMIN|R_MOD) & X.holder.rights)
 					to_chat(X, take_msg)
 			to_chat(M, SPAN_NOTICE("<b>Your message is being attended to by [usr.client]. Thanks for your patience!</b>"))
@@ -1675,7 +1675,7 @@
 		var/paths = list()
 		var/removed_paths = list()
 
-		for(var/dirty_path in dirty_paths)
+		for (var/dirty_path in dirty_paths)
 			var/path = text2path(dirty_path)
 			if (!path)
 				removed_paths += dirty_path
@@ -1798,7 +1798,7 @@
 	else if (href_list["ac_submit_new_channel"])
 		var/datum/feed_network/torch_network = news_network[1]
 		var/check = 0
-		for(var/datum/feed_channel/FC in torch_network.network_channels)
+		for (var/datum/feed_channel/FC in torch_network.network_channels)
 			if (FC.channel_name == src.admincaster_feed_channel.channel_name)
 				check = 1
 				break
@@ -1815,7 +1815,7 @@
 	else if (href_list["ac_set_channel_receiving"])
 		var/datum/feed_network/torch_network = news_network[1]
 		var/list/available_channels = list()
-		for(var/datum/feed_channel/F in torch_network.network_channels)
+		for (var/datum/feed_channel/F in torch_network.network_channels)
 			available_channels += F.channel_name
 		src.admincaster_feed_channel.channel_name = sanitizeSafe(input(usr, "Choose receiving Feed Channel", "Network Channel Handler") in available_channels )
 		src.access_news_network()
@@ -1887,7 +1887,7 @@
 					WANTED.backup_author = src.admincaster_signature                  //Submitted by
 					WANTED.is_admin_message = 1
 					torch_network.wanted_issue = WANTED
-					for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
+					for (var/obj/machinery/newscaster/NEWSCASTER in allCasters)
 						NEWSCASTER.newsAlert()
 						NEWSCASTER.update_icon()
 					src.admincaster_screen = 15
@@ -1904,7 +1904,7 @@
 		var/choice = alert("Please confirm Wanted Issue removal","Network Security Handler","Confirm","Cancel")
 		if (choice=="Confirm")
 			torch_network.wanted_issue = null
-			for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
+			for (var/obj/machinery/newscaster/NEWSCASTER in allCasters)
 				NEWSCASTER.update_icon()
 			src.admincaster_screen=17
 		src.access_news_network()
@@ -2159,7 +2159,7 @@
 				return other_mob
 
 			if (spawn_in_storage)
-				for(var/datum/gear/G in spawn_in_storage)
+				for (var/datum/gear/G in spawn_in_storage)
 					G.spawn_in_storage_or_drop(M, M.client.prefs.Gear()[G.display_name])
 
 			log_and_message_admins("has equipped [M.ckey]/([M]) with their spawn loadout.")

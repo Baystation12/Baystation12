@@ -28,7 +28,7 @@
 	return !can_become_antag_detailed(player, ignore_role)
 
 /datum/antagonist/proc/antags_are_dead()
-	for(var/datum/mind/antag in current_antagonists)
+	for (var/datum/mind/antag in current_antagonists)
 		if (mob_path && !istype(antag.current,mob_path))
 			continue
 		if (antag.current.stat==2)
@@ -41,7 +41,7 @@
 
 /datum/antagonist/proc/get_active_antag_count()
 	var/active_antags = 0
-	for(var/datum/mind/player in current_antagonists)
+	for (var/datum/mind/player in current_antagonists)
 		var/mob/living/L = player.current
 		if (!L || L.stat == DEAD)
 			continue //no mob or dead
@@ -76,7 +76,7 @@
 	RETURN_TYPE(/list)
 	// No caching as the ANTAG_RANDOM_EXCEPTED flag can be added/removed mid-round.
 	var/list/antag_candidates = GLOB.all_antag_types_.Copy()
-	for(var/datum/antagonist/antag in antag_candidates)
+	for (var/datum/antagonist/antag in antag_candidates)
 		if (antag.flags & ANTAG_RANDOM_EXCEPTED)
 			antag_candidates -= antag
 	return antag_candidates

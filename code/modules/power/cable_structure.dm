@@ -248,7 +248,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	//search for and merge diagonally matching cables from the first direction component (north/south)
 	var/turf/T  = get_step(src, direction&3)//go north/south
 
-	for(var/obj/structure/cable/C in T)
+	for (var/obj/structure/cable/C in T)
 
 		if (!C)
 			continue
@@ -269,7 +269,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	//the same from the second direction component (east/west)
 	T  = get_step(src, direction&12)//go east/west
 
-	for(var/obj/structure/cable/C in T)
+	for (var/obj/structure/cable/C in T)
 
 		if (!C)
 			continue
@@ -296,7 +296,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 	var/turf/TB  = get_zstep(src, direction)
 
-	for(var/obj/structure/cable/C in TB)
+	for (var/obj/structure/cable/C in TB)
 
 		if (!C)
 			continue
@@ -324,7 +324,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 	//first let's add turf cables to our powernet
 	//then we'll connect machines on turf with a node cable is present
-	for(var/AM in loc)
+	for (var/AM in loc)
 		if (istype(AM,/obj/structure/cable))
 			var/obj/structure/cable/C = AM
 			if (C.d1 == d1 || C.d2 == d1 || C.d1 == d2 || C.d2 == d2) //only connected if they have a common direction
@@ -353,7 +353,7 @@ By design, d1 is the smallest direction and d2 is the highest
 			to_connect += M //we'll connect the machines after all cables are merged
 
 	//now that cables are done, let's connect found machines
-	for(var/obj/machinery/power/PM in to_connect)
+	for (var/obj/machinery/power/PM in to_connect)
 		if (!PM.connect_to_network())
 			PM.disconnect_from_network() //if we somehow can't connect the machine to the new powernet, remove it from the old nonetheless
 
@@ -367,38 +367,38 @@ By design, d1 is the smallest direction and d2 is the highest
 	var/turf/T
 
 	// Handle standard cables in adjacent turfs
-	for(var/cable_dir in list(d1, d2))
+	for (var/cable_dir in list(d1, d2))
 		if (cable_dir == 0)
 			continue
 		var/reverse = GLOB.reverse_dir[cable_dir]
 		T = get_zstep(src, cable_dir)
 		if (T)
-			for(var/obj/structure/cable/C in T)
+			for (var/obj/structure/cable/C in T)
 				if (C.d1 == reverse || C.d2 == reverse)
 					. += C
 		if (cable_dir & (cable_dir - 1)) // Diagonal, check for /\/\/\ style cables along cardinal directions
-			for(var/pair in list(NORTH|SOUTH, EAST|WEST))
+			for (var/pair in list(NORTH|SOUTH, EAST|WEST))
 				T = get_step(src, cable_dir & pair)
 				if (T)
 					var/req_dir = cable_dir ^ pair
-					for(var/obj/structure/cable/C in T)
+					for (var/obj/structure/cable/C in T)
 						if (C.d1 == req_dir || C.d2 == req_dir)
 							. += C
 
 	// Handle cables on the same turf as us
-	for(var/obj/structure/cable/C in loc)
+	for (var/obj/structure/cable/C in loc)
 		if (C.d1 == d1 || C.d2 == d1 || C.d1 == d2 || C.d2 == d2) // if either of C's d1 and d2 match either of ours
 			. += C
 
 	if (d1 == 0)
-		for(var/obj/machinery/power/P in loc)
+		for (var/obj/machinery/power/P in loc)
 			if (P.powernet == 0) continue // exclude APCs with powernet=0
 			if (!powernetless_only || !P.powernet)
 				. += P
 
 	// if the caller asked for powernetless cables only, dump the ones with powernets
 	if (powernetless_only)
-		for(var/obj/structure/cable/C in .)
+		for (var/obj/structure/cable/C in .)
 			if (C.powernet)
 				. -= C
 
@@ -431,7 +431,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	if (length(P_list) == 0)//if nothing in both list, then the cable was a lone cable, just delete it and its powernet
 		powernet.remove_cable(src)
 
-		for(var/obj/machinery/power/P in T1)//check if it was powering a machine
+		for (var/obj/machinery/power/P in T1)//check if it was powering a machine
 			if (!P.connect_to_network()) //can't find a node cable on a the turf to connect to
 				P.disconnect_from_network() //remove from current network (and delete powernet)
 		return
@@ -445,7 +445,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 	// Disconnect machines connected to nodes
 	if (d1 == 0) // if we cut a node (O-X) cable
-		for(var/obj/machinery/power/P in T1)
+		for (var/obj/machinery/power/P in T1)
 			if (!P.connect_to_network()) //can't find a node cable on a the turf to connect to
 				P.disconnect_from_network() //remove from current network
 

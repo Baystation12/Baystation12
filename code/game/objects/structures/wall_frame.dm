@@ -41,7 +41,7 @@
 /obj/structure/wall_frame/Destroy()
 	var/turf/location = loc
 	. = ..()
-	for(var/obj/structure/wall_frame/W in orange(1, location))
+	for (var/obj/structure/wall_frame/W in orange(1, location))
 		W.update_connections()
 		W.queue_icon_update()
 
@@ -142,7 +142,7 @@
 	var/new_color = (paint_color ? paint_color : material.icon_colour)
 	color = new_color
 
-	for(var/i = 1 to 4)
+	for (var/i = 1 to 4)
 		if (other_connections[i] != "0")
 			I = image('icons/obj/wall_frame.dmi', "frame_other[connections[i]]", dir = SHIFTL(1, i - 1))
 		else
@@ -150,7 +150,7 @@
 		overlays += I
 
 	if (stripe_color)
-		for(var/i = 1 to 4)
+		for (var/i = 1 to 4)
 			if (other_connections[i] != "0")
 				I = image('icons/obj/wall_frame.dmi', "stripe_other[connections[i]]", dir = SHIFTL(1, i - 1))
 			else
@@ -162,7 +162,7 @@
 	. = ..()
 	if (prob(40))
 		var/spacefacing = FALSE
-		for(var/direction in GLOB.cardinal)
+		for (var/direction in GLOB.cardinal)
 			var/turf/T = get_step(src, direction)
 			var/area/A = get_area(T)
 			if (A && (A.area_flags & AREA_FLAG_EXTERNAL))

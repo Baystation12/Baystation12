@@ -65,6 +65,6 @@
 			finish_research()
 
 /datum/malf_research/proc/advance_all()
-	for(var/MRA in available_abilities.Copy())
+	for (var/MRA in available_abilities.Copy())
 		focus = MRA
 		finish_research()

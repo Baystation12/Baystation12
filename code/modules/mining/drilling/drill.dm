@@ -102,7 +102,7 @@
 		var/total_harvest = harvest_speed //Ore harvest-per-tick.
 		var/found_resource = 0 //If this doesn't get set, the area is depleted and the drill errors out.
 
-		for(var/metal in ore_types)
+		for (var/metal in ore_types)
 
 			if (length(contents) >= capacity)
 				system_error("insufficient storage space")
@@ -129,7 +129,7 @@
 					create_ore = harvesting.resources[metal]
 					harvesting.resources[metal] = 0
 
-				for(var/i=1, i <= create_ore, i++)
+				for (var/i=1, i <= create_ore, i++)
 					var/oretype = ore_types[metal]
 					new oretype(src)
 
@@ -244,7 +244,7 @@
 
 	var/obj/structure/ore_box/B = locate() in orange(1)
 	if (B)
-		for(var/obj/item/ore/O in contents)
+		for (var/obj/item/ore/O in contents)
 			O.forceMove(B)
 		to_chat(usr, SPAN_NOTICE("You unload the drill's storage cache into the ore box."))
 	else
@@ -293,7 +293,7 @@
 
 	var/turf/T = get_step(get_turf(src), src.dir)
 
-	for(var/thing in T.contents)
+	for (var/thing in T.contents)
 		if (istype(thing, /obj/machinery/mining/drill))
 			connected = thing
 			break

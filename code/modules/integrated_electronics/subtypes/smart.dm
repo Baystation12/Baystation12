@@ -128,7 +128,7 @@
 		var/list/Xn =  new/list(length(P))
 		var/list/Yn =  new/list(length(P))
 		var/turf/T
-		for(var/i =1 to length(P))
+		for (var/i =1 to length(P))
 			T=P[i]
 			Xn[i] = T.x
 			Yn[i] = T.y

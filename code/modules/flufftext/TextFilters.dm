@@ -6,7 +6,7 @@
 	var/list/unstuttered_words = split_phrase.Copy()
 	var/i = rand(1,3)
 	if (stunned) i = length(split_phrase)
-	for(,i > 0,i--) //Pick a few words to stutter on.
+	for (,i > 0,i--) //Pick a few words to stutter on.
 
 		if (!length(unstuttered_words))
 			break
@@ -46,7 +46,7 @@
 
 	var/new_msg = ""
 
-	for(var/w in words)
+	for (var/w in words)
 		if (prob(chance))
 			new_words += "..."
 		else

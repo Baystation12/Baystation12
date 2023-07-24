@@ -65,7 +65,7 @@ AI MODULES
 	if (!istype(ai))
 		return //We don't have slaves if we are not an AI
 
-	for(var/mob/living/silicon/robot/R in ai.connected_robots)
+	for (var/mob/living/silicon/robot/R in ai.connected_robots)
 		to_chat(R, "These are your laws now:")
 		R.show_laws()
 

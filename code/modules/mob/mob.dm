@@ -12,7 +12,7 @@
 	clear_fullscreen()
 	if (client)
 		remove_screen_obj_references()
-		for(var/atom/movable/AM in client.screen)
+		for (var/atom/movable/AM in client.screen)
 			var/obj/screen/screenobj = AM
 			if (!istype(screenobj) || !screenobj.globalscreen)
 				qdel(screenobj)
@@ -90,14 +90,14 @@
 	var/list/objs = list()
 	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, checkghosts)
 
-	for(var/o in objs)
+	for (var/o in objs)
 		var/obj/O = o
 		if (length(exclude_objs) && (O in exclude_objs))
 			exclude_objs -= O
 			continue
 		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 
-	for(var/m in mobs)
+	for (var/m in mobs)
 		var/mob/M = m
 		if (length(exclude_mobs) && (M in exclude_mobs))
 			exclude_mobs -= M
@@ -115,7 +115,7 @@
 			continue
 
 		if (!(M.knows_target(src)) && !isghost(M))
-			for(var/datum/pronouns/entry as anything in GLOB.pronouns.instances)
+			for (var/datum/pronouns/entry as anything in GLOB.pronouns.instances)
 				mob_message = replacetext(mob_message, " [initial(entry.his)] ", " their ")
 				mob_message = replacetext(mob_message, " [initial(entry.him)] ", " them ")
 				mob_message = replacetext(mob_message, " [initial(entry.self)] ", " themselves ")
@@ -143,7 +143,7 @@
 	var/list/objs = list()
 	get_mobs_and_objs_in_view_fast(T, hearing_distance, mobs, objs, checkghosts)
 
-	for(var/m in mobs)
+	for (var/m in mobs)
 		var/mob/M = m
 		if (length(exclude_mobs) && (M in exclude_mobs))
 			exclude_mobs -= M
@@ -156,7 +156,7 @@
 			mob_message = add_ghost_track(mob_message, M)
 
 		if (!(M.knows_target(src)) && !(isghost(M)))
-			for(var/datum/pronouns/entry as anything in GLOB.pronouns.instances)
+			for (var/datum/pronouns/entry as anything in GLOB.pronouns.instances)
 				mob_message = replacetext(mob_message, " [initial(entry.his)] ", " their ")
 				mob_message = replacetext(mob_message, " [initial(entry.him)] ", " them ")
 				mob_message = replacetext(mob_message, " [initial(entry.self)] ", " themselves ")
@@ -168,7 +168,7 @@
 		else
 			M.show_message(mob_message, AUDIBLE_MESSAGE)
 
-	for(var/o in objs)
+	for (var/o in objs)
 		var/obj/O = o
 		if (length(exclude_objs) && (O in exclude_objs))
 			exclude_objs -= O
@@ -483,7 +483,7 @@
 			return 1
 	if (getBruteLoss() + getFireLoss() < 100)
 		return 0
-	for(var/thing in organs)
+	for (var/thing in organs)
 		var/obj/item/organ/external/e = thing
 		if (!e || e.is_stump())
 			continue
@@ -650,7 +650,7 @@
 	return 1
 
 /mob/proc/show_viewers(message)
-	for(var/mob/M in viewers())
+	for (var/mob/M in viewers())
 		M.see(message)
 
 /mob/Stat()
@@ -698,7 +698,7 @@
 		else
 			if (statpanel("Turf"))
 				stat(listed_turf)
-				for(var/atom/A in listed_turf)
+				for (var/atom/A in listed_turf)
 					if (!A.mouse_opacity)
 						continue
 					if (A.invisibility > see_invisible)
@@ -740,7 +740,7 @@
 		set_density(initial(density))
 	reset_layer()
 
-	for(var/obj/item/grab/G in grabbed_by)
+	for (var/obj/item/grab/G in grabbed_by)
 		if (G.force_stand())
 			lying = 0
 
@@ -866,7 +866,7 @@
 
 /mob/proc/get_visible_implants(class = 0)
 	var/list/visible_implants = list()
-	for(var/obj/item/O in embedded)
+	for (var/obj/item/O in embedded)
 		if (O.w_class > class)
 			visible_implants += O
 	return visible_implants
@@ -877,7 +877,7 @@
 /mob/proc/remove_implant(obj/item/implant, surgical_removal = FALSE)
 	if (!LAZYLEN(get_visible_implants(0))) //Yanking out last object - removing verb.
 		verbs -= /mob/proc/yank_out_object
-	for(var/obj/item/O in pinned)
+	for (var/obj/item/O in pinned)
 		if (O == implant)
 			pinned -= O
 		if (!length(pinned))
@@ -907,14 +907,14 @@
 
 /mob/living/carbon/human/remove_implant(obj/item/implant, surgical_removal = FALSE, obj/item/organ/external/affected)
 	if (!affected) //Grab the organ holding the implant.
-		for(var/obj/item/organ/external/organ in organs)
-			for(var/obj/item/O in organ.implants)
+		for (var/obj/item/organ/external/organ in organs)
+			for (var/obj/item/O in organ.implants)
 				if (O == implant)
 					affected = organ
 					break
 	if (affected)
 		affected.implants -= implant
-		for(var/datum/wound/wound in affected.wounds)
+		for (var/datum/wound/wound in affected.wounds)
 			LAZYREMOVE(wound.embedded_objects, implant)
 		if (!surgical_removal)
 			shock_stage+=20
@@ -1173,7 +1173,7 @@
 /mob/proc/check_emissive_equipment()
 	var/old_zflags = z_flags
 	z_flags &= ~ZMM_MANGLE_PLANES
-	for(var/atom/movable/AM in get_equipped_items(TRUE))
+	for (var/atom/movable/AM in get_equipped_items(TRUE))
 		if (AM.z_flags & ZMM_MANGLE_PLANES)
 			z_flags |= ZMM_MANGLE_PLANES
 			break

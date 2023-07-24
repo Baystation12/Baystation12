@@ -52,7 +52,7 @@
 		if (show_trade)
 			var/list/trades = list()
 			if (length(T.trading_items))
-				for(var/i in 1 to length(T.trading_items))
+				for (var/i in 1 to length(T.trading_items))
 					trades += T.print_trading_items(i)
 			data["trades"] = trades
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -63,7 +63,7 @@
 		ui.open()
 
 /datum/computer_file/program/merchant/proc/connect_pad()
-	for(var/obj/machinery/merchant_pad/P in orange(1,get_turf(computer)))
+	for (var/obj/machinery/merchant_pad/P in orange(1,get_turf(computer)))
 		pad = P
 		return
 
@@ -107,7 +107,7 @@
 	var/quantity = 1
 	if (pad)
 		var/list/targets = pad.get_targets()
-		for(var/target in targets)
+		for (var/target in targets)
 			if (!computer.emagged() && istype(target,/mob/living/carbon/human))
 				last_comms = "SAFETY LOCK ENABLED: SENTIENT MATTER UNTRANSMITTABLE"
 				return
@@ -125,7 +125,7 @@
 		return
 	if (pad)
 		var/list/targets = pad.get_targets()
-		for(var/target in targets)
+		for (var/target in targets)
 			if (!computer.emagged() && istype(target,/mob/living/carbon/human))
 				last_comms = "SAFETY LOCK ENABLED: SENTIENT MATTER UNTRANSMITTABLE"
 				return
@@ -143,7 +143,7 @@
 /datum/computer_file/program/merchant/proc/transfer_to_bank()
 	if (pad)
 		var/list/targets = pad.get_targets()
-		for(var/target in targets)
+		for (var/target in targets)
 			if (istype(target, /obj/item/spacecash))
 				var/obj/item/spacecash/cash = target
 				bank += cash.worth

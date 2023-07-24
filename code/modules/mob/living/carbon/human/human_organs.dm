@@ -10,7 +10,7 @@
 
 /mob/living/carbon/human/proc/recheck_bad_external_organs()
 	var/damage_this_tick = getToxLoss()
-	for(var/obj/item/organ/external/O in organs)
+	for (var/obj/item/organ/external/O in organs)
 		damage_this_tick += O.burn_dam + O.brute_dam
 
 	if (damage_this_tick > last_dam)
@@ -24,11 +24,11 @@
 
 	if (force_process)
 		bad_external_organs.Cut()
-		for(var/obj/item/organ/external/Ex in organs)
+		for (var/obj/item/organ/external/Ex in organs)
 			bad_external_organs |= Ex
 
 	//processing internal organs is pretty cheap, do that first.
-	for(var/obj/item/organ/I in internal_organs)
+	for (var/obj/item/organ/I in internal_organs)
 		I.Process()
 
 	handle_stance()
@@ -37,7 +37,7 @@
 	if (!force_process && !length(bad_external_organs))
 		return
 
-	for(var/obj/item/organ/external/E in bad_external_organs)
+	for (var/obj/item/organ/external/E in bad_external_organs)
 		if (!E)
 			continue
 		if (!E.need_process())
@@ -54,16 +54,16 @@
 					Stun(2)
 
 				//Moving makes open wounds get infected much faster
-				for(var/datum/wound/W in E.wounds)
+				for (var/datum/wound/W in E.wounds)
 					if (W.infection_check())
 						W.germ_level += 1
 
 /mob/living/carbon/human/proc/Check_Proppable_Object()
-	for(var/turf/simulated/T in trange(1,src)) //we only care for non-space turfs
+	for (var/turf/simulated/T in trange(1,src)) //we only care for non-space turfs
 		if (T.density)	//walls work
 			return 1
 
-	for(var/obj/O in orange(1, src))
+	for (var/obj/O in orange(1, src))
 		if (O && O.density && O.anchored)
 			return 1
 
@@ -86,7 +86,7 @@
 		return
 
 	var/limb_pain
-	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
+	for (var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 		var/obj/item/organ/external/E = organs_by_name[limb_tag]
 		if (!E || !E.is_usable())
 			stance_damage += 2 // let it fail even if just foot&leg
@@ -136,7 +136,7 @@
 			/obj/structure/bed,
 		)
 
-	for(var/type in objects_to_sit_on) //things that can't be climbed but can be propped-up-on
+	for (var/type in objects_to_sit_on) //things that can't be climbed but can be propped-up-on
 		if (locate(type) in src.loc)
 			return
 
@@ -154,7 +154,7 @@
 
 	// You should not be able to pick anything up, but stranger things have happened.
 	if (l_hand)
-		for(var/limb_tag in list(BP_L_HAND, BP_L_ARM))
+		for (var/limb_tag in list(BP_L_HAND, BP_L_ARM))
 			var/obj/item/organ/external/E = get_organ(limb_tag)
 			if (!E)
 				visible_message(SPAN_DANGER("Lacking a functioning left hand, \the [src] drops \the [l_hand]."))
@@ -162,7 +162,7 @@
 				break
 
 	if (r_hand)
-		for(var/limb_tag in list(BP_R_HAND, BP_R_ARM))
+		for (var/limb_tag in list(BP_R_HAND, BP_R_ARM))
 			var/obj/item/organ/external/E = get_organ(limb_tag)
 			if (!E)
 				visible_message(SPAN_DANGER("Lacking a functioning right hand, \the [src] drops \the [r_hand]."))
@@ -246,7 +246,7 @@
 
 /mob/living/carbon/human/proc/sync_organ_dna()
 	var/list/all_bits = internal_organs|organs
-	for(var/obj/item/organ/O in all_bits)
+	for (var/obj/item/organ/O in all_bits)
 		O.set_dna(dna)
 
 /mob/living/proc/is_asystole()

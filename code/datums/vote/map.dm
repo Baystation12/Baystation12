@@ -9,7 +9,7 @@
 	return ..()
 
 /datum/vote/map/setup_vote()
-	for(var/name in GLOB.all_maps)
+	for (var/name in GLOB.all_maps)
 		choices += name
 	..()
 

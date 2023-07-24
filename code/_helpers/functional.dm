@@ -12,7 +12,7 @@
 
 /proc/all_predicates_true(list/input, list/predicates)
 	PREPARE_INPUT
-	for(var/predicate in predicates)
+	for (var/predicate in predicates)
 		PREPARE_ARGUMENTS
 		if (!call(predicate)(arglist(predicate_input)))
 			return FALSE
@@ -23,7 +23,7 @@
 	if (!length(predicates))
 		return TRUE
 
-	for(var/predicate in predicates)
+	for (var/predicate in predicates)
 		PREPARE_ARGUMENTS
 		if (call(predicate)(arglist(predicate_input)))
 			return TRUE
@@ -82,7 +82,7 @@
 /proc/where(list/list_to_filter, list/predicates, list/extra_predicate_input)
 	RETURN_TYPE(/list)
 	. = list()
-	for(var/entry in list_to_filter)
+	for (var/entry in list_to_filter)
 		var/predicate_input
 		if (extra_predicate_input)
 			predicate_input = (list(entry) + extra_predicate_input)
@@ -95,5 +95,5 @@
 /proc/map(list/list_to_map, map_proc)
 	RETURN_TYPE(/list)
 	. = list()
-	for(var/entry in list_to_map)
+	for (var/entry in list_to_map)
 		. += call(map_proc)(entry)

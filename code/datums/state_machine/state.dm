@@ -8,7 +8,7 @@
 
 /singleton/state/Initialize()
 	. = ..()
-	for(var/i in 1 to LAZYLEN(transitions))
+	for (var/i in 1 to LAZYLEN(transitions))
 		var/singleton/state_transition/T = GET_SINGLETON(transitions[i])
 		LAZYADD(T.from, src)
 		transitions[i] = T
@@ -16,7 +16,7 @@
 // Returns a list of transitions that a FSM could switch to.
 // Note that `holder` is NOT the FSM, but instead the thing the FSM is attached to.
 /singleton/state/proc/get_open_transitions(datum/holder)
-	for(var/singleton/state_transition/T as anything in transitions)
+	for (var/singleton/state_transition/T as anything in transitions)
 		if (T.is_open(holder))
 			LAZYADD(., T)
 

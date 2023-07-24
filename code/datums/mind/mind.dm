@@ -114,7 +114,7 @@
 	out += "<hr>"
 	out += "Factions and special roles:<br><table>"
 	var/list/all_antag_types = GLOB.all_antag_types_
-	for(var/antag_type in all_antag_types)
+	for (var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		out += "[antag.get_panel_entry(src)]"
 	out += "</table><hr>"
@@ -122,7 +122,7 @@
 
 	if (objectives && length(objectives))
 		var/num = 1
-		for(var/datum/objective/O in objectives)
+		for (var/datum/objective/O in objectives)
 			out += "<b>Objective #[num]:</b> [O.explanation_text] "
 			out += " <a href='?src=\ref[src];obj_delete=\ref[O]'>\[remove\]</a><br>"
 			num++
@@ -307,7 +307,7 @@
 				var/objective_type = "[objective_type_capital][objective_type_text]"//Add them together into a text string.
 
 				var/list/possible_targets = list("Free objective")
-				for(var/datum/mind/possible_target in SSticker.minds)
+				for (var/datum/mind/possible_target in SSticker.minds)
 					if ((possible_target != src) && istype(possible_target.current, /mob/living/carbon/human))
 						possible_targets += possible_target.current
 
@@ -407,8 +407,8 @@
 
 		switch(href_list["implant"])
 			if ("remove")
-				for(var/obj/item/implant/loyalty/I in H.contents)
-					for(var/obj/item/organ/external/organs in H.organs)
+				for (var/obj/item/implant/loyalty/I in H.contents)
+					for (var/obj/item/organ/external/organs in H.organs)
 						if (I in organs.implants)
 							qdel(I)
 							break
@@ -461,7 +461,7 @@
 	else if (href_list["common"])
 		switch(href_list["common"])
 			if ("undress")
-				for(var/obj/item/W in current)
+				for (var/obj/item/W in current)
 					current.drop_from_inventory(W)
 			if ("takeuplink")
 				take_uplink()
@@ -480,7 +480,7 @@
 	else if (href_list["obj_announce"])
 		var/obj_count = 1
 		to_chat(current, SPAN_NOTICE("Your current objectives:"))
-		for(var/datum/objective/objective in objectives)
+		for (var/datum/objective/objective in objectives)
 			to_chat(current, "<B>Objective #[obj_count]</B>: [objective.explanation_text]")
 			obj_count++
 

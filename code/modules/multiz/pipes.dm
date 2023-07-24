@@ -91,12 +91,12 @@
 	..()
 	var/node1_dir
 
-	for(var/direction in GLOB.cardinal)
+	for (var/direction in GLOB.cardinal)
 		if (direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
+	for (var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
@@ -104,7 +104,7 @@
 
 	var/turf/above = GetAbove(src)
 	if (above)
-		for(var/obj/machinery/atmospherics/target in above)
+		for (var/obj/machinery/atmospherics/target in above)
 			if (target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/down))
 				if (check_connect_types(target,src))
 					node2 = target
@@ -129,12 +129,12 @@
 	..()
 	var/node1_dir
 
-	for(var/direction in GLOB.cardinal)
+	for (var/direction in GLOB.cardinal)
 		if (direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
+	for (var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
@@ -142,7 +142,7 @@
 
 	var/turf/below = GetBelow(src)
 	if (below)
-		for(var/obj/machinery/atmospherics/target in below)
+		for (var/obj/machinery/atmospherics/target in below)
 			if (target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/up))
 				if (check_connect_types(target,src))
 					node2 = target

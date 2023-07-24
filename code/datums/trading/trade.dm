@@ -58,14 +58,14 @@
 	if (possible_trading_items)
 		possible_trading_items = generate_pool(possible_trading_items)
 
-	for(var/i in 3 to 6)
+	for (var/i in 3 to 6)
 		add_to_pool(trading_items, possible_trading_items, force = 1)
 		add_to_pool(wanted_items, possible_wanted_items, force = 1)
 
 /datum/trader/proc/generate_pool(list/trading_pool)
 	. = list()
 	// Add types
-	for(var/type in trading_pool)
+	for (var/type in trading_pool)
 		var/status = trading_pool[type]
 		if (status & TRADER_THIS_TYPE)
 			. += type
@@ -185,7 +185,7 @@
 		return make_response(TRADER_NOT_ENOUGH, "That's not enough.", 0, FALSE)
 	num = clamp(num, 1, length(trading_items))
 	var/offer_worth = 0
-	for(var/item in offers)
+	for (var/item in offers)
 		var/atom/movable/offer = item
 		var/is_wanted = 0
 		if ((trade_flags & TRADER_WANTED_ONLY) && is_type_in_list(offer, wanted_items))
@@ -254,7 +254,7 @@
 	return make_response(TRADER_COMPLEMENT_SUCCESS, "Thank you!", 0, TRUE)
 
 /datum/trader/proc/trade_quantity(quantity, list/offers, num, turf/location)
-	for(var/offer in offers)
+	for (var/offer in offers)
 		if (istype(offer, /mob))
 			var/text = mob_transfer_message
 			to_chat(offer, replacetext(text, "ORIGIN", origin))
@@ -285,7 +285,7 @@
 
 	var/datum/trade_response/tr = make_response(TRADER_WHAT_WANT, "Hm, I want", 0, TRUE)
 	var/list/want_english = list()
-	for(var/type in wanted_items)
+	for (var/type in wanted_items)
 		var/atom/a = type
 		want_english += initial(a.name)
 	tr.text += " [english_list(want_english)]"
@@ -299,7 +299,7 @@
 
 	var/wanted
 	var/total = 0
-	for(var/offer in offers)
+	for (var/offer in offers)
 		if ((trade_flags & TRADER_WANTED_ONLY) && is_type_in_list(offer,wanted_items))
 			wanted = 1
 		else if ((trade_flags & TRADER_WANTED_ALL) && is_type_in_list(offer,possible_wanted_items))
@@ -309,7 +309,7 @@
 		total += get_buy_price(offer, wanted, skill)
 
 	playsound(get_turf(offers[1]), 'sound/effects/teleport.ogg', 50, 1)
-	for(var/offer in offers)
+	for (var/offer in offers)
 		qdel(offer)
 	return make_response(TRADER_TRADE_COMPLETE, "Thanks for the goods!", total, TRUE)
 

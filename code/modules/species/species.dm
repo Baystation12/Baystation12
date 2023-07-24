@@ -315,7 +315,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	if (!codex_description)
 		codex_description = description
 
-	for(var/token in ALL_CULTURAL_TAGS)
+	for (var/token in ALL_CULTURAL_TAGS)
 
 		var/force_val = force_cultural_info[token]
 		if (force_val)
@@ -345,7 +345,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 	if (LAZYLEN(descriptors))
 		var/list/descriptor_datums = list()
-		for(var/desctype in descriptors)
+		for (var/desctype in descriptors)
 			var/datum/mob_descriptor/descriptor = new desctype
 			descriptor.comparison_offset = descriptors[desctype]
 			descriptor_datums[descriptor.name] = descriptor
@@ -359,20 +359,20 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		breathing_organ = BP_LUNGS
 
 	unarmed_attacks = list()
-	for(var/u_type in unarmed_types)
+	for (var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
 
 	// Modify organ lists if necessary.
 	if (islist(override_organ_types))
-		for(var/ltag in override_organ_types)
+		for (var/ltag in override_organ_types)
 			has_organ[ltag] = override_organ_types[ltag]
 
 	if (islist(override_limb_types))
-		for(var/ltag in override_limb_types)
+		for (var/ltag in override_limb_types)
 			has_limbs[ltag] = list("path" = override_limb_types[ltag])
 
 	//Build organ descriptors
-	for(var/limb_type in has_limbs)
+	for (var/limb_type in has_limbs)
 		var/list/organ_data = has_limbs[limb_type]
 		var/obj/item/organ/limb_path = organ_data["path"]
 		organ_data["descriptor"] = initial(limb_path.name)
@@ -388,7 +388,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 /datum/species/proc/create_organs(mob/living/carbon/human/H) //Handles creation of mob organs.
 
 	H.mob_size = mob_size
-	for(var/obj/item/organ/organ in H.contents)
+	for (var/obj/item/organ/organ in H.contents)
 		if ((organ in H.organs) || (organ in H.internal_organs))
 			qdel(organ)
 
@@ -402,12 +402,12 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	H.organs_by_name = list()
 	H.internal_organs_by_name = list()
 
-	for(var/limb_type in has_limbs)
+	for (var/limb_type in has_limbs)
 		var/list/organ_data = has_limbs[limb_type]
 		var/limb_path = organ_data["path"]
 		new limb_path(H)
 
-	for(var/organ_tag in has_organ)
+	for (var/organ_tag in has_organ)
 		var/organ_type = has_organ[organ_tag]
 		var/obj/item/organ/O = new organ_type(H)
 		if (organ_tag != O.organ_tag)
@@ -415,13 +415,13 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			O.organ_tag = organ_tag
 		H.internal_organs_by_name[organ_tag] = O
 
-	for(var/name in H.organs_by_name)
+	for (var/name in H.organs_by_name)
 		H.organs |= H.organs_by_name[name]
 
-	for(var/name in H.internal_organs_by_name)
+	for (var/name in H.internal_organs_by_name)
 		H.internal_organs |= H.internal_organs_by_name[name]
 
-	for(var/obj/item/organ/O in (H.organs|H.internal_organs))
+	for (var/obj/item/organ/O in (H.organs|H.internal_organs))
 		O.owner = H
 		post_organ_rejuvenate(O, H)
 
@@ -445,13 +445,13 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 /datum/species/proc/add_base_auras(mob/living/carbon/human/H)
 	if (base_auras)
-		for(var/type in base_auras)
+		for (var/type in base_auras)
 			H.add_aura(new type(H))
 
 /datum/species/proc/remove_base_auras(mob/living/carbon/human/H)
 	if (base_auras)
 		var/list/bcopy = base_auras.Copy()
-		for(var/a in H.auras)
+		for (var/a in H.auras)
 			var/obj/aura/A = a
 			if (is_type_in_list(a, bcopy))
 				bcopy -= A.type
@@ -460,13 +460,13 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 /datum/species/proc/remove_inherent_verbs(mob/living/carbon/human/H)
 	if (inherent_verbs)
-		for(var/verb_path in inherent_verbs)
+		for (var/verb_path in inherent_verbs)
 			H.verbs -= verb_path
 	return
 
 /datum/species/proc/add_inherent_verbs(mob/living/carbon/human/H)
 	if (inherent_verbs)
-		for(var/verb_path in inherent_verbs)
+		for (var/verb_path in inherent_verbs)
 			H.verbs |= verb_path
 	return
 
@@ -548,7 +548,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	if (!ignore_antag && H.mind && !player_is_antag(H.mind))
 		return 0
 
-	for(var/datum/unarmed_attack/attack in unarmed_attacks)
+	for (var/datum/unarmed_attack/attack in unarmed_attacks)
 		if (!attack.is_usable(H))
 			continue
 		if (attack.shredding)
@@ -590,7 +590,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	H.set_fullscreen(H.eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
 	H.set_fullscreen(H.druggy, "high", /obj/screen/fullscreen/high)
 
-	for(var/overlay in H.equipment_overlays)
+	for (var/overlay in H.equipment_overlays)
 		H.client.screen |= overlay
 
 	return 1
@@ -632,7 +632,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 //Mostly for toasters
 /datum/species/proc/handle_limbs_setup(mob/living/carbon/human/H)
-	for(var/thing in H.organs)
+	for (var/thing in H.organs)
 		post_organ_rejuvenate(thing, H)
 
 // Impliments different trails for species depending on if they're wearing shoes.
@@ -670,7 +670,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	if (target.a_intent == I_HELP)
 		state_mod -= 30
 	//Handle unintended consequences
-	for(var/obj/item/I in holding)
+	for (var/obj/item/I in holding)
 		var/hurt_prob = max(holding[I] - 3*skill_mod, 0)
 		if (prob(hurt_prob) && I.on_disarm_attempt(target, attacker))
 			return
@@ -693,7 +693,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			return
 
 		//Actually disarm them
-		for(var/obj/item/I in holding)
+		for (var/obj/item/I in holding)
 			if (I && target.unEquip(I))
 				target.visible_message(SPAN_DANGER("[attacker] has disarmed [target]!"))
 				playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
@@ -720,7 +720,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	if (!L)
 		L = list()
 		LAZYSET(hair_styles, type, L)
-		for(var/hairstyle in GLOB.hair_styles_list)
+		for (var/hairstyle in GLOB.hair_styles_list)
 			var/datum/sprite_accessory/S = GLOB.hair_styles_list[hairstyle]
 			if (S.species_allowed && !(get_bodytype() in S.species_allowed))
 				continue
@@ -741,7 +741,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		facial_hair_style_by_gender = list()
 		LAZYSET(facial_hair_styles_by_species, gender, facial_hair_style_by_gender)
 
-		for(var/facialhairstyle in GLOB.facial_hair_styles_list)
+		for (var/facialhairstyle in GLOB.facial_hair_styles_list)
 			var/datum/sprite_accessory/S = GLOB.facial_hair_styles_list[facialhairstyle]
 			if (gender == MALE && S.gender == FEMALE)
 				continue
@@ -812,7 +812,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				dat += "</br><b>Has a plantlike physiology.</b>"
 			if (slowdown)
 				dat += "</br><b>Moves [slowdown > 0 ? "slower" : "faster"] than most.</b>"
-			for(var/kind in damage_types)
+			for (var/kind in damage_types)
 				if (damage_types[kind] > 1)
 					dat += "</br><b>Vulnerable to [kind].</b>"
 				else if (damage_types[kind] < 1)
@@ -853,7 +853,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 /datum/species/proc/get_pain_emote(mob/living/carbon/human/H, pain_power)
 	if (!(species_flags & SPECIES_FLAG_NO_PAIN))
 		return
-	for(var/pain_emotes in pain_emotes_with_pain_level)
+	for (var/pain_emotes in pain_emotes_with_pain_level)
 		var/pain_level = pain_emotes_with_pain_level[pain_emotes]
 		if (pain_level >= pain_power)
 			// This assumes that if a pain-level has been defined it also has a list of emotes to go with it

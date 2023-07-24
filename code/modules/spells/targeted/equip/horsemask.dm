@@ -25,7 +25,7 @@
 
 /spell/targeted/equip_item/horsemask/cast(list/targets, mob/user = usr)
 	..()
-	for(var/mob/living/target in targets)
+	for (var/mob/living/target in targets)
 		target.visible_message(	SPAN_DANGER("[target]'s face  lights up in fire, and after the event a horse's head takes its place!"), \
 								SPAN_DANGER("Your face burns up, and shortly after the fire you realise you have the face of a horse!"))
 		target.flash_eyes()

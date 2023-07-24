@@ -61,7 +61,7 @@
 	overlays.Cut()
 	if (LAZYLEN(decals))
 		overlays += decals
-	for(var/direction in GLOB.cardinal)
+	for (var/direction in GLOB.cardinal)
 		var/turf/turf_to_check = get_step(src,direction)
 		if (!istype(turf_to_check, type))
 			var/image/rock_side = image(icon, "edge[pick(0,1,2)]", dir = turn(direction, 180))

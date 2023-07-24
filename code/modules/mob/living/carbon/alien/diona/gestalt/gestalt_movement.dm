@@ -14,7 +14,7 @@
 	else if (istype(AM, /obj/structure/diona_gestalt) && AM != src) // Combine!?
 		var/obj/structure/diona_gestalt/gestalt = AM
 		if (LAZYLEN(gestalt.nymphs))
-			for(var/nimp in gestalt.nymphs)
+			for (var/nimp in gestalt.nymphs)
 				roll_up_atom(nimp, silent = TRUE)
 			gestalt.nymphs.Cut()
 		var/gestalt_loc = gestalt.loc
@@ -30,7 +30,7 @@
 /obj/structure/diona_gestalt/Move()
 	. = ..()
 	if (.)
-		for(var/atom/movable/AM in loc)
+		for (var/atom/movable/AM in loc)
 			if (can_roll_up_atom(AM))
 				roll_up_atom(AM)
 

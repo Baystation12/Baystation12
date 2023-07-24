@@ -6,7 +6,7 @@
 	if (!.)
 		return
 	var/dat = "<B>Admin Log<HR></B>"
-	for(var/l in GLOB.admin_log)
+	for (var/l in GLOB.admin_log)
 		dat += "<li>[l]</li>"
 	if (!length(GLOB.admin_log))
 		dat += "No-one has done anything this round!"

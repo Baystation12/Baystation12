@@ -26,7 +26,7 @@
 /obj/item/device/radio/headset/Initialize()
 	. = ..()
 	internal_channels.Cut()
-	for(var/T in encryption_keys)
+	for (var/T in encryption_keys)
 		if (ispath(T))
 			encryption_keys = new T(src)
 	if (ks1type)
@@ -385,7 +385,7 @@
 	src.channels = list()
 	src.translate_binary = 0
 	src.syndie = 0
-	for(var/obj/ekey in encryption_keys)
+	for (var/obj/ekey in encryption_keys)
 		import_key_data(ekey)
 	for (var/ch_name in channels)
 		if (!radio_controller)
@@ -399,7 +399,7 @@
 /obj/item/device/radio/headset/proc/import_key_data(obj/item/device/encryptionkey/key)
 	if (!key)
 		return
-	for(var/ch_name in key.channels)
+	for (var/ch_name in key.channels)
 		if (ch_name in src.channels)
 			continue
 		src.channels[ch_name] = key.channels[ch_name]
@@ -410,7 +410,7 @@
 
 /obj/item/device/radio/headset/proc/setupRadioDescription()
 	var/radio_text = ""
-	for(var/i = 1 to length(channels))
+	for (var/i = 1 to length(channels))
 		var/channel = channels[i]
 		var/key = get_radio_key_from_channel(channel)
 		radio_text += "[key] - [channel]"

@@ -49,7 +49,7 @@
 
 /obj/item/robot_module/flying/surveyor/finalize_synths()
 	. = ..()
-	for(var/flag_type in flag_types)
+	for (var/flag_type in flag_types)
 		equipment += new flag_type(src)
 
 /obj/item/robot_module/flying/surveyor/respawn_consumable(mob/living/silicon/robot/R, amount)
@@ -60,7 +60,7 @@
 	if (LAZYLEN(gun.shells) < gun.max_shells)
 		gun.load(new /obj/item/net_shell)
 
-	for(var/flagtype in flag_types)
+	for (var/flagtype in flag_types)
 		var/obj/item/stack/flag/flag = locate(flagtype) in equipment
 		if (!flag)
 			flag = new flagtype

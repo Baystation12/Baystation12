@@ -53,16 +53,16 @@
 
 	var/list/skill_data = list()
 	var/singleton/hierarchy/skill/skill = GET_SINGLETON(/singleton/hierarchy/skill)
-	for(var/singleton/hierarchy/skill/V in skill.children)
+	for (var/singleton/hierarchy/skill/V in skill.children)
 		var/list/skill_cat = list()
 		skill_cat["name"] = V.name
 		var/list/skills_in_cat = list()
-		for(var/singleton/hierarchy/skill/S in V.children)
+		for (var/singleton/hierarchy/skill/S in V.children)
 			var/offset = S.prerequisites ? S.prerequisites[S.parent.type] - 1 : 0
 			if (hide_unskilled && (get_value(S.type) + offset == SKILL_MIN))
 				continue
 			skills_in_cat += list(get_nano_row(S))
-			for(var/singleton/hierarchy/skill/perk in S.children)
+			for (var/singleton/hierarchy/skill/perk in S.children)
 				skills_in_cat += list(get_nano_row(perk))
 		if (length(skills_in_cat))
 			skill_cat["skills"] = skills_in_cat
@@ -78,16 +78,16 @@
 	skill_item["available"] = check_prerequisites(S.type)
 	var/offset = S.prerequisites ? S.prerequisites[S.parent.type] - 1 : 0
 	var/list/levels = list()
-	for(var/i in 1 to offset)
+	for (var/i in 1 to offset)
 		levels += list(list("blank" = 1))
-	for(var/i in 1 to length(S.levels))
+	for (var/i in 1 to length(S.levels))
 		var/list/level = list()
 		level["blank"] = 0
 		level["val"] = i
 		level["name"] = S.levels[i]
 		level["selected"] = (i == value)
 		levels += list(level)
-	for(var/i in (length(levels) + 1) to SKILL_MAX)
+	for (var/i in (length(levels) + 1) to SKILL_MAX)
 		levels += list(list("blank" = 1))
 	skill_item["levels"] = levels
 	return skill_item
@@ -96,7 +96,7 @@
 	var/singleton/hierarchy/skill/S = GET_SINGLETON(skill_type)
 	if (!S.prerequisites)
 		return TRUE
-	for(var/prereq_type in S.prerequisites)
+	for (var/prereq_type in S.prerequisites)
 		if (!(get_value(prereq_type) >= S.prerequisites[prereq_type]))
 			return FALSE
 	return TRUE
@@ -115,7 +115,7 @@ The generic antag version.
 	.["can_choose"] = can_choose()
 	var/list/selection_data = list()
 	var/singleton/hierarchy/skill/skill = GET_SINGLETON(/singleton/hierarchy/skill)
-	for(var/i in 1 to length(max_choices))
+	for (var/i in 1 to length(max_choices))
 		var/choices = max_choices[i]
 		if (!choices)
 			continue
@@ -124,7 +124,7 @@ The generic antag version.
 		level_data["level"] = i
 		var/selected = LAZYACCESS(currently_selected, i)
 		level_data["selected"] = list()
-		for(var/skill_type in selected)
+		for (var/skill_type in selected)
 			var/singleton/hierarchy/skill/S = skill_type // False type.
 			level_data["selected"] += list(list("name" = initial(S.name), "ref" = "\ref[skill_type]"))
 		level_data["remaining"] = choices - length(selected)
@@ -142,7 +142,7 @@ The generic antag version.
 			return 1
 		var/level = text2num(href_list["add_skill"])
 		var/list/choices = list()
-		for(var/singleton/hierarchy/skill/S in GLOB.skills)
+		for (var/singleton/hierarchy/skill/S in GLOB.skills)
 			if (can_select(S.type, level))
 				choices[S.name] = S.type
 		var/choice = input(usr, "Which skill would you like to add?", "Add Skill") as null|anything in choices
@@ -206,7 +206,7 @@ The generic antag version.
 	currently_selected[level] = selection
 
 /datum/nano_module/skill_ui/antag/proc/deselect(skill_type)
-	for(var/i in 1 to length(currently_selected))
+	for (var/i in 1 to length(currently_selected))
 		var/list/selection = currently_selected[i]
 		LAZYREMOVE(selection, skill_type) // Can't send list[key] into the macro.
 		currently_selected[i] = selection
@@ -215,8 +215,8 @@ The generic antag version.
 	if (!skillset || !skillset.owner)
 		return
 	var/list/buff = list()
-	for(var/i in 1 to length(currently_selected))
-		for(var/skill_type in currently_selected[i])
+	for (var/i in 1 to length(currently_selected))
+		for (var/skill_type in currently_selected[i])
 			buff[skill_type] = i - skillset.get_value(skill_type)
 	if (skillset.owner.buff_skill(buff, buff_type = buff_type))
 		currently_selected = null
@@ -261,12 +261,12 @@ Admin version, with debugging options.
 		return 1
 
 	if (href_list["reset_antag"])
-		for(var/datum/skill_buff/buff in skillset.owner.fetch_buffs_of_type(/datum/skill_buff/antag))
+		for (var/datum/skill_buff/buff in skillset.owner.fetch_buffs_of_type(/datum/skill_buff/antag))
 			buff.remove()
 		log_and_message_admins("SKILLS: [key_name_admin(skillset.owner)] has been granted a reset of antag skills.")
 		return 1
 	if (href_list["reset_buffs"])
-		for(var/datum/skill_buff/buff in skillset.owner.fetch_buffs_of_type(/datum/skill_buff))
+		for (var/datum/skill_buff/buff in skillset.owner.fetch_buffs_of_type(/datum/skill_buff))
 			buff.remove()
 		log_and_message_admins("SKILLS: All skill buffs have been removed from [key_name_admin(skillset.owner)].")
 		return 1

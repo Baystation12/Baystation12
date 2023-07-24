@@ -17,7 +17,7 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 
 /datum/category_group/player_setup_category/background_preferences/content(mob/user)
 	. = ""
-	for(var/datum/category_item/player_setup_item/player_setup_item in items)
+	for (var/datum/category_item/player_setup_item/player_setup_item in items)
 		. += "[player_setup_item.content(user)]<br>"
 
 /datum/category_group/player_setup_category/occupation_preferences
@@ -65,28 +65,28 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	return ..()
 
 /datum/category_collection/player_setup_collection/proc/sanitize_setup()
-	for(var/datum/category_group/player_setup_category/PS in categories)
+	for (var/datum/category_group/player_setup_category/PS in categories)
 		PS.sanitize_setup()
 
 /datum/category_collection/player_setup_collection/proc/load_character(datum/pref_record_reader/R)
-	for(var/datum/category_group/player_setup_category/PS in categories)
+	for (var/datum/category_group/player_setup_category/PS in categories)
 		PS.load_character(R)
 
 /datum/category_collection/player_setup_collection/proc/save_character(datum/pref_record_writer/W)
-	for(var/datum/category_group/player_setup_category/PS in categories)
+	for (var/datum/category_group/player_setup_category/PS in categories)
 		PS.save_character(W)
 
 /datum/category_collection/player_setup_collection/proc/load_preferences(datum/pref_record_reader/R)
-	for(var/datum/category_group/player_setup_category/PS in categories)
+	for (var/datum/category_group/player_setup_category/PS in categories)
 		PS.load_preferences(R)
 
 /datum/category_collection/player_setup_collection/proc/save_preferences(datum/pref_record_writer/W)
-	for(var/datum/category_group/player_setup_category/PS in categories)
+	for (var/datum/category_group/player_setup_category/PS in categories)
 		PS.save_preferences(W)
 
 /datum/category_collection/player_setup_collection/proc/header()
 	var/dat = ""
-	for(var/datum/category_group/player_setup_category/PS in categories)
+	for (var/datum/category_group/player_setup_category/PS in categories)
 		if (PS == selected_category)
 			dat += "[PS.name] "	// TODO: Check how to properly mark a href/button selected in a classic browser window
 		else
@@ -124,37 +124,37 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	return sort_order
 
 /datum/category_group/player_setup_category/proc/sanitize_setup()
-	for(var/datum/category_item/player_setup_item/player_setup_item in items)
+	for (var/datum/category_item/player_setup_item/player_setup_item in items)
 		player_setup_item.sanitize_preferences()
-	for(var/datum/category_item/player_setup_item/player_setup_item in items)
+	for (var/datum/category_item/player_setup_item/player_setup_item in items)
 		player_setup_item.sanitize_character()
 
 /datum/category_group/player_setup_category/proc/load_character(savefile/S)
-	for(var/datum/category_item/player_setup_item/player_setup_item in items)
+	for (var/datum/category_item/player_setup_item/player_setup_item in items)
 		player_setup_item.load_character(S)
 
 /datum/category_group/player_setup_category/proc/save_character(savefile/S)
 	// Sanitize all data, then save it
-	for(var/datum/category_item/player_setup_item/player_setup_item in items)
+	for (var/datum/category_item/player_setup_item/player_setup_item in items)
 		player_setup_item.sanitize_character()
-	for(var/datum/category_item/player_setup_item/player_setup_item in items)
+	for (var/datum/category_item/player_setup_item/player_setup_item in items)
 		player_setup_item.save_character(S)
 
 /datum/category_group/player_setup_category/proc/load_preferences(savefile/S)
-	for(var/datum/category_item/player_setup_item/player_setup_item in items)
+	for (var/datum/category_item/player_setup_item/player_setup_item in items)
 		player_setup_item.load_preferences(S)
 
 /datum/category_group/player_setup_category/proc/save_preferences(savefile/S)
-	for(var/datum/category_item/player_setup_item/player_setup_item in items)
+	for (var/datum/category_item/player_setup_item/player_setup_item in items)
 		player_setup_item.sanitize_preferences()
-	for(var/datum/category_item/player_setup_item/player_setup_item in items)
+	for (var/datum/category_item/player_setup_item/player_setup_item in items)
 		player_setup_item.save_preferences(S)
 
 /datum/category_group/player_setup_category/proc/content(mob/user)
 	. = "<table style='width:100%'><tr style='vertical-align:top'><td style='width:50%'>"
 	var/current = 0
 	var/wrap_index = item_wrap_index || length(items) / 2
-	for(var/datum/category_item/player_setup_item/player_setup_item in items)
+	for (var/datum/category_item/player_setup_item/player_setup_item in items)
 		if (wrap_index && current++ >= wrap_index)
 			wrap_index = 0
 			. += "</td><td></td><td style='width:50%'>"
@@ -162,7 +162,7 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	. += "</td></tr></table>"
 
 /datum/category_group/player_setup_category/occupation_preferences/content(mob/user)
-	for(var/datum/category_item/player_setup_item/player_setup_item in items)
+	for (var/datum/category_item/player_setup_item/player_setup_item in items)
 		. += "[player_setup_item.content(user)]<br>"
 
 /**********************
@@ -249,7 +249,7 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 
 /datum/category_item/player_setup_item/proc/preference_mob()
 	if (!pref.client)
-		for(var/client/C)
+		for (var/client/C)
 			if (C.ckey == pref.client_ckey)
 				pref.client = C
 				break

@@ -11,9 +11,9 @@
 	if (!length(second.req_access))
 		return first.req_access.Copy()
 	. = list()
-	for(var/requirement in first.req_access)
+	for (var/requirement in first.req_access)
 		add_access_requirement(., get_minimal_requirement(second.req_access, requirement))
-	for(var/requirement in second.req_access)
+	for (var/requirement in second.req_access)
 		add_access_requirement(., get_minimal_requirement(first.req_access, requirement))
 
 // Given two areas, find the minimal req_access needed such that req_access >= (area access) + (other area access)
@@ -24,7 +24,7 @@
 	if (!length(second.req_access))
 		return first.req_access.Copy()
 	. = first.req_access.Copy()
-	for(var/requirement in second.req_access)
+	for (var/requirement in second.req_access)
 		add_access_requirement(., requirement)
 
 // Comes up with the minimal thing to add to the first argument so that the new list guarantees that the access requirement in the second argument is satisfied.
@@ -35,12 +35,12 @@
 		return
 	if (!islist(requirement))
 		return (requirement in req_access) ? null : requirement
-	for(var/req in req_access)
+	for (var/req in req_access)
 		if (req in requirement)
 			return // have one of the requirements, and these use OR, so we're good
 		if (islist(req))
 			var/fully_contained = TRUE // In this case we check if we are already requiring something more stringent than the new thing.
-			for(var/one_req in req)
+			for (var/one_req in req)
 				if (!(one_req in requirement))
 					fully_contained = FALSE
 					break

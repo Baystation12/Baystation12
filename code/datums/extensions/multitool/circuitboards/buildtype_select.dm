@@ -6,7 +6,7 @@
 	var/dat = list()
 	dat += "<b>Select Built Machine:</b><br>"
 	dat += "<table>"
-	for(var/path in board.get_buildable_types())
+	for (var/path in board.get_buildable_types())
 		var/obj/thing = path
 		dat += "<tr>"
 		if (path == board.build_path)

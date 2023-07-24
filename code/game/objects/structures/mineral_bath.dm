@@ -113,7 +113,7 @@
 
 		// Replace limbs for crystalline species.
 		if ((H.species.name == SPECIES_ADHERENT || H.species.name == SPECIES_GOLEM) && prob(10))
-			for(var/limb_type in H.species.has_limbs)
+			for (var/limb_type in H.species.has_limbs)
 				var/obj/item/organ/external/E = H.organs_by_name[limb_type]
 				if (E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
 					E.removed()
@@ -132,7 +132,7 @@
 
 		// Repair crystalline internal organs.
 		if (prob(10))
-			for(var/thing in H.internal_organs)
+			for (var/thing in H.internal_organs)
 				var/obj/item/organ/internal/I = thing
 				if (BP_IS_CRYSTAL(I) && I.damage)
 					I.heal_damage(rand(3,5))
@@ -141,10 +141,10 @@
 
 		// Repair robotic external organs.
 		if (!repaired_organ && prob(25))
-			for(var/thing in H.organs)
+			for (var/thing in H.organs)
 				var/obj/item/organ/external/E = thing
 				if (BP_IS_ROBOTIC(E))
-					for(var/obj/implanted_object in E.implants)
+					for (var/obj/implanted_object in E.implants)
 						if (!istype(implanted_object,/obj/item/implant) && !istype(implanted_object,/obj/item/organ/internal/augment) && prob(25))	// We don't want to remove REAL implants. Just shrapnel etc.
 							E.implants -= implanted_object
 							to_chat(H, SPAN_NOTICE("The mineral-rich bath dissolves the [implanted_object.name]."))

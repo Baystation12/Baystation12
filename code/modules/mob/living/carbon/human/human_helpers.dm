@@ -109,7 +109,7 @@
 	var/search_id = 1
 	var/search_pda = 1
 
-	for(var/A in searching)
+	for (var/A in searching)
 		if (search_id && istype(A,/obj/item/card/id))
 			var/obj/item/card/id/ID = A
 			if (ID.registered_name == old_name)
@@ -181,7 +181,7 @@
 	next_sonar_ping += 10 SECONDS
 	var/heard_something = FALSE
 	to_chat(src, SPAN_NOTICE("You take a moment to listen in to your environment..."))
-	for(var/mob/living/L in range(client.view, src))
+	for (var/mob/living/L in range(client.view, src))
 		var/turf/T = get_turf(L)
 		if (!T || L == src || L.stat == DEAD || is_below_sound_pressure(T))
 			continue
@@ -327,7 +327,7 @@
 		return FALSE
 
 	var/list/rogue_entries = list()
-	for(var/entry in cloaking_sources)
+	for (var/entry in cloaking_sources)
 		var/weakref/W = entry
 		if (!W.resolve())
 			cloaking_sources -= W
@@ -347,7 +347,7 @@
 
 /mob/living/carbon/human/proc/has_meson_effect()
 	. = FALSE
-	for(var/obj/screen/equipment_screen in equipment_overlays) // check through our overlays to see if we have any source of the meson overlay
+	for (var/obj/screen/equipment_screen in equipment_overlays) // check through our overlays to see if we have any source of the meson overlay
 		if (equipment_screen.icon_state == "meson_hud")
 			return TRUE
 

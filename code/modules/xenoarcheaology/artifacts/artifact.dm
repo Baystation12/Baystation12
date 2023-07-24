@@ -60,7 +60,7 @@
 
 /obj/machinery/artifact/proc/check_triggers(trigger_proc)
 	. = FALSE
-	for(var/datum/artifact_effect/effect in list(my_effect, secondary_effect))
+	for (var/datum/artifact_effect/effect in list(my_effect, secondary_effect))
 		if (!effect.trigger)
 			return
 
@@ -94,7 +94,7 @@
 	if (enivonment.return_pressure() >= SOUND_MINIMUM_PRESSURE)
 		check_triggers(/datum/artifact_trigger/proc/on_gas_exposure, enivonment)
 
-	for(var/datum/artifact_effect/effect in list(my_effect, secondary_effect))
+	for (var/datum/artifact_effect/effect in list(my_effect, secondary_effect))
 		effect.process()
 
 /obj/machinery/artifact/attack_robot(mob/living/user)

@@ -114,9 +114,9 @@ var/global/list/outfits_singletons_by_type_
 		assignment = W.assignment
 	equip_pda(H, rank, assignment, equip_adjustments)
 
-	for(var/path in backpack_contents)
+	for (var/path in backpack_contents)
 		var/number = backpack_contents[path]
-		for(var/i=0,i<number,i++)
+		for (var/i=0,i<number,i++)
 			H.equip_to_slot_or_store_or_drop(new path(H), slot_in_backpack)
 
 	if (!(OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP & equip_adjustments))
@@ -124,7 +124,7 @@ var/global/list/outfits_singletons_by_type_
 	H.update_icons()
 
 	// We set ID info last to ensure the ID photo is as correct as possible.
-	for(var/id_card in id_cards)
+	for (var/id_card in id_cards)
 		H.set_id_info(id_card)
 	return TRUE
 
@@ -210,7 +210,7 @@ var/global/list/outfits_singletons_by_type_
 	if (OUTFIT_ADJUSTMENT_SKIP_ID_PDA & equip_adjustments)
 		return
 	var/created_cards = list()
-	for(var/id_type in id_types)
+	for (var/id_type in id_types)
 		var/obj/item/card/id/W = new id_type(H)
 		if (id_desc)
 			W.desc = id_desc

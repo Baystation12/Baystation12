@@ -59,7 +59,7 @@
 	data["id"] = plant ? plant.id_tag : "unset"
 	data["status"] = (use_power >= POWER_USE_ACTIVE)
 	data["materials"] = list()
-	for(var/mat in stored)
+	for (var/mat in stored)
 		var/material/material = SSmaterials.get_material_by_name(mat)
 		if (material)
 			var/sheets = floor(stored[mat]/(material.units_per_sheet * 1.5))
@@ -78,10 +78,10 @@
 
 	if (use_power >= POWER_USE_ACTIVE)
 		if (harvest_from && harvest_from.owned_field)
-			for(var/mat in harvest_from.owned_field.reactants)
+			for (var/mat in harvest_from.owned_field.reactants)
 				if (SSmaterials.materials_by_name[mat] && !stored[mat])
 					stored[mat] = 0
-			for(var/mat in harvesting)
+			for (var/mat in harvesting)
 				if (!SSmaterials.materials_by_name[mat] || !harvest_from.owned_field.reactants[mat])
 					harvesting -= mat
 				else

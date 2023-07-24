@@ -76,7 +76,7 @@
 				var/list/local_total = typesof(layout)
 				if (alert("Do you want to only add the subtypes of this item?",,"No","Yes") == "Yes")
 					local_total -= layout
-				for(var/a in local_total)
+				for (var/a in local_total)
 					current_list[a] = chance
 			else
 				current_list[layout] = chance
@@ -97,8 +97,8 @@
 
 	var/datum/random_map/winding_dungeon/W = /datum/random_map/winding_dungeon
 
-	for(var/x in 1 to vars["limit_x"])
-		for(var/y in 1 to vars["limit_y"])
+	for (var/x in 1 to vars["limit_x"])
+		for (var/y in 1 to vars["limit_y"])
 			sleep(-1)
 			var/turf/T = locate(usr.x+x-1,usr.y+y-1,usr.z)
 			if (!T)

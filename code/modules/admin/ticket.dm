@@ -91,18 +91,18 @@ var/global/list/ticket_panels = list()
 /datum/ticket/proc/assigned_admin_ckeys()
 	. = list()
 
-	for(var/datum/client_lite/assigned_admin in assigned_admins)
+	for (var/datum/client_lite/assigned_admin in assigned_admins)
 		. |= assigned_admin.ckey
 
 /datum/ticket/proc/assigned_admin_keys()
 	. = list()
 
-	for(var/datum/client_lite/assigned_admin in assigned_admins)
+	for (var/datum/client_lite/assigned_admin in assigned_admins)
 		. |= assigned_admin.key
 
 /proc/get_open_ticket_by_client(datum/client_lite/owner)
 	RETURN_TYPE(/datum/ticket)
-	for(var/datum/ticket/ticket in tickets)
+	for (var/datum/ticket/ticket in tickets)
 		if (ticket.owner.ckey == owner.ckey && (ticket.status == TICKET_OPEN || ticket.status == TICKET_ASSIGNED))
 			return ticket // there should only be one open ticket by a client at a time, so no need to keep looking
 
@@ -113,7 +113,7 @@ var/global/list/ticket_panels = list()
 	if (world.time - last_message_time > 30 MINUTES)
 		return FALSE
 
-	for(var/datum/client_lite/admin in assigned_admins)
+	for (var/datum/client_lite/admin in assigned_admins)
 		var/client/admin_client = client_by_ckey(admin.ckey)
 		if (admin_client && !admin_client.is_afk())
 			return 1
@@ -145,7 +145,7 @@ var/global/list/ticket_panels = list()
 	var/list/dat = list()
 
 	var/list/ticket_dat = list()
-	for(var/id = length(tickets), id >= 1, id--)
+	for (var/id = length(tickets), id >= 1, id--)
 		var/datum/ticket/ticket = tickets[id]
 		if (C.holder || ticket.owner.ckey == C.ckey)
 			var/client/owner_client = client_by_ckey(ticket.owner.ckey)
@@ -192,7 +192,7 @@ var/global/list/ticket_panels = list()
 			dat += "<div style='width:50%;float:left;'><p><b>\[<a href='byond://?src=\ref[src];action=unview;'>X</a>\] Messages for ticket #[open_ticket.id]:</b></p>"
 
 			var/list/msg_dat = list()
-			for(var/datum/ticket_msg/msg in open_ticket.msgs)
+			for (var/datum/ticket_msg/msg in open_ticket.msgs)
 				var/msg_to = msg.msg_to ? msg.msg_to : "Adminhelp"
 				msg_dat += "<li>\[[msg.time_stamp]\] [msg.msg_from] -> [msg_to]: [C.holder ? generate_ahelp_key_words(C.mob, msg.msg) : msg.msg]</li>"
 
@@ -248,7 +248,7 @@ var/global/list/ticket_panels = list()
 			else if (ticket.status == TICKET_ASSIGNED)
 				// manually check that the target client exists here as to not spam the usr for each logged out admin on the ticket
 				var/admin_found = 0
-				for(var/datum/client_lite/admin in ticket.assigned_admins)
+				for (var/datum/client_lite/admin in ticket.assigned_admins)
 					var/client/admin_client = client_by_ckey(admin.ckey)
 					if (admin_client)
 						admin_found = 1
@@ -271,7 +271,7 @@ var/global/list/ticket_panels = list()
 	ticket_panel.ticket_panel_window.open()
 
 /proc/update_ticket_panels()
-	for(var/client/C in ticket_panels)
+	for (var/client/C in ticket_panels)
 		var/datum/ticket_panel/ticket_panel = ticket_panels[C]
 		if (C.mob != ticket_panel.ticket_panel_window.user)
 			C.view_tickets()

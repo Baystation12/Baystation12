@@ -36,15 +36,15 @@
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/door_timer/LateInitialize()
-	for(var/obj/machinery/door/window/brigdoor/M in SSmachines.machinery)
+	for (var/obj/machinery/door/window/brigdoor/M in SSmachines.machinery)
 		if (M.id == src.id)
 			targets += M
 
-	for(var/obj/machinery/flasher/F in SSmachines.machinery)
+	for (var/obj/machinery/flasher/F in SSmachines.machinery)
 		if (F.id_tag == src.id)
 			targets += F
 
-	for(var/obj/structure/closet/secure_closet/brig/C in world)
+	for (var/obj/structure/closet/secure_closet/brig/C in world)
 		if (C.id == src.id)
 			targets += C
 
@@ -92,12 +92,12 @@
 	//set timing
 	timing = 1
 
-	for(var/obj/machinery/door/window/brigdoor/door in targets)
+	for (var/obj/machinery/door/window/brigdoor/door in targets)
 		if (door.density)	continue
 		spawn(0)
 			door.close()
 
-	for(var/obj/structure/closet/secure_closet/brig/C in targets)
+	for (var/obj/structure/closet/secure_closet/brig/C in targets)
 		if (C.broken)	continue
 		if (C.opened && !C.close())	continue
 		C.locked = TRUE
@@ -118,12 +118,12 @@
 	if (broadcast_to_huds)
 		broadcast_security_hud_message("The timer for [id] has expired.", src)
 
-	for(var/obj/machinery/door/window/brigdoor/door in targets)
+	for (var/obj/machinery/door/window/brigdoor/door in targets)
 		if (!door.density)	continue
 		spawn(0)
 			door.open()
 
-	for(var/obj/structure/closet/secure_closet/brig/C in targets)
+	for (var/obj/structure/closet/secure_closet/brig/C in targets)
 		if (C.broken)	continue
 		if (C.opened)	continue
 		C.locked = 0
@@ -161,7 +161,7 @@
 
 	var/list/flashes = list()
 
-	for(var/obj/machinery/flasher/flash  in targets)
+	for (var/obj/machinery/flasher/flash  in targets)
 		var/list/flashdata = list()
 		if (flash.last_flash && (flash.last_flash + 150) > world.time)
 			flashdata["status"] = 0
@@ -194,7 +194,7 @@
 		. =  TOPIC_REFRESH
 
 	if (href_list["flash"])
-		for(var/obj/machinery/flasher/F in targets)
+		for (var/obj/machinery/flasher/F in targets)
 			F.flash()
 		. =  TOPIC_REFRESH
 
@@ -252,7 +252,7 @@
 	var/image/I = image('icons/obj/status_display.dmi', "blank")
 	var/len = length(tn)
 
-	for(var/d = 1 to len)
+	for (var/d = 1 to len)
 		var/char = copytext(tn, len-d+1, len-d+2)
 		if (char == " ")
 			continue

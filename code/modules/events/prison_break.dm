@@ -23,7 +23,7 @@
 
 
 /datum/event/prison_break/start()
-	for(var/area/A in world)
+	for (var/area/A in world)
 		if (is_type_in_list(A,areaType) && !is_type_in_list(A,areaNotType))
 			areas += A
 
@@ -33,7 +33,7 @@
 		var/obj/machinery/message_server/MS = get_message_server()
 		if (MS)
 			MS.send_rc_message("Engineering", my_department, rc_message, "", "", 2)
-		for(var/mob/living/silicon/ai/A in GLOB.player_list)
+		for (var/mob/living/silicon/ai/A in GLOB.player_list)
 			to_chat(A, SPAN_DANGER("Malicious program detected in the [english_list(areaName)] lighting and airlock control systems by [my_department]."))
 
 	else
@@ -45,13 +45,13 @@
 	if (activeFor == releaseWhen)
 		if (areas && length(areas) > 0)
 			var/obj/machinery/power/apc/theAPC = null
-			for(var/area/A in areas)
+			for (var/area/A in areas)
 				theAPC = A.get_apc()
 				if (theAPC && theAPC.operating)	//If the apc's off, it's a little hard to overload the lights.
-					for(var/obj/machinery/light/L in A)
+					for (var/obj/machinery/light/L in A)
 						L.flicker(10)
 
 
 /datum/event/prison_break/end()
-	for(var/area/A in shuffle(areas))
+	for (var/area/A in shuffle(areas))
 		A.prison_break()

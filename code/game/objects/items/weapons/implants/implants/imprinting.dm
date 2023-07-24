@@ -18,7 +18,7 @@
 	It is HIGLY ILLEGAL and the seller does NOT endorse use of this device in such way.
 	Any amount of "Mind-Breaker"(TM) present in bloodstream will trigger this side-effect.<BR>"}
 	. += "<HR><B>Instructions:</B><BR>"
-	for(var/i = 1 to length(instructions))
+	for (var/i = 1 to length(instructions))
 		. += "- [instructions[i]] <A href='byond://?src=\ref[src];edit=[i]'>Edit</A> <A href='byond://?src=\ref[src];del=[i]'>Remove</A><br>"
 	. += "<A href='byond://?src=\ref[src];add=1'>Add</A>"
 
@@ -60,7 +60,7 @@
 		. += "[SPAN_DANGER("The fog in your head clears, and you remember some important things. You hold following things as deep convictions, almost like synthetics' laws:")]<br>"
 	else
 		. += "[SPAN_NOTICE("You hear an annoying voice in the back of your head. The things it keeps reminding you of:")]<br>"
-	for(var/thing in instructions)
+	for (var/thing in instructions)
 		. += "- [thing]<br>"
 	. = JOINTEXT(.)
 

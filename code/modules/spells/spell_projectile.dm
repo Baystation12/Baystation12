@@ -16,7 +16,7 @@
 	var/list/trails = new()
 
 /obj/item/projectile/spell_projectile/Destroy()
-	for(var/trail in trails)
+	for (var/trail in trails)
 		qdel(trail)
 	carried = null
 	return ..()

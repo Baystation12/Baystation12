@@ -53,7 +53,7 @@
 			access_edit = list(access_edit)
 		override ? (src.access_edit = list(access_edit)) : (src.access_edit += list(access_edit))
 	if (recursive)
-		for(var/datum/report_field/field in fields)
+		for (var/datum/report_field/field in fields)
 			field.set_access(access, access_edit, override)
 
 /// Strongly recommended to use these procs to check for access. They can take access values (numbers) or lists of values.
@@ -67,12 +67,12 @@
 
 /// Looking up fields. Names might not be unique unless you ensure otherwise.
 /datum/computer_file/report/proc/field_from_ID(ID)
-	for(var/datum/report_field/field in fields)
+	for (var/datum/report_field/field in fields)
 		if (field.ID == ID)
 			return field
 
 /datum/computer_file/report/proc/field_from_name(name)
-	for(var/datum/report_field/field in fields)
+	for (var/datum/report_field/field in fields)
 		if (field.display_name() == name)
 			return field
 
@@ -83,7 +83,7 @@
 /datum/computer_file/report/proc/submit(mob/user)
 	if (!istype(user))
 		return 0
-	for(var/datum/report_field/field in fields)
+	for (var/datum/report_field/field in fields)
 		if (field.required && !field.get_value())
 			to_chat(user, SPAN_NOTICE("You are missing a required field!"))
 			return 0
@@ -120,7 +120,7 @@
 	temp.file_time = file_time
 	temp.access_edit = access_edit
 	temp.access = access
-	for(var/i = 1, i <= length(fields), i++)
+	for (var/i = 1, i <= length(fields), i++)
 		var/datum/report_field/new_field = temp.fields[i]
 		new_field.copy_value(fields[i])
 	return temp
@@ -139,7 +139,7 @@
 	if (given_access)
 		.["access"] = verify_access(given_access)
 		.["access_edit"] = verify_access_edit(given_access)
-	for(var/datum/report_field/field in fields)
+	for (var/datum/report_field/field in fields)
 		.["fields"] += list(field.generate_nano_data(given_access))
 /**
   * This formats the report into pencode for use with paper and printing. Setting access to null will bypass access checks.
@@ -151,7 +151,7 @@
 	. += "\[center\][logo]\[/center\]"
 	. += "\[center\]\[h2\][display_name()]\[/h2\]\[/center\]"
 	. += "\[grid\]"
-	for(var/datum/report_field/F in fields)
+	for (var/datum/report_field/F in fields)
 		. += F.generate_row_pencode(access, with_fields)
 	. += "\[/grid\]"
 	. = JOINTEXT(.)

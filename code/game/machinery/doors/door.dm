@@ -406,7 +406,7 @@
 
 /obj/machinery/door/update_nearby_tiles(need_rebuild)
 	. = ..()
-	for(var/turf/simulated/turf in locs)
+	for (var/turf/simulated/turf in locs)
 		update_heat_protection(turf)
 		SSair.mark_for_update(turf)
 	return 1
@@ -448,7 +448,7 @@
 /obj/machinery/door/proc/update_connections(propagate = 0)
 	var/dirs = 0
 
-	for(var/direction in GLOB.cardinal)
+	for (var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)
 		var/success = 0
 
@@ -462,8 +462,8 @@
 		else if ( istype(T, /turf/simulated/shuttle/wall) ||	istype(T, /turf/unsimulated/wall))
 			success = 1
 		else
-			for(var/obj/O in T)
-				for(var/b_type in blend_objects)
+			for (var/obj/O in T)
+				for (var/b_type in blend_objects)
 					if ( istype(O, b_type))
 						success = 1
 

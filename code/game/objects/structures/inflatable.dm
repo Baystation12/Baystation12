@@ -102,7 +102,7 @@
 	var/max_pressure = 0
 	var/max_local_temp = 0
 
-	for(var/check_dir in GLOB.cardinal)
+	for (var/check_dir in GLOB.cardinal)
 		var/turf/T = get_step(get_turf(src), check_dir)
 		var/datum/gas_mixture/env = T.return_air()
 		var/pressure = env.return_pressure()
@@ -272,7 +272,7 @@
 
 /obj/structure/inflatable/door/proc/Close()
 	// If the inflatable is blocked, don't close
-	for(var/turf/A in locs)
+	for (var/turf/A in locs)
 		var/turf/T = A
 		var/obstruction = T.get_obstruction()
 		if (obstruction)

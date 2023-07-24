@@ -35,7 +35,7 @@
 	atmos_init()
 
 /obj/machinery/atmospherics/unary/cryo_cell/Destroy()
-	for(var/atom/movable/A in src)
+	for (var/atom/movable/A in src)
 		A.dropInto(loc)
 	if (beaker)
 		beaker.forceMove(get_step(loc, SOUTH)) //Beaker is carefully ejected from the wreckage of the cryotube
@@ -46,7 +46,7 @@
 	..()
 	if (node) return
 	var/node_connect = dir
-	for(var/obj/machinery/atmospherics/target in get_step(src,node_connect))
+	for (var/obj/machinery/atmospherics/target in get_step(src,node_connect))
 		if (target.initialize_directions & get_dir(target,src))
 			node = target
 			break
@@ -261,7 +261,7 @@
 /obj/machinery/atmospherics/unary/cryo_cell/proc/go_out()
 	if (!( occupant ))
 		return
-	//for(var/obj/O in src)
+	//for (var/obj/O in src)
 	//	O.loc = loc
 	if (occupant.client)
 		occupant.client.eye = occupant.client.mob

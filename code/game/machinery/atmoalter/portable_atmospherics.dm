@@ -162,7 +162,7 @@
 		return
 
 	var/gases = ""
-	for(var/gas in air_contents.gas)
+	for (var/gas in air_contents.gas)
 		if (gases)
 			gases += ", [gas]"
 		else

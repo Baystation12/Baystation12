@@ -58,7 +58,7 @@
 		overlays += "fab-active"
 
 /obj/machinery/robotics_fabricator/dismantle()
-	for(var/f in materials)
+	for (var/f in materials)
 		eject_materials(f, -1)
 	..()
 
@@ -87,7 +87,7 @@
 	data["categories"] = categories
 	if (all_robolimbs)
 		var/list/T = list()
-		for(var/A in all_robolimbs)
+		for (var/A in all_robolimbs)
 			var/datum/robolimb/R = all_robolimbs[A]
 			if (R.unavailable_at_fab || length(R.applies_to_part))
 				continue
@@ -211,7 +211,7 @@
 	update_busy()
 
 /obj/machinery/robotics_fabricator/proc/can_build(datum/design/D)
-	for(var/M in D.materials)
+	for (var/M in D.materials)
 		if (materials[M] <= D.materials[M] * mat_efficiency)
 			return 0
 	return 1
@@ -226,26 +226,26 @@
 		return
 	if (D.time > progress)
 		return
-	for(var/M in D.materials)
+	for (var/M in D.materials)
 		materials[M] = max(0, materials[M] - D.materials[M] * mat_efficiency)
 	if (D.build_path)
 		var/obj/new_item = D.Fabricate(loc, src)
 		visible_message("\The [src] pings, indicating that \the [D] is complete.", "You hear a ping.")
 		if (mat_efficiency != 1)
 			if (new_item.matter && length(new_item.matter) > 0)
-				for(var/i in new_item.matter)
+				for (var/i in new_item.matter)
 					new_item.matter[i] = new_item.matter[i] * mat_efficiency
 	remove_from_queue(1)
 
 /obj/machinery/robotics_fabricator/proc/get_queue_names()
 	. = list()
-	for(var/i = 2 to length(queue))
+	for (var/i = 2 to length(queue))
 		var/datum/design/D = queue[i]
 		. += D.name
 
 /obj/machinery/robotics_fabricator/proc/get_build_options()
 	. = list()
-	for(var/i = 1 to length(files.known_designs))
+	for (var/i = 1 to length(files.known_designs))
 		var/datum/design/D = files.known_designs[i]
 		if (!D.build_path || !(D.build_type & MECHFAB))
 			continue
@@ -253,7 +253,7 @@
 
 /obj/machinery/robotics_fabricator/proc/get_design_resourses(datum/design/D)
 	var/list/F = list()
-	for(var/T in D.materials)
+	for (var/T in D.materials)
 		F += "[capitalize(T)]: [D.materials[T] * mat_efficiency]"
 	return english_list(F, and_text = ", ")
 
@@ -265,7 +265,7 @@
 
 /obj/machinery/robotics_fabricator/proc/update_categories()
 	categories = list()
-	for(var/datum/design/D in files.known_designs)
+	for (var/datum/design/D in files.known_designs)
 		if (!D.build_path || !(D.build_type & MECHFAB))
 			continue
 		categories |= D.category
@@ -274,7 +274,7 @@
 
 /obj/machinery/robotics_fabricator/proc/get_materials()
 	. = list()
-	for(var/T in materials)
+	for (var/T in materials)
 		. += list(list("mat" = capitalize(T), "amt" = materials[T]))
 
 /obj/machinery/robotics_fabricator/proc/eject_materials(material, amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
@@ -317,12 +317,12 @@
 
 /obj/machinery/robotics_fabricator/proc/sync()
 	sync_message = "Error: no console found."
-	for(var/obj/machinery/computer/rdconsole/RDC in get_area_all_atoms(get_area(src)))
+	for (var/obj/machinery/computer/rdconsole/RDC in get_area_all_atoms(get_area(src)))
 		if (!RDC.sync)
 			continue
-		for(var/datum/tech/T in RDC.files.known_tech)
+		for (var/datum/tech/T in RDC.files.known_tech)
 			files.AddTech2Known(T)
-		for(var/datum/design/D in RDC.files.known_designs)
+		for (var/datum/design/D in RDC.files.known_designs)
 			files.AddDesign2Known(D)
 		files.RefreshResearch()
 		sync_message = "Sync complete."

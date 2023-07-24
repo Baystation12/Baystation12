@@ -193,7 +193,7 @@
 		switch(action_type)
 			if ("Strict type")
 				var/i = 0
-				for(var/obj/Obj in world)
+				for (var/obj/Obj in world)
 					if (Obj.type == O_type)
 						i++
 						qdel(Obj)
@@ -204,7 +204,7 @@
 				message_admins(SPAN_NOTICE("[key_name(usr)] deleted all objects of type [O_type] ([i] objects deleted)"))
 			if ("Type and subtypes")
 				var/i = 0
-				for(var/obj/Obj in world)
+				for (var/obj/Obj in world)
 					if (istype(Obj,O_type))
 						i++
 						qdel(Obj)

@@ -17,7 +17,7 @@
 	endWhen = rand(500, 1500)
 
 /datum/event/ionstorm/announce()
-	for(var/mob/living/carbon/S in SSmobs.mob_list)
+	for (var/mob/living/carbon/S in SSmobs.mob_list)
 		if (!S.isSynthetic())
 			continue
 		if (!(S.z in affecting_z))
@@ -31,7 +31,7 @@
 		var/ionbug = rand(5, 15)
 		S.confused += ionbug
 		S.eye_blurry += ionbug-1
-	for(var/mob/living/silicon/S in SSmobs.mob_list)
+	for (var/mob/living/silicon/S in SSmobs.mob_list)
 		if (isdrone(S) || !(isAI(S) || isrobot(S)))
 			continue
 		if (!(S.z in affecting_z))
@@ -118,7 +118,7 @@
 
 /datum/event/ionstorm/tick()
 	if (botEmagChance)
-		for(var/mob/living/bot/bot in GLOB.alive_mobs)
+		for (var/mob/living/bot/bot in GLOB.alive_mobs)
 			if (!(bot.z in affecting_z))
 				continue
 			if (prob(botEmagChance))
@@ -142,7 +142,7 @@
 
 /datum/event/ionstorm/proc/get_random_species_name(default_if_none = "Humans")
 	var/list/species = list()
-	for(var/S in typesof(/datum/species))
+	for (var/S in typesof(/datum/species))
 		var/datum/species/specimen = S
 		if (initial(specimen.spawn_flags) & SPECIES_CAN_JOIN)
 			species += initial(specimen.name_plural)
@@ -153,7 +153,7 @@
 
 /datum/event/ionstorm/proc/get_random_language(mob/living/silicon/S)
 	var/list/languages = S.speech_synthesizer_langs.Copy()
-	for(var/datum/language/L in languages)
+	for (var/datum/language/L in languages)
 		if (L == S.default_language)
 			languages -= L
 		// Also removing any languages that won't work well over radio.

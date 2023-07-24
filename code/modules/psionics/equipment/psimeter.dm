@@ -31,7 +31,7 @@
 	else
 		dat += "<h2>TELESTO Mark I Psi-Meter</h2><hr><table border = 1 width = 100%><tr><td colspan = 2><b>Candidates</b></td></tr>"
 		var/found
-		for(var/mob/living/H in range(1, src))
+		for (var/mob/living/H in range(1, src))
 			found = TRUE
 			dat += "<tr><td>[H.name]</td><td><a href='?src=\ref[src];assay=\ref[H]'>Conduct Assay</a>"
 		if (!found)

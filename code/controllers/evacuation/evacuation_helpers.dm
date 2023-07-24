@@ -34,7 +34,7 @@
 		return 0
 
 	if (!forced)
-		for(var/predicate in evacuation_predicates)
+		for (var/predicate in evacuation_predicates)
 			var/datum/evacuation_predicate/esp = predicate
 			if (!esp.is_valid())
 				evacuation_predicates -= esp

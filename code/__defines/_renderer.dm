@@ -107,7 +107,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 /// Removes the mob's renderers on /Logout()
 /mob/proc/RemoveRenderers()
 	if (my_client)
-		for(var/atom/movable/renderer/renderer as anything in renderers)
+		for (var/atom/movable/renderer/renderer as anything in renderers)
 			my_client.screen -= renderer
 			if (renderer.relay)
 				my_client.screen -= renderer.relay
@@ -152,7 +152,7 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 
 /hook/startup/proc/create_global_renderers() //Some (most) renderers probably do not need to be instantiated per mob. So may as well make them global and just add to screen
 	//Zmimic planemasters
-	for(var/i = 0 to OPENTURF_MAX_DEPTH)
+	for (var/i = 0 to OPENTURF_MAX_DEPTH)
 		GLOB.zmimic_renderers += new /atom/movable/renderer/shared/zmimic(null, null, OPENTURF_MAX_PLANE - i)
 
 	return TRUE

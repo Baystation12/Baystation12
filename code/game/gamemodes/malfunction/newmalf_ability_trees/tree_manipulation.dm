@@ -54,7 +54,7 @@
 	if (!ability_prechecks(user, price) || !ability_pay(user,price))
 		return
 	to_chat(user, "Sending feedback pulse...")
-	for(var/obj/machinery/power/apc/AP in SSmachines.machinery)
+	for (var/obj/machinery/power/apc/AP in SSmachines.machinery)
 		if (prob(5))
 			AP.overload_lighting()
 		if (prob(2.5) && (get_area(AP) != get_area(user))) // Very very small chance to actually destroy the APC, but not if the APC is powering the AI.

@@ -142,21 +142,21 @@
 		return 1
 
 	//First, check objects to block exit that are not on the border
-	for(var/obj/obstacle in mover.loc)
+	for (var/obj/obstacle in mover.loc)
 		if (!(obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER) && (mover != obstacle) && (forget != obstacle))
 			if (!obstacle.CheckExit(mover, src))
 				mover.Bump(obstacle, 1)
 				return 0
 
 	//Now, check objects to block exit that are on the border
-	for(var/obj/border_obstacle in mover.loc)
+	for (var/obj/border_obstacle in mover.loc)
 		if ((border_obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER) && (mover != border_obstacle) && (forget != border_obstacle))
 			if (!border_obstacle.CheckExit(mover, src))
 				mover.Bump(border_obstacle, 1)
 				return 0
 
 	//Next, check objects to block entry that are on the border
-	for(var/obj/border_obstacle in src)
+	for (var/obj/border_obstacle in src)
 		if (border_obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER)
 			if (!border_obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != border_obstacle))
 				mover.Bump(border_obstacle, 1)
@@ -168,7 +168,7 @@
 		return 0
 
 	//Finally, check objects/mobs to block entry that are not on the border
-	for(var/atom/movable/obstacle in src)
+	for (var/atom/movable/obstacle in src)
 		if (!(obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 			if (!obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != obstacle))
 				mover.Bump(obstacle, 1)
@@ -193,7 +193,7 @@ var/global/const/enterloopsanity = 100
 
 	var/objects = 0
 	if (A && (A.movable_flags & MOVABLE_FLAG_PROXMOVE))
-		for(var/atom/movable/thing in range(1))
+		for (var/atom/movable/thing in range(1))
 			if (objects > enterloopsanity) break
 			objects++
 			spawn(0)
@@ -213,12 +213,12 @@ var/global/const/enterloopsanity = 100
 	return FALSE
 
 /turf/proc/levelupdate()
-	for(var/obj/O in src)
+	for (var/obj/O in src)
 		O.hide(O.hides_under_flooring() && !is_plating())
 
 /turf/proc/AdjacentTurfs(check_blockage = TRUE)
 	. = list()
-	for(var/turf/t in (trange(1,src) - src))
+	for (var/turf/t in (trange(1,src) - src))
 		if (check_blockage)
 			if (!t.density)
 				if (!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
@@ -228,7 +228,7 @@ var/global/const/enterloopsanity = 100
 
 /turf/proc/CardinalTurfs(check_blockage = TRUE)
 	. = list()
-	for(var/ad in AdjacentTurfs(check_blockage))
+	for (var/ad in AdjacentTurfs(check_blockage))
 		var/turf/T = ad
 		if (T.x == src.x || T.y == src.y)
 			. += T
@@ -243,7 +243,7 @@ var/global/const/enterloopsanity = 100
 
 /turf/proc/AdjacentTurfsSpace()
 	var/L[] = new()
-	for(var/turf/t in oview(src,1))
+	for (var/turf/t in oview(src,1))
 		if (!t.density)
 			if (!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
 				L.Add(t)
@@ -252,7 +252,7 @@ var/global/const/enterloopsanity = 100
 /turf/proc/contains_dense_objects()
 	if (density)
 		return 1
-	for(var/atom/A in src)
+	for (var/atom/A in src)
 		if (A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 			return 1
 	return 0
@@ -271,7 +271,7 @@ var/global/const/enterloopsanity = 100
 	source.reagents.trans_to_turf(src, 1, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
 
 /turf/proc/remove_cleanables(skip_blood = TRUE)
-	for(var/obj/effect/O in src)
+	for (var/obj/effect/O in src)
 		if (istype(O,/obj/effect/rune) || (istype(O,/obj/effect/decal/cleanable) && (!skip_blood || !istype(O, /obj/effect/decal/cleanable/blood))))
 			qdel(O)
 
@@ -314,7 +314,7 @@ var/global/const/enterloopsanity = 100
 		return
 
 	var/too_much_graffiti = 0
-	for(var/obj/effect/decal/writing/W in src)
+	for (var/obj/effect/decal/writing/W in src)
 		too_much_graffiti++
 	if (too_much_graffiti >= 5)
 		to_chat(vandal, SPAN_WARNING("There's too much graffiti here to add more."))
@@ -367,7 +367,7 @@ var/global/const/enterloopsanity = 100
  */
 /turf/proc/is_safe_to_enter(mob/living/L)
 	if (LAZYLEN(dangerous_objects))
-		for(var/obj/O in dangerous_objects)
+		for (var/obj/O in dangerous_objects)
 			if (!O.is_safe_to_step(L))
 				return FALSE
 	return TRUE

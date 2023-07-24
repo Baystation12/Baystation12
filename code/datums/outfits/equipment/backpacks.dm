@@ -75,14 +75,14 @@
 /singleton/backpack_outfit/proc/spawn_backpack(location, metadata, desired_type)
 	metadata = metadata || list()
 	desired_type = desired_type || path
-	for(var/t in tweaks)
+	for (var/t in tweaks)
 		var/datum/backpack_tweak/bt = t
 		var/tweak_metadata = metadata["[bt]"] || bt.get_default_metadata()
 		desired_type = bt.get_backpack_type(desired_type, tweak_metadata)
 
 	. = new desired_type(location)
 
-	for(var/t in tweaks)
+	for (var/t in tweaks)
 		var/datum/backpack_tweak/bt = t
 		var/tweak_metadata = metadata["[bt]"]
 		bt.tweak_backpack(., tweak_metadata)
@@ -128,7 +128,7 @@
 	var/list/duplicate_values = duplicates(list_values(selections))
 	if (length(duplicate_values))
 		CRASH("Duplicate types found: [english_list(duplicate_values)]")
-	for(var/selection_key in selections)
+	for (var/selection_key in selections)
 		if (!istext(selection_key))
 			CRASH("Expected a valid selection key, was [log_info_line(selection_key)]")
 		var/selection_type = selections[selection_key]
@@ -190,7 +190,7 @@
 /proc/get_default_outfit_backpack()
 	RETURN_TYPE(/singleton/backpack_outfit)
 	var backpacks = GET_SINGLETON_SUBTYPE_MAP(/singleton/backpack_outfit)
-	for(var/backpack in backpacks)
+	for (var/backpack in backpacks)
 		var/singleton/backpack_outfit/bo = backpacks[backpack]
 		if (bo.is_default)
 			return bo

@@ -188,7 +188,7 @@
 	vision_index = 1
 	var/list/processed_vision = list()
 
-	for(var/vision_mode in vision_modes)
+	for (var/vision_mode in vision_modes)
 		var/datum/rig_vision/vision_datum = new vision_mode
 		if (!vision) vision = vision_datum
 		processed_vision += vision_datum

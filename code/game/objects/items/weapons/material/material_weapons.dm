@@ -39,7 +39,7 @@
 
 	matter = material.get_matter()
 	if (length(matter))
-		for(var/material_type in matter)
+		for (var/material_type in matter)
 			if (!isnull(matter[material_type]))
 				matter[material_type] *= force_multiplier // May require a new var instead.
 

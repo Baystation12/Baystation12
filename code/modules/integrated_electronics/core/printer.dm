@@ -46,13 +46,13 @@
 /obj/item/device/integrated_circuit_printer/proc/recycle(obj/item/O, mob/user, obj/item/device/electronic_assembly/assembly)
 	if (!O.canremove) //in case we have an augment circuit
 		return
-	for(var/material in O.matter)
+	for (var/material in O.matter)
 		if (materials[material] + O.matter[material] > metal_max)
 			var/material/material_datum = SSmaterials.get_material_by_name(material)
 			if (material_datum)
 				to_chat(user, SPAN_NOTICE("[src] can't hold any more [material_datum.display_name]!"))
 			return
-	for(var/material in O.matter)
+	for (var/material in O.matter)
 		materials[material] += O.matter[material]
 	if (assembly)
 		assembly.remove_component(O)
@@ -200,7 +200,7 @@
 	else
 		HTML += "Materials: "
 		var/list/dat = list()
-		for(var/material in materials)
+		for (var/material in materials)
 			var/material/material_datum = SSmaterials.get_material_by_name(material)
 			dat += "[materials[material]]/[metal_max] [material_datum.display_name]"
 		HTML += jointext(dat, "; ")
@@ -229,7 +229,7 @@
 
 		HTML += "<br><hr>"
 	HTML += "Categories:"
-	for(var/category in SScircuit.circuit_fabricator_recipe_list)
+	for (var/category in SScircuit.circuit_fabricator_recipe_list)
 		if (category != current_category)
 			HTML += " <a href='?src=\ref[src];category=[category]'>\[[category]\]</a> "
 		else // Bold the button if it's already selected.
@@ -238,7 +238,7 @@
 	HTML += "<center><h4>[current_category]</h4></center>"
 
 	var/list/current_list = SScircuit.circuit_fabricator_recipe_list[current_category]
-	for(var/path in current_list)
+	for (var/path in current_list)
 		var/obj/O = path
 		var/can_build = TRUE
 		if (ispath(path, /obj/item/integrated_circuit))
@@ -350,7 +350,7 @@
 					if (!subtract_material_costs(cost, usr))
 						return
 					var/cloning_time = 0
-					for(var/material in cost)
+					for (var/material in cost)
 						cloning_time += cost[material]
 					cloning_time = round(cloning_time/15)
 					cloning_time = min(cloning_time, MAX_CIRCUIT_CLONE_TIME)
@@ -367,18 +367,18 @@
 				to_chat(usr, SPAN_NOTICE("Cloning has been canceled. Cost has been refunded."))
 				cloning = FALSE
 				var/cost = program["cost"]
-				for(var/material in cost)
+				for (var/material in cost)
 					materials[material] = min(metal_max, materials[material] + cost[material])
 
 	interact(usr)
 
 /obj/item/device/integrated_circuit_printer/proc/subtract_material_costs(list/cost, mob/user)
-	for(var/material in cost)
+	for (var/material in cost)
 		if (materials[material] < cost[material])
 			var/material/material_datum = SSmaterials.get_material_by_name(material)
 			to_chat(user, SPAN_WARNING("You need [cost[material]] [material_datum.display_name] to build that!"))
 			return FALSE
-	for(var/material in cost) //Iterate twice to make sure it's going to work before deducting
+	for (var/material in cost) //Iterate twice to make sure it's going to work before deducting
 		materials[material] -= cost[material]
 	return TRUE
 

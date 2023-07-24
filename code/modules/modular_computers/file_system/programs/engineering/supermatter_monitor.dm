@@ -47,7 +47,7 @@
 /datum/nano_module/supermatter_monitor/proc/refresh()
 	supermatters = list()
 	var/valid_z_levels = GetConnectedZlevels(get_host_z())
-	for(var/obj/machinery/power/supermatter/S in SSmachines.machinery)
+	for (var/obj/machinery/power/supermatter/S in SSmachines.machinery)
 		// Delaminating, not within coverage, not on a tile.
 		if (S.grav_pulling || S.exploded || !(S.z in valid_z_levels) || !isturf(S.loc))
 			continue
@@ -59,7 +59,7 @@
 
 /datum/nano_module/supermatter_monitor/proc/get_status()
 	. = SUPERMATTER_INACTIVE
-	for(var/obj/machinery/power/supermatter/S in supermatters)
+	for (var/obj/machinery/power/supermatter/S in supermatters)
 		. = max(., S.get_status())
 
 /datum/nano_module/supermatter_monitor/proc/process_data_output(skill, value)
@@ -138,7 +138,7 @@
 			data["SM_gas_H2"] = 0
 	else
 		var/list/SMS = list()
-		for(var/obj/machinery/power/supermatter/S in supermatters)
+		for (var/obj/machinery/power/supermatter/S in supermatters)
 			var/area/A = get_area(S)
 			if (!A)
 				continue
@@ -184,7 +184,7 @@
 		return 1
 	if ( href_list["set"] )
 		var/newuid = text2num(href_list["set"])
-		for(var/obj/machinery/power/supermatter/S in supermatters)
+		for (var/obj/machinery/power/supermatter/S in supermatters)
 			if (S.uid == newuid)
 				active = S
 		return 1

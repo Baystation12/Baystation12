@@ -325,19 +325,19 @@
  *
  * Returns list (Instances of `/atom`). All found matches.
  */
-/atom/proc/search_contents_for(path,list/filter_path=null)
+/atom/proc/search_contents_for (path,list/filter_path=null)
 	var/list/found = list()
-	for(var/atom/A in src)
+	for (var/atom/A in src)
 		if (istype(A, path))
 			found += A
 		if (filter_path)
 			var/pass = 0
-			for(var/type in filter_path)
+			for (var/type in filter_path)
 				pass |= istype(A, type)
 			if (!pass)
 				continue
 		if (length(A.contents))
-			found += A.search_contents_for(path,filter_path)
+			found += A.search_contents_for (path,filter_path)
 	return found
 
 /**
@@ -644,7 +644,7 @@
 	var/cur_x = null
 	var/cur_y = null
 	var/list/y_arr = null
-	for(cur_x = 1 to length(GLOB.global_map))
+	for (cur_x = 1 to length(GLOB.global_map))
 		y_arr = GLOB.global_map[cur_x]
 		cur_y = y_arr.Find(src.z)
 		if (cur_y)
@@ -705,14 +705,14 @@
 	var/list/objs = list()
 	get_mobs_and_objs_in_view_fast(T,range, mobs, objs, checkghosts)
 
-	for(var/o in objs)
+	for (var/o in objs)
 		var/obj/O = o
 		if (length(exclude_objs) && (O in exclude_objs))
 			exclude_objs -= O
 			continue
 		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 
-	for(var/m in mobs)
+	for (var/m in mobs)
 		var/mob/M = m
 		if (length(exclude_mobs) && (M in exclude_mobs))
 			exclude_mobs -= M
@@ -742,14 +742,14 @@
 	var/list/objs = list()
 	get_mobs_and_objs_in_view_fast(T, hearing_distance, mobs, objs, checkghosts)
 
-	for(var/m in mobs)
+	for (var/m in mobs)
 		var/mob/M = m
 		if (length(exclude_mobs) && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
 		M.show_message(message,2,deaf_message,1)
 
-	for(var/o in objs)
+	for (var/o in objs)
 		var/obj/O = o
 		if (length(exclude_objs) && (O in exclude_objs))
 			exclude_objs -= O
@@ -830,7 +830,7 @@
 	if (!occupied && istype(src, /obj/structure/wall_frame))
 		var/original_dir = get_dir(src, user.loc)
 		var/progress_dir = original_dir
-		for(var/atom/A in loc.contents)
+		for (var/atom/A in loc.contents)
 			if (A.atom_flags & ATOM_FLAG_CHECKS_BORDER)
 				var/obj/structure/window/W = A
 				if (istype(W))
@@ -888,7 +888,7 @@
 	var/turf/T = get_turf(src)
 	if (!istype(T))
 		return 0
-	for(var/atom/A in T.contents)
+	for (var/atom/A in T.contents)
 		if (ignore && ignore == A)
 			continue
 		if (A.atom_flags & ATOM_FLAG_CLIMBABLE)
@@ -940,12 +940,12 @@
  * Handler for atoms being moved, shaken, or otherwise interacted with in a manner that would affect atoms on top of if.
  */
 /atom/proc/object_shaken()
-	for(var/mob/living/M in climbers)
+	for (var/mob/living/M in climbers)
 		M.Weaken(1)
 		to_chat(M, SPAN_DANGER("You topple as you are shaken off \the [src]!"))
 		climbers.Cut(1,2)
 
-	for(var/mob/living/M in get_turf(src))
+	for (var/mob/living/M in get_turf(src))
 		if (M.lying) return //No spamming this on people.
 
 		M.Weaken(3)
@@ -1037,5 +1037,5 @@
 		bullet_mark.icon_state = "light_scorch"
 
 /atom/proc/clear_bulletholes()
-	for(var/obj/effect/overlay/bmark/bullet_mark in src)
+	for (var/obj/effect/overlay/bmark/bullet_mark in src)
 		qdel(bullet_mark)

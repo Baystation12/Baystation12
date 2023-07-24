@@ -56,7 +56,7 @@
 
 	var/list/valid_breaches = list()
 
-	for(var/datum/breach/B in breaches)
+	for (var/datum/breach/B in breaches)
 		if (B.damtype == damtype)
 			valid_breaches += B
 
@@ -65,7 +65,7 @@
 		return
 
 	var/amount_left = amount
-	for(var/datum/breach/B in valid_breaches)
+	for (var/datum/breach/B in valid_breaches)
 		if (!amount_left) break
 
 		if (B.class <= amount_left)
@@ -97,7 +97,7 @@
 	if (damage > 25) return //We don't need to keep tracking it when it's at 250% pressure loss, really.
 
 	//Increase existing breaches.
-	for(var/datum/breach/existing in breaches)
+	for (var/datum/breach/existing in breaches)
 
 		if (existing.damtype != damtype)
 			continue
@@ -152,7 +152,7 @@
 		SetName(initial(name))
 		return 0
 
-	for(var/datum/breach/B in breaches)
+	for (var/datum/breach/B in breaches)
 		if (!B.class)
 			src.breaches -= B
 			qdel(B)
@@ -232,7 +232,7 @@
 
 	else if (istype(W, /obj/item/tape_roll))
 		var/datum/breach/target_breach		//Target the largest unpatched breach.
-		for(var/datum/breach/B in breaches)
+		for (var/datum/breach/B in breaches)
 			if (B.patched)
 				continue
 			if (!target_breach || (B.class > target_breach.class))
@@ -260,7 +260,7 @@
 /obj/item/clothing/suit/space/examine(mob/user)
 	. = ..()
 	if (can_breach && breaches && length(breaches))
-		for(var/datum/breach/B in breaches)
+		for (var/datum/breach/B in breaches)
 			to_chat(user, SPAN_DANGER("It has \a [B.descriptor]."))
 
 /obj/item/clothing/suit/space/get_pressure_weakness(pressure)

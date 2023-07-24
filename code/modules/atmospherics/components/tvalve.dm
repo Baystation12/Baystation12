@@ -184,17 +184,17 @@
 	init_nodes(node1_dir, node2_dir, node3_dir)
 
 /obj/machinery/atmospherics/tvalve/proc/init_nodes(node1_dir, node2_dir, node3_dir)
-	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
+	for (var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
 				break
-	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
+	for (var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
 		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node2 = target
 				break
-	for(var/obj/machinery/atmospherics/target in get_step(src,node3_dir))
+	for (var/obj/machinery/atmospherics/target in get_step(src,node3_dir))
 		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node3 = target

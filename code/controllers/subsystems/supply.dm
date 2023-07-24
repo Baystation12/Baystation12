@@ -37,7 +37,7 @@ SUBSYSTEM_DEF(supply)
 	var/singleton/hierarchy/supply_pack/root = GET_SINGLETON(/singleton/hierarchy/supply_pack)
 	for (var/singleton/hierarchy/supply_pack/sp in root.children)
 		if (sp.is_category())
-			for(var/singleton/hierarchy/supply_pack/spc in sp.get_descendents())
+			for (var/singleton/hierarchy/supply_pack/spc in sp.get_descendents())
 				spc.setup()
 				master_supply_list += spc
 
@@ -76,7 +76,7 @@ SUBSYSTEM_DEF(supply)
 	if (istype(A, /obj/machinery/tele_beacon))
 		return TRUE
 
-	for(var/i=1, i<=length(A.contents), i++)
+	for (var/i=1, i<=length(A.contents), i++)
 		var/atom/B = A.contents[i]
 		if (.(B))
 			return TRUE
@@ -84,8 +84,8 @@ SUBSYSTEM_DEF(supply)
 /datum/controller/subsystem/supply/proc/sell()
 	var/list/material_count = list()
 
-	for(var/area/subarea in shuttle.shuttle_area)
-		for(var/atom/movable/AM in subarea)
+	for (var/area/subarea in shuttle.shuttle_area)
+		for (var/atom/movable/AM in subarea)
 			if (AM.anchored)
 				continue
 			if (istype(AM, /obj/structure/closet/crate))
@@ -94,7 +94,7 @@ SUBSYSTEM_DEF(supply)
 				add_points_from_source(CR.points_per_crate, "crate")
 				var/find_slip = 1
 
-				for(var/atom in CR)
+				for (var/atom in CR)
 					// Sell manifests
 					var/atom/A = atom
 					if (find_slip && istype(A,/obj/item/paper/manifest))
@@ -182,18 +182,18 @@ SUBSYSTEM_DEF(supply)
 			qdel(AM)
 
 	if (length(material_count))
-		for(var/material_type in material_count)
+		for (var/material_type in material_count)
 			add_points_from_source(material_count[material_type], material_type)
 
 /datum/controller/subsystem/supply/proc/get_clear_turfs()
 	var/list/clear_turfs = list()
 
-	for(var/area/subarea in shuttle.shuttle_area)
-		for(var/turf/T in subarea)
+	for (var/area/subarea in shuttle.shuttle_area)
+		for (var/turf/T in subarea)
 			if (T.density)
 				continue
 			var/occupied = 0
-			for(var/atom/A in T.contents)
+			for (var/atom/A in T.contents)
 				if (!A.simulated)
 					continue
 				occupied = 1
@@ -210,7 +210,7 @@ SUBSYSTEM_DEF(supply)
 
 	var/list/clear_turfs = get_clear_turfs()
 
-	for(var/S in shoppinglist)
+	for (var/S in shoppinglist)
 		if (!length(clear_turfs))
 			break
 		var/turf/pickedloc = pick_n_take(clear_turfs)
@@ -246,7 +246,7 @@ SUBSYSTEM_DEF(supply)
 
 		var/list/spawned = SP.spawn_contents(A)
 		if (slip)
-			for(var/atom/content in spawned)
+			for (var/atom/content in spawned)
 				slip.info += "<li>[content.name]</li>" //add the item to the manifest
 			slip.info += "</ul><br>CHECK CONTENTS AND STAMP BELOW THE LINE TO CONFIRM RECEIPT OF GOODS<hr>"
 

@@ -16,7 +16,7 @@
 
 /datum/event/meteor_wave/setup()
 	waves = 0
-	for(var/n in 1 to severity)
+	for (var/n in 1 to severity)
 		waves += rand(5,15)
 
 	start_side = pick(GLOB.cardinal)
@@ -32,7 +32,7 @@
 /datum/event/meteor_wave/tick()
 	// Begin sending the alarm signals to shield diffusers so the field is already regenerated (if it exists) by the time actual meteors start flying around.
 	if (alarmWhen < activeFor)
-		for(var/obj/machinery/shield_diffuser/SD in SSmachines.machinery)
+		for (var/obj/machinery/shield_diffuser/SD in SSmachines.machinery)
 			if (isStationLevel(SD.z))
 				SD.meteor_alarm(10)
 

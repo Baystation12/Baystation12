@@ -1,11 +1,11 @@
 /obj/machinery/atmospherics/var/image/pipe_image
 
 /obj/machinery/atmospherics/Destroy()
-	for(var/mob/living/M in src) //ventcrawling is serious business
+	for (var/mob/living/M in src) //ventcrawling is serious business
 		M.remove_ventcrawl()
 		M.dropInto(loc)
 	if (pipe_image)
-		for(var/mob/living/M in GLOB.player_list)
+		for (var/mob/living/M in GLOB.player_list)
 			if (M.client)
 				M.client.images -= pipe_image
 				M.pipes_shown -= pipe_image
@@ -13,7 +13,7 @@
 	. = ..()
 
 /obj/machinery/atmospherics/ex_act(severity)
-	for(var/atom/movable/A in src) //ventcrawling is serious business
+	for (var/atom/movable/A in src) //ventcrawling is serious business
 		A.ex_act(severity)
 	. = ..()
 
@@ -54,7 +54,7 @@
 	return !welded
 
 /obj/machinery/atmospherics/proc/findConnecting(direction)
-	for(var/obj/machinery/atmospherics/target in get_step(src,direction))
+	for (var/obj/machinery/atmospherics/target in get_step(src,direction))
 		if (target.initialize_directions & get_dir(target,src))
 			if (isConnectable(target) && target.isConnectable(src))
 				return target

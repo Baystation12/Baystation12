@@ -4,8 +4,8 @@
 	limit_y = 7
 
 /datum/random_map/building/generate_map()
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
+	for (var/x = 1, x <= limit_x, x++)
+		for (var/y = 1, y <= limit_y, y++)
 			var/current_cell = get_map_cell(x,y)
 			if (!current_cell)
 				continue
@@ -16,8 +16,8 @@
 
 /datum/random_map/building/handle_post_overlay_on(datum/random_map/target_map, tx, ty)
 	var/list/possible_doors
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
+	for (var/x = 1, x <= limit_x, x++)
+		for (var/y = 1, y <= limit_y, y++)
 			var/current_cell = get_map_cell(x,y)
 			if (!current_cell)
 				continue

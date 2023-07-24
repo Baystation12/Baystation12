@@ -19,7 +19,7 @@
 	if (!backpacks_by_name)
 		backpacks_by_name = list()
 		var/bos = GET_SINGLETON_SUBTYPE_MAP(/singleton/backpack_outfit)
-		for(var/bo in bos)
+		for (var/bo in bos)
 			var/singleton/backpack_outfit/backpack_outfit = bos[bo]
 			backpacks_by_name[backpack_outfit.name] = backpack_outfit
 
@@ -47,8 +47,8 @@
 	if (!istype(pref.all_underwear))
 		pref.all_underwear = list()
 
-		for(var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
-			for(var/datum/category_item/underwear/WRI in WRC.items)
+		for (var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
+			for (var/datum/category_item/underwear/WRI in WRC.items)
 				if (WRI.is_default(pref.gender ? pref.gender : MALE))
 					pref.all_underwear[WRC.name] = WRI.name
 					break
@@ -60,7 +60,7 @@
 	if (!istype(pref.all_underwear_metadata))
 		pref.all_underwear_metadata = list()
 
-	for(var/underwear_category in pref.all_underwear)
+	for (var/underwear_category in pref.all_underwear)
 		var/datum/category_group/underwear/UWC = GLOB.underwear.categories_by_name[underwear_category]
 		if (!UWC)
 			pref.all_underwear -= underwear_category
@@ -69,7 +69,7 @@
 			if (!UWI)
 				pref.all_underwear -= underwear_category
 
-	for(var/underwear_metadata in pref.all_underwear_metadata)
+	for (var/underwear_metadata in pref.all_underwear_metadata)
 		if (!(underwear_metadata in pref.all_underwear))
 			pref.all_underwear_metadata -= underwear_metadata
 
@@ -79,15 +79,15 @@
 	if (!istype(pref.backpack_metadata))
 		pref.backpack_metadata = list()
 
-	for(var/backpack_metadata_name in pref.backpack_metadata)
+	for (var/backpack_metadata_name in pref.backpack_metadata)
 		if (!(backpack_metadata_name in backpacks_by_name))
 			pref.backpack_metadata -= backpack_metadata_name
 
-	for(var/backpack_name in backpacks_by_name)
+	for (var/backpack_name in backpacks_by_name)
 		var/singleton/backpack_outfit/backpack = backpacks_by_name[backpack_name]
 		var/list/tweak_metadata = pref.backpack_metadata["[backpack]"]
 		if (tweak_metadata)
-			for(var/tw in backpack.tweaks)
+			for (var/tw in backpack.tweaks)
 				var/datum/backpack_tweak/tweak = tw
 				var/list/metadata = tweak_metadata["[tweak]"]
 				tweak_metadata["[tweak]"] = tweak.validate_metadata(metadata)
@@ -98,18 +98,18 @@
 /datum/category_item/player_setup_item/physical/equipment/content()
 	. = list()
 	. += "<b>Equipment:</b><br>"
-	for(var/datum/category_group/underwear/UWC in GLOB.underwear.categories)
+	for (var/datum/category_group/underwear/UWC in GLOB.underwear.categories)
 		var/item_name = (pref.all_underwear && pref.all_underwear[UWC.name]) ? pref.all_underwear[UWC.name] : "None"
 		. += "[UWC.name]: <a href='?src=\ref[src];change_underwear=[UWC.name]'><b>[item_name]</b></a>"
 
 		var/datum/category_item/underwear/UWI = UWC.items_by_name[item_name]
 		if (UWI)
-			for(var/datum/gear_tweak/gt in UWI.tweaks)
+			for (var/datum/gear_tweak/gt in UWI.tweaks)
 				. += " <a href='?src=\ref[src];underwear=[UWC.name];tweak=\ref[gt]'>[gt.get_contents(get_underwear_metadata(UWC.name, gt))]</a>"
 
 		. += "<br>"
 	. += "Backpack Type: <a href='?src=\ref[src];change_backpack=1'><b>[pref.backpack.name]</b></a>"
-	for(var/datum/backpack_tweak/bt in pref.backpack.tweaks)
+	for (var/datum/backpack_tweak/bt in pref.backpack.tweaks)
 		. += " <a href='?src=\ref[src];backpack=[pref.backpack.name];tweak=\ref[bt]'>[bt.get_ui_content(get_backpack_metadata(pref.backpack, bt))]</a>"
 	. += "<br>"
 	. += "Default Suit Sensor Setting: <a href='?src=\ref[src];change_sensor_setting=1'>[pref.sensor_setting]</a><br />"

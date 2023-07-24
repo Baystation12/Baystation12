@@ -9,7 +9,7 @@
 	if (confirm != "Yes")
 		return
 
-	for(var/obj/item/W in M)
+	for (var/obj/item/W in M)
 		M.drop_from_inventory(W)
 
 	log_admin("[key_name(usr)] made [key_name(M)] drop everything!")
@@ -26,7 +26,7 @@
 			alert("The AI can't be sent to prison you jerk!", null, null, null, null, null)
 			return
 		//strip their stuff before they teleport into a cell :downs:
-		for(var/obj/item/W in M)
+		for (var/obj/item/W in M)
 			M.drop_from_inventory(W)
 		//teleport person to cell
 		M.Paralyse(5)
@@ -56,7 +56,7 @@
 	var/missing_ages = 0
 	var/msg = ""
 
-	for(var/client/C in GLOB.clients)
+	for (var/client/C in GLOB.clients)
 		if (C.player_age == "Requires database")
 			missing_ages = 1
 			continue
@@ -243,7 +243,7 @@
 
 	var/list/listening_hosts = hosts_in_view_range(usr)
 
-	for(var/listener in listening_hosts)
+	for (var/listener in listening_hosts)
 		to_chat(listener, result[1])
 	log_and_message_staff(" - LocalNarrate [result[2]]/[result[3]]: [result[4]]")
 
@@ -383,7 +383,7 @@ Ccomp's first proc.
 	var/list/ghosts = list()
 	var/list/sortmob = sortAtom(SSmobs.mob_list)                           // get the mob list.
 	var/any=0
-	for(var/mob/observer/ghost/M in sortmob)
+	for (var/mob/observer/ghost/M in sortmob)
 		mobs.Add(M)                                             //filter it where it's only ghosts
 		any = 1                                                 //if no ghosts show up, any will just be 0
 	if (!any)
@@ -391,7 +391,7 @@ Ccomp's first proc.
 			to_chat(src, "There doesn't appear to be any ghosts for you to select.")
 		return
 
-	for(var/mob/M in mobs)
+	for (var/mob/M in mobs)
 		var/name = M.name
 		ghosts[name] = M                                        //get the name of the mob for the popup list
 	if (what==1)
@@ -401,7 +401,7 @@ Ccomp's first proc.
 
 /client/proc/get_ghosts_by_key()
 	. = list()
-	for(var/mob/observer/ghost/M in SSmobs.mob_list)
+	for (var/mob/observer/ghost/M in SSmobs.mob_list)
 		.[M.ckey] = M
 	. = sortAssoc(.)
 
@@ -511,7 +511,7 @@ Ccomp's first proc.
 		to_chat(src, "Only administrators may use this command.")
 	var/action=""
 	if (config.antag_hud_allowed)
-		for(var/mob/observer/ghost/g in get_ghosts())
+		for (var/mob/observer/ghost/g in get_ghosts())
 			if (!g.client.holder)						//Remove the verb from non-admin ghosts
 				g.verbs -= /mob/observer/ghost/verb/toggle_antagHUD
 			if (g.antagHUD)
@@ -522,7 +522,7 @@ Ccomp's first proc.
 		to_chat(src, SPAN_DANGER("AntagHUD usage has been disabled"))
 		action = "disabled"
 	else
-		for(var/mob/observer/ghost/g in get_ghosts())
+		for (var/mob/observer/ghost/g in get_ghosts())
 			if (!g.client.holder)						// Add the verb back for all non-admin ghosts
 				g.verbs += /mob/observer/ghost/verb/toggle_antagHUD
 				to_chat(g, SPAN_NOTICE("<B>The Administrator has enabled AntagHUD </B>"))// Notify all observers they can now use AntagHUD
@@ -545,13 +545,13 @@ Ccomp's first proc.
 		to_chat(src, "Only administrators may use this command.")
 	var/action=""
 	if (config.antag_hud_restricted)
-		for(var/mob/observer/ghost/g in get_ghosts())
+		for (var/mob/observer/ghost/g in get_ghosts())
 			to_chat(g, SPAN_NOTICE("<B>The administrator has lifted restrictions on joining the round if you use AntagHUD</B>"))
 		action = "lifted restrictions"
 		config.antag_hud_restricted = 0
 		to_chat(src, SPAN_NOTICE("<B>AntagHUD restrictions have been lifted</B>"))
 	else
-		for(var/mob/observer/ghost/g in get_ghosts())
+		for (var/mob/observer/ghost/g in get_ghosts())
 			to_chat(g, SPAN_DANGER("The administrator has placed restrictions on joining the round if you use AntagHUD"))
 			to_chat(g, SPAN_DANGER("Your AntagHUD has been disabled, you may choose to re-enabled it but will be under restrictions"))
 			g.antagHUD = 0
@@ -572,14 +572,14 @@ Ccomp's first proc.
 	var/input = sanitize(input(usr, "Please enter anything you want the AI to do. Anything. Serious.", "What?", "") as text|null)
 	if (!input)
 		return
-	for(var/mob/living/silicon/ai/M in SSmobs.mob_list)
+	for (var/mob/living/silicon/ai/M in SSmobs.mob_list)
 		if (M.stat == 2)
 			to_chat(usr, "Upload failed. No signal is being detected from the AI.")
 		else if (M.see_in_dark == 0)
 			to_chat(usr, "Upload failed. Only a faint signal is being detected from the AI, and it is not responding to our requests. It may be low on power.")
 		else
 			M.add_ion_law(input)
-			for(var/mob/living/silicon/ai/O in SSmobs.mob_list)
+			for (var/mob/living/silicon/ai/O in SSmobs.mob_list)
 				to_chat(O, SPAN_WARNING("" + input + "...LAWS UPDATED"))
 				O.show_laws()
 
@@ -659,7 +659,7 @@ Ccomp's first proc.
 	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
-	for(var/datum/job/job in SSjobs.primary_job_datums)
+	for (var/datum/job/job in SSjobs.primary_job_datums)
 		to_chat(src, "[job.title]: [job.total_positions]")
 
 /client/proc/cmd_admin_explosion(atom/O as obj|mob|turf in range(world.view))
@@ -758,7 +758,7 @@ Ccomp's first proc.
 	set name = "Check Contents"
 
 	var/list/L = M.get_contents()
-	for(var/t in L)
+	for (var/t in L)
 		to_chat(usr, "[t]")
 
 /* This proc is DEFERRED. Does not do anything.
@@ -770,7 +770,7 @@ Ccomp's first proc.
 		return
 // DEFERRED
 	spawn(0)
-		for(var/turf/T in view())
+		for (var/turf/T in view())
 			T.poison = 0
 			T.oldpoison = 0
 			T.tmppoison = 0
@@ -857,7 +857,7 @@ Ccomp's first proc.
 	set name = "Attack Log"
 
 	to_chat(usr, SPAN_DANGER("Attack Log for [mob]"))
-	for(var/t in M.attack_logs_)
+	for (var/t in M.attack_logs_)
 		to_chat(usr, t)
 
 

@@ -172,7 +172,7 @@ Please contact me on #coderbus IRC. ~Carn x
 		icon_state = null
 		visible_overlays = overlays_standing
 
-	for(var/i = 1 to LAZYLEN(visible_overlays))
+	for (var/i = 1 to LAZYLEN(visible_overlays))
 		var/entry = visible_overlays[i]
 		if (istype(entry, /image))
 			var/image/overlay = entry
@@ -180,7 +180,7 @@ Please contact me on #coderbus IRC. ~Carn x
 				overlay.transform = get_lying_offset(overlay)
 			overlays_to_apply += overlay
 		else if (istype(entry, /list))
-			for(var/image/overlay in entry)
+			for (var/image/overlay in entry)
 				if (i != HO_DAMAGE_LAYER && i != HO_BODY_LAYER)
 					overlay.transform = get_lying_offset(overlay)
 				overlays_to_apply += overlay
@@ -268,7 +268,7 @@ var/global/list/damage_icon_parts = list()
 	if (!species.damage_overlays || !species.damage_mask)
 		return
 
-	for(var/obj/item/organ/external/O in organs)
+	for (var/obj/item/organ/external/O in organs)
 		if (O.is_stump())
 			continue
 		damage_appearance += O.damage_state
@@ -282,7 +282,7 @@ var/global/list/damage_icon_parts = list()
 	var/image/standing_image = image(species.damage_overlays, icon_state = "00")
 
 	// blend the individual damage states with our icons
-	for(var/obj/item/organ/external/O in organs)
+	for (var/obj/item/organ/external/O in organs)
 		if (O.is_stump())
 			continue
 
@@ -313,7 +313,7 @@ var/global/list/damage_icon_parts = list()
 		return
 	var/image/standing_image = overlays_standing[HO_DAMAGE_LAYER]
 	if (standing_image)
-		for(var/obj/item/organ/external/O in organs)
+		for (var/obj/item/organ/external/O in organs)
 			if (O.is_stump())
 				continue
 			var/bandage_level = O.bandage_level()
@@ -333,7 +333,7 @@ var/global/list/damage_icon_parts = list()
 	var/limb_count_update = FALSE
 	var/list/missing_bodyparts = list()
 
-	for(var/organ_tag in species.has_limbs)
+	for (var/organ_tag in species.has_limbs)
 		var/obj/item/organ/external/limb = organs_by_name[organ_tag]
 		if (!isnull(limb))
 			var/old_key = icon_render_keys?[organ_tag] //Checks the mob's icon render key list for the bodypart
@@ -347,13 +347,13 @@ var/global/list/damage_icon_parts = list()
 			missing_bodyparts += organ_tag
 			limb_count_update = TRUE
 
-	for(var/missing_limb in missing_bodyparts)
+	for (var/missing_limb in missing_bodyparts)
 		icon_render_keys -= missing_limb
 
 	if (length(needs_update) || limb_count_update)
 		//GENERATE NEW LIMBS
 		var/list/new_limbs = list()
-		for(var/obj/item/organ/external/limb in organs)
+		for (var/obj/item/organ/external/limb in organs)
 			if (limb in needs_update)
 				var/list/limb_overlays = limb.get_overlays()
 				GLOB.limb_overlays_cache[icon_render_keys[limb.organ_tag]] = limb_overlays
@@ -373,7 +373,7 @@ var/global/list/damage_icon_parts = list()
 
 /mob/living/carbon/human/proc/update_underwear(update_icons=1)
 	overlays_standing[HO_UNDERWEAR_LAYER] = list()
-	for(var/entry in worn_underwear)
+	for (var/entry in worn_underwear)
 		var/obj/item/underwear/UW = entry
 		if (!UW || !UW.icon) // Avoid runtimes for nude underwear types
 			continue
@@ -424,7 +424,7 @@ var/global/list/damage_icon_parts = list()
 	var/g = "m"
 	if (gender == FEMALE)	g = "f"
 	// DNA2 - Drawing underlays.
-	for(var/datum/dna/gene/gene in dna_genes)
+	for (var/datum/dna/gene/gene in dna_genes)
 		if (!gene.block)
 			continue
 		if (gene.is_active(src))
@@ -432,7 +432,7 @@ var/global/list/damage_icon_parts = list()
 			if (underlay)
 				standing.underlays += underlay
 				add_image = 1
-	for(var/mut in mutations)
+	for (var/mut in mutations)
 		switch(mut)
 			if (MUTATION_LASER)
 				standing.overlays	+= "lasereyes_s"
@@ -778,7 +778,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/update_surgery(update_icons=1)
 	overlays_standing[HO_SURGERY_LAYER] = null
 	var/image/total = new
-	for(var/obj/item/organ/external/E in organs)
+	for (var/obj/item/organ/external/E in organs)
 		if (BP_IS_ROBOTIC(E) || E.is_stump())
 			continue
 		var/how_open = round(E.how_open())

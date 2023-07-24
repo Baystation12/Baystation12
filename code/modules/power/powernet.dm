@@ -25,10 +25,10 @@
 	..()
 
 /datum/powernet/Destroy()
-	for(var/obj/structure/cable/C in cables)
+	for (var/obj/structure/cable/C in cables)
 		cables -= C
 		C.powernet = null
-	for(var/obj/machinery/power/M in nodes)
+	for (var/obj/machinery/power/M in nodes)
 		nodes -= M
 		M.powernet = null
 	STOP_PROCESSING_POWERNET(src)
@@ -102,7 +102,7 @@
 		problem = max(problem - 1, 0)
 
 	if (nodes && length(nodes)) // Added to fix a bad list bug -- TLE
-		for(var/obj/machinery/power/terminal/term in nodes)
+		for (var/obj/machinery/power/terminal/term in nodes)
 			if ( istype( term.master_machine(), /obj/machinery/power/apc ) )
 				numapc++
 
@@ -122,14 +122,14 @@
 	// At this point, all other machines have finished using power. Anything left over may be used up to charge SMESs.
 	if (length(inputting) && smes_demand)
 		var/smes_input_percentage = clamp((netexcess / smes_demand) * 100, 0, 100)
-		for(var/obj/machinery/power/smes/S in inputting)
+		for (var/obj/machinery/power/smes/S in inputting)
 			S.input_power(smes_input_percentage)
 
 	netexcess = avail - load
 
 	if (netexcess)
 		var/perc = get_percent_load(1)
-		for(var/obj/machinery/power/smes/S in nodes)
+		for (var/obj/machinery/power/smes/S in nodes)
 			S.restore(perc)
 
 	//updates the viewed load (as seen on power computers)
@@ -174,7 +174,7 @@
 // Parameters: 3 (failure_chance - chance to actually break the APC, overload_chance - Chance of breaking lights, reboot_chance - Chance of temporarily disabling the APC)
 // Description: Damages output powernet by power surge. Destroys few APCs and lights, depending on parameters.
 /datum/powernet/proc/apcs_overload(failure_chance, overload_chance, reboot_chance)
-	for(var/obj/machinery/power/terminal/T in nodes)
+	for (var/obj/machinery/power/terminal/T in nodes)
 		var/obj/machinery/power/apc/A = T.master_machine()
 		if (istype(A))
 			if (prob(failure_chance))
@@ -194,7 +194,7 @@
 /turf/proc/get_cable_node()
 	if (!istype(src, /turf/simulated))
 		return null
-	for(var/obj/structure/cable/C in src)
+	for (var/obj/structure/cable/C in src)
 		if (C.d1 == 0)
 			return C
 	return null

@@ -64,7 +64,7 @@
 		// If we are capable of repairing damage, reboot destroyed components and allow them to be repaired for very large power spike.
 		var/list/damaged = R.get_damaged_components(1,1,1)
 		if (length(damaged) && wire_rate && weld_rate)
-			for(var/datum/robot_component/C in damaged)
+			for (var/datum/robot_component/C in damaged)
 				if ((C.installed == -1) && use_power_oneoff(100 KILOWATTS, LOCAL) <= 0)
 					C.repair()
 

@@ -30,7 +30,7 @@
 	var/direction = front.dir
 
 	var/distance = 0
-	for(var/turf/T in getline(get_step(front,front.dir),get_target_turf(start, direction)))
+	for (var/turf/T in getline(get_step(front,front.dir),get_target_turf(start, direction)))
 		distance++
 		if (T.density)
 			if (distance < 7)
@@ -38,7 +38,7 @@
 				continue
 			else
 				T.ex_act(EX_ACT_DEVASTATING)
-		for(var/atom/A in T)
+		for (var/atom/A in T)
 			if (A.density)
 				if (distance < 7)
 					explosion(A, 6)
@@ -46,7 +46,7 @@
 				else
 					A.ex_act(EX_ACT_DEVASTATING)
 
-	for(var/mob/M in GLOB.player_list)
+	for (var/mob/M in GLOB.player_list)
 		if (!AreConnectedZLevels(get_z(M), get_z(start)))
 			continue
 		shake_camera(M, 25)
@@ -94,11 +94,11 @@
 	var/list/candidates = list()
 
 	// Prioritize events. Thus you can hide in meteor showers in exchange for protection from the disperser.
-	for(var/obj/effect/overmap/event/O in overmaptarget)
+	for (var/obj/effect/overmap/event/O in overmaptarget)
 		candidates += O
 	// Next we see if there are any ships around. Logically they are between us and the sector if one exists.
 	if (!length(candidates))
-		for(var/obj/effect/overmap/visitable/ship/S in overmaptarget)
+		for (var/obj/effect/overmap/visitable/ship/S in overmaptarget)
 			if (S == linked)
 				/// Why are you shooting yourself?
 				continue
@@ -106,7 +106,7 @@
 
 	// No events, no ships, the last thing to check is a sector.
 	if (!length(candidates))
-		for(var/obj/effect/overmap/O in overmaptarget)
+		for (var/obj/effect/overmap/O in overmaptarget)
 			if (O == linked)
 				// Why are you shooting yourself?
 				continue
@@ -164,10 +164,10 @@
 	if (chargetype == OVERMAP_WEAKNESS_DROPPOD)
 		if (targetturf.density)
 			targetturf.ex_act(EX_ACT_DEVASTATING)
-		for(var/atom/A in targetturf)
+		for (var/atom/A in targetturf)
 			A.ex_act(EX_ACT_LIGHT)
 
-		for(var/mob/M in GLOB.player_list)
+		for (var/mob/M in GLOB.player_list)
 			if (!AreConnectedZLevels(get_z(M), get_z(targetturf)))
 				continue
 			shake_camera(M, 25)
@@ -192,7 +192,7 @@
 
 		charge.forceMove(targetturf)
 		// The disperser is not a taxi
-		for(var/mob/living/L in charge)
+		for (var/mob/living/L in charge)
 			to_chat(L, SPAN_DANGER("Your body shakes violently, immense and agonising forces tearing it apart."))
 			L.forceMove(targetturf)
 			L.ex_act(EX_ACT_DEVASTATING)

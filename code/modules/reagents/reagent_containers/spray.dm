@@ -194,7 +194,7 @@
 		else
 			admin_attacker_log(user, "Used \the [name] containing [contained] to spray \the [A]")
 
-	for(var/a = 1 to 3)
+	for (var/a = 1 to 3)
 		spawn(0)
 			if (reagents.total_volume < 1) break
 			var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))

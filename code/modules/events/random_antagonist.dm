@@ -5,7 +5,7 @@
 /datum/event/random_antag/start()
 	var/list/valid_types = list()
 
-	for(var/antag_type in GLOB.all_antag_types_)
+	for (var/antag_type in GLOB.all_antag_types_)
 		var/datum/antagonist/antag = GLOB.all_antag_types_[antag_type]
 		if (antag.flags & ANTAG_RANDSPAWN)
 			valid_types |= antag

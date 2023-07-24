@@ -4,7 +4,7 @@
 
 /datum/codex_category/reagents/Initialize()
 
-	for(var/thing in subtypesof(/datum/reagent))
+	for (var/thing in subtypesof(/datum/reagent))
 		var/datum/reagent/reagent = thing
 		if (initial(reagent.hidden_from_codex))
 			continue
@@ -15,7 +15,7 @@
 		 _lore_text = "[initial(reagent.description)] It apparently tastes of [initial(reagent.taste_description)].")
 
 		var/list/production_strings = list()
-		for(var/react in SSchemistry.reactions_by_result[thing])
+		for (var/react in SSchemistry.reactions_by_result[thing])
 
 			var/datum/chemical_reaction/reaction = react
 
@@ -23,7 +23,7 @@
 				continue
 
 			var/list/reactant_values = list()
-			for(var/reactant_id in reaction.required_reagents)
+			for (var/reactant_id in reaction.required_reagents)
 				var/datum/reagent/reactant = reactant_id
 				reactant_values += "[reaction.required_reagents[reactant_id]]u [lowertext(initial(reactant.name))]"
 
@@ -31,7 +31,7 @@
 				continue
 
 			var/list/catalysts = list()
-			for(var/catalyst_id in reaction.catalysts)
+			for (var/catalyst_id in reaction.catalysts)
 				var/datum/reagent/catalyst = catalyst_id
 				catalysts += "[reaction.catalysts[catalyst_id]]u [lowertext(initial(catalyst.name))]"
 

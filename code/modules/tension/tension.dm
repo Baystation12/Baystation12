@@ -213,7 +213,7 @@
 	var/list/potential_threats = list()
 
 	// First, get everything threatening to us.
-	for(var/thing in view(src))
+	for (var/thing in view(src))
 		if (isliving(thing))
 			potential_threats += thing
 		if (istype(thing, /obj/machinery/porta_turret))
@@ -221,7 +221,7 @@
 
 	var/danger = FALSE
 	// Now to get all the threats.
-	for(var/atom/movable/AM in potential_threats)
+	for (var/atom/movable/AM in potential_threats)
 		var/tension_from_AM = AM.get_threat(src)
 		tension += tension_from_AM
 		if (tension_from_AM > 0)

@@ -16,7 +16,7 @@
 
 	// Grab any mapped notices.
 	notices = list()
-	for(var/obj/item/paper/note in get_turf(src))
+	for (var/obj/item/paper/note in get_turf(src))
 		note.forceMove(src)
 		LAZYADD(notices, note)
 		if (LAZYLEN(notices) >= max_notices)
@@ -27,12 +27,12 @@
 
 		var/turf/here = get_turf(src)
 		var/placing = 0
-		for(var/checkdir in GLOB.cardinal)
+		for (var/checkdir in GLOB.cardinal)
 			var/turf/T = get_step(here, checkdir)
 			if (T.density)
 				placing = checkdir
 				break
-			for(var/thing in T)
+			for (var/thing in T)
 				var/atom/A = thing
 				if (A.simulated && !A.CanPass(src, T))
 					placing = checkdir
@@ -70,7 +70,7 @@
 			update_icon()
 
 /obj/structure/noticeboard/proc/dismantle()
-	for(var/thing in notices)
+	for (var/thing in notices)
 		remove_paper(thing, skip_icon_update = TRUE)
 	new /obj/item/stack/material(get_turf(src), 10, MATERIAL_WOOD)
 	qdel(src)
@@ -160,7 +160,7 @@
 /obj/structure/noticeboard/examine(mob/user)
 	. = ..()
 	var/list/dat = list("<table>")
-	for(var/thing in notices)
+	for (var/thing in notices)
 		LAZYADD(dat, "<tr><td>[thing]</td><td>")
 		if (istype(thing, /obj/item/paper))
 			LAZYADD(dat, "<a href='?src=\ref[src];read=\ref[thing]'>Read</a><a href='?src=\ref[src];write=\ref[thing]'>Write</a>")

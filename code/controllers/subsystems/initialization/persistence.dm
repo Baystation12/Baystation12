@@ -11,13 +11,13 @@ SUBSYSTEM_DEF(persistence)
 
 
 /datum/controller/subsystem/persistence/Initialize(start_uptime)
-	for(var/thing in subtypesof(/datum/persistent))
+	for (var/thing in subtypesof(/datum/persistent))
 		var/datum/persistent/P = new thing
 		persistence_datums[thing] = P
 		P.Initialize()
 
 /datum/controller/subsystem/persistence/Shutdown()
-	for(var/thing in persistence_datums)
+	for (var/thing in persistence_datums)
 		var/datum/persistent/P = persistence_datums[thing]
 		P.Shutdown()
 
@@ -49,7 +49,7 @@ SUBSYSTEM_DEF(persistence)
 
 	var/list/dat = list("<table width = '100%'>")
 	var/can_modify = check_rights(R_ADMIN, 0, user)
-	for(var/thing in persistence_datums)
+	for (var/thing in persistence_datums)
 		var/datum/persistent/P = persistence_datums[thing]
 		if (P.has_admin_data)
 			dat += P.GetAdminSummary(user, can_modify)

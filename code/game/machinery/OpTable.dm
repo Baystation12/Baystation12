@@ -23,7 +23,7 @@
 
 /obj/machinery/optable/Initialize()
 	. = ..()
-	for(dir in list(NORTH,EAST,SOUTH,WEST))
+	for (dir in list(NORTH,EAST,SOUTH,WEST))
 		computer = locate(/obj/machinery/computer/operating, get_step(src, dir))
 		if (computer)
 			computer.table = src
@@ -101,7 +101,7 @@
 		if (connected_monitor)
 			connected_monitor.update_victim()
 		if (locate(/mob/living/carbon/human) in loc)
-			for(var/mob/living/carbon/human/H in loc)
+			for (var/mob/living/carbon/human/H in loc)
 				if (H.lying)
 					victim = H
 					if (connected_monitor)

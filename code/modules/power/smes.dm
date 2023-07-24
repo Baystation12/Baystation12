@@ -79,11 +79,11 @@
 	update_icon()
 
 /obj/machinery/power/smes/populate_parts()
-	for(var/d in GLOB.cardinal)
+	for (var/d in GLOB.cardinal)
 		var/obj/item/stock_parts/power/terminal/part = install_component(/obj/item/stock_parts/power/terminal, refresh_parts = FALSE)
 		part.terminal_dir = d
 		var/turf/T = get_step(src, d)
-		for(var/obj/machinery/power/terminal/term in T)
+		for (var/obj/machinery/power/terminal/term in T)
 			if (term.dir == turn(d, 180) && !term.master)
 				part.set_terminal(src, term)
 				term.connect_to_network()
@@ -140,7 +140,7 @@
 		inputting = 1
 	// else inputting = 0, as set in process()
 
-	for(var/obj/item/stock_parts/power/terminal/term in power_components)
+	for (var/obj/item/stock_parts/power/terminal/term in power_components)
 		var/inputted = term.use_power_oneoff(src, to_input, power_channel)
 		add_charge(inputted)
 		input_available += inputted
@@ -180,7 +180,7 @@
 	if (input_attempt && (!input_pulsed && !input_cut))
 		target_load = min((capacity-charge)/CELLRATE, input_level)	// Amount we will request from the powernet.
 		var/is_input_available = FALSE
-		for(var/obj/item/stock_parts/power/terminal/term in power_components)
+		for (var/obj/item/stock_parts/power/terminal/term in power_components)
 			if (!term.terminal || !term.terminal.powernet)
 				continue
 			is_input_available = TRUE

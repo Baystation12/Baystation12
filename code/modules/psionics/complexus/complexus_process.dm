@@ -6,7 +6,7 @@
 	var/highest_faculty
 	var/highest_rank = 0
 	var/combined_rank = 0
-	for(var/faculty in ranks)
+	for (var/faculty in ranks)
 		var/check_rank = get_rank(faculty)
 		if (check_rank == 1)
 			LAZYADD(latencies, faculty)
@@ -43,7 +43,7 @@
 					owner.client.screen |= ui.components
 					owner.client.screen |= ui
 			if (!suppressed && owner.client)
-				for(var/thing in SSpsi.all_aura_images)
+				for (var/thing in SSpsi.all_aura_images)
 					owner.client.images |= thing
 
 			var/image/aura_image = get_aura_image()
@@ -181,7 +181,7 @@
 
 			// Heal organ damage.
 			if (heal_internal)
-				for(var/obj/item/organ/I in H.internal_organs)
+				for (var/obj/item/organ/I in H.internal_organs)
 
 					if (BP_IS_ROBOTIC(I) || BP_IS_CRYSTAL(I))
 						continue
@@ -194,7 +194,7 @@
 
 			// Heal broken bones.
 			if (length(H.bad_external_organs))
-				for(var/obj/item/organ/external/E in H.bad_external_organs)
+				for (var/obj/item/organ/external/E in H.bad_external_organs)
 
 					if (BP_IS_ROBOTIC(E))
 						continue
@@ -217,7 +217,7 @@
 							E.status &= ~ORGAN_TENDON_CUT
 							return TRUE
 
-						for(var/datum/wound/W in E.wounds)
+						for (var/datum/wound/W in E.wounds)
 
 							if (W.bleeding() && spend_power(heal_rate))
 								to_chat(H, SPAN_NOTICE("Your autoredactive faculty knits together severed veins, stemming the bleeding from \a [W.desc] on your [E.name]."))

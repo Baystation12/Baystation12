@@ -16,7 +16,7 @@
 
 /obj/item/clothing/get_mechanics_info()
 	var/list/armor_strings = list()
-	for(var/armor_type in armour_to_descriptive_term)
+	for (var/armor_type in armour_to_descriptive_term)
 		if (LAZYACCESS(armor, armor_type))
 			switch(armor[armor_type])
 				if (1 to 20)
@@ -60,10 +60,10 @@
 
 	var/list/covers = list()
 	var/list/slots = list()
-	for(var/name in string_part_flags)
+	for (var/name in string_part_flags)
 		if (body_parts_covered & string_part_flags[name])
 			covers += name
-	for(var/name in string_slot_flags)
+	for (var/name in string_slot_flags)
 		if (slot_flags & string_slot_flags[name])
 			slots += name
 

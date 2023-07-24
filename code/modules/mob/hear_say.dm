@@ -180,7 +180,7 @@
 				var/mob/living/carbon/human/I = impersonated[speaker_name]
 
 				if (!I)
-					for(var/mob/living/carbon/human/M in SSmobs.mob_list)
+					for (var/mob/living/carbon/human/M in SSmobs.mob_list)
 						if (M.real_name == speaker_name)
 							I = M
 							impersonated[speaker_name] = I
@@ -295,9 +295,9 @@
 		message = "<B>[speaker]</B> [verb][adverb]."
 
 	if (src.status_flags & PASSEMOTES)
-		for(var/obj/item/holder/H in src.contents)
+		for (var/obj/item/holder/H in src.contents)
 			H.show_message(message)
-		for(var/mob/living/M in src.contents)
+		for (var/mob/living/M in src.contents)
 			M.show_message(message)
 	src.show_message(message)
 

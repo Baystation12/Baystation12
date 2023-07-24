@@ -49,14 +49,14 @@
 
 // override to make sure nothing is hidden
 /turf/simulated/open/levelupdate()
-	for(var/obj/O in src)
+	for (var/obj/O in src)
 		O.hide(0)
 
 /turf/simulated/open/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if (distance <= 2)
 		var/depth = 1
-		for(var/T = GetBelow(src); isopenspace(T); T = GetBelow(T))
+		for (var/T = GetBelow(src); isopenspace(T); T = GetBelow(T))
 			depth += 1
 		to_chat(user, "It is about [depth] level\s deep.")
 
@@ -94,12 +94,12 @@
 		coil.PlaceCableOnTurf(src, user)
 		return
 
-	for(var/atom/movable/M in below)
+	for (var/atom/movable/M in below)
 		if (M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
 			return M.attackby(C, user)
 
 /turf/simulated/open/attack_hand(mob/user)
-	for(var/atom/movable/M in below)
+	for (var/atom/movable/M in below)
 		if (M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
 			return M.attack_hand(user)
 

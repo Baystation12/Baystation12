@@ -100,7 +100,7 @@
 		return TRUE
 
 	if (thing.reagents)
-		for(var/checktype in permitted_types)
+		for (var/checktype in permitted_types)
 			if (istype(thing, checktype))
 				if (container)
 					to_chat(user, SPAN_WARNING("\The [src] is already holding \the [container]."))

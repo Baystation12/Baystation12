@@ -32,7 +32,7 @@
 	var/list/to_receive = list()
 
 /datum/event/mail/setup()
-	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+	for (var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
 		if (prob(25))
 			to_receive.Add(CR.get_name())
 
@@ -62,7 +62,7 @@
 	var/obj/structure/closet/crate/gift_crate = new()
 	gift_crate.SetName("mail crate")
 
-	for(var/name in to_receive)
+	for (var/name in to_receive)
 		var/obj/item/documents/letter = new()
 		letter.SetName("letter to [name]")
 		letter.desc = "A letter from home."

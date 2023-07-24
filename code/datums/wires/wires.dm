@@ -37,7 +37,7 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 	// Generate new wires
 	if (random)
 		GenerateWires()
-		for(var/datum/wire_description/desc in descriptions)
+		for (var/datum/wire_description/desc in descriptions)
 			if (prob(50))
 				desc.skill_level++
 	// Get the same wires
@@ -68,7 +68,7 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 	var/list/colours_to_pick = wireColours.Copy() // Get a copy, not a reference.
 	var/list/indexes_to_pick = list()
 	//Generate our indexes
-	for(var/i = 1; i < MAX_FLAG && i < SHIFTL(1, wire_count); i += i)
+	for (var/i = 1; i < MAX_FLAG && i < SHIFTL(1, wire_count); i += i)
 		indexes_to_pick += i
 	LIST_RESIZE(colours_to_pick, wire_count) // Downsize it to our specifications.
 
@@ -111,12 +111,12 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 	html += "<table[table_options]>"
 
 	var/list/wires_used = list()
-	for(var/colour in wires)
+	for (var/colour in wires)
 		wires_used += prob(user.skill_fail_chance(SKILL_ELECTRICAL, 20, SKILL_TRAINED)) ? pick(wires) : colour
 	if (!user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
 		wires_used = shuffle(wires_used)
 
-	for(var/colour in wires_used)
+	for (var/colour in wires_used)
 		html += "<tr>"
 		html += "<td[row_options1]>[SPAN_COLOR(colour, "&#9724;")][capitalize(colour)]</td>"
 		html += "<td[row_options2]>"
@@ -273,7 +273,7 @@ var/global/const/POWER = 8
 //
 
 /datum/wires/proc/get_description(index)
-	for(var/datum/wire_description/desc in descriptions)
+	for (var/datum/wire_description/desc in descriptions)
 		if (desc.index == index)
 			return desc
 
@@ -342,7 +342,7 @@ var/global/const/POWER = 8
 
 /datum/wires/proc/Pulse(obj/item/device/assembly/signaler/S)
 
-	for(var/colour in signallers)
+	for (var/colour in signallers)
 		if (S == signallers[colour])
 			PulseColour(colour)
 			break
@@ -370,12 +370,12 @@ var/global/const/POWER = 8
 	CutWireColour(wires[r])
 
 /datum/wires/proc/RandomCutAll(probability = 10)
-	for(var/i = 1; i < MAX_FLAG && i < SHIFTL(1, wire_count); i += i)
+	for (var/i = 1; i < MAX_FLAG && i < SHIFTL(1, wire_count); i += i)
 		if (prob(probability))
 			CutWireIndex(i)
 
 /datum/wires/proc/CutAll()
-	for(var/i = 1; i < MAX_FLAG && i < SHIFTL(1, wire_count); i += i)
+	for (var/i = 1; i < MAX_FLAG && i < SHIFTL(1, wire_count); i += i)
 		CutWireIndex(i)
 
 /datum/wires/proc/IsAllCut()
@@ -384,7 +384,7 @@ var/global/const/POWER = 8
 	return 0
 
 /datum/wires/proc/MendAll()
-	for(var/i = 1; i < MAX_FLAG && i < SHIFTL(1, wire_count); i += i)
+	for (var/i = 1; i < MAX_FLAG && i < SHIFTL(1, wire_count); i += i)
 		if (IsIndexCut(i))
 			CutWireIndex(i)
 

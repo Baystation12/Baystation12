@@ -25,7 +25,7 @@
 		var/sanity = prob(99.9)
 		while (i <= gasnum && total_moles && length(newgases))
 			if (badflag && sanity)
-				for(var/g in newgases)
+				for (var/g in newgases)
 					if (gas_data.flags[g] & badflag)
 						newgases -= g
 			var/ng = pick_n_take(newgases)	//pick a gas

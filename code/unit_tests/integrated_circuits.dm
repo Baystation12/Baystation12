@@ -7,7 +7,7 @@
 /datum/unit_test/integrated_circuits/unique_names/start_test()
 	var/list/circuits_by_name = list()
 
-	for(var/circuit_path in SScircuit.cached_components)
+	for (var/circuit_path in SScircuit.cached_components)
 		var/atom/A = circuit_path
 		group_by(circuits_by_name, initial(A.name), circuit_path)
 
@@ -24,7 +24,7 @@
 
 /datum/unit_test/integrated_circuits/prefabs_are_valid/start_test()
 	var/list/failed_prefabs = list()
-	for(var/prefab_type in subtypesof(/singleton/prefab/ic_assembly))
+	for (var/prefab_type in subtypesof(/singleton/prefab/ic_assembly))
 		var/singleton/prefab/ic_assembly/prefab = prefab_type
 		var/result = SScircuit.validate_electronic_assembly(initial(prefab.data))
 		if (istext(result)) //Returned some error
@@ -41,7 +41,7 @@
 
 /datum/unit_test/integrated_circuits/prefabs_shall_not_fail_to_create/start_test()
 	var/list/failed_prefabs = list()
-	for(var/prefab_type in subtypesof(/singleton/prefab/ic_assembly))
+	for (var/prefab_type in subtypesof(/singleton/prefab/ic_assembly))
 		var/singleton/prefab/ic_assembly/prefab = GET_SINGLETON(prefab_type)
 
 		try
@@ -80,16 +80,16 @@
 		fail("Given inputs do not match the expected outputs length.")
 		return 1
 
-	for(var/test_index = 1 to length(all_inputs))
+	for (var/test_index = 1 to length(all_inputs))
 		var/list/inputs = all_inputs[test_index]
 		var/list/expected_outputs = all_expected_outputs[test_index]
 
-		for(var/input_pin_index = 1 to length(inputs))
+		for (var/input_pin_index = 1 to length(inputs))
 			ic.set_pin_data(IC_INPUT, input_pin_index, inputs[input_pin_index])
 
 		ic.do_work(activation_pin)
 
-		for(var/output_index = 1 to length(expected_outputs))
+		for (var/output_index = 1 to length(expected_outputs))
 			var/actual_output = ic.get_pin_data(IC_OUTPUT, output_index)
 			var/expected_output = expected_outputs[output_index]
 			if (expected_output == IC_TEST_ANY_OUTPUT)
@@ -97,9 +97,9 @@
 			if (actual_output != expected_output)
 				failed = TRUE
 				log_bad("[circuit_type] - Test [test_index] - Expected '[expected_output]', was '[actual_output]'")
-				for(var/datum/integrated_io/io in ic.inputs)
+				for (var/datum/integrated_io/io in ic.inputs)
 					log_bad("Raw Input: [io.data]")
-				for(var/datum/integrated_io/io in ic.outputs)
+				for (var/datum/integrated_io/io in ic.outputs)
 					log_bad("Raw Output: [io.data]")
 
 	qdel(ic)

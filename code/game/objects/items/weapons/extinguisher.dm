@@ -87,13 +87,13 @@
 		C = O
 
 	var/list/move_speed = list(1, 1, 1, 2, 2, 3)
-	for(var/i in 1 to 6)
+	for (var/i in 1 to 6)
 		if (C) C.propelled = (6-i)
 		O.Move(get_step(user,movementdirection), movementdirection)
 		sleep(move_speed[i])
 
 	//additional movement
-	for(var/i in 1 to 3)
+	for (var/i in 1 to 3)
 		O.Move(get_step(user,movementdirection), movementdirection)
 		sleep(3)
 
@@ -157,7 +157,7 @@
 /obj/item/extinguisher/proc/do_spray(atom/Target)
 	var/turf/T = get_turf(Target)
 	var/per_particle = min(spray_amount, reagents.total_volume)/spray_particles
-	for(var/a = 1 to spray_particles)
+	for (var/a = 1 to spray_particles)
 		if (!src || !reagents.total_volume) return
 
 		var/obj/effect/effect/water/W = new /obj/effect/effect/water(get_turf(src))

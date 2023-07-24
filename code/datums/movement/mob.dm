@@ -152,7 +152,7 @@
 		return MOVEMENT_HANDLED
 
 /datum/movement_handler/mob/stop_effect/MayMove()
-	for(var/obj/effect/stop/S in mob.loc)
+	for (var/obj/effect/stop/S in mob.loc)
 		if (S.victim == mob)
 			return MOVEMENT_STOP
 	return MOVEMENT_PROCEED
@@ -187,7 +187,7 @@
 			to_chat(mob, SPAN_NOTICE("You're pinned down by \a [mob.pinned[1]]!"))
 		return MOVEMENT_STOP
 
-	for(var/obj/item/grab/G in mob.grabbed_by)
+	for (var/obj/item/grab/G in mob.grabbed_by)
 		if (G.assailant != mob && G.stop_move())
 			if (mover == mob)
 				to_chat(mob, SPAN_NOTICE("You're stuck in a grab!"))
@@ -195,7 +195,7 @@
 			return MOVEMENT_STOP
 
 	if (mob.restrained())
-		for(var/mob/M in range(mob, 1))
+		for (var/mob/M in range(mob, 1))
 			if (M.pulling == mob)
 				if (!M.incapacitated() && mob.Adjacent(M))
 					if (mover == mob)
@@ -297,11 +297,11 @@
 							if (mob.loc != old_turf && M.loc != mob.loc)
 								step(M, get_dir(M.loc, old_turf))
 			else
-				for(var/mob/M in L)
+				for (var/mob/M in L)
 					M.other_mobs = 1
 					if (mob != M)
 						M.animate_movement = 3
-				for(var/mob/M in L)
+				for (var/mob/M in L)
 					spawn( 0 )
 						step(M, direction)
 						return

@@ -1,15 +1,15 @@
 /mob/living/carbon/human/gib()
-	for(var/obj/item/organ/I in internal_organs)
+	for (var/obj/item/organ/I in internal_organs)
 		I.removed()
 		if (!QDELETED(I) && isturf(loc))
 			I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 
-	for(var/obj/item/organ/external/E in src.organs)
+	for (var/obj/item/organ/external/E in src.organs)
 		E.droplimb(0,DROPLIMB_EDGE,1)
 
 	sleep(1)
 
-	for(var/obj/item/I in src)
+	for (var/obj/item/I in src)
 		drop_from_inventory(I)
 		if (!QDELETED(I))
 			I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)), rand(1,3), round(30/I.w_class))
@@ -41,7 +41,7 @@
 	var/mob/living/simple_animal/borer/B
 
 	if (head)
-		for(var/I in head.implants)
+		for (var/I in head.implants)
 			if (istype(I,/mob/living/simple_animal/borer))
 				B = I
 		if (B)
@@ -82,7 +82,7 @@
 		update_hair(0)
 
 	mutations.Add(MUTATION_HUSK)
-	for(var/obj/item/organ/external/E in organs)
+	for (var/obj/item/organ/external/E in organs)
 		E.status |= ORGAN_DISFIGURED
 	update_body(1)
 	return
@@ -102,7 +102,7 @@
 	update_hair(0)
 
 	mutations.Add(MUTATION_SKELETON)
-	for(var/obj/item/organ/external/E in organs)
+	for (var/obj/item/organ/external/E in organs)
 		E.status |= ORGAN_DISFIGURED
 	update_body(1)
 	playsound(src.loc, 'sound/effects/bonerattle.ogg', 50, 1)

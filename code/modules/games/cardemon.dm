@@ -6,7 +6,7 @@
 /obj/item/pack/cardemon/SetupCards()
 	var/datum/playingcard/P
 	var/i
-	for(i=0; i<6; i++)
+	for (i=0; i<6; i++)
 		var/element = pick("ire","spaghetti","meat","metal","money","brain")
 		var/stats = list("HP"=rand(1,15),"DP"=rand(1,15),"SP"=rand(1,15))
 		var/rarity

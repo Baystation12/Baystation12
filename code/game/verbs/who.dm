@@ -8,7 +8,7 @@
 	var/list/Lines = list()
 
 	if (check_rights(R_INVESTIGATE, 0))
-		for(var/client/C in GLOB.clients)
+		for (var/client/C in GLOB.clients)
 			var/entry = "\t[C.key]"
 			if (!C.mob) //If mob is null, print error and skip rest of info for client.
 				entry += " - [SPAN_COLOR("red", "<i>HAS NO MOB</i>")]"
@@ -49,11 +49,11 @@
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
 			Lines += entry
 	else
-		for(var/client/C in GLOB.clients)
+		for (var/client/C in GLOB.clients)
 			if (!C.is_stealthed())
 				Lines += C.key
 
-	for(var/line in sortList(Lines))
+	for (var/line in sortList(Lines))
 		msg += "[line]\n"
 
 	msg += "<b>Total Players: [length(Lines)]</b>"
@@ -68,7 +68,7 @@
 	var/total_staff = 0
 	var/can_investigate = check_rights(R_INVESTIGATE, 0)
 
-	for(var/client/C as anything in GLOB.admins)
+	for (var/client/C as anything in GLOB.admins)
 		var/line = list()
 		if (!can_investigate && C.is_stealthed())
 			continue

@@ -77,8 +77,8 @@ Internal procs. Do not modify.
 
 /singleton/public_access/public_variable/proc/var_changed(owner, old_value, new_value)
 	var/list/to_alert = listeners[owner]
-	for(var/thing in to_alert)
-		for(var/call_proc in to_alert[thing])
+	for (var/thing in to_alert)
+		for (var/call_proc in to_alert[thing])
 			call(thing, call_proc)(src, owner, old_value, new_value)
 
 /*
@@ -105,8 +105,8 @@ Machinery implementation
 /obj/machinery/var/list/public_methods
 
 /obj/machinery/Initialize()
-	for(var/path in public_variables)
+	for (var/path in public_variables)
 		public_variables[path] = GET_SINGLETON(path)
-	for(var/path in public_methods)
+	for (var/path in public_methods)
 		public_methods[path] = GET_SINGLETON(path)
 	. = ..()

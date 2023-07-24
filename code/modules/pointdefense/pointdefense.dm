@@ -67,7 +67,7 @@
 	var/list/turrets = list()
 	if (lan)
 		var/list/pointdefense_turrets = lan.get_devices(/obj/machinery/pointdefense)
-		for(var/i = 1 to LAZYLEN(pointdefense_turrets))
+		for (var/i = 1 to LAZYLEN(pointdefense_turrets))
 			var/list/turret = list()
 			var/obj/machinery/pointdefense/PD = pointdefense_turrets[i]
 			turret["id"] =          "#[i]"
@@ -137,7 +137,7 @@
 
 //Guns cannot shoot through hull or generally dense turfs.
 /obj/machinery/pointdefense/proc/space_los(meteor)
-	for(var/turf/T in getline(src,meteor))
+	for (var/turf/T in getline(src,meteor))
 		if (T.density)
 			return FALSE
 	return TRUE
@@ -207,9 +207,9 @@
 	if (!istype(PC))
 		return
 
-	for(var/obj/effect/meteor/M in GLOB.meteor_list)
+	for (var/obj/effect/meteor/M in GLOB.meteor_list)
 		var/already_targeted = FALSE
-		for(var/weakref/WR in PC.targets)
+		for (var/weakref/WR in PC.targets)
 			var/obj/effect/meteor/m = WR.resolve()
 			if (m == M)
 				already_targeted = TRUE

@@ -29,11 +29,11 @@ SUBSYSTEM_DEF(robots)
 /datum/controller/subsystem/robots/Initialize(start_uptime)
 
 	// This is done via loop instead of just assignment in order to trim associations.
-	for(var/title in (mob_types_by_title|mmi_types_by_title))
+	for (var/title in (mob_types_by_title|mmi_types_by_title))
 		robot_alt_titles |= capitalize(title)
 	sortTim(robot_alt_titles, /proc/cmp_text_asc)
 
-	for(var/module_type in subtypesof(/obj/item/robot_module))
+	for (var/module_type in subtypesof(/obj/item/robot_module))
 		var/obj/item/robot_module/module = module_type
 		var/module_category = initial(module.module_category)
 		var/module_name = initial(module.display_name)

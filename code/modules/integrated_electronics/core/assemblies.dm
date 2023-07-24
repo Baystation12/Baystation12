@@ -96,7 +96,7 @@
 
 /obj/item/device/electronic_assembly/GetAccess()
 	. = list()
-	for(var/obj/item/integrated_circuit/output/O in assembly_components)
+	for (var/obj/item/integrated_circuit/output/O in assembly_components)
 		var/o_access = O.GetAccess()
 		. |= o_access
 
@@ -119,7 +119,7 @@
 /obj/item/device/electronic_assembly/Destroy()
 	QDEL_NULL(spark_system)
 	STOP_PROCESSING(SScircuit, src)
-	for(var/circ in assembly_components)
+	for (var/circ in assembly_components)
 		remove_component(circ)
 		qdel(circ)
 	return ..()
@@ -129,7 +129,7 @@
 
 /obj/item/device/electronic_assembly/Process()
 	// First we generate power.
-	for(var/obj/item/integrated_circuit/passive/power/P in assembly_components)
+	for (var/obj/item/integrated_circuit/passive/power/P in assembly_components)
 		P.make_energy()
 
 	var/power_failure = FALSE
@@ -139,7 +139,7 @@
 			spark_system.start()
 		power_failure = TRUE
 	// Now spend it.
-	for(var/I in assembly_components)
+	for (var/I in assembly_components)
 		var/obj/item/integrated_circuit/IC = I
 		if (IC.power_draw_idle)
 			if (power_failure || !draw_power(IC.power_draw_idle))
@@ -166,14 +166,14 @@
 	HTML += "<br><br>"
 
 	var/listed_components = FALSE
-	for(var/obj/item/integrated_circuit/circuit in contents)
+	for (var/obj/item/integrated_circuit/circuit in contents)
 		var/list/topic_data = circuit.get_topic_data(user)
 		if (topic_data)
 			listed_components = TRUE
 			HTML += "<b>[circuit.displayed_name]: </b>"
 			if (length(topic_data) != 1)
 				HTML += "<br>"
-			for(var/entry in topic_data)
+			for (var/entry in topic_data)
 				var/href = topic_data[entry]
 				if (href)
 					HTML += "<a href=?src=\ref[circuit];[href]>[entry]</a>"
@@ -207,7 +207,7 @@
 		HTML += "Components:<br>"
 
 		var/start_index = ((components_per_page * interact_page) + 1)
-		for(var/i = start_index to min(length(assembly_components), start_index + (components_per_page - 1)))
+		for (var/i = start_index to min(length(assembly_components), start_index + (components_per_page - 1)))
 			var/obj/item/integrated_circuit/circuit = assembly_components[i]
 			HTML += "\[ <a href='?src=\ref[src];component=\ref[circuit];set_slot=1'>[i]</a> \] | "
 			HTML += "<a href='?src=\ref[circuit];component=\ref[circuit];rename=1'>\[R\]</a> | "
@@ -220,7 +220,7 @@
 
 		if (length(assembly_components) > components_per_page)
 			HTML += "<br>\["
-			for(var/i = 1 to ceil(length(assembly_components)/components_per_page))
+			for (var/i = 1 to ceil(length(assembly_components)/components_per_page))
 				if ((i-1) == interact_page)
 					HTML += " [i]"
 				else
@@ -322,7 +322,7 @@
 
 /obj/item/device/electronic_assembly/examine(mob/user)
 	. = ..()
-	for(var/I in assembly_components)
+	for (var/I in assembly_components)
 		var/obj/item/integrated_circuit/IC = I
 		IC.external_examine(user)
 		if (opened)
@@ -332,21 +332,21 @@
 
 //This only happens when this EA is loaded via the printer
 /obj/item/device/electronic_assembly/proc/post_load()
-	for(var/I in assembly_components)
+	for (var/I in assembly_components)
 		var/obj/item/integrated_circuit/IC = I
 		IC.on_data_written()
 
 /obj/item/device/electronic_assembly/proc/return_total_complexity()
 	. = 0
 	var/obj/item/integrated_circuit/part
-	for(var/p in assembly_components)
+	for (var/p in assembly_components)
 		part = p
 		. += part.complexity
 
 /obj/item/device/electronic_assembly/proc/return_total_size()
 	. = 0
 	var/obj/item/integrated_circuit/part
-	for(var/p in assembly_components)
+	for (var/p in assembly_components)
 		part = p
 		. += part.size
 
@@ -424,7 +424,7 @@
 
 /obj/item/device/electronic_assembly/afterattack(atom/target, mob/user, proximity)
 	. = ..()
-	for(var/obj/item/integrated_circuit/input/S in assembly_components)
+	for (var/obj/item/integrated_circuit/input/S in assembly_components)
 		if (S.sense(target,user,proximity))
 			if (proximity)
 				visible_message(SPAN_NOTICE("\The [user] waves \the [src] around \the [target]."))
@@ -573,7 +573,7 @@
 	..()
 
 /obj/item/device/electronic_assembly/emp_act(severity)
-	for(var/I in src)
+	for (var/I in src)
 		var/atom/movable/AM = I
 		AM.emp_act(severity)
 	. = ..()

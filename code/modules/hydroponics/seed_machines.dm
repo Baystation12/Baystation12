@@ -274,7 +274,7 @@
 		data["sourceName"] = loaded_disk.genesource
 		data["locus"] = ""
 
-		for(var/datum/plantgene/P in loaded_disk.genes)
+		for (var/datum/plantgene/P in loaded_disk.genes)
 			if (data["locus"] != "") data["locus"] += ", "
 			data["locus"] += "[SSplants.gene_tag_masks[P.genetype]]"
 
@@ -316,7 +316,7 @@
 			failed_task = 1
 			seed.modified = 101
 
-		for(var/datum/plantgene/gene in loaded_disk.genes)
+		for (var/datum/plantgene/gene in loaded_disk.genes)
 			seed.seed.apply_gene(gene)
 			var/expertise = max(user.get_skill_value(SKILL_BOTANY) - SKILL_TRAINED)
 			seed.modified += rand(5,10) + min(-5, 30 * expertise)

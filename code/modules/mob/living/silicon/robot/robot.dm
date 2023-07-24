@@ -115,7 +115,7 @@
 	init()
 	initialize_components()
 
-	for(var/V in components) if (V != "power cell")
+	for (var/V in components) if (V != "power cell")
 		var/datum/robot_component/C = components[V]
 		C.installed = 1
 		C.wrapped = new C.external_type
@@ -148,7 +148,7 @@
 	var/mult = 1
 	if (storage)
 		mult += storage.rating
-	for(var/datum/matter_synth/M in module.synths)
+	for (var/datum/matter_synth/M in module.synths)
 		M.set_multiplier(mult)
 
 /mob/living/silicon/robot/proc/init()
@@ -388,7 +388,7 @@
 	set desc = "Toggle a component, conserving power."
 
 	var/list/installed_components = list()
-	for(var/V in components)
+	for (var/V in components)
 		if (V == "power cell") continue
 		var/datum/robot_component/C = components[V]
 		if (C.installed)
@@ -448,7 +448,7 @@
 		show_jetpack_pressure()
 		stat(null, text("Lights: [lights_on ? "ON" : "OFF"]"))
 		if (module)
-			for(var/datum/matter_synth/ms in module.synths)
+			for (var/datum/matter_synth/ms in module.synths)
 				stat("[ms.name]: [ms.energy]/[ms.max_energy_multiplied]")
 
 /mob/living/silicon/robot/restrained()
@@ -1028,7 +1028,7 @@
 				if (istype(tile, /turf/simulated))
 					var/turf/simulated/S = tile
 					S.dirt = 0
-				for(var/A in tile)
+				for (var/A in tile)
 					if (istype(A, /obj/item))
 						var/obj/item/cleaned_item = A
 						cleaned_item.clean_blood()

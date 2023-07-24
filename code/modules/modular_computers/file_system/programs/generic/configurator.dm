@@ -41,7 +41,7 @@
 
 	var/list/all_entries[0]
 	var/list/hardware = program.computer.get_all_components()
-	for(var/obj/item/stock_parts/computer/H in hardware)
+	for (var/obj/item/stock_parts/computer/H in hardware)
 		all_entries.Add(list(list(
 		"name" = H.name,
 		"desc" = H.desc,

@@ -66,7 +66,7 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 	var/syndicate_commando_name = pick(GLOB.last_names)
 
 	var/datum/preferences/A = new() //Randomize appearance for the commando.
-	A.randomize_appearance_and_body_for(player.current)
+	A.randomize_appearance_and_body_for (player.current)
 
 	player.name = "[syndicate_commando_rank] [syndicate_commando_name]"
 	player.current.real_name = player.name

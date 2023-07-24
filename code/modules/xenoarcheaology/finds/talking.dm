@@ -39,7 +39,7 @@
 			msg+=" "*/
 		seperate = splittext(msg, " ")
 
-	for(var/Xa = 1,Xa<length(seperate),Xa++)
+	for (var/Xa = 1,Xa<length(seperate),Xa++)
 		var/next = Xa + 1
 		if (length(heard_words) > 20 + rand(10,20))
 			heard_words.Remove(heard_words[1])
@@ -62,10 +62,10 @@
 
 /*/obj/item/talkingcrystal/proc/debug()
 	//set src in view()
-	for(var/v in heard_words)
+	for (var/v in heard_words)
 		log_debug("[uppertext(v)]")
 		var/list/d = heard_words["[v]"]
-		for(var/X in d)
+		for (var/X in d)
 			log_debug("[X]") */
 
 /datum/talking_atom/proc/SaySomething(word = null)
@@ -92,7 +92,7 @@
 		q=1
 
 	text=lowertext(text)
-	for(var/ya,ya <= limit,ya++)
+	for (var/ya,ya <= limit,ya++)
 
 		if (heard_words.Find("[text]"))
 			var/list/w = heard_words["[text]"]

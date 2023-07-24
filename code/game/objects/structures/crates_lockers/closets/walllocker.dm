@@ -33,7 +33,7 @@
 		return
 	if (amount)
 		to_chat(usr, "<spawn class='notice'>You take out some items from \the [src].")
-		for(var/path in spawnitems)
+		for (var/path in spawnitems)
 			new path(src.loc)
 		amount--
 	return

@@ -39,7 +39,7 @@
 				if (istype(C))
 					C.visible_message(SPAN_DANGER("[src] explodes in [C]'s hands!"), SPAN_DANGER("[src] explodes in your face!"))
 					C.drop_from_inventory(src)
-					for(var/zone in list(BP_L_HAND, BP_R_HAND))
+					for (var/zone in list(BP_L_HAND, BP_R_HAND))
 						C.apply_damage(rand(10,20), def_zone=zone)
 				else
 					visible_message(SPAN_DANGER("[src] explodes!"))

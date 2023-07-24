@@ -75,7 +75,7 @@
 	emagged = emag
 	distance = 0
 	settlers = list("[usr]")
-	for(var/i=0; i<3; i++)
+	for (var/i=0; i<3; i++)
 		if (prob(50))
 			settlers += pick(GLOB.first_names_male)
 		else
@@ -158,14 +158,14 @@
 		if (ORION_VIEW_SUPPLIES)
 			dat  = "<center><h1>Supplies</h1>View your supplies or buy more when at a spaceport.</center><BR>"
 			dat += "<center>You have [supplies["6"]] [GLOB.using_map.local_currency_name].</center>"
-			for(var/i=1; i<6; i++)
+			for (var/i=1; i<6; i++)
 				var/amm = (i>3?10:1)
 				dat += "[supplies["[i]"]] [supply_name["[i]"]][event==ORION_TRAIL_SPACEPORT ? ", <a href='?src=\ref[src];buy=[i]'>buy [amm] for [supply_cost["[i]"]]T</a>" : ""]<BR>"
 				if (supplies["[i]"] >= amm && event == ORION_TRAIL_SPACEPORT)
 					dat += "<a href='?src=\ref[src];sell=[i]'>sell [amm] for [supply_cost["[i]"]]T</a><br>"
 		if (ORION_VIEW_CREW)
 			dat = "<center><h1>Crew</h1>View the status of your crew.</center>"
-			for(var/i=1;i<=length(settlers);i++)
+			for (var/i=1;i<=length(settlers);i++)
 				dat += "[settlers[i]] <a href='?src=\ref[src];kill=[i]'>Kill</a><br>"
 
 	dat += "<br><P ALIGN=Right>View:<BR>"
@@ -343,7 +343,7 @@
 				var/num = 1
 				if (prob(15))
 					num++
-				for(var/i=0;i<num;i++)
+				for (var/i=0;i<num;i++)
 					remove_settler(null,"has succumbed to an illness.")
 			else
 				event_info = "Thankfully everybody was able to pull through."
@@ -363,13 +363,13 @@
 				event_info = "The traitors decided to jump ship along with some of your supplies!<BR>"
 				change_resource(4,-1 - (0.2 * num_traitors))
 				change_resource(5,-1 - (0.1 * num_traitors))
-				for(var/i=0;i<num_traitors;i++)
+				for (var/i=0;i<num_traitors;i++)
 					remove_settler(rand(2,length(settlers)),"decided to up and leave!")
 				num_traitors = 0
 			else //alright. They wanna fight for the ship.
 				event_info = "The traitors are charging you! Prepare your weapons!<BR>"
 				var/list/traitors = list()
-				for(var/i=0;i<num_traitors;i++)
+				for (var/i=0;i<num_traitors;i++)
 					traitors += pick((settlers-traitors)-settlers[1])
 				var/list/nontraitors = settlers-traitors
 				while(length(nontraitors) && length(traitors))
@@ -433,7 +433,7 @@
 			if (supplies["3"])
 				return
 			src.visible_message("\The [src]'s screen glitches out and smoke comes out of the back.")
-			for(var/i=1;i<7;i++)
+			for (var/i=1;i<7;i++)
 				supplies["[i]"] = max(0,supplies["[i]"] + rand(-10,10))
 		if (ORION_TRAIL_COLLISION)
 			if (prob(90) && !supplies["2"])
@@ -447,7 +447,7 @@
 			var/mob/living/M = usr
 			M.visible_message("\The [M] starts rapidly deteriorating.")
 			close_browser(M, "window=arcade")
-			for(var/i=0;i<10;i++)
+			for (var/i=0;i<10;i++)
 				sleep(10)
 				M.Stun(5)
 				M.adjustBruteLoss(10)

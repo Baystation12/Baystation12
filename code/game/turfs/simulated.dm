@@ -39,7 +39,7 @@
 		wet_overlay = null
 
 /turf/simulated/clean_blood()
-	for(var/obj/effect/decal/cleanable/blood/B in contents)
+	for (var/obj/effect/decal/cleanable/blood/B in contents)
 		B.clean_blood()
 	..()
 
@@ -138,7 +138,7 @@
 		return 0
 
 	if (istype(M))
-		for(var/obj/effect/decal/cleanable/blood/B in contents)
+		for (var/obj/effect/decal/cleanable/blood/B in contents)
 			if (!B.blood_DNA)
 				B.blood_DNA = list()
 			if (!B.blood_DNA[M.dna.unique_enzymes])

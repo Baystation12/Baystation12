@@ -106,7 +106,7 @@
 	if (in_use)
 		var/is_in_use = 0
 		var/list/nearby = viewers(1, src) | usr
-		for(var/mob/M in nearby)
+		for (var/mob/M in nearby)
 			if ((M.client && M.machine == src))
 				if (CanUseTopic(M, DefaultTopicState()) > STATUS_CLOSE)
 					is_in_use = 1
@@ -120,7 +120,7 @@
 	if (in_use)
 		var/list/nearby = viewers(1, src)
 		var/is_in_use = 0
-		for(var/mob/M in nearby)
+		for (var/mob/M in nearby)
 			if ((M.client && M.machine == src))
 				if (CanUseTopic(M, DefaultTopicState()) > STATUS_CLOSE)
 					is_in_use = 1

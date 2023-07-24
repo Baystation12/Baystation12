@@ -114,7 +114,7 @@
 /obj/machinery/computer/modular/RefreshParts()
 	..()
 	var/extra_power = 0
-	for(var/obj/item/stock_parts/computer/part in component_parts)
+	for (var/obj/item/stock_parts/computer/part in component_parts)
 		if (part.enabled)
 			extra_power += part.power_usage
 	change_power_consumption(initial(active_power_usage) + extra_power, POWER_USE_ACTIVE)

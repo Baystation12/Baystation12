@@ -9,7 +9,7 @@
 		var/datum/codex_entry/entry = new(_display_name = "[name] (category)")
 		entry.lore_text = desc + "<hr>"
 		var/list/links = list()
-		for(var/item in items)
+		for (var/item in items)
 			links+= "<l>[item]</l>"
 		entry.lore_text += jointext(links, "<br>")
 		SScodex.add_entry_by_string(lowertext(entry.display_name), entry)

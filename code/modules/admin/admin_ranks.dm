@@ -10,7 +10,7 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 	var/list/Lines = file2list("config/admin_ranks.txt")
 
 	//process each line seperately
-	for(var/line in Lines)
+	for (var/line in Lines)
 		if (!length(line))				continue
 		if (copytext(line,1,2) == "#")	continue
 
@@ -23,7 +23,7 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 			if ("Removed")	continue				//Reserved
 
 		var/rights = 0
-		for(var/i=2, i<=length(List), i++)
+		for (var/i=2, i<=length(List), i++)
 			switch(ckey(List[i]))
 				if ("@","prev")					rights |= previous_rights
 				if ("buildmode","build")			rights |= R_BUILDMODE
@@ -53,7 +53,7 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 /proc/load_admins()
 	//clear the datums references
 	admin_datums.Cut()
-	for(var/client/C as anything in GLOB.admins)
+	for (var/client/C as anything in GLOB.admins)
 		C.remove_admin_verbs()
 		C.holder = null
 	GLOB.admins.Cut()
@@ -69,7 +69,7 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 		var/list/Lines = file2list("config/admins.txt")
 
 		//process each line seperately
-		for(var/line in Lines)
+		for (var/line in Lines)
 			if (!length(line))				continue
 			if (copytext(line,1,2) == "#")	continue
 

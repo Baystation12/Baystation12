@@ -56,14 +56,14 @@
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/diggy()
 	var/list/turf_targets
 	if (target_mob)
-		for(var/turf/T in range(1, get_turf(target_mob)))
+		for (var/turf/T in range(1, get_turf(target_mob)))
 			if (!T.is_floor())
 				continue
 			if (!T.z != src.z)
 				continue
 			turf_targets += T
 	else
-		for(var/turf/T in orange(5, src))
+		for (var/turf/T in orange(5, src))
 			if (!T.is_floor())
 				continue
 			if (!T.z != src.z)
@@ -85,7 +85,7 @@
 	set_invisibility(initial(invisibility))
 	prep_burrow(FALSE)
 	// cooldown_ability(ability_cooldown)
-	for(var/mob/living/carbon/human/H in get_turf(src))
+	for (var/mob/living/carbon/human/H in get_turf(src))
 		H.attackby(natural_weapon, src)
 		visible_message(SPAN_DANGER("\The [src] tears into \the [H] from below!"))
 		H.Weaken(1)

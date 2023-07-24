@@ -84,7 +84,7 @@
 
 /turf/singularity_act(S, current_size)
 	if (!is_plating())
-		for(var/obj/O in contents)
+		for (var/obj/O in contents)
 			if (O.level != ATOM_LEVEL_UNDER_TILE)
 				continue
 			if (O.invisibility == INVISIBILITY_ABSTRACT)

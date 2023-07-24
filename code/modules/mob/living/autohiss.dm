@@ -43,7 +43,7 @@
 	while(length(message))
 		var/min_index = 10000 // if the message is longer than this, the autohiss is the least of your problems
 		var/min_char = null
-		for(var/char in map)
+		for (var/char in map)
 			var/i = findtext_char(message, char)
 			if (!i) // no more of this character anywhere in the string, don't even bother searching next time
 				map -= char

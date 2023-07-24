@@ -7,5 +7,5 @@
 
 /singleton/psionic_faculty/New()
 	..()
-	for(var/atype in armour_types)
+	for (var/atype in armour_types)
 		SSpsi.armour_faculty_by_type[atype] = id

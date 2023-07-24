@@ -3,7 +3,7 @@
 
 /mob/living/exosuit/Life()
 
-	for(var/thing in pilots)
+	for (var/thing in pilots)
 		var/mob/pilot = thing
 		if (pilot.loc != src) // Admin jump or teleport/grab.
 			if (pilot.client)
@@ -26,7 +26,7 @@
 		if (head)
 			head.active_sensors = FALSE
 			hud_camera.queue_icon_update()
-		for(var/hardpoint in hardpoints)
+		for (var/hardpoint in hardpoints)
 			var/obj/item/mech_equipment/M = hardpoints[hardpoint]
 			if (istype(M) && M.active && M.passive_power_use)
 				M.deactivate()
@@ -55,7 +55,7 @@
 /mob/living/exosuit/proc/calc_power_draw()
 	//Passive power stuff here. You can also recharge cells or hardpoints if those make sense
 	var/total_draw = 0
-	for(var/hardpoint in hardpoints)
+	for (var/hardpoint in hardpoints)
 		var/obj/item/mech_equipment/I = hardpoints[hardpoint]
 		if (!istype(I))
 			continue
@@ -92,7 +92,7 @@
 	// Eject the pilot.
 	if (LAZYLEN(pilots))
 		hatch_locked = 0 // So they can get out.
-		for(var/pilot in pilots)
+		for (var/pilot in pilots)
 			eject(pilot, silent=1)
 
 	// Salvage moves into the wreck unless we're exploding violently.
@@ -124,14 +124,14 @@
 
 	// Hurl our component pieces about.
 	var/list/stuff_to_throw = list()
-	for(var/obj/item/thing in list(arms, legs, head, body))
+	for (var/obj/item/thing in list(arms, legs, head, body))
 		if (thing) stuff_to_throw += thing
-	for(var/hardpoint in hardpoints)
+	for (var/hardpoint in hardpoints)
 		if (hardpoints[hardpoint])
 			var/obj/item/thing = hardpoints[hardpoint]
 			thing.screen_loc = null
 			stuff_to_throw += thing
-	for(var/obj/item/thing in stuff_to_throw)
+	for (var/obj/item/thing in stuff_to_throw)
 		thing.forceMove(T)
 		thing.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(3,6),40)
 	explosion(T, 2, EX_ACT_LIGHT)
@@ -147,7 +147,7 @@
 		sight &= ~BLIND
 
 	if (sight & BLIND && !was_blind)
-		for(var/mob/pilot in pilots)
+		for (var/mob/pilot in pilots)
 			to_chat(pilot, SPAN_WARNING("The sensors are not operational and you cannot see a thing!"))
 
 /mob/living/exosuit/additional_sight_flags()

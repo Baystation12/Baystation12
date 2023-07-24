@@ -9,7 +9,7 @@
 
 /datum/unit_test/atmos_machinery/proc/create_gas_mixes(gas_mix_data)
 	var/list/gas_mixes = list()
-	for(var/mix_name in gas_mix_data)
+	for (var/mix_name in gas_mix_data)
 		var/list/mix_data = gas_mix_data[mix_name]
 
 		var/datum/gas_mixture/gas_mix = new (CELL_VOLUME, mix_data["temperature"])
@@ -17,7 +17,7 @@
 		var/list/initial_gas = mix_data["initial_gas"]
 		if (length(initial_gas))
 			var/list/gas_args = list()
-			for(var/gasid in initial_gas)
+			for (var/gasid in initial_gas)
 				gas_args += gasid
 				gas_args += initial_gas[gasid]
 			gas_mix.adjust_multi(arglist(gas_args))
@@ -27,14 +27,14 @@
 
 /datum/unit_test/atmos_machinery/proc/gas_amount_changes(list/before_gas_mixes, list/after_gas_mixes)
 	var/list/result = list()
-	for(var/mix_name in before_gas_mixes & after_gas_mixes)
+	for (var/mix_name in before_gas_mixes & after_gas_mixes)
 		var/change = list()
 
 		var/datum/gas_mixture/before = before_gas_mixes[mix_name]
 		var/datum/gas_mixture/after = after_gas_mixes[mix_name]
 
 		var/list/all_gases = before.gas | after.gas
-		for(var/gasid in all_gases)
+		for (var/gasid in all_gases)
 			change[gasid] = after.get_gas(gasid) - before.get_gas(gasid)
 
 		result[mix_name] = change
@@ -43,14 +43,14 @@
 
 /datum/unit_test/atmos_machinery/proc/check_moles_conserved(case_name, list/before_gas_mixes, list/after_gas_mixes)
 	var/failed = FALSE
-	for(var/gasid in gas_data.gases)
+	for (var/gasid in gas_data.gases)
 		var/before = 0
-		for(var/gasmix in before_gas_mixes)
+		for (var/gasmix in before_gas_mixes)
 			var/datum/gas_mixture/G = before_gas_mixes[gasmix]
 			before += G.get_gas(gasid)
 
 		var/after = 0
-		for(var/gasmix in after_gas_mixes)
+		for (var/gasmix in after_gas_mixes)
 			var/datum/gas_mixture/G = after_gas_mixes[gasmix]
 			after += G.get_gas(gasid)
 
@@ -169,7 +169,7 @@
 	name = "ATMOS MACHINERY: pump_gas() Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/pump_gas/start_test()
-	for(var/case_name in test_cases)
+	for (var/case_name in test_cases)
 		var/gas_mix_data = test_cases[case_name]
 		var/list/before_gas_mixes = create_gas_mixes(gas_mix_data)
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
@@ -184,7 +184,7 @@
 	name = "ATMOS MACHINERY: pump_gas_passive() Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/pump_gas_passive/start_test()
-	for(var/case_name in test_cases)
+	for (var/case_name in test_cases)
 		var/gas_mix_data = test_cases[case_name]
 		var/list/before_gas_mixes = create_gas_mixes(gas_mix_data)
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
@@ -201,7 +201,7 @@
 /datum/unit_test/atmos_machinery/conserve_moles/scrub_gas/start_test()
 	var/list/filtering = gas_data.gases
 
-	for(var/case_name in test_cases)
+	for (var/case_name in test_cases)
 		var/gas_mix_data = test_cases[case_name]
 		var/list/before_gas_mixes = create_gas_mixes(gas_mix_data)
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
@@ -218,7 +218,7 @@
 /datum/unit_test/atmos_machinery/conserve_moles/filter_gas/start_test()
 	var/list/filtering = gas_data.gases
 
-	for(var/case_name in test_cases)
+	for (var/case_name in test_cases)
 		var/gas_mix_data = test_cases[case_name]
 		var/list/before_gas_mixes = create_gas_mixes(gas_mix_data)
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
@@ -233,13 +233,13 @@
 	name = "ATMOS MACHINERY: filter_gas_multi() Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/filter_gas_multi/start_test()
-	for(var/case_name in test_cases)
+	for (var/case_name in test_cases)
 		var/gas_mix_data = test_cases[case_name]
 		var/list/before_gas_mixes = create_gas_mixes(gas_mix_data)
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
 
 		var/list/filtering = list()
-		for(var/gasid in gas_data.gases)
+		for (var/gasid in gas_data.gases)
 			filtering[gasid] = after_gas_mixes["sink"] //just filter everything to sink
 
 		filter_gas_multi(null, filtering, after_gas_mixes["source"], after_gas_mixes["sink"], null, INFINITY)
@@ -252,13 +252,13 @@
 	name = "ATMOS MACHINERY: mix_gas() Conserves Moles"
 
 /datum/unit_test/atmos_machinery/conserve_moles/mix_gas/start_test()
-	for(var/case_name in test_cases)
+	for (var/case_name in test_cases)
 		var/gas_mix_data = test_cases[case_name]
 		var/list/before_gas_mixes = create_gas_mixes(gas_mix_data)
 		var/list/after_gas_mixes = create_gas_mixes(gas_mix_data)
 
 		var/list/mix_sources = list()
-		for(var/gasid in ALL_GASIDS)
+		for (var/gasid in ALL_GASIDS)
 			var/datum/gas_mixture/mix_source = after_gas_mixes["sink"]
 			mix_sources[mix_source] = 1.0/length(gas_data.gases) //doesn't work as a macro for some reason
 
@@ -274,8 +274,8 @@
 /datum/unit_test/pipes_shall_belong_to_unique_pipelines/start_test()
 	var/list/checked_pipes = list()
 	var/list/bad_pipelines = list()
-	for(var/datum/pipeline/P)
-		for(var/obj/machinery/atmospherics/pipe/pipe in P.members)
+	for (var/datum/pipeline/P)
+		for (var/obj/machinery/atmospherics/pipe/pipe in P.members)
 			if (!checked_pipes[pipe])
 				checked_pipes[pipe] = P
 				continue
@@ -283,9 +283,9 @@
 			LAZYDISTINCTADD(bad_pipelines[checked_pipes[pipe]], pipe) // Missed it the first time; thought it was good.
 
 	if (length(bad_pipelines))
-		for(var/datum/pipeline/badboy in bad_pipelines)
+		for (var/datum/pipeline/badboy in bad_pipelines)
 			var/info = list()
-			for(var/bad_pipe in bad_pipelines[badboy])
+			for (var/bad_pipe in bad_pipelines[badboy])
 				info += log_info_line(bad_pipe)
 			log_bad("A pipeline with overlapping members contained the following overlapping pipes: [english_list(info)]")
 		fail("Some pipes were in multiple pipelines at once.")
@@ -298,8 +298,8 @@
 
 /datum/unit_test/atmos_machinery_shall_not_have_conflicting_connections/start_test()
 	var/fail = FALSE
-	for(var/obj/machinery/atmospherics/machine in SSmachines.machinery)
-		for(var/obj/machinery/atmospherics/M in machine.loc)
+	for (var/obj/machinery/atmospherics/machine in SSmachines.machinery)
+		for (var/obj/machinery/atmospherics/M in machine.loc)
 			if (M == machine)
 				continue
 			if (!machine.check_connect_types(M, machine))

@@ -85,7 +85,7 @@
 			O.attack_hand(user)
 			return TRUE
 		else if (istype(target, /obj/machinery))
-			for(var/mtype in valid_machine_types)
+			for (var/mtype in valid_machine_types)
 				if (istype(target, mtype))
 					var/obj/machinery/machine = target
 					machine.attack_hand(user)

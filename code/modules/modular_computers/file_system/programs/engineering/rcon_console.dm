@@ -29,7 +29,7 @@
 
 	// SMES DATA (simplified view)
 	var/list/smeslist[0]
-	for(var/obj/machinery/power/smes/buildable/SMES in known_SMESs)
+	for (var/obj/machinery/power/smes/buildable/SMES in known_SMESs)
 		smeslist.Add(list(list(
 		"charge" = round(SMES.Percentage()),
 		"input_set" = SMES.input_attempt,
@@ -45,7 +45,7 @@
 
 	// BREAKER DATA (simplified view)
 	var/list/breakerlist[0]
-	for(var/obj/machinery/power/breakerbox/BR in known_breakers)
+	for (var/obj/machinery/power/breakerbox/BR in known_breakers)
 		breakerlist.Add(list(list(
 		"RCON_tag" = BR.RCon_tag,
 		"enabled" = BR.on
@@ -92,7 +92,7 @@
 
 	if (href_list["toggle_breaker"])
 		var/obj/machinery/power/breakerbox/toggle = null
-		for(var/obj/machinery/power/breakerbox/breaker in known_breakers)
+		for (var/obj/machinery/power/breakerbox/breaker in known_breakers)
 			if (breaker.RCon_tag == href_list["toggle_breaker"])
 				toggle = breaker
 		if (toggle)
@@ -115,7 +115,7 @@
 	if (!tag)
 		return
 
-	for(var/obj/machinery/power/smes/buildable/S in known_SMESs)
+	for (var/obj/machinery/power/smes/buildable/S in known_SMESs)
 		if (S.RCon_tag == tag)
 			return S
 
@@ -124,11 +124,11 @@
 // Description: Refreshes local list of known devices.
 /datum/nano_module/rcon/proc/FindDevices()
 	known_SMESs = new /list()
-	for(var/obj/machinery/power/smes/buildable/SMES in SSmachines.machinery)
+	for (var/obj/machinery/power/smes/buildable/SMES in SSmachines.machinery)
 		if (AreConnectedZLevels(get_host_z(), get_z(SMES)) && SMES.RCon_tag && (SMES.RCon_tag != "NO_TAG") && SMES.RCon)
 			known_SMESs.Add(SMES)
 
 	known_breakers = new /list()
-	for(var/obj/machinery/power/breakerbox/breaker in SSmachines.machinery)
+	for (var/obj/machinery/power/breakerbox/breaker in SSmachines.machinery)
 		if (AreConnectedZLevels(get_host_z(), get_z(breaker)) && breaker.RCon_tag != "NO_TAG")
 			known_breakers.Add(breaker)

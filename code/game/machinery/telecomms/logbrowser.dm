@@ -39,7 +39,7 @@
 			dat += "<br>Current Network: <a href='?src=\ref[src];network=1'>[network]</a><br>"
 			if (length(servers))
 				dat += "<br>Detected Telecommunication Servers:<ul>"
-				for(var/obj/machinery/telecomms/T in servers)
+				for (var/obj/machinery/telecomms/T in servers)
 					dat += "<li><a href='?src=\ref[src];viewserver=[T.id]'>\ref[T] [T.name]</a> ([T.id])</li>"
 				dat += "</ul>"
 				dat += "<br><a href='?src=\ref[src];operation=release'>\[Flush Buffer\]</a>"
@@ -64,7 +64,7 @@
 			dat += "Stored Logs: <ol>"
 
 			var/i = 0
-			for(var/datum/comm_log_entry/C in SelectedServer.log_entries)
+			for (var/datum/comm_log_entry/C in SelectedServer.log_entries)
 				i++
 
 
@@ -119,7 +119,7 @@
 /obj/machinery/computer/telecomms/server/OnTopic(mob/user, list/href_list, datum/topic_state/state)
 	if (href_list["viewserver"])
 		screen = 1
-		for(var/obj/machinery/telecomms/T in servers)
+		for (var/obj/machinery/telecomms/T in servers)
 			if (T.id == href_list["viewserver"])
 				SelectedServer = T
 				break
@@ -139,7 +139,7 @@
 					temp = SPAN_COLOR("#d70b00", "- FAILED: CANNOT PROBE WHEN BUFFER FULL -")
 
 				else
-					for(var/obj/machinery/telecomms/server/T in range(25, src))
+					for (var/obj/machinery/telecomms/server/T in range(25, src))
 						if (T.network == network)
 							servers.Add(T)
 

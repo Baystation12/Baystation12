@@ -68,7 +68,7 @@
 	. = ..()
 
 	// One table per turf.
-	for(var/obj/structure/table/T in loc)
+	for (var/obj/structure/table/T in loc)
 		if (T != src)
 			// There's another table here that's not us, break to metal.
 			// break_to_parts calls qdel(src)
@@ -87,7 +87,7 @@
 	material = null
 	reinforced = null
 	update_connections(1) // Update tables around us to ignore us (material=null forces no connections)
-	for(var/obj/structure/table/T in oview(src, 1))
+	for (var/obj/structure/table/T in oview(src, 1))
 		T.update_icon()
 	. = ..()
 
@@ -375,13 +375,13 @@
 		var/image/I
 
 		// Base frame shape. Mostly done for glass/diamond tables, where this is visible.
-		for(var/i = 1 to 4)
+		for (var/i = 1 to 4)
 			I = image(icon, dir = SHIFTL(1, i - 1), icon_state = connections[i])
 			overlays += I
 
 		// Standard table image
 		if (material)
-			for(var/i = 1 to 4)
+			for (var/i = 1 to 4)
 				I = image(icon, "[material.table_icon_base]_[connections[i]]", dir = SHIFTL(1, i - 1))
 				if (material.icon_colour) I.color = material.icon_colour
 				I.alpha = 255 * material.opacity
@@ -389,14 +389,14 @@
 
 		// Reinforcements
 		if (reinforced)
-			for(var/i = 1 to 4)
+			for (var/i = 1 to 4)
 				I = image(icon, "[material.table_icon_reinf]_[connections[i]]", dir = SHIFTL(1, i - 1))
 				I.color = reinforced.icon_colour
 				I.alpha = 255 * reinforced.opacity
 				overlays += I
 
 		if (carpeted)
-			for(var/i = 1 to 4)
+			for (var/i = 1 to 4)
 				I = image(icon, "carpet_[connections[i]]", dir = SHIFTL(1, i - 1))
 				overlays += I
 	else
@@ -404,7 +404,7 @@
 		overlays.Cut()
 		var/type = 0
 		var/tabledirs = 0
-		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
+		for (var/direction in list(turn(dir,90), turn(dir,-90)) )
 			var/obj/structure/table/T = locate(/obj/structure/table ,get_step(src,direction))
 			if (T && T.flipped == 1 && T.dir == src.dir && material && T.material && T.material.name == material.name)
 				type++
@@ -445,20 +445,20 @@
 		connections = list("0", "0", "0", "0")
 
 		if (propagate)
-			for(var/obj/structure/table/T in oview(src, 1))
+			for (var/obj/structure/table/T in oview(src, 1))
 				T.update_connections()
 		return
 
 	var/list/blocked_dirs = list()
-	for(var/obj/structure/window/W in get_turf(src))
+	for (var/obj/structure/window/W in get_turf(src))
 		if (W.is_fulltile())
 			connections = list("0", "0", "0", "0")
 			return
 		blocked_dirs |= W.dir
 
-	for(var/D in list(NORTH, SOUTH, EAST, WEST) - blocked_dirs)
+	for (var/D in list(NORTH, SOUTH, EAST, WEST) - blocked_dirs)
 		var/turf/T = get_step(src, D)
-		for(var/obj/structure/window/W in T)
+		for (var/obj/structure/window/W in T)
 			if (W.is_fulltile() || W.dir == GLOB.reverse_dir[D])
 				blocked_dirs |= D
 				break
@@ -466,23 +466,23 @@
 				if (W.dir != D) // it's off to the side
 					blocked_dirs |= W.dir|D // blocks the diagonal
 
-	for(var/D in list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST) - blocked_dirs)
+	for (var/D in list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST) - blocked_dirs)
 		var/turf/T = get_step(src, D)
 
-		for(var/obj/structure/window/W in T)
+		for (var/obj/structure/window/W in T)
 			if (W.is_fulltile() || (W.dir & GLOB.reverse_dir[D]))
 				blocked_dirs |= D
 				break
 
 	// Blocked cardinals block the adjacent diagonals too. Prevents weirdness with tables.
-	for(var/x in list(NORTH, SOUTH))
-		for(var/y in list(EAST, WEST))
+	for (var/x in list(NORTH, SOUTH))
+		for (var/y in list(EAST, WEST))
 			if ((x in blocked_dirs) || (y in blocked_dirs))
 				blocked_dirs |= x|y
 
 	var/list/connection_dirs = list()
 
-	for(var/obj/structure/table/T in orange(src, 1))
+	for (var/obj/structure/table/T in orange(src, 1))
 		if (!T.can_connect()) continue
 		var/T_dir = get_dir(src, T)
 		if (T_dir in blocked_dirs) continue
@@ -513,7 +513,7 @@
 
 	var/list/ret = list(NORTHWEST, SOUTHEAST, NORTHEAST, SOUTHWEST)
 
-	for(var/i = 1 to length(ret))
+	for (var/i = 1 to length(ret))
 		var/dir = ret[i]
 		. = CORNER_NONE
 		if (dir in dirs)

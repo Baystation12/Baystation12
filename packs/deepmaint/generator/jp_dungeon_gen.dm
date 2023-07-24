@@ -123,7 +123,7 @@
 	 ***********************************************************************************/
 
 /obj/procedural/jp_DungeonGenerator/proc/updateWallConnections()
-	for(var/turf/simulated/wall/W in border_turfs)
+	for (var/turf/simulated/wall/W in border_turfs)
 		W.update_connections(1)
 
 /**
@@ -403,7 +403,7 @@
 */
 /obj/procedural/jp_DungeonGenerator/proc/setAllowedRooms(list/l)
 	allowedRooms = list()
-	for(var/k in l)	allowedRooms["[k]"] = new /obj/procedural/jp_dungeonroomEntry/(k)
+	for (var/k in l)	allowedRooms["[k]"] = new /obj/procedural/jp_dungeonroomEntry/(k)
 
 /**
 	Adds the type 'r' to the list of allowed jp_dungeonrooms. Will create
@@ -427,7 +427,7 @@
 /obj/procedural/jp_DungeonGenerator/proc/getAllowedRooms()
 	if (!allowedRooms) return null
 	var/list/l = list()
-	for(var/k in allowedRooms) l+=text2path(k)
+	for (var/k in allowedRooms) l+=text2path(k)
 	return l
 
 /**
@@ -508,7 +508,7 @@
 	regs += r1
 	var/obj/procedural/jp_DungeonRegion/r2 = null
 	var/r_distance = 127 // At this time, get_dist() never returns a value greater than 127 - thank you, byond, very cool.
-	for(var/obj/procedural/jp_DungeonRegion/region in R)
+	for (var/obj/procedural/jp_DungeonRegion/region in R)
 		if (r1 == region)
 			continue
 		var/dist = get_dist(r1.center, region.center)
@@ -589,10 +589,10 @@
 
 	if (usePreexistingRegions)
 		examined = list()
-		for(var/turf/t in block(locate(getMinX(), getMinY(), getZ()), locate(getMaxX(), getMaxY(), getZ())))
+		for (var/turf/t in block(locate(getMinX(), getMinY(), getZ()), locate(getMaxX(), getMaxY(), getZ())))
 			if (!t.is_wall()) if (!(t in examined)) rooms+=regionCreate(t)
 
-	for(var/k in allowedRooms)
+	for (var/k in allowedRooms)
 		nextentry = allowedRooms[k]
 		if (nextentry.required>0) required+=nextentry
 
@@ -624,7 +624,7 @@
 
 	border_turfs = list()
 
-	for(var/obj/procedural/jp_dungeonroom/r in rooms)
+	for (var/obj/procedural/jp_dungeonroom/r in rooms)
 		if (!r.doesMultiborder())
 			if (length(r.border) == 0)
 				continue
@@ -635,7 +635,7 @@
 			regions+=reg
 			border_turfs+=reg.getBorder()
 		else
-			for(var/l in r.getMultiborder())
+			for (var/l in r.getMultiborder())
 				var/obj/procedural/jp_DungeonRegion/reg = new /obj/procedural/jp_DungeonRegion(src)
 				reg.addTurfs(r.getTurfs(), 1)
 				reg.addBorder(l)
@@ -643,10 +643,10 @@
 				regions+=reg
 				border_turfs+=l
 
-	for(var/turf/t in border_turfs)
-		for(var/turf/t2 in range(t, 1))
+	for (var/turf/t in border_turfs)
+		for (var/turf/t2 in range(t, 1))
 			if (t2.is_wall()&&!(t2 in border_turfs))
-				for(var/turf/t3 in range(t2, 1))
+				for (var/turf/t3 in range(t2, 1))
 					if (!t3.is_wall())
 						border_turfs+=t2
 						break
@@ -681,7 +681,7 @@
 
 		if (region1==region2) if (length(regions)<=1) paths--
 
-		for(var/turf/t in path)
+		for (var/turf/t in path)
 			path-=t
 			t.ChangeTurf(floortype)
 			path+= t
@@ -694,10 +694,10 @@
 			region1.addBorder(region2.getBorder())
 			regions-=region2
 
-		for(var/turf/t in region1.getBorder()) if (!(t in border_turfs)) border_turfs+=t
-		for(var/turf/t in path)	for(var/turf/t2 in range(t, 1))	if (!(t2 in border_turfs)) border_turfs+=t2
+		for (var/turf/t in region1.getBorder()) if (!(t in border_turfs)) border_turfs+=t
+		for (var/turf/t in path)	for (var/turf/t2 in range(t, 1))	if (!(t2 in border_turfs)) border_turfs+=t2
 
-	for(var/obj/procedural/jp_dungeonroom/r in rooms)
+	for (var/obj/procedural/jp_dungeonroom/r in rooms)
 		r.finalise()
 
 	initializeSubmaps()
@@ -753,7 +753,7 @@
 		if (nt.y>maxy) maxy=nt.y
 		if (!nt.density)
 			turfs+=nt
-			for(var/turf/t2 in getAdjacent(nt))	if (!((t2 in border) || (t2 in turfs))) next+=t2
+			for (var/turf/t2 in getAdjacent(nt))	if (!((t2 in border) || (t2 in turfs))) next+=t2
 		else
 			walls+=nt
 
@@ -773,7 +773,7 @@
 	Checks if two jp_dungeonrooms are too close to each other
 */
 /obj/procedural/jp_DungeonGenerator/proc/intersects(obj/procedural/jp_dungeonroom/newroom, list/obj/procedural/jp_dungeonroom/rooms)
-	for(var/obj/procedural/jp_dungeonroom/r in rooms)
+	for (var/obj/procedural/jp_dungeonroom/r in rooms)
 		. = newroom.getSize() + r.getSize() + 2
 		if ((. > abs(newroom.getX() - r.getX())) && (. > abs(newroom.getY() - r.getY())))
 			if (!doAccurateRoomPlacementCheck) return TRUE
@@ -816,7 +816,7 @@
 				if (inty1<0) inty1 = sy2
 				else inty2 = sy2
 
-			for(var/turf/t in block(locate(intx1, inty1, getZ()), locate(intx2, inty2, getZ())))
+			for (var/turf/t in block(locate(intx1, inty1, getZ()), locate(intx2, inty2, getZ())))
 				var/ret = (t in newroom.getTurfs()) + (t in newroom.getBorder()) + (t in newroom.getWalls()) + (t in r.getTurfs()) + (t in r.getBorder()) + (t in r.getWalls())
 				if (ret>1) return TRUE
 	return FALSE
@@ -826,7 +826,7 @@
 
 /obj/procedural/jp_DungeonGenerator/proc/GetSquare(turf/T, side_size = 2)
 	var/list/square_turfs = list()
-	for(var/turf/N in block(T,locate(T.x + side_size - 1, T.y + side_size - 1, T.z)))
+	for (var/turf/N in block(T,locate(T.x + side_size - 1, T.y + side_size - 1, T.z)))
 		square_turfs += N
 	return square_turfs
 
@@ -864,7 +864,7 @@
 			return retPath(end, previous, pathWidth, start, end)
 
 	next-=borders
-	for(var/turf/t in next)
+	for (var/turf/t in next)
 		if (!t.is_wall()) next-=t
 		previous["\ref[t]"] = start
 		cost["\ref[t]"]=1
@@ -876,7 +876,7 @@
 		var/turf/min
 		var/mincost = maxPathLength
 
-		for(var/turf/t in next)
+		for (var/turf/t in next)
 			if ((cost["\ref[t]"]<mincost) || (cost["\ref[t]"]==mincost && prob(50)))
 				min = t
 				mincost=cost["\ref[t]"]
@@ -895,9 +895,9 @@
 			else
 				continue
 
-		for(var/turf/t in getAdjacent(min))
+		for (var/turf/t in getAdjacent(min))
 			var/stop_looking = FALSE
-			for(var/turf/t1 in GetSquare(t, pathWidth + 1))
+			for (var/turf/t1 in GetSquare(t, pathWidth + 1))
 				if (!(t1.is_wall() && !(t1 in borders)))
 					stop_looking = TRUE
 					break
@@ -938,7 +938,7 @@
 		return 0
 
 	if (islist(walltype))
-		for(var/k in walltype)
+		for (var/k in walltype)
 			if (!ispath(k))
 				out_error = ERROR_NO_WALLTYPE
 				return 0
@@ -1022,19 +1022,19 @@ Make a new jp_DungeonRegion, and set its reference to its generator object
 	them to the list of borders
 */
 /obj/procedural/jp_DungeonRegion/proc/addTurfs(list/turf/l, noborder=0)
-	for(var/turf/t in l)
+	for (var/turf/t in l)
 		if (t in border) border-=t
 		if (!(t in contained))
 			contained+=t
 			if (!noborder)
-				for(var/turf/t2 in gen.getAdjacent(t))
+				for (var/turf/t2 in gen.getAdjacent(t))
 					if (t2.is_wall() && !(t2 in border)) border+=t2
 
 /**
 	Adds a list of turfs to the border of the region.
 */
 /obj/procedural/jp_DungeonRegion/proc/addBorder(list/turf/l)
-	for(var/turf/t in l) if (!(t in border)) border+=t
+	for (var/turf/t in l) if (!(t in border)) border+=t
 
 /**
 	Returns the list of floors in this region
@@ -1187,10 +1187,10 @@ to the floor that return true from is_wall().
 /obj/procedural/jp_dungeonroom/preexist/square/New()
 	..()
 
-	for(var/turf/t in range(centre, size)) turfs += t
+	for (var/turf/t in range(centre, size)) turfs += t
 
-	for(var/turf/t in turfs)
-		for(var/turf/t2 in gen.getAdjacent(t))
+	for (var/turf/t in turfs)
+		for (var/turf/t2 in gen.getAdjacent(t))
 			if (t2 in turfs)
 				continue
 			if (t2.is_wall() && !(t2 in border))
@@ -1199,7 +1199,7 @@ to the floor that return true from is_wall().
 	border -= getCorners() //If the path width is more than 1, the corner and path connection looks really ugly
 
 /obj/procedural/jp_dungeonroom/preexist/square/place()
-	for(var/turf/t in turfs)
+	for (var/turf/t in turfs)
 		turfs -=t
 		t.ChangeTurf(gen.floortype)
 		turfs += t
@@ -1218,7 +1218,7 @@ return true from is_wall()
 	..()
 	var/radsqr = size*size
 
-	for(var/turf/t in range(centre, size))
+	for (var/turf/t in range(centre, size))
 		var/ti = t.x-getX()
 		var/tj = t.y-getY()
 
@@ -1228,15 +1228,15 @@ return true from is_wall()
 
 
 
-	for(var/turf/t in turfs)
-		for(var/turf/t2 in gen.getAdjacent(t))
+	for (var/turf/t in turfs)
+		for (var/turf/t2 in gen.getAdjacent(t))
 			if (t2 in turfs)
 				continue
 			if (t2.is_wall() && !(t2 in border))
 				border+=t2
 
 /obj/procedural/jp_dungeonroom/preexist/circle/place()
-	for(var/turf/t in turfs)
+	for (var/turf/t in turfs)
 		turfs-=t
 		turfs+=new gen.floortype(t)
 
@@ -1252,17 +1252,17 @@ the arms of the plus sign - there are only four.
 
 /obj/procedural/jp_dungeonroom/preexist/cross/New()
 	..()
-	for(var/turf/t in range(centre, size))
+	for (var/turf/t in range(centre, size))
 		if (t.x == getX() || t.y == getY())
 			turfs += t
 
-	for(var/turf/t in range(centre, size+1))
+	for (var/turf/t in range(centre, size+1))
 		if (t in turfs) continue
 		if (t.is_wall() && (t.x == getX() || t.y == getY()))
 			border+=t
 
 /obj/procedural/jp_dungeonroom/preexist/cross/place()
-	for(var/turf/t in turfs)
+	for (var/turf/t in turfs)
 		turfs-=t
 		turfs+=new gen.floortype(t)
 

@@ -33,7 +33,7 @@
 
 	update_pulling()
 
-	for(var/obj/item/grab/G in src)
+	for (var/obj/item/grab/G in src)
 		G.Process()
 
 	handle_actions()

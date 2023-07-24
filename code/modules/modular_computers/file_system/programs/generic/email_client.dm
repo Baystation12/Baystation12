@@ -109,7 +109,7 @@
 		id_login = id.associated_email_login.Copy()
 
 	var/datum/computer_file/data/email_account/target
-	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
+	for (var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
 		if (!account || !account.can_login)
 			continue
 		if (id_login && id_login["login"] == account.login)
@@ -197,7 +197,7 @@
 		data["notification_mute"] = current_account.notification_mute
 		if (addressbook)
 			var/list/all_accounts = list()
-			for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
+			for (var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
 				if (!account.can_login)
 					continue
 				all_accounts.Add(list(list(
@@ -244,7 +244,7 @@
 			if (message_source)
 				data["folder"] = folder
 				var/list/all_messages = list()
-				for(var/datum/computer_file/data/email_message/message in message_source)
+				for (var/datum/computer_file/data/email_message/message in message_source)
 					all_messages.Add(list(list(
 						"title" = message.title,
 						"body" = digitalPencode2html(message.stored_data),
@@ -275,7 +275,7 @@
 	if (istext(fuid))
 		fuid = text2num(fuid)
 
-	for(var/datum/computer_file/data/email_message/message in current_account.all_emails())
+	for (var/datum/computer_file/data/email_message/message in current_account.all_emails())
 		if (message.uid == fuid)
 			return message
 
@@ -525,7 +525,7 @@
 
 		var/list/filenames = list()
 		var/list/files_on_disk = os.get_all_files()
-		for(var/datum/computer_file/CF in files_on_disk)
+		for (var/datum/computer_file/CF in files_on_disk)
 			if (CF.unsendable)
 				continue
 			filenames.Add(CF.filename)
@@ -538,7 +538,7 @@
 		if (!os)
 			return TOPIC_HANDLED
 
-		for(var/datum/computer_file/CF in files_on_disk)
+		for (var/datum/computer_file/CF in files_on_disk)
 			if (CF.unsendable)
 				continue
 			if (CF.filename == picked_file)

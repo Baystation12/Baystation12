@@ -41,7 +41,7 @@
 //Performs functions relating to setting up the question and choices, if relevant.
 /datum/vote/proc/setup_vote(mob/creator, automatic)
 	initiator = (!automatic && istype(creator)) ? creator.ckey : "the server"
-	for(var/choice in choices)
+	for (var/choice in choices)
 		display_choices[choice] = choice // Default behavior is that the choice name is displayed directly.
 
 /datum/vote/proc/start_vote()
@@ -89,7 +89,7 @@
 /datum/vote/proc/remove_candidate(list/choice_list, list/vote_list, candidate)
 	var/candidate_index = choices.Find(candidate) // use choices instead of choice_list because we need the original indexing
 	choice_list -= candidate
-	for(var/ckey in vote_list)
+	for (var/ckey in vote_list)
 		if (length(votes[ckey]) && vote_list[ckey][1] == candidate_index && length(vote_list[ckey]) > 1)
 			var/new_first_choice = choices[vote_list[ckey][2]]
 			choice_list[new_first_choice] += 1
@@ -124,7 +124,7 @@
 		if (result_length > 1)
 			text += "\nRunner ups: "
 			var/list/runner_ups = list()
-			for(var/runner_up in result.Copy(2))
+			for (var/runner_up in result.Copy(2))
 				runner_ups += display_choices[runner_up]
 			text += english_list(runner_ups)
 
@@ -135,7 +135,7 @@
 	text += "<b>Total Votes: [length(votes)]/[length(GLOB.clients)]</b>\n"
 	text += "\n"
 	text += "<b>Votes Per Option:</b>"
-	for(var/R in result)
+	for (var/R in result)
 		if (result[R] > 0)
 			text += "\n[R]: [result[R]]"
 	return JOINTEXT(text)
@@ -208,7 +208,7 @@
 	. += additional_header
 	. += "</tr>"
 
-	for(var/i = 1, i <= length(choices), i++)
+	for (var/i = 1, i <= length(choices), i++)
 		var/choice = choices[i]
 		var/voted_for = votes[user.ckey] && (i in votes[user.ckey])
 

@@ -195,7 +195,7 @@
 	return (check_threat(A) >= SECBOT_THREAT_ARREST)
 
 /mob/living/bot/secbot/lookForTargets()
-	for(var/mob/living/M in view(src))
+	for (var/mob/living/M in view(src))
 		if (M.stat == DEAD)
 			continue
 		if (confirmTarget(M))

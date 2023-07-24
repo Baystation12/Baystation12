@@ -98,8 +98,8 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		)
 
 /datum/antagonist/raider/update_access(mob/living/player)
-	for(var/obj/item/storage/wallet/W in player.contents)
-		for(var/obj/item/card/id/id in W.contents)
+	for (var/obj/item/storage/wallet/W in player.contents)
+		for (var/obj/item/card/id/id in W.contents)
 			id.SetName("[player.real_name]'s Passport")
 			id.registered_name = player.real_name
 			W.SetName("[initial(W.name)] ([id.name])")
@@ -137,7 +137,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	if (!current_antagonists || length(current_antagonists) == 0)
 		return 0
 
-	for(var/datum/mind/player in current_antagonists)
+	for (var/datum/mind/player in current_antagonists)
 		if (!player.current || get_area(player.current) != locate(/area/map_template/skipjack_station/start))
 			return 0
 	return 1
@@ -225,7 +225,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 				player.equip_to_slot_or_del(new bullet_thrower.magazine_type(player), slot_r_store)
 		else if (bullet_thrower.ammo_type)
 			var/obj/item/storage/box/ammobox = new(get_turf(player.loc))
-			for(var/i in 1 to rand(3,5) + rand(0,2))
+			for (var/i in 1 to rand(3,5) + rand(0,2))
 				new bullet_thrower.ammo_type(ammobox)
 			player.put_in_any_hand_if_possible(ammobox)
 		return

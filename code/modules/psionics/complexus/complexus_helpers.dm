@@ -1,7 +1,7 @@
 /datum/psi_complexus/proc/cancel()
 	sound_to(owner, sound('sound/effects/psi/power_fail.ogg'))
 	if (LAZYLEN(manifested_items))
-		for(var/thing in manifested_items)
+		for (var/thing in manifested_items)
 			owner.drop_from_inventory(thing)
 			qdel(thing)
 		manifested_items = null
@@ -62,12 +62,12 @@
 
 /datum/psi_complexus/proc/hide_auras()
 	if (owner.client)
-		for(var/thing in SSpsi.all_aura_images)
+		for (var/thing in SSpsi.all_aura_images)
 			owner.client.images -= thing
 
 /datum/psi_complexus/proc/show_auras()
 	if (owner.client)
-		for(var/image/I in SSpsi.all_aura_images)
+		for (var/image/I in SSpsi.all_aura_images)
 			owner.client.images |= I
 
 /datum/psi_complexus/proc/backblast(value)

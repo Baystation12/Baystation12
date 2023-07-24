@@ -137,7 +137,7 @@ var/global/list/all_gps_units = list()
 	compass.hide_waypoints(FALSE)
 
 	var/turf/my_turf = get_turf(src)
-	for(var/thing in tracking_devices)
+	for (var/thing in tracking_devices)
 		var/obj/item/device/gps/gps = locate(thing)
 		if (!istype(gps) || QDELETED(gps))
 			LAZYREMOVE(tracking_devices, thing)
@@ -231,7 +231,7 @@ var/global/list/all_gps_units = list()
 	.["z_level_detection"] = z_level_detection
 
 	var/list/gps_list = list()
-	for(var/obj/item/device/gps/G as anything in global.all_gps_units)
+	for (var/obj/item/device/gps/G as anything in global.all_gps_units)
 		if (G == src || !can_track(G, z_level_detection))
 			continue
 

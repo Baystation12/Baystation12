@@ -54,7 +54,7 @@
 	var/list/stamps = list()
 
 	// Generate them into a list
-	for(var/stamp_type in stamp_types)
+	for (var/stamp_type in stamp_types)
 		var/obj/item/stamp/S = new stamp_type
 		stamps[capitalize(S.name)] = S
 

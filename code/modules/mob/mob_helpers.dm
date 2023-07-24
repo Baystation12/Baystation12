@@ -25,7 +25,7 @@
 /mob/living/carbon/human/isSynthetic()
 	if (isnull(full_prosthetic))
 		robolimb_count = 0
-		for(var/obj/item/organ/external/E in organs)
+		for (var/obj/item/organ/external/E in organs)
 			if (BP_IS_ROBOTIC(E))
 				robolimb_count++
 		full_prosthetic = (robolimb_count == length(organs))
@@ -171,7 +171,7 @@ var/global/list/organ_rel_size = list(
 		if (target.buckled || target.lying)
 			return zone
 		// if your target is being grabbed aggressively by someone you cannot miss either
-		for(var/obj/item/grab/G in target.grabbed_by)
+		for (var/obj/item/grab/G in target.grabbed_by)
 			if (G.stop_move())
 				return zone
 
@@ -199,7 +199,7 @@ var/global/list/organ_rel_size = list(
 	var/intag = 0
 	var/block = list()
 	. = list()
-	for(var/i = 1, i <= length_char(n), i++)
+	for (var/i = 1, i <= length_char(n), i++)
 		var/char = copytext_char(n, i, i+1)
 		if (!intag && (char == "<"))
 			intag = 1
@@ -218,7 +218,7 @@ var/global/list/organ_rel_size = list(
 	RETURN_TYPE(/list)
 	text = html_decode(text) //We don't want to screw up escaped characters
 	. = list()
-	for(var/i = 1, i <= length_char(text), i++)
+	for (var/i = 1, i <= length_char(text), i++)
 		var/char = copytext_char(text, i, i+1)
 		if (char == " " || prob(pr))
 			. += char
@@ -280,14 +280,14 @@ var/global/list/organ_rel_size = list(
 /proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 for p will cause letters to be replaced instead of added
 	/* Turn text into complete gibberish! */
 	var/returntext = ""
-	for(var/i = 1, i <= length_char(t), i++)
+	for (var/i = 1, i <= length_char(t), i++)
 
 		var/letter = copytext_char(t, i, i+1)
 		if (prob(50))
 			if (p >= 70)
 				letter = ""
 
-			for(var/j = 1, j <= rand(0, 2), j++)
+			for (var/j = 1, j <= rand(0, 2), j++)
 				letter += pick("#","@","*","&","%","$","/", "<", ">", ";","*","*","*","*","*","*","*")
 
 		returntext += letter
@@ -309,7 +309,7 @@ var/global/list/organ_rel_size = list(
 			aiEyeFlag = 1
 
 		var/x
-		for(x=0; x<duration, x++)
+		for (x=0; x<duration, x++)
 			if (aiEyeFlag)
 				M.client.eye = locate(dd_range(1,oldeye.loc.x+rand(-strength,strength),world.maxx),dd_range(1,oldeye.loc.y+rand(-strength,strength),world.maxy),oldeye.loc.z)
 			else
@@ -400,14 +400,14 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 
 /proc/broadcast_hud_message(message, broadcast_source, list/targets, icon)
 	var/turf/sourceturf = get_turf(broadcast_source)
-	for(var/mob/M in targets)
+	for (var/mob/M in targets)
 		if (!sourceturf || (get_z(M) in GetConnectedZlevels(sourceturf.z)))
 			M.show_message(SPAN_INFO("[icon2html(icon, M)] [message]"), 1)
 
 /proc/mobs_in_area(area/A)
 	RETURN_TYPE(/list)
 	var/list/mobs = new
-	for(var/mob/living/M in SSmobs.mob_list)
+	for (var/mob/living/M in SSmobs.mob_list)
 		if (get_area(M) == A)
 			mobs += M
 	return mobs
@@ -575,7 +575,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		client.images -= image
 
 /mob/proc/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
-	for(var/mob/M in contents)
+	for (var/mob/M in contents)
 		M.flash_eyes(intensity, override_blindness_check, affect_silicon, visual, type)
 
 /mob/proc/fully_replace_character_name(new_name, in_depth = TRUE)
@@ -616,10 +616,10 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		if (istype(thearea, /list))
 			thearea = thearea[1]
 	var/list/L = list()
-	for(var/turf/T in get_area_turfs(thearea))
+	for (var/turf/T in get_area_turfs(thearea))
 		if (!T.density)
 			var/clear = 1
-			for(var/obj/O in T)
+			for (var/obj/O in T)
 				if (O.density)
 					clear = 0
 					break
@@ -650,7 +650,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 
 //Tries to find the mob's email.
 /proc/find_email(real_name)
-	for(var/mob/mob in GLOB.alive_mobs)
+	for (var/mob/mob in GLOB.alive_mobs)
 		if (mob.real_name == real_name)
 			if (!mob.mind)
 				return
@@ -685,7 +685,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	var/result[2]
 	var/asight = 0
 	var/ainvis = 0
-	for(var/atom/vision_handler in additional_vision_handlers)
+	for (var/atom/vision_handler in additional_vision_handlers)
 		//Grab their flags
 		asight |= vision_handler.additional_sight_flags()
 		ainvis = max(ainvis, vision_handler.additional_see_invisible())

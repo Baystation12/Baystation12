@@ -137,7 +137,7 @@ var/global/list/sparring_attack_cache = list()
 
 	if (istype(user.wear_mask, /obj/item/clothing/mask))
 		return FALSE
-	for(var/obj/item/clothing/C in list(user.wear_mask, user.head, user.wear_suit))
+	for (var/obj/item/clothing/C in list(user.wear_mask, user.head, user.wear_suit))
 		if (C && (C.body_parts_covered & FACE) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 			return FALSE //prevent biting through a space helmet or similar
 	if (user == target && (zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH))

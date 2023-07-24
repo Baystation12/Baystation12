@@ -30,12 +30,12 @@
 
 /datum/nano_module/deck_management/New()
 	..()
-	for(var/shuttle in SSshuttle.shuttle_logs) //Registering to get shuttle updates.
+	for (var/shuttle in SSshuttle.shuttle_logs) //Registering to get shuttle updates.
 		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[shuttle]
 		my_log.register(src)
 
 /datum/nano_module/deck_management/Destroy()
-	for(var/shuttle in SSshuttle.shuttle_logs) //Unregistering; important for garbage collection.
+	for (var/shuttle in SSshuttle.shuttle_logs) //Unregistering; important for garbage collection.
 		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[shuttle]
 		my_log.unregister(src)
 	. = ..()
@@ -50,7 +50,7 @@
 	switch(prog_state)
 		if (DECK_HOME)
 			var/shuttles = list()
-			for(var/datum/shuttle/shuttle in logs)
+			for (var/datum/shuttle/shuttle in logs)
 				var/shuttle_data = list()
 				shuttle_data["name"] = shuttle.name
 				shuttle_data["access"] = get_shuttle_access(user, shuttle)
@@ -80,11 +80,11 @@
 			data["shuttle_name"] = selected_shuttle.name
 			var/datum/shuttle_log/log = SSshuttle.shuttle_logs[selected_shuttle]
 			var/missions = list()
-			for(var/datum/shuttle_mission/M in log.missions)
+			for (var/datum/shuttle_mission/M in log.missions)
 				missions += list(generate_mission_data(M))
 			data["mission_data"] = missions
 			var/queued_missions = list()
-			for(var/datum/shuttle_mission/M in log.queued_missions)
+			for (var/datum/shuttle_mission/M in log.queued_missions)
 				queued_missions += list(generate_mission_data(M))
 			data["queued_data"] = queued_missions
 
@@ -99,7 +99,7 @@
 				data["crew"] = selected_mission.flight_plan.manifest.get_value()
 			if (!(selected_mission.stage in list(SHUTTLE_MISSION_PLANNED, SHUTTLE_MISSION_QUEUED)))
 				var/other_reports = list()
-				for(var/i = 1, i <= length(report_prototypes), i++)
+				for (var/i = 1, i <= length(report_prototypes), i++)
 					var/datum/computer_file/report/recipient/shuttle/report = report_prototypes[i]
 					var/L = list()
 					L["name"] = report.display_name()
@@ -172,7 +172,7 @@
 	return mission_data
 
 /datum/nano_module/deck_management/proc/get_default_access(mob/user)
-	for(var/access_pattern in default_access)
+	for (var/access_pattern in default_access)
 		if (check_access(user, access_pattern))
 			return 1
 
@@ -191,7 +191,7 @@
 	if (selected_shuttle != prototype_shuttle)
 		prototype_shuttle = selected_shuttle
 		report_prototypes = list()
-		for(var/report_type in subtypesof(/datum/computer_file/report/recipient/shuttle))
+		for (var/report_type in subtypesof(/datum/computer_file/report/recipient/shuttle))
 			var/datum/computer_file/report/recipient/shuttle/new_report = new report_type
 			if (new_report.access_shuttle)
 				new_report.set_access(null, selected_shuttle.logging_access, override = 0)

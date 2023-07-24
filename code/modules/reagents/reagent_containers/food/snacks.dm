@@ -206,7 +206,7 @@
 				user.visible_message(SPAN_NOTICE("\The [user] slices \the [src]!"), SPAN_NOTICE("You slice \the [src]!"))
 
 			var/reagents_per_slice = reagents.total_volume/slices_num
-			for(var/i=1 to (slices_num-slices_lost))
+			for (var/i=1 to (slices_num-slices_lost))
 				var/obj/item/reagent_containers/food/snacks/S = new slice_path (src.loc)
 				reagents.trans_to_obj(S, reagents_per_slice)
 
@@ -225,7 +225,7 @@
 
 /obj/item/reagent_containers/food/snacks/Destroy()
 	if (contents)
-		for(var/atom/movable/something in contents)
+		for (var/atom/movable/something in contents)
 			something.dropInto(loc)
 	. = ..()
 
@@ -2851,7 +2851,7 @@
 			// make a list of all boxes to be added
 			var/list/boxestoadd = list()
 			boxestoadd += box
-			for(var/obj/item/pizzabox/i in box.boxes)
+			for (var/obj/item/pizzabox/i in box.boxes)
 				boxestoadd += i
 
 			if ( (length(boxes)+1) + length(boxestoadd) <= 5 )

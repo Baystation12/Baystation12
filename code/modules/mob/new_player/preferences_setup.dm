@@ -1,6 +1,6 @@
 #define ASSIGN_LIST_TO_COLORS(L, R, G, B) if (L) { R = L[1]; G = L[2]; B = L[3]; }
 
-/datum/preferences/proc/randomize_appearance_and_body_for(mob/living/carbon/human/H)
+/datum/preferences/proc/randomize_appearance_and_body_for (mob/living/carbon/human/H)
 	var/datum/species/current_species = all_species[species]
 	if (!current_species) current_species = all_species[SPECIES_HUMAN]
 	gender = pick(current_species.genders)
@@ -31,7 +31,7 @@
 	if (current_species.appearance_flags & SPECIES_APPEARANCE_HAS_UNDERWEAR)
 		if (all_underwear)
 			all_underwear.Cut()
-		for(var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
+		for (var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
 			var/datum/category_item/underwear/WRI = pick(WRC.items)
 			all_underwear[WRC.name] = WRI.name
 

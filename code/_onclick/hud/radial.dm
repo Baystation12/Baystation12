@@ -124,7 +124,7 @@ var/global/list/radial_menus = list()
 	var/paged = max_elements < length(choices)
 	if (length(elements) < max_elements)
 		var/elements_to_add = max_elements - length(elements)
-		for(var/i in 1 to elements_to_add) //Create all elements
+		for (var/i in 1 to elements_to_add) //Create all elements
 			var/obj/screen/radial/slice/new_element = new /obj/screen/radial/slice
 			new_element.tooltips = use_tooltips
 			new_element.parent = src
@@ -156,7 +156,7 @@ var/global/list/radial_menus = list()
 /datum/radial_menu/proc/update_screen_objects(anim = FALSE)
 	var/list/page_choices = page_data[current_page]
 	var/angle_per_element = round(zone / length(page_choices))
-	for(var/i in 1 to length(elements))
+	for (var/i in 1 to length(elements))
 		var/obj/screen/radial/E = elements[i]
 		var/angle = Wrap(starting_angle + (i - 1) * angle_per_element,0,360)
 		if (i > length(page_choices))
@@ -227,7 +227,7 @@ var/global/list/radial_menus = list()
 /datum/radial_menu/proc/set_choices(list/new_choices, use_tooltips, use_labels)
 	if (length(choices))
 		Reset()
-	for(var/E in new_choices)
+	for (var/E in new_choices)
 		var/id = get_next_id()
 		choices += id
 		choices_values[id] = E
@@ -280,7 +280,7 @@ var/global/list/radial_menus = list()
 		if (require_near && !in_range(anchor, user))
 			return
 
-		for(var/atom/movable/thing in check_locs)
+		for (var/atom/movable/thing in check_locs)
 			if (QDELETED(thing) || thing.loc != check_locs[thing])
 				return
 
@@ -311,7 +311,7 @@ var/global/list/radial_menus = list()
 		uniqueid = "defmenu_[any2ref(user)]_[any2ref(anchor)]"
 
 	if (check_locs)
-		for(var/atom/thing in check_locs)
+		for (var/atom/thing in check_locs)
 			check_locs[thing] = thing.loc
 
 	if (global.radial_menus[uniqueid])
@@ -353,5 +353,5 @@ var/global/list/radial_menus = list()
 	Helper to make a radial menu button for a set of atoms with their names and icons.
 */
 /proc/make_item_radial_menu_choices(list/items, name_prefix = "", name_suffix = "")
-	for(var/atom/movable/AM in items)
+	for (var/atom/movable/AM in items)
 		LAZYSET(., AM, make_item_radial_menu_button(AM, name_prefix, name_suffix))

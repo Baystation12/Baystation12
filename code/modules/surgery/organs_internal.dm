@@ -26,7 +26,7 @@
 /singleton/surgery_step/internal/fix_organ/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
 	if (affected)
-		for(var/obj/item/organ/internal/I in affected.internal_organs)
+		for (var/obj/item/organ/internal/I in affected.internal_organs)
 			if (I.damage > 0)
 				if (I.surface_accessible || (affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 					return affected
@@ -40,7 +40,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts treating damage within \the [target]'s [affected.name] with [tool_name].", \
 	"You start treating damage within \the [target]'s [affected.name] with [tool_name]." )
-	for(var/obj/item/organ/internal/I in affected.internal_organs)
+	for (var/obj/item/organ/internal/I in affected.internal_organs)
 		if (I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (!(I.status & ORGAN_DEAD) || I.can_recover()) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			user.visible_message("[user] starts treating damage to [target]'s [I.name] with [tool_name].", \
 			"You start treating damage to [target]'s [I.name] with [tool_name]." )
@@ -54,7 +54,7 @@
 	if (istype(tool, /obj/item/stack/medical/bruise_pack))
 		tool_name = "the bandaid"
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	for(var/obj/item/organ/internal/I in affected.internal_organs)
+	for (var/obj/item/organ/internal/I in affected.internal_organs)
 		if (I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			if (I.status & ORGAN_DEAD && I.can_recover())
 				user.visible_message(SPAN_NOTICE("\The [user] treats damage to [target]'s [I.name] with [tool_name], though it needs to be recovered further."), \
@@ -77,7 +77,7 @@
 		dam_amt = 5
 		target.adjustToxLoss(10)
 		affected.take_external_damage(dam_amt, 0, (DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE), used_weapon = tool)
-	for(var/obj/item/organ/internal/I in affected.internal_organs)
+	for (var/obj/item/organ/internal/I in affected.internal_organs)
 		if (I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			I.take_internal_damage(dam_amt)
 
@@ -330,7 +330,7 @@
 	var/list/attachable_organs
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
-	for(var/obj/item/organ/I in affected.implants)
+	for (var/obj/item/organ/I in affected.implants)
 		if (I && (I.status & ORGAN_CUT_AWAY))
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
 			radial_button.name = "Attach \the [I.name]"
@@ -425,7 +425,7 @@
 		return FALSE
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/list/obj/item/organ/internal/dead_organs = list()
-	for(var/obj/item/organ/internal/I in target.internal_organs)
+	for (var/obj/item/organ/internal/I in target.internal_organs)
 		if (I && !(I.status & ORGAN_CUT_AWAY) && (I.status & ORGAN_DEAD) && I.parent_organ == affected.organ_tag && !BP_IS_ROBOTIC(I))
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
 			radial_button.name = "Attach \the [I.name]"

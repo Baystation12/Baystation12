@@ -92,7 +92,7 @@
 			reconnect_scanner()
 		if (owned_scanner)
 			var/artifact_in_use = 0
-			for(var/obj/O in owned_scanner.loc)
+			for (var/obj/O in owned_scanner.loc)
 				if (O == owned_scanner)
 					continue
 				if (O.invisibility)

@@ -252,7 +252,7 @@
 	if (href_list["wipe"])
 		var/confirm = input("Are you CERTAIN you wish to delete the current personality? This action cannot be undone.", "Personality Wipe") in list("Yes", "No")
 		if (confirm == "Yes")
-			for(var/mob/M in src)
+			for (var/mob/M in src)
 				to_chat(M, "<h2 style='font-color: #ff0000'>You feel yourself slipping away from reality.</h2>")
 				to_chat(M, "<h3 style='font-color: #ff4d4d'>Byte by byte you lose your sense of self.</h3>")
 				to_chat(M, "<h4 style='font-color: #ff8787'>Your mental faculties leave you.</h4>")
@@ -317,7 +317,7 @@
 		M.show_message(SPAN_NOTICE("\The [src] flashes a message across its screen, \"Additional personalities available for download.\""), 3, SPAN_NOTICE("\The [src] bleeps electronically."), 2)
 
 /obj/item/device/paicard/emp_act(severity)
-	for(var/mob/M in src)
+	for (var/mob/M in src)
 		M.emp_act(severity)
 
 /obj/item/device/paicard/ex_act(severity)

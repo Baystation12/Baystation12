@@ -38,7 +38,7 @@
 			// deleting pipe is inside a dense turf (wall)
 			// this is unlikely, but just dump out everything into the turf in case
 
-			for(var/atom/movable/AM in H)
+			for (var/atom/movable/AM in H)
 				AM.forceMove(T)
 				AM.pipe_eject(0)
 			qdel(H)
@@ -105,7 +105,7 @@
 	// Empty the holder if it is expelled into a dense turf.
 	// Leaving it intact and sitting in a wall is stupid.
 	if (T.density)
-		for(var/atom/movable/AM in H)
+		for (var/atom/movable/AM in H)
 			AM.loc = T
 			AM.pipe_eject(0)
 		qdel(H)
@@ -126,7 +126,7 @@
 
 		playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
 		if (H)
-			for(var/atom/movable/AM in H)
+			for (var/atom/movable/AM in H)
 				AM.forceMove(T)
 				AM.pipe_eject(direction)
 				spawn(1)
@@ -148,7 +148,7 @@
 	else	// no specified direction, so throw in random direction
 		playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
 		if (H)
-			for(var/atom/movable/AM in H)
+			for (var/atom/movable/AM in H)
 				target = get_offset_target_turf(T, rand(5)-rand(5), rand(5)-rand(5))
 
 				AM.forceMove(T)
@@ -166,7 +166,7 @@
 // remains : set to leave broken pipe pieces in place
 /obj/structure/disposalpipe/proc/broken(remains = 0)
 	if (remains)
-		for(var/D in GLOB.cardinal)
+		for (var/D in GLOB.cardinal)
 			if (D & dpdir)
 				var/obj/structure/disposalpipe/broken/P = new(src.loc)
 				P.set_dir(D)
@@ -181,7 +181,7 @@
 			// broken pipe is inside a dense turf (wall)
 			// this is unlikely, but just dump out everything into the turf in case
 
-			for(var/atom/movable/AM in H)
+			for (var/atom/movable/AM in H)
 				AM.forceMove(T)
 				AM.pipe_eject(0)
 			qdel(H)
@@ -269,7 +269,7 @@
 			// deleting pipe is inside a dense turf (wall)
 			// this is unlikely, but just dump out everything into the turf in case
 
-			for(var/atom/movable/AM in H)
+			for (var/atom/movable/AM in H)
 				AM.forceMove(T)
 				AM.pipe_eject(0)
 			qdel(H)
@@ -285,7 +285,7 @@
 
 // *** TEST verb
 //client/verb/dispstop()
-//	for(var/obj/structure/disposalholder/H in world)
+//	for (var/obj/structure/disposalholder/H in world)
 //		H.active = 0
 
 // a straight or bent segment
@@ -338,7 +338,7 @@
 			H.forceMove(loc)
 			return
 		else
-			for(var/obj/structure/disposalpipe/down/F in T)
+			for (var/obj/structure/disposalpipe/down/F in T)
 				P = F
 
 	else
@@ -388,7 +388,7 @@
 			H.forceMove(src.loc)
 			return
 		else
-			for(var/obj/structure/disposalpipe/up/F in T)
+			for (var/obj/structure/disposalpipe/up/F in T)
 				P = F
 	else
 		T = get_step(src.loc, H.dir)

@@ -5,7 +5,7 @@
 	result_amount = 1
 
 /datum/chemical_reaction/nullglass/get_reaction_flags(datum/reagents/holder)
-	for(var/datum/reagent/blood/blood in holder.reagent_list)
+	for (var/datum/reagent/blood/blood in holder.reagent_list)
 		var/weakref/donor_ref = islist(blood.data) && blood.data["donor"]
 		if (istype(donor_ref))
 			var/mob/living/donor = donor_ref.resolve()
@@ -15,10 +15,10 @@
 /datum/chemical_reaction/nullglass/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	var/location = get_turf(holder.my_atom)
 	if (reaction_flags)
-		for(var/i = 1, i <= created_volume, i++)
+		for (var/i = 1, i <= created_volume, i++)
 			new /obj/item/device/soulstone(location)
 	else
-		for(var/i = 1, i <= created_volume*2, i++)
+		for (var/i = 1, i <= created_volume*2, i++)
 			new /obj/item/material/shard(location, MATERIAL_CRYSTAL)
 
 /datum/reagent/crystal
@@ -32,7 +32,7 @@
 	var/result_mat = (M.psi || (M.mind && GLOB.wizards.is_antagonist(M.mind))) ? MATERIAL_NULLGLASS : MATERIAL_CRYSTAL
 	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/external/E in shuffle(H.organs.Copy()))
+		for (var/obj/item/organ/external/E in shuffle(H.organs.Copy()))
 			if (E.is_stump())
 				continue
 
@@ -50,7 +50,7 @@
 				if (E.can_feel_pain())
 					H.emote("scream")
 				if (prob(25))
-					for(var/i = 1 to rand(1,3))
+					for (var/i = 1 to rand(1,3))
 						new /obj/item/material/shard(get_turf(E), result_mat)
 					E.take_external_damage(rand(50,70), 0)
 				else
@@ -59,7 +59,7 @@
 					E.status |= ORGAN_BRITTLE
 				break
 
-		for(var/obj/item/organ/internal/I in shuffle(H.internal_organs.Copy()))
+		for (var/obj/item/organ/internal/I in shuffle(H.internal_organs.Copy()))
 			if (I.organ_tag == BP_BRAIN)
 				continue
 

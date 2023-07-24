@@ -197,7 +197,7 @@
 
 /obj/item/clothing/mask/smokable/cigarette/New()
 	..()
-	for(var/R in filling)
+	for (var/R in filling)
 		reagents.add_reagent(R, filling[R])
 
 /obj/item/clothing/mask/smokable/cigarette/light(flavor_text = "[usr] lights the [name].")

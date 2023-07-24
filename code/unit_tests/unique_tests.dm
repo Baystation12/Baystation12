@@ -5,7 +5,7 @@
 	var/list/ids = list()
 	var/list/build_paths = list()
 
-	for(var/design_type in subtypesof(/datum/design))
+	for (var/design_type in subtypesof(/datum/design))
 		var/datum/design/design = design_type
 		if (initial(design.id) == "id")
 			continue
@@ -29,7 +29,7 @@
 /datum/unit_test/player_preferences_shall_have_unique_key/start_test()
 	var/list/preference_keys = list()
 
-	for(var/cp in get_client_preferences())
+	for (var/cp in get_client_preferences())
 		var/datum/client_preference/client_pref = cp
 		group_by(preference_keys, client_pref.key, client_pref)
 
@@ -47,7 +47,7 @@
 	var/list/access_ids = list()
 	var/list/access_descs = list()
 
-	for(var/a in get_all_access_datums())
+	for (var/a in get_all_access_datums())
 		var/datum/access/access = a
 		group_by(access_ids, access.id, access)
 		group_by(access_descs, access.desc, access)
@@ -66,7 +66,7 @@
 /datum/unit_test/outfit_datums_shall_have_unique_names/start_test()
 	var/list/outfits_by_name = list()
 
-	for(var/a in outfits())
+	for (var/a in outfits())
 		var/singleton/hierarchy/outfit/outfit = a
 		group_by(outfits_by_name, outfit.name, outfit.type)
 
@@ -83,7 +83,7 @@
 /datum/unit_test/languages_shall_have_unique_names/start_test()
 	var/list/languages_by_name = list()
 
-	for(var/lt in subtypesof(/datum/language))
+	for (var/lt in subtypesof(/datum/language))
 		var/datum/language/l = lt
 		group_by(languages_by_name, initial(l.name), lt)
 
@@ -100,7 +100,7 @@
 /datum/unit_test/languages_shall_have_no_or_unique_keys/start_test()
 	var/list/languages_by_key = list()
 
-	for(var/lt in subtypesof(/datum/language))
+	for (var/lt in subtypesof(/datum/language))
 		var/datum/language/l = lt
 		var/language_key = initial(l.key)
 		if (!language_key)
@@ -122,7 +122,7 @@
 	var/list/backpacks_by_name = list()
 
 	var/bos = GET_SINGLETON_SUBTYPE_MAP(/singleton/backpack_outfit)
-	for(var/bo in bos)
+	for (var/bo in bos)
 		var/singleton/backpack_outfit/backpack_outfit = bos[bo]
 		group_by(backpacks_by_name, backpack_outfit.name, backpack_outfit)
 
@@ -140,7 +140,7 @@
 	var/list/space_suit_modifiers_by_name = list()
 
 	var/sss = GET_SINGLETON_SUBTYPE_MAP(/singleton/item_modifier/space_suit)
-	for(var/ss in sss)
+	for (var/ss in sss)
 		var/singleton/item_modifier/space_suit/space_suit_modifier = sss[ss]
 		group_by(space_suit_modifiers_by_name, space_suit_modifier.name, space_suit_modifier)
 
@@ -153,7 +153,7 @@
 
 /datum/unit_test/proc/number_of_issues(list/entries, type, feedback = /singleton/noi_feedback)
 	var/issues = 0
-	for(var/key in entries)
+	for (var/key in entries)
 		var/list/values = entries[key]
 		if (length(values) > 1)
 			var/singleton/noi_feedback/noif = GET_SINGLETON(feedback)
@@ -171,6 +171,6 @@
 /singleton/noi_feedback/detailed/print(datum/unit_test/ut, type, key, list/entries)
 	var/list/pretty_print = list()
 	pretty_print += ""
-	for(var/entry in entries)
+	for (var/entry in entries)
 		pretty_print += log_info_line(entry)
 	priv_print(ut, type, key, jointext(pretty_print, "\n"))

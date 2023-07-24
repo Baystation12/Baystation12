@@ -22,14 +22,14 @@
 /spell/targeted/ethereal_jaunt/Destroy()
 	if (jaunt_holder) // eject our user in case something happens and we get deleted
 		var/turf/T = get_turf(jaunt_holder)
-		for(var/mob/living/L in jaunt_holder)
+		for (var/mob/living/L in jaunt_holder)
 			L.forceMove(T)
 	QDEL_NULL(jaunt_holder)
 	QDEL_NULL(animation)
 	return ..()
 
 /spell/targeted/ethereal_jaunt/cast(list/targets) //magnets, so mostly hardcoded
-	for(var/mob/living/target in targets)
+	for (var/mob/living/target in targets)
 		if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(target))
 			continue
 
@@ -62,7 +62,7 @@
 
 /spell/targeted/ethereal_jaunt/proc/reappear(mob_loc, mob/living/user)
 	if (!user.forceMove(mob_loc))
-		for(var/direction in list(1,2,4,8,5,6,9,10))
+		for (var/direction in list(1,2,4,8,5,6,9,10))
 			var/turf/T = get_step(mob_loc, direction)
 			if (T && user.forceMove(T))
 				break
@@ -107,7 +107,7 @@
 
 /obj/effect/dummy/spell_jaunt/Destroy()
 	// Eject contents if deleted somehow
-	for(var/atom/movable/AM in src)
+	for (var/atom/movable/AM in src)
 		AM.dropInto(loc)
 	return ..()
 

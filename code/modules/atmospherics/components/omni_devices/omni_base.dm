@@ -33,7 +33,7 @@
 	icon_state = "base"
 
 	ports = new()
-	for(var/d in GLOB.cardinal)
+	for (var/d in GLOB.cardinal)
 		var/datum/omni_port/new_port = new(src, d)
 		switch(d)
 			if (NORTH)
@@ -81,7 +81,7 @@
 		return ..()
 
 	var/int_pressure = 0
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		int_pressure += P.air.return_pressure()
 	var/datum/gas_mixture/env_air = loc.return_air()
 	if ((int_pressure - env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
@@ -126,7 +126,7 @@
 	if (!check_icon_cache())
 		return
 
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		if (P.update)
 			var/ref_layer = 0
 			switch(P.dir)
@@ -193,7 +193,7 @@
 		return list("on_icon" = ic_on, "off_icon" = ic_off, "pipe_icon" = pipe_state)
 
 /obj/machinery/atmospherics/omni/update_underlays()
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		P.update = 1
 	update_ports()
 
@@ -203,7 +203,7 @@
 /obj/machinery/atmospherics/omni/proc/update_ports()
 	sort_ports()
 	update_port_icons()
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		P.update = 0
 
 /obj/machinery/atmospherics/omni/proc/sort_ports()
@@ -213,7 +213,7 @@
 // Housekeeping and pipe network stuff below
 
 /obj/machinery/atmospherics/omni/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		if (reference == P.node)
 			P.network = new_network
 			break
@@ -226,7 +226,7 @@
 	return null
 
 /obj/machinery/atmospherics/omni/Destroy()
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		if (P.node)
 			P.node.disconnect(src)
 			qdel(P.network)
@@ -236,22 +236,22 @@
 
 /obj/machinery/atmospherics/omni/atmos_init()
 	..()
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		if (P.node || P.mode == 0)
 			continue
-		for(var/obj/machinery/atmospherics/target in get_step(src, P.dir))
+		for (var/obj/machinery/atmospherics/target in get_step(src, P.dir))
 			if (target.initialize_directions & get_dir(target,src))
 				if (check_connect_types(target,src))
 					P.node = target
 					break
 
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		P.update = 1
 
 	update_ports()
 
 /obj/machinery/atmospherics/omni/build_network()
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		if (!P.network && P.node)
 			P.network = new /datum/pipe_network()
 			P.network.normal_members += src
@@ -260,14 +260,14 @@
 /obj/machinery/atmospherics/omni/return_network(obj/machinery/atmospherics/reference)
 	build_network()
 
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		if (reference == P.node)
 			return P.network
 
 	return null
 
 /obj/machinery/atmospherics/omni/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		if (P.network == old_network)
 			P.network = new_network
 
@@ -276,14 +276,14 @@
 /obj/machinery/atmospherics/omni/return_network_air(datum/pipe_network/reference)
 	var/list/results = list()
 
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		if (P.network == reference)
 			results += P.air
 
 	return results
 
 /obj/machinery/atmospherics/omni/disconnect(obj/machinery/atmospherics/reference)
-	for(var/datum/omni_port/P in ports)
+	for (var/datum/omni_port/P in ports)
 		if (reference == P.node)
 			qdel(P.network)
 			P.node = null

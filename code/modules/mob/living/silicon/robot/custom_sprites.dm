@@ -9,7 +9,7 @@ var/global/list/robot_custom_icons
 	var/list/lines = splittext(config_file, "\n")
 
 	robot_custom_icons = list()
-	for(var/line in lines)
+	for (var/line in lines)
 		//split entry into ckey and real_name
 		var/split_idx = findtext(line, "-") //this works if ckey cannot contain dashes, and findtext starts from the beginning
 		if (!split_idx || split_idx == length(line))

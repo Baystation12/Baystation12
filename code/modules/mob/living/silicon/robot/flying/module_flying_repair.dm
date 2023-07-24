@@ -68,7 +68,7 @@
 	MD.metal = metal
 	MD.glass = glass
 
-	for(var/thing in list(
+	for (var/thing in list(
 		 /obj/item/stack/material/cyborg/steel,
 		 /obj/item/stack/material/cyborg/aluminium,
 		 /obj/item/stack/material/rods/cyborg,
@@ -78,7 +78,7 @@
 		var/obj/item/stack/stack = locate(thing) in equipment
 		LAZYDISTINCTADD(stack.synths, metal)
 
-	for(var/thing in list(
+	for (var/thing in list(
 		 /obj/item/stack/material/cyborg/glass/reinforced,
 		 /obj/item/stack/material/cyborg/glass
 		))

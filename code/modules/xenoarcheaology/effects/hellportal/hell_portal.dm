@@ -121,7 +121,7 @@
 	effectrange = 30 //create lots of bads in a large area
 
 	DoEffectPulse(FALSE)
-	for(var/mob/M in GLOB.player_list)
+	for (var/mob/M in GLOB.player_list)
 		if ((M.z == holder.z) && !istype(M,/mob/new_player))
 			to_chat(M, SPAN_DANGER(FONT_LARGE("Agonized screams fill your ears as the world around you briefly burns in hellfire!")))
 			if (istype(M, /mob/living/carbon/human))

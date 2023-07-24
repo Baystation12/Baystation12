@@ -27,7 +27,7 @@
 	dat += "[mechanics_text]"
 	dat += "<h3>Categories</h3>"
 	var/list/categories = list()
-	for(var/type in subtypesof(/datum/codex_category))
+	for (var/type in subtypesof(/datum/codex_category))
 		var/datum/codex_category/C = type
 		var/key = "[initial(C.name)] (category)"
 		var/datum/codex_entry/entry = SScodex.get_codex_entry(key)

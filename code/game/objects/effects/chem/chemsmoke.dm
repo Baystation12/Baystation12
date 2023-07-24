@@ -30,8 +30,8 @@
 	var/list/oldlocs = view(1, src)
 	. = ..()
 	if (.)
-		for(var/turf/T in view(1, src) - oldlocs)
-			for(var/atom/movable/AM in T)
+		for (var/turf/T in view(1, src) - oldlocs)
+			for (var/atom/movable/AM in T)
 				if (!istype(AM, /obj/effect/effect/smoke/chem))
 					reagents.splash(AM, splash_amount, copy = 1)
 
@@ -41,8 +41,8 @@
 		reagents.splash(AM, splash_amount, copy = 1)
 
 /obj/effect/effect/smoke/chem/proc/initial_splash()
-	for(var/turf/T in view(1, src))
-		for(var/atom/movable/AM in T)
+	for (var/turf/T in view(1, src))
+		for (var/atom/movable/AM in T)
 			if (!istype(AM, /obj/effect/effect/smoke/chem))
 				reagents.splash(AM, splash_amount, copy = 1)
 
@@ -95,7 +95,7 @@
 	targetTurfs = new()
 
 	//build affected area list
-	for(var/turf/T in view(range, location))
+	for (var/turf/T in view(range, location))
 		//cull turfs to circle
 		if (sqrt((T.x - location.x)**2 + (T.y - location.y)**2) <= range)
 			targetTurfs += T
@@ -134,11 +134,11 @@
 		return
 
 	if (length(chemholder.reagents.reagent_list)) //reagent application - only run if there are extra reagents in the smoke
-		for(var/turf/T in wallList)
+		for (var/turf/T in wallList)
 			chemholder.reagents.touch_turf(T)
-		for(var/turf/T in targetTurfs)
+		for (var/turf/T in targetTurfs)
 			chemholder.reagents.touch_turf(T)
-			for(var/atom/A in T.contents)
+			for (var/atom/A in T.contents)
 				if (istype(A, /obj/effect/effect/smoke/chem) || istype(A, /mob))
 					continue
 				else if (isobj(A) && !A.simulated)
@@ -162,7 +162,7 @@
 
 	var/const/arcLength = 2.3559 //distance between each smoke cloud
 
-	for(var/i = 0, i < range, i++) //calculate positions for smoke coverage - then spawn smoke
+	for (var/i = 0, i < range, i++) //calculate positions for smoke coverage - then spawn smoke
 		var/radius = i * 1.5
 		if (!radius)
 			spawn(0)
@@ -176,7 +176,7 @@
 		if (!IsInteger(radius))
 			offset = 45		//degrees
 
-		for(var/j = 0, j < points, j++)
+		for (var/j = 0, j < points, j++)
 			var/a = (angle * j) + offset
 			var/x = round(radius * cos(a) + location.x, 1)
 			var/y = round(radius * sin(a) + location.y, 1)
@@ -221,8 +221,8 @@
 	pending += location
 
 	while(length(pending))
-		for(var/turf/current in pending)
-			for(var/D in GLOB.cardinal)
+		for (var/turf/current in pending)
+			for (var/D in GLOB.cardinal)
 				var/turf/target = get_step(current, D)
 				if (wallList)
 					if (istype(target, /turf/simulated/wall))

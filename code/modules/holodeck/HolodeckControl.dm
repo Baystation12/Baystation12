@@ -65,7 +65,7 @@
 		onclose(user, "computer")
 		return
 
-	for(var/prog in supported_programs)
+	for (var/prog in supported_programs)
 		dat += "<A href='?src=\ref[src];program=[supported_programs[prog]]'>([prog])</A><BR>"
 
 	dat += "<BR>"
@@ -87,7 +87,7 @@
 	dat += "<BR>"
 
 	if (safety_disabled)
-		for(var/prog in restricted_programs)
+		for (var/prog in restricted_programs)
 			dat += "<A href='?src=\ref[src];program=[restricted_programs[prog]]'>([SPAN_COLOR("red", "Begin [prog]")])</A><BR>"
 			dat += "Ensure the holodeck is empty before testing.<BR>"
 			dat += "<BR>"
@@ -156,14 +156,14 @@
 /obj/machinery/computer/HolodeckControl/proc/update_projections()
 	if (safety_disabled)
 		item_power_usage = 2500
-		for(var/obj/item/holo/esword/H in linkedholodeck)
+		for (var/obj/item/holo/esword/H in linkedholodeck)
 			H.damtype = DAMAGE_BRUTE
 	else
 		item_power_usage = initial(item_power_usage)
-		for(var/obj/item/holo/esword/H in linkedholodeck)
+		for (var/obj/item/holo/esword/H in linkedholodeck)
 			H.damtype = initial(H.damtype)
 
-	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+	for (var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
 		C.set_safety(!safety_disabled)
 		if (last_to_emag)
 			C.friends = list(weakref(last_to_emag))
@@ -183,12 +183,12 @@
 		emergencyShutdown()
 
 /obj/machinery/computer/HolodeckControl/Process()
-	for(var/item in holographic_objs) // do this first, to make sure people don't take items out when power is down.
+	for (var/item in holographic_objs) // do this first, to make sure people don't take items out when power is down.
 		if (!(get_turf(item) in linkedholodeck))
 			derez(item, 0)
 
 	if (!safety_disabled)
-		for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+		for (var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
 			if (get_area(C.loc) != linkedholodeck)
 				holographic_mobs -= C
 				C.death()
@@ -203,11 +203,11 @@
 			loadProgram(GLOB.using_map.holodeck_programs["turnoff"], 0)
 			active = 0
 			update_use_power(POWER_USE_IDLE)
-			for(var/mob/M in range(10,src))
+			for (var/mob/M in range(10,src))
 				M.show_message("The holodeck overloads!")
 
 
-			for(var/turf/T in linkedholodeck)
+			for (var/turf/T in linkedholodeck)
 				if (prob(30))
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 					s.set_up(2, 1, T)
@@ -227,7 +227,7 @@
 	qdel(obj)
 
 /obj/machinery/computer/HolodeckControl/proc/checkInteg(area/A)
-	for(var/turf/T in A)
+	for (var/turf/T in A)
 		if (istype(T, /turf/space))
 			return 0
 
@@ -258,7 +258,7 @@
 		if (world.time < (last_change + 25))
 			if (world.time < (last_change + 15))//To prevent super-spam clicking, reduced process size and annoyance -Sieve
 				return
-			for(var/mob/M in range(3,src))
+			for (var/mob/M in range(3,src))
 				M.show_message(SPAN_WARNING("ERROR. Recalibrating projection apparatus."))
 				last_change = world.time
 				return
@@ -267,18 +267,18 @@
 	active = 1
 	update_use_power(POWER_USE_ACTIVE)
 
-	for(var/item in holographic_objs)
+	for (var/item in holographic_objs)
 		derez(item)
 
-	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+	for (var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
 		holographic_mobs -= C
 		C.death()
 
-	for(var/obj/effect/decal/cleanable/blood/B in linkedholodeck)
+	for (var/obj/effect/decal/cleanable/blood/B in linkedholodeck)
 		qdel(B)
 
 	holographic_objs = A.copy_contents_to(linkedholodeck , 1)
-	for(var/obj/holo_obj in holographic_objs)
+	for (var/obj/holo_obj in holographic_objs)
 		holo_obj.alpha *= 0.8 //give holodeck objs a slight transparency
 		holo_obj.holographic = TRUE
 		if (istype(holo_obj,/obj/item/storage))
@@ -291,14 +291,14 @@
 	else
 		LAZYCLEARLIST(linkedholodeck.forced_ambience)
 
-	for(var/mob/living/M in mobs_in_area(linkedholodeck))
+	for (var/mob/living/M in mobs_in_area(linkedholodeck))
 		if (M.mind)
 			linkedholodeck.play_ambience(M)
 
 	linkedholodeck.sound_env = A.sound_env
 
 	spawn(30)
-		for(var/obj/effect/landmark/L in linkedholodeck)
+		for (var/obj/effect/landmark/L in linkedholodeck)
 			if (L.name=="Atmospheric Test Start")
 				spawn(20)
 					var/turf/T = get_turf(L)
@@ -322,7 +322,7 @@
 	if (world.time < (last_gravity_change + 25))
 		if (world.time < (last_gravity_change + 15))//To prevent super-spam clicking
 			return
-		for(var/mob/M in range(3,src))
+		for (var/mob/M in range(3,src))
 			M.show_message(SPAN_WARNING("ERROR. Recalibrating gravity field."))
 			last_change = world.time
 			return

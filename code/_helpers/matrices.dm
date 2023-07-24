@@ -141,10 +141,10 @@ var/global/list/delta_index = list(
 	var/list/result = new (m * p)
 
 	if (length(A) == m*n && length(B) == n*p)
-		for(var/row = 1; row <= m; row += 1) //For each row on left matrix
-			for(var/col = 1; col <= p; col += 1) //go over each column of the second matrix
+		for (var/row = 1; row <= m; row += 1) //For each row on left matrix
+			for (var/col = 1; col <= p; col += 1) //go over each column of the second matrix
 				var/sum = 0
-				for(var/i = 1; i <= n; i += 1) //multiply each pair
+				for (var/i = 1; i <= n; i += 1) //multiply each pair
 					sum += A[(row-1)*n + i] * B[(i-1)*p + col]
 
 				result[(row-1)*p + col] = sum

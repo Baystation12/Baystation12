@@ -37,7 +37,7 @@
 	var/list/areas = list()
 	if (!islist(shuttle_area))
 		shuttle_area = list(shuttle_area)
-	for(var/T in shuttle_area)
+	for (var/T in shuttle_area)
 		var/area/A = locate(T)
 		if (!istype(A))
 			CRASH("Shuttle \"[name]\" couldn't locate area [T].")
@@ -158,7 +158,7 @@
 		return FALSE
 	testing("[src] moving to [destination]. Areas are [english_list(shuttle_area)]")
 	var/list/translation = list()
-	for(var/area/A in shuttle_area)
+	for (var/area/A in shuttle_area)
 		testing("Moving [A]")
 		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
 	var/old_location = current_location
@@ -191,27 +191,27 @@
 		if (destination.flags & SLANDMARK_FLAG_ZERO_G)
 			var/area/new_area = get_area(destination)
 			new_grav = new_area.has_gravity
-		for(var/area/our_area in shuttle_area)
+		for (var/area/our_area in shuttle_area)
 			if (our_area.has_gravity != new_grav)
 				our_area.gravitychange(new_grav)
 
-	for(var/turf/src_turf in turf_translation)
+	for (var/turf/src_turf in turf_translation)
 		var/turf/dst_turf = turf_translation[src_turf]
 		if (src_turf.is_solid_structure()) //in case someone put a hole in the shuttle and you were lucky enough to be under it
-			for(var/atom/movable/AM in dst_turf)
+			for (var/atom/movable/AM in dst_turf)
 				if (!AM.simulated)
 					continue
 				AM.shuttle_land_on()
 	var/list/powernets = list()
-	for(var/area/A in shuttle_area)
+	for (var/area/A in shuttle_area)
 		// if there was a zlevel above our origin, erase our ceiling now we're leaving
 		if (HasAbove(current_location.z))
-			for(var/turf/TO in A.contents)
+			for (var/turf/TO in A.contents)
 				var/turf/TA = GetAbove(TO)
 				if (istype(TA, ceiling_type))
 					TA.ChangeTurf(get_base_turf_by_area(TA), 1, 1)
 		if (knockdown)
-			for(var/mob/M in A)
+			for (var/mob/M in A)
 				spawn(0)
 					if (istype(M, /mob/living/carbon))
 						if (M.buckled)
@@ -223,7 +223,7 @@
 							M.visible_message(SPAN_WARNING("[M.name] is tossed around by the sudden acceleration!"))
 							M.throw_at_random(FALSE, 4, 1)
 
-		for(var/obj/structure/cable/C in A)
+		for (var/obj/structure/cable/C in A)
 			powernets |= C.powernet
 	if (logging_home_tag)
 		var/datum/shuttle_log/s_log = SSshuttle.shuttle_logs[src]
@@ -234,8 +234,8 @@
 
 	// if there's a zlevel above our destination, paint in a ceiling on it so we retain our air
 	if (HasAbove(current_location.z))
-		for(var/area/A in shuttle_area)
-			for(var/turf/TD in A.contents)
+		for (var/area/A in shuttle_area)
+			for (var/turf/TD in A.contents)
 				var/turf/TA = GetAbove(TD)
 				if (istype(TA, get_base_turf_by_area(TA)) || istype(TA, /turf/simulated/open))
 					if (get_area(TA) in shuttle_area)
@@ -244,10 +244,10 @@
 
 	// Remove all powernets that were affected, and rebuild them.
 	var/list/cables = list()
-	for(var/datum/powernet/P in powernets)
+	for (var/datum/powernet/P in powernets)
 		cables |= P.cables
 		qdel(P)
-	for(var/obj/structure/cable/C in cables)
+	for (var/obj/structure/cable/C in cables)
 		if (!C.powernet)
 			var/datum/powernet/NewPN = new()
 			NewPN.add_cable(C)
@@ -274,7 +274,7 @@
 
 /datum/shuttle/proc/find_children()
 	. = list()
-	for(var/shuttle_name in SSshuttle.shuttles)
+	for (var/shuttle_name in SSshuttle.shuttles)
 		var/datum/shuttle/shuttle = SSshuttle.shuttles[shuttle_name]
 		if (shuttle.mothershuttle == name)
 			. += shuttle
@@ -282,7 +282,7 @@
 //Returns those areas that are not actually child shuttles.
 /datum/shuttle/proc/find_childfree_areas()
 	. = shuttle_area.Copy()
-	for(var/datum/shuttle/child in find_children())
+	for (var/datum/shuttle/child in find_children())
 		. -= child.shuttle_area
 
 /datum/shuttle/autodock/proc/get_location_name()

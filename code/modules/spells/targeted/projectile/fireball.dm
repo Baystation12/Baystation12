@@ -28,7 +28,7 @@
 	cast_sound = 'sound/magic/fireball.ogg'
 
 /spell/targeted/projectile/dumbfire/fireball/prox_cast(list/targets, spell_holder)
-	for(var/mob/living/M in targets)
+	for (var/mob/living/M in targets)
 		apply_spell_damage(M)
 	explosion(get_turf(spell_holder), explosion_radius, explosion_max_power)
 

@@ -28,7 +28,7 @@
 		)
 		if (terminal.computer.terminals)
 			var/list/remote_connections = list()
-			for(var/datum/terminal/remote/rt in terminal.computer.terminals)
+			for (var/datum/terminal/remote/rt in terminal.computer.terminals)
 				var/obj/item/stock_parts/computer/network_card/origin_nc = rt.origin_computer.get_component(PART_NETWORK)
 				var/obj/item/stock_parts/computer/network_card/remote_nc = rt.computer.get_component(PART_NETWORK)
 				if (origin_nc && remote_nc)

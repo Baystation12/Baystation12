@@ -44,7 +44,7 @@
 	. = ..()
 	if (starts_loaded)
 		if (ispath(ammo_type) && (load_method & (SINGLE_CASING|SPEEDLOADER)))
-			for(var/i in 1 to max_shells)
+			for (var/i in 1 to max_shells)
 				loaded += new ammo_type(src)
 		if (ispath(magazine_type) && (load_method & MAGAZINE))
 			ammo_magazine = new magazine_type(src)
@@ -198,7 +198,7 @@
 					to_chat(user, SPAN_WARNING("[src] is full!"))
 					return
 				var/count = 0
-				for(var/obj/item/ammo_casing/C in AM.stored_ammo)
+				for (var/obj/item/ammo_casing/C in AM.stored_ammo)
 					if (length(loaded) >= max_shells)
 						break
 					if (C.caliber == caliber)
@@ -253,7 +253,7 @@
 			var/count = 0
 			var/turf/T = get_turf(user)
 			if (T)
-				for(var/obj/item/ammo_casing/C in loaded)
+				for (var/obj/item/ammo_casing/C in loaded)
 					if (LAZYLEN(C.fall_sounds))
 						playsound(loc, pick(C.fall_sounds), 50, 1)
 					C.forceMove(T)

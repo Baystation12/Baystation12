@@ -7,7 +7,7 @@
 	var/list/result = list()
 
 	result += rand(0, 14)
-	for(var/i in 2 to size)
+	for (var/i in 2 to size)
 		var/shifts = list(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
 		shifts -= result[i - 1] //consecutive shifts should not be equal
 		if (i == size)

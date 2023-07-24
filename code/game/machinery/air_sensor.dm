@@ -44,7 +44,7 @@
 		return
 
 	. = list()
-	for(var/gas in air_sample.gas)
+	for (var/gas in air_sample.gas)
 		var/gaspercent = round(air_sample.gas["[gas]"]*100/total_moles,0.01)
 		var/gas_list = list("symbol" = gas_data.symbol_html["[gas]"], "percent" = gaspercent)
 		. += list(gas_list)

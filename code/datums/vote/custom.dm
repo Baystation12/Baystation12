@@ -16,7 +16,7 @@
 	if (!question)
 		abort = 1
 		return
-	for(var/i=1,i<=10,i++)
+	for (var/i=1,i<=10,i++)
 		var/option = capitalize(sanitizeSafe(input(creator,"Please enter an option or hit cancel to finish") as text|null))
 		if (!option || !creator.client)
 			break

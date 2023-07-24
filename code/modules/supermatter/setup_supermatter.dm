@@ -33,7 +33,7 @@
 
 	// CONFIGURATION PHASE
 	// Coolant canisters, set types according to response.
-	for(var/obj/effect/engine_setup/coolant_canister/C in world)
+	for (var/obj/effect/engine_setup/coolant_canister/C in world)
 		switch(response)
 			if ("N2")
 				C.canister_type = /obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup
@@ -48,7 +48,7 @@
 				C.canister_type = /obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup
 				continue
 
-	for(var/obj/effect/engine_setup/core/C in world)
+	for (var/obj/effect/engine_setup/core/C in world)
 		switch(response)
 			if ("N2")
 				C.energy_setting = ENERGY_NITROGEN
@@ -63,12 +63,12 @@
 				C.energy_setting = ENERGY_HYDROGEN
 				continue
 
-	for(var/obj/effect/engine_setup/filter/F in world)
+	for (var/obj/effect/engine_setup/filter/F in world)
 		F.coolant = response
 
 	var/list/delayed_objects = list()
 	// SETUP PHASE
-	for(var/obj/effect/engine_setup/S in world)
+	for (var/obj/effect/engine_setup/S in world)
 		var/result = S.activate(0)
 		switch(result)
 			if (SETUP_OK)
@@ -86,7 +86,7 @@
 				continue
 
 	if (!errors)
-		for(var/obj/effect/engine_setup/S in delayed_objects)
+		for (var/obj/effect/engine_setup/S in delayed_objects)
 			var/result = S.activate(1)
 			switch(result)
 				if (SETUP_OK)
@@ -230,7 +230,7 @@
 
 	// Non-co2 coolant, adjust the filter's config first.
 	if (coolant != "CO2")
-		for(var/datum/omni_port/P in F.ports)
+		for (var/datum/omni_port/P in F.ports)
 			if (P.mode != ATM_CO2)
 				continue
 			if (coolant == "PH")

@@ -41,7 +41,7 @@
 
 /obj/item/organ/internal/stomach/proc/is_full(atom/movable/food)
 	var/total = floor(ingested.total_volume / 10)
-	for(var/a in contents + food)
+	for (var/a in contents + food)
 		if (ismob(a))
 			var/mob/M = a
 			total += M.mob_size
@@ -138,7 +138,7 @@
 			functioning = FALSE
 
 		if (functioning)
-			for(var/mob/living/M in contents)
+			for (var/mob/living/M in contents)
 				if (M.stat == DEAD)
 					qdel(M)
 					continue

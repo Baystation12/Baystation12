@@ -4,11 +4,11 @@
 /datum/unit_test/machines_shall_obey_part_maximum/start_test()
 	var/failed = list()
 	var/passed = list()
-	for(var/thing in SSmachines.machinery)
+	for (var/thing in SSmachines.machinery)
 		var/obj/machinery/machine = thing
 		if (passed[machine.type] || failed[machine.type])
 			continue
-		for(var/path in machine.maximum_component_parts)
+		for (var/path in machine.maximum_component_parts)
 			if (machine.number_of_components(path) > machine.maximum_component_parts[path])
 				failed[machine.type] = TRUE
 				log_bad("[log_info_line(machine)] had too many components of type [path].")
@@ -27,7 +27,7 @@
 /datum/unit_test/machines_with_circuits_shall_have_construct_states/start_test()
 	var/failed = list()
 	var/passed = list()
-	for(var/thing in SSmachines.machinery)
+	for (var/thing in SSmachines.machinery)
 		var/obj/machinery/machine = thing
 		if (passed[machine.type] || failed[machine.type])
 			continue
@@ -50,7 +50,7 @@
 
 /datum/unit_test/machine_construct_states_shall_be_valid/start_test()
 	var/failed = list()
-	for(var/thing in SSmachines.machinery)
+	for (var/thing in SSmachines.machinery)
 		var/obj/machinery/machine = thing
 		if (failed[machine.type])
 			continue
@@ -73,10 +73,10 @@
 
 /datum/unit_test/fabricator_recipes_shall_be_buildable/start_test()
 	var/failed = list()
-	for(var/thing in typesof(/obj/machinery/fabricator))
+	for (var/thing in typesof(/obj/machinery/fabricator))
 		var/obj/machinery/fabricator/fab = new thing
-		for(var/datum/fabricator_recipe/recipe in SSfabrication.get_recipes(fab.fabricator_class))
-			for(var/mat in recipe.resources)
+		for (var/datum/fabricator_recipe/recipe in SSfabrication.get_recipes(fab.fabricator_class))
+			for (var/mat in recipe.resources)
 				if (isnull(fab.storage_capacity[mat]))
 					log_bad("[fab.name] ([fab.type]) could not print [recipe.name] due to lacking [mat].")
 					failed += thing

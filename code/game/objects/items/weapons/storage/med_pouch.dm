@@ -30,9 +30,9 @@ Single Use Emergency Pouches
 	. = ..()
 	name = "emergency [injury_type] pouch"
 	make_exact_fit()
-	for(var/obj/item/reagent_containers/pill/P in contents)
+	for (var/obj/item/reagent_containers/pill/P in contents)
 		P.color = color
-	for(var/obj/item/reagent_containers/hypospray/autoinjector/A in contents)
+	for (var/obj/item/reagent_containers/hypospray/autoinjector/A in contents)
 		A.band_color = color
 		A.update_icon()
 

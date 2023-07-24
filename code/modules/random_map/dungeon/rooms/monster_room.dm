@@ -7,8 +7,8 @@
 		return 1
 	var truex = xorigin + x - 1
 	var truey = yorigin + y - 1
-	for(var/i = 1, i < width - 1, i++)
-		for(var/j = 1, j < height - 1, j++)
+	for (var/i = 1, i < width - 1, i++)
+		for (var/j = 1, j < height - 1, j++)
 			var/turf/T = locate(truex+i,truey+j,zorigin)
 			if (!T)
 				return 0

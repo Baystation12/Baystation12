@@ -35,11 +35,11 @@
 		var/obj/structure/closet/body_bag/B = target
 		if (!B.opened)
 			var/list/scan_content = list()
-			for(var/mob/living/L in B.contents)
+			for (var/mob/living/L in B.contents)
 				scan_content.Add(L)
 
 			if (length(scan_content) == 1)
-				for(var/mob/living/carbon/human/L in scan_content)
+				for (var/mob/living/carbon/human/L in scan_content)
 					scan_subject = L
 			else if (length(scan_content) > 1)
 				to_chat(user, SPAN_WARNING("\The [scanner] picks up multiple readings inside \the [target], too close together to scan properly."))
@@ -187,7 +187,7 @@
 		dat += SPAN_CLASS("scan_red", "[b]Severe anatomical damage detected.[endb]")
 
 	if (skill_level >= SKILL_BASIC)
-		for(var/name in H.organs_by_name)
+		for (var/name in H.organs_by_name)
 			var/obj/item/organ/external/e = H.organs_by_name[name]
 			if (!e)
 				continue
@@ -198,7 +198,7 @@
 			if (e.has_infected_wound())
 				dat += SPAN_CLASS("scan_warning", "Infected wound detected in subject [limb]. Disinfection recommended.")
 
-		for(var/name in H.organs_by_name)
+		for (var/name in H.organs_by_name)
 			var/obj/item/organ/external/e = H.organs_by_name[name]
 			if (e && e.status & ORGAN_BROKEN)
 				dat += SPAN_CLASS("scan_warning", "Bone fractures detected. Advanced scanner required for location.")
@@ -207,7 +207,7 @@
 		var/found_bleed
 		var/found_tendon
 		var/found_disloc
-		for(var/obj/item/organ/external/e in H.organs)
+		for (var/obj/item/organ/external/e in H.organs)
 			if (e)
 				if (!found_disloc && e.dislocated >= 1)
 					dat += SPAN_CLASS("scan_warning", "Dislocation detected. Advanced scanner required for location.")
@@ -230,7 +230,7 @@
 
 		var/list/damaged = H.get_damaged_organs(1,1)
 		if (length(damaged))
-			for(var/obj/item/organ/external/org in damaged)
+			for (var/obj/item/organ/external/org in damaged)
 				var/limb_result = "[capitalize(org.name)][BP_IS_ROBOTIC(org) ? " (Cybernetic)" : ""]:"
 				if (org.brute_dam > 0)
 					limb_result = "[limb_result] \[[SPAN_COLOR("red", "<b>[get_wound_severity(org.brute_ratio, (org.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))] physical trauma</b>")]\]"
@@ -250,7 +250,7 @@
 	if (H.reagents.total_volume)
 		var/unknown = 0
 		var/reagentdata[0]
-		for(var/A in H.reagents.reagent_list)
+		for (var/A in H.reagents.reagent_list)
 			var/datum/reagent/R = A
 			if (R.scannable)
 				print_reagent_default_message = FALSE
@@ -260,7 +260,7 @@
 		if (length(reagentdata))
 			print_reagent_default_message = FALSE
 			. += SPAN_CLASS("scan_notice", "Beneficial reagents detected in subject's blood:")
-			for(var/d in reagentdata)
+			for (var/d in reagentdata)
 				. += reagentdata[d]
 		if (unknown)
 			print_reagent_default_message = FALSE
@@ -269,7 +269,7 @@
 	var/datum/reagents/ingested = H.get_ingested_reagents()
 	if (ingested && ingested.total_volume)
 		var/unknown = 0
-		for(var/datum/reagent/R in ingested.reagent_list)
+		for (var/datum/reagent/R in ingested.reagent_list)
 			if (R.scannable)
 				print_reagent_default_message = FALSE
 				. += SPAN_CLASS("scan_notice", "[R.name] found in subject's stomach.")
@@ -281,7 +281,7 @@
 
 	if (length(H.chem_doses))
 		var/list/chemtraces = list()
-		for(var/T in H.chem_doses)
+		for (var/T in H.chem_doses)
 			var/datum/reagent/R = T
 			if (initial(R.scannable))
 				chemtraces += "[initial(R.name)] ([H.chem_doses[T]])"

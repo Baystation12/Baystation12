@@ -86,7 +86,7 @@
 	if (!(target in view(7,get_turf(src))))
 		return
 	var/projection_type
-	for(var/T in projection_types)
+	for (var/T in projection_types)
 		if (istype(current_slide, T))
 			projection_type = projection_types[T]
 			break
@@ -108,7 +108,7 @@
 
 	var/table = list("<table><tr><th>#</th><th>SLIDE</th><th>SHOW</th></tr>")
 	var/i = 1
-	for(var/obj/item/I in contents)
+	for (var/obj/item/I in contents)
 		table += "<tr><td>#[i]</td>"
 		if (I == current_slide)
 			table += "<td><b>[I.name]</b></td><td>SHOWING</td>"

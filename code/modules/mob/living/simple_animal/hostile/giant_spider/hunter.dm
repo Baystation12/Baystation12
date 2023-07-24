@@ -62,7 +62,7 @@
 
 	// Now for the stun.
 	var/mob/living/victim = null
-	for(var/mob/living/L in T) // So player-controlled spiders only need to click the tile to stun them.
+	for (var/mob/living/L in T) // So player-controlled spiders only need to click the tile to stun them.
 		if (L == src)
 			continue
 

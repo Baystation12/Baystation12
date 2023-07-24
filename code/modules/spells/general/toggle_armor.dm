@@ -10,7 +10,7 @@
 /spell/toggle_armor/New()
 	if (armor_pieces)
 		var/list/nlist = list()
-		for(var/type in armor_pieces)
+		for (var/type in armor_pieces)
 			var/obj/item/I = new type(null)
 			nlist[I] = armor_pieces[type]
 		armor_pieces = nlist
@@ -28,13 +28,13 @@
 	equip = !equip
 	name = "[initial(name)] ([equip ? "off" : "on"])"
 	if (equip)
-		for(var/piece in armor_pieces)
+		for (var/piece in armor_pieces)
 			var/slot = armor_pieces[piece]
 			drop_piece(piece)
 			user.drop_from_inventory(user.get_equipped_item(slot))
 			user.equip_to_slot_if_possible(piece, slot, TRYEQUIP_REDRAW | TRYEQUIP_SILENT | TRYEQUIP_FORCE)
 	else
-		for(var/piece in armor_pieces)
+		for (var/piece in armor_pieces)
 			var/obj/item/I = piece
 			drop_piece(piece)
 			I.forceMove(null)

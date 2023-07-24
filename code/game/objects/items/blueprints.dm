@@ -110,7 +110,7 @@
 	A.power_light = 0
 	A.power_environ = 0
 	A.always_unpowered = 0
-	for(var/T in turfs)
+	for (var/T in turfs)
 		ChangeArea(T, A)
 	A.always_unpowered = 0
 	interact()
@@ -144,15 +144,15 @@
 	if (!oldtitle) // or replacetext goes to infinite loop
 		return
 
-	for(var/obj/machinery/alarm/M in A)
+	for (var/obj/machinery/alarm/M in A)
 		M.SetName(replacetext(M.name,oldtitle,title))
-	for(var/obj/machinery/power/apc/M in A)
+	for (var/obj/machinery/power/apc/M in A)
 		M.SetName(replacetext(M.name,oldtitle,title))
-	for(var/obj/machinery/atmospherics/unary/vent_scrubber/M in A)
+	for (var/obj/machinery/atmospherics/unary/vent_scrubber/M in A)
 		M.SetName(replacetext(M.name,oldtitle,title))
-	for(var/obj/machinery/atmospherics/unary/vent_pump/M in A)
+	for (var/obj/machinery/atmospherics/unary/vent_pump/M in A)
 		M.SetName(replacetext(M.name,oldtitle,title))
-	for(var/obj/machinery/door/M in A)
+	for (var/obj/machinery/door/M in A)
 		M.SetName(replacetext(M.name,oldtitle,title))
 	//TODO: much much more. Unnamed airlocks, cameras, etc.
 
@@ -173,7 +173,7 @@
 			return BORDER_BETWEEN
 		if (W.dir in list(NORTHEAST,SOUTHEAST,NORTHWEST,SOUTHWEST))
 			return BORDER_2NDTILE
-	for(var/obj/machinery/door/window/D in T2)
+	for (var/obj/machinery/door/window/D in T2)
 		if (turn(dir,180) == D.dir)
 			return BORDER_BETWEEN
 	if (locate(/obj/machinery/door) in T2)
@@ -195,7 +195,7 @@
 				if (dir == W.dir || (W.dir in list(NORTHEAST,SOUTHEAST,NORTHWEST,SOUTHWEST)))
 					skip = 1; break
 			if (skip) continue
-			for(var/obj/machinery/door/window/D in T)
+			for (var/obj/machinery/door/window/D in T)
 				if (dir == D.dir)
 					skip = 1; break
 			if (skip) continue

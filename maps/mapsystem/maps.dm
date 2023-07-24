@@ -6,7 +6,7 @@ var/global/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
 var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /hook/startup/proc/initialise_map_list()
-	for(var/type in subtypesof(/datum/map))
+	for (var/type in subtypesof(/datum/map))
 		var/datum/map/M
 		if (type == GLOB.using_map.type)
 			M = GLOB.using_map
@@ -228,7 +228,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		map_levels = station_levels.Copy()
 	if (!allowed_jobs)
 		allowed_jobs = list()
-		for(var/jtype in subtypesof(/datum/job))
+		for (var/jtype in subtypesof(/datum/job))
 			var/datum/job/job = jtype
 			if (initial(job.available_by_default))
 				allowed_jobs += jtype
@@ -405,7 +405,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if (!use_overmap)
 		return
 
-	for(var/i = 0, i < num_exoplanets, i++)
+	for (var/i = 0, i < num_exoplanets, i++)
 		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
 		var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, planet_size[1], planet_size[2])
 		new_planet.build_level()
@@ -416,10 +416,10 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	set background = 1
 	set waitfor = 0
 
-	for(var/thing in mining_walls["[zlevel]"])
+	for (var/thing in mining_walls["[zlevel]"])
 		var/turf/simulated/mineral/M = thing
 		M.update_icon()
-	for(var/thing in mining_floors["[zlevel]"])
+	for (var/thing in mining_floors["[zlevel]"])
 		var/turf/simulated/floor/asteroid/M = thing
 		if (istype(M))
 			M.updateMineralOverlays()
@@ -447,7 +447,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		N.CreateFeedChannel("Nyx Daily", "SolGov Minister of Information", 1, 1)
 		N.CreateFeedChannel("The Gibson Gazette", "Editor Mike Hammers", 1, 1)
 
-	for(var/loc_type in typesof(/datum/trade_destination) - /datum/trade_destination)
+	for (var/loc_type in typesof(/datum/trade_destination) - /datum/trade_destination)
 		var/datum/trade_destination/D = new loc_type
 		weighted_randomevent_locations[D] = length(D.viable_random_events)
 		weighted_mundaneevent_locations[D] = length(D.viable_mundane_events)
@@ -455,13 +455,13 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if (!station_account)
 		station_account = create_account("[station_name()] Primary Account", "[station_name()]", starting_money, ACCOUNT_TYPE_DEPARTMENT)
 
-	for(var/job in allowed_jobs)
+	for (var/job in allowed_jobs)
 		var/datum/job/J = job
 		var/dept = initial(J.department)
 		if (dept)
 			station_departments |= dept
 
-	for(var/department in station_departments)
+	for (var/department in station_departments)
 		department_accounts[department] = create_account("[department] Account", "[department]", department_money, ACCOUNT_TYPE_DEPARTMENT)
 
 	department_accounts["Vendor"] = create_account("Vendor Account", "Vendor", 0, ACCOUNT_TYPE_DEPARTMENT)
@@ -520,7 +520,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")
 
 /datum/map/proc/roundend_player_status()
-	for(var/mob/Player in GLOB.player_list)
+	for (var/mob/Player in GLOB.player_list)
 		if (Player.mind && !isnewplayer(Player))
 			if (Player.stat != DEAD)
 				var/turf/playerTurf = get_turf(Player)
@@ -558,7 +558,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	data["left_behind_total"] = 0 //players who didnt escape and aren't on the station.
 	data["offship_players"] = 0
 
-	for(var/mob/M in GLOB.player_list)
+	for (var/mob/M in GLOB.player_list)
 		if (M.client)
 			data["clients"]++
 			if (M.stat != DEAD)

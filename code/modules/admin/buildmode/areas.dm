@@ -116,7 +116,7 @@ Shift + Right Click - Select point B
 	GLOB.destroyed_event.unregister(selected_area, src, .proc/UnselectArea)
 
 	var/has_turf = FALSE
-	for(var/turf/T in selected_area)
+	for (var/turf/T in selected_area)
 		has_turf = TRUE
 		break
 	if (!has_turf)
@@ -124,7 +124,7 @@ Shift + Right Click - Select point B
 	selected_area = null
 
 /datum/build_mode/areas/proc/make_area(low_bound_x, low_bound_y, high_bound_x, high_bound_y, z_level)
-	for(var/i = low_bound_x, i <= high_bound_x, i++)
-		for(var/j = low_bound_y, j <= high_bound_y, j++)
+	for (var/i = low_bound_x, i <= high_bound_x, i++)
+		for (var/j = low_bound_y, j <= high_bound_y, j++)
 			var/turf/T = locate(i, j, z_level)
 			ChangeArea(T, selected_area)

@@ -362,7 +362,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			l_hand.update_twohanding()
 
 	W.hud_layerise()
-	for(var/s in species.hud.gear)
+	for (var/s in species.hud.gear)
 		var/list/gear = species.hud.gear[s]
 		if (gear["slot"] == slot)
 			W.screen_loc = gear["loc"]

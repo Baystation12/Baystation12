@@ -20,7 +20,7 @@
 /obj/item/organ/internal/augment/active/nanounit/proc/catastrophic_failure()
 	playsound(owner,'sound/mecha/internaldmgalarm.ogg',25,1)
 	owner.visible_message(SPAN_WARNING("The nanites attempt to harden. But they seem... brittle."))
-	for(var/obj/item/organ/external/E in owner.organs)
+	for (var/obj/item/organ/external/E in owner.organs)
 		if (prob(25))
 			E.status |= ORGAN_BRITTLE
 			to_chat(owner, SPAN_DANGER("Your [E.name] feels cold and rigid"))

@@ -125,7 +125,7 @@
 
 	var/grenade_type = pickweight(grenade_types)
 	chambered = new grenade_type(src)
-	for(var/i in 1 to max_grenades)
+	for (var/i in 1 to max_grenades)
 		grenade_type = pickweight(grenade_types)
 		grenades += new grenade_type(src)
 

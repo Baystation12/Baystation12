@@ -87,7 +87,7 @@
 	if (attempt_self_heat)
 		to_chat(user, SPAN_NOTICE("A comforting warmth spreads through \the [src]. It's ready to eat!"))
 	if (!was_heated)
-		for(var/reagent in hot_reagents)
+		for (var/reagent in hot_reagents)
 			reagents.add_reagent(reagent, hot_reagents[reagent])
 		was_heated = TRUE
 	SetName("hot " + name)

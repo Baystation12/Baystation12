@@ -160,7 +160,7 @@
 				msg += "[SPAN_WARNING("[P.His] face is horribly mangled!")]\n"
 
 	//splints
-	for(var/organ in list(BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
+	for (var/organ in list(BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
 		var/obj/item/organ/external/o = get_organ(organ)
 		if (o && o.splinted && o.splinted.loc == o)
 			msg += "[SPAN_WARNING("[P.He] [P.has] \a [o.splinted] on [P.his] [o.name]!")]\n"
@@ -213,7 +213,7 @@
 	var/list/shown_objects = list()
 	var/list/hidden_bleeders = list()
 
-	for(var/organ_tag in species.has_limbs)
+	for (var/organ_tag in species.has_limbs)
 
 		var/list/organ_data = species.has_limbs[organ_tag]
 		var/organ_descriptor = organ_data["descriptor"]
@@ -230,7 +230,7 @@
 
 		var/obj/item/clothing/hidden
 		var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
-		for(var/obj/item/clothing/C in clothing_items)
+		for (var/obj/item/clothing/C in clothing_items)
 			if (istype(C) && (C.body_parts_covered & E.body_part))
 				hidden = C
 				break
@@ -257,27 +257,27 @@
 			if (((E.status & ORGAN_BROKEN) && E.brute_dam > E.min_broken_damage) || (E.status & ORGAN_MUTATED))
 				wound_flavor_text[E.name] += "[P.His] [E.name] is dented and swollen!<br>"
 
-		for(var/datum/wound/wound in E.wounds)
+		for (var/datum/wound/wound in E.wounds)
 			var/list/embedlist = wound.embedded_objects
 			if (LAZYLEN(embedlist))
 				shown_objects += embedlist
 				var/parsedembed[0]
-				for(var/obj/embedded in embedlist)
+				for (var/obj/embedded in embedlist)
 					if (!length(parsedembed) || (!parsedembed.Find(embedded.name) && !parsedembed.Find("multiple [embedded.name]")))
 						parsedembed.Add(embedded.name)
 					else if (!parsedembed.Find("multiple [embedded.name]"))
 						parsedembed.Remove(embedded.name)
 						parsedembed.Add("multiple "+embedded.name)
 				wound_flavor_text["[E.name]"] += "The [wound.desc] on [P.his] [E.name] has \a [english_list(parsedembed, and_text = " and a ", comma_text = ", a ")] sticking out of it!<br>"
-	for(var/hidden in hidden_bleeders)
+	for (var/hidden in hidden_bleeders)
 		wound_flavor_text[hidden] = "[P.He] [P.has] blood soaking through [hidden] around [P.his] [english_list(hidden_bleeders[hidden])]!<br>"
 
 	var/wound_msg = ""
-	for(var/limb in wound_flavor_text)
+	for (var/limb in wound_flavor_text)
 		wound_msg += wound_flavor_text[limb]
 	msg += SPAN_WARNING(wound_msg)
 
-	for(var/obj/implant in get_visible_implants(0))
+	for (var/obj/implant in get_visible_implants(0))
 		if (implant in shown_objects)
 			continue
 		if (src.fake_name)

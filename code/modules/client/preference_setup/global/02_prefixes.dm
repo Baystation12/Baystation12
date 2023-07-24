@@ -17,14 +17,14 @@
 
 	if (istype(prefix_keys_by_name))
 		pref.prefix_keys_by_type = list()
-		for(var/prefix_name in prefix_keys_by_name)
+		for (var/prefix_name in prefix_keys_by_name)
 			var/singleton/prefix/prefix_instance = prefix_by_name[prefix_name]
 			if (prefix_instance)
 				pref.prefix_keys_by_type[prefix_instance.type] = prefix_keys_by_name[prefix_name]
 
 /datum/category_item/player_setup_item/player_global/prefixes/save_preferences(datum/pref_record_writer/W)
 	var/list/prefix_keys_by_name = list()
-	for(var/prefix_type in pref.prefix_keys_by_type)
+	for (var/prefix_type in pref.prefix_keys_by_type)
 		var/singleton/prefix/prefix_instance = GET_SINGLETON(prefix_type)
 		prefix_keys_by_name[prefix_instance.name] = pref.prefix_keys_by_type[prefix_type]
 
@@ -35,7 +35,7 @@
 		pref.prefix_keys_by_type = list()
 
 	// Setup the default keys for any prefix without one
-	for(var/prefix_name in prefix_by_name)
+	for (var/prefix_name in prefix_by_name)
 		var/singleton/prefix/prefix_instance = prefix_by_name[prefix_name]
 		if (!(prefix_instance.type in pref.prefix_keys_by_type))
 			pref.prefix_keys_by_type[prefix_instance.type] = prefix_instance.default_key
@@ -47,7 +47,7 @@
 /datum/category_item/player_setup_item/player_global/prefixes/content(mob/user)
 	. += "<b>Prefix Keys:</b><br>"
 	. += "<table>"
-	for(var/prefix_name in prefix_by_name)
+	for (var/prefix_name in prefix_by_name)
 		var/singleton/prefix/prefix_instance = prefix_by_name[prefix_name]
 		var/current_prefix = pref.prefix_keys_by_type[prefix_instance.type]
 
@@ -76,7 +76,7 @@
 
 		do
 			var/keys_in_use = list()
-			for(var/prefix_type in pref.prefix_keys_by_type)
+			for (var/prefix_type in pref.prefix_keys_by_type)
 				if (prefix_type == prefix_instance.type)
 					continue
 				keys_in_use += pref.prefix_keys_by_type[prefix_type]
@@ -95,7 +95,7 @@
 				pref.prefix_keys_by_type[prefix_instance.type] = new_key
 
 				// Here we attempt to replace any matching prefix keys with their default value, to allow quick replacements
-				for(var/prefix_type in pref.prefix_keys_by_type)
+				for (var/prefix_type in pref.prefix_keys_by_type)
 					if (prefix_type == prefix_instance.type)
 						continue
 					var/prefix_key = pref.prefix_keys_by_type[prefix_type]
@@ -125,14 +125,14 @@
 
 /datum/category_item/player_setup_item/player_global/prefixes/proc/reset_duplicate_keys()
 	var/list/prefixes_by_key = list()
-	for(var/prefix_type in pref.prefix_keys_by_type)
+	for (var/prefix_type in pref.prefix_keys_by_type)
 		var/prefix_key = pref.prefix_keys_by_type[prefix_type]
 		group_by(prefixes_by_key, prefix_key, prefix_type)
 
-	for(var/prefix_key in prefixes_by_key)
+	for (var/prefix_key in prefixes_by_key)
 		var/list/prefix_types = prefixes_by_key[prefix_key]
 		if (length(prefix_types) > 1)
-			for(var/prefix_type in prefix_types)
+			for (var/prefix_type in prefix_types)
 				var/singleton/prefix/prefix_instance = GET_SINGLETON(prefix_type)
 				pref.prefix_keys_by_type[prefix_instance.type] = prefix_instance.default_key
 

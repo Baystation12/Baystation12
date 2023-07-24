@@ -172,7 +172,7 @@
 
 		var/obj/item/storage/bag/P = O
 		var/objects_loaded = 0
-		for(var/obj/G in P.contents)
+		for (var/obj/G in P.contents)
 			if (length(ingredients) < GLOB.microwave_maximum_item_storage && is_type_in_list(G, GLOB.microwave_accepts_items) && P.remove_from_storage(G, src, 1))
 				objects_loaded++
 				LAZYADD(ingredients, G)

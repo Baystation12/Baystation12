@@ -25,7 +25,7 @@
 
 /obj/item/storage/box/samplebags/New()
 	..()
-	for(var/i = 1 to 7)
+	for (var/i = 1 to 7)
 		var/obj/item/evidencebag/S = new(src)
 		S.SetName("sample bag")
 		S.desc = "a bag for holding research samples."
@@ -67,7 +67,7 @@
 			else
 				GLOB.xeno_artifact_turfs -= T
 
-		for(var/turf/simulated/mineral/T as anything in GLOB.xeno_digsite_turfs)
+		for (var/turf/simulated/mineral/T as anything in GLOB.xeno_digsite_turfs)
 			if (T.density && T.finds && length(T.finds))
 				if (T.z == cur_turf.z)
 					var/cur_dist = get_dist(cur_turf, T) * 2
@@ -180,7 +180,7 @@
 		dat += "<br><br><br><br>"
 	dat += "<hr>"
 	if (length(positive_locations))
-		for(var/index = 1 to length(positive_locations))
+		for (var/index = 1 to length(positive_locations))
 			var/datum/depth_scan/D = positive_locations[index]
 			dat += "<A href='?src=\ref[src];select=[index]'>[D.time], coords: [D.coords]</a><br>"
 	else
@@ -230,7 +230,7 @@
 	var/turf/T = get_turf(src)
 	var/zlevels = GetConnectedZlevels(T.z)
 	var/cur_dist = world.maxx+world.maxy
-	for(var/obj/machinery/tele_beacon/R in world)
+	for (var/obj/machinery/tele_beacon/R in world)
 		if (!R.functioning())
 			continue
 		if (R.z in zlevels)

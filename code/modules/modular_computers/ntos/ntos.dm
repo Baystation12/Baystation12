@@ -53,7 +53,7 @@
 		process_updates()
 		return
 
-	for(var/datum/computer_file/program/P in running_programs)
+	for (var/datum/computer_file/program/P in running_programs)
 		if ((P.requires_ntnet && !get_ntnet_status()) || (P.requires_ntnet_feature && !get_ntnet_capability(P.requires_ntnet_feature)))
 			P.event_networkfailure(P != active_program)
 		else
@@ -66,7 +66,7 @@
 
 /// Handles all cleanup when the system is shut down.
 /datum/extension/interactive/ntos/proc/system_shutdown()
-	for(var/datum/computer_file/program/P in running_programs)
+	for (var/datum/computer_file/program/P in running_programs)
 		kill_program(P, TRUE)
 
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
@@ -233,15 +233,15 @@
 		system_shutdown()
 
 /datum/extension/interactive/ntos/proc/event_powerfailure()
-	for(var/datum/computer_file/program/P in running_programs)
+	for (var/datum/computer_file/program/P in running_programs)
 		P.event_powerfailure(P != active_program)
 
 /datum/extension/interactive/ntos/proc/event_idremoved()
-	for(var/datum/computer_file/program/P in running_programs)
+	for (var/datum/computer_file/program/P in running_programs)
 		P.event_idremoved(P != active_program)
 
 /datum/extension/interactive/ntos/proc/has_terminal(mob/user)
-	for(var/datum/terminal/terminal in terminals)
+	for (var/datum/terminal/terminal in terminals)
 		if (terminal.get_user() == user)
 			return terminal
 

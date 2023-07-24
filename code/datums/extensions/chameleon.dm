@@ -18,7 +18,7 @@
 			LAZYSET(chameleon_choices_by_type, chameleon_type, chameleon_choices)
 	else
 		var/list/choices = list()
-		for(var/path in chameleon_choices)
+		for (var/path in chameleon_choices)
 			add_chameleon_choice(choices, path)
 		chameleon_choices = sortAssoc(choices)
 

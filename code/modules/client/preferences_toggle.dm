@@ -9,10 +9,10 @@ var/global/list/client_preference_stats_
 		return
 	if (!client_preference_stats_)
 		client_preference_stats_ = list()
-		for(var/datum/client_preference/client_pref in get_client_preferences())
+		for (var/datum/client_preference/client_pref in get_client_preferences())
 			client_preference_stats_[client_pref.description] = new /stat_client_preference(null, client_pref)
 
-	for(var/client_pref_description in client_preference_stats_)
+	for (var/client_pref_description in client_preference_stats_)
 		var/stat_client_preference/scp = client_preference_stats_[client_pref_description]
 		if (scp.client_preference.may_set(user))
 			scp.update_name(user)
@@ -33,7 +33,7 @@ var/global/list/client_preference_stats_
 	if (!client || !statpanel("Preferences"))
 		return
 	var/list/preferences = client_preference_stats_for_usr(src)
-	for(var/client_preference_description in preferences)
+	for (var/client_preference_description in preferences)
 		var/stat_client_preference/scp = client_preference_stats_[client_preference_description]
 		stat(scp.client_preference.description, scp)
 

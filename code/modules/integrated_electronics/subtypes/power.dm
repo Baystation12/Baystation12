@@ -53,7 +53,7 @@
 			if (O.loc != assembly)
 				transfer_amount *= 0.8 // Losses due to distance.
 			var/transmitter_count = 0
-			for(var/obj/item/integrated_circuit/power/transmitter in A.GetAllContents())
+			for (var/obj/item/integrated_circuit/power/transmitter in A.GetAllContents())
 				transmitter_count++
 			if (!transmitter_count)
 				return FALSE

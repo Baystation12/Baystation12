@@ -22,7 +22,7 @@
 
 	var/datum/computer_file/data/autorun = get_file("autorun")
 	var/list/programs = list()
-	for(var/datum/computer_file/program/P in get_all_files())
+	for (var/datum/computer_file/program/P in get_all_files())
 		var/list/program = list()
 		program["name"] = P.filename
 		program["desc"] = P.filedesc
@@ -129,7 +129,7 @@
 		ui_update_needed = TRUE
 
 	var/list/current_header_icons = list()
-	for(var/datum/computer_file/program/P in running_programs)
+	for (var/datum/computer_file/program/P in running_programs)
 		if (!P.ui_header)
 			continue
 		current_header_icons[P.type] = P.ui_header
@@ -141,7 +141,7 @@
 		last_header_icons = current_header_icons
 		ui_update_needed = TRUE
 	else
-		for(var/x in last_header_icons|current_header_icons)
+		for (var/x in last_header_icons|current_header_icons)
 			if (last_header_icons[x]!=current_header_icons[x])
 				last_header_icons = current_header_icons
 				ui_update_needed = TRUE
@@ -201,7 +201,7 @@
 				data["PC_ntneticon"] = "sig_lan.gif"
 
 	var/list/program_headers = list()
-	for(var/datum/computer_file/program/P in running_programs)
+	for (var/datum/computer_file/program/P in running_programs)
 		if (!P.ui_header)
 			continue
 		program_headers.Add(list(list(

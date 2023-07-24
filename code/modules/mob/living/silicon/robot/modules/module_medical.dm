@@ -62,7 +62,7 @@
 
 /obj/item/robot_module/medical/surgeon/finalize_equipment()
 	. = ..()
-	for(var/thing in list(
+	for (var/thing in list(
 		 /obj/item/stack/nanopaste,
 		 /obj/item/stack/medical/advanced/bruise_pack
 		))
@@ -78,7 +78,7 @@
 /obj/item/robot_module/medical/surgeon/finalize_synths()
 	. = ..()
 	var/datum/matter_synth/medicine/medicine = locate() in synths
-	for(var/thing in list(
+	for (var/thing in list(
 		 /obj/item/stack/nanopaste,
 		 /obj/item/stack/medical/advanced/bruise_pack
 		))
@@ -135,7 +135,7 @@
 
 /obj/item/robot_module/medical/crisis/finalize_equipment()
 	. = ..()
-	for(var/thing in list(
+	for (var/thing in list(
 		 /obj/item/stack/medical/advanced/ointment,
 		 /obj/item/stack/medical/advanced/bruise_pack,
 		 /obj/item/stack/medical/splint
@@ -152,7 +152,7 @@
 /obj/item/robot_module/medical/crisis/finalize_synths()
 	. = ..()
 	var/datum/matter_synth/medicine/medicine = locate() in synths
-	for(var/thing in list(
+	for (var/thing in list(
 		 /obj/item/stack/medical/advanced/ointment,
 		 /obj/item/stack/medical/advanced/bruise_pack,
 		 /obj/item/stack/medical/splint

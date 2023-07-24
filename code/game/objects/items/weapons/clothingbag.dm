@@ -12,7 +12,7 @@
 		user.visible_message(SPAN_NOTICE("\The [user] tears open \the [src.name]!"), SPAN_NOTICE("You tear open \the [src.name]!"))
 		opened = 1
 		icon_state = icon_used
-		for(var/obj/item in contents)
+		for (var/obj/item in contents)
 			item.dropInto(loc)
 	else
 		to_chat(user, SPAN_WARNING("\The [src.name] is already ripped open and is now completely useless!"))
@@ -40,5 +40,5 @@
 
 /obj/item/clothingbag/rubbermask/New()
 	..()
-	for(var/T in subtypesof(/obj/item/clothing/mask/rubber))
+	for (var/T in subtypesof(/obj/item/clothing/mask/rubber))
 		new T(src)

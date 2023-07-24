@@ -21,7 +21,7 @@ SUBSYSTEM_DEF(webhooks)
 
 	var/list/all_webhooks_by_id = list()
 	var/list/all_webhooks = GET_SINGLETON_SUBTYPE_MAP(/singleton/webhook)
-	for(var/wid in all_webhooks)
+	for (var/wid in all_webhooks)
 		var/singleton/webhook/webhook = all_webhooks[wid]
 		if (webhook.id)
 			all_webhooks_by_id[webhook.id] = webhook
@@ -29,7 +29,7 @@ SUBSYSTEM_DEF(webhooks)
 	webhook_singletons.Cut()
 	var/webhook_config = file2text("config/webhooks.json") || "{}"
 	if (webhook_config)
-		for(var/webhook_data in json_decode(webhook_config))
+		for (var/webhook_data in json_decode(webhook_config))
 			var/wid = webhook_data["id"]
 			var/wurl = webhook_data["url"]
 			var/wmention = webhook_data["mentions"]

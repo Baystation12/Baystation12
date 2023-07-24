@@ -196,16 +196,16 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 
 			var/maxx = xcrdStart
 			if (measureOnly)
-				for(var/line in gridLines)
+				for (var/line in gridLines)
 					maxx = max(maxx, xcrdStart + length(line) / key_len - 1)
 			else
-				for(var/line in gridLines)
+				for (var/line in gridLines)
 					if ((ycrd - y_offset + 1) < y_lower || (ycrd - y_offset + 1) > y_upper)				//Reverse operation and check if it is out of bounds of cropping.
 						--ycrd
 						continue
 					if (ycrd <= world.maxy && ycrd >= 1)
 						xcrd = xcrdStart
-						for(var/tpos = 1 to length(line) - key_len + 1 step key_len)
+						for (var/tpos = 1 to length(line) - key_len + 1 step key_len)
 							if ((xcrd - x_offset + 1) < x_lower || (xcrd - x_offset + 1) > x_upper)			//Same as above.
 								++xcrd
 								continue								//X cropping.
@@ -241,7 +241,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 	else
 		if (!measureOnly)
 			if (clear_contents)
-				for(var/atom/to_delete in atoms_to_delete)
+				for (var/atom/to_delete in atoms_to_delete)
 					qdel(to_delete)
 		var/datum/map_load_metadata/M = new
 		M.bounds = bounds
@@ -334,7 +334,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 				if (length(fields))
 					if (!trimtext(fields[length(fields)]))
 						LIST_DEC(fields)
-					for(var/I in fields)
+					for (var/I in fields)
 						var/value = fields[I]
 						if (istext(value))
 							fields[I] = apply_text_macros(value)
@@ -424,7 +424,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 					atoms_to_delete |= pre_existing
 
 	//finally instance all remainings objects/mobs
-	for(index in 1 to first_turf_index-1)
+	for (index in 1 to first_turf_index-1)
 		atoms_to_initialise += instance_atom(members[index],members_attributes[index],crds,no_changeturf)
 	//Restore initialization to the previous valsue
 	SSatoms.map_loader_stop()
@@ -569,7 +569,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 		target_path = path
 
 /dmm_suite/preloader/proc/load(atom/what)
-	for(var/attribute in attributes)
+	for (var/attribute in attributes)
 		var/value = attributes[attribute]
 		if (islist(value))
 			value = deepCopyList(value)

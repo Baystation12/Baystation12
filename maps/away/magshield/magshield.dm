@@ -73,7 +73,7 @@
 		var/area/A = get_area(src)
 		log_game("EMP with size ([heavy_range], [lighter_range]) in area [A] ([T.x], [T.y], [T.z])")
 		visible_message(SPAN_NOTICE("\the [src] suddenly activates."), SPAN_NOTICE("Few lightnings jump between [src]'s rotating hands. You feel everything metal being pulled towards \the [src]."))
-		for(var/mob/living/carbon/M in hear(10, get_turf(src)))
+		for (var/mob/living/carbon/M in hear(10, get_turf(src)))
 			eye_safety = M.eyecheck()
 			if (eye_safety < FLASH_PROTECTION_MODERATE)
 				M.flash_eyes()

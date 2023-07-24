@@ -17,7 +17,7 @@
 /mob/proc/has_client_color(color_type)
 	if (!ispath(/datum/client_color) || !LAZYLEN(client_colors))
 		return FALSE
-	for(var/thing in client_colors)
+	for (var/thing in client_colors)
 		var/datum/client_color/col = thing
 		if (col.type == color_type)
 			return TRUE
@@ -41,7 +41,7 @@
 		return FALSE
 
 	var/result = FALSE
-	for(var/cc in client_colors)
+	for (var/cc in client_colors)
 		var/datum/client_color/CC = cc
 		if (CC.type == color_type)
 			result = TRUE
@@ -63,14 +63,14 @@
 	if (!length(client_colors))
 		return
 	var/list/c = list(1,0,0, 0,1,0, 0,0,1) //Star at normal
-	for(var/datum/client_color/CC in client_colors)
+	for (var/datum/client_color/CC in client_colors)
 		//Matrix multiplication newcolor * current
 		var/list/current = c.Copy()
 
-		for(var/m = 1; m <= 3; m += 1) //For each row
-			for(var/i = 1; i <= 3; i += 1) //go over each column of the second matrix
+		for (var/m = 1; m <= 3; m += 1) //For each row
+			for (var/i = 1; i <= 3; i += 1) //go over each column of the second matrix
 				var/sum = 0
-				for(var/j = 1; j <= 3; j += 1) //multiply each pair
+				for (var/j = 1; j <= 3; j += 1) //multiply each pair
 					sum += CC.client_color[(m-1)*3 + j] * current[(j-1)*3 + i]
 
 				c[(m-1)*3 + i] = sum

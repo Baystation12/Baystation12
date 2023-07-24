@@ -14,7 +14,7 @@
 
 /datum/unit_test/subsystem_shall_be_initialized/start_test()
 	var/list/bad_subsystems = list()
-	for(var/datum/controller/subsystem/SS in Master.subsystems)
+	for (var/datum/controller/subsystem/SS in Master.subsystems)
 		if (SS.flags & SS_NO_INIT)
 			continue
 		if (!SS.initialized)
@@ -33,7 +33,7 @@
 /datum/unit_test/all_atoms_shall_be_initialized/start_test()
 	set background = TRUE // avoid infinite loop warning; SS will still wait for us.
 	var/fail = FALSE
-	for(var/atom/atom in world)
+	for (var/atom/atom in world)
 		if (!(atom.atom_flags & ATOM_FLAG_INITIALIZED))
 			log_bad("Uninitialized atom: [log_info_line(atom)]")
 			fail = TRUE

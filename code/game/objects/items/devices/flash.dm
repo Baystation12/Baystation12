@@ -26,7 +26,7 @@
 
 /obj/item/device/flash/proc/flash_recharge()
 	//capacitor recharges over time
-	for(var/i=0, i<3, i++)
+	for (var/i=0, i<3, i++)
 		if (last_used+600 > world.time)
 			break
 		last_used += 600
@@ -184,7 +184,7 @@
 			sleep(5)
 			qdel(animation)
 
-	for(var/mob/living/carbon/M in oviewers(3, null))
+	for (var/mob/living/carbon/M in oviewers(3, null))
 		var/safety = M.eyecheck()
 		if (safety < FLASH_PROTECTION_MODERATE)
 			if (!M.blinded)
@@ -209,7 +209,7 @@
 				if (safety < FLASH_PROTECTION_MODERATE)
 					M.Weaken(10)
 					M.flash_eyes()
-					for(var/mob/O in viewers(M, null))
+					for (var/mob/O in viewers(M, null))
 						O.show_message(SPAN_CLASS("disarm", "[M] is blinded by the [name]!"))
 	..()
 

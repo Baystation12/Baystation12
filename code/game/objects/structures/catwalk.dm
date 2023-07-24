@@ -23,7 +23,7 @@
 	return ..()
 
 /obj/structure/catwalk/proc/redraw_nearby_catwalks()
-	for(var/direction in GLOB.alldirs)
+	for (var/direction in GLOB.alldirs)
 		var/obj/structure/catwalk/L = locate() in get_step(src, direction)
 		if (L)
 			L.update_connections()
@@ -36,7 +36,7 @@
 	icon_state = ""
 	var/image/I
 	if (!hatch_open)
-		for(var/i = 1 to 4)
+		for (var/i = 1 to 4)
 			I = image('icons/obj/catwalks.dmi', "catwalk[connections[i]]", dir = SHIFTL(1, i - 1))
 			overlays += I
 	if (plated_tile)
@@ -185,8 +185,8 @@
 		C.name = "plated catwalk"
 		C.update_icon()
 	activated = 1
-	for(var/turf/T in orange(src, 1))
-		for(var/obj/effect/wallframe_spawn/other in T)
+	for (var/turf/T in orange(src, 1))
+		for (var/obj/effect/wallframe_spawn/other in T)
 			if (!other.activated) other.activate()
 
 /obj/effect/catwalk_plated/dark

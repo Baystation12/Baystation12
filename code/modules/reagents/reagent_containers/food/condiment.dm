@@ -76,7 +76,7 @@
 
 /obj/item/reagent_containers/food/condiment/Initialize()
 	. = ..()
-	for(var/R in starting_reagents)
+	for (var/R in starting_reagents)
 		reagents.add_reagent(R, starting_reagents[R])
 
 /obj/item/reagent_containers/food/condiment/on_reagent_change()

@@ -25,12 +25,12 @@ calculate text size per text.
 	var/list/out = list()
 	var/list/tastes = list() //descriptor = strength
 	if (minimum_percent <= 100)
-		for(var/datum/reagent/R in reagent_list)
+		for (var/datum/reagent/R in reagent_list)
 			if (!R.taste_mult)
 				continue
 			if (R.type == /datum/reagent/nutriment) //this is ugly but apparently only nutriment (not subtypes) has taste data TODO figure out why
 				var/list/taste_data = R.get_data()
-				for(var/taste in taste_data)
+				for (var/taste in taste_data)
 					if (taste in tastes)
 						tastes[taste] += taste_data[taste]
 					else
@@ -45,9 +45,9 @@ calculate text size per text.
 
 		//deal with percentages
 		var/total_taste = 0
-		for(var/taste_desc in tastes)
+		for (var/taste_desc in tastes)
 			total_taste += tastes[taste_desc]
-		for(var/taste_desc in tastes)
+		for (var/taste_desc in tastes)
 			var/percent = tastes[taste_desc]/total_taste * 100
 			if (percent < minimum_percent)
 				continue

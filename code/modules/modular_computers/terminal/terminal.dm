@@ -37,7 +37,7 @@
 		qdel(src)
 
 /datum/terminal/proc/command_by_name(name)
-	for(var/command in GLOB.terminal_commands)
+	for (var/command in GLOB.terminal_commands)
 		var/datum/terminal_command/command_datum = command
 		if (command_datum.name == name)
 			return command
@@ -78,7 +78,7 @@
 
 /datum/terminal/proc/parse(text, mob/user)
 	if (user.skill_check(SKILL_COMPUTER, SKILL_BASIC))
-		for(var/datum/terminal_command/command in GLOB.terminal_commands)
+		for (var/datum/terminal_command/command in GLOB.terminal_commands)
 			. = command.parse(text, user, src)
 			if (!isnull(.))
 				return
@@ -90,7 +90,7 @@
 
 /datum/terminal/proc/skill_critical_fail(user)
 	var/list/candidates = list()
-	for(var/datum/terminal_skill_fail/scf in GLOB.terminal_fails)
+	for (var/datum/terminal_skill_fail/scf in GLOB.terminal_fails)
 		if (scf.can_run(user, src))
 			candidates[scf] = scf.weight
 	var/datum/terminal_skill_fail/chosen = pickweight(candidates)

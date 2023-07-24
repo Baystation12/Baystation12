@@ -143,10 +143,10 @@
 
 	var/pressure_adjustment_coefficient = 0
 	var/list/zones = list(HEAD, UPPER_TORSO, LOWER_TORSO, LEGS, FEET, ARMS, HANDS)
-	for(var/zone in zones)
+	for (var/zone in zones)
 		var/list/covers = get_covering_equipped_items(zone)
 		var/zone_exposure = 1
-		for(var/obj/item/clothing/C in covers)
+		for (var/obj/item/clothing/C in covers)
 			zone_exposure = min(zone_exposure, C.get_pressure_weakness(pressure,zone))
 		if (zone_exposure >= 1)
 			return 1
@@ -218,7 +218,7 @@
 
 	// DNA2 - Gene processing.
 	// The HULK stuff that was here is now in the hulk gene.
-	for(var/datum/dna/gene/gene in dna_genes)
+	for (var/datum/dna/gene/gene in dna_genes)
 		if (!gene.block)
 			continue
 		if (gene.is_active(src))
@@ -344,7 +344,7 @@
 	var/adjusted_pressure = calculate_affecting_pressure(pressure)
 
 	//Check for contaminants before anything else because we don't want to skip it.
-	for(var/g in environment.gas)
+	for (var/g in environment.gas)
 		if (gas_data.flags[g] & XGM_GAS_CONTAMINANT && environment.gas[g] > gas_data.overlay_limit[g] + 1)
 			pl_effects()
 			break
@@ -429,7 +429,7 @@
 		pressure_alert = -1
 	else
 		var/list/obj/item/organ/external/parts = get_damageable_organs()
-		for(var/obj/item/organ/external/O in parts)
+		for (var/obj/item/organ/external/O in parts)
 			if (QDELETED(O) || !(O.owner == src))
 				continue
 			if (O.damage + (LOW_PRESSURE_DAMAGE) < O.min_broken_damage) //vacuum does not break bones
@@ -477,12 +477,12 @@
 /mob/living/carbon/human/proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
 	. = 0
 	//Handle normal clothing
-	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
+	for (var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
 		if (C)
 			if (C.max_heat_protection_temperature && C.max_heat_protection_temperature >= temperature)
 				. |= C.heat_protection
 			if (length(C.accessories))
-				for(var/obj/item/clothing/accessory/A in C.accessories)
+				for (var/obj/item/clothing/accessory/A in C.accessories)
 					if (A.max_heat_protection_temperature && A.max_heat_protection_temperature >= temperature)
 						. |= A.heat_protection
 
@@ -490,12 +490,12 @@
 /mob/living/carbon/human/proc/get_cold_protection_flags(temperature)
 	. = 0
 	//Handle normal clothing
-	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
+	for (var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
 		if (C)
 			if (C.min_cold_protection_temperature && C.min_cold_protection_temperature <= temperature)
 				. |= C.cold_protection
 			if (length(C.accessories))
-				for(var/obj/item/clothing/accessory/A in C.accessories)
+				for (var/obj/item/clothing/accessory/A in C.accessories)
 					if (A.min_cold_protection_temperature && A.min_cold_protection_temperature <= temperature)
 						. |= A.cold_protection
 
@@ -557,7 +557,7 @@
 		if (ingested) metabolize_ingested_reagents()
 
 	// Trace chemicals
-	for(var/T in chem_doses)
+	for (var/T in chem_doses)
 		if (bloodstr?.has_reagent(T) || ingested?.has_reagent(T) || touching?.has_reagent(T))
 			continue
 		var/datum/reagent/R = T
@@ -660,7 +660,7 @@
 
 		if (vsc.plc.CONTAMINATION_LOSS)
 			var/total_phoronloss = 0
-			for(var/obj/item/I in src)
+			for (var/obj/item/I in src)
 				if (I.contaminated)
 					total_phoronloss += vsc.plc.CONTAMINATION_LOSS
 			adjustToxLoss(total_phoronloss)
@@ -750,13 +750,13 @@
 					trauma_val = max(shock_stage,get_shock())/(species.total_health-100)
 				// Collect and apply the images all at once to avoid appearance churn.
 				var/list/health_images = list()
-				for(var/obj/item/organ/external/E in organs)
+				for (var/obj/item/organ/external/E in organs)
 					if (no_damage && (E.brute_dam || E.burn_dam))
 						no_damage = 0
 					health_images += E.get_damage_hud_image()
 
 				// Apply wound overlays
-				for(var/obj/item/organ/external/O in organs)
+				for (var/obj/item/organ/external/O in organs)
 					if (O.is_stump() || O.damage_state == "00")
 						continue
 					var/icon/doll_wounds = new /icon(species.get_damage_overlays(src), O.damage_state)
@@ -867,7 +867,7 @@
 /mob/living/carbon/human/handle_random_events()
 	// Puke if toxloss is too high
 	var/vomit_score = 0
-	for(var/tag in list(BP_LIVER,BP_KIDNEYS))
+	for (var/tag in list(BP_LIVER,BP_KIDNEYS))
 		var/obj/item/organ/internal/I = internal_organs_by_name[tag]
 		if (I)
 			vomit_score += I.damage
@@ -1057,7 +1057,7 @@
 		holder2.icon_state = "hudblank"
 		holder3.icon_state = "hudblank"
 
-		for(var/obj/item/implant/I in src)
+		for (var/obj/item/implant/I in src)
 			if (I.implanted)
 				if (istype(I,/obj/item/implant/tracking))
 					holder1.icon_state = "hud_imp_tracking"
@@ -1113,7 +1113,7 @@
 	if (burn_temperature < 1)
 		return
 
-	for(var/obj/item/organ/external/E in organs)
+	for (var/obj/item/organ/external/E in organs)
 		if (!(E.body_part & protected_limbs) && prob(20))
 			E.take_external_damage(burn = round(species_heat_mod * log(10, (burn_temperature + 10)), 0.1), used_weapon = "fire")
 

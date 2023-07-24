@@ -31,7 +31,7 @@ var/global/list/map_sectors = list()
 	if (y == 1 || y == GLOB.using_map.overmap_size)
 		numbers += list("[round(x/10)]","[round(x%10)]")
 
-	for(var/i = 1 to length(numbers))
+	for (var/i = 1 to length(numbers))
 		var/image/I = image('icons/effects/numbers.dmi',numbers[i])
 		I.pixel_x = 5*i - 2
 		I.pixel_y = world.icon_size/2 - 3
@@ -68,12 +68,12 @@ var/global/list/moving_levels = list()
 		moving_levels["[zlevel]"] = gen_dir
 
 		var/list/spaceturfs = block(locate(1, 1, zlevel), locate(world.maxx, world.maxy, zlevel))
-		for(var/turf/space/T in spaceturfs)
+		for (var/turf/space/T in spaceturfs)
 			if (!gen_dir)
 				T.icon_state = "white"
 			else
 				T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"
-				for(var/atom/movable/AM in T)
+				for (var/atom/movable/AM in T)
 					if (AM.simulated && !AM.anchored)
 						AM.throw_at(get_step(T,reverse_direction(direction)), 5, 1)
 						CHECK_TICK

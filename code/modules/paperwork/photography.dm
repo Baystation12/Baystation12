@@ -204,7 +204,7 @@ var/global/photo_count = 0
 
 /obj/item/device/camera/proc/get_mobs(turf/the_turf as turf)
 	var/mob_detail
-	for(var/mob/living/carbon/A in the_turf)
+	for (var/mob/living/carbon/A in the_turf)
 		if (A.invisibility) continue
 		var/holding = null
 		var/list/held_items = A.GetAllHeld()
@@ -246,8 +246,8 @@ var/global/photo_count = 0
 	var/y_c = target.y + (size-1)/2
 	var/z_c	= target.z
 	var/mobs = ""
-	for(var/i = 1 to size)
-		for(var/j = 1 to size)
+	for (var/i = 1 to size)
+		for (var/j = 1 to size)
 			var/turf/T = locate(x_c, y_c, z_c)
 			if (user.can_capture_turf(T))
 				mobs += get_mobs(T)

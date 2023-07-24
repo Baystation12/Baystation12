@@ -6,7 +6,7 @@
 
 /obj/item/storage/pill_bottle/dice/New()
 	..()
-	for(var/i = 1 to 7)
+	for (var/i = 1 to 7)
 		new /obj/item/dice( src )
 
 /obj/item/storage/pill_bottle/dice_nerd	//DnD dice
@@ -38,7 +38,7 @@
 /obj/item/storage/box/donut/on_update_icon()
 	overlays.Cut()
 	var/i = 0
-	for(var/obj/item/reagent_containers/food/snacks/donut/D in contents)
+	for (var/obj/item/reagent_containers/food/snacks/donut/D in contents)
 		var/image/I = image('icons/obj/food.dmi', "[i][D.overlay_state]")
 		if (D.overlay_state == "box-donut1")
 			I.color = D.filling_color

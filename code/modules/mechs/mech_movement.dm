@@ -150,7 +150,7 @@
 	return 0
 
 /mob/living/exosuit/check_space_footing()//mechs can't push off things to move around in space, they stick to hull or float away
-	for(var/thing in trange(1,src))
+	for (var/thing in trange(1,src))
 		var/turf/T = thing
 		if (T.density || T.is_wall() || T.is_floor())
 			return T
@@ -160,7 +160,7 @@
 
 
 /mob/living/exosuit/lost_in_space()
-	for(var/atom/movable/AM in contents)
+	for (var/atom/movable/AM in contents)
 		if (!AM.lost_in_space())
 			return FALSE
 	return !length(pilots)

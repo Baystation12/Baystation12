@@ -14,7 +14,7 @@
 
 /datum/gestalt_vote/proc/timed_out()
 	if (owner && !passed)
-		for(var/thing in owner.nymphs)
+		for (var/thing in owner.nymphs)
 			to_chat(thing, SPAN_NOTICE("\The vote to <i>[descriptor]</i> has run out of time and has failed."))
 	qdel(src)
 
@@ -25,13 +25,13 @@
 		if (!voter.incapacitated() && voter.loc == owner && !voted[voter] && !passed && !QDELETED(src))
 			voted[voter] = TRUE
 			var/target_value = 0
-			for(var/thing in owner.nymphs)
+			for (var/thing in owner.nymphs)
 				var/mob/living/carbon/alien/diona/chirp = thing
 				if (chirp.client)
 					target_value++
 			target_value = ceil(target_value/2)
 			passed = (length(voted) >= target_value)
-			for(var/thing in owner.nymphs)
+			for (var/thing in owner.nymphs)
 				to_chat(thing, SPAN_NOTICE("\The [voter] voted yes to <i>[descriptor]</i> ([length(voted)]/[target_value])."))
 				if (passed)
 					to_chat(thing, SPAN_NOTICE("<b>Motion passed!</b>"))
@@ -62,7 +62,7 @@
 	else
 		humanoid_gestalt.key = caller.key
 	owner.visible_message(SPAN_NOTICE("\The [owner] curls in on itself and bunches up, forming a humanoid shape."))
-	for(var/thing in owner.nymphs)
+	for (var/thing in owner.nymphs)
 		var/mob/living/carbon/alien/diona/D = thing
 		D.forceMove(humanoid_gestalt)
 		to_chat(D, SPAN_NOTICE("\The [caller] has shaped the gestalt into a humanoid form."))

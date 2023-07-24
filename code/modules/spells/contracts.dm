@@ -27,7 +27,7 @@
 		user.visible_message("\The [src] disappears with a flash of light.")
 		if (length(contract_spells) && istype(contract_master,/mob/living)) //if it aint text its probably a mob or another user
 			var/mob/living/M = contract_master
-			for(var/spell_type in contract_spells)
+			for (var/spell_type in contract_spells)
 				M.add_spell(new spell_type(user), "const_spell_ready")
 		log_and_message_admins("signed their soul over to \the [contract_master] using \the [src].", user)
 		qdel(src)

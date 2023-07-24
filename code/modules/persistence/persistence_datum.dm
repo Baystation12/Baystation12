@@ -47,7 +47,7 @@
 		var/_message = tokens["message"]
 		if (_n >= entries_decay_at)
 			var/decayed_message = ""
-			for(var/i = 1 to length(_message))
+			for (var/i = 1 to length(_message))
 				var/char = copytext(_message, i, i + 1)
 				if (prob(round(_n * entry_decay_weight)))
 					if (prob(99))
@@ -96,14 +96,14 @@
 /datum/persistent/proc/Initialize()
 	if (fexists(filename))
 		var/list/token_sets = json_decode(file2text(filename))
-		for(var/tokens in token_sets)
+		for (var/tokens in token_sets)
 			tokens = FinalizeTokens(tokens)
 			if (CheckTokenSanity(tokens))
 				ProcessAndApplyTokens(tokens)
 
 /datum/persistent/proc/Shutdown()
 	var/list/entries = list()
-	for(var/thing in SSpersistence.tracking_values[type])
+	for (var/thing in SSpersistence.tracking_values[type])
 		if (IsValidEntry(thing))
 			entries += list(CompileEntry(thing))
 	if (fexists(filename))
@@ -116,11 +116,11 @@
 /datum/persistent/proc/GetAdminSummary(mob/user, can_modify)
 	. = list("<tr><td colspan = 4><b>[capitalize(name)]</b></td></tr>")
 	. += "<tr><td colspan = 4><hr></td></tr>"
-	for(var/thing in SSpersistence.tracking_values[type])
-		. += "<tr>[GetAdminDataStringFor(thing, can_modify, user)]</tr>"
+	for (var/thing in SSpersistence.tracking_values[type])
+		. += "<tr>[GetAdminDataStringfor (thing, can_modify, user)]</tr>"
 	. += "<tr><td colspan = 4><hr></td></tr>"
 
-/datum/persistent/proc/GetAdminDataStringFor(thing, can_modify, mob/user)
+/datum/persistent/proc/GetAdminDataStringfor (thing, can_modify, mob/user)
 	if (can_modify)
 		. = "<td colspan = 3>[thing]</td><td><a href='byond://?src=\ref[src];caller=\ref[user];remove_entry=\ref[thing]'>Destroy</a></td>"
 	else

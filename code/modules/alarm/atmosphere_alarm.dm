@@ -6,12 +6,12 @@
 
 /datum/alarm_handler/atmosphere/major_alarms(z_level)
 	. = list()
-	for(var/datum/alarm/A in ..())
+	for (var/datum/alarm/A in ..())
 		if (A.max_severity() > 1)
 			. += A
 
 /datum/alarm_handler/atmosphere/minor_alarms(z_level)
 	. = list()
-	for(var/datum/alarm/A in ..())
+	for (var/datum/alarm/A in ..())
 		if (A.max_severity() == 1)
 			. += A

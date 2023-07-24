@@ -100,7 +100,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 			<script type='text/javascript'>
 				var complete_list = \[\];
 				var lis = document.getElementById("vars").children;
-				for(var i = lis.length; i--;) complete_list\[i\] = lis\[i\];
+				for (var i = lis.length; i--;) complete_list\[i\] = lis\[i\];
 			</script>
 		</body>
 		</html>
@@ -128,9 +128,9 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 		return
 
 	dat += "<style>div.var { padding: 5px; } div.var:nth-child(even) { background-color: #555; }</style>"
-	for(var/datum/D in user.client.watched_variables)
+	for (var/datum/D in user.client.watched_variables)
 		dat += "<h1>[make_view_variables_value(D)]</h1>"
-		for(var/v in user.client.watched_variables[D])
+		for (var/v in user.client.watched_variables[D])
 			dat += "<div class='var'>"
 			dat += "(<a href='?_src_=vars;datumunwatch=\ref[D];varnameunwatch=[v]'>X</a>) "
 			dat += "[D.make_view_variables_variable_entry(v, D.get_variable_value(v), 1)] [v] = [make_view_variables_value(D.get_variable_value(v), v)]"
@@ -154,7 +154,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 	. = list()
 	var/list/variables = D.get_variables()
 	variables = sortList(variables)
-	for(var/x in variables)
+	for (var/x in variables)
 		. += make_view_variables_var_entry(D, x, D.get_variable_value(x))
 	return jointext(., null)
 

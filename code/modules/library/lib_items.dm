@@ -20,7 +20,7 @@
 	obj_flags = OBJ_FLAG_ANCHORABLE
 
 /obj/structure/bookcase/Initialize()
-	for(var/obj/item/I in loc)
+	for (var/obj/item/I in loc)
 		if (istype(I, /obj/item/book))
 			I.forceMove(src)
 	update_icon()
@@ -89,19 +89,19 @@
 /obj/structure/bookcase/ex_act(severity)
 	switch(severity)
 		if (EX_ACT_DEVASTATING)
-			for(var/obj/item/book/b in contents)
+			for (var/obj/item/book/b in contents)
 				qdel(b)
 			qdel(src)
 			return
 		if (EX_ACT_HEAVY)
-			for(var/obj/item/book/b in contents)
+			for (var/obj/item/book/b in contents)
 				if (prob(50)) b.dropInto(loc)
 				else qdel(b)
 			qdel(src)
 			return
 		if (EX_ACT_LIGHT)
 			if (prob(50))
-				for(var/obj/item/book/b in contents)
+				for (var/obj/item/book/b in contents)
 					b.dropInto(loc)
 				qdel(src)
 			return

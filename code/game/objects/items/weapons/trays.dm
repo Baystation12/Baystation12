@@ -38,7 +38,7 @@
 	. = ..()
 	// Drop all the things. All of them.
 	overlays.Cut()
-	for(var/obj/item/I in carrying)
+	for (var/obj/item/I in carrying)
 		I.dropInto(get_turf(M))
 		carrying.Remove(I)
 		step(I, pick(NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHWEST, SOUTHEAST))
@@ -83,7 +83,7 @@
 // Calculates the total storage cost being used by the tray.
 /obj/item/tray/proc/calc_carry()
 	. = 0
-	for(var/obj/item/I in carrying)
+	for (var/obj/item/I in carrying)
 		. += storage_cost_for_item(I)
 
 
@@ -135,7 +135,7 @@
 
 	if (!isnull(I))
 		var/added_items = 0
-		for(var/obj/item/item in T)
+		for (var/obj/item/item in T)
 			if (can_add_item(I))
 				pickup_item(item)
 				added_items++

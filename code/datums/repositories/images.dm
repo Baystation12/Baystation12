@@ -32,7 +32,7 @@ var/global/repository/images/image_repository = new()
 
 /repository/images/proc/atom_destroyed(atom/destroyed)
 	var/list/atom_cache_list = image_cache_for_atoms[destroyed]
-	for(var/img in atom_cache_list)
+	for (var/img in atom_cache_list)
 		qdel(atom_cache_list[img])
 	atom_cache_list.Cut()
 	image_cache_for_atoms -= destroyed

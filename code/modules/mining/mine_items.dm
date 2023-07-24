@@ -211,7 +211,7 @@
 		to_chat(user, SPAN_WARNING("There's no solid surface to plant \the [singular_name] on."))
 		return
 
-	for(var/obj/item/stack/flag/F in T)
+	for (var/obj/item/stack/flag/F in T)
 		if (F.upright)
 			to_chat(user, SPAN_WARNING("\The [F] is already planted here."))
 			return

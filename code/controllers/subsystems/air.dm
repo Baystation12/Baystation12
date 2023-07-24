@@ -133,7 +133,7 @@ SUBSYSTEM_DEF(air)
 /datum/controller/subsystem/air/Initialize(start_uptime, simulate = TRUE)
 	report_progress("Processing Geometry...")
 	var/simulated_turf_count = 0
-	for(var/turf/simulated/S)
+	for (var/turf/simulated/S)
 		simulated_turf_count++
 		S.update_air_properties()
 		CHECK_TICK
@@ -393,7 +393,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 
 /datum/controller/subsystem/air/proc/get_edge(zone/A, zone/B)
 	if (istype(B))
-		for(var/connection_edge/zone/edge in A.edges)
+		for (var/connection_edge/zone/edge in A.edges)
 			if (edge.contains_zone(B))
 				return edge
 		var/connection_edge/edge = new/connection_edge/zone(A,B)
@@ -401,7 +401,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 		edge.recheck()
 		return edge
 	else
-		for(var/connection_edge/unsimulated/edge in A.edges)
+		for (var/connection_edge/unsimulated/edge in A.edges)
 			if (has_same_air(edge.B,B))
 				return edge
 		var/connection_edge/edge = new/connection_edge/unsimulated(A,B)
@@ -413,13 +413,13 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 	if (A.initial_gas)
 		if (!B.initial_gas)
 			return 0
-		for(var/g in A.initial_gas)
+		for (var/g in A.initial_gas)
 			if (A.initial_gas[g] != B.initial_gas[g])
 				return 0
 	if (B.initial_gas)
 		if (!A.initial_gas)
 			return 0
-		for(var/g in B.initial_gas)
+		for (var/g in B.initial_gas)
 			if (A.initial_gas[g] != B.initial_gas[g])
 				return 0
 	if (A.temperature != B.temperature)

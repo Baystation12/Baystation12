@@ -3,7 +3,7 @@
 	desc = "Notable gases."
 
 /datum/codex_category/gases/Initialize()
-	for(var/gas in gas_data.gases)
+	for (var/gas in gas_data.gases)
 		if (gas_data.hidden_from_codex[gas])
 			continue
 

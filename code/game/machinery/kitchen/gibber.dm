@@ -152,7 +152,7 @@
 /obj/machinery/gibber/proc/go_out()
 	if (operating || !src.occupant)
 		return
-	for(var/obj/O in (contents - component_parts))
+	for (var/obj/O in (contents - component_parts))
 		O.dropInto(loc)
 	if (src.occupant.client)
 		src.occupant.client.eye = src.occupant.client.mob
@@ -200,7 +200,7 @@
 	slab_nutrition /= length(gib_products)
 
 	var/drop_products = floor(length(gib_products) * 0.35)
-	for(var/atom/movable/thing in gib_products)
+	for (var/atom/movable/thing in gib_products)
 		if (drop_products)
 			drop_products--
 			qdel(thing)

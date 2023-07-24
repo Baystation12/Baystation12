@@ -12,7 +12,7 @@
 	var/number_of_pins = 1
 
 /obj/item/integrated_circuit/memory/Initialize()
-	for(var/i = 1 to number_of_pins)
+	for (var/i = 1 to number_of_pins)
 		inputs["input [i]"] = IC_PINTYPE_ANY // This is just a string since pins don't get built until ..() is called.
 		outputs["output [i]"] = IC_PINTYPE_ANY
 	complexity = number_of_pins
@@ -21,7 +21,7 @@
 /obj/item/integrated_circuit/memory/examine(mob/user)
 	. = ..()
 	var/i
-	for(i = 1, i <= length(outputs), i++)
+	for (i = 1, i <= length(outputs), i++)
 		var/datum/integrated_io/O = outputs[i]
 		var/data = "nothing"
 		if (isweakref(O.data))
@@ -33,7 +33,7 @@
 		to_chat(user, "\The [src] has [data] saved to address [i].")
 
 /obj/item/integrated_circuit/memory/do_work()
-	for(var/i = 1 to length(inputs))
+	for (var/i = 1 to length(inputs))
 		var/datum/integrated_io/I = inputs[i]
 		var/datum/integrated_io/O = outputs[i]
 		O.data = I.data
@@ -86,7 +86,7 @@
 	O.push_data()
 
 /obj/item/integrated_circuit/memory/constant/emp_act()
-	for(var/i in 1 to length(activators))
+	for (var/i in 1 to length(activators))
 		var/datum/integrated_io/activate/A = activators[i]
 		A.scramble()
 	..()

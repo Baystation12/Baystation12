@@ -11,7 +11,7 @@
 
 #define QUEUE_TEMPERATURE_ATOMS(_atoms) \
 	if (islist(_atoms)) { \
-		for(var/thing in _atoms) { \
+		for (var/thing in _atoms) { \
 			var/atom/A = thing; \
 			if (ATOM_IS_TEMPERATURE_SENSITIVE(A)) { \
 				SStemperature.processing[A] = TRUE; \

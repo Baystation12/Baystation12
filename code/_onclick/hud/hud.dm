@@ -68,7 +68,7 @@
 	if (!mymob) return
 	if (ishuman(mymob))
 		var/mob/living/carbon/human/H = mymob
-		for(var/gear_slot in H.species.hud.gear)
+		for (var/gear_slot in H.species.hud.gear)
 			var/list/hud_data = H.species.hud.gear[gear_slot]
 			if (inventory_shown && hud_shown)
 				switch(hud_data["slot"])
@@ -118,7 +118,7 @@
 
 	if (ishuman(mymob))
 		var/mob/living/carbon/human/H = mymob
-		for(var/gear_slot in H.species.hud.gear)
+		for (var/gear_slot in H.species.hud.gear)
 			var/list/hud_data = H.species.hud.gear[gear_slot]
 			if (hud_shown)
 				switch(hud_data["slot"])

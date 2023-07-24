@@ -58,7 +58,7 @@
 	transfer_fingerprints_to(rods)
 	var/turf/source = get_turf(src)
 	if (locate(/obj/structure/cable, source))
-		for(var/obj/structure/cable/C in source)
+		for (var/obj/structure/cable/C in source)
 			C.visible_message(SPAN_WARNING("\The [C] snaps!"))
 			new/obj/item/stack/cable_coil(source, (C.d1 ? 2 : 1), C.color)
 			qdel(C)

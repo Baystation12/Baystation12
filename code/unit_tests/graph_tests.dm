@@ -282,8 +282,8 @@
 		return FALSE
 
 	var/total_issues = 0
-	for(var/datum/graph/testing/GT in graphs)
-		for(var/issue in GT.CheckExpectations())
+	for (var/datum/graph/testing/GT in graphs)
+		for (var/issue in GT.CheckExpectations())
 			log_bad("[GT.name] - [issue]")
 			total_issues++
 
@@ -324,9 +324,9 @@
 	else if (length(split_expectations))
 		var/list/unexpected_subgraphs = list()
 		var/list/split_expectations_copy = split_expectations.Copy()
-		for(var/subgraph in subgraphs)
+		for (var/subgraph in subgraphs)
 			var/expectations_fulfilled = FALSE
-			for(var/split_expectation in split_expectations_copy)
+			for (var/split_expectation in split_expectations_copy)
 				var/datum/graph_expectation/GE = split_expectation
 				if (!length(GE.CheckExpectations(subgraph)))
 					split_expectations_copy -= GE
@@ -335,9 +335,9 @@
 			if (!expectations_fulfilled)
 				unexpected_subgraphs += subgraph
 
-		for(var/expected_graph in unexpected_subgraphs)
+		for (var/expected_graph in unexpected_subgraphs)
 			issues += "Unexpected graph: [log_info_line(expected_graph)]"
-		for(var/expected_split in split_expectations_copy)
+		for (var/expected_split in split_expectations_copy)
 			issues += "Unfulfilled split expectation: [log_info_line(expected_split)]"
 
 	on_split_was_called = TRUE
@@ -368,11 +368,11 @@
 	if (length(expected_edges ^ (graph.edges || list())))
 		. += "Expected the following edges [log_info_line(expected_edges)], was [log_info_line(graph.edges)]"
 
-	for(var/datum/node/N in graph.nodes)
+	for (var/datum/node/N in graph.nodes)
 		if (N.graph != graph)
 			. += "[log_info_line(N)]: Expected the following graph [log_info_line(graph)], was [N.graph]"
 
-	for(var/node in expected_edges)
+	for (var/node in expected_edges)
 		var/expected_connections = expected_edges[node]
 		var/actual_connections = graph.edges[node]
 		if (length(expected_connections ^ actual_connections))

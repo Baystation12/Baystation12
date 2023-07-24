@@ -39,7 +39,7 @@
 	var/list/cores = list()
 	if (lan)
 		var/list/fusion_cores = lan.get_devices(/obj/machinery/power/fusion_core)
-		for(var/i = 1 to LAZYLEN(fusion_cores))
+		for (var/i = 1 to LAZYLEN(fusion_cores))
 			var/list/core = list()
 			var/obj/machinery/power/fusion_core/C = fusion_cores[i]
 			core["id"] =          "#[i]"
@@ -52,7 +52,7 @@
 			core["powerstatus"] = "[C.avail()]/[C.active_power_usage] W"
 			var/fuel_string = "<table width = '100%'>"
 			if (C.owned_field && LAZYLEN(C.owned_field.reactants))
-				for(var/reactant in C.owned_field.reactants)
+				for (var/reactant in C.owned_field.reactants)
 					fuel_string += "<tr><td>[reactant]</td><td>[C.owned_field.reactants[reactant]]</td></tr>"
 			else
 				fuel_string += "<tr><td colspan = 2>Nothing.</td></tr>"

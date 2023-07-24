@@ -7,13 +7,13 @@
 /mob/living/carbon/human/proc/show_descriptors_to(mob/user)
 	if (LAZYLEN(descriptors))
 		if (user == src)
-			for(var/entry in descriptors)
+			for (var/entry in descriptors)
 				var/datum/mob_descriptor/descriptor = species.descriptors[entry]
 				if (!descriptor)
 					continue
 				LAZYADD(., "[descriptor.get_first_person_message_start()] [descriptor.get_standalone_value_descriptor(descriptors[entry])].")
 		else
-			for(var/entry in descriptors)
+			for (var/entry in descriptors)
 				var/datum/mob_descriptor/descriptor = species.descriptors[entry]
 
 				if (!descriptor)
@@ -38,7 +38,7 @@
 		chargen_label = name
 	if (!chargen_value_descriptors)
 		chargen_value_descriptors = list()
-		for(var/i = 1 to LAZYLEN(standalone_value_descriptors))
+		for (var/i = 1 to LAZYLEN(standalone_value_descriptors))
 			chargen_value_descriptors[standalone_value_descriptors[i]] = i
 	default_value = ceil(LAZYLEN(standalone_value_descriptors) * 0.5)
 	..()

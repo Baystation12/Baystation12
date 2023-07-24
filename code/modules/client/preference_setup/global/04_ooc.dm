@@ -21,7 +21,7 @@
 /datum/category_item/player_setup_item/player_global/ooc/content(mob/user)
 	. += "<b>OOC:</b><br>"
 	. += "Ignored Players<br>"
-	for(var/ignored_player in pref.ignored_players)
+	for (var/ignored_player in pref.ignored_players)
 		. += "[ignored_player] (<a href='?src=\ref[src];unignore_player=[ignored_player]'>Unignore</a>)<br>"
 	. += "(<a href='?src=\ref[src];ignore_player=1'>Ignore Player</a>)"
 

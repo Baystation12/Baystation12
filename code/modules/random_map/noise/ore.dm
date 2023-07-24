@@ -19,7 +19,7 @@
 	var/deep_count = 0
 
 	// Increment map sanity counters.
-	for(var/value in map)
+	for (var/value in map)
 		if (value < rare_val)
 			surface_count++
 		else if (value < deep_val)
@@ -47,8 +47,8 @@
 	var/tx = ((origin_x-1)+x)*chunk_size
 	var/ty = ((origin_y-1)+y)*chunk_size
 
-	for(var/i=0,i<chunk_size,i++)
-		for(var/j=0,j<chunk_size,j++)
+	for (var/i=0,i<chunk_size,i++)
+		for (var/j=0,j<chunk_size,j++)
 			var/turf/simulated/T = locate(tx+j, ty+i, origin_z)
 			if (!istype(T) || !T.has_resources)
 				continue

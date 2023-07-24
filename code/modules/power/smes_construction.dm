@@ -100,7 +100,7 @@
 
 
 /obj/machinery/power/smes/buildable/Destroy()
-	for(var/datum/nano_module/rcon/R in world)
+	for (var/datum/nano_module/rcon/R in world)
 		R.FindDevices()
 	return ..()
 
@@ -136,7 +136,7 @@
 	capacity = 0
 	input_level_max = 0
 	output_level_max = 0
-	for(var/obj/item/stock_parts/smes_coil/C in component_parts)
+	for (var/obj/item/stock_parts/smes_coil/C in component_parts)
 		capacity += C.ChargeCapacity
 		input_level_max += C.IOCapacity
 		output_level_max += C.IOCapacity

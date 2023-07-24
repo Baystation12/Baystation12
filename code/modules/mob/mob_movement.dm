@@ -212,13 +212,13 @@
 /mob/proc/get_spacemove_backup()
 	var/shoegrip = Check_Shoegrip()
 
-	for(var/thing in trange(1,src))//checks for walls or grav turf first
+	for (var/thing in trange(1,src))//checks for walls or grav turf first
 		var/turf/T = thing
 		if (T.density || T.is_wall() || (T.is_floor() && (shoegrip || T.has_gravity())))
 			return T
 
 	var/obj/item/grab/G = locate() in src
-	for(var/A in range(1, get_turf(src)))
+	for (var/A in range(1, get_turf(src)))
 		if (istype(A,/atom/movable))
 			var/atom/movable/AM = A
 			if (AM == src || AM == inertia_ignore || !AM.simulated || !AM.mouse_opacity || AM == buckled)	//mouse_opacity is hacky as hell, need better solution
@@ -239,7 +239,7 @@
 		return 1
 
 	if (Check_Shoegrip())
-		for(var/thing in trange(1,src))	//checks for turfs that one can maglock to
+		for (var/thing in trange(1,src))	//checks for turfs that one can maglock to
 			var/turf/T = thing
 			if (T.density || T.is_wall() || T.is_floor())
 				return 1
@@ -294,7 +294,7 @@
 
 /mob/proc/set_next_usable_move_intent()
 	var/checking_intent = (istype(move_intent) ? move_intent.type : move_intents[1])
-	for(var/i = 1 to length(move_intents)) // One full iteration of the move set.
+	for (var/i = 1 to length(move_intents)) // One full iteration of the move set.
 		checking_intent = next_in_list(checking_intent, move_intents)
 		if (set_move_intent(GET_SINGLETON(checking_intent)))
 			return
@@ -308,27 +308,27 @@
 	return FALSE
 
 /mob/proc/get_movement_datum_by_flag(move_flag = MOVE_INTENT_DELIBERATE)
-	for(var/m_intent in move_intents)
+	for (var/m_intent in move_intents)
 		var/singleton/move_intent/check_move_intent = GET_SINGLETON(m_intent)
 		if (check_move_intent.flags & move_flag)
 			return check_move_intent
 
 /mob/proc/get_movement_datum_by_missing_flag(move_flag = MOVE_INTENT_DELIBERATE)
-	for(var/m_intent in move_intents)
+	for (var/m_intent in move_intents)
 		var/singleton/move_intent/check_move_intent = GET_SINGLETON(m_intent)
 		if (!(check_move_intent.flags & move_flag))
 			return check_move_intent
 
 /mob/proc/get_movement_datums_by_flag(move_flag = MOVE_INTENT_DELIBERATE)
 	. = list()
-	for(var/m_intent in move_intents)
+	for (var/m_intent in move_intents)
 		var/singleton/move_intent/check_move_intent = GET_SINGLETON(m_intent)
 		if (check_move_intent.flags & move_flag)
 			. += check_move_intent
 
 /mob/proc/get_movement_datums_by_missing_flag(move_flag = MOVE_INTENT_DELIBERATE)
 	. = list()
-	for(var/m_intent in move_intents)
+	for (var/m_intent in move_intents)
 		var/singleton/move_intent/check_move_intent = GET_SINGLETON(m_intent)
 		if (!(check_move_intent.flags & move_flag))
 			. += check_move_intent

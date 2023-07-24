@@ -34,7 +34,7 @@
 	message_admins("[uppertext(name)]: Attempting autospawn.")
 
 	var/list/usable_templates = list()
-	for(var/datum/antagonist/A in antag_templates)
+	for (var/datum/antagonist/A in antag_templates)
 		if (A.can_late_spawn())
 			message_admins("[uppertext(name)]: [A.id] selected for spawn attempt.")
 			usable_templates |= A

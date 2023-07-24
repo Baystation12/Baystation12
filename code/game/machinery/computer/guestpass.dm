@@ -96,7 +96,7 @@
 		data["giv_name"] = giv_name
 
 		var/list/giver_access = list()
-		for(var/A in giver.access)
+		for (var/A in giver.access)
 			giver_access.Add(list(list(
 				"desc" = get_access_desc(A),
 				"access" = A,

@@ -58,7 +58,7 @@
 			if (!other)
 				var/found_connection
 				if (locate(/obj/structure/grille) in T)
-					for(var/obj/structure/window/W in T)
+					for (var/obj/structure/window/W in T)
 						if (W.type == win_path && W.dir == get_dir(T,src))
 							found_connection = 1
 							qdel(W)
@@ -76,7 +76,7 @@
 		handle_grille_spawn(G)
 
 	activated = 1
-	for(var/obj/effect/wingrille_spawn/other in neighbours)
+	for (var/obj/effect/wingrille_spawn/other in neighbours)
 		if (!other.activated) other.activate()
 
 /obj/effect/wingrille_spawn/proc/handle_window_spawn(obj/structure/window/W)

@@ -64,7 +64,7 @@
 			num_of_prizes = rand(1,4)
 		if (EMP_ACT_LIGHT)
 			num_of_prizes = rand(0,2)
-	for(num_of_prizes; num_of_prizes > 0; num_of_prizes--)
+	for (num_of_prizes; num_of_prizes > 0; num_of_prizes--)
 		empprize = pickweight(prizes)
 		new empprize(src.loc)
 

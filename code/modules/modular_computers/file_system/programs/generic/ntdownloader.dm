@@ -155,9 +155,9 @@
 	data["disk_size"] = program.computer.max_disk_capacity()
 	data["disk_used"] = program.computer.used_disk_capacity()
 	var/list/all_entries[0]
-	for(var/category in ntnet_global.available_software_by_category)
+	for (var/category in ntnet_global.available_software_by_category)
 		var/list/category_list[0]
-		for(var/datum/computer_file/program/P in ntnet_global.available_software_by_category[category])
+		for (var/datum/computer_file/program/P in ntnet_global.available_software_by_category[category])
 			// Only those programs our user can run will show in the list
 			if (!P.can_run(user) && P.requires_access_to_download)
 				continue
@@ -176,7 +176,7 @@
 	data["hackedavailable"] = FALSE
 	if (prog.computer.emagged()) // If we are running on emagged computer we have access to some "bonus" software
 		var/list/hacked_programs[0]
-		for(var/datum/computer_file/program/P in ntnet_global.available_antag_software)
+		for (var/datum/computer_file/program/P in ntnet_global.available_antag_software)
 			data["hackedavailable"] = TRUE
 			hacked_programs.Add(list(list(
 				"filename" = P.filename,
@@ -191,7 +191,7 @@
 
 	if (length(prog.downloads_queue) > 0)
 		var/list/queue = list() // Nanoui can't iterate through assotiative lists, so we have to do this
-		for(var/item in prog.downloads_queue)
+		for (var/item in prog.downloads_queue)
 			queue += item
 		data["downloads_queue"] = queue
 

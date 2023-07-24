@@ -83,7 +83,7 @@
 			data["transactions"] = trx
 
 	var/list/accounts[0]
-	for(var/i=1, i<=length(all_money_accounts), i++)
+	for (var/i=1, i<=length(all_money_accounts), i++)
 		var/datum/money_account/D = all_money_accounts[i]
 		accounts.Add(list(list(\
 			"account_number"=D.account_number,\
@@ -223,7 +223,7 @@
 							<tbody>
 					"}
 
-					for(var/i=1, i<=length(all_money_accounts), i++)
+					for (var/i=1, i<=length(all_money_accounts), i++)
 						var/datum/money_account/D = all_money_accounts[i]
 						text += {"
 								<tr>

@@ -9,10 +9,10 @@ var/global/datum/admin_secrets/admin_secrets = new()
 	categories = init_subtypes(/datum/admin_secret_category)
 	items = list()
 	var/list/category_assoc = list()
-	for(var/datum/admin_secret_category/category in categories)
+	for (var/datum/admin_secret_category/category in categories)
 		category_assoc[category.type] = category
 
-	for(var/item_type in (typesof(/datum/admin_secret_item) - /datum/admin_secret_item))
+	for (var/item_type in (typesof(/datum/admin_secret_item) - /datum/admin_secret_item))
 		var/datum/admin_secret_item/secret_item = item_type
 		if (!initial(secret_item.name))
 			continue
@@ -34,7 +34,7 @@ var/global/datum/admin_secrets/admin_secrets = new()
 	items = list()
 
 /datum/admin_secret_category/proc/can_view(mob/user)
-	for(var/datum/admin_secret_item/item in items)
+	for (var/datum/admin_secret_item/item in items)
 		if (item.can_view(user))
 			return 1
 	return 0

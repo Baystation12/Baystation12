@@ -46,9 +46,9 @@
 				dearer_goods = list(ANIMALS)
 			if (FESTIVAL)
 				dearer_goods = list(FOOD, ANIMALS)
-		for(var/good_type in dearer_goods)
+		for (var/good_type in dearer_goods)
 			affected_dest.temp_price_change[good_type] = rand(1,100)
-		for(var/good_type in cheaper_goods)
+		for (var/good_type in cheaper_goods)
 			affected_dest.temp_price_change[good_type] = rand(1,100) / 100
 
 /datum/event/economic_event/announce()
@@ -93,7 +93,7 @@
 		N.SubmitArticle(body, author, channel, null, 1)
 
 /datum/event/economic_event/end()
-	for(var/good_type in dearer_goods)
+	for (var/good_type in dearer_goods)
 		affected_dest.temp_price_change[good_type] = 1
-	for(var/good_type in cheaper_goods)
+	for (var/good_type in cheaper_goods)
 		affected_dest.temp_price_change[good_type] = 1

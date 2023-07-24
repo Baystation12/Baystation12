@@ -35,7 +35,7 @@
 
 /obj/item/stock_parts/radio/transmitter/basic/proc/var_changed(singleton/public_access/public_variable/variable, obj/machinery/machine, old_value, new_value)
 	var/list/L = list()
-	for(var/thing in transmit_on_change)
+	for (var/thing in transmit_on_change)
 		if (transmit_on_change[thing] == variable)
 			L[thing] = new_value
 	queue_transmit(L)
@@ -46,26 +46,26 @@
 	sanitize_events(machine, transmit_on_tick)
 	if (LAZYLEN(transmit_on_tick))
 		start_processing(machine)
-	for(var/thing in transmit_on_change)
+	for (var/thing in transmit_on_change)
 		var/singleton/public_access/public_variable/variable = transmit_on_change[thing]
 		variable.register_listener(src, machine, .proc/var_changed)
 
 /obj/item/stock_parts/radio/transmitter/basic/on_uninstall(obj/machinery/machine)
-	for(var/thing in transmit_on_change)
+	for (var/thing in transmit_on_change)
 		var/singleton/public_access/public_variable/variable = transmit_on_change[thing]
 		variable.unregister_listener(src, machine)
 	..()
 
 /obj/item/stock_parts/radio/transmitter/basic/Destroy()
 	if (istype(loc, /obj/machinery))
-		for(var/thing in transmit_on_change)
+		for (var/thing in transmit_on_change)
 			var/singleton/public_access/public_variable/variable = transmit_on_change[thing]
 			variable.unregister_listener(src, loc)
 	. = ..()
 
 /obj/item/stock_parts/radio/transmitter/basic/machine_process(obj/machinery/machine)
 	var/list/L = list()
-	for(var/thing in transmit_on_tick)
+	for (var/thing in transmit_on_tick)
 		var/singleton/public_access/public_variable/variable = transmit_on_tick[thing]
 		L[thing] = variable.access_var(machine)
 	queue_transmit(L)
@@ -102,7 +102,7 @@
 
 /obj/item/stock_parts/radio/transmitter/on_event/proc/trigger_event(singleton/public_access/public_variable/variable, obj/machinery/machine, old_value, new_value)
 	var/list/dat = list()
-	for(var/thing in transmit_on_event)
+	for (var/thing in transmit_on_event)
 		var/singleton/public_access/public_variable/check_variable = transmit_on_event[thing]
 		dat[thing] = check_variable.access_var(machine)
 	queue_transmit(dat)

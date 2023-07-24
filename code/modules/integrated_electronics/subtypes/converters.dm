@@ -157,13 +157,13 @@
 	var/number_of_pins = 8
 
 /obj/item/integrated_circuit/converter/concatenator/Initialize()
-	for(var/i = 1 to number_of_pins)
+	for (var/i = 1 to number_of_pins)
 		inputs["input [i]"] = IC_PINTYPE_STRING
 	. = ..()
 
 /obj/item/integrated_circuit/converter/concatenator/do_work()
 	var/result = null
-	for(var/k in 1 to length(inputs))
+	for (var/k in 1 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
 		if (!isnull(I))
 			result = result + I

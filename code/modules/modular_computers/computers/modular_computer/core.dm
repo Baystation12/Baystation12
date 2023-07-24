@@ -34,7 +34,7 @@
 /obj/item/modular_computer/proc/install_default_programs_by_job(mob/living/carbon/human/H)
 	var/datum/job/jb = SSjobs.get_by_title(H.job)
 	if (!jb) return
-	for(var/prog_type in jb.software_on_spawn)
+	for (var/prog_type in jb.software_on_spawn)
 		var/datum/computer_file/program/prog_file = prog_type
 		if (initial(prog_file.usage_flags) & hardware_flag)
 			prog_file = new prog_file
@@ -62,7 +62,7 @@
 	STOP_PROCESSING(SSobj, src)
 	if (istype(stored_pen))
 		QDEL_NULL(stored_pen)
-	for(var/obj/item/stock_parts/computer/CH in src.get_all_components())
+	for (var/obj/item/stock_parts/computer/CH in src.get_all_components())
 		uninstall_component(null, CH)
 		qdel(CH)
 	return ..()

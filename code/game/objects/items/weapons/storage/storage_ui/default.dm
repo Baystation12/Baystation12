@@ -77,7 +77,7 @@
 		user.s_active.show_to(user)
 
 /datum/storage_ui/default/on_pre_remove(mob/user, obj/item/W)
-	for(var/mob/M in range(1, storage.loc))
+	for (var/mob/M in range(1, storage.loc))
 		if (M.s_active == storage)
 			if (M.client)
 				M.client.screen -= W
@@ -87,14 +87,14 @@
 		user.s_active.show_to(user)
 
 /datum/storage_ui/default/on_hand_attack(mob/user)
-	for(var/mob/M in range(1))
+	for (var/mob/M in range(1))
 		if (M.s_active == storage)
 			storage.close(M)
 
 /datum/storage_ui/default/show_to(mob/user)
 	if (!user.client) return
 	if (user.s_active != storage)
-		for(var/obj/item/I in storage)
+		for (var/obj/item/I in storage)
 			if (I.on_found(user))
 				return
 	if (user.s_active)
@@ -138,13 +138,13 @@
 		slot_orient_objs()
 
 /datum/storage_ui/default/close_all()
-	for(var/mob/M in can_see_contents())
+	for (var/mob/M in can_see_contents())
 		storage.close(M)
 		. = 1
 
 /datum/storage_ui/default/proc/can_see_contents()
 	var/list/cansee = list()
-	for(var/mob/M in is_seeing)
+	for (var/mob/M in is_seeing)
 		if (M.s_active == storage && M.client)
 			cansee |= M
 		else
@@ -157,7 +157,7 @@
 	var/cx = tx
 	var/cy = ty
 	boxes.screen_loc = "[tx]:,[ty] to [mx],[my]"
-	for(var/obj/O in storage.contents)
+	for (var/obj/O in storage.contents)
 		O.screen_loc = "[cx],[cy]"
 		O.hud_layerise()
 		cx++
@@ -182,7 +182,7 @@
 	var/cy = 2+rows
 	boxes.screen_loc = "4:16,2:16 to [4+cols]:16,[2+rows]:16"
 
-	for(var/obj/O in storage.contents)
+	for (var/obj/O in storage.contents)
 		O.screen_loc = "[cx]:16,[cy]:16"
 		O.maptext = ""
 		O.hud_layerise()
@@ -211,7 +211,7 @@
 	var/startpoint = 0
 	var/endpoint = 1
 
-	for(var/obj/item/O in storage.contents)
+	for (var/obj/item/O in storage.contents)
 		startpoint = endpoint + 1
 		endpoint += storage_width * O.get_storage_cost()/storage.max_storage_space
 		stored_start.SetTransform(offset_x = startpoint)

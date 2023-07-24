@@ -30,7 +30,7 @@
 /proc/list_gases(gases)
 	RETURN_TYPE(/list)
 	. = list()
-	for(var/g in gases)
+	for (var/g in gases)
 		. += "[gas_data.name[g]] ([gases[g]]%)"
 	return english_list(.)
 
@@ -61,7 +61,7 @@
 		if (A.minbodytemp && A.maxbodytemp)
 			. += "Temperature comfort zone:\t[A.minbodytemp] K to [A.maxbodytemp] K"
 		var/area/map = locate(/area/overmap)
-		for(var/obj/effect/overmap/visitable/sector/exoplanet/P in map)
+		for (var/obj/effect/overmap/visitable/sector/exoplanet/P in map)
 			if ((A in P.animals) || is_type_in_list(A, P.repopulate_types))
 				GLOB.stat_fauna_scanned |= "[P.name]-[A.type]"
 				. += "New xenofauna species discovered!"
@@ -84,7 +84,7 @@
 			. += "This slime will never mutate."
 		else
 			var/list/mutationChances = list()
-			for(var/i in mutations)
+			for (var/i in mutations)
 				if (i == T.colour)
 					continue
 				if (mutationChances[i])
@@ -93,7 +93,7 @@
 					mutationChances[i] = T.mutation_chance / length(mutations)
 
 			var/list/mutationTexts = list("[T.colour] ([100 - T.mutation_chance]%)")
-			for(var/i in mutationChances)
+			for (var/i in mutationChances)
 				mutationTexts += "[i] ([mutationChances[i]]%)"
 
 			. += "Possible colours on splitting:\t[english_list(mutationTexts)]"

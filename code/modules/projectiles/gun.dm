@@ -14,7 +14,7 @@
 	..()
 	if (!properties) return
 
-	for(var/propname in properties)
+	for (var/propname in properties)
 		var/propvalue = properties[propname]
 
 		if (propname == "mode_name")
@@ -27,7 +27,7 @@
 /datum/firemode/proc/apply_to(obj/item/gun/gun)
 	LAZYINITLIST(original_settings)
 
-	for(var/propname in settings)
+	for (var/propname in settings)
 		original_settings[propname] = gun.vars[propname]
 		gun.vars[propname] = settings[propname]
 
@@ -110,7 +110,7 @@
 
 /obj/item/gun/Initialize()
 	. = ..()
-	for(var/i in 1 to length(firemodes))
+	for (var/i in 1 to length(firemodes))
 		firemodes[i] = new /datum/firemode(src, firemodes[i])
 
 	if (isnull(scoped_accuracy))
@@ -174,7 +174,7 @@
 	return 1
 
 /obj/item/gun/emp_act(severity)
-	for(var/obj/O in contents)
+	for (var/obj/O in contents)
 		O.emp_act(severity)
 	..()
 
@@ -255,7 +255,7 @@
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
-	for(var/i in 1 to burst)
+	for (var/i in 1 to burst)
 		var/obj/projectile = consume_next_projectile(user)
 		if (!projectile)
 			handle_click_empty(user)
@@ -362,7 +362,7 @@
 		var/mob/living/carbon/human/H = user
 		if (istype(H.back,/obj/item/rig))
 			var/obj/item/rig/R = H.back
-			for(var/obj/item/rig_module/stealth_field/S in R.installed_modules)
+			for (var/obj/item/rig_module/stealth_field/S in R.installed_modules)
 				S.deactivate()
 
 	if (space_recoil && !user.check_space_footing())
@@ -391,7 +391,7 @@
 		var/mob/living/L = target
 		if (L.incapacitated())
 			max_mult = 1.2
-		for(var/obj/item/grab/G in L.grabbed_by)
+		for (var/obj/item/grab/G in L.grabbed_by)
 			max_mult = max(max_mult, G.point_blank_mult())
 	P.damage *= max_mult
 
@@ -643,7 +643,7 @@
 
 /obj/item/gun/on_disarm_attempt(mob/target, mob/attacker)
 	var/list/turfs = list()
-	for(var/turf/T in view())
+	for (var/turf/T in view())
 		turfs += T
 	if (length(turfs))
 		var/turf/shoot_to = pick(turfs)

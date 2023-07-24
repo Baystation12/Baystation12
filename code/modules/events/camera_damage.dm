@@ -12,7 +12,7 @@
 		if (EVENT_LEVEL_MAJOR)
 			severity_range = 15
 
-	for(var/obj/machinery/camera/cam in range(severity_range,C))
+	for (var/obj/machinery/camera/cam in range(severity_range,C))
 		if (is_valid_camera(cam))
 			if (prob(2*severity))
 				cam.kill_health()

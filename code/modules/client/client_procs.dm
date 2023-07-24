@@ -368,7 +368,7 @@
 
 //Sends resource files to client cache
 /client/proc/getFiles()
-	for(var/file in args)
+	for (var/file in args)
 		send_rsc(src, file, null)
 
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
@@ -478,7 +478,7 @@
 
 	// Apply an ever-lowering offset until we finish or fail
 	var/delta
-	for(var/safety in 1 to 10)
+	for (var/safety in 1 to 10)
 		var/after_size = winget(src, "mapwindow", "size")
 		map_size = splittext(after_size, "x")
 		var/got_width = text2num(map_size[1])

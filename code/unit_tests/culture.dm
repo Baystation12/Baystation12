@@ -3,13 +3,13 @@
 
 /datum/unit_test/culture/start_test()
 	var/fails = 0
-	for(var/species_name in all_species)
+	for (var/species_name in all_species)
 		var/datum/species/species = all_species[species_name]
 		if (!islist(species.default_cultural_info))
 			fails++
 			log_bad("Default cultural info for [species_name] is not a list.")
 		else
-			for(var/token in species.default_cultural_info)
+			for (var/token in species.default_cultural_info)
 				if (!(token in ALL_CULTURAL_TAGS))
 					fails++
 					log_bad("Default cultural info for [species_name] contains invalid tag '[token]'.")
@@ -37,7 +37,7 @@
 			fails++
 			log_bad("Forced cultural info for [species_name] is not a list.")
 		else
-			for(var/token in species.force_cultural_info)
+			for (var/token in species.force_cultural_info)
 				if (!(token in ALL_CULTURAL_TAGS))
 					fails++
 					log_bad("Forced cultural info for [species_name] contains invalid tag '[token]'.")
@@ -65,7 +65,7 @@
 			fails++
 			log_bad("Available cultural info for [species_name] is not a list.")
 		else
-			for(var/token in ALL_CULTURAL_TAGS)
+			for (var/token in ALL_CULTURAL_TAGS)
 				if (!islist(species.available_cultural_info[token]))
 					fails++
 					log_bad("Available cultural info for [species_name] tag '[token]' is invalid type, must be a list.")
@@ -73,7 +73,7 @@
 					fails++
 					log_bad("Available cultural info for [species_name] tag '[token]' is empty, must have at least one entry.")
 				else
-					for(var/val in species.available_cultural_info[token])
+					for (var/val in species.available_cultural_info[token])
 						var/singleton/cultural_info/culture = SSculture.get_culture(val)
 						if (!istype(culture))
 							fails++

@@ -89,12 +89,12 @@
 		)
 	var/new_data = 0
 
-	for(var/turf/simulated/T in range(2, target))
+	for (var/turf/simulated/T in range(2, target))
 
 		if (!T.has_resources)
 			continue
 
-		for(var/metal in T.resources)
+		for (var/metal in T.resources)
 			var/ore_type
 			var/data_value = 1
 
@@ -119,7 +119,7 @@
 		T.surveyed = 1
 
 	var/list/scandata = list("Mineral scan at ([target.x],[target.y])")
-	for(var/ore_type in metals)
+	for (var/ore_type in metals)
 		var/result = "no sign"
 
 		switch(metals[ore_type])

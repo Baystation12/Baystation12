@@ -29,7 +29,7 @@
 	else
 		var/list/all_records = list()
 
-		for(var/datum/computer_file/report/crew_record/R in GLOB.all_crew_records)
+		for (var/datum/computer_file/report/crew_record/R in GLOB.all_crew_records)
 			all_records.Add(list(list(
 				"name" = R.get_name(),
 				"rank" = R.get_job(),
@@ -83,7 +83,7 @@
 		return 1
 	if (href_list["set_active"])
 		var/ID = text2num(href_list["set_active"])
-		for(var/datum/computer_file/report/crew_record/R in GLOB.all_crew_records)
+		for (var/datum/computer_file/report/crew_record/R in GLOB.all_crew_records)
 			if (R.uid == ID)
 				active_record = R
 				break
@@ -105,7 +105,7 @@
 		var/search = sanitize(input("Enter the value for search for.") as null|text)
 		if (!search)
 			return
-		for(var/datum/computer_file/report/crew_record/R in GLOB.all_crew_records)
+		for (var/datum/computer_file/report/crew_record/R in GLOB.all_crew_records)
 			var/datum/report_field/field = R.field_from_name(field_name)
 			if (findtext(lowertext(field.get_value()), lowertext(search)))
 				active_record = R

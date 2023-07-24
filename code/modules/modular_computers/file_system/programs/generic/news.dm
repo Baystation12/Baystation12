@@ -95,7 +95,7 @@
 
 		data["channels"] = list()
 		data["active_channels"] = list() // There will only ever be one active channel, but we use this for unified handling in nanoUI
-		for(var/datum/feed_channel/channel in connected_group.network_channels)
+		for (var/datum/feed_channel/channel in connected_group.network_channels)
 			var/list/channel_data = list()
 			channel_data["name"] = channel.channel_name
 			channel_data["admin"] = channel.is_admin_channel

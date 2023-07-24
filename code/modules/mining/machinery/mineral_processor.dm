@@ -22,7 +22,7 @@
 /obj/machinery/mineral/processing_unit/Initialize()
 	ores_processing = list()
 	ores_stored = list()
-	for(var/orename in SSmaterials.processable_ores)
+	for (var/orename in SSmaterials.processable_ores)
 		ores_processing[orename] = 0
 		ores_stored[orename] = 0
 	. = ..()
@@ -33,11 +33,11 @@
 
 	//Grab some more ore to process this tick.
 	if (input_turf)
-		for(var/obj/item/I in recursive_content_check(input_turf, sight_check = FALSE, include_mobs = FALSE))
+		for (var/obj/item/I in recursive_content_check(input_turf, sight_check = FALSE, include_mobs = FALSE))
 			if (QDELETED(I) || !I.simulated || I.anchored)
 				continue
 			if (LAZYLEN(I.matter))
-				for(var/o_material in I.matter)
+				for (var/o_material in I.matter)
 					if (!isnull(ores_stored[o_material]))
 						ores_stored[o_material] += I.matter[o_material]
 						qdel(I)
@@ -46,7 +46,7 @@
 	if (output_turf)
 		var/sheets = 0
 		var/list/attempt_to_alloy = list()
-		for(var/metal in ores_stored)
+		for (var/metal in ores_stored)
 
 			if (sheets >= sheets_per_tick)
 				break
@@ -79,25 +79,25 @@
 		if (LAZYLEN(attempt_to_alloy))
 
 			var/list/making_alloys = list()
-			for(var/thing in SSmaterials.alloy_products)
+			for (var/thing in SSmaterials.alloy_products)
 				var/material/M = thing
 				var/failed = FALSE
-				for(var/otherthing in M.alloy_materials)
+				for (var/otherthing in M.alloy_materials)
 					if (!attempt_to_alloy[otherthing] || ores_stored[otherthing] < M.alloy_materials[otherthing])
 						failed = TRUE
 						break
 				if (!failed) making_alloys += M
 
-			for(var/thing in making_alloys)
+			for (var/thing in making_alloys)
 				if (sheets >= sheets_per_tick) break
 				var/material/M = thing
 				var/making
-				for(var/otherthing in M.alloy_materials)
+				for (var/otherthing in M.alloy_materials)
 					var/_make = floor(ores_stored[otherthing] / M.alloy_materials[otherthing])
 					if (isnull(making) || making > _make)
 						making = _make
 				making = min(sheets_per_tick-sheets, making)
-				for(var/otherthing in M.alloy_materials)
+				for (var/otherthing in M.alloy_materials)
 					ores_stored[otherthing] -= making * M.alloy_materials[otherthing]
 				if (making > 0)
 					M.place_sheet(output_turf, making)
@@ -128,7 +128,7 @@
 /obj/machinery/mineral/processing_unit/get_console_data()
 	. = ..() + "<h1>Mineral Processing</h1>"
 	var/result = ""
-	for(var/ore in ores_processing)
+	for (var/ore in ores_processing)
 		if (!ores_stored[ore] && !report_all_ores) continue
 		var/material/M = SSmaterials.get_material_by_name(ore)
 		var/line = "[capitalize(M.display_name)]</td><td>[floor(ores_stored[ore] / M.units_per_sheet)] ([ores_stored[ore]]u)"

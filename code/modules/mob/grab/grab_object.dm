@@ -173,7 +173,7 @@
 		if (organ.organ_tag in bad_parts)
 			to_chat(assailant, SPAN_NOTICE("You can't grab your own [organ.name] with itself!"))
 			return 0
-	for(var/obj/item/grab/G in affecting.grabbed_by)
+	for (var/obj/item/grab/G in affecting.grabbed_by)
 		if (G.assailant == assailant && G.target_zone == target_zone)
 			var/obj/O = G.get_targeted_organ()
 			to_chat(assailant, SPAN_NOTICE("You already grabbed [affecting]'s [O.name]."))

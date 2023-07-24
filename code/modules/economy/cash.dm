@@ -62,7 +62,7 @@
 	. = list()
 	var/sum = src.worth
 	var/num = 0
-	for(var/i in denominations)
+	for (var/i in denominations)
 		while(sum >= i && num < 50)
 			sum -= i
 			num++
@@ -74,7 +74,7 @@
 	overlays.Cut()
 	var/list/images = src.getMoneyImages()
 
-	for(var/A in images)
+	for (var/A in images)
 		var/image/banknote = image('icons/obj/items.dmi', A)
 		banknote.SetTransform(
 			rotation = pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45),

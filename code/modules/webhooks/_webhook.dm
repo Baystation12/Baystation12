@@ -32,7 +32,7 @@
 				message["content"] = "[mentions]"
 		message = json_encode(message)
 		. = TRUE
-		for(var/target_url in urls)
+		for (var/target_url in urls)
 			var/list/httpresponse = http_post(target_url, message)
 			if (!islist(httpresponse))
 				. = FALSE

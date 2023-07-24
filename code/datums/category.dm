@@ -10,7 +10,7 @@
 	..()
 	categories = new()
 	categories_by_name = new()
-	for(var/category_type in typesof(category_group_type))
+	for (var/category_type in typesof(category_group_type))
 		var/datum/category_group/category = category_type
 		if (initial(category.name))
 			category = new category(src)
@@ -19,7 +19,7 @@
 	categories = dd_sortedObjectList(categories)
 
 /datum/category_collection/Destroy()
-	for(var/category in categories)
+	for (var/category in categories)
 		qdel(category)
 	categories.Cut()
 	return ..()
@@ -40,7 +40,7 @@
 	items = new()
 	items_by_name = new()
 
-	for(var/item_type in typesof(category_item_type))
+	for (var/item_type in typesof(category_item_type))
 		var/datum/category_item/item = item_type
 		if (initial(item.name))
 			item = new item(src)
@@ -52,7 +52,7 @@
 	items = dd_sortedObjectList(items)
 
 /datum/category_group/Destroy()
-	for(var/item in items)
+	for (var/item in items)
 		qdel(item)
 	items.Cut()
 	collection = null

@@ -77,7 +77,7 @@
 	if (reagents && reagents.total_volume >= 1)
 		src.visible_message(SPAN_WARNING("\The [src] bursts!"),"You hear a pop and a splash.")
 		src.reagents.touch_turf(get_turf(hit_atom))
-		for(var/atom/A in get_turf(hit_atom))
+		for (var/atom/A in get_turf(hit_atom))
 			src.reagents.touch(A)
 		src.icon_state = "burst"
 		spawn(5)
@@ -178,21 +178,21 @@
 		D.SetName("foam dart")
 		playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
 
-		for(var/i=0, i<6, i++)
+		for (var/i=0, i<6, i++)
 			if (D)
 				if (D.loc == trg) break
 				step_towards(D,trg)
 
-				for(var/mob/living/M in D.loc)
+				for (var/mob/living/M in D.loc)
 					if (!istype(M,/mob/living)) continue
 					if (M == user) continue
-					for(var/mob/O in viewers(world.view, D))
+					for (var/mob/O in viewers(world.view, D))
 						O.show_message(SPAN_WARNING("\The [M] was hit by the foam dart!"), 1)
 					new /obj/item/toy/ammo/crossbow(M.loc)
 					qdel(D)
 					return
 
-				for(var/atom/A in D.loc)
+				for (var/atom/A in D.loc)
 					if (A == user) continue
 					if (A.density)
 						new /obj/item/toy/ammo/crossbow(A.loc)
@@ -208,7 +208,7 @@
 		return
 	else if (bullets == 0)
 		user.Weaken(5)
-		for(var/mob/O in viewers(world.view, user))
+		for (var/mob/O in viewers(world.view, user))
 			O.show_message(SPAN_WARNING("\The [user] realized they were out of ammo and starting scrounging for some!"), 1)
 
 

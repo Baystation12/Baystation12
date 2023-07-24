@@ -26,7 +26,7 @@
 /obj/item/storage/box/glasses/Initialize()
 	. = ..()
 
-	for(var/i = 1 to 7)
+	for (var/i = 1 to 7)
 		new glass_type(src)
 	make_exact_fit()
 
@@ -69,7 +69,7 @@
 	storage_slots = 14
 
 /obj/item/storage/box/glass_extras/Initialize()
-	for(var/i = 1 to 14)
+	for (var/i = 1 to 14)
 		new extra_type(src)
 	. = ..()
 

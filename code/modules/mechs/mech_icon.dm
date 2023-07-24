@@ -29,7 +29,7 @@
 /proc/get_mech_images(list/components = list(), overlay_layer = FLOAT_LAYER)
 	RETURN_TYPE(/list)
 	var/list/all_images = list()
-	for(var/obj/item/mech_component/comp in components)
+	for (var/obj/item/mech_component/comp in components)
 		all_images += get_mech_image(comp.decal, comp.icon_state, comp.on_mech_icon, comp.color, overlay_layer)
 	return all_images
 
@@ -46,7 +46,7 @@
 		new_overlays += get_mech_image(arms.decal, arms.icon_state, arms.on_mech_icon, arms.color, MECH_ARM_LAYER)
 	if (legs)
 		new_overlays += get_mech_image(legs.decal, legs.icon_state, legs.on_mech_icon, legs.color, MECH_LEG_LAYER)
-	for(var/hardpoint in hardpoints)
+	for (var/hardpoint in hardpoints)
 		var/obj/item/mech_equipment/hardpoint_object = hardpoints[hardpoint]
 		if (hardpoint_object)
 			var/use_icon_state = "[hardpoint_object.icon_state]_[hardpoint]"
@@ -71,7 +71,7 @@
 		overlays -= pilot_overlays
 	pilot_overlays = null
 	if (body && !(body.hide_pilot))
-		for(var/i = 1 to LAZYLEN(pilots))
+		for (var/i = 1 to LAZYLEN(pilots))
 			var/mob/pilot = pilots[i]
 			var/image/draw_pilot = new
 			draw_pilot.appearance = pilot

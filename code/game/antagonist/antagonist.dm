@@ -122,7 +122,7 @@
 
 	// Prune restricted status. Broke it up for readability.
 	// Note that this is done before jobs are handed out.
-	for(var/datum/mind/player in mode.get_players_for_role(id))
+	for (var/datum/mind/player in mode.get_players_for_role(id))
 		if (ghosts_only && !(isghostmind(player) || isnewplayer(player.current)))
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: Only ghosts may join as this role!")
 			continue
@@ -148,7 +148,7 @@
 	var/candidates = list()
 
 	// Keeping broken up for readability
-	for(var/datum/mind/player in mode.get_players_for_role(id))
+	for (var/datum/mind/player in mode.get_players_for_role(id))
 		if (ghosts_only && !(isghostmind(player) || isnewplayer(player.current)))
 		else if (config.use_age_restriction_for_antags && player.current.client.player_age < minimum_player_age)
 		else if (player.special_role)
@@ -252,7 +252,7 @@
 	if (!pending_antagonists)
 		return
 
-	for(var/datum/mind/player in pending_antagonists)
+	for (var/datum/mind/player in pending_antagonists)
 		pending_antagonists -= player
 		add_antagonist(player,0,0,1)
 
@@ -266,7 +266,7 @@
 //(and assigned_role if ANTAG_OVERRIDE_JOB is set) as well as clearing the candidate list.
 //Existing antagonists are left untouched.
 /datum/antagonist/proc/reset_antag_selection()
-	for(var/datum/mind/player in pending_antagonists)
+	for (var/datum/mind/player in pending_antagonists)
 		if (flags & ANTAG_OVERRIDE_JOB)
 			player.assigned_job = null
 			player.assigned_role = null

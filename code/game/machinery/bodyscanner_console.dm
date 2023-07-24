@@ -38,7 +38,7 @@
 				qdel(src)
 
 /obj/machinery/body_scanconsole/proc/FindScanner()
-	for(var/D in GLOB.cardinal)
+	for (var/D in GLOB.cardinal)
 		connected = locate(/obj/machinery/bodyscanner, get_step(src, D))
 		if (connected)
 			break
@@ -49,7 +49,7 @@
 	connected = null
 
 /obj/machinery/body_scanconsole/proc/FindDisplays()
-	for(var/obj/machinery/body_scan_display/D in SSmachines.machinery)
+	for (var/obj/machinery/body_scan_display/D in SSmachines.machinery)
 		if (AreConnectedZLevels(D.z, z))
 			connected_displays += D
 			GLOB.destroyed_event.register(D, src, .proc/remove_display)
@@ -132,7 +132,7 @@
 		if (!length(connected_displays) && !FindDisplays())
 			to_chat(user, SPAN_WARNING("[icon2html(src, user)]Error: No configured displays detected."))
 			return TOPIC_REFRESH
-		for(var/obj/machinery/body_scan_display/D in connected_displays)
+		for (var/obj/machinery/body_scan_display/D in connected_displays)
 			D.add_new_scan(data["scan"])
 		user.visible_message(
 			SPAN_NOTICE("\The [user] keys a command into \the [src]."),
@@ -161,6 +161,6 @@
 
 /obj/machinery/body_scanconsole/Destroy()
 	. = ..()
-	for(var/D in connected_displays)
+	for (var/D in connected_displays)
 		remove_display(D)
 	unlink_scanner(connected)

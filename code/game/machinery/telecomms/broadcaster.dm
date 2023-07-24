@@ -309,7 +309,7 @@ var/global/message_delay = 0 // To make sure restarting the recentmessages list 
 	// --- Broadcast to antag radios! ---
 
 	else if (data == 3)
-		for(var/antag_freq in ANTAG_FREQS)
+		for (var/antag_freq in ANTAG_FREQS)
 			var/datum/radio_frequency/antag_connection = radio_controller.return_frequency(antag_freq)
 			for (var/obj/item/device/radio/R in antag_connection.devices["[RADIO_CHAT]"])
 				if (R.intercept && R.receive_range(antag_freq, level) > -1)
@@ -322,7 +322,7 @@ var/global/message_delay = 0 // To make sure restarting the recentmessages list 
 			if (R.receive_range(display_freq, level) > -1)
 				radios += R
 
-	for(var/obj/item/device/radio/R in radios)
+	for (var/obj/item/device/radio/R in radios)
 		if ((R.last_radio_sound + 1 SECOND) < world.time && R != radio)
 			playsound(R.loc, 'sound/effects/radio_chatter.ogg', 10, 0, -6)
 			R.last_radio_sound = world.time
@@ -477,7 +477,7 @@ var/global/message_delay = 0 // To make sure restarting the recentmessages list 
 	// --- Broadcast to antag radios! ---
 
 	else if (data == 3)
-		for(var/freq in ANTAG_FREQS)
+		for (var/freq in ANTAG_FREQS)
 			var/datum/radio_frequency/antag_connection = radio_controller.return_frequency(freq)
 			for (var/obj/item/device/radio/R in antag_connection.devices["[RADIO_CHAT]"])
 				var/turf/position = get_turf(R)
@@ -608,7 +608,7 @@ var/global/message_delay = 0 // To make sure restarting the recentmessages list 
 	signal.frequency = PUB_FREQ// Common channel
 
   //#### Sending the signal to all subspace receivers ####//
-	for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
+	for (var/obj/machinery/telecomms/receiver/R in telecomms_list)
 		R.receive_signal(signal)
 
 	if (do_sleep)

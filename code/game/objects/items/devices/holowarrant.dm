@@ -39,7 +39,7 @@
 /obj/item/device/holowarrant/attack_self(mob/living/user as mob)
 	active = null
 	var/list/warrants = list()
-	for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
+	for (var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 		if (!W.archived)
 			warrants["[W.fields["namewarrant"]] ([capitalize(W.fields["arrestsearch"])])"] = W
 	if (length(warrants) == 0)

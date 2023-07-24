@@ -39,7 +39,7 @@
 	..()
 
 /obj/structure/proc/reset_mobs_offset()
-	for(var/mob/living/M in loc)
+	for (var/mob/living/M in loc)
 		M.on_structure_offset(0)
 
 /obj/structure/Initialize()
@@ -143,7 +143,7 @@
 	return istype(S, src)
 
 /obj/structure/proc/refresh_neighbors()
-	for(var/thing in RANGE_TURFS(src, 1))
+	for (var/thing in RANGE_TURFS(src, 1))
 		var/turf/T = thing
 		T.update_icon()
 
@@ -151,7 +151,7 @@
 	var/list/dirs = list()
 	var/list/other_dirs = list()
 
-	for(var/obj/structure/S in orange(src, 1))
+	for (var/obj/structure/S in orange(src, 1))
 		if (can_visually_connect_to(S))
 			if (S.can_visually_connect())
 				if (propagate)
@@ -164,10 +164,10 @@
 		other_connections = list("0", "0", "0", "0")
 		return FALSE
 
-	for(var/direction in GLOB.cardinal)
+	for (var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)
 		var/success = 0
-		for(var/b_type in blend_objects)
+		for (var/b_type in blend_objects)
 			if (istype(T, b_type))
 				success = 1
 				if (propagate)
@@ -179,14 +179,14 @@
 			if (success)
 				break
 		if (!success)
-			for(var/obj/O in T)
-				for(var/b_type in blend_objects)
+			for (var/obj/O in T)
+				for (var/b_type in blend_objects)
 					if (istype(O, b_type))
 						success = 1
-						for(var/obj/structure/S in T)
+						for (var/obj/structure/S in T)
 							if (can_visually_connect_to(S))
 								success = 0
-						for(var/nb_type in noblend_objects)
+						for (var/nb_type in noblend_objects)
 							if (istype(O, nb_type))
 								success = 0
 

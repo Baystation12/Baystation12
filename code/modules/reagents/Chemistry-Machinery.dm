@@ -126,7 +126,7 @@
 					var/amount = clamp((text2num(href_list["amount"])), 0, get_remaining_volume())
 					if (sloppy)
 						var/contaminants = fetch_contaminants(user, R, their_reagent)
-						for(var/datum/reagent/reagent in contaminants)
+						for (var/datum/reagent/reagent in contaminants)
 							R.trans_type_to(src, reagent.type, round(rand()*amount/5, 0.1))
 					else
 						mult -= 0.4 * (SKILL_MAX - user.get_skill_value(core_skill))/(SKILL_MAX-SKILL_MIN) //10% loss per skill level down from max
@@ -148,11 +148,11 @@
 					var/contaminants = fetch_contaminants(user, reagents, my_reagents)
 					if (to_beaker)
 						reagents.trans_type_to(beaker, my_reagents.type, amount)
-						for(var/datum/reagent/reagent in contaminants)
+						for (var/datum/reagent/reagent in contaminants)
 							reagents.trans_type_to(beaker, reagent.type, round(rand()*amount, 0.1))
 					else
 						reagents.remove_reagent(my_reagents.type, amount)
-						for(var/datum/reagent/reagent in contaminants)
+						for (var/datum/reagent/reagent in contaminants)
 							reagents.remove_reagent(reagent.type, round(rand()*amount, 0.1))
 
 		else if (href_list["removecustom"])
@@ -250,7 +250,7 @@
 
 /obj/machinery/chem_master/proc/fetch_contaminants(mob/user, datum/reagents/reagents, datum/reagent/main_reagent)
 	. = list()
-	for(var/datum/reagent/reagent in reagents.reagent_list)
+	for (var/datum/reagent/reagent in reagents.reagent_list)
 		if (reagent == main_reagent)
 			continue
 		if (prob(user.skill_fail_chance(core_skill, 100)))
@@ -288,9 +288,9 @@
 	if (!(user.client in has_sprites))
 		spawn()
 			has_sprites += user.client
-			for(var/i = 1 to MAX_PILL_SPRITE)
+			for (var/i = 1 to MAX_PILL_SPRITE)
 				send_rsc(usr, icon('icons/obj/chemical.dmi', "pill" + num2text(i)), "pill[i].png")
-			for(var/sprite in BOTTLE_SPRITES)
+			for (var/sprite in BOTTLE_SPRITES)
 				send_rsc(usr, icon('icons/obj/chemical.dmi', sprite), "[sprite].png")
 
 	var/data = list()
@@ -337,14 +337,14 @@
 
 	if (switching_sprite)
 		data["pillSprites"] = list()
-		for(var/i = 1 to MAX_PILL_SPRITE)
+		for (var/i = 1 to MAX_PILL_SPRITE)
 			var/pill_sprite = list()
 			pill_sprite["index"] = i
 			pill_sprite["image"] = "<img src=\"pill[i].png\" />"
 			data["pillSprites"] += list(pill_sprite)
 
 		data["bottleSprites"] = list()
-		for(var/sprite in BOTTLE_SPRITES)
+		for (var/sprite in BOTTLE_SPRITES)
 			var/bottle_sprite = list()
 			bottle_sprite["index"] = sprite
 			bottle_sprite["image"] = "<img src=\"[sprite].png\" />"

@@ -61,7 +61,7 @@
 	Stress(crush_damage)
 
 /obj/structure/closet/airlock_crush(crush_damage)
-	for(var/atom/movable/AM in src)
+	for (var/atom/movable/AM in src)
 		AM.airlock_crush(crush_damage)
 	..()
 

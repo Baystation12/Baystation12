@@ -68,7 +68,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /datum/effect/effect/system/steam_spread/start()
 	var/i = 0
-	for(i=0, i<src.number, i++)
+	for (i=0, i<src.number, i++)
 		addtimer(new Callback(src, /datum/effect/effect/system/proc/spread, i), 0)
 
 /datum/effect/effect/system/steam_spread/spread(i)
@@ -81,7 +81,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 		direction = pick(GLOB.cardinal)
 	else
 		direction = pick(GLOB.alldirs)
-	for(i=0, i<pick(1,2,3), i++)
+	for (i=0, i<pick(1,2,3), i++)
 		sleep(5)
 		step(steam,direction)
 	QDEL_IN(steam, 2 SECONDS)
@@ -138,7 +138,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /datum/effect/effect/system/spark_spread/start()
 	var/i = 0
-	for(i=0, i<src.number, i++)
+	for (i=0, i<src.number, i++)
 		addtimer(new Callback(src, /datum/effect/effect/system/proc/spread, i), 0)
 
 /datum/effect/effect/system/spark_spread/spread(i)
@@ -151,7 +151,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 		direction = pick(GLOB.cardinal)
 	else
 		direction = pick(GLOB.alldirs)
-	for(i=0, i<pick(1,2,3), i++)
+	for (i=0, i<pick(1,2,3), i++)
 		sleep(5)
 		step(sparks,direction)
 
@@ -195,7 +195,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /obj/effect/effect/smoke/Move()
 	..()
-	for(var/mob/living/carbon/M in get_turf(src))
+	for (var/mob/living/carbon/M in get_turf(src))
 		if (can_affect(M))
 			affect(M)
 
@@ -340,7 +340,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /datum/effect/effect/system/smoke_spread/start()
 	var/i = 0
-	for(i=0, i<src.number, i++)
+	for (i=0, i<src.number, i++)
 		if (src.total_smoke > 20)
 			return
 		addtimer(new Callback(src, /datum/effect/effect/system/proc/spread, i), 0)
@@ -356,7 +356,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 			direction = pick(GLOB.cardinal)
 		else
 			direction = pick(GLOB.alldirs)
-	for(i=0, i<pick(0,1,1,1,2,2,2,3), i++)
+	for (i=0, i<pick(0,1,1,1,2,2,2,3), i++)
 		sleep(1 SECOND)
 		if (QDELETED(smoke))
 			total_smoke--
@@ -483,9 +483,9 @@ would spawn and follow the beaker, even if it is carried or thrown.
 		s.set_up(2, 1, location)
 		s.start()
 
-		for(var/mob/M in viewers(5, location))
+		for (var/mob/M in viewers(5, location))
 			to_chat(M, SPAN_WARNING("The solution violently explodes."))
-		for(var/mob/M in viewers(1, location))
+		for (var/mob/M in viewers(1, location))
 			if (prob (50 * amount))
 				to_chat(M, SPAN_WARNING("The explosion knocks you down."))
 				M.Weaken(rand(1,5))
@@ -515,7 +515,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 		else
 			max_power = EX_ACT_LIGHT
 
-		for(var/mob/M in viewers(8, location))
+		for (var/mob/M in viewers(8, location))
 			to_chat(M, SPAN_WARNING("The solution violently explodes."))
 
 		explosion(location, range, max_power)

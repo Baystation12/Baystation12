@@ -91,7 +91,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 
 /datum/unit_test/proc/get_safe_turf()
 	if (!safe_landmark)
-		for(var/landmark in landmarks_list)
+		for (var/landmark in landmarks_list)
 			if (istype(landmark, /obj/effect/landmark/test/safe_turf))
 				safe_landmark = landmark
 				break
@@ -99,7 +99,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 
 /datum/unit_test/proc/get_space_turf()
 	if (!space_landmark)
-		for(var/landmark in landmarks_list)
+		for (var/landmark in landmarks_list)
 			if (istype(landmark, /obj/effect/landmark/test/space_turf))
 				space_landmark = landmark
 				break
@@ -120,7 +120,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 /proc/get_test_datums()
 	RETURN_TYPE(/list)
 	. = list()
-	for(var/test in subtypesof(/datum/unit_test))
+	for (var/test in subtypesof(/datum/unit_test))
 		var/datum/unit_test/d = test
 		if (test == initial(d.template))
 			continue

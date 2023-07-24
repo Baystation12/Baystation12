@@ -32,7 +32,7 @@
 
 /mob/living/silicon/robot/proc/use_power()
 	used_power_this_tick = 0
-	for(var/V in components)
+	for (var/V in components)
 		var/datum/robot_component/C = components[V]
 		C.update_power_state()
 
@@ -173,7 +173,7 @@
 			healths.icon_state = "health7"
 
 	if (src.syndicate && src.client)
-		for(var/datum/mind/tra in GLOB.traitors.current_antagonists)
+		for (var/datum/mind/tra in GLOB.traitors.current_antagonists)
 			if (tra.current)
 				// TODO: Update to new antagonist system.
 				var/I = image('icons/mob/mob.dmi', loc = tra.current, icon_state = "traitor")
@@ -216,7 +216,7 @@
 		var/datum/species/species = all_species[SPECIES_HUMAN]
 		if (environment.gas[species.breath_type] >= species.breath_pressure)
 			src.oxygen.icon_state = "oxy0"
-			for(var/gas in species.poison_types)
+			for (var/gas in species.poison_types)
 				if (environment.gas[gas])
 					src.oxygen.icon_state = "oxy1"
 					break
@@ -273,7 +273,7 @@
 /mob/living/silicon/robot/proc/update_items()
 	if (src.client)
 		src.client.screen -= src.contents
-		for(var/obj/I in src.contents)
+		for (var/obj/I in src.contents)
 			if (I && !(istype(I,/obj/item/cell) || istype(I,/obj/item/device/radio)  || istype(I,/obj/machinery/camera) || istype(I,/obj/item/device/mmi)))
 				src.client.screen += I
 	if (src.module_state_1)

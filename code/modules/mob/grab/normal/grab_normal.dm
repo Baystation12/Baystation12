@@ -154,7 +154,7 @@
 
 	if (!attack)
 		return
-	for(var/obj/item/protection in list(target.head, target.wear_mask, target.glasses))
+	for (var/obj/item/protection in list(target.head, target.wear_mask, target.glasses))
 		if (protection && (protection.body_parts_covered & EYES))
 			to_chat(attacker, SPAN_DANGER("You're going to need to remove the eye covering first."))
 			return
@@ -269,7 +269,7 @@
 			damage_mod -= armor_datum.get_blocked(DAMAGE_BRUTE, damage_flags, W.armor_penetration, W.force*1.5)
 
 	var/total_damage = 0
-	for(var/i in 1 to 3)
+	for (var/i in 1 to 3)
 		var/damage = min(W.force*2.5, 30)*damage_mod
 		affecting.apply_damage(damage, W.damtype, BP_HEAD, damage_flags, armor_pen = 100, used_weapon=W)
 		total_damage += damage

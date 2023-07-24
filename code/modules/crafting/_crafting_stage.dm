@@ -38,7 +38,7 @@
 
 /singleton/crafting_stage/New()
 	var/stages = list()
-	for(var/nid in next_stages)
+	for (var/nid in next_stages)
 		stages += GET_SINGLETON(nid)
 	next_stages = stages
 	..()
@@ -70,7 +70,7 @@
  * Returns path (Types of `/singleton/crafting_stage`).
  */
 /singleton/crafting_stage/proc/get_next_stage(obj/item/trigger)
-	for(var/singleton/crafting_stage/next_stage in next_stages)
+	for (var/singleton/crafting_stage/next_stage in next_stages)
 		if (next_stage.is_appropriate_tool(trigger))
 			return next_stage
 

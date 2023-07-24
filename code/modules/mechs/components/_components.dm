@@ -25,7 +25,7 @@
 
 /obj/item/mech_component/emp_act(severity)
 	take_burn_damage(rand((10 - (severity*3)),15-(severity*4)))
-	for(var/obj/item/thing in contents)
+	for (var/obj/item/thing in contents)
 		thing.emp_act(severity)
 	..()
 
@@ -85,7 +85,7 @@
 
 /obj/item/mech_component/proc/take_component_damage(brute, burn)
 	var/list/damageable_components = list()
-	for(var/obj/item/robot_parts/robot_component/RC in contents)
+	for (var/obj/item/robot_parts/robot_component/RC in contents)
 		damageable_components += RC
 	if (!length(damageable_components)) return
 	var/obj/item/robot_parts/robot_component/RC = pick(damageable_components)
@@ -98,7 +98,7 @@
 		if (length(contents))
 			//Filter non movables
 			var/list/valid_contents = list()
-			for(var/atom/movable/A in contents)
+			for (var/atom/movable/A in contents)
 				if (!A.anchored)
 					valid_contents += A
 			if (!length(valid_contents))

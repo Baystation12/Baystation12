@@ -12,7 +12,7 @@
 		CRASH("Invalid list of nodes: [log_info_line(nodes)]")
 	if (length(nodes) > 1 && !istype(edges))
 		CRASH("Invalid list of edges: [log_info_line(edges)]")
-	for(var/n in nodes)
+	for (var/n in nodes)
 		var/datum/node/node = n
 		if (node.graph && node.graph != previous_owner)
 			CRASH("Attempted to add a node already belonging to a network")
@@ -23,7 +23,7 @@
 	src.nodes = nodes
 	src.edges = edges || list()
 
-	for(var/n in nodes)
+	for (var/n in nodes)
 		var/datum/node/node = n
 		node.graph = src
 
@@ -72,16 +72,16 @@
 		return
 
 	OnMerge(other)
-	for(var/n in other.nodes)
+	for (var/n in other.nodes)
 		var/datum/node/node = n
 		node.graph = src
 	nodes += other.nodes
 	edges += other.edges
 
-	for(var/other_node_to_be_connected in other.pending_connections)
+	for (var/other_node_to_be_connected in other.pending_connections)
 		var/other_neighbours = other.pending_connections[other_node_to_be_connected]
 		Connect(other_node_to_be_connected, other_neighbours, FALSE)
-	for(var/other_node_to_be_disconnected in other.pending_disconnections)
+	for (var/other_node_to_be_disconnected in other.pending_disconnections)
 		var/other_formed_neighbours = other.pending_disconnections[other_node_to_be_disconnected]
 		Disconnect(other_node_to_be_disconnected, other_formed_neighbours, FALSE)
 
@@ -98,7 +98,7 @@
 // Here subgraphs is a list of a list of nodes
 /datum/graph/proc/Split(list/subgraphs)
 	var/list/new_subgraphs = list()
-	for(var/subgraph in subgraphs)
+	for (var/subgraph in subgraphs)
 		if (length(subgraph) == 1)
 			var/datum/node/N = subgraph[1] // Doing QDELETED(subgraph[1]) will result in multiple list index calls
 			if (QDELETED(N))
@@ -131,7 +131,7 @@
 		else
 			edges[N] = new_neighbours
 
-		for(var/new_neighbour in new_neighbours)
+		for (var/new_neighbour in new_neighbours)
 			var/neighbour_edges = edges[new_neighbour]
 			if (!neighbour_edges)
 				neighbour_edges = list()
@@ -141,9 +141,9 @@
 	if (!LAZYLEN(pending_disconnections))
 		return
 
-	for(var/pending_node_disconnect in pending_disconnections)
+	for (var/pending_node_disconnect in pending_disconnections)
 		var/pending_edge_disconnects = pending_disconnections[pending_node_disconnect] || edges[pending_node_disconnect]
-		for(var/connected_node in pending_edge_disconnects)
+		for (var/connected_node in pending_edge_disconnects)
 			edges[connected_node] -= pending_node_disconnect
 			if (!length(edges[connected_node]))
 				edges -= connected_node

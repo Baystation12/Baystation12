@@ -2,7 +2,7 @@
 
 /obj/effect/vine/proc/get_cardinal_neighbors()
 	var/list/cardinal_neighbors = list()
-	for(var/check_dir in GLOB.cardinal)
+	for (var/check_dir in GLOB.cardinal)
 		var/turf/simulated/T = get_step(get_turf(src), check_dir)
 		if (istype(T))
 			cardinal_neighbors |= T
@@ -25,12 +25,12 @@
 /obj/effect/vine/proc/get_neighbors()
 	var/list/neighbors = list()
 
-	for(var/turf/simulated/floor in get_cardinal_neighbors())
+	for (var/turf/simulated/floor in get_cardinal_neighbors())
 		if (get_dist(parent, floor) > spread_distance)
 			continue
 
 		var/blocked = 0
-		for(var/obj/effect/vine/other in floor.contents)
+		for (var/obj/effect/vine/other in floor.contents)
 			if (other.seed == src.seed)
 				blocked = 1
 				break
@@ -61,7 +61,7 @@
 		return
 
 	//Vine fight!
-	for(var/obj/effect/vine/other in T)
+	for (var/obj/effect/vine/other in T)
 		if (other.seed != seed)
 			other.vine_overrun(seed, src)
 
@@ -139,18 +139,18 @@
 
 /obj/effect/vine/proc/wake_neighbors()
 	// This turf is clear now, let our buddies know.
-	for(var/turf/simulated/check_turf in (get_cardinal_neighbors() | get_zlevel_neighbors()))
+	for (var/turf/simulated/check_turf in (get_cardinal_neighbors() | get_zlevel_neighbors()))
 		if (!istype(check_turf))
 			continue
-		for(var/obj/effect/vine/neighbor in check_turf.contents)
+		for (var/obj/effect/vine/neighbor in check_turf.contents)
 			START_PROCESSING(SSvines, neighbor)
 
 /obj/effect/vine/proc/targets_in_range()
 	var/list/mob/targets = list()
-	for(var/turf/simulated/check_turf in (get_cardinal_neighbors() | get_zlevel_neighbors() | list(loc)))
+	for (var/turf/simulated/check_turf in (get_cardinal_neighbors() | get_zlevel_neighbors() | list(loc)))
 		if (!istype(check_turf))
 			continue
-		for(var/mob/living/M in check_turf.contents)
+		for (var/mob/living/M in check_turf.contents)
 			if (prob(5) || !M.skill_check(SKILL_BOTANY, SKILL_MASTER))
 				targets |= M
 	if (length(targets))

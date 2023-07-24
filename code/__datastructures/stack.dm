@@ -61,6 +61,6 @@
 	stack.Cut()
 
 /datum/stack/proc/QdelClear()
-	for(var/entry in stack)
+	for (var/entry in stack)
 		qdel(entry)
 	stack.Cut()

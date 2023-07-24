@@ -30,7 +30,7 @@
 		air_contents.temperature = T20C
 
 		var/list/gases = list()
-		for(var/gas in filling)
+		for (var/gas in filling)
 			gases += gas
 			gases += start_pressure * filling[gas] * (air_contents.volume)/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
 		air_contents.adjust_multi(arglist(gases))

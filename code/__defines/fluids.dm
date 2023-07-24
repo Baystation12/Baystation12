@@ -26,17 +26,17 @@
 #define UPDATE_FLUID_BLOCKED_DIRS(T) \
 	if (isnull(T:fluid_blocked_dirs)) {\
 		T:fluid_blocked_dirs = 0; \
-		for(var/obj/structure/window/W in T) { \
+		for (var/obj/structure/window/W in T) { \
 			if (W.density) T:fluid_blocked_dirs |= W.dir; \
 		} \
-		for(var/obj/machinery/door/window/D in T) {\
+		for (var/obj/machinery/door/window/D in T) {\
 			if (D.density) T:fluid_blocked_dirs |= D.dir; \
 		} \
 	}
 
 // Expects turf for T, bool for dry_run.
 #define FLOOD_TURF_NEIGHBORS(T, dry_run) \
-	for(var/spread_dir in GLOB.cardinal) {\
+	for (var/spread_dir in GLOB.cardinal) {\
 		UPDATE_FLUID_BLOCKED_DIRS(T); \
 		if (T:fluid_blocked_dirs & spread_dir) continue; \
 		var/turf/next = get_step(T, spread_dir); \

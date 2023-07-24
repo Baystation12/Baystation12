@@ -28,7 +28,7 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 		return
 
 	var/objective_list = list(1,2,3,4,5)
-	for(var/i=rand(2,4),i>0,i--)
+	for (var/i=rand(2,4),i>0,i--)
 		switch(pick(objective_list))
 			if (1)//Kill
 				var/datum/objective/assassinate/ninja_objective = new

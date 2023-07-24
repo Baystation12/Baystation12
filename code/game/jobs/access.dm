@@ -38,10 +38,10 @@
 	return has_access(R, L)
 
 /proc/has_access(list/req_access, list/accesses)
-	for(var/req in req_access)
+	for (var/req in req_access)
 		if (islist(req))
 			var/found = FALSE
-			for(var/req_one in req)
+			for (var/req_one in req)
 				if (req_one in accesses)
 					found = TRUE
 					break
@@ -55,7 +55,7 @@
 /proc/has_access_pattern(list/access_patterns, access)
 	if (!islist(access))
 		access = list(access)
-	for(var/access_pattern in access_patterns)
+	for (var/access_pattern in access_patterns)
 		if (has_access(access_pattern, access))
 			return 1
 
@@ -101,7 +101,7 @@ var/global/list/datum/access/priv_all_access_datums_id
 	RETURN_TYPE(/list)
 	if (!priv_all_access_datums_id)
 		priv_all_access_datums_id = list()
-		for(var/datum/access/A in get_all_access_datums())
+		for (var/datum/access/A in get_all_access_datums())
 			priv_all_access_datums_id["[A.id]"] = A
 
 	return priv_all_access_datums_id.Copy()
@@ -111,7 +111,7 @@ var/global/list/datum/access/priv_all_access_datums_region
 	RETURN_TYPE(/list)
 	if (!priv_all_access_datums_region)
 		priv_all_access_datums_region = list()
-		for(var/datum/access/A in get_all_access_datums())
+		for (var/datum/access/A in get_all_access_datums())
 			if (!priv_all_access_datums_region[A.region])
 				priv_all_access_datums_region[A.region] = list()
 			priv_all_access_datums_region[A.region] += A
@@ -121,7 +121,7 @@ var/global/list/datum/access/priv_all_access_datums_region
 /proc/get_access_ids(access_types = ACCESS_TYPE_ALL)
 	RETURN_TYPE(/list)
 	var/list/L = new()
-	for(var/datum/access/A in get_all_access_datums())
+	for (var/datum/access/A in get_all_access_datums())
 		if (A.access_type & access_types)
 			L += A.id
 	return L
@@ -166,7 +166,7 @@ var/global/list/priv_region_access
 
 	if (!priv_region_access)
 		priv_region_access = list()
-		for(var/datum/access/A in get_all_access_datums())
+		for (var/datum/access/A in get_all_access_datums())
 			if (!priv_region_access["[A.region]"])
 				priv_region_access["[A.region]"] = list()
 			priv_region_access["[A.region]"] += A.id
@@ -238,7 +238,7 @@ var/global/list/priv_region_access
 
 #define HUMAN_ID_CARDS list(get_active_hand(), wear_id, get_inactive_hand())
 /mob/living/carbon/human/GetIdCard()
-	for(var/item_slot in HUMAN_ID_CARDS)
+	for (var/item_slot in HUMAN_ID_CARDS)
 		var/obj/item/I = item_slot
 		var/obj/item/card/id = I ? I.GetIdCard() : null
 		if (id)
@@ -246,7 +246,7 @@ var/global/list/priv_region_access
 
 /mob/living/carbon/human/GetAccess()
 	. = list()
-	for(var/item_slot in HUMAN_ID_CARDS)
+	for (var/item_slot in HUMAN_ID_CARDS)
 		var/obj/item/I = item_slot
 		if (I)
 			. |= I.GetAccess()

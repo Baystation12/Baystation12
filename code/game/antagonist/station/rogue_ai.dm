@@ -26,7 +26,7 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 
 /datum/antagonist/rogue_ai/build_candidate_list()
 	..()
-	for(var/datum/mind/player in candidates)
+	for (var/datum/mind/player in candidates)
 		if (player.assigned_role && player.assigned_role != "AI")
 			candidates -= player
 	return candidates

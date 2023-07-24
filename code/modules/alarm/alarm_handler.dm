@@ -9,7 +9,7 @@
 	var/list/listeners = new				// A list of all objects interested in alarm changes.
 
 /datum/alarm_handler/proc/process()
-	for(var/datum/alarm/A in alarms)
+	for (var/datum/alarm/A in alarms)
 		A.process()
 		check_alarm_cleared(A)
 
@@ -53,7 +53,7 @@
 /datum/alarm_handler/proc/alarms(z_level)
 	if (z_level)
 		. = list()
-		for(var/z in GetConnectedZlevels(z_level))
+		for (var/z in GetConnectedZlevels(z_level))
 			. += SANITIZE_LIST(alarms_by_z["[z]"])
 	else
 		return alarms
@@ -82,7 +82,7 @@
 	return 0
 
 /datum/alarm_handler/proc/on_alarm_change(datum/alarm/alarm, was_raised)
-	for(var/obj/machinery/camera/C in alarm.cameras())
+	for (var/obj/machinery/camera/C in alarm.cameras())
 		if (was_raised)
 			C.add_network(category)
 		else
@@ -119,5 +119,5 @@
 	listeners -= object
 
 /datum/alarm_handler/proc/notify_listeners(alarm, was_raised)
-	for(var/listener in listeners)
+	for (var/listener in listeners)
 		call(listener, listeners[listener])(src, alarm, was_raised)

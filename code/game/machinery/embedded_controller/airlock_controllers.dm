@@ -18,7 +18,7 @@
 	var/scrubber_assist = 0
 
 /obj/machinery/embedded_controller/radio/airlock/Destroy()
-	for(var/thing in dummy_terminals)
+	for (var/thing in dummy_terminals)
 		var/obj/machinery/dummy_airlock_controller/dummy = thing
 		dummy.master_controller = null
 	dummy_terminals.Cut()

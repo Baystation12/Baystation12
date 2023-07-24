@@ -20,7 +20,7 @@
 		return
 	var/list/options = list("!","@","#","$","%","^","&","*","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
 	var/new_data = ""
-	for(var/i in 1 to length(data))
+	for (var/i in 1 to length(data))
 		new_data += pick(options)
 	push_data()
 

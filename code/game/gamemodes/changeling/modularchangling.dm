@@ -172,7 +172,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 	src = usr.mind.changeling
 
 	if (!length(powerinstances))
-		for(var/P in powers)
+		for (var/P in powers)
 			powerinstances += new P()
 
 	var/dat = "<html><head><title>Changling Evolution Menu</title></head>"
@@ -263,7 +263,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 
 				function clearAll(){
 					var spans = document.getElementsByTagName('span');
-					for(var i = 0; i < spans.length; i++){
+					for (var i = 0; i < spans.length; i++){
 						var span = spans\[i\];
 
 						var id = span.getAttribute("id");
@@ -273,7 +273,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 
 						var pass = 1;
 
-						for(var j = 0; j < locked_tabs.length; j++){
+						for (var j = 0; j < locked_tabs.length; j++){
 							if (locked_tabs\[j\]==id){
 								pass = 0;
 								break;
@@ -302,7 +302,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 					}
 
 					var pass = 1;
-					for(var j = 0; j < locked_tabs.length; j++){
+					for (var j = 0; j < locked_tabs.length; j++){
 						if (locked_tabs\[j\]==id){
 							pass = 0;
 							break;
@@ -326,7 +326,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 					//document.write("a");
 					var index = 0;
 					var pass = 0;
-					for(var j = 0; j < locked_tabs.length; j++){
+					for (var j = 0; j < locked_tabs.length; j++){
 						if (locked_tabs\[j\]==id){
 							pass = 1;
 							index = j;
@@ -385,7 +385,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 		<table width='560' align='center' cellspacing='0' cellpadding='5' id='maintable_data'>"}
 
 	var/i = 1
-	for(var/datum/power/changeling/P in powerinstances)
+	for (var/datum/power/changeling/P in powerinstances)
 		var/ownsthis = 0
 
 		if (P in purchasedpowers)

@@ -92,7 +92,7 @@
 
 	SSair.mark_for_update(src) //handle the addition of the new turf.
 
-	for(var/turf/space/S in range(W,1))
+	for (var/turf/space/S in range(W,1))
 		S.update_starlight()
 
 	W.above = old_above
@@ -113,7 +113,7 @@
 			else
 				lighting_clear_overlay()
 
-	for(var/turf/T in RANGE_TURFS(src, 1))
+	for (var/turf/T in RANGE_TURFS(src, 1))
 		T.update_icon()
 
 	if (density != old_density)

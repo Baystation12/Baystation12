@@ -11,13 +11,13 @@
 
 // Predicates for the pick_area and pick_area_turf proc
 /proc/area_has_disposals_pipe(area/A)
-	for(var/turf/T in A)
+	for (var/turf/T in A)
 		if (has_disposals_pipe(T))
 			return TRUE
 	return FALSE
 
 /proc/has_disposals_pipe(turf/T)
-	for(var/atom/A in T)
+	for (var/atom/A in T)
 		if (istype(A, /obj/structure/disposalpipe/segment))
 			return TRUE
 	return FALSE
@@ -39,7 +39,7 @@
 		kill()
 		return
 
-	for(var/atom/A in containing_turf)
+	for (var/atom/A in containing_turf)
 		if (istype(A, /obj/structure/disposalpipe/segment))
 			bursting_pipe = A
 			// Subscribe to pipe destruction facts
@@ -77,7 +77,7 @@
 		var/obj/structure/disposalholder/trash_holder = new()
 
 		// Fill it with trash
-		for(var/i = 0 to rand(5,8))
+		for (var/i = 0 to rand(5,8))
 			var/chosen_trash = pick(subtypesof(/obj/item/trash))
 			var/obj/item/trash/T = new chosen_trash()
 			T.forceMove(trash_holder)

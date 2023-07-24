@@ -41,7 +41,7 @@
 
 	if (tile == 0)
 		var i;
-		for(i=0;i<64;i++)
+		for (i=0;i<64;i++)
 			if (!board["[i]"])
 				board["[i]"] = I
 				break
@@ -66,7 +66,7 @@
 	"})
 	var i, stagger
 	stagger = 0 //so we can have the checkerboard effect
-	for(i=0, i<64, i++)
+	for (i=0, i<64, i++)
 		if (i%8 == 0)
 			dat += "<tr>"
 			stagger = !stagger
@@ -142,7 +142,7 @@
 			num--
 			selected = -1
 			var j
-			for(j=0;j<64;j++)
+			for (j=0;j<64;j++)
 				if (board["[j]"])
 					var/obj/item/K = board["[j]"]
 					if (K.icon == I.icon && cmptext(K.icon_state,I.icon_state))

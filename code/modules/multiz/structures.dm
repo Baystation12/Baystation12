@@ -31,7 +31,7 @@
 	. = ..()
 	// the upper will connect to the lower
 	if (allowed_directions & DOWN) //we only want to do the top one, as it will initialize the ones before it.
-		for(var/obj/structure/ladder/L in GetBelow(src))
+		for (var/obj/structure/ladder/L in GetBelow(src))
 			if (L.allowed_directions & UP)
 				target_down = L
 				L.target_up = src
@@ -76,7 +76,7 @@
 
 	var/atom/blocker
 	var/turf/landing = get_turf(target_down)
-	for(var/atom/A in landing)
+	for (var/atom/A in landing)
 		if (!A.CanPass(I, I.loc, 1.5, 0))
 			blocker = A
 			break
@@ -178,7 +178,7 @@
 		return FALSE
 
 	var/carry_count = 0
-	for(var/obj/item/grab/G in src)
+	for (var/obj/item/grab/G in src)
 		if (!G.ladder_carry())
 			to_chat(src, SPAN_WARNING("You can't carry [G.affecting] up \the [ladder]."))
 			return FALSE
@@ -195,7 +195,7 @@
 
 /obj/structure/ladder/proc/climbLadder(mob/user, target_ladder, obj/item/I = null)
 	var/turf/T = get_turf(target_ladder)
-	for(var/atom/A in T)
+	for (var/atom/A in T)
 		if (!A.CanPass(user, user.loc, 1.5, 0))
 			to_chat(user, SPAN_NOTICE("\The [A] is blocking \the [src]."))
 
@@ -244,7 +244,7 @@
 
 
 /obj/structure/stairs/Initialize()
-	for(var/turf/turf in locs)
+	for (var/turf/turf in locs)
 		var/turf/simulated/open/above = GetAbove(turf)
 		if (!above)
 			warning("Stair created without level above: ([loc.x], [loc.y], [loc.z])")

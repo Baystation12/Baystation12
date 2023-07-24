@@ -12,7 +12,7 @@
 /obj/structure/displaycase/Initialize()
 	. = ..()
 	var/turf/T = get_turf(src)
-	for(var/atom/movable/AM in T)
+	for (var/atom/movable/AM in T)
 		if (AM.simulated && !AM.anchored)
 			AM.forceMove(src)
 	update_icon()
@@ -47,7 +47,7 @@
 /obj/structure/displaycase/on_death()
 	set_density(FALSE)
 	new /obj/item/material/shard(loc)
-	for(var/atom/movable/AM in src)
+	for (var/atom/movable/AM in src)
 		AM.dropInto(loc)
 	playsound(src, "shatter", 70, 1)
 	update_icon()
@@ -61,7 +61,7 @@
 	else
 		icon_state = "glassbox"
 	underlays.Cut()
-	for(var/atom/movable/AM in contents)
+	for (var/atom/movable/AM in contents)
 		underlays += AM.appearance
 
 /obj/structure/displaycase/attack_hand(mob/user as mob)

@@ -131,7 +131,7 @@
 	add_field(/datum/report_field/signature, "Volunteer's Signature:")
 	temp_fields += add_field(/datum/report_field/signature, "Corporate Representative's Signature")
 	temp_fields += add_field(/datum/report_field/options/yes_no, "Approved")
-	for(var/datum/report_field/temp_field in temp_fields)
+	for (var/datum/report_field/temp_field in temp_fields)
 		temp_field.set_access(access_edit = access_nanotrasen)
 
 /datum/computer_file/report/recipient/corp/deny

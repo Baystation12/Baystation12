@@ -11,7 +11,7 @@
 
 /obj/machinery/mineral/stacking_machine/Process()
 	if (input_turf)
-		for(var/obj/item/I in input_turf)
+		for (var/obj/item/I in input_turf)
 			if (istype(I, /obj/item/stack/material))
 				var/obj/item/stack/material/S = I
 				if (S.material && S.material.stack_type)
@@ -24,7 +24,7 @@
 				I.forceMove(output_turf)
 
 	if (output_turf)
-		for(var/sheet in stacks)
+		for (var/sheet in stacks)
 			if (stacks[sheet] >= stack_amt)
 				var/material/stackmat = SSmaterials.get_material_by_name(sheet)
 				stackmat.place_sheet(output_turf, stack_amt)
@@ -35,7 +35,7 @@
 	. += "<h1>Sheet Stacking</h1>"
 	. += "Stacking: [stack_amt] <a href='?src=\ref[src];change_stack=1'>\[change\]</a>"
 	var/line = ""
-	for(var/stacktype in stacks)
+	for (var/stacktype in stacks)
 		if (stacks[stacktype] > 0)
 			line += "<tr><td>[capitalize(stacktype)]</td><td>[stacks[stacktype]]</td><td><A href='?src=\ref[src];release_stack=[stacktype]'>Release</a></td></tr>"
 	. += "<table>[line]</table>"

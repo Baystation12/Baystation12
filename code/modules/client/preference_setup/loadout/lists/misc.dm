@@ -95,7 +95,7 @@
 /datum/gear/lunchbox/New()
 	..()
 	var/list/lunchboxes = list()
-	for(var/lunchbox_type in typesof(/obj/item/storage/lunchbox))
+	for (var/lunchbox_type in typesof(/obj/item/storage/lunchbox))
 		var/obj/item/storage/lunchbox/lunchbox = lunchbox_type
 		if (!initial(lunchbox.filled))
 			lunchboxes[initial(lunchbox.name)] = lunchbox_type

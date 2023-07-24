@@ -12,7 +12,7 @@
 	if (hunger < 100) //stop hunting when satiated
 		ai_holder.hostile = FALSE
 	else
-		for(var/mob/living/simple_animal/S in range(src,1))
+		for (var/mob/living/simple_animal/S in range(src,1))
 			if (S.stat == DEAD && S != src)
 				visible_message("[src] consumes \the body of [S]!")
 				var/turf/T = get_turf(S)
@@ -39,7 +39,7 @@
 	if (isghost(usr))
 		return
 
-	for(var/obj/effect/overmap/visitable/sector/exoplanet/E)
+	for (var/obj/effect/overmap/visitable/sector/exoplanet/E)
 		if (src in E.animals)
 			newname = sanitizeName(newname, allow_numbers = TRUE, force_first_letter_uppercase = FALSE)
 			if (newname && CanInteract(usr, GLOB.conscious_state))

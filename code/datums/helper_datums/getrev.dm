@@ -12,7 +12,7 @@ var/global/datum/getrev/revdata = new()
 		branch = copytext(head_branch[1], 17)
 
 	var/list/head_log = file2list(".git/logs/HEAD", "\n")
-	for(var/line=length(head_log), line>=1, line--)
+	for (var/line=length(head_log), line>=1, line--)
 		if (head_log[line])
 			var/list/last_entry = splittext(head_log[line], " ")
 			if (length(last_entry) < 2)	continue

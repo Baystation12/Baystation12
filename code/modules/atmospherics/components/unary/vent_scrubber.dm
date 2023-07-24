@@ -117,7 +117,7 @@
 		scrubbing_gas = initial(scrubbing_gas)
 	else
 		scrubbing_gas = list()
-		for(var/g in gas_data.gases)
+		for (var/g in gas_data.gases)
 			if (g != GAS_OXYGEN && g != GAS_NITROGEN)
 				add_to_scrubbing(g)
 
@@ -186,7 +186,7 @@
 	panic.write_var(src, !panic)
 
 /obj/machinery/atmospherics/unary/vent_scrubber/proc/set_scrub_gas(list/gases)
-	for(var/gas_id in gases)
+	for (var/gas_id in gases)
 		if ((gas_id in scrubbing_gas) ^ gases[gas_id])
 			scrubbing_gas ^= gas_id
 

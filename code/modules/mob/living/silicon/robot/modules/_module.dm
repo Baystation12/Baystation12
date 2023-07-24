@@ -81,7 +81,7 @@
 
 /obj/item/robot_module/proc/build_equipment()
 	var/list/created_equipment = list()
-	for(var/thing in equipment)
+	for (var/thing in equipment)
 		if (ispath(thing, /obj/item))
 			created_equipment |= new thing(src)
 		else if (isitem(thing))
@@ -93,12 +93,12 @@
 	equipment = created_equipment
 
 /obj/item/robot_module/proc/finalize_equipment()
-	for(var/obj/item/I in equipment)
+	for (var/obj/item/I in equipment)
 		I.canremove = FALSE
 
 /obj/item/robot_module/proc/build_synths()
 	var/list/created_synths = list()
-	for(var/thing in synths)
+	for (var/thing in synths)
 		if (ispath(thing, /datum/matter_synth))
 			if (!isnull(synths[thing]))
 				created_synths += new thing(synths[thing])
@@ -146,12 +146,12 @@
 
 /obj/item/robot_module/emp_act(severity)
 	if (equipment)
-		for(var/obj/O in equipment)
+		for (var/obj/O in equipment)
 			O.emp_act(severity)
 	if (emag)
 		emag.emp_act(severity)
 	if (synths)
-		for(var/datum/matter_synth/S in synths)
+		for (var/datum/matter_synth/S in synths)
 			S.emp_act(severity)
 	..()
 
@@ -166,34 +166,34 @@
 			F.times_used--
 	if (!synths || !length(synths))
 		return
-	for(var/datum/matter_synth/T in synths)
+	for (var/datum/matter_synth/T in synths)
 		T.add_charge(T.recharge_rate * rate)
 
 /obj/item/robot_module/proc/add_languages(mob/living/silicon/robot/R)
 	// Stores the languages as they were before receiving the module, and whether they could be synthezized.
-	for(var/datum/language/language_datum in R.languages)
+	for (var/datum/language/language_datum in R.languages)
 		original_languages[language_datum] = (language_datum in R.speech_synthesizer_langs)
 
-	for(var/language in languages)
+	for (var/language in languages)
 		R.add_language(language, languages[language])
 
 /obj/item/robot_module/proc/remove_languages(mob/living/silicon/robot/R)
 	// Clear all added languages, whether or not we originally had them.
-	for(var/language in languages)
+	for (var/language in languages)
 		R.remove_language(language)
 
 	// Then add back all the original languages, and the relevant synthezising ability
-	for(var/original_language in original_languages)
+	for (var/original_language in original_languages)
 		var/datum/language/language_datum = original_language
 		R.add_language(language_datum.name, original_languages[original_language])
 	original_languages.Cut()
 
 /obj/item/robot_module/proc/add_subsystems(mob/living/silicon/robot/R)
-	for(var/subsystem_type in subsystems)
+	for (var/subsystem_type in subsystems)
 		R.init_subsystem(subsystem_type)
 
 /obj/item/robot_module/proc/remove_subsystems(mob/living/silicon/robot/R)
-	for(var/subsystem_type in subsystems)
+	for (var/subsystem_type in subsystems)
 		R.remove_subsystem(subsystem_type)
 
 /obj/item/robot_module/proc/apply_status_flags(mob/living/silicon/robot/R)
@@ -210,10 +210,10 @@
 /obj/item/robot_module/proc/grant_skills(mob/living/silicon/robot/R)
 	reset_skills(R) // for safety
 	var/list/skill_mod = list()
-	for(var/skill_type in skills)
+	for (var/skill_type in skills)
 		skill_mod[skill_type] = skills[skill_type] - SKILL_MIN // the buff is additive, so normalize accordingly
 	R.buff_skill(skill_mod, buff_type = /datum/skill_buff/robot)
 
 /obj/item/robot_module/proc/reset_skills(mob/living/silicon/robot/R)
-	for(var/datum/skill_buff/buff in R.fetch_buffs_of_type(/datum/skill_buff/robot))
+	for (var/datum/skill_buff/buff in R.fetch_buffs_of_type(/datum/skill_buff/robot))
 		buff.remove()

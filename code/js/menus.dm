@@ -3,7 +3,7 @@ function dropdowns() {
 	var divs = document.getElementsByTagName('div');
 	var headers = new Array();
 	var links = new Array();
-	for(var i=0;i<divs.length;i++){
+	for (var i=0;i<divs.length;i++){
 		if (divs\[i\].className=='header') {
 			divs\[i\].className='header closed';
 			divs\[i\].innerHTML = divs\[i\].innerHTML+' +';
@@ -14,7 +14,7 @@ function dropdowns() {
 			links.push(divs\[i\]);
 		}
 	}
-	for(var i=0;i<headers.length;i++){
+	for (var i=0;i<headers.length;i++){
 		if (typeof(links\[i\])!== 'undefined' && links\[i\]!=null) {
 			headers\[i\].onclick = (function(elem) {
 				return function() {

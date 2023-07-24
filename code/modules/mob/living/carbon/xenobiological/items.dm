@@ -279,7 +279,7 @@
 
 /obj/effect/golemrune/Process()
 	var/mob/observer/ghost/ghost
-	for(var/mob/observer/ghost/O in src.loc)
+	for (var/mob/observer/ghost/O in src.loc)
 		if (!O.client)	continue
 		if (O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
 		ghost = O
@@ -291,7 +291,7 @@
 
 /obj/effect/golemrune/attack_hand(mob/living/user as mob)
 	var/mob/observer/ghost/ghost
-	for(var/mob/observer/ghost/O in src.loc)
+	for (var/mob/observer/ghost/O in src.loc)
 		if (!O.client)
 			continue
 		if (O.mind && O.mind.current && O.mind.current.stat != DEAD)
@@ -321,7 +321,7 @@
 
 
 /obj/effect/golemrune/proc/announce_to_ghosts()
-	for(var/mob/observer/ghost/G in GLOB.player_list)
+	for (var/mob/observer/ghost/G in GLOB.player_list)
 		if (G.client)
 			var/area/A = get_area(src)
 			if (A)

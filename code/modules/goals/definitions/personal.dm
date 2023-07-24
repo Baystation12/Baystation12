@@ -28,7 +28,7 @@
 /datum/goal/money/update_strings()
 	target_amount = rand(100, 200)
 	var/datum/mind/mind = owner
-	for(var/datum/money_account/acct in all_money_accounts)
+	for (var/datum/money_account/acct in all_money_accounts)
 		if (acct.owner_name == mind.current.real_name)
 			target_amount = acct.get_balance() * rand(2,3)
 			break
@@ -36,7 +36,7 @@
 
 /datum/goal/money/check_success()
 	var/datum/mind/mind = owner
-	for(var/datum/money_account/acct in all_money_accounts)
+	for (var/datum/money_account/acct in all_money_accounts)
 		if (acct.owner_name == mind.current.real_name)
 			return acct.get_balance() > target_amount
 	return FALSE

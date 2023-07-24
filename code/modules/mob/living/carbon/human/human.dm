@@ -63,7 +63,7 @@
 		dream_timer = null
 	GLOB.human_mobs -= src
 	worn_underwear = null
-	for(var/organ in organs)
+	for (var/organ in organs)
 		qdel(organ)
 	return ..()
 
@@ -86,7 +86,7 @@
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
 	if (stomach)
 		var/food_volume = 0
-		for(var/datum/reagent/nutriment/A in stomach.ingested.reagent_list)
+		for (var/datum/reagent/nutriment/A in stomach.ingested.reagent_list)
 			food_volume += A.volume
 		return nutrition + food_volume * 15
 	return 0 //Always hungry, but you can't actually eat. :(
@@ -144,9 +144,9 @@
 	L.implanted(src)
 
 /mob/living/carbon/human/proc/is_loyalty_implanted(mob/living/carbon/human/M)
-	for(var/L in M.contents)
+	for (var/L in M.contents)
 		if (istype(L, /obj/item/implant/loyalty))
-			for(var/obj/item/organ/external/O in M.organs)
+			for (var/obj/item/organ/external/O in M.organs)
 				if (L in O.implants)
 					return 1
 	return 0
@@ -176,7 +176,7 @@
 	user.set_machine(src)
 	var/dat = "<B><HR>[FONT_LARGE(name)]</B><BR><HR>"
 
-	for(var/entry in species.hud.gear)
+	for (var/entry in species.hud.gear)
 		var/list/slot_ref = species.hud.gear[entry]
 		if ((slot_ref["slot"] in list(slot_l_store, slot_r_store)))
 			continue
@@ -212,7 +212,7 @@
 		dat += "<BR><A href='?src=\ref[src];webbed=1'>Webbed</A>"
 		break
 
-	for(var/entry in worn_underwear)
+	for (var/entry in worn_underwear)
 		var/obj/item/underwear/UW = entry
 		dat += "<BR><a href='?src=\ref[src];item=\ref[UW]'>Remove \the [UW]</a>"
 
@@ -314,7 +314,7 @@
 
 	if (!lying)
 		var/list/obj/item/organ/external/standing = list()
-		for(var/limb_tag in list(BP_L_FOOT, BP_R_FOOT))
+		for (var/limb_tag in list(BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = organs_by_name[limb_tag]
 			if (E && E.is_usable())
 				standing[E.organ_tag] = E
@@ -340,7 +340,7 @@
 
 	var/total_damage = 0
 
-	for(var/obj/item/organ/external/E in to_shock)
+	for (var/obj/item/organ/external/E in to_shock)
 		total_damage += ..(shock_damage, E.organ_tag, base_siemens_coeff * get_siemens_coefficient_organ(E))
 
 	if (total_damage > 10)
@@ -357,7 +357,7 @@
 	if (!floor || init == floor)
 		return list(init)
 
-	for(var/obj/item/organ/external/E in list(floor, init))
+	for (var/obj/item/organ/external/E in list(floor, init))
 		while(E && E.parent_organ)
 			var/candidate = organs_by_name[E.parent_organ]
 			if (!candidate || (candidate in traced_organs))
@@ -374,11 +374,11 @@
 		limbs = list(limbs)
 
 	var/list/EMP = list()
-	for(var/obj/item/organ/external/limb in limbs)
+	for (var/obj/item/organ/external/limb in limbs)
 		EMP += limb
 		EMP += limb.internal_organs
 		EMP += limb.implants
-	for(var/atom/E in EMP)
+	for (var/atom/E in EMP)
 		E.emp_act(severity)
 
 /mob/living/carbon/human/OnSelfTopic(href_list, topic_status)
@@ -689,19 +689,19 @@
 		return
 
 	if (should_have_organ(BP_STOMACH))
-		for(var/a in stomach.contents)
+		for (var/a in stomach.contents)
 			var/atom/movable/A = a
 			A.dropInto(get_turf(src))
 			if (species.gluttonous & GLUT_PROJECTILE_VOMIT)
 				A.throw_at(get_edge_target_turf(src,dir),7,7,src)
 	else
-		for(var/mob/M in contents)
+		for (var/mob/M in contents)
 			M.dropInto(get_turf(src))
 			if (species.gluttonous & GLUT_PROJECTILE_VOMIT)
 				M.throw_at(get_edge_target_turf(src,dir),7,7,src)
 
 	// vomit into a toilet
-	for(var/obj/structure/hygiene/toilet/T in range(1, src))
+	for (var/obj/structure/hygiene/toilet/T in range(1, src))
 		if (T.open)
 			visible_message(SPAN_DANGER("\The [src] throws up into the toilet!"),SPAN_DANGER("You throw up into the toilet!"))
 			playsound(loc, 'sound/effects/splat.ogg', 50, 1)
@@ -710,7 +710,7 @@
 
 	// check if you can vomit into a disposal unit
 	// see above comment for how vomit reagents are handled
-	for(var/obj/machinery/disposal/D in orange(1, src))
+	for (var/obj/machinery/disposal/D in orange(1, src))
 		visible_message(SPAN_DANGER("\The [src] throws up into the disposal unit!"),SPAN_DANGER("You throw up into the disposal unit!"))
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 		if (stomach.ingested.total_volume)
@@ -788,7 +788,7 @@
 	var/list/hairs = list()
 
 	// loop through potential hairs
-	for(var/x in all_hairs)
+	for (var/x in all_hairs)
 		var/datum/sprite_accessory/hair/H = new x // create new hair datum based on type x
 		hairs.Add(H.name) // add hair name to hairs
 		qdel(H) // delete the hair after it's all done
@@ -803,7 +803,7 @@
 	var/list/all_fhairs = typesof(/datum/sprite_accessory/facial_hair) - /datum/sprite_accessory/facial_hair
 	var/list/fhairs = list()
 
-	for(var/x in all_fhairs)
+	for (var/x in all_fhairs)
 		var/datum/sprite_accessory/facial_hair/H = new x
 		fhairs.Add(H.name)
 		qdel(H)
@@ -850,7 +850,7 @@
 		src.verbs -= /mob/living/carbon/human/proc/remotesay
 		return
 	var/list/creatures = list()
-	for(var/mob/living/carbon/h in world)
+	for (var/mob/living/carbon/h in world)
 		creatures += h
 	var/mob/target = input("Who do you want to project your mind to ?") as null|anything in creatures
 	if (isnull(target))
@@ -863,7 +863,7 @@
 		target.show_message(SPAN_NOTICE("You hear a voice that seems to echo around the room: [say]"))
 	usr.show_message(SPAN_NOTICE("You project your mind into [target.real_name]: [say]"))
 	log_say("[key_name(usr)] sent a telepathic message to [key_name(target)]: [say]")
-	for(var/mob/observer/ghost/G in world)
+	for (var/mob/observer/ghost/G in world)
 		G.show_message("<i>Telepathic message from <b>[src]</b> to <b>[target]</b>: [say]</i>")
 
 /mob/living/carbon/human/proc/remoteobserve()
@@ -888,7 +888,7 @@
 
 	var/list/mob/creatures = list()
 
-	for(var/mob/living/carbon/h in world)
+	for (var/mob/living/carbon/h in world)
 		var/turf/temp_turf = get_turf(h)
 		if ((temp_turf.z != 1 && temp_turf.z != 5) || h.stat!=CONSCIOUS) //Not on mining or the station. Or dead
 			continue
@@ -977,7 +977,7 @@
 			update_inv_gloves(1)
 		germ_level = 0
 
-	for(var/obj/item/organ/external/organ in organs)
+	for (var/obj/item/organ/external/organ in organs)
 		if (clean_feet || (organ.organ_tag in list(BP_L_HAND,BP_R_HAND)))
 			organ.gunshot_residue = null
 
@@ -990,16 +990,16 @@
 /mob/living/carbon/human/get_visible_implants(class = 0)
 
 	var/list/visible_implants = list()
-	for(var/obj/item/organ/external/organ in src.organs)
-		for(var/obj/item/O in organ.implants)
+	for (var/obj/item/organ/external/organ in src.organs)
+		for (var/obj/item/O in organ.implants)
 			if (!istype(O,/obj/item/implant) && (O.w_class > class) && !istype(O,/obj/item/material/shard/shrapnel))
 				visible_implants += O
 
 	return(visible_implants)
 
 /mob/living/carbon/human/embedded_needs_process()
-	for(var/obj/item/organ/external/organ in src.organs)
-		for(var/obj/item/O in organ.implants)
+	for (var/obj/item/organ/external/organ in src.organs)
+		for (var/obj/item/O in organ.implants)
 			if (!istype(O, /obj/item/implant)) //implant type items do not cause embedding effects, see handle_embedded_objects()
 				return 1
 	return 0
@@ -1007,16 +1007,16 @@
 /mob/living/carbon/human/handle_embedded_and_stomach_objects()
 
 	if (embedded_flag)
-		for(var/obj/item/organ/external/organ in organs)
+		for (var/obj/item/organ/external/organ in organs)
 			if (organ.splinted)
 				continue
-			for(var/obj/item/O in organ.implants)
+			for (var/obj/item/O in organ.implants)
 				if (!istype(O,/obj/item/implant) && O.w_class > 1 && prob(5)) //Moving with things stuck in you could be bad.
 					jostle_internal_object(organ, O)
 
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
 	if (stomach && length(stomach.contents))
-		for(var/obj/item/O in stomach.contents)
+		for (var/obj/item/O in stomach.contents)
 			if ((O.edge || O.sharp) && prob(5))
 				var/obj/item/organ/external/parent = get_organ(stomach.parent_organ)
 				if (prob(1) && can_feel_pain() && O.can_embed())
@@ -1049,7 +1049,7 @@
 
 	if (usr.stat || usr.restrained() || !isliving(usr)) return
 
-	for(var/obj/item/organ/external/o in organs)
+	for (var/obj/item/organ/external/o in organs)
 		if (o && o.splinted)
 			var/obj/item/S = o.splinted
 			if (!istype(S) || S.loc != o) //can only remove splints that are actually worn on the organ (deals with hardsuit splints)
@@ -1206,7 +1206,7 @@
 
 	if (LAZYLEN(species.descriptors))
 		descriptors = list()
-		for(var/desctype in species.descriptors)
+		for (var/desctype in species.descriptors)
 			var/datum/mob_descriptor/descriptor = species.descriptors[desctype]
 			descriptors[desctype] = descriptor.default_value
 
@@ -1239,7 +1239,7 @@
 	full_prosthetic = null
 
 	var/update_lang
-	for(var/token in ALL_CULTURAL_TAGS)
+	for (var/token in ALL_CULTURAL_TAGS)
 		if (species.force_cultural_info && species.force_cultural_info[token])
 			update_lang = TRUE
 			set_cultural_value(token, species.force_cultural_info[token], defer_language_update = TRUE)
@@ -1261,7 +1261,7 @@
 		update_languages()
 
 	//recheck species-restricted clothing
-	for(var/slot in slot_first to slot_last)
+	for (var/slot in slot_first to slot_last)
 		var/obj/item/C = get_equipped_item(slot)
 		if (istype(C) && !C.mob_can_equip(src, slot, 1))
 			drop_from_inventory(C)
@@ -1275,7 +1275,7 @@
 	var/list/free_languages =      list()
 	var/list/default_languages =   list()
 
-	for(var/thing in cultural_info)
+	for (var/thing in cultural_info)
 		var/singleton/cultural_info/check = cultural_info[thing]
 		if (istype(check))
 			if (check.default_language)
@@ -1285,12 +1285,12 @@
 				free_languages    |= all_languages[check.language]
 			if (check.name_language)
 				free_languages    |= all_languages[check.name_language]
-			for(var/lang in check.additional_langs)
+			for (var/lang in check.additional_langs)
 				free_languages    |= all_languages[lang]
-			for(var/lang in check.get_spoken_languages())
+			for (var/lang in check.get_spoken_languages())
 				permitted_languages |= all_languages[lang]
 
-	for(var/thing in languages)
+	for (var/thing in languages)
 		var/datum/language/lang = thing
 		if (lang in permitted_languages)
 			continue
@@ -1300,7 +1300,7 @@
 			default_language = null
 		remove_language(lang.name)
 
-	for(var/thing in free_languages)
+	for (var/thing in free_languages)
 		var/datum/language/lang = thing
 		add_language(lang.name)
 
@@ -1374,7 +1374,7 @@
 
 	. = CAN_INJECT
 	if (!ignore_thick_clothing)
-		for(var/obj/item/clothing/C in list(head, wear_mask, wear_suit, w_uniform, gloves, shoes))
+		for (var/obj/item/clothing/C in list(head, wear_mask, wear_suit, w_uniform, gloves, shoes))
 			if (C && (C.body_parts_covered & affecting.body_part) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 				if (istype(C, /obj/item/clothing/suit/space))
 					. = INJECTION_PORT //it was going to block us, but it's a space suit so it doesn't because it has some kind of port
@@ -1394,7 +1394,7 @@
 	var/hands_exposed = 1
 	var/feet_exposed = 1
 
-	for(var/obj/item/clothing/C in equipment)
+	for (var/obj/item/clothing/C in equipment)
 		if (C.body_parts_covered & HEAD)
 			head_exposed = 0
 		if (C.body_parts_covered & FACE)
@@ -1482,7 +1482,7 @@
 		self = 1 // Removing object from yourself.
 
 	var/list/limbs = list()
-	for(var/limb in organs_by_name)
+	for (var/limb in organs_by_name)
 		var/obj/item/organ/external/current_limb = organs_by_name[limb]
 		if (current_limb && current_limb.dislocated > 0 && !current_limb.is_parent_dislocated()) //if the parent is also dislocated you will have to relocate that first
 			limbs |= current_limb
@@ -1528,7 +1528,7 @@
 /mob/living/carbon/human/can_stand_overridden()
 	if (wearing_rig && wearing_rig.ai_can_move_suit(check_for_ai = 1))
 		// Actually missing a leg will screw you up. Everything else can be compensated for.
-		for(var/limbcheck in list(BP_L_LEG,BP_R_LEG))
+		for (var/limbcheck in list(BP_L_LEG,BP_R_LEG))
 			var/obj/item/organ/affecting = get_organ(limbcheck)
 			if (!affecting)
 				return 0
@@ -1662,7 +1662,7 @@
 			SPAN_NOTICE("You check yourself for injuries.") \
 			)
 
-		for(var/obj/item/organ/external/org in organs)
+		for (var/obj/item/organ/external/org in organs)
 			var/list/status = list()
 
 			var/feels = 1 + round(org.pain/100, 0.1)
@@ -1813,7 +1813,7 @@
 
 /mob/living/carbon/human/needs_wheelchair()
 	var/stance_damage = 0
-	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
+	for (var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 		var/obj/item/organ/external/E = organs_by_name[limb_tag]
 		if (!E || !E.is_usable())
 			stance_damage += 2
@@ -1838,7 +1838,7 @@
 
 /mob/living/carbon/human/get_sound_volume_multiplier()
 	. = ..()
-	for(var/obj/item/clothing/C in list(head, l_ear, r_ear))
+	for (var/obj/item/clothing/C in list(head, l_ear, r_ear))
 		. = min(., C.volume_multiplier)
 
 /mob/living/carbon/human/handle_pull_damage(mob/living/puller)

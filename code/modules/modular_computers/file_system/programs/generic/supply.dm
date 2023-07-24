@@ -74,7 +74,7 @@
 
 		if (2)// Statistics screen with credit overview
 			var/list/point_breakdown = list()
-			for(var/tag in SSsupply.point_source_descriptions)
+			for (var/tag in SSsupply.point_source_descriptions)
 				var/entry = list()
 				entry["desc"] = SSsupply.point_source_descriptions[tag]
 				entry["points"] = SSsupply.point_sources[tag] || 0
@@ -98,11 +98,11 @@
 				var/list/cart[0]
 				var/list/requests[0]
 				var/list/done[0]
-				for(var/datum/supply_order/SO in SSsupply.shoppinglist)
+				for (var/datum/supply_order/SO in SSsupply.shoppinglist)
 					cart.Add(order_to_nanoui(SO, SUPPLY_LIST_ID_CART))
-				for(var/datum/supply_order/SO in SSsupply.requestlist)
+				for (var/datum/supply_order/SO in SSsupply.requestlist)
 					requests.Add(order_to_nanoui(SO, SUPPLY_LIST_ID_REQUEST))
-				for(var/datum/supply_order/SO in SSsupply.donelist)
+				for (var/datum/supply_order/SO in SSsupply.donelist)
 					done.Add(order_to_nanoui(SO, SUPPLY_LIST_ID_DONE))
 				data["cart"] = cart
 				data["requests"] = requests
@@ -120,7 +120,7 @@
 
 // Supply the order ID and where to look. This is just to reduce copypaste code.
 /datum/nano_module/supply/proc/find_order_by_id(order_id, list/find_in)
-	for(var/datum/supply_order/SO in find_in)
+	for (var/datum/supply_order/SO in find_in)
 		if (SO.ordernum == order_id)
 			return SO
 
@@ -296,12 +296,12 @@
 	category_names.Cut()
 	category_contents.Cut()
 	var/singleton/hierarchy/supply_pack/root = GET_SINGLETON(/singleton/hierarchy/supply_pack)
-	for(var/singleton/hierarchy/supply_pack/sp in root.children)
+	for (var/singleton/hierarchy/supply_pack/sp in root.children)
 		if (!sp.is_category())
 			continue // No children
 		category_names.Add(sp.name)
 		var/list/category[0]
-		for(var/singleton/hierarchy/supply_pack/spc in sp.get_descendents())
+		for (var/singleton/hierarchy/supply_pack/spc in sp.get_descendents())
 			if ((spc.hidden || spc.contraband || !spc.sec_available()) && !emagged)
 				continue
 			category.Add(list(list(
@@ -317,7 +317,7 @@
 		return FALSE
 	contents_of_order.Cut()
 	showing_contents_of_ref = order_ref
-	for(var/item_path in sp.contains) // Thanks to Lohikar for helping me with type paths - CarlenWhite
+	for (var/item_path in sp.contains) // Thanks to Lohikar for helping me with type paths - CarlenWhite
 		var/obj/item/stack/OB = item_path // Not always a stack, but will always have a name we can fetch.
 		var/name = initial(OB.name)
 		var/amount = sp.contains[item_path] || 1 // If it's just one item (has no number associated), fallback to 1.
@@ -391,7 +391,7 @@
 /datum/nano_module/supply/proc/print_summary(mob/user)
 	var/t = ""
 	t += "<center><BR><b><large>[GLOB.using_map.station_name]</large></b><BR><i>[station_date]</i><BR><i>Export overview<field></i></center><hr>"
-	for(var/source in SSsupply.point_source_descriptions)
+	for (var/source in SSsupply.point_source_descriptions)
 		t += "[SSsupply.point_source_descriptions[source]]: [SSsupply.point_sources[source] || 0]<br>"
 	print_text(t, user)
 

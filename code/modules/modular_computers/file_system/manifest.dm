@@ -16,7 +16,7 @@
 	)
 	var/list/misc //Special departments for easier access
 	var/list/bot
-	for(var/list/department in dept_data)
+	for (var/list/department in dept_data)
 		if (department["flag"] == MSC)
 			misc = department["names"]
 		if (isnull(department["flag"]))
@@ -37,7 +37,7 @@
 	<tr class='head'><th>Name</th><th>Position</th><th>Activity</th></tr>
 	"}
 	// sort mobs
-	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+	for (var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
 		var/name = CR.get_formal_name()
 		var/rank = CR.get_job()
 		mil_ranks[name] = ""
@@ -51,7 +51,7 @@
 
 		if (OOC)
 			var/active = 0
-			for(var/mob/M in GLOB.player_list)
+			for (var/mob/M in GLOB.player_list)
 				var/mob_real_name = M.real_name
 				if (sanitize(mob_real_name) == CR.get_name() && M.client && M.client.inactivity <= 10 MINUTES)
 					active = 1
@@ -63,7 +63,7 @@
 		var/datum/job/job = SSjobs.get_by_title(rank)
 		var/found_place = 0
 		if (job)
-			for(var/list/department in dept_data)
+			for (var/list/department in dept_data)
 				var/list/names = department["names"]
 				if (job.department_flag & department["flag"])
 					names[name] = rank
@@ -72,21 +72,21 @@
 			misc[name] = rank
 
 	// Synthetics don't have actual records, so we will pull them from here.
-	for(var/mob/living/silicon/ai/ai in SSmobs.mob_list)
+	for (var/mob/living/silicon/ai/ai in SSmobs.mob_list)
 		bot[ai.name] = "Artificial Intelligence"
 
-	for(var/mob/living/silicon/robot/robot in SSmobs.mob_list)
+	for (var/mob/living/silicon/robot/robot in SSmobs.mob_list)
 		// No combat/syndicate cyborgs, no drones.
 		if (robot.module && robot.module.hide_on_manifest)
 			continue
 
 		bot[robot.name] = "[robot.modtype] [robot.braintype]"
 
-	for(var/list/department in dept_data)
+	for (var/list/department in dept_data)
 		var/list/names = department["names"]
 		if (length(names) > 0)
 			dat += "<tr><th colspan=3 style=background-color:[department["color"]]>[department["header"]]</th></tr>"
-			for(var/name in names)
+			for (var/name in names)
 				dat += "<tr class='candystripe'><td>[mil_ranks[name]][name]</td><td>[names[name]]</td><td>[isactive[name]]</td></tr>"
 
 	dat += "</table>"
@@ -97,13 +97,13 @@
 /proc/silicon_nano_crew_manifest(list/filter)
 	var/list/filtered_entries = list()
 
-	for(var/mob/living/silicon/ai/ai in SSmobs.mob_list)
+	for (var/mob/living/silicon/ai/ai in SSmobs.mob_list)
 		filtered_entries.Add(list(list(
 			"name" = ai.name,
 			"rank" = "Artificial Intelligence",
 			"status" = ""
 		)))
-	for(var/mob/living/silicon/robot/robot in SSmobs.mob_list)
+	for (var/mob/living/silicon/robot/robot in SSmobs.mob_list)
 		if (robot.module && robot.module.hide_on_manifest)
 			continue
 		filtered_entries.Add(list(list(
@@ -116,7 +116,7 @@
 /proc/filtered_nano_crew_manifest(list/filter, blacklist = FALSE)
 	RETURN_TYPE(/list)
 	var/list/filtered_entries = list()
-	for(var/datum/computer_file/report/crew_record/CR in department_crew_manifest(filter, blacklist))
+	for (var/datum/computer_file/report/crew_record/CR in department_crew_manifest(filter, blacklist))
 		filtered_entries.Add(list(list(
 			"name" = CR.get_name(),
 			"rank" = CR.get_job(),

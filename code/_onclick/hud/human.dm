@@ -24,7 +24,7 @@
 
 	// Draw the various inventory equipment slots.
 	var/has_hidden_gear
-	for(var/gear_slot in hud_data.gear)
+	for (var/gear_slot in hud_data.gear)
 
 		inv_box = new /obj/screen/inventory()
 		inv_box.icon = ui_style

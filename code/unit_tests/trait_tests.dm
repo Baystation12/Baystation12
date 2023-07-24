@@ -11,7 +11,7 @@
 
 /datum/unit_test/trait/all_traits_shall_have_valid_names/start_test()
 	var/list/invalid_traits = list()
-	for(var/trait in GET_SINGLETON_SUBTYPE_LIST(/singleton/trait))
+	for (var/trait in GET_SINGLETON_SUBTYPE_LIST(/singleton/trait))
 		var/singleton/trait/T = trait
 		if (!T.name || !istext(T.name)) // Empty strings are valid texts
 			invalid_traits += T.type
@@ -52,7 +52,7 @@
 /datum/unit_test/trait/all_traits_shall_have_unique_name/start_test()
 	var/list/trait_names = list()
 
-	for(var/trait in GET_SINGLETON_SUBTYPE_LIST(/singleton/trait))
+	for (var/trait in GET_SINGLETON_SUBTYPE_LIST(/singleton/trait))
 		var/singleton/trait/T = trait
 		group_by(trait_names, T.name, T.type)
 
@@ -69,7 +69,7 @@
 
 /datum/unit_test/trait/all_traits_shall_have_valid_levels/start_test()
 	var/list/invalid_traits = list()
-	for(var/trait in GET_SINGLETON_SUBTYPE_LIST(/singleton/trait))
+	for (var/trait in GET_SINGLETON_SUBTYPE_LIST(/singleton/trait))
 		var/singleton/trait/T = trait
 		if (!length(T.levels) || (length(T.levels) > 1 && (TRAIT_LEVEL_EXISTS in T.levels)))
 			invalid_traits += T.type
@@ -87,9 +87,9 @@
 
 /datum/unit_test/trait/all_species_shall_have_valid_trait_levels/start_test()
 	var/list/invalid_species = list()
-	for(var/species_name in all_species)
+	for (var/species_name in all_species)
 		var/datum/species/S = all_species[species_name]
-		for(var/trait_type in S.traits)
+		for (var/trait_type in S.traits)
 			var/trait_level = S.traits[trait_type]
 			var/singleton/trait/T = GET_SINGLETON(trait_type)
 			if (!T.Validate(trait_level))

@@ -5,7 +5,7 @@
 /datum/unit_test/reagent_colors_test/start_test()
 	var/list/bad_reagents = list()
 
-	for(var/T in typesof(/datum/reagent))
+	for (var/T in typesof(/datum/reagent))
 		var/datum/reagent/R = T
 		if (length(initial(R.color)) != 7)
 			bad_reagents += "[T] ([initial(R.color)])"

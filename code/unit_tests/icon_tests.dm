@@ -14,7 +14,7 @@
 	var/list/valid_states = icon_states('icons/mob/robots.dmi') + icon_states('icons/mob/robots_drones.dmi') + icon_states('icons/mob/robots_flying.dmi')
 
 	var/list/original_valid_states = valid_states.Copy()
-	for(var/icon_state in valid_states)
+	for (var/icon_state in valid_states)
 		if (icon_state in excepted_icon_states_)
 			continue
 		if (text_starts_with(icon_state, "eyes-"))
@@ -50,9 +50,9 @@
 	var/icon_state_cache = list()
 	var/duplicates_found = FALSE
 
-	for(var/sprite_accessory_main_type in sprite_accessory_subtypes)
+	for (var/sprite_accessory_main_type in sprite_accessory_subtypes)
 		var/sprite_accessories_by_name = list()
-		for(var/sprite_accessory_type in subtypesof(sprite_accessory_main_type))
+		for (var/sprite_accessory_type in subtypesof(sprite_accessory_main_type))
 			var/failed = FALSE
 			var/datum/sprite_accessory/sat = sprite_accessory_type
 
@@ -103,7 +103,7 @@
 	var/contraband_icons = icon_states('icons/obj/contraband.dmi')
 	var/list/invalid_posters = list()
 
-	for(var/poster_type in subtypesof(/singleton/poster))
+	for (var/poster_type in subtypesof(/singleton/poster))
 		var/singleton/poster/P = GET_SINGLETON(poster_type)
 		if (!(P.icon_state in contraband_icons))
 			invalid_posters += poster_type
@@ -122,9 +122,9 @@
 	var/list/bad_modifiers = list()
 	var/item_modifiers = list_values(Singletons.GetMap(/singleton/item_modifier))
 
-	for(var/im in item_modifiers)
+	for (var/im in item_modifiers)
 		var/singleton/item_modifier/item_modifier = im
-		for(var/type_setup_type in item_modifier.type_setups)
+		for (var/type_setup_type in item_modifier.type_setups)
 			var/list/type_setup = item_modifier.type_setups[type_setup_type]
 			var/list/icon_states = icon_states_by_type[type_setup_type]
 
@@ -148,7 +148,7 @@
 /datum/unit_test/icon_test/random_spawners_shall_have_icon_states/start_test()
 	var/states_per_icon = list()
 	var/list/invalid_spawners = list()
-	for(var/random_type in typesof(/obj/random))
+	for (var/random_type in typesof(/obj/random))
 		var/obj/random/R = random_type
 		var/icon = initial(R.icon)
 		var/icon_state = initial(R.icon_state) || ""

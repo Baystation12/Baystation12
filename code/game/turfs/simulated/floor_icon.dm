@@ -30,7 +30,7 @@ var/global/list/flooring_cache = list()
 		overlays.Cut()
 		var/has_border = 0
 		//Check the cardinal turfs
-		for(var/step_dir in GLOB.cardinal)
+		for (var/step_dir in GLOB.cardinal)
 			var/turf/simulated/floor/T = get_step(src, step_dir)
 			var/is_linked = flooring.symmetric_test_link(src, T)
 
@@ -48,14 +48,14 @@ var/global/list/flooring_cache = list()
 
 		//We can only have inner corners if we're smoothed with something
 		if (has_smooth && flooring.flags & TURF_HAS_INNER_CORNERS)
-			for(var/direction in GLOB.cornerdirs)
+			for (var/direction in GLOB.cornerdirs)
 				if ((has_smooth & direction) == direction)
 					if (!flooring.symmetric_test_link(src, get_step(src, direction)))
 						overlays |= get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-corner-[direction]", "[flooring.icon_base]_corners", direction)
 
 		//Next up, outer corners
 		if (has_border && flooring.flags & TURF_HAS_CORNERS)
-			for(var/direction in GLOB.cornerdirs)
+			for (var/direction in GLOB.cornerdirs)
 				if ((has_border & direction) == direction)
 					if (!flooring.symmetric_test_link(src, get_step(src, direction)))
 						overlays |= get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction,(flooring.flags & TURF_HAS_EDGES))
@@ -72,7 +72,7 @@ var/global/list/flooring_cache = list()
 		*/
 
 	if (decals && length(decals))
-		for(var/image/I in decals)
+		for (var/image/I in decals)
 			if (floor(I.layer) != floor(layer))
 				continue
 			overlays |= I
@@ -88,7 +88,7 @@ var/global/list/flooring_cache = list()
 
 	queue_ao(FALSE)
 	if (update_neighbors)
-		for(var/turf/simulated/floor/F in orange(src, 1))
+		for (var/turf/simulated/floor/F in orange(src, 1))
 			F.queue_ao(FALSE)
 			F.update_icon()
 
@@ -141,7 +141,7 @@ var/global/list/flooring_cache = list()
 
 		//Check for window frames.
 		if (wall_smooth == SMOOTH_ALL)
-			for(var/obj/structure/wall_frame/WF in T.contents)
+			for (var/obj/structure/wall_frame/WF in T.contents)
 				is_linked = TRUE
 
 		//If the floor is the same as us,then we're linked,

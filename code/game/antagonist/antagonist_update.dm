@@ -19,13 +19,13 @@
 	return player.current
 
 /datum/antagonist/proc/update_access(mob/living/player)
-	for(var/obj/item/card/id/id in player.contents)
+	for (var/obj/item/card/id/id in player.contents)
 		player.set_id_info(id)
 
 /datum/antagonist/proc/clear_indicators(datum/mind/recipient)
 	if (!recipient.current || !recipient.current.client)
 		return
-	for(var/image/I in recipient.current.client.images)
+	for (var/image/I in recipient.current.client.images)
 		if (I.icon_state == antag_indicator || (faction_indicator && I.icon_state == faction_indicator))
 			qdel(I)
 
@@ -43,11 +43,11 @@
 /datum/antagonist/proc/update_all_icons()
 	if (!antag_indicator)
 		return
-	for(var/datum/mind/antag in current_antagonists)
+	for (var/datum/mind/antag in current_antagonists)
 		clear_indicators(antag)
 		if (faction_invisible && (antag in faction_members))
 			continue
-		for(var/datum/mind/other_antag in current_antagonists)
+		for (var/datum/mind/other_antag in current_antagonists)
 			if (antag.current && antag.current.client)
 				antag.current.client.images |= get_indicator(antag, other_antag)
 
@@ -57,7 +57,7 @@
 	spawn(0)
 
 		var/give_to_player = (!faction_invisible || !(player in faction_members))
-		for(var/datum/mind/antag in current_antagonists)
+		for (var/datum/mind/antag in current_antagonists)
 			if (!antag.current)
 				continue
 			if (antag.current.client)
@@ -73,9 +73,9 @@
 	spawn(0)
 		clear_indicators(player)
 		if (player.current && player.current.client)
-			for(var/datum/mind/antag in current_antagonists)
+			for (var/datum/mind/antag in current_antagonists)
 				if (antag.current && antag.current.client)
-					for(var/image/I in antag.current.client.images)
+					for (var/image/I in antag.current.client.images)
 						if (I.loc == player.current)
 							qdel(I)
 
@@ -87,7 +87,7 @@
 	if (mode.antag_scaling_coeff)
 
 		var/count = 0
-		for(var/mob/living/M in GLOB.player_list)
+		for (var/mob/living/M in GLOB.player_list)
 			if (M.client)
 				count++
 

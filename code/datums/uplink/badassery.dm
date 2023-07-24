@@ -66,7 +66,7 @@
 
 /datum/uplink_item/item/badassery/random_many/get_goods(obj/item/device/uplink/U, loc)
 	var/list/bought_items = list()
-	for(var/datum/uplink_item/UI in get_random_uplink_items(U, U.uses, loc))
+	for (var/datum/uplink_item/UI in get_random_uplink_items(U, U.uses, loc))
 		UI.purchase_log(U)
 		var/obj/item/I = UI.get_goods(U, loc)
 		if (istype(I))
@@ -94,7 +94,7 @@
 /datum/uplink_item/item/badassery/surplus/get_goods(obj/item/device/uplink/U, loc)
 	var/obj/structure/largecrate/C = new(loc)
 	var/random_items = get_random_uplink_items(U, item_worth, C)
-	for(var/datum/uplink_item/I in random_items)
+	for (var/datum/uplink_item/I in random_items)
 		I.purchase_log(U)
 		I.get_goods(U, C)
 

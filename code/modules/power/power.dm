@@ -119,11 +119,11 @@
 	var/cdir
 	var/turf/T
 
-	for(var/card in GLOB.cardinal)
+	for (var/card in GLOB.cardinal)
 		T = get_step(loc,card)
 		cdir = get_dir(T,loc)
 
-		for(var/obj/structure/cable/C in T)
+		for (var/obj/structure/cable/C in T)
 			if (C.powernet)	continue
 			if (C.d1 == cdir || C.d2 == cdir)
 				. += C
@@ -138,11 +138,11 @@
 	var/cdir
 	var/turf/T
 
-	for(var/card in GLOB.cardinal)
+	for (var/card in GLOB.cardinal)
 		T = get_step(loc,card)
 		cdir = get_dir(T,loc)
 
-		for(var/obj/structure/cable/C in T)
+		for (var/obj/structure/cable/C in T)
 			if (C.d1 == cdir || C.d2 == cdir)
 				. += C
 	return .
@@ -150,7 +150,7 @@
 //returns all the NODES (O-X) cables WITHOUT a powernet in the turf the machine is located at
 /obj/machinery/power/proc/get_indirect_connections()
 	. = list()
-	for(var/obj/structure/cable/C in loc)
+	for (var/obj/structure/cable/C in loc)
 		if (C.powernet)	continue
 		if (C.d1 == 0) // the cable is a node cable
 			. += C
@@ -169,7 +169,7 @@
 	. = list()
 
 	var/reverse = d ? GLOB.reverse_dir[d] : 0
-	for(var/AM in T)
+	for (var/AM in T)
 		if (AM == source)	continue			//we don't want to return source
 
 		if (!cable_only && istype(AM,/obj/machinery/power))
@@ -216,7 +216,7 @@
 			continue
 
 	//now that the powernet is set, connect found machines to it
-	for(var/obj/machinery/power/PM in found_machines)
+	for (var/obj/machinery/power/PM in found_machines)
 		if (!PM.connect_to_network()) //couldn't find a node on its turf...
 			PM.disconnect_from_network() //... so disconnect if already on a powernet
 
@@ -237,12 +237,12 @@
 		net2 = temp
 
 	//merge net2 into net1
-	for(var/obj/structure/cable/Cable in net2.cables) //merge cables
+	for (var/obj/structure/cable/Cable in net2.cables) //merge cables
 		net1.add_cable(Cable)
 
 	if (!net2) return net1
 
-	for(var/obj/machinery/power/Node in net2.nodes) //merge power machines
+	for (var/obj/machinery/power/Node in net2.nodes) //merge power machines
 		if (!Node.connect_to_network())
 			Node.disconnect_from_network() //if somehow we can't connect the machine to the new powernet, disconnect it from the old nonetheless
 

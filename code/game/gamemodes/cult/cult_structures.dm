@@ -125,7 +125,7 @@
 			if (Robot.mmi)
 				qdel(Robot.mmi)
 		else
-			for(var/obj/item/W in M)
+			for (var/obj/item/W in M)
 				M.drop_from_inventory(W)
 				if (istype(W, /obj/item/implant))
 					qdel(W)

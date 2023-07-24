@@ -1,16 +1,16 @@
 /datum/map/bolt_saferooms()
-	for(var/atype in typesof(/area/crew_quarters/safe_room))
+	for (var/atype in typesof(/area/crew_quarters/safe_room))
 		var/area/A = locate(atype)
 		if (istype(A))
-			for(var/obj/machinery/door/airlock/vault/bolted/V in A.contents)
+			for (var/obj/machinery/door/airlock/vault/bolted/V in A.contents)
 				if (!V.locked)
 					V.lock()
 
 /datum/map/unbolt_saferooms()
-	for(var/atype in typesof(/area/crew_quarters/safe_room))
+	for (var/atype in typesof(/area/crew_quarters/safe_room))
 		var/area/A = locate(atype)
 		if (istype(A))
-			for(var/obj/machinery/door/airlock/vault/bolted/V in A.contents)
+			for (var/obj/machinery/door/airlock/vault/bolted/V in A.contents)
 				if (V.locked)
 					V.unlock()
 
@@ -31,7 +31,7 @@
 		priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks.", "Attention!")
 
 /datum/map/torch/roundend_player_status()
-	for(var/mob/Player in GLOB.player_list)
+	for (var/mob/Player in GLOB.player_list)
 		if (Player.mind && !isnewplayer(Player))
 			if (Player.stat != DEAD)
 				var/turf/playerTurf = get_turf(Player)
@@ -58,7 +58,7 @@
 
 
 /datum/map/torch/ship_jump()
-	for(var/obj/effect/overmap/visitable/ship/torch/torch)
+	for (var/obj/effect/overmap/visitable/ship/torch/torch)
 		new /obj/effect/ftl (get_turf(torch))
 		qdel(torch)
 		animate(torch, time = 0.5 SECONDS)

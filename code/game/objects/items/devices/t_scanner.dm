@@ -71,13 +71,13 @@
 	var/list/update_remove = active_scanned - scanned
 
 	//Add new overlays
-	for(var/obj/O in update_add)
+	for (var/obj/O in update_add)
 		var/image/overlay = get_overlay(O)
 		active_scanned[O] = overlay
 		user_client.images += overlay
 
 	//Remove stale overlays
-	for(var/obj/O in update_remove)
+	for (var/obj/O in update_remove)
 		user_client.images -= active_scanned[O]
 		active_scanned -= O
 
@@ -127,8 +127,8 @@
 	var/turf/center = get_turf(src.loc)
 	if (!center) return
 
-	for(var/turf/T in range(scan_range, center))
-		for(var/mob/M in T.contents)
+	for (var/turf/T in range(scan_range, center))
+		for (var/mob/M in T.contents)
 			if (ishuman(M))
 				var/mob/living/carbon/human/H = M
 				if (H.is_cloaked())
@@ -141,7 +141,7 @@
 		if (!!T.is_plating())
 			continue
 
-		for(var/obj/O in T.contents)
+		for (var/obj/O in T.contents)
 			if (O.level != ATOM_LEVEL_UNDER_TILE)
 				continue
 			if (!O.invisibility)
@@ -154,10 +154,10 @@
 	if (new_client == user_client)
 		return
 	if (user_client)
-		for(var/scanned in active_scanned)
+		for (var/scanned in active_scanned)
 			user_client.images -= active_scanned[scanned]
 	if (new_client)
-		for(var/scanned in active_scanned)
+		for (var/scanned in active_scanned)
 			new_client.images += active_scanned[scanned]
 	else
 		active_scanned.Cut()

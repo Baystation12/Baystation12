@@ -24,7 +24,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 /obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
 	LAZYADD(GLOB.overmap_helm_computers, src)
-	for(var/obj/effect/overmap/visitable/sector as anything in GLOB.known_overmap_sectors)
+	for (var/obj/effect/overmap/visitable/sector as anything in GLOB.known_overmap_sectors)
 		add_known_sector(sector)
 
 /obj/machinery/computer/ship/helm/Destroy()

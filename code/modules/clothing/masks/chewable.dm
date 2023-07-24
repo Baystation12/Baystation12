@@ -15,7 +15,7 @@
 	..()
 	atom_flags |= ATOM_FLAG_NO_REACT // so it doesn't react until you light it
 	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
-	for(var/R in filling)
+	for (var/R in filling)
 		reagents.add_reagent(R, filling[R])
 
 /obj/item/clothing/mask/chewable/equipped(mob/living/user, slot)

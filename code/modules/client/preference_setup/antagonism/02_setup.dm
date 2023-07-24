@@ -19,14 +19,14 @@
 
 	if (istype(uplink_order))
 		pref.uplink_sources = list()
-		for(var/entry in uplink_order)
+		for (var/entry in uplink_order)
 			var/uplink_source = uplink_sources_by_name[entry]
 			if (uplink_source)
 				pref.uplink_sources += uplink_source
 
 /datum/category_item/player_setup_item/antagonism/basic/save_character(datum/pref_record_writer/W)
 	var/uplink_order = list()
-	for(var/entry in pref.uplink_sources)
+	for (var/entry in pref.uplink_sources)
 		var/singleton/uplink_source/UL = entry
 		uplink_order += UL.name
 
@@ -36,13 +36,13 @@
 /datum/category_item/player_setup_item/antagonism/basic/sanitize_character()
 	if (!istype(pref.uplink_sources))
 		pref.uplink_sources = list()
-		for(var/entry in GLOB.default_uplink_source_priority)
+		for (var/entry in GLOB.default_uplink_source_priority)
 			pref.uplink_sources += GET_SINGLETON(entry)
 
 /datum/category_item/player_setup_item/antagonism/basic/content(mob/user)
 	. +="<b>Antag Setup:</b><br>"
 	. +="Uplink Source Priority: <a href='?src=\ref[src];add_source=1'>Add</a><br>"
-	for(var/entry in pref.uplink_sources)
+	for (var/entry in pref.uplink_sources)
 		var/singleton/uplink_source/US = entry
 		. +="[US.name] <a href='?src=\ref[src];move_source_up=\ref[US]'>Move Up</a> <a href='?src=\ref[src];move_source_down=\ref[US]'>Move Down</a> <a href='?src=\ref[src];remove_source=\ref[US]'>Remove</a><br>"
 		if (US.desc)

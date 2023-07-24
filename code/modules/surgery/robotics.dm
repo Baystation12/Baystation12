@@ -371,7 +371,7 @@
 /singleton/surgery_step/robotics/fix_organ_robotic/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
 	if (affected)
-		for(var/obj/item/organ/internal/I in affected.internal_organs)
+		for (var/obj/item/organ/internal/I in affected.internal_organs)
 			if (BP_IS_ROBOTIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0)
 				if (I.surface_accessible)
 					return affected
@@ -380,7 +380,7 @@
 
 /singleton/surgery_step/robotics/fix_organ_robotic/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	for(var/obj/item/organ/I in affected.internal_organs)
+	for (var/obj/item/organ/I in affected.internal_organs)
 		if (I && I.damage > 0)
 			if (BP_IS_ROBOTIC(I))
 				user.visible_message("[user] starts mending the damage to [target]'s [I.name]'s mechanisms.", \
@@ -389,7 +389,7 @@
 
 /singleton/surgery_step/robotics/fix_organ_robotic/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	for(var/obj/item/organ/I in affected.internal_organs)
+	for (var/obj/item/organ/I in affected.internal_organs)
 		if (I && I.damage > 0)
 			if (BP_IS_ROBOTIC(I))
 				user.visible_message(SPAN_NOTICE("[user] repairs [target]'s [I.name] with [tool]."), \
@@ -402,7 +402,7 @@
 	SPAN_WARNING("Your hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with \the [tool]!"))
 	target.adjustToxLoss(5)
 	affected.createwound(INJURY_TYPE_CUT, 5)
-	for(var/internal in affected.internal_organs)
+	for (var/internal in affected.internal_organs)
 		var/obj/item/organ/internal/I = internal
 		if (I)
 			I.take_internal_damage(rand(3,5))
@@ -421,7 +421,7 @@
 
 /singleton/surgery_step/robotics/detatch_organ_robotic/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/list/attached_organs
-	for(var/organ in target.internal_organs_by_name)
+	for (var/organ in target.internal_organs_by_name)
 		var/obj/item/organ/I = target.internal_organs_by_name[organ]
 		if (I && !(I.status & ORGAN_CUT_AWAY) && !BP_IS_CRYSTAL(I) && I.parent_organ == target_zone)
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)

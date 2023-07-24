@@ -3,7 +3,7 @@ if (!singletons_by_name) \
 {\
 	singletons_by_name = list();\
 	var/singletons_by_type = GET_SINGLETON_SUBTYPE_MAP(singleton_prototype);\
-	for(var/singleton_type in singletons_by_type) \
+	for (var/singleton_type in singletons_by_type) \
 	{\
 		var##singleton_prototype/singleton_instance = singletons_by_type[singleton_type];\
 		ADD_SORTED(singletons_by_name, singleton_instance.name, /proc/cmp_text_asc);\

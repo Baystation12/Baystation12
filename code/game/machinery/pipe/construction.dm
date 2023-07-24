@@ -141,7 +141,7 @@ Buildable meters
 	var/obj/machinery/atmospherics/fake_machine = constructed_path
 	var/pipe_dir = base_pipe_initialize_directions(dir, initial(fake_machine.connect_dir_type))
 
-	for(var/obj/machinery/atmospherics/M in loc)
+	for (var/obj/machinery/atmospherics/M in loc)
 		if ((M.initialize_directions & pipe_dir) && M.check_connect_types_construction(M,src))	// matches at least one direction on either type of pipe & same connection type
 			to_chat(user, SPAN_WARNING("There is already a pipe of the same type at this location."))
 			return 1

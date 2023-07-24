@@ -219,6 +219,6 @@
 
 /obj/item/reagent_containers/ex_act(severity)
 	if (reagents)
-		for(var/datum/reagent/R in reagents.reagent_list)
+		for (var/datum/reagent/R in reagents.reagent_list)
 			R.ex_act(src, severity)
 	..()

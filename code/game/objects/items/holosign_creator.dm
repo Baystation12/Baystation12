@@ -16,7 +16,7 @@
 	var/holocreator_busy = FALSE //to prevent placing multiple holo barriers at once
 
 /obj/item/holosign_creator/Destroy()
-	for(var/sign in signs)
+	for (var/sign in signs)
 		qdel(sign)
 	signs.Cut()
 	. = ..()
@@ -57,6 +57,6 @@
 
 /obj/item/holosign_creator/attack_self(mob/user)
 	if (length(signs))
-		for(var/H in signs)
+		for (var/H in signs)
 			qdel(H)
 		to_chat(user, SPAN_NOTICE("You clear all active holograms."))

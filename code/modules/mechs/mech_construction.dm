@@ -2,7 +2,7 @@
 
 	playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 	var/obj/structure/heavy_vehicle_frame/frame = new(get_turf(src))
-	for(var/hardpoint in hardpoints)
+	for (var/hardpoint in hardpoints)
 		remove_system(hardpoint, force = 1)
 	hardpoints.Cut()
 
@@ -35,7 +35,7 @@
 /mob/living/exosuit/proc/forget_module(module_to_forget)
 	//Realistically a module disappearing without being uninstalled is wrong and a bug or adminbus
 	var/target = null
-	for(var/hardpoint in hardpoints)
+	for (var/hardpoint in hardpoints)
 		if (hardpoints[hardpoint]== module_to_forget)
 			target = hardpoint
 			break
@@ -54,7 +54,7 @@
 	refresh_hud()
 	queue_icon_update()
 
-	for(var/thing in pilots)
+	for (var/thing in pilots)
 		var/mob/pilot = thing
 		if (pilot && pilot.client)
 			pilot.client.screen -= module_to_forget
@@ -71,7 +71,7 @@
 			if (!head || !head.software)
 				return FALSE
 			var/found
-			for(var/software in ME.restricted_software)
+			for (var/software in ME.restricted_software)
 				if (software in head.software.installed_software)
 					found = TRUE
 					break
@@ -148,7 +148,7 @@
 	var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
 	H.holding = null
 
-	for(var/thing in pilots)
+	for (var/thing in pilots)
 		var/mob/pilot = thing
 		if (pilot && pilot.client)
 			pilot.client.screen -= system

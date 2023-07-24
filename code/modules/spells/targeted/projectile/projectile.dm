@@ -16,7 +16,7 @@ If the spell_projectile is seeking, it will update its target every process and 
 	var/cast_prox_range = 1
 
 /spell/targeted/projectile/cast(list/targets, mob/user = usr)
-	for(var/atom/target in targets)
+	for (var/atom/target in targets)
 		var/obj/item/projectile/projectile = new proj_type(user.loc, user.dir)
 
 		if (!projectile)
@@ -39,7 +39,7 @@ If the spell_projectile is seeking, it will update its target every process and 
 
 /spell/targeted/projectile/proc/choose_prox_targets(mob/user = usr, atom/movable/spell_holder)
 	var/list/targets = list()
-	for(var/mob/living/M in range(spell_holder, cast_prox_range))
+	for (var/mob/living/M in range(spell_holder, cast_prox_range))
 		if (M == user && !(spell_flags & INCLUDEUSER))
 			continue
 		targets += M

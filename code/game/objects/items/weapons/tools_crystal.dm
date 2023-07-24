@@ -27,14 +27,14 @@
 	. = 0
 	var/mob/living/carbon/human/adherent = loc
 	if (istype(adherent))
-		for(var/obj/item/organ/internal/cell/cell in adherent.internal_organs)
+		for (var/obj/item/organ/internal/cell/cell in adherent.internal_organs)
 			if (!cell.is_broken())
 				. += cell.get_charge()
 
 /obj/item/weldingtool/electric/crystal/spend_charge(amount)
 	var/mob/living/carbon/human/adherent = loc
 	if (istype(adherent))
-		for(var/obj/item/organ/internal/cell/cell in adherent.internal_organs)
+		for (var/obj/item/organ/internal/cell/cell in adherent.internal_organs)
 			if (!cell.is_broken() && cell.get_charge() >= amount)
 				var/spending = min(amount, cell.get_charge())
 				cell.use(spending)

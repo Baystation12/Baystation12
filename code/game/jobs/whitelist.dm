@@ -91,7 +91,7 @@ var/global/list/alien_whitelist = list()
 			return 1
 	else
 		//Config File Whitelist
-		for(var/s in alien_whitelist)
+		for (var/s in alien_whitelist)
 			if (findtext(s,"[ckey] - [item]"))
 				return 1
 			if (findtext(s,"[ckey] - All"))

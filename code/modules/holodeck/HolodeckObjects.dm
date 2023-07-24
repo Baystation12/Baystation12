@@ -376,7 +376,7 @@
 
 	var/numbuttons = 0
 	var/numready = 0
-	for(var/obj/machinery/readybutton/button in currentarea)
+	for (var/obj/machinery/readybutton/button in currentarea)
 		numbuttons++
 		if (button.ready)
 			numready++
@@ -395,10 +395,10 @@
 
 	eventstarted = 1
 
-	for(var/obj/structure/window/reinforced/holowindow/disappearing/W in currentarea)
+	for (var/obj/structure/window/reinforced/holowindow/disappearing/W in currentarea)
 		qdel(W)
 
-	for(var/mob/M in currentarea)
+	for (var/mob/M in currentarea)
 		to_chat(M, "FIGHT!")
 
 //Holocarp

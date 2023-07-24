@@ -3,7 +3,7 @@
 		return FALSE
 	if (isnull(fluid_can_pass))
 		fluid_can_pass = TRUE
-		for(var/atom/movable/AM in src)
+		for (var/atom/movable/AM in src)
 			if (AM.simulated && !AM.CanFluidPass(coming_from))
 				fluid_can_pass = FALSE
 				break
@@ -25,7 +25,7 @@
 /turf/proc/make_flooded()
 	if (!flooded)
 		flooded = TRUE
-		for(var/obj/effect/fluid/F in src)
+		for (var/obj/effect/fluid/F in src)
 			qdel(F)
 		update_icon()
 		fluid_update()
@@ -63,7 +63,7 @@
 
 	// Wake up our neighbors.
 	if (!ignore_neighbors)
-		for(var/checkdir in GLOB.cardinal)
+		for (var/checkdir in GLOB.cardinal)
 			var/turf/T = get_step(src, checkdir)
 			if (T) T.fluid_update(1)
 
@@ -76,5 +76,5 @@
 			ADD_ACTIVE_FLUID_SOURCE(src)
 	else
 		REMOVE_ACTIVE_FLUID_SOURCE(src)
-		for(var/obj/effect/fluid/F in src)
+		for (var/obj/effect/fluid/F in src)
 			ADD_ACTIVE_FLUID(F)

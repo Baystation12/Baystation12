@@ -3,7 +3,7 @@
 	desc = "Recipes for a variety of reagents."
 
 /datum/codex_category/recipes/Initialize()
-	for(var/datum/microwave_recipe/recipe in GLOB.microwave_recipes)
+	for (var/datum/microwave_recipe/recipe in GLOB.microwave_recipes)
 		if (recipe.hidden_from_codex || !recipe.result_path)
 			continue
 

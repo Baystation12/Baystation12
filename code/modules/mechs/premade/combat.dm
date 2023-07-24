@@ -33,5 +33,5 @@
 
 /mob/living/exosuit/premade/combat/military/Initialize()
 	. = ..()
-	for(var/obj/thing in list(arms,legs,head,body))
+	for (var/obj/thing in list(arms,legs,head,body))
 		thing.color = COLOR_WHITE

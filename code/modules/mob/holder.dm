@@ -25,12 +25,12 @@ var/global/list/holder_mob_icon_cache = list()
 	START_PROCESSING(SSobj, src)
 
 /obj/item/holder/proc/destroy_all()
-	for(var/atom/movable/AM in src)
+	for (var/atom/movable/AM in src)
 		qdel(AM)
 	qdel(src)
 
 /obj/item/holder/Destroy()
-	for(var/atom/movable/AM in src)
+	for (var/atom/movable/AM in src)
 		AM.forceMove(get_turf(src))
 	last_holder = null
 	STOP_PROCESSING(SSobj, src)
@@ -46,17 +46,17 @@ var/global/list/holder_mob_icon_cache = list()
 
 /obj/item/holder/proc/update_state()
 	if (last_holder != loc)
-		for(var/mob/M in contents)
+		for (var/mob/M in contents)
 			unregister_all_movement(last_holder, M)
 
 	if (istype(loc,/turf) || !(length(contents)))
-		for(var/mob/M in contents)
+		for (var/mob/M in contents)
 			var/atom/movable/mob_container = M
 			mob_container.dropInto(loc)
 			M.reset_view()
 		qdel(src)
 	else if (last_holder != loc)
-		for(var/mob/M in contents)
+		for (var/mob/M in contents)
 			register_all_movement(loc, M)
 
 	last_holder = loc
@@ -67,7 +67,7 @@ var/global/list/holder_mob_icon_cache = list()
 	return ..()
 
 /obj/item/holder/GetIdCard()
-	for(var/mob/M in contents)
+	for (var/mob/M in contents)
 		var/obj/item/I = M.GetIdCard()
 		if (I)
 			return I
@@ -81,13 +81,13 @@ var/global/list/holder_mob_icon_cache = list()
 	if (!ishuman(user))
 		return
 	var/mob/living/carbon/human/H = user
-	for(var/mob/M in contents)
+	for (var/mob/M in contents)
 		H.species.hug(H, M)
 
 /obj/item/holder/MouseDrop(atom/over_atom, atom/source_loc, atom/over_loc, source_control, over_control, list/mouse_params)
 	if (over_atom != usr)
 		return ..()
-	for(var/mob/M in contents)
+	for (var/mob/M in contents)
 		M.show_inv(usr)
 
 /obj/item/holder/attack(mob/target, mob/user)
@@ -95,7 +95,7 @@ var/global/list/holder_mob_icon_cache = list()
 	if (target == user && istype(user,/mob/living/carbon))
 		var/mob/living/carbon/M = user
 
-		for(var/mob/victim in src.contents)
+		for (var/mob/victim in src.contents)
 			M.devour(victim)
 
 		update_state()
@@ -147,7 +147,7 @@ var/global/list/holder_mob_icon_cache = list()
 	item_state = "poppy"
 
 /obj/item/holder/attackby(obj/item/W as obj, mob/user as mob)
-	for(var/mob/M in src.contents)
+	for (var/mob/M in src.contents)
 		M.attackby(W,user)
 
 //Mob procs and vars for scooping up

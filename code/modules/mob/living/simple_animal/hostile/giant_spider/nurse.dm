@@ -56,7 +56,7 @@
 		var/obj/item/organ/external/O = H.get_organ(target_zone)
 		if (O)
 			var/eggcount = 0
-			for(var/obj/effect/spider/eggcluster/E in O.implants)
+			for (var/obj/effect/spider/eggcluster/E in O.implants)
 				eggcount++
 			if (!eggcount)
 				var/eggs = new egg_type(O, src)
@@ -111,7 +111,7 @@
 	// Finally done with the checks.
 	var/obj/effect/spider/cocoon/C = new(AM.loc)
 	var/large_cocoon = FALSE
-	for(var/mob/living/L in C.contents)
+	for (var/mob/living/L in C.contents)
 		if (istype(L, /mob/living/simple_animal/hostile/giant_spider)) // Cannibalism is bad.
 			continue
 		fed++
@@ -224,7 +224,7 @@
 
 	var/static/alternative_targets = typecacheof(list(/obj/structure))
 
-	for(var/AT in typecache_filter_list(range(vision_range, holder), alternative_targets))
+	for (var/AT in typecache_filter_list(range(vision_range, holder), alternative_targets))
 		var/obj/O = AT
 		if (can_see(holder, O, vision_range) && !O.anchored)
 			. += O
@@ -233,7 +233,7 @@
 /datum/ai_holder/simple_animal/melee/nurse_spider/pick_target(list/targets)
 	var/mobs_only = locate(/mob/living) in targets // If a mob is in the list of targets, then ignore objects.
 	if (mobs_only)
-		for(var/A in targets)
+		for (var/A in targets)
 			if (!isliving(A))
 				targets -= A
 

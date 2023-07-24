@@ -24,14 +24,14 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 
 /datum/antagonist/vox/add_antagonist(datum/mind/player, ignore_role, do_not_equip, move_to_spawn, do_not_announce, preserve_appearance)
 	if (pending_item_spawn)
-		for(var/obj/effect/voxartifactspawner/S as anything in GLOB.vox_artifact_spawners)
+		for (var/obj/effect/voxartifactspawner/S as anything in GLOB.vox_artifact_spawners)
 			S.spawn_artifact()
 		pending_item_spawn = FALSE
 	..()
 
 /datum/antagonist/vox/build_candidate_list(datum/game_mode/mode, ghosts_only)
 	candidates = list()
-	for(var/datum/mind/player in mode.get_players_for_role(id))
+	for (var/datum/mind/player in mode.get_players_for_role(id))
 		if (ghosts_only && !(isghostmind(player) || isnewplayer(player.current)))
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: Only ghosts may join as this role!")
 			continue
@@ -58,7 +58,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 /datum/antagonist/vox/get_potential_candidates(datum/game_mode/mode, ghosts_only)
 	var/candidates = list()
 
-	for(var/datum/mind/player in mode.get_players_for_role(id))
+	for (var/datum/mind/player in mode.get_players_for_role(id))
 		if (ghosts_only && !(isghostmind(player) || isnewplayer(player.current)))
 		else if (config.use_age_restriction_for_antags && player.current.client.player_age < minimum_player_age)
 		else if (player.special_role)
@@ -126,7 +126,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 					working = FALSE
 					on_update_icon()
 					favors -= rewards[choice][1]
-					for(var/I in rewards[choice])
+					for (var/I in rewards[choice])
 						if (!isnum(I))
 							new I(get_turf(src))
 				else
@@ -297,7 +297,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 			if (choice)
 				if ((rewards[choice][1] <= points) && choice)
 					points -= rewards[choice][1]
-					for(var/I in rewards[choice])
+					for (var/I in rewards[choice])
 						if (!isnum(I))
 							new I(get_turf(src))
 				else

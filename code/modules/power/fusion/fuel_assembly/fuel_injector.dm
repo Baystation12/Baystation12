@@ -110,7 +110,7 @@
 		return
 	if (cur_assembly)
 		var/amount_left = 0
-		for(var/reagent in cur_assembly.rod_quantities)
+		for (var/reagent in cur_assembly.rod_quantities)
 			if (cur_assembly.rod_quantities[reagent] > 0)
 				var/amount = cur_assembly.rod_quantities[reagent] * fuel_usage * injection_rate
 				if (amount < 1)

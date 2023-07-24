@@ -12,7 +12,7 @@
 		if (!lan || !fuel_injectors)
 			return TOPIC_NOACTION
 
-		for(var/obj/machinery/fusion_fuel_injector/F in fuel_injectors)
+		for (var/obj/machinery/fusion_fuel_injector/F in fuel_injectors)
 			if (F.injecting)
 				F.StopInjecting()
 			else
@@ -28,7 +28,7 @@
 			return TOPIC_NOACTION
 		if (!CanInteract(user,state))
 			return TOPIC_NOACTION
-		for(var/obj/machinery/fusion_fuel_injector/F as anything in fuel_injectors)
+		for (var/obj/machinery/fusion_fuel_injector/F as anything in fuel_injectors)
 			F.injection_rate = new_injection_clamped
 		return TOPIC_REFRESH
 
@@ -61,7 +61,7 @@
 	var/list/injectors = list()
 	if (lan)
 		var/list/fuel_injectors = lan.get_devices(/obj/machinery/fusion_fuel_injector)
-		for(var/i = 1 to LAZYLEN(fuel_injectors))
+		for (var/i = 1 to LAZYLEN(fuel_injectors))
 			var/list/injector = list()
 			var/obj/machinery/fusion_fuel_injector/I = fuel_injectors[i]
 			injector["id"] =       "#[i]"

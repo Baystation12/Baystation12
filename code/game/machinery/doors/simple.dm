@@ -76,7 +76,7 @@
 		return
 
 	// If the door is blocked, don't close
-	for(var/turf/A in locs)
+	for (var/turf/A in locs)
 		var/turf/T = A
 		var/obstruction = T.get_obstruction()
 		if (obstruction)

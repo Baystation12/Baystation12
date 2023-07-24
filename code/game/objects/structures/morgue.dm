@@ -39,21 +39,21 @@
 /obj/structure/morgue/ex_act(severity)
 	switch(severity)
 		if (EX_ACT_DEVASTATING)
-			for(var/atom/movable/A as mob|obj in src)
+			for (var/atom/movable/A as mob|obj in src)
 				A.forceMove(src.loc)
 				ex_act(severity)
 			qdel(src)
 			return
 		if (EX_ACT_HEAVY)
 			if (prob(50))
-				for(var/atom/movable/A as mob|obj in src)
+				for (var/atom/movable/A as mob|obj in src)
 					A.forceMove(src.loc)
 					ex_act(severity)
 				qdel(src)
 				return
 		if (EX_ACT_LIGHT)
 			if (prob(5))
-				for(var/atom/movable/A as mob|obj in src)
+				for (var/atom/movable/A as mob|obj in src)
 					A.forceMove(src.loc)
 					ex_act(severity)
 				qdel(src)
@@ -62,7 +62,7 @@
 
 /obj/structure/morgue/attack_hand(mob/user as mob)
 	if (src.connected)
-		for(var/atom/movable/A as mob|obj in src.connected.loc)
+		for (var/atom/movable/A as mob|obj in src.connected.loc)
 			if (!( A.anchored ))
 				A.forceMove(src)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
@@ -76,7 +76,7 @@
 		if (T.contents.Find(src.connected))
 			src.connected.connected = src
 			src.icon_state = "morgue0"
-			for(var/atom/movable/A as mob|obj in src)
+			for (var/atom/movable/A as mob|obj in src)
 				A.forceMove(src.connected.loc)
 			src.connected.icon_state = "morguet"
 			src.connected.set_dir(src.dir)
@@ -126,7 +126,7 @@
 	if (T.contents.Find(src.connected))
 		src.connected.connected = src
 		src.icon_state = "morgue0"
-		for(var/atom/movable/A as mob|obj in src)
+		for (var/atom/movable/A as mob|obj in src)
 			A.forceMove(src.connected.loc)
 		src.connected.icon_state = "morguet"
 	else
@@ -157,7 +157,7 @@
 
 /obj/structure/m_tray/attack_hand(mob/user as mob)
 	if (src.connected)
-		for(var/atom/movable/A as mob|obj in src.loc)
+		for (var/atom/movable/A as mob|obj in src.loc)
 			if (!( A.anchored ))
 				A.forceMove(src.connected)
 		src.connected.connected = null
@@ -177,7 +177,7 @@
 		return
 	O.forceMove(src.loc)
 	if (user != O)
-		for(var/mob/B in viewers(user, 3))
+		for (var/mob/B in viewers(user, 3))
 			if ((B.client && !( B.blinded )))
 				to_chat(B, SPAN_WARNING("\The [user] stuffs [O] into [src]!"))
 	return
@@ -219,21 +219,21 @@
 /obj/structure/crematorium/ex_act(severity)
 	switch(severity)
 		if (EX_ACT_DEVASTATING)
-			for(var/atom/movable/A as mob|obj in src)
+			for (var/atom/movable/A as mob|obj in src)
 				A.forceMove(src.loc)
 				ex_act(severity)
 			qdel(src)
 			return
 		if (EX_ACT_HEAVY)
 			if (prob(50))
-				for(var/atom/movable/A as mob|obj in src)
+				for (var/atom/movable/A as mob|obj in src)
 					A.forceMove(src.loc)
 					ex_act(severity)
 				qdel(src)
 				return
 		if (EX_ACT_LIGHT)
 			if (prob(5))
-				for(var/atom/movable/A as mob|obj in src)
+				for (var/atom/movable/A as mob|obj in src)
 					A.forceMove(src.loc)
 					ex_act(severity)
 				qdel(src)
@@ -245,7 +245,7 @@
 		to_chat(usr, SPAN_WARNING("It's locked."))
 		return
 	if (src.connected && (src.locked == FALSE))
-		for(var/atom/movable/A as mob|obj in src.connected.loc)
+		for (var/atom/movable/A as mob|obj in src.connected.loc)
 			if (!( A.anchored ))
 				A.forceMove(src)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
@@ -259,7 +259,7 @@
 		if (T.contents.Find(src.connected))
 			src.connected.connected = src
 			src.icon_state = "crema0"
-			for(var/atom/movable/A as mob|obj in src)
+			for (var/atom/movable/A as mob|obj in src)
 				A.forceMove(src.connected.loc)
 			src.connected.icon_state = "cremat"
 		else
@@ -302,7 +302,7 @@
 	if (T.contents.Find(src.connected))
 		src.connected.connected = src
 		src.icon_state = "crema0"
-		for(var/atom/movable/A as mob|obj in src)
+		for (var/atom/movable/A as mob|obj in src)
 			A.forceMove(src.connected.loc)
 	else
 		qdel(src.connected)
@@ -318,7 +318,7 @@
 		return
 
 	else
-		if (length(search_contents_for(/obj/item/disk/nuclear)))
+		if (length(search_contents_for (/obj/item/disk/nuclear)))
 			to_chat(loc, "The button's status indicator flashes yellow, indicating that something important is inside the crematorium, and must be removed.")
 			return
 		src.audible_message(SPAN_WARNING("You hear a roar as the [src] activates."), 1)
@@ -327,11 +327,11 @@
 		locked = 1
 		update()
 
-		for(var/mob/living/M in contents)
+		for (var/mob/living/M in contents)
 			admin_attack_log(A, M, "Began cremating their victim.", "Has begun being cremated.", "began cremating")
 			if (iscarbon(M))
 				var/mob/living/carbon/C = M
-				for(var/I, I < 60, I++)
+				for (var/I, I < 60, I++)
 					C.bodytemperature += 50
 					C.adjustFireLoss(20)
 					C.adjustBrainLoss(5)
@@ -383,7 +383,7 @@
 				M.audible_message("[M]'s screams cease, as does any movement within the [src]. All that remains is a dull, empty silence.")
 				M.dust()
 
-		for(var/obj/O in contents) //obj instead of obj/item so that bodybags and ashes get destroyed. We dont want tons and tons of ash piling up
+		for (var/obj/O in contents) //obj instead of obj/item so that bodybags and ashes get destroyed. We dont want tons and tons of ash piling up
 			qdel(O)
 
 		new /obj/effect/decal/cleanable/ash(src)
@@ -416,7 +416,7 @@
 
 /obj/structure/c_tray/attack_hand(mob/user as mob)
 	if (src.connected)
-		for(var/atom/movable/A as mob|obj in src.loc)
+		for (var/atom/movable/A as mob|obj in src.loc)
 			if (!( A.anchored ))
 				A.forceMove(src.connected)
 		src.connected.connected = null
@@ -452,7 +452,7 @@
 /obj/machinery/button/crematorium/activate(mob/user)
 	if (operating)
 		return
-	for(var/obj/structure/crematorium/C in range())
+	for (var/obj/structure/crematorium/C in range())
 		if (C.id == id_tag)
 			if (!C.cremating)
 				C.cremate(user)

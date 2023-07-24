@@ -82,7 +82,7 @@
 			stat("Players: [totalPlayers]", "Players Ready: [totalPlayersReady]")
 			totalPlayers = 0
 			totalPlayersReady = 0
-			for(var/mob/new_player/player in GLOB.player_list)
+			for (var/mob/new_player/player in GLOB.player_list)
 				var/highjob
 				if (player.client)
 					var/show_ready = player.client.get_preference_value(/datum/client_preference/show_ready) == GLOB.PREF_SHOW
@@ -317,12 +317,12 @@
 	// TORCH JOBS
 	var/list/job_summaries
 	var/list/hidden_reasons = list()
-	for(var/datum/job/job in SSjobs.primary_job_datums)
+	for (var/datum/job/job in SSjobs.primary_job_datums)
 		var/summary = job.get_join_link(client, "byond://?src=\ref[src];SelectedJob=[job.title]", show_invalid_jobs)
 		if (summary && summary != "")
 			LAZYADD(job_summaries, summary)
 		else
-			for(var/raisin in job.get_unavailable_reasons(client))
+			for (var/raisin in job.get_unavailable_reasons(client))
 				hidden_reasons[raisin] = TRUE
 
 	if (LAZYLEN(job_summaries))
@@ -332,18 +332,18 @@
 	// END TORCH JOBS
 
 	// SUBMAP JOBS
-	for(var/thing in SSmapping.submaps)
+	for (var/thing in SSmapping.submaps)
 		var/datum/submap/submap = thing
 		if (submap && submap.available())
 			dat += "<tr><td colspan = 3><b>[submap.name] ([submap.archetype.descriptor]):</b></td></tr>"
 			job_summaries = list()
-			for(var/otherthing in submap.jobs)
+			for (var/otherthing in submap.jobs)
 				var/datum/job/job = submap.jobs[otherthing]
 				var/summary = job.get_join_link(client, "byond://?src=\ref[submap];joining=\ref[src];join_as=[otherthing]", show_invalid_jobs)
 				if (summary && summary != "")
 					LAZYADD(job_summaries, summary)
 				else
-					for(var/raisin in job.get_unavailable_reasons(client))
+					for (var/raisin in job.get_unavailable_reasons(client))
 						hidden_reasons[raisin] = TRUE
 
 			if (LAZYLEN(job_summaries))
@@ -355,7 +355,7 @@
 	dat += "</table></center>"
 	if (LAZYLEN(hidden_reasons))
 		var/list/additional_dat = list("<br><b>Some roles have been hidden from this list for the following reasons:</b><br>")
-		for(var/raisin in hidden_reasons)
+		for (var/raisin in hidden_reasons)
 			additional_dat += "[raisin]<br>"
 		additional_dat += "<br>"
 		dat = additional_dat + dat

@@ -79,7 +79,7 @@
 	..()
 	if (software)
 		to_chat(user, SPAN_NOTICE(" Installed Software"))
-		for(var/exosystem_software in software.installed_software)
+		for (var/exosystem_software in software.installed_software)
 			to_chat(user, SPAN_NOTICE(" - <b>[capitalize(exosystem_software)]</b>"))
 	else
 		to_chat(user, SPAN_WARNING(" Control Module Missing or Non-functional."))
@@ -136,7 +136,7 @@
 
 /obj/item/mech_component/control_module/proc/update_software()
 	installed_software = list()
-	for(var/obj/item/circuitboard/exosystem/program in contents)
+	for (var/obj/item/circuitboard/exosystem/program in contents)
 		installed_software |= program.contains_software
 
 

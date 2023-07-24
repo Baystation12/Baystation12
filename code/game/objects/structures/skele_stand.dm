@@ -40,7 +40,7 @@
 	. = ..()
 	if (length(swag))
 		var/list/swagnames = list()
-		for(var/slot in swag)
+		for (var/slot in swag)
 			var/obj/item/clothing/C = swag[slot]
 			if (C)
 				swagnames += C.get_examine_line()
@@ -101,14 +101,14 @@
 
 
 /obj/structure/skele_stand/Destroy()
-	for(var/slot in swag)
+	for (var/slot in swag)
 		var/obj/item/I = swag[slot]
 		I.forceMove(loc)
 	. = ..()
 
 /obj/structure/skele_stand/on_update_icon()
 	overlays.Cut()
-	for(var/slot in swag)
+	for (var/slot in swag)
 		var/obj/item/I = swag[slot]
 		overlays += I.get_mob_overlay(null, slot)
 

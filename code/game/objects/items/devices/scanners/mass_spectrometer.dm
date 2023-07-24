@@ -52,7 +52,7 @@
 		return SPAN_WARNING("No sample to scan.")
 	var/list/blood_traces = list()
 	var/list/blood_doses = list()
-	for(var/datum/reagent/R in reagents.reagent_list)
+	for (var/datum/reagent/R in reagents.reagent_list)
 		if (length(reagents.reagent_list) == 1)
 			var/datum/reagent/random/random = R
 			if (istype(random))
@@ -66,7 +66,7 @@
 			break
 
 	var/list/dat = list("Trace Chemicals Found: ")
-	for(var/T in blood_traces)
+	for (var/T in blood_traces)
 		var/datum/reagent/R = T
 		if (details)
 			dat += "[initial(R.name)] ([blood_traces[T]] units) "
@@ -74,7 +74,7 @@
 			dat += "[initial(R.name)] "
 	if (details)
 		dat += "Metabolism Products of Chemicals Found:"
-		for(var/T in blood_doses)
+		for (var/T in blood_doses)
 			var/datum/reagent/R = T
 			dat += "[initial(R.name)] ([blood_doses[T]] units) "
 

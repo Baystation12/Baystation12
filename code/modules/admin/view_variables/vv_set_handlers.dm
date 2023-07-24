@@ -12,7 +12,7 @@
 		log_error("Did not find the variable '[variable]' for the instance [log_info_line(O)].")
 		return FALSE
 	if (predicates)
-		for(var/predicate in predicates)
+		for (var/predicate in predicates)
 			if (!call(predicate)(var_value, client))
 				return FALSE
 	return TRUE

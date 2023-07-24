@@ -97,7 +97,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 	var/handle_type = "Holocomms"
 	var/ai_exists = FALSE
 
-	for(var/mob/living/silicon/ai/AI in GLOB.alive_mobs)
+	for (var/mob/living/silicon/ai/AI in GLOB.alive_mobs)
 		if (!AI.client)	continue
 		ai_exists = TRUE
 		break
@@ -111,7 +111,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 				last_request = world.time
 				to_chat(user, SPAN_NOTICE("You request an AI's presence."))
 				var/area/area = get_area(src)
-				for(var/mob/living/silicon/ai/AI in GLOB.alive_mobs)
+				for (var/mob/living/silicon/ai/AI in GLOB.alive_mobs)
 					if (!AI.client)	continue
 					if (holopadType != HOLOPAD_LONG_RANGE && !AreConnectedZLevels(AI.z, src.z))
 						continue
@@ -128,11 +128,11 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 				var/zlevels = GetConnectedZlevels(z)
 				var/zlevels_long = list()
 				if (GLOB.using_map.use_overmap && holopadType == HOLOPAD_LONG_RANGE)
-					for(var/zlevel in map_sectors)
+					for (var/zlevel in map_sectors)
 						var/obj/effect/overmap/visitable/O = map_sectors["[zlevel]"]
 						if (!isnull(O))
 							zlevels_long |= O.map_z
-				for(var/obj/machinery/hologram/holopad/H in SSmachines.machinery)
+				for (var/obj/machinery/hologram/holopad/H in SSmachines.machinery)
 					if (H.operable())
 						if (H.z in zlevels)
 							holopadlist["[H.loc.loc.name]"] = H	//Define a list and fill it with the area of every holopad in the world
@@ -266,7 +266,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 // Note that speaking may be null here, presumably due to echo effects/non-mob transmission.
 /obj/machinery/hologram/holopad/hear_talk(mob/living/M, text, verb, datum/language/speaking)
 	if (M)
-		for(var/mob/living/silicon/ai/master in masters)
+		for (var/mob/living/silicon/ai/master in masters)
 			var/ai_text = text
 			if (!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.
 				if (speaking)
@@ -306,12 +306,12 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 
 /obj/machinery/hologram/holopad/see_emote(mob/living/M, text)
 	if (M)
-		for(var/mob/living/silicon/ai/master in masters)
+		for (var/mob/living/silicon/ai/master in masters)
 			//var/name_used = M.GetVoice()
 			var/rendered = "<i>[SPAN_CLASS("game say", "Holopad received, [SPAN_CLASS("message", "[text]")]")]</i>"
 			//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
 			master.show_message(rendered, 2)
-		for(var/mob/living/carbon/master in masters)
+		for (var/mob/living/carbon/master in masters)
 			//var/name_used = M.GetVoice()
 			var/rendered = "<i>[SPAN_CLASS("game say", "Holopad received, [SPAN_CLASS("message", "[text]")]")]</i>"
 			//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
@@ -320,16 +320,16 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			targetpad.visible_message("<i>[SPAN_CLASS("message", "[text]")]</i>")
 
 /obj/machinery/hologram/holopad/show_message(msg, type, alt, alt_type)
-	for(var/mob/living/silicon/ai/master in masters)
+	for (var/mob/living/silicon/ai/master in masters)
 		var/rendered = "<i>[SPAN_CLASS("game say", "The holographic image of [SPAN_CLASS("message", "[msg]")]")]</i>"
 		master.show_message(rendered, type)
 	if (findtext(msg, "Holopad received,"))
 		return
-	for(var/mob/living/carbon/master in masters)
+	for (var/mob/living/carbon/master in masters)
 		var/rendered = "<i>[SPAN_CLASS("game say", "The holographic image of [SPAN_CLASS("message", "[msg]")]")]</i>"
 		master.show_message(rendered, type)
 	if (targetpad)
-		for(var/mob/living/carbon/master in view(targetpad))
+		for (var/mob/living/carbon/master in view(targetpad))
 			var/rendered = "<i>[SPAN_CLASS("game say", "The holographic image of [SPAN_CLASS("message", "[msg]")]")]</i>"
 			master.show_message(rendered, type)
 

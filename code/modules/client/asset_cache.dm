@@ -88,7 +88,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	if (length(unreceived) >= ASSET_CACHE_TELL_CLIENT_AMOUNT)
 		to_chat(client, "Sending Resources...")
 	var/singleton/asset_cache/asset_cache = GET_SINGLETON(/singleton/asset_cache)
-	for(var/asset in unreceived)
+	for (var/asset in unreceived)
 		if (asset in asset_cache.cache)
 			send_rsc(client, asset_cache.cache[asset], asset)
 
@@ -119,7 +119,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 //This proc will download the files without clogging up the browse() queue, used for passively sending files on connection start.
 //The proc calls procs that sleep for long times.
 /proc/getFilesSlow(client/client, list/files, register_asset = TRUE)
-	for(var/file in files)
+	for (var/file in files)
 		if (!client)
 			break
 		if (register_asset)
@@ -166,7 +166,7 @@ var/global/list/asset_datums = list()
 	var/verify = FALSE
 
 /datum/asset/simple/register()
-	for(var/asset_name in assets)
+	for (var/asset_name in assets)
 		register_asset(asset_name, assets[asset_name])
 
 /datum/asset/simple/send(client)
@@ -177,11 +177,11 @@ var/global/list/asset_datums = list()
 	var/list/children
 
 /datum/asset/group/register()
-	for(var/type in children)
+	for (var/type in children)
 		get_asset_datum(type)
 
 /datum/asset/group/send(client/C)
-	for(var/type in children)
+	for (var/type in children)
 		var/datum/asset/A = get_asset_datum(type)
 		A.send(C)
 
@@ -204,24 +204,24 @@ var/global/list/asset_datums = list()
 	// Crawl the directories to find files.
 	for (var/path in common_dirs)
 		var/list/filenames = flist(path)
-		for(var/filename in filenames)
+		for (var/filename in filenames)
 			if (copytext(filename, -1) != "/") // Ignore directories.
 				if (fexists(path + filename))
 					common[filename] = fcopy_rsc(path + filename)
 					register_asset(filename, common[filename])
 	for (var/path in uncommon_dirs)
 		var/list/filenames = flist(path)
-		for(var/filename in filenames)
+		for (var/filename in filenames)
 			if (copytext(filename, -1) != "/") // Ignore directories.
 				if (fexists(path + filename))
 					register_asset(filename, fcopy_rsc(path + filename))
 
 	var/list/mapnames = list()
-	for(var/z in GLOB.using_map.map_levels)
+	for (var/z in GLOB.using_map.map_levels)
 		mapnames += map_image_file_name(z)
 
 	var/list/filenames = flist(MAP_IMAGE_PATH)
-	for(var/filename in filenames)
+	for (var/filename in filenames)
 		if (copytext(filename, -1) != "/") // Ignore directories.
 			var/file_path = MAP_IMAGE_PATH + filename
 			if ((filename in mapnames) && fexists(file_path))
@@ -275,11 +275,11 @@ var/global/list/asset_datums = list()
 	var/list/cache = list()
 
 /singleton/asset_cache/proc/load()
-	for(var/type in typesof(/datum/asset) - list(/datum/asset, /datum/asset/simple))
+	for (var/type in typesof(/datum/asset) - list(/datum/asset, /datum/asset/simple))
 		var/datum/asset/A = new type()
 		A.register()
 
-	for(var/client/C in GLOB.clients) // This is also called in client/New, but as we haven't initialized the cache until now, and it's possible the client is already connected, we risk doing it twice.
+	for (var/client/C in GLOB.clients) // This is also called in client/New, but as we haven't initialized the cache until now, and it's possible the client is already connected, we risk doing it twice.
 		// Doing this to a client too soon after they've connected can cause issues, also the proc we call sleeps.
 		spawn(10)
 			getFilesSlow(C, cache, FALSE)

@@ -182,8 +182,8 @@
 
 	// Magical chemical filtration system, do not question it.
 	var/total_transferred = 0
-	for(var/datum/reagent/R in input_item.reagents.reagent_list)
-		for(var/chargetype in charges)
+	for (var/datum/reagent/R in input_item.reagents.reagent_list)
+		for (var/chargetype in charges)
 			var/datum/rig_charge/charge = charges[chargetype]
 			if (charge.product_type == R.type)
 

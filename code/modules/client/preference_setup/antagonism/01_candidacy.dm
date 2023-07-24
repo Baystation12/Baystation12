@@ -23,10 +23,10 @@
 	var/special_roles = valid_special_roles()
 	var/old_be_special_role = pref.be_special_role.Copy()
 	var/old_may_be_special_role = pref.may_be_special_role.Copy()
-	for(var/role in old_be_special_role)
+	for (var/role in old_be_special_role)
 		if (!(role in special_roles))
 			pref.be_special_role -= role
-	for(var/role in old_may_be_special_role)
+	for (var/role in old_may_be_special_role)
 		if (!(role in special_roles))
 			pref.may_be_special_role -= role
 
@@ -35,7 +35,7 @@
 	. += "<b>Special Role Availability:</b><br>"
 	. += "<table>"
 	var/list/all_antag_types = GLOB.all_antag_types_
-	for(var/antag_type in all_antag_types)
+	for (var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		. += "<tr><td>[antag.role_text]: </td><td>"
 		if (jobban_isbanned(preference_mob(), antag.id) || (antag.id == MODE_MALFUNCTION && jobban_isbanned(preference_mob(), "AI")))
@@ -82,7 +82,7 @@
 		var/selection = text2num(href_list["select_all"])
 		var/list/roles = valid_special_roles(FALSE)
 
-		for(var/id in roles)
+		for (var/id in roles)
 			switch(selection)
 				if (0)
 					pref.be_special_role -= id
@@ -100,7 +100,7 @@
 /datum/category_item/player_setup_item/antagonism/candidacy/proc/valid_special_roles(include_bans = TRUE)
 	var/list/private_valid_special_roles = list()
 
-	for(var/antag_type in GLOB.all_antag_types_)
+	for (var/antag_type in GLOB.all_antag_types_)
 		if (!include_bans)
 			if (jobban_isbanned(preference_mob(), antag_type))
 				continue

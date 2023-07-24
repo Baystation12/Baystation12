@@ -28,7 +28,7 @@
 
 	log_and_message_admins("## FUSION CORE SETUP - Setup initiated by [usr].")
 
-	for(var/obj/machinery/fusion_fuel_injector/mapped/injector in SSmachines.machinery)
+	for (var/obj/machinery/fusion_fuel_injector/mapped/injector in SSmachines.machinery)
 		injector.cur_assembly = new /obj/item/fuel_assembly/deuterium(injector)
 		injector.BeginInjecting()
 
@@ -37,7 +37,7 @@
 		var/list/delayed_objects = list()
 
 		// SETUP PHASE
-		for(var/obj/effect/engine_setup/S in world)
+		for (var/obj/effect/engine_setup/S in world)
 			var/result = S.activate(0)
 			switch(result)
 				if (SETUP_OK)
@@ -55,7 +55,7 @@
 					continue
 
 		if (!errors)
-			for(var/obj/effect/engine_setup/S in delayed_objects)
+			for (var/obj/effect/engine_setup/S in delayed_objects)
 				var/result = S.activate(1)
 				switch(result)
 					if (SETUP_OK)

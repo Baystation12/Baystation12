@@ -35,7 +35,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	geneticdamage = max(0, geneticdamage-1)
 
 /datum/changeling/proc/GetDNA(dna_owner)
-	for(var/datum/absorbed_dna/DNA in absorbed_dna)
+	for (var/datum/absorbed_dna/DNA in absorbed_dna)
 		if (dna_owner == DNA.name)
 			return DNA
 
@@ -46,7 +46,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if (!changeling)
 		return
 
-	for(var/language in newDNA.languages)
+	for (var/language in newDNA.languages)
 		changeling.absorbed_languages |= language
 
 	changeling_update_languages(changeling.absorbed_languages)
@@ -66,22 +66,22 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/lesser_form = !ishuman(src)
 
 	if (!length(powerinstances))
-		for(var/P in powers)
+		for (var/P in powers)
 			powerinstances += new P()
 
 	// Code to auto-purchase free powers.
-	for(var/datum/power/changeling/P in powerinstances)
+	for (var/datum/power/changeling/P in powerinstances)
 		if (!P.genomecost) // Is it free?
 			if (!(P in mind.changeling.purchasedpowers)) // Do we not have it already?
 				mind.changeling.purchasePower(mind, P.name, 0)// Purchase it. Don't remake our verbs, we're doing it after this.
 
-	for(var/datum/power/changeling/P in mind.changeling.purchasedpowers)
+	for (var/datum/power/changeling/P in mind.changeling.purchasedpowers)
 		if (P.isVerb)
 			if (lesser_form && !P.allowduringlesserform)	continue
 			if (!(P in src.verbs))
 				src.verbs += P.verbpath
 
-	for(var/language in languages)
+	for (var/language in languages)
 		mind.changeling.absorbed_languages |= language
 
 	var/mob/living/carbon/human/H = src
@@ -94,7 +94,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 //removes our changeling verbs
 /mob/proc/remove_changeling_powers()
 	if (!mind || !mind.changeling)	return
-	for(var/datum/power/changeling/P in mind.changeling.purchasedpowers)
+	for (var/datum/power/changeling/P in mind.changeling.purchasedpowers)
 		if (P.isVerb)
 			verbs -= P.verbpath
 
@@ -133,7 +133,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 /mob/proc/changeling_update_languages(updated_languages)
 
 	languages = list()
-	for(var/language in updated_languages)
+	for (var/language in updated_languages)
 		languages += language
 
 	//This isn't strictly necessary but just to be safe...
@@ -181,7 +181,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		to_chat(src, SPAN_WARNING("They are missing that body part!"))
 
 	changeling.isabsorbing = 1
-	for(var/stage = 1, stage<=3, stage++)
+	for (var/stage = 1, stage<=3, stage++)
 		switch(stage)
 			if (1)
 				to_chat(src, SPAN_NOTICE("This creature is compatible. We must hold still..."))
@@ -205,7 +205,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	changeling.geneticpoints += 2
 
 	//Steal all of their languages!
-	for(var/language in T.languages)
+	for (var/language in T.languages)
 		if (!(language in changeling.absorbed_languages))
 			changeling.absorbed_languages += language
 
@@ -219,7 +219,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	if (T.mind && T.mind.changeling)
 		if (T.mind.changeling.absorbed_dna)
-			for(var/datum/absorbed_dna/dna_data in T.mind.changeling.absorbed_dna)	//steal all their loot
+			for (var/datum/absorbed_dna/dna_data in T.mind.changeling.absorbed_dna)	//steal all their loot
 				if (changeling.GetDNA(dna_data.name))
 					continue
 				absorbDNA(dna_data)
@@ -227,7 +227,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 			T.mind.changeling.absorbed_dna.Cut(2)
 
 		if (T.mind.changeling.purchasedpowers)
-			for(var/datum/power/changeling/Tp in T.mind.changeling.purchasedpowers)
+			for (var/datum/power/changeling/Tp in T.mind.changeling.purchasedpowers)
 				if (Tp in changeling.purchasedpowers)
 					continue
 				else
@@ -261,7 +261,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if (!changeling)	return
 
 	var/list/names = list()
-	for(var/datum/absorbed_dna/DNA in changeling.absorbed_dna)
+	for (var/datum/absorbed_dna/DNA in changeling.absorbed_dna)
 		names += "[DNA.name]"
 
 	var/S = input("Select the target DNA: ", "Target DNA", null) as null|anything in names
@@ -351,7 +351,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		return
 
 	var/list/names = list()
-	for(var/datum/dna/DNA in changeling.absorbed_dna)
+	for (var/datum/dna/DNA in changeling.absorbed_dna)
 		names += "[DNA.real_name]"
 
 	var/S = input("Select the target DNA: ", "Target DNA", null) as null|anything in names
@@ -383,7 +383,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	sleep(48)
 	qdel(animation)
 
-	for(var/obj/item/W in src)
+	for (var/obj/item/W in src)
 		C.drop_from_inventory(W)
 
 	var/mob/living/carbon/human/O = new /mob/living/carbon/human( src )
@@ -395,7 +395,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	C.dna = null
 	O.real_name = chosen_dna.real_name
 
-	for(var/obj/T in C)
+	for (var/obj/T in C)
 		qdel(T)
 
 	O.dropInto(C.loc)
@@ -549,7 +549,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	var/mob/living/carbon/human/C = src
 	spawn(0)
-		for(var/i = 0, i<10,i++)
+		for (var/i = 0, i<10,i++)
 			if (C)
 				C.adjustBruteLoss(-10)
 				C.adjustToxLoss(-10)
@@ -574,9 +574,9 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	if (!changeling)	return
 
 	var/list/names = list()
-	for(var/datum/absorbed_dna/DNA in changeling.absorbed_dna)
+	for (var/datum/absorbed_dna/DNA in changeling.absorbed_dna)
 		var/valid = 1
-		for(var/datum/absorbed_dna/DNB in hivemind_bank)
+		for (var/datum/absorbed_dna/DNB in hivemind_bank)
 			if (DNA.name == DNB.name)
 				valid = 0
 				break
@@ -614,7 +614,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	if (!changeling)	return
 
 	var/list/names = list()
-	for(var/datum/absorbed_dna/DNA in hivemind_bank)
+	for (var/datum/absorbed_dna/DNA in hivemind_bank)
 		if (!(changeling.GetDNA(DNA.name)))
 			names[DNA.name] = DNA
 
@@ -686,7 +686,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	if (!changeling)								return
 
 	var/list/victims = list()
-	for(var/mob/living/carbon/human/C in oview(changeling.sting_range))
+	for (var/mob/living/carbon/human/C in oview(changeling.sting_range))
 		victims += C
 	var/mob/living/carbon/human/T = input(src, "Who will we sting?") as null|anything in victims
 
@@ -708,7 +708,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 		visible_message(SPAN_DANGER("[src] fires an organic shard into [T]!"))
 	admin_attack_log(src, T, "Stung their victim using [sting_name]", "Was stung using [sting_name]", "stung using [sting_name]")
 
-	for(var/obj/item/clothing/clothes in list(T.head, T.wear_mask, T.wear_suit, T.w_uniform, T.gloves, T.shoes))
+	for (var/obj/item/clothing/clothes in list(T.head, T.wear_mask, T.wear_suit, T.w_uniform, T.gloves, T.shoes))
 		if (istype(clothes) && (clothes.body_parts_covered & target_limb.body_part) && (clothes.item_flags & ITEM_FLAG_THICKMATERIAL))
 			to_chat(src, SPAN_WARNING("[T]'s armor has protected them."))
 			return //thick clothes will protect from the sting

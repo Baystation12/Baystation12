@@ -45,7 +45,7 @@
 
 	stored_ore = list()
 
-	for(var/obj/item/ore/O in contents)
+	for (var/obj/item/ore/O in contents)
 
 		if (stored_ore[O.name])
 			stored_ore[O.name]++
@@ -73,7 +73,7 @@
 		last_update = world.time
 
 	to_chat(user, "It holds:")
-	for(var/ore in stored_ore)
+	for (var/ore in stored_ore)
 		to_chat(user, "- [stored_ore[ore]] [ore]")
 	return
 

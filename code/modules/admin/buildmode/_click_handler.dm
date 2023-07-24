@@ -12,14 +12,14 @@
 	..()
 
 	build_modes = list()
-	for(var/mode_type in subtypesof(/datum/build_mode))
+	for (var/mode_type in subtypesof(/datum/build_mode))
 		var/datum/build_mode/build_mode = new mode_type(src)
 		build_modes += build_mode
 		if (build_mode.the_default)
 			current_build_mode = build_mode
 
 	build_buttons = list()
-	for(var/button_type in subtypesof(/obj/effect/bmode))
+	for (var/button_type in subtypesof(/obj/effect/bmode))
 		var/obj/effect/bmode/build_button = new button_type(src)
 		build_buttons += build_button
 	StartTimer()
@@ -49,12 +49,12 @@
 
 /datum/click_handler/build_mode/Enter()
 	user.client.show_popup_menus = FALSE
-	for(var/build_button in build_buttons)
+	for (var/build_button in build_buttons)
 		user.client.screen += build_button
 
 /datum/click_handler/build_mode/Exit()
 	user.my_client.show_popup_menus = TRUE
-	for(var/build_button in build_buttons)
+	for (var/build_button in build_buttons)
 		user.my_client.screen -= build_button
 
 /datum/click_handler/build_mode/OnDblClick(atom/A, params)

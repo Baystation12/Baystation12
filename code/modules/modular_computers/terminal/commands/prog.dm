@@ -25,14 +25,14 @@
 		. = list()
 		. += "[name]: Listing running programs..."
 		. += "PID Status Filename"
-		for(var/datum/computer_file/program/P in terminal.computer.running_programs)
+		for (var/datum/computer_file/program/P in terminal.computer.running_programs)
 			if (P.program_state)
 				. += "[P.uid] - [(P.program_state == PROGRAM_STATE_ACTIVE ? "active" : "bckgrn")] - [P.filename]"
 		. += ""
 	// Run command with flag only
 	else if (length(arguments) == 1)
 		if (arguments[1] == "-k")
-			for(var/datum/computer_file/program/P in terminal.computer.running_programs)
+			for (var/datum/computer_file/program/P in terminal.computer.running_programs)
 				terminal.computer.kill_program_remote(P, 1)
 			return "[name]: All running programs terminated."
 		else if (arguments[1] == "-a")
@@ -67,6 +67,6 @@
 	pid = text2num(pid)
 	if (!pid)
 		return
-	for(var/datum/computer_file/program/P in terminal.computer.running_programs)
+	for (var/datum/computer_file/program/P in terminal.computer.running_programs)
 		if (P.uid == pid && P.program_state)
 			return P

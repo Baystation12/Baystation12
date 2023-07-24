@@ -55,7 +55,7 @@
 	aura_image.pixel_y = -64
 	aura_image.mouse_opacity = 0
 	aura_image.appearance_flags = DEFAULT_APPEARANCE_FLAGS
-	for(var/thing in SSpsi.processing)
+	for (var/thing in SSpsi.processing)
 		var/datum/psi_complexus/psychic = thing
 		if (psychic.owner.client && !psychic.suppressed)
 			psychic.owner.client.images += aura_image
@@ -63,7 +63,7 @@
 	return aura_image
 
 /proc/destroy_aura_image(image/aura_image)
-	for(var/thing in SSpsi.processing)
+	for (var/thing in SSpsi.processing)
 		var/datum/psi_complexus/psychic = thing
 		if (psychic.owner.client)
 			psychic.owner.client.images -= aura_image
@@ -81,14 +81,14 @@
 		cancel()
 		if (owner.client)
 			owner.client.screen -= list(ui, ui?.components)
-			for(var/thing in SSpsi.all_aura_images)
+			for (var/thing in SSpsi.all_aura_images)
 				owner.client.images -= thing
 		QDEL_NULL(ui)
 		owner.psi = null
 		owner = null
 
 	if (manifested_items)
-		for(var/thing in manifested_items)
+		for (var/thing in manifested_items)
 			qdel(thing)
 		manifested_items.Cut()
 	. = ..()

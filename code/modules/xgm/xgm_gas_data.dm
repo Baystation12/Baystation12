@@ -54,7 +54,7 @@ var/global/datum/xgm_gas_data/gas_data
 
 /hook/startup/proc/generateGasData()
 	gas_data = new
-	for(var/p in (typesof(/singleton/xgm_gas) - /singleton/xgm_gas))
+	for (var/p in (typesof(/singleton/xgm_gas) - /singleton/xgm_gas))
 		var/singleton/xgm_gas/gas = new p //avoid initial() because of potential New() actions
 
 		if (gas.id in gas_data.gases)

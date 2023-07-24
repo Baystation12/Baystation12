@@ -23,7 +23,7 @@
 
 	. = list("[name]: Establishing route to [(nid ? "NID [nid]" : "NTNet service provider")]")
 	var/list/route = origin_nc.get_route()
-	for(var/i = 1; i <= length(route); i++)
+	for (var/i = 1; i <= length(route); i++)
 		var/obj/item/stock_parts/computer/network_card/C = route[i]
 		if (!istype(C))
 			. += "Error; connection aborted"

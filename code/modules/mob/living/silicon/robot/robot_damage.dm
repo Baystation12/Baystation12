@@ -8,14 +8,14 @@
 
 /mob/living/silicon/robot/getBruteLoss()
 	var/amount = 0
-	for(var/V in components)
+	for (var/V in components)
 		var/datum/robot_component/C = components[V]
 		if (C.installed != 0) amount += C.brute_damage
 	return amount
 
 /mob/living/silicon/robot/getFireLoss()
 	var/amount = 0
-	for(var/V in components)
+	for (var/V in components)
 		var/datum/robot_component/C = components[V]
 		if (C.installed != 0) amount += C.electronics_damage
 	return amount
@@ -34,7 +34,7 @@
 
 /mob/living/silicon/robot/proc/get_damaged_components(brute, burn, destroyed = 0)
 	var/list/datum/robot_component/parts = list()
-	for(var/V in components)
+	for (var/V in components)
 		var/datum/robot_component/C = components[V]
 		if (C.installed == 1 || (C.installed == -1 && destroyed))
 			if ((brute && C.brute_damage) || (burn && C.electronics_damage) || (!C.toggled) || (!C.powered && C.toggled))
@@ -43,7 +43,7 @@
 
 /mob/living/silicon/robot/proc/get_damageable_components()
 	var/list/rval = new
-	for(var/V in components)
+	for (var/V in components)
 		var/datum/robot_component/C = components[V]
 		if (C.installed == 1) rval += C
 	return rval

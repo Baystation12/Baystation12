@@ -395,7 +395,7 @@
 		wash_mob(washing)
 		if (isturf(loc))
 			var/turf/tile = loc
-			for(var/obj/effect/E in tile)
+			for (var/obj/effect/E in tile)
 				if (istype(E,/obj/effect/decal/cleanable) || istype(E,/obj/effect/overlay))
 					qdel(E)
 		reagents.splash(washing, 10)
@@ -404,7 +404,7 @@
 	..()
 	if (!on) return
 
-	for(var/thing in loc)
+	for (var/thing in loc)
 		var/atom/movable/AM = thing
 		var/mob/living/L = thing
 		if (istype(AM) && AM.simulated)

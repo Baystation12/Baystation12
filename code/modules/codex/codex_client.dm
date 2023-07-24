@@ -30,12 +30,12 @@
 	var/list/all_entries = SScodex.retrieve_entries_for_string(searching)
 	if (mob && mob.mind && !player_is_antag(mob.mind))
 		all_entries = all_entries.Copy() // So we aren't messing with the codex search cache.
-		for(var/datum/codex_entry/entry in all_entries)
+		for (var/datum/codex_entry/entry in all_entries)
 			if (entry.antag_text && !entry.mechanics_text && !entry.lore_text)
 				all_entries -= entry
 
 	//Put entries with match in the name first
-	for(var/datum/codex_entry/entry in all_entries)
+	for (var/datum/codex_entry/entry in all_entries)
 		if (findtext(entry.display_name, searching))
 			all_entries -= entry
 			all_entries.Insert(1, entry)
@@ -48,7 +48,7 @@
 			if (LAZYLEN(all_entries) > max_codex_entries_shown)
 				codex_data += "Showing first <b>[max_codex_entries_shown]</b> entries. <b>[length(all_entries) - 5] result\s</b> omitted.</br>"
 			codex_data += "<table width = 100%>"
-			for(var/i = 1 to min(length(all_entries), max_codex_entries_shown))
+			for (var/i = 1 to min(length(all_entries), max_codex_entries_shown))
 				var/datum/codex_entry/entry = all_entries[i]
 				codex_data += "<tr><td>[entry.display_name]</td><td><a href='?src=\ref[SScodex];show_examined_info=\ref[entry];show_to=\ref[mob]'>View</a></td></tr>"
 			codex_data += "</table>"
@@ -81,7 +81,7 @@
 
 	var/antag_check = mob && mob.mind && player_is_antag(mob.mind)
 	var/last_first_letter
-	for(var/thing in SScodex.index_file)
+	for (var/thing in SScodex.index_file)
 
 		var/datum/codex_entry/entry = SScodex.index_file[thing]
 		if (!antag_check && entry.antag_text && !entry.mechanics_text && !entry.lore_text)

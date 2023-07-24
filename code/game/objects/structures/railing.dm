@@ -32,7 +32,7 @@
 /obj/structure/railing/Process()
 	if (!material || !material.radioactivity)
 		return
-	for(var/mob/living/L in range(1,src))
+	for (var/mob/living/L in range(1,src))
 		L.apply_damage(round(material.radioactivity/20), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 
 /obj/structure/railing/Initialize(mapload, material_key)
@@ -86,7 +86,7 @@
 	var/Rturn = turn(src.dir, -90)
 	var/Lturn = turn(src.dir, 90)
 
-	for(var/obj/structure/railing/R in src.loc)
+	for (var/obj/structure/railing/R in src.loc)
 		if (QDELETED(R))
 			continue
 		if ((R.dir == Lturn) && R.anchored)

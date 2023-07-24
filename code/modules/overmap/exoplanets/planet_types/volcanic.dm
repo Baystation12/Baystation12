@@ -48,14 +48,14 @@
 
 //Squashing most of 1 tile lava puddles
 /datum/random_map/noise/exoplanet/volcanic/cleanup()
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
+	for (var/x = 1, x <= limit_x, x++)
+		for (var/y = 1, y <= limit_y, y++)
 			var/current_cell = get_map_cell(x,y)
 			if (noise2value(map[current_cell]) < water_level)
 				continue
 			var/frendos
-			for(var/dx in list(-1,0,1))
-				for(var/dy in list(-1,0,1))
+			for (var/dx in list(-1,0,1))
+				for (var/dy in list(-1,0,1))
 					var/tmp_cell = get_map_cell(x+dx,y+dy)
 					if (tmp_cell && tmp_cell != current_cell && noise2value(map[tmp_cell]) >= water_level)
 						frendos = 1
@@ -124,7 +124,7 @@
 	if (locate(/obj/structure/catwalk) in src)
 		victims = null
 		return PROCESS_KILL
-	for(var/weakref/W in victims)
+	for (var/weakref/W in victims)
 		var/atom/movable/AM = W.resolve()
 		if (AM == null || get_turf(AM) != src || AM.is_burnable() == FALSE)
 			victims -= W

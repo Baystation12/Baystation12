@@ -20,18 +20,18 @@
 	open_doors()
 
 /datum/turbolift/proc/doors_are_open(datum/turbolift_floor/use_floor = current_floor)
-	for(var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
+	for (var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
 		if (!door.density)
 			return 1
 	return 0
 
 /datum/turbolift/proc/open_doors(datum/turbolift_floor/use_floor = current_floor)
-	for(var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
+	for (var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
 		door.command("open")
 	return
 
 /datum/turbolift/proc/close_doors(datum/turbolift_floor/use_floor = current_floor)
-	for(var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
+	for (var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
 		door.command("close")
 	return
 
@@ -114,8 +114,8 @@
 	if (!istype(origin) || !istype(destination) || (origin == destination))
 		return 0
 
-	for(var/turf/T in destination)
-		for(var/atom/movable/AM in T)
+	for (var/turf/T in destination)
+		for (var/atom/movable/AM in T)
 			if (istype(AM, /mob/living))
 				var/mob/living/M = AM
 				M.gib()

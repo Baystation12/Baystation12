@@ -175,7 +175,7 @@
 							src.say("BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
 						ears.dropInto(loc)
 						ears = null
-						for(var/possible_phrase in say_list.speak)
+						for (var/possible_phrase in say_list.speak)
 							if (copytext(possible_phrase,1,3) in department_radio_keys)
 								possible_phrase = copytext(possible_phrase,3,length(possible_phrase))
 					else
@@ -209,7 +209,7 @@
 						to_chat(user, "You fit the headset onto [src].")
 
 						available_channels.Cut()
-						for(var/ch in headset_to_add.channels)
+						for (var/ch in headset_to_add.channels)
 							switch(ch)
 								if ("Engineering")
 									available_channels.Add(":e")
@@ -354,7 +354,7 @@
 				var/list/newspeak = list()
 
 				if (length(available_channels) && src.ears)
-					for(var/possible_phrase in say_list.speak)
+					for (var/possible_phrase in say_list.speak)
 
 						//50/50 chance to not use the radio at all
 						var/useradio = 0
@@ -369,7 +369,7 @@
 						newspeak.Add(possible_phrase)
 
 				else //If we have no headset or channels to use, don't try to use any!
-					for(var/possible_phrase in say_list.speak)
+					for (var/possible_phrase in say_list.speak)
 						if (copytext(possible_phrase,1,3) in department_radio_keys)
 							possible_phrase = "[copytext(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
 						newspeak.Add(possible_phrase)
@@ -535,7 +535,7 @@
 	..()
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/search_for_item()
-	for(var/atom/movable/AM in view(src))
+	for (var/atom/movable/AM in view(src))
 		//Skip items we already stole or are wearing or are too big
 		if (parrot_perch && AM.loc == parrot_perch.loc || AM.loc == src)
 			continue
@@ -551,16 +551,16 @@
 	return null
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/search_for_perch()
-	for(var/obj/O in view(src))
-		for(var/path in desired_perches)
+	for (var/obj/O in view(src))
+		for (var/path in desired_perches)
 			if (istype(O, path))
 				return O
 	return null
 
 //This proc was made to save on doing two 'in view' loops seperatly
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/search_for_perch_and_item()
-	for(var/atom/movable/AM in view(src))
-		for(var/perch_path in desired_perches)
+	for (var/atom/movable/AM in view(src))
+		for (var/perch_path in desired_perches)
 			if (istype(AM, perch_path))
 				return AM
 
@@ -599,7 +599,7 @@
 		to_chat(src, SPAN_WARNING("You are already holding the [held_item]"))
 		return 1
 
-	for(var/obj/item/I in view(1,src))
+	for (var/obj/item/I in view(1,src))
 		//Make sure we're not already holding it and it's small enough
 		if (I.loc != src && can_pick_up(I))
 
@@ -629,7 +629,7 @@
 
 	var/obj/item/stolen_item = null
 
-	for(var/mob/living/carbon/C in view(1,src))
+	for (var/mob/living/carbon/C in view(1,src))
 		for (var/obj/item as anything in C.GetAllHeld())
 			if (can_pick_up(item))
 				stolen_item = item
@@ -691,8 +691,8 @@
 		return
 
 	if (icon_state == "[icon_set]_fly")
-		for(var/atom/movable/AM in view(src,1))
-			for(var/perch_path in desired_perches)
+		for (var/atom/movable/AM in view(src,1))
+			for (var/perch_path in desired_perches)
 				if (istype(AM, perch_path))
 					forceMove(AM.loc)
 					icon_state = "[icon_set]_sit"

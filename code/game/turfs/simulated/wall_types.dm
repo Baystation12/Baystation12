@@ -30,7 +30,7 @@
 	color = null //color is just for mapping
 	if (prob(40))
 		var/spacefacing = FALSE
-		for(var/direction in GLOB.cardinal)
+		for (var/direction in GLOB.cardinal)
 			var/turf/T = get_step(src, direction)
 			var/area/A = get_area(T)
 			if (A && (A.area_flags & AREA_FLAG_EXTERNAL))

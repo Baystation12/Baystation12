@@ -55,7 +55,7 @@
 	GLOB.silicon_mobs -= src
 	QDEL_NULL(silicon_radio)
 	QDEL_NULL(silicon_camera)
-	for(var/datum/alarm_handler/AH as anything in SSalarm.alarm_handlers)
+	for (var/datum/alarm_handler/AH as anything in SSalarm.alarm_handlers)
 		AH.unregister_alarm(src)
 	return ..()
 
@@ -210,7 +210,7 @@
 	if (default_language)
 		dat += "Current default language: [default_language] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
 
-	for(var/datum/language/L in languages)
+	for (var/datum/language/L in languages)
 		if (!(L.flags & NONGLOBAL))
 			var/default_str
 			if (L == default_language)
@@ -280,7 +280,7 @@
 
 /mob/living/silicon/ai/raised_alarm(datum/alarm/A)
 	var/cameratext = ""
-	for(var/obj/machinery/camera/C in A.cameras())
+	for (var/obj/machinery/camera/C in A.cameras())
 		cameratext += "[(cameratext == "")? "" : "|"]<A HREF=?src=\ref[src];switchcamera=\ref[C]>[C.c_tag]</A>"
 	to_chat(src, "[A.alarm_name()]! ([(cameratext)? cameratext : "No Camera"])")
 

@@ -47,7 +47,7 @@
 		if (will_hunt(hungry) || attacked || rabid) // Only add to the list if we need to
 			var/list/targets = list()
 
-			for(var/mob/living/L in view(7,src))
+			for (var/mob/living/L in view(7,src))
 				if (AssessTarget(L))
 					targets += L // Possible target found!
 
@@ -55,7 +55,7 @@
 				if (attacked || rabid || hungry == 2)
 					Target = targets[1] // I am attacked and am fighting back or so hungry I don't even care
 				else
-					for(var/mob/living/carbon/C in targets)
+					for (var/mob/living/carbon/C in targets)
 						if (ishuman(C) && prob(5))
 							Target = C
 							break
@@ -134,7 +134,7 @@
 			AIproc = 0
 			return
 
-		for(var/mob/living/carbon/slime/M in view(1, Target))
+		for (var/mob/living/carbon/slime/M in view(1, Target))
 			if (M.Victim == Target)
 				Target = null
 				AIproc = 0

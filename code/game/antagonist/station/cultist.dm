@@ -84,7 +84,7 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 		"left hand" = slot_l_hand,
 		"right hand" = slot_r_hand,
 	)
-	for(var/slot in slots)
+	for (var/slot in slots)
 		player.equip_to_slot(T, slot)
 		if (T.loc == player)
 			break
@@ -126,7 +126,7 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 	if (old_rating >= CULT_MAX_CULTINESS)
 		return
 	var/list/to_update = list()
-	for(var/i in cult_rating_bounds)
+	for (var/i in cult_rating_bounds)
 		if ((old_rating < i) && (max_cult_rating >= i))
 			to_update += i
 
@@ -135,23 +135,23 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 
 /datum/antagonist/cultist/proc/update_cult_magic(list/to_update)
 	if (CULT_RUNES_1 in to_update)
-		for(var/datum/mind/H in GLOB.cult.current_antagonists)
+		for (var/datum/mind/H in GLOB.cult.current_antagonists)
 			if (H.current)
 				to_chat(H.current, SPAN_OCCULT("The veil between this world and beyond grows thin, and your power grows."))
 				add_cult_magic(H.current)
 	if (CULT_RUNES_2 in to_update)
-		for(var/datum/mind/H in GLOB.cult.current_antagonists)
+		for (var/datum/mind/H in GLOB.cult.current_antagonists)
 			if (H.current)
 				to_chat(H.current, SPAN_OCCULT("You feel that the fabric of reality is tearing."))
 				add_cult_magic(H.current)
 	if (CULT_RUNES_3 in to_update)
-		for(var/datum/mind/H in GLOB.cult.current_antagonists)
+		for (var/datum/mind/H in GLOB.cult.current_antagonists)
 			if (H.current)
 				to_chat(H.current, SPAN_OCCULT("The world is at end. The veil is as thin as ever."))
 				add_cult_magic(H.current)
 
 	if ((CULT_GHOSTS_1 in to_update) || (CULT_GHOSTS_2 in to_update) || (CULT_GHOSTS_3 in to_update))
-		for(var/mob/observer/ghost/D in SSmobs.mob_list)
+		for (var/mob/observer/ghost/D in SSmobs.mob_list)
 			add_ghost_magic(D)
 
 /datum/antagonist/cultist/proc/offer_uncult(mob/M)

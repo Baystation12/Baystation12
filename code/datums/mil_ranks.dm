@@ -34,7 +34,7 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
  *  Retrieve branch object by branch type
  */
 /datum/mil_branches/proc/get_branch_by_type(branch_type)
-	for(var/name in branches)
+	for (var/name in branches)
 		if (istype(branches[name], branch_type))
 			return branches[name]
 
@@ -60,7 +60,7 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 	if (!.)
 		. = list()
 		LAZYSET(spawn_branches_by_species_, S, .)
-		for(var/spawn_branch in spawn_branches_)
+		for (var/spawn_branch in spawn_branches_)
 			if (!GLOB.using_map.is_species_branch_restricted(S, spawn_branches_[spawn_branch]))
 				. += spawn_branch
 
@@ -120,7 +120,7 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 	spawn_ranks_ = list()
 	spawn_ranks_by_species_ = list()
 
-	for(var/rank_path in rank_types)
+	for (var/rank_path in rank_types)
 		if (!ispath(rank_path, /datum/mil_rank))
 			crash_with("[name]'s rank_types includes [rank_path], which is not a subtype of /datum/mil_rank.")
 			continue
@@ -137,7 +137,7 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 	if (!.)
 		. = list()
 		spawn_ranks_by_species_[S] = .
-		for(var/spawn_rank in spawn_ranks_)
+		for (var/spawn_rank in spawn_ranks_)
 			if (!GLOB.using_map.is_species_rank_restricted(S, src, spawn_ranks_[spawn_rank]))
 				. += spawn_rank
 
@@ -155,7 +155,7 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 	GLOB.mil_branches.branches  = list()
 	GLOB.mil_branches.spawn_branches_ = list()
 	GLOB.mil_branches.spawn_branches_by_species_ = list()
-	for(var/branch_path in GLOB.using_map.branch_types)
+	for (var/branch_path in GLOB.using_map.branch_types)
 		if (!ispath(branch_path, /datum/mil_branch))
 			crash_with("populate_branches() attempted to instantiate object with path [branch_path], which is not a subtype of /datum/mil_branch.")
 			continue

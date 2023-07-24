@@ -89,7 +89,7 @@
 
 /obj/item/stock_parts/circuitboard/vending/get_buildable_types()
 	. = list()
-	for(var/path in typesof(/obj/machinery/vending))
+	for (var/path in typesof(/obj/machinery/vending))
 		var/obj/machinery/vending/vendor = path
 		var/base_type = initial(vendor.base_type) || path
 		. |= base_type

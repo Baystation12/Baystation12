@@ -25,5 +25,5 @@
 		ad.AddViewer(viewer)
 
 /singleton/appearance_handler/proc/DisplayAllAltAppearancesTo(viewer)
-	for(var/entry in appearance_sources)
+	for (var/entry in appearance_sources)
 		DisplayAltAppearanceTo(entry, viewer)

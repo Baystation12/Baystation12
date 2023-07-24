@@ -231,7 +231,7 @@ var/global/list/id_card_states
 	RETURN_TYPE(/list)
 	if (!id_card_states)
 		id_card_states = list()
-		for(var/path in typesof(/obj/item/card/id))
+		for (var/path in typesof(/obj/item/card/id))
 			var/obj/item/card/id/ID = path
 			var/datum/card_state/CS = new()
 			CS.icon_state = initial(ID.icon_state)

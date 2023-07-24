@@ -42,9 +42,9 @@
 	var/full_name = ""
 	var/new_name = ""
 
-	for(var/i = 0;i<name_count;i++)
+	for (var/i = 0;i<name_count;i++)
 		new_name = ""
-		for(var/x = rand(floor(syllable_count/syllable_divisor),syllable_count);x>0;x--)
+		for (var/x = rand(floor(syllable_count/syllable_divisor),syllable_count);x>0;x--)
 			new_name += pick(syllables)
 		full_name += " [capitalize(lowertext(new_name))]"
 
@@ -56,14 +56,14 @@
 /datum/language/proc/scramble(input, list/known_languages)
 
 	var/understand_chance = 0
-	for(var/datum/language/L in known_languages)
+	for (var/datum/language/L in known_languages)
 		if (LAZYACCESS(partial_understanding, L.name))
 			understand_chance += partial_understanding[L.name]
 
 	var/list/words = splittext(input, " ")
 	var/list/scrambled_text = list()
 	var/new_sentence = 0
-	for(var/w in words)
+	for (var/w in words)
 		var/nword = "[w] "
 		var/input_ending = copytext(w, -1)
 		var/ends_sentence = findtext(".?!",input_ending)
@@ -139,7 +139,7 @@
 	if (!speaker_mask) speaker_mask = speaker.name
 	message = format_message(message, get_spoken_verb(message))
 
-	for(var/mob/player in GLOB.player_list)
+	for (var/mob/player in GLOB.player_list)
 		player.hear_broadcast(src, speaker, speaker_mask, message)
 
 /mob/proc/hear_broadcast(datum/language/language, mob/speaker, speaker_name, message)
@@ -216,7 +216,7 @@
 
 	var/dat = "<b>[FONT_GIANT("Known Languages")]</b><br/><br/>"
 
-	for(var/datum/language/L in languages)
+	for (var/datum/language/L in languages)
 		if (!(L.flags & NONGLOBAL))
 			dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b><br/>[L.desc]<br/><br/>"
 
@@ -229,7 +229,7 @@
 	if (default_language)
 		dat += "Current default language: [default_language] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
 
-	for(var/datum/language/L in languages)
+	for (var/datum/language/L in languages)
 		if (!(L.flags & NONGLOBAL))
 			if (L == default_language)
 				dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b> - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/>[L.desc]<br/><br/>"
@@ -258,7 +258,7 @@
 	return ..()
 
 /proc/transfer_languages(mob/source, mob/target, except_flags)
-	for(var/datum/language/L in source.languages)
+	for (var/datum/language/L in source.languages)
 		if (L.flags & except_flags)
 			continue
 		target.add_language(L.name)

@@ -48,7 +48,7 @@
 		paired_nurse = null
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/find_nurse()
-	for(var/mob/living/simple_animal/hostile/giant_spider/nurse/N in hearers(src, 10))
+	for (var/mob/living/simple_animal/hostile/giant_spider/nurse/N in hearers(src, 10))
 		if (N.stat || N.paired_guard)
 			continue
 		paired_nurse = N

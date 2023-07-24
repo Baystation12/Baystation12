@@ -28,7 +28,7 @@
 		if (new_seed_type)
 			to_chat(user, SPAN_NOTICE("You extract some seeds from [O]."))
 			var/produce = rand(1,4)
-			for(var/i = 0;i<=produce;i++)
+			for (var/i = 0;i<=produce;i++)
 				var/obj/item/seeds/seeds = new(get_turf(src))
 				seeds.seed_type = new_seed_type.name
 				seeds.update_seed()

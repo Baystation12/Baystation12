@@ -25,7 +25,7 @@
 
 /obj/item/storage/bag/proc/update_w_class()
 	w_class = initial(w_class)
-	for(var/obj/item/I in contents)
+	for (var/obj/item/I in contents)
 		w_class = max(w_class, I.w_class)
 
 	var/cur_storage_space = storage_space_used()

@@ -7,8 +7,8 @@
 
 // Get rid of those dumb little single-tile volcanic areas.
 /datum/random_map/noise/volcanism/cleanup()
-	for(var/x = 1, x <= limit_x, x++)
-		for(var/y = 1, y <= limit_y, y++)
+	for (var/x = 1, x <= limit_x, x++)
+		for (var/y = 1, y <= limit_y, y++)
 			var/current_cell = get_map_cell(x,y)
 			if (map[current_cell] < 178)
 				continue

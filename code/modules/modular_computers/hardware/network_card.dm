@@ -73,7 +73,7 @@ var/global/ntnet_card_uid = 1
 /// Validates identificator name
 /obj/item/stock_parts/computer/network_card/proc/validate_identificator(identificator)
 	var/list/badchars = list("/","\\",":","*","?","\"","<",">","|","#",","," ")
-	for(var/char in badchars)
+	for (var/char in badchars)
 		if (findtext(identificator, char))
 			return FALSE
 	return TRUE
@@ -117,7 +117,7 @@ var/global/ntnet_card_uid = 1
 /// Returns the resolved signal strength, accounting for proxies
 /obj/item/stock_parts/computer/network_card/proc/get_signal(specific_action = 0)
 	var/list/cards = get_route()
-	for(var/i = length(cards); i > 0; i--)
+	for (var/i = length(cards); i > 0; i--)
 		var/obj/item/stock_parts/computer/network_card/nc = cards[i]
 		if (!nc)
 			return 0

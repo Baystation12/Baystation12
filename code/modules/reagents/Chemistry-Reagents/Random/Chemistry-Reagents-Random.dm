@@ -16,7 +16,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 
 #define FOR_ALL_EFFECTS \
 	var/list/all_effects = Singletons.GetList(data);\
-	for(var/singleton/random_chem_effect/effect in all_effects)
+	for (var/singleton/random_chem_effect/effect in all_effects)
 
 /datum/reagent/random
 	name = "exotic chemical"
@@ -50,22 +50,22 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	effects_to_get += subtypesof(/singleton/random_chem_effect/general_properties)
 
 	var/list/singletons = Singletons.GetList(effects_to_get)
-	for(var/item in singletons)
+	for (var/item in singletons)
 		var/singleton/random_chem_effect/effect = item
 		effect.prototype_process(src, temperature)
 
 	var/whitelist = subtypesof(/datum/reagent)
-	for(var/bad_type in GLOB.random_chem_interaction_blacklist)
+	for (var/bad_type in GLOB.random_chem_interaction_blacklist)
 		whitelist -= typesof(bad_type)
 
 	chilling_products = list()
-	for(var/i in 1 to rand(1,3))
+	for (var/i in 1 to rand(1,3))
 		chilling_products += pick_n_take(whitelist) // it's possible that these form a valid reaction, but we're OK with that.
 	heating_products = list()
-	for(var/i in 1 to rand(1,3))
+	for (var/i in 1 to rand(1,3))
 		heating_products += pick_n_take(whitelist)
 
-	for(var/singleton/random_chem_effect/random_properties/effect in singletons)
+	for (var/singleton/random_chem_effect/random_properties/effect in singletons)
 		effect.set_caches(src, whitelist)
 
 /datum/reagent/random/proc/stable_at_temperature(temperature)

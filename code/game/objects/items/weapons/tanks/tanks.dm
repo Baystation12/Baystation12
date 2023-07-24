@@ -42,7 +42,7 @@ var/global/list/tank_gauge_cache = list()
 	proxyassembly.tank = src
 
 	air_contents = new /datum/gas_mixture(volume, T20C)
-	for(var/gas in starting_pressure)
+	for (var/gas in starting_pressure)
 		air_contents.adjust_gas(gas, starting_pressure[gas]*volume/(R_IDEAL_GAS_EQUATION*T20C), 0)
 	air_contents.update_values()
 

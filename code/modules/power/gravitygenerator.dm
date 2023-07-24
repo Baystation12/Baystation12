@@ -32,13 +32,13 @@
 	locatelocalareas()
 
 /obj/machinery/computer/gravity_control_computer/proc/updatemodules()
-	for(dir in list(NORTH,EAST,SOUTH,WEST))
+	for (dir in list(NORTH,EAST,SOUTH,WEST))
 		gravity_generator = locate(/obj/machinery/gravity_generator, get_step(src, dir))
 		if (gravity_generator)
 			return
 
 /obj/machinery/gravity_generator/proc/locatelocalareas()
-	for(var/area/A in range(src,effectiverange))
+	for (var/area/A in range(src,effectiverange))
 		if (istype(A,/area/space))
 			continue // No (de)gravitizing space.
 		localareas |= A
@@ -62,7 +62,7 @@
 
 		dat += "<br><tt>Currently Supplying Gravitons To:</tt><br>"
 
-		for(var/area/A in gravity_generator.localareas)
+		for (var/area/A in gravity_generator.localareas)
 			if (A.has_gravity && gravity_generator.on)
 				dat += "<tt>[SPAN_COLOR("green", A)]</tt><br>"
 
@@ -95,15 +95,15 @@
 		if (gravity_generator.on)
 			gravity_generator.on = 0
 
-			for(var/area/A in gravity_generator.localareas)
+			for (var/area/A in gravity_generator.localareas)
 				var/obj/machinery/gravity_generator/G
-				for(G in SSmachines.machinery)
+				for (G in SSmachines.machinery)
 					if ((A in G.localareas) && (G.on))
 						break
 				if (!G)
 					A.gravitychange(0)
 		else
-			for(var/area/A in gravity_generator.localareas)
+			for (var/area/A in gravity_generator.localareas)
 				gravity_generator.on = 1
 				A.gravitychange(1)
 

@@ -4,7 +4,7 @@
 
 /datum/codex_category/languages/Initialize()
 	var/example_line = "This is just some random words. What did you expect here? Hah hah!"
-	for(var/langname in all_languages)
+	for (var/langname in all_languages)
 		var/datum/language/L = all_languages[langname]
 		if (L.hidden_from_codex)
 			continue

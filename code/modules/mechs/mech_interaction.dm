@@ -211,7 +211,7 @@
 /mob/living/exosuit/proc/clear_selected_hardpoint()
 
 	if (selected_hardpoint)
-		for(var/hardpoint in hardpoints)
+		for (var/hardpoint in hardpoints)
 			if (hardpoint != selected_hardpoint)
 				continue
 			var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
@@ -297,7 +297,7 @@
 /mob/living/exosuit/proc/sync_access()
 	access_card.access = saved_access.Copy()
 	if (sync_access)
-		for(var/mob/pilot in pilots)
+		for (var/mob/pilot in pilots)
 			access_card.access |= pilot.GetAccess()
 			to_chat(pilot, SPAN_NOTICE("Security access permissions synchronized."))
 
@@ -571,7 +571,7 @@
 	to_chat(user, SPAN_NOTICE("You have redesignated this exosuit as \the [name]."))
 
 /mob/living/exosuit/get_inventory_slot(obj/item/I)
-	for(var/h in hardpoints)
+	for (var/h in hardpoints)
 		if (hardpoints[h] == I)
 			return h
 	return 0

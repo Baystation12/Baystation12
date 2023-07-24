@@ -251,7 +251,7 @@
 	has_areas = FALSE
 	//Get the areas for this z level and mark if we're empty
 	overlays.Cut()
-	for(var/area/A in SSminimap.holomaps[z_level].holomap_areas)
+	for (var/area/A in SSminimap.holomaps[z_level].holomap_areas)
 		if (A.holomap_color == saved_color)
 			var/image/area = image(SSminimap.holomaps[z_level].holomap_areas[A])
 			area.pixel_x = ((HOLOMAP_ICON_SIZE / 2) - world.maxx / 2) - pixel_x
@@ -353,7 +353,7 @@
 				lbuttons[2].pixel_x = 196
 
 			//Each level now has to be built and offset properly. Then stored to be showed later
-			for(var/level = 1; level <= z_count; level++)
+			for (var/level = 1; level <= z_count; level++)
 				if (z == O.map_z[level])
 					current_z_index = level
 
@@ -405,7 +405,7 @@
 
 	//Fix legend position
 	var/pixel_y = HOLOMAP_LEGEND_Y
-	for(var/obj/screen/legend/element in legend)
+	for (var/obj/screen/legend/element in legend)
 		element.owner = src
 		element.pixel_y = pixel_y //Set adjusted pixel y as it will be needed for area placement
 		element.Setup(z_levels[displayed_level])
@@ -424,7 +424,7 @@
 	L.Select()
 
 /datum/station_holomap/proc/legend_deselect()
-	for(var/obj/screen/legend/entry in legend)
+	for (var/obj/screen/legend/entry in legend)
 		entry.Deselect()
 
 /datum/station_holomap/proc/initialize_holomap_bogus()

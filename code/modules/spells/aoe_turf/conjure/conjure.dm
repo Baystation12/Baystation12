@@ -26,7 +26,7 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 
 /spell/aoe_turf/conjure/cast(list/targets, mob/user)
 
-	for(var/i=1,i <= summon_amt,i++)
+	for (var/i=1,i <= summon_amt,i++)
 		if (!length(targets))
 			break
 		var/summoned_object_type
@@ -59,7 +59,7 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 		if (istype(summoned_object,/mob)) //we want them to NOT attack us.
 			var/mob/M = summoned_object
 			M.faction = user.faction
-		for(var/varName in newVars)
+		for (var/varName in newVars)
 			if (varName in summoned_object.vars)
 				summoned_object.vars[varName] = newVars[varName]
 

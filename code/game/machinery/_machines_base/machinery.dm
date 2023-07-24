@@ -280,7 +280,7 @@
 /obj/machinery/proc/RefreshParts()
 	set_stat(MACHINE_STAT_NOINPUT, TRUE)
 	set_stat(MACHINE_STAT_NOSCREEN, TRUE)
-	for(var/thing in component_parts)
+	for (var/thing in component_parts)
 		var/obj/item/stock_parts/part = thing
 		part.on_refresh(src)
 	var/list/missing = missing_parts()
@@ -288,7 +288,7 @@
 
 /// Displays a message for mobs in range.
 /obj/machinery/proc/state(msg)
-	for(var/mob/O in hearers(src, null))
+	for (var/mob/O in hearers(src, null))
 		O.show_message("[icon2html(src, O)] " + SPAN_NOTICE(msg), AUDIBLE_MESSAGE)
 
 /// Displays a ping message and sound effect.
@@ -332,12 +332,12 @@
 		new frame_type(get_turf(src), src)
 	else
 		new frame_type(get_turf(src), dir)
-	for(var/I in component_parts)
+	for (var/I in component_parts)
 		uninstall_component(I, refresh_parts = FALSE)
 	while(LAZYLEN(uncreated_component_parts))
 		var/path = uncreated_component_parts[1]
 		uninstall_component(path, refresh_parts = FALSE)
-	for(var/obj/O in src)
+	for (var/obj/O in src)
 		O.dropInto(loc)
 
 	qdel(src)
@@ -367,9 +367,9 @@
 /// Displays all components in the machine to the user.
 /obj/machinery/proc/display_parts(mob/user)
 	to_chat(user, SPAN_NOTICE("Following parts detected in the machine:"))
-	for(var/obj/item/C in component_parts)
+	for (var/obj/item/C in component_parts)
 		to_chat(user, SPAN_NOTICE("	[C.name]"))
-	for(var/path in uncreated_component_parts)
+	for (var/path in uncreated_component_parts)
 		var/obj/item/thing = path
 		to_chat(user, SPAN_NOTICE("	[initial(thing.name)] ([uncreated_component_parts[path] || 1])"))
 
@@ -390,7 +390,7 @@
 	var/list/missing = missing_parts()
 	if (missing)
 		var/list/parts = list()
-		for(var/type in missing)
+		for (var/type in missing)
 			var/obj/item/fake_thing = type
 			parts += "[num2text(missing[type])] [initial(fake_thing.name)]"
 		to_chat(user, SPAN_WARNING("\The [src] is missing [english_list(parts)], rendering it inoperable."))

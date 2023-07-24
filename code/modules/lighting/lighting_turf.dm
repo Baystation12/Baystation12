@@ -23,7 +23,7 @@
 	var/old_opaque_counter = opaque_counter
 
 	opaque_counter = opacity
-	for(var/a in src)
+	for (var/a in src)
 		var/atom/A = a
 		opaque_counter += A.opacity
 
@@ -36,14 +36,14 @@
 
 // Causes any affecting light sources to be queued for a visibility update, for example a door got opened.
 /turf/proc/reconsider_lights()
-	for(var/datum/light_source/L in affecting_lights)
+	for (var/datum/light_source/L in affecting_lights)
 		L.vis_update()
 
 /turf/proc/lighting_clear_overlay()
 	if (lighting_overlay)
 		qdel(lighting_overlay)
 
-	for(var/datum/lighting_corner/C in corners)
+	for (var/datum/lighting_corner/C in corners)
 		C.update_active()
 
 // Builds a lighting overlay for us, but only if our area is dynamic.
@@ -58,9 +58,9 @@
 
 		new /atom/movable/lighting_overlay(src)
 
-		for(var/datum/lighting_corner/C in corners)
+		for (var/datum/lighting_corner/C in corners)
 			if (!C.active) // We would activate the corner, calculate the lighting for it.
-				for(var/L in C.affecting)
+				for (var/L in C.affecting)
 					var/datum/light_source/S = L
 					S.recalc_corner(C)
 
@@ -75,7 +75,7 @@
 			lighting_overlay = O
 
 	var/totallums = 0
-	for(var/datum/lighting_corner/L in corners)
+	for (var/datum/lighting_corner/L in corners)
 		totallums += max(L.lum_r, L.lum_g, L.lum_b)
 
 	totallums /= 4 // 4 corners, max channel selected, return the average
@@ -106,7 +106,7 @@
 	if (!corners)
 		corners = list(null, null, null, null)
 
-	for(var/i = 1 to 4)
+	for (var/i = 1 to 4)
 		if (corners[i]) // Already have a corner on this direction.
 			continue
 

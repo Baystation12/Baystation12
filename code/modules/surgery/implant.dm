@@ -109,7 +109,7 @@
 			to_chat(user, SPAN_WARNING("\The [tool] is too big for [affected.cavity_name] cavity."))
 			return FALSE
 		var/total_volume = tool.get_storage_cost()
-		for(var/obj/item/I in affected.implants)
+		for (var/obj/item/I in affected.implants)
 			if (istype(I,/obj/item/implant))
 				continue
 			total_volume += I.get_storage_cost()
@@ -154,7 +154,7 @@
 /singleton/surgery_step/cavity/implant_removal/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
 	if (affected)
-		for(var/obj/O in affected.implants)
+		for (var/obj/O in affected.implants)
 			if (!istype(O, /obj/item/organ/internal))
 				return affected
 	return FALSE
@@ -179,7 +179,7 @@
 	if (exposed)
 		loot = affected.implants
 	else
-		for(var/datum/wound/wound in affected.wounds)
+		for (var/datum/wound/wound in affected.wounds)
 			if (LAZYLEN(wound.embedded_objects))
 				loot |= wound.embedded_objects
 			find_prob += 50
@@ -224,7 +224,7 @@
 /singleton/surgery_step/cavity/implant_removal/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	..()
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	for(var/obj/item/implant/imp in affected.implants)
+	for (var/obj/item/implant/imp in affected.implants)
 		var/fail_prob = 10
 		fail_prob += 100 - tool_quality(tool)
 		if (prob(fail_prob))

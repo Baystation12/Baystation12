@@ -21,12 +21,12 @@
 	..()
 
 	var/destination = null
-	for(var/obj/singularity/narsie/large/N in narsie_list)
+	for (var/obj/singularity/narsie/large/N in narsie_list)
 		destination = N.loc
 		break
 	if (destination)
 		var/prey = 0
-		for(var/mob/living/M in targets)
+		for (var/mob/living/M in targets)
 			if (!findNullRod(M))
 				M.forceMove(destination)
 				if (M != user)

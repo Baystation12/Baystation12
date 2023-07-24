@@ -109,7 +109,7 @@
 
 	// Run through our nymphs and spit them out
 	var/list/available_nymphs = list()
-	for(var/mob/living/carbon/alien/diona/nymph in donor.contents)
+	for (var/mob/living/carbon/alien/diona/nymph in donor.contents)
 		nymph.dropInto(donor.loc)
 		transfer_languages(donor, nymph, (WHITELISTED|RESTRICTED))
 		nymph.set_dir(pick(NORTH, SOUTH, EAST, WEST))
@@ -124,7 +124,7 @@
 	// Link availalbe nymphs together
 	var/mob/living/carbon/alien/diona/first_nymph
 	var/mob/living/carbon/alien/diona/last_nymph
-	for(var/mob/living/carbon/alien/diona/nymph in available_nymphs)
+	for (var/mob/living/carbon/alien/diona/nymph in available_nymphs)
 		if (!first_nymph)
 			first_nymph = nymph
 		else
@@ -145,7 +145,7 @@
 
 	log_and_message_admins("has split into nymphs; player now controls [key_name_admin(first_nymph)]", donor)
 
-	for(var/obj/item/W in donor)
+	for (var/obj/item/W in donor)
 		donor.drop_from_inventory(W)
 
 	donor.visible_message(SPAN_WARNING("\The [donor] quivers slightly, then splits apart with a wet slithering noise."))

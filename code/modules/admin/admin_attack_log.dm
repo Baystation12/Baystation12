@@ -22,7 +22,7 @@
 		return
 
 	var/list/user_keys = list()
-	for(var/mob/user in users)
+	for (var/mob/user in users)
 		user_keys += key_name(user)
 
 	log_admin("[english_list(user_keys)] [message]")
@@ -105,7 +105,7 @@
 	if (!victims || !length(victims))
 		return
 
-	for(var/mob/victim in victims)
+	for (var/mob/victim in victims)
 		admin_attack_log(attacker, victim, attacker_message, victim_message, admin_message)
 
 /proc/admin_inject_log(mob/attacker, mob/victim, obj/item/weapon, reagents, amount_transferred, violent=0)

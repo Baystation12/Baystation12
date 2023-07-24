@@ -50,7 +50,7 @@
 /obj/structure/grille/Destroy()
 	var/turf/location = loc
 	. = ..()
-	for(var/obj/structure/grille/G in orange(1, location))
+	for (var/obj/structure/grille/G in orange(1, location))
 		G.update_connections()
 		G.queue_icon_update()
 
@@ -67,14 +67,14 @@
 		var/image/I
 		icon_state = ""
 		if (on_frame)
-			for(var/i = 1 to 4)
+			for (var/i = 1 to 4)
 				if (other_connections[i] != "0")
 					I = image(icon, "grille_other_onframe[connections[i]]", dir = SHIFTL(1, i - 1))
 				else
 					I = image(icon, "grille_onframe[connections[i]]", dir = SHIFTL(1, i - 1))
 				overlays += I
 		else
-			for(var/i = 1 to 4)
+			for (var/i = 1 to 4)
 				if (other_connections[i] != "0")
 					I = image(icon, "grille_other[connections[i]]", dir = SHIFTL(1, i - 1))
 				else

@@ -26,7 +26,7 @@
 
 	if (!istype(T, /turf/space))	//If the above isn't a space turf then we force it to find one will most likely pick 1,1,1
 		T = locate(/turf/space)
-	for(var/species_name in all_species)
+	for (var/species_name in all_species)
 		var/datum/species/S = all_species[species_name]
 		var/mob/living/carbon/human/H = new(T, S.name)
 		if (H.need_breathe())
@@ -39,13 +39,13 @@
 	return 1
 
 /datum/unit_test/human_breath/check_result()
-	for(var/i in test_subjects)
+	for (var/i in test_subjects)
 		var/mob/living/carbon/human/H = test_subjects[i][1]
 		if (H.life_tick < 10) 	// Finish Condition
 			return 0	// Return 0 to try again later.
 
 	var/failcount = 0
-	for(var/i in test_subjects)
+	for (var/i in test_subjects)
 		var/mob/living/carbon/human/H = test_subjects[i][1]
 		var/ending_oxyloss = damage_check(H, DAMAGE_OXY)
 		var/starting_oxyloss = test_subjects[i][2]
@@ -70,7 +70,7 @@ var/global/default_mobloc = null
 
 	if (isnull(mobloc))
 		if (!default_mobloc)
-			for(var/turf/simulated/floor/tiled/T in world)
+			for (var/turf/simulated/floor/tiled/T in world)
 				var/pressure = T.zone?.air.return_pressure()
 				if (isnull(pressure))
 					continue
@@ -496,7 +496,7 @@ var/global/default_mobloc = null
 	if (!length(valid_states))
 		return 1
 
-	for(var/i = 1 to length(SSrobots.all_module_names))
+	for (var/i = 1 to length(SSrobots.all_module_names))
 		var/modname = lowertext(SSrobots.all_module_names[i])
 		var/bad_msg = "[ascii_red]--------------- [modname]"
 		if (!(modname in valid_states))
@@ -520,7 +520,7 @@ var/global/default_mobloc = null
 	var/failcount = 0
 
 /datum/unit_test/species_base_skin/start_test()
-	for(var/species_name in all_species)
+	for (var/species_name in all_species)
 		var/datum/species/S = all_species[species_name]
 		if (S.base_skin_colours)
 			if (!(S.appearance_flags & SPECIES_APPEARANCE_HAS_BASE_SKIN_COLOURS))
@@ -532,7 +532,7 @@ var/global/default_mobloc = null
 				failcount++
 				continue
 			var/to_fail = FALSE
-			for(var/tag in S.has_limbs)
+			for (var/tag in S.has_limbs)
 				var/list/paths = S.has_limbs[tag]
 				var/obj/item/organ/external/E = paths["path"]
 				var/list/gender_test = list("")
@@ -540,8 +540,8 @@ var/global/default_mobloc = null
 					gender_test = list("_m", "_f")
 				var/icon_name = initial(E.icon_name)
 
-				for(var/base in S.base_skin_colours)
-					for(var/gen in gender_test)
+				for (var/base in S.base_skin_colours)
+					for (var/gen in gender_test)
 						if (!("[icon_name][gen][S.base_skin_colours[base]]" in icon_states(S.icobase)))
 							to_fail = TRUE
 							log_debug("[S.name] has missing icon: [icon_name][gen][S.base_skin_colours[base]] for base [base] and limb tag [tag].")
@@ -570,13 +570,13 @@ var/global/default_mobloc = null
 
 /datum/unit_test/mob_nullspace/start_test()
 	// Simply create one of each species type in nullspace
-	for(var/species_name in all_species)
+	for (var/species_name in all_species)
 		var/test_subject = new/mob/living/carbon/human(null, species_name)
 		test_subjects += test_subject
 	return TRUE
 
 /datum/unit_test/mob_nullspace/check_result()
-	for(var/ts in test_subjects)
+	for (var/ts in test_subjects)
 		var/mob/living/carbon/human/H = ts
 		if (H.life_tick < 10)
 			return FALSE
@@ -591,10 +591,10 @@ var/global/default_mobloc = null
 
 /datum/unit_test/mob_organ_size/start_test()
 	var/failed = FALSE
-	for(var/species_name in all_species)
+	for (var/species_name in all_species)
 		var/mob/living/carbon/human/H = new(null, species_name)
-		for(var/obj/item/organ/external/E in H.organs)
-			for(var/obj/item/organ/internal/I in E.internal_organs)
+		for (var/obj/item/organ/external/E in H.organs)
+			for (var/obj/item/organ/internal/I in E.internal_organs)
 				if (I.w_class > E.cavity_max_w_class)
 					failed = TRUE
 					log_bad("Internal organ [I] inside external organ [E] on species [species_name] was too large to fit.")
@@ -620,7 +620,7 @@ var/global/default_mobloc = null
 
 /datum/unit_test/mob_butchery/start_test()
 
-	for(var/mobtype in subtypesof(/mob/living))
+	for (var/mobtype in subtypesof(/mob/living))
 
 		// Humans use species for their products and are
 		// difficult to properly unit test because of this.
@@ -659,22 +659,22 @@ var/global/default_mobloc = null
 			failed += "[mobtype] - invalid bone_material ([bmat]) but bone_amount above zero"
 
 	var/list/spawned_mobs = list()
-	for(var/mobtype in check_skin)
+	for (var/mobtype in check_skin)
 		var/mob/living/M = spawned_mobs[mobtype] || new mobtype
 		spawned_mobs[mobtype] = M
 		if (!length(M.harvest_skin()))
 			failed += "[mobtype] - invalid skin products"
-	for(var/mobtype in check_bones)
+	for (var/mobtype in check_bones)
 		var/mob/living/M = spawned_mobs[mobtype] || new mobtype
 		spawned_mobs[mobtype] = M
 		if (!length(M.harvest_bones()))
 			failed += "[mobtype] - invalid bone products"
-	for(var/mobtype in check_meat)
+	for (var/mobtype in check_meat)
 		var/mob/living/M = spawned_mobs[mobtype] || new mobtype
 		spawned_mobs[mobtype] = M
 		if (!length(M.harvest_meat()))
 			failed += "[mobtype] - invalid meat products"
-	for(var/thing in spawned_mobs)
+	for (var/thing in spawned_mobs)
 		var/mob/living/M = spawned_mobs[thing]
 		if (!QDELETED(M))
 			qdel(M)

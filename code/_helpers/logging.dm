@@ -56,7 +56,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	to_debug_listeners(text, "WARNING")
 
 /proc/to_debug_listeners(text, prefix = "DEBUG")
-	for(var/client/C as anything in GLOB.admins)
+	for (var/client/C as anything in GLOB.admins)
 		if (C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == GLOB.PREF_SHOW)
 			to_chat(C, SPAN_DEBUG("<b>[prefix]</b>: [text]"))
 
@@ -208,7 +208,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 		return "*null*"
 	if (islist(d))
 		var/list/L = list()
-		for(var/e in d)
+		for (var/e in d)
 			// Indexing on numbers just gives us the same number again in the best case and causes an index out of bounds runtime in the worst
 			var/v = isnum(e) ? null : d[e]
 			L += "[log_info_line(e)][v ? " - [log_info_line(v)]" : ""]"

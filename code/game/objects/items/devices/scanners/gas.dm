@@ -42,7 +42,7 @@
 
 		if (total_moles > 0 && length(mixture.gas))
 			text_details += "<h2>Gas Details:</h2><dl>"
-			for(var/mix in mixture.gas)
+			for (var/mix in mixture.gas)
 				var/percentage = round(mixture.gas[mix]/total_moles * 100, 0.01)
 				if (!percentage)
 					continue

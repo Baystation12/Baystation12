@@ -11,7 +11,7 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 		if (!authorized_modes)
 			authorized_modes = list()
 
-		for(var/i = length(authorized_modes) + 1 to length(firemodes))
+		for (var/i = length(authorized_modes) + 1 to length(firemodes))
 			authorized_modes.Add(default_mode_authorization)
 
 	. = ..()

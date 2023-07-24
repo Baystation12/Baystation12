@@ -44,7 +44,7 @@
 // If there are less than two nymphs (or if none of the nymphs have players), it isn't a viable gestalt.
 /obj/structure/diona_gestalt/proc/check_nymphs()
 	if (LAZYLEN(length(nymphs)) >= 2)
-		for(var/nimp in nymphs)
+		for (var/nimp in nymphs)
 			var/mob/living/carbon/alien/diona/chirp = nimp
 			if (chirp.client)
 				return

@@ -70,7 +70,7 @@ SUBSYSTEM_DEF(radiation)
 	if (!istype(T))
 		return
 
-	for(var/value in sources)
+	for (var/value in sources)
 		var/datum/radiation_source/source = value
 		if (source.rad_power < .)
 			continue // Already being affected by a stronger source

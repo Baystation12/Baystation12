@@ -205,10 +205,10 @@
 	var/list/affected_z = GetConnectedZlevels(TS.z)
 
 	// Effect 1: Radiation, weakening to all mobs on Z level
-	for(var/z in affected_z)
+	for (var/z in affected_z)
 		SSradiation.z_radiate(locate(1, 1, z), DETONATION_RADS, 1)
 
-	for(var/mob/living/mob in GLOB.alive_mobs)
+	for (var/mob/living/mob in GLOB.alive_mobs)
 		var/turf/TM = get_turf(mob)
 		if (!TM)
 			continue
@@ -219,7 +219,7 @@
 		to_chat(mob, SPAN_DANGER("An invisible force slams you against the ground!"))
 
 	// Effect 2: Z-level wide electrical pulse
-	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
+	for (var/obj/machinery/power/apc/A in SSmachines.machinery)
 		if (!(A.z in affected_z))
 			continue
 
@@ -233,7 +233,7 @@
 		else
 			A.energy_fail(round(DETONATION_SHUTDOWN_APC * random_change))
 
-	for(var/obj/machinery/power/smes/buildable/S in SSmachines.machinery)
+	for (var/obj/machinery/power/smes/buildable/S in SSmachines.machinery)
 		if (!(S.z in affected_z))
 			continue
 		// Causes SMESes to shut down for a bit
@@ -242,7 +242,7 @@
 
 	// Effect 3: Break solar arrays
 
-	for(var/obj/machinery/power/solar/S in SSmachines.machinery)
+	for (var/obj/machinery/power/solar/S in SSmachines.machinery)
 		if (!(S.z in affected_z))
 			continue
 		if (prob(DETONATION_SOLAR_BREAK_CHANCE))
@@ -309,7 +309,7 @@
 			GLOB.global_announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")
 			public_alert = 1
 			GLOB.using_map.unbolt_saferooms() // torch
-			for(var/mob/M in GLOB.player_list)
+			for (var/mob/M in GLOB.player_list)
 				var/turf/T = get_turf(M)
 				if (T && (T.z in GLOB.using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
 					sound_to(M, 'sound/ambience/matteralarm.ogg')
@@ -409,7 +409,7 @@
 
 		env.merge(removed)
 
-	for(var/mob/living/carbon/human/subject in view(src, min(7, round(sqrt(power/6)))))
+	for (var/mob/living/carbon/human/subject in view(src, min(7, round(sqrt(power/6)))))
 		var/obj/item/organ/internal/eyes/eyes = subject.internal_organs_by_name[BP_EYES]
 		if (!eyes)
 			continue
@@ -557,7 +557,7 @@
 	power += 200
 
 	//Some poor sod got eaten, go ahead and irradiate people nearby.
-	for(var/mob/living/l in range(10))
+	for (var/mob/living/l in range(10))
 		if (l in view())
 			to_chat(l, SPAN_WARNING("As \the [src] slowly stops resonating, you feel an intense wave of heat wash over you."))
 		else
@@ -567,7 +567,7 @@
 
 
 /proc/supermatter_pull(atom/target, pull_range = 255, pull_power = STAGE_FIVE)
-	for(var/atom/A in range(pull_range, target))
+	for (var/atom/A in range(pull_range, target))
 		A.singularity_pull(target, pull_power)
 
 /obj/machinery/power/supermatter/GotoAirflowDest(n) //Supermatter not pushed around by airflow

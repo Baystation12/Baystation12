@@ -176,7 +176,7 @@
 			dat += "<center><A href='?src=\ref[src];back=1'>Back</a> - <A href='?src=\ref[src];refresh=1'>Refresh</center><hr>"
 			dat += {"<table border='1' width='100%'><tr><th width = '5%'>X</th><th width='15%'>Sending Dep.</th><th width='15%'>Receiving Dep.</th>
 			<th width='300px' word-wrap: break-word>Message</th><th width='15%'>Stamp</th><th width='15%'>ID Auth.</th><th width='15%'>Priority.</th></tr>"}
-			for(var/datum/data_rc_msg/rc in src.linkedServer.rc_msgs)
+			for (var/datum/data_rc_msg/rc in src.linkedServer.rc_msgs)
 				index++
 				if (index > 3000)
 					break
@@ -310,7 +310,7 @@
 	..()
 	spawn(10)
 		if (message_servers)
-			for(var/obj/machinery/message_server/server in message_servers)
+			for (var/obj/machinery/message_server/server in message_servers)
 				if (!isnull(server))
 					if (!isnull(server.decryptkey))
 						info = "<center><h2>Daily Key Reset</h2></center><br>The new message monitor key is '[server.decryptkey]'.<br>This key is only intended for personnel granted access to the messaging server. Keep it safe.<br>If necessary, change the password to a more secure one."

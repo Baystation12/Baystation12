@@ -10,9 +10,9 @@
 
 /datum/pipe_network/Destroy()
 	STOP_PROCESSING_PIPENET(src)
-	for(var/datum/pipeline/line_member in line_members)
+	for (var/datum/pipeline/line_member in line_members)
 		line_member.network = null
-	for(var/obj/machinery/atmospherics/normal_member in normal_members)
+	for (var/obj/machinery/atmospherics/normal_member in normal_members)
 		normal_member.reassign_network(src, null)
 	gases.Cut()  // Do not qdel the gases, we don't own them
 	leaks.Cut()
@@ -27,7 +27,7 @@
 		reconcile_air() //equalize_gases(gases)
 
 	//Give pipelines their process call for pressure checking and what not. Have to remove pressure checks for the time being as pipes don't radiate heat - Mport
-	//for(var/datum/pipeline/line_member in line_members)
+	//for (var/datum/pipeline/line_member in line_members)
 	//	line_member.process()
 
 /datum/pipe_network/proc/build_network(obj/machinery/atmospherics/start_normal, obj/machinery/atmospherics/reference)
@@ -55,10 +55,10 @@
 
 	leaks |= giver.leaks
 
-	for(var/obj/machinery/atmospherics/normal_member in giver.normal_members)
+	for (var/obj/machinery/atmospherics/normal_member in giver.normal_members)
 		normal_member.reassign_network(giver, src)
 
-	for(var/datum/pipeline/line_member in giver.line_members)
+	for (var/datum/pipeline/line_member in giver.line_members)
 		line_member.network = src
 
 	update_network_gases()
@@ -70,14 +70,14 @@
 	gases = list()
 	volume = 0
 
-	for(var/obj/machinery/atmospherics/normal_member in normal_members)
+	for (var/obj/machinery/atmospherics/normal_member in normal_members)
 		var/result = normal_member.return_network_air(src)
 		if (result) gases += result
 
-	for(var/datum/pipeline/line_member in line_members)
+	for (var/datum/pipeline/line_member in line_members)
 		gases += line_member.air
 
-	for(var/datum/gas_mixture/air in gases)
+	for (var/datum/gas_mixture/air in gases)
 		volume += air.volume
 
 /datum/pipe_network/proc/reconcile_air()

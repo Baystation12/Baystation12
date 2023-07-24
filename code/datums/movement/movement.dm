@@ -7,7 +7,7 @@ var/global/const/MOVEMENT_STOP    = FLAG(3)
 #define INIT_MOVEMENT_HANDLERS \
 if (LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	var/new_handlers = list(); \
-	for(var/path in movement_handlers){ \
+	for (var/path in movement_handlers){ \
 		var/arguments = movement_handlers[path];   \
 		arguments = arguments ? (list(src) | (arguments)) : list(src); \
 		new_handlers += new path(arglist(arguments)); \
@@ -27,7 +27,7 @@ if (LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	if (ispath(movement_handlers[1]))
 		return (handler_path in movement_handlers)
 	else
-		for(var/mh in movement_handlers)
+		for (var/mh in movement_handlers)
 			var/datum/MH = mh
 			if (MH.type == handler_path)
 				return TRUE
@@ -41,7 +41,7 @@ if (LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	// If a handler_path_to_add_before was given, attempt to find it and insert our handler just before it
 	if (handler_path_to_add_before && LAZYLEN(movement_handlers))
 		var/index = 0
-		for(var/handler in movement_handlers)
+		for (var/handler in movement_handlers)
 			index++
 			var/datum/H = handler
 			if (H.type == handler_path_to_add_before)
@@ -55,7 +55,7 @@ if (LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	INIT_MOVEMENT_HANDLERS
 
 	if (ispath(handler_path))
-		for(var/handler in movement_handlers)
+		for (var/handler in movement_handlers)
 			var/datum/H = handler
 			if (H.type == handler_path)
 				REMOVE_AND_QDEL(H)
@@ -70,7 +70,7 @@ if (LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 /atom/movable/proc/GetMovementHandler(handler_path)
 	INIT_MOVEMENT_HANDLERS
 
-	for(var/handler in movement_handlers)
+	for (var/handler in movement_handlers)
 		var/datum/H = handler
 		if (H.type == handler_path)
 			return H
@@ -84,7 +84,7 @@ if (LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	SET_MOVER(mover)
 	SET_IS_EXTERNAL(mover)
 
-	for(var/mh in movement_handlers)
+	for (var/mh in movement_handlers)
 		var/datum/movement_handler/movement_handler = mh
 		if (movement_handler.MayMove(mover, is_external) & MOVEMENT_STOP)
 			return MOVEMENT_HANDLED
@@ -102,7 +102,7 @@ if (LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	SET_MOVER(mover)
 	SET_IS_EXTERNAL(mover)
 
-	for(var/mh in movement_handlers)
+	for (var/mh in movement_handlers)
 		var/datum/movement_handler/movement_handler = mh
 		var/may_move = movement_handler.MayMove(mover, is_external)
 		if (may_move & MOVEMENT_STOP)

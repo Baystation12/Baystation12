@@ -117,7 +117,7 @@
 
 	if (charges && length(charges))
 		var/list/processed_charges = list()
-		for(var/list/charge in charges)
+		for (var/list/charge in charges)
 			var/datum/rig_charge/charge_dat = new
 
 			charge_dat.short_name   = charge[1]
@@ -311,8 +311,8 @@
 		else
 			air_tank = "NOT FOUND"
 		stat("Tank Pressure:", air_tank)
-		for(var/obj/item/rig_module/module in R.installed_modules)
-			for(var/stat_rig_module/SRM in module.stat_modules)
+		for (var/obj/item/rig_module/module in R.installed_modules)
+			for (var/stat_rig_module/SRM in module.stat_modules)
 				if (SRM.CanUse())
 					stat(SRM.module.interface_name,SRM)
 

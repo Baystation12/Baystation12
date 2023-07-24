@@ -37,7 +37,7 @@ SUBSYSTEM_DEF(jobs)
 
 	// Create main map jobs.
 	primary_job_datums.Cut()
-	for(var/jobtype in (list(DEFAULT_JOB_TYPE) | GLOB.using_map.allowed_jobs))
+	for (var/jobtype in (list(DEFAULT_JOB_TYPE) | GLOB.using_map.allowed_jobs))
 		var/datum/job/job = get_by_path(jobtype)
 		if (!job)
 			job = new jobtype
@@ -45,9 +45,9 @@ SUBSYSTEM_DEF(jobs)
 
 	// Create abstract submap archetype jobs for use in prefs, etc.
 	archetype_job_datums.Cut()
-	for(var/atype in SSmapping.submap_archetypes)
+	for (var/atype in SSmapping.submap_archetypes)
 		var/singleton/submap_archetype/arch = SSmapping.submap_archetypes[atype]
-		for(var/jobtype in arch.crew_jobs)
+		for (var/jobtype in arch.crew_jobs)
 			var/datum/job/job = get_by_path(jobtype)
 			if (!job && ispath(jobtype, /datum/job/submap))
 				// Set this here so that we don't create multiples of the same title
@@ -67,10 +67,10 @@ SUBSYSTEM_DEF(jobs)
 	// Populate/set up map job lists.
 	job_lists_by_map_name = list("[GLOB.using_map.full_name]" = list("jobs" = primary_job_datums, "default_to_hidden" = FALSE))
 
-	for(var/atype in SSmapping.submap_archetypes)
+	for (var/atype in SSmapping.submap_archetypes)
 		var/list/submap_job_datums
 		var/singleton/submap_archetype/arch = SSmapping.submap_archetypes[atype]
-		for(var/jobtype in arch.crew_jobs)
+		for (var/jobtype in arch.crew_jobs)
 			var/datum/job/job = get_by_path(jobtype)
 			if (job)
 				LAZYADD(submap_job_datums, job)
@@ -78,7 +78,7 @@ SUBSYSTEM_DEF(jobs)
 			job_lists_by_map_name[arch.descriptor] = list("jobs" = submap_job_datums, "default_to_hidden" = TRUE)
 
 	// Update global map blacklists and whitelists.
-	for(var/mappath in GLOB.all_maps)
+	for (var/mappath in GLOB.all_maps)
 		var/datum/map/M = GLOB.all_maps[mappath]
 		M.setup_job_lists()
 
@@ -86,12 +86,12 @@ SUBSYSTEM_DEF(jobs)
 	titles_to_datums = list()
 	types_to_datums = list()
 	positions_by_department = list()
-	for(var/map_name in job_lists_by_map_name)
+	for (var/map_name in job_lists_by_map_name)
 		var/list/map_data = job_lists_by_map_name[map_name]
-		for(var/datum/job/job in map_data["jobs"])
+		for (var/datum/job/job in map_data["jobs"])
 			types_to_datums[job.type] = job
 			titles_to_datums[job.title] = job
-			for(var/alt_title in job.alt_titles)
+			for (var/alt_title in job.alt_titles)
 				titles_to_datums[alt_title] = job
 			if (job.department_flag)
 				for (var/I in 1 to length(GLOB.bitflags))
@@ -109,18 +109,18 @@ SUBSYSTEM_DEF(jobs)
 
 
 /datum/controller/subsystem/jobs/proc/guest_jobbans(job)
-	for(var/dept in list(COM, MSC, SEC))
+	for (var/dept in list(COM, MSC, SEC))
 		if (job in titles_by_department(dept))
 			return TRUE
 	return FALSE
 
 /datum/controller/subsystem/jobs/proc/reset_occupations()
-	for(var/mob/new_player/player in GLOB.player_list)
+	for (var/mob/new_player/player in GLOB.player_list)
 		if ((player) && (player.mind))
 			player.mind.assigned_job = null
 			player.mind.assigned_role = null
 			player.mind.special_role = null
-	for(var/datum/job/job in primary_job_datums)
+	for (var/datum/job/job in primary_job_datums)
 		job.current_positions = 0
 	unassigned_roundstart = list()
 
@@ -196,7 +196,7 @@ SUBSYSTEM_DEF(jobs)
 		if ((job.current_positions < position_limit) || position_limit == -1)
 			player.mind.assigned_job = job
 			player.mind.assigned_role = rank
-			player.mind.role_alt_title = job.get_alt_title_for(player.client)
+			player.mind.role_alt_title = job.get_alt_title_for (player.client)
 			unassigned_roundstart -= player
 			job.current_positions++
 			return 1
@@ -204,7 +204,7 @@ SUBSYSTEM_DEF(jobs)
 
 /datum/controller/subsystem/jobs/proc/find_occupation_candidates(datum/job/job, level, flag)
 	var/list/candidates = list()
-	for(var/mob/new_player/player in unassigned_roundstart)
+	for (var/mob/new_player/player in unassigned_roundstart)
 		if (jobban_isbanned(player, job.title))
 			continue
 		if (!job.player_old_enough(player.client))
@@ -218,7 +218,7 @@ SUBSYSTEM_DEF(jobs)
 	return candidates
 
 /datum/controller/subsystem/jobs/proc/give_random_job(mob/new_player/player, datum/game_mode/mode = SSticker.mode)
-	for(var/datum/job/job in shuffle(primary_job_datums))
+	for (var/datum/job/job in shuffle(primary_job_datums))
 		if (!job)
 			continue
 		if (job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
@@ -274,7 +274,7 @@ SUBSYSTEM_DEF(jobs)
 
 ///This proc is called at the start of the level loop of divide_occupations() and will cause head jobs to be checked before any other jobs of the same level
 /datum/controller/subsystem/jobs/proc/CheckHeadPositions(level, datum/game_mode/mode)
-	for(var/command_position in titles_by_department(COM))
+	for (var/command_position in titles_by_department(COM))
 		var/datum/job/job = get_by_title(command_position)
 		if (!job)	continue
 		var/list/candidates = find_occupation_candidates(job, level)
@@ -288,7 +288,7 @@ SUBSYSTEM_DEF(jobs)
  **/
 /datum/controller/subsystem/jobs/proc/divide_occupations(datum/game_mode/mode)
 	//Get the players who are ready
-	for(var/mob/new_player/player in GLOB.player_list)
+	for (var/mob/new_player/player in GLOB.player_list)
 		if (player.ready && player.mind && !player.mind.assigned_role)
 			unassigned_roundstart += player
 	if (length(unassigned_roundstart) == 0)	return 0
@@ -297,7 +297,7 @@ SUBSYSTEM_DEF(jobs)
 	//People who wants to be assistants, sure, go on.
 	var/datum/job/assist = new DEFAULT_JOB_TYPE ()
 	var/list/assistant_candidates = find_occupation_candidates(assist, 3)
-	for(var/mob/new_player/player in assistant_candidates)
+	for (var/mob/new_player/player in assistant_candidates)
 		assign_role(player, GLOB.using_map.default_assistant_title, mode = mode)
 		assistant_candidates -= player
 
@@ -311,15 +311,15 @@ SUBSYSTEM_DEF(jobs)
 
 	// Loop through all levels from high to low
 	var/list/shuffledoccupations = shuffle(primary_job_datums)
-	for(var/level = 1 to 3)
+	for (var/level = 1 to 3)
 		//Check the head jobs first each level
 		CheckHeadPositions(level, mode)
 
 		// Loop through all unassigned players
 		var/list/deferred_jobs = list()
-		for(var/mob/new_player/player in unassigned_roundstart)
+		for (var/mob/new_player/player in unassigned_roundstart)
 			// Loop through all jobs
-			for(var/datum/job/job in shuffledoccupations) // SHUFFLE ME BABY
+			for (var/datum/job/job in shuffledoccupations) // SHUFFLE ME BABY
 				if (job && !mode.disabled_jobs.Find(job.title))
 					if (job.defer_roundstart_spawn)
 						deferred_jobs[job] = TRUE
@@ -328,8 +328,8 @@ SUBSYSTEM_DEF(jobs)
 						break
 
 		if (LAZYLEN(deferred_jobs))
-			for(var/mob/new_player/player in unassigned_roundstart)
-				for(var/datum/job/job in deferred_jobs)
+			for (var/mob/new_player/player in unassigned_roundstart)
+				for (var/datum/job/job in deferred_jobs)
 					if (attempt_role_assignment(player, job, level, mode))
 						unassigned_roundstart -= player
 						break
@@ -337,11 +337,11 @@ SUBSYSTEM_DEF(jobs)
 
 	// Hand out random jobs to the people who didn't get any in the last check
 	// Also makes sure that they got their preference correct
-	for(var/mob/new_player/player in unassigned_roundstart)
+	for (var/mob/new_player/player in unassigned_roundstart)
 		if (player.client.prefs.alternate_option == GET_RANDOM_JOB)
 			give_random_job(player, mode)
 	// For those who wanted to be assistant if their preferences were filled, here you go.
-	for(var/mob/new_player/player in unassigned_roundstart)
+	for (var/mob/new_player/player in unassigned_roundstart)
 		if (player.client.prefs.alternate_option == BE_ASSISTANT)
 			var/datum/job/ass = DEFAULT_JOB_TYPE
 			if ((GLOB.using_map.flags & MAP_HAS_BRANCH) && player.client.prefs.branches[initial(ass.title)])
@@ -349,7 +349,7 @@ SUBSYSTEM_DEF(jobs)
 				ass = branch.assistant_job
 			assign_role(player, initial(ass.title), mode = mode)
 	//For ones returning to lobby
-	for(var/mob/new_player/player in unassigned_roundstart)
+	for (var/mob/new_player/player in unassigned_roundstart)
 		if (player.client.prefs.alternate_option == RETURN_TO_LOBBY)
 			player.ready = 0
 			player.new_player_panel()
@@ -374,7 +374,7 @@ SUBSYSTEM_DEF(jobs)
 	var/list/spawn_in_storage = list()
 	var/list/loadout_taken_slots = list()
 	if (H.client.prefs.Gear() && job.loadout_allowed)
-		for(var/thing in H.client.prefs.Gear())
+		for (var/thing in H.client.prefs.Gear())
 			var/datum/gear/G = gear_datums[thing]
 			if (G)
 				var/permitted = 0
@@ -394,7 +394,7 @@ SUBSYSTEM_DEF(jobs)
 						permitted = 1
 
 				if (permitted && G.allowed_skills)
-					for(var/required in G.allowed_skills)
+					for (var/required in G.allowed_skills)
 						if (!H.skill_check(required,G.allowed_skills[required]))
 							permitted = 0
 
@@ -412,16 +412,16 @@ SUBSYSTEM_DEF(jobs)
 
 	// do accessories last so they don't attach to a suit that will be replaced
 	if (H.char_rank && H.char_rank.accessory)
-		for(var/accessory_path in H.char_rank.accessory)
+		for (var/accessory_path in H.char_rank.accessory)
 			var/list/accessory_data = H.char_rank.accessory[accessory_path]
 			if (islist(accessory_data))
 				var/amt = accessory_data[1]
 				var/list/accessory_args = accessory_data.Copy()
 				accessory_args[1] = src
-				for(var/i in 1 to amt)
+				for (var/i in 1 to amt)
 					H.equip_to_slot_or_del(new accessory_path(arglist(accessory_args)), slot_tie)
 			else
-				for(var/i in 1 to (isnull(accessory_data)? 1 : accessory_data))
+				for (var/i in 1 to (isnull(accessory_data)? 1 : accessory_data))
 					H.equip_to_slot_or_del(new accessory_path(src), slot_tie)
 
 	return spawn_in_storage
@@ -517,7 +517,7 @@ SUBSYSTEM_DEF(jobs)
 		return other_mob
 
 	if (spawn_in_storage)
-		for(var/datum/gear/G in spawn_in_storage)
+		for (var/datum/gear/G in spawn_in_storage)
 			G.spawn_in_storage_or_drop(H, H.client.prefs.Gear()[G.display_name])
 
 	if (istype(H)) //give humans wheelchairs, if they need them.
@@ -555,7 +555,7 @@ SUBSYSTEM_DEF(jobs)
 	return positions_by_department["[dept]"] || list()
 
 /datum/controller/subsystem/jobs/proc/spawn_empty_ai()
-	for(var/obj/effect/landmark/start/S in landmarks_list)
+	for (var/obj/effect/landmark/start/S in landmarks_list)
 		if (S.name != "AI")
 			continue
 		if (locate(/mob/living) in S.loc)

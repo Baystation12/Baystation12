@@ -41,7 +41,7 @@
 	..()
 
 /obj/machinery/power/smes/batteryrack/Destroy()
-	for(var/obj/item/cell/C in internal_cells)
+	for (var/obj/item/cell/C in internal_cells)
 		qdel(C)
 	internal_cells = null
 	return ..()
@@ -60,7 +60,7 @@
 		icon_state = "rack-closed"
 	else
 		icon_state = "rack"
-		for(var/obj/item/cell/C as anything in internal_cells)
+		for (var/obj/item/cell/C as anything in internal_cells)
 			if (++cellcount > max_cells)
 				break
 			overlays += "cell[cellcount]"
@@ -72,7 +72,7 @@
 // Recalculate maxcharge and similar variables.
 /obj/machinery/power/smes/batteryrack/proc/update_maxcharge()
 	var/newmaxcharge = 0
-	for(var/obj/item/cell/C in internal_cells)
+	for (var/obj/item/cell/C in internal_cells)
 		newmaxcharge += C.maxcharge
 
 	capacity = newmaxcharge
@@ -108,7 +108,7 @@
 		if (!amount)
 			return
 	// We're still here, so it means the least charged cell was full OR we don't care about equalising the charge. Give power to other cells instead.
-	for(var/obj/item/cell/C in internal_cells)
+	for (var/obj/item/cell/C in internal_cells)
 		amount -= C.give(amount)
 		// No more power to input so return.
 		if (!amount)
@@ -124,7 +124,7 @@
 		if (!amount)
 			return
 	// We're still here, so it means the most charged cell didn't have enough power OR we don't care about equalising the charge. Use power from other cells instead.
-	for(var/obj/item/cell/C in internal_cells)
+	for (var/obj/item/cell/C in internal_cells)
 		amount -= C.use(amount)
 		// No more power to output so return.
 		if (!amount)
@@ -133,7 +133,7 @@
 // Helper procs to get most/least charged cells.
 /obj/machinery/power/smes/batteryrack/proc/get_most_charged_cell()
 	var/obj/item/cell/CL = null
-	for(var/obj/item/cell/C in internal_cells)
+	for (var/obj/item/cell/C in internal_cells)
 		if (CL == null)
 			CL = C
 		else if (CL.percent() < C.percent())
@@ -141,7 +141,7 @@
 	return CL
 /obj/machinery/power/smes/batteryrack/proc/get_least_charged_cell()
 	var/obj/item/cell/CL = null
-	for(var/obj/item/cell/C in internal_cells)
+	for (var/obj/item/cell/C in internal_cells)
 		if (CL == null)
 			CL = C
 		else if (CL.percent() > C.percent())
@@ -166,7 +166,7 @@
 
 /obj/machinery/power/smes/batteryrack/Process()
 	charge = 0
-	for(var/obj/item/cell/C in internal_cells)
+	for (var/obj/item/cell/C in internal_cells)
 		charge += C.charge
 
 	..()
@@ -209,7 +209,7 @@
 	data["cells_cur"] = length(internal_cells)
 	var/list/cells = list()
 	var/cell_index = 1
-	for(var/obj/item/cell/C in internal_cells)
+	for (var/obj/item/cell/C in internal_cells)
 		var/list/cell[0]
 		cell["slot"] = cell_index
 		cell["used"] = 1
@@ -232,7 +232,7 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/power/smes/batteryrack/dismantle()
-	for(var/obj/item/cell/C in internal_cells)
+	for (var/obj/item/cell/C in internal_cells)
 		C.dropInto(loc)
 		internal_cells -= C
 	return ..()

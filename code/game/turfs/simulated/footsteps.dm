@@ -5,7 +5,7 @@
 		. = pick(FS.footstep_sounds)
 
 /turf/simulated/proc/get_footstep_sound(mob/caller)
-	for(var/obj/structure/S in contents)
+	for (var/obj/structure/S in contents)
 		if (S.footstep_type)
 			return get_footstep(S.footstep_type, caller)
 

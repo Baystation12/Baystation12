@@ -51,7 +51,7 @@
 		return 1
 
 	//Language check.
-	for(var/datum/language/L in src.languages)
+	for (var/datum/language/L in src.languages)
 		if (speaking.name == L.name)
 			return 1
 

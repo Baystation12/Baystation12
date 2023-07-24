@@ -97,7 +97,7 @@ Scent intensity
 	emit_scent()
 
 /datum/extension/scent/proc/emit_scent()
-	for(var/mob/living/carbon/human/H in all_hearers(holder, range))
+	for (var/mob/living/carbon/human/H in all_hearers(holder, range))
 		var/turf/T = get_turf(H.loc)
 		if (!T)
 			continue
@@ -137,7 +137,7 @@ To add a scent extension to an atom using a reagent's info, where R. is the reag
 	var/datum/reagent/scent_intensity
 	if (!smelly_atom.reagents || !smelly_atom.reagents.total_volume)
 		return
-	for(var/datum/reagent/reagent_to_compare in smelly_atom.reagents.reagent_list)
+	for (var/datum/reagent/reagent_to_compare in smelly_atom.reagents.reagent_list)
 		var/datum/reagent/R = reagent_to_compare
 		if (!R.scent)
 			continue

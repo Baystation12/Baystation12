@@ -80,12 +80,12 @@
 	var/locations[] = length(stationlocs) ? stationlocs : drinks//if null, defaults to drinks instead.
 
 	var/names[] = list()
-	for(var/datum/computer_file/report/crew_record/t in GLOB.all_crew_records)//Picks from crew manifest.
+	for (var/datum/computer_file/report/crew_record/t in GLOB.all_crew_records)//Picks from crew manifest.
 		names += t.get_name()
 
 	var/maxwords = words//Extra var to check for duplicates.
 
-	for(words,words>0,words--)//Randomly picks from one of the choices below.
+	for (words,words>0,words--)//Randomly picks from one of the choices below.
 
 		if (words==1&&(1 in safety)&&(2 in safety))//If there is only one word remaining and choice 1 or 2 have not been selected.
 			safety = list(pick(1,2))//Select choice 1 or 2.

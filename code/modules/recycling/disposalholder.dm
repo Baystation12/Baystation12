@@ -36,7 +36,7 @@
 
 	// now everything inside the disposal gets put into the holder
 	// note AM since can contain mobs or objs
-	for(var/atom/movable/AM in stuff)
+	for (var/atom/movable/AM in stuff)
 		if (AM == src)
 			continue
 		AM.forceMove(src)
@@ -75,7 +75,7 @@
 		var/obj/structure/disposalpipe/last
 
 		if (hasmob && prob(10))
-			for(var/mob/living/H in check_mob(src))
+			for (var/mob/living/H in check_mob(src))
 				H.apply_damage(30, DAMAGE_BRUTE, null, DAMAGE_FLAG_DISPERSED, "Blunt Trauma", ARMOR_MELEE_MAJOR)//horribly maim any living creature jumping down disposals.  c'est la vie
 
 		var/obj/structure/disposalpipe/curr = loc
@@ -102,7 +102,7 @@
 		return null
 
 	var/fdir = turn(dir, 180)	// flip the movement direction
-	for(var/obj/structure/disposalpipe/P in T)
+	for (var/obj/structure/disposalpipe/P in T)
 		if (fdir & P.dpdir)		// find pipe direction mask that matches flipped dir
 			return P
 	// if no matching pipe, return null
@@ -114,7 +114,7 @@
 	if (other.reagents?.total_volume)
 		src.create_reagents()
 		other.reagents.trans_to_holder(src.reagents, other.reagents.total_volume)
-	for(var/atom/movable/AM in other)
+	for (var/atom/movable/AM in other)
 		AM.forceMove(src)		// move everything in other holder to this one
 		if (ismob(AM))
 			var/mob/M = AM

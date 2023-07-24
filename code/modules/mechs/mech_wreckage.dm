@@ -14,10 +14,10 @@
 	if (exosuit)
 		name = "wreckage of \the [exosuit.name]"
 		if (!gibbed)
-			for(var/obj/item/thing in list(exosuit.arms, exosuit.legs, exosuit.head, exosuit.body))
+			for (var/obj/item/thing in list(exosuit.arms, exosuit.legs, exosuit.head, exosuit.body))
 				if (thing && prob(40))
 					thing.forceMove(src)
-			for(var/hardpoint in exosuit.hardpoints)
+			for (var/hardpoint in exosuit.hardpoints)
 				if (exosuit.hardpoints[hardpoint])
 					if (prob(40))
 						var/obj/item/thing = exosuit.hardpoints[hardpoint]
@@ -90,7 +90,7 @@
 
 
 /obj/structure/mech_wreckage/Destroy()
-	for(var/obj/thing in contents)
+	for (var/obj/thing in contents)
 		if (prob(65))
 			thing.forceMove(get_turf(src))
 		else

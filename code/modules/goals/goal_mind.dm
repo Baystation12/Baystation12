@@ -11,7 +11,7 @@
 /datum/mind/proc/summarize_goals(show_success = FALSE, allow_modification = FALSE, mob/caller)
 	. = list()
 	if (LAZYLEN(goals))
-		for(var/i = 1 to LAZYLEN(goals))
+		for (var/i = 1 to LAZYLEN(goals))
 			var/datum/goal/goal = goals[i]
 			. += "[i]. [goal.summarize(show_success, allow_modification, caller)]"
 
@@ -25,7 +25,7 @@
 
 	if (ishuman(current))
 		var/mob/living/carbon/human/H = current
-		for(var/token in H.cultural_info)
+		for (var/token in H.cultural_info)
 			var/singleton/cultural_info/culture = H.get_cultural_value(token)
 			var/list/new_goals = culture.get_possible_personal_goals(job ? job.department_flag : null)
 			if (LAZYLEN(new_goals))
@@ -63,7 +63,7 @@
 				to_chat(src.current, SPAN_WARNING("There are no more goals available."))
 			return FALSE
 
-	for(var/i = 1 to min(LAZYLEN(available_goals), add_amount))
+	for (var/i = 1 to min(LAZYLEN(available_goals), add_amount))
 		var/goal = pick_n_take(available_goals)
 		new goal(src)
 	return TRUE

@@ -60,7 +60,7 @@
 
 	overlays.Cut()
 
-	for(var/obj/effect/decal/writing/W in src)
+	for (var/obj/effect/decal/writing/W in src)
 		qdel(W)
 
 	SetName(base_name)
@@ -86,7 +86,7 @@
 		update_icon(1)
 
 /turf/simulated/floor/levelupdate()
-	for(var/obj/O in src)
+	for (var/obj/O in src)
 		O.hide(O.hides_under_flooring() && src.flooring)
 
 	if (flooring)

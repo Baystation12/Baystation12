@@ -31,7 +31,7 @@ GLOBAL_LIST_EMPTY(skills)
 	. = ..()
 	if (is_hidden_category())
 		if (!length(GLOB.skills))
-			for(var/singleton/hierarchy/skill/C in children)
+			for (var/singleton/hierarchy/skill/C in children)
 				GLOB.skills += C.get_descendents()
 		else
 			CRASH("Warning: multiple instances of /singleton/hierarchy/skill have been created!")

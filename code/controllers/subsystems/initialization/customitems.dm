@@ -29,7 +29,7 @@ SUBSYSTEM_DEF(customitems)
 		directories_to_check -= checkdir
 		if (checkdir == "[CUSTOM_ITEM_CONFIG]examples/")
 			continue
-		for(var/checkfile in flist(checkdir))
+		for (var/checkfile in flist(checkdir))
 			checkfile = "[checkdir][checkfile]"
 			if (copytext(checkfile, -1) == "/")
 				directories_to_check += checkfile
@@ -61,7 +61,7 @@ SUBSYSTEM_DEF(customitems)
 	var/list/key_list = custom_items_by_ckey[M.ckey]
 	if (!length(key_list))
 		return
-	for(var/datum/custom_item/citem in key_list)
+	for (var/datum/custom_item/citem in key_list)
 		// Check for requisite ckey and character name.
 		if (citem.ckey != M.ckey || lowertext(citem.character_name) != lowertext(M.real_name))
 			continue
@@ -114,13 +114,13 @@ SUBSYSTEM_DEF(customitems)
 		return SPAN_WARNING("The target item path is invalid or does not exist.")
 	else if (item_icon_state)
 		if (ispath(item_path, /obj/item/device/kit/suit))
-			for(var/state in list("[item_icon_state]_suit", "[item_icon_state]_helmet"))
+			for (var/state in list("[item_icon_state]_suit", "[item_icon_state]_helmet"))
 				if (!(state in SScustomitems.item_states))
 					return SPAN_WARNING("The given item icon [state] does not exist.")
 				if (!(state in SScustomitems.mob_states))
 					return SPAN_WARNING("The given mob icon [state] does not exist.")
 		else
-			for(var/state in list(item_icon_state))
+			for (var/state in list(item_icon_state))
 				if (!(state in SScustomitems.item_states))
 					return SPAN_WARNING("The given item icon [state] does not exist.")
 

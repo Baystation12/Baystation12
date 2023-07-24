@@ -34,7 +34,7 @@
 /obj/item/reagent_containers/food/snacks/csandwich/attackby(obj/item/W, mob/user)
 
 	var/sandwich_limit = 4
-	for(var/obj/item/O in ingredients)
+	for (var/obj/item/O in ingredients)
 		if (istype(O,/obj/item/reagent_containers/food/snacks/slice/bread))
 			sandwich_limit += 4
 
@@ -104,7 +104,7 @@
 /obj/item/reagent_containers/food/snacks/csandwich/attack(mob/M as mob, mob/user as mob, def_zone)
 
 	var/obj/item/shard
-	for(var/obj/item/O in contents)
+	for (var/obj/item/O in contents)
 		if (istype(O,/obj/item/material/shard))
 			shard = O
 			break

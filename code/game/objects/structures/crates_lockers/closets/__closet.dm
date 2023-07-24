@@ -58,7 +58,7 @@
 	. = ..()
 	if (distance <= 1 && !opened)
 		var/content_size = 0
-		for(var/atom/movable/AM in src.contents)
+		for (var/atom/movable/AM in src.contents)
 			if (!AM.anchored)
 				content_size += content_size(AM)
 		if (!content_size)
@@ -84,7 +84,7 @@
 	return 1
 
 /obj/structure/closet/proc/can_close()
-	for(var/atom/movable/object in get_turf(src))
+	for (var/atom/movable/object in get_turf(src))
 		if (istype(object, /obj/structure/closet) && object != src)
 			return FALSE
 		if (istype(object, /mob/living))
@@ -94,13 +94,13 @@
 	return TRUE
 
 /obj/structure/closet/proc/dump_contents()
-	for(var/mob/M in src)
+	for (var/mob/M in src)
 		M.dropInto(loc)
 		if (M.client)
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE
 
-	for(var/atom/movable/AM in src)
+	for (var/atom/movable/AM in src)
 		AM.dropInto(loc)
 
 /obj/structure/closet/proc/store_contents()
@@ -149,13 +149,13 @@
 /obj/structure/closet/proc/store_items(stored_units)
 	. = 0
 
-	for(var/obj/effect/dummy/chameleon/AD in loc)
+	for (var/obj/effect/dummy/chameleon/AD in loc)
 		if (CLOSET_CHECK_TOO_BIG(1))
 			break
 		.++
 		AD.forceMove(src)
 
-	for(var/obj/item/I in loc)
+	for (var/obj/item/I in loc)
 		if (I.anchored)
 			continue
 		var/item_size = content_size(I)
@@ -169,7 +169,7 @@
 
 /obj/structure/closet/proc/store_mobs(stored_units)
 	. = 0
-	for(var/mob/living/M in loc)
+	for (var/mob/living/M in loc)
 		if (M.buckled || length(M.pinned) || M.anchored)
 			continue
 		var/mob_size = content_size(M)
@@ -184,7 +184,7 @@
 /obj/structure/closet/proc/store_structures(stored_units)
 	. = 0
 
-	for(var/obj/structure/S in loc)
+	for (var/obj/structure/S in loc)
 		if (S == src)
 			continue
 		if (S.anchored)
@@ -195,7 +195,7 @@
 		. += structure_size
 		S.forceMove(src)
 
-	for(var/obj/machinery/M in loc)
+	for (var/obj/machinery/M in loc)
 		if (M.anchored)
 			continue
 		var/structure_size = content_size(M)
@@ -467,7 +467,7 @@
 	visible_message(SPAN_DANGER("\The [src] begins to shake violently!"))
 
 	breakout = 1 //can't think of a better way to do this right now.
-	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
+	for (var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
 		if (!do_after(escapee, 5 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED)) //5 seconds
 			breakout = 0
 			return FALSE

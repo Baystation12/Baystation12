@@ -13,7 +13,7 @@
 
 /obj/machinery/nuke_cylinder_dispenser/Initialize()
 	. = ..()
-	for(var/i in 1 to 6)
+	for (var/i in 1 to 6)
 		cylinders += new /obj/item/nuclear_cylinder()
 	update_icon()
 

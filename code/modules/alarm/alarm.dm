@@ -35,7 +35,7 @@
 	// Has origin gone missing?
 	if (!origin && !end_time)
 		end_time = world.time + ALARM_RESET_DELAY
-	for(var/datum/alarm_source/AS in sources)
+	for (var/datum/alarm_source/AS in sources)
 		// Has the alarm passed its best before date?
 		if ((AS.end_time && world.time > AS.end_time) || (AS.duration && world.time > (AS.start_time + AS.duration)))
 			sources -= AS
@@ -98,7 +98,7 @@
 
 /datum/alarm/proc/max_severity()
 	var/max_severity = 0
-	for(var/datum/alarm_source/AS in sources)
+	for (var/datum/alarm_source/AS in sources)
 		max_severity = max(AS.severity, max_severity)
 
 	return max_severity

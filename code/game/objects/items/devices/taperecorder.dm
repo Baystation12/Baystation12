@@ -288,7 +288,7 @@
 	update_icon()
 	to_chat(user, SPAN_NOTICE("Audio playback started."))
 	playsound(src, 'sound/machines/click.ogg', 10, 1)
-	for(var/i=1 , i < mytape?.max_capacity , i++)
+	for (var/i=1 , i < mytape?.max_capacity , i++)
 		if (!mytape || !playing)
 			break
 		if (length(mytape.storedinfo) < i)
@@ -362,7 +362,7 @@
 	to_chat(usr, SPAN_NOTICE("Transcript printed."))
 	var/obj/item/paper/P = new /obj/item/paper(get_turf(src))
 	var/t1 = "<B>Transcript:</B><BR><BR>"
-	for(var/i=1,length(mytape.storedinfo) >= i,i++)
+	for (var/i=1,length(mytape.storedinfo) >= i,i++)
 		var/printedmessage = mytape.storedinfo[i]
 		if (findtextEx(printedmessage,"*",1,2)) //replace action sounds
 			printedmessage = "\[[time2text(mytape.timestamp[i]*10,"mm:ss")]\] (Unrecognized sound)"
@@ -512,7 +512,7 @@
 		to_chat(user, SPAN_NOTICE("There's nothing on this tape!"))
 		return
 	var/list/output = list("<center>")
-	for(var/i=1, i < length(timestamp), i++)
+	for (var/i=1, i < length(timestamp), i++)
 		var/time = "\[[time2text(timestamp[i]*10,"mm:ss")]\]"
 		output += "[time]<br><a href='?src=\ref[src];cut_after=[i]'>-----CUT------</a><br>"
 	output += "</center>"

@@ -32,7 +32,7 @@
 
 /obj/screen/psi/toggle_psi_menu/Click()
 	var/set_hidden = !hidden
-	for(var/thing in controller.components)
+	for (var/thing in controller.components)
 		var/obj/screen/psi/psi = thing
 		psi.hidden = set_hidden
 	controller.update_icon()
