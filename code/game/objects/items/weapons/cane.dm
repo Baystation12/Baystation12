@@ -58,6 +58,8 @@
 		w_class = initial(w_class)
 		extended = FALSE
 		can_support = FALSE
+	playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
+	update_held_icon()
 
 /obj/item/cane/telescopic/holocane
 	name = "holo-cane"
